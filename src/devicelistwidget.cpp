@@ -6,6 +6,7 @@ DWIDGET_USE_NAMESPACE
 DeviceListWidget::DeviceListWidget(QWidget* parent):DTreeWidget(parent)
 {
     setFocus(Qt::FocusReason::NoFocusReason);
+    //setSizePolicy(QSizePolicy::Policy::Preferred);
 }
 
 void DeviceListWidget::addDevice(const QString& deviceName, const QString& iconFile)

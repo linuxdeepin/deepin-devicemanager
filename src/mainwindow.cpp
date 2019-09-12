@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "devicelistwidget.h"
 #include <QHBoxLayout>
-
+#include "DStackedWidget"
 #include "deviceinfowidget.h"
 
 DWIDGET_USE_NAMESPACE
@@ -10,15 +10,14 @@ MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
     QWidget* mainWidget = new QWidget(this);
-    mainWidget->setFixedHeight(640);
+    mainWidget->setMaximumHeight(640);
     QHBoxLayout* ly = new QHBoxLayout;
     setFocus(Qt::FocusReason::NoFocusReason);
 
     DeviceListWidget* leftDeviceList = new DeviceListWidget(this);
-    leftDeviceList->setFixedWidth(160);
+    leftDeviceList->setMinimumWidth(160);
     leftDeviceList->setHeaderHidden(true);
     //leftDeviceList->setFrameStyle(QFrame::NoFrame);
-
 
     leftDeviceList->addDevice("电脑", ":/cpu.svg");
     leftDeviceList->addDevice("主板", ":/cpu.svg");
@@ -28,22 +27,49 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ly->addWidget(leftDeviceList);
 
-    DeviceInfoWidget* rightWidget = new DeviceInfoWidget(this);
+    DStackedWidget* rightDeviceInfoWidget = new DStackedWidget(this);
 
-    ly->addWidget(rightWidget);
+    DeviceInfoWidget* rightWidget = new DeviceInfoWidget(this);
+    rightDeviceInfoWidget->addWidget(rightWidget);
+    ly->addWidget(rightDeviceInfoWidget);
 
     rightWidget->setTitle("电脑概况");
     QStringList names;
     names.push_back("电脑型号");
     names.push_back("操作系统");
     names.push_back("处理器");
+    names.push_back("处理器");
+    names.push_back("处理器");
+    names.push_back("处理器");
+    names.push_back("处理器");
+    names.push_back("电脑型号");
+    names.push_back("操作系统");
+    names.push_back("处理器");
+    names.push_back("处理器");
+    names.push_back("处理器");
+    names.push_back("处理器");
+    names.push_back("处理器");
 
     QStringList contents;
     contents.push_back("联想F81笔记本电脑");
     contents.push_back("Win 10专业版64位");
     contents.push_back("因特尔Core i5-8300");
+    contents.push_back("因特尔Core i5-8300");
+    contents.push_back("因特尔Core i5-8300");
+    contents.push_back("因特尔Core i5-8300");
+    contents.push_back("因特尔Core i5-8300");
+    contents.push_back("联想F81笔记本电脑");
+    contents.push_back("Win 10专业版64位");
+    contents.push_back("因特尔Core i5-8300");
+    contents.push_back("因特尔Core i5-8300");
+    contents.push_back("因特尔Core i5-8300");
+    contents.push_back("因特尔Core i5-8300");
+    contents.push_back("因特尔Core i5-8300");
 
-    rightWidget->addSubInfo("", names, contents);
+    rightWidget->addSubInfo("PC1", names, contents);
+    rightWidget->addSubInfo("PC2", names, contents);
+    rightWidget->addSubInfo("PC3", names, contents);
+    rightWidget->addSubInfo("PC4", names, contents);
 
     QStringList headers;
     headers.push_back("内存插槽");
@@ -89,7 +115,6 @@ MainWindow::MainWindow(QWidget *parent) :
     rightWidget->addTable(headers, contentsList);
 
     mainWidget->setLayout(ly);
-
 
     setCentralWidget(mainWidget);
 }

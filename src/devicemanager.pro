@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui svg
+QT       += gui-private
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,19 +27,38 @@ CONFIG += c++11
 CONFIG += link_pkgconfig
 PKGCONFIG += xcb xcb-util dtkwidget dtkwm
 
+INCLUDEPATH += ../dmidecode/
+
+//CFLAGS += -D_FILE_OFFSET_BITS=64
+QMAKE_CFLAGS += -D_FILE_OFFSET_BITS=64
+
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
     devicelistwidget.cpp \
     generalinfowidget.cpp \
-    deviceinfowidget.cpp
+    deviceinfowidget.cpp \
+    deviceinfoparser.cpp \
+    ../dmidecode/dmioem.c \
+    ../dmidecode/dmiopt.c \
+    ../dmidecode/util.c \
+    ../dmidecode/dmidecode.c
 
 HEADERS += \
     mainwindow.h \
     devicelistwidget.h \
     version.h \
     generalinfowidget.h \
-    deviceinfowidget.h
+    deviceinfowidget.h \
+    deviceinfoparser.h \
+    deviceinfodefine.h \
+    ../dmidecode/version.h \
+    ../dmidecode/types.h \
+    ../dmidecode/config.h \
+    ../dmidecode/dmidecode.h \
+    ../dmidecode/dmiopt.h \
+    ../dmidecode/dmioem.h \
+    ../dmidecode/util.h
 
 
 # Default rules for deployment.

@@ -1,14 +1,25 @@
+#include "dmidecode.h"
 #include "mainwindow.h"
 #include <DApplication>
 #include <DWidgetUtil>
 #include "version.h"
 #include <DLog>
-
+#include "deviceinfoparser.h"
 
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    //dmidecode(argc, argv);
+    //return 0;
+
+//    DeviceInfoParser parser;
+//    QString osInfo;
+//    parser.getOSInfo(osInfo);
+//    parser.loadDemicodeDatabase();
+
+//    return 0;
+
     DApplication::loadDXcbPlugin();
 
     const char *descriptionText = QT_TRANSLATE_NOOP("MainWindow", "Deepin DeviceManager.");
@@ -21,7 +32,7 @@ int main(int argc, char *argv[])
     app.setOrganizationName("deepin");
     app.setApplicationName("DeviceManager");
     app.setApplicationDisplayName(QObject::tr("Device Manager"));
-    app.setApplicationVersion(VERSION);
+    app.setApplicationVersion("0.0.1");
     app.setProductIcon(QIcon((":/cpu.svg")));
     app.setWindowIcon(QIcon((":/cpu.svg")));
     app.setProductName(DApplication::translate("MainWindow", "Device Manager"));
@@ -31,7 +42,7 @@ int main(int argc, char *argv[])
     Dtk::Core::DLogManager::registerConsoleAppender();
     Dtk::Core::DLogManager::registerFileAppender();
 
-    app.setStyle("chameleon");
+    //app.setStyle("chameleon");
 
     MainWindow w;
     Dtk::Widget::moveToCenter(&w);

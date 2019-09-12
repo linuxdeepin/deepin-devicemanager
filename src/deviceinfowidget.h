@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QList>
 #include "DTableWidget"
+#include "DScrollArea"
 
 class QLabel;
 class QVBoxLayout;
@@ -23,6 +24,9 @@ public:
     void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
 
+protected:
+    //virtual void focusInEvent(QFocusEvent *e) override{};
+    //virtual void focusOutEvent(QFocusEvent *e) override{};
 signals:
 
 public slots:
@@ -32,4 +36,6 @@ private:
     QList<DeviceInfo> deviceInfos_;
     QVBoxLayout* vLayout_ = nullptr;
     Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
+    Dtk::Widget::DWidget*   downWidget_  = nullptr;
+    QVBoxLayout* downWidgetLayout = nullptr;
 };
