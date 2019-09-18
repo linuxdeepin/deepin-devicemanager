@@ -1,4 +1,3 @@
-#include "dmidecode.h"
 #include "mainwindow.h"
 #include <DApplication>
 #include <DWidgetUtil>
@@ -10,15 +9,16 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
-    //dmidecode(argc, argv);
-    //return 0;
+    DeviceInfoParser parser;
+    QString osInfo;
+    parser.getOSInfo(osInfo);
+    parser.loadDemicodeDatabase();
+    parser.loadLshwDatabase();
+    parser.loadLscpuDatabase();
+    parser.loadSmartctlDatabase();
+    parser.loadCatInputDatabase();
 
-//    DeviceInfoParser parser;
-//    QString osInfo;
-//    parser.getOSInfo(osInfo);
-//    parser.loadDemicodeDatabase();
-
-//    return 0;
+    return 0;
 
     DApplication::loadDXcbPlugin();
 

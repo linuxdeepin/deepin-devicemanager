@@ -39,10 +39,6 @@ SOURCES += \
     generalinfowidget.cpp \
     deviceinfowidget.cpp \
     deviceinfoparser.cpp \
-    ../dmidecode/dmioem.c \
-    ../dmidecode/dmiopt.c \
-    ../dmidecode/util.c \
-    ../dmidecode/dmidecode.c
 
 HEADERS += \
     mainwindow.h \
@@ -52,13 +48,6 @@ HEADERS += \
     deviceinfowidget.h \
     deviceinfoparser.h \
     deviceinfodefine.h \
-    ../dmidecode/version.h \
-    ../dmidecode/types.h \
-    ../dmidecode/config.h \
-    ../dmidecode/dmidecode.h \
-    ../dmidecode/dmiopt.h \
-    ../dmidecode/dmioem.h \
-    ../dmidecode/util.h
 
 
 # Default rules for deployment.
