@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg
+QT       += core gui svg dbus
 QT       += gui-private
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -25,9 +25,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 CONFIG += link_pkgconfig
-PKGCONFIG += xcb xcb-util dtkwidget dtkwm
+PKGCONFIG += xcb xcb-util dtkwidget dtkwm dframeworkdbus
 
-INCLUDEPATH += ../dmidecode/
+INCLUDEPATH += ../dmidecode/    \
+            /usr/include/libdframeworkdbus-2.0/
 
 //CFLAGS += -D_FILE_OFFSET_BITS=64
 QMAKE_CFLAGS += -D_FILE_OFFSET_BITS=64
@@ -36,18 +37,20 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     devicelistwidget.cpp \
-    generalinfowidget.cpp \
-    deviceinfowidget.cpp \
     deviceinfoparser.cpp \
+    deviceinfowidgetbase.cpp \
+    computeroverviewwidget.cpp
 
 HEADERS += \
     mainwindow.h \
     devicelistwidget.h \
     version.h \
-    generalinfowidget.h \
-    deviceinfowidget.h \
     deviceinfoparser.h \
     deviceinfodefine.h \
+    deviceattributedefine.h \
+    deviceinfowidgetbase.h \
+    computeroverviewwidget.h \
+    singletondef.h
 
 
 # Default rules for deployment.

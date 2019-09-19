@@ -9,16 +9,18 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
-    DeviceInfoParser parser;
     QString osInfo;
-    parser.getOSInfo(osInfo);
-    parser.loadDemicodeDatabase();
-    parser.loadLshwDatabase();
-    parser.loadLscpuDatabase();
-    parser.loadSmartctlDatabase();
-    parser.loadCatInputDatabase();
-
-    return 0;
+    DeviceInfoParserInstance.getOSInfo(osInfo);
+    DeviceInfoParserInstance.loadDemicodeDatabase();
+    DeviceInfoParserInstance.loadLshwDatabase();
+    DeviceInfoParserInstance.loadLscpuDatabase();
+    DeviceInfoParserInstance.loadSmartctlDatabase();
+    DeviceInfoParserInstance.loadCatInputDatabase();
+    DeviceInfoParserInstance.loadPowerSettings();
+    DeviceInfoParserInstance.loadXrandrDatabase();
+    DeviceInfoParserInstance.loadLspciDatabase();
+    DeviceInfoParserInstance.loadHciconfigDatabase();
+    DeviceInfoParserInstance.loadLsusbDatabase();
 
     DApplication::loadDXcbPlugin();
 

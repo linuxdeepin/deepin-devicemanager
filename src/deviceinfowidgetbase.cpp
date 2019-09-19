@@ -1,4 +1,4 @@
-#include "deviceinfowidget.h"
+#include "deviceinfowidgetbase.h"
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QGridLayout>
@@ -9,7 +9,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-DeviceInfoWidget::DeviceInfoWidget(QWidget *parent) : QWidget(parent)
+DeviceInfoWidgetBase::DeviceInfoWidgetBase(QWidget *parent, const QString& deviceName) : QWidget(parent), deviceName_(deviceName)
 {
     vLayout_ = new QVBoxLayout;
     //vLayout_->addStretch(1);
@@ -18,7 +18,12 @@ DeviceInfoWidget::DeviceInfoWidget(QWidget *parent) : QWidget(parent)
     //setAttribute(Qt::WidgetAttribute::WA_NoBackground);
 }
 
-void DeviceInfoWidget::DeviceInfoWidget::setTitle(const QString& title)
+DeviceInfoWidgetBase::~DeviceInfoWidgetBase()
+{
+
+}
+
+void DeviceInfoWidgetBase::DeviceInfoWidgetBase::setTitle(const QString& title)
 {
     if(nullptr == title_)
     {
@@ -29,7 +34,7 @@ void DeviceInfoWidget::DeviceInfoWidget::setTitle(const QString& title)
     vLayout_->insertWidget(vLayout_->count(), title_);
 }
 
-void DeviceInfoWidget::addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents)
+void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents)
 {
     if(nullptr == downWidget_)
     {
@@ -89,7 +94,7 @@ void DeviceInfoWidget::addSubInfo(const QString& subTitle, const QStringList& na
     deviceInfos_.push_back(subInfo);
 }
 
-void DeviceInfoWidget::addTable(const QStringList& headers, const QList<QStringList>& contentsList)
+void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStringList>& contentsList)
 {
     if(tableWidget_ == nullptr)
     {
@@ -131,4 +136,9 @@ void DeviceInfoWidget::addTable(const QStringList& headers, const QList<QStringL
         }
     }
 
+}
+
+QString DeviceInfoWidgetBase::getDeviceName()
+{
+    return deviceName_;
 }

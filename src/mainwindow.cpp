@@ -2,7 +2,8 @@
 #include "devicelistwidget.h"
 #include <QHBoxLayout>
 #include "DStackedWidget"
-#include "deviceinfowidget.h"
+#include "deviceinfowidgetbase.h"
+#include "computeroverviewwidget.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -14,24 +15,35 @@ MainWindow::MainWindow(QWidget *parent) :
     QHBoxLayout* ly = new QHBoxLayout;
     setFocus(Qt::FocusReason::NoFocusReason);
 
-    DeviceListWidget* leftDeviceList = new DeviceListWidget(this);
-    leftDeviceList->setMinimumWidth(160);
-    leftDeviceList->setHeaderHidden(true);
+    leftDeviceList_ = new DeviceListWidget(this);
+    leftDeviceList_->setMinimumWidth(160);
+    leftDeviceList_->setHeaderHidden(true);
     //leftDeviceList->setFrameStyle(QFrame::NoFrame);
 
-    leftDeviceList->addDevice("电脑", ":/cpu.svg");
-    leftDeviceList->addDevice("主板", ":/cpu.svg");
-    leftDeviceList->addDevice("处理器", ":/cpu.svg");
-    leftDeviceList->addDevice("内存", ":/cpu.svg");
-    leftDeviceList->addDevice("磁盘", ":/cpu.svg");
+//    leftDeviceList_->addDevice("电脑", ":/cpu.svg");
+//    leftDeviceList_->addDevice("主板", ":/cpu.svg");
+//    leftDeviceList_->addDevice("处理器", ":/cpu.svg");
+//    leftDeviceList_->addDevice("内存", ":/cpu.svg");
+//    leftDeviceList_->addDevice("磁盘", ":/cpu.svg");
 
-    ly->addWidget(leftDeviceList);
+    ly->addWidget(leftDeviceList_);
 
-    DStackedWidget* rightDeviceInfoWidget = new DStackedWidget(this);
+    rightDeviceInfoWidget_ = new DStackedWidget(this);
+    ComputerOverviewWidget* computerOverviewWidget = new ComputerOverviewWidget(this);
 
-    DeviceInfoWidget* rightWidget = new DeviceInfoWidget(this);
-    rightDeviceInfoWidget->addWidget(rightWidget);
-    ly->addWidget(rightDeviceInfoWidget);
+    DeviceInfoWidgetBase* rightWidget = new DeviceInfoWidgetBase(this, "主板");
+    addDeviceWidget(computerOverviewWidget);
+    addDeviceWidget(rightWidget);
+
+    connect( leftDeviceList_, &DeviceListWidget::currentItemChanged, \
+            [this]()
+            {
+                QString currentDevice = this->leftDeviceList_->currentItem()->text(0);
+                rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);
+            }
+    );
+
+    ly->addWidget(rightDeviceInfoWidget_);
 
     rightWidget->setTitle("电脑概况");
     QStringList names;
@@ -122,4 +134,11 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
 
+}
+
+void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w)
+{
+    leftDeviceList_->addDevice(w->getDeviceName(), ":/cpu.svg");
+    rightDeviceInfoWidget_->addWidget(w);
+    deviceInfoWidgetMap_[w->getDeviceName()] = w;
 }

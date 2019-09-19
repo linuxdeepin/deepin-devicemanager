@@ -15,14 +15,18 @@ struct DeviceInfo
     QList<QLabel*>  contentLabels;
 };
 
-class DeviceInfoWidget : public QWidget
+class DeviceInfoWidgetBase : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DeviceInfoWidget(QWidget *parent = nullptr);
+    explicit DeviceInfoWidgetBase(QWidget *parent = nullptr, const QString& deviceName = "");
+    virtual ~DeviceInfoWidgetBase();
+
     void setTitle(const QString& title);
     void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
+
+    QString getDeviceName();
 
 protected:
     //virtual void focusInEvent(QFocusEvent *e) override{};
@@ -32,6 +36,7 @@ signals:
 public slots:
 
 private:
+    QString deviceName_ = "DeviceInfoWidgetBase";
     QLabel* title_ = nullptr;
     QList<DeviceInfo> deviceInfos_;
     QVBoxLayout* vLayout_ = nullptr;

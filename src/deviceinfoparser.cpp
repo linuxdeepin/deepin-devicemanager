@@ -6,13 +6,58 @@
 #include <QProcess>
 #include <QRegExp>
 #include <DLog>
+#include <com_deepin_daemon_power.h>
+
+using PowerInter = com::deepin::daemon::Power;
 
 DCORE_USE_NAMESPACE
 
 static QProcess process_;
 
-DeviceInfoParser::DeviceInfoParser()
+const QString& DeviceInfoParser::qureyData(const QString& toolname, const QString& firstKey, const QString& secondKey)
 {
+    static QString result = "null";
+    if(false == toolDatabase_.contains(toolname))
+    {
+        return result;
+    }
+
+    if(false == toolDatabase_[toolname].contains(firstKey))
+    {
+        return result;
+    }
+
+    if(false == toolDatabase_[toolname][firstKey].contains(secondKey))
+    {
+        return result;
+    }
+
+    return toolDatabase_[toolname][firstKey][secondKey];
+}
+
+const QString& DeviceInfoParser::fuzzyQueryData(const QString& toolname, const QString& firstKey, const QString& secondKey)
+{
+    static QString result = "null";
+    if(false == toolDatabase_.contains(toolname))
+    {
+        return result;
+    }
+
+    foreach(const QString& fk, toolDatabase_[toolname].uniqueKeys() )
+    {
+        if( fk.contains(firstKey) )
+        {
+            foreach(const QString& sk, toolDatabase_[toolname][fk].uniqueKeys() )
+            {
+                if( sk.contains(secondKey) )
+                {
+                    return toolDatabase_[toolname][fk][sk];
+                }
+            }
+        }
+    }
+
+    return result;
 }
 
 bool DeviceInfoParser::getOSInfo(QString& osInfo)
@@ -41,6 +86,9 @@ bool DeviceInfoParser::loadDemicodeDatabase()
     {
         return false;
     }
+
+    // dimdecode
+    DatabaseMap dimdecodeDatabase_;
 
     QString dmidecodeOut = dmidecodeFile.readAll();
 
@@ -162,6 +210,7 @@ bool DeviceInfoParser::loadDemicodeDatabase()
         }
     }
 
+    toolDatabase_[dmidecodeToolName] = dimdecodeDatabase_;
     return  true;
 }
 
@@ -172,6 +221,9 @@ bool DeviceInfoParser::loadLshwDatabase()
     {
         return false;
     }
+
+    // lshw
+    DatabaseMap lshwDatabase_;
 
     int startIndex = 0;
     int lineNumber = -1;
@@ -264,6 +316,7 @@ bool DeviceInfoParser::loadLshwDatabase()
         lshwDatabase_[deviceTypeName] = DeviceInfoMap;
     }
 
+    toolDatabase_[lshwToolname] = lshwDatabase_;
     return true;
 }
 
@@ -274,6 +327,9 @@ bool DeviceInfoParser::loadLscpuDatabase()
     {
         return false;
     }
+
+    // lscpu
+    QMap<QString, QString> lscpuDatabase_;
 
     int startIndex = 0;
     QString lscpuOut = lscpuFile.readAll();
@@ -295,6 +351,9 @@ bool DeviceInfoParser::loadLscpuDatabase()
          }
     }
 
+    DatabaseMap rootlscuDb;
+    rootlscuDb[lscpuToolname] = lscpuDatabase_;
+    toolDatabase_[lscpuToolname] = rootlscuDb;
     return true;
 }
 
@@ -305,7 +364,8 @@ bool DeviceInfoParser::loadSmartctlDatabase()
     {
         return false;
     }
-
+    // smartctl
+    QMap<QString, QString> smartctlDatabase_;
     int startIndex = 0;
     QString smartctlOut = smartctlFile.readAll();
 
@@ -333,6 +393,10 @@ bool DeviceInfoParser::loadSmartctlDatabase()
          }
     }
 
+    DatabaseMap rootsmartctlDb;
+    rootsmartctlDb[smartctlToolname] = smartctlDatabase_;
+    toolDatabase_[smartctlToolname] = rootsmartctlDb;
+
     return true;
 }
 
@@ -343,6 +407,9 @@ bool DeviceInfoParser::loadCatInputDatabase()
     {
         return false;
     }
+
+    // cat /proc/bus/input/devices
+    DatabaseMap catInputDeviceDatabase_;
 
     QMap<QString, QString> DeviceInfoMap;
     int startIndex = 0;
@@ -412,12 +479,288 @@ bool DeviceInfoParser::loadCatInputDatabase()
          }
     }
 
+    toolDatabase_[catInputToolname] = catInputDeviceDatabase_;
+    return true;
+}
+
+bool DeviceInfoParser::loadXrandrDatabase()
+{
+    QFile xrandrFile("//home//archermind//Desktop//xrandr.txt");
+    if( false == xrandrFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+
+    // xrandr --verbose
+    DatabaseMap xrandrDatabase_;
+    QMap<QString, QString> DeviceInfoMap;
+    QString xrandrOut = xrandrFile.readAll();
+    int startIndex = 0;
+    QString title;
+    QString deviceType;
+    QString content;
+
+    for( int i = 0; i < xrandrOut.size(); ++i )
+    {
+
+        if( xrandrOut[i] != '\n' && i != xrandrOut.size() -1)
+        {
+            continue;
+        }
+
+        QString line = xrandrOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if( i == xrandrOut.size() -1)
+        {
+            content += line;
+            DeviceInfoMap[deviceType] = content;
+            if(title.isEmpty() == false && DeviceInfoMap.size() > 0 )
+            {
+                xrandrDatabase_[title] = DeviceInfoMap;
+            }
+            break;
+        }
+
+        if( line.startsWith(Devicetype_Xrandr_Screen) && line.contains(Devicetype_Separator) )
+        {
+            QStringList strList = line.split(Devicetype_Separator);
+
+            DeviceInfoMap.clear();
+            foreach(const QString& screenStr, strList.last().split(Devicetype_Xrandr_Screen_Separator) )
+            {
+                QString contentStr = screenStr.trimmed();
+                int index = contentStr.indexOf(Devicetype_Xrandr_Space);
+                if( index > 0 )
+                {
+                    DeviceInfoMap[contentStr.mid(0, index).trimmed()] = contentStr.mid(index+1).trimmed();
+                }
+            }
+
+            xrandrDatabase_[strList.first().trimmed()] = DeviceInfoMap;
+            continue;
+        }
+
+        if( line.startsWith(Devicetype_Xrandr_Twotab) || line.startsWith(Devicetype_Xrandr_Twospace) || line.startsWith(Devicetype_Xrandr_TabAndspace))
+        {
+            content += line;
+            continue;
+        }
+
+        if( line.startsWith(Devicetype_Xrandr_Tab) )
+        {
+            if(deviceType.isEmpty() == false)
+            {
+                DeviceInfoMap[deviceType] = content.trimmed();
+            }
+            int index = line.indexOf(Devicetype_Separator);
+            if(index > 0)
+            {
+                deviceType = line.mid(0, index).trimmed();
+            }
+
+            content = line.mid(index+1);
+            continue;
+        }
+
+        if( line.contains(Devicetype_Xrandr_Connected) || line.contains(Devicetype_Xrandr_Disconnected) )
+        {
+            if(deviceType.isEmpty() == false)
+            {
+                DeviceInfoMap[deviceType] = content;
+            }
+
+            if(title.isEmpty() == false && DeviceInfoMap.size() > 0 )
+            {
+                xrandrDatabase_[title] = DeviceInfoMap;
+            }
+
+            DeviceInfoMap.clear();
+
+            title = line.trimmed();
+            continue;
+        }
+    }
+
+    toolDatabase_[xrandrToolname] = xrandrDatabase_;
+    return true;
+}
+
+bool DeviceInfoParser::parseEDID( QString edidStr )
+{
+
+//    if()
+//    {
+
+//    }
+
+    return true;
+}
+
+bool DeviceInfoParser::loadPowerSettings()
+{
+    PowerInter power("com.deepin.daemon.Power", "/com/deepin/daemon/Power", QDBusConnection::sessionBus(), nullptr);
+    // switchingpower
+    switchingpowerScreenSuspendDelay_ = power.linePowerScreenBlackDelay();     //screen suspend delay seconds
+    switchingpowerComputerSuspendDelay_ = power.linePowerSleepDelay();   //computer suspend delay seconds
+    switchingpowerAutoLockScreenDelay_ = power.linePowerLockDelay();        //auto lock screen delay seconds
+    // Battery
+    batteryScreenSuspendDelay_ = power.batteryScreenBlackDelay();
+    batteryComputerSuspendDelay_ = power.batterySleepDelay();
+    batteryAutoLockScreenDelay_ = power.batteryLockDelay();
+    return true;
+}
+
+bool DeviceInfoParser::loadLspciDatabase()
+{
+    QFile lspciFile("//home//archermind//Desktop//lspci.txt");
+    if( false == lspciFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+
+    // lspci --verbose
+    DatabaseMap lspciDatabase_;
+    QMap<QString, QString> DeviceInfoMap;
+    QString deviceName;
+    QString lspciOut = lspciFile.readAll();
+    int startIndex = 0;
+
+    for( int i = 0; i < lspciOut.size(); ++i )
+    {
+
+        if( lspciOut[i] != '\n' && i != lspciOut.size() -1)
+        {
+            continue;
+        }
+
+        QString line = lspciOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if(line.contains(Devicetype_Lspci_Tab))
+        {
+            int index = line.indexOf(Devicetype_Lspci_Seperator);
+            if( index > 0 )
+            {
+                DeviceInfoMap[line.mid(0,index).trimmed()] = line.mid(index+1).trimmed();
+            }
+            else
+            {
+                DeviceInfoMap[line.trimmed()] = "";
+            }
+            continue;
+        }
+
+        if(line.trimmed().isEmpty())
+        {
+            lspciDatabase_[deviceName] = DeviceInfoMap;
+            DeviceInfoMap.clear();
+            deviceName = "";
+            continue;
+        }
+
+        int index = line.indexOf(Devicetype_Lspci_Seperator);
+        if( index > 0 )
+        {
+            if(deviceName.isEmpty() == false)
+            {
+                lspciDatabase_[deviceName] = DeviceInfoMap;
+                DeviceInfoMap.clear();
+                deviceName = "";
+            }
+            DeviceInfoMap[Devicetype_Name] = line.mid(index+1);
+            deviceName = line.mid(0,index);
+            continue;
+        }
+
+        if( i == lspciOut.size() -1 )
+        {
+            if(deviceName.isEmpty() == false)
+            {
+                lspciDatabase_[deviceName] = DeviceInfoMap;
+            }
+        }
+    }
+
+    toolDatabase_[lspciToolname] = lspciDatabase_;
+    return true;
+}
+
+bool DeviceInfoParser::loadHciconfigDatabase()
+{
+    QFile hciconfigFile("//home//archermind//Desktop//hciconfig.txt");
+    if( false == hciconfigFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+
+    // hciconfig
+    DatabaseMap hciconfigDatabase_;
+    QMap<QString, QString> DeviceInfoMap;
+    QString deviceName;
+    QString hciconfigOut = hciconfigFile.readAll();
+    int startIndex = 0;
+
+    for( int i = 0; i < hciconfigOut.size(); ++i )
+    {
+
+        if( hciconfigOut[i] != '\n' && i != hciconfigOut.size() -1)
+        {
+            continue;
+        }
+
+        QString line = hciconfigOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if(line.startsWith(Devicetype_Hciconfig_Hci))
+        {
+            if(deviceName.isEmpty() == false)
+            {
+                hciconfigDatabase_[deviceName] = DeviceInfoMap;
+            }
+            DeviceInfoMap.clear();
+            deviceName = line.mid(0, line.indexOf(Devicetype_Separator));
+            continue;
+        }
+
+        if(line.startsWith(Devicetype_Hciconfig_Multispace))
+        {
+            int index = line.indexOf(Devicetype_Separator);
+            if( index > 0 )
+            {
+                DeviceInfoMap[line.mid(0, index).trimmed()] = line.mid(index+1).trimmed();
+            }
+            else
+            {
+                DeviceInfoMap[line.trimmed()] = "";
+            }
+        }
+
+        if( i == hciconfigOut.size() -1 || line.trimmed().isEmpty() )
+        {
+            if(deviceName.isEmpty() == false)
+            {
+                hciconfigDatabase_[deviceName] = DeviceInfoMap;
+            }
+            DeviceInfoMap.clear();
+            deviceName = "";
+            continue;
+        }
+    }
+
+    toolDatabase_[hciconfigToolname] = hciconfigDatabase_;
+    return true;
+}
+
+bool DeviceInfoParser::loadLsusbDatabase()
+{
+    // lsusb
+    DatabaseMap lsusbDatabase_;
     return true;
 }
 
 bool DeviceInfoParser::executeProcess(const QString& cmd)
 {
-
     /*int res = */process_.start(cmd);
     bool res = process_.waitForFinished();
     standOutput_ = process_.readAllStandardOutput();
