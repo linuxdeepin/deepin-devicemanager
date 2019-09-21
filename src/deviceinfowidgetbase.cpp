@@ -25,38 +25,28 @@ DeviceInfoWidgetBase::~DeviceInfoWidgetBase()
 
 void DeviceInfoWidgetBase::DeviceInfoWidgetBase::setTitle(const QString& title)
 {
-    if(nullptr == title_)
+    if(titleInfo_==nullptr)
     {
-        title_ = new QLabel(this);
+       titleInfo_ = new DeviceInfo;
     }
 
-    title_->setText(title);
-    vLayout_->insertWidget(vLayout_->count(), title_);
+    if(nullptr == titleInfo_->title)
+    {
+        titleInfo_->title = new QLabel(this);
+    }
+
+    titleInfo_->title->setText(title);
+    vLayout_->insertWidget(vLayout_->count(), titleInfo_->title);
 }
 
-void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents)
+void DeviceInfoWidgetBase::addInfo(const QStringList& names, const QStringList& contents)
 {
-    if(nullptr == downWidget_)
-    {
-        DScrollArea* downWidgetScrollArea_ = new DScrollArea(this);
-        downWidgetScrollArea_->setFrameShape(QFrame::NoFrame);
-        downWidget_ = new DWidget(downWidgetScrollArea_);
-        //downWidget_->setFixedHeight(100);
-        downWidget_->setBaseSize(700, 100);
-        //downWidget_->setFixedWidth(700);
-        downWidget_->setMinimumWidth(700);
-        downWidgetLayout = new QVBoxLayout;
-        downWidget_->setLayout(downWidgetLayout);
-        downWidgetLayout->addStretch(1);
-        downWidgetScrollArea_->setWidget(downWidget_);
-        //downWidget_->setSizePolicy(QSizePolicy::Minimum);
-        //downWidgetScrollArea_->setFixedHeight(100);
-        downWidgetScrollArea_->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
-        //downWidgetScrollArea_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
-        vLayout_->insertWidget(vLayout_->count(), downWidgetScrollArea_);
-    }
+    initDownWidget();
 
-    int increaseHeight = 0;
+    if(titleInfo_)
+    {
+       titleInfo_ = new DeviceInfo;
+    }
 
     QHBoxLayout* hly = new QHBoxLayout;
 
@@ -67,14 +57,55 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
     hly->addLayout(gridLayout);
     downWidgetLayout->insertLayout(downWidgetLayout->count()-1, hly);
 
+    int increaseHeight = 0;
+
+    for(int i = 0; i < names.size(); ++i)
+    {
+        QLabel* nameLabel = new QLabel(names.at(i), this);
+        QLabel* contentLabel = new QLabel(contents.at(i), this);
+        nameLabel->setFixedHeight(30);
+        contentLabel->setFixedHeight(30);
+        titleInfo_->nameLabels.push_back(nameLabel);
+        titleInfo_->contentLabels.push_back(contentLabel);
+        gridLayout->addWidget(nameLabel, i+1, 0);
+        gridLayout->addWidget(contentLabel, i+1, 1);
+        increaseHeight+= 30;
+    }
+
+    downWidget_->setFixedHeight(downWidget_->height() + increaseHeight);
+}
+
+void DeviceInfoWidgetBase::addLinefeed()
+{
+
+}
+
+void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents)
+{
+    initDownWidget();
+
+    downWidgetLayout->insertSpacing(downWidgetLayout->count()-1, 25);
+
+    int increaseHeight = 25;
+
     DeviceInfo subInfo;
     if(false == subTitle.isEmpty())
     {
-        subInfo.subTitle = new QLabel(subTitle, this);
-        subInfo.subTitle->setFixedHeight(30);
-        gridLayout->addWidget(subInfo.subTitle, 0, 0);
+        subInfo.title = new QLabel(subTitle, this);
+        subInfo.title->setFixedHeight(30);
+        downWidgetLayout->insertWidget(downWidgetLayout->count()-1, subInfo.title);
         increaseHeight += 30;
     }
+
+    QHBoxLayout* hly = new QHBoxLayout;
+
+    QGridLayout* gridLayout = new QGridLayout;
+    gridLayout->setMargin(0);
+    hly->setMargin(0);
+    hly->addSpacing(10);
+    hly->addLayout(gridLayout);
+
+    downWidgetLayout->insertLayout(downWidgetLayout->count()-1, hly);
 
     for(int i = 0; i < names.size(); ++i)
     {
@@ -84,12 +115,12 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
         contentLabel->setFixedHeight(30);
         subInfo.nameLabels.push_back(nameLabel);
         subInfo.contentLabels.push_back(contentLabel);
-        gridLayout->addWidget(nameLabel, i+1, 0);
-        gridLayout->addWidget(contentLabel, i+1, 1);
+        gridLayout->addWidget(nameLabel, i+1, 1);
+        gridLayout->addWidget(contentLabel, i+1, 2);
         increaseHeight+= 30;
     }
 
-    downWidget_->setMinimumHeight(downWidget_->height() + increaseHeight);
+    downWidget_->setFixedHeight(downWidget_->height() + increaseHeight);
 
     deviceInfos_.push_back(subInfo);
 }
@@ -136,6 +167,31 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         }
     }
 
+}
+
+void DeviceInfoWidgetBase::initDownWidget()
+{
+    if(downWidget_)
+    {
+        return;
+    }
+
+    DScrollArea* downWidgetScrollArea_ = new DScrollArea(this);
+    downWidgetScrollArea_->setFrameShape(QFrame::NoFrame);
+    downWidget_ = new DWidget(downWidgetScrollArea_);
+    //downWidget_->setFixedHeight(100);
+    downWidget_->setBaseSize(700, 100);
+    //downWidget_->setFixedWidth(700);
+    downWidget_->setMinimumWidth(700);
+    downWidgetLayout = new QVBoxLayout;
+    downWidget_->setLayout(downWidgetLayout);
+    downWidgetLayout->addStretch(1);
+    downWidgetScrollArea_->setWidget(downWidget_);
+    //downWidget_->setSizePolicy(QSizePolicy::Minimum);
+    //downWidgetScrollArea_->setFixedHeight(100);
+    downWidgetScrollArea_->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
+    //downWidgetScrollArea_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
+    vLayout_->insertWidget(vLayout_->count(), downWidgetScrollArea_);
 }
 
 QString DeviceInfoWidgetBase::getDeviceName()

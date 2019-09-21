@@ -27,9 +27,18 @@ const QString Devicetype_Xrandr_TabAndspace = "\t  ";
 
 const QString Devicetype_Lspci_Seperator = ": ";
 const QString Devicetype_Lspci_Tab = "\t";
+const QString Devicetype_Lspci_Memory = "Memory";
+const QString Devicetype_Lspci_non_prefetchable = "non-prefetchable";
+const QString Devicetype_Lspci_prefetchable = "prefetchable";
 
 const QString Devicetype_Hciconfig_Hci = "hci";
 const QString Devicetype_Hciconfig_Multispace = "    ";
+
+const QString Devicetype_HwInfo_Twospace = "  ";
+const QString Devicetype_HwInfo_Fourspace = "    ";
+const QString Devicetype_HwInfo_Resolution = "Resolution";
+const QString Devicetype_HwInfo_ResolutionList = "Resolution list";
+const QString Devicetype_HwInfo_Currentresolution = "Current Resolution";
 
 const QString dmidecodeToolName = "dmidecode";
 const QString lshwToolname = "lshw";
@@ -39,6 +48,9 @@ const QString catInputToolname = "catinput";
 const QString xrandrToolname = "xrandr";
 const QString lspciToolname = "lspci";
 const QString hciconfigToolname = "hciconfig";
+const QString hwinfoToolname = "hwinfo";
+
+
 
 typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
 
@@ -51,6 +63,9 @@ public:
 public:
     const QString& qureyData(const QString& toolname, const QString& firstKey, const QString& secondKey);
     const QString& fuzzyQueryData(const QString& toolname, const QString& firstKey, const QString& secondKey);
+
+    QStringList getMemorynameList();
+    QStringList getDisknameList();
 
     // get os
     bool getOSInfo(QString& osInfo);
@@ -66,8 +81,8 @@ public:
     bool loadCatInputDatabase();
     // xrandr
     bool loadXrandrDatabase();
-    bool getMonitorInfo();
-    bool parseEDID(QString edidStr);
+    bool parseXrandrData();
+    bool parseEDID();
     // get power settings
     bool loadPowerSettings();
     // lspci parse
@@ -76,6 +91,8 @@ public:
     bool loadHciconfigDatabase();
     // lsusb
     bool loadLsusbDatabase();
+    // hwinfo
+    bool loadHwinfoDatabase();
 
 public:
     bool executeProcess(const QString& cmd);

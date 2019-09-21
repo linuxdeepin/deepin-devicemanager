@@ -4,11 +4,15 @@
 #include "version.h"
 #include <DLog>
 #include "deviceinfoparser.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    sqrt(0.01);
     QString osInfo;
     DeviceInfoParserInstance.getOSInfo(osInfo);
     DeviceInfoParserInstance.loadDemicodeDatabase();
@@ -21,6 +25,7 @@ int main(int argc, char *argv[])
     DeviceInfoParserInstance.loadLspciDatabase();
     DeviceInfoParserInstance.loadHciconfigDatabase();
     DeviceInfoParserInstance.loadLsusbDatabase();
+    DeviceInfoParserInstance.loadHwinfoDatabase();
 
     DApplication::loadDXcbPlugin();
 

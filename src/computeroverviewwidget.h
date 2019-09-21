@@ -1,7 +1,6 @@
 #pragma once
 
 #include "deviceinfowidgetbase.h"
-#include "deviceattributedefine.h"
 
 class ComputerOverviewWidget : public DeviceInfoWidgetBase
 {

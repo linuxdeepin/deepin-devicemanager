@@ -7,6 +7,7 @@
 #include <QRegExp>
 #include <DLog>
 #include <com_deepin_daemon_power.h>
+#include "hwinfohandler.h"
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -60,6 +61,46 @@ const QString& DeviceInfoParser::fuzzyQueryData(const QString& toolname, const Q
     return result;
 }
 
+QStringList DeviceInfoParser::getMemorynameList()
+{
+    QStringList memList;
+
+    if(false == toolDatabase_.contains("dmidecode"))
+    {
+        return memList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["dmidecode"].uniqueKeys() )
+    {
+        if( fk == "Memory Device" || fk.contains("Memory Device_"))
+        {
+            memList.push_back(fk);
+        }
+    }
+
+    return memList;
+}
+
+QStringList DeviceInfoParser::getDisknameList()
+{
+    QStringList diskList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return diskList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        if( fk.contains("disk") && false == fk.contains("volume"))
+        {
+            diskList.push_back(fk);
+        }
+    }
+
+    return diskList;
+}
+
 bool DeviceInfoParser::getOSInfo(QString& osInfo)
 {
     struct utsname kernel_info;
@@ -75,7 +116,32 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
         return false;
     }
 
-    osInfo = standOutput_;
+     QString linuxCoreVerson;
+     QString releaseVersion;
+
+     QRegExp rx("^([\\s\\S]*)\\([\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?\\)([\\s\\S]*)$");
+     if( rx.exactMatch(standOutput_) )
+     {
+        linuxCoreVerson = rx.cap(1).trimmed();
+        releaseVersion = rx.cap(2).trimmed();
+
+        rx.setPattern("^(\\(gcc version [\\d-.]*)[\\s\\S]*$");
+        if( rx.exactMatch( releaseVersion ) )
+        {
+            releaseVersion.remove(rx.cap(1));
+            int index = releaseVersion.indexOf(")");
+            releaseVersion.remove( index, 1 );
+        }
+
+        osInfo = linuxCoreVerson + releaseVersion;
+     }
+     else
+     {
+        osInfo = standOutput_;
+     }
+
+     osInfo.remove("version");
+
     return true;
 }
 
@@ -95,6 +161,9 @@ bool DeviceInfoParser::loadDemicodeDatabase()
     int startIndex = 0;
     int lineNumber = 0;
     QString deviceType;
+    QString childDeviceType;
+    QString childDeviceContent;
+
     QMap<QString, QString> DeviceInfoMap;
 
     for( int i = 0; i < dmidecodeOut.size(); ++i )
@@ -166,15 +235,37 @@ bool DeviceInfoParser::loadDemicodeDatabase()
             continue;
         }
 
+        if( line.startsWith("\t\t") && childDeviceType.isEmpty() == false )
+        {
+            if(childDeviceContent.isEmpty() ==false)
+            {
+                childDeviceContent += ", ";
+            }
+            childDeviceContent += line.trimmed();
+            continue;
+        }
+
         if( line.startsWith('\t') )
         {
+            if(childDeviceType.isEmpty() == false)
+            {
+                DeviceInfoMap[childDeviceType] = childDeviceContent;
+                childDeviceType.clear();
+                childDeviceContent.clear();
+            }
+
             if( line.contains(':') )
             {
                 QStringList strList = line.split(':');
-                if(strList.size() == 2)
+                if(strList.last().trimmed().isEmpty() == true)
+                {
+                    childDeviceType = strList[0].trimmed();
+                }
+                else if(strList.size() == 2)
                 {
                     DeviceInfoMap[strList[0].trimmed()] = strList[1].trimmed();
                 }
+
             }
             continue;
         }
@@ -586,13 +677,15 @@ bool DeviceInfoParser::loadXrandrDatabase()
     return true;
 }
 
-bool DeviceInfoParser::parseEDID( QString edidStr )
+bool DeviceInfoParser::parseXrandrData()
 {
 
-//    if()
-//    {
+    return true;
+}
 
-//    }
+bool DeviceInfoParser::parseEDID( )
+{
+
 
     return true;
 }
@@ -643,6 +736,25 @@ bool DeviceInfoParser::loadLspciDatabase()
             if( index > 0 )
             {
                 DeviceInfoMap[line.mid(0,index).trimmed()] = line.mid(index+1).trimmed();
+            }
+            else if(line.contains(Devicetype_Lspci_Memory) )
+            {
+                if( line.contains(Devicetype_Lspci_non_prefetchable) )
+                {
+                    QRegExp rx("^[\\s\\S]*\\[size=([\\d]*)M\\]$");
+                    if( rx.exactMatch(line) )
+                    {
+                        DeviceInfoMap[Devicetype_Lspci_Memory] = QString(rx.cap(1)).toUInt();
+                    }
+                }
+                else if( line.contains(Devicetype_Lspci_prefetchable) )
+                {
+                    QRegExp rx("^[\\s\\S]*\\[size=([\\d]*)M\\]$");
+                    if( rx.exactMatch(line) )
+                    {
+                        DeviceInfoMap[Devicetype_Lspci_Memory] = QString(rx.cap(1)).toUInt();
+                    }
+                }
             }
             else
             {
@@ -703,7 +815,6 @@ bool DeviceInfoParser::loadHciconfigDatabase()
 
     for( int i = 0; i < hciconfigOut.size(); ++i )
     {
-
         if( hciconfigOut[i] != '\n' && i != hciconfigOut.size() -1)
         {
             continue;
@@ -756,6 +867,101 @@ bool DeviceInfoParser::loadLsusbDatabase()
 {
     // lsusb
     DatabaseMap lsusbDatabase_;
+    return true;
+}
+
+bool DeviceInfoParser::loadHwinfoDatabase()
+{
+    QString hwOut = getHwMonitorString();
+    if( hwOut.size() < 1 )
+    {
+        return false;
+    }
+
+    // hciconfig
+    DatabaseMap hwinfoDatabase_;
+    QMap<QString, QString> DeviceInfoMap;
+    QString deviceName;
+    int startIndex = 0;
+
+    for( int i = 0; i < hwOut.size(); ++i )
+    {
+        if( hwOut[i] != '\n' && i != hwOut.size() -1)
+        {
+            continue;
+        }
+
+        QString line = hwOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if( i == hwOut.size() -1 || line.trimmed().isEmpty() )
+        {
+            if(deviceName.isEmpty() == false)
+            {
+                hwinfoDatabase_[deviceName] = DeviceInfoMap;
+            }
+
+            DeviceInfoMap.clear();
+            deviceName = "";
+            continue;
+        }
+
+        if(line.startsWith(Devicetype_HwInfo_Fourspace))
+        {
+            int index = line.indexOf(": ");
+            if(index > 0)
+            {
+                if( line.trimmed().contains(Devicetype_HwInfo_Resolution) )
+                {
+                    if(DeviceInfoMap.contains(Devicetype_HwInfo_Resolution))
+                    {
+                        DeviceInfoMap[Devicetype_HwInfo_Currentresolution] += ",";
+                        DeviceInfoMap[Devicetype_HwInfo_Currentresolution] +=line.mid(index+1).trimmed();
+                    }
+                    else
+                    {
+                        DeviceInfoMap[Devicetype_HwInfo_Currentresolution] = line.mid(index+1).trimmed();
+                    }
+
+                    continue;
+                }
+
+                DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index+1).trimmed();
+            }
+            continue;
+        }
+
+        if(line.startsWith(Devicetype_HwInfo_Twospace))
+        {
+            int index = line.indexOf(": ");
+            if(index > 0)
+            {
+                if( line.contains(Devicetype_HwInfo_Resolution) )
+                {
+                    if(DeviceInfoMap.contains(Devicetype_HwInfo_ResolutionList))
+                    {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += ",";
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] +=line.mid(index+1).trimmed();
+                    }
+                    else
+                    {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] = line.mid(index+1).trimmed();
+                    }
+
+                    continue;
+                }
+
+                DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index+1).trimmed();
+            }
+            continue;
+        }
+
+
+
+        deviceName = line.trimmed();
+    }
+
+    toolDatabase_[hwinfoToolname] = hwinfoDatabase_;
     return true;
 }
 

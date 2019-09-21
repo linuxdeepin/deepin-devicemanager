@@ -1,11 +1,12 @@
 #include "computeroverviewwidget.h"
 #include "deviceinfoparser.h"
+#include "QRegExp"
 
 ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeComputerOverview)
 {
     setTitle(DeviceAttributeComputerOverview);
 
-    QStringList names = {   DeviceAttributeComputerModel,
+    QStringList names = {   DeviceAttributeModel,
                             DeviceAttributeOperatingSystem,
                             DeviceAttributeCPU,
                             DeviceAttributeMotherboard,
@@ -19,20 +20,34 @@ ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent) : DeviceInfoWidg
 
     QString os;
     DeviceInfoParserInstance.getOSInfo(os);
+    QString chipsetFamily = DeviceInfoParserInstance.fuzzyQueryData("lspci", "ISA bridge", "Subsystem");
+    QRegExp rx("^[\\s\\S]*\\(([\\S]*)\\)$");
+    if( rx.exactMatch(chipsetFamily) )
+    {
+        chipsetFamily = "(" + rx.cap(1)+" "+DeviceAttributeChipsetFamily + ")";
+    }
+
+    QString motherboard =  DeviceInfoParserInstance.qureyData("dmidecode", "Base Board Information", "Manufacturer") \
+            + DeviceInfoParserInstance.qureyData("dmidecode", "Base Board Information", "Product Name") + chipsetFamily;
+
+    QString monitor = DeviceInfoParserInstance.fuzzyQueryData("hwinfo", "Monitor", "Model");
+    monitor.remove("\"");
+
+    QString cpu = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Model name");
+    cpu.remove(" CPU", Qt::CaseInsensitive);
 
     QStringList contents = {
         DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Version"),
         os,
-        DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Model name"),
-        DeviceInfoParserInstance.qureyData("dmidecode", "Base Board Information", "Manufacturer") \
-        + DeviceInfoParserInstance.qureyData("dmidecode", "Base Board Information", "Product Name"),
+        cpu,
+        motherboard,
         DeviceInfoParserInstance.qureyData("lshw", "Computer_core_memory", "size"),
         DeviceInfoParserInstance.qureyData("lshw", "Computer_core_pci_sata_disk", "size"),
         DeviceInfoParserInstance.fuzzyQueryData("lspci", "VGA compatible controller", "Subsystem"),
-        DeviceInfoParserInstance.fuzzyQueryData("dmidecode", "System Information", "Version"),
+        monitor,
         DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Subsystem"),
         DeviceInfoParserInstance.fuzzyQueryData("lspci", "Ethernet controller", "Subsystem"),
     };
 
-    addSubInfo("", names, contents);
+    addInfo( names, contents);
 }

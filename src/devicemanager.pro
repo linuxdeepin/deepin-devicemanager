@@ -33,13 +33,20 @@ INCLUDEPATH += ../dmidecode/    \
 //CFLAGS += -D_FILE_OFFSET_BITS=64
 QMAKE_CFLAGS += -D_FILE_OFFSET_BITS=64
 
+LIBS += -L/usr/lib/x86_64-linux-gnu/ -lhd
+
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
     devicelistwidget.cpp \
     deviceinfoparser.cpp \
     deviceinfowidgetbase.cpp \
-    computeroverviewwidget.cpp
+    computeroverviewwidget.cpp \
+    hwinfohandler.cpp \
+    motherboardwidget.cpp \
+    cpuwidget.cpp \
+    memorywidget.cpp \
+    diskwidget.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -50,7 +57,12 @@ HEADERS += \
     deviceattributedefine.h \
     deviceinfowidgetbase.h \
     computeroverviewwidget.h \
-    singletondef.h
+    singletondef.h \
+    hwinfohandler.h \
+    motherboardwidget.h \
+    cpuwidget.h \
+    memorywidget.h \
+    diskwidget.h
 
 
 # Default rules for deployment.
