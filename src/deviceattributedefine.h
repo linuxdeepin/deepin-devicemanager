@@ -5,11 +5,12 @@
 //computer overview 电脑概况
 
 const QString DeviceAttributeInfo= "Info";   //主板
-const QString DeviceAttributeVersion = "Version";   //主板
-const QString DeviceAttributeGood = "Good";   //
-const QString DeviceAttributeBad = "Bad";   //
-const QString DeviceAttributeYes = "Yes";   //
+const QString DeviceAttributeVersion = "Version";
+const QString DeviceAttributeGood = "Good";
+const QString DeviceAttributeBad = "Bad";
+const QString DeviceAttributeYes = "Yes";
 const QString DeviceAttributeNo = "No";
+const QString DeviceAttributeUnknown= "Unknown";
 
 const QString DeviceAttributeComputerOverview = "Computer Overview";  //电脑概况
 
@@ -24,15 +25,6 @@ const QString DeviceAttributeDisplayAdapter= "DisplayAdapter";//显卡
 const QString DeviceAttributeMonitor= "Monitor";   //显示器
 const QString DeviceAttributeAudioAdapter= "AudioAdapter";//声卡
 const QString DeviceAttributeNetworkAdapter= "NetworkAdapter";//网卡
-
-
-//  DeviceAttributeDisplayAdapter   显卡
-const QString DeviceAttributeDisplayAdapterInfo = "DisplayAdapter Info";
-const QString DeviceAttributeName = "Name";
-const QString DeviceAttributeGraphicsMemory = "Graphics memory";
-const QString DeviceAttributeManufacturer = "Manufacturer"; //制造商】
-const QString DeviceAttributeDriver = "Driver";//驱动
-const QString DeviceAttributeMaxDisplayResolution = "Max display resolution";
 
 // Motherboard Info
 const QString DeviceAttributeBios = "Bios";
@@ -68,3 +60,49 @@ const QString DeviceAttributeRotateSpeed = "Rotate Speed";
 const QString DeviceAttributeShapeCharacteristics= "Shape Characteristics";
 const QString DeviceAttributePowerOnTimes= "Power On Times";
 const QString DeviceAttributeSataVersion= "SATA Version";
+
+//  DeviceAttributeDisplayAdapter   显卡
+const QString DeviceAttributeDisplayAdapterInfo = "DisplayAdapter Info";
+const QString DeviceAttributeName = "Name";
+const QString DeviceAttributeGraphicsMemory = "Graphics memory";
+const QString DeviceAttributeVendor = "Vendor"; //制造商
+const QString DeviceAttributeDriver = "Driver";//驱动
+const QString DeviceAttributeMaxDisplayResolution = "Max display resolution";
+const QString DeviceAttributeGraphicMemory = "Graphic Memory";//显存
+const QString DeviceAttributeSupportInterface = "Support Interface";//显存
+
+//  Monitor 显示器
+const QString DeviceAttributeManufactureDate = "Manufacture Date";//显存Date of manufacture
+const QString DeviceAttributeResolution = "Resolution";
+const QString DeviceAttributeDisplayRate= "Display Rate";
+const QString DeviceAttributeConnectType= "Connect Type";
+const QString DeviceAttributeYear= "Year";
+const QString DeviceAttributeWeek= "Week";
+const QString DeviceAttributeInch= "inch";
+
+// AudioDevice 音频
+const QString DeviceAttributeAudioDevice = "Audio Device";
+const QString DeviceAttributeSpeaker = "Speaker";
+const QString DeviceAttributeMicrophone = "Microphone";
+
+// NetworkAdapter 网卡
+const QString DeviceAttributeMac = "Mac Address";
+
+// Bluetooth 蓝牙
+const QString DeviceAttributeBluetooth = "Bluetooth";
+const QString DeviceAttributeLinkPolicy = "Link Policy";
+const QString DeviceAttributeLinkMode = "Link Mode";
+
+// Cameras 摄像头
+const QString DeviceAttributeCamera = "Camera";
+
+const QString DeviceAttributeUsbdevice = "Usb Device";
+
+const QString DeviceAttributePower = "Power";
+
+const QString DeviceAttributeKeyboard = "Keyboard";
+const QString DeviceAttributeMouse = "Mouse";
+
+const QString DeviceAttributeOtherInputdevice= "Other Inputdevice";
+const QString DeviceAttributeCapabilities = "Capabilities";
+

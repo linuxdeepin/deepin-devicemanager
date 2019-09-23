@@ -101,6 +101,190 @@ QStringList DeviceInfoParser::getDisknameList()
     return diskList;
 }
 
+QStringList DeviceInfoParser::getDiaplayadapterList()
+{
+    QStringList displayadapterList;
+
+    if(false == toolDatabase_.contains("lspci"))
+    {
+        return displayadapterList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lspci"].uniqueKeys() )
+    {
+        if( fk.contains("VGA compatible controller") )
+        {
+            displayadapterList.push_back(fk);
+        }
+    }
+
+    return displayadapterList;
+}
+
+QStringList DeviceInfoParser::getDisplayInterfaceList()
+{
+    QStringList interfaceList;
+
+    if(false == toolDatabase_.contains("xrandr"))
+    {
+        return interfaceList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["xrandr"].uniqueKeys() )
+    {
+        int index = fk.indexOf(Devicetype_Xrandr_Disconnected);
+        if(index < 1)
+        {
+            index = fk.indexOf(Devicetype_Xrandr_Connected);
+        }
+
+        if( index < 0 )
+        {
+            continue;
+        }
+
+        QString interface = fk.mid(0, index).trimmed();
+        index = interface.indexOf('-');
+        if( index > 0 )
+        {
+            interface = interface.mid(0, index);
+        }
+        if( false == interfaceList.contains(interface) )
+        {
+            interfaceList.push_back(interface);
+        }
+    }
+
+    return interfaceList;
+}
+
+QStringList DeviceInfoParser::getMonitorList()
+{
+    QStringList monitorList;
+
+    if(false == toolDatabase_.contains("hwinfo"))
+    {
+        return monitorList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["hwinfo"].uniqueKeys() )
+    {
+        monitorList.push_back(fk);
+    }
+
+    return monitorList;
+}
+
+QStringList DeviceInfoParser::getConnectedMonitorList()
+{
+    QStringList connectedMonitorList;
+
+    if(false == toolDatabase_.contains("xrandr"))
+    {
+        return connectedMonitorList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["xrandr"].uniqueKeys() )
+    {
+        int index = fk.indexOf(Devicetype_Xrandr_Connected);
+        if( index < 0 )
+        {
+            continue;
+        }
+
+        QString interface = fk.mid(0, index).trimmed();
+        index = interface.indexOf('-');
+        if( index > 0 )
+        {
+            interface = interface.mid(0, index);
+        }
+
+        connectedMonitorList.push_back(interface);
+    }
+
+    return connectedMonitorList;
+}
+
+QStringList DeviceInfoParser::getInputdeviceList()
+{
+    QStringList inputdeviceList;
+
+    if(false == toolDatabase_.contains("catinput"))
+    {
+        return inputdeviceList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["catinput"].uniqueKeys() )
+    {
+        inputdeviceList.push_back(fk);
+    }
+
+    return inputdeviceList;
+}
+
+QStringList DeviceInfoParser::getNetworkadapterList()
+{
+    QStringList networkadapterList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return networkadapterList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        if( fk.contains("network") )
+        {
+            networkadapterList.push_back(fk);
+        }
+    }
+
+    return networkadapterList;
+}
+
+QStringList DeviceInfoParser::getBluetoothList()
+{
+    QStringList bluetoothList;
+
+    if(false == toolDatabase_.contains("hciconfig"))
+    {
+        return bluetoothList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["hciconfig"].uniqueKeys() )
+    {
+        bluetoothList.push_back(fk);
+    }
+
+    return bluetoothList;
+}
+
+QStringList DeviceInfoParser::getCameraList()
+{
+    QStringList cameraList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return cameraList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        if(false == toolDatabase_["lshw"][fk].contains("product"))
+        {
+            continue;
+        }
+
+        QString product =toolDatabase_["lshw"][fk]["product"];
+        if(product.contains("Camera", Qt::CaseInsensitive))
+        {
+            cameraList.push_back(fk);
+        }
+    }
+
+    return cameraList;
+}
+
 bool DeviceInfoParser::getOSInfo(QString& osInfo)
 {
     struct utsname kernel_info;
@@ -384,10 +568,10 @@ bool DeviceInfoParser::loadLshwDatabase()
             continue;
         }
 
-        if( line.contains(Devicetype_Separator) )
+        int index = line.indexOf(Devicetype_Separator);
+        if( index > 0 )
         {
-            QStringList strList = line.split(Devicetype_Separator);
-            DeviceInfoMap[strList.first().trimmed().remove(Devicetype_lshw_Class_Prefix)] = strList.last().trimmed();
+            DeviceInfoMap[line.mid(0,index).trimmed().remove(Devicetype_lshw_Class_Prefix)] = line.mid(index+1).trimmed();
             continue;
         }
     }
@@ -551,10 +735,12 @@ bool DeviceInfoParser::loadCatInputDatabase()
                 continue;
             }
 
-            if( cutLine.indexOf(DeviceType_CatDevice_Separator, first_index) < 0)
+            int secondIndex = cutLine.indexOf(DeviceType_CatDevice_Separator, first_index+1);
+            if( cutLine.indexOf(DeviceType_CatDevice_Separator, first_index+1) < 0)
             {
                 QStringList strList = cutLine.split(DeviceType_CatDevice_Separator);
                 DeviceInfoMap[strList.first().trimmed()] = strList.last().trimmed();
+                continue;
             }
 
             foreach( const QString& typeStr, cutLine.split(' ') )
@@ -605,7 +791,7 @@ bool DeviceInfoParser::loadXrandrDatabase()
         if( i == xrandrOut.size() -1)
         {
             content += line;
-            DeviceInfoMap[deviceType] = content;
+            DeviceInfoMap[deviceType] = content.trimmed();
             if(title.isEmpty() == false && DeviceInfoMap.size() > 0 )
             {
                 xrandrDatabase_[title] = DeviceInfoMap;
@@ -741,18 +927,18 @@ bool DeviceInfoParser::loadLspciDatabase()
             {
                 if( line.contains(Devicetype_Lspci_non_prefetchable) )
                 {
-                    QRegExp rx("^[\\s\\S]*\\[size=([\\d]*)M\\]$");
+                    QRegExp rx("^[\\s\\S]*\\[size=([\\d]*M)\\]$");
                     if( rx.exactMatch(line) )
                     {
-                        DeviceInfoMap[Devicetype_Lspci_Memory] = QString(rx.cap(1)).toUInt();
+                        DeviceInfoMap[Devicetype_Lspci_Memory] = QString(rx.cap(1)).trimmed();
                     }
                 }
                 else if( line.contains(Devicetype_Lspci_prefetchable) )
                 {
-                    QRegExp rx("^[\\s\\S]*\\[size=([\\d]*)M\\]$");
+                    QRegExp rx("^[\\s\\S]*\\[size=([\\d]*M)\\]$");
                     if( rx.exactMatch(line) )
                     {
-                        DeviceInfoMap[Devicetype_Lspci_Memory] = QString(rx.cap(1)).toUInt();
+                        DeviceInfoMap[Devicetype_Lspci_Memory] = QString(rx.cap(1)).trimmed();
                     }
                 }
             }
@@ -780,7 +966,7 @@ bool DeviceInfoParser::loadLspciDatabase()
                 DeviceInfoMap.clear();
                 deviceName = "";
             }
-            DeviceInfoMap[Devicetype_Name] = line.mid(index+1);
+            DeviceInfoMap[Devicetype_Name] = line.mid(index+1).trimmed();
             deviceName = line.mid(0,index);
             continue;
         }

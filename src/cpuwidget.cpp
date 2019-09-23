@@ -7,7 +7,7 @@ CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttri
 
     QStringList names = {   DeviceAttributeModel,
                             DeviceAttributeArchitecture,
-                            DeviceAttributeManufacturer,
+                            DeviceAttributeVendor,
                             DeviceAttributeSpeed,
                             DeviceAttributeCores + " " + DeviceAttributeNumber,
                             DeviceAttributeThreads + " " + DeviceAttributeNumber,
@@ -17,14 +17,27 @@ CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttri
                             DeviceAttributeL3
                         };
 
+    QString modelName = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Model name");
+
     float maxMHz = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "CPU max MHz").toFloat()/1000.0;
     float minMHz = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "CPU min MHz").toFloat()/1000.0;
-    QString speed = QString::number(maxMHz) + "GHz";
+
+    QString speed;
+    int index = modelName.indexOf('@');
+    if(index > 0)
+    {
+        speed = modelName.mid(index+1).trimmed();
+    }
+    else
+    {
+        speed = QString::number(maxMHz) + "GHz";
+    }
+
     if(minMHz != maxMHz)
     {
-        speed += "(";
+        speed += " (";
         speed += QString::number(minMHz);
-        speed += "GHz -";
+        speed += "GHz - ";
         speed += QString::number(maxMHz);
         speed += "GHz)";
     }
@@ -34,7 +47,7 @@ CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttri
     QString corePlus = QString::number(cpus) + "x ";
 
     QStringList contents = {
-        DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Model name"),
+        modelName,
         DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Architecture"),
         DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Vendor ID"),
         speed,

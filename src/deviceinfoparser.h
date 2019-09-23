@@ -66,6 +66,14 @@ public:
 
     QStringList getMemorynameList();
     QStringList getDisknameList();
+    QStringList getDiaplayadapterList();
+    QStringList getDisplayInterfaceList();
+    QStringList getMonitorList();
+    QStringList getConnectedMonitorList();
+    QStringList getInputdeviceList();
+    QStringList getNetworkadapterList();
+    QStringList getBluetoothList();
+    QStringList getCameraList();
 
     // get os
     bool getOSInfo(QString& osInfo);

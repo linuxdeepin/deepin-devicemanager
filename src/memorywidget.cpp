@@ -46,7 +46,7 @@ MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, Devic
 
     addInfo(names, contents);
 
-    QStringList subNames = {   DeviceAttributeManufacturer,
+    QStringList subNames = {   DeviceAttributeVendor,
                             DeviceAttributeSize,
                             DeviceAttributeType,
                             DeviceAttributeSpeed,

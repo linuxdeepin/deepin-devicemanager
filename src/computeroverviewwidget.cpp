@@ -36,13 +36,19 @@ ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent) : DeviceInfoWidg
     QString cpu = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Model name");
     cpu.remove(" CPU", Qt::CaseInsensitive);
 
+    QString memory = DeviceInfoParserInstance.qureyData("lshw", "Computer_core_memory", "size");
+    memory.replace("GiB","GB");
+
+    QString diskSize = DeviceInfoParserInstance.qureyData("lshw", "Computer_core_pci_sata_disk", "size");
+    diskSize.replace("GiB","GB");
+
     QStringList contents = {
         DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Version"),
         os,
         cpu,
         motherboard,
-        DeviceInfoParserInstance.qureyData("lshw", "Computer_core_memory", "size"),
-        DeviceInfoParserInstance.qureyData("lshw", "Computer_core_pci_sata_disk", "size"),
+        memory,
+        diskSize,
         DeviceInfoParserInstance.fuzzyQueryData("lspci", "VGA compatible controller", "Subsystem"),
         monitor,
         DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Subsystem"),

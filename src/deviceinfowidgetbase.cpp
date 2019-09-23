@@ -73,6 +73,8 @@ void DeviceInfoWidgetBase::addInfo(const QStringList& names, const QStringList& 
     }
 
     downWidget_->setFixedHeight(downWidget_->height() + increaseHeight);
+
+    downWidgetLayout->insertSpacing(downWidgetLayout->count()-1, 25);
 }
 
 void DeviceInfoWidgetBase::addLinefeed()
@@ -84,9 +86,7 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
 {
     initDownWidget();
 
-    downWidgetLayout->insertSpacing(downWidgetLayout->count()-1, 25);
-
-    int increaseHeight = 25;
+    int increaseHeight = 0;
 
     DeviceInfo subInfo;
     if(false == subTitle.isEmpty())
@@ -120,9 +120,10 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
         increaseHeight+= 30;
     }
 
+    deviceInfos_.push_back(subInfo);
     downWidget_->setFixedHeight(downWidget_->height() + increaseHeight);
 
-    deviceInfos_.push_back(subInfo);
+    downWidgetLayout->insertSpacing(downWidgetLayout->count()-1, 25);
 }
 
 void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStringList>& contentsList)

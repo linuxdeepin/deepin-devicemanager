@@ -46,7 +46,18 @@ SOURCES += \
     motherboardwidget.cpp \
     cpuwidget.cpp \
     memorywidget.cpp \
-    diskwidget.cpp
+    diskwidget.cpp \
+    displayadapterwidget.cpp \
+    monitorwidget.cpp \
+    audiodevicewidget.cpp \
+    networkadapterwidget.cpp \
+    bluetoothwidget.cpp \
+    camerawidget.cpp \
+    keyboardwidget.cpp \
+    mousewidget.cpp \
+    usbdevicewidget.cpp \
+    otherinputdevicewidget.cpp \
+    powerwidget.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -62,7 +73,18 @@ HEADERS += \
     motherboardwidget.h \
     cpuwidget.h \
     memorywidget.h \
-    diskwidget.h
+    diskwidget.h \
+    displayadapterwidget.h \
+    monitorwidget.h \
+    audiodevicewidget.h \
+    networkadapterwidget.h \
+    bluetoothwidget.h \
+    camerawidget.h \
+    keyboardwidget.h \
+    otherinputdevicewidget.h \
+    powerwidget.h \
+    mousewidget.h \
+    usbdevicewidget.h
 
 
 # Default rules for deployment.
