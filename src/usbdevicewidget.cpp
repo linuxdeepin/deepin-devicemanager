@@ -5,27 +5,30 @@ UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
 {
     setTitle(DeviceAttributeUsbdevice);
 
-    QStringList bluetoothNames = {
+    QStringList names = {
                             DeviceAttributeName,
                             DeviceAttributeVendor,
-                            DeviceAttributeMac,
-                            DeviceAttributeLinkPolicy,
-                            DeviceAttributeLinkMode
+                            DeviceAttributeCapabilities,
+                            DeviceAttributeConfiguration
                         };
 
-    QStringList bluetoothList = DeviceInfoParserInstance.getBluetoothList();
+    QStringList usbdeviceList = DeviceInfoParserInstance.getUsbdeviceList();
 
-    foreach(const QString& device, bluetoothList)
+    foreach(const QString& device, usbdeviceList)
     {
+        QString name = DeviceInfoParserInstance.qureyData("lshw", device, "product");
+        if(name == DeviceAttributeUnknown)
+        {
+            name = DeviceInfoParserInstance.qureyData("lshw", device, "description");
+        }
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Name"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Manufacturer"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "BD Address"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Link policy"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Link mode")
+            name,
+            DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
+            DeviceInfoParserInstance.qureyData("lshw", device, "capabilities"),
+            DeviceInfoParserInstance.qureyData("lshw", device, "configuration")
         };
 
-        addSubInfo( "", bluetoothNames, contents);
+        addSubInfo( "", names, contents);
     }
 }
 

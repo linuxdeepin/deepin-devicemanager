@@ -7,6 +7,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "DTitlebar"
 
 DWIDGET_USE_NAMESPACE
 
@@ -40,8 +41,8 @@ int main(int argc, char *argv[])
     app.setApplicationName("DeviceManager");
     app.setApplicationDisplayName(QObject::tr("Device Manager"));
     app.setApplicationVersion("0.0.1");
-    app.setProductIcon(QIcon((":/cpu.svg")));
-    app.setWindowIcon(QIcon((":/cpu.svg")));
+    app.setProductIcon(QIcon(":/cpu.svg"));
+    app.setWindowIcon(QIcon(":/cpu.svg"));
     app.setProductName(DApplication::translate("MainWindow", "Device Manager"));
     app.setApplicationDescription(DApplication::translate("MainWindow", descriptionText) + "\n");
     app.setApplicationAcknowledgementPage(acknowledgementLink);
@@ -52,6 +53,7 @@ int main(int argc, char *argv[])
     //app.setStyle("chameleon");
 
     MainWindow w;
+    w.titlebar()->setIcon(QIcon(":/cpu.svg"));
     Dtk::Widget::moveToCenter(&w);
     w.show();
 

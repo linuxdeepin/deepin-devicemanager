@@ -57,7 +57,9 @@ SOURCES += \
     mousewidget.cpp \
     usbdevicewidget.cpp \
     otherinputdevicewidget.cpp \
-    powerwidget.cpp
+    powerwidget.cpp \
+    otherpcidevice.cpp \
+    portwidget.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -84,7 +86,9 @@ HEADERS += \
     otherinputdevicewidget.h \
     powerwidget.h \
     mousewidget.h \
-    usbdevicewidget.h
+    usbdevicewidget.h \
+    otherpcidevice.h \
+    portwidget.h
 
 
 # Default rules for deployment.

@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 /*  Best Singleton
     noncopyable
     use stack, not new from heap

@@ -33,7 +33,7 @@ AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(par
     foreach(const QString& device, inputdeviceList)
     {
         QString name = DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Name");
-        if(false == name.contains("Speaker") && false == name.contains("Headphone") )
+        if(false == name.contains("Speaker", Qt::CaseInsensitive) && false == name.contains("Headphone", Qt::CaseInsensitive) )
         {
             continue;
         }
@@ -50,7 +50,7 @@ AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(par
     foreach(const QString& device, inputdeviceList)
     {
         QString name = DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Name");
-        if(false == name.contains("Mic"))
+        if(false == name.contains("Mic", Qt::CaseInsensitive))
         {
             continue;
         }

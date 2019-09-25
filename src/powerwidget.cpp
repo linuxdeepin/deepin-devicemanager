@@ -3,29 +3,76 @@
 
 PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributePower)
 {
-    setTitle(DeviceAttributePower + " " + DeviceAttributeInfo);
+    //setTitle(DeviceAttributePower + " " + DeviceAttributeInfo);
 
-    QStringList bluetoothNames = {
+    QStringList switchingpowerNames = {
                             DeviceAttributeName,
+                            DeviceAttributeType,
                             DeviceAttributeVendor,
-                            DeviceAttributeMac,
-                            DeviceAttributeLinkPolicy,
-                            DeviceAttributeLinkMode
+                            DeviceAttributeMaxPowerCapacity,
+                            DeviceAttributeStatu,
+                            DeviceAttributeType,
+                            DeviceAttributeScreenSuspendDelay,
+                            DeviceAttributeComputerSuspendDelay,
+                            DeviceAttributeAutoLockScreenDelay
                         };
 
-    QStringList bluetoothList = DeviceInfoParserInstance.getBluetoothList();
-
-    foreach(const QString& device, bluetoothList)
+    QStringList switchingpowerList = DeviceInfoParserInstance.getSwitchingpowerList();
+    bool bNeedSetTitle = true;
+    foreach(const QString& device, switchingpowerList)
     {
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Name"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Manufacturer"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "BD Address"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Link policy"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Link mode")
+            DeviceInfoParserInstance.qureyData("lshw", device, "product"),
+            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Manufacturer"),
+            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Manufacturer"),
+            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Max Power Capacity"),
+            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Status"),
+            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Type"),
+            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Manufacturer"),
+            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "BD Address"),
+            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Link policy")
+        };
+        if(bNeedSetTitle)
+        {
+            addSubInfo(DeviceAttributeSwitchingPower, switchingpowerNames, contents);
+            bNeedSetTitle = false;
+        }
+        else
+        {
+            addSubInfo("", switchingpowerNames, contents);
+        }
+    }
+
+    QStringList batteryNames = {
+                            DeviceAttributeName,
+                            DeviceAttributeVendor,
+                            DeviceAttributeSlot,
+                            DeviceAttributeMaxPowerCapacity,
+                            DeviceAttributeConfiguration
+                        };
+
+    QStringList batteryList = DeviceInfoParserInstance.getBatteryList();
+    bNeedSetTitle = true;
+    foreach(const QString& device, batteryList)
+    {
+        QStringList contents = {
+            DeviceInfoParserInstance.qureyData("lshw", device, "product"),
+            DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
+            DeviceInfoParserInstance.qureyData("lshw", device, "slot"),
+            DeviceInfoParserInstance.qureyData("lshw", device, "capacity"),
+            DeviceInfoParserInstance.qureyData("lshw", device, "configuration")
         };
 
-        addSubInfo( "", bluetoothNames, contents);
+        if(bNeedSetTitle)
+        {
+            addSubInfo(DeviceAttributeBattery, batteryNames, contents);
+            bNeedSetTitle = false;
+        }
+        else
+        {
+            addSubInfo("", switchingpowerNames, contents);
+        }
+
     }
 }
 

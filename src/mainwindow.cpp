@@ -19,6 +19,9 @@
 #include "usbdevicewidget.h"
 #include "otherinputdevicewidget.h"
 #include "powerwidget.h"
+#include <QStandardItemModel>
+#include "otherpcidevice.h"
+#include "portwidget.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -31,9 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setFocus(Qt::FocusReason::NoFocusReason);
 
     leftDeviceList_ = new DeviceListWidget(this);
-    leftDeviceList_->setMinimumWidth(160);
-    leftDeviceList_->setHeaderHidden(true);
-
+    leftDeviceList_->setMinimumWidth(150);
 
     ly->addWidget(leftDeviceList_);
 
@@ -55,11 +56,13 @@ MainWindow::MainWindow(QWidget *parent) :
     addDeviceWidget(new UsbdeviceWidget(this));
     addDeviceWidget(new OtherInputdeviceWidget(this));
     addDeviceWidget(new PowerWidget(this));
+    addDeviceWidget(new OtherPciDeviceWidget(this));
+    addDeviceWidget(new PortWidget(this));
 
-    connect( leftDeviceList_, &DeviceListWidget::currentItemChanged, \
-            [this]()
+
+    connect(leftDeviceList_, &DListView::clicked, [this](const QModelIndex& index)
             {
-                QString currentDevice = this->leftDeviceList_->currentItem()->text(0);
+                QString currentDevice = index.data().toString();
                 rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);
             }
     );
@@ -69,6 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mainWidget->setLayout(ly);
 
     setCentralWidget(mainWidget);
+
 }
 
 MainWindow::~MainWindow()

@@ -1,7 +1,7 @@
-#include "otherinputdevicewidget.h"
+#include "portwidget.h"
 #include "deviceinfoparser.h"
 
-OtherInputdeviceWidget::OtherInputdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeOtherInputdevice)
+PortWidget::PortWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeOtherPciPort)
 {
     //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
 
@@ -12,12 +12,6 @@ OtherInputdeviceWidget::OtherInputdeviceWidget(QWidget *parent) : DeviceInfoWidg
                         };
 
     QStringList otherInputdeviceList = DeviceInfoParserInstance.getOtherInputdeviceList();
-
-    if(otherInputdeviceList.size() == 0)
-    {
-        setTitle("No " + DeviceAttributeOtherInputdevice + " found!");
-        addStrecch();
-    }
 
     foreach(const QString& device, otherInputdeviceList)
     {

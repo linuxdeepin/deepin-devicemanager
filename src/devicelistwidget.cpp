@@ -1,17 +1,41 @@
 #include "devicelistwidget.h"
-#include "DTreeWidget"
+#include <QStandardItemModel>
+#include <QMargins>
+#include <QVariant>
 
 DWIDGET_USE_NAMESPACE
 
-DeviceListWidget::DeviceListWidget(QWidget* parent):DTreeWidget(parent)
+Q_DECLARE_METATYPE(QMargins)
+
+DeviceListWidget::DeviceListWidget(QWidget* parent):DListView(parent)
 {
+    setFrameShape(QFrame::Shape::NoFrame);
+    setEditTriggers(QListView::NoEditTriggers);
+    setResizeMode(QListView::Adjust);
+    setAutoScroll(false);
+
+    setSpacing(0);
+    setViewMode(QListView::ListMode);
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    viewport()->setAutoFillBackground(true);
+
     setFocus(Qt::FocusReason::NoFocusReason);
-    //setSizePolicy(QSizePolicy::Policy::Preferred);
+
+    navModel_ = new QStandardItemModel(navModel_);
+    setModel(navModel_);
 }
 
 void DeviceListWidget::addDevice(const QString& deviceName, const QString& iconFile)
 {
-    QTreeWidgetItem *item = new QTreeWidgetItem(this);
-    item->setIcon(0, QIcon(iconFile));
-    item->setText(0, deviceName);
+    DStandardItem* item = new DStandardItem;
+    item->setIcon(QIcon(iconFile));
+    item->setText(deviceName);
+
+
+    const QMargins ListViweItemMargin(20,8,20,8);
+    const QVariant VListViewItemMargin = QVariant::fromValue(ListViweItemMargin);
+
+    item->setData(VListViewItemMargin, Dtk::MarginsRole);
+
+    navModel_->appendRow(item);
 }

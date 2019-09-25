@@ -74,6 +74,12 @@ public:
     QStringList getNetworkadapterList();
     QStringList getBluetoothList();
     QStringList getCameraList();
+    QStringList getUsbdeviceList();
+
+    QStringList getSwitchingpowerList();
+    QStringList getBatteryList();
+
+    QStringList getOtherInputdeviceList();
 
     // get os
     bool getOSInfo(QString& osInfo);

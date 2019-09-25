@@ -106,3 +106,20 @@ const QString DeviceAttributeMouse = "Mouse";
 const QString DeviceAttributeOtherInputdevice= "Other Inputdevice";
 const QString DeviceAttributeCapabilities = "Capabilities";
 
+// 键盘鼠标
+const QString DeviceAttributeInterface = "Interface";
+
+const QString DeviceAttributeConfiguration = "configuration";
+
+//  电源
+const QString DeviceAttributeSwitchingPower = "Switching Power";
+const QString DeviceAttributeBattery= "Battery";
+const QString DeviceAttributeMaxPowerCapacity = "Max Power Capacity";
+const QString DeviceAttributeScreenSuspendDelay= "Screen Suspend Delay";
+const QString DeviceAttributeComputerSuspendDelay= "Computer Suspend Delay";
+const QString DeviceAttributeAutoLockScreenDelay = "AutoLock Screen Delay";
+
+const QString DeviceAttributeDescription= "DeviceAttributeDescription";
+
+const QString DeviceAttributeOtherPciDevice= "Other PCI Device";
+const QString DeviceAttributeOtherPciPort= "Ports";

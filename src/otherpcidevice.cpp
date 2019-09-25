@@ -1,7 +1,7 @@
-#include "otherinputdevicewidget.h"
+#include "otherpcidevice.h"
 #include "deviceinfoparser.h"
 
-OtherInputdeviceWidget::OtherInputdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeOtherInputdevice)
+OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeOtherPciDevice)
 {
     //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
 
@@ -15,7 +15,7 @@ OtherInputdeviceWidget::OtherInputdeviceWidget(QWidget *parent) : DeviceInfoWidg
 
     if(otherInputdeviceList.size() == 0)
     {
-        setTitle("No " + DeviceAttributeOtherInputdevice + " found!");
+        setTitle("No " + DeviceAttributeOtherPciDevice + " found!");
         addStrecch();
     }
 

@@ -8,6 +8,7 @@
 #include <DLog>
 #include <com_deepin_daemon_power.h>
 #include "hwinfohandler.h"
+#include "deviceattributedefine.h"
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -17,7 +18,7 @@ static QProcess process_;
 
 const QString& DeviceInfoParser::qureyData(const QString& toolname, const QString& firstKey, const QString& secondKey)
 {
-    static QString result = "null";
+    static QString result = DeviceAttributeUnknown;
     if(false == toolDatabase_.contains(toolname))
     {
         return result;
@@ -38,7 +39,7 @@ const QString& DeviceInfoParser::qureyData(const QString& toolname, const QStrin
 
 const QString& DeviceInfoParser::fuzzyQueryData(const QString& toolname, const QString& firstKey, const QString& secondKey)
 {
-    static QString result = "null";
+    static QString result = DeviceAttributeUnknown;
     if(false == toolDatabase_.contains(toolname))
     {
         return result;
@@ -283,6 +284,120 @@ QStringList DeviceInfoParser::getCameraList()
     }
 
     return cameraList;
+}
+
+QStringList DeviceInfoParser::getUsbdeviceList()
+{
+    QStringList usbdeviceList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return usbdeviceList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        if(fk.contains("usb:", Qt::CaseInsensitive))
+        {
+            usbdeviceList.push_back(fk);
+        }
+    }
+
+    return usbdeviceList;
+}
+
+QStringList DeviceInfoParser::getSwitchingpowerList()
+{
+    QStringList switchingpowerList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return switchingpowerList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        if(fk.contains("power", Qt::CaseInsensitive))
+        {
+            switchingpowerList.push_back(fk);
+        }
+    }
+
+    return switchingpowerList;
+}
+
+QStringList DeviceInfoParser::getBatteryList()
+{
+    QStringList batteryList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return batteryList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        if(fk.contains("battery", Qt::CaseInsensitive))
+        {
+            batteryList.push_back(fk);
+        }
+    }
+
+    return batteryList;
+}
+
+QStringList DeviceInfoParser::getOtherInputdeviceList()
+{
+    QStringList otherInputdeviceList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return otherInputdeviceList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        QString product =toolDatabase_["lshw"][fk]["product"];
+        QString description =toolDatabase_["lshw"][fk]["description"];
+
+        if( product.contains("touchpad", Qt::CaseInsensitive) || description.contains("touchpad", Qt::CaseInsensitive) || \
+            product.contains("scanner", Qt::CaseInsensitive) || description.contains("scanner", Qt::CaseInsensitive) || \
+            product.contains("Joystick", Qt::CaseInsensitive) || description.contains("Joystick", Qt::CaseInsensitive) ||
+            product.contains("Handwriting", Qt::CaseInsensitive) || description.contains("Handwriting", Qt::CaseInsensitive) ||
+            product.contains("Voice input", Qt::CaseInsensitive) || description.contains("Voice input", Qt::CaseInsensitive)  )
+        {
+            otherInputdeviceList.push_back(fk);
+        }
+    }
+
+    return otherInputdeviceList;
+}
+
+QStringList DeviceInfoParser::getOtherPciDeviceList()
+{
+    QStringList otherInputdeviceList;
+
+    if(false == toolDatabase_.contains("lspci"))
+    {
+        return otherInputdeviceList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lspci"].uniqueKeys() )
+    {
+        QString product =toolDatabase_["lshw"][fk]["product"];
+        QString description =toolDatabase_["lshw"][fk]["description"];
+
+        if( product.contains("touchpad", Qt::CaseInsensitive) || description.contains("touchpad", Qt::CaseInsensitive) || \
+            product.contains("scanner", Qt::CaseInsensitive) || description.contains("scanner", Qt::CaseInsensitive) || \
+            product.contains("Joystick", Qt::CaseInsensitive) || description.contains("Joystick", Qt::CaseInsensitive) ||
+            product.contains("Handwriting", Qt::CaseInsensitive) || description.contains("Handwriting", Qt::CaseInsensitive) ||
+            product.contains("Voice input", Qt::CaseInsensitive) || description.contains("Voice input", Qt::CaseInsensitive)  )
+        {
+            otherInputdeviceList.push_back(fk);
+        }
+    }
+
+    return otherInputdeviceList;
 }
 
 bool DeviceInfoParser::getOSInfo(QString& osInfo)

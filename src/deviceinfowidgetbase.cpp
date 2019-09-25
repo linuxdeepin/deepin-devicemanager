@@ -7,6 +7,7 @@
 #include "DScrollBar"
 #include <QSizePolicy>
 
+
 DWIDGET_USE_NAMESPACE
 
 DeviceInfoWidgetBase::DeviceInfoWidgetBase(QWidget *parent, const QString& deviceName) : QWidget(parent), deviceName_(deviceName)
@@ -16,11 +17,20 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(QWidget *parent, const QString& devic
     setLayout(vLayout_);
     setMinimumWidth(700);
     //setAttribute(Qt::WidgetAttribute::WA_NoBackground);
+    initContextMenu();
 }
 
 DeviceInfoWidgetBase::~DeviceInfoWidgetBase()
 {
+}
 
+void DeviceInfoWidgetBase::initContextMenu()
+{
+    contextMenu_ = new QMenu;
+    contextMenu_->addAction(new QAction("Refresh",this));
+    contextMenu_->addAction(new QAction("Export to File",this));
+    contextMenu_->addAction(new QAction("Attach",this));
+    contextMenu_->addAction(new QAction("Detach",this));
 }
 
 void DeviceInfoWidgetBase::DeviceInfoWidgetBase::setTitle(const QString& title)
@@ -50,21 +60,24 @@ void DeviceInfoWidgetBase::addInfo(const QStringList& names, const QStringList& 
 
     QHBoxLayout* hly = new QHBoxLayout;
 
+    int increaseHeight = 10;
     hly->addSpacing(10);
+
     QGridLayout* gridLayout = new QGridLayout;
     gridLayout->setMargin(0);
     //gridLayout->setSizePo(QLayout::QSizePolicy::Minimum);
     hly->addLayout(gridLayout);
     downWidgetLayout->insertLayout(downWidgetLayout->count()-1, hly);
 
-    int increaseHeight = 0;
-
     for(int i = 0; i < names.size(); ++i)
     {
         QLabel* nameLabel = new QLabel(names.at(i), this);
         QLabel* contentLabel = new QLabel(contents.at(i), this);
         nameLabel->setFixedHeight(30);
+        nameLabel->setFixedWidth(200);
+
         contentLabel->setFixedHeight(30);
+
         titleInfo_->nameLabels.push_back(nameLabel);
         titleInfo_->contentLabels.push_back(contentLabel);
         gridLayout->addWidget(nameLabel, i+1, 0);
@@ -72,9 +85,8 @@ void DeviceInfoWidgetBase::addInfo(const QStringList& names, const QStringList& 
         increaseHeight+= 30;
     }
 
-    downWidget_->setFixedHeight(downWidget_->height() + increaseHeight);
-
     downWidgetLayout->insertSpacing(downWidgetLayout->count()-1, 25);
+    downWidget_->setFixedHeight(downWidget_->height() + increaseHeight+25);
 }
 
 void DeviceInfoWidgetBase::addLinefeed()
@@ -103,6 +115,7 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
     gridLayout->setMargin(0);
     hly->setMargin(0);
     hly->addSpacing(10);
+    increaseHeight += 10;
     hly->addLayout(gridLayout);
 
     downWidgetLayout->insertLayout(downWidgetLayout->count()-1, hly);
@@ -112,6 +125,7 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
         QLabel* nameLabel = new QLabel(names.at(i), this);
         QLabel* contentLabel = new QLabel(contents.at(i), this);
         nameLabel->setFixedHeight(30);
+        nameLabel->setFixedWidth(200);
         contentLabel->setFixedHeight(30);
         subInfo.nameLabels.push_back(nameLabel);
         subInfo.contentLabels.push_back(contentLabel);
@@ -121,9 +135,9 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
     }
 
     deviceInfos_.push_back(subInfo);
-    downWidget_->setFixedHeight(downWidget_->height() + increaseHeight);
-
     downWidgetLayout->insertSpacing(downWidgetLayout->count()-1, 25);
+    increaseHeight += 25;
+    downWidget_->setFixedHeight(downWidget_->height() + increaseHeight);
 }
 
 void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStringList>& contentsList)
@@ -170,6 +184,11 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
 }
 
+void DeviceInfoWidgetBase::addStrecch()
+{
+    vLayout_->addStretch(1);
+}
+
 void DeviceInfoWidgetBase::initDownWidget()
 {
     if(downWidget_)
@@ -198,4 +217,15 @@ void DeviceInfoWidgetBase::initDownWidget()
 QString DeviceInfoWidgetBase::getDeviceName()
 {
     return deviceName_;
+}
+
+
+void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)
+{
+    contextMenu_->exec(event->globalPos());
+}
+
+bool DeviceInfoWidgetBase::exportToFile()
+{
+    return true;
 }

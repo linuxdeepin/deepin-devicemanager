@@ -5,27 +5,47 @@ MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceA
 {
     setTitle(DeviceAttributeMouse + " " + DeviceAttributeInfo);
 
-    QStringList bluetoothNames = {
+    QStringList names = {
                             DeviceAttributeName,
                             DeviceAttributeVendor,
-                            DeviceAttributeMac,
-                            DeviceAttributeLinkPolicy,
-                            DeviceAttributeLinkMode
+                            DeviceAttributeInterface
                         };
 
-    QStringList bluetoothList = DeviceInfoParserInstance.getBluetoothList();
-
-    foreach(const QString& device, bluetoothList)
+    QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceList();
+    foreach(const QString& device, inputdeviceList)
     {
+        QString name = DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Name");
+        if(false == name.contains("mouse", Qt::CaseInsensitive) )
+        {
+            continue;
+        }
+
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Name"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Manufacturer"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "BD Address"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Link policy"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Link mode")
+                                name,
+                                DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Vendor"),
+                                "PS/2",
+                                };
+
+        addSubInfo("", names, contents);
+    }
+
+    QStringList usbdeviceList = DeviceInfoParserInstance.getUsbdeviceList();
+
+    foreach(const QString& device, usbdeviceList)
+    {
+        QString description =DeviceInfoParserInstance.qureyData("lshw", device, "description");
+        if(false == description.contains("mouse", Qt::CaseInsensitive))
+        {
+            continue;
+        }
+
+        QStringList contents = {
+            DeviceInfoParserInstance.qureyData("lshw", device, "product"),
+            DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
+            DeviceInfoParserInstance.qureyData("lshw", device, "capabilities")
         };
 
-        addSubInfo( "", bluetoothNames, contents);
+        addSubInfo( "", names, contents);
     }
 }
 

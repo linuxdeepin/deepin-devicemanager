@@ -2,17 +2,15 @@
 
 #include <QObject>
 #include <QString>
-#include "DTreeWidget"
+#include "DListView"
 
-class DeviceListWidget : public Dtk::Widget::DTreeWidget
+class DeviceListWidget : public Dtk::Widget::DListView
 {
     Q_OBJECT
 public:
     DeviceListWidget(QWidget* parent = nullptr);
     void addDevice(const QString& deviceName, const QString& iconFile);
 
-signals:
-
-public slots:
-
+public:
+    QStandardItemModel* navModel_ = nullptr;
 };
