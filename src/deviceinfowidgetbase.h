@@ -5,6 +5,7 @@
 #include "DTableWidget"
 #include "DScrollArea"
 #include "DMenu"
+#include "DLabel"
 
 #include "deviceattributedefine.h"
 
@@ -13,9 +14,9 @@ class QVBoxLayout;
 
 struct DeviceInfo
 {
-    QLabel* title = nullptr;
-    QList<QLabel*>  nameLabels;
-    QList<QLabel*>  contentLabels;
+    Dtk::Widget::DLabel* title = nullptr;
+    QList<Dtk::Widget::DLabel*>  nameLabels;
+    QList<Dtk::Widget::DLabel*>  contentLabels;
 };
 
 //enum class ExportFileType{ Txt, Doc, Xls, Html, Invalid};
@@ -46,19 +47,21 @@ protected:
 public slots:
     bool exportToFile();
 
-//    virtual bool exportToTxt() = 0;
-//    virtual bool exportToDoc() = 0;
-//    virtual bool exportToXls() = 0;
-//    virtual bool exportToHtml() = 0;
+private:
+    bool writeToTextStream(QTextStream& ts);
+    virtual bool exportToTxt(const QString& txtFile);
+    virtual bool exportToDoc(const QString& docFile);
+    virtual bool exportToXls(const QString& xlsFile);
+    virtual bool exportToHtml(const QString& htmlFile);
 
 private:
     QString deviceName_ = "DeviceInfoWidgetBase";
 
+    Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
     DeviceInfo* titleInfo_ = nullptr;
     QList<DeviceInfo> deviceInfos_;
 
     QVBoxLayout* vLayout_ = nullptr;
-    Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
     Dtk::Widget::DWidget*   downWidget_  = nullptr;
     QVBoxLayout* downWidgetLayout = nullptr;
     Dtk::Widget::DMenu* contextMenu_ = nullptr;

@@ -4,7 +4,6 @@
 #include "version.h"
 #include <DLog>
 #include "deviceinfoparser.h"
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "DTitlebar"
@@ -13,7 +12,7 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
-    sqrt(0.01);
+
     QString osInfo;
     DeviceInfoParserInstance.getOSInfo(osInfo);
     DeviceInfoParserInstance.loadDemicodeDatabase();

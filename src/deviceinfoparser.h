@@ -80,7 +80,9 @@ public:
     QStringList getBatteryList();
 
     QStringList getOtherInputdeviceList();
-
+    QStringList getOtherPciDeviceList();
+    QStringList getPortsList();
+    
     // get os
     bool getOSInfo(QString& osInfo);
     // dmidecode parse

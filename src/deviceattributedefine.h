@@ -119,7 +119,11 @@ const QString DeviceAttributeScreenSuspendDelay= "Screen Suspend Delay";
 const QString DeviceAttributeComputerSuspendDelay= "Computer Suspend Delay";
 const QString DeviceAttributeAutoLockScreenDelay = "AutoLock Screen Delay";
 
-const QString DeviceAttributeDescription= "DeviceAttributeDescription";
+const QString DeviceAttributeDescription= "Description";
 
 const QString DeviceAttributeOtherPciDevice= "Other PCI Device";
-const QString DeviceAttributeOtherPciPort= "Ports";
+const QString DeviceAttributePorts= "Ports";
+
+const QString DeviceAttributePortType= "Port Type";
+const QString DeviceAttributeConnectorType= "Connector Type";
+const QString DeviceAttributeReferenceDesignator = "Reference Designator";

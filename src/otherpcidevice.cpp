@@ -11,15 +11,15 @@ OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBa
                             DeviceAttributeCapabilities
                         };
 
-    QStringList otherInputdeviceList = DeviceInfoParserInstance.getOtherInputdeviceList();
+    QStringList otherPcideviceList = DeviceInfoParserInstance.getOtherPciDeviceList();
 
-    if(otherInputdeviceList.size() == 0)
+    if(otherPcideviceList.size() == 0)
     {
         setTitle("No " + DeviceAttributeOtherPciDevice + " found!");
         addStrecch();
     }
 
-    foreach(const QString& device, otherInputdeviceList)
+    foreach(const QString& device, otherPcideviceList)
     {
         QStringList contents = {
             DeviceInfoParserInstance.qureyData("lshw", device, "description"),

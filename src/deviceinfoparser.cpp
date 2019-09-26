@@ -375,29 +375,49 @@ QStringList DeviceInfoParser::getOtherInputdeviceList()
 
 QStringList DeviceInfoParser::getOtherPciDeviceList()
 {
-    QStringList otherInputdeviceList;
+    QStringList otherPcideviceList;
 
-    if(false == toolDatabase_.contains("lspci"))
+    if(false == toolDatabase_.contains("lshw"))
     {
-        return otherInputdeviceList;
+        return otherPcideviceList;
     }
 
-    foreach(const QString& fk, toolDatabase_["lspci"].uniqueKeys() )
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
-        QString product =toolDatabase_["lshw"][fk]["product"];
-        QString description =toolDatabase_["lshw"][fk]["description"];
+        QRegExp re("^[\\s\\S]*_pci_[\\S\\s]*pci:[\\d]?_[\\S\\s]*$");
 
-        if( product.contains("touchpad", Qt::CaseInsensitive) || description.contains("touchpad", Qt::CaseInsensitive) || \
-            product.contains("scanner", Qt::CaseInsensitive) || description.contains("scanner", Qt::CaseInsensitive) || \
-            product.contains("Joystick", Qt::CaseInsensitive) || description.contains("Joystick", Qt::CaseInsensitive) ||
-            product.contains("Handwriting", Qt::CaseInsensitive) || description.contains("Handwriting", Qt::CaseInsensitive) ||
-            product.contains("Voice input", Qt::CaseInsensitive) || description.contains("Voice input", Qt::CaseInsensitive)  )
+        if( re.exactMatch(fk) )
         {
-            otherInputdeviceList.push_back(fk);
+            if( fk.endsWith("display", Qt::CaseInsensitive) || fk.endsWith("network", Qt::CaseInsensitive) )
+            {
+                continue;
+            }
+
+            otherPcideviceList.push_back(fk);
         }
     }
 
-    return otherInputdeviceList;
+    return otherPcideviceList;
+}
+
+QStringList DeviceInfoParser::getPortsList()
+{
+    QStringList portsList;
+
+    if(false == toolDatabase_.contains("dmidecode"))
+    {
+        return portsList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["dmidecode"].uniqueKeys() )
+    {
+        if( fk.contains("Port Connector Information", Qt::CaseInsensitive) )
+        {
+            portsList.push_back(fk);
+        }
+    }
+
+    return portsList;
 }
 
 bool DeviceInfoParser::getOSInfo(QString& osInfo)
@@ -850,7 +870,6 @@ bool DeviceInfoParser::loadCatInputDatabase()
                 continue;
             }
 
-            int secondIndex = cutLine.indexOf(DeviceType_CatDevice_Separator, first_index+1);
             if( cutLine.indexOf(DeviceType_CatDevice_Separator, first_index+1) < 0)
             {
                 QStringList strList = cutLine.split(DeviceType_CatDevice_Separator);

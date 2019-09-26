@@ -4,8 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg dbus
-QT       += gui-private
+QT       += core gui svg dbus xml
+#QT       += gui-private
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,13 +27,21 @@ CONFIG += c++11
 CONFIG += link_pkgconfig
 PKGCONFIG += xcb xcb-util dtkwidget dtkwm dframeworkdbus
 
-INCLUDEPATH += ../dmidecode/    \
-            /usr/include/libdframeworkdbus-2.0/
+INCLUDEPATH +=     \
+            /usr/include/libdframeworkdbus-2.0/ \
+            ../ \
+            ../thirdlib/QtXlsxWriter/include    \
+            ../thirdlib/QtXlsxWriter/include/QtXlsx
 
-//CFLAGS += -D_FILE_OFFSET_BITS=64
-QMAKE_CFLAGS += -D_FILE_OFFSET_BITS=64
+
+include(../thirdlib/QtXlsxWriter/src/xlsx/qtxlsx.pri)
+include(../thirdlib/docx/docx_dependencies.pri)
 
 LIBS += -L/usr/lib/x86_64-linux-gnu/ -lhd
+#LIBS += -L/home/archermind/build-testlib-unknown-Debug/ -ltestlib
+#LIBS += -L/home/archermind/Desktop/build-docx-unknown-Debug/ -ldocxlib
+LIBS += -L/home/archermind/Desktop/build-qtxlsx-unknown-Debug/lib -lQt5Xlsx
+#LIBS += -ldocxlib
 
 SOURCES += \
     main.cpp \

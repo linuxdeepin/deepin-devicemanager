@@ -1,25 +1,25 @@
 #include "portwidget.h"
 #include "deviceinfoparser.h"
 
-PortWidget::PortWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeOtherPciPort)
+PortWidget::PortWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributePorts)
 {
     //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
 
-    QStringList names = {   DeviceAttributeDescription,
-                            DeviceAttributeName,
-                            DeviceAttributeVendor,
+    QStringList names = {   DeviceAttributePortType,
+                            DeviceAttributeConnectorType,
+                            DeviceAttributeReferenceDesignator,
                             DeviceAttributeCapabilities
                         };
 
-    QStringList otherInputdeviceList = DeviceInfoParserInstance.getOtherInputdeviceList();
+    QStringList portsList = DeviceInfoParserInstance.getPortsList();
 
-    foreach(const QString& device, otherInputdeviceList)
+    foreach(const QString& device, portsList)
     {
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("lshw", device, "description"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "product"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "capabilities"),
+            DeviceInfoParserInstance.qureyData("dmidecode", device, "Port Type"),
+            DeviceInfoParserInstance.qureyData("dmidecode", device, "External Connector Type"),
+            DeviceInfoParserInstance.qureyData("dmidecode", device, "External Reference Designator"),
+            DeviceInfoParserInstance.qureyData("dmidecode", device, "capabilities"),
         };
 
         addSubInfo( "", names, contents);
