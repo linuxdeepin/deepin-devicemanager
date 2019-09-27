@@ -3,6 +3,11 @@
 
 CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeCamera)
 {
+    initWidget();
+}
+
+void CameraWidget::initWidget()
+{
     setTitle(DeviceAttributeCamera + " " + DeviceAttributeInfo);
 
     QStringList cameraNames = {
@@ -12,6 +17,13 @@ CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, Devic
                         };
 
     QStringList cameraList = DeviceInfoParserInstance.getCameraList();
+
+    if(cameraList.size() < 1)
+    {
+        setTitle("No " + DeviceAttributeCamera + " found!");
+        addStrecch();
+        return;
+    }
 
     foreach(const QString& device, cameraList)
     {

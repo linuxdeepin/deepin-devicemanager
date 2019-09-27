@@ -8,8 +8,6 @@ class KeyboardWidget : public DeviceInfoWidgetBase
 public:
     explicit KeyboardWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 

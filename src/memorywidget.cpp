@@ -3,6 +3,11 @@
 
 MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeMemory)
 {
+    initWidget();
+}
+
+void MemoryWidget::initWidget()
+{
     bool canUpgrade = false;
 
     setTitle(DeviceAttributeMemory + " " + DeviceAttributeInfo);
@@ -37,9 +42,11 @@ MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, Devic
                             DeviceAttributeUpgradeable
                         };
 
+    QString memSize = DeviceInfoParserInstance.qureyData("lshw", "Computer_core_memory", "size");
+    memSize.replace("GiB", " GB");
     QStringList contents = {
         DeviceInfoParserInstance.qureyData("dmidecode", "Physical Memory Array", "Number Of Devices"),
-        DeviceInfoParserInstance.qureyData("lshw", "Computer_core_memory", "size"),
+        memSize,
         DeviceInfoParserInstance.qureyData("dmidecode", "Physical Memory Array", "Maximum Capacity"),
         canUpgrade?DeviceAttributeYes:DeviceAttributeNo
     };

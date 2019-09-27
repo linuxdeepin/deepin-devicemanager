@@ -1,9 +1,12 @@
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
+QT -= gui
+QT += xml gui-private
+!build_xlsx_lib
+
 SC_LIB_NAME = Docx
-SC_LIB_DEPENDS += \
-                comutils
+SC_LIB_DEPENDS += comutils
 
 SOURCES += \
     $$PWD/document.cpp \

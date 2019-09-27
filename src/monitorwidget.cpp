@@ -14,6 +14,11 @@ int gcd(int a,int b){
 
 MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeMonitor)
 {
+    initWidget();
+}
+
+void MonitorWidget::initWidget()
+{
     setTitle(DeviceAttributeMonitor + " " + DeviceAttributeInfo);
 
     QStringList monitorNames = {
@@ -78,9 +83,22 @@ MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, Dev
             }
         }
 
+        QString vendor = DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Vendor");
+        QString abb;
+        QRegExp rx("(^[\\s\\S]*)\"([\\s\\S]+)\"$");
+        if( rx.exactMatch(vendor) )
+        {
+            abb = rx.cap(1).trimmed();
+            vendor = rx.cap(2).trimmed();
+        }
+
+        QString model = DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Model");
+        model = model.remove("\"");
+        model.remove(abb);
+
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Model"),
-            DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Vendor"),
+            model,
+            vendor,
             manufactureDate,
             monitorSize,
             currentResolution,
@@ -91,4 +109,3 @@ MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, Dev
         addSubInfo( "", monitorNames, contents);
     }
 }
-

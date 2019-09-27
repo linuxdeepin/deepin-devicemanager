@@ -3,6 +3,11 @@
 
 PortWidget::PortWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributePorts)
 {
+    initWidget();
+}
+
+void PortWidget::initWidget()
+{
     //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
 
     QStringList names = {   DeviceAttributePortType,
@@ -25,4 +30,3 @@ PortWidget::PortWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAtt
         addSubInfo( "", names, contents);
     }
 }
-

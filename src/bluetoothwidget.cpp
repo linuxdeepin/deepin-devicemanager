@@ -3,6 +3,11 @@
 
 BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeBluetooth)
 {
+    initWidget();
+}
+
+void BluetoothWidget::initWidget()
+{
     setTitle(DeviceAttributeBluetooth + " " + DeviceAttributeInfo);
 
     QStringList bluetoothNames = {
@@ -14,6 +19,13 @@ BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
                         };
 
     QStringList bluetoothList = DeviceInfoParserInstance.getBluetoothList();
+
+    if(bluetoothList.size() < 1)
+    {
+        setTitle("No " + DeviceAttributeBluetooth + " found!");
+        addStrecch();
+        return;
+    }
 
     foreach(const QString& device, bluetoothList)
     {

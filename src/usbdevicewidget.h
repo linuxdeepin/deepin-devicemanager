@@ -8,8 +8,6 @@ class UsbdeviceWidget : public DeviceInfoWidgetBase
 public:
     explicit UsbdeviceWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 

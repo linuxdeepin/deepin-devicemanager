@@ -3,6 +3,11 @@
 
 OtherInputdeviceWidget::OtherInputdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeOtherInputdevice)
 {
+    initWidget();
+}
+
+void OtherInputdeviceWidget::initWidget()
+{
     //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
 
     QStringList names = {   DeviceAttributeDescription,

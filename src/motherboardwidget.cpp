@@ -3,12 +3,17 @@
 
 MotherboardWidget::MotherboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeMotherboard)
 {
+    initWidget();
+}
+
+void MotherboardWidget::initWidget()
+{
     setTitle(DeviceAttributeMotherboard + " " + DeviceAttributeInfo);
 
     QStringList names = {   DeviceAttributeModel,
                             DeviceAttributeVendor,
                             DeviceAttributeChipsetFamily,
-                            DeviceAttributeBios+DeviceAttributeVersion,
+                            DeviceAttributeBios + " " + DeviceAttributeVersion,
                             DeviceAttributeFeatures
                         };
 

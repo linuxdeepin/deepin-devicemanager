@@ -8,8 +8,6 @@ class DiskWidget : public DeviceInfoWidgetBase
 public:
     explicit DiskWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 

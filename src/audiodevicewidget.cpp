@@ -5,6 +5,11 @@
 
 AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeAudioDevice)
 {
+    initWidget();
+}
+
+void AudiodeviceWidget::initWidget()
+{
     setTitle(DeviceAttributeAudioDevice + " " + DeviceAttributeInfo);
 
     QStringList audioadapterNames = {
@@ -64,4 +69,3 @@ AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(par
         addSubInfo("", names, contents);
     }
 }
-

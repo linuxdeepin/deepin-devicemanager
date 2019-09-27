@@ -3,6 +3,11 @@
 
 UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeUsbdevice)
 {
+    initWidget();
+}
+
+void UsbdeviceWidget::initWidget()
+{
     setTitle(DeviceAttributeUsbdevice);
 
     QStringList names = {
@@ -13,6 +18,13 @@ UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
                         };
 
     QStringList usbdeviceList = DeviceInfoParserInstance.getUsbdeviceList();
+
+    if(usbdeviceList.size() < 1)
+    {
+        setTitle("No " + DeviceAttributeUsbdevice + " found!");
+        addStrecch();
+        return;
+    }
 
     foreach(const QString& device, usbdeviceList)
     {

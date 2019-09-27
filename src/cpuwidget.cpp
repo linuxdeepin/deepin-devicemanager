@@ -3,6 +3,11 @@
 
 CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeCPU)
 {
+    initWidget();
+}
+
+void CpuWidget::initWidget()
+{
     setTitle(DeviceAttributeCPU + " " + DeviceAttributeInfo);
 
     QStringList names = {   DeviceAttributeModel,
@@ -44,7 +49,7 @@ CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttri
 
     int cpus = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "CPU(s)").toInt();
     int threadsPerCore = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Thread(s) per core").toInt();
-    QString corePlus = QString::number(cpus) + "x ";
+    QString corePlus = " x " + QString::number(cpus);
 
     QStringList contents = {
         modelName,
@@ -53,9 +58,9 @@ CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttri
         speed,
         DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "CPU(s)"),
         QString::number(cpus*threadsPerCore),
-        corePlus+DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "L1d cache"),
-        corePlus+DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "L1i cache"),
-        corePlus+DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "L2 cache"),
+        DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "L1d cache") + corePlus,
+        DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "L1i cache") + corePlus,
+        DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "L2 cache") + corePlus,
         DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "L3 cache"),
     };
 

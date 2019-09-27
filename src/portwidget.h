@@ -8,8 +8,6 @@ class PortWidget : public DeviceInfoWidgetBase
 public:
     explicit PortWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 

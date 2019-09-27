@@ -466,16 +466,24 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
 
 bool DeviceInfoParser::loadDemicodeDatabase()
 {
+    if( false == executeProcess("sudo dmidecode"))
+    {
+        return false;
+    }
+
+    QString dmidecodeOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
     QFile dmidecodeFile("//home//archermind//Desktop//dmidecode.txt");
     if( false == dmidecodeFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
 
+    dmidecodeOut = dmidecodeFile.readAll();
+#endif
+
     // dimdecode
     DatabaseMap dimdecodeDatabase_;
-
-    QString dmidecodeOut = dmidecodeFile.readAll();
 
     int startIndex = 0;
     int lineNumber = 0;
@@ -626,12 +634,20 @@ bool DeviceInfoParser::loadDemicodeDatabase()
 
 bool DeviceInfoParser::loadLshwDatabase()
 {
+    if( false == executeProcess("sudo lshw"))
+    {
+        return false;
+    }
+
+    QString lshwOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
     QFile lshwFile("//home//archermind//Desktop//lshw.txt");
     if( false == lshwFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
-
+    lshwOut = lshwFile.readAll();
+#endif
     // lshw
     DatabaseMap lshwDatabase_;
 
@@ -639,8 +655,6 @@ bool DeviceInfoParser::loadLshwDatabase()
     int lineNumber = -1;
     QStringList deviceType;
     QMap<QString, QString> DeviceInfoMap;
-
-    QString lshwOut = lshwFile.readAll();
 
     for( int i = 0; i < lshwOut.size(); ++i )
     {
@@ -732,17 +746,25 @@ bool DeviceInfoParser::loadLshwDatabase()
 
 bool DeviceInfoParser::loadLscpuDatabase()
 {
+    if( false == executeProcess("sudo lscpu"))
+    {
+        return false;
+    }
+
+    QString lscpuOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
     QFile lscpuFile("//home//archermind//Desktop//lscpu.txt");
     if( false == lscpuFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
+    lscpuOut = lscpuFile.readAll();
+#endif
 
     // lscpu
     QMap<QString, QString> lscpuDatabase_;
 
     int startIndex = 0;
-    QString lscpuOut = lscpuFile.readAll();
 
     for( int i = 0; i < lscpuOut.size(); ++i )
     {
@@ -769,15 +791,24 @@ bool DeviceInfoParser::loadLscpuDatabase()
 
 bool DeviceInfoParser::loadSmartctlDatabase()
 {
+    if( false == executeProcess("sudo smartctl --all /dev/sda"))
+    {
+        return false;
+    }
+
+    QString smartctlOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
     QFile smartctlFile("//home//archermind//Desktop//smartctl.txt");
     if( false == smartctlFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
+    smartctlOut = smartctlFile.readAll();
+#endif
+
     // smartctl
     QMap<QString, QString> smartctlDatabase_;
     int startIndex = 0;
-    QString smartctlOut = smartctlFile.readAll();
 
     for( int i = 0; i < smartctlOut.size(); ++i )
     {
@@ -812,18 +843,26 @@ bool DeviceInfoParser::loadSmartctlDatabase()
 
 bool DeviceInfoParser::loadCatInputDatabase()
 {
+    if( false == executeProcess("cat /proc/bus/input/devices"))
+    {
+        return false;
+    }
+
+    QString inputDeviceOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
     QFile inputDeviceFile("//home//archermind//Desktop//input.txt");
     if( false == inputDeviceFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
+    inputDeviceOut = inputDeviceFile.readAll();
+#endif
 
     // cat /proc/bus/input/devices
     DatabaseMap catInputDeviceDatabase_;
 
     QMap<QString, QString> DeviceInfoMap;
     int startIndex = 0;
-    QString inputDeviceOut = inputDeviceFile.readAll();
 
     for( int i = 0; i < inputDeviceOut.size(); ++i )
     {
@@ -896,16 +935,25 @@ bool DeviceInfoParser::loadCatInputDatabase()
 
 bool DeviceInfoParser::loadXrandrDatabase()
 {
+    if( false == executeProcess("sudo xrandr --verbose"))
+    {
+        return false;
+    }
+
+    QString xrandrOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
     QFile xrandrFile("//home//archermind//Desktop//xrandr.txt");
     if( false == xrandrFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
+    xrandrOut = xrandrFile.readAll();
+#endif
 
     // xrandr --verbose
     DatabaseMap xrandrDatabase_;
     QMap<QString, QString> DeviceInfoMap;
-    QString xrandrOut = xrandrFile.readAll();
+
     int startIndex = 0;
     QString title;
     QString deviceType;
@@ -1026,17 +1074,24 @@ bool DeviceInfoParser::loadPowerSettings()
 
 bool DeviceInfoParser::loadLspciDatabase()
 {
+    if( false == executeProcess("sudo lspci -v"))
+    {
+        return false;
+    }
+    QString lspciOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
     QFile lspciFile("//home//archermind//Desktop//lspci.txt");
     if( false == lspciFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
-
+    lspciOut = lspciFile.readAll();
+#endif
     // lspci --verbose
     DatabaseMap lspciDatabase_;
     QMap<QString, QString> DeviceInfoMap;
     QString deviceName;
-    QString lspciOut = lspciFile.readAll();
+
     int startIndex = 0;
 
     for( int i = 0; i < lspciOut.size(); ++i )
@@ -1120,17 +1175,27 @@ bool DeviceInfoParser::loadLspciDatabase()
 
 bool DeviceInfoParser::loadHciconfigDatabase()
 {
+    if( false == executeProcess("sudo hciconfig -a"))
+    {
+        return false;
+    }
+
+    QString hciconfigOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile xrandrFile("//home//archermind//Desktop//xrandr.txt");
     QFile hciconfigFile("//home//archermind//Desktop//hciconfig.txt");
     if( false == hciconfigFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
 
+    hciconfigOut = hciconfigFile.readAll();
+#endif
+
     // hciconfig
     DatabaseMap hciconfigDatabase_;
     QMap<QString, QString> DeviceInfoMap;
     QString deviceName;
-    QString hciconfigOut = hciconfigFile.readAll();
     int startIndex = 0;
 
     for( int i = 0; i < hciconfigOut.size(); ++i )

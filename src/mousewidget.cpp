@@ -3,6 +3,11 @@
 
 MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeMouse)
 {
+    initWidget();
+}
+
+void MouseWidget::initWidget()
+{
     setTitle(DeviceAttributeMouse + " " + DeviceAttributeInfo);
 
     QStringList names = {
@@ -48,4 +53,3 @@ MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceA
         addSubInfo( "", names, contents);
     }
 }
-

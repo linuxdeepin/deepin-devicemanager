@@ -28,6 +28,8 @@ public:
     explicit DeviceInfoWidgetBase(QWidget *parent = nullptr, const QString& deviceName = "");
     virtual ~DeviceInfoWidgetBase();
 
+    virtual void initWidget() = 0;
+
     void initContextMenu();
 
     void setTitle(const QString& title);
@@ -65,4 +67,9 @@ private:
     Dtk::Widget::DWidget*   downWidget_  = nullptr;
     QVBoxLayout* downWidgetLayout = nullptr;
     Dtk::Widget::DMenu* contextMenu_ = nullptr;
+
+    static bool isTitleFontInit_;
+    static QFont titleFont_;
+    static bool isSubTitleFontInit_;
+    static QFont subTitleFont_;
 };

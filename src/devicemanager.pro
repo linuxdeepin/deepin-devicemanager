@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui svg dbus xml
-#QT       += gui-private
+QT       += gui-private
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,6 +18,8 @@ TEMPLATE = app
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
+#DEFINES += TEST_DATA_FROM_FILE
+
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -29,19 +31,12 @@ PKGCONFIG += xcb xcb-util dtkwidget dtkwm dframeworkdbus
 
 INCLUDEPATH +=     \
             /usr/include/libdframeworkdbus-2.0/ \
-            ../ \
-            ../thirdlib/QtXlsxWriter/include    \
-            ../thirdlib/QtXlsxWriter/include/QtXlsx
 
 
 include(../thirdlib/QtXlsxWriter/src/xlsx/qtxlsx.pri)
-include(../thirdlib/docx/docx_dependencies.pri)
+include(../thirdlib/docx/docx.pri)
 
 LIBS += -L/usr/lib/x86_64-linux-gnu/ -lhd
-#LIBS += -L/home/archermind/build-testlib-unknown-Debug/ -ltestlib
-#LIBS += -L/home/archermind/Desktop/build-docx-unknown-Debug/ -ldocxlib
-LIBS += -L/home/archermind/Desktop/build-qtxlsx-unknown-Debug/lib -lQt5Xlsx
-#LIBS += -ldocxlib
 
 SOURCES += \
     main.cpp \

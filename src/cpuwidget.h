@@ -8,7 +8,5 @@ class CpuWidget : public DeviceInfoWidgetBase
 public:
     explicit CpuWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };

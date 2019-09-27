@@ -9,7 +9,5 @@ class MotherboardWidget : public DeviceInfoWidgetBase
 public:
     explicit MotherboardWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };

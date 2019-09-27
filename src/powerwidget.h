@@ -8,8 +8,6 @@ class PowerWidget : public DeviceInfoWidgetBase
 public:
     explicit PowerWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 

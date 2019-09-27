@@ -8,7 +8,5 @@ class MemoryWidget : public DeviceInfoWidgetBase
 public:
     explicit MemoryWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };

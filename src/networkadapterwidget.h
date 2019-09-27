@@ -8,8 +8,6 @@ class NetworkadapterWidget : public DeviceInfoWidgetBase
 public:
     explicit NetworkadapterWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 

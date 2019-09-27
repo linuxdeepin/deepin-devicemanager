@@ -22,6 +22,7 @@
 #include <QStandardItemModel>
 #include "otherpcidevice.h"
 #include "portwidget.h"
+#include "deviceinfoparser.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -38,27 +39,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ly->addWidget(leftDeviceList_);
 
-    rightDeviceInfoWidget_ = new DStackedWidget(this);
+    rightDeviceInfoWidget_ = new DStackedWidget(mainWidget);
 
-    addDeviceWidget(new ComputerOverviewWidget(this));
-    addDeviceWidget(new CpuWidget(this));
-    addDeviceWidget(new MotherboardWidget(this));
-    addDeviceWidget(new MemoryWidget(this));
-    addDeviceWidget(new DiskWidget(this));
-    addDeviceWidget(new DisplayadapterWidget(this));
-    addDeviceWidget(new MonitorWidget(this));
-    addDeviceWidget(new AudiodeviceWidget(this));
-    addDeviceWidget(new NetworkadapterWidget(this));
-    addDeviceWidget(new BluetoothWidget(this));
-    addDeviceWidget(new CameraWidget(this));
-    addDeviceWidget(new MouseWidget(this));
-    addDeviceWidget(new KeyboardWidget(this));
-    addDeviceWidget(new UsbdeviceWidget(this));
-    addDeviceWidget(new OtherInputdeviceWidget(this));
-    addDeviceWidget(new PowerWidget(this));
-    addDeviceWidget(new OtherPciDeviceWidget(this));
-    addDeviceWidget(new PortWidget(this));
-
+    addAllDeviceinfoWidget();
 
     connect(leftDeviceList_, &DListView::clicked, [this](const QModelIndex& index)
             {
@@ -80,9 +63,73 @@ MainWindow::~MainWindow()
 
 }
 
+void MainWindow::addAllDeviceinfoWidget()
+{
+    refreshDatabase();
+
+    addDeviceWidget(new ComputerOverviewWidget(this));
+    addDeviceWidget(new CpuWidget(this));
+    addDeviceWidget(new MotherboardWidget(this));
+    addDeviceWidget(new MemoryWidget(this));
+    addDeviceWidget(new DiskWidget(this));
+    addDeviceWidget(new DisplayadapterWidget(this));
+    addDeviceWidget(new MonitorWidget(this));
+    addDeviceWidget(new AudiodeviceWidget(this));
+    addDeviceWidget(new NetworkadapterWidget(this));
+    addDeviceWidget(new BluetoothWidget(this));
+    addDeviceWidget(new CameraWidget(this));
+    addDeviceWidget(new MouseWidget(this));
+    addDeviceWidget(new KeyboardWidget(this));
+    addDeviceWidget(new UsbdeviceWidget(this));
+    addDeviceWidget(new OtherInputdeviceWidget(this));
+    addDeviceWidget(new PowerWidget(this));
+    addDeviceWidget(new OtherPciDeviceWidget(this));
+    addDeviceWidget(new PortWidget(this));
+
+    firstAdd_ = false;
+}
+
 void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w)
 {
-    leftDeviceList_->addDevice(w->getDeviceName(), ":/cpu.svg");
+    if(firstAdd_ == true)
+    {
+        leftDeviceList_->addDevice(w->getDeviceName(), ":/cpu.svg");
+    }
     rightDeviceInfoWidget_->addWidget(w);
     deviceInfoWidgetMap_[w->getDeviceName()] = w;
+}
+
+void MainWindow::refresh()
+{
+    QString currentDevice = leftDeviceList_->currentIndex().data().toString();
+
+    QMap<QString, QWidget*> oldWidgetMap;
+    std::swap(deviceInfoWidgetMap_, oldWidgetMap);
+
+    addAllDeviceinfoWidget();
+
+    rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);
+
+    foreach(const QString& widgetName, oldWidgetMap.keys())
+    {
+        rightDeviceInfoWidget_->removeWidget(oldWidgetMap[widgetName]);
+        delete oldWidgetMap[widgetName];
+    }
+}
+
+void MainWindow::refreshDatabase()
+{
+    QString osInfo;
+    DeviceInfoParserInstance.getOSInfo(osInfo);
+    DeviceInfoParserInstance.loadDemicodeDatabase();
+    DeviceInfoParserInstance.loadLshwDatabase();
+    DeviceInfoParserInstance.loadLscpuDatabase();
+    DeviceInfoParserInstance.loadSmartctlDatabase();
+    DeviceInfoParserInstance.loadCatInputDatabase();
+    DeviceInfoParserInstance.loadPowerSettings();
+    DeviceInfoParserInstance.loadXrandrDatabase();
+    DeviceInfoParserInstance.loadLspciDatabase();
+    DeviceInfoParserInstance.loadHciconfigDatabase();
+    DeviceInfoParserInstance.loadLsusbDatabase();
+    DeviceInfoParserInstance.loadHwinfoDatabase();
 }

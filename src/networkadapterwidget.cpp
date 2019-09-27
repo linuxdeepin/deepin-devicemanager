@@ -3,6 +3,11 @@
 
 NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeNetworkAdapter)
 {
+    initWidget();
+}
+
+void NetworkadapterWidget::initWidget()
+{
     setTitle(DeviceAttributeNetworkAdapter + " " + DeviceAttributeInfo);
 
     QStringList networkadapterNames = {
@@ -28,4 +33,3 @@ NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBa
         addSubInfo( "", networkadapterNames, contents);
     }
 }
-

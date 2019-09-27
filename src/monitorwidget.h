@@ -8,8 +8,6 @@ class MonitorWidget : public DeviceInfoWidgetBase
 public:
     explicit MonitorWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 

@@ -8,8 +8,6 @@ class DisplayadapterWidget : public DeviceInfoWidgetBase
 public:
     explicit DisplayadapterWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 

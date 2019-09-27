@@ -3,7 +3,6 @@
 #include <DWidgetUtil>
 #include "version.h"
 #include <DLog>
-#include "deviceinfoparser.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "DTitlebar"
@@ -12,21 +11,6 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
-
-    QString osInfo;
-    DeviceInfoParserInstance.getOSInfo(osInfo);
-    DeviceInfoParserInstance.loadDemicodeDatabase();
-    DeviceInfoParserInstance.loadLshwDatabase();
-    DeviceInfoParserInstance.loadLscpuDatabase();
-    DeviceInfoParserInstance.loadSmartctlDatabase();
-    DeviceInfoParserInstance.loadCatInputDatabase();
-    DeviceInfoParserInstance.loadPowerSettings();
-    DeviceInfoParserInstance.loadXrandrDatabase();
-    DeviceInfoParserInstance.loadLspciDatabase();
-    DeviceInfoParserInstance.loadHciconfigDatabase();
-    DeviceInfoParserInstance.loadLsusbDatabase();
-    DeviceInfoParserInstance.loadHwinfoDatabase();
-
     DApplication::loadDXcbPlugin();
 
     const char *descriptionText = QT_TRANSLATE_NOOP("MainWindow", "Deepin DeviceManager.");

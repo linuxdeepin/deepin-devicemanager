@@ -3,6 +3,11 @@
 
 DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeDisk)
 {
+    initWidget();
+}
+
+void DiskWidget::initWidget()
+{
     setTitle(DeviceAttributeDisk + " " + DeviceAttributeInfo);
 
     QStringList mechanicalHardDiskNames = {

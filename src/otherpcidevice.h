@@ -8,8 +8,6 @@ class OtherPciDeviceWidget : public DeviceInfoWidgetBase
 public:
     explicit OtherPciDeviceWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 

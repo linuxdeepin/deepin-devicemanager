@@ -3,6 +3,11 @@
 
 KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeKeyboard)
 {
+    initWidget();
+}
+
+void KeyboardWidget::initWidget()
+{
     setTitle(DeviceAttributeKeyboard + " " + DeviceAttributeInfo);
 
     QStringList names = {

@@ -3,6 +3,11 @@
 
 DisplayadapterWidget::DisplayadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeDisplayAdapter)
 {
+    initWidget();
+}
+
+void DisplayadapterWidget::initWidget()
+{
     setTitle(DeviceAttributeDisplayAdapter + " " + DeviceAttributeInfo);
 
     QStringList displayadapterNames = {

@@ -3,6 +3,11 @@
 
 OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeOtherPciDevice)
 {
+    initWidget();
+}
+
+void OtherPciDeviceWidget::initWidget()
+{
     //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
 
     QStringList names = {   DeviceAttributeDescription,
@@ -17,6 +22,7 @@ OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBa
     {
         setTitle("No " + DeviceAttributeOtherPciDevice + " found!");
         addStrecch();
+        return;
     }
 
     foreach(const QString& device, otherPcideviceList)

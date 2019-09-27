@@ -3,6 +3,11 @@
 
 PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributePower)
 {
+    initWidget();
+}
+
+void PowerWidget::initWidget()
+{
     //setTitle(DeviceAttributePower + " " + DeviceAttributeInfo);
 
     QStringList switchingpowerNames = {
@@ -75,4 +80,3 @@ PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceA
 
     }
 }
-

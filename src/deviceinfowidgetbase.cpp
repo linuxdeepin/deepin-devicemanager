@@ -13,8 +13,14 @@
 //#include "thirdlib/docx/include/table.h"
 #include "xlsxdocument.h"
 #include <QFile>
+#include <mainwindow.h>
 
 DWIDGET_USE_NAMESPACE
+
+bool DeviceInfoWidgetBase::isTitleFontInit_ = false;
+QFont DeviceInfoWidgetBase::titleFont_;
+bool DeviceInfoWidgetBase::isSubTitleFontInit_ = false;
+QFont DeviceInfoWidgetBase::subTitleFont_;
 
 DeviceInfoWidgetBase::DeviceInfoWidgetBase(QWidget *parent, const QString& deviceName) : QWidget(parent), deviceName_(deviceName)
 {
@@ -31,7 +37,19 @@ DeviceInfoWidgetBase::~DeviceInfoWidgetBase()
 void DeviceInfoWidgetBase::initContextMenu()
 {
     contextMenu_ = new QMenu;
-    contextMenu_->addAction(new QAction("Refresh",this));
+    QAction* refreshAction = new QAction("Refresh", this);
+    connect(refreshAction, &QAction::triggered, \
+            [this]()
+            {
+                MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent()->parent()->parent());
+                if(mainWindow)
+                {
+                    mainWindow->refresh();
+                }
+            }
+    );
+    contextMenu_->addAction(refreshAction);
+
 
     QAction* exportAction = new QAction("Export to File");
     connect(exportAction, &QAction::triggered, this, &DeviceInfoWidgetBase::exportToFile);
@@ -39,7 +57,6 @@ void DeviceInfoWidgetBase::initContextMenu()
 
 
     contextMenu_->addAction(new QAction("Attach",this));
-
     contextMenu_->addAction(new QAction("Detach",this));
 }
 
@@ -55,7 +72,16 @@ void DeviceInfoWidgetBase::DeviceInfoWidgetBase::setTitle(const QString& title)
         titleInfo_->title = new DLabel(this);
     }
 
+    if(isTitleFontInit_== false)
+    {
+        titleFont_ = titleInfo_->title->font();
+        titleFont_.setBold(true);
+        //titleFont_.setPixelSize(titleFont_.pixelSize() + 2);
+        isTitleFontInit_ = true;
+    }
     titleInfo_->title->setText(title);
+    titleInfo_->title->setFont(titleFont_);
+
     vLayout_->insertWidget(vLayout_->count(), titleInfo_->title);
 }
 
@@ -116,6 +142,15 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
     if(false == subTitle.isEmpty())
     {
         subInfo.title = new DLabel(subTitle, this);
+        if(isSubTitleFontInit_== false)
+        {
+            subTitleFont_ = subInfo.title->font();
+            subTitleFont_.setBold(true);
+            //subTitleFont_.setPixelSize(subTitleFont_.pixelSize() + 2);
+            isSubTitleFontInit_ = true;
+        }
+
+        subInfo.title->setFont(subTitleFont_);
         subInfo.title->setFixedHeight(30);
         downWidgetLayout->insertWidget(downWidgetLayout->count()-1, subInfo.title);
         increaseHeight += 30;
@@ -232,7 +267,6 @@ QString DeviceInfoWidgetBase::getDeviceName()
 {
     return deviceName_;
 }
-
 
 void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)
 {
@@ -410,7 +444,14 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
 
     for(int i = 0; i < di.nameLabels.size(); ++i)
     {
-        QString line = di.nameLabels[i]->text() + " : " + di.contentLabels[i]->text();
+        QString name = di.nameLabels[i]->text();
+        QString content = di.contentLabels[i]->text();
+        QString line;
+        if(name.isEmpty() == false || false == content.isEmpty())
+        {
+            line = name + " : " + content;
+        }
+
         doc.addParagraph(line);
     }
 

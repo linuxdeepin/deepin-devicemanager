@@ -8,8 +8,6 @@ class MouseWidget : public DeviceInfoWidgetBase
 public:
     explicit MouseWidget(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
+    void initWidget() override;
 };
 
