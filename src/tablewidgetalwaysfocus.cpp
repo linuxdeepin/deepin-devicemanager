@@ -44,8 +44,8 @@ TableWidgetAlwaysFocus::TableWidgetAlwaysFocus(QWidget *parent):DTableWidget(par
 
     //setAutoFillBackground(true);
     //setPalette(pal);
-    setStyleSheet("QTableView{outline: 0;}");
-    setFrameShape(Shape::NoFrame);
+    //setStyleSheet("QTableView{outline: 0;}");
+    //setFrameShape(Shape::NoFrame);
     //setItemDelegate(new NoFocusDelegate());
 }
 

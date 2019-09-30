@@ -14,7 +14,7 @@ void ComputerOverviewWidget::initWidget()
 
     QStringList names = {   DeviceAttributeModel,
                             DeviceAttributeOperatingSystem,
-                            "",
+                            " ",
                             DeviceAttributeCPU,
                             DeviceAttributeMotherboard,
                             DeviceAttributeMemory,
@@ -164,7 +164,7 @@ void ComputerOverviewWidget::initWidget()
     QStringList contents = {
         DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Version"),
         os,
-        "",
+        " ",
         cpu,
         motherboard,
         memory,

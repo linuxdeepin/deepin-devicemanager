@@ -12,14 +12,13 @@ void PowerWidget::initWidget()
 
     QStringList switchingpowerNames = {
                             DeviceAttributeName,
-                            DeviceAttributeType,
+                            DeviceAttributeScreenSuspendDelay,
+                            DeviceAttributeComputerSuspendDelay,
+                            DeviceAttributeAutoLockScreenDelay,
                             DeviceAttributeVendor,
                             DeviceAttributeMaxPowerCapacity,
                             DeviceAttributeStatu,
-                            DeviceAttributeType,
-                            DeviceAttributeScreenSuspendDelay,
-                            DeviceAttributeComputerSuspendDelay,
-                            DeviceAttributeAutoLockScreenDelay
+                            DeviceAttributeType
                         };
 
     QStringList switchingpowerList = DeviceInfoParserInstance.getSwitchingpowerList();
@@ -28,14 +27,16 @@ void PowerWidget::initWidget()
     {
         QStringList contents = {
             DeviceInfoParserInstance.qureyData("lshw", device, "product"),
-            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Manufacturer"),
+            DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_==0? "Never" \
+                : QString::number(DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_) + " Secs",
+            DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_==0? "Never" \
+                : QString::number(DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_) + " Secs",
+            DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_==0? "Never" \
+                : QString::number(DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_) + " Secs",
             DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Manufacturer"),
             DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Max Power Capacity"),
             DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Status"),
-            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Type"),
-            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Manufacturer"),
-            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "BD Address"),
-            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Link policy")
+            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Type")
         };
         if(bNeedSetTitle)
         {
@@ -50,6 +51,9 @@ void PowerWidget::initWidget()
 
     QStringList batteryNames = {
                             DeviceAttributeName,
+                            DeviceAttributeScreenSuspendDelay,
+                            DeviceAttributeComputerSuspendDelay,
+                            DeviceAttributeAutoLockScreenDelay,
                             DeviceAttributeVendor,
                             DeviceAttributeSlot,
                             DeviceAttributeMaxPowerCapacity,
@@ -62,6 +66,12 @@ void PowerWidget::initWidget()
     {
         QStringList contents = {
             DeviceInfoParserInstance.qureyData("lshw", device, "product"),
+            DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? "Never" \
+                : QString::number(DeviceInfoParserInstance.batteryScreenSuspendDelay_) + " Secs",
+            DeviceInfoParserInstance.batteryComputerSuspendDelay_==0? "Never" \
+                : QString::number(DeviceInfoParserInstance.batteryComputerSuspendDelay_) + " Secs",
+            DeviceInfoParserInstance.batteryAutoLockScreenDelay_==0? "Never" \
+                : QString::number(DeviceInfoParserInstance.batteryAutoLockScreenDelay_) + " Secs",
             DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
             DeviceInfoParserInstance.qureyData("lshw", device, "slot"),
             DeviceInfoParserInstance.qureyData("lshw", device, "capacity"),

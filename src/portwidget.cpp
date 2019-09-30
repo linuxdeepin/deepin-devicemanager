@@ -10,9 +10,9 @@ void PortWidget::initWidget()
 {
     //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
 
-    QStringList names = {   DeviceAttributePortType,
+    QStringList names = {   DeviceAttributeReferenceDesignator,
+                            DeviceAttributePortType,
                             DeviceAttributeConnectorType,
-                            DeviceAttributeReferenceDesignator,
                             DeviceAttributeCapabilities
                         };
 
@@ -21,9 +21,9 @@ void PortWidget::initWidget()
     foreach(const QString& device, portsList)
     {
         QStringList contents = {
+            DeviceInfoParserInstance.qureyData("dmidecode", device, "External Reference Designator"),
             DeviceInfoParserInstance.qureyData("dmidecode", device, "Port Type"),
             DeviceInfoParserInstance.qureyData("dmidecode", device, "External Connector Type"),
-            DeviceInfoParserInstance.qureyData("dmidecode", device, "External Reference Designator"),
             DeviceInfoParserInstance.qureyData("dmidecode", device, "capabilities"),
         };
 

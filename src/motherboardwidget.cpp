@@ -30,7 +30,7 @@ void MotherboardWidget::initWidget()
         manufactor + " "+ DeviceInfoParserInstance.qureyData("dmidecode", "Base Board Information", "Product Name"),
         manufactor,
         chipsetFamily,
-        DeviceInfoParserInstance.qureyData("dmidecode", "BIOS Information", "Version") + "("+ DeviceInfoParserInstance.qureyData("dmidecode", "BIOS Information", "Release Date") + ")",
+        DeviceInfoParserInstance.qureyData("dmidecode", "BIOS Information", "Version") + " ("+ DeviceInfoParserInstance.qureyData("dmidecode", "BIOS Information", "Release Date") + ")",
         DeviceInfoParserInstance.qureyData("dmidecode", "Base Board Information", "Features")
     };
 

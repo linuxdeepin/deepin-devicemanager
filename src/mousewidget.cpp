@@ -16,7 +16,9 @@ void MouseWidget::initWidget()
                             DeviceAttributeInterface
                         };
 
+    int mouseCount = 0;
     QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceList();
+
     foreach(const QString& device, inputdeviceList)
     {
         QString name = DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Name");
@@ -24,6 +26,9 @@ void MouseWidget::initWidget()
         {
             continue;
         }
+
+        ++mouseCount;
+        name.remove("\"");
 
         QStringList contents = {
                                 name,
@@ -34,8 +39,8 @@ void MouseWidget::initWidget()
         addSubInfo("", names, contents);
     }
 
-    QStringList usbdeviceList = DeviceInfoParserInstance.getUsbdeviceList();
 
+    QStringList usbdeviceList = DeviceInfoParserInstance.getUsbdeviceList();
     foreach(const QString& device, usbdeviceList)
     {
         QString description =DeviceInfoParserInstance.qureyData("lshw", device, "description");
@@ -43,7 +48,7 @@ void MouseWidget::initWidget()
         {
             continue;
         }
-
+        ++mouseCount;
         QStringList contents = {
             DeviceInfoParserInstance.qureyData("lshw", device, "product"),
             DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
@@ -52,4 +57,12 @@ void MouseWidget::initWidget()
 
         addSubInfo( "", names, contents);
     }
+
+    if( mouseCount < 1)
+    {
+        setTitle("No " + DeviceAttributeMouse + " found!");
+        addStrecch();
+        return;
+    }
+
 }

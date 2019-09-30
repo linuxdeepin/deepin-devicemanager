@@ -6,18 +6,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "DTitlebar"
-#include <QProxyStyle>
 
+#include "DApplicationSettings"
 
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
     DApplication::loadDXcbPlugin();
-
-    const char *descriptionText = QT_TRANSLATE_NOOP("MainWindow", "Device Manager is a gadget for viewing device information.");
-
-    const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
 
     DApplication app(argc, argv);
     app.setAttribute(Qt::AA_UseHighDpiPixmaps);
@@ -29,13 +25,19 @@ int main(int argc, char *argv[])
     app.setProductIcon(QIcon(":/cpu.svg"));
     app.setWindowIcon(QIcon(":/cpu.svg"));
     app.setProductName(DApplication::translate("MainWindow", "Device Manager"));
+
+    const char *descriptionText = QT_TRANSLATE_NOOP("MainWindow", "Device Manager is a gadget for viewing device information.");
     app.setApplicationDescription(DApplication::translate("MainWindow", descriptionText) + "\n");
+
+    const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
     app.setApplicationAcknowledgementPage(acknowledgementLink);
 
     Dtk::Core::DLogManager::registerConsoleAppender();
     Dtk::Core::DLogManager::registerFileAppender();
 
     //app.setStyle("chameleon");
+
+    DApplicationSettings settings;
 
     MainWindow w;
     w.titlebar()->setIcon(QIcon(":/cpu.svg"));

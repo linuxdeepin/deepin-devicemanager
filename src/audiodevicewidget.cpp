@@ -24,7 +24,7 @@ void AudiodeviceWidget::initWidget()
                             DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Name"),
                             DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Subsystem"),
                             DeviceAttributeGood
-    };
+                            };
 
     addSubInfo("", audioadapterNames, audioadapterContents);
 
@@ -43,6 +43,7 @@ void AudiodeviceWidget::initWidget()
             continue;
         }
 
+        name.remove("\"");
         QStringList contents = {
                                 DeviceAttributeSpeaker,
                                 name,
@@ -59,7 +60,7 @@ void AudiodeviceWidget::initWidget()
         {
             continue;
         }
-
+        name.remove("\"");
         QStringList contents = {
                                 DeviceAttributeMicrophone,
                                 name,

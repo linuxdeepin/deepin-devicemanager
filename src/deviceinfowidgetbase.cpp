@@ -24,7 +24,8 @@ bool DeviceInfoWidgetBase::isSubTitleFontInit_ = false;
 QFont DeviceInfoWidgetBase::subTitleFont_;
 
 static const int NameLength_ = 130;
-static const int RowHeight_ = 26;
+static const int RowHeight_ = 25;
+static const int SubRowHeight_ = 20;
 
 DeviceInfoWidgetBase::DeviceInfoWidgetBase(QWidget *parent, const QString& deviceName) : QWidget(parent), deviceName_(deviceName)
 {
@@ -105,15 +106,15 @@ void DeviceInfoWidgetBase::addInfo(const QStringList& names, const QStringList& 
 
     QHBoxLayout* hly = new QHBoxLayout;
 
-    int increaseHeight = 10;
+    int increaseHeight = downWidget_->height();
     hly->addSpacing(10);
 
     QGridLayout* gridLayout = new QGridLayout;
-
+    gridLayout->setSpacing(0);
     gridLayout->setMargin(0);
-    //gridLayout->setSizePo(QLayout::QSizePolicy::Minimum);
+    gridLayout->setContentsMargins(0,0,0,0);
+    gridLayout->setSizeConstraint(QLayout::SizeConstraint::SetFixedSize);
     hly->addLayout(gridLayout);
-    downWidgetLayout->insertLayout(downWidgetLayout->count()-1, hly);
 
     for(int i = 0; i < names.size(); ++i)
     {
@@ -123,18 +124,19 @@ void DeviceInfoWidgetBase::addInfo(const QStringList& names, const QStringList& 
         //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard);
         nameLabel->setFixedHeight(RowHeight_);
         nameLabel->setFixedWidth(NameLength_);
-
         contentLabel->setFixedHeight(RowHeight_);
 
         titleInfo_->nameLabels.push_back(nameLabel);
         titleInfo_->contentLabels.push_back(contentLabel);
-        gridLayout->addWidget(nameLabel, i+1, 0);
-        gridLayout->addWidget(contentLabel, i+1, 1);
+        gridLayout->addWidget(nameLabel, i, 0);
+        gridLayout->addWidget(contentLabel, i, 1);
+        gridLayout->setRowMinimumHeight(i, RowHeight_);
         increaseHeight+= RowHeight_;
     }
 
-    downWidgetLayout->insertSpacing(downWidgetLayout->count()-1, 25);
-    downWidget_->setFixedHeight(downWidget_->height() + increaseHeight+25);
+    downWidgetLayout->insertLayout(downWidgetLayout->count()-1, hly);
+    increaseHeight += 20;
+    downWidget_->setFixedHeight( increaseHeight );
 }
 
 void DeviceInfoWidgetBase::addLinefeed()
@@ -146,7 +148,13 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
 {
     initDownWidget();
 
-    int increaseHeight = 0;
+    int increaseHeight = downWidget_->height();
+
+    if( (titleInfo_ && titleInfo_->nameLabels.size() > 0) || deviceInfos_.size() > 0 )
+    {
+        downWidgetLayout->insertSpacing(downWidgetLayout->count()-1, 20);
+        increaseHeight += 20;
+    }
 
     DeviceInfo subInfo;
     if(false == subTitle.isEmpty())
@@ -166,37 +174,32 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList
     }
 
     QHBoxLayout* hly = new QHBoxLayout;
-    //layoutMap_[subTitle] = gridLayout;
-
-    QGridLayout* gridLayout = new QGridLayout;
-    gridLayout->setMargin(0);
-    hly->setMargin(0);
     hly->addSpacing(10);
-    increaseHeight += 10;
-    hly->addLayout(gridLayout);
-
-    downWidgetLayout->insertLayout(downWidgetLayout->count()-1, hly);
+    QGridLayout* gridLayout = new QGridLayout;
+    gridLayout->setSpacing(0);
+    gridLayout->setMargin(0);
+    gridLayout->setContentsMargins(0,0,0,0);
 
     for(int i = 0; i < names.size(); ++i)
     {
         DLabel* nameLabel = new DLabel(names.at(i), downWidget_);
-        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard);
         DLabel* contentLabel = new DLabel(contents.at(i), downWidget_);
-        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard);
-        nameLabel->setFixedHeight(RowHeight_);
+        nameLabel->setFixedHeight(SubRowHeight_);
         nameLabel->setFixedWidth(NameLength_);
-        contentLabel->setFixedHeight(RowHeight_);
+        contentLabel->setFixedHeight(SubRowHeight_);
         subInfo.nameLabels.push_back(nameLabel);
         subInfo.contentLabels.push_back(contentLabel);
-        gridLayout->addWidget(nameLabel, i+1, 1);
-        gridLayout->addWidget(contentLabel, i+1, 2);
-        increaseHeight+= RowHeight_;
+        gridLayout->addWidget(nameLabel, i, 1);
+        gridLayout->addWidget(contentLabel, i, 2);
+        increaseHeight+= SubRowHeight_;
     }
 
+    hly->addLayout(gridLayout);
+    downWidgetLayout->insertLayout(downWidgetLayout->count()-1, hly);
     deviceInfos_.push_back(subInfo);
-    downWidgetLayout->insertSpacing(downWidgetLayout->count()-1, 25);
-    increaseHeight += 25;
-    downWidget_->setFixedHeight(downWidget_->height() + increaseHeight);
+
+    //increaseHeight += 10;
+    downWidget_->setFixedHeight(increaseHeight);
 }
 
 void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStringList>& contentsList)
@@ -210,11 +213,11 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         tableWidget_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
         //tableWidget_->horizontalHeader()->setClickable(false);
         tableWidget_->setFocusPolicy(Qt::FocusPolicy::WheelFocus);
-        tableWidget_->setAutoFillBackground(false);
-        tableWidget_->setAttribute(Qt::WA_ShowWithoutActivating);
+        //tableWidget_->setAutoFillBackground(false);
+        //tableWidget_->setAttribute(Qt::WA_ShowWithoutActivating);
         //tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
-        tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
-        tableWidget_->setEnabled(true);
+        //tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
+        //tableWidget_->setEnabled(true);
     }
 
     tableWidget_->setRowCount(contentsList.size());
@@ -266,8 +269,12 @@ void DeviceInfoWidgetBase::initDownWidget()
     //downWidget_->setFixedHeight(100);
     downWidget_->setBaseSize(700, 100);
     //downWidget_->setFixedWidth(700);
+    //downWidget_->setFixedHeight(20);
     downWidget_->setMinimumWidth(700);
     downWidgetLayout = new QVBoxLayout;
+    downWidgetLayout->setMargin(0);
+    downWidgetLayout->setContentsMargins(0,0,0,0);
+    downWidgetLayout->setSpacing(0);
     downWidget_->setLayout(downWidgetLayout);
     downWidgetLayout->addStretch(1);
     downWidgetScrollArea_->setWidget(downWidget_);
@@ -585,17 +592,17 @@ bool writeTabwidgetToHtml(DTableWidget* tableWidget, QFile& html)
         return false;
     }
 
-    html.write("<table border=\"0\">\n");
+    html.write("<table border=\"0\" white-space:pre>\n");
     html.write("<thead><tr>\n");
     for(int col = 0; col < tableWidget->columnCount(); ++col)
     {
         auto item = tableWidget->horizontalHeaderItem(col);
         if(item)
         {
-            html.write( QString("<th style=\"width:200px;text-align:left;\">" + item->text() + "</th>").toUtf8().data() );
+            html.write( QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + item->text() + "</th>").toUtf8().data() );
         }
         else {
-             html.write( "<td style=\"width:200px;text-align:left;\"> </td>" );
+             html.write( "<td style=\"width:200px;text-align:left; white-space:pre;\"> </td>" );
         }
     }
     html.write("</tr></thead>\n");
@@ -628,7 +635,7 @@ bool writeDeviceInfoToHtml(const DeviceInfo& di, QFile& html)
     for(int i = 0; i < di.nameLabels.size(); ++i)
     {
         html.write("<tr>\n");
-        html.write( QString("<td style=\"width:200px;text-align:left;\">" + di.nameLabels[i]->text() + "</td>").toUtf8().data() );
+        html.write( QString("<td style=\"width:200px;text-align:left;white-space:pre;\">" + di.nameLabels[i]->text() + "</td>").toUtf8().data() );
         html.write( QString( "<td>" + di.contentLabels[i]->text() + "</td>\n").toUtf8().data() );
         html.write("</tr>\n");
     }

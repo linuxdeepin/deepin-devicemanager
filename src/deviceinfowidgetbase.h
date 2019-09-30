@@ -41,7 +41,7 @@ public:
     void initDownWidget();
     QString getDeviceName();
 
-    virtual void deviceListClicked(){};
+    virtual void deviceListClicked(){ }
 
 protected:
     void focusOutEvent(QFocusEvent */*event*/) override{}//disable lostfocus

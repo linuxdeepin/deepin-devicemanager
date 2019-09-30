@@ -16,7 +16,10 @@ void KeyboardWidget::initWidget()
                             DeviceAttributeInterface
                         };
 
+    int keyboardCount = 0;
     QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceList();
+
+
     foreach(const QString& device, inputdeviceList)
     {
         QString name = DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Name");
@@ -25,6 +28,8 @@ void KeyboardWidget::initWidget()
             continue;
         }
 
+        ++keyboardCount;
+        name.remove("\"");
         QStringList contents = {
                                 name,
                                 DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Vendor"),
@@ -44,6 +49,7 @@ void KeyboardWidget::initWidget()
             continue;
         }
 
+        ++keyboardCount;
         QStringList contents = {
             DeviceInfoParserInstance.qureyData("lshw", device, "product"),
             DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
@@ -51,6 +57,13 @@ void KeyboardWidget::initWidget()
         };
 
         addSubInfo( "", names, contents);
+    }
+
+    if( keyboardCount < 1)
+    {
+        setTitle("No " + DeviceAttributeKeyboard + " found!");
+        addStrecch();
+        return;
     }
 }
 
