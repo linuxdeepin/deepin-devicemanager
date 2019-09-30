@@ -17,12 +17,14 @@ DeviceListWidget::DeviceListWidget(QWidget* parent):DListView(parent)
     setSpacing(0);
     setViewMode(QListView::ListMode);
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-    viewport()->setAutoFillBackground(true);
+    //viewport()->setAutoFillBackground(false);
 
     setFocus(Qt::FocusReason::NoFocusReason);
 
     navModel_ = new QStandardItemModel(navModel_);
     setModel(navModel_);
+
+    setBackgroundType(DStyledItemDelegate::BackgroundType::ClipCornerBackground);
 }
 
 void DeviceListWidget::addDevice(const QString& deviceName, const QString& iconFile)
@@ -30,7 +32,6 @@ void DeviceListWidget::addDevice(const QString& deviceName, const QString& iconF
     DStandardItem* item = new DStandardItem;
     item->setIcon(QIcon(iconFile));
     item->setText(deviceName);
-
 
     const QMargins ListViweItemMargin(20,8,20,8);
     const QVariant VListViewItemMargin = QVariant::fromValue(ListViweItemMargin);

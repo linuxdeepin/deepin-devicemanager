@@ -1257,7 +1257,14 @@ bool DeviceInfoParser::loadLsusbDatabase()
 
 bool DeviceInfoParser::loadHwinfoDatabase()
 {
-    QString hwOut = getHwMonitorString();
+    if( false == executeProcess("sudo hwinfo --monitor"))
+    {
+        return false;
+    }
+
+    QString hwOut = standOutput_;
+
+    //QString hwOut = getHwMonitorString();
     if( hwOut.size() < 1 )
     {
         return false;

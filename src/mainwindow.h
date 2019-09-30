@@ -21,6 +21,7 @@ private:
     DeviceListWidget* leftDeviceList_ = nullptr;
     Dtk::Widget::DStackedWidget* rightDeviceInfoWidget_ = nullptr;
 
-    QMap<QString, QWidget*> deviceInfoWidgetMap_;//widgetname　- widget
+    QMap<QString, DeviceInfoWidgetBase*> deviceInfoWidgetMap_;//widgetname　- widget
     bool firstAdd_ = true;
+    QString currentDevice_;
 };

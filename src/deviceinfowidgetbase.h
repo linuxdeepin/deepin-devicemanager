@@ -6,11 +6,11 @@
 #include "DScrollArea"
 #include "DMenu"
 #include "DLabel"
-
 #include "deviceattributedefine.h"
 
 class QLabel;
 class QVBoxLayout;
+class TableWidgetAlwaysFocus;
 
 struct DeviceInfo
 {
@@ -38,16 +38,19 @@ public:
     void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
     void addStrecch();
-
     void initDownWidget();
-
     QString getDeviceName();
+
+    virtual void deviceListClicked(){};
+
+protected:
+    void focusOutEvent(QFocusEvent */*event*/) override{}//disable lostfocus
 
 protected:
     virtual void contextMenuEvent(QContextMenuEvent *event) override;
 
 public slots:
-    bool exportToFile();
+    bool onExportToFile();
 
 private:
     bool writeToTextStream(QTextStream& ts);
@@ -56,14 +59,15 @@ private:
     virtual bool exportToXls(const QString& xlsFile);
     virtual bool exportToHtml(const QString& htmlFile);
 
-private:
+protected:
     QString deviceName_ = "DeviceInfoWidgetBase";
 
-    Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
+    TableWidgetAlwaysFocus* tableWidget_ = nullptr;
     DeviceInfo* titleInfo_ = nullptr;
     QList<DeviceInfo> deviceInfos_;
 
     QVBoxLayout* vLayout_ = nullptr;
+    Dtk::Widget::DScrollArea* downWidgetScrollArea_ = nullptr;
     Dtk::Widget::DWidget*   downWidget_  = nullptr;
     QVBoxLayout* downWidgetLayout = nullptr;
     Dtk::Widget::DMenu* contextMenu_ = nullptr;

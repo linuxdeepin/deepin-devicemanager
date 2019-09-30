@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "DTitlebar"
+#include <QProxyStyle>
+
 
 DWIDGET_USE_NAMESPACE
 
@@ -13,7 +15,7 @@ int main(int argc, char *argv[])
 {
     DApplication::loadDXcbPlugin();
 
-    const char *descriptionText = QT_TRANSLATE_NOOP("MainWindow", "Deepin DeviceManager.");
+    const char *descriptionText = QT_TRANSLATE_NOOP("MainWindow", "Device Manager is a gadget for viewing device information.");
 
     const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
 

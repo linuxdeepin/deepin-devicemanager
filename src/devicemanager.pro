@@ -36,7 +36,8 @@ INCLUDEPATH +=     \
 include(../thirdlib/QtXlsxWriter/src/xlsx/qtxlsx.pri)
 include(../thirdlib/docx/docx.pri)
 
-LIBS += -L/usr/lib/x86_64-linux-gnu/ -lhd
+#LIBS += -L/usr/lib/x86_64-linux-gnu/ -lhd
+#LIBS += -L../thirdlib/hd -lhd
 
 SOURCES += \
     main.cpp \
@@ -62,7 +63,8 @@ SOURCES += \
     otherinputdevicewidget.cpp \
     powerwidget.cpp \
     otherpcidevice.cpp \
-    portwidget.cpp
+    portwidget.cpp \
+    tablewidgetalwaysfocus.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -91,7 +93,8 @@ HEADERS += \
     mousewidget.h \
     usbdevicewidget.h \
     otherpcidevice.h \
-    portwidget.h
+    portwidget.h \
+    tablewidgetalwaysfocus.h
 
 
 # Default rules for deployment.

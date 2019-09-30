@@ -2,4 +2,4 @@
 
 #include <QString>
 
-QString getHwMonitorString();
+//QString getHwMonitorString();
