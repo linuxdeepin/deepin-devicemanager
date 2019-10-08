@@ -1,22 +1,25 @@
 #include "displayadapterwidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-DisplayadapterWidget::DisplayadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeDisplayAdapter)
+DWIDGET_USE_NAMESPACE
+
+DisplayadapterWidget::DisplayadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "DisplayAdapter"))
 {
     initWidget();
 }
 
 void DisplayadapterWidget::initWidget()
 {
-    setTitle(DeviceAttributeDisplayAdapter + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "DisplayAdapter")  + DApplication::translate("Main", " Info"));
 
     QStringList displayadapterNames = {
-                            DeviceAttributeName,
-                            DeviceAttributeGraphicMemory,
-                            DeviceAttributeVendor,
-                            DeviceAttributeDriver,
-                            //DeviceAttributeMaxDisplayResolution,
-                            DeviceAttributeSupportInterface
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Graphic Memory"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Driver"),
+                            //DApplication::translate("Main", "Max display resolution"),
+                            DApplication::translate("Main", "Support Interface")
                         };
 
     QStringList displayadapterList = DeviceInfoParserInstance.getDiaplayadapterList();

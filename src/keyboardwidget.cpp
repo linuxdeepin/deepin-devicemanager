@@ -1,19 +1,22 @@
 #include "keyboardwidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeKeyboard)
+DWIDGET_USE_NAMESPACE
+
+KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Keyboard"))
 {
     initWidget();
 }
 
 void KeyboardWidget::initWidget()
 {
-    setTitle(DeviceAttributeKeyboard + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "Keyboard")  + DApplication::translate("Main", " Info"));
 
     QStringList names = {
-                            DeviceAttributeName,
-                            DeviceAttributeVendor,
-                            DeviceAttributeInterface
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Interface")
                         };
 
     int keyboardCount = 0;
@@ -61,7 +64,7 @@ void KeyboardWidget::initWidget()
 
     if( keyboardCount < 1)
     {
-        setTitle("No " + DeviceAttributeKeyboard + " found!");
+        setTitle("No " + DApplication::translate("Main", "Keyboard") + " found!");
         addStrecch();
         return;
     }

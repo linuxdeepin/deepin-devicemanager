@@ -2,27 +2,30 @@
 #include "deviceinfoparser.h"
 #include "QRegExp"
 #include "math.h"
+#include <DApplication>
 
-ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeComputerOverview)
+DWIDGET_USE_NAMESPACE
+
+ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Computer Overview"))
 {
     initWidget();
 }
 
 void ComputerOverviewWidget::initWidget()
 {
-    setTitle(DeviceAttributeComputerOverview);
+    setTitle(DApplication::translate("Main", "Computer Overview"));
 
-    QStringList names = {   DeviceAttributeModel,
-                            DeviceAttributeOperatingSystem,
+    QStringList names = {   DApplication::translate("Main", "Model"),
+                            DApplication::translate("Main", "Operating System"),
                             " ",
-                            DeviceAttributeCPU,
-                            DeviceAttributeMotherboard,
-                            DeviceAttributeMemory,
-                            DeviceAttributeDisk,
-                            DeviceAttributeDisplayAdapter,
-                            DeviceAttributeMonitor,
-                            DeviceAttributeAudioAdapter,
-                            DeviceAttributeNetworkAdapter
+                            DApplication::translate("Main", "CPU"),
+                            DApplication::translate("Main", "Motherboard"),
+                            DApplication::translate("Main", "Memory"),
+                            DApplication::translate("Main", "Disk"),
+                            DApplication::translate("Main", "DisplayAdapter"),
+                            DApplication::translate("Main", "Monitor"),
+                            DApplication::translate("Main", "AudioAdapter"),
+                            DApplication::translate("Main", "NetworkAdapter")
                         };
     QString pName = DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Product Name");
     QString ver = DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Version");
@@ -44,7 +47,7 @@ void ComputerOverviewWidget::initWidget()
     QRegExp rx("^[\\s\\S]*\\(([\\S]*)\\)$");
     if( rx.exactMatch(chipsetFamily) )
     {
-        chipsetFamily = "(" + rx.cap(1)+" "+DeviceAttributeChipsetFamily + ")";
+        chipsetFamily = "(" + rx.cap(1)+" "+DApplication::translate("Main", "Chipset Family") + ")";
     }
 
     QString motherboard =  DeviceInfoParserInstance.qureyData("dmidecode", "Base Board Information", "Manufacturer") \
@@ -118,7 +121,7 @@ void ComputerOverviewWidget::initWidget()
         displayAdapter += " (";
         displayAdapter += DeviceInfoParserInstance.qureyData("lspci", displayadapterList[0], "Memory");
         QString manufacturer = DeviceInfoParserInstance.qureyData("lspci", displayadapterList[0], "Subsystem").split(" ").first();
-        if(DeviceAttributeUnknown != manufacturer)
+        if(DApplication::translate("Main", "Unknown") != manufacturer)
         {
             displayAdapter += " / ";
             displayAdapter += manufacturer;
@@ -154,7 +157,7 @@ void ComputerOverviewWidget::initWidget()
             double inch = std::sqrt(width*width + height*height)/10.0;
             monitor += " (";
             monitor += QString::number(inch,10, 1);
-            monitor += " " + DeviceAttributeInch;
+            monitor += " " + DApplication::translate("Main", "inch");
             monitor += ")";
         }
         else

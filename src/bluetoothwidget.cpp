@@ -1,28 +1,32 @@
 #include "bluetoothwidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeBluetooth)
+DWIDGET_USE_NAMESPACE
+
+
+BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Bluetooth"))
 {
     initWidget();
 }
 
 void BluetoothWidget::initWidget()
 {
-    setTitle(DeviceAttributeBluetooth + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "Bluetooth") + " " + DApplication::translate("Main", " Info"));
 
     QStringList bluetoothNames = {
-                            DeviceAttributeName,
-                            DeviceAttributeVendor,
-                            DeviceAttributeMac,
-                            DeviceAttributeLinkPolicy,
-                            DeviceAttributeLinkMode
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Mac Address"),
+                            DApplication::translate("Main", "Link Policy"),
+                            DApplication::translate("Main", "Link Mode")
                         };
 
     QStringList bluetoothList = DeviceInfoParserInstance.getBluetoothList();
 
     if(bluetoothList.size() < 1)
     {
-        setTitle("No " + DeviceAttributeBluetooth + " found!");
+        setTitle("No " + DApplication::translate("Main", "Bluetooth") + " found!");
         addStrecch();
         return;
     }

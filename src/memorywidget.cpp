@@ -3,10 +3,11 @@
 #include "DTableWidget"
 #include <QVBoxLayout>
 #include "tablewidgetalwaysfocus.h"
+#include <DApplication>
 
 DWIDGET_USE_NAMESPACE
 
-MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeMemory)
+MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Memory"))
 {
     initWidget();
     connect(tableWidget_, &DTableWidget::currentItemChanged, this, &MemoryWidget::OnCurrentItemChanged);
@@ -22,7 +23,7 @@ void MemoryWidget::initWidget()
 void MemoryWidget::initTableWdiget()
 {
     canUpgrade_ = false;
-    QStringList headers = {DeviceAttributeBank, DeviceAttributeSize, DeviceAttributeType,DeviceAttributeSpeed, DeviceAttributeStatu};
+    QStringList headers = {DApplication::translate("Main", "Bank"),  DApplication::translate("Main", "Size"), DApplication::translate("Main", "Type"),DApplication::translate("Main", "Speed"), DApplication::translate("Main", "Statu")};
     QList<QStringList> tabList;
 
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
@@ -39,7 +40,7 @@ void MemoryWidget::initTableWdiget()
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Size"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Type"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank") == "Unknown"?DeviceAttributeBad:DeviceAttributeGood
+            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank") == "Unknown"?DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
         };
 
         tabList.push_back(tab);
@@ -50,12 +51,12 @@ void MemoryWidget::initTableWdiget()
 
 void MemoryWidget::updateWholeDownWidget()
 {
-    setTitle(DeviceAttributeMemory + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "Memory")  + DApplication::translate("Main", " Info"));
 
-    QStringList names = {   DeviceAttributeSlot,
-                            DeviceAttributeSize,
-                            DeviceAttributeMaximumCapacity,
-                            DeviceAttributeUpgradeable
+    QStringList names = {   DApplication::translate("Main", "Slot"),
+                             DApplication::translate("Main", "Size"),
+                            DApplication::translate("Main", "Maximum Capacity"),
+                            DApplication::translate("Main", "Upgradeable")
                         };
 
     QString memSize = DeviceInfoParserInstance.qureyData("lshw", "Computer_core_memory", "size");
@@ -64,19 +65,19 @@ void MemoryWidget::updateWholeDownWidget()
         DeviceInfoParserInstance.qureyData("dmidecode", "Physical Memory Array", "Number Of Devices"),
         memSize,
         DeviceInfoParserInstance.qureyData("dmidecode", "Physical Memory Array", "Maximum Capacity"),
-        canUpgrade_?DeviceAttributeYes:DeviceAttributeNo
+        canUpgrade_?DApplication::translate("Main", "Yes"):DApplication::translate("Main", "No")
     };
 
     addInfo(names, contents);
 
-    QStringList subNames = {    DeviceAttributeVendor,
-                                DeviceAttributeSize,
-                                DeviceAttributeType,
-                                DeviceAttributeSpeed,
-                                DeviceAttributeSerialNumber,
-                                DeviceAttributeModel,
-                                DeviceAttributeStatu,
-                                DeviceAttributeConfiguredVoltage
+    QStringList subNames = {    DApplication::translate("Main", "Vendor"),
+                                 DApplication::translate("Main", "Size"),
+                                DApplication::translate("Main", "Type"),
+                                DApplication::translate("Main", "Speed"),
+                                DApplication::translate("Main", "Serial Number"),
+                                DApplication::translate("Main", "Model"),
+                                DApplication::translate("Main", "Statu"),
+                                DApplication::translate("Main", "Configured Voltage")
                         };
 
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
@@ -95,7 +96,7 @@ void MemoryWidget::updateWholeDownWidget()
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Serial Number"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Part Number"),
-            DeviceAttributeGood,
+            DApplication::translate("Main", "Good"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Configured Voltage")
         };
 
@@ -106,14 +107,14 @@ void MemoryWidget::updateWholeDownWidget()
 void MemoryWidget::updateDownWidget(const QString& currentChannel)
 {
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
-    QStringList subNames = {    DeviceAttributeVendor,
-                                DeviceAttributeSize,
-                                DeviceAttributeType,
-                                DeviceAttributeSpeed,
-                                DeviceAttributeSerialNumber,
-                                DeviceAttributeModel,
-                                DeviceAttributeStatu,
-                                DeviceAttributeConfiguredVoltage
+    QStringList subNames = {    DApplication::translate("Main", "Vendor"),
+                                 DApplication::translate("Main", "Size"),
+                                DApplication::translate("Main", "Type"),
+                                DApplication::translate("Main", "Speed"),
+                                DApplication::translate("Main", "Serial Number"),
+                                DApplication::translate("Main", "Model"),
+                                DApplication::translate("Main", "Statu"),
+                                DApplication::translate("Main", "Configured Voltage")
                         };
 
     foreach(const QString& mem, memList)
@@ -129,7 +130,7 @@ void MemoryWidget::updateDownWidget(const QString& currentChannel)
                 DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
                 DeviceInfoParserInstance.qureyData("dmidecode", mem, "Serial Number"),
                 DeviceInfoParserInstance.qureyData("dmidecode", mem, "Part Number"),
-                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank") == "Unknown"?DeviceAttributeBad:DeviceAttributeGood,
+                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank") == "Unknown"?DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good"),
                 DeviceInfoParserInstance.qureyData("dmidecode", mem, "Configured Voltage")
             };
 

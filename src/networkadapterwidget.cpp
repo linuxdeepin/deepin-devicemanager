@@ -1,21 +1,24 @@
 #include "networkadapterwidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeNetworkAdapter)
+DWIDGET_USE_NAMESPACE
+
+NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "NetworkAdapter"))
 {
     initWidget();
 }
 
 void NetworkadapterWidget::initWidget()
 {
-    setTitle(DeviceAttributeNetworkAdapter + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "NetworkAdapter")  + DApplication::translate("Main", " Info"));
 
     QStringList networkadapterNames = {
-                            DeviceAttributeName,
-                            DeviceAttributeModel,
-                            DeviceAttributeVendor,
-                            DeviceAttributeMac,
-                            DeviceAttributeSpeed
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Model"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Mac Address"),
+                            DApplication::translate("Main", "Speed")
                         };
 
     QStringList networkadapterList = DeviceInfoParserInstance.getNetworkadapterList();

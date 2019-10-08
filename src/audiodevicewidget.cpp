@@ -2,36 +2,39 @@
 #include "deviceinfoparser.h"
 #include "math.h"
 #include <QDate>
+#include <DApplication>
 
-AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeAudioDevice)
+DWIDGET_USE_NAMESPACE
+
+AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Audio Device"))
 {
     initWidget();
 }
 
 void AudiodeviceWidget::initWidget()
 {
-    setTitle(DeviceAttributeAudioDevice + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "Audio Device")  + DApplication::translate("Main", " Info"));
 
     QStringList audioadapterNames = {
-                            DeviceAttributeType,
-                            DeviceAttributeName,
-                            DeviceAttributeVendor,
-                            DeviceAttributeStatu
+                            DApplication::translate("Main", "Type"),
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Statu")
                             };
 
     QStringList audioadapterContents = {
-                            DeviceAttributeAudioAdapter,
+                            DApplication::translate("Main", "AudioAdapter"),
                             DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Name"),
                             DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Subsystem"),
-                            DeviceAttributeGood
+                            DApplication::translate("Main", "Good")
                             };
 
     addSubInfo("", audioadapterNames, audioadapterContents);
 
     QStringList names = {
-                            DeviceAttributeType,
-                            DeviceAttributeName,
-                            DeviceAttributeVendor
+                            DApplication::translate("Main", "Type"),
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Vendor")
                             };
 
     QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceList();
@@ -45,7 +48,7 @@ void AudiodeviceWidget::initWidget()
 
         name.remove("\"");
         QStringList contents = {
-                                DeviceAttributeSpeaker,
+                                DApplication::translate("Main", "Speaker"),
                                 name,
                                 DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Vendor"),
                                 };
@@ -62,7 +65,7 @@ void AudiodeviceWidget::initWidget()
         }
         name.remove("\"");
         QStringList contents = {
-                                DeviceAttributeMicrophone,
+                                DApplication::translate("Main", "Microphone"),
                                 name,
                                 DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Vendor"),
                                 };

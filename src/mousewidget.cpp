@@ -1,19 +1,22 @@
 #include "mousewidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeMouse)
+DWIDGET_USE_NAMESPACE
+
+MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Mouse"))
 {
     initWidget();
 }
 
 void MouseWidget::initWidget()
 {
-    setTitle(DeviceAttributeMouse + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "Mouse")  + DApplication::translate("Main", " Info"));
 
     QStringList names = {
-                            DeviceAttributeName,
-                            DeviceAttributeVendor,
-                            DeviceAttributeInterface
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Interface")
                         };
 
     int mouseCount = 0;
@@ -60,7 +63,7 @@ void MouseWidget::initWidget()
 
     if( mouseCount < 1)
     {
-        setTitle("No " + DeviceAttributeMouse + " found!");
+        setTitle("No " + DApplication::translate("Main", "Mouse") + " found!");
         addStrecch();
         return;
     }

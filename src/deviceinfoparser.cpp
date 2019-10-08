@@ -9,6 +9,9 @@
 #include <com_deepin_daemon_power.h>
 #include "hwinfohandler.h"
 #include "deviceattributedefine.h"
+#include <DApplication>
+
+DWIDGET_USE_NAMESPACE
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -18,7 +21,7 @@ static QProcess process_;
 
 const QString& DeviceInfoParser::qureyData(const QString& toolname, const QString& firstKey, const QString& secondKey)
 {
-    static QString result = DeviceAttributeUnknown;
+    static QString result = DApplication::translate("Main", "Unknown");
     if(false == toolDatabase_.contains(toolname))
     {
         return result;
@@ -39,7 +42,7 @@ const QString& DeviceInfoParser::qureyData(const QString& toolname, const QStrin
 
 const QString& DeviceInfoParser::fuzzyQueryData(const QString& toolname, const QString& firstKey, const QString& secondKey)
 {
-    static QString result = DeviceAttributeUnknown;
+    static QString result = DApplication::translate("Main", "Unknown");
     if(false == toolDatabase_.contains(toolname))
     {
         return result;
@@ -1387,7 +1390,7 @@ bool DeviceInfoParser::executeProcess(const QString& cmd)
     /*int res = */process_.start(cmd);
     bool res = process_.waitForFinished();
     standOutput_ = process_.readAllStandardOutput();
-    std::cout << standOutput_.toStdString() << std::endl;
+    //std::cout << standOutput_.toStdString() << std::endl;
 
     return res;
 }

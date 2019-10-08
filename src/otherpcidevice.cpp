@@ -1,28 +1,30 @@
 #include "otherpcidevice.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeOtherPciDevice)
+DWIDGET_USE_NAMESPACE
+
+OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Other PCI Device"))
 {
     initWidget();
 }
 
 void OtherPciDeviceWidget::initWidget()
 {
-    //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
+    //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
 
-    QStringList names = {   DeviceAttributeName,
-                            DeviceAttributeDescription,
-                            DeviceAttributeVendor,
-                            DeviceAttributeCapabilities
+    QStringList names = {   DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Description"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Capabilities")
                         };
 
     QStringList otherPcideviceList = DeviceInfoParserInstance.getOtherPciDeviceList();
 
     if(otherPcideviceList.size() == 0)
     {
-        setTitle("No " + DeviceAttributeOtherPciDevice + " found!");
+        setTitle("No " + DApplication::translate("Main", "Other PCI Device") + " found!");
         addStrecch();
-        return;
     }
 
     foreach(const QString& device, otherPcideviceList)

@@ -16,6 +16,7 @@
 #include <mainwindow.h>
 #include "tablewidgetalwaysfocus.h"
 #include <QDate>
+#include "DApplication"
 
 DWIDGET_USE_NAMESPACE
 
@@ -43,7 +44,7 @@ DeviceInfoWidgetBase::~DeviceInfoWidgetBase()
 void DeviceInfoWidgetBase::initContextMenu()
 {
     contextMenu_ = new QMenu;
-    QAction* refreshAction = new QAction("Refresh", this);
+    QAction* refreshAction = new QAction(DApplication::translate("Main", "Refresh"), this);
     connect(refreshAction, &QAction::triggered, \
             [this]()
             {
@@ -57,13 +58,13 @@ void DeviceInfoWidgetBase::initContextMenu()
     contextMenu_->addAction(refreshAction);
 
 
-    QAction* exportAction = new QAction("Export to File");
+    QAction* exportAction = new QAction(DApplication::translate("Main", "Export to File"));
     connect(exportAction, &QAction::triggered, this, &DeviceInfoWidgetBase::onExportToFile);
     contextMenu_->addAction(exportAction);
 
 
-    contextMenu_->addAction(new QAction("Attach",this));
-    contextMenu_->addAction(new QAction("Detach",this));
+    contextMenu_->addAction(new QAction(DApplication::translate("Main", "Attach"),this));
+    contextMenu_->addAction(new QAction(DApplication::translate("Main", "Detach"),this));
 }
 
 void DeviceInfoWidgetBase::DeviceInfoWidgetBase::setTitle(const QString& title)
@@ -235,7 +236,11 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     tableWidget_->resizeRowsToContents();
     tableWidget_->horizontalHeader()->setSectionResizeMode(headers.size() - 2, QHeaderView::Stretch);
     tableWidget_->horizontalHeader()->setDefaultAlignment(Qt::AlignmentFlag::AlignLeft);
-    tableWidget_->setColumnWidth(0, 200);
+    tableWidget_->setColumnWidth(0, 100);
+    tableWidget_->setColumnWidth(1, 220);
+    tableWidget_->setColumnWidth(2, 140);
+    tableWidget_->setColumnWidth(3, 100);
+    tableWidget_->setColumnWidth(4, 50);
     tableWidget_->setAlternatingRowColors(true);
     tableWidget_->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
@@ -470,7 +475,7 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
         QString name = di.nameLabels[i]->text();
         QString content = di.contentLabels[i]->text();
         QString line;
-        if(name.isEmpty() == false || false == content.isEmpty())
+        if(name.trimmed().isEmpty() == false || false == content.trimmed().isEmpty())
         {
             line = name + " : " + content;
         }
@@ -483,7 +488,7 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
 
 bool DeviceInfoWidgetBase::exportToDoc(const QString& docFile)
 {
-    Docx::Document doc(":/doc_template/template.doc");
+    Docx::Document doc(":/thirdlib/docx/doc_template/template.doc");
     if(tableWidget_)
     {
         writeTabwidgetToDoc(tableWidget_, doc);

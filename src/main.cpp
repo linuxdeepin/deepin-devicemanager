@@ -19,19 +19,15 @@ int main(int argc, char *argv[])
     app.setAttribute(Qt::AA_UseHighDpiPixmaps);
     app.loadTranslator();
     app.setOrganizationName("deepin");
-    //app.setApplicationName(DApplication::translate("Main", "DeviceManager"));
-    //app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
-    app.setApplicationName("DeviceManager");
-    app.setApplicationDisplayName("Device Manager");
+    app.setApplicationName(DApplication::translate("Main", "DeviceManager"));
+    app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
 
     app.setApplicationVersion("0.0.1");
     app.setProductIcon(QIcon(":/cpu.svg"));
     app.setWindowIcon(QIcon(":/cpu.svg"));
-    //app.setProductName(DApplication::translate("Main", "Device Manager"));
-    app.setProductName("Device Manager");
+    app.setProductName(DApplication::translate("Main", "Device Manager"));
 
     app.setApplicationDescription(DApplication::translate("Main", "Device Manager is a gadget for viewing device information.") + "\n");
-    //app.setApplicationDescription("Device Manager is a gadget for viewing device information.");
 
     const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
     app.setApplicationAcknowledgementPage(acknowledgementLink);

@@ -1,27 +1,30 @@
 #include "usbdevicewidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeUsbdevice)
+DWIDGET_USE_NAMESPACE
+
+UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Usb Device"))
 {
     initWidget();
 }
 
 void UsbdeviceWidget::initWidget()
 {
-    setTitle(DeviceAttributeUsbdevice);
+    setTitle(DApplication::translate("Main", "Usb Device"));
 
     QStringList names = {
-                            DeviceAttributeName,
-                            DeviceAttributeVendor,
-                            DeviceAttributeCapabilities,
-                            DeviceAttributeConfiguration
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Capabilities"),
+                            DApplication::translate("Main", "configuration")
                         };
 
     QStringList usbdeviceList = DeviceInfoParserInstance.getUsbdeviceList();
 
     if(usbdeviceList.size() < 1)
     {
-        setTitle("No " + DeviceAttributeUsbdevice + " found!");
+        setTitle("No " + DApplication::translate("Main", "Usb Device") + " found!");
         addStrecch();
         return;
     }
@@ -29,7 +32,7 @@ void UsbdeviceWidget::initWidget()
     foreach(const QString& device, usbdeviceList)
     {
         QString name = DeviceInfoParserInstance.qureyData("lshw", device, "product");
-        if(name == DeviceAttributeUnknown)
+        if(name == DApplication::translate("Main", "Unknown"))
         {
             name = DeviceInfoParserInstance.qureyData("lshw", device, "description");
         }

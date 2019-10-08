@@ -1,26 +1,29 @@
 #include "otherinputdevicewidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-OtherInputdeviceWidget::OtherInputdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeOtherInputdevice)
+DWIDGET_USE_NAMESPACE
+
+OtherInputdeviceWidget::OtherInputdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Other Inputdevice"))
 {
     initWidget();
 }
 
 void OtherInputdeviceWidget::initWidget()
 {
-    //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
+    //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
 
-    QStringList names = {   DeviceAttributeDescription,
-                            DeviceAttributeName,
-                            DeviceAttributeVendor,
-                            DeviceAttributeCapabilities
+    QStringList names = {   DApplication::translate("Main", "Description"),
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Capabilities")
                         };
 
     QStringList otherInputdeviceList = DeviceInfoParserInstance.getOtherInputdeviceList();
 
     if(otherInputdeviceList.size() == 0)
     {
-        setTitle("No " + DeviceAttributeOtherInputdevice + " found!");
+        setTitle("No " + DApplication::translate("Main", "Other Inputdevice") + " found!");
         addStrecch();
     }
 

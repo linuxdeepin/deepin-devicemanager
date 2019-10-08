@@ -1,25 +1,28 @@
 #include "diskwidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeDisk)
+DWIDGET_USE_NAMESPACE
+
+DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Disk"))
 {
     initWidget();
 }
 
 void DiskWidget::initWidget()
 {
-    setTitle(DeviceAttributeDisk + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "Disk")  + DApplication::translate("Main", " Info"));
 
     QStringList mechanicalHardDiskNames = {
-                            DeviceAttributeModel,
-                            DeviceAttributeSize,
-                            DeviceAttributeVendor,
-                            DeviceAttributeRotateSpeed,
-                            DeviceAttributeShapeCharacteristics,
-                            DeviceAttributePowerOnTimes,
-                            DeviceAttributeSerialNumber,
-                            DeviceAttributeSataVersion,
-                            DeviceAttributeSpeed
+                            DApplication::translate("Main", "Model"),
+                             DApplication::translate("Main", "Size"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Rotate Speed"),
+                            DApplication::translate("Main", "Shape Characteristics"),
+                            DApplication::translate("Main", "Power On Times"),
+                            DApplication::translate("Main", "Serial Number"),
+                            DApplication::translate("Main", "SATA Version"),
+                            DApplication::translate("Main", "Speed")
                         };
 
     QStringList diskList = DeviceInfoParserInstance.getDisknameList();
@@ -51,8 +54,8 @@ void DiskWidget::initWidget()
             DeviceInfoParserInstance.qureyData("lshw", disk, "vendor"),
             DeviceInfoParserInstance.qureyData("smartctl", "smartctl", "Rotation Rate"),
             DeviceInfoParserInstance.qureyData("smartctl", "smartctl", "Form Factor"),
-            DeviceInfoParserInstance.qureyData("smartctl", "smartctl", "Power_On_Hours") + " Hours, "
-            + DeviceInfoParserInstance.qureyData("smartctl", "smartctl", "Power_Cycle_Count") + " Power Cycle Count",
+            DeviceInfoParserInstance.qureyData("smartctl", "smartctl", "Power_On_Hours") + DApplication::translate("Main", " Hours") + ", "
+            + DeviceInfoParserInstance.qureyData("smartctl", "smartctl", "Power_Cycle_Count") + DApplication::translate("Main", " Power Cycle Count"),
             DeviceInfoParserInstance.qureyData("lshw", disk, "serial"),
             version,
             speed

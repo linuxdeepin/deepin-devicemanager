@@ -1,31 +1,34 @@
 #include "cpuwidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeCPU)
+DWIDGET_USE_NAMESPACE
+
+CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "CPU"))
 {
     initWidget();
 }
 
 void CpuWidget::initWidget()
 {
-    setTitle(DeviceAttributeCPU + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "CPU")  + DApplication::translate("Main", " Info"));
 
-    QStringList names = {   DeviceAttributeModel,
-                            DeviceAttributeArchitecture,
-                            DeviceAttributeVendor,
-                            DeviceAttributeSpeed,
-                            DeviceAttributeCores + " " + DeviceAttributeNumber,
-                            DeviceAttributeThreads + " " + DeviceAttributeNumber,
-                            DeviceAttributeL1d,
-                            DeviceAttributeL1i,
-                            DeviceAttributeL2,
-                            DeviceAttributeL3
+    QStringList names = {   DApplication::translate("Main", "Model"),
+                            DApplication::translate("Main", "Architecture"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Speed"),
+                            DApplication::translate("Main", "Cores")  + DApplication::translate("Main", "Number"),
+                            DApplication::translate("Main", "Threads")  + DApplication::translate("Main", "Number"),
+                            DApplication::translate("Main", "L1d") + DApplication::translate("Main", "Cache"),
+                            DApplication::translate("Main", "L1i")+ DApplication::translate("Main", "Cache"),
+                            DApplication::translate("Main", "L2")+ DApplication::translate("Main", "Cache"),
+                            DApplication::translate("Main", "L3")+ DApplication::translate("Main", "Cache")
                         };
 
     QString modelName = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Model name");
 
-    float maxMHz = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "CPU max MHz").toFloat()/1000.0;
-    float minMHz = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "CPU min MHz").toFloat()/1000.0;
+    double maxMHz = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "CPU max MHz").toDouble()/1000.0;
+    double minMHz = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "CPU min MHz").toDouble()/1000.0;
 
     QString speed;
     int index = modelName.indexOf('@');

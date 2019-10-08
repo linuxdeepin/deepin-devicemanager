@@ -1,6 +1,6 @@
-<!DOCTYPE RCC><RCC version="1.0">
-  <qresource>
-      <file>cpu.svg</file>
-      <file>../doc_template/template.doc</file>
-  </qresource>
-  </RCC>
+<RCC>
+    <qresource prefix="/">
+        <file>cpu.svg</file>
+        <file>../thirdlib/docx/doc_template/template.doc</file>
+    </qresource>
+</RCC>

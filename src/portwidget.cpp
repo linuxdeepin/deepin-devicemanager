@@ -1,19 +1,22 @@
 #include "portwidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-PortWidget::PortWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributePorts)
+DWIDGET_USE_NAMESPACE
+
+PortWidget::PortWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Ports"))
 {
     initWidget();
 }
 
 void PortWidget::initWidget()
 {
-    //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
+    //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
 
-    QStringList names = {   DeviceAttributeReferenceDesignator,
-                            DeviceAttributePortType,
-                            DeviceAttributeConnectorType,
-                            DeviceAttributeCapabilities
+    QStringList names = {   DApplication::translate("Main", "Reference Designator"),
+                            DApplication::translate("Main", "Port Type"),
+                            DApplication::translate("Main", "Connector Type"),
+                            DApplication::translate("Main", "Capabilities")
                         };
 
     QStringList portsList = DeviceInfoParserInstance.getPortsList();

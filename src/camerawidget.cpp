@@ -1,26 +1,29 @@
 #include "camerawidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributeCamera)
+DWIDGET_USE_NAMESPACE
+
+CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Camera"))
 {
     initWidget();
 }
 
 void CameraWidget::initWidget()
 {
-    setTitle(DeviceAttributeCamera + " " + DeviceAttributeInfo);
+    setTitle(DApplication::translate("Main", "Camera")  + DApplication::translate("Main", " Info"));
 
     QStringList cameraNames = {
-                            DeviceAttributeName,
-                            DeviceAttributeVendor,
-                            DeviceAttributeCapabilities
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Capabilities")
                         };
 
     QStringList cameraList = DeviceInfoParserInstance.getCameraList();
 
     if(cameraList.size() < 1)
     {
-        setTitle("No " + DeviceAttributeCamera + " found!");
+        setTitle("No " + DApplication::translate("Main", "Camera") + " found!");
         addStrecch();
         return;
     }

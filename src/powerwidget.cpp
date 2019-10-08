@@ -1,24 +1,27 @@
 #include "powerwidget.h"
 #include "deviceinfoparser.h"
+#include <DApplication>
 
-PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DeviceAttributePower)
+DWIDGET_USE_NAMESPACE
+
+PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Power"))
 {
     initWidget();
 }
 
 void PowerWidget::initWidget()
 {
-    //setTitle(DeviceAttributePower + " " + DeviceAttributeInfo);
+    //setTitle(DApplication::translate("Main", "Power")  + DApplication::translate("Main", " Info"));
 
     QStringList switchingpowerNames = {
-                            DeviceAttributeName,
-                            DeviceAttributeScreenSuspendDelay,
-                            DeviceAttributeComputerSuspendDelay,
-                            DeviceAttributeAutoLockScreenDelay,
-                            DeviceAttributeVendor,
-                            DeviceAttributeMaxPowerCapacity,
-                            DeviceAttributeStatu,
-                            DeviceAttributeType
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Screen Suspend Delay"),
+                            DApplication::translate("Main", "Computer Suspend Delay"),
+                            DApplication::translate("Main", "AutoLock Screen Delay"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Max Power Capacity"),
+                            DApplication::translate("Main", "Statu"),
+                            DApplication::translate("Main", "Type")
                         };
 
     QStringList switchingpowerList = DeviceInfoParserInstance.getSwitchingpowerList();
@@ -40,7 +43,7 @@ void PowerWidget::initWidget()
         };
         if(bNeedSetTitle)
         {
-            addSubInfo(DeviceAttributeSwitchingPower, switchingpowerNames, contents);
+            addSubInfo(DApplication::translate("Main", "Switching Power"), switchingpowerNames, contents);
             bNeedSetTitle = false;
         }
         else
@@ -50,14 +53,14 @@ void PowerWidget::initWidget()
     }
 
     QStringList batteryNames = {
-                            DeviceAttributeName,
-                            DeviceAttributeScreenSuspendDelay,
-                            DeviceAttributeComputerSuspendDelay,
-                            DeviceAttributeAutoLockScreenDelay,
-                            DeviceAttributeVendor,
-                            DeviceAttributeSlot,
-                            DeviceAttributeMaxPowerCapacity,
-                            DeviceAttributeConfiguration
+                            DApplication::translate("Main", "Name"),
+                            DApplication::translate("Main", "Screen Suspend Delay"),
+                            DApplication::translate("Main", "Computer Suspend Delay"),
+                            DApplication::translate("Main", "AutoLock Screen Delay"),
+                            DApplication::translate("Main", "Vendor"),
+                            DApplication::translate("Main", "Slot"),
+                            DApplication::translate("Main", "Max Power Capacity"),
+                            DApplication::translate("Main", "configuration")
                         };
 
     QStringList batteryList = DeviceInfoParserInstance.getBatteryList();
@@ -80,7 +83,7 @@ void PowerWidget::initWidget()
 
         if(bNeedSetTitle)
         {
-            addSubInfo(DeviceAttributeBattery, batteryNames, contents);
+            addSubInfo(DApplication::translate("Main", "Battery"), batteryNames, contents);
             bNeedSetTitle = false;
         }
         else
