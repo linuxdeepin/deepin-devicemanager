@@ -24,6 +24,19 @@ void ComputerOverviewWidget::initWidget()
                             DeviceAttributeAudioAdapter,
                             DeviceAttributeNetworkAdapter
                         };
+    QString pName = DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Product Name");
+    QString ver = DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Version");
+    QString model = pName + " " + ver;
+    if(ver.contains("Not Specified", Qt::CaseInsensitive) )
+    {
+        model = pName;
+    }
+
+    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW
+                                                                //  Version: ThinkCentre M910t-N000
+    {
+        model = ver;
+    }
 
     QString os;
     DeviceInfoParserInstance.getOSInfo(os);
@@ -136,8 +149,8 @@ void ComputerOverviewWidget::initWidget()
         QRegExp re("^([\\d]*)x([\\d]*) mm$");
         if( re.exactMatch(size) )
         {
-            double width = re.cap(1).toFloat()/2.54;
-            double height = re.cap(2).toFloat()/2.54;
+            double width = re.cap(1).toDouble()/2.54;
+            double height = re.cap(2).toDouble()/2.54;
             double inch = std::sqrt(width*width + height*height)/10.0;
             monitor += " (";
             monitor += QString::number(inch,10, 1);
@@ -157,12 +170,12 @@ void ComputerOverviewWidget::initWidget()
     if(networkadapterList.size() > 0)
     {
         networkAdapter = DeviceInfoParserInstance.qureyData("lshw", networkadapterList[0], "vendor");
-        networkAdapter += "";
+        networkAdapter += " ";
         networkAdapter += DeviceInfoParserInstance.qureyData("lshw", networkadapterList[0], "product");
     }
 
     QStringList contents = {
-        DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Version"),
+        model,
         os,
         " ",
         cpu,

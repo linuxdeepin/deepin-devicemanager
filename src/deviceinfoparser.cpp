@@ -79,6 +79,13 @@ QStringList DeviceInfoParser::getMemorynameList()
         }
     }
 
+    std::sort( memList.begin(), memList.end(),
+                [this](const QString& m1, const QString& m2)
+                {
+                    return toolDatabase_["dmidecode"][m1]["Locator"] < toolDatabase_["dmidecode"][m2]["Locator"] ;
+                }
+                );
+
     return memList;
 }
 
@@ -435,11 +442,25 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
         return false;
     }
 
+    QString str = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    executeProcess("tar zxvf /home/archermind/Desktop/deviceInfo.tar.gz");
+
+    QFile osinfoFile("./deviceInfo/osinfo.txt");
+    if( false == osinfoFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+
+    str = osinfoFile.readAll();
+    osinfoFile.close();
+#endif
+
      QString linuxCoreVerson;
      QString releaseVersion;
 
      QRegExp rx("^([\\s\\S]*)\\([\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?\\)([\\s\\S]*)$");
-     if( rx.exactMatch(standOutput_) )
+     if( rx.exactMatch(str) )
      {
         linuxCoreVerson = rx.cap(1).trimmed();
         releaseVersion = rx.cap(2).trimmed();
@@ -473,13 +494,14 @@ bool DeviceInfoParser::loadDemicodeDatabase()
 
     QString dmidecodeOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile dmidecodeFile("//home//archermind//Desktop//dmidecode.txt");
+    QFile dmidecodeFile("./deviceInfo/dmidecode.txt");
     if( false == dmidecodeFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
 
     dmidecodeOut = dmidecodeFile.readAll();
+    dmidecodeFile.close();
 #endif
 
     // dimdecode
@@ -641,12 +663,13 @@ bool DeviceInfoParser::loadLshwDatabase()
 
     QString lshwOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile lshwFile("//home//archermind//Desktop//lshw.txt");
+    QFile lshwFile("./deviceInfo/lshw.txt");
     if( false == lshwFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
     lshwOut = lshwFile.readAll();
+    lshwFile.close();
 #endif
     // lshw
     DatabaseMap lshwDatabase_;
@@ -753,12 +776,13 @@ bool DeviceInfoParser::loadLscpuDatabase()
 
     QString lscpuOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile lscpuFile("//home//archermind//Desktop//lscpu.txt");
+    QFile lscpuFile("./deviceInfo/lscpu.txt");
     if( false == lscpuFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
     lscpuOut = lscpuFile.readAll();
+    lscpuFile.close();
 #endif
 
     // lscpu
@@ -798,12 +822,13 @@ bool DeviceInfoParser::loadSmartctlDatabase()
 
     QString smartctlOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile smartctlFile("//home//archermind//Desktop//smartctl.txt");
+    QFile smartctlFile("./deviceInfo/smartctl.txt");
     if( false == smartctlFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
     smartctlOut = smartctlFile.readAll();
+    smartctlFile.close();
 #endif
 
     // smartctl
@@ -850,12 +875,13 @@ bool DeviceInfoParser::loadCatInputDatabase()
 
     QString inputDeviceOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile inputDeviceFile("//home//archermind//Desktop//input.txt");
+    QFile inputDeviceFile("./deviceInfo/input.txt");
     if( false == inputDeviceFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
     inputDeviceOut = inputDeviceFile.readAll();
+    inputDeviceFile.close();
 #endif
 
     // cat /proc/bus/input/devices
@@ -942,12 +968,13 @@ bool DeviceInfoParser::loadXrandrDatabase()
 
     QString xrandrOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile xrandrFile("//home//archermind//Desktop//xrandr.txt");
+    QFile xrandrFile("./deviceInfo/xrandr.txt");
     if( false == xrandrFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
     xrandrOut = xrandrFile.readAll();
+    xrandrFile.close();
 #endif
 
     // xrandr --verbose
@@ -1045,19 +1072,6 @@ bool DeviceInfoParser::loadXrandrDatabase()
     return true;
 }
 
-bool DeviceInfoParser::parseXrandrData()
-{
-
-    return true;
-}
-
-bool DeviceInfoParser::parseEDID( )
-{
-
-
-    return true;
-}
-
 bool DeviceInfoParser::loadPowerSettings()
 {
     PowerInter power("com.deepin.daemon.Power", "/com/deepin/daemon/Power", QDBusConnection::sessionBus(), nullptr);
@@ -1080,12 +1094,13 @@ bool DeviceInfoParser::loadLspciDatabase()
     }
     QString lspciOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile lspciFile("//home//archermind//Desktop//lspci.txt");
+    QFile lspciFile("./deviceInfo/lspci.txt");
     if( false == lspciFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
     lspciOut = lspciFile.readAll();
+    lspciFile.close();
 #endif
     // lspci --verbose
     DatabaseMap lspciDatabase_;
@@ -1182,14 +1197,14 @@ bool DeviceInfoParser::loadHciconfigDatabase()
 
     QString hciconfigOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile xrandrFile("//home//archermind//Desktop//xrandr.txt");
-    QFile hciconfigFile("//home//archermind//Desktop//hciconfig.txt");
+    QFile hciconfigFile("./deviceInfo/hciconfig.txt");
     if( false == hciconfigFile.open(QIODevice::ReadOnly) )
     {
         return false;
     }
 
     hciconfigOut = hciconfigFile.readAll();
+    hciconfigFile.close();
 #endif
 
     // hciconfig
@@ -1263,6 +1278,16 @@ bool DeviceInfoParser::loadHwinfoDatabase()
     }
 
     QString hwOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile hwinfoFile("./deviceInfo/hwinfo.txt");
+    if( false == hwinfoFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+
+    hwOut = hwinfoFile.readAll();
+    hwinfoFile.close();
+#endif
 
     //QString hwOut = getHwMonitorString();
     if( hwOut.size() < 1 )

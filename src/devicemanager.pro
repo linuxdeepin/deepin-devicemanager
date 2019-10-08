@@ -30,6 +30,8 @@ CONFIG += c++11
 CONFIG += link_pkgconfig
 PKGCONFIG += xcb xcb-util dtkwidget dtkwm dframeworkdbus
 
+TRANSLATIONS += ../translations/DeviceManager.ts
+
 INCLUDEPATH +=     \
             /usr/include/libdframeworkdbus-2.0/ \
 
@@ -105,3 +107,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     app.qrc
+
+DISTFILES += \
+    ../translations/DeviceManager.ts \
+    ../translations/DeviceManager_zh_CN.ts

@@ -15,6 +15,7 @@
 #include <QFile>
 #include <mainwindow.h>
 #include "tablewidgetalwaysfocus.h"
+#include <QDate>
 
 DWIDGET_USE_NAMESPACE
 
@@ -298,7 +299,7 @@ void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)
 bool DeviceInfoWidgetBase::onExportToFile()
 {
    QString selectFilter;
-   QString exportFile = DFileDialog::getSaveFileName(this, tr("Export File"), "./" + deviceName_.remove(QRegExp("\\s")) + ".txt", \
+   QString exportFile = DFileDialog::getSaveFileName(this, tr("Export File"), "./" + deviceName_ + QDate::currentDate().toString("yyyyMMdd") .remove(QRegExp("\\s")) + ".txt", \
                         tr("TEXT (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
 
    if(exportFile.isEmpty() == true)

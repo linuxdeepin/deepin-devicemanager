@@ -129,7 +129,7 @@ void MemoryWidget::updateDownWidget(const QString& currentChannel)
                 DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
                 DeviceInfoParserInstance.qureyData("dmidecode", mem, "Serial Number"),
                 DeviceInfoParserInstance.qureyData("dmidecode", mem, "Part Number"),
-                DeviceAttributeGood,
+                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank") == "Unknown"?DeviceAttributeBad:DeviceAttributeGood,
                 DeviceInfoParserInstance.qureyData("dmidecode", mem, "Configured Voltage")
             };
 

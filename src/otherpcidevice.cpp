@@ -10,8 +10,8 @@ void OtherPciDeviceWidget::initWidget()
 {
     //setTitle(DeviceAttributeOtherInputdevice + " " + DeviceAttributeInfo);
 
-    QStringList names = {   DeviceAttributeDescription,
-                            DeviceAttributeName,
+    QStringList names = {   DeviceAttributeName,
+                            DeviceAttributeDescription,
                             DeviceAttributeVendor,
                             DeviceAttributeCapabilities
                         };
@@ -28,8 +28,8 @@ void OtherPciDeviceWidget::initWidget()
     foreach(const QString& device, otherPcideviceList)
     {
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("lshw", device, "description"),
             DeviceInfoParserInstance.qureyData("lshw", device, "product"),
+            DeviceInfoParserInstance.qureyData("lshw", device, "description"),
             DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
             DeviceInfoParserInstance.qureyData("lshw", device, "capabilities"),
         };

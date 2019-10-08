@@ -97,8 +97,6 @@ public:
     bool loadCatInputDatabase();
     // xrandr
     bool loadXrandrDatabase();
-    bool parseXrandrData();
-    bool parseEDID();
     // get power settings
     bool loadPowerSettings();
     // lspci parse
