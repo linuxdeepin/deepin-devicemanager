@@ -13,7 +13,7 @@
 //#include "thirdlib/docx/include/table.h"
 #include "xlsxdocument.h"
 #include <QFile>
-#include <mainwindow.h>
+#include "mainwindow.h"
 #include "tablewidgetalwaysfocus.h"
 #include <QDate>
 #include "DApplication"

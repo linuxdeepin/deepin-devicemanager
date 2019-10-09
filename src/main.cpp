@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     app.setApplicationName(DApplication::translate("Main", "DeviceManager"));
     app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
 
-    app.setApplicationVersion("0.0.1");
+    app.setApplicationVersion(VERSION);
     app.setProductIcon(QIcon(":/cpu.svg"));
     app.setWindowIcon(QIcon(":/cpu.svg"));
     app.setProductName(DApplication::translate("Main", "Device Manager"));

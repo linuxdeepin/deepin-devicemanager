@@ -27,7 +27,7 @@ public:
 
 TableWidgetAlwaysFocus::TableWidgetAlwaysFocus(QWidget *parent):DTableWidget(parent)
 {
-    MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent->parent());
+    //MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent->parent());
     //setFocusProxy(mainWindow);
     //setAutoFillBackground(false);
     setFocusPolicy(Qt::FocusPolicy::StrongFocus);
