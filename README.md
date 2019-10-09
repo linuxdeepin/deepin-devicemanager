@@ -14,7 +14,8 @@ Device Manager is a gadget for viewing device information.
 
 ## Installation
 
-* cd src
+* mkdir build
+* cd build
 * qmake ..
 * make
 
