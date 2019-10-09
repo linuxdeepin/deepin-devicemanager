@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
     app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
 
     app.setApplicationVersion(VERSION);
-    app.setProductIcon(QIcon(":/cpu.svg"));
-    app.setWindowIcon(QIcon(":/cpu.svg"));
+    app.setProductIcon(QIcon(":images/cpu.svg"));
+    app.setWindowIcon(QIcon(":images/cpu.svg"));
     app.setProductName(DApplication::translate("Main", "Device Manager"));
 
     app.setApplicationDescription(DApplication::translate("Main", "Device Manager is a gadget for viewing device information.") + "\n");
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     DApplicationSettings settings;
 
     MainWindow w;
-    w.titlebar()->setIcon(QIcon(":/cpu.svg"));
+    w.titlebar()->setIcon(QIcon(":images/cpu.svg"));
     Dtk::Widget::moveToCenter(&w);
     w.show();
 

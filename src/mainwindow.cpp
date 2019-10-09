@@ -102,8 +102,9 @@ void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w)
 {
     if(firstAdd_ == true)
     {
-        leftDeviceList_->addDevice(w->getDeviceName(), ":/cpu.svg");
+        leftDeviceList_->addDevice(w->getDeviceName(), ":images/cpu.svg");
     }
+
     rightDeviceInfoWidget_->addWidget(w);
     deviceInfoWidgetMap_[w->getDeviceName()] = w;
 }
