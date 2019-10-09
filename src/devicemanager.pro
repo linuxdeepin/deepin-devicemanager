@@ -67,7 +67,8 @@ SOURCES += \
     powerwidget.cpp \
     otherpcidevice.cpp \
     portwidget.cpp \
-    tablewidgetalwaysfocus.cpp
+    tablewidgetalwaysfocus.cpp \
+    logpasswordauth.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -96,7 +97,8 @@ HEADERS += \
     usbdevicewidget.h \
     otherpcidevice.h \
     portwidget.h \
-    tablewidgetalwaysfocus.h
+    tablewidgetalwaysfocus.h \
+    logpasswordauth.h
 
 
 # Default rules for deployment.

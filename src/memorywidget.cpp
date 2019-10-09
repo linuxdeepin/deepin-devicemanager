@@ -30,7 +30,7 @@ void MemoryWidget::initTableWdiget()
     foreach(const QString& mem, memList)
     {
         QString rank = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
-        if(rank == "Unknown")
+        if(rank == DApplication::translate("Main", "Unknown"))
         {
             canUpgrade_ = true;
         }
@@ -40,7 +40,7 @@ void MemoryWidget::initTableWdiget()
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Size"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Type"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank") == "Unknown"?DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
+            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank") == DApplication::translate("Main", "Unknown")?DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
         };
 
         tabList.push_back(tab);
@@ -84,7 +84,7 @@ void MemoryWidget::updateWholeDownWidget()
     foreach(const QString& mem, memList)
     {
         QString rank = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
-        if(rank == "Unknown")
+        if(rank == DApplication::translate("Main", "Unknown") || rank == "Unknown" )
         {
             continue;
         }

@@ -92,7 +92,7 @@ public:
     // lscpu parse
     bool loadLscpuDatabase();
     // smartctl www.smartmontools.org get disk info
-    bool loadSmartctlDatabase();
+    bool loadSmartctlDatabase(const QString& diskLogical);
     // cat /proc/bus/input/devices
     bool loadCatInputDatabase();
     // xrandr
@@ -110,6 +110,9 @@ public:
 
 public:
     bool executeProcess(const QString& cmd);
+    bool runCmd(const QString& cmd);
+    bool runCmd(const QStringList& cmdList);
+
     QString standOutput_;
 
     QMap<QString, DatabaseMap> toolDatabase_;

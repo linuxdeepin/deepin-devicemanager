@@ -64,7 +64,7 @@ void ComputerOverviewWidget::initWidget()
     foreach(const QString& mem, memList)
     {
         QString rank = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
-        if(rank == "Unknown")
+        if(rank == DApplication::translate("Main", "Unknown")|| rank == "Unknown" )
         {
             continue;
         }

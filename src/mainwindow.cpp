@@ -133,7 +133,7 @@ void MainWindow::refreshDatabase()
     DeviceInfoParserInstance.loadDemicodeDatabase();
     DeviceInfoParserInstance.loadLshwDatabase();
     DeviceInfoParserInstance.loadLscpuDatabase();
-    DeviceInfoParserInstance.loadSmartctlDatabase();
+    //DeviceInfoParserInstance.loadSmartctlDatabase();
     DeviceInfoParserInstance.loadCatInputDatabase();
     DeviceInfoParserInstance.loadPowerSettings();
     DeviceInfoParserInstance.loadXrandrDatabase();

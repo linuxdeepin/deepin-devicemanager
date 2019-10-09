@@ -10,6 +10,8 @@
 #include "hwinfohandler.h"
 #include "deviceattributedefine.h"
 #include <DApplication>
+#include "logpasswordauth.h"
+#include "DMessageBox"
 
 DWIDGET_USE_NAMESPACE
 
@@ -103,7 +105,7 @@ QStringList DeviceInfoParser::getDisknameList()
 
     foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
-        if( fk.contains("disk") && false == fk.contains("volume"))
+        if( fk.endsWith("disk") )
         {
             diskList.push_back(fk);
         }
@@ -441,7 +443,7 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
 
     if( false == executeProcess("cat /proc/version") )
     {
-        osInfo = "Unknow";
+        osInfo = DApplication::translate("Main", "Unknown");
         return false;
     }
 
@@ -816,9 +818,9 @@ bool DeviceInfoParser::loadLscpuDatabase()
     return true;
 }
 
-bool DeviceInfoParser::loadSmartctlDatabase()
+bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
 {
-    if( false == executeProcess("sudo smartctl --all /dev/sda"))
+    if( false == executeProcess("sudo smartctl --all " + diskLogical))
     {
         return false;
     }
@@ -863,7 +865,7 @@ bool DeviceInfoParser::loadSmartctlDatabase()
     }
 
     DatabaseMap rootsmartctlDb;
-    rootsmartctlDb[smartctlToolname] = smartctlDatabase_;
+    rootsmartctlDb[diskLogical] = smartctlDatabase_;
     toolDatabase_[smartctlToolname] = rootsmartctlDb;
 
     return true;
@@ -1387,10 +1389,62 @@ bool DeviceInfoParser::loadHwinfoDatabase()
 
 bool DeviceInfoParser::executeProcess(const QString& cmd)
 {
-    /*int res = */process_.start(cmd);
+#ifdef TEST_DATA_FROM_FILE
+    return true;
+#endif
+
+    if( false == cmd.startsWith("sudo") )
+    {
+        return runCmd(cmd);
+    }
+
+    static LogPasswordAuth* autoDialog = nullptr;
+
+    runCmd("whoami");
+    if(standOutput_ == "root")
+    {
+        return runCmd(cmd);
+    }
+
+    if( autoDialog == nullptr )
+    {
+        autoDialog = new LogPasswordAuth;
+    }
+
+    if( autoDialog->getPasswd().isEmpty() )
+    {
+        autoDialog->exec();
+    }
+
+    QStringList arg;
+    arg << "-c" << "echo " + autoDialog->getPasswd() + " | sudo -S whoami";
+    bool res = runCmd(arg);  // file path is fixed. So write cmd direct
+    if( res == false || standOutput_.trimmed() != "root" )
+    {
+        autoDialog->clearPasswd();
+        DMessageBox::warning(nullptr, "Password Error!", "");
+        exit(-1);
+    }
+
+    arg.clear();
+    QString newCmd = cmd;
+
+    arg << "-c" << "echo " + autoDialog->getPasswd() + " | sudo -S" + newCmd.remove("sudo");
+    return runCmd(arg);
+}
+
+bool DeviceInfoParser::runCmd(const QString& cmd)
+{
+    process_.start(cmd);
     bool res = process_.waitForFinished();
     standOutput_ = process_.readAllStandardOutput();
-    //std::cout << standOutput_.toStdString() << std::endl;
+    return res;
+}
 
+bool DeviceInfoParser::runCmd(const QStringList& cmdList)
+{
+    process_.start("/bin/bash",cmdList);
+    bool res = process_.waitForFinished();
+    standOutput_ = process_.readAllStandardOutput();
     return res;
 }
