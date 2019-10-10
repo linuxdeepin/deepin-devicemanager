@@ -28,7 +28,7 @@ void MonitorWidget::initWidget()
                             DApplication::translate("Main", "Name"),
                             DApplication::translate("Main", "Vendor"),
                             DApplication::translate("Main", "Manufacture Date"),
-                             DApplication::translate("Main", "Size"),
+                            DApplication::translate("Main", "Size"),
                             DApplication::translate("Main", "Resolution"),
                             DApplication::translate("Main", "Display Rate"),
                             DApplication::translate("Main", "Connect Type")

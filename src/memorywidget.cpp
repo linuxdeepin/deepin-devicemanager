@@ -30,17 +30,19 @@ void MemoryWidget::initTableWdiget()
     foreach(const QString& mem, memList)
     {
         QString rank = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
-        if(rank == DApplication::translate("Main", "Unknown"))
+        if(rank == DApplication::translate("Main", "Unknown") || rank == "Unknown" )
         {
             canUpgrade_ = true;
         }
 
+        QString rankStr = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
         QStringList tab = {
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Locator"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Size"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Type"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank") == DApplication::translate("Main", "Unknown")?DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
+            (  rankStr == DApplication::translate("Main", "Unknown")\
+            || rankStr ==  "Unknown" ) ? DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
         };
 
         tabList.push_back(tab);
