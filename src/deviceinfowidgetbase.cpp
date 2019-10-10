@@ -220,6 +220,11 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         //tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
         //tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
         //tableWidget_->setEnabled(true);
+        tableWidget_->horizontalHeader()->setHighlightSections(false);
+        tableWidget_->horizontalHeader()->setFrameShape(QFrame::Shape::NoFrame);
+        tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
+        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
+        tableWidget_->horizontalHeader()->setFrameShadow(QFrame::Shadow::Sunken);
     }
 
     tableWidget_->setRowCount(contentsList.size());
@@ -252,9 +257,13 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         const QStringList& contents = contentsList[i];
         for(int j = 0; j < contents.size(); ++j )
         {
-            tableWidget_->setItem(i, j,new QTableWidgetItem(contents[j]));
+            QTableWidgetItem* item = new QTableWidgetItem(contents[j]);
+            tableWidget_->setItem(i, j, item);
         }
     }
+
+    tableWidget_->clearSpans();
+    tableWidget_->setFrameShape(QFrame::Shape::NoFrame);
 }
 
 void DeviceInfoWidgetBase::addStrecch()
@@ -439,7 +448,7 @@ bool writeTabwidgetToDoc(DTableWidget* tableWidget, Docx::Document& doc)
     }
 
     Docx::Table* tab = doc.addTable(tableWidget->rowCount()+1, tableWidget->columnCount());
-    tab->setAlignment(Docx::WD_TABLE_ALIGNMENT::LEFT);
+    //tab->setAlignment(Docx::WD_TABLE_ALIGNMENT::LEFT);
 
     for(int col = 0; col < tableWidget->columnCount(); ++col)
     {
@@ -494,17 +503,17 @@ bool DeviceInfoWidgetBase::exportToDoc(const QString& docFile)
         writeTabwidgetToDoc(tableWidget_, doc);
     }
 
-    if(titleInfo_)
-    {
-        doc.addParagraph("\n");
-        writeDeviceInfoToDoc(*titleInfo_, doc);
-    }
+//    if(titleInfo_)
+//    {
+//        doc.addParagraph("\n");
+//        writeDeviceInfoToDoc(*titleInfo_, doc);
+//    }
 
-    foreach(auto di, deviceInfos_)
-    {
-        doc.addParagraph("\n");
-        writeDeviceInfoToDoc(di, doc);
-    }
+//    foreach(auto di, deviceInfos_)
+//    {
+//        doc.addParagraph("\n");
+//        writeDeviceInfoToDoc(di, doc);
+//    }
 
     doc.save(docFile);
     return true;

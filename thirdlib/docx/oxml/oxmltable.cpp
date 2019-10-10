@@ -110,6 +110,7 @@ CT_TblGrid::CT_TblGrid(QDomDocument *dom, const QDomElement &ele)
 QDomElement CT_TblGrid::addGridCol()
 {
     QDomElement gridcol = m_dom->createElement(QStringLiteral("w:gridCol"));
+    gridcol.setAttribute(QStringLiteral("w:w"), 1600);
     m_element.appendChild(gridcol);
     ++cols;
     return gridcol;
