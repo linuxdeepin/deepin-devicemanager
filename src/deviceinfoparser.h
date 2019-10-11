@@ -40,6 +40,9 @@ const QString Devicetype_HwInfo_Resolution = "Resolution";
 const QString Devicetype_HwInfo_ResolutionList = "Resolution list";
 const QString Devicetype_HwInfo_Currentresolution = "Current Resolution";
 
+const QString Devicetype_lpstat_4Space = "    ";
+const QString Devicetype_lpstat_Tab = "\t";
+
 const QString dmidecodeToolName = "dmidecode";
 const QString lshwToolname = "lshw";
 const QString lscpuToolname = "lscpu";
@@ -49,7 +52,7 @@ const QString xrandrToolname = "xrandr";
 const QString lspciToolname = "lspci";
 const QString hciconfigToolname = "hciconfig";
 const QString hwinfoToolname = "hwinfo";
-
+const QString lpstatToolname = "lpstat";
 
 
 typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
@@ -107,6 +110,8 @@ public:
     bool loadLsusbDatabase();
     // hwinfo
     bool loadHwinfoDatabase();
+    // lpstat
+    bool loadLpstatDatabase();
 
 public:
     bool executeProcess(const QString& cmd);

@@ -371,13 +371,5 @@
             <source>Export to File</source>
             <translation type="unfinished"/>
         </message>
-        <message>
-            <source>Attach</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Detach</source>
-            <translation type="unfinished"/>
-        </message>
     </context>
 </TS>

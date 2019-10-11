@@ -748,7 +748,49 @@ bool DeviceInfoParser::loadLshwDatabase()
         int index = line.indexOf(Devicetype_Separator);
         if( index > 0 )
         {
-            DeviceInfoMap[line.mid(0,index).trimmed().remove(Devicetype_lshw_Class_Prefix)] = line.mid(index+1).trimmed();
+            QString name = line.mid(0,index).trimmed().remove(Devicetype_lshw_Class_Prefix);
+            if(name == "configuration" || name == "resources" )
+            {
+                QChar splitChar = name == "configuration" ? '=': ':';
+
+                QStringList lst = line.mid(index+1).trimmed().split(splitChar);
+                if(lst.size() < 2)
+                {
+                    DeviceInfoMap[name] = line.mid(index+1).trimmed();
+                }
+                else
+                {
+                    for(int ind = 0; ind < lst.size() - 1; ++ind)
+                    {
+                        QString tempName = lst[ind].split(" ").last();
+                        int spaceIndex = lst[ind+1].lastIndexOf(" ");
+                        if(spaceIndex < 0)
+                        {
+                            if(DeviceInfoMap.contains(tempName))
+                            {
+                                DeviceInfoMap[tempName] += ",";
+                                DeviceInfoMap[tempName] += lst[ind+1];
+                            }
+                            else {
+                                DeviceInfoMap[tempName] = lst[ind+1];
+                            }
+                        }
+                        else
+                        {
+                            if(DeviceInfoMap.contains(tempName))
+                            {
+                                DeviceInfoMap[tempName] += ",";
+                                DeviceInfoMap[tempName] += lst[ind+1].mid(0, spaceIndex);
+                            }
+                            else {
+                                DeviceInfoMap[tempName] = lst[ind+1].mid(0, spaceIndex);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+                DeviceInfoMap[name] = line.mid(index+1).trimmed();
             continue;
         }
     }
@@ -1378,12 +1420,67 @@ bool DeviceInfoParser::loadHwinfoDatabase()
             continue;
         }
 
-
-
         deviceName = line.trimmed();
     }
 
     toolDatabase_[hwinfoToolname] = hwinfoDatabase_;
+    return true;
+}
+
+bool DeviceInfoParser::loadLpstatDatabase()
+{
+    // lpstat -l -p
+    if( false == executeProcess("sudo lpstat -l -p") )
+    {
+        return false;
+    }
+
+    QString lpstatOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile lpstatFile("./deviceInfo/lpstat.txt");
+    if( false == lpstatFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+
+    lpstatOut = lpstatFile.readAll();
+    lpstatFile.close();
+#endif
+
+    DatabaseMap lpstatDatabase_;
+    QMap<QString, QString> DeviceInfoMap;
+    QString deviceName;
+    int startIndex = 0;
+
+    for( int i = 0; i < lpstatOut.size(); ++i )
+    {
+        if( lpstatOut[i] != '\n' && i != lpstatOut.size() -1)
+        {
+            continue;
+        }
+
+        QString line = lpstatOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if( i == lpstatOut.size() -1 || line.trimmed().isEmpty() )
+        {
+            if(deviceName.isEmpty() == false)
+            {
+                lpstatDatabase_[deviceName] = DeviceInfoMap;
+            }
+
+            DeviceInfoMap.clear();
+            deviceName = "";
+            continue;
+        }
+
+        if( line.startsWith(Devicetype_lpstat_4Space) || line.startsWith(Devicetype_lpstat_Tab) )
+        {
+
+        }
+    }
+
+    toolDatabase_[lpstatToolname] = lpstatDatabase_;
     return true;
 }
 

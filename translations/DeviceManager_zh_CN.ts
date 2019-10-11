@@ -12,8 +12,8 @@
             <translation>设备管理器</translation>
         </message>
         <message>
-            <source>Device Manager is a gadget for viewing device information.</source>
-            <translation>设备管理器是一款查看设备信息的小工具．</translation>
+            <source>Device Manager is gadget for viewing device information.</source>
+            <translation>设备管理器是查看设备信息的小工具．</translation>
         </message>
                 <message>
             <source>Computer Overview</source>
@@ -370,14 +370,6 @@
         <message>
             <source>Export to File</source>
             <translation>导出到文件</translation>
-        </message>
-        <message>
-            <source>Attach</source>
-            <translation>安装</translation>
-        </message>
-        <message>
-            <source>Detach</source>
-            <translation>拆卸</translation>
         </message>
     </context>
 </TS>

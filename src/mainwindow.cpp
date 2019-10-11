@@ -92,7 +92,7 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new OtherInputdeviceWidget(this));
     addDeviceWidget(new PowerWidget(this));
     addDeviceWidget(new OtherPciDeviceWidget(this));
-    addDeviceWidget(new PortWidget(this));
+    //addDeviceWidget(new PortWidget(this));
 
     firstAdd_ = false;
     QApplication::restoreOverrideCursor();

@@ -61,10 +61,6 @@ void DeviceInfoWidgetBase::initContextMenu()
     QAction* exportAction = new QAction(DApplication::translate("Main", "Export to File"));
     connect(exportAction, &QAction::triggered, this, &DeviceInfoWidgetBase::onExportToFile);
     contextMenu_->addAction(exportAction);
-
-
-    contextMenu_->addAction(new QAction(DApplication::translate("Main", "Attach"),this));
-    contextMenu_->addAction(new QAction(DApplication::translate("Main", "Detach"),this));
 }
 
 void DeviceInfoWidgetBase::DeviceInfoWidgetBase::setTitle(const QString& title)
@@ -141,7 +137,7 @@ void DeviceInfoWidgetBase::addInfo(const QStringList& names, const QStringList& 
     downWidget_->setFixedHeight( increaseHeight );
 }
 
-void DeviceInfoWidgetBase::addLinefeed()
+void DeviceInfoWidgetBase::addInfo(const QList<ArticleStruct> articles)
 {
 
 }
@@ -225,29 +221,32 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
         tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
         tableWidget_->horizontalHeader()->setFrameShadow(QFrame::Shadow::Sunken);
+
+        tableWidget_->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
+        tableWidget_->setSelectionMode(QAbstractItemView::SingleSelection);
+
+        tableWidget_->verticalHeader()->setVisible(false);
+        tableWidget_->setGridStyle( Qt::PenStyle::NoPen);
+        tableWidget_->setShowGrid(false);
+
+        tableWidget_->setAlternatingRowColors(true);
+        tableWidget_->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+        tableWidget_->setFrameShape(QFrame::Shape::NoFrame);
     }
 
     tableWidget_->setRowCount(contentsList.size());
     tableWidget_->setColumnCount(headers.size());
-
-    tableWidget_->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
-    tableWidget_->setSelectionMode(QAbstractItemView::SingleSelection);
-
-    tableWidget_->verticalHeader()->setVisible(false);
-    tableWidget_->setGridStyle( Qt::PenStyle::NoPen);
-    tableWidget_->setShowGrid(false);
-
     tableWidget_->setHorizontalHeaderLabels(headers);
-    tableWidget_->resizeRowsToContents();
-    tableWidget_->horizontalHeader()->setSectionResizeMode(headers.size() - 2, QHeaderView::Stretch);
+
+    //tableWidget_->horizontalHeader()->setSectionResizeMode(headers.size() - 2, QHeaderView::Stretch);
     tableWidget_->horizontalHeader()->setDefaultAlignment(Qt::AlignmentFlag::AlignLeft);
-    tableWidget_->setColumnWidth(0, 100);
-    tableWidget_->setColumnWidth(1, 220);
-    tableWidget_->setColumnWidth(2, 140);
-    tableWidget_->setColumnWidth(3, 100);
-    tableWidget_->setColumnWidth(4, 50);
-    tableWidget_->setAlternatingRowColors(true);
-    tableWidget_->setEditTriggers(QAbstractItemView::NoEditTriggers);
+//    tableWidget_->setColumnWidth(0, 100);
+//    tableWidget_->setColumnWidth(1, 220);
+//    tableWidget_->setColumnWidth(2, 140);
+//    tableWidget_->setColumnWidth(3, 100);
+//    tableWidget_->setColumnWidth(4, 50);
+
 
     vLayout_->insertWidget(0, tableWidget_);
 
@@ -263,7 +262,11 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     }
 
     tableWidget_->clearSpans();
-    tableWidget_->setFrameShape(QFrame::Shape::NoFrame);
+
+    //tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
+    tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableWidget_->resizeColumnsToContents();
+    tableWidget_->resizeRowsToContents();
 }
 
 void DeviceInfoWidgetBase::addStrecch()

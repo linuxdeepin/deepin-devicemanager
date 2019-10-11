@@ -8,6 +8,21 @@
 #include "DLabel"
 #include "deviceattributedefine.h"
 
+struct TableHeader
+{
+    QString head;
+    int length;
+};
+
+struct ArticleStruct
+{
+    QString name;
+    QString value;
+
+    bool autoHide = true;
+};
+
+
 class QLabel;
 class QVBoxLayout;
 class TableWidgetAlwaysFocus;
@@ -18,8 +33,6 @@ struct DeviceInfo
     QList<Dtk::Widget::DLabel*>  nameLabels;
     QList<Dtk::Widget::DLabel*>  contentLabels;
 };
-
-//enum class ExportFileType{ Txt, Doc, Xls, Html, Invalid};
 
 class DeviceInfoWidgetBase : public QWidget
 {
@@ -32,19 +45,21 @@ public:
 
     void initContextMenu();
 
+    // version1.0
+
     void setTitle(const QString& title);
     void addInfo(const QStringList& names, const QStringList& contents);
-    void addLinefeed();
+    void addInfo(const QList<ArticleStruct> articles);
+
     void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
+    void createTable();
+
     void addStrecch();
     void initDownWidget();
     QString getDeviceName();
 
-    virtual void deviceListClicked(){ }
-
-protected:
-    void focusOutEvent(QFocusEvent */*event*/) override{}//disable lostfocus
+    virtual void deviceListClicked(){}
 
 protected:
     virtual void contextMenuEvent(QContextMenuEvent *event) override;

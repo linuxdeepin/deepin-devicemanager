@@ -8,8 +8,5 @@ class AudiodeviceWidget : public DeviceInfoWidgetBase
 public:
     explicit AudiodeviceWidget(QWidget *parent = nullptr);
     void initWidget() override;
-signals:
-
-public slots:
 };
 
