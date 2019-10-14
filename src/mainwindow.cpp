@@ -21,7 +21,7 @@
 #include "powerwidget.h"
 #include <QStandardItemModel>
 #include "otherpcidevice.h"
-#include "portwidget.h"
+#include "printerwidget.h"
 #include "deviceinfoparser.h"
 #include "DApplication"
 
@@ -91,8 +91,8 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new UsbdeviceWidget(this));
     addDeviceWidget(new OtherInputdeviceWidget(this));
     addDeviceWidget(new PowerWidget(this));
+    addDeviceWidget(new PrinterWidget(this));
     addDeviceWidget(new OtherPciDeviceWidget(this));
-    //addDeviceWidget(new PortWidget(this));
 
     firstAdd_ = false;
     QApplication::restoreOverrideCursor();
@@ -142,4 +142,5 @@ void MainWindow::refreshDatabase()
     DeviceInfoParserInstance.loadHciconfigDatabase();
     DeviceInfoParserInstance.loadLsusbDatabase();
     DeviceInfoParserInstance.loadHwinfoDatabase();
+    DeviceInfoParserInstance.loadCupsDatabase();
 }

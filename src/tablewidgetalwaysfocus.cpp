@@ -69,7 +69,7 @@ void TableWidgetAlwaysFocus::showEvent(QShowEvent *event)
 {
     DTableWidget::showEvent(event);
     //setFocus(Qt::FocusReason::OtherFocusReason);
-    setCurrentItem(nullptr);
+    //setCurrentItem(nullptr);
 }
 
 void TableWidgetAlwaysFocus::enterEvent(QEvent *event)

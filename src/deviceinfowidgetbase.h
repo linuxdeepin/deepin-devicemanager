@@ -8,6 +8,11 @@
 #include "DLabel"
 #include "deviceattributedefine.h"
 
+class QLabel;
+class QVBoxLayout;
+class TableWidgetAlwaysFocus;
+class QGridLayout;
+
 struct TableHeader
 {
     QString head;
@@ -21,11 +26,6 @@ struct ArticleStruct
 
     bool autoHide = true;
 };
-
-
-class QLabel;
-class QVBoxLayout;
-class TableWidgetAlwaysFocus;
 
 struct DeviceInfo
 {
@@ -46,29 +46,33 @@ public:
     void initContextMenu();
 
     // version1.0
+    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents);
+    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles);
 
     void setTitle(const QString& title);
     void addInfo(const QStringList& names, const QStringList& contents);
-    void addInfo(const QList<ArticleStruct> articles);
+    void addInfo(const QList<ArticleStruct>& articles);
 
     void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
+    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
+
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
-    void createTable();
 
     void addStrecch();
     void initDownWidget();
+
     QString getDeviceName();
 
-    virtual void deviceListClicked(){}
+    virtual void deviceListClicked();
 
 protected:
     virtual void contextMenuEvent(QContextMenuEvent *event) override;
 
 public slots:
+    void OnCurrentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous);
     bool onExportToFile();
 
 private:
-    bool writeToTextStream(QTextStream& ts);
     virtual bool exportToTxt(const QString& txtFile);
     virtual bool exportToDoc(const QString& docFile);
     virtual bool exportToXls(const QString& xlsFile);
@@ -77,7 +81,7 @@ private:
 protected:
     QString deviceName_ = "DeviceInfoWidgetBase";
 
-    TableWidgetAlwaysFocus* tableWidget_ = nullptr;
+    Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
     DeviceInfo* titleInfo_ = nullptr;
     QList<DeviceInfo> deviceInfos_;
 
@@ -87,8 +91,13 @@ protected:
     QVBoxLayout* downWidgetLayout = nullptr;
     Dtk::Widget::DMenu* contextMenu_ = nullptr;
 
+    Dtk::Widget::DWidget* infoWidget_ = nullptr;
+    QList<Dtk::Widget::DWidget*> subinfoWidgetList_;
+
     static bool isTitleFontInit_;
     static QFont titleFont_;
     static bool isSubTitleFontInit_;
     static QFont subTitleFont_;
+
+    int currentRow_ = -1;//-1 for whole info
 };

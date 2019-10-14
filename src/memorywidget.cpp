@@ -9,8 +9,7 @@ DWIDGET_USE_NAMESPACE
 
 MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Memory"))
 {
-    initWidget();
-    connect(tableWidget_, &DTableWidget::currentItemChanged, this, &MemoryWidget::OnCurrentItemChanged);
+    initWidget();    
 }
 
 void MemoryWidget::initWidget()
@@ -18,7 +17,6 @@ void MemoryWidget::initWidget()
     initTableWdiget();
     updateWholeDownWidget();
 }
-
 
 void MemoryWidget::initTableWdiget()
 {
@@ -41,7 +39,7 @@ void MemoryWidget::initTableWdiget()
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Size"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Type"),
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
-            (  rankStr == DApplication::translate("Main", "Unknown")\
+            (  rankStr == DApplication::translate("Main", "Unknown")    \
             || rankStr ==  "Unknown" ) ? DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
         };
 
@@ -62,18 +60,19 @@ void MemoryWidget::updateWholeDownWidget()
                         };
 
     QString memSize = DeviceInfoParserInstance.qureyData("lshw", "Computer_core_memory", "size");
-    memSize.replace("GiB", " GB");
+    memSize.replace( "GiB", " GB" );
+
     QStringList contents = {
         DeviceInfoParserInstance.qureyData("dmidecode", "Physical Memory Array", "Number Of Devices"),
         memSize,
         DeviceInfoParserInstance.qureyData("dmidecode", "Physical Memory Array", "Maximum Capacity"),
-        canUpgrade_?DApplication::translate("Main", "Yes"):DApplication::translate("Main", "No")
+        canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No")
     };
 
     addInfo(names, contents);
 
     QStringList subNames = {    DApplication::translate("Main", "Vendor"),
-                                 DApplication::translate("Main", "Size"),
+                                DApplication::translate("Main", "Size"),
                                 DApplication::translate("Main", "Type"),
                                 DApplication::translate("Main", "Speed"),
                                 DApplication::translate("Main", "Serial Number"),
@@ -86,10 +85,10 @@ void MemoryWidget::updateWholeDownWidget()
     foreach(const QString& mem, memList)
     {
         QString rank = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
-        if(rank == DApplication::translate("Main", "Unknown") || rank == "Unknown" )
-        {
-            continue;
-        }
+//        if(rank == DApplication::translate("Main", "Unknown") || rank == "Unknown" )
+//        {
+//            continue;
+//        }
 
         QStringList contents = {
             DeviceInfoParserInstance.qureyData("dmidecode", mem, "Manufacturer"),
@@ -110,7 +109,7 @@ void MemoryWidget::updateDownWidget(const QString& currentChannel)
 {
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
     QStringList subNames = {    DApplication::translate("Main", "Vendor"),
-                                 DApplication::translate("Main", "Size"),
+                                DApplication::translate("Main", "Size"),
                                 DApplication::translate("Main", "Type"),
                                 DApplication::translate("Main", "Speed"),
                                 DApplication::translate("Main", "Serial Number"),
@@ -143,58 +142,59 @@ void MemoryWidget::updateDownWidget(const QString& currentChannel)
     }
 }
 
-void MemoryWidget::deviceListClicked()
-{
-    if(-1 == currentRow_)
-    {
-        return;
-    }
+//void MemoryWidget::deviceListClicked()
+//{
+//    if(-1 == currentRow_)
+//    {
+//        return;
+//    }
 
-    currentRow_ = -1;
-    if(downWidgetScrollArea_)
-    {
-        deviceInfos_.clear();
-        titleInfo_->nameLabels.clear();
-        titleInfo_->contentLabels.clear();
-        vLayout_->removeWidget(downWidgetScrollArea_);
-        delete downWidget_;
-        delete downWidgetScrollArea_;
-        downWidgetScrollArea_ = nullptr;
-    }
+//    currentRow_ = -1;
 
-    initDownWidget();
-    updateWholeDownWidget();
-    tableWidget_->setCurrentItem(nullptr);
-    return;
-}
+//    if(downWidgetScrollArea_)
+//    {
+//        deviceInfos_.clear();
+//        titleInfo_->nameLabels.clear();
+//        titleInfo_->contentLabels.clear();
+//        vLayout_->removeWidget( downWidgetScrollArea_ );
+//        delete downWidget_;
+//        delete downWidgetScrollArea_;
+//        downWidgetScrollArea_ = nullptr;
+//    }
 
-void MemoryWidget::OnCurrentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous)
-{
-    if(current == nullptr)
-    {
-        return;
-    }
+//    initDownWidget();
+//    updateWholeDownWidget();
+//    tableWidget_->setCurrentItem(nullptr);
+//    return;
+//}
 
-    int row = current->row();
+//void MemoryWidget::OnCurrentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous)
+//{
+//    if(current == nullptr)
+//    {
+//        return;
+//    }
 
-    if(row == currentRow_)
-    {
-        return;
-    }
+//    int row = current->row();
 
-    if(downWidgetScrollArea_)
-    {
-        deviceInfos_.clear();
-        titleInfo_->nameLabels.clear();
-        titleInfo_->contentLabels.clear();
-        vLayout_->removeWidget(downWidgetScrollArea_);
-        delete downWidget_;
-        delete downWidgetScrollArea_;
-        downWidgetScrollArea_ = nullptr;
-    }
+//    if(row == currentRow_)
+//    {
+//        return;
+//    }
 
-    currentRow_ = row;
-    QString memroy = tableWidget_->item( row, 0 )->text();
-    initDownWidget();
-    updateDownWidget( memroy );
-}
+//    if(downWidgetScrollArea_)
+//    {
+//        deviceInfos_.clear();
+//        titleInfo_->nameLabels.clear();
+//        titleInfo_->contentLabels.clear();
+//        vLayout_->removeWidget(downWidgetScrollArea_);
+//        delete downWidget_;
+//        delete downWidgetScrollArea_;
+//        downWidgetScrollArea_ = nullptr;
+//    }
+
+//    currentRow_ = row;
+//    QString memroy = tableWidget_->item( row, 0 )->text();
+//    initDownWidget();
+//    updateDownWidget( memroy );
+//}

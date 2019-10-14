@@ -1,15 +1,15 @@
-#include "portwidget.h"
+#include "printerwidget.h"
 #include "deviceinfoparser.h"
 #include <DApplication>
 
 DWIDGET_USE_NAMESPACE
 
-PortWidget::PortWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Ports"))
+PrinterWidget::PrinterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Printer"))
 {
     initWidget();
 }
 
-void PortWidget::initWidget()
+void PrinterWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
 
@@ -19,7 +19,7 @@ void PortWidget::initWidget()
                             DApplication::translate("Main", "Capabilities")
                         };
 
-    QStringList portsList = DeviceInfoParserInstance.getPortsList();
+    QStringList portsList = DeviceInfoParserInstance.getPrinterList();
 
     foreach(const QString& device, portsList)
     {

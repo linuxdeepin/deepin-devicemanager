@@ -53,7 +53,7 @@ const QString lspciToolname = "lspci";
 const QString hciconfigToolname = "hciconfig";
 const QString hwinfoToolname = "hwinfo";
 const QString lpstatToolname = "lpstat";
-
+const QString CupsName = "Cups";
 
 typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
 
@@ -84,7 +84,7 @@ public:
 
     QStringList getOtherInputdeviceList();
     QStringList getOtherPciDeviceList();
-    QStringList getPortsList();
+    QStringList getPrinterList();
     
     // get os
     bool getOSInfo(QString& osInfo);
@@ -112,6 +112,9 @@ public:
     bool loadHwinfoDatabase();
     // lpstat
     bool loadLpstatDatabase();
+    // cups
+    bool loadCupsDatabase();
+
 
 public:
     bool executeProcess(const QString& cmd);

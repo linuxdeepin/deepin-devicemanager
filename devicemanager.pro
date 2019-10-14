@@ -26,6 +26,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+QMAKE_CXXFLAGS += `cups-config --cflags` `cups-config --libs`
+
+LIBS += -lcups
+
 CONFIG += c++11
 CONFIG += link_pkgconfig
 PKGCONFIG += xcb xcb-util dtkwidget dtkwm dframeworkdbus
@@ -66,9 +70,9 @@ SOURCES += \
     src/otherinputdevicewidget.cpp \
     src/powerwidget.cpp \
     src/otherpcidevice.cpp \
-    src/portwidget.cpp \
     src/tablewidgetalwaysfocus.cpp \
-    src/logpasswordauth.cpp
+    src/logpasswordauth.cpp \
+    src/printerwidget.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -96,9 +100,9 @@ HEADERS += \
     src/mousewidget.h \
     src/usbdevicewidget.h \
     src/otherpcidevice.h \
-    src/portwidget.h \
     src/tablewidgetalwaysfocus.h \
-    src/logpasswordauth.h
+    src/logpasswordauth.h \
+    src/printerwidget.h
 
 
 # Default rules for deployment.
