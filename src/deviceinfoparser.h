@@ -3,6 +3,7 @@
 #include <QMap>
 #include <QString>
 #include "singletondef.h"
+#include "deviceattributedefine.h"
 
 const QString Deviceype_Computer = "Computer";
 const QString Devicetype_Name = "Name";
@@ -43,20 +44,7 @@ const QString Devicetype_HwInfo_Currentresolution = "Current Resolution";
 const QString Devicetype_lpstat_4Space = "    ";
 const QString Devicetype_lpstat_Tab = "\t";
 
-const QString dmidecodeToolName = "dmidecode";
-const QString lshwToolname = "lshw";
-const QString lscpuToolname = "lscpu";
-const QString smartctlToolname = "smartctl";
-const QString catInputToolname = "catinput";
-const QString xrandrToolname = "xrandr";
-const QString lspciToolname = "lspci";
-const QString hciconfigToolname = "hciconfig";
-const QString hwinfoToolname = "hwinfo";
-const QString lpstatToolname = "lpstat";
-const QString CupsName = "Cups";
-
 typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
-
 
 class DeviceInfoParser
 {
@@ -64,9 +52,17 @@ public:
     Declare_Singleton(DeviceInfoParser);
 
 public:
-    const QString& qureyData(const QString& toolname, const QString& firstKey, const QString& secondKey);
+    bool isToolSuccess(const QString& toolname);
+
+    const QString& queryData(const QString& toolname, const QString& firstKey, const QString& secondKey);
     const QString& fuzzyQueryData(const QString& toolname, const QString& firstKey, const QString& secondKey);
 
+    bool fuzzeyQueryKey(const QString& toolname, const QString& fuzzeyKey, QString& key);
+
+    bool queryDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles);
+    bool queryRemainderDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles, const QSet<QString>& existArticles);
+
+    QStringList getCpuList();
     QStringList getMemorynameList();
     QStringList getDisknameList();
     QStringList getDiaplayadapterList();
@@ -94,6 +90,8 @@ public:
     bool loadLshwDatabase();
     // lscpu parse
     bool loadLscpuDatabase();
+    // cat proc/cpu
+    bool loadCatcpuDatabase();
     // smartctl www.smartmontools.org get disk info
     bool loadSmartctlDatabase(const QString& diskLogical);
     // cat /proc/bus/input/devices
@@ -106,7 +104,7 @@ public:
     bool loadLspciDatabase();
     // hciconfig
     bool loadHciconfigDatabase();
-    // lsusb
+    // lsusbss
     bool loadLsusbDatabase();
     // hwinfo
     bool loadHwinfoDatabase();
@@ -114,7 +112,6 @@ public:
     bool loadLpstatDatabase();
     // cups
     bool loadCupsDatabase();
-
 
 public:
     bool executeProcess(const QString& cmd);

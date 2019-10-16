@@ -31,9 +31,9 @@ void CameraWidget::initWidget()
     foreach(const QString& device, cameraList)
     {
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("lshw", device, "product"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "capabilities")
+            DeviceInfoParserInstance.queryData("lshw", device, "product"),
+            DeviceInfoParserInstance.queryData("lshw", device, "vendor"),
+            DeviceInfoParserInstance.queryData("lshw", device, "capabilities")
         };
 
         addSubInfo( "", cameraNames, contents);

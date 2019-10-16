@@ -30,10 +30,10 @@ void OtherInputdeviceWidget::initWidget()
     foreach(const QString& device, otherInputdeviceList)
     {
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("lshw", device, "description"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "product"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "capabilities"),
+            DeviceInfoParserInstance.queryData("lshw", device, "description"),
+            DeviceInfoParserInstance.queryData("lshw", device, "product"),
+            DeviceInfoParserInstance.queryData("lshw", device, "vendor"),
+            DeviceInfoParserInstance.queryData("lshw", device, "capabilities"),
         };
 
         addSubInfo( "", names, contents);

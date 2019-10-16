@@ -3,7 +3,7 @@
 #include "DMainWindow"
 #include "dwidgetstype.h"
 
-class DeviceListWidget;
+class DeviceListView;
 class DeviceInfoWidgetBase;
 
 class MainWindow : public Dtk::Widget::DMainWindow
@@ -15,10 +15,11 @@ public:
 
     void addAllDeviceinfoWidget();
     void addDeviceWidget(DeviceInfoWidgetBase* w);
+    void insertDeviceWidget(int index, DeviceInfoWidgetBase* w);
     void refresh();
     void refreshDatabase();
 private:
-    DeviceListWidget* leftDeviceList_ = nullptr;
+    DeviceListView* leftDeviceView_ = nullptr;
     Dtk::Widget::DStackedWidget* rightDeviceInfoWidget_ = nullptr;
 
     QMap<QString, DeviceInfoWidgetBase*> deviceInfoWidgetMap_;//widgetname　- widget

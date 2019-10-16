@@ -31,16 +31,16 @@ void UsbdeviceWidget::initWidget()
 
     foreach(const QString& device, usbdeviceList)
     {
-        QString name = DeviceInfoParserInstance.qureyData("lshw", device, "product");
+        QString name = DeviceInfoParserInstance.queryData("lshw", device, "product");
         if(name == DApplication::translate("Main", "Unknown"))
         {
-            name = DeviceInfoParserInstance.qureyData("lshw", device, "description");
+            name = DeviceInfoParserInstance.queryData("lshw", device, "description");
         }
         QStringList contents = {
             name,
-            DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "capabilities"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "configuration")
+            DeviceInfoParserInstance.queryData("lshw", device, "vendor"),
+            DeviceInfoParserInstance.queryData("lshw", device, "capabilities"),
+            DeviceInfoParserInstance.queryData("lshw", device, "configuration")
         };
 
         addSubInfo( "", names, contents);

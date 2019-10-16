@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "devicelistwidget.h"
+#include "devicelistview.h"
 #include <QHBoxLayout>
 #include "DStackedWidget"
 
@@ -27,6 +27,8 @@
 
 DWIDGET_USE_NAMESPACE
 
+QList<ArticleStruct> staticArticles;
+
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
@@ -41,20 +43,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ly->setSizeConstraint(QLayout::SetMaximumSize);
     setFocus(Qt::FocusReason::NoFocusReason);
 
-    leftDeviceList_ = new DeviceListWidget(this);
-    leftDeviceList_->setMinimumWidth(150);
+    leftDeviceView_ = new DeviceListView(this);
+    leftDeviceView_->setMinimumWidth(150);
 
-    ly->addWidget(leftDeviceList_);
+    ly->addWidget(leftDeviceView_);
 
     rightDeviceInfoWidget_ = new DStackedWidget(mainWidget);
     //rightDeviceInfoWidget_->setAutoFillBackground(false);
 
     addAllDeviceinfoWidget();
 
-    connect(leftDeviceList_, &DListView::clicked, [this](const QModelIndex& index)
-            {
-                deviceInfoWidgetMap_[index.data().toString()]->deviceListClicked();
-                rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[index.data().toString()]);
+    connect(leftDeviceView_, &DeviceListView::clicked, [this](const QModelIndex& index)
+                {
+                    deviceInfoWidgetMap_[index.data().toString()]->deviceListClicked();
+                    rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[index.data().toString()]);
             }
     );
 
@@ -72,10 +74,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::addAllDeviceinfoWidget()
 {
+    staticArticles.clear();
+
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     refreshDatabase();
 
-    addDeviceWidget(new ComputerOverviewWidget(this));
+    auto overviewWidget = new ComputerOverviewWidget(this);
+    addDeviceWidget(overviewWidget);
+
     addDeviceWidget(new CpuWidget(this));
     addDeviceWidget(new MotherboardWidget(this));
     addDeviceWidget(new MemoryWidget(this));
@@ -84,15 +90,23 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new MonitorWidget(this));
     addDeviceWidget(new AudiodeviceWidget(this));
     addDeviceWidget(new NetworkadapterWidget(this));
+
+    leftDeviceView_->addSeperator();
+
     addDeviceWidget(new BluetoothWidget(this));
     addDeviceWidget(new CameraWidget(this));
     addDeviceWidget(new MouseWidget(this));
     addDeviceWidget(new KeyboardWidget(this));
     addDeviceWidget(new UsbdeviceWidget(this));
-    addDeviceWidget(new OtherInputdeviceWidget(this));
     addDeviceWidget(new PowerWidget(this));
     addDeviceWidget(new PrinterWidget(this));
+
+    leftDeviceView_->addSeperator();
+
+    addDeviceWidget(new OtherInputdeviceWidget(this));
     addDeviceWidget(new OtherPciDeviceWidget(this));
+
+    overviewWidget->setOverviewInfos(staticArticles);
 
     firstAdd_ = false;
     QApplication::restoreOverrideCursor();
@@ -102,23 +116,41 @@ void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w)
 {
     if(firstAdd_ == true)
     {
-        leftDeviceList_->addDevice(w->getDeviceName(), ":images/cpu.svg");
+        leftDeviceView_->addDevice(w->getDeviceName(), ":images/cpu.svg");
+    }
+
+    ArticleStruct overviweInfo;
+    if( true == w->getOverViewInfo(overviweInfo))
+    {
+        staticArticles.push_back(overviweInfo);
     }
 
     rightDeviceInfoWidget_->addWidget(w);
     deviceInfoWidgetMap_[w->getDeviceName()] = w;
 }
 
+void MainWindow::insertDeviceWidget(int index, DeviceInfoWidgetBase* w)
+{
+    if(firstAdd_ == true)
+    {
+        leftDeviceView_->addDevice(w->getDeviceName(), ":images/cpu.svg");
+    }
+
+    rightDeviceInfoWidget_->insertWidget(index, w);
+    rightDeviceInfoWidget_->setCurrentWidget(w);
+    deviceInfoWidgetMap_[w->getDeviceName()] = w;
+}
+
 void MainWindow::refresh()
 {
-    QString currentDevice = leftDeviceList_->currentIndex().data().toString();
+    //QString currentDevice = leftDeviceList_->currentIndex().data().toString();
 
     QMap<QString, DeviceInfoWidgetBase*> oldWidgetMap;
     std::swap(deviceInfoWidgetMap_, oldWidgetMap);
 
     addAllDeviceinfoWidget();
 
-    rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);
+    //rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);
 
     foreach(const QString& widgetName, oldWidgetMap.keys())
     {
@@ -133,6 +165,7 @@ void MainWindow::refreshDatabase()
     DeviceInfoParserInstance.getOSInfo(osInfo);
     DeviceInfoParserInstance.loadDemicodeDatabase();
     DeviceInfoParserInstance.loadLshwDatabase();
+    DeviceInfoParserInstance.loadCatcpuDatabase();
     DeviceInfoParserInstance.loadLscpuDatabase();
     //DeviceInfoParserInstance.loadSmartctlDatabase();
     DeviceInfoParserInstance.loadCatInputDatabase();

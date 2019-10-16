@@ -22,7 +22,44 @@ DCORE_USE_NAMESPACE
 
 static QProcess process_;
 
-const QString& DeviceInfoParser::qureyData(const QString& toolname, const QString& firstKey, const QString& secondKey)
+bool DeviceInfoParser::isToolSuccess(const QString& toolname)
+{
+    if(false == toolDatabase_.contains(toolname))
+    {
+        return false;
+    }
+
+    foreach( auto map, toolDatabase_[toolname])
+    {
+        if( map.size() > 0 )
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool DeviceInfoParser::fuzzeyQueryKey(const QString& toolname, const QString& fuzzeyKey, QString& key)
+{
+    if(false == toolDatabase_.contains(toolname))
+    {
+        return false;
+    }
+
+    foreach(auto toolKey, toolDatabase_[toolname].keys() )
+    {
+        if( toolKey.contains(fuzzeyKey) )
+        {
+            key = toolKey;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+const QString& DeviceInfoParser::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey)
 {
     static QString result = DApplication::translate("Main", "Unknown");
     if(false == toolDatabase_.contains(toolname))
@@ -66,6 +103,73 @@ const QString& DeviceInfoParser::fuzzyQueryData(const QString& toolname, const Q
     }
 
     return result;
+}
+
+bool DeviceInfoParser::queryDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles)
+{
+    if(false == toolDatabase_.contains(toolname))
+    {
+        return false;
+    }
+
+    if(false == toolDatabase_[toolname].contains(deviceName))
+    {
+        return false;
+    }
+
+    foreach( auto key, toolDatabase_[toolname][deviceName].keys())
+    {
+        ArticleStruct article;
+        article.name = key;
+        article.value = toolDatabase_[toolname][deviceName][key];
+        articles.push_back(article);
+    }
+
+    return true;
+}
+
+bool DeviceInfoParser::queryRemainderDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles, const QSet<QString>& existArticles)
+{
+    if(false == toolDatabase_.contains(toolname))
+    {
+        return false;
+    }
+
+    if(false == toolDatabase_[toolname].contains(deviceName))
+    {
+        return false;
+    }
+
+    foreach( auto key, toolDatabase_[toolname][deviceName].keys())
+    {
+        if(existArticles.contains(key))
+        {
+            continue;
+        }
+
+        ArticleStruct article(key, true);
+        article.value = toolDatabase_[toolname][deviceName][key];
+        articles.push_back(article);
+    }
+
+    return true;
+}
+
+QStringList DeviceInfoParser::getCpuList()
+{
+    QStringList catcpuList;
+
+    if(false == toolDatabase_.contains("catcpu"))
+    {
+        return catcpuList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["catcpu"].keys() )
+    {
+        catcpuList.push_back(fk);
+    }
+
+    return catcpuList;
 }
 
 QStringList DeviceInfoParser::getMemorynameList()
@@ -119,14 +223,14 @@ QStringList DeviceInfoParser::getDiaplayadapterList()
 {
     QStringList displayadapterList;
 
-    if(false == toolDatabase_.contains("lspci"))
+    if(false == toolDatabase_.contains("lshw"))
     {
         return displayadapterList;
     }
 
-    foreach(const QString& fk, toolDatabase_["lspci"].uniqueKeys() )
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
-        if( fk.contains("VGA compatible controller") )
+        if( fk.endsWith("display") )
         {
             displayadapterList.push_back(fk);
         }
@@ -653,7 +757,7 @@ bool DeviceInfoParser::loadDemicodeDatabase()
         }
     }
 
-    toolDatabase_[dmidecodeToolName] = dimdecodeDatabase_;
+    toolDatabase_["dmidecode"] = dimdecodeDatabase_;
     return  true;
 }
 
@@ -808,7 +912,7 @@ bool DeviceInfoParser::loadLshwDatabase()
         lshwDatabase_[deviceTypeName] = DeviceInfoMap;
     }
 
-    toolDatabase_[lshwToolname] = lshwDatabase_;
+    toolDatabase_["lshw"] = lshwDatabase_;
     return true;
 }
 
@@ -853,8 +957,71 @@ bool DeviceInfoParser::loadLscpuDatabase()
     }
 
     DatabaseMap rootlscuDb;
-    rootlscuDb[lscpuToolname] = lscpuDatabase_;
-    toolDatabase_[lscpuToolname] = rootlscuDb;
+    rootlscuDb["lscpu"] = lscpuDatabase_;
+    toolDatabase_["lscpu"] = rootlscuDb;
+    return true;
+}
+
+bool DeviceInfoParser::loadCatcpuDatabase()
+{
+    if( false == executeProcess("cat /proc/cpuinfo"))
+    {
+        return false;
+    }
+
+    QString catCpuOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile inputDeviceFile("./deviceInfo/catcpu.txt");
+    if( false == inputDeviceFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+    catCpuOut = inputDeviceFile.readAll();
+    inputDeviceFile.close();
+#endif
+
+    // cat /proc/bus/input/devices
+    DatabaseMap catcpuDatabase_;
+
+    QMap<QString, QString> DeviceInfoMap;
+    int startIndex = 0;
+    QString cpuName;
+
+    for( int i = 0; i < catCpuOut.size(); ++i )
+    {
+         if( catCpuOut[i] != '\n')
+         {
+             continue;
+         }
+
+         QString line = catCpuOut.mid(startIndex, i - startIndex);
+         startIndex = i + 1;
+
+         if( line.trimmed().isEmpty() && false == cpuName.isEmpty() )
+         {
+             catcpuDatabase_[cpuName] = DeviceInfoMap;
+             DeviceInfoMap.clear();
+             cpuName = "";
+             continue;
+         }
+
+         int index = line.indexOf(":");
+         if(index > 0)
+         {
+            QString name = line.mid(0, index).trimmed();
+            DeviceInfoMap[name] = line.mid(index+1).trimmed();
+            if(name == "processor")
+            {
+                cpuName = line.mid(index+1).trimmed();
+            }
+         }
+    }
+
+    if( false == cpuName.isEmpty() )
+    {
+        catcpuDatabase_[cpuName] = DeviceInfoMap;
+    }
+    toolDatabase_["catcpu"] = catcpuDatabase_;
     return true;
 }
 
@@ -906,7 +1073,7 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
 
     DatabaseMap rootsmartctlDb;
     rootsmartctlDb[diskLogical] = smartctlDatabase_;
-    toolDatabase_[smartctlToolname] = rootsmartctlDb;
+    toolDatabase_["smartctl"] = rootsmartctlDb;
 
     return true;
 }
@@ -1000,7 +1167,7 @@ bool DeviceInfoParser::loadCatInputDatabase()
          }
     }
 
-    toolDatabase_[catInputToolname] = catInputDeviceDatabase_;
+    toolDatabase_["catinput"] = catInputDeviceDatabase_;
     return true;
 }
 
@@ -1033,7 +1200,6 @@ bool DeviceInfoParser::loadXrandrDatabase()
 
     for( int i = 0; i < xrandrOut.size(); ++i )
     {
-
         if( xrandrOut[i] != '\n' && i != xrandrOut.size() -1)
         {
             continue;
@@ -1113,7 +1279,7 @@ bool DeviceInfoParser::loadXrandrDatabase()
         }
     }
 
-    toolDatabase_[xrandrToolname] = xrandrDatabase_;
+    toolDatabase_["xrandr"] = xrandrDatabase_;
     return true;
 }
 
@@ -1229,7 +1395,7 @@ bool DeviceInfoParser::loadLspciDatabase()
         }
     }
 
-    toolDatabase_[lspciToolname] = lspciDatabase_;
+    toolDatabase_["lspci"] = lspciDatabase_;
     return true;
 }
 
@@ -1304,7 +1470,7 @@ bool DeviceInfoParser::loadHciconfigDatabase()
         }
     }
 
-    toolDatabase_[hciconfigToolname] = hciconfigDatabase_;
+    toolDatabase_["hciconfig"] = hciconfigDatabase_;
     return true;
 }
 
@@ -1421,7 +1587,7 @@ bool DeviceInfoParser::loadHwinfoDatabase()
         deviceName = line.trimmed();
     }
 
-    toolDatabase_[hwinfoToolname] = hwinfoDatabase_;
+    toolDatabase_["hwinfo"] = hwinfoDatabase_;
     return true;
 }
 
@@ -1478,7 +1644,7 @@ bool DeviceInfoParser::loadLpstatDatabase()
         }
     }
 
-    toolDatabase_[lpstatToolname] = lpstatDatabase_;
+    toolDatabase_["lpstat"] = lpstatDatabase_;
     return true;
 }
 
@@ -1491,7 +1657,7 @@ void showDetailedInfo(cups_dest_t *dest, const char* option, QMap<QString, QStri
           ipp_attribute_t *finishings = cupsFindDestSupported(CUPS_HTTP_DEFAULT, dest, info, option);
           int i, count = ippGetCount(finishings);
 
-          std::cout << option << " support" << std::endl;
+          //std::cout << option << " support" << std::endl;
           for (i = 0; i < count; i ++)
           {
               if(option == CUPS_FINISHINGS || option == CUPS_COPIES /*|| option == CUPS_MEDIA */|| \
@@ -1507,7 +1673,7 @@ void showDetailedInfo(cups_dest_t *dest, const char* option, QMap<QString, QStri
                       DeviceInfoMap[option] = QString::number(ippGetInteger(finishings, i));
                   }
 
-                    std::cout << option<<" : "<<ippGetInteger(finishings, i)  << std::endl;
+                  //std::cout << option<<" : "<<ippGetInteger(finishings, i)  << std::endl;
               }
               else
               {
@@ -1521,13 +1687,13 @@ void showDetailedInfo(cups_dest_t *dest, const char* option, QMap<QString, QStri
                       DeviceInfoMap[option] = ippGetString(finishings, i, nullptr);
                   }
 
-                  std::cout << option<<" : " << ippGetString(finishings, i, nullptr) << std::endl;
+                  //std::cout << option<<" : " << ippGetString(finishings, i, nullptr) << std::endl;
               }
           }
     }
     else
     {
-        std::cout << option << " not supported." << std::endl;
+        //std::cout << option << " not supported." << std::endl;
     }
 }
 
@@ -1573,7 +1739,7 @@ bool DeviceInfoParser::loadCupsDatabase()
 
     cupsEnumDests(CUPS_DEST_FLAGS_NONE, 1000, nullptr, 0, 0, getDestInfo, &cupsDatabase);
 
-    toolDatabase_[CupsName] = cupsDatabase;
+    toolDatabase_["Cups"] = cupsDatabase;
     return true;
 }
 

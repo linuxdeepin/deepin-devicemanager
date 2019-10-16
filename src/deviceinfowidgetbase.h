@@ -19,14 +19,6 @@ struct TableHeader
     int length;
 };
 
-struct ArticleStruct
-{
-    QString name;
-    QString value;
-
-    bool autoHide = true;
-};
-
 struct DeviceInfo
 {
     Dtk::Widget::DLabel* title = nullptr;
@@ -39,7 +31,8 @@ class DeviceInfoWidgetBase : public QWidget
     Q_OBJECT
 public:
     explicit DeviceInfoWidgetBase(QWidget *parent = nullptr, const QString& deviceName = "");
-    virtual ~DeviceInfoWidgetBase();
+
+    virtual bool getOverViewInfo(ArticleStruct& info);
 
     virtual void initWidget() = 0;
 
@@ -52,6 +45,7 @@ public:
     void setTitle(const QString& title);
     void addInfo(const QStringList& names, const QStringList& contents);
     void addInfo(const QList<ArticleStruct>& articles);
+    void addInfo(const QString& name, const QString& value);
 
     void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
     void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
@@ -79,8 +73,6 @@ private:
     virtual bool exportToHtml(const QString& htmlFile);
 
 protected:
-    QString deviceName_ = "DeviceInfoWidgetBase";
-
     Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
     DeviceInfo* titleInfo_ = nullptr;
     QList<DeviceInfo> deviceInfos_;
@@ -100,4 +92,6 @@ protected:
     static QFont subTitleFont_;
 
     int currentRow_ = -1;//-1 for whole info
+
+    ArticleStruct overviewInfo_;
 };

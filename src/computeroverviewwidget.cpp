@@ -13,129 +13,143 @@ ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent) : DeviceInfoWidg
 
 void ComputerOverviewWidget::initWidget()
 {
-    setTitle(DApplication::translate("Main", "Computer Overview"));
+    setTitle( "Computer Overview" );
 
-    QStringList names = {   DApplication::translate("Main", "Model"),
-                            DApplication::translate("Main", "Operating System"),
-                            " ",
-                            DApplication::translate("Main", "CPU"),
-                            DApplication::translate("Main", "Motherboard"),
-                            DApplication::translate("Main", "Memory"),
-                            DApplication::translate("Main", "Disk"),
-                            DApplication::translate("Main", "DisplayAdapter"),
-                            DApplication::translate("Main", "Monitor"),
-                            DApplication::translate("Main", "AudioAdapter"),
-                            DApplication::translate("Main", "NetworkAdapter")
-                        };
-    QString pName = DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Product Name");
-    QString ver = DeviceInfoParserInstance.qureyData("dmidecode", "System Information", "Version");
-    QString model = pName + " " + ver;
+    QList<ArticleStruct> articles;
+
+    ArticleStruct model("Model");
+    QString pName = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Product Name");
+    QString ver = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Version");
+    model.value = pName + " " + ver;
     if(ver.contains("Not Specified", Qt::CaseInsensitive) )
     {
-        model = pName;
+        model.value = pName;
     }
-
-    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW
-                                                                //  Version: ThinkCentre M910t-N000
+    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000
     {
-        model = ver;
+        model.value = ver;
     }
+    articles.push_back(model);
 
-    QString os;
-    DeviceInfoParserInstance.getOSInfo(os);
+    QStringList names = {
+                            " ",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "AudioAdapter",
+                            "",
+                            "Bluetooth",
+                            "Camera",
+                            "Usb Device",
+                            "Keyboard",
+                            "Mouse",
+                            "Other Inputdevice",
+                            "Power",
+                            "Printer",
+                            "Other Inputdevice"
+                        };
+
+
+    ArticleStruct os("Operating System");
+    DeviceInfoParserInstance.getOSInfo(os.value);
+    articles.push_back(os);
+
     QString chipsetFamily = DeviceInfoParserInstance.fuzzyQueryData("lspci", "ISA bridge", "Subsystem");
     QRegExp rx("^[\\s\\S]*\\(([\\S]*)\\)$");
     if( rx.exactMatch(chipsetFamily) )
     {
         chipsetFamily = "(" + rx.cap(1)+" "+DApplication::translate("Main", "Chipset Family") + ")";
     }
+    ArticleStruct motherboard("Motherboard");
+    motherboard.value =  DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Manufacturer") \
+            + " " + DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Product Name") + chipsetFamily;
+    articles.push_back(motherboard);
 
-    QString motherboard =  DeviceInfoParserInstance.qureyData("dmidecode", "Base Board Information", "Manufacturer") \
-            + " " + DeviceInfoParserInstance.qureyData("dmidecode", "Base Board Information", "Product Name") + chipsetFamily;
-
-    QString cpu = DeviceInfoParserInstance.qureyData("lscpu", "lscpu", "Model name");
-    cpu.remove(" CPU", Qt::CaseInsensitive);
-
-    QString memory = DeviceInfoParserInstance.qureyData("lshw", "Computer_core_memory", "size");
-    memory.replace("GiB","GB");
+    ArticleStruct memory("Memory");
+    memory.value  = DeviceInfoParserInstance.queryData("lshw", "Computer_core_memory", "size");
+    memory.value.replace("GiB","GB");
 
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
     QStringList detailMem;
     foreach(const QString& mem, memList)
     {
-        QString rank = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
+        QString rank = DeviceInfoParserInstance.queryData("dmidecode", mem, "Rank");
         if(rank == DApplication::translate("Main", "Unknown")|| rank == "Unknown" )
         {
             continue;
         }
 
-        auto vendor = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Manufacturer");
+        auto vendor = DeviceInfoParserInstance.queryData("dmidecode", mem, "Manufacturer");
         vendor += " ";
-        vendor += DeviceInfoParserInstance.qureyData("dmidecode", mem, "Type");
+        vendor += DeviceInfoParserInstance.queryData("dmidecode", mem, "Type");
         vendor += " ";
-        vendor += DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed");
+        vendor += DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed");
         if( false == detailMem .contains(vendor) )
         {
             detailMem.push_back(vendor);
         }
     }
-
     if(detailMem.size() > 0)
     {
-        memory += " (";
-        memory += detailMem.join("/");
-        memory += ")";
+        memory.value += " (";
+        memory.value += detailMem.join("/");
+        memory.value += ")";
     }
+    articles.push_back(memory);
 
-    QString disk;
+    ArticleStruct disk("Disk");
     QStringList diskList = DeviceInfoParserInstance.getDisknameList();
     if(diskList.size() > 0)
     {
         QString primaryDisk = diskList[0];
-        disk = DeviceInfoParserInstance.qureyData("lshw", primaryDisk, "product");
-        disk += " (";
-        QString diskSize = DeviceInfoParserInstance.qureyData("lshw", primaryDisk, "size");
+        disk.value = DeviceInfoParserInstance.queryData("lshw", primaryDisk, "product");
+        disk.value += " (";
+        QString diskSize = DeviceInfoParserInstance.queryData("lshw", primaryDisk, "size");
         diskSize.replace("GiB","GB");
         QRegExp reg("^[\\s\\S]*\\(([\\s\\S]+)\\)$");
         if(reg.exactMatch(diskSize))
         {
-            disk += reg.cap(1);
+            disk.value += reg.cap(1);
         }
         else
-            disk += diskSize;
-        disk += ")";
+            disk.value += diskSize;
+        disk.value += ")";
     }
+    articles.push_back(disk);
 
-    QString displayAdapter;
-        QStringList displayadapterList = DeviceInfoParserInstance.getDiaplayadapterList();
+    ArticleStruct displayAdapter("DisplayAdapter");
+    QStringList displayadapterList = DeviceInfoParserInstance.getDiaplayadapterList();
     if(displayadapterList.size() > 0)
     {
-        displayAdapter = DeviceInfoParserInstance.qureyData("lspci", displayadapterList[0], "Name");
-        displayAdapter.remove(" Corporation", Qt::CaseInsensitive);
-        int index = displayAdapter.indexOf('(');
+        displayAdapter = DeviceInfoParserInstance.queryData("lspci", displayadapterList[0], "Name");
+        displayAdapter.value.remove(" Corporation", Qt::CaseInsensitive);
+        int index = displayAdapter.value.indexOf('(');
         if(index > 0)
         {
-            displayAdapter = displayAdapter.mid(0, index);
+            displayAdapter = displayAdapter.value.mid(0, index);
         }
 
-        displayAdapter += " (";
-        displayAdapter += DeviceInfoParserInstance.qureyData("lspci", displayadapterList[0], "Memory");
-        QString manufacturer = DeviceInfoParserInstance.qureyData("lspci", displayadapterList[0], "Subsystem").split(" ").first();
+        displayAdapter.value += " (";
+        displayAdapter.value += DeviceInfoParserInstance.queryData("lspci", displayadapterList[0], "Memory");
+        QString manufacturer = DeviceInfoParserInstance.queryData("lspci", displayadapterList[0], "Subsystem").split(" ").first();
         if(DApplication::translate("Main", "Unknown") != manufacturer)
         {
-            displayAdapter += " / ";
-            displayAdapter += manufacturer;
+            displayAdapter.value += " / ";
+            displayAdapter.value += manufacturer;
         }
 
-        displayAdapter += ")";
+        displayAdapter.value += ")";
     }
+    articles.push_back(displayAdapter);
 
-
-    QString monitor;
+    ArticleStruct monitor("Monitor");
     QStringList monitorList = DeviceInfoParserInstance.getMonitorList();
     if(monitorList.size() > 0)
     {
-        QString vendor = DeviceInfoParserInstance.qureyData("hwinfo", monitorList[0], "Vendor");
+        QString vendor = DeviceInfoParserInstance.queryData("hwinfo", monitorList[0], "Vendor");
         QString abb;
         QRegExp rx("(^[\\s\\S]*)\"([\\s\\S]+)\"$");
         if( rx.exactMatch(vendor) )
@@ -144,52 +158,83 @@ void ComputerOverviewWidget::initWidget()
             vendor = rx.cap(2).trimmed();
         }
 
-        monitor = DeviceInfoParserInstance.qureyData("hwinfo", monitorList[0], "Model");
-        monitor = monitor.remove("\"");
-        monitor.remove(abb);
+        monitor = DeviceInfoParserInstance.queryData("hwinfo", monitorList[0], "Model");
+        monitor = monitor.value.remove("\"");
+        monitor.value.remove(abb);
 
-        QString size = DeviceInfoParserInstance.qureyData("hwinfo", monitorList[0], "Size");
+        QString size = DeviceInfoParserInstance.queryData("hwinfo", monitorList[0], "Size");
         QRegExp re("^([\\d]*)x([\\d]*) mm$");
         if( re.exactMatch(size) )
         {
             double width = re.cap(1).toDouble()/2.54;
             double height = re.cap(2).toDouble()/2.54;
             double inch = std::sqrt(width*width + height*height)/10.0;
-            monitor += " (";
-            monitor += QString::number(inch,10, 1);
-            monitor += " " + DApplication::translate("Main", "inch");
-            monitor += ")";
+            monitor.value += " (";
+            monitor.value += QString::number(inch,10, 1);
+            monitor.value += " " + DApplication::translate("Main", "inch");
+            monitor.value += ")";
         }
         else
         {
-            monitor += " (";
-            monitor += size;
-            monitor += ")";
+            monitor.value += " (";
+            monitor.value += size;
+            monitor.value += ")";
         }
     }
+    articles.push_back(monitor);
 
-    QString networkAdapter;
+    ArticleStruct networkAdapter("NetworkAdapter");
     QStringList networkadapterList = DeviceInfoParserInstance.getNetworkadapterList();
     if(networkadapterList.size() > 0)
     {
-        networkAdapter = DeviceInfoParserInstance.qureyData("lshw", networkadapterList[0], "vendor");
-        networkAdapter += " ";
-        networkAdapter += DeviceInfoParserInstance.qureyData("lshw", networkadapterList[0], "product");
+        networkAdapter = DeviceInfoParserInstance.queryData("lshw", networkadapterList[0], "vendor");
+        networkAdapter.value += " ";
+        networkAdapter.value += DeviceInfoParserInstance.queryData("lshw", networkadapterList[0], "product");
     }
 
-    QStringList contents = {
-        model,
-        os,
-        " ",
-        cpu,
-        motherboard,
-        memory,
-        disk,
-        displayAdapter,
-        monitor,
-        DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Name"),
-        networkAdapter,
-    };
+//    QStringList contents = {
+//        model,
+//        os,
+//        " ",
+//        cpu,
+//        motherboard,
+//        memory,
+//        disk,
+//        displayAdapter,
+//        monitor,
+//        DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Name"),
+//        networkAdapter,
+//    };
 
-    addInfo( names, contents);
+    //addInfo( names, contents);
+}
+
+void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& others )
+{
+    setTitle( "Computer Overview" );
+
+    QList<ArticleStruct> articles;
+
+    ArticleStruct model("Model");
+    QString pName = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Product Name");
+    QString ver = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Version");
+    model.value = pName + " " + ver;
+    if(ver.contains("Not Specified", Qt::CaseInsensitive) )
+    {
+        model.value = pName;
+    }
+    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000
+    {
+        model.value = ver;
+    }
+    articles.push_back(model);
+
+
+    ArticleStruct os("Operating System");
+    DeviceInfoParserInstance.getOSInfo(os.value);
+    articles.push_back(os);
+
+    articles.append(others);
+
+    addInfo(others);
 }

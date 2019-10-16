@@ -29,17 +29,17 @@ void PowerWidget::initWidget()
     foreach(const QString& device, switchingpowerList)
     {
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("lshw", device, "product"),
+            DeviceInfoParserInstance.queryData("lshw", device, "product"),
             DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_==0? "Never" \
                 : QString::number(DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_) + " Secs",
             DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_==0? "Never" \
                 : QString::number(DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_) + " Secs",
             DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_==0? "Never" \
                 : QString::number(DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_) + " Secs",
-            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Manufacturer"),
-            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Max Power Capacity"),
-            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Status"),
-            DeviceInfoParserInstance.qureyData("dmidecode", "System Power Supply", "Type")
+            DeviceInfoParserInstance.queryData("dmidecode", "System Power Supply", "Manufacturer"),
+            DeviceInfoParserInstance.queryData("dmidecode", "System Power Supply", "Max Power Capacity"),
+            DeviceInfoParserInstance.queryData("dmidecode", "System Power Supply", "Status"),
+            DeviceInfoParserInstance.queryData("dmidecode", "System Power Supply", "Type")
         };
         if(bNeedSetTitle)
         {
@@ -68,17 +68,17 @@ void PowerWidget::initWidget()
     foreach(const QString& device, batteryList)
     {
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("lshw", device, "product"),
+            DeviceInfoParserInstance.queryData("lshw", device, "product"),
             DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? "Never" \
                 : QString::number(DeviceInfoParserInstance.batteryScreenSuspendDelay_) + " Secs",
             DeviceInfoParserInstance.batteryComputerSuspendDelay_==0? "Never" \
                 : QString::number(DeviceInfoParserInstance.batteryComputerSuspendDelay_) + " Secs",
             DeviceInfoParserInstance.batteryAutoLockScreenDelay_==0? "Never" \
                 : QString::number(DeviceInfoParserInstance.batteryAutoLockScreenDelay_) + " Secs",
-            DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "slot"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "capacity"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "configuration")
+            DeviceInfoParserInstance.queryData("lshw", device, "vendor"),
+            DeviceInfoParserInstance.queryData("lshw", device, "slot"),
+            DeviceInfoParserInstance.queryData("lshw", device, "capacity"),
+            DeviceInfoParserInstance.queryData("lshw", device, "configuration")
         };
 
         if(bNeedSetTitle)

@@ -21,24 +21,24 @@ void MemoryWidget::initWidget()
 void MemoryWidget::initTableWdiget()
 {
     canUpgrade_ = false;
-    QStringList headers = {DApplication::translate("Main", "Bank"),  DApplication::translate("Main", "Size"), DApplication::translate("Main", "Type"),DApplication::translate("Main", "Speed"), DApplication::translate("Main", "Statu")};
-    QList<QStringList> tabList;
+    QStringList headers = { "Bank",  "Size", "Type", "Speed", "Statu"};
 
+    QList<QStringList> tabList;
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
     foreach(const QString& mem, memList)
     {
-        QString rank = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
+        QString rank = DeviceInfoParserInstance.queryData("dmidecode", mem, "Rank");
         if(rank == DApplication::translate("Main", "Unknown") || rank == "Unknown" )
         {
             canUpgrade_ = true;
         }
 
-        QString rankStr = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
+        QString rankStr = DeviceInfoParserInstance.queryData("dmidecode", mem, "Rank");
         QStringList tab = {
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Locator"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Size"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Type"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Size"),
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Type"),
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed"),
             (  rankStr == DApplication::translate("Main", "Unknown")    \
             || rankStr ==  "Unknown" ) ? DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
         };
@@ -53,148 +53,115 @@ void MemoryWidget::updateWholeDownWidget()
 {
     setTitle(DApplication::translate("Main", "Memory")  + DApplication::translate("Main", " Info"));
 
-    QStringList names = {   DApplication::translate("Main", "Slot"),
-                             DApplication::translate("Main", "Size"),
-                            DApplication::translate("Main", "Maximum Capacity"),
-                            DApplication::translate("Main", "Upgradeable")
+    QStringList names = {   "Slot",
+                            "Size",
+                            "Maximum Capacity",
+                            "Upgradeable"
                         };
 
-    QString memSize = DeviceInfoParserInstance.qureyData("lshw", "Computer_core_memory", "size");
+    QString memSize = DeviceInfoParserInstance.queryData("lshw", "Computer_core_memory", "size");
     memSize.replace( "GiB", " GB" );
 
     QStringList contents = {
-        DeviceInfoParserInstance.qureyData("dmidecode", "Physical Memory Array", "Number Of Devices"),
+        DeviceInfoParserInstance.queryData("dmidecode", "Physical Memory Array", "Number Of Devices"),
         memSize,
-        DeviceInfoParserInstance.qureyData("dmidecode", "Physical Memory Array", "Maximum Capacity"),
+        DeviceInfoParserInstance.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity"),
         canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No")
     };
 
     addInfo(names, contents);
 
-    QStringList subNames = {    DApplication::translate("Main", "Vendor"),
-                                DApplication::translate("Main", "Size"),
-                                DApplication::translate("Main", "Type"),
-                                DApplication::translate("Main", "Speed"),
-                                DApplication::translate("Main", "Serial Number"),
-                                DApplication::translate("Main", "Model"),
-                                DApplication::translate("Main", "Statu"),
-                                DApplication::translate("Main", "Configured Voltage")
-                        };
-
+    QList<ArticleStruct> articles;
+    QSet<QString> existArticles;
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
+    QStringList detailMem;
     foreach(const QString& mem, memList)
     {
-        QString rank = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
-//        if(rank == DApplication::translate("Main", "Unknown") || rank == "Unknown" )
-//        {
-//            continue;
-//        }
+        articles.clear();
+        existArticles.clear();
 
-        QStringList contents = {
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Manufacturer"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Size"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Type"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Serial Number"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Part Number"),
-            DApplication::translate("Main", "Good"),
-            DeviceInfoParserInstance.qureyData("dmidecode", mem, "Configured Voltage")
-        };
+        ArticleStruct vendor("Vendor");
+        vendor.queryData("dmidecode", mem, "Manufacturer");
+        articles.push_back(vendor);
+        existArticles.insert("Manufacturer");
 
-        addSubInfo(DeviceInfoParserInstance.qureyData("dmidecode", mem, "Locator"), subNames, contents);
-    }
-}
+        ArticleStruct size("Size");
+        size.queryData("dmidecode", mem, "Size");
+        articles.push_back(size);
+        existArticles.insert("Size");
 
-void MemoryWidget::updateDownWidget(const QString& currentChannel)
-{
-    QStringList memList = DeviceInfoParserInstance.getMemorynameList();
-    QStringList subNames = {    DApplication::translate("Main", "Vendor"),
-                                DApplication::translate("Main", "Size"),
-                                DApplication::translate("Main", "Type"),
-                                DApplication::translate("Main", "Speed"),
-                                DApplication::translate("Main", "Serial Number"),
-                                DApplication::translate("Main", "Model"),
-                                DApplication::translate("Main", "Statu"),
-                                DApplication::translate("Main", "Configured Voltage")
-                        };
+        ArticleStruct type("Type");
+        type.queryData("dmidecode", mem, "Type");
+        articles.push_back(type);
+        existArticles.insert("Type");
 
-    foreach(const QString& mem, memList)
-    {
-        QString locator = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Locator");
-        if(currentChannel == locator)
+        ArticleStruct speed("Speed");
+        speed.queryData("dmidecode", mem, "Speed");
+        articles.push_back(speed);
+        existArticles.insert("Speed");
+
+        ArticleStruct serial("Serial Number");
+        serial.queryData("dmidecode", mem, "Serial Number");
+        articles.push_back(serial);
+        existArticles.insert("Serial Number");
+
+        ArticleStruct model("Model");
+        model.queryData("dmidecode", mem, "Part Number");
+        articles.push_back(model);
+        existArticles.insert("Part Number");
+
+        ArticleStruct configVoltage("Configured Voltage");
+        configVoltage.queryData("dmidecode", mem, "Configured Voltage");
+        articles.push_back(configVoltage);
+        existArticles.insert("Configured Voltage");
+
+        ArticleStruct minVoltage("Minimum Voltage");
+        minVoltage.queryData("dmidecode", mem, "Minimum Voltage");
+        articles.push_back(minVoltage);
+        existArticles.insert("Minimum Voltage");
+
+        ArticleStruct maxVoltage("Maximum Voltage");
+        maxVoltage.queryData("dmidecode", mem, "Maximum Voltage");
+        articles.push_back(maxVoltage);
+        existArticles.insert("Maximum Voltage");
+
+        ArticleStruct rank("Rank");
+        rank.queryData("dmidecode", mem, "Rank");
+        articles.push_back(rank);
+        existArticles.insert("Rank");
+
+        ArticleStruct configSpeed("Configured Speed");
+        configSpeed.queryData("dmidecode", mem, "Configured Memory Speed");
+        articles.push_back(configSpeed);
+        existArticles.insert("Configured Memory Speed");
+
+
+        DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
+
+        addSubInfo(DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"), articles );
+
+        if(rank.value == DApplication::translate("Main", "Unknown")|| rank.value == "Unknown" )
         {
-            QString rank = DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank");
-            QStringList contents = {
-                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Manufacturer"),
-                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Size"),
-                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Type"),
-                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Speed"),
-                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Serial Number"),
-                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Part Number"),
-                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Rank") == "Unknown"?DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good"),
-                DeviceInfoParserInstance.qureyData("dmidecode", mem, "Configured Voltage")
-            };
+            continue;
+        }
 
-            setTitle(locator);
-            addSubInfo("", subNames, contents);
-            break;
+        QString overviewVendor = vendor.value;
+        overviewVendor += " ";
+        overviewVendor += type.value;
+        overviewVendor += " ";
+        overviewVendor += speed.value;
+
+        if( false == detailMem .contains(overviewVendor) )
+        {
+            detailMem.push_back(overviewVendor);
         }
     }
+
+    overviewInfo_.value = memSize;
+    if( detailMem.size() > 0 )
+    {
+        overviewInfo_.value += " (";
+        overviewInfo_.value += detailMem.join("/");
+        overviewInfo_.value += ")";
+    }
 }
-
-//void MemoryWidget::deviceListClicked()
-//{
-//    if(-1 == currentRow_)
-//    {
-//        return;
-//    }
-
-//    currentRow_ = -1;
-
-//    if(downWidgetScrollArea_)
-//    {
-//        deviceInfos_.clear();
-//        titleInfo_->nameLabels.clear();
-//        titleInfo_->contentLabels.clear();
-//        vLayout_->removeWidget( downWidgetScrollArea_ );
-//        delete downWidget_;
-//        delete downWidgetScrollArea_;
-//        downWidgetScrollArea_ = nullptr;
-//    }
-
-//    initDownWidget();
-//    updateWholeDownWidget();
-//    tableWidget_->setCurrentItem(nullptr);
-//    return;
-//}
-
-//void MemoryWidget::OnCurrentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous)
-//{
-//    if(current == nullptr)
-//    {
-//        return;
-//    }
-
-//    int row = current->row();
-
-//    if(row == currentRow_)
-//    {
-//        return;
-//    }
-
-//    if(downWidgetScrollArea_)
-//    {
-//        deviceInfos_.clear();
-//        titleInfo_->nameLabels.clear();
-//        titleInfo_->contentLabels.clear();
-//        vLayout_->removeWidget(downWidgetScrollArea_);
-//        delete downWidget_;
-//        delete downWidgetScrollArea_;
-//        downWidgetScrollArea_ = nullptr;
-//    }
-
-//    currentRow_ = row;
-//    QString memroy = tableWidget_->item( row, 0 )->text();
-//    initDownWidget();
-//    updateDownWidget( memroy );
-//}

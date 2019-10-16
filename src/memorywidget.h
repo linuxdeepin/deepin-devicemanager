@@ -12,14 +12,7 @@ public:
 
     void initTableWdiget();
     void updateWholeDownWidget();
-    void updateDownWidget(const QString& currentChannel);
-
-    //void deviceListClicked() override;
-
-public slots:
-    //void OnCurrentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous);
 
 private:
     bool canUpgrade_ = false;
-
 };

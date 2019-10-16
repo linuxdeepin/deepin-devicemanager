@@ -46,7 +46,7 @@ void KeyboardWidget::initWidget()
 
     foreach(const QString& device, usbdeviceList)
     {
-        QString description =DeviceInfoParserInstance.qureyData("lshw", device, "description");
+        QString description =DeviceInfoParserInstance.queryData("lshw", device, "description");
         if(false == description.contains("keyboard", Qt::CaseInsensitive))
         {
             continue;
@@ -54,9 +54,9 @@ void KeyboardWidget::initWidget()
 
         ++keyboardCount;
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("lshw", device, "product"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "vendor"),
-            DeviceInfoParserInstance.qureyData("lshw", device, "capabilities")
+            DeviceInfoParserInstance.queryData("lshw", device, "product"),
+            DeviceInfoParserInstance.queryData("lshw", device, "vendor"),
+            DeviceInfoParserInstance.queryData("lshw", device, "capabilities")
         };
 
         addSubInfo( "", names, contents);

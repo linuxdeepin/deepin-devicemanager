@@ -19,7 +19,7 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 #load device info from file
-#DEFINES += TEST_DATA_FROM_FILE
+# DEFINES += TEST_DATA_FROM_FILE
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -49,7 +49,6 @@ include(thirdlib/docx/docx.pri)
 SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
-    src/devicelistwidget.cpp \
     src/deviceinfoparser.cpp \
     src/deviceinfowidgetbase.cpp \
     src/computeroverviewwidget.cpp \
@@ -72,11 +71,12 @@ SOURCES += \
     src/otherpcidevice.cpp \
     src/tablewidgetalwaysfocus.cpp \
     src/logpasswordauth.cpp \
-    src/printerwidget.cpp
+    src/printerwidget.cpp \
+    src/devicelistview.cpp \
+    src/deviceattributedefine.cpp
 
 HEADERS += \
     src/mainwindow.h \
-    src/devicelistwidget.h \
     src/version.h \
     src/deviceinfoparser.h \
     src/deviceattributedefine.h \
@@ -102,7 +102,8 @@ HEADERS += \
     src/otherpcidevice.h \
     src/tablewidgetalwaysfocus.h \
     src/logpasswordauth.h \
-    src/printerwidget.h
+    src/printerwidget.h \
+    src/devicelistview.h
 
 
 # Default rules for deployment.

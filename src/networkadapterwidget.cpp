@@ -26,11 +26,11 @@ void NetworkadapterWidget::initWidget()
     foreach(const QString& networkadapter, networkadapterList)
     {
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("lshw", networkadapter, "description"),
-            DeviceInfoParserInstance.qureyData("lshw", networkadapter, "product"),
-            DeviceInfoParserInstance.qureyData("lshw", networkadapter, "vendor"),
-            DeviceInfoParserInstance.qureyData("lshw", networkadapter, "serial"),
-            DeviceInfoParserInstance.qureyData("lshw", networkadapter, "capacity")
+            DeviceInfoParserInstance.queryData("lshw", networkadapter, "description"),
+            DeviceInfoParserInstance.queryData("lshw", networkadapter, "product"),
+            DeviceInfoParserInstance.queryData("lshw", networkadapter, "vendor"),
+            DeviceInfoParserInstance.queryData("lshw", networkadapter, "serial"),
+            DeviceInfoParserInstance.queryData("lshw", networkadapter, "capacity")
         };
 
         addSubInfo( "", networkadapterNames, contents);

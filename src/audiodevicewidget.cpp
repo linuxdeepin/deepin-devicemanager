@@ -16,10 +16,10 @@ void AudiodeviceWidget::initWidget()
     setTitle(DApplication::translate("Main", "Audio Device")  + DApplication::translate("Main", " Info"));
 
     QStringList audioadapterNames = {
-                            DApplication::translate("Main", "Type"),
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Statu")
+                            "Type",
+                            "Name",
+                            "Vendor",
+                            "Statu"
                             };
 
     QStringList audioadapterContents = {
@@ -32,9 +32,9 @@ void AudiodeviceWidget::initWidget()
     addSubInfo("", audioadapterNames, audioadapterContents);
 
     QStringList names = {
-                            DApplication::translate("Main", "Type"),
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Vendor")
+                            "Type",
+                            "Name",
+                            "Vendor"
                             };
 
     QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceList();

@@ -40,15 +40,15 @@ void MonitorWidget::initWidget()
     for(int i = 0; i < monitorList.size(); ++i)
     {
         const QString& monitor = monitorList.at(i);
-        QString manufactureDate = DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Year of Manufacture");
+        QString manufactureDate = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Year of Manufacture");
         manufactureDate += DApplication::translate("Main", "Year");
         manufactureDate += " ";
-        manufactureDate += DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Week of Manufacture");
+        manufactureDate += DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
         manufactureDate += DApplication::translate("Main", "Week");
 
         QString monitorSize;
 
-        QString size = DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Size");
+        QString size = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Size");
         QRegExp re("^([\\d]*)x([\\d]*) mm$");
         if( re.exactMatch(size) )
         {
@@ -64,7 +64,7 @@ void MonitorWidget::initWidget()
             monitorSize += size;
         }
 
-        QString currentResolution = DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Current Resolution");
+        QString currentResolution = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Current Resolution");
         QString displayRete;
         re.setPattern("^([\\d]*)x([\\d]*)$");
         if( re.exactMatch(currentResolution) )
@@ -86,7 +86,7 @@ void MonitorWidget::initWidget()
             }
         }
 
-        QString vendor = DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Vendor");
+        QString vendor = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Vendor");
         QString abb;
         QRegExp rx("(^[\\s\\S]*)\"([\\s\\S]+)\"$");
         if( rx.exactMatch(vendor) )
@@ -95,7 +95,7 @@ void MonitorWidget::initWidget()
             vendor = rx.cap(2).trimmed();
         }
 
-        QString model = DeviceInfoParserInstance.qureyData("hwinfo", monitor, "Model");
+        QString model = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Model");
         model = model.remove("\"");
         model.remove(abb);
 

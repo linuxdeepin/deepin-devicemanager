@@ -34,11 +34,11 @@ void BluetoothWidget::initWidget()
     foreach(const QString& device, bluetoothList)
     {
         QStringList contents = {
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Name"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Manufacturer"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "BD Address"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Link policy"),
-            DeviceInfoParserInstance.qureyData("hciconfig", device, "Link mode")
+            DeviceInfoParserInstance.queryData("hciconfig", device, "Name"),
+            DeviceInfoParserInstance.queryData("hciconfig", device, "Manufacturer"),
+            DeviceInfoParserInstance.queryData("hciconfig", device, "BD Address"),
+            DeviceInfoParserInstance.queryData("hciconfig", device, "Link policy"),
+            DeviceInfoParserInstance.queryData("hciconfig", device, "Link mode")
         };
 
         addSubInfo( "", bluetoothNames, contents);

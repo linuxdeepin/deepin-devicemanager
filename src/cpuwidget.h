@@ -9,4 +9,5 @@ public:
     explicit CpuWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+    void addPrecessor(const QString& precessor);
 };
