@@ -14,8 +14,8 @@ const char DeviceType_CatDevice_Separator = '=';
 const QString Devicetype_CatDeviceSysfs = "Sysfs";
 
 const QString Devicetype_Xrandr_Screen = "Screen";
-const QString Devicetype_Xrandr_Connected = "connected";
-const QString Devicetype_Xrandr_Disconnected = "disconnected";
+const QString Devicetype_Xrandr_Connected = " connected";
+const QString Devicetype_Xrandr_Disconnected = " disconnected";
 const char Devicetype_Xrandr_Space = ' ';
 const QString Devicetype_Xrandr_Screen_Separator = ",";
 const QString Devicetype_Xrandr_Minimum = "minimum";
@@ -67,13 +67,22 @@ public:
     QStringList getDisknameList();
     QStringList getDiaplayadapterList();
     QStringList getDisplayInterfaceList();
-    QStringList getMonitorList();
-    QStringList getConnectedMonitorList();
+    QStringList getHwinfoMonitorList();
+    QStringList getXrandrMonitorList();
+    QStringList getMultimediaList();
+    QStringList getInputAudioDeviceList();
     QStringList getInputdeviceList();
     QStringList getNetworkadapterList();
     QStringList getBluetoothList();
+    QStringList getHciconfigBluetoothList();
+
     QStringList getCameraList();
     QStringList getUsbdeviceList();
+
+    QStringList getMouseInputdeviceList();
+    QStringList getMouseList();
+    QStringList getKeyboardInputdeviceList();
+    QStringList getKeyboardList();
 
     QStringList getSwitchingpowerList();
     QStringList getBatteryList();

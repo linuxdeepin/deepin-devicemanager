@@ -69,7 +69,7 @@ void MotherboardWidget::initWidget()
     articles.push_back(uuid);
     existArticles.insert("UUID");
 
-    ArticleStruct wakeupType("UUID");
+    ArticleStruct wakeupType("Wake-up Type");
     wakeupType.queryData("dmidecode", "System Information", "Wake-up Type");
     articles.push_back(wakeupType);
     existArticles.insert("Wake-up Type");

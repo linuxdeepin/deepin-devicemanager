@@ -13,63 +13,124 @@ AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(par
 
 void AudiodeviceWidget::initWidget()
 {
-    setTitle(DApplication::translate("Main", "Audio Device")  + DApplication::translate("Main", " Info"));
+    //setTitle(DApplication::translate("Main", "Audio Device")  + DApplication::translate("Main", " Info"));
 
-    QStringList audioadapterNames = {
-                            "Type",
-                            "Name",
-                            "Vendor",
-                            "Statu"
-                            };
+    QList<QStringList> tabList;
+    QList<ArticleStruct> articles;
+    QSet<QString> existArticles;
 
-    QStringList audioadapterContents = {
-                            DApplication::translate("Main", "AudioAdapter"),
-                            DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Name"),
-                            DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Subsystem"),
-                            DApplication::translate("Main", "Good")
-                            };
+    QStringList multimediaList = DeviceInfoParserInstance.getMultimediaList();
 
-    addSubInfo("", audioadapterNames, audioadapterContents);
-
-    QStringList names = {
-                            "Type",
-                            "Name",
-                            "Vendor"
-                            };
-
-    QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceList();
-    foreach(const QString& device, inputdeviceList)
+    foreach(auto multimedia, multimediaList)
     {
-        QString name = DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Name");
-        if(false == name.contains("Speaker", Qt::CaseInsensitive) && false == name.contains("Headphone", Qt::CaseInsensitive) )
+        articles.clear();
+        existArticles.clear();
+
+//        ArticleStruct type("Type");
+//        type.value = "AudioAdapter";
+//        articles.push_back(type);
+
+        ArticleStruct name("Name");
+        name.queryData( "lshw", multimedia, "product");
+        articles.push_back(name);
+        existArticles.insert("product");
+
+        ArticleStruct description("Description");
+        description.queryData("lshw", multimedia, "description");
+        articles.push_back(description);
+        existArticles.insert("description");
+
+        ArticleStruct vendor("Vendor");
+        vendor.queryData( "lshw", multimedia, "vendor");
+        articles.push_back(vendor);
+        existArticles.insert("vendor");
+
+        ArticleStruct busInfo("Bus info");
+        busInfo.queryData( "lshw", multimedia, "bus info");
+        articles.push_back(busInfo);
+        existArticles.insert("bus info");
+
+        ArticleStruct version("Version");
+        version.queryData( "lshw", multimedia, "version");
+        articles.push_back(version);
+        existArticles.insert("version");
+
+        ArticleStruct width("Width");
+        width.queryData( "lshw", multimedia, "width");
+        articles.push_back(width);
+        existArticles.insert("width");
+
+        ArticleStruct clock("Clock");
+        clock.queryData( "lshw", multimedia, "clock");
+        articles.push_back(clock);
+        existArticles.insert("clock");
+
+        ArticleStruct capabilities("Capabilities");
+        capabilities.queryData( "lshw", multimedia, "capabilities");
+        articles.push_back(capabilities);
+        existArticles.insert("capabilities");
+
+        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles);
+        addSubInfo( name.value , articles );
+
+        QStringList tab =
         {
-            continue;
+            name.value,
+            vendor.value
+        };
+
+        tabList.push_back(tab);
+
+        if( overviewInfo_.value.isEmpty() == true )
+        {
+            overviewInfo_.value = vendor.value;
+            overviewInfo_.value += " ";
+            overviewInfo_.value += name.value;
         }
-
-        name.remove("\"");
-        QStringList contents = {
-                                DApplication::translate("Main", "Speaker"),
-                                name,
-                                DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Vendor"),
-                                };
-
-        addSubInfo("", names, contents);
     }
 
+    QStringList inputdeviceList = DeviceInfoParserInstance.getInputAudioDeviceList();
     foreach(const QString& device, inputdeviceList)
     {
-        QString name = DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Name");
-        if(false == name.contains("Mic", Qt::CaseInsensitive))
-        {
-            continue;
-        }
-        name.remove("\"");
-        QStringList contents = {
-                                DApplication::translate("Main", "Microphone"),
-                                name,
-                                DeviceInfoParserInstance.fuzzyQueryData("catinput", device, "Vendor"),
-                                };
+        articles.clear();
+        existArticles.clear();
 
-        addSubInfo("", names, contents);
+        ArticleStruct name("Name");
+        name.queryData( "catinput", device, "Name");
+        name.value.remove("\"");
+        articles.push_back(name);
+        existArticles.insert("Name");
+
+        ArticleStruct vendor("Vendor");
+        vendor.queryData( "catinput", device, "Vendor");
+        articles.push_back(vendor);
+        existArticles.insert("Vendor");
+
+        ArticleStruct vesion("Version");
+        vesion.queryData( "catinput", device, "Version");
+        articles.push_back(vesion);
+        existArticles.insert("Sysfs");
+
+        ArticleStruct sysfs("Sysfs");
+        sysfs.queryData( "catinput", device, "Sysfs");
+        articles.push_back(sysfs);
+        existArticles.insert("Sysfs");
+
+        DeviceInfoParserInstance.queryRemainderDeviceInfo("catinput", device, articles, existArticles);
+        addSubInfo( name.value , articles );
+
+        QStringList tab =
+        {
+            name.value,
+            vendor.value
+        };
+
+        tabList.push_back(tab);
+    }
+
+    if( multimediaList.size() + inputdeviceList.size() > 1 )
+    {
+        QStringList headers = { "Name",  "Vendor" };
+        addTable( headers, tabList);
     }
 }

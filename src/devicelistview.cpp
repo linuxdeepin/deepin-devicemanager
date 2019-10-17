@@ -57,7 +57,7 @@ DeviceListView::DeviceListView(QWidget* parent):DListView(parent)
     setSpacing(0);
     setViewMode(QListView::ListMode);
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-    //viewport()->setAutoFillBackground(false);
+    viewport()->setAutoFillBackground(true);
 
     setFocus(Qt::FocusReason::NoFocusReason);
 

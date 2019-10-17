@@ -17,15 +17,6 @@ void DisplayadapterWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    QStringList displayadapterNames = {
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Graphic Memory"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Driver"),
-                            //DApplication::translate("Main", "Max display resolution"),
-                            DApplication::translate("Main", "Support Interface")
-                        };
-
     QStringList displayadapterList = DeviceInfoParserInstance.getDiaplayadapterList();
 
     foreach(const QString& displayadapter, displayadapterList)
@@ -83,8 +74,8 @@ void DisplayadapterWidget::initWidget()
         existArticles.insert("width");
 
         ArticleStruct clock("Clock");
-        width.queryData("lshw", displayadapter, "clock");
-        articles.push_back(width);
+        clock.queryData("lshw", displayadapter, "clock");
+        articles.push_back(clock);
         existArticles.insert("clock");
 
         ArticleStruct capabilities("Capabilities");

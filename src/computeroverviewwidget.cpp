@@ -146,7 +146,7 @@ void ComputerOverviewWidget::initWidget()
     articles.push_back(displayAdapter);
 
     ArticleStruct monitor("Monitor");
-    QStringList monitorList = DeviceInfoParserInstance.getMonitorList();
+    QStringList monitorList = DeviceInfoParserInstance.getHwinfoMonitorList();
     if(monitorList.size() > 0)
     {
         QString vendor = DeviceInfoParserInstance.queryData("hwinfo", monitorList[0], "Vendor");
@@ -191,22 +191,6 @@ void ComputerOverviewWidget::initWidget()
         networkAdapter.value += " ";
         networkAdapter.value += DeviceInfoParserInstance.queryData("lshw", networkadapterList[0], "product");
     }
-
-//    QStringList contents = {
-//        model,
-//        os,
-//        " ",
-//        cpu,
-//        motherboard,
-//        memory,
-//        disk,
-//        displayAdapter,
-//        monitor,
-//        DeviceInfoParserInstance.fuzzyQueryData("lspci", "Audio device", "Name"),
-//        networkAdapter,
-//    };
-
-    //addInfo( names, contents);
 }
 
 void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& others )
@@ -236,5 +220,5 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
 
     articles.append(others);
 
-    addInfo(others);
+    addInfo(articles);
 }

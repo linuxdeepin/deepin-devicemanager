@@ -276,7 +276,7 @@ QStringList DeviceInfoParser::getDisplayInterfaceList()
     return interfaceList;
 }
 
-QStringList DeviceInfoParser::getMonitorList()
+QStringList DeviceInfoParser::getHwinfoMonitorList()
 {
     QStringList monitorList;
 
@@ -293,7 +293,7 @@ QStringList DeviceInfoParser::getMonitorList()
     return monitorList;
 }
 
-QStringList DeviceInfoParser::getConnectedMonitorList()
+QStringList DeviceInfoParser::getXrandrMonitorList()
 {
     QStringList connectedMonitorList;
 
@@ -310,17 +310,67 @@ QStringList DeviceInfoParser::getConnectedMonitorList()
             continue;
         }
 
-        QString interface = fk.mid(0, index).trimmed();
-        index = interface.indexOf('-');
-        if( index > 0 )
-        {
-            interface = interface.mid(0, index);
-        }
+//        QString interface = fk.mid(0, index).trimmed();
+//        index = interface.indexOf('-');
+//        if( index > 0 )
+//        {
+//            interface = interface.mid(0, index);
+//        }
 
-        connectedMonitorList.push_back(interface);
+        connectedMonitorList.push_back(fk);
     }
 
     return connectedMonitorList;
+}
+
+QStringList DeviceInfoParser::getMultimediaList()
+{
+    QStringList multimediaList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return multimediaList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        if( fk.contains("multimedia") )
+        {
+            multimediaList.push_back(fk);
+        }
+    }
+
+    return multimediaList;
+}
+
+QStringList DeviceInfoParser::getInputAudioDeviceList()
+{
+    QStringList inputdeviceList;
+
+    if(false == toolDatabase_.contains("catinput"))
+    {
+        return inputdeviceList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["catinput"].uniqueKeys() )
+    {
+        if(false ==toolDatabase_["catinput"][fk].contains("Name"))
+        {
+            continue;
+        }
+
+        QString name = toolDatabase_["catinput"][fk]["Name"];
+        if(     false == name.contains("Speaker", Qt::CaseInsensitive) \
+            &&  false == name.contains("Headphone", Qt::CaseInsensitive) \
+            &&  false == name.contains("Mic", Qt::CaseInsensitive) )
+        {
+            continue;
+        }
+
+        inputdeviceList.push_back(fk);
+    }
+
+    return inputdeviceList;
 }
 
 QStringList DeviceInfoParser::getInputdeviceList()
@@ -364,12 +414,37 @@ QStringList DeviceInfoParser::getBluetoothList()
 {
     QStringList bluetoothList;
 
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return bluetoothList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].keys() )
+    {
+        if( toolDatabase_["lshw"][fk].contains("description") == false )
+        {
+            continue;
+        }
+
+        if( toolDatabase_["lshw"][fk]["description"].contains("Bluetooth", Qt::CaseInsensitive) )
+        {
+            bluetoothList.push_back(fk);
+        }
+    }
+
+    return bluetoothList;
+}
+
+QStringList DeviceInfoParser::getHciconfigBluetoothList()
+{
+    QStringList bluetoothList;
+
     if(false == toolDatabase_.contains("hciconfig"))
     {
         return bluetoothList;
     }
 
-    foreach(const QString& fk, toolDatabase_["hciconfig"].uniqueKeys() )
+    foreach(const QString& fk, toolDatabase_["hciconfig"].keys() )
     {
         bluetoothList.push_back(fk);
     }
@@ -388,15 +463,22 @@ QStringList DeviceInfoParser::getCameraList()
 
     foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
-        if(false == toolDatabase_["lshw"][fk].contains("product"))
+        if(true == toolDatabase_["lshw"][fk].contains("description"))
         {
-            continue;
+            if( toolDatabase_["lshw"][fk]["description"] == "Video" )
+            {
+                cameraList.push_back(fk);
+                continue;
+            }
         }
 
-        QString product =toolDatabase_["lshw"][fk]["product"];
-        if(product.contains("Camera", Qt::CaseInsensitive))
+        if(true == toolDatabase_["lshw"][fk].contains("product"))
         {
-            cameraList.push_back(fk);
+            if( toolDatabase_["lshw"][fk]["product"].contains("Camera", Qt::CaseInsensitive) )
+            {
+                cameraList.push_back(fk);
+                continue;
+            }
         }
     }
 
@@ -421,6 +503,122 @@ QStringList DeviceInfoParser::getUsbdeviceList()
     }
 
     return usbdeviceList;
+}
+
+QStringList DeviceInfoParser::getMouseInputdeviceList()
+{
+    QStringList inputdeviceList;
+
+    if(false == toolDatabase_.contains("catinput"))
+    {
+        return inputdeviceList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["catinput"].keys() )
+    {
+        if( false == toolDatabase_["catinput"][fk].contains("Name") )
+        {
+            continue;
+        }
+
+        if( toolDatabase_["catinput"][fk]["Name"].contains("mouse", Qt::CaseInsensitive) )
+        {
+            inputdeviceList.push_back(fk);
+        }
+    }
+
+    return inputdeviceList;
+}
+
+QStringList DeviceInfoParser::getMouseList()
+{
+    QStringList mouseList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return mouseList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        if(true == toolDatabase_["lshw"][fk].contains("description"))
+        {
+            if( toolDatabase_["lshw"][fk]["description"].contains("mouse", Qt::CaseInsensitive) )
+            {
+                mouseList.push_back(fk);
+                continue;
+            }
+        }
+
+        if(true == toolDatabase_["lshw"][fk].contains("product"))
+        {
+            if( toolDatabase_["lshw"][fk]["product"].contains("mouse", Qt::CaseInsensitive) )
+            {
+                mouseList.push_back(fk);
+                continue;
+            }
+        }
+    }
+
+    return mouseList;
+}
+
+QStringList DeviceInfoParser::getKeyboardInputdeviceList()
+{
+    QStringList inputdeviceList;
+
+    if(false == toolDatabase_.contains("catinput"))
+    {
+        return inputdeviceList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["catinput"].keys() )
+    {
+        if( false == toolDatabase_["catinput"][fk].contains("Name") )
+        {
+            continue;
+        }
+
+        if( toolDatabase_["catinput"][fk]["Name"].contains("keyboard", Qt::CaseInsensitive) )
+        {
+            inputdeviceList.push_back(fk);
+        }
+    }
+
+    return inputdeviceList;
+}
+
+QStringList DeviceInfoParser::getKeyboardList()
+{
+    QStringList keyboardList;
+
+    if(false == toolDatabase_.contains("lshw"))
+    {
+        return keyboardList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    {
+        if(true == toolDatabase_["lshw"][fk].contains("description"))
+        {
+            if( toolDatabase_["lshw"][fk]["description"].contains("keyboard", Qt::CaseInsensitive) )
+            {
+                keyboardList.push_back(fk);
+                continue;
+            }
+        }
+
+        if(true == toolDatabase_["lshw"][fk].contains("product"))
+        {
+            if( toolDatabase_["lshw"][fk]["product"].contains("keyboard", Qt::CaseInsensitive) )
+            {
+                keyboardList.push_back(fk);
+                continue;
+            }
+        }
+    }
+
+    return keyboardList;
 }
 
 QStringList DeviceInfoParser::getSwitchingpowerList()

@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     //setAutoFillBackground(false);
     DWidget* mainWidget = new DWidget(this);
-    //mainWidget->setAutoFillBackground(false);
+    mainWidget->setAutoFillBackground(true);
     mainWidget->setMaximumHeight(640);
     QHBoxLayout* ly = new QHBoxLayout;
     ly->setMargin(0);
@@ -55,7 +55,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(leftDeviceView_, &DeviceListView::clicked, [this](const QModelIndex& index)
                 {
-                    deviceInfoWidgetMap_[index.data().toString()]->deviceListClicked();
+                    QString device = index.data().toString();
+                    if( false == deviceInfoWidgetMap_.contains(device) )
+                    {
+                        return;
+                    }
+                    deviceInfoWidgetMap_[device]->deviceListClicked();
                     rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[index.data().toString()]);
             }
     );

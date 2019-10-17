@@ -40,6 +40,7 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(QWidget *parent, const QString& devic
     setMinimumHeight(WidgetHeight);
     initContextMenu();
     //setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard);
+    setAutoFillBackground(true);
 }
 
 bool DeviceInfoWidgetBase::getOverViewInfo(ArticleStruct& info)
