@@ -4,13 +4,18 @@ Device Manager is a gadget for viewing device information.
 
 ## depend on 
 * lshw
-* dmidecode
+* [dmidecode](http://www.nongnu.org/dmidecode/)
 * hciconfig
 * hwinfo
 * lsusb
 * lscpu
-* smartctl
-* xrandr
+* [smartctl](https://www.smartmontools.org/)
+* [xrandr](https://www.x.org/wiki/Projects/XRandR/)
+
+# thridparty lib
+docx
+[QtXlsx](http://qtxlsx.debao.me)
+[CPUS](https://www.cups.org/index.html)
 
 ## Installation
 
