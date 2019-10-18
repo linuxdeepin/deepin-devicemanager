@@ -118,6 +118,7 @@ DISTFILES += \
     translations/DeviceManager_zh_CN.ts
 
 # target
+target.files += thirdlib/smartmontools-7.0/smartctl
 target.path = /usr/bin/
 
 # icons
