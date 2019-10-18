@@ -146,7 +146,7 @@ void MemoryWidget::updateWholeDownWidget()
 
         addSubInfo(DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"), articles );
 
-        if(rank.value == DApplication::translate("Main", "Unknown")|| rank.value == "Unknown" )
+        if(size.value == DApplication::translate("Main", "Unknown") || size.value == "No Module Installed" )
         {
             continue;
         }
