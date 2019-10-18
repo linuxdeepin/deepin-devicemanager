@@ -11,7 +11,7 @@ Device Manager is a gadget for viewing device information.
 * lscpu
 * [smartctl](https://www.smartmontools.org/)
 * [xrandr](https://www.x.org/wiki/Projects/XRandR/)
-* [CPUS](https://www.cups.org/index.html)
+* [CUPS](https://www.cups.org/index.html)
 
 ## thridparty lib
 * docx
