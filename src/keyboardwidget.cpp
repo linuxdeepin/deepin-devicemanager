@@ -21,10 +21,10 @@ void KeyboardWidget::initWidget()
         return;
     }
 
-    if( inputdeviceList.size() + keyboardList.size() == 1)
-    {
-        setTitle(DApplication::translate("Main", "Keyboard")  + DApplication::translate("Main", " Info"));
-    }
+//    if( inputdeviceList.size() + keyboardList.size() == 1)
+//    {
+//        setTitle(DApplication::translate("Main", "Keyboard")  + DApplication::translate("Main", " Info"));
+//    }
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;

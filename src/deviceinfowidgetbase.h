@@ -91,7 +91,7 @@ protected:
     static bool isSubTitleFontInit_;
     static QFont subTitleFont_;
 
-    int currentRow_ = -1;//-1 for whole info
+    int currentRow_ = -1;   //-1 for whole info
 
     ArticleStruct overviewInfo_;
 };

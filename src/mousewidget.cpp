@@ -21,10 +21,10 @@ void MouseWidget::initWidget()
         return;
     }
 
-    if( inputdeviceList.size() + mouseList.size() == 1)
-    {
-        setTitle(DApplication::translate("Main", "Mouse")  + DApplication::translate("Main", " Info"));
-    }
+//    if( inputdeviceList.size() + mouseList.size() == 1)
+//    {
+//        setTitle(DApplication::translate("Main", "Mouse")  + DApplication::translate("Main", " Info"));
+//    }
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;

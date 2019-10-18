@@ -90,3 +90,13 @@ void DeviceListView::addSeperator()
     item->setText("Seperator");
     navModel_->appendRow(item);
 }
+
+QString DeviceListView::currentDevice()
+{
+    return currentDevice_;
+}
+
+void DeviceListView::setCurrentDevice(QString& device)
+{
+    currentDevice_ = device;
+}

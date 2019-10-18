@@ -34,6 +34,7 @@ const QString Devicetype_Lspci_prefetchable = "prefetchable";
 
 const QString Devicetype_Hciconfig_Hci = "hci";
 const QString Devicetype_Hciconfig_Multispace = "    ";
+const QString Devicetype_Hciconfig_Tab = "\t";
 
 const QString Devicetype_HwInfo_Twospace = "  ";
 const QString Devicetype_HwInfo_Fourspace = "    ";
@@ -69,15 +70,21 @@ public:
     QStringList getDisplayInterfaceList();
     QStringList getHwinfoMonitorList();
     QStringList getXrandrMonitorList();
+
     QStringList getMultimediaList();
     QStringList getInputAudioDeviceList();
+
     QStringList getInputdeviceList();
+
     QStringList getNetworkadapterList();
+
     QStringList getBluetoothList();
+
     QStringList getHciconfigBluetoothList();
 
     QStringList getCameraList();
-    QStringList getUsbdeviceList();
+
+    QStringList getOtherUsbdeviceList();
 
     QStringList getMouseInputdeviceList();
     QStringList getMouseList();
@@ -85,7 +92,9 @@ public:
     QStringList getKeyboardList();
 
     QStringList getSwitchingpowerList();
+    QStringList getDemidecodeSwitchingpowerList();
     QStringList getBatteryList();
+    QStringList getDemidecodeBatteryList();
 
     QStringList getOtherInputdeviceList();
     QStringList getOtherPciDeviceList();
