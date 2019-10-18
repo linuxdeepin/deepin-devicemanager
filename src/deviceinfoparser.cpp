@@ -332,7 +332,7 @@ QStringList DeviceInfoParser::getMultimediaList()
         return multimediaList;
     }
 
-    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    foreach(const QString& fk, toolDatabase_["lshw"].keys() )
     {
         if( fk.contains("multimedia") )
         {
@@ -485,9 +485,13 @@ QStringList DeviceInfoParser::getCameraList()
     return cameraList;
 }
 
-QStringList DeviceInfoParser::getUsbdeviceList()
+QStringList DeviceInfoParser::getOtherUsbdeviceList()
 {
     QStringList usbdeviceList;
+
+    //QStringList mouseList = getMouseList();
+    //QStringList keyboardList = getKeyboardList();
+    //QStringList cameraList = getCameraList();
 
     if(false == toolDatabase_.contains("lshw"))
     {
@@ -496,8 +500,54 @@ QStringList DeviceInfoParser::getUsbdeviceList()
 
     foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
-        if(fk.contains("usb:", Qt::CaseInsensitive))
+        if( fk.contains("usb:", Qt::CaseInsensitive) )
         {
+            if( fk.contains("multimedia") )
+            {
+                continue;
+            }
+
+            if(true == toolDatabase_["lshw"][fk].contains("description"))
+            {
+                if( toolDatabase_["lshw"][fk]["description"].contains("mouse", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["description"].contains("keyboard", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["description"] == "Video" )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["description"].contains("Bluetooth", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+            }
+
+            if(true == toolDatabase_["lshw"][fk].contains("product"))
+            {
+                if( toolDatabase_["lshw"][fk]["product"].contains("mouse", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["product"].contains("keyboard", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["product"].contains("Camera", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+            }
+
             usbdeviceList.push_back(fk);
         }
     }
@@ -539,7 +589,7 @@ QStringList DeviceInfoParser::getMouseList()
         return mouseList;
     }
 
-    foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
+    foreach(const QString& fk, toolDatabase_["lshw"].keys() )
     {
         if(true == toolDatabase_["lshw"][fk].contains("description"))
         {
@@ -641,6 +691,26 @@ QStringList DeviceInfoParser::getSwitchingpowerList()
     return switchingpowerList;
 }
 
+QStringList DeviceInfoParser::getDemidecodeSwitchingpowerList()
+{
+    QStringList switchingpowerList;
+
+    if(false == toolDatabase_.contains("dmidecode"))
+    {
+        return switchingpowerList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["dmidecode"].uniqueKeys() )
+    {
+        if(fk.contains("System Power Supply", Qt::CaseInsensitive))
+        {
+            switchingpowerList.push_back(fk);
+        }
+    }
+
+    return switchingpowerList;
+}
+
 QStringList DeviceInfoParser::getBatteryList()
 {
     QStringList batteryList;
@@ -653,6 +723,26 @@ QStringList DeviceInfoParser::getBatteryList()
     foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
         if(fk.contains("battery", Qt::CaseInsensitive))
+        {
+            batteryList.push_back(fk);
+        }
+    }
+
+    return batteryList;
+}
+
+QStringList DeviceInfoParser::getDemidecodeBatteryList()
+{
+    QStringList batteryList;
+
+    if(false == toolDatabase_.contains("dmidecode"))
+    {
+        return batteryList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["dmidecode"].uniqueKeys() )
+    {
+        if(fk.contains("Battery", Qt::CaseInsensitive))
         {
             batteryList.push_back(fk);
         }
@@ -1227,7 +1317,15 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
 {
     if( false == executeProcess("sudo smartctl --all " + diskLogical))
     {
-        return false;
+        if( false == executeProcess("sudo chmod +x smartctl") )
+        {
+            return false;
+        }
+
+        if( false == executeProcess("sudo ./smartctl --all " + diskLogical))
+        {
+            return false;
+        }
     }
 
     QString smartctlOut = standOutput_;
@@ -1643,7 +1741,7 @@ bool DeviceInfoParser::loadHciconfigDatabase()
             continue;
         }
 
-        if(line.startsWith(Devicetype_Hciconfig_Multispace))
+        if( line.startsWith(Devicetype_Hciconfig_Multispace) || line.startsWith(Devicetype_Hciconfig_Tab) )
         {
             int index = line.indexOf(Devicetype_Separator);
             if( index > 0 )

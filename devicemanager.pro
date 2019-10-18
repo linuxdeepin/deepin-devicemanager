@@ -19,7 +19,7 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 #load device info from file
-# DEFINES += TEST_DATA_FROM_FILE
+#DEFINES += TEST_DATA_FROM_FILE
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -107,12 +107,28 @@ HEADERS += \
 
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+#qnx: target.path = /tmp/$${TARGET}/bin
+#else: unix:!android: target.path = /opt/$${TARGET}/bin
+#!isEmpty(target.path): INSTALLS += target
 
 RESOURCES += app.qrc
 
 DISTFILES += \
     translations/DeviceManager.ts \
     translations/DeviceManager_zh_CN.ts
+
+# target
+target.path = /usr/bin/
+
+# icons
+icons.files += images/cpu.svg
+icons.path = /usr/share/dde-devicemanager/
+
+# desktop
+desktop.files += DeviceManager.desktop
+desktop.path = /usr/share/applications/
+
+translations.path = /usr/share/dde-devicemanager/translations
+translations.files = translations/*.qm
+
+INSTALLS += target icons desktop translations

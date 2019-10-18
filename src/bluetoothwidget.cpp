@@ -12,16 +12,6 @@ BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
 
 void BluetoothWidget::initWidget()
 {
-
-
-    QStringList bluetoothNames = {
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Mac Address"),
-                            DApplication::translate("Main", "Link Policy"),
-                            DApplication::translate("Main", "Link Mode")
-                        };
-
     QStringList bluetoothList = DeviceInfoParserInstance.getBluetoothList();
 
     if( bluetoothList.size() < 1 )

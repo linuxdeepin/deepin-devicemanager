@@ -60,8 +60,10 @@ MainWindow::MainWindow(QWidget *parent) :
                     {
                         return;
                     }
+
                     deviceInfoWidgetMap_[device]->deviceListClicked();
                     rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[index.data().toString()]);
+                    leftDeviceView_->setCurrentDevice(device);
             }
     );
 
@@ -119,13 +121,18 @@ void MainWindow::addAllDeviceinfoWidget()
 
 void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w)
 {
+    if(w == nullptr)
+    {
+        return;
+    }
+
     if(firstAdd_ == true)
     {
         leftDeviceView_->addDevice(w->getDeviceName(), ":images/cpu.svg");
     }
 
     ArticleStruct overviweInfo;
-    if( true == w->getOverViewInfo(overviweInfo))
+    if( true == w->getOverViewInfo(overviweInfo) )
     {
         staticArticles.push_back(overviweInfo);
     }
@@ -148,14 +155,17 @@ void MainWindow::insertDeviceWidget(int index, DeviceInfoWidgetBase* w)
 
 void MainWindow::refresh()
 {
-    //QString currentDevice = leftDeviceList_->currentIndex().data().toString();
+    QString currentDevice = leftDeviceView_->currentDevice();
 
     QMap<QString, DeviceInfoWidgetBase*> oldWidgetMap;
     std::swap(deviceInfoWidgetMap_, oldWidgetMap);
 
     addAllDeviceinfoWidget();
 
-    //rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);
+    if(  deviceInfoWidgetMap_.contains(currentDevice) )
+    {
+        rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);;
+    }
 
     foreach(const QString& widgetName, oldWidgetMap.keys())
     {

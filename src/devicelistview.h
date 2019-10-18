@@ -26,6 +26,10 @@ public:
     void addDevice(const QString& deviceName, const QString& iconFile);
     void addSeperator();
 
+    QString currentDevice();
+    void setCurrentDevice(QString& device);
+
 public:
     QStandardItemModel* navModel_ = nullptr;
+    QString currentDevice_;
 };
