@@ -9,7 +9,7 @@ QT       += gui-private
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = DeviceManager
+TARGET = dde-devicemanager
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -19,7 +19,7 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 #load device info from file
-#DEFINES += TEST_DATA_FROM_FILE
+# DEFINES += TEST_DATA_FROM_FILE
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -118,7 +118,6 @@ DISTFILES += \
     translations/DeviceManager_zh_CN.ts
 
 # target
-target.files += thirdlib/smartmontools-7.0/smartctl
 target.path = /usr/bin/
 
 # icons
@@ -126,7 +125,7 @@ icons.files += images/cpu.svg
 icons.path = /usr/share/dde-devicemanager/
 
 # desktop
-desktop.files += DeviceManager.desktop
+desktop.files += dde-devicemanager.desktop
 desktop.path = /usr/share/applications/
 
 translations.path = /usr/share/dde-devicemanager/translations
