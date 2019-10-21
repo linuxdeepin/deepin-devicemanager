@@ -26,11 +26,11 @@ struct DeviceInfo
     QList<Dtk::Widget::DLabel*>  contentLabels;
 };
 
-class DeviceInfoWidgetBase : public QWidget
+class DeviceInfoWidgetBase : public Dtk::Widget::DWidget
 {
     Q_OBJECT
 public:
-    explicit DeviceInfoWidgetBase(QWidget *parent = nullptr, const QString& deviceName = "");
+    explicit DeviceInfoWidgetBase(Dtk::Widget::DWidget *parent = nullptr, const QString& deviceName = "");
 
     virtual bool getOverViewInfo(ArticleStruct& info);
 
@@ -43,11 +43,11 @@ public:
     void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles);
 
     void setTitle(const QString& title);
-    void addInfo(const QStringList& names, const QStringList& contents);
+    void addInfo(const QString& title, const QStringList& names, const QStringList& contents);
     void addInfo(const QList<ArticleStruct>& articles);
     void addInfo(const QString& name, const QString& value);
 
-    void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
+    //void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
     void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
@@ -63,7 +63,7 @@ protected:
     virtual void contextMenuEvent(QContextMenuEvent *event) override;
 
 public slots:
-    void OnCurrentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous);
+    void OnCurrentItemClicked(QTableWidgetItem *item);
     bool onExportToFile();
 
 private:
@@ -94,4 +94,6 @@ protected:
     int currentRow_ = -1;   //-1 for whole info
 
     ArticleStruct overviewInfo_;
+
+    int verticalScrollBarMaxValue = 0;
 };

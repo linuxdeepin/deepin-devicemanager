@@ -57,7 +57,7 @@ void MemoryWidget::initTableWdiget()
 
 void MemoryWidget::updateWholeDownWidget()
 {
-    setTitle(DApplication::translate("Main", "Memory")  + DApplication::translate("Main", " Info"));
+    //setTitle(DApplication::translate("Main", "Memory")  + DApplication::translate("Main", " Info"));
 
     QStringList names = {   "Slot Count",
                             "Size",
@@ -75,7 +75,7 @@ void MemoryWidget::updateWholeDownWidget()
         canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No")
     };
 
-    addInfo(names, contents);
+    addInfo("", names, contents);
 
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;

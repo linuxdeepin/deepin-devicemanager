@@ -108,7 +108,7 @@ void BluetoothWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
-        addSubInfo( "", articles);
+        addSubInfo( name.value, articles);
 
         if( bluetoothList.size() > 1 )
         {

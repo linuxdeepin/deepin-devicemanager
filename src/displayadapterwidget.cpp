@@ -33,7 +33,7 @@ void DisplayadapterWidget::initWidget()
 
         QString lspciName = DeviceInfoParserInstance.fuzzyQueryData("lspci", lspciDeviceName, "bus info");
         ArticleStruct name("Name");
-        name.queryData("lshw", displayadapter, "product");
+        name.queryData("lspci", lspciDeviceName, "Name");
         name.value.remove( " Corporation", Qt::CaseInsensitive );
 
         int index = name.value.indexOf('(');
