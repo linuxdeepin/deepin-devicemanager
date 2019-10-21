@@ -30,23 +30,54 @@ void AudiodeviceWidget::initWidget()
 //        type.value = "AudioAdapter";
 //        articles.push_back(type);
 
+        ArticleStruct busInfo("Bus info");
+        busInfo.value = DeviceInfoParserInstance.queryData("lshw", multimedia, "bus info");
+        QRegExp reg("^pci@[0-9]*:([\\s\\S]*)$");
+
+        QString pci_bus;
+        if(reg.exactMatch(busInfo.value))
+        {
+            pci_bus= reg.cap(1);
+        }
+
+        QString lspciDeviceName;
+        DeviceInfoParserInstance.fuzzeyQueryKey("lspci", pci_bus, lspciDeviceName);
+
         ArticleStruct name("Name");
-        name.queryData( "lshw", multimedia, "product");
-        articles.push_back(name);
+        name.queryData("lspci", lspciDeviceName, "Name");
+        if(name.value == DApplication::translate("Main", "Unknown"))
+        {
+            name.queryData( "lshw", multimedia, "product");
+        }
+        name.value.remove( " Corporation", Qt::CaseInsensitive );
+        int index = name.value.indexOf('(');
+        if(index > 0)
+        {
+            name.value = name.value.mid(0, index);
+        }
+
+
         existArticles.insert("product");
 
         ArticleStruct description("Description");
         description.queryData("lshw", multimedia, "description");
-        articles.push_back(description);
+
         existArticles.insert("description");
 
         ArticleStruct vendor("Vendor");
         vendor.queryData( "lshw", multimedia, "vendor");
+
+        if(name.value == vendor.value)
+        {
+            name.value = description.value;
+        }
+
+        articles.push_back(name);
+        articles.push_back(description);
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct busInfo("Bus info");
-        busInfo.queryData( "lshw", multimedia, "bus info");
+
         articles.push_back(busInfo);
         existArticles.insert("bus info");
 

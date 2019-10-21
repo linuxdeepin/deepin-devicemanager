@@ -13,7 +13,7 @@ ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent) : DeviceInfoWidg
 
 void ComputerOverviewWidget::initWidget()
 {
-    setTitle( "Computer Overview" );
+    //setTitle( "Computer Overview" );
 
     QList<ArticleStruct> articles;
 
@@ -195,7 +195,7 @@ void ComputerOverviewWidget::initWidget()
 
 void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& others )
 {
-    setTitle( "Computer Overview" );
+    //setTitle( "Computer Overview" );
 
     QList<ArticleStruct> articles;
 

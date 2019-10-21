@@ -4,6 +4,7 @@
 #include <QVariant>
 #include <QPainter>
 #include <qdrawutil.h>
+#include "DApplicationHelper"
 
 DWIDGET_USE_NAMESPACE
 
@@ -29,7 +30,7 @@ QSize DeviceListviewDelegate::sizeHint(const QStyleOptionViewItem &option, const
 {
     if( index.data().toString() == "Seperator" )
     {
-        return QSize(200, 5);;
+        return QSize(option.rect.width(), 5);;
     }
     else
     {
@@ -42,44 +43,83 @@ void DeviceListviewDelegate::paintSeparator(QPainter *painter, const QStyleOptio
     painter->save();
 
     int yPoint = option.rect.top() + option.rect.height() / 2;
-    qDrawShadeLine(painter, 0, yPoint, option.rect.width(), yPoint, option.palette);
+    qDrawShadeLine(painter, 8, yPoint, option.rect.width() - 8, yPoint, option.palette);
 
     painter->restore();
 }
 
 DeviceListView::DeviceListView(QWidget* parent):DListView(parent)
 {
+    navModel_ = new QStandardItemModel(navModel_);
+
+    setVerticalScrollMode(ScrollPerPixel);
+    setIconSize(QSize(24, 24));
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+//    setMouseTracking(true);
+
+    setDragDropMode(QAbstractItemView::InternalMove);
+    setDragDropOverwriteMode(false);
+
+    setModel(navModel_);
+
+    setContextMenuPolicy(Qt::CustomContextMenu);
     setFrameShape(QFrame::Shape::NoFrame);
+
     setEditTriggers(QListView::NoEditTriggers);
     setResizeMode(QListView::Adjust);
-    setAutoScroll(false);
+    //setAutoScroll(false);
 
-    setSpacing(0);
-    setViewMode(QListView::ListMode);
-    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    //setSpacing(0);
+    //setViewMode(QListView::ListMode);
+    //setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     viewport()->setAutoFillBackground(true);
 
     setFocus(Qt::FocusReason::NoFocusReason);
 
-    navModel_ = new QStandardItemModel(navModel_);
-    setModel(navModel_);
 
     setItemDelegate( new DeviceListviewDelegate(this) );
 
-    setBackgroundType(DStyledItemDelegate::BackgroundType::ClipCornerBackground);
+    setBackgroundType(DStyledItemDelegate::BackgroundType::RoundedBackground);
     setAutoFillBackground(true);
+
+    DPalette pa = DApplicationHelper::instance()->palette(this);
+    QColor base_color = palette().base().color();
+    DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
+
+    if (ct == DGuiApplicationHelper::LightType) {
+        pa.setBrush(DPalette::ItemBackground, palette().base());
+    } else {
+        base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
+        pa.setColor(DPalette::ItemBackground, base_color);
+    }
+
+    DApplicationHelper::instance()->setPalette(this, pa);
+
+    //setMaximumWidth(150);
 }
 
 void DeviceListView::addDevice(const QString& deviceName, const QString& iconFile)
 {
     DStandardItem* item = new DStandardItem;
+    QFont itemFont = item->font();
+    itemFont.setPointSize(13);
+
+    item->setFont(itemFont);
+
     item->setIcon(QIcon(iconFile));
     item->setText(deviceName);
 
+    item->setTextAlignment(Qt::AlignLeft);
+
     const QMargins ListViweItemMargin(20,8,20,8);
+    //const QMargins ListViweItemMargin( 10, 5, 10, 5 );
     const QVariant VListViewItemMargin = QVariant::fromValue(ListViweItemMargin);
 
     item->setData(VListViewItemMargin, Dtk::MarginsRole);
+
+    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
 
     navModel_->appendRow(item);
 }

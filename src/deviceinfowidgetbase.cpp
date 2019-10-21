@@ -17,6 +17,7 @@
 #include "tablewidgetalwaysfocus.h"
 #include <QDate>
 #include "DApplication"
+#include "DApplicationHelper"
 
 DWIDGET_USE_NAMESPACE
 
@@ -30,17 +31,41 @@ static const int RowHeight_ = 25;
 static const int SubRowHeight_ = 20;
 
 static const int WidgetWidth = 640;
-static const int WidgetHeight = 480;
+static const int WidgetHeight = 770;
 
-DeviceInfoWidgetBase::DeviceInfoWidgetBase(QWidget *parent, const QString& deviceName) : QWidget(parent)
+DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent, const QString& deviceName) : QWidget(parent)
 {
+    //setStyleSheet("QWidget{border-top-left-radius:15px;border-top-right-radius:5px;}");
+
     overviewInfo_.name = deviceName;
+
     vLayout_ = new QVBoxLayout;
+
+    vLayout_->setSpacing(0);
+    vLayout_->setMargin(8);
+
+    setAutoFillBackground(false);
+
     setLayout(vLayout_);
     setMinimumHeight(WidgetHeight);
     initContextMenu();
-    //setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard);
-    setAutoFillBackground(true);
+
+    DPalette pa = DApplicationHelper::instance()->palette(this);
+    QColor base_color = palette().base().color();
+    DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
+
+    if (ct == DGuiApplicationHelper::LightType) {
+        pa.setColor(QPalette::Background, base_color);
+        pa.setBrush(DPalette::LightLively, palette().base());
+        pa.setBrush(DPalette::DarkLively, palette().base());
+        //pa.setColor(QPalette::Light, base_color);
+        //pa.setC
+    } else {
+        base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
+        pa.setColor(QPalette::Background, base_color);
+    }
+
+    DApplicationHelper::instance()->setPalette(this, pa);
 }
 
 bool DeviceInfoWidgetBase::getOverViewInfo(ArticleStruct& info)
@@ -136,6 +161,10 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
 
 void DeviceInfoWidgetBase::DeviceInfoWidgetBase::setTitle(const QString& title)
 {
+//    QStringList list;
+//    addSubInfo( title, list, list);
+    return;
+
     if(titleInfo_ && titleInfo_->title)
     {
         titleInfo_->title->setText(title);
@@ -161,10 +190,11 @@ void DeviceInfoWidgetBase::DeviceInfoWidgetBase::setTitle(const QString& title)
 
     titleInfo_->title->setText( DApplication::translate("Main", title.toStdString().data() ));
     titleInfo_->title->setFont(titleFont_);
-    vLayout_->insertWidget( vLayout_->count(), titleInfo_->title);
+
+    vLayout_->insertWidget( vLayout_->count(), titleInfo_->title );
 }
 
-void DeviceInfoWidgetBase::addInfo(const QStringList& names, const QStringList& contents)
+void DeviceInfoWidgetBase::addInfo(const QString& title, const QStringList& names, const QStringList& contents)
 {
     initDownWidget();
 
@@ -174,22 +204,27 @@ void DeviceInfoWidgetBase::addInfo(const QStringList& names, const QStringList& 
     }
 
     QHBoxLayout* hly = new QHBoxLayout;
+//    hly->setMargin(0);
+//    hly->setContentsMargins(0,0,0,0);
 
     hly->addSpacing(10);
 
     QGridLayout* gridLayout = new QGridLayout;
-    gridLayout->setSpacing(0);
-    gridLayout->setMargin(0);
-    gridLayout->setContentsMargins(0,0,0,0);
+//    gridLayout->setSpacing(0);
+//    gridLayout->setMargin(0);
+//    gridLayout->setContentsMargins(0,0,0,0);
     gridLayout->setSizeConstraint(QLayout::SizeConstraint::SetFixedSize);
     hly->addLayout(gridLayout);
 
     addLabelToGridLayout(titleInfo_, gridLayout, names, contents);
     infoWidget_ = new DWidget(this);
     infoWidget_->setLayout(hly);
-    downWidgetLayout->insertWidget(downWidgetLayout->count()-1, infoWidget_);
+    downWidgetLayout->insertWidget(downWidgetLayout->count(), infoWidget_);
 
     downWidget_->adjustSize();
+
+    verticalScrollBarMaxValue += infoWidget_->height();
+    downWidgetScrollArea_->verticalScrollBar()->setRange(0, verticalScrollBarMaxValue);
 }
 
 void DeviceInfoWidgetBase::addInfo(const QList<ArticleStruct>& articles)
@@ -202,79 +237,83 @@ void DeviceInfoWidgetBase::addInfo(const QList<ArticleStruct>& articles)
     }
 
     QHBoxLayout* hly = new QHBoxLayout;
-
+//    hly->setMargin(0);
+//    hly->setContentsMargins(0,0,0,0);
     hly->addSpacing(10);
 
     QGridLayout* gridLayout = new QGridLayout;
-    gridLayout->setSpacing(0);
-    gridLayout->setMargin(0);
-    gridLayout->setContentsMargins(0,0,0,0);
+//    gridLayout->setSpacing(0);
+//    gridLayout->setMargin(0);
+//    gridLayout->setContentsMargins(0,0,0,0);
     gridLayout->setSizeConstraint(QLayout::SizeConstraint::SetFixedSize);
     hly->addLayout(gridLayout);
 
     addLabelToGridLayout(titleInfo_, gridLayout, articles);
     infoWidget_ = new DWidget(this);
     infoWidget_->setLayout(hly);
-    downWidgetLayout->insertWidget(downWidgetLayout->count()-1, infoWidget_);
+    downWidgetLayout->insertWidget(downWidgetLayout->count(), infoWidget_);
 
     downWidget_->adjustSize();
+
+    verticalScrollBarMaxValue += infoWidget_->height();
+    downWidgetScrollArea_->verticalScrollBar()->setRange(0, verticalScrollBarMaxValue);
 }
 
-void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents)
-{
-    initDownWidget();
+//void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents)
+//{
+//    initDownWidget();
 
-    QVBoxLayout* vly = new QVBoxLayout;
-    DeviceInfo subInfo;
-    if( false == subTitle.isEmpty() )
-    {
-        subInfo.title = new DLabel(subTitle, downWidget_);
-        if(isSubTitleFontInit_== false)
-        {
-            subTitleFont_ = subInfo.title->font();
-            subTitleFont_.setBold(true);
-            isSubTitleFontInit_ = true;
-        }
+//    QVBoxLayout* vly = new QVBoxLayout;
+//    vly->setMargin(0);
+//    vly->setContentsMargins(0,0,0,0);
 
-        subInfo.title->setFont(subTitleFont_);
-        subInfo.title->setFixedHeight(RowHeight_);
-        vly->addWidget(subInfo.title);
-    }
+//    DeviceInfo subInfo;
+//    if( false == subTitle.isEmpty() )
+//    {
+//        subInfo.title = new DLabel(subTitle, downWidget_);
+//        if(isSubTitleFontInit_== false)
+//        {
+//            subTitleFont_ = subInfo.title->font();
+//            subTitleFont_.setBold(true);
+//            isSubTitleFontInit_ = true;
+//        }
 
-    QHBoxLayout* hly = new QHBoxLayout;
-    hly->addSpacing(20);
-    QGridLayout* gridLayout = new QGridLayout;
+//        subInfo.title->setFont(subTitleFont_);
+//        subInfo.title->setFixedHeight(RowHeight_);
+//        vly->addWidget(subInfo.title);
+//    }
 
-    gridLayout->setSpacing(0);
-    gridLayout->setMargin(0);
-    gridLayout->setContentsMargins(0,0,0,0);
+//    QHBoxLayout* hly = new QHBoxLayout;
+//    hly->setMargin(0);
+//    hly->setContentsMargins(0,0,0,0);
+//    hly->addSpacing(20);
+//    QGridLayout* gridLayout = new QGridLayout;
 
-    addLabelToGridLayout(&subInfo, gridLayout, names, contents);
+//    gridLayout->setSpacing(0);
+//    gridLayout->setMargin(0);
+//    gridLayout->setContentsMargins(0,0,0,0);
 
-    hly->addLayout(gridLayout);
-    vly->addLayout(hly);
-    DWidget* subInfoWidget = new DWidget(this);
-    subInfoWidget->setLayout(vly);
-    if( (titleInfo_ && titleInfo_->nameLabels.size() > 0) || deviceInfos_.size() > 0 )
-    {
-        vly->setContentsMargins(0, 20, 0, 0);
-    }
-    subinfoWidgetList_.push_back(subInfoWidget);
+//    addLabelToGridLayout(&subInfo, gridLayout, names, contents);
 
-    downWidgetLayout->insertWidget(downWidgetLayout->count()-1, subInfoWidget);
-    deviceInfos_.push_back(subInfo);
-    downWidget_->adjustSize();
-}
+//    hly->addLayout(gridLayout);
+//    vly->addLayout(hly);
+//    DWidget* subInfoWidget = new DWidget(this);
+//    subInfoWidget->setLayout(vly);
+//    if( (titleInfo_ && titleInfo_->nameLabels.size() > 0) || deviceInfos_.size() > 0 )
+//    {
+//        vly->setContentsMargins(0, 0, 0, 0);
+//    }
+//    subinfoWidgetList_.push_back(subInfoWidget);
+
+//    downWidgetLayout->insertWidget(downWidgetLayout->count()-1, subInfoWidget);
+//    deviceInfos_.push_back(subInfo);
+//    downWidget_->adjustSize();
+//}
 
 void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles)
 {
     initDownWidget();
     QVBoxLayout* vly = new QVBoxLayout;
-
-    if( (titleInfo_ && titleInfo_->nameLabels.size() > 0) || deviceInfos_.size() > 0 )
-    {
-        vly->addSpacing(20);
-    }
 
     DeviceInfo subInfo;
     if(false == subTitle.isEmpty())
@@ -293,11 +332,9 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
     }
 
     QHBoxLayout* hly = new QHBoxLayout;
+
     hly->addSpacing(20);
     QGridLayout* gridLayout = new QGridLayout;
-    gridLayout->setSpacing(0);
-    gridLayout->setMargin(0);
-    gridLayout->setContentsMargins(0,0,0,0);
 
     addLabelToGridLayout(&subInfo, gridLayout, articles);
 
@@ -306,10 +343,18 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
 
     DWidget* subInfoWidget = new DWidget(this);
     subInfoWidget->setLayout(vly);
+    if( infoWidget_ || subinfoWidgetList_.size() > 0 )
+    {
+        vly->setContentsMargins(0, 20, 0, 0);
+    }
+
     subinfoWidgetList_.push_back(subInfoWidget);
-    downWidgetLayout->insertWidget(downWidgetLayout->count()-1, subInfoWidget);
+    downWidgetLayout->insertWidget( downWidgetLayout->count(), subInfoWidget);
     deviceInfos_.push_back(subInfo);
     downWidget_->adjustSize();
+
+    verticalScrollBarMaxValue += subInfoWidget->height();
+    downWidgetScrollArea_->verticalScrollBar()->setRange(0, verticalScrollBarMaxValue);
 }
 
 void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStringList>& contentsList)
@@ -317,7 +362,8 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     if(tableWidget_ == nullptr)
     {
         tableWidget_ = new DTableWidget(this);
-        tableWidget_->setFixedHeight(150);
+        //tableWidget_->setMinimumHeight(150);
+        tableWidget_->setMaximumHeight(250);
         tableWidget_->setVerticalScrollBar(new DScrollBar(this));
         tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
         tableWidget_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
@@ -328,11 +374,37 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         //tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
         //tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
         //tableWidget_->setEnabled(true);
+        //tableWidget_->horizontalHeader()->clearMask();
+        DPalette pa = DApplicationHelper::instance()->palette(this);
+        QColor base_color = palette().base().color();
+        DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
+
+        if (ct == DGuiApplicationHelper::LightType) {
+            pa.setColor(QPalette::Background, base_color);
+            pa.setBrush(DPalette::DarkLively, palette().base());
+            pa.setBrush(DPalette::FrameBorder, palette().base());
+            pa.setColor(QPalette::Button, base_color);
+            //pa.setColor(QPalette::Link, base_color);
+            //pa.setColor(QPalette::LinkVisited, base_color);
+            //pa.setColor(QPalette::AlternateBase, base_color);
+            pa.setColor(QPalette::NoRole, base_color);
+            //pa.setColor(QPalette::NColorRoles, base_color);
+            //pa.setColor(QPalette::Light, base_color);
+            //pa.setC
+        } else {
+            base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
+            pa.setColor(QPalette::Background, base_color);
+        }
+
+        DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
+
+        tableWidget_->horizontalHeader()->setContentsMargins(0,0,0,0);
         tableWidget_->horizontalHeader()->setHighlightSections(false);
         tableWidget_->horizontalHeader()->setFrameShape(QFrame::Shape::NoFrame);
         tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
         tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
-        tableWidget_->horizontalHeader()->setFrameShadow(QFrame::Shadow::Sunken);
+        //tableWidget_->horizontalHeader()->setFrameShadow(QFrame::Shadow::Plain);
+        tableWidget_->horizontalHeader()->setAutoFillBackground(true);
 
         tableWidget_->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
         tableWidget_->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -346,10 +418,10 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         tableWidget_->setFrameShape(QFrame::Shape::NoFrame);
 
-        QItemSelectionModel *selectionModel = tableWidget_->selectionModel();
+        //QItemSelectionModel *selectionModel = tableWidget_->selectionModel();
         //selectionModel->set
 
-        connect(tableWidget_, &DTableWidget::currentItemChanged, this, &DeviceInfoWidgetBase::OnCurrentItemChanged);
+        connect(tableWidget_, &DTableWidget::itemClicked, this, &DeviceInfoWidgetBase::OnCurrentItemClicked);
     }
 
     tableWidget_->setRowCount(contentsList.size());
@@ -364,9 +436,8 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 //    tableWidget_->setColumnWidth(3, 100);
 //    tableWidget_->setColumnWidth(4, 50);
 
-
     vLayout_->insertWidget(0, tableWidget_);
-
+    vLayout_->addSpacing(8);
 
     for(int i = 0; i < contentsList.size(); ++i)
     {
@@ -388,7 +459,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
 void DeviceInfoWidgetBase::addStrecch()
 {
-    vLayout_->addStretch(1);
+    //vLayout_->addStretch(1);
 }
 
 void DeviceInfoWidgetBase::initDownWidget()
@@ -399,6 +470,8 @@ void DeviceInfoWidgetBase::initDownWidget()
     }
 
     downWidgetScrollArea_ = new DScrollArea(this);
+    //downWidgetScrollArea_->verticalScrollBar()->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
+    //setVerticalScrollMode(ScrollPerPixel);
     downWidgetScrollArea_->setFrameShape(QFrame::NoFrame);
     downWidget_ = new DWidget(downWidgetScrollArea_);
     //downWidget_->setFixedHeight(100);
@@ -408,10 +481,10 @@ void DeviceInfoWidgetBase::initDownWidget()
     downWidget_->setMinimumWidth(WidgetWidth);
     downWidgetLayout = new QVBoxLayout;
     downWidgetLayout->setMargin(0);
-    downWidgetLayout->setContentsMargins(0,0,0,0);
+    //downWidgetLayout->setContentsMargins(0, 8, 0, 0);
     downWidgetLayout->setSpacing(0);
     downWidget_->setLayout(downWidgetLayout);
-    downWidgetLayout->addStretch(1);
+    //downWidgetLayout->addStretch(1);
     downWidgetScrollArea_->setWidget(downWidget_);
     //downWidget_->setSizePolicy(QSizePolicy::Minimum);
     //downWidgetScrollArea_->setFixedHeight(100);
@@ -427,30 +500,12 @@ QString DeviceInfoWidgetBase::getDeviceName()
 
 void DeviceInfoWidgetBase::deviceListClicked()
 {
-    if(currentRow_ == -1)
+    if(downWidgetScrollArea_ == nullptr)
     {
         return;
     }
 
-    currentRow_ = -1;
-
-    if(titleInfo_ && titleInfo_->title)
-    {
-        titleInfo_->title->setVisible(true);
-    }
-
-    for(int i = 0; i < subinfoWidgetList_.size(); ++i )
-    {
-        subinfoWidgetList_.at(i)->layout()->setContentsMargins(0, 20, 0, 0);
-        subinfoWidgetList_.at(i)->setVisible(true);
-    }
-
-    if(infoWidget_)
-    {
-        infoWidget_->setVisible(true);
-    }
-
-    downWidget_->adjustSize();
+    downWidgetScrollArea_->verticalScrollBar()->setValue(0);
 }
 
 void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)
@@ -458,47 +513,28 @@ void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)
     contextMenu_->exec(event->globalPos());
 }
 
-void DeviceInfoWidgetBase::OnCurrentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous)
+void DeviceInfoWidgetBase::OnCurrentItemClicked(QTableWidgetItem *item)
 {
-    if(current == nullptr)
+    if(item == nullptr)
     {
         return;
     }
 
-    int row = current->row();
-
-    if( row == currentRow_ )
-    {
-        return;
-    }
-
-    currentRow_ = row;
-
-    if(titleInfo_ && titleInfo_->title)
-    {
-        titleInfo_->title->setVisible(false);
-    }
-
-    for(int i = 0; i < subinfoWidgetList_.size(); ++i )
-    {
-        if(row == -1 || row == i)
-        {
-            subinfoWidgetList_.at(i)->layout()->setContentsMargins(0, 0, 0, 0);
-            subinfoWidgetList_.at(i)->setVisible(true);
-        }
-        else
-        {
-            subinfoWidgetList_.at(i)->setVisible(false);
-        }
-    }
-
+    int height = 0;
     if(infoWidget_)
     {
-        infoWidget_->setVisible(row == -1);
+        height += infoWidget_->height();
     }
 
 
-    downWidget_->adjustSize();
+    int row = item->row();
+
+    for(int i = 0; i < row; ++i )
+    {
+        height += subinfoWidgetList_.at(i)->height();
+    }
+
+    downWidgetScrollArea_->verticalScrollBar()->setValue(height);
 }
 
 

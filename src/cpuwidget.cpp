@@ -92,7 +92,7 @@ void CpuWidget::initWidget()
         DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L3 cache"),
     };
 
-    addInfo( names, contents);
+    addInfo( "", names, contents);
 
     foreach(auto precessor, cpuList)
     {      

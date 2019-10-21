@@ -24,6 +24,7 @@
 #include "printerwidget.h"
 #include "deviceinfoparser.h"
 #include "DApplication"
+#include "DApplicationHelper"
 
 DWIDGET_USE_NAMESPACE
 
@@ -32,24 +33,26 @@ QList<ArticleStruct> staticArticles;
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
-    //setAutoFillBackground(false);
+    setAutoFillBackground(false);
     DWidget* mainWidget = new DWidget(this);
     mainWidget->setAutoFillBackground(true);
     mainWidget->setMaximumHeight(640);
     QHBoxLayout* ly = new QHBoxLayout;
     ly->setMargin(0);
-    ly->setContentsMargins(0, 0, 0, 0);
+    //ly->setContentsMargins(0, 0, 0, 0);
     ly->setSpacing(0);
-    ly->setSizeConstraint(QLayout::SetMaximumSize);
+    ly->setSizeConstraint(QLayout::SetMinAndMaxSize);
     setFocus(Qt::FocusReason::NoFocusReason);
 
     leftDeviceView_ = new DeviceListView(this);
-    leftDeviceView_->setMinimumWidth(150);
+    leftDeviceView_->setMaximumWidth(180);
+    leftDeviceView_->setMinimumWidth(100);
 
     ly->addWidget(leftDeviceView_);
 
+    this->setFocusProxy(leftDeviceView_);
+
     rightDeviceInfoWidget_ = new DStackedWidget(mainWidget);
-    //rightDeviceInfoWidget_->setAutoFillBackground(false);
 
     addAllDeviceinfoWidget();
 

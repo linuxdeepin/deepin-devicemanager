@@ -11,17 +11,6 @@ PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplic
 
 void PowerWidget::initWidget()
 {
-    QStringList switchingpowerNames = {
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Screen Suspend Delay"),
-                            DApplication::translate("Main", "Computer Suspend Delay"),
-                            DApplication::translate("Main", "AutoLock Screen Delay"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Max Power Capacity"),
-                            DApplication::translate("Main", "Statu"),
-                            DApplication::translate("Main", "Type")
-                        };
-
     QStringList switchingpowerList = DeviceInfoParserInstance.getSwitchingpowerList();
     QStringList demidecodeSwitchingpowerList = DeviceInfoParserInstance.getDemidecodeSwitchingpowerList();
 
