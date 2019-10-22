@@ -22,15 +22,16 @@ void UsbdeviceWidget::initWidget()
 
     if( usbdeviceList.size() < 1)
     {
-        setTitle("No Usb Device found!");
+        QStringList emptyList;
+        addInfo("No Usb Device found!", emptyList, emptyList);
         addStrecch();
         return;
     }
 
-    if( usbdeviceList.size() == 1 )
-    {
-        setTitle(DApplication::translate("Main", "Usb Device"));
-    }
+//    if( usbdeviceList.size() == 1 )
+//    {
+//        setTitle(DApplication::translate("Main", "Usb Device"));
+//    }
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;

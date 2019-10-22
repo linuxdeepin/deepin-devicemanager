@@ -22,7 +22,7 @@ MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DAp
 
 void MonitorWidget::initWidget()
 {
-    setTitle(DApplication::translate("Main", "Monitor")  + DApplication::translate("Main", " Info"));
+    //setTitle(DApplication::translate("Main", "Monitor")  + DApplication::translate("Main", " Info"));
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
@@ -151,7 +151,7 @@ void MonitorWidget::initWidget()
         }
         articles.push_back(connectType);
 
-        addSubInfo( "", articles );
+        addSubInfo( name.value, articles );
 
         if( hwinfMonitorList.size() > 1 )
         {

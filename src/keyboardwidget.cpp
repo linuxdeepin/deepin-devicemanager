@@ -16,7 +16,8 @@ void KeyboardWidget::initWidget()
 
     if( inputdeviceList.size() + keyboardList.size() < 1 )
     {
-        setTitle("No Keyboard found!");
+        QStringList emptyList;
+        addInfo("No Keyboard found!", emptyList, emptyList);
         addStrecch();
         return;
     }

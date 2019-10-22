@@ -16,7 +16,8 @@ void MouseWidget::initWidget()
 
     if( inputdeviceList.size() + mouseList.size() < 1 )
     {
-        setTitle("No Mouse found!");
+        QStringList emptyList;
+        addInfo("No Mouse found!", emptyList, emptyList);
         addStrecch();
         return;
     }

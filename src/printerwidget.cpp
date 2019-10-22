@@ -18,7 +18,8 @@ void PrinterWidget::initWidget()
 
     if( printerList.size() < 1)
     {
-        setTitle("No Printer found!");
+        QStringList emptyList;
+        addInfo("No Printer found!", emptyList, emptyList);
         addStrecch();
         return;
     }

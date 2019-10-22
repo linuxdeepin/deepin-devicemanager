@@ -39,13 +39,13 @@ public:
     void initContextMenu();
 
     // version1.0
-    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents);
-    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles);
+    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents, const QFont& font);
+    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font);
 
-    void setTitle(const QString& title);
+    //void setTitle(const QString& title);
     void addInfo(const QString& title, const QStringList& names, const QStringList& contents);
-    void addInfo(const QList<ArticleStruct>& articles);
-    void addInfo(const QString& name, const QString& value);
+    void addInfo(const QString& title, const QList<ArticleStruct>& articles);
+    //void addInfo(const QString& name, const QString& value);
 
     //void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
     void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
@@ -86,10 +86,12 @@ protected:
     Dtk::Widget::DWidget* infoWidget_ = nullptr;
     QList<Dtk::Widget::DWidget*> subinfoWidgetList_;
 
-    static bool isTitleFontInit_;
+    static bool isFontInit_;
     static QFont titleFont_;
-    static bool isSubTitleFontInit_;
     static QFont subTitleFont_;
+    static QFont infoFont_;
+    static QFont labelFont_;
+    static QFont tableContentFont_;
 
     int currentRow_ = -1;   //-1 for whole info
 

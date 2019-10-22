@@ -17,8 +17,10 @@ void OtherPciDeviceWidget::initWidget()
 
     if(otherPcideviceList.size() == 0)
     {
-        setTitle("No " + DApplication::translate("Main", "Other PCI Device") + " found!");
+        QStringList emptyList;
+        addInfo("No " + DApplication::translate("Main", "Other PCI Device") + " found!", emptyList, emptyList);
         addStrecch();
+        return;
     }
 
     QList<QStringList> tabList;

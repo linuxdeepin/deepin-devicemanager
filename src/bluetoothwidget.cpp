@@ -16,13 +16,14 @@ void BluetoothWidget::initWidget()
 
     if( bluetoothList.size() < 1 )
     {
-        setTitle("No Bluetooth Device found!");
+        QStringList emptyList;
+        addInfo("No Bluetooth Device found!", emptyList, emptyList);
         addStrecch();
         return;
     }
 
     QStringList hciconfigBluetoothList = DeviceInfoParserInstance.getHciconfigBluetoothList();
-    setTitle(DApplication::translate("Main", "Bluetooth") + " " + DApplication::translate("Main", " Info"));
+    //setTitle(DApplication::translate("Main", "Bluetooth") + " " + DApplication::translate("Main", " Info"));
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;

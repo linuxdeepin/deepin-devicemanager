@@ -35,7 +35,7 @@ void CpuWidget::initWidget()
         addTable(headers, tabList);
     }
 
-    setTitle(DApplication::translate("Main", "CPU")  + DApplication::translate("Main", " Info"));
+    //setTitle(DApplication::translate("Main", "CPU")  + DApplication::translate("Main", " Info"));
 
     QStringList names = {   "Model",
                             "Architecture",
@@ -92,7 +92,7 @@ void CpuWidget::initWidget()
         DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L3 cache"),
     };
 
-    addInfo( "", names, contents);
+    addInfo( "Cpu Info", names, contents);
 
     foreach(auto precessor, cpuList)
     {      

@@ -11,7 +11,7 @@ MotherboardWidget::MotherboardWidget(QWidget *parent) : DeviceInfoWidgetBase(par
 
 void MotherboardWidget::initWidget()
 {
-    setTitle(DApplication::translate("Main", "Motherboard")  + DApplication::translate("Main", " Info"));
+    //setTitle(DApplication::translate("Main", "Motherboard")  + DApplication::translate("Main", " Info"));
 
 
     QList<ArticleStruct> articles;
@@ -103,5 +103,5 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Characteristics");
     DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles);
 
-    addInfo( articles );
+    addInfo( "", articles );
 }
