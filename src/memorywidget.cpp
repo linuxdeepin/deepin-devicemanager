@@ -75,7 +75,7 @@ void MemoryWidget::updateWholeDownWidget()
         canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No")
     };
 
-    addInfo("", names, contents);
+    addInfo("Memory Info", names, contents);
 
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;

@@ -11,7 +11,7 @@ DisplayadapterWidget::DisplayadapterWidget(QWidget *parent) : DeviceInfoWidgetBa
 
 void DisplayadapterWidget::initWidget()
 {
-    setTitle( DApplication::translate("Main", "DisplayAdapter")  + DApplication::translate("Main", " Info") );
+    //setTitle( DApplication::translate("Main", "DisplayAdapter")  + DApplication::translate("Main", " Info") );
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;

@@ -179,7 +179,8 @@ void DiskWidget::initWidget()
 
     if(diskList.size() > 1)
     {
-        setTitle(DApplication::translate("Main", "Disk")  + DApplication::translate("Main", " Info"));
+        //QStringList emptyList;
+        //add(DApplication::translate("Main", "Disk")  + DApplication::translate("Main", " Info"), emptyList, emptyList);
         QStringList headers = { "Model",  "Vendor", "Media Type", "Size"};
         addTable(headers, tabList);
     }

@@ -16,7 +16,8 @@ void OtherInputdeviceWidget::initWidget()
 
     if( otherInputdeviceList.size() < 1 )
     {
-        setTitle("No " + DApplication::translate("Main", "Other Inputdevice") + " found!");
+        QStringList emptyList;
+        addInfo("No Other Inputdevice found!", emptyList, emptyList);
         addStrecch();
         return;
     }

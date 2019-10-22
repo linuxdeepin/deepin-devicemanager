@@ -220,5 +220,5 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
 
     articles.append(others);
 
-    addInfo(articles);
+    addInfo("", articles);
 }

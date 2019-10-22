@@ -15,12 +15,13 @@ void CameraWidget::initWidget()
 
     if( cameraList.size() < 1 )
     {
-        setTitle("No Camera found!");
+        QStringList emptyList;
+        addInfo("No Camera found!", emptyList, emptyList);
         addStrecch();
         return;
     }
 
-    setTitle(DApplication::translate("Main", "Camera")  + DApplication::translate("Main", " Info"));
+    //setTitle(DApplication::translate("Main", "Camera")  + DApplication::translate("Main", " Info"));
 
     QStringList cameraNames = {
                             DApplication::translate("Main", "Name"),
@@ -74,7 +75,7 @@ void CameraWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
-        addSubInfo( "", articles);
+        addSubInfo( name.value, articles);
 
         if( cameraList.size() > 1 )
         {
