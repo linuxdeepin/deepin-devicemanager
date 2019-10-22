@@ -122,10 +122,12 @@ void DiskWidget::initWidget()
 
             ArticleStruct powerOnHours("Power On Hours");
             powerOnHours.queryData("smartctl", logicalName, "Power_On_Hours");
+            powerOnHours.value += DApplication::translate("Main", " Hours");
             articles.push_back(powerOnHours);
 
             ArticleStruct powerCycleCount("Power Cycle Count");
             powerCycleCount.queryData("smartctl", logicalName, "Power_Cycle_Count");
+            powerCycleCount.value += DApplication::translate("Main", " Times");
             articles.push_back(powerCycleCount);
         }
 

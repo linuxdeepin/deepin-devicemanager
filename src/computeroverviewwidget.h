@@ -7,7 +7,7 @@ class ComputerOverviewWidget : public DeviceInfoWidgetBase
     Q_OBJECT
 public:
     explicit ComputerOverviewWidget(QWidget *parent = nullptr);
-    void initWidget() override;
+    void initWidget()override {}
 
     void setOverviewInfos( const QList<ArticleStruct>& others );
 };

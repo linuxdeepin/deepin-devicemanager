@@ -19,7 +19,7 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 #load device info from file
-# DEFINES += TEST_DATA_FROM_FILE
+#DEFINES += TEST_DATA_FROM_FILE
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -73,7 +73,8 @@ SOURCES += \
     src/logpasswordauth.cpp \
     src/printerwidget.cpp \
     src/devicelistview.cpp \
-    src/deviceattributedefine.cpp
+    src/deviceattributedefine.cpp \
+    src/subdevicetableview.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -103,7 +104,8 @@ HEADERS += \
     src/tablewidgetalwaysfocus.h \
     src/logpasswordauth.h \
     src/printerwidget.h \
-    src/devicelistview.h
+    src/devicelistview.h \
+    src/subdevicetableview.h
 
 
 # Default rules for deployment.
@@ -114,8 +116,8 @@ HEADERS += \
 RESOURCES += app.qrc
 
 DISTFILES += \
-    translations/DeviceManager.ts \
-    translations/DeviceManager_zh_CN.ts
+    translations/dde-devicemanager.ts \
+    translations/dde-devicemanager_zh_CN.ts
 
 # target
 target.path = /usr/bin/

@@ -16,8 +16,8 @@
             <translation>设备管理器是查看设备信息的小工具．</translation>
         </message>
                 <message>
-            <source>Computer Overview</source>
-            <translation>电脑概况</translation>
+            <source>Overview</source>
+            <translation>概况</translation>
         </message>
         <message>
             <source>Model</source>
@@ -64,6 +64,10 @@
             <translation>网卡</translation>
         </message>
         <message>
+            <source>Printer</source>
+            <translation>打印机</translation>
+        </message>
+        <message>
             <source>Bios</source>
             <translation>Bios</translation>
         </message>
@@ -94,22 +98,6 @@
         <message>
             <source>Cache</source>
             <translation>缓存</translation>
-        </message>
-        <message>
-            <source>L1d</source>
-            <translation>一级数据</translation>
-        </message>
-        <message>
-            <source>L1i</source>
-            <translation>一级代码</translation>
-        </message>
-        <message>
-            <source>L2</source>
-            <translation>二级</translation>
-        </message>
-        <message>
-            <source>L3</source>
-            <translation>三级</translation>
         </message>
         <message>
             <source>Bank</source>
@@ -173,7 +161,7 @@
         </message>
         <message>
             <source>Vendor</source>
-            <translation>厂商</translation>
+            <translation>制造商</translation>
         </message>
         <message>
             <source>Driver</source>
@@ -221,7 +209,7 @@
         </message>
         <message>
             <source>Audio Device</source>
-            <translation>声音设备</translation>
+            <translation>音频设备</translation>
         </message>
         <message>
             <source>Speaker</source>
@@ -245,7 +233,7 @@
         </message>
         <message>
             <source>Camera</source>
-            <translation>摄像头</translation>
+            <translation>图像设备</translation>
         </message>
         <message>
             <source>Usb Device</source>
@@ -360,6 +348,10 @@
             <translation>小时</translation>
         </message>
         <message>
+            <source> Times</source>
+            <translation>次</translation>
+        </message>
+        <message>
             <source> Power Cycle Count</source>
             <translation>通电次数</translation>
         </message>
@@ -371,5 +363,430 @@
             <source>Export to File</source>
             <translation>导出到文件</translation>
         </message>
+        <message>
+            <source>Cpu Info</source>
+            <translation>处理器信息</translation>
+        </message>
+        <message>
+            <source>CPU cores</source>
+            <translation>处理器核心数</translation>
+        </message>
+        <message>
+        <source>cpu cores</source>
+        <translation>处理器核心数</translation>
+    </message>
+        <message>
+            <source>Threads amount</source>
+            <translation>线程数</translation>
+        </message>
+        <message>
+            <source>L1d Cache</source>
+            <translation>一级数据缓存</translation>
+        </message>
+        <message>
+            <source>L1i Cache</source>
+            <translation>一级代码缓存</translation>
+        </message>
+        <message>
+            <source>L2 Cache</source>
+            <translation>二级缓存</translation>
+        </message>
+        <message>
+            <source>L3 Cache</source>
+            <translation>三级缓存</translation>
+        </message>
+        <message>
+            <source>Cpu id</source>
+            <translation>处理器ID</translation>
+        </message>
+        <message>
+            <source>Core id</source>
+            <translation>核心ID</translation>
+        </message>
+        <message>
+            <source>Current Speed</source>
+            <translation>当前频率</translation>
+        </message>
+        <message>
+            <source>Cpu Family</source>
+            <translation>家族</translation>
+        </message>
+        <message>
+            <source>Stepping</source>
+            <translation>步进</translation>
+        </message>
+        <message>
+            <source>Flags</source>
+            <translation>特性</translation>
+        </message>
+        <message>
+            <source>Virtualization</source>
+            <translation>虚拟化</translation>
+        </message>
+        <message>
+            <source>address sizes</source>
+            <translation>地址大小</translation>
+        </message>
+        <message>
+            <source>bugs</source>
+            <translation>bugs</translation>
+        </message>
+        <message>
+            <source>cache size</source>
+            <translation>缓存大小</translation>
+        </message>
+        <message>
+            <source>cache_alignment</source>
+            <translation>缓存对齐</translation>
+        </message>
+        <message>
+            <source>cpuid level</source>
+            <translation>处理器ID等级</translation>
+        </message>
+        <message>
+            <source>fpu</source>
+            <translation>浮点运算</translation>
+        </message>
+        <message>
+            <source>fpu_exception</source>
+            <translation>浮点运算异常</translation>
+        </message>
+        <message>
+            <source>microcode</source>
+            <translation>微代码</translation>
+        </message>
+        <message>
+            <source>processor</source>
+            <translation>处理器</translation>
+        </message>
+        <message>
+            <source>siblings</source>
+            <translation>逻辑数量</translation>
+        </message>
+        <message>
+            <source>Asset Tag</source>
+            <translation>资产编号</translation>
+        </message>
+        <message>
+            <source>Location In Chassis</source>
+            <translation>机箱位置</translation>
+        </message>
+        <message>
+            <source>Wake-up Type</source>
+            <translation>唤醒类型</translation>
+        </message>
+        <message>
+            <source>Family</source>
+            <translation>家族</translation>
+        </message>
+        <message>
+            <source>Manufacturer</source>
+            <translation>制造商</translation>
+        </message>
+        <message>
+            <source>Product Name</source>
+            <translation>产品名称</translation>
+        </message>
+        <message>
+            <source>Bios Version</source>
+            <translation>Bios版本</translation>
+        </message>
+        <message>
+            <source>Release Date</source>
+            <translation>发布日期</translation>
+        </message>
+        <message>
+            <source>Bios Vendor</source>
+            <translation>Bios厂商</translation>
+        </message>
+        <message>
+            <source>Characteristics</source>
+            <translation>特性</translation>
+        </message>
+        <message>
+            <source>Address</source>
+            <translation>地址</translation>
+        </message>
+        <message>
+            <source>BIOS Revision</source>
+            <translation>Bios修订版本</translation>
+        </message>
+        <message>
+            <source>Firmware Revision</source>
+            <translation>固件修订版本</translation>
+        </message>
+        <message>
+            <source>ROM Size</source>
+            <translation>存储大小</translation>
+        </message>
+        <message>
+            <source>Runtime Size</source>
+            <translation>运行内存大小</translation>
+        </message>
+        <message>
+            <source>Memory Info</source>
+            <translation>内存信息</translation>
+        </message>
+        <message>
+            <source>Slot Count</source>
+            <translation>插槽数</translation>
+        </message>
+        <message>
+            <source>Rank</source>
+            <translation>位列</translation>
+        </message>
+        <message>
+            <source>Configured Speed</source>
+            <translation>配置频率</translation>
+        </message>
+        <message>
+            <source>Bank Locator</source>
+            <translation>插槽位置</translation>
+        </message>
+        <message>
+            <source>Data Width</source>
+            <translation>数据位宽</translation>
+        </message>
+        <message>
+            <source>Form Factor</source>
+            <translation>尺寸型号</translation>
+        </message>
+        <message>
+            <source>Total Width</source>
+            <translation>总位宽</translation>
+        </message>
+        <message>
+            <source>Type Detail</source>
+            <translation>类型详情</translation>
+        </message>
+        <message>
+            <source>Serial</source>
+            <translation>序列号</translation>
+        </message>
+        <message>
+            <source>Rotation Rate</source>
+            <translation>转速</translation>
+        </message>
+        <message>
+            <source>Power On Hours</source>
+            <translation>通电时间</translation>
+        </message>
+        <message>
+            <source>Power Cycle Count</source>
+            <translation>通电次数</translation>
+        </message>
+        <message>
+            <source>ansiversion</source>
+            <translation>标准版本号</translation>
+        </message>
+        <message>
+            <source>bus info</source>
+            <translation>总线</translation>
+        </message>
+        <message>
+            <source>Bus Info</source>
+            <translation>总线</translation>
+        </message>
+        <message>
+            <source>logical name</source>
+            <translation>逻辑名称</translation>
+        </message>
+        <message>
+            <source>Logical Name</source>
+            <translation>逻辑名称</translation>
+        </message>
+        <message>
+            <source>logicalsectorsize</source>
+            <translation>逻辑分区大小</translation>
+        </message>
+        <message>
+            <source>physical id</source>
+            <translation>物理ID</translation>
+        </message>
+        <message>
+            <source>Physical ID</source>
+            <translation>物理ID</translation>
+        </message>
+        <message>
+            <source>sectorsize</source>
+            <translation>扇区大小</translation>
+        </message>
+        <message>
+            <source>signature</source>
+            <translation>签名</translation>
+        </message>
+        <message>
+            <source>Product</source>
+            <translation>产品</translation>
+        </message>
+        <message>
+            <source>Bus</source>
+            <translation>总线</translation>
+        </message>
+        <message>
+            <source>Capacity</source>
+            <translation>容量</translation>
+        </message>
+        <message>
+            <source>serial</source>
+            <translation>序列号</translation>
+        </message>
+        <message>
+            <source>Location</source>
+            <translation>位置</translation>
+        </message>
+        <message>
+            <source>Hot Replaceable</source>
+            <translation>热插拔</translation>
+        </message>
+        <message>
+            <source>Input Voltage Range Switching</source>
+            <translation>输入电压调整</translation>
+        </message>
+        <message>
+            <source>Plugged</source>
+            <translation>已插电</translation>
+        </message>
+        <message>
+            <source>Revision</source>
+            <translation>修订版本</translation>
+        </message>
+        <message>
+            <source>Status</source>
+            <translation>状态</translation>
+        </message>
+        <message>
+            <source>Clock</source>
+            <translation>时钟频率</translation>
+        </message>
+        <message>
+            <source>description</source>
+            <translation>描述</translation>
+        </message>
+        <message>
+            <source>driver</source>
+            <translation>驱动</translation>
+        </message>
+        <message>
+            <source>multimedia</source>
+            <translation>多媒体</translation>
+        </message>
+        <message>
+            <source>capacity</source>
+            <translation>容量</translation>
+        </message>
+        <message>
+            <source>duplex</source>
+            <translation>双工</translation>
+        </message>
+        <message>
+            <source>ip</source>
+            <translation>网址</translation>
+        </message>
+        <message>
+            <source>link</source>
+            <translation>连接</translation>
+        </message>
+        <message>
+            <source>Device Class</source>
+            <translation>设备类别</translation>
+        </message>
+        <message>
+            <source>HCI Version</source>
+            <translation>HCI版本</translation>
+        </message>
+        <message>
+            <source>LMP Version</source>
+            <translation>LMP版本</translation>
+        </message>
+        <message>
+            <source>Packet type</source>
+            <translation>包类型</translation>
+        </message>
+        <message>
+            <source>RX bytes</source>
+            <translation>接收bytes</translation>
+        </message>
+        <message>
+            <source>Service Classes</source>
+            <translation>服务类别</translation>
+        </message>
+        <message>
+            <source>TX bytes</source>
+            <translation>发送bytes</translation>
+        </message>
+        <message>
+            <source>maxpower</source>
+            <translation>最大功率</translation>
+        </message>
+        <message>
+            <source>Primary Monitor</source>
+            <translation>主显示器</translation>
+        </message>
+        <message>
+            <source>Media Type</source>
+            <translation>介质类型</translation>
+        </message>
+        <message>
+            <source>Width</source>
+            <translation>位宽</translation>
+        </message>
+        <message>
+            <source>No Audio Device found!</source>
+            <translation>未发现音频设备！</translation>
+        </message>
+        <message>
+            <source>No Bluetooth Device found!</source>
+            <translation>未发现蓝牙设备！</translation>
+        </message>
+        <message>
+            <source>No Camera found</source>
+            <translation>未发现图像设备！</translation>
+        </message>
+        <message>
+            <source>No Keyboard found!</source>
+            <translation>未发现键盘！</translation>
+        </message>
+        <message>
+            <source>No Mouse found!</source>
+            <translation>未发现鼠标！</translation>
+        </message>
+        <message>
+            <source>No NetworkAdapter found!</source>
+            <translation>未发现网络适配器！</translation>
+        </message>
+        <message>
+            <source>No Other Inputdevice found!</source>
+            <translation>未发现其他输入设备！</translation>
+        </message>
+        <message>
+            <source>No Printer found!</source>
+            <translation>未发现打印机！</translation>
+        </message>
+        <message>
+            <source>No Usb Device found!</source>
+            <translation>未发现其他USB设备！</translation>
+        </message>
+        <message>
+            <source>Model Part Number</source>
+            <translation>部件号码</translation>
+        </message>
+        <message>
+            <source>multicast</source>
+            <translation>多播</translation>
+        </message>
+        <message>
+            <source>broadcast</source>
+            <translation>广播</translation>
+        </message>
+        <message>
+            <source>autonegotiation</source>
+            <translation>自动协商</translation>
+        </message>
+        <message>
+            <source>firmware</source>
+            <translation>固件</translation>
+        </message>
+
     </context>
 </TS>

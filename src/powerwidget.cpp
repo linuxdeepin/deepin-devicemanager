@@ -14,6 +14,9 @@ void PowerWidget::initWidget()
     QStringList switchingpowerList = DeviceInfoParserInstance.getSwitchingpowerList();
     QStringList demidecodeSwitchingpowerList = DeviceInfoParserInstance.getDemidecodeSwitchingpowerList();
 
+    QStringList batteryList = DeviceInfoParserInstance.getBatteryList();
+    QStringList demidecodebatteryList = DeviceInfoParserInstance.getDemidecodeBatteryList();
+
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
@@ -92,21 +95,20 @@ void PowerWidget::initWidget()
         }
 
         addSubInfo( "Switching Power", articles );
+
+        if( switchingpowerList.size() + batteryList.size() > 1 )
+        {
+            QStringList tab =
+            {
+                DApplication::translate("Main", "Switching Power"),
+                name.value,
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
     }
 
-    QStringList batteryNames = {
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Screen Suspend Delay"),
-                            DApplication::translate("Main", "Computer Suspend Delay"),
-                            DApplication::translate("Main", "AutoLock Screen Delay"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Slot"),
-                            DApplication::translate("Main", "Max Power Capacity"),
-                            DApplication::translate("Main", "configuration")
-                        };
-
-    QStringList batteryList = DeviceInfoParserInstance.getBatteryList();
-    QStringList demidecodebatteryList = DeviceInfoParserInstance.getDemidecodeBatteryList();
 
     for( int i = 0; i < batteryList.size(); ++i )
     {
@@ -183,5 +185,23 @@ void PowerWidget::initWidget()
         }
 
         addSubInfo( "Battery", articles );
+
+        if( switchingpowerList.size() + batteryList.size() > 1 )
+        {
+            QStringList tab =
+            {
+                DApplication::translate("Main", "Battery"),
+                name.value,
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
+    }
+
+    if( switchingpowerList.size() + batteryList.size() > 1 )
+    {
+        QStringList headers = { "Type", "Name", "Vendor" };
+        addTable( headers, tabList);
     }
 }

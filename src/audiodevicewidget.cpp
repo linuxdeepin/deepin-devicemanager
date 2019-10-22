@@ -14,12 +14,20 @@ AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(par
 void AudiodeviceWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Audio Device")  + DApplication::translate("Main", " Info"));
+    QStringList multimediaList = DeviceInfoParserInstance.getMultimediaList();
+    QStringList inputdeviceList = DeviceInfoParserInstance.getInputAudioDeviceList();
+
+    if( multimediaList.size() + inputdeviceList.size() < 1 )
+    {
+        QStringList emptyList;
+        addInfo("No Audio Device found!", emptyList, emptyList);
+        addStrecch();
+        return;
+    }
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
-
-    QStringList multimediaList = DeviceInfoParserInstance.getMultimediaList();
 
     foreach(auto multimedia, multimediaList)
     {
@@ -104,13 +112,17 @@ void AudiodeviceWidget::initWidget()
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles);
         addSubInfo( name.value , articles );
 
-        QStringList tab =
+        if( multimediaList.size() + inputdeviceList.size() > 1 )
         {
-            name.value,
-            vendor.value
-        };
+            QStringList tab =
+            {
+                name.value,
+                vendor.value
+            };
 
-        tabList.push_back(tab);
+            tabList.push_back(tab);
+        }
+
 
         if( overviewInfo_.value.isEmpty() == true )
         {
@@ -120,7 +132,6 @@ void AudiodeviceWidget::initWidget()
         }
     }
 
-    QStringList inputdeviceList = DeviceInfoParserInstance.getInputAudioDeviceList();
     foreach(const QString& device, inputdeviceList)
     {
         articles.clear();
@@ -150,13 +161,16 @@ void AudiodeviceWidget::initWidget()
         DeviceInfoParserInstance.queryRemainderDeviceInfo("catinput", device, articles, existArticles);
         addSubInfo( name.value , articles );
 
-        QStringList tab =
+        if( multimediaList.size() + inputdeviceList.size() > 1 )
         {
-            name.value,
-            vendor.value
-        };
+            QStringList tab =
+            {
+                name.value,
+                vendor.value
+            };
 
-        tabList.push_back(tab);
+            tabList.push_back(tab);
+        }
     }
 
     if( multimediaList.size() + inputdeviceList.size() > 1 )

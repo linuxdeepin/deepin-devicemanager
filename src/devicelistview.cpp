@@ -48,8 +48,15 @@ void DeviceListviewDelegate::paintSeparator(QPainter *painter, const QStyleOptio
     painter->restore();
 }
 
-DeviceListView::DeviceListView(QWidget* parent):DListView(parent)
+DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
 {
+//    setResizeMode(QListView::Adjust);
+//    setOrientation(QListView::LeftToRight, true);
+//    setTextElideMode(Qt::ElideMiddle);
+//    setSelectionBehavior(QAbstractItemView::SelectRows);
+
+    //DListView::setSelectionRectVisible(false);
+
     navModel_ = new QStandardItemModel(navModel_);
 
     setVerticalScrollMode(ScrollPerPixel);

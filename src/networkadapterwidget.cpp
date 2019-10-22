@@ -13,20 +13,20 @@ void NetworkadapterWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "NetworkAdapter")  + DApplication::translate("Main", " Info"));
 
-    QList<QStringList> tabList;
-    QList<ArticleStruct> articles;
-    QSet<QString> existArticles;
-
-    QStringList networkadapterNames = {
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Model"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Mac Address"),
-                            DApplication::translate("Main", "Speed")
-                        };
 
     QStringList networkadapterList = DeviceInfoParserInstance.getNetworkadapterList();
 
+    if( networkadapterList.size() < 1 )
+    {
+        QStringList emptyList;
+        addInfo("No NetworkAdapter found!", emptyList, emptyList);
+        addStrecch();
+        return;
+    }
+
+    QList<QStringList> tabList;
+    QList<ArticleStruct> articles;
+    QSet<QString> existArticles;
     foreach(const QString& networkadapter, networkadapterList)
     {
         articles.clear();

@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setFocus(Qt::FocusReason::NoFocusReason);
 
     leftDeviceView_ = new DeviceListView(this);
-    leftDeviceView_->setMaximumWidth(180);
+    leftDeviceView_->setMaximumWidth(220);
     leftDeviceView_->setMinimumWidth(100);
 
     ly->addWidget(leftDeviceView_);
@@ -96,22 +96,28 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new MotherboardWidget(this));
     addDeviceWidget(new MemoryWidget(this));
     addDeviceWidget(new DiskWidget(this));
-    addDeviceWidget(new DisplayadapterWidget(this));
-    addDeviceWidget(new MonitorWidget(this));
-    addDeviceWidget(new AudiodeviceWidget(this));
-    addDeviceWidget(new NetworkadapterWidget(this));
-
-    leftDeviceView_->addSeperator();
-
-    addDeviceWidget(new BluetoothWidget(this));
-    addDeviceWidget(new CameraWidget(this));
-    addDeviceWidget(new MouseWidget(this));
     addDeviceWidget(new KeyboardWidget(this));
-    addDeviceWidget(new UsbdeviceWidget(this));
+    addDeviceWidget(new MouseWidget(this));
     addDeviceWidget(new PowerWidget(this));
     addDeviceWidget(new PrinterWidget(this));
 
-    leftDeviceView_->addSeperator();
+    if(firstAdd_ == true)
+    {
+        leftDeviceView_->addSeperator();
+    }
+
+    addDeviceWidget(new DisplayadapterWidget(this));
+    addDeviceWidget(new AudiodeviceWidget(this));
+    addDeviceWidget(new NetworkadapterWidget(this));
+    addDeviceWidget(new BluetoothWidget(this));
+    addDeviceWidget(new MonitorWidget(this));
+    addDeviceWidget(new CameraWidget(this));
+    addDeviceWidget(new UsbdeviceWidget(this));
+
+    if(firstAdd_ == true)
+    {
+        leftDeviceView_->addSeperator();
+    }
 
     addDeviceWidget(new OtherInputdeviceWidget(this));
     addDeviceWidget(new OtherPciDeviceWidget(this));

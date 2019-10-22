@@ -22,10 +22,10 @@ void MemoryWidget::initTableWdiget()
 {
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
 
-    if( memList.size() < 2 )
-    {
-        return;
-    }
+//    if( memList.size() < 2 )
+//    {
+//        return;
+//    }
 
     canUpgrade_ = false;
     QStringList headers = { "Bank",  "Size", "Type", "Speed", "Statu"};

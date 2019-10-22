@@ -4,6 +4,7 @@
 #include <QString>
 #include "DListView"
 #include <DStyledItemDelegate>
+#include "DWidget"
 
 class DeviceListviewDelegate : public Dtk::Widget::DStyledItemDelegate
 {
@@ -22,7 +23,7 @@ class DeviceListView : public Dtk::Widget::DListView
 {
     Q_OBJECT
 public:
-    DeviceListView(QWidget* parent = nullptr);
+    DeviceListView(Dtk::Widget::DWidget* parent = nullptr);
     void addDevice(const QString& deviceName, const QString& iconFile);
     void addSeperator();
 

@@ -242,7 +242,7 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QStringList& name
     DeviceInfo subInfo;
     if( false == title.isEmpty() )
     {
-        subInfo.title = new DLabel(title, downWidget_);
+        subInfo.title = new DLabel( DApplication::translate("Main", title.toStdString().data()), downWidget_);
         subInfo.title->setFont(titleFont_);
         subInfo.title->setFixedHeight(RowHeight_);
         vly->addWidget(subInfo.title);
@@ -287,7 +287,7 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
     DeviceInfo subInfo;
     if( false == title.isEmpty() )
     {
-        subInfo.title = new DLabel(title, downWidget_);
+        subInfo.title = new DLabel( DApplication::translate("Main", title.toStdString().data()), downWidget_);
         subInfo.title->setFont(titleFont_);
         subInfo.title->setFixedHeight(RowHeight_);
         vly->addWidget(subInfo.title);
@@ -376,10 +376,10 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
     DeviceInfo subInfo;
     if(false == subTitle.isEmpty())
     {
-        subInfo.title = new DLabel(subTitle, downWidget_);
+        subInfo.title = new DLabel( DApplication::translate("Main", subTitle.toStdString().data()), downWidget_);
         subInfo.title->setFont(subTitleFont_);
         subInfo.title->setFixedHeight(RowHeight_);
-        vly->addWidget(subInfo.title);
+        vly->addWidget( subInfo.title );
     }
 
     QHBoxLayout* hly = new QHBoxLayout;
@@ -413,15 +413,22 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     if(tableWidget_ == nullptr)
     {
         tableWidget_ = new DTableWidget(this);
+
+//        MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent());
+//        if( mainWindow )
+//        {
+//            tableWidget_->setFocusProxy(mainWindow);
+//        }
+
         tableWidget_->setMinimumHeight(200);
         tableWidget_->setMaximumHeight(500);
         tableWidget_->setVerticalScrollBar(new DScrollBar(this));
         tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
         tableWidget_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
         //tableWidget_->horizontalHeader()->setClickable(false);
-        //tableWidget_->setFocusPolicy(Qt::FocusPolicy::WheelFocus);
+        tableWidget_->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
         //tableWidget_->setAutoFillBackground(false);
-        //tableWidget_->setAttribute(Qt::WA_ShowWithoutActivating);
+        tableWidget_->setAttribute(Qt::WA_ShowWithoutActivating);
         //tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
         //tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
         //tableWidget_->setEnabled(true);
@@ -477,7 +484,12 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
     tableWidget_->setRowCount(contentsList.size());
     tableWidget_->setColumnCount(headers.size());
-    tableWidget_->setHorizontalHeaderLabels(headers);
+    QStringList translaterHeaders;
+    foreach(auto header, headers)
+    {
+        translaterHeaders.push_back(DApplication::translate("Main", header.toStdString().data()));
+    }
+    tableWidget_->setHorizontalHeaderLabels(translaterHeaders);
 
     //tableWidget_->horizontalHeader()->setSectionResizeMode(headers.size() - 2, QHeaderView::Stretch);
     tableWidget_->horizontalHeader()->setDefaultAlignment(Qt::AlignmentFlag::AlignLeft);
@@ -594,7 +606,7 @@ bool DeviceInfoWidgetBase::onExportToFile()
 {
    QString selectFilter;
    QString exportFile = DFileDialog::getSaveFileName(this, tr("Export File"), "./" + overviewInfo_.name + QDate::currentDate().toString("yyyyMMdd") .remove(QRegExp("\\s")) + ".txt", \
-                        tr("TEXT (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
+                        tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
 
    if(exportFile.isEmpty() == true)
    {
