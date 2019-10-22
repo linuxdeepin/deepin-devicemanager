@@ -1,0 +1,12 @@
+Source: dde-devicemanager
+Section: devel
+Priority: optional
+Maintainer: Packages <packages@deepin.com>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.3
+
+Package: dde-devicemanager
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
