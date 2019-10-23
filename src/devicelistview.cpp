@@ -86,24 +86,37 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     setFocus(Qt::FocusReason::NoFocusReason);
 
 
+
+
+    //DPalette pa = DApplicationHelper::instance()->palette(this);
+    //auto ba = QPalette::Base;
+    //ba.setBrush(DPalette::ItemBackground, palette().base());
+    //setBackgroundRole(QPalette::Base);
+    //setAutoFillBackground(true);
+
     setItemDelegate( new DeviceListviewDelegate(this) );
 
     setBackgroundType(DStyledItemDelegate::BackgroundType::RoundedBackground);
     setAutoFillBackground(true);
 
-    DPalette pa = DApplicationHelper::instance()->palette(this);
-    QColor base_color = palette().base().color();
-    DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
+    auto modifyTheme = [this](){
+        DPalette pa = DApplicationHelper::instance()->palette(this);
+        QColor base_color = palette().base().color();
+        DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
 
-    if (ct == DGuiApplicationHelper::LightType) {
-        pa.setBrush(DPalette::ItemBackground, palette().base());
-    } else {
-        base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
-        pa.setColor(DPalette::ItemBackground, base_color);
-    }
+//        if (ct == DGuiApplicationHelper::LightType) {
+            pa.setBrush(DPalette::ItemBackground, palette().base());
+//        } else {
+//            base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
+//            pa.setColor(DPalette::ItemBackground, base_color);
+//        }
 
-    DApplicationHelper::instance()->setPalette(this, pa);
+        DApplicationHelper::instance()->setPalette(this, pa);
+    };
 
+    modifyTheme();
+
+    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, modifyTheme);
     //setMaximumWidth(150);
 }
 
@@ -134,6 +147,8 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
 void DeviceListView::addSeperator()
 {
     DStandardItem* item = new DStandardItem;
+    //item->setBackgroundRole(QPalette::Base);
+    //item->setAutoFillBackground(true);
     item->setText("Seperator");
     navModel_->appendRow(item);
 }

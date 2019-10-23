@@ -73,28 +73,51 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent, const QString& devic
     vLayout_->setSpacing(0);
     vLayout_->setMargin(8);
 
-    setAutoFillBackground(false);
+    //setAutoFillBackground(false);
 
     setLayout(vLayout_);
     setMinimumHeight(WidgetHeight);
     initContextMenu();
 
-    DPalette pa = DApplicationHelper::instance()->palette(this);
-    QColor base_color = palette().base().color();
-    DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
+//    DPalette pa = DApplicationHelper::instance()->palette(this);
+//    QColor base_color = palette().base().color();
+//    DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
 
-    if (ct == DGuiApplicationHelper::LightType) {
-        pa.setColor(QPalette::Background, base_color);
-        pa.setBrush(DPalette::LightLively, palette().base());
-        pa.setBrush(DPalette::DarkLively, palette().base());
-        //pa.setColor(QPalette::Light, base_color);
-        //pa.setC
-    } else {
-        base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
-        pa.setColor(QPalette::Background, base_color);
-    }
+//    if (ct == DGuiApplicationHelper::LightType) {
+//        pa.setColor(QPalette::Background, base_color);
+//        pa.setBrush(DPalette::LightLively, palette().base());
+//        pa.setBrush(DPalette::DarkLively, palette().base());
+//        //pa.setColor(QPalette::Light, base_color);
+//        //pa.setC
+//    } else {
+//        base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
+//        pa.setColor(QPalette::Background, base_color);
+//    }
 
-    DApplicationHelper::instance()->setPalette(this, pa);
+//    DApplicationHelper::instance()->setPalette(this, pa);
+
+    auto modifyTheme = [this](){
+        DPalette pa = DApplicationHelper::instance()->palette(this);
+        QColor base_color = palette().base().color();
+        DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
+
+        //if (ct == DGuiApplicationHelper::LightType) {
+            pa.setColor(QPalette::Background, base_color);
+//            pa.setBrush(DPalette::LightLively, palette().base());
+//            pa.setBrush(DPalette::DarkLively, palette().base());
+            pa.setBrush(DPalette::ItemBackground, palette().base());
+//        } else {
+//            base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
+//            pa.setColor(DPalette::ItemBackground, base_color);
+//            pa.setColor(QPalette::Background, base_color);
+//        }
+
+        DApplicationHelper::instance()->setPalette(this, pa);
+    };
+
+    modifyTheme();
+
+    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, modifyTheme);
 }
 
 bool DeviceInfoWidgetBase::getOverViewInfo(ArticleStruct& info)
@@ -415,6 +438,9 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     {
         tableWidget_ = new DTableWidget(this);
 
+        //tableWidget_->setBackgroundRole(QPalette::Base);
+        //tableWidget_->setAutoFillBackground(true);
+
 //        MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent());
 //        if( mainWindow )
 //        {
@@ -430,32 +456,41 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         tableWidget_->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
         //tableWidget_->setAutoFillBackground(false);
         tableWidget_->setAttribute(Qt::WA_ShowWithoutActivating);
-        //tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
-        //tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
-        //tableWidget_->setEnabled(true);
-        //tableWidget_->horizontalHeader()->clearMask();
-        DPalette pa = DApplicationHelper::instance()->palette(this);
-        QColor base_color = palette().base().color();
-        DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
 
-        if (ct == DGuiApplicationHelper::LightType) {
-            pa.setColor(QPalette::Background, base_color);
-            pa.setBrush(DPalette::DarkLively, palette().base());
-            pa.setBrush(DPalette::FrameBorder, palette().base());
-            pa.setColor(QPalette::Button, base_color);
-            //pa.setColor(QPalette::Link, base_color);
-            //pa.setColor(QPalette::LinkVisited, base_color);
-            //pa.setColor(QPalette::AlternateBase, base_color);
-            pa.setColor(QPalette::NoRole, base_color);
-            //pa.setColor(QPalette::NColorRoles, base_color);
-            //pa.setColor(QPalette::Light, base_color);
-            //pa.setC
-        } else {
-            base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
-            pa.setColor(QPalette::Background, base_color);
-        }
+        tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
+        tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
+        tableWidget_->setEnabled(true);
+        tableWidget_->horizontalHeader()->clearMask();
 
-        DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
+        auto changeTheme = [this](){
+            DPalette pa = DApplicationHelper::instance()->palette(this);
+            QColor base_color = palette().base().color();
+            DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
+
+            //if (ct == DGuiApplicationHelper::LightType) {
+                pa.setColor(QPalette::Background, base_color);
+                pa.setBrush(DPalette::DarkLively, palette().base());
+                pa.setBrush(DPalette::FrameBorder, palette().base());
+                pa.setColor(QPalette::Button, base_color);
+                //pa.setColor(QPalette::Link, base_color);
+                //pa.setColor(QPalette::LinkVisited, base_color);
+                //pa.setColor(QPalette::AlternateBase, base_color);
+                pa.setColor(QPalette::NoRole, base_color);
+                //pa.setColor(QPalette::NColorRoles, base_color);
+                //pa.setColor(QPalette::Light, base_color);
+                //pa.setC
+//            } else {
+//                base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
+//                pa.setColor(QPalette::Background, base_color);
+//            }
+
+            DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
+        };
+
+        changeTheme();
+
+        connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, changeTheme);
+
 
         tableWidget_->horizontalHeader()->setContentsMargins(0,0,0,0);
         tableWidget_->horizontalHeader()->setHighlightSections(false);
@@ -539,6 +574,10 @@ void DeviceInfoWidgetBase::initDownWidget()
     //setVerticalScrollMode(ScrollPerPixel);
     downWidgetScrollArea_->setFrameShape(QFrame::NoFrame);
     downWidget_ = new DWidget(downWidgetScrollArea_);
+
+    //downWidget_->setBackgroundRole(QPalette::Base);
+    //downWidget_->setAutoFillBackground(true);
+
     //downWidget_->setFixedHeight(100);
     //downWidget_->setBaseSize(700, 100);
     //downWidget_->setFixedWidth(700);
