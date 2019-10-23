@@ -1,4 +1,4 @@
-# dde_devicemanager
+# dde-devicemanager
 Device Manager is a gadget for viewing device information.
 深度设备管理器是查看、管理硬件设备的工具软件。
 
@@ -18,12 +18,13 @@ Device Manager is a gadget for viewing device information.
 * [QtXlsx](http://qtxlsx.debao.me)
 
 ## Installation
+* sudo apt-get install dde-devicemanager
 
+## Build
 * mkdir build
 * cd build
 * qmake ..
 * make
 
 ## Usage
-
-* ./DeviceManager
+* sudo ./dde-devicemanager
