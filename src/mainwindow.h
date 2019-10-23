@@ -18,6 +18,8 @@ public:
     void insertDeviceWidget(int index, DeviceInfoWidgetBase* w);
     void refresh();
     void refreshDatabase();
+
+    bool exportTo(const QString& file, const QString& selectFilter);
 private:
     DeviceListView* leftDeviceView_ = nullptr;
     Dtk::Widget::DStackedWidget* rightDeviceInfoWidget_ = nullptr;

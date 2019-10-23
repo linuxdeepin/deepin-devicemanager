@@ -44,7 +44,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Disk</source>
+            <source>Storage</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -744,6 +744,10 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>No Camera found!</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>No Keyboard found!</source>
             <translation type="unfinished"/>
         </message>
@@ -760,6 +764,10 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>No Other PCI Device found!</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>No Printer found!</source>
             <translation type="unfinished"/>
         </message>
@@ -769,6 +777,10 @@
         </message>
         <message>
             <source>Model Part Number</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Power Unit Group</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -785,6 +797,14 @@
         </message>
         <message>
             <source>multicast</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Minimum Resolution</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Maximum Resolution</source>
             <translation type="unfinished"/>
         </message>
     </context>

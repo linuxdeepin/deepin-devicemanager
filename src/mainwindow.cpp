@@ -33,6 +33,7 @@ QList<ArticleStruct> staticArticles;
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
+    //setWindowTitle("");
     setAutoFillBackground(false);
     DWidget* mainWidget = new DWidget(this);
     mainWidget->setAutoFillBackground(true);
@@ -200,4 +201,90 @@ void MainWindow::refreshDatabase()
     DeviceInfoParserInstance.loadLsusbDatabase();
     DeviceInfoParserInstance.loadHwinfoDatabase();
     DeviceInfoParserInstance.loadCupsDatabase();
+}
+
+bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
+{
+    if(selectFilter == "Text (*.txt)")
+    {
+        QFile textFile( file );
+        if( false == textFile.open(QIODevice::WriteOnly))
+        {
+            return false;
+        }
+
+        for(int i = 0; i < leftDeviceView_->count(); ++i)
+        {
+            QString device = leftDeviceView_->indexAt(i);
+            if( deviceInfoWidgetMap_.contains(device) )
+            {
+                deviceInfoWidgetMap_[device]->exportToTxt(textFile);
+            }
+        }
+
+        textFile.close();
+
+        return true;
+    }
+
+    if(selectFilter == "Html (*.html)")
+    {
+        QFile htmlFile( file );
+        if( false == htmlFile.open(QIODevice::WriteOnly))
+        {
+            return false;
+        }
+
+        for(int i = 0; i < leftDeviceView_->count(); ++i)
+        {
+            QString device = leftDeviceView_->indexAt(i);
+            if( deviceInfoWidgetMap_.contains(device) )
+            {
+                deviceInfoWidgetMap_[device]->exportToHtml(htmlFile);
+            }
+        }
+
+        htmlFile.close();
+
+        return true;
+    }
+
+    if(selectFilter == "Doc (*.doc)")
+    {
+        Docx::Document doc(":/thirdlib/docx/doc_template/template.doc");
+
+        for(int i = 0; i < leftDeviceView_->count(); ++i)
+        {
+            QString device = leftDeviceView_->indexAt(i);
+            if( deviceInfoWidgetMap_.contains(device) )
+            {
+                deviceInfoWidgetMap_[device]->exportToDoc(doc);
+            }
+        }
+
+        doc.save(file);
+        return true;
+    }
+
+    if( selectFilter == "Xls (*.xls)")
+    {
+        QXlsx::Document xlsx;
+
+        DeviceInfoWidgetBase::resetXlsRowCount();
+
+        for(int i = 0; i < leftDeviceView_->count(); ++i)
+        {
+            QString device = leftDeviceView_->indexAt(i);
+            if( deviceInfoWidgetMap_.contains(device) )
+            {
+                deviceInfoWidgetMap_[device]->exportToXls(xlsx);
+            }
+        }
+
+        xlsx.saveAs(file);
+        return true;
+    }
+
+
+    return false;
 }

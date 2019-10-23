@@ -239,6 +239,26 @@ QStringList DeviceInfoParser::getDiaplayadapterList()
     return displayadapterList;
 }
 
+QStringList DeviceInfoParser::getScreenName()
+{
+    QStringList screenList;
+
+    if(false == toolDatabase_.contains("xrandr"))
+    {
+        return screenList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["xrandr"].uniqueKeys() )
+    {
+        if( fk.startsWith("Screen", Qt::CaseInsensitive) )
+        {
+            screenList.push_back(fk);;
+        }
+    }
+
+    return screenList;
+}
+
 QStringList DeviceInfoParser::getDisplayInterfaceList()
 {
     QStringList interfaceList;
@@ -500,7 +520,29 @@ QStringList DeviceInfoParser::getOtherUsbdeviceList()
 
     foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
-        if( fk.contains("usb:", Qt::CaseInsensitive) )
+        QRegExp rx("^[\\s\\S]*usb[:0-9]*$");
+        if( rx.exactMatch(fk) ==false )
+        {
+            continue;
+        }
+
+//        int index = fk.indexOf( "usb:", -1 );
+//        if( index < 0 )
+//        {
+//            index = fk.indexOf("usb", -1 );
+//        }
+
+//        if( index < 0 )
+//        {
+//            continue;
+//        }
+
+//        if(fk.indexOf("usb"), -1)
+//        {
+
+//        }
+
+        if( fk.contains("usb", Qt::CaseInsensitive) )
         {
             if( fk.contains("multimedia") )
             {
@@ -509,6 +551,21 @@ QStringList DeviceInfoParser::getOtherUsbdeviceList()
 
             if(true == toolDatabase_["lshw"][fk].contains("description"))
             {
+                if( toolDatabase_["lshw"][fk]["description"].contains("USB controller", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["description"].contains("Host Controller", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["description"].contains("USB hub", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
                 if( toolDatabase_["lshw"][fk]["description"].contains("mouse", Qt::CaseInsensitive) )
                 {
                     continue;
@@ -532,6 +589,21 @@ QStringList DeviceInfoParser::getOtherUsbdeviceList()
 
             if(true == toolDatabase_["lshw"][fk].contains("product"))
             {
+                if( toolDatabase_["lshw"][fk]["product"].contains("USB controller", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["product"].contains("Host Controller", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["product"].contains("USB hub", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
                 if( toolDatabase_["lshw"][fk]["product"].contains("mouse", Qt::CaseInsensitive) )
                 {
                     continue;
@@ -1102,13 +1174,13 @@ bool DeviceInfoParser::loadLshwDatabase()
         if(line.contains(Devicetype_lshw_Class_Prefix))
         {
             QString deviceTypeName;
-            foreach(auto deviceType, deviceType)
+            foreach(auto dt, deviceType)
             {
                 if(deviceTypeName.isEmpty() == false)
                 {
                     deviceTypeName += Devicetype_Stitching_Symbol;
                 }
-                deviceTypeName += deviceType.trimmed().remove(Devicetype_lshw_Class_Prefix);
+                deviceTypeName += dt.trimmed().remove(Devicetype_lshw_Class_Prefix);
             }
 
             lshwDatabase_[deviceTypeName] = DeviceInfoMap;

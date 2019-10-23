@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
     DApplicationSettings settings;
 
     MainWindow w;
+    w.titlebar()->setTitle("");
     w.titlebar()->setIcon(QIcon(":images/cpu.svg"));
     Dtk::Widget::moveToCenter(&w);
     w.show();

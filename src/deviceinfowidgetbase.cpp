@@ -8,16 +8,16 @@
 #include <QSizePolicy>
 #include "DFileDialog"
 #include <QTextStream>
-#include "document.h"
-#include "table.h"
+//#include "document.h"
 //#include "thirdlib/docx/include/table.h"
-#include "xlsxdocument.h"
+//#include "xlsxdocument.h"
 #include <QFile>
 #include "mainwindow.h"
 #include "tablewidgetalwaysfocus.h"
 #include <QDate>
 #include "DApplication"
 #include "DApplicationHelper"
+#include "table.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -27,6 +27,9 @@ QFont DeviceInfoWidgetBase::subTitleFont_;
 QFont DeviceInfoWidgetBase::infoFont_;
 QFont DeviceInfoWidgetBase::labelFont_;
 QFont DeviceInfoWidgetBase::tableContentFont_;
+
+
+int currentXlsRow_ = 1;
 
 static const int NameLength_ = 130;
 static const int RowHeight_ = 30;
@@ -127,15 +130,15 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
 {
     for(int i = 0; i < names.size(); ++i)
     {
-        QLabel* nameLabel = new DLabel( DApplication::translate("Main", names.at(i).toStdString().data() ), downWidget_);
-        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        QLabel* nameLabel = new DLabel( DApplication::translate("Main", names.at(i).toStdString().data() ) + ":", downWidget_);
+        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         nameLabel->setMinimumWidth(NameLength_);
         nameLabel->setFont(font);
         //nameLabel->setMinimumHeight(SubRowHeight_);
         //nameLabel->setReadOnly(true);
 
         QLabel* contentLabel = new DLabel(contents.at(i), downWidget_);
-        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         contentLabel->setWordWrap(true);
         contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
         //contentLabel->setMinimumHeight(SubRowHeight_);
@@ -172,14 +175,14 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
             continue;
         }
 
-        QLabel* nameLabel = new DLabel( DApplication::translate("Main", article.name.toStdString().data() ), downWidget_ );
-        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        QLabel* nameLabel = new DLabel( DApplication::translate("Main", article.name.toStdString().data()) + ":", downWidget_ );
+        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         nameLabel->setMinimumWidth(NameLength_);
         //nameLabel->setMinimumHeight(SubRowHeight_);
         nameLabel->setFont(font);
 
         QLabel* contentLabel = new DLabel( article.value, downWidget_ );
-        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         contentLabel->setWordWrap(true);
         contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
         //contentLabel->setMinimumHeight(SubRowHeight_);
@@ -239,13 +242,12 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QStringList& name
 
     QVBoxLayout* vly = new QVBoxLayout;
 
-    DeviceInfo subInfo;
     if( false == title.isEmpty() )
     {
-        subInfo.title = new DLabel( DApplication::translate("Main", title.toStdString().data()), downWidget_);
-        subInfo.title->setFont(titleFont_);
-        subInfo.title->setFixedHeight(RowHeight_);
-        vly->addWidget(subInfo.title);
+        titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()), downWidget_);
+        titleInfo_->title->setFont(titleFont_);
+        titleInfo_->title->setFixedHeight(RowHeight_);
+        vly->addWidget(titleInfo_->title);
     }
 
     QHBoxLayout* hly = new QHBoxLayout;
@@ -284,13 +286,12 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
 
     QVBoxLayout* vly = new QVBoxLayout;
 
-    DeviceInfo subInfo;
     if( false == title.isEmpty() )
     {
-        subInfo.title = new DLabel( DApplication::translate("Main", title.toStdString().data()), downWidget_);
-        subInfo.title->setFont(titleFont_);
-        subInfo.title->setFixedHeight(RowHeight_);
-        vly->addWidget(subInfo.title);
+        titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()), downWidget_);
+        titleInfo_->title->setFont(titleFont_);
+        titleInfo_->title->setFixedHeight(RowHeight_);
+        vly->addWidget(titleInfo_->title);
     }
 
     QHBoxLayout* hly = new QHBoxLayout;
@@ -613,27 +614,13 @@ bool DeviceInfoWidgetBase::onExportToFile()
        return true;
    }
 
-    if(selectFilter == "Text (*.txt)")
-    {
-        return exportToTxt(exportFile);
-    }
+   MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent()->parent());
+   if( nullptr == mainWindow )
+   {
+       return false;
+   }
 
-    if(selectFilter == "Doc (*.doc)")
-    {
-        return exportToDoc(exportFile);
-    }
-
-    if(selectFilter == "Xls (*.xls)")
-    {
-        return exportToXls(exportFile);
-    }
-
-    if(selectFilter == "Html (*.html)")
-    {
-        return exportToHtml(exportFile);
-    }
-
-    return false;
+   return mainWindow->exportTo(exportFile, selectFilter);
 }
 
 QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
@@ -666,7 +653,7 @@ QTextStream& operator<<(QTextStream& ds, DTableWidget* tableWidget)
     for(int col = 0; col < tableWidget->columnCount(); ++col)
     {
         auto item = tableWidget->horizontalHeaderItem(col);
-        ds.setFieldWidth(tableWidget->columnWidth(col) *100.0 / tableWidget->width());
+        ds.setFieldWidth(tableWidget->columnWidth(col) *25.0 / tableWidget->width());
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
         if(item)
         {
@@ -685,7 +672,7 @@ QTextStream& operator<<(QTextStream& ds, DTableWidget* tableWidget)
     {
         for( int col = 0; col < tableWidget->columnCount(); ++col )
         {
-            ds.setFieldWidth(tableWidget->columnWidth(col) *100.0 / tableWidget->width());
+            ds.setFieldWidth(tableWidget->columnWidth(col) *25.0 / tableWidget->width());
             ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
             ds << tableWidget->item(row,col)->text();
             ds.setFieldWidth(0);
@@ -697,6 +684,35 @@ QTextStream& operator<<(QTextStream& ds, DTableWidget* tableWidget)
     return ds;
 }
 
+bool DeviceInfoWidgetBase::exportToTxt(QFile& txtFile)
+{
+    QTextStream out(&txtFile);
+    out <<  "[" << overviewInfo_.name << "]\n-------------------------------------------------";
+
+    if(tableWidget_)
+    {
+        out << "\n";
+        out << tableWidget_;
+    }
+
+    if(titleInfo_)
+    {
+        out << "\n";
+        out << *titleInfo_;
+    }
+
+    foreach(const DeviceInfo& di, deviceInfos_)
+    {
+        out << "\n";
+        out << di;
+    }
+    out << "\n";
+
+
+
+    return true;
+}
+
 bool DeviceInfoWidgetBase::exportToTxt(const QString& txtFile)
 {
     QFile file( txtFile );
@@ -705,22 +721,8 @@ bool DeviceInfoWidgetBase::exportToTxt(const QString& txtFile)
         return false;
     }
 
-    QTextStream out(&file);
+    exportToTxt(file);
 
-    if(tableWidget_)
-    {
-        out << tableWidget_ << "\n";
-    }
-
-    if(titleInfo_)
-    {
-        out << *titleInfo_ << "\n";
-    }
-
-    foreach(const DeviceInfo& di, deviceInfos_)
-    {
-        out << di << "\n";
-    }
 
     file.close();
 
@@ -763,7 +765,7 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
 {
     if(di.title)
     {
-        doc.addHeading(di.title->text(), 5);
+        doc.addHeading(di.title->text(), 4);
     }
 
     for(int i = 0; i < di.nameLabels.size(); ++i)
@@ -773,7 +775,7 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
         QString line;
         if(name.trimmed().isEmpty() == false || false == content.trimmed().isEmpty())
         {
-            line = name + " : " + content;
+            line = name + " " + content;
         }
 
         doc.addParagraph(line);
@@ -782,31 +784,45 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
     return true;
 }
 
-bool DeviceInfoWidgetBase::exportToDoc(const QString& docFile)
+bool DeviceInfoWidgetBase::exportToDoc(Docx::Document& doc)
 {
-    Docx::Document doc(":/thirdlib/docx/doc_template/template.doc");
+    doc.addHeading("[" + overviewInfo_.name + "]", 2);
+    doc.addParagraph("-------------------------------------------------");
+
     if(tableWidget_)
     {
         writeTabwidgetToDoc(tableWidget_, doc);
+        doc.addParagraph("\n");
     }
 
     if(titleInfo_)
     {
-        doc.addParagraph("\n");
         writeDeviceInfoToDoc(*titleInfo_, doc);
+        doc.addParagraph("\n");
     }
 
     foreach(auto di, deviceInfos_)
     {
-        doc.addParagraph("\n");
         writeDeviceInfoToDoc(di, doc);
+        doc.addParagraph("\n");
     }
 
+    doc.addParagraph("\n");
+    return true;
+}
+
+bool DeviceInfoWidgetBase::exportToDoc(const QString& docFile)
+{
+    Docx::Document doc(":/thirdlib/docx/doc_template/template.doc");
+    exportToDoc(doc);
     doc.save(docFile);
     return true;
 }
 
-static int currentXlsRow = 1;
+void DeviceInfoWidgetBase::resetXlsRowCount()
+{
+    currentXlsRow_ = 1;
+}
 
 bool writeTabwidgetToXls(DTableWidget* tableWidget, QXlsx::Document& xlsx)
 {
@@ -822,22 +838,23 @@ bool writeTabwidgetToXls(DTableWidget* tableWidget, QXlsx::Document& xlsx)
         if(item)
         {
             QXlsx::Format boldFont;
+            boldFont.setFontSize(10);
             boldFont.setFontBold(true);
-            xlsx.write( currentXlsRow, col+1, item->text(), boldFont );
+            xlsx.write( currentXlsRow_, col+1, item->text(), boldFont );
         }
     }
-    ++currentXlsRow;
+    ++currentXlsRow_;
 
     for( int row = 0; row < tableWidget->rowCount(); ++row )
     {
         for( int col = 0; col < tableWidget->columnCount(); ++col )
         {
-            xlsx.write( currentXlsRow, col+1, tableWidget->item(row,col)->text());
+            xlsx.write( currentXlsRow_, col+1, tableWidget->item(row,col)->text());
         }
-        ++currentXlsRow;
+        ++currentXlsRow_;
     }
 
-    ++currentXlsRow;
+    ++currentXlsRow_;
 
     return true;
 }
@@ -847,40 +864,54 @@ bool writeDeviceInfoToXls(const DeviceInfo& di, QXlsx::Document& xlsx)
     if(di.title)
     {
         QXlsx::Format boldFont;
+        boldFont.setFontSize(10);
         boldFont.setFontBold(true);
-        xlsx.write( currentXlsRow++, 1, di.title->text(), boldFont);
+        xlsx.write( currentXlsRow_++, 1, di.title->text(), boldFont);
     }
 
     for(int i = 0; i < di.nameLabels.size(); ++i)
     {
-        xlsx.write(currentXlsRow, 1, di.nameLabels[i]->text());
-        xlsx.write(currentXlsRow++, 2, di.contentLabels[i]->text());
+        xlsx.write(currentXlsRow_, 1, di.nameLabels[i]->text());
+        xlsx.write(currentXlsRow_++, 2, di.contentLabels[i]->text());
     }
 
-    ++currentXlsRow;
+    ++currentXlsRow_;
 
     return true;
 }
 
-bool DeviceInfoWidgetBase::exportToXls(const QString& xlsFile)
+
+bool DeviceInfoWidgetBase::exportToXls(QXlsx::Document& xlsFile)
 {
-    currentXlsRow = 1;
-    QXlsx::Document xlsx;
+    QXlsx::Format boldFont;
+    boldFont.setFontBold(true);
+    xlsFile.write( currentXlsRow_++, 1, overviewInfo_.name, boldFont);
 
     if(tableWidget_)
     {
-        writeTabwidgetToXls(tableWidget_, xlsx);
+        writeTabwidgetToXls(tableWidget_, xlsFile);
     }
 
     if(titleInfo_)
     {
-        writeDeviceInfoToXls(*titleInfo_, xlsx);
+        writeDeviceInfoToXls(*titleInfo_, xlsFile);
     }
 
     foreach(auto di, deviceInfos_)
     {
-        writeDeviceInfoToXls(di, xlsx);
+        writeDeviceInfoToXls(di, xlsFile);
     }
+
+    return true;
+}
+
+
+bool DeviceInfoWidgetBase::exportToXls(const QString& xlsFile)
+{
+    currentXlsRow_ = 1;
+    QXlsx::Document xlsx;
+
+    exportToXls(xlsx);
 
     xlsx.saveAs(xlsFile);
 
@@ -945,6 +976,36 @@ bool writeDeviceInfoToHtml(const DeviceInfo& di, QFile& html)
     return true;
 }
 
+bool DeviceInfoWidgetBase::exportToHtml(QFile& htmlFile)
+{
+    htmlFile.write("<!DOCTYPE html>\n");
+    htmlFile.write("<html>\n");
+    htmlFile.write("<body>\n");
+
+    htmlFile.write( (QString("<h2>") + overviewInfo_.name + "</h2>").toUtf8() );
+
+    if(tableWidget_)
+    {
+        writeTabwidgetToHtml(tableWidget_, htmlFile);
+        htmlFile.write("<br />\n");
+    }
+
+    if(titleInfo_)
+    {
+        writeDeviceInfoToHtml(*titleInfo_, htmlFile);
+        htmlFile.write("<br />\n");
+    }
+
+    foreach(auto di, deviceInfos_)
+    {
+        writeDeviceInfoToHtml(di, htmlFile);
+    }
+
+    htmlFile.write("</body>\n");
+    htmlFile.write("</html>\n");
+    return true;
+}
+
 bool DeviceInfoWidgetBase::exportToHtml(const QString& htmlFile)
 {
     QFile html(htmlFile);
@@ -953,29 +1014,7 @@ bool DeviceInfoWidgetBase::exportToHtml(const QString& htmlFile)
         return false;
     }
 
-    html.write("<!DOCTYPE html>\n");
-    html.write("<html>\n");
-    html.write("<body>\n");
-
-    if(tableWidget_)
-    {
-        writeTabwidgetToHtml(tableWidget_, html);
-        html.write("<br />\n");
-    }
-
-    if(titleInfo_)
-    {
-        writeDeviceInfoToHtml(*titleInfo_, html);
-        html.write("<br />\n");
-    }
-
-    foreach(auto di, deviceInfos_)
-    {
-        writeDeviceInfoToHtml(di, html);
-    }
-
-    html.write("</body>\n");
-    html.write("</html>\n");
+    exportToHtml(html);
     html.close();
     return true;
 }

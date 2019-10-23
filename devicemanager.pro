@@ -73,8 +73,7 @@ SOURCES += \
     src/logpasswordauth.cpp \
     src/printerwidget.cpp \
     src/devicelistview.cpp \
-    src/deviceattributedefine.cpp \
-    src/subdevicetableview.cpp
+    src/deviceattributedefine.cpp
 
 HEADERS += \
     src/mainwindow.h \
@@ -104,8 +103,7 @@ HEADERS += \
     src/tablewidgetalwaysfocus.h \
     src/logpasswordauth.h \
     src/printerwidget.h \
-    src/devicelistview.h \
-    src/subdevicetableview.h
+    src/devicelistview.h
 
 
 # Default rules for deployment.

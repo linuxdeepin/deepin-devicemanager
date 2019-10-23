@@ -18,9 +18,11 @@ void DisplayadapterWidget::initWidget()
     QSet<QString> existArticles;
 
     QStringList displayadapterList = DeviceInfoParserInstance.getDiaplayadapterList();
+    QStringList screenList = DeviceInfoParserInstance.getScreenName();
 
-    foreach(const QString& displayadapter, displayadapterList)
+    for(int i =0; i < displayadapterList.size(); ++i )
     {
+        QString displayadapter = displayadapterList[i];
         QString pci_bus = DeviceInfoParserInstance.queryData("lshw", displayadapter, "bus info");
         QRegExp reg("^pci@[0-9]*:([\\s\\S]*)$");
         if(reg.exactMatch(pci_bus))
@@ -53,6 +55,19 @@ void DisplayadapterWidget::initWidget()
         vendor.queryData( "lshw", displayadapter, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
+
+        if( i < screenList.size() )
+        {
+            QString screenName = screenList[i];
+
+            ArticleStruct minimum("Minimum Resolution");
+            minimum.queryData( "xrandr", screenName, "minimum");
+            articles.push_back(minimum);
+
+            ArticleStruct maximum("Maximum Resolution");
+            maximum.queryData( "xrandr", screenName, "maximum");
+            articles.push_back(maximum);
+        }
 
         ArticleStruct driver("Driver");
         driver.queryData("lspci", lspciDeviceName, "Kernel modules");

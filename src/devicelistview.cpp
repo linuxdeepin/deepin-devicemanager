@@ -147,3 +147,10 @@ void DeviceListView::setCurrentDevice(QString& device)
 {
     currentDevice_ = device;
 }
+
+QString DeviceListView::indexAt(int index)
+{
+    return navModel_->index(index, 0).data().toString();
+
+    //return navModel_->index(index).data().toString();
+}

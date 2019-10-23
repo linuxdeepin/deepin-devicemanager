@@ -66,7 +66,10 @@ public:
     QStringList getCpuList();
     QStringList getMemorynameList();
     QStringList getDisknameList();
+
     QStringList getDiaplayadapterList();
+    QStringList getScreenName();
+
     QStringList getDisplayInterfaceList();
     QStringList getHwinfoMonitorList();
     QStringList getXrandrMonitorList();

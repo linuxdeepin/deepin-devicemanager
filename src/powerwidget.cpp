@@ -27,21 +27,6 @@ void PowerWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct name("Name");
-        name.queryData( "lshw", device, "product");
-        articles.push_back(name);
-        existArticles.insert("product");
-
-        ArticleStruct vendor("Vendor");
-        vendor.queryData( "lshw", device, "vendor");
-        articles.push_back(vendor);
-        existArticles.insert("vendor");
-
-        ArticleStruct description("Description");
-        description.queryData("lshw", device, "description");
-        articles.push_back(description);
-        existArticles.insert("description");
-
         ArticleStruct ssdelay("Screen Suspend Delay");
         ssdelay.value = DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_==0? "Never" \
             : QString::number(DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_) + " Secs";
@@ -56,6 +41,21 @@ void PowerWidget::initWidget()
         asdelay.value = DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_==0? "Never" \
             : QString::number(DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_) + " Secs";
         articles.push_back(asdelay);
+
+        ArticleStruct name("Name");
+        name.queryData( "lshw", device, "product");
+        articles.push_back(name);
+        existArticles.insert("product");
+
+        ArticleStruct vendor("Vendor");
+        vendor.queryData( "lshw", device, "vendor");
+        articles.push_back(vendor);
+        existArticles.insert("vendor");
+
+        ArticleStruct description("Description");
+        description.queryData("lshw", device, "description");
+        articles.push_back(description);
+        existArticles.insert("description");
 
         ArticleStruct physicalId("Physical ID");
         physicalId.queryData( "lshw", device, "physical id");
@@ -77,6 +77,12 @@ void PowerWidget::initWidget()
         if(i < demidecodeSwitchingpowerList.size())
         {
             QString demideSwitchingpower = demidecodeSwitchingpowerList[i];
+
+            ArticleStruct maxcapacity("Max Power Capacity");
+            maxcapacity.queryData( "dmidecode", demideSwitchingpower, "Max Power Capacity");
+            articles.push_back(maxcapacity);
+            existArticles.insert("Max Power Capacity");
+
             existArticles.insert("Name");
             existArticles.insert("Manufacturer");
             existArticles.insert("Serial Number");
@@ -91,6 +97,7 @@ void PowerWidget::initWidget()
             assetTag.queryData( "dmidecode", demideSwitchingpower, "Asset Tag");
             articles.push_back(assetTag);
             existArticles.insert("Asset Tag");
+
             DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideSwitchingpower, articles, existArticles);
         }
 
@@ -107,6 +114,8 @@ void PowerWidget::initWidget()
 
             tabList.push_back(tab);
         }
+
+        overviewInfo_.value = DApplication::translate("Main", "Switching Power") + " " + name.value;
     }
 
 
@@ -116,21 +125,6 @@ void PowerWidget::initWidget()
 
         articles.clear();
         existArticles.clear();
-
-        ArticleStruct name("Name");
-        name.queryData( "lshw", device, "product");
-        articles.push_back(name);
-        existArticles.insert("product");
-
-        ArticleStruct vendor("Vendor");
-        vendor.queryData( "lshw", device, "vendor");
-        articles.push_back(vendor);
-        existArticles.insert("vendor");
-
-        ArticleStruct description("Description");
-        description.queryData("lshw", device, "description");
-        articles.push_back(description);
-        existArticles.insert("description");
 
         ArticleStruct ssdelay("Screen Suspend Delay");
         ssdelay.value = DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? "Never" \
@@ -146,6 +140,21 @@ void PowerWidget::initWidget()
         asdelay.value = DeviceInfoParserInstance.batteryAutoLockScreenDelay_==0? "Never" \
             : QString::number(DeviceInfoParserInstance.batteryAutoLockScreenDelay_) + " Secs";
         articles.push_back(asdelay);
+
+        ArticleStruct name("Name");
+        name.queryData( "lshw", device, "product");
+        articles.push_back(name);
+        existArticles.insert("product");
+
+        ArticleStruct vendor("Vendor");
+        vendor.queryData( "lshw", device, "vendor");
+        articles.push_back(vendor);
+        existArticles.insert("vendor");
+
+        ArticleStruct description("Description");
+        description.queryData("lshw", device, "description");
+        articles.push_back(description);
+        existArticles.insert("description");  
 
         ArticleStruct physicalId("Physical ID");
         physicalId.queryData( "lshw", device, "physical id");
@@ -197,6 +206,11 @@ void PowerWidget::initWidget()
 
             tabList.push_back(tab);
         }
+        if(overviewInfo_.value.isEmpty() == false)
+        {
+            overviewInfo_.value += " / ";
+        }
+        overviewInfo_.value += DApplication::translate("Main", "Battery") + " " + name.value;
     }
 
     if( switchingpowerList.size() + batteryList.size() > 1 )

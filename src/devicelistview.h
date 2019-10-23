@@ -30,7 +30,9 @@ public:
     QString currentDevice();
     void setCurrentDevice(QString& device);
 
-public:
+    QString indexAt(int index);
+
+private:
     QStandardItemModel* navModel_ = nullptr;
     QString currentDevice_;
 };

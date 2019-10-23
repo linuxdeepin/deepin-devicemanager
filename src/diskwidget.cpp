@@ -4,7 +4,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Disk"))
+DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Storage"))
 {
     initWidget();
 }

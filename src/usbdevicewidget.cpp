@@ -11,13 +11,6 @@ UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
 
 void UsbdeviceWidget::initWidget()
 {
-    QStringList names = {
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Capabilities"),
-                            DApplication::translate("Main", "configuration")
-                        };
-
     QStringList usbdeviceList = DeviceInfoParserInstance.getOtherUsbdeviceList();
 
     if( usbdeviceList.size() < 1)

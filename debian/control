@@ -7,6 +7,6 @@ Standards-Version: 4.1.3
 
 Package: dde-devicemanager
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, smartmontools, dmidecode, x11-xserver-utils, hwinfo
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>

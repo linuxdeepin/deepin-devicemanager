@@ -8,6 +8,9 @@
 #include "DLabel"
 #include "deviceattributedefine.h"
 
+#include "document.h"
+#include "xlsxdocument.h"
+
 class QLabel;
 class QVBoxLayout;
 class TableWidgetAlwaysFocus;
@@ -66,9 +69,15 @@ public slots:
     void OnCurrentItemClicked(QTableWidgetItem *item);
     bool onExportToFile();
 
-private:
+public:
+    virtual bool exportToTxt(QFile& txtFile);
+    virtual bool exportToDoc(Docx::Document& doc);
+    virtual bool exportToXls(QXlsx::Document& xlsFile);
+    virtual bool exportToHtml(QFile& htmlFile);
+
     virtual bool exportToTxt(const QString& txtFile);
     virtual bool exportToDoc(const QString& docFile);
+    static void resetXlsRowCount();
     virtual bool exportToXls(const QString& xlsFile);
     virtual bool exportToHtml(const QString& htmlFile);
 
@@ -98,4 +107,6 @@ protected:
     ArticleStruct overviewInfo_;
 
     int verticalScrollBarMaxValue = 0;
+
+    //static int currentXlsRow_;
 };

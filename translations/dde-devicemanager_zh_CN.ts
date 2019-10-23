@@ -44,12 +44,12 @@
             <translation>内存</translation>
         </message>
         <message>
-            <source>Disk</source>
-            <translation>硬盘</translation>
+            <source>Storage</source>
+            <translation>存储设备</translation>
         </message>
         <message>
             <source>DisplayAdapter</source>
-            <translation>显卡</translation>
+            <translation>显示适配器</translation>
         </message>
         <message>
             <source>Monitor</source>
@@ -61,7 +61,7 @@
         </message>
         <message>
             <source>NetworkAdapter</source>
-            <translation>网卡</translation>
+            <translation>网络适配器</translation>
         </message>
         <message>
             <source>Printer</source>
@@ -740,7 +740,7 @@
             <translation>未发现蓝牙设备！</translation>
         </message>
         <message>
-            <source>No Camera found</source>
+            <source>No Camera found!</source>
             <translation>未发现图像设备！</translation>
         </message>
         <message>
@@ -760,6 +760,10 @@
             <translation>未发现其他输入设备！</translation>
         </message>
         <message>
+            <source>No Other PCI Device found!</source>
+            <translation>未发现其他PCI设备！</translation>
+        </message>
+        <message>
             <source>No Printer found!</source>
             <translation>未发现打印机！</translation>
         </message>
@@ -770,6 +774,10 @@
         <message>
             <source>Model Part Number</source>
             <translation>部件号码</translation>
+        </message>
+        <message>
+            <source>Power Unit Group</source>
+            <translation>电源组</translation>
         </message>
         <message>
             <source>multicast</source>
@@ -787,6 +795,13 @@
             <source>firmware</source>
             <translation>固件</translation>
         </message>
-
+        <message>
+            <source>Minimum Resolution</source>
+            <translation>最小分辨率</translation>
+        </message>
+        <message>
+            <source>Maximum Resolution</source>
+            <translation>最大分辨率</translation>
+        </message>
     </context>
 </TS>
