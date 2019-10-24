@@ -49,7 +49,7 @@ void MotherboardWidget::initWidget()
     }
     articles.push_back(chipsetFamily);
 
-    overviewInfo_.value =  model.value + chipsetFamily.value;
+    overviewInfo_.value =  model.value + " " + chipsetFamily.value;
 
     ArticleStruct serial("Serial Number");
     serial.queryData("dmidecode", "Base Board Information", "Serial Number");
@@ -62,7 +62,9 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Features");
 
     DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Base Board Information", articles, existArticles);
+    addInfo( "", articles );
 
+    articles.clear();
     existArticles.clear();
     ArticleStruct uuid("UUID");
     uuid.queryData("dmidecode", "System Information", "UUID");
@@ -81,6 +83,9 @@ void MotherboardWidget::initWidget()
 
     DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "System Information", articles, existArticles);
 
+    addSubInfo( "System Information", articles );
+
+    articles.clear();
     existArticles.clear();
     ArticleStruct biosVersion("Bios Version");
     biosVersion.queryData("dmidecode", "BIOS Information", "Version");
@@ -103,5 +108,5 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Characteristics");
     DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles);
 
-    addInfo( "", articles );
+    addSubInfo( "Bios", articles );
 }

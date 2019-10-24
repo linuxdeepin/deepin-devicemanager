@@ -80,6 +80,10 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>speed</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>Cores</source>
             <translation type="unfinished"/>
         </message>
@@ -592,6 +596,10 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>Bus info</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>logical name</source>
             <translation type="unfinished"/>
         </message>
@@ -609,6 +617,10 @@
         </message>
         <message>
             <source>Physical ID</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Physical id</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -805,6 +817,22 @@
         </message>
         <message>
             <source>Maximum Resolution</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Never</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source> Secs later</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>latency</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>irq</source>
             <translation type="unfinished"/>
         </message>
     </context>

@@ -45,6 +45,7 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent, const QString& devic
     {
         QLabel* nameLabel = new DLabel("", this);
         titleFont_ = nameLabel->font();
+        delete nameLabel;
         subTitleFont_ = titleFont_;
         labelFont_ = titleFont_;
         infoFont_ = titleFont_;
@@ -73,44 +74,18 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent, const QString& devic
     vLayout_->setSpacing(0);
     vLayout_->setMargin(8);
 
-    //setAutoFillBackground(false);
+    setAutoFillBackground(false);
 
     setLayout(vLayout_);
     setMinimumHeight(WidgetHeight);
     initContextMenu();
 
-//    DPalette pa = DApplicationHelper::instance()->palette(this);
-//    QColor base_color = palette().base().color();
-//    DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
-
-//    if (ct == DGuiApplicationHelper::LightType) {
-//        pa.setColor(QPalette::Background, base_color);
-//        pa.setBrush(DPalette::LightLively, palette().base());
-//        pa.setBrush(DPalette::DarkLively, palette().base());
-//        //pa.setColor(QPalette::Light, base_color);
-//        //pa.setC
-//    } else {
-//        base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
-//        pa.setColor(QPalette::Background, base_color);
-//    }
-
-//    DApplicationHelper::instance()->setPalette(this, pa);
-
     auto modifyTheme = [this](){
         DPalette pa = DApplicationHelper::instance()->palette(this);
         QColor base_color = palette().base().color();
-        DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
 
-        //if (ct == DGuiApplicationHelper::LightType) {
-            pa.setColor(QPalette::Background, base_color);
-//            pa.setBrush(DPalette::LightLively, palette().base());
-//            pa.setBrush(DPalette::DarkLively, palette().base());
-            pa.setBrush(DPalette::ItemBackground, palette().base());
-//        } else {
-//            base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
-//            pa.setColor(DPalette::ItemBackground, base_color);
-//            pa.setColor(QPalette::Background, base_color);
-//        }
+        pa.setColor(QPalette::Background, base_color);
+        pa.setBrush(DPalette::ItemBackground, palette().base());
 
         DApplicationHelper::instance()->setPalette(this, pa);
     };
@@ -204,7 +179,9 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
         //nameLabel->setMinimumHeight(SubRowHeight_);
         nameLabel->setFont(font);
 
-        QLabel* contentLabel = new DLabel( article.value, downWidget_ );
+        QLabel* contentLabel = new DLabel( article.valueTranslate ? \
+                                           DApplication::translate("Main", article.value.toStdString().data()): \
+                                           article.value, downWidget_ );
         //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         contentLabel->setWordWrap(true);
         contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
@@ -253,6 +230,36 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
 
 //    vLayout_->insertWidget( vLayout_->count(), titleInfo_->title );
 //}
+
+void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
+{
+    //initDownWidget();
+
+    if(titleInfo_ == nullptr)
+    {
+       titleInfo_ = new DeviceInfo;
+    }
+
+    downWidget_ = new DWidget(this);
+    downWidget_->setAutoFillBackground(true);
+    downWidgetLayout = new QVBoxLayout;
+    downWidget_->setLayout(downWidgetLayout);
+
+    if( false == info.isEmpty() )
+    {
+        titleInfo_->title = new DLabel( DApplication::translate("Main", info.toStdString().data()), downWidget_);
+        titleInfo_->title->setFont(infoFont_);
+
+        auto hLayout = new QHBoxLayout;
+        hLayout->addWidget(titleInfo_->title, 1, Qt::AlignmentFlag::AlignCenter);
+
+        downWidgetLayout->addStretch(2);
+        downWidgetLayout->addLayout(hLayout, 1);
+        downWidgetLayout->addStretch(3);
+    }
+
+    vLayout_->addWidget(downWidget_ );
+}
 
 void DeviceInfoWidgetBase::addInfo(const QString& title, const QStringList& names, const QStringList& contents)
 {
@@ -436,7 +443,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 {
     if(tableWidget_ == nullptr)
     {
-        tableWidget_ = new DTableWidget(this);
+        tableWidget_ = new TableWidgetAlwaysFocus(this);
 
         //tableWidget_->setBackgroundRole(QPalette::Base);
         //tableWidget_->setAutoFillBackground(true);

@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
     //setWindowTitle("");
-    setAutoFillBackground(false);
+    setAutoFillBackground(true);
     DWidget* mainWidget = new DWidget(this);
     mainWidget->setAutoFillBackground(true);
     mainWidget->setMaximumHeight(640);

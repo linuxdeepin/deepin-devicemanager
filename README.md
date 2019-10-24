@@ -1,8 +1,10 @@
 # dde-devicemanager
 Device Manager is a gadget for viewing device information.
+
+
 深度设备管理器是查看、管理硬件设备的工具软件。
 
-## depend on 
+## Depend on 
 * lshw
 * [dmidecode](http://www.nongnu.org/dmidecode/)
 * hciconfig
@@ -13,8 +15,8 @@ Device Manager is a gadget for viewing device information.
 * [xrandr](https://www.x.org/wiki/Projects/XRandR/)
 * [CUPS](https://www.cups.org/index.html)
 
-## thridparty lib
-* docx
+## Thridparty lib
+* [docx](https://github.com/lpxxn/docx)
 * [QtXlsx](http://qtxlsx.debao.me)
 
 ## Installation
@@ -27,4 +29,4 @@ Device Manager is a gadget for viewing device information.
 * make
 
 ## Usage
-* sudo ./dde-devicemanager
+sudo ./dde-devicemanager

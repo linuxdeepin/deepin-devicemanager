@@ -51,34 +51,36 @@ TableWidgetAlwaysFocus::TableWidgetAlwaysFocus(QWidget *parent):DTableWidget(par
 
 void TableWidgetAlwaysFocus::focusOutEvent(QFocusEvent *event)
 {
+    //this->setFocus();
     //setFocus(Qt::FocusReason::OtherFocusReason);
-    DTableWidget::focusOutEvent(event);
+    //DTableWidget::focusOutEvent(event);
     //setBackgroundRole(QPalette::Dark);
     //setPalette(QPalette(QColor(255,255,255)));
-    //focusInEvent(event);
+    DTableWidget::focusOutEvent(event);
     //setFocus(Qt::FocusReason::OtherFocusReason);
 }
 
 void TableWidgetAlwaysFocus::focusInEvent(QFocusEvent *event)
 {
+    //this->setFocus();
     //setFocus(Qt::FocusReason::OtherFocusReason);
     DTableWidget::focusInEvent(event);
 }
 
-void TableWidgetAlwaysFocus::showEvent(QShowEvent *event)
-{
-    DTableWidget::showEvent(event);
-    //setFocus(Qt::FocusReason::OtherFocusReason);
-    //setCurrentItem(nullptr);
-}
+//void TableWidgetAlwaysFocus::showEvent(QShowEvent *event)
+//{
+//    DTableWidget::showEvent(event);
+//    //setFocus(Qt::FocusReason::OtherFocusReason);
+//    //setCurrentItem(nullptr);
+//}
 
-void TableWidgetAlwaysFocus::enterEvent(QEvent *event)
-{
-    DTableWidget::enterEvent(event);
-}
+//void TableWidgetAlwaysFocus::enterEvent(QEvent *event)
+//{
+//    DTableWidget::enterEvent(event);
+//}
 
-void TableWidgetAlwaysFocus::leaveEvent(QEvent *event)
-{
-    DTableWidget::leaveEvent(event);
-    //setFocus(Qt::FocusReason::OtherFocusReason);
-}
+//void TableWidgetAlwaysFocus::leaveEvent(QEvent *event)
+//{
+//    DTableWidget::leaveEvent(event);
+//    //setFocus(Qt::FocusReason::OtherFocusReason);
+//}

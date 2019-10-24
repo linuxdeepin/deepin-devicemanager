@@ -18,9 +18,7 @@ void NetworkadapterWidget::initWidget()
 
     if( networkadapterList.size() < 1 )
     {
-        QStringList emptyList;
-        addInfo("No NetworkAdapter found!", emptyList, emptyList);
-        addStrecch();
+        setCentralInfo("No NetworkAdapter found!");
         return;
     }
 

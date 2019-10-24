@@ -45,6 +45,7 @@ public:
     void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents, const QFont& font);
     void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font);
 
+    void setCentralInfo(const QString& info);
     //void setTitle(const QString& title);
     void addInfo(const QString& title, const QStringList& names, const QStringList& contents);
     void addInfo(const QString& title, const QList<ArticleStruct>& articles);

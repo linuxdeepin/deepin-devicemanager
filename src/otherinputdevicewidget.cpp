@@ -16,9 +16,7 @@ void OtherInputdeviceWidget::initWidget()
 
     if( otherInputdeviceList.size() < 1 )
     {
-        QStringList emptyList;
-        addInfo("No Other Inputdevice found!", emptyList, emptyList);
-        addStrecch();
+        setCentralInfo("No Other Inputdevice found!");
         return;
     }
 

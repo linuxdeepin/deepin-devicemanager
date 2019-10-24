@@ -16,9 +16,7 @@ void BluetoothWidget::initWidget()
 
     if( bluetoothList.size() < 1 )
     {
-        QStringList emptyList;
-        addInfo("No Bluetooth Device found!", emptyList, emptyList);
-        addStrecch();
+        setCentralInfo("No Bluetooth Device found!");
         return;
     }
 

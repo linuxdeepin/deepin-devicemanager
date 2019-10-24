@@ -16,9 +16,7 @@ void PrinterWidget::initWidget()
 
     if( printerList.size() < 1)
     {
-        QStringList emptyList;
-        addInfo("No Printer found!", emptyList, emptyList);
-        addStrecch();
+        setCentralInfo("No Printer found!");
         return;
     }
 
@@ -28,6 +26,9 @@ void PrinterWidget::initWidget()
 
     foreach(const QString& device, printerList)
     {
+        articles.clear();
+        existArticles.clear();
+
         ArticleStruct printerInfo("printer-info");
         printerInfo.queryData( "Cups", device, "printer-info");
         articles.push_back(printerInfo);
@@ -38,21 +39,19 @@ void PrinterWidget::initWidget()
         articles.push_back(printerMakeAndModel);
         existArticles.insert("printer-make-and-model");
 
-
-
-        if( false == DeviceInfoParserInstance.queryDeviceInfo( "Cups", device, articles))
-        {
-            continue;
-        }
+        DeviceInfoParserInstance.queryDeviceInfo( "Cups", device, articles);
 
         addSubInfo( device, articles);
-        articles.clear();
 
         if(overviewInfo_.value.isEmpty() )
         {
             overviewInfo_.value = printerMakeAndModel.value;
-            overviewInfo_.value += " ";
-            overviewInfo_.value += printerInfo.value;
+            if( false == overviewInfo_.value.contains(printerInfo.value, Qt::CaseInsensitive) )
+            {
+                overviewInfo_.value += " ";
+                overviewInfo_.value += printerInfo.value;
+            }
+
         }
     }
 }

@@ -627,7 +627,7 @@ QStringList DeviceInfoParser::getOtherUsbdeviceList()
     return usbdeviceList;
 }
 
-QStringList DeviceInfoParser::getMouseInputdeviceList()
+QStringList DeviceInfoParser::getPS_2MouseInputdeviceList()
 {
     QStringList inputdeviceList;
 
@@ -643,10 +643,20 @@ QStringList DeviceInfoParser::getMouseInputdeviceList()
             continue;
         }
 
-        if( toolDatabase_["catinput"][fk]["Name"].contains("mouse", Qt::CaseInsensitive) )
+        if( false == toolDatabase_["catinput"][fk]["Name"].contains("mouse", Qt::CaseInsensitive))
         {
-            inputdeviceList.push_back(fk);
+            continue;
         }
+
+        if( toolDatabase_["catinput"][fk].contains("Phys") && toolDatabase_["catinput"][fk]["Phys"].contains("usb", Qt::CaseInsensitive) )// remove dumplicate usb mouse
+        {
+            continue;
+        }
+
+//        if( toolDatabase_["catinput"][fk]["Name"].contains("PS/2", Qt::CaseInsensitive) )
+//        {
+            inputdeviceList.push_back(fk);
+//        }
     }
 
     return inputdeviceList;
@@ -685,7 +695,7 @@ QStringList DeviceInfoParser::getMouseList()
     return mouseList;
 }
 
-QStringList DeviceInfoParser::getKeyboardInputdeviceList()
+QStringList DeviceInfoParser::getPS_2KeyboardInputdeviceList()
 {
     QStringList inputdeviceList;
 
@@ -701,10 +711,20 @@ QStringList DeviceInfoParser::getKeyboardInputdeviceList()
             continue;
         }
 
-        if( toolDatabase_["catinput"][fk]["Name"].contains("keyboard", Qt::CaseInsensitive) )
+        if( false == toolDatabase_["catinput"][fk]["Name"].contains("keyboard", Qt::CaseInsensitive) )
         {
-            inputdeviceList.push_back(fk);
+            continue;
+        }     
+
+        if( toolDatabase_["catinput"][fk].contains("Phys") && toolDatabase_["catinput"][fk]["Phys"].contains("usb", Qt::CaseInsensitive) )// remove dumplicate usb keyboard
+        {
+            continue;
         }
+
+//        if( toolDatabase_["catinput"][fk]["Name"].contains("PS/2", Qt::CaseInsensitive))
+//        {
+            inputdeviceList.push_back(fk);
+//        }
     }
 
     return inputdeviceList;

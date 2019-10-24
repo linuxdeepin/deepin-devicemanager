@@ -19,9 +19,7 @@ void AudiodeviceWidget::initWidget()
 
     if( multimediaList.size() + inputdeviceList.size() < 1 )
     {
-        QStringList emptyList;
-        addInfo("No Audio Device found!", emptyList, emptyList);
-        addStrecch();
+        setCentralInfo("No Audio Device found!");
         return;
     }
 

@@ -15,9 +15,7 @@ void CameraWidget::initWidget()
 
     if( cameraList.size() < 1 )
     {
-        QStringList emptyList;
-        addInfo("No Camera found!", emptyList, emptyList);
-        addStrecch();
+        setCentralInfo("No Camera found!");
         return;
     }
 

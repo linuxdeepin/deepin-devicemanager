@@ -11,14 +11,12 @@ KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, D
 
 void KeyboardWidget::initWidget()
 {
-    QStringList inputdeviceList = DeviceInfoParserInstance.getKeyboardInputdeviceList();
+    QStringList inputdeviceList = DeviceInfoParserInstance.getPS_2KeyboardInputdeviceList();
     QStringList keyboardList = DeviceInfoParserInstance.getKeyboardList();
 
     if( inputdeviceList.size() + keyboardList.size() < 1 )
     {
-        QStringList emptyList;
-        addInfo("No Keyboard found!", emptyList, emptyList);
-        addStrecch();
+        setCentralInfo("No Keyboard found!");
         return;
     }
 

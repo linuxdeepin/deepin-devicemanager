@@ -84,6 +84,10 @@
             <translation>速度</translation>
         </message>
         <message>
+            <source>speed</source>
+            <translation>速度</translation>
+        </message>
+        <message>
             <source>Cores</source>
             <translation>核心</translation>
         </message>
@@ -257,7 +261,7 @@
         </message>
         <message>
             <source>Capabilities</source>
-            <translation>容量</translation>
+            <translation>功能</translation>
         </message>
         <message>
             <source>Interface</source>
@@ -588,6 +592,10 @@
             <translation>总线</translation>
         </message>
         <message>
+            <source>Bus info</source>
+            <translation>总线</translation>
+        </message>
+        <message>
             <source>logical name</source>
             <translation>逻辑名称</translation>
         </message>
@@ -605,6 +613,10 @@
         </message>
         <message>
             <source>Physical ID</source>
+            <translation>物理ID</translation>
+        </message>
+        <message>
+            <source>Physical id</source>
             <translation>物理ID</translation>
         </message>
         <message>
@@ -802,6 +814,22 @@
         <message>
             <source>Maximum Resolution</source>
             <translation>最大分辨率</translation>
+        </message>
+        <message>
+            <source>Never</source>
+            <translation>从不</translation>
+        </message>
+        <message>
+            <source> Secs later</source>
+            <translation>秒后</translation>
+        </message>
+        <message>
+            <source>latency</source>
+            <translation>延迟</translation>
+        </message>
+        <message>
+            <source>irq</source>
+            <translation>中断</translation>
         </message>
     </context>
 </TS>

@@ -17,9 +17,7 @@ void OtherPciDeviceWidget::initWidget()
 
     if(otherPcideviceList.size() < 1)
     {
-        QStringList emptyList;
-        addInfo("No Other PCI Device found!", emptyList, emptyList);
-        addStrecch();
+        setCentralInfo("No Other PCI Device found!");
         return;
     }
 

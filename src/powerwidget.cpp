@@ -28,18 +28,18 @@ void PowerWidget::initWidget()
         existArticles.clear();
 
         ArticleStruct ssdelay("Screen Suspend Delay");
-        ssdelay.value = DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_==0? "Never" \
-            : QString::number(DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_) + " Secs";
+        ssdelay.value = DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_==0? DApplication::translate("Main", "Never") \
+            : QString::number(DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
         articles.push_back(ssdelay);
 
         ArticleStruct csdelay("Computer Suspend Delay");
-        csdelay.value = DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_==0? "Never" \
-            : QString::number(DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_) + " Secs";
+        csdelay.value = DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_==0? DApplication::translate("Main", "Never") \
+            : QString::number(DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
         articles.push_back(csdelay);
 
         ArticleStruct asdelay("AutoLock Screen Delay");
-        asdelay.value = DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_==0? "Never" \
-            : QString::number(DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_) + " Secs";
+        asdelay.value = DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_==0? DApplication::translate("Main", "Never") \
+            : QString::number(DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
         articles.push_back(asdelay);
 
         ArticleStruct name("Name");
@@ -127,18 +127,18 @@ void PowerWidget::initWidget()
         existArticles.clear();
 
         ArticleStruct ssdelay("Screen Suspend Delay");
-        ssdelay.value = DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? "Never" \
-            : QString::number(DeviceInfoParserInstance.batteryScreenSuspendDelay_) + " Secs";
+        ssdelay.value = DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? DApplication::translate("Main", "Never") \
+            : QString::number(DeviceInfoParserInstance.batteryScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
         articles.push_back(ssdelay);
 
         ArticleStruct csdelay("Computer Suspend Delay");
-        csdelay.value = DeviceInfoParserInstance.batteryComputerSuspendDelay_==0? "Never" \
-            : QString::number(DeviceInfoParserInstance.batteryComputerSuspendDelay_) + " Secs";
+        csdelay.value = DeviceInfoParserInstance.batteryComputerSuspendDelay_==0? DApplication::translate("Main", "Never") \
+            : QString::number(DeviceInfoParserInstance.batteryComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
         articles.push_back(csdelay);
 
         ArticleStruct asdelay("AutoLock Screen Delay");
-        asdelay.value = DeviceInfoParserInstance.batteryAutoLockScreenDelay_==0? "Never" \
-            : QString::number(DeviceInfoParserInstance.batteryAutoLockScreenDelay_) + " Secs";
+        asdelay.value = DeviceInfoParserInstance.batteryAutoLockScreenDelay_==0? DApplication::translate("Main", "Never") \
+            : QString::number(DeviceInfoParserInstance.batteryAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
         articles.push_back(asdelay);
 
         ArticleStruct name("Name");
@@ -171,26 +171,35 @@ void PowerWidget::initWidget()
         articles.push_back(capacity);
         existArticles.insert("capacity");
 
+        ArticleStruct slot("Location");
+        slot.queryData( "dmidecode", device, "slot");
+        articles.push_back(slot);
+        if(slot.value.isEmpty() == false || slot.value != DApplication::translate("Main", "Unknown"))
+        {
+            existArticles.insert("Location");
+        }
+        existArticles.insert("slot");
+
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
-        if(i < demidecodeSwitchingpowerList.size())
+        if(i < demidecodebatteryList.size())
         {
-            QString demideSwitchingpower = demidecodeSwitchingpowerList[i];
+            QString demideBattery = demidecodebatteryList[i];
             existArticles.insert("Name");
             existArticles.insert("Manufacturer");
             existArticles.insert("Serial Number");
             existArticles.insert("Name");
 
             ArticleStruct location("Location");
-            location.queryData( "dmidecode", demideSwitchingpower, "Location");
+            location.queryData( "dmidecode", demideBattery, "Location");
             articles.push_back(location);
             existArticles.insert("Location");
 
             ArticleStruct assetTag("Asset Tag");
-            assetTag.queryData( "dmidecode", demideSwitchingpower, "Asset Tag");
+            assetTag.queryData( "dmidecode", demideBattery, "Asset Tag");
             articles.push_back(assetTag);
             existArticles.insert("Asset Tag");
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideSwitchingpower, articles, existArticles);
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideBattery, articles, existArticles);
         }
 
         addSubInfo( "Battery", articles );

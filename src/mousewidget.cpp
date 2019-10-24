@@ -11,14 +11,12 @@ MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplic
 
 void MouseWidget::initWidget()
 {
-    QStringList inputdeviceList = DeviceInfoParserInstance.getMouseInputdeviceList();
+    QStringList inputdeviceList = DeviceInfoParserInstance.getPS_2MouseInputdeviceList();
     QStringList mouseList = DeviceInfoParserInstance.getMouseList();
 
     if( inputdeviceList.size() + mouseList.size() < 1 )
     {
-        QStringList emptyList;
-        addInfo("No Mouse found!", emptyList, emptyList);
-        addStrecch();
+        setCentralInfo("No Mouse found!");
         return;
     }
 
@@ -155,7 +153,10 @@ void MouseWidget::initWidget()
 
         tabList.push_back(tab);
 
-        overviewInfo_.value += " / ";
+        if(overviewInfo_.value.isEmpty() == false)
+        {
+            overviewInfo_.value += " / ";
+        }
         overviewInfo_.value += name.value;
     }
 

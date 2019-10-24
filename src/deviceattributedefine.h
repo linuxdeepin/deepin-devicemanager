@@ -8,6 +8,7 @@ struct ArticleStruct
     QString value;
 
     bool autoHide = true;
+    bool valueTranslate = false;
 
     ArticleStruct(const QString& n = "", bool b = true): name(n), autoHide(b)
     {

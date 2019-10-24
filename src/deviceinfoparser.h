@@ -89,9 +89,9 @@ public:
 
     QStringList getOtherUsbdeviceList();
 
-    QStringList getMouseInputdeviceList();
+    QStringList getPS_2MouseInputdeviceList();
     QStringList getMouseList();
-    QStringList getKeyboardInputdeviceList();
+    QStringList getPS_2KeyboardInputdeviceList();
     QStringList getKeyboardList();
 
     QStringList getSwitchingpowerList();
