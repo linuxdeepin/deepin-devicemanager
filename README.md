@@ -20,7 +20,7 @@ Device Manager is a gadget for viewing device information.
 * [QtXlsx](http://qtxlsx.debao.me)
 
 ## Installation
-* sudo apt-get install dde-devicemanager
+sudo apt-get install dde-devicemanager
 
 ## Build
 * mkdir build
