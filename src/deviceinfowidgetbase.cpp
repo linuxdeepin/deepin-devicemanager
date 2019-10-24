@@ -175,6 +175,7 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
 
         QLabel* nameLabel = new DLabel( DApplication::translate("Main", article.name.toStdString().data()) + ":", downWidget_ );
         //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+
         nameLabel->setMinimumWidth(NameLength_);
         //nameLabel->setMinimumHeight(SubRowHeight_);
         nameLabel->setFont(font);
@@ -183,6 +184,11 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
                                            DApplication::translate("Main", article.value.toStdString().data()): \
                                            article.value, downWidget_ );
         //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        if(article.externalLinks)
+        {
+            contentLabel->setOpenExternalLinks(true);
+        }
+
         contentLabel->setWordWrap(true);
         contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
         //contentLabel->setMinimumHeight(SubRowHeight_);

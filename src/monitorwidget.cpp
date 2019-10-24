@@ -28,21 +28,14 @@ void MonitorWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    QStringList monitorNames = {
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Manufacture Date"),
-                            DApplication::translate("Main", "Size"),
-                            DApplication::translate("Main", "Resolution"),
-                            DApplication::translate("Main", "Display Rate"),
-                            DApplication::translate("Main", "Connect Type")
-                            };
-
     QStringList hwinfMonitorList = DeviceInfoParserInstance.getHwinfoMonitorList();
     QStringList xrandrMonitorList = DeviceInfoParserInstance.getXrandrMonitorList();
 
     for(int i = 0; i < hwinfMonitorList.size(); ++i)
     {
+        articles.clear();
+        existArticles.clear();
+
         const QString& monitor = hwinfMonitorList.at(i);
 
         ArticleStruct name("Name");
@@ -72,13 +65,22 @@ void MonitorWidget::initWidget()
         articles.push_back(serial);
         existArticles.insert("Serial ID");
 
-        ArticleStruct mDate("Manufacture Date");
-        mDate.value = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Year of Manufacture");
-        mDate.value += DApplication::translate("Main", "Year");
-        mDate.value += " ";
-        mDate.value += DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
-        mDate.value += DApplication::translate("Main", "Week");
+        ArticleStruct mDate("Manufacture Date"); 
+        QString my = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Year of Manufacture");
+        if( my.isEmpty() == false && my != DApplication::translate("Main", "Unknown") )
+        {
+            mDate.value = my + DApplication::translate("Main", "Year");
+        }
+
+        QString mw = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
+        if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
+        {
+            mDate.value += " ";
+            mDate.value += mw;
+            mDate.value += DApplication::translate("Main", "Week");
+        }
         articles.push_back(mDate);
+
         existArticles.insert("Year of Manufacture");
         existArticles.insert("Week of Manufacture");
 

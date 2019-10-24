@@ -186,8 +186,9 @@ void MainWindow::refresh()
 
 void MainWindow::refreshDatabase()
 {
-    QString osInfo;
-    DeviceInfoParserInstance.getOSInfo(osInfo);
+    //QString osInfo;
+    DeviceInfoParserInstance.loadCatosrelelease();
+    //DeviceInfoParserInstance.getOSInfo(osInfo);
     DeviceInfoParserInstance.loadDemicodeDatabase();
     DeviceInfoParserInstance.loadLshwDatabase();
     DeviceInfoParserInstance.loadCatcpuDatabase();

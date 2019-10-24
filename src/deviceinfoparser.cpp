@@ -967,8 +967,71 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
         osInfo = standOutput_;
      }
 
-     osInfo.remove("version");
+    osInfo.remove("version");
+    QString lsbRelease = queryData("catOsrelease", "catOsrelease", "PRETTY_NAME");
+    lsbRelease.remove("\"");
+    QString homeUrl = queryData("catOsrelease", "catOsrelease", "HOME_URL");
+    homeUrl.remove("\"");
+    if(lsbRelease.isEmpty() || lsbRelease ==  DApplication::translate("Main", "Unknown"))
+    {
+        return true;
+    }
 
+    if( homeUrl.isEmpty() == false && homeUrl !=  DApplication::translate("Main", "Unknown"))
+    {
+        osInfo =  "<style> a {text-decoration: none} </style><a href=\"" + homeUrl + "\">" + lsbRelease + " </a> \t" + osInfo;
+    }
+    else
+    {
+        osInfo = lsbRelease + " " + osInfo;
+    }
+
+    return true;
+}
+
+bool DeviceInfoParser::loadCatosrelelease()
+{
+    if( false == executeProcess("cat /etc/os-release"))
+    {
+        return false;
+    }
+
+    QString CatosreleleaseOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile lsb_releaseFile("./deviceInfo/os-release.txt");
+    if( false == lsb_releaseFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+    CatosreleleaseOut = lsb_releaseFile.readAll();
+    lsb_releaseFile.close();
+#endif
+
+    // lscpu
+    QMap<QString, QString> osreleaseDatabase_;
+
+    int startIndex = 0;
+
+    for( int i = 0; i < CatosreleleaseOut.size(); ++i )
+    {
+         if( CatosreleleaseOut[i] != '\n' && i != CatosreleleaseOut.size() -1 )
+         {
+             continue;
+         }
+
+         QString line = CatosreleleaseOut.mid(startIndex, i - startIndex);
+         startIndex = i + 1;
+
+         if( line.contains(DeviceType_CatDevice_Separator) )
+         {
+             QStringList strList = line.split(DeviceType_CatDevice_Separator);
+             osreleaseDatabase_[strList.first().trimmed().remove(Devicetype_lshw_Class_Prefix)] = strList.last().trimmed();
+         }
+    }
+
+    DatabaseMap rootlscuDb;
+    rootlscuDb["catOsrelease"] = osreleaseDatabase_;
+    toolDatabase_["catOsrelease"] = rootlscuDb;
     return true;
 }
 
