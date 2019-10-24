@@ -25,8 +25,8 @@ void MotherboardWidget::initWidget()
                         };
 
     ArticleStruct model("Model");
-    QString manufactor = DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Manufacturer");
-    model.value = manufactor + " "+ DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Product Name");
+    //QString manufactor = DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Manufacturer");
+    model.value = /*manufactor + " "+*/ DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Product Name");
     articles.push_back(model);
     existArticles.insert("Product Name");
 

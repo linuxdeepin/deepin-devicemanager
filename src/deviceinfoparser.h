@@ -106,6 +106,8 @@ public:
     // get os
     bool getOSInfo(QString& osInfo);
     bool loadCatosrelelease();
+    bool loadlsb_release();
+
     // dmidecode parse
     bool loadDemicodeDatabase();
     // lshw parse

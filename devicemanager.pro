@@ -115,7 +115,32 @@ RESOURCES += app.qrc
 
 DISTFILES += \
     translations/dde-devicemanager.ts \
-    translations/dde-devicemanager_zh_CN.ts
+    translations/dde-devicemanager_zh_CN.ts \
+    images/memory.svg \
+    images/power.svg \
+    images/keyboard.svg \
+    images/overview.svg \
+    images/bluetooth.svg \
+    images/usbdevice.svg \
+    images/monitor.svg \
+    images/disk.ico \
+    images/mouse.ico \
+    images/bluetooth.svg \
+    images/keyboard.svg \
+    images/otherinputdevice.svg \
+    images/camera.svg \
+    images/sounddevice.svg \
+    images/overview.svg \
+    images/printer.svg \
+    images/networkadapter.svg \
+    images/power.svg \
+    images/usbdevice.svg \
+    images/memory.svg \
+    images/monitor.svg \
+    images/otherpcidevice.ico \
+    images/motherboard.ico \
+    images/mouse.ico \
+    images/disk.ico
 
 # target
 target.path = /usr/bin/

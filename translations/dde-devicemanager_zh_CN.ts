@@ -4,6 +4,10 @@
     <context>
         <name>Main</name>
         <message>
+            <source>dde-devicemanager</source>
+            <translation>设备管理器</translation>
+        </message>
+        <message>
             <source>DeviceManager</source>
             <translation>设备管理器</translation>
         </message>

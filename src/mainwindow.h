@@ -14,7 +14,7 @@ public:
     ~MainWindow();
 
     void addAllDeviceinfoWidget();
-    void addDeviceWidget(DeviceInfoWidgetBase* w);
+    void addDeviceWidget(DeviceInfoWidgetBase* w, const QString& icon);
     void insertDeviceWidget(int index, DeviceInfoWidgetBase* w);
     void refresh();
     void refreshDatabase();

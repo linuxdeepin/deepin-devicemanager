@@ -4,6 +4,10 @@
     <context>
         <name>Main</name>
         <message>
+            <source>dde-devicemanager</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>DeviceManager</source>
             <translation type="unfinished"/>
         </message>

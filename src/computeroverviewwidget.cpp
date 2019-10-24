@@ -18,16 +18,31 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
     QList<ArticleStruct> articles;
 
     ArticleStruct model("Model");
+    QString vendor = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Manufacturer");
+    if(vendor.contains("System manufacturer"))
+    {
+        vendor = DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Manufacturer");
+    }
     QString pName = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Product Name");
+    if( pName.contains("System Product Name"))
+    {
+        pName = DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Product Name");
+    }
+
     QString ver = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Version");
-    model.value = pName + " " + ver;
+    if(ver.contains("System Version"))
+    {
+        ver = "";
+    }
+
+    model.value = vendor + " " + pName + " " + ver;
     if(ver.contains("Not Specified", Qt::CaseInsensitive) )
     {
-        model.value = pName;
+        model.value = vendor + " " + pName;
     }
     else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000
     {
-        model.value = ver;
+        model.value = vendor + " " + ver;
     }
     articles.push_back(model);
 

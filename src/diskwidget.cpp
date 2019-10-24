@@ -70,12 +70,12 @@ void DiskWidget::initWidget()
         {
             interface.value = lst.at(lst.size() -2);
         }
-        articles.push_back(interface);
 
         ArticleStruct serial("Serial");
         serial.queryData("lshw", disk, "serial");
         articles.push_back(serial);
         existArticles.insert("serial");
+        existArticles.insert("Serial Number");
 
         if( DeviceInfoParserInstance.isToolSuccess("smartctl") )
         {
@@ -91,10 +91,6 @@ void DiskWidget::initWidget()
                 QString version;
                 QString speed;
 
-
-                ArticleStruct rr("Rotation Rate");
-                rr.value = rotationRate;
-                articles.push_back(rr);
                 int index = sataVersion.indexOf("current:");
                 if(index>0)
                 {
@@ -110,25 +106,33 @@ void DiskWidget::initWidget()
                 }
 
             }
+            articles.push_back(interface);
+            existArticles.insert("SATA Version is");
 
             ArticleStruct rr("Rotation Rate");
             rr.value = rotationRate;
             articles.push_back(rr);
+            existArticles.insert("Rotation Rate");
 
             ArticleStruct fromFactor("Form Factor");
             fromFactor.queryData("smartctl", logicalName, "Form Factor");
             fromFactor.value.replace("inches", DApplication::translate("Main", "inch"));
             articles.push_back(fromFactor);
+            existArticles.insert("Form Factor");
 
             ArticleStruct powerOnHours("Power On Hours");
             powerOnHours.queryData("smartctl", logicalName, "Power_On_Hours");
             powerOnHours.value += DApplication::translate("Main", " Hours");
             articles.push_back(powerOnHours);
+            existArticles.insert("Power_On_Hours");
 
             ArticleStruct powerCycleCount("Power Cycle Count");
             powerCycleCount.queryData("smartctl", logicalName, "Power_Cycle_Count");
             powerCycleCount.value += DApplication::translate("Main", " Times");
             articles.push_back(powerCycleCount);
+            existArticles.insert("Power_Cycle_Count");
+
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles);
         }
 
         ArticleStruct version("Version");

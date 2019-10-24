@@ -974,6 +974,11 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
     homeUrl.remove("\"");
     if(lsbRelease.isEmpty() || lsbRelease ==  DApplication::translate("Main", "Unknown"))
     {
+        lsbRelease = queryData("lsb_release", "lsb_release", "Description");
+    }
+
+    if(lsbRelease.isEmpty() || lsbRelease ==  DApplication::translate("Main", "Unknown"))
+    {
         return true;
     }
 
@@ -983,7 +988,7 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
     }
     else
     {
-        osInfo = lsbRelease + " " + osInfo;
+        osInfo = lsbRelease + " / " + osInfo;
     }
 
     return true;
@@ -1032,6 +1037,52 @@ bool DeviceInfoParser::loadCatosrelelease()
     DatabaseMap rootlscuDb;
     rootlscuDb["catOsrelease"] = osreleaseDatabase_;
     toolDatabase_["catOsrelease"] = rootlscuDb;
+    return true;
+}
+
+bool DeviceInfoParser::loadlsb_release()
+{
+    if( false == executeProcess("lsb_release -a"))
+    {
+        return false;
+    }
+
+    QString lsb_releaseOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile lsb_releaseFile("./deviceInfo/lsb_release.txt");
+    if( false == lsb_releaseFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+    lsb_releaseOut = lsb_releaseFile.readAll();
+    lsb_releaseFile.close();
+#endif
+
+    // lscpu
+    QMap<QString, QString> lsb_releaseDatabase_;
+
+    int startIndex = 0;
+
+    for( int i = 0; i < lsb_releaseOut.size(); ++i )
+    {
+         if( lsb_releaseOut[i] != '\n' && i != lsb_releaseOut.size() -1 )
+         {
+             continue;
+         }
+
+         QString line = lsb_releaseOut.mid(startIndex, i - startIndex);
+         startIndex = i + 1;
+
+         if( line.contains(Devicetype_Separator) )
+         {
+             QStringList strList = line.split(Devicetype_Separator);
+             lsb_releaseDatabase_[strList.first().trimmed().remove(Devicetype_lshw_Class_Prefix)] = strList.last().trimmed();
+         }
+    }
+
+    DatabaseMap rootlscuDb;
+    rootlscuDb["lsb_release"] = lsb_releaseDatabase_;
+    toolDatabase_["lsb_release"] = rootlscuDb;
     return true;
 }
 
@@ -1470,6 +1521,7 @@ bool DeviceInfoParser::loadCatcpuDatabase()
 
 bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
 {
+#ifndef TEST_DATA_FROM_FILE
     if( false == executeProcess("sudo smartctl --all " + diskLogical))
     {
         if( false == executeProcess("sudo chmod +x smartctl") )
@@ -1482,7 +1534,7 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
             return false;
         }
     }
-
+#endif
     QString smartctlOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
     QFile smartctlFile("./deviceInfo/smartctl.txt");
@@ -1498,6 +1550,8 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
     QMap<QString, QString> smartctlDatabase_;
     int startIndex = 0;
 
+    QRegExp reg("^[\\s\\S]*[\\d]:[\\d][\\s\\S]*$");
+
     for( int i = 0; i < smartctlOut.size(); ++i )
     {
          if( smartctlOut[i] != '\n' && i != smartctlOut.size() -1 )
@@ -1508,7 +1562,8 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
          QString line = smartctlOut.mid(startIndex, i - startIndex);
          startIndex = i + 1;
 
-         if( line.contains(Devicetype_Separator) )
+
+         if( line.contains(Devicetype_Separator) && reg.exactMatch(line) == false )
          {
              int index = line.indexOf(Devicetype_Separator);
              smartctlDatabase_[line.mid(0, index).trimmed()] = line.mid(index+1).trimmed();
@@ -1519,6 +1574,19 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
          if( rx.indexIn(line) > -1 )
          {
              smartctlDatabase_[rx.cap(1)] = rx.cap(2);
+             continue;
+         }
+
+         if(line.contains("Power_On_Hours"))
+         {
+             smartctlDatabase_["Power_On_Hours"] = line.split(" ").last();
+             continue;
+         }
+
+         if(line.contains("Power_Cycle_Count"))
+         {
+             smartctlDatabase_["Power_Cycle_Count"] = line.split(" ").last();
+             continue;
          }
     }
 

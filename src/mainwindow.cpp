@@ -91,37 +91,37 @@ void MainWindow::addAllDeviceinfoWidget()
     refreshDatabase();
 
     auto overviewWidget = new ComputerOverviewWidget(this);
-    addDeviceWidget(overviewWidget);
+    addDeviceWidget(overviewWidget, ":images/overview.svg");
 
-    addDeviceWidget(new CpuWidget(this));
-    addDeviceWidget(new MotherboardWidget(this));
-    addDeviceWidget(new MemoryWidget(this));
-    addDeviceWidget(new DiskWidget(this));
-    addDeviceWidget(new KeyboardWidget(this));
-    addDeviceWidget(new MouseWidget(this));
-    addDeviceWidget(new PowerWidget(this));
-    addDeviceWidget(new PrinterWidget(this));
-
-    if(firstAdd_ == true)
-    {
-        leftDeviceView_->addSeperator();
-    }
-
-    addDeviceWidget(new DisplayadapterWidget(this));
-    addDeviceWidget(new AudiodeviceWidget(this));
-    addDeviceWidget(new NetworkadapterWidget(this));
-    addDeviceWidget(new BluetoothWidget(this));
-    addDeviceWidget(new MonitorWidget(this));
-    addDeviceWidget(new CameraWidget(this));
-    addDeviceWidget(new UsbdeviceWidget(this));
+    addDeviceWidget(new CpuWidget(this), ":images/cpu.svg");
+    addDeviceWidget(new MotherboardWidget(this), ":images/motherboard.ico");
+    addDeviceWidget(new MemoryWidget(this), ":images/memory.svg");
+    addDeviceWidget(new DiskWidget(this), ":images/disk.ico");
+    addDeviceWidget(new KeyboardWidget(this), ":images/keyboard.svg");
+    addDeviceWidget(new MouseWidget(this), ":images/mouse.ico");
+    addDeviceWidget(new PowerWidget(this), ":images/power.svg");
+    addDeviceWidget(new PrinterWidget(this), ":images/printer.svg");
 
     if(firstAdd_ == true)
     {
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new OtherInputdeviceWidget(this));
-    addDeviceWidget(new OtherPciDeviceWidget(this));
+    addDeviceWidget(new DisplayadapterWidget(this), ":images/overview.svg");
+    addDeviceWidget(new AudiodeviceWidget(this), ":images/sounddevice.svg");
+    addDeviceWidget(new NetworkadapterWidget(this), ":images/networkadapter.svg");
+    addDeviceWidget(new BluetoothWidget(this), ":images/bluetooth.svg");
+    addDeviceWidget(new MonitorWidget(this), ":images/monitor.svg");
+    addDeviceWidget(new CameraWidget(this), ":images/camera.svg");
+    addDeviceWidget(new UsbdeviceWidget(this), ":images/usbdevice.svg");
+
+    if(firstAdd_ == true)
+    {
+        leftDeviceView_->addSeperator();
+    }
+
+    addDeviceWidget(new OtherInputdeviceWidget(this), ":images/otherinputdevice.svg");
+    addDeviceWidget(new OtherPciDeviceWidget(this), ":images/otherpcidevice.ico");
 
     overviewWidget->setOverviewInfos(staticArticles);
 
@@ -129,7 +129,7 @@ void MainWindow::addAllDeviceinfoWidget()
     QApplication::restoreOverrideCursor();
 }
 
-void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w)
+void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w,  const QString& icon)
 {
     if(w == nullptr)
     {
@@ -138,7 +138,7 @@ void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w)
 
     if(firstAdd_ == true)
     {
-        leftDeviceView_->addDevice(w->getDeviceName(), ":images/cpu.svg");
+        leftDeviceView_->addDevice(w->getDeviceName(), icon);
     }
 
     ArticleStruct overviweInfo;
@@ -188,6 +188,7 @@ void MainWindow::refreshDatabase()
 {
     //QString osInfo;
     DeviceInfoParserInstance.loadCatosrelelease();
+    DeviceInfoParserInstance.loadlsb_release();
     //DeviceInfoParserInstance.getOSInfo(osInfo);
     DeviceInfoParserInstance.loadDemicodeDatabase();
     DeviceInfoParserInstance.loadLshwDatabase();
