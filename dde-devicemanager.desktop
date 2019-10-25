@@ -5,6 +5,7 @@ Exec=dde-devicemanager
 GenericName=dde-devicemanager
 Icon=/usr/share/dde-devicemanager/cpu.svg
 Name=dde-devicemanager
+Name[zh_CN]=日志管理器
 Terminal=false
 Type=Application
 Version=1.0
