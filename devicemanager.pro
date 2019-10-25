@@ -4,8 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg dbus xml
-QT       += gui-private
+QT  += core gui svg dbus xml
+QT  += gui-private
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +19,7 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 #load device info from file
-#DEFINES += TEST_DATA_FROM_FILE
+DEFINES += TEST_DATA_FROM_FILE
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -32,7 +32,7 @@ LIBS += -lcups
 
 CONFIG += c++11
 CONFIG += link_pkgconfig
-PKGCONFIG += xcb xcb-util dtkwidget dtkwm dframeworkdbus
+PKGCONFIG += dtkwidget dframeworkdbus
 
 TRANSLATIONS += translations/DeviceManager.ts
 

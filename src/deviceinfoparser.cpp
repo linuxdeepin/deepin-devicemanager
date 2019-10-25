@@ -210,7 +210,7 @@ QStringList DeviceInfoParser::getDisknameList()
 
     foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
-        if( fk.endsWith("disk") )
+        if( fk.contains("disk") )
         {
             diskList.push_back(fk);
         }
@@ -230,7 +230,7 @@ QStringList DeviceInfoParser::getDiaplayadapterList()
 
     foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
-        if( fk.endsWith("display") )
+        if( fk.contains("display") )
         {
             displayadapterList.push_back(fk);
         }
@@ -885,7 +885,7 @@ QStringList DeviceInfoParser::getOtherPciDeviceList()
 
         if( re.exactMatch(fk) )
         {
-            if( fk.endsWith("display", Qt::CaseInsensitive) || fk.endsWith("network", Qt::CaseInsensitive) )
+            if( fk.contains("display", Qt::CaseInsensitive) || fk.contains("network", Qt::CaseInsensitive) )
             {
                 continue;
             }
