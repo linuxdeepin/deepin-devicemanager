@@ -210,7 +210,8 @@ QStringList DeviceInfoParser::getDisknameList()
 
     foreach(const QString& fk, toolDatabase_["lshw"].uniqueKeys() )
     {
-        if( fk.contains("disk") )
+        int index = fk.lastIndexOf("disk");
+        if( index > 0 && fk.size() - index < 7 )
         {
             diskList.push_back(fk);
         }

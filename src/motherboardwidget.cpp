@@ -61,6 +61,10 @@ void MotherboardWidget::initWidget()
     articles.push_back(features);
     existArticles.insert("Features");
 
+    ArticleStruct SMBIOSVersion("SMBIOS Version");
+    SMBIOSVersion.queryData("dmidecode", "SMBIOS", "version");
+    articles.push_back(SMBIOSVersion);
+
     DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Base Board Information", articles, existArticles);
     addInfo( "", articles );
 

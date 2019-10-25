@@ -851,5 +851,9 @@
             <source>deviceInfo</source>
             <translation type="unfinished"/>
         </message>
+        <message>
+            <source>SMBIOS Version</source>
+            <translation type="unfinished"/>
+        </message>
     </context>
 </TS>

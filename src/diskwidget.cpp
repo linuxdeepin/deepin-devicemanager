@@ -11,12 +11,18 @@ DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplicat
 
 void DiskWidget::initWidget()
 {
+    QStringList diskList = DeviceInfoParserInstance.getDisknameList();
+    if(diskList.size() < 1)
+    {
+        setCentralInfo("No Disk found!");
+        return;
+    }
+
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
     int i = 0;
-    QStringList diskList = DeviceInfoParserInstance.getDisknameList();
     foreach(const QString& disk, diskList)
     {
         QString logicalName = DeviceInfoParserInstance.queryData("lshw", disk, "logical name");

@@ -847,5 +847,9 @@
             <source>deviceInfo</source>
             <translation>设备信息</translation>
         </message>
+        <message>
+            <source>SMBIOS Version</source>
+            <translation>SMBIOS版本</translation>
+        </message>
     </context>
 </TS>
