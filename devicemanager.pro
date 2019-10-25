@@ -19,7 +19,7 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 #load device info from file
-#DEFINES += TEST_DATA_FROM_FILE
+DEFINES += TEST_DATA_FROM_FILE
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
