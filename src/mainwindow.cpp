@@ -25,6 +25,10 @@
 #include "deviceinfoparser.h"
 #include "DApplication"
 #include "DApplicationHelper"
+#include <QSplashScreen>
+#include <QFileSystemModel>
+#include "DFrame"
+#include <QProgressDialog>
 
 DWIDGET_USE_NAMESPACE
 
@@ -85,14 +89,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::addAllDeviceinfoWidget()
 {
+    //QProgressDialog progress("Copying files...", "Abort Copy", 0, 100, this);
+    //progress.setWindowModality(Qt::NonModal);
+
     staticArticles.clear();
 
+    //progress.show();
+
+    //progress.setValue(1);
+
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
     refreshDatabase();
 
     auto overviewWidget = new ComputerOverviewWidget(this);
     addDeviceWidget(overviewWidget, ":images/overview.svg");
-
     addDeviceWidget(new CpuWidget(this), ":images/cpu.svg");
     addDeviceWidget(new MotherboardWidget(this), ":images/motherboard.ico");
     addDeviceWidget(new MemoryWidget(this), ":images/memory.svg");
@@ -124,9 +135,10 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new OtherPciDeviceWidget(this), ":images/otherpcidevice.ico");
 
     overviewWidget->setOverviewInfos(staticArticles);
-
     firstAdd_ = false;
+    //progress.setValue(100);
     QApplication::restoreOverrideCursor();
+    //progress.close();
 }
 
 void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w,  const QString& icon)
@@ -186,7 +198,6 @@ void MainWindow::refresh()
 
 void MainWindow::refreshDatabase()
 {
-    //QString osInfo;
     DeviceInfoParserInstance.loadCatosrelelease();
     DeviceInfoParserInstance.loadlsb_release();
     //DeviceInfoParserInstance.getOSInfo(osInfo);

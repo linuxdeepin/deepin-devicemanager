@@ -66,7 +66,10 @@ void MotherboardWidget::initWidget()
     articles.push_back(SMBIOSVersion);
 
     DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Base Board Information", articles, existArticles);
-    addInfo( "", articles );
+    if(articles.size() > 0)
+    {
+        addInfo( "", articles );
+    }
 
     articles.clear();
     existArticles.clear();
@@ -86,8 +89,10 @@ void MotherboardWidget::initWidget()
     existArticles.insert("SKU Number");
 
     DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "System Information", articles, existArticles);
-
-    addSubInfo( "System Information", articles );
+    if(articles.size() > 0)
+    {
+        addSubInfo( "System Information", articles );
+    }
 
     articles.clear();
     existArticles.clear();
@@ -111,6 +116,43 @@ void MotherboardWidget::initWidget()
     articles.push_back(characteristics);
     existArticles.insert("Characteristics");
     DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles);
+    if(articles.size() > 0)
+    {
+        addSubInfo( "Bios", articles );
+    }
 
-    addSubInfo( "Bios", articles );
+
+    articles.clear();
+    existArticles.clear();
+
+    articles.clear();
+    existArticles.clear();
+
+    ArticleStruct chassisVendor("Vendor");
+    chassisVendor.queryData("dmidecode", "Chassis Information", "Manufacturer");
+    articles.push_back(chassisVendor);
+    existArticles.insert("Manufacturer");
+
+    ArticleStruct chassisType("Type");
+    chassisType.queryData("dmidecode", "Chassis Information", "Type");
+    articles.push_back(chassisType);
+    existArticles.insert("Type");
+
+    ArticleStruct chassisSN("Serial Number");
+    chassisSN.queryData("dmidecode", "Chassis Information", "Serial Number");
+    articles.push_back(chassisSN);
+    existArticles.insert("Serial Number");
+
+    ArticleStruct chassisVersion("Version");
+    chassisVersion.queryData("dmidecode", "Chassis Information", "Version");
+    articles.push_back(chassisVersion);
+    existArticles.insert("Version");
+
+    DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Chassis Information", articles, existArticles);
+
+    if(articles.size() > 0)
+    {
+        addSubInfo( "Chassis Information", articles );
+    }
+
 }

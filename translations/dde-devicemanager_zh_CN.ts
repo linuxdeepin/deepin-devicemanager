@@ -851,5 +851,94 @@
             <source>SMBIOS Version</source>
             <translation>SMBIOS版本</translation>
         </message>
+        <message>
+            <source>Chassis Handle</source>
+            <translation>机箱Handle</translation>
+        </message>
+        <message>
+            <source>Contained Object Handles</source>
+            <translation>包含对象Handles</translation>
+        </message>
+        <message>
+            <source>System Information</source>
+            <translation>系统信息</translation>
+        </message>
+        <message>
+            <source>Chassis Information</source>
+            <translation>机箱信息</translation>
+        </message>
+        <message>
+            <source>Boot-up State</source>
+            <translation>开机状态</translation>
+        </message>
+        <message>
+            <source>Contained Elements</source>
+            <translation>包含组件数</translation>
+        </message>
+        <message>
+            <source>Height</source>
+            <translation>高度</translation>
+        </message>
+        <message>
+            <source>锁</source>
+            <translation></translation>
+        </message>
+        <message>
+            <source>Number Of Power Cords</source>
+            <translation>电源线数量</translation>
+        </message>
+        <message>
+            <source>OEM Information</source>
+            <translation>OEM信息</translation>
+        </message>
+        <message>
+            <source>SKU Number</source>
+            <translation>SKU号</translation>
+        </message>
+        <message>
+            <source>Power Supply State</source>
+            <translation>供电状态</translation>
+        </message>
+        <message>
+            <source>Security Status</source>
+            <translation>安全状态</translation>
+        </message>
+        <message>
+            <source>Thermal State</source>
+            <translation>散热状态</translation>
+        </message>
+        <message>
+            <source>Error Information Handle</source>
+            <translation>错误信息Handle</translation>
+        </message>
+        <message>
+            <source>Array Handle</source>
+            <translation>数组Handle</translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+
     </context>
 </TS>

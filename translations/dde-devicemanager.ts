@@ -855,5 +855,149 @@
             <source>SMBIOS Version</source>
             <translation type="unfinished"/>
         </message>
+        <message>
+            <source>Chassis Handle</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Contained Object Handles</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>System Information</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Chassis Information</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Boot-up State</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Contained Elements</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Height</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Lock</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Number Of Power Cords</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>OEM Information</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>SKU Number</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Power Supply State</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Security Status</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Thermal State</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Error Information Handle</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Array Handle</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
     </context>
 </TS>

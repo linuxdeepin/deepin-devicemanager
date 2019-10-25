@@ -2,30 +2,31 @@
     <qresource prefix="/">
         <file>images/cpu.svg</file>
         <file>images/memory.svg</file>
-	    <file>images/power.svg</file>
-	    <file>images/keyboard.svg</file>
-	    <file>images/overview.svg</file>
-	    <file>images/bluetooth.svg</file>
-	    <file>images/usbdevice.svg</file>
-	    <file>images/monitor.svg</file>
-	    <file>images/disk.ico</file>
-	    <file>images/mouse.ico</file>
-	    <file>images/bluetooth.svg</file>
-	    <file>images/keyboard.svg</file>
-	    <file>images/otherinputdevice.svg</file>
-	    <file>images/camera.svg</file>
-	    <file>images/sounddevice.svg</file>
-	    <file>images/overview.svg</file>
-	    <file>images/printer.svg</file>
-	    <file>images/networkadapter.svg</file>
-	    <file>images/power.svg</file>
-	    <file>images/usbdevice.svg</file>
-	    <file>images/memory.svg</file>
-	    <file>images/monitor.svg</file>
-	    <file>images/otherpcidevice.ico</file>
-	    <file>images/motherboard.ico</file>
-	    <file>images/mouse.ico</file>
-	    <file>images/disk.ico</file>
+        <file>images/power.svg</file>
+        <file>images/keyboard.svg</file>
+        <file>images/overview.svg</file>
+        <file>images/bluetooth.svg</file>
+        <file>images/usbdevice.svg</file>
+        <file>images/monitor.svg</file>
+        <file>images/disk.ico</file>
+        <file>images/mouse.ico</file>
+        <file>images/bluetooth.svg</file>
+        <file>images/keyboard.svg</file>
+        <file>images/otherinputdevice.svg</file>
+        <file>images/camera.svg</file>
+        <file>images/sounddevice.svg</file>
+        <file>images/overview.svg</file>
+        <file>images/printer.svg</file>
+        <file>images/networkadapter.svg</file>
+        <file>images/power.svg</file>
+        <file>images/usbdevice.svg</file>
+        <file>images/memory.svg</file>
+        <file>images/monitor.svg</file>
+        <file>images/otherpcidevice.ico</file>
+        <file>images/motherboard.ico</file>
+        <file>images/mouse.ico</file>
+        <file>images/disk.ico</file>
         <file>thirdlib/docx/doc_template/template.doc</file>
+        <file>images/splash.png</file>
     </qresource>
 </RCC>

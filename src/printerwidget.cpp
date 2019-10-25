@@ -32,7 +32,7 @@ void PrinterWidget::initWidget()
         ArticleStruct printerInfo("printer-info");
         printerInfo.queryData( "Cups", device, "printer-info");
         articles.push_back(printerInfo);
-        existArticles.insert("capacity");
+        existArticles.insert("printer-info");
 
         ArticleStruct printerMakeAndModel("printer-make-and-model");
         printerMakeAndModel.queryData( "Cups", device, "printer-make-and-model");
