@@ -140,6 +140,14 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>Minimum Voltage</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Maximum Voltage</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>Upgradeable</source>
             <translation type="unfinished"/>
         </message>
@@ -364,7 +372,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Export to File</source>
+            <source>Export</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -837,6 +845,10 @@
         </message>
         <message>
             <source>irq</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>deviceInfo</source>
             <translation type="unfinished"/>
         </message>
     </context>

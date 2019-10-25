@@ -119,7 +119,7 @@ void DeviceInfoWidgetBase::initContextMenu()
     contextMenu_->addAction(refreshAction);
 
 
-    QAction* exportAction = new QAction(DApplication::translate("Main", "Export to File"));
+    QAction* exportAction = new QAction(DApplication::translate("Main", "Export"));
     connect(exportAction, &QAction::triggered, this, &DeviceInfoWidgetBase::onExportToFile);
     contextMenu_->addAction(exportAction);
 }
@@ -658,8 +658,18 @@ void DeviceInfoWidgetBase::OnCurrentItemClicked(QTableWidgetItem *item)
 bool DeviceInfoWidgetBase::onExportToFile()
 {
    QString selectFilter;
-   QString exportFile = DFileDialog::getSaveFileName(this, tr("Export File"), "./" + overviewInfo_.name + QDate::currentDate().toString("yyyyMMdd") .remove(QRegExp("\\s")) + ".txt", \
-                        tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
+
+   QString saveDir = "./";
+   QDir dir( QDir::homePath() + "/Documents/");
+   if(dir.exists())
+   {
+        saveDir = QDir::homePath() + "/Documents/";
+   }
+
+   QString exportFile = DFileDialog::getSaveFileName(this,
+                                                     tr("Export File"), saveDir + DApplication::translate("Main", "deviceInfo") + \
+                                                     QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
+                                                    tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
 
    if(exportFile.isEmpty() == true)
    {

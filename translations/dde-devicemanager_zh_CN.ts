@@ -144,6 +144,14 @@
             <translation>配置电压</translation>
         </message>
         <message>
+            <source>Minimum Voltage</source>
+            <translation>最低电压</translation>
+        </message>
+        <message>
+            <source>Maximum Voltage</source>
+            <translation>最高电压</translation>
+        </message>
+        <message>
             <source>Upgradeable</source>
             <translation>支持升级</translation>
         </message>
@@ -293,7 +301,7 @@
         </message>
         <message>
             <source>Computer Suspend Delay</source>
-            <translation>待机模式</translation>
+            <translation>进入待机模式</translation>
         </message>
         <message>
             <source>AutoLock Screen Delay</source>
@@ -368,8 +376,8 @@
             <translation>刷新</translation>
         </message>
         <message>
-            <source>Export to File</source>
-            <translation>导出到文件</translation>
+            <source>Export</source>
+            <translation>导出</translation>
         </message>
         <message>
             <source>Cpu Info</source>
@@ -834,6 +842,10 @@
         <message>
             <source>irq</source>
             <translation>中断</translation>
+        </message>
+        <message>
+            <source>deviceInfo</source>
+            <translation>设备信息</translation>
         </message>
     </context>
 </TS>

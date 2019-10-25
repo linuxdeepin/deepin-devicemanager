@@ -6,6 +6,7 @@ Device Manager is a gadget for viewing device information.
 
 ## Depend on 
 * lshw
+* lsb_release
 * [dmidecode](http://www.nongnu.org/dmidecode/)
 * hciconfig
 * hwinfo
