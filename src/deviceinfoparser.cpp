@@ -12,7 +12,7 @@
 #include <DApplication>
 #include "logpasswordauth.h"
 #include "DMessageBox"
-#include <cups/cups.h>
+#include <cups.h>
 
 DWIDGET_USE_NAMESPACE
 
