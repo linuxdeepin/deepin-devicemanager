@@ -17,5 +17,6 @@ struct ArticleStruct
     }
 
     void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey);
+    bool isValid();
 };
 

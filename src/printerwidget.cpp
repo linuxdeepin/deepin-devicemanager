@@ -39,7 +39,7 @@ void PrinterWidget::initWidget()
         articles.push_back(printerMakeAndModel);
         existArticles.insert("printer-make-and-model");
 
-        DeviceInfoParserInstance.queryDeviceInfo( "Cups", device, articles);
+        DeviceInfoParserInstance.queryRemainderDeviceInfo( "Cups", device, articles, existArticles);
 
         addSubInfo( device, articles);
 

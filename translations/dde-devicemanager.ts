@@ -920,7 +920,51 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Loading Operating System Info...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading SMBBios Info...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading List Hardware Info</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading CPU Info...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading Input Device Info...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading Power Settings...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading Displayer Info...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading PCI Device Info...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading Bluetooth Device Info...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading USB Device Info...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Loading Ptinter Info...</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Lock</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -932,39 +976,139 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Power Supply</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>State</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Current Energy</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Full Energy</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Battery Percentage</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Design Energy</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Battery Healthy</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>energy-empty</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>energy-rate</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>has history</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>has statistics</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>icon-name</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>native-path</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>present</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>rechargeable</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>product</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Design Capacity</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Design Voltage</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>voltage</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>technology</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>updated</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>warning-level</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Maximum Error</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>OEM-specific Information</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>SBDS Chemistry</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>SBDS Version</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>printer-info</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>printer-make-and-model</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>device-uri</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>copies</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>memory</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>driverversion</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>wireless</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Core</source>
             <translation type="unfinished"/>
         </message>
         <message>

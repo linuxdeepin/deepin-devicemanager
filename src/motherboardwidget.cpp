@@ -56,17 +56,15 @@ void MotherboardWidget::initWidget()
     articles.push_back(serial);
     existArticles.insert("Serial Number");
 
-    ArticleStruct features("Features");
-    features.queryData("dmidecode", "Base Board Information", "Features");
-    articles.push_back(features);
     existArticles.insert("Features");
+
+    bool res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Base Board Information", articles, existArticles);
 
     ArticleStruct SMBIOSVersion("SMBIOS Version");
     SMBIOSVersion.queryData("dmidecode", "SMBIOS", "version");
     articles.push_back(SMBIOSVersion);
 
-    DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Base Board Information", articles, existArticles);
-    if(articles.size() > 0)
+    if(res)
     {
         addInfo( "", articles );
     }
@@ -88,8 +86,13 @@ void MotherboardWidget::initWidget()
     articles.push_back(sku);
     existArticles.insert("SKU Number");
 
-    DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "System Information", articles, existArticles);
-    if(articles.size() > 0)
+    res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "System Information", articles, existArticles);
+
+    ArticleStruct features("Features");
+    features.queryData("dmidecode", "Base Board Information", "Features");
+    articles.push_back(features);
+
+    if(res)
     {
         addSubInfo( "System Information", articles );
     }
@@ -111,16 +114,17 @@ void MotherboardWidget::initWidget()
     articles.push_back(biosVendor);
     existArticles.insert("Vendor");
 
+    existArticles.insert("Characteristics");
+    res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles);
+
     ArticleStruct characteristics("Characteristics");
     characteristics.queryData("dmidecode", "BIOS Information", "Characteristics");
     articles.push_back(characteristics);
-    existArticles.insert("Characteristics");
-    DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles);
-    if(articles.size() > 0)
+
+    if(res)
     {
         addSubInfo( "Bios", articles );
     }
-
 
     articles.clear();
     existArticles.clear();
@@ -148,9 +152,9 @@ void MotherboardWidget::initWidget()
     articles.push_back(chassisVersion);
     existArticles.insert("Version");
 
-    DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Chassis Information", articles, existArticles);
+    res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Chassis Information", articles, existArticles);
 
-    if(articles.size() > 0)
+    if(res)
     {
         addSubInfo( "Chassis Information", articles );
     }

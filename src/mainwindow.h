@@ -5,6 +5,7 @@
 
 class DeviceListView;
 class DeviceInfoWidgetBase;
+class QSplashScreen;
 
 class MainWindow : public Dtk::Widget::DMainWindow
 {
@@ -20,6 +21,10 @@ public:
     void refreshDatabase();
 
     bool exportTo(const QString& file, const QString& selectFilter);
+
+private:
+    void showSplashMessage(const QString& message);
+
 private:
     DeviceListView* leftDeviceView_ = nullptr;
     Dtk::Widget::DStackedWidget* rightDeviceInfoWidget_ = nullptr;
@@ -27,4 +32,6 @@ private:
     QMap<QString, DeviceInfoWidgetBase*> deviceInfoWidgetMap_;//widgetname　- widget
     bool firstAdd_ = true;
     QString currentDevice_;
+
+    QSplashScreen* splash_ = nullptr;
 };

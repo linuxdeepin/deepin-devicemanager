@@ -47,6 +47,8 @@ const QString Devicetype_lpstat_Tab = "\t";
 
 typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
 
+class LogPasswordAuth;
+
 class DeviceInfoParser
 {
 public:
@@ -96,8 +98,11 @@ public:
 
     QStringList getSwitchingpowerList();
     QStringList getDemidecodeSwitchingpowerList();
+    QStringList getSwitchingUpowerList();
+
     QStringList getBatteryList();
     QStringList getDemidecodeBatteryList();
+    QStringList getBatteryUpowerList();
 
     QStringList getOtherInputdeviceList();
     QStringList getOtherPciDeviceList();
@@ -124,6 +129,7 @@ public:
     bool loadXrandrDatabase();
     // get power settings
     bool loadPowerSettings();
+    bool loadUpowerDatabase();
     // lspci parse
     bool loadLspciDatabase();
     // hciconfig
@@ -138,10 +144,12 @@ public:
     bool loadCupsDatabase();
 
 public:
+    bool getRootPassword();
     bool executeProcess(const QString& cmd);
     bool runCmd(const QString& cmd);
     bool runCmd(const QStringList& cmdList);
 
+    LogPasswordAuth* autoDialog = nullptr;
     QString standOutput_;
 
     QMap<QString, DatabaseMap> toolDatabase_;

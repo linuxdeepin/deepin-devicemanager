@@ -916,6 +916,206 @@
             <translation>数组Handle</translation>
         </message>
         <message>
+            <source>Loading Operating System Info...</source>
+            <translation>获取操作系统信息...</translation>
+        </message>
+        <message>
+            <source>Loading SMBBios Info...</source>
+            <translation>获取SMBBios信息...</translation>
+        </message>
+        <message>
+            <source>Loading List Hardware Info</source>
+            <translation>获取硬件列表信息...</translation>
+        </message>
+        <message>
+            <source>Loading CPU Info...</source>
+            <translation>获取处理器信息...</translation>
+        </message>
+        <message>
+            <source>Loading Input Device Info...</source>
+            <translation>获取输入设备信息...</translation>
+        </message>
+        <message>
+            <source>Loading Power Settings...</source>
+            <translation>获取电源设置...</translation>
+        </message>
+        <message>
+            <source>Loading Displayer Info...</source>
+            <translation>获取显示器信息...</translation>
+        </message>
+        <message>
+            <source>Loading PCI Device Info...</source>
+            <translation>获取PCI设备信息...</translation>
+        </message>
+        <message>
+            <source>Loading Bluetooth Device Info...</source>
+            <translation>获取蓝牙设备信息...</translation>
+        </message>
+        <message>
+            <source>Loading USB Device Info...</source>
+            <translation>获取USB设备信息...</translation>
+        </message>
+        <message>
+            <source>Loading Ptinter Info...</source>
+            <translation>获取打印机信息...</translation>
+        </message>
+        <message>
+            <source>Lock</source>
+            <translation>锁</translation>
+        </message>
+        <message>
+            <source>Power Supply</source>
+            <translation>供电</translation>
+        </message>
+        <message>
+            <source>State</source>
+            <translation>状态</translation>
+        </message>
+        <message>
+            <source>Current Energy</source>
+            <translation>当前容量</translation>
+        </message>
+        <message>
+            <source>Full Energy</source>
+            <translation>完全充满容量</translation>
+        </message>
+        <message>
+            <source>Battery Percentage</source>
+            <translation>电量</translation>
+        </message>
+        <message>
+            <source>Design Energy</source>
+            <translation>设计容量</translation>
+        </message>
+        <message>
+            <source>Battery Healthy</source>
+            <translation>电池健康</translation>
+        </message>
+        <message>
+            <source>energy-empty</source>
+            <translation>最低容量</translation>
+        </message>
+        <message>
+            <source>energy-rate</source>
+            <translation>能量密度</translation>
+        </message>
+        <message>
+            <source>has history</source>
+            <translation>历史记录</translation>
+        </message>
+        <message>
+            <source>has statistics</source>
+            <translation>用电统计</translation>
+        </message>
+        <message>
+            <source>icon-name</source>
+            <translation>图标</translation>
+        </message>
+        <message>
+            <source>native-path</source>
+            <translation>安装路径</translation>
+        </message>
+        <message>
+            <source>present</source>
+            <translation>Present</translation>
+        </message>
+        <message>
+            <source>rechargeable</source>
+            <translation>可再充电</translation>
+        </message>
+        <message>
+            <source>product</source>
+            <translation>产品</translation>
+        </message>
+        <message>
+            <source>Design Capacity</source>
+            <translation>设计容量</translation>
+        </message>
+        <message>
+            <source>Design Voltage</source>
+            <translation>设计电压</translation>
+        </message>
+        <message>
+            <source>voltage</source>
+            <translation>电压</translation>
+        </message>
+        <message>
+            <source>technology</source>
+            <translation>电池技术</translation>
+        </message>
+        <message>
+            <source>updated</source>
+            <translation>更新时间</translation>
+        </message>
+        <message>
+            <source>warning-level</source>
+            <translation>警告等级</translation>
+        </message>
+        <message>
+            <source>Maximum Error</source>
+            <translation>最大错误</translation>
+        </message>
+        <message>
+            <source>OEM-specific Information</source>
+            <translation>OEM的信息</translation>
+        </message>
+        <message>
+            <source>SBDS Chemistry</source>
+            <translation>SBDS材料</translation>
+        </message>
+        <message>
+            <source>SBDS Version</source>
+            <translation>SBDS版本</translation>
+        </message>
+        <message>
+            <source>printer-info</source>
+            <translation>名称</translation>
+        </message>
+        <message>
+            <source>printer-make-and-model</source>
+            <translation>制造商和型号</translation>
+        </message>
+        <message>
+            <source>device-uri</source>
+            <translation>设备Uri</translation>
+        </message>
+        <message>
+            <source>copies</source>
+            <translation>支持复印</translation>
+        </message>
+        <message>
+            <source>memory</source>
+            <translation>内存地址</translation>
+        </message>
+        <message>
+            <source>driverversion</source>
+            <translation>驱动版本</translation>
+        </message>
+        <message>
+            <source>wireless</source>
+            <translation>无线协议</translation>
+        </message>
+        <message>
+            <source>Core</source>
+            <translation>内核</translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
             <source></source>
             <translation></translation>
         </message>
@@ -939,6 +1139,40 @@
             <source></source>
             <translation></translation>
         </message>
-
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message><message>
+        <source></source>
+        <translation></translation>
+    </message>
     </context>
 </TS>

@@ -26,9 +26,6 @@
 #include "DApplication"
 #include "DApplicationHelper"
 #include <QSplashScreen>
-#include <QFileSystemModel>
-#include "DFrame"
-#include <QProgressDialog>
 
 DWIDGET_USE_NAMESPACE
 
@@ -89,14 +86,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::addAllDeviceinfoWidget()
 {
-    //QProgressDialog progress("Copying files...", "Abort Copy", 0, 100, this);
-    //progress.setWindowModality(Qt::NonModal);
+    DeviceInfoParserInstance.getRootPassword();
+
+    if( firstAdd_ == true && splash_ == nullptr )
+    {
+        QPixmap screenPixmap(":images/splash.png");
+        splash_ = new QSplashScreen(screenPixmap);
+        splash_->show();
+        QApplication::processEvents();
+    }
 
     staticArticles.clear();
-
-    //progress.show();
-
-    //progress.setValue(1);
 
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
@@ -135,10 +135,16 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new OtherPciDeviceWidget(this), ":images/otherpcidevice.ico");
 
     overviewWidget->setOverviewInfos(staticArticles);
+
+    if( firstAdd_ == true && splash_ != nullptr )
+    {
+        splash_->finish(this);
+        delete splash_;
+        splash_ = nullptr;
+    }
+
     firstAdd_ = false;
-    //progress.setValue(100);
     QApplication::restoreOverrideCursor();
-    //progress.close();
 }
 
 void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w,  const QString& icon)
@@ -198,21 +204,43 @@ void MainWindow::refresh()
 
 void MainWindow::refreshDatabase()
 {
+    showSplashMessage("Loading Operating System Info...");
     DeviceInfoParserInstance.loadCatosrelelease();
     DeviceInfoParserInstance.loadlsb_release();
     //DeviceInfoParserInstance.getOSInfo(osInfo);
+
+    showSplashMessage("Loading SMBBios Info...");
     DeviceInfoParserInstance.loadDemicodeDatabase();
+
+    showSplashMessage("Loading List Hardware Info");
     DeviceInfoParserInstance.loadLshwDatabase();
+
+    showSplashMessage("Loading CPU Info...");
     DeviceInfoParserInstance.loadCatcpuDatabase();
     DeviceInfoParserInstance.loadLscpuDatabase();
     //DeviceInfoParserInstance.loadSmartctlDatabase();
+
+    showSplashMessage("Loading Input Device Info...");
     DeviceInfoParserInstance.loadCatInputDatabase();
+
+    showSplashMessage("Loading Power Settings...");
     DeviceInfoParserInstance.loadPowerSettings();
+    DeviceInfoParserInstance.loadUpowerDatabase();
+
+    showSplashMessage("Loading Displayer Info...");
     DeviceInfoParserInstance.loadXrandrDatabase();
-    DeviceInfoParserInstance.loadLspciDatabase();
-    DeviceInfoParserInstance.loadHciconfigDatabase();
-    DeviceInfoParserInstance.loadLsusbDatabase();
     DeviceInfoParserInstance.loadHwinfoDatabase();
+
+    showSplashMessage("Loading PCI Device Info...");
+    DeviceInfoParserInstance.loadLspciDatabase();
+
+    showSplashMessage("Loading Bluetooth Device Info...");
+    DeviceInfoParserInstance.loadHciconfigDatabase();
+
+    showSplashMessage("Loading USB Device Info...");
+    DeviceInfoParserInstance.loadLsusbDatabase();
+
+    showSplashMessage("Loading Ptinter Info...");
     DeviceInfoParserInstance.loadCupsDatabase();
 }
 
@@ -300,4 +328,12 @@ bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
 
 
     return false;
+}
+
+void MainWindow::showSplashMessage(const QString& message)
+{
+    if( firstAdd_ == true && splash_ )
+    {
+        splash_->showMessage( DApplication::translate("Main", message.toStdString().data()));
+    }
 }

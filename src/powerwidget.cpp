@@ -13,17 +13,19 @@ void PowerWidget::initWidget()
 {
     QStringList switchingpowerList = DeviceInfoParserInstance.getSwitchingpowerList();
     QStringList demidecodeSwitchingpowerList = DeviceInfoParserInstance.getDemidecodeSwitchingpowerList();
+    QStringList switchingUpowerList = DeviceInfoParserInstance.getSwitchingUpowerList();
 
     QStringList batteryList = DeviceInfoParserInstance.getBatteryList();
     QStringList demidecodebatteryList = DeviceInfoParserInstance.getDemidecodeBatteryList();
+    QStringList batteryUpowerList = DeviceInfoParserInstance.getBatteryUpowerList();
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    for(int i = 0; i < switchingpowerList.size(); ++i )
+    int maxSwitchingSize = maxDeviceSize(switchingpowerList, demidecodeSwitchingpowerList, switchingUpowerList);
+    for(int i = 0; i < maxSwitchingSize; ++i )
     {
-        QString device = switchingpowerList[i];
         articles.clear();
         existArticles.clear();
 
@@ -43,36 +45,70 @@ void PowerWidget::initWidget()
         articles.push_back(asdelay);
 
         ArticleStruct name("Name");
-        name.queryData( "lshw", device, "product");
-        articles.push_back(name);
-        existArticles.insert("product");
-
         ArticleStruct vendor("Vendor");
-        vendor.queryData( "lshw", device, "vendor");
-        articles.push_back(vendor);
-        existArticles.insert("vendor");
 
-        ArticleStruct description("Description");
-        description.queryData("lshw", device, "description");
-        articles.push_back(description);
-        existArticles.insert("description");
+        if(i < switchingUpowerList.size())
+        {
+            existArticles.clear();
 
-        ArticleStruct physicalId("Physical ID");
-        physicalId.queryData( "lshw", device, "physical id");
-        articles.push_back(physicalId);
-        existArticles.insert("physical id");
+            name.value = switchingUpowerList[i];
+            articles.push_back(name);
 
-        ArticleStruct version("Version");
-        version.queryData( "lshw", device, "version");
-        articles.push_back(version);
-        existArticles.insert("version");
+            vendor.queryData( "upower", name.value, "vendor");
+            articles.push_back(vendor);
+            existArticles.insert("vendor");
 
-        ArticleStruct capacity("Capacity");
-        capacity.queryData( "lshw", device, "capacity");
-        articles.push_back(capacity);
-        existArticles.insert("capacity");
+            ArticleStruct Serial("Serial");
+            Serial.queryData( "upower", name.value, "serial");
+            articles.push_back(Serial);
+            existArticles.insert("serial");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+            ArticleStruct model("Model");
+            model.queryData( "upower", name.value, "model");
+            articles.push_back(model);
+            existArticles.insert("model");
+
+            ArticleStruct powerSupply("Power Supply");
+            powerSupply.queryData( "upower", name.value, "power supply");
+            articles.push_back(powerSupply);
+            existArticles.insert("power supply");
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", name.value, articles, existArticles);
+        }
+
+        if(i < switchingpowerList.size())
+        {
+            QString device = switchingpowerList[i];
+
+            name.queryData( "lshw", device, "product");
+            articles.push_back(name);
+            existArticles.insert("product");
+
+            vendor.queryData( "lshw", device, "vendor");
+            articles.push_back(vendor);
+            existArticles.insert("vendor");
+
+            ArticleStruct description("Description");
+            description.queryData("lshw", device, "description");
+            articles.push_back(description);
+            existArticles.insert("description");
+
+            ArticleStruct physicalId("Physical ID");
+            physicalId.queryData( "lshw", device, "physical id");
+            articles.push_back(physicalId);
+            existArticles.insert("physical id");
+
+            ArticleStruct version("Version");
+            version.queryData( "lshw", device, "version");
+            articles.push_back(version);
+            existArticles.insert("version");
+
+            ArticleStruct capacity("Capacity");
+            capacity.queryData( "lshw", device, "capacity");
+            articles.push_back(capacity);
+            existArticles.insert("capacity");
+
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        }
 
         if(i < demidecodeSwitchingpowerList.size())
         {
@@ -118,14 +154,10 @@ void PowerWidget::initWidget()
         overviewInfo_.value = DApplication::translate("Main", "Switching Power") + " " + name.value;
     }
 
-
-    for( int i = 0; i < batteryList.size(); ++i )
+    int maxBatterySize = maxDeviceSize(batteryList, demidecodebatteryList, batteryUpowerList);
+    for( int i = 0; i < maxBatterySize; ++i )
     {
-        QString device = batteryList[i];
-
         articles.clear();
-        existArticles.clear();
-
         ArticleStruct ssdelay("Screen Suspend Delay");
         ssdelay.value = DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? DApplication::translate("Main", "Never") \
             : QString::number(DeviceInfoParserInstance.batteryScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
@@ -142,45 +174,116 @@ void PowerWidget::initWidget()
         articles.push_back(asdelay);
 
         ArticleStruct name("Name");
-        name.queryData( "lshw", device, "product");
-        articles.push_back(name);
-        existArticles.insert("product");
-
         ArticleStruct vendor("Vendor");
-        vendor.queryData( "lshw", device, "vendor");
-        articles.push_back(vendor);
-        existArticles.insert("vendor");
+        ArticleStruct de("Design Energy");
 
-        ArticleStruct description("Description");
-        description.queryData("lshw", device, "description");
-        articles.push_back(description);
-        existArticles.insert("description");  
-
-        ArticleStruct physicalId("Physical ID");
-        physicalId.queryData( "lshw", device, "physical id");
-        articles.push_back(physicalId);
-        existArticles.insert("physical id");
-
-        ArticleStruct version("Version");
-        version.queryData( "lshw", device, "version");
-        articles.push_back(version);
-        existArticles.insert("version");
-
-        ArticleStruct capacity("Capacity");
-        capacity.queryData( "lshw", device, "capacity");
-        articles.push_back(capacity);
-        existArticles.insert("capacity");
-
-        ArticleStruct slot("Location");
-        slot.queryData( "dmidecode", device, "slot");
-        articles.push_back(slot);
-        if(slot.value.isEmpty() == false || slot.value != DApplication::translate("Main", "Unknown"))
+        if(i < batteryUpowerList.size())
         {
-            existArticles.insert("Location");
-        }
-        existArticles.insert("slot");
+            existArticles.clear();
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+            name.value = batteryUpowerList[i];
+            articles.push_back(name);
+
+            vendor.queryData( "upower", name.value, "vendor");
+            articles.push_back(vendor);
+            existArticles.insert("vendor");
+
+            ArticleStruct Serial("Serial");
+            Serial.queryData( "upower", name.value, "serial");
+            articles.push_back(Serial);
+            existArticles.insert("serial");
+
+            ArticleStruct model("Model");
+            model.queryData( "upower", name.value, "model");
+            articles.push_back(model);
+            existArticles.insert("model");
+
+            ArticleStruct powerSupply("Power Supply");
+            powerSupply.queryData( "upower", name.value, "power supply");
+            articles.push_back(powerSupply);
+            existArticles.insert("power supply");
+
+            ArticleStruct state("State");
+            state.queryData( "upower", name.value, "state");
+            articles.push_back(state);
+            existArticles.insert("state");
+
+            ArticleStruct ce("Current Energy");
+            ce.queryData( "upower", name.value, "energy");
+            articles.push_back(ce);
+            existArticles.insert("energy");
+
+            ArticleStruct fe("Full Energy");
+            fe.queryData( "upower", name.value, "energy-full");
+            articles.push_back(fe);
+            existArticles.insert("energy-full");
+
+            ArticleStruct percentage("Battery Percentage");
+            percentage.queryData( "upower", name.value, "percentage");
+            articles.push_back(percentage);
+            existArticles.insert("percentage");
+
+            de.queryData( "upower", name.value, "energy-full-design");
+            articles.push_back(de);
+            existArticles.insert("energy-full-design");
+
+            ArticleStruct bh("Battery Healthy");
+            bh.queryData( "upower", name.value, "capacity");
+            articles.push_back(bh);
+            existArticles.insert("capacity");
+
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", name.value, articles, existArticles);
+        }
+
+        if( i < batteryList.size())
+        {
+            QString device = batteryList[i];
+
+            if(name.isValid() == false)
+            {
+                name.queryData( "lshw", device, "product");
+                articles.push_back(name);
+                existArticles.insert("product");
+            }
+
+            if( vendor.isValid() == false)
+            {
+                vendor.queryData( "lshw", device, "vendor");
+                articles.push_back(vendor);
+                existArticles.insert("vendor");
+            }
+
+            ArticleStruct description("Description");
+            description.queryData("lshw", device, "description");
+            articles.push_back(description);
+            existArticles.insert("description");
+
+            ArticleStruct physicalId("Physical ID");
+            physicalId.queryData( "lshw", device, "physical id");
+            articles.push_back(physicalId);
+            existArticles.insert("physical id");
+
+            ArticleStruct version("Version");
+            version.queryData( "lshw", device, "version");
+            articles.push_back(version);
+            existArticles.insert("version");
+
+            ArticleStruct capacity("Capacity");
+            capacity.queryData( "lshw", device, "capacity");
+            articles.push_back(capacity);
+            existArticles.insert("capacity");
+
+            ArticleStruct slot("Location");
+            slot.queryData( "dmidecode", device, "slot");
+            articles.push_back(slot);
+            if(slot.value.isEmpty() == false || slot.value != DApplication::translate("Main", "Unknown"))
+            {
+                existArticles.insert("Location");
+            }
+            existArticles.insert("slot");
+
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        }
 
         if(i < demidecodebatteryList.size())
         {
@@ -199,10 +302,18 @@ void PowerWidget::initWidget()
             assetTag.queryData( "dmidecode", demideBattery, "Asset Tag");
             articles.push_back(assetTag);
             existArticles.insert("Asset Tag");
+
+            if(de.isValid() == false)
+            {
+                de.queryData( "dmidecode", demideBattery, "Design Capacity");
+                articles.push_back(de);
+            }
+            existArticles.insert("Design Capacity");
+
             DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideBattery, articles, existArticles);
         }
 
-        addSubInfo( "Battery", articles );
+        addSubInfo( DApplication::translate("Main", "Battery") + name.value, articles );
 
         if( switchingpowerList.size() + batteryList.size() > 1 )
         {
@@ -215,6 +326,7 @@ void PowerWidget::initWidget()
 
             tabList.push_back(tab);
         }
+
         if(overviewInfo_.value.isEmpty() == false)
         {
             overviewInfo_.value += " / ";

@@ -17,14 +17,15 @@ void CpuWidget::initWidget()
     QString architecture =  DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Architecture");
     if(cpuList.size() > 1)
     {
-        QStringList headers = { "Name",  "Vendor", "Speed", "Architecture" };
+        QStringList headers = { "Core", "Name",  /*"Vendor",*/ "Speed", "Architecture" };
         QList<QStringList> tabList;
 
         foreach(const QString& cpu, cpuList)
         {
             QStringList tab = {
+                DApplication::translate("Main", "Core") +" " + cpu,
                 DeviceInfoParserInstance.queryData("catcpu", cpu, "model name"),
-                DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id"),
+                //DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id"),
                 DeviceInfoParserInstance.queryData("catcpu", cpu, "cpu MHz"),
                 architecture
             };

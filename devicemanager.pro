@@ -14,7 +14,7 @@ TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
+# depend on your compiler). Please consult the documentation of the$
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
@@ -34,7 +34,7 @@ CONFIG += c++11
 CONFIG += link_pkgconfig
 PKGCONFIG += dtkwidget dframeworkdbus
 
-TRANSLATIONS += translations/DeviceManager.ts
+TRANSLATIONS += translations/*.ts
 
 INCLUDEPATH +=     \
             /usr/include/cups/ \
@@ -115,6 +115,7 @@ HEADERS += \
 RESOURCES += app.qrc
 
 DISTFILES += \
+    images/splash.png \
     translations/dde-devicemanager.ts \
     translations/dde-devicemanager_zh_CN.ts \
     images/memory.svg \
@@ -143,6 +144,10 @@ DISTFILES += \
     images/mouse.ico \
     images/disk.ico
 
+
+policy.path = /usr/share/polkit-1/actions
+policy.files = policy/com.deepin.pkexec.dde-devicemanager.policy
+
 # target
 target.path = /usr/bin/
 
@@ -157,4 +162,4 @@ desktop.path = /usr/share/applications/
 translations.path = /usr/share/dde-devicemanager/translations
 translations.files = translations/*.qm
 
-INSTALLS += target icons desktop translations
+INSTALLS += target icons desktop translations policy

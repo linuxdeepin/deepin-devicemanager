@@ -63,6 +63,8 @@ public:
 
     virtual void deviceListClicked();
 
+    static int maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3);
+
 protected:
     virtual void contextMenuEvent(QContextMenuEvent *event) override;
 

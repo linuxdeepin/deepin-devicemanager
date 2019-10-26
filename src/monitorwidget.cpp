@@ -15,6 +15,27 @@ int gcd(int a,int b){
         return gcd(b,a%b);
 }
 
+bool findAspectRatio(int width, int height, int& ar_w, int& ar_h)
+{
+    float r1 = float(width)/float(height);
+
+    for(ar_w = 21; ar_w > 0; --ar_w)
+    {
+        for(ar_h = 21; ar_h > 0; --ar_h)
+        {
+            if( std::abs(r1 - float(ar_w)/float(ar_h))/r1 < 0.01)
+            {
+                int r = gcd(ar_w, ar_h);
+                ar_w/= r;
+                ar_h/= r;
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Monitor"))
 {
     initWidget();
@@ -116,7 +137,15 @@ void MonitorWidget::initWidget()
             int width = re.cap(1).toInt();
             int height = re.cap(2).toInt();
             int gys = gcd(width, height);
-            displayRete.value = QString::number(width/gys) + " : " + QString::number(height/gys);
+            int w = width/gys;
+            int h = height/gys;
+
+            if(w > 21)
+            {
+                findAspectRatio(w, h, w, h);
+            }
+
+            displayRete.value = QString::number(w) + " : " + QString::number(h);
         }
 
         articles.push_back(currentResolution);

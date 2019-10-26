@@ -61,7 +61,7 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent, const QString& devic
 
         labelFont_.setPointSize(11);
 
-        tableContentFont_.setPointSize(11);
+        tableContentFont_.setPointSize(10);
         tableContentFont_.setBold(true);
 
         isFontInit_ = true;
@@ -478,24 +478,11 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         auto changeTheme = [this](){
             DPalette pa = DApplicationHelper::instance()->palette(this);
             QColor base_color = palette().base().color();
-            DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
 
-            //if (ct == DGuiApplicationHelper::LightType) {
-                pa.setColor(QPalette::Background, base_color);
-                pa.setBrush(DPalette::DarkLively, palette().base());
-                pa.setBrush(DPalette::FrameBorder, palette().base());
-                pa.setColor(QPalette::Button, base_color);
-                //pa.setColor(QPalette::Link, base_color);
-                //pa.setColor(QPalette::LinkVisited, base_color);
-                //pa.setColor(QPalette::AlternateBase, base_color);
-                pa.setColor(QPalette::NoRole, base_color);
-                //pa.setColor(QPalette::NColorRoles, base_color);
-                //pa.setColor(QPalette::Light, base_color);
-                //pa.setC
-//            } else {
-//                base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
-//                pa.setColor(QPalette::Background, base_color);
-//            }
+            pa.setColor(QPalette::Background, base_color);
+            pa.setBrush(DPalette::DarkLively, palette().base());
+            pa.setBrush(DPalette::FrameBorder, palette().base());
+            pa.setColor(QPalette::Button, base_color);
 
             DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
         };
@@ -623,6 +610,23 @@ void DeviceInfoWidgetBase::deviceListClicked()
     }
 
     downWidgetScrollArea_->verticalScrollBar()->setValue(0);
+}
+
+int DeviceInfoWidgetBase::maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3)
+{
+    int max = list1.size();
+
+    if(max < list2.size())
+    {
+        max = list2.size();
+    }
+
+    if(max < list3.size())
+    {
+        max = list3.size();
+    }
+
+    return max;
 }
 
 void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)

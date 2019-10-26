@@ -784,6 +784,26 @@ QStringList DeviceInfoParser::getSwitchingpowerList()
     return switchingpowerList;
 }
 
+QStringList DeviceInfoParser::getSwitchingUpowerList()
+{
+    QStringList switchingpowerList;
+
+    if(false == toolDatabase_.contains("upower"))
+    {
+        return switchingpowerList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["upower"].uniqueKeys() )
+    {
+        if(fk.contains("line_power", Qt::CaseInsensitive))
+        {
+            switchingpowerList.push_back(fk);
+        }
+    }
+
+    return switchingpowerList;
+}
+
 QStringList DeviceInfoParser::getDemidecodeSwitchingpowerList()
 {
     QStringList switchingpowerList;
@@ -836,6 +856,26 @@ QStringList DeviceInfoParser::getDemidecodeBatteryList()
     foreach(const QString& fk, toolDatabase_["dmidecode"].uniqueKeys() )
     {
         if(fk.contains("Battery", Qt::CaseInsensitive))
+        {
+            batteryList.push_back(fk);
+        }
+    }
+
+    return batteryList;
+}
+
+QStringList DeviceInfoParser::getBatteryUpowerList()
+{
+    QStringList batteryList;
+
+    if(false == toolDatabase_.contains("upower"))
+    {
+        return batteryList;
+    }
+
+    foreach(const QString& fk, toolDatabase_["upower"].uniqueKeys() )
+    {
+        if(fk.contains("battery", Qt::CaseInsensitive))
         {
             batteryList.push_back(fk);
         }
@@ -1159,20 +1199,20 @@ bool DeviceInfoParser::loadDemicodeDatabase()
         if( lineNumber < 5 )
         {
             //# dmidecode 3.2
-            QRegExp rx("^# dmidecode ([\\d]*).([\\d]*)$");
+            QRegExp rx("^# dmidecode ([\\d]*.[\\d]*)$");
             if( rx.indexIn(line) > -1 )
             {
-                DeviceInfoMap["version"] = rx.cap(1)+ "." + rx.cap(2);
+                DeviceInfoMap["version"] = rx.cap(1);
                 dimdecodeDatabase_["dmidecode"] = DeviceInfoMap;
                 DeviceInfoMap.clear();
                 continue;
             }
 
             //  SMBIOS 3.0.0 present.
-            rx.setPattern("^SMBIOS ([\\d])*.([\\d])*.([\\d])* present.$");
+            rx.setPattern("^SMBIOS ([\\d]*.[\\d]*.[\\d])+ present.$");
             if( rx.indexIn(line) > -1 )
             {
-                DeviceInfoMap["version"] = rx.cap(1)+ "." + rx.cap(2) + "." + rx.cap(1);
+                DeviceInfoMap["version"] = rx.cap(1);
                 dimdecodeDatabase_["SMBIOS"] = DeviceInfoMap;
                 DeviceInfoMap.clear();
                 continue;
@@ -1817,6 +1857,71 @@ bool DeviceInfoParser::loadPowerSettings()
     return true;
 }
 
+bool DeviceInfoParser::loadUpowerDatabase()
+{
+    if( false == executeProcess("upower --dump"))
+    {
+        return false;
+    }
+
+    QString upowerOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile hciconfigFile("./deviceInfo/upower.txt");
+    if( false == hciconfigFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+
+    upowerOut = hciconfigFile.readAll();
+    hciconfigFile.close();
+#endif
+
+    // hciconfig
+    DatabaseMap upowerDatabase_;
+    QMap<QString, QString> DeviceInfoMap;
+    QString deviceName;
+    int startIndex = 0;
+
+    for( int i = 0; i < upowerOut.size(); ++i )
+    {
+        if( upowerOut[i] != '\n' && i != upowerOut.size() -1)
+        {
+            continue;
+        }
+
+        QString line = upowerOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        int index = line.indexOf("Device:")+1;
+        if( line.startsWith("Device:") || line.trimmed().isEmpty() || i == upowerOut.size() )
+        {
+            if( deviceName.isEmpty() == false )
+            {
+                upowerDatabase_[deviceName] = DeviceInfoMap;
+            }
+
+            DeviceInfoMap.clear();
+            int index2 = line.lastIndexOf("/")+1;
+            deviceName = line.mid(index2>index? index2:index);
+
+            continue;
+        }
+
+        index = line.indexOf(Devicetype_Separator);
+        if( index > 0 )
+        {
+            DeviceInfoMap[line.mid(0, index).trimmed()] = line.mid(index+1).trimmed();
+        }
+        else
+        {
+            DeviceInfoMap[line.trimmed()] = "";
+        }
+    }
+
+    toolDatabase_["upower"] = upowerDatabase_;
+    return true;
+}
+
 bool DeviceInfoParser::loadLspciDatabase()
 {
     if( false == executeProcess("sudo lspci -v"))
@@ -2217,7 +2322,7 @@ void showDetailedInfo(cups_dest_t *dest, const char* option, QMap<QString, QStri
     }
 }
 
-int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest)
+int getDestInfo(void *user_data, unsigned /*flags*/, cups_dest_t *dest)
 {
     DatabaseMap& cupsDatabase = *(reinterpret_cast<DatabaseMap*>(user_data));
 
@@ -2240,7 +2345,7 @@ int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest)
     showDetailedInfo( dest, CUPS_SIDES, DeviceInfoMap);
 
 
-    cups_dinfo_t* info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);
+    //cups_dinfo_t* info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);
 
     for(int i = 0; i < dest->num_options; ++i)
     {
@@ -2263,25 +2368,11 @@ bool DeviceInfoParser::loadCupsDatabase()
     return true;
 }
 
-bool DeviceInfoParser::executeProcess(const QString& cmd)
+bool DeviceInfoParser::getRootPassword()
 {
 #ifdef TEST_DATA_FROM_FILE
     return true;
 #endif
-
-    if( false == cmd.startsWith("sudo") )
-    {
-        return runCmd(cmd);
-    }
-
-    static LogPasswordAuth* autoDialog = nullptr;
-
-    runCmd("whoami");
-    if(standOutput_ == "root")
-    {
-        return runCmd(cmd);
-    }
-
     if( autoDialog == nullptr )
     {
         autoDialog = new LogPasswordAuth;
@@ -2302,6 +2393,26 @@ bool DeviceInfoParser::executeProcess(const QString& cmd)
         exit(-1);
     }
 
+    return true;
+}
+
+bool DeviceInfoParser::executeProcess(const QString& cmd)
+{
+#ifdef TEST_DATA_FROM_FILE
+    return true;
+#endif
+    if( false == cmd.startsWith("sudo") )
+    {
+        return runCmd(cmd);
+    }
+
+    runCmd("whoami");
+    if(standOutput_ == "root")
+    {
+        return runCmd(cmd);
+    }
+
+    QStringList arg;
     arg.clear();
     QString newCmd = cmd;
 

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Utility;
 Comment=Device Manager is a gadget for viewing device information.
-Exec=dde-devicemanager
+Exec=pkexec dde-devicemanager
 GenericName=dde-devicemanager
 Icon=/usr/share/dde-devicemanager/cpu.svg
 Name=dde-devicemanager
