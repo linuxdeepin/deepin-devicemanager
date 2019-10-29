@@ -397,19 +397,19 @@
         </message>
         <message>
             <source>L1d Cache</source>
-            <translation>一级数据缓存</translation>
+            <translation>L1缓存(数据)</translation>
         </message>
         <message>
             <source>L1i Cache</source>
-            <translation>一级代码缓存</translation>
+            <translation>L1缓存(代码)</translation>
         </message>
         <message>
             <source>L2 Cache</source>
-            <translation>二级缓存</translation>
+            <translation>L2缓存</translation>
         </message>
         <message>
             <source>L3 Cache</source>
-            <translation>三级缓存</translation>
+            <translation>L3缓存</translation>
         </message>
         <message>
             <source>Cpu id</source>
@@ -1100,24 +1100,24 @@
             <translation>内核</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Cancel</source>
+            <translation>取消</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Authenticate</source>
+            <translation>认证</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Password Error!</source>
+            <translation>密码错误！请检查</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Error</source>
+            <translation>错误</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Please Enter Password!</source>
+            <translation>请输入密码！</translation>
         </message>
         <message>
             <source></source>
@@ -1171,8 +1171,15 @@
             <source></source>
             <translation></translation>
         </message><message>
-        <source></source>
-        <translation></translation>
-    </message>
+            <source></source>
+            <translation></translation>
+        </message>
+    </context>
+    <context>
+        <name>CPU</name>
+        <message>
+            <source>Speed</source>
+            <translation>频率</translation>
+        </message>
     </context>
 </TS>

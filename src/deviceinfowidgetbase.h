@@ -65,6 +65,8 @@ public:
 
     static int maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3);
 
+    //void paintEvent(QPaintEvent *event) override;
+
 protected:
     virtual void contextMenuEvent(QContextMenuEvent *event) override;
 

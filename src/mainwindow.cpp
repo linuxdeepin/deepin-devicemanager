@@ -26,35 +26,41 @@
 #include "DApplication"
 #include "DApplicationHelper"
 #include <QSplashScreen>
+#include <DWidgetUtil>
+#include <QDir>
+#include "DFileDialog"
+#include <QDateTime>
+#include "DTitlebar"
 
 DWIDGET_USE_NAMESPACE
 
 QList<ArticleStruct> staticArticles;
 
-MainWindow::MainWindow(QWidget *parent) :
-    DMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent, QSplashScreen* ss) :
+    DMainWindow(parent), splash_(ss)
 {
-    //setWindowTitle("");
-    setAutoFillBackground(true);
+    //setAutoFillBackground(false);
     DWidget* mainWidget = new DWidget(this);
-    mainWidget->setAutoFillBackground(true);
+    //mainWidget->setAutoFillBackground(true);
     mainWidget->setMaximumHeight(640);
     QHBoxLayout* ly = new QHBoxLayout;
     ly->setMargin(0);
-    //ly->setContentsMargins(0, 0, 0, 0);
     ly->setSpacing(0);
     ly->setSizeConstraint(QLayout::SetMinAndMaxSize);
     setFocus(Qt::FocusReason::NoFocusReason);
 
     leftDeviceView_ = new DeviceListView(this);
     leftDeviceView_->setMaximumWidth(220);
-    leftDeviceView_->setMinimumWidth(100);
+    leftDeviceView_->setMinimumWidth(175);
 
     ly->addWidget(leftDeviceView_);
 
     this->setFocusProxy(leftDeviceView_);
 
     rightDeviceInfoWidget_ = new DStackedWidget(mainWidget);
+//    rightDeviceInfoWidget_->setAutoFillBackground(true);
+//    rightDeviceInfoWidget_->setBackgroundRole(DPalette::Base);
+//    rightDeviceInfoWidget_->setForegroundRole(DPalette::Base);
 
     addAllDeviceinfoWidget();
 
@@ -77,6 +83,20 @@ MainWindow::MainWindow(QWidget *parent) :
     mainWidget->setLayout(ly);
 
     setCentralWidget(mainWidget);
+
+//    titlebar()->setAutoFillBackground(false);
+//    titlebar()->setBackgroundRole(DPalette::Base);
+    //titlebar()->setForegroundRole(DPalette::Base);
+
+    //DPalette pa = DApplicationHelper::instance()->palette(this);
+
+
+    //pa.setColor(QPalette::Background, base_color);
+    //pa.setBrush(DPalette::ItemBackground, titlebar()->palette().base());
+
+    //DApplicationHelper::instance()->setPalette(this, pa);
+
+    //titlebar()->setBackgroundRole(DPalette::Base);
 }
 
 MainWindow::~MainWindow()
@@ -88,10 +108,8 @@ void MainWindow::addAllDeviceinfoWidget()
 {
     DeviceInfoParserInstance.getRootPassword();
 
-    if( firstAdd_ == true && splash_ == nullptr )
+    if( firstAdd_ == true && splash_ )
     {
-        QPixmap screenPixmap(":images/splash.png");
-        splash_ = new QSplashScreen(screenPixmap);
         splash_->show();
         QApplication::processEvents();
     }
@@ -103,45 +121,52 @@ void MainWindow::addAllDeviceinfoWidget()
     refreshDatabase();
 
     auto overviewWidget = new ComputerOverviewWidget(this);
-    addDeviceWidget(overviewWidget, ":images/overview.svg");
-    addDeviceWidget(new CpuWidget(this), ":images/cpu.svg");
-    addDeviceWidget(new MotherboardWidget(this), ":images/motherboard.ico");
-    addDeviceWidget(new MemoryWidget(this), ":images/memory.svg");
-    addDeviceWidget(new DiskWidget(this), ":images/disk.ico");
-    addDeviceWidget(new KeyboardWidget(this), ":images/keyboard.svg");
-    addDeviceWidget(new MouseWidget(this), ":images/mouse.ico");
-    addDeviceWidget(new PowerWidget(this), ":images/power.svg");
-    addDeviceWidget(new PrinterWidget(this), ":images/printer.svg");
+    addDeviceWidget(overviewWidget, "概况.svg");
+
+//    if(firstAdd_ == true)
+//    {
+//        leftDeviceView_->addSeperator();
+//    }
+
+    addDeviceWidget(new CpuWidget(this), "处理器.svg");
+    addDeviceWidget(new MotherboardWidget(this), "主板.svg");
+    addDeviceWidget(new MemoryWidget(this), "内存.svg");
+    addDeviceWidget(new DiskWidget(this), "存储设备.svg");
+    addDeviceWidget(new DisplayadapterWidget(this), "显示适配器.svg");
+    addDeviceWidget(new MonitorWidget(this), "显示设备.svg");
+    addDeviceWidget(new NetworkadapterWidget(this), "网络适配器.svg");
+    addDeviceWidget(new AudiodeviceWidget(this), "音频适配器.svg");
+    addDeviceWidget(new PowerWidget(this), "电池.svg");
 
     if(firstAdd_ == true)
     {
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new DisplayadapterWidget(this), ":images/overview.svg");
-    addDeviceWidget(new AudiodeviceWidget(this), ":images/sounddevice.svg");
-    addDeviceWidget(new NetworkadapterWidget(this), ":images/networkadapter.svg");
-    addDeviceWidget(new BluetoothWidget(this), ":images/bluetooth.svg");
-    addDeviceWidget(new MonitorWidget(this), ":images/monitor.svg");
-    addDeviceWidget(new CameraWidget(this), ":images/camera.svg");
-    addDeviceWidget(new UsbdeviceWidget(this), ":images/usbdevice.svg");
+    addDeviceWidget(new KeyboardWidget(this), "键盘.svg");
+    addDeviceWidget(new MouseWidget(this), "鼠标.svg");
+    addDeviceWidget(new BluetoothWidget(this), "蓝牙.svg");
+    addDeviceWidget(new PrinterWidget(this), "打印机.svg");
+    addDeviceWidget(new CameraWidget(this), "图像设备.svg");
+    addDeviceWidget(new UsbdeviceWidget(this), "usb设备.svg");
 
     if(firstAdd_ == true)
     {
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new OtherInputdeviceWidget(this), ":images/otherinputdevice.svg");
-    addDeviceWidget(new OtherPciDeviceWidget(this), ":images/otherpcidevice.ico");
+    addDeviceWidget(new OtherInputdeviceWidget(this), "其他输入设备.svg");
+    addDeviceWidget(new OtherPciDeviceWidget(this), "其他PCI设备.svg");
 
     overviewWidget->setOverviewInfos(staticArticles);
 
-    if( firstAdd_ == true && splash_ != nullptr )
-    {
-        splash_->finish(this);
-        delete splash_;
-        splash_ = nullptr;
-    }
+//    if( firstAdd_ == true && splash_ != nullptr )
+//    {
+//        splash_->finish(this);
+//        //Dtk::Widget::moveToCenter(this);
+//        //delete splash_;
+//        splash_ = nullptr;
+//    }
 
     firstAdd_ = false;
     QApplication::restoreOverrideCursor();
@@ -183,6 +208,7 @@ void MainWindow::insertDeviceWidget(int index, DeviceInfoWidgetBase* w)
 
 void MainWindow::refresh()
 {
+    //move(100, 100);
     QString currentDevice = leftDeviceView_->currentDevice();
 
     QMap<QString, DeviceInfoWidgetBase*> oldWidgetMap;
@@ -192,7 +218,7 @@ void MainWindow::refresh()
 
     if(  deviceInfoWidgetMap_.contains(currentDevice) )
     {
-        rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);;
+        rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);
     }
 
     foreach(const QString& widgetName, oldWidgetMap.keys())
@@ -326,14 +352,18 @@ bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
         return true;
     }
 
-
     return false;
 }
 
 void MainWindow::showSplashMessage(const QString& message)
 {
-    if( firstAdd_ == true && splash_ )
+    if(firstAdd_ == false || splash_ == nullptr)
     {
-        splash_->showMessage( DApplication::translate("Main", message.toStdString().data()));
+        return;
     }
+
+    splash_->showMessage( DApplication::translate("Main", message.toStdString().data()));
+    QApplication::processEvents();
 }
+
+

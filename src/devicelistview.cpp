@@ -5,6 +5,13 @@
 #include <QPainter>
 #include <qdrawutil.h>
 #include "DApplicationHelper"
+#include "DMenu"
+#include "DApplication"
+#include "mainwindow.h"
+#include <QDir>
+#include "DFileDialog"
+#include <QDateTime>
+#include <QContextMenuEvent>
 
 DWIDGET_USE_NAMESPACE
 
@@ -97,27 +104,38 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     setItemDelegate( new DeviceListviewDelegate(this) );
 
     setBackgroundType(DStyledItemDelegate::BackgroundType::RoundedBackground);
-    setAutoFillBackground(true);
+
 
     auto modifyTheme = [this](){
+//        DPalette pa;
+//        pa.setColor(DPalette::Background,QColor(0, 248, 248));
+//        setAutoFillBackground(true);
+//        setPalette(pa);
+
         DPalette pa = DApplicationHelper::instance()->palette(this);
         QColor base_color = palette().base().color();
-        DGuiApplicationHelper::ColorType ct = DGuiApplicationHelper::toColorType(base_color);
 
-//        if (ct == DGuiApplicationHelper::LightType) {
-            pa.setBrush(DPalette::ItemBackground, palette().base());
-//        } else {
-//            base_color = DGuiApplicationHelper::adjustColor(base_color, 0, 0, +5, 0, 0, 0, 0);
-//            pa.setColor(DPalette::ItemBackground, base_color);
-//        }
+        pa.setBrush(DPalette::ItemBackground, base_color);
+        pa.setColor(QPalette::Background, base_color);
+
+        setPalette(pa);
 
         DApplicationHelper::instance()->setPalette(this, pa);
     };
 
     modifyTheme();
 
+    this->setAutoFillBackground(true);
+    //this->setBackgroundRole(DPalette::Base);
+
     connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, modifyTheme);
     //setMaximumWidth(150);
+
+    initContextMenu();
+
+    setContextMenuPolicy(Qt::CustomContextMenu);
+
+    connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), SLOT(OnlvOpRightBtn(const QPoint&)));
 }
 
 void DeviceListView::addDevice(const QString& deviceName, const QString& iconFile)
@@ -128,7 +146,15 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
 
     item->setFont(itemFont);
 
-    item->setIcon(QIcon(iconFile));
+    DGuiApplicationHelper::ColorType ct = DApplicationHelper::instance()->themeType();
+
+    QString icon = ":images/";
+    icon += ((ct == DGuiApplicationHelper::LightType) ? "light/normal/":"dark/normal/");
+    icon += iconFile;
+
+    item->setIcon(QIcon(icon));
+    item->setData(icon, Qt::UserRole+89);
+
     item->setText(deviceName);
 
     item->setTextAlignment(Qt::AlignLeft);
@@ -166,6 +192,100 @@ void DeviceListView::setCurrentDevice(QString& device)
 QString DeviceListView::indexAt(int index)
 {
     return navModel_->index(index, 0).data().toString();
-
-    //return navModel_->index(index).data().toString();
 }
+
+bool DeviceListView::onExportToFile()
+{
+   QString selectFilter;
+
+   QString saveDir = "./";
+   QDir dir( QDir::homePath() + "/Documents/");
+   if(dir.exists())
+   {
+        saveDir = QDir::homePath() + "/Documents/";
+   }
+
+   QString exportFile = DFileDialog::getSaveFileName(this,
+                                                     tr("Export File"), saveDir + DApplication::translate("Main", "deviceInfo") + \
+                                                     QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
+                                                    tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
+
+   if(exportFile.isEmpty() == true)
+   {
+       return true;
+   }
+
+   MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent());
+   if( nullptr == mainWindow )
+   {
+       return false;
+   }
+
+   return mainWindow->exportTo(exportFile, selectFilter);
+}
+
+void DeviceListView::OnlvOpRightBtn( const QPoint& point)
+{
+    contextMenu_->exec(mapToGlobal(point));
+}
+
+void DeviceListView::initContextMenu()
+{
+    contextMenu_ = new DMenu(this);
+    QAction* refreshAction = new QAction(DApplication::translate("Main", "Refresh"), this);
+    connect(refreshAction, &QAction::triggered, \
+            [this]()
+            {
+                MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent()->parent());
+                if(mainWindow)
+                {
+                    mainWindow->refresh();
+                }
+            }
+    );
+    contextMenu_->addAction(refreshAction);
+
+
+    QAction* exportAction = new QAction(DApplication::translate("Main", "Export"));
+
+    connect(exportAction, &QAction::triggered, this, &DeviceListView::onExportToFile);
+
+    contextMenu_->addAction(exportAction);
+}
+
+void DeviceListView::currentChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+    QStandardItem* currentItem = navModel_->itemFromIndex(current);
+    if(currentItem)
+    {
+        QString icon = currentItem->data(Qt::UserRole+89).toString();
+        if(icon.isEmpty() == false)
+        {
+            icon.replace("normal", "press");
+            currentItem->setIcon(QIcon(icon));
+            currentItem->setData(icon, Qt::UserRole+89);
+        }
+    }
+
+    QStandardItem* previousItem = navModel_->itemFromIndex(previous);
+    if(previousItem)
+    {
+        QString icon = previousItem->data(Qt::UserRole+89).toString();
+        if(icon.isEmpty() == false)
+        {
+            icon.replace("press", "normal");
+            previousItem->setIcon(QIcon(icon));
+            previousItem->setData(icon, Qt::UserRole+89);
+        }
+    }
+
+
+    DListView::currentChanged(current, previous);
+}
+
+//void DeviceListView::contextMenuEvent(QContextMenuEvent *event)
+//{
+//    contextMenu_->exec(event->globalPos());
+//}
+
+

@@ -51,6 +51,11 @@ void MotherboardWidget::initWidget()
 
     overviewInfo_.value =  model.value + " " + chipsetFamily.value;
 
+    if( overviewInfo_.value.contains(vendor.value, Qt::CaseInsensitive) == false )
+    {
+        overviewInfo_.value = vendor.value + " " + overviewInfo_.value;
+    }
+
     ArticleStruct serial("Serial Number");
     serial.queryData("dmidecode", "Base Board Information", "Serial Number");
     articles.push_back(serial);
@@ -64,6 +69,10 @@ void MotherboardWidget::initWidget()
     SMBIOSVersion.queryData("dmidecode", "SMBIOS", "version");
     articles.push_back(SMBIOSVersion);
 
+    ArticleStruct features("Features");
+    features.queryData("dmidecode", "Base Board Information", "Features");
+    articles.push_back(features);
+
     if(res)
     {
         addInfo( "", articles );
@@ -71,6 +80,24 @@ void MotherboardWidget::initWidget()
 
     articles.clear();
     existArticles.clear();
+
+    ArticleStruct productName("Product Name");
+    productName.queryData("dmidecode", "System Information", "Product Name");
+    articles.push_back(productName);
+    existArticles.insert("Product Name");
+
+    vendor.queryData("dmidecode", "System Information", "Manufacturer");
+    articles.push_back(vendor);
+    existArticles.insert("Manufacturer");
+
+    serial.queryData("dmidecode", "System Information", "Serial Number");
+    articles.push_back(serial);
+    existArticles.insert("Serial Number");
+
+    version.queryData("dmidecode", "System Information", "Version");
+    articles.push_back(version);
+    existArticles.insert("Version");
+
     ArticleStruct uuid("UUID");
     uuid.queryData("dmidecode", "System Information", "UUID");
     articles.push_back(uuid);
@@ -87,10 +114,6 @@ void MotherboardWidget::initWidget()
     existArticles.insert("SKU Number");
 
     res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "System Information", articles, existArticles);
-
-    ArticleStruct features("Features");
-    features.queryData("dmidecode", "Base Board Information", "Features");
-    articles.push_back(features);
 
     if(res)
     {

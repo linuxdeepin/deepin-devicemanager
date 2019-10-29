@@ -1112,7 +1112,23 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Cancel</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Authenticate</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Password Error!</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Error</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Please Enter Password!</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -1127,20 +1143,11 @@
             <source></source>
             <translation type="unfinished"/>
         </message>
+    </context>
+    <context>
+        <name>CPU</name>
         <message>
-            <source></source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source></source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source></source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source></source>
+            <source>Speed</source>
             <translation type="unfinished"/>
         </message>
     </context>

@@ -6,20 +6,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "DTitlebar"
-
 #include "DApplicationSettings"
+#include "QSplashScreen"
 
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    //DApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
     DApplication::loadDXcbPlugin();
 
     DApplication app(argc, argv);
     app.setAttribute(Qt::AA_UseHighDpiPixmaps);
     app.loadTranslator();
     app.setOrganizationName("deepin");
-    app.setApplicationName(DApplication::translate("Main", "DeviceManager"));
+    app.setApplicationName("dde-devicemanager");
     app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
 
     app.setApplicationVersion(VERSION);
@@ -37,13 +39,18 @@ int main(int argc, char *argv[])
 
     //app.setStyle("chameleon");
 
-    DApplicationSettings settings;
+    DApplicationSettings settinAgs;
 
-    MainWindow w;
+    QPixmap screenPixmap(":images/splash.png");
+    auto sp = new QSplashScreen(screenPixmap);
+
+    MainWindow w(nullptr, sp);
     w.titlebar()->setTitle("");
     w.titlebar()->setIcon(QIcon(":images/cpu.svg"));
-    Dtk::Widget::moveToCenter(&w);
+
     w.show();
+    Dtk::Widget::moveToCenter(&w);
+    sp->finish(&w);
 
     return app.exec();
 }

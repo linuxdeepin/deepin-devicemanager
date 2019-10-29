@@ -6,6 +6,8 @@
 #include <DStyledItemDelegate>
 #include "DWidget"
 
+class QListViewItem;
+
 class DeviceListviewDelegate : public Dtk::Widget::DStyledItemDelegate
 {
     Q_OBJECT
@@ -32,7 +34,16 @@ public:
 
     QString indexAt(int index);
 
+public slots:
+    bool onExportToFile();
+    void OnlvOpRightBtn( const QPoint&);
+
+private:
+    void initContextMenu();
+    void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
+
 private:
     QStandardItemModel* navModel_ = nullptr;
     QString currentDevice_;
+    Dtk::Widget::DMenu* contextMenu_ = nullptr;
 };

@@ -10,4 +10,6 @@ public:
 
     void initWidget() override;
     void addPrecessor(const QString& precessor);
+
+    QString speed_;
 };

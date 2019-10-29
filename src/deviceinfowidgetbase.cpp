@@ -18,6 +18,7 @@
 #include "DApplication"
 #include "DApplicationHelper"
 #include "table.h"
+#include "DTitlebar"
 
 DWIDGET_USE_NAMESPACE
 
@@ -38,7 +39,7 @@ static const int SubRowHeight_ = 40;
 static const int WidgetWidth = 640;
 static const int WidgetHeight = 770;
 
-DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent, const QString& deviceName) : QWidget(parent)
+DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& deviceName) : QWidget(parent_)
 {
     //setStyleSheet("QWidget{border-top-left-radius:15px;border-top-right-radius:5px;}");
     if(isFontInit_ == false)
@@ -78,6 +79,7 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent, const QString& devic
 
     setLayout(vLayout_);
     setMinimumHeight(WidgetHeight);
+
     initContextMenu();
 
     auto modifyTheme = [this](){
@@ -85,12 +87,17 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent, const QString& devic
         QColor base_color = palette().base().color();
 
         pa.setColor(QPalette::Background, base_color);
-        pa.setBrush(DPalette::ItemBackground, palette().base());
+        pa.setBrush(DPalette::ItemBackground, base_color);
 
-        DApplicationHelper::instance()->setPalette(this, pa);
+        setPalette(pa);
+
+        //DApplicationHelper::instance()->setPalette(this, pa);
     };
 
     modifyTheme();
+
+//    setAutoFillBackground(false);
+//    setBackgroundRole(DPalette::Base);
 
     connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, modifyTheme);
 }
@@ -611,6 +618,35 @@ void DeviceInfoWidgetBase::deviceListClicked()
 
     downWidgetScrollArea_->verticalScrollBar()->setValue(0);
 }
+
+//void DeviceInfoWidgetBase::paintEvent(QPaintEvent *event)
+//{
+//    QPainter painter(this);
+//        painter.setRenderHint(QPainter::Antialiasing, true);
+
+//        // Save pen
+//        QPen oldPen = painter.pen();
+
+//        painter.setRenderHint(QPainter::Antialiasing);
+//        DPalette pa = DApplicationHelper::instance()->palette(this);
+//        painter.setBrush(QBrush(pa.color(DPalette::Base)));
+//        QColor penColor = pa.color(DPalette::FrameBorder);
+//        penColor.setAlphaF(0.05);
+//        painter.setPen(QPen(penColor));
+
+//        QRectF rect = this->rect();
+//        rect.setX(0.5);
+//        rect.setY(0.5);
+//        rect.setWidth(rect.width() - 0.5);
+//        rect.setHeight(rect.height() - 0.5);
+
+//        QPainterPath painterPath;
+//        painterPath.addRoundedRect(rect, 8, 8);
+//        painter.drawPath(painterPath);
+
+//        // Restore the pen
+//        painter.setPen(oldPen);
+//}
 
 int DeviceInfoWidgetBase::maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3)
 {

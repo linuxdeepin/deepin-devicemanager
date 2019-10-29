@@ -15,33 +15,14 @@ void CpuWidget::initWidget()
     QStringList cpuList = DeviceInfoParserInstance.getCpuList();
 
     QString architecture =  DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Architecture");
-    if(cpuList.size() > 1)
-    {
-        QStringList headers = { "Core", "Name",  /*"Vendor",*/ "Speed", "Architecture" };
-        QList<QStringList> tabList;
 
-        foreach(const QString& cpu, cpuList)
-        {
-            QStringList tab = {
-                DApplication::translate("Main", "Core") +" " + cpu,
-                DeviceInfoParserInstance.queryData("catcpu", cpu, "model name"),
-                //DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id"),
-                DeviceInfoParserInstance.queryData("catcpu", cpu, "cpu MHz"),
-                architecture
-            };
-
-            tabList.push_back(tab);
-        }
-
-        addTable(headers, tabList);
-    }
 
     //setTitle(DApplication::translate("Main", "CPU")  + DApplication::translate("Main", " Info"));
 
     QStringList names = {   "Model",
                             "Architecture",
                             "Vendor",
-                            "Speed",
+                            DApplication::translate("CPU", "Speed"),
                             "CPU cores",
                             "Threads amount",
                             "L1d Cache",
@@ -56,24 +37,46 @@ void CpuWidget::initWidget()
     double maxMHz = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU max MHz").toDouble()/1000.0;
     double minMHz = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU min MHz").toDouble()/1000.0;
 
-    QString speed;
+    speed_.clear();
+
     int index = overviewInfo_.value.indexOf('@');
     if(index > 0)
     {
-        speed = overviewInfo_.value.mid(index+1).trimmed();
+        speed_ = overviewInfo_.value.mid(index+1).trimmed();
     }
     else
     {
-        speed = QString::number(maxMHz) + "GHz";
+        speed_ = QString::number(maxMHz) + "GHz";
     }
 
     if(minMHz != maxMHz)
     {
-        speed += " (";
-        speed += QString::number(minMHz);
-        speed += "GHz - ";
-        speed += QString::number(maxMHz);
-        speed += "GHz)";
+        speed_ += " (";
+        speed_ += QString::number(minMHz);
+        speed_ += "GHz - ";
+        speed_ += QString::number(maxMHz);
+        speed_ += "GHz)";
+    }
+
+    if(cpuList.size() > 1)
+    {
+        QStringList headers = { "Core", "Name",  /*"Vendor",*/ DApplication::translate("CPU", "Speed"), "Architecture" };
+        QList<QStringList> tabList;
+
+        foreach(const QString& cpu, cpuList)
+        {
+            QStringList tab = {
+                DApplication::translate("Main", "Core") +" " + cpu,
+                DeviceInfoParserInstance.queryData("catcpu", cpu, "model name"),
+                //DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id"),
+                speed_,
+                architecture
+            };
+
+            tabList.push_back(tab);
+        }
+
+        addTable(headers, tabList);
     }
 
     int cpus = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU(s)").toInt();
@@ -84,7 +87,7 @@ void CpuWidget::initWidget()
         overviewInfo_.value,
         architecture,
         DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Vendor ID"),
-        speed,
+        speed_,
         DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU(s)"),
         QString::number(cpus*threadsPerCore),
         DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L1d cache") + corePlus,
@@ -186,6 +189,6 @@ void CpuWidget::addPrecessor(const QString& precessor)
 
     DeviceInfoParserInstance.queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles);
 
-    addSubInfo( "Processor " + precessor, articles);
+    addSubInfo( DApplication::translate("Main", "Core") + " " +  precessor, articles);
     articles.clear();
 }

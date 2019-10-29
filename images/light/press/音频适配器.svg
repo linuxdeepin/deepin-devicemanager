@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>音频适配器备份</title>
+    <desc>Created with Sketch.</desc>
+    <g id="音频适配器备份" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组" transform="translate(6.000000, 2.000000)" stroke="#FFFFFF">
+            <rect id="矩形" x="2.5" y="0.5" width="4" height="7" rx="2"></rect>
+            <path d="M0,6 C0,8.209139 2.01471863,10 4.5,10 L4.5,10 C6.98528137,10 9,8.209139 9,6" id="路径" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M4.5,10 L4.5,13" id="路径-29" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M9,13.5 L0,13.5" id="路径-29" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

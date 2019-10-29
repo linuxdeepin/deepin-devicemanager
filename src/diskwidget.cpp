@@ -109,9 +109,12 @@ void DiskWidget::initWidget()
                     interface.value = sataVersion.mid(0, index);
                     interface.value.remove("(");
                     interface.value = interface.value.trimmed();
+                    interface.value.remove( speed.value);
+                    interface.value.remove( ",");
                 }
 
             }
+
             articles.push_back(interface);
             existArticles.insert("SATA Version is");
 

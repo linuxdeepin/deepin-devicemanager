@@ -2370,6 +2370,12 @@ bool DeviceInfoParser::loadCupsDatabase()
 
 bool DeviceInfoParser::getRootPassword()
 {
+    bool res = runCmd("id -un");  // file path is fixed. So write cmd direct
+    if( res == true && standOutput_.trimmed() == "root" )
+    {
+        return true;
+    }
+
 #ifdef TEST_DATA_FROM_FILE
     return true;
 #endif
@@ -2380,16 +2386,20 @@ bool DeviceInfoParser::getRootPassword()
 
     if( autoDialog->getPasswd().isEmpty() )
     {
-        autoDialog->exec();
+        if( -1 == autoDialog->exec())
+        {
+            exit(-1);
+        }
     }
 
     QStringList arg;
     arg << "-c" << "echo " + autoDialog->getPasswd() + " | sudo -S whoami";
-    bool res = runCmd(arg);  // file path is fixed. So write cmd direct
+    res = runCmd(arg);  // file path is fixed. So write cmd direct
     if( res == false || standOutput_.trimmed() != "root" )
     {
         autoDialog->clearPasswd();
-        DMessageBox::warning(nullptr, "Password Error!", "");
+        autoDialog->showMessage(DApplication::translate("Main", "Password Error!"));
+        //DMessageBox::warning(nullptr, "", DApplication::translate("Main", "Password Error!"));
         exit(-1);
     }
 
@@ -2406,8 +2416,8 @@ bool DeviceInfoParser::executeProcess(const QString& cmd)
         return runCmd(cmd);
     }
 
-    runCmd("whoami");
-    if(standOutput_ == "root")
+    runCmd("id -un");
+    if(standOutput_.trimmed() == "root")
     {
         return runCmd(cmd);
     }
@@ -2423,8 +2433,10 @@ bool DeviceInfoParser::executeProcess(const QString& cmd)
 bool DeviceInfoParser::runCmd(const QString& cmd)
 {
     process_.start(cmd);
+    standOutput_ = process_.readAllStandardOutput();
     bool res = process_.waitForFinished();
     standOutput_ = process_.readAllStandardOutput();
+    QString errorOut = process_.readAllStandardError();
     return res;
 }
 

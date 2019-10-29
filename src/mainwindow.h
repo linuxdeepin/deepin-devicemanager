@@ -2,16 +2,16 @@
 
 #include "DMainWindow"
 #include "dwidgetstype.h"
+#include <QSplashScreen>
 
 class DeviceListView;
 class DeviceInfoWidgetBase;
-class QSplashScreen;
 
 class MainWindow : public Dtk::Widget::DMainWindow
 {
     Q_OBJECT
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr, QSplashScreen* ss = nullptr);
     ~MainWindow();
 
     void addAllDeviceinfoWidget();
@@ -34,4 +34,5 @@ private:
     QString currentDevice_;
 
     QSplashScreen* splash_ = nullptr;
+    Dtk::Widget::DMenu* contextMenu_ = nullptr;
 };

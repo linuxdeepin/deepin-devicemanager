@@ -28,7 +28,7 @@ void MemoryWidget::initTableWdiget()
 //    }
 
     canUpgrade_ = false;
-    QStringList headers = { "Bank",  "Size", "Type", "Speed", "Statu"};
+    QStringList headers = { "Bank",  "Statu", "Type", "Speed",   "Size",};
 
     QList<QStringList> tabList;
 
@@ -42,11 +42,11 @@ void MemoryWidget::initTableWdiget()
 
         QStringList tab = {
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
-            DeviceInfoParserInstance.queryData("dmidecode", mem, "Size"),
+            (  size == DApplication::translate("Main", "Unknown")    \
+                || size ==  "No Module Installed" ) ? DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good"),
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Type"),
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed"),
-            (  size == DApplication::translate("Main", "Unknown")    \
-            || size ==  "No Module Installed" ) ? DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Size")
         };
 
         tabList.push_back(tab);
@@ -86,6 +86,11 @@ void MemoryWidget::updateWholeDownWidget()
     {
         articles.clear();
         existArticles.clear();
+
+        ArticleStruct locator("Locator");
+        locator.queryData("dmidecode", mem, "Locator");
+        articles.push_back(locator);
+        existArticles.insert("Locator");
 
         ArticleStruct vendor("Vendor");
         vendor.queryData("dmidecode", mem, "Manufacturer");
@@ -144,12 +149,19 @@ void MemoryWidget::updateWholeDownWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
 
-        addSubInfo(DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"), articles );
-
         if(size.value == DApplication::translate("Main", "Unknown") || size.value == "No Module Installed" )
         {
+            articles.clear();
+
+            ArticleStruct status("Status");
+            status.value = DApplication::translate("Main", "Bad");
+            articles.push_back(status);
+
+            addSubInfo(DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"), articles );
             continue;
         }
+
+        addSubInfo(DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"), articles );
 
         QString overviewVendor = vendor.value;
         overviewVendor += " ";
