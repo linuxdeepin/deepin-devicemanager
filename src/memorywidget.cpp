@@ -28,7 +28,7 @@ void MemoryWidget::initTableWdiget()
 //    }
 
     canUpgrade_ = false;
-    QStringList headers = { "Bank",  "Statu", "Type", "Speed",   "Size",};
+    QStringList headers = { "Bank", "Type", /*"Speed",*/  "Size",  "Statu"};
 
     QList<QStringList> tabList;
 
@@ -42,11 +42,13 @@ void MemoryWidget::initTableWdiget()
 
         QStringList tab = {
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
-            (  size == DApplication::translate("Main", "Unknown")    \
-                || size ==  "No Module Installed" ) ? DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good"),
-            DeviceInfoParserInstance.queryData("dmidecode", mem, "Type"),
+
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Type") + " " +
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed"),
-            DeviceInfoParserInstance.queryData("dmidecode", mem, "Size")
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Size"),
+
+            (  size == DApplication::translate("Main", "Unknown")    \
+                || size ==  "No Module Installed" ) ? DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
         };
 
         tabList.push_back(tab);
@@ -122,6 +124,21 @@ void MemoryWidget::updateWholeDownWidget()
         articles.push_back(model);
         existArticles.insert("Part Number");
 
+        ArticleStruct formFactor("Form Factor");
+        formFactor.queryData("dmidecode", mem, "Form Factor");
+        articles.push_back(formFactor);
+        existArticles.insert("Form Factor");
+
+        ArticleStruct rank("Rank");
+        rank.queryData("dmidecode", mem, "Rank");
+        articles.push_back(rank);
+        existArticles.insert("Rank");
+
+        ArticleStruct bankLocator("Bank Locator");
+        bankLocator.queryData("dmidecode", mem, "Bank Locator");
+        articles.push_back(bankLocator);
+        existArticles.insert("Bank Locator");
+
         ArticleStruct configVoltage("Configured Voltage");
         configVoltage.queryData("dmidecode", mem, "Configured Voltage");
         articles.push_back(configVoltage);
@@ -137,17 +154,26 @@ void MemoryWidget::updateWholeDownWidget()
         articles.push_back(maxVoltage);
         existArticles.insert("Maximum Voltage");
 
-        ArticleStruct rank("Rank");
-        rank.queryData("dmidecode", mem, "Rank");
-        articles.push_back(rank);
-        existArticles.insert("Rank");
-
         ArticleStruct configSpeed("Configured Speed");
         configSpeed.queryData("dmidecode", mem, "Configured Memory Speed");
         articles.push_back(configSpeed);
         existArticles.insert("Configured Memory Speed");
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
+
+        QString deviceName;
+        if(locator.isValid())
+        {
+            deviceName = locator.value;
+        }
+        else if(bankLocator.isValid())
+        {
+            deviceName = bankLocator.value;
+        }
+        else if(rank.isValid())
+        {
+            deviceName = rank.value;
+        }
 
         if(size.value == DApplication::translate("Main", "Unknown") || size.value == "No Module Installed" )
         {
@@ -157,11 +183,12 @@ void MemoryWidget::updateWholeDownWidget()
             status.value = DApplication::translate("Main", "Bad");
             articles.push_back(status);
 
-            addSubInfo(DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"), articles );
+            addSubInfo( deviceName, articles );
             continue;
         }
 
-        addSubInfo(DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"), articles );
+
+        addSubInfo( deviceName, articles );
 
         QString overviewVendor = vendor.value;
         overviewVendor += " ";

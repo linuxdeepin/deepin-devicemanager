@@ -79,7 +79,6 @@ void DiskWidget::initWidget()
 
         ArticleStruct serial("Serial");
         serial.queryData("lshw", disk, "serial");
-        articles.push_back(serial);
         existArticles.insert("serial");
         existArticles.insert("Serial Number");
 
@@ -122,6 +121,8 @@ void DiskWidget::initWidget()
             rr.value = rotationRate;
             articles.push_back(rr);
             existArticles.insert("Rotation Rate");
+
+            articles.push_back(serial);
 
             ArticleStruct fromFactor("Form Factor");
             fromFactor.queryData("smartctl", logicalName, "Form Factor");

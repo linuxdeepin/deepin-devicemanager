@@ -105,6 +105,7 @@ protected:
     static QFont subTitleFont_;
     static QFont infoFont_;
     static QFont labelFont_;
+    static QFont tableHeaderFont_;
     static QFont tableContentFont_;
 
     int currentRow_ = -1;   //-1 for whole info

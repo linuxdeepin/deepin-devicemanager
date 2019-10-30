@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>images/cpu.svg</file>
         <file>thirdlib/docx/doc_template/template.doc</file>
-        <file>images/splash.png</file>
         <file>images/security.ico</file>
         <file>images/light/normal/处理器.svg</file>
         <file>images/light/normal/存储设备.svg</file>

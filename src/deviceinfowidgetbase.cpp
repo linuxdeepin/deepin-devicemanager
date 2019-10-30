@@ -27,6 +27,7 @@ QFont DeviceInfoWidgetBase::titleFont_;
 QFont DeviceInfoWidgetBase::subTitleFont_;
 QFont DeviceInfoWidgetBase::infoFont_;
 QFont DeviceInfoWidgetBase::labelFont_;
+QFont DeviceInfoWidgetBase::tableHeaderFont_;
 QFont DeviceInfoWidgetBase::tableContentFont_;
 
 
@@ -37,7 +38,7 @@ static const int RowHeight_ = 30;
 static const int SubRowHeight_ = 40;
 
 static const int WidgetWidth = 640;
-static const int WidgetHeight = 770;
+static const int WidgetHeight = 740;
 
 DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& deviceName) : QWidget(parent_)
 {
@@ -50,20 +51,24 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
         subTitleFont_ = titleFont_;
         labelFont_ = titleFont_;
         infoFont_ = titleFont_;
+        tableHeaderFont_ = titleFont_;
         tableContentFont_ = titleFont_;
 
-        titleFont_.setPointSize(14);
-        titleFont_.setBold(true);
+        titleFont_.setPixelSize(16);
+        titleFont_.setWeight(QFont::DemiBold);
 
-        subTitleFont_.setPointSize(11);
-        subTitleFont_.setBold(true);
+        infoFont_.setPixelSize(15);
 
-        infoFont_.setPointSize(12);
+        subTitleFont_.setPixelSize(15);
+        subTitleFont_.setWeight(QFont::DemiBold);
 
-        labelFont_.setPointSize(11);
+        labelFont_.setPixelSize(14);
 
-        tableContentFont_.setPointSize(10);
-        tableContentFont_.setBold(true);
+        tableHeaderFont_.setWeight(QFont::Medium);
+        tableHeaderFont_.setPixelSize(15);
+
+        tableContentFont_.setWeight(QFont::Medium);
+        tableContentFont_.setPixelSize(14);
 
         isFontInit_ = true;
     }
@@ -78,7 +83,7 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
     setAutoFillBackground(false);
 
     setLayout(vLayout_);
-    setMinimumHeight(WidgetHeight);
+    //setMinimumHeight(WidgetHeight);
 
     initContextMenu();
 
@@ -174,8 +179,7 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
     int i = 0;
     foreach(auto article, articles)
     {
-        if( article.autoHide && ( article.value.isEmpty() == true || \
-                                  article.value == DApplication::translate("Main", "Unknown")) )
+        if( article.autoHide &&  article.isValid() == false )
         {
             continue;
         }
@@ -261,7 +265,7 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
     if( false == info.isEmpty() )
     {
         titleInfo_->title = new DLabel( DApplication::translate("Main", info.toStdString().data()), downWidget_);
-        titleInfo_->title->setFont(infoFont_);
+        titleInfo_->title->setFont(titleFont_);
 
         auto hLayout = new QHBoxLayout;
         hLayout->addWidget(titleInfo_->title, 1, Qt::AlignmentFlag::AlignCenter);
@@ -287,7 +291,7 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QStringList& name
 
     if( false == title.isEmpty() )
     {
-        titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()), downWidget_);
+        titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()) + ":", downWidget_);
         titleInfo_->title->setFont(titleFont_);
         titleInfo_->title->setFixedHeight(RowHeight_);
         vly->addWidget(titleInfo_->title);
@@ -331,7 +335,7 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
 
     if( false == title.isEmpty() )
     {
-        titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()), downWidget_);
+        titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()) + ":", downWidget_);
         titleInfo_->title->setFont(titleFont_);
         titleInfo_->title->setFixedHeight(RowHeight_);
         vly->addWidget(titleInfo_->title);
@@ -420,7 +424,7 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
     DeviceInfo subInfo;
     if(false == subTitle.isEmpty())
     {
-        subInfo.title = new DLabel( DApplication::translate("Main", subTitle.toStdString().data()), downWidget_);
+        subInfo.title = new DLabel( DApplication::translate("Main", subTitle.toStdString().data()) + ":", downWidget_);
         subInfo.title->setFont(subTitleFont_);
         subInfo.title->setFixedHeight(RowHeight_);
         vly->addWidget( subInfo.title );
@@ -428,7 +432,7 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
 
     QHBoxLayout* hly = new QHBoxLayout;
 
-    hly->addSpacing(20);
+    hly->addSpacing(10);
     QGridLayout* gridLayout = new QGridLayout;
 
     addLabelToGridLayout(&subInfo, gridLayout, articles, labelFont_);
@@ -467,7 +471,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 //            tableWidget_->setFocusProxy(mainWindow);
 //        }
 
-        tableWidget_->setMinimumHeight(200);
+        tableWidget_->setMinimumHeight(178);
         tableWidget_->setMaximumHeight(500);
         tableWidget_->setVerticalScrollBar(new DScrollBar(this));
         tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
@@ -481,6 +485,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
         tableWidget_->setEnabled(true);
         tableWidget_->horizontalHeader()->clearMask();
+        tableWidget_->horizontalHeader()->setFont(tableHeaderFont_);
 
         auto changeTheme = [this](){
             DPalette pa = DApplicationHelper::instance()->palette(this);

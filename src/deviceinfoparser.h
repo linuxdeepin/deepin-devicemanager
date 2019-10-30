@@ -4,6 +4,7 @@
 #include <QString>
 #include "singletondef.h"
 #include "deviceattributedefine.h"
+#include <QObject>
 
 const QString Deviceype_Computer = "Computer";
 const QString Devicetype_Name = "Name";
@@ -49,10 +50,23 @@ typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
 
 class LogPasswordAuth;
 
-class DeviceInfoParser
+class DeviceInfoParser: public QObject
 {
+    Q_OBJECT
 public:
-    Declare_Singleton(DeviceInfoParser);
+    static DeviceInfoParser& Instance()
+    {
+        static DeviceInfoParser _instance;
+        return _instance;
+    }
+
+    DeviceInfoParser();
+    ~DeviceInfoParser();
+
+    void refreshDabase();
+
+signals:
+    void loadFinished(const QString& msg);
 
 public:
     bool isToolSuccess(const QString& toolname);

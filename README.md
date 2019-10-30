@@ -4,6 +4,9 @@ Device Manager is a gadget for viewing device information.
 
 深度设备管理器是查看、管理硬件设备的工具软件。
 
+## Special Links
+* [linux-hardware.org](https://linux-hardware.org/)
+
 ## Depend on 
 * lshw
 * lsb_release

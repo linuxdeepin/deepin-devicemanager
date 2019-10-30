@@ -36,14 +36,15 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
     }
 
     model.value = vendor + " " + pName + " " + ver;
-    if(ver.contains("Not Specified", Qt::CaseInsensitive) )
+    if(ver.contains("Not Specified", Qt::CaseInsensitive) || ver.contains("x.x", Qt::CaseInsensitive) || ver.contains("Not Applicable", Qt::CaseInsensitive))
     {
         model.value = vendor + " " + pName;
     }
-    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000
-    {
-        model.value = vendor + " " + ver;
-    }
+//    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000
+//    {
+//        model.value = vendor + " " + pName + " " + ver;
+//    }
+
     articles.push_back(model);
 
     ArticleStruct os("Operating System");

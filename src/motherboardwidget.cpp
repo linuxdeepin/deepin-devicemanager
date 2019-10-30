@@ -24,16 +24,16 @@ void MotherboardWidget::initWidget()
                             DApplication::translate("Main", "Features")
                         };
 
+    ArticleStruct vendor("Vendor");
+    vendor.queryData("dmidecode", "Base Board Information", "Manufacturer");
+    articles.push_back(vendor);
+    existArticles.insert("Manufacturer");
+
     ArticleStruct model("Model");
     //QString manufactor = DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Manufacturer");
     model.value = /*manufactor + " "+*/ DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Product Name");
     articles.push_back(model);
     existArticles.insert("Product Name");
-
-    ArticleStruct vendor("Vendor");
-    vendor.queryData("dmidecode", "Base Board Information", "Manufacturer");
-    articles.push_back(vendor);
-    existArticles.insert("Manufacturer");
 
     ArticleStruct version("Version");
     version.queryData("dmidecode", "Base Board Information", "Version");
@@ -51,10 +51,8 @@ void MotherboardWidget::initWidget()
 
     overviewInfo_.value =  model.value + " " + chipsetFamily.value;
 
-    if( overviewInfo_.value.contains(vendor.value, Qt::CaseInsensitive) == false )
-    {
-        overviewInfo_.value = vendor.value + " " + overviewInfo_.value;
-    }
+    overviewInfo_.value.remove( vendor.value, Qt::CaseInsensitive);
+    overviewInfo_.value = vendor.value + " " + overviewInfo_.value;
 
     ArticleStruct serial("Serial Number");
     serial.queryData("dmidecode", "Base Board Information", "Serial Number");
@@ -81,14 +79,14 @@ void MotherboardWidget::initWidget()
     articles.clear();
     existArticles.clear();
 
+    vendor.queryData("dmidecode", "System Information", "Manufacturer");
+    articles.push_back(vendor);
+    existArticles.insert("Manufacturer");
+
     ArticleStruct productName("Product Name");
     productName.queryData("dmidecode", "System Information", "Product Name");
     articles.push_back(productName);
     existArticles.insert("Product Name");
-
-    vendor.queryData("dmidecode", "System Information", "Manufacturer");
-    articles.push_back(vendor);
-    existArticles.insert("Manufacturer");
 
     serial.queryData("dmidecode", "System Information", "Serial Number");
     articles.push_back(serial);
@@ -113,7 +111,12 @@ void MotherboardWidget::initWidget()
     articles.push_back(sku);
     existArticles.insert("SKU Number");
 
+    existArticles.insert("Features");
+
     res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "System Information", articles, existArticles);
+
+    //features.queryData("dmidecode", "System Information", "Features");
+    //articles.push_back(features);
 
     if(res)
     {
@@ -122,6 +125,7 @@ void MotherboardWidget::initWidget()
 
     articles.clear();
     existArticles.clear();
+
     ArticleStruct biosVersion("Bios Version");
     biosVersion.queryData("dmidecode", "BIOS Information", "Version");
     articles.push_back(biosVersion);

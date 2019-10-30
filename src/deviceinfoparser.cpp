@@ -22,6 +22,60 @@ DCORE_USE_NAMESPACE
 
 static QProcess process_;
 
+DeviceInfoParser::DeviceInfoParser(): QObject()
+{
+
+}
+
+DeviceInfoParser::~DeviceInfoParser()
+{
+
+}
+
+void DeviceInfoParser::refreshDabase()
+{
+    emit loadFinished("Loading Operating System Info...");
+    DeviceInfoParserInstance.loadCatosrelelease();
+    DeviceInfoParserInstance.loadlsb_release();
+    //DeviceInfoParserInstance.getOSInfo(osInfo);
+
+    emit loadFinished("Loading SMBBios Info...");
+    DeviceInfoParserInstance.loadDemicodeDatabase();
+
+    emit loadFinished("Loading List Hardware Info");
+    DeviceInfoParserInstance.loadLshwDatabase();
+
+    emit loadFinished("Loading CPU Info...");
+    DeviceInfoParserInstance.loadCatcpuDatabase();
+    DeviceInfoParserInstance.loadLscpuDatabase();
+    //DeviceInfoParserInstance.loadSmartctlDatabase();
+
+    emit loadFinished("Loading Input Device Info...");
+    DeviceInfoParserInstance.loadCatInputDatabase();
+
+    emit loadFinished("Loading Power Settings...");
+    DeviceInfoParserInstance.loadPowerSettings();
+    DeviceInfoParserInstance.loadUpowerDatabase();
+
+    emit loadFinished("Loading Displayer Info...");
+    DeviceInfoParserInstance.loadXrandrDatabase();
+    DeviceInfoParserInstance.loadHwinfoDatabase();
+
+    emit loadFinished("Loading PCI Device Info...");
+    DeviceInfoParserInstance.loadLspciDatabase();
+
+    emit loadFinished("Loading Bluetooth Device Info...");
+    DeviceInfoParserInstance.loadHciconfigDatabase();
+
+    emit loadFinished("Loading USB Device Info...");
+    DeviceInfoParserInstance.loadLsusbDatabase();
+
+    emit loadFinished("Loading Ptinter Info...");
+    DeviceInfoParserInstance.loadCupsDatabase();
+
+    emit loadFinished("finish");
+}
+
 bool DeviceInfoParser::isToolSuccess(const QString& toolname)
 {
     if(false == toolDatabase_.contains(toolname))
@@ -1170,6 +1224,13 @@ bool DeviceInfoParser::loadDemicodeDatabase()
 
         if( line.trimmed().isEmpty() )
         {
+            if(childDeviceType.isEmpty() == false)
+            {
+                DeviceInfoMap[childDeviceType] = childDeviceContent;
+                childDeviceType.clear();
+                childDeviceContent.clear();
+            }
+
             if(deviceType.isEmpty() == false)
             {
                 static int endIndex = 1;
@@ -1293,6 +1354,7 @@ bool DeviceInfoParser::loadDemicodeDatabase()
     }
 
     toolDatabase_["dmidecode"] = dimdecodeDatabase_;
+    emit loadFinished("dmidecode");
     return  true;
 }
 
@@ -1591,7 +1653,7 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
     QMap<QString, QString> smartctlDatabase_;
     int startIndex = 0;
 
-    QRegExp reg("^[\\s\\S]*[\\d]:[\\d][\\s\\S]*$");
+    QRegExp reg("^[\\s\\S]*[\\d]:[\\d][\\s\\S]*$");//time 08:00
 
     for( int i = 0; i < smartctlOut.size(); ++i )
     {
@@ -1604,7 +1666,7 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
          startIndex = i + 1;
 
 
-         if( line.contains(Devicetype_Separator) && reg.exactMatch(line) == false )
+         if( line.contains(Devicetype_Separator) && reg.exactMatch(line) == false && false == line.contains("Error") && false == line.contains("hh:mm:SS") )
          {
              int index = line.indexOf(Devicetype_Separator);
              smartctlDatabase_[line.mid(0, index).trimmed()] = line.mid(index+1).trimmed();
@@ -1798,13 +1860,7 @@ bool DeviceInfoParser::loadXrandrDatabase()
             continue;
         }
 
-        if( line.startsWith(Devicetype_Xrandr_Twotab) || line.startsWith(Devicetype_Xrandr_Twospace) || line.startsWith(Devicetype_Xrandr_TabAndspace))
-        {
-            content += line;
-            continue;
-        }
-
-        if( line.startsWith(Devicetype_Xrandr_Tab) )
+        if( line.startsWith(Devicetype_Xrandr_Tab) || line.startsWith(Devicetype_Xrandr_Twospace) )
         {
             if(deviceType.isEmpty() == false)
             {
@@ -1819,6 +1875,13 @@ bool DeviceInfoParser::loadXrandrDatabase()
             content = line.mid(index+1);
             continue;
         }
+
+        if( line.startsWith(Devicetype_Xrandr_Twotab) || line.startsWith(Devicetype_Xrandr_TabAndspace))
+        {
+            content += line;
+            continue;
+        }
+
 
         if( line.contains(Devicetype_Xrandr_Connected) || line.contains(Devicetype_Xrandr_Disconnected) )
         {

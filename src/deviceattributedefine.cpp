@@ -21,5 +21,10 @@ bool ArticleStruct::isValid()
         return false;
     }
 
+    if( value == "Unknown" )
+    {
+        return false;
+    }
+
     return true;
 }

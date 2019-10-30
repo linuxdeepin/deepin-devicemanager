@@ -30,9 +30,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 LIBS += -lcups
 
-CONFIG += c++11
-CONFIG += link_pkgconfig
-PKGCONFIG += dtkwidget dframeworkdbus
+CONFIG  += c++11
+CONFIG  += link_pkgconfig
+PKGCONFIG   += dtkwidget dframeworkdbus
 
 TRANSLATIONS += translations/*.ts
 
@@ -106,7 +106,6 @@ HEADERS += \
     src/printerwidget.h \
     src/devicelistview.h
 
-
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin
 #else: unix:!android: target.path = /opt/$${TARGET}/bin
@@ -116,7 +115,6 @@ RESOURCES += app.qrc
 
 DISTFILES += \
     images/security.ico \
-    images/splash.png \
     translations/dde-devicemanager.ts \
     translations/dde-devicemanager_zh_CN.ts \
 

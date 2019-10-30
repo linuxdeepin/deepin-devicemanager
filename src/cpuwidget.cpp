@@ -34,8 +34,17 @@ void CpuWidget::initWidget()
     overviewInfo_.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Model name");
     overviewInfo_.value.remove(" CPU", Qt::CaseInsensitive);
 
-    double maxMHz = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU max MHz").toDouble()/1000.0;
-    double minMHz = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU min MHz").toDouble()/1000.0;
+    QString maxSpeed = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU max MHz");
+    QString minSpeed = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU min MHz");
+
+    double maxMHz = maxSpeed.remove(",").toDouble()/1000.0;
+
+    double minMHz = minSpeed.remove(",").toDouble()/1000.0;
+    if(maxMHz > 10000)  //AMD CPU speed is MHZ, intel is GHZ
+    {
+        maxMHz/=10000.0;
+        minMHz/=10000.0;
+    }
 
     speed_.clear();
 
@@ -60,14 +69,14 @@ void CpuWidget::initWidget()
 
     if(cpuList.size() > 1)
     {
-        QStringList headers = { "Core", "Name",  /*"Vendor",*/ DApplication::translate("CPU", "Speed"), "Architecture" };
+        QStringList headers = { "Name", "Core", /*"Vendor",*/ DApplication::translate("CPU", "Speed"), "Architecture" };
         QList<QStringList> tabList;
 
         foreach(const QString& cpu, cpuList)
         {
             QStringList tab = {
-                DApplication::translate("Main", "Core") +" " + cpu,
                 DeviceInfoParserInstance.queryData("catcpu", cpu, "model name"),
+                DApplication::translate("Main", "Core") +" " + cpu,
                 //DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id"),
                 speed_,
                 architecture

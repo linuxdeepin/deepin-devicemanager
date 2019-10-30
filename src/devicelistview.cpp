@@ -67,7 +67,7 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     navModel_ = new QStandardItemModel(navModel_);
 
     setVerticalScrollMode(ScrollPerPixel);
-    setIconSize(QSize(24, 24));
+    //setIconSize(QSize(24, 24));
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -136,15 +136,20 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     setContextMenuPolicy(Qt::CustomContextMenu);
 
     connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), SLOT(OnlvOpRightBtn(const QPoint&)));
+
+    setItemSpacing(0);
 }
 
 void DeviceListView::addDevice(const QString& deviceName, const QString& iconFile)
 {
     DStandardItem* item = new DStandardItem;
     QFont itemFont = item->font();
-    itemFont.setPointSize(13);
+    itemFont.setPixelSize(16);
+    itemFont.setWeight(QFont::Medium);
 
     item->setFont(itemFont);
+
+    item->setSizeHint( QSize(20, 40) );
 
     DGuiApplicationHelper::ColorType ct = DApplicationHelper::instance()->themeType();
 
@@ -187,6 +192,12 @@ QString DeviceListView::currentDevice()
 void DeviceListView::setCurrentDevice(QString& device)
 {
     currentDevice_ = device;
+}
+
+void DeviceListView::setSelectNull()
+{
+    QModelIndex index = navModel_->index(0, 0);
+    selectionModel()->select(index, QItemSelectionModel::Select);
 }
 
 QString DeviceListView::indexAt(int index)

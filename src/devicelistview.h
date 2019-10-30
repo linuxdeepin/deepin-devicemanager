@@ -32,6 +32,8 @@ public:
     QString currentDevice();
     void setCurrentDevice(QString& device);
 
+    void setSelectNull();
+
     QString indexAt(int index);
 
 public slots:
