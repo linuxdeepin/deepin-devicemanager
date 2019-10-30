@@ -39,5 +39,41 @@
         <file>images/light/press/音频适配器.svg</file>
         <file>images/light/press/主板.svg</file>
         <file>images/light/press/usb设备.svg</file>
+        <file>images/dark/normal/处理器.svg</file>
+        <file>images/dark/normal/存储设备.svg</file>
+        <file>images/dark/normal/打印机.svg</file>
+        <file>images/dark/normal/电池.svg</file>
+        <file>images/dark/normal/概况.svg</file>
+        <file>images/dark/normal/键盘.svg</file>
+        <file>images/dark/normal/蓝牙.svg</file>
+        <file>images/dark/normal/内存.svg</file>
+        <file>images/dark/normal/其他输入设备.svg</file>
+        <file>images/dark/normal/其他PCI设备.svg</file>
+        <file>images/dark/normal/鼠标.svg</file>
+        <file>images/dark/normal/图像设备.svg</file>
+        <file>images/dark/normal/网络适配器.svg</file>
+        <file>images/dark/normal/显示设备.svg</file>
+        <file>images/dark/normal/显示适配器.svg</file>
+        <file>images/dark/normal/音频适配器.svg</file>
+        <file>images/dark/normal/主板.svg</file>
+        <file>images/dark/normal/usb设备.svg</file>
+        <file>images/dark/press/处理器.svg</file>
+        <file>images/dark/press/存储设备.svg</file>
+        <file>images/dark/press/打印机.svg</file>
+        <file>images/dark/press/电池.svg</file>
+        <file>images/dark/press/概况.svg</file>
+        <file>images/dark/press/键盘.svg</file>
+        <file>images/dark/press/蓝牙.svg</file>
+        <file>images/dark/press/内存.svg</file>
+        <file>images/dark/press/其他输入设备.svg</file>
+        <file>images/dark/press/其他PCI设备.svg</file>
+        <file>images/dark/press/鼠标.svg</file>
+        <file>images/dark/press/图像设备.svg</file>
+        <file>images/dark/press/网络适配器.svg</file>
+        <file>images/dark/press/显示设备.svg</file>
+        <file>images/dark/press/显示适配器.svg</file>
+        <file>images/dark/press/音频适配器.svg</file>
+        <file>images/dark/press/主板.svg</file>
+        <file>images/dark/press/usb设备.svg</file>
     </qresource>
 </RCC>

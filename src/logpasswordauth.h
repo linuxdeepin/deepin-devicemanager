@@ -40,9 +40,9 @@ private:
     QHBoxLayout *buttonLayout;
     QHBoxLayout *topLayout;
 
-    QLabel* iconLabel;
-    QLabel* messageLabel;
-    QLabel* titleLabel;
+    Dtk::Widget::DLabel* iconLabel;
+    Dtk::Widget::DLabel* messageLabel;
+    Dtk::Widget::DLabel* titleLabel;
 
     Dtk::Widget::DPushButton* cancelButton_;
     Dtk::Widget::DPushButton* confimButton_;

@@ -41,17 +41,17 @@ void LogPasswordAuth::initUI()
     topLayout->setSpacing(DIALOG::ICON_LAYOUT_SPACING);
 
     // TopLayout--Icon
-    iconLabel = new QLabel;
+    iconLabel = new DLabel;
     iconLabel->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     QPixmap pix(":images/security.ico");
     iconLabel->setPixmap(pix);
     topLayout->addWidget(iconLabel);
 
-    titleLabel = new QLabel(DApplication::translate("Main", "读取设备信息需要授权"));
+    titleLabel = new DLabel(DApplication::translate("Main", "读取设备信息需要授权"));
     titleLabel->setObjectName("TitleLabel");
     titleLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
 
-    messageLabel = new QLabel;
+    messageLabel = new DLabel;
     messageLabel->hide();
     messageLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
 

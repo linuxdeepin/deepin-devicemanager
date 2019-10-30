@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>其他PCI设备备份</title>
+    <desc>Created with Sketch.</desc>
+    <g id="其他PCI设备备份" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-4" transform="translate(3.000000, 4.000000)">
+            <path d="M1.5,0.5 L13.5,0.5 C14.0522847,0.5 14.5,0.94771525 14.5,1.5 L14.5,10.5 C14.5,11.0522847 14.0522847,11.5 13.5,11.5 L1.5,11.5 C0.94771525,11.5 0.5,11.0522847 0.5,10.5 L0.5,1.5 C0.5,0.94771525 0.94771525,0.5 1.5,0.5 Z" id="形状结合" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <rect id="矩形" fill="#FFFFFF" x="2" y="5" width="3" height="2" rx="1"></rect>
+            <rect id="矩形" fill="#FFFFFF" x="6" y="5" width="4" height="2" rx="1"></rect>
+        </g>
+    </g>
+</svg>

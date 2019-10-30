@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>鼠标</title>
+    <desc>Created with Sketch.</desc>
+    <g id="鼠标" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="编组-5" transform="translate(4.000000, 3.000000)" stroke="#536076">
+            <path d="M1.5,0.5 L10.5,0.5 C11.0522847,0.5 11.5,0.94771525 11.5,1.5 L11.5,9 C11.5,12.0375661 9.03756612,14.5 6,14.5 C2.96243388,14.5 0.5,12.0375661 0.5,9 L0.5,1.5 C0.5,0.94771525 0.94771525,0.5 1.5,0.5 Z" id="矩形"></path>
+            <path d="M6,5 L6,7" id="路径-21" stroke-width="2"></path>
+        </g>
+    </g>
+</svg>
