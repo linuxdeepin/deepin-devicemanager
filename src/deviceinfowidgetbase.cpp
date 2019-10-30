@@ -94,9 +94,9 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
         pa.setColor(QPalette::Background, base_color);
         pa.setBrush(DPalette::ItemBackground, base_color);
 
-        setPalette(pa);
+        //setPalette(pa);
 
-        //DApplicationHelper::instance()->setPalette(this, pa);
+        DApplicationHelper::instance()->setPalette(this, pa);
     };
 
     modifyTheme();
@@ -104,7 +104,7 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
 //    setAutoFillBackground(false);
 //    setBackgroundRole(DPalette::Base);
 
-    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, modifyTheme);
+    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, modifyTheme);
 }
 
 bool DeviceInfoWidgetBase::getOverViewInfo(ArticleStruct& info)
@@ -501,7 +501,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         changeTheme();
 
-        connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, changeTheme);
+        connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, changeTheme);
 
 
         tableWidget_->horizontalHeader()->setContentsMargins(0,0,0,0);
