@@ -513,7 +513,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 //                //tableWidget_->horizontalHeader()->model()->setData(itemIndex, 0, Qt::BackgroundRole);
 //            }
 
-            tableWidget_->horizontalHeader()->setStyleSheet( "QHeaderView#DeviceInfoHeaderView{ background-color: white; }");
+            //tableWidget_->horizontalHeader()->setStyleSheet( "QHeaderView#DeviceInfoHeaderView{ background-color: white; }");
         };
 
         changeTheme();

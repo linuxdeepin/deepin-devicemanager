@@ -9,7 +9,7 @@ class TableWidgetAlwaysActiveHeaderViewDelegate : public Dtk::Widget::DStyledIte
 public:
     TableWidgetAlwaysActiveHeaderViewDelegate(QAbstractItemView *parent = nullptr);
 
-    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+    //void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 };
 
 class TableWidgetAlwaysActiveHeaderView: public Dtk::Widget::DHeaderView
