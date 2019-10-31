@@ -597,15 +597,15 @@
         </message>
         <message>
             <source>bus info</source>
-            <translation>总线</translation>
+            <translation>总线信息</translation>
         </message>
         <message>
             <source>Bus Info</source>
-            <translation>总线</translation>
+            <translation>总线信息</translation>
         </message>
         <message>
             <source>Bus info</source>
-            <translation>总线</translation>
+            <translation>总线信息</translation>
         </message>
         <message>
             <source>logical name</source>
@@ -1332,8 +1332,8 @@
             <translation>扇区大小</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Seagate</source>
+            <translation>希捷</translation>
         </message>
         <message>
             <source></source>
@@ -1492,6 +1492,13 @@
         <message>
             <source>Size</source>
             <translation>容量</translation>
+        </message>
+    </context>
+    <context>
+        <name>Monitor</name>
+        <message>
+            <source>Size</source>
+            <translation>屏幕尺寸</translation>
         </message>
     </context>
 </TS>

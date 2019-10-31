@@ -44,6 +44,12 @@ void DiskWidget::initWidget()
 
         ArticleStruct vendor("Vendor");
         vendor.value = vendorStr;
+        if(vendor.isValid() == false && model.value.startsWith("ST", Qt::CaseInsensitive))
+        {
+            vendor.value = "Seagate";
+            vendor.valueTranslate = true;
+        }
+
         articles.push_back(vendor);
         existArticles.insert("vendor");
 

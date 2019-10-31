@@ -51,28 +51,26 @@ void PowerWidget::initWidget()
         {
             existArticles.clear();
 
-            name.value = switchingUpowerList[i];
-            articles.push_back(name);
+            ArticleStruct device("Device");
+            device.value = switchingUpowerList[i];
+            articles.push_back(device);
 
-            vendor.queryData( "upower", name.value, "vendor");
+            vendor.queryData( "upower", device.value, "vendor");
             articles.push_back(vendor);
-            existArticles.insert("vendor");
-
             ArticleStruct Serial("Serial");
-            Serial.queryData( "upower", name.value, "serial");
+            Serial.queryData( "upower", device.value, "serial");
             articles.push_back(Serial);
             existArticles.insert("serial");
 
             ArticleStruct model("Model");
-            model.queryData( "upower", name.value, "model");
+            model.queryData( "upower", device.value, "model");
             articles.push_back(model);
             existArticles.insert("model");
 
             ArticleStruct powerSupply("Power Supply");
-            powerSupply.queryData( "upower", name.value, "power supply");
+            powerSupply.queryData( "upower", device.value, "power supply");
             articles.push_back(powerSupply);
             existArticles.insert("power supply");
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", name.value, articles, existArticles);
         }
 
         if(i < switchingpowerList.size())
@@ -106,8 +104,6 @@ void PowerWidget::initWidget()
             capacity.queryData( "lshw", device, "capacity");
             articles.push_back(capacity);
             existArticles.insert("capacity");
-
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
         }
 
         if(i < demidecodeSwitchingpowerList.size())
@@ -133,6 +129,22 @@ void PowerWidget::initWidget()
             assetTag.queryData( "dmidecode", demideSwitchingpower, "Asset Tag");
             articles.push_back(assetTag);
             existArticles.insert("Asset Tag");
+        }
+
+        if(i < switchingUpowerList.size())
+        {
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", name.value, articles, existArticles);
+        }
+
+        if(i < switchingpowerList.size())
+        {
+            QString device = switchingpowerList[i];
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        }
+
+        if(i < demidecodeSwitchingpowerList.size())
+        {
+            QString demideSwitchingpower = demidecodeSwitchingpowerList[i];
 
             DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideSwitchingpower, articles, existArticles);
         }
@@ -173,78 +185,77 @@ void PowerWidget::initWidget()
             : QString::number(DeviceInfoParserInstance.batteryAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
         articles.push_back(asdelay);
 
-        ArticleStruct name("Name");
         ArticleStruct vendor("Vendor");
         ArticleStruct de("Design Energy");
+        ArticleStruct device("Device");
+        ArticleStruct model("Model");
 
         if(i < batteryUpowerList.size())
         {
             existArticles.clear();
 
-            name.value = batteryUpowerList[i];
-            articles.push_back(name);
 
-            vendor.queryData( "upower", name.value, "vendor");
+            device.value = batteryUpowerList[i];
+            articles.push_back(device);
+
+            vendor.queryData( "upower", device.value, "vendor");
             articles.push_back(vendor);
             existArticles.insert("vendor");
 
-            ArticleStruct Serial("Serial");
-            Serial.queryData( "upower", name.value, "serial");
-            articles.push_back(Serial);
-            existArticles.insert("serial");
-
-            ArticleStruct model("Model");
-            model.queryData( "upower", name.value, "model");
+            model.queryData( "upower", device.value, "model");
             articles.push_back(model);
             existArticles.insert("model");
 
-            ArticleStruct powerSupply("Power Supply");
-            powerSupply.queryData( "upower", name.value, "power supply");
-            articles.push_back(powerSupply);
-            existArticles.insert("power supply");
+            ArticleStruct Serial("Serial");
+            Serial.queryData( "upower", device.value, "serial");
+            articles.push_back(Serial);
+            existArticles.insert("serial");
 
             ArticleStruct state("State");
-            state.queryData( "upower", name.value, "state");
+            state.queryData( "upower", device.value, "state");
             articles.push_back(state);
             existArticles.insert("state");
 
+            ArticleStruct percentage("Battery Percentage");
+            percentage.queryData( "upower", device.value, "percentage");
+            articles.push_back(percentage);
+            existArticles.insert("percentage");
+
             ArticleStruct ce("Current Energy");
-            ce.queryData( "upower", name.value, "energy");
+            ce.queryData( "upower", device.value, "energy");
             articles.push_back(ce);
             existArticles.insert("energy");
 
             ArticleStruct fe("Full Energy");
-            fe.queryData( "upower", name.value, "energy-full");
+            fe.queryData( "upower", device.value, "energy-full");
             articles.push_back(fe);
             existArticles.insert("energy-full");
 
-            ArticleStruct percentage("Battery Percentage");
-            percentage.queryData( "upower", name.value, "percentage");
-            articles.push_back(percentage);
-            existArticles.insert("percentage");
-
-            de.queryData( "upower", name.value, "energy-full-design");
+            de.queryData( "upower", device.value, "energy-full-design");
             articles.push_back(de);
             existArticles.insert("energy-full-design");
 
             ArticleStruct bh("Battery Healthy");
-            bh.queryData( "upower", name.value, "capacity");
+            bh.queryData( "upower", device.value, "capacity");
             articles.push_back(bh);
             existArticles.insert("capacity");
 
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", name.value, articles, existArticles);
+            ArticleStruct powerSupply("Power Supply");
+            powerSupply.queryData( "upower", device.value, "power supply");
+            articles.push_back(powerSupply);
+            existArticles.insert("power supply");
+
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", device.value, articles, existArticles);
         }
 
+        ArticleStruct name("Name");
         if( i < batteryList.size())
         {
             QString device = batteryList[i];
 
-            if(name.isValid() == false)
-            {
-                name.queryData( "lshw", device, "product");
-                articles.push_back(name);
-                existArticles.insert("product");
-            }
+            name.queryData( "lshw", device, "product");
+            articles.push_back(name);
+            existArticles.insert("product");
 
             if( vendor.isValid() == false)
             {
@@ -313,14 +324,19 @@ void PowerWidget::initWidget()
             DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideBattery, articles, existArticles);
         }
 
-        addSubInfo( DApplication::translate("Main", "Battery") + name.value, articles );
+        QString d_name = device.value;
 
         if( switchingpowerList.size() + batteryList.size() > 1 )
         {
+            if(device.isValid() == false)
+            {
+                d_name = name.value;
+            }
+
             QStringList tab =
             {
                 DApplication::translate("Main", "Battery"),
-                name.value,
+                d_name,
                 vendor.value
             };
 
@@ -331,7 +347,32 @@ void PowerWidget::initWidget()
         {
             overviewInfo_.value += " / ";
         }
-        overviewInfo_.value += DApplication::translate("Main", "Battery") + " " + name.value;
+
+        QString overName;
+        if(vendor.isValid())
+        {
+            overName = vendor.value;
+        }
+        if(overName.isEmpty() == false)
+        {
+            overName += " ";
+        }
+        if(model.isValid())
+        {
+            overName += model.value;
+        }
+        else if(name.isValid())
+        {
+            overName += name.value;
+        }
+        else if(device.isValid())
+        {
+            overName += device.value;
+        }
+
+        addSubInfo( DApplication::translate("Main", "Battery") + " " + overName, articles );
+
+        overviewInfo_.value += DApplication::translate("Main", "Battery") + " " + overName;
     }
 
     if( switchingpowerList.size() + batteryList.size() > 1 )

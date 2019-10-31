@@ -1340,7 +1340,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Seagate</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -1521,6 +1521,13 @@
     </context>
     <context>
         <name>Disk</name>
+        <message>
+            <source>Size</source>
+            <translation type="unfinished"/>
+        </message>
+    </context>
+    <context>
+        <name>Monitor</name>
         <message>
             <source>Size</source>
             <translation type="unfinished"/>

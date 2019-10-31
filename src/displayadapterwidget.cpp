@@ -46,15 +46,15 @@ void DisplayadapterWidget::initWidget()
         articles.push_back(name);
         existArticles.insert("product");
 
-        ArticleStruct memory("Graphic Memory");
-        memory.queryData("lspci", lspciDeviceName, "Memory");
-        articles.push_back(memory);
-        existArticles.insert("Memory");
-
         ArticleStruct vendor("Vendor");
         vendor.queryData( "lshw", displayadapter, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
+
+        ArticleStruct memory("Graphic Memory");
+        memory.queryData("lspci", lspciDeviceName, "Memory");
+        articles.push_back(memory);
+        existArticles.insert("Memory");
 
         if( i < screenList.size() )
         {

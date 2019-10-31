@@ -65,13 +65,15 @@ void AudiodeviceWidget::initWidget()
 
         existArticles.insert("product");
 
+
+        ArticleStruct vendor("Vendor");
+        vendor.queryData( "lshw", multimedia, "vendor");
+
         ArticleStruct description("Description");
         description.queryData("lshw", multimedia, "description");
 
         existArticles.insert("description");
 
-        ArticleStruct vendor("Vendor");
-        vendor.queryData( "lshw", multimedia, "vendor");
 
         if(name.value == vendor.value)
         {
@@ -79,8 +81,8 @@ void AudiodeviceWidget::initWidget()
         }
 
         articles.push_back(name);
-        articles.push_back(description);
         articles.push_back(vendor);
+        articles.push_back(description);
         existArticles.insert("vendor");
 
 

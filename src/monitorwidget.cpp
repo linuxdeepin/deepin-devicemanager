@@ -105,7 +105,7 @@ void MonitorWidget::initWidget()
         existArticles.insert("Year of Manufacture");
         existArticles.insert("Week of Manufacture");
 
-        ArticleStruct monitorSize("Size");
+        ArticleStruct monitorSize(DApplication::translate("Monitor", "Size"));
         QString size = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Size");
         double inch = 0.0;
         QRegExp re("^([\\d]*)x([\\d]*) mm$");

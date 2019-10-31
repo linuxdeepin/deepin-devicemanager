@@ -473,9 +473,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         //tableWidget_->horizontalHeader()->setClickable(false);
         //tableWidget_->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
         //tableWidget_->setAutoFillBackground(true);
-        tableWidget_->horizontalHeader()->setAutoFillBackground(false);
-        tableWidget_->setAttribute(Qt::WA_OpaquePaintEvent);
-        tableWidget_->setAttribute(Qt::WA_NoSystemBackground);
+
 
         //tableWidget_->setAttribute(Qt::WA_ShowWithoutActivating);
 
@@ -494,23 +492,28 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         }
         tableWidget_->setHorizontalHeaderLabels(translaterHeaders);
 
+        tableWidget_->horizontalHeader()->setObjectName("DeviceInfoHeaderView");
+
         auto changeTheme = [this](){
             QPalette pa = this->palette();
 
-            QBrush bash_brush = pa.base();
-
+            QBrush bash_brush( QColor(255,255,255,255) );
 
             pa.setColorGroup(QPalette::Inactive, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
             pa.setColorGroup(QPalette::Active, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
+
             DApplicationHelper::instance()->setPalette(tableWidget_, pa);
+            DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
 
             //tableWidget_->horizontalHeader()->setAutoFillBackground(true);
 
-            for(int itemIndex = 0; itemIndex < tableWidget_->horizontalHeader()->count(); ++itemIndex)
-            {
-                tableWidget_->horizontalHeaderItem(itemIndex)->setBackground(bash_brush);
-                //tableWidget_->horizontalHeader()->model()->setData(itemIndex, 0, Qt::BackgroundRole);
-            }
+//            for(int itemIndex = 0; itemIndex < tableWidget_->horizontalHeader()->count(); ++itemIndex)
+//            {
+//                tableWidget_->horizontalHeaderItem(itemIndex)->setBackground(bash_brush);
+//                //tableWidget_->horizontalHeader()->model()->setData(itemIndex, 0, Qt::BackgroundRole);
+//            }
+
+            tableWidget_->horizontalHeader()->setStyleSheet( "QHeaderView#DeviceInfoHeaderView{ background-color: white; }");
         };
 
         changeTheme();
@@ -522,9 +525,17 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         //tableWidget_->horizontalHeader()->setHighlightSections(false);
         //tableWidget_->horizontalHeader()->setFrameShape(QFrame::Shape::NoFrame);
         //tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
-        //tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
+        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
+
+        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
+
+
+        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_OpaquePaintEvent);
+        //tableWidget_->setAttribute(Qt::WA_NoSystemBackground);
+
+
         //tableWidget_->horizontalHeader()->setFrameShadow(QFrame::Shadow::Plain);
-        //tableWidget_->horizontalHeader()->setAutoFillBackground(true);
+        tableWidget_->horizontalHeader()->setAutoFillBackground(false);
 
         tableWidget_->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
         tableWidget_->setSelectionMode(QAbstractItemView::SingleSelection);
