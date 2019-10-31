@@ -18,6 +18,7 @@ Device Manager is a gadget for viewing device information.
 * [smartctl](https://www.smartmontools.org/)
 * [xrandr](https://www.x.org/wiki/Projects/XRandR/)
 * [CUPS](https://www.cups.org/index.html)
+* upower
 
 ## Thridparty lib
 * [docx](https://github.com/lpxxn/docx)
@@ -33,4 +34,4 @@ sudo apt-get install dde-devicemanager
 * make
 
 ## Usage
-sudo ./dde-devicemanager
+./dde-devicemanager

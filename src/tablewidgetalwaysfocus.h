@@ -1,15 +1,34 @@
 #pragma once
 #include "DTableWidget"
+#include "DHeaderView"
+#include <DStyledItemDelegate>
 
-class TableWidgetAlwaysFocus: public Dtk::Widget::DTableWidget
+class TableWidgetAlwaysActiveHeaderViewDelegate : public Dtk::Widget::DStyledItemDelegate
+{
+    Q_OBJECT
+public:
+    TableWidgetAlwaysActiveHeaderViewDelegate(QAbstractItemView *parent = nullptr);
+
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
+};
+
+class TableWidgetAlwaysActiveHeaderView: public Dtk::Widget::DHeaderView
 {
 public:
-    TableWidgetAlwaysFocus(QWidget *parent = nullptr);
+    TableWidgetAlwaysActiveHeaderView(Qt::Orientation orientation, QWidget *parent = nullptr);
 
 private:
-    void focusOutEvent(QFocusEvent *event) override;
-    void focusInEvent(QFocusEvent *event) override;
-//    void enterEvent(QEvent *event) override;
-//    void leaveEvent(QEvent *event) override;
-//    void showEvent(QShowEvent *event) override;
+    //void paintEvent(QPaintEvent *e) override;
+    QStyleOptionViewItem viewOptions() const override;
+};
+
+
+
+class TableWidgetAlwaysActive: public Dtk::Widget::DTableWidget
+{
+public:
+    TableWidgetAlwaysActive(QWidget *parent = nullptr);
+
+private:
+    QStyleOptionViewItem viewOptions() const override;
 };

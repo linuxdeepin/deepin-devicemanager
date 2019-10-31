@@ -1,86 +1,57 @@
 #include "tablewidgetalwaysfocus.h"
 #include "mainwindow.h"
 #include <QStyledItemDelegate>
+#include <qdrawutil.h>
+
 DWIDGET_USE_NAMESPACE
 
-class NoFocusDelegate: public QStyledItemDelegate
-{
-public:
-    NoFocusDelegate()
-    {
-
-    }
-
-    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override
-    {
-        if( !(option.type & QStyleOption::SO_FocusRect) )
-        {
-            QStyleOptionViewItem option2 = option;
-            option2.type |= QStyleOption::SO_FocusRect;
-            return QStyledItemDelegate::paint(painter, option2, index);
-        }
-
-
-        QStyledItemDelegate::paint(painter, option, index);
-    }
-};
-
-TableWidgetAlwaysFocus::TableWidgetAlwaysFocus(QWidget *parent):DTableWidget(parent)
-{
-    //MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent->parent());
-    //setFocusProxy(mainWindow);
-    //setAutoFillBackground(false);
-    setFocusPolicy(Qt::FocusPolicy::StrongFocus);
-    //setEnabled(true);
-    //setWindowFlags(/*Qt::Popup |*/ Qt::FramelessWindowHint);
-    //setModel(true);
-    //setModal(true);
-    //setMouseTracking(false);
-    //setStyleSheet("background-color: #FFFFCC;");
-    //QPalette pal = palette();
-
-    // set black background
-    //pal.setColor(QPalette::Foreground, Qt::black);
-
-    //setAutoFillBackground(true);
-    //setPalette(pal);
-    //setStyleSheet("QTableView{outline: 0;}");
-    //setFrameShape(Shape::NoFrame);
-    //setItemDelegate(new NoFocusDelegate());
-}
-
-void TableWidgetAlwaysFocus::focusOutEvent(QFocusEvent *event)
-{
-    //this->setFocus();
-    //setFocus(Qt::FocusReason::OtherFocusReason);
-    //DTableWidget::focusOutEvent(event);
-    //setBackgroundRole(QPalette::Dark);
-    //setPalette(QPalette(QColor(255,255,255)));
-    DTableWidget::focusOutEvent(event);
-    //setFocus(Qt::FocusReason::OtherFocusReason);
-}
-
-void TableWidgetAlwaysFocus::focusInEvent(QFocusEvent *event)
-{
-    //this->setFocus();
-    //setFocus(Qt::FocusReason::OtherFocusReason);
-    DTableWidget::focusInEvent(event);
-}
-
-//void TableWidgetAlwaysFocus::showEvent(QShowEvent *event)
+//TableWidgetAlwaysActiveHeaderViewDelegate::TableWidgetAlwaysActiveHeaderViewDelegate(QAbstractItemView *parent)
+//    : DStyledItemDelegate(parent)
 //{
-//    DTableWidget::showEvent(event);
-//    //setFocus(Qt::FocusReason::OtherFocusReason);
-//    //setCurrentItem(nullptr);
+
 //}
 
-//void TableWidgetAlwaysFocus::enterEvent(QEvent *event)
+//void TableWidgetAlwaysActiveHeaderViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 //{
-//    DTableWidget::enterEvent(event);
+//    painter->save();
+
+//    int yPoint = option.rect.top() + option.rect.height() / 2;
+//    qDrawShadeRect(painter, 8, yPoint, option.rect.width() - 8, yPoint, option.palette);
+
+//    painter->restore();
 //}
 
-//void TableWidgetAlwaysFocus::leaveEvent(QEvent *event)
+TableWidgetAlwaysActiveHeaderView::TableWidgetAlwaysActiveHeaderView(Qt::Orientation orientation, QWidget *parent ):DHeaderView(orientation, parent)
+{
+
+}
+
+//void TableWidgetAlwaysActiveHeaderView::paintEvent(QPaintEvent *e)
 //{
-//    DTableWidget::leaveEvent(event);
-//    //setFocus(Qt::FocusReason::OtherFocusReason);
+//    return DHeaderView::paintEvent(e);
 //}
+
+QStyleOptionViewItem TableWidgetAlwaysActiveHeaderView::viewOptions() const
+{
+    auto styleOptViewItem = TableWidgetAlwaysActiveHeaderView::viewOptions();
+
+    QBrush brush;
+    brush.setColor(QColor(255, 255, 255, 255));
+
+    styleOptViewItem.palette.setBrush(QPalette::Background, brush);
+
+    return styleOptViewItem;
+}
+
+TableWidgetAlwaysActive::TableWidgetAlwaysActive(QWidget *parent): DTableWidget(parent)
+{
+
+}
+
+QStyleOptionViewItem TableWidgetAlwaysActive::viewOptions() const
+{
+    auto styleOptViewItem = DTableWidget::viewOptions();
+    styleOptViewItem.state |= QStyle::State_Active;
+
+    return styleOptViewItem;
+}

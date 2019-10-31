@@ -1120,6 +1120,262 @@
             <translation>请输入密码！</translation>
         </message>
         <message>
+            <source>AAM feature</source>
+            <translation>AAM特性</translation>
+        </message>
+        <message>
+            <source>APM level</source>
+            <translation>APM等级</translation>
+        </message>
+        <message>
+            <source>ATA Security</source>
+            <translation>ATA安全</translation>
+        </message>
+        <message>
+            <source>ATA Version</source>
+            <translation>ATA版本</translation>
+        </message>
+        <message>
+            <source>Local Time</source>
+            <translation>本地时间</translation>
+        </message>
+        <message>
+            <source>Rd look-ahead</source>
+            <translation>Rd look-ahead</translation>
+        </message>
+        <message>
+            <source>Write cache</source>
+            <translation>写缓存</translation>
+        </message>
+        <message>
+            <source>Wt Cache Reorder</source>
+            <translation>写缓存记录</translation>
+        </message>
+        <message>
+            <source>data collection</source>
+            <translation>数据收集</translation>
+        </message>
+        <message>
+            <source>Model Family</source>
+            <translation>产品家族</translation>
+        </message>
+        <message>
+            <source>SCT Support Level</source>
+            <translation>SCT支持等级</translation>
+        </message>
+        <message>
+            <source>Under/Over Temperature Limit Count</source>
+            <translation>过冷/过热记数</translation>
+        </message>
+        <message>
+            <source>SMART capabilities</source>
+            <translation>SMART功能</translation>
+        </message>
+        <message>
+            <source>Error logging capability</source>
+            <translation>错误日志功能</translation>
+        </message>
+        <message>
+            <source>SCT capabilities</source>
+            <translation>SCT功能</translation>
+        </message>
+        <message>
+            <source>Auto Offline Data Collection</source>
+            <translation>自动离线数据收集</translation>
+        </message>
+        <message>
+            <source>Raw_Read_Error_Rate</source>
+            <translation>原始读取错误率</translation>
+        </message>
+        <message>
+            <source>Spin_Up_Time</source>
+            <translation>启动时间</translation>
+        </message>
+        <message>
+            <source>Start_Stop_Count</source>
+            <translation>启停计数</translation>
+        </message>
+        <message>
+            <source>Reallocated_Sector_Ct</source>
+            <translation>重新分配扇区</translation>
+        </message>
+        <message>
+            <source>Seek_Error_Rate</source>
+            <translation>寻址错误率</translation>
+        </message>
+        <message>
+            <source>Spin_Retry_Count</source>
+            <translation>旋转重试计数</translation>
+        </message>
+        <message>
+            <source>G-Sense_Error_Rate</source>
+            <translation>G-感应误差率</translation>
+        </message>
+        <message>
+            <source>Power-Off_Retract_Count</source>
+            <translation>断电收回计数</translation>
+        </message>
+        <message>
+            <source>Load_Cycle_Count</source>
+            <translation>加载周期计数</translation>
+        </message>
+        <message>
+            <source>Temperature_Celsius</source>
+            <translation>温度(摄氏度)</translation>
+        </message>
+        <message>
+            <source>Reallocated_Event_Count</source>
+            <translation>重新分配事件计数</translation>
+        </message>
+        <message>
+            <source>Offline_Uncorrectable</source>
+            <translation>离线无法纠正</translation>
+        </message>
+        <message>
+            <source>UDMA_CRC_Error_Count</source>
+            <translation>UDMA-CRC错误计数</translation>
+        </message>
+        <message>
+            <source>Multi_Zone_Error_Rate</source>
+            <translation>多区错误率</translation>
+        </message>
+        <message>
+            <source>Calibration_Retry_Count</source>
+            <translation>校准重试次数</translation>
+        </message>
+        <message>
+            <source>Current Temperature</source>
+            <translation>硬盘温度</translation>
+        </message>
+        <message>
+            <source>Current_Pending_Sector</source>
+            <translation>当前待处理扇区</translation>
+        </message>
+        <message>
+            <source>Device</source>
+            <translation>设备</translation>
+        </message>
+        <message>
+            <source>Device Model</source>
+            <translation>设备型号</translation>
+        </message>
+        <message>
+            <source>Firmware Version</source>
+            <translation>固件版本</translation>
+        </message>
+        <message>
+            <source>Device State</source>
+            <translation>设备状态</translation>
+        </message>
+        <message>
+            <source>Power Cycle Min/Max Temperature</source>
+            <translation>Power Cycle最低/最高温度</translation>
+        </message>
+        <message>
+            <source>Lifetime    Min/Max Temperature</source>
+            <translation>生命周期最低/最高温度</translation>
+        </message>
+        <message>
+            <source>LU WWN Device Id</source>
+            <translation>LU WWN设备ID</translation>
+        </message>
+        <message>
+            <source>User Capacity</source>
+            <translation>可用</translation>
+        </message>
+        <message>
+            <source>Min/Max recommended Temperature</source>
+            <translation>正常工作温度范围</translation>
+        </message>
+        <message>
+            <source>Min/Max Temperature Limit</source>
+            <translation>理论工作温度范围</translation>
+        </message>
+        <message>
+            <source>Temperature History Size (Index)</source>
+            <translation>温度历史记录大小</translation>
+        </message>
+        <message>
+            <source>Temperature Sampling Period</source>
+            <translation>温度采样周期</translation>
+        </message>
+        <message>
+            <source>Temperature Logging Interval</source>
+            <translation>温度记录间隔</translation>
+        </message>
+        <message>
+            <source>SCT Status Version</source>
+            <translation>SCT状态版本</translation>
+        </message>
+        <message>
+            <source>Offline data collection status</source>
+            <translation>离线数据记录状态</translation>
+        </message>
+        <message>
+            <source>SCT Temperature History Version</source>
+            <translation>SCT温度记录历史版本</translation>
+        </message>
+        <message>
+            <source>SMART support</source>
+            <translation>SMART支持</translation>
+        </message>
+        <message>
+            <source>recommended polling time</source>
+            <translation>建议轮询时间</translation>
+        </message>
+        <message>
+            <source>Self-test execution status</source>
+            <translation>自检执行状态</translation>
+        </message>
+        <message>
+            <source>Sector Size</source>
+            <translation>扇区大小</translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
             <source></source>
             <translation></translation>
         </message>
@@ -1170,7 +1426,56 @@
         <message>
             <source></source>
             <translation></translation>
-        </message><message>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+        <source></source>
+        <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
             <source></source>
             <translation></translation>
         </message>
@@ -1180,6 +1485,13 @@
         <message>
             <source>Speed</source>
             <translation>频率</translation>
+        </message>
+    </context>
+    <context>
+        <name>Disk</name>
+        <message>
+            <source>Size</source>
+            <translation>容量</translation>
         </message>
     </context>
 </TS>

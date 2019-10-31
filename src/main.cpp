@@ -7,13 +7,12 @@
 #include <stdlib.h>
 #include "DTitlebar"
 #include "DApplicationSettings"
-#include "QSplashScreen"
 
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
-    //DApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    DApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     DApplication::loadDXcbPlugin();
 

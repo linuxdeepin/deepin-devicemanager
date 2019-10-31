@@ -41,7 +41,7 @@ QList<ArticleStruct> staticArticles;
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
-    setMinimumSize(900, 780);
+    setMinimumSize(900, 730);
     DeviceInfoParserInstance.getRootPassword();
 
     initLoadingWidget();

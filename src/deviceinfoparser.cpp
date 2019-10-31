@@ -1651,6 +1651,7 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
 
     // smartctl
     QMap<QString, QString> smartctlDatabase_;
+    QString indexName;
     int startIndex = 0;
 
     QRegExp reg("^[\\s\\S]*[\\d]:[\\d][\\s\\S]*$");//time 08:00
@@ -1666,12 +1667,48 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
          startIndex = i + 1;
 
 
-         if( line.contains(Devicetype_Separator) && reg.exactMatch(line) == false && false == line.contains("Error") && false == line.contains("hh:mm:SS") )
+         int index = line.indexOf(Devicetype_Separator);
+         if( index > 0 && reg.exactMatch(line) == false && false == line.contains("Error") && false == line.contains("hh:mm:SS") )
          {
-             int index = line.indexOf(Devicetype_Separator);
-             smartctlDatabase_[line.mid(0, index).trimmed()] = line.mid(index+1).trimmed();
-             continue;
+            if(line.indexOf("(") < index && line.indexOf(")") > index)
+            {
+                continue;
+            }
+
+            if(line.indexOf("[") < index && line.indexOf("]") > index)
+            {
+                continue;
+            }
+
+            indexName = line.mid(0, index).trimmed().remove(" is");
+            if(smartctlDatabase_.contains(indexName) )
+            {
+                smartctlDatabase_[indexName] += ", ";
+                smartctlDatabase_[indexName] += line.mid(index+1).trimmed();
+            }
+            else
+            {
+                smartctlDatabase_[indexName] = line.mid(index+1).trimmed();
+            }
+            continue;
          }
+
+         if( indexName.isEmpty() == false && ( line.startsWith("\t\t") || line.startsWith("    ") ) && line.contains(":") == false )
+         {
+            if(smartctlDatabase_.contains(indexName))
+            {
+                smartctlDatabase_[indexName] += ", ";
+                smartctlDatabase_[indexName] += line.trimmed();
+            }
+            else
+            {
+                smartctlDatabase_[indexName] = line.trimmed();
+            }
+
+            continue;
+         }
+
+         indexName = "";
 
          QRegExp rx("^[ ]*[0-9]+[ ]+([\\w-_]+)[ ]+0x[0-9a-fA-F-]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+([0-9\\/w-]+[ ]*[ 0-9\\/w-()]*)$");
          if( rx.indexIn(line) > -1 )
@@ -1680,15 +1717,108 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
              continue;
          }
 
+         QStringList strList = line.trimmed().split(" ");
+
+         if(strList.size() < 5)
+         {
+             continue;
+         }
+
          if(line.contains("Power_On_Hours"))
          {
-             smartctlDatabase_["Power_On_Hours"] = line.split(" ").last();
+             smartctlDatabase_["Power_On_Hours"] = strList.last();
              continue;
          }
 
          if(line.contains("Power_Cycle_Count"))
          {
-             smartctlDatabase_["Power_Cycle_Count"] = line.split(" ").last();
+             smartctlDatabase_["Power_Cycle_Count"] = strList.last();
+             continue;
+         }
+
+         if(line.contains("Raw_Read_Error_Rate"))
+         {
+             smartctlDatabase_["Raw_Read_Error_Rate"] = strList.last();
+             continue;
+         }
+
+         if(line.contains("Spin_Up_Time"))
+         {
+             smartctlDatabase_["Spin_Up_Time"] = strList.last();
+             continue;
+         }
+
+         if(line.contains("Start_Stop_Count"))
+         {
+             smartctlDatabase_["Start_Stop_Count"] = strList.last();
+             continue;
+         }
+
+         if(line.contains("Reallocated_Sector_Ct"))
+         {
+             smartctlDatabase_["Reallocated_Sector_Ct"] = strList.last();
+             continue;
+         }
+
+         if(line.contains("Seek_Error_Rate"))
+         {
+             smartctlDatabase_["Seek_Error_Rate"] = strList.last();
+             continue;
+         }
+
+         if(line.contains("Spin_Retry_Count"))
+         {
+             smartctlDatabase_["Spin_Retry_Count"] = strList.last();
+             continue;
+         }
+         if(line.contains("Calibration_Retry_Count"))
+         {
+             smartctlDatabase_["Calibration_Retry_Count"] = strList.last();
+             continue;
+         }
+         if(line.contains("G-Sense_Error_Rate"))
+         {
+             smartctlDatabase_["G-Sense_Error_Rate"] = strList.last();
+             continue;
+         }
+         if(line.contains("Power-Off_Retract_Count"))
+         {
+             smartctlDatabase_["Power-Off_Retract_Count"] = strList.last();
+             continue;
+         }
+         if(line.contains("Load_Cycle_Count"))
+         {
+             smartctlDatabase_["Load_Cycle_Count"] = strList.last();
+             continue;
+         }
+         if(line.contains("Temperature_Celsius"))
+         {
+             smartctlDatabase_["Temperature_Celsius"] = strList.last();
+             continue;
+         }
+         if(line.contains("Reallocated_Event_Count"))
+         {
+             smartctlDatabase_["Reallocated_Event_Count"] = strList.last();
+             continue;
+         }
+         if(line.contains("Current_Pending_Sector"))
+         {
+             smartctlDatabase_["Current_Pending_Sector"] = strList.last();
+             continue;
+         }
+         if(line.contains("Offline_Uncorrectable"))
+         {
+             smartctlDatabase_["Offline_Uncorrectable"] = strList.last();
+             continue;
+         }
+         if(line.contains("UDMA_CRC_Error_Count"))
+         {
+             smartctlDatabase_["UDMA_CRC_Error_Count"] = strList.last();
+             continue;
+         }
+         if(line.contains("Multi_Zone_Error_Rate"))
+         {
+             smartctlDatabase_["Multi_Zone_Error_Rate"] = strList.last();
              continue;
          }
     }

@@ -40,7 +40,7 @@ static const int SubRowHeight_ = 40;
 static const int WidgetWidth = 640;
 static const int WidgetHeight = 740;
 
-DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& deviceName) : QWidget(parent_)
+DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& deviceName) : DWidget(parent_)
 {
     //setStyleSheet("QWidget{border-top-left-radius:15px;border-top-right-radius:5px;}");
     if(isFontInit_ == false)
@@ -86,6 +86,8 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
     //setMinimumHeight(WidgetHeight);
 
     initContextMenu();
+
+    //setAutoFillBackground(true);
 
     auto modifyTheme = [this](){
         DPalette pa = DApplicationHelper::instance()->palette(this);
@@ -460,43 +462,55 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 {
     if(tableWidget_ == nullptr)
     {
-        tableWidget_ = new TableWidgetAlwaysFocus(this);
-
-        //tableWidget_->setBackgroundRole(QPalette::Base);
-        //tableWidget_->setAutoFillBackground(true);
-
-//        MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent());
-//        if( mainWindow )
-//        {
-//            tableWidget_->setFocusProxy(mainWindow);
-//        }
+        tableWidget_ = new DTableWidget(this);
+        tableWidget_->setHorizontalHeader(new TableWidgetAlwaysActiveHeaderView(Qt::Orientation::Horizontal, this) );
 
         tableWidget_->setMinimumHeight(178);
         tableWidget_->setMaximumHeight(500);
         tableWidget_->setVerticalScrollBar(new DScrollBar(this));
-        tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOn);
+        tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
         tableWidget_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
         //tableWidget_->horizontalHeader()->setClickable(false);
-        tableWidget_->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
-        //tableWidget_->setAutoFillBackground(false);
-        tableWidget_->setAttribute(Qt::WA_ShowWithoutActivating);
+        //tableWidget_->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
+        //tableWidget_->setAutoFillBackground(true);
+        tableWidget_->horizontalHeader()->setAutoFillBackground(false);
+        tableWidget_->setAttribute(Qt::WA_OpaquePaintEvent);
+        tableWidget_->setAttribute(Qt::WA_NoSystemBackground);
+
+        //tableWidget_->setAttribute(Qt::WA_ShowWithoutActivating);
 
         tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
-        tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
-        tableWidget_->setEnabled(true);
+        //tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
+        //tableWidget_->setEnabled(true);
         tableWidget_->horizontalHeader()->clearMask();
         tableWidget_->horizontalHeader()->setFont(tableHeaderFont_);
 
+        tableWidget_->setRowCount(contentsList.size());
+        tableWidget_->setColumnCount(headers.size());
+        QStringList translaterHeaders;
+        foreach(auto header, headers)
+        {
+            translaterHeaders.push_back(DApplication::translate("Main", header.toStdString().data()));
+        }
+        tableWidget_->setHorizontalHeaderLabels(translaterHeaders);
+
         auto changeTheme = [this](){
-            DPalette pa = DApplicationHelper::instance()->palette(this);
-            QColor base_color = palette().base().color();
+            QPalette pa = this->palette();
 
-            pa.setColor(QPalette::Background, base_color);
-            pa.setBrush(DPalette::DarkLively, palette().base());
-            pa.setBrush(DPalette::FrameBorder, palette().base());
-            pa.setColor(QPalette::Button, base_color);
+            QBrush bash_brush = pa.base();
 
-            DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
+
+            pa.setColorGroup(QPalette::Inactive, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
+            pa.setColorGroup(QPalette::Active, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
+            DApplicationHelper::instance()->setPalette(tableWidget_, pa);
+
+            //tableWidget_->horizontalHeader()->setAutoFillBackground(true);
+
+            for(int itemIndex = 0; itemIndex < tableWidget_->horizontalHeader()->count(); ++itemIndex)
+            {
+                tableWidget_->horizontalHeaderItem(itemIndex)->setBackground(bash_brush);
+                //tableWidget_->horizontalHeader()->model()->setData(itemIndex, 0, Qt::BackgroundRole);
+            }
         };
 
         changeTheme();
@@ -505,39 +519,27 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
 
         tableWidget_->horizontalHeader()->setContentsMargins(0,0,0,0);
-        tableWidget_->horizontalHeader()->setHighlightSections(false);
-        tableWidget_->horizontalHeader()->setFrameShape(QFrame::Shape::NoFrame);
-        tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
-        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
+        //tableWidget_->horizontalHeader()->setHighlightSections(false);
+        //tableWidget_->horizontalHeader()->setFrameShape(QFrame::Shape::NoFrame);
+        //tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
+        //tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
         //tableWidget_->horizontalHeader()->setFrameShadow(QFrame::Shadow::Plain);
-        tableWidget_->horizontalHeader()->setAutoFillBackground(true);
+        //tableWidget_->horizontalHeader()->setAutoFillBackground(true);
 
         tableWidget_->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
         tableWidget_->setSelectionMode(QAbstractItemView::SingleSelection);
 
         tableWidget_->verticalHeader()->setVisible(false);
-        tableWidget_->setGridStyle( Qt::PenStyle::NoPen);
+        //tableWidget_->setGridStyle( Qt::PenStyle::NoPen);
         tableWidget_->setShowGrid(false);
 
         tableWidget_->setAlternatingRowColors(true);
-        tableWidget_->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        //tableWidget_->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
         tableWidget_->setFrameShape(QFrame::Shape::NoFrame);
 
-        //QItemSelectionModel *selectionModel = tableWidget_->selectionModel();
-        //selectionModel->set
-
         connect(tableWidget_, &DTableWidget::itemClicked, this, &DeviceInfoWidgetBase::OnCurrentItemClicked);
     }
-
-    tableWidget_->setRowCount(contentsList.size());
-    tableWidget_->setColumnCount(headers.size());
-    QStringList translaterHeaders;
-    foreach(auto header, headers)
-    {
-        translaterHeaders.push_back(DApplication::translate("Main", header.toStdString().data()));
-    }
-    tableWidget_->setHorizontalHeaderLabels(translaterHeaders);
 
     //tableWidget_->horizontalHeader()->setSectionResizeMode(headers.size() - 2, QHeaderView::Stretch);
     tableWidget_->horizontalHeader()->setDefaultAlignment(Qt::AlignmentFlag::AlignLeft);
@@ -561,12 +563,12 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         }
     }
 
-    tableWidget_->clearSpans();
+    //tableWidget_->clearSpans();
 
     //tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
     tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    tableWidget_->resizeColumnsToContents();
-    tableWidget_->resizeRowsToContents();
+    //tableWidget_->resizeColumnsToContents();
+    //tableWidget_->resizeRowsToContents();
 }
 
 void DeviceInfoWidgetBase::addStrecch()
@@ -712,7 +714,7 @@ bool DeviceInfoWidgetBase::onExportToFile()
    }
 
    QString exportFile = DFileDialog::getSaveFileName(this,
-                                                     tr("Export File"), saveDir + DApplication::translate("Main", "deviceInfo") + \
+                                                     DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
                                                      QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
                                                     tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
 

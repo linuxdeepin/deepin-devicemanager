@@ -968,14 +968,6 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source></source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
             <source>Power Supply</source>
             <translation type="unfinished"/>
         </message>
@@ -1132,6 +1124,382 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>AAM feature</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>APM level</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>ATA Security</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>ATA Version</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Local Time</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Rd look-ahead</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Write cache</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Wt Cache Reorder</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>data collection</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>SMART capabilities</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Error logging capability</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>SCT capabilities</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Auto Offline Data Collection</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Raw_Read_Error_Rate</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Spin_Up_Time</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Start_Stop_Count</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Reallocated_Sector_Ct</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Seek_Error_Rate</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Spin_Retry_Count</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>G-Sense_Error_Rate</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Power-Off_Retract_Count</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Load_Cycle_Count</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Temperature_Celsius</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Reallocated_Event_Count</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Current_Pending_Sector</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Offline_Uncorrectable</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>UDMA_CRC_Error_Count</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Multi_Zone_Error_Rate</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Calibration_Retry_Count</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Current Temperature</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Current_Pending_Sector</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Device</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Device Model</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Firmware Version</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Device State</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Power Cycle Min/Max Temperature</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Lifetime    Min/Max Temperature</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>LU WWN Device Id</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>User Capacity</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Min/Max recommended Temperature</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Min/Max Temperature Limit</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Temperature History Size (Index)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Temperature Sampling Period</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Temperature Logging Interval</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>SCT Status Version</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Model Family</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>SCT Support Level</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Under/Over Temperature Limit Count</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Offline data collection status</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>SCT Temperature History Version</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>SMART support</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>recommended polling time</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Self-test execution status</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Sector Size</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Device</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Device Model</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source></source>
             <translation type="unfinished"/>
         </message>
@@ -1148,6 +1516,13 @@
         <name>CPU</name>
         <message>
             <source>Speed</source>
+            <translation type="unfinished"/>
+        </message>
+    </context>
+    <context>
+        <name>Disk</name>
+        <message>
+            <source>Size</source>
             <translation type="unfinished"/>
         </message>
     </context>

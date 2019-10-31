@@ -149,7 +149,7 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
 
     item->setFont(itemFont);
 
-    item->setSizeHint( QSize(20, 40) );
+    item->setSizeHint( QSize(20, 37) );
 
     DGuiApplicationHelper::ColorType ct = DApplicationHelper::instance()->themeType();
 
@@ -217,7 +217,7 @@ bool DeviceListView::onExportToFile()
    }
 
    QString exportFile = DFileDialog::getSaveFileName(this,
-                                                     tr("Export File"), saveDir + DApplication::translate("Main", "deviceInfo") + \
+                                                     DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
                                                      QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
                                                     tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
 

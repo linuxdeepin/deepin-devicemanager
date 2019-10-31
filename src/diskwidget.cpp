@@ -64,7 +64,7 @@ void DiskWidget::initWidget()
         mediaType.value = mediaTypeStr;
         articles.push_back(mediaType);
 
-        ArticleStruct size("Size");
+        ArticleStruct size(DApplication::translate("Disk", "Size"));
         size.value = sizeStr;
         articles.push_back(size);
         existArticles.insert("size");
@@ -92,30 +92,26 @@ void DiskWidget::initWidget()
             else
             {
                 mediaTypeStr = "HDD";
-                QString sataVersion = DeviceInfoParserInstance.queryData("smartctl", logicalName, "SATA Version is");
+                QString sataVersion = DeviceInfoParserInstance.queryData("smartctl", logicalName, "SATA Version");
                 QString version;
                 QString speed;
 
-                int index = sataVersion.indexOf("current:");
+                int index = sataVersion.indexOf(",");
                 if(index>0)
                 {
                     ArticleStruct speed("Speed");
-                    speed.value = sataVersion.mid( index + sizeof("current:") );
-                    speed.value.remove(")");
+                    speed.value = sataVersion.mid( index + 1 );
                     speed.value = speed.value.trimmed();
                     articles.push_back(speed);
 
                     interface.value = sataVersion.mid(0, index);
-                    interface.value.remove("(");
                     interface.value = interface.value.trimmed();
-                    interface.value.remove( speed.value);
-                    interface.value.remove( ",");
                 }
 
             }
 
             articles.push_back(interface);
-            existArticles.insert("SATA Version is");
+            existArticles.insert("SATA Version");
 
             ArticleStruct rr("Rotation Rate");
             rr.value = rotationRate;
@@ -141,8 +137,6 @@ void DiskWidget::initWidget()
             powerCycleCount.value += DApplication::translate("Main", " Times");
             articles.push_back(powerCycleCount);
             existArticles.insert("Power_Cycle_Count");
-
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles);
         }
 
         ArticleStruct version("Version");
@@ -161,6 +155,11 @@ void DiskWidget::initWidget()
         existArticles.insert("description");
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", disk, articles, existArticles);
+
+        if( DeviceInfoParserInstance.isToolSuccess("smartctl") )
+        {
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles);
+        }
 
         addSubInfo( model.value, articles );
 
@@ -197,7 +196,7 @@ void DiskWidget::initWidget()
     {
         //QStringList emptyList;
         //add(DApplication::translate("Main", "Disk")  + DApplication::translate("Main", " Info"), emptyList, emptyList);
-        QStringList headers = { "Model",  "Vendor", "Media Type", "Size"};
+        QStringList headers = { "Model",  "Vendor", "Media Type", DApplication::translate("Disk", "Size") };
         addTable(headers, tabList);
     }
 }
