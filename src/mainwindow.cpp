@@ -187,36 +187,36 @@ void MainWindow::addAllDeviceinfoWidget()
     staticArticles.clear();
 
     auto overviewWidget = new ComputerOverviewWidget(this);
-    addDeviceWidget(overviewWidget, "概况.svg");
-    addDeviceWidget(new CpuWidget(this), "处理器.svg");
-    addDeviceWidget(new MotherboardWidget(this), "主板.svg");
-    addDeviceWidget(new MemoryWidget(this), "内存.svg");
-    addDeviceWidget(new DiskWidget(this), "存储设备.svg");
-    addDeviceWidget(new DisplayadapterWidget(this), "显示适配器.svg");
-    addDeviceWidget(new MonitorWidget(this), "显示设备.svg");
-    addDeviceWidget(new NetworkadapterWidget(this), "网络适配器.svg");
-    addDeviceWidget(new AudiodeviceWidget(this), "音频适配器.svg");
-    addDeviceWidget(new PowerWidget(this), "电池.svg");
+    addDeviceWidget(overviewWidget, "overview.svg");
+    addDeviceWidget(new CpuWidget(this), "cpu.svg");
+    addDeviceWidget(new MotherboardWidget(this), "motherboard.svg");
+    addDeviceWidget(new MemoryWidget(this), "memory.svg");
+    addDeviceWidget(new DiskWidget(this), "storage.svg");
+    addDeviceWidget(new DisplayadapterWidget(this), "displayadapter.svg");
+    addDeviceWidget(new MonitorWidget(this), "monitor.svg");
+    addDeviceWidget(new NetworkadapterWidget(this), "networkadapter.svg");
+    addDeviceWidget(new AudiodeviceWidget(this), "audiodevice.svg");
+    addDeviceWidget(new PowerWidget(this), "battery.svg");
 
     if(firstAdd_ == true)
     {
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new KeyboardWidget(this), "键盘.svg");
-    addDeviceWidget(new MouseWidget(this), "鼠标.svg");
-    addDeviceWidget(new BluetoothWidget(this), "蓝牙.svg");
-    addDeviceWidget(new PrinterWidget(this), "打印机.svg");
-    addDeviceWidget(new CameraWidget(this), "图像设备.svg");
-    addDeviceWidget(new UsbdeviceWidget(this), "usb设备.svg");
+    addDeviceWidget(new KeyboardWidget(this), "keyboard.svg");
+    addDeviceWidget(new MouseWidget(this), "mouse.svg");
+    addDeviceWidget(new BluetoothWidget(this), "bluetooth.svg");
+    addDeviceWidget(new PrinterWidget(this), "printer.svg");
+    addDeviceWidget(new CameraWidget(this), "camera.svg");
+    addDeviceWidget(new UsbdeviceWidget(this), "usbdevice.svg");
 
     if(firstAdd_ == true)
     {
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new OtherInputdeviceWidget(this), "其他输入设备.svg");
-    addDeviceWidget(new OtherPciDeviceWidget(this), "其他PCI设备.svg");
+    addDeviceWidget(new OtherInputdeviceWidget(this), "otherinputdevice.svg");
+    addDeviceWidget(new OtherPciDeviceWidget(this), "otherpcidevice.svg");
 
     overviewWidget->setOverviewInfos(staticArticles);
 

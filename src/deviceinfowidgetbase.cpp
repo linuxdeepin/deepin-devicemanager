@@ -143,14 +143,14 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
     for(int i = 0; i < names.size(); ++i)
     {
         QLabel* nameLabel = new DLabel( DApplication::translate("Main", names.at(i).toStdString().data() ) + ":", downWidget_);
-        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         nameLabel->setMinimumWidth(NameLength_);
         nameLabel->setFont(font);
         //nameLabel->setMinimumHeight(SubRowHeight_);
         //nameLabel->setReadOnly(true);
 
         QLabel* contentLabel = new DLabel(contents.at(i), downWidget_);
-        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         contentLabel->setWordWrap(true);
         contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
         //contentLabel->setMinimumHeight(SubRowHeight_);
@@ -187,7 +187,7 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
         }
 
         QLabel* nameLabel = new DLabel( DApplication::translate("Main", article.name.toStdString().data()) + ":", downWidget_ );
-        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
         nameLabel->setMinimumWidth(NameLength_);
         //nameLabel->setMinimumHeight(SubRowHeight_);
@@ -196,7 +196,7 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
         QLabel* contentLabel = new DLabel( article.valueTranslate ? \
                                            DApplication::translate("Main", article.value.toStdString().data()): \
                                            article.value, downWidget_ );
-        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         if(article.externalLinks)
         {
             contentLabel->setOpenExternalLinks(true);
@@ -463,7 +463,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     if(tableWidget_ == nullptr)
     {
         tableWidget_ = new DTableWidget(this);
-        tableWidget_->setHorizontalHeader(new TableWidgetAlwaysActiveHeaderView(Qt::Orientation::Horizontal, this) );
+        //tableWidget_->setHorizontalHeader(new TableWidgetAlwaysActiveHeaderView(Qt::Orientation::Horizontal, this) );
 
         tableWidget_->setMinimumHeight(178);
         tableWidget_->setMaximumHeight(500);
@@ -477,7 +477,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         //tableWidget_->setAttribute(Qt::WA_ShowWithoutActivating);
 
-        tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
+        //tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
         //tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
         //tableWidget_->setEnabled(true);
         tableWidget_->horizontalHeader()->clearMask();
@@ -525,12 +525,12 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         //tableWidget_->horizontalHeader()->setHighlightSections(false);
         //tableWidget_->horizontalHeader()->setFrameShape(QFrame::Shape::NoFrame);
         //tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
-        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
+//        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
 
-        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
+//        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
 
 
-        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_OpaquePaintEvent);
+//        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_OpaquePaintEvent);
         //tableWidget_->setAttribute(Qt::WA_NoSystemBackground);
 
 

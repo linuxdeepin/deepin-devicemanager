@@ -3,55 +3,55 @@
 #include <QStyledItemDelegate>
 #include <qdrawutil.h>
 
-DWIDGET_USE_NAMESPACE
+//DWIDGET_USE_NAMESPACE
 
-//TableWidgetAlwaysActiveHeaderViewDelegate::TableWidgetAlwaysActiveHeaderViewDelegate(QAbstractItemView *parent)
-//    : DStyledItemDelegate(parent)
+////TableWidgetAlwaysActiveHeaderViewDelegate::TableWidgetAlwaysActiveHeaderViewDelegate(QAbstractItemView *parent)
+////    : DStyledItemDelegate(parent)
+////{
+
+////}
+
+////void TableWidgetAlwaysActiveHeaderViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+////{
+////    painter->save();
+
+////    int yPoint = option.rect.top() + option.rect.height() / 2;
+////    qDrawShadeRect(painter, 8, yPoint, option.rect.width() - 8, yPoint, option.palette);
+
+////    painter->restore();
+////}
+
+//TableWidgetAlwaysActiveHeaderView::TableWidgetAlwaysActiveHeaderView(Qt::Orientation orientation, QWidget *parent ):DHeaderView(orientation, parent)
 //{
 
 //}
 
-//void TableWidgetAlwaysActiveHeaderViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+////void TableWidgetAlwaysActiveHeaderView::paintEvent(QPaintEvent *e)
+////{
+////    return DHeaderView::paintEvent(e);
+////}
+
+//QStyleOptionViewItem TableWidgetAlwaysActiveHeaderView::viewOptions() const
 //{
-//    painter->save();
+//    auto styleOptViewItem = TableWidgetAlwaysActiveHeaderView::viewOptions();
 
-//    int yPoint = option.rect.top() + option.rect.height() / 2;
-//    qDrawShadeRect(painter, 8, yPoint, option.rect.width() - 8, yPoint, option.palette);
+//    QBrush brush;
+//    brush.setColor(QColor(255, 255, 255, 255));
 
-//    painter->restore();
+//    styleOptViewItem.palette.setBrush(QPalette::Background, brush);
+
+//    return styleOptViewItem;
 //}
 
-TableWidgetAlwaysActiveHeaderView::TableWidgetAlwaysActiveHeaderView(Qt::Orientation orientation, QWidget *parent ):DHeaderView(orientation, parent)
-{
-
-}
-
-//void TableWidgetAlwaysActiveHeaderView::paintEvent(QPaintEvent *e)
+//TableWidgetAlwaysActive::TableWidgetAlwaysActive(QWidget *parent): DTableWidget(parent)
 //{
-//    return DHeaderView::paintEvent(e);
+
 //}
 
-QStyleOptionViewItem TableWidgetAlwaysActiveHeaderView::viewOptions() const
-{
-    auto styleOptViewItem = TableWidgetAlwaysActiveHeaderView::viewOptions();
+//QStyleOptionViewItem TableWidgetAlwaysActive::viewOptions() const
+//{
+//    auto styleOptViewItem = DTableWidget::viewOptions();
+//    styleOptViewItem.state |= QStyle::State_Active;
 
-    QBrush brush;
-    brush.setColor(QColor(255, 255, 255, 255));
-
-    styleOptViewItem.palette.setBrush(QPalette::Background, brush);
-
-    return styleOptViewItem;
-}
-
-TableWidgetAlwaysActive::TableWidgetAlwaysActive(QWidget *parent): DTableWidget(parent)
-{
-
-}
-
-QStyleOptionViewItem TableWidgetAlwaysActive::viewOptions() const
-{
-    auto styleOptViewItem = DTableWidget::viewOptions();
-    styleOptViewItem.state |= QStyle::State_Active;
-
-    return styleOptViewItem;
-}
+//    return styleOptViewItem;
+//}
