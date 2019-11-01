@@ -20,7 +20,7 @@ using PowerInter = com::deepin::daemon::Power;
 
 DCORE_USE_NAMESPACE
 
-static QProcess process_;
+//static QProcess process_;
 
 DeviceInfoParser::DeviceInfoParser(): QObject()
 {
@@ -42,8 +42,11 @@ void DeviceInfoParser::refreshDabase()
     emit loadFinished("Loading SMBBios Info...");
     DeviceInfoParserInstance.loadDemicodeDatabase();
 
-    emit loadFinished("Loading List Hardware Info");
+    emit loadFinished("Loading List Hardware Info...");
     DeviceInfoParserInstance.loadLshwDatabase();
+
+    emit loadFinished("Loading Storage Info...");
+    DeviceInfoParserInstance.loadAllSmartctlDatabase();
 
     emit loadFinished("Loading CPU Info...");
     DeviceInfoParserInstance.loadCatcpuDatabase();
@@ -1510,6 +1513,11 @@ bool DeviceInfoParser::loadLshwDatabase()
     }
 
     toolDatabase_["lshw"] = lshwDatabase_;
+
+    //QString logicalName = DeviceInfoParserInstance.queryData("lshw", disk, "logical name");
+
+    //DeviceInfoParserInstance.loadSmartctlDatabase(logicalName);
+
     return true;
 }
 
@@ -1619,6 +1627,19 @@ bool DeviceInfoParser::loadCatcpuDatabase()
         catcpuDatabase_[cpuName] = DeviceInfoMap;
     }
     toolDatabase_["catcpu"] = catcpuDatabase_;
+    return true;
+}
+
+bool DeviceInfoParser::loadAllSmartctlDatabase()
+{
+    QStringList diskList = DeviceInfoParserInstance.getDisknameList();
+
+    foreach(const QString& disk, diskList)
+    {
+        QString logicalName = DeviceInfoParserInstance.queryData("lshw", disk, "logical name");
+        DeviceInfoParserInstance.loadSmartctlDatabase(logicalName);
+    }
+
     return true;
 }
 
@@ -2563,6 +2584,7 @@ bool DeviceInfoParser::loadCupsDatabase()
 
 bool DeviceInfoParser::getRootPassword()
 {
+
     bool res = runCmd("id -un");  // file path is fixed. So write cmd direct
     if( res == true && standOutput_.trimmed() == "root" )
     {
@@ -2625,6 +2647,7 @@ bool DeviceInfoParser::executeProcess(const QString& cmd)
 
 bool DeviceInfoParser::runCmd(const QString& cmd)
 {
+    QProcess process_;
     process_.start(cmd);
     standOutput_ = process_.readAllStandardOutput();
     bool res = process_.waitForFinished();
@@ -2635,6 +2658,7 @@ bool DeviceInfoParser::runCmd(const QString& cmd)
 
 bool DeviceInfoParser::runCmd(const QStringList& cmdList)
 {
+    QProcess process_;
     process_.start("/bin/bash",cmdList);
     bool res = process_.waitForFinished();
     standOutput_ = process_.readAllStandardOutput();

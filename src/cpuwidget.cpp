@@ -3,6 +3,62 @@
 #include <DApplication>
 #include <QSet>
 
+static int coresNumberArray[] =
+{
+    1,2,4,6,8,
+    10,12,14,16,18,
+    20,22,24,26,28,
+    30,32,34,36,38,
+    40,42,44,46,48,
+    50,52,54,56,58,
+    60,62,64,
+    128
+};
+
+static QString NumberStrinArray[] =
+{
+    "One",
+    "Two",
+    "Four",
+    "Six",
+    "Eight",
+
+    "Ten",
+    "Twelve",
+    "Fourteen",
+    "Sixteen",
+    "Eighteen",
+
+    "Twenty",
+    "Twenty-two",
+    "Twenty-four",
+    "Twenty-six",
+    "Twenty-eight",
+    "Thirty",
+
+    "Thirty-two",
+    "Thirty-four",
+    "Thirty-six",
+    "Thirty-eight",
+    "Fourty",
+
+    "Fourty-two",
+    "Fourty-four",
+    "Fourty-six",
+    "Fourty-eight",
+    "Fifty",
+
+    "Fifty-two",
+    "Fifty-four",
+    "Fifty-six",
+    "Fifty-eight",
+    "Sixty",
+
+    "Sixty-two",
+    "Sixty-four",
+    "One hundred and Twenty-eight",
+};
+
 DWIDGET_USE_NAMESPACE
 
 CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "CPU"))
@@ -91,6 +147,27 @@ void CpuWidget::initWidget()
     int cpus = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU(s)").toInt();
     int threadsPerCore = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Thread(s) per core").toInt();
     QString corePlus = " x " + QString::number(cpus);
+
+    overviewInfo_.value += " ";
+    int i = 0;
+    for( ; i < sizeof(coresNumberArray)/sizeof(int); ++i)
+    {
+        if(coresNumberArray[i] == cpus)
+        {
+            break;
+        }
+    }
+
+    if( i < sizeof(coresNumberArray)/sizeof(int) )
+    {
+        overviewInfo_.value += DApplication::translate("CPU", NumberStrinArray[i].toStdString().data() );
+    }
+    else
+    {
+        overviewInfo_.value += QString::number(cpus);
+    }
+
+    overviewInfo_.value += DApplication::translate("CPU", " Core(s)");
 
     QStringList contents = {
         overviewInfo_.value,

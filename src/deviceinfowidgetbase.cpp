@@ -143,14 +143,14 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
     for(int i = 0; i < names.size(); ++i)
     {
         QLabel* nameLabel = new DLabel( DApplication::translate("Main", names.at(i).toStdString().data() ) + ":", downWidget_);
-        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         nameLabel->setMinimumWidth(NameLength_);
         nameLabel->setFont(font);
         //nameLabel->setMinimumHeight(SubRowHeight_);
         //nameLabel->setReadOnly(true);
 
         QLabel* contentLabel = new DLabel(contents.at(i), downWidget_);
-        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         contentLabel->setWordWrap(true);
         contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
         //contentLabel->setMinimumHeight(SubRowHeight_);
@@ -187,7 +187,7 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
         }
 
         QLabel* nameLabel = new DLabel( DApplication::translate("Main", article.name.toStdString().data()) + ":", downWidget_ );
-        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
         nameLabel->setMinimumWidth(NameLength_);
         //nameLabel->setMinimumHeight(SubRowHeight_);
@@ -196,7 +196,7 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
         QLabel* contentLabel = new DLabel( article.valueTranslate ? \
                                            DApplication::translate("Main", article.value.toStdString().data()): \
                                            article.value, downWidget_ );
-        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         if(article.externalLinks)
         {
             contentLabel->setOpenExternalLinks(true);
@@ -617,7 +617,7 @@ void DeviceInfoWidgetBase::initDownWidget()
     downWidgetScrollArea_->setWidget(downWidget_);
     //downWidget_->setSizePolicy(QSizePolicy::Minimum);
     //downWidgetScrollArea_->setFixedHeight(100);
-    downWidgetScrollArea_->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
+    //downWidgetScrollArea_->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
     //downWidgetScrollArea_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
     vLayout_->insertWidget( vLayout_->count(), downWidgetScrollArea_);
 }
@@ -743,6 +743,30 @@ bool DeviceInfoWidgetBase::onExportToFile()
    return mainWindow->exportTo(exportFile, selectFilter);
 }
 
+QString getOsInfoWithoutHtml(const QString& str )
+{
+    int index = str.indexOf("href=\"");
+    QString href;
+    QString osName;
+    QString osOther =  str;
+    if(index > 0)
+    {
+        int index_maohao = str.indexOf("\">", index);
+        if(index_maohao  > index )
+        {
+            href = str.mid( index+5, index_maohao - index - 5);
+            int index_last_a = str.indexOf("</a>", index);
+            if(index_last_a > index_maohao)
+            {
+                osName = str.mid(index_maohao + 2, index_last_a - index_maohao -2);
+                osOther = str.mid(index_last_a + 4).trimmed();
+            }
+        }
+    }
+
+    return osName + "(" + href + ")" + " " + osOther;
+}
+
 QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
 {
     if(di.title)
@@ -757,7 +781,14 @@ QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
         ds << di.nameLabels[i]->text();
         ds.setFieldWidth(0);
-        ds << di.contentLabels[i]->text()<< "\n";
+        if( di.contentLabels[i]->openExternalLinks() )
+        {
+            ds << getOsInfoWithoutHtml(di.contentLabels[i]->text()) << "\n";
+        }
+        else
+        {
+            ds << di.contentLabels[i]->text()<< "\n";
+        }
     }
 
     return ds;
@@ -807,6 +838,7 @@ QTextStream& operator<<(QTextStream& ds, DTableWidget* tableWidget)
 bool DeviceInfoWidgetBase::exportToTxt(QFile& txtFile)
 {
     QTextStream out(&txtFile);
+
     out <<  "[" << overviewInfo_.name << "]\n-------------------------------------------------";
 
     if(tableWidget_)
@@ -891,7 +923,16 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
     for(int i = 0; i < di.nameLabels.size(); ++i)
     {
         QString name = di.nameLabels[i]->text();
-        QString content = di.contentLabels[i]->text();
+        QString content;
+        if( di.contentLabels[i]->openExternalLinks() )
+        {
+            content = getOsInfoWithoutHtml(di.contentLabels[i]->text());
+        }
+        else
+        {
+            content = di.contentLabels[i]->text();
+        }
+
         QString line;
         if(name.trimmed().isEmpty() == false || false == content.trimmed().isEmpty())
         {
@@ -992,7 +1033,14 @@ bool writeDeviceInfoToXls(const DeviceInfo& di, QXlsx::Document& xlsx)
     for(int i = 0; i < di.nameLabels.size(); ++i)
     {
         xlsx.write(currentXlsRow_, 1, di.nameLabels[i]->text());
-        xlsx.write(currentXlsRow_++, 2, di.contentLabels[i]->text());
+        if( di.contentLabels[i]->openExternalLinks() )
+        {
+            xlsx.write(currentXlsRow_++, 2, getOsInfoWithoutHtml(di.contentLabels[i]->text()) );
+        }
+        else
+        {
+            xlsx.write(currentXlsRow_++, 2, di.contentLabels[i]->text());
+        }
     }
 
     ++currentXlsRow_;
@@ -1089,7 +1137,15 @@ bool writeDeviceInfoToHtml(const DeviceInfo& di, QFile& html)
     {
         html.write("<tr>\n");
         html.write( QString("<td style=\"width:200px;text-align:left;white-space:pre;\">" + di.nameLabels[i]->text() + "</td>").toUtf8().data() );
-        html.write( QString( "<td>" + di.contentLabels[i]->text() + "</td>\n").toUtf8().data() );
+        if( di.contentLabels[i]->openExternalLinks() )
+        {
+            html.write( QString( "<td>" + getOsInfoWithoutHtml(di.contentLabels[i]->text()) + "</td>\n").toUtf8().data() );
+        }
+        else
+        {
+            html.write( QString( "<td>" + di.contentLabels[i]->text() + "</td>\n").toUtf8().data() );
+        }
+
         html.write("</tr>\n");
     }
     html.write("</table>\n");

@@ -20,7 +20,6 @@ Q_DECLARE_METATYPE(QMargins)
 DeviceListviewDelegate::DeviceListviewDelegate(QAbstractItemView *parent)
     : DStyledItemDelegate(parent)
 {
-
 }
 
 void DeviceListviewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -138,6 +137,8 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), SLOT(OnlvOpRightBtn(const QPoint&)));
 
     setItemSpacing(0);
+
+    setIconSize( QSize(32, 32) );
 }
 
 void DeviceListView::addDevice(const QString& deviceName, const QString& iconFile)
@@ -149,7 +150,7 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
 
     item->setFont(itemFont);
 
-    item->setSizeHint( QSize(20, 37) );
+    item->setSizeHint( QSize(20, 40) );
 
     DGuiApplicationHelper::ColorType ct = DApplicationHelper::instance()->themeType();
 

@@ -1,15 +1,13 @@
 #pragma once
 
-#include <QWidget>
 #include <QList>
 #include "DTableWidget"
 #include "DScrollArea"
 #include "DMenu"
 #include "DLabel"
 #include "deviceattributedefine.h"
-
-#include "document.h"
 #include "xlsxdocument.h"
+#include "document.h"
 
 class QLabel;
 class QVBoxLayout;

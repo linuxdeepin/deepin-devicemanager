@@ -41,7 +41,7 @@ QList<ArticleStruct> staticArticles;
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
-    setMinimumSize(900, 730);
+    setMinimumSize(940, 780);
     DeviceInfoParserInstance.getRootPassword();
 
     initLoadingWidget();
@@ -105,7 +105,7 @@ void MainWindow::loadDeviceWidget()
 
     leftDeviceView_ = new DeviceListView(this);
     leftDeviceView_->setMaximumWidth(220);
-    leftDeviceView_->setMinimumWidth(175);
+    leftDeviceView_->setMinimumWidth(180);
 
     DApplication::processEvents();
 
@@ -196,6 +196,7 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new MonitorWidget(this), "monitor.svg");
     addDeviceWidget(new NetworkadapterWidget(this), "networkadapter.svg");
     addDeviceWidget(new AudiodeviceWidget(this), "audiodevice.svg");
+    addDeviceWidget(new BluetoothWidget(this), "bluetooth.svg");
     addDeviceWidget(new PowerWidget(this), "battery.svg");
 
     if(firstAdd_ == true)
@@ -205,7 +206,6 @@ void MainWindow::addAllDeviceinfoWidget()
 
     addDeviceWidget(new KeyboardWidget(this), "keyboard.svg");
     addDeviceWidget(new MouseWidget(this), "mouse.svg");
-    addDeviceWidget(new BluetoothWidget(this), "bluetooth.svg");
     addDeviceWidget(new PrinterWidget(this), "printer.svg");
     addDeviceWidget(new CameraWidget(this), "camera.svg");
     addDeviceWidget(new UsbdeviceWidget(this), "usbdevice.svg");

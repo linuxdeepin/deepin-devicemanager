@@ -57,7 +57,7 @@
         </message>
         <message>
             <source>Monitor</source>
-            <translation>显示器</translation>
+            <translation>显示设备</translation>
         </message>
         <message>
             <source>AudioAdapter</source>
@@ -924,8 +924,12 @@
             <translation>获取SMBBios信息...</translation>
         </message>
         <message>
-            <source>Loading List Hardware Info</source>
+            <source>Loading List Hardware Info...</source>
             <translation>获取硬件列表信息...</translation>
+        </message>
+        <message>
+            <source>Loading Storage Info...</source>
+            <translation>获取存储信息...</translation>
         </message>
         <message>
             <source>Loading CPU Info...</source>
@@ -1485,6 +1489,182 @@
         <message>
             <source>Speed</source>
             <translation>频率</translation>
+        </message>
+        <message>
+            <source> Core(s)</source>
+            <translation>核</translation>
+        </message>
+        <message>
+            <source>One</source>
+            <translation>单</translation>
+        </message>
+        <message>
+            <source>Two</source>
+            <translation>双</translation>
+        </message>
+        <message>
+            <source>Four</source>
+            <translation>四</translation>
+        </message>
+        <message>
+            <source>Six</source>
+            <translation>六</translation>
+        </message>
+        <message>
+            <source>Eight</source>
+            <translation>八</translation>
+        </message>
+        <message>
+            <source>Ten</source>
+            <translation>十</translation>
+        </message>
+        <message>
+            <source>Twelve</source>
+            <translation>十二</translation>
+        </message>
+        <message>
+            <source>Fourteen</source>
+            <translation>十四</translation>
+        </message>
+        <message>
+            <source>Sixteen</source>
+            <translation>十六</translation>
+        </message>
+        <message>
+            <source>Eighteen</source>
+            <translation>十八</translation>
+        </message>
+        <message>
+            <source>Twenty</source>
+            <translation>二十</translation>
+        </message>
+        <message>
+            <source>Twenty-two</source>
+            <translation>二十二</translation>
+        </message>
+        <message>
+            <source>Twenty-four</source>
+            <translation>二十四</translation>
+        </message>
+        <message>
+            <source>Twenty-six</source>
+            <translation>二十六</translation>
+        </message>
+        <message>
+            <source>Twenty-eight</source>
+            <translation>二十八</translation>
+        </message>
+        <message>
+            <source>Thirty</source>
+            <translation>三十</translation>
+        </message>
+        <message>
+            <source>Thirty-two</source>
+            <translation>三十二</translation>
+        </message>
+        <message>
+            <source>Thirty-four</source>
+            <translation>三十四</translation>
+        </message>
+        <message>
+            <source>Thirty-six</source>
+            <translation>三十六</translation>
+        </message>
+        <message>
+            <source>Thirty-eight</source>
+            <translation>三十八</translation>
+        </message>
+        <message>
+            <source>Fourty</source>
+            <translation>四十</translation>
+        </message>
+        <message>
+            <source>Fourty-two</source>
+            <translation>四十二</translation>
+        </message>
+        <message>
+            <source>Fourty-four</source>
+            <translation>四十四</translation>
+        </message>
+        <message>
+            <source>Fourty-six</source>
+            <translation>四十六</translation>
+        </message>
+        <message>
+            <source>Fourty-eight</source>
+            <translation>四十八</translation>
+        </message>
+        <message>
+            <source>Fifty</source>
+            <translation>五十</translation>
+        </message>
+        <message>
+            <source>Fifty-two</source>
+            <translation>五十二</translation>
+        </message>
+        <message>
+            <source>Fifty-four</source>
+            <translation>五十四</translation>
+        </message>
+        <message>
+            <source>Fifty-six</source>
+            <translation>五十六</translation>
+        </message>
+        <message>
+            <source>Fifty-eight</source>
+            <translation>五十八</translation>
+        </message>
+        <message>
+            <source>Sixty</source>
+            <translation>六十</translation>
+        </message>
+        <message>
+            <source>Sixty-two</source>
+            <translation>六十二</translation>
+        </message>
+        <message>
+            <source>Sixty-four</source>
+            <translation>六十四</translation>
+        </message>
+        <message>
+            <source>One hundred and Twenty-eight</source>
+            <translation>一百二十八</translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
         </message>
     </context>
     <context>

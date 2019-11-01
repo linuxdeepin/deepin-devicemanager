@@ -28,7 +28,7 @@ void MemoryWidget::initTableWdiget()
 //    }
 
     canUpgrade_ = false;
-    QStringList headers = { "Bank", "Type", "Speed",  "Size",  "Statu"};
+    QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size",  "Statu"};
 
     QList<QStringList> tabList;
 
@@ -42,8 +42,8 @@ void MemoryWidget::initTableWdiget()
 
         QStringList tab = {
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
-
-            DeviceInfoParserInstance.queryData("dmidecode", mem, "Type"),
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Manufacturer"),
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Type") + " " +
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed"),
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Size"),
 

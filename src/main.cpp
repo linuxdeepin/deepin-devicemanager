@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <DApplication>
 #include <DWidgetUtil>
-#include "version.h"
+//#include "version.h"
 #include <DLog>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("dde-devicemanager");
     app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
 
-    app.setApplicationVersion(VERSION);
+    //app.setApplicationVersion(VERSION);
     app.setProductIcon(QIcon(":images/cpu.svg"));
     app.setWindowIcon(QIcon(":images/cpu.svg"));
     app.setProductName(DApplication::translate("Main", "Device Manager"));

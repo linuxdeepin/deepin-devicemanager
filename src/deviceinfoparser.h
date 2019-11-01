@@ -136,6 +136,8 @@ public:
     // cat proc/cpu
     bool loadCatcpuDatabase();
     // smartctl www.smartmontools.org get disk info
+    bool loadAllSmartctlDatabase();
+
     bool loadSmartctlDatabase(const QString& diskLogical);
     // cat /proc/bus/input/devices
     bool loadCatInputDatabase();

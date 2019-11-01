@@ -928,7 +928,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Loading List Hardware Info</source>
+            <source>Loading List Hardware Info...</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -1518,6 +1518,207 @@
             <source>Speed</source>
             <translation type="unfinished"/>
         </message>
+        <message>
+            <source>Cores(s)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>One</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Two</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Four</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Six</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Eight</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Ten</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Twelve</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fourteen</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Sixteen</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Eighteen</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Twenty</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Twenty-two</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Twenty-four</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Twenty-six</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Twenty-eight</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Thirty</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Thirty-two</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Thirty-four</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Thirty-six</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Thirty-eight</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fourty</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fourty-two</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fourty-four</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fourty-six</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fourty-eight</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fifty</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fifty-two</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fifty-four</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fifty-six</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Fifty-eight</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Sixty</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Sixty-two</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Sixty-four</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>One hundred and Twenty-eight</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+
     </context>
     <context>
         <name>Disk</name>

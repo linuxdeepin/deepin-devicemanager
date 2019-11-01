@@ -26,7 +26,8 @@ void DiskWidget::initWidget()
     foreach(const QString& disk, diskList)
     {
         QString logicalName = DeviceInfoParserInstance.queryData("lshw", disk, "logical name");
-        DeviceInfoParserInstance.loadSmartctlDatabase(logicalName);
+
+//        DeviceInfoParserInstance.loadSmartctlDatabase(logicalName);
 
         QString modelStr = DeviceInfoParserInstance.queryData("lshw", disk, "product");
         QString vendorStr = DeviceInfoParserInstance.queryData("lshw", disk, "vendor");
@@ -181,7 +182,12 @@ void DiskWidget::initWidget()
 
         if( i == 0)
         {
-            overviewInfo_.value = model.value;
+            if(model.value.contains(vendor.value) == false)
+            {
+                overviewInfo_.value = vendor.value + " ";
+            }
+
+            overviewInfo_.value += model.value;
             overviewInfo_.value += " (";
             QString diskSize = size.value;
             QRegExp reg("^[\\s\\S]*\\(([\\s\\S]+)\\)$");
