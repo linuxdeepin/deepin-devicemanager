@@ -40,6 +40,43 @@ static const int SubRowHeight_ = 40;
 static const int WidgetWidth = 640;
 static const int WidgetHeight = 740;
 
+
+ColumnWidget::ColumnWidget(DWidget* parent):DWidget(parent)
+{
+    setAutoFillBackground(true);
+    QHBoxLayout* hly = new QHBoxLayout;
+    setLayout(hly);
+
+    l1 = new DLabel("l1", this);
+    l1->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    l1->installEventFilter( this );
+    //l1->setAttribute(Qt::WA_TransparentForMouseEvents);
+    l2 = new DLabel("l2", this);
+    l2->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    l2->setAttribute(Qt::WA_TransparentForMouseEvents);
+    //l2->installEventFilter( this );
+
+    hly->addWidget(l1);
+    hly->addWidget(l2);
+}
+
+void ColumnWidget::mousePressEvent(QMouseEvent *event)
+{
+    DPalette pa = DApplicationHelper::instance()->palette(this);
+
+    QBrush brush(pa.highlight());
+    //QPalette pa( palette() );
+    //pa.setColor(QPalette::Foreground, QColor(0,0,0,255));
+    //pa.setColor(QPalette::Button, QColor(0,0,0,255));
+    pa.setBrush(QPalette::Background, brush);
+
+
+    //QApplication::setPalette()
+    setPalette(pa);
+    DWidget::mousePressEvent(event);
+    //setStyleSheet("background-color: black");
+}
+
 DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& deviceName) : DWidget(parent_)
 {
     //setStyleSheet("QWidget{border-top-left-radius:15px;border-top-right-radius:5px;}");
@@ -140,21 +177,31 @@ void DeviceInfoWidgetBase::initContextMenu()
 
 void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents, const QFont& font)
 {
+    ly->setSpacing(0);
+    ly->setContentsMargins(0,0,0,0);
+
     for(int i = 0; i < names.size(); ++i)
     {
-        QLabel* nameLabel = new DLabel( DApplication::translate("Main", names.at(i).toStdString().data() ) + ":", downWidget_);
-        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        //ColumnWidget cw(this);
+
+
+        DLabel* nameLabel = new DLabel( DApplication::translate("Main", names.at(i).toStdString().data() ) + ":", downWidget_);
+        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         nameLabel->setMinimumWidth(NameLength_);
         nameLabel->setFont(font);
+        //nameLabel->setStyleSheet("QLabel { background-color : red; color : blue; }");
         //nameLabel->setMinimumHeight(SubRowHeight_);
         //nameLabel->setReadOnly(true);
 
-        QLabel* contentLabel = new DLabel(contents.at(i), downWidget_);
-        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+
+        DLabel* contentLabel = new DLabel(contents.at(i), downWidget_);
+        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         contentLabel->setWordWrap(true);
         contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
         //contentLabel->setMinimumHeight(SubRowHeight_);
         contentLabel->setFont(font);
+        //contentLabel->setSelection(0, contents.at(i).size());
+        //contentLabel->setStyleSheet("QLabel { background-color : red; color : blue; }");
 
         //QSizePolicy::Policy policy = QSizePolicy::Minimum;
         //contentLabel->setSizePolicy( policy );
@@ -168,12 +215,19 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
         di->nameLabels.push_back(nameLabel);
         di->contentLabels.push_back(contentLabel);
         //contentLabel->adjustSize();
+
+//        QHBoxLayout* hly = new QHBoxLayout;
+//        hly->addWidget(contentLabel, Qt::AlignLeft);
+//        hly->addStretch(1);
         ly->addWidget(nameLabel, i, 0, Qt::AlignTop);
+//        ly->addLayout(hly, i, 1, Qt::AlignTop);
         ly->addWidget(contentLabel, i, 1, Qt::AlignTop);
         //gridLayout->setRowMinimumHeight(i, RowHeight_);
         //nameLabel->setFixedHeight(contentLabel->height());
         //increaseHeight+= contentLabel->height();
     }
+
+    //ly->setRowStretch(2, 1);
 }
 
 void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font)
@@ -186,17 +240,17 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
             continue;
         }
 
-        QLabel* nameLabel = new DLabel( DApplication::translate("Main", article.name.toStdString().data()) + ":", downWidget_ );
-        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        DLabel* nameLabel = new DLabel( DApplication::translate("Main", article.name.toStdString().data()) + ":", downWidget_ );
+        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
         nameLabel->setMinimumWidth(NameLength_);
         //nameLabel->setMinimumHeight(SubRowHeight_);
         nameLabel->setFont(font);
 
-        QLabel* contentLabel = new DLabel( article.valueTranslate ? \
+        DLabel* contentLabel = new DLabel( article.valueTranslate ? \
                                            DApplication::translate("Main", article.value.toStdString().data()): \
                                            article.value, downWidget_ );
-        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         if(article.externalLinks)
         {
             contentLabel->setOpenExternalLinks(true);
@@ -505,6 +559,10 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
             DApplicationHelper::instance()->setPalette(tableWidget_, pa);
             DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
 
+            //pa.setBrush(QPalette::Highlight, bash_brush);
+
+            //tableWidget_->setPalette(pa);
+
             //tableWidget_->horizontalHeader()->setAutoFillBackground(true);
 
 //            for(int itemIndex = 0; itemIndex < tableWidget_->horizontalHeader()->count(); ++itemIndex)
@@ -522,7 +580,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
 
         tableWidget_->horizontalHeader()->setContentsMargins(0,0,0,0);
-        //tableWidget_->horizontalHeader()->setHighlightSections(false);
+        tableWidget_->horizontalHeader()->setHighlightSections(false);
         //tableWidget_->horizontalHeader()->setFrameShape(QFrame::Shape::NoFrame);
         //tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
 //        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
@@ -545,7 +603,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         tableWidget_->setShowGrid(false);
 
         tableWidget_->setAlternatingRowColors(true);
-        //tableWidget_->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidget_->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
         tableWidget_->setFrameShape(QFrame::Shape::NoFrame);
 
@@ -569,6 +627,8 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         for(int j = 0; j < contents.size(); ++j )
         {
             QTableWidgetItem* item = new QTableWidgetItem(contents[j]);
+            int flags = item->flags();
+            //item->setFlags(flags | Qt::ItemFlag::ItemIsEditable);
             item->setFont(tableContentFont_);
             tableWidget_->setItem(i, j, item);
         }
@@ -576,9 +636,9 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
     //tableWidget_->clearSpans();
 
-    //tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
+    tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
     tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    //tableWidget_->resizeColumnsToContents();
+    tableWidget_->resizeColumnToContents(0);
     //tableWidget_->resizeRowsToContents();
 }
 

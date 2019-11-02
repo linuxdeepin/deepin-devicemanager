@@ -1101,7 +1101,11 @@
         </message>
         <message>
             <source>Core</source>
-            <translation>内核</translation>
+            <translation>核心</translation>
+        </message>
+        <message>
+            <source>Core ID</source>
+            <translation>核心ID</translation>
         </message>
         <message>
             <source>Cancel</source>
@@ -1340,8 +1344,8 @@
             <translation>希捷</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>GenuineIntel</source>
+            <translation>因特尔</translation>
         </message>
         <message>
             <source></source>

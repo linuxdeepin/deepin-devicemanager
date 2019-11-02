@@ -52,6 +52,7 @@ void MotherboardWidget::initWidget()
     overviewInfo_.value =  model.value + " " + chipsetFamily.value;
 
     overviewInfo_.value.remove( vendor.value, Qt::CaseInsensitive);
+    overviewInfo_.value.remove( " Company" );
     overviewInfo_.value = vendor.value + " " + overviewInfo_.value;
 
     ArticleStruct serial("Serial Number");

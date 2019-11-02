@@ -22,6 +22,9 @@ void DisplayadapterWidget::initWidget()
 
     for(int i =0; i < displayadapterList.size(); ++i )
     {
+        articles.clear();
+        existArticles.clear();
+
         QString displayadapter = displayadapterList[i];
         QString pci_bus = DeviceInfoParserInstance.queryData("lshw", displayadapter, "bus info");
         QRegExp reg("^pci@[0-9]*:([\\s\\S]*)$");
@@ -100,7 +103,13 @@ void DisplayadapterWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", displayadapter, articles, existArticles);
 
-        addSubInfo( "", articles);
+        QString dpName = "";
+        if( displayadapterList.size() > 1 )
+        {
+            dpName = name.value;
+        }
+
+        addSubInfo( dpName, articles);
 
         QStringList tab =
         {
@@ -110,21 +119,23 @@ void DisplayadapterWidget::initWidget()
 
         tabList.push_back(tab);
 
-        if( overviewInfo_.value.isEmpty() == true)
+        if( overviewInfo_.value.isEmpty() == false)
         {
-            overviewInfo_.value = name.value;
-
-            overviewInfo_.value += " (";
-            overviewInfo_.value += memory.value;
-
-            if(DApplication::translate("Main", "Unknown") != vendor.value)
-            {
-                overviewInfo_.value += " / ";
-                overviewInfo_.value += vendor.value;
-            }
-
-            overviewInfo_.value += ")";
+            overviewInfo_.value += " / ";
         }
+
+        overviewInfo_.value += name.value.remove(vendor.value);
+
+        overviewInfo_.value += " (";
+        overviewInfo_.value += memory.value;
+
+        if(DApplication::translate("Main", "Unknown") != vendor.value)
+        {
+            overviewInfo_.value += " / ";
+            overviewInfo_.value += vendor.value;
+        }
+
+        overviewInfo_.value += ")";
     }
 
     if(displayadapterList.size() > 1)

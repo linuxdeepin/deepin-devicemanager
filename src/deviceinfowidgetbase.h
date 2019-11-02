@@ -27,6 +27,17 @@ struct DeviceInfo
     QList<Dtk::Widget::DLabel*>  contentLabels;
 };
 
+class ColumnWidget: public Dtk::Widget::DWidget
+{
+private:
+    Dtk::Widget::DLabel* l1;
+    Dtk::Widget::DLabel* l2;
+
+public:
+    ColumnWidget(Dtk::Widget::DWidget* parent = nullptr);
+    void mousePressEvent(QMouseEvent *event) override;
+};
+
 class DeviceInfoWidgetBase : public Dtk::Widget::DWidget
 {
     Q_OBJECT

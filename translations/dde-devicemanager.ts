@@ -92,6 +92,10 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>Core ID</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>Threads</source>
             <translation type="unfinished"/>
         </message>
@@ -1344,7 +1348,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>GenuineIntel</source>
             <translation type="unfinished"/>
         </message>
         <message>

@@ -34,6 +34,8 @@ DeviceInfoParser::~DeviceInfoParser()
 
 void DeviceInfoParser::refreshDabase()
 {
+    toolDatabase_.clear();
+
     emit loadFinished("Loading Operating System Info...");
     DeviceInfoParserInstance.loadCatosrelelease();
     DeviceInfoParserInstance.loadlsb_release();
@@ -2136,6 +2138,8 @@ bool DeviceInfoParser::loadUpowerDatabase()
     return true;
 }
 
+//  http://pci-ids.ucw.cz/read/PD/
+//  /usr/share/misc/pci.ids
 bool DeviceInfoParser::loadLspciDatabase()
 {
     if( false == executeProcess("sudo lspci -v"))

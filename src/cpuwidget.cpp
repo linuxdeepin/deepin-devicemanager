@@ -118,14 +118,14 @@ void CpuWidget::initWidget()
     {
         speed_ += " (";
         speed_ += QString::number(minMHz);
-        speed_ += "GHz - ";
+        speed_ += " - ";
         speed_ += QString::number(maxMHz);
         speed_ += "GHz)";
     }
 
     if(cpuList.size() > 1)
     {
-        QStringList headers = { "Name", "Core", /*"Vendor",*/ DApplication::translate("CPU", "Speed"), "Architecture" };
+        QStringList headers = { "Name", "Core ID", /*"Vendor",*/ DApplication::translate("CPU", "Speed"), "Architecture" };
         QList<QStringList> tabList;
 
         foreach(const QString& cpu, cpuList)

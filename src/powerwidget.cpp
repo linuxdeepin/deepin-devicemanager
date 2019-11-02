@@ -46,12 +46,12 @@ void PowerWidget::initWidget()
 
         ArticleStruct name("Name");
         ArticleStruct vendor("Vendor");
+        ArticleStruct device("Device");
 
         if(i < switchingUpowerList.size())
         {
             existArticles.clear();
 
-            ArticleStruct device("Device");
             device.value = switchingUpowerList[i];
             articles.push_back(device);
 
@@ -133,7 +133,7 @@ void PowerWidget::initWidget()
 
         if(i < switchingUpowerList.size())
         {
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", name.value, articles, existArticles);
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", device.value, articles, existArticles);
         }
 
         if(i < switchingpowerList.size())
