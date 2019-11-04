@@ -22,10 +22,6 @@ void MemoryWidget::initTableWdiget()
 {
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
 
-//    if( memList.size() < 2 )
-//    {
-//        return;
-//    }
 
     canUpgrade_ = false;
     QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size",  "Statu"};
@@ -38,6 +34,16 @@ void MemoryWidget::initTableWdiget()
         if( size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
         {
             canUpgrade_ = true;
+            QStringList tab = {
+                DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
+                "--",
+                "--",
+                "--",
+                DApplication::translate("Main", "Bad")
+            };
+
+            tabList.push_back(tab);
+            continue;
         }
 
         QStringList tab = {
@@ -47,8 +53,7 @@ void MemoryWidget::initTableWdiget()
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed"),
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Size"),
 
-            (  size == DApplication::translate("Main", "Unknown")    \
-                || size ==  "No Module Installed" ) ? DApplication::translate("Main", "Bad"):DApplication::translate("Main", "Good")
+            DApplication::translate("Main", "Good")
         };
 
         tabList.push_back(tab);
@@ -59,27 +64,32 @@ void MemoryWidget::initTableWdiget()
 
 void MemoryWidget::updateWholeDownWidget()
 {
-    //setTitle(DApplication::translate("Main", "Memory")  + DApplication::translate("Main", " Info"));
-
-    QStringList names = {   "Slot Count",
-                            "Size",
-                            "Maximum Capacity",
-                            "Upgradeable"
-                        };
-
     QString memSize = DeviceInfoParserInstance.queryData("lshw", "Computer_core_memory", "size");
     memSize.replace( "GiB", " GB" );
 
-    QStringList contents = {
-        DeviceInfoParserInstance.queryData("dmidecode", "Physical Memory Array", "Number Of Devices"),
-        memSize,
-        DeviceInfoParserInstance.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity"),
-        canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No")
-    };
 
-    addInfo("Memory Info", names, contents);
 
     QList<ArticleStruct> articles;
+
+    ArticleStruct slotCount("Slot Count");
+    slotCount.queryData("dmidecode", "Physical Memory Array", "Number Of Devices");
+    articles.push_back(slotCount);
+
+    ArticleStruct size("Size");
+    size.value = memSize;
+    articles.push_back(size);
+
+    ArticleStruct mc("Maximum Capacity");
+    mc.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity");
+    articles.push_back(mc);
+
+    ArticleStruct ug("Upgradeable");
+    ug.value = canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No");
+    articles.push_back(ug);
+
+    addInfo("Memory Info", articles);
+
+    articles.clear();
     QSet<QString> existArticles;
 
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();

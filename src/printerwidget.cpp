@@ -41,7 +41,18 @@ void PrinterWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo( "Cups", device, articles, existArticles);
 
-        addSubInfo( device, articles);
+        addDevice( device, articles, printerList.size() );
+
+        if( printerList.size() > 1 )
+        {
+            QStringList tab =
+            {
+                printerInfo.value,
+                printerMakeAndModel.value
+            };
+
+            tabList.push_back(tab);
+        }
 
         if(overviewInfo_.value.isEmpty() )
         {
@@ -51,7 +62,12 @@ void PrinterWidget::initWidget()
                 overviewInfo_.value += " ";
                 overviewInfo_.value += printerInfo.value;
             }
-
         }
+    }
+
+    if( printerList.size() > 1 )
+    {
+        QStringList headers = { "printer-info", "printer-make-and-model" };
+        addTable( headers, tabList);
     }
 }

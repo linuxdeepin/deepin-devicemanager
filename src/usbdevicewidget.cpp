@@ -81,7 +81,7 @@ void UsbdeviceWidget::initWidget()
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
         QString title = (name.value.isEmpty() == false && name.value != DApplication::translate("Main", "Unknown"))? name.value: description.value;
-        addSubInfo( title, articles );
+        addDevice( title, articles, usbdeviceList.size() );
 
         QStringList tab =
         {

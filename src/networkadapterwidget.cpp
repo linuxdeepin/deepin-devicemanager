@@ -30,11 +30,6 @@ void NetworkadapterWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct description("Description");
-        description.queryData( "lshw", networkadapter, "description");
-        articles.push_back(description);
-        existArticles.insert("Description");
-
         ArticleStruct name("Name");
         name.queryData( "lshw", networkadapter, "product");
         articles.push_back(name);
@@ -44,6 +39,11 @@ void NetworkadapterWidget::initWidget()
         vendor.queryData( "lshw", networkadapter, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
+
+        ArticleStruct description("Description");
+        description.queryData( "lshw", networkadapter, "description");
+        articles.push_back(description);
+        existArticles.insert("Description");
 
         ArticleStruct version("Version");
         version.queryData( "lshw", networkadapter, "version");
@@ -86,7 +86,7 @@ void NetworkadapterWidget::initWidget()
         existArticles.insert("capabilities");
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", networkadapter, articles, existArticles);
-        addSubInfo( name.value , articles );
+        addDevice( name.value , articles, networkadapterList.size() );
 
         if( networkadapterList.size() > 1 )
         {

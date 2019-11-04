@@ -59,12 +59,29 @@ MainWindow::~MainWindow()
 
 void MainWindow::initLoadingWidget()
 {
+    //setAutoFillBackground(false);
+
     loadingWidget_ = new DWidget;
+
+    //loadingWidget_->setAutoFillBackground(true);
+
+    DPalette pa = DApplicationHelper::instance()->palette(this);
+    QColor base_color = palette().base().color();
+
+    pa.setColor(QPalette::Background, base_color);
+    //pa.setBrush(DPalette::ItemBackground, base_color);
+
+    //setPalette(pa);
+
+    DApplicationHelper::instance()->setPalette(loadingWidget_, pa);
+
     //mainWidget->setAutoFillBackground(true);
     //mainWidget_->setMinimumWidth(640);
     //mainWidget_->setMinimumHeight(640);
 
     QVBoxLayout* vly = new QVBoxLayout;
+
+    vly->setMargin(20);
 
     vly->addStretch(2);
     auto spinner_ = new DSpinner(loadingWidget_);

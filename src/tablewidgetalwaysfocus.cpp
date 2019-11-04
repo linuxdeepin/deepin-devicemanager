@@ -3,7 +3,7 @@
 #include <QStyledItemDelegate>
 #include <qdrawutil.h>
 
-//DWIDGET_USE_NAMESPACE
+DWIDGET_USE_NAMESPACE
 
 ////TableWidgetAlwaysActiveHeaderViewDelegate::TableWidgetAlwaysActiveHeaderViewDelegate(QAbstractItemView *parent)
 ////    : DStyledItemDelegate(parent)
@@ -43,15 +43,15 @@
 //    return styleOptViewItem;
 //}
 
-//TableWidgetAlwaysActive::TableWidgetAlwaysActive(QWidget *parent): DTableWidget(parent)
-//{
+TableWidgetAlwaysActive::TableWidgetAlwaysActive(QWidget *parent): DTableWidget(parent)
+{
 
-//}
+}
 
-//QStyleOptionViewItem TableWidgetAlwaysActive::viewOptions() const
-//{
-//    auto styleOptViewItem = DTableWidget::viewOptions();
-//    styleOptViewItem.state |= QStyle::State_Active;
+QStyleOptionViewItem TableWidgetAlwaysActive::viewOptions() const
+{
+    auto styleOptViewItem = DTableWidget::viewOptions();
+    styleOptViewItem.state |= QStyle::State_Active;
 
-//    return styleOptViewItem;
-//}
+    return styleOptViewItem;
+}

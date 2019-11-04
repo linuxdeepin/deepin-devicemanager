@@ -149,7 +149,7 @@ void PowerWidget::initWidget()
             DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideSwitchingpower, articles, existArticles);
         }
 
-        addSubInfo( "Switching Power", articles );
+        addDevice( "Switching Power", articles, switchingpowerList.size() + batteryList.size(), true );
 
         if( switchingpowerList.size() + batteryList.size() > 1 )
         {
@@ -326,7 +326,7 @@ void PowerWidget::initWidget()
 
         QString d_name = device.value;
 
-        if( switchingpowerList.size() + batteryList.size() > 1 )
+        if( maxSwitchingSize + maxBatterySize > 1 )
         {
             if(device.isValid() == false)
             {
@@ -370,12 +370,12 @@ void PowerWidget::initWidget()
             overName += device.value;
         }
 
-        addSubInfo( DApplication::translate("Main", "Battery") + " " + overName, articles );
+        addDevice( DApplication::translate("Main", "Battery") + " " + overName, articles, maxSwitchingSize + maxBatterySize, true );
 
         overviewInfo_.value += DApplication::translate("Main", "Battery") + " " + overName;
     }
 
-    if( switchingpowerList.size() + batteryList.size() > 1 )
+    if( maxSwitchingSize + maxBatterySize > 1 )
     {
         QStringList headers = { "Type", "Name", "Vendor" };
         addTable( headers, tabList);

@@ -51,12 +51,12 @@ public:
     void initContextMenu();
 
     // version1.0
-    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents, const QFont& font);
-    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font);
+    //void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents, const QFont& font);
+    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font , const QPalette& pa);
 
     void setCentralInfo(const QString& info);
     //void setTitle(const QString& title);
-    void addInfo(const QString& title, const QStringList& names, const QStringList& contents);
+    //void addInfo(const QString& title, const QStringList& names, const QStringList& contents);
     void addInfo(const QString& title, const QList<ArticleStruct>& articles);
     //void addInfo(const QString& name, const QString& value);
 
@@ -64,6 +64,8 @@ public:
     void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
+
+    void addDevice( const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle = false );
 
     void addStrecch();
     void initDownWidget();
@@ -78,6 +80,7 @@ public:
 
 protected:
     virtual void contextMenuEvent(QContextMenuEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 public slots:
     void OnCurrentItemClicked(QTableWidgetItem *item);

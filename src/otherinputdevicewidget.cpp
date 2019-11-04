@@ -76,7 +76,18 @@ void OtherInputdeviceWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
-        addSubInfo( name.value, articles );
+        addDevice( name.value, articles, otherInputdeviceList.size() );
+
+        if( otherInputdeviceList.size() > 1 )
+        {
+            QStringList tab =
+            {
+                name.value,
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
 
         if( overviewInfo_.value.isEmpty() == true )
         {
@@ -84,6 +95,12 @@ void OtherInputdeviceWidget::initWidget()
             overviewInfo_.value += " ";
             overviewInfo_.value += name.value;
         }
+    }
+
+    if( otherInputdeviceList.size() > 1 )
+    {
+        QStringList headers = { "Name",  "Vendor" };
+        addTable( headers, tabList);
     }
 }
 

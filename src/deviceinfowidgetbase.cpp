@@ -33,7 +33,7 @@ QFont DeviceInfoWidgetBase::tableContentFont_;
 
 int currentXlsRow_ = 1;
 
-static const int NameLength_ = 130;
+static const int NameLength_ = 120;
 static const int RowHeight_ = 30;
 static const int SubRowHeight_ = 40;
 
@@ -94,12 +94,14 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
         titleFont_.setPixelSize(16);
         titleFont_.setWeight(QFont::DemiBold);
 
-        infoFont_.setPixelSize(15);
+        infoFont_.setPixelSize(14);
+        infoFont_.setWeight(QFont::Thin);
 
         subTitleFont_.setPixelSize(15);
         subTitleFont_.setWeight(QFont::DemiBold);
 
-        labelFont_.setPixelSize(14);
+        labelFont_.setPixelSize(13);
+        labelFont_.setWeight(QFont::Thin);
 
         tableHeaderFont_.setWeight(QFont::Medium);
         tableHeaderFont_.setPixelSize(15);
@@ -131,7 +133,7 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
         QColor base_color = palette().base().color();
 
         pa.setColor(QPalette::Background, base_color);
-        pa.setBrush(DPalette::ItemBackground, base_color);
+        //pa.setBrush(DPalette::ItemBackground, base_color);
 
         //setPalette(pa);
 
@@ -155,7 +157,33 @@ bool DeviceInfoWidgetBase::getOverViewInfo(ArticleStruct& info)
 
 void DeviceInfoWidgetBase::initContextMenu()
 {
-    contextMenu_ = new QMenu;
+    contextMenu_ = new DMenu(this);
+
+    contextMenu_->setAutoFillBackground(true);
+
+//    auto modifyTheme = [this](){
+//        DPalette pa = DApplicationHelper::instance()->palette(contextMenu_);
+
+////        QColor base_color = palette().base().color();
+////        base_color.setAlpha(20);
+
+//        //QColor base_color(1,1,1,1);
+
+//        //pa.setColor(QPalette::Background, base_color);
+//        //pa.setColor(QPalette::Button, base_color);
+
+//        DApplicationHelper::instance()->setPalette(contextMenu_, pa);
+//    };
+
+//    modifyTheme();
+
+//    setAutoFillBackground(false);
+//    setBackgroundRole(DPalette::Base);
+
+    //connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, modifyTheme);
+
+    contextMenu_->setMinimumWidth(150);
+
     QAction* refreshAction = new QAction(DApplication::translate("Main", "Refresh"), this);
     connect(refreshAction, &QAction::triggered, \
             [this]()
@@ -175,62 +203,63 @@ void DeviceInfoWidgetBase::initContextMenu()
     contextMenu_->addAction(exportAction);
 }
 
-void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents, const QFont& font)
-{
-    ly->setSpacing(0);
-    ly->setContentsMargins(0,0,0,0);
+//void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents, const QFont& font)
+//{
+////    ly->setSpacing(0);
+////    ly->setContentsMargins(0,0,0,0);
 
-    for(int i = 0; i < names.size(); ++i)
-    {
-        //ColumnWidget cw(this);
-
-
-        DLabel* nameLabel = new DLabel( DApplication::translate("Main", names.at(i).toStdString().data() ) + ":", downWidget_);
-        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
-        nameLabel->setMinimumWidth(NameLength_);
-        nameLabel->setFont(font);
-        //nameLabel->setStyleSheet("QLabel { background-color : red; color : blue; }");
-        //nameLabel->setMinimumHeight(SubRowHeight_);
-        //nameLabel->setReadOnly(true);
+//    for(int i = 0; i < names.size(); ++i)
+//    {
+//        //ColumnWidget cw(this);
 
 
-        DLabel* contentLabel = new DLabel(contents.at(i), downWidget_);
-        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
-        contentLabel->setWordWrap(true);
-        contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
-        //contentLabel->setMinimumHeight(SubRowHeight_);
-        contentLabel->setFont(font);
-        //contentLabel->setSelection(0, contents.at(i).size());
-        //contentLabel->setStyleSheet("QLabel { background-color : red; color : blue; }");
+//        DLabel* nameLabel = new DLabel( DApplication::translate("Main", names.at(i).toStdString().data() ) + ":", downWidget_);
+//        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+//        nameLabel->setMinimumWidth(NameLength_);
+//        nameLabel->setWordWrap(true);
+//        nameLabel->setFont(font);
+//        //nameLabel->setStyleSheet("QLabel { background-color : red; color : blue; }");
+//        //nameLabel->setMinimumHeight(SubRowHeight_);
+//        //nameLabel->setReadOnly(true);
 
-        //QSizePolicy::Policy policy = QSizePolicy::Minimum;
-        //contentLabel->setSizePolicy( policy );
-        //nameLabel->setFixedHeight(RowHeight_);
-        //contentLabel->setSizePolicy(policy, policy);
-        //contentLabel->setMargin(0);
-        //contentLabel->setContentsMargins(0,0,0,0);
-        //contentLabel->setFixedWidth(200);
-        //contentLabel->setFixedHeight(RowHeight_);
 
-        di->nameLabels.push_back(nameLabel);
-        di->contentLabels.push_back(contentLabel);
-        //contentLabel->adjustSize();
+//        DLabel* contentLabel = new DLabel(contents.at(i), downWidget_);
+//        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+//        contentLabel->setWordWrap(true);
+//        contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
+//        //contentLabel->setMinimumHeight(SubRowHeight_);
+//        contentLabel->setFont(font);
+//        //contentLabel->setSelection(0, contents.at(i).size());
+//        //contentLabel->setStyleSheet("QLabel { background-color : red; color : blue; }");
 
-//        QHBoxLayout* hly = new QHBoxLayout;
-//        hly->addWidget(contentLabel, Qt::AlignLeft);
-//        hly->addStretch(1);
-        ly->addWidget(nameLabel, i, 0, Qt::AlignTop);
-//        ly->addLayout(hly, i, 1, Qt::AlignTop);
-        ly->addWidget(contentLabel, i, 1, Qt::AlignTop);
-        //gridLayout->setRowMinimumHeight(i, RowHeight_);
-        //nameLabel->setFixedHeight(contentLabel->height());
-        //increaseHeight+= contentLabel->height();
-    }
+//        //QSizePolicy::Policy policy = QSizePolicy::Minimum;
+//        //contentLabel->setSizePolicy( policy );
+//        //nameLabel->setFixedHeight(RowHeight_);
+//        //contentLabel->setSizePolicy(policy, policy);
+//        //contentLabel->setMargin(0);
+//        //contentLabel->setContentsMargins(0,0,0,0);
+//        //contentLabel->setFixedWidth(200);
+//        //contentLabel->setFixedHeight(RowHeight_);
 
-    //ly->setRowStretch(2, 1);
-}
+//        di->nameLabels.push_back(nameLabel);
+//        di->contentLabels.push_back(contentLabel);
+//        //contentLabel->adjustSize();
 
-void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font)
+////        QHBoxLayout* hly = new QHBoxLayout;
+////        hly->addWidget(contentLabel, Qt::AlignLeft);
+////        hly->addStretch(1);
+//        ly->addWidget(nameLabel, i, 0, Qt::AlignTop);
+////        ly->addLayout(hly, i, 1, Qt::AlignTop);
+//        ly->addWidget(contentLabel, i, 1, Qt::AlignTop);
+//        //gridLayout->setRowMinimumHeight(i, RowHeight_);
+//        //nameLabel->setFixedHeight(contentLabel->height());
+//        //increaseHeight+= contentLabel->height();
+//    }
+
+//    //ly->setRowStretch(2, 1);
+//}
+
+void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font, const QPalette& pa)
 {
     int i = 0;
     foreach(auto article, articles)
@@ -241,16 +270,18 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
         }
 
         DLabel* nameLabel = new DLabel( DApplication::translate("Main", article.name.toStdString().data()) + ":", downWidget_ );
-        nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
-
+        //nameLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        nameLabel->setWordWrap(true);
         nameLabel->setMinimumWidth(NameLength_);
         //nameLabel->setMinimumHeight(SubRowHeight_);
         nameLabel->setFont(font);
 
+        DApplicationHelper::instance()->setPalette(nameLabel, pa);
+
         DLabel* contentLabel = new DLabel( article.valueTranslate ? \
                                            DApplication::translate("Main", article.value.toStdString().data()): \
                                            article.value, downWidget_ );
-        contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        //contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
         if(article.externalLinks)
         {
             contentLabel->setOpenExternalLinks(true);
@@ -260,6 +291,7 @@ void DeviceInfoWidgetBase::addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly,
         contentLabel->setMinimumWidth(WidgetWidth - NameLength_);
         //contentLabel->setMinimumHeight(SubRowHeight_);
         contentLabel->setFont(font);
+        DApplicationHelper::instance()->setPalette(contentLabel, pa);
 
         di->nameLabels.push_back(nameLabel);
         di->contentLabels.push_back(contentLabel);
@@ -334,49 +366,52 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
     vLayout_->addWidget(downWidget_ );
 }
 
-void DeviceInfoWidgetBase::addInfo(const QString& title, const QStringList& names, const QStringList& contents)
-{
-    initDownWidget();
+//void DeviceInfoWidgetBase::addInfo(const QString& title, const QStringList& names, const QStringList& contents)
+//{
+//    initDownWidget();
 
-    if(titleInfo_ == nullptr)
-    {
-       titleInfo_ = new DeviceInfo;
-    }
+//    if(titleInfo_ == nullptr)
+//    {
+//       titleInfo_ = new DeviceInfo;
+//    }
 
-    QVBoxLayout* vly = new QVBoxLayout;
+//    QVBoxLayout* vly = new QVBoxLayout;
 
-    if( false == title.isEmpty() )
-    {
-        titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()) + ":", downWidget_);
-        titleInfo_->title->setFont(titleFont_);
-        titleInfo_->title->setFixedHeight(RowHeight_);
-        vly->addWidget(titleInfo_->title);
-    }
+//    vly->setContentsMargins(20, 5, 20, 20);
 
-    QHBoxLayout* hly = new QHBoxLayout;
-//    hly->setMargin(0);
-//    hly->setContentsMargins(0,0,0,0);
+//    if( false == title.isEmpty() )
+//    {
+//        titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()) + ":", downWidget_);
+//        titleInfo_->title->setFont(titleFont_);
+//        titleInfo_->title->setFixedHeight(RowHeight_);
+//        vly->addWidget(titleInfo_->title);
+//    }
 
-    hly->addSpacing(10);
+//    QHBoxLayout* hly = new QHBoxLayout;
+//    //    hly->setMargin(0);
+//    //    hly->setContentsMargins(0,0,0,0);
 
-    QGridLayout* gridLayout = new QGridLayout;
-    gridLayout->setSpacing(10);
-//    gridLayout->setMargin(0);
-//    gridLayout->setContentsMargins(0,0,0,0);
-    gridLayout->setSizeConstraint(QLayout::SizeConstraint::SetFixedSize);
-    hly->addLayout(gridLayout);
-    vly->addLayout(hly);
+//    //hly->addSpacing(10);
 
-    addLabelToGridLayout(titleInfo_, gridLayout, names, contents, infoFont_);
-    infoWidget_ = new DWidget(this);
-    infoWidget_->setLayout(vly);
-    downWidgetLayout->insertWidget(downWidgetLayout->count(), infoWidget_);
+//    QGridLayout* gridLayout = new QGridLayout;
+//    //gridLayout->setSpacing(10);
+//    //    gridLayout->setMargin(0);
+//    //    gridLayout->setContentsMargins(0,0,0,0);
+//    gridLayout->setSizeConstraint(QLayout::SizeConstraint::SetFixedSize);
+//    gridLayout->setSpacing(10);
+//    hly->addLayout(gridLayout);
+//    vly->addLayout(hly);
 
-    downWidget_->adjustSize();
+//    addLabelToGridLayout(titleInfo_, gridLayout, names, contents, infoFont_);
+//    infoWidget_ = new DWidget(this);
+//    infoWidget_->setLayout(vly);
+//    downWidgetLayout->insertWidget(downWidgetLayout->count(), infoWidget_);
 
-    verticalScrollBarMaxValue += infoWidget_->height();
-    downWidgetScrollArea_->verticalScrollBar()->setRange(0, verticalScrollBarMaxValue);
-}
+//    downWidget_->adjustSize();
+
+//    verticalScrollBarMaxValue += infoWidget_->height();
+//    downWidgetScrollArea_->verticalScrollBar()->setRange(0, verticalScrollBarMaxValue);
+//}
 
 void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStruct>& articles)
 {
@@ -388,19 +423,20 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
     }
 
     QVBoxLayout* vly = new QVBoxLayout;
+    vly->setContentsMargins(20, 15, 20, 20);
 
     if( false == title.isEmpty() )
     {
         titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()) + ":", downWidget_);
         titleInfo_->title->setFont(titleFont_);
-        titleInfo_->title->setFixedHeight(RowHeight_);
+        //titleInfo_->title->setFixedHeight(RowHeight_);
         vly->addWidget(titleInfo_->title);
     }
 
     QHBoxLayout* hly = new QHBoxLayout;
 //    hly->setMargin(0);
 //    hly->setContentsMargins(0,0,0,0);
-    hly->addSpacing(10);
+    //hly->addSpacing(10);
 
     QGridLayout* gridLayout = new QGridLayout;
     gridLayout->setSpacing(10);
@@ -410,7 +446,9 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
     hly->addLayout(gridLayout);
     vly->addLayout(hly);
 
-    addLabelToGridLayout(titleInfo_, gridLayout, articles, infoFont_);
+    DPalette pa = DApplicationHelper::instance()->palette(this);
+
+    addLabelToGridLayout(titleInfo_, gridLayout, articles, infoFont_, pa);
     infoWidget_ = new DWidget(this);
     infoWidget_->setLayout(vly);
     downWidgetLayout->insertWidget(downWidgetLayout->count(), infoWidget_);
@@ -477,6 +515,8 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
     initDownWidget();
     QVBoxLayout* vly = new QVBoxLayout;
 
+    vly->setContentsMargins(20, 0, 20, 20);
+
     DeviceInfo subInfo;
     if(false == subTitle.isEmpty())
     {
@@ -488,10 +528,13 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
 
     QHBoxLayout* hly = new QHBoxLayout;
 
-    hly->addSpacing(10);
+    //hly->addSpacing(10);
     QGridLayout* gridLayout = new QGridLayout;
 
-    addLabelToGridLayout(&subInfo, gridLayout, articles, labelFont_);
+    DPalette pa = DApplicationHelper::instance()->palette(this);
+    //QColor color = pa.textTips().color();
+    //pa.setColor(QPalette::WindowText, QColor("#526A7F"));
+    addLabelToGridLayout(&subInfo, gridLayout, articles, labelFont_, pa);
 
     hly->addLayout(gridLayout);
     vly->addLayout(hly);
@@ -516,11 +559,13 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 {
     if(tableWidget_ == nullptr)
     {
-        tableWidget_ = new DTableWidget(this);
+        tableWidget_ = new TableWidgetAlwaysActive(this);
+        //tableWidget_ = new DTableWidget(this);
         //tableWidget_->setHorizontalHeader(new TableWidgetAlwaysActiveHeaderView(Qt::Orientation::Horizontal, this) );
 
-        tableWidget_->setMinimumHeight(178);
-        tableWidget_->setMaximumHeight(500);
+        //tableWidget_->setMinimumHeight(183);
+        //tableWidget_->setMaximumHeight(500);
+        tableWidget_->setFixedHeight(183);
         tableWidget_->setVerticalScrollBar(new DScrollBar(this));
         tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
         tableWidget_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
@@ -549,15 +594,21 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         tableWidget_->horizontalHeader()->setObjectName("DeviceInfoHeaderView");
 
         auto changeTheme = [this](){
-            QPalette pa = this->palette();
+            DPalette pa = this->palette();
 
-            QBrush bash_brush( QColor(255,255,255,255) );
+            //QBrush bash_brush( QColor(0,0,0,255) );
 
-            pa.setColorGroup(QPalette::Inactive, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
-            pa.setColorGroup(QPalette::Active, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
+            pa.setColorGroup(QPalette::Inactive, pa.windowText(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
+            //pa.setColorGroup(QPalette::Active, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
+
+            QColor base_color = palette().base().color();
+
+            //pa.setColor(QPalette::Background, base_color);
+            //pa.setBrush(QPalette::Inactive, DPalette::Base, pa.brush(QPalette::Active, DPalette::Dark));
+            //pa.setBrush(QPalette::Inactive, DPalette::Base, bash_brush);
 
             DApplicationHelper::instance()->setPalette(tableWidget_, pa);
-            DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
+            //DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
 
             //pa.setBrush(QPalette::Highlight, bash_brush);
 
@@ -627,7 +678,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         for(int j = 0; j < contents.size(); ++j )
         {
             QTableWidgetItem* item = new QTableWidgetItem(contents[j]);
-            int flags = item->flags();
+            //int flags = item->flags();
             //item->setFlags(flags | Qt::ItemFlag::ItemIsEditable);
             item->setFont(tableContentFont_);
             tableWidget_->setItem(i, j, item);
@@ -640,6 +691,18 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableWidget_->resizeColumnToContents(0);
     //tableWidget_->resizeRowsToContents();
+}
+
+void DeviceInfoWidgetBase::addDevice( const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle )
+{
+    if( deviceNumber < 2 )
+    {
+        addInfo( showTitle ? subTitle: "", articles );
+    }
+    else
+    {
+        addSubInfo( subTitle, articles );
+    }
 }
 
 void DeviceInfoWidgetBase::addStrecch()
@@ -748,6 +811,26 @@ void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)
     contextMenu_->exec(event->globalPos());
 }
 
+void DeviceInfoWidgetBase::resizeEvent(QResizeEvent *event)
+{
+//    if(tableWidget_)
+//    {
+//        tableWidget_->adjustSize();
+//    }
+
+    if(downWidget_)
+    {
+        downWidget_->adjustSize();
+    }
+
+    if(infoWidget_)
+    {
+        infoWidget_->adjustSize();
+    }
+
+    DWidget::resizeEvent(event);
+}
+
 void DeviceInfoWidgetBase::OnCurrentItemClicked(QTableWidgetItem *item)
 {
     if(item == nullptr)
@@ -787,7 +870,7 @@ bool DeviceInfoWidgetBase::onExportToFile()
    QString exportFile = DFileDialog::getSaveFileName(this,
                                                      DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
                                                      QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
-                                                    tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
+                                                     tr("Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)"), &selectFilter);
 
    if(exportFile.isEmpty() == true)
    {

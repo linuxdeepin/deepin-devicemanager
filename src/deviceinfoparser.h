@@ -150,7 +150,7 @@ public:
     bool loadLspciDatabase();
     // hciconfig
     bool loadHciconfigDatabase();
-    // lsusbss
+    // lsusb
     bool loadLsusbDatabase();
     // hwinfo
     bool loadHwinfoDatabase();
@@ -169,6 +169,7 @@ public:
     QString standOutput_;
 
     QMap<QString, DatabaseMap> toolDatabase_;
+    QMap<QString, QStringList> toolDatabaseSecondOrder_;
 
     // Power settings
     // Switchingpower

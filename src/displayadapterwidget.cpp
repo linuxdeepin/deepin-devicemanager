@@ -109,7 +109,7 @@ void DisplayadapterWidget::initWidget()
             dpName = name.value;
         }
 
-        addSubInfo( dpName, articles);
+        addDevice( dpName, articles,  displayadapterList.size() );
 
         QStringList tab =
         {
@@ -138,7 +138,7 @@ void DisplayadapterWidget::initWidget()
         overviewInfo_.value += ")";
     }
 
-    if(displayadapterList.size() > 1)
+    if( displayadapterList.size() > 1)
     {
         QStringList headers = { "Name",  "Vendor" };
         addTable( headers, tabList);

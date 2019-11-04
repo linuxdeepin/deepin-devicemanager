@@ -77,7 +77,18 @@ void OtherPciDeviceWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
-        addSubInfo( name.value, articles );
+        addDevice( name.value, articles, otherPcideviceList.size() );
+
+        if( otherPcideviceList.size() > 1 )
+        {
+            QStringList tab =
+            {
+                name.value,
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
 
         if( overviewInfo_.value.isEmpty() == true )
         {
@@ -85,6 +96,12 @@ void OtherPciDeviceWidget::initWidget()
             overviewInfo_.value += " ";
             overviewInfo_.value += name.value;
         }
+    }
+
+    if( otherPcideviceList.size() > 1 )
+    {
+        QStringList headers = { "Name",  "Vendor" };
+        addTable( headers, tabList);
     }
 }
 

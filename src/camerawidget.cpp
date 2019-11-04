@@ -73,7 +73,7 @@ void CameraWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
-        addSubInfo( name.value, articles);
+        addDevice( name.value, articles, cameraList.size() );
 
         if( cameraList.size() > 1 )
         {

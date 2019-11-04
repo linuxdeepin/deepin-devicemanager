@@ -168,7 +168,7 @@ void DiskWidget::initWidget()
             DeviceInfoParserInstance.queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles);
         }
 
-        addSubInfo( model.value, articles );
+        addDevice( model.value, articles, diskList.size() );
 
         QStringList tab =
         {
@@ -182,7 +182,7 @@ void DiskWidget::initWidget()
 
         if( i == 0)
         {
-            if(model.value.contains(vendor.value) == false)
+            if(model.value.contains(vendor.value, Qt::CaseInsensitive) == false)
             {
                 overviewInfo_.value = vendor.value + " ";
             }
@@ -204,7 +204,7 @@ void DiskWidget::initWidget()
         }
     }
 
-    if(diskList.size() > 1)
+    if( diskList.size() > 1 )
     {
         //QStringList emptyList;
         //add(DApplication::translate("Main", "Disk")  + DApplication::translate("Main", " Info"), emptyList, emptyList);

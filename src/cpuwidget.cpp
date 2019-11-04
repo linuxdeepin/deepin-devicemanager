@@ -73,20 +73,6 @@ void CpuWidget::initWidget()
     QString architecture =  DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Architecture");
 
 
-    //setTitle(DApplication::translate("Main", "CPU")  + DApplication::translate("Main", " Info"));
-
-    QStringList names = {   "Model",
-                            "Architecture",
-                            "Vendor",
-                            DApplication::translate("CPU", "Speed"),
-                            "CPU cores",
-                            "Threads amount",
-                            "L1d Cache",
-                            "L1i Cache",
-                            "L2 Cache",
-                            "L3 Cache"
-                        };
-
     overviewInfo_.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Model name");
     overviewInfo_.value.remove(" CPU", Qt::CaseInsensitive);
 
@@ -169,20 +155,50 @@ void CpuWidget::initWidget()
 
     overviewInfo_.value += DApplication::translate("CPU", " Core(s)");
 
-    QStringList contents = {
-        overviewInfo_.value,
-        architecture,
-        DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Vendor ID"),
-        speed_,
-        DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU(s)"),
-        QString::number(cpus*threadsPerCore),
-        DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L1d cache") + corePlus,
-        DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L1i cache") + corePlus,
-        DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L2 cache") + corePlus,
-        DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L3 cache"),
-    };
 
-    addInfo( "Cpu Info", names, contents);
+    QList<ArticleStruct> articles;
+
+    ArticleStruct model("Model");
+    model.value = overviewInfo_.value;
+    articles.push_back(model);
+
+    ArticleStruct ac("Architecture");
+    ac.value = architecture;
+    articles.push_back(ac);
+
+    ArticleStruct vendor("Vendor");
+    vendor.queryData("lscpu", "lscpu", "Vendor ID");
+    articles.push_back(vendor);
+
+    ArticleStruct speed(DApplication::translate("CPU", "Speed"));
+    speed.value = speed_;
+    articles.push_back(speed);
+
+    ArticleStruct cpuCores("CPU cores");
+    cpuCores.queryData("lscpu", "lscpu", "CPU(s)");
+    articles.push_back(cpuCores);
+
+    ArticleStruct tamount("Threads amount");
+    tamount.value = QString::number(cpus*threadsPerCore);
+    articles.push_back(tamount);
+
+    ArticleStruct l1dCache("L1d Cache");
+    l1dCache.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L1d cache") + corePlus;
+    articles.push_back(l1dCache);
+
+    ArticleStruct l1iCache("L1i Cache");
+    l1iCache.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L1i cache") + corePlus;
+    articles.push_back(l1iCache);
+
+    ArticleStruct l2Cache("L2 Cache");
+    l2Cache.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L2 cache") + corePlus;
+    articles.push_back(l2Cache);
+
+    ArticleStruct l3Cache("L3 Cache");
+    l3Cache.queryData("lscpu", "lscpu", "L3 cache");
+    articles.push_back(l3Cache);
+
+    addInfo("Cpu Info", articles);
 
     foreach(auto precessor, cpuList)
     {      

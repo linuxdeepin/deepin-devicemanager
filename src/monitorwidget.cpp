@@ -182,7 +182,7 @@ void MonitorWidget::initWidget()
         }
         articles.push_back(connectType);
 
-        addSubInfo( name.value, articles );
+        addDevice( name.value, articles, hwinfMonitorList.size() );
 
         if( hwinfMonitorList.size() > 1 )
         {

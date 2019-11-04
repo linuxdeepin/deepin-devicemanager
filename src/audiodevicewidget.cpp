@@ -110,7 +110,7 @@ void AudiodeviceWidget::initWidget()
         existArticles.insert("capabilities");
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles);
-        addSubInfo( name.value , articles );
+        addDevice( name.value , articles, multimediaList.size() + inputdeviceList.size() );
 
         if( multimediaList.size() + inputdeviceList.size() > 1 )
         {

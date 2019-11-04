@@ -71,7 +71,7 @@ void KeyboardWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("catinput", device, articles, existArticles);
 
-        addSubInfo( name.value, articles);
+        addDevice( name.value, articles, inputdeviceList.size() + keyboardList.size() );
 
 //        overviewInfo_.value = "PS/2 ";
 //        overviewInfo_.value += vendor.value;
@@ -142,7 +142,7 @@ void KeyboardWidget::initWidget()
         existArticles.insert("capabilities");
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", keyboard, articles, existArticles);
-        addSubInfo( name.value , articles );
+        addDevice( name.value , articles, inputdeviceList.size() + keyboardList.size() );
 
         QStringList tab =
         {

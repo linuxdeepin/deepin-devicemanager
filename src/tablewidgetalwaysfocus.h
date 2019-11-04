@@ -24,11 +24,11 @@
 
 
 
-//class TableWidgetAlwaysActive: public Dtk::Widget::DTableWidget
-//{
-//public:
-//    TableWidgetAlwaysActive(QWidget *parent = nullptr);
+class TableWidgetAlwaysActive: public Dtk::Widget::DTableWidget
+{
+public:
+    TableWidgetAlwaysActive(QWidget *parent = nullptr);
 
-//private:
-//    QStyleOptionViewItem viewOptions() const override;
-//};
+private:
+    QStyleOptionViewItem viewOptions() const override;
+};

@@ -71,7 +71,7 @@ void MouseWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("catinput", device, articles, existArticles);
 
-        addSubInfo( name.value, articles);
+        addDevice( name.value , articles , inputdeviceList.size() + mouseList.size());
 
 //        overviewInfo_.value = "PS/2 ";
 //        overviewInfo_.value += vendor.value;
@@ -142,7 +142,7 @@ void MouseWidget::initWidget()
         existArticles.insert("capabilities");
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", mouse, articles, existArticles);
-        addSubInfo( name.value , articles );
+        addDevice( name.value , articles , inputdeviceList.size() + mouseList.size());
 
         QStringList tab =
         {
