@@ -84,9 +84,9 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
     {
         QLabel* nameLabel = new DLabel("", this);
         titleFont_ = nameLabel->font();
-        QString family = titleFont_.family();
-        titleFont_.setFamily("Noto Sans CJK SC");
-        family = titleFont_.family();
+        //QString family = titleFont_.family();
+        //titleFont_.setFamily("Noto Sans CJK SC");
+        //family = titleFont_.family();
         delete nameLabel;
         subTitleFont_ = titleFont_;
         labelFont_ = titleFont_;
