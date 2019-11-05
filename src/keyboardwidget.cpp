@@ -76,6 +76,11 @@ void KeyboardWidget::initWidget()
 //        overviewInfo_.value = "PS/2 ";
 //        overviewInfo_.value += vendor.value;
 //        overviewInfo_.value += " ";
+        if(overviewInfo_.value.isEmpty() == false)
+        {
+            overviewInfo_.value += " / ";
+        }
+
         overviewInfo_.value += name.value;
 
         if( inputdeviceList.size() + keyboardList.size() > 1 )
@@ -153,7 +158,11 @@ void KeyboardWidget::initWidget()
 
         tabList.push_back(tab);
 
-        overviewInfo_.value += " / ";
+        if(overviewInfo_.value.isEmpty() == false)
+        {
+            overviewInfo_.value += " / ";
+        }
+
         overviewInfo_.value += name.value;
     }
 

@@ -509,6 +509,17 @@ QStringList DeviceInfoParser::getBluetoothList()
         if( toolDatabase_["lshw"][fk]["description"].contains("Bluetooth", Qt::CaseInsensitive) )
         {
             bluetoothList.push_back(fk);
+            continue;
+        }
+
+        if( toolDatabase_["lshw"][fk].contains("driver") == false )
+        {
+            continue;
+        }
+
+        if( toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) )
+        {
+            bluetoothList.push_back(fk);
         }
     }
 
@@ -642,6 +653,16 @@ QStringList DeviceInfoParser::getOtherUsbdeviceList()
                 }
 
                 if( toolDatabase_["lshw"][fk]["description"].contains("Bluetooth", Qt::CaseInsensitive) )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk].contains("driver") == false )
+                {
+                    continue;
+                }
+
+                if( toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) )
                 {
                     continue;
                 }
@@ -994,6 +1015,14 @@ QStringList DeviceInfoParser::getOtherPciDeviceList()
             otherPcideviceList.push_back(fk);
         }
     }
+
+    QStringList audioDeviceList = getMultimediaList();
+
+    foreach(auto str, audioDeviceList)
+    {
+       otherPcideviceList.removeAll(str);
+    }
+
 
     return otherPcideviceList;
 }

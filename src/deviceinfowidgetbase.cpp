@@ -84,6 +84,9 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
     {
         QLabel* nameLabel = new DLabel("", this);
         titleFont_ = nameLabel->font();
+        QString family = titleFont_.family();
+        titleFont_.setFamily("Noto Sans CJK SC");
+        family = titleFont_.family();
         delete nameLabel;
         subTitleFont_ = titleFont_;
         labelFont_ = titleFont_;
@@ -565,7 +568,10 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         //tableWidget_->setMinimumHeight(183);
         //tableWidget_->setMaximumHeight(500);
-        tableWidget_->setFixedHeight(183);
+        tableWidget_->setFixedHeight(192);
+
+        tableWidget_->verticalHeader()->setDefaultSectionSize(40);
+
         tableWidget_->setVerticalScrollBar(new DScrollBar(this));
         tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
         tableWidget_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
