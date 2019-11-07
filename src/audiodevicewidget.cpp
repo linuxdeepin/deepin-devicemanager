@@ -15,7 +15,7 @@ void AudiodeviceWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Audio Device")  + DApplication::translate("Main", " Info"));
     QStringList multimediaList = DeviceInfoParserInstance.getMultimediaList();
-    QStringList inputdeviceList = DeviceInfoParserInstance.getInputAudioDeviceList();
+    QStringList inputdeviceList /*= DeviceInfoParserInstance.getInputAudioDeviceList()*/;// mask input device
 
     if( multimediaList.size() + inputdeviceList.size() < 1 )
     {
@@ -175,7 +175,7 @@ void AudiodeviceWidget::initWidget()
 
     if( multimediaList.size() + inputdeviceList.size() > 1 )
     {
-        QStringList headers = { "Name",  "Vendor" };
+        QStringList headers = { "Name",  "Vendor"};
         addTable( headers, tabList);
     }
 }

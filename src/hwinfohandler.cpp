@@ -1,4 +1,4 @@
-#include "hwinfohandler.h"
+#include "commondefine.h"
 #include "hd.h"
 #include <stdio.h>
 #include <stdlib.h>

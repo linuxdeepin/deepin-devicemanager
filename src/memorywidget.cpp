@@ -23,23 +23,27 @@ void MemoryWidget::initTableWdiget()
     QStringList memList = DeviceInfoParserInstance.getMemorynameList();
 
 
-    canUpgrade_ = false;
-    QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size",  "Statu"};
+    QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size", /* "Statu"*/};
 
     QList<QStringList> tabList;
 
     foreach(const QString& mem, memList)
     {
+        if(canUpgrade_ == -1)
+        {
+            canUpgrade_ = 0;
+        }
+
         QString size = DeviceInfoParserInstance.queryData("dmidecode", mem, "Size");
         if( size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
         {
-            canUpgrade_ = true;
+            canUpgrade_ = 1;
             QStringList tab = {
                 DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
                 "--",
                 "--",
                 "--",
-                DApplication::translate("Main", "Bad")
+                //DApplication::translate("Main", "Bad")
             };
 
             tabList.push_back(tab);
@@ -53,7 +57,7 @@ void MemoryWidget::initTableWdiget()
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed"),
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Size"),
 
-            DApplication::translate("Main", "Good")
+            //DApplication::translate("Main", "Good")
         };
 
         tabList.push_back(tab);
@@ -66,8 +70,7 @@ void MemoryWidget::updateWholeDownWidget()
 {
     QString memSize = DeviceInfoParserInstance.queryData("lshw", "Computer_core_memory", "size");
     memSize.replace( "GiB", " GB" );
-
-
+    memSize.replace( "MiB", " MB" );
 
     QList<ArticleStruct> articles;
 
@@ -83,9 +86,12 @@ void MemoryWidget::updateWholeDownWidget()
     mc.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity");
     articles.push_back(mc);
 
-    ArticleStruct ug("Upgradeable");
-    ug.value = canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No");
-    articles.push_back(ug);
+    if(canUpgrade_ != -1)
+    {
+        ArticleStruct ug("Upgradeable");
+        ug.value = canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No");
+        articles.push_back(ug);
+    }
 
     addInfo("Memory Info", articles);
 

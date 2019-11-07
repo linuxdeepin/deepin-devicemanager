@@ -58,7 +58,9 @@ void DiskWidget::initWidget()
         if( DeviceInfoParserInstance.isToolSuccess("smartctl") )
         {
             QString rotationRate = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Rotation Rate");
-            if(rotationRate == DApplication::translate("Main", "Unknown"))
+            if(rotationRate == DApplication::translate("Main", "Unknown") ||\
+               rotationRate.contains("SSD", Qt::CaseInsensitive) ||\
+               rotationRate.contains("Solid", Qt::CaseInsensitive) )
             {
                 mediaTypeStr = "SDD";
             }
@@ -92,30 +94,33 @@ void DiskWidget::initWidget()
         if( DeviceInfoParserInstance.isToolSuccess("smartctl") )
         {
             QString rotationRate = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Rotation Rate");
-            if(rotationRate == DApplication::translate("Main", "Unknown"))
+            if(rotationRate == DApplication::translate("Main", "Unknown") ||\
+               rotationRate.contains("SSD", Qt::CaseInsensitive) ||\
+               rotationRate.contains("Solid", Qt::CaseInsensitive))
             {
                 mediaTypeStr = "SDD";
             }
             else
             {
                 mediaTypeStr = "HDD";
-                QString sataVersion = DeviceInfoParserInstance.queryData("smartctl", logicalName, "SATA Version");
-                QString version;
-                QString speed;
-
-                int index = sataVersion.indexOf(",");
-                if(index>0)
-                {
-                    ArticleStruct speed("Speed");
-                    speed.value = sataVersion.mid( index + 1 );
-                    speed.value = speed.value.trimmed();
-                    articles.push_back(speed);
-
-                    interface.value = sataVersion.mid(0, index);
-                    interface.value = interface.value.trimmed();
-                }
-
             }
+
+            QString sataVersion = DeviceInfoParserInstance.queryData("smartctl", logicalName, "SATA Version");
+            QString version;
+            QString speed;
+
+            int index = sataVersion.indexOf(",");
+            if(index>0)
+            {
+                ArticleStruct speed("Speed");
+                speed.value = sataVersion.mid( index + 1 );
+                speed.value = speed.value.trimmed();
+                articles.push_back(speed);
+
+                interface.value = sataVersion.mid(0, index);
+                interface.value = interface.value.trimmed();
+            }
+
 
             articles.push_back(interface);
             existArticles.insert("SATA Version");
@@ -173,7 +178,7 @@ void DiskWidget::initWidget()
         QStringList tab =
         {
             modelStr,
-            vendorStr,
+            vendor.value,
             mediaTypeStr,
             sizeStr
         };
@@ -182,7 +187,7 @@ void DiskWidget::initWidget()
 
         if( i == 0)
         {
-            if(model.value.contains(vendor.value, Qt::CaseInsensitive) == false)
+            if( model.value.contains(vendor.value, Qt::CaseInsensitive) == false )
             {
                 overviewInfo_.value = vendor.value + " ";
             }

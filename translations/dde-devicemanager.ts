@@ -804,6 +804,14 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>No Disk found!</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Get Power Infomation failed!</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>Model Part Number</source>
             <translation type="unfinished"/>
         </message>
@@ -1108,6 +1116,10 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>core</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>Cancel</source>
             <translation type="unfinished"/>
         </message>
@@ -1352,35 +1364,35 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Powered</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Discoverable</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Pairable</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Modalias</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Discovering</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>CD-ROM</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>capabilities</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>status</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -1392,43 +1404,43 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>ASEs implemented</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>CPU MHz</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>cpu model</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>extra interrupt vector</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>hardware watchpoint</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>machine</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>microsecond timers</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>shadow register sets</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>system type</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>wait instruction</source>
             <translation type="unfinished"/>
         </message>
         <message>

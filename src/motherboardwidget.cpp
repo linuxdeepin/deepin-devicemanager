@@ -26,12 +26,21 @@ void MotherboardWidget::initWidget()
 
     ArticleStruct vendor("Vendor");
     vendor.queryData("dmidecode", "Base Board Information", "Manufacturer");
+    if(vendor.isValid() == false)
+    {
+        vendor.queryData("catbaseboard", "Base Board Information", "Manufacturer");
+    }
     articles.push_back(vendor);
     existArticles.insert("Manufacturer");
 
     ArticleStruct model("Model");
     //QString manufactor = DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Manufacturer");
     model.value = /*manufactor + " "+*/ DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Product Name");
+    if(model.isValid() == false)
+    {
+        model.queryData("catbaseboard", "Base Board Information", "Board name");
+        existArticles.insert("Board name");
+    }
     articles.push_back(model);
     existArticles.insert("Product Name");
 
@@ -46,6 +55,11 @@ void MotherboardWidget::initWidget()
     if( rx.exactMatch(chipsetFamily.value) )
     {
         chipsetFamily.value =  rx.cap(1)+" " + DApplication::translate("Main", "Chipset Family");
+    }
+    if(chipsetFamily.isValid() == false)
+    {
+        chipsetFamily.queryData("catbaseboard", "Base Board Information", "Family");
+        existArticles.insert("Family");
     }
     articles.push_back(chipsetFamily);
 
@@ -63,6 +77,10 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Features");
 
     bool res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Base Board Information", articles, existArticles);
+    if(res == false)
+    {
+        res = DeviceInfoParserInstance.queryRemainderDeviceInfo("catbaseboard", "Base Board Information", articles, existArticles);
+    }
 
     ArticleStruct SMBIOSVersion("SMBIOS Version");
     SMBIOSVersion.queryData("dmidecode", "SMBIOS", "version");
@@ -131,19 +149,38 @@ void MotherboardWidget::initWidget()
     biosVersion.queryData("dmidecode", "BIOS Information", "Version");
     articles.push_back(biosVersion);
     existArticles.insert("Version");
+    if(biosVersion.isValid() == false)
+    {
+        biosVersion.queryData("catbaseboard", "BIOS Information", "Version");
+    }
+
 
     ArticleStruct releaseDate("Release Date");
     releaseDate.queryData("dmidecode", "BIOS Information", "Release Date");
+    if(releaseDate.isValid() == false)
+    {
+        releaseDate.queryData("catbaseboard", "BIOS Information", "Release Date");
+    }
     articles.push_back(releaseDate);
     existArticles.insert("Release Date");
 
+
+
     ArticleStruct biosVendor("Bios Vendor");
     biosVendor.queryData("dmidecode", "BIOS Information", "Vendor");
+    if(biosVendor.isValid() == false)
+    {
+        biosVendor.queryData("catbaseboard", "BIOS Information", "Vendor");
+    }
     articles.push_back(biosVendor);
     existArticles.insert("Vendor");
 
     existArticles.insert("Characteristics");
     res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles);
+    if(res == false)
+    {
+        res = DeviceInfoParserInstance.queryRemainderDeviceInfo("catbaseboard", "BIOS Information", articles, existArticles);
+    }
 
     ArticleStruct characteristics("Characteristics");
     characteristics.queryData("dmidecode", "BIOS Information", "Characteristics");

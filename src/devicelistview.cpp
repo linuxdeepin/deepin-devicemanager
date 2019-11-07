@@ -12,6 +12,7 @@
 #include "DFileDialog"
 #include <QDateTime>
 #include <QContextMenuEvent>
+#include "commondefine.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -20,6 +21,8 @@ Q_DECLARE_METATYPE(QMargins)
 DeviceListviewDelegate::DeviceListviewDelegate(QAbstractItemView *parent)
     : DStyledItemDelegate(parent)
 {
+    //setMargins(QMargins(10, 2, 10, 10));
+    setItemSpacing(10);
 }
 
 void DeviceListviewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -36,12 +39,10 @@ QSize DeviceListviewDelegate::sizeHint(const QStyleOptionViewItem &option, const
 {
     if( index.data().toString() == "Seperator" )
     {
-        return QSize(option.rect.width(), 5);;
+        return QSize( option.rect.width(), 5);
     }
-    else
-    {
-        return DStyledItemDelegate::sizeHint(option, index);
-    }
+
+    return DStyledItemDelegate::sizeHint(option, index);
 }
 
 void DeviceListviewDelegate::paintSeparator(QPainter *painter, const QStyleOptionViewItem &option) const
@@ -82,12 +83,14 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
 
     setEditTriggers(QListView::NoEditTriggers);
     setResizeMode(QListView::Adjust);
+
+    //setContentsMargins( 20, 8, 20, 8);
     //setAutoScroll(false);
 
     //setSpacing(0);
     //setViewMode(QListView::ListMode);
     //setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-    viewport()->setAutoFillBackground(true);
+    //viewport()->setAutoFillBackground(true);
 
     setFocus(Qt::FocusReason::NoFocusReason);
 
@@ -103,6 +106,8 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     setItemDelegate( new DeviceListviewDelegate(this) );
 
     setBackgroundType(DStyledItemDelegate::BackgroundType::RoundedBackground);
+
+    //setMar
 
 
     auto modifyTheme = [this](){
@@ -120,6 +125,8 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
         setPalette(pa);
 
         DApplicationHelper::instance()->setPalette(this, pa);
+
+        changeThemeIcon();
     };
 
     modifyTheme();
@@ -138,19 +145,24 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
 
     setItemSpacing(0);
 
-    setIconSize( QSize(32, 32) );
+    setIconSize( QSize(30, 30) );
+
+    setViewportMargins(10,2,10,5);
+
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
 }
 
 void DeviceListView::addDevice(const QString& deviceName, const QString& iconFile)
 {
     DStandardItem* item = new DStandardItem;
     QFont itemFont = item->font();
-    itemFont.setPixelSize(16);
+    itemFont.setPixelSize(14);
     itemFont.setWeight(QFont::Medium);
+    itemFont.setFamily(commonFontFamily_);
 
     item->setFont(itemFont);
 
-    item->setSizeHint( QSize(20, 40) );
+    item->setSizeHint( QSize(20, 38) );
 
     DGuiApplicationHelper::ColorType ct = DApplicationHelper::instance()->themeType();
 
@@ -165,7 +177,7 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
 
     item->setTextAlignment(Qt::AlignLeft);
 
-    const QMargins ListViweItemMargin(20,8,20,8);
+    const QMargins ListViweItemMargin(10, 8, 0, 8);
     //const QMargins ListViweItemMargin( 10, 5, 10, 5 );
     const QVariant VListViewItemMargin = QVariant::fromValue(ListViweItemMargin);
 
@@ -238,14 +250,45 @@ bool DeviceListView::onExportToFile()
 
 void DeviceListView::OnlvOpRightBtn( const QPoint& point)
 {
+    MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent()->parent());
+    if(mainWindow)
+    {
+        refreshAction_->setDisabled(mainWindow->isRefreshing());
+    }
+
     contextMenu_->exec(mapToGlobal(point));
+}
+
+void DeviceListView::changeThemeIcon()
+{
+    auto type = DApplicationHelper::instance()->themeType();
+
+    QString currentFolderName = (type == DApplicationHelper::DarkType )? "/dark/":"/light/";
+    QString oldFolderName = (type == DApplicationHelper::DarkType) ? "/light/":"/dark/";
+
+    for(int i = 0; i < navModel_->rowCount(); ++i)
+    {
+        QStandardItem* item = navModel_->item(i);
+        {
+            if(item)
+            {
+                QString icon = item->data(Qt::UserRole+89).toString();
+                if(icon.isEmpty() == false)
+                {
+                    icon.replace(oldFolderName, currentFolderName);
+                    item->setIcon(QIcon(icon));
+                    item->setData(icon, Qt::UserRole+89);
+                }
+            }
+        }
+    }
 }
 
 void DeviceListView::initContextMenu()
 {
     contextMenu_ = new DMenu(this);
-    QAction* refreshAction = new QAction(DApplication::translate("Main", "Refresh"), this);
-    connect(refreshAction, &QAction::triggered, \
+    refreshAction_ = new QAction(DApplication::translate("Main", "Refresh"), this);
+    connect(refreshAction_, &QAction::triggered, \
             [this]()
             {
                 MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent()->parent());
@@ -255,7 +298,7 @@ void DeviceListView::initContextMenu()
                 }
             }
     );
-    contextMenu_->addAction(refreshAction);
+    contextMenu_->addAction(refreshAction_);
 
 
     QAction* exportAction = new QAction(DApplication::translate("Main", "Export"));

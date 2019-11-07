@@ -75,5 +75,9 @@
         <file>images/dark/press/audiodevice.svg</file>
         <file>images/dark/press/motherboard.svg</file>
         <file>images/dark/press/usbdevice.svg</file>
+        <file>images/dark/normal/cdrom.svg</file>
+        <file>images/dark/press/cdrom.svg</file>
+        <file>images/light/normal/cdrom.svg</file>
+        <file>images/light/press/cdrom.svg</file>
     </qresource>
 </RCC>

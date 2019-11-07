@@ -7,7 +7,7 @@
 #include <QRegExp>
 #include <DLog>
 #include <com_deepin_daemon_power.h>
-#include "hwinfohandler.h"
+#include "commondefine.h"
 #include "deviceattributedefine.h"
 #include <DApplication>
 #include "logpasswordauth.h"
@@ -43,6 +43,8 @@ void DeviceInfoParser::refreshDabase()
 
     emit loadFinished("Loading SMBBios Info...");
     DeviceInfoParserInstance.loadDemicodeDatabase();
+    DeviceInfoParserInstance.loadCatBoardinfoDatabase
+            ();
 
     emit loadFinished("Loading List Hardware Info...");
     DeviceInfoParserInstance.loadLshwDatabase();
@@ -71,6 +73,7 @@ void DeviceInfoParser::refreshDabase()
 
     emit loadFinished("Loading Bluetooth Device Info...");
     DeviceInfoParserInstance.loadHciconfigDatabase();
+    DeviceInfoParserInstance.loadAllBluetoothctlDatabase();
 
     emit loadFinished("Loading USB Device Info...");
     DeviceInfoParserInstance.loadLsusbDatabase();
@@ -270,7 +273,7 @@ QStringList DeviceInfoParser::getDisknameList()
     foreach(const QString& fk, toolDatabaseSecondOrder_["lshw"] )
     {
         int index = fk.lastIndexOf("disk");
-        if( index > 0 && fk.size() - index < 7 )
+        if( index > 0 && fk.size() - index < 7 )    //avoid disk_volume:0
         {
             diskList.push_back(fk);
         }
@@ -724,7 +727,7 @@ QStringList DeviceInfoParser::getPS_2MouseInputdeviceList()
             continue;
         }
 
-        if( false == toolDatabase_["catinput"][fk]["Name"].contains("mouse", Qt::CaseInsensitive) || \
+        if( false == toolDatabase_["catinput"][fk]["Name"].contains("mouse", Qt::CaseInsensitive) && \
             false == toolDatabase_["catinput"][fk]["Name"].contains("TouchPad", Qt::CaseInsensitive) )
         {
             continue;
@@ -757,7 +760,7 @@ QStringList DeviceInfoParser::getMouseList()
     {
         if(true == toolDatabase_["lshw"][fk].contains("description"))
         {
-            if( toolDatabase_["lshw"][fk]["description"].contains("mouse", Qt::CaseInsensitive) || toolDatabase_["lshw"][fk]["description"].contains("TouchPad", Qt::CaseInsensitive) )
+            if( toolDatabase_["lshw"][fk]["description"].contains("mouse", Qt::CaseInsensitive) && toolDatabase_["lshw"][fk]["description"].contains("TouchPad", Qt::CaseInsensitive) )
             {
                 mouseList.push_back(fk);
                 continue;
@@ -766,7 +769,7 @@ QStringList DeviceInfoParser::getMouseList()
 
         if(true == toolDatabase_["lshw"][fk].contains("product"))
         {
-            if( toolDatabase_["lshw"][fk]["product"].contains("mouse", Qt::CaseInsensitive) || toolDatabase_["lshw"][fk]["product"].contains("TouchPad", Qt::CaseInsensitive))
+            if( toolDatabase_["lshw"][fk]["product"].contains("mouse", Qt::CaseInsensitive) && toolDatabase_["lshw"][fk]["product"].contains("TouchPad", Qt::CaseInsensitive))
             {
                 mouseList.push_back(fk);
                 continue;
@@ -979,7 +982,7 @@ QStringList DeviceInfoParser::getOtherInputdeviceList()
         QString product =toolDatabase_["lshw"][fk]["product"];
         QString description =toolDatabase_["lshw"][fk]["description"];
 
-        if( product.contains("touchpad", Qt::CaseInsensitive) || description.contains("touchpad", Qt::CaseInsensitive) || \
+        if( /*product.contains("touchpad", Qt::CaseInsensitive) || description.contains("touchpad", Qt::CaseInsensitive) ||*/ \
             product.contains("scanner", Qt::CaseInsensitive) || description.contains("scanner", Qt::CaseInsensitive) || \
             product.contains("Joystick", Qt::CaseInsensitive) || description.contains("Joystick", Qt::CaseInsensitive) ||
             product.contains("Handwriting", Qt::CaseInsensitive) || description.contains("Handwriting", Qt::CaseInsensitive) ||
@@ -1044,6 +1047,27 @@ QStringList DeviceInfoParser::getPrinterList()
     return printerList;
 }
 
+QStringList DeviceInfoParser::getCDRomList()
+{
+    QStringList cdromList;
+
+    if(false == toolDatabaseSecondOrder_.contains("lshw"))
+    {
+        return cdromList;
+    }
+
+    foreach(const QString& fk, toolDatabaseSecondOrder_["lshw"] )
+    {
+        if(fk.contains("cdrom"))
+        {
+            cdromList.push_back(fk);
+            continue;
+        }
+    }
+
+    return cdromList;
+}
+
 bool DeviceInfoParser::getOSInfo(QString& osInfo)
 {
     struct utsname kernel_info;
@@ -1094,7 +1118,7 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
      }
      else
      {
-        osInfo = standOutput_;
+        osInfo = str;
      }
 
     osInfo.remove("version");
@@ -1399,6 +1423,65 @@ bool DeviceInfoParser::loadDemicodeDatabase()
     return  true;
 }
 
+bool DeviceInfoParser::loadCatBoardinfoDatabase()
+{
+    if( false == executeProcess("cat /proc/boardinfo"))
+    {
+        return false;
+    }
+
+    QString catbaseboardOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile catboardinfoFile("./deviceInfo/boardinfo.txt");
+    if( false == catboardinfoFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+    catbaseboardOut = catboardinfoFile.readAll();
+    catboardinfoFile.close();
+#endif
+
+    // lscpu
+    DatabaseMap catboardinfoDb;
+    QMap<QString, QString> catboardinfoDatabase_;
+    QString deviceType;
+    int startIndex = 0;
+
+    for( int i = 0; i < catbaseboardOut.size(); ++i )
+    {
+         if( catbaseboardOut[i] != '\n' && i != catbaseboardOut.size() -1 )
+         {
+             continue;
+         }
+
+         QString line = catbaseboardOut.mid(startIndex, i - startIndex);
+         startIndex = i + 1;
+
+         if( line.trimmed().isEmpty() )
+         {
+             catboardinfoDb[deviceType] = catboardinfoDatabase_;
+             catboardinfoDatabase_.clear();
+             deviceType.clear();
+             continue;
+         }
+
+         if( deviceType.isEmpty() )
+         {
+            deviceType = line.trimmed();
+            continue;
+         }
+
+         int index = line.indexOf(Devicetype_Separator);
+         if( index > 0 )
+         {
+             catboardinfoDatabase_[line.left(index).trimmed()] = line.mid(index+1).trimmed();
+         }
+    }
+
+    toolDatabase_["catbaseboard"] = catboardinfoDb;
+    return true;
+}
+
 bool DeviceInfoParser::loadLshwDatabase()
 {
     if( false == executeProcess("sudo lshw"))
@@ -1481,7 +1564,14 @@ bool DeviceInfoParser::loadLshwDatabase()
             if( line.contains(Devicetype_Separator) )
             {
                 QStringList strList = line.split(Devicetype_Separator);
-                DeviceInfoMap[strList.first().trimmed().remove(Devicetype_lshw_Class_Prefix)] = strList.last().trimmed();
+                if(DeviceInfoMap.contains(strList.first().trimmed().remove(Devicetype_lshw_Class_Prefix)))
+                {
+                    DeviceInfoMap[strList.first().trimmed().remove(Devicetype_lshw_Class_Prefix)] += ", ";
+                    DeviceInfoMap[strList.first().trimmed().remove(Devicetype_lshw_Class_Prefix)] += strList.last().trimmed();
+                }
+                else {
+                    DeviceInfoMap[strList.first().trimmed().remove(Devicetype_lshw_Class_Prefix)] = strList.last().trimmed();
+                }
             }
             deviceType.push_back(line);
             continue;
@@ -1498,7 +1588,15 @@ bool DeviceInfoParser::loadLshwDatabase()
                 QStringList lst = line.mid(index+1).trimmed().split(splitChar);
                 if(lst.size() < 2)
                 {
-                    DeviceInfoMap[name] = line.mid(index+1).trimmed();
+                    if(DeviceInfoMap.contains(name))
+                    {
+                        DeviceInfoMap[name] += ", ";
+                        DeviceInfoMap[name] += line.mid(index+1).trimmed();
+                    }
+                    else {
+                        DeviceInfoMap[name] = line.mid(index+1).trimmed();
+                    }
+
                 }
                 else
                 {
@@ -1510,7 +1608,7 @@ bool DeviceInfoParser::loadLshwDatabase()
                         {
                             if(DeviceInfoMap.contains(tempName))
                             {
-                                DeviceInfoMap[tempName] += ",";
+                                DeviceInfoMap[tempName] += ", ";
                                 DeviceInfoMap[tempName] += lst[ind+1];
                             }
                             else {
@@ -1521,7 +1619,7 @@ bool DeviceInfoParser::loadLshwDatabase()
                         {
                             if(DeviceInfoMap.contains(tempName))
                             {
-                                DeviceInfoMap[tempName] += ",";
+                                DeviceInfoMap[tempName] += ", ";
                                 DeviceInfoMap[tempName] += lst[ind+1].mid(0, spaceIndex);
                             }
                             else {
@@ -1532,7 +1630,16 @@ bool DeviceInfoParser::loadLshwDatabase()
                 }
             }
             else
-                DeviceInfoMap[name] = line.mid(index+1).trimmed();
+            {
+                if(DeviceInfoMap.contains(name))
+                {
+                    DeviceInfoMap[name] += ", ";
+                    DeviceInfoMap[name] += line.mid(index+1).trimmed();
+                }
+                else {
+                    DeviceInfoMap[name] = line.mid(index+1).trimmed();
+                }
+            }
             continue;
         }
     }
@@ -1893,9 +2000,17 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
          }
     }
 
-    DatabaseMap rootsmartctlDb;
-    rootsmartctlDb[diskLogical] = smartctlDatabase_;
-    toolDatabase_["smartctl"] = rootsmartctlDb;
+    if(toolDatabase_.contains("smartctl") == false)
+    {
+        DatabaseMap rootsmartctlDb;
+        rootsmartctlDb[diskLogical] = smartctlDatabase_;
+        toolDatabase_["smartctl"] = rootsmartctlDb;
+    }
+    else
+    {
+        toolDatabase_["smartctl"][diskLogical] = smartctlDatabase_;
+    }
+
 
     return true;
 }
@@ -2366,13 +2481,43 @@ bool DeviceInfoParser::loadHciconfigDatabase()
         if( line.startsWith(Devicetype_Hciconfig_Multispace) || line.startsWith(Devicetype_Hciconfig_Tab) )
         {
             int index = line.indexOf(Devicetype_Separator);
+
+            QString key = (index > 0)?line.mid(0, index).trimmed():line.trimmed();
+
+            if( line.contains("BD Address") )
+            {
+                QString bdLine = line.trimmed();
+                int sepIndex = index;
+
+                //BD Address: 00:19:86:00:25:4E  ACL MTU: 1021:8  SCO MTU: 64:1
+                while(sepIndex > 1 )
+                {
+                    int spaceIndex = bdLine.indexOf(" ", sepIndex + 2);
+
+                    if( spaceIndex > sepIndex + 1 )
+                    {
+                        DeviceInfoMap[ bdLine.left(sepIndex-1).trimmed()] = bdLine.mid(sepIndex+1, spaceIndex - sepIndex - 1).trimmed();
+                        bdLine = bdLine.mid(spaceIndex).trimmed();
+                        sepIndex = bdLine.indexOf(Devicetype_Separator);
+                    }
+                    else
+                    {
+                        DeviceInfoMap[bdLine.left(sepIndex-1)] = line.mid(sepIndex+1).trimmed();
+
+                        break;
+                    }
+                }
+
+                continue;
+            }
+
             if( index > 0 )
             {
-                DeviceInfoMap[line.mid(0, index).trimmed()] = line.mid(index+1).trimmed();
+                DeviceInfoMap[key] = line.mid(index+1).trimmed();
             }
             else
             {
-                DeviceInfoMap[line.trimmed()] = "";
+                DeviceInfoMap[key] = "";
             }
         }
 
@@ -2392,6 +2537,95 @@ bool DeviceInfoParser::loadHciconfigDatabase()
     toolDatabase_["hciconfig"] = hciconfigDatabase_;
     secondOrder.removeDuplicates();
     toolDatabaseSecondOrder_["hciconfig"] = secondOrder;
+    return true;
+}
+
+bool DeviceInfoParser::loadAllBluetoothctlDatabase()
+{
+    QStringList bList = DeviceInfoParserInstance.getHciconfigBluetoothList();
+
+    foreach(const QString& b, bList)
+    {
+        QString controller = DeviceInfoParserInstance.queryData("hciconfig", b, "BD Address");
+        DeviceInfoParserInstance.loadBluetoothctlDatabase(controller);
+    }
+
+    return true;
+}
+
+bool DeviceInfoParser::loadBluetoothctlDatabase(const QString& controller)
+{
+    if( false == executeProcess("bluetoothctl show " + controller))
+    {
+        return false;
+    }
+
+    QString bluetoothctlOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile bluetoothctlFile("./deviceInfo/bluetoothctl.txt");
+    if( false == bluetoothctlFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+
+    bluetoothctlOut = bluetoothctlFile.readAll();
+    bluetoothctlFile.close();
+#endif
+
+    QStringList secondOrder;
+    secondOrder.push_back(controller);
+
+    QMap<QString, QString> DeviceInfoMap;
+    int startIndex = 0;
+
+    for( int i = 0; i < bluetoothctlOut.size(); ++i )
+    {
+        if( bluetoothctlOut[i] != '\n' && i != bluetoothctlOut.size() -1)
+        {
+            continue;
+        }
+
+        QString line = bluetoothctlOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if(line.startsWith("Controller "))
+        {
+            continue;
+        }
+
+        if( line.startsWith(Devicetype_Hciconfig_Multispace) || line.startsWith(Devicetype_Hciconfig_Tab) )
+        {
+            int index = line.indexOf(Devicetype_Separator);
+            if( index > 0 )
+            {
+                DeviceInfoMap[line.mid(0, index).trimmed()] = line.mid(index+1).trimmed();
+            }
+            else
+            {
+                DeviceInfoMap[line.trimmed()] = "";
+            }
+        }
+
+        if( i == bluetoothctlOut.size() -1 || line.trimmed().isEmpty() )
+        {
+            continue;
+        }
+    }
+
+
+    if(false == toolDatabase_.contains("bluetoothctl"))
+    {
+        DatabaseMap bluetoothctlDatabase_;
+        bluetoothctlDatabase_[controller] = DeviceInfoMap;
+        toolDatabase_["bluetoothctl"] = bluetoothctlDatabase_;
+    }
+    else
+    {
+        toolDatabase_["bluetoothctl"][controller] = DeviceInfoMap;
+    }
+
+    secondOrder.removeDuplicates();
+    toolDatabaseSecondOrder_["bluetoothctl"] = secondOrder;
     return true;
 }
 
@@ -2467,7 +2701,7 @@ bool DeviceInfoParser::loadHwinfoDatabase()
                 {
                     if(DeviceInfoMap.contains(Devicetype_HwInfo_Resolution))
                     {
-                        DeviceInfoMap[Devicetype_HwInfo_Currentresolution] += ",";
+                        DeviceInfoMap[Devicetype_HwInfo_Currentresolution] += ", ";
                         DeviceInfoMap[Devicetype_HwInfo_Currentresolution] +=line.mid(index+1).trimmed();
                     }
                     else
@@ -2492,7 +2726,7 @@ bool DeviceInfoParser::loadHwinfoDatabase()
                 {
                     if(DeviceInfoMap.contains(Devicetype_HwInfo_ResolutionList))
                     {
-                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += ",";
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += ", ";
                         DeviceInfoMap[Devicetype_HwInfo_ResolutionList] +=line.mid(index+1).trimmed();
                     }
                     else

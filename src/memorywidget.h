@@ -14,5 +14,5 @@ public:
     void updateWholeDownWidget();
 
 private:
-    bool canUpgrade_ = false;
+    int canUpgrade_ = -1;
 };

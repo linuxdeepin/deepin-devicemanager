@@ -18,7 +18,7 @@ const QString Devicetype_Xrandr_Screen = "Screen";
 const QString Devicetype_Xrandr_Connected = " connected";
 const QString Devicetype_Xrandr_Disconnected = " disconnected";
 const char Devicetype_Xrandr_Space = ' ';
-const QString Devicetype_Xrandr_Screen_Separator = ",";
+const QString Devicetype_Xrandr_Screen_Separator = ", ";
 const QString Devicetype_Xrandr_Minimum = "minimum";
 const QString Devicetype_Xrandr_Current = "current";
 const QString Devicetype_Xrandr_Maximum = "maximum";
@@ -79,6 +79,8 @@ public:
     bool queryDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles);
     bool queryRemainderDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles, const QSet<QString>& existArticles);
 
+    bool checkValue(const QString& toolName, const QString& device, const QString& key, const QString& contains);
+
     QStringList getCpuList();
     QStringList getMemorynameList();
     QStringList getDisknameList();
@@ -121,6 +123,8 @@ public:
     QStringList getOtherInputdeviceList();
     QStringList getOtherPciDeviceList();
     QStringList getPrinterList();
+
+    QStringList getCDRomList();
     
     // get os
     bool getOSInfo(QString& osInfo);
@@ -129,6 +133,8 @@ public:
 
     // dmidecode parse
     bool loadDemicodeDatabase();
+    // cat /proc/baseboard
+    bool loadCatBoardinfoDatabase();
     // lshw parse
     bool loadLshwDatabase();
     // lscpu parse
@@ -137,7 +143,6 @@ public:
     bool loadCatcpuDatabase();
     // smartctl www.smartmontools.org get disk info
     bool loadAllSmartctlDatabase();
-
     bool loadSmartctlDatabase(const QString& diskLogical);
     // cat /proc/bus/input/devices
     bool loadCatInputDatabase();
@@ -148,8 +153,10 @@ public:
     bool loadUpowerDatabase();
     // lspci parse
     bool loadLspciDatabase();
-    // hciconfig
+    // bluetooth
     bool loadHciconfigDatabase();
+    bool loadAllBluetoothctlDatabase();
+    bool loadBluetoothctlDatabase(const QString& controller);
     // lsusb
     bool loadLsusbDatabase();
     // hwinfo

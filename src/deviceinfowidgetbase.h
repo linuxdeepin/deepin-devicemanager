@@ -9,10 +9,12 @@
 #include "xlsxdocument.h"
 #include "document.h"
 
+
 class QLabel;
 class QVBoxLayout;
 class TableWidgetAlwaysFocus;
 class QGridLayout;
+class QAction;
 
 struct TableHeader
 {
@@ -43,6 +45,7 @@ class DeviceInfoWidgetBase : public Dtk::Widget::DWidget
     Q_OBJECT
 public:
     explicit DeviceInfoWidgetBase(Dtk::Widget::DWidget *parent = nullptr, const QString& deviceName = "");
+    void initFont();
 
     virtual bool getOverViewInfo(ArticleStruct& info);
 
@@ -50,24 +53,20 @@ public:
 
     void initContextMenu();
 
-    // version1.0
-    //void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QStringList& names, const QStringList& contents, const QFont& font);
     void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font , const QPalette& pa);
 
     void setCentralInfo(const QString& info);
-    //void setTitle(const QString& title);
-    //void addInfo(const QString& title, const QStringList& names, const QStringList& contents);
-    void addInfo(const QString& title, const QList<ArticleStruct>& articles);
-    //void addInfo(const QString& name, const QString& value);
 
-    //void addSubInfo(const QString& subTitle, const QStringList& names, const QStringList& contents);
+    void addInfo(const QString& title, const QList<ArticleStruct>& articles);
+    // Html version
+    void addHtmlInfo(const QString& title, const QList<ArticleStruct>& articles);
+
     void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
 
     void addDevice( const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle = false );
 
-    void addStrecch();
     void initDownWidget();
 
     QString getDeviceName();
@@ -75,8 +74,6 @@ public:
     virtual void deviceListClicked();
 
     static int maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3);
-
-    //void paintEvent(QPaintEvent *event) override;
 
 protected:
     virtual void contextMenuEvent(QContextMenuEvent *event) override;
@@ -109,6 +106,8 @@ protected:
     QVBoxLayout* downWidgetLayout = nullptr;
     Dtk::Widget::DMenu* contextMenu_ = nullptr;
 
+    QAction* refreshAction_ = nullptr;
+
     Dtk::Widget::DWidget* infoWidget_ = nullptr;
     QList<Dtk::Widget::DWidget*> subinfoWidgetList_;
 
@@ -119,8 +118,6 @@ protected:
     static QFont labelFont_;
     static QFont tableHeaderFont_;
     static QFont tableContentFont_;
-
-    int currentRow_ = -1;   //-1 for whole info
 
     ArticleStruct overviewInfo_;
 

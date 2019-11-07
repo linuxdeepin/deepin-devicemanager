@@ -21,6 +21,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #load device info from file
 #DEFINES += TEST_DATA_FROM_FILE
 
+#QT_SCALE_FACTOR=1.5
+
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
@@ -48,6 +50,7 @@ include(thirdlib/docx/docx.pri)
 #LIBS += -L../thirdlib/hd -lhd
 
 SOURCES += \
+    src/cdromwidget.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/deviceinfoparser.cpp \
@@ -77,6 +80,8 @@ SOURCES += \
     src/deviceattributedefine.cpp
 
 HEADERS += \
+    src/cdromwidget.h \
+    src/commondefine.h \
     src/mainwindow.h \
     src/version.h \
     src/deviceinfoparser.h \
@@ -84,7 +89,6 @@ HEADERS += \
     src/deviceinfowidgetbase.h \
     src/computeroverviewwidget.h \
     src/singletondef.h \
-    src/hwinfohandler.h \
     src/motherboardwidget.h \
     src/cpuwidget.h \
     src/memorywidget.h \

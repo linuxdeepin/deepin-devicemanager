@@ -7,6 +7,7 @@
 #include "DWidget"
 
 class QListViewItem;
+class QAction;
 
 class DeviceListviewDelegate : public Dtk::Widget::DStyledItemDelegate
 {
@@ -39,6 +40,7 @@ public:
 public slots:
     bool onExportToFile();
     void OnlvOpRightBtn( const QPoint&);
+    void changeThemeIcon();
 
 private:
     void initContextMenu();
@@ -48,4 +50,5 @@ private:
     QStandardItemModel* navModel_ = nullptr;
     QString currentDevice_;
     Dtk::Widget::DMenu* contextMenu_ = nullptr;
+    QAction* refreshAction_ = nullptr;
 };

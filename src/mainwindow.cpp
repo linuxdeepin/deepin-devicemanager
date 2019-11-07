@@ -32,6 +32,7 @@
 #include <QDateTime>
 #include "DTitlebar"
 #include "DSpinner"
+#include "cdromwidget.h"
 #include <thread>
 
 DWIDGET_USE_NAMESPACE
@@ -41,7 +42,8 @@ QList<ArticleStruct> staticArticles;
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
-    setMinimumSize(940, 780);
+    setMinimumSize(1070, 790);
+
     DeviceInfoParserInstance.getRootPassword();
 
     initLoadingWidget();
@@ -61,7 +63,7 @@ void MainWindow::initLoadingWidget()
 {
     //setAutoFillBackground(false);
 
-    loadingWidget_ = new DWidget;
+    loadingWidget_ = new DWidget(this);
 
     //loadingWidget_->setAutoFillBackground(true);
 
@@ -113,16 +115,19 @@ void MainWindow::loadDeviceWidget()
     //mainWidget->setAutoFillBackground(true);
     //mainWidget_->setMaximumHeight(640);
     QHBoxLayout* ly = new QHBoxLayout;
+    //ly->setContentsMargins(10, 0, 10, 0);
     ly->setMargin(0);
     ly->setSpacing(0);
-    ly->setSizeConstraint(QLayout::SetMinAndMaxSize);
+    //ly->setSizeConstraint(QLayout::SetMinAndMaxSize);
     //setFocus(Qt::FocusReason::NoFocusReason);
 
     DApplication::processEvents();
 
+
     leftDeviceView_ = new DeviceListView(this);
-    leftDeviceView_->setMaximumWidth(220);
-    leftDeviceView_->setMinimumWidth(180);
+
+    leftDeviceView_->setMaximumWidth(200);
+    leftDeviceView_->setMinimumWidth(170);
 
     DApplication::processEvents();
 
@@ -241,6 +246,7 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new PrinterWidget(this), "printer.svg");
     addDeviceWidget(new CameraWidget(this), "camera.svg");
     addDeviceWidget(new UsbdeviceWidget(this), "usbdevice.svg");
+    addDeviceWidget(new CDRomWidget(this), "cdrom.svg");
 
     if(firstAdd_ == true)
     {
@@ -302,7 +308,9 @@ void MainWindow::insertDeviceWidget(int index, DeviceInfoWidgetBase* w)
 
 void MainWindow::refresh()
 {
+    leftDeviceView_->setEnabled(false);
     //leftDeviceView_->setEnabled(false);
+    refreshing_ = true;
 
     initLoadingWidget();
 
@@ -482,6 +490,9 @@ void MainWindow::showSplashMessage(const QString& message)
         {
             refreshDeviceWidget();
         }
+
+        refreshing_ = false;
+        leftDeviceView_->setEnabled(true);
         return;
     }
 

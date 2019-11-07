@@ -23,6 +23,7 @@ public:
     void addDeviceWidget(DeviceInfoWidgetBase* w, const QString& icon);
     void insertDeviceWidget(int index, DeviceInfoWidgetBase* w);
 
+    bool isRefreshing(){ return refreshing_; }
     void refresh();
     void refreshDatabase();
 
@@ -49,4 +50,6 @@ private:
     Dtk::Widget::DLabel* loadLabel_ = nullptr;
     Dtk::Widget::DWidget* mainWidget_ = nullptr;
     Dtk::Widget::DWidget* loadingWidget_ = nullptr;
+
+    bool refreshing_ = false;
 };

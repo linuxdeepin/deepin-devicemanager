@@ -18,27 +18,41 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
     QList<ArticleStruct> articles;
 
     ArticleStruct model("Model");
-    QString vendor = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Manufacturer");
-    if(vendor.contains("System manufacturer"))
+
+    ArticleStruct vendor;
+    vendor.queryData("dmidecode", "System Information", "Manufacturer");
+    if(vendor.isValid() == false)
     {
-        vendor = DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Manufacturer");
+        vendor.queryData("catbaseboard", "Base Board Information", "Manufacturer");
     }
-    QString pName = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Product Name");
-    if( pName.contains("System Product Name"))
+    if(vendor.value.contains("System manufacturer"))
     {
-        pName = DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Product Name");
+        vendor.queryData("dmidecode", "Base Board Information", "Manufacturer");
     }
 
-    QString ver = DeviceInfoParserInstance.queryData("dmidecode", "System Information", "Version");
-    if(ver.contains("System Version"))
+    ArticleStruct pName;
+    pName.queryData("dmidecode", "System Information", "Product Name");
+    if(pName.isValid() == false)
     {
-        ver = "";
+        pName.queryData("catbaseboard", "Base Board Information", "Board name");
+    }
+    if( pName.value.contains("System Product Name"))
+    {
+        pName.queryData("dmidecode", "Base Board Information", "Board name");
     }
 
-    model.value = vendor + " " + pName + " " + ver;
-    if(ver.contains("Not Specified", Qt::CaseInsensitive) || ver.contains("x.x", Qt::CaseInsensitive) || ver.contains("Not Applicable", Qt::CaseInsensitive))
+    ArticleStruct ver;
+    ver.queryData("dmidecode", "System Information", "Version");
+    if(ver.isValid() == false || ver.value.contains("System Version"))
     {
-        model.value = vendor + " " + pName;
+        ver.value = "";
+    }
+
+    model.value = vendor.value + " " + pName.value + " " + ver.value;
+
+    if(ver.value.contains("Not Specified", Qt::CaseInsensitive) || ver.value.contains("x.x", Qt::CaseInsensitive) || ver.value.contains("Not Applicable", Qt::CaseInsensitive))
+    {
+        model.value = vendor.value + " " + pName.value;
     }
 //    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000
 //    {

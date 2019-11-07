@@ -19,11 +19,18 @@ void PowerWidget::initWidget()
     QStringList demidecodebatteryList = DeviceInfoParserInstance.getDemidecodeBatteryList();
     QStringList batteryUpowerList = DeviceInfoParserInstance.getBatteryUpowerList();
 
+    int maxSwitchingSize = maxDeviceSize(switchingpowerList, demidecodeSwitchingpowerList, switchingUpowerList);
+
+    if(maxSwitchingSize < 1)
+    {
+        setCentralInfo("Get Power Infomation failed!");
+        return;
+    }
+
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    int maxSwitchingSize = maxDeviceSize(switchingpowerList, demidecodeSwitchingpowerList, switchingUpowerList);
     for(int i = 0; i < maxSwitchingSize; ++i )
     {
         articles.clear();

@@ -477,7 +477,7 @@
         </message>
         <message>
             <source>siblings</source>
-            <translation>逻辑数量</translation>
+            <translation>逻辑单元数量</translation>
         </message>
         <message>
             <source>Asset Tag</source>
@@ -609,7 +609,7 @@
         </message>
         <message>
             <source>logical name</source>
-            <translation>逻辑名称</translation>
+            <translation>逻辑地址</translation>
         </message>
         <message>
             <source>Logical Name</source>
@@ -794,6 +794,14 @@
         <message>
             <source>No Usb Device found!</source>
             <translation>未发现其他USB设备！</translation>
+        </message>
+        <message>
+            <source>No Disk found!</source>
+            <translation>未发现存储设备！</translation>
+        </message>
+        <message>
+            <source>Get Power Infomation failed!</source>
+            <translation>获取电源信息失败！</translation>
         </message>
         <message>
             <source>Model Part Number</source>
@@ -1104,6 +1112,10 @@
             <translation>核心</translation>
         </message>
         <message>
+            <source>core</source>
+            <translation>核心</translation>
+        </message>
+        <message>
             <source>Core ID</source>
             <translation>核心ID</translation>
         </message>
@@ -1348,80 +1360,80 @@
             <translation>因特尔</translation>
         </message>
         <message>
-            <source></source>
+            <source>Powered</source>
+            <translation>供电</translation>
+        </message>
+        <message>
+            <source>Discoverable</source>
+            <translation>可发现</translation>
+        </message>
+        <message>
+            <source>Pairable</source>
+            <translation>可配对</translation>
+        </message>
+        <message>
+            <source>Modalias</source>
+            <translation>Modalias</translation>
+        </message>
+        <message>
+            <source>Discovering</source>
+            <translation>搜索中</translation>
+        </message>
+        <message>
+            <source>CD-ROM</source>
+            <translation>光驱</translation>
+        </message>
+        <message>
+            <source>capabilities</source>
+            <translation>功能</translation>
+        </message>
+        <message>
+            <source>status</source>
+            <translation>状态</translation>
+        </message>
+        <message>
+            <source>ASEs implemented</source>
+            <translation>已实现ASEs</translation>
+        </message>
+        <message>
+            <source>CPU MHz</source>
             <translation></translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>CPU MHz</source>
+            <translation>CPU频率(MHz)</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>cpu model</source>
+            <translation>cpu型号</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>extra interrupt vector</source>
+            <translation>额外中断vector</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>hardware watchpoint</source>
+            <translation>硬件观察点</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>machine</source>
+            <translation>设备</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>microsecond timers</source>
+            <translation>微秒计时</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>shadow register sets</source>
+            <translation>shadow寄存器集</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>system type</source>
+            <translation>系统类型</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
+            <source>wait instruction</source>
+            <translation>等待指令</translation>
         </message>
         <message>
             <source></source>

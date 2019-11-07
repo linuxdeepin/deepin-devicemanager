@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
     app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
 
     //app.setApplicationVersion(VERSION);
+    app.setApplicationVersion(DApplication::buildVersion("3.0"));
+
     app.setProductIcon(QIcon(":images/cpu.svg"));
     app.setWindowIcon(QIcon(":images/cpu.svg"));
     app.setProductName(DApplication::translate("Main", "Device Manager"));

@@ -5,18 +5,18 @@
     <desc>Created with Sketch.</desc>
     <g id="键盘" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="编组-6" transform="translate(3.000000, 5.000000)">
-            <rect id="矩形" stroke="#536076" stroke-linecap="round" stroke-linejoin="round" x="0.5" y="0.5" width="14" height="10" rx="1"></rect>
-            <rect id="矩形" fill="#626E88" x="3" y="5" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="5" y="5" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="7" y="5" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="9" y="5" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="11" y="5" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="3" y="3" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="5" y="3" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="7" y="3" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="9" y="3" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="11" y="3" width="1" height="1"></rect>
-            <rect id="矩形" fill="#626E88" x="3" y="7" width="9" height="1"></rect>
+            <rect id="矩形" stroke="#C0C6D4" stroke-linecap="round" stroke-linejoin="round" x="0.5" y="0.5" width="14" height="10" rx="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="3" y="5" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="5" y="5" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="7" y="5" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="9" y="5" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="11" y="5" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="3" y="3" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="5" y="3" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="7" y="3" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="9" y="3" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="11" y="3" width="1" height="1"></rect>
+            <rect id="矩形" fill="#C0C6D4" x="3" y="7" width="9" height="1"></rect>
         </g>
     </g>
 </svg>
