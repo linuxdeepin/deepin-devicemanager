@@ -1,3 +1,24 @@
+/*
+ * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
+ *
+ * Author:     AaronZhang <ya.zhang@archermind.com>
+ *
+ * Maintainer: AaronZhang <ya.zhang@archermind.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #pragma once
 
 #include <QList>
@@ -15,6 +36,7 @@ class QVBoxLayout;
 class TableWidgetAlwaysFocus;
 class QGridLayout;
 class QAction;
+class ColumnWidget;
 
 struct TableHeader
 {
@@ -25,19 +47,9 @@ struct TableHeader
 struct DeviceInfo
 {
     Dtk::Widget::DLabel* title = nullptr;
-    QList<Dtk::Widget::DLabel*>  nameLabels;
-    QList<Dtk::Widget::DLabel*>  contentLabels;
-};
+    QList<ColumnWidget*>  columnWidgets;
 
-class ColumnWidget: public Dtk::Widget::DWidget
-{
-private:
-    Dtk::Widget::DLabel* l1;
-    Dtk::Widget::DLabel* l2;
-
-public:
-    ColumnWidget(Dtk::Widget::DWidget* parent = nullptr);
-    void mousePressEvent(QMouseEvent *event) override;
+    void changeTheme();
 };
 
 class DeviceInfoWidgetBase : public Dtk::Widget::DWidget
@@ -53,14 +65,19 @@ public:
 
     void initContextMenu();
 
-    void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font , const QPalette& pa);
+    //void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font , const QPalette& pa);
+    void addCloumnToLayout(DeviceInfo* di, QVBoxLayout* vly, const QList<ArticleStruct>& articles, const QFont& font , int columnHeight, const QPalette& pa);
 
     void setCentralInfo(const QString& info);
 
-    void addInfo(const QString& title, const QList<ArticleStruct>& articles);
+    //void addInfo(const QString& title, const QList<ArticleStruct>& articles);
     // Html version
     void addHtmlInfo(const QString& title, const QList<ArticleStruct>& articles);
+    // cloumnwidgeth version
+    void addInfo(const QString& title, const QList<ArticleStruct>& articles);
 
+    //void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
+    // cloumnwidget version
     void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
@@ -75,8 +92,15 @@ public:
 
     static int maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3);
 
+    void selectColumnWidget(ColumnWidget* sw);
+
+    void getContextMenu(Dtk::Widget::DMenu** contextMenu);
+
+    void changeTheme();
+
 protected:
-    virtual void contextMenuEvent(QContextMenuEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void contextMenuEvent(QContextMenuEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
 
 public slots:
@@ -124,4 +148,5 @@ protected:
     int verticalScrollBarMaxValue = 0;
 
     //static int currentXlsRow_;
+    ColumnWidget* selectColumnWidget_ = nullptr;
 };

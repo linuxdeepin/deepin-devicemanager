@@ -268,8 +268,8 @@
             <translation>鼠标</translation>
         </message>
         <message>
-            <source>Other Inputdevice</source>
-            <translation>其他输入设备</translation>
+            <source>Other Devices</source>
+            <translation>其他设备</translation>
         </message>
         <message>
             <source>Capabilities</source>
@@ -312,7 +312,7 @@
             <translation>描述</translation>
         </message>
         <message>
-            <source>Other PCI Device</source>
+            <source>Other PCI Devices</source>
             <translation>其他PCI设备</translation>
         </message>
         <message>
@@ -780,11 +780,11 @@
             <translation>未发现网络适配器！</translation>
         </message>
         <message>
-            <source>No Other Inputdevice found!</source>
-            <translation>未发现其他输入设备！</translation>
+            <source>No Other Devices found!</source>
+            <translation>未发现其他设备！</translation>
         </message>
         <message>
-            <source>No Other PCI Device found!</source>
+            <source>No Other PCI Devices found!</source>
             <translation>未发现其他PCI设备！</translation>
         </message>
         <message>
@@ -798,6 +798,10 @@
         <message>
             <source>No Disk found!</source>
             <translation>未发现存储设备！</translation>
+        </message>
+        <message>
+            <source>No CD-ROM found!</source>
+            <translation>未发现光驱！</translation>
         </message>
         <message>
             <source>Get Power Infomation failed!</source>
@@ -937,7 +941,7 @@
         </message>
         <message>
             <source>Loading Storage Info...</source>
-            <translation>获取存储信息...</translation>
+            <translation>获取存储设备信息...</translation>
         </message>
         <message>
             <source>Loading CPU Info...</source>
@@ -956,7 +960,7 @@
             <translation>获取显示器信息...</translation>
         </message>
         <message>
-            <source>Loading PCI Device Info...</source>
+            <source>Loading PCI Devices Info...</source>
             <translation>获取PCI设备信息...</translation>
         </message>
         <message>
@@ -1436,8 +1440,8 @@
             <translation>等待指令</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Copy</source>
+            <translation>复制</translation>
         </message>
         <message>
             <source></source>

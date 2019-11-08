@@ -1,3 +1,24 @@
+/*
+ * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
+ *
+ * Author:     AaronZhang <ya.zhang@archermind.com>
+ *
+ * Maintainer: AaronZhang <ya.zhang@archermind.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "logpasswordauth.h"
 #include <DApplication>
 #include <QDebug>
@@ -50,10 +71,16 @@ void LogPasswordAuth::initUI()
     titleLabel = new DLabel(DApplication::translate("Main", "读取设备信息需要授权"));
     titleLabel->setObjectName("TitleLabel");
     titleLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
+    QFont font = titleLabel->font();
+    font.setPixelSize(20);
+    titleLabel->setFont(font);
 
     messageLabel = new DLabel;
     messageLabel->hide();
     messageLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
+    font = messageLabel->font();
+    font.setPixelSize(20);
+    messageLabel->setFont(font);
 
     QVBoxLayout *textLayout = new QVBoxLayout;
     textLayout->setContentsMargins(0, 0, 0, 0);
@@ -99,12 +126,18 @@ void LogPasswordAuth::initUI()
     cancelButton_->setAttribute(Qt::WA_NoMousePropagation);
     cancelButton_->setFixedHeight(40);
     cancelButton_->setObjectName("ActionButton");
+    font = cancelButton_->font();
+    font.setPixelSize(20);
+    cancelButton_->setFont(font);
 
     connect(cancelButton_, &DPushButton::clicked, this, &LogPasswordAuth::cancelButtonClicked);
 
     confimButton_ = new DPushButton(DApplication::translate("Main", "Authenticate"), this);
     confimButton_->setAttribute(Qt::WA_NoMousePropagation);
     confimButton_->setFixedHeight(40);
+    font = confimButton_->font();
+    font.setPixelSize(20);
+    confimButton_->setFont(font);
     connect(confimButton_, &DPushButton::clicked, this, &LogPasswordAuth::confimButtonClicked);
 
     QAction *button_action = new QAction(this);

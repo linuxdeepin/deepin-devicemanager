@@ -268,7 +268,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Other Inputdevice</source>
+            <source>Other Devices</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -312,7 +312,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Other PCI Device</source>
+            <source>Other PCI Devices</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -788,11 +788,11 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>No Other Inputdevice found!</source>
+            <source>No Other Devices found!</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>No Other PCI Device found!</source>
+            <source>No Other PCI Devices found!</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -805,6 +805,10 @@
         </message>
         <message>
             <source>No Disk found!</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>No CD-ROM found!</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -1444,7 +1448,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Copy</source>
             <translation type="unfinished"/>
         </message>
         <message>

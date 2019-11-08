@@ -1,3 +1,24 @@
+/*
+ * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
+ *
+ * Author:     AaronZhang <ya.zhang@archermind.com>
+ *
+ * Maintainer: AaronZhang <ya.zhang@archermind.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "mainwindow.h"
 #include "devicelistview.h"
 #include <QHBoxLayout>
@@ -17,7 +38,7 @@
 #include "keyboardwidget.h"
 #include "mousewidget.h"
 #include "usbdevicewidget.h"
-#include "otherinputdevicewidget.h"
+#include "otherdevicewidget.h"
 #include "powerwidget.h"
 #include <QStandardItemModel>
 #include "otherpcidevice.h"
@@ -34,6 +55,7 @@
 #include "DSpinner"
 #include "cdromwidget.h"
 #include <thread>
+#include "commondefine.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -42,11 +64,12 @@ QList<ArticleStruct> staticArticles;
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
-    setMinimumSize(1070, 790);
+    setMinimumSize(mainWindowMinWidth_, mainWindowMinHeight_);
 
     DeviceInfoParserInstance.getRootPassword();
 
     initLoadingWidget();
+
     setCentralWidget(loadingWidget_);
 
     connect( &DeviceInfoParserInstance, &DeviceInfoParser::loadFinished, this, &MainWindow::showSplashMessage);
@@ -83,11 +106,9 @@ void MainWindow::initLoadingWidget()
 
     QVBoxLayout* vly = new QVBoxLayout;
 
-    vly->setMargin(20);
-
     vly->addStretch(2);
     auto spinner_ = new DSpinner(loadingWidget_);
-    spinner_->setFixedSize(48, 48);
+    spinner_->setFixedSize(spinnerWidth, spinnerHeight);
 
     QHBoxLayout* hly1 = new QHBoxLayout;
     hly1->addWidget(spinner_, 1);
@@ -96,6 +117,9 @@ void MainWindow::initLoadingWidget()
     hly2->addStretch();
 
     loadLabel_ = new DLabel("Loading...", this);
+    QFont font = loadLabel_->font();
+    font.setPixelSize(14);
+    loadLabel_->setFont(font);
     hly2->addWidget(loadLabel_);
     hly2->addStretch();
 
@@ -110,7 +134,6 @@ void MainWindow::initLoadingWidget()
 
 void MainWindow::loadDeviceWidget()
 {
-    //setAutoFillBackground(false);
     mainWidget_ = new DWidget(this);
     //mainWidget->setAutoFillBackground(true);
     //mainWidget_->setMaximumHeight(640);
@@ -124,14 +147,14 @@ void MainWindow::loadDeviceWidget()
     DApplication::processEvents();
 
 
-    leftDeviceView_ = new DeviceListView(this);
+    leftDeviceView_ = new DeviceListView(mainWidget_);
 
-    leftDeviceView_->setMaximumWidth(200);
-    leftDeviceView_->setMinimumWidth(170);
+    //leftDeviceView_->setMaximumWidth(200);
+    leftDeviceView_->setMinimumWidth(leftDeviceListViewMinWidth_);
 
     DApplication::processEvents();
 
-    ly->addWidget(leftDeviceView_);
+    ly->addWidget(leftDeviceView_, leftDeviceListViewMinWidth_);
 
     DApplication::processEvents();
 
@@ -170,7 +193,7 @@ void MainWindow::loadDeviceWidget()
 //            }
 //    );
 
-    ly->addWidget(rightDeviceInfoWidget_);
+    ly->addWidget(rightDeviceInfoWidget_, mainWindowMinWidth_ - leftDeviceListViewMinWidth_);
 
     DApplication::processEvents();
 
@@ -223,38 +246,38 @@ void MainWindow::addAllDeviceinfoWidget()
 {
     staticArticles.clear();
 
-    auto overviewWidget = new ComputerOverviewWidget(this);
+    auto overviewWidget = new ComputerOverviewWidget(mainWidget_);
     addDeviceWidget(overviewWidget, "overview.svg");
-    addDeviceWidget(new CpuWidget(this), "cpu.svg");
-    addDeviceWidget(new MotherboardWidget(this), "motherboard.svg");
-    addDeviceWidget(new MemoryWidget(this), "memory.svg");
-    addDeviceWidget(new DiskWidget(this), "storage.svg");
-    addDeviceWidget(new DisplayadapterWidget(this), "displayadapter.svg");
-    addDeviceWidget(new MonitorWidget(this), "monitor.svg");
-    addDeviceWidget(new NetworkadapterWidget(this), "networkadapter.svg");
-    addDeviceWidget(new AudiodeviceWidget(this), "audiodevice.svg");
-    addDeviceWidget(new BluetoothWidget(this), "bluetooth.svg");
-    addDeviceWidget(new PowerWidget(this), "battery.svg");
+    addDeviceWidget(new CpuWidget(mainWidget_), "cpu.svg");
+    addDeviceWidget(new MotherboardWidget(mainWidget_), "motherboard.svg");
+    addDeviceWidget(new MemoryWidget(mainWidget_), "memory.svg");
+    addDeviceWidget(new DiskWidget(mainWidget_), "storage.svg");
+    addDeviceWidget(new DisplayadapterWidget(mainWidget_), "displayadapter.svg");
+    addDeviceWidget(new MonitorWidget(mainWidget_), "monitor.svg");
+    addDeviceWidget(new NetworkadapterWidget(mainWidget_), "networkadapter.svg");
+    addDeviceWidget(new AudiodeviceWidget(mainWidget_), "audiodevice.svg");
+    addDeviceWidget(new BluetoothWidget(mainWidget_), "bluetooth.svg");
+    addDeviceWidget(new PowerWidget(mainWidget_), "battery.svg");
 
     if(firstAdd_ == true)
     {
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new KeyboardWidget(this), "keyboard.svg");
-    addDeviceWidget(new MouseWidget(this), "mouse.svg");
-    addDeviceWidget(new PrinterWidget(this), "printer.svg");
-    addDeviceWidget(new CameraWidget(this), "camera.svg");
-    addDeviceWidget(new UsbdeviceWidget(this), "usbdevice.svg");
-    addDeviceWidget(new CDRomWidget(this), "cdrom.svg");
+    addDeviceWidget(new KeyboardWidget(mainWidget_), "keyboard.svg");
+    addDeviceWidget(new MouseWidget(mainWidget_), "mouse.svg");
+    addDeviceWidget(new PrinterWidget(mainWidget_), "printer.svg");
+    addDeviceWidget(new CameraWidget(mainWidget_), "camera.svg");
+    addDeviceWidget(new UsbdeviceWidget(mainWidget_), "usbdevice.svg");
+    addDeviceWidget(new CDRomWidget(mainWidget_), "cdrom.svg");
 
     if(firstAdd_ == true)
     {
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new OtherInputdeviceWidget(this), "otherinputdevice.svg");
-    addDeviceWidget(new OtherPciDeviceWidget(this), "otherpcidevice.svg");
+    addDeviceWidget(new OtherPciDeviceWidget(mainWidget_), "otherpcidevices.svg");
+    addDeviceWidget(new OtherDevicesWidget(mainWidget_), "otherdevices.svg");
 
     overviewWidget->setOverviewInfos(staticArticles);
 
@@ -351,47 +374,7 @@ void MainWindow::refreshDatabase()
 
     thread.detach();
 }
-//void MainWindow::refreshDatabase()
-//{
-//    showSplashMessage("Loading Operating System Info...");
-//    DeviceInfoParserInstance.loadCatosrelelease();
-//    DeviceInfoParserInstance.loadlsb_release();
-//    //DeviceInfoParserInstance.getOSInfo(osInfo);
 
-//    showSplashMessage("Loading SMBBios Info...");
-//    DeviceInfoParserInstance.loadDemicodeDatabase();
-
-//    showSplashMessage("Loading List Hardware Info");
-//    DeviceInfoParserInstance.loadLshwDatabase();
-
-//    showSplashMessage("Loading CPU Info...");
-//    DeviceInfoParserInstance.loadCatcpuDatabase();
-//    DeviceInfoParserInstance.loadLscpuDatabase();
-//    //DeviceInfoParserInstance.loadSmartctlDatabase();
-
-//    showSplashMessage("Loading Input Device Info...");
-//    DeviceInfoParserInstance.loadCatInputDatabase();
-
-//    showSplashMessage("Loading Power Settings...");
-//    DeviceInfoParserInstance.loadPowerSettings();
-//    DeviceInfoParserInstance.loadUpowerDatabase();
-
-//    showSplashMessage("Loading Displayer Info...");
-//    DeviceInfoParserInstance.loadXrandrDatabase();
-//    DeviceInfoParserInstance.loadHwinfoDatabase();
-
-//    showSplashMessage("Loading PCI Device Info...");
-//    DeviceInfoParserInstance.loadLspciDatabase();
-
-//    showSplashMessage("Loading Bluetooth Device Info...");
-//    DeviceInfoParserInstance.loadHciconfigDatabase();
-
-//    showSplashMessage("Loading USB Device Info...");
-//    DeviceInfoParserInstance.loadLsusbDatabase();
-
-//    showSplashMessage("Loading Ptinter Info...");
-//    DeviceInfoParserInstance.loadCupsDatabase();
-//}
 
 bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
 {

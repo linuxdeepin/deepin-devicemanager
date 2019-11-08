@@ -23,11 +23,11 @@
 
 #include "deviceinfowidgetbase.h"
 
-class MouseWidget : public DeviceInfoWidgetBase
+class OtherDevicesWidget : public DeviceInfoWidgetBase
 {
     Q_OBJECT
 public:
-    explicit MouseWidget(QWidget *parent = nullptr);
+    explicit OtherDevicesWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
 };

@@ -8,7 +8,7 @@ Device Manager is a gadget for viewing device information.
 * [linux-hardware.org](https://linux-hardware.org/)
 
 ## Depend on 
-* lshw
+* [lshw](https://ezix.org/project/wiki/HardwareLiSter)
 * lsb_release
 * [dmidecode](http://www.nongnu.org/dmidecode/)
 * hciconfig

@@ -11,8 +11,8 @@
         <file>images/light/normal/keyboard.svg</file>
         <file>images/light/normal/bluetooth.svg</file>
         <file>images/light/normal/memory.svg</file>
-        <file>images/light/normal/otherinputdevice.svg</file>
-        <file>images/light/normal/otherpcidevice.svg</file>
+        <file>images/light/normal/otherdevices.svg</file>
+        <file>images/light/normal/otherpcidevices.svg</file>
         <file>images/light/normal/mouse.svg</file>
         <file>images/light/normal/camera.svg</file>
         <file>images/light/normal/networkadapter.svg</file>
@@ -29,8 +29,8 @@
         <file>images/light/press/keyboard.svg</file>
         <file>images/light/press/bluetooth.svg</file>
         <file>images/light/press/memory.svg</file>
-        <file>images/light/press/otherinputdevice.svg</file>
-        <file>images/light/press/otherpcidevice.svg</file>
+        <file>images/light/press/otherdevices.svg</file>
+        <file>images/light/press/otherpcidevices.svg</file>
         <file>images/light/press/mouse.svg</file>
         <file>images/light/press/camera.svg</file>
         <file>images/light/press/networkadapter.svg</file>
@@ -47,8 +47,8 @@
         <file>images/dark/normal/keyboard.svg</file>
         <file>images/dark/normal/bluetooth.svg</file>
         <file>images/dark/normal/memory.svg</file>
-        <file>images/dark/normal/otherinputdevice.svg</file>
-        <file>images/dark/normal/otherpcidevice.svg</file>
+        <file>images/dark/normal/otherdevices.svg</file>
+        <file>images/dark/normal/otherpcidevices.svg</file>
         <file>images/dark/normal/mouse.svg</file>
         <file>images/dark/normal/camera.svg</file>
         <file>images/dark/normal/networkadapter.svg</file>
@@ -65,8 +65,8 @@
         <file>images/dark/press/keyboard.svg</file>
         <file>images/dark/press/bluetooth.svg</file>
         <file>images/dark/press/memory.svg</file>
-        <file>images/dark/press/otherinputdevice.svg</file>
-        <file>images/dark/press/otherpcidevice.svg</file>
+        <file>images/dark/press/otherdevices.svg</file>
+        <file>images/dark/press/otherpcidevices.svg</file>
         <file>images/dark/press/mouse.svg</file>
         <file>images/dark/press/camera.svg</file>
         <file>images/dark/press/networkadapter.svg</file>
