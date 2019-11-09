@@ -141,16 +141,19 @@ public:
     QStringList getDemidecodeBatteryList();
     QStringList getBatteryUpowerList();
 
-    QStringList getOtherInputdeviceList();
+    QStringList getOtherDeviceList();
     QStringList getOtherPciDeviceList();
     QStringList getPrinterList();
 
     QStringList getCDRomList();
     
     // get os
-    bool getOSInfo(QString& osInfo);
+    const QString&  getOsInfo();
+    const QString&  getOsHtmlInfo();
+
     bool loadCatosrelelease();
     bool loadlsb_release();
+    bool loadOSInfo();
 
     // dmidecode parse
     bool loadDemicodeDatabase();
@@ -208,6 +211,9 @@ public:
     int batteryScreenSuspendDelay_ = 0;
     int batteryComputerSuspendDelay_ = 0;
     int batteryAutoLockScreenDelay_ = 0;
+
+    QString osInfo_;
+    QString osInfoHtml_;
 };
 
 #define DeviceInfoParserInstance (DeviceInfoParser::Instance())

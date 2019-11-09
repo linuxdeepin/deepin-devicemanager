@@ -52,7 +52,7 @@ public:
     void addSeperator();
 
     QString currentDevice();
-    void setCurrentDevice(QString& device);
+    void setCurrentDevice(const QString& device);
 
     void setSelectNull();
 

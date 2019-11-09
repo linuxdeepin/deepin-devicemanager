@@ -430,7 +430,7 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
     addCloumnToLayout(titleInfo_, vly, articles, infoFont_, 29, pa);
 
     infoWidget_ = new DWidget(this);
-    infoWidget_->setFixedWidth(DeviceWidgetDownWidgehWidth_);
+    //infoWidget_->setFixedWidth(DeviceWidgetDownWidgehWidth_);
     infoWidget_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     infoWidget_->setLayout(vly);
 
@@ -633,7 +633,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         tableWidget_->setFrameShape(QFrame::Shape::NoFrame);
 
-        connect(tableWidget_, &DTableWidget::itemClicked, this, &DeviceInfoWidgetBase::OnCurrentItemClicked);
+        connect(tableWidget_, &DTableWidget::itemSelectionChanged, this, &DeviceInfoWidgetBase::OnCurrentItemClicked);
     }
 
     //tableWidget_->horizontalHeader()->setSectionResizeMode(headers.size() - 2, QHeaderView::Stretch);
@@ -864,8 +864,14 @@ void DeviceInfoWidgetBase::resizeEvent(QResizeEvent *event)
     DWidget::resizeEvent(event);
 }
 
-void DeviceInfoWidgetBase::OnCurrentItemClicked(QTableWidgetItem *item)
+void DeviceInfoWidgetBase::OnCurrentItemClicked(/*QTableWidgetItem *item*/)
 {
+    if( tableWidget_->selectedItems().size() < 1)
+    {
+        return;
+    }
+
+    QTableWidgetItem *item = tableWidget_->selectedItems().at(0);
     if(item == nullptr)
     {
         return;

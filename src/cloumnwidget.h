@@ -26,6 +26,7 @@
 #include <QClipboard>
 #include "DLabel"
 #include "deviceinfowidgetbase.h"
+#include "DPalette"
 
 class ColumnWidget;
 
@@ -60,4 +61,8 @@ public:
 
 private:
     DeviceInfoWidgetBase* deviceInfoWidget_ = nullptr;
+
+    static bool isPaletteInit_;
+    static Dtk::Gui::DPalette paHighlight_;
+    static Dtk::Gui::DPalette paNormal_;
 };

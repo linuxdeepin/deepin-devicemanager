@@ -83,7 +83,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
     articles.push_back(model);
 
     ArticleStruct os("Operating System");
-    DeviceInfoParserInstance.getOSInfo(os.value);
+    os.value = DeviceInfoParserInstance.getOsHtmlInfo();
     os.externalLinks = true;
     articles.push_back(os);
 

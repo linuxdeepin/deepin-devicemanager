@@ -164,32 +164,10 @@ void MainWindow::loadDeviceWidget()
 
     addAllDeviceinfoWidget();
 
-    connect(leftDeviceView_, &DeviceListView::pressed, [this](const QModelIndex& index)
-                {
-                    QString device = index.data().toString();
-                    if( false == deviceInfoWidgetMap_.contains(device) )
-                    {
-                        return;
-                    }
-
-                    deviceInfoWidgetMap_[device]->deviceListClicked();
-                    rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[index.data().toString()]);
-                    leftDeviceView_->setCurrentDevice(device);
-                    //titlebar()->setTitle(device);
-            }
-    );
-
-//    connect(leftDeviceView_, &DeviceListView::clicked, [this](const QModelIndex& index)
+//    connect(leftDeviceView_, &DeviceListView::pressed, [this](const QModelIndex& index)
 //                {
 //                    QString device = index.data().toString();
-//                    if( false == deviceInfoWidgetMap_.contains(device) )
-//                    {
-//                        return;
-//                    }
-
-//                    deviceInfoWidgetMap_[device]->deviceListClicked();
-//                    rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[index.data().toString()]);
-//                    leftDeviceView_->setCurrentDevice(device);
+//                    currentDeviceChanged(device);
 //            }
 //    );
 
@@ -459,6 +437,18 @@ bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
     }
 
     return false;
+}
+
+void MainWindow::currentDeviceChanged(const QString& device)
+{
+    if( false == deviceInfoWidgetMap_.contains(device) )
+    {
+        return;
+    }
+
+    deviceInfoWidgetMap_[device]->deviceListClicked();
+    rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[device]);
+    leftDeviceView_->setCurrentDevice(device);
 }
 
 void MainWindow::showSplashMessage(const QString& message)

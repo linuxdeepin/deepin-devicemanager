@@ -29,8 +29,13 @@
 #include "DApplication"
 #include "commondefine.h"
 #include "QSizePolicy"
+#include "deviceinfoparser.h"
 
 DWIDGET_USE_NAMESPACE
+
+bool ColumnWidget::isPaletteInit_ = false;
+DPalette ColumnWidget::paHighlight_;
+DPalette ColumnWidget::paNormal_;
 
 ColumnLabel::ColumnLabel(const QString& text, ColumnWidget* parent): DLabel(text, parent),columnWidget_(parent)
 {
@@ -57,7 +62,6 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
     setLayout(hly);
 
     hly->setSpacing(0);
-
     hly->setMargin(0);
 
 
@@ -71,18 +75,29 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
     l2 = new ColumnLabel( strRight, this);
     l2->setFont(font);
     l2->setWordWrap(true);
-    int textWidth = QFontMetrics( font ).width(strRight) + 10;
+    int textWidth = QFontMetrics( font ).width(strRight);
     if(textWidth > DeviceWidgetContentWidth_)
     {
         textWidth = DeviceWidgetContentWidth_;
     }
-    l2->setMinimumWidth( textWidth );
+
+    l2->setMinimumWidth( textWidth + 10);
     l2->setAutoFillBackground(true);
     l2->setMinimumHeight(columnHeight);
 
-    hly->addWidget(l1);
-    hly->addWidget(l2);
+    hly->addWidget(l1, 0, Qt::AlignmentFlag::AlignTop);
+    hly->addWidget(l2, 0, Qt::AlignmentFlag::AlignTop);
     hly->addStretch();
+
+    if(isPaletteInit_ == false)
+    {
+        isPaletteInit_ = true;
+        paNormal_ = DApplicationHelper::instance()->palette(this);
+
+        paHighlight_.setBrush(QPalette::Background, paNormal_.highlight());
+        paHighlight_.setBrush(QPalette::WindowText, paNormal_.highlightedText());
+        paHighlight_.setBrush(QPalette::Link, paNormal_.highlightedText() );
+    }
 }
 
 void ColumnWidget::labelMousePressEvent(QMouseEvent *event)
@@ -139,30 +154,31 @@ void ColumnWidget::labelContextMenuEvent(QContextMenuEvent *event)
 void ColumnWidget::setHilight(bool highLight)
 {
     //setAutoFillBackground(highLight);
-
-    DPalette pa = DApplicationHelper::instance()->palette(this);
-    QColor link = pa.link().color();
-
-    if(highLight == false )
+    DApplicationHelper::instance()->setPalette(l1, highLight? paHighlight_:paNormal_);
+    if(l2->openExternalLinks() == true )
     {
-        pa.setBrush(QPalette::Background, pa.background());
-        pa.setBrush(QPalette::WindowText, pa.windowText());
-        pa.setBrush(QPalette::Link, pa.link() );
-    }
-    else
-    {
-        pa.setBrush(QPalette::Background, pa.highlight());
-        pa.setBrush(QPalette::WindowText, pa.highlightedText());
-        pa.setBrush(QPalette::Link, pa.highlightedText() );
+        if(highLight)
+        {
+            l2->setText( DeviceInfoParserInstance.getOsInfo() );
+        }
+        else
+        {
+            l2->setText( DeviceInfoParserInstance.getOsHtmlInfo() );
+        }
     }
 
-    DApplicationHelper::instance()->setPalette(l1, pa);
-    DApplicationHelper::instance()->setPalette(l2, pa);
+    DApplicationHelper::instance()->setPalette(l2, highLight? paHighlight_:paNormal_);
 
     st = highLight;
 }
 
 void ColumnWidget::changeTheme()
 {
+    paNormal_ = DApplicationHelper::instance()->palette(this);
+
+    paHighlight_.setBrush(QPalette::Background, paNormal_.highlight());
+    paHighlight_.setBrush(QPalette::WindowText, paNormal_.highlightedText());
+    paHighlight_.setBrush(QPalette::Link, paNormal_.highlightedText() );
+
     setHilight(false);
 }

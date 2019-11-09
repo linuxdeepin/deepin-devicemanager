@@ -50,6 +50,8 @@ public:
 
     bool exportTo(const QString& file, const QString& selectFilter);
 
+    void currentDeviceChanged(const QString& device);
+
 signals:
     void startLoadingWidgetSignal();
 

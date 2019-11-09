@@ -104,7 +104,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
 public slots:
-    void OnCurrentItemClicked(QTableWidgetItem *item);
+    void OnCurrentItemClicked(/*QTableWidgetItem *item*/);
     bool onExportToFile();
 
 public:

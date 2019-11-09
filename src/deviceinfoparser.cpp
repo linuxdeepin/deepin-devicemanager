@@ -58,49 +58,50 @@ void DeviceInfoParser::refreshDabase()
     toolDatabase_.clear();
 
     emit loadFinished("Loading Operating System Info...");
-    DeviceInfoParserInstance.loadCatosrelelease();
-    DeviceInfoParserInstance.loadlsb_release();
+    loadCatosrelelease();
+    loadlsb_release();
+    loadOSInfo();
     //DeviceInfoParserInstance.getOSInfo(osInfo);
 
     emit loadFinished("Loading SMBBios Info...");
-    DeviceInfoParserInstance.loadDemicodeDatabase();
-    DeviceInfoParserInstance.loadCatBoardinfoDatabase
+    loadDemicodeDatabase();
+    loadCatBoardinfoDatabase
             ();
 
     emit loadFinished("Loading List Hardware Info...");
-    DeviceInfoParserInstance.loadLshwDatabase();
+    loadLshwDatabase();
 
     emit loadFinished("Loading Storage Info...");
-    DeviceInfoParserInstance.loadAllSmartctlDatabase();
+    loadAllSmartctlDatabase();
 
     emit loadFinished("Loading CPU Info...");
-    DeviceInfoParserInstance.loadCatcpuDatabase();
-    DeviceInfoParserInstance.loadLscpuDatabase();
+    loadCatcpuDatabase();
+    loadLscpuDatabase();
     //DeviceInfoParserInstance.loadSmartctlDatabase();
 
     emit loadFinished("Loading Input Device Info...");
-    DeviceInfoParserInstance.loadCatInputDatabase();
+    loadCatInputDatabase();
 
     emit loadFinished("Loading Power Settings...");
-    DeviceInfoParserInstance.loadPowerSettings();
-    DeviceInfoParserInstance.loadUpowerDatabase();
+    loadPowerSettings();
+    loadUpowerDatabase();
 
     emit loadFinished("Loading Displayer Info...");
-    DeviceInfoParserInstance.loadXrandrDatabase();
-    DeviceInfoParserInstance.loadHwinfoDatabase();
+    loadXrandrDatabase();
+    loadHwinfoDatabase();
 
     emit loadFinished("Loading PCI Device Info...");
-    DeviceInfoParserInstance.loadLspciDatabase();
+    loadLspciDatabase();
 
     emit loadFinished("Loading Bluetooth Device Info...");
-    DeviceInfoParserInstance.loadHciconfigDatabase();
-    DeviceInfoParserInstance.loadAllBluetoothctlDatabase();
+    loadHciconfigDatabase();
+    loadAllBluetoothctlDatabase();
 
     emit loadFinished("Loading USB Device Info...");
-    DeviceInfoParserInstance.loadLsusbDatabase();
+    loadLsusbDatabase();
 
     emit loadFinished("Loading Ptinter Info...");
-    DeviceInfoParserInstance.loadCupsDatabase();
+    loadCupsDatabase();
 
     emit loadFinished("finish");
 }
@@ -458,20 +459,28 @@ QStringList DeviceInfoParser::getInputAudioDeviceList()
 
     foreach(const QString& fk, toolDatabaseSecondOrder_["catinput"] )
     {
-        if(false ==toolDatabase_["catinput"][fk].contains("Name"))
+        if( toolDatabase_["catinput"][fk].contains("Name") )
         {
-            continue;
+            QString name = toolDatabase_["catinput"][fk]["Name"];
+            if(     name.contains("Speaker", Qt::CaseInsensitive) \
+                ||  name.contains("Headphone", Qt::CaseInsensitive) \
+                ||  name.contains("Mic", Qt::CaseInsensitive)  )
+            {
+                    inputdeviceList.push_back(fk);
+                    continue;
+            }
         }
 
-        QString name = toolDatabase_["catinput"][fk]["Name"];
-        if(     false == name.contains("Speaker", Qt::CaseInsensitive) \
-            &&  false == name.contains("Headphone", Qt::CaseInsensitive) \
-            &&  false == name.contains("Mic", Qt::CaseInsensitive) )
+        if( toolDatabase_["catinput"][fk].contains("Sysfs") )
         {
-            continue;
+            QString sysfs = toolDatabase_["catinput"][fk]["Sysfs"];
+            if( sysfs.contains("/sound/", Qt::CaseInsensitive) )
+            {
+                inputdeviceList.push_back(fk);
+                continue;
+            }
         }
 
-        inputdeviceList.push_back(fk);
     }
 
     return inputdeviceList;
@@ -989,7 +998,7 @@ QStringList DeviceInfoParser::getBatteryUpowerList()
     return batteryList;
 }
 
-QStringList DeviceInfoParser::getOtherInputdeviceList()
+QStringList DeviceInfoParser::getOtherDeviceList()
 {
     QStringList otherInputdeviceList;
 
@@ -1089,7 +1098,7 @@ QStringList DeviceInfoParser::getCDRomList()
     return cdromList;
 }
 
-bool DeviceInfoParser::getOSInfo(QString& osInfo)
+bool DeviceInfoParser::loadOSInfo()
 {
     struct utsname kernel_info;
     int ret = uname(&kernel_info);
@@ -1100,7 +1109,9 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
 
     if( false == executeProcess("cat /proc/version") )
     {
-        osInfo = DApplication::translate("Main", "Unknown");
+        osInfoHtml_ = DApplication::translate("Main", "Unknown");
+        osInfo_ = osInfoHtml_;
+
         return false;
     }
 
@@ -1135,14 +1146,14 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
             releaseVersion.remove( index, 1 );
         }
 
-        osInfo = linuxCoreVerson + releaseVersion;
+        osInfo_ = linuxCoreVerson + releaseVersion;
      }
      else
      {
-        osInfo = str;
+        osInfo_ = str;
      }
 
-    osInfo.remove("version");
+    osInfo_.remove("version");
     QString lsbRelease = queryData("catOsrelease", "catOsrelease", "PRETTY_NAME");
     lsbRelease.remove("\"");
     QString homeUrl = queryData("catOsrelease", "catOsrelease", "HOME_URL");
@@ -1154,19 +1165,32 @@ bool DeviceInfoParser::getOSInfo(QString& osInfo)
 
     if(lsbRelease.isEmpty() || lsbRelease ==  DApplication::translate("Main", "Unknown"))
     {
+        osInfoHtml_ = osInfo_;
         return true;
     }
 
     if( homeUrl.isEmpty() == false && homeUrl !=  DApplication::translate("Main", "Unknown"))
     {
-        osInfo =  "<style> a {text-decoration: none; }\"</style><a href=\"" + homeUrl + "\">" + lsbRelease + " </a> \t" + osInfo;
+        osInfoHtml_ =  "<style> a {text-decoration: none; }\"</style><a href=\"" + homeUrl + "\">" + lsbRelease + " </a>" + osInfo_;
+        osInfo_ = lsbRelease +" "+ osInfo_;
     }
     else
     {
-        osInfo = lsbRelease + " / " + osInfo;
+        osInfo_ = lsbRelease + " / " + osInfo_;
+        osInfoHtml_ = osInfo_;
     }
 
     return true;
+}
+
+const QString& DeviceInfoParser::getOsInfo()
+{
+    return osInfo_;
+}
+
+const QString& DeviceInfoParser::getOsHtmlInfo()
+{
+    return osInfoHtml_;
 }
 
 bool DeviceInfoParser::loadCatosrelelease()
@@ -2100,7 +2124,7 @@ bool DeviceInfoParser::loadCatInputDatabase()
 
          foreach( const QString& line,  paragraph.split('\n'))
          {
-            QString cutLine = line.mid(line.indexOf(Devicetype_Separator)+1);
+            QString cutLine = line.mid(line.indexOf(Devicetype_Separator)+1).trimmed();
             int first_index = cutLine.indexOf(DeviceType_CatDevice_Separator);
             if( first_index < 0 )
             {
@@ -2111,6 +2135,12 @@ bool DeviceInfoParser::loadCatInputDatabase()
             {
                 QStringList strList = cutLine.split(DeviceType_CatDevice_Separator);
                 DeviceInfoMap[strList.first().trimmed()] = strList.last().trimmed();
+                continue;
+            }
+
+            if(cutLine.startsWith("Name="))
+            {
+                DeviceInfoMap[cutLine.left(first_index)] = cutLine.mid(first_index+1).remove("\"");
                 continue;
             }
 

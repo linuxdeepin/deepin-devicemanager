@@ -223,7 +223,7 @@ QString DeviceListView::currentDevice()
     return currentDevice_;
 }
 
-void DeviceListView::setCurrentDevice(QString& device)
+void DeviceListView::setCurrentDevice(const QString& device)
 {
     currentDevice_ = device;
 }
@@ -360,6 +360,15 @@ void DeviceListView::currentChanged(const QModelIndex &current, const QModelInde
 
 
     DListView::currentChanged(current, previous);
+
+    QString device = current.data().toString();
+    MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent());
+    if( nullptr == mainWindow )
+    {
+        return;
+    }
+
+    return mainWindow->currentDeviceChanged(device);
 }
 
 //void DeviceListView::contextMenuEvent(QContextMenuEvent *event)
