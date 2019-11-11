@@ -33,7 +33,7 @@ BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
 
 void BluetoothWidget::initWidget()
 {
-    QStringList bluetoothList = DeviceInfoParserInstance.getBluetoothList();
+    QStringList bluetoothList = DeviceInfoParserInstance.getLshwBluetoothList();
 
     if( bluetoothList.size() < 1 )
     {

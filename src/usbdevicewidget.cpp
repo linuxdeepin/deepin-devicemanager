@@ -32,7 +32,7 @@ UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
 
 void UsbdeviceWidget::initWidget()
 {
-    QStringList usbdeviceList = DeviceInfoParserInstance.getOtherUsbdeviceList();
+    QStringList usbdeviceList = DeviceInfoParserInstance.getLshwOtherUsbdeviceList();
 
     if( usbdeviceList.size() < 1)
     {

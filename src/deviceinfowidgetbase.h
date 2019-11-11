@@ -29,7 +29,7 @@
 #include "deviceattributedefine.h"
 #include "xlsxdocument.h"
 #include "document.h"
-
+#include "DPalette"
 
 class QLabel;
 class QVBoxLayout;
@@ -49,7 +49,11 @@ struct DeviceInfo
     Dtk::Widget::DLabel* title = nullptr;
     QList<ColumnWidget*>  columnWidgets;
 
+    DeviceInfo();
     void changeTheme();
+
+//    static bool isPaletteInit_;
+//    static Dtk::Gui::DPalette defaultPa_;
 };
 
 class DeviceInfoWidgetBase : public Dtk::Widget::DWidget
@@ -96,8 +100,6 @@ public:
 
     void getContextMenu(Dtk::Widget::DMenu** contextMenu);
 
-    void changeTheme();
-
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *event) override;
@@ -105,7 +107,9 @@ protected:
 
 public slots:
     void OnCurrentItemClicked(/*QTableWidgetItem *item*/);
+    void onScroll(int value);
     bool onExportToFile();
+    void changeTheme();
 
 public:
     virtual bool exportToTxt(QFile& txtFile);
@@ -149,4 +153,7 @@ protected:
 
     //static int currentXlsRow_;
     ColumnWidget* selectColumnWidget_ = nullptr;
+
+    static bool isPaletteInit_;
+    static Dtk::Gui::DPalette defaultPa_;
 };

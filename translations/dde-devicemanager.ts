@@ -976,7 +976,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Loading Ptinter Info...</source>
+            <source>Loading Printer Info...</source>
             <translation type="unfinished"/>
         </message>
         <message>

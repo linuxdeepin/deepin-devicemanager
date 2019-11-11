@@ -55,6 +55,7 @@ DeviceInfoParser::~DeviceInfoParser()
 
 void DeviceInfoParser::refreshDabase()
 {
+    orderedDevices.clear();
     toolDatabase_.clear();
 
     emit loadFinished("Loading Operating System Info...");
@@ -100,7 +101,7 @@ void DeviceInfoParser::refreshDabase()
     emit loadFinished("Loading USB Device Info...");
     loadLsusbDatabase();
 
-    emit loadFinished("Loading Ptinter Info...");
+    emit loadFinished("Loading Printer Info...");
     loadCupsDatabase();
 
     emit loadFinished("finish");
@@ -239,7 +240,7 @@ bool DeviceInfoParser::queryRemainderDeviceInfo(const QString& toolname, const Q
     return true;
 }
 
-QStringList DeviceInfoParser::getCpuList()
+QStringList DeviceInfoParser::getCatcpuCpuList()
 {
     QStringList catcpuList;
 
@@ -256,7 +257,7 @@ QStringList DeviceInfoParser::getCpuList()
     return catcpuList;
 }
 
-QStringList DeviceInfoParser::getMemorynameList()
+QStringList DeviceInfoParser::getMmidecodeMemoryList()
 {
     QStringList memList;
 
@@ -283,7 +284,7 @@ QStringList DeviceInfoParser::getMemorynameList()
     return memList;
 }
 
-QStringList DeviceInfoParser::getDisknameList()
+QStringList DeviceInfoParser::getLshwDisknameList()
 {
     QStringList diskList;
 
@@ -298,13 +299,14 @@ QStringList DeviceInfoParser::getDisknameList()
         if( index > 0 && fk.size() - index < 7 )    //avoid disk_volume:0
         {
             diskList.push_back(fk);
+            orderedDevices.insert(fk);
         }
     }
 
     return diskList;
 }
 
-QStringList DeviceInfoParser::getDiaplayadapterList()
+QStringList DeviceInfoParser::getLshwDiaplayadapterList()
 {
     QStringList displayadapterList;
 
@@ -318,13 +320,14 @@ QStringList DeviceInfoParser::getDiaplayadapterList()
         if( fk.contains("display") )
         {
             displayadapterList.push_back(fk);
+            orderedDevices.insert(fk);
         }
     }
 
     return displayadapterList;
 }
 
-QStringList DeviceInfoParser::getScreenName()
+QStringList DeviceInfoParser::getXrandrScreenName()
 {
     QStringList screenList;
 
@@ -344,7 +347,7 @@ QStringList DeviceInfoParser::getScreenName()
     return screenList;
 }
 
-QStringList DeviceInfoParser::getDisplayInterfaceList()
+QStringList DeviceInfoParser::getXrandrDisplayInterfaceList()
 {
     QStringList interfaceList;
 
@@ -428,7 +431,7 @@ QStringList DeviceInfoParser::getXrandrMonitorList()
     return connectedMonitorList;
 }
 
-QStringList DeviceInfoParser::getMultimediaList()
+QStringList DeviceInfoParser::getLshwMultimediaList()
 {
     QStringList multimediaList;
 
@@ -442,13 +445,14 @@ QStringList DeviceInfoParser::getMultimediaList()
         if( fk.contains("multimedia") )
         {
             multimediaList.push_back(fk);
+            orderedDevices.insert(fk);
         }
     }
 
     return multimediaList;
 }
 
-QStringList DeviceInfoParser::getInputAudioDeviceList()
+QStringList DeviceInfoParser::getCatinputAudioDeviceList()
 {
     QStringList inputdeviceList;
 
@@ -486,7 +490,7 @@ QStringList DeviceInfoParser::getInputAudioDeviceList()
     return inputdeviceList;
 }
 
-QStringList DeviceInfoParser::getInputdeviceList()
+QStringList DeviceInfoParser::getCatinputInputdeviceList()
 {
     QStringList inputdeviceList;
 
@@ -503,7 +507,7 @@ QStringList DeviceInfoParser::getInputdeviceList()
     return inputdeviceList;
 }
 
-QStringList DeviceInfoParser::getNetworkadapterList()
+QStringList DeviceInfoParser::getLshwNetworkadapterList()
 {
     QStringList networkadapterList;
 
@@ -517,13 +521,14 @@ QStringList DeviceInfoParser::getNetworkadapterList()
         if( fk.contains("network") )
         {
             networkadapterList.push_back(fk);
+            orderedDevices.insert(fk);
         }
     }
 
     return networkadapterList;
 }
 
-QStringList DeviceInfoParser::getBluetoothList()
+QStringList DeviceInfoParser::getLshwBluetoothList()
 {
     QStringList bluetoothList;
 
@@ -542,6 +547,7 @@ QStringList DeviceInfoParser::getBluetoothList()
         if( toolDatabase_["lshw"][fk]["description"].contains("Bluetooth", Qt::CaseInsensitive) )
         {
             bluetoothList.push_back(fk);
+            orderedDevices.insert(fk);
             continue;
         }
 
@@ -553,6 +559,7 @@ QStringList DeviceInfoParser::getBluetoothList()
         if( toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) )
         {
             bluetoothList.push_back(fk);
+            orderedDevices.insert(fk);
         }
     }
 
@@ -576,7 +583,7 @@ QStringList DeviceInfoParser::getHciconfigBluetoothList()
     return bluetoothList;
 }
 
-QStringList DeviceInfoParser::getCameraList()
+QStringList DeviceInfoParser::getLshwCameraList()
 {
     QStringList cameraList;
 
@@ -592,6 +599,7 @@ QStringList DeviceInfoParser::getCameraList()
             if( toolDatabase_["lshw"][fk]["description"] == "Video" )
             {
                 cameraList.push_back(fk);
+                orderedDevices.insert(fk);
                 continue;
             }
         }
@@ -601,15 +609,27 @@ QStringList DeviceInfoParser::getCameraList()
             if( toolDatabase_["lshw"][fk]["product"].contains("Camera", Qt::CaseInsensitive) )
             {
                 cameraList.push_back(fk);
+                orderedDevices.insert(fk);
                 continue;
             }
+        }
+
+        if( toolDatabase_["lshw"][fk].contains("driver") == false )
+        {
+            continue;
+        }
+
+        if( toolDatabase_["lshw"][fk]["driver"].contains("uvcvideo", Qt::CaseInsensitive) )
+        {
+            cameraList.push_back(fk);
+            orderedDevices.insert(fk);
         }
     }
 
     return cameraList;
 }
 
-QStringList DeviceInfoParser::getOtherUsbdeviceList()
+QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
 {
     QStringList usbdeviceList;
 
@@ -630,29 +650,8 @@ QStringList DeviceInfoParser::getOtherUsbdeviceList()
             continue;
         }
 
-//        int index = fk.indexOf( "usb:", -1 );
-//        if( index < 0 )
-//        {
-//            index = fk.indexOf("usb", -1 );
-//        }
-
-//        if( index < 0 )
-//        {
-//            continue;
-//        }
-
-//        if(fk.indexOf("usb"), -1)
-//        {
-
-//        }
-
         if( fk.contains("usb", Qt::CaseInsensitive) )
         {
-            if( fk.contains("multimedia") )
-            {
-                continue;
-            }
-
             if(true == toolDatabase_["lshw"][fk].contains("description"))
             {
                 if( toolDatabase_["lshw"][fk]["description"].contains("USB controller", Qt::CaseInsensitive) )
@@ -666,36 +665,6 @@ QStringList DeviceInfoParser::getOtherUsbdeviceList()
                 }
 
                 if( toolDatabase_["lshw"][fk]["description"].contains("USB hub", Qt::CaseInsensitive) )
-                {
-                    continue;
-                }
-
-                if( toolDatabase_["lshw"][fk]["description"].contains("mouse", Qt::CaseInsensitive) )
-                {
-                    continue;
-                }
-
-                if( toolDatabase_["lshw"][fk]["description"].contains("keyboard", Qt::CaseInsensitive) )
-                {
-                    continue;
-                }
-
-                if( toolDatabase_["lshw"][fk]["description"] == "Video" )
-                {
-                    continue;
-                }
-
-                if( toolDatabase_["lshw"][fk]["description"].contains("Bluetooth", Qt::CaseInsensitive) )
-                {
-                    continue;
-                }
-
-                if( toolDatabase_["lshw"][fk].contains("driver") == false )
-                {
-                    continue;
-                }
-
-                if( toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) )
                 {
                     continue;
                 }
@@ -717,24 +686,13 @@ QStringList DeviceInfoParser::getOtherUsbdeviceList()
                 {
                     continue;
                 }
-
-                if( toolDatabase_["lshw"][fk]["product"].contains("mouse", Qt::CaseInsensitive) )
-                {
-                    continue;
-                }
-
-                if( toolDatabase_["lshw"][fk]["product"].contains("keyboard", Qt::CaseInsensitive) )
-                {
-                    continue;
-                }
-
-                if( toolDatabase_["lshw"][fk]["product"].contains("Camera", Qt::CaseInsensitive) )
-                {
-                    continue;
-                }
             }
 
-            usbdeviceList.push_back(fk);
+            if( orderedDevices.contains(fk) == false )
+            {
+                usbdeviceList.push_back(fk);
+                orderedDevices.insert(fk);
+            }
         }
     }
 
@@ -777,7 +735,7 @@ QStringList DeviceInfoParser::getPS_2MouseInputdeviceList()
     return inputdeviceList;
 }
 
-QStringList DeviceInfoParser::getMouseList()
+QStringList DeviceInfoParser::getLshwMouseList()
 {
     QStringList mouseList;
 
@@ -790,18 +748,20 @@ QStringList DeviceInfoParser::getMouseList()
     {
         if(true == toolDatabase_["lshw"][fk].contains("description"))
         {
-            if( toolDatabase_["lshw"][fk]["description"].contains("mouse", Qt::CaseInsensitive) && toolDatabase_["lshw"][fk]["description"].contains("TouchPad", Qt::CaseInsensitive) )
+            if( toolDatabase_["lshw"][fk]["description"].contains("mouse", Qt::CaseInsensitive) || toolDatabase_["lshw"][fk]["description"].contains("TouchPad", Qt::CaseInsensitive) )
             {
                 mouseList.push_back(fk);
+                orderedDevices.insert(fk);
                 continue;
             }
         }
 
         if(true == toolDatabase_["lshw"][fk].contains("product"))
         {
-            if( toolDatabase_["lshw"][fk]["product"].contains("mouse", Qt::CaseInsensitive) && toolDatabase_["lshw"][fk]["product"].contains("TouchPad", Qt::CaseInsensitive))
+            if( toolDatabase_["lshw"][fk]["product"].contains("mouse", Qt::CaseInsensitive) || toolDatabase_["lshw"][fk]["product"].contains("TouchPad", Qt::CaseInsensitive))
             {
                 mouseList.push_back(fk);
+                orderedDevices.insert(fk);
                 continue;
             }
         }
@@ -845,7 +805,7 @@ QStringList DeviceInfoParser::getPS_2KeyboardInputdeviceList()
     return inputdeviceList;
 }
 
-QStringList DeviceInfoParser::getKeyboardList()
+QStringList DeviceInfoParser::getLshwKeyboardList()
 {
     QStringList keyboardList;
 
@@ -861,6 +821,7 @@ QStringList DeviceInfoParser::getKeyboardList()
             if( toolDatabase_["lshw"][fk]["description"].contains("keyboard", Qt::CaseInsensitive) )
             {
                 keyboardList.push_back(fk);
+                orderedDevices.insert(fk);
                 continue;
             }
         }
@@ -870,6 +831,7 @@ QStringList DeviceInfoParser::getKeyboardList()
             if( toolDatabase_["lshw"][fk]["product"].contains("keyboard", Qt::CaseInsensitive) )
             {
                 keyboardList.push_back(fk);
+                orderedDevices.insert(fk);
                 continue;
             }
         }
@@ -878,7 +840,7 @@ QStringList DeviceInfoParser::getKeyboardList()
     return keyboardList;
 }
 
-QStringList DeviceInfoParser::getSwitchingpowerList()
+QStringList DeviceInfoParser::getLshwSwitchingpowerList()
 {
     QStringList switchingpowerList;
 
@@ -892,13 +854,14 @@ QStringList DeviceInfoParser::getSwitchingpowerList()
         if(fk.contains("power", Qt::CaseInsensitive))
         {
             switchingpowerList.push_back(fk);
+            orderedDevices.insert(fk);
         }
     }
 
     return switchingpowerList;
 }
 
-QStringList DeviceInfoParser::getSwitchingUpowerList()
+QStringList DeviceInfoParser::getUpowerSwitchingList()
 {
     QStringList switchingpowerList;
 
@@ -938,7 +901,7 @@ QStringList DeviceInfoParser::getDemidecodeSwitchingpowerList()
     return switchingpowerList;
 }
 
-QStringList DeviceInfoParser::getBatteryList()
+QStringList DeviceInfoParser::getLshwBatteryList()
 {
     QStringList batteryList;
 
@@ -952,6 +915,7 @@ QStringList DeviceInfoParser::getBatteryList()
         if(fk.contains("battery", Qt::CaseInsensitive))
         {
             batteryList.push_back(fk);
+            orderedDevices.insert(fk);
         }
     }
 
@@ -978,7 +942,7 @@ QStringList DeviceInfoParser::getDemidecodeBatteryList()
     return batteryList;
 }
 
-QStringList DeviceInfoParser::getBatteryUpowerList()
+QStringList DeviceInfoParser::getUpowerBatteryList()
 {
     QStringList batteryList;
 
@@ -998,34 +962,45 @@ QStringList DeviceInfoParser::getBatteryUpowerList()
     return batteryList;
 }
 
-QStringList DeviceInfoParser::getOtherDeviceList()
+QStringList DeviceInfoParser::getLshwOtherDeviceList()
 {
-    QStringList otherInputdeviceList;
+    QStringList otherDeviceList;
 
     if(false == toolDatabaseSecondOrder_.contains("lshw"))
     {
-        return otherInputdeviceList;
+        return otherDeviceList;
     }
 
-    foreach(const QString& fk, toolDatabaseSecondOrder_["lshw"] )
+    int lshwSize = toolDatabaseSecondOrder_["lshw"].size();
+    for(int i = 0; i < lshwSize; ++i )
     {
+        const QString& fk = toolDatabaseSecondOrder_["lshw"][i];
+        if( i < lshwSize - 1 && toolDatabaseSecondOrder_["lshw"][i+1].startsWith(fk) == true )
+        {
+            continue;
+        }
+
         QString product =toolDatabase_["lshw"][fk]["product"];
         QString description =toolDatabase_["lshw"][fk]["description"];
 
-        if( /*product.contains("touchpad", Qt::CaseInsensitive) || description.contains("touchpad", Qt::CaseInsensitive) ||*/ \
-            product.contains("scanner", Qt::CaseInsensitive) || description.contains("scanner", Qt::CaseInsensitive) || \
-            product.contains("Joystick", Qt::CaseInsensitive) || description.contains("Joystick", Qt::CaseInsensitive) ||
-            product.contains("Handwriting", Qt::CaseInsensitive) || description.contains("Handwriting", Qt::CaseInsensitive) ||
-            product.contains("Voice input", Qt::CaseInsensitive) || description.contains("Voice input", Qt::CaseInsensitive)  )
+        if( orderedDevices.contains(fk) )
         {
-            otherInputdeviceList.push_back(fk);
+            continue;
         }
+
+        if(fk.contains("_firmware") || fk.contains("_memory") || fk.contains("_cache") || fk.contains("_cpu") \
+           || fk.contains("_volume")|| fk.contains("_usb") /*|| fk.contains("_pci")*/  )
+        {
+            continue;
+        }
+
+        otherDeviceList.push_back(fk);
     }
 
-    return otherInputdeviceList;
+    return otherDeviceList;
 }
 
-QStringList DeviceInfoParser::getOtherPciDeviceList()
+QStringList DeviceInfoParser::getLshwOtherPciDeviceList()
 {
     QStringList otherPcideviceList;
 
@@ -1040,27 +1015,57 @@ QStringList DeviceInfoParser::getOtherPciDeviceList()
 
         if( re.exactMatch(fk) )
         {
-            if( fk.contains("display", Qt::CaseInsensitive) || fk.contains("network", Qt::CaseInsensitive) )
+            if( orderedDevices.contains(fk) == false )
             {
-                continue;
+                otherPcideviceList.push_back(fk);
+                orderedDevices.insert(fk);
             }
-
-            otherPcideviceList.push_back(fk);
         }
     }
-
-    QStringList audioDeviceList = getMultimediaList();
-
-    foreach(auto str, audioDeviceList)
-    {
-       otherPcideviceList.removeAll(str);
-    }
-
 
     return otherPcideviceList;
 }
 
-QStringList DeviceInfoParser::getPrinterList()
+QStringList DeviceInfoParser::getLshwPrinterList()
+{
+    QStringList bluetoothList;
+
+    if(false == toolDatabaseSecondOrder_.contains("lshw"))
+    {
+        return bluetoothList;
+    }
+
+    foreach(const QString& fk, toolDatabaseSecondOrder_["lshw"] )
+    {
+        if( toolDatabase_["lshw"][fk].contains("description") == false )
+        {
+            continue;
+        }
+
+        if( toolDatabase_["lshw"][fk]["description"].contains("Bluetooth", Qt::CaseInsensitive) )
+        {
+            bluetoothList.push_back(fk);
+            orderedDevices.insert(fk);
+            continue;
+        }
+
+        if( toolDatabase_["lshw"][fk].contains("driver") == false )
+        {
+            continue;
+        }
+
+        if( toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) )
+        {
+            bluetoothList.push_back(fk);
+            orderedDevices.insert(fk);
+            continue;
+        }
+    }
+
+    return bluetoothList;
+}
+
+QStringList DeviceInfoParser::getCupsPrinterList()
 {
     QStringList printerList;
 
@@ -1077,7 +1082,7 @@ QStringList DeviceInfoParser::getPrinterList()
     return printerList;
 }
 
-QStringList DeviceInfoParser::getCDRomList()
+QStringList DeviceInfoParser::getLshwCDRomList()
 {
     QStringList cdromList;
 
@@ -1091,6 +1096,7 @@ QStringList DeviceInfoParser::getCDRomList()
         if(fk.contains("cdrom"))
         {
             cdromList.push_back(fk);
+            orderedDevices.insert(fk);
             continue;
         }
     }
@@ -1594,6 +1600,10 @@ bool DeviceInfoParser::loadLshwDatabase()
             secondOrder.push_back(deviceTypeName);
 
             DeviceInfoMap.clear();
+
+            QString typeStr =  line;
+            DeviceInfoMap["Type"] = typeStr.remove(Devicetype_lshw_Class_Prefix).trimmed();
+
             while( deviceType.size() > 0 )
             {
                 if( deviceType.last().indexOf(Devicetype_lshw_Class_Prefix) >= line.indexOf(Devicetype_lshw_Class_Prefix) )
@@ -1833,7 +1843,7 @@ bool DeviceInfoParser::loadCatcpuDatabase()
 
 bool DeviceInfoParser::loadAllSmartctlDatabase()
 {
-    QStringList diskList = DeviceInfoParserInstance.getDisknameList();
+    QStringList diskList = DeviceInfoParserInstance.getLshwDisknameList();
 
     foreach(const QString& disk, diskList)
     {
@@ -2913,8 +2923,13 @@ void showDetailedInfo(cups_dest_t *dest, const char* option, QMap<QString, QStri
     }
 }
 
-int getDestInfo(void *user_data, unsigned /*flags*/, cups_dest_t *dest)
+int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest)
 {
+    if (flags & CUPS_DEST_FLAGS_REMOVED)
+    {
+        return -1;
+    }
+
     DatabaseMap& cupsDatabase = *(reinterpret_cast<DatabaseMap*>(user_data));
 
     if(dest == nullptr)
@@ -2945,6 +2960,7 @@ int getDestInfo(void *user_data, unsigned /*flags*/, cups_dest_t *dest)
     }
 
     cupsDatabase[dest->name] = DeviceInfoMap;
+
     return (1);
 }
 
@@ -2953,7 +2969,7 @@ bool DeviceInfoParser::loadCupsDatabase()
 {
     DatabaseMap cupsDatabase;
 
-    cupsEnumDests(CUPS_DEST_FLAGS_NONE, 1000, nullptr, 0, 0, getDestInfo, &cupsDatabase);
+    cupsEnumDests(CUPS_DEST_FLAGS_NONE, 1000, nullptr, CUPS_PRINTER_CLASS, 0, getDestInfo, &cupsDatabase);
 
     toolDatabase_["Cups"] = cupsDatabase;
     return true;

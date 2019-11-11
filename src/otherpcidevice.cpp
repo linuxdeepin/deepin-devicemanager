@@ -34,7 +34,7 @@ void OtherPciDeviceWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
 
-    QStringList otherPcideviceList = DeviceInfoParserInstance.getOtherPciDeviceList();
+    QStringList otherPcideviceList = DeviceInfoParserInstance.getLshwOtherPciDeviceList();
 
     if(otherPcideviceList.size() < 1)
     {

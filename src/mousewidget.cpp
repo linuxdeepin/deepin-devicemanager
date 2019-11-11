@@ -33,7 +33,7 @@ MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplic
 void MouseWidget::initWidget()
 {
     QStringList inputdeviceList = DeviceInfoParserInstance.getPS_2MouseInputdeviceList();
-    QStringList mouseList = DeviceInfoParserInstance.getMouseList();
+    QStringList mouseList = DeviceInfoParserInstance.getLshwMouseList();
 
     if( inputdeviceList.size() + mouseList.size() < 1 )
     {

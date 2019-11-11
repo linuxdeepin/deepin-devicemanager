@@ -972,7 +972,7 @@
             <translation>获取USB设备信息...</translation>
         </message>
         <message>
-            <source>Loading Ptinter Info...</source>
+            <source>Loading Printer Info...</source>
             <translation>获取打印机信息...</translation>
         </message>
         <message>

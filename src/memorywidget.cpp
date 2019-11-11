@@ -30,7 +30,7 @@ DWIDGET_USE_NAMESPACE
 
 MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Memory"))
 {
-    initWidget();    
+    initWidget();
 }
 
 void MemoryWidget::initWidget()
@@ -41,7 +41,7 @@ void MemoryWidget::initWidget()
 
 void MemoryWidget::initTableWdiget()
 {
-    QStringList memList = DeviceInfoParserInstance.getMemorynameList();
+    QStringList memList = DeviceInfoParserInstance.getMmidecodeMemoryList();
 
 
     QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size", /* "Statu"*/};
@@ -119,7 +119,7 @@ void MemoryWidget::updateWholeDownWidget()
     articles.clear();
     QSet<QString> existArticles;
 
-    QStringList memList = DeviceInfoParserInstance.getMemorynameList();
+    QStringList memList = DeviceInfoParserInstance.getMmidecodeMemoryList();
     QStringList detailMem;
     foreach(const QString& mem, memList)
     {

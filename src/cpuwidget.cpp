@@ -89,7 +89,7 @@ CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplicatio
 
 void CpuWidget::initWidget()
 { 
-    QStringList cpuList = DeviceInfoParserInstance.getCpuList();
+    QStringList cpuList = DeviceInfoParserInstance.getCatcpuCpuList();
 
     QString architecture =  DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Architecture");
 

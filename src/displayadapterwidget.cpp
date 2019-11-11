@@ -38,8 +38,8 @@ void DisplayadapterWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    QStringList displayadapterList = DeviceInfoParserInstance.getDiaplayadapterList();
-    QStringList screenList = DeviceInfoParserInstance.getScreenName();
+    QStringList displayadapterList = DeviceInfoParserInstance.getLshwDiaplayadapterList();
+    QStringList screenList = DeviceInfoParserInstance.getXrandrScreenName();
 
     for(int i =0; i < displayadapterList.size(); ++i )
     {

@@ -32,9 +32,9 @@ OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(p
 
 void OtherDevicesWidget::initWidget()
 {
-    QStringList otherInputdeviceList = DeviceInfoParserInstance.getOtherInputdeviceList();
+    QStringList otherDeviceList = DeviceInfoParserInstance.getLshwOtherDeviceList();
 
-    if( otherInputdeviceList.size() < 1 )
+    if( otherDeviceList.size() < 1 )
     {
         setCentralInfo("No Other Devices found!");
         return;
@@ -44,7 +44,7 @@ void OtherDevicesWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    foreach(const QString& device, otherInputdeviceList)
+    foreach(const QString& device, otherDeviceList)
     {
         articles.clear();
         existArticles.clear();
@@ -53,6 +53,11 @@ void OtherDevicesWidget::initWidget()
         name.queryData( "lshw", device, "product");
         articles.push_back(name);
         existArticles.insert("product");
+
+        ArticleStruct type("Type");
+        type.queryData( "lshw", device, "Type");
+        articles.push_back(type);
+        existArticles.insert("Type");
 
         ArticleStruct description("Description");
         description.queryData("lshw", device, "description");
@@ -96,13 +101,19 @@ void OtherDevicesWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
-        addDevice( name.value, articles, otherInputdeviceList.size() );
+        QString titleValue = name.value;
+        if(name.isValid() == false)
+        {
+            titleValue = type.value;
+        }
 
-        if( otherInputdeviceList.size() > 1 )
+        addDevice( titleValue, articles, otherDeviceList.size() );
+
+        if( otherDeviceList.size() > 1 )
         {
             QStringList tab =
             {
-                name.value,
+                titleValue,
                 vendor.value
             };
 
@@ -113,11 +124,11 @@ void OtherDevicesWidget::initWidget()
         {
             overviewInfo_.value = vendor.value;
             overviewInfo_.value += " ";
-            overviewInfo_.value += name.value;
+            overviewInfo_.value += titleValue;
         }
     }
 
-    if( otherInputdeviceList.size() > 1 )
+    if( otherDeviceList.size() > 1 )
     {
         QStringList headers = { "Name",  "Vendor" };
         addTable( headers, tabList);

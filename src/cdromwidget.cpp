@@ -33,7 +33,7 @@ CDRomWidget::CDRomWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplic
 void CDRomWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
-    QStringList cdromList = DeviceInfoParserInstance.getCDRomList();
+    QStringList cdromList = DeviceInfoParserInstance.getLshwCDRomList();
 
     if( cdromList.size() < 1)
     {

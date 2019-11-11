@@ -51,15 +51,41 @@ QFont DeviceInfoWidgetBase::labelFont_;
 QFont DeviceInfoWidgetBase::tableHeaderFont_;
 QFont DeviceInfoWidgetBase::tableContentFont_;
 
+bool DeviceInfoWidgetBase::isPaletteInit_ = false;
+DPalette DeviceInfoWidgetBase::defaultPa_;
+
+//bool DeviceInfo::isPaletteInit_ = false;
+//DPalette DeviceInfo::defaultPa_;
+
 int currentXlsRow_ = 1;
 
-void DeviceInfo::changeTheme()
+DeviceInfo::DeviceInfo()
 {
+    changeTheme();
+}
+
+void DeviceInfo::changeTheme()
+{ 
+//    if(title)
+//    {
+//        if(isPaletteInit_ == false)
+//        {
+//            defaultPa_ = DApplicationHelper::instance()->palette(title);
+//            auto color = defaultPa_.brightText().color();
+//            defaultPa_.setBrush(QPalette::WindowText, defaultPa_.brightText() );
+//            isPaletteInit_ = true;
+//        }
+
+//        DApplicationHelper::instance()->setPalette(title, defaultPa_);
+//    }
+
     foreach(auto widget, columnWidgets)
     {
         widget->changeTheme();
     }
 }
+
+
 
 DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& deviceName) : DWidget(parent_)
 {
@@ -77,20 +103,16 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
 
     initContextMenu();
 
+    changeTheme();
 
-    auto modifyTheme = [this](){
-        DPalette pa = DApplicationHelper::instance()->palette(this);
-        QColor base_color = palette().base().color();
+    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this,
+            [this](){
+                DeviceInfoWidgetBase::isPaletteInit_ = false;
+                //DeviceInfo::isPaletteInit_ = false;
 
-        pa.setColor(QPalette::Background, base_color);
-        DApplicationHelper::instance()->setPalette(this, pa);
-
-        changeTheme();
-    };
-
-    modifyTheme();
-
-    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, modifyTheme);
+                DeviceInfoWidgetBase::changeTheme();
+            }
+        );
 
     initFont();
 }
@@ -711,6 +733,8 @@ void DeviceInfoWidgetBase::initDownWidget()
     downWidgetScrollArea_->setWidget(downWidget_);
 
     vLayout_->insertWidget( vLayout_->count(), downWidgetScrollArea_);
+
+    //connect(downWidgetScrollArea_->verticalScrollBar(), &QScrollBar::valueChanged, this, &DeviceInfoWidgetBase::onScroll);
 }
 
 QString DeviceInfoWidgetBase::getDeviceName()
@@ -767,6 +791,15 @@ void DeviceInfoWidgetBase::getContextMenu(DMenu** contextMenu)
 
 void DeviceInfoWidgetBase::changeTheme()
 {
+    if(isPaletteInit_ == false)
+    {
+        defaultPa_ = DApplicationHelper::instance()->palette(this);
+        defaultPa_.setBrush(QPalette::Background, palette().base() );
+        isPaletteInit_ = true;
+    }
+
+    DApplicationHelper::instance()->setPalette(this, defaultPa_);
+
     if(titleInfo_)
     {
         titleInfo_->changeTheme();
@@ -894,6 +927,29 @@ void DeviceInfoWidgetBase::OnCurrentItemClicked(/*QTableWidgetItem *item*/)
     downWidgetScrollArea_->verticalScrollBar()->setValue(height);
 }
 
+void DeviceInfoWidgetBase::onScroll(int value)
+{
+    int height = 0;
+
+    for(int i = 0; i < subinfoWidgetList_.size(); ++i )
+    {
+        height += subinfoWidgetList_.at(i)->height();;
+        if( height == value )
+        {
+            if(tableWidget_)
+            {
+                //tableWidget_->setCurrentIndex(i);
+            }
+
+            continue;
+        }
+
+        if(height > value)
+        {
+            return;
+        }
+    }
+}
 
 bool DeviceInfoWidgetBase::onExportToFile()
 {

@@ -33,7 +33,7 @@ KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, D
 void KeyboardWidget::initWidget()
 {
     QStringList inputdeviceList = DeviceInfoParserInstance.getPS_2KeyboardInputdeviceList();
-    QStringList keyboardList = DeviceInfoParserInstance.getKeyboardList();
+    QStringList keyboardList = DeviceInfoParserInstance.getLshwKeyboardList();
 
     if( inputdeviceList.size() + keyboardList.size() < 1 )
     {

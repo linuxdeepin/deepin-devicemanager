@@ -32,13 +32,13 @@ PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplic
 
 void PowerWidget::initWidget()
 {
-    QStringList switchingpowerList = DeviceInfoParserInstance.getSwitchingpowerList();
+    QStringList switchingpowerList = DeviceInfoParserInstance.getLshwSwitchingpowerList();
     QStringList demidecodeSwitchingpowerList = DeviceInfoParserInstance.getDemidecodeSwitchingpowerList();
-    QStringList switchingUpowerList = DeviceInfoParserInstance.getSwitchingUpowerList();
+    QStringList switchingUpowerList = DeviceInfoParserInstance.getUpowerSwitchingList();
 
-    QStringList batteryList = DeviceInfoParserInstance.getBatteryList();
+    QStringList batteryList = DeviceInfoParserInstance.getLshwBatteryList();
     QStringList demidecodebatteryList = DeviceInfoParserInstance.getDemidecodeBatteryList();
-    QStringList batteryUpowerList = DeviceInfoParserInstance.getBatteryUpowerList();
+    QStringList batteryUpowerList = DeviceInfoParserInstance.getUpowerBatteryList();
 
     int maxSwitchingSize = maxDeviceSize(switchingpowerList, demidecodeSwitchingpowerList, switchingUpowerList);
 

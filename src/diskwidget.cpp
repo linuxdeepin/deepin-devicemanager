@@ -32,7 +32,7 @@ DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplicat
 
 void DiskWidget::initWidget()
 {
-    QStringList diskList = DeviceInfoParserInstance.getDisknameList();
+    QStringList diskList = DeviceInfoParserInstance.getLshwDisknameList();
     if(diskList.size() < 1)
     {
         setCentralInfo("No Disk found!");

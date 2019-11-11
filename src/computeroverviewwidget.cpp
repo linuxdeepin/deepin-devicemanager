@@ -29,7 +29,7 @@ DWIDGET_USE_NAMESPACE
 
 ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Overview"))
 {
-    initWidget();
+    
 }
 
 void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& others )

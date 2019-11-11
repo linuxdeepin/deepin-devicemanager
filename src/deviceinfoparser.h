@@ -26,6 +26,7 @@
 #include "singletondef.h"
 #include "deviceattributedefine.h"
 #include <QObject>
+#include <QSet>
 
 const QString Deviceype_Computer = "Computer";
 const QString Devicetype_Name = "Name";
@@ -102,50 +103,52 @@ public:
 
     bool checkValue(const QString& toolName, const QString& device, const QString& key, const QString& contains);
 
-    QStringList getCpuList();
-    QStringList getMemorynameList();
-    QStringList getDisknameList();
+    QStringList getCatcpuCpuList();
+    QStringList getMmidecodeMemoryList();
+    QStringList getLshwDisknameList();
 
-    QStringList getDiaplayadapterList();
-    QStringList getScreenName();
+    QStringList getLshwDiaplayadapterList();
+    QStringList getXrandrScreenName();
+    QStringList getXrandrDisplayInterfaceList();
 
-    QStringList getDisplayInterfaceList();
     QStringList getHwinfoMonitorList();
     QStringList getXrandrMonitorList();
 
-    QStringList getMultimediaList();
-    QStringList getInputAudioDeviceList();
+    QStringList getLshwMultimediaList();
+    QStringList getCatinputAudioDeviceList();
 
-    QStringList getInputdeviceList();
+    QStringList getCatinputInputdeviceList();
 
-    QStringList getNetworkadapterList();
+    QStringList getLshwNetworkadapterList();
 
-    QStringList getBluetoothList();
+    QStringList getLshwBluetoothList();
 
     QStringList getHciconfigBluetoothList();
 
-    QStringList getCameraList();
+    QStringList getLshwCameraList();
 
-    QStringList getOtherUsbdeviceList();
+    QStringList getLshwOtherUsbdeviceList();
 
     QStringList getPS_2MouseInputdeviceList();
-    QStringList getMouseList();
+    QStringList getLshwMouseList();
     QStringList getPS_2KeyboardInputdeviceList();
-    QStringList getKeyboardList();
+    QStringList getLshwKeyboardList();
 
-    QStringList getSwitchingpowerList();
+    QStringList getLshwSwitchingpowerList();
     QStringList getDemidecodeSwitchingpowerList();
-    QStringList getSwitchingUpowerList();
+    QStringList getUpowerSwitchingList();
 
-    QStringList getBatteryList();
+    QStringList getLshwBatteryList();
     QStringList getDemidecodeBatteryList();
-    QStringList getBatteryUpowerList();
+    QStringList getUpowerBatteryList();
 
-    QStringList getOtherDeviceList();
-    QStringList getOtherPciDeviceList();
-    QStringList getPrinterList();
+    QStringList getLshwOtherDeviceList();
+    QStringList getLshwOtherPciDeviceList();
 
-    QStringList getCDRomList();
+    QStringList getLshwPrinterList();
+    QStringList getCupsPrinterList();
+
+    QStringList getLshwCDRomList();
     
     // get os
     const QString&  getOsInfo();
@@ -214,6 +217,8 @@ public:
 
     QString osInfo_;
     QString osInfoHtml_;
+
+    QSet<QString> orderedDevices;
 };
 
 #define DeviceInfoParserInstance (DeviceInfoParser::Instance())

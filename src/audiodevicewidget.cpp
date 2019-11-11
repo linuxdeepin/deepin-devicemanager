@@ -35,8 +35,8 @@ AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(par
 void AudiodeviceWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Audio Device")  + DApplication::translate("Main", " Info"));
-    QStringList multimediaList = DeviceInfoParserInstance.getMultimediaList();
-    QStringList inputdeviceList = DeviceInfoParserInstance.getInputAudioDeviceList();
+    QStringList multimediaList = DeviceInfoParserInstance.getLshwMultimediaList();
+    QStringList inputdeviceList = DeviceInfoParserInstance.getCatinputAudioDeviceList();
 
     if( multimediaList.size() + inputdeviceList.size() < 1 )
     {

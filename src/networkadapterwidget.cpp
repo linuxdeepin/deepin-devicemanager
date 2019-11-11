@@ -35,7 +35,7 @@ void NetworkadapterWidget::initWidget()
     //setTitle(DApplication::translate("Main", "NetworkAdapter")  + DApplication::translate("Main", " Info"));
 
 
-    QStringList networkadapterList = DeviceInfoParserInstance.getNetworkadapterList();
+    QStringList networkadapterList = DeviceInfoParserInstance.getLshwNetworkadapterList();
 
     if( networkadapterList.size() < 1 )
     {

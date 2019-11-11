@@ -32,7 +32,7 @@ CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DAppl
 
 void CameraWidget::initWidget()
 {
-    QStringList cameraList = DeviceInfoParserInstance.getCameraList();
+    QStringList cameraList = DeviceInfoParserInstance.getLshwCameraList();
 
     if( cameraList.size() < 1 )
     {
