@@ -78,7 +78,7 @@ public:
     // Html version
     void addHtmlInfo(const QString& title, const QList<ArticleStruct>& articles);
     // cloumnwidgeth version
-    void addInfo(const QString& title, const QList<ArticleStruct>& articles);
+    void addInfo(const QString& title, const QList<ArticleStruct>& articles, bool main = true);
 
     //void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
     // cloumnwidget version
@@ -139,6 +139,7 @@ protected:
     Dtk::Widget::DWidget* infoWidget_ = nullptr;
     QList<Dtk::Widget::DWidget*> subinfoWidgetList_;
 
+public:
     static bool isFontInit_;
     static QFont titleFont_;
     static QFont subTitleFont_;
@@ -147,6 +148,7 @@ protected:
     static QFont tableHeaderFont_;
     static QFont tableContentFont_;
 
+protected:
     ArticleStruct overviewInfo_;
 
     int verticalScrollBarMaxValue = 0;

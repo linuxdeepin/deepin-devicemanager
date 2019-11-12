@@ -50,6 +50,7 @@ class TableWidgetAlwaysActive: public Dtk::Widget::DTableWidget
 public:
     TableWidgetAlwaysActive(QWidget *parent = nullptr);
 
+    int sizeHintForColumn(int column) const override;
 private:
     QStyleOptionViewItem viewOptions() const override;
 };

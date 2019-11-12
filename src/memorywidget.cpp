@@ -114,7 +114,7 @@ void MemoryWidget::updateWholeDownWidget()
         articles.push_back(ug);
     }
 
-    addInfo("Memory Info", articles);
+    addInfo("Memory Info", articles, false);
 
     articles.clear();
     QSet<QString> existArticles;

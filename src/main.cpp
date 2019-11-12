@@ -56,12 +56,15 @@ int main(int argc, char *argv[])
     const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
     app.setApplicationAcknowledgementPage(acknowledgementLink);
 
+    DApplicationSettings settinAgs;
+
     Dtk::Core::DLogManager::registerConsoleAppender();
     Dtk::Core::DLogManager::registerFileAppender();
 
     //app.setStyle("chameleon");
+    if (!DGuiApplicationHelper::instance()->setSingleInstance("dde-devicemanager"))
+            return 0;
 
-    DApplicationSettings settinAgs;
 
     MainWindow w(nullptr);
     w.titlebar()->setTitle("");

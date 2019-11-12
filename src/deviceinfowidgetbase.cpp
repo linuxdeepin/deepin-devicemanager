@@ -275,7 +275,9 @@ void DeviceInfoWidgetBase::addCloumnToLayout(DeviceInfo* di, QVBoxLayout* vly, c
             continue;
         }
 
-        ColumnWidget* widget = new ColumnWidget( DApplication::translate("Main", article.name.toStdString().data())+ ":", article.value, font, columnHeight, downWidget_, this);
+        QString value = article.valueTranslate? DApplication::translate("Main", article.value.toStdString().data()): article.value;
+
+        ColumnWidget* widget = new ColumnWidget( DApplication::translate("Main", article.name.toStdString().data())+ ":", value, font, columnHeight, downWidget_, this);
         DApplicationHelper::instance()->setPalette(widget->l1, pa);
 
         if( article.externalLinks )
@@ -428,7 +430,7 @@ void DeviceInfoWidgetBase::addHtmlInfo(const QString& title, const QList<Article
     downWidgetScrollArea_->verticalScrollBar()->setRange( 0, verticalScrollBarMaxValue );
 }
 
-void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStruct>& articles)
+void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStruct>& articles, bool main)
 {
     initDownWidget();
 
@@ -449,7 +451,15 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
 
 
     DPalette pa = DApplicationHelper::instance()->palette(this);
-    addCloumnToLayout(titleInfo_, vly, articles, infoFont_, 29, pa);
+    if(main == true)
+    {
+        addCloumnToLayout(titleInfo_, vly, articles, infoFont_, 29, pa);
+    }
+
+    else
+    {
+        addCloumnToLayout(titleInfo_, vly, articles, labelFont_, 21, pa);
+    }
 
     infoWidget_ = new DWidget(this);
     //infoWidget_->setFixedWidth(DeviceWidgetDownWidgehWidth_);
@@ -684,9 +694,10 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
     //tableWidget_->clearSpans();
 
-    tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
-    tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    tableWidget_->resizeColumnToContents(0);
+    //tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
+    //tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableWidget_->horizontalHeader()->setStretchLastSection(true);
+    tableWidget_->resizeColumnsToContents();
     //tableWidget_->resizeRowsToContents();
 }
 

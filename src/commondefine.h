@@ -43,5 +43,5 @@ const int DeviceWidgetContentWidth_ = DeviceWidgetDownWidgehWidth_ - NameLength_
 
 const int contextMenuWidth_ = 150;
 
-const int spinnerWidth = 48;
-const int spinnerHeight = 48;
+const int spinnerWidth = 32;
+const int spinnerHeight = 32;

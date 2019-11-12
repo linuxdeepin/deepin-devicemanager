@@ -1452,6 +1452,150 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>Load_Retry_Count</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Sector Sizes</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Seek_Time_Performance</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Throughput_Performance</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Hardware_ECC_Recovered</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>online</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>yes</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>no</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>none</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Lithium-Ion</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>lithium-ion</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Other</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Intel Corporation</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Qualcomm (29)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>LENOVO</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Lenovo</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Notebook</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Unspecified</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Hynix/Hyundai</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Not Specified</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Acer</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>AuthenticAMD</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>None</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Not Provided</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Disabled</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Enabled</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>PASSED</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source></source>
             <translation type="unfinished"/>
         </message>

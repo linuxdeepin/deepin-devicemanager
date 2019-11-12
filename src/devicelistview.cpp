@@ -71,7 +71,7 @@ void DeviceListviewDelegate::paintSeparator(QPainter *painter, const QStyleOptio
     painter->save();
 
     int yPoint = option.rect.top() + option.rect.height() / 2;
-    qDrawShadeLine(painter, 8, yPoint, option.rect.width() - 8, yPoint, option.palette);
+    qDrawShadeLine(painter, 0, yPoint, option.rect.width() - 0, yPoint, option.palette);
 
     painter->restore();
 }
@@ -216,6 +216,9 @@ void DeviceListView::addSeperator()
     //item->setAutoFillBackground(true);
     item->setText("Seperator");
     navModel_->appendRow(item);
+    item->setCheckable(false);
+    item->setSelectable(false);
+    item->setEnabled(false);
 }
 
 QString DeviceListView::currentDevice()

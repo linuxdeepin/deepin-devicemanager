@@ -219,7 +219,7 @@ void CpuWidget::initWidget()
     l3Cache.queryData("lscpu", "lscpu", "L3 cache");
     articles.push_back(l3Cache);
 
-    addInfo("Cpu Info", articles);
+    addInfo("Cpu Info", articles, false);
 
     foreach(auto precessor, cpuList)
     {      

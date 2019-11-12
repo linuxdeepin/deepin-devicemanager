@@ -102,9 +102,16 @@ void OtherDevicesWidget::initWidget()
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
         QString titleValue = name.value;
-        if(name.isValid() == false)
+        if( name.isValid() == false || name.value == vendor.value )
         {
-            titleValue = type.value;
+            if( description.isValid() )
+            {
+                titleValue = description.value;
+            }
+            else
+            {
+                titleValue = type.value;
+            }
         }
 
         addDevice( titleValue, articles, otherDeviceList.size() );

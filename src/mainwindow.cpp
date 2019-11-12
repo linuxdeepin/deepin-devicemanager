@@ -84,21 +84,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::initLoadingWidget()
 {
-    //setAutoFillBackground(false);
-
     loadingWidget_ = new DWidget(this);
 
-    //loadingWidget_->setAutoFillBackground(true);
+//    DPalette pa = DApplicationHelper::instance()->palette(this);
+//    QColor base_color = palette().base().color();
 
-    DPalette pa = DApplicationHelper::instance()->palette(this);
-    QColor base_color = palette().base().color();
+//    pa.setColor(QPalette::Background, base_color);
+//    //pa.setBrush(DPalette::ItemBackground, base_color);
 
-    pa.setColor(QPalette::Background, base_color);
-    //pa.setBrush(DPalette::ItemBackground, base_color);
+//    //setPalette(pa);
 
-    //setPalette(pa);
-
-    DApplicationHelper::instance()->setPalette(loadingWidget_, pa);
+//    DApplicationHelper::instance()->setPalette(loadingWidget_, pa);
 
     //mainWidget->setAutoFillBackground(true);
     //mainWidget_->setMinimumWidth(640);
@@ -111,7 +107,9 @@ void MainWindow::initLoadingWidget()
     spinner_->setFixedSize(spinnerWidth, spinnerHeight);
 
     QHBoxLayout* hly1 = new QHBoxLayout;
-    hly1->addWidget(spinner_, 1);
+    hly1->addStretch();
+    hly1->addWidget(spinner_);
+    hly1->addStretch();
 
     QHBoxLayout* hly2 = new QHBoxLayout;
     hly2->addStretch();
@@ -124,6 +122,7 @@ void MainWindow::initLoadingWidget()
     hly2->addStretch();
 
     vly->addLayout(hly1);
+    vly->addSpacing(5);
     vly->addLayout(hly2);
 
     vly->addStretch(3);

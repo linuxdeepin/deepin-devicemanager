@@ -1444,8 +1444,112 @@
             <translation>复制</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Load_Retry_Count</source>
+            <translation>加载重试次数</translation>
+        </message>
+        <message>
+            <source>Sector Sizes</source>
+            <translation>扇区大小</translation>
+        </message>
+        <message>
+            <source>Seek_Time_Performance</source>
+            <translation>寻址时间性能</translation>
+        </message>
+        <message>
+            <source>Throughput_Performance</source>
+            <translation>吞吐性能</translation>
+        </message>
+        <message>
+            <source>Hardware_ECC_Recovered</source>
+            <translation>硬件ECC恢复</translation>
+        </message>
+        <message>
+            <source>online</source>
+            <translation>在线</translation>
+        </message>
+        <message>
+            <source>yes</source>
+            <translation>是</translation>
+        </message>
+        <message>
+            <source>no</source>
+            <translation>否</translation>
+        </message>
+        <message>
+            <source>none</source>
+            <translation>无</translation>
+        </message>
+        <message>
+            <source>Lithium-Ion</source>
+            <translation>锂电池</translation>
+        </message>
+        <message>
+            <source>lithium-ion</source>
+            <translation>锂电池</translation>
+        </message>
+        <message>
+            <source>Other</source>
+            <translation>其他</translation>
+        </message>
+        <message>
+            <source>Intel Corporation</source>
+            <translation>因特尔公司</translation>
+        </message>
+        <message>
+            <source>Qualcomm (29)</source>
+            <translation>高通</translation>
+        </message>
+        <message>
+            <source>LENOVO</source>
+            <translation>联想</translation>
+        </message>
+        <message>
+            <source>Lenovo</source>
+            <translation>联想</translation>
+        </message>
+        <message>
+            <source>Notebook</source>
+            <translation>笔记本计算机</translation>
+        </message>
+        <message>
+            <source>Unspecified</source>
+            <translation>未指定</translation>
+        </message>
+        <message>
+            <source>Hynix/Hyundai</source>
+            <translation>海力士/现代</translation>
+        </message>
+        <message>
+            <source>Not Specified</source>
+            <translation>未指定</translation>
+        </message>
+        <message>
+            <source>Acer</source>
+            <translation>宏碁</translation>
+        </message>
+        <message>
+            <source>AuthenticAMD</source>
+            <translation>AuthenticAMD</translation>
+        </message>
+        <message>
+            <source>None</source>
+            <translation>无</translation>
+        </message>
+        <message>
+            <source>Not Provided</source>
+            <translation>未提供</translation>
+        </message>
+        <message>
+            <source>Disabled</source>
+            <translation>禁用</translation>
+        </message>
+        <message>
+            <source>Enabled</source>
+            <translation>启用</translation>
+        </message>
+        <message>
+            <source>PASSED</source>
+            <translation>通过</translation>
         </message>
         <message>
             <source></source>
@@ -1454,26 +1558,6 @@
         <message>
             <source></source>
             <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-        <source></source>
-        <translation></translation>
         </message>
         <message>
             <source></source>

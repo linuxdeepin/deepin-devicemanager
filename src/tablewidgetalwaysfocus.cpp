@@ -23,6 +23,7 @@
 #include "mainwindow.h"
 #include <QStyledItemDelegate>
 #include <qdrawutil.h>
+#include "deviceinfowidgetbase.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -67,6 +68,21 @@ DWIDGET_USE_NAMESPACE
 TableWidgetAlwaysActive::TableWidgetAlwaysActive(QWidget *parent): DTableWidget(parent)
 {
 
+}
+
+int TableWidgetAlwaysActive::sizeHintForColumn(int column) const
+{
+    int maxWidth = 0;
+    for(int i = 0; i < rowCount(); ++i)
+    {
+        int width = QFontMetrics( DeviceInfoWidgetBase::tableContentFont_ ).width(item(i, column)->text());
+        if(maxWidth < width)
+        {
+            maxWidth = width;
+        }
+    }
+
+    return maxWidth + 100;
 }
 
 QStyleOptionViewItem TableWidgetAlwaysActive::viewOptions() const
