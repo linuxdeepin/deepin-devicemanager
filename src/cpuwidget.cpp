@@ -151,7 +151,7 @@ void CpuWidget::initWidget()
         addTable(headers, tabList);
     }
 
-    int cpus = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU(s)").toInt();
+    int cpus = cpuList.size()/*DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU(s)").toInt()*/;
     int threadsPerCore = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Thread(s) per core").toInt();
     QString corePlus = " x " + QString::number(cpus);
 

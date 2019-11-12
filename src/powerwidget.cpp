@@ -41,8 +41,9 @@ void PowerWidget::initWidget()
     QStringList batteryUpowerList = DeviceInfoParserInstance.getUpowerBatteryList();
 
     int maxSwitchingSize = maxDeviceSize(switchingpowerList, demidecodeSwitchingpowerList, switchingUpowerList);
+    int maxBatterySize = maxDeviceSize(batteryList, demidecodebatteryList, batteryUpowerList);
 
-    if(maxSwitchingSize < 1)
+    if(maxSwitchingSize + maxBatterySize < 1)
     {
         setCentralInfo("Get Power Infomation failed!");
         return;
@@ -179,7 +180,7 @@ void PowerWidget::initWidget()
 
         addDevice( "Switching Power", articles, switchingpowerList.size() + batteryList.size(), true );
 
-        if( switchingpowerList.size() + batteryList.size() > 1 )
+        if( maxSwitchingSize + maxBatterySize > 1 )
         {
             QStringList tab =
             {
@@ -194,7 +195,7 @@ void PowerWidget::initWidget()
         overviewInfo_.value = DApplication::translate("Main", "Switching Power") + " " + name.value;
     }
 
-    int maxBatterySize = maxDeviceSize(batteryList, demidecodebatteryList, batteryUpowerList);
+
     for( int i = 0; i < maxBatterySize; ++i )
     {
         articles.clear();
