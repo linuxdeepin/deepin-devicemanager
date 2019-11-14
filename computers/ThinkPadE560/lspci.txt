@@ -1,0 +1,189 @@
+00:00.0 Host bridge: Intel Corporation Skylake Host Bridge/DRAM Registers (rev 08)
+	Subsystem: Lenovo Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers
+	Flags: bus master, fast devsel, latency 0
+	Capabilities: [e0] Vendor Specific Information: Len=10 <?>
+	Kernel driver in use: skl_uncore
+
+00:02.0 VGA compatible controller: Intel Corporation HD Graphics 520 (rev 07) (prog-if 00 [VGA controller])
+	Subsystem: Lenovo Skylake GT2 [HD Graphics 520]
+	Flags: bus master, fast devsel, latency 0, IRQ 126
+	Memory at e0000000 (64-bit, non-prefetchable) [size=16M]
+	Memory at d0000000 (64-bit, prefetchable) [size=256M]
+	I/O ports at 4000 [size=64]
+	[virtual] Expansion ROM at 000c0000 [disabled] [size=128K]
+	Capabilities: [40] Vendor Specific Information: Len=0c <?>
+	Capabilities: [70] Express Root Complex Integrated Endpoint, MSI 00
+	Capabilities: [ac] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [d0] Power Management version 2
+	Capabilities: [100] Process Address Space ID (PASID)
+	Capabilities: [200] Address Translation Service (ATS)
+	Capabilities: [300] Page Request Interface (PRI)
+	Kernel driver in use: i915
+	Kernel modules: i915
+
+00:14.0 USB controller: Intel Corporation Sunrise Point-LP USB 3.0 xHCI Controller (rev 21) (prog-if 30 [XHCI])
+	Subsystem: Lenovo Sunrise Point-LP USB 3.0 xHCI Controller
+	Flags: bus master, medium devsel, latency 0, IRQ 125
+	Memory at e1320000 (64-bit, non-prefetchable) [size=64K]
+	Capabilities: [70] Power Management version 2
+	Capabilities: [80] MSI: Enable+ Count=1/8 Maskable- 64bit+
+	Kernel driver in use: xhci_hcd
+	Kernel modules: xhci_pci
+
+00:14.2 Signal processing controller: Intel Corporation Sunrise Point-LP Thermal subsystem (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP Thermal subsystem
+	Flags: bus master, fast devsel, latency 0, IRQ 18
+	Memory at e134a000 (64-bit, non-prefetchable) [size=4K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [80] MSI: Enable- Count=1/1 Maskable- 64bit-
+	Kernel driver in use: intel_pch_thermal
+	Kernel modules: intel_pch_thermal
+
+00:16.0 Communication controller: Intel Corporation Sunrise Point-LP CSME HECI #1 (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP CSME HECI
+	Flags: bus master, fast devsel, latency 0, IRQ 123
+	Memory at e134b000 (64-bit, non-prefetchable) [size=4K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [8c] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Kernel driver in use: mei_me
+	Kernel modules: mei_me
+
+00:17.0 SATA controller: Intel Corporation Sunrise Point-LP SATA Controller [AHCI mode] (rev 21) (prog-if 01 [AHCI 1.0])
+	Subsystem: Lenovo Sunrise Point-LP SATA Controller [AHCI mode]
+	Flags: bus master, 66MHz, medium devsel, latency 0, IRQ 124
+	Memory at e1348000 (32-bit, non-prefetchable) [size=8K]
+	Memory at e134e000 (32-bit, non-prefetchable) [size=256]
+	I/O ports at 4080 [size=8]
+	I/O ports at 4088 [size=4]
+	I/O ports at 4060 [size=32]
+	Memory at e134c000 (32-bit, non-prefetchable) [size=2K]
+	Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [70] Power Management version 3
+	Capabilities: [a8] SATA HBA v1.0
+	Kernel driver in use: ahci
+	Kernel modules: ahci
+
+00:1c.0 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port (rev f1) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 18
+	Bus: primary=00, secondary=01, subordinate=01, sec-latency=0
+	Memory behind bridge: e1200000-e12fffff
+	Capabilities: [40] Express Root Port (Slot+), MSI 00
+	Capabilities: [80] MSI: Enable- Count=1/1 Maskable- 64bit-
+	Capabilities: [90] Subsystem: Lenovo Sunrise Point-LP PCI Express Root Port
+	Capabilities: [a0] Power Management version 3
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [140] Access Control Services
+	Capabilities: [200] L1 PM Substates
+	Capabilities: [220] #19
+	Kernel driver in use: pcieport
+
+00:1c.5 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #6 (rev f1) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 17
+	Bus: primary=00, secondary=02, subordinate=02, sec-latency=0
+	Memory behind bridge: e1100000-e11fffff
+	Capabilities: [40] Express Root Port (Slot+), MSI 00
+	Capabilities: [80] MSI: Enable- Count=1/1 Maskable- 64bit-
+	Capabilities: [90] Subsystem: Lenovo Sunrise Point-LP PCI Express Root Port
+	Capabilities: [a0] Power Management version 3
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [140] Access Control Services
+	Capabilities: [220] #19
+	Kernel driver in use: pcieport
+
+00:1d.0 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #9 (rev f1) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 16
+	Bus: primary=00, secondary=03, subordinate=03, sec-latency=0
+	I/O behind bridge: 00003000-00003fff
+	Memory behind bridge: e1000000-e10fffff
+	Prefetchable memory behind bridge: 00000000c0000000-00000000cfffffff
+	Capabilities: [40] Express Root Port (Slot+), MSI 00
+	Capabilities: [80] MSI: Enable- Count=1/1 Maskable- 64bit-
+	Capabilities: [90] Subsystem: Lenovo Sunrise Point-LP PCI Express Root Port
+	Capabilities: [a0] Power Management version 3
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [140] Access Control Services
+	Capabilities: [220] #19
+	Kernel driver in use: pcieport
+
+00:1f.0 ISA bridge: Intel Corporation Sunrise Point-LP LPC Controller (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP LPC Controller
+	Flags: bus master, medium devsel, latency 0
+
+00:1f.2 Memory controller: Intel Corporation Sunrise Point-LP PMC (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP PMC
+	Flags: fast devsel
+	[virtual] Memory at e1344000 (32-bit, non-prefetchable) [size=16K]
+
+00:1f.3 Audio device: Intel Corporation Sunrise Point-LP HD Audio (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP HD Audio
+	Flags: bus master, fast devsel, latency 64, IRQ 128
+	Memory at e1340000 (64-bit, non-prefetchable) [size=16K]
+	Memory at e1330000 (64-bit, non-prefetchable) [size=64K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [60] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Kernel driver in use: snd_hda_intel
+	Kernel modules: snd_hda_intel, snd_soc_skl
+
+00:1f.4 SMBus: Intel Corporation Sunrise Point-LP SMBus (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP SMBus
+	Flags: medium devsel, IRQ 16
+	Memory at e134d000 (64-bit, non-prefetchable) [size=256]
+	I/O ports at efa0 [size=32]
+	Kernel driver in use: i801_smbus
+	Kernel modules: i2c_i801
+
+00:1f.6 Ethernet controller: Intel Corporation Ethernet Connection I219-V (rev 21)
+	Subsystem: Lenovo Ethernet Connection I219-V
+	Flags: fast devsel, IRQ 130
+	Memory at e1300000 (32-bit, non-prefetchable) [disabled] [size=128K]
+	Capabilities: [c8] Power Management version 3
+	Capabilities: [d0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [e0] PCI Advanced Features
+	Kernel driver in use: e1000e
+	Kernel modules: e1000e
+
+01:00.0 Network controller: Intel Corporation Intel Dual Band Wireless-AC 3165 Plus Bluetooth (rev 79)
+	Subsystem: Intel Corporation Dual Band Wireless-AC 3165 Plus Bluetooth
+	Flags: bus master, fast devsel, latency 0, IRQ 129
+	Memory at e1200000 (64-bit, non-prefetchable) [size=8K]
+	Capabilities: [c8] Power Management version 3
+	Capabilities: [d0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [40] Express Endpoint, MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [140] Device Serial Number e0-94-67-ff-ff-47-13-6e
+	Capabilities: [14c] Latency Tolerance Reporting
+	Capabilities: [154] L1 PM Substates
+	Kernel driver in use: iwlwifi
+	Kernel modules: iwlwifi, wl
+
+02:00.0 Unassigned class [ff00]: Realtek Semiconductor Co., Ltd. RTS522A PCI Express Card Reader (rev 01)
+	Subsystem: Lenovo RTS522A PCI Express Card Reader
+	Flags: bus master, fast devsel, latency 0, IRQ 122
+	Memory at e1100000 (32-bit, non-prefetchable) [size=4K]
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Endpoint, MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [140] Device Serial Number 00-00-00-01-00-4c-e0-00
+	Capabilities: [150] Latency Tolerance Reporting
+	Capabilities: [158] L1 PM Substates
+	Kernel driver in use: rtsx_pci
+	Kernel modules: rtsx_pci
+
+03:00.0 Display controller: Advanced Micro Devices, Inc. [AMD/ATI] Mars [Radeon HD 8670A/8670M/8750M] (rev 81)
+	Subsystem: Lenovo Mars [Radeon HD 8670A/8670M/8750M]
+	Flags: bus master, fast devsel, latency 0, IRQ 127
+	Memory at c0000000 (64-bit, prefetchable) [size=256M]
+	Memory at e1000000 (64-bit, non-prefetchable) [size=256K]
+	I/O ports at 3000 [size=256]
+	Expansion ROM at e1040000 [disabled] [size=128K]
+	Capabilities: [48] Vendor Specific Information: Len=08 <?>
+	Capabilities: [50] Power Management version 3
+	Capabilities: [58] Express Legacy Endpoint, MSI 00
+	Capabilities: [a0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [100] Vendor Specific Information: ID=0001 Rev=1 Len=010 <?>
+	Capabilities: [150] Advanced Error Reporting
+	Capabilities: [270] #19
+	Kernel driver in use: radeon
+	Kernel modules: radeon, amdgpu
+

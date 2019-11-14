@@ -1,0 +1,26 @@
+34: None 00.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.yyoSwQTIAO1
+  Parent ID: _Znp.aWzZJdXDfa4
+  Hardware Class: monitor
+  Model: "JDI LCD Monitor"
+  Vendor: JDI "JDI"
+  Device: eisa 0x422a 
+  Resolution: 3000x2000@60Hz
+  Size: 293x196 mm
+  Year of Manufacture: 2017
+  Week of Manufacture: 0
+  Detailed Timings #0:
+     Resolution: 3000x2000
+     Horizontal: 3000 3008 3040 3160 (+8 +40 +160) -hsync
+       Vertical: 2000 2048 2056 2577 (+48 +56 +577) +vsync
+    Frequencies: 390.95 MHz, 123.72 kHz, 48.01 Hz
+  Year of Manufacture: 2017
+  Week of Manufacture: 0
+  Detailed Timings #1:
+     Resolution: 3000x2000
+     Horizontal: 3000 3008 3040 3160 (+8 +40 +160) -hsync
+       Vertical: 2000 2048 2056 2062 (+48 +56 +62) +vsync
+    Frequencies: 390.95 MHz, 123.72 kHz, 60.00 Hz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #31 (VGA compatible controller)

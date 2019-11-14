@@ -1,0 +1,23 @@
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                1
+On-line CPU(s) list:   0
+Thread(s) per core:    1
+Core(s) per socket:    1
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             AuthenticAMD
+CPU family:            16
+Model:                 6
+Model name:            AMD Athlon(tm) II Neo K125 Processor
+Stepping:              3
+CPU MHz:               1300.000
+CPU max MHz:           1700,0000
+CPU min MHz:           800,0000
+BogoMIPS:              3391.40
+Virtualization:        AMD-V
+L1d cache:             64K
+L1i cache:             64K
+L2 cache:              1024K
+NUMA node0 CPU(s):     0

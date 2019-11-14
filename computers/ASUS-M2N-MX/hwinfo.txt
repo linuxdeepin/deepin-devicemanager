@@ -1,0 +1,40 @@
+34: None 00.0: 10000 Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.ty2RE6fFnSA
+  Parent ID: B35A.a6MAQmycdHF
+  Hardware Class: monitor
+  Model: "SAMSUNG SyncMaster"
+  Vendor: SAM "SAMSUNG"
+  Device: eisa 0x0091 "SyncMaster"
+  Serial ID: --
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 640x480@67Hz
+  Resolution: 640x480@72Hz
+  Resolution: 640x480@75Hz
+  Resolution: 800x600@56Hz
+  Resolution: 800x600@60Hz
+  Resolution: 800x600@72Hz
+  Resolution: 800x600@75Hz
+  Resolution: 832x624@75Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1024x768@70Hz
+  Resolution: 1024x768@75Hz
+  Resolution: 1280x1024@75Hz
+  Resolution: 1600x1200@60Hz
+  Resolution: 1280x1024@60Hz
+  Size: 432x324 mm
+  Year of Manufacture: 2004
+  Week of Manufacture: 10
+  Detailed Timings #0:
+     Resolution: 1600x1200
+     Horizontal: 1600 1664 1856 2160 (+64 +256 +560) +hsync
+       Vertical: 1200 1201 1204 1250 (+1 +4 +50) +vsync
+    Frequencies: 162.00 MHz, 75.00 kHz, 60.00 Hz
+  Driver Info #0:
+    Max. Resolution: 1600x1200
+    Vert. Sync Range: 56-75 Hz
+    Hor. Sync Range: 30-81 kHz
+    Bandwidth: 162 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #16 (VGA compatible controller)

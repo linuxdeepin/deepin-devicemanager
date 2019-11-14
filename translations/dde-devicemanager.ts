@@ -1588,15 +1588,15 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>time to empty</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>SBDS Serial Number</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>SBDS Manufacture Date</source>
             <translation type="unfinished"/>
         </message>
         <message>

@@ -178,7 +178,7 @@ void PowerWidget::initWidget()
             DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideSwitchingpower, articles, existArticles);
         }
 
-        addDevice( "Switching Power", articles, switchingpowerList.size() + batteryList.size(), true );
+        addDevice( "Switching Power", articles, maxSwitchingSize + maxBatterySize, true );
 
         if( maxSwitchingSize + maxBatterySize > 1 )
         {

@@ -37,7 +37,7 @@ void KeyboardWidget::initWidget()
 
     if( inputdeviceList.size() < 1 )
     {
-        setCentralInfo("No Mouse found!");
+        setCentralInfo("No Keyboard found!");
         return;
     }
 
@@ -114,6 +114,7 @@ void KeyboardWidget::initWidget()
 
             existKeyboard.insert(uniq.value);
             QString blueTooth = DeviceInfoParserInstance.getCorrespondBluetoothKeyboard(uniq.value);
+
             if( blueTooth.isEmpty() == false )
             {
                 type.value = "Bluetooth";

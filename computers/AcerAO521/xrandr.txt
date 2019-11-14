@@ -1,0 +1,78 @@
+Screen 0: minimum 320 x 200, current 1024 x 600, maximum 8192 x 8192
+VGA-0 disconnected (normal left inverted right x axis y axis)
+  Identifier: 0x51
+  Timestamp:  44784
+  Subpixel:   no subpixels
+  Clones:    
+  CRTCs:      0 1
+  Transform:  1.000000 0.000000 0.000000
+              0.000000 1.000000 0.000000
+              0.000000 0.000000 1.000000
+             filter: 
+  scaling mode: None 
+    supported: None, Full, Center, Full aspect
+  load detection: 1 
+    range: (0, 1)
+LVDS connected 1024x600+0+0 (0x55) normal (normal left inverted right x axis y axis) 224mm x 126mm
+  Identifier: 0x52
+  Timestamp:  44784
+  Subpixel:   horizontal rgb
+  Gamma:      1.0:1.0:1.0
+  Brightness: 1.0
+  Clones:    
+  CRTC:       0
+  CRTCs:      0 1
+  Transform:  1.000000 0.000000 0.000000
+              0.000000 1.000000 0.000000
+              0.000000 0.000000 1.000000
+             filter: 
+  EDID: 
+    00ffffffffffff0030e46e0200000000
+    0013010380160d780acfc59559548c27
+    1e505400000001010101010101010101
+    0101010101012c15009a41581e203020
+    3600e07e0000001b0000000000000000
+    00000000000000000000000000fe004c
+    4720446973706c61790a2020000000fc
+    004c503130315753422d544c4e310007
+  scaling mode: Full 
+    supported: None, Full, Center, Full aspect
+  1024x600 (0x55)   54.2MHz +HSync -VSync *current +preferred
+        h: width  1024 start 1072 end 1104 total 1434 skew    0 clock   37.8KHz
+        v: height  600 start  603 end  609 total  630           clock   60.0Hz
+  800x600 (0x56)   38.2MHz -HSync +VSync
+        h: width   800 start  832 end  912 total 1024 skew    0 clock   37.4KHz
+        v: height  600 start  603 end  607 total  624           clock   59.9Hz
+  848x480 (0x57)   31.5MHz -HSync +VSync
+        h: width   848 start  872 end  952 total 1056 skew    0 clock   29.8KHz
+        v: height  480 start  483 end  493 total  500           clock   59.7Hz
+  720x480 (0x58)   26.8MHz -HSync +VSync
+        h: width   720 start  744 end  808 total  896 skew    0 clock   29.9KHz
+        v: height  480 start  483 end  493 total  500           clock   59.7Hz
+  640x480 (0x59)   23.8MHz -HSync +VSync
+        h: width   640 start  664 end  720 total  800 skew    0 clock   29.7KHz
+        v: height  480 start  483 end  487 total  500           clock   59.4Hz
+HDMI-0 disconnected (normal left inverted right x axis y axis)
+  Identifier: 0x53
+  Timestamp:  44784
+  Subpixel:   horizontal rgb
+  Clones:    
+  CRTCs:      0 1
+  Transform:  1.000000 0.000000 0.000000
+              0.000000 1.000000 0.000000
+              0.000000 0.000000 1.000000
+             filter: 
+  audio: auto 
+    supported: off, on, auto
+  scaling mode: None 
+    supported: None, Full, Center, Full aspect
+  dither: off 
+    supported: off, on
+  underscan vborder: 0 
+    range: (0, 128)
+  underscan hborder: 0 
+    range: (0, 128)
+  underscan: off 
+    supported: off, on, auto
+  coherent: 1 
+    range: (0, 1)

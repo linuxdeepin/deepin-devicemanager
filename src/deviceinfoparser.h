@@ -62,7 +62,7 @@ const QString Devicetype_Hciconfig_Tab = "\t";
 const QString Devicetype_HwInfo_Twospace = "  ";
 const QString Devicetype_HwInfo_Fourspace = "    ";
 const QString Devicetype_HwInfo_Resolution = "Resolution";
-const QString Devicetype_HwInfo_ResolutionList = "Resolution list";
+const QString Devicetype_HwInfo_ResolutionList = "Support Resolution";
 const QString Devicetype_HwInfo_Currentresolution = "Current Resolution";
 
 const QString Devicetype_lpstat_4Space = "    ";
@@ -139,8 +139,6 @@ public:
     QStringList getInputdeviceMouseList();
     QString getCorrespondLshwMouse(const QString& inputMouse);
     QString getCorrespondBluetoothMouse(const QString& inputMouse);
-
-
 
     QStringList getInputdeviceKeyboardList();
     QString getCorrespondLshwKeyboard(const QString& inputMouse);

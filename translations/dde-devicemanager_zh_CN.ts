@@ -1580,6 +1580,98 @@
             <translation>已信任</translation>
         </message>
         <message>
+            <source>time to empty</source>
+            <translation>剩余电量可用时间</translation>
+        </message>
+        <message>
+            <source>SBDS Serial Number</source>
+            <translation>SBDS序列号</translation>
+        </message>
+        <message>
+            <source>SBDS Manufacture Date</source>
+            <translation>SBDS制造日期</translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
             <source></source>
             <translation></translation>
         </message>

@@ -1,0 +1,17 @@
+hci0:	Type: Primary  Bus: USB
+	BD Address: E0:94:67:47:13:72  ACL MTU: 1021:5  SCO MTU: 96:6
+	UP RUNNING PSCAN ISCAN 
+	RX bytes:1727 acl:0 sco:0 events:220 errors:0
+	TX bytes:41242 acl:0 sco:0 commands:219 errors:0
+	Features: 0xff 0xfe 0x0f 0xfe 0xdb 0xff 0x7b 0x87
+	Packet type: DM1 DM3 DM5 DH1 DH3 DH5 HV1 HV2 HV3 
+	Link policy: RSWITCH HOLD SNIFF 
+	Link mode: SLAVE ACCEPT 
+	Name: 'archermind-PC'
+	Class: 0x0c010c
+	Service Classes: Rendering, Capturing
+	Device Class: Computer, Laptop
+	HCI Version: 4.2 (0x8)  Revision: 0x1000
+	LMP Version: 4.2 (0x8)  Subversion: 0x1000
+	Manufacturer: Intel Corp. (2)
+

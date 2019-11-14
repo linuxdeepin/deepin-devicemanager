@@ -1,0 +1,158 @@
+I: Bus=0019 Vendor=0000 Product=0001 Version=0000
+N: Name="Power Button"
+P: Phys=PNP0C0C/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input0
+U: Uniq=
+H: Handlers=kbd event0 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0019 Vendor=0000 Product=0003 Version=0000
+N: Name="Sleep Button"
+P: Phys=PNP0C0E/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0E:00/input/input1
+U: Uniq=
+H: Handlers=kbd event1 
+B: PROP=0
+B: EV=3
+B: KEY=4000 0 0
+
+I: Bus=0019 Vendor=0000 Product=0001 Version=0000
+N: Name="Power Button"
+P: Phys=LNXPWRBN/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXPWRBN:00/input/input2
+U: Uniq=
+H: Handlers=kbd event2 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0019 Vendor=0000 Product=0006 Version=0000
+N: Name="Video Bus"
+P: Phys=LNXVIDEO/video/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/LNXVIDEO:00/input/input3
+U: Uniq=
+H: Handlers=kbd event3 
+B: PROP=0
+B: EV=3
+B: KEY=3e000b00000000 0 0 0
+
+I: Bus=0003 Vendor=1c4f Product=0034 Version=0110
+N: Name="SIGMACHIP Usb Mouse"
+P: Phys=usb-0000:00:14.0-1/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1:1.0/0003:1C4F:0034.0001/input/input4
+U: Uniq=
+H: Handlers=mouse0 event4 
+B: PROP=0
+B: EV=17
+B: KEY=70000 0 0 0 0
+B: REL=103
+B: MSC=10
+
+I: Bus=0003 Vendor=05ac Product=8294 Version=0111
+N: Name="Broadcom Corp. Bluetooth USB Host Controller"
+P: Phys=usb-0000:00:14.0-6/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-6/1-6:1.0/0003:05AC:8294.0002/input/input5
+U: Uniq=
+H: Handlers=sysrq kbd event5 leds 
+B: PROP=0
+B: EV=120013
+B: KEY=1000000000007 ff800000000007ff febeffdff3cfffff fffffffffffffffe
+B: MSC=10
+B: LED=7
+
+I: Bus=0003 Vendor=05ac Product=8294 Version=0111
+N: Name="Broadcom Corp. Bluetooth USB Host Controller"
+P: Phys=usb-0000:00:14.0-6/input1
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-6/1-6:1.1/0003:05AC:8294.0003/input/input6
+U: Uniq=
+H: Handlers=mouse1 event6 
+B: PROP=0
+B: EV=17
+B: KEY=70000 0 0 0 0
+B: REL=3
+B: MSC=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel HDMI HDMI/DP,pcm=3"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:03.0/sound/card0/input7
+U: Uniq=
+H: Handlers=event7 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel HDMI HDMI/DP,pcm=7"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:03.0/sound/card0/input8
+U: Uniq=
+H: Handlers=event8 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel HDMI HDMI/DP,pcm=8"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:03.0/sound/card0/input9
+U: Uniq=
+H: Handlers=event9 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Mic"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card1/input10
+U: Uniq=
+H: Handlers=event10 
+B: PROP=0
+B: EV=21
+B: SW=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Headphone"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card1/input11
+U: Uniq=
+H: Handlers=event11 
+B: PROP=0
+B: EV=21
+B: SW=4
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH SPDIF"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card1/input12
+U: Uniq=
+H: Handlers=event12 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0003 Vendor=05ac Product=8511 Version=7230
+N: Name="FaceTime HD Camera (Built-in)"
+P: Phys=usb-0000:00:14.0-5/button
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0/input/input13
+U: Uniq=
+H: Handlers=kbd event13 
+B: PROP=0
+B: EV=3
+B: KEY=100000 0 0 0
+
+I: Bus=0005 Vendor=004c Product=0267 Version=0066
+N: Name="Magic Keyboard"
+P: Phys=28:f0:76:00:a3:0f
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-6/1-6:1.2/bluetooth/hci0/hci0:11/0005:004C:0267.0004/input/input14
+U: Uniq=04:69:f8:ba:65:cb
+H: Handlers=sysrq kbd event14 leds 
+B: PROP=0
+B: EV=12001b
+B: KEY=7 0 200000000 e080ffdf01cfffff fffffffffffffffe
+B: ABS=10000000000
+B: MSC=10
+B: LED=1f

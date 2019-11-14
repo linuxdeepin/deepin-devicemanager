@@ -107,6 +107,17 @@ void MemoryWidget::updateWholeDownWidget()
     mc.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity");
     articles.push_back(mc);
 
+    if( mc.isValid() && size.isValid())
+    {
+        if( (mc.value.contains("Mb") && size.value.contains("Mb")) || (mc.value.contains("GB") && size.value.contains("GB")) )
+        {
+            if(mc.value.left(mc.value.size() - 2 ).toInt() > size.value.left(mc.value.size() -2 ).toInt())
+            {
+                canUpgrade_ = true;
+            }
+        }
+    }
+
     if(canUpgrade_ != -1)
     {
         ArticleStruct ug("Upgradeable");

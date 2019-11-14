@@ -1,0 +1,32 @@
+Device: /org/freedesktop/UPower/devices/mouse_hidpp_battery_0
+  native-path:          hidpp_battery_0
+  model:                Wireless Mouse
+  serial:               --
+  power supply:         no
+  updated:              Wed Nov  6 11:25:16 2019 (63 seconds ago)
+  has history:          yes
+  has statistics:       yes
+  mouse
+    present:             yes
+    rechargeable:        yes
+    state:               discharging
+    warning-level:       none
+    battery-level:       normal
+    percentage:          55% (should be ignored)
+    icon-name:          'battery-low-symbolic'
+
+Device: /org/freedesktop/UPower/devices/DisplayDevice
+  power supply:         no
+  updated:              Wed Nov  6 09:43:21 2019 (6178 seconds ago)
+  has history:          no
+  has statistics:       no
+  unknown
+    warning-level:       none
+    icon-name:          'battery-missing-symbolic'
+
+Daemon:
+  daemon-version:  0.99.10
+  on-battery:      no
+  lid-is-closed:   no
+  lid-is-present:  no
+  critical-action: PowerOff

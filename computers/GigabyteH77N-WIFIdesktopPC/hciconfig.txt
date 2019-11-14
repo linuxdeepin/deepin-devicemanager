@@ -1,0 +1,16 @@
+hci0:	Type: Primary  Bus: USB
+	BD Address: XX:XX:XX:XX:XX:XX  ACL MTU: 310:10  SCO MTU: 64:8
+	UP RUNNING PSCAN ISCAN 
+	RX bytes:718 acl:0 sco:0 events:54 errors:0
+	TX bytes:3673 acl:0 sco:0 commands:53 errors:0
+	Features: 0xff 0xff 0x8f 0xfe 0xdb 0xff 0x5b 0x87
+	Packet type: DM1 DM3 DM5 DH1 DH3 DH5 HV1 HV2 HV3 
+	Link policy: RSWITCH HOLD SNIFF PARK 
+	Link mode: SLAVE ACCEPT 
+	Name: 'sophia'
+	Class: 0x0c0104
+	Service Classes: Rendering, Capturing
+	Device Class: Computer, Desktop workstation
+	HCI Version: 4.0 (0x6)  Revision: 0x1ebd
+	LMP Version: 4.0 (0x6)  Subversion: 0xfc00
+	Manufacturer: Intel Corp. (2)

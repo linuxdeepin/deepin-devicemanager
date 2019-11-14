@@ -1,0 +1,1 @@
+Linux version 4.19.0-5-amd64 (debian-kernel@lists.debian.org) (gcc version 8.3.0 (Debian 8.3.0-6)) #1 SMP Deepin 4.19.37-9deepin (2019-09-21)

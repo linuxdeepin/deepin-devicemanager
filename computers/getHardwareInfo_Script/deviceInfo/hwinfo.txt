@@ -1,0 +1,41 @@
+14: None 00.0: 10000 Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.lSp6M+aRN53
+  Parent ID: _Znp.T0D2+dWKy+E
+  Hardware Class: monitor
+  Model: "Lenovo LEN T2324C"
+  Vendor: LEN "Lenovo"
+  Device: eisa 0x60f2 "LEN T2324C"
+  Serial ID: "U0-B1HAL8"
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 640x480@72Hz
+  Resolution: 640x480@75Hz
+  Resolution: 800x600@56Hz
+  Resolution: 800x600@60Hz
+  Resolution: 800x600@72Hz
+  Resolution: 800x600@75Hz
+  Resolution: 832x624@75Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1024x768@70Hz
+  Resolution: 1024x768@75Hz
+  Resolution: 1280x1024@75Hz
+  Resolution: 1152x864@75Hz
+  Resolution: 1280x1024@60Hz
+  Resolution: 1280x1024@70Hz
+  Resolution: 1920x1080@60Hz
+  Size: 510x287 mm
+  Year of Manufacture: 2018
+  Week of Manufacture: 25
+  Detailed Timings #0:
+     Resolution: 1920x1080
+     Horizontal: 1920 1968 2000 2080 (+48 +80 +160) -hsync
+       Vertical: 1080 1083 1088 1111 (+3 +8 +31) +vsync
+    Frequencies: 138.50 MHz, 66.59 kHz, 59.93 Hz
+  Driver Info #0:
+    Max. Resolution: 1920x1080
+    Vert. Sync Range: 50-75 Hz
+    Hor. Sync Range: 30-81 kHz
+    Bandwidth: 138 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #11 (VGA compatible controller)

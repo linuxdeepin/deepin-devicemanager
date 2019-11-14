@@ -1,0 +1,129 @@
+00:00.0 Host bridge: Intel Corporation 4th Gen Core Processor DRAM Controller (rev 06)
+	Subsystem: Hewlett-Packard Company 4th Gen Core Processor DRAM Controller
+	Flags: bus master, fast devsel, latency 0
+	Capabilities: [e0] Vendor Specific Information: Len=0c <?>
+	Kernel driver in use: hsw_uncore
+
+00:02.0 VGA compatible controller: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics Controller (rev 06) (prog-if 00 [VGA controller])
+	Subsystem: Hewlett-Packard Company Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 29
+	Memory at f7800000 (64-bit, non-prefetchable) [size=4M]
+	Memory at e0000000 (64-bit, prefetchable) [size=256M]
+	I/O ports at f000 [size=64]
+	[virtual] Expansion ROM at 000c0000 [disabled] [size=128K]
+	Capabilities: [90] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [d0] Power Management version 2
+	Capabilities: [a4] PCI Advanced Features
+	Kernel driver in use: i915
+	Kernel modules: i915
+
+00:03.0 Audio device: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor HD Audio Controller (rev 06)
+	Subsystem: Hewlett-Packard Company Xeon E3-1200 v3/4th Gen Core Processor HD Audio Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 26
+	Memory at f7c34000 (64-bit, non-prefetchable) [size=16K]
+	Capabilities: [50] Power Management version 2
+	Capabilities: [60] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [70] Express Root Complex Integrated Endpoint, MSI 00
+	Kernel driver in use: snd_hda_intel
+	Kernel modules: snd_hda_intel
+
+00:14.0 USB controller: Intel Corporation 8 Series/C220 Series Chipset Family USB xHCI (rev 04) (prog-if 30 [XHCI])
+	Subsystem: Hewlett-Packard Company 8 Series/C220 Series Chipset Family USB xHCI
+	Flags: bus master, medium devsel, latency 0, IRQ 27
+	Memory at f7c20000 (64-bit, non-prefetchable) [size=64K]
+	Capabilities: [70] Power Management version 2
+	Capabilities: [80] MSI: Enable+ Count=1/8 Maskable- 64bit+
+	Kernel driver in use: xhci_hcd
+	Kernel modules: xhci_pci
+
+00:16.0 Communication controller: Intel Corporation 8 Series/C220 Series Chipset Family MEI Controller #1 (rev 04)
+	Subsystem: Hewlett-Packard Company 8 Series/C220 Series Chipset Family MEI Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 31
+	Memory at f7c40000 (64-bit, non-prefetchable) [size=16]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [8c] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Kernel driver in use: mei_me
+	Kernel modules: mei_me
+
+00:16.3 Serial controller: Intel Corporation 8 Series/C220 Series Chipset Family KT Controller (rev 04) (prog-if 02 [16550])
+	Subsystem: Hewlett-Packard Company 8 Series/C220 Series Chipset Family KT Controller
+	Flags: bus master, 66MHz, fast devsel, latency 0, IRQ 19
+	I/O ports at f0e0 [size=8]
+	Memory at f7c3e000 (32-bit, non-prefetchable) [size=4K]
+	Capabilities: [c8] Power Management version 3
+	Capabilities: [d0] MSI: Enable- Count=1/1 Maskable- 64bit+
+	Kernel driver in use: serial
+
+00:19.0 Ethernet controller: Intel Corporation Ethernet Connection I217-LM (rev 04)
+	Subsystem: Hewlett-Packard Company Ethernet Connection I217-LM
+	Flags: bus master, fast devsel, latency 0, IRQ 32
+	Memory at f7c00000 (32-bit, non-prefetchable) [size=128K]
+	Memory at f7c3d000 (32-bit, non-prefetchable) [size=4K]
+	I/O ports at f080 [size=32]
+	Capabilities: [c8] Power Management version 2
+	Capabilities: [d0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [e0] PCI Advanced Features
+	Kernel driver in use: e1000e
+	Kernel modules: e1000e
+
+00:1a.0 USB controller: Intel Corporation 8 Series/C220 Series Chipset Family USB EHCI #2 (rev 04) (prog-if 20 [EHCI])
+	Subsystem: Hewlett-Packard Company 8 Series/C220 Series Chipset Family USB EHCI
+	Flags: bus master, medium devsel, latency 0, IRQ 16
+	Memory at f7c3c000 (32-bit, non-prefetchable) [size=1K]
+	Capabilities: [50] Power Management version 2
+	Capabilities: [58] Debug port: BAR=1 offset=00a0
+	Capabilities: [98] PCI Advanced Features
+	Kernel driver in use: ehci-pci
+	Kernel modules: ehci_pci
+
+00:1b.0 Audio device: Intel Corporation 8 Series/C220 Series Chipset High Definition Audio Controller (rev 04)
+	Subsystem: Hewlett-Packard Company 8 Series/C220 Series Chipset High Definition Audio Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 30
+	Memory at f7c30000 (64-bit, non-prefetchable) [size=16K]
+	Capabilities: [50] Power Management version 2
+	Capabilities: [60] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Root Complex Integrated Endpoint, MSI 00
+	Capabilities: [100] Virtual Channel
+	Kernel driver in use: snd_hda_intel
+	Kernel modules: snd_hda_intel
+
+00:1d.0 USB controller: Intel Corporation 8 Series/C220 Series Chipset Family USB EHCI #1 (rev 04) (prog-if 20 [EHCI])
+	Subsystem: Hewlett-Packard Company 8 Series/C220 Series Chipset Family USB EHCI
+	Flags: bus master, medium devsel, latency 0, IRQ 23
+	Memory at f7c3b000 (32-bit, non-prefetchable) [size=1K]
+	Capabilities: [50] Power Management version 2
+	Capabilities: [58] Debug port: BAR=1 offset=00a0
+	Capabilities: [98] PCI Advanced Features
+	Kernel driver in use: ehci-pci
+	Kernel modules: ehci_pci
+
+00:1f.0 ISA bridge: Intel Corporation Q87 Express LPC Controller (rev 04)
+	Subsystem: Hewlett-Packard Company Q87 Express LPC Controller
+	Flags: bus master, medium devsel, latency 0
+	Capabilities: [e0] Vendor Specific Information: Len=0c <?>
+	Kernel driver in use: lpc_ich
+	Kernel modules: lpc_ich
+
+00:1f.2 SATA controller: Intel Corporation 8 Series/C220 Series Chipset Family 6-port SATA Controller 1 [AHCI mode] (rev 04) (prog-if 01 [AHCI 1.0])
+	Subsystem: Hewlett-Packard Company 8 Series/C220 Series Chipset Family 6-port SATA Controller 1 [AHCI mode]
+	Flags: bus master, 66MHz, medium devsel, latency 0, IRQ 28
+	I/O ports at f0d0 [size=8]
+	I/O ports at f0c0 [size=4]
+	I/O ports at f0b0 [size=8]
+	I/O ports at f0a0 [size=4]
+	I/O ports at f060 [size=32]
+	Memory at f7c3a000 (32-bit, non-prefetchable) [size=2K]
+	Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [70] Power Management version 3
+	Capabilities: [a8] SATA HBA v1.0
+	Kernel driver in use: ahci
+	Kernel modules: ahci
+
+00:1f.3 SMBus: Intel Corporation 8 Series/C220 Series Chipset Family SMBus Controller (rev 04)
+	Subsystem: Hewlett-Packard Company 8 Series/C220 Series Chipset Family SMBus Controller
+	Flags: medium devsel, IRQ 18
+	Memory at f7c39000 (64-bit, non-prefetchable) [size=256]
+	I/O ports at f040 [size=32]
+	Kernel driver in use: i801_smbus
+	Kernel modules: i2c_i801
+

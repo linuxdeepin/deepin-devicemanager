@@ -1,0 +1,16 @@
+xrandr: Failed to get size of gamma for output default
+Screen 0: minimum 1024 x 768, current 1024 x 768, maximum 1024 x 768
+default connected primary 1024x768+0+0 (0x270) normal (normal) 0mm x 0mm
+	Identifier: 0x26f
+	Timestamp:  14607
+	Subpixel:   unknown
+	Clones:    
+	CRTC:       0
+	CRTCs:      0
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+  1024x768 (0x270)   59.8MHz *current
+        h: width  1024 start    0 end    0 total 1024 skew    0 clock   58.4KHz
+        v: height  768 start    0 end    0 total  768           clock   76.0Hz

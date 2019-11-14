@@ -1,0 +1,101 @@
+36: None 00.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.wRVDze9z4l6
+  Parent ID: _Znp._fOSIVQs6w2
+  Hardware Class: monitor
+  Model: "N140HCA-EAC LCD Monitor"
+  Vendor: CMN "N140HCA-EAC"
+  Device: eisa 0x14d4 
+  Resolution: 1920x1080@60Hz
+  Size: 309x173 mm
+  Year of Manufacture: 2016
+  Week of Manufacture: 36
+  Detailed Timings #0:
+     Resolution: 1920x1080
+     Horizontal: 1920 2000 2060 2250 (+80 +140 +330) -hsync
+       Vertical: 1080 1086 1094 1132 (+6 +14 +52) -vsync
+    Frequencies: 152.84 MHz, 67.93 kHz, 60.01 Hz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #33 (VGA compatible controller)
+
+37: None 01.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: wkFv.zb_TCur0BID
+  Parent ID: _Znp._fOSIVQs6w2
+  Hardware Class: monitor
+  Model: "Lenovo LEN T24d-10"
+  Vendor: LEN "Lenovo"
+  Device: eisa 0x61b4 "LEN T24d-10"
+  Serial ID: --
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 640x480@67Hz
+  Resolution: 640x480@72Hz
+  Resolution: 640x480@75Hz
+  Resolution: 800x600@60Hz
+  Resolution: 800x600@72Hz
+  Resolution: 800x600@75Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1024x768@70Hz
+  Resolution: 1024x768@75Hz
+  Resolution: 1280x1024@75Hz
+  Resolution: 1920x1080@60Hz
+  Resolution: 1152x864@75Hz
+  Resolution: 1280x1024@72Hz
+  Resolution: 1920x1200@60Hz
+  Size: 518x324 mm
+  Year of Manufacture: 2017
+  Week of Manufacture: 48
+  Detailed Timings #0:
+     Resolution: 1920x1200
+     Horizontal: 1920 1968 2000 2080 (+48 +80 +160) -hsync
+       Vertical: 1200 1203 1209 1235 (+3 +9 +35) +vsync
+    Frequencies: 154.00 MHz, 74.04 kHz, 59.95 Hz
+  Driver Info #0:
+    Max. Resolution: 1920x1200
+    Vert. Sync Range: 50-75 Hz
+    Hor. Sync Range: 30-83 kHz
+    Bandwidth: 154 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #33 (VGA compatible controller)
+
+38: None 02.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: +rIN.cS7sbCKCUY6
+  Parent ID: _Znp._fOSIVQs6w2
+  Hardware Class: monitor
+  Model: "Lenovo LEN T24d-10"
+  Vendor: LEN "Lenovo"
+  Device: eisa 0x61b4 "LEN T24d-10"
+  Serial ID: --
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 640x480@67Hz
+  Resolution: 640x480@72Hz
+  Resolution: 640x480@75Hz
+  Resolution: 800x600@60Hz
+  Resolution: 800x600@72Hz
+  Resolution: 800x600@75Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1024x768@70Hz
+  Resolution: 1024x768@75Hz
+  Resolution: 1280x1024@75Hz
+  Resolution: 1920x1080@60Hz
+  Resolution: 1152x864@75Hz
+  Resolution: 1280x1024@72Hz
+  Resolution: 1920x1200@60Hz
+  Size: 518x324 mm
+  Year of Manufacture: 2017
+  Week of Manufacture: 48
+  Detailed Timings #0:
+     Resolution: 1920x1200
+     Horizontal: 1920 1968 2000 2080 (+48 +80 +160) -hsync
+       Vertical: 1200 1203 1209 1235 (+3 +9 +35) +vsync
+    Frequencies: 154.00 MHz, 74.04 kHz, 59.95 Hz
+  Driver Info #0:
+    Max. Resolution: 1920x1200
+    Vert. Sync Range: 50-75 Hz
+    Hor. Sync Range: 30-83 kHz
+    Bandwidth: 154 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #33 (VGA compatible controller)

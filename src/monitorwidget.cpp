@@ -169,6 +169,21 @@ void MonitorWidget::initWidget()
             displayRete.value = QString::number(w) + " : " + QString::number(h);
         }
 
+        ArticleStruct frequencies("Frequencies");
+        frequencies.queryData("hwinfo", monitor, "Frequencies");
+        if(frequencies.isValid())
+        {
+            frequencies.value = frequencies.value.trimmed().split(",").last().trimmed();
+            if(frequencies.isValid())
+            {
+                currentResolution.value += " @";
+                currentResolution.value += frequencies.value;
+            }
+        }
+
+
+
+
         articles.push_back(currentResolution);
         existArticles.insert("Current Resolution");
 
@@ -182,6 +197,8 @@ void MonitorWidget::initWidget()
             {
                 primaryMonitor.value = "Yes";
             }
+
+            //currentResolution.queryData("xrandr", xrandrMonitorList.at(i), "");
         }
         articles.push_back(primaryMonitor);
 
@@ -202,6 +219,10 @@ void MonitorWidget::initWidget()
             }
         }
         articles.push_back(connectType);
+
+        ArticleStruct resolutionList("Support Resolution");
+        resolutionList.queryData("hwinfo", monitor, "Support Resolution");
+        articles.push_back(resolutionList);
 
         addDevice( name.value, articles, hwinfMonitorList.size() );
 

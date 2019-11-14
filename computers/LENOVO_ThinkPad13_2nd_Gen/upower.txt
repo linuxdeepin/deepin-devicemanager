@@ -1,0 +1,68 @@
+Device: /org/freedesktop/UPower/devices/line_power_ACAD
+  native-path:          ACAD
+  power supply:         yes
+  updated:              Tue Nov 12 11:01:31 2019 (1242 seconds ago)
+  has history:          no
+  has statistics:       no
+  line-power
+    warning-level:       none
+    online:              no
+    icon-name:          'ac-adapter-symbolic'
+
+Device: /org/freedesktop/UPower/devices/battery_BAT1
+  native-path:          BAT1
+  vendor:               SMP
+  model:                LNV-01AV436
+  serial:               --
+  power supply:         yes
+  updated:              Tue Nov 12 11:21:31 2019 (42 seconds ago)
+  has history:          yes
+  has statistics:       yes
+  battery
+    present:             yes
+    rechargeable:        yes
+    state:               discharging
+    warning-level:       none
+    energy:              25.62 Wh
+    energy-empty:        0 Wh
+    energy-full:         35.9 Wh
+    energy-full-design:  42.01 Wh
+    energy-rate:         6.34 W
+    voltage:             11.634 V
+    time to empty:       4.0 hours
+    percentage:          71%
+    capacity:            85.4558%
+    technology:          lithium-polymer
+    icon-name:          'battery-full-symbolic'
+  History (charge):
+    1573554091  71.000  discharging
+    -731947662  85.000  discharging
+    -731947782  86.000  discharging
+  History (rate):
+    1573554091  6.340 discharging
+    -731947542  4.229 discharging
+    -731947662  4.429 discharging
+    -731947782  6.146 discharging
+
+Device: /org/freedesktop/UPower/devices/DisplayDevice
+  power supply:         yes
+  updated:              Tue Nov 12 11:21:31 2019 (42 seconds ago)
+  has history:          no
+  has statistics:       no
+  battery
+    present:             yes
+    state:               discharging
+    warning-level:       none
+    energy:              25.62 Wh
+    energy-full:         35.9 Wh
+    energy-rate:         6.34 W
+    time to empty:       4.0 hours
+    percentage:          71%
+    icon-name:          'battery-full-symbolic'
+
+Daemon:
+  daemon-version:  0.99.11
+  on-battery:      yes
+  lid-is-closed:   no
+  lid-is-present:  yes
+  critical-action: HybridSleep

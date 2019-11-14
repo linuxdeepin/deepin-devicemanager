@@ -1,0 +1,176 @@
+I: Bus=0011 Vendor=0001 Product=0001 Version=ab41
+N: Name="AT Translated Set 2 keyboard"
+P: Phys=isa0060/serio0/input0
+S: Sysfs=/devices/platform/i8042/serio0/input/input0
+U: Uniq=
+H: Handlers=sysrq kbd leds event0 
+B: PROP=0
+B: EV=120013
+B: KEY=10000 0 0 0 1000402000000 3803078f800d001 feffffdfffefffff fffffffffffffffe
+B: MSC=10
+B: LED=7
+
+I: Bus=0019 Vendor=0000 Product=0005 Version=0000
+N: Name="Lid Switch"
+P: Phys=PNP0C0D/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0D:00/input/input2
+U: Uniq=
+H: Handlers=event1 
+B: PROP=0
+B: EV=21
+B: SW=1
+
+I: Bus=0019 Vendor=0000 Product=0003 Version=0000
+N: Name="Sleep Button"
+P: Phys=PNP0C0E/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0E:00/input/input3
+U: Uniq=
+H: Handlers=kbd event2 
+B: PROP=0
+B: EV=3
+B: KEY=4000 0 0
+
+I: Bus=0019 Vendor=0000 Product=0001 Version=0000
+N: Name="Power Button"
+P: Phys=LNXPWRBN/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXPWRBN:00/input/input4
+U: Uniq=
+H: Handlers=kbd event3 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0019 Vendor=0000 Product=0006 Version=0000
+N: Name="Video Bus"
+P: Phys=LNXVIDEO/video/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/LNXVIDEO:00/input/input6
+U: Uniq=
+H: Handlers=kbd event4 
+B: PROP=0
+B: EV=3
+B: KEY=3e000b00000000 0 0 0
+
+I: Bus=0003 Vendor=17ef Product=608d Version=0111
+N: Name="PixArt lenovo USB Optical Mouse"
+P: Phys=usb-0000:00:14.0-2/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb2/2-2/2-2:1.0/0003:17EF:608D.0001/input/input7
+U: Uniq=
+H: Handlers=mouse0 event5 
+B: PROP=0
+B: EV=17
+B: KEY=70000 0 0 0 0
+B: REL=103
+B: MSC=10
+
+I: Bus=0011 Vendor=0002 Product=0007 Version=01b1
+N: Name="SynPS/2 Synaptics TouchPad"
+P: Phys=isa0060/serio1/input0
+S: Sysfs=/devices/platform/i8042/serio1/input/input5
+U: Uniq=
+H: Handlers=mouse1 event6 
+B: PROP=1
+B: EV=b
+B: KEY=e520 30000 0 0 0 0
+B: ABS=660800011000003
+
+I: Bus=0010 Vendor=001f Product=0001 Version=0100
+N: Name="PC Speaker"
+P: Phys=isa0061/input0
+S: Sysfs=/devices/platform/pcspkr/input/input8
+U: Uniq=
+H: Handlers=kbd event7 
+B: PROP=0
+B: EV=40001
+B: SND=6
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel HDMI HDMI/DP,pcm=3"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:03.0/sound/card1/input9
+U: Uniq=
+H: Handlers=event8 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel HDMI HDMI/DP,pcm=7"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:03.0/sound/card1/input10
+U: Uniq=
+H: Handlers=event9 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel HDMI HDMI/DP,pcm=8"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:03.0/sound/card1/input11
+U: Uniq=
+H: Handlers=event10 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel HDMI HDMI/DP,pcm=9"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:03.0/sound/card1/input12
+U: Uniq=
+H: Handlers=event11 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel HDMI HDMI/DP,pcm=10"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:03.0/sound/card1/input13
+U: Uniq=
+H: Handlers=event12 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0019 Vendor=0000 Product=0000 Version=0000
+N: Name="Ideapad extra buttons"
+P: Phys=ideapad/input0
+S: Sysfs=/devices/pci0000:00/0000:00:1f.0/PNP0C09:00/VPC2004:00/input/input14
+U: Uniq=
+H: Handlers=kbd event13 rfkill 
+B: PROP=0
+B: EV=13
+B: KEY=81000800100c03 4400000000300000 0 2
+B: MSC=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Mic"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card2/input15
+U: Uniq=
+H: Handlers=event14 
+B: PROP=0
+B: EV=21
+B: SW=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Headphone"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card2/input16
+U: Uniq=
+H: Handlers=event15 
+B: PROP=0
+B: EV=21
+B: SW=4
+
+I: Bus=0003 Vendor=5986 Product=0299 Version=1405
+N: Name="Lenovo EasyCamera: Lenovo EasyC"
+P: Phys=usb-0000:00:14.0-6/button
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb2/2-6/2-6:1.0/input/input17
+U: Uniq=
+H: Handlers=kbd event16 
+B: PROP=0
+B: EV=3
+B: KEY=100000 0 0 0
+

@@ -1,0 +1,85 @@
+I: Bus=0019 Vendor=0000 Product=0001 Version=0000
+N: Name="Power Button"
+P: Phys=PNP0C0C/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input1
+U: Uniq=
+H: Handlers=kbd event0 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0019 Vendor=0000 Product=0001 Version=0000
+N: Name="Power Button"
+P: Phys=LNXPWRBN/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXPWRBN:00/input/input2
+U: Uniq=
+H: Handlers=kbd event1 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0003 Vendor=046d Product=c016 Version=0110
+N: Name="Logitech Optical USB Mouse"
+P: Phys=usb-0000:00:02.1-1.1/input0
+S: Sysfs=/devices/pci0000:00/0000:00:02.1/usb1/1-1/1-1.1/1-1.1:1.0/0003:046D:C016.0001/input/input3
+U: Uniq=
+H: Handlers=mouse0 event2 
+B: PROP=0
+B: EV=17
+B: KEY=70000 0 0 0 0
+B: REL=103
+B: MSC=10
+
+I: Bus=0003 Vendor=04f2 Product=0403 Version=0111
+N: Name="Chicony USB Keyboard"
+P: Phys=usb-0000:00:02.1-1.4/input0
+S: Sysfs=/devices/pci0000:00/0000:00:02.1/usb1/1-1/1-1.4/1-1.4:1.0/0003:04F2:0403.0002/input/input4
+U: Uniq=
+H: Handlers=sysrq kbd leds event3 
+B: PROP=0
+B: EV=120013
+B: KEY=1000000000007 ff9f207ac14057ff febeffdfffefffff fffffffffffffffe
+B: MSC=10
+B: LED=7
+
+I: Bus=0003 Vendor=04f2 Product=0403 Version=0111
+N: Name="Chicony USB Keyboard System Control"
+P: Phys=usb-0000:00:02.1-1.4/input1
+S: Sysfs=/devices/pci0000:00/0000:00:02.1/usb1/1-1/1-1.4/1-1.4:1.1/0003:04F2:0403.0003/input/input5
+U: Uniq=
+H: Handlers=kbd event4 
+B: PROP=0
+B: EV=13
+B: KEY=c000 10000000000000 0
+B: MSC=10
+
+I: Bus=0003 Vendor=04f2 Product=0403 Version=0111
+N: Name="Chicony USB Keyboard Consumer Control"
+P: Phys=usb-0000:00:02.1-1.4/input1
+S: Sysfs=/devices/pci0000:00/0000:00:02.1/usb1/1-1/1-1.4/1-1.4:1.1/0003:04F2:0403.0003/input/input6
+U: Uniq=
+H: Handlers=kbd event5 
+B: PROP=0
+B: EV=13
+B: KEY=2000000 387ad8011001 e000000000000 0
+B: MSC=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA ATI HDMI HDMI/DP,pcm=3"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:09.0/0000:02:00.1/sound/card0/input8
+U: Uniq=
+H: Handlers=event6 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0003 Vendor=0000 Product=0000 Version=0004
+N: Name="ACPI Virtual Keyboard Device"
+P: Phys=
+S: Sysfs=/devices/virtual/input/input9
+U: Uniq=
+H: Handlers=sysrq kbd event7 rfkill 
+B: PROP=0
+B: EV=3
+B: KEY=ffffffffffffffff ffffffffffffffff ffffffffffffffff fffffffffffffffe

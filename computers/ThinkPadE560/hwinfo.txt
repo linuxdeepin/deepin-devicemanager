@@ -1,0 +1,19 @@
+18: None 00.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.UzCWRhRX_t3
+  Parent ID: _Znp.zrFNLFrYmlC
+  Hardware Class: monitor
+  Model: "LG Display LCD Monitor"
+  Vendor: LGD "LG Display"
+  Device: eisa 0x04b7 
+  Resolution: 1366x768@60Hz
+  Size: 344x194 mm
+  Year of Manufacture: 2015
+  Week of Manufacture: 0
+  Detailed Timings #0:
+     Resolution: 1366x768
+     Horizontal: 1366 1414 1446 1610 (+48 +80 +244) -hsync
+       Vertical:  768  771  776  790 (+3 +8 +22) -vsync
+    Frequencies: 76.32 MHz, 47.40 kHz, 60.00 Hz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #15 (VGA compatible controller)

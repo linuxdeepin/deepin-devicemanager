@@ -1,0 +1,28 @@
+36: None 00.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.7VVzoijL134
+  Parent ID: _Znp.CrZuXe2RBG4
+  Hardware Class: monitor
+  Model: "Apple iMac"
+  Vendor: APP "Apple"
+  Device: eisa 0xa012 "iMac"
+  Resolution: 960x540@60Hz
+  Resolution: 1920x1080@60Hz
+  Size: 475x267 mm
+  Year of Manufacture: 2012
+  Week of Manufacture: 28
+  Detailed Timings #0:
+     Resolution: 1920x1080
+     Horizontal: 1920 1968 2000 2080 (+48 +80 +160) -hsync
+       Vertical: 1080 1083 1088 1111 (+3 +8 +31) +vsync
+    Frequencies: 138.50 MHz, 66.59 kHz, 59.93 Hz
+  Year of Manufacture: 2012
+  Week of Manufacture: 28
+  Detailed Timings #1:
+     Resolution: 960x540
+     Horizontal:  960 1008 1040 1120 (+48 +80 +160) -hsync
+       Vertical:  540  543  548  556 (+3 +8 +16) +vsync
+    Frequencies: 37.25 MHz, 33.26 kHz, 59.82 Hz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #23 (VGA compatible controller)
+
