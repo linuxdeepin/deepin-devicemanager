@@ -35,6 +35,8 @@ void PrinterWidget::initWidget()
     //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
     QStringList printerList = DeviceInfoParserInstance.getCupsPrinterList();
 
+    QStringList lshwPrinterList = DeviceInfoParserInstance.getLshwPrinterList();
+
     if( printerList.size() < 1)
     {
         setCentralInfo("No Printer found!");
@@ -68,7 +70,7 @@ void PrinterWidget::initWidget()
         {
             QStringList tab =
             {
-                printerInfo.value,
+                device,
                 printerMakeAndModel.value
             };
 

@@ -138,6 +138,7 @@ void DeviceInfoWidgetBase::initFont()
     tableContentFont_ = titleFont_;
 
     titleFont_.setPixelSize(17);
+    //titleFont_.setPointSizeF(17);
     titleFont_.setWeight(QFont::DemiBold);
 
     infoFont_.setPixelSize(14);
@@ -277,14 +278,8 @@ void DeviceInfoWidgetBase::addCloumnToLayout(DeviceInfo* di, QVBoxLayout* vly, c
 
         QString value = article.valueTranslate? DApplication::translate("Main", article.value.toStdString().data()): article.value;
 
-        ColumnWidget* widget = new ColumnWidget( DApplication::translate("Main", article.name.toStdString().data())+ ":", value, font, columnHeight, downWidget_, this);
+        ColumnWidget* widget = new ColumnWidget( DApplication::translate("Main", article.name.toStdString().data())+ ":", value, font, columnHeight, article.externalLinks, downWidget_, this);
         DApplicationHelper::instance()->setPalette(widget->l1, pa);
-
-        if( article.externalLinks )
-        {
-            widget->l2->setOpenExternalLinks(true);
-        }
-
 
         DApplicationHelper::instance()->setPalette(widget->l2, pa);
 
@@ -462,6 +457,7 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
     }
 
     infoWidget_ = new DWidget(this);
+    infoWidget_->setAutoFillBackground(true);
     //infoWidget_->setFixedWidth(DeviceWidgetDownWidgehWidth_);
     infoWidget_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     infoWidget_->setLayout(vly);
@@ -573,7 +569,8 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         tableWidget_->verticalHeader()->setDefaultSectionSize(40);
 
-        tableWidget_->setVerticalScrollBar(new DScrollBar(this));
+        auto scrollBar = new DScrollBar(tableWidget_);
+        tableWidget_->setVerticalScrollBar(scrollBar);
         tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
         tableWidget_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
         //tableWidget_->horizontalHeader()->setClickable(false);
@@ -676,6 +673,18 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 //    tableWidget_->setColumnWidth(3, 100);
 //    tableWidget_->setColumnWidth(4, 50);
 
+//    DFrame* f = new DFrame(this);
+//    QVBoxLayout* vly = new QVBoxLayout;
+//    vly->addWidget(tableWidget_);
+//    vly->setMargin(3);
+//    f->setLayout(vly);
+
+//    vLayout_->insertWidget(0, f);
+//    QHBoxLayout* hly = new QHBoxLayout;
+//    hly->addWidget(tableWidget_);
+//    hly->addSpacing(10);
+//    vLayout_->insertLayout(0, hly);
+
     vLayout_->insertWidget(0, tableWidget_);
     vLayout_->insertSpacing(1, 8);
 
@@ -720,10 +729,15 @@ void DeviceInfoWidgetBase::initDownWidget()
         return;
     }
 
+    QFrame* f = new QFrame(this);
+    //auto f = new DWidget(this);
+
     downWidgetScrollArea_ = new DScrollArea(this);
+    downWidgetScrollArea_->setAutoFillBackground(true);
 
     downWidgetScrollArea_->setFrameShape(QFrame::NoFrame);
     downWidget_ = new DWidget(downWidgetScrollArea_);
+    downWidget_->setAutoFillBackground(true);
 
     //downWidget_->setBackgroundRole(QPalette::Base);
     //downWidget_->setAutoFillBackground(true);
@@ -743,7 +757,16 @@ void DeviceInfoWidgetBase::initDownWidget()
     downWidget_->setLayout(downWidgetLayout);
     downWidgetScrollArea_->setWidget(downWidget_);
 
-    vLayout_->insertWidget( vLayout_->count(), downWidgetScrollArea_);
+
+    //f->setAutoFillBackground(false);
+    QVBoxLayout* ly = new QVBoxLayout;
+    ly->setMargin(3);
+    ly->setSpacing(0);
+    ly->addWidget(downWidgetScrollArea_);
+    f->setLayout(ly);
+    vLayout_->insertWidget( vLayout_->count(), f);
+
+    //vLayout_->insertWidget( vLayout_->count(), downWidgetScrollArea_);
 
     //connect(downWidgetScrollArea_->verticalScrollBar(), &QScrollBar::valueChanged, this, &DeviceInfoWidgetBase::onScroll);
 }

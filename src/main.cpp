@@ -62,8 +62,8 @@ int main(int argc, char *argv[])
     Dtk::Core::DLogManager::registerFileAppender();
 
     //app.setStyle("chameleon");
-    if (!DGuiApplicationHelper::instance()->setSingleInstance("dde-devicemanager"))
-            return 0;
+//    if (!DGuiApplicationHelper::instance()->setSingleInstance("dde-devicemanager"))
+//            return 0;
 
 
     MainWindow w(nullptr);

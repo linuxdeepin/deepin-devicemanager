@@ -41,7 +41,7 @@ void MemoryWidget::initWidget()
 
 void MemoryWidget::initTableWdiget()
 {
-    QStringList memList = DeviceInfoParserInstance.getMmidecodeMemoryList();
+    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
 
 
     QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size", /* "Statu"*/};
@@ -119,7 +119,7 @@ void MemoryWidget::updateWholeDownWidget()
     articles.clear();
     QSet<QString> existArticles;
 
-    QStringList memList = DeviceInfoParserInstance.getMmidecodeMemoryList();
+    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
     QStringList detailMem;
     foreach(const QString& mem, memList)
     {

@@ -1552,32 +1552,32 @@
             <translation>通过</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Configured Clock Speed</source>
+            <translation>配置时钟频率</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Alias</source>
+            <translation>别名</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Blocked</source>
+            <translation>阻塞</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Connected</source>
+            <translation>已连接</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Icon</source>
+            <translation>图标</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Paired</source>
+            <translation>已配对</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Trusted</source>
+            <translation>已信任</translation>
         </message>
         <message>
             <source></source>

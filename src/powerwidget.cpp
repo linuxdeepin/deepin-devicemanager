@@ -184,8 +184,8 @@ void PowerWidget::initWidget()
         {
             QStringList tab =
             {
-                DApplication::translate("Main", "Switching Power"),
                 name.value,
+                DApplication::translate("Main", "Switching Power"),
                 vendor.value
             };
 
@@ -364,8 +364,8 @@ void PowerWidget::initWidget()
 
             QStringList tab =
             {
-                DApplication::translate("Main", "Battery"),
                 d_name,
+                DApplication::translate("Main", "Battery"),
                 vendor.value
             };
 
@@ -406,7 +406,7 @@ void PowerWidget::initWidget()
 
     if( maxSwitchingSize + maxBatterySize > 1 )
     {
-        QStringList headers = { "Type", "Name", "Vendor" };
+        QStringList headers = { "Name", "Type", "Vendor" };
         addTable( headers, tabList);
     }
 }

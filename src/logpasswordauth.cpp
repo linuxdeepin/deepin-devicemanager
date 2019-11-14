@@ -59,7 +59,7 @@ void LogPasswordAuth::initUI()
                                   DIALOG::ICON_LAYOUT_TOP_MARGIN,
                                   DIALOG::ICON_LAYOUT_RIGHT_MARGIN,
                                   DIALOG::ICON_LAYOUT_BOTTOM_MARGIN);
-    topLayout->setSpacing(DIALOG::ICON_LAYOUT_SPACING);
+    //topLayout->setSpacing(DIALOG::ICON_LAYOUT_SPACING);
 
     // TopLayout--Icon
     iconLabel = new DLabel;
@@ -155,6 +155,9 @@ void LogPasswordAuth::initUI()
     this->addAction(button_action);
     this->setFocusPolicy(Qt::ClickFocus);
     this->setFocus();
+
+    //m_edt->adjustSize();
+    m_edt->setEchoButtonIsVisible(true);
 }
 
 void LogPasswordAuth::initConnections()

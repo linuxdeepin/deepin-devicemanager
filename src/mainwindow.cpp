@@ -233,6 +233,10 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new MonitorWidget(mainWidget_), "monitor.svg");
     addDeviceWidget(new NetworkadapterWidget(mainWidget_), "networkadapter.svg");
     addDeviceWidget(new AudiodeviceWidget(mainWidget_), "audiodevice.svg");
+
+    auto keyboardWidget = new KeyboardWidget(mainWidget_);
+    auto mouseWidget = new MouseWidget(mainWidget_);        //提前占用蓝牙键盘鼠标
+
     addDeviceWidget(new BluetoothWidget(mainWidget_), "bluetooth.svg");
     addDeviceWidget(new PowerWidget(mainWidget_), "battery.svg");
 
@@ -241,8 +245,8 @@ void MainWindow::addAllDeviceinfoWidget()
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new KeyboardWidget(mainWidget_), "keyboard.svg");
-    addDeviceWidget(new MouseWidget(mainWidget_), "mouse.svg");
+    addDeviceWidget(keyboardWidget, "keyboard.svg");
+    addDeviceWidget(mouseWidget, "mouse.svg");
     addDeviceWidget(new PrinterWidget(mainWidget_), "printer.svg");
     addDeviceWidget(new CameraWidget(mainWidget_), "camera.svg");
     addDeviceWidget(new UsbdeviceWidget(mainWidget_), "usbdevice.svg");
@@ -260,10 +264,10 @@ void MainWindow::addAllDeviceinfoWidget()
 
     if(firstAdd_ == true)
     {
-        leftDeviceView_->setSelectNull();
+        leftDeviceView_->setFistSelected();
+        firstAdd_ = false;
     }
 
-    firstAdd_ = false;
 
     QApplication::restoreOverrideCursor();
 
@@ -365,7 +369,7 @@ bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
 
         for(int i = 0; i < leftDeviceView_->count(); ++i)
         {
-            QString device = leftDeviceView_->indexAt(i);
+            QString device = leftDeviceView_->indexString(i);
             if( deviceInfoWidgetMap_.contains(device) )
             {
                 deviceInfoWidgetMap_[device]->exportToTxt(textFile);
@@ -387,7 +391,7 @@ bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
 
         for(int i = 0; i < leftDeviceView_->count(); ++i)
         {
-            QString device = leftDeviceView_->indexAt(i);
+            QString device = leftDeviceView_->indexString(i);
             if( deviceInfoWidgetMap_.contains(device) )
             {
                 deviceInfoWidgetMap_[device]->exportToHtml(htmlFile);
@@ -405,7 +409,7 @@ bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
 
         for(int i = 0; i < leftDeviceView_->count(); ++i)
         {
-            QString device = leftDeviceView_->indexAt(i);
+            QString device = leftDeviceView_->indexString(i);
             if( deviceInfoWidgetMap_.contains(device) )
             {
                 deviceInfoWidgetMap_[device]->exportToDoc(doc);
@@ -424,7 +428,7 @@ bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
 
         for(int i = 0; i < leftDeviceView_->count(); ++i)
         {
-            QString device = leftDeviceView_->indexAt(i);
+            QString device = leftDeviceView_->indexString(i);
             if( deviceInfoWidgetMap_.contains(device) )
             {
                 deviceInfoWidgetMap_[device]->exportToXls(xlsx);

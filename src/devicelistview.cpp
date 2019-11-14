@@ -231,13 +231,27 @@ void DeviceListView::setCurrentDevice(const QString& device)
     currentDevice_ = device;
 }
 
-void DeviceListView::setSelectNull()
+void DeviceListView::setFistSelected()
 {
     QModelIndex index = navModel_->index(0, 0);
-    selectionModel()->select(index, QItemSelectionModel::Select);
+//    selectionModel()->select(index, QItemSelectionModel::Select);
+
+//    QStandardItem* currentItem = navModel_->itemFromIndex(index);
+//    if(currentItem)
+//    {
+//        QString icon = currentItem->data(Qt::UserRole+89).toString();
+//        if(icon.isEmpty() == false)
+//        {
+//            icon.replace("normal", "press");
+//            currentItem->setIcon(QIcon(icon));
+//            currentItem->setData(icon, Qt::UserRole+89);
+//        }
+//    }
+
+    setCurrentIndex(index);
 }
 
-QString DeviceListView::indexAt(int index)
+QString DeviceListView::indexString(int index)
 {
     return navModel_->index(index, 0).data().toString();
 }
@@ -360,7 +374,6 @@ void DeviceListView::currentChanged(const QModelIndex &current, const QModelInde
             previousItem->setData(icon, Qt::UserRole+89);
         }
     }
-
 
     DListView::currentChanged(current, previous);
 

@@ -54,9 +54,9 @@ public:
     QString currentDevice();
     void setCurrentDevice(const QString& device);
 
-    void setSelectNull();
+    void setFistSelected();
 
-    QString indexAt(int index);
+    QString indexString(int index);
 
 public slots:
     bool onExportToFile();

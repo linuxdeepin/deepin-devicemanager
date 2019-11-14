@@ -32,19 +32,14 @@ MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplic
 
 void MouseWidget::initWidget()
 {
-    QStringList inputdeviceList = DeviceInfoParserInstance.getPS_2MouseInputdeviceList();
-    QStringList mouseList = DeviceInfoParserInstance.getLshwMouseList();
+    QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceMouseList();
+    //QStringList mouseList = DeviceInfoParserInstance.getLshwMouseList();
 
-    if( inputdeviceList.size() + mouseList.size() < 1 )
+    if( inputdeviceList.size() < 1 )
     {
         setCentralInfo("No Mouse found!");
         return;
     }
-
-//    if( inputdeviceList.size() + mouseList.size() == 1)
-//    {
-//        setTitle(DApplication::translate("Main", "Mouse")  + DApplication::translate("Main", " Info"));
-//    }
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
@@ -61,22 +56,111 @@ void MouseWidget::initWidget()
         articles.push_back(name);
         existArticles.insert("Name");
 
-        ArticleStruct type("Type");
-        type.value = "PS/2";
-        articles.push_back(type);
-
         ArticleStruct vendor("Vendor");
-        vendor.queryData( "catinput", device, "Vendor");
-        articles.push_back(vendor);
+        ArticleStruct type("Type");
+
+        QString lshwMouse = DeviceInfoParserInstance.getCorrespondLshwMouse(name.value);
+        if( lshwMouse.isEmpty() == false )
+        {
+            existArticles.insert("product");
+
+            ArticleStruct description("Description");
+            description.queryData("lshw", lshwMouse, "description");
+            articles.push_back(description);
+            existArticles.insert("description");
+
+            vendor.queryData( "lshw", lshwMouse, "vendor");
+            articles.push_back(vendor);
+            existArticles.insert("vendor");
+
+            ArticleStruct busInfo("Bus info");
+            busInfo.queryData( "lshw", lshwMouse, "bus info");
+            articles.push_back(busInfo);
+            existArticles.insert("bus info");
+
+            ArticleStruct version("Version");
+            version.queryData( "lshw", lshwMouse, "version");
+            articles.push_back(version);
+            existArticles.insert("version");
+
+            ArticleStruct width("Width");
+            width.queryData( "lshw", lshwMouse, "width");
+            articles.push_back(width);
+            existArticles.insert("width");
+
+            ArticleStruct clock("Clock");
+            clock.queryData( "lshw", lshwMouse, "clock");
+            articles.push_back(clock);
+            existArticles.insert("clock");
+
+            ArticleStruct capabilities("Capabilities");
+            capabilities.queryData( "lshw", lshwMouse, "capabilities");
+            articles.push_back(capabilities);
+            existArticles.insert("capabilities");
+
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", lshwMouse, articles, existArticles);
+        }
+
+        ArticleStruct uniq("Uniq");
+        uniq.queryData( "catinput", device, "Uniq");
+
+        if(uniq.isValid())
+        {
+            QString blueTooth = DeviceInfoParserInstance.getCorrespondBluetoothMouse(uniq.value);
+            if( blueTooth.isEmpty() == false )
+            {
+                type.value = "Bluetooth";
+                existArticles.insert("Name");
+
+                ArticleStruct connected("Connected");
+                connected.queryData( "paired-devices", blueTooth, "Connected");
+                //articles.push_back(connected);
+
+                if(connected.value.compare("yes", Qt::CaseInsensitive) != 0)
+                {
+                    continue;
+                }
+
+                DeviceInfoParserInstance.queryRemainderDeviceInfo("paired-devices", blueTooth, articles, existArticles);
+            }
+        }
+
+        ArticleStruct phys("Phys");
+        phys.queryData( "catinput", device, "Phys");
+
+        if(type.isValid() == false)
+        {
+            if(phys.value.contains("usb", Qt::CaseInsensitive))
+            {
+                type.value = "Usb";
+            }
+            else if(phys.value.contains("/serio", Qt::CaseInsensitive))
+            {
+                type.value = "PS/2";
+            }
+            else
+            {
+                type.value = "Other";
+            }
+        }
+
+        //articles.push_back(type);
+
+        if(vendor.isValid() == false)
+        {
+            vendor.queryData( "catinput", device, "Vendor");
+            articles.push_back(vendor);
+        }
         existArticles.insert("Vendor");
+
+        articles.push_back(uniq);
+        existArticles.insert("Uniq");
 
         ArticleStruct sysfs("Sysfs");
         sysfs.queryData( "catinput", device, "Sysfs");
         articles.push_back(sysfs);
         existArticles.insert("Sysfs");
 
-        ArticleStruct phys("Phys");
-        phys.queryData( "catinput", device, "Phys");
         articles.push_back(phys);
         existArticles.insert("Phys");
 
@@ -92,19 +176,34 @@ void MouseWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("catinput", device, articles, existArticles);
 
-        addDevice( name.value , articles , inputdeviceList.size() + mouseList.size());
+        if( uniq.isValid() )
+        {
+            auto upower = DeviceInfoParserInstance.getCorrespondUpower(uniq.value);
 
-//        overviewInfo_.value = "PS/2 ";
-//        overviewInfo_.value += vendor.value;
-//        overviewInfo_.value += " ";
+            ArticleStruct power("Power");
+            power.value = " ";
+            articles.push_back(power);
+
+            if(upower.isEmpty() == false )
+            {
+                DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", upower, articles );
+            }
+        }
+
+        addDevice( name.value , articles , inputdeviceList.size() );
+
+        if(overviewInfo_.value.isEmpty() == false)
+        {
+            overviewInfo_.value += " / ";
+        }
         overviewInfo_.value += name.value;
 
-        if( inputdeviceList.size() + mouseList.size() > 1 )
+        if( inputdeviceList.size()  > 1 )
         {
             QStringList tab =
             {
                 name.value,
-                "PS/2",
+                type.value,
                 vendor.value
             };
 
@@ -113,75 +212,75 @@ void MouseWidget::initWidget()
     }
 
 
-    foreach(const QString& mouse, mouseList)
-    {
-        articles.clear();
-        existArticles.clear();
+//    foreach(const QString& mouse, mouseList)
+//    {
+//        articles.clear();
+//        existArticles.clear();
 
-//        ArticleStruct type("Type");
-//        type.value = "AudioAdapter";
-//        articles.push_back(type);
+////        ArticleStruct type("Type");
+////        type.value = "AudioAdapter";
+////        articles.push_back(type);
 
-        ArticleStruct name("Name");
-        name.queryData( "lshw", mouse, "product");
-        articles.push_back(name);
-        existArticles.insert("product");
+//        ArticleStruct name("Name");
+//        name.queryData( "lshw", mouse, "product");
+//        articles.push_back(name);
+//        existArticles.insert("product");
 
-        ArticleStruct description("Description");
-        description.queryData("lshw", mouse, "description");
-        articles.push_back(description);
-        existArticles.insert("description");
+//        ArticleStruct description("Description");
+//        description.queryData("lshw", mouse, "description");
+//        articles.push_back(description);
+//        existArticles.insert("description");
 
-        ArticleStruct vendor("Vendor");
-        vendor.queryData( "lshw", mouse, "vendor");
-        articles.push_back(vendor);
-        existArticles.insert("vendor");
+//        ArticleStruct vendor("Vendor");
+//        vendor.queryData( "lshw", mouse, "vendor");
+//        articles.push_back(vendor);
+//        existArticles.insert("vendor");
 
-        ArticleStruct busInfo("Bus info");
-        busInfo.queryData( "lshw", mouse, "bus info");
-        articles.push_back(busInfo);
-        existArticles.insert("bus info");
+//        ArticleStruct busInfo("Bus info");
+//        busInfo.queryData( "lshw", mouse, "bus info");
+//        articles.push_back(busInfo);
+//        existArticles.insert("bus info");
 
-        ArticleStruct version("Version");
-        version.queryData( "lshw", mouse, "version");
-        articles.push_back(version);
-        existArticles.insert("version");
+//        ArticleStruct version("Version");
+//        version.queryData( "lshw", mouse, "version");
+//        articles.push_back(version);
+//        existArticles.insert("version");
 
-        ArticleStruct width("Width");
-        width.queryData( "lshw", mouse, "width");
-        articles.push_back(width);
-        existArticles.insert("width");
+//        ArticleStruct width("Width");
+//        width.queryData( "lshw", mouse, "width");
+//        articles.push_back(width);
+//        existArticles.insert("width");
 
-        ArticleStruct clock("Clock");
-        clock.queryData( "lshw", mouse, "clock");
-        articles.push_back(clock);
-        existArticles.insert("clock");
+//        ArticleStruct clock("Clock");
+//        clock.queryData( "lshw", mouse, "clock");
+//        articles.push_back(clock);
+//        existArticles.insert("clock");
 
-        ArticleStruct capabilities("Capabilities");
-        capabilities.queryData( "lshw", mouse, "capabilities");
-        articles.push_back(capabilities);
-        existArticles.insert("capabilities");
+//        ArticleStruct capabilities("Capabilities");
+//        capabilities.queryData( "lshw", mouse, "capabilities");
+//        articles.push_back(capabilities);
+//        existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", mouse, articles, existArticles);
-        addDevice( name.value , articles , inputdeviceList.size() + mouseList.size());
+//        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", mouse, articles, existArticles);
+//        addDevice( name.value , articles , inputdeviceList.size() + mouseList.size());
 
-        QStringList tab =
-        {
-            name.value,
-            description.value,
-            vendor.value
-        };
+//        QStringList tab =
+//        {
+//            name.value,
+//            description.value,
+//            vendor.value
+//        };
 
-        tabList.push_back(tab);
+//        tabList.push_back(tab);
 
-        if(overviewInfo_.value.isEmpty() == false)
-        {
-            overviewInfo_.value += " / ";
-        }
-        overviewInfo_.value += name.value;
-    }
+//        if(overviewInfo_.value.isEmpty() == false)
+//        {
+//            overviewInfo_.value += " / ";
+//        }
+//        overviewInfo_.value += name.value;
+//    }
 
-    if( inputdeviceList.size() + mouseList.size() > 1 )
+    if( inputdeviceList.size() /*+ mouseList.size()*/ > 1 )
     {
         QStringList headers = { "Name",  "Type", "Vendor" };
         addTable( headers, tabList);

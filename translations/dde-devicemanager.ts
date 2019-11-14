@@ -1560,31 +1560,31 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Configured Clock Speed</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Alias</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Blocked</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Connected</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Icon</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Paired</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Trusted</source>
             <translation type="unfinished"/>
         </message>
         <message>

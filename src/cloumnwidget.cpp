@@ -44,6 +44,7 @@ ColumnLabel::ColumnLabel(const QString& text, ColumnWidget* parent): DLabel(text
 
 void ColumnLabel::mousePressEvent(QMouseEvent *event)
 {
+    //DLabel::mousePressEvent(event);
     columnWidget_->labelMousePressEvent(event);
 }
 
@@ -52,7 +53,7 @@ void ColumnLabel::contextMenuEvent(QContextMenuEvent *event)
     columnWidget_->labelContextMenuEvent(event);
 }
 
-ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, const QFont& font, int columnHeight, Dtk::Widget::DWidget* parent , DeviceInfoWidgetBase* di):\
+ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, const QFont& font, int columnHeight, bool isRightLink, Dtk::Widget::DWidget* parent , DeviceInfoWidgetBase* di):\
     DWidget(parent), deviceInfoWidget_(di)
 {
     setAutoFillBackground(true);
@@ -76,6 +77,13 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
     l2->setFont(font);
     l2->setWordWrap(true);
     int textWidth = QFontMetrics( font ).width(strRight);
+
+    if( isRightLink )
+    {
+        l2->setOpenExternalLinks(true);
+        textWidth = QFontMetrics( font ).width(DeviceInfoParserInstance.getOsInfo());
+    }
+
     if(textWidth > DeviceWidgetContentWidth_)
     {
         textWidth = DeviceWidgetContentWidth_;
@@ -92,11 +100,7 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
     if(isPaletteInit_ == false)
     {
         isPaletteInit_ = true;
-        paNormal_ = DApplicationHelper::instance()->palette(this);
-
-        paHighlight_.setBrush(QPalette::Background, paNormal_.highlight());
-        paHighlight_.setBrush(QPalette::WindowText, paNormal_.highlightedText());
-        paHighlight_.setBrush(QPalette::Link, paNormal_.highlightedText() );
+        changeTheme();
     }
 }
 
@@ -175,6 +179,8 @@ void ColumnWidget::setHilight(bool highLight)
 void ColumnWidget::changeTheme()
 {
     paNormal_ = DApplicationHelper::instance()->palette(this);
+
+    auto color1 = paNormal_.highlight().color();
 
     paHighlight_.setBrush(QPalette::Background, paNormal_.highlight());
     paHighlight_.setBrush(QPalette::WindowText, paNormal_.highlightedText());

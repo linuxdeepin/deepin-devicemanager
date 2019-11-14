@@ -130,7 +130,7 @@ void CpuWidget::initWidget()
         speed_ += "GHz)";
     }
 
-    if(cpuList.size() > 1)
+//    if(cpuList.size() > 1)
     {
         QStringList headers = { "Name", "Core ID", /*"Vendor",*/ DApplication::translate("CPU", "Speed"), "Architecture" };
         QList<QStringList> tabList;

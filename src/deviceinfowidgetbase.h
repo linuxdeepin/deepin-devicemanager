@@ -30,6 +30,7 @@
 #include "xlsxdocument.h"
 #include "document.h"
 #include "DPalette"
+#include "DFrame"
 
 class QLabel;
 class QVBoxLayout;

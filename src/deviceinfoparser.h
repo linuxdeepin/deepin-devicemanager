@@ -72,6 +72,8 @@ typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
 
 class LogPasswordAuth;
 
+typedef bool (*checkValueFun_t)(const QString&);
+
 class DeviceInfoParser: public QObject
 {
     Q_OBJECT
@@ -99,12 +101,16 @@ public:
     bool fuzzeyQueryKey(const QString& toolname, const QString& fuzzeyKey, QString& key);
 
     bool queryDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles);
-    bool queryRemainderDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles, const QSet<QString>& existArticles);
+    bool queryRemainderDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles, const QSet<QString>& existArticles = QSet<QString>());
 
     bool checkValue(const QString& toolName, const QString& device, const QString& key, const QString& contains);
 
+private:
+    QStringList getMatchToolDeviceList(const QString& toolName, checkValueFun_t* checkFunc = nullptr);
+
+public:
     QStringList getCatcpuCpuList();
-    QStringList getMmidecodeMemoryList();
+    QStringList getDimdecodeMemoryList();
     QStringList getLshwDisknameList();
 
     QStringList getLshwDiaplayadapterList();
@@ -123,16 +129,24 @@ public:
 
     QStringList getLshwBluetoothList();
 
-    QStringList getHciconfigBluetoothList();
+    QStringList getHciconfigBluetoothControllerList();
+    QStringList getOtherBluetoothctlPairedDevicesList();
 
     QStringList getLshwCameraList();
 
     QStringList getLshwOtherUsbdeviceList();
 
-    QStringList getPS_2MouseInputdeviceList();
-    QStringList getLshwMouseList();
-    QStringList getPS_2KeyboardInputdeviceList();
-    QStringList getLshwKeyboardList();
+    QStringList getInputdeviceMouseList();
+    QString getCorrespondLshwMouse(const QString& inputMouse);
+    QString getCorrespondBluetoothMouse(const QString& inputMouse);
+
+
+
+    QStringList getInputdeviceKeyboardList();
+    QString getCorrespondLshwKeyboard(const QString& inputMouse);
+    QString getCorrespondBluetoothKeyboard(const QString& inputMouse);
+
+    QString getCorrespondUpower(const QString& bluetoothDevice);
 
     QStringList getLshwSwitchingpowerList();
     QStringList getDemidecodeSwitchingpowerList();
@@ -182,8 +196,11 @@ public:
     bool loadLspciDatabase();
     // bluetooth
     bool loadHciconfigDatabase();
-    bool loadAllBluetoothctlDatabase();
+    bool loadAllBluetoothctlControllerDatabase();
     bool loadBluetoothctlDatabase(const QString& controller);
+    QStringList getAllBluetoothctlPairedDevices();
+    bool loadAllBluethctlPairedDeviceDatabase();
+    bool loadBluetoothctlPairedDeviceDatabase(const QString& mac);
     // lsusb
     bool loadLsusbDatabase();
     // hwinfo
@@ -218,6 +235,7 @@ public:
     QString osInfo_;
     QString osInfoHtml_;
 
+public:
     QSet<QString> orderedDevices;
 };
 

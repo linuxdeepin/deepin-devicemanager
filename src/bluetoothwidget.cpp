@@ -41,9 +41,9 @@ void BluetoothWidget::initWidget()
         return;
     }
 
-    QStringList hciconfigBluetoothList = DeviceInfoParserInstance.getHciconfigBluetoothList();
+    QStringList hciconfigBluetoothList = DeviceInfoParserInstance.getHciconfigBluetoothControllerList();
+    QStringList pairedDevicesList = DeviceInfoParserInstance.getOtherBluetoothctlPairedDevicesList();
     //setTitle(DApplication::translate("Main", "Bluetooth") + " " + DApplication::translate("Main", " Info"));
-
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
@@ -137,10 +137,6 @@ void BluetoothWidget::initWidget()
             }
         }
 
-        //existArticles.clear();
-
-
-
         ArticleStruct physicalId("Physical id");
         physicalId.queryData("lshw", device, "physical id");
         articles.push_back(physicalId);
@@ -170,13 +166,14 @@ void BluetoothWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles2);
 
-        addDevice( name.value, articles,  bluetoothList.size() );
+        addDevice( name.value, articles,  bluetoothList.size()+ pairedDevicesList.size() );
 
-        if( bluetoothList.size() > 1 )
+        if( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 )
         {
             QStringList tab =
             {
                 name.value,
+                "Controller",
                 vendor.value
             };
 
@@ -200,9 +197,112 @@ void BluetoothWidget::initWidget()
         ++i;
     }
 
-    if( bluetoothList.size() > 1 )
+    foreach(const QString& device, pairedDevicesList)
     {
-        QStringList headers = { "Name",  "Vendor" };
+        articles.clear();
+        existArticles.clear();
+
+        ArticleStruct name("Name");
+        name.queryData("paired-devices", device, "Name");
+        articles.push_back(name);
+        existArticles.insert("Name");
+
+        ArticleStruct vendor("Vendor");
+        vendor.queryData("paired-devices", device, "Vendor");
+        articles.push_back(vendor);
+        existArticles.insert("Vendor");
+
+        ArticleStruct alias("Alias");
+        alias.queryData("paired-devices", device, "Alias");
+        articles.push_back(alias);
+        existArticles.insert("Alias");
+
+        ArticleStruct appearance("Appearance");
+        appearance.queryData("paired-devices", device, "Appearance");
+        articles.push_back(appearance);
+        existArticles.insert("Appearance");
+
+        ArticleStruct icon("Icon");
+        icon.queryData("paired-devices", device, "Icon");
+        articles.push_back(icon);
+        existArticles.insert("Icon");
+
+        ArticleStruct connected("Connected");
+        connected.queryData("paired-devices", device, "Connected");
+        articles.push_back(connected);
+        existArticles.insert("Connected");
+
+        if(connected.value.compare("yes", Qt::CaseInsensitive) != 0)
+        {
+            continue;
+        }
+
+        ArticleStruct paired("Paired");
+        paired.queryData("paired-devices", device, "Paired");
+        articles.push_back(paired);
+        existArticles.insert("Paired");
+
+        ArticleStruct trusted("Trusted");
+        trusted.queryData("paired-devices", device, "Trusted");
+        articles.push_back(trusted);
+        existArticles.insert("Trusted");
+
+        ArticleStruct blocked("Blocked");
+        blocked.queryData("paired-devices", device, "Blocked");
+        articles.push_back(blocked);
+        existArticles.insert("Blocked");
+
+
+        DeviceInfoParserInstance.queryRemainderDeviceInfo("paired-devices", device, articles, existArticles2);
+
+        if( device.isEmpty() == false )
+        {
+            auto upower = DeviceInfoParserInstance.getCorrespondUpower(device);
+
+            ArticleStruct power("Power");
+            power.value = " ";
+            articles.push_back(power);
+
+            if(upower.isEmpty() == false )
+            {
+                DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", upower, articles );
+            }
+        }
+
+        addDevice( name.value, articles,  bluetoothList.size()+ pairedDevicesList.size() );
+
+        if( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 )
+        {
+            QStringList tab =
+            {
+                name.value,
+                "Device",
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
+
+//        if(i == 0)
+//        {
+//            overviewInfo_.value = vendor.value;
+//            overviewInfo_.value += " ";
+//            if( product.value.isEmpty() == false && product.value != DApplication::translate("Main", "Unknown") )
+//            {
+//                overviewInfo_.value += product.value;
+//            }
+//            else
+//            {
+//                overviewInfo_.value += description.value;
+//            }
+//        }
+
+        ++i;
+    }
+
+    if( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 )
+    {
+        QStringList headers = { "Name",  "Type", "Vendor" };
         addTable( headers, tabList);
     }
 }

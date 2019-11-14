@@ -50,7 +50,7 @@ public:
     bool st = false;
 
 public:
-    ColumnWidget(const QString& strLeft, const QString& strRight, const QFont& font, int columnHeight, Dtk::Widget::DWidget* parent = nullptr, DeviceInfoWidgetBase* di = nullptr);
+    ColumnWidget(const QString& strLeft, const QString& strRight, const QFont& font, int columnHeight, bool isRightLink = false, Dtk::Widget::DWidget* parent = nullptr, DeviceInfoWidgetBase* di = nullptr);
 
     void labelMousePressEvent(QMouseEvent *event);
     void labelContextMenuEvent(QContextMenuEvent *event);
