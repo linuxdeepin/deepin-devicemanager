@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon(":images/cpu.svg"));
     app.setProductName(DApplication::translate("Main", "Device Manager"));
 
-    app.setApplicationDescription(DApplication::translate("Main", "Deepin Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
+    app.setApplicationDescription(DApplication::translate("Main", "Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
 
     const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
     app.setApplicationAcknowledgementPage(acknowledgementLink);

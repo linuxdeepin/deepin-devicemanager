@@ -1,10 +1,12 @@
-# 设备管理器|../common/dde-calendar.svg|
+# 设备管理器|../common/deepin-devicemanager.svg|
 
 待完善...
 
 ## 概述
 
 设备管理器是查看、管理硬件设备的工具软件。
+
+![0|main](picture/overview.png)
 
 ## 使用入门
 
@@ -25,6 +27,8 @@
 
 在设备列表窗或主窗口点击鼠标右键。
 
+![draw](picture/contextmenu.png)
+
 ### 刷新
 
 刷新设备信息。
@@ -32,7 +36,6 @@
 ### 导出
 
 导出设备信息为Txt/Doc/Xls/Html格式。
-
 
 
 

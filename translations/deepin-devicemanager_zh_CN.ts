@@ -16,10 +16,10 @@
             <translation>设备管理器</translation>
         </message>
         <message>
-            <source>Deepin Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-            <translation>深度设备管理器是查看、管理硬件设备的工具软件。</translation>
+            <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
+            <translation>设备管理器是查看、管理硬件设备的工具软件。</translation>
         </message>
-                <message>
+        <message>
             <source>Overview</source>
             <translation>概况</translation>
         </message>

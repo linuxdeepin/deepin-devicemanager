@@ -16,7 +16,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Device Manager is a gadget for viewing device information.</source>
+            <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
             <translation type="unfinished"/>
         </message>
         <message>
