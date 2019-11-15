@@ -4,7 +4,7 @@
     <context>
         <name>Main</name>
         <message>
-            <source>dde-devicemanager</source>
+            <source>deepin-devicemanager</source>
             <translation type="unfinished"/>
         </message>
         <message>

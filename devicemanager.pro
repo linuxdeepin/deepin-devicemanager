@@ -139,7 +139,7 @@ DISTFILES += \
 
 
 #policy.path = /usr/share/polkit-1/actions
-#policy.files = policy/com.deepin.pkexec.dde-devicemanager.policy
+#policy.files = policy/com.deepin.pkexec.deepin-devicemanager.policy
 
 # target
 target.path = /usr/bin/
