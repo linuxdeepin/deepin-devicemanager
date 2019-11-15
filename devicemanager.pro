@@ -9,7 +9,7 @@ QT  += gui-private
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = dde-devicemanager
+TARGET = deepin-devicemanager
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -134,8 +134,8 @@ RESOURCES += app.qrc
 
 DISTFILES += \
     images/security.ico \
-    translations/dde-devicemanager.ts \
-    translations/dde-devicemanager_zh_CN.ts \
+    translations/deepin-devicemanager.ts \
+    translations/deepin-devicemanager_zh_CN.ts \
 
 
 #policy.path = /usr/share/polkit-1/actions
@@ -146,13 +146,13 @@ target.path = /usr/bin/
 
 # icons
 icons.files += images/cpu.svg
-icons.path = /usr/share/dde-devicemanager/
+icons.path = /usr/share/deepin-devicemanager/
 
 # desktop
-desktop.files += dde-devicemanager.desktop
+desktop.files += deepin-devicemanager.desktop
 desktop.path = /usr/share/applications/
 
-translations.path = /usr/share/dde-devicemanager/translations
+translations.path = /usr/share/deepin-devicemanager/translations
 translations.files = translations/*.qm
 
 INSTALLS += target icons desktop translations

@@ -22,6 +22,7 @@
 #pragma once
 
 #include <QString>
+#include <QSet>
 
 struct ArticleStruct
 {
@@ -37,7 +38,12 @@ struct ArticleStruct
 
     }
 
-    void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey);
+    void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey );
+    void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet);
+    void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet, QList<ArticleStruct>& articles);
     bool isValid();
+
+    bool operator==(const ArticleStruct& other);
 };
 
+bool operator==(const ArticleStruct& a1, const ArticleStruct& a2);

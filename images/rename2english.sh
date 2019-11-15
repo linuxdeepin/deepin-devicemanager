@@ -1,6 +1,5 @@
 mv usb设备.svg usbdevice.svg
 mv 处理器.svg cpu.svg
-mv usb设备.svg usbdevice.svg
 mv 存储设备.svg storage.svg
 mv 打印机.svg printer.svg
 mv 电池.svg battery.svg
@@ -17,7 +16,4 @@ mv 显示设备.svg monitor.svg
 mv 显示适配器.svg displayadapter.svg
 mv 音频适配器.svg audiodevice.svg
 mv 主板.svg motherboard.svg
-
-
-
-
+mv 光驱设备.svg cdrom.svg

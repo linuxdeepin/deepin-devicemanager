@@ -36,8 +36,8 @@ public:
     ColumnLabel(const QString& text = "", ColumnWidget* parent = nullptr);
 
 private:
-    void mousePressEvent(QMouseEvent *event) override;
-    void contextMenuEvent(QContextMenuEvent *event) override;
+    //void mousePressEvent(QMouseEvent *event) override;
+    //void contextMenuEvent(QContextMenuEvent *event) override;
 private:
     ColumnWidget* columnWidget_ = nullptr;
 };

@@ -2,6 +2,11 @@
 
 #pkexec /bin/bash -c "apt-get install lshw"
 
+pkexec /bin/bash -c "apt-get install smartmontools"
+pkexec /bin/bash -c "apt-get install dmidecode"
+pkexec /bin/bash -c "apt-get install hwinfo"
+pkexec /bin/bash -c "apt-get install upower"
+
 chmod +x smartctl
 
 mkdir deviceInfo

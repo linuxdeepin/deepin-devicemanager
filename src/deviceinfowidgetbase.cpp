@@ -40,6 +40,7 @@
 #include "commondefine.h"
 #include <QSizePolicy>
 #include "cloumnwidget.h"
+#include <QSet>
 
 DWIDGET_USE_NAMESPACE
 
@@ -316,12 +317,21 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
         hLayout->addWidget(titleInfo_->title/*, 1, Qt::AlignmentFlag::AlignCenter*/);
         hLayout->addStretch(1);
 
-        downWidgetLayout->addStretch(2);
+        downWidgetLayout->addStretch(1);
         downWidgetLayout->addLayout(hLayout);
-        downWidgetLayout->addStretch(3);
+        downWidgetLayout->addStretch(1);
     }
+    DFrame* f = new DFrame(this);
+    //f->setAutoFillBackground(false);
+    QVBoxLayout* ly = new QVBoxLayout;
+//    ly->setMargin(0);
+//    ly->setSpacing(0);
+    ly->addWidget(downWidget_);
+    f->setLayout(ly);
 
-    vLayout_->addWidget( downWidget_ );
+//    vLayout_->insertWidget( vLayout_->count(), f);
+
+    vLayout_->addWidget( f );
 }
 
 //void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStruct>& articles)
@@ -686,7 +696,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 //    vLayout_->insertLayout(0, hly);
 
     vLayout_->insertWidget(0, tableWidget_);
-    vLayout_->insertSpacing(1, 8);
+    vLayout_->insertSpacing(1, 2);
 
     for(int i = 0; i < contentsList.size(); ++i)
     {
@@ -712,13 +722,24 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
 void DeviceInfoWidgetBase::addDevice( const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle )
 {
+    QList<ArticleStruct> lst;
+    QSet<QString> existString;
+    foreach(auto article, articles)
+    {
+        if(existString.contains(article.name + ":" + article.value ) == false )
+        {
+            lst.push_back(article);
+            existString.insert(article.name + ":" + article.value);
+        }
+    }
+
     if( deviceNumber < 2 )
     {
-        addInfo( showTitle ? subTitle: "", articles );
+        addInfo( showTitle ? subTitle: "", lst );
     }
     else
     {
-        addSubInfo( subTitle, articles );
+        addSubInfo( subTitle, lst );
     }
 }
 
@@ -729,7 +750,7 @@ void DeviceInfoWidgetBase::initDownWidget()
         return;
     }
 
-    QFrame* f = new QFrame(this);
+    DFrame* f = new DFrame(this);
     //auto f = new DWidget(this);
 
     downWidgetScrollArea_ = new DScrollArea(this);
@@ -760,8 +781,8 @@ void DeviceInfoWidgetBase::initDownWidget()
 
     //f->setAutoFillBackground(false);
     QVBoxLayout* ly = new QVBoxLayout;
-    ly->setMargin(3);
-    ly->setSpacing(0);
+//    ly->setMargin(0);
+//    ly->setSpacing(0);
     ly->addWidget(downWidgetScrollArea_);
     f->setLayout(ly);
     vLayout_->insertWidget( vLayout_->count(), f);

@@ -33,15 +33,15 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    DApplication::loadDXcbPlugin();
+    DApplication app(argc, argv);
+
     DApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    DApplication::loadDXcbPlugin();
-
-    DApplication app(argc, argv);
     app.setAttribute(Qt::AA_UseHighDpiPixmaps);
     app.loadTranslator();
     app.setOrganizationName("deepin");
-    app.setApplicationName("dde-devicemanager");
+    app.setApplicationName("deepin-devicemanager");
     app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
 
     //app.setApplicationVersion(VERSION);
@@ -62,8 +62,8 @@ int main(int argc, char *argv[])
     Dtk::Core::DLogManager::registerFileAppender();
 
     //app.setStyle("chameleon");
-//    if (!DGuiApplicationHelper::instance()->setSingleInstance("dde-devicemanager"))
-//            return 0;
+    //    if (!DGuiApplicationHelper::instance()->setSingleInstance("deepin-devicemanager"))
+    //            return 0;
 
 
     MainWindow w(nullptr);

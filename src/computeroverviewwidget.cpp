@@ -38,7 +38,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
 
     QList<ArticleStruct> articles;
 
-    ArticleStruct model("Model");
+    ArticleStruct model("Device");
 
     ArticleStruct vendor;
     vendor.queryData("dmidecode", "System Information", "Manufacturer");

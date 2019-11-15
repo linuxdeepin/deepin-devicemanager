@@ -1,0 +1,11 @@
+BIOS Information
+Vendor			: Kunlun
+Version			: Kunlun-A1801-V3.1.7-20190716
+BIOS ROMSIZE		: 1024
+Release date		: 20190716
+
+Base Board Information		
+Manufacturer		: LEMOTE
+Board name		: LEMOTE-LS3A3000-7A1000-1w-V0.1-pc
+Family			: LOONGSON3
+

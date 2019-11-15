@@ -27,7 +27,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Audio Device"))
+AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Audio Adapter"))
 {
     initWidget();
 }
@@ -58,7 +58,7 @@ void AudiodeviceWidget::initWidget()
 //        articles.push_back(type);
 
         ArticleStruct busInfo("Bus info");
-        busInfo.value = DeviceInfoParserInstance.queryData("lshw", multimedia, "bus info");
+        busInfo.queryData("lshw", multimedia, "bus info", existArticles);
         QRegExp reg("^pci@[0-9]*:([\\s\\S]*)$");
 
         QString pci_bus;
@@ -72,10 +72,8 @@ void AudiodeviceWidget::initWidget()
 
         ArticleStruct name("Name");
         name.queryData("lspci", lspciDeviceName, "Name");
-        if(name.value == DApplication::translate("Main", "Unknown"))
-        {
-            name.queryData( "lshw", multimedia, "product");
-        }
+        name.queryData( "lshw", multimedia, "product", existArticles);
+
         name.value.remove( " Corporation", Qt::CaseInsensitive );
         int index = name.value.indexOf('(');
         if(index > 0)
@@ -83,18 +81,13 @@ void AudiodeviceWidget::initWidget()
             name.value = name.value.mid(0, index);
         }
 
-
-        existArticles.insert("product");
-
-
         ArticleStruct vendor("Vendor");
-        vendor.queryData( "lshw", multimedia, "vendor");
+        vendor.queryData( "lshw", multimedia, "vendor", existArticles);
 
         ArticleStruct description("Description");
         description.queryData("lshw", multimedia, "description");
 
         existArticles.insert("description");
-
 
         if(name.value == vendor.value)
         {
@@ -104,31 +97,22 @@ void AudiodeviceWidget::initWidget()
         articles.push_back(name);
         articles.push_back(vendor);
         articles.push_back(description);
-        existArticles.insert("vendor");
-
-
         articles.push_back(busInfo);
-        existArticles.insert("bus info");
 
         ArticleStruct version("Version");
-        version.queryData( "lshw", multimedia, "version");
-        articles.push_back(version);
-        existArticles.insert("version");
+        version.queryData( "lshw", multimedia, "version", existArticles, articles);
+
 
         ArticleStruct width("Width");
-        width.queryData( "lshw", multimedia, "width");
-        articles.push_back(width);
-        existArticles.insert("width");
+        width.queryData( "lshw", multimedia, "width", existArticles, articles);
+
 
         ArticleStruct clock("Clock");
-        clock.queryData( "lshw", multimedia, "clock");
-        articles.push_back(clock);
-        existArticles.insert("clock");
+        clock.queryData( "lshw", multimedia, "clock", existArticles, articles);
+
 
         ArticleStruct capabilities("Capabilities");
-        capabilities.queryData( "lshw", multimedia, "capabilities");
-        articles.push_back(capabilities);
-        existArticles.insert("capabilities");
+        capabilities.queryData( "lshw", multimedia, "capabilities", existArticles, articles);
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles);
         addDevice( name.value , articles, multimediaList.size() + inputdeviceList.size() );
@@ -165,19 +149,14 @@ void AudiodeviceWidget::initWidget()
         existArticles.insert("Name");
 
         ArticleStruct vendor("Vendor");
-        vendor.queryData( "catinput", device, "Vendor");
-        articles.push_back(vendor);
-        existArticles.insert("Vendor");
+        vendor.queryData( "catinput", device, "Vendor" , existArticles, articles);
 
         ArticleStruct vesion("Version");
-        vesion.queryData( "catinput", device, "Version");
-        articles.push_back(vesion);
-        existArticles.insert("Sysfs");
+        vesion.queryData( "catinput", device, "Version", existArticles, articles);
 
         ArticleStruct sysfs("Sysfs");
-        sysfs.queryData( "catinput", device, "Sysfs");
-        articles.push_back(sysfs);
-        existArticles.insert("Sysfs");
+        sysfs.queryData( "catinput", device, "Sysfs", existArticles, articles);
+
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("catinput", device, articles, existArticles);
         addSubInfo( name.value , articles );

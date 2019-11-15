@@ -102,7 +102,7 @@ void MainWindow::initLoadingWidget()
 
     QVBoxLayout* vly = new QVBoxLayout;
 
-    vly->addStretch(2);
+    vly->addStretch(1);
     auto spinner_ = new DSpinner(loadingWidget_);
     spinner_->setFixedSize(spinnerWidth, spinnerHeight);
 
@@ -125,7 +125,7 @@ void MainWindow::initLoadingWidget()
     vly->addSpacing(5);
     vly->addLayout(hly2);
 
-    vly->addStretch(3);
+    vly->addStretch(1);
 
     spinner_->start();
     loadingWidget_->setLayout(vly);
@@ -149,7 +149,7 @@ void MainWindow::loadDeviceWidget()
     leftDeviceView_ = new DeviceListView(mainWidget_);
 
     //leftDeviceView_->setMaximumWidth(200);
-    leftDeviceView_->setMinimumWidth(leftDeviceListViewMinWidth_);
+    leftDeviceView_->setFixedWidth(leftDeviceListViewMinWidth_);
 
     DApplication::processEvents();
 
@@ -238,6 +238,7 @@ void MainWindow::addAllDeviceinfoWidget()
     auto mouseWidget = new MouseWidget(mainWidget_);        //提前占用蓝牙键盘鼠标
 
     addDeviceWidget(new BluetoothWidget(mainWidget_), "bluetooth.svg");
+    addDeviceWidget(new OtherPciDeviceWidget(mainWidget_), "otherpcidevices.svg");
     addDeviceWidget(new PowerWidget(mainWidget_), "battery.svg");
 
     if(firstAdd_ == true)
@@ -249,7 +250,6 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(mouseWidget, "mouse.svg");
     addDeviceWidget(new PrinterWidget(mainWidget_), "printer.svg");
     addDeviceWidget(new CameraWidget(mainWidget_), "camera.svg");
-    addDeviceWidget(new UsbdeviceWidget(mainWidget_), "usbdevice.svg");
     addDeviceWidget(new CDRomWidget(mainWidget_), "cdrom.svg");
 
     if(firstAdd_ == true)
@@ -257,7 +257,7 @@ void MainWindow::addAllDeviceinfoWidget()
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new OtherPciDeviceWidget(mainWidget_), "otherpcidevices.svg");
+    addDeviceWidget(new UsbdeviceWidget(mainWidget_), "usbdevice.svg");
     addDeviceWidget(new OtherDevicesWidget(mainWidget_), "otherdevices.svg");
 
     overviewWidget->setOverviewInfos(staticArticles);

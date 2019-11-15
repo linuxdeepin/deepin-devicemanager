@@ -37,7 +37,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../computers/Apple_iMac16_1";
+const QString DEVICEINFO_PATH = "../computers/AcerAO521";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -704,7 +704,13 @@ QStringList DeviceInfoParser::getInputdeviceKeyboardList()
     {
         if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Name") )
         {
-            if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("keyboard", Qt::CaseInsensitive) )
+            if(     DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("System Control", Qt::CaseInsensitive) \
+                 || DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("Consumer Control", Qt::CaseInsensitive)  )
+            {
+                return false;
+            }
+
+            if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("keyboard", Qt::CaseInsensitive) )
             {
                 return true;
             }

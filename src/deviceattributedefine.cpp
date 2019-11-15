@@ -27,7 +27,27 @@ DWIDGET_USE_NAMESPACE
 
 void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey)
 {
+    if( isValid() )
+    {
+        return;
+    }
+
     value = DeviceInfoParserInstance.queryData( toolname, firstKey, secondKey );
+}
+
+void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet)
+{
+    existSet.insert(secondKey);
+    queryData(toolname, firstKey, secondKey);
+}
+
+void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet, QList<ArticleStruct>& articles)
+{
+    queryData(toolname, firstKey, secondKey, existSet);
+    if(isValid())
+    {
+        articles.push_back(*this);
+    }
 }
 
 bool ArticleStruct::isValid()
@@ -42,10 +62,20 @@ bool ArticleStruct::isValid()
         return false;
     }
 
-    if( value == "Unknown" )
-    {
-        return false;
-    }
+//    if( value == "Unknown" )
+//    {
+//        return false;
+//    }
 
     return true;
+}
+
+bool ArticleStruct::operator==(const ArticleStruct& other)
+{
+    return this->name == other.name && this->value == other.value;
+}
+
+bool operator==(const ArticleStruct& a1, const ArticleStruct& a2)
+{
+    return a1.name == a2.name && a1.value == a2.value;
 }

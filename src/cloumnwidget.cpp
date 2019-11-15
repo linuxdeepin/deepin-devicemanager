@@ -42,16 +42,16 @@ ColumnLabel::ColumnLabel(const QString& text, ColumnWidget* parent): DLabel(text
 
 }
 
-void ColumnLabel::mousePressEvent(QMouseEvent *event)
-{
-    //DLabel::mousePressEvent(event);
-    columnWidget_->labelMousePressEvent(event);
-}
+//void ColumnLabel::mousePressEvent(QMouseEvent *event)
+//{
+//    //DLabel::mousePressEvent(event);
+//    columnWidget_->labelMousePressEvent(event);
+//}
 
-void ColumnLabel::contextMenuEvent(QContextMenuEvent *event)
-{
-    columnWidget_->labelContextMenuEvent(event);
-}
+//void ColumnLabel::contextMenuEvent(QContextMenuEvent *event)
+//{
+//    columnWidget_->labelContextMenuEvent(event);
+//}
 
 ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, const QFont& font, int columnHeight, bool isRightLink, Dtk::Widget::DWidget* parent , DeviceInfoWidgetBase* di):\
     DWidget(parent), deviceInfoWidget_(di)

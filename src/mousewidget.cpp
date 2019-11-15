@@ -180,12 +180,12 @@ void MouseWidget::initWidget()
         {
             auto upower = DeviceInfoParserInstance.getCorrespondUpower(uniq.value);
 
-            ArticleStruct power("Power");
-            power.value = " ";
-            articles.push_back(power);
-
             if(upower.isEmpty() == false )
             {
+                ArticleStruct power("Power");
+                power.value = " ";
+                articles.push_back(power);
+
                 DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", upower, articles );
             }
         }

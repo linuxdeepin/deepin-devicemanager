@@ -45,6 +45,7 @@ void KeyboardWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
     QSet<QString> existKeyboard;
+    QSet<QString> existPhys;
 
     foreach(const QString& device, inputdeviceList)
     {
@@ -60,46 +61,46 @@ void KeyboardWidget::initWidget()
         ArticleStruct vendor("Vendor");
         ArticleStruct type("Type");
 
-        QString lshwMouse = DeviceInfoParserInstance.getCorrespondLshwMouse(name.value);
-        if( lshwMouse.isEmpty() == false )
+        QString lshwKeyboard = DeviceInfoParserInstance.getCorrespondLshwKeyboard(name.value);
+        if( lshwKeyboard.isEmpty() == false )
         {
             existArticles.insert("product");
 
             ArticleStruct description("Description");
-            description.queryData("lshw", lshwMouse, "description");
+            description.queryData("lshw", lshwKeyboard, "description");
             articles.push_back(description);
             existArticles.insert("description");
 
-            vendor.queryData( "lshw", lshwMouse, "vendor");
+            vendor.queryData( "lshw", lshwKeyboard, "vendor");
             articles.push_back(vendor);
             existArticles.insert("vendor");
 
             ArticleStruct busInfo("Bus info");
-            busInfo.queryData( "lshw", lshwMouse, "bus info");
+            busInfo.queryData( "lshw", lshwKeyboard, "bus info");
             articles.push_back(busInfo);
             existArticles.insert("bus info");
 
             ArticleStruct version("Version");
-            version.queryData( "lshw", lshwMouse, "version");
+            version.queryData( "lshw", lshwKeyboard, "version");
             articles.push_back(version);
             existArticles.insert("version");
 
             ArticleStruct width("Width");
-            width.queryData( "lshw", lshwMouse, "width");
+            width.queryData( "lshw", lshwKeyboard, "width");
             articles.push_back(width);
             existArticles.insert("width");
 
             ArticleStruct clock("Clock");
-            clock.queryData( "lshw", lshwMouse, "clock");
+            clock.queryData( "lshw", lshwKeyboard, "clock");
             articles.push_back(clock);
             existArticles.insert("clock");
 
             ArticleStruct capabilities("Capabilities");
-            capabilities.queryData( "lshw", lshwMouse, "capabilities");
+            capabilities.queryData( "lshw", lshwKeyboard, "capabilities");
             articles.push_back(capabilities);
             existArticles.insert("capabilities");
 
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", lshwMouse, articles, existArticles);
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", lshwKeyboard, articles, existArticles);
         }
 
         ArticleStruct uniq("Uniq");
@@ -137,6 +138,16 @@ void KeyboardWidget::initWidget()
 
         ArticleStruct phys("Phys");
         phys.queryData( "catinput", device, "Phys");
+
+        if(phys.isValid())
+        {
+            if(existPhys.contains(phys.value))
+            {
+                continue;
+            }
+
+            existPhys.insert(phys.value);
+        }
 
         if(type.isValid() == false)
         {
@@ -190,12 +201,12 @@ void KeyboardWidget::initWidget()
         {
             auto upower = DeviceInfoParserInstance.getCorrespondUpower(uniq.value);
 
-            ArticleStruct power("Power");
-            power.value = " ";
-            articles.push_back(power);
-
             if(upower.isEmpty() == false )
             {
+                ArticleStruct power("Power");
+                power.value = " ";
+                articles.push_back(power);
+
                 DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", upower, articles );
             }
         }

@@ -32,16 +32,16 @@ PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplic
 
 void PowerWidget::initWidget()
 {
-    QStringList switchingpowerList = DeviceInfoParserInstance.getLshwSwitchingpowerList();
+    QStringList lshwSwitchingpowerList = DeviceInfoParserInstance.getLshwSwitchingpowerList();
     QStringList demidecodeSwitchingpowerList = DeviceInfoParserInstance.getDemidecodeSwitchingpowerList();
-    QStringList switchingUpowerList = DeviceInfoParserInstance.getUpowerSwitchingList();
+    QStringList upowerSwitchingList = DeviceInfoParserInstance.getUpowerSwitchingList();
 
-    QStringList batteryList = DeviceInfoParserInstance.getLshwBatteryList();
+    QStringList lshwBatteryList = DeviceInfoParserInstance.getLshwBatteryList();
     QStringList demidecodebatteryList = DeviceInfoParserInstance.getDemidecodeBatteryList();
-    QStringList batteryUpowerList = DeviceInfoParserInstance.getUpowerBatteryList();
+    QStringList UpowerBatteryList = DeviceInfoParserInstance.getUpowerBatteryList();
 
-    int maxSwitchingSize = maxDeviceSize(switchingpowerList, demidecodeSwitchingpowerList, switchingUpowerList);
-    int maxBatterySize = maxDeviceSize(batteryList, demidecodebatteryList, batteryUpowerList);
+    int maxSwitchingSize = maxDeviceSize(lshwSwitchingpowerList, demidecodeSwitchingpowerList, upowerSwitchingList);
+    int maxBatterySize = maxDeviceSize(lshwBatteryList, demidecodebatteryList, UpowerBatteryList);
 
     if(maxSwitchingSize + maxBatterySize < 1)
     {
@@ -51,131 +51,108 @@ void PowerWidget::initWidget()
 
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
-    QSet<QString> existArticles;
+    QSet<QString> existArticles1;
+    QSet<QString> existArticles2;
+    QSet<QString> existArticles3;
 
     for(int i = 0; i < maxSwitchingSize; ++i )
     {
         articles.clear();
-        existArticles.clear();
+        existArticles1.clear();
+        existArticles2.clear();
+        existArticles3.clear();
 
-        ArticleStruct ssdelay("Screen Suspend Delay");
-        ssdelay.value = DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_==0? DApplication::translate("Main", "Never") \
-            : QString::number(DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
-        articles.push_back(ssdelay);
+//        ArticleStruct ssdelay("Screen Suspend Delay");
+//        ssdelay.value = DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_==0? DApplication::translate("Main", "Never") \
+//            : QString::number(DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
+//        articles.push_back(ssdelay);
 
-        ArticleStruct csdelay("Computer Suspend Delay");
-        csdelay.value = DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_==0? DApplication::translate("Main", "Never") \
-            : QString::number(DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
-        articles.push_back(csdelay);
+//        ArticleStruct csdelay("Computer Suspend Delay");
+//        csdelay.value = DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_==0? DApplication::translate("Main", "Never") \
+//            : QString::number(DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
+//        articles.push_back(csdelay);
 
-        ArticleStruct asdelay("AutoLock Screen Delay");
-        asdelay.value = DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_==0? DApplication::translate("Main", "Never") \
-            : QString::number(DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
-        articles.push_back(asdelay);
+//        ArticleStruct asdelay("AutoLock Screen Delay");
+//        asdelay.value = DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_==0? DApplication::translate("Main", "Never") \
+//            : QString::number(DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
+//        articles.push_back(asdelay);
 
         ArticleStruct name("Name");
         ArticleStruct vendor("Vendor");
         ArticleStruct device("Device");
+        ArticleStruct serial("Serial");
 
-        if(i < switchingUpowerList.size())
+        if(i < upowerSwitchingList.size())
         {
-            existArticles.clear();
-
-            device.value = switchingUpowerList[i];
+            device.value = upowerSwitchingList[i];
             articles.push_back(device);
 
-            vendor.queryData( "upower", device.value, "vendor");
-            articles.push_back(vendor);
-            ArticleStruct Serial("Serial");
-            Serial.queryData( "upower", device.value, "serial");
-            articles.push_back(Serial);
-            existArticles.insert("serial");
+            vendor.queryData( "upower", device.value, "vendor", existArticles1, articles);
+
+            serial.queryData( "upower", device.value, "serial", existArticles1, articles);
 
             ArticleStruct model("Model");
-            model.queryData( "upower", device.value, "model");
-            articles.push_back(model);
-            existArticles.insert("model");
+            model.queryData( "upower", device.value, "model", existArticles1, articles);
 
             ArticleStruct powerSupply("Power Supply");
-            powerSupply.queryData( "upower", device.value, "power supply");
-            articles.push_back(powerSupply);
-            existArticles.insert("power supply");
+            powerSupply.queryData( "upower", device.value, "power supply", existArticles1, articles);
         }
 
-        if(i < switchingpowerList.size())
+        if(i < lshwSwitchingpowerList.size())
         {
-            QString device = switchingpowerList[i];
+            QString device = lshwSwitchingpowerList[i];
 
-            name.queryData( "lshw", device, "product");
-            articles.push_back(name);
-            existArticles.insert("product");
+            name.queryData( "lshw", device, "product", existArticles2, articles);
 
-            vendor.queryData( "lshw", device, "vendor");
-            articles.push_back(vendor);
-            existArticles.insert("vendor");
+            vendor.queryData( "lshw", device, "vendor", existArticles2, articles);
 
             ArticleStruct description("Description");
-            description.queryData("lshw", device, "description");
-            articles.push_back(description);
-            existArticles.insert("description");
+            description.queryData("lshw", device, "description", existArticles2, articles);
 
             ArticleStruct physicalId("Physical ID");
-            physicalId.queryData( "lshw", device, "physical id");
-            articles.push_back(physicalId);
-            existArticles.insert("physical id");
+            physicalId.queryData( "lshw", device, "physical id", existArticles2, articles);
 
             ArticleStruct version("Version");
-            version.queryData( "lshw", device, "version");
-            articles.push_back(version);
-            existArticles.insert("version");
+            version.queryData( "lshw", device, "version", existArticles2, articles);
 
             ArticleStruct capacity("Capacity");
-            capacity.queryData( "lshw", device, "capacity");
-            articles.push_back(capacity);
-            existArticles.insert("capacity");
+            capacity.queryData( "lshw", device, "capacity", existArticles2, articles);
         }
 
         if(i < demidecodeSwitchingpowerList.size())
         {
             QString demideSwitchingpower = demidecodeSwitchingpowerList[i];
+
+            name.queryData( "dmidecode", demideSwitchingpower, "Name", existArticles3, articles);
+
+            vendor.queryData( "dmidecode", demideSwitchingpower, "Manufacturer", existArticles3, articles);
+
+            serial.queryData( "dmidecode", demideSwitchingpower, "Serial Number", existArticles3, articles);
 
             ArticleStruct maxcapacity("Max Power Capacity");
-            maxcapacity.queryData( "dmidecode", demideSwitchingpower, "Max Power Capacity");
-            articles.push_back(maxcapacity);
-            existArticles.insert("Max Power Capacity");
+            maxcapacity.queryData( "dmidecode", demideSwitchingpower, "Max Power Capacity", existArticles3, articles);
 
-            existArticles.insert("Name");
-            existArticles.insert("Manufacturer");
-            existArticles.insert("Serial Number");
-            existArticles.insert("Name");
 
             ArticleStruct location("Location");
-            location.queryData( "dmidecode", demideSwitchingpower, "Location");
-            articles.push_back(location);
-            existArticles.insert("Location");
+            location.queryData( "dmidecode", demideSwitchingpower, "Location", existArticles3, articles);
 
             ArticleStruct assetTag("Asset Tag");
-            assetTag.queryData( "dmidecode", demideSwitchingpower, "Asset Tag");
-            articles.push_back(assetTag);
-            existArticles.insert("Asset Tag");
+            assetTag.queryData( "dmidecode", demideSwitchingpower, "Asset Tag", existArticles3, articles);
         }
 
-        if(i < switchingUpowerList.size())
+        if(i < upowerSwitchingList.size())
         {
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", device.value, articles, existArticles);
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", device.value, articles, existArticles1);
         }
 
-        if(i < switchingpowerList.size())
+        if(i < lshwSwitchingpowerList.size())
         {
-            QString device = switchingpowerList[i];
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", lshwSwitchingpowerList[i], articles, existArticles2);
         }
 
         if(i < demidecodeSwitchingpowerList.size())
         {
-            QString demideSwitchingpower = demidecodeSwitchingpowerList[i];
-
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideSwitchingpower, articles, existArticles);
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demidecodeSwitchingpowerList[i], articles, existArticles3);
         }
 
         addDevice( "Switching Power", articles, maxSwitchingSize + maxBatterySize, true );
@@ -198,159 +175,137 @@ void PowerWidget::initWidget()
 
     for( int i = 0; i < maxBatterySize; ++i )
     {
+        existArticles1.clear();
+        existArticles2.clear();
+        existArticles3.clear();
         articles.clear();
-        ArticleStruct ssdelay("Screen Suspend Delay");
-        ssdelay.value = DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? DApplication::translate("Main", "Never") \
-            : QString::number(DeviceInfoParserInstance.batteryScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
-        articles.push_back(ssdelay);
+//        ArticleStruct ssdelay("Screen Suspend Delay");
+//        ssdelay.value = DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? DApplication::translate("Main", "Never") \
+//            : QString::number(DeviceInfoParserInstance.batteryScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
+//        articles.push_back(ssdelay);
 
-        ArticleStruct csdelay("Computer Suspend Delay");
-        csdelay.value = DeviceInfoParserInstance.batteryComputerSuspendDelay_==0? DApplication::translate("Main", "Never") \
-            : QString::number(DeviceInfoParserInstance.batteryComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
-        articles.push_back(csdelay);
+//        ArticleStruct csdelay("Computer Suspend Delay");
+//        csdelay.value = DeviceInfoParserInstance.batteryComputerSuspendDelay_==0? DApplication::translate("Main", "Never") \
+//            : QString::number(DeviceInfoParserInstance.batteryComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
+//        articles.push_back(csdelay);
 
-        ArticleStruct asdelay("AutoLock Screen Delay");
-        asdelay.value = DeviceInfoParserInstance.batteryAutoLockScreenDelay_==0? DApplication::translate("Main", "Never") \
-            : QString::number(DeviceInfoParserInstance.batteryAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
-        articles.push_back(asdelay);
+//        ArticleStruct asdelay("AutoLock Screen Delay");
+//        asdelay.value = DeviceInfoParserInstance.batteryAutoLockScreenDelay_==0? DApplication::translate("Main", "Never") \
+//            : QString::number(DeviceInfoParserInstance.batteryAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
+//        articles.push_back(asdelay);
 
         ArticleStruct vendor("Vendor");
         ArticleStruct de("Design Energy");
         ArticleStruct device("Device");
         ArticleStruct model("Model");
+        ArticleStruct name("Name");
+        ArticleStruct serial("Serial");
 
-        if(i < batteryUpowerList.size())
+        if(i < UpowerBatteryList.size())
         {
-            existArticles.clear();
-
-
-            device.value = batteryUpowerList[i];
+            device.value = UpowerBatteryList[i];
             articles.push_back(device);
 
-            vendor.queryData( "upower", device.value, "vendor");
-            articles.push_back(vendor);
-            existArticles.insert("vendor");
+            vendor.queryData( "upower", device.value, "vendor", existArticles1, articles);
 
-            model.queryData( "upower", device.value, "model");
-            articles.push_back(model);
-            existArticles.insert("model");
+            model.queryData( "upower", device.value, "model", existArticles1, articles);
 
-            ArticleStruct Serial("Serial");
-            Serial.queryData( "upower", device.value, "serial");
-            articles.push_back(Serial);
-            existArticles.insert("serial");
+            serial.queryData( "upower", device.value, "serial", existArticles1, articles);
 
             ArticleStruct state("State");
-            state.queryData( "upower", device.value, "state");
-            articles.push_back(state);
-            existArticles.insert("state");
+            state.queryData( "upower", device.value, "state", existArticles1, articles);
 
             ArticleStruct percentage("Battery Percentage");
-            percentage.queryData( "upower", device.value, "percentage");
-            articles.push_back(percentage);
-            existArticles.insert("percentage");
+            percentage.queryData( "upower", device.value, "percentage", existArticles1, articles);
 
             ArticleStruct ce("Current Energy");
-            ce.queryData( "upower", device.value, "energy");
-            articles.push_back(ce);
-            existArticles.insert("energy");
+            ce.queryData( "upower", device.value, "energy", existArticles1, articles);
 
             ArticleStruct fe("Full Energy");
-            fe.queryData( "upower", device.value, "energy-full");
-            articles.push_back(fe);
-            existArticles.insert("energy-full");
+            fe.queryData( "upower", device.value, "energy-full", existArticles1, articles);
 
-            de.queryData( "upower", device.value, "energy-full-design");
-            articles.push_back(de);
-            existArticles.insert("energy-full-design");
+            de.queryData( "upower", device.value, "energy-full-design", existArticles1, articles);
 
             ArticleStruct bh("Battery Healthy");
-            bh.queryData( "upower", device.value, "capacity");
-            articles.push_back(bh);
-            existArticles.insert("capacity");
+            bh.queryData( "upower", device.value, "capacity", existArticles1, articles);
 
             ArticleStruct powerSupply("Power Supply");
-            powerSupply.queryData( "upower", device.value, "power supply");
-            articles.push_back(powerSupply);
-            existArticles.insert("power supply");
-
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", device.value, articles, existArticles);
+            powerSupply.queryData( "upower", device.value, "power supply", existArticles1, articles);
         }
 
-        ArticleStruct name("Name");
-        if( i < batteryList.size())
+        if( i < lshwBatteryList.size())
         {
-            QString device = batteryList[i];
+            QString device = lshwBatteryList[i];
 
-            name.queryData( "lshw", device, "product");
+            name.queryData( "lshw", device, "product", existArticles2, articles);
             articles.push_back(name);
-            existArticles.insert("product");
 
-            if( vendor.isValid() == false)
-            {
-                vendor.queryData( "lshw", device, "vendor");
-                articles.push_back(vendor);
-                existArticles.insert("vendor");
-            }
+            vendor.queryData( "lshw", device, "vendor", existArticles2, articles);
 
             ArticleStruct description("Description");
-            description.queryData("lshw", device, "description");
-            articles.push_back(description);
-            existArticles.insert("description");
+            description.queryData("lshw", device, "description", existArticles2, articles);
 
             ArticleStruct physicalId("Physical ID");
-            physicalId.queryData( "lshw", device, "physical id");
-            articles.push_back(physicalId);
-            existArticles.insert("physical id");
+            physicalId.queryData( "lshw", device, "physical id", existArticles2, articles);
 
             ArticleStruct version("Version");
-            version.queryData( "lshw", device, "version");
-            articles.push_back(version);
-            existArticles.insert("version");
+            version.queryData( "lshw", device, "version", existArticles2, articles);
+
 
             ArticleStruct capacity("Capacity");
-            capacity.queryData( "lshw", device, "capacity");
-            articles.push_back(capacity);
-            existArticles.insert("capacity");
+            capacity.queryData( "lshw", device, "capacity", existArticles2, articles);
+
 
             ArticleStruct slot("Location");
             slot.queryData( "dmidecode", device, "slot");
             articles.push_back(slot);
             if(slot.value.isEmpty() == false || slot.value != DApplication::translate("Main", "Unknown"))
             {
-                existArticles.insert("Location");
+                existArticles2.insert("Location");
             }
-            existArticles.insert("slot");
-
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+            if(slot.isValid())
+            {
+                existArticles2.insert("slot");
+            }
         }
 
         if(i < demidecodebatteryList.size())
         {
             QString demideBattery = demidecodebatteryList[i];
-            existArticles.insert("Name");
-            existArticles.insert("Manufacturer");
-            existArticles.insert("Serial Number");
-            existArticles.insert("Name");
+
+            name.queryData( "dmidecode", demideBattery, "Name", existArticles3, articles);
+
+            vendor.queryData( "dmidecode", demideBattery, "Manufacturer", existArticles3, articles);
+
+            serial.queryData( "dmidecode", demideBattery, "Serial Number", existArticles3, articles);
+
+//            existArticles.insert("Name");
+//            existArticles.insert("Manufacturer");
+//            existArticles.insert("Serial Number");
+//            existArticles.insert("Name");
 
             ArticleStruct location("Location");
-            location.queryData( "dmidecode", demideBattery, "Location");
-            articles.push_back(location);
-            existArticles.insert("Location");
+            location.queryData( "dmidecode", demideBattery, "Location", existArticles3, articles);
 
             ArticleStruct assetTag("Asset Tag");
-            assetTag.queryData( "dmidecode", demideBattery, "Asset Tag");
-            articles.push_back(assetTag);
-            existArticles.insert("Asset Tag");
+            assetTag.queryData( "dmidecode", demideBattery, "Asset Tag", existArticles3, articles);
 
-            if(de.isValid() == false)
-            {
-                de.queryData( "dmidecode", demideBattery, "Design Capacity");
-                articles.push_back(de);
-            }
-            existArticles.insert("Design Capacity");
+            de.queryData( "dmidecode", demideBattery, "Design Capacity", existArticles3, articles);
+        }
 
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demideBattery, articles, existArticles);
+        if(i < UpowerBatteryList.size())
+        {
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", device.value, articles, existArticles1);
+        }
+
+        if(i < lshwBatteryList.size())
+        {
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", lshwBatteryList[i], articles, existArticles2);
+        }
+
+        if(i < demidecodebatteryList.size())
+        {
+            DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", demidecodebatteryList[i], articles, existArticles3);
         }
 
         QString d_name = device.value;
