@@ -161,13 +161,19 @@ void DiskWidget::initWidget()
 
             ArticleStruct powerOnHours("Power On Hours");
             powerOnHours.queryData("smartctl", logicalName, "Power_On_Hours");
-            powerOnHours.value += DApplication::translate("Main", " Hours");
+            if(powerOnHours.isValid())
+            {
+                powerOnHours.value += DApplication::translate("Main", " Hours");
+            }
             articles.push_back(powerOnHours);
             existArticles.insert("Power_On_Hours");
 
             ArticleStruct powerCycleCount("Power Cycle Count");
             powerCycleCount.queryData("smartctl", logicalName, "Power_Cycle_Count");
-            powerCycleCount.value += DApplication::translate("Main", " Times");
+            if(powerCycleCount.isValid())
+            {
+                powerCycleCount.value += DApplication::translate("Main", " Times");
+            }
             articles.push_back(powerCycleCount);
             existArticles.insert("Power_Cycle_Count");
         }

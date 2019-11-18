@@ -1671,21 +1671,21 @@
             <source></source>
             <translation></translation>
         </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
-        </message>
     </context>
     <context>
         <name>CPU</name>
+        <message>
+            <source>Processor</source>
+            <translation>逻辑处理器</translation>
+        </message>
+        <message>
+            <source> Sockets</source>
+            <translation>处理器</translation>
+        </message>
+        <message>
+            <source> Precessor(s)</source>
+            <translation>逻辑处理器</translation>
+        </message>
         <message>
             <source>Speed</source>
             <translation>频率</translation>

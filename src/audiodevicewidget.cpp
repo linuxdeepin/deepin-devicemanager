@@ -40,7 +40,7 @@ void AudiodeviceWidget::initWidget()
 
     if( multimediaList.size() + inputdeviceList.size() < 1 )
     {
-        setCentralInfo("No Audio Device found!");
+        setCentralInfo("No Audio Adapter found!");
         return;
     }
 

@@ -110,6 +110,8 @@ private:
 
 public:
     QStringList getCatcpuCpuList();
+    QStringList getlscpuCpuList();
+
     QStringList getDimdecodeMemoryList();
     QStringList getLshwDisknameList();
 

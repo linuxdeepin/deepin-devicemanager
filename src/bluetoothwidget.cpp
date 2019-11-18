@@ -42,7 +42,7 @@ void BluetoothWidget::initWidget()
     }
 
     QStringList hciconfigBluetoothList = DeviceInfoParserInstance.getHciconfigBluetoothControllerList();
-    QStringList pairedDevicesList = DeviceInfoParserInstance.getOtherBluetoothctlPairedDevicesList();
+    QStringList pairedDevicesList /*= DeviceInfoParserInstance.getOtherBluetoothctlPairedDevicesList()*/;
     //setTitle(DApplication::translate("Main", "Bluetooth") + " " + DApplication::translate("Main", " Info"));
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
@@ -141,7 +141,7 @@ void BluetoothWidget::initWidget()
             QStringList tab =
             {
                 name.value,
-                "Controller",
+//                "Controller",
                 vendor.value
             };
 
@@ -243,7 +243,7 @@ void BluetoothWidget::initWidget()
             QStringList tab =
             {
                 name.value,
-                "Device",
+//                "Device",
                 vendor.value
             };
 
@@ -269,7 +269,7 @@ void BluetoothWidget::initWidget()
 
     if( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 )
     {
-        QStringList headers = { "Name",  "Type", "Vendor" };
+        QStringList headers = { "Name",  /*"Type",*/ "Vendor" };
         addTable( headers, tabList);
     }
 }

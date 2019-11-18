@@ -37,7 +37,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/AcerAO521";
+const QString DEVICEINFO_PATH = "../../computers/Dell_02C2CP_A02";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -106,7 +106,7 @@ void DeviceInfoParser::refreshDabase()
     loadLsusbDatabase();
 
     emit loadFinished("Loading Printer Info...");
-    loadCupsDatabase();
+    //loadCupsDatabase();
 
     emit loadFinished("finish");
 }
@@ -276,6 +276,11 @@ QStringList DeviceInfoParser::getCatcpuCpuList()
     return getMatchToolDeviceList("catcpu");
 }
 
+QStringList DeviceInfoParser::getlscpuCpuList()
+{
+    return getMatchToolDeviceList("lscpu");
+}
+
 QStringList DeviceInfoParser::getDimdecodeMemoryList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
@@ -291,12 +296,12 @@ QStringList DeviceInfoParser::getDimdecodeMemoryList()
 
     QStringList memList = getMatchToolDeviceList("dmidecode", &func );
 
-    std::sort( memList.begin(), memList.end(),
-                [this](const QString& m1, const QString& m2)
-                {
-                    return toolDatabase_["dmidecode"][m1]["Locator"] < toolDatabase_["dmidecode"][m2]["Locator"] ;
-                }
-                );
+//    std::sort( memList.begin(), memList.end(),
+//                [this](const QString& m1, const QString& m2)
+//                {
+//                    return toolDatabase_["dmidecode"][m1]["Locator"] < toolDatabase_["dmidecode"][m2]["Locator"] ;
+//                }
+//                );
 
     return memList;
 }
@@ -1564,6 +1569,7 @@ bool DeviceInfoParser::loadLshwDatabase()
                     deviceTypeName += Devicetype_Stitching_Symbol;
                 }
                 deviceTypeName += dt.trimmed().remove(Devicetype_lshw_Class_Prefix);
+                continue;
             }
 
             lshwDatabase_[deviceTypeName] = DeviceInfoMap;

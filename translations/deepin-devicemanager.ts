@@ -1663,21 +1663,21 @@
             <source></source>
             <translation type="unfinished"/>
         </message>
-        <message>
-            <source></source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source></source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source></source>
-            <translation type="unfinished"/>
-        </message>
     </context>
     <context>
         <name>CPU</name>
+        <message>
+            <source>Processor</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source> Sockets</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source> Precessor(s)</source>
+            <translation type="unfinished"/>
+        </message>
         <message>
             <source>Speed</source>
             <translation type="unfinished"/>

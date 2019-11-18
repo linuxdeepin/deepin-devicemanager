@@ -89,9 +89,7 @@ void MemoryWidget::initTableWdiget()
 
 void MemoryWidget::updateWholeDownWidget()
 {
-    QString memSize = DeviceInfoParserInstance.queryData("lshw", "Computer_core_memory", "size");
-    memSize.replace( "GiB", " GB" );
-    memSize.replace( "MiB", " MB" );
+    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
 
     QList<ArticleStruct> articles;
 
@@ -100,7 +98,34 @@ void MemoryWidget::updateWholeDownWidget()
     articles.push_back(slotCount);
 
     ArticleStruct size("Size");
-    size.value = memSize;
+    size.queryData("lshw", "Computer_core_memory", "size");
+
+    if(size.isValid() == false)
+    {
+        int total = 0;
+        QString unitStr;
+
+        foreach(const QString& mem, memList)
+        {
+            ArticleStruct strMem("Size");
+            strMem.queryData("dmidecode", mem, "Size");
+            if(strMem.isValid() && strMem.value.contains(" "))
+            {
+                QStringList lst = strMem.value.split(" ");
+                int memInstelled = lst.first().toInt();
+                if(memInstelled > 0)
+                {
+                    total += memInstelled;
+                    unitStr = lst.last();
+                }
+            }
+        }
+
+        size.value = QString::number(total) + " " + unitStr;
+    }
+
+    size.value.replace( "GiB", " GB" );
+    size.value.replace( "MiB", " MB" );
     articles.push_back(size);
 
     ArticleStruct mc("Maximum Capacity");
@@ -130,7 +155,7 @@ void MemoryWidget::updateWholeDownWidget()
     articles.clear();
     QSet<QString> existArticles;
 
-    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
+
     QStringList detailMem;
     foreach(const QString& mem, memList)
     {
@@ -250,7 +275,7 @@ void MemoryWidget::updateWholeDownWidget()
         }
     }
 
-    overviewInfo_.value = memSize;
+    overviewInfo_.value = size.value;
     if( detailMem.size() > 0 )
     {
         overviewInfo_.value += " (";

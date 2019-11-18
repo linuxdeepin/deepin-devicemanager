@@ -93,7 +93,6 @@ void CpuWidget::initWidget()
 
     QString architecture =  DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Architecture");
 
-
     overviewInfo_.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Model name");
     overviewInfo_.value.remove(" CPU", Qt::CaseInsensitive);
 
@@ -132,15 +131,15 @@ void CpuWidget::initWidget()
 
 //    if(cpuList.size() > 1)
     {
-        QStringList headers = { "Name", "Core ID", /*"Vendor",*/ DApplication::translate("CPU", "Speed"), "Architecture" };
+        QStringList headers = { "Name", /*"Core ID",*/ "Vendor", DApplication::translate("CPU", "Speed"), "Architecture" };
         QList<QStringList> tabList;
 
         foreach(const QString& cpu, cpuList)
         {
             QStringList tab = {
                 DeviceInfoParserInstance.queryData("catcpu", cpu, "model name"),
-                DApplication::translate("Main", "Core") +" " + cpu,
-                //DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id"),
+                //DApplication::translate("Main", "Core") +" " + cpu,
+                DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id"),
                 speed_,
                 architecture
             };
@@ -151,15 +150,46 @@ void CpuWidget::initWidget()
         addTable(headers, tabList);
     }
 
-    int cpus = cpuList.size()/*DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU(s)").toInt()*/;
-    int threadsPerCore = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Thread(s) per core").toInt();
-    QString corePlus = " x " + QString::number(cpus);
+    int sockets = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Socket(s)").toInt();
+    int cores = /*cpuList.size()*/DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Core(s) per socket").toInt();
+    int logicalCpus = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU(s)").toInt();
 
-    overviewInfo_.value += " ";
+    int threadsPerCore = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Thread(s) per core").toInt();
+    QString corePlus = " x " + QString::number(cores);
+
+    overviewInfo_.value += "(";
     int i = 0;
+
+    if(sockets > 1)
+    {
+        i = 0;
+        for( ; i < sizeof(coresNumberArray)/sizeof(int); ++i)
+        {
+            if(coresNumberArray[i] == sockets)
+            {
+                break;
+            }
+        }
+
+        if( i < sizeof(coresNumberArray)/sizeof(int) )
+        {
+            overviewInfo_.value += DApplication::translate("CPU", NumberStrinArray[i].toStdString().data() );
+        }
+        else
+        {
+            overviewInfo_.value += QString::number(cores);
+        }
+
+        overviewInfo_.value += DApplication::translate("CPU", " Sockets");
+
+        overviewInfo_.value += "/";
+    }
+
+    i = 0;
+    cores*=sockets;
     for( ; i < sizeof(coresNumberArray)/sizeof(int); ++i)
     {
-        if(coresNumberArray[i] == cpus)
+        if(coresNumberArray[i] == cores)
         {
             break;
         }
@@ -171,13 +201,40 @@ void CpuWidget::initWidget()
     }
     else
     {
-        overviewInfo_.value += QString::number(cpus);
+        overviewInfo_.value += QString::number(cores);
     }
 
     overviewInfo_.value += DApplication::translate("CPU", " Core(s)");
 
+    if(logicalCpus > 1)
+    {
+        i = 0;
+        overviewInfo_.value += "/";
+        for( ; i < sizeof(coresNumberArray)/sizeof(int); ++i)
+        {
+            if(coresNumberArray[i] == logicalCpus)
+            {
+                break;
+            }
+        }
+
+        if( i < sizeof(coresNumberArray)/sizeof(int) )
+        {
+            overviewInfo_.value += DApplication::translate("CPU", NumberStrinArray[i].toStdString().data() );
+        }
+        else
+        {
+            overviewInfo_.value += QString::number(logicalCpus);
+        }
+
+        overviewInfo_.value += DApplication::translate("CPU", " Precessor(s)");
+    }
+
+    overviewInfo_.value += ")";
+
 
     QList<ArticleStruct> articles;
+    QSet<QString> existSet;
 
     ArticleStruct model("Model");
     model.value = overviewInfo_.value;
@@ -188,19 +245,17 @@ void CpuWidget::initWidget()
     articles.push_back(ac);
 
     ArticleStruct vendor("Vendor");
-    vendor.queryData("lscpu", "lscpu", "Vendor ID");
-    articles.push_back(vendor);
+    vendor.queryData("lscpu", "lscpu", "Vendor ID", existSet, articles);
 
     ArticleStruct speed(DApplication::translate("CPU", "Speed"));
     speed.value = speed_;
     articles.push_back(speed);
 
     ArticleStruct cpuCores("CPU cores");
-    cpuCores.queryData("lscpu", "lscpu", "CPU(s)");
-    articles.push_back(cpuCores);
+    cpuCores.queryData("lscpu", "lscpu", "CPU(s)", existSet, articles);
 
     ArticleStruct tamount("Threads amount");
-    tamount.value = QString::number(cpus*threadsPerCore);
+    tamount.value = QString::number(cores*threadsPerCore);
     articles.push_back(tamount);
 
     ArticleStruct l1dCache("L1d Cache");
@@ -219,10 +274,14 @@ void CpuWidget::initWidget()
     l3Cache.queryData("lscpu", "lscpu", "L3 cache");
     articles.push_back(l3Cache);
 
-    addInfo("Cpu Info", articles, false);
+//    ArticleStruct sockets("Socket(s)");
+//    l3Cache.queryData("lscpu", "lscpu", "Socket(s)");
+//    articles.push_back(l3Cache);
+
+    //addInfo("Cpu Info", articles, false);
 
     foreach(auto precessor, cpuList)
-    {      
+    {
         addPrecessor(precessor);
     }
 }
@@ -312,6 +371,6 @@ void CpuWidget::addPrecessor(const QString& precessor)
 
     DeviceInfoParserInstance.queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles);
 
-    addSubInfo( DApplication::translate("Main", "Core") + " " +  precessor, articles);
+    addSubInfo( DApplication::translate("CPU", "Processor") + " " +  precessor, articles);
     articles.clear();
 }
