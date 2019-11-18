@@ -1604,15 +1604,15 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Currently Installed Language</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Language Description Format</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Installable Languages</source>
             <translation type="unfinished"/>
         </message>
         <message>

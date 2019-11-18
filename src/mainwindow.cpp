@@ -75,6 +75,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect( &DeviceInfoParserInstance, &DeviceInfoParser::loadFinished, this, &MainWindow::showSplashMessage);
 
     refreshDatabase();
+
+    setAttribute(Qt::WA_AcceptDrops, false);
 }
 
 MainWindow::~MainWindow()
@@ -158,6 +160,10 @@ void MainWindow::loadDeviceWidget()
     DApplication::processEvents();
 
     rightDeviceInfoWidget_ = new DStackedWidget(mainWidget_);
+
+
+    auto flags = rightDeviceInfoWidget_->windowFlags();
+    //setAttribute(Qt::)
 
     DApplication::processEvents();
 
@@ -403,9 +409,9 @@ bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
         return true;
     }
 
-    if(selectFilter == "Doc (*.doc)")
+    if(selectFilter == "Doc (*.docx)")
     {
-        Docx::Document doc(":/thirdlib/docx/doc_template/template.doc");
+        Docx::Document doc(":/thirdlib/docx/doc_template/template.docx");
 
         for(int i = 0; i < leftDeviceView_->count(); ++i)
         {

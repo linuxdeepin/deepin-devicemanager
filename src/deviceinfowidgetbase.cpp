@@ -1267,7 +1267,7 @@ bool DeviceInfoWidgetBase::exportToDoc(Docx::Document& doc)
 
 bool DeviceInfoWidgetBase::exportToDoc(const QString& docFile)
 {
-    Docx::Document doc(":/thirdlib/docx/doc_template/template.doc");
+    Docx::Document doc(":/thirdlib/docx/doc_template/docx");
     exportToDoc(doc);
     doc.save(docFile);
     return true;

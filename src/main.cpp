@@ -65,7 +65,6 @@ int main(int argc, char *argv[])
     //    if (!DGuiApplicationHelper::instance()->setSingleInstance("deepin-devicemanager"))
     //            return 0;
 
-
     MainWindow w(nullptr);
     w.titlebar()->setTitle("");
     w.titlebar()->setIcon(QIcon(":images/cpu.svg"));

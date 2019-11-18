@@ -1,9 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2019-09-07T12:58:06
-#
-#-------------------------------------------------
-
 QT  += core gui svg dbus xml
 QT  += gui-private
 
@@ -43,8 +37,8 @@ INCLUDEPATH +=     \
             /usr/include/libdframeworkdbus-2.0/ \
 
 
-include(thirdlib/QtXlsxWriter/src/xlsx/qtxlsx.pri)
-include(thirdlib/docx/docx.pri)
+include(../thirdlib/QtXlsxWriter/src/xlsx/qtxlsx.pri)
+include(../thirdlib/docx/docx.pri)
 
 CONFIG(debug, debug|release) {
     TRANSLATIONS = $$files($$PWD/translations/*.ts)
@@ -63,67 +57,67 @@ CONFIG(debug, debug|release) {
 #LIBS += -L../thirdlib/hd -lhd
 
 SOURCES += \
-    src/cdromwidget.cpp \
-    src/cloumnwidget.cpp \
-    src/main.cpp \
-    src/mainwindow.cpp \
-    src/deviceinfoparser.cpp \
-    src/deviceinfowidgetbase.cpp \
-    src/computeroverviewwidget.cpp \
-    src/hwinfohandler.cpp \
-    src/motherboardwidget.cpp \
-    src/cpuwidget.cpp \
-    src/memorywidget.cpp \
-    src/diskwidget.cpp \
-    src/displayadapterwidget.cpp \
-    src/monitorwidget.cpp \
-    src/audiodevicewidget.cpp \
-    src/networkadapterwidget.cpp \
-    src/bluetoothwidget.cpp \
-    src/camerawidget.cpp \
-    src/keyboardwidget.cpp \
-    src/mousewidget.cpp \
-    src/otherdevicewidget.cpp \
-    src/usbdevicewidget.cpp \
-    src/powerwidget.cpp \
-    src/otherpcidevice.cpp \
-    src/tablewidgetalwaysfocus.cpp \
-    src/logpasswordauth.cpp \
-    src/printerwidget.cpp \
-    src/devicelistview.cpp \
-    src/deviceattributedefine.cpp
+    cdromwidget.cpp \
+    cloumnwidget.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    deviceinfoparser.cpp \
+    deviceinfowidgetbase.cpp \
+    computeroverviewwidget.cpp \
+    hwinfohandler.cpp \
+    motherboardwidget.cpp \
+    cpuwidget.cpp \
+    memorywidget.cpp \
+    diskwidget.cpp \
+    displayadapterwidget.cpp \
+    monitorwidget.cpp \
+    audiodevicewidget.cpp \
+    networkadapterwidget.cpp \
+    bluetoothwidget.cpp \
+    camerawidget.cpp \
+    keyboardwidget.cpp \
+    mousewidget.cpp \
+    otherdevicewidget.cpp \
+    usbdevicewidget.cpp \
+    powerwidget.cpp \
+    otherpcidevice.cpp \
+    tablewidgetalwaysfocus.cpp \
+    logpasswordauth.cpp \
+    printerwidget.cpp \
+    devicelistview.cpp \
+    deviceattributedefine.cpp
 
 HEADERS += \
-    src/cdromwidget.h \
-    src/cloumnwidget.h \
-    src/commondefine.h \
-    src/mainwindow.h \
-    src/otherdevicewidget.h \
-    src/version.h \
-    src/deviceinfoparser.h \
-    src/deviceattributedefine.h \
-    src/deviceinfowidgetbase.h \
-    src/computeroverviewwidget.h \
-    src/singletondef.h \
-    src/motherboardwidget.h \
-    src/cpuwidget.h \
-    src/memorywidget.h \
-    src/diskwidget.h \
-    src/displayadapterwidget.h \
-    src/monitorwidget.h \
-    src/audiodevicewidget.h \
-    src/networkadapterwidget.h \
-    src/bluetoothwidget.h \
-    src/camerawidget.h \
-    src/keyboardwidget.h \
-    src/powerwidget.h \
-    src/mousewidget.h \
-    src/usbdevicewidget.h \
-    src/otherpcidevice.h \
-    src/tablewidgetalwaysfocus.h \
-    src/logpasswordauth.h \
-    src/printerwidget.h \
-    src/devicelistview.h
+    cdromwidget.h \
+    cloumnwidget.h \
+    commondefine.h \
+    mainwindow.h \
+    otherdevicewidget.h \
+    version.h \
+    deviceinfoparser.h \
+    deviceattributedefine.h \
+    deviceinfowidgetbase.h \
+    computeroverviewwidget.h \
+    singletondef.h \
+    motherboardwidget.h \
+    cpuwidget.h \
+    memorywidget.h \
+    diskwidget.h \
+    displayadapterwidget.h \
+    monitorwidget.h \
+    audiodevicewidget.h \
+    networkadapterwidget.h \
+    bluetoothwidget.h \
+    camerawidget.h \
+    keyboardwidget.h \
+    powerwidget.h \
+    mousewidget.h \
+    usbdevicewidget.h \
+    otherpcidevice.h \
+    tablewidgetalwaysfocus.h \
+    logpasswordauth.h \
+    printerwidget.h \
+    devicelistview.h
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin
@@ -133,19 +127,15 @@ HEADERS += \
 RESOURCES += app.qrc
 
 DISTFILES += \
-    images/security.ico \
-    translations/deepin-devicemanager.ts \
-    translations/deepin-devicemanager_zh_CN.ts \
-
-
-#policy.path = /usr/share/polkit-1/actions
-#policy.files = policy/com.deepin.pkexec.deepin-devicemanager.policy
+    ../images/security.ico \
+    ../translations/deepin-devicemanager.ts \
+    ../translations/deepin-devicemanager_zh_CN.ts \
 
 # target
 target.path = /usr/bin/
 
 # icons
-icons.files += images/cpu.svg
+icons.files += ../images/cpu.svg
 icons.path = /usr/share/deepin-devicemanager/
 
 # desktop

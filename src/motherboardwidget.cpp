@@ -186,7 +186,6 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Release Date");
 
 
-
     ArticleStruct biosVendor("Bios Vendor");
     biosVendor.queryData("dmidecode", "BIOS Information", "Vendor");
     if(biosVendor.isValid() == false)
@@ -202,6 +201,8 @@ void MotherboardWidget::initWidget()
     {
         res = DeviceInfoParserInstance.queryRemainderDeviceInfo("catbaseboard", "BIOS Information", articles, existArticles);
     }
+
+    DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "BIOS Language Information", articles);
 
     ArticleStruct characteristics("Characteristics");
     characteristics.queryData("dmidecode", "BIOS Information", "Characteristics");

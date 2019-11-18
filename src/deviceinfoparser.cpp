@@ -37,7 +37,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../computers/AcerAO521";
+const QString DEVICEINFO_PATH = "../../computers/AcerAO521";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -1296,6 +1296,11 @@ bool DeviceInfoParser::loadDemicodeDatabase()
         startIndex = i + 1;
         ++lineNumber;
 
+        if(line.contains("BIOS Language Information"))
+        {
+            int j = 1;
+        }
+
         if( line.trimmed().isEmpty() )
         {
             if(childDeviceType.isEmpty() == false)
@@ -1371,6 +1376,7 @@ bool DeviceInfoParser::loadDemicodeDatabase()
                 childDeviceContent += ", ";
             }
             childDeviceContent += line.trimmed();
+
             continue;
         }
 
@@ -1386,6 +1392,7 @@ bool DeviceInfoParser::loadDemicodeDatabase()
             if( line.contains(':') )
             {
                 QStringList strList = line.split(':');
+
                 if(strList.last().trimmed().isEmpty() == true)
                 {
                     childDeviceType = strList[0].trimmed();
@@ -3096,7 +3103,6 @@ bool DeviceInfoParser::loadCupsDatabase()
 
 bool DeviceInfoParser::getRootPassword()
 {
-
     bool res = runCmd("id -un");  // file path is fixed. So write cmd direct
     if( res == true && standOutput_.trimmed() == "root" )
     {
@@ -3106,29 +3112,31 @@ bool DeviceInfoParser::getRootPassword()
 #ifdef TEST_DATA_FROM_FILE
     return true;
 #endif
-    if( autoDialog == nullptr )
-    {
-        autoDialog = new LogPasswordAuth;
-    }
+    return executeProcess("sudo whoami");
 
-    if( autoDialog->getPasswd().isEmpty() )
-    {
-        if( -1 == autoDialog->exec())
-        {
-            exit(-1);
-        }
-    }
+//    if( autoDialog == nullptr )
+//    {
+//        autoDialog = new LogPasswordAuth;
+//    }
 
-    QStringList arg;
-    arg << "-c" << "echo " + autoDialog->getPasswd() + " | sudo -S whoami";
-    res = runCmd(arg);  // file path is fixed. So write cmd direct
-    if( res == false || standOutput_.trimmed() != "root" )
-    {
-        autoDialog->clearPasswd();
-        autoDialog->showMessage(DApplication::translate("Main", "Password Error!"));
-        //DMessageBox::warning(nullptr, "", DApplication::translate("Main", "Password Error!"));
-        exit(-1);
-    }
+//    if( autoDialog->getPasswd().isEmpty() )
+//    {
+//        if( -1 == autoDialog->exec())
+//        {
+//            exit(-1);
+//        }
+//    }
+
+//    QStringList arg;
+//    arg << "-c" << "echo " + autoDialog->getPasswd() + " | sudo -S whoami";
+//    res = runCmd(arg);  // file path is fixed. So write cmd direct
+//    if( res == false || standOutput_.trimmed() != "root" )
+//    {
+//        autoDialog->clearPasswd();
+//        autoDialog->showMessage(DApplication::translate("Main", "Password Error!"));
+//        //DMessageBox::warning(nullptr, "", DApplication::translate("Main", "Password Error!"));
+//        exit(-1);
+//    }
 
     return true;
 }
@@ -3149,22 +3157,19 @@ bool DeviceInfoParser::executeProcess(const QString& cmd)
         return runCmd(cmd);
     }
 
-    QStringList arg;
-    arg.clear();
-    QString newCmd = cmd;
-
-    arg << "-c" << "echo " + autoDialog->getPasswd() + " | sudo -S" + newCmd.remove("sudo");
-    return runCmd(arg);
+    QString newCmd = "pkexec deepin-devicemanager-authenticateProxy \"";
+    newCmd += cmd;
+    newCmd += "\"";
+    newCmd.remove("sudo");
+    return runCmd(newCmd);
 }
 
 bool DeviceInfoParser::runCmd(const QString& cmd)
 {
     QProcess process_;
     process_.start(cmd);
+    bool res = process_.waitForFinished(10000);
     standOutput_ = process_.readAllStandardOutput();
-    bool res = process_.waitForFinished();
-    standOutput_ = process_.readAllStandardOutput();
-    QString errorOut = process_.readAllStandardError();
     return res;
 }
 

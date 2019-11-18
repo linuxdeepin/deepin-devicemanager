@@ -1600,16 +1600,16 @@
             <translation>支持分辨率</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Currently Installed Language</source>
+            <translation>当前语言</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Language Description Format</source>
+            <translation>语言描述格式</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Installable Languages</source>
+            <translation>安装语言数</translation>
         </message>
         <message>
             <source></source>
