@@ -143,6 +143,6 @@ desktop.files += deepin-devicemanager.desktop
 desktop.path = /usr/share/applications/
 
 translations.path = /usr/share/deepin-devicemanager/translations
-translations.files = translations/*.qm
+translations.files = ../translations/*.qm
 
 INSTALLS += target icons desktop translations
