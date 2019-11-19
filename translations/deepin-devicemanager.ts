@@ -1659,10 +1659,6 @@
             <source></source>
             <translation type="unfinished"/>
         </message>
-        <message>
-            <source></source>
-            <translation type="unfinished"/>
-        </message>
     </context>
     <context>
         <name>CPU</name>

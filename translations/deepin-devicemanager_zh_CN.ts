@@ -1137,7 +1137,7 @@
         </message>
         <message>
             <source>Password Error!</source>
-            <translation>密码错误！请检查</translation>
+            <translation>密码错误！</translation>
         </message>
         <message>
             <source>Error</source>
@@ -1614,10 +1614,6 @@
         <message>
             <source>Memory Bank Info</source>
             <translation>内存插槽信息</translation>
-        </message>
-        <message>
-            <source></source>
-            <translation></translation>
         </message>
         <message>
             <source></source>

@@ -37,7 +37,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/Lenovo_ThinkCentre_M910t-N000";
+const QString DEVICEINFO_PATH = "../../computers/ThinkPadE560";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -3204,11 +3204,15 @@ bool DeviceInfoParser::runCmd(const QString& cmd)
     {
         if(cmd.contains("whoami"))
         {
-            DMessageBox::warning(nullptr, "", "Password Error!");
+            //if(exitCode == 126)
+            {
+                DMessageBox::critical(nullptr, "", DApplication::translate("Main", "Password Error!" ));
+            }
+
             exit(-1);
         }
 
-        DMessageBox::warning(nullptr, "", "Password Error!");
+        DMessageBox::critical(nullptr, "", DApplication::translate("Main", "Password Error!" ) );
     }
 
     return res;
