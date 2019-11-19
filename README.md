@@ -35,10 +35,11 @@ sudo apt-get install deepin-devicemanager
 * make
 
 ## Usage
-Caution: deepin-devicemanager is depend on polkit, so you have to add policy to usr/share/polkit-1/actions/. add deepin-devicemanager-authenticateProxy to /usr/bin
+Caution: deepin-devicemanager is depend on polkit, So if run source build version, 
+you have to add policy to usr/share/polkit-1/actions/. 
+add deepin-devicemanager-authenticateProxy to /usr/bin.
 
-sudo cp authenticateProxy/policy/com.deepin.pkexec.deepin-devicemanager-authenticateProxy.policy /usr/share/polkit-1/actions/
+* sudo cp authenticateProxy/policy/com.deepin.pkexec.deepin-devicemanager-authenticateProxy.policy /usr/share/polkit-1/actions/
+* sudo cp build-all-unknown-Debug/authenticateProxy/deepin-devicemanager-authenticateProxy /usr/bin
 
-sudo mv build-all-unknown-Debug/authenticateProxy/deepin-devicemanager-authenticateProxy /usr/bin
-
-./deepin-devicemanager
+* ./deepin-devicemanager
