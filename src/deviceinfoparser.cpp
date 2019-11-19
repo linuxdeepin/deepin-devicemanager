@@ -3129,7 +3129,12 @@ bool DeviceInfoParser::getRootPassword()
 #ifdef TEST_DATA_FROM_FILE
     return true;
 #endif
-    return executeProcess("sudo whoami");
+    if( false == executeProcess("sudo whoami"))
+    {
+        return false;
+    }
+
+    return true;
 
 //    if( autoDialog == nullptr )
 //    {
@@ -3184,9 +3189,28 @@ bool DeviceInfoParser::executeProcess(const QString& cmd)
 bool DeviceInfoParser::runCmd(const QString& cmd)
 {
     QProcess process_;
+    int msecs = 10000;
+    if(cmd.startsWith("pkexec deepin-devicemanager-authenticateProxy") )
+    {
+        msecs = -1;
+    }
+
     process_.start(cmd);
-    bool res = process_.waitForFinished(10000);
+
+    bool res = process_.waitForFinished(msecs);
     standOutput_ = process_.readAllStandardOutput();
+    int exitCode = process_.exitCode();
+    if( cmd.startsWith("pkexec deepin-devicemanager-authenticateProxy") && (exitCode == 127 || exitCode == 126) )
+    {
+        if(cmd.contains("whoami"))
+        {
+            DMessageBox::warning(nullptr, "", "Password Error!");
+            exit(-1);
+        }
+
+        DMessageBox::warning(nullptr, "", "Password Error!");
+    }
+
     return res;
 }
 

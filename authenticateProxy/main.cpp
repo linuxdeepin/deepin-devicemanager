@@ -33,11 +33,16 @@ int main(int argc, char *argv[])
     QProcess proc;
 
     proc.start( argv[1] );
-    proc.waitForFinished(-1);
+    bool res = proc.waitForFinished(-1);
 
     std::cout << proc.readAllStandardOutput().data();
 
     proc.close();
+
+    if(res == false)
+    {
+        return -1;
+    }
 
     return 0;
 }

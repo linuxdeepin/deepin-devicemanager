@@ -157,7 +157,7 @@ void CpuWidget::initWidget()
     int threadsPerCore = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Thread(s) per core").toInt();
     QString corePlus = " x " + QString::number(cores);
 
-    overviewInfo_.value += "(";
+    overviewInfo_.value += " (";
     int i = 0;
 
     if(sockets > 1)

@@ -248,7 +248,7 @@ void MonitorWidget::initWidget()
         overviewInfo_.value += name.value;
         if(inch != 0.0)
         {
-            overviewInfo_.value += "(";
+            overviewInfo_.value += " (";
             overviewInfo_.value += QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch");
             overviewInfo_.value += ")";
         }
