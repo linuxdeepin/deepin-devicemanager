@@ -6,7 +6,7 @@ Device D3:6A:FF:19:CE:06 (random)
 	Paired: yes
 	Trusted: yes
 	Blocked: no
-	Connected: yes
+	Connected: no
 	LegacyPairing: no
 	UUID: Vendor specific           (00001530-1212-efde-1523-785feabcd123)
 	UUID: Generic Access Profile    (00001800-0000-1000-8000-00805f9b34fb)

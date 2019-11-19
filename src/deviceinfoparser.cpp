@@ -37,7 +37,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/Dell_02C2CP_A02";
+const QString DEVICEINFO_PATH = "../../computers/Lenovo_ThinkCentre_M910t-N000";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -948,18 +948,29 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
             continue;
         }
 
-        QString product =toolDatabase_["lshw"][fk]["product"];
-        QString description =toolDatabase_["lshw"][fk]["description"];
-
         if( orderedDevices.contains(fk) )
         {
             continue;
         }
 
         if(fk.contains("_firmware") || fk.contains("_memory") || fk.contains("_cache") || fk.contains("_cpu") \
-           || fk.contains("_volume")|| fk.contains("_usb") /*|| fk.contains("_pci")*/  )
+           || fk.contains("_volume")|| fk.contains("_usb") /*|| fk.contains("_pci")*/  ||
+              fk.contains("_pnp") || fk.contains("_volume") || fk.contains("_volume") || fk.contains("_volume")  )
         {
             continue;
+        }
+
+        if( toolDatabase_["lshw"][fk].contains("description") )
+        {
+            if( toolDatabase_["lshw"][fk]["description"].compare("Signal processing controller", Qt::CaseInsensitive) == 0 \
+            || toolDatabase_["lshw"][fk]["description"].compare("Communication controller", Qt::CaseInsensitive) == 0   \
+            || toolDatabase_["lshw"][fk]["description"].compare("Serial controller", Qt::CaseInsensitive) == 0 \
+            || toolDatabase_["lshw"][fk]["description"].compare("PCI bridge", Qt::CaseInsensitive) == 0 \
+            || toolDatabase_["lshw"][fk]["description"].compare("ISA bridge", Qt::CaseInsensitive) == 0 \
+            || toolDatabase_["lshw"][fk]["description"].compare("SMBus", Qt::CaseInsensitive) == 0 )
+            {
+                continue;
+            }
         }
 
         otherDeviceList.push_back(fk);

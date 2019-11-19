@@ -1,8 +1,8 @@
-Device D3:6A:FF:19:CE:06 (random)
-	Name: Dell WM527 Mouse
-	Alias: Dell WM527 Mouse
-	Appearance: 0x03c2
-	Icon: input-mouse
+Device C6:FC:4E:B1:FD:BA (random)
+	Name: Dell WK717Keyboard
+	Alias: Dell WK717Keyboard
+	Appearance: 0x03c1
+	Icon: input-keyboard
 	Paired: yes
 	Trusted: yes
 	Blocked: no
@@ -14,5 +14,5 @@ Device D3:6A:FF:19:CE:06 (random)
 	UUID: Device Information        (0000180a-0000-1000-8000-00805f9b34fb)
 	UUID: Battery Service           (0000180f-0000-1000-8000-00805f9b34fb)
 	UUID: Human Interface Device    (00001812-0000-1000-8000-00805f9b34fb)
-	Modalias: usb:v413Cp301Ed0001
+	Modalias: usb:v413Cp2114d0001
 	RSSI: -70

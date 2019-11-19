@@ -51,6 +51,7 @@ QFont DeviceInfoWidgetBase::infoFont_;
 QFont DeviceInfoWidgetBase::labelFont_;
 QFont DeviceInfoWidgetBase::tableHeaderFont_;
 QFont DeviceInfoWidgetBase::tableContentFont_;
+QFont DeviceInfoWidgetBase::centralFont_;
 
 bool DeviceInfoWidgetBase::isPaletteInit_ = false;
 DPalette DeviceInfoWidgetBase::defaultPa_;
@@ -86,8 +87,6 @@ void DeviceInfo::changeTheme()
     }
 }
 
-
-
 DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& deviceName) : DWidget(parent_)
 {
     overviewInfo_.name = deviceName;
@@ -97,6 +96,7 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
     setContentsMargins( DeviceWidgetMargin_, DeviceWidgetMargin_, DeviceWidgetMargin_, DeviceWidgetMargin_);
 
     vLayout_->setSpacing(0);
+    vLayout_->setMargin(0);
 
     setAutoFillBackground(false);
 
@@ -137,6 +137,7 @@ void DeviceInfoWidgetBase::initFont()
     infoFont_ = titleFont_;
     tableHeaderFont_ = titleFont_;
     tableContentFont_ = titleFont_;
+    centralFont_ = titleFont_;
 
     titleFont_.setPixelSize(17);
     //titleFont_.setPointSizeF(17);
@@ -145,17 +146,19 @@ void DeviceInfoWidgetBase::initFont()
     infoFont_.setPixelSize(14);
     infoFont_.setWeight(QFont::Thin);
 
-    subTitleFont_.setPixelSize(15);
+    subTitleFont_.setPixelSize(14);
     subTitleFont_.setWeight(QFont::DemiBold);
 
-    labelFont_.setPixelSize(13);
+    labelFont_.setPixelSize(12);
     labelFont_.setWeight(QFont::Thin);
 
     tableHeaderFont_.setWeight(QFont::Medium);
-    tableHeaderFont_.setPixelSize(15);
+    tableHeaderFont_.setPixelSize(14);
 
     tableContentFont_.setWeight(QFont::Medium);
-    tableContentFont_.setPixelSize(14);
+    tableContentFont_.setPixelSize(12);
+
+    centralFont_.setPixelSize(20);
 }
 
 bool DeviceInfoWidgetBase::getOverViewInfo(ArticleStruct& info)
@@ -310,7 +313,7 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
     if( false == info.isEmpty() )
     {
         titleInfo_->title = new DLabel( DApplication::translate("Main", info.toStdString().data()), downWidget_);
-        titleInfo_->title->setFont(titleFont_);
+        titleInfo_->title->setFont(centralFont_);
 
         auto hLayout = new QHBoxLayout;
         hLayout->addStretch(1);
@@ -454,7 +457,6 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
         vly->addWidget(titleInfo_->title);
     }
 
-
     DPalette pa = DApplicationHelper::instance()->palette(this);
     if(main == true)
     {
@@ -527,12 +529,12 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
 //    downWidgetScrollArea_->verticalScrollBar()->setRange(0, verticalScrollBarMaxValue);
 //}
 
-void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles)
+void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin)
 {
     initDownWidget();
     QVBoxLayout* vly = new QVBoxLayout;
 
-    vly->setContentsMargins(20, 0, 20, 20);
+    vly->setContentsMargins(margin, 0, 0, 20);
 
     DeviceInfo subInfo;
     if(false == subTitle.isEmpty())
@@ -541,7 +543,6 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
         subInfo.title->setFont(subTitleFont_);
         vly->addWidget( subInfo.title );
     }
-
 
     DPalette pa = DApplicationHelper::instance()->palette(this);
 
@@ -570,16 +571,20 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     if(tableWidget_ == nullptr)
     {
         tableWidget_ = new TableWidgetAlwaysActive(this);
+
+        tableWidget_->setSortingEnabled(true);
         //tableWidget_ = new DTableWidget(this);
         //tableWidget_->setHorizontalHeader(new TableWidgetAlwaysActiveHeaderView(Qt::Orientation::Horizontal, this) );
 
         //tableWidget_->setMinimumHeight(183);
         //tableWidget_->setMaximumHeight(500);
-        tableWidget_->setFixedHeight(191);
+        tableWidget_->setFixedHeight(TableViewRowHeight_*5);
 
-        tableWidget_->verticalHeader()->setDefaultSectionSize(40);
+        //tableWidget_->verticalHeader()->setDefaultSectionSize(TableViewRowHeight_);
+        //tableWidget_->verticalHeader()->setFixedHeight(TableViewRowHeight_);
 
         auto scrollBar = new DScrollBar(tableWidget_);
+
         tableWidget_->setVerticalScrollBar(scrollBar);
         tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
         tableWidget_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
@@ -700,10 +705,15 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
     for(int i = 0; i < contentsList.size(); ++i)
     {
+        tableWidget_->setRowHeight(i, TableViewRowHeight_);
         const QStringList& contents = contentsList[i];
         for(int j = 0; j < contents.size(); ++j )
         {
             QTableWidgetItem* item = new QTableWidgetItem(contents[j]);
+            if(j == 0)
+            {
+                item->setData(Qt::UserRole + 90, i);
+            }
             //int flags = item->flags();
             //item->setFlags(flags | Qt::ItemFlag::ItemIsEditable);
             item->setFont(tableContentFont_);
@@ -972,7 +982,7 @@ void DeviceInfoWidgetBase::OnCurrentItemClicked(/*QTableWidgetItem *item*/)
     }
 
 
-    int row = item->row();
+    int row = item->data(Qt::UserRole+90).toInt();
 
     for(int i = 0; i < row; ++i )
     {

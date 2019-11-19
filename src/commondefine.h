@@ -31,11 +31,11 @@ const int leftDeviceListViewMinWidth_ = 152;
 
 const int NameLength_ = 120;
 
-const int DeviceWidgetMargin_ = 4;
+const int DeviceWidgetMargin_ = 10;
 
 const int DeviceWidgetContentMarginLeft_ = 20;
-const int DeviceWidgetContentMarginTop_ = 15;
-const int DeviceWidgetContentMarginRight_ = 20;
+const int DeviceWidgetContentMarginTop_ = 10;
+const int DeviceWidgetContentMarginRight_ = 0;
 const int DeviceWidgetContentMarginBottom_ = 20;
 
 const int DeviceWidgetDownWidgehWidth_ = mainWindowMinWidth_ - leftDeviceListViewMinWidth_ - DeviceWidgetMargin_*2 - NameLength_ - DeviceWidgetContentMarginLeft_ - DeviceWidgetContentMarginRight_;
@@ -45,3 +45,5 @@ const int contextMenuWidth_ = 150;
 
 const int spinnerWidth = 32;
 const int spinnerHeight = 32;
+
+const int TableViewRowHeight_ = 36;

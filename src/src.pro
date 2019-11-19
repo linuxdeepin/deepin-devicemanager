@@ -135,8 +135,9 @@ DISTFILES += \
 target.path = /usr/bin/
 
 # icons
-icons.files += ../images/cpu.svg
-icons.path = /usr/share/deepin-devicemanager/
+#icons.files += ../images/cpu.svg
+#icons.path = /usr/share/deepin-devicemanager/
+icons.path = /usr/share/icons/hicolor/scalable/apps
 
 # desktop
 desktop.files += deepin-devicemanager.desktop

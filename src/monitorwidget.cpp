@@ -98,6 +98,12 @@ void MonitorWidget::initWidget()
         existArticles.insert("Vendor");
 
         name.value.remove(abb);
+
+        if(name.value.contains(vendor.value) == false)
+        {
+            name.value = vendor.value + " " + name.value;
+        }
+
         articles.push_back(name);
         articles.push_back(vendor);
 
@@ -181,9 +187,6 @@ void MonitorWidget::initWidget()
             }
         }
 
-
-
-
         articles.push_back(currentResolution);
         existArticles.insert("Current Resolution");
 
@@ -237,15 +240,17 @@ void MonitorWidget::initWidget()
             tabList.push_back(tab);
         }
 
-        if(i == 0)
+        if(overviewInfo_.value.isEmpty() == false)
         {
-            overviewInfo_.value = name.value;
-            if(inch != 0.0)
-            {
-                overviewInfo_.value += "(";
-                overviewInfo_.value += QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch");
-                overviewInfo_.value += ")";
-            }
+            overviewInfo_.value += " / ";
+        }
+
+        overviewInfo_.value += name.value;
+        if(inch != 0.0)
+        {
+            overviewInfo_.value += "(";
+            overviewInfo_.value += QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch");
+            overviewInfo_.value += ")";
         }
     }
 

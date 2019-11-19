@@ -1,0 +1,5 @@
+/dev/sda
+smartctl 7.0 2018-12-30 r4883 [x86_64-linux-4.15.0-45-generic] (local build)
+Copyright (C) 2002-18, Bruce Allen, Christian Franke, www.smartmontools.org
+
+Smartctl open device: /dev/sda failed: DELL or MegaRaid controller, please try adding '-d megaraid,N'

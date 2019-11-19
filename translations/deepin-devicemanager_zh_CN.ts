@@ -1612,8 +1612,8 @@
             <translation>安装语言数</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Memory Bank Info</source>
+            <translation>内存插槽信息</translation>
         </message>
         <message>
             <source></source>

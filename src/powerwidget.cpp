@@ -169,7 +169,11 @@ void PowerWidget::initWidget()
             tabList.push_back(tab);
         }
 
-        overviewInfo_.value = DApplication::translate("Main", "Switching Power") + " " + name.value;
+        if(overviewInfo_.value.isEmpty() == false)
+        {
+            overviewInfo_.value += " / ";
+        }
+        overviewInfo_.value += DApplication::translate("Main", "Switching Power") + " " + name.value;
     }
 
 
@@ -327,11 +331,6 @@ void PowerWidget::initWidget()
             tabList.push_back(tab);
         }
 
-        if(overviewInfo_.value.isEmpty() == false)
-        {
-            overviewInfo_.value += " / ";
-        }
-
         QString overName;
         if(vendor.isValid())
         {
@@ -356,6 +355,10 @@ void PowerWidget::initWidget()
 
         addDevice( DApplication::translate("Main", "Battery") + " " + overName, articles, maxSwitchingSize + maxBatterySize, true );
 
+        if(overviewInfo_.value.isEmpty() == false)
+        {
+            overviewInfo_.value += " / ";
+        }
         overviewInfo_.value += DApplication::translate("Main", "Battery") + " " + overName;
     }
 

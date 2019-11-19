@@ -36,4 +36,5 @@ public:
 
 private:
     int canUpgrade_ = -1;
+    QList<ArticleStruct> summaryInfo_;
 };

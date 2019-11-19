@@ -182,7 +182,7 @@ void CpuWidget::initWidget()
 
         overviewInfo_.value += DApplication::translate("CPU", " Sockets");
 
-        overviewInfo_.value += "/";
+        overviewInfo_.value += " / ";
     }
 
     i = 0;
@@ -209,7 +209,7 @@ void CpuWidget::initWidget()
     if(logicalCpus > 1)
     {
         i = 0;
-        overviewInfo_.value += "/";
+        overviewInfo_.value += " / ";
         for( ; i < sizeof(coresNumberArray)/sizeof(int); ++i)
         {
             if(coresNumberArray[i] == logicalCpus)

@@ -1616,7 +1616,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Memory Bank Info</source>
             <translation type="unfinished"/>
         </message>
         <message>

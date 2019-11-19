@@ -31,4 +31,5 @@ public:
     explicit MotherboardWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+    void addMemoryInfo();
 };

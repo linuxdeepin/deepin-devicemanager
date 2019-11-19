@@ -83,11 +83,11 @@ public:
 
     //void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
     // cloumnwidget version
-    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
+    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin = 10);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
 
-    void addDevice( const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle = false );
+    void addDevice(const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle = false );
 
     void initDownWidget();
 
@@ -148,6 +148,7 @@ public:
     static QFont labelFont_;
     static QFont tableHeaderFont_;
     static QFont tableContentFont_;
+    static QFont centralFont_;
 
 protected:
     ArticleStruct overviewInfo_;

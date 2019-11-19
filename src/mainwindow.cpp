@@ -103,6 +103,7 @@ void MainWindow::initLoadingWidget()
     //mainWidget_->setMinimumHeight(640);
 
     QVBoxLayout* vly = new QVBoxLayout;
+    //vly->setMargin(0);
 
     vly->addStretch(1);
     auto spinner_ = new DSpinner(loadingWidget_);
@@ -162,7 +163,7 @@ void MainWindow::loadDeviceWidget()
     rightDeviceInfoWidget_ = new DStackedWidget(mainWidget_);
 
 
-    auto flags = rightDeviceInfoWidget_->windowFlags();
+    //auto flags = rightDeviceInfoWidget_->windowFlags();
     //setAttribute(Qt::)
 
     DApplication::processEvents();

@@ -22,6 +22,7 @@
 #include "motherboardwidget.h"
 #include "deviceinfoparser.h"
 #include <DApplication>
+#include "commondefine.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -33,8 +34,6 @@ MotherboardWidget::MotherboardWidget(QWidget *parent) : DeviceInfoWidgetBase(par
 void MotherboardWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Motherboard")  + DApplication::translate("Main", " Info"));
-
-
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
@@ -116,6 +115,8 @@ void MotherboardWidget::initWidget()
         addInfo( "", articles );
     }
 
+    addMemoryInfo();
+
     articles.clear();
     existArticles.clear();
 
@@ -160,7 +161,7 @@ void MotherboardWidget::initWidget()
 
     if(res)
     {
-        addSubInfo( "System Information", articles );
+        addSubInfo( "System Information", articles, DeviceWidgetContentMarginLeft_ );
     }
 
     articles.clear();
@@ -210,7 +211,7 @@ void MotherboardWidget::initWidget()
 
     if(res)
     {
-        addSubInfo( "Bios", articles );
+        addSubInfo( "Bios", articles, DeviceWidgetContentMarginLeft_ );
     }
 
     articles.clear();
@@ -243,7 +244,88 @@ void MotherboardWidget::initWidget()
 
     if(res)
     {
-        addSubInfo( "Chassis Information", articles );
+        addSubInfo( "Chassis Information", articles, DeviceWidgetContentMarginLeft_);
     }
 
+}
+
+void MotherboardWidget::addMemoryInfo()
+{
+    int canUpgrade = -1;
+    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
+    foreach(const QString& mem, memList)
+    {
+        if(canUpgrade == -1)
+        {
+            canUpgrade = 0;
+        }
+
+        QString size = DeviceInfoParserInstance.queryData("dmidecode", mem, "Size");
+        if( size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
+        {
+            canUpgrade = 1;
+            continue;
+        }
+    }
+
+    QList<ArticleStruct> articles;
+
+    ArticleStruct slotCount("Slot Count");
+    slotCount.queryData("dmidecode", "Physical Memory Array", "Number Of Devices");
+    articles.push_back(slotCount);
+
+    ArticleStruct size("Size");
+    size.queryData("lshw", "Computer_core_memory", "size");
+
+    if(size.isValid() == false)
+    {
+        int total = 0;
+        QString unitStr;
+
+        foreach(const QString& mem, memList)
+        {
+            ArticleStruct strMem("Size");
+            strMem.queryData("dmidecode", mem, "Size");
+            if(strMem.isValid() && strMem.value.contains(" "))
+            {
+                QStringList lst = strMem.value.split(" ");
+                int memInstelled = lst.first().toInt();
+                if(memInstelled > 0)
+                {
+                    total += memInstelled;
+                    unitStr = lst.last();
+                }
+            }
+        }
+
+        size.value = QString::number(total) + " " + unitStr;
+    }
+
+    size.value.replace( "GiB", " GB" );
+    size.value.replace( "MiB", " MB" );
+    articles.push_back(size);
+
+    ArticleStruct mc("Maximum Capacity");
+    mc.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity");
+    articles.push_back(mc);
+
+    if( mc.isValid() && size.isValid())
+    {
+        if( (mc.value.contains("Mb") && size.value.contains("Mb")) || (mc.value.contains("GB") && size.value.contains("GB")) )
+        {
+            if(mc.value.left(mc.value.size() - 2 ).toInt() > size.value.left(mc.value.size() -2 ).toInt())
+            {
+                canUpgrade = 1;
+            }
+        }
+    }
+
+    if(canUpgrade != -1)
+    {
+        ArticleStruct ug("Upgradeable");
+        ug.value = canUpgrade ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No");
+        articles.push_back(ug);
+    }
+
+    addSubInfo("Memory Bank Info", articles, DeviceWidgetContentMarginLeft_);
 }

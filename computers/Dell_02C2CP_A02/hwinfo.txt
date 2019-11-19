@@ -1,0 +1,43 @@
+d204: None 00.0: 10000 Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.AlFCDbORUF3
+  Parent ID: x1VA.pdgsodD3dQB
+  Hardware Class: monitor
+  Model: "X223W"
+  Vendor: ACR 
+  Device: eisa 0x000d "X223W"
+  Serial ID: --
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 640x480@67Hz
+  Resolution: 640x480@72Hz
+  Resolution: 640x480@75Hz
+  Resolution: 800x600@56Hz
+  Resolution: 800x600@60Hz
+  Resolution: 800x600@72Hz
+  Resolution: 800x600@75Hz
+  Resolution: 832x624@75Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1024x768@70Hz
+  Resolution: 1024x768@75Hz
+  Resolution: 1280x1024@75Hz
+  Resolution: 1600x1200@60Hz
+  Resolution: 1152x864@75Hz
+  Resolution: 1280x960@60Hz
+  Resolution: 1360x765@60Hz
+  Resolution: 1680x1050@60Hz
+  Size: 474x296 mm
+  Year of Manufacture: 2007
+  Week of Manufacture: 41
+  Detailed Timings #0:
+     Resolution: 1680x1050
+     Horizontal: 1680 1784 1960 2240 (+104 +280 +560) -hsync
+       Vertical: 1050 1053 1059 1089 (+3 +9 +39) -vsync
+    Frequencies: 146.25 MHz, 65.29 kHz, 59.95 Hz
+  Driver Info #0:
+    Max. Resolution: 1600x1200
+    Vert. Sync Range: 56-77 Hz
+    Hor. Sync Range: 31-84 kHz
+    Bandwidth: 146 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #55 (VGA compatible controller)

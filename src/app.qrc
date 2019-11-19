@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>../images/cpu.svg</file>
         <file>../thirdlib/docx/doc_template/template.docx</file>
         <file>../images/security.ico</file>
         <file>../images/light/normal/cpu.svg</file>

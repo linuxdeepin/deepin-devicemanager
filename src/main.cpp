@@ -47,8 +47,8 @@ int main(int argc, char *argv[])
     //app.setApplicationVersion(VERSION);
     app.setApplicationVersion(DApplication::buildVersion("3.0"));
 
-    app.setProductIcon(QIcon(":images/cpu.svg"));
-    app.setWindowIcon(QIcon(":images/cpu.svg"));
+    app.setProductIcon(QIcon::fromTheme("deepin-devicemanager"));
+    app.setWindowIcon(QIcon::fromTheme("deepin-devicemanager"));
     app.setProductName(DApplication::translate("Main", "Device Manager"));
 
     app.setApplicationDescription(DApplication::translate("Main", "Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 
     MainWindow w(nullptr);
     w.titlebar()->setTitle("");
-    w.titlebar()->setIcon(QIcon(":images/cpu.svg"));
+    w.titlebar()->setIcon(QIcon::fromTheme("deepin-devicemanager"));
 
     w.show();
     Dtk::Widget::moveToCenter(&w);
