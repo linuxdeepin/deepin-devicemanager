@@ -43,6 +43,7 @@ void BluetoothWidget::initWidget()
 
     QStringList hciconfigBluetoothList = DeviceInfoParserInstance.getHciconfigBluetoothControllerList();
     QStringList pairedDevicesList /*= DeviceInfoParserInstance.getOtherBluetoothctlPairedDevicesList()*/;
+    int connectedDeviceNumber = DeviceInfoParserInstance.getOtherBluetoothctlPairedAndConnectedDevicesList().size();
     //setTitle(DApplication::translate("Main", "Bluetooth") + " " + DApplication::translate("Main", " Info"));
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
@@ -58,7 +59,7 @@ void BluetoothWidget::initWidget()
         existArticles2.clear();
         existArticles3.clear();
 
-        ArticleStruct name("Name");
+        ArticleStruct name("Bluetooth Name");
         ArticleStruct vendor("Vendor");
         ArticleStruct product("Product");
         ArticleStruct description("Description");
@@ -68,17 +69,18 @@ void BluetoothWidget::initWidget()
         {
             QString hciconfigName = hciconfigBluetoothList.at(i);
 
+            product.queryData( "lshw", device, "product", existArticles, articles);
+
+            vendor.queryData("lshw", device, "vendor", existArticles, articles);
+            vendor.queryData("hciconfig", hciconfigName, "Manufacturer", existArticles2, articles);
+
             name.queryData("hciconfig", hciconfigName, "Name");
             name.value.remove("\'");
             articles.push_back(name);
             existArticles2.insert("Name");
 
-            vendor.queryData("lshw", device, "vendor", existArticles, articles);
-            vendor.queryData("hciconfig", hciconfigName, "Manufacturer", existArticles2, articles);
-
             mac.queryData("hciconfig", hciconfigName, "BD Address", existArticles2, articles);
 
-            product.queryData( "lshw", device, "product", existArticles, articles);
 
             description.queryData("lshw", device, "description", existArticles, articles);
 
@@ -200,10 +202,10 @@ void BluetoothWidget::initWidget()
         articles.push_back(connected);
         existArticles.insert("Connected");
 
-        if(connected.value.compare("yes", Qt::CaseInsensitive) != 0)
-        {
-            continue;
-        }
+//        if(connected.value.compare("yes", Qt::CaseInsensitive) != 0)
+//        {
+//            continue;
+//        }
 
         ArticleStruct paired("Paired");
         paired.queryData("paired-devices", device, "Paired");
@@ -265,6 +267,14 @@ void BluetoothWidget::initWidget()
 //        }
 
         ++i;
+    }
+
+    if(connectedDeviceNumber > 0 && overviewInfo_.isValid())
+    {
+        overviewInfo_.value += " (";
+        overviewInfo_.value += QString::number(connectedDeviceNumber);
+        overviewInfo_.value += DApplication::translate("Main", " Bluetooth Device(s) Connected") ;
+        overviewInfo_.value += ")";
     }
 
     if( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 )

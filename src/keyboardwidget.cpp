@@ -125,10 +125,10 @@ void KeyboardWidget::initWidget()
                 connected.queryData( "paired-devices", blueTooth, "Connected");
                 //articles.push_back(connected);
 
-                if(connected.value.compare("yes", Qt::CaseInsensitive) != 0)
-                {
-                    continue;
-                }
+//                if(connected.value.compare("yes", Qt::CaseInsensitive) != 0)
+//                {
+//                    continue;
+//                }
 
                 //existArticles.insert("Connected");
 

@@ -113,7 +113,7 @@
         </message>
         <message>
             <source>Bank</source>
-            <translation>插槽</translation>
+            <translation>通道</translation>
         </message>
         <message>
             <source>Locator</source>
@@ -152,7 +152,15 @@
             <translation>最低电压</translation>
         </message>
         <message>
+            <source>Minimum voltage</source>
+            <translation>最低电压</translation>
+        </message>
+        <message>
             <source>Maximum Voltage</source>
+            <translation>最高电压</translation>
+        </message>
+        <message>
+            <source>Maximum voltage</source>
             <translation>最高电压</translation>
         </message>
         <message>
@@ -561,7 +569,7 @@
         </message>
         <message>
             <source>Bank Locator</source>
-            <translation>插槽位置</translation>
+            <translation>内存通道</translation>
         </message>
         <message>
             <source>Data Width</source>
@@ -1588,6 +1596,10 @@
             <translation>剩余电量可用时间</translation>
         </message>
         <message>
+            <source>time to full</source>
+            <translation>充满电所需时间</translation>
+        </message>
+        <message>
             <source>SBDS Serial Number</source>
             <translation>SBDS序列号</translation>
         </message>
@@ -1616,12 +1628,12 @@
             <translation>内存插槽信息</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Bluetooth Name</source>
+            <translation>蓝牙名称</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source> Bluetooth Device(s) Connected</source>
+            <translation>台蓝牙设备已连接</translation>
         </message>
         <message>
             <source></source>

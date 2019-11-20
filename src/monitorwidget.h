@@ -30,5 +30,8 @@ public:
     explicit MonitorWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+
+    QString parseMonitorSize(const QString& size, double& inch);
+    QString parseDisplayRate(const QString& resulotion);
 };
 

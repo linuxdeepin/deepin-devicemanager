@@ -148,7 +148,15 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>Minimum voltage</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>Maximum Voltage</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Maximum oltage</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -1592,6 +1600,10 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>time to full</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>SBDS Serial Number</source>
             <translation type="unfinished"/>
         </message>
@@ -1620,11 +1632,11 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Bluetooth Name</source>
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source> Bluetooth Device(s) Connected</source>
             <translation type="unfinished"/>
         </message>
         <message>

@@ -66,7 +66,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     setMinimumSize(mainWindowMinWidth_, mainWindowMinHeight_);
 
-    DeviceInfoParserInstance.getRootPassword();
+    if(false == DeviceInfoParserInstance.getRootPassword())
+    {
+        exit(-1);
+    }
 
     initLoadingWidget();
 
@@ -276,7 +279,7 @@ void MainWindow::addAllDeviceinfoWidget()
     }
 
 
-    QApplication::restoreOverrideCursor();
+    DApplication::restoreOverrideCursor();
 
     //leftDeviceView_->setEnabled(true);
 }
@@ -319,6 +322,11 @@ void MainWindow::insertDeviceWidget(int index, DeviceInfoWidgetBase* w)
 
 void MainWindow::refresh()
 {
+    if(false == DeviceInfoParserInstance.getRootPassword())
+    {
+        return;
+    }
+
     leftDeviceView_->setEnabled(false);
     //leftDeviceView_->setEnabled(false);
     refreshing_ = true;
@@ -351,7 +359,7 @@ void MainWindow::refresh()
 
 void MainWindow::refreshDatabase()
 {
-    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+    DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
     std::thread thread(
             []()

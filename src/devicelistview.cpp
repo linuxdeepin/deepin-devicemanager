@@ -115,9 +115,6 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
 
     setFocus(Qt::FocusReason::NoFocusReason);
 
-
-
-
     //DPalette pa = DApplicationHelper::instance()->palette(this);
     //auto ba = QPalette::Base;
     //ba.setBrush(DPalette::ItemBackground, palette().base());
@@ -171,17 +168,20 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     setViewportMargins(10,2,10,5);
 
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+    DFontSizeManager::instance()->bind(this, DFontSizeManager::T6);
 }
 
 void DeviceListView::addDevice(const QString& deviceName, const QString& iconFile)
 {
     DStandardItem* item = new DStandardItem;
-    QFont itemFont = item->font();
-    itemFont.setPixelSize(14);
-    itemFont.setWeight(QFont::Medium);
-    itemFont.setFamily(commonFontFamily_);
+    //DFontSizeManager::instance()->bind(nameLabel, DFontSizeManager::T8);
+    //QFont itemFont = item->font();
+    //itemFont.setPixelSize(14);
+    //itemFont.setWeight(QFont::Medium);
+    //itemFont.setFamily(commonFontFamily_);
 
-    item->setFont(itemFont);
+    //item->setFont(itemFont);
 
     item->setSizeHint( QSize(20, 38) );
 

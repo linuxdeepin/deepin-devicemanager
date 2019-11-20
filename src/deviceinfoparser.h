@@ -132,7 +132,7 @@ public:
     QStringList getLshwBluetoothList();
 
     QStringList getHciconfigBluetoothControllerList();
-    QStringList getOtherBluetoothctlPairedDevicesList();
+    QStringList getOtherBluetoothctlPairedAndConnectedDevicesList();
 
     QStringList getLshwCameraList();
 

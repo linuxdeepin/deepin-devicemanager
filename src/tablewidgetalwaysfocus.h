@@ -53,4 +53,6 @@ public:
     int sizeHintForColumn(int column) const override;
 private:
     QStyleOptionViewItem viewOptions() const override;
+
+    QStandardItemModel* navModel_ = nullptr;
 };

@@ -1,0 +1,211 @@
+Screen 0: minimum 8 x 8, current 1920 x 1080, maximum 32767 x 32767
+DP1 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x42
+	Timestamp:  31737
+	Subpixel:   unknown
+	Clones:    
+	CRTCs:      0 1
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	Broadcast RGB: Automatic 
+		supported: Automatic, Full, Limited 16:235
+	audio: auto 
+		supported: force-dvi, off, auto, on
+DP2 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x43
+	Timestamp:  31737
+	Subpixel:   unknown
+	Clones:    
+	CRTCs:      0 1
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	Broadcast RGB: Automatic 
+		supported: Automatic, Full, Limited 16:235
+	audio: auto 
+		supported: force-dvi, off, auto, on
+HDMI1 connected primary 1920x1080+0+0 (0x48) normal (normal left inverted right x axis y axis) 160mm x 90mm
+	Identifier: 0x44
+	Timestamp:  31737
+	Subpixel:   unknown
+	Gamma:      1.0:1.0:1.0
+	Brightness: 1.0
+	Clones:    
+	CRTC:       0
+	CRTCs:      0 1
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	EDID: 
+		00ffffffffffff004c2d590600000000
+		2d130103801009780aee91a3544c9926
+		0f5054bdef80714f8100814081809500
+		950fb300a940023a801871382d40582c
+		4500a05a0000001e662150b051001b30
+		40703600a05a0000001e000000fd0018
+		4b1a5117000a202020202020000000fc
+		0053414d53554e470a2020202020013a
+		020323f14b901f041305140312202122
+		2309070783010000e2000f67030c0030
+		00b82d011d007251d01e206e285500a0
+		5a0000001e011d00bc52d01e20b82855
+		40a05a0000001e011d8018711c162058
+		2c2500a05a0000009e011d80d0721c16
+		20102c2580a05a0000009e0000000000
+		000000000000000000000000000000ed
+	aspect ratio: Automatic 
+		supported: Automatic, 4:3, 16:9
+	Broadcast RGB: Automatic 
+		supported: Automatic, Full, Limited 16:235
+	audio: auto 
+		supported: force-dvi, off, auto, on
+  1920x1080 (0x48)  148.5MHz +HSync +VSync *current +preferred
+        h: width  1920 start 2008 end 2052 total 2200 skew    0 clock   67.5KHz
+        v: height 1080 start 1084 end 1089 total 1125           clock   60.0Hz
+  1920x1080 (0xe4)  148.5MHz +HSync +VSync
+        h: width  1920 start 2448 end 2492 total 2640 skew    0 clock   56.2KHz
+        v: height 1080 start 1084 end 1089 total 1125           clock   50.0Hz
+  1920x1080 (0xe5)  148.4MHz +HSync +VSync
+        h: width  1920 start 2008 end 2052 total 2200 skew    0 clock   67.4KHz
+        v: height 1080 start 1084 end 1089 total 1125           clock   59.9Hz
+  1920x1080i (0xe6)   74.2MHz +HSync +VSync Interlace
+        h: width  1920 start 2008 end 2052 total 2200 skew    0 clock   33.8KHz
+        v: height 1080 start 1084 end 1094 total 1125           clock   60.1Hz
+  1920x1080i (0xe7)   74.2MHz +HSync +VSync Interlace
+        h: width  1920 start 2448 end 2492 total 2640 skew    0 clock   28.1KHz
+        v: height 1080 start 1084 end 1094 total 1125           clock   50.0Hz
+  1920x1080 (0xe8)   74.2MHz +HSync +VSync
+        h: width  1920 start 2008 end 2052 total 2200 skew    0 clock   33.8KHz
+        v: height 1080 start 1084 end 1089 total 1125           clock   30.0Hz
+  1920x1080 (0xe9)   74.2MHz +HSync +VSync
+        h: width  1920 start 2448 end 2492 total 2640 skew    0 clock   28.1KHz
+        v: height 1080 start 1084 end 1089 total 1125           clock   25.0Hz
+  1920x1080 (0xea)   74.2MHz +HSync +VSync
+        h: width  1920 start 2558 end 2602 total 2750 skew    0 clock   27.0KHz
+        v: height 1080 start 1084 end 1089 total 1125           clock   24.0Hz
+  1920x1080i (0xeb)   74.2MHz +HSync +VSync Interlace
+        h: width  1920 start 2008 end 2052 total 2200 skew    0 clock   33.7KHz
+        v: height 1080 start 1084 end 1094 total 1125           clock   60.0Hz
+  1920x1080 (0xec)   74.2MHz +HSync +VSync
+        h: width  1920 start 2008 end 2052 total 2200 skew    0 clock   33.7KHz
+        v: height 1080 start 1084 end 1089 total 1125           clock   30.0Hz
+  1920x1080 (0xed)   74.2MHz +HSync +VSync
+        h: width  1920 start 2558 end 2602 total 2750 skew    0 clock   27.0KHz
+        v: height 1080 start 1084 end 1089 total 1125           clock   24.0Hz
+  1600x1200 (0xee)  162.0MHz +HSync +VSync
+        h: width  1600 start 1664 end 1856 total 2160 skew    0 clock   75.0KHz
+        v: height 1200 start 1201 end 1204 total 1250           clock   60.0Hz
+  1680x1050 (0xef)  119.0MHz +HSync -VSync
+        h: width  1680 start 1728 end 1760 total 1840 skew    0 clock   64.7KHz
+        v: height 1050 start 1053 end 1059 total 1080           clock   59.9Hz
+  1280x1024 (0xf0)  135.0MHz +HSync +VSync
+        h: width  1280 start 1296 end 1440 total 1688 skew    0 clock   80.0KHz
+        v: height 1024 start 1025 end 1028 total 1066           clock   75.0Hz
+  1280x1024 (0xf1)  108.0MHz +HSync +VSync
+        h: width  1280 start 1328 end 1440 total 1688 skew    0 clock   64.0KHz
+        v: height 1024 start 1025 end 1028 total 1066           clock   60.0Hz
+  1440x900 (0xf2)  136.8MHz -HSync +VSync
+        h: width  1440 start 1536 end 1688 total 1936 skew    0 clock   70.6KHz
+        v: height  900 start  903 end  909 total  942           clock   75.0Hz
+  1440x900 (0xf3)   88.8MHz +HSync -VSync
+        h: width  1440 start 1488 end 1520 total 1600 skew    0 clock   55.5KHz
+        v: height  900 start  903 end  909 total  926           clock   59.9Hz
+  1280x960 (0xf4)  108.0MHz +HSync +VSync
+        h: width  1280 start 1376 end 1488 total 1800 skew    0 clock   60.0KHz
+        v: height  960 start  961 end  964 total 1000           clock   60.0Hz
+  1360x768 (0xf5)   85.5MHz +HSync +VSync
+        h: width  1360 start 1424 end 1536 total 1792 skew    0 clock   47.7KHz
+        v: height  768 start  771 end  777 total  795           clock   60.0Hz
+  1280x800 (0xf6)   71.0MHz +HSync -VSync
+        h: width  1280 start 1328 end 1360 total 1440 skew    0 clock   49.3KHz
+        v: height  800 start  803 end  809 total  823           clock   59.9Hz
+  1152x864 (0xf7)  108.0MHz +HSync +VSync
+        h: width  1152 start 1216 end 1344 total 1600 skew    0 clock   67.5KHz
+        v: height  864 start  865 end  868 total  900           clock   75.0Hz
+  1280x720 (0xf8)   74.2MHz +HSync +VSync
+        h: width  1280 start 1390 end 1430 total 1650 skew    0 clock   45.0KHz
+        v: height  720 start  725 end  730 total  750           clock   60.0Hz
+  1280x720 (0xf9)   74.2MHz +HSync +VSync
+        h: width  1280 start 1720 end 1760 total 1980 skew    0 clock   37.5KHz
+        v: height  720 start  725 end  730 total  750           clock   50.0Hz
+  1280x720 (0xfa)   74.2MHz +HSync +VSync
+        h: width  1280 start 1390 end 1430 total 1650 skew    0 clock   45.0KHz
+        v: height  720 start  725 end  730 total  750           clock   59.9Hz
+  1024x768 (0xfb)   78.8MHz +HSync +VSync
+        h: width  1024 start 1040 end 1136 total 1312 skew    0 clock   60.1KHz
+        v: height  768 start  769 end  772 total  800           clock   75.1Hz
+  1024x768 (0xfc)   75.0MHz -HSync -VSync
+        h: width  1024 start 1048 end 1184 total 1328 skew    0 clock   56.5KHz
+        v: height  768 start  771 end  777 total  806           clock   70.1Hz
+  1024x768 (0xfd)   65.0MHz -HSync -VSync
+        h: width  1024 start 1048 end 1184 total 1344 skew    0 clock   48.4KHz
+        v: height  768 start  771 end  777 total  806           clock   60.0Hz
+  832x624 (0xfe)   57.3MHz -HSync -VSync
+        h: width   832 start  864 end  928 total 1152 skew    0 clock   49.7KHz
+        v: height  624 start  625 end  628 total  667           clock   74.6Hz
+  800x600 (0xff)   50.0MHz +HSync +VSync
+        h: width   800 start  856 end  976 total 1040 skew    0 clock   48.1KHz
+        v: height  600 start  637 end  643 total  666           clock   72.2Hz
+  800x600 (0x100)   49.5MHz +HSync +VSync
+        h: width   800 start  816 end  896 total 1056 skew    0 clock   46.9KHz
+        v: height  600 start  601 end  604 total  625           clock   75.0Hz
+  800x600 (0x101)   40.0MHz +HSync +VSync
+        h: width   800 start  840 end  968 total 1056 skew    0 clock   37.9KHz
+        v: height  600 start  601 end  605 total  628           clock   60.3Hz
+  720x576 (0x102)   27.0MHz -HSync -VSync
+        h: width   720 start  732 end  796 total  864 skew    0 clock   31.2KHz
+        v: height  576 start  581 end  586 total  625           clock   50.0Hz
+  720x480 (0x103)   27.0MHz -HSync -VSync
+        h: width   720 start  736 end  798 total  858 skew    0 clock   31.5KHz
+        v: height  480 start  489 end  495 total  525           clock   60.0Hz
+  720x480 (0x104)   27.0MHz -HSync -VSync
+        h: width   720 start  736 end  798 total  858 skew    0 clock   31.5KHz
+        v: height  480 start  489 end  495 total  525           clock   59.9Hz
+  640x480 (0x105)   31.5MHz -HSync -VSync
+        h: width   640 start  656 end  720 total  840 skew    0 clock   37.5KHz
+        v: height  480 start  481 end  484 total  500           clock   75.0Hz
+  640x480 (0x106)   31.5MHz -HSync -VSync
+        h: width   640 start  664 end  704 total  832 skew    0 clock   37.9KHz
+        v: height  480 start  489 end  491 total  520           clock   72.8Hz
+  640x480 (0x107)   30.2MHz -HSync -VSync
+        h: width   640 start  704 end  768 total  864 skew    0 clock   35.0KHz
+        v: height  480 start  483 end  486 total  525           clock   66.7Hz
+  640x480 (0x108)   25.2MHz -HSync -VSync
+        h: width   640 start  656 end  752 total  800 skew    0 clock   31.5KHz
+        v: height  480 start  490 end  492 total  525           clock   60.0Hz
+  640x480 (0x109)   25.2MHz -HSync -VSync
+        h: width   640 start  656 end  752 total  800 skew    0 clock   31.5KHz
+        v: height  480 start  490 end  492 total  525           clock   59.9Hz
+  720x400 (0x10a)   28.3MHz -HSync +VSync
+        h: width   720 start  738 end  846 total  900 skew    0 clock   31.5KHz
+        v: height  400 start  412 end  414 total  449           clock   70.1Hz
+HDMI2 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x45
+	Timestamp:  31737
+	Subpixel:   unknown
+	Clones:    
+	CRTCs:      0 1
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	aspect ratio: Automatic 
+		supported: Automatic, 4:3, 16:9
+	Broadcast RGB: Automatic 
+		supported: Automatic, Full, Limited 16:235
+	audio: auto 
+		supported: force-dvi, off, auto, on
+VIRTUAL1 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x46
+	Timestamp:  31737
+	Subpixel:   no subpixels
+	Clones:    
+	CRTCs:      2
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter:

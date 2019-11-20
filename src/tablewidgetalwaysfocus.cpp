@@ -68,7 +68,8 @@ DWIDGET_USE_NAMESPACE
 
 TableWidgetAlwaysActive::TableWidgetAlwaysActive(QWidget *parent): DTableWidget(parent)
 {
-
+    //navModel_ = new QStandardItemModel(navModel_);
+    // this->setModel(navModel_);
 }
 
 int TableWidgetAlwaysActive::sizeHintForColumn(int column) const

@@ -71,7 +71,7 @@ public:
     void initContextMenu();
 
     //void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font , const QPalette& pa);
-    void addCloumnToLayout(DeviceInfo* di, QVBoxLayout* vly, const QList<ArticleStruct>& articles, const QFont& font , int columnHeight, const QPalette& pa);
+    void addCloumnToLayout(DeviceInfo* di, QVBoxLayout* vly, const QList<ArticleStruct>& articles, const QFont& font, int fontSizetype, int columnHeight, const QPalette& pa);
 
     void setCentralInfo(const QString& info);
 
@@ -83,7 +83,7 @@ public:
 
     //void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
     // cloumnwidget version
-    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin = 10);
+    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin = 20-8);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
 

@@ -30,6 +30,7 @@
 #include "commondefine.h"
 #include "QSizePolicy"
 #include "deviceinfoparser.h"
+#include "DFontSizeManager"
 
 DWIDGET_USE_NAMESPACE
 
@@ -53,7 +54,7 @@ ColumnLabel::ColumnLabel(const QString& text, ColumnWidget* parent): DLabel(text
 //    columnWidget_->labelContextMenuEvent(event);
 //}
 
-ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, const QFont& font, int columnHeight, bool isRightLink, Dtk::Widget::DWidget* parent , DeviceInfoWidgetBase* di):\
+ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, const QFont& font, int fontSizetype, int columnHeight, bool isRightLink, Dtk::Widget::DWidget* parent , DeviceInfoWidgetBase* di):\
     DWidget(parent), deviceInfoWidget_(di)
 {
     setAutoFillBackground(true);
@@ -68,15 +69,19 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
 
     l1 = new ColumnLabel( strLeft, this);
     l1->setFont(font);
+    DFontSizeManager::instance()->bind(l1, DFontSizeManager::SizeType(fontSizetype) );
     l1->setWordWrap(true);
     l1->setMinimumWidth(NameLength_);
     l1->setAutoFillBackground(true);
+    l1->setScaledContents(true);
     l1->setMinimumHeight(columnHeight);
 
     l2 = new ColumnLabel( strRight, this);
     l2->setFont(font);
+    DFontSizeManager::instance()->bind(l2, DFontSizeManager::SizeType(fontSizetype) );
     l2->setWordWrap(true);
     int textWidth = QFontMetrics( font ).width(strRight);
+    l2->setScaledContents(true);
 
     if( isRightLink )
     {
@@ -136,7 +141,7 @@ void ColumnWidget::labelContextMenuEvent(QContextMenuEvent *event)
     connect(&copyAction, &QAction::triggered, \
             [this]()
             {
-                QClipboard *clipboard = QApplication::clipboard(); //获取系统剪贴板指针
+                QClipboard *clipboard = DApplication::clipboard(); //获取系统剪贴板指针
                 clipboard->setText(l1->text() + l2->text());//设置剪贴板内容
             }
     );

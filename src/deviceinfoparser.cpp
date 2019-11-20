@@ -34,10 +34,11 @@
 #include "logpasswordauth.h"
 #include "DMessageBox"
 #include <cups.h>
+#include "Logger.h"
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/ThinkPadE560";
+const QString DEVICEINFO_PATH = "../../computers/Meegopad_T02";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -69,8 +70,7 @@ void DeviceInfoParser::refreshDabase()
 
     emit loadFinished("Loading SMBBios Info...");
     loadDemicodeDatabase();
-    loadCatBoardinfoDatabase
-            ();
+    loadCatBoardinfoDatabase();
 
     emit loadFinished("Loading List Hardware Info...");
     loadLshwDatabase();
@@ -514,10 +514,20 @@ QStringList DeviceInfoParser::getHciconfigBluetoothControllerList()
     return getMatchToolDeviceList("hciconfig");
 }
 
-QStringList DeviceInfoParser::getOtherBluetoothctlPairedDevicesList()
+QStringList DeviceInfoParser::getOtherBluetoothctlPairedAndConnectedDevicesList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
+        if( DeviceInfoParserInstance.toolDatabase_["paired-devices"][fk].contains("Connected") )
+        {
+            if(DeviceInfoParserInstance.toolDatabase_["paired-devices"][fk]["Connected"].compare("Yes", Qt::CaseInsensitive) == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         if( DeviceInfoParserInstance.orderedDevices.contains(fk) == false )
         {
             return true;
@@ -1936,7 +1946,25 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
              continue;
          }
 
-         QStringList strList = line.trimmed().split(" ");
+         QStringList strList;
+
+        if( line.endsWith(")") )
+        {
+            int leftBracket = line.indexOf("(");
+            if(leftBracket > 0)
+            {
+                QString str = line.left(leftBracket).trimmed();
+                strList = str.trimmed().split(" ");
+                if(strList.size() > 2)
+                {
+                    strList.last() += line.mid(leftBracket);
+                }
+            }
+        }
+        else if(strList.size() == 0 )
+        {
+             strList = line.trimmed().split(" ");
+        }
 
          if(strList.size() < 5)
          {
@@ -2125,16 +2153,16 @@ bool DeviceInfoParser::loadCatInputDatabase()
             continue;
         }
 
+        if(cutLine.startsWith("Name="))
+        {
+            DeviceInfoMap[cutLine.left(first_index).trimmed()] = cutLine.mid(first_index+1).remove("\"").trimmed();
+            continue;
+        }
+
         if( cutLine.indexOf(DeviceType_CatDevice_Separator, first_index+1) < 0)
         {
             QStringList strList = cutLine.split(DeviceType_CatDevice_Separator);
             DeviceInfoMap[strList.first().trimmed()] = strList.last().trimmed();
-            continue;
-        }
-
-        if(cutLine.startsWith("Name="))
-        {
-            DeviceInfoMap[cutLine.left(first_index)] = cutLine.mid(first_index+1).remove("\"");
             continue;
         }
 
@@ -2266,6 +2294,21 @@ bool DeviceInfoParser::loadXrandrDatabase()
             DeviceInfoMap.clear();
 
             title = line.trimmed();
+            QString resolutionStr;
+            QRegExp reg("[ ]([0-9]\\d*x[0-9]\\d*)");
+            int pos = reg.indexIn(line);
+            if( pos > 0 )
+            {
+                DeviceInfoMap["Resolution"] = line.mid(pos+1, reg.matchedLength()-1).trimmed();
+            }
+
+            reg.setPattern("[ ]([0-9]\\d*mm x [0-9]\\d*mm)");
+            pos = reg.indexIn(line);
+            if( pos > 0 )
+            {
+                DeviceInfoMap["Size"] = line.mid(pos+1, reg.matchedLength()-1).trimmed();
+            }
+
             continue;
         }
     }
@@ -3202,17 +3245,25 @@ bool DeviceInfoParser::runCmd(const QString& cmd)
     int exitCode = process_.exitCode();
     if( cmd.startsWith("pkexec deepin-devicemanager-authenticateProxy") && (exitCode == 127 || exitCode == 126) )
     {
+        dError( "Run \'" + cmd + "\' failed: Password Error! " + QString::number(exitCode) + "\n");
+
         if(cmd.contains("whoami"))
         {
             //if(exitCode == 126)
-            {
-                DMessageBox::critical(nullptr, "", DApplication::translate("Main", "Password Error!" ));
-            }
+            //{
+                //DMessageBox::critical(nullptr, "", DApplication::translate("Main", "Password Error!" ));
+            //}
 
-            exit(-1);
+            //exit(-1);
         }
 
-        DMessageBox::critical(nullptr, "", DApplication::translate("Main", "Password Error!" ) );
+        //DMessageBox::critical(nullptr, "", DApplication::translate("Main", "Password Error!" ) );
+        return false;
+    }
+
+    if(res == false)
+    {
+        dError( "Run \'" + cmd + "\' failed\n" );
     }
 
     return res;

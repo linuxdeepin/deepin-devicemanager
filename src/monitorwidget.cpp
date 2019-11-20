@@ -73,124 +73,106 @@ void MonitorWidget::initWidget()
     QStringList hwinfMonitorList = DeviceInfoParserInstance.getHwinfoMonitorList();
     QStringList xrandrMonitorList = DeviceInfoParserInstance.getXrandrMonitorList();
 
-    for(int i = 0; i < hwinfMonitorList.size(); ++i)
+    for(int i = 0; i < std::max(hwinfMonitorList.size(), xrandrMonitorList.size()); ++i)
     {
         articles.clear();
         existArticles.clear();
 
-        const QString& monitor = hwinfMonitorList.at(i);
-
         ArticleStruct name("Name");
-        name.queryData("hwinfo", monitor, "Model");
-        name.value = name.value.remove("\"");
-
-        existArticles.insert("Model");
-
         ArticleStruct vendor("Vendor");
-        vendor.queryData("hwinfo", monitor, "Vendor");
-        QString abb;
-        QRegExp rx("(^[\\s\\S]*)\"([\\s\\S]+)\"$");
-        if( rx.exactMatch(vendor.value) )
-        {
-            abb = rx.cap(1).trimmed();
-            vendor.value = rx.cap(2).trimmed();
-        }
-        existArticles.insert("Vendor");
-
-        name.value.remove(abb);
-
-        if(name.value.contains(vendor.value) == false)
-        {
-            name.value = vendor.value + " " + name.value;
-        }
-
-        articles.push_back(name);
-        articles.push_back(vendor);
-
-        ArticleStruct serial("Serial Number");
-        serial.queryData("hwinfo", monitor, "Serial ID");
-        serial.value.remove("\"");
-        articles.push_back(serial);
-        existArticles.insert("Serial ID");
-
-        ArticleStruct mDate("Manufacture Date"); 
-        QString my = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Year of Manufacture");
-        if( my.isEmpty() == false && my != DApplication::translate("Main", "Unknown") )
-        {
-            mDate.value = my + DApplication::translate("Main", "Year");
-        }
-
-        QString mw = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
-        if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
-        {
-            mDate.value += " ";
-            mDate.value += mw;
-            mDate.value += DApplication::translate("Main", "Week");
-        }
-        articles.push_back(mDate);
-
-        existArticles.insert("Year of Manufacture");
-        existArticles.insert("Week of Manufacture");
-
-        ArticleStruct monitorSize(DApplication::translate("Monitor", "Size"));
-        QString size = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Size");
-        double inch = 0.0;
-        QRegExp re("^([\\d]*)x([\\d]*) mm$");
-        if( re.exactMatch(size) )
-        {
-            double width = re.cap(1).toDouble()/2.54;
-            double height = re.cap(2).toDouble()/2.54;
-            inch = std::sqrt(width*width + height*height)/10.0;
-            monitorSize.value = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch") + " (";
-            monitorSize.value += size;
-            monitorSize.value += ")";
-        }
-        else
-        {
-            monitorSize.value += size;
-        }
-        articles.push_back(monitorSize);
-        existArticles.insert("Size");
-
         ArticleStruct currentResolution("Resolution");
-
+        ArticleStruct resolutionList("Support Resolution");
         ArticleStruct displayRete("Display Rate");
 
-        currentResolution.queryData("hwinfo", monitor, "Current Resolution");
+        ArticleStruct monitorSize(DApplication::translate("Monitor", "Size"));
 
-        re.setPattern("^([\\d]*)x([\\d]*)$");
-        if( re.exactMatch(currentResolution.value) )
+        double inch = 0.0;
+
+        if( i < hwinfMonitorList.size() )
         {
-            int width = re.cap(1).toInt();
-            int height = re.cap(2).toInt();
-            int gys = gcd(width, height);
-            int w = width/gys;
-            int h = height/gys;
+            const QString& monitor = hwinfMonitorList.at(i);
 
-            if(w > 21)
+            name.queryData("hwinfo", monitor, "Model");
+            name.value = name.value.remove("\"");
+
+            existArticles.insert("Model");
+
+            vendor.queryData("hwinfo", monitor, "Vendor");
+            QString abb;
+            QRegExp rx("(^[\\s\\S]*)\"([\\s\\S]+)\"$");
+            if( rx.exactMatch(vendor.value) )
             {
-                findAspectRatio(w, h, w, h);
+                abb = rx.cap(1).trimmed();
+                vendor.value = rx.cap(2).trimmed();
+            }
+            existArticles.insert("Vendor");
+
+            name.value.remove(abb);
+
+            if(name.value.contains(vendor.value) == false)
+            {
+                name.value = vendor.value + " " + name.value;
             }
 
-            displayRete.value = QString::number(w) + " : " + QString::number(h);
-        }
+            articles.push_back(name);
+            articles.push_back(vendor);
 
-        ArticleStruct frequencies("Frequencies");
-        frequencies.queryData("hwinfo", monitor, "Frequencies");
-        if(frequencies.isValid())
-        {
-            frequencies.value = frequencies.value.trimmed().split(",").last().trimmed();
+            ArticleStruct serial("Serial Number");
+            serial.queryData("hwinfo", monitor, "Serial ID");
+            serial.value.remove("\"");
+            articles.push_back(serial);
+            existArticles.insert("Serial ID");
+
+            QString size = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Size");
+
+            monitorSize.value = parseMonitorSize(size, inch);
+
+            articles.push_back(monitorSize);
+            existArticles.insert("Size");
+
+            ArticleStruct mDate("Manufacture Date");
+            QString my = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Year of Manufacture");
+            if( my.isEmpty() == false && my != DApplication::translate("Main", "Unknown") )
+            {
+                mDate.value = my + DApplication::translate("Main", "Year");
+            }
+
+            QString mw = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
+            if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
+            {
+                mDate.value += " ";
+                mDate.value += mw;
+                mDate.value += DApplication::translate("Main", "Week");
+            }
+            articles.push_back(mDate);
+
+            existArticles.insert("Year of Manufacture");
+            existArticles.insert("Week of Manufacture");
+
+            currentResolution.queryData("hwinfo", monitor, "Current Resolution");
+            currentResolution.queryData("hwinfo", monitor, "Support Resolution");
+
+            displayRete.value = parseDisplayRate(currentResolution.value);
+
+            ArticleStruct frequencies("Frequencies");
+            frequencies.queryData("hwinfo", monitor, "Frequencies");
             if(frequencies.isValid())
             {
-                currentResolution.value += " @";
-                currentResolution.value += frequencies.value;
+                frequencies.value = frequencies.value.trimmed().split(",").last().trimmed();
+                if(frequencies.isValid())
+                {
+                    currentResolution.value += " @";
+                    currentResolution.value += frequencies.value;
+                }
             }
+
+            articles.push_back(currentResolution);
+            existArticles.insert("Current Resolution");
+
+            articles.push_back(displayRete);
+
+            resolutionList.queryData("hwinfo", monitor, "Support Resolution");
         }
-
-        articles.push_back(currentResolution);
-        existArticles.insert("Current Resolution");
-
-        articles.push_back(displayRete);
 
         ArticleStruct primaryMonitor("Primary Monitor");
         primaryMonitor.value = "No";
@@ -202,6 +184,20 @@ void MonitorWidget::initWidget()
             }
 
             //currentResolution.queryData("xrandr", xrandrMonitorList.at(i), "");
+            if(currentResolution.isValid() == false)
+            {
+                currentResolution.queryData("xrandr", xrandrMonitorList.at(i), "Resolution");
+                articles.push_back(currentResolution);
+                displayRete.value = parseDisplayRate(currentResolution.value);
+                articles.push_back(displayRete);
+            }
+
+            if(monitorSize.isValid() == false)
+            {
+                monitorSize.queryData("xrandr", xrandrMonitorList.at(i), "Size");
+                monitorSize.value = parseMonitorSize(monitorSize.value, inch);
+                articles.push_back(monitorSize);
+            }
         }
         articles.push_back(primaryMonitor);
 
@@ -223,13 +219,11 @@ void MonitorWidget::initWidget()
         }
         articles.push_back(connectType);
 
-        ArticleStruct resolutionList("Support Resolution");
-        resolutionList.queryData("hwinfo", monitor, "Support Resolution");
         articles.push_back(resolutionList);
 
         addDevice( name.value, articles, hwinfMonitorList.size() );
 
-        if( hwinfMonitorList.size() > 1 )
+        if( std::max(hwinfMonitorList.size(), xrandrMonitorList.size() ) > 1 )
         {
             QStringList tab =
             {
@@ -248,9 +242,16 @@ void MonitorWidget::initWidget()
         overviewInfo_.value += name.value;
         if(inch != 0.0)
         {
-            overviewInfo_.value += " (";
-            overviewInfo_.value += QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch");
-            overviewInfo_.value += ")";
+            if(overviewInfo_.isValid() == false)
+            {
+                overviewInfo_.value = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch");
+            }
+            else
+            {
+                overviewInfo_.value += " (";
+                overviewInfo_.value += QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch");
+                overviewInfo_.value += ")";
+            }
         }
     }
 
@@ -259,4 +260,57 @@ void MonitorWidget::initWidget()
         QStringList headers = { "Name",  "Vendor" };
         addTable( headers, tabList);
     }
+}
+
+QString MonitorWidget::parseMonitorSize(const QString& size, double& inch)
+{
+    inch = 0.0;
+
+    QString res = size;
+    QRegExp re("^([\\d]*)x([\\d]*) mm$");
+    if( re.exactMatch(size) )
+    {
+        double width = re.cap(1).toDouble()/2.54;
+        double height = re.cap(2).toDouble()/2.54;
+        inch = std::sqrt(width*width + height*height)/10.0;
+        res = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch") + " (";
+        res += size;
+        res += ")";
+    }
+
+    re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
+    if( re.exactMatch(size) )
+    {
+        double width = re.cap(1).toDouble()/2.54;
+        double height = re.cap(2).toDouble()/2.54;
+        inch = std::sqrt(width*width + height*height)/10.0;
+        res = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch") + " (";
+        res += size;
+        res += ")";
+    }
+
+    return res;
+}
+
+QString MonitorWidget::parseDisplayRate(const QString& resulotion)
+{
+    QRegExp re("^([\\d]*)x([\\d]*)$");
+    QString res;
+    if( re.exactMatch(resulotion) )
+    {
+        int width = re.cap(1).toInt();
+        int height = re.cap(2).toInt();
+        int gys = gcd(width, height);
+        int w = width/gys;
+        int h = height/gys;
+
+        if(w > 21)
+        {
+            findAspectRatio(w, h, w, h);
+        }
+
+        res = QString::number(w) + " : " + QString::number(h);
+    }
+
+    return res;
 }

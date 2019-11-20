@@ -128,37 +128,43 @@ void DeviceInfoWidgetBase::initFont()
     isFontInit_ = true;
 
     QLabel* nameLabel = new DLabel("", this);
+
+    DFontSizeManager::instance()->bind( nameLabel, DFontSizeManager::T5);
+
     titleFont_ = nameLabel->font();
-    titleFont_.setFamily(commonFontFamily_);
-    delete nameLabel;
-
-    subTitleFont_ = titleFont_;
-    labelFont_ = titleFont_;
-    infoFont_ = titleFont_;
-    tableHeaderFont_ = titleFont_;
-    tableContentFont_ = titleFont_;
-    centralFont_ = titleFont_;
-
-    titleFont_.setPixelSize(17);
-    //titleFont_.setPointSizeF(17);
     titleFont_.setWeight(QFont::DemiBold);
 
-    infoFont_.setPixelSize(14);
-    infoFont_.setWeight(QFont::Thin);
-
-    subTitleFont_.setPixelSize(14);
+    DFontSizeManager::instance()->bind( nameLabel, DFontSizeManager::T5);
+    subTitleFont_ = nameLabel->font();
+    //subTitleFont_.setPixelSize(14);
     subTitleFont_.setWeight(QFont::DemiBold);
 
-    labelFont_.setPixelSize(12);
-    labelFont_.setWeight(QFont::Thin);
+    DFontSizeManager::instance()->bind( nameLabel, DFontSizeManager::T5);
+    infoFont_ = nameLabel->font();
+    //infoFont_.setPixelSize(14);
+    infoFont_.setWeight(QFont::Normal);
 
+    DFontSizeManager::instance()->bind( nameLabel, DFontSizeManager::T8);
+    labelFont_ = nameLabel->font();
+    //labelFont_.setPixelSize(12);
+    labelFont_.setWeight(QFont::Normal);
+
+    DFontSizeManager::instance()->bind( nameLabel, DFontSizeManager::T5);
+    tableHeaderFont_ = nameLabel->font();
     tableHeaderFont_.setWeight(QFont::Medium);
-    tableHeaderFont_.setPixelSize(14);
+    //tableHeaderFont_.setPixelSize(14);
 
+    DFontSizeManager::instance()->bind( nameLabel, DFontSizeManager::T8);
+    tableContentFont_ = nameLabel->font();
     tableContentFont_.setWeight(QFont::Medium);
-    tableContentFont_.setPixelSize(12);
+    //tableContentFont_.setPixelSize(12);
 
-    centralFont_.setPixelSize(20);
+    DFontSizeManager::instance()->bind( nameLabel, DFontSizeManager::T4);
+    centralFont_ = nameLabel->font();
+    centralFont_.setWeight(QFont::Normal);
+    //centralFont_.setPixelSize(20);
+
+    delete nameLabel;
 }
 
 bool DeviceInfoWidgetBase::getOverViewInfo(ArticleStruct& info)
@@ -268,7 +274,7 @@ void DeviceInfoWidgetBase::initContextMenu()
 //    }
 //}
 
-void DeviceInfoWidgetBase::addCloumnToLayout(DeviceInfo* di, QVBoxLayout* vly, const QList<ArticleStruct>& articles, const QFont& font , int columnHeight, const QPalette& pa)
+void DeviceInfoWidgetBase::addCloumnToLayout(DeviceInfo* di, QVBoxLayout* vly, const QList<ArticleStruct>& articles, const QFont& font, int fontSizetype, int columnHeight, const QPalette& pa)
 {
 
     vly->setSizeConstraint(QLayout::SetNoConstraint);
@@ -282,13 +288,12 @@ void DeviceInfoWidgetBase::addCloumnToLayout(DeviceInfo* di, QVBoxLayout* vly, c
 
         QString value = article.valueTranslate? DApplication::translate("Main", article.value.toStdString().data()): article.value;
 
-        ColumnWidget* widget = new ColumnWidget( DApplication::translate("Main", article.name.toStdString().data())+ ":", value, font, columnHeight, article.externalLinks, downWidget_, this);
-        DApplicationHelper::instance()->setPalette(widget->l1, pa);
+        ColumnWidget* widget = new ColumnWidget( DApplication::translate("Main", article.name.toStdString().data())+ ":", value, font, fontSizetype, columnHeight, article.externalLinks, downWidget_, this);
 
+        DApplicationHelper::instance()->setPalette(widget->l1, pa);
         DApplicationHelper::instance()->setPalette(widget->l2, pa);
 
         di->columnWidgets.push_back( widget );
-
         vly->addWidget(widget);
     }
 }
@@ -313,7 +318,8 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
     if( false == info.isEmpty() )
     {
         titleInfo_->title = new DLabel( DApplication::translate("Main", info.toStdString().data()), downWidget_);
-        titleInfo_->title->setFont(centralFont_);
+        // titleInfo_->title->setFont(centralFont_);
+        DFontSizeManager::instance()->bind(titleInfo_->title, DFontSizeManager::T4);
 
         auto hLayout = new QHBoxLayout;
         hLayout->addStretch(1);
@@ -416,6 +422,7 @@ void DeviceInfoWidgetBase::addHtmlInfo(const QString& title, const QList<Article
     {
         titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()) + ":", downWidget_);
         titleInfo_->title->setFont(titleFont_);
+        DFontSizeManager::instance()->bind(titleInfo_->title, DFontSizeManager::T5);
         vly->addWidget(titleInfo_->title);
     }
 
@@ -454,18 +461,19 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
     {
         titleInfo_->title = new DLabel( DApplication::translate("Main", title.toStdString().data()) + ":", downWidget_);
         titleInfo_->title->setFont(titleFont_);
+        DFontSizeManager::instance()->bind(titleInfo_->title, DFontSizeManager::T5);
         vly->addWidget(titleInfo_->title);
     }
 
     DPalette pa = DApplicationHelper::instance()->palette(this);
     if(main == true)
     {
-        addCloumnToLayout(titleInfo_, vly, articles, infoFont_, 29, pa);
+        addCloumnToLayout(titleInfo_, vly, articles, infoFont_, DFontSizeManager::T6, 29, pa);
     }
 
     else
     {
-        addCloumnToLayout(titleInfo_, vly, articles, labelFont_, 21, pa);
+        addCloumnToLayout(titleInfo_, vly, articles, labelFont_, DFontSizeManager::T8, 21, pa);
     }
 
     infoWidget_ = new DWidget(this);
@@ -541,12 +549,13 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
     {
         subInfo.title = new DLabel( DApplication::translate("Main", subTitle.toStdString().data()) + ":", downWidget_);
         subInfo.title->setFont(subTitleFont_);
+        DFontSizeManager::instance()->bind(subInfo.title, DFontSizeManager::T6);
         vly->addWidget( subInfo.title );
     }
 
     DPalette pa = DApplicationHelper::instance()->palette(this);
 
-    addCloumnToLayout(&subInfo, vly, articles, labelFont_, 21, pa);
+    addCloumnToLayout(&subInfo, vly, articles, labelFont_, DFontSizeManager::T8, 21, pa);
 
     DWidget* subInfoWidget = new DWidget(this);
     subInfoWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -572,13 +581,15 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     {
         tableWidget_ = new TableWidgetAlwaysActive(this);
 
+        DFontSizeManager::instance()->bind( tableWidget_, DFontSizeManager::T8);
+
         tableWidget_->setSortingEnabled(true);
         //tableWidget_ = new DTableWidget(this);
         //tableWidget_->setHorizontalHeader(new TableWidgetAlwaysActiveHeaderView(Qt::Orientation::Horizontal, this) );
 
         //tableWidget_->setMinimumHeight(183);
         //tableWidget_->setMaximumHeight(500);
-        tableWidget_->setFixedHeight(TableViewRowHeight_*4 + tableWidget_->verticalHeader()->height()+2);
+        tableWidget_->setFixedHeight(TableViewRowHeight_*4 + tableWidget_->verticalHeader()->height()+3);
 
         //tableWidget_->verticalHeader()->setDefaultSectionSize(TableViewRowHeight_);
         //tableWidget_->verticalHeader()->setFixedHeight(TableViewRowHeight_);
@@ -600,6 +611,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         //tableWidget_->setEnabled(true);
         tableWidget_->horizontalHeader()->clearMask();
         tableWidget_->horizontalHeader()->setFont(tableHeaderFont_);
+        DFontSizeManager::instance()->bind( tableWidget_->horizontalHeader(), DFontSizeManager::T6);
 
         tableWidget_->setRowCount(contentsList.size());
         tableWidget_->setColumnCount(headers.size());
@@ -649,7 +661,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, changeTheme);
 
 
-        tableWidget_->horizontalHeader()->setContentsMargins(0,0,0,0);
+        //tableWidget_->horizontalHeader()->setContentsMargins(0,0,0,0);
         tableWidget_->horizontalHeader()->setHighlightSections(false);
         //tableWidget_->horizontalHeader()->setFrameShape(QFrame::Shape::NoFrame);
         //tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
@@ -716,10 +728,13 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
             }
             //int flags = item->flags();
             //item->setFlags(flags | Qt::ItemFlag::ItemIsEditable);
-            item->setFont(tableContentFont_);
+            //item->setFont(tableContentFont_);
+            //DFontSizeManager::instance()->bind( item, DFontSizeManager::T6);
             tableWidget_->setItem(i, j, item);
         }
     }
+
+    //tableWidget_->setModel();
 
     //tableWidget_->clearSpans();
 
@@ -728,6 +743,8 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     tableWidget_->horizontalHeader()->setStretchLastSection(true);
     tableWidget_->resizeColumnsToContents();
     //tableWidget_->resizeRowsToContents();
+
+    //tableWidget_->setContentsMargins(50, 0, 10, 0);
 }
 
 void DeviceInfoWidgetBase::addDevice( const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle )
