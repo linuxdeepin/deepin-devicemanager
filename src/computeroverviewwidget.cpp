@@ -63,6 +63,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
     }
 
     ArticleStruct ver;
+    ver.queryData("dmidecode", "System Information", "Family");
     ver.queryData("dmidecode", "System Information", "Version");
     if(ver.isValid() == false || ver.value.contains("System Version"))
     {

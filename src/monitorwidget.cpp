@@ -131,10 +131,10 @@ void MonitorWidget::initWidget()
             existArticles.insert("Size");
 
             ArticleStruct mDate("Manufacture Date");
-            QString my = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Year of Manufacture");
-            if( my.isEmpty() == false && my != DApplication::translate("Main", "Unknown") )
+            mDate.queryData("hwinfo", monitor, "Year of Manufacture");
+            if( mDate.isValid() )
             {
-                mDate.value = my + DApplication::translate("Main", "Year");
+                mDate.value = mDate.value + DApplication::translate("Main", "Year");
             }
 
             QString mw = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
@@ -148,6 +148,14 @@ void MonitorWidget::initWidget()
 
             existArticles.insert("Year of Manufacture");
             existArticles.insert("Week of Manufacture");
+
+            ArticleStruct tmy("The Model Year(Not Manufacture Date)");
+            tmy.queryData("hwinfo", monitor, "The Model Year", existArticles );
+            if( tmy.isValid() )
+            {
+                tmy.value = tmy.value + DApplication::translate("Main", "Year");
+                articles.push_back(tmy);
+            }
 
             currentResolution.queryData("hwinfo", monitor, "Current Resolution");
             currentResolution.queryData("hwinfo", monitor, "Support Resolution");

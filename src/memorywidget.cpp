@@ -245,11 +245,9 @@ void MemoryWidget::updateWholeDownWidget()
 
         addSubInfo( deviceName, articles );
 
-        QString overviewVendor = vendor.value;
-        overviewVendor += " ";
-        overviewVendor += type.value;
-        overviewVendor += " ";
-        overviewVendor += speed.value;
+        QList<ArticleStruct> arLst;
+        arLst << vendor << type << speed;
+        QString overviewVendor = joinArticle(arLst);
 
         if( false == detailMem .contains(overviewVendor) )
         {
@@ -261,7 +259,7 @@ void MemoryWidget::updateWholeDownWidget()
     if( detailMem.size() > 0 )
     {
         overviewInfo_.value += " (";
-        overviewInfo_.value += detailMem.join("/");
+        overviewInfo_.value += detailMem.join(" / ");
         overviewInfo_.value += ")";
     }
 }

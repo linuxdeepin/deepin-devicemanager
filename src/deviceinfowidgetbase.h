@@ -104,6 +104,8 @@ public:
 
     void getContextMenu(Dtk::Widget::DMenu** contextMenu);
 
+    QString joinArticle(QList<ArticleStruct>& articles);
+
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *event) override;

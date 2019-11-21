@@ -882,6 +882,25 @@ void DeviceInfoWidgetBase::getContextMenu(DMenu** contextMenu)
     *contextMenu = contextMenu_;
 }
 
+QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct>& articles)
+{
+    QString res;
+    foreach(auto article, articles)
+    {
+        if(article.isValid())
+        {
+            if(res.isEmpty() == false)
+            {
+                res += " ";
+            }
+
+            res += article.value;
+        }
+    }
+
+    return res;
+}
+
 void DeviceInfoWidgetBase::changeTheme()
 {
     if(isPaletteInit_ == false)

@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/Lenovo_Yoga_C930-13IKB";
+const QString DEVICEINFO_PATH = "../../computers/Sony_SVD13215PXB";
 
 using PowerInter = com::deepin::daemon::Power;
 

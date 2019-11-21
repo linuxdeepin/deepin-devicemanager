@@ -25,6 +25,7 @@
 #include "dwidgetstype.h"
 #include <QSplashScreen>
 #include "DSpinner"
+#include "DLabel"
 
 class DeviceListView;
 class DeviceInfoWidgetBase;

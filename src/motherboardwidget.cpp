@@ -120,6 +120,7 @@ void MotherboardWidget::initWidget()
     articles.clear();
     existArticles.clear();
 
+    vendor.value.clear();
     vendor.queryData("dmidecode", "System Information", "Manufacturer");
     articles.push_back(vendor);
     existArticles.insert("Manufacturer");
@@ -129,10 +130,12 @@ void MotherboardWidget::initWidget()
     articles.push_back(productName);
     existArticles.insert("Product Name");
 
+    serial.value.clear();
     serial.queryData("dmidecode", "System Information", "Serial Number");
     articles.push_back(serial);
     existArticles.insert("Serial Number");
 
+    version.value.clear();
     version.queryData("dmidecode", "System Information", "Version");
     articles.push_back(version);
     existArticles.insert("Version");
