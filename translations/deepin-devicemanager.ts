@@ -1644,7 +1644,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>The Model Year(Not Manufacture Date)</source>
             <translation type="unfinished"/>
         </message>
         <message>

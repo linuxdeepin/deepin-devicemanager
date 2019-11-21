@@ -1640,8 +1640,8 @@
             <translation>获取内存信息失败!</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>The Model Year(Not Manufacture Date)</source>
+            <translation>型号日期(非生产日期)</translation>
         </message>
         <message>
             <source></source>
