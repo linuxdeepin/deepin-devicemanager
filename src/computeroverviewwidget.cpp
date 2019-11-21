@@ -69,16 +69,21 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
         ver.value = "";
     }
 
-    if( false == pName.value.contains(vendor.value) )
-    {
-        model.value = vendor.value + " ";
-    }
+    pName.value = pName.value.remove( vendor.value, Qt::CaseInsensitive);
+    ver.value = ver.value.remove(vendor.value, Qt::CaseInsensitive);
 
-    model.value = model.value + pName.value + " " + ver.value;
+    model.value = vendor.value.trimmed();
+    model.value += " ";
+    model.value += ver.value;
+    model.value = model.value.trimmed();
+    model.value += " ";
+    model.value += pName.value;
 
     if(ver.value.contains("Not Specified", Qt::CaseInsensitive) || ver.value.contains("x.x", Qt::CaseInsensitive) || ver.value.contains("Not Applicable", Qt::CaseInsensitive))
     {
-        model.value = model.value + pName.value;
+        model.value = vendor.value.trimmed();
+        model.value += " ";
+        model.value += pName.value;
     }
 //    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000
 //    {
