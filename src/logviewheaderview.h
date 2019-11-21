@@ -43,7 +43,7 @@ protected:
                               int logicalIndex) const override;
 
 private:
-    QStyleOptionViewItem viewOptions() const override;
+    //QStyleOptionViewItem viewOptions() const override;
 
 private:
     int m_spacing {1};

@@ -38,13 +38,27 @@ void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, 
 void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet)
 {
     existSet.insert(secondKey);
-    queryData(toolname, firstKey, secondKey);
+
+    if( isValid() )
+    {
+        return;
+    }
+
+    value = DeviceInfoParserInstance.queryData( toolname, firstKey, secondKey );
 }
 
 void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet, QList<ArticleStruct>& articles)
 {
-    queryData(toolname, firstKey, secondKey, existSet);
-    if(isValid())
+    existSet.insert(secondKey);
+
+    if( isValid() )
+    {
+        return;
+    }
+
+    value = DeviceInfoParserInstance.queryData( toolname, firstKey, secondKey );
+
+    if( isValid() )
     {
         articles.push_back(*this);
     }

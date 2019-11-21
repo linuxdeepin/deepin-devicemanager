@@ -42,8 +42,8 @@ private:
     int sizeHintForColumn(int column) const override;
 
 private:
-    QStyleOptionViewItem viewOptions() const override;
-    void initStyleOption(QStyleOptionFrame *option) const;
+    //QStyleOptionViewItem viewOptions() const override;
+    //void initStyleOption(QStyleOptionFrame *option) const;
 
 public:
     LogViewItemDelegate *m_itemDelegate;

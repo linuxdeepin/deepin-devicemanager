@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/LOONGSON3_LEMOTE-LS3A3000-7A1000-1w-V0.1-pc";
+const QString DEVICEINFO_PATH = "../../computers/Lenovo_ThinkCentre_M910t-N000";
 
 using PowerInter = com::deepin::daemon::Power;
 

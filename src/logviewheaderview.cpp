@@ -157,11 +157,11 @@ QSize LogViewHeaderView::sizeHint() const
     return QSize(size.width(), size.height() + m_spacing);
 }
 
-QStyleOptionViewItem LogViewHeaderView::viewOptions() const
-{
-    auto styleOptViewItem = DHeaderView::viewOptions();
-    styleOptViewItem.state |= QStyle::State_Active;
+//QStyleOptionViewItem LogViewHeaderView::viewOptions() const
+//{
+//    auto styleOptViewItem = DHeaderView::viewOptions();
+//    styleOptViewItem.state |= QStyle::State_Active;
 
-    return styleOptViewItem;
-}
+//    return styleOptViewItem;
+//}
 

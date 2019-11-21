@@ -625,39 +625,39 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         //tableWidget_->horizontalHeader()->setObjectName("DeviceInfoHeaderView");
 
-        auto changeTheme = [this](){
-            DPalette pa = this->palette();
+//        auto changeTheme = [this](){
+//            DPalette pa = this->palette();
 
-//            //QBrush bash_brush( QColor(0,0,0,255) );
+////            //QBrush bash_brush( QColor(0,0,0,255) );
 
-            pa.setColorGroup(QPalette::Inactive, pa.windowText(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
-//            //pa.setColorGroup(QPalette::Active, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
+//            pa.setColorGroup(QPalette::Inactive, pa.windowText(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
+////            //pa.setColorGroup(QPalette::Active, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
 
-//            QColor base_color = palette().base().color();
+////            QColor base_color = palette().base().color();
 
-//            //pa.setColor(QPalette::Background, base_color);
-//            //pa.setBrush(QPalette::Inactive, DPalette::Base, pa.brush(QPalette::Active, DPalette::Dark));
-//            //pa.setBrush(QPalette::Inactive, DPalette::Base, bash_brush);
+////            //pa.setColor(QPalette::Background, base_color);
+////            //pa.setBrush(QPalette::Inactive, DPalette::Base, pa.brush(QPalette::Active, DPalette::Dark));
+////            //pa.setBrush(QPalette::Inactive, DPalette::Base, bash_brush);
 
-//            DApplicationHelper::instance()->setPalette(tableWidget_, pa);
-//            //DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
+////            DApplicationHelper::instance()->setPalette(tableWidget_, pa);
+////            //DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
 
-//            //pa.setBrush(QPalette::Highlight, bash_brush);
+////            //pa.setBrush(QPalette::Highlight, bash_brush);
 
-            tableWidget_->setPalette(pa);
+//            tableWidget_->setPalette(pa);
 
-//            //tableWidget_->horizontalHeader()->setAutoFillBackground(true);
+////            //tableWidget_->horizontalHeader()->setAutoFillBackground(true);
 
-////            for(int itemIndex = 0; itemIndex < tableWidget_->horizontalHeader()->count(); ++itemIndex)
-////            {
-////                tableWidget_->horizontalHeaderItem(itemIndex)->setBackground(bash_brush);
-////                //tableWidget_->horizontalHeader()->model()->setData(itemIndex, 0, Qt::BackgroundRole);
-////            }
+//////            for(int itemIndex = 0; itemIndex < tableWidget_->horizontalHeader()->count(); ++itemIndex)
+//////            {
+//////                tableWidget_->horizontalHeaderItem(itemIndex)->setBackground(bash_brush);
+//////                //tableWidget_->horizontalHeader()->model()->setData(itemIndex, 0, Qt::BackgroundRole);
+//////            }
 
-//            //tableWidget_->horizontalHeader()->setStyleSheet( "QHeaderView#DeviceInfoHeaderView{ background-color: white; }");
-        };
+////            //tableWidget_->horizontalHeader()->setStyleSheet( "QHeaderView#DeviceInfoHeaderView{ background-color: white; }");
+//        };
 
-        changeTheme();
+//        changeTheme();
 
         //connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, changeTheme);
 

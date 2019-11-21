@@ -144,19 +144,19 @@ int LogTreeView::sizeHintForColumn(int column) const
     return (maxWidth + 50 > (DeviceWidgetDownWidgehWidth_/m_pModel->columnCount())*2) ? (DeviceWidgetDownWidgehWidth_/m_pModel->columnCount()*2) : (maxWidth + 50);
 }
 
-QStyleOptionViewItem LogTreeView::viewOptions() const
-{
-    auto styleOptViewItem = DTreeView::viewOptions();
-    styleOptViewItem.state |= QStyle::State_Active;
+//QStyleOptionViewItem LogTreeView::viewOptions() const
+//{
+//    auto styleOptViewItem = DTreeView::viewOptions();
+//    styleOptViewItem.state |= QStyle::State_Active;
 
-    return styleOptViewItem;
-}
+//    return styleOptViewItem;
+//}
 
-void LogTreeView::initStyleOption(QStyleOptionFrame *option) const
-{
-    DTreeView::initStyleOption(option);
-    option->state |= QStyle::State_Active;
+//void LogTreeView::initStyleOption(QStyleOptionFrame *option) const
+//{
+//    DTreeView::initStyleOption(option);
+//    option->state |= QStyle::State_Active;
 
-}
+//}
 
 

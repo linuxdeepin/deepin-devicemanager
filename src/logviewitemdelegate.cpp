@@ -185,5 +185,5 @@ void LogViewItemDelegate::initStyleOption(QStyleOptionViewItem *option,
         option->text = index.data().toString();
 
     //auto styleOptViewItem = DTreeView::viewOptions();
-    option->state |= QStyle::State_Active;
+    //option->state |= QStyle::State_Active;
 }

@@ -100,23 +100,25 @@ void PowerWidget::initWidget()
 
         if(i < lshwSwitchingpowerList.size())
         {
-            QString device = lshwSwitchingpowerList[i];
+            QString dname = lshwSwitchingpowerList[i];
 
-            name.queryData( "lshw", device, "product", existArticles2, articles);
+            name.queryData( "lshw", dname, "product", existArticles2, articles);
 
-            vendor.queryData( "lshw", device, "vendor", existArticles2, articles);
+            vendor.queryData( "lshw", dname, "vendor", existArticles2, articles);
 
             ArticleStruct description("Description");
-            description.queryData("lshw", device, "description", existArticles2, articles);
+            description.queryData("lshw", dname, "description", existArticles2, articles);
+
+            serial.queryData( "upower", dname, "serial", existArticles2, articles);
 
             ArticleStruct physicalId("Physical ID");
-            physicalId.queryData( "lshw", device, "physical id", existArticles2, articles);
+            physicalId.queryData( "lshw", dname, "physical id", existArticles2, articles);
 
             ArticleStruct version("Version");
-            version.queryData( "lshw", device, "version", existArticles2, articles);
+            version.queryData( "lshw", dname, "version", existArticles2, articles);
 
             ArticleStruct capacity("Capacity");
-            capacity.queryData( "lshw", device, "capacity", existArticles2, articles);
+            capacity.queryData( "lshw", dname, "capacity", existArticles2, articles);
         }
 
         if(i < demidecodeSwitchingpowerList.size())
