@@ -53,15 +53,32 @@ void KeyboardWidget::initWidget()
         existArticles.clear();
 
         ArticleStruct name("Name");
-        name.queryData( "catinput", device, "Name");
-        name.value.remove("\"");
-        articles.push_back(name);
-        existArticles.insert("Name");
-
         ArticleStruct vendor("Vendor");
         ArticleStruct type("Type");
 
+
+        name.queryData( "catinput", device, "Name");
+        existArticles.insert("Name");
+
+        name.value.remove("\"");
         QString lshwKeyboard = DeviceInfoParserInstance.getCorrespondLshwKeyboard(name.value);
+
+        if( lshwKeyboard.isEmpty() == false )
+        {
+            vendor.queryData( "lshw", lshwKeyboard, "vendor");
+
+            existArticles.insert("vendor");
+
+            if(name.value.count(vendor.value) > 1)
+            {
+                name.value = vendor.value + " " + name.value.remove(vendor.value).trimmed();
+            }
+        }
+
+        articles.push_back(name);
+        articles.push_back(vendor);
+
+        //QString lshwKeyboard = DeviceInfoParserInstance.getCorrespondLshwKeyboard(name.value);
         if( lshwKeyboard.isEmpty() == false )
         {
             existArticles.insert("product");
@@ -70,10 +87,6 @@ void KeyboardWidget::initWidget()
             description.queryData("lshw", lshwKeyboard, "description");
             articles.push_back(description);
             existArticles.insert("description");
-
-            vendor.queryData( "lshw", lshwKeyboard, "vendor");
-            articles.push_back(vendor);
-            existArticles.insert("vendor");
 
             ArticleStruct busInfo("Bus info");
             busInfo.queryData( "lshw", lshwKeyboard, "bus info");

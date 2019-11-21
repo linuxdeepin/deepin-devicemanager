@@ -121,7 +121,7 @@ void AudiodeviceWidget::initWidget()
         {
             QStringList tab =
             {
-                name.value,
+                name.value.remove(vendor.value),
                 vendor.value
             };
 
@@ -129,12 +129,17 @@ void AudiodeviceWidget::initWidget()
         }
 
 
-        if( overviewInfo_.value.isEmpty() == true )
+        if( overviewInfo_.value.isEmpty() == false )
         {
-            overviewInfo_.value = vendor.value;
-            overviewInfo_.value += " ";
-            overviewInfo_.value += name.value;
+            overviewInfo_.value += " / ";
         }
+
+        if(vendor.isValid() && name.value.contains(vendor.value, Qt::CaseInsensitive)==false)
+        {
+            overviewInfo_.value += vendor.value;
+            overviewInfo_.value += " ";
+        }
+        overviewInfo_.value += name.value;
     }
 
     foreach(const QString& device, inputdeviceList)

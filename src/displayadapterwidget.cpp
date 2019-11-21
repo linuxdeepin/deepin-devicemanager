@@ -65,7 +65,7 @@ void DisplayadapterWidget::initWidget()
         int index = name.value.indexOf('(');
         if(index > 0)
         {
-            name.value = name.value.mid(0, index);
+            name.value = name.value.mid(0, index).trimmed();
         }
         articles.push_back(name);
         existArticles.insert("product");
@@ -145,7 +145,7 @@ void DisplayadapterWidget::initWidget()
             overviewInfo_.value += " / ";
         }
 
-        overviewInfo_.value += name.value.remove(vendor.value);
+        overviewInfo_.value += name.value.remove(vendor.value).trimmed();
 
         overviewInfo_.value += " (";
         overviewInfo_.value += memory.value;

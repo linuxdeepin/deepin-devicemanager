@@ -43,7 +43,6 @@ void MemoryWidget::initTableWdiget()
 {
     QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
 
-
     QStringList headers = { "Name", "Vendor", "Type", "Speed",  "Size", /* "Statu"*/};
 
     QList<QStringList> tabList;
@@ -81,6 +80,12 @@ void MemoryWidget::initTableWdiget()
 void MemoryWidget::updateWholeDownWidget()
 {
     QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
+
+//    if( memList.size() < 1)
+//    {
+//        setCentralInfo("Get Memory Infomation failed!");
+//        return;
+//    }
 
     QList<ArticleStruct> articles;
 
@@ -141,7 +146,10 @@ void MemoryWidget::updateWholeDownWidget()
         articles.push_back(ug);
     }
 
-    //addInfo("Memory Info", articles, false);
+    if(memList.size() < 1)
+    {
+        addInfo("Memory Info", articles, false);
+    }
     summaryInfo_ = articles;
 
     articles.clear();

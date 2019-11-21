@@ -51,15 +51,31 @@ void MouseWidget::initWidget()
         existArticles.clear();
 
         ArticleStruct name("Name");
-        name.queryData( "catinput", device, "Name");
-        name.value.remove("\"");
-        articles.push_back(name);
-        existArticles.insert("Name");
-
         ArticleStruct vendor("Vendor");
         ArticleStruct type("Type");
 
+        name.queryData( "catinput", device, "Name");
+        name.value.remove("\"");
+        existArticles.insert("Name");
+
+
+
         QString lshwMouse = DeviceInfoParserInstance.getCorrespondLshwMouse(name.value);
+        if( lshwMouse.isEmpty() == false )
+        {
+            vendor.queryData( "lshw", lshwMouse, "vendor");
+
+            existArticles.insert("vendor");
+
+            if(name.value.count(vendor.value) > 1)
+            {
+                name.value = vendor.value + " " + name.value.remove(vendor.value).trimmed();
+            }
+        }
+
+        articles.push_back(name);
+        articles.push_back(vendor);
+
         if( lshwMouse.isEmpty() == false )
         {
             existArticles.insert("product");
@@ -68,10 +84,6 @@ void MouseWidget::initWidget()
             description.queryData("lshw", lshwMouse, "description");
             articles.push_back(description);
             existArticles.insert("description");
-
-            vendor.queryData( "lshw", lshwMouse, "vendor");
-            articles.push_back(vendor);
-            existArticles.insert("vendor");
 
             ArticleStruct busInfo("Bus info");
             busInfo.queryData( "lshw", lshwMouse, "bus info");

@@ -41,6 +41,7 @@
 #include <QSizePolicy>
 #include "cloumnwidget.h"
 #include <QSet>
+#include "logtreeview.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -98,22 +99,22 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
     vLayout_->setSpacing(0);
     vLayout_->setMargin(0);
 
-    setAutoFillBackground(false);
+    //setAutoFillBackground(false);
 
     setLayout(vLayout_);
 
     initContextMenu();
 
-    changeTheme();
+    //changeTheme();
 
-    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this,
-            [this](){
-                DeviceInfoWidgetBase::isPaletteInit_ = false;
-                //DeviceInfo::isPaletteInit_ = false;
+//    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this,
+//            [this](){
+//                DeviceInfoWidgetBase::isPaletteInit_ = false;
+//                //DeviceInfo::isPaletteInit_ = false;
 
-                DeviceInfoWidgetBase::changeTheme();
-            }
-        );
+//                //DeviceInfoWidgetBase::changeTheme();
+//            }
+//        );
 
     initFont();
 }
@@ -577,9 +578,10 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     {
         return;
     }
+
     if(tableWidget_ == nullptr)
     {
-        tableWidget_ = new TableWidgetAlwaysActive(this);
+        tableWidget_ = new LogTreeView(this);
 
         DFontSizeManager::instance()->bind( tableWidget_, DFontSizeManager::T8);
 
@@ -589,16 +591,15 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         //tableWidget_->setMinimumHeight(183);
         //tableWidget_->setMaximumHeight(500);
-        tableWidget_->setFixedHeight(TableViewRowHeight_*4 + tableWidget_->verticalHeader()->height()+3);
+        tableWidget_->setFixedHeight(TableViewRowHeight_*5 +3 /*+ tableWidget_->verticalHeader()->height()+3*/);
 
-        //tableWidget_->verticalHeader()->setDefaultSectionSize(TableViewRowHeight_);
-        //tableWidget_->verticalHeader()->setFixedHeight(TableViewRowHeight_);
+        tableWidget_->m_headerDelegate->setDefaultSectionSize(TableViewRowHeight_);
+        tableWidget_->m_headerDelegate->setFixedHeight(TableViewRowHeight_);
 
-        auto scrollBar = new DScrollBar(tableWidget_);
+        //auto scrollBar = new DScrollBar(tableWidget_);
 
-        tableWidget_->setVerticalScrollBar(scrollBar);
-        tableWidget_->setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
-        tableWidget_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+//        tableWidget_->setVerticalScrollBar(scrollBar);
+
         //tableWidget_->horizontalHeader()->setClickable(false);
         //tableWidget_->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
         //tableWidget_->setAutoFillBackground(true);
@@ -609,60 +610,60 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         //tableWidget_->setWindowFlags(/*Qt::Tool | Qt::FramelessWindowHint|*/Qt::WindowStaysOnTopHint);
         //tableWidget_->overrideWindowState(Qt::WindowState::WindowActive);
         //tableWidget_->setEnabled(true);
-        tableWidget_->horizontalHeader()->clearMask();
-        tableWidget_->horizontalHeader()->setFont(tableHeaderFont_);
-        DFontSizeManager::instance()->bind( tableWidget_->horizontalHeader(), DFontSizeManager::T6);
+        //tableWidget_->horizontalHeader()->clearMask();
+        //tableWidget_->horizontalHeader()->setFont(tableHeaderFont_);
+        DFontSizeManager::instance()->bind( tableWidget_->m_headerDelegate, DFontSizeManager::T6);
 
-        tableWidget_->setRowCount(contentsList.size());
-        tableWidget_->setColumnCount(headers.size());
+        //tableWidget_->setRowCount(contentsList.size());
+        //tableWidget_->setColumnCount(headers.size());
         QStringList translaterHeaders;
         foreach(auto header, headers)
         {
             translaterHeaders.push_back(DApplication::translate("Main", header.toStdString().data()));
         }
-        tableWidget_->setHorizontalHeaderLabels(translaterHeaders);
+        tableWidget_->m_pModel->setHorizontalHeaderLabels(translaterHeaders);
 
-        tableWidget_->horizontalHeader()->setObjectName("DeviceInfoHeaderView");
+        //tableWidget_->horizontalHeader()->setObjectName("DeviceInfoHeaderView");
 
         auto changeTheme = [this](){
             DPalette pa = this->palette();
 
-            //QBrush bash_brush( QColor(0,0,0,255) );
+//            //QBrush bash_brush( QColor(0,0,0,255) );
 
             pa.setColorGroup(QPalette::Inactive, pa.windowText(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
-            //pa.setColorGroup(QPalette::Active, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
+//            //pa.setColorGroup(QPalette::Active, pa.base(), pa.button(),pa.light(),pa.dark(),pa.mid(),pa.text(),pa.brightText(),pa.base(), pa.window());
 
-            QColor base_color = palette().base().color();
+//            QColor base_color = palette().base().color();
 
-            //pa.setColor(QPalette::Background, base_color);
-            //pa.setBrush(QPalette::Inactive, DPalette::Base, pa.brush(QPalette::Active, DPalette::Dark));
-            //pa.setBrush(QPalette::Inactive, DPalette::Base, bash_brush);
+//            //pa.setColor(QPalette::Background, base_color);
+//            //pa.setBrush(QPalette::Inactive, DPalette::Base, pa.brush(QPalette::Active, DPalette::Dark));
+//            //pa.setBrush(QPalette::Inactive, DPalette::Base, bash_brush);
 
-            DApplicationHelper::instance()->setPalette(tableWidget_, pa);
-            //DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
+//            DApplicationHelper::instance()->setPalette(tableWidget_, pa);
+//            //DApplicationHelper::instance()->setPalette(tableWidget_->horizontalHeader(), pa);
 
-            //pa.setBrush(QPalette::Highlight, bash_brush);
+//            //pa.setBrush(QPalette::Highlight, bash_brush);
 
-            //tableWidget_->setPalette(pa);
+            tableWidget_->setPalette(pa);
 
-            //tableWidget_->horizontalHeader()->setAutoFillBackground(true);
+//            //tableWidget_->horizontalHeader()->setAutoFillBackground(true);
 
-//            for(int itemIndex = 0; itemIndex < tableWidget_->horizontalHeader()->count(); ++itemIndex)
-//            {
-//                tableWidget_->horizontalHeaderItem(itemIndex)->setBackground(bash_brush);
-//                //tableWidget_->horizontalHeader()->model()->setData(itemIndex, 0, Qt::BackgroundRole);
-//            }
+////            for(int itemIndex = 0; itemIndex < tableWidget_->horizontalHeader()->count(); ++itemIndex)
+////            {
+////                tableWidget_->horizontalHeaderItem(itemIndex)->setBackground(bash_brush);
+////                //tableWidget_->horizontalHeader()->model()->setData(itemIndex, 0, Qt::BackgroundRole);
+////            }
 
-            //tableWidget_->horizontalHeader()->setStyleSheet( "QHeaderView#DeviceInfoHeaderView{ background-color: white; }");
+//            //tableWidget_->horizontalHeader()->setStyleSheet( "QHeaderView#DeviceInfoHeaderView{ background-color: white; }");
         };
 
         changeTheme();
 
-        connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, changeTheme);
+        //connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, changeTheme);
 
 
         //tableWidget_->horizontalHeader()->setContentsMargins(0,0,0,0);
-        tableWidget_->horizontalHeader()->setHighlightSections(false);
+        //tableWidget_->horizontalHeader()->setHighlightSections(false);
         //tableWidget_->horizontalHeader()->setFrameShape(QFrame::Shape::NoFrame);
         //tableWidget_->setAttribute(Qt::WA_TranslucentBackground);
 //        tableWidget_->horizontalHeader()->setAttribute(Qt::WA_TranslucentBackground);
@@ -675,25 +676,25 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
 
         //tableWidget_->horizontalHeader()->setFrameShadow(QFrame::Shadow::Plain);
-        tableWidget_->horizontalHeader()->setAutoFillBackground(false);
+        //tableWidget_->horizontalHeader()->setAutoFillBackground(false);
 
-        tableWidget_->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
-        tableWidget_->setSelectionMode(QAbstractItemView::SingleSelection);
+//        tableWidget_->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
+//        tableWidget_->setSelectionMode(QAbstractItemView::SingleSelection);
 
-        tableWidget_->verticalHeader()->setVisible(false);
+        //tableWidget_->verticalHeader()->setVisible(false);
         //tableWidget_->setGridStyle( Qt::PenStyle::NoPen);
-        tableWidget_->setShowGrid(false);
+        //tableWidget_->setShowGrid(false);
 
-        tableWidget_->setAlternatingRowColors(true);
-        tableWidget_->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        //tableWidget_->setAlternatingRowColors(true);
+//        tableWidget_->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-        tableWidget_->setFrameShape(QFrame::Shape::NoFrame);
+//        tableWidget_->setFrameShape(QFrame::Shape::NoFrame);
 
-        connect(tableWidget_, &DTableWidget::itemSelectionChanged, this, &DeviceInfoWidgetBase::OnCurrentItemClicked);
+        connect(tableWidget_, &DTreeView::clicked, this, &DeviceInfoWidgetBase::OnCurrentItemClicked);
     }
 
     //tableWidget_->horizontalHeader()->setSectionResizeMode(headers.size() - 2, QHeaderView::Stretch);
-    tableWidget_->horizontalHeader()->setDefaultAlignment(Qt::AlignmentFlag::AlignLeft);
+    //tableWidget_->horizontalHeader()->setDefaultAlignment(Qt::AlignmentFlag::AlignLeft);
 //    tableWidget_->setColumnWidth(0, 100);
 //    tableWidget_->setColumnWidth(1, 220);
 //    tableWidget_->setColumnWidth(2, 140);
@@ -717,20 +718,29 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
     for(int i = 0; i < contentsList.size(); ++i)
     {
-        tableWidget_->setRowHeight(i, TableViewRowHeight_);
+        //tableWidget_->setRowHeight(i, TableViewRowHeight_);
         const QStringList& contents = contentsList[i];
         for(int j = 0; j < contents.size(); ++j )
         {
-            QTableWidgetItem* item = new QTableWidgetItem(contents[j]);
+            DStandardItem* item = new DStandardItem(contents[j]);
             if(j == 0)
             {
-                item->setData(Qt::UserRole + 90, i);
+                item->setData( i, Qt::UserRole + 90 );
             }
+
+//            const QMargins ListViweItemMargin(10, 8, 0, 8);
+//            //const QMargins ListViweItemMargin( 10, 5, 10, 5 );
+//            const QVariant VListViewItemMargin = QVariant::fromValue(ListViweItemMargin);
+
+//            item->setData(VListViewItemMargin, Dtk::MarginsRole);
+
             //int flags = item->flags();
             //item->setFlags(flags | Qt::ItemFlag::ItemIsEditable);
             //item->setFont(tableContentFont_);
             //DFontSizeManager::instance()->bind( item, DFontSizeManager::T6);
-            tableWidget_->setItem(i, j, item);
+            //tableWidget_->setItem(i, j, item);
+
+            tableWidget_->m_pModel->setItem(i, j, item);
         }
     }
 
@@ -738,10 +748,11 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
     //tableWidget_->clearSpans();
 
-    //tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
-    //tableWidget_->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    tableWidget_->horizontalHeader()->setStretchLastSection(true);
-    tableWidget_->resizeColumnsToContents();
+    //tableWidget_->m_headerDelegate->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
+    //tableWidget_->m_headerDelegate->setSectionResizeMode(QHeaderView::Stretch);
+    tableWidget_->m_headerDelegate->setStretchLastSection(true);
+    tableWidget_->m_headerDelegate->resizeSections(QHeaderView::ResizeMode::ResizeToContents);
+    //tableWidget_->resizeColumnsToContents();
     //tableWidget_->resizeRowsToContents();
 
     //tableWidget_->setContentsMargins(50, 0, 10, 0);
@@ -979,18 +990,19 @@ void DeviceInfoWidgetBase::resizeEvent(QResizeEvent *event)
     DWidget::resizeEvent(event);
 }
 
-void DeviceInfoWidgetBase::OnCurrentItemClicked(/*QTableWidgetItem *item*/)
+void DeviceInfoWidgetBase::OnCurrentItemClicked(const QModelIndex &index)
 {
-    if( tableWidget_->selectedItems().size() < 1)
+    if(downWidgetScrollArea_ == nullptr)
     {
         return;
     }
 
-    QTableWidgetItem *item = tableWidget_->selectedItems().at(0);
+    QStandardItem* item = tableWidget_->m_pModel->item( index.row() );
     if(item == nullptr)
     {
         return;
     }
+
 
     int height = 0;
     if(infoWidget_)
@@ -1272,7 +1284,7 @@ bool DeviceInfoWidgetBase::exportToDoc(Docx::Document& doc)
 
     if(tableWidget_)
     {
-        writeTabwidgetToDoc(tableWidget_, doc);
+        //writeTabwidgetToDoc(tableWidget_, doc);
         doc.addParagraph("\n");
     }
 
@@ -1377,7 +1389,7 @@ bool DeviceInfoWidgetBase::exportToXls(QXlsx::Document& xlsFile)
 
     if(tableWidget_)
     {
-        writeTabwidgetToXls(tableWidget_, xlsFile);
+        //writeTabwidgetToXls(tableWidget_, xlsFile);
     }
 
     if(titleInfo_)
@@ -1482,7 +1494,7 @@ bool DeviceInfoWidgetBase::exportToHtml(QFile& htmlFile)
 
     if(tableWidget_)
     {
-        writeTabwidgetToHtml(tableWidget_, htmlFile);
+        //writeTabwidgetToHtml(tableWidget_, htmlFile);
         htmlFile.write("<br />\n");
     }
 

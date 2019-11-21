@@ -1640,7 +1640,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source></source>
+            <source>Get Memory Infomation failed!</source>
             <translation type="unfinished"/>
         </message>
         <message>

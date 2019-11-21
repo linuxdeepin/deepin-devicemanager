@@ -1636,8 +1636,8 @@
             <translation>台蓝牙设备已连接</translation>
         </message>
         <message>
-            <source></source>
-            <translation></translation>
+            <source>Get Memory Infomation failed!</source>
+            <translation>获取内存信息失败!</translation>
         </message>
         <message>
             <source></source>

@@ -31,6 +31,7 @@
 #include "document.h"
 #include "DPalette"
 #include "DFrame"
+#include "commondefine.h"
 
 class QLabel;
 class QVBoxLayout;
@@ -38,6 +39,8 @@ class TableWidgetAlwaysFocus;
 class QGridLayout;
 class QAction;
 class ColumnWidget;
+class LogTreeView;
+class QStandardItem;
 
 struct TableHeader
 {
@@ -83,7 +86,7 @@ public:
 
     //void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
     // cloumnwidget version
-    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin = 20-8);
+    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin = DeviceWidgetContentMarginLeft_-8);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
 
@@ -107,7 +110,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
 public slots:
-    void OnCurrentItemClicked(/*QTableWidgetItem *item*/);
+    void OnCurrentItemClicked(const QModelIndex &index);
     void onScroll(int value);
     bool onExportToFile();
     void changeTheme();
@@ -125,7 +128,8 @@ public:
     virtual bool exportToHtml(const QString& htmlFile);
 
 protected:
-    Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
+    //Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
+    LogTreeView* tableWidget_ = nullptr;
     DeviceInfo* titleInfo_ = nullptr;
     QList<DeviceInfo> deviceInfos_;
 

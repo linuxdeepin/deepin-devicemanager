@@ -33,7 +33,7 @@ const int NameLength_ = 120;
 
 const int DeviceWidgetMargin_ = 10;
 
-const int DeviceWidgetContentMarginLeft_ = 20;
+const int DeviceWidgetContentMarginLeft_ = 18;
 const int DeviceWidgetContentMarginTop_ = 10;
 const int DeviceWidgetContentMarginRight_ = 0;
 const int DeviceWidgetContentMarginBottom_ = 20;

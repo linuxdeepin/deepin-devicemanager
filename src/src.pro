@@ -59,6 +59,9 @@ CONFIG(debug, debug|release) {
 SOURCES += \
     cdromwidget.cpp \
     cloumnwidget.cpp \
+    logtreeview.cpp \
+    logviewheaderview.cpp \
+    logviewitemdelegate.cpp \
     main.cpp \
     mainwindow.cpp \
     deviceinfoparser.cpp \
@@ -91,6 +94,9 @@ HEADERS += \
     cdromwidget.h \
     cloumnwidget.h \
     commondefine.h \
+    logtreeview.h \
+    logviewheaderview.h \
+    logviewitemdelegate.h \
     mainwindow.h \
     otherdevicewidget.h \
     version.h \

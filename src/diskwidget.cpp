@@ -130,6 +130,16 @@ void DiskWidget::initWidget()
             QString version;
             QString speed;
 
+            ArticleStruct mf("Model Family");
+            mf.queryData("smartctl", logicalName, "Model Family");
+            articles.push_back(mf);
+            existArticles.insert("Model Family");
+
+            ArticleStruct dm("Device Model");
+            dm.queryData("smartctl", logicalName, "Device Model");
+            articles.push_back(dm);
+            existArticles.insert("Device Model");
+
             int index = sataVersion.indexOf(",");
             if(index>0)
             {

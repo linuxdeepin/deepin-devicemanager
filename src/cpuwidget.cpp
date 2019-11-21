@@ -136,10 +136,16 @@ void CpuWidget::initWidget()
 
         foreach(const QString& cpu, cpuList)
         {
+            QString md = DeviceInfoParserInstance.queryData("catcpu", cpu, "model name");
+            QString mc = DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id");
+            if(mc == DApplication::translate("Main", "Unknown"))
+            {
+                mc = md.split(" ").first();
+            }
             QStringList tab = {
-                DeviceInfoParserInstance.queryData("catcpu", cpu, "model name"),
+                md,
                 //DApplication::translate("Main", "Core") +" " + cpu,
-                DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id"),
+                mc,
                 speed_,
                 architecture
             };
