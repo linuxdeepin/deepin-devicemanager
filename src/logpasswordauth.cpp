@@ -52,7 +52,7 @@ LogPasswordAuth::~LogPasswordAuth()
 
 void LogPasswordAuth::initUI()
 {
-    setAutoFillBackground(true);
+    //setAutoFillBackground(true);
     // TopLayout
     topLayout = new QHBoxLayout;
     topLayout->setContentsMargins(DIALOG::ICON_LAYOUT_LEFT_MARGIN,

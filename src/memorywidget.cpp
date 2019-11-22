@@ -35,11 +35,11 @@ MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DAppl
 
 void MemoryWidget::initWidget()
 {
-    initTableWdiget();
-    updateWholeDownWidget();
+    init_l_Designer_l_TableWdiget();
+    update_l_Designer_l_WholeDownWidget();
 }
 
-void MemoryWidget::initTableWdiget()
+void MemoryWidget::init_l_Designer_l_TableWdiget()
 {
     QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
 
@@ -54,8 +54,9 @@ void MemoryWidget::initTableWdiget()
             canUpgrade_ = 0;
         }
 
+        QString speed = DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed");
         QString size = DeviceInfoParserInstance.queryData("dmidecode", mem, "Size");
-        if( size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
+        if( isSlotValid(size, speed) == false )
         {
             canUpgrade_ = 1;
             continue;
@@ -65,8 +66,8 @@ void MemoryWidget::initTableWdiget()
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Part Number"),
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Manufacturer"),
             DeviceInfoParserInstance.queryData("dmidecode", mem, "Type"),
-            DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed"),
-            DeviceInfoParserInstance.queryData("dmidecode", mem, "Size"),
+            speed,
+            size,
 
             //DApplication::translate("Main", "Good")
         };
@@ -77,10 +78,11 @@ void MemoryWidget::initTableWdiget()
     addTable(headers, tabList);
 }
 
-void MemoryWidget::updateWholeDownWidget()
+void MemoryWidget::update_l_Designer_l_WholeDownWidget()
 {
     QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
 
+    int validMemoryNumber = 0;
 //    if( memList.size() < 1)
 //    {
 //        setCentralInfo("Get Memory Infomation failed!");
@@ -146,10 +148,6 @@ void MemoryWidget::updateWholeDownWidget()
         articles.push_back(ug);
     }
 
-    if(memList.size() < 1)
-    {
-        addInfo("Memory Info", articles, false);
-    }
     summaryInfo_ = articles;
 
     articles.clear();
@@ -237,11 +235,12 @@ void MemoryWidget::updateWholeDownWidget()
 
         QString deviceName = vendor.value + " " + model.value;
 
-        if(size.value == DApplication::translate("Main", "Unknown") || size.value == "No Module Installed" )
+        if( false == isSlotValid(size.value, speed.value) )
         {
             continue;
         }
 
+        ++validMemoryNumber;
 
         addSubInfo( deviceName, articles );
 
@@ -255,6 +254,11 @@ void MemoryWidget::updateWholeDownWidget()
         }
     }
 
+    if(validMemoryNumber < 1)
+    {
+        addInfo("Memory Info", articles, false);
+    }
+
     overviewInfo_.value = size.value;
     if( detailMem.size() > 0 )
     {
@@ -264,248 +268,262 @@ void MemoryWidget::updateWholeDownWidget()
     }
 }
 
-
-//void MemoryWidget::initTableWdiget()
-//{
-//    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
-
-
-//    QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size", /* "Statu"*/};
-
-//    QList<QStringList> tabList;
-
-//    foreach(const QString& mem, memList)
-//    {
-//        if(canUpgrade_ == -1)
-//        {
-//            canUpgrade_ = 0;
-//        }
-
-//        QString size = DeviceInfoParserInstance.queryData("dmidecode", mem, "Size");
-//        if( size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
-//        {
-//            canUpgrade_ = 1;
-//            QStringList tab = {
-//                DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
-//                "--",
-//                "--",
-//                "--",
-//                //DApplication::translate("Main", "Bad")
-//            };
-
-//            tabList.push_back(tab);
-//            continue;
-//        }
-
-//        QStringList tab = {
-//            DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
-//            DeviceInfoParserInstance.queryData("dmidecode", mem, "Manufacturer"),
-//            DeviceInfoParserInstance.queryData("dmidecode", mem, "Type") + " " +
-//            DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed"),
-//            DeviceInfoParserInstance.queryData("dmidecode", mem, "Size"),
-
-//            //DApplication::translate("Main", "Good")
-//        };
-
-//        tabList.push_back(tab);
-//    }
-
-//    addTable(headers, tabList);
-//}
-
-//void MemoryWidget::updateWholeDownWidget()
-//{
-//    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
-
-//    QList<ArticleStruct> articles;
-
-//    ArticleStruct slotCount("Slot Count");
-//    slotCount.queryData("dmidecode", "Physical Memory Array", "Number Of Devices");
-//    articles.push_back(slotCount);
-
-//    ArticleStruct size("Size");
-//    size.queryData("lshw", "Computer_core_memory", "size");
-
-//    if(size.isValid() == false)
-//    {
-//        int total = 0;
-//        QString unitStr;
-
-//        foreach(const QString& mem, memList)
-//        {
-//            ArticleStruct strMem("Size");
-//            strMem.queryData("dmidecode", mem, "Size");
-//            if(strMem.isValid() && strMem.value.contains(" "))
-//            {
-//                QStringList lst = strMem.value.split(" ");
-//                int memInstelled = lst.first().toInt();
-//                if(memInstelled > 0)
-//                {
-//                    total += memInstelled;
-//                    unitStr = lst.last();
-//                }
-//            }
-//        }
-
-//        size.value = QString::number(total) + " " + unitStr;
-//    }
-
-//    size.value.replace( "GiB", " GB" );
-//    size.value.replace( "MiB", " MB" );
-//    articles.push_back(size);
-
-//    ArticleStruct mc("Maximum Capacity");
-//    mc.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity");
-//    articles.push_back(mc);
-
-//    if( mc.isValid() && size.isValid())
-//    {
-//        if( (mc.value.contains("Mb") && size.value.contains("Mb")) || (mc.value.contains("GB") && size.value.contains("GB")) )
-//        {
-//            if(mc.value.left(mc.value.size() - 2 ).toInt() > size.value.left(mc.value.size() -2 ).toInt())
-//            {
-//                canUpgrade_ = true;
-//            }
-//        }
-//    }
-
-//    if(canUpgrade_ != -1)
-//    {
-//        ArticleStruct ug("Upgradeable");
-//        ug.value = canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No");
-//        articles.push_back(ug);
-//    }
-
-//    addInfo("Memory Info", articles, false);
-
-//    articles.clear();
-//    QSet<QString> existArticles;
+void MemoryWidget::initTableWdiget_Good()
+{
+    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
 
 
-//    QStringList detailMem;
-//    foreach(const QString& mem, memList)
-//    {
-//        articles.clear();
-//        existArticles.clear();
+    QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size", /* "Statu"*/};
 
-//        ArticleStruct locator("Locator");
-//        locator.queryData("dmidecode", mem, "Locator");
-//        articles.push_back(locator);
-//        existArticles.insert("Locator");
+    QList<QStringList> tabList;
 
-//        ArticleStruct vendor("Vendor");
-//        vendor.queryData("dmidecode", mem, "Manufacturer");
-//        articles.push_back(vendor);
-//        existArticles.insert("Manufacturer");
+    foreach(const QString& mem, memList)
+    {
+        if(canUpgrade_ == -1)
+        {
+            canUpgrade_ = 0;
+        }
 
-//        ArticleStruct size("Size");
-//        size.queryData("dmidecode", mem, "Size");
-//        articles.push_back(size);
-//        existArticles.insert("Size");
+        QString size = DeviceInfoParserInstance.queryData("dmidecode", mem, "Size");
+        if( size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
+        {
+            canUpgrade_ = 1;
+            QStringList tab = {
+                DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
+                "--",
+                "--",
+                "--",
+                //DApplication::translate("Main", "Bad")
+            };
 
-//        ArticleStruct type("Type");
-//        type.queryData("dmidecode", mem, "Type");
-//        articles.push_back(type);
-//        existArticles.insert("Type");
+            tabList.push_back(tab);
+            continue;
+        }
 
-//        ArticleStruct speed("Speed");
-//        speed.queryData("dmidecode", mem, "Speed");
-//        articles.push_back(speed);
-//        existArticles.insert("Speed");
+        QStringList tab = {
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Locator"),
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Manufacturer"),
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Type") + " " +
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Speed"),
+            DeviceInfoParserInstance.queryData("dmidecode", mem, "Size"),
 
-//        ArticleStruct serial("Serial Number");
-//        serial.queryData("dmidecode", mem, "Serial Number");
-//        articles.push_back(serial);
-//        existArticles.insert("Serial Number");
+            //DApplication::translate("Main", "Good")
+        };
 
-//        ArticleStruct model("Model");
-//        model.queryData("dmidecode", mem, "Part Number");
-//        articles.push_back(model);
-//        existArticles.insert("Part Number");
+        tabList.push_back(tab);
+    }
 
-//        ArticleStruct formFactor("Form Factor");
-//        formFactor.queryData("dmidecode", mem, "Form Factor");
-//        articles.push_back(formFactor);
-//        existArticles.insert("Form Factor");
+    addTable(headers, tabList);
+}
 
-//        ArticleStruct rank("Rank");
-//        rank.queryData("dmidecode", mem, "Rank");
-//        articles.push_back(rank);
-//        existArticles.insert("Rank");
+void MemoryWidget::updateWholeDownWidget_Good()
+{
+    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
 
-//        ArticleStruct bankLocator("Bank Locator");
-//        bankLocator.queryData("dmidecode", mem, "Bank Locator");
-//        articles.push_back(bankLocator);
-//        existArticles.insert("Bank Locator");
+    QList<ArticleStruct> articles;
 
-//        ArticleStruct configVoltage("Configured Voltage");
-//        configVoltage.queryData("dmidecode", mem, "Configured Voltage");
-//        articles.push_back(configVoltage);
-//        existArticles.insert("Configured Voltage");
+    ArticleStruct slotCount("Slot Count");
+    slotCount.queryData("dmidecode", "Physical Memory Array", "Number Of Devices");
+    articles.push_back(slotCount);
 
-//        ArticleStruct minVoltage("Minimum Voltage");
-//        minVoltage.queryData("dmidecode", mem, "Minimum Voltage");
-//        articles.push_back(minVoltage);
-//        existArticles.insert("Minimum Voltage");
+    ArticleStruct size("Size");
+    size.queryData("lshw", "Computer_core_memory", "size");
 
-//        ArticleStruct maxVoltage("Maximum Voltage");
-//        maxVoltage.queryData("dmidecode", mem, "Maximum Voltage");
-//        articles.push_back(maxVoltage);
-//        existArticles.insert("Maximum Voltage");
+    if(size.isValid() == false)
+    {
+        int total = 0;
+        QString unitStr;
 
-//        ArticleStruct configSpeed("Configured Speed");
-//        configSpeed.queryData("dmidecode", mem, "Configured Memory Speed");
-//        articles.push_back(configSpeed);
-//        existArticles.insert("Configured Memory Speed");
+        foreach(const QString& mem, memList)
+        {
+            ArticleStruct strMem("Size");
+            strMem.queryData("dmidecode", mem, "Size");
+            if(strMem.isValid() && strMem.value.contains(" "))
+            {
+                QStringList lst = strMem.value.split(" ");
+                int memInstelled = lst.first().toInt();
+                if(memInstelled > 0)
+                {
+                    total += memInstelled;
+                    unitStr = lst.last();
+                }
+            }
+        }
 
-//        DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
+        size.value = QString::number(total) + " " + unitStr;
+    }
 
-//        QString deviceName;
-//        if(locator.isValid())
-//        {
-//            deviceName = locator.value;
-//        }
-//        else if(bankLocator.isValid())
-//        {
-//            deviceName = bankLocator.value;
-//        }
-//        else if(rank.isValid())
-//        {
-//            deviceName = rank.value;
-//        }
+    size.value.replace( "GiB", " GB" );
+    size.value.replace( "MiB", " MB" );
+    articles.push_back(size);
 
-//        if(size.value == DApplication::translate("Main", "Unknown") || size.value == "No Module Installed" )
-//        {
-//            articles.clear();
+    ArticleStruct mc("Maximum Capacity");
+    mc.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity");
+    articles.push_back(mc);
 
-//            ArticleStruct status("Status");
-//            status.value = DApplication::translate("Main", "Bad");
-//            articles.push_back(status);
+    if( mc.isValid() && size.isValid())
+    {
+        if( (mc.value.contains("Mb") && size.value.contains("Mb")) || (mc.value.contains("GB") && size.value.contains("GB")) )
+        {
+            if(mc.value.left(mc.value.size() - 2 ).toInt() > size.value.left(mc.value.size() -2 ).toInt())
+            {
+                canUpgrade_ = true;
+            }
+        }
+    }
 
-//            addSubInfo( deviceName, articles );
-//            continue;
-//        }
+    if(canUpgrade_ != -1)
+    {
+        ArticleStruct ug("Upgradeable");
+        ug.value = canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No");
+        articles.push_back(ug);
+    }
+
+    addInfo("Memory Info", articles, false);
+
+    articles.clear();
+    QSet<QString> existArticles;
 
 
-//        addSubInfo( deviceName, articles );
+    QStringList detailMem;
+    foreach(const QString& mem, memList)
+    {
+        articles.clear();
+        existArticles.clear();
 
-//        QString overviewVendor = vendor.value;
-//        overviewVendor += " ";
-//        overviewVendor += type.value;
-//        overviewVendor += " ";
-//        overviewVendor += speed.value;
+        ArticleStruct locator("Locator");
+        locator.queryData("dmidecode", mem, "Locator");
+        articles.push_back(locator);
+        existArticles.insert("Locator");
 
-//        if( false == detailMem .contains(overviewVendor) )
-//        {
-//            detailMem.push_back(overviewVendor);
-//        }
-//    }
+        ArticleStruct vendor("Vendor");
+        vendor.queryData("dmidecode", mem, "Manufacturer");
+        articles.push_back(vendor);
+        existArticles.insert("Manufacturer");
 
-//    overviewInfo_.value = size.value;
-//    if( detailMem.size() > 0 )
-//    {
-//        overviewInfo_.value += " (";
-//        overviewInfo_.value += detailMem.join("/");
-//        overviewInfo_.value += ")";
-//    }
-//}
+        ArticleStruct size("Size");
+        size.queryData("dmidecode", mem, "Size");
+        articles.push_back(size);
+        existArticles.insert("Size");
+
+        ArticleStruct type("Type");
+        type.queryData("dmidecode", mem, "Type");
+        articles.push_back(type);
+        existArticles.insert("Type");
+
+        ArticleStruct speed("Speed");
+        speed.queryData("dmidecode", mem, "Speed");
+        articles.push_back(speed);
+        existArticles.insert("Speed");
+
+        ArticleStruct serial("Serial Number");
+        serial.queryData("dmidecode", mem, "Serial Number");
+        articles.push_back(serial);
+        existArticles.insert("Serial Number");
+
+        ArticleStruct model("Model");
+        model.queryData("dmidecode", mem, "Part Number");
+        articles.push_back(model);
+        existArticles.insert("Part Number");
+
+        ArticleStruct formFactor("Form Factor");
+        formFactor.queryData("dmidecode", mem, "Form Factor");
+        articles.push_back(formFactor);
+        existArticles.insert("Form Factor");
+
+        ArticleStruct rank("Rank");
+        rank.queryData("dmidecode", mem, "Rank");
+        articles.push_back(rank);
+        existArticles.insert("Rank");
+
+        ArticleStruct bankLocator("Bank Locator");
+        bankLocator.queryData("dmidecode", mem, "Bank Locator");
+        articles.push_back(bankLocator);
+        existArticles.insert("Bank Locator");
+
+        ArticleStruct configVoltage("Configured Voltage");
+        configVoltage.queryData("dmidecode", mem, "Configured Voltage");
+        articles.push_back(configVoltage);
+        existArticles.insert("Configured Voltage");
+
+        ArticleStruct minVoltage("Minimum Voltage");
+        minVoltage.queryData("dmidecode", mem, "Minimum Voltage");
+        articles.push_back(minVoltage);
+        existArticles.insert("Minimum Voltage");
+
+        ArticleStruct maxVoltage("Maximum Voltage");
+        maxVoltage.queryData("dmidecode", mem, "Maximum Voltage");
+        articles.push_back(maxVoltage);
+        existArticles.insert("Maximum Voltage");
+
+        ArticleStruct configSpeed("Configured Speed");
+        configSpeed.queryData("dmidecode", mem, "Configured Memory Speed");
+        articles.push_back(configSpeed);
+        existArticles.insert("Configured Memory Speed");
+
+        DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
+
+        QString deviceName;
+        if(locator.isValid())
+        {
+            deviceName = locator.value;
+        }
+        else if(bankLocator.isValid())
+        {
+            deviceName = bankLocator.value;
+        }
+        else if(rank.isValid())
+        {
+            deviceName = rank.value;
+        }
+
+        if(size.value == DApplication::translate("Main", "Unknown") || size.value == "No Module Installed" )
+        {
+            articles.clear();
+
+            ArticleStruct status("Status");
+            status.value = DApplication::translate("Main", "Bad");
+            articles.push_back(status);
+
+            addSubInfo( deviceName, articles );
+            continue;
+        }
+
+
+        addSubInfo( deviceName, articles );
+
+        QString overviewVendor = vendor.value;
+        overviewVendor += " ";
+        overviewVendor += type.value;
+        overviewVendor += " ";
+        overviewVendor += speed.value;
+
+        if( false == detailMem .contains(overviewVendor) )
+        {
+            detailMem.push_back(overviewVendor);
+        }
+    }
+
+    overviewInfo_.value = size.value;
+    if( detailMem.size() > 0 )
+    {
+        overviewInfo_.value += " (";
+        overviewInfo_.value += detailMem.join("/");
+        overviewInfo_.value += ")";
+    }
+}
+
+bool MemoryWidget::isSlotValid(const QString& size, const QString& speed )
+{
+    if( speed.contains("MT/s") )
+    {
+        return true;
+    }
+
+    if(size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
+    {
+        return false;
+    }
+
+    return true;
+}

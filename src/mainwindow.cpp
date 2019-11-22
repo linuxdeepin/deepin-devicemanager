@@ -56,6 +56,12 @@
 #include "cdromwidget.h"
 #include <thread>
 #include "commondefine.h"
+#include "QStatusBar"
+#include "utils.h"
+#include <QProcess>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 DWIDGET_USE_NAMESPACE
 
@@ -80,6 +86,9 @@ MainWindow::MainWindow(QWidget *parent) :
     refreshDatabase();
 
     setAttribute(Qt::WA_AcceptDrops, false);
+
+    statusBar()->setSizeGripEnabled(true);
+    statusBar()->hide();
 }
 
 MainWindow::~MainWindow()
@@ -327,8 +336,8 @@ void MainWindow::refresh()
         return;
     }
 
-    leftDeviceView_->setEnabled(false);
-    //leftDeviceView_->setEnabled(false);
+    leftDeviceView_->setAllItemsEnable(false);
+
     refreshing_ = true;
 
     initLoadingWidget();
@@ -372,8 +381,27 @@ void MainWindow::refreshDatabase()
 }
 
 
-bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
+bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
 {
+    QString selectFilter;
+
+    QString saveDir = "./";
+    QDir dir( QDir::homePath() + "/Documents/");
+    if(dir.exists())
+    {
+         saveDir = QDir::homePath() + "/Documents/";
+    }
+
+    QString file = DFileDialog::getSaveFileName(this,
+                                                      DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
+                                                      QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
+                                                      tr("Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)"), &selectFilter);
+
+    if(file.isEmpty() == true)
+    {
+        return true;
+    }
+
     if(selectFilter == "Text (*.txt)")
     {
         QFile textFile( file );
@@ -457,6 +485,91 @@ bool MainWindow::exportTo(const QString& file, const QString& selectFilter)
     return false;
 }
 
+void MainWindow::showDisplayShortcutsHelpDialog()
+{
+    QRect rect = window()->geometry();
+    QPoint pos(rect.x() + rect.width() / 2,
+               rect.y() + rect.height() / 2);
+
+    QJsonObject shortcutObj;
+    QJsonArray jsonGroups;
+
+    QJsonObject windowJsonGroup;
+    windowJsonGroup.insert("groupName", DApplication::translate("Main","System"));
+    QJsonArray windowJsonItems;
+
+    QJsonObject shortcutItem;
+    shortcutItem.insert("name", DApplication::translate("Main","Show Shortcut Keyboard"));
+    shortcutItem.insert("value", "Ctrl+Shift+/");
+    windowJsonItems.append(shortcutItem);
+
+    QJsonObject jsonItem;
+    jsonItem.insert("name", DApplication::translate("Main","Window Maximize/Minimize"));
+    jsonItem.insert("value", "Ctrl+Alt+F");
+    windowJsonItems.append(jsonItem);
+
+    QJsonObject closeItem;
+    closeItem.insert("name", DApplication::translate("Main","Close"));
+    closeItem.insert("value", "Alt+F4");
+    windowJsonItems.append(closeItem);
+
+    QJsonObject helpItem;
+    helpItem.insert("name", DApplication::translate("Main","Help"));
+    helpItem.insert("value", "F1");
+    windowJsonItems.append(helpItem);
+
+    QJsonObject copyItem;
+    copyItem.insert("name", DApplication::translate("Main","Copy"));
+    copyItem.insert("value", "Ctrl+C");
+    windowJsonItems.append(copyItem);
+
+    windowJsonGroup.insert("groupItems", windowJsonItems);
+    jsonGroups.append(windowJsonGroup);
+
+    QStringList editorKeymaps;
+
+    QJsonObject editorJsonGroup;
+    editorJsonGroup.insert("groupName", DApplication::translate("Main","DeviceManager"));
+    QJsonArray editorJsonItems;
+
+//    QJsonObject refreshItem;
+//    refreshItem.insert("name", DApplication::translate("Main","Refresh"));
+//    refreshItem.insert("value", "F5");
+//    editorJsonItems.append(refreshItem);
+
+    QJsonObject exportItem;
+    exportItem.insert("name", DApplication::translate("Main","Export"));
+    exportItem.insert("value", "Ctrl+E");
+    editorJsonItems.append(exportItem);
+
+    editorJsonGroup.insert("groupItems", editorJsonItems);
+    jsonGroups.append(editorJsonGroup);
+
+    shortcutObj.insert("shortcut", jsonGroups);
+
+    QJsonDocument doc(shortcutObj);
+
+    QProcess* shortcutViewProcess = new QProcess();
+    QStringList shortcutString;
+    QString param1 = "-j=" + QString(doc.toJson().data());
+    QString param2 = "-p=" + QString::number(pos.x()) + "," + QString::number(pos.y());
+    shortcutString << param1 << param2;
+
+    shortcutViewProcess->startDetached("deepin-shortcut-viewer", shortcutString);
+
+    connect(shortcutViewProcess, SIGNAL(finished(int)), shortcutViewProcess, SLOT(deleteLater()));
+}
+
+void MainWindow::windowMaximizing()
+{
+    if (isMaximized()) {
+        showNormal();
+    }  else {
+        //setWindowState(Qt::WindowMaximized);
+        showMaximized();
+    }
+}
+
 void MainWindow::currentDeviceChanged(const QString& device)
 {
     if( false == deviceInfoWidgetMap_.contains(device) )
@@ -483,7 +596,7 @@ void MainWindow::showSplashMessage(const QString& message)
         }
 
         refreshing_ = false;
-        leftDeviceView_->setEnabled(true);
+        leftDeviceView_->setAllItemsEnable(true);
         return;
     }
 
@@ -493,4 +606,45 @@ void MainWindow::showSplashMessage(const QString& message)
     }
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *e)
+{
+    if(  e->key()==Qt::Key_E )
+    {
+        Qt::KeyboardModifiers modifiers = e->modifiers();
+        if (modifiers != Qt::NoModifier)
+        {
+            if (modifiers.testFlag(Qt::ControlModifier))
+            {
+                exportTo();
+                return;
+            }
+        }
+    }
+    else if(e->key()==Qt::Key_Question)
+    {
+        Qt::KeyboardModifiers modifiers = e->modifiers();
+        if (modifiers != Qt::NoModifier)
+        {
+            if (modifiers.testFlag(Qt::ControlModifier))
+            {
+                showDisplayShortcutsHelpDialog();
+                return;
+            }
+        }
+    }
+    else if(e->key()==Qt::Key_F)
+    {
+        Qt::KeyboardModifiers modifiers = e->modifiers();
+        if (modifiers != Qt::NoModifier)
+        {
+            if ( modifiers.testFlag(Qt::ControlModifier) && modifiers.testFlag(Qt::AltModifier) )
+            {
+                windowMaximizing();
+                return;
+            }
+        }
+    }
+
+    return DMainWindow::keyPressEvent(e);
+}
 

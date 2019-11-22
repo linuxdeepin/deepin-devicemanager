@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/Sony_SVD13215PXB";
+const QString DEVICEINFO_PATH = "../../computers/TYAN_Computer_S7002";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -279,6 +279,22 @@ QStringList DeviceInfoParser::getCatcpuCpuList()
 QStringList DeviceInfoParser::getlscpuCpuList()
 {
     return getMatchToolDeviceList("lscpu");
+}
+
+QStringList DeviceInfoParser::getDimdecodePhysicMemory()
+{
+    checkValueFun_t func = [](const QString& fk)->bool
+    {
+        if(fk == "Physical Memory Array" || fk.startsWith("Physical Memory Array_"))
+        {
+            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            return true;
+        }
+
+        return false;
+    };
+
+    return getMatchToolDeviceList("dmidecode", &func );
 }
 
 QStringList DeviceInfoParser::getDimdecodeMemoryList()

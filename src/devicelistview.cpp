@@ -143,6 +143,7 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
         setPalette(pa);
 
         DApplicationHelper::instance()->setPalette(this, pa);
+        //DApplicationHelper::instance()->setPalette(this->viewport(), pa);
 
         changeThemeIcon();
     };
@@ -150,6 +151,7 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     modifyTheme();
 
     this->setAutoFillBackground(true);
+
     //this->setBackgroundRole(DPalette::Base);
 
     connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, modifyTheme);
@@ -166,6 +168,7 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     setIconSize( QSize(20, 20) );
 
     setViewportMargins(10,2,10,5);
+    this->viewport()->setAutoFillBackground(false);
 
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -256,26 +259,40 @@ QString DeviceListView::indexString(int index)
     return navModel_->index(index, 0).data().toString();
 }
 
+void DeviceListView::setAllItemsEnable(bool eable)
+{
+    for(int i = 0; i < navModel_->rowCount(); ++i)
+    {
+        QStandardItem* item = navModel_->item(i);
+        {
+            if(item && item->isEnabled() != eable && item->isSelectable() )
+            {
+                item->setEnabled(eable);
+            }
+        }
+    }
+}
+
 bool DeviceListView::onExportToFile()
 {
-   QString selectFilter;
+//   QString selectFilter;
 
-   QString saveDir = "./";
-   QDir dir( QDir::homePath() + "/Documents/");
-   if(dir.exists())
-   {
-        saveDir = QDir::homePath() + "/Documents/";
-   }
+//   QString saveDir = "./";
+//   QDir dir( QDir::homePath() + "/Documents/");
+//   if(dir.exists())
+//   {
+//        saveDir = QDir::homePath() + "/Documents/";
+//   }
 
-   QString exportFile = DFileDialog::getSaveFileName(this,
-                                                     DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
-                                                     QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
-                                                    tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
+//   QString exportFile = DFileDialog::getSaveFileName(this,
+//                                                     DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
+//                                                     QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
+//                                                    tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
 
-   if(exportFile.isEmpty() == true)
-   {
-       return true;
-   }
+//   if(exportFile.isEmpty() == true)
+//   {
+//       return true;
+//   }
 
    MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent());
    if( nullptr == mainWindow )
@@ -283,7 +300,7 @@ bool DeviceListView::onExportToFile()
        return false;
    }
 
-   return mainWindow->exportTo(exportFile, selectFilter);
+   return mainWindow->exportTo();
 }
 
 void DeviceListView::OnlvOpRightBtn( const QPoint& point)

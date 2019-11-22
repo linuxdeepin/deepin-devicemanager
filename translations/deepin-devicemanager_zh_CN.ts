@@ -1521,7 +1521,7 @@
         </message>
         <message>
             <source>Notebook</source>
-            <translation>笔记本计算机</translation>
+            <translation>笔记本电脑</translation>
         </message>
         <message>
             <source>Unspecified</source>
@@ -1642,6 +1642,94 @@
         <message>
             <source>The Model Year(Not Manufacture Date)</source>
             <translation>型号日期(非生产日期)</translation>
+        </message>
+        <message>
+            <source>Desktop</source>
+            <translation>台式电脑</translation>
+        </message>
+        <message>
+            <source>Tablet</source>
+            <translation>平板电脑</translation>
+        </message>
+        <message>
+            <source>Server</source>
+            <translation>服务器</translation>
+        </message>
+        <message>
+            <source>All in one</source>
+            <translation>一体机</translation>
+        </message>
+        <message>
+            <source>All In One</source>
+            <translation>一体机</translation>
+        </message>
+        <message>
+            <source>Mini pc</source>
+            <translation>Mini电脑</translation>
+        </message>
+        <message>
+            <source>Convertible</source>
+            <translation>翻转电脑</translation>
+        </message>
+        <message>
+            <source>System On Chip</source>
+            <translation>板载电脑</translation>
+        </message>
+        <message>
+            <source>Stick pc</source>
+            <translation></translation>
+        </message>
+        <message>
+            <source>Phone</source>
+            <translation>手机</translation>
+        </message>
+        <message>
+            <source>Other</source>
+            <translation>其他型号电脑</translation>
+        </message>
+        <message>
+            <source>Laptop</source>
+            <translation>便携式电脑</translation>
+        </message>
+        <message>
+            <source>Rack Mount Chassis</source>
+            <translation>机架式服务器</translation>
+        </message>
+        <message>
+            <source>Mini Tower</source>
+            <translation>微塔式机</translation>
+        </message>
+        <message>
+            <source>Main Server Chassis</source>
+            <translation>主服务器</translation>
+        </message>
+        <message>
+            <source>Blade Enclosing</source>
+            <translation>刀片服务器</translation>
+        </message>
+        <message>
+            <source>Blade</source>
+            <translation>刀片服务器</translation>
+        </message>
+        <message>
+            <source>System</source>
+            <translation>系统</translation>
+        </message>
+        <message>
+            <source>Window Maximize/Minimize</source>
+            <translation>窗口大小切换</translation>
+        </message>
+        <message>
+            <source>Close</source>
+            <translation>关闭应用</translation>
+        </message>
+        <message>
+            <source>Help</source>
+            <translation>帮助</translation>
+        </message>
+        <message>
+            <source>Show Shortcut Keyboard</source>
+            <translation>显示快捷键预览</translation>
         </message>
         <message>
             <source></source>

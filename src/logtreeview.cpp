@@ -45,7 +45,6 @@ LogTreeView::LogTreeView(QWidget *parent)
     setModel(m_pModel);
 
     setAutoFillBackground(false);
-
 }
 
 void LogTreeView::initUI()

@@ -49,7 +49,9 @@ public:
     void refresh();
     void refreshDatabase();
 
-    bool exportTo(const QString& file, const QString& selectFilter);
+    bool exportTo(/*const QString& file, const QString& selectFilter*/);
+    void showDisplayShortcutsHelpDialog();
+    void windowMaximizing();
 
     void currentDeviceChanged(const QString& device);
 
@@ -66,6 +68,9 @@ public slots:
 
 private:
     void showSplashMessage(const QString& message);
+
+private:
+    void keyPressEvent(QKeyEvent *keyEvent) override;
 
 private:
     DeviceListView* leftDeviceView_ = nullptr;

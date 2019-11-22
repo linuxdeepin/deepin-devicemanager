@@ -104,7 +104,7 @@ public:
 
     void getContextMenu(Dtk::Widget::DMenu** contextMenu);
 
-    QString joinArticle(QList<ArticleStruct>& articles);
+    QString joinArticle(QList<ArticleStruct>& articles, const QString& split = " ");
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

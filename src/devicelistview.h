@@ -58,6 +58,8 @@ public:
 
     QString indexString(int index);
 
+    void setAllItemsEnable(bool eable);
+
 public slots:
     bool onExportToFile();
     void OnlvOpRightBtn( const QPoint&);

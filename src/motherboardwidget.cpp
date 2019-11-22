@@ -309,7 +309,16 @@ void MotherboardWidget::addMemoryInfo()
     articles.push_back(size);
 
     ArticleStruct mc("Maximum Capacity");
-    mc.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity");
+    QStringList pmList = DeviceInfoParserInstance.getDimdecodePhysicMemory();
+    foreach(auto pm , pmList)
+    {
+        if(mc.value.isEmpty() == false)
+        {
+            mc.value += " + ";
+        }
+        mc.value += DeviceInfoParserInstance.queryData("dmidecode", pm, "Maximum Capacity");
+    }
+
     articles.push_back(mc);
 
     if( mc.isValid() && size.isValid())

@@ -112,6 +112,7 @@ public:
     QStringList getCatcpuCpuList();
     QStringList getlscpuCpuList();
 
+    QStringList getDimdecodePhysicMemory();
     QStringList getDimdecodeMemoryList();
     QStringList getLshwDisknameList();
 

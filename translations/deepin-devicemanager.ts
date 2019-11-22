@@ -1648,6 +1648,94 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>Desktop</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Tablet</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Server</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>All in one</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>All In One</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Mini pc</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Convertible</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>System On Chip</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Stick pc</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Phone</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Other</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Laptop</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Rack Mount Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Mini Tower</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Main Server Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Blade Enclosing</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Blade</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>System</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Window Maximize/Minimize</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Close</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Help</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Show Shortcut Keyboard</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source></source>
             <translation type="unfinished"/>
         </message>

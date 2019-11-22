@@ -57,7 +57,7 @@ ColumnLabel::ColumnLabel(const QString& text, ColumnWidget* parent): DLabel(text
 ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, const QFont& font, int fontSizetype, int columnHeight, bool isRightLink, Dtk::Widget::DWidget* parent , DeviceInfoWidgetBase* di):\
     DWidget(parent), deviceInfoWidget_(di)
 {
-    setAutoFillBackground(true);
+    //setAutoFillBackground(true);
 
     QHBoxLayout* hly = new QHBoxLayout;
 
@@ -72,7 +72,7 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
     DFontSizeManager::instance()->bind(l1, DFontSizeManager::SizeType(fontSizetype) );
     l1->setWordWrap(true);
     l1->setMinimumWidth(NameLength_);
-    l1->setAutoFillBackground(true);
+    //l1->setAutoFillBackground(true);
     l1->setScaledContents(true);
     l1->setMinimumHeight(columnHeight);
 
@@ -95,7 +95,7 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
     }
 
     l2->setMinimumWidth( textWidth + 10);
-    l2->setAutoFillBackground(true);
+    //l2->setAutoFillBackground(true);
     l2->setMinimumHeight(columnHeight);
 
     hly->addWidget(l1, 0, Qt::AlignmentFlag::AlignTop);

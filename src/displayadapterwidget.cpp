@@ -147,16 +147,16 @@ void DisplayadapterWidget::initWidget()
 
         overviewInfo_.value += name.value.remove(vendor.value).trimmed();
 
-        overviewInfo_.value += " (";
-        overviewInfo_.value += memory.value;
+        QList<ArticleStruct> subArticles;
+        subArticles << memory << vendor;
+        QString subValue = joinArticle(subArticles, " / ");
 
-        if(DApplication::translate("Main", "Unknown") != vendor.value)
+        if( subValue.isEmpty() == false)
         {
-            overviewInfo_.value += " / ";
-            overviewInfo_.value += vendor.value;
+            overviewInfo_.value += " (";
+            overviewInfo_.value += subValue;
+            overviewInfo_.value += ")";
         }
-
-        overviewInfo_.value += ")";
     }
 
     if( displayadapterList.size() > 1)

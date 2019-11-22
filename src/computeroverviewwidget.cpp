@@ -70,22 +70,24 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
         ver.value = "";
     }
 
+    ArticleStruct chassisType("Type");
+    chassisType.queryData("dmidecode", "Chassis Information", "Type");
+
     pName.value = pName.value.remove( vendor.value, Qt::CaseInsensitive);
     ver.value = ver.value.remove(vendor.value, Qt::CaseInsensitive);
 
-    model.value = vendor.value.trimmed();
-    model.value += " ";
-    model.value += ver.value;
-    model.value = model.value.trimmed();
-    model.value += " ";
-    model.value += pName.value;
+    QList<ArticleStruct> acList;
 
     if(ver.value.contains("Not Specified", Qt::CaseInsensitive) || ver.value.contains("x.x", Qt::CaseInsensitive) || ver.value.contains("Not Applicable", Qt::CaseInsensitive))
     {
-        model.value = vendor.value.trimmed();
-        model.value += " ";
-        model.value += pName.value;
+        acList << vendor  << model << pName << chassisType;
     }
+    else
+    {
+        acList << vendor << ver << model << pName << chassisType;
+    }
+
+    model.value = joinArticle(acList);
 //    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000
 //    {
 //        model.value = vendor + " " + pName + " " + ver;

@@ -88,7 +88,8 @@ SOURCES += \
     logpasswordauth.cpp \
     printerwidget.cpp \
     devicelistview.cpp \
-    deviceattributedefine.cpp
+    deviceattributedefine.cpp \
+    utils.cpp
 
 HEADERS += \
     cdromwidget.h \
@@ -99,6 +100,7 @@ HEADERS += \
     logviewitemdelegate.h \
     mainwindow.h \
     otherdevicewidget.h \
+    utils.h \
     version.h \
     deviceinfoparser.h \
     deviceattributedefine.h \

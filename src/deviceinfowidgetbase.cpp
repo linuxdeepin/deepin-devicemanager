@@ -42,6 +42,7 @@
 #include "cloumnwidget.h"
 #include <QSet>
 #include "logtreeview.h"
+#include "QShortcut"
 
 DWIDGET_USE_NAMESPACE
 
@@ -205,6 +206,7 @@ void DeviceInfoWidgetBase::initContextMenu()
     contextMenu_->setMinimumWidth(contextMenuWidth_);
 
     refreshAction_ = new QAction(DApplication::translate("Main", "Refresh"), this);
+
     connect(refreshAction_, &QAction::triggered, \
             [this]()
             {
@@ -219,6 +221,11 @@ void DeviceInfoWidgetBase::initContextMenu()
 
 
     QAction* exportAction = new QAction( DApplication::translate("Main", "Export") );
+
+    QShortcut *temp = new QShortcut(this);
+    temp->setKey(tr("ctrl+e"));
+    connect( temp, &QShortcut::activated, this, &DeviceInfoWidgetBase::onExportToFile);
+
     connect(exportAction, &QAction::triggered, this, &DeviceInfoWidgetBase::onExportToFile);
     contextMenu_->addAction(exportAction);
 }
@@ -312,7 +319,7 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
     }
 
     downWidget_ = new DWidget(this);
-    downWidget_->setAutoFillBackground(true);
+    //downWidget_->setAutoFillBackground(true);
     downWidgetLayout = new QVBoxLayout(downWidget_);
     downWidget_->setLayout(downWidgetLayout);
 
@@ -478,7 +485,7 @@ void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStru
     }
 
     infoWidget_ = new DWidget(this);
-    infoWidget_->setAutoFillBackground(true);
+    //infoWidget_->setAutoFillBackground(true);
     //infoWidget_->setFixedWidth(DeviceWidgetDownWidgehWidth_);
     infoWidget_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     infoWidget_->setLayout(vly);
@@ -792,11 +799,11 @@ void DeviceInfoWidgetBase::initDownWidget()
     //auto f = new DWidget(this);
 
     downWidgetScrollArea_ = new DScrollArea(this);
-    downWidgetScrollArea_->setAutoFillBackground(true);
+    //downWidgetScrollArea_->setAutoFillBackground(true);
 
     downWidgetScrollArea_->setFrameShape(QFrame::NoFrame);
     downWidget_ = new DWidget(downWidgetScrollArea_);
-    downWidget_->setAutoFillBackground(true);
+    //downWidget_->setAutoFillBackground(true);
 
     //downWidget_->setBackgroundRole(QPalette::Base);
     //downWidget_->setAutoFillBackground(true);
@@ -882,7 +889,7 @@ void DeviceInfoWidgetBase::getContextMenu(DMenu** contextMenu)
     *contextMenu = contextMenu_;
 }
 
-QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct>& articles)
+QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct>& articles, const QString& split)
 {
     QString res;
     foreach(auto article, articles)
@@ -891,10 +898,10 @@ QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct>& articles)
         {
             if(res.isEmpty() == false)
             {
-                res += " ";
+                res += split;
             }
 
-            res += article.value;
+            res +=  DApplication::translate("Main", article.value.trimmed().toStdString().data());
         }
     }
 
@@ -1066,32 +1073,13 @@ void DeviceInfoWidgetBase::onScroll(int value)
 
 bool DeviceInfoWidgetBase::onExportToFile()
 {
-   QString selectFilter;
-
-   QString saveDir = "./";
-   QDir dir( QDir::homePath() + "/Documents/");
-   if(dir.exists())
-   {
-        saveDir = QDir::homePath() + "/Documents/";
-   }
-
-   QString exportFile = DFileDialog::getSaveFileName(this,
-                                                     DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
-                                                     QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
-                                                     tr("Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)"), &selectFilter);
-
-   if(exportFile.isEmpty() == true)
-   {
-       return true;
-   }
-
    MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent()->parent());
    if( nullptr == mainWindow )
    {
        return false;
    }
 
-   return mainWindow->exportTo(exportFile, selectFilter);
+   return mainWindow->exportTo();
 }
 
 QString getOsInfoWithoutHtml(const QString& str )

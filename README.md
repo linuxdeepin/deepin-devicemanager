@@ -20,6 +20,7 @@ Device Manager is a gadget for viewing device information.
 * [xrandr](https://www.x.org/wiki/Projects/XRandR/)
 * [CUPS](https://www.cups.org/index.html)
 * [upower](https://upower.freedesktop.org/)
+* deepin-shortcut-viewer
 
 ## Thridparty lib
 * [docx](https://github.com/lpxxn/docx)
