@@ -591,7 +591,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         //tableWidget_->setMinimumHeight(183);
         //tableWidget_->setMaximumHeight(500);
-        tableWidget_->setFixedHeight(TableViewRowHeight_*5 +3 /*+ tableWidget_->verticalHeader()->height()+3*/);
+        tableWidget_->setFixedHeight(TableViewRowHeight_*5  /*+ tableWidget_->verticalHeader()->height()+3*/);
 
         tableWidget_->m_headerDelegate->setDefaultSectionSize(TableViewRowHeight_);
         tableWidget_->m_headerDelegate->setFixedHeight(TableViewRowHeight_);
