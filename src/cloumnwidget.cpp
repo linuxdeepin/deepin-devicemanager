@@ -109,25 +109,25 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
     }
 }
 
-void ColumnWidget::labelMousePressEvent(QMouseEvent *event)
-{
-    if(deviceInfoWidget_)
-    {
-        deviceInfoWidget_->selectColumnWidget(this);
-    }
+//void ColumnWidget::labelMousePressEvent(QMouseEvent *event)
+//{
+//    if(deviceInfoWidget_)
+//    {
+//        deviceInfoWidget_->selectColumnWidget(this);
+//    }
 
-    if(event->button() == Qt::MouseButton::LeftButton )
-    {
-        setHilight(!st);
-    }
+//    if(event->button() == Qt::MouseButton::LeftButton )
+//    {
+//        setHilight(!st);
+//    }
 
-    else if(event->button() == Qt::MouseButton::RightButton )
-    {
-        setHilight(true);
-    }
+//    else if(event->button() == Qt::MouseButton::RightButton )
+//    {
+//        setHilight(true);
+//    }
 
-    //DWidget::mousePressEvent(event);
-}
+//    //DWidget::mousePressEvent(event);
+//}
 
 void ColumnWidget::labelContextMenuEvent(QContextMenuEvent *event)
 {

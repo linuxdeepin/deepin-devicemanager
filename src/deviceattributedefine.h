@@ -38,6 +38,15 @@ struct ArticleStruct
 
     }
 
+    ArticleStruct(const ArticleStruct& other)
+    {
+        name = other.name;
+        value = other.value;
+        autoHide = other.autoHide;
+        externalLinks = other.externalLinks;
+        valueTranslate = other.valueTranslate;
+    }
+
     void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey );
     void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet);
     void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet, QList<ArticleStruct>& articles);

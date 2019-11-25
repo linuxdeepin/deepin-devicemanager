@@ -384,7 +384,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Export</source>
+            <source>Export(E)</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -1456,7 +1456,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Copy</source>
+            <source>Copy(C)</source>
             <translation type="unfinished"/>
         </message>
         <message>

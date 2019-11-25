@@ -388,8 +388,8 @@
             <translation>刷新</translation>
         </message>
         <message>
-            <source>Export</source>
-            <translation>导出</translation>
+            <source>Export(E)</source>
+            <translation>导出(E)</translation>
         </message>
         <message>
             <source>Cpu Info</source>
@@ -1452,8 +1452,8 @@
             <translation>等待指令</translation>
         </message>
         <message>
-            <source>Copy</source>
-            <translation>复制</translation>
+            <source>Copy(C)</source>
+            <translation>复制(C)</translation>
         </message>
         <message>
             <source>Load_Retry_Count</source>

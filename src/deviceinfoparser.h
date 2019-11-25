@@ -168,6 +168,7 @@ public:
     // get os
     const QString&  getOsInfo();
     const QString&  getOsHtmlInfo();
+    const QString getOsReleaseName();
 
     bool loadCatosrelelease();
     bool loadlsb_release();

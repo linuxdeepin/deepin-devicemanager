@@ -345,7 +345,7 @@ void DeviceListView::initContextMenu()
 
     contextMenu_->setMinimumWidth(contextMenuWidth_);
 
-    refreshAction_ = new QAction(DApplication::translate("Main", "Refresh"), this);
+    refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), DApplication::translate("Main", "Refresh"), this);
     connect(refreshAction_, &QAction::triggered, \
             [this]()
             {
@@ -359,7 +359,7 @@ void DeviceListView::initContextMenu()
     contextMenu_->addAction(refreshAction_);
 
 
-    QAction* exportAction = new QAction(DApplication::translate("Main", "Export"));
+    QAction* exportAction = new QAction(QIcon::fromTheme("document-new"), DApplication::translate("Main", "Export(E)"));
 
     connect(exportAction, &QAction::triggered, this, &DeviceListView::onExportToFile);
 

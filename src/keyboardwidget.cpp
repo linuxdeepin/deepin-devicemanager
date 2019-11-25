@@ -35,6 +35,8 @@ void KeyboardWidget::initWidget()
 {
     QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceKeyboardList();
 
+    int validKeyboardSize = 0;
+
     if( inputdeviceList.size() < 1 )
     {
         setCentralInfo("No Keyboard found!");
@@ -224,6 +226,7 @@ void KeyboardWidget::initWidget()
             }
         }
 
+        ++validKeyboardSize;
         addDevice( name.value , articles , inputdeviceList.size() );
 
         if(overviewInfo_.value.isEmpty() == false)
@@ -245,7 +248,7 @@ void KeyboardWidget::initWidget()
         }
     }
 
-    if( inputdeviceList.size() > 1 )
+    if( validKeyboardSize > 1 )
     {
         QStringList headers = { "Name",  "Type", "Vendor" };
         addTable( headers, tabList);

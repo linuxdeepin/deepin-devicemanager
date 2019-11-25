@@ -1,0 +1,20 @@
+34: None 00.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.1rqhP_IZwv4
+  Parent ID: _Znp.0ak9ivn+hfA
+  Hardware Class: monitor
+  Model: "AUO LCD Monitor"
+  Vendor: AUO "AUO"
+  Device: eisa 0x303d 
+  Resolution: 1920x1080@60Hz
+  Size: 309x174 mm
+  Year of Manufacture: 2016
+  Week of Manufacture: 0
+  Detailed Timings #0:
+     Resolution: 1920x1080
+     Horizontal: 1920 1936 1952 2104 (+16 +32 +184) -hsync
+       Vertical: 1080 1083 1097 1116 (+3 +17 +36) -vsync
+    Frequencies: 141.00 MHz, 67.02 kHz, 60.05 Hz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #30 (VGA compatible controller)
+

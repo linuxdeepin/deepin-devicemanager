@@ -1,0 +1,4 @@
+Distributor ID:	Fedora
+Description:	Fedora release 29 (Twenty Nine)
+Release:	29
+Codename:	TwentyNine

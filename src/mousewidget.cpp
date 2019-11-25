@@ -41,6 +41,8 @@ void MouseWidget::initWidget()
         return;
     }
 
+    int validMouseSize = 0;
+
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
@@ -202,6 +204,7 @@ void MouseWidget::initWidget()
             }
         }
 
+        ++validMouseSize;
         addDevice( name.value , articles , inputdeviceList.size() );
 
         if(overviewInfo_.value.isEmpty() == false)
@@ -292,7 +295,7 @@ void MouseWidget::initWidget()
 //        overviewInfo_.value += name.value;
 //    }
 
-    if( inputdeviceList.size() /*+ mouseList.size()*/ > 1 )
+    if( validMouseSize /*+ mouseList.size()*/ > 1 )
     {
         QStringList headers = { "Name",  "Type", "Vendor" };
         addTable( headers, tabList);

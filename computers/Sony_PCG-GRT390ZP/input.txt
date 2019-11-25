@@ -1,0 +1,97 @@
+I: Bus=0019 Vendor=0000 Product=0005 Version=0000
+N: Name="Lid Switch"
+P: Phys=PNP0C0D/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/device:00/PNP0C0D:00/input/input0
+U: Uniq=
+H: Handlers=event0 
+B: PROP=0
+B: EV=21
+B: SW=1
+
+I: Bus=0019 Vendor=0000 Product=0001 Version=0000
+N: Name="Power Button"
+P: Phys=PNP0C0C/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/device:00/PNP0C0C:00/input/input1
+U: Uniq=
+H: Handlers=kbd event1 
+B: PROP=0
+B: EV=3
+B: KEY=100000 0 0 0
+
+I: Bus=0011 Vendor=0001 Product=0001 Version=ab41
+N: Name="AT Translated Set 2 keyboard"
+P: Phys=isa0060/serio0/input0
+S: Sysfs=/devices/platform/i8042/serio0/input/input2
+U: Uniq=
+H: Handlers=sysrq kbd event2 
+B: PROP=0
+B: EV=120013
+B: KEY=4 2000000 3803078 f800d001 feffffdf ffefffff ffffffff fffffffe
+B: MSC=10
+B: LED=7
+
+I: Bus=0011 Vendor=0002 Product=0008 Version=0000
+N: Name="ALPS PS/2 Device"
+P: Phys=isa0060/serio1/input1
+S: Sysfs=/devices/platform/i8042/serio1/input/input5
+U: Uniq=
+H: Handlers=mouse0 event3 
+B: PROP=0
+B: EV=7
+B: KEY=70000 0 0 0 0 0 0 0 0
+B: REL=3
+
+I: Bus=0011 Vendor=0002 Product=0008 Version=0200
+N: Name="AlpsPS/2 ALPS GlidePoint"
+P: Phys=isa0060/serio1/input0
+S: Sysfs=/devices/platform/i8042/serio1/input/input4
+U: Uniq=
+H: Handlers=mouse1 event4 
+B: PROP=0
+B: EV=b
+B: KEY=420 0 70000 0 0 0 0 0 0 0 0
+B: ABS=1000003
+
+I: Bus=0019 Vendor=0000 Product=0006 Version=0000
+N: Name="Video Bus"
+P: Phys=LNXVIDEO/video/input0
+S: Sysfs=/devices/LNXSYSTM:00/device:00/PNP0A03:00/device:05/LNXVIDEO:00/input/input6
+U: Uniq=
+H: Handlers=kbd event5 
+B: PROP=0
+B: EV=3
+B: KEY=3e000b 0 0 0 0 0 0 0
+
+I: Bus=0003 Vendor=1c4f Product=0034 Version=0110
+N: Name="SIGMACHIP Usb Mouse"
+P: Phys=usb-0000:00:03.0-2/input0
+S: Sysfs=/devices/pci0000:00/0000:00:03.0/usb2/2-2/2-2:1.0/0003:1C4F:0034.0001/input/input7
+U: Uniq=
+H: Handlers=mouse2 event6 
+B: PROP=0
+B: EV=17
+B: KEY=70000 0 0 0 0 0 0 0 0
+B: REL=103
+B: MSC=10
+
+I: Bus=0010 Vendor=104d Product=0000 Version=0000
+N: Name="Sony Vaio Keys"
+P: Phys=
+S: Sysfs=/devices/LNXSYSTM:00/device:00/PNP0A03:00/device:09/SNY6001:00/input/input8
+U: Uniq=
+H: Handlers=kbd event7 rfkill 
+B: PROP=0
+B: EV=13
+B: KEY=1f d6070000 c 0 100100 0 2 0 600f 102c00 3800002 40300400 e0000 0 0 0
+B: MSC=10
+
+I: Bus=0010 Vendor=104d Product=0000 Version=0000
+N: Name="Sony Vaio Jogdial"
+P: Phys=
+S: Sysfs=/devices/LNXSYSTM:00/device:00/PNP0A03:00/device:09/SNY6001:00/input/input9
+U: Uniq=
+H: Handlers=mouse3 event8 
+B: PROP=0
+B: EV=7
+B: KEY=40000 0 0 0 0 0 0 0 0
+B: REL=100

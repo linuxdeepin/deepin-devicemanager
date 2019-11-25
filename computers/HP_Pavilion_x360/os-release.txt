@@ -1,0 +1,9 @@
+NAME="ROSA Desktop Fresh R8.1"
+VERSION="EE 2014.1 Desktop"
+ID=rosa
+VERSION_ID=2014.1
+PRETTY_NAME="ROSA Desktop Fresh R8.1 EE 2014.1 Desktop"
+ANSI_COLOR="1;43"
+CPE_NAME="cpe:/o:rosa:rosalinux:2014.1"
+HOME_URL="http://www.rosalinux.com/"
+BUG_REPORT_URL="http://bugs.rosalinux.ru/"

@@ -83,11 +83,11 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
     QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
 
     int validMemoryNumber = 0;
-//    if( memList.size() < 1)
-//    {
-//        setCentralInfo("Get Memory Infomation failed!");
-//        return;
-//    }
+    if( memList.size() < 1)
+    {
+        setCentralInfo("Get Memory Infomation failed!");
+        return;
+    }
 
     QList<ArticleStruct> articles;
 
@@ -256,7 +256,8 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
     if(validMemoryNumber < 1)
     {
-        addInfo("Memory Info", articles, false);
+        setCentralInfo("Get Memory Infomation failed!");
+        return;
     }
 
     overviewInfo_.value = size.value;

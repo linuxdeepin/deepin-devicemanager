@@ -1204,6 +1204,13 @@ const QString& DeviceInfoParser::getOsHtmlInfo()
     return osInfoHtml_;
 }
 
+const QString DeviceInfoParser::getOsReleaseName()
+{
+    QString lsbRelease = queryData("catOsrelease", "catOsrelease", "NAME");
+    lsbRelease = queryData("lsb_release", "lsb_release", "Description");
+    return lsbRelease;
+}
+
 bool DeviceInfoParser::loadCatosrelelease()
 {
     if( false == executeProcess("cat /etc/os-release"))

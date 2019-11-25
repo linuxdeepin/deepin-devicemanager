@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include "DTitlebar"
 #include "DApplicationSettings"
+#include "deviceinfoparser.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -47,8 +48,11 @@ int main(int argc, char *argv[])
     //app.setApplicationVersion(VERSION);
     app.setApplicationVersion(DApplication::buildVersion("3.0"));
 
-    app.setProductIcon(QIcon::fromTheme("deepin-devicemanager"));
-    app.setWindowIcon(QIcon::fromTheme("deepin-devicemanager"));
+    QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
+
+    app.setProductIcon(appIcon);
+    app.setWindowIcon(appIcon);
+
     app.setProductName(DApplication::translate("Main", "Device Manager"));
 
     app.setApplicationDescription(DApplication::translate("Main", "Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
@@ -67,10 +71,18 @@ int main(int argc, char *argv[])
 
     MainWindow w(nullptr);
     w.titlebar()->setTitle("");
-    w.titlebar()->setIcon(QIcon::fromTheme("deepin-devicemanager"));
+    w.titlebar()->setIcon(appIcon);
 
     w.show();
     Dtk::Widget::moveToCenter(&w);
+
+    if(appIcon.isNull() || DeviceInfoParserInstance.getOsReleaseName().contains("uos", Qt::CaseInsensitive) ==  false)
+    {
+        QIcon localIcon(":images/icons/deepin-devicemanager64.svg");
+        app.setProductIcon(localIcon);
+        app.setWindowIcon(localIcon);
+        w.titlebar()->setIcon(localIcon);
+    }
 
     return app.exec();
 }

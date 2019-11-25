@@ -1,0 +1,19 @@
+33: None 00.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.J9dInIgmKF6
+  Parent ID: _Znp.8iI_6QNb927
+  Hardware Class: monitor
+  Model: "LCD Monitor"
+  Vendor: LGD 
+  Device: eisa 0x048c 
+  Resolution: 1920x1080@60Hz
+  Size: 294x165 mm
+  Year of Manufacture: 2014
+  Week of Manufacture: 0
+  Detailed Timings #0:
+     Resolution: 1920x1080
+     Horizontal: 1920 1968 2000 2080 (+48 +80 +160) -hsync
+       Vertical: 1080 1083 1088 1111 (+3 +8 +31) -vsync
+    Frequencies: 138.70 MHz, 66.68 kHz, 60.02 Hz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #18 (VGA compatible controller)

@@ -52,7 +52,7 @@ public:
 public:
     ColumnWidget(const QString& strLeft, const QString& strRight, const QFont& font, int fontSizetype, int columnHeight, bool isRightLink = false, Dtk::Widget::DWidget* parent = nullptr, DeviceInfoWidgetBase* di = nullptr);
 
-    void labelMousePressEvent(QMouseEvent *event);
+    //void labelMousePressEvent(QMouseEvent *event);
     void labelContextMenuEvent(QContextMenuEvent *event);
 
     void setHilight(bool highLight);

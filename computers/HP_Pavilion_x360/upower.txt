@@ -1,0 +1,80 @@
+Device: /org/freedesktop/UPower/devices/line_power_ADP1
+  native-path:          ADP1
+  power supply:         yes
+  updated:              Wed Jan 24 07:33:24 2018 (2431 seconds ago)
+  has history:          no
+  has statistics:       no
+  line-power
+    warning-level:       none
+    online:              yes
+    icon-name:          'ac-adapter-symbolic'
+
+Device: /org/freedesktop/UPower/devices/battery_BAT0
+  native-path:          BAT0
+  vendor:               333-54-2A
+  model:                LE03048XL
+  serial:               --
+  power supply:         yes
+  updated:              Wed Jan 24 08:13:26 2018 (29 seconds ago)
+  has history:          yes
+  has statistics:       yes
+  battery
+    present:             yes
+    rechargeable:        yes
+    state:               charging
+    warning-level:       none
+    energy:              24.9318 Wh
+    energy-empty:        0 Wh
+    energy-full:         40.9716 Wh
+    energy-full-design:  40.9716 Wh
+    energy-rate:         22.8798 W
+    voltage:             12.466 V
+    time to full:        42.0 minutes
+    percentage:          60%
+    capacity:            100%
+    technology:          lithium-ion
+    icon-name:          'battery-full-charging-symbolic'
+  History (charge):
+    1516770806  60.000  charging
+  History (rate):
+    1516770806  22.880  charging
+
+Device: /org/freedesktop/UPower/devices/mouse_0003o046Do101Bx0004
+  native-path:          /sys/devices/pci0000:00/0000:00:14.0/usb1/1-3/1-3:1.2/0003:046D:C52B.0003/0003:046D:101B.0004
+  vendor:               Logitech, Inc.
+  model:                M705
+  serial:               --
+  power supply:         no
+  updated:              Wed Jan 24 08:13:25 2018 (30 seconds ago)
+  has history:          yes
+  has statistics:       no
+  mouse
+    present:             yes
+    rechargeable:        yes
+    state:               discharging
+    warning-level:       none
+    percentage:          90%
+    icon-name:          'battery-full-symbolic'
+
+Device: /org/freedesktop/UPower/devices/DisplayDevice
+  power supply:         yes
+  updated:              Wed Jan 24 08:13:26 2018 (29 seconds ago)
+  has history:          no
+  has statistics:       no
+  battery
+    present:             yes
+    state:               charging
+    warning-level:       none
+    energy:              24.9318 Wh
+    energy-full:         40.9716 Wh
+    energy-rate:         22.8798 W
+    time to full:        42.0 minutes
+    percentage:          60%
+    icon-name:          'battery-full-charging-symbolic'
+
+Daemon:
+  daemon-version:  0.99.4
+  on-battery:      no
+  lid-is-closed:   no
+  lid-is-present:  yes
+  critical-action: HybridSleep

@@ -1,0 +1,187 @@
+Screen 0: minimum 8 x 8, current 1366 x 768, maximum 32767 x 32767
+eDP1 connected primary 1366x768+0+0 (0x49) normal (normal left inverted right x axis y axis) 310mm x 170mm
+	Identifier: 0x43
+	Timestamp:  30118
+	Subpixel:   unknown
+	Gamma:      -0.16:1.0:3.0
+	Brightness: 0.45
+	Clones:    
+	CRTC:       0
+	CRTCs:      0 1 2
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	EDID: 
+		00ffffffffffff000daec31400000000
+		26190104951f1178027e459355539428
+		23505400000001010101010101010101
+		010101010101da1d56e250002030442d
+		470035ad10000018000000fe004e3134
+		304247412d4541330a20000000fe0043
+		4d4e0a202020202020202020000000fe
+		004e3134304247412d4541330a200053
+	BACKLIGHT: 46 
+		range: (0, 937)
+	Backlight: 46 
+		range: (0, 937)
+	scaling mode: Full aspect 
+		supported: Full, Center, Full aspect
+	Broadcast RGB: Automatic 
+		supported: Automatic, Full, Limited 16:235
+	link-status: Good 
+		supported: Good, Bad
+	non-desktop: 0 
+		range: (0, 1)
+  1366x768 (0x49) 76.420MHz -HSync -VSync *current +preferred
+        h: width  1366 start 1434 end 1479 total 1592 skew    0 clock  48.00KHz
+        v: height  768 start  772 end  779 total  800           clock  60.00Hz
+  1280x720 (0x179) 74.500MHz -HSync +VSync
+        h: width  1280 start 1344 end 1472 total 1664 skew    0 clock  44.77KHz
+        v: height  720 start  723 end  728 total  748           clock  59.86Hz
+  1280x720 (0x17a) 74.480MHz -HSync +VSync
+        h: width  1280 start 1336 end 1472 total 1664 skew    0 clock  44.76KHz
+        v: height  720 start  721 end  724 total  746           clock  60.00Hz
+  1280x720 (0x17b) 63.750MHz +HSync -VSync
+        h: width  1280 start 1328 end 1360 total 1440 skew    0 clock  44.27KHz
+        v: height  720 start  723 end  728 total  741           clock  59.74Hz
+  1024x768 (0x17c) 65.000MHz -HSync -VSync
+        h: width  1024 start 1048 end 1184 total 1344 skew    0 clock  48.36KHz
+        v: height  768 start  771 end  777 total  806           clock  60.00Hz
+  1024x576 (0x17d) 46.995MHz -HSync +VSync
+        h: width  1024 start 1064 end 1168 total 1312 skew    0 clock  35.82KHz
+        v: height  576 start  577 end  580 total  597           clock  60.00Hz
+  1024x576 (0x17e) 46.500MHz -HSync +VSync
+        h: width  1024 start 1064 end 1160 total 1296 skew    0 clock  35.88KHz
+        v: height  576 start  579 end  584 total  599           clock  59.90Hz
+  1024x576 (0x17f) 42.000MHz +HSync -VSync
+        h: width  1024 start 1072 end 1104 total 1184 skew    0 clock  35.47KHz
+        v: height  576 start  579 end  584 total  593           clock  59.82Hz
+  960x540 (0x180) 40.784MHz -HSync +VSync
+        h: width   960 start  992 end 1088 total 1216 skew    0 clock  33.54KHz
+        v: height  540 start  541 end  544 total  559           clock  60.00Hz
+  960x540 (0x181) 40.750MHz -HSync +VSync
+        h: width   960 start  992 end 1088 total 1216 skew    0 clock  33.51KHz
+        v: height  540 start  543 end  548 total  562           clock  59.63Hz
+  960x540 (0x182) 37.250MHz +HSync -VSync
+        h: width   960 start 1008 end 1040 total 1120 skew    0 clock  33.26KHz
+        v: height  540 start  543 end  548 total  556           clock  59.82Hz
+  800x600 (0x183) 40.000MHz +HSync +VSync
+        h: width   800 start  840 end  968 total 1056 skew    0 clock  37.88KHz
+        v: height  600 start  601 end  605 total  628           clock  60.32Hz
+  800x600 (0x184) 36.000MHz +HSync +VSync
+        h: width   800 start  824 end  896 total 1024 skew    0 clock  35.16KHz
+        v: height  600 start  601 end  603 total  625           clock  56.25Hz
+  864x486 (0x185) 32.901MHz -HSync +VSync
+        h: width   864 start  888 end  976 total 1088 skew    0 clock  30.24KHz
+        v: height  486 start  487 end  490 total  504           clock  60.00Hz
+  864x486 (0x186) 32.500MHz -HSync +VSync
+        h: width   864 start  888 end  968 total 1072 skew    0 clock  30.32KHz
+        v: height  486 start  489 end  494 total  506           clock  59.92Hz
+  864x486 (0x187) 30.500MHz +HSync -VSync
+        h: width   864 start  912 end  944 total 1024 skew    0 clock  29.79KHz
+        v: height  486 start  489 end  494 total  500           clock  59.57Hz
+  640x480 (0x188) 25.175MHz -HSync -VSync
+        h: width   640 start  656 end  752 total  800 skew    0 clock  31.47KHz
+        v: height  480 start  490 end  492 total  525           clock  59.94Hz
+  720x405 (0x189) 22.500MHz -HSync +VSync
+        h: width   720 start  744 end  808 total  896 skew    0 clock  25.11KHz
+        v: height  405 start  408 end  413 total  422           clock  59.51Hz
+  720x405 (0x18a) 22.176MHz -HSync +VSync
+        h: width   720 start  728 end  800 total  880 skew    0 clock  25.20KHz
+        v: height  405 start  406 end  409 total  420           clock  60.00Hz
+  720x405 (0x18b) 21.750MHz +HSync -VSync
+        h: width   720 start  768 end  800 total  880 skew    0 clock  24.72KHz
+        v: height  405 start  408 end  413 total  419           clock  58.99Hz
+  680x384 (0x18c) 19.677MHz -HSync +VSync
+        h: width   680 start  688 end  752 total  824 skew    0 clock  23.88KHz
+        v: height  384 start  385 end  388 total  398           clock  60.00Hz
+  640x360 (0x18d) 18.000MHz -HSync +VSync
+        h: width   640 start  664 end  720 total  800 skew    0 clock  22.50KHz
+        v: height  360 start  363 end  368 total  376           clock  59.84Hz
+  640x360 (0x18e) 17.750MHz +HSync -VSync
+        h: width   640 start  688 end  720 total  800 skew    0 clock  22.19KHz
+        v: height  360 start  363 end  368 total  374           clock  59.32Hz
+  640x360 (0x18f) 17.187MHz -HSync +VSync
+        h: width   640 start  640 end  704 total  768 skew    0 clock  22.38KHz
+        v: height  360 start  361 end  364 total  373           clock  60.00Hz
+DP1 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x44
+	Timestamp:  30118
+	Subpixel:   unknown
+	Clones:     HDMI2
+	CRTCs:      0 1 2
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	Content Protection: Undesired 
+		supported: Undesired, Desired, Enabled
+	Broadcast RGB: Automatic 
+		supported: Automatic, Full, Limited 16:235
+	audio: auto 
+		supported: force-dvi, off, auto, on
+	link-status: Good 
+		supported: Good, Bad
+	non-desktop: 0 
+		range: (0, 1)
+HDMI1 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x45
+	Timestamp:  30118
+	Subpixel:   unknown
+	Clones:    
+	CRTCs:      0 1 2
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	Content Protection: Undesired 
+		supported: Undesired, Desired, Enabled
+	content type: No Data 
+		supported: No Data, Graphics, Photo, Cinema, Game
+	aspect ratio: Automatic 
+		supported: Automatic, 4:3, 16:9
+	Broadcast RGB: Automatic 
+		supported: Automatic, Full, Limited 16:235
+	audio: auto 
+		supported: force-dvi, off, auto, on
+	link-status: Good 
+		supported: Good, Bad
+	non-desktop: 0 
+		range: (0, 1)
+HDMI2 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x46
+	Timestamp:  30118
+	Subpixel:   unknown
+	Clones:     DP1
+	CRTCs:      0 1 2
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	Content Protection: Undesired 
+		supported: Undesired, Desired, Enabled
+	content type: No Data 
+		supported: No Data, Graphics, Photo, Cinema, Game
+	aspect ratio: Automatic 
+		supported: Automatic, 4:3, 16:9
+	Broadcast RGB: Automatic 
+		supported: Automatic, Full, Limited 16:235
+	audio: auto 
+		supported: force-dvi, off, auto, on
+	link-status: Good 
+		supported: Good, Bad
+	non-desktop: 0 
+		range: (0, 1)
+VIRTUAL1 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x47
+	Timestamp:  30118
+	Subpixel:   no subpixels
+	Clones:    
+	CRTCs:      3
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	non-desktop: 0 
+		supported: 0, 1

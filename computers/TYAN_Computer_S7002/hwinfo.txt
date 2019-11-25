@@ -1,0 +1,110 @@
+122: None 00.0: 10002 LCD Monitor
+  [Created at monitor.97]
+  Unique ID: rdCR.htOiZD7VhAB
+  Hardware Class: monitor
+  Model: "LG ELECTRONICS LG TV"
+  Vendor: GSM "LG ELECTRONICS"
+  Device: eisa 0x0001 "LG TV"
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 800x600@60Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1152x864@60Hz
+  Resolution: 1280x720@60Hz
+  Resolution: 1280x1024@60Hz
+  Resolution: 1360x768@60Hz
+  Resolution: 1920x1080@60Hz
+  Year of Manufacture: 2011
+  Week of Manufacture: 1
+  Detailed Timings #0:
+     Resolution: 1920x1080
+     Horizontal: 1920 2008 2052 2200 (+88 +132 +280) +hsync
+       Vertical: 1080 1084 1089 1125 (+4 +9 +45) +vsync
+    Frequencies: 148.50 MHz, 67.50 kHz, 60.00 Hz
+  Year of Manufacture: 2011
+  Week of Manufacture: 1
+  Detailed Timings #1:
+     Resolution: 1360x768
+     Horizontal: 1360 1424 1536 1792 (+64 +176 +432) +hsync
+       Vertical:  768  771  777  795 (+3 +9 +27) +vsync
+    Frequencies: 85.50 MHz, 47.71 kHz, 60.02 Hz
+  Driver Info #0:
+    Max. Resolution: 1920x1080
+    Vert. Sync Range: 57-63 Hz
+    Hor. Sync Range: 31-82 kHz
+    Bandwidth: 148 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+123: None 00.1: 10002 LCD Monitor
+  [Created at monitor.97]
+  Unique ID: jyhG.htOiZD7VhAB
+  Hardware Class: monitor
+  Model: "LG ELECTRONICS LG TV"
+  Vendor: GSM "LG ELECTRONICS"
+  Device: eisa 0x0001 "LG TV"
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 800x600@60Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1152x864@60Hz
+  Resolution: 1280x720@60Hz
+  Resolution: 1280x1024@60Hz
+  Resolution: 1360x768@60Hz
+  Resolution: 1920x1080@60Hz
+  Year of Manufacture: 2011
+  Week of Manufacture: 1
+  Detailed Timings #0:
+     Resolution: 1920x1080
+     Horizontal: 1920 2008 2052 2200 (+88 +132 +280) +hsync
+       Vertical: 1080 1084 1089 1125 (+4 +9 +45) +vsync
+    Frequencies: 148.50 MHz, 67.50 kHz, 60.00 Hz
+  Year of Manufacture: 2011
+  Week of Manufacture: 1
+  Detailed Timings #1:
+     Resolution: 1360x768
+     Horizontal: 1360 1424 1536 1792 (+64 +176 +432) +hsync
+       Vertical:  768  771  777  795 (+3 +9 +27) +vsync
+    Frequencies: 85.50 MHz, 47.71 kHz, 60.02 Hz
+  Driver Info #0:
+    Max. Resolution: 1920x1080
+    Vert. Sync Range: 57-63 Hz
+    Hor. Sync Range: 31-82 kHz
+    Bandwidth: 148 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+124: None 00.2: 10002 LCD Monitor
+  [Created at monitor.97]
+  Unique ID: aHB6.htOiZD7VhAB
+  Hardware Class: monitor
+  Model: "LG ELECTRONICS LG TV"
+  Vendor: GSM "LG ELECTRONICS"
+  Device: eisa 0x0001 "LG TV"
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 800x600@60Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1152x864@60Hz
+  Resolution: 1280x720@60Hz
+  Resolution: 1280x1024@60Hz
+  Resolution: 1360x768@60Hz
+  Resolution: 1920x1080@60Hz
+  Year of Manufacture: 2011
+  Week of Manufacture: 1
+  Detailed Timings #0:
+     Resolution: 1920x1080
+     Horizontal: 1920 2008 2052 2200 (+88 +132 +280) +hsync
+       Vertical: 1080 1084 1089 1125 (+4 +9 +45) +vsync
+    Frequencies: 148.50 MHz, 67.50 kHz, 60.00 Hz
+  Year of Manufacture: 2011
+  Week of Manufacture: 1
+  Detailed Timings #1:
+     Resolution: 1360x768
+     Horizontal: 1360 1424 1536 1792 (+64 +176 +432) +hsync
+       Vertical:  768  771  777  795 (+3 +9 +27) +vsync
+    Frequencies: 85.50 MHz, 47.71 kHz, 60.02 Hz
+  Driver Info #0:
+    Max. Resolution: 1920x1080
+    Vert. Sync Range: 57-63 Hz
+    Hor. Sync Range: 31-82 kHz
+    Bandwidth: 148 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown

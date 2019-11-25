@@ -32,6 +32,7 @@
 #include "DPalette"
 #include "DFrame"
 #include "commondefine.h"
+#include "DTextBrowser"
 
 class QLabel;
 class QVBoxLayout;
@@ -50,15 +51,26 @@ struct TableHeader
 
 struct DeviceInfo
 {
-    Dtk::Widget::DLabel* title = nullptr;
-    QList<ColumnWidget*>  columnWidgets;
+    QString title_ = nullptr;
+    QList<ArticleStruct>  articles_;
 
-    DeviceInfo();
-    void changeTheme();
-
-//    static bool isPaletteInit_;
-//    static Dtk::Gui::DPalette defaultPa_;
+    QFont font_;
+    int fontSizeType_;
 };
+
+class DeviceInfoWidgetBase;
+
+class DeivceInfoBrower: public Dtk::Widget::DTextBrowser
+{
+public:
+    DeivceInfoBrower(DeviceInfoWidgetBase* parent = nullptr);
+
+protected:
+    void contextMenuEvent(QContextMenuEvent *event) override;
+
+    DeviceInfoWidgetBase* deviceInfoWidget_ = nullptr;
+};
+
 
 class DeviceInfoWidgetBase : public Dtk::Widget::DWidget
 {
@@ -73,20 +85,21 @@ public:
 
     void initContextMenu();
 
-    //void addLabelToGridLayout(DeviceInfo* di, QGridLayout* ly, const QList<ArticleStruct>& articles, const QFont& font , const QPalette& pa);
-    void addCloumnToLayout(DeviceInfo* di, QVBoxLayout* vly, const QList<ArticleStruct>& articles, const QFont& font, int fontSizetype, int columnHeight, const QPalette& pa);
-
     void setCentralInfo(const QString& info);
 
     //void addInfo(const QString& title, const QList<ArticleStruct>& articles);
     // Html version
-    void addHtmlInfo(const QString& title, const QList<ArticleStruct>& articles);
-    // cloumnwidgeth version
+
+    static QString toHtmlString(const DeviceInfo& di);
+
     void addInfo(const QString& title, const QList<ArticleStruct>& articles, bool main = true);
+    // cloumnwidgeth version
+    //void addInfo(const QString& title, const QList<ArticleStruct>& articles, bool main = true);
 
     //void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
     // cloumnwidget version
     void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin = DeviceWidgetContentMarginLeft_-8);
+    //void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin = DeviceWidgetContentMarginLeft_-8);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
 
@@ -100,20 +113,18 @@ public:
 
     static int maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3);
 
-    void selectColumnWidget(ColumnWidget* sw);
-
     void getContextMenu(Dtk::Widget::DMenu** contextMenu);
 
     QString joinArticle(QList<ArticleStruct>& articles, const QString& split = " ");
 
 protected:
-    void mousePressEvent(QMouseEvent *event) override;
+    //void mousePressEvent(QMouseEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
+    //void resizeEvent(QResizeEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 public slots:
     void OnCurrentItemClicked(const QModelIndex &index);
-    void onScroll(int value);
     bool onExportToFile();
     void changeTheme();
 
@@ -129,22 +140,28 @@ public:
     virtual bool exportToXls(const QString& xlsFile);
     virtual bool exportToHtml(const QString& htmlFile);
 
-protected:
+public:
     //Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
     LogTreeView* tableWidget_ = nullptr;
     DeviceInfo* titleInfo_ = nullptr;
     QList<DeviceInfo> deviceInfos_;
 
     QVBoxLayout* vLayout_ = nullptr;
-    Dtk::Widget::DScrollArea* downWidgetScrollArea_ = nullptr;
-    Dtk::Widget::DWidget*   downWidget_  = nullptr;
+
+    Dtk::Widget::DFrame* downFrame_ = nullptr;
+
+    Dtk::Widget::DTextBrowser* htmlBrower_ = nullptr;
     QVBoxLayout* downWidgetLayout = nullptr;
+
     Dtk::Widget::DMenu* contextMenu_ = nullptr;
 
     QAction* refreshAction_ = nullptr;
+    QAction* exportAction_ = nullptr;
 
-    Dtk::Widget::DWidget* infoWidget_ = nullptr;
-    QList<Dtk::Widget::DWidget*> subinfoWidgetList_;
+    QList<int> textCursorList_;
+
+    //Dtk::Widget::DLabel* htmlLabel_;
+
 
 public:
     static bool isFontInit_;
@@ -162,8 +179,10 @@ protected:
     int verticalScrollBarMaxValue = 0;
 
     //static int currentXlsRow_;
-    ColumnWidget* selectColumnWidget_ = nullptr;
+    //ColumnWidget* selectColumnWidget_ = nullptr;
 
     static bool isPaletteInit_;
     static Dtk::Gui::DPalette defaultPa_;
+
+    bool firstShow_ = true;
 };

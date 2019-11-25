@@ -1,0 +1,17 @@
+Architecture:          i686
+CPU op-mode(s):        32-bit
+Byte Order:            Little Endian
+CPU(s):                2
+On-line CPU(s) list:   0,1
+Thread(s) per core:    2
+Core(s) per socket:    1
+Socket(s):             1
+Vendor ID:             GenuineIntel
+CPU family:            15
+Model:                 2
+Model name:            Mobile Intel(R) Pentium(R) 4     CPU 3.06GHz
+Stepping:              9
+CPU MHz:               1600.000
+CPU max MHz:           3066,0000
+CPU min MHz:           1600,0000
+BogoMIPS:              3207.84
