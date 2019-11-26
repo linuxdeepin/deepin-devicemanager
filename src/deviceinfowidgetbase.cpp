@@ -899,21 +899,21 @@ QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
     return ds;
 }
 
-QTextStream& operator<<(QTextStream& ds, DTableWidget* tableWidget)
+QTextStream& operator<<(QTextStream& ds, LogTreeView* tableWidget)
 {
-    if(tableWidget == nullptr || tableWidget->rowCount() < 1)
+    if(tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1)
     {
         return ds;
     }
 
-    for(int col = 0; col < tableWidget->columnCount(); ++col)
+    for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
     {
-        auto item = tableWidget->horizontalHeaderItem(col);
+        auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
         ds.setFieldWidth(tableWidget->columnWidth(col) *25.0 / tableWidget->width());
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
         if(item)
         {
-             ds << tableWidget->horizontalHeaderItem(col)->text();
+             ds << tableWidget->m_pModel->horizontalHeaderItem(col)->text();
         }
         else
         {
@@ -924,13 +924,13 @@ QTextStream& operator<<(QTextStream& ds, DTableWidget* tableWidget)
     ds << "\n";
 
 
-    for( int row = 0; row < tableWidget->rowCount(); ++row )
+    for( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row )
     {
-        for( int col = 0; col < tableWidget->columnCount(); ++col )
+        for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
         {
             ds.setFieldWidth(tableWidget->columnWidth(col) *25.0 / tableWidget->width());
             ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
-            ds << tableWidget->item(row,col)->text();
+            ds << tableWidget->m_pModel->item(row,col)->text();
             ds.setFieldWidth(0);
         }
 
@@ -986,32 +986,32 @@ bool DeviceInfoWidgetBase::exportToTxt(const QString& txtFile)
     return true;
 }
 
-bool writeTabwidgetToDoc(DTableWidget* tableWidget, Docx::Document& doc)
+bool writeTabwidgetToDoc(LogTreeView* tableWidget, Docx::Document& doc)
 {
-    if(tableWidget == nullptr || tableWidget->rowCount() < 1)
+    if(tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1)
     {
         return false;
     }
 
-    Docx::Table* tab = doc.addTable(tableWidget->rowCount()+1, tableWidget->columnCount());
+    Docx::Table* tab = doc.addTable(tableWidget->m_pModel->rowCount()+1, tableWidget->m_pModel->columnCount());
     //tab->setAlignment(Docx::WD_TABLE_ALIGNMENT::LEFT);
 
-    for(int col = 0; col < tableWidget->columnCount(); ++col)
+    for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
     {
-        auto item = tableWidget->horizontalHeaderItem(col);
+        auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
         auto cel = tab->cell(0, col);
         if(item)
         {
-             cel->addText(tableWidget->horizontalHeaderItem(col)->text());
+             cel->addText(tableWidget->m_pModel->horizontalHeaderItem(col)->text());
         }
     }
 
-    for( int row = 0; row < tableWidget->rowCount(); ++row )
+    for( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row )
     {
-        for( int col = 0; col < tableWidget->columnCount(); ++col )
+        for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
         {
             auto cel = tab->cell(row+1, col);
-            cel->addText(tableWidget->item(row,col)->text());
+            cel->addText(tableWidget->m_pModel->item(row,col)->text());
         }
     }
 
@@ -1057,7 +1057,7 @@ bool DeviceInfoWidgetBase::exportToDoc(Docx::Document& doc)
 
     if(tableWidget_)
     {
-        //writeTabwidgetToDoc(tableWidget_, doc);
+        writeTabwidgetToDoc(tableWidget_, doc);
         doc.addParagraph("\n");
     }
 
@@ -1090,17 +1090,17 @@ void DeviceInfoWidgetBase::resetXlsRowCount()
     currentXlsRow_ = 1;
 }
 
-bool writeTabwidgetToXls(DTableWidget* tableWidget, QXlsx::Document& xlsx)
+bool writeTabwidgetToXls(LogTreeView* tableWidget, QXlsx::Document& xlsx)
 {
-    if(tableWidget == nullptr || tableWidget->rowCount() < 1)
+    if(tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1)
     {
         return false;
     }
 
 
-    for(int col = 0; col < tableWidget->columnCount(); ++col)
+    for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
     {
-        auto item = tableWidget->horizontalHeaderItem(col);
+        auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
         if(item)
         {
             QXlsx::Format boldFont;
@@ -1111,11 +1111,11 @@ bool writeTabwidgetToXls(DTableWidget* tableWidget, QXlsx::Document& xlsx)
     }
     ++currentXlsRow_;
 
-    for( int row = 0; row < tableWidget->rowCount(); ++row )
+    for( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row )
     {
-        for( int col = 0; col < tableWidget->columnCount(); ++col )
+        for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
         {
-            xlsx.write( currentXlsRow_, col+1, tableWidget->item(row,col)->text());
+            xlsx.write( currentXlsRow_, col+1, tableWidget->m_pModel->item(row,col)->text());
         }
         ++currentXlsRow_;
     }
@@ -1162,7 +1162,7 @@ bool DeviceInfoWidgetBase::exportToXls(QXlsx::Document& xlsFile)
 
     if(tableWidget_)
     {
-        //writeTabwidgetToXls(tableWidget_, xlsFile);
+        writeTabwidgetToXls(tableWidget_, xlsFile);
     }
 
     if(titleInfo_)
@@ -1191,18 +1191,18 @@ bool DeviceInfoWidgetBase::exportToXls(const QString& xlsFile)
     return true;
 }
 
-bool writeTabwidgetToHtml(DTableWidget* tableWidget, QFile& html)
+bool writeTabwidgetToHtml(LogTreeView* tableWidget, QFile& html)
 {
-    if(tableWidget == nullptr || tableWidget->rowCount() < 1)
+    if(tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1)
     {
         return false;
     }
 
     html.write("<table border=\"0\" white-space:pre>\n");
     html.write("<thead><tr>\n");
-    for(int col = 0; col < tableWidget->columnCount(); ++col)
+    for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
     {
-        auto item = tableWidget->horizontalHeaderItem(col);
+        auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
         if(item)
         {
             html.write( QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + item->text() + "</th>").toUtf8().data() );
@@ -1213,12 +1213,12 @@ bool writeTabwidgetToHtml(DTableWidget* tableWidget, QFile& html)
     }
     html.write("</tr></thead>\n");
 
-    for( int row = 0; row < tableWidget->rowCount(); ++row )
+    for( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row )
     {
         html.write("<tr>\n");
-        for( int col = 0; col < tableWidget->columnCount(); ++col )
+        for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
         {
-            html.write( QString("<td style=\"width:200px;text-align:left;\">" + tableWidget->item(row,col)->text() + "</td>").toUtf8().data() );
+            html.write( QString("<td style=\"width:200px;text-align:left;\">" + tableWidget->m_pModel->item(row,col)->text() + "</td>").toUtf8().data() );
         }
         html.write("</tr>\n");
     }
@@ -1244,7 +1244,7 @@ bool DeviceInfoWidgetBase::exportToHtml(QFile& htmlFile)
 
     if(tableWidget_)
     {
-        //writeTabwidgetToHtml(tableWidget_, htmlFile);
+        writeTabwidgetToHtml(tableWidget_, htmlFile);
         htmlFile.write("<br />\n");
     }
 
