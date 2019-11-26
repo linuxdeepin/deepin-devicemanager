@@ -312,6 +312,11 @@ QString DeviceInfoWidgetBase::toHtmlString(const DeviceInfo& di)
 
     foreach( auto article, di.articles_ )
     {
+        if(article.isValid() == false)
+        {
+            continue;
+        }
+
         str += "<tr>";
         str += "<td width= \"15%\" style=\"text-align:left;\">";
         str += DApplication::translate("Main", article.name.toStdString().data());
