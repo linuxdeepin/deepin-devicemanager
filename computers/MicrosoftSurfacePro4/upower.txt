@@ -1,0 +1,41 @@
+Device: /org/freedesktop/UPower/devices/line_power_ADP1
+  native-path:          ADP1
+  power supply:         yes
+  updated:              Fri Apr 12 12:59:59 2019 (11810 seconds ago)
+  has history:          no
+  has statistics:       no
+  line-power
+    online:             no
+
+Device: /org/freedesktop/UPower/devices/battery_BAT1
+  native-path:          BAT1
+  vendor:               SMP
+  model:                X910527
+  serial:               --
+  power supply:         yes
+  updated:              Fri Apr 12 14:44:45 2019 (5524 seconds ago)
+  has history:          yes
+  has statistics:       yes
+  battery
+    present:             yes
+    rechargeable:        yes
+    state:               fully-charged
+    energy:              32.475 Wh
+    energy-empty:        0 Wh
+    energy-full:         32.475 Wh
+    energy-full-design:  38.152 Wh
+    energy-rate:         0.96 W
+    voltage:             8.616 V
+    percentage:          100%
+    capacity:            83.9799%
+    technology:          lithium-ion
+
+Daemon:
+  daemon-version:  0.9.23
+  can-suspend:     yes
+  can-hibernate:   yes
+  on-battery:      no
+  on-low-battery:  no
+  lid-is-closed:   no
+  lid-is-present:  yes
+  is-docked:       yes

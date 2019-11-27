@@ -83,11 +83,14 @@ void MotherboardWidget::initWidget()
     }
     articles.push_back(chipsetFamily);
 
-    overviewInfo_.value =  model.value + " " + chipsetFamily.value;
+    model.value.remove(vendor.value);
+    chipsetFamily.value.remove(vendor.value);
+    model.value.remove(" Company");
+    model.value.remove(" Company");
 
-    overviewInfo_.value.remove( vendor.value, Qt::CaseInsensitive);
-    overviewInfo_.value.remove( " Company" );
-    overviewInfo_.value = vendor.value + " " + overviewInfo_.value;
+    QList<ArticleStruct> aList;
+    aList << vendor << model << chipsetFamily;
+    overviewInfo_.value = joinArticle(aList);
 
     ArticleStruct serial("Serial Number");
     serial.queryData("dmidecode", "Base Board Information", "Serial Number");

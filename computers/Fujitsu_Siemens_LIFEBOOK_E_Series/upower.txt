@@ -1,0 +1,45 @@
+Device: /org/freedesktop/UPower/devices/line_power_AC
+  native-path:          AC
+  power supply:         yes
+  updated:              Mon Sep  9 07:04:41 2019 (2016 seconds ago)
+  has history:          no
+  has statistics:       no
+  line-power
+    online:             yes
+
+Device: /org/freedesktop/UPower/devices/battery_CMB1
+  native-path:          CMB1
+  vendor:               Fujitsu
+  model:                CP021006-XX
+  serial:               --
+  power supply:         yes
+  updated:              Mon Sep  9 07:38:08 2019 (9 seconds ago)
+  has history:          yes
+  has statistics:       yes
+  battery
+    present:             yes
+    rechargeable:        yes
+    state:               charging
+    energy:              34.992 Wh
+    energy-empty:        0 Wh
+    energy-full:         48.6 Wh
+    energy-full-design:  48.6 Wh
+    energy-rate:         3.78 W
+    voltage:             11.972 V
+    time to full:        3.6 hours
+    percentage:          72%
+    capacity:            100%
+    technology:          lithium-ion
+  History (rate):
+    1568007488  3.780 charging
+    1568007398  3.834 charging
+
+Daemon:
+  daemon-version:  0.9.23
+  can-suspend:     yes
+  can-hibernate:   yes
+  on-battery:      no
+  on-low-battery:  no
+  lid-is-closed:   no
+  lid-is-present:  yes
+  is-docked:       no

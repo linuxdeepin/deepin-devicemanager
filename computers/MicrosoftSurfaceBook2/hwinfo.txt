@@ -1,0 +1,24 @@
+31: None 00.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.qcP77920LF6
+  Parent ID: _Znp.rEEAXtXllbE
+  Hardware Class: monitor
+  Model: "PANASONIC TDM13O56"
+  Vendor: MEI "PANASONIC"
+  Device: eisa 0x96a2 "TDM13O56"
+  Resolution: 3000x2000@60Hz
+  Size: 285x190 mm
+  The Model Year: 2016
+  Detailed Timings #0:
+     Resolution: 3000x2000
+     Horizontal: 3000 3008 3016 3360 (+8 +16 +360) +hsync
+       Vertical: 2000 2008 2016 2064 (+8 +16 +64) +vsync
+    Frequencies: 416.00 MHz, 123.81 kHz, 59.99 Hz
+  Driver Info #0:
+    Max. Resolution: 3000x2000
+    Vert. Sync Range: 46-60 Hz
+    Hor. Sync Range: 94-124 kHz
+    Bandwidth: 416 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #28 (VGA compatible controller)
+

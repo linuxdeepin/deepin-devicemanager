@@ -1,0 +1,124 @@
+xrandr: Failed to get size of gamma for output default
+Screen 0: minimum 320 x 175, current 1024 x 768, maximum 1024 x 768
+default connected 1024x768+0+0 (0x78) normal (normal) 0mm x 0mm
+	Identifier: 0x77
+	Timestamp:  4458605
+	Subpixel:   unknown
+	Clones:    
+	CRTC:       0
+	CRTCs:      0
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+  1024x768 (0x78)   68.4MHz *current
+        h: width  1024 start    0 end    0 total 1024 skew    0 clock   66.8KHz
+        v: height  768 start    0 end    0 total  768           clock   87.0Hz
+  1024x768 (0x79)   66.8MHz
+        h: width  1024 start    0 end    0 total 1024 skew    0 clock   65.3KHz
+        v: height  768 start    0 end    0 total  768           clock   85.0Hz
+  1024x768 (0x7a)   59.0MHz
+        h: width  1024 start    0 end    0 total 1024 skew    0 clock   57.6KHz
+        v: height  768 start    0 end    0 total  768           clock   75.0Hz
+  1024x768 (0x7b)   55.1MHz
+        h: width  1024 start    0 end    0 total 1024 skew    0 clock   53.8KHz
+        v: height  768 start    0 end    0 total  768           clock   70.0Hz
+  1024x768 (0x7c)   47.2MHz
+        h: width  1024 start    0 end    0 total 1024 skew    0 clock   46.1KHz
+        v: height  768 start    0 end    0 total  768           clock   60.0Hz
+  1024x768 (0x7d)   63.7MHz
+        h: width  1024 start    0 end    0 total 1024 skew    0 clock   62.2KHz
+        v: height  768 start    0 end    0 total  768           clock   81.0Hz
+  832x624 (0x7e)   38.9MHz
+        h: width   832 start    0 end    0 total  832 skew    0 clock   46.8KHz
+        v: height  624 start    0 end    0 total  624           clock   75.0Hz
+  800x600 (0x7f)   40.8MHz
+        h: width   800 start    0 end    0 total  800 skew    0 clock   51.0KHz
+        v: height  600 start    0 end    0 total  600           clock   85.0Hz
+  800x600 (0x80)   36.0MHz
+        h: width   800 start    0 end    0 total  800 skew    0 clock   45.0KHz
+        v: height  600 start    0 end    0 total  600           clock   75.0Hz
+  800x600 (0x81)   34.6MHz
+        h: width   800 start    0 end    0 total  800 skew    0 clock   43.2KHz
+        v: height  600 start    0 end    0 total  600           clock   72.0Hz
+  800x600 (0x82)   28.8MHz
+        h: width   800 start    0 end    0 total  800 skew    0 clock   36.0KHz
+        v: height  600 start    0 end    0 total  600           clock   60.0Hz
+  800x600 (0x83)   26.9MHz
+        h: width   800 start    0 end    0 total  800 skew    0 clock   33.6KHz
+        v: height  600 start    0 end    0 total  600           clock   56.0Hz
+  640x480 (0x84)   26.1MHz
+        h: width   640 start    0 end    0 total  640 skew    0 clock   40.8KHz
+        v: height  480 start    0 end    0 total  480           clock   85.0Hz
+  640x480 (0x85)   23.0MHz
+        h: width   640 start    0 end    0 total  640 skew    0 clock   36.0KHz
+        v: height  480 start    0 end    0 total  480           clock   75.0Hz
+  640x480 (0x86)   22.4MHz
+        h: width   640 start    0 end    0 total  640 skew    0 clock   35.0KHz
+        v: height  480 start    0 end    0 total  480           clock   73.0Hz
+  640x480 (0x87)   18.4MHz
+        h: width   640 start    0 end    0 total  640 skew    0 clock   28.8KHz
+        v: height  480 start    0 end    0 total  480           clock   60.0Hz
+  720x400 (0x88)   24.5MHz
+        h: width   720 start    0 end    0 total  720 skew    0 clock   34.0KHz
+        v: height  400 start    0 end    0 total  400           clock   85.0Hz
+  640x400 (0x89)   21.8MHz
+        h: width   640 start    0 end    0 total  640 skew    0 clock   34.0KHz
+        v: height  400 start    0 end    0 total  400           clock   85.0Hz
+  640x350 (0x8a)   19.0MHz
+        h: width   640 start    0 end    0 total  640 skew    0 clock   29.8KHz
+        v: height  350 start    0 end    0 total  350           clock   85.0Hz
+  512x384 (0x8b)   17.1MHz
+        h: width   512 start    0 end    0 total  512 skew    0 clock   33.4KHz
+        v: height  384 start    0 end    0 total  384           clock   87.0Hz
+  512x384 (0x8c)   16.7MHz
+        h: width   512 start    0 end    0 total  512 skew    0 clock   32.6KHz
+        v: height  384 start    0 end    0 total  384           clock   85.0Hz
+  512x384 (0x8d)   14.7MHz
+        h: width   512 start    0 end    0 total  512 skew    0 clock   28.8KHz
+        v: height  384 start    0 end    0 total  384           clock   75.0Hz
+  512x384 (0x8e)   13.8MHz
+        h: width   512 start    0 end    0 total  512 skew    0 clock   26.9KHz
+        v: height  384 start    0 end    0 total  384           clock   70.0Hz
+  512x384 (0x8f)   11.8MHz
+        h: width   512 start    0 end    0 total  512 skew    0 clock   23.0KHz
+        v: height  384 start    0 end    0 total  384           clock   60.0Hz
+  416x312 (0x90)    9.7MHz
+        h: width   416 start    0 end    0 total  416 skew    0 clock   23.4KHz
+        v: height  312 start    0 end    0 total  312           clock   75.0Hz
+  400x300 (0x91)   10.2MHz
+        h: width   400 start    0 end    0 total  400 skew    0 clock   25.5KHz
+        v: height  300 start    0 end    0 total  300           clock   85.0Hz
+  400x300 (0x92)    9.0MHz
+        h: width   400 start    0 end    0 total  400 skew    0 clock   22.5KHz
+        v: height  300 start    0 end    0 total  300           clock   75.0Hz
+  400x300 (0x93)    8.6MHz
+        h: width   400 start    0 end    0 total  400 skew    0 clock   21.6KHz
+        v: height  300 start    0 end    0 total  300           clock   72.0Hz
+  400x300 (0x94)    7.2MHz
+        h: width   400 start    0 end    0 total  400 skew    0 clock   18.0KHz
+        v: height  300 start    0 end    0 total  300           clock   60.0Hz
+  400x300 (0x95)    6.7MHz
+        h: width   400 start    0 end    0 total  400 skew    0 clock   16.8KHz
+        v: height  300 start    0 end    0 total  300           clock   56.0Hz
+  320x240 (0x96)    6.5MHz
+        h: width   320 start    0 end    0 total  320 skew    0 clock   20.4KHz
+        v: height  240 start    0 end    0 total  240           clock   85.0Hz
+  320x240 (0x97)    5.8MHz
+        h: width   320 start    0 end    0 total  320 skew    0 clock   18.0KHz
+        v: height  240 start    0 end    0 total  240           clock   75.0Hz
+  320x240 (0x98)    5.6MHz
+        h: width   320 start    0 end    0 total  320 skew    0 clock   17.5KHz
+        v: height  240 start    0 end    0 total  240           clock   73.0Hz
+  320x240 (0x99)    4.6MHz
+        h: width   320 start    0 end    0 total  320 skew    0 clock   14.4KHz
+        v: height  240 start    0 end    0 total  240           clock   60.0Hz
+  360x200 (0x9a)    6.1MHz
+        h: width   360 start    0 end    0 total  360 skew    0 clock   17.0KHz
+        v: height  200 start    0 end    0 total  200           clock   85.0Hz
+  320x200 (0x9b)    5.4MHz
+        h: width   320 start    0 end    0 total  320 skew    0 clock   17.0KHz
+        v: height  200 start    0 end    0 total  200           clock   85.0Hz
+  320x175 (0x9c)    4.8MHz
+        h: width   320 start    0 end    0 total  320 skew    0 clock   14.9KHz
+        v: height  175 start    0 end    0 total  175           clock   85.0Hz

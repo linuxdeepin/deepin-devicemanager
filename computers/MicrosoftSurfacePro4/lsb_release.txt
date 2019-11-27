@@ -1,0 +1,4 @@
+Distributor ID:	Devuan
+Description:	Devuan GNU/Linux 2.0 (ascii)
+Release:	2.0
+Codename:	ascii

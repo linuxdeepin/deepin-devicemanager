@@ -1701,7 +1701,7 @@
         </message>
         <message>
             <source>Laptop</source>
-            <translation>便携式电脑</translation>
+            <translation>笔记本电脑</translation>
         </message>
         <message>
             <source>Rack Mount Chassis</source>

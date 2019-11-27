@@ -1,0 +1,1 @@
+Linux version 4.19.0-arm64-desktop (deepin@uos) (gcc version 8.3.0 (Debian 8.3.0-6)) #1072 SMP Fri Nov 15 15:02:43 CST 2019

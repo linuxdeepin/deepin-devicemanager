@@ -76,6 +76,8 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
     pName.value = pName.value.remove( vendor.value, Qt::CaseInsensitive);
     ver.value = ver.value.remove(vendor.value, Qt::CaseInsensitive);
 
+    pName.value.remove(ver.value);
+
     QList<ArticleStruct> acList;
 
     if(ver.value.contains("Not Specified", Qt::CaseInsensitive) || ver.value.contains("x.x", Qt::CaseInsensitive) || ver.value.contains("Not Applicable", Qt::CaseInsensitive))

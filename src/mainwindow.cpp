@@ -70,6 +70,7 @@ QList<ArticleStruct> staticArticles;
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
+    //setBaseSize(1070, 790);
     setMinimumSize(mainWindowMinWidth_, mainWindowMinHeight_);
 
     if(false == DeviceInfoParserInstance.getRootPassword())

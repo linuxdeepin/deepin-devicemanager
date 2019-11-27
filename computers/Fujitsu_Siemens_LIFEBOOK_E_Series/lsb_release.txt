@@ -1,0 +1,4 @@
+Distributor ID:	openSUSE project
+Description:	openSUSE 13.1 (Bottle) (i586)
+Release:	13.1
+Codename:	Bottle

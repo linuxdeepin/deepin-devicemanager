@@ -1,0 +1,216 @@
+I: Bus=0019 Vendor=0000 Product=0005 Version=0000
+N: Name="Lid Switch"
+P: Phys=PNP0C0D/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0D:00/input/input9
+U: Uniq=
+H: Handlers=event0 
+B: PROP=0
+B: EV=21
+B: SW=1
+
+I: Bus=0019 Vendor=0000 Product=0000 Version=0000
+N: Name="Surface Pro 3/4 Buttons"
+P: Phys=MSHW0040/buttons
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:19/PNP0C09:00/MSHW0040:00/input/input10
+U: Uniq=
+H: Handlers=kbd event6 
+B: PROP=0
+B: EV=3
+B: KEY=201c000000000000 0
+
+I: Bus=0010 Vendor=001f Product=0001 Version=0100
+N: Name="PC Speaker"
+P: Phys=isa0061/input0
+S: Sysfs=/devices/platform/pcspkr/input/input11
+U: Uniq=
+H: Handlers=kbd event7 
+B: PROP=0
+B: EV=40001
+B: SND=6
+
+I: Bus=0019 Vendor=0000 Product=0006 Version=0000
+N: Name="Video Bus"
+P: Phys=LNXVIDEO/video/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/LNXVIDEO:00/input/input12
+U: Uniq=
+H: Handlers=kbd event1 
+B: PROP=0
+B: EV=3
+B: KEY=3e000b00000000 0 0 0
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Mic"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1f.3/sound/card0/input13
+U: Uniq=
+H: Handlers=event2 
+B: PROP=0
+B: EV=21
+B: SW=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Headphone"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1f.3/sound/card0/input14
+U: Uniq=
+H: Handlers=event3 
+B: PROP=0
+B: EV=21
+B: SW=4
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH HDMI/DP,pcm=3"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1f.3/sound/card0/input15
+U: Uniq=
+H: Handlers=event8 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH HDMI/DP,pcm=7"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1f.3/sound/card0/input16
+U: Uniq=
+H: Handlers=event9 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH HDMI/DP,pcm=8"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1f.3/sound/card0/input17
+U: Uniq=
+H: Handlers=event10 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH HDMI/DP,pcm=9"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1f.3/sound/card0/input18
+U: Uniq=
+H: Handlers=event11 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH HDMI/DP,pcm=10"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1f.3/sound/card0/input19
+U: Uniq=
+H: Handlers=event12 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0003 Vendor=045e Product=07e8 Version=0111
+N: Name="Microsoft Surface Type Cover Keyboard"
+P: Phys=usb-0000:00:14.0-7/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input20
+U: Uniq=
+H: Handlers=sysrq kbd leds event4 
+B: PROP=0
+B: EV=120013
+B: KEY=1000000000007 ff800000000007ff febeffdff3cfffff fffffffffffffffe
+B: MSC=10
+B: LED=7
+
+I: Bus=0003 Vendor=045e Product=07e8 Version=0111
+N: Name="Microsoft Surface Type Cover Consumer Control"
+P: Phys=usb-0000:00:14.0-7/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input22
+U: Uniq=
+H: Handlers=kbd event5 
+B: PROP=0
+B: EV=1f
+B: KEY=3f0003007f 0 0 483ffff17aff32d bf54444600000000 1 130f938b17c000 677bfad9415fed 9ed68000004400 10000002
+B: REL=1040
+B: ABS=100000000
+B: MSC=10
+
+I: Bus=0003 Vendor=045e Product=07e8 Version=0111
+N: Name="Microsoft Surface Type Cover Touchpad"
+P: Phys=usb-0000:00:14.0-7/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input24
+U: Uniq=
+H: Handlers=mouse0 event13 
+B: PROP=5
+B: EV=1b
+B: KEY=e520 10000 0 0 0 0
+B: ABS=260800000000003
+B: MSC=20
+
+I: Bus=0003 Vendor=1532 Product=0067 Version=0111
+N: Name="Razer Razer Naga Trinity"
+P: Phys=usb-0000:00:14.0-2.1.4/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.1/1-2.1.4/1-2.1.4:1.0/0003:1532:0067.0008/input/input45
+U: Uniq=00000000001A
+H: Handlers=mouse1 event14 
+B: PROP=0
+B: EV=17
+B: KEY=1f0000 0 0 0 0
+B: REL=903
+B: MSC=10
+
+I: Bus=0003 Vendor=1532 Product=0067 Version=0111
+N: Name="Razer Razer Naga Trinity Keyboard"
+P: Phys=usb-0000:00:14.0-2.1.4/input1
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.1/1-2.1.4/1-2.1.4:1.1/0003:1532:0067.0009/input/input46
+U: Uniq=00000000001A
+H: Handlers=sysrq kbd event15 
+B: PROP=0
+B: EV=100013
+B: KEY=1000000000007 ff9f207ac14057ff febeffdfffefffff fffffffffffffffe
+B: MSC=10
+
+I: Bus=0003 Vendor=1532 Product=0067 Version=0111
+N: Name="Razer Razer Naga Trinity Consumer Control"
+P: Phys=usb-0000:00:14.0-2.1.4/input1
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.1/1-2.1.4/1-2.1.4:1.1/0003:1532:0067.0009/input/input47
+U: Uniq=00000000001A
+H: Handlers=kbd event16 
+B: PROP=0
+B: EV=1f
+B: KEY=3007f 0 0 483ffff17aff32d bf54444600000000 1 130c130b17c000 267bfad9415fed 9e168000004400 10000002
+B: REL=1040
+B: ABS=100000000
+B: MSC=10
+
+I: Bus=0003 Vendor=1532 Product=0067 Version=0111
+N: Name="Razer Razer Naga Trinity System Control"
+P: Phys=usb-0000:00:14.0-2.1.4/input1
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.1/1-2.1.4/1-2.1.4:1.1/0003:1532:0067.0009/input/input48
+U: Uniq=00000000001A
+H: Handlers=kbd event17 
+B: PROP=0
+B: EV=13
+B: KEY=c000 10000000000000 0
+B: MSC=10
+
+I: Bus=0003 Vendor=1532 Product=0067 Version=0111
+N: Name="Razer Razer Naga Trinity"
+P: Phys=usb-0000:00:14.0-2.1.4/input1
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.1/1-2.1.4/1-2.1.4:1.1/0003:1532:0067.0009/input/input49
+U: Uniq=00000000001A
+H: Handlers=event18 
+B: PROP=0
+B: EV=9
+B: ABS=10000000000
+
+I: Bus=0003 Vendor=1532 Product=0067 Version=0111
+N: Name="Razer Razer Naga Trinity"
+P: Phys=usb-0000:00:14.0-2.1.4/input2
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.1/1-2.1.4/1-2.1.4:1.2/0003:1532:0067.000A/input/input50
+U: Uniq=00000000001A
+H: Handlers=sysrq kbd leds event19 
+B: PROP=0
+B: EV=120013
+B: KEY=1000000000007 ff9f207ac14057ff febeffdfffefffff fffffffffffffffe
+B: MSC=10
+B: LED=7
+

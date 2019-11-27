@@ -1,0 +1,4 @@
+Distributor ID:	Uos
+Description:	uos 20
+Release:	20
+Codename:	buster

@@ -1,0 +1,79 @@
+I: Bus=0019 Vendor=0000 Product=0001 Version=0000
+N: Name="Power Button"
+P: Phys=PNP0C0C/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input0
+U: Uniq=
+H: Handlers=kbd event0 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0003 Vendor=1c4f Product=0026 Version=0110
+N: Name="SIGMACHIP USB Keyboard"
+P: Phys=usb-0000:7a:01.0-2.1/input0
+S: Sysfs=/devices/pci0000:7a/0000:7a:01.0/usb1/1-2/1-2.1/1-2.1:1.0/0003:1C4F:0026.0001/input/input1
+U: Uniq=
+H: Handlers=sysrq kbd event1 
+B: PROP=0
+B: EV=120013
+B: KEY=1000000000007 ff800000000007ff febeffdff3cfffff fffffffffffffffe
+B: MSC=10
+B: LED=7
+
+I: Bus=0003 Vendor=1c4f Product=0026 Version=0110
+N: Name="SIGMACHIP USB Keyboard Consumer Control"
+P: Phys=usb-0000:7a:01.0-2.1/input1
+S: Sysfs=/devices/pci0000:7a/0000:7a:01.0/usb1/1-2/1-2.1/1-2.1:1.1/0003:1C4F:0026.0002/input/input2
+U: Uniq=
+H: Handlers=kbd event2 
+B: PROP=0
+B: EV=1f
+B: KEY=300ff 0 0 483ffff17aff32d bf54444600000000 1 130c730b17c000 267bfad9415fed 9e168000004400 10000002
+B: REL=40
+B: ABS=100000000
+B: MSC=10
+
+I: Bus=0003 Vendor=1c4f Product=0026 Version=0110
+N: Name="SIGMACHIP USB Keyboard System Control"
+P: Phys=usb-0000:7a:01.0-2.1/input1
+S: Sysfs=/devices/pci0000:7a/0000:7a:01.0/usb1/1-2/1-2.1/1-2.1:1.1/0003:1C4F:0026.0002/input/input3
+U: Uniq=
+H: Handlers=kbd event3 
+B: PROP=0
+B: EV=13
+B: KEY=c000 10000000000000 0
+B: MSC=10
+
+I: Bus=0003 Vendor=0bda Product=4987 Version=0111
+N: Name="Generic USB Audio"
+P: Phys=usb-0000:7a:01.0-2.3/input5
+S: Sysfs=/devices/pci0000:7a/0000:7a:01.0/usb1/1-2/1-2.3/1-2.3:1.5/0003:0BDA:4987.0004/input/input5
+U: Uniq=201701110001
+H: Handlers=kbd event5 
+B: PROP=0
+B: EV=13
+B: KEY=40 0 0 0 0 0 0 1000000000 c000000000000 0
+B: MSC=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA ATI HDMI HDMI/DP,pcm=3"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:08.0/0000:03:00.1/sound/card0/input6
+U: Uniq=
+H: Handlers=event6 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0003 Vendor=093a Product=2510 Version=0111
+N: Name="PixArt USB Optical Mouse"
+P: Phys=usb-0000:7a:01.0-2.2/input0
+S: Sysfs=/devices/pci0000:7a/0000:7a:01.0/usb1/1-2/1-2.2/1-2.2:1.0/0003:093A:2510.0005/input/input7
+U: Uniq=
+H: Handlers=mouse0 event4 
+B: PROP=0
+B: EV=17
+B: KEY=70000 0 0 0 0
+B: REL=103
+B: MSC=10
+

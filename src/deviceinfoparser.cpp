@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/Kunpeng_Desktop_Board";
+const QString DEVICEINFO_PATH = "../../computers/Fujitsu_Siemens_LIFEBOOK_E_Series";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -446,16 +446,16 @@ QStringList DeviceInfoParser::getCatinputAudioDeviceList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
-        if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Name") )
-        {
-            QString name = DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"];
-            if(     name.contains("Speaker", Qt::CaseInsensitive) \
-                ||  name.contains("Headphone", Qt::CaseInsensitive) \
-                ||  name.contains("Mic", Qt::CaseInsensitive)  )
-            {
-                    return true;
-            }
-        }
+//        if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Name") )
+//        {
+//            QString name = DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"];
+//            if(     name.contains("Speaker", Qt::CaseInsensitive) \
+//                ||  name.contains("Headphone", Qt::CaseInsensitive) \
+//                ||  name.contains("Mic", Qt::CaseInsensitive)  )
+//            {
+//                    return true;
+//            }
+//        }
 
         if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Sysfs") )
         {
