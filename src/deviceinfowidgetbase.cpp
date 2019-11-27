@@ -73,7 +73,7 @@ void DeivceInfoBrower::contextMenuEvent(QContextMenuEvent *event)
     //QMenu* standMenu = createStandardContextMenu();
 
     QString str = QTextEdit::textCursor().selectedText();
-    if(str.isEmpty() == false)
+    //if(str.isEmpty() == false)
     {
         QAction* copyAction = new QAction(QIcon::fromTheme("edit-copy"), DApplication::translate("Main", "Copy(C)"), this);
         connect(copyAction, &QAction::triggered, \
@@ -81,9 +81,14 @@ void DeivceInfoBrower::contextMenuEvent(QContextMenuEvent *event)
                 {
                     QClipboard *clipboard = DApplication::clipboard(); //获取系统剪贴板指针
                     QTextDocumentFragment frag = textCursor().selection();
-                    clipboard->setText(frag.toHtml());//设置剪贴板内容
+                    clipboard->setText(frag.toPlainText());//设置剪贴板内容
                 }
         );
+
+        if(str.isEmpty())
+        {
+            copyAction->setDisabled(true);
+        }
 
         standMenu->addAction(copyAction);
         standMenu->addSeparator();

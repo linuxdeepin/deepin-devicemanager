@@ -392,6 +392,10 @@
             <translation>导出(E)</translation>
         </message>
         <message>
+            <source>Export</source>
+            <translation>导出</translation>
+        </message>
+        <message>
             <source>Cpu Info</source>
             <translation>处理器信息</translation>
         </message>
@@ -1454,6 +1458,10 @@
         <message>
             <source>Copy(C)</source>
             <translation>复制(C)</translation>
+        </message>
+        <message>
+            <source>Copy</source>
+            <translation>复制</translation>
         </message>
         <message>
             <source>Load_Retry_Count</source>

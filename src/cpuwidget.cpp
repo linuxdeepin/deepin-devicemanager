@@ -138,6 +138,11 @@ void CpuWidget::initWidget()
         {
             QString md = DeviceInfoParserInstance.queryData("catcpu", cpu, "model name");
             QString mc = DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id");
+            if(mc.isEmpty() || mc == DApplication::translate("Main", "Unknown"))
+            {
+                mc = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Vendor ID");
+            }
+
             if(mc == DApplication::translate("Main", "Unknown"))
             {
                 mc = md.split(" ").first();
@@ -304,6 +309,8 @@ void CpuWidget::addPrecessor(const QString& precessor)
 
     ArticleStruct vendor("Vendor");
     vendor.queryData("catcpu", precessor, "vendor_id" );
+    vendor.queryData("lscpu", "lscpu", "Vendor ID" );
+
     articles.push_back(vendor);
     existArticles.insert("vendor_id");
 

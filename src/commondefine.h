@@ -27,7 +27,7 @@ const QString commonFontFamily_ = "Noto Sans CJK TC";
 const int mainWindowMinWidth_ = 1070;
 const int mainWindowMinHeight_ = 790;
 
-const int leftDeviceListViewMinWidth_ = 152;
+const int leftDeviceListViewMinWidth_ = 172;
 
 const int NameLength_ = 120;
 

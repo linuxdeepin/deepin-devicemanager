@@ -165,6 +165,8 @@ void MainWindow::loadDeviceWidget()
 
     //leftDeviceView_->setMaximumWidth(200);
     leftDeviceView_->setFixedWidth(leftDeviceListViewMinWidth_);
+    //leftDeviceView_->setMaximumWidth(leftDeviceListViewMinWidth_ + 30);
+    //leftDeviceView_->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
     DApplication::processEvents();
 
@@ -331,6 +333,11 @@ void MainWindow::insertDeviceWidget(int index, DeviceInfoWidgetBase* w)
 
 void MainWindow::refresh()
 {
+    if(refreshing_ == true)
+    {
+        return;
+    }
+
     if(false == DeviceInfoParserInstance.getRootPassword())
     {
         return;
@@ -542,6 +549,11 @@ void MainWindow::showDisplayShortcutsHelpDialog()
     exportItem.insert("value", "Ctrl+E");
     editorJsonItems.append(exportItem);
 
+    QJsonObject refreshItem;
+    refreshItem.insert("name", DApplication::translate("Main","Refresh"));
+    refreshItem.insert("value", "F5");
+    editorJsonItems.append(refreshItem);
+
     editorJsonGroup.insert("groupItems", editorJsonItems);
     jsonGroups.append(editorJsonGroup);
 
@@ -620,6 +632,11 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
             }
         }
     }
+    if(  e->key()==Qt::Key_F5 )
+    {
+        refresh();
+        return;
+    }
     else if(e->key()==Qt::Key_Question)
     {
         Qt::KeyboardModifiers modifiers = e->modifiers();
@@ -644,6 +661,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
             }
         }
     }
+
 
     return DMainWindow::keyPressEvent(e);
 }
