@@ -1030,7 +1030,7 @@ bool writeTabwidgetToDoc(LogTreeView* tableWidget, Docx::Document& doc)
 
 bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
 {
-    if(di.title_.isEmpty())
+    if(di.title_.isEmpty() == false)
     {
         doc.addHeading( di.title_, 4);
     }
@@ -1083,7 +1083,7 @@ bool DeviceInfoWidgetBase::exportToDoc(Docx::Document& doc)
         doc.addParagraph("\n");
     }
 
-    doc.addParagraph("\n");
+    //doc.addParagraph("\n");
     return true;
 }
 
@@ -1137,7 +1137,7 @@ bool writeTabwidgetToXls(LogTreeView* tableWidget, QXlsx::Document& xlsx)
 
 bool writeDeviceInfoToXls(const DeviceInfo& di, QXlsx::Document& xlsx)
 {
-    if(di.title_.isEmpty())
+    if(di.title_.isEmpty() == false)
     {
         QXlsx::Format boldFont;
         boldFont.setFontSize(10);

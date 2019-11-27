@@ -186,7 +186,7 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
 
     //item->setFont(itemFont);
 
-    item->setSizeHint( QSize(20, 38) );
+    //item->setSizeHint( QSize(20, 38) );
 
     DGuiApplicationHelper::ColorType ct = DApplicationHelper::instance()->themeType();
 
@@ -201,11 +201,11 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
 
     item->setTextAlignment(Qt::AlignLeft);
 
-    const QMargins ListViweItemMargin(10, 8, 0, 8);
+    //const QMargins ListViweItemMargin(10, 8, 0, 8);
     //const QMargins ListViweItemMargin( 10, 5, 10, 5 );
-    const QVariant VListViewItemMargin = QVariant::fromValue(ListViweItemMargin);
+    //const QVariant VListViewItemMargin = QVariant::fromValue(ListViweItemMargin);
 
-    item->setData(VListViewItemMargin, Dtk::MarginsRole);
+    //item->setData(VListViewItemMargin, Dtk::MarginsRole);
 
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
 

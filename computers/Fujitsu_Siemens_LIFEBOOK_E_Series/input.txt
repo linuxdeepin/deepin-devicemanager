@@ -101,3 +101,52 @@ H: Handlers=kbd event9
 B: PROP=0
 B: EV=3
 B: KEY=e0000 0 0 0
+
+I: Bus=0005 Vendor=413c Product=2114 Version=0001
+N: Name="Dell WK717Keyboard Keyboard"
+P: Phys=00:19:86:00:25:4E
+S: Sysfs=/devices/virtual/misc/uhid/0005:413C:2114.0001/input/input17
+U: Uniq=C6:FC:4E:B1:FD:BA
+H: Handlers=sysrq kbd leds event16 
+B: PROP=0
+B: EV=120013
+B: KEY=1000000000007 ff800000000007ff febeffdfffefffff fffffffffffffffe
+B: MSC=10
+B: LED=1f
+
+I: Bus=0005 Vendor=413c Product=2114 Version=0001
+N: Name="Dell WK717Keyboard Consumer Control"
+P: Phys=00:19:86:00:25:4E
+S: Sysfs=/devices/virtual/misc/uhid/0005:413C:2114.0001/input/input18
+U: Uniq=C6:FC:4E:B1:FD:BA
+H: Handlers=kbd event17 
+B: PROP=0
+B: EV=1f
+B: KEY=3f000300ff 0 0 483ffff17aff32d bf54444600000000 1 130ff38b17c000 677bfad9415fed 19ed68000004400 10000002
+B: REL=40
+B: ABS=100000000
+B: MSC=10
+
+I: Bus=0005 Vendor=413c Product=2114 Version=0001
+N: Name="Dell WK717Keyboard System Control"
+P: Phys=00:19:86:00:25:4E
+S: Sysfs=/devices/virtual/misc/uhid/0005:413C:2114.0001/input/input19
+U: Uniq=C6:FC:4E:B1:FD:BA
+H: Handlers=kbd event18 
+B: PROP=0
+B: EV=13
+B: KEY=c000 10000000000000 0
+B: MSC=10
+
+I: Bus=0005 Vendor=413c Product=301e Version=0001
+N: Name="Dell WM527 Mouse"
+P: Phys=00:19:86:00:25:4E
+S: Sysfs=/devices/virtual/misc/uhid/0005:413C:301E.0002/input/input20
+U: Uniq=D3:6A:FF:19:CE:06
+H: Handlers=mouse1 event19 
+B: PROP=0
+B: EV=17
+B: KEY=1f0000 0 0 0 0
+B: REL=143
+B: MSC=10
+

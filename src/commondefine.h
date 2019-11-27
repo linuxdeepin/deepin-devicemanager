@@ -30,7 +30,7 @@ const int mainWindowMinHeight_ = 790;
 //const int mainWindowMinWidth_ = 768;
 //const int mainWindowMinHeight_ = 562;
 
-const int leftDeviceListViewMinWidth_ = 172;
+const int leftDeviceListViewMinWidth_ = 177;
 
 const int NameLength_ = 120;
 
