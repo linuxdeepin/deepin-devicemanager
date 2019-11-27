@@ -539,11 +539,6 @@ void MainWindow::showDisplayShortcutsHelpDialog()
     editorJsonGroup.insert("groupName", DApplication::translate("Main","DeviceManager"));
     QJsonArray editorJsonItems;
 
-//    QJsonObject refreshItem;
-//    refreshItem.insert("name", DApplication::translate("Main","Refresh"));
-//    refreshItem.insert("value", "F5");
-//    editorJsonItems.append(refreshItem);
-
     QJsonObject exportItem;
     exportItem.insert("name", DApplication::translate("Main","Export"));
     exportItem.insert("value", "Ctrl+E");

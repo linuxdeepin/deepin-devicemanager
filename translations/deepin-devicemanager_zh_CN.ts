@@ -388,6 +388,10 @@
             <translation>刷新</translation>
         </message>
         <message>
+            <source>Refresh(F5)</source>
+            <translation>刷新(F5)</translation>
+        </message>
+        <message>
             <source>Export(E)</source>
             <translation>导出(E)</translation>
         </message>

@@ -186,7 +186,7 @@ void DeviceInfoWidgetBase::initContextMenu()
 
     contextMenu_->setMinimumWidth(contextMenuWidth_);
 
-    refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), DApplication::translate("Main", "Refresh"), this);
+    refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), DApplication::translate("Main", "Refresh(F5)"), this);
 
     connect(refreshAction_, &QAction::triggered, \
             [this]()

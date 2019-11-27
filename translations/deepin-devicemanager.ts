@@ -384,6 +384,10 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source>Refresh(F5)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source>Export</source>
             <translation type="unfinished"/>
         </message>
