@@ -1,0 +1,647 @@
+deepin-pc
+    description: Desktop Computer
+    product: 90EWA050CN (LENOVO_PN_90EWA050CN)
+    vendor: LENOVO
+    version: KaiTianM610B-D120
+    serial: CF001QQB
+    width: 64 bits
+    capabilities: smbios-2.7 dmi-2.7 smp vsyscall32
+    configuration: administrator_password=disabled boot=normal chassis=desktop family=IdeaCentre frontpanel_password=disabled keyboard_password=disabled power-on_password=disabled sku=LENOVO_PN_90EWA050CN uuid=0F80B520-A0C4-AF1D-6DC1-0D8D00008DC1
+  *-core
+       description: Motherboard
+       product: VT8614C
+       vendor: LENOVO
+       physical id: 0
+       version: Not Defined
+       serial: NOK
+       slot: Base Board Chassis Location
+     *-cache:0
+          description: L1 cache
+          physical id: 0
+          slot: L1-Cache
+          size: 32KiB
+          capacity: 32KiB
+          capabilities: burst pipeline-burst asynchronous internal write-back instruction
+          configuration: level=1
+     *-cache:1
+          description: L2 cache
+          physical id: 1
+          slot: L2-Cache
+          size: 2MiB
+          capacity: 2MiB
+          capabilities: burst pipeline-burst asynchronous internal write-back unified
+          configuration: level=2
+     *-cpu
+          description: CPU
+          product: C-QuadCore C4600@2.0GHz
+          vendor: CentaurHauls
+          physical id: 2
+          bus info: cpu@0
+          version: C-QuadCore C4600@2.0GHz
+          slot: CPU 1
+          size: 1498MHz
+          capacity: 1998MHz
+          width: 64 bits
+          clock: 333MHz
+          capabilities: lm fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx fxsr_opt pdpe1gb rdtscp x86-64 constant_tsc arch_perfmon rep_good nopl xtopology cpuid pni pclmulqdq monitor vmx est tm2 ssse3 cx16 xtpr pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand rng rng_en ace ace_en ace2 phe phe_en pmm pmm_en parallax parallax_en rng2 rng2_en phe2 phe2_en xmodx xmodx_en lahf_lm abm 3dnowprefetch invpcid_single pti tpr_shadow vnmi ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 invpcid dep_fpu_cs_ds rdseed adx xsaveopt dtherm ida cpufreq
+          configuration: cores=4 enabledcores=4 threads=4
+     *-firmware
+          description: BIOS
+          vendor: LENOVO
+          physical id: 4
+          version: M0SKT28A
+          date: 07/13/2017
+          size: 64KiB
+          capacity: 8MiB
+          capabilities: pci upgrade shadowing cdboot bootselect socketedrom edd int5printscreen int9keyboard int14serial acpi usb biosbootspecification uefi
+     *-memory
+          description: System Memory
+          physical id: 2c
+          slot: System board or motherboard
+          size: 4GiB
+        *-bank:0
+             description: DIMM DDR3 Synchronous [empty]
+             product: PartNumber0
+             vendor: Manufacturer0
+             physical id: 0
+             serial: SerNum0
+             slot: DIMM0
+             width: 64 bits
+        *-bank:1
+             description: DIMM DDR3 Synchronous 1600 MHz (0.6 ns)
+             product: PartNumber1
+             vendor: Manufacturer1
+             physical id: 1
+             serial: SerNum1
+             slot: DIMM1
+             size: 4GiB
+             width: 64 bits
+             clock: 1600MHz (0.6ns)
+     *-pci:0
+          description: Host bridge
+          product: VX11 Standard Host Bridge
+          vendor: VIA Technologies, Inc.
+          physical id: 100
+          bus info: pci@0000:00:00.0
+          version: 80
+          width: 32 bits
+          clock: 33MHz
+        *-pci:0
+             description: PCI bridge
+             product: VX11 PCI Express Root Port
+             vendor: VIA Technologies, Inc.
+             physical id: 2
+             bus info: pci@0000:00:02.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci pciexpress pm msi normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:25 ioport:e000(size=4096) memory:d0200000-d02fffff ioport:c0000000(size=268435456)
+           *-display
+                description: VGA compatible controller
+                product: Oland [Radeon HD 8570 / R7 240/340 OEM]
+                vendor: Advanced Micro Devices, Inc. [AMD/ATI]
+                physical id: 0
+                bus info: pci@0000:01:00.0
+                version: 87
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pm pciexpress msi vga_controller bus_master cap_list rom
+                configuration: driver=radeon latency=0
+                resources: irq:35 memory:c0000000-cfffffff memory:d0200000-d023ffff ioport:e000(size=256) memory:d0260000-d027ffff
+           *-multimedia
+                description: Audio device
+                product: Cape Verde/Pitcairn HDMI Audio [Radeon HD 7700/7800 Series]
+                vendor: Advanced Micro Devices, Inc. [AMD/ATI]
+                physical id: 0.1
+                bus info: pci@0000:01:00.1
+                version: 00
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pm pciexpress msi bus_master cap_list
+                configuration: driver=snd_hda_intel latency=0
+                resources: irq:37 memory:d0240000-d0243fff
+        *-pci:1
+             description: PCI bridge
+             product: VX11 PCI Express Root Port
+             vendor: VIA Technologies, Inc.
+             physical id: 3
+             bus info: pci@0000:00:03.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci pciexpress pm msi normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:27 ioport:d000(size=4096) memory:d0100000-d01fffff ioport:d0000000(size=1048576)
+           *-network
+                description: Ethernet interface
+                product: RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller
+                vendor: Realtek Semiconductor Co., Ltd.
+                physical id: 0
+                bus info: pci@0000:02:00.0
+                logical name: enp2s0
+                version: 0c
+                serial: 1c:69:7a:20:69:49
+                size: 1Gbit/s
+                capacity: 1Gbit/s
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pm msi pciexpress msix vpd bus_master cap_list ethernet physical tp aui bnc mii fibre 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+                configuration: autonegotiation=on broadcast=yes driver=r8169 duplex=full firmware=rtl8168g-2_0.0.1 02/06/13 ip=10.20.17.57 latency=0 link=yes multicast=yes port=MII speed=1Gbit/s
+                resources: irq:30 ioport:d000(size=256) memory:d0100000-d0100fff memory:d0000000-d0003fff
+        *-pci:2
+             description: PCI bridge
+             product: VX11 PCI Express Root Port
+             vendor: VIA Technologies, Inc.
+             physical id: 6
+             bus info: pci@0000:00:06.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci pciexpress pm msi normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:29 ioport:1000(size=4096) memory:d0400000-d05fffff ioport:d0600000(size=2097152)
+        *-sata
+             description: SATA controller
+             product: Standard AHCI 1.0 SATA Controller
+             vendor: VIA Technologies, Inc.
+             physical id: f
+             bus info: pci@0000:00:0f.0
+             logical name: scsi0
+             logical name: scsi1
+             version: 01
+             width: 32 bits
+             clock: 33MHz
+             capabilities: sata pm msi ahci_1.0 bus_master cap_list emulated
+             configuration: driver=ahci latency=32
+             resources: irq:31 ioport:f0a0(size=32) memory:d0305000-d03053ff
+           *-disk
+                description: ATA Disk
+                product: SanDisk SD9TB8W2
+                physical id: 0
+                bus info: scsi@0:0.0.0
+                logical name: /dev/sda
+                version: 7101
+                serial: 19170C803859
+                size: 238GiB (256GB)
+                capabilities: gpt-1.00 partitioned partitioned:gpt
+                configuration: ansiversion=5 guid=09446ff8-d154-4dde-94aa-b8d4a1fad5a3 logicalsectorsize=512 sectorsize=512
+              *-volume:0
+                   description: Windows FAT volume
+                   vendor: mkfs.fat
+                   physical id: 1
+                   bus info: scsi@0:0.0.0,1
+                   logical name: /dev/sda1
+                   logical name: /boot/efi
+                   version: FAT32
+                   serial: 2818-2b55
+                   size: 298MiB
+                   capacity: 299MiB
+                   capabilities: boot fat initialized
+                   configuration: FATs=2 filesystem=fat label=efi mount.fstype=vfat mount.options=rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro state=mounted
+              *-volume:1
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 2
+                   bus info: scsi@0:0.0.0,2
+                   logical name: /dev/sda2
+                   logical name: /boot
+                   version: 1.0
+                   serial: 8bb60526-03f9-4e9c-850d-b4fda018b7a3
+                   size: 1536MiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2019-10-11 23:40:50 filesystem=ext4 label=boot lastmountpoint=/boot modified=2019-11-28 11:35:00 mount.fstype=ext4 mount.options=rw,relatime mounted=2019-11-28 11:35:00 state=mounted
+              *-volume:2
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 3
+                   bus info: scsi@0:0.0.0,3
+                   logical name: /dev/sda3
+                   logical name: /
+                   version: 1.0
+                   serial: a92492f9-c0d6-478e-b19f-4803dfe2f7de
+                   size: 47GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2019-10-11 23:40:51 filesystem=ext4 label=roota lastmountpoint=/ modified=2019-11-28 11:34:57 mount.fstype=ext4 mount.options=rw,relatime mounted=2019-11-28 11:34:58 state=mounted
+              *-volume:3
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 4
+                   bus info: scsi@0:0.0.0,4
+                   logical name: /dev/sda4
+                   logical name: /media/deepin/rootb
+                   version: 1.0
+                   serial: e1919ff7-79b2-4559-b1ce-9378d3df58e6
+                   size: 47GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2019-10-11 23:40:53 filesystem=ext4 label=rootb lastmountpoint=/media/deepin/rootb modified=2019-11-28 11:35:27 mount.fstype=ext4 mount.options=rw,nosuid,nodev,relatime mounted=2019-11-28 11:35:27 state=mounted
+              *-volume:4
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 5
+                   bus info: scsi@0:0.0.0,5
+                   logical name: /dev/sda5
+                   logical name: /data
+                   logical name: /opt
+                   logical name: /home
+                   version: 1.0
+                   serial: af7050ad-04a6-4f29-85aa-83b80b2b3d6d
+                   size: 125GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2019-10-11 23:40:55 filesystem=ext4 label=_dde_data lastmountpoint=/opt modified=2019-11-28 11:35:00 mount.fstype=ext4 mount.options=rw,relatime mounted=2019-11-28 11:35:00 state=mounted
+              *-volume:5
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 6
+                   bus info: scsi@0:0.0.0,6
+                   logical name: /dev/sda6
+                   logical name: /media/deepin/backup
+                   version: 1.0
+                   serial: 8f7f5698-ffae-43ad-a000-d8b0d08a1107
+                   size: 10GiB
+                   capabilities: precious journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2019-10-11 23:40:59 filesystem=ext4 label=backup lastmountpoint=/media/deepin/backup modified=2019-11-28 11:35:27 mount.fstype=ext4 mount.options=rw,nosuid,nodev,relatime mounted=2019-11-28 11:35:27 state=mounted
+              *-volume:6
+                   description: Linux swap volume
+                   vendor: Linux
+                   physical id: 7
+                   bus info: scsi@0:0.0.0,7
+                   logical name: /dev/sda7
+                   version: 1
+                   serial: ecc51083-ad77-41ce-a8c6-5e997ee1b415
+                   size: 6142MiB
+                   capacity: 6143MiB
+                   capabilities: nofs swap initialized
+                   configuration: filesystem=swap label=swap pagesize=4095
+           *-cdrom
+                description: DVD writer
+                product: DVD-RW DH16AFSH
+                vendor: PLDS
+                physical id: 1
+                bus info: scsi@1:0.0.0
+                logical name: /dev/cdrom
+                logical name: /dev/cdrw
+                logical name: /dev/dvd
+                logical name: /dev/dvdrw
+                logical name: /dev/sr0
+                version: DL3M
+                capabilities: removable audio cd-r cd-rw dvd dvd-r
+                configuration: ansiversion=5 status=nodisc
+        *-usb:0
+             description: USB controller
+             product: VT82xx/62xx UHCI USB 1.1 Controller
+             vendor: VIA Technologies, Inc.
+             physical id: 10
+             bus info: pci@0000:00:10.0
+             version: a0
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pm uhci bus_master cap_list
+             configuration: driver=uhci_hcd latency=64
+             resources: irq:20 ioport:f080(size=32)
+           *-usbhost
+                product: UHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 uhci_hcd
+                physical id: 1
+                bus info: usb@2
+                logical name: usb2
+                version: 4.19
+                capabilities: usb-1.10
+                configuration: driver=hub slots=2 speed=12Mbit/s
+        *-usb:1
+             description: USB controller
+             product: VT82xx/62xx UHCI USB 1.1 Controller
+             vendor: VIA Technologies, Inc.
+             physical id: 10.1
+             bus info: pci@0000:00:10.1
+             version: a0
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pm uhci bus_master cap_list
+             configuration: driver=uhci_hcd latency=64
+             resources: irq:22 ioport:f060(size=32)
+           *-usbhost
+                product: UHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 uhci_hcd
+                physical id: 1
+                bus info: usb@3
+                logical name: usb3
+                version: 4.19
+                capabilities: usb-1.10
+                configuration: driver=hub slots=2 speed=12Mbit/s
+        *-usb:2
+             description: USB controller
+             product: VT82xx/62xx UHCI USB 1.1 Controller
+             vendor: VIA Technologies, Inc.
+             physical id: 10.2
+             bus info: pci@0000:00:10.2
+             version: a0
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pm uhci bus_master cap_list
+             configuration: driver=uhci_hcd latency=64
+             resources: irq:21 ioport:f040(size=32)
+           *-usbhost
+                product: UHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 uhci_hcd
+                physical id: 1
+                bus info: usb@4
+                logical name: usb4
+                version: 4.19
+                capabilities: usb-1.10
+                configuration: driver=hub slots=2 speed=12Mbit/s
+        *-usb:3
+             description: USB controller
+             product: VT82xx/62xx UHCI USB 1.1 Controller
+             vendor: VIA Technologies, Inc.
+             physical id: 10.3
+             bus info: pci@0000:00:10.3
+             version: a0
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pm uhci bus_master cap_list
+             configuration: driver=uhci_hcd latency=64
+             resources: irq:23 ioport:f020(size=32)
+           *-usbhost
+                product: UHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 uhci_hcd
+                physical id: 1
+                bus info: usb@5
+                logical name: usb5
+                version: 4.19
+                capabilities: usb-1.10
+                configuration: driver=hub slots=2 speed=12Mbit/s
+        *-usb:4
+             description: USB controller
+             product: VT82xx/62xx UHCI USB 1.1 Controller
+             vendor: VIA Technologies, Inc.
+             physical id: 10.4
+             bus info: pci@0000:00:10.4
+             version: a0
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pm uhci bus_master cap_list
+             configuration: driver=uhci_hcd latency=64
+             resources: irq:20 ioport:f000(size=32)
+           *-usbhost
+                product: UHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 uhci_hcd
+                physical id: 1
+                bus info: usb@6
+                logical name: usb6
+                version: 4.19
+                capabilities: usb-1.10
+                configuration: driver=hub slots=2 speed=12Mbit/s
+        *-usb:5
+             description: USB controller
+             product: USB 2.0
+             vendor: VIA Technologies, Inc.
+             physical id: 10.7
+             bus info: pci@0000:00:10.7
+             version: 90
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pm debug ehci bus_master cap_list
+             configuration: driver=ehci-pci latency=64
+             resources: irq:23 memory:d0306000-d03060ff
+           *-usbhost
+                product: EHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 ehci_hcd
+                physical id: 1
+                bus info: usb@1
+                logical name: usb1
+                version: 4.19
+                capabilities: usb-2.00
+                configuration: driver=hub slots=10 speed=480Mbit/s
+              *-usb
+                   description: USB hub
+                   product: USB2.0 Hub
+                   vendor: Genesys Logic, Inc.
+                   physical id: 3
+                   bus info: usb@1:3
+                   version: 32.98
+                   capabilities: usb-2.00
+                   configuration: driver=hub maxpower=100mA slots=4 speed=480Mbit/s
+        *-isa
+             description: ISA bridge
+             product: VX11 Miscellaneous Bus
+             vendor: VIA Technologies, Inc.
+             physical id: 11
+             bus info: pci@0000:00:11.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: isa pm cap_list
+             configuration: latency=0
+        *-usb:6
+             description: USB controller
+             product: USB3.0 Controller
+             vendor: VIA Technologies, Inc.
+             physical id: 12
+             bus info: pci@0000:00:12.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi xhci bus_master cap_list
+             configuration: driver=xhci_hcd latency=0
+             resources: irq:33 memory:d0304000-d0304fff
+           *-usbhost:0
+                product: xHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 xhci-hcd
+                physical id: 0
+                bus info: usb@7
+                logical name: usb7
+                version: 4.19
+                capabilities: usb-2.00
+                configuration: driver=hub slots=1 speed=480Mbit/s
+           *-usbhost:1
+                product: xHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 xhci-hcd
+                physical id: 1
+                bus info: usb@8
+                logical name: usb8
+                version: 4.19
+                capabilities: usb-3.00
+                configuration: driver=hub slots=3 speed=5000Mbit/s
+              *-usb
+                   description: Mass storage device
+                   product: DataTraveler 3.0
+                   vendor: Kingston
+                   physical id: 2
+                   bus info: usb@8:2
+                   logical name: scsi2
+                   version: 1.10
+                   serial: 08606E6D4087B340D70F19CF
+                   capabilities: usb-3.20 scsi emulated
+                   configuration: driver=usb-storage maxpower=504mA speed=5000Mbit/s
+                 *-disk
+                      description: SCSI Disk
+                      product: DataTraveler 3.0
+                      vendor: Kingston
+                      physical id: 0.0.0
+                      bus info: scsi@2:0.0.0
+                      logical name: /dev/sdb
+                      version: PMAP
+                      serial: 0B8364006DE7
+                      size: 57GiB (61GB)
+                      capabilities: removable
+                      configuration: ansiversion=6 logicalsectorsize=512 sectorsize=512
+                    *-medium
+                         physical id: 0
+                         logical name: /dev/sdb
+                         size: 57GiB (61GB)
+                         capabilities: partitioned partitioned:dos
+                         configuration: signature=05befbb5
+                       *-volume
+                            description: Windows FAT volume
+                            vendor: MSWIN4.1
+                            physical id: 1
+                            logical name: /dev/sdb1
+                            logical name: /media/deepin/0512-8871
+                            version: FAT32
+                            serial: 0512-8871
+                            size: 57GiB
+                            capacity: 57GiB
+                            capabilities: primary fat initialized
+                            configuration: FATs=2 filesystem=fat mount.fstype=vfat mount.options=rw,nosuid,nodev,relatime,uid=1000,gid=1000,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,showexec,utf8,flush,errors=remount-ro state=mounted
+        *-pci:3
+             description: PCI bridge
+             product: VX11 PCI to PCI Bridge
+             vendor: VIA Technologies, Inc.
+             physical id: 13
+             bus info: pci@0000:00:13.0
+             version: 01
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci normal_decode bus_master cap_list
+        *-multimedia
+             description: Audio device
+             product: VT8237A/VT8251 HDA Controller
+             vendor: VIA Technologies, Inc.
+             physical id: 14
+             bus info: pci@0000:00:14.0
+             version: 30
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm pciexpress bus_master cap_list
+             configuration: driver=snd_hda_intel latency=0
+             resources: irq:17 memory:d0300000-d0303fff
+     *-pci:1
+          description: Host bridge
+          product: VX11 Standard Host Bridge
+          vendor: VIA Technologies, Inc.
+          physical id: 101
+          bus info: pci@0000:00:00.1
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+     *-pci:2
+          description: Host bridge
+          product: VX11 Standard Host Bridge
+          vendor: VIA Technologies, Inc.
+          physical id: 102
+          bus info: pci@0000:00:00.2
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+     *-pci:3
+          description: Host bridge
+          product: VX11 DRAM Controller
+          vendor: VIA Technologies, Inc.
+          physical id: 103
+          bus info: pci@0000:00:00.3
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+     *-pci:4
+          description: Host bridge
+          product: VX11 Power Management Controller
+          vendor: VIA Technologies, Inc.
+          physical id: 104
+          bus info: pci@0000:00:00.4
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+     *-pci:5
+          description: Host bridge
+          product: VX11 I/O APIC
+          vendor: VIA Technologies, Inc.
+          physical id: 105
+          bus info: pci@0000:00:00.5
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+     *-pci:6
+          description: Host bridge
+          product: VX11 Scratch Device
+          vendor: VIA Technologies, Inc.
+          physical id: 106
+          bus info: pci@0000:00:00.6
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+     *-pci:7
+          description: Host bridge
+          product: VX11 Standard Host Bridge
+          vendor: VIA Technologies, Inc.
+          physical id: 107
+          bus info: pci@0000:00:00.7
+          version: 00
+          width: 32 bits
+          clock: 33MHz
+     *-pci:8
+          description: Host bridge
+          product: VX11 Standard Host Bridge
+          vendor: VIA Technologies, Inc.
+          physical id: 108
+          bus info: pci@0000:00:11.7
+          version: 01
+          width: 32 bits
+          clock: 33MHz
+          configuration: latency=8
+     *-pnp00:00
+          product: PnP device PNP0c01
+          physical id: 3
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:01
+          product: PnP device PNP0f03
+          physical id: 5
+          capabilities: pnp
+          configuration: driver=i8042 aux
+     *-pnp00:02
+          product: PnP device PNP0303
+          physical id: 6
+          capabilities: pnp
+          configuration: driver=i8042 kbd
+     *-pnp00:03
+          product: PnP device PNP0501
+          physical id: 7
+          capabilities: pnp
+          configuration: driver=serial
+     *-pnp00:04
+          product: PnP device PNP0401
+          physical id: 8
+          capabilities: pnp
+          configuration: driver=parport_pc
+     *-pnp00:05
+          product: PnP device PNP0c02
+          physical id: 9
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:06
+          product: PnP device PNP0b00
+          physical id: a
+          capabilities: pnp
+          configuration: driver=rtc_cmos
+     *-pnp00:07
+          product: PnP device PNP0c02
+          physical id: b
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:08
+          product: PnP device PNP0c01
+          physical id: c
+          capabilities: pnp
+          configuration: driver=system

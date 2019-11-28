@@ -894,7 +894,7 @@ QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
     {
         ds.setFieldWidth(20);
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
-        ds << article.name;
+        ds << article.name + ":";
         ds.setFieldWidth(0);
         if(article.externalLinks )
         {
@@ -919,7 +919,7 @@ QTextStream& operator<<(QTextStream& ds, LogTreeView* tableWidget)
     for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
     {
         auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
-        ds.setFieldWidth(tableWidget->columnWidth(col) *25.0 / tableWidget->width());
+        ds.setFieldWidth( ((float)tableWidget->columnWidth(col)/(float)tableWidget->width()) *25.0);
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
         if(item)
         {
@@ -938,7 +938,7 @@ QTextStream& operator<<(QTextStream& ds, LogTreeView* tableWidget)
     {
         for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
         {
-            ds.setFieldWidth(tableWidget->columnWidth(col) *25.0 / tableWidget->width());
+            ds.setFieldWidth( ((float)tableWidget->columnWidth(col) / (float)tableWidget->width()) *25.0);
             ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
             ds << tableWidget->m_pModel->item(row,col)->text();
             ds.setFieldWidth(0);
@@ -1051,7 +1051,7 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
         QString line;
         if(name.trimmed().isEmpty() == false || false == content.trimmed().isEmpty())
         {
-            line = name + " " + content;
+            line = name + ":   " + content;
         }
 
         doc.addParagraph(line);

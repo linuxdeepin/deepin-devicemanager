@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/Fujitsu_Siemens_LIFEBOOK_E_Series";
+const QString DEVICEINFO_PATH = "../../computers/LENOVO_KaiTianM610B-D120";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -102,7 +102,7 @@ void DeviceInfoParser::refreshDabase()
     loadAllBluetoothctlControllerDatabase();
     loadAllBluethctlPairedDeviceDatabase();
 
-    emit loadFinished("Loading USB Device Info...");
+    emit loadFinished("Loading USB Devices Info...");
     loadLsusbDatabase();
 
     emit loadFinished("Loading Printer Info...");

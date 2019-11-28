@@ -89,8 +89,15 @@ void MotherboardWidget::initWidget()
     model.value.remove(" Company");
 
     QList<ArticleStruct> aList;
-    aList << vendor << model << chipsetFamily;
+    aList << vendor << model;
     overviewInfo_.value = joinArticle(aList);
+
+    if( chipsetFamily.isValid() )
+    {
+        overviewInfo_.value += " (";
+        overviewInfo_.value += chipsetFamily.value;
+        overviewInfo_.value += ")";
+    }
 
     ArticleStruct serial("Serial Number");
     serial.queryData("dmidecode", "Base Board Information", "Serial Number");

@@ -260,7 +260,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Usb Device</source>
+            <source>Usb Devices</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -812,7 +812,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>No Usb Device found!</source>
+            <source>No Usb Devices found!</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -984,7 +984,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Loading USB Device Info...</source>
+            <source>Loading USB Devices Info...</source>
             <translation type="unfinished"/>
         </message>
         <message>

@@ -62,10 +62,18 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
         pName.queryData("dmidecode", "Base Board Information", "Board name");
     }
 
+    ArticleStruct family;
+    family.queryData("dmidecode", "System Information", "Family");
+    if(family.isValid() == false || family.value.contains("System Version") \
+        || family.value.contains("Not Specified", Qt::CaseInsensitive) || family.value.contains("x.x", Qt::CaseInsensitive) || family.value.contains("Not Applicable", Qt::CaseInsensitive))
+    {
+        family.value = "";
+    }
+
     ArticleStruct ver;
-    ver.queryData("dmidecode", "System Information", "Family");
     ver.queryData("dmidecode", "System Information", "Version");
-    if(ver.isValid() == false || ver.value.contains("System Version"))
+    if(ver.isValid() == false || ver.value.contains("System Version") \
+            || ver.value.contains("Not Specified", Qt::CaseInsensitive) || ver.value.contains("x.x", Qt::CaseInsensitive) || ver.value.contains("Not Applicable", Qt::CaseInsensitive))
     {
         ver.value = "";
     }
@@ -80,14 +88,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
 
     QList<ArticleStruct> acList;
 
-    if(ver.value.contains("Not Specified", Qt::CaseInsensitive) || ver.value.contains("x.x", Qt::CaseInsensitive) || ver.value.contains("Not Applicable", Qt::CaseInsensitive))
-    {
-        acList << vendor  << model << pName << chassisType;
-    }
-    else
-    {
-        acList << vendor << ver << model << pName << chassisType;
-    }
+    acList << vendor << family << ver << model << pName << chassisType;
 
     model.value = joinArticle(acList);
 //    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000

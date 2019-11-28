@@ -66,10 +66,18 @@ void DiskWidget::initWidget()
 
         ArticleStruct vendor("Vendor");
         vendor.value = vendorStr;
-        if(vendor.isValid() == false && model.value.startsWith("ST", Qt::CaseInsensitive))
+        if(vendor.isValid() == false)
         {
-            vendor.value = "Seagate";
-            vendor.valueTranslate = true;
+            if( model.value.startsWith("ST", Qt::CaseInsensitive))
+            {
+                vendor.value = "Seagate";
+                vendor.valueTranslate = true;
+            }
+            else if(model.value.startsWith("SanDisk", Qt::CaseInsensitive))
+            {
+                vendor.value = "SanDisk";
+                vendor.valueTranslate = true;
+            }
         }
 
         articles.push_back(vendor);
@@ -224,12 +232,17 @@ void DiskWidget::initWidget()
 
         if( i == 0)
         {
-            if( model.value.contains(vendor.value, Qt::CaseInsensitive) == false )
+            if(overviewInfo_.isValid())
             {
-                overviewInfo_.value = vendor.value + " ";
+                overviewInfo_.value += " / ";
             }
 
-            overviewInfo_.value += model.value;
+            model.value.remove(vendor.value, Qt::CaseInsensitive);
+
+            QList<ArticleStruct> asList;
+            asList << vendor << model;
+
+            overviewInfo_.value += joinArticle( asList );
             overviewInfo_.value += " (";
             QString diskSize = size.value;
             QRegExp reg("^[\\s\\S]*\\(([\\s\\S]+)\\)$");

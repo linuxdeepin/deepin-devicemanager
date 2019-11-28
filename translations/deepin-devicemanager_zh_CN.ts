@@ -264,7 +264,7 @@
             <translation>图像设备</translation>
         </message>
         <message>
-            <source>Usb Device</source>
+            <source>Usb Devices</source>
             <translation>USB设备</translation>
         </message>
         <message>
@@ -812,7 +812,7 @@
             <translation>未发现打印机！</translation>
         </message>
         <message>
-            <source>No Usb Device found!</source>
+            <source>No Usb Devices found!</source>
             <translation>未发现其他USB设备！</translation>
         </message>
         <message>
@@ -988,7 +988,7 @@
             <translation>获取蓝牙设备信息...</translation>
         </message>
         <message>
-            <source>Loading USB Device Info...</source>
+            <source>Loading USB Devices Info...</source>
             <translation>获取USB设备信息...</translation>
         </message>
         <message>
