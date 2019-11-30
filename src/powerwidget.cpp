@@ -63,17 +63,17 @@ void PowerWidget::initWidget()
         existArticles3.clear();
 
 //        ArticleStruct ssdelay("Screen Suspend Delay");
-//        ssdelay.value = DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_==0? DApplication::translate("Main", "Never") \
+//        ssdelay.value = DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_==0? DApplication::translate("Main", "Never")
 //            : QString::number(DeviceInfoParserInstance.switchingpowerScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
 //        articles.push_back(ssdelay);
 
 //        ArticleStruct csdelay("Computer Suspend Delay");
-//        csdelay.value = DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_==0? DApplication::translate("Main", "Never") \
+//        csdelay.value = DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_==0? DApplication::translate("Main", "Never")
 //            : QString::number(DeviceInfoParserInstance.switchingpowerComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
 //        articles.push_back(csdelay);
 
 //        ArticleStruct asdelay("AutoLock Screen Delay");
-//        asdelay.value = DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_==0? DApplication::translate("Main", "Never") \
+//        asdelay.value = DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_==0? DApplication::translate("Main", "Never")
 //            : QString::number(DeviceInfoParserInstance.switchingpowerAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
 //        articles.push_back(asdelay);
 
@@ -186,17 +186,17 @@ void PowerWidget::initWidget()
         existArticles3.clear();
         articles.clear();
 //        ArticleStruct ssdelay("Screen Suspend Delay");
-//        ssdelay.value = DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? DApplication::translate("Main", "Never") \
+//        ssdelay.value = DeviceInfoParserInstance.batteryScreenSuspendDelay_==0? DApplication::translate("Main", "Never")
 //            : QString::number(DeviceInfoParserInstance.batteryScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
 //        articles.push_back(ssdelay);
 
 //        ArticleStruct csdelay("Computer Suspend Delay");
-//        csdelay.value = DeviceInfoParserInstance.batteryComputerSuspendDelay_==0? DApplication::translate("Main", "Never") \
+//        csdelay.value = DeviceInfoParserInstance.batteryComputerSuspendDelay_==0? DApplication::translate("Main", "Never")
 //            : QString::number(DeviceInfoParserInstance.batteryComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
 //        articles.push_back(csdelay);
 
 //        ArticleStruct asdelay("AutoLock Screen Delay");
-//        asdelay.value = DeviceInfoParserInstance.batteryAutoLockScreenDelay_==0? DApplication::translate("Main", "Never") \
+//        asdelay.value = DeviceInfoParserInstance.batteryAutoLockScreenDelay_==0? DApplication::translate("Main", "Never")
 //            : QString::number(DeviceInfoParserInstance.batteryAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
 //        articles.push_back(asdelay);
 

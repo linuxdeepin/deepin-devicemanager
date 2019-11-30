@@ -184,7 +184,7 @@ void DeviceInfoWidgetBase::initContextMenu()
 
     contextMenu_->setAutoFillBackground(true);
 
-    contextMenu_->setMinimumWidth(contextMenuWidth_);
+    //contextMenu_->setMinimumWidth(contextMenuWidth_);
 
     refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), DApplication::translate("Main", "Refresh(F5)"), this);
 
@@ -892,9 +892,9 @@ QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
 
     foreach(auto article, di.articles_)
     {
-        ds.setFieldWidth(20);
+        ds.setFieldWidth(21);
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
-        ds << article.name + ":";
+        ds << article.name + ": ";
         ds.setFieldWidth(0);
         if(article.externalLinks )
         {
@@ -919,11 +919,13 @@ QTextStream& operator<<(QTextStream& ds, LogTreeView* tableWidget)
     for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
     {
         auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
-        ds.setFieldWidth( ((float)tableWidget->columnWidth(col)/(float)tableWidget->width()) *25.0);
+
+        QString text = tableWidget->m_pModel->horizontalHeaderItem(col)->text();
+        ds.setFieldWidth( text.size() * 1.5);
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
         if(item)
         {
-             ds << tableWidget->m_pModel->horizontalHeaderItem(col)->text();
+             ds << text;
         }
         else
         {
@@ -938,9 +940,11 @@ QTextStream& operator<<(QTextStream& ds, LogTreeView* tableWidget)
     {
         for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
         {
-            ds.setFieldWidth( ((float)tableWidget->columnWidth(col) / (float)tableWidget->width()) *25.0);
+            QString text = tableWidget->m_pModel->item(row,col)->text();
+
+            ds.setFieldWidth( text.size() * 1.5);
             ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
-            ds << tableWidget->m_pModel->item(row,col)->text();
+            ds << text;
             ds.setFieldWidth(0);
         }
 

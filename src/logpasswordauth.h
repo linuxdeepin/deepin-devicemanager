@@ -19,8 +19,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LOGPASSWORDAUTH_H
-#define LOGPASSWORDAUTH_H
+/*  Deprecated 20191030
+ *
+#pragma once
 
 #include <dabstractdialog.h>
 #include <DDialog>
@@ -31,6 +32,7 @@
 #include <QTimer>
 #include "DIconButton"
 #include "DPasswordEdit"
+
 
 class LogPasswordAuth : public Dtk::Widget::DAbstractDialog
 {
@@ -73,4 +75,4 @@ private:
     QTimer* m_timer = nullptr;
 };
 
-#endif  // LOGPASSWORDAUTH_H
+*/

@@ -27,6 +27,7 @@
     easy use
 */
 
+/*
 #define Declare_Singleton(classname) \
 public: \
 static classname& Instance() \
@@ -41,3 +42,4 @@ protected: \
     classname(const classname& rInstance); \
     classname& operator = (const classname& rInstance) \
 \
+*/

@@ -1,6 +1,8 @@
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
+QMAKE_CXXFLAGS += -Wno-unused-parameter
+
 QT += core gui gui-private
 !build_xlsx_lib:DEFINES += XLSX_NO_LIB
 

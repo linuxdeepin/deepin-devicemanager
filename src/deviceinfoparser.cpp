@@ -31,7 +31,7 @@
 #include "commondefine.h"
 #include "deviceattributedefine.h"
 #include <DApplication>
-#include "logpasswordauth.h"
+//#include "logpasswordauth.h"
 #include "DMessageBox"
 #include <cups.h>
 #include "Logger.h"
@@ -446,17 +446,6 @@ QStringList DeviceInfoParser::getCatinputAudioDeviceList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
-//        if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Name") )
-//        {
-//            QString name = DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"];
-//            if(     name.contains("Speaker", Qt::CaseInsensitive) \
-//                ||  name.contains("Headphone", Qt::CaseInsensitive) \
-//                ||  name.contains("Mic", Qt::CaseInsensitive)  )
-//            {
-//                    return true;
-//            }
-//        }
-
         if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Sysfs") )
         {
             QString sysfs = DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Sysfs"];
@@ -1344,11 +1333,6 @@ bool DeviceInfoParser::loadDemicodeDatabase()
         QString line = dmidecodeOut.mid(startIndex, i - startIndex);
         startIndex = i + 1;
         ++lineNumber;
-
-        if(line.contains("BIOS Language Information"))
-        {
-            int j = 1;
-        }
 
         if( line.trimmed().isEmpty() )
         {

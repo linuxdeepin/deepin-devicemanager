@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
 #include "logpasswordauth.h"
 #include <DApplication>
 #include <QDebug>
@@ -252,3 +253,5 @@ void LogPasswordAuth::onTimer()
 
     hideMessage();
 }
+
+*/

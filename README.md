@@ -1,10 +1,14 @@
 ## deepin-devicemanager
-Device Manager is a gadget for viewing device information.
+Device Manager is a handy tool for viewing hardware information and managing the devices.
 
-深度设备管理器是查看、管理硬件设备的工具软件。
+设备管理器是查看、管理硬件设备的工具软件。
 
 #### Core
-- The primary GUI is based on DTK, Qt (Supported >= 5.12).
+The primary GUI is based on DTK, Qt (Supported >= 5.12).
+
+Build-Depends: debhelper (>= 11), pkg-config, qt5-qmake, qt5-default, libdtkwidget-dev, libdtkgui-dev, qtbase5-private-dev, libdframeworkdbus-dev, libcups2-dev
+
+Execute-Depends: smartmontools, dmidecode[i386 arm64 amd64], x11-xserver-utils, hwinfo, cups, upower, deepin-shortcut-viewer, lshw
 
 #### Special Links
 - [linux-hardware.org](https://linux-hardware.org/)
@@ -25,7 +29,7 @@ Device Manager is a gadget for viewing device information.
 - [upower](https://upower.freedesktop.org/)
 - deepin-shortcut-viewer
 
-#### Thridparty lib
+#### Thridparty lib (source code)
 - [docx](https://github.com/lpxxn/docx)
 - [QtXlsx](http://qtxlsx.debao.me)
 
@@ -46,4 +50,4 @@ add deepin-devicemanager-authenticateProxy to /usr/bin.
 - sudo cp authenticateProxy/policy/com.deepin.pkexec.deepin-devicemanager-authenticateProxy.policy /usr/share/polkit-1/actions/
 - sudo cp build-all-unknown-Debug/authenticateProxy/deepin-devicemanager-authenticateProxy /usr/bin
 
-*- ./deepin-devicemanager
+- ./deepin-devicemanager

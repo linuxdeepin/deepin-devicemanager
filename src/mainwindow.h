@@ -55,11 +55,6 @@ public:
 
     void currentDeviceChanged(const QString& device);
 
-    virtual void dragMoveEvent(QDragMoveEvent *event) override
-    {
-        return;
-    }
-
 signals:
     void startLoadingWidgetSignal();
 

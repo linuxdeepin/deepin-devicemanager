@@ -70,7 +70,7 @@ const QString Devicetype_lpstat_Tab = "\t";
 
 typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
 
-class LogPasswordAuth;
+//class LogPasswordAuth;
 
 typedef bool (*checkValueFun_t)(const QString&);
 
@@ -144,8 +144,8 @@ public:
     QString getCorrespondBluetoothMouse(const QString& inputMouse);
 
     QStringList getInputdeviceKeyboardList();
-    QString getCorrespondLshwKeyboard(const QString& inputMouse);
-    QString getCorrespondBluetoothKeyboard(const QString& inputMouse);
+    QString getCorrespondLshwKeyboard(const QString& inputKeyboard);
+    QString getCorrespondBluetoothKeyboard(const QString& inputKeyboard);
 
     QString getCorrespondUpower(const QString& bluetoothDevice);
 
@@ -218,7 +218,7 @@ public:
     bool runCmd(const QString& cmd);
     bool runCmd(const QStringList& cmdList);
 
-    LogPasswordAuth* autoDialog = nullptr;
+    //LogPasswordAuth* autoDialog = nullptr;
     QString standOutput_;
 
     QMap<QString, DatabaseMap> toolDatabase_;

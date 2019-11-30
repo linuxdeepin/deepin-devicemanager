@@ -67,7 +67,6 @@ SOURCES += \
     deviceinfoparser.cpp \
     deviceinfowidgetbase.cpp \
     computeroverviewwidget.cpp \
-    hwinfohandler.cpp \
     motherboardwidget.cpp \
     cpuwidget.cpp \
     memorywidget.cpp \
@@ -101,7 +100,6 @@ HEADERS += \
     mainwindow.h \
     otherdevicewidget.h \
     utils.h \
-    version.h \
     deviceinfoparser.h \
     deviceattributedefine.h \
     deviceinfowidgetbase.h \
@@ -135,7 +133,9 @@ HEADERS += \
 RESOURCES += app.qrc
 
 DISTFILES += \
-    ../images/security.ico \
+    ../README.md \
+    ../debian/control \
+    ../debian/rules \
     ../translations/deepin-devicemanager.ts \
     ../translations/deepin-devicemanager_zh_CN.ts \
 

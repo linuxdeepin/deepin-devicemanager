@@ -22,7 +22,6 @@
 #include "mainwindow.h"
 #include <DApplication>
 #include <DWidgetUtil>
-//#include "version.h"
 #include <DLog>
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,6 +1,8 @@
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
+QMAKE_CXXFLAGS += -Wno-unused-parameter
+
 QT -= gui
 QT += xml gui-private
 !build_xlsx_lib
