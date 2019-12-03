@@ -88,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 
+    setMinimumSize(840, 360);
     resize(normal);
 
     initLoadingWidget();
