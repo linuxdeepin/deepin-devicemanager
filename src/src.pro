@@ -83,7 +83,6 @@ SOURCES += \
     usbdevicewidget.cpp \
     powerwidget.cpp \
     otherpcidevice.cpp \
-    tablewidgetalwaysfocus.cpp \
     logpasswordauth.cpp \
     printerwidget.cpp \
     devicelistview.cpp \
@@ -120,7 +119,6 @@ HEADERS += \
     mousewidget.h \
     usbdevicewidget.h \
     otherpcidevice.h \
-    tablewidgetalwaysfocus.h \
     logpasswordauth.h \
     printerwidget.h \
     devicelistview.h

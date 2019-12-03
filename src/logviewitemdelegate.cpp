@@ -99,23 +99,24 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
             rect.setX(rect.x() + margin);  // left margin
 
             QPainterPath rectPath, roundedPath;
-            roundedPath.addRoundedRect(rect.x(), rect.y(), rect.width() * 2, rect.height(), radius,
+            roundedPath.addRoundedRect(rect.x(), rect.y()+2, rect.width() * 2, rect.height()-4, radius,
                                        radius);
-            rectPath.addRect(rect.x() + rect.width(), rect.y(), rect.width(), rect.height());
+            rectPath.addRect(rect.x() + rect.width(), rect.y() +2, rect.width(), rect.height()-4);
             clipPath = roundedPath.subtracted(rectPath);
             painter->setClipPath(clipPath);
             path.addRect(rect);
         } break;
         case QStyleOptionViewItem::Middle: {
-            path.addRect(rect);
+            QRect rect2(rect.left(), rect.top() +2, rect.width(), rect.height() - 4);
+            path.addRect(rect2);
         } break;
         case QStyleOptionViewItem::End: {
             rect.setWidth(rect.width() - margin);  // right margin
 
             QPainterPath rectPath, roundedPath;
-            roundedPath.addRoundedRect(rect.x() - rect.width(), rect.y(), rect.width() * 2,
-                                       rect.height(), radius, radius);
-            rectPath.addRect(rect.x() - rect.width(), rect.y(), rect.width(), rect.height());
+            roundedPath.addRoundedRect(rect.x() - rect.width(), rect.y() +2, rect.width() * 2,
+                                       rect.height() -4, radius, radius);
+            rectPath.addRect(rect.x() - rect.width(), rect.y()+2, rect.width(), rect.height()-4);
             clipPath = roundedPath.subtracted(rectPath);
             painter->setClipPath(clipPath);
             path.addRect(rect);
@@ -133,17 +134,17 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     }
     painter->fillPath(path, background);
 
-//    QRect iconRect = rect;
-//    if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
-//        index.data(Qt::DecorationRole).isValid()) {
-//        iconRect.setX(rect.x() - margin);
-//        iconRect.setWidth(64);
-//        QIcon ic = index.data(Qt::DecorationRole).value<QIcon>();
-//        ic.paint(painter, iconRect);
-//    }
+    QRect iconRect = rect;
+    if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
+        index.data(Qt::DecorationRole).isValid()) {
+        iconRect.setX(rect.x() - margin);
+        iconRect.setWidth(64);
+        QIcon ic = index.data(Qt::DecorationRole).value<QIcon>();
+        ic.paint(painter, iconRect);
+    }
     textRect = rect;
     textRect.setX(textRect.x() + margin - 2);
-    textRect.setWidth(textRect.width() - margin * 2);
+    //    textRect.setWidth(textRect.width() - margin * 2);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
     painter->drawText(textRect, static_cast<int>(opt.displayAlignment), text);
@@ -183,7 +184,4 @@ void LogViewItemDelegate::initStyleOption(QStyleOptionViewItem *option,
         option->features |= QStyleOptionViewItem::Alternate;
     if (index.data(Qt::DisplayRole).isValid())
         option->text = index.data().toString();
-
-    //auto styleOptViewItem = DTreeView::viewOptions();
-    //option->state |= QStyle::State_Active;
 }

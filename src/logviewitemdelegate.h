@@ -43,9 +43,6 @@ public:
 
 protected:
     void initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const override;
-
-//private:
-//    QStyleOptionViewItem viewOptions() const override;
 };
 
 #endif  // SYSTEM_SERVICE_ITEM_DELEGATE_H

@@ -23,7 +23,6 @@
 #include "deviceinfoparser.h"
 #include "DTableWidget"
 #include <QVBoxLayout>
-#include "tablewidgetalwaysfocus.h"
 #include <DApplication>
 
 DWIDGET_USE_NAMESPACE

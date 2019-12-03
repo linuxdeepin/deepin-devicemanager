@@ -62,6 +62,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QScreen>
 
 DWIDGET_USE_NAMESPACE
 
@@ -70,13 +71,25 @@ QList<ArticleStruct> staticArticles;
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent)
 {
-    //setBaseSize(1070, 790);
-    setMinimumSize(mainWindowMinWidth_, mainWindowMinHeight_);
-
     if(false == DeviceInfoParserInstance.getRootPassword())
     {
         exit(-1);
     }
+
+    QSize normal(mainWindowMinWidth_, mainWindowMinHeight_);
+
+    QList<QScreen *> lst = QGuiApplication::screens();
+    if(lst.size() > 0)
+    {
+        QSize rect = lst.at(0)->size();
+        if( rect.width()*2/3 < normal.width() && rect.height()*2/3 < normal.height() )
+        {
+            normal.setWidth(rect.width()*2/3);
+            normal.setHeight(rect.height()*2/3);
+        }
+    }
+
+    resize(normal);
 
     initLoadingWidget();
 

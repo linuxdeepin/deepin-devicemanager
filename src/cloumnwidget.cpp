@@ -185,7 +185,7 @@ void ColumnWidget::changeTheme()
 {
     paNormal_ = DApplicationHelper::instance()->palette(this);
 
-    auto color1 = paNormal_.highlight().color();
+    //auto color1 = paNormal_.highlight().color();
 
     paHighlight_.setBrush(QPalette::Background, paNormal_.highlight());
     paHighlight_.setBrush(QPalette::WindowText, paNormal_.highlightedText());

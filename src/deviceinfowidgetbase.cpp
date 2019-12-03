@@ -31,7 +31,6 @@
 #include <QTextStream>
 #include <QFile>
 #include "mainwindow.h"
-#include "tablewidgetalwaysfocus.h"
 #include <QDate>
 #include "DApplication"
 #include "DApplicationHelper"
@@ -44,6 +43,8 @@
 #include "logtreeview.h"
 #include "QShortcut"
 #include <QTextDocumentFragment>
+#include "DFontSizeManager"
+#include "DStandardItem"
 
 DWIDGET_USE_NAMESPACE
 

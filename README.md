@@ -10,7 +10,7 @@ Build-Depends: debhelper (>= 11), pkg-config, qt5-qmake, qt5-default, libdtkwidg
 
 Execute-Depends: smartmontools, dmidecode[i386 arm64 amd64], x11-xserver-utils, hwinfo, cups, upower, deepin-shortcut-viewer, lshw
 
-#### Special Links
+#### Special Link
 - [linux-hardware.org](https://linux-hardware.org/)
 
 #### Depend on 
