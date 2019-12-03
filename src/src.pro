@@ -86,8 +86,7 @@ SOURCES += \
     logpasswordauth.cpp \
     printerwidget.cpp \
     devicelistview.cpp \
-    deviceattributedefine.cpp \
-    utils.cpp
+    deviceattributedefine.cpp
 
 HEADERS += \
     cdromwidget.h \
@@ -98,7 +97,6 @@ HEADERS += \
     logviewitemdelegate.h \
     mainwindow.h \
     otherdevicewidget.h \
-    utils.h \
     deviceinfoparser.h \
     deviceattributedefine.h \
     deviceinfowidgetbase.h \
@@ -134,8 +132,6 @@ DISTFILES += \
     ../README.md \
     ../debian/control \
     ../debian/rules \
-    ../translations/deepin-devicemanager.ts \
-    ../translations/deepin-devicemanager_zh_CN.ts \
 
 # target
 target.path = /usr/bin/
@@ -144,6 +140,7 @@ target.path = /usr/bin/
 #icons.files += ../images/cpu.svg
 #icons.path = /usr/share/deepin-devicemanager/
 icons.path = /usr/share/icons/hicolor/scalable/apps
+icons.files = ../images/icons/deepin-devicemanager.svg
 
 # desktop
 desktop.files += deepin-devicemanager.desktop

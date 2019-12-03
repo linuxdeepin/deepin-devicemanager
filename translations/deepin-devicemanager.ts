@@ -1532,10 +1532,6 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Notebook</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
             <source>Unspecified</source>
             <translation type="unfinished"/>
         </message>
@@ -1655,74 +1651,7 @@
             <source>The Model Year(Not Manufacture Date)</source>
             <translation type="unfinished"/>
         </message>
-        <message>
-            <source>Desktop</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Tablet</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Server</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>All in one</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>All In One</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Mini pc</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Convertible</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>System On Chip</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Stick pc</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Phone</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Other</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Laptop</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Rack Mount Chassis</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Mini Tower</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Main Server Chassis</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Blade Enclosing</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
-            <source>Blade</source>
-            <translation type="unfinished"/>
-        </message>
+
         <message>
             <source>System</source>
             <translation type="unfinished"/>
@@ -1999,6 +1928,375 @@
         <name>Monitor</name>
         <message>
             <source>Size</source>
+            <translation type="unfinished"/>
+        </message>
+    </context>
+    <context>
+        <!-- contains in https://git.savannah.nongnu.org/git/dmidecode.git dmidecode.c -->
+        <name>Dmidecode</name>
+        <message>
+            <source>Other</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Unknown</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Desktop</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Low Profile Desktop</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Pizza Box</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Mini Tower</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Tower</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Portable</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Laptop</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Notebook</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Hand Held</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Docking Station</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>All In One</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Sub Notebook</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Space-saving</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Lunch Box</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Main Server Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Expansion Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Sub Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Bus Expansion Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Peripheral Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>RAID Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Rack Mount Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Sealed-case PC</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Multi-system</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>CompactPCI</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>AdvancedTCA</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Blade</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Blade Enclosing</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Tablet</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Convertible</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Detachable</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>IoT Gateway</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Embedded PC</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Mini pc</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Stick pc</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Server</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>System On Chip</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Phone</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Rack Mount Chassis</source>
+            <translation type="unfinished"/>
+        </message>
+
+        <message>
+            <source>BIOS characteristics not supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>ISA is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>MCA is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>EISA is supported"</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>PCI is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>PC Card (PCMCIA) is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>PNP is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>APM is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>BIOS is upgradeable</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>BIOS shadowing is allowed</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>VLB is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>ESCD support is available</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Boot from CD is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Selectable boot is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>BIOS ROM is socketed</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Boot from PC Card (PCMCIA) is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>EDD is supported</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Japanese floppy for NEC 9800 1.2 MB is supported (int 13h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Japanese floppy for Toshiba 1.2 MB is supported (int 13h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>5.25\"/360 kB floppy services are supported (int 13h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>5.25\"/1.2 MB floppy services are supported (int 13h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>3.5\"/720 kB floppy services are supported (int 13h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>3.5\"/2.88 MB floppy services are supported (int 13h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Print screen service is supported (int 5h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>8042 keyboard services are supported (int 9h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Serial services are supported (int 14h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>Printer services are supported (int 17h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>CGA/mono video services are supported (int 10h)</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source>NEC PC-98</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source></source>
             <translation type="unfinished"/>
         </message>
     </context>

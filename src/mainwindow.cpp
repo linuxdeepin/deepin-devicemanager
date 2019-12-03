@@ -57,7 +57,6 @@
 #include <thread>
 #include "commondefine.h"
 #include "QStatusBar"
-#include "utils.h"
 #include <QProcess>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -406,24 +405,33 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
 {
     QString selectFilter;
 
-    QString saveDir = "./";
-    QDir dir( QDir::homePath() + "/Documents/");
-    if(dir.exists())
-    {
-         saveDir = QDir::homePath() + "/Documents/";
-    }
+    static QString saveDir = [](){
+        QString dirStr = "./";
+        QDir dir( QDir::homePath() + "/Documents/");
+        if(dir.exists())
+        {
+            dirStr = QDir::homePath() + "/Documents/";
+        }
+        return dirStr;
+    }();
 
-    QString file = DFileDialog::getSaveFileName(this,
-                                                      DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
-                                                      QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
-                                                      tr("Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)"), &selectFilter);
+    static DFileDialog dialog;
 
-    if(file.isEmpty() == true)
+    QString file = DFileDialog::getSaveFileName(
+                      this,
+                      DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
+                      QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
+                      tr("Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)"), &selectFilter);
+
+    if( file.isEmpty() == true )
     {
         return true;
     }
 
-    if(selectFilter == "Text (*.txt)")
+    QFileInfo fileInfo(file);
+    saveDir = fileInfo.absolutePath() + "/";
+
+    if( selectFilter == "Text (*.txt)" )
     {
         QFile textFile( file );
         if( false == textFile.open(QIODevice::WriteOnly))

@@ -115,6 +115,11 @@ void DiskWidget::initWidget()
             interface.value = lst.at(lst.size() -2);
         }
 
+//        if(interface.value.compare("usb", Qt::CaseInsensitive) == 0)
+//        {
+//            model.value += " USB disk";
+//        }
+
         ArticleStruct serial("Serial");
         serial.queryData("lshw", disk, "serial");
         existArticles.insert("serial");

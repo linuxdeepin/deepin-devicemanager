@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/LENOVO_KaiTianM610B-D120";
+const QString DEVICEINFO_PATH = "../../computers/TYAN_Computer_S7002";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -329,6 +329,11 @@ QStringList DeviceInfoParser::getLshwDisknameList()
         int index = fk.lastIndexOf("disk");
         if( index > 0 && fk.size() - index < 7 )    //avoid disk_volume:0
         {
+            int index = fk.lastIndexOf("_");
+            if(index > 0)
+            {
+                DeviceInfoParserInstance.orderedDevices.insert(fk.left(index));
+            }
             DeviceInfoParserInstance.orderedDevices.insert(fk);
             return true;
         }
@@ -590,7 +595,7 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
         QRegExp rx("^[\\s\\S]*usb[:0-9]*$");
         if( rx.exactMatch(fk) ==false )
         {
-            return false;;
+            return false;
         }
 
         if( fk.contains("usb", Qt::CaseInsensitive) )

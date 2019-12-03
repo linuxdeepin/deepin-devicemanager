@@ -101,7 +101,7 @@ void UsbdeviceWidget::initWidget()
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
-        QString title = (name.value.isEmpty() == false && name.value != DApplication::translate("Main", "Unknown"))? name.value: description.value;
+        QString title = name.isValid()? name.value: description.value;
         addDevice( title, articles, usbdeviceList.size() );
 
         QStringList tab =
@@ -111,6 +111,19 @@ void UsbdeviceWidget::initWidget()
         };
 
         tabList.push_back(tab);
+
+        if(overviewInfo_.isValid())
+        {
+            overviewInfo_.value += " / ";
+        }
+
+        QList<ArticleStruct> overArticle;
+        overArticle << vendor << name;
+        if(name.isValid() == false)
+        {
+            overArticle << description;
+        }
+        overviewInfo_.value += joinArticle(overArticle);
     }
 
     if( usbdeviceList.size() > 1 )

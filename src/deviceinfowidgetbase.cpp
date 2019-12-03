@@ -674,7 +674,7 @@ QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct>& articles, const 
                 res += split;
             }
 
-            res +=  DApplication::translate("Main", article.value.trimmed().toStdString().data());
+            res +=  DApplication::translate( article.transContextName.isEmpty()?"Main":article.transContextName.toStdString().data(), article.value.trimmed().toStdString().data());
         }
     }
 

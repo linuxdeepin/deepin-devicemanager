@@ -28,6 +28,7 @@ struct ArticleStruct
 {
     QString name;
     QString value;
+    QString transContextName;
 
     bool autoHide = true;
     bool externalLinks = false;
@@ -45,6 +46,7 @@ struct ArticleStruct
         autoHide = other.autoHide;
         externalLinks = other.externalLinks;
         valueTranslate = other.valueTranslate;
+        transContextName = other.transContextName;
     }
 
     void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey );

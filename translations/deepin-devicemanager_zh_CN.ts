@@ -1421,10 +1421,6 @@
         </message>
         <message>
             <source>CPU MHz</source>
-            <translation></translation>
-        </message>
-        <message>
-            <source>CPU MHz</source>
             <translation>CPU频率(MHz)</translation>
         </message>
         <message>
@@ -1654,75 +1650,7 @@
         <message>
             <source>The Model Year(Not Manufacture Date)</source>
             <translation>型号日期(非生产日期)</translation>
-        </message>
-        <message>
-            <source>Desktop</source>
-            <translation>台式电脑</translation>
-        </message>
-        <message>
-            <source>Tablet</source>
-            <translation>平板电脑</translation>
-        </message>
-        <message>
-            <source>Server</source>
-            <translation>服务器</translation>
-        </message>
-        <message>
-            <source>All in one</source>
-            <translation>一体机</translation>
-        </message>
-        <message>
-            <source>All In One</source>
-            <translation>一体机</translation>
-        </message>
-        <message>
-            <source>Mini pc</source>
-            <translation>Mini电脑</translation>
-        </message>
-        <message>
-            <source>Convertible</source>
-            <translation>翻转电脑</translation>
-        </message>
-        <message>
-            <source>System On Chip</source>
-            <translation>板载电脑</translation>
-        </message>
-        <message>
-            <source>Stick pc</source>
-            <translation></translation>
-        </message>
-        <message>
-            <source>Phone</source>
-            <translation>手机</translation>
-        </message>
-        <message>
-            <source>Other</source>
-            <translation>其他型号电脑</translation>
-        </message>
-        <message>
-            <source>Laptop</source>
-            <translation>笔记本电脑</translation>
-        </message>
-        <message>
-            <source>Rack Mount Chassis</source>
-            <translation>机架式服务器</translation>
-        </message>
-        <message>
-            <source>Mini Tower</source>
-            <translation>微塔式机</translation>
-        </message>
-        <message>
-            <source>Main Server Chassis</source>
-            <translation>主服务器</translation>
-        </message>
-        <message>
-            <source>Blade Enclosing</source>
-            <translation>刀片服务器</translation>
-        </message>
-        <message>
-            <source>Blade</source>
-            <translation>刀片服务器</translation>
-        </message>
+        </message>   
         <message>
             <source>System</source>
             <translation>系统</translation>
@@ -1987,6 +1915,370 @@
         <message>
             <source>Size</source>
             <translation>屏幕尺寸</translation>
+        </message>
+    </context>
+    <context>
+        <!-- contains in https://git.savannah.nongnu.org/git/dmidecode.git dmidecode.c -->
+        <name>Dmidecode</name>
+        <message>
+            <source>Other</source>
+            <translation>其他型号</translation>
+        </message>
+        <message>
+            <source>Unknown</source>
+            <translation>未知型号</translation>
+        </message>
+        <message>
+            <source>Desktop</source>
+            <translation>桌面电脑</translation>
+        </message>
+        <message>
+            <source>Low Profile Desktop</source>
+            <translation>Low Profile台式机</translation>
+        </message>
+        <message>
+            <source>Pizza Box</source>
+            <translation>披萨盒</translation>
+        </message>
+        <message>
+            <source>Mini Tower</source>
+            <translation>微塔式机</translation>
+        </message>
+        <message>
+            <source>Tower</source>
+            <translation>塔式电脑</translation>
+        </message>
+        <message>
+            <source>Portable</source>
+            <translation>Portable</translation>
+        </message>
+        <message>
+            <source>Laptop</source>
+            <translation>笔记本电脑</translation>
+        </message>
+        <message>
+            <source>Notebook</source>
+            <translation>笔记本电脑</translation>
+        </message>
+        <message>
+            <source>Hand Held</source>
+            <translation>掌上电脑</translation>
+        </message>
+        <message>
+            <source>Docking Station</source>
+            <translation>扩展底座</translation>
+        </message>
+        <message>
+            <source>All In One</source>
+            <translation>一体机</translation>
+        </message>
+        <message>
+            <source>Sub Notebook</source>
+            <translation>迷你型笔记本</translation>
+        </message>
+        <message>
+            <source>Space-saving</source>
+            <translation>微电脑</translation>
+        </message>
+        <message>
+            <source>Lunch Box</source>
+            <translation>Lunch Box</translation>
+        </message>
+        <message>
+            <source>Main Server Chassis</source>
+            <translation>主服务器</translation>
+        </message>
+        <message>
+            <source>Expansion Chassis</source>
+            <translation>拓展机箱</translation>
+        </message>
+        <message>
+            <source>Sub Chassis</source>
+            <translation>Sub Chassis</translation>
+        </message>
+        <message>
+            <source>Bus Expansion Chassis</source>
+            <translation>Bus Expansion Chassis</translation>
+        </message>
+        <message>
+            <source>Peripheral Chassis</source>
+            <translation>Peripheral Chassis</translation>
+        </message>
+        <message>
+            <source>RAID Chassis</source>
+            <translation>RAID Chassis</translation>
+        </message>
+        <message>
+            <source>Rack Mount Chassis</source>
+            <translation>机架式服务器</translation>
+        </message>
+        <message>
+            <source>Sealed-case PC</source>
+            <translation>Sealed-case PC</translation>
+        </message>
+        <message>
+            <source>Multi-system</source>
+            <translation>多系统</translation>
+        </message>
+        <message>
+            <source>CompactPCI</source>
+            <translation>CompactPCI</translation>
+        </message>
+        <message>
+            <source>AdvancedTCA</source>
+            <translation>AdvancedTCA</translation>
+        </message>
+        <message>
+            <source>Blade</source>
+            <translation>刀片服务器</translation>
+        </message>
+        <message>
+            <source>Blade Enclosing</source>
+            <translation>刀片服务器</translation>
+        </message>
+        <message>
+            <source>Tablet</source>
+            <translation>平板电脑</translation>
+        </message>
+        <message>
+            <source>Convertible</source>
+            <translation>翻转电脑</translation>
+        </message>
+        <message>
+            <source>Detachable</source>
+            <translation>Detachable</translation>
+        </message>
+        <message>
+            <source>IoT Gateway</source>
+            <translation>IoT Gateway</translation>
+        </message>
+        <message>
+            <source>Embedded PC</source>
+            <translation>嵌入式电脑</translation>
+        </message>
+        <message>
+            <source>Mini pc</source>
+            <translation>迷你电脑</translation>
+        </message>
+        <message>
+            <source>Stick pc</source>
+            <translation>掌上电脑</translation>
+        </message>
+        <message>
+            <source>Server</source>
+            <translation>服务器</translation>
+        </message>
+        <message>
+            <source>System On Chip</source>
+            <translation>板载电脑</translation>
+        </message>
+        <message>
+            <source>Phone</source>
+            <translation>手机</translation>
+        </message>
+        <message>
+            <source>Rack Mount Chassis</source>
+            <translation>Rack Mount Chassis</translation>
+        </message>
+        <message>
+            <source>BIOS characteristics not supported</source>
+            <translation>不支持主板BIOS特性</translation>
+        </message>
+        <message>
+            <source>ISA is supported</source>
+            <translation>支持ISA</translation>
+        </message>
+        <message>
+            <source>MCA is supported</source>
+            <translation>支持MCA</translation>
+        </message>
+        <message>
+            <source>EISA is supported"</source>
+            <translation>支持EISA</translation>
+        </message>
+        <message>
+            <source>PCI is supported</source>
+            <translation>支持PCI</translation>
+        </message>
+        <message>
+            <source>PC Card (PCMCIA) is supported</source>
+            <translation>支持PC Card (PCMCIA)</translation>
+        </message>
+        <message>
+            <source>PNP is supported</source>
+            <translation>支持PNP</translation>
+        </message>
+        <message>
+            <source>APM is supported</source>
+            <translation>支持APM</translation>
+        </message>
+        <message>
+            <source>BIOS is upgradeable</source>
+            <translation>BIOS支持升级</translation>
+        </message>
+        <message>
+            <source>BIOS shadowing is allowed</source>
+            <translation>允许BIOS shadowing</translation>
+        </message>
+        <message>
+            <source>VLB is supported</source>
+            <translation>支持VLB</translation>
+        </message>
+        <message>
+            <source>ESCD support is available</source>
+            <translation>ESCD支持可用</translation>
+        </message>
+        <message>
+            <source>Boot from CD is supported</source>
+            <translation>支持从光驱启动</translation>
+        </message>
+        <message>
+            <source>Selectable boot is supported</source>
+            <translation>支持Boot可选</translation>
+        </message>
+        <message>
+            <source>BIOS ROM is socketed</source>
+            <translation></translation>
+        </message>
+        <message>
+            <source>Boot from PC Card (PCMCIA) is supported</source>
+            <translation></translation>
+        </message>
+        <message>
+            <source>EDD is supported</source>
+            <translation>支持EDD</translation>
+        </message>
+        <message>
+            <source>Japanese floppy for NEC 9800 1.2 MB is supported (int 13h)</source>
+            <translation>Japanese floppy for NEC 9800 1.2 MB is supported (int 13h)</translation>
+        </message>
+        <message>
+            <source>Japanese floppy for Toshiba 1.2 MB is supported (int 13h)</source>
+            <translation>Japanese floppy for Toshiba 1.2 MB is supported (int 13h)</translation>
+        </message>
+        <message>
+            <source>5.25\"/360 kB floppy services are supported (int 13h)</source>
+            <translation>5.25\"/360 kB floppy services are supported (int 13h)</translation>
+        </message>
+        <message>
+            <source>5.25\"/1.2 MB floppy services are supported (int 13h)</source>
+            <translation>5.25\"/1.2 MB floppy services are supported (int 13h)</translation>
+        </message>
+        <message>
+            <source>3.5\"/720 kB floppy services are supported (int 13h)</source>
+            <translation>3.5\"/720 kB floppy services are supported (int 13h)</translation>
+        </message>
+        <message>
+            <source>3.5\"/2.88 MB floppy services are supported (int 13h)</source>
+            <translation></translation>
+        </message>
+        <message>
+            <source>Print screen service is supported (int 5h)</source>
+            <translation>Print screen service is supported (int 5h)</translation>
+        </message>
+        <message>
+            <source>8042 keyboard services are supported (int 9h)</source>
+            <translation>8042 keyboard services are supported (int 9h)</translation>
+        </message>
+        <message>
+            <source>Serial services are supported (int 14h)</source>
+            <translation>Serial services are supported (int 14h)</translation>
+        </message>
+        <message>
+            <source>Printer services are supported (int 17h)</source>
+            <translation>Printer services are supported (int 17h)</translation>
+        </message>
+        <message>
+            <source>CGA/mono video services are supported (int 10h)</source>
+            <translation>CGA/mono video services are supported (int 10h)</translation>
+        </message>
+        <message>
+            <source>NEC PC-98</source>
+            <translation>NEC PC-98</translation>
+        </message>
+        <message>
+            <source>BIOS boot specification is supported</source>
+            <translation>BIOS boot specification is supported</translation>
+        </message>
+        <message>
+            <source>Function key-initiated network boot is supported</source>
+            <translation>Function key-initiated network boot is supporte</translation>
+        </message>
+        <message>
+            <source>Targeted content distribution is supported</source>
+            <translation>Targeted content distribution is supported</translation>
+        </message>
+        <message>
+            <source>UEFI is supported</source>
+            <translation>UEFI is supported</translation>
+        </message>
+        <message>
+            <source>Board is a hosting board</source>
+            <translation>Board is a hosting board</translation>
+        </message>
+        <message>
+            <source>System is a virtual machine</source>
+            <translation>System is a virtual machine</translation>
+        </message>
+        <message>
+            <source>Board requires at least one daughter board</source>
+            <translation>Board requires at least one daughter board</translation>
+        </message>
+        <message>
+            <source>Board is removable</source>
+            <translation>主板可移除</translation>
+        </message>
+        <message>
+            <source>Board is replaceable</source>
+            <translation>主板可更换</translation>
+        </message>
+        <message>
+            <source>Board is hot swappable</source>
+            <translation>主板可热插拔</translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
+        </message>
+        <message>
+            <source></source>
+            <translation></translation>
         </message>
     </context>
 </TS>

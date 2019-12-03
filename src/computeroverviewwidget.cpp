@@ -79,6 +79,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
     }
 
     ArticleStruct chassisType("Type");
+    chassisType.transContextName = "Dmidecode";
     chassisType.queryData("dmidecode", "Chassis Information", "Type");
 
     pName.value = pName.value.remove( vendor.value, Qt::CaseInsensitive);
