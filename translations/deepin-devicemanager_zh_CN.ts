@@ -408,9 +408,9 @@
             <translation>处理器核心数</translation>
         </message>
         <message>
-        <source>cpu cores</source>
-        <translation>处理器核心数</translation>
-    </message>
+            <source>cpu cores</source>
+            <translation>处理器核心数</translation>
+        </message>
         <message>
             <source>Threads amount</source>
             <translation>线程数</translation>
@@ -1930,11 +1930,11 @@
         </message>
         <message>
             <source>Desktop</source>
-            <translation>桌面电脑</translation>
+            <translation>台式电脑</translation>
         </message>
         <message>
             <source>Low Profile Desktop</source>
-            <translation>Low Profile台式机</translation>
+            <translation>Low Profile台式电脑</translation>
         </message>
         <message>
             <source>Pizza Box</source>
@@ -1946,11 +1946,11 @@
         </message>
         <message>
             <source>Tower</source>
-            <translation>塔式电脑</translation>
+            <translation>塔式机</translation>
         </message>
         <message>
             <source>Portable</source>
-            <translation>Portable</translation>
+            <translation>可移动计算机</translation>
         </message>
         <message>
             <source>Laptop</source>
@@ -1974,11 +1974,11 @@
         </message>
         <message>
             <source>Sub Notebook</source>
-            <translation>迷你型笔记本</translation>
+            <translation>迷你笔记本</translation>
         </message>
         <message>
             <source>Space-saving</source>
-            <translation>微电脑</translation>
+            <translation>Space-saving</translation>
         </message>
         <message>
             <source>Lunch Box</source>
@@ -2042,7 +2042,7 @@
         </message>
         <message>
             <source>Convertible</source>
-            <translation>翻转电脑</translation>
+            <translation>翻转笔记本</translation>
         </message>
         <message>
             <source>Detachable</source>
@@ -2062,7 +2062,7 @@
         </message>
         <message>
             <source>Stick pc</source>
-            <translation>掌上电脑</translation>
+            <translation>电脑棒</translation>
         </message>
         <message>
             <source>Server</source>

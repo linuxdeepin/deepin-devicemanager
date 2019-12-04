@@ -2094,7 +2094,6 @@
             <source>Rack Mount Chassis</source>
             <translation type="unfinished"/>
         </message>
-
         <message>
             <source>BIOS characteristics not supported</source>
             <translation type="unfinished"/>

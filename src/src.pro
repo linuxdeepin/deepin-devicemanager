@@ -132,6 +132,7 @@ DISTFILES += \
     ../README.md \
     ../debian/control \
     ../debian/rules \
+    ../translations/*.ts
 
 # target
 target.path = /usr/bin/
