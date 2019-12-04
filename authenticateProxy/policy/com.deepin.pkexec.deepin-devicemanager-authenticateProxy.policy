@@ -6,8 +6,10 @@
   <vendor>LinuxDeepin</vendor>
   <vendor_url>https://www.deepin.com/</vendor_url>
   <action id="com.deepin.pkexec.deepin-devicemanager">
-    <message>Devicemanager Authentication is required to super permissions</message>
-    <message xml:lang="zh_CN">设备管理器读取设备信息需要授权</message>
+  	<description>Run Device Manager Need Authentication</description>
+   <description xml:lang="zh_CN">设备管理器需要授权以读取硬件信息</description>
+    <message>Authentication is required to read Hardware Infomation</message>
+    <message xml:lang="zh_CN">需要授权以读取硬件信息</message>
     <icon_name></icon_name>
     <defaults>
       <allow_any>no</allow_any>
