@@ -70,7 +70,7 @@ void LogTreeView::initUI()
     setRootIsDecorated(false);
     setItemsExpandable(false);
     setFrameStyle(QFrame::NoFrame);
-    this->viewport()->setAutoFillBackground(false);
+    this->viewport()->setAutoFillBackground(true);
 
     //setBack
 }
@@ -95,7 +95,7 @@ void LogTreeView::paintEvent(QPaintEvent *event)
     auto *dAppHelper = DApplicationHelper::instance();
     auto palette = dAppHelper->applicationPalette();
 
-    QBrush bgBrush(palette.color(cg, DPalette::Base));
+    QBrush bgBrush(palette.color(cg, DPalette::Background));
 
     QStyleOptionFrame option;
     initStyleOption(&option);
@@ -106,9 +106,9 @@ void LogTreeView::paintEvent(QPaintEvent *event)
     QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
     QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
     QPainterPath clipPath, subPath;
-    //    clipPath.addRoundedRect(clipRect, radius, radius);
-    //    subPath.addRect(subRect);
-    //    clipPath = clipPath.subtracted(subPath);
+    clipPath.addRoundedRect(clipRect, 8, 8);
+    subPath.addRect(subRect);
+    clipPath = clipPath.subtracted(subPath);
     clipPath.addRect(rect);
 
     painter.fillPath(clipPath, bgBrush);

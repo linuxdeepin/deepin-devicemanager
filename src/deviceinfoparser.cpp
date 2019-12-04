@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/TYAN_Computer_S7002";
+const QString DEVICEINFO_PATH = "../../computers/Dell_OptiPlex3020";
 
 using PowerInter = com::deepin::daemon::Power;
 

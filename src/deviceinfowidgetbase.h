@@ -109,8 +109,6 @@ public:
 
     QString getDeviceName();
 
-    virtual void deviceListClicked();
-
     static int maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3);
 
     void getContextMenu(Dtk::Widget::DMenu** contextMenu);
@@ -118,9 +116,7 @@ public:
     QString joinArticle(QList<ArticleStruct>& articles, const QString& split = " ");
 
 protected:
-    //void mousePressEvent(QMouseEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *event) override;
-    //void resizeEvent(QResizeEvent *event) override;
     void showEvent(QShowEvent *event) override;
 
 public slots:

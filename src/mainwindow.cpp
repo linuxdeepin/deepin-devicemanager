@@ -607,7 +607,6 @@ void MainWindow::currentDeviceChanged(const QString& device)
         return;
     }
 
-    deviceInfoWidgetMap_[device]->deviceListClicked();
     rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[device]);
     leftDeviceView_->setCurrentDevice(device);
 }

@@ -522,7 +522,6 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     if(tableWidget_ == nullptr)
     {
         tableWidget_ = new LogTreeView(this);
-
         DFontSizeManager::instance()->bind( tableWidget_, DFontSizeManager::T8);
 
         tableWidget_->setSortingEnabled(true);
@@ -542,13 +541,15 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         }
         tableWidget_->m_pModel->setHorizontalHeaderLabels(translaterHeaders);
 
-
-
         connect(tableWidget_, &DTreeView::clicked, this, &DeviceInfoWidgetBase::OnCurrentItemClicked);
     }
 
+    //vLayout_->insertWidget(0, tableWidget_);
+    QVBoxLayout* tableLay = new QVBoxLayout;
+    tableLay->setContentsMargins(1,1,1,1);
+    tableLay->addWidget(tableWidget_);
+    vLayout_->insertLayout(0,tableLay);
 
-    vLayout_->insertWidget(0, tableWidget_);
     vLayout_->insertSpacing(1, 2);
 
     for(int i = 0; i < contentsList.size(); ++i)
@@ -617,6 +618,8 @@ void DeviceInfoWidgetBase::initDownWidget()
 
     QVBoxLayout* ly = new QVBoxLayout;
 
+    ly->setContentsMargins(10,10,0,10);
+
     ly->setSpacing(0);
 
     ly->addWidget(htmlBrower_);
@@ -627,16 +630,6 @@ void DeviceInfoWidgetBase::initDownWidget()
 QString DeviceInfoWidgetBase::getDeviceName()
 {
     return overviewInfo_.name;
-}
-
-void DeviceInfoWidgetBase::deviceListClicked()
-{
-//    if(downWidgetScrollArea_ == nullptr)
-//    {
-//        return;
-//    }
-
-//    downWidgetScrollArea_->verticalScrollBar()->setValue(0);
 }
 
 int DeviceInfoWidgetBase::maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3)
@@ -727,7 +720,7 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
 {
     if(firstShow_ == false)
     {
-        return DWidget::show();
+        return DWidget::showEvent(event);
     }
 
     firstShow_ = false;
@@ -763,72 +756,6 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
     DWidget::showEvent(event);
 }
 
-//void DeviceInfoWidgetBase::resizeEvent(QResizeEvent *event)
-//{
-//    if(tableWidget_)
-//    {
-//        tableWidget_->adjustSize();
-//    }
-
-//    if(downWidget_)
-//    {
-//        if(titleInfo_)
-//        {
-//            if(titleInfo_->title)
-//            {
-//                titleInfo_->title->adjustSize();
-//            }
-
-//            foreach(auto namelabel, titleInfo_->nameLabels)
-//            {
-//                if(namelabel)
-//                {
-//                    namelabel->adjustSize();
-//                }
-//            }
-
-//            foreach(auto content, titleInfo_->contentLabels)
-//            {
-//                if(content)
-//                {
-//                    content->adjustSize();
-//                }
-//            }
-//        }
-
-//        foreach(auto info, deviceInfos_)
-//        {
-//            if(info.title)
-//            {
-//                info.title->adjustSize();
-//            }
-
-//            foreach(auto namelabel, info.nameLabels)
-//            {
-//                if(namelabel)
-//                {
-//                    namelabel->adjustSize();
-//                }
-//            }
-
-//            foreach(auto content, info.contentLabels)
-//            {
-//                if(content)
-//                {
-//                    content->adjustSize();
-//                }
-//            }
-//        }
-//    }
-
-//    if(infoWidget_)
-//    {
-//        infoWidget_->adjustSize();
-//    }
-
-//    DWidget::resizeEvent(event);
-//}
-
 void DeviceInfoWidgetBase::OnCurrentItemClicked(const QModelIndex &index)
 {
     QStandardItem* item = tableWidget_->m_pModel->item( index.row() );
@@ -838,8 +765,6 @@ void DeviceInfoWidgetBase::OnCurrentItemClicked(const QModelIndex &index)
     }
 
     int row = item->data(Qt::UserRole+90).toInt();
-
-    //htmlBrower_->scroll(0, height);
 
     QTextCursor cursor = htmlBrower_->textCursor();
     cursor.setPosition( htmlBrower_->document()->characterCount() -1 );

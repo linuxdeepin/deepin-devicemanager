@@ -1,0 +1,15 @@
+Device: /org/freedesktop/UPower/devices/DisplayDevice
+  power supply:         no
+  updated:              2019年12月04日 星期三 13时17分58秒 (4354 seconds ago)
+  has history:          no
+  has statistics:       no
+  unknown
+    warning-level:       none
+    icon-name:          'battery-missing-symbolic'
+
+Daemon:
+  daemon-version:  0.99.10
+  on-battery:      no
+  lid-is-closed:   no
+  lid-is-present:  no
+  critical-action: PowerOff
