@@ -51,6 +51,9 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    QString defaultLanguage = getenv("LANGUAGE");
+    setenv ("LANGUAGE", "en_US", 1);    //for aviod translate in lscpu...
+
     QProcess proc;
 
     proc.start( argv[1] );
@@ -62,8 +65,10 @@ int main(int argc, char *argv[])
 
     if(res == false)
     {
+        setenv ("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
         return -1;
     }
 
+    setenv ("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
     return 0;
 }

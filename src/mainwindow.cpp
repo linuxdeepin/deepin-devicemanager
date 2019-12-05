@@ -416,8 +416,6 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
         return dirStr;
     }();
 
-    static DFileDialog dialog;
-
     QString file = DFileDialog::getSaveFileName(
                       this,
                       DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \

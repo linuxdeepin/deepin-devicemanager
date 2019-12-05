@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/Dell_OptiPlex3020";
+const QString DEVICEINFO_PATH = "../../computers/Bell_Aspire_xxxx";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -62,7 +62,12 @@ void DeviceInfoParser::refreshDabase()
     toolDatabase_.clear();
     toolDatabaseSecondOrder_.clear();
 
+    QString defaultLanguage = getenv("LANGUAGE");
+
     emit loadFinished("Loading Operating System Info...");
+
+    setenv ("LANGUAGE", "en_US", 1);    //for aviod translate in lscpu...
+
     loadCatosrelelease();
     loadlsb_release();
     loadOSInfo();
@@ -83,7 +88,7 @@ void DeviceInfoParser::refreshDabase()
     loadLscpuDatabase();
     //DeviceInfoParserInstance.loadSmartctlDatabase();
 
-    emit loadFinished("Loading Input Device Info...");
+    emit loadFinished("Loading Input Devices Info...");
     loadCatInputDatabase();
 
     emit loadFinished("Loading Power Settings...");
@@ -94,7 +99,7 @@ void DeviceInfoParser::refreshDabase()
     loadXrandrDatabase();
     loadHwinfoDatabase();
 
-    emit loadFinished("Loading PCI Device Info...");
+    emit loadFinished("Loading PCI Devices Info...");
     loadLspciDatabase();
 
     emit loadFinished("Loading Bluetooth Device Info...");
@@ -104,6 +109,8 @@ void DeviceInfoParser::refreshDabase()
 
     emit loadFinished("Loading USB Devices Info...");
     loadLsusbDatabase();
+
+    setenv ("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
 
     emit loadFinished("Loading Printer Info...");
     //loadCupsDatabase();
@@ -3214,8 +3221,6 @@ bool DeviceInfoParser::getRootPassword()
 //        //DMessageBox::warning(nullptr, "", DApplication::translate("Main", "Password Error!"));
 //        exit(-1);
 //    }
-
-    return true;
 }
 
 bool DeviceInfoParser::executeProcess(const QString& cmd)

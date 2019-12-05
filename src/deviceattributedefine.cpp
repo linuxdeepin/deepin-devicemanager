@@ -32,7 +32,7 @@ void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, 
         return;
     }
 
-    value = DeviceInfoParserInstance.queryData( toolname, firstKey, secondKey );
+    value = DeviceInfoParserInstance.queryData( toolname, firstKey, secondKey);
 }
 
 void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet)
@@ -44,7 +44,7 @@ void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, 
         return;
     }
 
-    value = DeviceInfoParserInstance.queryData( toolname, firstKey, secondKey );
+    value = DeviceInfoParserInstance.queryData( toolname, firstKey, secondKey);
 }
 
 void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet, QList<ArticleStruct>& articles)
@@ -56,7 +56,7 @@ void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, 
         return;
     }
 
-    value = DeviceInfoParserInstance.queryData( toolname, firstKey, secondKey );
+    value = DeviceInfoParserInstance.queryData( toolname, firstKey, secondKey);
 
     if( isValid() )
     {

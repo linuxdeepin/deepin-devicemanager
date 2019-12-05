@@ -964,7 +964,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Loading Input Device Info...</source>
+            <source>Loading Input Devices Info...</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -976,7 +976,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Loading PCI Device Info...</source>
+            <source>Loading PCI Devices Info...</source>
             <translation type="unfinished"/>
         </message>
         <message>

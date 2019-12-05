@@ -968,7 +968,7 @@
             <translation>获取处理器信息...</translation>
         </message>
         <message>
-            <source>Loading Input Device Info...</source>
+            <source>Loading Input Devices Info...</source>
             <translation>获取输入设备信息...</translation>
         </message>
         <message>
