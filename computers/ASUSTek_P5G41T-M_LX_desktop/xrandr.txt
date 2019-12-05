@@ -1,0 +1,93 @@
+Screen 0: minimum 320 x 200, current 1920 x 1080, maximum 8192 x 8192
+DVI-I-1 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x61
+	Timestamp:  340569
+	Subpixel:   unknown
+	Clones:    
+	CRTCs:      0 1
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	dithering depth: 6 bpc 
+		supported: auto, 6 bpc, 8 bpc
+	dithering mode: off 
+		supported: auto, off, static 2x2, dynamic 2x2
+	scaling mode: None 
+		supported: None, Full, Center, Full aspect
+	color vibrance: 150 
+		range: (0, 200)
+	vibrant hue: 90 
+		range: (0, 180)
+	underscan vborder: 0 
+		range: (0, 128)
+	underscan hborder: 0 
+		range: (0, 128)
+	underscan: off 
+		supported: auto, off, on
+	subconnector: Unknown 
+		supported: Unknown, DVI-D, DVI-A
+VGA-1 connected primary 1920x1080+0+0 (0x64) normal (normal left inverted right x axis y axis) 477mm x 268mm
+	Identifier: 0x62
+	Timestamp:  340569
+	Subpixel:   unknown
+	Gamma:      1.0:1.0:1.0
+	Brightness: 1.0
+	Clones:    
+	CRTC:       0
+	CRTCs:      0 1
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	EDID: 
+		00ffffffffffff001e6d38583bd30200
+		0c1501036c301b78ea3331a354519e27
+		115054a54b00714f8180818fb3000101
+		010101010101023a801871382d40582c
+		4500dd0c1100001e000000fd00384b1e
+		530f000a202020202020000000fc0045
+		323231310a20202020202020000000ff
+		003131324e44435235463134370a009a
+	scaling mode: None 
+		supported: None, Full, Center, Full aspect
+	color vibrance: 150 
+		range: (0, 200)
+	vibrant hue: 90 
+		range: (0, 180)
+  1920x1080 (0x64)  148.5MHz +HSync +VSync *current +preferred
+        h: width  1920 start 2008 end 2052 total 2200 skew    0 clock   67.5KHz
+        v: height 1080 start 1084 end 1089 total 1125           clock   60.0Hz
+  1680x1050 (0x65)  146.2MHz -HSync +VSync
+        h: width  1680 start 1784 end 1960 total 2240 skew    0 clock   65.3KHz
+        v: height 1050 start 1053 end 1059 total 1089           clock   60.0Hz
+  1280x1024 (0x66)  135.0MHz +HSync +VSync
+        h: width  1280 start 1296 end 1440 total 1688 skew    0 clock   80.0KHz
+        v: height 1024 start 1025 end 1028 total 1066           clock   75.0Hz
+  1280x1024 (0x67)  108.0MHz +HSync +VSync
+        h: width  1280 start 1328 end 1440 total 1688 skew    0 clock   64.0KHz
+        v: height 1024 start 1025 end 1028 total 1066           clock   60.0Hz
+  1152x864 (0x68)  108.0MHz +HSync +VSync
+        h: width  1152 start 1216 end 1344 total 1600 skew    0 clock   67.5KHz
+        v: height  864 start  865 end  868 total  900           clock   75.0Hz
+  1024x768 (0x69)   78.8MHz +HSync +VSync
+        h: width  1024 start 1040 end 1136 total 1312 skew    0 clock   60.1KHz
+        v: height  768 start  769 end  772 total  800           clock   75.1Hz
+  1024x768 (0x6a)   65.0MHz -HSync -VSync
+        h: width  1024 start 1048 end 1184 total 1344 skew    0 clock   48.4KHz
+        v: height  768 start  771 end  777 total  806           clock   60.0Hz
+  800x600 (0x6b)   49.5MHz +HSync +VSync
+        h: width   800 start  816 end  896 total 1056 skew    0 clock   46.9KHz
+        v: height  600 start  601 end  604 total  625           clock   75.0Hz
+  800x600 (0x6c)   40.0MHz +HSync +VSync
+        h: width   800 start  840 end  968 total 1056 skew    0 clock   37.9KHz
+        v: height  600 start  601 end  605 total  628           clock   60.3Hz
+  640x480 (0x6d)   31.5MHz -HSync -VSync
+        h: width   640 start  656 end  720 total  840 skew    0 clock   37.5KHz
+        v: height  480 start  481 end  484 total  500           clock   75.0Hz
+  640x480 (0x6e)   25.2MHz -HSync -VSync
+        h: width   640 start  656 end  752 total  800 skew    0 clock   31.5KHz
+        v: height  480 start  490 end  492 total  525           clock   60.0Hz
+  720x400 (0x6f)   28.3MHz -HSync +VSync
+        h: width   720 start  738 end  846 total  900 skew    0 clock   31.5KHz
+        v: height  400 start  412 end  414 total  449           clock   70.1Hz

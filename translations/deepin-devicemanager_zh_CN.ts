@@ -376,6 +376,18 @@
             <translation>小时</translation>
         </message>
         <message>
+            <source> Seconds</source>
+            <translation>秒</translation>
+        </message>
+        <message>
+            <source> Minutes</source>
+            <translation>分钟</translation>
+        </message>
+        <message>
+            <source> Half Minutes</source>
+            <translation>半分钟</translation>
+        </message>
+        <message>
             <source> Times</source>
             <translation>次</translation>
         </message>

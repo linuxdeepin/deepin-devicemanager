@@ -75,6 +75,9 @@ void DisplayadapterWidget::initWidget()
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
+        ArticleStruct description("Description");
+        description.queryData("lshw", displayadapter, "description", existArticles, articles);
+
         ArticleStruct memory("Graphic Memory");
         memory.queryData("lspci", lspciDeviceName, "Memory");
         articles.push_back(memory);
@@ -145,7 +148,7 @@ void DisplayadapterWidget::initWidget()
             overviewInfo_.value += " / ";
         }
 
-        overviewInfo_.value += name.value.remove(vendor.value).trimmed();
+        overviewInfo_.value += name.value.remove(vendor.value, Qt::CaseInsensitive).trimmed();
 
         QList<ArticleStruct> subArticles;
         subArticles << memory << vendor;

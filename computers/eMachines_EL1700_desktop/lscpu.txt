@@ -1,0 +1,26 @@
+Architecture:x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Порядок байт:Little Endian
+CPU(s):                2
+On-line CPU(s) list:   0,1
+Thread(s) per core:    1
+Ядер на сокет:2
+Сокетов:        1
+NUMA node(s):          1
+ID прроизводителя:GenuineIntel
+Семейство ЦПУ:6
+Модель:          23
+Model name:   Pentium(R) Dual-Core  CPU      E5800  @ 3.20GHz
+Степпинг:      10
+CPU MHz:               3203.000
+CPU max MHz:           3203,0000
+CPU min MHz:           1203,0000
+BogoMIPS:              6399.41
+Виртуализация:VT-x
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              2048K
+NUMA node0 CPU(s):     0,1
+Флаги:            fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx lm constant_tsc arch_perfmon pebs bts rep_good nopl aperfmperf eagerfpu pni dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm xsave lahf_lm tpr_shadow vnmi flexpriority dtherm
+
+

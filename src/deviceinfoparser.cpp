@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/Bell_Aspire_xxxx";
+const QString DEVICEINFO_PATH = "../../computers/IBM_4810XXX_desktop";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -336,11 +336,11 @@ QStringList DeviceInfoParser::getLshwDisknameList()
         int index = fk.lastIndexOf("disk");
         if( index > 0 && fk.size() - index < 7 )    //avoid disk_volume:0
         {
-            int index = fk.lastIndexOf("_");
-            if(index > 0)
-            {
-                DeviceInfoParserInstance.orderedDevices.insert(fk.left(index));
-            }
+//            int index = fk.lastIndexOf("_");
+//            if(index > 0)
+//            {
+//                DeviceInfoParserInstance.orderedDevices.insert(fk.left(index));
+//            }
             DeviceInfoParserInstance.orderedDevices.insert(fk);
             return true;
         }

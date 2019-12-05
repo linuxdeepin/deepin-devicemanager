@@ -558,7 +558,13 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         const QStringList& contents = contentsList[i];
         for(int j = 0; j < contents.size(); ++j )
         {
-            DStandardItem* item = new DStandardItem(contents[j]);
+            QString strContent = contents[j];
+            if( strContent.isEmpty() == true)
+            {
+                strContent = "--";
+            }
+
+            DStandardItem* item = new DStandardItem(strContent);
             if(j == 0)
             {
                 item->setData( i, Qt::UserRole + 90 );
@@ -673,37 +679,6 @@ QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct>& articles, const 
 
     return res;
 }
-
-void DeviceInfoWidgetBase::changeTheme()
-{
-    if(isPaletteInit_ == false)
-    {
-        defaultPa_ = DApplicationHelper::instance()->palette(this);
-        defaultPa_.setBrush(QPalette::Background, palette().base() );
-        isPaletteInit_ = true;
-    }
-
-    DApplicationHelper::instance()->setPalette(this, defaultPa_);
-
-    if(titleInfo_)
-    {
-        //titleInfo_->changeTheme();
-    }
-
-    foreach(auto dv, deviceInfos_)
-    {
-        //dv.changeTheme();
-    }
-
-    //selectColumnWidget_ = nullptr;
-}
-
-//void DeviceInfoWidgetBase::mousePressEvent(QMouseEvent *event)
-//{
-//    selectColumnWidget(nullptr);
-
-//    DWidget::mousePressEvent(event);
-//}
 
 void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)
 {

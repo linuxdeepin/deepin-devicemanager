@@ -1,0 +1,18 @@
+Architecture:         i686
+CPU op-mode(s):  32-bit, 64-bit
+Boutisme :            Little Endian
+Processeur(s):       2
+Liste de processeur(s) en ligne : 0,1
+Thread(s) par core: 1
+Cœur(s) par socket : 2
+Socket(s) :           1
+Identifiant constructeur : GenuineIntel
+Famille de processeur : 6
+Modèle :             23
+Model name:      Intel(R) Celeron(R) CPU        E3400  @ 2.60GHz
+Révision :           10
+Vitesse du processeur en MHz : 2603.000
+Vitesse maximale du processeur en MHz : 2603,0000
+Vitesse minimale du processeur en MHz : 1203,0000
+BogoMIPS :            5201.28
+Virtualisation :      VT-x

@@ -1,0 +1,31 @@
+35: None 00.0: 10002 LCD Monitor
+  [Created at monitor.95]
+  Unique ID: rdCR.50VuRMZQdMF
+  Hardware Class: monitor
+  Model: "LG Display LP156WH3-TLA2"
+  Vendor: LGD "LG Display"
+  Device: eisa 0x0210 "LP156WH3-TLA2"
+  Resolution: 1366x768@60Hz
+  Size: 345x194 mm
+  Detailed Timings #0:
+     Resolution: 1366x768
+     Horizontal: 1366 1414 1446 1564 (+48 +80 +198) -hsync
+       Vertical:  768  771  776  800 (+3 +8 +32) -vsync
+    Frequencies: 75.10 MHz, 48.02 kHz, 60.02 Hz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+36: None 00.2: 10002 LCD Monitor
+  [Created at monitor.95]
+  Unique ID: aHB6.50VuRMZQdMF
+  Hardware Class: monitor
+  Model: "LG Display LP156WH3-TLA2"
+  Vendor: LGD "LG Display"
+  Device: eisa 0x0210 "LP156WH3-TLA2"
+  Resolution: 1366x768@60Hz
+  Size: 345x194 mm
+  Detailed Timings #0:
+     Resolution: 1366x768
+     Horizontal: 1366 1414 1446 1564 (+48 +80 +198) -hsync
+       Vertical:  768  771  776  800 (+3 +8 +32) -vsync
+    Frequencies: 75.10 MHz, 48.02 kHz, 60.02 Hz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown

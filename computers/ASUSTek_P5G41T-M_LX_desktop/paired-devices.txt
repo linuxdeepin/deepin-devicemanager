@@ -1,0 +1,2 @@
+Device D3:6A:FF:19:CE:06 Dell WM527 Mouse
+Device C6:FC:4E:B1:FD:BA Dell WK717Keyboard

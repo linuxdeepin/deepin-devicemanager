@@ -1,0 +1,4 @@
+Distributor ID:	RosaDesktopFresh
+Description:	ROSA Desktop Fresh R8
+Release:	2014.1
+Codename:	Fresh

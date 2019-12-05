@@ -1,0 +1,17 @@
+Architecture:          i686
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                2
+On-line CPU(s) list:   0,1
+Thread(s) per core:    1
+Core(s) per socket:    2
+Socket(s):             1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 37
+Model name:            Intel(R) Pentium(R) CPU        P6200  @ 2.13GHz
+Stepping:              5
+CPU MHz:               2133.000
+CPU max MHz:           2133,0000
+CPU min MHz:           933,0000
+BogoMIPS:              4256.09

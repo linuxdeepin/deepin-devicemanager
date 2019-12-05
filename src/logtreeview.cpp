@@ -71,7 +71,6 @@ void LogTreeView::initUI()
     setItemsExpandable(false);
     setFrameStyle(QFrame::NoFrame);
     this->viewport()->setAutoFillBackground(true);
-
     //setBack
 }
 
@@ -99,8 +98,6 @@ void LogTreeView::paintEvent(QPaintEvent *event)
 
     QStyleOptionFrame option;
     initStyleOption(&option);
-    //option.state |= QStyle::State_Active;
-    //    int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
 
     QRect rect = viewport()->rect();
     QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
@@ -128,7 +125,8 @@ void LogTreeView::keyPressEvent(QKeyEvent *event)
 
 int LogTreeView::sizeHintForColumn(int column) const
 {
-    int maxWidth = 50;
+    static int margin = 25;
+    int maxWidth = margin;
     for(int i = 0; i < m_pModel->rowCount(); ++i)
     {
         int width = QFontMetrics( DeviceInfoWidgetBase::tableContentFont_ ).width(m_pModel->item(i, column)->text());
@@ -138,7 +136,8 @@ int LogTreeView::sizeHintForColumn(int column) const
         }
     }
 
-    return (maxWidth + 50 > (DeviceWidgetDownWidgehWidth_/m_pModel->columnCount())*2) ? (DeviceWidgetDownWidgehWidth_/m_pModel->columnCount()*2) : (maxWidth + 50);
+    return (maxWidth + margin > (DeviceWidgetDownWidgehWidth_/m_pModel->columnCount())*2) ? (DeviceWidgetDownWidgehWidth_/m_pModel->columnCount()*2) : (maxWidth + margin);
+    //return DTreeView::sizeHintForColumn(column);
 }
 
 //QStyleOptionViewItem LogTreeView::viewOptions() const

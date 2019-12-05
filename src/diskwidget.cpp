@@ -48,8 +48,6 @@ void DiskWidget::initWidget()
     {
         QString logicalName = DeviceInfoParserInstance.queryData("lshw", disk, "logical name");
 
-//        DeviceInfoParserInstance.loadSmartctlDatabase(logicalName);
-
         QString modelStr = DeviceInfoParserInstance.queryData("lshw", disk, "product");
         QString vendorStr = DeviceInfoParserInstance.queryData("lshw", disk, "vendor");
         QString mediaTypeStr = "Unknown";
@@ -87,16 +85,31 @@ void DiskWidget::initWidget()
         if( DeviceInfoParserInstance.isToolSuccess("smartctl") )
         {
             QString rotationRate = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Rotation Rate");
-            if(rotationRate == DApplication::translate("Main", "Unknown") ||\
-               rotationRate.contains("SSD", Qt::CaseInsensitive) ||\
-               rotationRate.contains("Solid", Qt::CaseInsensitive) )
+            QString modelFamilyStr = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Model Family");
+            QString deviceModelStr = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Device Model");
+
+            if( getDiskType(rotationRate, mediaTypeStr) == false )
             {
-                mediaTypeStr = "SDD";
+                if( getDiskType(modelFamilyStr, mediaTypeStr) == false )
+                {
+                    getDiskType(deviceModelStr, mediaTypeStr);
+                }
             }
-            else
-            {
-                mediaTypeStr = "HDD";
-            }
+        }
+
+
+
+        ArticleStruct interface("Interface");
+        QStringList lst = disk.split("_");
+        interface.value = DApplication::translate("Main", "Unknown");
+        if( lst.size() > 2 )
+        {
+            interface.value = lst.at(lst.size() -2);
+        }
+
+        if(mediaTypeStr == "Unknown" && interface.value.compare("usb", Qt::CaseInsensitive) == 0)
+        {
+            mediaTypeStr = " USB disk";
         }
 
         mediaType.value = mediaTypeStr;
@@ -107,19 +120,6 @@ void DiskWidget::initWidget()
         articles.push_back(size);
         existArticles.insert("size");
 
-        ArticleStruct interface("Interface");
-        QStringList lst = disk.split("_");
-        interface.value = DApplication::translate("Main", "Unknown");
-        if( lst.size() > 2 )
-        {
-            interface.value = lst.at(lst.size() -2);
-        }
-
-//        if(interface.value.compare("usb", Qt::CaseInsensitive) == 0)
-//        {
-//            model.value += " USB disk";
-//        }
-
         ArticleStruct serial("Serial");
         serial.queryData("lshw", disk, "serial");
         existArticles.insert("serial");
@@ -128,16 +128,6 @@ void DiskWidget::initWidget()
         if( DeviceInfoParserInstance.isToolSuccess("smartctl") )
         {
             QString rotationRate = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Rotation Rate");
-            if(rotationRate == DApplication::translate("Main", "Unknown") ||\
-               rotationRate.contains("SSD", Qt::CaseInsensitive) ||\
-               rotationRate.contains("Solid", Qt::CaseInsensitive))
-            {
-                mediaTypeStr = "SDD";
-            }
-            else
-            {
-                mediaTypeStr = "HDD";
-            }
 
             QString sataVersion = DeviceInfoParserInstance.queryData("smartctl", logicalName, "SATA Version");
             QString version;
@@ -152,6 +142,11 @@ void DiskWidget::initWidget()
             dm.queryData("smartctl", logicalName, "Device Model");
             articles.push_back(dm);
             existArticles.insert("Device Model");
+
+            ArticleStruct description("Description");
+            description.queryData("lshw", disk, "description");
+            articles.push_back(description);
+            existArticles.insert("description");
 
             int index = sataVersion.indexOf(",");
             if(index>0)
@@ -183,13 +178,34 @@ void DiskWidget::initWidget()
             existArticles.insert("Form Factor");
 
             ArticleStruct powerOnHours("Power On Hours");
-            powerOnHours.queryData("smartctl", logicalName, "Power_On_Hours");
+            powerOnHours.queryData("smartctl", logicalName, "Power_On_Hours", existArticles, articles);
             if(powerOnHours.isValid())
             {
                 powerOnHours.value += DApplication::translate("Main", " Hours");
             }
-            articles.push_back(powerOnHours);
-            existArticles.insert("Power_On_Hours");
+
+            ArticleStruct powerOnMinutes("Power_On_Minutes");
+            powerOnMinutes.queryData("smartctl", logicalName, "Power_On_Minutes", existArticles, articles);
+            if(powerOnMinutes.isValid())
+            {
+                powerOnMinutes.value += DApplication::translate("Main", " Minutes");
+            }
+
+
+            ArticleStruct powerOnHalfMinutes("Power_On_Half_Minutes");
+            powerOnHalfMinutes.queryData("smartctl", logicalName, "Power_On_Half_Minutes", existArticles, articles);
+            if(powerOnHalfMinutes.isValid())
+            {
+                powerOnHalfMinutes.value += DApplication::translate("Main", " Half Minutes");
+            }
+
+
+            ArticleStruct powerOnSeconds("Power_On_Seconds");
+            powerOnSeconds.queryData("smartctl", logicalName, "Power_On_Seconds", existArticles, articles);
+            if(powerOnSeconds.isValid())
+            {
+                powerOnSeconds.value += DApplication::translate("Main", " Seconds");
+            }
 
             ArticleStruct powerCycleCount("Power Cycle Count");
             powerCycleCount.queryData("smartctl", logicalName, "Power_Cycle_Count");
@@ -210,11 +226,6 @@ void DiskWidget::initWidget()
         capabilities.queryData("lshw", disk, "capabilities");
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
-
-        ArticleStruct description("Description");
-        description.queryData("lshw", disk, "description");
-        articles.push_back(description);
-        existArticles.insert("description");
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", disk, articles, existArticles);
 
@@ -266,10 +277,37 @@ void DiskWidget::initWidget()
 
     if( diskList.size() > 1 )
     {
-        //QStringList emptyList;
-        //add(DApplication::translate("Main", "Disk")  + DApplication::translate("Main", " Info"), emptyList, emptyList);
         QStringList headers = { "Model",  "Vendor", "Media Type", DApplication::translate("Disk", "Size") };
         addTable(headers, tabList);
     }
+}
+
+bool DiskWidget::getDiskType(const QString& diskProperty, QString& type)
+{
+    if( diskProperty.contains("SSD", Qt::CaseInsensitive) || diskProperty.contains("Solid", Qt::CaseInsensitive) )
+    {
+        type = "SDD";
+        return true;
+    }
+
+    if(diskProperty.contains("HDD", Qt::CaseInsensitive) || diskProperty.contains("7200", Qt::CaseInsensitive) \
+            || diskProperty.contains("5400", Qt::CaseInsensitive) || diskProperty.contains("rpm", Qt::CaseInsensitive))
+    {
+        type = "HDD";
+        return true;
+    }
+
+    if( diskProperty.contains("Western Digital", Qt::CaseInsensitive) )
+    {
+        if( diskProperty.contains("Black", Qt::CaseInsensitive) ||
+            diskProperty.contains("Green", Qt::CaseInsensitive) ||
+            diskProperty.contains("Blue", Qt::CaseInsensitive) ||
+            diskProperty.contains("Red", Qt::CaseInsensitive) ||
+            diskProperty.contains("Scorpio", Qt::CaseInsensitive) )
+        type = "HDD";
+        return true;
+    }
+
+    return false;
 }
 

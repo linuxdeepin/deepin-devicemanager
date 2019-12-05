@@ -1,0 +1,33 @@
+35: None 00.1: 10000 Monitor
+  [Created at monitor.97]
+  Unique ID: jyhG.4SRifm_qv53
+  Hardware Class: monitor
+  Model: "BenQ G700"
+  Vendor: BNQ 
+  Device: eisa 0x7801 "BenQ G700"
+  Serial ID: --
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 640x480@75Hz
+  Resolution: 800x600@60Hz
+  Resolution: 800x600@75Hz
+  Resolution: 832x624@75Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1024x768@75Hz
+  Resolution: 1280x1024@75Hz
+  Resolution: 1280x960@60Hz
+  Size: 338x270 mm
+  Year of Manufacture: 2007
+  Week of Manufacture: 52
+  Detailed Timings #0:
+     Resolution: 1280x1024
+     Horizontal: 1280 1328 1440 1688 (+48 +160 +408) +hsync
+       Vertical: 1024 1025 1028 1066 (+1 +4 +42) +vsync
+    Frequencies: 108.00 MHz, 63.98 kHz, 60.02 Hz
+  Driver Info #0:
+    Max. Resolution: 1280x1024
+    Vert. Sync Range: 55-76 Hz
+    Hor. Sync Range: 31-83 kHz
+    Bandwidth: 108 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+

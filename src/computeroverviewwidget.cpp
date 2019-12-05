@@ -64,6 +64,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
 
     ArticleStruct family;
     family.queryData("dmidecode", "System Information", "Family");
+    family.value = family.value.remove(vendor.value);
     if(family.isValid() == false || family.value.contains("System Version") \
         || family.value.contains("Not Specified", Qt::CaseInsensitive) || family.value.contains("x.x", Qt::CaseInsensitive) || family.value.contains("Not Applicable", Qt::CaseInsensitive))
     {

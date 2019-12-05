@@ -1,0 +1,204 @@
+I: Bus=0019 Vendor=0000 Product=0001 Version=0000
+N: Name="Power Button"
+P: Phys=PNP0C0C/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input0
+U: Uniq=
+H: Handlers=kbd event0 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0019 Vendor=0000 Product=0001 Version=0000
+N: Name="Power Button"
+P: Phys=LNXPWRBN/button/input0
+S: Sysfs=/devices/LNXSYSTM:00/LNXPWRBN:00/input/input1
+U: Uniq=
+H: Handlers=kbd event1 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0011 Vendor=0001 Product=0001 Version=ab41
+N: Name="AT Translated Set 2 keyboard"
+P: Phys=isa0060/serio0/input0
+S: Sysfs=/devices/platform/i8042/serio0/input/input2
+U: Uniq=
+H: Handlers=sysrq kbd event2 leds 
+B: PROP=0
+B: EV=120013
+B: KEY=2000000 3803078f800d001 feffffdfffefffff fffffffffffffffe
+B: MSC=10
+B: LED=7
+
+I: Bus=0003 Vendor=09da Product=f613 Version=0111
+N: Name="COMPANY USB Device"
+P: Phys=usb-0000:00:14.0-7/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb3/3-7/3-7:1.0/0003:09DA:F613.0001/input/input3
+U: Uniq=
+H: Handlers=sysrq kbd event3 leds 
+B: PROP=0
+B: EV=120013
+B: KEY=1000000000007 ff800000000007ff febeffdfffefffff fffffffffffffffe
+B: MSC=10
+B: LED=1f
+
+I: Bus=0003 Vendor=09da Product=f613 Version=0111
+N: Name="COMPANY USB Device"
+P: Phys=usb-0000:00:14.0-7/input1
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb3/3-7/3-7:1.1/0003:09DA:F613.0002/input/input4
+U: Uniq=
+H: Handlers=mouse0 event4 
+B: PROP=0
+B: EV=17
+B: KEY=ff0000 0 0 0 0
+B: REL=103
+B: MSC=10
+
+I: Bus=0003 Vendor=09da Product=f613 Version=0111
+N: Name="COMPANY USB Device"
+P: Phys=usb-0000:00:14.0-7/input2
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb3/3-7/3-7:1.2/0003:09DA:F613.0003/input/input5
+U: Uniq=
+H: Handlers=sysrq kbd event5 
+B: PROP=0
+B: EV=10001f
+B: KEY=3007f 0 0 4c3ffff17aff32d bf54445600000000 1 130c130b17c000 267bfad951dfed fabeffdf77cfffff fffffffffffffffe
+B: REL=40
+B: ABS=ffff0100000000
+B: MSC=10
+
+I: Bus=0003 Vendor=1a81 Product=1004 Version=0111
+N: Name="G-Tech Wireless Dongle"
+P: Phys=usb-0000:00:14.0-9/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb3/3-9/3-9:1.0/0003:1A81:1004.0004/input/input6
+U: Uniq=
+H: Handlers=sysrq kbd event6 leds 
+B: PROP=0
+B: EV=120013
+B: KEY=1000000000007 ff800000000007ff febeffdfffefffff fffffffffffffffe
+B: MSC=10
+B: LED=1f
+
+I: Bus=0003 Vendor=1a81 Product=1004 Version=0111
+N: Name="G-Tech Wireless Dongle"
+P: Phys=usb-0000:00:14.0-9/input1
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb3/3-9/3-9:1.1/0003:1A81:1004.0005/input/input7
+U: Uniq=
+H: Handlers=kbd mouse1 event7 
+B: PROP=0
+B: EV=10001f
+B: KEY=3007f 0 0 483ffff17aff32d bf54444600000000 1f0001 130c130b17c000 267bfad941dfed 9e168000004400 10000002
+B: REL=1c3
+B: ABS=100000000
+B: MSC=10
+
+I: Bus=0019 Vendor=0000 Product=0000 Version=0000
+N: Name="Eee PC WMI hotkeys"
+P: Phys=eeepc-wmi/input0
+S: Sysfs=/devices/platform/eeepc-wmi/input/input8
+U: Uniq=
+H: Handlers=rfkill kbd event8 
+B: PROP=0
+B: EV=100013
+B: KEY=7e00000 0 800000000000 0 0 1400b00100000 8300180001100800 e000000000000 2
+B: MSC=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Rear Mic"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card0/input9
+U: Uniq=
+H: Handlers=event9 
+B: PROP=0
+B: EV=21
+B: SW=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Line"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card0/input10
+U: Uniq=
+H: Handlers=event10 
+B: PROP=0
+B: EV=21
+B: SW=2000
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Line Out Front"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card0/input11
+U: Uniq=
+H: Handlers=event11 
+B: PROP=0
+B: EV=21
+B: SW=40
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Line Out Surround"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card0/input12
+U: Uniq=
+H: Handlers=event12 
+B: PROP=0
+B: EV=21
+B: SW=40
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Line Out CLFE"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card0/input13
+U: Uniq=
+H: Handlers=event13 
+B: PROP=0
+B: EV=21
+B: SW=40
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA Intel PCH Line Out Side"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:1b.0/sound/card0/input14
+U: Uniq=
+H: Handlers=event14 
+B: PROP=0
+B: EV=21
+B: SW=40
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA NVidia HDMI/DP,pcm=3"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/input15
+U: Uniq=
+H: Handlers=event15 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA NVidia HDMI/DP,pcm=7"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/input16
+U: Uniq=
+H: Handlers=event16 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA NVidia HDMI/DP,pcm=8"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/input17
+U: Uniq=
+H: Handlers=event17 
+B: PROP=0
+B: EV=21
+B: SW=140
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA NVidia HDMI/DP,pcm=9"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/input18
+U: Uniq=
+H: Handlers=event18 
+B: PROP=0
+B: EV=21
+B: SW=140

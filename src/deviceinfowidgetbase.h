@@ -122,7 +122,6 @@ protected:
 public slots:
     void OnCurrentItemClicked(const QModelIndex &index);
     bool onExportToFile();
-    void changeTheme();
 
 public:
     virtual bool exportToTxt(QFile& txtFile);

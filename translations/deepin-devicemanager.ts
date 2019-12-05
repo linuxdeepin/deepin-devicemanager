@@ -372,6 +372,18 @@
             <translation type="unfinished"/>
         </message>
         <message>
+            <source> Seconds</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source> Minutes</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
+            <source> Half Minutes</source>
+            <translation type="unfinished"/>
+        </message>
+        <message>
             <source> Times</source>
             <translation type="unfinished"/>
         </message>

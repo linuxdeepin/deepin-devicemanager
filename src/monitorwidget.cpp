@@ -73,7 +73,9 @@ void MonitorWidget::initWidget()
     QStringList hwinfMonitorList = DeviceInfoParserInstance.getHwinfoMonitorList();
     QStringList xrandrMonitorList = DeviceInfoParserInstance.getXrandrMonitorList();
 
-    for(int i = 0; i < std::max(hwinfMonitorList.size(), xrandrMonitorList.size()); ++i)
+    int maxSize = std::max(hwinfMonitorList.size(), xrandrMonitorList.size());
+
+    for(int i = 0; i < maxSize; ++i)
     {
         articles.clear();
         existArticles.clear();
@@ -109,7 +111,7 @@ void MonitorWidget::initWidget()
 
             name.value.remove(abb);
 
-            if(name.value.contains(vendor.value) == false)
+            if(name.value.contains(vendor.value, Qt::CaseInsensitive) == false)
             {
                 name.value = vendor.value + " " + name.value;
             }
@@ -186,6 +188,15 @@ void MonitorWidget::initWidget()
         primaryMonitor.value = "No";
         if( i < xrandrMonitorList.size())
         {
+            if(name.isValid() == false)
+            {
+                int connectedIndex = xrandrMonitorList.at(i).indexOf("connected", Qt::CaseInsensitive);
+                if(connectedIndex > 0)
+                {
+                    name.value = xrandrMonitorList.at(i).left(connectedIndex);
+                }
+            }
+
             if( true == xrandrMonitorList.at(i).contains("primary", Qt::CaseInsensitive) )
             {
                 primaryMonitor.value = "Yes";
@@ -229,9 +240,9 @@ void MonitorWidget::initWidget()
 
         articles.push_back(resolutionList);
 
-        addDevice( name.value, articles, hwinfMonitorList.size() );
+        addDevice( name.value, articles, maxSize );
 
-        if( std::max(hwinfMonitorList.size(), xrandrMonitorList.size() ) > 1 )
+        if( maxSize > 1 )
         {
             QStringList tab =
             {
@@ -263,7 +274,7 @@ void MonitorWidget::initWidget()
         }
     }
 
-    if( hwinfMonitorList.size() > 1 )
+    if( maxSize > 1 )
     {
         QStringList headers = { "Name",  "Vendor" };
         addTable( headers, tabList);
