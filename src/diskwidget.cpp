@@ -178,34 +178,38 @@ void DiskWidget::initWidget()
             existArticles.insert("Form Factor");
 
             ArticleStruct powerOnHours("Power On Hours");
-            powerOnHours.queryData("smartctl", logicalName, "Power_On_Hours", existArticles, articles);
+            powerOnHours.queryData("smartctl", logicalName, "Power_On_Hours", existArticles);
             if(powerOnHours.isValid())
             {
                 powerOnHours.value += DApplication::translate("Main", " Hours");
             }
+            articles.push_back(powerOnHours);
 
             ArticleStruct powerOnMinutes("Power_On_Minutes");
-            powerOnMinutes.queryData("smartctl", logicalName, "Power_On_Minutes", existArticles, articles);
+            powerOnMinutes.queryData("smartctl", logicalName, "Power_On_Minutes", existArticles);
             if(powerOnMinutes.isValid())
             {
                 powerOnMinutes.value += DApplication::translate("Main", " Minutes");
             }
+            articles.push_back(powerOnMinutes);
 
 
             ArticleStruct powerOnHalfMinutes("Power_On_Half_Minutes");
-            powerOnHalfMinutes.queryData("smartctl", logicalName, "Power_On_Half_Minutes", existArticles, articles);
+            powerOnHalfMinutes.queryData("smartctl", logicalName, "Power_On_Half_Minutes", existArticles);
             if(powerOnHalfMinutes.isValid())
             {
                 powerOnHalfMinutes.value += DApplication::translate("Main", " Half Minutes");
             }
+            articles.push_back(powerOnHalfMinutes);
 
 
             ArticleStruct powerOnSeconds("Power_On_Seconds");
-            powerOnSeconds.queryData("smartctl", logicalName, "Power_On_Seconds", existArticles, articles);
+            powerOnSeconds.queryData("smartctl", logicalName, "Power_On_Seconds", existArticles);
             if(powerOnSeconds.isValid())
             {
                 powerOnSeconds.value += DApplication::translate("Main", " Seconds");
             }
+            articles.push_back(powerOnSeconds);
 
             ArticleStruct powerCycleCount("Power Cycle Count");
             powerCycleCount.queryData("smartctl", logicalName, "Power_Cycle_Count");
