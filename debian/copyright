@@ -1,10 +1,10 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: deepin-devicemanager
-Source: <url://example.com>
+Source: <http://gitlab01.archermind.com/amt_NJ/dde_devicemanager>
 
 Files: *
-Copyright: <years> <put author's name and email here>
-           <years> <likewise for another author>
+Copyright: <2019> <Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.>
+           <2019> <AaronZhang <ya.zhang@archermind.com>
 License: <special license>
  <Put the license of the package here indented by 1 space>
  <This follows the format of Description: lines in control file>
