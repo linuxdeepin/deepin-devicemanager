@@ -233,6 +233,14 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
 
         QString deviceName = vendor.value + " " + model.value;
+        if(deviceName.trimmed().isEmpty() == true)
+        {
+            deviceName = locator.value;
+            if(deviceName.trimmed().isEmpty() == true)
+            {
+                deviceName = bankLocator.value;
+            }
+        }
 
         if( false == isSlotValid(size.value, speed.value) )
         {

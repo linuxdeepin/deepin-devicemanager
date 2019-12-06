@@ -1,0 +1,22 @@
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                16
+On-line CPU(s) list:   0-15
+Thread(s) per core:    16
+Core(s) per socket:    1
+Socket(s):             1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 63
+Model name:            Intel(R) Xeon(R) CPU E5-2670 v3 @ 2.30GHz
+Stepping:              2
+CPU MHz:               2300.036
+BogoMIPS:              4600.00
+Hypervisor vendor:     Xen
+Virtualization type:   none
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              30720K
+Flags:                 fpu de tsc msr pae mce cx8 apic sep mca cmov pat clflush acpi mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good nopl nonstop_tsc cpuid pni pclmulqdq est ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm cpuid_fault intel_ppin ssbd ibrs ibpb stibp fsgsbase bmi1 avx2 bmi2 erms xsaveopt

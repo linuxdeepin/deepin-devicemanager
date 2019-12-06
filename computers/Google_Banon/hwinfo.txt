@@ -1,0 +1,19 @@
+17: None 00.0: 10002 LCD Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.AkejiqMeTXE
+  Parent ID: _Znp.TS49o8ulBD0
+  Hardware Class: monitor
+  Model: "N156BGA-EA2 LCD Monitor"
+  Vendor: CMN "N156BGA-EA2"
+  Device: eisa 0x15db 
+  Resolution: 1366x768@60Hz
+  Size: 344x193 mm
+  Year of Manufacture: 2015
+  Week of Manufacture: 45
+  Detailed Timings #0:
+     Resolution: 1366x768
+     Horizontal: 1366 1434 1479 1592 (+68 +113 +226) -hsync
+       Vertical:  768  772  779  800 (+4 +11 +32) -vsync
+    Frequencies: 76.42 MHz, 48.00 kHz, 60.00 Hz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #13 (VGA compatible controller)

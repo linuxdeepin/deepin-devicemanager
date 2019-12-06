@@ -166,9 +166,9 @@ public:
     QStringList getLshwCDRomList();
     
     // get os
-    const QString&  getOsInfo();
-    const QString&  getOsHtmlInfo();
-    const QString getOsReleaseName();
+    QString getOsInfo();
+    QString getLsbRelease();
+    QString getHomeUrl();
 
     bool loadCatosrelelease();
     bool loadlsb_release();
@@ -235,7 +235,8 @@ public:
     int batteryAutoLockScreenDelay_ = 0;
 
     QString osInfo_;
-    QString osInfoHtml_;
+    QString homeUrl_;
+    QString lsbRelease_;
 
 public:
     QSet<QString> orderedDevices;

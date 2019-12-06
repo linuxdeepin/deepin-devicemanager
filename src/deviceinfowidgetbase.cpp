@@ -45,6 +45,7 @@
 #include <QTextDocumentFragment>
 #include "DFontSizeManager"
 #include "DStandardItem"
+#include "deviceinfoparser.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -298,23 +299,25 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
 
 // Html version
 
-QString DeviceInfoWidgetBase::toHtmlString(const DeviceInfo& di)
+void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di )
 {
-    QString str /*= "<table border=\"0\" width = \"100%\" cellpadding=\"3\">"*/;
-
     if( di.title_.isEmpty() == false)
     {
-//        str += "<tr>";
-//        str += "<th style=\"text-align:left;\">";
-        str += "<h3>";
-        str += "&nbsp;";
-        str += di.title_;
-        str += "</h3>";
-//        str += "</th>";
-//        str +=("</tr>");
+        QDomElement h3 = doc.createElement("h3");
+        QDomText valueText = doc.createTextNode(di.title_);
+        h3.appendChild(valueText);
+        doc.appendChild(h3);
     }
 
-    str += "<table border=\"0\" width = \"100%\" cellpadding=\"3\">";
+    if( di.articles_.size() < 1 )
+    {
+        return;
+    }
+
+    QDomElement table = doc.createElement("table");
+    table.setAttribute("border", "0");
+    table.setAttribute("width", "100%");
+    table.setAttribute("cellpadding", "3");
 
     foreach( auto article, di.articles_ )
     {
@@ -323,22 +326,90 @@ QString DeviceInfoWidgetBase::toHtmlString(const DeviceInfo& di)
             continue;
         }
 
-        str += "<tr>";
-        str += "<td width= \"15%\" style=\"text-align:left;\">";
-        str += DApplication::translate("Main", article.name.toStdString().data());
-        str +=":</td>";
+        QDomElement tr = doc.createElement("tr");
 
-        str += "<td width= \"85%\">";
-        str += article.value;
-        str += "</td>";
+        QDomElement td = doc.createElement("td");
+        td.setAttribute("width", "15%");
+        td.setAttribute("style", "text-align:left;");
+        QDomText nameText = doc.createTextNode(DApplication::translate("Main", article.name.toStdString().data()) + ":");
+        td.appendChild(nameText);
+        tr.appendChild(td);
 
-        str +=("</tr>");
+        QDomElement td2 = doc.createElement("td");
+        td2.setAttribute("width", "85%");
+
+        QDomText valueText;
+        if(article.externalLinks == false)
+        {
+            valueText = doc.createTextNode(article.value);
+            td2.appendChild(valueText);
+        }
+        else
+        {
+             QDomElement style = doc.createElement("style");
+             QDomText decoration = doc.createTextNode("a {text-decoration: none; }");
+             style.appendChild(decoration);
+             td2.appendChild(style);
+
+             QDomElement a = doc.createElement("a");
+             a.setAttribute("href", DeviceInfoParserInstance.getHomeUrl() );
+             QDomText  href = doc.createTextNode(DeviceInfoParserInstance.getLsbRelease() + " ");
+             a.appendChild(href);
+             td2.appendChild(a);
+
+             valueText = doc.createTextNode(DeviceInfoParserInstance.getOsInfo());
+             td2.appendChild(valueText);
+        }
+
+        tr.appendChild(td2);
+
+        table.appendChild(tr);
     }
 
-    str +="</table>";
-
-    return str;
+    doc.appendChild(table);
 }
+
+//QString DeviceInfoWidgetBase::toHtmlString(const DeviceInfo& di)
+//{
+//    QString str /*= "<table border=\"0\" width = \"100%\" cellpadding=\"3\">"*/;
+
+//    if( di.title_.isEmpty() == false)
+//    {
+////        str += "<tr>";
+////        str += "<th style=\"text-align:left;\">";
+//        str += "<h3>";
+//        str += "&nbsp;";
+//        str += di.title_;
+//        str += "</h3>";
+////        str += "</th>";
+////        str +=("</tr>");
+//    }
+
+//    str += "<table border=\"0\" width = \"100%\" cellpadding=\"3\">";
+
+//    foreach( auto article, di.articles_ )
+//    {
+//        if(article.isValid() == false)
+//        {
+//            continue;
+//        }
+
+//        str += "<tr>";
+//        str += "<td width= \"15%\" style=\"text-align:left;\">";
+//        str += DApplication::translate("Main", article.name.toStdString().data());
+//        str +=":</td>";
+
+//        str += "<td width= \"85%\">";
+//        str += article.value;
+//        str += "</td>";
+
+//        str +=("</tr>");
+//    }
+
+//    str +="</table>";
+
+//    return str;
+//}
 
 void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStruct> &articles, bool main)
 {
@@ -700,33 +771,31 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
 
     firstShow_ = false;
 
-    int addDiNumber = 0;
-
     initDownWidget();
-
-    QString htmlStr;
 
     int fontSize = DFontSizeManager::T7;
 
+    QDomDocument doc;
+
     if(titleInfo_)
     {
-        htmlStr += toHtmlString(*titleInfo_);
-        ++addDiNumber;
+        toHtmlString(doc, *titleInfo_);
         fontSize = DFontSizeManager::T6;
+    }
+
+    DFontSizeManager::instance()->bind( htmlBrower_, DFontSizeManager::SizeType(fontSize));
+
+    if(deviceInfos_.size() < 1)
+    {
+        htmlBrower_->setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
     }
 
     foreach(auto di, deviceInfos_)
     {
         textCursorList_.push_back(htmlBrower_->document()->characterCount());
-
-        htmlStr += toHtmlString(di);
-        htmlBrower_->setHtml(htmlStr+"</table>");
-        ++addDiNumber;
+        toHtmlString(doc, di);
+        htmlBrower_->setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
     }
-
-    DFontSizeManager::instance()->bind( htmlBrower_, DFontSizeManager::SizeType(fontSize));
-
-    htmlBrower_->setText(htmlStr);
 
     DWidget::showEvent(event);
 }
@@ -759,30 +828,6 @@ bool DeviceInfoWidgetBase::onExportToFile()
    return mainWindow->exportTo();
 }
 
-QString getOsInfoWithoutHtml(const QString& str )
-{
-    int index = str.indexOf("href=\"");
-    QString href;
-    QString osName;
-    QString osOther =  str;
-    if(index > 0)
-    {
-        int index_maohao = str.indexOf("\">", index);
-        if(index_maohao  > index )
-        {
-            href = str.mid( index+5, index_maohao - index - 5);
-            int index_last_a = str.indexOf("</a>", index);
-            if(index_last_a > index_maohao)
-            {
-                osName = str.mid(index_maohao + 2, index_last_a - index_maohao -2);
-                osOther = str.mid(index_last_a + 4).trimmed();
-            }
-        }
-    }
-
-    return osName + "(" + href + ")" + " " + osOther;
-}
-
 QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
 {
     if(di.title_.isEmpty() == false)
@@ -799,7 +844,7 @@ QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
         ds.setFieldWidth(0);
         if(article.externalLinks )
         {
-            ds << getOsInfoWithoutHtml(article.value) << "\n";
+            ds << DeviceInfoParserInstance.getLsbRelease() + "(" +  DeviceInfoParserInstance.getHomeUrl() + ") " + DeviceInfoParserInstance.getOsInfo() << "\n";
         }
         else
         {
@@ -946,7 +991,7 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
         QString content;
         if( article.externalLinks )
         {
-            content = getOsInfoWithoutHtml( article.value );
+            content = DeviceInfoParserInstance.getLsbRelease() + "(" +  DeviceInfoParserInstance.getHomeUrl() + ") " + DeviceInfoParserInstance.getOsInfo();
         }
         else
         {
@@ -1055,7 +1100,7 @@ bool writeDeviceInfoToXls(const DeviceInfo& di, QXlsx::Document& xlsx)
         xlsx.write(currentXlsRow_, 1, article.name);
         if( article.externalLinks )
         {
-            xlsx.write(currentXlsRow_++, 2, getOsInfoWithoutHtml( article.value ));
+            xlsx.write(currentXlsRow_++, 2,  DeviceInfoParserInstance.getLsbRelease() + "(" +  DeviceInfoParserInstance.getHomeUrl() + ")" + DeviceInfoParserInstance.getOsInfo() );
         }
         else
         {
@@ -1143,12 +1188,6 @@ bool writeTabwidgetToHtml(LogTreeView* tableWidget, QFile& html)
     return true;
 }
 
-bool writeDeviceInfoToHtml(const DeviceInfo& di, QFile& html)
-{
-    html.write( DeviceInfoWidgetBase::toHtmlString(di).toStdString().data() );
-    return true;
-}
-
 bool DeviceInfoWidgetBase::exportToHtml(QFile& htmlFile)
 {
     htmlFile.write("<!DOCTYPE html>\n");
@@ -1163,20 +1202,20 @@ bool DeviceInfoWidgetBase::exportToHtml(QFile& htmlFile)
         htmlFile.write("<br />\n");
     }
 
-    htmlFile.write("<table border=\"0\" width = \"100%\" cellpadding=\"3\">");
+    QDomDocument doc;
 
     if(titleInfo_)
     {
-        writeDeviceInfoToHtml(*titleInfo_, htmlFile);
-        htmlFile.write("<br />\n");
+        toHtmlString(doc, *titleInfo_);
+        doc.appendChild( doc.createElement("br") );
     }
 
     foreach(auto di, deviceInfos_)
     {
-        writeDeviceInfoToHtml(di, htmlFile);
+        toHtmlString(doc, di);
     }
 
-    htmlFile.write("</table>");
+    htmlFile.write(doc.toString().toStdString().data());
 
     htmlFile.write("</body>\n");
     htmlFile.write("</html>\n");

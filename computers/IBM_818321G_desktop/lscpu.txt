@@ -1,0 +1,17 @@
+Architecture:i686
+CPU op-mode(s):        32-bit
+Порядок байт:Little Endian
+CPU(s):                1
+On-line CPU(s) list:   0
+Thread(s) per core:    1
+Socket(s):1
+Сокетов:        1
+ID прроизводителя:GenuineIntel
+Семейство ЦПУ:15
+Модель:          2
+Model name:   Intel(R) Pentium(R) 4 CPU 2.40GHz
+Степпинг:      7
+CPU MHz:               2394.266
+BogoMIPS:              4788.53
+Флаги:            fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe pebs bts eagerfpu cid xtpr
+

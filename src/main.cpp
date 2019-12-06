@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
     w.show();
     Dtk::Widget::moveToCenter(&w);
 
-    if(appIcon.isNull() || DeviceInfoParserInstance.getOsReleaseName().contains("uos", Qt::CaseInsensitive) ==  false)
+    if(appIcon.isNull() || DeviceInfoParserInstance.getLsbRelease().contains("uos", Qt::CaseInsensitive) ==  false)
     {
         QIcon localIcon(":images/icons/deepin-devicemanager64.svg");
         app.setProductIcon(localIcon);

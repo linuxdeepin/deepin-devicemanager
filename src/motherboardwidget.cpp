@@ -125,8 +125,6 @@ void MotherboardWidget::initWidget()
         addInfo( "", articles );
     }
 
-    addMemoryInfo();
-
     articles.clear();
     existArticles.clear();
 
@@ -176,6 +174,8 @@ void MotherboardWidget::initWidget()
     {
         addSubInfo( "System Information", articles, DeviceWidgetContentMarginLeft_ );
     }
+
+    addMemoryInfo();
 
     articles.clear();
     existArticles.clear();

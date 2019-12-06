@@ -86,7 +86,7 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
     if( isRightLink )
     {
         l2->setOpenExternalLinks(true);
-        textWidth = QFontMetrics( font ).width(DeviceInfoParserInstance.getOsInfo());
+        //textWidth = QFontMetrics( font ).width(DeviceInfoParserInstance.getOsInfo());
     }
 
     if(textWidth > DeviceWidgetContentWidth_)
@@ -168,12 +168,12 @@ void ColumnWidget::setHilight(bool highLight)
     {
         if(highLight)
         {
-            l2->setText( DeviceInfoParserInstance.getOsInfo() );
+            //l2->setText( DeviceInfoParserInstance.getOsInfo() );
         }
-        else
-        {
-            l2->setText( DeviceInfoParserInstance.getOsHtmlInfo() );
-        }
+//        else
+//        {
+//            l2->setText( DeviceInfoParserInstance.getOsHtmlInfo() );
+//        }
     }
 
     DApplicationHelper::instance()->setPalette(l2, highLight? paHighlight_:paNormal_);

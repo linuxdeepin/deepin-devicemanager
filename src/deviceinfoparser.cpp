@@ -38,7 +38,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/IBM_4810XXX_desktop";
+const QString DEVICEINFO_PATH = "../../computers/Supermicro_X10DRL-i_Server";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -58,6 +58,9 @@ DeviceInfoParser::~DeviceInfoParser()
 
 void DeviceInfoParser::refreshDabase()
 {
+    osInfo_.clear();
+    homeUrl_.clear();
+    lsbRelease_.clear();
     orderedDevices.clear();
     toolDatabase_.clear();
     toolDatabaseSecondOrder_.clear();
@@ -1121,9 +1124,7 @@ bool DeviceInfoParser::loadOSInfo()
 
     if( false == executeProcess("cat /proc/version") )
     {
-        osInfoHtml_ = DApplication::translate("Main", "Unknown");
-        osInfo_ = osInfoHtml_;
-
+        osInfo_ = DApplication::translate("Main", "Unknown");
         return false;
     }
 
@@ -1166,50 +1167,31 @@ bool DeviceInfoParser::loadOSInfo()
      }
 
     osInfo_.remove("version");
-    QString lsbRelease = queryData("catOsrelease", "catOsrelease", "PRETTY_NAME");
-    lsbRelease.remove("\"");
-    QString homeUrl = queryData("catOsrelease", "catOsrelease", "HOME_URL");
-    homeUrl.remove("\"");
-    if(lsbRelease.isEmpty() || lsbRelease ==  DApplication::translate("Main", "Unknown"))
+    lsbRelease_ = queryData("catOsrelease", "catOsrelease", "PRETTY_NAME");
+    lsbRelease_.remove("\"");
+    homeUrl_ = queryData("catOsrelease", "catOsrelease", "HOME_URL");
+    homeUrl_.remove("\"");
+    if(lsbRelease_.isEmpty() || lsbRelease_ ==  DApplication::translate("Main", "Unknown"))
     {
-        lsbRelease = queryData("lsb_release", "lsb_release", "Description");
-    }
-
-    if(lsbRelease.isEmpty() || lsbRelease ==  DApplication::translate("Main", "Unknown"))
-    {
-        osInfoHtml_ = osInfo_;
-        return true;
-    }
-
-    if( homeUrl.isEmpty() == false && homeUrl !=  DApplication::translate("Main", "Unknown"))
-    {
-        osInfoHtml_ =  "<style> a {text-decoration: none; }\"</style><a href=\"" + homeUrl + "\">" + lsbRelease + " </a>" + osInfo_;
-        osInfo_ = lsbRelease +" "+ osInfo_;
-    }
-    else
-    {
-        osInfo_ = lsbRelease + " / " + osInfo_;
-        osInfoHtml_ = osInfo_;
+        lsbRelease_ = queryData("lsb_release", "lsb_release", "Description");
     }
 
     return true;
 }
 
-const QString& DeviceInfoParser::getOsInfo()
+QString DeviceInfoParser::getOsInfo()
 {
     return osInfo_;
 }
 
-const QString& DeviceInfoParser::getOsHtmlInfo()
+QString DeviceInfoParser::getLsbRelease()
 {
-    return osInfoHtml_;
+    return lsbRelease_;
 }
 
-const QString DeviceInfoParser::getOsReleaseName()
+QString DeviceInfoParser::getHomeUrl()
 {
-    QString lsbRelease = queryData("catOsrelease", "catOsrelease", "NAME");
-    lsbRelease = queryData("lsb_release", "lsb_release", "Description");
-    return lsbRelease;
+    return homeUrl_;
 }
 
 bool DeviceInfoParser::loadCatosrelelease()

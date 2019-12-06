@@ -33,6 +33,7 @@
 #include "DFrame"
 #include "commondefine.h"
 #include "DTextBrowser"
+#include <QDomDocument>
 
 class QLabel;
 class QVBoxLayout;
@@ -90,6 +91,7 @@ public:
     //void addInfo(const QString& title, const QList<ArticleStruct>& articles);
     // Html version
 
+    static void toHtmlString( QDomDocument& doc, const DeviceInfo& di);
     static QString toHtmlString(const DeviceInfo& di);
 
     void addInfo(const QString& title, const QList<ArticleStruct>& articles, bool main = true);
