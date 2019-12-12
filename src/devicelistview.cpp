@@ -129,21 +129,12 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
 
 
     auto modifyTheme = [this](){
-//        DPalette pa;
-//        pa.setColor(DPalette::Background,QColor(0, 248, 248));
-//        setAutoFillBackground(true);
-//        setPalette(pa);
+        pa_ = DApplicationHelper::instance()->palette(this);
+        pa_.setBrush(DPalette::ItemBackground, pa_.brush(DPalette::Base));
+        pa_.setBrush(DPalette::Background, pa_.brush(DPalette::Base));
 
-        DPalette pa = DApplicationHelper::instance()->palette(this);
-        QColor base_color = palette().base().color();
-
-        pa.setBrush(DPalette::ItemBackground, base_color);
-        pa.setColor(QPalette::Background, base_color);
-
-        setPalette(pa);
-
-        DApplicationHelper::instance()->setPalette(this, pa);
-        //DApplicationHelper::instance()->setPalette(this->viewport(), pa);
+        DApplicationHelper::instance()->setPalette(this, pa_);
+        DApplicationHelper::instance()->setPalette(this->viewport(), pa_);
 
         changeThemeIcon();
     };
@@ -152,10 +143,7 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
 
     this->setAutoFillBackground(true);
 
-    //this->setBackgroundRole(DPalette::Base);
-
-    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, modifyTheme);
-    //setMaximumWidth(150);
+    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, modifyTheme);
 
     initContextMenu();
 
@@ -404,9 +392,12 @@ void DeviceListView::currentChanged(const QModelIndex &current, const QModelInde
     return mainWindow->currentDeviceChanged(device);
 }
 
-//void DeviceListView::contextMenuEvent(QContextMenuEvent *event)
-//{
-//    contextMenu_->exec(event->globalPos());
-//}
+void DeviceListView::paintEvent(QPaintEvent *event)
+{
+    pa_ = DApplicationHelper::instance()->palette(this);
+    pa_.setBrush(DPalette::ItemBackground, pa_.brush(DPalette::Base));
 
+    DApplicationHelper::instance()->setPalette(this, pa_);
+    DListView::paintEvent(event);
+}
 

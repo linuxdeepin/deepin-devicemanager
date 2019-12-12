@@ -68,10 +68,13 @@ public slots:
 private:
     void initContextMenu();
     void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     QStandardItemModel* navModel_ = nullptr;
     QString currentDevice_;
     Dtk::Widget::DMenu* contextMenu_ = nullptr;
     QAction* refreshAction_ = nullptr;
+
+    DPalette pa_;
 };
