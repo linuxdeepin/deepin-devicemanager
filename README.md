@@ -46,6 +46,8 @@ sudo apt-get install deepin-devicemanager
 Caution: deepin-devicemanager is depend on polkit, So if run source build version, 
 you have to add policy to usr/share/polkit-1/actions/. 
 add deepin-devicemanager-authenticateProxy to /usr/bin.
+If use Qt Creator, you should set [Project][Run Settings] [Run] [Run configuration] to src from 2 projects authenticateProxy and src.
+Of course, you have to install build depends first.
 
 - sudo cp authenticateProxy/policy/com.deepin.pkexec.deepin-devicemanager-authenticateProxy.policy /usr/share/polkit-1/actions/
 - sudo cp build-all-unknown-Debug/authenticateProxy/deepin-devicemanager-authenticateProxy /usr/bin
