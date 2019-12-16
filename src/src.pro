@@ -126,10 +126,8 @@ HEADERS += \
 #else: unix:!android: target.path = /opt/$${TARGET}/bin
 #!isEmpty(target.path): INSTALLS += target
 
-#RESOURCES += app.qrc
 
-RESOURCES += \      
-    appimage.qrc
+RESOURCES += appimage.qrc
 
 DISTFILES += \
     ../README.md \
