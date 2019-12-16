@@ -170,7 +170,7 @@ void CpuWidget::initWidget()
     QString corePlus = " x " + QString::number(cores);
 
     overviewInfo_.value += " (";
-    int i = 0;
+    unsigned int i = 0;
 
     if(sockets > 1)
     {

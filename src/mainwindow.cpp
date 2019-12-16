@@ -311,14 +311,15 @@ void MainWindow::addAllDeviceinfoWidget()
 
 void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w,  const QString& icon)
 {
-    if(w == nullptr)
-    {
+    if(w==nullptr||icon.isNull()||icon.isEmpty())
         return;
-    }
+    QString iconName = icon;
+    if(iconName.endsWith(".svg"))
+       iconName.remove(".svg");
 
     if(firstAdd_ == true)
     {
-        leftDeviceView_->addDevice(w->getDeviceName(), icon);
+        leftDeviceView_->addDevice(w->getDeviceName(), iconName);
     }
 
     ArticleStruct overviweInfo;
@@ -332,6 +333,8 @@ void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w,  const QString& icon)
 
     DApplication::processEvents();
 }
+
+
 
 void MainWindow::insertDeviceWidget(int index, DeviceInfoWidgetBase* w)
 {

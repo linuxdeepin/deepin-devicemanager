@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 
     if(appIcon.isNull() || DeviceInfoParserInstance.getLsbRelease().contains("uos", Qt::CaseInsensitive) ==  false)
     {
-        QIcon localIcon(":images/icons/deepin-devicemanager64.svg");
+        QIcon localIcon(":/../icons/deepin/builtin/deepin-devicemanager64.svg");
         app.setProductIcon(localIcon);
         app.setWindowIcon(localIcon);
         w.titlebar()->setIcon(localIcon);

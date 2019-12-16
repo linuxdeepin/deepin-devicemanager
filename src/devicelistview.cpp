@@ -30,6 +30,7 @@
 #include "DApplication"
 #include "mainwindow.h"
 #include <QDir>
+#include <QString>
 #include "DFileDialog"
 #include <QDateTime>
 #include <QContextMenuEvent>
@@ -136,7 +137,7 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
         DApplicationHelper::instance()->setPalette(this, pa_);
         DApplicationHelper::instance()->setPalette(this->viewport(), pa_);
 
-        changeThemeIcon();
+//        changeThemeIcon();
     };
 
     modifyTheme();
@@ -166,6 +167,7 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
 void DeviceListView::addDevice(const QString& deviceName, const QString& iconFile)
 {
     DStandardItem* item = new DStandardItem;
+
     //DFontSizeManager::instance()->bind(nameLabel, DFontSizeManager::T8);
     //QFont itemFont = item->font();
     //itemFont.setPixelSize(14);
@@ -177,12 +179,13 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
     //item->setSizeHint( QSize(20, 38) );
 
     DGuiApplicationHelper::ColorType ct = DApplicationHelper::instance()->themeType();
+    item->setIcon(QIcon::fromTheme(iconFile));
 
     QString icon = ":images/";
     icon += ((ct == DGuiApplicationHelper::LightType) ? "light/normal/":"dark/normal/");
     icon += iconFile;
 
-    item->setIcon(QIcon(icon));
+
     item->setData(icon, Qt::UserRole+89);
 
     item->setText(deviceName);
@@ -356,29 +359,29 @@ void DeviceListView::initContextMenu()
 
 void DeviceListView::currentChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-    QStandardItem* currentItem = navModel_->itemFromIndex(current);
-    if(currentItem)
-    {
-        QString icon = currentItem->data(Qt::UserRole+89).toString();
-        if(icon.isEmpty() == false)
-        {
-            icon.replace("normal", "press");
-            currentItem->setIcon(QIcon(icon));
-            currentItem->setData(icon, Qt::UserRole+89);
-        }
-    }
+//    QStandardItem* currentItem = navModel_->itemFromIndex(current);
+//    if(currentItem)
+//    {
+//        QString icon = currentItem->data(Qt::UserRole+89).toString();
+//        if(icon.isEmpty() == false)
+//        {
+//            icon.replace("normal", "press");
+//            currentItem->setIcon(QIcon(icon));
+//            currentItem->setData(icon, Qt::UserRole+89);
+//        }
+//    }
 
-    QStandardItem* previousItem = navModel_->itemFromIndex(previous);
-    if(previousItem)
-    {
-        QString icon = previousItem->data(Qt::UserRole+89).toString();
-        if(icon.isEmpty() == false)
-        {
-            icon.replace("press", "normal");
-            previousItem->setIcon(QIcon(icon));
-            previousItem->setData(icon, Qt::UserRole+89);
-        }
-    }
+//    QStandardItem* previousItem = navModel_->itemFromIndex(previous);
+//    if(previousItem)
+//    {
+//        QString icon = previousItem->data(Qt::UserRole+89).toString();
+//        if(icon.isEmpty() == false)
+//        {
+//            icon.replace("press", "normal");
+//            previousItem->setIcon(QIcon(icon));
+//            previousItem->setData(icon, Qt::UserRole+89);
+//        }
+//    }
 
     DListView::currentChanged(current, previous);
 

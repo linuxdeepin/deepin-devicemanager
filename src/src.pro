@@ -75,7 +75,6 @@ SOURCES += \
     monitorwidget.cpp \
     audiodevicewidget.cpp \
     networkadapterwidget.cpp \
-    bluetoothwidget.cpp \
     camerawidget.cpp \
     keyboardwidget.cpp \
     mousewidget.cpp \
@@ -86,7 +85,8 @@ SOURCES += \
     logpasswordauth.cpp \
     printerwidget.cpp \
     devicelistview.cpp \
-    deviceattributedefine.cpp
+    deviceattributedefine.cpp \
+    bluetoothwidget.cpp
 
 HEADERS += \
     cdromwidget.h \
@@ -126,7 +126,10 @@ HEADERS += \
 #else: unix:!android: target.path = /opt/$${TARGET}/bin
 #!isEmpty(target.path): INSTALLS += target
 
-RESOURCES += app.qrc
+#RESOURCES += app.qrc
+
+RESOURCES += \      
+    appimage.qrc
 
 DISTFILES += \
     ../README.md \
@@ -141,7 +144,7 @@ target.path = /usr/bin/
 #icons.files += ../images/cpu.svg
 #icons.path = /usr/share/deepin-devicemanager/
 icons.path = /usr/share/icons/hicolor/scalable/apps
-icons.files = ../images/icons/deepin-devicemanager.svg
+icons.files = ../icons/deepin/builtin/deepin-devicemanager64.svg
 
 # desktop
 desktop.files += deepin-devicemanager.desktop

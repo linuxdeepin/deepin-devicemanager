@@ -38,7 +38,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../computers/Supermicro_X10DRL-i_Server";
+//const QString DEVICEINFO_PATH = "../../computers/Supermicro_X10DRL-i_Server";
+const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/Supermicro_X10DRL-i_Server";
 
 using PowerInter = com::deepin::daemon::Power;
 
