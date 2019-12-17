@@ -42,8 +42,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("deepin-devicemanager");
     app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
 
-    //app.setApplicationVersion(VERSION);
-    app.setApplicationVersion(DApplication::buildVersion("3.0"));
+    app.setApplicationVersion(DApplication::buildVersion(QDate::currentDate().toString("yyyyMMdd")));
 
     QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
 
@@ -61,10 +60,6 @@ int main(int argc, char *argv[])
 
     Dtk::Core::DLogManager::registerConsoleAppender();
     Dtk::Core::DLogManager::registerFileAppender();
-
-    //app.setStyle("chameleon");
-    //    if (!DGuiApplicationHelper::instance()->setSingleInstance("deepin-devicemanager"))
-    //            return 0;
 
     MainWindow w(nullptr);
     w.titlebar()->setTitle("");
