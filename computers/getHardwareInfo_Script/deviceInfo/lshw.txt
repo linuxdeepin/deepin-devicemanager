@@ -89,7 +89,7 @@ archermind-pc
           version: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
           serial: To Be Filled By O.E.M.
           slot: U3E1
-          size: 2019MHz
+          size: 4085MHz
           capacity: 4200MHz
           width: 64 bits
           clock: 100MHz
@@ -97,7 +97,7 @@ archermind-pc
           configuration: cores=4 enabledcores=4 threads=8
      *-pci
           description: Host bridge
-          product: Intel Corporation
+          product: Xeon E3-1200 v6/7th Gen Core Processor Host Bridge/DRAM Registers
           vendor: Intel Corporation
           physical id: 100
           bus info: pci@0000:00:00.0
@@ -108,7 +108,7 @@ archermind-pc
           resources: irq:0
         *-display
              description: VGA compatible controller
-             product: Intel Corporation
+             product: HD Graphics 630
              vendor: Intel Corporation
              physical id: 2
              bus info: pci@0000:00:02.0
@@ -120,7 +120,7 @@ archermind-pc
              resources: irq:124 memory:f6000000-f6ffffff memory:e0000000-efffffff ioport:f000(size=64) memory:c0000-dffff
         *-usb
              description: USB controller
-             product: Intel Corporation
+             product: 200 Series/Z370 Chipset Family USB 3.0 xHCI Controller
              vendor: Intel Corporation
              physical id: 14
              bus info: pci@0000:00:14.0
@@ -139,16 +139,6 @@ archermind-pc
                 version: 4.19
                 capabilities: usb-2.00
                 configuration: driver=hub slots=16 speed=480Mbit/s
-              *-usb
-                   description: Generic USB device
-                   product: BCM20702A0
-                   vendor: Broadcom Corp
-                   physical id: 6
-                   bus info: usb@1:6
-                   version: 1.12
-                   serial: 00198600254E
-                   capabilities: usb-2.00
-                   configuration: driver=btusb speed=12Mbit/s
            *-usbhost:1
                 product: xHCI Host Controller
                 vendor: Linux 4.19.0-6-amd64 xhci-hcd
@@ -160,7 +150,7 @@ archermind-pc
                 configuration: driver=hub slots=10 speed=5000Mbit/s
         *-generic UNCLAIMED
              description: Signal processing controller
-             product: Intel Corporation
+             product: 200 Series PCH Thermal Subsystem
              vendor: Intel Corporation
              physical id: 14.2
              bus info: pci@0000:00:14.2
@@ -172,7 +162,7 @@ archermind-pc
              resources: memory:f704f000-f704ffff
         *-communication:0
              description: Communication controller
-             product: Intel Corporation
+             product: 200 Series PCH CSME HECI #1
              vendor: Intel Corporation
              physical id: 16
              bus info: pci@0000:00:16.0
@@ -196,7 +186,7 @@ archermind-pc
              resources: irq:19 ioport:f0a0(size=8) memory:f704d000-f704dfff
         *-sata
              description: SATA controller
-             product: Intel Corporation
+             product: 200 Series PCH SATA controller [AHCI mode]
              vendor: Intel Corporation
              physical id: 17
              bus info: pci@0000:00:17.0
@@ -231,7 +221,7 @@ archermind-pc
                    size: 1536MiB
                    capacity: 1536MiB
                    capabilities: primary bootable journaled extended_attributes large_files huge_files dir_nlink 64bit extents ext4 ext2 initialized
-                   configuration: created=2019-08-01 10:08:48 filesystem=ext4 lastmountpoint=/boot modified=2019-11-12 18:13:35 mount.fstype=ext4 mount.options=rw,relatime mounted=2019-11-12 18:13:35 state=mounted
+                   configuration: created=2019-08-01 10:08:48 filesystem=ext4 lastmountpoint=/boot modified=2019-12-13 09:27:26 mount.fstype=ext4 mount.options=rw,relatime mounted=2019-12-13 09:27:26 state=mounted
               *-volume:1
                    description: Linux swap volume
                    physical id: 2
@@ -255,7 +245,7 @@ archermind-pc
                    size: 100GiB
                    capacity: 100GiB
                    capabilities: primary journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
-                   configuration: created=2019-08-01 10:08:43 filesystem=ext4 lastmountpoint=/ modified=2019-11-13 09:24:08 mount.fstype=ext4 mount.options=rw,relatime mounted=2019-11-13 09:24:12 state=mounted
+                   configuration: created=2019-08-01 10:08:43 filesystem=ext4 lastmountpoint=/ modified=2019-12-13 14:29:06 mount.fstype=ext4 mount.options=rw,relatime mounted=2019-12-13 14:29:09 state=mounted
               *-volume:3
                    description: Extended partition
                    physical id: 4
@@ -275,10 +265,10 @@ archermind-pc
                       size: 822GiB
                       capacity: 822GiB
                       capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
-                      configuration: created=2019-08-01 10:08:26 filesystem=ext4 lastmountpoint=/home modified=2019-11-13 09:24:20 mount.fstype=ext4 mount.options=rw,relatime mounted=2019-11-13 09:24:20 state=mounted
+                      configuration: created=2019-08-01 10:08:26 filesystem=ext4 lastmountpoint=/home modified=2019-12-13 14:29:16 mount.fstype=ext4 mount.options=rw,relatime mounted=2019-12-13 14:29:16 state=mounted
         *-pci
              description: PCI bridge
-             product: Intel Corporation
+             product: 200 Series PCH PCI Express Root Port #1
              vendor: Intel Corporation
              physical id: 1c
              bus info: pci@0000:00:1c.0
@@ -290,7 +280,7 @@ archermind-pc
              resources: irq:120
         *-isa
              description: ISA bridge
-             product: Intel Corporation
+             product: 200 Series PCH LPC Controller (Q270)
              vendor: Intel Corporation
              physical id: 1f
              bus info: pci@0000:00:1f.0
@@ -301,7 +291,7 @@ archermind-pc
              configuration: latency=0
         *-memory UNCLAIMED
              description: Memory controller
-             product: Intel Corporation
+             product: 200 Series/Z370 Chipset Family Power Management Controller
              vendor: Intel Corporation
              physical id: 1f.2
              bus info: pci@0000:00:1f.2
@@ -313,7 +303,7 @@ archermind-pc
              resources: memory:f7044000-f7047fff
         *-multimedia
              description: Audio device
-             product: Intel Corporation
+             product: 200 Series PCH HD Audio
              vendor: Intel Corporation
              physical id: 1f.3
              bus info: pci@0000:00:1f.3
@@ -325,7 +315,7 @@ archermind-pc
              resources: irq:126 memory:f7040000-f7043fff memory:f7020000-f702ffff
         *-serial
              description: SMBus
-             product: Intel Corporation
+             product: 200 Series/Z370 Chipset Family SMBus Controller
              vendor: Intel Corporation
              physical id: 1f.4
              bus info: pci@0000:00:1f.4

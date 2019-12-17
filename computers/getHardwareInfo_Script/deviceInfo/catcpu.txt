@@ -5,7 +5,7 @@ model		: 158
 model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
 stepping	: 9
 microcode	: 0x8e
-cpu MHz		: 1810.379
+cpu MHz		: 4087.036
 cache size	: 8192 KB
 physical id	: 0
 siblings	: 8
@@ -32,7 +32,7 @@ model		: 158
 model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
 stepping	: 9
 microcode	: 0x8e
-cpu MHz		: 2263.760
+cpu MHz		: 4115.055
 cache size	: 8192 KB
 physical id	: 0
 siblings	: 8
@@ -59,7 +59,7 @@ model		: 158
 model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
 stepping	: 9
 microcode	: 0x8e
-cpu MHz		: 3731.831
+cpu MHz		: 4153.107
 cache size	: 8192 KB
 physical id	: 0
 siblings	: 8
@@ -86,7 +86,7 @@ model		: 158
 model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
 stepping	: 9
 microcode	: 0x8e
-cpu MHz		: 2378.738
+cpu MHz		: 4102.735
 cache size	: 8192 KB
 physical id	: 0
 siblings	: 8
@@ -113,7 +113,7 @@ model		: 158
 model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
 stepping	: 9
 microcode	: 0x8e
-cpu MHz		: 2331.814
+cpu MHz		: 4078.006
 cache size	: 8192 KB
 physical id	: 0
 siblings	: 8
@@ -140,7 +140,7 @@ model		: 158
 model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
 stepping	: 9
 microcode	: 0x8e
-cpu MHz		: 2334.136
+cpu MHz		: 4081.582
 cache size	: 8192 KB
 physical id	: 0
 siblings	: 8
@@ -167,7 +167,7 @@ model		: 158
 model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
 stepping	: 9
 microcode	: 0x8e
-cpu MHz		: 2168.108
+cpu MHz		: 4110.774
 cache size	: 8192 KB
 physical id	: 0
 siblings	: 8
@@ -194,7 +194,7 @@ model		: 158
 model name	: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
 stepping	: 9
 microcode	: 0x8e
-cpu MHz		: 1882.751
+cpu MHz		: 4080.247
 cache size	: 8192 KB
 physical id	: 0
 siblings	: 8

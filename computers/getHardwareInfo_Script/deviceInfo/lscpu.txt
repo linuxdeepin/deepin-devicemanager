@@ -13,7 +13,7 @@ CPU family:          6
 Model:               158
 Model name:          Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
 Stepping:            9
-CPU MHz:             1810.379
+CPU MHz:             4087.036
 CPU max MHz:         4200.0000
 CPU min MHz:         800.0000
 BogoMIPS:            7200.00

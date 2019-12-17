@@ -1,0 +1,118 @@
+00:00.0 Host bridge: Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers (rev 07)
+	Subsystem: Lenovo Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers
+	Flags: bus master, fast devsel, latency 0
+	Capabilities: [e0] Vendor Specific Information: Len=10 <?>
+	Kernel driver in use: skl_uncore
+
+00:02.0 VGA compatible controller: Intel Corporation HD Graphics 530 (rev 06) (prog-if 00 [VGA controller])
+	Subsystem: Lenovo HD Graphics 530
+	Flags: bus master, fast devsel, latency 0, IRQ 124
+	Memory at f6000000 (64-bit, non-prefetchable) [size=16M]
+	Memory at e0000000 (64-bit, prefetchable) [size=256M]
+	I/O ports at f000 [size=64]
+	[virtual] Expansion ROM at 000c0000 [disabled] [size=128K]
+	Capabilities: [40] Vendor Specific Information: Len=0c <?>
+	Capabilities: [70] Express Root Complex Integrated Endpoint, MSI 00
+	Capabilities: [ac] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [d0] Power Management version 2
+	Capabilities: [100] Process Address Space ID (PASID)
+	Capabilities: [200] Address Translation Service (ATS)
+	Capabilities: [300] Page Request Interface (PRI)
+	Kernel driver in use: i915
+	Kernel modules: i915
+
+00:14.0 USB controller: Intel Corporation 200 Series/Z370 Chipset Family USB 3.0 xHCI Controller (prog-if 30 [XHCI])
+	Subsystem: Lenovo 200 Series/Z370 Chipset Family USB 3.0 xHCI Controller
+	Flags: bus master, medium devsel, latency 0, IRQ 122
+	Memory at f7030000 (64-bit, non-prefetchable) [size=64K]
+	Capabilities: [70] Power Management version 2
+	Capabilities: [80] MSI: Enable+ Count=1/8 Maskable- 64bit+
+	Kernel driver in use: xhci_hcd
+	Kernel modules: xhci_pci
+
+00:14.2 Signal processing controller: Intel Corporation 200 Series PCH Thermal Subsystem
+	Subsystem: Lenovo 200 Series PCH Thermal Subsystem
+	Flags: bus master, fast devsel, latency 0, IRQ 11
+	Memory at f704f000 (64-bit, non-prefetchable) [size=4K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [80] MSI: Enable- Count=1/1 Maskable- 64bit-
+
+00:16.0 Communication controller: Intel Corporation 200 Series PCH CSME HECI #1
+	Subsystem: Lenovo 200 Series PCH CSME HECI
+	Flags: bus master, fast devsel, latency 0, IRQ 125
+	Memory at f704e000 (64-bit, non-prefetchable) [size=4K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [8c] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Kernel driver in use: mei_me
+	Kernel modules: mei_me
+
+00:16.3 Serial controller: Intel Corporation Device a2bd (prog-if 02 [16550])
+	Subsystem: Lenovo Device 3107
+	Flags: bus master, 66MHz, fast devsel, latency 0, IRQ 19
+	I/O ports at f0a0 [size=8]
+	Memory at f704d000 (32-bit, non-prefetchable) [size=4K]
+	Capabilities: [40] MSI: Enable- Count=1/1 Maskable- 64bit+
+	Capabilities: [50] Power Management version 3
+	Kernel driver in use: serial
+
+00:17.0 SATA controller: Intel Corporation 200 Series PCH SATA controller [AHCI mode] (prog-if 01 [AHCI 1.0])
+	Subsystem: Lenovo 200 Series PCH SATA controller [AHCI mode]
+	Flags: bus master, 66MHz, medium devsel, latency 0, IRQ 123
+	Memory at f7048000 (32-bit, non-prefetchable) [size=8K]
+	Memory at f704c000 (32-bit, non-prefetchable) [size=256]
+	I/O ports at f090 [size=8]
+	I/O ports at f080 [size=4]
+	I/O ports at f060 [size=32]
+	Memory at f704b000 (32-bit, non-prefetchable) [size=2K]
+	Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [70] Power Management version 3
+	Capabilities: [a8] SATA HBA v1.0
+	Kernel driver in use: ahci
+	Kernel modules: ahci
+
+00:1c.0 PCI bridge: Intel Corporation 200 Series PCH PCI Express Root Port #1 (rev f0) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 120
+	Bus: primary=00, secondary=01, subordinate=01, sec-latency=0
+	Capabilities: [40] Express Root Port (Slot-), MSI 00
+	Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [90] Subsystem: Lenovo 200 Series PCH PCI Express Root Port
+	Capabilities: [a0] Power Management version 3
+	Kernel driver in use: pcieport
+
+00:1f.0 ISA bridge: Intel Corporation 200 Series PCH LPC Controller (Q270)
+	Subsystem: Lenovo 200 Series PCH LPC Controller (Q270)
+	Flags: bus master, medium devsel, latency 0
+
+00:1f.2 Memory controller: Intel Corporation 200 Series/Z370 Chipset Family Power Management Controller
+	Subsystem: Lenovo 200 Series/Z370 Chipset Family Power Management Controller
+	Flags: bus master, fast devsel, latency 0
+	Memory at f7044000 (32-bit, non-prefetchable) [size=16K]
+
+00:1f.3 Audio device: Intel Corporation 200 Series PCH HD Audio
+	Subsystem: Lenovo 200 Series PCH HD Audio
+	Flags: bus master, fast devsel, latency 32, IRQ 126
+	Memory at f7040000 (64-bit, non-prefetchable) [size=16K]
+	Memory at f7020000 (64-bit, non-prefetchable) [size=64K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [60] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Kernel driver in use: snd_hda_intel
+	Kernel modules: snd_hda_intel
+
+00:1f.4 SMBus: Intel Corporation 200 Series/Z370 Chipset Family SMBus Controller
+	Subsystem: Lenovo 200 Series/Z370 Chipset Family SMBus Controller
+	Flags: medium devsel, IRQ 16
+	Memory at f704a000 (64-bit, non-prefetchable) [size=256]
+	I/O ports at f040 [size=32]
+	Kernel driver in use: i801_smbus
+	Kernel modules: i2c_i801
+
+00:1f.6 Ethernet controller: Intel Corporation Ethernet Connection (2) I219-LM
+	Subsystem: Lenovo Ethernet Connection (2) I219-LM
+	Flags: bus master, fast devsel, latency 0, IRQ 121
+	Memory at f7000000 (32-bit, non-prefetchable) [size=128K]
+	Capabilities: [c8] Power Management version 3
+	Capabilities: [d0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [e0] PCI Advanced Features
+	Kernel driver in use: e1000e
+	Kernel modules: e1000e
+

@@ -85,8 +85,9 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
 
     pName.value = pName.value.remove( vendor.value, Qt::CaseInsensitive);
     ver.value = ver.value.remove(vendor.value, Qt::CaseInsensitive);
-    ver.value = ver.value.remove(family.value);
-    family.value = family.value.remove(ver.value);
+    ver.value = ver.value.remove(family.value, Qt::CaseInsensitive);
+    family.value = family.value.remove(vendor.value, Qt::CaseInsensitive);
+    family.value = family.value.remove(ver.value, Qt::CaseInsensitive);
 
     pName.value.remove(ver.value);
 
