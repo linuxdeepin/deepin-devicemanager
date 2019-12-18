@@ -604,7 +604,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         tableWidget_->setFixedHeight(TableViewRowHeight_*5 + 4/*+ tableWidget_->verticalHeader()->height()+3*/);
 
         tableWidget_->m_headerDelegate->setDefaultSectionSize(TableViewRowHeight_+4);
-        tableWidget_->m_headerDelegate->setFixedHeight(TableViewRowHeight_);
+        tableWidget_->m_headerDelegate->setFixedHeight(TableViewRowHeight_+4);
 
         DFontSizeManager::instance()->bind( tableWidget_->m_headerDelegate, DFontSizeManager::T6);
 
