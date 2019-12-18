@@ -185,9 +185,6 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
     icon += ((ct == DGuiApplicationHelper::LightType) ? "light/normal/":"dark/normal/");
     icon += iconFile;
 
-
-    item->setData(icon, Qt::UserRole+89);
-
     item->setText(deviceName);
 
     item->setTextAlignment(Qt::AlignLeft);

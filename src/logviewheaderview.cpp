@@ -66,7 +66,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
 
     // title
     QRect contentRect(rect.x(), rect.y(), rect.width(), rect.height() - m_spacing);
-    QRect hSpacingRect(rect.x(), contentRect.height(), rect.width(),
+    QRect hSpacingRect(rect.x(), contentRect.height()- 4, rect.width(),
                        rect.height() - contentRect.height());
 
     QBrush contentBrush(palette.color(cg, DPalette::Base));
@@ -75,7 +75,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     // vertical spacing
     QBrush vSpacingBrush(palette.color(cg, DPalette::FrameBorder));
     QRectF vSpacingRect(rect.x(), rect.y() + kSpacingMargin, m_spacing,
-                        rect.height() - kSpacingMargin * 2);
+                        rect.height() - kSpacingMargin * 2-4);
     QBrush clearBrush(palette.color(cg, DPalette::Window));
 
     painter->fillRect(hSpacingRect, clearBrush);
@@ -106,7 +106,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
 
     if (logicalIndex == 0) {
         QRect col0Rect = textRect;
-        col0Rect.setX(textRect.x() + margin - 2);
+        col0Rect.setX(textRect.x() + 4 );
         painter->drawText(col0Rect, static_cast<int>(align), title);
     } else {
         painter->drawText(textRect, static_cast<int>(align), title);

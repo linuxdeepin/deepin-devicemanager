@@ -33,21 +33,17 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+
     DApplication::loadDXcbPlugin();
     DApplication app(argc, argv);
 
-    app.setAttribute(Qt::AA_UseHighDpiPixmaps);
     app.loadTranslator();
     app.setOrganizationName("deepin");
     app.setApplicationName("deepin-devicemanager");
     app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
 
     app.setApplicationVersion(DApplication::buildVersion(QDate::currentDate().toString("yyyyMMdd")));
-
-    QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
-
-    app.setProductIcon(appIcon);
-    app.setWindowIcon(appIcon);
 
     app.setProductName(DApplication::translate("Main", "Device Manager"));
 
@@ -63,18 +59,20 @@ int main(int argc, char *argv[])
 
     MainWindow w(nullptr);
     w.titlebar()->setTitle("");
+
+
+    QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
+    if( appIcon.isNull() )
+    {
+        appIcon = QIcon(":/../icons/deepin/builtin/deepin-devicemanager.svg");
+    }
+
+    app.setProductIcon(appIcon);
+    app.setWindowIcon(appIcon);
     w.titlebar()->setIcon(appIcon);
 
-    w.show();
     Dtk::Widget::moveToCenter(&w);
-
-    if(appIcon.isNull() || DeviceInfoParserInstance.getLsbRelease().contains("uos", Qt::CaseInsensitive) ==  false)
-    {
-        QIcon localIcon(":/../icons/deepin/builtin/deepin-devicemanager64.svg");
-        app.setProductIcon(localIcon);
-        app.setWindowIcon(localIcon);
-        w.titlebar()->setIcon(localIcon);
-    }
+    w.show();
 
     return app.exec();
 }

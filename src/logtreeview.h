@@ -39,11 +39,10 @@ private:
 
     void keyPressEvent(QKeyEvent *event) override;
 
-    int sizeHintForColumn(int column) const override;
+    int calulateColumnSize(int column) const;
 
 private:
-    //QStyleOptionViewItem viewOptions() const override;
-    //void initStyleOption(QStyleOptionFrame *option) const;
+    void resizeEvent(QResizeEvent *event) override;
 
 public:
     LogViewItemDelegate *m_itemDelegate;

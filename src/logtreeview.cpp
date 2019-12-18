@@ -123,21 +123,41 @@ void LogTreeView::keyPressEvent(QKeyEvent *event)
     }
 }
 
-int LogTreeView::sizeHintForColumn(int column) const
+int LogTreeView::calulateColumnSize(int column) const
 {
+    int columnCount = m_headerDelegate->count();
+
+    int maxColumnWidth = static_cast<float>(width())*(static_cast<float>(2*columnCount-1))/(static_cast<float>(columnCount*columnCount));
+
     static int margin = 25;
-    int maxWidth = margin;
+
+    int maxWidth = static_cast<float>(width())/static_cast<float>(columnCount*2);
+
     for(int i = 0; i < m_pModel->rowCount(); ++i)
     {
-        int width = QFontMetrics( DeviceInfoWidgetBase::tableContentFont_ ).width(m_pModel->item(i, column)->text());
+        int width = QFontMetrics( DeviceInfoWidgetBase::tableContentFont_ ).width(m_pModel->item(i, column)->text()) + margin;
         if(maxWidth < width)
         {
             maxWidth = width;
         }
     }
 
-    return (maxWidth + margin > (DeviceWidgetDownWidgehWidth_/m_pModel->columnCount())*2) ? (DeviceWidgetDownWidgehWidth_/m_pModel->columnCount()*2) : (maxWidth + margin);
-    //return DTreeView::sizeHintForColumn(column);
+    if(maxWidth > maxColumnWidth)
+    {
+        maxWidth  = maxColumnWidth;
+    }
+
+    return maxWidth;
+}
+
+void LogTreeView::resizeEvent(QResizeEvent *event)
+{
+    for(int i = 0; i < m_headerDelegate->count(); ++i)
+    {
+        setColumnWidth( i, calulateColumnSize(i));
+    }
+
+    DTreeView::resizeEvent(event);
 }
 
 //QStyleOptionViewItem LogTreeView::viewOptions() const

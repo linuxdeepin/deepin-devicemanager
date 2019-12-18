@@ -142,7 +142,7 @@ target.path = /usr/bin/
 #icons.files += ../images/cpu.svg
 #icons.path = /usr/share/deepin-devicemanager/
 icons.path = /usr/share/icons/hicolor/scalable/apps
-icons.files = ../icons/deepin/builtin/deepin-devicemanager64.svg
+icons.files = ../icons/deepin/builtin/deepin-devicemanager.svg
 
 # desktop
 desktop.files += deepin-devicemanager.desktop

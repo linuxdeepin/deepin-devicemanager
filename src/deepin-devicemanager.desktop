@@ -10,4 +10,4 @@ Name[zh_CN]=设备管理器
 Terminal=false
 Type=Application
 X-Ayatana-Desktop-Shortcuts=deepin-devicemanager
-X-Deepin-Vendor=user-custom
+X-Deepin-Vendor=deepin

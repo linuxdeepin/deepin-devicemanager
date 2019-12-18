@@ -122,6 +122,8 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
     initContextMenu();
 
     initFont();
+
+    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, &DeviceInfoWidgetBase::changeTheme );
 }
 
 void DeviceInfoWidgetBase::initFont()
@@ -231,6 +233,8 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
     }
 
     downFrame_ = new DFrame(this);
+    changeTheme();
+
     QVBoxLayout* ly = new QVBoxLayout;
 
     downFrame_->setLayout(ly);
@@ -513,10 +517,10 @@ void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStru
 //    DWidget* subInfoWidget = new DWidget(this);
 //    subInfoWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 //    subInfoWidget->setLayout(vly);
-////    if( infoWidget_ || subinfoWidgetList_.size() > 0 )
-////    {
-////        vly->setContentsMargins(0, 20, 0, 0);
-////    }
+//    if( infoWidget_ || subinfoWidgetList_.size() > 0 )
+//    {
+//        vly->setContentsMargins(0, 20, 0, 0);
+//    }
 
 //    subinfoWidgetList_.push_back(subInfoWidget);
 //    downWidgetLayout->insertWidget( downWidgetLayout->count(), subInfoWidget);
@@ -597,13 +601,12 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
 
         tableWidget_->setSortingEnabled(true);
 
-        tableWidget_->setFixedHeight(TableViewRowHeight_*5  /*+ tableWidget_->verticalHeader()->height()+3*/);
+        tableWidget_->setFixedHeight(TableViewRowHeight_*5 + 4/*+ tableWidget_->verticalHeader()->height()+3*/);
 
-        tableWidget_->m_headerDelegate->setDefaultSectionSize(TableViewRowHeight_);
+        tableWidget_->m_headerDelegate->setDefaultSectionSize(TableViewRowHeight_+4);
         tableWidget_->m_headerDelegate->setFixedHeight(TableViewRowHeight_);
 
         DFontSizeManager::instance()->bind( tableWidget_->m_headerDelegate, DFontSizeManager::T6);
-
 
         QStringList translaterHeaders;
         foreach(auto header, headers)
@@ -681,6 +684,16 @@ void DeviceInfoWidgetBase::initDownWidget()
     }
 
     downFrame_ = new DFrame(this);
+
+    changeTheme();
+    //        QColor base_color = loadingWidget_->palette().base().color();
+
+    //        pa.setColor(QPalette::Background, base_color);
+    //        pa.setBrush(DPalette::ItemBackground, base_color);
+
+    //ApplicationHelper::instance()->setPalette(this, pa);
+
+    //downFrame_->setFrameShape(QFrame::NoFrame);
 
     htmlBrower_ = new DeivceInfoBrower(this);
     //htmlBrower_->setOpenLinks(true);
@@ -826,6 +839,18 @@ bool DeviceInfoWidgetBase::onExportToFile()
    }
 
    return mainWindow->exportTo();
+}
+
+void DeviceInfoWidgetBase::changeTheme()
+{
+    if(downFrame_ == nullptr)
+    {
+        return;
+    }
+
+    DPalette pa = DApplicationHelper::instance()->palette(this);
+    pa.setBrush(QPalette::Background, pa.foreground());
+    downFrame_->setPalette(pa);
 }
 
 QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
