@@ -134,22 +134,34 @@ void MonitorWidget::initWidget()
 
             ArticleStruct mDate("Manufacture Date");
             mDate.queryData("hwinfo", monitor, "Year of Manufacture");
-            if( mDate.isValid() )
+            if( mDate.isValid() && mDate.value.toInt() != 0)
             {
                 mDate.value = mDate.value + DApplication::translate("Main", "Year");
+
+                QString mw = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
+                if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
+                {
+                    mDate.value += " ";
+                    mDate.value += mw;
+                    mDate.value += DApplication::translate("Main", "Week");
+                }
+                articles.push_back(mDate);
+
+                existArticles.insert("Year of Manufacture");
+                existArticles.insert("Week of Manufacture");
             }
 
-            QString mw = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
-            if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
-            {
-                mDate.value += " ";
-                mDate.value += mw;
-                mDate.value += DApplication::translate("Main", "Week");
-            }
-            articles.push_back(mDate);
+//            QString mw = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
+//            if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
+//            {
+//                mDate.value += " ";
+//                mDate.value += mw;
+//                mDate.value += DApplication::translate("Main", "Week");
+//            }
+//            articles.push_back(mDate);
 
-            existArticles.insert("Year of Manufacture");
-            existArticles.insert("Week of Manufacture");
+//            existArticles.insert("Year of Manufacture");
+//            existArticles.insert("Week of Manufacture");
 
             ArticleStruct tmy("The Model Year(Not Manufacture Date)");
             tmy.queryData("hwinfo", monitor, "The Model Year", existArticles );
