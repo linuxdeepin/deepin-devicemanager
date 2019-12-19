@@ -52,7 +52,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>DisplayAdapter</source>
+            <source>Display Adapter</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -64,7 +64,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>NetworkAdapter</source>
+            <source>Network Adapter</source>
             <translation type="unfinished"/>
         </message>
         <message>

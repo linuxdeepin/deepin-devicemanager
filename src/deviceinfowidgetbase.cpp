@@ -438,7 +438,7 @@ void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStru
         titleInfo_->articles_.push_back(inserArt);
     }
 }
-
+/*
 //void DeviceInfoWidgetBase::addInfo(const QString& title, const QList<ArticleStruct>& articles, bool main)
 //{
 //    initDownWidget();
@@ -530,6 +530,8 @@ void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStru
 //    verticalScrollBarMaxValue += subInfoWidget->height();
 //    downWidgetScrollArea_->verticalScrollBar()->setRange(0, verticalScrollBarMaxValue);
 //}
+*/
+
 
 void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin )
 {
@@ -553,6 +555,7 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
     deviceInfos_.push_back(di);
 }
 
+/*
 //void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin)
 //{
 //    initDownWidget();
@@ -586,6 +589,7 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
 //    verticalScrollBarMaxValue += subInfoWidget->height();
 //    downWidgetScrollArea_->verticalScrollBar()->setRange(0, verticalScrollBarMaxValue);
 //}
+*/
 
 void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStringList>& contentsList)
 {

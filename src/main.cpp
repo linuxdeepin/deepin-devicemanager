@@ -62,14 +62,18 @@ int main(int argc, char *argv[])
 
 
     QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
-    if( appIcon.isNull() )
+//    if( appIcon.isNull() )
+//    {
+//        appIcon = QIcon(":../icons/deepin/builtin/deepin-devicemanager.svg");
+//    }
+
+    if(appIcon.isNull() == false)
     {
-        appIcon = QIcon(":/../icons/deepin/builtin/deepin-devicemanager.svg");
+        app.setProductIcon(appIcon);
+        app.setWindowIcon(appIcon);
+        w.titlebar()->setIcon(appIcon);
     }
 
-    app.setProductIcon(appIcon);
-    app.setWindowIcon(appIcon);
-    w.titlebar()->setIcon(appIcon);
 
     Dtk::Widget::moveToCenter(&w);
     w.show();

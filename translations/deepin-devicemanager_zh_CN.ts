@@ -56,7 +56,7 @@
             <translation>存储设备</translation>
         </message>
         <message>
-            <source>DisplayAdapter</source>
+            <source>Display Adapter</source>
             <translation>显示适配器</translation>
         </message>
         <message>
@@ -68,7 +68,7 @@
             <translation>声卡</translation>
         </message>
         <message>
-            <source>NetworkAdapter</source>
+            <source>Network Adapter</source>
             <translation>网络适配器</translation>
         </message>
         <message>

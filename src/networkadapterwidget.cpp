@@ -25,7 +25,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "NetworkAdapter"))
+NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Network Adapter"))
 {
     initWidget();
 }
