@@ -66,7 +66,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
 
     // title
     QRect contentRect(rect.x(), rect.y(), rect.width(), rect.height() - m_spacing);
-    QRect hSpacingRect(rect.x(), contentRect.height()- 4, rect.width(),
+    QRect hSpacingRect(rect.x(), contentRect.height() - 4, rect.width(),
                        rect.height() - contentRect.height());
 
     QBrush contentBrush(palette.color(cg, DPalette::Base));
@@ -97,6 +97,10 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
         textRect = {contentRect.x() + margin, contentRect.y(), contentRect.width() - margin,
                     contentRect.height()};
     }
+    //使text上下居中，yaobin191220
+
+
+
     QString title = model()->headerData(logicalIndex, orientation(), Qt::DisplayRole).toString();
     //    int align = model()->headerData(logicalIndex, orientation(),
     //    Qt::TextAlignmentRole).toInt();

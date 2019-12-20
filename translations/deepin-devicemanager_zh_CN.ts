@@ -808,7 +808,7 @@
             <translation>未发现鼠标！</translation>
         </message>
         <message>
-            <source>No NetworkAdapter found!</source>
+            <source>No Network Adapter found!</source>
             <translation>未发现网络适配器！</translation>
         </message>
         <message>

@@ -4,6 +4,7 @@
  * Author:     AaronZhang <ya.zhang@archermind.com>
  *
  * Maintainer: AaronZhang <ya.zhang@archermind.com>
+ * Maintainer: Yaobin <yao.bin@archermind.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +40,7 @@ void NetworkadapterWidget::initWidget()
 
     if( networkadapterList.size() < 1 )
     {
-        setCentralInfo("No NetworkAdapter found!");
+        setCentralInfo("No Network Adapter found!");
         return;
     }
 

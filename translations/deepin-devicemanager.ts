@@ -808,7 +808,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>No NetworkAdapter found!</source>
+            <source>No Network Adapter found!</source>
             <translation type="unfinished"/>
         </message>
         <message>

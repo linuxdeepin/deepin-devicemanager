@@ -4,6 +4,7 @@
  * Author:     AaronZhang <ya.zhang@archermind.com>
  *
  * Maintainer: AaronZhang <ya.zhang@archermind.com>
+ * Maintainer: Yaobin <yao.bin@archermind.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -180,7 +181,7 @@ void MainWindow::loadDeviceWidget()
     //leftDeviceView_->setMaximumWidth(200);
     leftDeviceView_->setFixedWidth(leftDeviceListViewMinWidth_);
     //leftDeviceView_->setMaximumWidth(leftDeviceListViewMinWidth_ + 30);
-    //leftDeviceView_->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    //leftDeviceView_->setSizePolicy(QSizePolicy::Minimum, QPolicy::Minimum);
 
     DApplication::processEvents();
 
