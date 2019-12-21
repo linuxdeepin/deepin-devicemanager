@@ -654,8 +654,9 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     }
 
 
-    tableWidget_->m_headerDelegate->setStretchLastSection(true);
-    tableWidget_->m_headerDelegate->resizeSections(QHeaderView::ResizeMode::ResizeToContents);
+//    tableWidget_->m_headerDelegate->setStretchLastSection(true);
+//    tableWidget_->m_headerDelegate->setSectionResizeMode(QHeaderView::ResizeMode::Stretch);
+//    tableWidget_->m_headerDelegate->resizeSections(QHeaderView::ResizeMode::ResizeToContents);
 }
 
 void DeviceInfoWidgetBase::addDevice( const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle )

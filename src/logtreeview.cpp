@@ -43,6 +43,7 @@ LogTreeView::LogTreeView(QWidget *parent)
     m_pModel = new QStandardItemModel(this);
 
     setModel(m_pModel);
+
 }
 
 void LogTreeView::initUI()
@@ -125,6 +126,7 @@ void LogTreeView::keyPressEvent(QKeyEvent *event)
 
 int LogTreeView::calulateColumnSize(int column) const
 {
+    /*
     int columnCount = m_headerDelegate->count();
 
     int maxColumnWidth = static_cast<float>(width())*(static_cast<float>(2*columnCount-1))/(static_cast<float>(columnCount*columnCount));
@@ -148,16 +150,28 @@ int LogTreeView::calulateColumnSize(int column) const
     }
 
     return maxWidth;
+    */
+//    int colWidthSum = 0;
+//    for(int i = 0;i < header()->count();i++){
+//        colWidthSum += columnWidth(i);
+//    }
+    return  width()/header()->count();
 }
 
 void LogTreeView::resizeEvent(QResizeEvent *event)
 {
-    for(int i = 0; i < m_headerDelegate->count(); ++i)
-    {
-        setColumnWidth( i, calulateColumnSize(i));
-    }
-
+    setEachColunmWidthSame();
     DTreeView::resizeEvent(event);
+}
+
+void LogTreeView::setEachColunmWidthSame()
+{
+    int colCount = header()->count();
+    int avgColWidth = width()/colCount;
+    for(int i = 0; i < colCount; i++)
+    {
+        setColumnWidth(i,avgColWidth);
+    }
 }
 
 //QStyleOptionViewItem LogTreeView::viewOptions() const

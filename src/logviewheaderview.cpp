@@ -97,9 +97,8 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
         textRect = {contentRect.x() + margin, contentRect.y(), contentRect.width() - margin,
                     contentRect.height()};
     }
-    //使text上下居中，yaobin191220
-
-
+    //使text上下居中，yaobin 191220
+    textRect.adjust(0,-2,0,-2);
 
     QString title = model()->headerData(logicalIndex, orientation(), Qt::DisplayRole).toString();
     //    int align = model()->headerData(logicalIndex, orientation(),

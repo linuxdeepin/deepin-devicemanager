@@ -144,9 +144,11 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     }
     textRect = rect;
     textRect.setX(textRect.x() + margin +3);
-    //    textRect.setWidth(textRect.width() - margin * 2);
-    QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
+    int leftElideSpace = fm.width(QString("yy"));
+    textRect.setWidth(textRect.width()-leftElideSpace);           //yaobin191221, make two char space bettewn text and item left edge
+
+    QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
     painter->drawText(textRect, static_cast<int>(opt.displayAlignment), text);
 
     painter->restore();

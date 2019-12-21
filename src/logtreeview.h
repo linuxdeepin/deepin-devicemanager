@@ -32,7 +32,8 @@ class LogTreeView : public Dtk::Widget::DTreeView
 {
 public:
     LogTreeView(QWidget *parent = nullptr);
-
+public slots:
+    void setEachColunmWidthSame();
 private:
     void initUI();
     void paintEvent(QPaintEvent *event) override;
@@ -43,7 +44,6 @@ private:
 
 private:
     void resizeEvent(QResizeEvent *event) override;
-
 public:
     LogViewItemDelegate *m_itemDelegate;
     LogViewHeaderView *m_headerDelegate;
