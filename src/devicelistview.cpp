@@ -264,6 +264,7 @@ void DeviceListView::setAllItemsEnable(bool eable)
 
 bool DeviceListView::onExportToFile()
 {
+    /*
 //   QString selectFilter;
 
 //   QString saveDir = "./";
@@ -282,7 +283,7 @@ bool DeviceListView::onExportToFile()
 //   {
 //       return true;
 //   }
-
+     */
    MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent());
    if( nullptr == mainWindow )
    {

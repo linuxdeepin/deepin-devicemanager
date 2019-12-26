@@ -65,9 +65,17 @@ public slots:
 private:
     void showSplashMessage(const QString& message);
 
-private:
+
+
+protected:
     void keyPressEvent(QKeyEvent *keyEvent) override;
 
+    void saveSettings();
+    void loadSizeSettings();
+
+    virtual void closeEvent(QCloseEvent *event) override;
+
+    virtual void showEvent(QShowEvent *event) override;
 private:
     DeviceListView* leftDeviceView_ = nullptr;
     Dtk::Widget::DStackedWidget* rightDeviceInfoWidget_ = nullptr;

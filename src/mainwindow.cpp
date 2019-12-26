@@ -63,6 +63,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QScreen>
+#include <QSettings>
 
 DWIDGET_USE_NAMESPACE
 
@@ -635,6 +636,48 @@ void MainWindow::showSplashMessage(const QString& message)
     {
         loadLabel_->setText(DApplication::translate("Main", message.toStdString().data()));
     }
+}
+
+void MainWindow::saveSettings()
+{
+    QSettings setting(qApp->organizationName(),qApp->applicationName());
+    setting.beginGroup("geometry");
+    setting.setValue("mainwidnow_geometry",this->geometry());
+    setting.endGroup();
+}
+
+void MainWindow::loadSizeSettings()
+{
+    QSettings setting(qApp->organizationName(),qApp->applicationName());
+    setting.beginGroup("geometry");
+    if(setting.value("mainwidnow_geometry").canConvert<QRect>()){
+         QRect geometry = setting.value("mainwidnow_geometry").toRect();
+         int width = geometry.width();
+         int height = geometry.height();
+         int minW = this->minimumWidth();
+         int maxW = this->maximumWidth();
+         int minH = this->minimumHeight();
+         int maxH = this->maximumHeight();
+         if(width >= minW && width <= maxW){
+             if(height >= minH && height <= maxH){
+                 resize(width,height);
+             }
+         }
+    }
+    setting.endGroup();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    saveSettings();
+    QWidget::closeEvent(event);
+}
+
+void MainWindow::showEvent(QShowEvent *event)
+{
+    loadSizeSettings();
+    Dtk::Widget::moveToCenter(this);
+    QWidget::showEvent(event);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
