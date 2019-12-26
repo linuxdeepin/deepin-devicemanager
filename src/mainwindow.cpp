@@ -65,6 +65,8 @@
 #include <QScreen>
 #include <QSettings>
 
+#include <QDebug>
+
 DWIDGET_USE_NAMESPACE
 
 QList<ArticleStruct> staticArticles;
@@ -109,7 +111,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-
+    saveSettings();
 }
 
 void MainWindow::initLoadingWidget()
@@ -669,15 +671,14 @@ void MainWindow::loadSizeSettings()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    saveSettings();
-    QWidget::closeEvent(event);
+    DMainWindow::closeEvent(event);
 }
 
 void MainWindow::showEvent(QShowEvent *event)
 {
     loadSizeSettings();
     Dtk::Widget::moveToCenter(this);
-    QWidget::showEvent(event);
+    DMainWindow::showEvent(event);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
