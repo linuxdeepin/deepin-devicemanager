@@ -3,7 +3,7 @@ host = https://www.transifex.com
 minimum_perc = 80
 mode = developer
 
-[deepin-devicemanager.dwidget]
+[deepin-devicemanager.deepin-devicemanager]
 file_filter = translations/deepin-devicemanager_<lang>.ts
 source_file = translations/deepin-devicemanager_en_US.ts
 source_lang = en
