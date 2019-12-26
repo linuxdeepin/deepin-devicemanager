@@ -49,9 +49,9 @@ CONFIG(debug, debug|release) {
         system(lrelease $$tsfile -qm $$qmfile) | error("Failed to lrelease")
     }
     #将qm文件添加到安装包
-#    dtk_translations.path = /usr/share/$$TARGET/translations
-#    dtk_translations.files = $$PWD/translations/*.qm
-#    INSTALLS += dtk_translations
+    dtk_translations.path = /usr/share/$$TARGET/translations
+    dtk_translations.files = $$PWD/translations/*.qm
+    INSTALLS += dtk_translations
 }
 
 #LIBS += -L/usr/lib/x86_64-linux-gnu/ -lhd

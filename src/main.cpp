@@ -63,7 +63,6 @@ int main(int argc, char *argv[])
 
     QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
 
-
     if(appIcon.isNull() == false)
     {
         app.setProductIcon(appIcon);
