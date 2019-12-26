@@ -65,8 +65,6 @@ public slots:
 private:
     void showSplashMessage(const QString& message);
 
-
-
 protected:
     void keyPressEvent(QKeyEvent *keyEvent) override;
 
