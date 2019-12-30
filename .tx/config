@@ -8,3 +8,17 @@ file_filter = translations/deepin-devicemanager_<lang>.ts
 source_file = translations/deepin-devicemanager_en_US.ts
 source_lang = en
 type = QT
+
+[deepin-devicemanager.deepin-devicemanager-desktop]
+file_filter = translations/desktop_<lang>.ts
+source_file = translations/desktop_.ts
+source_lang = en
+type = QT
+
+
+[deepin-devicemanager.deepin-devicemanager-policy]
+file_filter = translations/policy_<lang>.ts
+source_file = translations/policy.ts
+source_lang = en
+type = QT
+

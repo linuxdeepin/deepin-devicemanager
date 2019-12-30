@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>../thirdlib/docx/doc_template/template.docx</file>
         <file>../icons/deepin/builtin/light/texts/audiodevice_20px.svg</file>
         <file>../icons/deepin/builtin/light/texts/battery_20px.svg</file>
         <file>../icons/deepin/builtin/light/texts/bluetooth_20px.svg</file>
