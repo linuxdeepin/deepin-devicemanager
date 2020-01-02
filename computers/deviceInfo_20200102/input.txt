@@ -1,0 +1,118 @@
+I: Bus=0003 Vendor=046d Product=c016 Version=0110
+N: Name="Logitech Optical USB Mouse"
+P: Phys=usb-0000:06:00.0-2/input0
+S: Sysfs=/devices/pci0000:00/0000:00:05.0/0000:06:00.0/usb1/1-2/1-2:1.0/0003:046D:C016.0001/input/input0
+U: Uniq=
+H: Handlers=mouse0 event0 
+B: PROP=0
+B: EV=17
+B: KEY=70000 0 0 0 0
+B: REL=103
+B: MSC=10
+
+I: Bus=0003 Vendor=04f3 Product=0103 Version=0111
+N: Name="HID 04f3:0103"
+P: Phys=usb-0000:06:00.0-3.4/input0
+S: Sysfs=/devices/pci0000:00/0000:00:05.0/0000:06:00.0/usb1/1-3/1-3.4/1-3.4:1.0/0003:04F3:0103.0002/input/input1
+U: Uniq=
+H: Handlers=sysrq kbd event1 
+B: PROP=0
+B: EV=120013
+B: KEY=1000000000007 ff800000000007ff febeffdff3cfffff fffffffffffffffe
+B: MSC=10
+B: LED=7
+
+I: Bus=0003 Vendor=04f3 Product=0103 Version=0111
+N: Name="HID 04f3:0103 Consumer Control"
+P: Phys=usb-0000:06:00.0-3.4/input1
+S: Sysfs=/devices/pci0000:00/0000:00:05.0/0000:06:00.0/usb1/1-3/1-3.4/1-3.4:1.1/0003:04F3:0103.0003/input/input2
+U: Uniq=
+H: Handlers=kbd event2 
+B: PROP=0
+B: EV=1f
+B: KEY=300ff 0 0 483ffff17aff32d bf54444600000000 1 130c730b17c000 267bfad9415fed 9e168000004400 10000002
+B: REL=40
+B: ABS=100000000
+B: MSC=10
+
+I: Bus=0003 Vendor=04f3 Product=0103 Version=0111
+N: Name="HID 04f3:0103 System Control"
+P: Phys=usb-0000:06:00.0-3.4/input1
+S: Sysfs=/devices/pci0000:00/0000:00:05.0/0000:06:00.0/usb1/1-3/1-3.4/1-3.4:1.1/0003:04F3:0103.0003/input/input3
+U: Uniq=
+H: Handlers=kbd event3 
+B: PROP=0
+B: EV=13
+B: KEY=c000 10000000000000 0
+B: MSC=10
+
+I: Bus=0001 Vendor=10ec Product=0662 Version=0001
+N: Name="HDA Digital PCBeep"
+P: Phys=card1/codec#0/beep0
+S: Sysfs=/devices/platform/FTHD0001:00/sound/card1/input4
+U: Uniq=
+H: Handlers=kbd event4 
+B: PROP=0
+B: EV=40001
+B: SND=6
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="ft-hda Front Mic"
+P: Phys=ALSA
+S: Sysfs=/devices/platform/FTHD0001:00/sound/card1/input5
+U: Uniq=
+H: Handlers=event5 
+B: PROP=0
+B: EV=21
+B: SW=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="ft-hda Rear Mic"
+P: Phys=ALSA
+S: Sysfs=/devices/platform/FTHD0001:00/sound/card1/input6
+U: Uniq=
+H: Handlers=event6 
+B: PROP=0
+B: EV=21
+B: SW=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="ft-hda Line"
+P: Phys=ALSA
+S: Sysfs=/devices/platform/FTHD0001:00/sound/card1/input7
+U: Uniq=
+H: Handlers=event7 
+B: PROP=0
+B: EV=21
+B: SW=2000
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="ft-hda Line Out"
+P: Phys=ALSA
+S: Sysfs=/devices/platform/FTHD0001:00/sound/card1/input8
+U: Uniq=
+H: Handlers=event8 
+B: PROP=0
+B: EV=21
+B: SW=40
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="ft-hda Front Headphone"
+P: Phys=ALSA
+S: Sysfs=/devices/platform/FTHD0001:00/sound/card1/input9
+U: Uniq=
+H: Handlers=event9 
+B: PROP=0
+B: EV=21
+B: SW=4
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HDA ATI HDMI HDMI/DP,pcm=3"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:01.0/0000:02:00.1/sound/card2/input10
+U: Uniq=
+H: Handlers=event10 
+B: PROP=0
+B: EV=21
+B: SW=140
+

@@ -291,7 +291,7 @@ bool DiskWidget::getDiskType(const QString& diskProperty, QString& type)
 {
     if( diskProperty.contains("SSD", Qt::CaseInsensitive) || diskProperty.contains("Solid", Qt::CaseInsensitive) )
     {
-        type = "SDD";
+        type = "SSD";
         return true;
     }
 

@@ -77,7 +77,6 @@ void MouseWidget::initWidget()
         }
 
         articles.push_back(name);
-        articles.push_back(vendor);
 
         if( lshwMouse.isEmpty() == false )
         {
@@ -164,8 +163,8 @@ void MouseWidget::initWidget()
         if(vendor.isValid() == false)
         {
             vendor.queryData( "catinput", device, "Vendor");
-            articles.push_back(vendor);
         }
+        articles.push_back(vendor);
         existArticles.insert("Vendor");
 
         articles.push_back(uniq);

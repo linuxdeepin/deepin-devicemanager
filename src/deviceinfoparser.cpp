@@ -39,7 +39,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/Dell_02C2CP_A02";
+const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_20200102";
 
 using PowerInter = com::deepin::daemon::Power;
 

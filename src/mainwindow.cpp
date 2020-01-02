@@ -339,7 +339,6 @@ void MainWindow::addDeviceWidget(DeviceInfoWidgetBase* w,  const QString& icon)
 }
 
 
-
 void MainWindow::insertDeviceWidget(int index, DeviceInfoWidgetBase* w)
 {
     if(firstAdd_ == true)

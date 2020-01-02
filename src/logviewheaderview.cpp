@@ -97,7 +97,11 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
         textRect = {contentRect.x() + margin, contentRect.y(), contentRect.width() - margin,
                     contentRect.height()};
     }
-    //使text上下居中，yaobin 191220
+    /*
+    *@author yaobin
+    *@date 2020-01-02
+    *@Modify Reason:使文字居中
+    */
     textRect.adjust(0,-2,0,-2);
 
     QString title = model()->headerData(logicalIndex, orientation(), Qt::DisplayRole).toString();

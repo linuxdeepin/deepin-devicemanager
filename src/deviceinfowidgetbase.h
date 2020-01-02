@@ -150,7 +150,7 @@ public:
     Dtk::Widget::DFrame* downFrame_ = nullptr;
 
     Dtk::Widget::DTextBrowser* htmlBrower_ = nullptr;
-    QVBoxLayout* downWidgetLayout = nullptr;
+//    QVBoxLayout* downWidgetLayout = nullptr;
 
     Dtk::Widget::DMenu* contextMenu_ = nullptr;
 

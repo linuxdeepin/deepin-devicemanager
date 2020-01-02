@@ -124,9 +124,22 @@ void NetworkadapterWidget::initWidget()
 
         if( overviewInfo_.value.isEmpty() == true )
         {
-            overviewInfo_.value = vendor.value;
-            overviewInfo_.value += " ";
-            overviewInfo_.value += name.value;
+            /*
+            *@author yaobin
+            *@date 2020-01-02
+            *@Modify Reason:
+            */
+            if(vendor.isValid()){
+                overviewInfo_.value = vendor.value;
+                overviewInfo_.value += " ";
+                overviewInfo_.value += name.value;
+            }else {
+                if(description.isValid()){
+                    overviewInfo_.value = description.value;
+                }else{
+                    overviewInfo_.value = DApplication::translate("Main", "Unknown");
+                }
+            }
         }
     }
 
