@@ -31,5 +31,7 @@ public:
     explicit KeyboardWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+
+    bool findUsbKeyboard();
 };
 

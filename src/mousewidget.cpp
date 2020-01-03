@@ -61,8 +61,6 @@ void MouseWidget::initWidget()
         name.value.remove("\"");
         existArticles.insert("Name");
 
-
-
         QString lshwMouse = DeviceInfoParserInstance.getCorrespondLshwMouse(name.value);
         if( lshwMouse.isEmpty() == false )
         {

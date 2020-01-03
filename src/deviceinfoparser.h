@@ -139,6 +139,7 @@ public:
     QStringList getLshwCameraList();
 
     QStringList getLshwOtherUsbdeviceList();
+    QStringList getLshwUsbKeyboardDeviceList();
 
     QStringList getInputdeviceMouseList();
     QString getCorrespondLshwMouse(const QString& inputMouse);

@@ -39,7 +39,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_20200102";
+const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/Kunpeng_Desktop_Board";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -627,6 +627,10 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                 {
                     return false;
                 }
+                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["description"].contains("Keyboard", Qt::CaseInsensitive) )
+                {
+                    return false;
+                }
             }
 
             if(true == DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("product"))
@@ -654,6 +658,35 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
             }
         }
 
+        return false;
+    };
+
+    return getMatchToolDeviceList("lshw", &func);
+}
+
+QStringList DeviceInfoParser::getLshwUsbKeyboardDeviceList()
+{
+    checkValueFun_t func = [](const QString& fk)->bool
+    {
+        QRegExp rx("^[\\s\\S]*usb[:0-9]*$");
+        if( rx.exactMatch(fk) ==false )
+        {
+            return false;
+        }
+        if( fk.contains("usb", Qt::CaseInsensitive) )
+        {
+            if(true == DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("description"))
+            {
+                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["description"].contains("Keyboard", Qt::CaseInsensitive) )
+                {
+                    if( DeviceInfoParserInstance.orderedDevices.contains(fk) == false )
+                    {
+                        DeviceInfoParserInstance.orderedDevices.insert(fk);
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     };
 
@@ -740,13 +773,14 @@ QStringList DeviceInfoParser::getInputdeviceKeyboardList()
     {
         if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Name") )
         {
+            QString t = DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"];
             if(     DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("System Control", Qt::CaseInsensitive) \
                  || DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("Consumer Control", Qt::CaseInsensitive)  )
             {
                 return false;
             }
 
-            if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("keyboard", Qt::CaseInsensitive) )
+            if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("Keyboard", Qt::CaseInsensitive) )
             {
                 return true;
             }
