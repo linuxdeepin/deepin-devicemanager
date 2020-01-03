@@ -23,7 +23,7 @@
 #pragma once
 
 #include <QList>
-#include "DTableWidget"
+#include <DTableWidget>
 #include "DScrollArea"
 #include "DMenu"
 #include "DLabel"
@@ -71,6 +71,15 @@ protected:
     void contextMenuEvent(QContextMenuEvent *event) override;
 
     DeviceInfoWidgetBase* deviceInfoWidget_ = nullptr;
+
+    // QWidget interface
+protected:
+    /*
+    *@author yaobin
+    *@date 2020-01-03
+    *绘制底部两个圆角
+    */
+    virtual void paintEvent(QPaintEvent *event) override;
 };
 
 
@@ -184,4 +193,10 @@ protected:
     static Dtk::Gui::DPalette defaultPa_;
 
     bool firstShow_ = true;
+    /*
+    *@author yaobin
+    *@date 2020-01-03
+    *是否显示table
+    */
+    bool hasTable = false;
 };

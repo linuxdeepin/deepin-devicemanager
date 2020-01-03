@@ -423,6 +423,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     if(tableWidget_ == nullptr)
     {
         tableWidget_ = new LogTreeView(this);
+        hasTable = true;
         DFontSizeManager::instance()->bind( tableWidget_, DFontSizeManager::T8);
 
         tableWidget_->setSortingEnabled(true);
@@ -602,7 +603,21 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
 
     firstShow_ = false;
 
-    initDownWidget();
+    if(hasTable == false){
+        initDownWidget();
+    }else{
+        htmlBrower_ = new DeivceInfoBrower(this);
+        htmlBrower_->setFrameShape(QFrame::NoFrame);
+        htmlBrower_->setOpenExternalLinks(true);
+
+        vLayout_->setSpacing(2);
+
+        QVBoxLayout *htmlBroswerLayout = new QVBoxLayout;
+        htmlBroswerLayout->setContentsMargins(1,1,1,1);
+        htmlBroswerLayout->addWidget(htmlBrower_);
+
+        vLayout_->addLayout(htmlBroswerLayout);
+    }
 
     int fontSize = DFontSizeManager::T7;
 
@@ -1108,4 +1123,46 @@ bool DeviceInfoWidgetBase::exportToHtml(const QString& htmlFile)
     exportToHtml(html);
     html.close();
     return true;
+}
+
+
+void DeivceInfoBrower::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(viewport());
+    painter.save();
+    painter.setRenderHints(QPainter::Antialiasing);
+    painter.setOpacity(1);
+    painter.setClipping(true);
+
+    QWidget *wnd = DApplication::activeWindow();
+    DPalette::ColorGroup cg;
+    if (!wnd) {
+        cg = DPalette::Inactive;
+    } else {
+        cg = DPalette::Active;
+    }
+
+    //    auto style = dynamic_cast<DStyle *>(DApplication::style());
+    auto *dAppHelper = DApplicationHelper::instance();
+    auto palette = dAppHelper->applicationPalette();
+
+    QBrush bgBrush(palette.color(cg, DPalette::Background));
+
+    QStyleOptionFrame option;
+    initStyleOption(&option);
+
+    QRect rect = viewport()->rect();
+    QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
+    QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
+    QPainterPath clipPath, subPath;
+
+    clipPath.addRoundedRect(clipRect, 8, 8);
+    subPath.addRect(subRect);
+    clipPath = clipPath.subtracted(subPath);
+    clipPath.addRect(rect);
+
+    painter.fillPath(clipPath, bgBrush);
+
+    painter.restore();
+    Dtk::Widget::DTextBrowser::paintEvent(event);
 }

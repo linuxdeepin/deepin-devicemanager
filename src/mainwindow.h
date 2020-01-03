@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "DMainWindow"
+#include <DMainWindow>
 #include "dwidgetstype.h"
 #include <QSplashScreen>
 #include "DSpinner"

@@ -104,7 +104,13 @@ void LogTreeView::paintEvent(QPaintEvent *event)
     QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
     QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
     QPainterPath clipPath, subPath;
-    clipPath.addRoundedRect(clipRect, 8, 8);
+    /*
+    *@author yaobin
+    *@date 2020-01-03
+    *@Modify Reason:底部不需要圆角
+    */
+//    clipPath.addRoundedRect(clipRect, 8, 8);
+    clipPath.addRoundedRect(clipRect, 0, 0);
     subPath.addRect(subRect);
     clipPath = clipPath.subtracted(subPath);
     clipPath.addRect(rect);
