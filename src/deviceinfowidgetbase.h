@@ -66,7 +66,6 @@ class DeivceInfoBrower: public Dtk::Widget::DTextBrowser
 {
 public:
     DeivceInfoBrower(DeviceInfoWidgetBase* parent = nullptr);
-
 protected:
     void contextMenuEvent(QContextMenuEvent *event) override;
 
@@ -156,7 +155,7 @@ public:
 
     QVBoxLayout* vLayout_ = nullptr;
 
-    Dtk::Widget::DFrame* downFrame_ = nullptr;
+    QFrame * downFrame_ = nullptr;
 
     Dtk::Widget::DTextBrowser* htmlBrower_ = nullptr;
 //    QVBoxLayout* downWidgetLayout = nullptr;

@@ -87,7 +87,8 @@ SOURCES += \
     printerwidget.cpp \
     devicelistview.cpp \
     deviceattributedefine.cpp \
-    bluetoothwidget.cpp
+    bluetoothwidget.cpp \
+    bottomroundframe.cpp
 
 HEADERS += \
     cdromwidget.h \
@@ -120,7 +121,8 @@ HEADERS += \
     otherpcidevice.h \
     logpasswordauth.h \
     printerwidget.h \
-    devicelistview.h
+    devicelistview.h \
+    bottomroundframe.h
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin

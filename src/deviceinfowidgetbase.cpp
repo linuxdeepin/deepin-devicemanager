@@ -21,8 +21,10 @@
  */
 
 #include "deviceinfowidgetbase.h"
+#include "bottomroundframe.h"
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QHeaderView>
@@ -111,7 +113,7 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
     setContentsMargins( DeviceWidgetMargin_, DeviceWidgetMargin_, DeviceWidgetMargin_, DeviceWidgetMargin_);
 
     vLayout_ = new QVBoxLayout;
-    vLayout_->setSpacing(0);
+    vLayout_->setSpacing(2);
     vLayout_->setMargin(0);
 
     setLayout(vLayout_);
@@ -503,37 +505,20 @@ void DeviceInfoWidgetBase::initDownWidget()
     {
         return;
     }
-
     downFrame_ = new DFrame(this);
 
     changeTheme();
-    //        QColor base_color = loadingWidget_->palette().base().color();
-
-    //        pa.setColor(QPalette::Background, base_color);
-    //        pa.setBrush(DPalette::ItemBackground, base_color);
-
-    //ApplicationHelper::instance()->setPalette(this, pa);
-
-    //downFrame_->setFrameShape(QFrame::NoFrame);
 
     htmlBrower_ = new DeivceInfoBrower(this);
     htmlBrower_->setFrameShape(QFrame::NoFrame);
     htmlBrower_->setOpenExternalLinks(true);
 
-//    downWidgetLayout = new QVBoxLayout;
-//    downWidgetLayout->setMargin(0);
-//    downWidgetLayout->setSpacing(0);
-//    htmlBrower_->setLayout(downWidgetLayout);
-
     QVBoxLayout* ly = new QVBoxLayout;
 
-    ly->setContentsMargins(10,10,0,10);
-
-    ly->setSpacing(0);
-
+    ly->setContentsMargins(10,10,0,0);
     ly->addWidget(htmlBrower_);
     downFrame_->setLayout(ly);
-    vLayout_->insertWidget( vLayout_->count(), downFrame_);
+    vLayout_->addWidget(downFrame_);
 }
 
 QString DeviceInfoWidgetBase::getDeviceName()
@@ -602,21 +587,30 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
     }
 
     firstShow_ = false;
-
     if(hasTable == false){
         initDownWidget();
-    }else{
-        htmlBrower_ = new DeivceInfoBrower(this);
-        htmlBrower_->setFrameShape(QFrame::NoFrame);
-        htmlBrower_->setOpenExternalLinks(true);
+    }
+    else {
+        if(htmlBrower_ == nullptr){
+            htmlBrower_ = new DeivceInfoBrower(this);
+            htmlBrower_->setFrameShape(QFrame::NoFrame);
+            htmlBrower_->setOpenExternalLinks(true);
 
-        vLayout_->setSpacing(2);
+            QHBoxLayout *htmlBroswerLayout = new QHBoxLayout;
+            htmlBroswerLayout->setContentsMargins(7,19,0,20);
+            htmlBroswerLayout->addWidget(htmlBrower_);
 
-        QVBoxLayout *htmlBroswerLayout = new QVBoxLayout;
-        htmlBroswerLayout->setContentsMargins(1,1,1,1);
-        htmlBroswerLayout->addWidget(htmlBrower_);
+            auto bottomRoundFrame = new BottomRoundFrame;
+            bottomRoundFrame->setTextBroser(htmlBrower_);
+            bottomRoundFrame->setLayout(htmlBroswerLayout);
 
-        vLayout_->addLayout(htmlBroswerLayout);
+            QVBoxLayout *layout = new QVBoxLayout;
+            layout->addWidget(bottomRoundFrame/*new QTextEdit*/);
+            layout->setMargin(1);
+            QWidget * widget = new QWidget;
+            widget->setLayout(layout);
+            vLayout_->addWidget(widget);
+        }
     }
 
     int fontSize = DFontSizeManager::T7;
@@ -693,9 +687,11 @@ QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
         ds << di.title_ << "\n";
     }
 
-
     foreach(auto article, di.articles_)
     {
+        if(article.isValid() == false){
+            continue;
+        }
         ds.setFieldWidth(21);
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
         ds << article.name + ": ";
@@ -762,56 +758,31 @@ bool DeviceInfoWidgetBase::exportToTxt(QFile& txtFile)
 {
     QTextStream out(&txtFile);
 
-    out <<  "[" << overviewInfo_.name << "]\n-------------------------------------------------";
+        out <<  "[" << overviewInfo_.name << "]\n-------------------------------------------------";
 
-    if(tableWidget_)
-    {
+        if(tableWidget_)
+        {
+            out << "\n";
+            out << tableWidget_;
+        }
+
+        if(titleInfo_)
+        {
+            out << "\n";
+            out << *titleInfo_;
+        }
+
+        foreach(const DeviceInfo& di, deviceInfos_)
+        {
+            out << "\n";
+            out << di;
+        }
         out << "\n";
-        out << tableWidget_;
-    }
 
-    if(titleInfo_)
-    {
-        out << "\n";
-        /*
-        *@author yaobin
-        *@date 2020-01-02
-        *@Modify Reason:内容为空时不显示
-        */
-//        out << *titleInfo_;
-        if(!titleInfo_->title_.isNull() && !titleInfo_->title_.isEmpty()){
-            out << titleInfo_->title_<<"\n";
-        }
-        foreach(ArticleStruct art,titleInfo_->articles_){
-            if(false == art.isValid()){
-                continue;
-            }
-            out << art.name <<":\t"<<art.value<<"\n";
-        }
-    }
 
-    foreach(const DeviceInfo& di, deviceInfos_)
-    {
-        out << "\n";
-        /*
-        *@author yaobin
-        *@date 2020-01-02
-        *@Modify Reason:内容为空时不显示
-        */
-//        out << di;
-        if(!di.title_.isNull() && !di.title_.isEmpty()){
-            out << di.title_<<"\n";
-        }
-        foreach(ArticleStruct it,di.articles_){
-            if(false == it.isValid()){
-                continue;
-            }
-            out << it.name <<":\t"<<it.value<<"\n";
-        }
-    }
-    out << "\n";
 
-    return true;
+        return true;
+
 }
 
 bool DeviceInfoWidgetBase::exportToTxt(const QString& txtFile)
@@ -1128,41 +1099,41 @@ bool DeviceInfoWidgetBase::exportToHtml(const QString& htmlFile)
 
 void DeivceInfoBrower::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(viewport());
-    painter.save();
-    painter.setRenderHints(QPainter::Antialiasing);
-    painter.setOpacity(1);
-    painter.setClipping(true);
+//    QPainter painter(viewport());
+//    painter.save();
+//    painter.setRenderHints(QPainter::Antialiasing);
+//    painter.setOpacity(1);
+//    painter.setClipping(true);
 
-    QWidget *wnd = DApplication::activeWindow();
-    DPalette::ColorGroup cg;
-    if (!wnd) {
-        cg = DPalette::Inactive;
-    } else {
-        cg = DPalette::Active;
-    }
+//    QWidget *wnd = DApplication::activeWindow();
+//    DPalette::ColorGroup cg;
+//    if (!wnd) {
+//        cg = DPalette::Inactive;
+//    } else {
+//        cg = DPalette::Active;
+//    }
 
-    //    auto style = dynamic_cast<DStyle *>(DApplication::style());
-    auto *dAppHelper = DApplicationHelper::instance();
-    auto palette = dAppHelper->applicationPalette();
+//    //    auto style = dynamic_cast<DStyle *>(DApplication::style());
+//    auto *dAppHelper = DApplicationHelper::instance();
+//    auto palette = dAppHelper->applicationPalette();
 
-    QBrush bgBrush(palette.color(cg, DPalette::Background));
+//    QBrush bgBrush(palette.color(cg, DPalette::Background));
 
-    QStyleOptionFrame option;
-    initStyleOption(&option);
+//    QStyleOptionFrame option;
+//    initStyleOption(&option);
 
-    QRect rect = viewport()->rect();
-    QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
-    QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
-    QPainterPath clipPath, subPath;
+//    QRect rect = viewport()->rect();
+//    QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
+//    QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
+//    QPainterPath clipPath, subPath;
 
-    clipPath.addRoundedRect(clipRect, 8, 8);
-    subPath.addRect(subRect);
-    clipPath = clipPath.subtracted(subPath);
-    clipPath.addRect(rect);
+//    clipPath.addRoundedRect(clipRect, 8, 8);
+//    subPath.addRect(subRect);
+//    clipPath = clipPath.subtracted(subPath);
+//    clipPath.addRect(rect);
 
-    painter.fillPath(clipPath, bgBrush);
+//    painter.fillPath(clipPath, bgBrush);
 
-    painter.restore();
+//    painter.restore();
     Dtk::Widget::DTextBrowser::paintEvent(event);
 }
