@@ -108,13 +108,20 @@ void NetworkadapterWidget::initWidget()
         existArticles.insert("capabilities");
 
         DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", networkadapter, articles, existArticles);
-        addDevice( name.value , articles, networkadapterList.size() );
+
+        QString deviceName = name.value;
+        if(name.isValid() == false && description.isValid())
+        {
+            deviceName = description.value;
+        }
+
+        addDevice( deviceName, articles, networkadapterList.size() );
 
         if( networkadapterList.size() > 1 )
         {
             QStringList tab =
             {
-                name.value,
+                deviceName,
                 vendor.value
             };
 
@@ -122,25 +129,17 @@ void NetworkadapterWidget::initWidget()
         }
 
 
-        if( overviewInfo_.value.isEmpty() == true )
+        if( overviewInfo_.value.isEmpty() == false )
         {
-            /*
-            *@author yaobin
-            *@date 2020-01-02
-            *@Modify Reason:
-            */
-            if(vendor.isValid()){
-                overviewInfo_.value = vendor.value;
-                overviewInfo_.value += " ";
-                overviewInfo_.value += name.value;
-            }else {
-                if(description.isValid()){
-                    overviewInfo_.value = description.value;
-                }else{
-                    overviewInfo_.value = DApplication::translate("Main", "Unknown");
-                }
-            }
+            overviewInfo_.value += " / ";
         }
+
+        if(vendor.isValid() && deviceName.contains(vendor.value, Qt::CaseInsensitive) == false )
+        {
+            overviewInfo_.value += vendor.value;
+            overviewInfo_.value += " ";
+        }
+        overviewInfo_.value += deviceName;
     }
 
     if( networkadapterList.size() > 1 )

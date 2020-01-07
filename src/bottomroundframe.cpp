@@ -26,7 +26,7 @@
 #include <DApplicationHelper>
 #include <QDebug>
 DWIDGET_USE_NAMESPACE
-BottomRoundFrame::BottomRoundFrame(QWidget *parent) : QFrame(parent),m_textBrowser(nullptr)
+BottomRoundFrame::BottomRoundFrame(QWidget *parent) : QFrame(parent),m_textBrowser(nullptr),m_roundedRadius(18)
 {
     this->setFrameStyle(QFrame::Plain);
     this->setLineWidth(0);
@@ -53,7 +53,7 @@ void BottomRoundFrame::paintEvent(QPaintEvent *event)
     QPainterPath roundedPath,topPath;
     QRect rect = this->rect();
     topPath.addRect(QRect(rect.x(),rect.y(),width(),height()/2));
-    roundedPath.addRoundedRect(this->rect(),20,20);
+    roundedPath.addRoundedRect(this->rect(),m_roundedRadius,m_roundedRadius);
     roundedPath += topPath;
     painter.setClipPath(roundedPath);
 

@@ -88,17 +88,18 @@ void DiskWidget::initWidget()
             QString rotationRate = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Rotation Rate");
             QString modelFamilyStr = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Model Family");
             QString deviceModelStr = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Device Model");
+            QString modelStr = DeviceInfoParserInstance.queryData("lshw", disk, "product");
 
             if( getDiskType(rotationRate, mediaTypeStr) == false )
             {
                 if( getDiskType(modelFamilyStr, mediaTypeStr) == false )
                 {
-                    getDiskType(deviceModelStr, mediaTypeStr);
+                    if(getDiskType(deviceModelStr, mediaTypeStr) == false){
+                        getDiskType(modelStr, mediaTypeStr);
+                    }
                 }
             }
         }
-
-
 
         ArticleStruct interface("Interface");
         QStringList lst = disk.split("_");
@@ -112,7 +113,6 @@ void DiskWidget::initWidget()
         {
             mediaTypeStr = " USB disk";
         }
-
         mediaType.value = mediaTypeStr;
         articles.push_back(mediaType);
 

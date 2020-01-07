@@ -74,8 +74,9 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
 
         tabList.push_back(tab);
     }
-
-    addTable(headers, tabList);
+    if(tabList.size() > 1){
+      addTable(headers, tabList);
+    }
 }
 
 void MemoryWidget::update_l_Designer_l_WholeDownWidget()

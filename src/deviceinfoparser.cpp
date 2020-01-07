@@ -39,7 +39,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/Kunpeng_Desktop_Board";
+const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deepin_uos_arm64_nvme_disk";
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/thinkpadE480";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -338,7 +339,7 @@ QStringList DeviceInfoParser::getLshwDisknameList()
     checkValueFun_t func = [](const QString& fk)->bool
     {
         int index = fk.lastIndexOf("disk");
-        if( index > 0 && fk.size() - index < 7 )    //avoid disk_volume:0
+        if((index > 0 && fk.size() - index < 7 )||fk.lastIndexOf("storage") > 0)    //avoid disk_volume:0
         {
 //            int index = fk.lastIndexOf("_");
 //            if(index > 0)

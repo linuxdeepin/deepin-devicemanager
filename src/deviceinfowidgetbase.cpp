@@ -587,30 +587,32 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
     }
 
     firstShow_ = false;
-    if(hasTable == false){
-        initDownWidget();
-    }
-    else {
-        if(htmlBrower_ == nullptr){
-            htmlBrower_ = new DeivceInfoBrower(this);
-            htmlBrower_->setFrameShape(QFrame::NoFrame);
-            htmlBrower_->setOpenExternalLinks(true);
+//    if(hasTable == false){
+//        initDownWidget();
+//    }
+//    else {
 
-            QHBoxLayout *htmlBroswerLayout = new QHBoxLayout;
-            htmlBroswerLayout->setContentsMargins(7,19,0,20);
-            htmlBroswerLayout->addWidget(htmlBrower_);
+//    }
 
-            auto bottomRoundFrame = new BottomRoundFrame;
-            bottomRoundFrame->setTextBroser(htmlBrower_);
-            bottomRoundFrame->setLayout(htmlBroswerLayout);
+    if(htmlBrower_ == nullptr){
+        htmlBrower_ = new DeivceInfoBrower(this);
+        htmlBrower_->setFrameShape(QFrame::NoFrame);
+        htmlBrower_->setOpenExternalLinks(true);
 
-            QVBoxLayout *layout = new QVBoxLayout;
-            layout->addWidget(bottomRoundFrame/*new QTextEdit*/);
-            layout->setMargin(1);
-            QWidget * widget = new QWidget;
-            widget->setLayout(layout);
-            vLayout_->addWidget(widget);
-        }
+        QHBoxLayout *htmlBroswerLayout = new QHBoxLayout;
+        htmlBroswerLayout->setContentsMargins(7,19,0,20);
+        htmlBroswerLayout->addWidget(htmlBrower_);
+
+        auto bottomRoundFrame = new BottomRoundFrame;
+        bottomRoundFrame->setTextBroser(htmlBrower_);
+        bottomRoundFrame->setLayout(htmlBroswerLayout);
+
+        QVBoxLayout *layout = new QVBoxLayout;
+        layout->addWidget(bottomRoundFrame/*new QTextEdit*/);
+        layout->setMargin(1);
+        QWidget * widget = new QWidget;
+        widget->setLayout(layout);
+        vLayout_->addWidget(widget);
     }
 
     int fontSize = DFontSizeManager::T7;

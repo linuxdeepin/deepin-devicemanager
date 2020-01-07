@@ -37,6 +37,8 @@ private:
     // QWidget interface
 protected:
     virtual void paintEvent(QPaintEvent *event) override;
+private:
+    int m_roundedRadius;
 };
 
 #endif // BOTTOMROUNDFRAME_H
