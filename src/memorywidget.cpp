@@ -320,7 +320,6 @@ void MemoryWidget::initTableWdiget_Good()
 
         tabList.push_back(tab);
     }
-
     addTable(headers, tabList);
 }
 

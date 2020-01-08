@@ -117,6 +117,7 @@ MainWindow::~MainWindow()
 void MainWindow::initLoadingWidget()
 {
     loadingWidget_ = new DWidget(this);
+    DFontSizeManager::instance()->bind( loadingWidget_, DFontSizeManager::T6);
 
 //    DPalette pa = DApplicationHelper::instance()->palette(this);
 //    QColor base_color = palette().base().color();
@@ -148,9 +149,9 @@ void MainWindow::initLoadingWidget()
     hly2->addStretch();
 
     loadLabel_ = new DLabel("Loading...", this);
-    QFont font = loadLabel_->font();
-    font.setPixelSize(14);
-    loadLabel_->setFont(font);
+//    QFont font = loadLabel_->font();
+//    font.setPixelSize(14);
+//    loadLabel_->setFont(font);
     hly2->addWidget(loadLabel_);
     hly2->addStretch();
 
