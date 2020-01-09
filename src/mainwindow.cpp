@@ -364,7 +364,7 @@ void MainWindow::refresh()
         return;
     }
 
-    leftDeviceView_->setAllItemsEnable(false);
+    leftDeviceView_->setEnabled(false);
 
     refreshing_ = true;
 
@@ -630,7 +630,7 @@ void MainWindow::showSplashMessage(const QString& message)
         }
 
         refreshing_ = false;
-        leftDeviceView_->setAllItemsEnable(true);
+        leftDeviceView_->setEnabled(true);
         return;
     }
 

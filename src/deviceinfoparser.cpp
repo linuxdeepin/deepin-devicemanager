@@ -39,8 +39,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deepin_uos_arm64_nvme_disk";
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/thinkpadE480";
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deepin_uos_arm64_nvme_disk";
+const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/Google_Eve";
 
 using PowerInter = com::deepin::daemon::Power;
 
