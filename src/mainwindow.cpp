@@ -79,21 +79,9 @@ MainWindow::MainWindow(QWidget *parent) :
         exit(-1);
     }
 
-    QSize normal(mainWindowMinWidth_, mainWindowMinHeight_);
-
-    QList<QScreen *> lst = QGuiApplication::screens();
-    if(lst.size() > 0)
-    {
-        QSize rect = lst.at(0)->size();
-        if( rect.width()*2/3 < normal.width() && rect.height()*2/3 < normal.height() )
-        {
-            normal.setWidth(rect.width()*2/3);
-            normal.setHeight(rect.height()*2/3);
-        }
-    }
-
     setMinimumSize(840, 360);
-    resize(normal);
+
+    loadSizeSettings();
 
     initLoadingWidget();
 
@@ -107,6 +95,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     statusBar()->setSizeGripEnabled(true);
     statusBar()->hide();
+
 }
 
 MainWindow::~MainWindow()
@@ -642,31 +631,59 @@ void MainWindow::showSplashMessage(const QString& message)
 
 void MainWindow::saveSettings()
 {
-    QSettings setting(qApp->organizationName(),qApp->applicationName());
-    setting.beginGroup("geometry");
-    setting.setValue("mainwidnow_geometry",this->geometry());
-    setting.endGroup();
+//    QSettings setting(qApp->organizationName(),qApp->applicationName());
+//    setting.beginGroup("geometry");
+//    setting.setValue("mainwidnow_geometry",this->geometry());
+//    setting.endGroup();
+
+    QSettings settings(qApp->organizationName(),qApp->applicationName());
+    settings.setValue("geometry", saveGeometry());
 }
 
 void MainWindow::loadSizeSettings()
 {
-    QSettings setting(qApp->organizationName(),qApp->applicationName());
-    setting.beginGroup("geometry");
-    if(setting.value("mainwidnow_geometry").canConvert<QRect>()){
-         QRect geometry = setting.value("mainwidnow_geometry").toRect();
-         int width = geometry.width();
-         int height = geometry.height();
-         int minW = this->minimumWidth();
-         int maxW = this->maximumWidth();
-         int minH = this->minimumHeight();
-         int maxH = this->maximumHeight();
-         if(width >= minW && width <= maxW){
-             if(height >= minH && height <= maxH){
-                 resize(width,height);
-             }
-         }
+//    QSettings setting(qApp->organizationName(),qApp->applicationName());
+//    setting.beginGroup("geometry");
+//    if(setting.value("mainwidnow_geometry").canConvert<QRect>()){
+//         QRect geometry = setting.value("mainwidnow_geometry").toRect();
+//         int width = geometry.width();
+//         int height = geometry.height();
+//         int minW = this->minimumWidth();
+//         int maxW = this->maximumWidth();
+//         int minH = this->minimumHeight();
+//         int maxH = this->maximumHeight();
+//         if(width >= minW && width <= maxW){
+//             if(height >= minH && height <= maxH){
+//                 resize(width,height);
+//             }
+//         }
+//    }
+//    setting.endGroup();
+
+    QSettings settings(qApp->organizationName(),qApp->applicationName());
+    const QByteArray geometry = settings.value("geometry").toByteArray();
+
+    if(false == geometry.isEmpty())
+    {
+        restoreGeometry(geometry);
     }
-    setting.endGroup();
+    else
+    {
+        QSize normal(mainWindowMinWidth_, mainWindowMinHeight_);
+
+        QList<QScreen *> lst = QGuiApplication::screens();
+        if(lst.size() > 0)
+        {
+            QSize rect = lst.at(0)->size();
+            if( rect.width()*2/3 < normal.width() && rect.height()*2/3 < normal.height() )
+            {
+                normal.setWidth(rect.width()*2/3);
+                normal.setHeight(rect.height()*2/3);
+            }
+        }
+        resize(normal);
+    }
+//    setMinimumSize(620, 465);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -676,8 +693,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::showEvent(QShowEvent *event)
 {
-    loadSizeSettings();
-    Dtk::Widget::moveToCenter(this);
     DMainWindow::showEvent(event);
 }
 
