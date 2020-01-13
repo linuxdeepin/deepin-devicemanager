@@ -69,11 +69,7 @@ protected:
     void keyPressEvent(QKeyEvent *keyEvent) override;
 
     void saveSettings();
-    void loadSizeSettings();
-
-    virtual void closeEvent(QCloseEvent *event) override;
-
-    virtual void showEvent(QShowEvent *event) override;
+    void loadSettings();
 private:
     DeviceListView* leftDeviceView_ = nullptr;
     Dtk::Widget::DStackedWidget* rightDeviceInfoWidget_ = nullptr;
@@ -88,4 +84,8 @@ private:
     Dtk::Widget::DWidget* loadingWidget_ = nullptr;
 
     bool refreshing_ = false;
+    QSize m_sizeForQSetting;
+    // QWidget interface
+protected:
+    virtual void resizeEvent(QResizeEvent *event) override;
 };

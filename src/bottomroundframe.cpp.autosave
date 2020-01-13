@@ -2,7 +2,6 @@
  * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
  *
  * Author:     Yaobin <yao.bin@archermind.com>
- *
  * Maintainer: Yaobin <yao.bin@archermind.com>
  *
  * This program is free software: you can redistribute it and/or modify

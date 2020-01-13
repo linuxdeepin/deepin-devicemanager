@@ -72,16 +72,15 @@ DWIDGET_USE_NAMESPACE
 QList<ArticleStruct> staticArticles;
 
 MainWindow::MainWindow(QWidget *parent) :
-    DMainWindow(parent)
+    DMainWindow(parent),
+    m_sizeForQSetting(mainWindowMinWidth_,mainWindowMinHeight_)
 {
     if(false == DeviceInfoParserInstance.getRootPassword())
     {
         exit(-1);
     }
-
-    setMinimumSize(840, 360);
-
-    loadSizeSettings();
+    setMinimumSize(mainWindowMinWidth_,mainWindowMinHeight_);
+    loadSettings();
 
     initLoadingWidget();
 
@@ -108,20 +107,6 @@ void MainWindow::initLoadingWidget()
     loadingWidget_ = new DWidget(this);
     DFontSizeManager::instance()->bind( loadingWidget_, DFontSizeManager::T6);
 
-//    DPalette pa = DApplicationHelper::instance()->palette(this);
-//    QColor base_color = palette().base().color();
-
-//    pa.setColor(QPalette::Background, base_color);
-//    //pa.setBrush(DPalette::ItemBackground, base_color);
-
-//    //setPalette(pa);
-
-//    DApplicationHelper::instance()->setPalette(loadingWidget_, pa);
-
-    //mainWidget->setAutoFillBackground(true);
-    //mainWidget_->setMinimumWidth(640);
-    //mainWidget_->setMinimumHeight(640);
-
     QVBoxLayout* vly = new QVBoxLayout;
     //vly->setMargin(0);
 
@@ -138,9 +123,7 @@ void MainWindow::initLoadingWidget()
     hly2->addStretch();
 
     loadLabel_ = new DLabel("Loading...", this);
-//    QFont font = loadLabel_->font();
-//    font.setPixelSize(14);
-//    loadLabel_->setFont(font);
+
     hly2->addWidget(loadLabel_);
     hly2->addStretch();
 
@@ -157,24 +140,14 @@ void MainWindow::initLoadingWidget()
 void MainWindow::loadDeviceWidget()
 {
     mainWidget_ = new DWidget(this);
-    //mainWidget->setAutoFillBackground(true);
-    //mainWidget_->setMaximumHeight(640);
     QHBoxLayout* ly = new QHBoxLayout;
-    //ly->setContentsMargins(10, 0, 10, 0);
     ly->setMargin(0);
     ly->setSpacing(0);
-    //ly->setSizeConstraint(QLayout::SetMinAndMaxSize);
-    //setFocus(Qt::FocusReason::NoFocusReason);
-
     DApplication::processEvents();
-
 
     leftDeviceView_ = new DeviceListView(mainWidget_);
 
-    //leftDeviceView_->setMaximumWidth(200);
     leftDeviceView_->setFixedWidth(leftDeviceListViewMinWidth_);
-    //leftDeviceView_->setMaximumWidth(leftDeviceListViewMinWidth_ + 30);
-    //leftDeviceView_->setSizePolicy(QSizePolicy::Minimum, QPolicy::Minimum);
 
     DApplication::processEvents();
 
@@ -184,20 +157,9 @@ void MainWindow::loadDeviceWidget()
 
     rightDeviceInfoWidget_ = new DStackedWidget(mainWidget_);
 
-
-    //auto flags = rightDeviceInfoWidget_->windowFlags();
-    //setAttribute(Qt::)
-
     DApplication::processEvents();
 
     addAllDeviceinfoWidget();
-
-//    connect(leftDeviceView_, &DeviceListView::pressed, [this](const QModelIndex& index)
-//                {
-//                    QString device = index.data().toString();
-//                    currentDeviceChanged(device);
-//            }
-//    );
 
     ly->addWidget(rightDeviceInfoWidget_, mainWindowMinWidth_ - leftDeviceListViewMinWidth_);
 
@@ -358,24 +320,6 @@ void MainWindow::refresh()
     refreshing_ = true;
 
     initLoadingWidget();
-
-//    loadingWidget_->setAutoFillBackground(true);
-
-//    auto modifyTheme = [this](){
-//        DPalette pa = DApplicationHelper::instance()->palette(this);
-//        QColor base_color = loadingWidget_->palette().base().color();
-
-//        pa.setColor(QPalette::Background, base_color);
-//        pa.setBrush(DPalette::ItemBackground, base_color);
-
-//        loadingWidget_->setPalette(pa);
-
-//        //DApplicationHelper::instance()->setPalette(this, pa);
-//    };
-
-//    modifyTheme();
-
-//    connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, modifyTheme);
 
     rightDeviceInfoWidget_->addWidget(loadingWidget_);
     rightDeviceInfoWidget_->setCurrentWidget(loadingWidget_);
@@ -631,69 +575,24 @@ void MainWindow::showSplashMessage(const QString& message)
 
 void MainWindow::saveSettings()
 {
-//    QSettings setting(qApp->organizationName(),qApp->applicationName());
-//    setting.beginGroup("geometry");
-//    setting.setValue("mainwidnow_geometry",this->geometry());
-//    setting.endGroup();
-
-    QSettings settings(qApp->organizationName(),qApp->applicationName());
-    settings.setValue("geometry", saveGeometry());
+    QSettings setting(qApp->organizationName(),qApp->applicationName());
+    setting.beginGroup("mainwindow");
+    setting.setValue("size",m_sizeForQSetting);
+    setting.endGroup();
 }
 
-void MainWindow::loadSizeSettings()
-{
-//    QSettings setting(qApp->organizationName(),qApp->applicationName());
-//    setting.beginGroup("geometry");
-//    if(setting.value("mainwidnow_geometry").canConvert<QRect>()){
-//         QRect geometry = setting.value("mainwidnow_geometry").toRect();
-//         int width = geometry.width();
-//         int height = geometry.height();
-//         int minW = this->minimumWidth();
-//         int maxW = this->maximumWidth();
-//         int minH = this->minimumHeight();
-//         int maxH = this->maximumHeight();
-//         if(width >= minW && width <= maxW){
-//             if(height >= minH && height <= maxH){
-//                 resize(width,height);
-//             }
-//         }
-//    }
-//    setting.endGroup();
-
-    QSettings settings(qApp->organizationName(),qApp->applicationName());
-    const QByteArray geometry = settings.value("geometry").toByteArray();
-
-    if(false == geometry.isEmpty())
-    {
-        restoreGeometry(geometry);
-    }
-    else
-    {
-        QSize normal(mainWindowMinWidth_, mainWindowMinHeight_);
-
-        QList<QScreen *> lst = QGuiApplication::screens();
-        if(lst.size() > 0)
-        {
-            QSize rect = lst.at(0)->size();
-            if( rect.width()*2/3 < normal.width() && rect.height()*2/3 < normal.height() )
-            {
-                normal.setWidth(rect.width()*2/3);
-                normal.setHeight(rect.height()*2/3);
-            }
+void MainWindow::loadSettings()
+{   
+    QSettings setting(qApp->organizationName(),qApp->applicationName());
+    QSize t_size;
+    setting.beginGroup("mainwindow");
+    if(setting.contains("size")){
+        t_size = setting.value("size").toSize();
+        if (t_size.isValid()){
+            this->resize(t_size);
         }
-        resize(normal);
     }
-//    setMinimumSize(620, 465);
-}
-
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-    DMainWindow::closeEvent(event);
-}
-
-void MainWindow::showEvent(QShowEvent *event)
-{
-    DMainWindow::showEvent(event);
+    setting.endGroup();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
@@ -744,3 +643,11 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
     return DMainWindow::keyPressEvent(e);
 }
 
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    if(this->windowState() == Qt::WindowState::WindowNoState)
+    {
+        m_sizeForQSetting = this->size();
+    }
+    DMainWindow::resizeEvent(event);
+}

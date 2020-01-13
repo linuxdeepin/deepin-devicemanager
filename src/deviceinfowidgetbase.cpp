@@ -315,7 +315,12 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
              a.appendChild(href);
              td2.appendChild(a);
 
-             valueText = doc.createTextNode(DeviceInfoParserInstance.getOsInfo());
+             QString osInfo = DeviceInfoParserInstance.getOsInfo();
+             if (m_dontShowDeepinInOsInfo) {
+                 osInfo.remove("deepin@",Qt::CaseInsensitive);
+                 osInfo.remove("deepin",Qt::CaseInsensitive);
+             }
+             valueText = doc.createTextNode(osInfo);
              td2.appendChild(valueText);
         }
 
@@ -369,7 +374,7 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
 //    return str;
 //}
 
-void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStruct> &articles, bool main)
+void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStruct> &articles, bool /*main*/)
 {
     if(titleInfo_ == nullptr)
     {
@@ -393,7 +398,7 @@ void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStru
     }
 }
 
-void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin )
+void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int /*margin*/ )
 {
     DeviceInfo di;
 
@@ -425,7 +430,6 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     if(tableWidget_ == nullptr)
     {
         tableWidget_ = new LogTreeView(this);
-        hasTable = true;
         DFontSizeManager::instance()->bind( tableWidget_, DFontSizeManager::T8);
 
         tableWidget_->setSortingEnabled(true);
@@ -587,12 +591,6 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
     }
 
     firstShow_ = false;
-//    if(hasTable == false){
-//        initDownWidget();
-//    }
-//    else {
-
-//    }
 
     if(htmlBrower_ == nullptr){
         htmlBrower_ = new DeivceInfoBrower(this);

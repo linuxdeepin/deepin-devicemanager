@@ -192,10 +192,6 @@ protected:
     static Dtk::Gui::DPalette defaultPa_;
 
     bool firstShow_ = true;
-    /*
-    *@author yaobin
-    *@date 2020-01-03
-    *是否显示table
-    */
-    bool hasTable = false;
+    //操作系统信息里面不显示deepin字符串
+    const static bool m_dontShowDeepinInOsInfo = true;
 };
