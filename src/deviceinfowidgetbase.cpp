@@ -86,7 +86,9 @@ void DeivceInfoBrower::contextMenuEvent(QContextMenuEvent *event)
                 {
                     QClipboard *clipboard = DApplication::clipboard(); //获取系统剪贴板指针
                     QTextDocumentFragment frag = textCursor().selection();
-                    clipboard->setText(frag.toPlainText());//设置剪贴板内容
+
+                    QString content = frag.toPlainText();
+                    clipboard->setText(content.trimmed()+"\n");//设置剪贴板内容
                 }
         );
 
