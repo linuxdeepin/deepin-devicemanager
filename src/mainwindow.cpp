@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         exit(-1);
     }
-    setMinimumSize(mainWindowMinWidth_,mainWindowMinHeight_);
+    setSizeLimits();
     loadSettings();
 
     initLoadingWidget();
@@ -650,4 +650,22 @@ void MainWindow::resizeEvent(QResizeEvent *event)
         m_sizeForQSetting = this->size();
     }
     DMainWindow::resizeEvent(event);
+}
+
+void MainWindow::setSizeLimits()
+{
+    QSize normal(mainWindowMinWidth_, mainWindowMinHeight_);
+
+    QList<QScreen *> lst = QGuiApplication::screens();
+    if(lst.size() > 0)
+    {
+        QSize rect = lst.at(0)->size();
+        if( rect.width()*2/3 < normal.width() && rect.height()*2/3 < normal.height() )
+        {
+            normal.setWidth(rect.width()*2/3);
+            normal.setHeight(rect.height()*2/3);
+        }
+    }
+    setMinimumSize(840, 360);
+    resize(normal);
 }

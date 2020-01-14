@@ -68,6 +68,9 @@ private:
 protected:
     void keyPressEvent(QKeyEvent *keyEvent) override;
 
+    void resizeEvent(QResizeEvent *event) override;
+
+    void setSizeLimits();
     void saveSettings();
     void loadSettings();
 private:
@@ -85,7 +88,4 @@ private:
 
     bool refreshing_ = false;
     QSize m_sizeForQSetting;
-    // QWidget interface
-protected:
-    virtual void resizeEvent(QResizeEvent *event) override;
 };
