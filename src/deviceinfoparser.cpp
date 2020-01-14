@@ -1217,7 +1217,16 @@ bool DeviceInfoParser::loadOSInfo()
 
 QString DeviceInfoParser::getOsInfo()
 {
-    return osInfo_;
+    //不能有“deepin”字符
+    const bool dontShowDeepin = true;
+    QString ret = osInfo_;
+    if (dontShowDeepin) {
+        if (ret.contains("deepin",Qt::CaseInsensitive)) {
+           ret.replace("deepin@uos","UOS",Qt::CaseInsensitive);
+           ret.replace("deepin","uos",Qt::CaseInsensitive);
+        }
+    }
+    return ret;
 }
 
 QString DeviceInfoParser::getLsbRelease()

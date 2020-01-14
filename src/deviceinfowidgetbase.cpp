@@ -316,10 +316,6 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
              td2.appendChild(a);
 
              QString osInfo = DeviceInfoParserInstance.getOsInfo();
-             if (m_dontShowDeepinInOsInfo) {
-                 osInfo.remove("deepin@",Qt::CaseInsensitive);
-                 osInfo.remove("deepin",Qt::CaseInsensitive);
-             }
              valueText = doc.createTextNode(osInfo);
              td2.appendChild(valueText);
         }

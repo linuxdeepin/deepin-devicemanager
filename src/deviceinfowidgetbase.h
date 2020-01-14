@@ -192,6 +192,4 @@ protected:
     static Dtk::Gui::DPalette defaultPa_;
 
     bool firstShow_ = true;
-    //操作系统信息里面不显示deepin字符串
-    const static bool m_dontShowDeepinInOsInfo = true;
 };
