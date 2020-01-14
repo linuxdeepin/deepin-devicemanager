@@ -597,7 +597,7 @@ void MainWindow::loadSettings()
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
-    if(  e->key()==Qt::Key_E )
+    if (e->key()==Qt::Key_E )
     {
         Qt::KeyboardModifiers modifiers = e->modifiers();
         if (modifiers != Qt::NoModifier)
@@ -609,12 +609,12 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
             }
         }
     }
-    if(  e->key()==Qt::Key_F5 )
+    if (e->key()==Qt::Key_F5 )
     {
         refresh();
         return;
     }
-    else if(e->key()==Qt::Key_Question)
+    if(e->key()==Qt::Key_Question)
     {
         Qt::KeyboardModifiers modifiers = e->modifiers();
         if (modifiers != Qt::NoModifier)
@@ -626,7 +626,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
             }
         }
     }
-    else if(e->key()==Qt::Key_F)
+    if(e->key()==Qt::Key_F)
     {
         Qt::KeyboardModifiers modifiers = e->modifiers();
         if (modifiers != Qt::NoModifier)
@@ -638,8 +638,6 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
             }
         }
     }
-
-
     return DMainWindow::keyPressEvent(e);
 }
 

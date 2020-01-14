@@ -64,8 +64,11 @@ class DeviceInfoWidgetBase;
 
 class DeivceInfoBrower: public Dtk::Widget::DTextBrowser
 {
+    Q_OBJECT
 public:
-    DeivceInfoBrower(DeviceInfoWidgetBase* parent = nullptr);
+    explicit DeivceInfoBrower(DeviceInfoWidgetBase* parent = nullptr);
+public slots:
+    void fillClipboard();
 protected:
     void contextMenuEvent(QContextMenuEvent *event) override;
 
@@ -79,6 +82,12 @@ protected:
     *绘制底部两个圆角
     */
     virtual void paintEvent(QPaintEvent *event) override;
+    /*
+    *@author yaobin
+    *@date 2020-01-14
+    *重写ctrl + c 事件
+    */
+    virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
 

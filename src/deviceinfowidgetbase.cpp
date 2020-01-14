@@ -72,33 +72,33 @@ DeivceInfoBrower::DeivceInfoBrower( DeviceInfoWidgetBase* parent ): DTextBrowser
 
 }
 
+void DeivceInfoBrower::fillClipboard()
+{
+    QString str = QTextEdit::textCursor().selectedText();
+    if(str.isEmpty()){
+        return;
+    }
+    QClipboard *clipboard = DApplication::clipboard();
+    QTextDocumentFragment frag = textCursor().selection();
+    clipboard->setText(frag.toPlainText().trimmed()+"\n");
+}
+
 void DeivceInfoBrower::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu* standMenu = new QMenu(this);
-    //QMenu* standMenu = createStandardContextMenu();
 
     QString str = QTextEdit::textCursor().selectedText();
-    //if(str.isEmpty() == false)
+
+    QAction* copyAction = new QAction(QIcon::fromTheme("edit-copy"), DApplication::translate("Main", "Copy(C)"), this);
+    if(str.isEmpty())
     {
-        QAction* copyAction = new QAction(QIcon::fromTheme("edit-copy"), DApplication::translate("Main", "Copy(C)"), this);
-        connect(copyAction, &QAction::triggered, \
-                [this]()
-                {
-                    QClipboard *clipboard = DApplication::clipboard(); //获取系统剪贴板指针
-                    QTextDocumentFragment frag = textCursor().selection();
-
-                    QString content = frag.toPlainText();
-                    clipboard->setText(content.trimmed()+"\n");//设置剪贴板内容
-                }
-        );
-
-        if(str.isEmpty())
-        {
-            copyAction->setDisabled(true);
-        }
-        standMenu->addAction(copyAction);
-        standMenu->addSeparator();
+        copyAction->setDisabled(true);
     }
+    else {
+        connect(copyAction, &QAction::triggered,this,&DeivceInfoBrower::fillClipboard);
+    }
+    standMenu->addAction(copyAction);
+    standMenu->addSeparator();
 
     standMenu->addAction(deviceInfoWidget_->refreshAction_);
     standMenu->addAction(deviceInfoWidget_->exportAction_);
@@ -106,6 +106,64 @@ void DeivceInfoBrower::contextMenuEvent(QContextMenuEvent *event)
     standMenu->exec(event->globalPos());
 
     delete standMenu;
+}
+
+void DeivceInfoBrower::paintEvent(QPaintEvent *event)
+{
+//    QPainter painter(viewport());
+//    painter.save();
+//    painter.setRenderHints(QPainter::Antialiasing);
+//    painter.setOpacity(1);
+//    painter.setClipping(true);
+
+//    QWidget *wnd = DApplication::activeWindow();
+//    DPalette::ColorGroup cg;
+//    if (!wnd) {
+//        cg = DPalette::Inactive;
+//    } else {
+//        cg = DPalette::Active;
+//    }
+
+//    //    auto style = dynamic_cast<DStyle *>(DApplication::style());
+//    auto *dAppHelper = DApplicationHelper::instance();
+//    auto palette = dAppHelper->applicationPalette();
+
+//    QBrush bgBrush(palette.color(cg, DPalette::Background));
+
+//    QStyleOptionFrame option;
+//    initStyleOption(&option);
+
+//    QRect rect = viewport()->rect();
+//    QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
+//    QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
+//    QPainterPath clipPath, subPath;
+
+//    clipPath.addRoundedRect(clipRect, 8, 8);
+//    subPath.addRect(subRect);
+//    clipPath = clipPath.subtracted(subPath);
+//    clipPath.addRect(rect);
+
+//    painter.fillPath(clipPath, bgBrush);
+
+//    painter.restore();
+    return Dtk::Widget::DTextBrowser::paintEvent(event);
+}
+
+void DeivceInfoBrower::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key()==Qt::Key_C)
+    {
+        Qt::KeyboardModifiers modifiers = event->modifiers();
+        if (modifiers != Qt::NoModifier)
+        {
+            if ( modifiers.testFlag(Qt::ControlModifier))
+            {
+                fillClipboard();
+                return;
+            }
+        }
+    }
+    Dtk::Widget::DTextBrowser::keyPressEvent(event);
 }
 
 DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& deviceName) : DWidget(parent_)
@@ -1092,46 +1150,4 @@ bool DeviceInfoWidgetBase::exportToHtml(const QString& htmlFile)
     exportToHtml(html);
     html.close();
     return true;
-}
-
-
-void DeivceInfoBrower::paintEvent(QPaintEvent *event)
-{
-//    QPainter painter(viewport());
-//    painter.save();
-//    painter.setRenderHints(QPainter::Antialiasing);
-//    painter.setOpacity(1);
-//    painter.setClipping(true);
-
-//    QWidget *wnd = DApplication::activeWindow();
-//    DPalette::ColorGroup cg;
-//    if (!wnd) {
-//        cg = DPalette::Inactive;
-//    } else {
-//        cg = DPalette::Active;
-//    }
-
-//    //    auto style = dynamic_cast<DStyle *>(DApplication::style());
-//    auto *dAppHelper = DApplicationHelper::instance();
-//    auto palette = dAppHelper->applicationPalette();
-
-//    QBrush bgBrush(palette.color(cg, DPalette::Background));
-
-//    QStyleOptionFrame option;
-//    initStyleOption(&option);
-
-//    QRect rect = viewport()->rect();
-//    QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
-//    QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
-//    QPainterPath clipPath, subPath;
-
-//    clipPath.addRoundedRect(clipRect, 8, 8);
-//    subPath.addRect(subRect);
-//    clipPath = clipPath.subtracted(subPath);
-//    clipPath.addRect(rect);
-
-//    painter.fillPath(clipPath, bgBrush);
-
-//    painter.restore();
-    Dtk::Widget::DTextBrowser::paintEvent(event);
 }
