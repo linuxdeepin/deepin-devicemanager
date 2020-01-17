@@ -9,4 +9,3 @@ Package: deepin-devicemanager
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, smartmontools, dmidecode[i386 arm64 amd64], x11-xserver-utils, hwinfo, cups, upower, deepin-shortcut-viewer, lshw
 Description: Device Manager is a handy tool for viewing hardware information and managing the devices.
- Press F1 for Help. Press Ctrl+Shift+/ For Keyboard ShortCuts. Support device info Export to Txt/Doc/Xls/Html.
