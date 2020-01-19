@@ -36,8 +36,8 @@ AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(par
 void AudiodeviceWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Audio Device")  + DApplication::translate("Main", " Info"));
-    QStringList multimediaList = DeviceInfoParserInstance.getLshwMultimediaList();
-    QStringList inputdeviceList = DeviceInfoParserInstance.getCatinputAudioDeviceList();
+    QStringList multimediaList = DeviceInfoParser::Instance().getLshwMultimediaList();
+    QStringList inputdeviceList = DeviceInfoParser::Instance().getCatinputAudioDeviceList();
 
     if( multimediaList.size() + inputdeviceList.size() < 1 )
     {
@@ -69,7 +69,7 @@ void AudiodeviceWidget::initWidget()
         }
 
         QString lspciDeviceName;
-        DeviceInfoParserInstance.fuzzeyQueryKey("lspci", pci_bus, lspciDeviceName);
+        DeviceInfoParser::Instance().fuzzeyQueryKey("lspci", pci_bus, lspciDeviceName);
 
         ArticleStruct name("Name");
         name.queryData("lspci", lspciDeviceName, "Name");
@@ -115,7 +115,7 @@ void AudiodeviceWidget::initWidget()
         ArticleStruct capabilities("Capabilities");
         capabilities.queryData( "lshw", multimedia, "capabilities", existArticles, articles);
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles);
         addDevice( name.value , articles, multimediaList.size() + inputdeviceList.size() );
 
         if( multimediaList.size() + inputdeviceList.size() > 1 )
@@ -164,7 +164,7 @@ void AudiodeviceWidget::initWidget()
         sysfs.queryData( "catinput", device, "Sysfs", existArticles, articles);
 
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("catinput", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles);
         addSubInfo( name.value , articles );
 
         if( multimediaList.size() + inputdeviceList.size() > 1 )

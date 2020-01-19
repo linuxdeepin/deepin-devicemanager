@@ -71,8 +71,8 @@ void MonitorWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    QStringList hwinfMonitorList = DeviceInfoParserInstance.getHwinfoMonitorList();
-    QStringList xrandrMonitorList = DeviceInfoParserInstance.getXrandrMonitorList();
+    QStringList hwinfMonitorList = DeviceInfoParser::Instance().getHwinfoMonitorList();
+    QStringList xrandrMonitorList = DeviceInfoParser::Instance().getXrandrMonitorList();
 
     int maxSize = std::max(hwinfMonitorList.size(), xrandrMonitorList.size());
 
@@ -126,7 +126,7 @@ void MonitorWidget::initWidget()
             articles.push_back(serial);
             existArticles.insert("Serial ID");
 
-            QString size = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Size");
+            QString size = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Size");
 
             monitorSize.value = parseMonitorSize(size, inch);
 
@@ -139,7 +139,7 @@ void MonitorWidget::initWidget()
             {
                 mDate.value = mDate.value + DApplication::translate("Main", "Year");
 
-                QString mw = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
+                QString mw = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Week of Manufacture");
                 if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
                 {
                     mDate.value += " ";
@@ -152,7 +152,7 @@ void MonitorWidget::initWidget()
                 existArticles.insert("Week of Manufacture");
             }
 
-//            QString mw = DeviceInfoParserInstance.queryData("hwinfo", monitor, "Week of Manufacture");
+//            QString mw = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Week of Manufacture");
 //            if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
 //            {
 //                mDate.value += " ";

@@ -33,7 +33,7 @@ OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(p
 
 void OtherDevicesWidget::initWidget()
 {
-    QStringList otherDeviceList = DeviceInfoParserInstance.getLshwOtherDeviceList();
+    QStringList otherDeviceList = DeviceInfoParser::Instance().getLshwOtherDeviceList();
 
     if( otherDeviceList.size() < 1 )
     {
@@ -100,7 +100,7 @@ void OtherDevicesWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
         QString titleValue = name.value;
         if( name.isValid() == false || name.value == vendor.value )

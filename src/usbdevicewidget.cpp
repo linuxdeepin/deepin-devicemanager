@@ -33,7 +33,7 @@ UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
 
 void UsbdeviceWidget::initWidget()
 {
-    QStringList usbdeviceList = DeviceInfoParserInstance.getLshwOtherUsbdeviceList();
+    QStringList usbdeviceList = DeviceInfoParser::Instance().getLshwOtherUsbdeviceList();
 
     if( usbdeviceList.size() < 1)
     {
@@ -100,7 +100,7 @@ void UsbdeviceWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
         QString title = name.isValid()? name.value: description.value;
         addDevice( title, articles, usbdeviceList.size() );

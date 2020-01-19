@@ -40,7 +40,7 @@
 DWIDGET_USE_NAMESPACE
 
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deepin_uos_arm64_nvme_disk";
-const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/Google_Eve";
+const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_bug_12495";
 
 using PowerInter = com::deepin::daemon::Power;
 
@@ -76,7 +76,7 @@ void DeviceInfoParser::refreshDabase()
     loadCatosrelelease();
     loadlsb_release();
     loadOSInfo();
-    //DeviceInfoParserInstance.getOSInfo(osInfo);
+    //DeviceInfoParser::Instance().getOSInfo(osInfo);
 
     emit loadFinished("Loading SMBBios Info...");
     loadDemicodeDatabase();
@@ -91,7 +91,7 @@ void DeviceInfoParser::refreshDabase()
     emit loadFinished("Loading CPU Info...");
     loadCatcpuDatabase();
     loadLscpuDatabase();
-    //DeviceInfoParserInstance.loadSmartctlDatabase();
+    //DeviceInfoParser::Instance().loadSmartctlDatabase();
 
     emit loadFinished("Loading Input Devices Info...");
     loadCatInputDatabase();
@@ -299,7 +299,7 @@ QStringList DeviceInfoParser::getDimdecodePhysicMemory()
     {
         if(fk == "Physical Memory Array" || fk.startsWith("Physical Memory Array_"))
         {
-            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
 
@@ -315,7 +315,7 @@ QStringList DeviceInfoParser::getDimdecodeMemoryList()
     {
         if(fk == "Memory Device" || fk.contains("Memory Device_"))
         {
-            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
 
@@ -344,9 +344,9 @@ QStringList DeviceInfoParser::getLshwDisknameList()
 //            int index = fk.lastIndexOf("_");
 //            if(index > 0)
 //            {
-//                DeviceInfoParserInstance.orderedDevices.insert(fk.left(index));
+//                DeviceInfoParser::Instance().orderedDevices.insert(fk.left(index));
 //            }
-            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
 
@@ -365,7 +365,7 @@ QStringList DeviceInfoParser::getLshwDiaplayadapterList()
     {
         if(fk.contains("display", Qt::CaseInsensitive))
         {
-            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
 
@@ -442,13 +442,18 @@ QStringList DeviceInfoParser::getXrandrMonitorList()
     return getMatchToolDeviceList("xrandr", &func);
 }
 
+QString DeviceInfoParser::getEDID()
+{
+
+}
+
 QStringList DeviceInfoParser::getLshwMultimediaList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
         if( fk.contains("multimedia") )
         {
-            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
 
@@ -463,9 +468,9 @@ QStringList DeviceInfoParser::getCatinputAudioDeviceList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
-        if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Sysfs") )
+        if( DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("Sysfs") )
         {
-            QString sysfs = DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Sysfs"];
+            QString sysfs = DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Sysfs"];
             if( sysfs.contains("/sound/", Qt::CaseInsensitive) )
             {
                 return true;
@@ -489,7 +494,7 @@ QStringList DeviceInfoParser::getLshwNetworkadapterList()
     {
         if( fk.contains("network") )
         {
-            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
 
@@ -503,25 +508,25 @@ QStringList DeviceInfoParser::getLshwBluetoothList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
-        if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("description") == false )
+        if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("description") == false )
         {
             return false;
         }
 
-        if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["description"].contains("Bluetooth", Qt::CaseInsensitive) )
+        if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("Bluetooth", Qt::CaseInsensitive) )
         {
-            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
 
-        if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("driver") == false )
+        if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("driver") == false )
         {
             return false;
         }
 
-        if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) )
+        if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) )
         {
-            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
 
@@ -540,9 +545,9 @@ QStringList DeviceInfoParser::getOtherBluetoothctlPairedAndConnectedDevicesList(
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
-        if( DeviceInfoParserInstance.toolDatabase_["paired-devices"][fk].contains("Connected") )
+        if( DeviceInfoParser::Instance().toolDatabase_["paired-devices"][fk].contains("Connected") )
         {
-            if(DeviceInfoParserInstance.toolDatabase_["paired-devices"][fk]["Connected"].compare("Yes", Qt::CaseInsensitive) == 0)
+            if(DeviceInfoParser::Instance().toolDatabase_["paired-devices"][fk]["Connected"].compare("Yes", Qt::CaseInsensitive) == 0)
             {
                 return true;
             }
@@ -550,7 +555,7 @@ QStringList DeviceInfoParser::getOtherBluetoothctlPairedAndConnectedDevicesList(
             return false;
         }
 
-        if( DeviceInfoParserInstance.orderedDevices.contains(fk) == false )
+        if( DeviceInfoParser::Instance().orderedDevices.contains(fk) == false )
         {
             return true;
         }
@@ -565,32 +570,32 @@ QStringList DeviceInfoParser::getLshwCameraList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
-        if(true == DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("description"))
+        if(true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("description"))
         {
-            if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["description"] == "Video" )
+            if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"] == "Video" )
             {
-                DeviceInfoParserInstance.orderedDevices.insert(fk);
+                DeviceInfoParser::Instance().orderedDevices.insert(fk);
                 return true;
             }
         }
 
-        if(true == DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("product"))
+        if(true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("product"))
         {
-            if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["product"].contains("Camera", Qt::CaseInsensitive) )
+            if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("Camera", Qt::CaseInsensitive) )
             {
-                DeviceInfoParserInstance.orderedDevices.insert(fk);
+                DeviceInfoParser::Instance().orderedDevices.insert(fk);
                 return true;
             }
         }
 
-        if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("driver") == false )
+        if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("driver") == false )
         {
             return false;
         }
 
-        if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["driver"].contains("uvcvideo", Qt::CaseInsensitive) )
+        if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["driver"].contains("uvcvideo", Qt::CaseInsensitive) )
         {
-            DeviceInfoParserInstance.orderedDevices.insert(fk);
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
 
@@ -612,49 +617,49 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
 
         if( fk.contains("usb", Qt::CaseInsensitive) )
         {
-            if(true == DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("description"))
+            if(true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("description"))
             {
-                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["description"].contains("USB controller", Qt::CaseInsensitive) )
+                if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("USB controller", Qt::CaseInsensitive) )
                 {
                     return false;
                 }
 
-                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["description"].contains("Host Controller", Qt::CaseInsensitive) )
+                if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("Host Controller", Qt::CaseInsensitive) )
                 {
                     return false;
                 }
 
-                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["description"].contains("USB hub", Qt::CaseInsensitive) )
+                if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("USB hub", Qt::CaseInsensitive) )
                 {
                     return false;
                 }
-                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["description"].contains("Keyboard", Qt::CaseInsensitive) )
+                if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("Keyboard", Qt::CaseInsensitive) )
                 {
                     return false;
                 }
             }
 
-            if(true == DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("product"))
+            if(true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("product"))
             {
-                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["product"].contains("USB controller", Qt::CaseInsensitive) )
+                if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("USB controller", Qt::CaseInsensitive) )
                 {
                     return false;
                 }
 
-                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["product"].contains("Host Controller", Qt::CaseInsensitive) )
+                if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("Host Controller", Qt::CaseInsensitive) )
                 {
                     return false;
                 }
 
-                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["product"].contains("USB hub", Qt::CaseInsensitive) )
+                if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("USB hub", Qt::CaseInsensitive) )
                 {
                     return false;
                 }
             }
 
-            if( DeviceInfoParserInstance.orderedDevices.contains(fk) == false )
+            if( DeviceInfoParser::Instance().orderedDevices.contains(fk) == false )
             {
-                DeviceInfoParserInstance.orderedDevices.insert(fk);
+                DeviceInfoParser::Instance().orderedDevices.insert(fk);
                 return true;
             }
         }
@@ -676,13 +681,13 @@ QStringList DeviceInfoParser::getLshwUsbKeyboardDeviceList()
         }
         if( fk.contains("usb", Qt::CaseInsensitive) )
         {
-            if(true == DeviceInfoParserInstance.toolDatabase_["lshw"][fk].contains("description"))
+            if(true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("description"))
             {
-                if( DeviceInfoParserInstance.toolDatabase_["lshw"][fk]["description"].contains("Keyboard", Qt::CaseInsensitive) )
+                if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("Keyboard", Qt::CaseInsensitive) )
                 {
-                    if( DeviceInfoParserInstance.orderedDevices.contains(fk) == false )
+                    if( DeviceInfoParser::Instance().orderedDevices.contains(fk) == false )
                     {
-                        DeviceInfoParserInstance.orderedDevices.insert(fk);
+                        DeviceInfoParser::Instance().orderedDevices.insert(fk);
                         return true;
                     }
                 }
@@ -698,20 +703,20 @@ QStringList DeviceInfoParser::getInputdeviceMouseList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
-        if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Name") )
+        if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("Name") )
         {
-            if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("mouse", Qt::CaseInsensitive) || \
-                true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("mice", Qt::CaseInsensitive) || \
-                true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("TouchPad", Qt::CaseInsensitive) ||\
-                true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("TrackPoint", Qt::CaseInsensitive))
+            if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("mouse", Qt::CaseInsensitive) || \
+                true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("mice", Qt::CaseInsensitive) || \
+                true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("TouchPad", Qt::CaseInsensitive) ||\
+                true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("TrackPoint", Qt::CaseInsensitive))
             {
                 return true;
             }
         }
 
-//        if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Handlers") )
+//        if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("Handlers") )
 //        {
-//            if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Handlers"].contains("mouse", Qt::CaseInsensitive) )
+//            if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Handlers"].contains("mouse", Qt::CaseInsensitive) )
 //            {
 //                return true;
 //            }
@@ -772,32 +777,32 @@ QStringList DeviceInfoParser::getInputdeviceKeyboardList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
-        if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Name") )
+        if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("Name") )
         {
-            QString t = DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"];
-            if(     DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("System Control", Qt::CaseInsensitive) \
-                 || DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("Consumer Control", Qt::CaseInsensitive)  )
+            QString t = DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"];
+            if(     DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("System Control", Qt::CaseInsensitive) \
+                 || DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("Consumer Control", Qt::CaseInsensitive)  )
             {
                 return false;
             }
 
-            if( DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Name"].contains("Keyboard", Qt::CaseInsensitive) )
+            if( DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("Keyboard", Qt::CaseInsensitive) )
             {
                 return true;
             }
         }
 
-//        if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("EV") )
+//        if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("EV") )
 //        {
-//            if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["EV"].contains("120013", Qt::CaseInsensitive) )
+//            if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["EV"].contains("120013", Qt::CaseInsensitive) )
 //            {
 //                return true;
 //            }
 //        }
 
-//        if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk].contains("Handlers") )
+//        if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("Handlers") )
 //        {
-//            if( true == DeviceInfoParserInstance.toolDatabase_["catinput"][fk]["Handlers"].contains("kbd", Qt::CaseInsensitive) )
+//            if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Handlers"].contains("kbd", Qt::CaseInsensitive) )
 //            {
 //                return true;
 //            }
@@ -1753,9 +1758,9 @@ bool DeviceInfoParser::loadLshwDatabase()
     secondOrder.removeDuplicates();
     toolDatabaseSecondOrder_["lshw"] = secondOrder;
 
-    //QString logicalName = DeviceInfoParserInstance.queryData("lshw", disk, "logical name");
+    //QString logicalName = DeviceInfoParser::Instance().queryData("lshw", disk, "logical name");
 
-    //DeviceInfoParserInstance.loadSmartctlDatabase(logicalName);
+    //DeviceInfoParser::Instance().loadSmartctlDatabase(logicalName);
 
     return true;
 }
@@ -1877,12 +1882,12 @@ bool DeviceInfoParser::loadCatcpuDatabase()
 
 bool DeviceInfoParser::loadAllSmartctlDatabase()
 {
-    QStringList diskList = DeviceInfoParserInstance.getLshwDisknameList();
+    QStringList diskList = DeviceInfoParser::Instance().getLshwDisknameList();
 
     foreach(const QString& disk, diskList)
     {
-        QString logicalName = DeviceInfoParserInstance.queryData("lshw", disk, "logical name");
-        DeviceInfoParserInstance.loadSmartctlDatabase(logicalName);
+        QString logicalName = DeviceInfoParser::Instance().queryData("lshw", disk, "logical name");
+        DeviceInfoParser::Instance().loadSmartctlDatabase(logicalName);
     }
 
     return true;
@@ -2662,12 +2667,12 @@ bool DeviceInfoParser::loadHciconfigDatabase()
 
 bool DeviceInfoParser::loadAllBluetoothctlControllerDatabase()
 {
-    QStringList bList = DeviceInfoParserInstance.getHciconfigBluetoothControllerList();
+    QStringList bList = DeviceInfoParser::Instance().getHciconfigBluetoothControllerList();
 
     foreach(const QString& b, bList)
     {
-        QString controller = DeviceInfoParserInstance.queryData("hciconfig", b, "BD Address");
-        DeviceInfoParserInstance.loadBluetoothctlDatabase(controller);
+        QString controller = DeviceInfoParser::Instance().queryData("hciconfig", b, "BD Address");
+        DeviceInfoParser::Instance().loadBluetoothctlDatabase(controller);
     }
 
     return true;
@@ -2810,17 +2815,17 @@ QStringList DeviceInfoParser::getAllBluetoothctlPairedDevices()
 
 bool DeviceInfoParser::loadAllBluethctlPairedDeviceDatabase()
 {
-    QStringList bList = DeviceInfoParserInstance.getHciconfigBluetoothControllerList();
+    QStringList bList = DeviceInfoParser::Instance().getHciconfigBluetoothControllerList();
     if(bList.size() < 1)
     {
         return true;
     }
 
-    QStringList pairedDevices = DeviceInfoParserInstance.getAllBluetoothctlPairedDevices();
+    QStringList pairedDevices = DeviceInfoParser::Instance().getAllBluetoothctlPairedDevices();
 
     foreach(const QString& mac, pairedDevices)
     {
-        DeviceInfoParserInstance.loadBluetoothctlPairedDeviceDatabase(mac);
+        DeviceInfoParser::Instance().loadBluetoothctlPairedDeviceDatabase(mac);
     }
 
     return true;

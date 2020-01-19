@@ -90,15 +90,15 @@ CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplicatio
 
 void CpuWidget::initWidget()
 { 
-    QStringList cpuList = DeviceInfoParserInstance.getCatcpuCpuList();
+    QStringList cpuList = DeviceInfoParser::Instance().getCatcpuCpuList();
 
-    QString architecture =  DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Architecture");
+    QString architecture =  DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Architecture");
 
-    overviewInfo_.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Model name");
+    overviewInfo_.value = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Model name");
     overviewInfo_.value.remove(" CPU", Qt::CaseInsensitive);
 
-    QString maxSpeed = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU max MHz");
-    QString minSpeed = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU min MHz");
+    QString maxSpeed = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "CPU max MHz");
+    QString minSpeed = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "CPU min MHz");
 
     double maxMHz = maxSpeed.remove(",").toDouble()/1000.0;
 
@@ -137,12 +137,12 @@ void CpuWidget::initWidget()
 
         foreach(const QString& cpu, cpuList)
         {
-            QString md = DeviceInfoParserInstance.queryData("catcpu", cpu, "model name");
+            QString md = DeviceInfoParser::Instance().queryData("catcpu", cpu, "model name");
 
-            QString mc = DeviceInfoParserInstance.queryData("catcpu", cpu, "vendor_id");
+            QString mc = DeviceInfoParser::Instance().queryData("catcpu", cpu, "vendor_id");
             if(mc.isEmpty() || mc == DApplication::translate("Main", "Unknown"))
             {
-                mc = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Vendor ID");
+                mc = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Vendor ID");
             }
 
             if(mc == DApplication::translate("Main", "Unknown"))
@@ -163,11 +163,11 @@ void CpuWidget::initWidget()
         addTable(headers, tabList);
     }
 
-    int sockets = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Socket(s)").toInt();
-    int cores = /*cpuList.size()*/DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Core(s) per socket").toInt();
-    int logicalCpus = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "CPU(s)").toInt();
+    int sockets = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Socket(s)").toInt();
+    int cores = /*cpuList.size()*/DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Core(s) per socket").toInt();
+    int logicalCpus = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "CPU(s)").toInt();
 
-    int threadsPerCore = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "Thread(s) per core").toInt();
+    int threadsPerCore = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Thread(s) per core").toInt();
     QString corePlus = " x " + QString::number(cores);
 
     overviewInfo_.value += " (";
@@ -272,15 +272,15 @@ void CpuWidget::initWidget()
     articles.push_back(tamount);
 
     ArticleStruct l1dCache("L1d Cache");
-    l1dCache.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L1d cache") + corePlus;
+    l1dCache.value = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "L1d cache") + corePlus;
     articles.push_back(l1dCache);
 
     ArticleStruct l1iCache("L1i Cache");
-    l1iCache.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L1i cache") + corePlus;
+    l1iCache.value = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "L1i cache") + corePlus;
     articles.push_back(l1iCache);
 
     ArticleStruct l2Cache("L2 Cache");
-    l2Cache.value = DeviceInfoParserInstance.queryData("lscpu", "lscpu", "L2 cache") + corePlus;
+    l2Cache.value = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "L2 cache") + corePlus;
     articles.push_back(l2Cache);
 
     ArticleStruct l3Cache("L3 Cache");
@@ -384,7 +384,7 @@ void CpuWidget::addPrecessor(const QString& precessor)
     virtualization.queryData( "lscpu", "lscpu", "Virtualization" );
     articles.push_back(virtualization);
 
-    DeviceInfoParserInstance.queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles);
+    DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles);
 
     addSubInfo( DApplication::translate("CPU", "Processor") + " " +  precessor, articles);
     articles.clear();

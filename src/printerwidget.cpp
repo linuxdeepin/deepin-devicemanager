@@ -34,9 +34,9 @@ PrinterWidget::PrinterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DAp
 void PrinterWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
-    //QStringList printerList = DeviceInfoParserInstance.getCupsPrinterList();
+    //QStringList printerList = DeviceInfoParser::Instance().getCupsPrinterList();
 
-    QStringList lshwPrinterList = DeviceInfoParserInstance.getLshwPrinterList();
+    QStringList lshwPrinterList = DeviceInfoParser::Instance().getLshwPrinterList();
 
     if( lshwPrinterList.size() < 1)
     {
@@ -63,7 +63,7 @@ void PrinterWidget::initWidget()
 //        articles.push_back(printerMakeAndModel);
 //        existArticles.insert("printer-make-and-model");
 
-//        DeviceInfoParserInstance.queryRemainderDeviceInfo( "Cups", device, articles, existArticles);
+//        DeviceInfoParser::Instance().queryRemainderDeviceInfo( "Cups", device, articles, existArticles);
 
 //        addDevice( device, articles, printerList.size() );
 
@@ -135,7 +135,7 @@ void PrinterWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
         addDevice( device, articles, lshwPrinterList.size() );
 

@@ -75,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent),
     m_sizeForQSetting(mainWindowMinWidth_,mainWindowMinHeight_)
 {
-    if(false == DeviceInfoParserInstance.getRootPassword())
+    if(false == DeviceInfoParser::Instance().getRootPassword())
     {
         exit(-1);
     }
@@ -86,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setCentralWidget(loadingWidget_);
 
-    connect( &DeviceInfoParserInstance, &DeviceInfoParser::loadFinished, this, &MainWindow::showSplashMessage);
+    connect( &DeviceInfoParser::Instance(), &DeviceInfoParser::loadFinished, this, &MainWindow::showSplashMessage);
 
     refreshDatabase();
 
@@ -310,7 +310,7 @@ void MainWindow::refresh()
         return;
     }
 
-    if(false == DeviceInfoParserInstance.getRootPassword())
+    if(false == DeviceInfoParser::Instance().getRootPassword())
     {
         return;
     }
@@ -334,7 +334,7 @@ void MainWindow::refreshDatabase()
     std::thread thread(
             []()
             {
-                DeviceInfoParserInstance.refreshDabase();
+                DeviceInfoParser::Instance().refreshDabase();
             }
     );
 

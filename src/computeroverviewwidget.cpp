@@ -105,9 +105,9 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
     articles.push_back(model);
 
     ArticleStruct os("Operating System");
-    os.value = DeviceInfoParserInstance.getLsbRelease() + " " + DeviceInfoParserInstance.getOsInfo();
+    os.value = DeviceInfoParser::Instance().getLsbRelease() + " " + DeviceInfoParser::Instance().getOsInfo();
 
-    if( DeviceInfoParserInstance.getHomeUrl().isEmpty() == false)
+    if( DeviceInfoParser::Instance().getHomeUrl().isEmpty() == false)
     {
         os.externalLinks = true;
     }

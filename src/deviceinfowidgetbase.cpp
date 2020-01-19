@@ -284,6 +284,12 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
         titleInfo_ = new DeviceInfo;
     }
 
+    if(tableWidget_ != nullptr)
+    {
+        delete tableWidget_;
+        tableWidget_ = nullptr;
+    }
+
     if(downFrame_)
     {
         delete downFrame_;
@@ -370,12 +376,12 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
              td2.appendChild(style);
 
              QDomElement a = doc.createElement("a");
-             a.setAttribute("href", DeviceInfoParserInstance.getHomeUrl() );
-             QDomText  href = doc.createTextNode(DeviceInfoParserInstance.getLsbRelease() + " ");
+             a.setAttribute("href", DeviceInfoParser::Instance().getHomeUrl() );
+             QDomText  href = doc.createTextNode(DeviceInfoParser::Instance().getLsbRelease() + " ");
              a.appendChild(href);
              td2.appendChild(a);
 
-             QString osInfo = DeviceInfoParserInstance.getOsInfo();
+             QString osInfo = DeviceInfoParser::Instance().getOsInfo();
              valueText = doc.createTextNode(osInfo);
              td2.appendChild(valueText);
         }
@@ -754,7 +760,7 @@ QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
         ds.setFieldWidth(0);
         if(article.externalLinks )
         {
-            ds << DeviceInfoParserInstance.getLsbRelease() + "(" +  DeviceInfoParserInstance.getHomeUrl() + ") " + DeviceInfoParserInstance.getOsInfo() << "\n";
+            ds << DeviceInfoParser::Instance().getLsbRelease() + "(" +  DeviceInfoParser::Instance().getHomeUrl() + ") " + DeviceInfoParser::Instance().getOsInfo() << "\n";
         }
         else
         {
@@ -905,7 +911,7 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
         QString content;
         if( article.externalLinks )
         {
-            content = DeviceInfoParserInstance.getLsbRelease() + "(" +  DeviceInfoParserInstance.getHomeUrl() + ") " + DeviceInfoParserInstance.getOsInfo();
+            content = DeviceInfoParser::Instance().getLsbRelease() + "(" +  DeviceInfoParser::Instance().getHomeUrl() + ") " + DeviceInfoParser::Instance().getOsInfo();
         }
         else
         {
@@ -1017,7 +1023,7 @@ bool writeDeviceInfoToXls(const DeviceInfo& di, QXlsx::Document& xlsx)
         xlsx.write(currentXlsRow_, 1, article.name);
         if( article.externalLinks )
         {
-            xlsx.write(currentXlsRow_++, 2,  DeviceInfoParserInstance.getLsbRelease() + "(" +  DeviceInfoParserInstance.getHomeUrl() + ")" + DeviceInfoParserInstance.getOsInfo() );
+            xlsx.write(currentXlsRow_++, 2,  DeviceInfoParser::Instance().getLsbRelease() + "(" +  DeviceInfoParser::Instance().getHomeUrl() + ")" + DeviceInfoParser::Instance().getOsInfo() );
         }
         else
         {

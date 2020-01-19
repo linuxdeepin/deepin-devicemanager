@@ -34,7 +34,7 @@ KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, D
 
 void KeyboardWidget::initWidget()
 {
-    QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceKeyboardList();
+    QStringList inputdeviceList = DeviceInfoParser::Instance().getInputdeviceKeyboardList();
 
     int validKeyboardSize = 0;
 
@@ -66,7 +66,7 @@ void KeyboardWidget::initWidget()
         existArticles.insert("Name");
 
         name.value.remove("\"");
-        QString lshwKeyboard = DeviceInfoParserInstance.getCorrespondLshwKeyboard(name.value);
+        QString lshwKeyboard = DeviceInfoParser::Instance().getCorrespondLshwKeyboard(name.value);
 
         if( lshwKeyboard.isEmpty() == false )
         {
@@ -83,7 +83,7 @@ void KeyboardWidget::initWidget()
         articles.push_back(name);
         articles.push_back(vendor);
 
-        //QString lshwKeyboard = DeviceInfoParserInstance.getCorrespondLshwKeyboard(name.value);
+        //QString lshwKeyboard = DeviceInfoParser::Instance().getCorrespondLshwKeyboard(name.value);
         if( lshwKeyboard.isEmpty() == false )
         {
             existArticles.insert("product");
@@ -118,7 +118,7 @@ void KeyboardWidget::initWidget()
             articles.push_back(capabilities);
             existArticles.insert("capabilities");
 
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", lshwKeyboard, articles, existArticles);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwKeyboard, articles, existArticles);
         }
 
         ArticleStruct uniq("Uniq");
@@ -132,7 +132,7 @@ void KeyboardWidget::initWidget()
             }
 
             existKeyboard.insert(uniq.value);
-            QString blueTooth = DeviceInfoParserInstance.getCorrespondBluetoothKeyboard(uniq.value);
+            QString blueTooth = DeviceInfoParser::Instance().getCorrespondBluetoothKeyboard(uniq.value);
 
             if( blueTooth.isEmpty() == false )
             {
@@ -150,7 +150,7 @@ void KeyboardWidget::initWidget()
 
                 //existArticles.insert("Connected");
 
-                DeviceInfoParserInstance.queryRemainderDeviceInfo("paired-devices", blueTooth, articles, existArticles);
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("paired-devices", blueTooth, articles, existArticles);
             }
         }
 
@@ -213,11 +213,11 @@ void KeyboardWidget::initWidget()
         articles.push_back(product);
         existArticles.insert("Product");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("catinput", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles);
 
         if( uniq.isValid() )
         {
-            auto upower = DeviceInfoParserInstance.getCorrespondUpower(uniq.value);
+            auto upower = DeviceInfoParser::Instance().getCorrespondUpower(uniq.value);
 
             if(upower.isEmpty() == false )
             {
@@ -225,7 +225,7 @@ void KeyboardWidget::initWidget()
                 power.value = " ";
                 articles.push_back(power);
 
-                DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", upower, articles );
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles );
             }
         }
 
@@ -264,7 +264,7 @@ void KeyboardWidget::initWidget()
     */
 bool KeyboardWidget::findUsbKeyboard()
 {
-    QStringList findKeyboards = DeviceInfoParserInstance.getLshwUsbKeyboardDeviceList();
+    QStringList findKeyboards = DeviceInfoParser::Instance().getLshwUsbKeyboardDeviceList();
     if( findKeyboards.size() < 1)
     {
         return false;
@@ -328,7 +328,7 @@ bool KeyboardWidget::findUsbKeyboard()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", keyboard, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, articles, existArticles);
 
         QString title = name.isValid()? name.value: description.value;
         addDevice( title, articles, findKeyboards.size() );

@@ -34,7 +34,7 @@ BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
 
 void BluetoothWidget::initWidget()
 {
-    QStringList bluetoothList = DeviceInfoParserInstance.getLshwBluetoothList();
+    QStringList bluetoothList = DeviceInfoParser::Instance().getLshwBluetoothList();
 
     if( bluetoothList.size() < 1 )
     {
@@ -42,9 +42,9 @@ void BluetoothWidget::initWidget()
         return;
     }
 
-    QStringList hciconfigBluetoothList = DeviceInfoParserInstance.getHciconfigBluetoothControllerList();
-    QStringList pairedDevicesList /*= DeviceInfoParserInstance.getOtherBluetoothctlPairedDevicesList()*/;
-    int connectedDeviceNumber = DeviceInfoParserInstance.getOtherBluetoothctlPairedAndConnectedDevicesList().size();
+    QStringList hciconfigBluetoothList = DeviceInfoParser::Instance().getHciconfigBluetoothControllerList();
+    QStringList pairedDevicesList /*= DeviceInfoParser::Instance().getOtherBluetoothctlPairedDevicesList()*/;
+    int connectedDeviceNumber = DeviceInfoParser::Instance().getOtherBluetoothctlPairedAndConnectedDevicesList().size();
     //setTitle(DApplication::translate("Main", "Bluetooth") + " " + DApplication::translate("Main", " Info"));
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
@@ -127,15 +127,15 @@ void BluetoothWidget::initWidget()
 
         if( i < hciconfigBluetoothList.size() )
         {
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("hciconfig", hciconfigBluetoothList.at(i), articles, existArticles2);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("hciconfig", hciconfigBluetoothList.at(i), articles, existArticles2);
 
             if(mac.isValid())
             {
-                DeviceInfoParserInstance.queryRemainderDeviceInfo("bluetoothctl", mac.value, articles, existArticles3);
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("bluetoothctl", mac.value, articles, existArticles3);
             }
         }
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
         addDevice( name.value, articles,  bluetoothList.size()+ pairedDevicesList.size() );
 
@@ -223,11 +223,11 @@ void BluetoothWidget::initWidget()
         articles.push_back(blocked);
         existArticles.insert("Blocked");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("paired-devices", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("paired-devices", device, articles, existArticles);
 
         if( device.isEmpty() == false )
         {
-            auto upower = DeviceInfoParserInstance.getCorrespondUpower(device);
+            auto upower = DeviceInfoParser::Instance().getCorrespondUpower(device);
 
             if(upower.isEmpty() == false )
             {
@@ -235,7 +235,7 @@ void BluetoothWidget::initWidget()
                 power.value = " ";
                 articles.push_back(power);
 
-                DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", upower, articles );
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles );
             }
         }
 

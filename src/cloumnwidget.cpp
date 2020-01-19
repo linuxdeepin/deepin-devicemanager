@@ -87,7 +87,7 @@ ColumnWidget::ColumnWidget(const QString& strLeft, const QString& strRight, cons
     if( isRightLink )
     {
         l2->setOpenExternalLinks(true);
-        //textWidth = QFontMetrics( font ).width(DeviceInfoParserInstance.getOsInfo());
+        //textWidth = QFontMetrics( font ).width(DeviceInfoParser::Instance().getOsInfo());
     }
 
     if(textWidth > DeviceWidgetContentWidth_)
@@ -169,11 +169,11 @@ void ColumnWidget::setHilight(bool highLight)
     {
         if(highLight)
         {
-            //l2->setText( DeviceInfoParserInstance.getOsInfo() );
+            //l2->setText( DeviceInfoParser::Instance().getOsInfo() );
         }
 //        else
 //        {
-//            l2->setText( DeviceInfoParserInstance.getOsHtmlInfo() );
+//            l2->setText( DeviceInfoParser::Instance().getOsHtmlInfo() );
 //        }
     }
 

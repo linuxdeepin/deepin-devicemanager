@@ -35,7 +35,7 @@ void OtherPciDeviceWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
 
-    QStringList otherPcideviceList = DeviceInfoParserInstance.getLshwOtherPciDeviceList();
+    QStringList otherPcideviceList = DeviceInfoParser::Instance().getLshwOtherPciDeviceList();
 
     if(otherPcideviceList.size() < 1)
     {
@@ -97,7 +97,7 @@ void OtherPciDeviceWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
         addDevice( name.value, articles, otherPcideviceList.size() );
 

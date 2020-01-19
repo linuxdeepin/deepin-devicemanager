@@ -39,8 +39,8 @@ void DisplayadapterWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    QStringList displayadapterList = DeviceInfoParserInstance.getLshwDiaplayadapterList();
-    QStringList screenList = DeviceInfoParserInstance.getXrandrScreenName();
+    QStringList displayadapterList = DeviceInfoParser::Instance().getLshwDiaplayadapterList();
+    QStringList screenList = DeviceInfoParser::Instance().getXrandrScreenName();
 
     for(int i =0; i < displayadapterList.size(); ++i )
     {
@@ -48,7 +48,7 @@ void DisplayadapterWidget::initWidget()
         existArticles.clear();
 
         QString displayadapter = displayadapterList[i];
-        QString pci_bus = DeviceInfoParserInstance.queryData("lshw", displayadapter, "bus info");
+        QString pci_bus = DeviceInfoParser::Instance().queryData("lshw", displayadapter, "bus info");
         QRegExp reg("^pci@[0-9]*:([\\s\\S]*)$");
         if(reg.exactMatch(pci_bus))
         {
@@ -56,9 +56,9 @@ void DisplayadapterWidget::initWidget()
         }
 
         QString lspciDeviceName;
-        DeviceInfoParserInstance.fuzzeyQueryKey("lspci", pci_bus, lspciDeviceName);
+        DeviceInfoParser::Instance().fuzzeyQueryKey("lspci", pci_bus, lspciDeviceName);
 
-        QString lspciName = DeviceInfoParserInstance.fuzzyQueryData("lspci", lspciDeviceName, "bus info");
+        QString lspciName = DeviceInfoParser::Instance().fuzzyQueryData("lspci", lspciDeviceName, "bus info");
         ArticleStruct name("Name");
         name.queryData("lspci", lspciDeviceName, "Name");
         name.value.remove( " Corporation", Qt::CaseInsensitive );
@@ -103,7 +103,7 @@ void DisplayadapterWidget::initWidget()
         existArticles.insert("driver");
 
 //        ArticleStruct interface("Support Interface");
-//        interface.value = DeviceInfoParserInstance.getDisplayInterfaceList().join(", ");
+//        interface.value = DeviceInfoParser::Instance().getDisplayInterfaceList().join(", ");
 //        articles.push_back(interface);
 
         ArticleStruct version("Version");
@@ -126,7 +126,7 @@ void DisplayadapterWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", displayadapter, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", displayadapter, articles, existArticles);
 
         QString dpName = "";
         if( displayadapterList.size() > 1 )

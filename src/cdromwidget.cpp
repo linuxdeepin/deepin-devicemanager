@@ -34,7 +34,7 @@ CDRomWidget::CDRomWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplic
 void CDRomWidget::initWidget()
 {
     //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
-    QStringList cdromList = DeviceInfoParserInstance.getLshwCDRomList();
+    QStringList cdromList = DeviceInfoParser::Instance().getLshwCDRomList();
 
     if( cdromList.size() < 1)
     {
@@ -82,7 +82,7 @@ void CDRomWidget::initWidget()
         existArticles.insert("logical name");
 
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo( "lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo( "lshw", device, articles, existArticles);
 
         addDevice( device, articles, cdromList.size() );
 

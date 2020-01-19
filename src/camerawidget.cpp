@@ -33,7 +33,7 @@ CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DAppl
 
 void CameraWidget::initWidget()
 {
-    QStringList cameraList = DeviceInfoParserInstance.getLshwCameraList();
+    QStringList cameraList = DeviceInfoParser::Instance().getLshwCameraList();
 
     if( cameraList.size() < 1 )
     {
@@ -93,7 +93,7 @@ void CameraWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
         addDevice( name.value, articles, cameraList.size() );
 

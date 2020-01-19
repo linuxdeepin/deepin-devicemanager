@@ -33,8 +33,8 @@ MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplic
 
 void MouseWidget::initWidget()
 {
-    QStringList inputdeviceList = DeviceInfoParserInstance.getInputdeviceMouseList();
-    //QStringList mouseList = DeviceInfoParserInstance.getLshwMouseList();
+    QStringList inputdeviceList = DeviceInfoParser::Instance().getInputdeviceMouseList();
+    //QStringList mouseList = DeviceInfoParser::Instance().getLshwMouseList();
 
     if( inputdeviceList.size() < 1 )
     {
@@ -61,7 +61,7 @@ void MouseWidget::initWidget()
         name.value.remove("\"");
         existArticles.insert("Name");
 
-        QString lshwMouse = DeviceInfoParserInstance.getCorrespondLshwMouse(name.value);
+        QString lshwMouse = DeviceInfoParser::Instance().getCorrespondLshwMouse(name.value);
         if( lshwMouse.isEmpty() == false )
         {
             vendor.queryData( "lshw", lshwMouse, "vendor");
@@ -110,7 +110,7 @@ void MouseWidget::initWidget()
             articles.push_back(capabilities);
             existArticles.insert("capabilities");
 
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", lshwMouse, articles, existArticles);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwMouse, articles, existArticles);
         }
 
         ArticleStruct uniq("Uniq");
@@ -118,7 +118,7 @@ void MouseWidget::initWidget()
 
         if(uniq.isValid())
         {
-            QString blueTooth = DeviceInfoParserInstance.getCorrespondBluetoothMouse(uniq.value);
+            QString blueTooth = DeviceInfoParser::Instance().getCorrespondBluetoothMouse(uniq.value);
             if( blueTooth.isEmpty() == false )
             {
                 type.value = "Bluetooth";
@@ -133,7 +133,7 @@ void MouseWidget::initWidget()
                     continue;
                 }
 
-                DeviceInfoParserInstance.queryRemainderDeviceInfo("paired-devices", blueTooth, articles, existArticles);
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("paired-devices", blueTooth, articles, existArticles);
             }
         }
 
@@ -186,11 +186,11 @@ void MouseWidget::initWidget()
         articles.push_back(product);
         existArticles.insert("Product");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("catinput", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles);
 
         if( uniq.isValid() )
         {
-            auto upower = DeviceInfoParserInstance.getCorrespondUpower(uniq.value);
+            auto upower = DeviceInfoParser::Instance().getCorrespondUpower(uniq.value);
 
             if(upower.isEmpty() == false )
             {
@@ -198,7 +198,7 @@ void MouseWidget::initWidget()
                 power.value = " ";
                 articles.push_back(power);
 
-                DeviceInfoParserInstance.queryRemainderDeviceInfo("upower", upower, articles );
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles );
             }
         }
 
@@ -274,7 +274,7 @@ void MouseWidget::initWidget()
 //        articles.push_back(capabilities);
 //        existArticles.insert("capabilities");
 
-//        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", mouse, articles, existArticles);
+//        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", mouse, articles, existArticles);
 //        addDevice( name.value , articles , inputdeviceList.size() + mouseList.size());
 
 //        QStringList tab =

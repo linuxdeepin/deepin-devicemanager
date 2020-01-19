@@ -123,6 +123,7 @@ public:
 
     QStringList getHwinfoMonitorList();
     QStringList getXrandrMonitorList();
+    QString     getEDID();
 
     QStringList getLshwMultimediaList();
     QStringList getCatinputAudioDeviceList();
@@ -244,4 +245,3 @@ public:
     QSet<QString> orderedDevices;
 };
 
-#define DeviceInfoParserInstance (DeviceInfoParser::Instance())

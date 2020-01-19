@@ -55,8 +55,8 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Manufacturer");
 
     ArticleStruct model("Model");
-    //QString manufactor = DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Manufacturer");
-    model.value = /*manufactor + " "+*/ DeviceInfoParserInstance.queryData("dmidecode", "Base Board Information", "Product Name");
+    //QString manufactor = DeviceInfoParser::Instance().queryData("dmidecode", "Base Board Information", "Manufacturer");
+    model.value = /*manufactor + " "+*/ DeviceInfoParser::Instance().queryData("dmidecode", "Base Board Information", "Product Name");
     if(model.isValid() == false)
     {
         model.queryData("catbaseboard", "Base Board Information", "Board name");
@@ -71,7 +71,7 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Version");
 
     ArticleStruct chipsetFamily("Chipset Family");
-    chipsetFamily.value = DeviceInfoParserInstance.fuzzyQueryData("lspci", "ISA bridge", "Subsystem");
+    chipsetFamily.value = DeviceInfoParser::Instance().fuzzyQueryData("lspci", "ISA bridge", "Subsystem");
     QRegExp rx("^[\\s\\S]*\\(([\\S]*)\\)$");
     if( rx.exactMatch(chipsetFamily.value) )
     {
@@ -107,10 +107,10 @@ void MotherboardWidget::initWidget()
 
     existArticles.insert("Features");
 
-    bool res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Base Board Information", articles, existArticles);
+    bool res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "Base Board Information", articles, existArticles);
     if(res == false)
     {
-        res = DeviceInfoParserInstance.queryRemainderDeviceInfo("catbaseboard", "Base Board Information", articles, existArticles);
+        res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("catbaseboard", "Base Board Information", articles, existArticles);
     }
 
     ArticleStruct SMBIOSVersion("SMBIOS Version");
@@ -166,7 +166,7 @@ void MotherboardWidget::initWidget()
 
     existArticles.insert("Features");
 
-    res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "System Information", articles, existArticles);
+    res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "System Information", articles, existArticles);
 
     //features.queryData("dmidecode", "System Information", "Features");
     //articles.push_back(features);
@@ -211,13 +211,13 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Vendor");
 
     existArticles.insert("Characteristics");
-    res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles);
+    res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles);
     if(res == false)
     {
-        res = DeviceInfoParserInstance.queryRemainderDeviceInfo("catbaseboard", "BIOS Information", articles, existArticles);
+        res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("catbaseboard", "BIOS Information", articles, existArticles);
     }
 
-    DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "BIOS Language Information", articles);
+    DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "BIOS Language Information", articles);
 
     ArticleStruct characteristics("Characteristics");
     characteristics.queryData("dmidecode", "BIOS Information", "Characteristics");
@@ -254,7 +254,7 @@ void MotherboardWidget::initWidget()
     articles.push_back(chassisVersion);
     existArticles.insert("Version");
 
-    res = DeviceInfoParserInstance.queryRemainderDeviceInfo("dmidecode", "Chassis Information", articles, existArticles);
+    res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "Chassis Information", articles, existArticles);
 
     if(res)
     {
@@ -266,7 +266,7 @@ void MotherboardWidget::initWidget()
 void MotherboardWidget::addMemoryInfo()
 {
     int canUpgrade = -1;
-    QStringList memList = DeviceInfoParserInstance.getDimdecodeMemoryList();
+    QStringList memList = DeviceInfoParser::Instance().getDimdecodeMemoryList();
     foreach(const QString& mem, memList)
     {
         if(canUpgrade == -1)
@@ -274,7 +274,7 @@ void MotherboardWidget::addMemoryInfo()
             canUpgrade = 0;
         }
 
-        QString size = DeviceInfoParserInstance.queryData("dmidecode", mem, "Size");
+        QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");
         if( size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
         {
             canUpgrade = 1;
@@ -320,14 +320,14 @@ void MotherboardWidget::addMemoryInfo()
     articles.push_back(size);
 
     ArticleStruct mc("Maximum Capacity");
-    QStringList pmList = DeviceInfoParserInstance.getDimdecodePhysicMemory();
+    QStringList pmList = DeviceInfoParser::Instance().getDimdecodePhysicMemory();
     foreach(auto pm , pmList)
     {
         if(mc.value.isEmpty() == false)
         {
             mc.value += " + ";
         }
-        mc.value += DeviceInfoParserInstance.queryData("dmidecode", pm, "Maximum Capacity");
+        mc.value += DeviceInfoParser::Instance().queryData("dmidecode", pm, "Maximum Capacity");
     }
 
     articles.push_back(mc);

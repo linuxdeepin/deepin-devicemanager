@@ -36,7 +36,7 @@ void NetworkadapterWidget::initWidget()
     //setTitle(DApplication::translate("Main", "NetworkAdapter")  + DApplication::translate("Main", " Info"));
 
 
-    QStringList networkadapterList = DeviceInfoParserInstance.getLshwNetworkadapterList();
+    QStringList networkadapterList = DeviceInfoParser::Instance().getLshwNetworkadapterList();
 
     if( networkadapterList.size() < 1 )
     {
@@ -107,7 +107,7 @@ void NetworkadapterWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", networkadapter, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", networkadapter, articles, existArticles);
 
         QString deviceName = name.value;
         if(name.isValid() == false && description.isValid())

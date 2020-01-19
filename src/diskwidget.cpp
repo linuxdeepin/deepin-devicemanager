@@ -33,7 +33,7 @@ DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplicat
 
 void DiskWidget::initWidget()
 {
-    QStringList diskList = DeviceInfoParserInstance.getLshwDisknameList();
+    QStringList diskList = DeviceInfoParser::Instance().getLshwDisknameList();
     if(diskList.size() < 1)
     {
         setCentralInfo("No Disk found!");
@@ -47,12 +47,12 @@ void DiskWidget::initWidget()
     int i = 0;
     foreach(const QString& disk, diskList)
     {
-        QString logicalName = DeviceInfoParserInstance.queryData("lshw", disk, "logical name");
+        QString logicalName = DeviceInfoParser::Instance().queryData("lshw", disk, "logical name");
 
-        QString modelStr = DeviceInfoParserInstance.queryData("lshw", disk, "product");
-        QString vendorStr = DeviceInfoParserInstance.queryData("lshw", disk, "vendor");
+        QString modelStr = DeviceInfoParser::Instance().queryData("lshw", disk, "product");
+        QString vendorStr = DeviceInfoParser::Instance().queryData("lshw", disk, "vendor");
         QString mediaTypeStr = "Unknown";
-        QString sizeStr = DeviceInfoParserInstance.queryData("lshw", disk, "size");
+        QString sizeStr = DeviceInfoParser::Instance().queryData("lshw", disk, "size");
         sizeStr.replace("GiB","GB");
 
         articles.clear();
@@ -83,12 +83,12 @@ void DiskWidget::initWidget()
         existArticles.insert("vendor");
 
         ArticleStruct mediaType("Media Type");
-        if( DeviceInfoParserInstance.isToolSuccess("smartctl") )
+        if( DeviceInfoParser::Instance().isToolSuccess("smartctl") )
         {
-            QString rotationRate = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Rotation Rate");
-            QString modelFamilyStr = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Model Family");
-            QString deviceModelStr = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Device Model");
-            QString modelStr = DeviceInfoParserInstance.queryData("lshw", disk, "product");
+            QString rotationRate = DeviceInfoParser::Instance().queryData("smartctl", logicalName, "Rotation Rate");
+            QString modelFamilyStr = DeviceInfoParser::Instance().queryData("smartctl", logicalName, "Model Family");
+            QString deviceModelStr = DeviceInfoParser::Instance().queryData("smartctl", logicalName, "Device Model");
+            QString modelStr = DeviceInfoParser::Instance().queryData("lshw", disk, "product");
 
             if( getDiskType(rotationRate, mediaTypeStr) == false )
             {
@@ -126,11 +126,11 @@ void DiskWidget::initWidget()
         existArticles.insert("serial");
         existArticles.insert("Serial Number");
 
-        if( DeviceInfoParserInstance.isToolSuccess("smartctl") )
+        if( DeviceInfoParser::Instance().isToolSuccess("smartctl") )
         {
-            QString rotationRate = DeviceInfoParserInstance.queryData("smartctl", logicalName, "Rotation Rate");
+            QString rotationRate = DeviceInfoParser::Instance().queryData("smartctl", logicalName, "Rotation Rate");
 
-            QString sataVersion = DeviceInfoParserInstance.queryData("smartctl", logicalName, "SATA Version");
+            QString sataVersion = DeviceInfoParser::Instance().queryData("smartctl", logicalName, "SATA Version");
             QString version;
             QString speed;
 
@@ -232,11 +232,11 @@ void DiskWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParserInstance.queryRemainderDeviceInfo("lshw", disk, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", disk, articles, existArticles);
 
-        if( DeviceInfoParserInstance.isToolSuccess("smartctl") )
+        if( DeviceInfoParser::Instance().isToolSuccess("smartctl") )
         {
-            DeviceInfoParserInstance.queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles);
         }
 
         addDevice( model.value, articles, diskList.size() );
