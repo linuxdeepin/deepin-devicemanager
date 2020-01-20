@@ -295,7 +295,7 @@ QStringList DeviceInfoParser::getlscpuCpuList()
     return getMatchToolDeviceList("lscpu");
 }
 
-QStringList DeviceInfoParser::getDimdecodePhysicMemory()
+QStringList DeviceInfoParser::getDmidecodePhysicMemory()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
@@ -311,7 +311,7 @@ QStringList DeviceInfoParser::getDimdecodePhysicMemory()
     return getMatchToolDeviceList("dmidecode", &func );
 }
 
-QStringList DeviceInfoParser::getDimdecodeMemoryList()
+QStringList DeviceInfoParser::getDmidecodeMemoryList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
@@ -326,12 +326,22 @@ QStringList DeviceInfoParser::getDimdecodeMemoryList()
 
     QStringList memList = getMatchToolDeviceList("dmidecode", &func );
 
-//    std::sort( memList.begin(), memList.end(),
-//                [this](const QString& m1, const QString& m2)
-//                {
-//                    return toolDatabase_["dmidecode"][m1]["Locator"] < toolDatabase_["dmidecode"][m2]["Locator"] ;
-//                }
-//                );
+    return memList;
+}
+
+QStringList DeviceInfoParser::getDmidecodeMemoryArrayMappedAddress()
+{
+    checkValueFun_t func = [](const QString& fk)->bool
+    {
+        if(fk == "Memory Array Mapped Address")
+        {
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
+            return true;
+        }
+        return false;
+    };
+
+    QStringList memList = getMatchToolDeviceList("dmidecode", &func );
 
     return memList;
 }

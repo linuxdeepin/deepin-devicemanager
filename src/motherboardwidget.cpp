@@ -266,7 +266,7 @@ void MotherboardWidget::initWidget()
 void MotherboardWidget::addMemoryInfo()
 {
     int canUpgrade = -1;
-    QStringList memList = DeviceInfoParser::Instance().getDimdecodeMemoryList();
+    QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
     foreach(const QString& mem, memList)
     {
         if(canUpgrade == -1)
@@ -320,7 +320,7 @@ void MotherboardWidget::addMemoryInfo()
     articles.push_back(size);
 
     ArticleStruct mc("Maximum Capacity");
-    QStringList pmList = DeviceInfoParser::Instance().getDimdecodePhysicMemory();
+    QStringList pmList = DeviceInfoParser::Instance().getDmidecodePhysicMemory();
     foreach(auto pm , pmList)
     {
         if(mc.value.isEmpty() == false)

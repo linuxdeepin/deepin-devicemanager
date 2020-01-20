@@ -128,7 +128,7 @@ void CpuWidget::initWidget()
         speed_ += QString::number(maxMHz);
         speed_ += "GHz)";
     }
-    //获取cpu频率失败，再次尝试冲dmidecode中获取
+    //获取cpu频率失败，尝试从dmidecode中获取
 
     bool t_getCpuSpeedFromDmiSuccess = false;
     if (speed_.isEmpty()) {

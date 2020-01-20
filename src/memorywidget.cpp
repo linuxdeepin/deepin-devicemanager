@@ -41,52 +41,94 @@ void MemoryWidget::initWidget()
 
 void MemoryWidget::init_l_Designer_l_TableWdiget()
 {
-    QStringList memList = DeviceInfoParser::Instance().getDimdecodeMemoryList();
-
-    QStringList headers = { "Name", "Vendor", "Type", "Speed",  "Size", /* "Statu"*/};
-
-    QList<QStringList> tabList;
-
-    foreach(const QString& mem, memList)
-    {
-        if(canUpgrade_ == -1)
-        {
-            canUpgrade_ = 0;
-        }
-
-        QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
-        QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");
-        if( isSlotValid(size, speed) == false )
-        {
-            canUpgrade_ = 1;
-            continue;
-        }
-
-        QStringList tab = {
-            DeviceInfoParser::Instance().queryData("dmidecode", mem, "Part Number"),
-            DeviceInfoParser::Instance().queryData("dmidecode", mem, "Manufacturer"),
-            DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type"),
-            speed,
-            size,
-
-            //DApplication::translate("Main", "Good")
-        };
-
-        tabList.push_back(tab);
+    QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
+    bool getDmidecodeMemoryListSuccess = true;
+    if (memList.isEmpty()) {
+        getDmidecodeMemoryListSuccess = false;
+        memList = DeviceInfoParser::Instance().getDmidecodeMemoryArrayMappedAddress();
     }
-    addTable(headers, tabList);
+    if (getDmidecodeMemoryListSuccess == true) {
+
+        QStringList headers = { "Name", "Vendor", "Type", "Speed",  "Size", /* "Statu"*/};
+
+        QList<QStringList> tabList;
+
+        foreach(const QString& mem, memList)
+        {
+            if(canUpgrade_ == -1)
+            {
+                canUpgrade_ = 0;
+            }
+
+            QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
+            QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");
+            if( isSlotValid(size, speed) == false )
+            {
+                canUpgrade_ = 1;
+                continue;
+            }
+
+            QStringList tab = {
+                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Part Number"),
+                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Manufacturer"),
+                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type"),
+                speed,
+                size,
+
+                //DApplication::translate("Main", "Good")
+            };
+
+            tabList.push_back(tab);
+        }
+        addTable(headers, tabList);
+    }
+
+    if (getDmidecodeMemoryListSuccess == false) {
+        QStringList headers = { "Name", "Vendor", "Type", "Speed",  "Size",};
+
+        QList<QStringList> tabList;
+
+        foreach(const QString& mem, memList)
+        {
+            if(canUpgrade_ == -1)
+            {
+                canUpgrade_ = 0;
+            }
+
+            QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
+            QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Range Size");
+
+            QStringList tab = {
+                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Part Number"),
+                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Manufacturer"),
+                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type"),
+                speed,
+                size,
+
+                //DApplication::translate("Main", "Good")
+            };
+
+            tabList.push_back(tab);
+        }
+        addTable(headers, tabList);
+    }
+
 }
 
 void MemoryWidget::update_l_Designer_l_WholeDownWidget()
 {
-    QStringList memList = DeviceInfoParser::Instance().getDimdecodeMemoryList();
-
-    int validMemoryNumber = 0;
-    if( memList.size() < 1)
-    {
-        setCentralInfo("Get Memory Infomation failed!");
-        return;
+    QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
+    bool getDmidecodeMemoryListSuccess = true;
+    if (memList.isEmpty()) {
+        getDmidecodeMemoryListSuccess = false;
+        memList = DeviceInfoParser::Instance().getDmidecodeMemoryArrayMappedAddress();
     }
+    int validMemoryNumber = 0;
+//    if( memList.size() < 1)
+//    {
+//        setCentralInfo("Get Memory Infomation failed!");
+//        return;
+//    }
 
     QList<ArticleStruct> articles;
 
@@ -158,7 +200,6 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
     {
         articles.clear();
         existArticles.clear();
-
 
         ArticleStruct model("Model");
         model.queryData("dmidecode", mem, "Part Number");
@@ -242,7 +283,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
             }
         }
 
-        if( false == isSlotValid(size.value, speed.value) )
+        if( false == isSlotValid(size.value, speed.value) && getDmidecodeMemoryListSuccess == true)
         {
             continue;
         }
@@ -261,7 +302,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         }
     }
 
-    if(validMemoryNumber < 1)
+    if(validMemoryNumber < 1 && getDmidecodeMemoryListSuccess == true)
     {
         setCentralInfo("Get Memory Infomation failed!");
         return;
@@ -278,7 +319,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
 void MemoryWidget::initTableWdiget_Good()
 {
-    QStringList memList = DeviceInfoParser::Instance().getDimdecodeMemoryList();
+    QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
 
 
     QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size", /* "Statu"*/};
@@ -325,7 +366,7 @@ void MemoryWidget::initTableWdiget_Good()
 
 void MemoryWidget::updateWholeDownWidget_Good()
 {
-    QStringList memList = DeviceInfoParser::Instance().getDimdecodeMemoryList();
+    QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
 
     QList<ArticleStruct> articles;
 

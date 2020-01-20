@@ -113,8 +113,10 @@ public:
     QStringList getCatcpuCpuList();
     QStringList getlscpuCpuList();
 
-    QStringList getDimdecodePhysicMemory();
-    QStringList getDimdecodeMemoryList();
+    QStringList getDmidecodePhysicMemory();
+    QStringList getDmidecodeMemoryList();
+    QStringList getDmidecodeMemoryArrayMappedAddress();
+
     QStringList getLshwDisknameList();
 
     QStringList getLshwDiaplayadapterList();
