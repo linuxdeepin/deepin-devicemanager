@@ -100,15 +100,15 @@ void CpuWidget::initWidget()
     QString maxSpeed = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "CPU max MHz");
     QString minSpeed = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "CPU min MHz");
 
-    double maxMHz = maxSpeed.remove(",").toDouble()/1000.0;
+    double maxMHz = maxSpeed.remove(",").toDouble();
 
-    double minMHz = minSpeed.remove(",").toDouble()/1000.0;
+    double minMHz = minSpeed.remove(",").toDouble();
 
     QString speedUnit = "MHz";
-    if(maxMHz > 10000)  //AMD CPU speed is MHZ, intel is GHZ
+    if(maxMHz > 1000)  //AMD CPU speed is MHZ, intel is GHZ
     {
-        maxMHz/=10000.0;
-        minMHz/=10000.0;
+        maxMHz/=1000.0;
+        minMHz/=1000.0;
         speedUnit = "GHz";
     }
 
@@ -116,23 +116,32 @@ void CpuWidget::initWidget()
     int index = overviewInfo_.value.indexOf('@');
     if(index > 0)
     {
-        modelSpeed = overviewInfo_.value.mid(index+1).trimmed().remove("MHz",Qt::CaseInsensitive).remove("GHz",Qt::CaseInsensitive).toDouble();
+        QString t_modelSpeed = overviewInfo_.value;
+        modelSpeed = t_modelSpeed.mid(index+1).trimmed().remove("MHz",Qt::CaseInsensitive).remove("GHz",Qt::CaseInsensitive).toDouble();
+    }
+    if (overviewInfo_.value.contains("GHz",Qt::CaseInsensitive) && speedUnit == "MHz") {
+       modelSpeed *= 1000.0;
     }
 
     speed_.clear();
     bool minMaxMHzSuccess = ( minMHz >0.0 && maxMHz >0.0 && maxMHz >= minMHz);
     bool modelSpeedSuccess = modelSpeed > 0.0;
 
+
+    QString modeSpeedFormatStr = QString::number(modelSpeed,'0',2);
+    QString minMHzFormatStr    = QString::number(minMHz,'0',2);
+    QString maxMHzFormatStr    = QString::number(maxMHz,'0',2);
+
     if (modelSpeedSuccess) {
         if (minMaxMHzSuccess) {
-            speed_ = QString("%1(%2-%3)%4").arg(modelSpeed).arg(minMHz).arg(maxSpeed).arg(speedUnit);
+            speed_ = QString("%1(%2-%3) %4").arg(modeSpeedFormatStr).arg(minMHzFormatStr).arg(maxMHzFormatStr).arg(speedUnit);
         }
         else {
-            speed_ = QString("%1%2").arg(modelSpeed).arg(speedUnit);
+            speed_ = QString("%1 %2").arg(modeSpeedFormatStr).arg(speedUnit);
         }
     }
     if (modelSpeedSuccess == false && minMaxMHzSuccess) {
-        speed_ = QString("%1-%2%3").arg(minMHz).arg(maxMHz).arg(speedUnit);
+        speed_ = QString("%1-%2 %3").arg(minMHzFormatStr).arg(maxMHzFormatStr).arg(speedUnit);
     }
 
 
