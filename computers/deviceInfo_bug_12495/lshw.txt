@@ -1,0 +1,561 @@
+test-pc
+    description: Laptop
+    product: loongson,generic
+    vendor: Loongson Technology Co.,Ltd.
+    version: Not Specified
+    serial: Not Specified
+    width: 64 bits
+    capabilities: smbios-2.8 dmi-2.8 smp
+    configuration: boot=normal chassis=laptop family=Not Specified sku=Not Specified
+  *-core
+       description: Motherboard
+       product: Kunlun-LS3A4000-7A1000-1w-V1.2-Dev
+       vendor: BLD
+       physical id: 0
+       version: Not Specified
+       serial: Not Specified
+     *-firmware
+          description: BIOS
+          vendor: Kunlun
+          physical id: 0
+          version: Kunlun-V4.0.12V4.0 LS3A4000
+          date: Unknown
+          size: 1MiB
+          capacity: 4MiB
+          capabilities: pci upgrade cdboot bootselect socketedrom int14serial usb uefi
+     *-cpu:0
+          description: CPU
+          product: Loongson-3A R4 (Loongson-3A4000) @ 1700MHz
+          vendor: Loongson
+          physical id: 4
+          bus info: cpu@0
+          version: ICT Loongson-3A R3(loongson-3A4000)
+          serial: Not Specified
+          slot: CPU1
+          size: 1600MHz
+          width: 64 bits
+          capabilities: lm
+          configuration: cores=4 enabledcores=4 threads=4
+     *-memory
+          description: System Memory
+          physical id: d
+          slot: System board or motherboard
+          size: 7511MiB
+     *-cpu:1 DISABLED
+          description: CPU
+          product: cpu
+          physical id: 1
+          bus info: cpu@0
+     *-cpu:2
+          description: CPU
+          product: Loongson-3A R4 (Loongson-3A4000) @ 1700MHz
+          physical id: 2
+          bus info: cpu@1
+          width: 32 bits
+     *-cpu:3
+          description: CPU
+          product: Loongson-3A R4 (Loongson-3A4000) @ 1700MHz
+          physical id: 3
+          bus info: cpu@2
+          width: 32 bits
+     *-cpu:4
+          description: CPU
+          product: Loongson-3A R4 (Loongson-3A4000) @ 1700MHz
+          physical id: 5
+          bus info: cpu@3
+          width: 32 bits
+     *-cpu:5 DISABLED
+          description: CPU
+          product: cpu
+          physical id: 6
+          bus info: cpu@4
+     *-cpu:6 DISABLED
+          description: CPU
+          product: cpu
+          physical id: 7
+          bus info: cpu@5
+     *-cpu:7 DISABLED
+          description: CPU
+          product: cpu
+          physical id: 8
+          bus info: cpu@6
+     *-cpu:8 DISABLED
+          description: CPU
+          product: cpu
+          physical id: 9
+          bus info: cpu@7
+     *-cpu:9 DISABLED
+          description: CPU
+          product: cpu
+          physical id: a
+          bus info: cpu@8
+     *-cpu:10 DISABLED
+          description: CPU
+          product: cpu
+          physical id: b
+          bus info: cpu@9
+     *-cpu:11 DISABLED
+          description: CPU
+          product: cpu
+          physical id: c
+          bus info: cpu@10
+     *-cpu:12 DISABLED
+          description: CPU
+          product: cpu
+          physical id: e
+          bus info: cpu@11
+     *-cpu:13 DISABLED
+          description: CPU
+          product: cpu
+          physical id: f
+          bus info: cpu@12
+     *-cpu:14 DISABLED
+          description: CPU
+          product: cpu
+          physical id: 10
+          bus info: cpu@13
+     *-cpu:15 DISABLED
+          description: CPU
+          product: cpu
+          physical id: 11
+          bus info: cpu@14
+     *-cpu:16 DISABLED
+          description: CPU
+          product: cpu
+          physical id: 12
+          bus info: cpu@15
+     *-cpu:17 DISABLED
+          description: CPU
+          product: l2-cache0
+          physical id: 13
+          bus info: cpu@16
+     *-cpu:18 DISABLED
+          description: CPU
+          product: l2-cache1
+          physical id: 14
+          bus info: cpu@17
+     *-cpu:19 DISABLED
+          description: CPU
+          product: l2-cache2
+          physical id: 15
+          bus info: cpu@18
+     *-cpu:20 DISABLED
+          description: CPU
+          product: l2-cache3
+          physical id: 16
+          bus info: cpu@19
+     *-pci
+          description: Host bridge
+          product: Hyper Transport Bridge Controller
+          vendor: Loongson Technology LLC
+          physical id: 100
+          bus info: pci@0000:00:00.0
+          version: 00
+          width: 32 bits
+          clock: 33MHz
+        *-generic:0 UNCLAIMED
+             description: Non-VGA unclassified device
+             product: Loongson Technology LLC
+             vendor: Loongson Technology LLC
+             physical id: 0.1
+             bus info: pci@0000:00:00.1
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             configuration: latency=0
+        *-network:0 UNCLAIMED
+             description: Ethernet controller
+             product: Gigabit Ethernet Controller
+             vendor: Loongson Technology LLC
+             physical id: 3
+             bus info: pci@0000:00:03.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: bus_master vga_palette
+             configuration: latency=0
+             resources: memory:49370000-49377fff
+        *-network:1 UNCLAIMED
+             description: Ethernet controller
+             product: Gigabit Ethernet Controller
+             vendor: Loongson Technology LLC
+             physical id: 3.1
+             bus info: pci@0000:00:03.1
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: bus_master vga_palette
+             configuration: latency=0
+             resources: memory:49378000-4937ffff
+        *-usb:0
+             description: USB controller
+             product: OHCI USB Controller
+             vendor: Loongson Technology LLC
+             physical id: 4
+             bus info: pci@0000:00:04.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: ohci bus_master
+             configuration: driver=ohci-pci latency=0
+             resources: irq:113 memory:49380000-49387fff
+           *-usbhost
+                product: OHCI PCI host controller
+                vendor: Linux 4.19.0-loongson-3-desktop ohci_hcd
+                physical id: 1
+                bus info: usb@3
+                logical name: usb3
+                version: 4.19
+                capabilities: usb-1.10
+                configuration: driver=hub slots=3 speed=12Mbit/s
+        *-usb:1
+             description: USB controller
+             product: EHCI USB Controller
+             vendor: Loongson Technology LLC
+             physical id: 4.1
+             bus info: pci@0000:00:04.1
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: ehci bus_master vga_palette
+             configuration: driver=ehci-pci latency=0
+             resources: irq:112 memory:49388000-4938ffff
+           *-usbhost
+                product: EHCI Host Controller
+                vendor: Linux 4.19.0-loongson-3-desktop ehci_hcd
+                physical id: 1
+                bus info: usb@1
+                logical name: usb1
+                version: 4.19
+                capabilities: usb-2.00
+                configuration: driver=hub slots=3 speed=480Mbit/s
+        *-usb:2
+             description: USB controller
+             product: OHCI USB Controller
+             vendor: Loongson Technology LLC
+             physical id: 5
+             bus info: pci@0000:00:05.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: ohci bus_master
+             configuration: driver=ohci-pci latency=0
+             resources: irq:115 memory:49390000-49397fff
+           *-usbhost
+                product: OHCI PCI host controller
+                vendor: Linux 4.19.0-loongson-3-desktop ohci_hcd
+                physical id: 1
+                bus info: usb@4
+                logical name: usb4
+                version: 4.19
+                capabilities: usb-1.10
+                configuration: driver=hub slots=3 speed=12Mbit/s
+        *-usb:3
+             description: USB controller
+             product: EHCI USB Controller
+             vendor: Loongson Technology LLC
+             physical id: 5.1
+             bus info: pci@0000:00:05.1
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: ehci bus_master vga_palette
+             configuration: driver=ehci-pci latency=0
+             resources: irq:114 memory:49398000-4939ffff
+           *-usbhost
+                product: EHCI Host Controller
+                vendor: Linux 4.19.0-loongson-3-desktop ehci_hcd
+                physical id: 1
+                bus info: usb@2
+                logical name: usb2
+                version: 4.19
+                capabilities: usb-2.00
+                configuration: driver=hub slots=3 speed=480Mbit/s
+        *-multimedia:0
+             description: Multimedia video controller
+             product: Vivante GPU (Graphics Processing Unit)
+             vendor: Loongson Technology LLC
+             physical id: 6
+             bus info: pci@0000:00:06.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: bus_master vga_palette
+             configuration: driver=loongson-gpu latency=0
+             resources: irq:93 memory:49300000-4933ffff memory:40000000-47ffffff memory:49340000-4934ffff
+        *-display
+             description: Display controller
+             product: DC (Display Controller)
+             vendor: Loongson Technology LLC
+             physical id: 6.1
+             bus info: pci@0000:00:06.1
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: bus_master vga_palette
+             configuration: driver=loongson-drm latency=0
+             resources: irq:92 memory:49350000-4935ffff
+        *-multimedia:1
+             description: Audio device
+             product: HDA (High Definition Audio) Controller
+             vendor: Loongson Technology LLC
+             physical id: 7
+             bus info: pci@0000:00:07.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: bus_master vga_palette
+             configuration: driver=loongson-audio latency=0
+             resources: irq:122 memory:49360000-4936ffff
+        *-sata:0
+             description: SATA controller
+             product: SATA AHCI Controller
+             vendor: Loongson Technology LLC
+             physical id: 8
+             bus info: pci@0000:00:08.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: sata ahci_1.0 bus_master vga_palette
+             configuration: driver=ahci latency=0
+             resources: irq:80 memory:493a0000-493a1fff
+        *-sata:1
+             description: SATA controller
+             product: SATA AHCI Controller
+             vendor: Loongson Technology LLC
+             physical id: 8.1
+             bus info: pci@0000:00:08.1
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: sata ahci_1.0 bus_master vga_palette
+             configuration: driver=ahci latency=0
+             resources: irq:81 memory:493a2000-493a3fff
+        *-sata:2
+             description: SATA controller
+             product: SATA AHCI Controller
+             vendor: Loongson Technology LLC
+             physical id: 8.2
+             bus info: pci@0000:00:08.2
+             logical name: scsi2
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: sata ahci_1.0 bus_master vga_palette emulated
+             configuration: driver=ahci latency=0
+             resources: irq:82 memory:493a4000-493a5fff
+           *-disk
+                description: ATA Disk
+                product: FORESEE 256GB SS
+                physical id: 0.0.0
+                bus info: scsi@2:0.0.0
+                logical name: /dev/sda
+                version: V4.6
+                serial: J41366J004206
+                size: 238GiB (256GB)
+                capabilities: gpt-1.00 partitioned partitioned:gpt
+                configuration: ansiversion=5 guid=72a0f97c-ddcb-4da0-8f6d-7f32922dbca7 logicalsectorsize=512 sectorsize=512
+              *-volume:0
+                   description: Windows FAT volume
+                   vendor: mkfs.fat
+                   physical id: 1
+                   bus info: scsi@2:0.0.0,1
+                   logical name: /dev/sda1
+                   logical name: /boot/efi
+                   version: FAT32
+                   serial: 493e-15bd
+                   size: 298MiB
+                   capacity: 299MiB
+                   capabilities: boot fat initialized
+                   configuration: FATs=2 filesystem=fat label=EFI mount.fstype=vfat mount.options=rw,relatime,fmask=0022,dmask=0022,codepage=936,iocharset=cp936,shortname=mixed,utf8,errors=remount-ro state=mounted
+              *-volume:1
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 2
+                   bus info: scsi@2:0.0.0,2
+                   logical name: /dev/sda2
+                   logical name: /boot
+                   version: 1.0
+                   serial: 711a4304-cfb2-411e-a62d-705d789f7aa5
+                   size: 1536MiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover extents ext4 ext2 initialized
+                   configuration: created=2020-01-16 15:45:24 filesystem=ext4 label=Boot lastmountpoint=/boot modified=2020-01-17 16:05:29 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-01-17 16:05:29 state=mounted
+              *-volume:2
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 3
+                   bus info: scsi@2:0.0.0,3
+                   logical name: /dev/sda3
+                   logical name: /
+                   version: 1.0
+                   serial: 569adf1a-811b-484a-9aa8-621dabd05dfb
+                   size: 15GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover extents ext4 ext2 initialized
+                   configuration: created=2020-01-16 15:45:25 filesystem=ext4 label=Roota lastmountpoint=/ modified=2020-01-17 16:05:27 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-01-17 16:05:28 state=mounted
+              *-volume:3
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 4
+                   bus info: scsi@2:0.0.0,4
+                   logical name: /dev/sda4
+                   version: 1.0
+                   serial: 67685ee9-8189-4dff-a256-bf393aed7984
+                   size: 15GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink extents ext4 ext2 initialized
+                   configuration: created=2020-01-16 15:45:26 filesystem=ext4 label=Rootb modified=2020-01-16 15:45:26 state=clean
+              *-volume:4
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 5
+                   bus info: scsi@2:0.0.0,5
+                   logical name: /dev/sda5
+                   logical name: /data
+                   logical name: /home
+                   logical name: /var
+                   logical name: /root
+                   logical name: /opt
+                   version: 1.0
+                   serial: f2920345-454f-4ce9-8834-f011e30344cf
+                   size: 186GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover extents ext4 ext2 initialized
+                   configuration: created=2020-01-16 15:45:27 filesystem=ext4 label=_dde_data lastmountpoint=/var modified=2020-01-17 16:05:29 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-01-17 16:05:29 state=mounted
+              *-volume:5
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 6
+                   bus info: scsi@2:0.0.0,6
+                   logical name: /dev/sda6
+                   logical name: /recovery
+                   version: 1.0
+                   serial: 60fc0cc7-0d01-4fce-8d0a-cd18ab77ccd9
+                   size: 10GiB
+                   capabilities: precious journaled extended_attributes large_files huge_files dir_nlink recover extents ext4 ext2 initialized
+                   configuration: created=2020-01-16 15:45:33 filesystem=ext4 label=Backup lastmountpoint=/target/recovery modified=2020-01-17 16:05:29 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-01-17 16:05:29 state=mounted
+              *-volume:6
+                   description: swap partition
+                   vendor: Linux
+                   physical id: 7
+                   bus info: scsi@2:0.0.0,7
+                   logical name: /dev/sda7
+                   serial: 3c6d5ed7-a8e5-4783-8846-8deac91a0762
+                   capacity: 10239MiB
+                   capabilities: nofs
+        *-pci:0
+             description: PCI bridge
+             product: PCI-to-PCI Bridge
+             vendor: Loongson Technology LLC
+             physical id: 9
+             bus info: pci@0000:00:09.0
+             version: 01
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pci pm msi pciexpress normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:16 memory:493a6000-493a6fff memory:49000000-490fffff
+           *-usb
+                description: USB controller
+                product: uPD720201 USB 3.0 Host Controller
+                vendor: Renesas Technology Corp.
+                physical id: 0
+                bus info: pci@0000:01:00.0
+                version: 03
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pm msi msix pciexpress xhci bus_master cap_list
+                configuration: driver=xhci_hcd latency=0
+                resources: irq:20 memory:49000000-49001fff
+              *-usbhost:0
+                   product: xHCI Host Controller
+                   vendor: Linux 4.19.0-loongson-3-desktop xhci-hcd
+                   physical id: 0
+                   bus info: usb@5
+                   logical name: usb5
+                   version: 4.19
+                   capabilities: usb-2.00
+                   configuration: driver=hub slots=4 speed=480Mbit/s
+              *-usbhost:1
+                   product: xHCI Host Controller
+                   vendor: Linux 4.19.0-loongson-3-desktop xhci-hcd
+                   physical id: 1
+                   bus info: usb@6
+                   logical name: usb6
+                   version: 4.19
+                   capabilities: usb-3.00
+                   configuration: driver=hub slots=4 speed=5000Mbit/s
+        *-pci:1
+             description: PCI bridge
+             product: PCI-to-PCI Bridge
+             vendor: Loongson Technology LLC
+             physical id: b
+             bus info: pci@0000:00:0b.0
+             version: 01
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pci pm msi pciexpress normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:17 memory:493a7000-493a7fff ioport:20000(size=4096) ioport:49100000(size=1048576)
+           *-network
+                description: Ethernet interface
+                product: RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller
+                vendor: Realtek Semiconductor Co., Ltd.
+                physical id: 0
+                bus info: pci@0000:02:00.0
+                logical name: enp2s0
+                version: 07
+                serial: 00:00:00:00:00:03
+                size: 1Gbit/s
+                capacity: 1Gbit/s
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pm msi pciexpress msix vpd bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+                configuration: autonegotiation=on broadcast=yes driver=r8168 driverversion=8.047.04 duplex=full ip=10.20.11.57 latency=0 link=yes multicast=yes port=twisted pair speed=1Gbit/s
+                resources: irq:19 ioport:20000(size=256) memory:49104000-49104fff memory:49100000-49103fff
+        *-pci:2
+             description: PCI bridge
+             product: PCI-to-PCI Bridge
+             vendor: Loongson Technology LLC
+             physical id: c
+             bus info: pci@0000:00:0c.0
+             version: 01
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pci pm msi pciexpress normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:18 memory:493a8000-493a8fff memory:49200000-492fffff
+           *-network DISABLED
+                description: Wireless interface
+                product: Wireless 3160
+                vendor: Intel Corporation
+                physical id: 0
+                bus info: pci@0000:03:00.0
+                logical name: wlp3s0
+                version: 93
+                serial: 34:de:1a:da:5e:12
+                width: 64 bits
+                clock: 33MHz
+                capabilities: pm msi pciexpress bus_master cap_list ethernet physical wireless
+                configuration: broadcast=yes driver=iwlwifi driverversion=4.19.0-loongson-3-desktop firmware=17.3216344376.0 latency=0 link=no multicast=yes wireless=IEEE 802.11
+                resources: irq:21 memory:49200000-49201fff
+        *-generic:1 UNCLAIMED
+             description: System peripheral
+             product: SPI Controller
+             vendor: Loongson Technology LLC
+             physical id: 16
+             bus info: pci@0000:00:16.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: bus_master vga_palette
+             configuration: latency=0
+             resources: memory:493a9000-493a9fff memory:48000000-48ffffff
+        *-isa
+             description: ISA bridge
+             product: LPC Controller
+             vendor: Loongson Technology LLC
+             physical id: 17
+             bus info: pci@0000:00:17.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: isa bus_master vga_palette
+             configuration: latency=0

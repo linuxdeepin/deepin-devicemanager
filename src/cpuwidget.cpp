@@ -110,61 +110,85 @@ void CpuWidget::initWidget()
     }
 
     speed_.clear();
+    if(minMHz > 0.0 && maxMHz > 0.0 && maxMHz >= minMHz)
+    {
+        int index = overviewInfo_.value.indexOf('@');
+        if(index > 0)
+        {
+            speed_ = overviewInfo_.value.mid(index+1).trimmed();
+        }
+        else
+        {
+            speed_ = QString::number(maxMHz) + "GHz";
+        }
 
-    int index = overviewInfo_.value.indexOf('@');
-    if(index > 0)
-    {
-        speed_ = overviewInfo_.value.mid(index+1).trimmed();
-    }
-    else
-    {
-        speed_ = QString::number(maxMHz) + "GHz";
-    }
-
-    if(minMHz != maxMHz)
-    {
         speed_ += " (";
         speed_ += QString::number(minMHz);
         speed_ += " - ";
         speed_ += QString::number(maxMHz);
         speed_ += "GHz)";
     }
+    //获取cpu频率失败，再次尝试冲dmidecode中获取
 
-//    if(cpuList.size() > 1)
-    {
-        QStringList headers = { "Name", /*"Core ID",*/ "Vendor", DApplication::translate("CPU", "Speed"), "Architecture" };
-        QList<QStringList> tabList;
+    bool t_getCpuSpeedFromDmiSuccess = false;
+    if (speed_.isEmpty()) {
+        QString maxSpeed_DMI = DeviceInfoParser::Instance().queryData("dmidecode","Processor Information","Max Speed");
+        QString curSpeed_DMI = DeviceInfoParser::Instance().queryData("dmidecode","Processor Information","Current Speed");
 
-        foreach(const QString& cpu, cpuList)
-        {
-            QString md = DeviceInfoParser::Instance().queryData("catcpu", cpu, "model name");
-
-            QString mc = DeviceInfoParser::Instance().queryData("catcpu", cpu, "vendor_id");
-            if(mc.isEmpty() || mc == DApplication::translate("Main", "Unknown"))
-            {
-                mc = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Vendor ID");
-            }
-
-            if(mc == DApplication::translate("Main", "Unknown"))
-            {
-                mc = md.split(" ").first();
-            }
-            QStringList tab = {
-                md,
-                //DApplication::translate("Main", "Core") +" " + cpu,
-                mc,
-                speed_,
-                architecture
-            };
-
-            tabList.push_back(tab);
+        QRegExp englishLetter("[a-zA-Z]");
+        if (maxSpeed_DMI.contains("MHZ",Qt::CaseInsensitive)) {
+            maxSpeed_DMI = maxSpeed_DMI.remove(englishLetter).trimmed();
+        }
+        if (curSpeed_DMI.contains("MHZ",Qt::CaseInsensitive)) {
+            curSpeed_DMI = curSpeed_DMI.remove(englishLetter).trimmed();
         }
 
-        addTable(headers, tabList);
+        double maxMHz = maxSpeed_DMI.toDouble();
+        double curSpeedMHz = curSpeed_DMI.toDouble();
+        if (maxMHz > 0.0 && curSpeedMHz >0.0 && maxMHz >= curSpeedMHz) {
+            speed_ = QString::number(curSpeedMHz) + QString("(Max:") + QString::number(maxMHz) + QString(") MHz");
+            t_getCpuSpeedFromDmiSuccess = true;
+        }
     }
 
+    QStringList headers;
+    if (speed_.isEmpty()) {
+       headers << "Name" << "Vendor" << "Architecture";
+    } else {
+        headers << "Name" << "Vendor" << DApplication::translate("CPU", "Speed") << "Architecture";
+    }
+
+    QList<QStringList> tabList;
+
+    foreach(const QString& cpu, cpuList)
+    {
+        QString md = DeviceInfoParser::Instance().queryData("catcpu", cpu, "model name");
+
+        QString mc = DeviceInfoParser::Instance().queryData("catcpu", cpu, "vendor_id");
+        if(mc.isEmpty() || mc == DApplication::translate("Main", "Unknown"))
+        {
+            mc = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Vendor ID");
+        }
+
+        if(mc == DApplication::translate("Main", "Unknown"))
+        {
+            mc = md.split(" ").first();
+        }
+
+        QStringList tab = {};
+        if (speed_.isEmpty()) {
+            tab << md << mc <<architecture;
+        } else {
+            tab << md << mc << speed_ << architecture;
+        }
+
+        tabList.push_back(tab);
+    }
+
+    addTable(headers, tabList);
+
     int sockets = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Socket(s)").toInt();
-    int cores = /*cpuList.size()*/DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Core(s) per socket").toInt();
+    int cores = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Core(s) per socket").toInt();
     int logicalCpus = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "CPU(s)").toInt();
 
     int threadsPerCore = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Thread(s) per core").toInt();
@@ -244,7 +268,6 @@ void CpuWidget::initWidget()
     }
 
     overviewInfo_.value += ")";
-
 
     QList<ArticleStruct> articles;
     QSet<QString> existSet;

@@ -1,0 +1,103 @@
+I: Bus=0019 Vendor=0000 Product=0000 Version=0000
+N: Name="ACPI Power Button"
+P: Phys=acpi/button/input0
+S: Sysfs=/devices/virtual/input/input0
+U: Uniq=
+H: Handlers=kbd event0 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0011 Vendor=0002 Product=000e Version=0000
+N: Name="ETPS/2 Elantech Touchpad"
+P: Phys=isa0060/serio2/input0
+S: Sysfs=/devices/platform/i8042/serio2/input/input2
+U: Uniq=
+H: Handlers=event1 mouse0 
+B: PROP=5
+B: EV=b
+B: KEY=e420 10000 0 0 0 0
+B: ABS=661800011000003
+
+I: Bus=0001 Vendor=10ec Product=0269 Version=0001
+N: Name="HDA Digital PCBeep"
+P: Phys=card0/codec#0/beep0
+S: Sysfs=/devices/pci0000:00/0000:00:07.0/sound/card0/input8
+U: Uniq=
+H: Handlers=kbd event2 
+B: PROP=0
+B: EV=40001
+B: SND=6
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HD-Audio Loongson Front Mic"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:07.0/sound/card0/input9
+U: Uniq=
+H: Handlers=event3 
+B: PROP=0
+B: EV=21
+B: SW=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HD-Audio Loongson Rear Mic"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:07.0/sound/card0/input10
+U: Uniq=
+H: Handlers=event4 
+B: PROP=0
+B: EV=21
+B: SW=10
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HD-Audio Loongson Line"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:07.0/sound/card0/input11
+U: Uniq=
+H: Handlers=event5 
+B: PROP=0
+B: EV=21
+B: SW=2000
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HD-Audio Loongson Line Out Front"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:07.0/sound/card0/input12
+U: Uniq=
+H: Handlers=event6 
+B: PROP=0
+B: EV=21
+B: SW=40
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HD-Audio Loongson Line Out Surround"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:07.0/sound/card0/input13
+U: Uniq=
+H: Handlers=event7 
+B: PROP=0
+B: EV=21
+B: SW=40
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="HD-Audio Loongson Front Headphone"
+P: Phys=ALSA
+S: Sysfs=/devices/pci0000:00/0000:00:07.0/sound/card0/input14
+U: Uniq=
+H: Handlers=event8 
+B: PROP=0
+B: EV=21
+B: SW=4
+
+I: Bus=0011 Vendor=0001 Product=0001 Version=ab41
+N: Name="AT Translated Set 2 keyboard"
+P: Phys=isa0060/serio0/input0
+S: Sysfs=/devices/platform/i8042/serio0/input/input15
+U: Uniq=
+H: Handlers=sysrq kbd event9 
+B: PROP=0
+B: EV=120013
+B: KEY=402000000 3803078f800d001 feffffdfffefffff fffffffffffffffe
+B: MSC=10
+B: LED=7
+

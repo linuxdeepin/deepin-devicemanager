@@ -1,0 +1,221 @@
+# dmidecode 2.12
+# SMBIOS entry point at 0x0fffe000
+SMBIOS 2.8 present.
+18 structures occupying 1004 bytes.
+Table at 0x0F0200C0.
+
+Handle 0x0000, DMI type 0, 26 bytes
+BIOS Information
+	Vendor: Kunlun
+	Version: Kunlun-V4.0.12V4.0 LS3A4000
+	Release Date: Unknown
+	ROM Size: 4096 kB
+	Characteristics:
+		PCI is supported
+		BIOS is upgradeable
+		Boot from CD is supported
+		Selectable boot is supported
+		BIOS ROM is socketed
+		Serial services are supported (int 14h)
+		USB legacy is supported
+		UEFI is supported
+	BIOS Revision: 4.0
+
+Handle 0x0001, DMI type 1, 27 bytes
+System Information
+	Manufacturer: Loongson Technology Co.,Ltd.
+	Product Name: CZC-LS3A3000-LS7A-laptop
+	Version: Not Specified
+	Serial Number: Not Specified
+	UUID: Not Present
+	Wake-up Type: Power Switch
+	SKU Number: Not Specified
+	Family: Not Specified
+
+Handle 0x0002, DMI type 2, 17 bytes
+Base Board Information
+	Manufacturer: BLD
+	Product Name: Kunlun-LS3A4000-7A1000-1w-V1.2-Dev
+	Version: Not Specified
+	Serial Number: Not Specified
+	Asset Tag: Not Specified
+	Features:
+		Board is a hosting board
+		Board is replaceable
+	Location In Chassis: Not Specified
+	Chassis Handle: 0x0000
+	Type: Motherboard
+	Contained Object Handles: 0
+
+Handle 0x0003, DMI type 3, 24 bytes
+Chassis Information
+	Manufacturer: Loongson
+	Type: Laptop
+	Lock: Not Present
+	Version: Not Specified
+	Serial Number: Not Specified
+	Asset Tag: Not Specified
+	Boot-up State: Safe
+	Power Supply State: Safe
+	Thermal State: Safe
+	Security Status: Unknown
+	OEM Information: 0x00000000
+	Height: Unspecified
+	Number Of Power Cords: Unspecified
+	Contained Elements: 0
+	SKU Number: Not Specified
+
+Handle 0x0004, DMI type 4, 48 bytes
+Processor Information
+	Socket Designation: CPU1
+	Type: Central Processor
+	Family: MIPS
+	Manufacturer: Loongson
+	ID: C0 01 00 00 00 00 00 00
+	Version: ICT Loongson-3A R3(loongson-3A4000)
+	Voltage: Unknown
+	External Clock: Unknown
+	Max Speed: Unknown
+	Current Speed: 1600 MHz
+	Status: Populated, Enabled
+	Upgrade: None
+	L1 Cache Handle: Not Provided
+	L2 Cache Handle: Not Provided
+	L3 Cache Handle: Not Provided
+	Serial Number: Not Specified
+	Asset Tag: Not Specified
+	Part Number: Not Specified
+	Core Count: 4
+	Core Enabled: 4
+	Thread Count: 4
+	Characteristics:
+		64-bit capable
+		Multi-Core
+		Hardware Thread
+
+Handle 0x0005, DMI type 7, 27 bytes
+Cache Information
+	Socket Designation: Not Specified
+	Configuration: Disabled, Not Socketed, Level 1
+	Operational Mode: Write Through
+	Location: Internal
+	Installed Size: 0 kB
+	Maximum Size: 0 kB
+	Supported SRAM Types: None
+	Installed SRAM Type: None
+	Speed: Unknown
+	Error Correction Type: <OUT OF SPEC>
+	System Type: <OUT OF SPEC>
+	Associativity: <OUT OF SPEC>
+
+Handle 0x0006, DMI type 7, 27 bytes
+Cache Information
+	Socket Designation: Not Specified
+	Configuration: Disabled, Not Socketed, Level 1
+	Operational Mode: Write Through
+	Location: Internal
+	Installed Size: 0 kB
+	Maximum Size: 0 kB
+	Supported SRAM Types: None
+	Installed SRAM Type: None
+	Speed: Unknown
+	Error Correction Type: <OUT OF SPEC>
+	System Type: <OUT OF SPEC>
+	Associativity: <OUT OF SPEC>
+
+Handle 0x0007, DMI type 7, 27 bytes
+Cache Information
+	Socket Designation: Not Specified
+	Configuration: Disabled, Not Socketed, Level 1
+	Operational Mode: Write Through
+	Location: Internal
+	Installed Size: 0 kB
+	Maximum Size: 0 kB
+	Supported SRAM Types: None
+	Installed SRAM Type: None
+	Speed: Unknown
+	Error Correction Type: <OUT OF SPEC>
+	System Type: <OUT OF SPEC>
+	Associativity: <OUT OF SPEC>
+
+Handle 0x0008, DMI type 9, 17 bytes
+System Slot Information
+	Designation: PCIE X4 SLOT
+	Type: x4 PCI Express 2 x4
+	Current Usage: Available
+	Length: Short
+	ID: 0
+	Characteristics:
+		3.3 V is provided
+
+Handle 0x0009, DMI type 9, 17 bytes
+System Slot Information
+	Designation: PCIE X8 SLOT 1
+	Type: x8 PCI Express 2 x8
+	Current Usage: Available
+	Length: Short
+	ID: 1
+	Characteristics:
+		3.3 V is provided
+
+Handle 0x000A, DMI type 9, 17 bytes
+System Slot Information
+	Designation: PCIE X8 SLOT 2
+	Type: x8 PCI Express 2 x8
+	Current Usage: Available
+	Length: Short
+	ID: 2
+	Characteristics:
+		3.3 V is provided
+
+Handle 0x000B, DMI type 9, 17 bytes
+System Slot Information
+	Designation: PCIE X8 SLOT 3
+	Type: x8 PCI Express 2 x8
+	Current Usage: Available
+	Length: Short
+	ID: 3
+	Characteristics:
+		3.3 V is provided
+
+Handle 0x000C, DMI type 11, 5 bytes
+OEM Strings
+	String 1: Loongson
+
+Handle 0x000D, DMI type 16, 23 bytes
+Physical Memory Array
+	Location: System Board Or Motherboard
+	Use: System Memory
+	Error Correction Type: None
+	Maximum Capacity: 0 kB
+	Error Information Handle: Not Provided
+	Number Of Devices: 0
+
+Handle 0x000E, DMI type 19, 31 bytes
+Memory Array Mapped Address
+	Starting Address: 0x0000000000000000k
+	Ending Address: 0x0000000200000000k
+	Range Size: 8 GB
+	Physical Array Handle: 0x0000
+	Partition Width: 0
+
+Handle 0x000F, DMI type 28, 22 bytes
+Temperature Probe
+	Description: Cpu Temperature
+	Location: Processor
+	Status: OK
+	Maximum Value: 128.0 deg C
+	Minimum Value: Unknown
+	Resolution: Unknown
+	Tolerance: Unknown
+	Accuracy: Unknown
+	OEM-specific Information: 0x00000000
+	Nominal Value: 0.0 deg C
+
+Handle 0x0010, DMI type 32, 11 bytes
+System Boot Information
+	Status: No errors detected
+
+Handle 0xFEFF, DMI type 127, 4 bytes
+End Of Table
+
