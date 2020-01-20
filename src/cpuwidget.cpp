@@ -103,59 +103,75 @@ void CpuWidget::initWidget()
     double maxMHz = maxSpeed.remove(",").toDouble()/1000.0;
 
     double minMHz = minSpeed.remove(",").toDouble()/1000.0;
+
+    QString speedUnit = "MHz";
     if(maxMHz > 10000)  //AMD CPU speed is MHZ, intel is GHZ
     {
         maxMHz/=10000.0;
         minMHz/=10000.0;
+        speedUnit = "GHz";
+    }
+
+    double modelSpeed = 0;
+    int index = overviewInfo_.value.indexOf('@');
+    if(index > 0)
+    {
+        modelSpeed = overviewInfo_.value.mid(index+1).trimmed().remove("MHz",Qt::CaseInsensitive).remove("GHz",Qt::CaseInsensitive).toDouble();
     }
 
     speed_.clear();
-    if(minMHz > 0.0 && maxMHz > 0.0 && maxMHz >= minMHz)
-    {
-        int index = overviewInfo_.value.indexOf('@');
-        if(index > 0)
-        {
-            speed_ = overviewInfo_.value.mid(index+1).trimmed();
-        }
-        else
-        {
-            speed_ = QString::number(maxMHz) + "GHz";
-        }
+    bool minMaxMHzSuccess = ( minMHz >0.0 && maxMHz >0.0 && maxMHz >= minMHz);
+    bool modelSpeedSuccess = modelSpeed > 0.0;
 
-        speed_ += " (";
-        speed_ += QString::number(minMHz);
-        speed_ += " - ";
-        speed_ += QString::number(maxMHz);
-        speed_ += "GHz)";
+    if (modelSpeedSuccess) {
+        if (minMaxMHzSuccess) {
+            speed_ = QString("%1(%2-%3)%4").arg(modelSpeed).arg(minMHz).arg(maxSpeed).arg(speedUnit);
+        }
+        else {
+            speed_ = QString("%1%2").arg(modelSpeed).arg(speedUnit);
+        }
     }
+    if (modelSpeedSuccess == false && minMaxMHzSuccess) {
+        speed_ = QString("%1-%2%3").arg(minMHz).arg(maxMHz).arg(speedUnit);
+    }
+
+
     //获取cpu频率失败，尝试从dmidecode中获取
 
     bool t_getCpuSpeedFromDmiSuccess = false;
-    if (speed_.isEmpty()) {
+    if (minMaxMHzSuccess == false && modelSpeedSuccess == false) {
+        QRegExp letter("[a-zA-Z]");
         QString maxSpeed_DMI = DeviceInfoParser::Instance().queryData("dmidecode","Processor Information","Max Speed");
-        QString curSpeed_DMI = DeviceInfoParser::Instance().queryData("dmidecode","Processor Information","Current Speed");
 
-        QRegExp englishLetter("[a-zA-Z]");
-        if (maxSpeed_DMI.contains("MHZ",Qt::CaseInsensitive)) {
-            maxSpeed_DMI = maxSpeed_DMI.remove(englishLetter).trimmed();
+        if (maxSpeed_DMI.contains("HZ",Qt::CaseInsensitive)) {
+            maxSpeed_DMI = maxSpeed_DMI.remove(letter).trimmed();
         }
-        if (curSpeed_DMI.contains("MHZ",Qt::CaseInsensitive)) {
-            curSpeed_DMI = curSpeed_DMI.remove(englishLetter).trimmed();
-        }
+//        QString curSpeed_DMI = DeviceInfoParser::Instance().queryData("dmidecode","Processor Information","Current Speed");
+//        if (curSpeed_DMI.contains("HZ",Qt::CaseInsensitive)) {
+//            curSpeed_DMI = curSpeed_DMI.remove(englishLetter).trimmed();
+//        }
 
-        double maxMHz = maxSpeed_DMI.toDouble();
-        double curSpeedMHz = curSpeed_DMI.toDouble();
-        if (maxMHz > 0.0 && curSpeedMHz >0.0 && maxMHz >= curSpeedMHz) {
-            speed_ = QString::number(curSpeedMHz) + QString("(Max:") + QString::number(maxMHz) + QString(") MHz");
+//        double curSpeedMHz = curSpeed_DMI.toDouble();
+        double maxSpeed = maxSpeed_DMI.toDouble();
+        if (maxSpeed > 0.0) {
+            QString unit = "MHz";
+            if(maxSpeed_DMI.contains("GHz",Qt::CaseInsensitive)) {
+                unit = "GHz";
+            }
+            speed_ = QString("%1 %2").arg(maxSpeed).arg(unit);
             t_getCpuSpeedFromDmiSuccess = true;
         }
     }
 
     QStringList headers;
     if (speed_.isEmpty()) {
-       headers << "Name" << "Vendor" << "Architecture";
+       headers << tr("Name") << tr("Vendor") << tr("Architecture");
     } else {
-        headers << "Name" << "Vendor" << DApplication::translate("CPU", "Speed") << "Architecture";
+        if (t_getCpuSpeedFromDmiSuccess) {
+            headers << tr("Name") << tr("Vendor") << tr("Max Speed") << tr("Architecture");
+        } else {
+            headers << tr("Name") << tr("Vendor") << tr("Speed") << tr("Architecture");
+        }
     }
 
     QList<QStringList> tabList;
@@ -163,7 +179,6 @@ void CpuWidget::initWidget()
     foreach(const QString& cpu, cpuList)
     {
         QString md = DeviceInfoParser::Instance().queryData("catcpu", cpu, "model name");
-
         QString mc = DeviceInfoParser::Instance().queryData("catcpu", cpu, "vendor_id");
         if(mc.isEmpty() || mc == DApplication::translate("Main", "Unknown"))
         {

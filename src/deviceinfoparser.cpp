@@ -41,14 +41,14 @@ DWIDGET_USE_NAMESPACE
 
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deepin_uos_arm64_nvme_disk";
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_bug_12495";//读取不到内存的bug
-const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_12417_cpu_bug";//cpu主频为0
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_12417_cpu_bug";//cpu主频为0
+const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_dmidecode_multiProcessor";//dmidecode 有多个Processor information
 
 
 using PowerInter = com::deepin::daemon::Power;
 
 DCORE_USE_NAMESPACE
 
-//static QProcess process_;
 
 DeviceInfoParser::DeviceInfoParser(): QObject()
 {

@@ -1,0 +1,14 @@
+Architecture:        mips64
+Byte Order:          Little Endian
+CPU(s):              4
+On-line CPU(s) list: 0-3
+Thread(s) per core:  1
+Core(s) per socket:  4
+Socket(s):           1
+NUMA node(s):        1
+Model name:          Loongson-3A R4 (Loongson-3A4000) @ 1700MHz
+BogoMIPS:            3393.06
+L1d cache:           64K
+L1i cache:           64K
+L2 cache:            2048K
+NUMA node0 CPU(s):   0-3
