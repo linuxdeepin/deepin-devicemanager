@@ -42,7 +42,8 @@ DWIDGET_USE_NAMESPACE
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deepin_uos_arm64_nvme_disk";
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_bug_12495";//读取不到内存的bug
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_12417_cpu_bug";//cpu主频为0
-const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_dmidecode_multiProcessor";//dmidecode 有多个Processor information
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_dmidecode_multiProcessor";//dmidecode 有多个Processor information
+const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/longxin_3A400_notebook";//monitor size is in error
 
 
 using PowerInter = com::deepin::daemon::Power;
@@ -456,7 +457,15 @@ QStringList DeviceInfoParser::getXrandrMonitorList()
 
 QString DeviceInfoParser::getEDID()
 {
-
+    QStringList monitorList = getXrandrMonitorList();
+    foreach(auto firstKey, monitorList) {
+        QString edid = queryData("xrandr",firstKey,"EDID__0");
+        if(DApplication::translate("Main", "Unknown") != edid  &&
+                edid.count()%(QString("00ffffffffffff0030aed86100000000").count()+1) == 0) {
+            return edid;
+        }
+    }
+    return QString("");
 }
 
 QStringList DeviceInfoParser::getLshwMultimediaList()
@@ -2308,7 +2317,26 @@ bool DeviceInfoParser::loadXrandrDatabase()
             secondOrder.push_back(strList.first().trimmed());
             continue;
         }
-
+        static QString EDID = "";
+        static bool startLogEDID = false;
+        static int EDID_NO = 0;
+        if (line.contains("EDID:",Qt::CaseInsensitive)) {
+            startLogEDID = true;
+            EDID = "";
+        }
+        if(startLogEDID == true && !line.contains("EDID:",Qt::CaseInsensitive)) {
+            if (line.startsWith(Devicetype_Xrandr_Tab) || line.startsWith(Devicetype_Xrandr_Twospace)) {
+                if (line.trimmed().count() == QString("00ffffffffffff0030aed86100000000").count()){
+                    EDID += line.trimmed()+"\n";
+                }
+                else {
+                    startLogEDID = false;
+                    QString edidStr = QString("EDID__%1").arg(EDID_NO);
+                    EDID_NO++;
+                    DeviceInfoMap[edidStr] = EDID;
+                }
+            }
+        }
         if( line.startsWith(Devicetype_Xrandr_Tab) || line.startsWith(Devicetype_Xrandr_Twospace) )
         {
             if(deviceType.isEmpty() == false)

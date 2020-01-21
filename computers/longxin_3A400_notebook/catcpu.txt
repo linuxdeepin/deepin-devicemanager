@@ -1,0 +1,78 @@
+system type		: generic-loongson-machine
+machine			: loongson,generic
+processor		: 0
+cpu model		: ICT Loongson-3 V0.1  FPU V0.1
+model name		: Loongson-3A R4 (Loongson-3A4000) @ 1700MHz
+CPU MHz			: 1700.00
+BogoMIPS		: 3393.06
+wait instruction	: yes
+microsecond timers	: yes
+tlb_entries		: 2112
+extra interrupt vector	: no
+hardware watchpoint	: yes, count: 0, address/irw mask: []
+isa			: mips1 mips2 mips3 mips4 mips5 mips32r1 mips32r2 mips64r1 mips64r2
+ASEs implemented	: vz
+shadow register sets	: 1
+kscratch registers	: 6
+package			: 0
+core			: 0
+VCED exceptions		: not available
+VCEI exceptions		: not available
+
+processor		: 1
+cpu model		: ICT Loongson-3 V0.1  FPU V0.1
+model name		: Loongson-3A R4 (Loongson-3A4000) @ 1700MHz
+CPU MHz			: 1700.00
+BogoMIPS		: 3393.06
+wait instruction	: yes
+microsecond timers	: yes
+tlb_entries		: 2112
+extra interrupt vector	: no
+hardware watchpoint	: yes, count: 0, address/irw mask: []
+isa			: mips1 mips2 mips3 mips4 mips5 mips32r1 mips32r2 mips64r1 mips64r2
+ASEs implemented	: vz
+shadow register sets	: 1
+kscratch registers	: 6
+package			: 0
+core			: 1
+VCED exceptions		: not available
+VCEI exceptions		: not available
+
+processor		: 2
+cpu model		: ICT Loongson-3 V0.1  FPU V0.1
+model name		: Loongson-3A R4 (Loongson-3A4000) @ 1700MHz
+CPU MHz			: 1700.00
+BogoMIPS		: 3410.31
+wait instruction	: yes
+microsecond timers	: yes
+tlb_entries		: 2112
+extra interrupt vector	: no
+hardware watchpoint	: yes, count: 0, address/irw mask: []
+isa			: mips1 mips2 mips3 mips4 mips5 mips32r1 mips32r2 mips64r1 mips64r2
+ASEs implemented	: vz
+shadow register sets	: 1
+kscratch registers	: 6
+package			: 0
+core			: 2
+VCED exceptions		: not available
+VCEI exceptions		: not available
+
+processor		: 3
+cpu model		: ICT Loongson-3 V0.1  FPU V0.1
+model name		: Loongson-3A R4 (Loongson-3A4000) @ 1700MHz
+CPU MHz			: 1700.00
+BogoMIPS		: 3393.06
+wait instruction	: yes
+microsecond timers	: yes
+tlb_entries		: 2112
+extra interrupt vector	: no
+hardware watchpoint	: yes, count: 0, address/irw mask: []
+isa			: mips1 mips2 mips3 mips4 mips5 mips32r1 mips32r2 mips64r1 mips64r2
+ASEs implemented	: vz
+shadow register sets	: 1
+kscratch registers	: 6
+package			: 0
+core			: 3
+VCED exceptions		: not available
+VCEI exceptions		: not available
+

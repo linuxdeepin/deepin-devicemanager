@@ -177,7 +177,7 @@ void CpuWidget::initWidget()
        headers << tr("Name") << tr("Vendor") << tr("Architecture");
     } else {
         if (t_getCpuSpeedFromDmiSuccess) {
-            headers << tr("Name") << tr("Vendor") << tr("Max Speed") << tr("Architecture");
+            headers << tr("Name") << tr("Vendor") << DApplication::translate("CPU","Max Speed") << tr("Architecture");
         } else {
             headers << tr("Name") << tr("Vendor") << tr("Speed") << tr("Architecture");
         }

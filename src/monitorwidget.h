@@ -23,7 +23,7 @@
 #pragma once
 
 #include "deviceinfowidgetbase.h"
-
+#include <QSize>
 class MonitorWidget : public DeviceInfoWidgetBase
 {
     Q_OBJECT
@@ -32,7 +32,14 @@ public:
 
     void initWidget() override;
 
-    QString parseMonitorSize(const QString& size, double& inch);
+    QString parseMonitorSize(const QString& size, double& inch,QSize& s);
     QString parseDisplayRate(const QString& resulotion);
+
+    bool compare2SizeFromQtAPI(QSize size);
+    QString getMonitorSizeFromEDID();
+private:
+    int m_screenWidth = 0;
+    int m_screenHeight = 0;
+
 };
 

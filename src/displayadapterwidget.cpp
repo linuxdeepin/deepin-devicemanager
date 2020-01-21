@@ -152,7 +152,7 @@ void DisplayadapterWidget::initWidget()
         overviewInfo_.value += name.value.remove(vendor.value, Qt::CaseInsensitive).trimmed();
 
         QList<ArticleStruct> subArticles;
-        subArticles << memory << vendor;
+        subArticles /*<< memory*/ << vendor;
         QString subValue = joinArticle(subArticles, " / ");
 
         if( subValue.isEmpty() == false)

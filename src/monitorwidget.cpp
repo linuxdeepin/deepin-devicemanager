@@ -25,6 +25,7 @@
 #include "math.h"
 #include <QDate>
 #include <DApplication>
+#include <QScreen>
 
 DWIDGET_USE_NAMESPACE
 
@@ -60,6 +61,11 @@ bool findAspectRatio(int width, int height, int& ar_w, int& ar_h)
 
 MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Monitor"))
 {
+    auto screens =  QGuiApplication::screens();
+    if(screens.count()>=1){
+        m_screenWidth = screens.at(0)->physicalSize().width();
+        m_screenHeight = screens.at(0)->physicalSize().height();
+    }
     initWidget();
 }
 
@@ -126,12 +132,16 @@ void MonitorWidget::initWidget()
             articles.push_back(serial);
             existArticles.insert("Serial ID");
 
-            QString size = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Size");
-
-            monitorSize.value = parseMonitorSize(size, inch);
-
-            articles.push_back(monitorSize);
-            existArticles.insert("Size");
+            QString sizeDescrition = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Size");
+            QSize size(0,0);
+            QString inchValue = parseMonitorSize(sizeDescrition, inch,size);
+            if (compare2SizeFromQtAPI(size)) {
+                monitorSize.value = inchValue;
+                if (monitorSize.isValid()){
+                    articles.push_back(monitorSize);
+                    existArticles.insert("Size");
+                }
+            }
 
             ArticleStruct mDate("Manufacture Date");
             mDate.queryData("hwinfo", monitor, "Year of Manufacture");
@@ -224,11 +234,25 @@ void MonitorWidget::initWidget()
                 articles.push_back(displayRete);
             }
 
-            if(monitorSize.isValid() == false)
+            if (monitorSize.isValid() == false)
             {
                 monitorSize.queryData("xrandr", xrandrMonitorList.at(i), "Size");
-                monitorSize.value = parseMonitorSize(monitorSize.value, inch);
-                articles.push_back(monitorSize);
+                QSize size;
+                QString inchValue = parseMonitorSize(monitorSize.value, inch,size);
+                if (compare2SizeFromQtAPI(size)) {
+                    monitorSize.value = inchValue;
+                    if (monitorSize.isValid()) {
+                        articles.push_back(monitorSize);
+                    }
+                }
+            }
+
+//            if (true) {
+            if (monitorSize.isValid() == false) {
+                monitorSize.value = getMonitorSizeFromEDID();
+                if (monitorSize.isValid()) {
+                    articles.push_back(monitorSize);
+                }
             }
         }
         articles.push_back(primaryMonitor);
@@ -294,7 +318,7 @@ void MonitorWidget::initWidget()
     }
 }
 
-QString MonitorWidget::parseMonitorSize(const QString& size, double& inch)
+QString MonitorWidget::parseMonitorSize(const QString& size, double& inch,QSize &s)
 {
     inch = 0.0;
 
@@ -302,8 +326,11 @@ QString MonitorWidget::parseMonitorSize(const QString& size, double& inch)
     QRegExp re("^([\\d]*)x([\\d]*) mm$");
     if( re.exactMatch(size) )
     {
-        double width = re.cap(1).toDouble()/2.54;
-        double height = re.cap(2).toDouble()/2.54;
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        s = QSize(width,height);
+        width /= 2.54;
+        height /= 2.54;
         inch = std::sqrt(width*width + height*height)/10.0;
         res = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch") + " (";
         res += size;
@@ -313,8 +340,11 @@ QString MonitorWidget::parseMonitorSize(const QString& size, double& inch)
     re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
     if( re.exactMatch(size) )
     {
-        double width = re.cap(1).toDouble()/2.54;
-        double height = re.cap(2).toDouble()/2.54;
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        s = QSize(width,height);
+        width /= 2.54;
+        height /= 2.54;
         inch = std::sqrt(width*width + height*height)/10.0;
         res = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch") + " (";
         res += size;
@@ -345,4 +375,53 @@ QString MonitorWidget::parseDisplayRate(const QString& resulotion)
     }
 
     return res;
+}
+
+bool MonitorWidget::compare2SizeFromQtAPI(QSize size)
+{
+    if(m_screenWidth == 0.0 || m_screenHeight == 0.0) {
+        return false;
+    }
+    bool widthCmpRet = qAbs(size.width() - m_screenWidth)/m_screenWidth < 0.3 ;
+    bool heihtCmpRet = qAbs(size.height() - m_screenHeight)/m_screenHeight < 0.3;
+    if( widthCmpRet && heihtCmpRet){
+        return true;
+    }
+    return false;
+}
+
+QString MonitorWidget::getMonitorSizeFromEDID()
+{
+    QString edid = DeviceInfoParser::Instance().getEDID();
+    QStringList list = edid.split('\n');
+    QString secondItem = list.at(1);
+    QString width_field = secondItem.mid(10,2);
+    QString height_field = secondItem.mid(12,2);
+
+    auto is_HexNumber = [](char c,int &d) ->bool{
+        if(c >= char('0') && c <= char('9')) {
+            d = c - char('0');
+            return true;
+        }
+        if(c >= char('a') && c <= char('f')) {
+            d = c - char('a');
+            return true;
+        }
+        d = -1;
+        return false;
+    };
+    int w0 = 0, w1 = 0;
+    int h0 = 0, h1 = 0;
+    is_HexNumber(width_field.at(0).toLatin1(),w0);
+    is_HexNumber(width_field.at(1).toLatin1(),w1);
+
+    is_HexNumber(height_field.at(0).toLatin1(),h0);
+    is_HexNumber(height_field.at(1).toLatin1(),h1);
+    if( w0<0 || w1 <0 || h0<0 || h1<0) return "";
+    int width = w0*16+w1;
+    int height = h0*16+h1;
+
+    double inch = std::sqrt(width*width + height*height)/2.54;
+    QString ret = QString("%1 %2(%3x%4 %5)").arg(QString::number(inch,'0',1)).arg(tr("inch")).arg(width).arg(height).arg(tr("cm"));
+    return ret;
 }
