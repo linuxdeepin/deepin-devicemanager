@@ -164,6 +164,7 @@ void CpuWidget::initWidget()
         double maxSpeed = maxSpeed_DMI.toDouble();
         if (maxSpeed > 0.0) {
             QString unit = "MHz";
+            maxSpeed_DMI = DeviceInfoParser::Instance().queryData("dmidecode","Processor Information","Max Speed");
             if(maxSpeed_DMI.contains("GHz",Qt::CaseInsensitive)) {
                 unit = "GHz";
             }
