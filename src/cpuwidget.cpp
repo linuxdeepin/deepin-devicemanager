@@ -151,7 +151,6 @@ void CpuWidget::initWidget()
     if (minMaxMHzSuccess == false && modelSpeedSuccess == false) {
         QRegExp letter("[a-zA-Z]");
         QString maxSpeed_DMI = DeviceInfoParser::Instance().queryData("dmidecode","Processor Information","Max Speed");
-        maxSpeed_DMI = "Unknown";
 
         if (maxSpeed_DMI.contains("HZ",Qt::CaseInsensitive)) {
             maxSpeed_DMI = maxSpeed_DMI.remove(letter).trimmed();

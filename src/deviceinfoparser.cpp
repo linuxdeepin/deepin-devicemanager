@@ -51,7 +51,6 @@ using PowerInter = com::deepin::daemon::Power;
 
 DCORE_USE_NAMESPACE
 
-
 DeviceInfoParser::DeviceInfoParser(): QObject()
 {
 
