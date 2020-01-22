@@ -26,8 +26,9 @@
 #include <QDate>
 #include <DApplication>
 #include <QScreen>
-
+#include "Logger.h"
 DWIDGET_USE_NAMESPACE
+DCORE_USE_NAMESPACE
 
 int gcd(int a,int b){
     if(a<b)
@@ -91,7 +92,7 @@ void MonitorWidget::initWidget()
         ArticleStruct vendor("Vendor");
         ArticleStruct currentResolution("Resolution");
         ArticleStruct resolutionList("Support Resolution");
-        ArticleStruct displayRete("Display Rate");
+        ArticleStruct displayRatio("Display Ratio");
 
         ArticleStruct monitorSize(DApplication::translate("Monitor", "Size"));
 
@@ -185,7 +186,7 @@ void MonitorWidget::initWidget()
             currentResolution.queryData("hwinfo", monitor, "Current Resolution");
             currentResolution.queryData("hwinfo", monitor, "Support Resolution");
 
-            displayRete.value = parseDisplayRate(currentResolution.value);
+            displayRatio.value = parseDisplayRatio(currentResolution.value);
 
             ArticleStruct frequencies("Frequencies");
             frequencies.queryData("hwinfo", monitor, "Frequencies");
@@ -202,7 +203,7 @@ void MonitorWidget::initWidget()
             articles.push_back(currentResolution);
             existArticles.insert("Current Resolution");
 
-            articles.push_back(displayRete);
+            articles.push_back(displayRatio);
 
             resolutionList.queryData("hwinfo", monitor, "Support Resolution");
         }
@@ -230,8 +231,8 @@ void MonitorWidget::initWidget()
             {
                 currentResolution.queryData("xrandr", xrandrMonitorList.at(i), "Resolution");
                 articles.push_back(currentResolution);
-                displayRete.value = parseDisplayRate(currentResolution.value);
-                articles.push_back(displayRete);
+                displayRatio.value = parseDisplayRatio(currentResolution.value);
+                articles.push_back(displayRatio);
             }
 
             if (monitorSize.isValid() == false)
@@ -354,7 +355,7 @@ QString MonitorWidget::parseMonitorSize(const QString& size, double& inch,QSize 
     return res;
 }
 
-QString MonitorWidget::parseDisplayRate(const QString& resulotion)
+QString MonitorWidget::parseDisplayRatio(const QString& resulotion)
 {
     QRegExp re("^([\\d]*)x([\\d]*)$");
     QString res;
@@ -382,6 +383,13 @@ bool MonitorWidget::compare2SizeFromQtAPI(QSize size)
     if(m_screenWidth == 0.0 || m_screenHeight == 0.0) {
         return false;
     }
+    dInfo(QString("%1%2%3%4%5")
+          .arg("screens.at(0)->physicalSize().width == ")
+          .arg(m_screenWidth)
+          .arg("and height ==")
+          .arg(m_screenHeight)
+          .arg("\n"));
+
     bool widthCmpRet = qAbs(size.width() - m_screenWidth)/m_screenWidth < 0.3 ;
     bool heihtCmpRet = qAbs(size.height() - m_screenHeight)/m_screenHeight < 0.3;
     if( widthCmpRet && heihtCmpRet){

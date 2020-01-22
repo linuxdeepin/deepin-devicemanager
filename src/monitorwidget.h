@@ -33,7 +33,7 @@ public:
     void initWidget() override;
 
     QString parseMonitorSize(const QString& size, double& inch,QSize& s);
-    QString parseDisplayRate(const QString& resulotion);
+    QString parseDisplayRatio(const QString& resulotion);
 
     bool compare2SizeFromQtAPI(QSize size);
     QString getMonitorSizeFromEDID();

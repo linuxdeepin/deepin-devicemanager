@@ -43,8 +43,9 @@ DWIDGET_USE_NAMESPACE
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_bug_12495";//读取不到内存的bug
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_12417_cpu_bug";//cpu主频为0
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_dmidecode_multiProcessor";//dmidecode 有多个Processor information
-const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/longxin_3A400_notebook";//monitor size is in error
-
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/longxin_3A400_notebook";//monitor size is in error
+const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo_test";
+//#define TEST_DATA_FROM_FILE
 
 using PowerInter = com::deepin::daemon::Power;
 

@@ -13,8 +13,6 @@ TEMPLATE = app
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-#load device info from file
-#DEFINES += TEST_DATA_FROM_FILE
 
 #QT_SCALE_FACTOR=1.5
 
