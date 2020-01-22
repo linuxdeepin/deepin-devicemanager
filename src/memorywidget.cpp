@@ -274,6 +274,9 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
 
         QString deviceName = vendor.value + " " + model.value;
+        if(vendor.value == DApplication::translate("Main", "Unknown") && model.value == DApplication::translate("Main", "Unknown")){
+            deviceName = tr("Unknow memory");
+        }
         if(deviceName.trimmed().isEmpty() == true)
         {
             deviceName = locator.value;
@@ -283,7 +286,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
             }
         }
 
-        if( false == isSlotValid(size.value, speed.value) && getDmidecodeMemoryListSuccess == true)
+        if( false == isSlotValid(size.value, speed.value) && getDmidecodeMemoryListSuccess)
         {
             continue;
         }
@@ -563,12 +566,11 @@ void MemoryWidget::updateWholeDownWidget_Good()
 
 bool MemoryWidget::isSlotValid(const QString& size, const QString& speed )
 {
-    if( speed.contains("MT/s") )
+    if(size.contains("Unknown",Qt::CaseInsensitive)|| size.contains("No Module Installed",Qt::CaseInsensitive))
     {
-        return true;
+        return false;
     }
-
-    if(size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
+    if(speed.contains("MT/s") == false)//maybe weak
     {
         return false;
     }

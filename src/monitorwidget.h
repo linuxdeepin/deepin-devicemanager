@@ -40,6 +40,5 @@ public:
 private:
     int m_screenWidth = 0;
     int m_screenHeight = 0;
-    QSize m_size;
 };
 

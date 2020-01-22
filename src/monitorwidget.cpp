@@ -67,7 +67,6 @@ MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DAp
         m_screenWidth = screens.at(0)->physicalSize().width();
         m_screenHeight = screens.at(0)->physicalSize().height();
     }
-    m_size = QSize(0,0);
     initWidget();
 }
 
