@@ -45,7 +45,7 @@ DWIDGET_USE_NAMESPACE
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_dmidecode_multiProcessor";//dmidecode 有多个Processor information
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/longxin_3A400_notebook";//monitor size is in error
 const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo_test";
-//#define TEST_DATA_FROM_FILE
+#define TEST_DATA_FROM_FILE
 
 using PowerInter = com::deepin::daemon::Power;
 

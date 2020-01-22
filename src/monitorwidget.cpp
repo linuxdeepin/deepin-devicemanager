@@ -67,6 +67,7 @@ MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DAp
         m_screenWidth = screens.at(0)->physicalSize().width();
         m_screenHeight = screens.at(0)->physicalSize().height();
     }
+    m_size = QSize(0,0);
     initWidget();
 }
 
@@ -138,10 +139,6 @@ void MonitorWidget::initWidget()
             QString inchValue = parseMonitorSize(sizeDescrition, inch,size);
             if (compare2SizeFromQtAPI(size)) {
                 monitorSize.value = inchValue;
-                if (monitorSize.isValid()){
-                    articles.push_back(monitorSize);
-                    existArticles.insert("Size");
-                }
             }
 
             ArticleStruct mDate("Manufacture Date");
@@ -242,15 +239,17 @@ void MonitorWidget::initWidget()
                 QString inchValue = parseMonitorSize(monitorSize.value, inch,size);
                 if (compare2SizeFromQtAPI(size)) {
                     monitorSize.value = inchValue;
-                    if (monitorSize.isValid()) {
-                        articles.push_back(monitorSize);
-                    }
                 }
             }
 
-//            if (true) {
-            if (monitorSize.isValid() == false) {
-                monitorSize.value = getMonitorSizeFromEDID();
+            //干脆都从EDID中解析尺寸，compare2SizeFromQtAPI未必能起到作用，EDID中解析失败则任然使用之前获取的size
+            if (true) {
+//            if (monitorSize.isValid() == false) {
+                QString sizeValue = "";
+                sizeValue = getMonitorSizeFromEDID();
+                if(!sizeValue.isEmpty()&&sizeValue.contains("cm")) {
+                    monitorSize.value = sizeValue;
+                }
                 if (monitorSize.isValid()) {
                     articles.push_back(monitorSize);
                 }
@@ -319,36 +318,36 @@ void MonitorWidget::initWidget()
     }
 }
 
-QString MonitorWidget::parseMonitorSize(const QString& size, double& inch,QSize &s)
+QString MonitorWidget::parseMonitorSize(const QString& sizeDescription, double& inch,QSize &retSize)
 {
     inch = 0.0;
 
-    QString res = size;
+    QString res = sizeDescription;
     QRegExp re("^([\\d]*)x([\\d]*) mm$");
-    if( re.exactMatch(size) )
+    if( re.exactMatch(sizeDescription) )
     {
         double width = re.cap(1).toDouble();
         double height = re.cap(2).toDouble();
-        s = QSize(width,height);
+        retSize = QSize(width,height);
         width /= 2.54;
         height /= 2.54;
         inch = std::sqrt(width*width + height*height)/10.0;
         res = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch") + " (";
-        res += size;
+        res += sizeDescription;
         res += ")";
     }
 
     re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
-    if( re.exactMatch(size) )
+    if( re.exactMatch(sizeDescription) )
     {
         double width = re.cap(1).toDouble();
         double height = re.cap(2).toDouble();
-        s = QSize(width,height);
+        retSize = QSize(width,height);
         width /= 2.54;
         height /= 2.54;
         inch = std::sqrt(width*width + height*height)/10.0;
         res = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch") + " (";
-        res += size;
+        res += sizeDescription;
         res += ")";
     }
 
@@ -401,6 +400,9 @@ bool MonitorWidget::compare2SizeFromQtAPI(QSize size)
 QString MonitorWidget::getMonitorSizeFromEDID()
 {
     QString edid = DeviceInfoParser::Instance().getEDID();
+    if (edid.isEmpty()) {
+        return "";
+    }
     QStringList list = edid.split('\n');
     QString secondItem = list.at(1);
     QString width_field = secondItem.mid(10,2);
@@ -428,7 +430,8 @@ QString MonitorWidget::getMonitorSizeFromEDID()
     if( w0<0 || w1 <0 || h0<0 || h1<0) return "";
     int width = w0*16+w1;
     int height = h0*16+h1;
-
+    if(width <= 0) return  "";
+    if(height <= 0)return  "";
     double inch = std::sqrt(width*width + height*height)/2.54;
     QString ret = QString("%1 %2(%3x%4 %5)").arg(QString::number(inch,'0',1)).arg(tr("inch")).arg(width).arg(height).arg(tr("cm"));
     return ret;

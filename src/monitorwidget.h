@@ -32,7 +32,7 @@ public:
 
     void initWidget() override;
 
-    QString parseMonitorSize(const QString& size, double& inch,QSize& s);
+    QString parseMonitorSize(const QString& sizeDescription, double& inch,QSize& retSize);
     QString parseDisplayRatio(const QString& resulotion);
 
     bool compare2SizeFromQtAPI(QSize size);
@@ -40,6 +40,6 @@ public:
 private:
     int m_screenWidth = 0;
     int m_screenHeight = 0;
-
+    QSize m_size;
 };
 
