@@ -407,31 +407,17 @@ QString MonitorWidget::getMonitorSizeFromEDID()
     QString width_field = secondItem.mid(10,2);
     QString height_field = secondItem.mid(12,2);
 
-    auto is_HexNumber = [](char c,int &d) ->bool{
-        if(c >= char('0') && c <= char('9')) {
-            d = c - char('0');
-            return true;
-        }
-        if(c >= char('a') && c <= char('f')) {
-            d = c - char('a');
-            return true;
-        }
-        d = -1;
-        return false;
-    };
-    int w0 = 0, w1 = 0;
-    int h0 = 0, h1 = 0;
-    is_HexNumber(width_field.at(0).toLatin1(),w0);
-    is_HexNumber(width_field.at(1).toLatin1(),w1);
-
-    is_HexNumber(height_field.at(0).toLatin1(),h0);
-    is_HexNumber(height_field.at(1).toLatin1(),h1);
-    if( w0<0 || w1 <0 || h0<0 || h1<0) return "";
-    int width = w0*16+w1;
-    int height = h0*16+h1;
-    if(width <= 0) return  "";
-    if(height <= 0)return  "";
-    double inch = std::sqrt(width*width + height*height)/2.54;
-    QString ret = QString("%1 %2(%3x%4 %5)").arg(QString::number(inch,'0',1)).arg(tr("inch")).arg(width).arg(height).arg(tr("cm"));
+    int width = 0; bool trWidthOk = false;
+    int height = 0; bool trHeightOk = false;
+    width = width_field.toInt(&trWidthOk,16);
+    height = height_field.toInt(&trHeightOk,16);
+    if (trWidthOk == false || trHeightOk == false) {
+        return "";
+    }
+    if(height <= 0) return  "";
+    if(width <= 0)return  "";
+    double inch = std::sqrt(height*height + width*width)/2.54;
+    QString inchStr_tr = DApplication::translate("Main","inch");
+    QString ret = QString("%1 %2(%3x%4 %5)").arg(QString::number(inch,'0',1)).arg(inchStr_tr).arg(width).arg(height).arg(tr("cm"));
     return ret;
 }
