@@ -314,16 +314,18 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
     overviewInfo_.value = size.value;
     if( detailMem.size() > 0 )
     {
-        overviewInfo_.value += " (";
-        overviewInfo_.value += detailMem.join(" / ");
-        overviewInfo_.value += ")";
+        QString detail = detailMem.join(" / ");
+        if(detail.isEmpty() == false) {
+            overviewInfo_.value += " (";
+            overviewInfo_.value += detail;
+            overviewInfo_.value += ")";
+        }
     }
 }
 
 void MemoryWidget::initTableWdiget_Good()
 {
     QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
-
 
     QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size", /* "Statu"*/};
 
@@ -558,9 +560,12 @@ void MemoryWidget::updateWholeDownWidget_Good()
     overviewInfo_.value = size.value;
     if( detailMem.size() > 0 )
     {
-        overviewInfo_.value += " (";
-        overviewInfo_.value += detailMem.join("/");
-        overviewInfo_.value += ")";
+        QString detail  = detailMem.join("/");
+        if (detail.isEmpty() == false) {
+            overviewInfo_.value += " (";
+            overviewInfo_.value += detail;
+            overviewInfo_.value += ")";
+        }
     }
 }
 
