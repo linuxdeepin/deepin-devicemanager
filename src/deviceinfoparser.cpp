@@ -1243,7 +1243,7 @@ bool DeviceInfoParser::loadOSInfo()
 
 QString DeviceInfoParser::getOsInfo()
 {
-    return osInfo_;
+    return osInfo_.replace("deepin","",Qt::CaseInsensitive);
 }
 
 QString DeviceInfoParser::getLsbRelease()
