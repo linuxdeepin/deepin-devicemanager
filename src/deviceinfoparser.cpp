@@ -164,7 +164,7 @@ bool DeviceInfoParser::fuzzeyQueryKey(const QString& toolname, const QString& fu
 
 const QString& DeviceInfoParser::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey)
 {
-    static QString result = DApplication::translate("Main", "Unknown");
+    static QString result = tr("Unknown");
     if(false == toolDatabase_.contains(toolname))
     {
         return result;
@@ -185,7 +185,7 @@ const QString& DeviceInfoParser::queryData(const QString& toolname, const QStrin
 
 const QString& DeviceInfoParser::fuzzyQueryData(const QString& toolname, const QString& firstKey, const QString& secondKey)
 {
-    static QString result = DApplication::translate("Main", "Unknown");
+    static QString result = tr("Unknown");
     if(false == toolDatabase_.contains(toolname))
     {
         return result;
@@ -459,7 +459,7 @@ QString DeviceInfoParser::getEDID()
     QStringList monitorList = getXrandrMonitorList();
     foreach(auto firstKey, monitorList) {
         QString edid = queryData("xrandr",firstKey,"EDID__0");
-        if(DApplication::translate("Main", "Unknown") != edid  &&
+        if(tr("Unknown") != edid  &&
                 edid.count()%(QString("00ffffffffffff0030aed86100000000").count()+1) == 0) {
             return edid;
         }
@@ -1185,7 +1185,7 @@ bool DeviceInfoParser::loadOSInfo()
 
     if( false == executeProcess("cat /proc/version") )
     {
-        osInfo_ = DApplication::translate("Main", "Unknown");
+        osInfo_ = tr("Unknown");
         return false;
     }
 
@@ -1232,7 +1232,7 @@ bool DeviceInfoParser::loadOSInfo()
     lsbRelease_.remove("\"");
     homeUrl_ = queryData("catOsrelease", "catOsrelease", "HOME_URL");
     homeUrl_.remove("\"");
-    if(lsbRelease_.isEmpty() || lsbRelease_ ==  DApplication::translate("Main", "Unknown"))
+    if(lsbRelease_.isEmpty() || lsbRelease_ ==  tr("Unknown"))
     {
         lsbRelease_ = queryData("lsb_release", "lsb_release", "Description");
     }
@@ -3259,30 +3259,6 @@ bool DeviceInfoParser::getRootPassword()
     }
 
     return true;
-
-//    if( autoDialog == nullptr )
-//    {
-//        autoDialog = new LogPasswordAuth;
-//    }
-
-//    if( autoDialog->getPasswd().isEmpty() )
-//    {
-//        if( -1 == autoDialog->exec())
-//        {
-//            exit(-1);
-//        }
-//    }
-
-//    QStringList arg;
-//    arg << "-c" << "echo " + autoDialog->getPasswd() + " | sudo -S whoami";
-//    res = runCmd(arg);  // file path is fixed. So write cmd direct
-//    if( res == false || standOutput_.trimmed() != "root" )
-//    {
-//        autoDialog->clearPasswd();
-//        autoDialog->showMessage(DApplication::translate("Main", "Password Error!"));
-//        //DMessageBox::warning(nullptr, "", DApplication::translate("Main", "Password Error!"));
-//        exit(-1);
-//    }
 }
 
 bool DeviceInfoParser::executeProcess(const QString& cmd)
@@ -3330,13 +3306,12 @@ bool DeviceInfoParser::runCmd(const QString& cmd)
         {
             //if(exitCode == 126)
             //{
-                //DMessageBox::critical(nullptr, "", DApplication::translate("Main", "Password Error!" ));
+                //DMessageBox::critical(nullptr, "", tr("Password Error!" ));
             //}
 
             //exit(-1);
         }
 
-        //DMessageBox::critical(nullptr, "", DApplication::translate("Main", "Password Error!" ) );
         return false;
     }
 

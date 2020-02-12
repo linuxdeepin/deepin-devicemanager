@@ -2115,7 +2115,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>EISA is supported"</source>
+            <source>EISA is supported</source>
             <translation type="unfinished"/>
         </message>
         <message>

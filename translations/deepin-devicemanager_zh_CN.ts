@@ -2109,7 +2109,7 @@
             <translation>支持MCA</translation>
         </message>
         <message>
-            <source>EISA is supported"</source>
+            <source>EISA is supported</source>
             <translation>支持EISA</translation>
         </message>
         <message>

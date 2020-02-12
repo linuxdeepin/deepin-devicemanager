@@ -63,21 +63,6 @@ void PowerWidget::initWidget()
         existArticles2.clear();
         existArticles3.clear();
 
-//        ArticleStruct ssdelay("Screen Suspend Delay");
-//        ssdelay.value = DeviceInfoParser::Instance().switchingpowerScreenSuspendDelay_==0? DApplication::translate("Main", "Never")
-//            : QString::number(DeviceInfoParser::Instance().switchingpowerScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
-//        articles.push_back(ssdelay);
-
-//        ArticleStruct csdelay("Computer Suspend Delay");
-//        csdelay.value = DeviceInfoParser::Instance().switchingpowerComputerSuspendDelay_==0? DApplication::translate("Main", "Never")
-//            : QString::number(DeviceInfoParser::Instance().switchingpowerComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
-//        articles.push_back(csdelay);
-
-//        ArticleStruct asdelay("AutoLock Screen Delay");
-//        asdelay.value = DeviceInfoParser::Instance().switchingpowerAutoLockScreenDelay_==0? DApplication::translate("Main", "Never")
-//            : QString::number(DeviceInfoParser::Instance().switchingpowerAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
-//        articles.push_back(asdelay);
-
         ArticleStruct name("Name");
         ArticleStruct vendor("Vendor");
         ArticleStruct device("Device");
@@ -165,7 +150,7 @@ void PowerWidget::initWidget()
             QStringList tab =
             {
                 name.value,
-                DApplication::translate("Main", "Switching Power"),
+                tr("Switching Power"),
                 vendor.value
             };
 
@@ -176,7 +161,7 @@ void PowerWidget::initWidget()
         {
             overviewInfo_.value += " / ";
         }
-        overviewInfo_.value += DApplication::translate("Main", "Switching Power") + " " + name.value;
+        overviewInfo_.value += tr("Switching Power") + " " + name.value;
     }
 
 
@@ -186,20 +171,6 @@ void PowerWidget::initWidget()
         existArticles2.clear();
         existArticles3.clear();
         articles.clear();
-//        ArticleStruct ssdelay("Screen Suspend Delay");
-//        ssdelay.value = DeviceInfoParser::Instance().batteryScreenSuspendDelay_==0? DApplication::translate("Main", "Never")
-//            : QString::number(DeviceInfoParser::Instance().batteryScreenSuspendDelay_) + DApplication::translate("Main", " Secs later");
-//        articles.push_back(ssdelay);
-
-//        ArticleStruct csdelay("Computer Suspend Delay");
-//        csdelay.value = DeviceInfoParser::Instance().batteryComputerSuspendDelay_==0? DApplication::translate("Main", "Never")
-//            : QString::number(DeviceInfoParser::Instance().batteryComputerSuspendDelay_) + DApplication::translate("Main", " Secs later");
-//        articles.push_back(csdelay);
-
-//        ArticleStruct asdelay("AutoLock Screen Delay");
-//        asdelay.value = DeviceInfoParser::Instance().batteryAutoLockScreenDelay_==0? DApplication::translate("Main", "Never")
-//            : QString::number(DeviceInfoParser::Instance().batteryAutoLockScreenDelay_) + DApplication::translate("Main", " Secs later");
-//        articles.push_back(asdelay);
 
         ArticleStruct vendor("Vendor");
         ArticleStruct de("Design Energy");
@@ -266,7 +237,7 @@ void PowerWidget::initWidget()
             ArticleStruct slot("Location");
             slot.queryData( "dmidecode", device, "slot");
             articles.push_back(slot);
-            if(slot.value.isEmpty() == false || slot.value != DApplication::translate("Main", "Unknown"))
+            if(slot.value.isEmpty() == false || slot.value != tr("Unknown"))
             {
                 existArticles2.insert("Location");
             }
@@ -327,7 +298,7 @@ void PowerWidget::initWidget()
             QStringList tab =
             {
                 d_name,
-                DApplication::translate("Main", "Battery"),
+                tr("Battery"),
                 vendor.value
             };
 
@@ -356,13 +327,13 @@ void PowerWidget::initWidget()
             overName += device.value;
         }
 
-        addDevice( DApplication::translate("Main", "Battery") + " " + overName, articles, maxSwitchingSize + maxBatterySize, true );
+        addDevice(tr("Battery") + " " + overName, articles, maxSwitchingSize + maxBatterySize, true );
 
         if(overviewInfo_.value.isEmpty() == false)
         {
             overviewInfo_.value += " / ";
         }
-        overviewInfo_.value += DApplication::translate("Main", "Battery") + " " + overName;
+        overviewInfo_.value += tr("Battery") + " " + overName;
     }
 
     if( maxSwitchingSize + maxBatterySize > 1 )

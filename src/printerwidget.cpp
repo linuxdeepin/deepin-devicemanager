@@ -33,7 +33,7 @@ PrinterWidget::PrinterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr(
 
 void PrinterWidget::initWidget()
 {
-    //setTitle(DApplication::translate("Main", "Other Inputdevice")  + DApplication::translate("Main", " Info"));
+    //setTitle(tr("Other Inputdevice")  + tr(" Info"));
     //QStringList printerList = DeviceInfoParser::Instance().getCupsPrinterList();
 
     QStringList lshwPrinterList = DeviceInfoParser::Instance().getLshwPrinterList();

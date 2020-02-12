@@ -394,48 +394,6 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
     doc.appendChild(table);
 }
 
-//QString DeviceInfoWidgetBase::toHtmlString(const DeviceInfo& di)
-//{
-//    QString str /*= "<table border=\"0\" width = \"100%\" cellpadding=\"3\">"*/;
-
-//    if( di.title_.isEmpty() == false)
-//    {
-////        str += "<tr>";
-////        str += "<th style=\"text-align:left;\">";
-//        str += "<h3>";
-//        str += "&nbsp;";
-//        str += di.title_;
-//        str += "</h3>";
-////        str += "</th>";
-////        str +=("</tr>");
-//    }
-
-//    str += "<table border=\"0\" width = \"100%\" cellpadding=\"3\">";
-
-//    foreach( auto article, di.articles_ )
-//    {
-//        if(article.isValid() == false)
-//        {
-//            continue;
-//        }
-
-//        str += "<tr>";
-//        str += "<td width= \"15%\" style=\"text-align:left;\">";
-//        str += DApplication::translate("Main", article.name.toStdString().data());
-//        str +=":</td>";
-
-//        str += "<td width= \"85%\">";
-//        str += article.value;
-//        str += "</td>";
-
-//        str +=("</tr>");
-//    }
-
-//    str +="</table>";
-
-//    return str;
-//}
-
 void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStruct> &articles, bool /*main*/)
 {
     if(titleInfo_ == nullptr)

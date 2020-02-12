@@ -72,7 +72,7 @@ bool ArticleStruct::isValid()
         return false;
     }
 
-    if( value == DApplication::translate("Main", "Unknown"))
+    if( value == QObject::tr("Unknown"))
     {
         return false;
     }

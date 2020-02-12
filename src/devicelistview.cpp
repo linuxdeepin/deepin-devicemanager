@@ -264,26 +264,6 @@ void DeviceListView::setAllItemsEnable(bool eable)
 
 bool DeviceListView::onExportToFile()
 {
-    /*
-//   QString selectFilter;
-
-//   QString saveDir = "./";
-//   QDir dir( QDir::homePath() + "/Documents/");
-//   if(dir.exists())
-//   {
-//        saveDir = QDir::homePath() + "/Documents/";
-//   }
-
-//   QString exportFile = DFileDialog::getSaveFileName(this,
-//                                                     DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
-//                                                     QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
-//                                                    tr("Text (*.txt);; Doc (*.doc);; Xls (*.xls);; Html (*.html)"), &selectFilter);
-
-//   if(exportFile.isEmpty() == true)
-//   {
-//       return true;
-//   }
-     */
    MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent());
    if( nullptr == mainWindow )
    {
@@ -335,7 +315,7 @@ void DeviceListView::initContextMenu()
 
     //contextMenu_->setMinimumWidth(contextMenuWidth_);
 
-    refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), DApplication::translate("Main", "Refresh (F5)"), this);
+    refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this);
     connect(refreshAction_, &QAction::triggered, \
             [this]()
             {
@@ -349,7 +329,7 @@ void DeviceListView::initContextMenu()
     contextMenu_->addAction(refreshAction_);
 
 
-    QAction* exportAction = new QAction(QIcon::fromTheme("document-new"), DApplication::translate("Main", "Export(E)"));
+    QAction* exportAction = new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"));
 
     connect(exportAction, &QAction::triggered, this, &DeviceListView::onExportToFile);
 

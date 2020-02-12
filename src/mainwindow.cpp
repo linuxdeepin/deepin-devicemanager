@@ -358,7 +358,7 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
 
     QString file = DFileDialog::getSaveFileName(
                       this,
-                      DApplication::translate("Main", "Export"), saveDir + tr("Device Info") + \
+                      tr("Export"), saveDir + tr("Device Info") + \
                       QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
                       tr("Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)"), &selectFilter);
 
@@ -463,31 +463,31 @@ void MainWindow::showDisplayShortcutsHelpDialog()
     QJsonArray jsonGroups;
 
     QJsonObject windowJsonGroup;
-    windowJsonGroup.insert("groupName", DApplication::translate("Main","System"));
+    windowJsonGroup.insert("groupName", tr("System"));
     QJsonArray windowJsonItems;
 
     QJsonObject shortcutItem;
-    shortcutItem.insert("name", DApplication::translate("Main","Show Shortcut Keyboard"));
+    shortcutItem.insert("name", tr("Show Shortcut Keyboard"));
     shortcutItem.insert("value", "Ctrl+Shift+/");
     windowJsonItems.append(shortcutItem);
 
     QJsonObject jsonItem;
-    jsonItem.insert("name", DApplication::translate("Main","Window Maximize/Minimize"));
+    jsonItem.insert("name", tr("Window Maximize/Minimize"));
     jsonItem.insert("value", "Ctrl+Alt+F");
     windowJsonItems.append(jsonItem);
 
     QJsonObject closeItem;
-    closeItem.insert("name", DApplication::translate("Main","Close"));
+    closeItem.insert("name", tr("Close"));
     closeItem.insert("value", "Alt+F4");
     windowJsonItems.append(closeItem);
 
     QJsonObject helpItem;
-    helpItem.insert("name", DApplication::translate("Main","Help"));
+    helpItem.insert("name", tr("Help"));
     helpItem.insert("value", "F1");
     windowJsonItems.append(helpItem);
 
     QJsonObject copyItem;
-    copyItem.insert("name", DApplication::translate("Main","Copy"));
+    copyItem.insert("name", tr("Copy"));
     copyItem.insert("value", "Ctrl+C");
     windowJsonItems.append(copyItem);
 
@@ -501,12 +501,12 @@ void MainWindow::showDisplayShortcutsHelpDialog()
     QJsonArray editorJsonItems;
 
     QJsonObject exportItem;
-    exportItem.insert("name", DApplication::translate("Main","Export"));
+    exportItem.insert("name", tr("Export"));
     exportItem.insert("value", "Ctrl+E");
     editorJsonItems.append(exportItem);
 
     QJsonObject refreshItem;
-    refreshItem.insert("name", DApplication::translate("Main","Refresh"));
+    refreshItem.insert("name", tr("Refresh"));
     refreshItem.insert("value", "F5");
     editorJsonItems.append(refreshItem);
 

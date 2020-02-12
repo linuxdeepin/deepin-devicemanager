@@ -42,13 +42,13 @@ int main(int argc, char *argv[])
     app.loadTranslator();
     app.setOrganizationName("deepin");
     app.setApplicationName("deepin-devicemanager");
-    app.setApplicationDisplayName(DApplication::translate("Main", "Device Manager"));
+    app.setApplicationDisplayName(QObject::tr("Device Manager"));
 
     app.setApplicationVersion(DApplication::buildVersion(QDate::currentDate().toString("yyyyMMdd")));
 
-    app.setProductName(DApplication::translate("Main", "Device Manager"));
+    app.setProductName(QObject::tr("Device Manager"));
 
-    app.setApplicationDescription(DApplication::translate("Main", "Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
+    app.setApplicationDescription(QObject::tr("Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
 
     const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
     app.setApplicationAcknowledgementPage(acknowledgementLink);

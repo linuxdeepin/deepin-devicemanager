@@ -72,8 +72,6 @@ MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr(
 
 void MonitorWidget::initWidget()
 {
-    //setTitle(DApplication::translate("Main", "Monitor")  + DApplication::translate("Main", " Info"));
-
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
@@ -94,7 +92,7 @@ void MonitorWidget::initWidget()
         ArticleStruct resolutionList("Support Resolution");
         ArticleStruct displayRatio("Display Ratio");
 
-        ArticleStruct monitorSize(DApplication::translate("Monitor", "Size"));
+        ArticleStruct monitorSize(tr("Size"));
 
         double inch = 0.0;
 
@@ -160,11 +158,11 @@ void MonitorWidget::initWidget()
             }
 
 //            QString mw = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Week of Manufacture");
-//            if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
+//            if( mw.isEmpty() == false && mw != tr("Unknown") && mw != "0")
 //            {
 //                mDate.value += " ";
 //                mDate.value += mw;
-//                mDate.value += DApplication::translate("Main", "Week");
+//                mDate.value += tr("Week");
 //            }
 //            articles.push_back(mDate);
 
@@ -175,7 +173,7 @@ void MonitorWidget::initWidget()
             tmy.queryData("hwinfo", monitor, "The Model Year", existArticles );
             if( tmy.isValid() )
             {
-                tmy.value = tmy.value + DApplication::translate("Main", "Year");
+                tmy.value = tmy.value + tr("Year");
                 articles.push_back(tmy);
             }
 
@@ -256,7 +254,7 @@ void MonitorWidget::initWidget()
         articles.push_back(primaryMonitor);
 
         ArticleStruct connectType("Connect Type");
-        connectType.value = DApplication::translate("Main", "Unknown");
+        connectType.value = tr("Unknown");
         if( i < xrandrMonitorList.size())
         {
             connectType.value = xrandrMonitorList.at(i);
@@ -298,12 +296,12 @@ void MonitorWidget::initWidget()
         {
             if(overviewInfo_.isValid() == false)
             {
-                overviewInfo_.value = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch");
+                overviewInfo_.value = QString::number(inch,10, 1) + " " + tr("inch");
             }
             else
             {
                 overviewInfo_.value += " (";
-                overviewInfo_.value += QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch");
+                overviewInfo_.value += QString::number(inch,10, 1) + " " + tr("inch");
                 overviewInfo_.value += ")";
             }
         }
@@ -330,7 +328,7 @@ QString MonitorWidget::parseMonitorSize(const QString& sizeDescription, double& 
         width /= 2.54;
         height /= 2.54;
         inch = std::sqrt(width*width + height*height)/10.0;
-        res = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch") + " (";
+        res = QString::number(inch,10, 1) + " " + tr("inch") + " (";
         res += sizeDescription;
         res += ")";
     }
@@ -344,7 +342,7 @@ QString MonitorWidget::parseMonitorSize(const QString& sizeDescription, double& 
         width /= 2.54;
         height /= 2.54;
         inch = std::sqrt(width*width + height*height)/10.0;
-        res = QString::number(inch,10, 1) + " " + DApplication::translate("Main", "inch") + " (";
+        res = QString::number(inch,10, 1) + " " + tr("inch") + " (";
         res += sizeDescription;
         res += ")";
     }
@@ -416,7 +414,7 @@ QString MonitorWidget::getMonitorSizeFromEDID()
     if(height <= 0) return  "";
     if(width <= 0)return  "";
     double inch = std::sqrt(height*height + width*width)/2.54;
-    QString inchStr_tr = DApplication::translate("Main","inch");
+    QString inchStr_tr = tr("inch");
     QString ret = QString("%1 %2(%3x%4 %5)").arg(QString::number(inch,'0',1)).arg(inchStr_tr).arg(width).arg(height).arg(tr("cm"));
     return ret;
 }

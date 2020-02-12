@@ -243,7 +243,7 @@ void CpuWidget::initWidget()
             overviewInfo_.value += QString::number(cores);
         }
 
-        overviewInfo_.value += DApplication::translate("CPU", " Sockets");
+        overviewInfo_.value += (" "+ tr("Sockets"));
 
         overviewInfo_.value += " / ";
     }
@@ -267,7 +267,7 @@ void CpuWidget::initWidget()
         overviewInfo_.value += QString::number(cores);
     }
 
-    overviewInfo_.value += DApplication::translate("CPU", " Core(s)");
+    overviewInfo_.value += (" " + tr("Core(s)"));
 
     if(logicalCpus > 1)
     {
@@ -290,7 +290,7 @@ void CpuWidget::initWidget()
             overviewInfo_.value += QString::number(logicalCpus);
         }
 
-        overviewInfo_.value += DApplication::translate("CPU", " Precessor(s)");
+        overviewInfo_.value += (" "+tr("Precessor(s)"));
     }
 
     overviewInfo_.value += ")";
@@ -309,7 +309,7 @@ void CpuWidget::initWidget()
     ArticleStruct vendor("Vendor");
     vendor.queryData("lscpu", "lscpu", "Vendor ID", existSet, articles);
 
-    ArticleStruct speed(DApplication::translate("CPU", "Speed"));
+    ArticleStruct speed(tr("Speed"));
     speed.value = speed_;
     articles.push_back(speed);
 
@@ -435,6 +435,6 @@ void CpuWidget::addPrecessor(const QString& precessor)
 
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles);
 
-    addSubInfo( DApplication::translate("CPU", "Processor") + " " +  precessor, articles);
+    addSubInfo(tr("Processor") + " " +  precessor, articles);
     articles.clear();
 }

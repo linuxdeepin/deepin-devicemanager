@@ -103,7 +103,7 @@ void DiskWidget::initWidget()
 
         ArticleStruct interface("Interface");
         QStringList lst = disk.split("_");
-        interface.value = DApplication::translate("Main", "Unknown");
+        interface.value = tr("Unknown");
         if( lst.size() > 2 )
         {
             interface.value = lst.at(lst.size() -2);
@@ -116,7 +116,7 @@ void DiskWidget::initWidget()
         mediaType.value = mediaTypeStr;
         articles.push_back(mediaType);
 
-        ArticleStruct size(DApplication::translate("Disk", "Size"));
+        ArticleStruct size(tr("Size"));
         size.value = sizeStr;
         articles.push_back(size);
         existArticles.insert("size");
@@ -174,7 +174,7 @@ void DiskWidget::initWidget()
 
             ArticleStruct fromFactor("Form Factor");
             fromFactor.queryData("smartctl", logicalName, "Form Factor");
-            fromFactor.value.replace("inches", DApplication::translate("Main", "inch"));
+            fromFactor.value.replace("inches", tr("inch"));
             articles.push_back(fromFactor);
             existArticles.insert("Form Factor");
 
@@ -182,7 +182,7 @@ void DiskWidget::initWidget()
             powerOnHours.queryData("smartctl", logicalName, "Power_On_Hours", existArticles);
             if(powerOnHours.isValid())
             {
-                powerOnHours.value += DApplication::translate("Main", " Hours");
+                powerOnHours.value += (" "+ tr("Hours"));
             }
             articles.push_back(powerOnHours);
 
@@ -190,7 +190,7 @@ void DiskWidget::initWidget()
             powerOnMinutes.queryData("smartctl", logicalName, "Power_On_Minutes", existArticles);
             if(powerOnMinutes.isValid())
             {
-                powerOnMinutes.value += DApplication::translate("Main", " Minutes");
+                powerOnMinutes.value += (" " + tr("Minutes"));
             }
             articles.push_back(powerOnMinutes);
 
@@ -199,7 +199,8 @@ void DiskWidget::initWidget()
             powerOnHalfMinutes.queryData("smartctl", logicalName, "Power_On_Half_Minutes", existArticles);
             if(powerOnHalfMinutes.isValid())
             {
-                powerOnHalfMinutes.value += DApplication::translate("Main", " Half Minutes");
+                powerOnHalfMinutes.value += " ";
+                powerOnHalfMinutes.value += tr("Half Minutes");
             }
             articles.push_back(powerOnHalfMinutes);
 
@@ -208,7 +209,8 @@ void DiskWidget::initWidget()
             powerOnSeconds.queryData("smartctl", logicalName, "Power_On_Seconds", existArticles);
             if(powerOnSeconds.isValid())
             {
-                powerOnSeconds.value += DApplication::translate("Main", " Seconds");
+                powerOnSeconds.value += " ";
+                powerOnSeconds.value += tr("Seconds");
             }
             articles.push_back(powerOnSeconds);
 
@@ -216,7 +218,8 @@ void DiskWidget::initWidget()
             powerCycleCount.queryData("smartctl", logicalName, "Power_Cycle_Count");
             if(powerCycleCount.isValid())
             {
-                powerCycleCount.value += DApplication::translate("Main", " Times");
+                powerCycleCount.value += " ";
+                powerCycleCount.value += tr("Times");
             }
             articles.push_back(powerCycleCount);
             existArticles.insert("Power_Cycle_Count");
@@ -282,7 +285,7 @@ void DiskWidget::initWidget()
 
     if( diskList.size() > 1 )
     {
-        QStringList headers = { "Model",  "Vendor", "Media Type", DApplication::translate("Disk", "Size") };
+        QStringList headers = { tr("Model"),  tr("Vendor"), tr("Media Type"), tr("Size") };
         addTable(headers, tabList);
     }
 }

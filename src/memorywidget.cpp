@@ -75,7 +75,7 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
                 speed,
                 size,
 
-                //DApplication::translate("Main", "Good")
+                //tr("Good")
             };
 
             tabList.push_back(tab);
@@ -105,7 +105,7 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
                 speed,
                 size,
 
-                //DApplication::translate("Main", "Good")
+                //tr("Good")
             };
 
             tabList.push_back(tab);
@@ -180,7 +180,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
     if(canUpgrade_ != -1)
     {
         ArticleStruct ug("Upgradeable");
-        ug.value = canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No");
+        ug.value = canUpgrade_ ? tr("Yes") : tr("No");
         articles.push_back(ug);
     }
 
@@ -269,7 +269,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
 
         QString deviceName = vendor.value + " " + model.value;
-        if(vendor.value == DApplication::translate("Main", "Unknown") && model.value == DApplication::translate("Main", "Unknown")){
+        if(vendor.value == tr("Unknown") && model.value == tr("Unknown")){
             deviceName = tr("Unknow memory");
         }
         if(deviceName.trimmed().isEmpty() == true)
@@ -334,7 +334,7 @@ void MemoryWidget::initTableWdiget_Good()
         }
 
         QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");
-        if( size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
+        if( size == tr("Unknown") || size == "No Module Installed" )
         {
             canUpgrade_ = 1;
             QStringList tab = {
@@ -342,7 +342,7 @@ void MemoryWidget::initTableWdiget_Good()
                 "--",
                 "--",
                 "--",
-                //DApplication::translate("Main", "Bad")
+                //tr("Bad")
             };
 
             tabList.push_back(tab);
@@ -355,8 +355,7 @@ void MemoryWidget::initTableWdiget_Good()
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type") + " " +
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed"),
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size"),
-
-            //DApplication::translate("Main", "Good")
+            //tr("Good")
         };
 
         tabList.push_back(tab);
@@ -423,7 +422,7 @@ void MemoryWidget::updateWholeDownWidget_Good()
     if(canUpgrade_ != -1)
     {
         ArticleStruct ug("Upgradeable");
-        ug.value = canUpgrade_ ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No");
+        ug.value = canUpgrade_ ? tr("Yes") : tr("No");
         articles.push_back(ug);
     }
 
@@ -525,12 +524,12 @@ void MemoryWidget::updateWholeDownWidget_Good()
             deviceName = rank.value;
         }
 
-        if(size.value == DApplication::translate("Main", "Unknown") || size.value == "No Module Installed" )
+        if(size.value == tr("Unknown") || size.value == "No Module Installed" )
         {
             articles.clear();
 
             ArticleStruct status("Status");
-            status.value = DApplication::translate("Main", "Bad");
+            status.value = tr("Bad");
             articles.push_back(status);
 
             addSubInfo( deviceName, articles );

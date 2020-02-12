@@ -34,15 +34,14 @@ MotherboardWidget::MotherboardWidget(QWidget *parent) : DeviceInfoWidgetBase(par
 
 void MotherboardWidget::initWidget()
 {
-    //setTitle(DApplication::translate("Main", "Motherboard")  + DApplication::translate("Main", " Info"));
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    QStringList names = {   DApplication::translate("Main", "Model"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Chipset Family"),
-                            DApplication::translate("Main", "Bios")  + DApplication::translate("Main", "Version"),
-                            DApplication::translate("Main", "Features")
+    QStringList names = {   tr("Model"),
+                            tr("Vendor"),
+                            tr("Chipset Family"),
+                            tr("Bios")  + tr("Version"),
+                            tr("Features")
                         };
 
     ArticleStruct vendor("Vendor");
@@ -75,7 +74,7 @@ void MotherboardWidget::initWidget()
     QRegExp rx("^[\\s\\S]*\\(([\\S]*)\\)$");
     if( rx.exactMatch(chipsetFamily.value) )
     {
-        chipsetFamily.value =  rx.cap(1)+" " + DApplication::translate("Main", "Chipset Family");
+        chipsetFamily.value =  rx.cap(1)+" " + tr("Chipset Family");
     }
     if(chipsetFamily.isValid() == false)
     {
@@ -275,7 +274,7 @@ void MotherboardWidget::addMemoryInfo()
         }
 
         QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");
-        if( size == DApplication::translate("Main", "Unknown") || size == "No Module Installed" )
+        if( size == tr("Unknown") || size == "No Module Installed" )
         {
             canUpgrade = 1;
             continue;
@@ -346,7 +345,7 @@ void MotherboardWidget::addMemoryInfo()
     if(canUpgrade != -1)
     {
         ArticleStruct ug("Upgradeable");
-        ug.value = canUpgrade ? DApplication::translate("Main", "Yes") : DApplication::translate("Main", "No");
+        ug.value = canUpgrade ?tr("Yes") : tr("No");
         articles.push_back(ug);
     }
 

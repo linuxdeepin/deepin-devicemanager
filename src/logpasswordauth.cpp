@@ -70,7 +70,7 @@ void LogPasswordAuth::initUI()
     iconLabel->setPixmap(pix);
     topLayout->addWidget(iconLabel);
 
-    titleLabel = new DLabel(DApplication::translate("Main", "读取设备信息需要授权"));
+    titleLabel = new DLabel(tr("Device managet requires authorization"));
     titleLabel->setObjectName("TitleLabel");
     titleLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
     QFont font = titleLabel->font();
@@ -124,7 +124,7 @@ void LogPasswordAuth::initUI()
                                      DIALOG::BUTTON_LAYOUT_RIGHT_MARGIN,
                                      DIALOG::BUTTON_LAYOUT_BOTTOM_MARGIN);
 
-    cancelButton_ = new DPushButton(DApplication::translate("Main", "Cancel"), this);
+    cancelButton_ = new DPushButton(tr("Cancel"), this);
     cancelButton_->setAttribute(Qt::WA_NoMousePropagation);
     cancelButton_->setFixedHeight(40);
     cancelButton_->setObjectName("ActionButton");
@@ -134,7 +134,7 @@ void LogPasswordAuth::initUI()
 
     connect(cancelButton_, &DPushButton::clicked, this, &LogPasswordAuth::cancelButtonClicked);
 
-    confimButton_ = new DPushButton(DApplication::translate("Main", "Authenticate"), this);
+    confimButton_ = new DPushButton(tr("Authenticate"), this);
     confimButton_->setAttribute(Qt::WA_NoMousePropagation);
     confimButton_->setFixedHeight(40);
     font = confimButton_->font();
@@ -182,7 +182,7 @@ void LogPasswordAuth::hideMessage()
     QPalette pa;
     pa.setColor(QPalette::WindowText,Qt::black);
     titleLabel->setPalette(pa);
-    titleLabel->setText(DApplication::translate("Main", "读取设备信息需要授权"));
+    titleLabel->setText(tr("读取设备信息需要授权"));
 }
 
 void LogPasswordAuth::showMessage(const QString& msg)
@@ -212,8 +212,8 @@ void LogPasswordAuth::confimButtonClicked()
 {
     if(m_edt->text().isEmpty())
     {
-        showMessage(  DApplication::translate("Main", "Please Enter Password!") );
-        //DMessageBox::warning(this, DApplication::translate("Main", "Error"), DApplication::translate("Main", "Please Enter Password!"));
+        showMessage(tr("Please Enter Password!") );
+        //DMessageBox::warning(this, tr("Error"), tr("Please Enter Password!"));
         return;
     }
 
@@ -226,8 +226,8 @@ void LogPasswordAuth::confimButtonClicked()
     if( res == false || process.readAllStandardOutput().trimmed() != "root" )
     {
         clearPasswd();
-        showMessage(  DApplication::translate("Main", "Password Error!") );
-        //QMessageBox::warning(this, DApplication::translate("Main", "Error"), DApplication::translate("Main", "Password Error!"));
+        showMessage(  tr("Password Error!") );
+        //QMessageBox::warning(this, tr("Error"), tr("Wrong Password!"));
         return;
     }
 
