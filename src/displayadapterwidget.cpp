@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-DisplayadapterWidget::DisplayadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Display Adapter"))
+DisplayadapterWidget::DisplayadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Display Adapter"))
 {
     initWidget();
 }

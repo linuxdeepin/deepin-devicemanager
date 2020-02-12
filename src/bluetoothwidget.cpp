@@ -27,7 +27,7 @@
 DWIDGET_USE_NAMESPACE
 
 
-BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Bluetooth"))
+BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Bluetooth"))
 {
     initWidget();
 }
@@ -38,14 +38,13 @@ void BluetoothWidget::initWidget()
 
     if( bluetoothList.size() < 1 )
     {
-        setCentralInfo("No Bluetooth Device found!");
+        setCentralInfo(tr("No bluetooth device found"));
         return;
     }
 
     QStringList hciconfigBluetoothList = DeviceInfoParser::Instance().getHciconfigBluetoothControllerList();
     QStringList pairedDevicesList /*= DeviceInfoParser::Instance().getOtherBluetoothctlPairedDevicesList()*/;
     int connectedDeviceNumber = DeviceInfoParser::Instance().getOtherBluetoothctlPairedAndConnectedDevicesList().size();
-    //setTitle(DApplication::translate("Main", "Bluetooth") + " " + DApplication::translate("Main", " Info"));
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
@@ -155,7 +154,7 @@ void BluetoothWidget::initWidget()
         {
             overviewInfo_.value = vendor.value;
             overviewInfo_.value += " ";
-            if( product.value.isEmpty() == false && product.value != DApplication::translate("Main", "Unknown") )
+            if( product.value.isEmpty() == false && product.value != tr("Unknown") )
             {
                 overviewInfo_.value += product.value;
             }
@@ -257,7 +256,7 @@ void BluetoothWidget::initWidget()
 //        {
 //            overviewInfo_.value = vendor.value;
 //            overviewInfo_.value += " ";
-//            if( product.value.isEmpty() == false && product.value != DApplication::translate("Main", "Unknown") )
+//            if( product.value.isEmpty() == false && product.value != tr("Unknown") )
 //            {
 //                overviewInfo_.value += product.value;
 //            }
@@ -274,7 +273,7 @@ void BluetoothWidget::initWidget()
     {
         overviewInfo_.value += " (";
         overviewInfo_.value += QString::number(connectedDeviceNumber);
-        overviewInfo_.value += DApplication::translate("Main", " Bluetooth Device(s) Connected") ;
+        overviewInfo_.value += (" "+tr("Bluetooth Device(s) Connected")) ;
         overviewInfo_.value += ")";
     }
 

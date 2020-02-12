@@ -27,7 +27,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Keyboard"))
+KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Keyboard"))
 {
     initWidget();
 }
@@ -41,7 +41,7 @@ void KeyboardWidget::initWidget()
     if( inputdeviceList.size() < 1 )
     {
         if(false == findUsbKeyboard()){
-            setCentralInfo("No Keyboard found!");
+            setCentralInfo(tr("No keyboard found"));
             return;
         }
     }

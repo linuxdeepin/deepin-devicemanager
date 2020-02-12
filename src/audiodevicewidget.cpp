@@ -28,20 +28,19 @@
 
 DWIDGET_USE_NAMESPACE
 
-AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Audio Adapter"))
+AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Sound Adapter"))
 {
     initWidget();
 }
 
 void AudiodeviceWidget::initWidget()
 {
-    //setTitle(DApplication::translate("Main", "Audio Device")  + DApplication::translate("Main", " Info"));
     QStringList multimediaList = DeviceInfoParser::Instance().getLshwMultimediaList();
     QStringList inputdeviceList = DeviceInfoParser::Instance().getCatinputAudioDeviceList();
 
     if( multimediaList.size() + inputdeviceList.size() < 1 )
     {
-        setCentralInfo("No Audio Adapter found!");
+        setCentralInfo(tr("No sound adapter found"));
         return;
     }
 

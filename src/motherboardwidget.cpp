@@ -27,7 +27,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-MotherboardWidget::MotherboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Motherboard"))
+MotherboardWidget::MotherboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Motherboard"))
 {
     initWidget();
 }

@@ -154,7 +154,7 @@
             <translation>Voltaje máximo</translation>
         </message>
         <message>
-            <source>Maximum oltage</source>
+            <source>Maximum Voltage</source>
             <translation>Voltaje máximo</translation>
         </message>
         <message>

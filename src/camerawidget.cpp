@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Camera"))
+CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Camera"))
 {
     initWidget();
 }
@@ -37,16 +37,14 @@ void CameraWidget::initWidget()
 
     if( cameraList.size() < 1 )
     {
-        setCentralInfo("No Camera found!");
+        setCentralInfo(tr("No camera found"));
         return;
     }
 
-    //setTitle(DApplication::translate("Main", "Camera")  + DApplication::translate("Main", " Info"));
-
     QStringList cameraNames = {
-                            DApplication::translate("Main", "Name"),
-                            DApplication::translate("Main", "Vendor"),
-                            DApplication::translate("Main", "Capabilities")
+                            tr("Name"),
+                            tr("Vendor"),
+                            tr("Capabilities")
                         };
 
     QList<QStringList> tabList;
@@ -112,7 +110,7 @@ void CameraWidget::initWidget()
         {
             overviewInfo_.value = vendor.value;
             overviewInfo_.value += " ";
-            if( name.value.isEmpty() == false && name.value != DApplication::translate("Main", "Unknown") )
+            if( name.value.isEmpty() == false && name.value != tr("Unknown") )
             {
                 overviewInfo_.value += name.value;
             }

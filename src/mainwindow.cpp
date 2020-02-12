@@ -122,7 +122,7 @@ void MainWindow::initLoadingWidget()
     QHBoxLayout* hly2 = new QHBoxLayout;
     hly2->addStretch();
 
-    loadLabel_ = new DLabel("Loading...", this);
+    loadLabel_ = new DLabel(tr("Loading..."), this);
 
     hly2->addWidget(loadLabel_);
     hly2->addStretch();
@@ -358,7 +358,7 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
 
     QString file = DFileDialog::getSaveFileName(
                       this,
-                      DApplication::translate("Main", "Export"), saveDir + DApplication::translate("Main", "deviceInfo") + \
+                      DApplication::translate("Main", "Export"), saveDir + tr("Device Info") + \
                       QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
                       tr("Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)"), &selectFilter);
 
@@ -497,7 +497,7 @@ void MainWindow::showDisplayShortcutsHelpDialog()
     QStringList editorKeymaps;
 
     QJsonObject editorJsonGroup;
-    editorJsonGroup.insert("groupName", DApplication::translate("Main","DeviceManager"));
+    editorJsonGroup.insert("groupName", tr("Device Manager"));
     QJsonArray editorJsonItems;
 
     QJsonObject exportItem;
@@ -569,7 +569,7 @@ void MainWindow::showSplashMessage(const QString& message)
 
     if( loadLabel_ )
     {
-        loadLabel_->setText(DApplication::translate("Main", message.toStdString().data()));
+        loadLabel_->setText(message);
     }
 }
 

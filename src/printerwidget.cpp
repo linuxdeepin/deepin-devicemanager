@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-PrinterWidget::PrinterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Printer"))
+PrinterWidget::PrinterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Printer"))
 {
     initWidget();
 }
@@ -40,7 +40,7 @@ void PrinterWidget::initWidget()
 
     if( lshwPrinterList.size() < 1)
     {
-        setCentralInfo("No Printer found!");
+        setCentralInfo(tr("No printer found"));
         return;
     }
 

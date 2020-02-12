@@ -28,7 +28,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Memory"))
+MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Memory"))
 {
     initWidget();
 }
@@ -49,7 +49,7 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
     }
     if (getDmidecodeMemoryListSuccess == true) {
 
-        QStringList headers = { "Name", "Vendor", "Type", "Speed",  "Size", /* "Statu"*/};
+        QStringList headers = { "Name", "Vendor", "Type", "Speed",  "Size", /* "Status"*/};
 
         QList<QStringList> tabList;
 
@@ -124,11 +124,6 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         memList = DeviceInfoParser::Instance().getDmidecodeMemoryArrayMappedAddress();
     }
     int validMemoryNumber = 0;
-//    if( memList.size() < 1)
-//    {
-//        setCentralInfo("Get Memory Infomation failed!");
-//        return;
-//    }
 
     QList<ArticleStruct> articles;
 
@@ -307,7 +302,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
     if(validMemoryNumber < 1 && getDmidecodeMemoryListSuccess == true)
     {
-        setCentralInfo("Get Memory Infomation failed!");
+        setCentralInfo(tr("Failed to get memory information"));
         return;
     }
 
@@ -327,7 +322,7 @@ void MemoryWidget::initTableWdiget_Good()
 {
     QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
 
-    QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size", /* "Statu"*/};
+    QStringList headers = { "Bank", "Vendor", "Type", /*"Speed",*/  "Size", /* "Status"*/};
 
     QList<QStringList> tabList;
 

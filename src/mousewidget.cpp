@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Mouse"))
+MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Mouse"))
 {
     initWidget();
 }
@@ -38,7 +38,7 @@ void MouseWidget::initWidget()
 
     if( inputdeviceList.size() < 1 )
     {
-        setCentralInfo("No Mouse found!");
+        setCentralInfo(tr("No mouse found"));
         return;
     }
 
@@ -230,9 +230,9 @@ void MouseWidget::initWidget()
 //        articles.clear();
 //        existArticles.clear();
 
-////        ArticleStruct type("Type");
-////        type.value = "AudioAdapter";
-////        articles.push_back(type);
+//        ArticleStruct type("Type");
+//        type.value = "AudioAdapter";
+//        articles.push_back(type);
 
 //        ArticleStruct name("Name");
 //        name.queryData( "lshw", mouse, "product");

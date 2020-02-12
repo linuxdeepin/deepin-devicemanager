@@ -4,10 +4,6 @@
     <context>
         <name>Main</name>
         <message>
-            <source>deepin-devicemanager</source>
-            <translation type="unfinished"/>
-        </message>
-        <message>
             <source>DeviceManager</source>
             <translation type="unfinished"/>
         </message>
@@ -124,7 +120,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Statu</source>
+            <source>Status</source>
             <translation type="unfinished"/>
         </message>
         <message>
@@ -156,7 +152,7 @@
             <translation type="unfinished"/>
         </message>
         <message>
-            <source>Maximum oltage</source>
+            <source>Maximum Voltage</source>
             <translation type="unfinished"/>
         </message>
         <message>

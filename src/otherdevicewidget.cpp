@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Other Devices"))
+OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Other Devices"))
 {
     initWidget();
 }
@@ -37,7 +37,7 @@ void OtherDevicesWidget::initWidget()
 
     if( otherDeviceList.size() < 1 )
     {
-        setCentralInfo("No Other Devices found!");
+        setCentralInfo(tr("No other devices found"));
         return;
     }
 

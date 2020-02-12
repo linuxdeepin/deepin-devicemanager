@@ -26,21 +26,18 @@
 
 DWIDGET_USE_NAMESPACE
 
-NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Network Adapter"))
+NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Network Adapter"))
 {
     initWidget();
 }
 
 void NetworkadapterWidget::initWidget()
 {
-    //setTitle(DApplication::translate("Main", "NetworkAdapter")  + DApplication::translate("Main", " Info"));
-
-
     QStringList networkadapterList = DeviceInfoParser::Instance().getLshwNetworkadapterList();
 
     if( networkadapterList.size() < 1 )
     {
-        setCentralInfo("No Network Adapter found!");
+        setCentralInfo(tr("No network adapter found"));
         return;
     }
 

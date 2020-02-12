@@ -89,7 +89,7 @@ void DeivceInfoBrower::contextMenuEvent(QContextMenuEvent *event)
 
     QString str = QTextEdit::textCursor().selectedText();
 
-    QAction* copyAction = new QAction(QIcon::fromTheme("edit-copy"), DApplication::translate("Main", "Copy(C)"), this);
+    QAction* copyAction = new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this);
     if(str.isEmpty())
     {
         copyAction->setDisabled(true);
@@ -249,7 +249,7 @@ void DeviceInfoWidgetBase::initContextMenu()
 
     //contextMenu_->setMinimumWidth(contextMenuWidth_);
 
-    refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), DApplication::translate("Main", "Refresh(F5)"), this);
+    refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this);
 
     connect(refreshAction_, &QAction::triggered, \
             [this]()
@@ -264,8 +264,8 @@ void DeviceInfoWidgetBase::initContextMenu()
     contextMenu_->addAction(refreshAction_);
 
 
-    //exportAction_ = new QAction( QIcon::fromTheme("document-save-as"), DApplication::translate("Main", "Export(E)")  );
-    exportAction_ = new QAction( QIcon::fromTheme("document-new"), DApplication::translate("Main", "Export(E)")  );
+    //exportAction_ = new QAction( QIcon::fromTheme("document-save-as"), tr("Export (E)")  );
+    exportAction_ = new QAction( QIcon::fromTheme("document-new"), tr("Export (E)"));
 
     QShortcut *temp = new QShortcut(this);
     temp->setKey(tr("ctrl+e"));
@@ -305,7 +305,7 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
 
     if( false == info.isEmpty() )
     {
-        titleInfo_->title_ = DApplication::translate("Main", info.toStdString().data());
+        titleInfo_->title_ = info;
         auto label = new DLabel(titleInfo_->title_, this );
         label->setFont(centralFont_);
         DFontSizeManager::instance()->bind(label, DFontSizeManager::T4);
@@ -355,7 +355,7 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
         QDomElement td = doc.createElement("td");
         td.setAttribute("width", "15%");
         td.setAttribute("style", "text-align:left;");
-        QDomText nameText = doc.createTextNode(DApplication::translate("Main", article.name.toStdString().data()) + ":");
+        QDomText nameText = doc.createTextNode(article.name + ":");
         td.appendChild(nameText);
         tr.appendChild(td);
 
@@ -447,15 +447,13 @@ void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStru
 
     if( title.isEmpty()== false)
     {
-        titleInfo_->title_ = DApplication::translate("Main", title.toStdString().data());
+        titleInfo_->title_ = title;
     }
 
     foreach(auto article, articles)
     {
         ArticleStruct inserArt(article);
-
-        inserArt.name = DApplication::translate("Main", article.name.toStdString().data());
-
+//        inserArt.name = article.name;
         titleInfo_->articles_.push_back(inserArt);
     }
 }
@@ -468,14 +466,13 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
 
     if(subTitle.isEmpty() == false)
     {
-        di.title_ = DApplication::translate("Main", subTitle.toStdString().data());
+        di.title_ = subTitle;
     }
 
     foreach(auto article, articles)
     {
         ArticleStruct inserArt(article);
-
-        inserArt.name = DApplication::translate("Main", article.name.toStdString().data());
+//        inserArt.name = article.name;
         di.articles_.push_back(inserArt);
     }
 
@@ -506,7 +503,7 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
         QStringList translaterHeaders;
         foreach(auto header, headers)
         {
-            translaterHeaders.push_back(DApplication::translate("Main", header.toStdString().data()));
+            translaterHeaders.push_back(header);
         }
         tableWidget_->m_pModel->setHorizontalHeaderLabels(translaterHeaders);
 
@@ -627,7 +624,7 @@ QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct>& articles, const 
                 res += split;
             }
 
-            res +=  DApplication::translate( article.transContextName.isEmpty()?"Main":article.transContextName.toStdString().data(), article.value.trimmed().toStdString().data());
+            res +=  article.value.trimmed();
         }
     }
 

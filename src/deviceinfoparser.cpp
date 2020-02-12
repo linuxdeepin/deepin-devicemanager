@@ -72,7 +72,7 @@ void DeviceInfoParser::refreshDabase()
 
     QString defaultLanguage = getenv("LANGUAGE");
 
-    emit loadFinished("Loading Operating System Info...");
+    emit loadFinished(tr("Loading Operating System Info..."));
 
     setenv ("LANGUAGE", "en_US", 1);    //for aviod translate in lscpu...
 
@@ -81,46 +81,45 @@ void DeviceInfoParser::refreshDabase()
     loadOSInfo();
     //DeviceInfoParser::Instance().getOSInfo(osInfo);
 
-    emit loadFinished("Loading SMBBios Info...");
+    emit loadFinished(tr("Loading SMBios Info..."));
     loadDemicodeDatabase();
     loadCatBoardinfoDatabase();
 
-    emit loadFinished("Loading List Hardware Info...");
+    emit loadFinished(tr("Loading Hardware Info..."));
     loadLshwDatabase();
 
-    emit loadFinished("Loading Storage Info...");
+    emit loadFinished(tr("Loading Storage Info..."));
     loadAllSmartctlDatabase();
 
-    emit loadFinished("Loading CPU Info...");
+    emit loadFinished(tr("Loading CPU Info..."));
     loadCatcpuDatabase();
     loadLscpuDatabase();
-    //DeviceInfoParser::Instance().loadSmartctlDatabase();
 
-    emit loadFinished("Loading Input Devices Info...");
+    emit loadFinished(tr("Loading Input Devices Info..."));
     loadCatInputDatabase();
 
-    emit loadFinished("Loading Power Settings...");
+    emit loadFinished(tr("Loading Power Settings..."));
     loadPowerSettings();
     loadUpowerDatabase();
 
-    emit loadFinished("Loading Displayer Info...");
+    emit loadFinished(tr("Loading Monitor Info..."));
     loadXrandrDatabase();
     loadHwinfoDatabase();
 
-    emit loadFinished("Loading PCI Devices Info...");
+    emit loadFinished(tr("Loading PCI Devices Info..."));
     loadLspciDatabase();
 
-    emit loadFinished("Loading Bluetooth Device Info...");
+    emit loadFinished(tr("Loading Bluetooth Device Info..."));
     loadHciconfigDatabase();
     loadAllBluetoothctlControllerDatabase();
     loadAllBluethctlPairedDeviceDatabase();
 
-    emit loadFinished("Loading USB Devices Info...");
+    emit loadFinished(tr("Loading USB Devices Info..."));
     loadLsusbDatabase();
 
     setenv ("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
 
-    emit loadFinished("Loading Printer Info...");
+    emit loadFinished(tr("Loading Printer Info..."));
     //loadCupsDatabase();
 
     emit loadFinished("finish");

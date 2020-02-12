@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Power"))
+PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Power"))
 {
     initWidget();
 }
@@ -46,7 +46,7 @@ void PowerWidget::initWidget()
 
     if(maxSwitchingSize + maxBatterySize < 1)
     {
-        setCentralInfo("Get Power Infomation failed!");
+        setCentralInfo(tr("Get Power Infomation failed!"));
         return;
     }
 

@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Storage"))
+DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Storage"))
 {
     initWidget();
 }
@@ -36,7 +36,7 @@ void DiskWidget::initWidget()
     QStringList diskList = DeviceInfoParser::Instance().getLshwDisknameList();
     if(diskList.size() < 1)
     {
-        setCentralInfo("No Disk found!");
+        setCentralInfo(tr("No disk found"));
         return;
     }
 

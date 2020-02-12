@@ -22,6 +22,7 @@
 
 #include "cpuwidget.h"
 #include "deviceinfoparser.h"
+#include  <QObject>
 #include <DApplication>
 #include <QSet>
 
@@ -39,51 +40,51 @@ static int coresNumberArray[] =
 
 static QString NumberStrinArray[] =
 {
-    "One",
-    "Two",
-    "Four",
-    "Six",
-    "Eight",
+    QObject::tr("One"                         ),
+    QObject::tr("Two"                         ),
+    QObject::tr("Four"                        ),
+    QObject::tr("Six"                         ),
+    QObject::tr("Eight"                       ),
 
-    "Ten",
-    "Twelve",
-    "Fourteen",
-    "Sixteen",
-    "Eighteen",
+    QObject::tr("Ten"                         ),
+    QObject::tr("Twelve"                      ),
+    QObject::tr("Fourteen"                    ),
+    QObject::tr("Sixteen"                     ),
+    QObject::tr("Eighteen"                    ),
 
-    "Twenty",
-    "Twenty-two",
-    "Twenty-four",
-    "Twenty-six",
-    "Twenty-eight",
-    "Thirty",
+    QObject::tr("Twenty"                      ),
+    QObject::tr("Twenty-two"                  ),
+    QObject::tr("Twenty-four"                 ),
+    QObject::tr("Twenty-six"                  ),
+    QObject::tr("Twenty-eight"                ),
+    QObject::tr("Thirty"                      ),
 
-    "Thirty-two",
-    "Thirty-four",
-    "Thirty-six",
-    "Thirty-eight",
-    "Fourty",
+    QObject::tr("Thirty-two"                  ),
+    QObject::tr("Thirty-four"                 ),
+    QObject::tr("Thirty-six"                  ),
+    QObject::tr("Thirty-eight"                ),
+    QObject::tr("Fourty"                      ),
 
-    "Fourty-two",
-    "Fourty-four",
-    "Fourty-six",
-    "Fourty-eight",
-    "Fifty",
+    QObject::tr("Forty-two"                   ),
+    QObject::tr("Forty-four"                  ),
+    QObject::tr("Forty-six"                   ),
+    QObject::tr("Forty-eight"                 ),
+    QObject::tr("Fifty"                       ),
 
-    "Fifty-two",
-    "Fifty-four",
-    "Fifty-six",
-    "Fifty-eight",
-    "Sixty",
+    QObject::tr("Fifty-two"                   ),
+    QObject::tr("Fifty-four"                  ),
+    QObject::tr("Fifty-six"                   ),
+    QObject::tr("Fifty-eight"                 ),
+    QObject::tr("Sixty"                       ),
 
-    "Sixty-two",
-    "Sixty-four",
-    "One hundred and Twenty-eight",
+    QObject::tr("Sixty-two"                   ),
+    QObject::tr("Sixty-four"                  ),
+    QObject::tr("One hundred and Twenty-eight")
 };
 
 DWIDGET_USE_NAMESPACE
 
-CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "CPU"))
+CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("CPU"))
 {
     initWidget();
 }
@@ -178,7 +179,7 @@ void CpuWidget::initWidget()
        headers << tr("Name") << tr("Vendor") << tr("Architecture");
     } else {
         if (t_getCpuSpeedFromDmiSuccess) {
-            headers << tr("Name") << tr("Vendor") << DApplication::translate("CPU","Max Speed") << tr("Architecture");
+            headers << tr("Name") << tr("Vendor") << tr("CPU","Max Speed") << tr("Architecture");
         } else {
             headers << tr("Name") << tr("Vendor") << tr("Speed") << tr("Architecture");
         }
@@ -190,12 +191,12 @@ void CpuWidget::initWidget()
     {
         QString md = DeviceInfoParser::Instance().queryData("catcpu", cpu, "model name");
         QString mc = DeviceInfoParser::Instance().queryData("catcpu", cpu, "vendor_id");
-        if(mc.isEmpty() || mc == DApplication::translate("Main", "Unknown"))
+        if(mc.isEmpty() || mc == tr("Unknown"))
         {
             mc = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Vendor ID");
         }
 
-        if(mc == DApplication::translate("Main", "Unknown"))
+        if(mc == tr("Unknown"))
         {
             mc = md.split(" ").first();
         }
@@ -235,7 +236,7 @@ void CpuWidget::initWidget()
 
         if( i < sizeof(coresNumberArray)/sizeof(int) )
         {
-            overviewInfo_.value += DApplication::translate("CPU", NumberStrinArray[i].toStdString().data() );
+            overviewInfo_.value += NumberStrinArray[i];
         }
         else
         {
@@ -259,7 +260,7 @@ void CpuWidget::initWidget()
 
     if( i < sizeof(coresNumberArray)/sizeof(int) )
     {
-        overviewInfo_.value += DApplication::translate("CPU", NumberStrinArray[i].toStdString().data() );
+        overviewInfo_.value += NumberStrinArray[i];
     }
     else
     {
@@ -282,7 +283,7 @@ void CpuWidget::initWidget()
 
         if( i < sizeof(coresNumberArray)/sizeof(int) )
         {
-            overviewInfo_.value += DApplication::translate("CPU", NumberStrinArray[i].toStdString().data() );
+            overviewInfo_.value += NumberStrinArray[i];
         }
         else
         {
@@ -315,7 +316,7 @@ void CpuWidget::initWidget()
     ArticleStruct cpuCores("CPU cores");
     cpuCores.queryData("lscpu", "lscpu", "CPU(s)", existSet, articles);
 
-    ArticleStruct tamount("Threads amount");
+    ArticleStruct tamount("Threads");
     tamount.value = QString::number(cores*threadsPerCore);
     articles.push_back(tamount);
 
@@ -364,17 +365,17 @@ void CpuWidget::addPrecessor(const QString& precessor)
     articles.push_back(vendor);
     existArticles.insert("vendor_id");
 
-    ArticleStruct cpuid("Cpu id");
+    ArticleStruct cpuid("CPU ID");
     cpuid.queryData("catcpu", precessor, "physical id" );
     articles.push_back(cpuid);
     existArticles.insert("physical id");
 
-    ArticleStruct coreid("Core id");
+    ArticleStruct coreid("Core ID");
     coreid.queryData("catcpu", precessor, "core id" );
     articles.push_back(coreid);
     existArticles.insert("core id");
 
-    ArticleStruct threadamount("Threads amount");
+    ArticleStruct threadamount("Threads");
     threadamount.queryData("lscpu", "lscpu", "Thread(s) per core" );
     articles.push_back(threadamount);
 
@@ -392,7 +393,7 @@ void CpuWidget::addPrecessor(const QString& precessor)
     architecture.queryData( "lscpu", "lscpu", "Architecture" );
     articles.push_back(architecture);
 
-    ArticleStruct cpufamily("Cpu Family");
+    ArticleStruct cpufamily("CPU Family");
     cpufamily.queryData("catcpu", precessor, "cpu family" );
     articles.push_back(cpufamily);
     existArticles.insert("cpu family");

@@ -60,7 +60,7 @@ bool findAspectRatio(int width, int height, int& ar_w, int& ar_h)
     return false;
 }
 
-MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Monitor"))
+MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Monitor"))
 {
     auto screens =  QGuiApplication::screens();
     if(screens.count()>=1){
@@ -144,14 +144,14 @@ void MonitorWidget::initWidget()
             mDate.queryData("hwinfo", monitor, "Year of Manufacture");
             if( mDate.isValid() && mDate.value.toInt() != 0)
             {
-                mDate.value = mDate.value + DApplication::translate("Main", "Year");
+                mDate.value = mDate.value + tr("Year");
 
                 QString mw = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Week of Manufacture");
-                if( mw.isEmpty() == false && mw != DApplication::translate("Main", "Unknown") && mw != "0")
+                if( mw.isEmpty() == false && mw != tr("Unknown") && mw != "0")
                 {
                     mDate.value += " ";
                     mDate.value += mw;
-                    mDate.value += DApplication::translate("Main", "Week");
+                    mDate.value += tr("Week");
                 }
                 articles.push_back(mDate);
 
@@ -222,7 +222,6 @@ void MonitorWidget::initWidget()
                 primaryMonitor.value = "Yes";
             }
 
-            //currentResolution.queryData("xrandr", xrandrMonitorList.at(i), "");
             if(currentResolution.isValid() == false)
             {
                 currentResolution.queryData("xrandr", xrandrMonitorList.at(i), "Resolution");

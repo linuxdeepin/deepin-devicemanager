@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-CDRomWidget::CDRomWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "CD-ROM"))
+CDRomWidget::CDRomWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("CD-ROM"))
 {
     initWidget();
 }
@@ -38,7 +38,7 @@ void CDRomWidget::initWidget()
 
     if( cdromList.size() < 1)
     {
-        setCentralInfo("No CD-ROM found!");
+        setCentralInfo(tr("No CD-ROM found"));
         return;
     }
 

@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Usb Devices"))
+UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("USB Devices"))
 {
     initWidget();
 }
@@ -37,7 +37,7 @@ void UsbdeviceWidget::initWidget()
 
     if( usbdeviceList.size() < 1)
     {
-        setCentralInfo("No Usb Devices found!");
+        setCentralInfo(tr("No USB devices found"));
         return;
     }
 

@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, DApplication::translate("Main", "Other PCI Devices"))
+OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Other Devices"))
 {
     initWidget();
 }
@@ -39,7 +39,7 @@ void OtherPciDeviceWidget::initWidget()
 
     if(otherPcideviceList.size() < 1)
     {
-        setCentralInfo("No Other PCI Devices found!");
+        setCentralInfo(tr("No other PCI devices found"));
         return;
     }
 
