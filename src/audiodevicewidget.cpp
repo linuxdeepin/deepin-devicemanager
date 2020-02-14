@@ -53,11 +53,7 @@ void AudiodeviceWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-//        ArticleStruct type("Type");
-//        type.value = "AudioAdapter";
-//        articles.push_back(type);
-
-        ArticleStruct busInfo("Bus info");
+        ArticleStruct busInfo(tr("Bus info","Audio Device Info"));
         busInfo.queryData("lshw", multimedia, "bus info", existArticles);
         QRegExp reg("^pci@[0-9]*:([\\s\\S]*)$");
 
@@ -70,7 +66,7 @@ void AudiodeviceWidget::initWidget()
         QString lspciDeviceName;
         DeviceInfoParser::Instance().fuzzeyQueryKey("lspci", pci_bus, lspciDeviceName);
 
-        ArticleStruct name("Name");
+        ArticleStruct name(tr("Name","Audio Device Info"));
         name.queryData("lspci", lspciDeviceName, "Name");
         name.queryData( "lshw", multimedia, "product", existArticles);
 
@@ -81,10 +77,10 @@ void AudiodeviceWidget::initWidget()
             name.value = name.value.mid(0, index);
         }
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor","Audio Device Info"));
         vendor.queryData( "lshw", multimedia, "vendor", existArticles);
 
-        ArticleStruct description("Description");
+        ArticleStruct description(tr("Description"));
         description.queryData("lshw", multimedia, "description");
 
         existArticles.insert("description");
@@ -99,19 +95,19 @@ void AudiodeviceWidget::initWidget()
         articles.push_back(description);
         articles.push_back(busInfo);
 
-        ArticleStruct version("Version");
+        ArticleStruct version(tr("Version","Audio Device Info"));
         version.queryData( "lshw", multimedia, "version", existArticles, articles);
 
 
-        ArticleStruct width("Width");
+        ArticleStruct width(tr("Width","Audio Device Info"));
         width.queryData( "lshw", multimedia, "width", existArticles, articles);
 
 
-        ArticleStruct clock("Clock");
+        ArticleStruct clock(tr("Clock","Audio Device Info"));
         clock.queryData( "lshw", multimedia, "clock", existArticles, articles);
 
 
-        ArticleStruct capabilities("Capabilities");
+        ArticleStruct capabilities(tr("Capabilities","Audio Device Info"));
         capabilities.queryData( "lshw", multimedia, "capabilities", existArticles, articles);
 
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles);
@@ -147,19 +143,19 @@ void AudiodeviceWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct name("Name");
+        ArticleStruct name(tr("Name"));
         name.queryData( "catinput", device, "Name");
         name.value.remove("\"");
         articles.push_back(name);
         existArticles.insert("Name");
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor"));
         vendor.queryData( "catinput", device, "Vendor" , existArticles, articles);
 
-        ArticleStruct vesion("Version");
+        ArticleStruct vesion(tr("Version"));
         vesion.queryData( "catinput", device, "Version", existArticles, articles);
 
-        ArticleStruct sysfs("Sysfs");
+        ArticleStruct sysfs(tr("Sysfs","Audio Device Info"));
         sysfs.queryData( "catinput", device, "Sysfs", existArticles, articles);
 
 
@@ -180,7 +176,7 @@ void AudiodeviceWidget::initWidget()
 
     if( multimediaList.size() + inputdeviceList.size() > 1 )
     {
-        QStringList headers = { "Name",  "Vendor"};
+        QStringList headers = { tr("Name"),  tr("Vendor")};
         addTable( headers, tabList);
     }
 }

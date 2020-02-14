@@ -230,8 +230,12 @@ bool DeviceInfoParser::queryDeviceInfo(const QString& toolname, const QString& d
 
     return true;
 }
-
-bool DeviceInfoParser::queryRemainderDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles, const QSet<QString>& existArticles)
+//when provide both context and disabiguation,trigger translations
+bool DeviceInfoParser::queryRemainderDeviceInfo(const QString& toolname,
+                                                const QString& deviceName,
+                                                QList<ArticleStruct>& articles,
+                                                const QSet<QString>& existArticles,
+                                                 const char *context,const char *disambiguation)
 {
     if(false == toolDatabase_.contains(toolname))
     {
@@ -242,18 +246,46 @@ bool DeviceInfoParser::queryRemainderDeviceInfo(const QString& toolname, const Q
     {
         return false;
     }
-
+#if GenerateTsItem
+    QFile file(QString("../../translate/%1.txt").arg(context));
+    QTextStream *out = nullptr;
+    if(file.exists())
+        file.remove();
+    if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
+        out = new QTextStream(&file);
+        *out <<"<context>\n"
+             <<"<name>"<<context<<"</name>\n";
+    }
+#endif
     foreach( auto key, toolDatabase_[toolname][deviceName].keys())
     {
         if(existArticles.contains(key))
         {
             continue;
         }
-
-        ArticleStruct article(key, true);
+        QString articleName;
+        if(context != nullptr && disambiguation != nullptr) {
+            articleName = DApplication::translate(context,key.trimmed().toStdString().data(),disambiguation);
+#if GenerateTsItem
+            if(out != nullptr) {
+                *out << "   <message>\n"
+                        "       <source>" <<key.trimmed().toStdString().data() << "</source>\n"
+                        "       <translation type =\"unfinished\"></translation>\n"
+                        "   </message>\n";
+            }
+#endif
+            }else {
+            articleName = key;
+            }
+        ArticleStruct article(articleName, true);
         article.value = toolDatabase_[toolname][deviceName][key];
         articles.push_back(article);
-    }
+      }
+#if GenerateTsItem
+    *out <<"</context>\n";
+    file.close();
+    delete out;
+#endif
 
     return true;
 }

@@ -57,9 +57,9 @@ void KeyboardWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct name("Name");
-        ArticleStruct vendor("Vendor");
-        ArticleStruct type("Type");
+        ArticleStruct name(tr("Name"));
+        ArticleStruct vendor(tr("Vendor"));
+        ArticleStruct type(tr("Type"));
 
 
         name.queryData( "catinput", device, "Name");
@@ -88,32 +88,32 @@ void KeyboardWidget::initWidget()
         {
             existArticles.insert("product");
 
-            ArticleStruct description("Description");
+            ArticleStruct description(tr("Description"));
             description.queryData("lshw", lshwKeyboard, "description");
             articles.push_back(description);
             existArticles.insert("description");
 
-            ArticleStruct busInfo("Bus info");
+            ArticleStruct busInfo(tr("Bus info"));
             busInfo.queryData( "lshw", lshwKeyboard, "bus info");
             articles.push_back(busInfo);
             existArticles.insert("bus info");
 
-            ArticleStruct version("Version");
+            ArticleStruct version(tr("Version"));
             version.queryData( "lshw", lshwKeyboard, "version");
             articles.push_back(version);
             existArticles.insert("version");
 
-            ArticleStruct width("Width");
-            width.queryData( "lshw", lshwKeyboard, "width");
+            ArticleStruct width(tr("Width"));
+            width.queryData("lshw", lshwKeyboard, "width");
             articles.push_back(width);
             existArticles.insert("width");
 
-            ArticleStruct clock("Clock");
+            ArticleStruct clock(tr("Clock"));
             clock.queryData( "lshw", lshwKeyboard, "clock");
             articles.push_back(clock);
             existArticles.insert("clock");
 
-            ArticleStruct capabilities("Capabilities");
+            ArticleStruct capabilities(tr("Capabilities"));
             capabilities.queryData( "lshw", lshwKeyboard, "capabilities");
             articles.push_back(capabilities);
             existArticles.insert("capabilities");
@@ -121,7 +121,7 @@ void KeyboardWidget::initWidget()
             DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwKeyboard, articles, existArticles);
         }
 
-        ArticleStruct uniq("Uniq");
+        ArticleStruct uniq(tr("Uniq","Keyboard Info"));
         uniq.queryData( "catinput", device, "Uniq");
 
         if(uniq.isValid())
@@ -139,7 +139,7 @@ void KeyboardWidget::initWidget()
                 type.value = "Bluetooth";
                 existArticles.insert("Name");
 
-                ArticleStruct connected("Connected");
+                ArticleStruct connected(tr("Connected","Keyboard Info"));
                 connected.queryData( "paired-devices", blueTooth, "Connected");
                 //articles.push_back(connected);
 
@@ -154,7 +154,7 @@ void KeyboardWidget::initWidget()
             }
         }
 
-        ArticleStruct phys("Phys");
+        ArticleStruct phys(tr("Phys","Keyboard Info"));
         phys.queryData( "catinput", device, "Phys");
 
         if(phys.isValid())
@@ -195,7 +195,7 @@ void KeyboardWidget::initWidget()
         articles.push_back(uniq);
         existArticles.insert("Uniq");
 
-        ArticleStruct sysfs("Sysfs");
+        ArticleStruct sysfs(tr("Sysfs","Keyboard Info,better if dont do translation ,i think"));
         sysfs.queryData( "catinput", device, "Sysfs");
         articles.push_back(sysfs);
         existArticles.insert("Sysfs");
@@ -203,12 +203,12 @@ void KeyboardWidget::initWidget()
         articles.push_back(phys);
         existArticles.insert("Phys");
 
-        ArticleStruct vesion("Version");
+        ArticleStruct vesion(tr("Version"));
         vesion.queryData( "catinput", device, "Version");
         articles.push_back(vesion);
         existArticles.insert("Version");
 
-        ArticleStruct product("Product");
+        ArticleStruct product(tr("Product"));
         product.queryData( "catinput", device, "Product");
         articles.push_back(product);
         existArticles.insert("Product");
@@ -221,7 +221,7 @@ void KeyboardWidget::initWidget()
 
             if(upower.isEmpty() == false )
             {
-                ArticleStruct power("Power");
+                ArticleStruct power(tr("Power"));
                 power.value = " ";
                 articles.push_back(power);
 
@@ -253,7 +253,7 @@ void KeyboardWidget::initWidget()
 
     if( validKeyboardSize > 1 )
     {
-        QStringList headers = { "Name",  "Type", "Vendor" };
+        QStringList headers = { tr("Name"),  tr("Type"), tr("Vendor") };
         addTable( headers, tabList);
     }
 }
@@ -278,52 +278,52 @@ bool KeyboardWidget::findUsbKeyboard()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct name("Name");
+        ArticleStruct name(tr("Name"));
         name.queryData( "lshw", keyboard, "product");
         articles.push_back(name);
         existArticles.insert("product");
 
-        ArticleStruct description("Description");
+        ArticleStruct description(tr("Description"));
         description.queryData("lshw", keyboard, "description");
         articles.push_back(description);
         existArticles.insert("description");
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor"));
         vendor.queryData( "lshw", keyboard, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct busInfo("Bus info");
+        ArticleStruct busInfo(tr("Bus info"));
         busInfo.queryData( "lshw", keyboard, "bus info");
         articles.push_back(busInfo);
         existArticles.insert("bus info");
 
-        ArticleStruct physicalId("Physical ID");
+        ArticleStruct physicalId(tr("Physical ID"));
         physicalId.queryData( "lshw", keyboard, "physical id");
         articles.push_back(physicalId);
         existArticles.insert("physical id");
 
-        ArticleStruct logicalName("Logical Name");
+        ArticleStruct logicalName(tr("Logical Name"));
         logicalName.queryData( "lshw", keyboard, "logical name");
         articles.push_back(logicalName);
         existArticles.insert("logical name");
 
-        ArticleStruct version("Version");
+        ArticleStruct version(tr("Version"));
         version.queryData( "lshw", keyboard, "version");
         articles.push_back(version);
         existArticles.insert("version");
 
-        ArticleStruct width("Width");
+        ArticleStruct width(tr("Width"));
         width.queryData( "lshw", keyboard, "width");
         articles.push_back(width);
         existArticles.insert("width");
 
-        ArticleStruct clock("Clock");
+        ArticleStruct clock(tr("Clock"));
         clock.queryData( "lshw", keyboard, "clock");
         articles.push_back(clock);
         existArticles.insert("clock");
 
-        ArticleStruct capabilities("Capabilities");
+        ArticleStruct capabilities(tr("Capabilities"));
         capabilities.queryData( "lshw", keyboard, "capabilities");
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
@@ -356,7 +356,7 @@ bool KeyboardWidget::findUsbKeyboard()
     }
     if( findKeyboards.size() > 1 )
     {
-        QStringList headers = { "Name",  "Vendor" };
+        QStringList headers = { tr("Name"),  tr("Vendor") };
         addTable( headers, tabList);
     }
     return  true;

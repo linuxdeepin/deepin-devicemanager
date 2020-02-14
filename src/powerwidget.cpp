@@ -46,7 +46,7 @@ void PowerWidget::initWidget()
 
     if(maxSwitchingSize + maxBatterySize < 1)
     {
-        setCentralInfo(tr("Get Power Infomation failed!"));
+        setCentralInfo(tr("Failed to get power information"));
         return;
     }
 
@@ -63,10 +63,10 @@ void PowerWidget::initWidget()
         existArticles2.clear();
         existArticles3.clear();
 
-        ArticleStruct name("Name");
-        ArticleStruct vendor("Vendor");
-        ArticleStruct device("Device");
-        ArticleStruct serial("Serial");
+        ArticleStruct name(tr("Name"));
+        ArticleStruct vendor(tr("Vendor"));
+        ArticleStruct device(tr("Device"));
+        ArticleStruct serial(tr("Serial Number"));
 
         if(i < upowerSwitchingList.size())
         {
@@ -77,10 +77,10 @@ void PowerWidget::initWidget()
 
             serial.queryData( "upower", device.value, "serial", existArticles1, articles);
 
-            ArticleStruct model("Model");
+            ArticleStruct model(tr("Model"));
             model.queryData( "upower", device.value, "model", existArticles1, articles);
 
-            ArticleStruct powerSupply("Power Supply");
+            ArticleStruct powerSupply(tr("Power Supply"));
             powerSupply.queryData( "upower", device.value, "power supply", existArticles1, articles);
         }
 
@@ -92,18 +92,18 @@ void PowerWidget::initWidget()
 
             vendor.queryData( "lshw", dname, "vendor", existArticles2, articles);
 
-            ArticleStruct description("Description");
+            ArticleStruct description(tr("Description"));
             description.queryData("lshw", dname, "description", existArticles2, articles);
 
             serial.queryData( "upower", dname, "serial", existArticles2, articles);
 
-            ArticleStruct physicalId("Physical ID");
+            ArticleStruct physicalId(tr("Physical ID"));
             physicalId.queryData( "lshw", dname, "physical id", existArticles2, articles);
 
-            ArticleStruct version("Version");
+            ArticleStruct version(tr("Version"));
             version.queryData( "lshw", dname, "version", existArticles2, articles);
 
-            ArticleStruct capacity("Capacity");
+            ArticleStruct capacity(tr("Capacity"));
             capacity.queryData( "lshw", dname, "capacity", existArticles2, articles);
         }
 
@@ -117,14 +117,14 @@ void PowerWidget::initWidget()
 
             serial.queryData( "dmidecode", demideSwitchingpower, "Serial Number", existArticles3, articles);
 
-            ArticleStruct maxcapacity("Max Power Capacity");
+            ArticleStruct maxcapacity(tr("Max Power Capacity"));
             maxcapacity.queryData( "dmidecode", demideSwitchingpower, "Max Power Capacity", existArticles3, articles);
 
 
-            ArticleStruct location("Location");
+            ArticleStruct location(tr("Location"));
             location.queryData( "dmidecode", demideSwitchingpower, "Location", existArticles3, articles);
 
-            ArticleStruct assetTag("Asset Tag");
+            ArticleStruct assetTag(tr("Asset Tag","Power Info from DMIDecode"));
             assetTag.queryData( "dmidecode", demideSwitchingpower, "Asset Tag", existArticles3, articles);
         }
 
@@ -172,12 +172,12 @@ void PowerWidget::initWidget()
         existArticles3.clear();
         articles.clear();
 
-        ArticleStruct vendor("Vendor");
-        ArticleStruct de("Design Energy");
-        ArticleStruct device("Device");
-        ArticleStruct model("Model");
-        ArticleStruct name("Name");
-        ArticleStruct serial("Serial");
+        ArticleStruct vendor(tr("Vendor"));
+        ArticleStruct de(tr("Design Energy","Power Info from Upower"));
+        ArticleStruct device(tr("Device"));
+        ArticleStruct model(tr("Model"));
+        ArticleStruct name(tr("Name"));
+        ArticleStruct serial(tr("Serial Number"));
 
         if(i < UpowerBatteryList.size())
         {
@@ -190,24 +190,24 @@ void PowerWidget::initWidget()
 
             serial.queryData( "upower", device.value, "serial", existArticles1, articles);
 
-            ArticleStruct state("State");
+            ArticleStruct state(tr("State"));
             state.queryData( "upower", device.value, "state", existArticles1, articles);
 
-            ArticleStruct percentage("Battery Percentage");
+            ArticleStruct percentage(tr("Battery Percentage"));
             percentage.queryData( "upower", device.value, "percentage", existArticles1, articles);
 
-            ArticleStruct ce("Current Energy");
+            ArticleStruct ce(tr("Current Energy"));
             ce.queryData( "upower", device.value, "energy", existArticles1, articles);
 
-            ArticleStruct fe("Full Energy");
+            ArticleStruct fe(tr("Full Energy"));
             fe.queryData( "upower", device.value, "energy-full", existArticles1, articles);
 
             de.queryData( "upower", device.value, "energy-full-design", existArticles1, articles);
 
-            ArticleStruct bh("Battery Healthy");
+            ArticleStruct bh(tr("Battery Healthy"));
             bh.queryData( "upower", device.value, "capacity", existArticles1, articles);
 
-            ArticleStruct powerSupply("Power Supply");
+            ArticleStruct powerSupply(tr("Power Supply"));
             powerSupply.queryData( "upower", device.value, "power supply", existArticles1, articles);
         }
 
@@ -220,21 +220,21 @@ void PowerWidget::initWidget()
 
             vendor.queryData( "lshw", device, "vendor", existArticles2, articles);
 
-            ArticleStruct description("Description");
+            ArticleStruct description(tr("Description"));
             description.queryData("lshw", device, "description", existArticles2, articles);
 
-            ArticleStruct physicalId("Physical ID");
+            ArticleStruct physicalId(tr("Physical ID"));
             physicalId.queryData( "lshw", device, "physical id", existArticles2, articles);
 
-            ArticleStruct version("Version");
+            ArticleStruct version(tr("Version"));
             version.queryData( "lshw", device, "version", existArticles2, articles);
 
 
-            ArticleStruct capacity("Capacity");
+            ArticleStruct capacity(tr("Capacity"));
             capacity.queryData( "lshw", device, "capacity", existArticles2, articles);
 
 
-            ArticleStruct slot("Location");
+            ArticleStruct slot(tr("Location"));
             slot.queryData( "dmidecode", device, "slot");
             articles.push_back(slot);
             if(slot.value.isEmpty() == false || slot.value != tr("Unknown"))
@@ -262,10 +262,10 @@ void PowerWidget::initWidget()
 //            existArticles.insert("Serial Number");
 //            existArticles.insert("Name");
 
-            ArticleStruct location("Location");
+            ArticleStruct location(tr("Location"));
             location.queryData( "dmidecode", demideBattery, "Location", existArticles3, articles);
 
-            ArticleStruct assetTag("Asset Tag");
+            ArticleStruct assetTag(tr("Asset Tag"));
             assetTag.queryData( "dmidecode", demideBattery, "Asset Tag", existArticles3, articles);
 
             de.queryData( "dmidecode", demideBattery, "Design Capacity", existArticles3, articles);
@@ -338,7 +338,7 @@ void PowerWidget::initWidget()
 
     if( maxSwitchingSize + maxBatterySize > 1 )
     {
-        QStringList headers = { "Name", "Type", "Vendor" };
+        QStringList headers = { tr("Name"), tr("Type"), tr("Vendor") };
         addTable( headers, tabList);
     }
 }

@@ -358,9 +358,9 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
 
     QString file = DFileDialog::getSaveFileName(
                       this,
-                      tr("Export"), saveDir + tr("Device Info") + \
+                      "Export", saveDir + "Device Info" + \
                       QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
-                      tr("Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)"), &selectFilter);
+                      "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter);
 
     if( file.isEmpty() == true )
     {

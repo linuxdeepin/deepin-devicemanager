@@ -51,3 +51,4 @@ const int spinnerWidth = 32;
 const int spinnerHeight = 32;
 
 const int TableViewRowHeight_ = 36;
+#define GenerateTsItem 1

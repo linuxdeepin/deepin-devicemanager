@@ -26,7 +26,7 @@
 #include <DApplication>
 #include <QSet>
 
-static int coresNumberArray[] =
+const int coresNumberArray[] =
 {
     1,2,4,6,8,
     10,12,14,16,18,
@@ -38,54 +38,11 @@ static int coresNumberArray[] =
     128
 };
 
-static QString NumberStrinArray[] =
-{
-    QObject::tr("One"                         ),
-    QObject::tr("Two"                         ),
-    QObject::tr("Four"                        ),
-    QObject::tr("Six"                         ),
-    QObject::tr("Eight"                       ),
-
-    QObject::tr("Ten"                         ),
-    QObject::tr("Twelve"                      ),
-    QObject::tr("Fourteen"                    ),
-    QObject::tr("Sixteen"                     ),
-    QObject::tr("Eighteen"                    ),
-
-    QObject::tr("Twenty"                      ),
-    QObject::tr("Twenty-two"                  ),
-    QObject::tr("Twenty-four"                 ),
-    QObject::tr("Twenty-six"                  ),
-    QObject::tr("Twenty-eight"                ),
-    QObject::tr("Thirty"                      ),
-
-    QObject::tr("Thirty-two"                  ),
-    QObject::tr("Thirty-four"                 ),
-    QObject::tr("Thirty-six"                  ),
-    QObject::tr("Thirty-eight"                ),
-    QObject::tr("Fourty"                      ),
-
-    QObject::tr("Forty-two"                   ),
-    QObject::tr("Forty-four"                  ),
-    QObject::tr("Forty-six"                   ),
-    QObject::tr("Forty-eight"                 ),
-    QObject::tr("Fifty"                       ),
-
-    QObject::tr("Fifty-two"                   ),
-    QObject::tr("Fifty-four"                  ),
-    QObject::tr("Fifty-six"                   ),
-    QObject::tr("Fifty-eight"                 ),
-    QObject::tr("Sixty"                       ),
-
-    QObject::tr("Sixty-two"                   ),
-    QObject::tr("Sixty-four"                  ),
-    QObject::tr("One hundred and Twenty-eight")
-};
-
 DWIDGET_USE_NAMESPACE
 
 CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("CPU"))
 {
+    initNumberStringArray();
     initWidget();
 }
 
@@ -179,7 +136,7 @@ void CpuWidget::initWidget()
        headers << tr("Name") << tr("Vendor") << tr("Architecture");
     } else {
         if (t_getCpuSpeedFromDmiSuccess) {
-            headers << tr("Name") << tr("Vendor") << tr("CPU","Max Speed") << tr("Architecture");
+            headers << tr("Name") << tr("Vendor") << tr("Max Speed") << tr("Architecture");
         } else {
             headers << tr("Name") << tr("Vendor") << tr("Speed") << tr("Architecture");
         }
@@ -236,7 +193,7 @@ void CpuWidget::initWidget()
 
         if( i < sizeof(coresNumberArray)/sizeof(int) )
         {
-            overviewInfo_.value += NumberStrinArray[i];
+            overviewInfo_.value += m_numberStringArray[i];
         }
         else
         {
@@ -260,7 +217,8 @@ void CpuWidget::initWidget()
 
     if( i < sizeof(coresNumberArray)/sizeof(int) )
     {
-        overviewInfo_.value += NumberStrinArray[i];
+        QString t = m_numberStringArray[i];
+        overviewInfo_.value += t;
     }
     else
     {
@@ -283,7 +241,7 @@ void CpuWidget::initWidget()
 
         if( i < sizeof(coresNumberArray)/sizeof(int) )
         {
-            overviewInfo_.value += NumberStrinArray[i];
+            overviewInfo_.value += m_numberStringArray[i];
         }
         else
         {
@@ -348,93 +306,137 @@ void CpuWidget::initWidget()
     }
 }
 
+void CpuWidget::initNumberStringArray()
+{
+    m_numberStringArray .clear();
+    m_numberStringArray  <<QObject::tr("One"                         )
+                        <<QObject::tr("Two"                         )
+                        <<QObject::tr("Four"                        )
+                        <<QObject::tr("Six"                         )
+                        <<QObject::tr("Eight"                       )
+
+                        <<QObject::tr("Ten"                         )
+                        <<QObject::tr("Twelve"                      )
+                        <<QObject::tr("Fourteen"                    )
+                        <<QObject::tr("Sixteen"                     )
+                        <<QObject::tr("Eighteen"                    )
+
+                        <<QObject::tr("Twenty"                      )
+                        <<QObject::tr("Twenty-two"                  )
+                        <<QObject::tr("Twenty-four"                 )
+                        <<QObject::tr("Twenty-six"                  )
+                        <<QObject::tr("Twenty-eight"                )
+                        <<QObject::tr("Thirty"                      )
+
+                        <<QObject::tr("Thirty-two"                  )
+                        <<QObject::tr("Thirty-four"                 )
+                        <<QObject::tr("Thirty-six"                  )
+                        <<QObject::tr("Thirty-eight"                )
+                        <<QObject::tr("Fourty"                      )
+
+                        <<QObject::tr("Forty-two"                   )
+                        <<QObject::tr("Forty-four"                  )
+                        <<QObject::tr("Forty-six"                   )
+                        <<QObject::tr("Forty-eight"                 )
+                        <<QObject::tr("Fifty"                       )
+
+                        <<QObject::tr("Fifty-two"                   )
+                        <<QObject::tr("Fifty-four"                  )
+                        <<QObject::tr("Fifty-six"                   )
+                        <<QObject::tr("Fifty-eight"                 )
+                        <<QObject::tr("Sixty"                       )
+
+                        <<QObject::tr("Sixty-two"                   )
+                        <<QObject::tr("Sixty-four"                  )
+                        <<QObject::tr("One hundred and Twenty-eight");
+}
+
 void CpuWidget::addPrecessor(const QString& precessor)
 {
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    ArticleStruct name("Name");
+    ArticleStruct name(tr("Name"));
     name.queryData("catcpu", precessor, "model name" );
     articles.push_back(name);
     existArticles.insert("model name");
 
-    ArticleStruct vendor("Vendor");
+    ArticleStruct vendor(tr("Vendor"));
     vendor.queryData("catcpu", precessor, "vendor_id" );
     vendor.queryData("lscpu", "lscpu", "Vendor ID" );
 
     articles.push_back(vendor);
     existArticles.insert("vendor_id");
 
-    ArticleStruct cpuid("CPU ID");
+    ArticleStruct cpuid(tr("CPU ID"));
     cpuid.queryData("catcpu", precessor, "physical id" );
     articles.push_back(cpuid);
     existArticles.insert("physical id");
 
-    ArticleStruct coreid("Core ID");
+    ArticleStruct coreid(tr("Core ID"));
     coreid.queryData("catcpu", precessor, "core id" );
     articles.push_back(coreid);
     existArticles.insert("core id");
 
-    ArticleStruct threadamount("Threads");
+    ArticleStruct threadamount(tr("Threads"));
     threadamount.queryData("lscpu", "lscpu", "Thread(s) per core" );
     articles.push_back(threadamount);
 
-    ArticleStruct speed("Current Speed");
+    ArticleStruct speed(tr("Current Speed"));
     speed.queryData("catcpu", precessor, "cpu MHz" );
     articles.push_back(speed);
     existArticles.insert("cpu MHz");
 
-    ArticleStruct BogoMIPS("BogoMIPS");
+    ArticleStruct BogoMIPS(tr("BogoMIPS"));
     BogoMIPS.queryData( "catcpu", precessor, "bogomips" );
     articles.push_back(BogoMIPS);
     existArticles.insert("bogomips");
 
-    ArticleStruct architecture("Architecture");
+    ArticleStruct architecture(tr("Architecture"));
     architecture.queryData( "lscpu", "lscpu", "Architecture" );
     articles.push_back(architecture);
 
-    ArticleStruct cpufamily("CPU Family");
+    ArticleStruct cpufamily(tr("CPU Family"));
     cpufamily.queryData("catcpu", precessor, "cpu family" );
     articles.push_back(cpufamily);
     existArticles.insert("cpu family");
 
-    ArticleStruct model("Model");
+    ArticleStruct model(tr("Model"));
     model.queryData("catcpu", precessor, "model" );
     articles.push_back(model);
     existArticles.insert("model");
 
-    ArticleStruct stepping("Stepping");
+    ArticleStruct stepping(tr("Stepping"));
     stepping.queryData("catcpu", precessor, "stepping" );
     articles.push_back(stepping);
     existArticles.insert("stepping");
 
-    ArticleStruct l1d( "L1d Cache");
+    ArticleStruct l1d(tr("L1d Cache"));
     l1d.queryData( "lscpu", "lscpu", "L1d cache" );
     articles.push_back(l1d);
 
-    ArticleStruct l1i( "L1i Cache");
+    ArticleStruct l1i(tr("L1i Cache"));
     l1i.queryData( "lscpu", "lscpu", "L1i cache" );
     articles.push_back(l1i);
 
-    ArticleStruct l2( "L2 Cache");
+    ArticleStruct l2(tr("L2 Cache"));
     l2.queryData( "lscpu", "lscpu", "L2 cache" );
     articles.push_back(l2);
 
-    ArticleStruct l3( "L3 Cache");
+    ArticleStruct l3(tr("L3 Cache"));
     l3.queryData( "lscpu", "lscpu", "L3 cache" );
     articles.push_back(l3);
 
-    ArticleStruct flags("Flags");
+    ArticleStruct flags(tr("Flags"));
     flags.queryData( "catcpu", precessor, "flags" );
     articles.push_back(flags);
     existArticles.insert("flags");
 
-    ArticleStruct virtualization("Virtualization");
+    ArticleStruct virtualization(tr("Virtualization"));
     virtualization.queryData( "lscpu", "lscpu", "Virtualization" );
     articles.push_back(virtualization);
 
-    DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles);
-
+    DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles,"CPU_AutoSearch","CPU Information");
     addSubInfo(tr("Processor") + " " +  precessor, articles);
     articles.clear();
 }

@@ -106,20 +106,18 @@ public:
 
     void setCentralInfo(const QString& info);
 
-    //void addInfo(const QString& title, const QList<ArticleStruct>& articles);
+    //void (const QString& title, const QList<ArticleStruct>& articles);
     // Html version
 
     static void toHtmlString( QDomDocument& doc, const DeviceInfo& di);
     static QString toHtmlString(const DeviceInfo& di);
 
-    void addInfo(const QString& title, const QList<ArticleStruct>& articles, bool main = true);
-    // cloumnwidgeth version
-    //void addInfo(const QString& title, const QList<ArticleStruct>& articles, bool main = true);
+    void addInfo(const QString& title, const QList<ArticleStruct>& articles,
+                 const char *context = nullptr,const char *disambiguation = nullptr);
 
-    //void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
-    // cloumnwidget version
-    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin = DeviceWidgetContentMarginLeft_-8);
-    //void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles, int margin = DeviceWidgetContentMarginLeft_-8);
+
+    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles,
+                    const char *context = nullptr,const char *disambiguation = nullptr);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
 

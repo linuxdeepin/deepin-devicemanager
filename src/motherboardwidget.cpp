@@ -122,7 +122,7 @@ void MotherboardWidget::initWidget()
 
     if(res)
     {
-        addInfo( "", articles );
+        addInfo("", articles,"AutoSearch:motherborad information","motherborad information");
     }
 
     articles.clear();
@@ -172,7 +172,7 @@ void MotherboardWidget::initWidget()
 
     if(res)
     {
-        addSubInfo( "System Information", articles, DeviceWidgetContentMarginLeft_ );
+        addSubInfo(tr("System Information"), articles, "AutoSearch:System Information","System Information" );
     }
 
     addMemoryInfo();
@@ -224,7 +224,7 @@ void MotherboardWidget::initWidget()
 
     if(res)
     {
-        addSubInfo( "Bios", articles, DeviceWidgetContentMarginLeft_ );
+        addSubInfo(tr("Bios"), articles,"AutoSearch:Bios","Bios");
     }
 
     articles.clear();
@@ -257,7 +257,7 @@ void MotherboardWidget::initWidget()
 
     if(res)
     {
-        addSubInfo( "Chassis Information", articles, DeviceWidgetContentMarginLeft_);
+        addSubInfo(tr("Chassis Information"), articles,"AutoSearch:Chassis Information","Chassis Information");
     }
 
 }
@@ -349,5 +349,5 @@ void MotherboardWidget::addMemoryInfo()
         articles.push_back(ug);
     }
 
-    addSubInfo("Memory Bank Info", articles, DeviceWidgetContentMarginLeft_);
+    addSubInfo(tr("Memory Bank Info"), articles,"AutoSearch:Memory Bank Info","Memory Bank Info");
 }

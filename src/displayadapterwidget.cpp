@@ -57,7 +57,7 @@ void DisplayadapterWidget::initWidget()
         DeviceInfoParser::Instance().fuzzeyQueryKey("lspci", pci_bus, lspciDeviceName);
 
         QString lspciName = DeviceInfoParser::Instance().fuzzyQueryData("lspci", lspciDeviceName, "bus info");
-        ArticleStruct name("Name");
+        ArticleStruct name(tr("Name"));
         name.queryData("lspci", lspciDeviceName, "Name");
         name.value.remove( " Corporation", Qt::CaseInsensitive );
 
@@ -69,12 +69,12 @@ void DisplayadapterWidget::initWidget()
         articles.push_back(name);
         existArticles.insert("product");
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor"));
         vendor.queryData( "lshw", displayadapter, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct description("Description");
+        ArticleStruct description(tr("Description"));
         description.queryData("lshw", displayadapter, "description", existArticles, articles);
 
 //        ArticleStruct memory("Graphic Memory");
@@ -86,40 +86,40 @@ void DisplayadapterWidget::initWidget()
         {
             QString screenName = screenList[i];
 
-            ArticleStruct minimum("Minimum Resolution");
+            ArticleStruct minimum(tr("Minimum Resolution"));
             minimum.queryData( "xrandr", screenName, "minimum");
             articles.push_back(minimum);
 
-            ArticleStruct maximum("Maximum Resolution");
+            ArticleStruct maximum(tr("Maximum Resolution"));
             maximum.queryData( "xrandr", screenName, "maximum");
             articles.push_back(maximum);
         }
 
-        ArticleStruct driver("Driver");
+        ArticleStruct driver(tr("Driver"));
         driver.queryData("lspci", lspciDeviceName, "Kernel modules");
         articles.push_back(driver);
         existArticles.insert("driver");
 
-//        ArticleStruct interface("Support Interface");
+//        ArticleStruct interface(tr("Support Interface");
 //        interface.value = DeviceInfoParser::Instance().getDisplayInterfaceList().join(", ");
 //        articles.push_back(interface);
 
-        ArticleStruct version("Version");
+        ArticleStruct version(tr("Version"));
         version.queryData("lshw", displayadapter, "version");
         articles.push_back(version);
         existArticles.insert("version");
 
-        ArticleStruct width("Width");
+        ArticleStruct width(tr("Width"));
         width.queryData("lshw", displayadapter, "width");
         articles.push_back(width);
         existArticles.insert("width");
 
-        ArticleStruct clock("Clock");
+        ArticleStruct clock(tr("Clock"));
         clock.queryData("lshw", displayadapter, "clock");
         articles.push_back(clock);
         existArticles.insert("clock");
 
-        ArticleStruct capabilities("Capabilities");
+        ArticleStruct capabilities(tr("Capabilities"));
         capabilities.queryData("lshw", displayadapter, "capabilities");
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
@@ -163,7 +163,7 @@ void DisplayadapterWidget::initWidget()
 
     if( displayadapterList.size() > 1)
     {
-        QStringList headers = { "Name",  "Vendor" };
+        QStringList headers = { tr("Name"),tr("Vendor")};
         addTable( headers, tabList);
     }
 }

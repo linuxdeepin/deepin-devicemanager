@@ -31,7 +31,10 @@ public:
     explicit CpuWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+    void initNumberStringArray();
     void addPrecessor(const QString& precessor);
 
+private:
     QString speed_;
+    QStringList m_numberStringArray;
 };

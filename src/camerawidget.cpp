@@ -56,37 +56,37 @@ void CameraWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct name("Name");
+        ArticleStruct name(tr("Name"));
         name.queryData( "lshw", device, "product");
         articles.push_back(name);
         existArticles.insert("product");
 
-        ArticleStruct description("Description");
+        ArticleStruct description(tr("Description"));
         description.queryData("lshw", device, "description");
         articles.push_back(description);
         existArticles.insert("description");
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor"));
         vendor.queryData( "lshw", device, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct physicalId("Physical id");
+        ArticleStruct physicalId(tr("Physical ID"));
         physicalId.queryData("lshw", device, "physical id");
         articles.push_back(physicalId);
         existArticles.insert("physical id");
 
-        ArticleStruct busInfo("Bus Info");
+        ArticleStruct busInfo(tr("Bus Info"));
         busInfo.queryData("lshw", device, "bus info");
         articles.push_back(busInfo);
         existArticles.insert("bus info");
 
-        ArticleStruct version("Version");
+        ArticleStruct version(tr("Version"));
         version.queryData("lshw", device, "version");
         articles.push_back(version);
         existArticles.insert("version");
 
-        ArticleStruct capabilities("Capabilities");
+        ArticleStruct capabilities(tr("Capabilities"));
         capabilities.queryData("lshw", device, "capabilities");
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
@@ -123,7 +123,7 @@ void CameraWidget::initWidget()
 
     if( cameraList.size() > 1 )
     {
-        QStringList headers = { "Name",  "Vendor" };
+        QStringList headers = { tr("Name"),tr("Vendor") };
         addTable( headers, tabList);
     }
 }

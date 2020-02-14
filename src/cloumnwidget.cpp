@@ -138,7 +138,7 @@ void ColumnWidget::labelContextMenuEvent(QContextMenuEvent *event)
 
     contextMenu->setAutoFillBackground(true);
 
-    QAction copyAction(tr("Copy"), this);
+    QAction copyAction(QObject::tr("Copy"), this);
     connect(&copyAction, &QAction::triggered, \
             [this]()
             {

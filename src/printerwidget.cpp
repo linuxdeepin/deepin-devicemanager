@@ -48,89 +48,48 @@ void PrinterWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-//    foreach(const QString& device, printerList)
-//    {
-//        articles.clear();
-//        existArticles.clear();
-
-//        ArticleStruct printerInfo("printer-info");
-//        printerInfo.queryData( "Cups", device, "printer-info");
-//        articles.push_back(printerInfo);
-//        existArticles.insert("printer-info");
-
-//        ArticleStruct printerMakeAndModel("printer-make-and-model");
-//        printerMakeAndModel.queryData( "Cups", device, "printer-make-and-model");
-//        articles.push_back(printerMakeAndModel);
-//        existArticles.insert("printer-make-and-model");
-
-//        DeviceInfoParser::Instance().queryRemainderDeviceInfo( "Cups", device, articles, existArticles);
-
-//        addDevice( device, articles, printerList.size() );
-
-//        if( printerList.size() > 1 )
-//        {
-//            QStringList tab =
-//            {
-//                device,
-//                printerMakeAndModel.value
-//            };
-
-//            tabList.push_back(tab);
-//        }
-
-//        if(overviewInfo_.value.isEmpty() )
-//        {
-//            overviewInfo_.value = printerMakeAndModel.value;
-//            if( false == overviewInfo_.value.contains(printerInfo.value, Qt::CaseInsensitive) )
-//            {
-//                overviewInfo_.value += " ";
-//                overviewInfo_.value += printerInfo.value;
-//            }
-//        }
-//    }
-
     foreach(const QString& device, lshwPrinterList)
     {
         articles.clear();
         existArticles.clear();
 
         existArticles.insert("product");
-        ArticleStruct name("Name");
+        ArticleStruct name(tr("Name"));
         name.queryData("lshw", device, "product");
         articles.push_back(name);
         existArticles.insert("product");
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor"));
         vendor.queryData( "lshw", device, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct description("Description");
+        ArticleStruct description(tr("Description"));
         description.queryData("lshw", device, "description");
         articles.push_back(description);
         existArticles.insert("description");
 
-        ArticleStruct busInfo("Bus info");
+        ArticleStruct busInfo(tr("Bus info"));
         busInfo.queryData( "lshw", device, "bus info");
         articles.push_back(busInfo);
         existArticles.insert("bus info");
 
-        ArticleStruct version("Version");
+        ArticleStruct version(tr("Version"));
         version.queryData( "lshw", device, "version");
         articles.push_back(version);
         existArticles.insert("version");
 
-        ArticleStruct width("Width");
+        ArticleStruct width(tr("Width"));
         width.queryData( "lshw", device, "width");
         articles.push_back(width);
         existArticles.insert("width");
 
-        ArticleStruct clock("Clock");
+        ArticleStruct clock(tr("Clock"));
         clock.queryData( "lshw", device, "clock");
         articles.push_back(clock);
         existArticles.insert("clock");
 
-        ArticleStruct capabilities("Capabilities");
+        ArticleStruct capabilities(tr("Capabilities"));
         capabilities.queryData( "lshw", device, "capabilities");
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
@@ -160,10 +119,10 @@ void PrinterWidget::initWidget()
         }
     }
 
-
     if( lshwPrinterList.size() > 1 )
     {
-        QStringList headers = { "printer-info", "printer-make-and-model" };
+        QStringList headers = { tr("printer-info","Printer Info,shown on first column of table's head"),
+                                tr("printer-make-and-model","Printer Info,shown on second column of table's head ") };
         addTable( headers, tabList);
     }
 }

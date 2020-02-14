@@ -58,12 +58,12 @@ void DiskWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct model("Model");
+        ArticleStruct model(tr("Model","stroage info"));
         model.value = modelStr;
         articles.push_back(model);
         existArticles.insert("product");
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor","stroage info"));
         vendor.value = vendorStr;
         if(vendor.isValid() == false)
         {
@@ -82,7 +82,7 @@ void DiskWidget::initWidget()
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct mediaType("Media Type");
+        ArticleStruct mediaType(tr("Media Type","stroage info"));
         if( DeviceInfoParser::Instance().isToolSuccess("smartctl") )
         {
             QString rotationRate = DeviceInfoParser::Instance().queryData("smartctl", logicalName, "Rotation Rate");
@@ -101,7 +101,7 @@ void DiskWidget::initWidget()
             }
         }
 
-        ArticleStruct interface("Interface");
+        ArticleStruct interface(tr("Interface","stroage info"));
         QStringList lst = disk.split("_");
         interface.value = tr("Unknown");
         if( lst.size() > 2 )
@@ -116,12 +116,12 @@ void DiskWidget::initWidget()
         mediaType.value = mediaTypeStr;
         articles.push_back(mediaType);
 
-        ArticleStruct size(tr("Size"));
+        ArticleStruct size(tr("Size","stroage info"));
         size.value = sizeStr;
         articles.push_back(size);
         existArticles.insert("size");
 
-        ArticleStruct serial("Serial");
+        ArticleStruct serial(tr("Serial Number","stroage info"));
         serial.queryData("lshw", disk, "serial");
         existArticles.insert("serial");
         existArticles.insert("Serial Number");
@@ -134,17 +134,17 @@ void DiskWidget::initWidget()
             QString version;
             QString speed;
 
-            ArticleStruct mf("Model Family");
+            ArticleStruct mf(tr("Model Family","stroage info"));
             mf.queryData("smartctl", logicalName, "Model Family");
             articles.push_back(mf);
             existArticles.insert("Model Family");
 
-            ArticleStruct dm("Device Model");
+            ArticleStruct dm(tr("Device Model","stroage info"));
             dm.queryData("smartctl", logicalName, "Device Model");
             articles.push_back(dm);
             existArticles.insert("Device Model");
 
-            ArticleStruct description("Description");
+            ArticleStruct description(tr("Description","stroage info"));
             description.queryData("lshw", disk, "description");
             articles.push_back(description);
             existArticles.insert("description");
@@ -152,7 +152,7 @@ void DiskWidget::initWidget()
             int index = sataVersion.indexOf(",");
             if(index>0)
             {
-                ArticleStruct speed("Speed");
+                ArticleStruct speed(tr("Speed","stroage info"));
                 speed.value = sataVersion.mid( index + 1 );
                 speed.value = speed.value.trimmed();
                 articles.push_back(speed);
@@ -165,20 +165,20 @@ void DiskWidget::initWidget()
             articles.push_back(interface);
             existArticles.insert("SATA Version");
 
-            ArticleStruct rr("Rotation Rate");
+            ArticleStruct rr(tr("Rotation Rate","stroage info"));
             rr.value = rotationRate;
             articles.push_back(rr);
             existArticles.insert("Rotation Rate");
 
             articles.push_back(serial);
 
-            ArticleStruct fromFactor("Form Factor");
+            ArticleStruct fromFactor(tr("Form Factor","stroage info"));
             fromFactor.queryData("smartctl", logicalName, "Form Factor");
             fromFactor.value.replace("inches", tr("inch"));
             articles.push_back(fromFactor);
             existArticles.insert("Form Factor");
 
-            ArticleStruct powerOnHours("Power On Hours");
+            ArticleStruct powerOnHours(tr("Power On Hours","stroage info"));
             powerOnHours.queryData("smartctl", logicalName, "Power_On_Hours", existArticles);
             if(powerOnHours.isValid())
             {
@@ -186,16 +186,16 @@ void DiskWidget::initWidget()
             }
             articles.push_back(powerOnHours);
 
-            ArticleStruct powerOnMinutes("Power_On_Minutes");
+            ArticleStruct powerOnMinutes(tr("Power_On_Minutes","stroage info"));
             powerOnMinutes.queryData("smartctl", logicalName, "Power_On_Minutes", existArticles);
             if(powerOnMinutes.isValid())
             {
-                powerOnMinutes.value += (" " + tr("Minutes"));
+                powerOnMinutes.value += (" " + tr("Minutes","Power_On_Minutes"));
             }
             articles.push_back(powerOnMinutes);
 
 
-            ArticleStruct powerOnHalfMinutes("Power_On_Half_Minutes");
+            ArticleStruct powerOnHalfMinutes(tr("Power_On_Half_Minutes","stroage info"));
             powerOnHalfMinutes.queryData("smartctl", logicalName, "Power_On_Half_Minutes", existArticles);
             if(powerOnHalfMinutes.isValid())
             {
@@ -205,7 +205,7 @@ void DiskWidget::initWidget()
             articles.push_back(powerOnHalfMinutes);
 
 
-            ArticleStruct powerOnSeconds("Power_On_Seconds");
+            ArticleStruct powerOnSeconds(tr("Power_On_Seconds","stroage info"));
             powerOnSeconds.queryData("smartctl", logicalName, "Power_On_Seconds", existArticles);
             if(powerOnSeconds.isValid())
             {
@@ -214,23 +214,23 @@ void DiskWidget::initWidget()
             }
             articles.push_back(powerOnSeconds);
 
-            ArticleStruct powerCycleCount("Power Cycle Count");
+            ArticleStruct powerCycleCount(tr("Power Cycle Count","stroage info"));
             powerCycleCount.queryData("smartctl", logicalName, "Power_Cycle_Count");
             if(powerCycleCount.isValid())
             {
                 powerCycleCount.value += " ";
-                powerCycleCount.value += tr("Times");
+                powerCycleCount.value += tr("Times","Power Cycle Count");
             }
             articles.push_back(powerCycleCount);
             existArticles.insert("Power_Cycle_Count");
         }
 
-        ArticleStruct version("Version");
+        ArticleStruct version(tr("Version","stroage info"));
         version.queryData("lshw", disk, "version");
         articles.push_back(version);
         existArticles.insert("version");
 
-        ArticleStruct capabilities("Capabilities");
+        ArticleStruct capabilities(tr("Capabilities","stroage info"));
         capabilities.queryData("lshw", disk, "capabilities");
         articles.push_back(capabilities);
         existArticles.insert("capabilities");

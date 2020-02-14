@@ -39,7 +39,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
 
     QList<ArticleStruct> articles;
 
-    ArticleStruct model("Device");
+    ArticleStruct model(tr("Device"));
 
     ArticleStruct vendor;
     vendor.queryData("dmidecode", "System Information", "Manufacturer");
@@ -104,7 +104,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
 
     articles.push_back(model);
 
-    ArticleStruct os("Operating System");
+    ArticleStruct os(tr("Operating System"));
     os.value = DeviceInfoParser::Instance().getLsbRelease() + " " + DeviceInfoParser::Instance().getOsInfo();
 
     if( DeviceInfoParser::Instance().getHomeUrl().isEmpty() == false)
@@ -112,10 +112,6 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
         os.externalLinks = true;
     }
     articles.push_back(os);
-
-//    ArticleStruct space(" ");
-//    space.value = " ";
-//    articles.push_back(space);
 
     articles.append(others);
 

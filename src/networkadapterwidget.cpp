@@ -49,57 +49,57 @@ void NetworkadapterWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct name("Name");
+        ArticleStruct name(tr("Name"));
         name.queryData( "lshw", networkadapter, "product");
         articles.push_back(name);
         existArticles.insert("product");
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor"));
         vendor.queryData( "lshw", networkadapter, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct description("Description");
+        ArticleStruct description(tr("Description"));
         description.queryData( "lshw", networkadapter, "description");
         articles.push_back(description);
         existArticles.insert("description");
 
-        ArticleStruct version("Version");
+        ArticleStruct version(tr("Version"));
         version.queryData( "lshw", networkadapter, "version");
         articles.push_back(version);
         existArticles.insert("version");
 
-        ArticleStruct busInfo("Bus Info");
+        ArticleStruct busInfo(tr("Bus Info"));
         busInfo.queryData( "lshw", networkadapter, "bus info");
         articles.push_back(busInfo);
         existArticles.insert("bus info");
 
-        ArticleStruct logicalName("Logical Name");
+        ArticleStruct logicalName(tr("Logical Name"));
         logicalName.queryData( "lshw", networkadapter, "logical name");
         articles.push_back(logicalName);
         existArticles.insert("logical name");
 
-        ArticleStruct mac("Mac Address");
+        ArticleStruct mac(tr("MAC Address"));
         mac.queryData( "lshw", networkadapter, "serial");
         articles.push_back(mac);
         existArticles.insert("serial");
 
-        ArticleStruct speed("Speed");
+        ArticleStruct speed(tr("Speed","Network Adapter"));
         speed.queryData( "lshw", networkadapter, "speed");
         articles.push_back(speed);
         existArticles.insert("speed");
 
-        ArticleStruct width("Width");
+        ArticleStruct width(tr("Width","Network Adapter"));
         width.queryData( "lshw", networkadapter, "width");
         articles.push_back(width);
         existArticles.insert("width");
 
-        ArticleStruct clock("Clock");
+        ArticleStruct clock(tr("Clock","Network Adapter"));
         clock.queryData( "lshw", networkadapter, "clock");
         articles.push_back(clock);
         existArticles.insert("clock");
 
-        ArticleStruct capabilities("Capabilities");
+        ArticleStruct capabilities(tr("Capabilities","Network Adapter"));
         capabilities.queryData( "lshw", networkadapter, "capabilities");
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
@@ -141,7 +141,7 @@ void NetworkadapterWidget::initWidget()
 
     if( networkadapterList.size() > 1 )
     {
-        QStringList headers = { "Name",  "Vendor" };
+        QStringList headers = { tr("Name"),  tr("Vendor") };
         addTable( headers, tabList);
     }
 }

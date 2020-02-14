@@ -102,7 +102,9 @@ public:
     bool fuzzeyQueryKey(const QString& toolname, const QString& fuzzeyKey, QString& key);
 
     bool queryDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles);
-    bool queryRemainderDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles, const QSet<QString>& existArticles = QSet<QString>());
+    bool queryRemainderDeviceInfo(const QString& toolname, const QString& deviceName,
+                                  QList<ArticleStruct>& articles, const QSet<QString>& existArticles = QSet<QString>(),
+                                  const char *context = nullptr,const char *disambiguation = nullptr);
 
     bool checkValue(const QString& toolName, const QString& device, const QString& key, const QString& contains);
 

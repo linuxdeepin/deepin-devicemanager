@@ -59,11 +59,11 @@ void BluetoothWidget::initWidget()
         existArticles2.clear();
         existArticles3.clear();
 
-        ArticleStruct name("Bluetooth Name");
-        ArticleStruct vendor("Vendor");
-        ArticleStruct product("Product");
-        ArticleStruct description("Description");
-        ArticleStruct mac("Mac Address");
+        ArticleStruct name(tr("Bluetooth Name"));
+        ArticleStruct vendor(tr("Vendor"));
+        ArticleStruct product(tr("Product"));
+        ArticleStruct description(tr("Description"));
+        ArticleStruct mac(tr("MAC Address"));
 
         if( i < hciconfigBluetoothList.size() )
         {
@@ -84,44 +84,44 @@ void BluetoothWidget::initWidget()
 
             description.queryData("lshw", device, "description", existArticles, articles);
 
-            ArticleStruct serial("Serial");
+            ArticleStruct serial(tr("Serial Numboer"));
             serial.queryData( "lshw", device, "serial", existArticles, articles);
 
-            ArticleStruct linkPolicy("Link Policy");
+            ArticleStruct linkPolicy(tr("Link Policy","Bluetooth Info"));
             linkPolicy.queryData("hciconfig", hciconfigName, "Link policy", existArticles2, articles);
 
-            ArticleStruct linkMode("Link Mode");
+            ArticleStruct linkMode(tr("Link Mode","Bluetooth Info"));
             linkMode.queryData("hciconfig", hciconfigName, "Link mode", existArticles2, articles);
 
             if(mac.isValid())
             {
-                ArticleStruct powered("Powered");
+                ArticleStruct powered(tr("Powered","Bluetooth Info"));
                 powered.queryData("bluetoothctl", mac.value, "Powered", existArticles3, articles);
 
-                ArticleStruct discoverable("Discoverable");
+                ArticleStruct discoverable(tr("Discoverable","Bluetooth Info"));
                 discoverable.queryData("bluetoothctl", mac.value, "Discoverable", existArticles3, articles);
 
-                ArticleStruct pairable("Pairable");
+                ArticleStruct pairable(tr("Pairable","Bluetooth Info"));
                 pairable.queryData("bluetoothctl", mac.value, "Pairable", existArticles3, articles);
 
-                ArticleStruct modalias("Modalias");
+                ArticleStruct modalias(tr("Modalias","Bluetooth Info"));
                 modalias.queryData("bluetoothctl", mac.value, "Modalias", existArticles3, articles);
 
-                ArticleStruct discovering("Discovering");
+                ArticleStruct discovering(tr("Discovering","Bluetooth Info"));
                 discovering.queryData("bluetoothctl", mac.value, "Discovering", existArticles3, articles);
             }
         }
 
-        ArticleStruct physicalId("Physical id");
+        ArticleStruct physicalId(tr("Physical ID","Bluetooth Info"));
         physicalId.queryData("lshw", device, "physical id", existArticles, articles);
 
-        ArticleStruct busInfo("Bus Info");
+        ArticleStruct busInfo(tr("Bus Info","Bluetooth Info"));
         busInfo.queryData("lshw", device, "bus info", existArticles, articles);
 
-        ArticleStruct version("Version");
+        ArticleStruct version(tr("Version","Bluetooth Info"));
         version.queryData("lshw", device, "version", existArticles, articles);
 
-        ArticleStruct capabilities("Capabilities");
+        ArticleStruct capabilities(tr("Capabilities","Bluetooth Info"));
         capabilities.queryData("lshw", device, "capabilities", existArticles, articles);
 
         if( i < hciconfigBluetoothList.size() )
@@ -172,32 +172,32 @@ void BluetoothWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct name("Name");
+        ArticleStruct name(tr("Name"));
         name.queryData("paired-devices", device, "Name");
         articles.push_back(name);
         existArticles.insert("Name");
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor"));
         vendor.queryData("paired-devices", device, "Vendor");
         articles.push_back(vendor);
         existArticles.insert("Vendor");
 
-        ArticleStruct alias("Alias");
+        ArticleStruct alias(tr("Alias"));
         alias.queryData("paired-devices", device, "Alias");
         articles.push_back(alias);
         existArticles.insert("Alias");
 
-        ArticleStruct appearance("Appearance");
+        ArticleStruct appearance(tr("Appearance"));
         appearance.queryData("paired-devices", device, "Appearance");
         articles.push_back(appearance);
         existArticles.insert("Appearance");
 
-        ArticleStruct icon("Icon");
+        ArticleStruct icon(tr("Icon"));
         icon.queryData("paired-devices", device, "Icon");
         articles.push_back(icon);
         existArticles.insert("Icon");
 
-        ArticleStruct connected("Connected");
+        ArticleStruct connected(tr("Connected"));
         connected.queryData("paired-devices", device, "Connected");
         articles.push_back(connected);
         existArticles.insert("Connected");
@@ -207,17 +207,17 @@ void BluetoothWidget::initWidget()
 //            continue;
 //        }
 
-        ArticleStruct paired("Paired");
+        ArticleStruct paired(tr("Paired","Bluetooth Info"));
         paired.queryData("paired-devices", device, "Paired");
         articles.push_back(paired);
         existArticles.insert("Paired");
 
-        ArticleStruct trusted("Trusted");
+        ArticleStruct trusted(tr("Trusted","Bluetooth Info"));
         trusted.queryData("paired-devices", device, "Trusted");
         articles.push_back(trusted);
         existArticles.insert("Trusted");
 
-        ArticleStruct blocked("Blocked");
+        ArticleStruct blocked(tr("Blocked","Bluetooth Info"));
         blocked.queryData("paired-devices", device, "Blocked");
         articles.push_back(blocked);
         existArticles.insert("Blocked");
@@ -230,7 +230,7 @@ void BluetoothWidget::initWidget()
 
             if(upower.isEmpty() == false )
             {
-                ArticleStruct power("Power");
+                ArticleStruct power(tr("Power","Bluetooth Info"));
                 power.value = " ";
                 articles.push_back(power);
 
@@ -279,7 +279,7 @@ void BluetoothWidget::initWidget()
 
     if( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 )
     {
-        QStringList headers = { "Name",  /*"Type",*/ "Vendor" };
+        QStringList headers = { tr("Name"),  /*tr("Type"),*/ tr("Vendor") };
         addTable( headers, tabList);
     }
 }

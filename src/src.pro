@@ -135,16 +135,7 @@ DISTFILES += \
     ../debian/control \
     ../debian/rules \
     ../translations/*.ts \
-    ../translations/desktop_zh_CN.qm \
-    ../translations/desktop.qm \
-    ../translations/policy_zh_CN.qm \
-    ../translations/policy.qm \
-    ../translations/desktop_zh_CN.ts \
-    ../translations/deepin-devicemanager_zh_CN.ts \
-    ../translations/deepin-devicemanager.ts \
-    ../translations/desktop.ts \
-    ../translations/policy_zh_CN.ts \
-    ../translations/policy.ts
+    ../translations/*.qm
 
 # target
 target.path = /usr/bin/

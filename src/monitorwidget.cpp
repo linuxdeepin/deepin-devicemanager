@@ -86,11 +86,11 @@ void MonitorWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct name("Name");
-        ArticleStruct vendor("Vendor");
-        ArticleStruct currentResolution("Resolution");
-        ArticleStruct resolutionList("Support Resolution");
-        ArticleStruct displayRatio("Display Ratio");
+        ArticleStruct name(tr("Name"));
+        ArticleStruct vendor(tr("Vendor"));
+        ArticleStruct currentResolution(tr("Resolution"));
+        ArticleStruct resolutionList(tr("Support Resolution"));
+        ArticleStruct displayRatio(tr("Display Ratio"));
 
         ArticleStruct monitorSize(tr("Size"));
 
@@ -125,7 +125,7 @@ void MonitorWidget::initWidget()
             articles.push_back(name);
             articles.push_back(vendor);
 
-            ArticleStruct serial("Serial Number");
+            ArticleStruct serial(tr("Serial Number"));
             serial.queryData("hwinfo", monitor, "Serial ID");
             serial.value.remove("\"");
             articles.push_back(serial);
@@ -138,7 +138,7 @@ void MonitorWidget::initWidget()
                 monitorSize.value = inchValue;
             }
 
-            ArticleStruct mDate("Manufacture Date");
+            ArticleStruct mDate(tr("Manufacture Date"));
             mDate.queryData("hwinfo", monitor, "Year of Manufacture");
             if( mDate.isValid() && mDate.value.toInt() != 0)
             {
@@ -169,7 +169,7 @@ void MonitorWidget::initWidget()
 //            existArticles.insert("Year of Manufacture");
 //            existArticles.insert("Week of Manufacture");
 
-            ArticleStruct tmy("The Model Year(Not Manufacture Date)");
+            ArticleStruct tmy(tr("The Model Year(Not Manufacture Date)"));
             tmy.queryData("hwinfo", monitor, "The Model Year", existArticles );
             if( tmy.isValid() )
             {
@@ -182,7 +182,7 @@ void MonitorWidget::initWidget()
 
             displayRatio.value = parseDisplayRatio(currentResolution.value);
 
-            ArticleStruct frequencies("Frequencies");
+            ArticleStruct frequencies(tr("Frequencies"));
             frequencies.queryData("hwinfo", monitor, "Frequencies");
             if(frequencies.isValid())
             {
@@ -202,7 +202,7 @@ void MonitorWidget::initWidget()
             resolutionList.queryData("hwinfo", monitor, "Support Resolution");
         }
 
-        ArticleStruct primaryMonitor("Primary Monitor");
+        ArticleStruct primaryMonitor(tr("Primary Monitor"));
         primaryMonitor.value = "No";
         if( i < xrandrMonitorList.size())
         {
@@ -253,7 +253,7 @@ void MonitorWidget::initWidget()
         }
         articles.push_back(primaryMonitor);
 
-        ArticleStruct connectType("Connect Type");
+        ArticleStruct connectType(tr("Connect Type"));
         connectType.value = tr("Unknown");
         if( i < xrandrMonitorList.size())
         {
@@ -309,7 +309,7 @@ void MonitorWidget::initWidget()
 
     if( maxSize > 1 )
     {
-        QStringList headers = { "Name",  "Vendor" };
+        QStringList headers = { tr("Name"),  tr("Vendor") };
         addTable( headers, tabList);
     }
 }
@@ -415,6 +415,6 @@ QString MonitorWidget::getMonitorSizeFromEDID()
     if(width <= 0)return  "";
     double inch = std::sqrt(height*height + width*width)/2.54;
     QString inchStr_tr = tr("inch");
-    QString ret = QString("%1 %2(%3x%4 %5)").arg(QString::number(inch,'0',1)).arg(inchStr_tr).arg(width).arg(height).arg(tr("cm"));
+    QString ret = QString("%1 %2(%3x%4 %5)").arg(QString::number(inch,'0',1)).arg(inchStr_tr).arg(width).arg(height).arg(tr("cm","size unit"));
     return ret;
 }
