@@ -29,7 +29,7 @@ CONFIG  += c++11
 CONFIG  += link_pkgconfig
 PKGCONFIG   += dtkwidget dframeworkdbus
 
-TRANSLATIONS += translations/*.ts
+TRANSLATIONS += ../translations/*.ts
 
 INCLUDEPATH +=     \
             /usr/include/cups/ \
@@ -40,7 +40,7 @@ include(../thirdlib/QtXlsxWriter/src/xlsx/qtxlsx.pri)
 include(../thirdlib/docx/docx.pri)
 
 CONFIG(debug, debug|release) {
-    TRANSLATIONS = $$files($$PWD/translations/*.ts)
+    TRANSLATIONS = $$files($$PWD/../translations/*.ts)
     #遍历目录中的ts文件，调用lrelease将其生成为qm文件
     for(tsfile, TRANSLATIONS) {
         qmfile = $$replace(tsfile, .ts$, .qm)
@@ -48,10 +48,9 @@ CONFIG(debug, debug|release) {
     }
     #将qm文件添加到安装包
     dtk_translations.path = /usr/share/$$TARGET/translations
-    dtk_translations.files = $$PWD/translations/*.qm
+    dtk_translations.files = $$PWD/../translations/*.qm
     INSTALLS += dtk_translations
 }
-
 #LIBS += -L/usr/lib/x86_64-linux-gnu/ -lhd
 #LIBS += -L../thirdlib/hd -lhd
 
