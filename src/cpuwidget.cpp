@@ -433,10 +433,10 @@ void CpuWidget::addPrecessor(const QString& precessor)
     existArticles.insert("flags");
 
     ArticleStruct virtualization(tr("Virtualization"));
-    virtualization.queryData( "lscpu", "lscpu", "Virtualization" );
+    virtualization.queryData( "lscpu", "lscpu", "Virtualization");
     articles.push_back(virtualization);
 
-    DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles,"CPU_AutoSearch","CPU Information");
+    DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles,"ManulTrack__CPU","CPU Information");
     addSubInfo(tr("Processor") + " " +  precessor, articles);
     articles.clear();
 }

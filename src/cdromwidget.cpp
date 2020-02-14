@@ -81,7 +81,8 @@ void CDRomWidget::initWidget()
         existArticles.insert("logical name");
 
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo( "lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo( "lshw", device, articles, existArticles,
+                                                               "ManulTrack__CDROM","CDROM infomation from lshw");
 
         addDevice( device, articles, cdromList.size() );
 

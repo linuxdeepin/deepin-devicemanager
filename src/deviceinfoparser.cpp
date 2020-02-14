@@ -268,8 +268,9 @@ bool DeviceInfoParser::queryRemainderDeviceInfo(const QString& toolname,
             articleName = DApplication::translate(context,key.trimmed().toStdString().data(),disambiguation);
 #if GenerateTsItem
             if(out != nullptr) {
-                *out << "   <message>\n"
-                        "       <source>" <<key.trimmed().toStdString().data() << "</source>\n"
+                *out << "   <message><!-- manul track message -->\n"
+                        "       <source>"  <<key.trimmed().toStdString().data() << "</source>\n"
+                        "       <comment>" <<disambiguation                     << "</comment>\n"
                         "       <translation type =\"unfinished\"></translation>\n"
                         "   </message>\n";
             }

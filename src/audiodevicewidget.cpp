@@ -110,8 +110,9 @@ void AudiodeviceWidget::initWidget()
         ArticleStruct capabilities(tr("Capabilities","Audio Device Info"));
         capabilities.queryData( "lshw", multimedia, "capabilities", existArticles, articles);
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles);
-        addDevice( name.value , articles, multimediaList.size() + inputdeviceList.size() );
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles,
+                                                              "ManulTrack__AudioDevices","Audio device infomation from lshw");
+        addDevice( name.value , articles, multimediaList.size() + inputdeviceList.size());
 
         if( multimediaList.size() + inputdeviceList.size() > 1 )
         {
@@ -159,7 +160,8 @@ void AudiodeviceWidget::initWidget()
         sysfs.queryData( "catinput", device, "Sysfs", existArticles, articles);
 
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles,
+                                                              "ManulTrack__AudioDevices","Audio device infomation from catinput");
         addSubInfo( name.value , articles );
 
         if( multimediaList.size() + inputdeviceList.size() > 1 )

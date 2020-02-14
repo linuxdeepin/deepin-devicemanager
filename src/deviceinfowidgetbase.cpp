@@ -394,8 +394,7 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
     doc.appendChild(table);
 }
 
-void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStruct> &articles,
-                                   const char *context,const char *disambiguation)
+void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStruct> &articles)
 {
     if(titleInfo_ == nullptr)
     {
@@ -408,40 +407,15 @@ void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStru
     {
         titleInfo_->title_ = title;
     }
-#if GenerateTsItem
-    QFile file(QString("../../translate/%1.txt").arg(context));
-    QTextStream *out = nullptr;
-    if(file.exists())
-        file.remove();
-    if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
-        out = new QTextStream(&file);
-        *out <<"<context>\n"
-             <<"<name>"<<context<<"</name>\n";
-    }
-#endif
     foreach(auto article, articles)
     {
         ArticleStruct inserArt(article);
-        inserArt.name = DApplication::translate(context,article.name.toStdString().data(),disambiguation);
-#if GenerateTsItem
-         if(out != nullptr) {
-             *out << "   <message>\n"
-                     "       <source>" <<article.name.toStdString().data() << "</source>\n"
-                     "       <translation type =\"unfinished\"></translation>\n"
-                     "   </message>\n";
-         }
-#endif
         titleInfo_->articles_.push_back(inserArt);
     }
-#if GenerateTsItem
-    *out <<"</context>\n";
-    file.close();
-    delete out;
-#endif
+
 }
 
-void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles,
-                                       const char *context,const char *disambiguation)
+void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles)
 {
     DeviceInfo di;
 
@@ -451,38 +425,10 @@ void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<Artic
     {
         di.title_ = subTitle;
     }
-#if GenerateTsItem
-    QFile file(QString("../../translate/%1.txt").arg(context));
-    QTextStream *out = nullptr;
-    if(file.exists())
-        file.remove();
-    if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
-        out = new QTextStream(&file);
-        *out <<"<context>\n"
-             <<"<name>"<<context<<"</name>\n";
-    }
-#endif
     foreach(auto article, articles)
     {
-        ArticleStruct inserArt(article);
-        if (context != nullptr && disambiguation != nullptr) {
-           inserArt.name = DApplication::translate(context,article.name.toStdString().data(),disambiguation);
-#if GenerateTsItem
-            if(out != nullptr) {
-                *out << "   <message>\n"
-                        "       <source>" <<article.name.toStdString().data() << "</source>\n"
-                        "       <translation type =\"unfinished\"></translation>\n"
-                        "   </message>\n";
-            }
-#endif
-        }
-        di.articles_.push_back(inserArt);
+        di.articles_.push_back(article);
     }
-#if GenerateTsItem
-    *out <<"</context>\n";
-    file.close();
-    delete out;
-#endif
     deviceInfos_.push_back(di);
 }
 

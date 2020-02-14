@@ -91,7 +91,8 @@ void CameraWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles,
+                                                              "ManulTrack__Camera","Camera infomation from lshw");
 
         addDevice( name.value, articles, cameraList.size() );
 

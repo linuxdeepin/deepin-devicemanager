@@ -112,12 +112,10 @@ public:
     static void toHtmlString( QDomDocument& doc, const DeviceInfo& di);
     static QString toHtmlString(const DeviceInfo& di);
 
-    void addInfo(const QString& title, const QList<ArticleStruct>& articles,
-                 const char *context = nullptr,const char *disambiguation = nullptr);
+    void addInfo(const QString& title, const QList<ArticleStruct>& articles);
 
 
-    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles,
-                    const char *context = nullptr,const char *disambiguation = nullptr);
+    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
 
     void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
 
