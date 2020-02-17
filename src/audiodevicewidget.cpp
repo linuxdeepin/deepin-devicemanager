@@ -53,7 +53,7 @@ void AudiodeviceWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct busInfo(tr("Bus info","Audio Device Info"));
+        ArticleStruct busInfo(tr("Bus Info","Audio Device Info"));
         busInfo.queryData("lshw", multimedia, "bus info", existArticles);
         QRegExp reg("^pci@[0-9]*:([\\s\\S]*)$");
 

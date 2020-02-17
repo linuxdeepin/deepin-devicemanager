@@ -38,7 +38,7 @@ void BluetoothWidget::initWidget()
 
     if( bluetoothList.size() < 1 )
     {
-        setCentralInfo(tr("No bluetooth device found"));
+        setCentralInfo(tr("No Bluetooth device found"));
         return;
     }
 
@@ -84,7 +84,7 @@ void BluetoothWidget::initWidget()
 
             description.queryData("lshw", device, "description", existArticles, articles);
 
-            ArticleStruct serial(tr("Serial Numboer"));
+            ArticleStruct serial(tr("Serial Number"));
             serial.queryData( "lshw", device, "serial", existArticles, articles);
 
             ArticleStruct linkPolicy(tr("Link Policy","Bluetooth Info"));

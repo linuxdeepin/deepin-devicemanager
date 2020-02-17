@@ -93,7 +93,7 @@ void KeyboardWidget::initWidget()
             articles.push_back(description);
             existArticles.insert("description");
 
-            ArticleStruct busInfo(tr("Bus info"));
+            ArticleStruct busInfo(tr("Bus Info"));
             busInfo.queryData( "lshw", lshwKeyboard, "bus info");
             articles.push_back(busInfo);
             existArticles.insert("bus info");
@@ -293,7 +293,7 @@ bool KeyboardWidget::findUsbKeyboard()
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct busInfo(tr("Bus info"));
+        ArticleStruct busInfo(tr("Bus Info"));
         busInfo.queryData( "lshw", keyboard, "bus info");
         articles.push_back(busInfo);
         existArticles.insert("bus info");

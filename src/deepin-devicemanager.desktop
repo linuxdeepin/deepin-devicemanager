@@ -2,10 +2,10 @@
 Categories=Utility;
 Comment=Device Manager is a handy tool for viewing hardware information and managing the devices.
 Exec=deepin-devicemanager
-GenericName=Device Manager
+GenericName=Deepin Device Manager
 GenericName[zh_CN]=设备管理器
 Icon=deepin-devicemanager
-Name=Device Manager
+Name=Deepin Device Manager
 Name[zh_CN]=设备管理器
 Terminal=false
 Type=Application

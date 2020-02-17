@@ -53,7 +53,7 @@ void OtherPciDeviceWidget::initWidget()
         ArticleStruct name(tr("Name"));
         name.queryData( "lshw", device, "product");
         articles.push_back(name);
-        existArticles.insert(tr("product"));
+        existArticles.insert("product");
 
         ArticleStruct description(tr("Description"));
         description.queryData("lshw", device, "description");

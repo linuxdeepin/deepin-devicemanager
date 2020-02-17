@@ -65,7 +65,7 @@ void UsbdeviceWidget::initWidget()
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct busInfo(tr("Bus info"));
+        ArticleStruct busInfo(tr("Bus Info"));
         busInfo.queryData( "lshw", device, "bus info");
         articles.push_back(busInfo);
         existArticles.insert("bus info");

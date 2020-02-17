@@ -85,7 +85,7 @@ void MouseWidget::initWidget()
             articles.push_back(description);
             existArticles.insert("description");
 
-            ArticleStruct busInfo(tr("Bus info"));
+            ArticleStruct busInfo(tr("Bus Info"));
             busInfo.queryData( "lshw", lshwMouse, "bus info");
             articles.push_back(busInfo);
             existArticles.insert("bus info");

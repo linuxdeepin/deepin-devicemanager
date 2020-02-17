@@ -270,7 +270,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
         QString deviceName = vendor.value + " " + model.value;
         if(vendor.value == tr("Unknown") && model.value == tr("Unknown")){
-            deviceName = tr("Unknow memory");
+            deviceName = tr("Unknown memory");
         }
         if(deviceName.trimmed().isEmpty() == true)
         {
