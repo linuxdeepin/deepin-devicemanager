@@ -556,9 +556,6 @@
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="167"/>
         <location filename="../src/deviceinfoparser.cpp" line="188"/>
-        <location filename="../src/deviceinfoparser.cpp" line="504"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1230"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1277"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3544,6 +3541,4 @@
        <translation type ="unfinished"></translation>
    </message>
 </context>
-
-
 </TS>
