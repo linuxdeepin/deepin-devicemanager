@@ -467,14 +467,9 @@ void MainWindow::showDisplayShortcutsHelpDialog()
     QJsonArray windowJsonItems;
 
     QJsonObject shortcutItem;
-    shortcutItem.insert("name", tr("Show Shortcut Keyboard"));
+    shortcutItem.insert("name", tr("Display shortcuts"));
     shortcutItem.insert("value", "Ctrl+Shift+/");
     windowJsonItems.append(shortcutItem);
-
-    QJsonObject jsonItem;
-    jsonItem.insert("name", tr("Window Maximize/Minimize"));
-    jsonItem.insert("value", "Ctrl+Alt+F");
-    windowJsonItems.append(jsonItem);
 
     QJsonObject closeItem;
     closeItem.insert("name", tr("Close"));

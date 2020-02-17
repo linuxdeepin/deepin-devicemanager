@@ -26,7 +26,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Other Input Devices"))
+OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Other Devices","Other Input Devices"))
 {
     initWidget();
 }

@@ -40,7 +40,7 @@ void MotherboardWidget::initWidget()
     QStringList names = {   tr("Model"),
                             tr("Vendor"),
                             tr("Chipset Family"),
-                            tr("Bios")  + tr("Version"),
+                            tr("BIOS")  + tr("Version"),
                             tr("Features")
                         };
 
@@ -183,7 +183,7 @@ void MotherboardWidget::initWidget()
     articles.clear();
     existArticles.clear();
 
-    ArticleStruct biosVersion(tr("Bios Version"));
+    ArticleStruct biosVersion(tr("BIOS Version"));
     biosVersion.queryData("dmidecode", "BIOS Information", "Version");
     articles.push_back(biosVersion);
     existArticles.insert("Version");
@@ -203,7 +203,7 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Release Date");
 
 
-    ArticleStruct biosVendor(tr("Bios Vendor"));
+    ArticleStruct biosVendor(tr("BIOS Vendor"));
     biosVendor.queryData("dmidecode", "BIOS Information", "Vendor");
     if(biosVendor.isValid() == false)
     {
@@ -229,7 +229,7 @@ void MotherboardWidget::initWidget()
 
     if(res)
     {
-        addSubInfo(tr("Bios"), articles);
+        addSubInfo(tr("BIOS"), articles);
     }
 
     articles.clear();

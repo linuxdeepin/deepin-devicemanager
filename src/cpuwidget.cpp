@@ -248,7 +248,7 @@ void CpuWidget::initWidget()
             overviewInfo_.value += QString::number(logicalCpus);
         }
 
-        overviewInfo_.value += (" "+tr("Precessor(s)"));
+        overviewInfo_.value += (" "+tr("Processor(s)"));
     }
 
     overviewInfo_.value += ")";
@@ -332,7 +332,7 @@ void CpuWidget::initNumberStringArray()
                         <<QObject::tr("Thirty-four"                 )
                         <<QObject::tr("Thirty-six"                  )
                         <<QObject::tr("Thirty-eight"                )
-                        <<QObject::tr("Fourty"                      )
+                        <<QObject::tr("Forty"                      )
 
                         <<QObject::tr("Forty-two"                   )
                         <<QObject::tr("Forty-four"                  )

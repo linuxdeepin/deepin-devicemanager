@@ -247,14 +247,21 @@ bool DeviceInfoParser::queryRemainderDeviceInfo(const QString& toolname,
         return false;
     }
 #if GenerateTsItem
-    QFile file(QString("../../translate/%1.txt").arg(context));
+    //handl pasting may cause chaos,so put those all in one file
+    QFile file(QString("../../translate/ManulTrack.txt").arg(context));
     QTextStream *out = nullptr;
-    if(file.exists())
-        file.remove();
+    static bool startWrite = true;
+    if (startWrite == true) {
+        if(file.exists())
+            file.remove();
+        startWrite = false;
+    }
     if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
         out = new QTextStream(&file);
-        *out <<"<context>\n"
-             <<"<name>"<<context<<"</name>\n";
+        if (context != nullptr && disambiguation != nullptr) {
+            *out <<"<context>\n"
+                 <<"<name>"<<context<<"</name>\n";
+        }
     }
 #endif
     foreach( auto key, toolDatabase_[toolname][deviceName].keys())
@@ -283,7 +290,9 @@ bool DeviceInfoParser::queryRemainderDeviceInfo(const QString& toolname,
         articles.push_back(article);
       }
 #if GenerateTsItem
-    *out <<"</context>\n";
+    if (context != nullptr && disambiguation != nullptr) {
+        *out <<"</context>\n";
+    }
     file.close();
     delete out;
 #endif

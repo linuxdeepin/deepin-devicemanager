@@ -15,7 +15,7 @@
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="56"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <comment>Audio Device Info</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -92,11 +92,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="41"/>
-        <source>No bluetooth device found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/bluetoothwidget.cpp" line="62"/>
         <source>Bluetooth Name</source>
         <translation type="unfinished"></translation>
@@ -124,8 +119,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/bluetoothwidget.cpp" line="41"/>
+        <source>No Bluetooth device found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/bluetoothwidget.cpp" line="87"/>
-        <source>Serial Numboer</source>
+        <source>Serial Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="251"/>
-        <source>Precessor(s)</source>
+        <source>Processor(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -556,9 +556,9 @@
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="167"/>
         <location filename="../src/deviceinfoparser.cpp" line="188"/>
-        <location filename="../src/deviceinfoparser.cpp" line="495"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1221"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1268"/>
+        <location filename="../src/deviceinfoparser.cpp" line="505"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1231"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1278"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -876,7 +876,7 @@
     <message>
         <location filename="../src/keyboardwidget.cpp" line="96"/>
         <location filename="../src/keyboardwidget.cpp" line="296"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -963,41 +963,36 @@
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="470"/>
-        <source>Show Shortcut Keyboard</source>
+        <source>Display shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="475"/>
-        <source>Window Maximize/Minimize</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="480"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="485"/>
+        <location filename="../src/mainwindow.cpp" line="480"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="490"/>
+        <location filename="../src/mainwindow.cpp" line="485"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="500"/>
+        <location filename="../src/mainwindow.cpp" line="495"/>
         <source>Device Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="504"/>
+        <location filename="../src/mainwindow.cpp" line="499"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="509"/>
+        <location filename="../src/mainwindow.cpp" line="504"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1152,7 +1147,7 @@
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="273"/>
-        <source>Unknow memory</source>
+        <source>Unknown memory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1371,14 +1366,14 @@
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="43"/>
-        <location filename="../src/motherboardwidget.cpp" line="232"/>
-        <source>Bios</source>
+        <location filename="../src/motherboardwidget.cpp" line="67"/>
+        <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="43"/>
-        <location filename="../src/motherboardwidget.cpp" line="67"/>
-        <source>Version</source>
+        <location filename="../src/motherboardwidget.cpp" line="232"/>
+        <source>BIOS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1424,18 +1419,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="186"/>
-        <source>Bios Version</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/motherboardwidget.cpp" line="196"/>
         <source>Release Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/motherboardwidget.cpp" line="186"/>
+        <source>BIOS Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/motherboardwidget.cpp" line="206"/>
-        <source>Bios Vendor</source>
+        <source>BIOS Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1546,7 +1541,7 @@
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="88"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1683,7 +1678,8 @@
     <name>OtherDevicesWidget</name>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="29"/>
-        <source>Other Input Devices</source>
+        <source>Other Devices</source>
+        <comment>Other Input Devices</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1990,7 +1986,7 @@
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="72"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2135,7 +2131,7 @@
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="335"/>
-        <source>Fourty</source>
+        <source>Forty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2251,7 +2247,7 @@
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="68"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2284,158 +2280,6 @@
         <source>Capabilities</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-
-<context>
-<name>ManulTrack__Bios_lang</name>
-   <message><!-- manul track message -->
-       <source>Currently Installed Language</source>
-       <comment>BIOS Language Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Installable Languages</source>
-       <comment>BIOS Language Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Language Description Format</source>
-       <comment>BIOS Language Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-
-<context>
-<name>ManulTrack__BiosInfo_dmi</name>
-   <message><!-- manul track message -->
-       <source>Address</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>BIOS Revision</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Firmware Revision</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>ROM Size</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Runtime Size</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-
-
-<context>
-<name>ManulTrack__Chassis information</name>
-   <message><!-- manul track message -->
-       <source>Asset Tag</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Boot-up State</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Contained Elements</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Height</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Lock</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Number Of Power Cords</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>OEM Information</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Power Supply State</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SKU Number</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Security Status</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Thermal State</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
 </context>
 
 <context>
@@ -2521,7 +2365,587 @@
        <translation type ="unfinished"></translation>
    </message>
 </context>
-
+<context>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
 <context>
 <name>ManulTrack__MotherBoard_dmidecode</name>
    <message><!-- manul track message -->
@@ -2550,7 +2974,6 @@
        <translation type ="unfinished"></translation>
    </message>
 </context>
-
 <context>
 <name>ManulTrack__MotherBoard_SystemInfo</name>
    <message><!-- manul track message -->
@@ -2559,5 +2982,571 @@
        <translation type ="unfinished"></translation>
    </message>
 </context>
-
+<context>
+<name>ManulTrack__BiosInfo_dmi</name>
+   <message><!-- manul track message -->
+       <source>Address</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>BIOS Revision</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Firmware Revision</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>ROM Size</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Runtime Size</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__Bios_lang</name>
+   <message><!-- manul track message -->
+       <source>Currently Installed Language</source>
+       <comment>BIOS Language Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Installable Languages</source>
+       <comment>BIOS Language Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Language Description Format</source>
+       <comment>BIOS Language Information</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__Chassis information</name>
+   <message><!-- manul track message -->
+       <source>Asset Tag</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Boot-up State</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Contained Elements</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Height</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Lock</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Number Of Power Cords</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>OEM Information</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Power Supply State</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SKU Number</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Security Status</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Thermal State</source>
+       <comment>Chassis</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Type</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>driver</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>irq</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>latency</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>memory</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>multimedia</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>physical id</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Type</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>driver</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>irq</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>latency</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>memory</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>multimedia</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>physical id</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation type ="unfinished"></translation>
+   </message>
+</context>
 </TS>
