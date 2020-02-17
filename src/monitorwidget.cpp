@@ -25,7 +25,6 @@
 #include "math.h"
 #include <QDate>
 #include <DApplication>
-#include <QScreen>
 #include "Logger.h"
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
@@ -62,11 +61,6 @@ bool findAspectRatio(int width, int height, int& ar_w, int& ar_h)
 
 MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Monitor"))
 {
-    auto screens =  QGuiApplication::screens();
-    if(screens.count()>=1){
-        m_screenWidth = screens.at(0)->physicalSize().width();
-        m_screenHeight = screens.at(0)->physicalSize().height();
-    }
     initWidget();
 }
 
@@ -134,9 +128,6 @@ void MonitorWidget::initWidget()
             QString sizeDescrition = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Size");
             QSize size(0,0);
             QString inchValue = parseMonitorSize(sizeDescrition, inch,size);
-            if (compare2SizeFromQtAPI(size)) {
-                monitorSize.value = inchValue;
-            }
 
             ArticleStruct mDate(tr("Manufacture Date"));
             mDate.queryData("hwinfo", monitor, "Year of Manufacture");
@@ -157,17 +148,6 @@ void MonitorWidget::initWidget()
                 existArticles.insert("Week of Manufacture");
             }
 
-//            QString mw = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Week of Manufacture");
-//            if( mw.isEmpty() == false && mw != tr("Unknown") && mw != "0")
-//            {
-//                mDate.value += " ";
-//                mDate.value += mw;
-//                mDate.value += tr("Week");
-//            }
-//            articles.push_back(mDate);
-
-//            existArticles.insert("Year of Manufacture");
-//            existArticles.insert("Week of Manufacture");
 
             ArticleStruct tmy(tr("The Model Year(Not Manufacture Date)"));
             tmy.queryData("hwinfo", monitor, "The Model Year", existArticles );
@@ -233,17 +213,14 @@ void MonitorWidget::initWidget()
                 monitorSize.queryData("xrandr", xrandrMonitorList.at(i), "Size");
                 QSize size;
                 QString inchValue = parseMonitorSize(monitorSize.value, inch,size);
-                if (compare2SizeFromQtAPI(size)) {
-                    monitorSize.value = inchValue;
-                }
+
             }
 
-            //干脆都从EDID中解析尺寸，compare2SizeFromQtAPI未必能起到作用，EDID中解析失败则任然使用之前获取的size
+            //always get monitor size from EDID
             if (true) {
-//            if (monitorSize.isValid() == false) {
                 QString sizeValue = "";
                 sizeValue = getMonitorSizeFromEDID();
-                if(!sizeValue.isEmpty()&&sizeValue.contains("cm")) {
+                if(!sizeValue.isEmpty()) {
                     monitorSize.value = sizeValue;
                 }
                 if (monitorSize.isValid()) {
@@ -371,26 +348,6 @@ QString MonitorWidget::parseDisplayRatio(const QString& resulotion)
     }
 
     return res;
-}
-
-bool MonitorWidget::compare2SizeFromQtAPI(QSize size)
-{
-    if(m_screenWidth == 0.0 || m_screenHeight == 0.0) {
-        return false;
-    }
-    dInfo(QString("%1%2%3%4%5")
-          .arg("screens.at(0)->physicalSize().width == ")
-          .arg(m_screenWidth)
-          .arg("and height ==")
-          .arg(m_screenHeight)
-          .arg("\n"));
-
-    bool widthCmpRet = qAbs(size.width() - m_screenWidth)/m_screenWidth < 0.3 ;
-    bool heihtCmpRet = qAbs(size.height() - m_screenHeight)/m_screenHeight < 0.3;
-    if( widthCmpRet && heihtCmpRet){
-        return true;
-    }
-    return false;
 }
 
 QString MonitorWidget::getMonitorSizeFromEDID()

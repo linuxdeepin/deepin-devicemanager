@@ -35,10 +35,6 @@ public:
     QString parseMonitorSize(const QString& sizeDescription, double& inch,QSize& retSize);
     QString parseDisplayRatio(const QString& resulotion);
 
-    bool compare2SizeFromQtAPI(QSize size);
     QString getMonitorSizeFromEDID();
-private:
-    int m_screenWidth = 0;
-    int m_screenHeight = 0;
 };
 
