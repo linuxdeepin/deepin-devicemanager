@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_CN" sourcelanguage="en_AS">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -15,7 +13,7 @@
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="56"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <comment>Audio Device Info</comment>
         <translation>总线信息</translation>
     </message>
@@ -92,11 +90,6 @@
         <translation>蓝牙</translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="41"/>
-        <source>No bluetooth device found</source>
-        <translation>未发现蓝牙设备</translation>
-    </message>
-    <message>
         <location filename="../src/bluetoothwidget.cpp" line="62"/>
         <source>Bluetooth Name</source>
         <translation>蓝牙名称</translation>
@@ -124,8 +117,13 @@
         <translation>物理地址</translation>
     </message>
     <message>
+        <location filename="../src/bluetoothwidget.cpp" line="41"/>
+        <source>No Bluetooth device found</source>
+        <translation>未发现蓝牙设备</translation>
+    </message>
+    <message>
         <location filename="../src/bluetoothwidget.cpp" line="87"/>
-        <source>Serial Numboer</source>
+        <source>Serial Number</source>
         <translation>序列号</translation>
     </message>
     <message>
@@ -229,7 +227,7 @@
         <location filename="../src/bluetoothwidget.cpp" line="213"/>
         <source>Paired</source>
         <comment>Bluetooth Info</comment>
-        <translation>配对</translation>
+        <translation>已配对</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="218"/>
@@ -395,7 +393,7 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="203"/>
         <source>Sockets</source>
-        <translation>插槽</translation>
+        <translation>处理器</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="228"/>
@@ -404,7 +402,7 @@
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="251"/>
-        <source>Precessor(s)</source>
+        <source>Processor(s)</source>
         <translation>逻辑处理器</translation>
     </message>
     <message>
@@ -435,7 +433,7 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="399"/>
         <source>CPU Family</source>
-        <translation>CPU 家族</translation>
+        <translation>家族</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="404"/>
@@ -450,12 +448,12 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="414"/>
         <source>L1d Cache</source>
-        <translation>L1缓存(数据)</translation>
+        <translation>L1缓存（数据）</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="418"/>
         <source>L1i Cache</source>
-        <translation>L1缓存(代码)</translation>
+        <translation>L1缓存（指令）</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="422"/>
@@ -488,7 +486,7 @@
     <message>
         <location filename="../src/deviceinfowidgetbase.cpp" line="92"/>
         <source>Copy (C)</source>
-        <translation>复制(C)</translation>
+        <translation>复制 (C)</translation>
     </message>
 </context>
 <context>
@@ -500,13 +498,13 @@
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="84"/>
-        <source>Loading SMBios Info...</source>
-        <translation>获取SMBios信息...</translation>
+        <source>Loading SMBIOS Info...</source>
+        <translation>获取SMBIOS信息...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="88"/>
         <source>Loading Hardware Info...</source>
-        <translation>获取硬件列表信息...</translation>
+        <translation>获取打印机信息...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="91"/>
@@ -556,9 +554,6 @@
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="167"/>
         <location filename="../src/deviceinfoparser.cpp" line="188"/>
-        <location filename="../src/deviceinfoparser.cpp" line="495"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1221"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1268"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
@@ -568,12 +563,12 @@
     <message>
         <location filename="../src/deviceinfowidgetbase.cpp" line="252"/>
         <source>Refresh (F5)</source>
-        <translation>刷新(F5)</translation>
+        <translation>刷新 (F5)</translation>
     </message>
     <message>
         <location filename="../src/deviceinfowidgetbase.cpp" line="268"/>
         <source>Export (E)</source>
-        <translation>导出(E)</translation>
+        <translation>导出 (E)</translation>
     </message>
 </context>
 <context>
@@ -581,12 +576,12 @@
     <message>
         <location filename="../src/devicelistview.cpp" line="318"/>
         <source>Refresh (F5)</source>
-        <translation>刷新(F5)</translation>
+        <translation>刷新 (F5)</translation>
     </message>
     <message>
         <location filename="../src/devicelistview.cpp" line="332"/>
         <source>Export (E)</source>
-        <translation>导出(E)</translation>
+        <translation>导出 (E)</translation>
     </message>
 </context>
 <context>
@@ -599,7 +594,7 @@
     <message>
         <location filename="../src/diskwidget.cpp" line="39"/>
         <source>No disk found</source>
-        <translation>未发现存储设备</translation>
+        <translation>未发现磁盘</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="61"/>
@@ -646,7 +641,7 @@
         <location filename="../src/diskwidget.cpp" line="137"/>
         <source>Model Family</source>
         <comment>stroage info</comment>
-        <translation>模型族</translation>
+        <translation>产品家族</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="142"/>
@@ -664,7 +659,7 @@
         <location filename="../src/diskwidget.cpp" line="155"/>
         <source>Speed</source>
         <comment>stroage info</comment>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="168"/>
@@ -676,13 +671,23 @@
         <location filename="../src/diskwidget.cpp" line="175"/>
         <source>Form Factor</source>
         <comment>stroage info</comment>
-        <translation>规格</translation>
+        <translation>尺寸型号</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="177"/>
+        <source>inch</source>
+        <translation>英寸</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="181"/>
         <source>Power On Hours</source>
         <comment>stroage info</comment>
-        <translation>通电小时</translation>
+        <translation>通电时间</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="185"/>
+        <source>Hours</source>
+        <translation>小时</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="189"/>
@@ -700,13 +705,23 @@
         <location filename="../src/diskwidget.cpp" line="198"/>
         <source>Power_On_Half_Minutes</source>
         <comment>stroage info</comment>
-        <translation>通电时间（半分钟）</translation>
+        <translation>Power_On_Half_Minutes</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="203"/>
+        <source>Half Minutes</source>
+        <translation>Half Minutes</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="208"/>
         <source>Power_On_Seconds</source>
         <comment>stroage info</comment>
-        <translation>通电时间（秒）</translation>
+        <translation>通电秒数</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="213"/>
+        <source>Seconds</source>
+        <translation>秒</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="217"/>
@@ -734,31 +749,6 @@
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="288"/>
-        <source>Size</source>
-        <translation>大小</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="177"/>
-        <source>inch</source>
-        <translation>英寸</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="185"/>
-        <source>Hours</source>
-        <translation>小时</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="203"/>
-        <source>Half Minutes</source>
-        <translation>半分钟</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="213"/>
-        <source>Seconds</source>
-        <translation>秒</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="288"/>
         <source>Model</source>
         <translation>型号</translation>
     </message>
@@ -771,6 +761,11 @@
         <location filename="../src/diskwidget.cpp" line="288"/>
         <source>Media Type</source>
         <translation>介质类型</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="288"/>
+        <source>Size</source>
+        <translation>容量</translation>
     </message>
 </context>
 <context>
@@ -876,7 +871,7 @@
     <message>
         <location filename="../src/keyboardwidget.cpp" line="96"/>
         <location filename="../src/keyboardwidget.cpp" line="296"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <translation>总线信息</translation>
     </message>
     <message>
@@ -954,12 +949,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="125"/>
         <source>Loading...</source>
-        <translation>加载中...</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="504"/>
-        <source>Export</source>
-        <translation>导出</translation>
+        <translation>正在载入...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="466"/>
@@ -968,36 +958,36 @@
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="470"/>
-        <source>Show Shortcut Keyboard</source>
-        <translation>显示快捷键预览</translation>
+        <source>Display shortcuts</source>
+        <translation>显示快捷键</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="475"/>
-        <source>Window Maximize/Minimize</source>
-        <translation>窗口大小切换</translation>
+        <source>Close</source>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="480"/>
-        <source>Close</source>
-        <translation>关闭应用</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="485"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="490"/>
+        <location filename="../src/mainwindow.cpp" line="485"/>
         <source>Copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="500"/>
+        <location filename="../src/mainwindow.cpp" line="495"/>
         <source>Device Manager</source>
         <translation>设备管理器</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="509"/>
+        <location filename="../src/mainwindow.cpp" line="499"/>
+        <source>Export</source>
+        <translation>导出</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="504"/>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>
@@ -1033,6 +1023,14 @@
     <message>
         <location filename="../src/memorywidget.cpp" line="52"/>
         <location filename="../src/memorywidget.cpp" line="87"/>
+        <location filename="../src/memorywidget.cpp" line="461"/>
+        <source>Speed</source>
+        <comment>memory info</comment>
+        <translation>速度</translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="52"/>
+        <location filename="../src/memorywidget.cpp" line="87"/>
         <location filename="../src/memorywidget.cpp" line="134"/>
         <location filename="../src/memorywidget.cpp" line="144"/>
         <source>Size</source>
@@ -1041,7 +1039,7 @@
     <message>
         <location filename="../src/memorywidget.cpp" line="130"/>
         <source>Slot Count</source>
-        <translation>插槽数量</translation>
+        <translation>插槽数</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="165"/>
@@ -1070,7 +1068,7 @@
     <message>
         <location filename="../src/memorywidget.cpp" line="199"/>
         <source>Model</source>
-        <comment>memory&apos;s model</comment>
+        <comment>memory's model</comment>
         <translation>型号</translation>
     </message>
     <message>
@@ -1082,13 +1080,13 @@
     <message>
         <location filename="../src/memorywidget.cpp" line="214"/>
         <source>Size</source>
-        <comment>memory&apos;s size</comment>
+        <comment>memory's size</comment>
         <translation>大小</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="224"/>
         <source>Speed</source>
-        <comment>memory&apos;s Speed</comment>
+        <comment>memory's Speed</comment>
         <translation>速度</translation>
     </message>
     <message>
@@ -1099,12 +1097,12 @@
     <message>
         <location filename="../src/memorywidget.cpp" line="234"/>
         <source>Form Factor</source>
-        <translation>规格</translation>
+        <translation>尺寸型号</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="239"/>
         <source>Rank</source>
-        <translation>级别</translation>
+        <translation>位列</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="244"/>
@@ -1121,13 +1119,13 @@
     <message>
         <location filename="../src/memorywidget.cpp" line="254"/>
         <source>Minimum Voltage</source>
-        <comment>memory&apos;s config</comment>
+        <comment>memory's config</comment>
         <translation>最低电压</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="259"/>
         <source>Maximum Voltage</source>
-        <comment>memory&apos;s config</comment>
+        <comment>memory's config</comment>
         <translation>最高电压</translation>
     </message>
     <message>
@@ -1144,7 +1142,7 @@
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="273"/>
-        <source>Unknow memory</source>
+        <source>Unknown memory</source>
         <translation>未知内存</translation>
     </message>
     <message>
@@ -1164,21 +1162,13 @@
         <location filename="../src/memorywidget.cpp" line="451"/>
         <source>Size</source>
         <comment>memory info</comment>
-        <translation>内存大小</translation>
+        <translation>大小</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="456"/>
         <source>Type</source>
         <comment>memory info</comment>
         <translation>类型</translation>
-    </message>
-    <message>
-        <location filename="../src/memorywidget.cpp" line="52"/>
-        <location filename="../src/memorywidget.cpp" line="87"/>
-        <location filename="../src/memorywidget.cpp" line="461"/>
-        <source>Speed</source>
-        <comment>memory info</comment>
-        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="466"/>
@@ -1196,13 +1186,13 @@
         <location filename="../src/memorywidget.cpp" line="476"/>
         <source>Form Factor</source>
         <comment>memory info</comment>
-        <translation>规格</translation>
+        <translation>尺寸型号</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="481"/>
         <source>Rank</source>
         <comment>memory info</comment>
-        <translation>级别</translation>
+        <translation>位列</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="486"/>
@@ -1237,109 +1227,109 @@
         <location filename="../src/memorywidget.cpp" line="531"/>
         <source>Bad</source>
         <comment>memory info</comment>
-        <translation>异常</translation>
+        <translation>差</translation>
     </message>
 </context>
 <context>
     <name>MonitorWidget</name>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="63"/>
+        <location filename="../src/monitorwidget.cpp" line="62"/>
         <source>Monitor</source>
         <translation>显示设备</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="89"/>
-        <location filename="../src/monitorwidget.cpp" line="312"/>
+        <location filename="../src/monitorwidget.cpp" line="83"/>
+        <location filename="../src/monitorwidget.cpp" line="289"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="90"/>
-        <location filename="../src/monitorwidget.cpp" line="312"/>
+        <location filename="../src/monitorwidget.cpp" line="84"/>
+        <location filename="../src/monitorwidget.cpp" line="289"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="91"/>
+        <location filename="../src/monitorwidget.cpp" line="85"/>
         <source>Resolution</source>
         <translation>分辨率</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="92"/>
+        <location filename="../src/monitorwidget.cpp" line="86"/>
         <source>Support Resolution</source>
         <translation>支持分辨率</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="93"/>
+        <location filename="../src/monitorwidget.cpp" line="87"/>
         <source>Display Ratio</source>
         <translation>显示比例</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="95"/>
+        <location filename="../src/monitorwidget.cpp" line="89"/>
         <source>Size</source>
-        <translation>尺寸</translation>
+        <translation>屏幕尺寸</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="128"/>
+        <location filename="../src/monitorwidget.cpp" line="122"/>
         <source>Serial Number</source>
         <translation>序列号</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="141"/>
+        <location filename="../src/monitorwidget.cpp" line="132"/>
         <source>Manufacture Date</source>
         <translation>生产日期</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="145"/>
-        <location filename="../src/monitorwidget.cpp" line="176"/>
+        <location filename="../src/monitorwidget.cpp" line="136"/>
+        <location filename="../src/monitorwidget.cpp" line="156"/>
         <source>Year</source>
         <translation>年</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="148"/>
-        <location filename="../src/monitorwidget.cpp" line="257"/>
+        <location filename="../src/monitorwidget.cpp" line="139"/>
+        <location filename="../src/monitorwidget.cpp" line="234"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="152"/>
+        <location filename="../src/monitorwidget.cpp" line="143"/>
         <source>Week</source>
         <translation>周</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="172"/>
+        <location filename="../src/monitorwidget.cpp" line="152"/>
         <source>The Model Year(Not Manufacture Date)</source>
-        <translation>型号日期(非生产日期)</translation>
+        <translation>型号日期（非生产日期）</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="185"/>
+        <location filename="../src/monitorwidget.cpp" line="165"/>
         <source>Frequencies</source>
         <translation>频率</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="205"/>
+        <location filename="../src/monitorwidget.cpp" line="185"/>
         <source>Primary Monitor</source>
         <translation>主显示器</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="256"/>
+        <location filename="../src/monitorwidget.cpp" line="233"/>
         <source>Connect Type</source>
         <translation>连接类型</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="299"/>
-        <location filename="../src/monitorwidget.cpp" line="304"/>
-        <location filename="../src/monitorwidget.cpp" line="331"/>
-        <location filename="../src/monitorwidget.cpp" line="345"/>
-        <location filename="../src/monitorwidget.cpp" line="417"/>
+        <location filename="../src/monitorwidget.cpp" line="276"/>
+        <location filename="../src/monitorwidget.cpp" line="281"/>
+        <location filename="../src/monitorwidget.cpp" line="308"/>
+        <location filename="../src/monitorwidget.cpp" line="322"/>
+        <location filename="../src/monitorwidget.cpp" line="374"/>
         <source>inch</source>
         <translation>英寸</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="418"/>
+        <location filename="../src/monitorwidget.cpp" line="375"/>
         <source>cm</source>
         <comment>size unit</comment>
-        <translation>厘米</translation>
+        <translation>cm</translation>
     </message>
 </context>
 <context>
@@ -1358,7 +1348,7 @@
     <message>
         <location filename="../src/motherboardwidget.cpp" line="41"/>
         <location filename="../src/motherboardwidget.cpp" line="47"/>
-        <location filename="../src/motherboardwidget.cpp" line="236"/>
+        <location filename="../src/motherboardwidget.cpp" line="241"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
@@ -1371,140 +1361,140 @@
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="43"/>
-        <location filename="../src/motherboardwidget.cpp" line="227"/>
-        <source>Bios</source>
-        <translation>Bios</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="43"/>
         <location filename="../src/motherboardwidget.cpp" line="67"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
+        <location filename="../src/motherboardwidget.cpp" line="43"/>
+        <location filename="../src/motherboardwidget.cpp" line="232"/>
+        <source>BIOS</source>
+        <translation>BIOS</translation>
+    </message>
+    <message>
         <location filename="../src/motherboardwidget.cpp" line="44"/>
-        <location filename="../src/motherboardwidget.cpp" line="119"/>
+        <location filename="../src/motherboardwidget.cpp" line="121"/>
         <source>Features</source>
         <translation>特征</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="102"/>
-        <location filename="../src/motherboardwidget.cpp" line="246"/>
+        <location filename="../src/motherboardwidget.cpp" line="251"/>
         <source>Serial Number</source>
         <translation>序列号</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="115"/>
+        <location filename="../src/motherboardwidget.cpp" line="117"/>
         <source>SMBIOS Version</source>
-        <translation>SMBIOS 版本</translation>
+        <translation>SMBIOS版本</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="136"/>
+        <location filename="../src/motherboardwidget.cpp" line="138"/>
         <source>Product Name</source>
-        <translation>产品名</translation>
+        <translation>产品名称</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="151"/>
+        <location filename="../src/motherboardwidget.cpp" line="153"/>
         <source>UUID</source>
         <translation>UUID</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="156"/>
+        <location filename="../src/motherboardwidget.cpp" line="158"/>
         <source>Wake-up Type</source>
         <translation>唤醒类型</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="161"/>
+        <location filename="../src/motherboardwidget.cpp" line="163"/>
         <source>SKU Number</source>
-        <translation>SKU Number</translation>
+        <translation>SKU号</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="175"/>
+        <location filename="../src/motherboardwidget.cpp" line="178"/>
         <source>System Information</source>
         <translation>系统信息</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="183"/>
-        <source>Bios Version</source>
-        <translation>Bios 版本</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="193"/>
+        <location filename="../src/motherboardwidget.cpp" line="196"/>
         <source>Release Date</source>
         <translation>发布日期</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="203"/>
-        <source>Bios Vendor</source>
-        <translation>Bios 制造商</translation>
+        <location filename="../src/motherboardwidget.cpp" line="186"/>
+        <source>BIOS Version</source>
+        <translation>BIOS版本</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="221"/>
+        <location filename="../src/motherboardwidget.cpp" line="206"/>
+        <source>BIOS Vendor</source>
+        <translation>BIOS制造商</translation>
+    </message>
+    <message>
+        <location filename="../src/motherboardwidget.cpp" line="226"/>
         <source>Characteristics</source>
-        <translation>固件特点</translation>
+        <translation>特性</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="241"/>
+        <location filename="../src/motherboardwidget.cpp" line="246"/>
         <source>Type</source>
         <comment>Chassis Information</comment>
-        <translation>固件类型</translation>
+        <translation>类型</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="251"/>
+        <location filename="../src/motherboardwidget.cpp" line="256"/>
         <source>Version</source>
         <comment>Chassis Information</comment>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="260"/>
+        <location filename="../src/motherboardwidget.cpp" line="266"/>
         <source>Chassis Information</source>
         <translation>机箱信息</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="277"/>
+        <location filename="../src/motherboardwidget.cpp" line="283"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="286"/>
+        <location filename="../src/motherboardwidget.cpp" line="292"/>
         <source>Slot Count</source>
-        <translation>内存插槽数量</translation>
+        <translation>插槽数</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="290"/>
+        <location filename="../src/motherboardwidget.cpp" line="296"/>
         <source>Size</source>
         <comment>Computer_core_memory</comment>
-        <translation>内存大小</translation>
+        <translation>大小</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="300"/>
+        <location filename="../src/motherboardwidget.cpp" line="306"/>
         <source>Size</source>
         <comment>memory size</comment>
-        <translation>内存大小</translation>
+        <translation>大小</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="321"/>
+        <location filename="../src/motherboardwidget.cpp" line="327"/>
         <source>Maximum Capacity</source>
         <comment>PhysicMemory</comment>
-        <translation>内存最大容量</translation>
+        <translation>最大容量</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="347"/>
+        <location filename="../src/motherboardwidget.cpp" line="353"/>
         <source>Upgradeable</source>
         <translation>支持升级</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="348"/>
+        <location filename="../src/motherboardwidget.cpp" line="354"/>
         <source>Yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="348"/>
+        <location filename="../src/motherboardwidget.cpp" line="354"/>
         <source>No</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="352"/>
+        <location filename="../src/motherboardwidget.cpp" line="358"/>
         <source>Memory Bank Info</source>
         <translation>内存插槽信息</translation>
     </message>
@@ -1546,7 +1536,7 @@
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="88"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <translation>总线信息</translation>
     </message>
     <message>
@@ -1658,7 +1648,7 @@
         <location filename="../src/networkadapterwidget.cpp" line="87"/>
         <source>Speed</source>
         <comment>Network Adapter</comment>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="92"/>
@@ -1683,8 +1673,9 @@
     <name>OtherDevicesWidget</name>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="29"/>
-        <source>Other Input Devices</source>
-        <translation>其他输入设备</translation>
+        <source>Other Devices</source>
+        <comment>Other Input Devices</comment>
+        <translation>其他设备</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="40"/>
@@ -1761,11 +1752,6 @@
         <location filename="../src/otherpcidevice.cpp" line="123"/>
         <source>Name</source>
         <translation>名称</translation>
-    </message>
-    <message>
-        <location filename="../src/otherpcidevice.cpp" line="56"/>
-        <source>product</source>
-        <translation>产品</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="58"/>
@@ -1881,12 +1867,12 @@
         <location filename="../src/powerwidget.cpp" line="106"/>
         <location filename="../src/powerwidget.cpp" line="233"/>
         <source>Capacity</source>
-        <translation>电源容量</translation>
+        <translation>容量</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="120"/>
         <source>Max Power Capacity</source>
-        <translation>最大电源容量</translation>
+        <translation>最大容量</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="124"/>
@@ -1921,17 +1907,17 @@
     <message>
         <location filename="../src/powerwidget.cpp" line="196"/>
         <source>Battery Percentage</source>
-        <translation>电量（百分比）</translation>
+        <translation>电量</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="199"/>
         <source>Current Energy</source>
-        <translation>当前电量</translation>
+        <translation>当前容量</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="202"/>
         <source>Full Energy</source>
-        <translation>充满电量</translation>
+        <translation>完全充满容量</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="207"/>
@@ -1990,7 +1976,7 @@
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="72"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <translation>总线信息</translation>
     </message>
     <message>
@@ -2016,18 +2002,23 @@
     <message>
         <location filename="../src/printerwidget.cpp" line="124"/>
         <source>printer-info</source>
-        <comment>Printer Info,shown on first column of table&apos;s head</comment>
+        <comment>Printer Info,shown on first column of table's head</comment>
         <translation>名称</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="125"/>
         <source>printer-make-and-model</source>
-        <comment>Printer Info,shown on second column of table&apos;s head </comment>
+        <comment>Printer Info,shown on second column of table's head </comment>
         <translation>制造商和型号</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
+    <message>
+        <location filename="../src/cloumnwidget.cpp" line="141"/>
+        <source>Copy</source>
+        <translation>复制</translation>
+    </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="312"/>
         <source>One</source>
@@ -2130,7 +2121,7 @@
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="335"/>
-        <source>Fourty</source>
+        <source>Forty</source>
         <translation>四十</translation>
     </message>
     <message>
@@ -2214,23 +2205,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>设备管理器是查看、管理硬件设备的工具软件。</translation>
     </message>
-    <message>
-        <location filename="../src/cloumnwidget.cpp" line="141"/>
-        <source>Copy</source>
-        <translation>复制</translation>
-    </message>
 </context>
 <context>
     <name>UsbdeviceWidget</name>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="29"/>
         <source>USB Devices</source>
-        <translation>USB 设备</translation>
+        <translation>USB设备</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="40"/>
         <source>No USB devices found</source>
-        <translation>获取USB设备信息失败</translation>
+        <translation>未发现USB设备</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="53"/>
@@ -2251,7 +2237,7 @@
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="68"/>
-        <source>Bus info</source>
+        <source>Bus Info</source>
         <translation>总线信息</translation>
     </message>
     <message>
@@ -2285,272 +2271,1272 @@
         <translation>功能</translation>
     </message>
 </context>
+
 <context>
-    <name>ManulTrack__AudioDevices</name>
-    <message>
-        <source>Bus</source>
-        <comment>Audio device infomation from catinput</comment>
-        <translation>Bus</translation>
-    </message>
-    <message>
-        <source>EV</source>
-        <comment>Audio device infomation from catinput</comment>
-        <translation>EV</translation>
-    </message>
-    <message>
-        <source>Handlers</source>
-        <comment>Audio device infomation from catinput</comment>
-        <translation>Handlers</translation>
-    </message>
-    <message>
-        <source>PROP</source>
-        <comment>Audio device infomation from catinput</comment>
-        <translation>PROP</translation>
-    </message>
-    <message>
-        <source>Phys</source>
-        <comment>Audio device infomation from catinput</comment>
-        <translation>Phys</translation>
-    </message>
-    <message>
-        <source>Product</source>
-        <comment>Audio device infomation from catinput</comment>
-        <translation>产品</translation>
-    </message>
-    <message>
-        <source>SW</source>
-        <comment>Audio device infomation from catinput</comment>
-        <translation>SW</translation>
-    </message>
-    <message>
-        <source>Uniq</source>
-        <comment>Audio device infomation from catinput</comment>
-        <translation>Uniq</translation>
-    </message>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation>地址大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation>apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation>bugs</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation>缓存大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation>缓存对齐</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation>clflush size</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation>处理器核心数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation>处理器ID等级</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算异常</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation>initial apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation>微代码</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation>电源管理</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation>处理器</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation>逻辑单元数量</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation>写保护</translation>
+   </message>
 </context>
 <context>
-    <name>ManulTrack__Bios_lang</name>
-    <message>
-        <source>Currently Installed Language</source>
-        <comment>BIOS Language Information</comment>
-        <translation>当前已安装语言</translation>
-    </message>
-    <message>
-        <source>Installable Languages</source>
-        <comment>BIOS Language Information</comment>
-        <translation>可安装语言</translation>
-    </message>
-    <message>
-        <source>Language Description Format</source>
-        <comment>BIOS Language Information</comment>
-        <translation>语言描述格式</translation>
-    </message>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation>地址大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation>apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation>bugs</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation>缓存大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation>缓存对齐</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation>clflush size</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation>处理器核心数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation>处理器ID等级</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算异常</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation>initial apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation>微代码</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation>电源管理</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation>处理器</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation>逻辑单元数量</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation>写保护</translation>
+   </message>
 </context>
 <context>
-    <name>ManulTrack__BiosInfo_dmi</name>
-    <message>
-        <source>Address</source>
-        <comment>bios info of motherboard from dmidecode</comment>
-        <translation>地址</translation>
-    </message>
-    <message>
-        <source>BIOS Revision</source>
-        <comment>bios info of motherboard from dmidecode</comment>
-        <translation>BIOS Revision</translation>
-    </message>
-    <message>
-        <source>Firmware Revision</source>
-        <comment>bios info of motherboard from dmidecode</comment>
-        <translation>Firmware Revision</translation>
-    </message>
-    <message>
-        <source>ROM Size</source>
-        <comment>bios info of motherboard from dmidecode</comment>
-        <translation>ROM Size</translation>
-    </message>
-    <message>
-        <source>Runtime Size</source>
-        <comment>bios info of motherboard from dmidecode</comment>
-        <translation>Runtime Size</translation>
-    </message>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation>地址大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation>apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation>bugs</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation>缓存大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation>缓存对齐</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation>clflush size</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation>处理器核心数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation>处理器ID等级</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算异常</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation>initial apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation>微代码</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation>电源管理</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation>处理器</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation>逻辑单元数量</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation>写保护</translation>
+   </message>
 </context>
 <context>
-    <name>ManulTrack__Chassis information</name>
-    <message>
-        <source>Asset Tag</source>
-        <comment>Chassis</comment>
-        <translation>资产序号</translation>
-    </message>
-    <message>
-        <source>Boot-up State</source>
-        <comment>Chassis</comment>
-        <translation>Boot-up State</translation>
-    </message>
-    <message>
-        <source>Contained Elements</source>
-        <comment>Chassis</comment>
-        <translation>Contained Elements</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <comment>Chassis</comment>
-        <translation>高度</translation>
-    </message>
-    <message>
-        <source>Lock</source>
-        <comment>Chassis</comment>
-        <translation>Lock</translation>
-    </message>
-    <message>
-        <source>Number Of Power Cords</source>
-        <comment>Chassis</comment>
-        <translation>Number Of Power Cords</translation>
-    </message>
-    <message>
-        <source>OEM Information</source>
-        <comment>Chassis</comment>
-        <translation>OEM 信息</translation>
-    </message>
-    <message>
-        <source>Power Supply State</source>
-        <comment>Chassis</comment>
-        <translatorcomment>SKU Number</translatorcomment>
-        <translation>供电状态</translation>
-    </message>
-    <message>
-        <source>SKU Number</source>
-        <comment>Chassis</comment>
-        <translation>*SKU Number</translation>
-    </message>
-    <message>
-        <source>Security Status</source>
-        <comment>Chassis</comment>
-        <translation>安全状态</translation>
-    </message>
-    <message>
-        <source>Thermal State</source>
-        <comment>Chassis</comment>
-        <translation>Thermal State</translation>
-    </message>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation>地址大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation>apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation>bugs</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation>缓存大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation>缓存对齐</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation>clflush size</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation>处理器核心数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation>处理器ID等级</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算异常</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation>initial apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation>微代码</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation>电源管理</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation>处理器</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation>逻辑单元数量</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation>写保护</translation>
+   </message>
 </context>
 <context>
-    <name>ManulTrack__CPU</name>
-    <message>
-        <source>address sizes</source>
-        <comment>CPU Information</comment>
-        <translation>地址大小</translation>
-    </message>
-    <message>
-        <source>apicid</source>
-        <comment>CPU Information</comment>
-        <translation>apicid</translation>
-    </message>
-    <message>
-        <source>bugs</source>
-        <comment>CPU Information</comment>
-        <translation>bugs</translation>
-    </message>
-    <message>
-        <source>cache size</source>
-        <comment>CPU Information</comment>
-        <translation>缓存大小</translation>
-    </message>
-    <message>
-        <source>cache_alignment</source>
-        <comment>CPU Information</comment>
-        <translation>cache_alignment</translation>
-    </message>
-    <message>
-        <source>clflush size</source>
-        <comment>CPU Information</comment>
-        <translation>clflush size</translation>
-    </message>
-    <message>
-        <source>cpu cores</source>
-        <comment>CPU Information</comment>
-        <translation>CPU cores</translation>
-    </message>
-    <message>
-        <source>cpuid level</source>
-        <comment>CPU Information</comment>
-        <translation>cpuid level</translation>
-    </message>
-    <message>
-        <source>fpu</source>
-        <comment>CPU Information</comment>
-        <translation>fpu</translation>
-    </message>
-    <message>
-        <source>fpu_exception</source>
-        <comment>CPU Information</comment>
-        <translation>fpu_exception</translation>
-    </message>
-    <message>
-        <source>initial apicid</source>
-        <comment>CPU Information</comment>
-        <translation>initial apicid</translation>
-    </message>
-    <message>
-        <source>microcode</source>
-        <comment>CPU Information</comment>
-        <translation>微代码</translation>
-    </message>
-    <message>
-        <source>power management</source>
-        <comment>CPU Information</comment>
-        <translation>电源管理</translation>
-    </message>
-    <message>
-        <source>processor</source>
-        <comment>CPU Information</comment>
-        <translatorcomment>或许翻译有误</translatorcomment>
-        <translation>处理器</translation>
-    </message>
-    <message>
-        <source>siblings</source>
-        <comment>CPU Information</comment>
-        <translation>siblings</translation>
-    </message>
-    <message>
-        <source>wp</source>
-        <comment>CPU Information</comment>
-        <translation>wp</translation>
-    </message>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation>地址大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation>apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation>bugs</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation>缓存大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation>缓存对齐</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation>clflush size</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation>处理器核心数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation>处理器ID等级</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算异常</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation>initial apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation>微代码</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation>电源管理</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation>处理器</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation>逻辑单元数量</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation>写保护</translation>
+   </message>
 </context>
 <context>
-    <name>ManulTrack__MotherBoard_dmidecode</name>
-    <message>
-        <source>Asset Tag</source>
-        <comment>mother board info from dmidecode</comment>
-        <translation>资产序号</translation>
-    </message>
-    <message>
-        <source>Chassis Handle</source>
-        <comment>mother board info from dmidecode</comment>
-        <translation>Chassis Handle</translation>
-    </message>
-    <message>
-        <source>Contained Object Handles</source>
-        <comment>mother board info from dmidecode</comment>
-        <translation>Contained Object Handles</translation>
-    </message>
-    <message>
-        <source>Location In Chassis</source>
-        <comment>mother board info from dmidecode</comment>
-        <translation>Location In Chassis</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <comment>mother board info from dmidecode</comment>
-        <translation>Type</translation>
-    </message>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation>地址大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation>apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation>bugs</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation>缓存大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation>缓存对齐</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation>clflush size</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation>处理器核心数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation>处理器ID等级</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算异常</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation>initial apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation>微代码</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation>电源管理</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation>处理器</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation>逻辑单元数量</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation>写保护</translation>
+   </message>
 </context>
 <context>
-    <name>ManulTrack__MotherBoard_SystemInfo</name>
-    <message>
-        <source>Family</source>
-        <comment>System info of mother board from dmidecode</comment>
-        <translation>家族</translation>
-    </message>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation>地址大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation>apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation>bugs</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation>缓存大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation>缓存对齐</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation>clflush size</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation>处理器核心数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation>处理器ID等级</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算异常</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation>initial apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation>微代码</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation>电源管理</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation>处理器</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation>逻辑单元数量</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation>写保护</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__CPU</name>
+   <message><!-- manul track message -->
+       <source>address sizes</source>
+       <comment>CPU Information</comment>
+       <translation>地址大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>apicid</source>
+       <comment>CPU Information</comment>
+       <translation>apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>bugs</source>
+       <comment>CPU Information</comment>
+       <translation>bugs</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache size</source>
+       <comment>CPU Information</comment>
+       <translation>缓存大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cache_alignment</source>
+       <comment>CPU Information</comment>
+       <translation>缓存对齐</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>clflush size</source>
+       <comment>CPU Information</comment>
+       <translation>clflush size</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpu cores</source>
+       <comment>CPU Information</comment>
+       <translation>处理器核心数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>cpuid level</source>
+       <comment>CPU Information</comment>
+       <translation>处理器ID等级</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>fpu_exception</source>
+       <comment>CPU Information</comment>
+       <translation>浮点运算异常</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>initial apicid</source>
+       <comment>CPU Information</comment>
+       <translation>initial apicid</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>microcode</source>
+       <comment>CPU Information</comment>
+       <translation>微代码</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>power management</source>
+       <comment>CPU Information</comment>
+       <translation>电源管理</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>processor</source>
+       <comment>CPU Information</comment>
+       <translation>处理器</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>siblings</source>
+       <comment>CPU Information</comment>
+       <translation>逻辑单元数量</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>wp</source>
+       <comment>CPU Information</comment>
+       <translation>写保护</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__MotherBoard_dmidecode</name>
+   <message><!-- manul track message -->
+       <source>Asset Tag</source>
+       <comment>mother board info from dmidecode</comment>
+       <translation>资产编号</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Chassis Handle</source>
+       <comment>mother board info from dmidecode</comment>
+       <translation>机箱Handle</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Contained Object Handles</source>
+       <comment>mother board info from dmidecode</comment>
+       <translation>包含对象Handles</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Location In Chassis</source>
+       <comment>mother board info from dmidecode</comment>
+       <translation>机箱位置</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Type</source>
+       <comment>mother board info from dmidecode</comment>
+       <translation>类型</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__MotherBoard_SystemInfo</name>
+   <message><!-- manul track message -->
+       <source>Family</source>
+       <comment>System info of mother board from dmidecode</comment>
+       <translation>家族</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__BiosInfo_dmi</name>
+   <message><!-- manul track message -->
+       <source>Address</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation>地址</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>BIOS Revision</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation>BIOS修订版本</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Firmware Revision</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation>固件修订版本</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>ROM Size</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation>存储大小</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Runtime Size</source>
+       <comment>bios info of motherboard from dmidecode</comment>
+       <translation>运行内存大小</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__Bios_lang</name>
+   <message><!-- manul track message -->
+       <source>Currently Installed Language</source>
+       <comment>BIOS Language Information</comment>
+       <translation>当前语言</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Installable Languages</source>
+       <comment>BIOS Language Information</comment>
+       <translation>可安装语言数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Language Description Format</source>
+       <comment>BIOS Language Information</comment>
+       <translation>语言描述格式</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__Chassis information</name>
+   <message><!-- manul track message -->
+       <source>Asset Tag</source>
+       <comment>Chassis</comment>
+       <translation>资产编号</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Boot-up State</source>
+       <comment>Chassis</comment>
+       <translation>开机状态</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Contained Elements</source>
+       <comment>Chassis</comment>
+       <translation>包含组件数</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Height</source>
+       <comment>Chassis</comment>
+       <translation>高度</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Lock</source>
+       <comment>Chassis</comment>
+       <translation>锁</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Number Of Power Cords</source>
+       <comment>Chassis</comment>
+       <translation>电源线数量</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>OEM Information</source>
+       <comment>Chassis</comment>
+       <translation>OEM信息</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Power Supply State</source>
+       <comment>Chassis</comment>
+       <translation>供电状态</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SKU Number</source>
+       <comment>Chassis</comment>
+       <translation>SKU号</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Security Status</source>
+       <comment>Chassis</comment>
+       <translation>安全状态</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Thermal State</source>
+       <comment>Chassis</comment>
+       <translation>散热状态</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Type</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>类型</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>driver</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>驱动</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>irq</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>中断</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>latency</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>延迟</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>memory</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>内存地址</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>multimedia</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>多媒体</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>physical id</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>物理ID</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Type</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>类型</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>driver</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>驱动</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>irq</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>中断</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>latency</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>延迟</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>memory</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>内存地址</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>multimedia</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>多媒体</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>physical id</source>
+       <comment>Audio device infomation from lshw</comment>
+       <translation>物理ID</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>总线</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>EV</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Handlers</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>PROP</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Phys</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>产品</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>SW</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Uniq</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>总线</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>EV</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Handlers</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>PROP</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Phys</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>产品</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>SW</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Uniq</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>总线</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>EV</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Handlers</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>PROP</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Phys</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>产品</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>SW</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Uniq</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>总线</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>EV</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Handlers</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>PROP</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Phys</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>产品</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>SW</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Uniq</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>总线</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>EV</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Handlers</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>PROP</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Phys</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>产品</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>SW</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Uniq</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>总线</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>EV</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Handlers</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>PROP</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Phys</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>产品</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>SW</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Uniq</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>总线</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>EV</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Handlers</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>PROP</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Phys</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>产品</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>SW</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Uniq</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>总线</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>EV</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Handlers</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>PROP</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Phys</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>产品</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>SW</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Uniq</translation>
+   </message>
+</context>
+<context>
+<name>ManulTrack__AudioDevices</name>
+   <message><!-- manul track message -->
+       <source>Bus</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>总线</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>EV</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>EV</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Handlers</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Handlers</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>PROP</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>PROP</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Phys</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Phys</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Product</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>产品</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>SW</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>SW</translation>
+   </message>
+   <message><!-- manul track message -->
+       <source>Uniq</source>
+       <comment>Audio device infomation from catinput</comment>
+       <translation>Uniq</translation>
+   </message>
 </context>
 </TS>
