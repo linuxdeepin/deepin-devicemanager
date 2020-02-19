@@ -556,6 +556,9 @@
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="167"/>
         <location filename="../src/deviceinfoparser.cpp" line="188"/>
+        <location filename="../src/deviceinfoparser.cpp" line="504"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1230"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1277"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -951,6 +954,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="125"/>
         <source>Loading...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="361"/>
+        <source>Device Info</source>
+        <comment>export file&apos;s name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2273,7 +2282,6 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
-
 <context>
 <name>ManulTrack__CPU</name>
    <message><!-- manul track message -->
@@ -3541,4 +3549,5 @@
        <translation type ="unfinished"></translation>
    </message>
 </context>
+
 </TS>
