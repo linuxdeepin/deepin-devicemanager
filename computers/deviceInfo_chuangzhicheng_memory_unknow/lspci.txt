@@ -1,0 +1,254 @@
+00:00.0 Host bridge: Loongson Technology LLC Hyper Transport Bridge Controller
+	Subsystem: Loongson Technology LLC Hyper Transport Bridge Controller
+	Flags: fast devsel, NUMA node 0
+	Capabilities: [40] HyperTransport: Slave or Primary Interface
+	Capabilities: [60] HyperTransport: Retry Mode
+	Capabilities: [6c] HyperTransport: Interrupt Discovery and Configuration
+	Capabilities: [70] HyperTransport: Interrupt Discovery and Configuration
+	Capabilities: [c0] HyperTransport: #1a
+
+00:00.1 Non-VGA unclassified device: Loongson Technology LLC Device 7a10
+	Flags: fast devsel, NUMA node 0
+
+00:03.0 Ethernet controller: Loongson Technology LLC Gigabit Ethernet Controller
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 76, NUMA node 0
+	Memory at 5d870000 (64-bit, non-prefetchable) [size=32K]
+
+00:03.1 Ethernet controller: Loongson Technology LLC Gigabit Ethernet Controller
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 78, NUMA node 0
+	Memory at 5d878000 (64-bit, non-prefetchable) [size=32K]
+
+00:04.0 USB controller: Loongson Technology LLC OHCI USB Controller (prog-if 10 [OHCI])
+	Flags: bus master, fast devsel, latency 0, IRQ 113, NUMA node 0
+	Memory at 5d880000 (64-bit, non-prefetchable) [size=32K]
+	Kernel driver in use: ohci-pci
+
+00:04.1 USB controller: Loongson Technology LLC EHCI USB Controller (prog-if 20 [EHCI])
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 112, NUMA node 0
+	Memory at 5d888000 (64-bit, non-prefetchable) [size=32K]
+	Kernel driver in use: ehci-pci
+
+00:05.0 USB controller: Loongson Technology LLC OHCI USB Controller (prog-if 10 [OHCI])
+	Flags: bus master, fast devsel, latency 0, IRQ 115, NUMA node 0
+	Memory at 5d890000 (64-bit, non-prefetchable) [size=32K]
+	Kernel driver in use: ohci-pci
+
+00:05.1 USB controller: Loongson Technology LLC EHCI USB Controller (prog-if 20 [EHCI])
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 114, NUMA node 0
+	Memory at 5d898000 (64-bit, non-prefetchable) [size=32K]
+	Kernel driver in use: ehci-pci
+
+00:06.0 Multimedia video controller: Loongson Technology LLC Vivante GPU (Graphics Processing Unit)
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 93, NUMA node 0
+	Memory at 5d800000 (64-bit, non-prefetchable) [size=256K]
+	Memory at 58000000 (64-bit, non-prefetchable) [size=64M]
+	Memory at 5d840000 (64-bit, non-prefetchable) [size=64K]
+
+00:06.1 Display controller: Loongson Technology LLC DC (Display Controller)
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 92, NUMA node 0
+	Memory at 5d850000 (64-bit, non-prefetchable) [size=64K]
+
+00:07.0 Audio device: Loongson Technology LLC HDA (High Definition Audio) Controller
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 122, NUMA node 0
+	Memory at 5d860000 (64-bit, non-prefetchable) [size=64K]
+	Kernel driver in use: loongson-audio
+
+00:08.0 SATA controller: Loongson Technology LLC SATA AHCI Controller (prog-if 01 [AHCI 1.0])
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 80, NUMA node 0
+	Memory at 5d8a0000 (64-bit, non-prefetchable) [size=8K]
+	Kernel driver in use: ahci
+
+00:08.1 SATA controller: Loongson Technology LLC SATA AHCI Controller (prog-if 01 [AHCI 1.0])
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 81, NUMA node 0
+	Memory at 5d8a2000 (64-bit, non-prefetchable) [size=8K]
+	Kernel driver in use: ahci
+
+00:08.2 SATA controller: Loongson Technology LLC SATA AHCI Controller (prog-if 01 [AHCI 1.0])
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, IRQ 82, NUMA node 0
+	Memory at 5d8a4000 (64-bit, non-prefetchable) [size=8K]
+	Kernel driver in use: ahci
+
+00:0a.0 PCI bridge: Loongson Technology LLC PCI-to-PCI Bridge (rev 01) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 16, NUMA node 0
+	Memory at 5d8a6000 (64-bit, non-prefetchable) [size=4K]
+	Bus: primary=00, secondary=01, subordinate=01, sec-latency=0
+	Memory behind bridge: 5d000000-5d0fffff
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Root Port (Slot-), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Kernel driver in use: pcieport
+
+00:0b.0 PCI bridge: Loongson Technology LLC PCI-to-PCI Bridge (rev 01) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 17, NUMA node 0
+	Memory at 5d8a7000 (64-bit, non-prefetchable) [size=4K]
+	Bus: primary=00, secondary=02, subordinate=02, sec-latency=0
+	I/O behind bridge: 00020000-00020fff
+	Memory behind bridge: 5d100000-5d1fffff
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Root Port (Slot-), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Kernel driver in use: pcieport
+
+00:0c.0 PCI bridge: Loongson Technology LLC PCI-to-PCI Bridge (rev 01) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 18, NUMA node 0
+	Memory at 5d8a8000 (64-bit, non-prefetchable) [size=4K]
+	Bus: primary=00, secondary=03, subordinate=03, sec-latency=0
+	Memory behind bridge: 5d200000-5d2fffff
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Root Port (Slot-), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Kernel driver in use: pcieport
+
+00:0d.0 PCI bridge: Loongson Technology LLC PCI-to-PCI Bridge (rev 01) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 19, NUMA node 0
+	Memory at 5d8a9000 (64-bit, non-prefetchable) [size=4K]
+	Bus: primary=00, secondary=04, subordinate=04, sec-latency=0
+	I/O behind bridge: 00021000-00021fff
+	Memory behind bridge: 5d300000-5d3fffff
+	Prefetchable memory behind bridge: 000000005d400000-000000005d4fffff
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Root Port (Slot-), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Kernel driver in use: pcieport
+
+00:0e.0 PCI bridge: Loongson Technology LLC PCI-to-PCI Bridge (rev 01) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 20, NUMA node 0
+	Memory at 5d8aa000 (64-bit, non-prefetchable) [size=4K]
+	Bus: primary=00, secondary=05, subordinate=05, sec-latency=0
+	I/O behind bridge: 00022000-00022fff
+	Memory behind bridge: 5d500000-5d5fffff
+	Prefetchable memory behind bridge: 000000005d600000-000000005d6fffff
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Root Port (Slot-), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Kernel driver in use: pcieport
+
+00:0f.0 PCI bridge: Loongson Technology LLC PCI-to-PCI Bridge (rev 01) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 21, NUMA node 0
+	Memory at 5d8ab000 (64-bit, non-prefetchable) [size=4K]
+	Bus: primary=00, secondary=06, subordinate=06, sec-latency=0
+	I/O behind bridge: 00023000-00023fff
+	Memory behind bridge: 5d700000-5d7fffff
+	Prefetchable memory behind bridge: 0000000040000000-0000000057ffffff
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Root Port (Slot-), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Kernel driver in use: pcieport
+
+00:16.0 System peripheral: Loongson Technology LLC SPI Controller
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, NUMA node 0
+	Memory at 5d8ac000 (64-bit, non-prefetchable) [size=4K]
+	Memory at 5c000000 (64-bit, non-prefetchable) [size=16M]
+
+00:17.0 ISA bridge: Loongson Technology LLC LPC Controller
+	Flags: bus master, VGA palette snoop, fast devsel, latency 0, NUMA node 0
+	Memory at <ignored> (64-bit, non-prefetchable)
+	Memory at <ignored> (64-bit, non-prefetchable)
+	I/O ports at 0000
+	I/O ports at 0000
+
+01:00.0 USB controller: Etron Technology, Inc. EJ188/EJ198 USB 3.0 Host Controller (prog-if 30 [XHCI])
+	Subsystem: Etron Technology, Inc. EJ188/EJ198 USB 3.0 Host Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 25, NUMA node 0
+	Memory at 5d000000 (64-bit, non-prefetchable) [size=32K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [70] MSI: Enable+ Count=1/4 Maskable+ 64bit+
+	Capabilities: [a0] Express Endpoint, MSI 01
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [190] Device Serial Number 01-01-01-01-01-01-01-01
+	Kernel driver in use: xhci_hcd
+
+02:00.0 Ethernet controller: Intel Corporation I211 Gigabit Network Connection (rev 03)
+	Subsystem: Intel Corporation I211 Gigabit Network Connection
+	Flags: bus master, fast devsel, latency 0, IRQ 28, NUMA node 0
+	Memory at 5d100000 (32-bit, non-prefetchable) [size=128K]
+	I/O ports at 20000 [size=32]
+	Memory at 5d120000 (32-bit, non-prefetchable) [size=16K]
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable+ 64bit+
+	Capabilities: [70] MSI-X: Enable- Count=5 Masked-
+	Capabilities: [a0] Express Endpoint, MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [140] Device Serial Number 00-0b-2f-ff-ff-18-09-84
+	Capabilities: [1a0] Transaction Processing Hints
+	Kernel driver in use: igb
+	Kernel modules: igb
+
+03:00.0 USB controller: Etron Technology, Inc. EJ188/EJ198 USB 3.0 Host Controller (prog-if 30 [XHCI])
+	Subsystem: Etron Technology, Inc. EJ188/EJ198 USB 3.0 Host Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 26, NUMA node 0
+	Memory at 5d200000 (64-bit, non-prefetchable) [size=32K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [70] MSI: Enable+ Count=1/4 Maskable+ 64bit+
+	Capabilities: [a0] Express Endpoint, MSI 01
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [190] Device Serial Number 01-01-01-01-01-01-01-01
+	Kernel driver in use: xhci_hcd
+
+04:00.0 SATA controller: ASMedia Technology Inc. ASM1062 Serial ATA Controller (rev 02) (prog-if 01 [AHCI 1.0])
+	Subsystem: ASMedia Technology Inc. ASM1062 Serial ATA Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 23, NUMA node 0
+	I/O ports at 21020 [size=8]
+	I/O ports at 21030 [size=4]
+	I/O ports at 21028 [size=8]
+	I/O ports at 21034 [size=4]
+	I/O ports at 21000 [size=32]
+	Memory at 5d300000 (32-bit, non-prefetchable) [size=512]
+	Expansion ROM at 5d400000 [disabled] [size=64K]
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [78] Power Management version 3
+	Capabilities: [80] Express Legacy Endpoint, MSI 00
+	Capabilities: [100] Virtual Channel
+	Kernel driver in use: ahci
+
+05:00.0 SATA controller: ASMedia Technology Inc. ASM1062 Serial ATA Controller (rev 02) (prog-if 01 [AHCI 1.0])
+	Subsystem: ASMedia Technology Inc. ASM1062 Serial ATA Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 24, NUMA node 0
+	I/O ports at 22020 [size=8]
+	I/O ports at 22030 [size=4]
+	I/O ports at 22028 [size=8]
+	I/O ports at 22034 [size=4]
+	I/O ports at 22000 [size=32]
+	Memory at 5d500000 (32-bit, non-prefetchable) [size=512]
+	Expansion ROM at 5d600000 [disabled] [size=64K]
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [78] Power Management version 3
+	Capabilities: [80] Express Legacy Endpoint, MSI 00
+	Capabilities: [100] Virtual Channel
+	Kernel driver in use: ahci
+
+06:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Oland [Radeon HD 8570 / R7 240/340 OEM] (prog-if 00 [VGA controller])
+	Subsystem: PC Partner Limited / Sapphire Technology Oland [Radeon HD 8570 / R7 240/340 OEM]
+	Flags: bus master, fast devsel, latency 0, IRQ 22, NUMA node 0
+	Memory at 40000000 (64-bit, prefetchable) [size=256M]
+	Memory at 5d700000 (64-bit, non-prefetchable) [size=256K]
+	I/O ports at 23000 [size=256]
+	Expansion ROM at 50000000 [disabled] [size=128K]
+	Capabilities: [48] Vendor Specific Information: Len=08 <?>
+	Capabilities: [50] Power Management version 3
+	Capabilities: [58] Express Legacy Endpoint, MSI 00
+	Capabilities: [a0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [100] Vendor Specific Information: ID=0001 Rev=1 Len=010 <?>
+	Capabilities: [150] Advanced Error Reporting
+	Capabilities: [200] #15
+	Capabilities: [270] #19
+	Kernel driver in use: radeon
+
+06:00.1 Audio device: Advanced Micro Devices, Inc. [AMD/ATI] Oland/Hainan/Cape Verde/Pitcairn HDMI Audio [Radeon HD 7000 Series]
+	Subsystem: PC Partner Limited / Sapphire Technology Oland/Hainan/Cape Verde/Pitcairn HDMI Audio [Radeon HD 7000 Series]
+	Flags: bus master, fast devsel, latency 0, IRQ 27, NUMA node 0
+	Memory at 5d740000 (64-bit, non-prefetchable) [size=16K]
+	Capabilities: [48] Vendor Specific Information: Len=08 <?>
+	Capabilities: [50] Power Management version 3
+	Capabilities: [58] Express Legacy Endpoint, MSI 00
+	Capabilities: [a0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [100] Vendor Specific Information: ID=0001 Rev=1 Len=010 <?>
+	Capabilities: [150] Advanced Error Reporting
+	Kernel driver in use: snd_hda_intel
+

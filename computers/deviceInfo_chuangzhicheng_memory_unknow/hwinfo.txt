@@ -1,0 +1,36 @@
+30: None 00.0: 10000 Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.xfQA4Q3eWc4
+  Parent ID: vTuk._guMbdRR0F9
+  Hardware Class: monitor
+  Model: "DELL E2216H"
+  Vendor: DEL "DELL"
+  Device: eisa 0xf068 "DELL E2216H"
+  Serial ID: "1D6CN5CMCCNU"
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 640x480@75Hz
+  Resolution: 800x600@60Hz
+  Resolution: 800x600@75Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1024x768@75Hz
+  Resolution: 1280x1024@75Hz
+  Resolution: 1152x864@75Hz
+  Resolution: 1280x1024@60Hz
+  Resolution: 1600x900@60Hz
+  Resolution: 1920x1080@60Hz
+  Size: 476x268 mm
+  Year of Manufacture: 2015
+  Week of Manufacture: 52
+  Detailed Timings #0:
+     Resolution: 1920x1080
+     Horizontal: 1920 2008 2052 2200 (+88 +132 +280) +hsync
+       Vertical: 1080 1084 1089 1125 (+4 +9 +45) +vsync
+    Frequencies: 148.50 MHz, 67.50 kHz, 60.00 Hz
+  Driver Info #0:
+    Max. Resolution: 1920x1080
+    Vert. Sync Range: 56-76 Hz
+    Hor. Sync Range: 30-83 kHz
+    Bandwidth: 148 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #17 (VGA compatible controller)
