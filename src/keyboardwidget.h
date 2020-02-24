@@ -30,8 +30,11 @@ class KeyboardWidget : public DeviceInfoWidgetBase
 public:
     explicit KeyboardWidget(QWidget *parent = nullptr);
 
+private:
     void initWidget() override;
 
-    bool findUsbKeyboard();
+    bool findKeyboardFromLshw();
+    bool findKeyboardFromCatInput();
+    void foundNokeyboards();
 };
 

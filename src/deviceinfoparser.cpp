@@ -39,14 +39,6 @@
 
 DWIDGET_USE_NAMESPACE
 
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deepin_uos_arm64_nvme_disk";
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_bug_12495";//读取不到内存的bug
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_12417_cpu_bug";//cpu主频为0
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_dmidecode_multiProcessor";//dmidecode 有多个Processor information
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/longxin_3A400_notebook";//monitor size is in error
-const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo_test";
-//#define TEST_DATA_FROM_FILE
-
 using PowerInter = com::deepin::daemon::Power;
 
 DCORE_USE_NAMESPACE
@@ -82,7 +74,7 @@ void DeviceInfoParser::refreshDabase()
     //DeviceInfoParser::Instance().getOSInfo(osInfo);
 
     emit loadFinished(tr("Loading SMBIOS Info..."));
-    loadDemicodeDatabase();
+    loadDmidecodeDatabase();
     loadCatBoardinfoDatabase();
 
     emit loadFinished(tr("Loading Hardware Info..."));
@@ -737,7 +729,7 @@ QStringList DeviceInfoParser::getLshwUsbKeyboardDeviceList()
     checkValueFun_t func = [](const QString& fk)->bool
     {
         QRegExp rx("^[\\s\\S]*usb[:0-9]*$");
-        if( rx.exactMatch(fk) ==false )
+        if( rx.exactMatch(fk) == false )
         {
             return false;
         }
@@ -775,16 +767,6 @@ QStringList DeviceInfoParser::getInputdeviceMouseList()
                 return true;
             }
         }
-
-//        if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("Handlers") )
-//        {
-//            if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Handlers"].contains("mouse", Qt::CaseInsensitive) )
-//            {
-//                return true;
-//            }
-//        }
-
-
         return false;
     };
 
@@ -853,22 +835,6 @@ QStringList DeviceInfoParser::getInputdeviceKeyboardList()
                 return true;
             }
         }
-
-//        if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("EV") )
-//        {
-//            if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["EV"].contains("120013", Qt::CaseInsensitive) )
-//            {
-//                return true;
-//            }
-//        }
-
-//        if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("Handlers") )
-//        {
-//            if( true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Handlers"].contains("kbd", Qt::CaseInsensitive) )
-//            {
-//                return true;
-//            }
-//        }
 
         return false;
     };
@@ -1392,7 +1358,7 @@ bool DeviceInfoParser::loadlsb_release()
     return true;
 }
 
-bool DeviceInfoParser::loadDemicodeDatabase()
+bool DeviceInfoParser::loadDmidecodeDatabase()
 {
     if( false == executeProcess("sudo dmidecode"))
     {

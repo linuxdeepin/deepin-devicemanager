@@ -182,7 +182,7 @@ public:
     bool loadOSInfo();
 
     // dmidecode parse
-    bool loadDemicodeDatabase();
+    bool loadDmidecodeDatabase();
     // cat /proc/baseboard
     bool loadCatBoardinfoDatabase();
     // lshw parse
