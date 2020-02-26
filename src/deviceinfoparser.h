@@ -187,6 +187,9 @@ public:
     bool loadCatBoardinfoDatabase();
     // lshw parse
     bool loadLshwDatabase();
+    // sudo lsblk -l stdout parse
+    bool loadLsblKDatabase();
+    QStringList getLsblkDiskNameList();
     // lscpu parse
     bool loadLscpuDatabase();
     // cat proc/cpu

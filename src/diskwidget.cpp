@@ -28,16 +28,50 @@ DWIDGET_USE_NAMESPACE
 
 DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Storage"))
 {
+    m_translatedArticles.clear();
+    initNormalArticles();
     initWidget();
+//    //test code
+//    getDiskInfoFromSmartCtl();
+
 }
 
 void DiskWidget::initWidget()
 {
+    if (getDiskInfoFromLshw()) {
+        return;
+    }
+    if (getDiskInfoFromSmartCtl()) {
+        return;
+    }
+    return NoDiskFound();
+}
+
+void DiskWidget::initNormalArticles()
+{
+
+    m_translatedArticles <<ArticleStruct(tr("Model Family",          "stroage info"), QStringLiteral("Model Family"))
+                         <<ArticleStruct(tr("Device Model",          "stroage info"), QStringLiteral("Device Model"))
+                         <<ArticleStruct(tr("Form Factor",           "stroage info"), QStringLiteral("Form Factor"))
+                         <<ArticleStruct(tr("Power On Hours",        "stroage info"), QStringLiteral("Power_On_Hours"))
+                         <<ArticleStruct(tr("Power_On_Minutes",      "stroage info"), QStringLiteral("Power_On_Minutes"))
+                         <<ArticleStruct(tr("Power_On_Half_Minutes", "stroage info"), QStringLiteral("Power_On_Half_Minutes"))
+                         <<ArticleStruct(tr("Power_On_Seconds",      "stroage info"), QStringLiteral("Power_On_Seconds"))
+                         <<ArticleStruct(tr("Power Cycle Count",     "stroage info"), QStringLiteral("Power_Cycle_Count"));
+}
+
+void DiskWidget::NoDiskFound()
+{
+    setCentralInfo(tr("No disk found"));
+    return;
+}
+
+bool DiskWidget::getDiskInfoFromLshw()
+{
     QStringList diskList = DeviceInfoParser::Instance().getLshwDisknameList();
     if(diskList.size() < 1)
     {
-        setCentralInfo(tr("No disk found"));
-        return;
+        return false;
     }
 
     QList<QStringList> tabList;
@@ -288,6 +322,75 @@ void DiskWidget::initWidget()
         QStringList headers = { tr("Model"),  tr("Vendor"), tr("Media Type"), tr("Size") };
         addTable(headers, tabList);
     }
+
+    return true;
+}
+//seach disk file name,and parser by smartctl,so usb storage info in lshw is lost
+//on other hand,if we can find usb storage from lshw,getDiskInfoFromSmartCtl will not be run,so nvme disk info may be lost
+bool DiskWidget::getDiskInfoFromSmartCtl()
+{
+    const QString keyOfLsblk = "lsblk";
+    const QString keyOfSmartctl = "smartctl";
+    if (DeviceInfoParser::Instance().toolDatabase_.contains(keyOfLsblk) == false) {
+        return false;
+    }
+    if (DeviceInfoParser::Instance().toolDatabase_.contains(keyOfSmartctl) == false) {
+        return false;
+    }
+    QMap<QString,QMap<QString,QString>> dbOfLsblk = DeviceInfoParser::Instance().toolDatabase_.value(keyOfLsblk);
+    QMap<QString,QMap<QString,QString>> dbOfSmartctl = DeviceInfoParser::Instance().toolDatabase_.value(keyOfSmartctl);
+    if (dbOfLsblk.isEmpty() || dbOfSmartctl.count() != dbOfLsblk.count()) {
+        return false;
+    }
+    QList<QStringList> tabList;
+    tabList.clear();
+    foreach (auto diskName,dbOfLsblk.keys()) {
+        tabList.append({diskName,dbOfLsblk.value(diskName).first()});
+        QList<ArticleStruct> articles;
+        articles.clear();
+        QString fullPathName = QString("/dev/%1").arg(diskName);
+
+        foreach(auto art,m_translatedArticles) {
+            ArticleStruct t(art);
+            t.value = dbOfSmartctl.value(fullPathName).value(art.lastKey);
+            if (t.isValid()) {
+                articles.append(t);
+            }
+//            articles.append(t);
+        }
+        foreach (auto art_key,dbOfSmartctl.value(fullPathName).keys()) {
+            bool searched = false;
+            foreach (auto art,m_translatedArticles) {
+                if (art.lastKey == art_key) {
+                    searched = true;
+                    break;
+                }
+            }
+            if (searched) { continue; }
+
+            ArticleStruct t(art_key);
+            t.value = dbOfSmartctl.value(fullPathName).value(art_key);
+            articles.append(t);
+        }
+        addDevice(diskName,articles,dbOfLsblk.keys().count());
+    }
+    if (tabList.count()  > 1) {
+        QStringList headers = {tr("Disk Name"),tr("Disk Size")};
+        addTable(headers, tabList);
+    }
+    //construct overview info
+    this->overviewInfo_.value = "";
+    if (tabList.count() >= 1 && tabList.count() < 4) {
+        foreach (QStringList row,tabList) {
+            QString t = QString("%1(%2) \t").arg(row.first()).arg(row.last());
+            this->overviewInfo_.value += t;
+        }
+    }
+    else {
+        this->overviewInfo_.value = QString("%1 %2").arg(tabList.count()).arg(tr("disks"));
+    }
+
+    return true;
 }
 
 bool DiskWidget::getDiskType(const QString& diskProperty, QString& type)

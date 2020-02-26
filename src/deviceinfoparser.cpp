@@ -42,7 +42,7 @@ DWIDGET_USE_NAMESPACE
 using PowerInter = com::deepin::daemon::Power;
 
 DCORE_USE_NAMESPACE
-
+const QString g_lsblkDbKey = "lsblk";
 DeviceInfoParser::DeviceInfoParser(): QObject()
 {
 
@@ -81,6 +81,7 @@ void DeviceInfoParser::refreshDabase()
     loadLshwDatabase();
 
     emit loadFinished(tr("Loading Storage Info..."));
+    loadLsblKDatabase();
     loadAllSmartctlDatabase();
 
     emit loadFinished(tr("Loading CPU Info..."));
@@ -385,13 +386,10 @@ QStringList DeviceInfoParser::getLshwDisknameList()
     checkValueFun_t func = [](const QString& fk)->bool
     {
         int index = fk.lastIndexOf("disk");
-        if((index > 0 && fk.size() - index < 7 )||fk.lastIndexOf("storage") > 0)    //avoid disk_volume:0
+//according to lshw officail webpage,*-storage indicates storage controller,not real storage device
+//        if((index > 0 && fk.size() - index < 7 )||fk.lastIndexOf("storage") > 0)
+        if((index > 0 && fk.size() - index < 7 ))    //avoid disk_volume:0
         {
-//            int index = fk.lastIndexOf("_");
-//            if(index > 0)
-//            {
-//                DeviceInfoParser::Instance().orderedDevices.insert(fk.left(index));
-//            }
             DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
         }
@@ -399,11 +397,11 @@ QStringList DeviceInfoParser::getLshwDisknameList()
         return false;
     };
 
-
     QStringList diskList = getMatchToolDeviceList("lshw", &func );
 
     return diskList;
 }
+
 
 QStringList DeviceInfoParser::getLshwDiaplayadapterList()
 {
@@ -605,7 +603,6 @@ QStringList DeviceInfoParser::getOtherBluetoothctlPairedAndConnectedDevicesList(
             {
                 return true;
             }
-
             return false;
         }
 
@@ -1796,6 +1793,119 @@ bool DeviceInfoParser::loadLshwDatabase()
     return true;
 }
 
+bool DeviceInfoParser::loadLsblKDatabase()
+{
+    if( false == executeProcess("sudo lsblk -l"))
+    {
+        return false;
+    }
+    /**
+     * the standout of "sudo lsblk -l" look like this:
+     * NAME MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+     * sda    8:0    0 931.5G  0 disk
+     * sda1   8:1    0   1.5G  0 part /boot
+     * sda2   8:2    0     8G  0 part [SWAP]
+     * sda3   8:3    0   100G  0 part /
+     * sda4   8:4    0     1K  0 part
+     * sda5   8:5    0   822G  0 part /home
+     */
+    QString out = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile file(DEVICEINFO_PATH + "/lsblk.txt");
+    if( false == lscpuFile.open(QIODevice::ReadOnly) )
+    {
+        return false;
+    }
+    out = file.readAll();
+    file.close();
+#endif
+    //  sad,i must translate the table date model to tree model,for matching the container DatabaseMap
+    if (out.isEmpty()) return false;
+    QStringList outLines = out.split("\n");
+    if (outLines.count() < 2 ) return false;
+    if (outLines.first().isEmpty()) return false;
+    QStringList head = outLines.first().split(" ",QString::SkipEmptyParts);
+    if (head.count() != 7) return false;
+
+
+    int index_name = -1;
+    int index_size = -1;
+    int index_type = -1;
+
+    int index = 0;
+    foreach (auto it,head) {
+        if (it.compare("NAME",Qt::CaseInsensitive) == 0) {
+            index_name = index;
+        }
+        if (it.compare("SIZE",Qt::CaseInsensitive) == 0) {
+            index_size = index;
+        }
+        if (it.compare("TYPE",Qt::CaseInsensitive) == 0) {
+            index_type = index;
+        }
+        index++;
+    }
+    if (index_name+index_size+index_type <= 0) {
+        return false;
+    }
+
+    bool first = true;
+    DatabaseMap diskDb;
+    diskDb.clear();
+    foreach (auto oneRow,outLines) {
+        if (first ||oneRow.isEmpty() || oneRow.contains("disk",Qt::CaseInsensitive) == false)  {
+            first = false;
+            continue;
+        }
+
+        QStringList cols = oneRow.split(" ",QString::SkipEmptyParts);
+        QString unknow_str = tr("Unknow");
+        QString name = "",size = unknow_str,type = unknow_str;
+        int index_t = 0;
+        foreach (auto it,cols) {
+            if (index_t == index_name) {
+                name = it;
+            }
+            if (index_t == index_size) {
+                size = it;
+            }
+            if (index_t == index_type) {
+                type = it;
+            }
+            index_t ++;
+        }
+
+        if (name.isEmpty()) {
+            continue;
+        }
+        QMap<QString,QString> diskInfo;
+        diskInfo.clear();
+        diskInfo.insert("size",size);
+        diskInfo.insert("type",type);
+        diskDb.insert(name,diskInfo);
+    }
+
+
+    if (diskDb.isEmpty()) {
+        return false;
+    }
+    if (toolDatabase_.contains(g_lsblkDbKey)) {
+        toolDatabase_.remove(g_lsblkDbKey);
+    }
+    toolDatabase_.insert(g_lsblkDbKey,diskDb);
+    return true;
+}//end fun
+
+QStringList DeviceInfoParser::getLsblkDiskNameList()
+{
+    QStringList list;
+    list.clear();
+    if (toolDatabase_.contains(g_lsblkDbKey)) {
+        list = toolDatabase_.value(g_lsblkDbKey).keys();
+    }
+    return list;
+} //end fun
+
 bool DeviceInfoParser::loadLscpuDatabase()
 {
     if( false == executeProcess("sudo lscpu"))
@@ -1913,23 +2023,24 @@ bool DeviceInfoParser::loadCatcpuDatabase()
 
 bool DeviceInfoParser::loadAllSmartctlDatabase()
 {
-    QStringList diskList = DeviceInfoParser::Instance().getLshwDisknameList();
+    QStringList diskList = DeviceInfoParser::Instance().getLsblkDiskNameList();
 
-    foreach(const QString& disk, diskList)
+    foreach(const QString& diskDevFileName, diskList)
     {
-        QString logicalName = DeviceInfoParser::Instance().queryData("lshw", disk, "logical name");
-        DeviceInfoParser::Instance().loadSmartctlDatabase(logicalName);
+//        QString logicalName = DeviceInfoParser::Instance().queryData("lshw", disk, "logical name");
+        QString fullPathName = QString("/dev/%1").arg(diskDevFileName);
+        DeviceInfoParser::Instance().loadSmartctlDatabase(fullPathName);
     }
-
     return true;
 }
+
 
 bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
 {
 #ifndef TEST_DATA_FROM_FILE
     if( false == executeProcess("sudo smartctl --all " + diskLogical))
     {
-        if( false == executeProcess("sudo chmod +x smartctl") )
+        if( false == executeProcess("sudo chmod +x smartctl"))
         {
             return false;
         }
@@ -1941,6 +2052,8 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
     }
 #endif
     QString smartctlOut = standOutput_;
+    //shell for smartctl has a problem:assume only one disk and it's name is sda,so the smartctl.txt may got wrong stdout;
+    //after fix the shell file which is used for collect dev info,below code must be fixed too;
 #ifdef TEST_DATA_FROM_FILE
     QFile smartctlFile(DEVICEINFO_PATH + "/smartctl.txt");
     if( false == smartctlFile.open(QIODevice::ReadOnly) )
@@ -2153,8 +2266,6 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString& diskLogical)
     {
         toolDatabase_["smartctl"][diskLogical] = smartctlDatabase_;
     }
-
-
     return true;
 }
 

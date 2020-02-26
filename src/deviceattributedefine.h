@@ -31,15 +31,21 @@ struct ArticleStruct
     QString value;
     QString transContextName;
 
+
     bool autoHide = true;
     bool externalLinks = false;
     bool valueTranslate = false;
 
-    ArticleStruct(const QString& n = "", bool b = true): name(n), autoHide(b)
+    QString lastKey;
+
+    explicit ArticleStruct(const QString n = "",bool hide = false): name(n), autoHide(hide),lastKey("")
     {
 
     }
+    ArticleStruct(const QString& n ,QString lsKey): name(n), autoHide(false),lastKey(lsKey)
+    {
 
+    }
     ArticleStruct(const ArticleStruct& other)
     {
         name = other.name;
@@ -48,6 +54,7 @@ struct ArticleStruct
         externalLinks = other.externalLinks;
         valueTranslate = other.valueTranslate;
         transContextName = other.transContextName;
+        lastKey = other.lastKey;
     }
 
     void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey);

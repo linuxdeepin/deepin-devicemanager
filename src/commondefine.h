@@ -60,11 +60,11 @@ const int TableViewRowHeight_ = 36;
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/longxin_3A400_notebook";//monitor size is in error
 //const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo13623";
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_chuangzhicheng_memory_unknow";
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_loongson_memory";
+const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_loongson_memory";
 //const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo_chuangzhicheng_cpu_zero";
 
 //CF420Z deviceinfo  longxin_hardware m630  t630 ;disk bug
 
-const QString DEVICEINFO_PATH = "/home/archermind/Desktop/lenove_five_machine/m630";
+//const QString DEVICEINFO_PATH = "/home/archermind/Desktop/lenove_five_machine/m630";
 
 //#define TEST_DATA_FROM_FILE
