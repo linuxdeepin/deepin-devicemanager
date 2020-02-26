@@ -184,7 +184,6 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         ArticleStruct vendor(tr("Vendor"));
         ArticleStruct type(tr("Type"));
 
-
         name.queryData( "catinput", device, "Name");
         existArticles.insert("Name");
 

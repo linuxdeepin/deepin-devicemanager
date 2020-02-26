@@ -364,30 +364,32 @@ QStringList DeviceInfoParser::getDmidecodeMemoryList()
     return memList;
 }
 
-QStringList DeviceInfoParser::getDmidecodeMemoryArrayMappedAddress()
+QMap<QString,QMap<QString,QString>> DeviceInfoParser::getLshwMeoryList()
 {
-    checkValueFun_t func = [](const QString& fk)->bool
-    {
-        if(fk == "Memory Array Mapped Address")
-        {
-            DeviceInfoParser::Instance().orderedDevices.insert(fk);
-            return true;
+    QMap<QString,QMap<QString,QString>> memorys;
+    memorys.clear();
+
+    if (this->toolDatabase_.keys().contains("lshw") == false) {
+        return memorys;
+    }
+    auto lshw = this->toolDatabase_.value("lshw");
+    for(auto it = lshw.begin();it != lshw.end();it++) {
+        //brief:avoid this case :*-memory UNCLAIMED
+        //note:below code ignore memory bank,
+        if (it.key().endsWith("memory")) {
+            memorys.insert(it.key(),it.value());
         }
-        return false;
-    };
-
-    QStringList memList = getMatchToolDeviceList("dmidecode", &func );
-
-    return memList;
+    }
+    return memorys;
 }
 
-QStringList DeviceInfoParser::getLshwDisknameList()
+//according to lshw webpage,*-storage indicates storage controller,not real storage device
+QStringList DeviceInfoParser::getLshwDiskNameList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
         int index = fk.lastIndexOf("disk");
-//according to lshw officail webpage,*-storage indicates storage controller,not real storage device
-//        if((index > 0 && fk.size() - index < 7 )||fk.lastIndexOf("storage") > 0)
+
         if((index > 0 && fk.size() - index < 7 ))    //avoid disk_volume:0
         {
             DeviceInfoParser::Instance().orderedDevices.insert(fk);

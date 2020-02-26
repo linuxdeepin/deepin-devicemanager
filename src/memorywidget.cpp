@@ -35,94 +35,95 @@ MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("M
 
 void MemoryWidget::initWidget()
 {
-    init_l_Designer_l_TableWdiget();
-    update_l_Designer_l_WholeDownWidget();
+    auto resultFromDmi = DeviceInfoParser::Instance().getDmidecodeMemoryList();
+    if (resultFromDmi.isEmpty() == false) {
+        init_l_Designer_l_TableWdiget();
+        update_l_Designer_l_WholeDownWidget();
+        return;
+    }
+    /**
+     * on some loogson computer,dmidecode doesn't print any dmi device info,
+     * lshw show memory summary info without memory bank.
+     * we need collect memory bank info if it exist in future version.
+     */
+
+    if (resultFromDmi.isEmpty()) {
+
+        auto memorys = DeviceInfoParser::Instance().getLshwMeoryList();
+        if (memorys.isEmpty()) {
+            return setCentralInfo(tr("Failed to get memory information"));
+        }
+        else {
+            int index = 1;
+            for (auto ptr = memorys.begin(); ptr != memorys.end(); ptr++) {
+                QList<ArticleStruct> articles;
+                foreach (auto key,ptr.value().keys()) {
+                    ArticleStruct art(key);
+                    art.value = ptr.value().value(key);
+                    articles.append(art);
+                    if (key == QString("size")) {
+                        overviewInfo_.value += overviewInfo_.value.isEmpty() ? "": " /";
+                        overviewInfo_.value += art.value;
+                    }
+                }
+                QString title = tr("Memory");
+                addSubInfo( memorys.count() <= 1 ?
+                                QString("%1\n").arg(title):
+                                QString("%1 %2\n").arg(title).arg(index),
+                            articles );
+                index ++;
+            }
+        }
+        return;
+    }
+
+    return setCentralInfo(tr("Failed to get memory information"));
 }
 
 void MemoryWidget::init_l_Designer_l_TableWdiget()
 {
     QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
-    bool getDmidecodeMemoryListSuccess = true;
     if (memList.isEmpty()) {
-        getDmidecodeMemoryListSuccess = false;
-        memList = DeviceInfoParser::Instance().getDmidecodeMemoryArrayMappedAddress();
+        return;
     }
-    if (getDmidecodeMemoryListSuccess == true) {
+    QStringList headers = { tr("Name"), tr("Vendor"), tr("Type"), tr("Speed","memory info"),  tr("Size"), /* tr("Status")*/};
 
-        QStringList headers = { tr("Name"), tr("Vendor"), tr("Type"), tr("Speed","memory info"),  tr("Size"), /* tr("Status")*/};
+    QList<QStringList> tabList;
 
-        QList<QStringList> tabList;
-
-        foreach(const QString& mem, memList)
+    foreach(const QString& mem, memList)
+    {
+        if(canUpgrade_ == -1)
         {
-            if(canUpgrade_ == -1)
-            {
-                canUpgrade_ = 0;
-            }
-
-            QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
-            QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");
-            if( isSlotValid(size, speed) == false )
-            {
-                canUpgrade_ = 1;
-                continue;
-            }
-
-            QStringList tab = {
-                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Part Number"),
-                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Manufacturer"),
-                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type"),
-                speed,
-                size,
-
-                //tr("Good")
-            };
-
-            tabList.push_back(tab);
+            canUpgrade_ = 0;
         }
-        addTable(headers, tabList);
-    }
 
-    if (getDmidecodeMemoryListSuccess == false) {
-        QStringList headers = { tr("Name"), tr("Vendor"), tr("Type"), tr("Speed","memory info"),  tr("Size")};
-
-        QList<QStringList> tabList;
-
-        foreach(const QString& mem, memList)
+        QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
+        QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");
+        if( isSlotValid(size, speed) == false )
         {
-            if(canUpgrade_ == -1)
-            {
-                canUpgrade_ = 0;
-            }
-
-            QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
-            QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Range Size");
-
-            QStringList tab = {
-                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Part Number"),
-                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Manufacturer"),
-                DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type"),
-                speed,
-                size,
-
-                //tr("Good")
-            };
-
-            tabList.push_back(tab);
+            canUpgrade_ = 1;
+            continue;
         }
-        addTable(headers, tabList);
-    }
 
+        QStringList tab = {
+            DeviceInfoParser::Instance().queryData("dmidecode", mem, "Part Number"),
+            DeviceInfoParser::Instance().queryData("dmidecode", mem, "Manufacturer"),
+            DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type"),
+            speed,
+            size,
+
+            //tr("Good")
+        };
+
+        tabList.push_back(tab);
+    }
+    addTable(headers, tabList);
 }
 
 void MemoryWidget::update_l_Designer_l_WholeDownWidget()
 {
     QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
-    bool getDmidecodeMemoryListSuccess = true;
-    if (memList.isEmpty()) {
-        getDmidecodeMemoryListSuccess = false;
-        memList = DeviceInfoParser::Instance().getDmidecodeMemoryArrayMappedAddress();
-    }
+
     int validMemoryNumber = 0;
 
     QList<ArticleStruct> articles;
@@ -281,7 +282,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
             }
         }
 
-        if( false == isSlotValid(size.value, speed.value) && getDmidecodeMemoryListSuccess)
+        if(false == isSlotValid(size.value, speed.value))
         {
             continue;
         }
@@ -300,7 +301,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         }
     }
 
-    if(validMemoryNumber < 1 && getDmidecodeMemoryListSuccess == true)
+    if(validMemoryNumber < 1 )
     {
         setCentralInfo(tr("Failed to get memory information"));
         return;

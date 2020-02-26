@@ -117,9 +117,10 @@ public:
 
     QStringList getDmidecodePhysicMemory();
     QStringList getDmidecodeMemoryList();
-    QStringList getDmidecodeMemoryArrayMappedAddress();
+    //be careful about function above,the constructor and compare function of class ArticleStruct may not support some container function,such as bool contains(ArticleStruct)
+    QMap<QString,QMap<QString,QString>> getLshwMeoryList();
 
-    QStringList getLshwDisknameList();
+    QStringList getLshwDiskNameList();
 
     QStringList getLshwDiaplayadapterList();
     QStringList getXrandrScreenName();

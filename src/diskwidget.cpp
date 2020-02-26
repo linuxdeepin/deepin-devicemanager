@@ -68,7 +68,7 @@ void DiskWidget::NoDiskFound()
 
 bool DiskWidget::getDiskInfoFromLshw()
 {
-    QStringList diskList = DeviceInfoParser::Instance().getLshwDisknameList();
+    QStringList diskList = DeviceInfoParser::Instance().getLshwDiskNameList();
     if(diskList.size() < 1)
     {
         return false;
