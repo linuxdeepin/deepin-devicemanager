@@ -1812,7 +1812,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
     QString out = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
     QFile file(DEVICEINFO_PATH + "/lsblk.txt");
-    if( false == lscpuFile.open(QIODevice::ReadOnly) )
+    if( false == file.open(QIODevice::ReadOnly) )
     {
         return false;
     }
