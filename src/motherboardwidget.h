@@ -33,4 +33,6 @@ public:
 
     void initWidget() override;
     void addMemoryInfo();
+private:
+    bool hasValidInfo(QList<ArticleStruct> & arts);
 };

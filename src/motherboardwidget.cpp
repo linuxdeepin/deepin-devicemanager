@@ -170,7 +170,9 @@ void MotherboardWidget::initWidget()
     //features.queryData("dmidecode", "System Information", "Features");
     //articles.push_back(features);
 
-    addSubInfo(tr("System Information"), articles);
+    if (hasValidInfo(articles)) {
+        addSubInfo(tr("System Information"), articles);
+    }
 
     addMemoryInfo();
 
@@ -221,7 +223,9 @@ void MotherboardWidget::initWidget()
     characteristics.queryData("dmidecode", "BIOS Information", "Characteristics");
     articles.push_back(characteristics);
 
-    addSubInfo(tr("BIOS"), articles);
+    if (hasValidInfo(articles)) {
+        addSubInfo(tr("BIOS"), articles);
+    }
 
     articles.clear();
     existArticles.clear();
@@ -251,8 +255,9 @@ void MotherboardWidget::initWidget()
 
     res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "Chassis Information", articles, existArticles,
                                                                 "ManulTrack__Chassis information","Chassis");
-    addSubInfo(tr("Chassis Information"), articles);
-
+    if (hasValidInfo(articles)) {
+         addSubInfo(tr("Chassis Information"), articles);
+    }
 }
 
 void MotherboardWidget::addMemoryInfo()
@@ -343,4 +348,14 @@ void MotherboardWidget::addMemoryInfo()
     }
 
     addSubInfo(tr("Memory Info"), articles);
+}
+
+bool MotherboardWidget::hasValidInfo(QList<ArticleStruct> &arts)
+{
+    foreach (auto art,arts) {
+        if (art.isValid()) {
+            return true;
+        }
+    }
+    return false;
 }
