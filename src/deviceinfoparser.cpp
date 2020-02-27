@@ -59,6 +59,7 @@ void DeviceInfoParser::refreshDabase()
     homeUrl_.clear();
     lsbRelease_.clear();
     orderedDevices.clear();
+
     toolDatabase_.clear();
     toolDatabaseSecondOrder_.clear();
 
@@ -1561,43 +1562,32 @@ bool DeviceInfoParser::loadCatBoardinfoDatabase()
 #endif
 
     // lscpu
-    DatabaseMap catboardinfoDb;
-    QMap<QString, QString> catboardinfoDatabase_;
-    QString deviceType;
-    int startIndex = 0;
-
-    for( int i = 0; i < catbaseboardOut.size(); ++i )
-    {
-         if( catbaseboardOut[i] != '\n' && i != catbaseboardOut.size() -1 )
-         {
-             continue;
-         }
-
-         QString line = catbaseboardOut.mid(startIndex, i - startIndex);
-         startIndex = i + 1;
-
-         if( line.trimmed().isEmpty() )
-         {
-             catboardinfoDb[deviceType] = catboardinfoDatabase_;
-             catboardinfoDatabase_.clear();
-             deviceType.clear();
-             continue;
-         }
-
-         if( deviceType.isEmpty() )
-         {
-            deviceType = line.trimmed();
-            continue;
-         }
-
-         int index = line.indexOf(Devicetype_Separator);
-         if( index > 0 )
-         {
-             catboardinfoDatabase_[line.left(index).trimmed()] = line.mid(index+1).trimmed();
-         }
+    QStringList source = catbaseboardOut.split("\n");
+    int max = source.count();
+    if (max <= 1) {
+        return false;
     }
 
-    toolDatabase_["catbaseboard"] = catboardinfoDb;
+    DatabaseMap info;
+    info.clear();
+    for (auto line = source.begin();line != source.end();line ++) {
+        if (line->isEmpty() || line->contains(":")) {
+            continue;
+        }
+        auto next = line + 1;
+        QString info_title = line->trimmed();
+        QMap<QString,QString> info_body;
+        while (next != source.end() && next->contains(":")) {
+           int index = next->indexOf(':');
+           info_body.insert(next->left(index).trimmed(),next->right(next->count() - index - 1).trimmed());
+           ++next;
+        }
+        info.insert(info_title,info_body);
+    }
+    if (info.isEmpty()) {
+        return false;
+    }
+    toolDatabase_["catbaseboard"] = info;
     return true;
 }
 

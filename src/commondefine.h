@@ -54,17 +54,19 @@ const int TableViewRowHeight_ = 36;
 #define GenerateTsItem 0
 
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deepin_uos_arm64_nvme_disk";
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_bug_12495";//读取不到内存的bug
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_12417_cpu_bug";//cpu主频为0
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_dmidecode_multiProcessor";//dmidecode 有多个Processor information
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_12417_cpu_bug";//cpu dominant frequency is zero
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_dmidecode_multiProcessor";//dmidecode show lots of processor information
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/longxin_3A400_notebook";//monitor size is in error
-//const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo13623";
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_FT2000-64_server_bug13623";//unclear about usb and power
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_chuangzhicheng_memory_unknow";
-const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_loongson_memory";
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_loongson_memory";
 //const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo_chuangzhicheng_cpu_zero";
 
+//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_loongson_memory";
+//deviceInfo_bug_12495;dmidecode has no memory device
+//4Good_GM600;memory has bank
+//LENOVO_ThinkCentre M910t-N000_4 //test case like *-class UNCLAIMED in lshw
 //CF420Z deviceinfo  longxin_hardware m630  t630 ;disk bug
-
 //const QString DEVICEINFO_PATH = "/home/archermind/Desktop/lenove_five_machine/m630";
 
 //#define TEST_DATA_FROM_FILE
