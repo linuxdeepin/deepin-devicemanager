@@ -29,7 +29,9 @@ class PowerWidget : public DeviceInfoWidgetBase
     Q_OBJECT
 public:
     explicit PowerWidget(QWidget *parent = nullptr);
-
+    PowerWidget(QWidget *parent,bool &success_init_on_loonson);
     void initWidget() override;
+private:
+    bool initOnLoonsonDesktop();
 };
 
