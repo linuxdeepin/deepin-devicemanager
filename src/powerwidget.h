@@ -32,6 +32,6 @@ public:
     PowerWidget(QWidget *parent,bool &success_init_on_loonson);
     void initWidget() override;
 private:
-    bool initOnLoonsonDesktop();
+    bool init();
 };
 
