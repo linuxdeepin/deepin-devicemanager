@@ -1851,7 +1851,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
         }
 
         QStringList cols = oneRow.split(" ",QString::SkipEmptyParts);
-        QString unknow_str = tr("Unknow");
+        QString unknow_str = tr("Unknown");
         QString name = "",size = unknow_str,type = unknow_str;
         int index_t = 0;
         foreach (auto it,cols) {

@@ -76,9 +76,11 @@ void DisplayadapterWidget::initWidget()
 
         ArticleStruct description(tr("Description"));
         description.queryData("lshw", displayadapter, "description", existArticles, articles);
+        articles.push_back(description);
+        existArticles.insert("Description");
 
-        ArticleStruct memory("Graphic Memory");
-        memory.value = tr("Unknow");
+        ArticleStruct memory(tr("Graphic Memory"));
+        memory.value = tr("Unknown size");
         articles.push_back(memory);
         existArticles.insert("Memory");
 
@@ -150,7 +152,7 @@ void DisplayadapterWidget::initWidget()
         overviewInfo_.value += name.value.remove(vendor.value, Qt::CaseInsensitive).trimmed();
 
         QList<ArticleStruct> subArticles;
-        subArticles /*<< memory*/ << vendor;
+        subArticles <</* memory <<*/ vendor;
         QString subValue = joinArticle(subArticles, " / ");
 
         if( subValue.isEmpty() == false)
