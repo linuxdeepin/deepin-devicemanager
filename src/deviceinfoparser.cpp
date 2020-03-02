@@ -1811,7 +1811,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
     out = file.readAll();
     file.close();
 #endif
-    //  sad,i must translate the table date model to tree model,for matching the container DatabaseMap
+
     if (out.isEmpty()) return false;
     QStringList outLines = out.split("\n");
     if (outLines.count() < 2 ) return false;

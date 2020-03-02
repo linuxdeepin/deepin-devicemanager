@@ -77,10 +77,10 @@ bool ArticleStruct::isValid()
         return false;
     }
 
-//    if( value == "Unknown" )
-//    {
-//        return false;
-//    }
+    if( value == QString("Unknown"))
+    {
+        return false;
+    }
 
     return true;
 }

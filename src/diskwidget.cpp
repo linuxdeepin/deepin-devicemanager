@@ -28,37 +28,17 @@ DWIDGET_USE_NAMESPACE
 
 DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Storage"))
 {
-    m_translatedArticles.clear();
-    initNormalArticles();
     initWidget();
-//    //test code
-//    getDiskInfoFromSmartCtl();
-
 }
 
 void DiskWidget::initWidget()
 {
-    if (getDiskInfoFromLshw()) {
-        return;
-    }
-    if (getDiskInfoFromSmartCtl()) {
+    if (getDiskInfo()) {
         return;
     }
     return NoDiskFound();
 }
 
-void DiskWidget::initNormalArticles()
-{
-
-    m_translatedArticles <<ArticleStruct(tr("Model Family",          "stroage info"), QStringLiteral("Model Family"))
-                         <<ArticleStruct(tr("Device Model",          "stroage info"), QStringLiteral("Device Model"))
-                         <<ArticleStruct(tr("Form Factor",           "stroage info"), QStringLiteral("Form Factor"))
-                         <<ArticleStruct(tr("Power On Hours",        "stroage info"), QStringLiteral("Power_On_Hours"))
-                         <<ArticleStruct(tr("Power_On_Minutes",      "stroage info"), QStringLiteral("Power_On_Minutes"))
-                         <<ArticleStruct(tr("Power_On_Half_Minutes", "stroage info"), QStringLiteral("Power_On_Half_Minutes"))
-                         <<ArticleStruct(tr("Power_On_Seconds",      "stroage info"), QStringLiteral("Power_On_Seconds"))
-                         <<ArticleStruct(tr("Power Cycle Count",     "stroage info"), QStringLiteral("Power_Cycle_Count"));
-}
 
 void DiskWidget::NoDiskFound()
 {
@@ -66,10 +46,13 @@ void DiskWidget::NoDiskFound()
     return;
 }
 
-bool DiskWidget::getDiskInfoFromLshw()
+bool DiskWidget::getDiskInfo()
 {
-    QStringList diskList = DeviceInfoParser::Instance().getLshwDiskNameList();
-    if(diskList.size() < 1)
+    QStringList disksFromLshw = DeviceInfoParser::Instance().getLshwDiskNameList();
+    QList<QString> blockFileList = getAllDiskFromLsblk();
+    int diskCount = blockFileList.count();
+
+    if(diskCount < 1)
     {
         return false;
     }
@@ -78,10 +61,11 @@ bool DiskWidget::getDiskInfoFromLshw()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    int i = 0;
-    foreach(const QString& disk, diskList)
+    foreach(const QString& disk, disksFromLshw)
     {
-        QString logicalName = DeviceInfoParser::Instance().queryData("lshw", disk, "logical name");
+        const QString logicalName = DeviceInfoParser::Instance().queryData("lshw", disk, "logical name");
+        QString logicalName_ = logicalName;
+        blockFileList.removeAll(logicalName_.remove("/dev/"));
 
         QString modelStr = DeviceInfoParser::Instance().queryData("lshw", disk, "product");
         QString vendorStr = DeviceInfoParser::Instance().queryData("lshw", disk, "vendor");
@@ -195,7 +179,6 @@ bool DiskWidget::getDiskInfoFromLshw()
                 interface.value = interface.value.trimmed();
             }
 
-
             articles.push_back(interface);
             existArticles.insert("SATA Version");
 
@@ -220,7 +203,7 @@ bool DiskWidget::getDiskInfoFromLshw()
             }
             articles.push_back(powerOnHours);
 
-            ArticleStruct powerOnMinutes(tr("Power_On_Minutes","stroage info"));
+            ArticleStruct powerOnMinutes(tr("Power On Minutes","stroage info"));
             powerOnMinutes.queryData("smartctl", logicalName, "Power_On_Minutes", existArticles);
             if(powerOnMinutes.isValid())
             {
@@ -229,7 +212,7 @@ bool DiskWidget::getDiskInfoFromLshw()
             articles.push_back(powerOnMinutes);
 
 
-            ArticleStruct powerOnHalfMinutes(tr("Power_On_Half_Minutes","stroage info"));
+            ArticleStruct powerOnHalfMinutes(tr("Power On Half Minutes","stroage info"));
             powerOnHalfMinutes.queryData("smartctl", logicalName, "Power_On_Half_Minutes", existArticles);
             if(powerOnHalfMinutes.isValid())
             {
@@ -239,7 +222,7 @@ bool DiskWidget::getDiskInfoFromLshw()
             articles.push_back(powerOnHalfMinutes);
 
 
-            ArticleStruct powerOnSeconds(tr("Power_On_Seconds","stroage info"));
+            ArticleStruct powerOnSeconds(tr("Power On Seconds","stroage info"));
             powerOnSeconds.queryData("smartctl", logicalName, "Power_On_Seconds", existArticles);
             if(powerOnSeconds.isValid())
             {
@@ -276,123 +259,138 @@ bool DiskWidget::getDiskInfoFromLshw()
             DeviceInfoParser::Instance().queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles);
         }
 
-        addDevice( model.value, articles, diskList.size() );
+        addDevice( model.value, articles, diskCount );
 
         QStringList tab =
         {
+            logicalName_.remove("/dev/"),
             modelStr,
-            vendor.value,
             mediaTypeStr,
             sizeStr
         };
 
         tabList.push_back(tab);
 
-        if( i == 0)
+        //overiew info
+        if(overviewInfo_.isValid())
         {
-            if(overviewInfo_.isValid())
-            {
-                overviewInfo_.value += " / ";
-            }
-
-            model.value.remove(vendor.value, Qt::CaseInsensitive);
-
-            QList<ArticleStruct> asList;
-            asList << vendor << model;
-
-            overviewInfo_.value += joinArticle( asList );
-            overviewInfo_.value += " (";
-            QString diskSize = size.value;
-            QRegExp reg("^[\\s\\S]*\\(([\\s\\S]+)\\)$");
-            if(reg.exactMatch(diskSize))
-            {
-                overviewInfo_.value += reg.cap(1);
-            }
-            else
-            {
-                overviewInfo_.value += diskSize;
-            }
-
-            overviewInfo_.value += ")";
+            overviewInfo_.value += " / ";
         }
-    }
 
-    if( diskList.size() > 1 )
-    {
-        QStringList headers = { tr("Model"),  tr("Vendor"), tr("Media Type"), tr("Size") };
-        addTable(headers, tabList);
-    }
+        model.value.remove(vendor.value, Qt::CaseInsensitive);
 
-    return true;
-}
-//seach disk file name,and parser by smartctl,so usb storage info in lshw is lost
-//on other hand,if we can find usb storage from lshw,getDiskInfoFromSmartCtl will not be run,so nvme disk info may be lost
-bool DiskWidget::getDiskInfoFromSmartCtl()
-{
-    const QString keyOfLsblk = "lsblk";
-    const QString keyOfSmartctl = "smartctl";
-    if (DeviceInfoParser::Instance().toolDatabase_.contains(keyOfLsblk) == false) {
-        return false;
-    }
-    if (DeviceInfoParser::Instance().toolDatabase_.contains(keyOfSmartctl) == false) {
-        return false;
-    }
-    QMap<QString,QMap<QString,QString>> dbOfLsblk = DeviceInfoParser::Instance().toolDatabase_.value(keyOfLsblk);
-    QMap<QString,QMap<QString,QString>> dbOfSmartctl = DeviceInfoParser::Instance().toolDatabase_.value(keyOfSmartctl);
-    if (dbOfLsblk.isEmpty() || dbOfSmartctl.count() != dbOfLsblk.count()) {
-        return false;
-    }
-    QList<QStringList> tabList;
-    tabList.clear();
-    foreach (auto diskName,dbOfLsblk.keys()) {
-        tabList.append({diskName,dbOfLsblk.value(diskName).first()});
-        QList<ArticleStruct> articles;
-        articles.clear();
-        QString fullPathName = QString("/dev/%1").arg(diskName);
+        QList<ArticleStruct> asList;
+        asList << vendor << model;
 
-        foreach(auto art,m_translatedArticles) {
-            ArticleStruct t(art);
-            t.value = dbOfSmartctl.value(fullPathName).value(art.lastKey);
-            if (t.isValid()) {
-                articles.append(t);
-            }
-//            articles.append(t);
+        overviewInfo_.value += joinArticle( asList );
+        overviewInfo_.value += " (";
+        QString diskSize = size.value;
+        QRegExp reg("^[\\s\\S]*\\(([\\s\\S]+)\\)$");
+        if(reg.exactMatch(diskSize))
+        {
+            overviewInfo_.value += reg.cap(1);
         }
-        foreach (auto art_key,dbOfSmartctl.value(fullPathName).keys()) {
-            bool searched = false;
-            foreach (auto art,m_translatedArticles) {
-                if (art.lastKey == art_key) {
-                    searched = true;
-                    break;
+        else
+        {
+            overviewInfo_.value += diskSize;
+        }
+
+        overviewInfo_.value += ")";
+
+    }//for circle end
+
+    if (blockFileList.isEmpty() == false && DeviceInfoParser::Instance().toolDatabase_.contains("smartctl")) {
+        foreach (auto blockFileName, blockFileList) {
+            QString fullPathDeviceName = QString("/dev/%1").arg(blockFileName);
+            QList<ArticleStruct> articles;
+            articles.clear();
+            auto smartctlDb = DeviceInfoParser::Instance().toolDatabase_.value("smartctl");
+            if (smartctlDb.contains(fullPathDeviceName) == false) {
+                continue;
+            }
+
+            QString deviceName = blockFileName;
+            QString model;
+            QString mediaType;
+            QString size = "Unknown";
+            if (DeviceInfoParser::Instance().toolDatabase_.contains("lsblk")) {
+                size = DeviceInfoParser::Instance().toolDatabase_.value("lsblk").value(deviceName).value("size");
+            }
+            foreach (auto artHead, smartctlDb.value(fullPathDeviceName).keys()) {
+
+                static const QStringList showItems = {"Model Family",
+                                                      "Device Model",
+                                                      "SATA Version",
+                                                      "Device Model",
+                                                      "Form Factor",
+                                                      "Firmware Version",
+                                                      "Rotation Rate",
+                                                      "Power_On_Minutes",
+                                                      "Power_On_Half_Minutes",
+                                                      "Power_On_Seconds"
+                                                      "Power_Cycle_Count"
+                                                     };
+             static const QStringList tr_showItems = {tr("Model Family"),
+                                                      tr("Device Model"),
+                                                      tr("SATA Version"),
+                                                      tr("Device Model"),
+                                                      tr("Form Factor"),
+                                                      tr("Firmware Version"),
+                                                      tr("Rotation Rate"),
+                                                      tr("Power On Minutes"),
+                                                      tr("Power On Half_Minutes"),
+                                                      tr("Power On Seconds"),
+                                                      tr("Power Cycle Count"),
+                                                     };
+                if (showItems.contains(artHead)) {
+                    QString artName = artHead.replace("_"," ",Qt::CaseInsensitive);
+                    ArticleStruct art(tr(artName.toStdString().data()));
+                    art.value = smartctlDb.value(fullPathDeviceName).value(artHead);
+                    if (art.isValid())
+                    articles.append(art);
+                }
+
+                if (artHead == QLatin1String("Device Model")) {
+                    model = smartctlDb.value(fullPathDeviceName).value(artHead);
+                }
+                if (artHead == QLatin1String("Rotation Rate")) {
+
+                    getDiskType(smartctlDb.value(fullPathDeviceName).value(artHead),mediaType);
+
+                    ArticleStruct type(tr("Media Type","stroage info"));
+                    type.value = mediaType;
+                    if (type.isValid())
+                    articles.append(type);
                 }
             }
-            if (searched) { continue; }
+            if (overviewInfo_.value.isEmpty() == false) {
+                overviewInfo_.value += " / ";
+            }
+            overviewInfo_.value +=  QString("%1(%2)").arg(model).arg(size);
+            tabList.append(QStringList({deviceName,model,mediaType,size}));
+            addDevice(blockFileName,articles,diskCount);
+        }
+    }
 
-            ArticleStruct t(art_key);
-            t.value = dbOfSmartctl.value(fullPathName).value(art_key);
-            articles.append(t);
-        }
-        addDevice(diskName,articles,dbOfLsblk.keys().count());
-    }
-    if (tabList.count()  > 1) {
-        QStringList headers = {tr("Disk Name"),tr("Disk Size")};
+    if (diskCount > 1 )
+    {
+        QStringList headers = {tr("Device Name") ,tr("Model"), tr("Media Type"), tr("Size") };
         addTable(headers, tabList);
-    }
-    //construct overview info
-    this->overviewInfo_.value = "";
-    if (tabList.count() >= 1 && tabList.count() < 4) {
-        foreach (QStringList row,tabList) {
-            QString t = QString("%1(%2) \t").arg(row.first()).arg(row.last());
-            this->overviewInfo_.value += t;
-        }
-    }
-    else {
-        this->overviewInfo_.value = QString("%1 %2").arg(tabList.count()).arg(tr("disks"));
     }
 
     return true;
 }
-
+//return disk file name without prefix("/dev/")
+QList<QString> DiskWidget::getAllDiskFromLsblk()
+{
+    QList<QString> retList;
+    retList.clear();
+    auto toolDb = DeviceInfoParser::Instance().toolDatabase_;
+    if (toolDb.contains("lsblk") == false) {
+        return retList;
+    }
+    return  toolDb.value("lsblk").keys();
+}
 bool DiskWidget::getDiskType(const QString& diskProperty, QString& type)
 {
     if( diskProperty.contains("SSD", Qt::CaseInsensitive) || diskProperty.contains("Solid", Qt::CaseInsensitive) )

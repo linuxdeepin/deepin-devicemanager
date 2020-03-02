@@ -31,15 +31,13 @@ public:
     explicit DiskWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
-    void initNormalArticles();
     void NoDiskFound();
-    bool getDiskInfoFromLshw();
+    bool getDiskInfo();
+    QList<QString> getAllDiskFromLsblk();
 
-    bool getDiskInfoFromSmartCtl();
 
     bool getDiskType(const QString& diskProperty, QString& type);
 private:
-
     QList<ArticleStruct> m_translatedArticles;
 };
 
