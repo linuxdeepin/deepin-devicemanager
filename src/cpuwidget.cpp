@@ -42,7 +42,6 @@ DWIDGET_USE_NAMESPACE
 
 CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("CPU"))
 {
-    initNumberStringArray();
     initWidget();
 }
 
@@ -193,7 +192,7 @@ void CpuWidget::initWidget()
 
         if( i < sizeof(coresNumberArray)/sizeof(int) )
         {
-            overviewInfo_.value += m_numberStringArray[i];
+            overviewInfo_.value += getTrNumber(i);
         }
         else
         {
@@ -217,7 +216,7 @@ void CpuWidget::initWidget()
 
     if( i < sizeof(coresNumberArray)/sizeof(int) )
     {
-        QString t = m_numberStringArray[i];
+        QString t = getTrNumber(i);
         overviewInfo_.value += t;
     }
     else
@@ -241,7 +240,7 @@ void CpuWidget::initWidget()
 
         if( i < sizeof(coresNumberArray)/sizeof(int) )
         {
-            overviewInfo_.value += m_numberStringArray[i];
+            overviewInfo_.value += getTrNumber(i);
         }
         else
         {
@@ -306,49 +305,54 @@ void CpuWidget::initWidget()
     }
 }
 
-void CpuWidget::initNumberStringArray()
+const QString getTrNumber(unsigned int i)
 {
-    m_numberStringArray .clear();
-    m_numberStringArray  <<QObject::tr("One"                         )
-                        <<QObject::tr("Two"                         )
-                        <<QObject::tr("Four"                        )
-                        <<QObject::tr("Six"                         )
-                        <<QObject::tr("Eight"                       )
-
-                        <<QObject::tr("Ten"                         )
-                        <<QObject::tr("Twelve"                      )
-                        <<QObject::tr("Fourteen"                    )
-                        <<QObject::tr("Sixteen"                     )
-                        <<QObject::tr("Eighteen"                    )
-
-                        <<QObject::tr("Twenty"                      )
-                        <<QObject::tr("Twenty-two"                  )
-                        <<QObject::tr("Twenty-four"                 )
-                        <<QObject::tr("Twenty-six"                  )
-                        <<QObject::tr("Twenty-eight"                )
-                        <<QObject::tr("Thirty"                      )
-
-                        <<QObject::tr("Thirty-two"                  )
-                        <<QObject::tr("Thirty-four"                 )
-                        <<QObject::tr("Thirty-six"                  )
-                        <<QObject::tr("Thirty-eight"                )
-                        <<QObject::tr("Forty"                      )
-
-                        <<QObject::tr("Forty-two"                   )
-                        <<QObject::tr("Forty-four"                  )
-                        <<QObject::tr("Forty-six"                   )
-                        <<QObject::tr("Forty-eight"                 )
-                        <<QObject::tr("Fifty"                       )
-
-                        <<QObject::tr("Fifty-two"                   )
-                        <<QObject::tr("Fifty-four"                  )
-                        <<QObject::tr("Fifty-six"                   )
-                        <<QObject::tr("Fifty-eight"                 )
-                        <<QObject::tr("Sixty"                       )
-
-                        <<QObject::tr("Sixty-two"                   )
-                        <<QObject::tr("Sixty-four"                  )
-                        <<QObject::tr("One hundred and Twenty-eight");
+    static const  QStringList trNumbers = {
+             QObject::tr("One"                         ),
+             QObject::tr("Two"                         ),
+             QObject::tr("Four"                        ),
+             QObject::tr("Six"                         ),
+             QObject::tr("Eight"                       ),
+             //                                         ,
+             QObject::tr("Ten"                         ),
+             QObject::tr("Twelve"                      ),
+             QObject::tr("Fourteen"                    ),
+             QObject::tr("Sixteen"                     ),
+             QObject::tr("Eighteen"                    ),
+             //                                         ,
+             QObject::tr("Twenty"                      ),
+             QObject::tr("Twenty-two"                  ),
+             QObject::tr("Twenty-four"                 ),
+             QObject::tr("Twenty-six"                  ),
+             QObject::tr("Twenty-eight"                ),
+             QObject::tr("Thirty"                      ),
+             //                                         ,
+             QObject::tr("Thirty-two"                  ),
+             QObject::tr("Thirty-four"                 ),
+             QObject::tr("Thirty-six"                  ),
+             QObject::tr("Thirty-eight"                ),
+             QObject::tr("Forty"                       ),
+             //                                         ,
+             QObject::tr("Forty-two"                   ),
+             QObject::tr("Forty-four"                  ),
+             QObject::tr("Forty-six"                   ),
+             QObject::tr("Forty-eight"                 ),
+             QObject::tr("Fifty"                       ),
+             //                                         ,
+             QObject::tr("Fifty-two"                   ),
+             QObject::tr("Fifty-four"                  ),
+             QObject::tr("Fifty-six"                   ),
+             QObject::tr("Fifty-eight"                 ),
+             QObject::tr("Sixty"                       ),
+             //                                         ,
+             QObject::tr("Sixty-two"                   ),
+             QObject::tr("Sixty-four"                  ),
+             QObject::tr("One hundred and Twenty-eight"),
+    };
+    if (i < trNumbers.size()) {
+        return trNumbers.at(i);
+    }
+    return trNumbers.first();
 }
 
 void CpuWidget::addPrecessor(const QString& precessor)
