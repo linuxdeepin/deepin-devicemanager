@@ -80,7 +80,8 @@ void DisplayadapterWidget::initWidget()
         existArticles.insert("Description");
 
         ArticleStruct memory(tr("Graphic Memory"));
-        memory.value = tr("Unknown size");
+        //end with a empty char,for avoiding this article to be hidden
+        memory.value = QString("%1 ").arg(tr("Unknown"));
         articles.push_back(memory);
         existArticles.insert("Memory");
 

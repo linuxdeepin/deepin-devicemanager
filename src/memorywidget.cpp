@@ -46,37 +46,29 @@ void MemoryWidget::initWidget()
      * lshw show memory summary info without memory bank.
      * we need collect memory bank info if it exist in future version.
      */
-
-    if (resultFromDmi.isEmpty()) {
-
-        auto memorys = DeviceInfoParser::Instance().getLshwMeoryList();
-        if (memorys.isEmpty()) {
-            return setCentralInfo(tr("Failed to get memory information"));
-        }
-        else {
-            int index = 1;
-            for (auto ptr = memorys.begin(); ptr != memorys.end(); ptr++) {
-                QList<ArticleStruct> articles;
-                foreach (auto key,ptr.value().keys()) {
-                    ArticleStruct art(key);
-                    art.value = ptr.value().value(key);
-                    articles.append(art);
-                    if (key == QString("size")) {
-                        overviewInfo_.value += overviewInfo_.value.isEmpty() ? "": " /";
-                        overviewInfo_.value += art.value;
-                    }
+    auto memorys = DeviceInfoParser::Instance().getLshwMeoryList();
+    if (memorys.isEmpty() == false) {
+        int index = 1;
+        for (auto ptr = memorys.begin(); ptr != memorys.end(); ptr++) {
+            QList<ArticleStruct> articles;
+            foreach (auto key,ptr.value().keys()) {
+                ArticleStruct art(key);
+                art.value = ptr.value().value(key);
+                articles.append(art);
+                if (key == QString("size")) {
+                    overviewInfo_.value += overviewInfo_.value.isEmpty() ? "": " /";
+                    overviewInfo_.value += art.value;
                 }
-                QString title = tr("Memory");
-                addSubInfo( memorys.count() <= 1 ?
-                                QString("%1\n").arg(title):
-                                QString("%1 %2\n").arg(title).arg(index),
-                            articles );
-                index ++;
             }
+            QString title = tr("Memory");
+            addSubInfo( memorys.count() <= 1 ?
+                            QString("%1\n").arg(title):
+                            QString("%1 %2\n").arg(title).arg(index),
+                        articles );
+            index ++;
         }
         return;
     }
-
     return setCentralInfo(tr("Failed to get memory information"));
 }
 
