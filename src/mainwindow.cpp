@@ -230,16 +230,10 @@ void MainWindow::addAllDeviceinfoWidget()
 
     addDeviceWidget(new BluetoothWidget(mainWidget_), "bluetooth.svg");
     addDeviceWidget(new OtherPciDeviceWidget(mainWidget_), "otherpcidevices.svg");
-    //@date 2020-02-26,Emergency fix for loongson computer,power widget has nothing can be shown
-    bool ok = true;
-    auto powerWidget = new PowerWidget(mainWidget_,ok);
-    if (ok) {
-        addDeviceWidget(powerWidget, "battery.svg");
-    }
-    else {
-        delete powerWidget;
-    }
 
+    if (PowerWidget::infoIsEmpty() == false) {
+        addDeviceWidget(new PowerWidget(mainWidget_), "battery.svg");
+    }
     if(firstAdd_ == true)
     {
         leftDeviceView_->addSeperator();

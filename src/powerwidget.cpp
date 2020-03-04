@@ -31,18 +31,7 @@ PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Pow
     initWidget();
 }
 
-//success_init_on_loonson is false if we get nothing power info
-PowerWidget::PowerWidget(QWidget *parent, bool &success_init):DeviceInfoWidgetBase (parent,tr("Power"))
-{
-    success_init = init();
-}
-
 void PowerWidget::initWidget()
-{
-
-}
-
-bool PowerWidget::init()
 {
     QStringList lshwSwitchingpowerList = DeviceInfoParser::Instance().getLshwSwitchingpowerList();
     QStringList demidecodeSwitchingpowerList = DeviceInfoParser::Instance().getDemidecodeSwitchingpowerList();
@@ -58,9 +47,8 @@ bool PowerWidget::init()
     if(maxSwitchingSize + maxBatterySize < 1)
     {
         setCentralInfo(tr("Failed to get power information"));
-        return false;
+        return ;
     }
-
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles1;
@@ -352,6 +340,21 @@ bool PowerWidget::init()
         QStringList headers = { tr("Name"), tr("Type"), tr("Vendor") };
         addTable( headers, tabList);
     }
-
-    return true;
 }
+
+bool PowerWidget::infoIsEmpty()
+{
+    QStringList lshwSwitchingpowerList = DeviceInfoParser::Instance().getLshwSwitchingpowerList();
+    QStringList demidecodeSwitchingpowerList = DeviceInfoParser::Instance().getDemidecodeSwitchingpowerList();
+    QStringList upowerSwitchingList = DeviceInfoParser::Instance().getUpowerSwitchingList();
+
+    QStringList lshwBatteryList = DeviceInfoParser::Instance().getLshwBatteryList();
+    QStringList demidecodebatteryList = DeviceInfoParser::Instance().getDemidecodeBatteryList();
+    QStringList UpowerBatteryList = DeviceInfoParser::Instance().getUpowerBatteryList();
+
+    int maxSwitchingSize = maxDeviceSize(lshwSwitchingpowerList, demidecodeSwitchingpowerList, upowerSwitchingList);
+    int maxBatterySize = maxDeviceSize(lshwBatteryList, demidecodebatteryList, UpowerBatteryList);
+
+    return (maxSwitchingSize + maxBatterySize < 1);
+}
+
