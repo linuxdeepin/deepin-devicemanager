@@ -29,31 +29,30 @@ DWIDGET_USE_NAMESPACE
 
 KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Keyboard"))
 {
+    m_articles.clear();
+    m_tabList.clear();
+    m_heads.clear();
+    m_heads << tr("Name") << tr("Vendor");
     initWidget();
 }
 
 void KeyboardWidget::initWidget()
 {
-    QStringList inputdeviceList = DeviceInfoParser::Instance().getInputdeviceKeyboardList();
-    bool foundResultFromLshw = findKeyboardFromLshw();
-
-    if (foundResultFromLshw == true) {
+    bool ok1 = findKeyboardFromLshw();
+    bool ok2 = findKeyboardFromCatInput();
+    bool found = (ok1 || ok2);
+    int keyboard_count = m_articles.count();
+    if (found && keyboard_count > 0) {
+        for (auto index = m_articles.begin(); index != m_articles.end(); index++) {
+            addDevice(index.key(),index.value(),keyboard_count);
+        }
+        if (keyboard_count > 1) {
+            addTable(m_heads,m_tabList);
+        }
         return;
     }
-    if (inputdeviceList.count() < 1) {
-        return foundNokeyboards();
-    }
-    else {
-        if(findKeyboardFromCatInput() == false) {
-            return foundNokeyboards();
-        }
-    }
+    return foundNokeyboards();
 }
-// //test findKeyboardFromCatInput
-//void KeyboardWidget::initWidget()
-//{
-//    findKeyboardFromCatInput();
-//}
 
 /**
   *@author   yaobin
@@ -63,7 +62,7 @@ void KeyboardWidget::initWidget()
 bool KeyboardWidget::findKeyboardFromLshw()
 {
     QStringList foundKeyboards = DeviceInfoParser::Instance().getLshwUsbKeyboardDeviceList();
-    if( foundKeyboards.size() < 1)
+    if (foundKeyboards.isEmpty())
     {
         return false;
     }
@@ -129,7 +128,7 @@ bool KeyboardWidget::findKeyboardFromLshw()
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, articles, existArticles);
 
         QString title = name.isValid()? name.value: description.value;
-        addDevice( title, articles, foundKeyboards.size() );
+        m_articles.insert(title,articles);
 
         QStringList tab =
         {
@@ -137,7 +136,7 @@ bool KeyboardWidget::findKeyboardFromLshw()
             vendor.value
         };
 
-        tabList.push_back(tab);
+        m_tabList.push_back(tab);
 
         if(overviewInfo_.isValid())
         {
@@ -152,22 +151,17 @@ bool KeyboardWidget::findKeyboardFromLshw()
         }
         overviewInfo_.value += joinArticle(overArticle);
     }
-    if( foundKeyboards.size() > 1 )
-    {
-        QStringList headers = { tr("Name"),  tr("Vendor") };
-        addTable( headers, tabList);
-    }
     return  true;
 }
 
+
 /**
   *@author   yaobin
-  *@date     2020-02-20
-  *@brief    find keyboard from cmd: cat /proc/bus/input/devices
+  *@date     2020-03-04
+  *@brief    find keyboard from cmd: cat /proc/bus/input/devices, how ot exclude repeat Ps/2 keyboards is still remained to do
   */
 bool KeyboardWidget::findKeyboardFromCatInput()
 {
-    int validKeyboardCount = 0;
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
@@ -175,8 +169,14 @@ bool KeyboardWidget::findKeyboardFromCatInput()
     QSet<QString> existPhys;
 
     QStringList inputdeviceList = DeviceInfoParser::Instance().getInputdeviceKeyboardList();
+    if (inputdeviceList.isEmpty()) {
+        return false;
+    }
     foreach(const QString& device, inputdeviceList)
     {
+        if (device.contains("usb",Qt::CaseInsensitive)) {
+            continue;
+        }
         articles.clear();
         existArticles.clear();
 
@@ -242,7 +242,8 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         {
             if(phys.value.contains("usb", Qt::CaseInsensitive))
             {
-                type.value = "Usb";
+//                type.value = "Usb";
+                continue;
             }
             else if(phys.value.contains("/serio", Qt::CaseInsensitive))
             {
@@ -299,9 +300,7 @@ bool KeyboardWidget::findKeyboardFromCatInput()
                 DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles );
             }
         }
-
-        ++validKeyboardCount;
-        addDevice( name.value , articles , inputdeviceList.size() );
+        m_articles.insert(name.value,articles);
 
         if(overviewInfo_.value.isEmpty() == false)
         {
@@ -309,24 +308,10 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         }
         overviewInfo_.value += name.value;
 
-        if( inputdeviceList.size()  > 1 )
-        {
-            QStringList lst =
-            {
-                name.value,
-                type.value,
-                vendor.value
-            };
-
-            tabList.push_back(lst);
-        }
+        m_tabList.push_back({name.value, vendor.value });
     }
 
-    if( validKeyboardCount > 1 )
-    {
-        QStringList headers = { tr("Name"),  tr("Type"), tr("Vendor") };
-        addTable( headers, tabList);
-    }
+    return true;
 }
 
 /**
