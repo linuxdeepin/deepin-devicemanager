@@ -1,0 +1,85 @@
+Screen 0: minimum 320 x 200, current 1920 x 1080, maximum 10112 x 5400
+VGA-0 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x53
+	Timestamp:  1988463
+	Subpixel:   unknown
+	Clones:    
+	CRTCs:      2
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	TearFree: auto 
+		supported: off, on, auto
+	link-status: Good 
+		supported: Good, Bad
+	non-desktop: 0 
+		range: (0, 1)
+DisplayPort-0 connected primary 1920x1080+0+0 (0x57) normal (normal left inverted right x axis y axis) 309mm x 173mm
+	Identifier: 0x54
+	Timestamp:  1988463
+	Subpixel:   unknown
+	Gamma:      1.0:1.0:1.0
+	Brightness: 0.099
+	Clones:    
+	CRTC:       0
+	CRTCs:      0
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	EDID: 
+		00ffffffffffff0009e5df0600000000
+		011a0104a51f1178028631a3544e9b25
+		0e505400000001010101010101010101
+		0101010101013c3780de703814403c20
+		360035ad1000001a302c80de70381440
+		3020360035ad1000001a000000fe0042
+		4f452043510a202020202020000000fe
+		00485631343046484d2d4e36310a0049
+	TearFree: auto 
+		supported: off, on, auto
+	link-status: Good 
+		supported: Good, Bad
+	non-desktop: 0 
+		range: (0, 1)
+  1920x1080 (0x57) 141.400MHz +HSync -VSync *current +preferred
+        h: width  1920 start 1980 end 2012 total 2142 skew    0 clock  66.01KHz
+        v: height 1080 start 1083 end 1089 total 1100           clock  60.01Hz
+  1920x1080 (0x58) 113.120MHz +HSync -VSync
+        h: width  1920 start 1968 end 2000 total 2142 skew    0 clock  52.81KHz
+        v: height 1080 start 1083 end 1089 total 1100           clock  48.01Hz
+  1680x1050 (0x59) 146.250MHz -HSync +VSync
+        h: width  1680 start 1784 end 1960 total 2240 skew    0 clock  65.29KHz
+        v: height 1050 start 1053 end 1059 total 1089           clock  59.95Hz
+  1280x1024 (0x5a) 108.000MHz +HSync +VSync
+        h: width  1280 start 1328 end 1440 total 1688 skew    0 clock  63.98KHz
+        v: height 1024 start 1025 end 1028 total 1066           clock  60.02Hz
+  1280x720 (0x5b) 74.250MHz +HSync +VSync
+        h: width  1280 start 1390 end 1430 total 1650 skew    0 clock  45.00KHz
+        v: height  720 start  725 end  730 total  750           clock  60.00Hz
+  1024x768 (0x5c) 65.000MHz -HSync -VSync
+        h: width  1024 start 1048 end 1184 total 1344 skew    0 clock  48.36KHz
+        v: height  768 start  771 end  777 total  806           clock  60.00Hz
+  800x600 (0x5d) 40.000MHz +HSync +VSync
+        h: width   800 start  840 end  968 total 1056 skew    0 clock  37.88KHz
+        v: height  600 start  601 end  605 total  628           clock  60.32Hz
+  640x480 (0x5e) 25.175MHz -HSync -VSync
+        h: width   640 start  656 end  752 total  800 skew    0 clock  31.47KHz
+        v: height  480 start  490 end  492 total  525           clock  59.94Hz
+DisplayPort-1 disconnected (normal left inverted right x axis y axis)
+	Identifier: 0x55
+	Timestamp:  1988463
+	Subpixel:   unknown
+	Clones:    
+	CRTCs:      1
+	Transform:  1.000000 0.000000 0.000000
+	            0.000000 1.000000 0.000000
+	            0.000000 0.000000 1.000000
+	           filter: 
+	TearFree: auto 
+		supported: off, on, auto
+	link-status: Good 
+		supported: Good, Bad
+	non-desktop: 0 
+		range: (0, 1)

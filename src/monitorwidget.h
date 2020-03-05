@@ -36,5 +36,7 @@ public:
     QString parseDisplayRatio(const QString& resulotion);
 
     QString getMonitorSizeFromEDID();
+private:
+    void checkCurResuloution(ArticleStruct &curResolution,const QString &monitor);
 };
 

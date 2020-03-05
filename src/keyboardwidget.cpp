@@ -158,7 +158,7 @@ bool KeyboardWidget::findKeyboardFromLshw()
 /**
   *@author   yaobin
   *@date     2020-03-04
-  *@brief    find keyboard from cmd: cat /proc/bus/input/devices, how ot exclude repeat Ps/2 keyboards is still remained to do
+  *@brief    find keyboard from cmd: cat /proc/bus/input/devices, how ot exclude repeatable Ps/2 keyboards is still remained to do
   */
 bool KeyboardWidget::findKeyboardFromCatInput()
 {

@@ -157,22 +157,9 @@ void MonitorWidget::initWidget()
                 articles.push_back(tmy);
             }
 
-            currentResolution.queryData("hwinfo", monitor, "Current Resolution");
-            currentResolution.queryData("hwinfo", monitor, "Support Resolution");
+            checkCurResuloution(currentResolution,monitor);
 
             displayRatio.value = parseDisplayRatio(currentResolution.value);
-
-            ArticleStruct frequencies(tr("Frequencies"));
-            frequencies.queryData("hwinfo", monitor, "Frequencies");
-            if(frequencies.isValid())
-            {
-                frequencies.value = frequencies.value.trimmed().split(",").last().trimmed();
-                if(frequencies.isValid())
-                {
-                    currentResolution.value += " @";
-                    currentResolution.value += frequencies.value;
-                }
-            }
 
             articles.push_back(currentResolution);
             existArticles.insert("Current Resolution");
@@ -217,15 +204,13 @@ void MonitorWidget::initWidget()
             }
 
             //always get monitor size from EDID
-            if (true) {
-                QString sizeValue = "";
-                sizeValue = getMonitorSizeFromEDID();
-                if(!sizeValue.isEmpty()) {
-                    monitorSize.value = sizeValue;
-                }
-                if (monitorSize.isValid()) {
-                    articles.push_back(monitorSize);
-                }
+            QString sizeValue = "";
+            sizeValue = getMonitorSizeFromEDID();
+            if(!sizeValue.isEmpty()) {
+                monitorSize.value = sizeValue;
+            }
+            if (monitorSize.isValid()) {
+                articles.push_back(monitorSize);
             }
         }
         articles.push_back(primaryMonitor);
@@ -329,7 +314,7 @@ QString MonitorWidget::parseMonitorSize(const QString& sizeDescription, double& 
 
 QString MonitorWidget::parseDisplayRatio(const QString& resulotion)
 {
-    QRegExp re("^([\\d]*)x([\\d]*)$");
+    QRegExp re("^([\\d]*)x([\\d]*)(.*)$");
     QString res;
     if( re.exactMatch(resulotion) )
     {
@@ -375,3 +360,42 @@ QString MonitorWidget::getMonitorSizeFromEDID()
     QString ret = QString("%1 %2(%3x%4 %5)").arg(QString::number(inch,'0',1)).arg(inchStr_tr).arg(width).arg(height).arg(tr("cm","size unit"));
     return ret;
 }
+
+void MonitorWidget::checkCurResuloution(ArticleStruct &curResolution,const QString &monitor)
+{
+    if (curResolution.isValid()) {
+        return;
+    }
+    auto xrandr = DeviceInfoParser::Instance().toolDatabase_.value("xrandr");
+    if (xrandr.isEmpty()) {
+        return;
+    }
+    QString curScreen;
+    //find first connected,maybe error if multiple monitors are found by xrandr
+    foreach (auto it,xrandr.keys()) {
+        if (it.contains("disconnected",Qt::CaseInsensitive) == false) {
+            curScreen = it;
+            break;
+        }
+    }
+    auto curResolutionDescription = xrandr.value(curScreen).value("current");
+    if (curResolution.isValid() == false) {
+       curResolution.queryData("hwinfo", monitor, "Current Resolution");
+    }
+    curResolution.value = curResolutionDescription.remove(QRegExp("\\s"));
+    if (curResolution.value.contains("@")) {
+        return;
+    }
+    QString resolutionListDescrition = DeviceInfoParser::Instance().toolDatabase_.value("hwinfo").value(monitor).value("Support Resolution");
+    if (resolutionListDescrition.isEmpty()) {
+        return;
+    }
+    QStringList resolutionList = resolutionListDescrition.split(",",QString::SkipEmptyParts);
+    foreach (auto supportResolution, resolutionList) {
+        supportResolution.remove(QRegExp("\\s"));
+        if (supportResolution.startsWith(curResolution.value,Qt::CaseSensitive)) {
+            curResolution.value = supportResolution;
+            break;
+        }
+    }
+};
