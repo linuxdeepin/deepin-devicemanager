@@ -26,6 +26,7 @@
 #include <QDate>
 #include <DApplication>
 #include "Logger.h"
+#include <assert.h>
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
@@ -157,15 +158,6 @@ void MonitorWidget::initWidget()
                 articles.push_back(tmy);
             }
 
-            checkCurResuloution(currentResolution,monitor);
-
-            displayRatio.value = parseDisplayRatio(currentResolution.value);
-
-            articles.push_back(currentResolution);
-            existArticles.insert("Current Resolution");
-
-            articles.push_back(displayRatio);
-
             resolutionList.queryData("hwinfo", monitor, "Support Resolution");
         }
 
@@ -187,13 +179,14 @@ void MonitorWidget::initWidget()
                 primaryMonitor.value = "Yes";
             }
 
-            if(currentResolution.isValid() == false)
-            {
-                currentResolution.queryData("xrandr", xrandrMonitorList.at(i), "Resolution");
-                articles.push_back(currentResolution);
-                displayRatio.value = parseDisplayRatio(currentResolution.value);
-                articles.push_back(displayRatio);
-            }
+
+            currentResolution.queryData("xrandr", xrandrMonitorList.at(i), "Resolution");
+            //guarantee resulotion end with "@","\\d+","hz|HZ|Hz"
+            parseCurResolution(currentResolution,resolutionList);
+            articles.push_back(currentResolution);
+
+            displayRatio.value = parseDisplayRatio(currentResolution.value);
+            articles.push_back(displayRatio);
 
             if (monitorSize.isValid() == false)
             {
@@ -361,34 +354,16 @@ QString MonitorWidget::getMonitorSizeFromEDID()
     return ret;
 }
 
-void MonitorWidget::checkCurResuloution(ArticleStruct &curResolution,const QString &monitor)
+void MonitorWidget::parseCurResolution(ArticleStruct &artOfCurResolution,ArticleStruct &artOfResolutionList)
 {
-    if (curResolution.isValid()) {
-        return;
-    }
-    auto xrandr = DeviceInfoParser::Instance().toolDatabase_.value("xrandr");
-    if (xrandr.isEmpty()) {
-        return;
-    }
-    auto xrandrCurReolution = xrandr.value("Screen 0").value("current");
-
-    curResolution.value = xrandrCurReolution.remove(QRegExp("\\s"));
-    curResolution.queryData("hwinfo", monitor, "Current Resolution");
-
-    if (curResolution.value.contains("@") || curResolution.isValid() == false) {
-        return;
-    }
-    QString resolutionListDescrition = DeviceInfoParser::Instance().toolDatabase_.value("hwinfo").value(monitor).value("Support Resolution");
-
-    QStringList resolutionList = resolutionListDescrition.split(",",QString::SkipEmptyParts);
-
-    if (resolutionList.size() == 1) {
-        curResolution.value = resolutionList.first().remove(QRegExp("\\s"));
-    }
+    QStringList resolutionList = artOfResolutionList.value.split(",",QString::SkipEmptyParts);
     foreach (auto supportResolution, resolutionList) {
         supportResolution.remove(QRegExp("\\s"));
-        if (supportResolution.startsWith(curResolution.value,Qt::CaseSensitive)) {
-            curResolution.value = supportResolution;
+        if (supportResolution.startsWith(artOfCurResolution.value,Qt::CaseSensitive) &&
+                QRegExp("^.*@\\d+(Hz|hz|HZ)$").exactMatch(supportResolution)
+                )
+        {
+            artOfCurResolution.value = supportResolution;
             break;
         }
     }

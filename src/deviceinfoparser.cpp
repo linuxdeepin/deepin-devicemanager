@@ -613,7 +613,6 @@ QStringList DeviceInfoParser::getOtherBluetoothctlPairedAndConnectedDevicesList(
         {
             return true;
         }
-
         return false;
     };
 

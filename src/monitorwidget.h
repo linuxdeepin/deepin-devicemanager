@@ -37,6 +37,6 @@ public:
 
     QString getMonitorSizeFromEDID();
 private:
-    void checkCurResuloution(ArticleStruct &curResolution,const QString &monitor);
+    void parseCurResolution(ArticleStruct &curResolution,ArticleStruct &resolutionList);
 };
 
