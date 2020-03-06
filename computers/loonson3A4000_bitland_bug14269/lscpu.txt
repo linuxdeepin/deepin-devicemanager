@@ -1,0 +1,15 @@
+Architecture:        aarch64
+Byte Order:          Little Endian
+CPU(s):              4
+On-line CPU(s) list: 0-3
+Thread(s) per core:  1
+Core(s) per socket:  2
+Socket(s):           2
+NUMA node(s):        1
+Vendor ID:           0x70
+Model:               3
+Model name:          FT-2000/4
+Stepping:            0x1
+BogoMIPS:            96.00
+NUMA node0 CPU(s):   0-3
+Flags:               half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt lpae evtstrm aes pmull sha1 sha2 crc32

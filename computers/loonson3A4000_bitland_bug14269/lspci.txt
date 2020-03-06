@@ -1,0 +1,187 @@
+00:00.0 PCI bridge: Cadence Design Systems, Inc. Device dc16 (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 30
+	Memory at 1018000000 (64-bit, non-prefetchable) [size=4M]
+	Bus: primary=00, secondary=01, subordinate=01, sec-latency=0
+	Capabilities: [80] Power Management version 3
+	Capabilities: [90] MSI: Enable- Count=1/1 Maskable+ 64bit+
+	Capabilities: [b0] MSI-X: Enable- Count=1 Masked-
+	Capabilities: [c0] Express Root Port (Slot+), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [274] Transaction Processing Hints
+	Capabilities: [300] #19
+	Capabilities: [900] L1 PM Substates
+	Kernel driver in use: pcieport
+
+00:01.0 PCI bridge: Cadence Design Systems, Inc. Device dc08 (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 30
+	Memory at 1018400000 (64-bit, non-prefetchable) [size=4M]
+	Bus: primary=00, secondary=02, subordinate=02, sec-latency=0
+	Memory behind bridge: 58000000-580fffff
+	Capabilities: [80] Power Management version 3
+	Capabilities: [90] MSI: Enable- Count=1/1 Maskable+ 64bit+
+	Capabilities: [b0] MSI-X: Enable- Count=1 Masked-
+	Capabilities: [c0] Express Root Port (Slot+), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [274] Transaction Processing Hints
+	Capabilities: [300] #19
+	Capabilities: [900] L1 PM Substates
+	Kernel driver in use: pcieport
+
+00:02.0 PCI bridge: Cadence Design Systems, Inc. Device dc01 (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 30
+	Memory at 1018800000 (64-bit, non-prefetchable) [size=4M]
+	Bus: primary=00, secondary=03, subordinate=03, sec-latency=0
+	I/O behind bridge: 00001000-00001fff
+	Memory behind bridge: 58100000-581fffff
+	Capabilities: [80] Power Management version 3
+	Capabilities: [90] MSI: Enable- Count=1/1 Maskable+ 64bit+
+	Capabilities: [b0] MSI-X: Enable- Count=1 Masked-
+	Capabilities: [c0] Express Root Port (Slot+), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [274] Transaction Processing Hints
+	Capabilities: [300] #19
+	Capabilities: [900] L1 PM Substates
+	Kernel driver in use: pcieport
+
+00:03.0 PCI bridge: Cadence Design Systems, Inc. Device dc16 (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 30
+	Memory at 1018c00000 (64-bit, non-prefetchable) [size=4M]
+	Bus: primary=00, secondary=04, subordinate=04, sec-latency=0
+	I/O behind bridge: 00002000-00002fff
+	Memory behind bridge: 58200000-582fffff
+	Prefetchable memory behind bridge: 0000001040000000-00000010ffffffff
+	Capabilities: [80] Power Management version 3
+	Capabilities: [90] MSI: Enable- Count=1/1 Maskable+ 64bit+
+	Capabilities: [b0] MSI-X: Enable- Count=1 Masked-
+	Capabilities: [c0] Express Root Port (Slot+), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [274] Transaction Processing Hints
+	Capabilities: [300] #19
+	Capabilities: [900] L1 PM Substates
+	Kernel driver in use: pcieport
+
+00:04.0 PCI bridge: Cadence Design Systems, Inc. Device dc08 (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 30
+	Memory at 1019000000 (64-bit, non-prefetchable) [size=4M]
+	Bus: primary=00, secondary=05, subordinate=05, sec-latency=0
+	I/O behind bridge: 00003000-00003fff
+	Memory behind bridge: 58300000-583fffff
+	Capabilities: [80] Power Management version 3
+	Capabilities: [90] MSI: Enable- Count=1/1 Maskable+ 64bit+
+	Capabilities: [b0] MSI-X: Enable- Count=1 Masked-
+	Capabilities: [c0] Express Root Port (Slot+), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [274] Transaction Processing Hints
+	Capabilities: [300] #19
+	Capabilities: [900] L1 PM Substates
+	Kernel driver in use: pcieport
+
+00:05.0 PCI bridge: Cadence Design Systems, Inc. Device dc01 (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 30
+	Memory at 1019400000 (64-bit, non-prefetchable) [size=4M]
+	Bus: primary=00, secondary=06, subordinate=06, sec-latency=0
+	Memory behind bridge: 58400000-584fffff
+	Capabilities: [80] Power Management version 3
+	Capabilities: [90] MSI: Enable- Count=1/1 Maskable+ 64bit+
+	Capabilities: [b0] MSI-X: Enable- Count=1 Masked-
+	Capabilities: [c0] Express Root Port (Slot+), MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [274] Transaction Processing Hints
+	Capabilities: [300] #19
+	Capabilities: [900] L1 PM Substates
+	Kernel driver in use: pcieport
+
+02:00.0 USB controller: ASMedia Technology Inc. ASM1042A USB 3.0 Host Controller (prog-if 30 [XHCI])
+	Subsystem: ASMedia Technology Inc. ASM1042A USB 3.0 Host Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 30
+	Memory at 58000000 (64-bit, non-prefetchable) [size=32K]
+	Capabilities: [50] MSI: Enable- Count=1/8 Maskable- 64bit+
+	Capabilities: [68] MSI-X: Enable+ Count=8 Masked-
+	Capabilities: [78] Power Management version 3
+	Capabilities: [80] Express Legacy Endpoint, MSI 00
+	Capabilities: [100] Virtual Channel
+	Kernel driver in use: xhci_hcd
+	Kernel modules: xhci_pci
+
+03:00.0 Network controller: Realtek Semiconductor Co., Ltd. RTL8821CE 802.11ac PCIe Wireless Network Adapter
+	Subsystem: AzureWave RTL8821CE 802.11ac PCIe Wireless Network Adapter
+	Flags: fast devsel, IRQ 255
+	I/O ports at 1000 [disabled] [size=256]
+	Memory at 58100000 (64-bit, non-prefetchable) [disabled] [size=64K]
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable- Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Endpoint, MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [148] Device Serial Number 00-e0-4c-ff-fe-c8-21-01
+	Capabilities: [158] Latency Tolerance Reporting
+	Capabilities: [160] L1 PM Substates
+	Capabilities: [170] Precision Time Measurement
+	Capabilities: [17c] Vendor Specific Information: ID=0003 Rev=1 Len=054 <?>
+
+04:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Lexa [Radeon 540X/550X/630 / RX 640 / E9171 MCM] (rev c3) (prog-if 00 [VGA controller])
+	Subsystem: Lenovo Lexa [Radeon E9171 MCM]
+	Flags: bus master, fast devsel, latency 0, IRQ 44
+	Memory at 1080000000 (64-bit, prefetchable) [size=2G]
+	Memory at 1040000000 (64-bit, prefetchable) [size=2M]
+	I/O ports at 2000 [size=256]
+	Memory at 58200000 (32-bit, non-prefetchable) [size=256K]
+	Expansion ROM at 58240000 [size=128K]
+	Capabilities: [48] Vendor Specific Information: Len=08 <?>
+	Capabilities: [50] Power Management version 3
+	Capabilities: [58] Express Legacy Endpoint, MSI 00
+	Capabilities: [a0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [100] Vendor Specific Information: ID=0001 Rev=1 Len=010 <?>
+	Capabilities: [150] Advanced Error Reporting
+	Capabilities: [200] #15
+	Capabilities: [270] #19
+	Capabilities: [2b0] Address Translation Service (ATS)
+	Capabilities: [2c0] Page Request Interface (PRI)
+	Capabilities: [2d0] Process Address Space ID (PASID)
+	Capabilities: [320] Latency Tolerance Reporting
+	Capabilities: [328] Alternative Routing-ID Interpretation (ARI)
+	Capabilities: [370] L1 PM Substates
+	Kernel driver in use: amdgpu
+	Kernel modules: amdgpu
+
+04:00.1 Audio device: Advanced Micro Devices, Inc. [AMD/ATI] Baffin HDMI/DP Audio [Radeon RX 550 640SP / RX 560/560X]
+	Subsystem: Lenovo Baffin HDMI/DP Audio [Radeon RX 550 640SP / RX 560/560X]
+	Flags: bus master, fast devsel, latency 0, IRQ 46
+	Memory at 58260000 (64-bit, non-prefetchable) [size=16K]
+	Capabilities: [48] Vendor Specific Information: Len=08 <?>
+	Capabilities: [50] Power Management version 3
+	Capabilities: [58] Express Legacy Endpoint, MSI 00
+	Capabilities: [a0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [100] Vendor Specific Information: ID=0001 Rev=1 Len=010 <?>
+	Capabilities: [150] Advanced Error Reporting
+	Capabilities: [328] Alternative Routing-ID Interpretation (ARI)
+	Kernel driver in use: snd_hda_intel
+	Kernel modules: snd_hda_intel
+
+05:00.0 SATA controller: ASMedia Technology Inc. ASM1062 Serial ATA Controller (rev 02) (prog-if 01 [AHCI 1.0])
+	Subsystem: ASMedia Technology Inc. ASM1062 Serial ATA Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 33
+	I/O ports at 3020 [size=8]
+	I/O ports at 3030 [size=4]
+	I/O ports at 3028 [size=8]
+	I/O ports at 3034 [size=4]
+	I/O ports at 3000 [size=32]
+	Memory at 58310000 (32-bit, non-prefetchable) [size=512]
+	Expansion ROM at 58300000 [disabled] [size=64K]
+	Capabilities: [50] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [78] Power Management version 3
+	Capabilities: [80] Express Legacy Endpoint, MSI 00
+	Capabilities: [100] Virtual Channel
+	Kernel driver in use: ahci
+
+06:00.0 USB controller: Renesas Technology Corp. uPD720201 USB 3.0 Host Controller (rev 03) (prog-if 30 [XHCI])
+	Flags: bus master, fast devsel, latency 0, IRQ 30
+	Memory at 58400000 (64-bit, non-prefetchable) [size=8K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [70] MSI: Enable- Count=1/8 Maskable- 64bit+
+	Capabilities: [90] MSI-X: Enable+ Count=8 Masked-
+	Capabilities: [a0] Express Endpoint, MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [150] Latency Tolerance Reporting
+	Kernel driver in use: xhci_hcd
+	Kernel modules: xhci_pci
+

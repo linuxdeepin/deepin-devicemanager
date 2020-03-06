@@ -1,0 +1,17 @@
+hci0:	Type: Primary  Bus: UART
+	BD Address: 00:E7:53:80:3D:D7  ACL MTU: 1021:7  SCO MTU: 255:4
+	UP RUNNING PSCAN ISCAN 
+	RX bytes:3158 acl:0 sco:0 events:105 errors:0
+	TX bytes:4085 acl:0 sco:0 commands:105 errors:0
+	Features: 0xbf 0xfe 0x4d 0xfe 0xdb 0xff 0x5b 0x87
+	Packet type: DM1 DM3 DM5 DH1 DH3 DH5 HV1 HV2 HV3 
+	Link policy: RSWITCH SNIFF 
+	Link mode: SLAVE ACCEPT 
+	Name: 'deepin'
+	Class: 0x0c0000
+	Service Classes: Rendering, Capturing
+	Device Class: Miscellaneous, 
+	HCI Version:  (0xa)  Revision: 0x1317
+	LMP Version:  (0xa)  Subversion: 0x1317
+	Manufacturer: HiSilicon Technologies Co., Ltd. (271)
+

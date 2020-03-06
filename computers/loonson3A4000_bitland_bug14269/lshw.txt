@@ -1,0 +1,491 @@
+test-pc
+    description: System
+    product: FT2000+ (12345)
+    vendor: kylin
+    version: V1000
+    serial: 12345
+    width: 64 bits
+    capabilities: smbios-3.1.1 dmi-3.1.1 smp
+    configuration: boot=normal chassis=server family=12345 sku=12345 uuid=78563412-3412-7856-90AB-CDDEEFAABBCC
+  *-core
+       description: Motherboard
+       product: FT2000+
+       vendor: kaifaban
+       physical id: 0
+       version: V1000
+       serial: 12345
+       slot: 12345
+     *-cache:0
+          description: L1 cache
+          physical id: 0
+          slot: L1 Instruction Cache
+          size: 32KiB
+          capacity: 32KiB
+          capabilities: synchronous internal write-back instruction
+          configuration: level=1
+     *-cache:1
+          description: L1 cache
+          physical id: 1
+          slot: L1 Data Cache
+          size: 32KiB
+          capacity: 32KiB
+          capabilities: synchronous internal write-back data
+          configuration: level=1
+     *-cache:2
+          description: L2 cache
+          physical id: 2
+          slot: L2 Cache
+          size: 2MiB
+          capacity: 2MiB
+          capabilities: synchronous internal varies unified
+          configuration: level=2
+     *-cpu
+          description: CPU
+          product: ARMv8 (14)
+          vendor: Phytium
+          physical id: 3
+          bus info: cpu@0
+          version: FT-2000/4
+          serial: 721C54AD
+          slot: CPU01
+          size: 2200MHz
+          capacity: 2200MHz
+          clock: 48MHz
+          capabilities: lm
+          configuration: cores=4 enabledcores=4 threads=4
+     *-memory
+          description: System Memory
+          physical id: 4
+          slot: System board or motherboard
+          size: 8GiB
+        *-bank:0
+             description: DIMM DDR4 Synchronous 2668 MHz (0.4 ns) [empty]
+             product: 6478545886
+             vendor: Unknown
+             physical id: 0
+             serial: 008
+             slot: DIMM1
+             width: 64 bits
+             clock: 2668MHz (0.4ns)
+        *-bank:1
+             description: DIMM DDR4 Synchronous 2668 MHz (0.4 ns)
+             product: 6478545886
+             vendor: Unknown
+             physical id: 1
+             serial: AA26020008
+             slot: DIMM2
+             size: 8GiB
+             width: 64 bits
+             clock: 2668MHz (0.4ns)
+     *-firmware
+          description: BIOS
+          vendor: Kunlun Firmware
+          physical id: 9
+          version: 4.0
+          date: 01/19/20 17:04:03
+          size: 480KiB
+          capabilities: pci upgrade shadowing cdboot bootselect edd int13floppynec int13floppytoshiba int13floppy360 int13floppy1200 int13floppy720 int13floppy2880 int9keyboard int10video acpi usb biosbootspecification uefi
+     *-pci:0
+          description: PCI bridge
+          product: Cadence Design Systems, Inc.
+          vendor: Cadence Design Systems, Inc.
+          physical id: 100
+          bus info: pci@0000:00:00.0
+          version: 00
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci pm msi msix pciexpress normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: iomemory:100-ff irq:30 memory:1018000000-10183fffff
+     *-pci:1
+          description: PCI bridge
+          product: Cadence Design Systems, Inc.
+          vendor: Cadence Design Systems, Inc.
+          physical id: 101
+          bus info: pci@0000:00:01.0
+          version: 00
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci pm msi msix pciexpress normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: iomemory:100-ff irq:30 memory:1018400000-10187fffff memory:58000000-580fffff
+        *-usb
+             description: USB controller
+             product: ASM1042A USB 3.0 Host Controller
+             vendor: ASMedia Technology Inc.
+             physical id: 0
+             bus info: pci@0000:02:00.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: msi msix pm pciexpress xhci bus_master cap_list
+             configuration: driver=xhci_hcd latency=0
+             resources: irq:30 memory:58000000-58007fff
+           *-usbhost:0
+                product: xHCI Host Controller
+                vendor: Linux 4.19.0-arm64-desktop xhci-hcd
+                physical id: 0
+                bus info: usb@1
+                logical name: usb1
+                version: 4.19
+                capabilities: usb-2.00
+                configuration: driver=hub slots=2 speed=480Mbit/s
+              *-usb
+                   description: USB hub
+                   product: USB2.0 Hub
+                   vendor: GenesysLogic
+                   physical id: 2
+                   bus info: usb@1:2
+                   version: 92.26
+                   capabilities: usb-2.10
+                   configuration: driver=hub maxpower=100mA slots=4 speed=480Mbit/s
+                 *-usb:0
+                      description: Keyboard
+                      product: Lenovo USB Keyboard
+                      vendor: Lenovo
+                      physical id: 1
+                      bus info: usb@1:2.1
+                      version: 1.40
+                      capabilities: usb-2.00
+                      configuration: driver=usbhid maxpower=100mA speed=2Mbit/s
+                 *-usb:1
+                      description: Mouse
+                      product: USB Optical Mouse
+                      vendor: PixArt
+                      physical id: 4
+                      bus info: usb@1:2.4
+                      version: 1.00
+                      capabilities: usb-2.00
+                      configuration: driver=usbhid maxpower=100mA speed=2Mbit/s
+           *-usbhost:1
+                product: xHCI Host Controller
+                vendor: Linux 4.19.0-arm64-desktop xhci-hcd
+                physical id: 1
+                bus info: usb@2
+                logical name: usb2
+                version: 4.19
+                capabilities: usb-3.00
+                configuration: driver=hub slots=2 speed=5000Mbit/s
+              *-usb
+                   description: USB hub
+                   product: USB3.0 Hub
+                   vendor: GenesysLogic
+                   physical id: 2
+                   bus info: usb@2:2
+                   version: 92.26
+                   capabilities: usb-3.10
+                   configuration: driver=hub slots=4 speed=5000Mbit/s
+                 *-usb
+                      description: Mass storage device
+                      product: Ultra
+                      vendor: SanDisk
+                      physical id: 2
+                      bus info: usb@2:2.2
+                      logical name: scsi2
+                      version: 1.00
+                      serial: 4C530001221224116024
+                      capabilities: usb-3.00 scsi emulated scsi-host
+                      configuration: driver=usb-storage maxpower=896mA speed=5000Mbit/s
+                    *-disk
+                         description: SCSI Disk
+                         product: Ultra
+                         vendor: SanDisk
+                         physical id: 0.0.0
+                         bus info: scsi@2:0.0.0
+                         logical name: /dev/sdb
+                         version: 1.00
+                         serial: 4C530001221224116024
+                         size: 28GiB (30GB)
+                         capabilities: removable
+                         configuration: ansiversion=6 logicalsectorsize=512 sectorsize=512
+                       *-medium
+                            physical id: 0
+                            logical name: /dev/sdb
+                            size: 28GiB (30GB)
+                            capabilities: partitioned partitioned:dos
+                            configuration: signature=cad4ebea
+                          *-volume:0
+                               description: Windows NTFS volume
+                               physical id: 1
+                               logical name: /dev/sdb1
+                               logical name: /media/test/USB_DISK
+                               version: 3.1
+                               serial: 9e5a-3679
+                               size: 28GiB
+                               capacity: 28GiB
+                               capabilities: primary ntfs initialized
+                               configuration: clustersize=4096 created=2019-11-20 21:28:09 filesystem=ntfs label=USB_DISK mount.fstype=fuseblk mount.options=rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096 state=mounted
+                          *-volume:1
+                               description: Windows FAT volume
+                               vendor: MSDOS5.0
+                               physical id: 4
+                               logical name: /dev/sdb4
+                               logical name: /media/test/CD_ROM
+                               version: FAT16
+                               serial: 2310-19d9
+                               size: 258MiB
+                               capacity: 259MiB
+                               capabilities: primary bootable hidden fat initialized
+                               configuration: FATs=2 filesystem=fat label=CD_ROM mount.fstype=vfat mount.options=rw,nosuid,nodev,relatime,uid=1000,gid=1000,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,showexec,utf8,flush,errors=remount-ro state=mounted
+     *-pci:2
+          description: PCI bridge
+          product: Cadence Design Systems, Inc.
+          vendor: Cadence Design Systems, Inc.
+          physical id: 102
+          bus info: pci@0000:00:02.0
+          version: 00
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci pm msi msix pciexpress normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: iomemory:100-ff irq:30 memory:1018800000-1018bfffff ioport:1000(size=4096) memory:58100000-581fffff
+        *-network UNCLAIMED
+             description: Network controller
+             product: RTL8821CE 802.11ac PCIe Wireless Network Adapter
+             vendor: Realtek Semiconductor Co., Ltd.
+             physical id: 0
+             bus info: pci@0000:03:00.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi pciexpress cap_list
+             configuration: latency=0
+             resources: ioport:1000(size=256) memory:58100000-5810ffff
+     *-pci:3
+          description: PCI bridge
+          product: Cadence Design Systems, Inc.
+          vendor: Cadence Design Systems, Inc.
+          physical id: 103
+          bus info: pci@0000:00:03.0
+          version: 00
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci pm msi msix pciexpress normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: iomemory:100-ff irq:30 memory:1018c00000-1018ffffff ioport:2000(size=4096) memory:58200000-582fffff ioport:1040000000(size=3221225472)
+        *-display
+             description: VGA compatible controller
+             product: Lexa [Radeon 540X/550X/630 / RX 640 / E9171 MCM]
+             vendor: Advanced Micro Devices, Inc. [AMD/ATI]
+             physical id: 0
+             bus info: pci@0000:04:00.0
+             version: c3
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm pciexpress msi vga_controller bus_master cap_list rom
+             configuration: driver=amdgpu latency=0
+             resources: iomemory:100-ff iomemory:100-ff irq:44 memory:1080000000-10ffffffff memory:1040000000-10401fffff ioport:2000(size=256) memory:58200000-5823ffff ioport:58240000(size=131072)
+        *-multimedia
+             description: Audio device
+             product: Baffin HDMI/DP Audio [Radeon RX 550 640SP / RX 560/560X]
+             vendor: Advanced Micro Devices, Inc. [AMD/ATI]
+             physical id: 0.1
+             bus info: pci@0000:04:00.1
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm pciexpress msi bus_master cap_list
+             configuration: driver=snd_hda_intel latency=0
+             resources: irq:46 memory:58260000-58263fff
+     *-pci:4
+          description: PCI bridge
+          product: Cadence Design Systems, Inc.
+          vendor: Cadence Design Systems, Inc.
+          physical id: 104
+          bus info: pci@0000:00:04.0
+          version: 00
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci pm msi msix pciexpress normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: iomemory:100-ff irq:30 memory:1019000000-10193fffff ioport:3000(size=4096) memory:58300000-583fffff
+        *-sata
+             description: SATA controller
+             product: ASM1062 Serial ATA Controller
+             vendor: ASMedia Technology Inc.
+             physical id: 0
+             bus info: pci@0000:05:00.0
+             logical name: scsi0
+             version: 02
+             width: 32 bits
+             clock: 33MHz
+             capabilities: sata msi pm pciexpress ahci_1.0 bus_master cap_list rom emulated
+             configuration: driver=ahci latency=0
+             resources: irq:33 ioport:3020(size=8) ioport:3030(size=4) ioport:3028(size=8) ioport:3034(size=4) ioport:3000(size=32) memory:58310000-583101ff memory:58300000-5830ffff
+           *-disk
+                description: ATA Disk
+                product: Hoodisk SSD
+                physical id: 0.0.0
+                bus info: scsi@0:0.0.0
+                logical name: /dev/sda
+                version: 61A3
+                serial: 511190726282004960
+                size: 238GiB (256GB)
+                capabilities: gpt-1.00 partitioned partitioned:gpt
+                configuration: ansiversion=5 guid=a6d47f30-6592-4968-9947-3e3f9c030ad7 logicalsectorsize=512 sectorsize=512
+              *-volume:0
+                   description: Windows FAT volume
+                   vendor: mkfs.fat
+                   physical id: 1
+                   bus info: scsi@0:0.0.0,1
+                   logical name: /dev/sda1
+                   logical name: /boot/efi
+                   version: FAT32
+                   serial: 8255-e18e
+                   size: 298MiB
+                   capacity: 299MiB
+                   capabilities: boot fat initialized
+                   configuration: FATs=2 filesystem=fat label=EFI mount.fstype=vfat mount.options=rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro state=mounted
+              *-volume:1
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 2
+                   bus info: scsi@0:0.0.0,2
+                   logical name: /dev/sda2
+                   logical name: /boot
+                   version: 1.0
+                   serial: 3222f340-1d50-4766-bfb9-264ca89dddd5
+                   size: 1536MiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2020-03-04 15:26:29 filesystem=ext4 label=Boot lastmountpoint=/boot modified=2020-03-04 15:39:22 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-03-04 15:39:22 state=mounted
+              *-volume:2
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 3
+                   bus info: scsi@0:0.0.0,3
+                   logical name: /dev/sda3
+                   logical name: /
+                   version: 1.0
+                   serial: 2c78024f-8ab2-48ab-8a2e-32a809139414
+                   size: 15GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2020-03-04 15:26:30 filesystem=ext4 label=Roota lastmountpoint=/ modified=2020-03-04 15:39:19 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-03-04 15:39:20 state=mounted
+              *-volume:3
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 4
+                   bus info: scsi@0:0.0.0,4
+                   logical name: /dev/sda4
+                   version: 1.0
+                   serial: c614236f-77d1-4fb4-a092-7ead9f0b38aa
+                   size: 15GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink 64bit extents ext4 ext2 initialized
+                   configuration: created=2020-03-04 15:26:31 filesystem=ext4 label=Rootb modified=2020-03-04 15:26:31 state=clean
+              *-volume:4
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 5
+                   bus info: scsi@0:0.0.0,5
+                   logical name: /dev/sda5
+                   logical name: /data
+                   logical name: /opt
+                   logical name: /var
+                   logical name: /home
+                   logical name: /root
+                   version: 1.0
+                   serial: 5fedfaa1-7a4c-4969-af1f-09588d0b7399
+                   size: 185GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2020-03-04 15:26:31 filesystem=ext4 label=_dde_data lastmountpoint=/var modified=2020-03-04 15:39:22 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-03-04 15:39:22 state=mounted
+              *-volume:5
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 6
+                   bus info: scsi@0:0.0.0,6
+                   logical name: /dev/sda6
+                   logical name: /recovery
+                   version: 1.0
+                   serial: d5bd7015-2330-41dd-a03e-11df09ff35ec
+                   size: 10GiB
+                   capabilities: precious journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2020-03-04 15:26:35 filesystem=ext4 label=Backup lastmountpoint=/target/recovery modified=2020-03-04 15:39:22 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-03-04 15:39:22 state=mounted
+              *-volume:6
+                   description: Linux swap volume
+                   vendor: Linux
+                   physical id: 7
+                   bus info: scsi@0:0.0.0,7
+                   logical name: /dev/sda7
+                   version: 1
+                   serial: 27fcb912-43a7-4bcc-8a46-dbb8a6112391
+                   size: 10GiB
+                   capacity: 10GiB
+                   capabilities: nofs swap initialized
+                   configuration: filesystem=swap label=SWAP pagesize=4095
+     *-pci:5
+          description: PCI bridge
+          product: Cadence Design Systems, Inc.
+          vendor: Cadence Design Systems, Inc.
+          physical id: 5
+          bus info: pci@0000:00:05.0
+          version: 00
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci pm msi msix pciexpress normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: iomemory:100-ff irq:30 memory:1019400000-10197fffff memory:58400000-584fffff
+        *-usb
+             description: USB controller
+             product: uPD720201 USB 3.0 Host Controller
+             vendor: Renesas Technology Corp.
+             physical id: 0
+             bus info: pci@0000:06:00.0
+             version: 03
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi msix pciexpress xhci bus_master cap_list
+             configuration: driver=xhci_hcd latency=0
+             resources: irq:30 memory:58400000-58401fff
+           *-usbhost:0
+                product: xHCI Host Controller
+                vendor: Linux 4.19.0-arm64-desktop xhci-hcd
+                physical id: 0
+                bus info: usb@3
+                logical name: usb3
+                version: 4.19
+                capabilities: usb-2.00
+                configuration: driver=hub slots=4 speed=480Mbit/s
+              *-usb:0
+                   description: Bluetooth wireless interface
+                   product: Bluetooth Radio
+                   vendor: Realtek
+                   physical id: 2
+                   bus info: usb@3:2
+                   version: 1.10
+                   serial: 00e04c000001
+                   capabilities: bluetooth usb-1.10
+                   configuration: driver=btusb maxpower=500mA speed=12Mbit/s
+              *-usb:1
+                   description: Video
+                   product: Integrated Camera
+                   vendor: SunplusIT Inc
+                   physical id: 3
+                   bus info: usb@3:3
+                   version: 54.20
+                   capabilities: usb-2.01
+                   configuration: driver=uvcvideo maxpower=500mA speed=480Mbit/s
+              *-usb:2 UNCLAIMED
+                   description: Generic USB device
+                   product: FT9201Fingerprint.
+                   vendor: Focal-systems.Corp
+                   physical id: 4
+                   bus info: usb@3:4
+                   version: 1.00
+                   capabilities: usb-2.00
+                   configuration: maxpower=200mA speed=12Mbit/s
+           *-usbhost:1
+                product: xHCI Host Controller
+                vendor: Linux 4.19.0-arm64-desktop xhci-hcd
+                physical id: 1
+                bus info: usb@4
+                logical name: usb4
+                version: 4.19
+                capabilities: usb-3.00
+                configuration: driver=hub slots=4 speed=5000Mbit/s
+  *-power UNCLAIMED
+       description: Not specified
+       product: Not specified
+       vendor: Not specified
+       physical id: 1
+       version: Not specified
+       serial: Not specified
+       capacity: 32768mWh

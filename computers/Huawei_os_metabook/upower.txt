@@ -1,0 +1,60 @@
+Device: /org/freedesktop/UPower/devices/battery_Battery
+  native-path:          Battery
+  power supply:         yes
+  updated:              2020年03月04日 星期三 13时25分25秒 (5 seconds ago)
+  has history:          yes
+  has statistics:       yes
+  battery
+    present:             yes
+    rechargeable:        yes
+    state:               discharging
+    warning-level:       none
+    energy:              45.8553 Wh
+    energy-empty:        0 Wh
+    energy-full:         61.3645 Wh
+    energy-full-design:  56 Wh
+    energy-rate:         7.7264 W
+    voltage:             16.034 V
+    time to empty:       5.9 hours
+    percentage:          75%
+    temperature:         2.5 degrees C
+    capacity:            100%
+    technology:          lithium-ion
+    icon-name:          'battery-full-symbolic'
+  History (rate):
+    1583299525	7.726	unknown
+    1583299468	7.962	discharging
+
+Device: /org/freedesktop/UPower/devices/line_power_Mains
+  native-path:          Mains
+  power supply:         yes
+  updated:              2020年03月04日 星期三 11时07分20秒 (8290 seconds ago)
+  has history:          no
+  has statistics:       no
+  line-power
+    warning-level:       none
+    online:              no
+    icon-name:          'ac-adapter-symbolic'
+
+Device: /org/freedesktop/UPower/devices/DisplayDevice
+  power supply:         yes
+  updated:              2020年03月04日 星期三 13时25分25秒 (5 seconds ago)
+  has history:          no
+  has statistics:       no
+  battery
+    present:             yes
+    state:               discharging
+    warning-level:       none
+    energy:              45.8553 Wh
+    energy-full:         61.3645 Wh
+    energy-rate:         7.7264 W
+    time to empty:       5.9 hours
+    percentage:          75%
+    icon-name:          'battery-full-symbolic'
+
+Daemon:
+  daemon-version:  0.99.10
+  on-battery:      yes
+  lid-is-closed:   no
+  lid-is-present:  yes
+  critical-action: PowerOff

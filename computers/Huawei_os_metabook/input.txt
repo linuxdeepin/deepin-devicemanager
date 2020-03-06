@@ -1,0 +1,76 @@
+I: Bus=0019 Vendor=0000 Product=0000 Version=0000
+N: Name="hisi_gpio_key"
+P: Phys=
+S: Sysfs=/devices/platform/hisi_gpio_key/input/input0
+U: Uniq=
+H: Handlers=kbd event0 
+B: PROP=0
+B: EV=3
+B: KEY=c000000000000 0
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="hisi_on"
+P: Phys=hisi_on/input0
+S: Sysfs=/devices/platform/hisilicon-hisi-powerkey-ponkey/input/input1
+U: Uniq=
+H: Handlers=kbd event1 
+B: PROP=0
+B: EV=3
+B: KEY=10000000000000 0
+
+I: Bus=0018 Vendor=04f3 Product=30f5 Version=0100
+N: Name="clickpad_i2c 04F3:30F5 Touchpad"
+P: Phys=6-0015
+S: Sysfs=/devices/platform/amba/fa04e000.i2c/i2c-6/6-0015/0018:04F3:30F5.0001/input/input4
+U: Uniq=
+H: Handlers=event2 
+B: PROP=5
+B: EV=b
+B: KEY=e520 10000 0 0 0 0
+B: ABS=260800000000003
+
+I: Bus=0018 Vendor=14f3 Product=1400 Version=0100
+N: Name="ec_keyboard 14F3:1400"
+P: Phys=7-003a
+S: Sysfs=/devices/platform/amba/fa04f000.i2c/i2c-7/7-003a/0018:14F3:1400.0002/input/input5
+U: Uniq=
+H: Handlers=kbd leds event3 
+B: PROP=0
+B: EV=12001f
+B: KEY=3007f 0 0 483ffff17aff32d bf54444600000000 1 934c1b0b17c007 ffbe7bfad941dfff febeffdfffefffff fffffffffffffffe
+B: REL=40
+B: ABS=100000000
+B: MSC=10
+B: LED=1f
+
+I: Bus=0019 Vendor=0000 Product=0000 Version=0000
+N: Name="echub_lid"
+P: Phys=
+S: Sysfs=/devices/platform/echub_lid/input/input6
+U: Uniq=
+H: Handlers=event4 
+B: PROP=0
+B: EV=21
+B: SW=1
+
+I: Bus=0003 Vendor=05c8 Product=03d6 Version=0006
+N: Name="HD Camera: HD Camera"
+P: Phys=usb-xhci-hcd.0.auto-1.4/button
+S: Sysfs=/devices/platform/hisi_usb@f8480000/f8400000.dwc3/xhci-hcd.0.auto/usb1/1-1/1-1.4/1-1.4:1.0/input/input7
+U: Uniq=
+H: Handlers=kbd event5 
+B: PROP=0
+B: EV=3
+B: KEY=100000 0 0 0
+
+I: Bus=0000 Vendor=0000 Product=0000 Version=0000
+N: Name="hi3xxx_hi6405_card Headset Jack"
+P: Phys=ALSA
+S: Sysfs=/devices/platform/sound_hi6405/sound/card0/input8
+U: Uniq=
+H: Handlers=kbd event6 
+B: PROP=0
+B: EV=23
+B: KEY=40 0 0 0 0 0 0 100001000000000 c000000000000 0
+B: SW=2054
+
