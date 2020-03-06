@@ -1,0 +1,640 @@
+d11-pc
+    description: Desktop Computer
+    product: HUAWEI PGU-WBY0 (C233)
+    vendor: HUAWEI
+    version: D1020
+    serial: QLS0119B12000037
+    width: 64 bits
+    capabilities: smbios-3.1.1 dmi-3.1.1 smp
+    configuration: chassis=desktop family=HUAWEI sku=C233 uuid=16111920-1790-9CC8-FF81-9017C89CFF2F
+  *-core
+       description: Motherboard
+       product: HUAWEI PGU-WBY0-PCB
+       vendor: HUAWEI
+       physical id: 0
+       version: D1020
+       serial: 017DTX19B9900021
+       slot: Null
+     *-firmware
+          description: BIOS
+          vendor: Byosoft
+          physical id: 2
+          version: 1.00
+          date: 11/28/2019
+          size: 128KiB
+          capabilities: pci pnp upgrade shadowing cdboot bootselect edd acpi biosbootspecification uefi
+     *-cache:0
+          description: L1 cache
+          physical id: 5
+          slot: L1 Instruction Cache
+          size: 1536KiB
+          capacity: 1536KiB
+          capabilities: synchronous internal write-back instruction
+          configuration: level=1
+     *-cache:1
+          description: L1 cache
+          physical id: 6
+          slot: L1 Data Cache
+          size: 1536KiB
+          capacity: 1536KiB
+          capabilities: synchronous internal write-back data
+          configuration: level=1
+     *-cache:2
+          description: L2 cache
+          physical id: 7
+          slot: L2 Cache
+          size: 12MiB
+          capacity: 12MiB
+          capabilities: synchronous internal varies unified
+          configuration: level=2
+     *-cache:3
+          description: L3 cache
+          physical id: 8
+          slot: L3 Cache
+          size: 24MiB
+          capacity: 24MiB
+          capabilities: synchronous internal varies unified
+          configuration: level=3
+     *-cpu
+          description: CPU
+          product: ARM (NULL)
+          vendor: HISILICON
+          physical id: 9
+          bus info: cpu@0
+          version: HUAWEI Kunpeng 920 2426SK
+          serial: NULL
+          slot: CPU0
+          size: 1856MHz
+          capacity: 2600MHz
+          clock: 100MHz
+          capabilities: lm cpufreq
+          configuration: cores=24 enabledcores=24 threads=24
+     *-memory
+          description: System Memory
+          physical id: a
+          slot: System board or motherboard
+          size: 8GiB
+        *-bank:0
+             description: DIMM Synchronous [empty]
+             product: NO DIMM
+             vendor: NO DIMM
+             physical id: 0
+             serial: NO DIMM
+             slot: SODIMM_A
+        *-bank:1
+             description: DIMM DDR4 Synchronous 2666 MHz (0.4 ns)
+             product: RMSA3260KC78HAF-2666
+             vendor: Ramaxel
+             physical id: 1
+             serial: 124984067
+             slot: SODIMM_B
+             size: 8GiB
+             width: 64 bits
+             clock: 2666MHz (0.4ns)
+     *-pci:0
+          description: PCI bridge
+          product: HiSilicon PCIe Root Port with Gen4
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 100
+          bus info: pci@0000:00:00.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pciexpress msi pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:118 ioport:1000(size=4096) memory:e0c00000-e0dfffff ioport:80000000000(size=268435456)
+        *-display
+             description: VGA compatible controller
+             product: Oland [Radeon HD 8570 / R7 240/340 / R520 OEM]
+             vendor: Advanced Micro Devices, Inc. [AMD/ATI]
+             physical id: 0
+             bus info: pci@0000:01:00.0
+             version: 87
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm pciexpress msi vga_controller bus_master cap_list rom
+             configuration: driver=radeon latency=0
+             resources: iomemory:8000-7fff irq:277 memory:80000000000-8000fffffff memory:e0c00000-e0c3ffff ioport:1000(size=256) memory:e0c40000-e0c5ffff
+        *-multimedia
+             description: Audio device
+             product: Oland/Hainan/Cape Verde/Pitcairn HDMI Audio [Radeon HD 7000 Series]
+             vendor: Advanced Micro Devices, Inc. [AMD/ATI]
+             physical id: 0.1
+             bus info: pci@0000:01:00.1
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm pciexpress msi bus_master cap_list
+             configuration: driver=snd_hda_intel latency=0
+             resources: irq:352 memory:e0c60000-e0c63fff
+     *-pci:1
+          description: PCI bridge
+          product: HiSilicon PCIe Root Port with Gen4
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 101
+          bus info: pci@0000:00:08.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pciexpress msi pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:118 ioport:2000(size=4096) memory:e0e00000-e0ffffff ioport:80010000000(size=2097152)
+     *-pci:2
+          description: PCI bridge
+          product: HiSilicon PCIe Root Port with Gen4
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 102
+          bus info: pci@0000:00:0a.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pciexpress msi pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:118 ioport:3000(size=4096) memory:e1000000-e11fffff ioport:80010200000(size=2097152)
+        *-storage
+             description: Non-Volatile memory controller
+             product: NVMe SSD Controller SM981/PM981/PM983
+             vendor: Samsung Electronics Co Ltd
+             physical id: 0
+             bus info: pci@0000:03:00.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: storage pm msi pciexpress msix nvm_express bus_master cap_list
+             configuration: driver=nvme latency=0
+             resources: irq:118 memory:e1000000-e1003fff
+     *-pci:3
+          description: PCI bridge
+          product: HiSilicon PCIe Root Port with Gen4
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: c
+          bus info: pci@0000:00:0c.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pciexpress msi pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:118 ioport:4000(size=4096) memory:e0000000-e0bfffff ioport:80010400000(size=2097152)
+        *-network
+             description: Network controller
+             product: Huawei Technologies Co., Ltd.
+             vendor: Huawei Technologies Co., Ltd.
+             physical id: 0
+             bus info: pci@0000:04:00.0
+             version: 02
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi pciexpress bus_master cap_list
+             configuration: driver=hi110x_pci latency=0
+             resources: irq:118 memory:e0000000-e07fffff memory:e0800000-e0803fff
+     *-pci:4
+          description: PCI bridge
+          product: HiSilicon PCIe Root Port with Gen4
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: d
+          bus info: pci@0000:00:0d.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pciexpress msi pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:118 ioport:5000(size=4096) memory:e1200000-e13fffff ioport:80010600000(size=2097152)
+        *-usb
+             description: USB controller
+             product: uPD720202 USB 3.0 Host Controller
+             vendor: Renesas Technology Corp.
+             physical id: 0
+             bus info: pci@0000:05:00.0
+             version: 02
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi msix pciexpress xhci bus_master cap_list
+             configuration: driver=xhci_hcd latency=0
+             resources: irq:118 memory:e1200000-e1201fff
+           *-usbhost:0
+                product: xHCI Host Controller
+                vendor: Linux 4.19.34-2-arm64-974deepin-generic xhci-hcd
+                physical id: 0
+                bus info: usb@2
+                logical name: usb2
+                version: 4.19
+                capabilities: usb-2.00
+                configuration: driver=hub slots=2 speed=480Mbit/s
+              *-usb:0
+                   description: USB hub
+                   product: 4-Port USB 2.1 Hub
+                   vendor: Generic
+                   physical id: 1
+                   bus info: usb@2:1
+                   version: 1.01
+                   capabilities: usb-2.10
+                   configuration: driver=hub slots=4 speed=480Mbit/s
+              *-usb:1 UNCLAIMED
+                   description: Communication device
+                   product: Goodix Fingerprint Device
+                   vendor: Shenzhen Goodix Technology Co.,Ltd.
+                   physical id: 2
+                   bus info: usb@2:2
+                   version: 2.00
+                   capabilities: usb-2.00
+                   configuration: maxpower=100mA speed=12Mbit/s
+           *-usbhost:1
+                product: xHCI Host Controller
+                vendor: Linux 4.19.34-2-arm64-974deepin-generic xhci-hcd
+                physical id: 1
+                bus info: usb@3
+                logical name: usb3
+                version: 4.19
+                capabilities: usb-3.00
+                configuration: driver=hub slots=2 speed=5000Mbit/s
+              *-usb
+                   description: USB hub
+                   product: 4-Port USB 3.1 Hub
+                   vendor: Generic
+                   physical id: 1
+                   bus info: usb@3:1
+                   version: 1.01
+                   capabilities: usb-3.10
+                   configuration: driver=hub slots=4 speed=5000Mbit/s
+                 *-usb
+                      description: Mass storage device
+                      product: DataTraveler 3.0
+                      vendor: Kingston
+                      physical id: 1
+                      bus info: usb@3:1.1
+                      logical name: scsi4
+                      version: 1.10
+                      serial: 60A44C425091E2B17987D0C7
+                      capabilities: usb-3.10 scsi emulated scsi-host
+                      configuration: driver=usb-storage maxpower=504mA speed=5000Mbit/s
+                    *-disk
+                         description: SCSI Disk
+                         product: DataTraveler 3.0
+                         vendor: Kingston
+                         physical id: 0.0.0
+                         bus info: scsi@4:0.0.0
+                         logical name: /dev/sda
+                         version: PMAP
+                         serial: 6E02AB4147C9
+                         size: 28GiB (31GB)
+                         capabilities: removable
+                         configuration: ansiversion=6 logicalsectorsize=512 sectorsize=512
+                       *-medium
+                            physical id: 0
+                            logical name: /dev/sda
+                            size: 28GiB (31GB)
+                            capabilities: partitioned partitioned:dos
+                          *-volume
+                               description: Windows FAT volume
+                               vendor: SYSLINUX
+                               physical id: 1
+                               logical name: /dev/sda1
+                               logical name: /media/d11/UOS
+                               version: FAT32
+                               serial: 0000-0000
+                               size: 28GiB
+                               capacity: 28GiB
+                               capabilities: primary bootable fat initialized
+                               configuration: FATs=2 filesystem=fat label=UOS mount.fstype=vfat mount.options=rw,nosuid,nodev,relatime,uid=1000,gid=1000,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,showexec,utf8,flush,errors=remount-ro state=mounted
+     *-pci:5
+          description: PCI bridge
+          product: HiSilicon PCIe Root Port with Gen4
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: e
+          bus info: pci@0000:00:0e.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pciexpress msi pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:118 ioport:6000(size=4096) memory:e1400000-e15fffff ioport:80010800000(size=2097152)
+     *-pci:6
+          description: PCI bridge
+          product: HiSilicon PCIe Root Port with Gen4
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: f
+          bus info: pci@0000:00:0f.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pciexpress msi pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:118 ioport:7000(size=4096) memory:e1600000-e17fffff ioport:80010a00000(size=2097152)
+     *-pci:7
+          description: PCI bridge
+          product: HiSilicon PCIe Root Port with Gen4
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 12
+          bus info: pci@0000:00:12.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pciexpress msi pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:118 ioport:8000(size=4096) memory:e1800000-e19fffff ioport:80010c00000(size=2097152)
+     *-pci:8
+          description: PCI bridge
+          product: HiSilicon PCI-PCI Bridge
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 103
+          bus info: pci@0000:74:00.0
+          version: 20
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci pciexpress pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: iomemory:1010-100f irq:0 ioport:141000000(size=8388608)
+        *-generic UNCLAIMED
+             description: Processing accelerators
+             product: HiSilicon ZIP Engine
+             vendor: Huawei Technologies Co., Ltd.
+             physical id: 0
+             bus info: pci@0000:75:00.0
+             version: 21
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pciexpress msi pm cap_list
+             configuration: latency=0
+             resources: iomemory:10-f memory:141000000-1413fffff memory:141400000-1417effff
+     *-pci:9
+          description: PCI bridge
+          product: HiSilicon PCI-PCI Bridge
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 104
+          bus info: pci@0000:74:01.0
+          version: 20
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci pciexpress pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: iomemory:1010-100f irq:0 ioport:141800000(size=8388608)
+        *-generic UNCLAIMED
+             description: Network and computing encryption device
+             product: HiSilicon SEC Engine
+             vendor: Huawei Technologies Co., Ltd.
+             physical id: 0
+             bus info: pci@0000:76:00.0
+             version: 21
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pciexpress msi pm cap_list
+             configuration: latency=0
+             resources: iomemory:10-f memory:141800000-141bfffff memory:141c00000-141feffff
+     *-sas:0
+          description: Serial Attached SCSI controller
+          product: HiSilicon SAS 3.0 HBA
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: b
+          bus info: pci@0000:74:02.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: sas pciexpress msi pm bus_master cap_list
+          configuration: driver=hisi_sas_v3_hw latency=0
+          resources: irq:287 memory:a2000000-a2007fff
+     *-sata
+          description: SATA controller
+          product: HiSilicon AHCI HBA
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 3
+          bus info: pci@0000:74:03.0
+          logical name: scsi1
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: sata pciexpress msi pm ahci_1.0 bus_master cap_list emulated
+          configuration: driver=ahci latency=0
+          resources: irq:121 memory:a2010000-a2010fff
+        *-cdrom
+             description: DVD writer
+             product: DVD A  DU8AESH
+             vendor: Slimtype
+             physical id: 0.0.0
+             bus info: scsi@1:0.0.0
+             logical name: /dev/cdrom
+             logical name: /dev/cdrw
+             logical name: /dev/dvd
+             logical name: /dev/dvdrw
+             logical name: /dev/sr0
+             logical name: /media/d11/2020-01-20-03-29-12-00
+             version: 6C2M
+             capabilities: removable audio cd-r cd-rw dvd dvd-r
+             configuration: ansiversion=5 mount.fstype=iso9660 mount.options=ro,nosuid,nodev,relatime,nojoliet,check=s,map=n,blocksize=2048,uid=1000,gid=1000,dmode=500,fmode=400 state=mounted status=ready
+           *-medium
+                physical id: 0
+                logical name: /dev/cdrom
+                logical name: /media/d11/2020-01-20-03-29-12-00
+                configuration: mount.fstype=iso9660 mount.options=ro,nosuid,nodev,relatime,nojoliet,check=s,map=n,blocksize=2048,uid=1000,gid=1000,dmode=500,fmode=400 state=mounted
+     *-sas:1
+          description: Serial Attached SCSI controller
+          product: HiSilicon SAS 3.0 HBA
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 4
+          bus info: pci@0000:74:04.0
+          version: 21
+          width: 32 bits
+          clock: 33MHz
+          capabilities: sas pciexpress msi pm bus_master cap_list
+          configuration: driver=hisi_sas_v3_hw latency=0
+          resources: irq:319 memory:a2008000-a200ffff
+     *-pci:10
+          description: PCI bridge
+          product: HiSilicon PCI-PCI Bridge
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 105
+          bus info: pci@0000:78:00.0
+          version: 20
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci pciexpress pm normal_decode cap_list
+          configuration: driver=pcieport
+          resources: irq:0 ioport:208000000(size=8388608)
+        *-generic UNCLAIMED
+             description: Network and computing encryption device
+             product: HiSilicon HPRE Engine
+             vendor: Huawei Technologies Co., Ltd.
+             physical id: 0
+             bus info: pci@0000:79:00.0
+             version: 21
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pciexpress msi pm cap_list
+             configuration: latency=0
+             resources: iomemory:20-1f memory:208000000-2083fffff memory:208400000-2087effff
+     *-raid UNCLAIMED
+          description: RAID bus controller
+          product: HiSilicon RDE Engine
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 10
+          bus info: pci@0000:78:01.0
+          version: 21
+          width: 64 bits
+          clock: 33MHz
+          capabilities: raid pciexpress msi pm cap_list
+          configuration: latency=0
+          resources: iomemory:20-1f memory:208800000-208bfffff
+     *-usb:0 UNCLAIMED
+          description: USB controller
+          product: HiSilicon USB 1.1 Host Controller
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 11
+          bus info: pci@0000:7a:00.0
+          version: 21
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pciexpress msi pm ohci cap_list
+          configuration: latency=0
+          resources: iomemory:20-1f memory:20c100000-20c100fff
+     *-usb:1
+          description: USB controller
+          product: HiSilicon USB 2.0 2-port Host Controller
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 1
+          bus info: pci@0000:7a:01.0
+          version: 21
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pciexpress msi pm ehci bus_master cap_list
+          configuration: driver=ehci-pci latency=0
+          resources: iomemory:20-1f irq:118 memory:20c101000-20c101fff
+        *-usbhost
+             product: EHCI Host Controller
+             vendor: Linux 4.19.34-2-arm64-974deepin-generic ehci_hcd
+             physical id: 1
+             bus info: usb@1
+             logical name: usb1
+             version: 4.19
+             capabilities: usb-2.00
+             configuration: driver=hub slots=2 speed=480Mbit/s
+           *-usb
+                description: Audio device
+                product: USB Audio
+                vendor: Generic
+                physical id: 1
+                bus info: usb@1:1
+                version: 9.06
+                capabilities: usb-2.00 audio-control
+                configuration: driver=usbhid maxpower=100mA speed=480Mbit/s
+     *-usb:2
+          description: USB controller
+          product: HiSilicon USB 3.0 Host Controller
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 13
+          bus info: pci@0000:7a:02.0
+          version: 21
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pciexpress msi pm xhci bus_master cap_list
+          configuration: driver=xhci_hcd latency=0
+          resources: iomemory:20-1f irq:286 memory:20c000000-20c0fffff
+        *-usbhost:0
+             product: xHCI Host Controller
+             vendor: Linux 4.19.34-2-arm64-974deepin-generic xhci-hcd
+             physical id: 0
+             bus info: usb@4
+             logical name: usb4
+             version: 4.19
+             capabilities: usb-2.00
+             configuration: driver=hub slots=1 speed=480Mbit/s
+           *-usb
+                description: USB hub
+                product: 4-Port USB 2.1 Hub
+                vendor: Generic
+                physical id: 1
+                bus info: usb@4:1
+                version: 1.01
+                capabilities: usb-2.10
+                configuration: driver=hub slots=4 speed=480Mbit/s
+              *-usb:0
+                   description: Mouse
+                   product: USB OPTICAL MOUSE
+                   physical id: 1
+                   bus info: usb@4:1.1
+                   version: 1.00
+                   capabilities: usb-1.10
+                   configuration: driver=usbhid maxpower=100mA speed=2Mbit/s
+              *-usb:1
+                   description: Keyboard
+                   product: USB Keyboard
+                   vendor: USB Keyboard
+                   physical id: 2
+                   bus info: usb@4:1.2
+                   version: 1.08
+                   capabilities: usb-1.10
+                   configuration: driver=usbhid maxpower=250mA speed=12Mbit/s
+        *-usbhost:1
+             product: xHCI Host Controller
+             vendor: Linux 4.19.34-2-arm64-974deepin-generic xhci-hcd
+             physical id: 1
+             bus info: usb@5
+             logical name: usb5
+             version: 4.19
+             capabilities: usb-3.00
+             configuration: driver=hub slots=1 speed=5000Mbit/s
+           *-usb
+                description: USB hub
+                product: 4-Port USB 3.1 Hub
+                vendor: Generic
+                physical id: 1
+                bus info: usb@5:1
+                version: 1.01
+                capabilities: usb-3.10
+                configuration: driver=hub slots=4 speed=5000Mbit/s
+     *-generic UNCLAIMED
+          description: System peripheral
+          product: HiSilicon Embedded DMA Engine
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 14
+          bus info: pci@0000:7b:00.0
+          version: 21
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pciexpress msi pm cap_list
+          configuration: latency=0
+          resources: iomemory:10-f memory:148800000-148803fff
+     *-pci:11
+          description: PCI bridge
+          product: HiSilicon PCI-PCI Bridge
+          vendor: Huawei Technologies Co., Ltd.
+          physical id: 0
+          bus info: pci@0000:7c:00.0
+          version: 20
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci pciexpress pm normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: iomemory:1010-100f irq:0 ioport:120000000(size=2097152)
+        *-network
+             description: Ethernet interface
+             product: HNS GE/10GE/25GE RDMA Network Controller
+             vendor: Huawei Technologies Co., Ltd.
+             physical id: 0
+             bus info: pci@0000:7d:00.0
+             logical name: enp125s0f0
+             version: 21
+             serial: 90:17:c8:9c:ff:52
+             capacity: 1Gbit/s
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pciexpress msix pm bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+             configuration: autonegotiation=on broadcast=yes driver=hns3 driverversion=hns3-for-s4 firmware=1.8.15.0 latency=0 link=no multicast=yes port=MII
+             resources: iomemory:10-f iomemory:10-f irq:0 memory:120100000-12010ffff memory:120000000-1200fffff
+     *-pnp00:00
+          product: PnP device PNP0501
+          physical id: 15
+          capabilities: pnp
+          configuration: driver=serial
+  *-network:0 DISABLED
+       description: Wireless interface
+       physical id: 1
+       logical name: p2p0
+       serial: 92:17:c8:9c:ff:81
+       capabilities: ethernet physical wireless
+       configuration: broadcast=yes multicast=yes wireless=IEEE 802.11
+  *-network:1
+       description: Wireless interface
+       physical id: 2
+       logical name: wlan0
+       serial: 90:17:c8:9c:ff:81
+       capabilities: ethernet physical wireless
+       configuration: broadcast=yes ip=192.168.1.6 multicast=yes wireless=IEEE 802.11

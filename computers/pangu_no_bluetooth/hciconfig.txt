@@ -1,0 +1,17 @@
+hci0:	Type: Primary  Bus: UART
+	BD Address: 90:17:C8:9C:FF:2F  ACL MTU: 1021:7  SCO MTU: 255:4
+	UP RUNNING PSCAN ISCAN 
+	RX bytes:1744 acl:0 sco:0 events:64 errors:0
+	TX bytes:3342 acl:0 sco:0 commands:64 errors:0
+	Features: 0xbf 0xfe 0x4d 0xfe 0xdb 0xff 0x5b 0x87
+	Packet type: DM1 DM3 DM5 DH1 DH3 DH5 HV1 HV2 HV3 
+	Link policy: RSWITCH SNIFF 
+	Link mode: SLAVE ACCEPT 
+	Name: 'd11-PC'
+	Class: 0x0c0104
+	Service Classes: Rendering, Capturing
+	Device Class: Computer, Desktop workstation
+	HCI Version:  (0xa)  Revision: 0x1317
+	LMP Version:  (0xa)  Subversion: 0x1317
+	Manufacturer: HiSilicon Technologies Co., Ltd. (271)
+
