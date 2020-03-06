@@ -370,27 +370,21 @@ void MonitorWidget::checkCurResuloution(ArticleStruct &curResolution,const QStri
     if (xrandr.isEmpty()) {
         return;
     }
-    QString curScreen;
-    //find first connected,maybe error if multiple monitors are found by xrandr
-    foreach (auto it,xrandr.keys()) {
-        if (it.contains("disconnected",Qt::CaseInsensitive) == false) {
-            curScreen = it;
-            break;
-        }
-    }
-    auto curResolutionDescription = xrandr.value(curScreen).value("current");
-    if (curResolution.isValid() == false) {
-       curResolution.queryData("hwinfo", monitor, "Current Resolution");
-    }
-    curResolution.value = curResolutionDescription.remove(QRegExp("\\s"));
-    if (curResolution.value.contains("@")) {
+    auto xrandrCurReolution = xrandr.value("Screen 0").value("current");
+
+    curResolution.value = xrandrCurReolution.remove(QRegExp("\\s"));
+    curResolution.queryData("hwinfo", monitor, "Current Resolution");
+
+    if (curResolution.value.contains("@") || curResolution.isValid() == false) {
         return;
     }
     QString resolutionListDescrition = DeviceInfoParser::Instance().toolDatabase_.value("hwinfo").value(monitor).value("Support Resolution");
-    if (resolutionListDescrition.isEmpty()) {
-        return;
-    }
+
     QStringList resolutionList = resolutionListDescrition.split(",",QString::SkipEmptyParts);
+
+    if (resolutionList.size() == 1) {
+        curResolution.value = resolutionList.first().remove(QRegExp("\\s"));
+    }
     foreach (auto supportResolution, resolutionList) {
         supportResolution.remove(QRegExp("\\s"));
         if (supportResolution.startsWith(curResolution.value,Qt::CaseSensitive)) {
