@@ -254,6 +254,7 @@ void DiskWidget::initWidget()
                     searched_nvme_index ++;
 
                     if (searched_nvme_index == expect_nvme_index) {
+                        expect_nvme_index ++;
                         sizeStr = DeviceInfoParser::Instance().toolDatabase_.value("lsblk").value(diskName).value("size");
                         mediaTypeStr = "SSD";
                     }
