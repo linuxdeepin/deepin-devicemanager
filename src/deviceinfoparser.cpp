@@ -384,14 +384,15 @@ QMap<QString,QMap<QString,QString>> DeviceInfoParser::getLshwMeoryList()
     return memorys;
 }
 
-//according to lshw webpage,*-storage indicates storage controller,not real storage device
+//according to lshw webpage,*-storage indicates storage controller,not real storage device,
+//but real device should has same attribute with the controller,such as prodcut,vender
 QStringList DeviceInfoParser::getLshwDiskNameList()
 {
     checkValueFun_t func = [](const QString& fk)->bool
     {
         int index = fk.lastIndexOf("disk");
 
-        if((index > 0 && fk.size() - index < 7 ))    //avoid disk_volume:0
+        if((index > 0 && fk.size() - index < 7 ) || fk.contains("storage"))
         {
             DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
@@ -404,7 +405,6 @@ QStringList DeviceInfoParser::getLshwDiskNameList()
 
     return diskList;
 }
-
 
 QStringList DeviceInfoParser::getLshwDiaplayadapterList()
 {
