@@ -49,7 +49,26 @@ void DiskWidget::initWidget()
     int i = 0;
     foreach(const QString& disk, diskList)
     {
-        QString logicalName = DeviceInfoParser::Instance().queryData("lshw", disk, "logical name");
+        bool isNvmeDisk = false;
+        QString logicalName;
+        if (disk.contains("storage",Qt::CaseInsensitive) == false) {
+            logicalName = DeviceInfoParser::Instance().queryData("lshw", disk, "logical name");
+        }
+        else
+        {
+            int searched_nvme_index = 0;
+            foreach (QString diskName,lsblkList) {
+                isNvmeDisk = diskName.contains("nvme",Qt::CaseInsensitive);
+                if (isNvmeDisk) {
+                    searched_nvme_index ++;
+                    if (searched_nvme_index == expect_nvme_index) { //if ture, the diskName is corresponding lsblk key ,also smartctl db key
+                        expect_nvme_index ++;
+                        logicalName = QString("/dev/%1").arg(diskName);
+                        break;
+                    }
+                }
+            }
+        }
 
         QString modelStr = DeviceInfoParser::Instance().queryData("lshw", disk, "product");
         QString vendorStr = DeviceInfoParser::Instance().queryData("lshw", disk, "vendor");
@@ -246,26 +265,42 @@ void DiskWidget::initWidget()
 
         addDevice( model.value, articles, diskList.size() );
 
-        QStringList tab ;
-        if (disk.contains("storage")) {
-            int searched_nvme_index = 0;
-            foreach (QString diskName,lsblkList) {
-                if (diskName.contains("nvme",Qt::CaseInsensitive)) {
-                    searched_nvme_index ++;
 
-                    if (searched_nvme_index == expect_nvme_index) {
-                        expect_nvme_index ++;
-                        sizeStr = DeviceInfoParser::Instance().toolDatabase_.value("lsblk").value(diskName).value("size");
-                        mediaTypeStr = "SSD";
+        if (isNvmeDisk) {
+
+            auto  &db = DeviceInfoParser::Instance().toolDatabase_;
+            QString logicalName_ = logicalName;
+            sizeStr = db.value("lsblk").value(logicalName_.remove("/dev/")).value("size");
+            sizeStr.replace(QRegExp("(G|g)(B|b){0,1}"),"GB");
+
+            mediaTypeStr = "SSD";
+            if (db.value("smartctl").value(logicalName).value("Rotation Rate").contains("rpm",Qt::CaseInsensitive))
+            {
+                mediaTypeStr = "HDD";
+            }
+            if (db.value("smartctl").value(logicalName).value("Model Family").contains("HHD",Qt::CaseInsensitive))
+            {
+                mediaTypeStr = "HHD";
+            }
+            if (db.value("smartctl").value(logicalName).value("Model Family").contains("HDD",Qt::CaseInsensitive))
+            {
+                mediaTypeStr = "HDD";
+            }
+            //try to get nvme disk total size
+            QString totalNVMSize = db.value("smartctl").value(logicalName).value("Total NVM Capacity");
+            if (totalNVMSize.isEmpty() == false) {
+                QRegExp rx("^(.*)\\[(.*GB)\\]$");
+                QStringList capTexts ;
+                if (rx.exactMatch(totalNVMSize)) {
+                    capTexts = rx.capturedTexts();
+                    if (capTexts.isEmpty() == false) {
+                        sizeStr += QString(" (%1)").arg(capTexts.back());
                     }
-
                 }
             }
-        }
+         }
 
-        tab << modelStr << vendor.value <<  mediaTypeStr << sizeStr;
-
-        tabList.push_back(tab);
+        tabList.push_back({ modelStr,vendor.value,mediaTypeStr,sizeStr });
 
         if( i == 0)
         {

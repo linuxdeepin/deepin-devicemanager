@@ -392,10 +392,18 @@ QStringList DeviceInfoParser::getLshwDiskNameList()
     {
         int index = fk.lastIndexOf("disk");
 
-        if((index > 0 && fk.size() - index < 7 ) || fk.contains("storage"))
+        if((index > 0 && fk.size() - index < 7 ))
         {
             DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
+        }
+        if (fk.contains("storage",Qt::CaseInsensitive)) {
+            if (DeviceInfoParser::Instance().toolDatabase_.value("lshw").value(fk).value("product").contains("nvme",Qt::CaseInsensitive)) {
+                return  true;
+            }
+            if (DeviceInfoParser::Instance().toolDatabase_.value("lshw").value(fk).value("configuration").contains("nvme",Qt::CaseInsensitive)) {
+                return  true;
+            }
         }
 
         return false;
