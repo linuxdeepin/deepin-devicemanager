@@ -62,12 +62,15 @@ const int TableViewRowHeight_ = 36;
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_loongson_memory";
 //const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo_chuangzhicheng_cpu_zero";
 
-//const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo-3A4000";
+const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/loongson_unknown_nvme_";
+//const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/Meegopad_T02"; //bluetooth info
+//const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceinfo_haikangweishi";
+
 //deviceInfo_bug_12495;dmidecode has no memory device
 //4Good_GM600;memory has bank
 //LENOVO_ThinkCentre M910t-N000_4 //test case like *-class UNCLAIMED in lshw
 //CF420Z deviceinfo  longxin_hardware m630  t630 ;disk bug
 //test_monitor_refresh_rate,only xrandr.txt and hwinfo.txt come from the target computer
 //const QString DEVICEINFO_PATH = "/dde_devicemanager/computers/test_monitor_refresh_rate";
-
+//const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/loongson_unknown_nvme_";
 //#define TEST_DATA_FROM_FILE
