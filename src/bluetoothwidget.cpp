@@ -35,14 +35,18 @@ BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
 void BluetoothWidget::initWidget()
 {
     QStringList bluetoothList = DeviceInfoParser::Instance().getLshwBluetoothList();
-
-    if( bluetoothList.size() < 1 )
-    {
+    QStringList hciconfigBluetoothList = DeviceInfoParser::Instance().getHciconfigBluetoothControllerList();
+    if (hciconfigBluetoothList.isEmpty()) {
         setCentralInfo(tr("No Bluetooth device found"));
         return;
     }
 
-    QStringList hciconfigBluetoothList = DeviceInfoParser::Instance().getHciconfigBluetoothControllerList();
+    if (bluetoothList.isEmpty()) {
+        for (int i = 0;i < hciconfigBluetoothList.count();i++) {
+            bluetoothList.push_back(QString(""));
+        }
+    }
+
     QStringList pairedDevicesList /*= DeviceInfoParser::Instance().getOtherBluetoothctlPairedDevicesList()*/;
     int connectedDeviceNumber = DeviceInfoParser::Instance().getOtherBluetoothctlPairedAndConnectedDevicesList().size();
     QList<QStringList> tabList;
