@@ -42,6 +42,7 @@ DPalette ColumnWidget::paNormal_;
 ColumnLabel::ColumnLabel(const QString& text, ColumnWidget* parent): DLabel(text, parent),columnWidget_(parent)
 {
 
+
 }
 
 //void ColumnLabel::mousePressEvent(QMouseEvent *event)
