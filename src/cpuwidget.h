@@ -36,4 +36,4 @@ public:
 private:
     QString speed_;
 };
-const QString getTrNumber(unsigned int i);
+const QString getTrNumber(int i);

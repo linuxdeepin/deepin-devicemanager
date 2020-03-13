@@ -305,7 +305,7 @@ void CpuWidget::initWidget()
     }
 }
 
-const QString getTrNumber(unsigned int i)
+const QString getTrNumber( int i)
 {
     static const  QStringList trNumbers = {
              QObject::tr("One"                         ),

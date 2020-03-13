@@ -104,6 +104,7 @@ void DiskWidget::initWidget()
         existArticles.insert("vendor");
 
         ArticleStruct mediaType(tr("Media Type","stroage info"));
+        //firstly,try to get media type from smartctl
         if( DeviceInfoParser::Instance().isToolSuccess("smartctl") )
         {
             QString rotationRate = DeviceInfoParser::Instance().queryData("smartctl", logicalName, "Rotation Rate");
@@ -121,6 +122,65 @@ void DiskWidget::initWidget()
                 }
             }
         }
+        //secondly, try to get media type from lshw
+        if(mediaTypeStr == "Unknown")
+        {
+            if (disk.contains("usb",Qt::CaseInsensitive)) {
+                 mediaTypeStr = " USB disk";
+            }
+            else
+            {
+                QString curKey = disk;
+                QString parentKey = curKey.mid(0,curKey.lastIndexOf("_"));
+                auto &parent_dev = DeviceInfoParser::Instance().toolDatabase_.value("lshw").value(parentKey);
+                if (parentKey.endsWith("core") == false) {
+                    if(parent_dev.value("configuration").contains("usb")) {
+                         mediaTypeStr = " USB disk";
+                    }
+                    if(parent_dev.value("bus info").contains("usb")) {
+                         mediaTypeStr = " USB disk";
+                    }
+                }
+            }
+        }
+        //thirdly, try to get media type if media type is unknown, and try to get nvme disk size
+        if (isNvmeDisk) {
+            auto  &db = DeviceInfoParser::Instance().toolDatabase_;
+            QString logicalName_ = logicalName;
+            if (mediaTypeStr == "Unknown") {
+                if (db.value("smartctl").value(logicalName).value("Rotation Rate").contains("rpm",Qt::CaseInsensitive))
+                {
+                    mediaTypeStr = "HDD";
+                }
+                if (db.value("smartctl").value(logicalName).value("Model Family").contains("HHD",Qt::CaseInsensitive))
+                {
+                    mediaTypeStr = "HHD";
+                }
+                if (db.value("smartctl").value(logicalName).value("Model Family").contains("HDD",Qt::CaseInsensitive))
+                {
+                    mediaTypeStr= "HDD";
+                }
+            }
+            //get nvme disk used size
+            sizeStr = db.value("lsblk").value(logicalName_.remove("/dev/")).value("size");
+            sizeStr.replace(QRegExp("(G|g)(B|b){0,1}"),"GB");
+
+            //try to get nvme disk total size
+            QString totalNVMSize = db.value("smartctl").value(logicalName).value("Total NVM Capacity");
+            if (totalNVMSize.isEmpty() == false) {
+                QRegExp rx("^(.*)\\[(.*GB)\\]$");
+                QStringList capTexts ;
+                if (rx.exactMatch(totalNVMSize)) {
+                    capTexts = rx.capturedTexts();
+                    if (capTexts.isEmpty() == false) {
+                        sizeStr += QString(" (%1)").arg(capTexts.last());
+                    }
+                }
+            }
+         }
+        mediaType.value = mediaTypeStr;
+        articles.push_back(mediaType);
+
 
         ArticleStruct interface(tr("Interface","stroage info"));
         QStringList lst = disk.split("_");
@@ -129,13 +189,6 @@ void DiskWidget::initWidget()
         {
             interface.value = lst.at(lst.size() -2);
         }
-
-        if(mediaTypeStr == "Unknown" && interface.value.compare("usb", Qt::CaseInsensitive) == 0)
-        {
-            mediaTypeStr = " USB disk";
-        }
-        mediaType.value = mediaTypeStr;
-        articles.push_back(mediaType);
 
         ArticleStruct size(tr("Size","stroage info"));
         size.value = sizeStr;
@@ -181,8 +234,6 @@ void DiskWidget::initWidget()
                 interface.value = sataVersion.mid(0, index);
                 interface.value = interface.value.trimmed();
             }
-
-
             articles.push_back(interface);
             existArticles.insert("SATA Version");
 
@@ -264,43 +315,7 @@ void DiskWidget::initWidget()
         }
 
         addDevice( model.value, articles, diskList.size() );
-
-
-        if (isNvmeDisk) {
-
-            auto  &db = DeviceInfoParser::Instance().toolDatabase_;
-            QString logicalName_ = logicalName;
-            sizeStr = db.value("lsblk").value(logicalName_.remove("/dev/")).value("size");
-            sizeStr.replace(QRegExp("(G|g)(B|b){0,1}"),"GB");
-
-            mediaTypeStr = "SSD";
-            if (db.value("smartctl").value(logicalName).value("Rotation Rate").contains("rpm",Qt::CaseInsensitive))
-            {
-                mediaTypeStr = "HDD";
-            }
-            if (db.value("smartctl").value(logicalName).value("Model Family").contains("HHD",Qt::CaseInsensitive))
-            {
-                mediaTypeStr = "HHD";
-            }
-            if (db.value("smartctl").value(logicalName).value("Model Family").contains("HDD",Qt::CaseInsensitive))
-            {
-                mediaTypeStr = "HDD";
-            }
-            //try to get nvme disk total size
-            QString totalNVMSize = db.value("smartctl").value(logicalName).value("Total NVM Capacity");
-            if (totalNVMSize.isEmpty() == false) {
-                QRegExp rx("^(.*)\\[(.*GB)\\]$");
-                QStringList capTexts ;
-                if (rx.exactMatch(totalNVMSize)) {
-                    capTexts = rx.capturedTexts();
-                    if (capTexts.isEmpty() == false) {
-                        sizeStr += QString(" (%1)").arg(capTexts.back());
-                    }
-                }
-            }
-         }
-
-        tabList.push_back({ modelStr,vendor.value,mediaTypeStr,sizeStr });
+        tabList.push_back({ modelStr,vendor.value,mediaType.value,sizeStr });
 
         if( i == 0)
         {
