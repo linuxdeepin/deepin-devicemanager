@@ -698,6 +698,10 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                 {
                     return false;
                 }
+                if ( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("Disk", Qt::CaseInsensitive) )
+                {
+                    return false;
+                }
             }
 
             if(true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("product"))
@@ -713,6 +717,10 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                 }
 
                 if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("USB hub", Qt::CaseInsensitive) )
+                {
+                    return false;
+                }
+                if( DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("", Qt::CaseInsensitive) )
                 {
                     return false;
                 }
@@ -1178,6 +1186,11 @@ QStringList DeviceInfoParser::getLshwCDRomList()
 
     foreach(const QString& fk, toolDatabaseSecondOrder_["lshw"] )
     {
+//        if(fk.contains("medium"))
+//        {
+//            continue;
+
+//        }
         if(fk.contains("cdrom"))
         {
             cdromList.push_back(fk);
