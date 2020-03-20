@@ -55,15 +55,16 @@ void MemoryWidget::initWidget()
             foreach (auto key, ptr.value().keys()) {
                 ArticleStruct art(key);
                 art.value = ptr.value().value(key);
-                if (key == QString("size")) {
-                    overviewInfo_.value += overviewInfo_.value.isEmpty() ? "" : " /";
-                    overviewInfo_.value += art.value;
-                }
+
                 art.value.replace(QRegExp("TiB"), "TB");
                 art.value.replace(QRegExp("GiB"), "GB");
                 art.value.replace(QRegExp("MiB"), "MB");
                 art.value.replace(QRegExp("KiB"), "KB");
 
+                if (key == QString("size")) {
+                    overviewInfo_.value += overviewInfo_.value.isEmpty() ? "" : " /";
+                    overviewInfo_.value += art.value;
+                }
                 articles.append(art);
             }
             QString title = tr("Memory");
