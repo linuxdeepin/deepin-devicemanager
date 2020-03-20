@@ -23,6 +23,7 @@
 #include "diskwidget.h"
 #include "deviceinfoparser.h"
 #include <DApplication>
+//#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 
@@ -61,7 +62,8 @@ void DiskWidget::initWidget()
                 isNvmeDisk = diskName.contains("nvme",Qt::CaseInsensitive);
                 if (isNvmeDisk) {
                     searched_nvme_index ++;
-                    if (searched_nvme_index == expect_nvme_index) { //if ture, the diskName is corresponding lsblk key ,also smartctl db key
+                    if (searched_nvme_index == expect_nvme_index) {
+                        //if ture, the diskName is corresponding lsblk key ,also smartctl db key
                         expect_nvme_index ++;
                         logicalName = QString("/dev/%1").arg(diskName);
                         break;
@@ -74,7 +76,16 @@ void DiskWidget::initWidget()
         QString vendorStr = DeviceInfoParser::Instance().queryData("lshw", disk, "vendor");
         QString mediaTypeStr = "Unknown";
         QString sizeStr = DeviceInfoParser::Instance().queryData("lshw", disk, "size");
-        sizeStr.replace("GiB","GB");
+//        sizeStr.replace("GiB","GB");
+        int brackets = sizeStr.indexOf('(');
+//        qDebug() << sizeStr << brackets;
+        QString sizeStr1 = sizeStr.mid(0,brackets);
+        if (sizeStr1.contains("GiB")){
+            sizeStr1.replace("GiB","GB");
+        }
+        if (sizeStr1.contains("MiB")){
+            sizeStr1.replace( "MiB", " MB" );
+        }
 
         articles.clear();
         existArticles.clear();
@@ -162,18 +173,20 @@ void DiskWidget::initWidget()
                 }
             }
             //get nvme disk used size
-            sizeStr = db.value("lsblk").value(logicalName_.remove("/dev/")).value("size");
-            sizeStr.replace(QRegExp("(G|g)(B|b){0,1}"),"GB");
+            sizeStr1 = db.value("lsblk").value(logicalName_.remove("/dev/")).value("size");
+            sizeStr1.replace(QRegExp("(G|g)(B|b){0,1}"),"GB");
+            sizeStr1.replace(QRegExp("(M|m)(B|b){0,1}"),"MB");
 
             //try to get nvme disk total size
             QString totalNVMSize = db.value("smartctl").value(logicalName).value("Total NVM Capacity");
             if (totalNVMSize.isEmpty() == false) {
-                QRegExp rx("^(.*)\\[(.*GB)\\]$");
+//                QRegExp rx("^(.*)\\[(.*GB)\\]$");
+                QRegExp rx("^(.*)\\[(.*GB)\\]");
                 QStringList capTexts ;
                 if (rx.exactMatch(totalNVMSize)) {
                     capTexts = rx.capturedTexts();
                     if (capTexts.isEmpty() == false) {
-                        sizeStr += QString(" (%1)").arg(capTexts.last());
+                        sizeStr1 += QString(" (%1)").arg(capTexts.last());
                     }
                 }
             }
@@ -191,7 +204,7 @@ void DiskWidget::initWidget()
         }
 
         ArticleStruct size(tr("Size","stroage info"));
-        size.value = sizeStr;
+        size.value = sizeStr1;
         articles.push_back(size);
         existArticles.insert("size");
 
