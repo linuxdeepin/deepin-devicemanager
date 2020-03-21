@@ -89,7 +89,7 @@ QString EDIDParser::getMaxImageSize()
     if (!isVaild()) {
         return "";
     }
-    return QString("%1x%2(cm)").arg(m_edidBin[0x15]).arg(m_edidBin[0x16]);
+    return QString("%1x%2 (cm)").arg(m_edidBin[0x15]).arg(m_edidBin[0x16]);
 }
 
 QString EDIDParser::getSignalType()

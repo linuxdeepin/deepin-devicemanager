@@ -62,7 +62,6 @@ bool findAspectRatio(int width, int height, int &ar_w, int &ar_h)
 MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Monitor"))
 {
     initWidget();
-    EDIDParser pa;
 }
 
 void MonitorWidget::initWidget()
@@ -71,6 +70,9 @@ void MonitorWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
+    if(DeviceInfoParser::Instance().isHuaweiAndroidUos()) {
+        return initHwMonitor();
+    }
     QStringList hwinfMonitorList = DeviceInfoParser::Instance().getHwinfoMonitorList();
     QStringList xrandrMonitorList = DeviceInfoParser::Instance().getXrandrMonitorList();
 
@@ -245,26 +247,6 @@ void MonitorWidget::initWidget()
         addTable( headers, tabList);
     }
     if (maxSize == 0 ) {
-        if (DeviceInfoParser::Instance().isHuaweiAndroidUos()) {
-            EDIDParser edidParser;
-            edidParser.setSource("");
-
-            ArticleStruct vendor(tr("Vendor"));
-            ArticleStruct currentResolution(tr("Resolution"));
-            ArticleStruct resolutionList(tr("Support Resolution"));
-            ArticleStruct date(tr("Manufacture Date"));
-            ArticleStruct monitorSize(tr("Size"));
-
-            vendor.value = "HUAWEI";
-            currentResolution.value = "2160x1440@60Hz";
-            resolutionList.value = "2160x1440@60Hz";
-            date.value = QString("%1%2%3%4").arg(2019).arg(tr("Year")).arg(31).arg(tr("Week"));
-            monitorSize.value = "296x197mm";
-            articles = {vendor, currentResolution, resolutionList, date, monitorSize};
-            addDevice( vendor.value, articles, 1 );
-            overviewInfo_.value = "2160x1440@60Hz";
-            return;
-        }
         setCentralInfo(tr("Failed to find monitor information"));
     }
 }
@@ -365,3 +347,42 @@ void MonitorWidget::parseCurResolution(ArticleStruct &artOfCurResolution, Articl
         }
     }
 };
+
+//content in table view widget is missed
+void MonitorWidget::initHwMonitor()
+{
+    QList<ArticleStruct> articles;
+    EDIDParser edidParser;
+    edidParser.setSource("/sys/devices/platform/hisi-drm/drm/card0/card0-dp-1/edid");
+    int monitorCount = 1;
+    if(edidParser.isVaild()) monitorCount = 2;
+
+    ArticleStruct vendor(tr("Vendor"));
+    ArticleStruct currentResolution(tr("Resolution"));
+    ArticleStruct resolutionList(tr("Support Resolution"));
+    ArticleStruct date(tr("Manufacture Date"));
+    ArticleStruct monitorSize(tr("Size"));
+
+    vendor.value = "HUAWEI";
+    currentResolution.value = "2160x1440@60Hz";
+    resolutionList.value = "2160x1440@60Hz";
+    date.value = QString("%1%2%3%4").arg(2019).arg(tr("Year")).arg(31).arg(tr("Week"));
+    monitorSize.value = "296x197 mm";
+    articles = {vendor, currentResolution, resolutionList, date, monitorSize};
+    addDevice("Notebook monitor", articles, monitorCount );
+    overviewInfo_.value = tr("Notebook monitor");
+    if(edidParser.isVaild()){
+        //external monitor
+        vendor.value = edidParser.getManufatureName();
+        resolutionList.value = edidParser.getSupportResolutionList().join(" ");
+        int t_week = 1;int t_year = 2019;
+        edidParser.getDate(t_week,t_year);
+        date.value = QString("%1%2%3%4").arg(t_year).arg(tr("Year")).arg(t_week).arg(tr("Week"));
+        monitorSize.value = edidParser.getMaxImageSize();
+        articles = {vendor,resolutionList, date, monitorSize};
+        addDevice("External monitor", articles, monitorCount );
+        overviewInfo_.value += QString(" / ").arg(tr("External monitor"));
+    }
+
+    return;
+}
