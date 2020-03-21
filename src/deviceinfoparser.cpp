@@ -99,6 +99,7 @@ void DeviceInfoParser::refreshDabase()
     emit loadFinished(tr("Loading Monitor Info..."));
     loadXrandrDatabase();
     loadHwinfoDatabase();
+    loadGpuInfo();
 
     emit loadFinished(tr("Loading PCI Devices Info..."));
     loadLspciDatabase();
