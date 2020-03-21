@@ -258,7 +258,7 @@ void MonitorWidget::initWidget()
             vendor.value = "HUAWEI";
             currentResolution.value = "2160x1440@60Hz";
             resolutionList.value = "2160x1440@60Hz";
-            date.value = QString("%1%2%3%4").arg(2019).arg(tr("year")).arg(31).arg(tr("week"));
+            date.value = QString("%1%2%3%4").arg(2019).arg(tr("Year")).arg(31).arg(tr("Week"));
             monitorSize.value = "296x197mm";
             articles = {vendor, currentResolution, resolutionList, date, monitorSize};
             addDevice( vendor.value, articles, 1 );
