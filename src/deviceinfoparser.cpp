@@ -2819,6 +2819,33 @@ bool DeviceInfoParser::loadHwinfoDatabase()
     return true;
 }
 
+bool DeviceInfoParser::loadGpuInfo()
+{
+    if (isHuaweiAndroidUos() == false) {
+        return false;
+    }
+    if ( false == executeProcess("gpuinfo") ) {
+        return false;
+    }
+    QString gpuinfo = standOutput_;
+    QStringList lines = gpuinfo.split("\n", QString::SkipEmptyParts);
+    DatabaseMap db;
+    QString key = "Integrated Graphics Controller";
+    QMap<QString, QString> value;
+    foreach (auto line, lines) {
+        if (line.contains(":") == false && line.contains("controller", Qt::CaseInsensitive)) {
+            key = line;
+        }
+        if (line.contains(":")) {
+            int pos = line.indexOf(":");
+            value.insert(line.left(pos), line.right(line.length() - 1 - pos));
+        }
+    }
+    db.insert(key, value);
+    toolDatabase_["gpuinfo"] = db;
+    return true;
+}
+
 bool DeviceInfoParser::loadLpstatDatabase()
 {
     // lpstat -l -p

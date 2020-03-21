@@ -219,6 +219,7 @@ public:
     bool loadLsusbDatabase();
     // hwinfo
     bool loadHwinfoDatabase();
+    bool loadGpuInfo();
     // lpstat
     bool loadLpstatDatabase();
     // cups
