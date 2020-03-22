@@ -2840,6 +2840,15 @@ bool DeviceInfoParser::loadGpuInfo()
         return false;
     }
     QString gpuinfo = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile hwinfoFile(DEVICEINFO_PATH + "/gpuinfo.txt");
+    if ( false == hwinfoFile.open(QIODevice::ReadOnly) ) {
+        return false;
+    }
+
+    gpuinfo = hwinfoFile.readAll();
+    hwinfoFile.close();
+#endif
     QStringList lines = gpuinfo.split("\n", QString::SkipEmptyParts);
     DatabaseMap db;
     QString key = "Integrated Graphics Controller";
