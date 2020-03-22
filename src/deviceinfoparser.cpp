@@ -62,6 +62,7 @@ void DeviceInfoParser::refreshDabase()
 
     toolDatabase_.clear();
     toolDatabaseSecondOrder_.clear();
+    osVersion_.clear();
 
     QString defaultLanguage = getenv("LANGUAGE");
 
@@ -1095,9 +1096,8 @@ bool DeviceInfoParser::loadOSInfo()
     }
 
     QString str = standOutput_;
+    this->osVersion_ = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    executeProcess("tar zxvf /home/archermind/Desktop/deviceInfo.tar.gz");
-
     QFile osinfoFile(DEVICEINFO_PATH + "/osinfo.txt");
     if ( false == osinfoFile.open(QIODevice::ReadOnly) ) {
         return false;
@@ -1139,6 +1139,11 @@ bool DeviceInfoParser::loadOSInfo()
     return true;
 }
 
+QString DeviceInfoParser::getOsVersion()
+{
+    return this->osVersion_;
+}
+
 QString DeviceInfoParser::getOsInfo()
 {
     if (osInfo_.contains("UOS", Qt::CaseInsensitive)) {
@@ -1149,7 +1154,13 @@ QString DeviceInfoParser::getOsInfo()
 
 bool DeviceInfoParser::isHuaweiAndroidUos()
 {
-    return getOsInfo().contains("android");
+    QString os_v = getOsVersion();
+    if(os_v.contains("android",Qt::CaseInsensitive)
+            || os_v.contains("huawei",Qt::CaseInsensitive)
+            || os_v.contains("google",Qt::CaseInsensitive)){
+        return true;
+    }
+    return false;
 }
 
 QString DeviceInfoParser::getLsbRelease()

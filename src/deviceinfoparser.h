@@ -182,6 +182,7 @@ public:
     bool loadCatosrelelease();
     bool loadlsb_release();
     bool loadOSInfo();
+    QString getOsVersion();
 
     // dmidecode parse
     bool loadDmidecodeDatabase();
@@ -250,6 +251,7 @@ public:
     QString osInfo_;
     QString homeUrl_;
     QString lsbRelease_;
+    QString osVersion_;
 
 public:
     QSet<QString> orderedDevices;
