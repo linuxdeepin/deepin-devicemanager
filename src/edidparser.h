@@ -1,10 +1,7 @@
 /*
- * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
+ * Copyright (C) 2019 ~ 2020 Deepin Technology Co., Ltd.
  *
- * Author:     AaronZhang <ya.zhang@archermind.com>
- *
- * Maintainer: AaronZhang <ya.zhang@archermind.com>
- * Maintainer: Yaobin <yao.bin@archermind.com>
+ * Author:     yaobin <yaobin@uniontech.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,20 +17,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#ifndef EDIDPARSER_H
+#define EDIDPARSER_H
 
-#include "deviceinfowidgetbase.h"
-
-class CpuWidget : public DeviceInfoWidgetBase
+#include <QString>
+#include "monitorwidget.h"
+class EDIDParser
 {
-    Q_OBJECT
 public:
-    explicit CpuWidget(QWidget *parent = nullptr);
+    EDIDParser();
+    void setSource(QString source);
 
-    void initWidget() override;
-    void addPrecessor(const QString& precessor);
-
+    bool isVaild();
+    QString getReadableHexString();
+    bool getDate(int &week, int &year);
+    QString getManufatureName();
+    QString getEDIDVersion();
+    QString getMaxImageSize();
+    QString getSignalType();
+    QStringList getSupportResolutionList();
 private:
-    QString speed_;
+
+    bool m_sourceValid = false;
+    QByteArray m_edidBin;
 };
-const QString getTrNumber(int i);
+
+#endif // EDIDPARSER_H

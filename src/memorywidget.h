@@ -34,12 +34,12 @@ public:
 
     // "设 计 师"
     void init_l_Designer_l_TableWdiget();
-    void update_l_Designer_l_WholeDownWidget();
+    bool update_l_Designer_l_WholeDownWidget();
 
     void initTableWdiget_Good();
     void updateWholeDownWidget_Good();
 
-    bool isSlotValid(const QString& size, const QString& speed );
+    bool isSlotValid(const QString &size, const QString &speed );
 
 private:
     int canUpgrade_ = -1;

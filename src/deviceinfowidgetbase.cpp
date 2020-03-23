@@ -480,6 +480,24 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
             {
                 strContent = "--";
             }
+            if (j == 3){
+                int brackets = strContent.indexOf('(');
+                QString strContent1 = strContent.mid(0,brackets);
+                if (strContent1.contains("GiB")){
+                    strContent1.replace("GiB","GB");
+                }
+                if (strContent1.contains("MiB")){
+                    strContent1.replace( "MiB", "MB" );
+                }
+                DStandardItem* item = new DStandardItem(strContent1);
+                if(j == 0)
+                {
+                    item->setData( i, Qt::UserRole + 90 );
+                }
+
+                tableWidget_->m_pModel->setItem(i, j, item);
+                continue;
+            }
 
             DStandardItem* item = new DStandardItem(strContent);
             if(j == 0)

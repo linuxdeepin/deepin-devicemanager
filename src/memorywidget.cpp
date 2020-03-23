@@ -38,8 +38,9 @@ void MemoryWidget::initWidget()
     auto resultFromDmi = DeviceInfoParser::Instance().getDmidecodeMemoryList();
     if (resultFromDmi.isEmpty() == false) {
         init_l_Designer_l_TableWdiget();
-        update_l_Designer_l_WholeDownWidget();
-        return;
+        if (update_l_Designer_l_WholeDownWidget()) {
+            return;
+        }
     }
     /**
      * on some loogson computer,dmidecode doesn't print any dmi device info,
@@ -51,19 +52,25 @@ void MemoryWidget::initWidget()
         int index = 1;
         for (auto ptr = memorys.begin(); ptr != memorys.end(); ptr++) {
             QList<ArticleStruct> articles;
-            foreach (auto key,ptr.value().keys()) {
+            foreach (auto key, ptr.value().keys()) {
                 ArticleStruct art(key);
                 art.value = ptr.value().value(key);
-                articles.append(art);
+
+                art.value.replace(QRegExp("TiB"), "TB");
+                art.value.replace(QRegExp("GiB"), "GB");
+                art.value.replace(QRegExp("MiB"), "MB");
+                art.value.replace(QRegExp("KiB"), "KB");
+
                 if (key == QString("size")) {
-                    overviewInfo_.value += overviewInfo_.value.isEmpty() ? "": " /";
+                    overviewInfo_.value += overviewInfo_.value.isEmpty() ? "" : " /";
                     overviewInfo_.value += art.value;
                 }
+                articles.append(art);
             }
             QString title = tr("Memory");
             addSubInfo( memorys.count() <= 1 ?
-                            QString("%1\n").arg(title):
-                            QString("%1 %2\n").arg(title).arg(index),
+                        QString("%1\n").arg(title) :
+                        QString("%1 %2\n").arg(title).arg(index),
                         articles );
             index ++;
         }
@@ -78,21 +85,18 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
     if (memList.isEmpty()) {
         return;
     }
-    QStringList headers = { tr("Name"), tr("Vendor"), tr("Type"), tr("Speed","memory info"),  tr("Size"), /* tr("Status")*/};
+    QStringList headers = { tr("Name"), tr("Vendor"), tr("Type"), tr("Speed", "memory info"),  tr("Size"), /* tr("Status")*/};
 
     QList<QStringList> tabList;
 
-    foreach(const QString& mem, memList)
-    {
-        if(canUpgrade_ == -1)
-        {
+    foreach (const QString &mem, memList) {
+        if (canUpgrade_ == -1) {
             canUpgrade_ = 0;
         }
 
         QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
         QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");
-        if( isSlotValid(size, speed) == false )
-        {
+        if ( isSlotValid(size, speed) == false ) {
             canUpgrade_ = 1;
             continue;
         }
@@ -112,7 +116,7 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
     addTable(headers, tabList);
 }
 
-void MemoryWidget::update_l_Designer_l_WholeDownWidget()
+bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
 {
     QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
 
@@ -127,21 +131,17 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
     ArticleStruct size(tr("Size"));
     size.queryData("lshw", "Computer_core_memory", "size");
 
-    if(size.isValid() == false)
-    {
+    if (size.isValid() == false) {
         int total = 0;
         QString unitStr;
 
-        foreach(const QString& mem, memList)
-        {
+        foreach (const QString &mem, memList) {
             ArticleStruct strMem(tr("Size"));
             strMem.queryData("dmidecode", mem, "Size");
-            if(strMem.isValid() && strMem.value.contains(" "))
-            {
+            if (strMem.isValid() && strMem.value.contains(" ")) {
                 QStringList lst = strMem.value.split(" ");
                 int memInstelled = lst.first().toInt();
-                if(memInstelled > 0)
-                {
+                if (memInstelled > 0) {
                     total += memInstelled;
                     unitStr = lst.last();
                 }
@@ -159,19 +159,15 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
     mc.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity");
     articles.push_back(mc);
 
-    if( mc.isValid() && size.isValid())
-    {
-        if( (mc.value.contains("Mb") && size.value.contains("Mb")) || (mc.value.contains("GB") && size.value.contains("GB")) )
-        {
-            if(mc.value.left(mc.value.size() - 2 ).toInt() > size.value.left(mc.value.size() -2 ).toInt())
-            {
+    if ( mc.isValid() && size.isValid()) {
+        if ( (mc.value.contains("Mb") && size.value.contains("Mb")) || (mc.value.contains("GB") && size.value.contains("GB")) ) {
+            if (mc.value.left(mc.value.size() - 2 ).toInt() > size.value.left(mc.value.size() - 2 ).toInt()) {
                 canUpgrade_ = 1;
             }
         }
     }
 
-    if(canUpgrade_ != -1)
-    {
+    if (canUpgrade_ != -1) {
         ArticleStruct ug(tr("Upgradeable"));
         ug.value = canUpgrade_ ? tr("Yes") : tr("No");
         articles.push_back(ug);
@@ -184,12 +180,11 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
 
     QStringList detailMem;
-    foreach(const QString& mem, memList)
-    {
+    foreach (const QString &mem, memList) {
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct model(tr("Model","memory's model"));
+        ArticleStruct model(tr("Model", "memory's model"));
         model.queryData("dmidecode", mem, "Part Number");
         articles.push_back(model);
         existArticles.insert("Part Number");
@@ -204,7 +199,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         articles.push_back(locator);
         existArticles.insert("Locator");
 
-        ArticleStruct size(tr("Size","memory's size"));
+        ArticleStruct size(tr("Size", "memory's size"));
         size.queryData("dmidecode", mem, "Size");
         articles.push_back(size);
         existArticles.insert("Size");
@@ -214,7 +209,7 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         articles.push_back(type);
         existArticles.insert("Type");
 
-        ArticleStruct speed(tr("Speed","memory's Speed"));
+        ArticleStruct speed(tr("Speed", "memory's Speed"));
         speed.queryData("dmidecode", mem, "Speed");
         articles.push_back(speed);
         existArticles.insert("Speed");
@@ -239,17 +234,17 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         articles.push_back(bankLocator);
         existArticles.insert("Bank Locator");
 
-        ArticleStruct configVoltage(tr("Configured Voltage","memory info"));
+        ArticleStruct configVoltage(tr("Configured Voltage", "memory info"));
         configVoltage.queryData("dmidecode", mem, "Configured Voltage");
         articles.push_back(configVoltage);
         existArticles.insert("Configured Voltage");
 
-        ArticleStruct minVoltage(tr("Minimum Voltage","memory's config"));
+        ArticleStruct minVoltage(tr("Minimum Voltage", "memory's config"));
         minVoltage.queryData("dmidecode", mem, "Minimum Voltage");
         articles.push_back(minVoltage);
         existArticles.insert("Minimum Voltage");
 
-        ArticleStruct maxVoltage(tr("Maximum Voltage","memory's config"));
+        ArticleStruct maxVoltage(tr("Maximum Voltage", "memory's config"));
         maxVoltage.queryData("dmidecode", mem, "Maximum Voltage");
         articles.push_back(maxVoltage);
         existArticles.insert("Maximum Voltage");
@@ -262,20 +257,17 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
 
         QString deviceName = vendor.value + " " + model.value;
-        if(vendor.value == tr("Unknown") && model.value == tr("Unknown")){
+        if (vendor.value == tr("Unknown") && model.value == tr("Unknown")) {
             deviceName = tr("Unknown memory");
         }
-        if(deviceName.trimmed().isEmpty() == true)
-        {
+        if (deviceName.trimmed().isEmpty() == true) {
             deviceName = locator.value;
-            if(deviceName.trimmed().isEmpty() == true)
-            {
+            if (deviceName.trimmed().isEmpty() == true) {
                 deviceName = bankLocator.value;
             }
         }
 
-        if(false == isSlotValid(size.value, speed.value))
-        {
+        if (false == isSlotValid(size.value, speed.value)) {
             continue;
         }
 
@@ -287,28 +279,25 @@ void MemoryWidget::update_l_Designer_l_WholeDownWidget()
         arLst << vendor << type << speed;
         QString overviewVendor = joinArticle(arLst);
 
-        if( false == detailMem .contains(overviewVendor) )
-        {
+        if ( false == detailMem .contains(overviewVendor) ) {
             detailMem.push_back(overviewVendor);
         }
     }
 
-    if(validMemoryNumber < 1 )
-    {
-        setCentralInfo(tr("Failed to get memory information"));
-        return;
+    if (validMemoryNumber < 1 ) {
+        return false;
     }
 
     overviewInfo_.value = size.value;
-    if( detailMem.size() > 0 )
-    {
+    if ( detailMem.size() > 0 ) {
         QString detail = detailMem.join(" / ");
-        if(detail.isEmpty() == false) {
+        if (detail.isEmpty() == false) {
             overviewInfo_.value += " (";
             overviewInfo_.value += detail;
             overviewInfo_.value += ")";
         }
     }
+    return true;
 }
 
 void MemoryWidget::initTableWdiget_Good()
@@ -319,16 +308,13 @@ void MemoryWidget::initTableWdiget_Good()
 
     QList<QStringList> tabList;
 
-    foreach(const QString& mem, memList)
-    {
-        if(canUpgrade_ == -1)
-        {
+    foreach (const QString &mem, memList) {
+        if (canUpgrade_ == -1) {
             canUpgrade_ = 0;
         }
 
         QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");
-        if( size == tr("Unknown") || size == "No Module Installed" )
-        {
+        if ( size == tr("Unknown") || size == "No Module Installed" ) {
             canUpgrade_ = 1;
             QStringList tab = {
                 DeviceInfoParser::Instance().queryData("dmidecode", mem, "Locator"),
@@ -362,28 +348,24 @@ void MemoryWidget::updateWholeDownWidget_Good()
 
     QList<ArticleStruct> articles;
 
-    ArticleStruct slotCount(tr("Slot Count","memory info"));
+    ArticleStruct slotCount(tr("Slot Count", "memory info"));
     slotCount.queryData("dmidecode", "Physical Memory Array", "Number Of Devices");
     articles.push_back(slotCount);
 
-    ArticleStruct size(tr("Size","memory info"));
+    ArticleStruct size(tr("Size", "memory info"));
     size.queryData("lshw", "Computer_core_memory", "size");
 
-    if(size.isValid() == false)
-    {
+    if (size.isValid() == false) {
         int total = 0;
         QString unitStr;
 
-        foreach(const QString& mem, memList)
-        {
-            ArticleStruct strMem(tr("Size","memory info"));
+        foreach (const QString &mem, memList) {
+            ArticleStruct strMem(tr("Size", "memory info"));
             strMem.queryData("dmidecode", mem, "Size");
-            if(strMem.isValid() && strMem.value.contains(" "))
-            {
+            if (strMem.isValid() && strMem.value.contains(" ")) {
                 QStringList lst = strMem.value.split(" ");
                 int memInstelled = lst.first().toInt();
-                if(memInstelled > 0)
-                {
+                if (memInstelled > 0) {
                     total += memInstelled;
                     unitStr = lst.last();
                 }
@@ -401,19 +383,15 @@ void MemoryWidget::updateWholeDownWidget_Good()
     mc.queryData("dmidecode", "Physical Memory Array", "Maximum Capacity");
     articles.push_back(mc);
 
-    if( mc.isValid() && size.isValid())
-    {
-        if( (mc.value.contains("Mb") && size.value.contains("Mb")) || (mc.value.contains("GB") && size.value.contains("GB")) )
-        {
-            if(mc.value.left(mc.value.size() - 2 ).toInt() > size.value.left(mc.value.size() -2 ).toInt())
-            {
+    if ( mc.isValid() && size.isValid()) {
+        if ( (mc.value.contains("Mb") && size.value.contains("Mb")) || (mc.value.contains("GB") && size.value.contains("GB")) ) {
+            if (mc.value.left(mc.value.size() - 2 ).toInt() > size.value.left(mc.value.size() - 2 ).toInt()) {
                 canUpgrade_ = true;
             }
         }
     }
 
-    if(canUpgrade_ != -1)
-    {
+    if (canUpgrade_ != -1) {
         ArticleStruct ug(tr("Upgradeable"));
         ug.value = canUpgrade_ ? tr("Yes") : tr("No");
         articles.push_back(ug);
@@ -426,8 +404,7 @@ void MemoryWidget::updateWholeDownWidget_Good()
 
 
     QStringList detailMem;
-    foreach(const QString& mem, memList)
-    {
+    foreach (const QString &mem, memList) {
         articles.clear();
         existArticles.clear();
 
@@ -441,47 +418,47 @@ void MemoryWidget::updateWholeDownWidget_Good()
         articles.push_back(vendor);
         existArticles.insert("Manufacturer");
 
-        ArticleStruct size(tr("Size","memory info"));
+        ArticleStruct size(tr("Size", "memory info"));
         size.queryData("dmidecode", mem, "Size");
         articles.push_back(size);
         existArticles.insert("Size");
 
-        ArticleStruct type(tr("Type","memory info"));
+        ArticleStruct type(tr("Type", "memory info"));
         type.queryData("dmidecode", mem, "Type");
         articles.push_back(type);
         existArticles.insert("Type");
 
-        ArticleStruct speed(tr("Speed","memory info"));
+        ArticleStruct speed(tr("Speed", "memory info"));
         speed.queryData("dmidecode", mem, "Speed");
         articles.push_back(speed);
         existArticles.insert("Speed");
 
-        ArticleStruct serial(tr("Serial Number","memory info"));
+        ArticleStruct serial(tr("Serial Number", "memory info"));
         serial.queryData("dmidecode", mem, "Serial Number");
         articles.push_back(serial);
         existArticles.insert("Serial Number");
 
-        ArticleStruct model(tr("Model Part Number","memory info"));
+        ArticleStruct model(tr("Model Part Number", "memory info"));
         model.queryData("dmidecode", mem, "Part Number");
         articles.push_back(model);
         existArticles.insert("Part Number");
 
-        ArticleStruct formFactor(tr("Form Factor","memory info"));
+        ArticleStruct formFactor(tr("Form Factor", "memory info"));
         formFactor.queryData("dmidecode", mem, "Form Factor");
         articles.push_back(formFactor);
         existArticles.insert("Form Factor");
 
-        ArticleStruct rank(tr("Rank","memory info"));
+        ArticleStruct rank(tr("Rank", "memory info"));
         rank.queryData("dmidecode", mem, "Rank");
         articles.push_back(rank);
         existArticles.insert("Rank");
 
-        ArticleStruct bankLocator(tr("Bank Locator","memory info"));
+        ArticleStruct bankLocator(tr("Bank Locator", "memory info"));
         bankLocator.queryData("dmidecode", mem, "Bank Locator");
         articles.push_back(bankLocator);
         existArticles.insert("Bank Locator");
 
-        ArticleStruct configVoltage(tr("Configured Voltage","memory info"));
+        ArticleStruct configVoltage(tr("Configured Voltage", "memory info"));
         configVoltage.queryData("dmidecode", mem, "Configured Voltage");
         articles.push_back(configVoltage);
         existArticles.insert("Configured Voltage");
@@ -491,12 +468,12 @@ void MemoryWidget::updateWholeDownWidget_Good()
         articles.push_back(minVoltage);
         existArticles.insert("Minimum Voltage");
 
-        ArticleStruct maxVoltage(tr("Maximum Voltage","memory info"));
+        ArticleStruct maxVoltage(tr("Maximum Voltage", "memory info"));
         maxVoltage.queryData("dmidecode", mem, "Maximum Voltage");
         articles.push_back(maxVoltage);
         existArticles.insert("Maximum Voltage");
 
-        ArticleStruct configSpeed(tr("Configured Speed","memory info"));
+        ArticleStruct configSpeed(tr("Configured Speed", "memory info"));
         configSpeed.queryData("dmidecode", mem, "Configured Memory Speed");
         articles.push_back(configSpeed);
         existArticles.insert("Configured Memory Speed");
@@ -504,24 +481,18 @@ void MemoryWidget::updateWholeDownWidget_Good()
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
 
         QString deviceName;
-        if(locator.isValid())
-        {
+        if (locator.isValid()) {
             deviceName = locator.value;
-        }
-        else if(bankLocator.isValid())
-        {
+        } else if (bankLocator.isValid()) {
             deviceName = bankLocator.value;
-        }
-        else if(rank.isValid())
-        {
+        } else if (rank.isValid()) {
             deviceName = rank.value;
         }
 
-        if(size.value == tr("Unknown") || size.value == "No Module Installed" )
-        {
+        if (size.value == tr("Unknown") || size.value == "No Module Installed" ) {
             articles.clear();
-            ArticleStruct status(tr("Status","memory info"));
-            status.value = tr("Bad","memory info");
+            ArticleStruct status(tr("Status", "memory info"));
+            status.value = tr("Bad", "memory info");
             articles.push_back(status);
 
             addSubInfo( deviceName, articles );
@@ -535,15 +506,13 @@ void MemoryWidget::updateWholeDownWidget_Good()
         overviewVendor += " ";
         overviewVendor += speed.value;
 
-        if( false == detailMem .contains(overviewVendor))
-        {
+        if ( false == detailMem .contains(overviewVendor)) {
             detailMem.push_back(overviewVendor);
         }
     }
 
     overviewInfo_.value = size.value;
-    if( detailMem.size() > 0 )
-    {
+    if ( detailMem.size() > 0 ) {
         QString detail  = detailMem.join("/");
         if (detail.isEmpty() == false) {
             overviewInfo_.value += " (";
@@ -553,14 +522,12 @@ void MemoryWidget::updateWholeDownWidget_Good()
     }
 }
 
-bool MemoryWidget::isSlotValid(const QString& size, const QString& speed )
+bool MemoryWidget::isSlotValid(const QString &size, const QString &speed )
 {
-    if(size.contains("Unknown",Qt::CaseInsensitive)|| size.contains("No Module Installed",Qt::CaseInsensitive))
-    {
+    if (size.contains("Unknown", Qt::CaseInsensitive) || size.contains("No Module Installed", Qt::CaseInsensitive)) {
         return false;
     }
-    if(speed.contains("MT/s") == false)//maybe weak
-    {
+    if (speed.contains("MT/s") == false) { //maybe weak
         return false;
     }
 

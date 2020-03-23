@@ -85,7 +85,8 @@ SOURCES += \
     devicelistview.cpp \
     deviceattributedefine.cpp \
     bluetoothwidget.cpp \
-    bottomroundframe.cpp
+    bottomroundframe.cpp \
+    edidparser.cpp
 
 HEADERS += \
     cdromwidget.h \
@@ -119,7 +120,8 @@ HEADERS += \
     logpasswordauth.h \
     printerwidget.h \
     devicelistview.h \
-    bottomroundframe.h
+    bottomroundframe.h \
+    edidparser.h
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin

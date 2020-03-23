@@ -62,7 +62,7 @@ const int TableViewRowHeight_ = 36;
 //const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_loongson_memory";
 //const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo_chuangzhicheng_cpu_zero";
 
-const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/loongson_unknown_nvme_";
+//const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/loongson_unknown_nvme_";
 //const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/Meegopad_T02"; //bluetooth info
 //const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceinfo_haikangweishi";
 
@@ -73,4 +73,8 @@ const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/lo
 //test_monitor_refresh_rate,only xrandr.txt and hwinfo.txt come from the target computer
 //const QString DEVICEINFO_PATH = "/dde_devicemanager/computers/test_monitor_refresh_rate";
 //const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/loongson_unknown_nvme_";
+//const QString DEVICEINFO_PATH ="/home/archermind/workspace/git/device-manager/dde_devicemanager/computers/loongson_unknown_nvme_";
+//const QString DEVICEINFO_PATH ="/home/archermind/workspace/git/device-manager/dde_devicemanager/computers/deviceInfo_16426_bug";
+//const QString DEVICEINFO_PATH ="/home/archermind/workspace/git/device-manager/dde_devicemanager/computers/4G00_600";
+//const QString DEVICEINFO_PATH ="/home/yaobin/Desktop/dde/dde_devicemanager/computers/test_gpuinfo";
 //#define TEST_DATA_FROM_FILE

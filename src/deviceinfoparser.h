@@ -73,13 +73,13 @@ typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
 
 //class LogPasswordAuth;
 
-typedef bool (*checkValueFun_t)(const QString&);
+typedef bool (*checkValueFun_t)(const QString &);
 
 class DeviceInfoParser: public QObject
 {
     Q_OBJECT
 public:
-    static DeviceInfoParser& Instance()
+    static DeviceInfoParser &Instance()
     {
         static DeviceInfoParser _instance;
         return _instance;
@@ -91,25 +91,25 @@ public:
     void refreshDabase();
 
 signals:
-    void loadFinished(const QString& msg);
+    void loadFinished(const QString &msg);
 
 public:
-    bool isToolSuccess(const QString& toolname);
+    bool isToolSuccess(const QString &toolname);
 
-    const QString& queryData(const QString& toolname, const QString& firstKey, const QString& secondKey);
-    const QString& fuzzyQueryData(const QString& toolname, const QString& firstKey, const QString& secondKey);
+    const QString &queryData(const QString &toolname, const QString &firstKey, const QString &secondKey);
+    const QString &fuzzyQueryData(const QString &toolname, const QString &firstKey, const QString &secondKey);
 
-    bool fuzzeyQueryKey(const QString& toolname, const QString& fuzzeyKey, QString& key);
+    bool fuzzeyQueryKey(const QString &toolname, const QString &fuzzeyKey, QString &key);
 
-    bool queryDeviceInfo(const QString& toolname, const QString& deviceName, QList<ArticleStruct>& articles);
-    bool queryRemainderDeviceInfo(const QString& toolname, const QString& deviceName,
-                                  QList<ArticleStruct>& articles, const QSet<QString>& existArticles = QSet<QString>(),
-                                  const char *context = nullptr,const char *disambiguation = nullptr);
+    bool queryDeviceInfo(const QString &toolname, const QString &deviceName, QList<ArticleStruct> &articles);
+    bool queryRemainderDeviceInfo(const QString &toolname, const QString &deviceName,
+                                  QList<ArticleStruct> &articles, const QSet<QString> &existArticles = QSet<QString>(),
+                                  const char *context = nullptr, const char *disambiguation = nullptr);
 
-    bool checkValue(const QString& toolName, const QString& device, const QString& key, const QString& contains);
+    bool checkValue(const QString &toolName, const QString &device, const QString &key, const QString &contains);
 
 private:
-    QStringList getMatchToolDeviceList(const QString& toolName, checkValueFun_t* checkFunc = nullptr);
+    QStringList getMatchToolDeviceList(const QString &toolName, checkValueFun_t *checkFunc = nullptr);
 
 public:
     QStringList getCatcpuCpuList();
@@ -118,7 +118,7 @@ public:
     QStringList getDmidecodePhysicMemory();
     QStringList getDmidecodeMemoryList();
     //be careful about function above,the constructor and compare function of class ArticleStruct may not support some container function,such as bool contains(ArticleStruct)
-    QMap<QString,QMap<QString,QString>> getLshwMeoryList();
+    QMap<QString, QMap<QString, QString>> getLshwMeoryList();
 
     QStringList getLshwDiskNameList();
 
@@ -148,14 +148,14 @@ public:
     QStringList getLshwUsbKeyboardDeviceList();
 
     QStringList getInputdeviceMouseList();
-    QString getCorrespondLshwMouse(const QString& inputMouse);
-    QString getCorrespondBluetoothMouse(const QString& inputMouse);
+    QString getCorrespondLshwMouse(const QString &inputMouse);
+    QString getCorrespondBluetoothMouse(const QString &inputMouse);
 
     QStringList getInputdeviceKeyboardList();
-    QString getCorrespondLshwKeyboard(const QString& inputKeyboard);
-    QString getCorrespondBluetoothKeyboard(const QString& inputKeyboard);
+    QString getCorrespondLshwKeyboard(const QString &inputKeyboard);
+    QString getCorrespondBluetoothKeyboard(const QString &inputKeyboard);
 
-    QString getCorrespondUpower(const QString& bluetoothDevice);
+    QString getCorrespondUpower(const QString &bluetoothDevice);
 
     QStringList getLshwSwitchingpowerList();
     QStringList getDemidecodeSwitchingpowerList();
@@ -172,15 +172,17 @@ public:
     QStringList getCupsPrinterList();
 
     QStringList getLshwCDRomList();
-    
+
     // get os
     QString getOsInfo();
+    bool isHuaweiAndroidUos();
     QString getLsbRelease();
     QString getHomeUrl();
 
     bool loadCatosrelelease();
     bool loadlsb_release();
     bool loadOSInfo();
+    QString getOsVersion();
 
     // dmidecode parse
     bool loadDmidecodeDatabase();
@@ -197,7 +199,7 @@ public:
     bool loadCatcpuDatabase();
     // smartctl www.smartmontools.org get disk info
     bool loadAllSmartctlDatabase();
-    bool loadSmartctlDatabase(const QString& diskLogical);
+    bool loadSmartctlDatabase(const QString &diskLogical);
     // cat /proc/bus/input/devices
     bool loadCatInputDatabase();
     // xrandr
@@ -210,14 +212,15 @@ public:
     // bluetooth
     bool loadHciconfigDatabase();
     bool loadAllBluetoothctlControllerDatabase();
-    bool loadBluetoothctlDatabase(const QString& controller);
+    bool loadBluetoothctlDatabase(const QString &controller);
     QStringList getAllBluetoothctlPairedDevices();
     bool loadAllBluethctlPairedDeviceDatabase();
-    bool loadBluetoothctlPairedDeviceDatabase(const QString& mac);
+    bool loadBluetoothctlPairedDeviceDatabase(const QString &mac);
     // lsusb
     bool loadLsusbDatabase();
     // hwinfo
     bool loadHwinfoDatabase();
+    bool loadGpuInfo();
     // lpstat
     bool loadLpstatDatabase();
     // cups
@@ -225,9 +228,9 @@ public:
 
 public:
     bool getRootPassword();
-    bool executeProcess(const QString& cmd);
-    bool runCmd(const QString& cmd);
-    bool runCmd(const QStringList& cmdList);
+    bool executeProcess(const QString &cmd);
+    bool runCmd(const QString &cmd);
+    bool runCmd(const QStringList &cmdList);
 
     //LogPasswordAuth* autoDialog = nullptr;
     QString standOutput_;
@@ -248,6 +251,7 @@ public:
     QString osInfo_;
     QString homeUrl_;
     QString lsbRelease_;
+    QString osVersion_;
 
 public:
     QSet<QString> orderedDevices;
