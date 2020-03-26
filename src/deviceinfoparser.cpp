@@ -117,6 +117,7 @@ void DeviceInfoParser::refreshDabase()
 
     emit loadFinished(tr("Loading Printer Info..."));
     //loadCupsDatabase();
+    loadPrinterinfoDatabase();
 
     emit loadFinished("finish");
 }
@@ -450,6 +451,11 @@ QStringList DeviceInfoParser::getXrandrDisplayInterfaceList()
 QStringList DeviceInfoParser::getHwinfoMonitorList()
 {
     return getMatchToolDeviceList("hwinfo");
+}
+
+QStringList DeviceInfoParser::getHwinfoPrinterList()
+{
+    return getMatchToolDeviceList("printer" );
 }
 
 QStringList DeviceInfoParser::getXrandrMonitorList()
@@ -2734,6 +2740,8 @@ bool DeviceInfoParser::loadLsusbDatabase()
     return true;
 }
 
+
+
 bool DeviceInfoParser::loadHwinfoDatabase()
 {
     if (false == executeProcess("sudo hwinfo --monitor")) {
@@ -2829,6 +2837,104 @@ bool DeviceInfoParser::loadHwinfoDatabase()
     toolDatabase_["hwinfo"] = hwinfoDatabase_;
     secondOrder.removeDuplicates();
     toolDatabaseSecondOrder_["hwinfo"] = secondOrder;
+    return true;
+}
+
+bool DeviceInfoParser::loadPrinterinfoDatabase()
+{
+    if ( false == executeProcess("sudo hwinfo --printer")) {
+        return false;
+    }
+
+    QString hwOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile hwinfoFile(DEVICEINFO_PATH + "/hwinfo_printer.txt");
+    if ( false == hwinfoFile.open(QIODevice::ReadOnly) ) {
+        return false;
+    }
+
+    hwOut = hwinfoFile.readAll();
+    hwinfoFile.close();
+#endif
+
+    //QString hwOut = getHwMonitorString();
+    if ( hwOut.size() < 1 ) {
+        return false;
+    }
+
+    // hciconfig
+    DatabaseMap hwinfoDatabase_;
+    QStringList secondOrder;
+
+    QMap<QString, QString> DeviceInfoMap;
+    QString deviceName;
+    int startIndex = 0;
+
+    for ( int i = 0; i < hwOut.size(); ++i ) {
+        if ( hwOut[i] != '\n' && i != hwOut.size() - 1) {
+            continue;
+        }
+
+        QString line = hwOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if ( i == hwOut.size() - 1 || line.trimmed().isEmpty() ) {
+            if (deviceName.isEmpty() == false) {
+                hwinfoDatabase_[deviceName] = DeviceInfoMap;
+                secondOrder.push_back(deviceName);
+            }
+
+            DeviceInfoMap.clear();
+            deviceName = "";
+            continue;
+        }
+
+        if (line.startsWith(Devicetype_HwInfo_Fourspace)) {
+            int index = line.indexOf(": ");
+            if (index > 0) {
+                if ( line.trimmed().contains(Devicetype_HwInfo_Resolution) ) {
+                    if (DeviceInfoMap.contains(Devicetype_HwInfo_Currentresolution)) {
+                        //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] += ", ";
+                        //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] +=line.mid(index+1).trimmed();
+                    } else {
+                        DeviceInfoMap[Devicetype_HwInfo_Currentresolution] = line.mid(index + 1).trimmed();
+                    }
+
+                    continue;
+                }
+                if (false == DeviceInfoMap.contains( line.mid(0, index).trimmed() )) {
+                    DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
+                }
+
+            }
+            continue;
+        }
+
+        if (line.startsWith(Devicetype_HwInfo_Twospace)) {
+            int index = line.indexOf(": ");
+            if (index > 0) {
+                if ( line.contains(Devicetype_HwInfo_Resolution) ) {
+                    if (DeviceInfoMap.contains(Devicetype_HwInfo_ResolutionList)) {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += ", ";
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += line.mid(index + 1).trimmed();
+                    } else {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] = line.mid(index + 1).trimmed();
+                    }
+
+                    continue;
+                }
+
+                DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
+            }
+            continue;
+        }
+
+        deviceName = line.trimmed();
+    }
+
+    toolDatabase_["printer"] = hwinfoDatabase_;
+    secondOrder.removeDuplicates();
+    toolDatabaseSecondOrder_["printer"] = secondOrder;
     return true;
 }
 

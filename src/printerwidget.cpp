@@ -31,15 +31,11 @@ PrinterWidget::PrinterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr(
     initWidget();
 }
 
-void PrinterWidget::initWidget()
+void PrinterWidget::loadWidget()
 {
-    //setTitle(tr("Other Inputdevice")  + tr(" Info"));
-    //QStringList printerList = DeviceInfoParser::Instance().getCupsPrinterList();
+    QStringList hwinfoPrinterList = DeviceInfoParser::Instance().getHwinfoPrinterList();
 
-    QStringList lshwPrinterList = DeviceInfoParser::Instance().getLshwPrinterList();
-
-    if( lshwPrinterList.size() < 1)
-    {
+    if ( hwinfoPrinterList.size() < 1) {
         setCentralInfo(tr("No printer found"));
         return;
     }
@@ -48,8 +44,111 @@ void PrinterWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    foreach(const QString& device, lshwPrinterList)
-    {
+    foreach (const QString &device, hwinfoPrinterList) {
+        articles.clear();
+        existArticles.clear();
+
+        ArticleStruct name(tr("Name"));
+        name.queryData("printer", device, "Device");
+        articles.push_back(name);
+        existArticles.insert("Name");
+
+        ArticleStruct vendor(tr("Vendor"));
+        vendor.queryData( "printer", device, "Vendor");
+        articles.push_back(vendor);
+        existArticles.insert("Vendor");
+
+        ArticleStruct model(tr("Model"));
+        model.queryData( "printer", device, "Model");
+        articles.push_back(model);
+        existArticles.insert("Model");
+
+        ArticleStruct serial(tr("Serial ID"));
+        serial.queryData( "printer", device, "Serial ID");
+        articles.push_back(serial);
+        existArticles.insert("Serial ID");
+
+        ArticleStruct version(tr("Version"));
+        version.queryData( "printer", device, "Revision");
+        articles.push_back(version);
+        existArticles.insert("Version");
+
+        ArticleStruct status(tr("Status"));
+        status.queryData( "printer", device, "Config Status");
+        articles.push_back(status);
+        existArticles.insert("Status");
+
+        ArticleStruct driver(tr("Driver"));
+        driver.queryData( "printer", device, "Driver");
+        articles.push_back(driver);
+        existArticles.insert("Driver");
+
+        ArticleStruct speed(tr("Speed"));
+        speed.queryData( "printer", device, "Speed");
+        articles.push_back(speed);
+        existArticles.insert("Speed");
+
+        ArticleStruct bus(tr("BusID"));
+        bus.queryData( "printer", device, "SysFS BusID");
+        articles.push_back(bus);
+        existArticles.insert("BusID");
+
+        ArticleStruct description(tr("Description"));
+        description.queryData("printer", device, "description");
+        articles.push_back(description);
+        existArticles.insert("description");
+
+        //DeviceInfoParser::Instance().queryRemainderDeviceInfo("printer", device, articles, existArticles);
+
+        addDevice( device, articles, hwinfoPrinterList.size() );
+
+        if ( hwinfoPrinterList.size() > 1 ) {
+            QStringList tab = {
+                name.value,
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
+
+        if (overviewInfo_.value.isEmpty() ) {
+            overviewInfo_.value = name.value;
+            if ( false == overviewInfo_.value.contains(vendor.value, Qt::CaseInsensitive) ) {
+                overviewInfo_.value = vendor.value + " " + name.value;
+            }
+        }
+    }
+
+    if ( hwinfoPrinterList.size() > 1 ) {
+        QStringList headers = { tr("printer-info", "Printer Info,shown on first column of table's head"),
+                                tr("printer-make-and-model", "Printer Info,shown on second column of table's head ")
+                              };
+        addTable( headers, tabList);
+    }
+}
+
+void PrinterWidget::initWidget()
+{
+    //setTitle(tr("Other Inputdevice")  + tr(" Info"));
+    //QStringList printerList = DeviceInfoParser::Instance().getCupsPrinterList();
+    QStringList lshwPrinterList = DeviceInfoParser::Instance().getLshwPrinterList();
+
+    if ( lshwPrinterList.size() < 1) {
+        QStringList hwinfoPrinterList = DeviceInfoParser::Instance().getHwinfoPrinterList();
+        if (hwinfoPrinterList.size() < 1) {
+            setCentralInfo(tr("No printer found"));
+            return;
+        } else {
+            loadWidget();
+        }
+
+    }
+
+    QList<QStringList> tabList;
+    QList<ArticleStruct> articles;
+    QSet<QString> existArticles;
+
+    foreach (const QString &device, lshwPrinterList) {
         articles.clear();
         existArticles.clear();
 
@@ -98,10 +197,8 @@ void PrinterWidget::initWidget()
 
         addDevice( device, articles, lshwPrinterList.size() );
 
-        if( lshwPrinterList.size() > 1 )
-        {
-            QStringList tab =
-            {
+        if ( lshwPrinterList.size() > 1 ) {
+            QStringList tab = {
                 name.value,
                 vendor.value
             };
@@ -109,20 +206,19 @@ void PrinterWidget::initWidget()
             tabList.push_back(tab);
         }
 
-        if(overviewInfo_.value.isEmpty() )
-        {
+        if (overviewInfo_.value.isEmpty() ) {
             overviewInfo_.value = name.value;
-            if( false == overviewInfo_.value.contains(vendor.value, Qt::CaseInsensitive) )
-            {
+            if ( false == overviewInfo_.value.contains(vendor.value, Qt::CaseInsensitive) ) {
                 overviewInfo_.value = vendor.value + " " + name.value;
             }
         }
     }
 
-    if( lshwPrinterList.size() > 1 )
-    {
-        QStringList headers = { tr("printer-info","Printer Info,shown on first column of table's head"),
-                                tr("printer-make-and-model","Printer Info,shown on second column of table's head ") };
+    if ( lshwPrinterList.size() > 1 ) {
+        QStringList headers = { tr("printer-info", "Printer Info,shown on first column of table's head"),
+                                tr("printer-make-and-model", "Printer Info,shown on second column of table's head ")
+                              };
         addTable( headers, tabList);
     }
 }
+

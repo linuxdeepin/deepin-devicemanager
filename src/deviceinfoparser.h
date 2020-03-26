@@ -126,6 +126,7 @@ public:
     QStringList getXrandrScreenName();
     QStringList getXrandrDisplayInterfaceList();
 
+    QStringList getHwinfoPrinterList();
     QStringList getHwinfoMonitorList();
     QStringList getXrandrMonitorList();
     QString     getEDID();
@@ -226,6 +227,8 @@ public:
     // cups
     bool loadCupsDatabase();
 
+    //printers
+    bool loadPrinterinfoDatabase();
 public:
     bool getRootPassword();
     bool executeProcess(const QString &cmd);

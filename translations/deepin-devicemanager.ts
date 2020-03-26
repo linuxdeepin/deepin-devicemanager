@@ -92,165 +92,165 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="62"/>
+        <location filename="../src/bluetoothwidget.cpp" line="66"/>
         <source>Bluetooth Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="63"/>
-        <location filename="../src/bluetoothwidget.cpp" line="183"/>
-        <location filename="../src/bluetoothwidget.cpp" line="287"/>
+        <location filename="../src/bluetoothwidget.cpp" line="67"/>
+        <location filename="../src/bluetoothwidget.cpp" line="187"/>
+        <location filename="../src/bluetoothwidget.cpp" line="291"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="64"/>
+        <location filename="../src/bluetoothwidget.cpp" line="68"/>
         <source>Product</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="65"/>
+        <location filename="../src/bluetoothwidget.cpp" line="69"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="66"/>
+        <location filename="../src/bluetoothwidget.cpp" line="70"/>
         <source>MAC Address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="41"/>
+        <location filename="../src/bluetoothwidget.cpp" line="40"/>
         <source>No Bluetooth device found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="87"/>
+        <location filename="../src/bluetoothwidget.cpp" line="91"/>
         <source>Serial Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="90"/>
+        <location filename="../src/bluetoothwidget.cpp" line="94"/>
         <source>Link Policy</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="93"/>
+        <location filename="../src/bluetoothwidget.cpp" line="97"/>
         <source>Link Mode</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="98"/>
+        <location filename="../src/bluetoothwidget.cpp" line="102"/>
         <source>Powered</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="101"/>
+        <location filename="../src/bluetoothwidget.cpp" line="105"/>
         <source>Discoverable</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="104"/>
+        <location filename="../src/bluetoothwidget.cpp" line="108"/>
         <source>Pairable</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="107"/>
+        <location filename="../src/bluetoothwidget.cpp" line="111"/>
         <source>Modalias</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="110"/>
+        <location filename="../src/bluetoothwidget.cpp" line="114"/>
         <source>Discovering</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="115"/>
+        <location filename="../src/bluetoothwidget.cpp" line="119"/>
         <source>Physical ID</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="118"/>
+        <location filename="../src/bluetoothwidget.cpp" line="122"/>
         <source>Bus Info</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="121"/>
+        <location filename="../src/bluetoothwidget.cpp" line="125"/>
         <source>Version</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="124"/>
+        <location filename="../src/bluetoothwidget.cpp" line="128"/>
         <source>Capabilities</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="160"/>
+        <location filename="../src/bluetoothwidget.cpp" line="164"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="178"/>
-        <location filename="../src/bluetoothwidget.cpp" line="287"/>
+        <location filename="../src/bluetoothwidget.cpp" line="182"/>
+        <location filename="../src/bluetoothwidget.cpp" line="291"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="188"/>
+        <location filename="../src/bluetoothwidget.cpp" line="192"/>
         <source>Alias</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="193"/>
+        <location filename="../src/bluetoothwidget.cpp" line="197"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="198"/>
+        <location filename="../src/bluetoothwidget.cpp" line="202"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="203"/>
+        <location filename="../src/bluetoothwidget.cpp" line="207"/>
         <source>Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="213"/>
+        <location filename="../src/bluetoothwidget.cpp" line="217"/>
         <source>Paired</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="218"/>
+        <location filename="../src/bluetoothwidget.cpp" line="222"/>
         <source>Trusted</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="223"/>
+        <location filename="../src/bluetoothwidget.cpp" line="227"/>
         <source>Blocked</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="237"/>
+        <location filename="../src/bluetoothwidget.cpp" line="241"/>
         <source>Power</source>
         <comment>Bluetooth Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="281"/>
+        <location filename="../src/bluetoothwidget.cpp" line="285"/>
         <source>Bluetooth Device(s) Connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -352,133 +352,133 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="136"/>
-        <location filename="../src/cpuwidget.cpp" line="139"/>
-        <location filename="../src/cpuwidget.cpp" line="141"/>
-        <location filename="../src/cpuwidget.cpp" line="359"/>
+        <location filename="../src/cpuwidget.cpp" line="135"/>
+        <location filename="../src/cpuwidget.cpp" line="138"/>
+        <location filename="../src/cpuwidget.cpp" line="140"/>
+        <location filename="../src/cpuwidget.cpp" line="363"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="136"/>
-        <location filename="../src/cpuwidget.cpp" line="139"/>
-        <location filename="../src/cpuwidget.cpp" line="141"/>
-        <location filename="../src/cpuwidget.cpp" line="364"/>
+        <location filename="../src/cpuwidget.cpp" line="135"/>
+        <location filename="../src/cpuwidget.cpp" line="138"/>
+        <location filename="../src/cpuwidget.cpp" line="140"/>
+        <location filename="../src/cpuwidget.cpp" line="368"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="136"/>
-        <location filename="../src/cpuwidget.cpp" line="139"/>
-        <location filename="../src/cpuwidget.cpp" line="141"/>
-        <location filename="../src/cpuwidget.cpp" line="395"/>
+        <location filename="../src/cpuwidget.cpp" line="135"/>
+        <location filename="../src/cpuwidget.cpp" line="138"/>
+        <location filename="../src/cpuwidget.cpp" line="140"/>
+        <location filename="../src/cpuwidget.cpp" line="399"/>
         <source>Architecture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="139"/>
+        <location filename="../src/cpuwidget.cpp" line="138"/>
         <source>Max Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="141"/>
-        <location filename="../src/cpuwidget.cpp" line="270"/>
+        <location filename="../src/cpuwidget.cpp" line="140"/>
+        <location filename="../src/cpuwidget.cpp" line="269"/>
         <source>Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="151"/>
-        <location filename="../src/cpuwidget.cpp" line="156"/>
+        <location filename="../src/cpuwidget.cpp" line="150"/>
+        <location filename="../src/cpuwidget.cpp" line="155"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="203"/>
+        <location filename="../src/cpuwidget.cpp" line="202"/>
         <source>Sockets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="228"/>
+        <location filename="../src/cpuwidget.cpp" line="227"/>
         <source>Core(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="251"/>
+        <location filename="../src/cpuwidget.cpp" line="250"/>
         <source>Processor(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="371"/>
+        <location filename="../src/cpuwidget.cpp" line="375"/>
         <source>CPU ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="376"/>
+        <location filename="../src/cpuwidget.cpp" line="380"/>
         <source>Core ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="381"/>
+        <location filename="../src/cpuwidget.cpp" line="385"/>
         <source>Threads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="385"/>
+        <location filename="../src/cpuwidget.cpp" line="389"/>
         <source>Current Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="390"/>
+        <location filename="../src/cpuwidget.cpp" line="394"/>
         <source>BogoMIPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="399"/>
+        <location filename="../src/cpuwidget.cpp" line="403"/>
         <source>CPU Family</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="404"/>
+        <location filename="../src/cpuwidget.cpp" line="408"/>
         <source>Model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="409"/>
+        <location filename="../src/cpuwidget.cpp" line="413"/>
         <source>Stepping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="414"/>
+        <location filename="../src/cpuwidget.cpp" line="418"/>
         <source>L1d Cache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="418"/>
+        <location filename="../src/cpuwidget.cpp" line="422"/>
         <source>L1i Cache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="422"/>
+        <location filename="../src/cpuwidget.cpp" line="426"/>
         <source>L2 Cache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="426"/>
+        <location filename="../src/cpuwidget.cpp" line="430"/>
         <source>L3 Cache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="430"/>
+        <location filename="../src/cpuwidget.cpp" line="434"/>
         <source>Flags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="435"/>
+        <location filename="../src/cpuwidget.cpp" line="439"/>
         <source>Virtualization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="440"/>
+        <location filename="../src/cpuwidget.cpp" line="444"/>
         <source>Processor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -494,71 +494,72 @@
 <context>
     <name>DeviceInfoParser</name>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="75"/>
+        <location filename="../src/deviceinfoparser.cpp" line="69"/>
         <source>Loading Operating System Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="84"/>
+        <location filename="../src/deviceinfoparser.cpp" line="78"/>
         <source>Loading SMBIOS Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="88"/>
+        <location filename="../src/deviceinfoparser.cpp" line="82"/>
         <source>Loading Hardware Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="91"/>
+        <location filename="../src/deviceinfoparser.cpp" line="85"/>
         <source>Loading Storage Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="94"/>
+        <location filename="../src/deviceinfoparser.cpp" line="89"/>
         <source>Loading CPU Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="98"/>
+        <location filename="../src/deviceinfoparser.cpp" line="93"/>
         <source>Loading Input Devices Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="101"/>
+        <location filename="../src/deviceinfoparser.cpp" line="96"/>
         <source>Loading Power Settings...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="105"/>
+        <location filename="../src/deviceinfoparser.cpp" line="100"/>
         <source>Loading Monitor Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="109"/>
+        <location filename="../src/deviceinfoparser.cpp" line="105"/>
         <source>Loading PCI Devices Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="112"/>
+        <location filename="../src/deviceinfoparser.cpp" line="108"/>
         <source>Loading Bluetooth Device Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="117"/>
+        <location filename="../src/deviceinfoparser.cpp" line="113"/>
         <source>Loading USB Devices Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="122"/>
+        <location filename="../src/deviceinfoparser.cpp" line="118"/>
         <source>Loading Printer Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="167"/>
-        <location filename="../src/deviceinfoparser.cpp" line="188"/>
-        <location filename="../src/deviceinfoparser.cpp" line="504"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1230"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1277"/>
+        <location filename="../src/deviceinfoparser.cpp" line="158"/>
+        <location filename="../src/deviceinfoparser.cpp" line="176"/>
+        <location filename="../src/deviceinfoparser.cpp" line="480"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1100"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1141"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1689"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -592,183 +593,183 @@
 <context>
     <name>DiskWidget</name>
     <message>
-        <location filename="../src/diskwidget.cpp" line="29"/>
+        <location filename="../src/diskwidget.cpp" line="30"/>
         <source>Storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="39"/>
+        <location filename="../src/diskwidget.cpp" line="42"/>
         <source>No disk found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="61"/>
+        <location filename="../src/diskwidget.cpp" line="93"/>
         <source>Model</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="66"/>
+        <location filename="../src/diskwidget.cpp" line="98"/>
         <source>Vendor</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="85"/>
+        <location filename="../src/diskwidget.cpp" line="117"/>
         <source>Media Type</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="104"/>
+        <location filename="../src/diskwidget.cpp" line="198"/>
         <source>Interface</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="106"/>
+        <location filename="../src/diskwidget.cpp" line="200"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="119"/>
+        <location filename="../src/diskwidget.cpp" line="206"/>
         <source>Size</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="124"/>
+        <location filename="../src/diskwidget.cpp" line="211"/>
         <source>Serial Number</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="137"/>
+        <location filename="../src/diskwidget.cpp" line="224"/>
         <source>Model Family</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="142"/>
+        <location filename="../src/diskwidget.cpp" line="229"/>
         <source>Device Model</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="147"/>
+        <location filename="../src/diskwidget.cpp" line="234"/>
         <source>Description</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="155"/>
+        <location filename="../src/diskwidget.cpp" line="242"/>
         <source>Speed</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="168"/>
+        <location filename="../src/diskwidget.cpp" line="253"/>
         <source>Rotation Rate</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="175"/>
+        <location filename="../src/diskwidget.cpp" line="260"/>
         <source>Form Factor</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="177"/>
+        <location filename="../src/diskwidget.cpp" line="262"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="181"/>
+        <location filename="../src/diskwidget.cpp" line="266"/>
         <source>Power On Hours</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="185"/>
+        <location filename="../src/diskwidget.cpp" line="270"/>
         <source>Hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="189"/>
+        <location filename="../src/diskwidget.cpp" line="274"/>
         <source>Power_On_Minutes</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="193"/>
+        <location filename="../src/diskwidget.cpp" line="278"/>
         <source>Minutes</source>
         <comment>Power_On_Minutes</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="198"/>
+        <location filename="../src/diskwidget.cpp" line="283"/>
         <source>Power_On_Half_Minutes</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="203"/>
+        <location filename="../src/diskwidget.cpp" line="288"/>
         <source>Half Minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="208"/>
+        <location filename="../src/diskwidget.cpp" line="293"/>
         <source>Power_On_Seconds</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="213"/>
+        <location filename="../src/diskwidget.cpp" line="298"/>
         <source>Seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="217"/>
+        <location filename="../src/diskwidget.cpp" line="302"/>
         <source>Power Cycle Count</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="222"/>
+        <location filename="../src/diskwidget.cpp" line="307"/>
         <source>Times</source>
         <comment>Power Cycle Count</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="228"/>
+        <location filename="../src/diskwidget.cpp" line="313"/>
         <source>Version</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="233"/>
+        <location filename="../src/diskwidget.cpp" line="318"/>
         <source>Capabilities</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="288"/>
+        <location filename="../src/diskwidget.cpp" line="364"/>
         <source>Model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="288"/>
+        <location filename="../src/diskwidget.cpp" line="364"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="288"/>
+        <location filename="../src/diskwidget.cpp" line="364"/>
         <source>Media Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="288"/>
+        <location filename="../src/diskwidget.cpp" line="364"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -781,14 +782,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="60"/>
-        <location filename="../src/displayadapterwidget.cpp" line="166"/>
+        <location filename="../src/displayadapterwidget.cpp" line="61"/>
+        <location filename="../src/displayadapterwidget.cpp" line="163"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="72"/>
-        <location filename="../src/displayadapterwidget.cpp" line="166"/>
+        <location filename="../src/displayadapterwidget.cpp" line="163"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -798,38 +799,53 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="89"/>
+        <location filename="../src/displayadapterwidget.cpp" line="82"/>
+        <source>Graphic Memory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="84"/>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="91"/>
         <source>Minimum Resolution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="93"/>
+        <location filename="../src/displayadapterwidget.cpp" line="95"/>
         <source>Maximum Resolution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="98"/>
+        <location filename="../src/displayadapterwidget.cpp" line="100"/>
         <source>Driver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="107"/>
+        <location filename="../src/displayadapterwidget.cpp" line="109"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="112"/>
+        <location filename="../src/displayadapterwidget.cpp" line="114"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="117"/>
+        <location filename="../src/displayadapterwidget.cpp" line="119"/>
         <source>Clock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="122"/>
+        <location filename="../src/displayadapterwidget.cpp" line="124"/>
         <source>Capabilities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="186"/>
+        <source>Failed to find display adapter information</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -841,110 +857,101 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="44"/>
+        <location filename="../src/keyboardwidget.cpp" line="270"/>
+        <source>Sysfs</source>
+        <comment>Keyboard Info,better if dont translate，my personal opinion</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/keyboardwidget.cpp" line="324"/>
         <source>No keyboard found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="60"/>
-        <location filename="../src/keyboardwidget.cpp" line="256"/>
-        <location filename="../src/keyboardwidget.cpp" line="281"/>
-        <location filename="../src/keyboardwidget.cpp" line="359"/>
+        <location filename="../src/keyboardwidget.cpp" line="35"/>
+        <location filename="../src/keyboardwidget.cpp" line="78"/>
+        <location filename="../src/keyboardwidget.cpp" line="183"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="61"/>
-        <location filename="../src/keyboardwidget.cpp" line="256"/>
-        <location filename="../src/keyboardwidget.cpp" line="291"/>
-        <location filename="../src/keyboardwidget.cpp" line="359"/>
+        <location filename="../src/keyboardwidget.cpp" line="35"/>
+        <location filename="../src/keyboardwidget.cpp" line="88"/>
+        <location filename="../src/keyboardwidget.cpp" line="184"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="62"/>
-        <location filename="../src/keyboardwidget.cpp" line="256"/>
+        <location filename="../src/keyboardwidget.cpp" line="185"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="91"/>
-        <location filename="../src/keyboardwidget.cpp" line="286"/>
+        <location filename="../src/keyboardwidget.cpp" line="83"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="96"/>
-        <location filename="../src/keyboardwidget.cpp" line="296"/>
+        <location filename="../src/keyboardwidget.cpp" line="93"/>
         <source>Bus Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="101"/>
-        <location filename="../src/keyboardwidget.cpp" line="206"/>
-        <location filename="../src/keyboardwidget.cpp" line="311"/>
+        <location filename="../src/keyboardwidget.cpp" line="108"/>
+        <location filename="../src/keyboardwidget.cpp" line="278"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="106"/>
-        <location filename="../src/keyboardwidget.cpp" line="316"/>
+        <location filename="../src/keyboardwidget.cpp" line="113"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="111"/>
-        <location filename="../src/keyboardwidget.cpp" line="321"/>
+        <location filename="../src/keyboardwidget.cpp" line="118"/>
         <source>Clock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="116"/>
-        <location filename="../src/keyboardwidget.cpp" line="326"/>
+        <location filename="../src/keyboardwidget.cpp" line="123"/>
         <source>Capabilities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="124"/>
+        <location filename="../src/keyboardwidget.cpp" line="195"/>
         <source>Uniq</source>
         <comment>Keyboard Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="142"/>
+        <location filename="../src/keyboardwidget.cpp" line="213"/>
         <source>Connected</source>
         <comment>Keyboard Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="157"/>
+        <location filename="../src/keyboardwidget.cpp" line="228"/>
         <source>Phys</source>
         <comment>Keyboard Info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="198"/>
-        <source>Sysfs</source>
-        <comment>Keyboard Info,better if dont do translation ,i think</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="211"/>
+        <location filename="../src/keyboardwidget.cpp" line="283"/>
         <source>Product</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="224"/>
+        <location filename="../src/keyboardwidget.cpp" line="296"/>
         <source>Power</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="301"/>
+        <location filename="../src/keyboardwidget.cpp" line="98"/>
         <source>Physical ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="306"/>
+        <location filename="../src/keyboardwidget.cpp" line="103"/>
         <source>Logical Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -957,48 +964,48 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="361"/>
+        <location filename="../src/mainwindow.cpp" line="350"/>
         <source>Device Info</source>
         <comment>export file&apos;s name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="466"/>
+        <location filename="../src/mainwindow.cpp" line="440"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="470"/>
+        <location filename="../src/mainwindow.cpp" line="444"/>
         <source>Display shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="475"/>
+        <location filename="../src/mainwindow.cpp" line="449"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="480"/>
+        <location filename="../src/mainwindow.cpp" line="454"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="485"/>
+        <location filename="../src/mainwindow.cpp" line="459"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="495"/>
+        <location filename="../src/mainwindow.cpp" line="469"/>
         <source>Device Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="499"/>
+        <location filename="../src/mainwindow.cpp" line="473"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="504"/>
+        <location filename="../src/mainwindow.cpp" line="478"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1007,235 +1014,231 @@
     <name>MemoryWidget</name>
     <message>
         <location filename="../src/memorywidget.cpp" line="31"/>
+        <location filename="../src/memorywidget.cpp" line="70"/>
         <source>Memory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="52"/>
-        <location filename="../src/memorywidget.cpp" line="87"/>
+        <location filename="../src/memorywidget.cpp" line="88"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="52"/>
-        <location filename="../src/memorywidget.cpp" line="87"/>
-        <location filename="../src/memorywidget.cpp" line="204"/>
-        <location filename="../src/memorywidget.cpp" line="446"/>
+        <location filename="../src/memorywidget.cpp" line="88"/>
+        <location filename="../src/memorywidget.cpp" line="192"/>
+        <location filename="../src/memorywidget.cpp" line="416"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="52"/>
-        <location filename="../src/memorywidget.cpp" line="87"/>
-        <location filename="../src/memorywidget.cpp" line="219"/>
+        <location filename="../src/memorywidget.cpp" line="88"/>
+        <location filename="../src/memorywidget.cpp" line="207"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="52"/>
-        <location filename="../src/memorywidget.cpp" line="87"/>
-        <location filename="../src/memorywidget.cpp" line="461"/>
+        <location filename="../src/memorywidget.cpp" line="88"/>
+        <location filename="../src/memorywidget.cpp" line="431"/>
         <source>Speed</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="52"/>
-        <location filename="../src/memorywidget.cpp" line="87"/>
-        <location filename="../src/memorywidget.cpp" line="134"/>
-        <location filename="../src/memorywidget.cpp" line="144"/>
+        <location filename="../src/memorywidget.cpp" line="88"/>
+        <location filename="../src/memorywidget.cpp" line="131"/>
+        <location filename="../src/memorywidget.cpp" line="139"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="130"/>
+        <location filename="../src/memorywidget.cpp" line="127"/>
         <source>Slot Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="165"/>
-        <location filename="../src/memorywidget.cpp" line="407"/>
+        <location filename="../src/memorywidget.cpp" line="158"/>
+        <location filename="../src/memorywidget.cpp" line="382"/>
         <source>Maximum Capacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="182"/>
-        <location filename="../src/memorywidget.cpp" line="424"/>
+        <location filename="../src/memorywidget.cpp" line="171"/>
+        <location filename="../src/memorywidget.cpp" line="395"/>
         <source>Upgradeable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="183"/>
-        <location filename="../src/memorywidget.cpp" line="425"/>
+        <location filename="../src/memorywidget.cpp" line="172"/>
+        <location filename="../src/memorywidget.cpp" line="396"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="183"/>
-        <location filename="../src/memorywidget.cpp" line="425"/>
+        <location filename="../src/memorywidget.cpp" line="172"/>
+        <location filename="../src/memorywidget.cpp" line="396"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="199"/>
+        <location filename="../src/memorywidget.cpp" line="187"/>
         <source>Model</source>
         <comment>memory&apos;s model</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="209"/>
-        <location filename="../src/memorywidget.cpp" line="441"/>
+        <location filename="../src/memorywidget.cpp" line="197"/>
+        <location filename="../src/memorywidget.cpp" line="411"/>
         <source>Locator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="214"/>
+        <location filename="../src/memorywidget.cpp" line="202"/>
         <source>Size</source>
         <comment>memory&apos;s size</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="224"/>
+        <location filename="../src/memorywidget.cpp" line="212"/>
         <source>Speed</source>
         <comment>memory&apos;s Speed</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="229"/>
+        <location filename="../src/memorywidget.cpp" line="217"/>
         <source>Serial Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="234"/>
+        <location filename="../src/memorywidget.cpp" line="222"/>
         <source>Form Factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="239"/>
+        <location filename="../src/memorywidget.cpp" line="227"/>
         <source>Rank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="244"/>
+        <location filename="../src/memorywidget.cpp" line="232"/>
         <source>Bank Locator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="249"/>
-        <location filename="../src/memorywidget.cpp" line="491"/>
+        <location filename="../src/memorywidget.cpp" line="237"/>
+        <location filename="../src/memorywidget.cpp" line="461"/>
         <source>Configured Voltage</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="254"/>
+        <location filename="../src/memorywidget.cpp" line="242"/>
         <source>Minimum Voltage</source>
         <comment>memory&apos;s config</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="259"/>
+        <location filename="../src/memorywidget.cpp" line="247"/>
         <source>Maximum Voltage</source>
         <comment>memory&apos;s config</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="264"/>
+        <location filename="../src/memorywidget.cpp" line="252"/>
         <source>Configured Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="272"/>
-        <location filename="../src/memorywidget.cpp" line="337"/>
-        <location filename="../src/memorywidget.cpp" line="527"/>
+        <location filename="../src/memorywidget.cpp" line="260"/>
+        <location filename="../src/memorywidget.cpp" line="317"/>
+        <location filename="../src/memorywidget.cpp" line="492"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="273"/>
+        <location filename="../src/memorywidget.cpp" line="261"/>
         <source>Unknown memory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="305"/>
+        <location filename="../src/memorywidget.cpp" line="79"/>
         <source>Failed to get memory information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="372"/>
+        <location filename="../src/memorywidget.cpp" line="351"/>
         <source>Slot Count</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="376"/>
-        <location filename="../src/memorywidget.cpp" line="386"/>
-        <location filename="../src/memorywidget.cpp" line="451"/>
+        <location filename="../src/memorywidget.cpp" line="355"/>
+        <location filename="../src/memorywidget.cpp" line="363"/>
+        <location filename="../src/memorywidget.cpp" line="421"/>
         <source>Size</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="456"/>
+        <location filename="../src/memorywidget.cpp" line="426"/>
         <source>Type</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="466"/>
+        <location filename="../src/memorywidget.cpp" line="436"/>
         <source>Serial Number</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="471"/>
+        <location filename="../src/memorywidget.cpp" line="441"/>
         <source>Model Part Number</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="476"/>
+        <location filename="../src/memorywidget.cpp" line="446"/>
         <source>Form Factor</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="481"/>
+        <location filename="../src/memorywidget.cpp" line="451"/>
         <source>Rank</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="486"/>
+        <location filename="../src/memorywidget.cpp" line="456"/>
         <source>Bank Locator</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="496"/>
+        <location filename="../src/memorywidget.cpp" line="466"/>
         <source>Minimum Voltage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="501"/>
+        <location filename="../src/memorywidget.cpp" line="471"/>
         <source>Maximum Voltage</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="506"/>
+        <location filename="../src/memorywidget.cpp" line="476"/>
         <source>Configured Speed</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="530"/>
+        <location filename="../src/memorywidget.cpp" line="494"/>
         <source>Status</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="531"/>
+        <location filename="../src/memorywidget.cpp" line="495"/>
         <source>Bad</source>
         <comment>memory info</comment>
         <translation type="unfinished"></translation>
@@ -1249,95 +1252,114 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="83"/>
-        <location filename="../src/monitorwidget.cpp" line="289"/>
+        <location filename="../src/monitorwidget.cpp" line="85"/>
+        <location filename="../src/monitorwidget.cpp" line="246"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="84"/>
-        <location filename="../src/monitorwidget.cpp" line="289"/>
+        <location filename="../src/monitorwidget.cpp" line="86"/>
+        <location filename="../src/monitorwidget.cpp" line="246"/>
+        <location filename="../src/monitorwidget.cpp" line="360"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="85"/>
+        <location filename="../src/monitorwidget.cpp" line="87"/>
+        <location filename="../src/monitorwidget.cpp" line="361"/>
         <source>Resolution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="86"/>
+        <location filename="../src/monitorwidget.cpp" line="88"/>
+        <location filename="../src/monitorwidget.cpp" line="362"/>
         <source>Support Resolution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="87"/>
+        <location filename="../src/monitorwidget.cpp" line="89"/>
         <source>Display Ratio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="89"/>
+        <location filename="../src/monitorwidget.cpp" line="91"/>
+        <location filename="../src/monitorwidget.cpp" line="364"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="122"/>
+        <location filename="../src/monitorwidget.cpp" line="121"/>
         <source>Serial Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="132"/>
+        <location filename="../src/monitorwidget.cpp" line="131"/>
+        <location filename="../src/monitorwidget.cpp" line="363"/>
         <source>Manufacture Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="136"/>
-        <location filename="../src/monitorwidget.cpp" line="156"/>
+        <location filename="../src/monitorwidget.cpp" line="134"/>
+        <location filename="../src/monitorwidget.cpp" line="152"/>
+        <location filename="../src/monitorwidget.cpp" line="369"/>
+        <location filename="../src/monitorwidget.cpp" line="380"/>
         <source>Year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="139"/>
-        <location filename="../src/monitorwidget.cpp" line="234"/>
+        <location filename="../src/monitorwidget.cpp" line="137"/>
+        <location filename="../src/monitorwidget.cpp" line="202"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="143"/>
+        <location filename="../src/monitorwidget.cpp" line="140"/>
+        <location filename="../src/monitorwidget.cpp" line="369"/>
+        <location filename="../src/monitorwidget.cpp" line="380"/>
         <source>Week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="152"/>
+        <location filename="../src/monitorwidget.cpp" line="149"/>
         <source>The Model Year(Not Manufacture Date)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="165"/>
-        <source>Frequencies</source>
+        <location filename="../src/monitorwidget.cpp" line="373"/>
+        <source>Notebook monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="185"/>
+        <location filename="../src/monitorwidget.cpp" line="384"/>
+        <source>External monitor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/monitorwidget.cpp" line="159"/>
         <source>Primary Monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="233"/>
+        <location filename="../src/monitorwidget.cpp" line="201"/>
         <source>Connect Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="276"/>
-        <location filename="../src/monitorwidget.cpp" line="281"/>
-        <location filename="../src/monitorwidget.cpp" line="308"/>
-        <location filename="../src/monitorwidget.cpp" line="322"/>
-        <location filename="../src/monitorwidget.cpp" line="374"/>
+        <location filename="../src/monitorwidget.cpp" line="236"/>
+        <location filename="../src/monitorwidget.cpp" line="239"/>
+        <location filename="../src/monitorwidget.cpp" line="267"/>
+        <location filename="../src/monitorwidget.cpp" line="280"/>
+        <location filename="../src/monitorwidget.cpp" line="332"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="375"/>
+        <location filename="../src/monitorwidget.cpp" line="250"/>
+        <source>Failed to find monitor information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/monitorwidget.cpp" line="333"/>
         <source>cm</source>
         <comment>size unit</comment>
         <translation type="unfinished"></translation>
@@ -1359,7 +1381,7 @@
     <message>
         <location filename="../src/motherboardwidget.cpp" line="41"/>
         <location filename="../src/motherboardwidget.cpp" line="47"/>
-        <location filename="../src/motherboardwidget.cpp" line="241"/>
+        <location filename="../src/motherboardwidget.cpp" line="236"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1378,7 +1400,7 @@
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="43"/>
-        <location filename="../src/motherboardwidget.cpp" line="232"/>
+        <location filename="../src/motherboardwidget.cpp" line="227"/>
         <source>BIOS</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1390,7 +1412,7 @@
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="102"/>
-        <location filename="../src/motherboardwidget.cpp" line="251"/>
+        <location filename="../src/motherboardwidget.cpp" line="246"/>
         <source>Serial Number</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1400,113 +1422,113 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="138"/>
+        <location filename="../src/motherboardwidget.cpp" line="135"/>
         <source>Product Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="153"/>
+        <location filename="../src/motherboardwidget.cpp" line="150"/>
         <source>UUID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="158"/>
+        <location filename="../src/motherboardwidget.cpp" line="155"/>
         <source>Wake-up Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="163"/>
+        <location filename="../src/motherboardwidget.cpp" line="160"/>
         <source>SKU Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="178"/>
+        <location filename="../src/motherboardwidget.cpp" line="174"/>
         <source>System Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="196"/>
+        <location filename="../src/motherboardwidget.cpp" line="192"/>
         <source>Release Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="186"/>
+        <location filename="../src/motherboardwidget.cpp" line="350"/>
+        <source>Memory Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/motherboardwidget.cpp" line="182"/>
         <source>BIOS Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="206"/>
+        <location filename="../src/motherboardwidget.cpp" line="202"/>
         <source>BIOS Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="226"/>
+        <location filename="../src/motherboardwidget.cpp" line="222"/>
         <source>Characteristics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="246"/>
+        <location filename="../src/motherboardwidget.cpp" line="241"/>
         <source>Type</source>
         <comment>Chassis Information</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="256"/>
+        <location filename="../src/motherboardwidget.cpp" line="251"/>
         <source>Version</source>
         <comment>Chassis Information</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="266"/>
+        <location filename="../src/motherboardwidget.cpp" line="259"/>
         <source>Chassis Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="283"/>
+        <location filename="../src/motherboardwidget.cpp" line="275"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="292"/>
+        <location filename="../src/motherboardwidget.cpp" line="284"/>
         <source>Slot Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="296"/>
+        <location filename="../src/motherboardwidget.cpp" line="288"/>
         <source>Size</source>
         <comment>Computer_core_memory</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="306"/>
+        <location filename="../src/motherboardwidget.cpp" line="298"/>
         <source>Size</source>
         <comment>memory size</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="327"/>
+        <location filename="../src/motherboardwidget.cpp" line="319"/>
         <source>Maximum Capacity</source>
         <comment>PhysicMemory</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="353"/>
+        <location filename="../src/motherboardwidget.cpp" line="345"/>
         <source>Upgradeable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="354"/>
+        <location filename="../src/motherboardwidget.cpp" line="346"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="354"/>
+        <location filename="../src/motherboardwidget.cpp" line="346"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="358"/>
-        <source>Memory Bank Info</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1819,141 +1841,141 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="66"/>
-        <location filename="../src/powerwidget.cpp" line="179"/>
-        <location filename="../src/powerwidget.cpp" line="341"/>
+        <location filename="../src/powerwidget.cpp" line="65"/>
+        <location filename="../src/powerwidget.cpp" line="178"/>
+        <location filename="../src/powerwidget.cpp" line="340"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="67"/>
-        <location filename="../src/powerwidget.cpp" line="175"/>
-        <location filename="../src/powerwidget.cpp" line="341"/>
+        <location filename="../src/powerwidget.cpp" line="66"/>
+        <location filename="../src/powerwidget.cpp" line="174"/>
+        <location filename="../src/powerwidget.cpp" line="340"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="68"/>
-        <location filename="../src/powerwidget.cpp" line="177"/>
+        <location filename="../src/powerwidget.cpp" line="67"/>
+        <location filename="../src/powerwidget.cpp" line="176"/>
         <source>Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="69"/>
-        <location filename="../src/powerwidget.cpp" line="180"/>
+        <location filename="../src/powerwidget.cpp" line="68"/>
+        <location filename="../src/powerwidget.cpp" line="179"/>
         <source>Serial Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="80"/>
-        <location filename="../src/powerwidget.cpp" line="178"/>
+        <location filename="../src/powerwidget.cpp" line="79"/>
+        <location filename="../src/powerwidget.cpp" line="177"/>
         <source>Model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="83"/>
-        <location filename="../src/powerwidget.cpp" line="210"/>
+        <location filename="../src/powerwidget.cpp" line="82"/>
+        <location filename="../src/powerwidget.cpp" line="209"/>
         <source>Power Supply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="95"/>
-        <location filename="../src/powerwidget.cpp" line="223"/>
+        <location filename="../src/powerwidget.cpp" line="94"/>
+        <location filename="../src/powerwidget.cpp" line="222"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="100"/>
-        <location filename="../src/powerwidget.cpp" line="226"/>
+        <location filename="../src/powerwidget.cpp" line="99"/>
+        <location filename="../src/powerwidget.cpp" line="225"/>
         <source>Physical ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="103"/>
-        <location filename="../src/powerwidget.cpp" line="229"/>
+        <location filename="../src/powerwidget.cpp" line="102"/>
+        <location filename="../src/powerwidget.cpp" line="228"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="106"/>
-        <location filename="../src/powerwidget.cpp" line="233"/>
+        <location filename="../src/powerwidget.cpp" line="105"/>
+        <location filename="../src/powerwidget.cpp" line="232"/>
         <source>Capacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="120"/>
+        <location filename="../src/powerwidget.cpp" line="119"/>
         <source>Max Power Capacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="124"/>
-        <location filename="../src/powerwidget.cpp" line="237"/>
-        <location filename="../src/powerwidget.cpp" line="265"/>
+        <location filename="../src/powerwidget.cpp" line="123"/>
+        <location filename="../src/powerwidget.cpp" line="236"/>
+        <location filename="../src/powerwidget.cpp" line="264"/>
         <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="127"/>
+        <location filename="../src/powerwidget.cpp" line="126"/>
         <source>Asset Tag</source>
         <comment>Power Info from DMIDecode</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="153"/>
-        <location filename="../src/powerwidget.cpp" line="164"/>
+        <location filename="../src/powerwidget.cpp" line="152"/>
+        <location filename="../src/powerwidget.cpp" line="163"/>
         <source>Switching Power</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="176"/>
+        <location filename="../src/powerwidget.cpp" line="175"/>
         <source>Design Energy</source>
         <comment>Power Info from Upower</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="193"/>
+        <location filename="../src/powerwidget.cpp" line="192"/>
         <source>State</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="196"/>
+        <location filename="../src/powerwidget.cpp" line="195"/>
         <source>Battery Percentage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="199"/>
+        <location filename="../src/powerwidget.cpp" line="198"/>
         <source>Current Energy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="202"/>
+        <location filename="../src/powerwidget.cpp" line="201"/>
         <source>Full Energy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="207"/>
+        <location filename="../src/powerwidget.cpp" line="206"/>
         <source>Battery Healthy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="240"/>
+        <location filename="../src/powerwidget.cpp" line="239"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="268"/>
+        <location filename="../src/powerwidget.cpp" line="267"/>
         <source>Asset Tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="301"/>
-        <location filename="../src/powerwidget.cpp" line="330"/>
-        <location filename="../src/powerwidget.cpp" line="336"/>
+        <location filename="../src/powerwidget.cpp" line="300"/>
+        <location filename="../src/powerwidget.cpp" line="329"/>
+        <location filename="../src/powerwidget.cpp" line="335"/>
         <source>Battery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="341"/>
+        <location filename="../src/powerwidget.cpp" line="340"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1966,48 +1988,58 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="43"/>
+        <location filename="../src/printerwidget.cpp" line="40"/>
         <source>No printer found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="57"/>
+        <location filename="../src/printerwidget.cpp" line="52"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="62"/>
+        <location filename="../src/printerwidget.cpp" line="57"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/printerwidget.cpp" line="62"/>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/printerwidget.cpp" line="67"/>
+        <source>Serial ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="77"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="82"/>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="87"/>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="92"/>
+        <source>BusID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="97"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="72"/>
-        <source>Bus Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="77"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="82"/>
-        <source>Width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="87"/>
-        <source>Clock</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="92"/>
-        <source>Capabilities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2026,177 +2058,177 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/cloumnwidget.cpp" line="141"/>
+        <location filename="../src/cloumnwidget.cpp" line="142"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="312"/>
+        <location filename="../src/cpuwidget.cpp" line="311"/>
         <source>One</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="313"/>
+        <location filename="../src/cpuwidget.cpp" line="312"/>
         <source>Two</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="314"/>
+        <location filename="../src/cpuwidget.cpp" line="313"/>
         <source>Four</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="315"/>
+        <location filename="../src/cpuwidget.cpp" line="314"/>
         <source>Six</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="316"/>
+        <location filename="../src/cpuwidget.cpp" line="315"/>
         <source>Eight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="318"/>
+        <location filename="../src/cpuwidget.cpp" line="317"/>
         <source>Ten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="319"/>
+        <location filename="../src/cpuwidget.cpp" line="318"/>
         <source>Twelve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="320"/>
+        <location filename="../src/cpuwidget.cpp" line="319"/>
         <source>Fourteen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="321"/>
+        <location filename="../src/cpuwidget.cpp" line="320"/>
         <source>Sixteen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="322"/>
+        <location filename="../src/cpuwidget.cpp" line="321"/>
         <source>Eighteen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="324"/>
+        <location filename="../src/cpuwidget.cpp" line="323"/>
         <source>Twenty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="325"/>
+        <location filename="../src/cpuwidget.cpp" line="324"/>
         <source>Twenty-two</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="326"/>
+        <location filename="../src/cpuwidget.cpp" line="325"/>
         <source>Twenty-four</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="327"/>
+        <location filename="../src/cpuwidget.cpp" line="326"/>
         <source>Twenty-six</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="328"/>
+        <location filename="../src/cpuwidget.cpp" line="327"/>
         <source>Twenty-eight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="329"/>
+        <location filename="../src/cpuwidget.cpp" line="328"/>
         <source>Thirty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="331"/>
+        <location filename="../src/cpuwidget.cpp" line="330"/>
         <source>Thirty-two</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="332"/>
+        <location filename="../src/cpuwidget.cpp" line="331"/>
         <source>Thirty-four</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="333"/>
+        <location filename="../src/cpuwidget.cpp" line="332"/>
         <source>Thirty-six</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="334"/>
+        <location filename="../src/cpuwidget.cpp" line="333"/>
         <source>Thirty-eight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="335"/>
+        <location filename="../src/cpuwidget.cpp" line="334"/>
         <source>Forty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="337"/>
+        <location filename="../src/cpuwidget.cpp" line="336"/>
         <source>Forty-two</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="338"/>
+        <location filename="../src/cpuwidget.cpp" line="337"/>
         <source>Forty-four</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="339"/>
+        <location filename="../src/cpuwidget.cpp" line="338"/>
         <source>Forty-six</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="340"/>
+        <location filename="../src/cpuwidget.cpp" line="339"/>
         <source>Forty-eight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="341"/>
+        <location filename="../src/cpuwidget.cpp" line="340"/>
         <source>Fifty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="343"/>
+        <location filename="../src/cpuwidget.cpp" line="342"/>
         <source>Fifty-two</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="344"/>
+        <location filename="../src/cpuwidget.cpp" line="343"/>
         <source>Fifty-four</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="345"/>
+        <location filename="../src/cpuwidget.cpp" line="344"/>
         <source>Fifty-six</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="346"/>
+        <location filename="../src/cpuwidget.cpp" line="345"/>
         <source>Fifty-eight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="347"/>
+        <location filename="../src/cpuwidget.cpp" line="346"/>
         <source>Sixty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="349"/>
+        <location filename="../src/cpuwidget.cpp" line="348"/>
         <source>Sixty-two</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="350"/>
+        <location filename="../src/cpuwidget.cpp" line="349"/>
         <source>Sixty-four</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="351"/>
+        <location filename="../src/cpuwidget.cpp" line="350"/>
         <source>One hundred and Twenty-eight</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2282,1272 +2314,4 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-<name>ManulTrack__CPU</name>
-   <message><!-- manul track message -->
-       <source>address sizes</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>bugs</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache_alignment</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>clflush size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpu cores</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpuid level</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu_exception</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>initial apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>microcode</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>power management</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>processor</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>siblings</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>wp</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__CPU</name>
-   <message><!-- manul track message -->
-       <source>address sizes</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>bugs</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache_alignment</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>clflush size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpu cores</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpuid level</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu_exception</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>initial apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>microcode</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>power management</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>processor</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>siblings</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>wp</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__CPU</name>
-   <message><!-- manul track message -->
-       <source>address sizes</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>bugs</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache_alignment</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>clflush size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpu cores</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpuid level</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu_exception</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>initial apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>microcode</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>power management</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>processor</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>siblings</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>wp</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__CPU</name>
-   <message><!-- manul track message -->
-       <source>address sizes</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>bugs</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache_alignment</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>clflush size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpu cores</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpuid level</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu_exception</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>initial apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>microcode</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>power management</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>processor</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>siblings</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>wp</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__CPU</name>
-   <message><!-- manul track message -->
-       <source>address sizes</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>bugs</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache_alignment</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>clflush size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpu cores</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpuid level</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu_exception</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>initial apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>microcode</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>power management</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>processor</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>siblings</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>wp</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__CPU</name>
-   <message><!-- manul track message -->
-       <source>address sizes</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>bugs</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache_alignment</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>clflush size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpu cores</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpuid level</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu_exception</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>initial apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>microcode</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>power management</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>processor</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>siblings</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>wp</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__CPU</name>
-   <message><!-- manul track message -->
-       <source>address sizes</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>bugs</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache_alignment</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>clflush size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpu cores</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpuid level</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu_exception</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>initial apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>microcode</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>power management</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>processor</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>siblings</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>wp</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__CPU</name>
-   <message><!-- manul track message -->
-       <source>address sizes</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>bugs</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cache_alignment</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>clflush size</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpu cores</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>cpuid level</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>fpu_exception</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>initial apicid</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>microcode</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>power management</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>processor</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>siblings</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>wp</source>
-       <comment>CPU Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__MotherBoard_dmidecode</name>
-   <message><!-- manul track message -->
-       <source>Asset Tag</source>
-       <comment>mother board info from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Chassis Handle</source>
-       <comment>mother board info from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Contained Object Handles</source>
-       <comment>mother board info from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Location In Chassis</source>
-       <comment>mother board info from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Type</source>
-       <comment>mother board info from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__MotherBoard_SystemInfo</name>
-   <message><!-- manul track message -->
-       <source>Family</source>
-       <comment>System info of mother board from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__BiosInfo_dmi</name>
-   <message><!-- manul track message -->
-       <source>Address</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>BIOS Revision</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Firmware Revision</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>ROM Size</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Runtime Size</source>
-       <comment>bios info of motherboard from dmidecode</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__Bios_lang</name>
-   <message><!-- manul track message -->
-       <source>Currently Installed Language</source>
-       <comment>BIOS Language Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Installable Languages</source>
-       <comment>BIOS Language Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Language Description Format</source>
-       <comment>BIOS Language Information</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__Chassis information</name>
-   <message><!-- manul track message -->
-       <source>Asset Tag</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Boot-up State</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Contained Elements</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Height</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Lock</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Number Of Power Cords</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>OEM Information</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Power Supply State</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SKU Number</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Security Status</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Thermal State</source>
-       <comment>Chassis</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Type</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>driver</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>irq</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>latency</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>memory</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>multimedia</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>physical id</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Type</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>driver</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>irq</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>latency</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>memory</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>multimedia</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>physical id</source>
-       <comment>Audio device infomation from lshw</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-<context>
-<name>ManulTrack__AudioDevices</name>
-   <message><!-- manul track message -->
-       <source>Bus</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>EV</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Handlers</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>PROP</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Phys</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Product</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>SW</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-   <message><!-- manul track message -->
-       <source>Uniq</source>
-       <comment>Audio device infomation from catinput</comment>
-       <translation type ="unfinished"></translation>
-   </message>
-</context>
-
 </TS>

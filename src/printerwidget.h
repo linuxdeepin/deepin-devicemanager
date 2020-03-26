@@ -31,5 +31,6 @@ public:
     explicit PrinterWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+    void loadWidget();
 };
 
