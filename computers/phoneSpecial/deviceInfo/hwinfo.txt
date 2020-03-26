@@ -1,0 +1,30 @@
+15: None 00.0: 10000 Monitor
+  [Created at monitor.125]
+  Unique ID: rdCR.ilwKlXL_5g0
+  Parent ID: _Znp.oXvaUnbb5p1
+  Hardware Class: monitor
+  Model: "HP LE1711"
+  Vendor: HWP "HP"
+  Device: eisa 0x2856 "LE1711"
+  Serial ID: "3CQ152C1S9"
+  Resolution: 720x400@70Hz
+  Resolution: 640x480@60Hz
+  Resolution: 800x600@60Hz
+  Resolution: 1024x768@60Hz
+  Resolution: 1280x960@60Hz
+  Resolution: 1280x1024@60Hz
+  Size: 340x270 mm
+  Year of Manufacture: 2011
+  Week of Manufacture: 52
+  Detailed Timings #0:
+     Resolution: 1280x1024
+     Horizontal: 1280 1328 1440 1688 (+48 +160 +408) +hsync
+       Vertical: 1024 1025 1028 1066 (+1 +4 +42) +vsync
+    Frequencies: 108.00 MHz, 63.98 kHz, 60.02 Hz
+  Driver Info #0:
+    Max. Resolution: 1280x1024
+    Vert. Sync Range: 50-76 Hz
+    Hor. Sync Range: 24-83 kHz
+    Bandwidth: 108 MHz
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #12 (VGA compatible controller)

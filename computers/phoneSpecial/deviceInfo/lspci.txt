@@ -1,0 +1,134 @@
+00:00.0 Host bridge: Intel Corporation 8th Gen Core Processor Host Bridge/DRAM Registers (rev 07)
+	Subsystem: Lenovo 8th Gen Core Processor Host Bridge/DRAM Registers
+	Flags: bus master, fast devsel, latency 0
+	Capabilities: [e0] Vendor Specific Information: Len=10 <?>
+	Kernel driver in use: skl_uncore
+
+00:02.0 VGA compatible controller: Intel Corporation UHD Graphics 630 (Desktop) (prog-if 00 [VGA controller])
+	Subsystem: Lenovo UHD Graphics 630 (Desktop)
+	Flags: bus master, fast devsel, latency 0, IRQ 126
+	Memory at b0000000 (64-bit, non-prefetchable) [size=16M]
+	Memory at a0000000 (64-bit, prefetchable) [size=256M]
+	I/O ports at 3000 [size=64]
+	[virtual] Expansion ROM at 000c0000 [disabled] [size=128K]
+	Capabilities: [40] Vendor Specific Information: Len=0c <?>
+	Capabilities: [70] Express Root Complex Integrated Endpoint, MSI 00
+	Capabilities: [ac] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [d0] Power Management version 2
+	Capabilities: [100] Process Address Space ID (PASID)
+	Capabilities: [200] Address Translation Service (ATS)
+	Capabilities: [300] Page Request Interface (PRI)
+	Kernel driver in use: i915
+	Kernel modules: i915
+
+00:08.0 System peripheral: Intel Corporation Xeon E3-1200 v5/v6 / E3-1500 v5 / 6th/7th/8th Gen Core Processor Gaussian Mixture Model
+	Subsystem: Lenovo Xeon E3-1200 v5/v6 / E3-1500 v5 / 6th/7th Gen Core Processor Gaussian Mixture Model
+	Flags: bus master, fast devsel, latency 0, IRQ 11
+	Memory at b113e000 (64-bit, non-prefetchable) [size=4K]
+	Capabilities: [90] MSI: Enable- Count=1/1 Maskable- 64bit-
+	Capabilities: [dc] Power Management version 2
+	Capabilities: [f0] PCI Advanced Features
+
+00:14.0 USB controller: Intel Corporation Cannon Lake PCH USB 3.1 xHCI Host Controller (rev 10) (prog-if 30 [XHCI])
+	Subsystem: Lenovo Cannon Lake PCH USB 3.1 xHCI Host Controller
+	Flags: bus master, medium devsel, latency 0, IRQ 125
+	Memory at b1120000 (64-bit, non-prefetchable) [size=64K]
+	Capabilities: [70] Power Management version 2
+	Capabilities: [80] MSI: Enable+ Count=1/8 Maskable- 64bit+
+	Capabilities: [90] Vendor Specific Information: Len=14 <?>
+	Kernel driver in use: xhci_hcd
+	Kernel modules: xhci_pci
+
+00:14.2 RAM memory: Intel Corporation Cannon Lake PCH Shared SRAM (rev 10)
+	Subsystem: Lenovo Cannon Lake PCH Shared SRAM
+	Flags: bus master, fast devsel, latency 0
+	Memory at b1136000 (64-bit, non-prefetchable) [size=8K]
+	Memory at b113d000 (64-bit, non-prefetchable) [size=4K]
+	Capabilities: [80] Power Management version 3
+
+00:16.0 Communication controller: Intel Corporation Cannon Lake PCH HECI Controller (rev 10)
+	Subsystem: Lenovo Cannon Lake PCH HECI Controller
+	Flags: bus master, fast devsel, latency 0, IRQ 127
+	Memory at b113c000 (64-bit, non-prefetchable) [size=4K]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [8c] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [a4] Vendor Specific Information: Len=14 <?>
+	Kernel driver in use: mei_me
+	Kernel modules: mei_me
+
+00:16.3 Serial controller: Intel Corporation Cannon Lake PCH Active Management Technology - SOL (rev 10) (prog-if 02 [16550])
+	Subsystem: Lenovo Cannon Lake PCH Active Management Technology - SOL
+	Flags: bus master, 66MHz, fast devsel, latency 0, IRQ 19
+	I/O ports at 30a0 [size=8]
+	Memory at b113b000 (32-bit, non-prefetchable) [size=4K]
+	Capabilities: [40] MSI: Enable- Count=1/1 Maskable- 64bit+
+	Capabilities: [50] Power Management version 3
+	Kernel driver in use: serial
+
+00:17.0 SATA controller: Intel Corporation Cannon Lake PCH SATA AHCI Controller (rev 10) (prog-if 01 [AHCI 1.0])
+	Subsystem: Lenovo Cannon Lake PCH SATA AHCI Controller
+	Flags: bus master, 66MHz, medium devsel, latency 0, IRQ 124
+	Memory at b1134000 (32-bit, non-prefetchable) [size=8K]
+	Memory at b113a000 (32-bit, non-prefetchable) [size=256]
+	I/O ports at 3090 [size=8]
+	I/O ports at 3080 [size=4]
+	I/O ports at 3060 [size=32]
+	Memory at b1139000 (32-bit, non-prefetchable) [size=2K]
+	Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [70] Power Management version 3
+	Capabilities: [a8] SATA HBA v1.0
+	Kernel driver in use: ahci
+	Kernel modules: ahci
+
+00:1c.0 PCI bridge: Intel Corporation Cannon Lake PCH PCI Express Root Port #7 (rev f0) (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 122
+	Bus: primary=00, secondary=01, subordinate=02, sec-latency=0
+	Capabilities: [40] Express Root Port (Slot+), MSI 00
+	Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+	Capabilities: [90] Subsystem: Lenovo Cannon Lake PCH PCI Express Root Port
+	Capabilities: [a0] Power Management version 3
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [140] Access Control Services
+	Capabilities: [150] Precision Time Measurement
+	Capabilities: [200] L1 PM Substates
+	Capabilities: [220] #19
+	Capabilities: [250] Downstream Port Containment
+	Kernel driver in use: pcieport
+
+00:1f.0 ISA bridge: Intel Corporation Q370 Chipset LPC/eSPI Controller (rev 10)
+	Subsystem: Lenovo Q370 Chipset LPC/eSPI Controller
+	Flags: bus master, fast devsel, latency 0
+
+00:1f.3 Audio device: Intel Corporation Cannon Lake PCH cAVS (rev 10) (prog-if 80)
+	Subsystem: Lenovo Cannon Lake PCH cAVS
+	Flags: bus master, fast devsel, latency 32, IRQ 128
+	Memory at b1130000 (64-bit, non-prefetchable) [size=16K]
+	Memory at b1000000 (64-bit, non-prefetchable) [size=1M]
+	Capabilities: [50] Power Management version 3
+	Capabilities: [80] Vendor Specific Information: Len=14 <?>
+	Capabilities: [60] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Kernel driver in use: snd_hda_intel
+	Kernel modules: snd_hda_intel
+
+00:1f.4 SMBus: Intel Corporation Cannon Lake PCH SMBus Controller (rev 10)
+	Subsystem: Lenovo Cannon Lake PCH SMBus Controller
+	Flags: medium devsel, IRQ 16
+	Memory at b1138000 (64-bit, non-prefetchable) [size=256]
+	I/O ports at efa0 [size=32]
+	Kernel driver in use: i801_smbus
+	Kernel modules: i2c_i801
+
+00:1f.5 Serial bus controller [0c80]: Intel Corporation Cannon Lake PCH SPI Controller (rev 10)
+	Subsystem: Lenovo Cannon Lake PCH SPI Controller
+	Flags: fast devsel
+	Memory at fe010000 (32-bit, non-prefetchable) [size=4K]
+
+00:1f.6 Ethernet controller: Intel Corporation Ethernet Connection (7) I219-LM (rev 10)
+	Subsystem: Lenovo Ethernet Connection (7) I219-LM
+	Flags: bus master, fast devsel, latency 0, IRQ 123
+	Memory at b1100000 (32-bit, non-prefetchable) [size=128K]
+	Capabilities: [c8] Power Management version 3
+	Capabilities: [d0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Kernel driver in use: e1000e
+	Kernel modules: e1000e
+

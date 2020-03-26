@@ -25,6 +25,7 @@
 #include  <QObject>
 #include <DApplication>
 #include <QSet>
+#include <QDBusInterface>
 
 const int coresNumberArray[] = {
     1, 2, 4, 6, 8,
@@ -50,7 +51,11 @@ void CpuWidget::initWidget()
 
     QString architecture =  DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Architecture");
 
-    overviewInfo_.value = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Model name");
+//    overviewInfo_.value = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Model name");
+//    overviewInfo_.value.remove(" CPU", Qt::CaseInsensitive);
+    QDBusInterface cpuModelName("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
+    QString cpuModel  = cpuModelName.property("Processor").toString();
+    overviewInfo_.value = cpuModel;
     overviewInfo_.value.remove(" CPU", Qt::CaseInsensitive);
 
     QString maxSpeed = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "CPU max MHz");
@@ -140,21 +145,21 @@ void CpuWidget::initWidget()
     QList<QStringList> tabList;
 
     foreach (const QString &cpu, cpuList) {
-        QString md = DeviceInfoParser::Instance().queryData("catcpu", cpu, "model name");
+//        QString md = DeviceInfoParser::Instance().queryData("catcpu", cpu, "model name");
         QString mc = DeviceInfoParser::Instance().queryData("catcpu", cpu, "vendor_id");
         if (mc.isEmpty() || mc == tr("Unknown")) {
             mc = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Vendor ID");
         }
 
         if (mc == tr("Unknown")) {
-            mc = md.split(" ").first();
+            mc = cpuModel.split(" ").first();
         }
 
         QStringList tab = {};
         if (speed_.isEmpty()) {
-            tab << md << mc << architecture;
+            tab << cpuModel << mc << architecture;
         } else {
-            tab << md << mc << speed_ << architecture;
+            tab << cpuModel << mc << speed_ << architecture;
         }
 
         tabList.push_back(tab);

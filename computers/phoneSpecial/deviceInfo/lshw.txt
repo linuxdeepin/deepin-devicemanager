@@ -1,0 +1,452 @@
+cyt-pc
+    description: Desktop Computer
+    product: 10SMCTO1WW (LENOVO_MT_10SM_BU_Think_FM_ThinkCentre M920t-N000)
+    vendor: LENOVO
+    version: ThinkCentre M920t-N000
+    serial: M70BMSM5
+    width: 64 bits
+    capabilities: smbios-3.2.1 dmi-3.2.1 smp vsyscall32
+    configuration: administrator_password=disabled boot=normal chassis=desktop family=ThinkCentre M920t-N000 keyboard_password=enabled power-on_password=disabled sku=LENOVO_MT_10SM_BU_Think_FM_ThinkCentre M920t-N000 uuid=0099AD5B-77BE-E911-A193-B0F96FE52200
+  *-core
+       description: Motherboard
+       product: 3133
+       vendor: LENOVO
+       physical id: 0
+       version: NOK
+       slot: Default string
+     *-firmware
+          description: BIOS
+          vendor: LENOVO
+          physical id: 0
+          version: M1UKT45A
+          date: 07/11/2019
+          size: 64KiB
+          capacity: 12MiB
+          capabilities: pci upgrade shadowing cdboot bootselect socketedrom edd int13floppy1200 int13floppy720 int13floppy2880 int5printscreen int9keyboard int14serial int17printer acpi usb biosbootspecification uefi
+     *-memory
+          description: System Memory
+          physical id: 3b
+          slot: System board or motherboard
+          size: 16GiB
+        *-bank:0
+             description: [empty]
+             physical id: 0
+             slot: ChannelA-DIMM0
+        *-bank:1
+             description: DIMM DDR4 Synchronous 2667 MHz (0.4 ns)
+             product: HMA81GU6CJR8N-VK
+             vendor: SK Hynix
+             physical id: 1
+             serial: 2EBDCE7D
+             slot: ChannelA-DIMM1
+             size: 8GiB
+             width: 64 bits
+             clock: 2667MHz (0.4ns)
+        *-bank:2
+             description: [empty]
+             physical id: 2
+             slot: ChannelB-DIMM0
+        *-bank:3
+             description: DIMM DDR4 Synchronous 2667 MHz (0.4 ns)
+             product: HMA81GU6CJR8N-VK
+             vendor: SK Hynix
+             physical id: 3
+             serial: 2EBDCD30
+             slot: ChannelB-DIMM1
+             size: 8GiB
+             width: 64 bits
+             clock: 2667MHz (0.4ns)
+     *-cache:0
+          description: L1 cache
+          physical id: 47
+          slot: L1 Cache
+          size: 384KiB
+          capacity: 384KiB
+          capabilities: synchronous internal write-back unified
+          configuration: level=1
+     *-cache:1
+          description: L2 cache
+          physical id: 48
+          slot: L2 Cache
+          size: 1536KiB
+          capacity: 1536KiB
+          capabilities: synchronous internal write-back unified
+          configuration: level=2
+     *-cache:2
+          description: L3 cache
+          physical id: 49
+          slot: L3 Cache
+          size: 12MiB
+          capacity: 12MiB
+          capabilities: synchronous internal write-back unified
+          configuration: level=3
+     *-cpu
+          description: CPU
+          product: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
+          vendor: Intel Corp.
+          physical id: 4a
+          bus info: cpu@0
+          version: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
+          serial: To Be Filled By O.E.M.
+          slot: U3E1
+          size: 4415MHz
+          capacity: 4600MHz
+          width: 64 bits
+          clock: 100MHz
+          capabilities: lm fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp x86-64 constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm dep_fpu_cs_ds mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d cpufreq
+          configuration: cores=6 enabledcores=6 threads=12
+     *-pci
+          description: Host bridge
+          product: 8th Gen Core Processor Host Bridge/DRAM Registers
+          vendor: Intel Corporation
+          physical id: 100
+          bus info: pci@0000:00:00.0
+          version: 07
+          width: 32 bits
+          clock: 33MHz
+          configuration: driver=skl_uncore
+          resources: irq:0
+        *-display
+             description: VGA compatible controller
+             product: UHD Graphics 630 (Desktop)
+             vendor: Intel Corporation
+             physical id: 2
+             bus info: pci@0000:00:02.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pciexpress msi pm vga_controller bus_master cap_list rom
+             configuration: driver=i915 latency=0
+             resources: irq:126 memory:b0000000-b0ffffff memory:a0000000-afffffff ioport:3000(size=64) memory:c0000-dffff
+        *-generic UNCLAIMED
+             description: System peripheral
+             product: Xeon E3-1200 v5/v6 / E3-1500 v5 / 6th/7th/8th Gen Core Processor Gaussian Mixture Model
+             vendor: Intel Corporation
+             physical id: 8
+             bus info: pci@0000:00:08.0
+             version: 00
+             width: 64 bits
+             clock: 33MHz
+             capabilities: msi pm bus_master cap_list
+             configuration: latency=0
+             resources: memory:b113e000-b113efff
+        *-usb
+             description: USB controller
+             product: Cannon Lake PCH USB 3.1 xHCI Host Controller
+             vendor: Intel Corporation
+             physical id: 14
+             bus info: pci@0000:00:14.0
+             version: 10
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi xhci bus_master cap_list
+             configuration: driver=xhci_hcd latency=0
+             resources: irq:125 memory:b1120000-b112ffff
+           *-usbhost:0
+                product: xHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 xhci-hcd
+                physical id: 0
+                bus info: usb@1
+                logical name: usb1
+                version: 4.19
+                capabilities: usb-2.00
+                configuration: driver=hub slots=16 speed=480Mbit/s
+              *-usb UNCLAIMED
+                   description: Generic USB device
+                   product: m1852
+                   vendor: Meizu
+                   physical id: 8
+                   bus info: usb@1:8
+                   version: 4.09
+                   serial: 852QLETH245TH
+                   capabilities: usb-2.00
+                   configuration: maxpower=500mA speed=480Mbit/s
+           *-usbhost:1
+                product: xHCI Host Controller
+                vendor: Linux 4.19.0-6-amd64 xhci-hcd
+                physical id: 1
+                bus info: usb@2
+                logical name: usb2
+                version: 4.19
+                capabilities: usb-3.00
+                configuration: driver=hub slots=10 speed=5000Mbit/s
+        *-memory UNCLAIMED
+             description: RAM memory
+             product: Cannon Lake PCH Shared SRAM
+             vendor: Intel Corporation
+             physical id: 14.2
+             bus info: pci@0000:00:14.2
+             version: 10
+             width: 64 bits
+             clock: 33MHz (30.3ns)
+             capabilities: pm bus_master cap_list
+             configuration: latency=0
+             resources: memory:b1136000-b1137fff memory:b113d000-b113dfff
+        *-communication:0
+             description: Communication controller
+             product: Cannon Lake PCH HECI Controller
+             vendor: Intel Corporation
+             physical id: 16
+             bus info: pci@0000:00:16.0
+             version: 10
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi bus_master cap_list
+             configuration: driver=mei_me latency=0
+             resources: irq:127 memory:b113c000-b113cfff
+        *-communication:1
+             description: Serial controller
+             product: Cannon Lake PCH Active Management Technology - SOL
+             vendor: Intel Corporation
+             physical id: 16.3
+             bus info: pci@0000:00:16.3
+             version: 10
+             width: 32 bits
+             clock: 66MHz
+             capabilities: msi pm 16550 bus_master cap_list
+             configuration: driver=serial latency=0
+             resources: irq:19 ioport:30a0(size=8) memory:b113b000-b113bfff
+        *-sata
+             description: SATA controller
+             product: Cannon Lake PCH SATA AHCI Controller
+             vendor: Intel Corporation
+             physical id: 17
+             bus info: pci@0000:00:17.0
+             logical name: scsi0
+             version: 10
+             width: 32 bits
+             clock: 66MHz
+             capabilities: sata msi pm ahci_1.0 bus_master cap_list emulated
+             configuration: driver=ahci latency=0
+             resources: irq:124 memory:b1134000-b1135fff memory:b113a000-b113a0ff ioport:3090(size=8) ioport:3080(size=4) ioport:3060(size=32) memory:b1139000-b11397ff
+           *-disk
+                description: ATA Disk
+                product: ST1000DM003-1SB1
+                physical id: 0.0.0
+                bus info: scsi@0:0.0.0
+                logical name: /dev/sda
+                version: CC63
+                serial: ZN17LM7H
+                size: 931GiB (1TB)
+                capabilities: partitioned partitioned:dos
+                configuration: ansiversion=5 logicalsectorsize=512 sectorsize=4096 signature=b222a21a
+              *-volume:0
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 1
+                   bus info: scsi@0:0.0.0,1
+                   logical name: /dev/sda1
+                   logical name: /boot
+                   version: 1.0
+                   serial: db795d09-4647-4412-a9a4-b0165d9564f9
+                   size: 1536MiB
+                   capacity: 1536MiB
+                   capabilities: primary bootable journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2020-03-20 11:26:04 filesystem=ext4 label=Boot lastmountpoint=/boot modified=2020-03-26 08:08:04 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-03-26 08:08:04 state=mounted
+              *-volume:1
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 2
+                   bus info: scsi@0:0.0.0,2
+                   logical name: /dev/sda2
+                   logical name: /
+                   version: 1.0
+                   serial: 46050679-9484-47b9-98b0-9f8404f81166
+                   size: 15GiB
+                   capacity: 15GiB
+                   capabilities: primary journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2020-03-20 11:26:04 filesystem=ext4 label=Roota lastmountpoint=/ modified=2020-03-26 08:07:58 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-03-26 08:08:01 state=mounted
+              *-volume:2
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 3
+                   bus info: scsi@0:0.0.0,3
+                   logical name: /dev/sda3
+                   version: 1.0
+                   serial: ebedc6d5-7d46-4579-b601-e587285ecf67
+                   size: 15GiB
+                   capacity: 15GiB
+                   capabilities: primary journaled extended_attributes large_files huge_files dir_nlink 64bit extents ext4 ext2 initialized
+                   configuration: created=2020-03-20 11:26:05 filesystem=ext4 label=Rootb modified=2020-03-20 11:26:05 state=clean
+              *-volume:3
+                   description: Extended partition
+                   physical id: 4
+                   bus info: scsi@0:0.0.0,4
+                   logical name: /dev/sda4
+                   size: 900GiB
+                   capacity: 900GiB
+                   capabilities: primary extended partitioned partitioned:extended
+                 *-logicalvolume:0
+                      description: EXT4 volume
+                      vendor: Linux
+                      physical id: 5
+                      logical name: /dev/sda5
+                      logical name: /data
+                      logical name: /root
+                      logical name: /var
+                      logical name: /home
+                      logical name: /opt
+                      version: 1.0
+                      serial: 574b90a9-a5b6-4a4a-ab83-2179a8de17fe
+                      size: 874GiB
+                      capacity: 874GiB
+                      capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                      configuration: created=2020-03-20 11:26:07 filesystem=ext4 label=_dde_data lastmountpoint=/var modified=2020-03-26 08:08:04 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-03-26 08:08:04 state=mounted
+                 *-logicalvolume:1
+                      description: EXT4 volume
+                      vendor: Linux
+                      physical id: 6
+                      logical name: /dev/sda6
+                      logical name: /recovery
+                      version: 1.0
+                      serial: 739bd753-1cee-4ad0-a73b-b1b1026c8d21
+                      size: 10239MiB
+                      capacity: 10239MiB
+                      capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                      configuration: created=2020-03-20 11:26:20 filesystem=ext4 label=Backup lastmountpoint=/recovery modified=2020-03-26 08:08:04 mount.fstype=ext4 mount.options=rw,relatime mounted=2020-03-26 08:08:04 state=mounted
+                 *-logicalvolume:2
+                      description: Linux swap volume
+                      physical id: 7
+                      logical name: /dev/sda7
+                      version: 1
+                      serial: dc2b040c-1e5b-48c2-bb20-f5013e832810
+                      size: 15GiB
+                      capacity: 15GiB
+                      capabilities: nofs swap initialized
+                      configuration: filesystem=swap label=SWAP pagesize=4096
+        *-pci
+             description: PCI bridge
+             product: Cannon Lake PCH PCI Express Root Port #7
+             vendor: Intel Corporation
+             physical id: 1c
+             bus info: pci@0000:00:1c.0
+             version: f0
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci pciexpress msi pm normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:122
+        *-isa
+             description: ISA bridge
+             product: Q370 Chipset LPC/eSPI Controller
+             vendor: Intel Corporation
+             physical id: 1f
+             bus info: pci@0000:00:1f.0
+             version: 10
+             width: 32 bits
+             clock: 33MHz
+             capabilities: isa bus_master
+             configuration: latency=0
+        *-multimedia
+             description: Audio device
+             product: Cannon Lake PCH cAVS
+             vendor: Intel Corporation
+             physical id: 1f.3
+             bus info: pci@0000:00:1f.3
+             version: 10
+             width: 64 bits
+             clock: 33MHz
+             capabilities: pm msi bus_master cap_list
+             configuration: driver=snd_hda_intel latency=32
+             resources: irq:128 memory:b1130000-b1133fff memory:b1000000-b10fffff
+        *-serial:0
+             description: SMBus
+             product: Cannon Lake PCH SMBus Controller
+             vendor: Intel Corporation
+             physical id: 1f.4
+             bus info: pci@0000:00:1f.4
+             version: 10
+             width: 64 bits
+             clock: 33MHz
+             configuration: driver=i801_smbus latency=0
+             resources: irq:16 memory:b1138000-b11380ff ioport:efa0(size=32)
+        *-serial:1 UNCLAIMED
+             description: Serial bus controller
+             product: Cannon Lake PCH SPI Controller
+             vendor: Intel Corporation
+             physical id: 1f.5
+             bus info: pci@0000:00:1f.5
+             version: 10
+             width: 32 bits
+             clock: 33MHz
+             configuration: latency=0
+             resources: memory:fe010000-fe010fff
+        *-network
+             description: Ethernet interface
+             product: Ethernet Connection (7) I219-LM
+             vendor: Intel Corporation
+             physical id: 1f.6
+             bus info: pci@0000:00:1f.6
+             logical name: eno1
+             version: 10
+             serial: 6c:4b:90:ba:ec:a5
+             size: 100Mbit/s
+             capacity: 1Gbit/s
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pm msi bus_master cap_list ethernet physical tp 10bt 10bt-fd 100bt 100bt-fd 1000bt-fd autonegotiation
+             configuration: autonegotiation=on broadcast=yes driver=e1000e driverversion=3.2.6-k duplex=full firmware=0.5-4 ip=192.168.1.103 latency=0 link=yes multicast=yes port=twisted pair speed=100Mbit/s
+             resources: irq:123 memory:b1100000-b111ffff
+     *-pnp00:00
+          product: PnP device PNP0c02
+          physical id: 1
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:01
+          product: PnP device PNP0c02
+          physical id: 2
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:02
+          product: PnP device NCT0010
+          physical id: 3
+          capabilities: pnp
+          configuration: driver=i8042 kbd
+     *-pnp00:03
+          product: PnP device PNP0f03
+          physical id: 4
+          capabilities: pnp
+          configuration: driver=i8042 aux
+     *-pnp00:04
+          product: PnP device PNP0501
+          physical id: 5
+          capabilities: pnp
+          configuration: driver=serial
+     *-pnp00:05
+          product: PnP device PNP0c02
+          physical id: 6
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:06
+          product: PnP device INT3f0d
+          physical id: 7
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:07
+          product: PnP device PNP0c02
+          physical id: 8
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:08
+          product: PnP device PNP0c02
+          physical id: 9
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:09
+          product: PnP device PNP0c02
+          physical id: a
+          capabilities: pnp
+          configuration: driver=system
+     *-pnp00:0a
+          product: PnP device PNP0c02
+          physical id: b
+          capabilities: pnp
+          configuration: driver=system
+  *-power UNCLAIMED
+       description: To Be Filled By O.E.M.
+       product: To Be Filled By O.E.M.
+       vendor: To Be Filled By O.E.M.
+       physical id: 1
+       version: To Be Filled By O.E.M.
+       serial: To Be Filled By O.E.M.
+       capacity: 32768mWh
