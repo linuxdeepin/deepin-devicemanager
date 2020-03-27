@@ -30,5 +30,8 @@ class CameraWidget : public DeviceInfoWidgetBase
 public:
     explicit CameraWidget(QWidget *parent = nullptr);
     void initWidget() override;
+
+    /**@brief:如果从lshw读取不到摄像机的信息，则从hwinfo里面获取*/
+    void initDataFromHwinfo();
 };
 

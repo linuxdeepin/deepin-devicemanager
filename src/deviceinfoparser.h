@@ -144,6 +144,7 @@ public:
     QStringList getOtherBluetoothctlPairedAndConnectedDevicesList();
 
     QStringList getLshwCameraList();
+    QStringList getHwinfoCameraList(); // 从hwinfo 命令中获取 cameralist
 
     QStringList getLshwOtherUsbdeviceList();
     QStringList getLshwUsbKeyboardDeviceList();
@@ -220,7 +221,16 @@ public:
     // lsusb
     bool loadLsusbDatabase();
     // hwinfo
-    bool loadHwinfoDatabase();
+    bool loadHwinfoDatabase();// 这里面加载的是 sodu hwinfo --monitor
+    /**
+     * @brief:获取外接摄像头信息，在龙芯上lshw无法获取摄像头信息(如何升级了bios或许可以获取)，因此需要通过hwinfo来获取摄像头信息，
+     *        但是 sudo hwinfo --camera 无法获取外接的摄像头设备(可能只能获取内置摄像头，本人没有验证)，所以通过运行 sudo hwinfo --usb
+     *        然后 从中获取摄像机相关的信息，后期若有更好方法，请修改注释
+     */
+    bool loadHwinfoDatabaseOfCamera(); // 这里面执行的是 sudo hwinfo --usb
+    /**@brief:添加单个摄像机*/
+    void addACameraInfo(const QString& name,const QString& content);
+
     bool loadGpuInfo();
     // lpstat
     bool loadLpstatDatabase();

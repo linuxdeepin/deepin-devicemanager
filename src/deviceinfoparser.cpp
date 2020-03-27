@@ -112,6 +112,7 @@ void DeviceInfoParser::refreshDabase()
 
     emit loadFinished(tr("Loading USB Devices Info..."));
     loadLsusbDatabase();
+    loadHwinfoDatabaseOfCamera();
 
     setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
 
@@ -630,6 +631,11 @@ QStringList DeviceInfoParser::getLshwCameraList()
     };
 
     return getMatchToolDeviceList("lshw", &func);
+}
+
+QStringList DeviceInfoParser::getHwinfoCameraList()
+{
+    return toolDatabaseSecondOrder_["hwinfo_usb"];
 }
 
 QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
@@ -2838,6 +2844,58 @@ bool DeviceInfoParser::loadHwinfoDatabase()
     secondOrder.removeDuplicates();
     toolDatabaseSecondOrder_["hwinfo"] = secondOrder;
     return true;
+}
+
+bool DeviceInfoParser::loadHwinfoDatabaseOfCamera()
+{
+    if ( false == executeProcess("sudo hwinfo --usb")) {
+        return false;
+    }
+    QString hwOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile hwinfoFile(DEVICEINFO_PATH + "/hwinfo_usb.txt");
+    if ( false == hwinfoFile.open(QIODevice::ReadOnly) ) {
+        return false;
+    }
+
+    hwOut = hwinfoFile.readAll();
+    hwinfoFile.close();
+#endif
+
+    // ******* 筛选出与摄像机相关的信息*******************************************************
+    QStringList lstStr = hwOut.split("\n\n");
+    int i = 0;
+    for(QStringList::iterator it = lstStr.begin(); it != lstStr.end(); ++it){
+        if((*it).contains(QString("Camera"))){
+            addACameraInfo(QString("camera_%1").arg(i),*it);
+            i++;
+        }
+    }
+    return true;
+}
+void DeviceInfoParser::addACameraInfo(const QString& name,const QString& content)
+{
+
+    DatabaseMap hwInfo_camera;
+    QStringList secondOrder;
+    QMap<QString, QString> DeviceInfoMap;
+
+    QStringList lines = content.split("\n");
+    for(QStringList::iterator it = lines.begin(); it != lines.end(); ++it){
+
+        QStringList words = (*it).split(": ");
+        if(words.size() != 2  ||  (*it).contains("unknown") || (*it).contains("Driver Modules")){ continue; }
+
+        DeviceInfoMap[words[0].trimmed()] = words[1];
+    }
+
+    hwInfo_camera[name] = DeviceInfoMap;
+    secondOrder.push_back(name);
+
+
+    toolDatabase_["hwinfo_usb"] = hwInfo_camera;
+    secondOrder.removeDuplicates();
+    toolDatabaseSecondOrder_["hwinfo_usb"] = secondOrder;
 }
 
 bool DeviceInfoParser::loadPrinterinfoDatabase()

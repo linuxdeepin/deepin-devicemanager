@@ -37,7 +37,7 @@ void CameraWidget::initWidget()
 
     if( cameraList.size() < 1 )
     {
-        setCentralInfo(tr("No camera found"));
+        initDataFromHwinfo();
         return;
     }
 
@@ -92,6 +92,94 @@ void CameraWidget::initWidget()
         existArticles.insert("capabilities");
 
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles,
+                                                              "ManulTrack__Camera","Camera infomation from lshw");
+
+        addDevice( name.value, articles, cameraList.size() );
+
+        if( cameraList.size() > 1 )
+        {
+            QStringList tab =
+            {
+                name.value,
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
+
+        if( overviewInfo_.value.isEmpty() == true )
+        {
+            overviewInfo_.value = vendor.value;
+            overviewInfo_.value += " ";
+            if( name.value.isEmpty() == false && name.value != tr("Unknown") )
+            {
+                overviewInfo_.value += name.value;
+            }
+            else
+            {
+                overviewInfo_.value += description.value;
+            }
+        }
+    }
+
+    if( cameraList.size() > 1 )
+    {
+        QStringList headers = { tr("Name"),tr("Vendor") };
+        addTable( headers, tabList);
+    }
+}
+
+void CameraWidget::initDataFromHwinfo()
+{
+    QStringList cameraList = DeviceInfoParser::Instance().getHwinfoCameraList();
+    if( cameraList.size() < 1 )
+    {
+        setCentralInfo(tr("No camera found"));
+        return;
+    }
+
+    QList<QStringList> tabList;
+    QList<ArticleStruct> articles;
+    QSet<QString> existArticles;
+
+    foreach(const QString& device, cameraList){
+
+        ArticleStruct name(tr("Name"));
+        name.queryData( "hwinfo_usb", device, "Device");
+        articles.push_back(name);
+        existArticles.insert("Device");
+
+        ArticleStruct description(tr("Description"));
+        description.queryData("hwinfo_usb", device, "Model");
+        articles.push_back(description);
+        existArticles.insert("Model");
+
+        ArticleStruct vendor(tr("Vendor"));
+        vendor.queryData( "hwinfo_usb", device, "Vendor");
+        articles.push_back(vendor);
+        existArticles.insert("Vendor");
+
+        ArticleStruct physicalId(tr("Physical ID"));
+        physicalId.queryData("hwinfo_usb", device, "SysFS ID");
+        articles.push_back(physicalId);
+        existArticles.insert("SysFS ID");
+
+        ArticleStruct busInfo(tr("Bus Info"));
+        busInfo.queryData("hwinfo_usb", device, "SysFS BusID");
+        articles.push_back(busInfo);
+        existArticles.insert("SysFS BusID");
+
+        ArticleStruct version(tr("Version"));
+        version.queryData("hwinfo_usb", device, "Revision");
+        articles.push_back(version);
+        existArticles.insert("Revision");
+
+        ArticleStruct capabilities(tr("Capabilities"));
+        capabilities.queryData("hwinfo_usb", device, "Hotplug");
+        articles.push_back(capabilities);
+        existArticles.insert("Hotplug");
+
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("hwinfo_usb", device, articles, existArticles,
                                                               "ManulTrack__Camera","Camera infomation from lshw");
 
         addDevice( name.value, articles, cameraList.size() );
