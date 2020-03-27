@@ -126,6 +126,7 @@ public:
     QStringList getXrandrScreenName();
     QStringList getXrandrDisplayInterfaceList();
 
+    QStringList getHwinfoOtherUSBList();
     QStringList getHwinfoPrinterList();
     QStringList getHwinfoMonitorList();
     QStringList getXrandrMonitorList();
@@ -229,7 +230,7 @@ public:
      */
     bool loadHwinfoDatabaseOfCamera(); // 这里面执行的是 sudo hwinfo --usb
     /**@brief:添加单个摄像机*/
-    void addACameraInfo(const QString& name,const QString& content);
+    void addACameraInfo(const QString &name, const QString &content);
 
     bool loadGpuInfo();
     // lpstat
@@ -237,8 +238,12 @@ public:
     // cups
     bool loadCupsDatabase();
 
-    //printers
+    // printers
     bool loadPrinterinfoDatabase();
+
+    // USB hwinfo --usb
+    bool loadHwinfoUSBDatabase();
+
 public:
     bool getRootPassword();
     bool executeProcess(const QString &cmd);

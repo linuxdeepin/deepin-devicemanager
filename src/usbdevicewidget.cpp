@@ -31,13 +31,140 @@ UsbdeviceWidget::UsbdeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent,
     initWidget();
 }
 
+void UsbdeviceWidget::loadWidget()
+{
+    QStringList usbdeviceList = DeviceInfoParser::Instance().getHwinfoOtherUSBList();
+
+    if (usbdeviceList.size() < 1) {
+        setCentralInfo(tr("No USB devices found"));
+        return;
+    }
+
+    QList<QStringList> tabList;
+    QList<ArticleStruct> articles;
+    QSet<QString> existArticles;
+
+    int usbCount = usbdeviceList.size();
+
+    foreach (const QString &device, usbdeviceList) {
+        articles.clear();
+        existArticles.clear();
+
+        ArticleStruct name(tr("Name"));
+        name.queryData("USB", device, "Device");
+        articles.push_back(name);
+        existArticles.insert("Name");
+
+        if (name.value.contains("hub", Qt::CaseInsensitive) ||
+                name.value.contains("Keyboard", Qt::CaseInsensitive) ||
+                name.value.contains("mouse", Qt::CaseInsensitive) ||
+                name.value.contains("Camera", Qt::CaseInsensitive)) {
+            --usbCount;
+            continue;
+        }
+
+        ArticleStruct vendor(tr("Vendor"));
+        vendor.queryData( "USB", device, "Vendor");
+        articles.push_back(vendor);
+        existArticles.insert("Vendor");
+
+        ArticleStruct model(tr("Model"));
+        model.queryData( "USB", device, "Model");
+        articles.push_back(model);
+        existArticles.insert("Model");
+
+        ArticleStruct serial(tr("Serial ID"));
+        serial.queryData( "USB", device, "Serial ID");
+        articles.push_back(serial);
+        existArticles.insert("Serial ID");
+
+        ArticleStruct version(tr("Version"));
+        version.queryData( "USB", device, "Revision");
+        articles.push_back(version);
+        existArticles.insert("Version");
+
+        ArticleStruct status(tr("Status"));
+        status.queryData( "USB", device, "Config Status");
+        articles.push_back(status);
+        existArticles.insert("Status");
+
+        ArticleStruct driver(tr("Driver"));
+        driver.queryData( "USB", device, "Driver");
+        articles.push_back(driver);
+        existArticles.insert("Driver");
+
+        ArticleStruct speed(tr("Speed"));
+        speed.queryData( "USB", device, "Speed");
+        articles.push_back(speed);
+        existArticles.insert("Speed");
+
+        ArticleStruct bus(tr("BusID"));
+        bus.queryData( "USB", device, "SysFS BusID");
+        articles.push_back(bus);
+        existArticles.insert("BusID");
+
+        ArticleStruct description(tr("Description"));
+        description.queryData("USB", device, "description");
+        articles.push_back(description);
+        existArticles.insert("description");
+
+        ArticleStruct uniqueID(tr("Unique ID"));
+        uniqueID.queryData("USB", device, "Unique ID");
+        articles.push_back(uniqueID);
+        existArticles.insert("Unique ID");
+
+        ArticleStruct sysFSID(tr("SysFS ID"));
+        sysFSID.queryData("USB", device, "SysFS ID");
+        articles.push_back(sysFSID);
+        existArticles.insert("SysFS ID");
+
+        //DeviceInfoParser::Instance().queryRemainderDeviceInfo("USB", device, articles, existArticles);
+
+        QString title = name.isValid() ? name.value : description.value;
+        addDevice(title, articles, usbdeviceList.size());
+
+        QStringList tab = {
+            title,
+            vendor.value
+        };
+
+        tabList.push_back(tab);
+
+        if (overviewInfo_.isValid()) {
+            overviewInfo_.value += " / ";
+        }
+
+        QList<ArticleStruct> overArticle;
+        overArticle << vendor << name;
+        if (name.isValid() == false) {
+            overArticle << description;
+        }
+        overviewInfo_.value += joinArticle(overArticle);
+    }
+
+    if (usbCount > 1) {
+        QStringList headers = { tr("Name"), tr("Vendor") };
+        addTable(headers, tabList);
+    }
+
+    if (usbCount < 1) {
+        setCentralInfo(tr("No USB devices found"));
+        return;
+    }
+}
+
 void UsbdeviceWidget::initWidget()
 {
     QStringList usbdeviceList = DeviceInfoParser::Instance().getLshwOtherUsbdeviceList();
 
     if (usbdeviceList.size() < 1) {
-        setCentralInfo(tr("No USB devices found"));
-        return;
+        QStringList hwinfoUSBList = DeviceInfoParser::Instance().getHwinfoOtherUSBList();
+        if (hwinfoUSBList.size() < 1) {
+            setCentralInfo(tr("No USB devices found"));
+            return;
+        } else {
+            loadWidget();
+        }
     }
 
     QList<QStringList> tabList;

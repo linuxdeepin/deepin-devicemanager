@@ -112,6 +112,7 @@ void DeviceInfoParser::refreshDabase()
 
     emit loadFinished(tr("Loading USB Devices Info..."));
     loadLsusbDatabase();
+    loadHwinfoUSBDatabase();
     loadHwinfoDatabaseOfCamera();
 
     setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
@@ -459,6 +460,11 @@ QStringList DeviceInfoParser::getHwinfoPrinterList()
     return getMatchToolDeviceList("printer" );
 }
 
+QStringList DeviceInfoParser::getHwinfoOtherUSBList()
+{
+    return getMatchToolDeviceList("USB" );
+}
+
 QStringList DeviceInfoParser::getXrandrMonitorList()
 {
     checkValueFun_t func = [](const QString & fk)->bool {
@@ -658,9 +664,9 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                     return false;
                 }
 
-                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("USB hub", Qt::CaseInsensitive)) {
-                    return false;
-                }
+//                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("USB hub", Qt::CaseInsensitive)) {
+//                    return false;
+//                }
                 if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("Keyboard", Qt::CaseInsensitive)) {
                     return false;
                 }
@@ -2746,8 +2752,6 @@ bool DeviceInfoParser::loadLsusbDatabase()
     return true;
 }
 
-
-
 bool DeviceInfoParser::loadHwinfoDatabase()
 {
     if (false == executeProcess("sudo hwinfo --monitor")) {
@@ -2846,6 +2850,105 @@ bool DeviceInfoParser::loadHwinfoDatabase()
     return true;
 }
 
+
+bool DeviceInfoParser::loadHwinfoUSBDatabase()
+{
+    if (false == executeProcess("sudo hwinfo --usb")) {
+        return false;
+    }
+
+    QString hwOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile hwinfoFile(DEVICEINFO_PATH + "/hwinfo_usb.txt");
+    if (false == hwinfoFile.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+
+    hwOut = hwinfoFile.readAll();
+    hwinfoFile.close();
+#endif
+
+    //QString hwOut = getHwMonitorString();
+    if (hwOut.size() < 1) {
+        return false;
+    }
+
+    // hciconfig
+    DatabaseMap hwinfoDatabase_;
+    QStringList secondOrder;
+
+    QMap<QString, QString> DeviceInfoMap;
+    QString deviceName;
+    int startIndex = 0;
+
+    for (int i = 0; i < hwOut.size(); ++i) {
+        if (hwOut[i] != '\n' && i != hwOut.size() - 1) {
+            continue;
+        }
+
+        QString line = hwOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if (i == hwOut.size() - 1 || line.trimmed().isEmpty()) {
+            if (deviceName.isEmpty() == false) {
+                hwinfoDatabase_[deviceName] = DeviceInfoMap;
+                secondOrder.push_back(deviceName);
+            }
+
+            DeviceInfoMap.clear();
+            deviceName = "";
+            continue;
+        }
+
+        if (line.startsWith(Devicetype_HwInfo_Fourspace)) {
+            int index = line.indexOf(": ");
+            if (index > 0) {
+                if (line.trimmed().contains(Devicetype_HwInfo_Resolution)) {
+                    if (DeviceInfoMap.contains(Devicetype_HwInfo_Currentresolution)) {
+                        //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] += ", ";
+                        //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] +=line.mid(index+1).trimmed();
+                    } else {
+                        DeviceInfoMap[Devicetype_HwInfo_Currentresolution] = line.mid(index + 1).trimmed();
+                    }
+
+                    continue;
+                }
+                if (false == DeviceInfoMap.contains(line.mid(0, index).trimmed())) {
+                    DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
+                }
+
+            }
+            continue;
+        }
+
+        if (line.startsWith(Devicetype_HwInfo_Twospace)) {
+            int index = line.indexOf(": ");
+            if (index > 0) {
+                if (line.contains(Devicetype_HwInfo_Resolution)) {
+                    if (DeviceInfoMap.contains(Devicetype_HwInfo_ResolutionList)) {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += ", ";
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += line.mid(index + 1).trimmed();
+                    } else {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] = line.mid(index + 1).trimmed();
+                    }
+
+                    continue;
+                }
+
+                DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
+            }
+            continue;
+        }
+
+        deviceName = line.trimmed();
+    }
+
+    toolDatabase_["USB"] = hwinfoDatabase_;
+    secondOrder.removeDuplicates();
+    toolDatabaseSecondOrder_["USB"] = secondOrder;
+    return true;
+}
+
 bool DeviceInfoParser::loadHwinfoDatabaseOfCamera()
 {
     if ( false == executeProcess("sudo hwinfo --usb")) {
@@ -2865,15 +2968,15 @@ bool DeviceInfoParser::loadHwinfoDatabaseOfCamera()
     // ******* 筛选出与摄像机相关的信息*******************************************************
     QStringList lstStr = hwOut.split("\n\n");
     int i = 0;
-    for(QStringList::iterator it = lstStr.begin(); it != lstStr.end(); ++it){
-        if((*it).contains(QString("Camera"))){
-            addACameraInfo(QString("camera_%1").arg(i),*it);
+    for (QStringList::iterator it = lstStr.begin(); it != lstStr.end(); ++it) {
+        if ((*it).contains(QString("Camera"))) {
+            addACameraInfo(QString("camera_%1").arg(i), *it);
             i++;
         }
     }
     return true;
 }
-void DeviceInfoParser::addACameraInfo(const QString& name,const QString& content)
+void DeviceInfoParser::addACameraInfo(const QString &name, const QString &content)
 {
 
     DatabaseMap hwInfo_camera;
@@ -2881,10 +2984,12 @@ void DeviceInfoParser::addACameraInfo(const QString& name,const QString& content
     QMap<QString, QString> DeviceInfoMap;
 
     QStringList lines = content.split("\n");
-    for(QStringList::iterator it = lines.begin(); it != lines.end(); ++it){
+    for (QStringList::iterator it = lines.begin(); it != lines.end(); ++it) {
 
         QStringList words = (*it).split(": ");
-        if(words.size() != 2  ||  (*it).contains("unknown") || (*it).contains("Driver Modules")){ continue; }
+        if (words.size() != 2  ||  (*it).contains("unknown") || (*it).contains("Driver Modules")) {
+            continue;
+        }
 
         DeviceInfoMap[words[0].trimmed()] = words[1];
     }

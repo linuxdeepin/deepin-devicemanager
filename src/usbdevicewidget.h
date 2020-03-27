@@ -31,5 +31,6 @@ public:
     explicit UsbdeviceWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+    void loadWidget();
 };
 
