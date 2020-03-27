@@ -457,12 +457,12 @@ QStringList DeviceInfoParser::getHwinfoMonitorList()
 
 QStringList DeviceInfoParser::getHwinfoPrinterList()
 {
-    return getMatchToolDeviceList("printer" );
+    return getMatchToolDeviceList("printer");
 }
 
 QStringList DeviceInfoParser::getHwinfoOtherUSBList()
 {
-    return getMatchToolDeviceList("USB" );
+    return getMatchToolDeviceList("USB");
 }
 
 QStringList DeviceInfoParser::getXrandrMonitorList()
@@ -671,6 +671,10 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                     return false;
                 }
                 if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("Disk", Qt::CaseInsensitive)) {
+                    return false;
+                }
+                // 18403
+                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("storage", Qt::CaseInsensitive)) {
                     return false;
                 }
             }
@@ -2951,13 +2955,13 @@ bool DeviceInfoParser::loadHwinfoUSBDatabase()
 
 bool DeviceInfoParser::loadHwinfoDatabaseOfCamera()
 {
-    if ( false == executeProcess("sudo hwinfo --usb")) {
+    if (false == executeProcess("sudo hwinfo --usb")) {
         return false;
     }
     QString hwOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
     QFile hwinfoFile(DEVICEINFO_PATH + "/hwinfo_usb.txt");
-    if ( false == hwinfoFile.open(QIODevice::ReadOnly) ) {
+    if (false == hwinfoFile.open(QIODevice::ReadOnly)) {
         return false;
     }
 
@@ -2987,7 +2991,7 @@ void DeviceInfoParser::addACameraInfo(const QString &name, const QString &conten
     for (QStringList::iterator it = lines.begin(); it != lines.end(); ++it) {
 
         QStringList words = (*it).split(": ");
-        if (words.size() != 2  ||  (*it).contains("unknown") || (*it).contains("Driver Modules")) {
+        if (words.size() != 2  || (*it).contains("unknown") || (*it).contains("Driver Modules")) {
             continue;
         }
 
@@ -3005,14 +3009,14 @@ void DeviceInfoParser::addACameraInfo(const QString &name, const QString &conten
 
 bool DeviceInfoParser::loadPrinterinfoDatabase()
 {
-    if ( false == executeProcess("sudo hwinfo --printer")) {
+    if (false == executeProcess("sudo hwinfo --printer")) {
         return false;
     }
 
     QString hwOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
     QFile hwinfoFile(DEVICEINFO_PATH + "/hwinfo_printer.txt");
-    if ( false == hwinfoFile.open(QIODevice::ReadOnly) ) {
+    if (false == hwinfoFile.open(QIODevice::ReadOnly)) {
         return false;
     }
 
@@ -3021,7 +3025,7 @@ bool DeviceInfoParser::loadPrinterinfoDatabase()
 #endif
 
     //QString hwOut = getHwMonitorString();
-    if ( hwOut.size() < 1 ) {
+    if (hwOut.size() < 1) {
         return false;
     }
 
@@ -3033,15 +3037,15 @@ bool DeviceInfoParser::loadPrinterinfoDatabase()
     QString deviceName;
     int startIndex = 0;
 
-    for ( int i = 0; i < hwOut.size(); ++i ) {
-        if ( hwOut[i] != '\n' && i != hwOut.size() - 1) {
+    for (int i = 0; i < hwOut.size(); ++i) {
+        if (hwOut[i] != '\n' && i != hwOut.size() - 1) {
             continue;
         }
 
         QString line = hwOut.mid(startIndex, i - startIndex);
         startIndex = i + 1;
 
-        if ( i == hwOut.size() - 1 || line.trimmed().isEmpty() ) {
+        if (i == hwOut.size() - 1 || line.trimmed().isEmpty()) {
             if (deviceName.isEmpty() == false) {
                 hwinfoDatabase_[deviceName] = DeviceInfoMap;
                 secondOrder.push_back(deviceName);
@@ -3055,7 +3059,7 @@ bool DeviceInfoParser::loadPrinterinfoDatabase()
         if (line.startsWith(Devicetype_HwInfo_Fourspace)) {
             int index = line.indexOf(": ");
             if (index > 0) {
-                if ( line.trimmed().contains(Devicetype_HwInfo_Resolution) ) {
+                if (line.trimmed().contains(Devicetype_HwInfo_Resolution)) {
                     if (DeviceInfoMap.contains(Devicetype_HwInfo_Currentresolution)) {
                         //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] += ", ";
                         //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] +=line.mid(index+1).trimmed();
@@ -3065,7 +3069,7 @@ bool DeviceInfoParser::loadPrinterinfoDatabase()
 
                     continue;
                 }
-                if (false == DeviceInfoMap.contains( line.mid(0, index).trimmed() )) {
+                if (false == DeviceInfoMap.contains(line.mid(0, index).trimmed())) {
                     DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
                 }
 
@@ -3076,7 +3080,7 @@ bool DeviceInfoParser::loadPrinterinfoDatabase()
         if (line.startsWith(Devicetype_HwInfo_Twospace)) {
             int index = line.indexOf(": ");
             if (index > 0) {
-                if ( line.contains(Devicetype_HwInfo_Resolution) ) {
+                if (line.contains(Devicetype_HwInfo_Resolution)) {
                     if (DeviceInfoMap.contains(Devicetype_HwInfo_ResolutionList)) {
                         DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += ", ";
                         DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += line.mid(index + 1).trimmed();

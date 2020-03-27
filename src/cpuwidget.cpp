@@ -287,7 +287,7 @@ void CpuWidget::initWidget()
     //huawei requirement
     if (DeviceInfoParser::Instance().isHuaweiAndroidUos()) {
         overviewInfo_.value = QString("%1 (%2 %3)").\
-                              arg(DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Model name")).\
+                              arg(cpuModel).\
                               arg(getTrNumber(4)).\
                               arg(tr("Core(s)"));
     }
