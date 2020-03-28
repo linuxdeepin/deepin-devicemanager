@@ -44,10 +44,10 @@ void KeyboardWidget::initWidget()
     int keyboard_count = m_articles.count();
     if (found && keyboard_count > 0) {
         for (auto index = m_articles.begin(); index != m_articles.end(); index++) {
-            addDevice(index.key(),index.value(),keyboard_count);
+            addDevice(index.key(), index.value(), keyboard_count);
         }
         if (keyboard_count > 1) {
-            addTable(m_heads,m_tabList);
+            addTable(m_heads, m_tabList);
         }
         return;
     }
@@ -62,16 +62,14 @@ void KeyboardWidget::initWidget()
 bool KeyboardWidget::findKeyboardFromLshw()
 {
     QStringList foundKeyboards = DeviceInfoParser::Instance().getLshwUsbKeyboardDeviceList();
-    if (foundKeyboards.isEmpty())
-    {
+    if (foundKeyboards.isEmpty()) {
         return false;
     }
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    foreach(const QString& keyboard, foundKeyboards)
-    {
+    foreach (const QString &keyboard, foundKeyboards) {
         articles.clear();
         existArticles.clear();
 
@@ -127,26 +125,23 @@ bool KeyboardWidget::findKeyboardFromLshw()
 
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, articles, existArticles);
 
-        QString title = name.isValid()? name.value: description.value;
-        m_articles.insert(title,articles);
+        QString title = name.isValid() ? name.value : description.value;
+        m_articles.insert(title, articles);
 
-        QStringList tab =
-        {
+        QStringList tab = {
             title,
             vendor.value
         };
 
         m_tabList.push_back(tab);
 
-        if(overviewInfo_.isValid())
-        {
+        if (overviewInfo_.isValid()) {
             overviewInfo_.value += " / ";
         }
 
         QList<ArticleStruct> overArticle;
         overArticle << vendor << name;
-        if(name.isValid() == false)
-        {
+        if (name.isValid() == false) {
             overArticle << description;
         }
         overviewInfo_.value += joinArticle(overArticle);
@@ -172,11 +167,11 @@ bool KeyboardWidget::findKeyboardFromCatInput()
     if (inputdeviceList.isEmpty()) {
         return false;
     }
-    foreach(const QString& device, inputdeviceList)
-    {
-        if (device.contains("usb",Qt::CaseInsensitive)) {
-            continue;
-        }
+    foreach (const QString &device, inputdeviceList) {
+        //屏蔽了名称中含有USB的keyboard
+//        if (device.contains("usb",Qt::CaseInsensitive)) {
+//            continue;
+//        }
         articles.clear();
         existArticles.clear();
 
@@ -192,30 +187,26 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         articles.push_back(name);
         articles.push_back(vendor);
 
-        ArticleStruct uniq(tr("Uniq","Keyboard Info"));
+        ArticleStruct uniq(tr("Uniq", "Keyboard Info"));
         uniq.queryData( "catinput", device, "Uniq");
 
-        if(uniq.isValid())
-        {
-            if(existKeyboard.contains(uniq.value))
-            {
+        if (uniq.isValid()) {
+            if (existKeyboard.contains(uniq.value)) {
                 continue;
             }
 
             existKeyboard.insert(uniq.value);
             QString blueTooth = DeviceInfoParser::Instance().getCorrespondBluetoothKeyboard(uniq.value);
 
-            if( blueTooth.isEmpty() == false )
-            {
+            if ( blueTooth.isEmpty() == false ) {
                 type.value = "Bluetooth";
                 existArticles.insert("Name");
 
-                ArticleStruct connected(tr("Connected","Keyboard Info"));
+                ArticleStruct connected(tr("Connected", "Keyboard Info"));
                 connected.queryData( "paired-devices", blueTooth, "Connected");
                 //articles.push_back(connected);
 
-                if(connected.isValid() && connected.value.compare("yes", Qt::CaseInsensitive) != 0)
-                {
+                if (connected.isValid() && connected.value.compare("yes", Qt::CaseInsensitive) != 0) {
                     continue;
                 }
 
@@ -225,40 +216,32 @@ bool KeyboardWidget::findKeyboardFromCatInput()
             }
         }
 
-        ArticleStruct phys(tr("Phys","Keyboard Info"));
+        ArticleStruct phys(tr("Phys", "Keyboard Info"));
         phys.queryData( "catinput", device, "Phys");
 
-        if(phys.isValid())
-        {
-            if(existPhys.contains(phys.value))
-            {
+        if (phys.isValid()) {
+            if (existPhys.contains(phys.value)) {
                 continue;
             }
 
             existPhys.insert(phys.value);
         }
 
-        if(type.isValid() == false)
-        {
-            if(phys.value.contains("usb", Qt::CaseInsensitive))
-            {
-//                type.value = "Usb";
-                continue;
-            }
-            else if(phys.value.contains("/serio", Qt::CaseInsensitive))
-            {
+        if (type.isValid() == false) {
+            if (phys.value.contains("usb", Qt::CaseInsensitive)) {
+                type.value = "Usb";
+                //continue 的屏蔽了 usb借口的keyboard
+//                continue;
+            } else if (phys.value.contains("/serio", Qt::CaseInsensitive)) {
                 type.value = "PS/2";
-            }
-            else
-            {
+            } else {
                 type.value = "Other";
             }
         }
 
         //articles.push_back(type);
 
-        if(vendor.isValid() == false)
-        {
+        if (vendor.isValid() == false) {
             vendor.queryData( "catinput", device, "Vendor");
             articles.push_back(vendor);
         }
@@ -267,7 +250,7 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         articles.push_back(uniq);
         existArticles.insert("Uniq");
 
-        ArticleStruct sysfs(tr("Sysfs","Keyboard Info,better if dont translate，my personal opinion"));
+        ArticleStruct sysfs(tr("Sysfs", "Keyboard Info,better if dont translate，my personal opinion"));
         sysfs.queryData("catinput", device, "Sysfs");
         articles.push_back(sysfs);
         existArticles.insert("Sysfs");
@@ -287,12 +270,10 @@ bool KeyboardWidget::findKeyboardFromCatInput()
 
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles);
 
-        if( uniq.isValid() )
-        {
+        if ( uniq.isValid() ) {
             auto upower = DeviceInfoParser::Instance().getCorrespondUpower(uniq.value);
 
-            if(upower.isEmpty() == false )
-            {
+            if (upower.isEmpty() == false ) {
                 ArticleStruct power(tr("Power"));
                 power.value = " ";
                 articles.push_back(power);
@@ -300,10 +281,9 @@ bool KeyboardWidget::findKeyboardFromCatInput()
                 DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles );
             }
         }
-        m_articles.insert(name.value,articles);
+        m_articles.insert(name.value, articles);
 
-        if(overviewInfo_.value.isEmpty() == false)
-        {
+        if (overviewInfo_.value.isEmpty() == false) {
             overviewInfo_.value += " / ";
         }
         overviewInfo_.value += name.value;

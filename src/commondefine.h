@@ -76,5 +76,6 @@ const int TableViewRowHeight_ = 36;
 //const QString DEVICEINFO_PATH ="/home/archermind/workspace/git/device-manager/dde_devicemanager/computers/loongson_unknown_nvme_";
 //const QString DEVICEINFO_PATH ="/home/archermind/workspace/git/device-manager/dde_devicemanager/computers/deviceInfo_16426_bug";
 //const QString DEVICEINFO_PATH ="/home/archermind/workspace/git/device-manager/dde_devicemanager/computers/4G00_600";
+
 //#define TEST_DATA_FROM_FILE
-const QString DEVICEINFO_PATH = "/home/liujun/Work/TongXi/deviceInfo";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/TongXi/deviceInfo";
