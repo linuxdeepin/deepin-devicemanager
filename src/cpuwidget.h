@@ -31,7 +31,17 @@ public:
     explicit CpuWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
-    void addPrecessor(const QString& precessor);
+    void addDetailFromLscpuAndCatcpu(const QString& precessor);
+    void addDetailFromDmidecode(const QString& precessor);
+    void addArticleStruct(const QString& name,const QString& command,const QString& item,const QString& attri,QList<ArticleStruct>& articles,QSet<QString>& existArticles);
+
+    /**@brief:判断能不能从lsCpu获取频率，传入的参数是从lscpu命令中获取的最大最小频率*/
+    bool isCanGetSpeedFromLsCpu(double& minMHz,double& maxMHz);
+    void getSpeedFromLscpu(double& minHz,double& maxHz);
+    void getSpeedFromDmidecode();
+    void getTableHeader(bool getSpeedFromLscpu,QStringList& headers);
+    void getTableContentFromLscpu(const QString& cpuModel,const QStringList& cpuList,QList<QStringList>& tabList);
+    void getTableContentFromDmidecode(const QString& cpuModel,const QStringList& cpuList,QList<QStringList>& tabList);
 
 private:
     QString speed_;

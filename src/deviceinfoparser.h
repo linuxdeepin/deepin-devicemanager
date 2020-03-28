@@ -114,6 +114,8 @@ private:
 public:
     QStringList getCatcpuCpuList();
     QStringList getlscpuCpuList();
+    /**@brief:FT2000+的环境无法获取cpu频率，只能通过dmidecode命令获取*/
+    QStringList getDmidecodeCpuList();
 
     QStringList getDmidecodePhysicMemory();
     QStringList getDmidecodeMemoryList();

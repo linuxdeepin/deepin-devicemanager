@@ -287,6 +287,7 @@ QStringList DeviceInfoParser::getMatchToolDeviceList(const QString &toolName, ch
     }
 
     foreach (const QString &fk, toolDatabaseSecondOrder_[toolName]) {
+        qDebug() << fk;
         if (checkFunc) {
             if ((*checkFunc)(fk)) {
                 catcpuList.push_back(fk);
@@ -307,6 +308,23 @@ QStringList DeviceInfoParser::getCatcpuCpuList()
 QStringList DeviceInfoParser::getlscpuCpuList()
 {
     return getMatchToolDeviceList("lscpu");
+}
+
+QStringList DeviceInfoParser::getDmidecodeCpuList()
+{
+    checkValueFun_t func = [](const QString & fk)->bool {
+        if (fk.contains("Processor Information"))
+        {
+            DeviceInfoParser::Instance().orderedDevices.insert(fk);
+            return true;
+        }
+
+        return false;
+    };
+
+    QStringList dmiList = getMatchToolDeviceList("dmidecode", &func);
+
+    return dmiList;
 }
 
 QStringList DeviceInfoParser::getDmidecodePhysicMemory()
