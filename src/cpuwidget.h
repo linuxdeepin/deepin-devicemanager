@@ -35,22 +35,27 @@ public:
     /**
      * @brief:添加每个cpu核的详细信息，这些核的信息仅仅是从lscpu和catcpu中获取的
      */
-    void addDetailFromLscpuAndCatcpu(const QString& precessor);
+    void addDetailFromLscpuAndCatcpu(const QString &precessor);
 
     /**
      * @brief:添加每个cpu核的详细信息，这些核的信息是从lscpu、catcpu、dmidecode中获取的
      */
-    void addDetailFromLscpuCatcpuDmidecode(const QString& dmiProcessor,const QString& catcpuProcessor);
+    void addDetailFromLscpuCatcpuDmidecode(const QString &dmiProcessor, const QString &catcpuProcessor);
 
-    void addArticleStruct(const QString& name,const QString& command,const QString& item,const QString& attri,QList<ArticleStruct>& articles,QSet<QString>& existArticles);
+    void addArticleStruct(const QString &name, const QString &command, const QString &item, const QString &attri, QList<ArticleStruct> &articles, QSet<QString> &existArticles);
 
     /**@brief:判断能不能从lsCpu获取频率，传入的参数是从lscpu命令中获取的最大最小频率*/
-    bool isCanGetSpeedFromLsCpu(double& minMHz,double& maxMHz);
-    void getSpeedFromLscpu(double& minHz,double& maxHz);
+    bool isCanGetSpeedFromLsCpu(double &minMHz, double &maxMHz);
+    void getSpeedFromLscpu(double &minHz, double &maxHz);
     void getSpeedFromDmidecode();
-    void getTableHeader(bool getSpeedFromLscpu,QStringList& headers);
-    void getTableContentFromLscpu(const QString& cpuModel,const QStringList& cpuList,QList<QStringList>& tabList);
-    void getTableContentFromDmidecode(const QString& cpuModel,const QStringList& cpuList,QList<QStringList>& tabList);
+    void getTableHeader(bool getSpeedFromLscpu, QStringList &headers);
+    void getTableContentFromLscpu(const QString &cpuModel, const QStringList &cpuList, QList<QStringList> &tabList);
+    void getTableContentFromDmidecode(const QString &cpuModel, const QStringList &cpuList, QList<QStringList> &tabList);
+
+    /**
+     * @brief:获取制造商信息
+     */
+    QString getManufacturerInfo(const QString &cpu);
 
 private:
     QString speed_;
