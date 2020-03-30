@@ -31,8 +31,17 @@ public:
     explicit CpuWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+
+    /**
+     * @brief:添加每个cpu核的详细信息，这些核的信息仅仅是从lscpu和catcpu中获取的
+     */
     void addDetailFromLscpuAndCatcpu(const QString& precessor);
-    void addDetailFromDmidecode(const QString& precessor);
+
+    /**
+     * @brief:添加每个cpu核的详细信息，这些核的信息是从lscpu、catcpu、dmidecode中获取的
+     */
+    void addDetailFromLscpuCatcpuDmidecode(const QString& dmiProcessor,const QString& catcpuProcessor);
+
     void addArticleStruct(const QString& name,const QString& command,const QString& item,const QString& attri,QList<ArticleStruct>& articles,QSet<QString>& existArticles);
 
     /**@brief:判断能不能从lsCpu获取频率，传入的参数是从lscpu命令中获取的最大最小频率*/
