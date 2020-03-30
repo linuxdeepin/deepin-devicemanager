@@ -190,25 +190,25 @@ void CpuWidget::addDetailFromLscpuCatcpuDmidecode(const QString& dmiProcessor,co
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-//    addArticleStruct(tr("Name"),"lscpu","lscpu","Model name",articles,existArticles);
-//    //addArticleStruct(tr("CPU ID"),"dmidecode",precessor,"physical id",articles,existArticles);
-//    //addArticleStruct(tr("Core ID"),"dmidecode",precessor,"core id",articles,existArticles);
-//    addArticleStruct(tr("Threads"),"lscpu","lscpu","Thread(s) per core",articles,existArticles);
-//    addArticleStruct(tr("Current Speed"),"dmidecode",dmiProcessor,"Current Speed",articles,existArticles);
-//    //addArticleStruct(tr("BogoMIPS"),"dmidecode",precessor,"bogomips",articles,existArticles);
-//    addArticleStruct(tr("Architecture"),"lscpu","lscpu","Architecture",articles,existArticles);
-//    addArticleStruct(tr("CPU Family"),"dmidecode",precessor,"Family",articles,existArticles);
-//    addArticleStruct(tr("Model"),"lscpu","lscpu","Model",articles,existArticles);
-//    addArticleStruct(tr("Stepping"),"lscpu","lscpu","Stepping",articles,existArticles);
-//    addArticleStruct(tr("L1d Cache"),"dmidecode",precessor,"L1 Cache Handle",articles,existArticles);
-//    addArticleStruct(tr("L1i Cache"),"dmidecode",precessor,"L1 Cache Handle",articles,existArticles);
-//    addArticleStruct(tr("L2 Cache"),"dmidecode",precessor,"L2 Cache Handle",articles,existArticles);
-//    addArticleStruct(tr("L3 Cache"),"dmidecode",precessor,"L3 Cache Handle",articles,existArticles);
-//    addArticleStruct(tr("Flags"),"lscpu","lscpu","Flags",articles,existArticles);
+    addArticleStruct(tr("Name"),"lscpu","lscpu","Model name",articles,existArticles);
+    addArticleStruct(tr("CPU ID"),"dmidecode",dmiProcessor,"Socket Designation",articles,existArticles);
+    addArticleStruct(tr("Core ID"),"catcpu",catcpuProcessor,"processor",articles,existArticles);
+    addArticleStruct(tr("Threads"),"lscpu","lscpu","Thread(s) per core",articles,existArticles);
+    addArticleStruct(tr("Current Speed"),"dmidecode",dmiProcessor,"Current Speed",articles,existArticles);
+    addArticleStruct(tr("BogoMIPS"),"catcpu",catcpuProcessor,"BogoMIPS",articles,existArticles);
+    addArticleStruct(tr("Architecture"),"lscpu","lscpu","Architecture",articles,existArticles);
+    addArticleStruct(tr("CPU Family"),"dmidecode",dmiProcessor,"Family",articles,existArticles);
+    addArticleStruct(tr("Model"),"lscpu","lscpu","Model",articles,existArticles);
+    addArticleStruct(tr("Stepping"),"lscpu","lscpu","Stepping",articles,existArticles);
+    addArticleStruct(tr("L1d Cache"),"dmidecode",dmiProcessor,"L1 Cache Handle",articles,existArticles);
+    addArticleStruct(tr("L1i Cache"),"dmidecode",dmiProcessor,"L1 Cache Handle",articles,existArticles);
+    addArticleStruct(tr("L2 Cache"),"dmidecode",dmiProcessor,"L2 Cache Handle",articles,existArticles);
+    addArticleStruct(tr("L3 Cache"),"dmidecode",dmiProcessor,"L3 Cache Handle",articles,existArticles);
+    addArticleStruct(tr("Flags"),"lscpu","lscpu","Flags",articles,existArticles);
     //addArticleStruct(tr("Virtualization"),"dmidecode",precessor,"Virtualization",articles,existArticles);
 
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", dmiProcessor, articles, existArticles, "ManulTrack__CPU", "CPU Information");
-    addSubInfo(tr("Processor") + " " +  dmiProcessor, articles);
+    addSubInfo(tr("Processor") + " " +  catcpuProcessor, articles);
     articles.clear();
 }
 
