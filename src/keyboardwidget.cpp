@@ -39,7 +39,10 @@ KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, t
 void KeyboardWidget::initWidget()
 {
     bool ok1 = findKeyboardFromLshw();
-    bool ok2 = findKeyboardFromCatInput();
+    bool ok2 = true;
+    if (!ok1) {
+        ok2 = findKeyboardFromCatInput();
+    }
     bool found = (ok1 || ok2);
     int keyboard_count = m_articles.count();
     if (found && keyboard_count > 0) {
