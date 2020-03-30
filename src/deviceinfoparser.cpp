@@ -287,7 +287,6 @@ QStringList DeviceInfoParser::getMatchToolDeviceList(const QString &toolName, ch
     }
 
     foreach (const QString &fk, toolDatabaseSecondOrder_[toolName]) {
-        qDebug() << fk;
         if (checkFunc) {
             if ((*checkFunc)(fk)) {
                 catcpuList.push_back(fk);
@@ -709,9 +708,9 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                 if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("USB hub", Qt::CaseInsensitive)) {
                     return false;
                 }
-//                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("", Qt::CaseInsensitive)) {
-//                    return false;
-//                }
+                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("hub", Qt::CaseInsensitive)) {
+                    return false;
+                }
             }
 
             if (DeviceInfoParser::Instance().orderedDevices.contains(fk) == false) {
