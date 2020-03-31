@@ -211,7 +211,15 @@ public:
     bool loadXrandrDatabase();
     // get power settings
     bool loadPowerSettings();
+
+    /**
+     * @brief[loadUpowerDatabase]:通过命令 upower --dump 获取电源信息
+     * @brief[parsePowerInfo]:解析所有电源信息中的一段
+     */
     bool loadUpowerDatabase();
+    void parsePowerInfo(const QString& info,DatabaseMap& powerDataBase,QStringList& secondOrder);
+
+
     // lspci parse
     bool loadLspciDatabase();
     // bluetooth

@@ -49,15 +49,10 @@ void CpuWidget::initWidget()
 {
     // 获取cpu列表，即有多少个CPU
     QStringList cpuList = DeviceInfoParser::Instance().getDmidecodeCpuList();
-    if (cpuList.size() < 1) {
-        return;
-    }
 
     // 获取cpu核心列表，即有多少个CPU核
     QStringList coreList = DeviceInfoParser::Instance().getCatcpuCpuList();
-    if (coreList.size() < 1) {
-        return;
-    }
+    if(coreList.size() < 1 && cpuList.size() < 1){return;}
 
     // 获取CPU模型
     QDBusInterface cpuModelName("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
@@ -98,8 +93,9 @@ void CpuWidget::initWidget()
     foreach (auto precessor, coreList) {
         if (canGetSpeedFromLscpu) {
             addDetailFromLscpuAndCatcpu(precessor);
-        } else {
-            addDetailFromLscpuCatcpuDmidecode(cpuList[0], precessor);
+        }else {
+            if(cpuList.size() > 0)
+                addDetailFromLscpuCatcpuDmidecode(cpuList[0],precessor);
         }
     }
 
