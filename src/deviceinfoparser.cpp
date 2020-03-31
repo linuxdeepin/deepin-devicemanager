@@ -479,7 +479,21 @@ QStringList DeviceInfoParser::getHwinfoPrinterList()
 
 QStringList DeviceInfoParser::getHwinfoOtherUSBList()
 {
-    return getMatchToolDeviceList("USB");
+    checkValueFun_t func = [](const QString & fk)->bool {
+        if (fk.contains("hub", Qt::CaseInsensitive) ||
+                fk.contains("Keyboard", Qt::CaseInsensitive) ||
+                fk.contains("mouse", Qt::CaseInsensitive) ||
+                fk.contains("Camera", Qt::CaseInsensitive) ||
+                fk .contains("CD-ROM", Qt::CaseInsensitive) ||
+                fk .contains("disk", Qt::CaseInsensitive))
+        {
+            return false;
+        }
+
+
+        return true;
+    };
+    return getMatchToolDeviceList("USB", &func);
 }
 
 QStringList DeviceInfoParser::getXrandrMonitorList()

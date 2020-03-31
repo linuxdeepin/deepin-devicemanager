@@ -45,14 +45,12 @@ class ColumnWidget;
 class LogTreeView;
 class QStandardItem;
 
-struct TableHeader
-{
+struct TableHeader {
     QString head;
     int length;
 };
 
-struct DeviceInfo
-{
+struct DeviceInfo {
     QString title_ = nullptr;
     QList<ArticleStruct>  articles_;
 
@@ -66,13 +64,13 @@ class DeivceInfoBrower: public Dtk::Widget::DTextBrowser
 {
     Q_OBJECT
 public:
-    explicit DeivceInfoBrower(DeviceInfoWidgetBase* parent = nullptr);
+    explicit DeivceInfoBrower(DeviceInfoWidgetBase *parent = nullptr);
 public slots:
     void fillClipboard();
 protected:
     void contextMenuEvent(QContextMenuEvent *event) override;
 
-    DeviceInfoWidgetBase* deviceInfoWidget_ = nullptr;
+    DeviceInfoWidgetBase *deviceInfoWidget_ = nullptr;
 
     // QWidget interface
 protected:
@@ -95,41 +93,44 @@ class DeviceInfoWidgetBase : public Dtk::Widget::DWidget
 {
     Q_OBJECT
 public:
-    explicit DeviceInfoWidgetBase(Dtk::Widget::DWidget *parent = nullptr, const QString& deviceName = "");
+    explicit DeviceInfoWidgetBase(Dtk::Widget::DWidget *parent = nullptr, const QString &deviceName = "");
     void initFont();
 
-    virtual bool getOverViewInfo(ArticleStruct& info);
+    virtual bool getOverViewInfo(ArticleStruct &info);
 
     virtual void initWidget() = 0;
 
     void initContextMenu();
 
-    void setCentralInfo(const QString& info);
+    void setCentralInfo(const QString &info);
 
     //void (const QString& title, const QList<ArticleStruct>& articles);
     // Html version
 
-    static void toHtmlString( QDomDocument& doc, const DeviceInfo& di);
-    static QString toHtmlString(const DeviceInfo& di);
+    static void toHtmlString( QDomDocument &doc, const DeviceInfo &di);
+    static QString toHtmlString(const DeviceInfo &di);
 
-    void addInfo(const QString& title, const QList<ArticleStruct>& articles);
+    void addInfo(const QString &title, const QList<ArticleStruct> &articles);
 
 
-    void addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles);
+    void addSubInfo(const QString &subTitle, const QList<ArticleStruct> &articles);
 
-    void addTable(const QStringList& headers, const QList<QStringList>& contentsList);
+    void addTable(const QStringList &headers, const QList<QStringList> &contentsList);
 
-    void addDevice(const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle = false );
+    void addDevice(const QString &subTitle, const QList<ArticleStruct> &articles, int deviceNumber, bool showTitle = false );
 
     void initDownWidget();
 
     QString getDeviceName();
 
-    static int maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3);
+    static int maxDeviceSize(const QStringList &list1, const QStringList &list2, const QStringList &list3);
 
-    void getContextMenu(Dtk::Widget::DMenu** contextMenu);
+    void getContextMenu(Dtk::Widget::DMenu **contextMenu);
 
-    QString joinArticle(QList<ArticleStruct>& articles, const QString& split = " ");
+    QString joinArticle(QList<ArticleStruct> &articles, const QString &split = " ");
+
+    ArticleStruct addArticleStruct(const QString &name, const QString &command, const QString &item, const QString &attri);
+
 
 protected:
     void contextMenuEvent(QContextMenuEvent *event) override;
@@ -141,34 +142,34 @@ public slots:
     void changeTheme();
 
 public:
-    virtual bool exportToTxt(QFile& txtFile);
-    virtual bool exportToDoc(Docx::Document& doc);
-    virtual bool exportToXls(QXlsx::Document& xlsFile);
-    virtual bool exportToHtml(QFile& htmlFile);
+    virtual bool exportToTxt(QFile &txtFile);
+    virtual bool exportToDoc(Docx::Document &doc);
+    virtual bool exportToXls(QXlsx::Document &xlsFile);
+    virtual bool exportToHtml(QFile &htmlFile);
 
-    virtual bool exportToTxt(const QString& txtFile);
-    virtual bool exportToDoc(const QString& docFile);
+    virtual bool exportToTxt(const QString &txtFile);
+    virtual bool exportToDoc(const QString &docFile);
     static void resetXlsRowCount();
-    virtual bool exportToXls(const QString& xlsFile);
-    virtual bool exportToHtml(const QString& htmlFile);
+    virtual bool exportToXls(const QString &xlsFile);
+    virtual bool exportToHtml(const QString &htmlFile);
 
 public:
     //Dtk::Widget::DTableWidget* tableWidget_ = nullptr;
-    LogTreeView* tableWidget_ = nullptr;
-    DeviceInfo* titleInfo_ = nullptr;
+    LogTreeView *tableWidget_ = nullptr;
+    DeviceInfo *titleInfo_ = nullptr;
     QList<DeviceInfo> deviceInfos_;
 
-    QVBoxLayout* vLayout_ = nullptr;
+    QVBoxLayout *vLayout_ = nullptr;
 
-    QFrame * downFrame_ = nullptr;
+    QFrame *downFrame_ = nullptr;
 
-    Dtk::Widget::DTextBrowser* htmlBrower_ = nullptr;
+    Dtk::Widget::DTextBrowser *htmlBrower_ = nullptr;
 //    QVBoxLayout* downWidgetLayout = nullptr;
 
-    Dtk::Widget::DMenu* contextMenu_ = nullptr;
+    Dtk::Widget::DMenu *contextMenu_ = nullptr;
 
-    QAction* refreshAction_ = nullptr;
-    QAction* exportAction_ = nullptr;
+    QAction *refreshAction_ = nullptr;
+    QAction *exportAction_ = nullptr;
 
     QList<int> textCursorList_;
 
@@ -197,4 +198,7 @@ protected:
     static Dtk::Gui::DPalette defaultPa_;
 
     bool firstShow_ = true;
+
+    QList<ArticleStruct> m_articles;
+    QSet<QString> m_existArticles;
 };

@@ -31,6 +31,19 @@ public:
     explicit UsbdeviceWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
-    void loadWidget();
+
+    void loadUSBWidgetFromhwinfo();
+
+    // 添加信息
+//    ArticleStruct addArticleStruct(const QString &name, const QString &command, const QString &item, const QString &attri);
+
+    // 当有多个usb信息时设置TabList
+    void setTabList(int size, ArticleStruct &name, ArticleStruct &vendor, ArticleStruct &description);
+
+
+private:
+    QList<QStringList> m_tabList;
+//    QList<ArticleStruct> m_articles;
+//    QSet<QString> m_existArticles;
 };
 

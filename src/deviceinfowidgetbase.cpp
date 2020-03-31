@@ -67,7 +67,7 @@ DPalette DeviceInfoWidgetBase::defaultPa_;
 
 int currentXlsRow_ = 1;
 
-DeivceInfoBrower::DeivceInfoBrower( DeviceInfoWidgetBase* parent ): DTextBrowser(parent), deviceInfoWidget_(parent)
+DeivceInfoBrower::DeivceInfoBrower( DeviceInfoWidgetBase *parent ): DTextBrowser(parent), deviceInfoWidget_(parent)
 {
 
 }
@@ -75,27 +75,25 @@ DeivceInfoBrower::DeivceInfoBrower( DeviceInfoWidgetBase* parent ): DTextBrowser
 void DeivceInfoBrower::fillClipboard()
 {
     QString str = QTextEdit::textCursor().selectedText();
-    if(str.isEmpty()){
+    if (str.isEmpty()) {
         return;
     }
     QClipboard *clipboard = DApplication::clipboard();
     QTextDocumentFragment frag = textCursor().selection();
-    clipboard->setText(frag.toPlainText().trimmed()+"\n");
+    clipboard->setText(frag.toPlainText().trimmed() + "\n");
 }
 
 void DeivceInfoBrower::contextMenuEvent(QContextMenuEvent *event)
 {
-    QMenu* standMenu = new QMenu(this);
+    QMenu *standMenu = new QMenu(this);
 
     QString str = QTextEdit::textCursor().selectedText();
 
-    QAction* copyAction = new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this);
-    if(str.isEmpty())
-    {
+    QAction *copyAction = new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this);
+    if (str.isEmpty()) {
         copyAction->setDisabled(true);
-    }
-    else {
-        connect(copyAction, &QAction::triggered,this,&DeivceInfoBrower::fillClipboard);
+    } else {
+        connect(copyAction, &QAction::triggered, this, &DeivceInfoBrower::fillClipboard);
     }
     standMenu->addAction(copyAction);
     standMenu->addSeparator();
@@ -151,13 +149,10 @@ void DeivceInfoBrower::paintEvent(QPaintEvent *event)
 
 void DeivceInfoBrower::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key()==Qt::Key_C)
-    {
+    if (event->key() == Qt::Key_C) {
         Qt::KeyboardModifiers modifiers = event->modifiers();
-        if (modifiers != Qt::NoModifier)
-        {
-            if ( modifiers.testFlag(Qt::ControlModifier))
-            {
+        if (modifiers != Qt::NoModifier) {
+            if ( modifiers.testFlag(Qt::ControlModifier)) {
                 fillClipboard();
                 return;
             }
@@ -166,7 +161,7 @@ void DeivceInfoBrower::keyPressEvent(QKeyEvent *event)
     Dtk::Widget::DTextBrowser::keyPressEvent(event);
 }
 
-DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& deviceName) : DWidget(parent_)
+DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString &deviceName) : DWidget(parent_)
 {
     overviewInfo_.name = deviceName;
 
@@ -187,14 +182,13 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString& devi
 
 void DeviceInfoWidgetBase::initFont()
 {
-    if( isFontInit_ == true )
-    {
+    if ( isFontInit_ == true ) {
         return;
     }
 
     isFontInit_ = true;
 
-    QLabel* nameLabel = new DLabel("", this);
+    QLabel *nameLabel = new DLabel("", this);
 
     DFontSizeManager::instance()->bind( nameLabel, DFontSizeManager::T5);
 
@@ -234,7 +228,7 @@ void DeviceInfoWidgetBase::initFont()
     delete nameLabel;
 }
 
-bool DeviceInfoWidgetBase::getOverViewInfo(ArticleStruct& info)
+bool DeviceInfoWidgetBase::getOverViewInfo(ArticleStruct &info)
 {
     info = overviewInfo_;
 
@@ -252,15 +246,13 @@ void DeviceInfoWidgetBase::initContextMenu()
     refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this);
 
     connect(refreshAction_, &QAction::triggered, \
-            [this]()
-            {
-                MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent()->parent()->parent());
-                if(mainWindow)
-                {
-                    mainWindow->refresh();
-                }
-            }
-    );
+    [this]() {
+        MainWindow *mainWindow = dynamic_cast<MainWindow *>(parent()->parent()->parent());
+        if (mainWindow) {
+            mainWindow->refresh();
+        }
+    }
+           );
     contextMenu_->addAction(refreshAction_);
 
 
@@ -275,23 +267,20 @@ void DeviceInfoWidgetBase::initContextMenu()
     contextMenu_->addAction(exportAction_);
 }
 
-void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
+void DeviceInfoWidgetBase::setCentralInfo(const QString &info)
 {
     firstShow_ = false;
 
-    if(titleInfo_ == nullptr)
-    {
+    if (titleInfo_ == nullptr) {
         titleInfo_ = new DeviceInfo;
     }
 
-    if(tableWidget_ != nullptr)
-    {
+    if (tableWidget_ != nullptr) {
         delete tableWidget_;
         tableWidget_ = nullptr;
     }
 
-    if(downFrame_)
-    {
+    if (downFrame_) {
         delete downFrame_;
         downFrame_ = nullptr;
     }
@@ -299,12 +288,11 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
     downFrame_ = new DFrame(this);
     changeTheme();
 
-    QVBoxLayout* ly = new QVBoxLayout;
+    QVBoxLayout *ly = new QVBoxLayout;
 
     downFrame_->setLayout(ly);
 
-    if( false == info.isEmpty() )
-    {
+    if ( false == info.isEmpty() ) {
         titleInfo_->title_ = info;
         auto label = new DLabel(titleInfo_->title_, this );
         label->setFont(centralFont_);
@@ -323,18 +311,16 @@ void DeviceInfoWidgetBase::setCentralInfo(const QString& info)
     vLayout_->addWidget( downFrame_ );
 }
 
-void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di )
+void DeviceInfoWidgetBase::toHtmlString(QDomDocument &doc, const DeviceInfo &di )
 {
-    if( di.title_.isEmpty() == false)
-    {
+    if ( di.title_.isEmpty() == false) {
         QDomElement h3 = doc.createElement("h3");
         QDomText valueText = doc.createTextNode(di.title_);
         h3.appendChild(valueText);
         doc.appendChild(h3);
     }
 
-    if( di.articles_.size() < 1 )
-    {
+    if ( di.articles_.size() < 1 ) {
         return;
     }
 
@@ -343,10 +329,8 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
     table.setAttribute("width", "100%");
     table.setAttribute("cellpadding", "3");
 
-    foreach( auto article, di.articles_ )
-    {
-        if(article.isValid() == false)
-        {
+    foreach ( auto article, di.articles_ ) {
+        if (article.isValid() == false) {
             continue;
         }
 
@@ -363,27 +347,24 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
         td2.setAttribute("width", "85%");
 
         QDomText valueText;
-        if(article.externalLinks == false)
-        {
+        if (article.externalLinks == false) {
             valueText = doc.createTextNode(article.value);
             td2.appendChild(valueText);
-        }
-        else
-        {
-             QDomElement style = doc.createElement("style");
-             QDomText decoration = doc.createTextNode("a {text-decoration: none; }");
-             style.appendChild(decoration);
-             td2.appendChild(style);
+        } else {
+            QDomElement style = doc.createElement("style");
+            QDomText decoration = doc.createTextNode("a {text-decoration: none; }");
+            style.appendChild(decoration);
+            td2.appendChild(style);
 
-             QDomElement a = doc.createElement("a");
-             a.setAttribute("href", DeviceInfoParser::Instance().getHomeUrl() );
-             QDomText  href = doc.createTextNode(DeviceInfoParser::Instance().getLsbRelease() + " ");
-             a.appendChild(href);
-             td2.appendChild(a);
+            QDomElement a = doc.createElement("a");
+            a.setAttribute("href", DeviceInfoParser::Instance().getHomeUrl() );
+            QDomText  href = doc.createTextNode(DeviceInfoParser::Instance().getLsbRelease() + " ");
+            a.appendChild(href);
+            td2.appendChild(a);
 
-             QString osInfo = DeviceInfoParser::Instance().getOsInfo();
-             valueText = doc.createTextNode(osInfo);
-             td2.appendChild(valueText);
+            QString osInfo = DeviceInfoParser::Instance().getOsInfo();
+            valueText = doc.createTextNode(osInfo);
+            td2.appendChild(valueText);
         }
 
         tr.appendChild(td2);
@@ -396,66 +377,58 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument& doc, const DeviceInfo& di 
 
 void DeviceInfoWidgetBase::addInfo(const QString &title, const QList<ArticleStruct> &articles)
 {
-    if(titleInfo_ == nullptr)
-    {
+    if (titleInfo_ == nullptr) {
         titleInfo_ = new DeviceInfo;
     }
 
     titleInfo_->font_ = infoFont_;
 
-    if( title.isEmpty()== false)
-    {
+    if ( title.isEmpty() == false) {
         titleInfo_->title_ = title;
     }
-    foreach(auto article, articles)
-    {
+    foreach (auto article, articles) {
         ArticleStruct inserArt(article);
         titleInfo_->articles_.push_back(inserArt);
     }
 
 }
 
-void DeviceInfoWidgetBase::addSubInfo(const QString& subTitle, const QList<ArticleStruct>& articles)
+void DeviceInfoWidgetBase::addSubInfo(const QString &subTitle, const QList<ArticleStruct> &articles)
 {
     DeviceInfo di;
 
     di.font_ = labelFont_;
 
-    if(subTitle.isEmpty() == false)
-    {
+    if (subTitle.isEmpty() == false) {
         di.title_ = subTitle;
     }
-    foreach(auto article, articles)
-    {
+    foreach (auto article, articles) {
         di.articles_.push_back(article);
     }
     deviceInfos_.push_back(di);
 }
 
-void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStringList>& contentsList)
+void DeviceInfoWidgetBase::addTable(const QStringList &headers, const QList<QStringList> &contentsList)
 {
-    if(contentsList.size() == 0)
-    {
+    if (contentsList.size() == 0) {
         return;
     }
 
-    if(tableWidget_ == nullptr)
-    {
+    if (tableWidget_ == nullptr) {
         tableWidget_ = new LogTreeView(this);
         DFontSizeManager::instance()->bind( tableWidget_, DFontSizeManager::T8);
 
         tableWidget_->setSortingEnabled(true);
 
-        tableWidget_->setFixedHeight(TableViewRowHeight_*5 + 4/*+ tableWidget_->verticalHeader()->height()+3*/);
+        tableWidget_->setFixedHeight(TableViewRowHeight_ * 5 + 4/*+ tableWidget_->verticalHeader()->height()+3*/);
 
-        tableWidget_->m_headerDelegate->setDefaultSectionSize(TableViewRowHeight_+4);
-        tableWidget_->m_headerDelegate->setFixedHeight(TableViewRowHeight_+4);
+        tableWidget_->m_headerDelegate->setDefaultSectionSize(TableViewRowHeight_ + 4);
+        tableWidget_->m_headerDelegate->setFixedHeight(TableViewRowHeight_ + 4);
 
         DFontSizeManager::instance()->bind( tableWidget_->m_headerDelegate, DFontSizeManager::T6);
 
         QStringList translaterHeaders;
-        foreach(auto header, headers)
-        {
+        foreach (auto header, headers) {
             translaterHeaders.push_back(header);
         }
         tableWidget_->m_pModel->setHorizontalHeaderLabels(translaterHeaders);
@@ -464,34 +437,30 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     }
 
     //vLayout_->insertWidget(0, tableWidget_);
-    QVBoxLayout* tableLay = new QVBoxLayout;
-    tableLay->setContentsMargins(1,1,1,1);
+    QVBoxLayout *tableLay = new QVBoxLayout;
+    tableLay->setContentsMargins(1, 1, 1, 1);
     tableLay->addWidget(tableWidget_);
 
-    vLayout_->insertLayout(0,tableLay);
+    vLayout_->insertLayout(0, tableLay);
 
-    for(int i = 0; i < contentsList.size(); ++i)
-    {
-        const QStringList& contents = contentsList[i];
-        for(int j = 0; j < contents.size(); ++j )
-        {
+    for (int i = 0; i < contentsList.size(); ++i) {
+        const QStringList &contents = contentsList[i];
+        for (int j = 0; j < contents.size(); ++j ) {
             QString strContent = contents[j];
-            if( strContent.isEmpty() == true)
-            {
+            if ( strContent.isEmpty() == true) {
                 strContent = "--";
             }
-            if (j == 3){
+            if (j == 3) {
                 int brackets = strContent.indexOf('(');
-                QString strContent1 = strContent.mid(0,brackets);
-                if (strContent1.contains("GiB")){
-                    strContent1.replace("GiB","GB");
+                QString strContent1 = strContent.mid(0, brackets);
+                if (strContent1.contains("GiB")) {
+                    strContent1.replace("GiB", "GB");
                 }
-                if (strContent1.contains("MiB")){
+                if (strContent1.contains("MiB")) {
                     strContent1.replace( "MiB", " MB" );
                 }
-                DStandardItem* item = new DStandardItem(strContent1);
-                if(j == 0)
-                {
+                DStandardItem *item = new DStandardItem(strContent1);
+                if (j == 0) {
                     item->setData( i, Qt::UserRole + 90 );
                 }
 
@@ -499,9 +468,8 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
                 continue;
             }
 
-            DStandardItem* item = new DStandardItem(strContent);
-            if(j == 0)
-            {
+            DStandardItem *item = new DStandardItem(strContent);
+            if (j == 0) {
                 item->setData( i, Qt::UserRole + 90 );
             }
 
@@ -510,33 +478,27 @@ void DeviceInfoWidgetBase::addTable(const QStringList& headers, const QList<QStr
     }
 }
 
-void DeviceInfoWidgetBase::addDevice( const QString& subTitle, const QList<ArticleStruct>& articles, int deviceNumber, bool showTitle )
+void DeviceInfoWidgetBase::addDevice( const QString &subTitle, const QList<ArticleStruct> &articles, int deviceNumber, bool showTitle )
 {
     QList<ArticleStruct> lst;
     QSet<QString> existString;
-    foreach(auto article, articles)
-    {
-        if(existString.contains(article.name + ":" + article.value ) == false )
-        {
+    foreach (auto article, articles) {
+        if (existString.contains(article.name + ":" + article.value ) == false ) {
             lst.push_back(article);
             existString.insert(article.name + ":" + article.value);
         }
     }
 
-    if( deviceNumber < 2 )
-    {
-        addInfo( showTitle ? subTitle: "", lst );
-    }
-    else
-    {
+    if ( deviceNumber < 2 ) {
+        addInfo( showTitle ? subTitle : "", lst );
+    } else {
         addSubInfo( subTitle, lst );
     }
 }
 
 void DeviceInfoWidgetBase::initDownWidget()
 {
-    if( htmlBrower_ )
-    {
+    if ( htmlBrower_ ) {
         return;
     }
     downFrame_ = new DFrame(this);
@@ -547,9 +509,9 @@ void DeviceInfoWidgetBase::initDownWidget()
     htmlBrower_->setFrameShape(QFrame::NoFrame);
     htmlBrower_->setOpenExternalLinks(true);
 
-    QVBoxLayout* ly = new QVBoxLayout;
+    QVBoxLayout *ly = new QVBoxLayout;
 
-    ly->setContentsMargins(10,10,0,0);
+    ly->setContentsMargins(10, 10, 0, 0);
     ly->addWidget(htmlBrower_);
     downFrame_->setLayout(ly);
     vLayout_->addWidget(downFrame_);
@@ -560,17 +522,15 @@ QString DeviceInfoWidgetBase::getDeviceName()
     return overviewInfo_.name;
 }
 
-int DeviceInfoWidgetBase::maxDeviceSize(const QStringList& list1, const QStringList& list2, const QStringList& list3)
+int DeviceInfoWidgetBase::maxDeviceSize(const QStringList &list1, const QStringList &list2, const QStringList &list3)
 {
     int max = list1.size();
 
-    if(max < list2.size())
-    {
+    if (max < list2.size()) {
         max = list2.size();
     }
 
-    if(max < list3.size())
-    {
+    if (max < list3.size()) {
         max = list3.size();
     }
 
@@ -578,20 +538,17 @@ int DeviceInfoWidgetBase::maxDeviceSize(const QStringList& list1, const QStringL
 }
 
 
-void DeviceInfoWidgetBase::getContextMenu(DMenu** contextMenu)
+void DeviceInfoWidgetBase::getContextMenu(DMenu **contextMenu)
 {
     *contextMenu = contextMenu_;
 }
 
-QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct>& articles, const QString& split)
+QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct> &articles, const QString &split)
 {
     QString res;
-    foreach(auto article, articles)
-    {
-        if(article.isValid())
-        {
-            if(res.isEmpty() == false)
-            {
+    foreach (auto article, articles) {
+        if (article.isValid()) {
+            if (res.isEmpty() == false) {
                 res += split;
             }
 
@@ -604,9 +561,8 @@ QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct>& articles, const 
 
 void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)
 {
-    MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent()->parent()->parent());
-    if(mainWindow)
-    {
+    MainWindow *mainWindow = dynamic_cast<MainWindow *>(parent()->parent()->parent());
+    if (mainWindow) {
         refreshAction_->setDisabled(mainWindow->isRefreshing());
     }
 
@@ -615,20 +571,19 @@ void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)
 
 void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
 {
-    if(firstShow_ == false)
-    {
+    if (firstShow_ == false) {
         return DWidget::showEvent(event);
     }
 
     firstShow_ = false;
 
-    if(htmlBrower_ == nullptr){
+    if (htmlBrower_ == nullptr) {
         htmlBrower_ = new DeivceInfoBrower(this);
         htmlBrower_->setFrameShape(QFrame::NoFrame);
         htmlBrower_->setOpenExternalLinks(true);
 
         QHBoxLayout *htmlBroswerLayout = new QHBoxLayout;
-        htmlBroswerLayout->setContentsMargins(7,19,0,20);
+        htmlBroswerLayout->setContentsMargins(7, 19, 0, 20);
         htmlBroswerLayout->addWidget(htmlBrower_);
 
         auto bottomRoundFrame = new BottomRoundFrame;
@@ -638,7 +593,7 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
         QVBoxLayout *layout = new QVBoxLayout;
         layout->addWidget(bottomRoundFrame/*new QTextEdit*/);
         layout->setMargin(1);
-        QWidget * widget = new QWidget;
+        QWidget *widget = new QWidget;
         widget->setLayout(layout);
         vLayout_->addWidget(widget);
     }
@@ -647,21 +602,18 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
 
     QDomDocument doc;
 
-    if(titleInfo_)
-    {
+    if (titleInfo_) {
         toHtmlString(doc, *titleInfo_);
         fontSize = DFontSizeManager::T6;
     }
 
     DFontSizeManager::instance()->bind( htmlBrower_, DFontSizeManager::SizeType(fontSize));
 
-    if(deviceInfos_.size() < 1)
-    {
+    if (deviceInfos_.size() < 1) {
         htmlBrower_->setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
     }
 
-    foreach(auto di, deviceInfos_)
-    {
+    foreach (auto di, deviceInfos_) {
         textCursorList_.push_back(htmlBrower_->document()->characterCount());
         toHtmlString(doc, di);
         htmlBrower_->setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
@@ -672,16 +624,15 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
 
 void DeviceInfoWidgetBase::OnCurrentItemClicked(const QModelIndex &index)
 {
-    QStandardItem* item = tableWidget_->m_pModel->item( index.row() );
-    if(item == nullptr)
-    {
+    QStandardItem *item = tableWidget_->m_pModel->item( index.row() );
+    if (item == nullptr) {
         return;
     }
 
-    int row = item->data(Qt::UserRole+90).toInt();
+    int row = item->data(Qt::UserRole + 90).toInt();
 
     QTextCursor cursor = htmlBrower_->textCursor();
-    cursor.setPosition( htmlBrower_->document()->characterCount() -1 );
+    cursor.setPosition( htmlBrower_->document()->characterCount() - 1 );
     htmlBrower_->setTextCursor(cursor);
     cursor.setPosition( textCursorList_.at(row) );
     htmlBrower_->setTextCursor(cursor);
@@ -689,19 +640,17 @@ void DeviceInfoWidgetBase::OnCurrentItemClicked(const QModelIndex &index)
 
 bool DeviceInfoWidgetBase::onExportToFile()
 {
-   MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent()->parent());
-   if( nullptr == mainWindow )
-   {
-       return false;
-   }
+    MainWindow *mainWindow = dynamic_cast<MainWindow *>(this->parent()->parent()->parent());
+    if ( nullptr == mainWindow ) {
+        return false;
+    }
 
-   return mainWindow->exportTo();
+    return mainWindow->exportTo();
 }
 
 void DeviceInfoWidgetBase::changeTheme()
 {
-    if(downFrame_ == nullptr)
-    {
+    if (downFrame_ == nullptr) {
         return;
     }
 
@@ -710,28 +659,23 @@ void DeviceInfoWidgetBase::changeTheme()
     downFrame_->setPalette(pa);
 }
 
-QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
+QTextStream &operator<<(QTextStream &ds, const DeviceInfo &di)
 {
-    if(di.title_.isEmpty() == false)
-    {
+    if (di.title_.isEmpty() == false) {
         ds << di.title_ << "\n";
     }
 
-    foreach(auto article, di.articles_)
-    {
-        if(article.isValid() == false){
+    foreach (auto article, di.articles_) {
+        if (article.isValid() == false) {
             continue;
         }
         ds.setFieldWidth(21);
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
         ds << article.name + ": ";
         ds.setFieldWidth(0);
-        if(article.externalLinks )
-        {
+        if (article.externalLinks ) {
             ds << DeviceInfoParser::Instance().getLsbRelease() + "(" +  DeviceInfoParser::Instance().getHomeUrl() + ") " + DeviceInfoParser::Instance().getOsInfo() << "\n";
-        }
-        else
-        {
+        } else {
             ds << article.value << "\n";
         }
     }
@@ -739,26 +683,21 @@ QTextStream& operator<<(QTextStream& ds, const DeviceInfo& di)
     return ds;
 }
 
-QTextStream& operator<<(QTextStream& ds, LogTreeView* tableWidget)
+QTextStream &operator<<(QTextStream &ds, LogTreeView *tableWidget)
 {
-    if(tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1)
-    {
+    if (tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1) {
         return ds;
     }
 
-    for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
-    {
+    for (int col = 0; col < tableWidget->m_pModel->columnCount(); ++col) {
         auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
 
         QString text = tableWidget->m_pModel->horizontalHeaderItem(col)->text();
         ds.setFieldWidth( text.size() * 1.5);
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
-        if(item)
-        {
-             ds << text;
-        }
-        else
-        {
+        if (item) {
+            ds << text;
+        } else {
             ds << "";
         }
         ds.setFieldWidth(0);
@@ -766,11 +705,9 @@ QTextStream& operator<<(QTextStream& ds, LogTreeView* tableWidget)
     ds << "\n";
 
 
-    for( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row )
-    {
-        for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
-        {
-            QString text = tableWidget->m_pModel->item(row,col)->text();
+    for ( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row ) {
+        for ( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col ) {
+            QString text = tableWidget->m_pModel->item(row, col)->text();
 
             ds.setFieldWidth( text.size() * 1.5);
             ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
@@ -784,42 +721,38 @@ QTextStream& operator<<(QTextStream& ds, LogTreeView* tableWidget)
     return ds;
 }
 
-bool DeviceInfoWidgetBase::exportToTxt(QFile& txtFile)
+bool DeviceInfoWidgetBase::exportToTxt(QFile &txtFile)
 {
     QTextStream out(&txtFile);
 
-        out <<  "[" << overviewInfo_.name << "]\n-------------------------------------------------";
+    out <<  "[" << overviewInfo_.name << "]\n-------------------------------------------------";
 
-        if(tableWidget_)
-        {
-            out << "\n";
-            out << tableWidget_;
-        }
-
-        if(titleInfo_)
-        {
-            out << "\n";
-            out << *titleInfo_;
-        }
-
-        foreach(const DeviceInfo& di, deviceInfos_)
-        {
-            out << "\n";
-            out << di;
-        }
+    if (tableWidget_) {
         out << "\n";
+        out << tableWidget_;
+    }
+
+    if (titleInfo_) {
+        out << "\n";
+        out << *titleInfo_;
+    }
+
+    foreach (const DeviceInfo &di, deviceInfos_) {
+        out << "\n";
+        out << di;
+    }
+    out << "\n";
 
 
 
-        return true;
+    return true;
 
 }
 
-bool DeviceInfoWidgetBase::exportToTxt(const QString& txtFile)
+bool DeviceInfoWidgetBase::exportToTxt(const QString &txtFile)
 {
     QFile file( txtFile );
-    if( false == file.open(QIODevice::WriteOnly))
-    {
+    if ( false == file.open(QIODevice::WriteOnly)) {
         return false;
     }
 
@@ -831,64 +764,53 @@ bool DeviceInfoWidgetBase::exportToTxt(const QString& txtFile)
     return true;
 }
 
-bool writeTabwidgetToDoc(LogTreeView* tableWidget, Docx::Document& doc)
+bool writeTabwidgetToDoc(LogTreeView *tableWidget, Docx::Document &doc)
 {
-    if(tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1)
-    {
+    if (tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1) {
         return false;
     }
 
-    Docx::Table* tab = doc.addTable(tableWidget->m_pModel->rowCount()+1, tableWidget->m_pModel->columnCount());
+    Docx::Table *tab = doc.addTable(tableWidget->m_pModel->rowCount() + 1, tableWidget->m_pModel->columnCount());
     //tab->setAlignment(Docx::WD_TABLE_ALIGNMENT::LEFT);
 
-    for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
-    {
+    for (int col = 0; col < tableWidget->m_pModel->columnCount(); ++col) {
         auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
         auto cel = tab->cell(0, col);
-        if(item)
-        {
-             cel->addText(tableWidget->m_pModel->horizontalHeaderItem(col)->text());
+        if (item) {
+            cel->addText(tableWidget->m_pModel->horizontalHeaderItem(col)->text());
         }
     }
 
-    for( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row )
-    {
-        for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
-        {
-            auto cel = tab->cell(row+1, col);
-            cel->addText(tableWidget->m_pModel->item(row,col)->text());
+    for ( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row ) {
+        for ( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col ) {
+            auto cel = tab->cell(row + 1, col);
+            cel->addText(tableWidget->m_pModel->item(row, col)->text());
         }
     }
 
     return true;
 }
 
-bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
+bool writeDeviceInfoToDoc(const DeviceInfo &di, Docx::Document &doc)
 {
-    if(di.title_.isEmpty() == false)
-    {
+    if (di.title_.isEmpty() == false) {
         doc.addHeading( di.title_, 4);
     }
 
-    foreach(auto article, di.articles_)
-    {
-        if(!article.isValid()){
+    foreach (auto article, di.articles_) {
+        if (!article.isValid()) {
             continue;
         }
         QString name = article.name;
         QString content;
-        if( article.externalLinks )
-        {
+        if ( article.externalLinks ) {
             content = DeviceInfoParser::Instance().getLsbRelease() + "(" +  DeviceInfoParser::Instance().getHomeUrl() + ") " + DeviceInfoParser::Instance().getOsInfo();
-        }
-        else
-        {
+        } else {
             content = article.value;
         }
 
         QString line;
-        if(name.trimmed().isEmpty() == false || false == content.trimmed().isEmpty())
-        {
+        if (name.trimmed().isEmpty() == false || false == content.trimmed().isEmpty()) {
             line = name + ":   " + content;
         }
 
@@ -898,25 +820,22 @@ bool writeDeviceInfoToDoc(const DeviceInfo& di, Docx::Document& doc)
     return true;
 }
 
-bool DeviceInfoWidgetBase::exportToDoc(Docx::Document& doc)
+bool DeviceInfoWidgetBase::exportToDoc(Docx::Document &doc)
 {
     doc.addHeading("[" + overviewInfo_.name + "]", 2);
     doc.addParagraph("-------------------------------------------------");
 
-    if(tableWidget_)
-    {
+    if (tableWidget_) {
         writeTabwidgetToDoc(tableWidget_, doc);
         doc.addParagraph("\n");
     }
 
-    if(titleInfo_)
-    {
+    if (titleInfo_) {
         writeDeviceInfoToDoc(*titleInfo_, doc);
         doc.addParagraph("\n");
     }
 
-    foreach(auto di, deviceInfos_)
-    {
+    foreach (auto di, deviceInfos_) {
         writeDeviceInfoToDoc(di, doc);
         doc.addParagraph("\n");
     }
@@ -925,7 +844,7 @@ bool DeviceInfoWidgetBase::exportToDoc(Docx::Document& doc)
     return true;
 }
 
-bool DeviceInfoWidgetBase::exportToDoc(const QString& docFile)
+bool DeviceInfoWidgetBase::exportToDoc(const QString &docFile)
 {
     Docx::Document doc(":/thirdlib/docx/doc_template/docx");
     exportToDoc(doc);
@@ -938,32 +857,27 @@ void DeviceInfoWidgetBase::resetXlsRowCount()
     currentXlsRow_ = 1;
 }
 
-bool writeTabwidgetToXls(LogTreeView* tableWidget, QXlsx::Document& xlsx)
+bool writeTabwidgetToXls(LogTreeView *tableWidget, QXlsx::Document &xlsx)
 {
-    if(tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1)
-    {
+    if (tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1) {
         return false;
     }
 
 
-    for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
-    {
+    for (int col = 0; col < tableWidget->m_pModel->columnCount(); ++col) {
         auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
-        if(item)
-        {
+        if (item) {
             QXlsx::Format boldFont;
             boldFont.setFontSize(10);
             boldFont.setFontBold(true);
-            xlsx.write( currentXlsRow_, col+1, item->text(), boldFont );
+            xlsx.write( currentXlsRow_, col + 1, item->text(), boldFont );
         }
     }
     ++currentXlsRow_;
 
-    for( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row )
-    {
-        for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
-        {
-            xlsx.write( currentXlsRow_, col+1, tableWidget->m_pModel->item(row,col)->text());
+    for ( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row ) {
+        for ( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col ) {
+            xlsx.write( currentXlsRow_, col + 1, tableWidget->m_pModel->item(row, col)->text());
         }
         ++currentXlsRow_;
     }
@@ -973,28 +887,23 @@ bool writeTabwidgetToXls(LogTreeView* tableWidget, QXlsx::Document& xlsx)
     return true;
 }
 
-bool writeDeviceInfoToXls(const DeviceInfo& di, QXlsx::Document& xlsx)
+bool writeDeviceInfoToXls(const DeviceInfo &di, QXlsx::Document &xlsx)
 {
-    if(di.title_.isEmpty() == false)
-    {
+    if (di.title_.isEmpty() == false) {
         QXlsx::Format boldFont;
         boldFont.setFontSize(10);
         boldFont.setFontBold(true);
         xlsx.write( currentXlsRow_++, 1, di.title_, boldFont);
     }
 
-    foreach(auto article, di.articles_)
-    {
-        if(false == article.isValid()){
+    foreach (auto article, di.articles_) {
+        if (false == article.isValid()) {
             continue;
         }
         xlsx.write(currentXlsRow_, 1, article.name);
-        if( article.externalLinks )
-        {
+        if ( article.externalLinks ) {
             xlsx.write(currentXlsRow_++, 2,  DeviceInfoParser::Instance().getLsbRelease() + "(" +  DeviceInfoParser::Instance().getHomeUrl() + ")" + DeviceInfoParser::Instance().getOsInfo() );
-        }
-        else
-        {
+        } else {
             xlsx.write(currentXlsRow_++, 2, article.value );
         }
     }
@@ -1005,24 +914,21 @@ bool writeDeviceInfoToXls(const DeviceInfo& di, QXlsx::Document& xlsx)
 }
 
 
-bool DeviceInfoWidgetBase::exportToXls(QXlsx::Document& xlsFile)
+bool DeviceInfoWidgetBase::exportToXls(QXlsx::Document &xlsFile)
 {
     QXlsx::Format boldFont;
     boldFont.setFontBold(true);
     xlsFile.write( currentXlsRow_++, 1, overviewInfo_.name, boldFont);
 
-    if(tableWidget_)
-    {
+    if (tableWidget_) {
         writeTabwidgetToXls(tableWidget_, xlsFile);
     }
 
-    if(titleInfo_)
-    {
+    if (titleInfo_) {
         writeDeviceInfoToXls(*titleInfo_, xlsFile);
     }
 
-    foreach(auto di, deviceInfos_)
-    {
+    foreach (auto di, deviceInfos_) {
         writeDeviceInfoToXls(di, xlsFile);
     }
 
@@ -1030,7 +936,7 @@ bool DeviceInfoWidgetBase::exportToXls(QXlsx::Document& xlsFile)
 }
 
 
-bool DeviceInfoWidgetBase::exportToXls(const QString& xlsFile)
+bool DeviceInfoWidgetBase::exportToXls(const QString &xlsFile)
 {
     currentXlsRow_ = 1;
     QXlsx::Document xlsx;
@@ -1042,34 +948,28 @@ bool DeviceInfoWidgetBase::exportToXls(const QString& xlsFile)
     return true;
 }
 
-bool writeTabwidgetToHtml(LogTreeView* tableWidget, QFile& html)
+bool writeTabwidgetToHtml(LogTreeView *tableWidget, QFile &html)
 {
-    if(tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1)
-    {
+    if (tableWidget == nullptr || tableWidget->m_pModel->rowCount() < 1) {
         return false;
     }
 
     html.write("<table border=\"0\" white-space:pre>\n");
     html.write("<thead><tr>\n");
-    for(int col = 0; col < tableWidget->m_pModel->columnCount(); ++col)
-    {
+    for (int col = 0; col < tableWidget->m_pModel->columnCount(); ++col) {
         auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
-        if(item)
-        {
+        if (item) {
             html.write( QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + item->text() + "</th>").toUtf8().data() );
-        }
-        else {
-             html.write( "<td style=\"width:200px;text-align:left; white-space:pre;\"> </td>" );
+        } else {
+            html.write( "<td style=\"width:200px;text-align:left; white-space:pre;\"> </td>" );
         }
     }
     html.write("</tr></thead>\n");
 
-    for( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row )
-    {
+    for ( int row = 0; row < tableWidget->m_pModel->rowCount(); ++row ) {
         html.write("<tr>\n");
-        for( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col )
-        {
-            html.write( QString("<td style=\"width:200px;text-align:left;\">" + tableWidget->m_pModel->item(row,col)->text() + "</td>").toUtf8().data() );
+        for ( int col = 0; col < tableWidget->m_pModel->columnCount(); ++col ) {
+            html.write( QString("<td style=\"width:200px;text-align:left;\">" + tableWidget->m_pModel->item(row, col)->text() + "</td>").toUtf8().data() );
         }
         html.write("</tr>\n");
     }
@@ -1079,7 +979,7 @@ bool writeTabwidgetToHtml(LogTreeView* tableWidget, QFile& html)
     return true;
 }
 
-bool DeviceInfoWidgetBase::exportToHtml(QFile& htmlFile)
+bool DeviceInfoWidgetBase::exportToHtml(QFile &htmlFile)
 {
     htmlFile.write("<!DOCTYPE html>\n");
     htmlFile.write("<html>\n");
@@ -1087,22 +987,19 @@ bool DeviceInfoWidgetBase::exportToHtml(QFile& htmlFile)
 
     htmlFile.write( (QString("<h2>") + overviewInfo_.name + "</h2>").toUtf8() );
 
-    if(tableWidget_)
-    {
+    if (tableWidget_) {
         writeTabwidgetToHtml(tableWidget_, htmlFile);
         htmlFile.write("<br />\n");
     }
 
     QDomDocument doc;
 
-    if(titleInfo_)
-    {
+    if (titleInfo_) {
         toHtmlString(doc, *titleInfo_);
         doc.appendChild( doc.createElement("br") );
     }
 
-    foreach(auto di, deviceInfos_)
-    {
+    foreach (auto di, deviceInfos_) {
         toHtmlString(doc, di);
     }
 
@@ -1113,15 +1010,24 @@ bool DeviceInfoWidgetBase::exportToHtml(QFile& htmlFile)
     return true;
 }
 
-bool DeviceInfoWidgetBase::exportToHtml(const QString& htmlFile)
+bool DeviceInfoWidgetBase::exportToHtml(const QString &htmlFile)
 {
     QFile html(htmlFile);
-    if(false == html.open(QIODevice::OpenModeFlag::WriteOnly))
-    {
+    if (false == html.open(QIODevice::OpenModeFlag::WriteOnly)) {
         return false;
     }
 
     exportToHtml(html);
     html.close();
     return true;
+}
+
+
+ArticleStruct DeviceInfoWidgetBase::addArticleStruct(const QString &name, const QString &command, const QString &item, const QString &attri)
+{
+    ArticleStruct Name(name);
+    Name.queryData(command, item, attri);
+    m_articles.push_back(Name);
+    m_existArticles.insert(attri);
+    return Name;
 }
