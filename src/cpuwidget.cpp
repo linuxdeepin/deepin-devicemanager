@@ -69,29 +69,29 @@ void CpuWidget::initWidget()
     // 由于获取cpu的频率在不同的环境下的命令不同和方式不同，因此先判断是否可以从lscpu获取
     // 如果不能，则从dmidecode中获取
     speed_.clear();
-    bool canGetSpeedFromLscpu = isCanGetSpeedFromLsCpu(minMHz,maxMHz);
-    if(canGetSpeedFromLscpu){
+    bool canGetSpeedFromLscpu = isCanGetSpeedFromLsCpu(minMHz, maxMHz);
+    if (canGetSpeedFromLscpu) {
         //可以从lscpu获取频率
-        getSpeedFromLscpu(minMHz,maxMHz);
-    }else{
+        getSpeedFromLscpu(minMHz, maxMHz);
+    } else {
         //不可以从lscpu获取频率,从dmidecode中获取
         getSpeedFromDmidecode();
     }
 
     // 获取显示界面上面的表头
     QStringList headers;
-    getTableHeader(canGetSpeedFromLscpu,headers);
+    getTableHeader(canGetSpeedFromLscpu, headers);
 
     // 获取显示界面里面的内容
     QList<QStringList> tabList;
-    getTableContentFromLscpu(cpuModel,coreList,tabList);
+    getTableContentFromLscpu(cpuModel, coreList, tabList);
 
     // 将获取的数据写到表格
     addTable(headers, tabList);
 
     // 添加cpu详细信息
     foreach (auto precessor, coreList) {
-        if(canGetSpeedFromLscpu){
+        if (canGetSpeedFromLscpu) {
             addDetailFromLscpuAndCatcpu(precessor);
         }else {
             if(cpuList.size() > 0)
@@ -158,53 +158,53 @@ const QString getTrNumber(int i)
     return trNumbers.first();
 }
 
-void CpuWidget::addDetailFromLscpuAndCatcpu(const QString& precessor)
+void CpuWidget::addDetailFromLscpuAndCatcpu(const QString &precessor)
 {
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    addArticleStruct(tr("Name"),"catcpu",precessor,"model name",articles,existArticles);
-    addArticleStruct(tr("CPU ID"),"catcpu",precessor,"physical id",articles,existArticles);
-    addArticleStruct(tr("Core ID"),"catcpu",precessor,"core id",articles,existArticles);
-    addArticleStruct(tr("Threads"),"lscpu","lscpu","Thread(s) per core",articles,existArticles);
-    addArticleStruct(tr("Current Speed"),"catcpu",precessor,"cpu MHz",articles,existArticles);
-    addArticleStruct(tr("BogoMIPS"),"catcpu",precessor,"bogomips",articles,existArticles);
-    addArticleStruct(tr("Architecture"),"lscpu","lscpu","Architecture",articles,existArticles);
-    addArticleStruct(tr("CPU Family"),"catcpu",precessor,"cpu family",articles,existArticles);
-    addArticleStruct(tr("Model"),"catcpu",precessor,"model",articles,existArticles);
-    addArticleStruct(tr("Stepping"),"catcpu",precessor,"stepping",articles,existArticles);
-    addArticleStruct(tr("L1d Cache"),"lscpu","lscpu","L1d cache",articles,existArticles);
-    addArticleStruct(tr("L1i Cache"),"lscpu","lscpu","L1i cache",articles,existArticles);
-    addArticleStruct(tr("L2 Cache"),"lscpu","lscpu","L2 cache",articles,existArticles);
-    addArticleStruct(tr("L3 Cache"),"lscpu","lscpu","L3 cache",articles,existArticles);
-    addArticleStruct(tr("Flags"),"catcpu",precessor,"flags",articles,existArticles);
-    addArticleStruct(tr("Virtualization"),"lscpu","lscpu","Virtualization",articles,existArticles);
+    addArticleStruct(tr("Name"), "catcpu", precessor, "model name", articles, existArticles);
+    addArticleStruct(tr("CPU ID"), "catcpu", precessor, "physical id", articles, existArticles);
+    addArticleStruct(tr("Core ID"), "catcpu", precessor, "core id", articles, existArticles);
+    addArticleStruct(tr("Threads"), "lscpu", "lscpu", "Thread(s) per core", articles, existArticles);
+    addArticleStruct(tr("Current Speed"), "catcpu", precessor, "cpu MHz", articles, existArticles);
+    addArticleStruct(tr("BogoMIPS"), "catcpu", precessor, "bogomips", articles, existArticles);
+    addArticleStruct(tr("Architecture"), "lscpu", "lscpu", "Architecture", articles, existArticles);
+    addArticleStruct(tr("CPU Family"), "catcpu", precessor, "cpu family", articles, existArticles);
+    addArticleStruct(tr("Model"), "catcpu", precessor, "model", articles, existArticles);
+    addArticleStruct(tr("Stepping"), "catcpu", precessor, "stepping", articles, existArticles);
+    addArticleStruct(tr("L1d Cache"), "lscpu", "lscpu", "L1d cache", articles, existArticles);
+    addArticleStruct(tr("L1i Cache"), "lscpu", "lscpu", "L1i cache", articles, existArticles);
+    addArticleStruct(tr("L2 Cache"), "lscpu", "lscpu", "L2 cache", articles, existArticles);
+    addArticleStruct(tr("L3 Cache"), "lscpu", "lscpu", "L3 cache", articles, existArticles);
+    addArticleStruct(tr("Flags"), "catcpu", precessor, "flags", articles, existArticles);
+    addArticleStruct(tr("Virtualization"), "lscpu", "lscpu", "Virtualization", articles, existArticles);
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles, "ManulTrack__CPU", "CPU Information");
     addSubInfo(tr("Processor") + " " +  precessor, articles);
     articles.clear();
 
 }
 
-void CpuWidget::addDetailFromLscpuCatcpuDmidecode(const QString& dmiProcessor,const QString& catcpuProcessor)
+void CpuWidget::addDetailFromLscpuCatcpuDmidecode(const QString &dmiProcessor, const QString &catcpuProcessor)
 {
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    addArticleStruct(tr("Name"),"lscpu","lscpu","Model name",articles,existArticles);
-    addArticleStruct(tr("CPU ID"),"dmidecode",dmiProcessor,"Socket Designation",articles,existArticles);
-    addArticleStruct(tr("Core ID"),"catcpu",catcpuProcessor,"processor",articles,existArticles);
-    addArticleStruct(tr("Threads"),"lscpu","lscpu","Thread(s) per core",articles,existArticles);
-    addArticleStruct(tr("Current Speed"),"dmidecode",dmiProcessor,"Current Speed",articles,existArticles);
-    addArticleStruct(tr("BogoMIPS"),"catcpu",catcpuProcessor,"BogoMIPS",articles,existArticles);
-    addArticleStruct(tr("Architecture"),"lscpu","lscpu","Architecture",articles,existArticles);
-    addArticleStruct(tr("CPU Family"),"dmidecode",dmiProcessor,"Family",articles,existArticles);
-    addArticleStruct(tr("Model"),"lscpu","lscpu","Model",articles,existArticles);
-    addArticleStruct(tr("Stepping"),"lscpu","lscpu","Stepping",articles,existArticles);
-    addArticleStruct(tr("L1d Cache"),"dmidecode",dmiProcessor,"L1 Cache Handle",articles,existArticles);
-    addArticleStruct(tr("L1i Cache"),"dmidecode",dmiProcessor,"L1 Cache Handle",articles,existArticles);
-    addArticleStruct(tr("L2 Cache"),"dmidecode",dmiProcessor,"L2 Cache Handle",articles,existArticles);
-    addArticleStruct(tr("L3 Cache"),"dmidecode",dmiProcessor,"L3 Cache Handle",articles,existArticles);
-    addArticleStruct(tr("Flags"),"lscpu","lscpu","Flags",articles,existArticles);
+    addArticleStruct(tr("Name"), "lscpu", "lscpu", "Model name", articles, existArticles);
+    addArticleStruct(tr("CPU ID"), "dmidecode", dmiProcessor, "Socket Designation", articles, existArticles);
+    addArticleStruct(tr("Core ID"), "catcpu", catcpuProcessor, "processor", articles, existArticles);
+    addArticleStruct(tr("Threads"), "lscpu", "lscpu", "Thread(s) per core", articles, existArticles);
+    addArticleStruct(tr("Current Speed"), "dmidecode", dmiProcessor, "Current Speed", articles, existArticles);
+    addArticleStruct(tr("BogoMIPS"), "catcpu", catcpuProcessor, "BogoMIPS", articles, existArticles);
+    addArticleStruct(tr("Architecture"), "lscpu", "lscpu", "Architecture", articles, existArticles);
+    addArticleStruct(tr("CPU Family"), "dmidecode", dmiProcessor, "Family", articles, existArticles);
+    addArticleStruct(tr("Model"), "lscpu", "lscpu", "Model", articles, existArticles);
+    addArticleStruct(tr("Stepping"), "lscpu", "lscpu", "Stepping", articles, existArticles);
+    addArticleStruct(tr("L1d Cache"), "dmidecode", dmiProcessor, "L1 Cache Handle", articles, existArticles);
+    addArticleStruct(tr("L1i Cache"), "dmidecode", dmiProcessor, "L1 Cache Handle", articles, existArticles);
+    addArticleStruct(tr("L2 Cache"), "dmidecode", dmiProcessor, "L2 Cache Handle", articles, existArticles);
+    addArticleStruct(tr("L3 Cache"), "dmidecode", dmiProcessor, "L3 Cache Handle", articles, existArticles);
+    addArticleStruct(tr("Flags"), "lscpu", "lscpu", "Flags", articles, existArticles);
     //addArticleStruct(tr("Virtualization"),"dmidecode",precessor,"Virtualization",articles,existArticles);
 
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", dmiProcessor, articles, existArticles, "ManulTrack__CPU", "CPU Information");
@@ -213,24 +213,24 @@ void CpuWidget::addDetailFromLscpuCatcpuDmidecode(const QString& dmiProcessor,co
 }
 
 
-void CpuWidget::addArticleStruct(const QString& name,const QString& command,const QString& item,const QString& attri,QList<ArticleStruct>& articles,QSet<QString>& existArticles)
+void CpuWidget::addArticleStruct(const QString &name, const QString &command, const QString &item, const QString &attri, QList<ArticleStruct> &articles, QSet<QString> &existArticles)
 {
     ArticleStruct Name(name);
-    Name.queryData(command, item,attri);
+    Name.queryData(command, item, attri);
     articles.push_back(Name);
     existArticles.insert(attri);
 }
 
-bool CpuWidget::isCanGetSpeedFromLsCpu(double& minMHz,double& maxMHz)
+bool CpuWidget::isCanGetSpeedFromLsCpu(double &minMHz, double &maxMHz)
 {
-    if(maxMHz <= 0 || minMHz <= 0 || maxMHz < minMHz){
+    if (maxMHz <= 0 || minMHz <= 0 || maxMHz < minMHz) {
         return false;
-    }else{
+    } else {
         return true;
     }
 }
 
-void CpuWidget::getSpeedFromLscpu(double& minMHz,double& maxMHz)
+void CpuWidget::getSpeedFromLscpu(double &minMHz, double &maxMHz)
 {
     QString speedUnit = "MHz";
     if (maxMHz > 1000) { //AMD CPU speed is MHZ, intel is GHZ
@@ -256,7 +256,7 @@ void CpuWidget::getSpeedFromLscpu(double& minMHz,double& maxMHz)
     QString maxMHzFormatStr    = QString::number(maxMHz, '0', 2);
     if (modelSpeedSuccess) {
         speed_ = QString("%1(%2-%3) %4").arg(modeSpeedFormatStr).arg(minMHzFormatStr).arg(maxMHzFormatStr).arg(speedUnit);
-    }else {
+    } else {
         speed_ = QString("%1-%2 %3").arg(minMHzFormatStr).arg(maxMHzFormatStr).arg(speedUnit);
     }
 }
@@ -264,10 +264,10 @@ void CpuWidget::getSpeedFromLscpu(double& minMHz,double& maxMHz)
 void CpuWidget::getSpeedFromDmidecode()
 {
     QString maxMHz = DeviceInfoParser::Instance().queryData("dmidecode", "Processor Information", "Max Speed");
-    QString curMHz = DeviceInfoParser::Instance().queryData("dmidecode","Processor Information","Current Speed");
+    QString curMHz = DeviceInfoParser::Instance().queryData("dmidecode", "Processor Information", "Current Speed");
     speed_ = curMHz;
 }
-void CpuWidget::getTableHeader(bool getSpeedFromLscpu,QStringList& headers)
+void CpuWidget::getTableHeader(bool getSpeedFromLscpu, QStringList &headers)
 {
     if (speed_.isEmpty()) {
         headers << tr("Name") << tr("Vendor") << tr("Architecture");
@@ -279,16 +279,13 @@ void CpuWidget::getTableHeader(bool getSpeedFromLscpu,QStringList& headers)
         }
     }
 }
-void CpuWidget::getTableContentFromLscpu(const QString& cpuModel,const QStringList& cpuList,QList<QStringList>& tabList)
+void CpuWidget::getTableContentFromLscpu(const QString &cpuModel, const QStringList &cpuList, QList<QStringList> &tabList)
 {
     // 获取CPU架构
     QString architecture =  DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Architecture");
 
     foreach (const QString &cpu, cpuList) {
-        QString mc = DeviceInfoParser::Instance().queryData("catcpu", cpu, "vendor_id");
-        if (mc.isEmpty() || mc == tr("Unknown")) {
-            mc = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Vendor ID");
-        }
+        QString mc = getManufacturerInfo(cpu);
 
         if (mc == tr("Unknown")) {
             mc = cpuModel.split(" ").first();
@@ -304,7 +301,22 @@ void CpuWidget::getTableContentFromLscpu(const QString& cpuModel,const QStringLi
         tabList.push_back(tab);
     }
 }
-void CpuWidget::getTableContentFromDmidecode(const QString& cpuModel,const QStringList& cpuList,QList<QStringList>& tabList)
+
+QString CpuWidget::getManufacturerInfo(const QString &cpu)
+{
+    QString mc = DeviceInfoParser::Instance().queryData("catcpu", cpu, "vendor_id");
+
+    if (mc.isEmpty() || mc == tr("Unknown")) {
+        mc = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "Vendor ID");
+    }
+    // 针对vendor_id为 数字的情况 arm
+    if (mc.startsWith("0x", Qt::CaseInsensitive)) {
+        mc = DeviceInfoParser::Instance().queryData("dmidecode", "Processor Information", "Manufacturer");
+    }
+
+    return mc;
+}
+void CpuWidget::getTableContentFromDmidecode(const QString &cpuModel, const QStringList &cpuList, QList<QStringList> &tabList)
 {
 
 }
