@@ -41,66 +41,27 @@ void PrinterWidget::loadWidget()
     }
 
     QList<QStringList> tabList;
-    QList<ArticleStruct> articles;
-    QSet<QString> existArticles;
+//    QList<ArticleStruct> articles;
+//    QSet<QString> existArticles;
 
     foreach (const QString &device, hwinfoPrinterList) {
-        articles.clear();
-        existArticles.clear();
+        m_articles.clear();
+        m_existArticles.clear();
 
-        ArticleStruct name(tr("Name"));
-        name.queryData("printer", device, "Device");
-        articles.push_back(name);
-        existArticles.insert("Name");
+        // 添加printer相关信息
+        ArticleStruct name = addArticleStruct(tr("Name"), "printer", device, "Device");
+        ArticleStruct vendor = addArticleStruct(tr("Vendor"), "printer", device, "Vendor");
+        addArticleStruct(tr("Model"), "printer", device, "Model");
+        addArticleStruct(tr("Serial ID"), "printer", device, "Serial ID");
+        addArticleStruct(tr("Status"), "printer", device, "Config Status");
+        addArticleStruct(tr("Driver"), "printer", device, "Driver");
+        addArticleStruct(tr("Speed"), "printer", device, "Speed");
+        addArticleStruct(tr("BusID"), "printer", device, "SysFS BusID");
+        ArticleStruct description = addArticleStruct(tr("Description"), "printer", device, "description");
 
-        ArticleStruct vendor(tr("Vendor"));
-        vendor.queryData( "printer", device, "Vendor");
-        articles.push_back(vendor);
-        existArticles.insert("Vendor");
+//        DeviceInfoParser::Instance().queryRemainderDeviceInfo("printer", device, articles, existArticles);
 
-        ArticleStruct model(tr("Model"));
-        model.queryData( "printer", device, "Model");
-        articles.push_back(model);
-        existArticles.insert("Model");
-
-        ArticleStruct serial(tr("Serial ID"));
-        serial.queryData( "printer", device, "Serial ID");
-        articles.push_back(serial);
-        existArticles.insert("Serial ID");
-
-        ArticleStruct version(tr("Version"));
-        version.queryData( "printer", device, "Revision");
-        articles.push_back(version);
-        existArticles.insert("Version");
-
-        ArticleStruct status(tr("Status"));
-        status.queryData( "printer", device, "Config Status");
-        articles.push_back(status);
-        existArticles.insert("Status");
-
-        ArticleStruct driver(tr("Driver"));
-        driver.queryData( "printer", device, "Driver");
-        articles.push_back(driver);
-        existArticles.insert("Driver");
-
-        ArticleStruct speed(tr("Speed"));
-        speed.queryData( "printer", device, "Speed");
-        articles.push_back(speed);
-        existArticles.insert("Speed");
-
-        ArticleStruct bus(tr("BusID"));
-        bus.queryData( "printer", device, "SysFS BusID");
-        articles.push_back(bus);
-        existArticles.insert("BusID");
-
-        ArticleStruct description(tr("Description"));
-        description.queryData("printer", device, "description");
-        articles.push_back(description);
-        existArticles.insert("description");
-
-        //DeviceInfoParser::Instance().queryRemainderDeviceInfo("printer", device, articles, existArticles);
-
-        addDevice( device, articles, hwinfoPrinterList.size() );
+        addDevice( device, m_articles, hwinfoPrinterList.size() );
 
         if ( hwinfoPrinterList.size() > 1 ) {
             QStringList tab = {
