@@ -49,6 +49,7 @@ void PowerWidget::initWidget()
         setCentralInfo(tr("Failed to get power information"));
         return ;
     }
+
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles1;
@@ -344,12 +345,16 @@ void PowerWidget::initWidget()
 
 bool PowerWidget::infoIsEmpty()
 {
+    // 查看lshw命令中能不能获取电源信息(交流电和电源)
     QStringList lshwSwitchingpowerList = DeviceInfoParser::Instance().getLshwSwitchingpowerList();
-    QStringList demidecodeSwitchingpowerList = DeviceInfoParser::Instance().getDemidecodeSwitchingpowerList();
-    QStringList upowerSwitchingList = DeviceInfoParser::Instance().getUpowerSwitchingList();
-
     QStringList lshwBatteryList = DeviceInfoParser::Instance().getLshwBatteryList();
+
+    // 查看dmidecode命令能不能获取电源信息(交流电和电源)
+    QStringList demidecodeSwitchingpowerList = DeviceInfoParser::Instance().getDemidecodeSwitchingpowerList();
     QStringList demidecodebatteryList = DeviceInfoParser::Instance().getDemidecodeBatteryList();
+
+    // 查看upower命令能不能获取电源信息(交流电和电源)
+    QStringList upowerSwitchingList = DeviceInfoParser::Instance().getUpowerSwitchingList();
     QStringList UpowerBatteryList = DeviceInfoParser::Instance().getUpowerBatteryList();
 
     int maxSwitchingSize = maxDeviceSize(lshwSwitchingpowerList, demidecodeSwitchingpowerList, upowerSwitchingList);

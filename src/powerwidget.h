@@ -30,6 +30,10 @@ class PowerWidget : public DeviceInfoWidgetBase
 public:
     explicit PowerWidget(QWidget *parent = nullptr);
     void initWidget() override;
+
+    /**
+     * @brief:判断能不能获取电源信息
+     */
     static bool infoIsEmpty();
 };
 

@@ -2329,38 +2329,45 @@ bool DeviceInfoParser::loadUpowerDatabase()
     DatabaseMap upowerDatabase_;
     QStringList secondOrder;
 
-    QMap<QString, QString> DeviceInfoMap;
-    QString deviceName;
-    int startIndex = 0;
+//    QMap<QString,QString> DeviceInfoMap;
+//    QString deviceName;
+//    int startIndex = 0;
+//    for (int i = 0; i < upowerOut.size(); ++i) {
+//        if (upowerOut[i] != '\n' && i != upowerOut.size() - 1) {
+//            continue;
+//        }
 
-    for (int i = 0; i < upowerOut.size(); ++i) {
-        if (upowerOut[i] != '\n' && i != upowerOut.size() - 1) {
-            continue;
-        }
+//        QString line = upowerOut.mid(startIndex, i - startIndex);
+//        qDebug() << line;
 
-        QString line = upowerOut.mid(startIndex, i - startIndex);
-        startIndex = i + 1;
+//        startIndex = i + 1;
 
-        int index = line.indexOf("Device:") + 1;
-        if (line.startsWith("Device:") || line.trimmed().isEmpty() || i == upowerOut.size()) {
-            if (deviceName.isEmpty() == false) {
-                upowerDatabase_[deviceName] = DeviceInfoMap;
-                secondOrder.push_back(deviceName);
-            }
+//        int index = line.indexOf("Device:") + 1;
+//        if (line.startsWith("Device:") || line.trimmed().isEmpty() || i == upowerOut.size()) {
+//            if (deviceName.isEmpty() == false) {
+//                upowerDatabase_[deviceName] = DeviceInfoMap;
+//                secondOrder.push_back(deviceName);
+//            }
 
-            DeviceInfoMap.clear();
-            int index2 = line.lastIndexOf("/") + 1;
-            deviceName = line.mid(index2 > index ? index2 : index);
+//            DeviceInfoMap.clear();
+//            int index2 = line.lastIndexOf("/") + 1;
+//            deviceName = line.mid(index2 > index ? index2 : index);
 
-            continue;
-        }
+//            continue;
+//        }
 
-        index = line.indexOf(Devicetype_Separator);
-        if (index > 0) {
-            DeviceInfoMap[line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
-        } else {
-            DeviceInfoMap[line.trimmed()] = "";
-        }
+//        index = line.indexOf(Devicetype_Separator);
+//        if (index > 0) {
+//            DeviceInfoMap[line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
+//        } else {
+//            DeviceInfoMap[line.trimmed()] = "";
+//        }
+//    }
+
+    QStringList lstPower = upowerOut.split("\n\n");
+    for(QStringList::iterator it = lstPower.begin(); it != lstPower.end(); ++it){
+        // 解析其中的一段信息
+        parsePowerInfo(*it,upowerDatabase_,secondOrder);
     }
 
     toolDatabase_["upower"] = upowerDatabase_;
@@ -2368,6 +2375,48 @@ bool DeviceInfoParser::loadUpowerDatabase()
     toolDatabaseSecondOrder_["upower"] = secondOrder;
 
     return true;
+}
+
+void DeviceInfoParser::parsePowerInfo(const QString& info,DatabaseMap& powerDataBase,QStringList& secondOrder)
+{
+    // *****************************************************************************************
+    bool isSwitchPower = true;
+    QMap<QString, QString> deviceInfoMap;
+
+    // *****************************************************************************************
+    QStringList infoList = info.split("\n");
+    if(infoList.size() < 1){return;}
+
+    // *****************************************************************************************
+    for(QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it){
+
+        QStringList keyValue = (*it).split(":");
+        if(keyValue.size() < 1){continue;}
+        else if(keyValue.size() == 1) {
+            if(keyValue[0].contains("battery")){
+                isSwitchPower = false;
+            }
+            continue;
+        }
+
+        deviceInfoMap.insert(keyValue[0].trimmed(),keyValue[1].trimmed());
+    }
+
+    // *****************************************************************************************
+    for(QMap<QString, QString>::iterator it = deviceInfoMap.begin(); it != deviceInfoMap.end(); ++it){
+        if(isSwitchPower){
+            powerDataBase["line_power"].insert(it.key(),it.value());
+        }else {
+            powerDataBase["battery"].insert(it.key(),it.value());
+        }
+    }
+
+    // *****************************************************************************************
+    if(isSwitchPower){
+        secondOrder.append("line_power");
+    }else {
+        secondOrder.append("battery");
+    }
 }
 
 //  http://pci-ids.ucw.cz/read/PD/
