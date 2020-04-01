@@ -128,6 +128,7 @@ public:
     QStringList getXrandrScreenName();
     QStringList getXrandrDisplayInterfaceList();
 
+    QStringList getHwinfoKeyboardList();
     QStringList getHwinfoOtherUSBList();
     QStringList getHwinfoPrinterList();
     QStringList getHwinfoMonitorList();
@@ -217,7 +218,7 @@ public:
      * @brief[parsePowerInfo]:解析所有电源信息中的一段
      */
     bool loadUpowerDatabase();
-    void parsePowerInfo(const QString& info,DatabaseMap& powerDataBase,QStringList& secondOrder);
+    void parsePowerInfo(const QString &info, DatabaseMap &powerDataBase, QStringList &secondOrder);
 
 
     // lspci parse
@@ -254,6 +255,8 @@ public:
     // USB hwinfo --usb
     bool loadHwinfoUSBDatabase();
 
+    // USB hwinfo --keybooard
+    bool loadKeyboardinfoDatabase();
 public:
     bool getRootPassword();
     bool executeProcess(const QString &cmd);

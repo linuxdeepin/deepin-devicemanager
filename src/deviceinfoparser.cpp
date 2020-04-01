@@ -120,7 +120,7 @@ void DeviceInfoParser::refreshDabase()
     emit loadFinished(tr("Loading Printer Info..."));
     //loadCupsDatabase();
     loadPrinterinfoDatabase();
-
+    loadKeyboardinfoDatabase();
     emit loadFinished("finish");
 }
 
@@ -477,6 +477,11 @@ QStringList DeviceInfoParser::getHwinfoPrinterList()
     return getMatchToolDeviceList("printer");
 }
 
+QStringList DeviceInfoParser::getHwinfoKeyboardList()
+{
+    return getMatchToolDeviceList("Keyboard");
+}
+
 QStringList DeviceInfoParser::getHwinfoOtherUSBList()
 {
     checkValueFun_t func = [](const QString & fk)->bool {
@@ -485,11 +490,25 @@ QStringList DeviceInfoParser::getHwinfoOtherUSBList()
                 fk.contains("mouse", Qt::CaseInsensitive) ||
                 fk.contains("Camera", Qt::CaseInsensitive) ||
                 fk .contains("CD-ROM", Qt::CaseInsensitive) ||
-                fk .contains("disk", Qt::CaseInsensitive))
+                fk .contains("disk", Qt::CaseInsensitive) ||
+                fk .contains("Bluetooth", Qt::CaseInsensitive))
         {
             return false;
         }
 
+        if (DeviceInfoParser::Instance().toolDatabase_["USB"][fk].contains("Device"))
+        {
+            QString deviceVal = DeviceInfoParser::Instance().toolDatabase_["USB"][fk]["Device"];
+            if (deviceVal.contains("hub", Qt::CaseInsensitive) ||
+                    deviceVal.contains("Keyboard", Qt::CaseInsensitive) ||
+                    deviceVal.contains("mouse", Qt::CaseInsensitive) ||
+                    deviceVal.contains("Camera", Qt::CaseInsensitive) ||
+                    deviceVal .contains("CD-ROM", Qt::CaseInsensitive) ||
+                    deviceVal .contains("disk", Qt::CaseInsensitive) ||
+                    deviceVal .contains("Bluetooth", Qt::CaseInsensitive)) {
+                return false;
+            }
+        }
 
         return true;
     };
@@ -695,9 +714,9 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                     return false;
                 }
 
-//                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("USB hub", Qt::CaseInsensitive)) {
-//                    return false;
-//                }
+                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("USB hub", Qt::CaseInsensitive)) {
+                    return false;
+                }
                 if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("Keyboard", Qt::CaseInsensitive)) {
                     return false;
                 }
@@ -2378,9 +2397,9 @@ bool DeviceInfoParser::loadUpowerDatabase()
 //    }
 
     QStringList lstPower = upowerOut.split("\n\n");
-    for(QStringList::iterator it = lstPower.begin(); it != lstPower.end(); ++it){
+    for (QStringList::iterator it = lstPower.begin(); it != lstPower.end(); ++it) {
         // 解析其中的一段信息
-        parsePowerInfo(*it,upowerDatabase_,secondOrder);
+        parsePowerInfo(*it, upowerDatabase_, secondOrder);
     }
 
     toolDatabase_["upower"] = upowerDatabase_;
@@ -2390,7 +2409,7 @@ bool DeviceInfoParser::loadUpowerDatabase()
     return true;
 }
 
-void DeviceInfoParser::parsePowerInfo(const QString& info,DatabaseMap& powerDataBase,QStringList& secondOrder)
+void DeviceInfoParser::parsePowerInfo(const QString &info, DatabaseMap &powerDataBase, QStringList &secondOrder)
 {
     // *****************************************************************************************
     bool isSwitchPower = true;
@@ -2398,36 +2417,39 @@ void DeviceInfoParser::parsePowerInfo(const QString& info,DatabaseMap& powerData
 
     // *****************************************************************************************
     QStringList infoList = info.split("\n");
-    if(infoList.size() < 1){return;}
+    if (infoList.size() < 1) {
+        return;
+    }
 
     // *****************************************************************************************
-    for(QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it){
+    for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
 
         QStringList keyValue = (*it).split(":");
-        if(keyValue.size() < 1){continue;}
-        else if(keyValue.size() == 1) {
-            if(keyValue[0].contains("battery")){
+        if (keyValue.size() < 1) {
+            continue;
+        } else if (keyValue.size() == 1) {
+            if (keyValue[0].contains("battery")) {
                 isSwitchPower = false;
             }
             continue;
         }
 
-        deviceInfoMap.insert(keyValue[0].trimmed(),keyValue[1].trimmed());
+        deviceInfoMap.insert(keyValue[0].trimmed(), keyValue[1].trimmed());
     }
 
     // *****************************************************************************************
-    for(QMap<QString, QString>::iterator it = deviceInfoMap.begin(); it != deviceInfoMap.end(); ++it){
-        if(isSwitchPower){
-            powerDataBase["line_power"].insert(it.key(),it.value());
-        }else {
-            powerDataBase["battery"].insert(it.key(),it.value());
+    for (QMap<QString, QString>::iterator it = deviceInfoMap.begin(); it != deviceInfoMap.end(); ++it) {
+        if (isSwitchPower) {
+            powerDataBase["line_power"].insert(it.key(), it.value());
+        } else {
+            powerDataBase["battery"].insert(it.key(), it.value());
         }
     }
 
     // *****************************************************************************************
-    if(isSwitchPower){
+    if (isSwitchPower) {
         secondOrder.append("line_power");
-    }else {
+    } else {
         secondOrder.append("battery");
     }
 }
@@ -3182,6 +3204,104 @@ bool DeviceInfoParser::loadPrinterinfoDatabase()
     toolDatabase_["printer"] = hwinfoDatabase_;
     secondOrder.removeDuplicates();
     toolDatabaseSecondOrder_["printer"] = secondOrder;
+    return true;
+}
+
+bool DeviceInfoParser::loadKeyboardinfoDatabase()
+{
+    if (false == executeProcess("sudo hwinfo --keyboard")) {
+        return false;
+    }
+
+    QString hwOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile hwinfoFile(DEVICEINFO_PATH + "/hwinfo_keyboard.txt");
+    if (false == hwinfoFile.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+
+    hwOut = hwinfoFile.readAll();
+    hwinfoFile.close();
+#endif
+
+    //QString hwOut = getHwMonitorString();
+    if (hwOut.size() < 1) {
+        return false;
+    }
+
+    // hciconfig
+    DatabaseMap hwinfoDatabase_;
+    QStringList secondOrder;
+
+    QMap<QString, QString> DeviceInfoMap;
+    QString deviceName;
+    int startIndex = 0;
+
+    for (int i = 0; i < hwOut.size(); ++i) {
+        if (hwOut[i] != '\n' && i != hwOut.size() - 1) {
+            continue;
+        }
+
+        QString line = hwOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if (i == hwOut.size() - 1 || line.trimmed().isEmpty()) {
+            if (deviceName.isEmpty() == false) {
+                hwinfoDatabase_[deviceName] = DeviceInfoMap;
+                secondOrder.push_back(deviceName);
+            }
+
+            DeviceInfoMap.clear();
+            deviceName = "";
+            continue;
+        }
+
+        if (line.startsWith(Devicetype_HwInfo_Fourspace)) {
+            int index = line.indexOf(": ");
+            if (index > 0) {
+                if (line.trimmed().contains(Devicetype_HwInfo_Resolution)) {
+                    if (DeviceInfoMap.contains(Devicetype_HwInfo_Currentresolution)) {
+                        //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] += ", ";
+                        //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] +=line.mid(index+1).trimmed();
+                    } else {
+                        DeviceInfoMap[Devicetype_HwInfo_Currentresolution] = line.mid(index + 1).trimmed();
+                    }
+
+                    continue;
+                }
+                if (false == DeviceInfoMap.contains(line.mid(0, index).trimmed())) {
+                    DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
+                }
+
+            }
+            continue;
+        }
+
+        if (line.startsWith(Devicetype_HwInfo_Twospace)) {
+            int index = line.indexOf(": ");
+            if (index > 0) {
+                if (line.contains(Devicetype_HwInfo_Resolution)) {
+                    if (DeviceInfoMap.contains(Devicetype_HwInfo_ResolutionList)) {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += ", ";
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += line.mid(index + 1).trimmed();
+                    } else {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] = line.mid(index + 1).trimmed();
+                    }
+
+                    continue;
+                }
+
+                DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
+            }
+            continue;
+        }
+
+        deviceName = line.trimmed();
+    }
+
+    toolDatabase_["Keyboard"] = hwinfoDatabase_;
+    secondOrder.removeDuplicates();
+    toolDatabaseSecondOrder_["Keyboard"] = secondOrder;
     return true;
 }
 
