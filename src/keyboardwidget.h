@@ -32,14 +32,18 @@ public:
 
 private:
     void initWidget() override;
+    void loadWidget();
+
+    bool findKeyboardFromHwinfo();
 
     bool findKeyboardFromLshw();
     //exclude keyboard found in lshw,util now i think all usb keyboards will be found by lshw,all Ps/2 keyboards found in /proc/bus/input/devices file
     bool findKeyboardFromCatInput();
+
     void foundNokeyboards();
 private:
     QList<QStringList> m_tabList;
-    QMap<QString,QList<ArticleStruct>> m_articles;
+    QMap<QString, QList<ArticleStruct>> m_articlesmap;
     QStringList m_heads;
 };
 

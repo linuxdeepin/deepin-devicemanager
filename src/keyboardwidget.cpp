@@ -29,11 +29,11 @@ DWIDGET_USE_NAMESPACE
 
 KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Keyboard"))
 {
-    m_articles.clear();
+    m_articlesmap.clear();
     m_tabList.clear();
     m_heads.clear();
     m_heads << tr("Name") << tr("Vendor");
-    initWidget();
+    loadWidget();
 }
 
 void KeyboardWidget::initWidget()
@@ -44,9 +44,9 @@ void KeyboardWidget::initWidget()
         ok2 = findKeyboardFromCatInput();
     }
     bool found = (ok1 || ok2);
-    int keyboard_count = m_articles.count();
+    int keyboard_count = m_articlesmap.count();
     if (found && keyboard_count > 0) {
-        for (auto index = m_articles.begin(); index != m_articles.end(); index++) {
+        for (auto index = m_articlesmap.begin(); index != m_articlesmap.end(); index++) {
             addDevice(index.key(), index.value(), keyboard_count);
         }
         if (keyboard_count > 1) {
@@ -55,6 +55,82 @@ void KeyboardWidget::initWidget()
         return;
     }
     return foundNokeyboards();
+}
+
+void KeyboardWidget::loadWidget()
+{
+    bool found = findKeyboardFromHwinfo();
+    int keyboard_count = m_articlesmap.count();
+
+    if (found && keyboard_count > 1) {
+        for (auto index = m_articlesmap.begin(); index != m_articlesmap.end(); index++) {
+            addDevice(index.key(), index.value(), keyboard_count);
+        }
+        if (keyboard_count > 1) {
+            addTable(m_heads, m_tabList);
+        }
+        return;
+    }
+
+    if (keyboard_count <= 1) {
+        m_articlesmap.clear();
+        initWidget();
+        return;
+    }
+    return foundNokeyboards();
+}
+
+bool KeyboardWidget::findKeyboardFromHwinfo()
+{
+    QStringList keyboardList = DeviceInfoParser::Instance().getHwinfoKeyboardList();
+
+    if (keyboardList.empty()) {
+        return false;
+    }
+
+    foreach (const QString &keyboard, keyboardList) {
+        m_articles.clear();
+        m_existArticles.clear();
+
+        // 添加Keyboard相关信息
+        ArticleStruct name = addArticleStruct(tr("Name"), "Keyboard", keyboard, "Device");
+        ArticleStruct vendor = addArticleStruct(tr("Vendor"), "Keyboard", keyboard, "Vendor");
+        addArticleStruct(tr("Model"), "Keyboard", keyboard, "Model");
+        addArticleStruct(tr("Serial ID"), "Keyboard", keyboard, "Serial ID");
+        addArticleStruct(tr("Version"), "Keyboard", keyboard, "Revision");
+        addArticleStruct(tr("Status"), "Keyboard", keyboard, "Config Status");
+        addArticleStruct(tr("Driver"), "Keyboard", keyboard, "Driver");
+        addArticleStruct(tr("Speed"), "Keyboard", keyboard, "Speed");
+        addArticleStruct(tr("BusID"), "Keyboard", keyboard, "SysFS BusID");
+        ArticleStruct description = addArticleStruct(tr("Description"), "Keyboard", keyboard, "description");
+        addArticleStruct(tr("Unique ID"), "Keyboard", keyboard, "Unique ID");
+        addArticleStruct(tr("SysFS ID"), "Keyboard", keyboard, "SysFS ID");
+
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, m_articles, m_existArticles);
+
+        QString title = name.isValid() ? name.value : description.value;
+        m_articlesmap.insert(title, m_articles);
+
+        QStringList tab = {
+            title,
+            vendor.value
+        };
+
+        m_tabList.push_back(tab);
+
+        if (overviewInfo_.isValid()) {
+            overviewInfo_.value += " / ";
+        }
+
+        QList<ArticleStruct> overArticle;
+        overArticle << vendor << name;
+        if (name.isValid() == false) {
+            overArticle << description;
+        }
+        overviewInfo_.value += joinArticle(overArticle);
+    }
+
+    return true;
 }
 
 /**
@@ -68,68 +144,29 @@ bool KeyboardWidget::findKeyboardFromLshw()
     if (foundKeyboards.isEmpty()) {
         return false;
     }
-    QList<QStringList> tabList;
-    QList<ArticleStruct> articles;
-    QSet<QString> existArticles;
+//    QList<QStringList> tabList;
+//    QList<ArticleStruct> articles;
+//    QSet<QString> existArticles;
 
     foreach (const QString &keyboard, foundKeyboards) {
-        articles.clear();
-        existArticles.clear();
+        m_articles.clear();
+        m_existArticles.clear();
 
-        ArticleStruct name(tr("Name"));
-        name.queryData( "lshw", keyboard, "product");
-        articles.push_back(name);
-        existArticles.insert("product");
+        ArticleStruct name = addArticleStruct(tr("Name"), "lshw", keyboard, "product");
+        ArticleStruct description = addArticleStruct(tr("Description"), "lshw", keyboard, "description");
+        ArticleStruct vendor = addArticleStruct(tr("Vendor"), "lshw", keyboard, "vendor");
+        addArticleStruct(tr("Bus Info"), "lshw", keyboard, "bus info");
+        addArticleStruct(tr("Physical ID"), "lshw", keyboard, "physical id");
+        addArticleStruct(tr("Logical Name"), "lshw", keyboard, "logical name");
+        addArticleStruct(tr("Version"), "lshw", keyboard, "version");
+        addArticleStruct(tr("Width"), "lshw", keyboard, "width");
+        addArticleStruct(tr("Clock"), "lshw", keyboard, "clock");
+        addArticleStruct(tr("Capabilities"), "lshw", keyboard, "capabilities");
 
-        ArticleStruct description(tr("Description"));
-        description.queryData("lshw", keyboard, "description");
-        articles.push_back(description);
-        existArticles.insert("description");
-
-        ArticleStruct vendor(tr("Vendor"));
-        vendor.queryData( "lshw", keyboard, "vendor");
-        articles.push_back(vendor);
-        existArticles.insert("vendor");
-
-        ArticleStruct busInfo(tr("Bus Info"));
-        busInfo.queryData( "lshw", keyboard, "bus info");
-        articles.push_back(busInfo);
-        existArticles.insert("bus info");
-
-        ArticleStruct physicalId(tr("Physical ID"));
-        physicalId.queryData( "lshw", keyboard, "physical id");
-        articles.push_back(physicalId);
-        existArticles.insert("physical id");
-
-        ArticleStruct logicalName(tr("Logical Name"));
-        logicalName.queryData( "lshw", keyboard, "logical name");
-        articles.push_back(logicalName);
-        existArticles.insert("logical name");
-
-        ArticleStruct version(tr("Version"));
-        version.queryData( "lshw", keyboard, "version");
-        articles.push_back(version);
-        existArticles.insert("version");
-
-        ArticleStruct width(tr("Width"));
-        width.queryData( "lshw", keyboard, "width");
-        articles.push_back(width);
-        existArticles.insert("width");
-
-        ArticleStruct clock(tr("Clock"));
-        clock.queryData( "lshw", keyboard, "clock");
-        articles.push_back(clock);
-        existArticles.insert("clock");
-
-        ArticleStruct capabilities(tr("Capabilities"));
-        capabilities.queryData( "lshw", keyboard, "capabilities");
-        articles.push_back(capabilities);
-        existArticles.insert("capabilities");
-
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, m_articles, m_existArticles);
 
         QString title = name.isValid() ? name.value : description.value;
-        m_articles.insert(title, articles);
+        m_articlesmap.insert(title, m_articles);
 
         QStringList tab = {
             title,
@@ -284,7 +321,7 @@ bool KeyboardWidget::findKeyboardFromCatInput()
                 DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles );
             }
         }
-        m_articles.insert(name.value, articles);
+        m_articlesmap.insert(name.value, articles);
 
         if (overviewInfo_.value.isEmpty() == false) {
             overviewInfo_.value += " / ";
