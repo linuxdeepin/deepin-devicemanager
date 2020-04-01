@@ -53,16 +53,17 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     QStyleOptionViewItem opt = option;
     initStyleOption(&opt, index);
 
-    QWidget *wnd = DApplication::activeWindow();
+//    QWidget *wnd = DApplication::activeWindow();
     DPalette::ColorGroup cg;
     if (!(opt.state & DStyle::State_Enabled)) {
         cg = DPalette::Disabled;
     } else {
-        if (!wnd) {
-            cg = DPalette::Inactive;
-        } else {
-            cg = DPalette::Active;
-        }
+//        if (!wnd) {
+//            cg = DPalette::Inactive;
+//        } else {
+//            cg = DPalette::Active;
+//        }
+        cg = DPalette::Active;
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
