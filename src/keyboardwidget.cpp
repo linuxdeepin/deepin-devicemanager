@@ -193,7 +193,8 @@ bool KeyboardWidget::findKeyboardFromLshw()
 /**
   *@author   yaobin
   *@date     2020-03-04
-  *@brief    find keyboard from cmd: cat /proc/bus/input/devices, how ot exclude repeatable Ps/2 keyboards is still remained to do
+  *@brief    find keyboard from cmd: cat /proc/bus/input/devices,
+  * how ot exclude repeatable Ps/2 keyboards is still remained to do
   */
 bool KeyboardWidget::findKeyboardFromCatInput()
 {
@@ -219,7 +220,7 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         ArticleStruct vendor(tr("Vendor"));
         ArticleStruct type(tr("Type"));
 
-        name.queryData( "catinput", device, "Name");
+        name.queryData("catinput", device, "Name");
         existArticles.insert("Name");
 
         name.value.remove("\"");
@@ -228,7 +229,7 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         articles.push_back(vendor);
 
         ArticleStruct uniq(tr("Uniq", "Keyboard Info"));
-        uniq.queryData( "catinput", device, "Uniq");
+        uniq.queryData("catinput", device, "Uniq");
 
         if (uniq.isValid()) {
             if (existKeyboard.contains(uniq.value)) {
@@ -238,12 +239,12 @@ bool KeyboardWidget::findKeyboardFromCatInput()
             existKeyboard.insert(uniq.value);
             QString blueTooth = DeviceInfoParser::Instance().getCorrespondBluetoothKeyboard(uniq.value);
 
-            if ( blueTooth.isEmpty() == false ) {
+            if (blueTooth.isEmpty() == false) {
                 type.value = "Bluetooth";
                 existArticles.insert("Name");
 
                 ArticleStruct connected(tr("Connected", "Keyboard Info"));
-                connected.queryData( "paired-devices", blueTooth, "Connected");
+                connected.queryData("paired-devices", blueTooth, "Connected");
                 //articles.push_back(connected);
 
                 if (connected.isValid() && connected.value.compare("yes", Qt::CaseInsensitive) != 0) {
@@ -257,7 +258,7 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         }
 
         ArticleStruct phys(tr("Phys", "Keyboard Info"));
-        phys.queryData( "catinput", device, "Phys");
+        phys.queryData("catinput", device, "Phys");
 
         if (phys.isValid()) {
             if (existPhys.contains(phys.value)) {
@@ -282,7 +283,7 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         //articles.push_back(type);
 
         if (vendor.isValid() == false) {
-            vendor.queryData( "catinput", device, "Vendor");
+            vendor.queryData("catinput", device, "Vendor");
             articles.push_back(vendor);
         }
         existArticles.insert("Vendor");
@@ -299,26 +300,26 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         existArticles.insert("Phys");
 
         ArticleStruct vesion(tr("Version"));
-        vesion.queryData( "catinput", device, "Version");
+        vesion.queryData("catinput", device, "Version");
         articles.push_back(vesion);
         existArticles.insert("Version");
 
         ArticleStruct product(tr("Product"));
-        product.queryData( "catinput", device, "Product");
+        product.queryData("catinput", device, "Product");
         articles.push_back(product);
         existArticles.insert("Product");
 
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles);
 
-        if ( uniq.isValid() ) {
+        if (uniq.isValid()) {
             auto upower = DeviceInfoParser::Instance().getCorrespondUpower(uniq.value);
 
-            if (upower.isEmpty() == false ) {
+            if (upower.isEmpty() == false) {
                 ArticleStruct power(tr("Power"));
                 power.value = " ";
                 articles.push_back(power);
 
-                DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles );
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles);
             }
         }
         m_articlesmap.insert(name.value, articles);

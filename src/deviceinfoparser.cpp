@@ -118,9 +118,9 @@ void DeviceInfoParser::refreshDabase()
     setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
 
     emit loadFinished(tr("Loading Printer Info..."));
-    //loadCupsDatabase();
-    loadPrinterinfoDatabase();
     loadKeyboardinfoDatabase();
+    loadCupsDatabase();
+//    loadPrinterinfoDatabase();
     emit loadFinished("finish");
 }
 
@@ -472,10 +472,10 @@ QStringList DeviceInfoParser::getHwinfoMonitorList()
     return getMatchToolDeviceList("hwinfo");
 }
 
-QStringList DeviceInfoParser::getHwinfoPrinterList()
-{
-    return getMatchToolDeviceList("printer");
-}
+//QStringList DeviceInfoParser::getHwinfoPrinterList()
+//{
+//    return getMatchToolDeviceList("printer");
+//}
 
 QStringList DeviceInfoParser::getHwinfoKeyboardList()
 {
@@ -2420,7 +2420,6 @@ void DeviceInfoParser::parsePowerInfo(const QString &info, DatabaseMap &powerDat
     if (infoList.size() < 1) {
         return;
     }
-
     // *****************************************************************************************
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
 
@@ -3475,6 +3474,7 @@ bool DeviceInfoParser::loadCupsDatabase()
 {
     DatabaseMap cupsDatabase;
 
+    //获得所有的句柄
     cupsEnumDests(CUPS_DEST_FLAGS_NONE, 1000, nullptr, CUPS_PRINTER_CLASS, 0, getDestInfo, &cupsDatabase);
 
     toolDatabase_["Cups"] = cupsDatabase;
