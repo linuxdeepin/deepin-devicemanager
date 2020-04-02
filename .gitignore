@@ -2,3 +2,5 @@ all.pro.user
 all.pro.user.*
 *.autosave
 *.o
+src/commondefine.h
+
