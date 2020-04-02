@@ -179,6 +179,7 @@ void CpuWidget::addDetailFromLscpuAndCatcpu(const QString &precessor)
     addArticleStruct(tr("L3 Cache"), "lscpu", "lscpu", "L3 cache", articles, existArticles);
     addArticleStruct(tr("Flags"), "catcpu", precessor, "flags", articles, existArticles);
     addArticleStruct(tr("Virtualization"), "lscpu", "lscpu", "Virtualization", articles, existArticles);
+
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles, "ManulTrack__CPU", "CPU Information");
     addSubInfo(tr("Processor") + " " +  precessor, articles);
     articles.clear();

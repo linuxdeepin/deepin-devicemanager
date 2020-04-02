@@ -30,5 +30,28 @@ class BluetoothWidget : public DeviceInfoWidgetBase
 public:
     explicit BluetoothWidget(QWidget *parent = nullptr);
     void initWidget() override;
+
+    void initWidgetEX();
+
+    /**
+     * @brief:从命令中获取蓝牙列表
+     * @return[bool]:如果没有蓝牙则返回false
+     */
+    bool getBlueToothList(QStringList& lshwList,QStringList& hcionfigList);
+
+    /**
+     * @brief[getBlueToothsInfo]:根据蓝牙设备列表获取蓝牙设备信息
+     * @brief[getBlueToothInfo]:根据蓝牙设备名称获取蓝牙设备信息
+     * @param[in]:lshwList/hcionfigList   蓝牙设备列表
+     * @param[in]:lshwitem/hcionfigitem
+     * @param[in/out]:tabList --> 蓝牙设备的基本信息，也就是存放在表格里面的内容
+     */
+    void getBlueToothsInfo(const QStringList& lshwList,const QStringList& hcionfigList,QList<QStringList>& tabList);
+    void getBlueToothInfo(const QString& lshwitem,const QString& hcionfigitem,QList<ArticleStruct>& articles,QSet<QString>& existArticles,QSet<QString>& existArticles2,QSet<QString>& existArticles3,QStringList& tabItem);
+
+    /**
+     * @brief:获取总览信息
+     */
+    void getOverviewInfo(const QString& lshwitem,const QString& hcionfigitem);
 };
 
