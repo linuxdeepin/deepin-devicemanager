@@ -188,11 +188,11 @@ void MonitorWidget::initWidget()
             }
 
             //always get monitor size from EDID
-//            QString sizeValue = "";
-//            sizeValue = getMonitorSizeFromEDID();
-//            if (!sizeValue.isEmpty()) {
-//                monitorSize.value = sizeValue;
-//            }
+            QString sizeValue = "";
+            sizeValue = getMonitorSizeFromEDID();
+            if (!sizeValue.isEmpty() && monitorSize.isValid() == false) {
+                monitorSize.value = sizeValue;
+            }
             if (monitorSize.isValid()) {
                 articles.push_back(monitorSize);
             }
