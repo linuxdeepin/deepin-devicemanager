@@ -183,15 +183,16 @@ void MonitorWidget::initWidget()
                 monitorSize.queryData("xrandr", xrandrMonitorList.at(i), "Size");
                 QSize size;
                 QString inchValue = parseMonitorSize(monitorSize.value, inch, size);
+                monitorSize.value = inchValue;
 
             }
 
             //always get monitor size from EDID
-            QString sizeValue = "";
-            sizeValue = getMonitorSizeFromEDID();
-            if (!sizeValue.isEmpty()) {
-                monitorSize.value = sizeValue;
-            }
+//            QString sizeValue = "";
+//            sizeValue = getMonitorSizeFromEDID();
+//            if (!sizeValue.isEmpty()) {
+//                monitorSize.value = sizeValue;
+//            }
             if (monitorSize.isValid()) {
                 articles.push_back(monitorSize);
             }
