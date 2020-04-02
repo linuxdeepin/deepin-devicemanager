@@ -335,9 +335,8 @@ void PrinterWidget::initWidget()
 
         if (overviewInfo_.value.isEmpty()) {
             overviewInfo_.value = printerInfo.value;
-            if (false == overviewInfo_.value.contains(printerInfo.value, Qt::CaseInsensitive)) {
-                overviewInfo_.value = printerInfo.value + " " + printerMakeAndModel.value;
-            }
+        } else {
+            overviewInfo_.value += "/" + printerInfo.value;
         }
     }
 
