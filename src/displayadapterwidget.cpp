@@ -33,7 +33,7 @@ DisplayadapterWidget::DisplayadapterWidget(QWidget *parent) : DeviceInfoWidgetBa
 
 void DisplayadapterWidget::initWidget()
 {
-    if(DeviceInfoParser::Instance().isHuaweiAndroidUos()){
+    if (DeviceInfoParser::Instance().isHuaweiAndroidUos()) {
         return initGpuInof();
     }
     QList<QStringList> tabList;
@@ -43,7 +43,7 @@ void DisplayadapterWidget::initWidget()
     QStringList displayadapterList = DeviceInfoParser::Instance().getLshwDiaplayadapterList();
     QStringList screenList = DeviceInfoParser::Instance().getXrandrScreenName();
 
-    for (int i = 0; i < displayadapterList.size(); ++i ) {
+    for (int i = 0; i < displayadapterList.size(); ++i) {
         articles.clear();
         existArticles.clear();
 
@@ -60,7 +60,7 @@ void DisplayadapterWidget::initWidget()
         QString lspciName = DeviceInfoParser::Instance().fuzzyQueryData("lspci", lspciDeviceName, "bus info");
         ArticleStruct name(tr("Name"));
         name.queryData("lspci", lspciDeviceName, "Name");
-        name.value.remove( " Corporation", Qt::CaseInsensitive );
+        name.value.remove(" Corporation", Qt::CaseInsensitive);
 
         int index = name.value.indexOf('(');
         if (index > 0) {
@@ -70,7 +70,7 @@ void DisplayadapterWidget::initWidget()
         existArticles.insert("product");
 
         ArticleStruct vendor(tr("Vendor"));
-        vendor.queryData( "lshw", displayadapter, "vendor");
+        vendor.queryData("lshw", displayadapter, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
@@ -79,21 +79,21 @@ void DisplayadapterWidget::initWidget()
         articles.push_back(description);
         existArticles.insert("Description");
 
-        ArticleStruct memory(tr("Graphic Memory"));
+        ArticleStruct graphicMemory(tr("Graphic Memory"));
         //end with a empty char,for avoiding this article to be hidden
-        memory.value = QString("%1 ").arg(tr("Unknown"));
-        articles.push_back(memory);
+        graphicMemory.value = QString("%1 ").arg(tr("Unknown"));
+        articles.push_back(graphicMemory);
         existArticles.insert("Memory");
 
-        if ( i < screenList.size() ) {
+        if (i < screenList.size()) {
             QString screenName = screenList[i];
 
             ArticleStruct minimum(tr("Minimum Resolution"));
-            minimum.queryData( "xrandr", screenName, "minimum");
+            minimum.queryData("xrandr", screenName, "minimum");
             articles.push_back(minimum);
 
             ArticleStruct maximum(tr("Maximum Resolution"));
-            maximum.queryData( "xrandr", screenName, "maximum");
+            maximum.queryData("xrandr", screenName, "maximum");
             articles.push_back(maximum);
         }
 
@@ -126,14 +126,49 @@ void DisplayadapterWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
+        ArticleStruct type(tr("Type"));
+        type.queryData("lshw", displayadapter, "Type");
+        articles.push_back(type);
+        existArticles.insert("Type");
+
+        ArticleStruct busInfo(tr("bus info"));
+        busInfo.queryData("lshw", displayadapter, "bus info");
+        articles.push_back(busInfo);
+        existArticles.insert("bus info");
+
+        ArticleStruct ioport(tr("ioport"));
+        ioport.queryData("lshw", displayadapter, "ioport");
+        articles.push_back(ioport);
+        existArticles.insert("ioport");
+
+        ArticleStruct irq(tr("irq"));
+        irq.queryData("lshw", displayadapter, "irq");
+        articles.push_back(irq);
+        existArticles.insert("irq");
+
+        ArticleStruct latency(tr("latency"));
+        ioport.queryData("lshw", displayadapter, "latency");
+        articles.push_back(ioport);
+        existArticles.insert("latency");
+
+        ArticleStruct memory(tr("memory"));
+        memory.queryData("lshw", displayadapter, "memory");
+        articles.push_back(memory);
+        existArticles.insert("memory");
+
+        ArticleStruct physicalId(tr("physical id"));
+        physicalId.queryData("lshw", displayadapter, "physical id");
+        articles.push_back(physicalId);
+        existArticles.insert("physical id");
+
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", displayadapter, articles, existArticles);
 
         QString dpName = "";
-        if ( displayadapterList.size() > 1 ) {
+        if (displayadapterList.size() > 1) {
             dpName = name.value;
         }
 
-        addDevice( dpName, articles,  displayadapterList.size() );
+        addDevice(dpName, articles,  displayadapterList.size());
 
         QStringList tab = {
             name.value,
@@ -142,7 +177,7 @@ void DisplayadapterWidget::initWidget()
 
         tabList.push_back(tab);
 
-        if ( overviewInfo_.value.isEmpty() == false) {
+        if (overviewInfo_.value.isEmpty() == false) {
             overviewInfo_.value += " / ";
         }
 
@@ -152,19 +187,19 @@ void DisplayadapterWidget::initWidget()
         subArticles <</* memory <<*/ vendor;
         QString subValue = joinArticle(subArticles, " / ");
 
-        if ( subValue.isEmpty() == false) {
+        if (subValue.isEmpty() == false) {
             overviewInfo_.value += " (";
             overviewInfo_.value += subValue;
             overviewInfo_.value += ")";
         }
     }
 
-    if ( displayadapterList.size() > 1) {
+    if (displayadapterList.size() > 1) {
         QStringList headers = { tr("Name"), tr("Vendor")};
-        addTable( headers, tabList);
+        addTable(headers, tabList);
     }
 }
-
+//此为华为设备显示适配器函数GPU
 void DisplayadapterWidget::initGpuInof()
 {
     QList<ArticleStruct> articles;
@@ -180,7 +215,7 @@ void DisplayadapterWidget::initGpuInof()
                 t.value = db.value(gpuKey).value(artTitle);
                 articles.push_back(t);
             }
-            addDevice(gpuKey, articles, db.keys().count(),true);
+            addDevice(gpuKey, articles, db.keys().count(), true);
         }
     } else {
         setCentralInfo(tr("Failed to find display adapter information"));

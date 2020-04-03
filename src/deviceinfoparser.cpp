@@ -379,7 +379,7 @@ QMap<QString, QMap<QString, QString>> DeviceInfoParser::getLshwMeoryList()
 }
 
 //according to lshw webpage,*-storage indicates storage controller,not real storage device,
-//but real device should has same attribute with the controller,such as prodcut,vender
+//but real device should has same attribute with the controller,such as product,vender
 QStringList DeviceInfoParser::getLshwDiskNameList()
 {
     checkValueFun_t func = [](const QString & fk)->bool {
