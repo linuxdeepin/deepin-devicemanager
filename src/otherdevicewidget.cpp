@@ -26,17 +26,81 @@
 
 DWIDGET_USE_NAMESPACE
 
-OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Other Devices","Other Input Devices"))
+OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Other Devices", "Other Input Devices"))
 {
-    initWidget();
+//    initWidget();
+    loadWidget();
 }
 
+void OtherDevicesWidget::loadWidget()
+{
+    QStringList otherDeviceList = DeviceInfoParser::Instance().getLshwOtherDeviceList();
+
+    if ( otherDeviceList.size() < 1 ) {
+        setCentralInfo(tr("No other devices found"));
+        return;
+    }
+
+    QList<QStringList> tabList;
+    //    QList<ArticleStruct> articles;
+    //    QSet<QString> existArticles;
+
+    foreach (const QString &device, otherDeviceList) {
+        m_articles.clear();
+        m_existArticles.clear();
+
+        // 添加其他设备的属性
+        ArticleStruct name = addArticleStruct(tr("Name"), "lshw", device, "product");
+        ArticleStruct type = addArticleStruct(tr("Type"), "lshw", device, "Type");
+        ArticleStruct description = addArticleStruct(tr("Description"), "lshw", device, "description");
+        ArticleStruct vendor = addArticleStruct(tr("Vendor"), "lshw", device, "vendor");
+        addArticleStruct(tr("Bus Info"), "lshw", device, "bus info");
+        addArticleStruct(tr("Physical ID"), "lshw", device, "physical id");
+        addArticleStruct(tr("Version"), "lshw", device, "version");
+        addArticleStruct(tr("Width"), "lshw", device, "width");
+        addArticleStruct(tr("Clock"), "lshw", device, "clock");
+        addArticleStruct(tr("Capabilities"), "lshw", device, "capabilities");
+
+        // 添加未显示的属性
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, m_articles, m_existArticles);
+
+        QString titleValue = name.value;
+        if ( name.isValid() == false || name.value == vendor.value ) {
+            if ( description.isValid() ) {
+                titleValue = description.value;
+            } else {
+                titleValue = type.value;
+            }
+        }
+
+        addDevice( titleValue, m_articles, otherDeviceList.size() );
+
+        if ( otherDeviceList.size() > 1 ) {
+            QStringList tab = {
+                titleValue,
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
+        // 把其他PCI信息添加到overviewInfo_中显示到概况中
+        if ( overviewInfo_.value.isEmpty() == true ) {
+            overviewInfo_.value = vendor.value;
+            overviewInfo_.value += " ";
+            overviewInfo_.value += titleValue;
+        }
+    }
+
+    if ( otherDeviceList.size() > 1 ) {
+        QStringList headers = {tr("Name"), tr("Vendor")};
+        addTable( headers, tabList);
+    }
+}
 void OtherDevicesWidget::initWidget()
 {
     QStringList otherDeviceList = DeviceInfoParser::Instance().getLshwOtherDeviceList();
 
-    if( otherDeviceList.size() < 1 )
-    {
+    if ( otherDeviceList.size() < 1 ) {
         setCentralInfo(tr("No other devices found"));
         return;
     }
@@ -45,8 +109,7 @@ void OtherDevicesWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    foreach(const QString& device, otherDeviceList)
-    {
+    foreach (const QString &device, otherDeviceList) {
         articles.clear();
         existArticles.clear();
 
@@ -103,24 +166,18 @@ void OtherDevicesWidget::initWidget()
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles);
 
         QString titleValue = name.value;
-        if( name.isValid() == false || name.value == vendor.value )
-        {
-            if( description.isValid() )
-            {
+        if ( name.isValid() == false || name.value == vendor.value ) {
+            if ( description.isValid() ) {
                 titleValue = description.value;
-            }
-            else
-            {
+            } else {
                 titleValue = type.value;
             }
         }
 
         addDevice( titleValue, articles, otherDeviceList.size() );
 
-        if( otherDeviceList.size() > 1 )
-        {
-            QStringList tab =
-            {
+        if ( otherDeviceList.size() > 1 ) {
+            QStringList tab = {
                 titleValue,
                 vendor.value
             };
@@ -128,17 +185,15 @@ void OtherDevicesWidget::initWidget()
             tabList.push_back(tab);
         }
 
-        if( overviewInfo_.value.isEmpty() == true )
-        {
+        if ( overviewInfo_.value.isEmpty() == true ) {
             overviewInfo_.value = vendor.value;
             overviewInfo_.value += " ";
             overviewInfo_.value += titleValue;
         }
     }
 
-    if( otherDeviceList.size() > 1 )
-    {
-        QStringList headers = {tr("Name"),tr("Vendor")};
+    if ( otherDeviceList.size() > 1 ) {
+        QStringList headers = {tr("Name"), tr("Vendor")};
         addTable( headers, tabList);
     }
 }

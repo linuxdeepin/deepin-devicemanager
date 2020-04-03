@@ -28,15 +28,72 @@ DWIDGET_USE_NAMESPACE
 
 OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Other PCI Devices"))
 {
-    initWidget();
+//    initWidget();
+    loadWidget();
+}
+
+void OtherPciDeviceWidget::loadWidget()
+{
+    QStringList otherPcideviceList = DeviceInfoParser::Instance().getLshwOtherPciDeviceList();
+
+    if (otherPcideviceList.size() < 1) {
+        setCentralInfo(tr("No other PCI devices found"));
+        return;
+    }
+
+    QList<QStringList> tabList;
+//    QList<ArticleStruct> articles;
+//    QSet<QString> existArticles;
+
+    foreach (const QString &device, otherPcideviceList) {
+        m_articles.clear();
+        m_existArticles.clear();
+
+        // 添加从lshw.txt中获取的其他未显示的PCI信息
+        ArticleStruct name = addArticleStruct(tr("Name"), "lshw", device, "product");
+        ArticleStruct description = addArticleStruct(tr("Description"), "lshw", device, "description");
+        ArticleStruct vendor = addArticleStruct(tr("Vendor"), "lshw", device, "vendor");
+        addArticleStruct(tr("Bus Info"), "lshw", device, "bus info");
+        addArticleStruct(tr("Physical ID"), "lshw", device, "physical id");
+        addArticleStruct(tr("Version"), "lshw", device, "version");
+        addArticleStruct(tr("Width"), "lshw", device, "width");
+        addArticleStruct(tr("Clock"), "lshw", device, "clock");
+        addArticleStruct(tr("Capabilities"), "lshw", device, "capabilities");
+
+        //添加未显示的articles
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, m_articles, m_existArticles);
+
+
+        addDevice( name.value, m_articles, otherPcideviceList.size() );
+
+        if ( otherPcideviceList.size() > 1 ) {
+            QStringList tab = {
+                name.value,
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
+
+        // 把其他PCI信息添加到overviewInfo_中显示到概况中
+        if ( overviewInfo_.value.isEmpty() == true ) {
+            overviewInfo_.value = vendor.value;
+            overviewInfo_.value += " ";
+            overviewInfo_.value += name.value;
+        }
+    }
+
+    if ( otherPcideviceList.size() > 1 ) {
+        QStringList headers = { tr("Name"),  tr("Vendor") };
+        addTable( headers, tabList);
+    }
 }
 
 void OtherPciDeviceWidget::initWidget()
 {
     QStringList otherPcideviceList = DeviceInfoParser::Instance().getLshwOtherPciDeviceList();
 
-    if(otherPcideviceList.size() < 1)
-    {
+    if (otherPcideviceList.size() < 1) {
         setCentralInfo(tr("No other PCI devices found"));
         return;
     }
@@ -45,8 +102,7 @@ void OtherPciDeviceWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    foreach(const QString& device, otherPcideviceList)
-    {
+    foreach (const QString &device, otherPcideviceList) {
         articles.clear();
         existArticles.clear();
 
@@ -99,10 +155,8 @@ void OtherPciDeviceWidget::initWidget()
 
         addDevice( name.value, articles, otherPcideviceList.size() );
 
-        if( otherPcideviceList.size() > 1 )
-        {
-            QStringList tab =
-            {
+        if ( otherPcideviceList.size() > 1 ) {
+            QStringList tab = {
                 name.value,
                 vendor.value
             };
@@ -110,16 +164,14 @@ void OtherPciDeviceWidget::initWidget()
             tabList.push_back(tab);
         }
 
-        if( overviewInfo_.value.isEmpty() == true )
-        {
+        if ( overviewInfo_.value.isEmpty() == true ) {
             overviewInfo_.value = vendor.value;
             overviewInfo_.value += " ";
             overviewInfo_.value += name.value;
         }
     }
 
-    if( otherPcideviceList.size() > 1 )
-    {
+    if ( otherPcideviceList.size() > 1 ) {
         QStringList headers = { tr("Name"),  tr("Vendor") };
         addTable( headers, tabList);
     }

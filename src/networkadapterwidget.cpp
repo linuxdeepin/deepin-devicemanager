@@ -31,12 +31,78 @@ NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBa
     initWidget();
 }
 
+void NetworkadapterWidget::loadWidget()
+{
+    QStringList networkadapterList = DeviceInfoParser::Instance().getLshwNetworkadapterList();
+
+    if ( networkadapterList.size() < 1 ) {
+        setCentralInfo(tr("No network adapter found"));
+        return;
+    }
+
+    QList<QStringList> tabList;
+//    QList<ArticleStruct> articles;
+//    QSet<QString> existArticles;
+    foreach (const QString &networkadapter, networkadapterList) {
+        m_articles.clear();
+        m_existArticles.clear();
+
+        // 添加网络适配器的属性
+        ArticleStruct name = addArticleStruct(tr("Name"), "lshw", networkadapter, "product");
+        ArticleStruct vendor = addArticleStruct(tr("Vendor"), "lshw", networkadapter, "vendor");
+        ArticleStruct description = addArticleStruct(tr("Description"), "lshw", networkadapter, "description");
+        addArticleStruct(tr("Version"), "lshw", networkadapter, "version");
+        addArticleStruct(tr("Bus Info"), "lshw", networkadapter, "bus info");
+        addArticleStruct(tr("Logical Name"), "lshw", networkadapter, "logical name");
+        addArticleStruct(tr("MAC Address"), "lshw", networkadapter, "serial");
+        addArticleStruct(tr("Speed"), "lshw", networkadapter, "speed");
+        addArticleStruct(tr("Width"), "lshw", networkadapter, "width");
+        addArticleStruct(tr("Clock"), "lshw", networkadapter, "clock");
+        addArticleStruct(tr("Capabilities"), "lshw", networkadapter, "capabilities");
+
+        // 添加网络适配器的其他属性
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", networkadapter, m_articles, m_existArticles);
+
+        QString deviceName = name.value;
+        if (name.isValid() == false && description.isValid()) {
+            deviceName = description.value;
+        }
+
+        addDevice( deviceName, m_articles, networkadapterList.size() );
+
+        if ( networkadapterList.size() > 1 ) {
+            QStringList tab = {
+                deviceName,
+                vendor.value
+            };
+
+            tabList.push_back(tab);
+        }
+
+
+        if ( overviewInfo_.value.isEmpty() == false ) {
+            overviewInfo_.value += " / ";
+        }
+
+        // 添加概况预览
+        if (vendor.isValid() && deviceName.contains(vendor.value, Qt::CaseInsensitive) == false ) {
+            overviewInfo_.value += vendor.value;
+            overviewInfo_.value += " ";
+        }
+        overviewInfo_.value += deviceName;
+    }
+
+    if ( networkadapterList.size() > 1 ) {
+        QStringList headers = { tr("Name"),  tr("Vendor") };
+        addTable( headers, tabList);
+    }
+}
+
 void NetworkadapterWidget::initWidget()
 {
     QStringList networkadapterList = DeviceInfoParser::Instance().getLshwNetworkadapterList();
 
-    if( networkadapterList.size() < 1 )
-    {
+    if ( networkadapterList.size() < 1 ) {
         setCentralInfo(tr("No network adapter found"));
         return;
     }
@@ -44,8 +110,7 @@ void NetworkadapterWidget::initWidget()
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
-    foreach(const QString& networkadapter, networkadapterList)
-    {
+    foreach (const QString &networkadapter, networkadapterList) {
         articles.clear();
         existArticles.clear();
 
@@ -84,22 +149,22 @@ void NetworkadapterWidget::initWidget()
         articles.push_back(mac);
         existArticles.insert("serial");
 
-        ArticleStruct speed(tr("Speed","Network Adapter"));
+        ArticleStruct speed(tr("Speed", "Network Adapter"));
         speed.queryData( "lshw", networkadapter, "speed");
         articles.push_back(speed);
         existArticles.insert("speed");
 
-        ArticleStruct width(tr("Width","Network Adapter"));
+        ArticleStruct width(tr("Width", "Network Adapter"));
         width.queryData( "lshw", networkadapter, "width");
         articles.push_back(width);
         existArticles.insert("width");
 
-        ArticleStruct clock(tr("Clock","Network Adapter"));
+        ArticleStruct clock(tr("Clock", "Network Adapter"));
         clock.queryData( "lshw", networkadapter, "clock");
         articles.push_back(clock);
         existArticles.insert("clock");
 
-        ArticleStruct capabilities(tr("Capabilities","Network Adapter"));
+        ArticleStruct capabilities(tr("Capabilities", "Network Adapter"));
         capabilities.queryData( "lshw", networkadapter, "capabilities");
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
@@ -107,17 +172,14 @@ void NetworkadapterWidget::initWidget()
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", networkadapter, articles, existArticles);
 
         QString deviceName = name.value;
-        if(name.isValid() == false && description.isValid())
-        {
+        if (name.isValid() == false && description.isValid()) {
             deviceName = description.value;
         }
 
         addDevice( deviceName, articles, networkadapterList.size() );
 
-        if( networkadapterList.size() > 1 )
-        {
-            QStringList tab =
-            {
+        if ( networkadapterList.size() > 1 ) {
+            QStringList tab = {
                 deviceName,
                 vendor.value
             };
@@ -126,21 +188,18 @@ void NetworkadapterWidget::initWidget()
         }
 
 
-        if( overviewInfo_.value.isEmpty() == false )
-        {
+        if ( overviewInfo_.value.isEmpty() == false ) {
             overviewInfo_.value += " / ";
         }
 
-        if(vendor.isValid() && deviceName.contains(vendor.value, Qt::CaseInsensitive) == false )
-        {
+        if (vendor.isValid() && deviceName.contains(vendor.value, Qt::CaseInsensitive) == false ) {
             overviewInfo_.value += vendor.value;
             overviewInfo_.value += " ";
         }
         overviewInfo_.value += deviceName;
     }
 
-    if( networkadapterList.size() > 1 )
-    {
+    if ( networkadapterList.size() > 1 ) {
         QStringList headers = { tr("Name"),  tr("Vendor") };
         addTable( headers, tabList);
     }

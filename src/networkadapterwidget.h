@@ -31,5 +31,7 @@ public:
     explicit NetworkadapterWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+
+    void loadWidget();
 };
 
