@@ -52,7 +52,7 @@ void CpuWidget::initWidget()
 
     // 获取cpu核心列表，即有多少个CPU核
     QStringList coreList = DeviceInfoParser::Instance().getCatcpuCpuList();
-    if(coreList.size() < 1 && cpuList.size() < 1){return;}
+    if (coreList.size() < 1 && cpuList.size() < 1) {return;}
 
     // 获取CPU模型
     QDBusInterface cpuModelName("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
@@ -93,9 +93,9 @@ void CpuWidget::initWidget()
     foreach (auto precessor, coreList) {
         if (canGetSpeedFromLscpu) {
             addDetailFromLscpuAndCatcpu(precessor);
-        }else {
-            if(cpuList.size() > 0)
-                addDetailFromLscpuCatcpuDmidecode(cpuList[0],precessor);
+        } else {
+            if (cpuList.size() > 0)
+                addDetailFromLscpuCatcpuDmidecode(cpuList[0], precessor);
         }
     }
 
@@ -179,6 +179,22 @@ void CpuWidget::addDetailFromLscpuAndCatcpu(const QString &precessor)
     addArticleStruct(tr("L3 Cache"), "lscpu", "lscpu", "L3 cache", articles, existArticles);
     addArticleStruct(tr("Flags"), "catcpu", precessor, "flags", articles, existArticles);
     addArticleStruct(tr("Virtualization"), "lscpu", "lscpu", "Virtualization", articles, existArticles);
+    addArticleStruct(tr("Address Sizes"), "catcpu", precessor, "address sizes", articles, existArticles);
+    addArticleStruct(tr("APICID"), "catcpu", precessor, "apicid", articles, existArticles);
+    addArticleStruct(tr("Bugs"), "catcpu", precessor, "bugs", articles, existArticles);
+    addArticleStruct(tr("Cache Size"), "catcpu", precessor, "cache size", articles, existArticles);
+    addArticleStruct(tr("Cache Alignment"), "catcpu", precessor, "cache_alignment", articles, existArticles);
+    addArticleStruct(tr("Clflush Size"), "catcpu", precessor, "clflush size", articles, existArticles);
+    addArticleStruct(tr("CPU Cores"), "catcpu", precessor, "cpu cores", articles, existArticles);
+    addArticleStruct(tr("CPUID Level"), "catcpu", precessor, "cpuid level", articles, existArticles);
+    addArticleStruct(tr("FPU"), "catcpu", precessor, "fpu", articles, existArticles);
+    addArticleStruct(tr("FPU Exception"), "catcpu", precessor, "fpu_exception", articles, existArticles);
+    addArticleStruct(tr("Initial APICID"), "catcpu", precessor, "initial apicid", articles, existArticles);
+    addArticleStruct(tr("Microcode"), "catcpu", precessor, "microcode", articles, existArticles);
+    addArticleStruct(tr("Processor"), "catcpu", precessor, "processor", articles, existArticles);
+    addArticleStruct(tr("Siblings"), "catcpu", precessor, "siblings", articles, existArticles);
+//    addArticleStruct(tr(""), "catcpu", precessor, "vendor_id", articles, existArticles);
+    addArticleStruct(tr("WP"), "lscpu", "lscpu", "wp", articles, existArticles);
 
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles, "ManulTrack__CPU", "CPU Information");
     addSubInfo(tr("Processor") + " " +  precessor, articles);
@@ -206,7 +222,7 @@ void CpuWidget::addDetailFromLscpuCatcpuDmidecode(const QString &dmiProcessor, c
     addArticleStruct(tr("L2 Cache"), "dmidecode", dmiProcessor, "L2 Cache Handle", articles, existArticles);
     addArticleStruct(tr("L3 Cache"), "dmidecode", dmiProcessor, "L3 Cache Handle", articles, existArticles);
     addArticleStruct(tr("Flags"), "lscpu", "lscpu", "Flags", articles, existArticles);
-    //addArticleStruct(tr("Virtualization"),"dmidecode",precessor,"Virtualization",articles,existArticles);
+    addArticleStruct(tr("Virtualization"), "lscpu", "lscpu", dmiProcessor, articles, existArticles);
 
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", dmiProcessor, articles, existArticles, "ManulTrack__CPU", "CPU Information");
     addSubInfo(tr("Processor") + " " +  catcpuProcessor, articles);
