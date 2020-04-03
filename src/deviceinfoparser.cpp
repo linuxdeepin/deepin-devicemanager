@@ -491,7 +491,8 @@ QStringList DeviceInfoParser::getHwinfoOtherUSBList()
                 fk.contains("Camera", Qt::CaseInsensitive) ||
                 fk .contains("CD-ROM", Qt::CaseInsensitive) ||
                 fk .contains("disk", Qt::CaseInsensitive) ||
-                fk .contains("Bluetooth", Qt::CaseInsensitive))
+                fk .contains("Bluetooth", Qt::CaseInsensitive) ||
+                fk.contains("BCM20702A0", Qt::CaseInsensitive))
         {
             return false;
         }
@@ -505,7 +506,8 @@ QStringList DeviceInfoParser::getHwinfoOtherUSBList()
                     deviceVal.contains("Camera", Qt::CaseInsensitive) ||
                     deviceVal .contains("CD-ROM", Qt::CaseInsensitive) ||
                     deviceVal .contains("disk", Qt::CaseInsensitive) ||
-                    deviceVal .contains("Bluetooth", Qt::CaseInsensitive)) {
+                    deviceVal .contains("Bluetooth", Qt::CaseInsensitive) ||
+                    deviceVal .contains("BCM20702A0", Qt::CaseInsensitive)) {
                 return false;
             }
         }
