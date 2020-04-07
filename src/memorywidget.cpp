@@ -48,45 +48,75 @@ void MemoryWidget::initWidget()
      * lshw show memory summary info without memory bank.
      * we need collect memory bank info if it exist in future version.
      */
+//    auto memorys = DeviceInfoParser::Instance().getLshwMeoryList();
+//    QSet<QString> existArticles;
+//    if (memorys.isEmpty() == false) {
+//        int index = 1;
+//        for (auto ptr = memorys.begin(); ptr != memorys.end(); ptr++) {
+//            QList<ArticleStruct> articles;
+////            auto mem = ptr.value().keys().value(index);
+////            ArticleStruct type(tr("Type"));
+////            type.queryData("lshw", mem, "Type");
+////            articles.push_back(type);
+////            existArticles.insert("Type");
+
+////            ArticleStruct description(tr("Description"));
+////            description.queryData("lshw", mem, "description");
+////            articles.push_back(description);
+////            existArticles.insert("Description");
+
+////            ArticleStruct physicalId(tr("Physical ID"));
+////            physicalId.queryData("lshw", mem, "physical id");
+////            articles.push_back(physicalId);
+////            existArticles.insert("physical id");
+
+////            ArticleStruct size(tr("Size"));
+////            size.queryData("lshw", mem, "size");
+////            articles.push_back(size);
+////            existArticles.insert("size");
+
+////            ArticleStruct slot(tr("Slot"));
+////            slot.queryData("lshw", mem, "slot");
+////            articles.push_back(slot);
+////            existArticles.insert("slot");
+////            auto mem = ptr.value().keys().value();
+//            foreach (auto key, ptr.value().keys()) {
+//                ArticleStruct art(key);
+//                art.value = ptr.value().value(key);
+
+////                ArticleStruct type(tr("Type"));
+////                type.queryData("lshw", key, "Type");
+////                articles.push_back(type);
+////                existArticles.insert("Type");
+
+//                art.value.replace(QRegExp("TiB"), "TB");
+//                art.value.replace(QRegExp("GiB"), "GB");
+//                art.value.replace(QRegExp("MiB"), "MB");
+//                art.value.replace(QRegExp("KiB"), "KB");
+
+//                if (key == QString("size")) {
+//                    overviewInfo_.value += overviewInfo_.value.isEmpty() ? "" : " /";
+//                    overviewInfo_.value += art.value;
+//                }
+////                articles.append(art);
+//            }
+//            QString title = tr("Memory");
+//            addSubInfo(memorys.count() <= 1 ?
+//                       QString("%1\n").arg(title) :
+//                       QString("%1 %2\n").arg(title).arg(index),
+//                       articles);
+//            index ++;
+//        }
+//        return;
+//    }
     auto memorys = DeviceInfoParser::Instance().getLshwMeoryList();
-    QSet<QString> existArticles;
     if (memorys.isEmpty() == false) {
         int index = 1;
         for (auto ptr = memorys.begin(); ptr != memorys.end(); ptr++) {
             QList<ArticleStruct> articles;
-            auto mem = ptr.value().keys().value(index);
-            ArticleStruct type(tr("Type"));
-            type.queryData("lshw", mem, "Type");
-            articles.push_back(type);
-            existArticles.insert("Type");
-
-            ArticleStruct description(tr("Description"));
-            description.queryData("lshw", mem, "description");
-            articles.push_back(description);
-            existArticles.insert("Description");
-
-            ArticleStruct physicalId(tr("Physical ID"));
-            physicalId.queryData("lshw", mem, "physical id");
-            articles.push_back(physicalId);
-            existArticles.insert("physical id");
-
-            ArticleStruct size(tr("Size"));
-            size.queryData("lshw", mem, "size");
-            articles.push_back(size);
-            existArticles.insert("size");
-
-            ArticleStruct slot(tr("Slot"));
-            slot.queryData("lshw", mem, "slot");
-            articles.push_back(slot);
-            existArticles.insert("slot");
             foreach (auto key, ptr.value().keys()) {
                 ArticleStruct art(key);
                 art.value = ptr.value().value(key);
-
-//                ArticleStruct type(tr("Type"));
-//                type.queryData("lshw", key, "Type");
-//                articles.push_back(type);
-//                existArticles.insert("Type");
 
                 art.value.replace(QRegExp("TiB"), "TB");
                 art.value.replace(QRegExp("GiB"), "GB");
@@ -97,7 +127,7 @@ void MemoryWidget::initWidget()
                     overviewInfo_.value += overviewInfo_.value.isEmpty() ? "" : " /";
                     overviewInfo_.value += art.value;
                 }
-//                articles.append(art);
+                articles.append(art);
             }
             QString title = tr("Memory");
             addSubInfo(memorys.count() <= 1 ?

@@ -450,7 +450,7 @@
     </message>
     <message>
         <source>Sockets</source>
-        <translation type="vanished">处理器</translation>
+        <translation>处理器</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="107"/>
@@ -459,7 +459,7 @@
     </message>
     <message>
         <source>Processor(s)</source>
-        <translation type="vanished">逻辑处理器</translation>
+        <translation>逻辑处理器</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="167"/>
