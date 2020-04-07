@@ -729,6 +729,9 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                 if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("storage", Qt::CaseInsensitive)) {
                     return false;
                 }
+                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("printer", Qt::CaseInsensitive)) {
+                    return false;
+                }
             }
 
             if (true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("product")) {
