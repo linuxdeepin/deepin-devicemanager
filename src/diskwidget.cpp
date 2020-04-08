@@ -35,6 +35,7 @@ DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Stora
 void DiskWidget::initWidget()
 {
     QStringList diskList = DeviceInfoParser::Instance().getLshwDiskNameList();
+
     int expect_nvme_index = 1;
     QStringList lsblkList = DeviceInfoParser::Instance().getLsblkDiskNameList();
     if(diskList.size() < 1)
