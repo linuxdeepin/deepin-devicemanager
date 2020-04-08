@@ -32,13 +32,32 @@ public:
 
     void initWidget() override;
     void initHwMonitor();
+    void initWidgetEX();
+    void addDeviceFromHwinfo(const QString& monitor,QString& deviceName,QSize& size,QStringList& tabItem);
+    void addDeviceFromXrandr(const QString& monitor);
+    void initWidgetFromBoth(const QStringList& hwinfoList,const QStringList& xrandrList);
+    void getInfoFromXrandr(const QSize& size,const QStringList& xrandrList);
+    void addOverviewInfo(const QString& info);
 
     QString parseMonitorSize(const QString& sizeDescription, double& inch,QSize& retSize);
+    QString parseMonitorSize(const QString& sizeDescription,QSize& retSize);
+    QString parseMonitorSize(const QString& sizeDescription,double& inch);
+    QString parseMonitorSize(const QString& sizeDescription);
     QString parseDisplayRatio(const QString& resulotion);
 
     QString getMonitorSizeFromEDID();
 private:
     void parseCurResolution(ArticleStruct &curResolution,ArticleStruct &resolutionList);
+
+
+
+    QList<QStringList> tabList;
+    QList<ArticleStruct> articles;
+    QSet<QString> existArticles;
+
+    ArticleStruct currentResolution;
+    ArticleStruct resolutionList;
+    ArticleStruct displayRatio;
 };
 
 

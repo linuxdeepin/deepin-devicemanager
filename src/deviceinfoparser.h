@@ -257,6 +257,23 @@ public:
 
     // USB hwinfo --keybooard
     bool loadKeyboardinfoDatabase();
+
+
+
+
+    /**
+     * @brief：获取键盘信息,键盘信息的获取只要通过两个命令获取
+     *         sudo lshw -C input
+     *         sudo hwinfo --keyboard
+     * @brief[loadKeyboardInfoFromlshwInput]:从 sudo lshw -C input 中获取键盘信息
+     * @brief[loadKeyBoardInfoFromHwinfoKeyboard]:从 sudo hwinfo --keyboard 中获取键盘信息
+     */
+//    bool loadKeyboardInfoFromlshwInput();
+//    bool loadKeyBoardInfoFromHwinfoKeyboard();
+
+
+
+
 public:
     bool getRootPassword();
     bool executeProcess(const QString &cmd);
@@ -283,6 +300,7 @@ public:
     QString homeUrl_;
     QString lsbRelease_;
     QString osVersion_;
+    DatabaseMap                      m_KeyBoardInfo;
 
 public:
     QSet<QString> orderedDevices;

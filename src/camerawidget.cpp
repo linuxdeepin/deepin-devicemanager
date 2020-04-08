@@ -30,7 +30,10 @@ CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("C
 {
     initWidget();
 }
+void CameraWidget::initWidgetEx()
+{
 
+}
 void CameraWidget::initWidget()
 {
     QStringList cameraList = DeviceInfoParser::Instance().getLshwCameraList();
