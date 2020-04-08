@@ -489,10 +489,10 @@ QStringList DeviceInfoParser::getHwinfoOtherUSBList()
                 fk.contains("Keyboard", Qt::CaseInsensitive) ||
                 fk.contains("mouse", Qt::CaseInsensitive) ||
                 fk.contains("Camera", Qt::CaseInsensitive) ||
-                fk .contains("CD-ROM", Qt::CaseInsensitive) ||
-                fk .contains("disk", Qt::CaseInsensitive) ||
-                fk .contains("Bluetooth", Qt::CaseInsensitive) ||
-                fk.contains("BCM20702A0", Qt::CaseInsensitive))
+                fk.contains("CD-ROM", Qt::CaseInsensitive) ||
+                fk.contains("disk", Qt::CaseInsensitive) ||
+                fk.contains("Bluetooth", Qt::CaseInsensitive) ||
+                fk.contains("Printer", Qt::CaseInsensitive))
         {
             return false;
         }
@@ -504,10 +504,10 @@ QStringList DeviceInfoParser::getHwinfoOtherUSBList()
                     deviceVal.contains("Keyboard", Qt::CaseInsensitive) ||
                     deviceVal.contains("mouse", Qt::CaseInsensitive) ||
                     deviceVal.contains("Camera", Qt::CaseInsensitive) ||
-                    deviceVal .contains("CD-ROM", Qt::CaseInsensitive) ||
-                    deviceVal .contains("disk", Qt::CaseInsensitive) ||
-                    deviceVal .contains("Bluetooth", Qt::CaseInsensitive) ||
-                    deviceVal .contains("BCM20702A0", Qt::CaseInsensitive)) {
+                    deviceVal.contains("CD-ROM", Qt::CaseInsensitive) ||
+                    deviceVal.contains("disk", Qt::CaseInsensitive) ||
+                    deviceVal.contains("Bluetooth", Qt::CaseInsensitive) ||
+                    deviceVal.contains("Printer", Qt::CaseInsensitive)) {
                 return false;
             }
         }
@@ -729,7 +729,8 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                 if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("storage", Qt::CaseInsensitive)) {
                     return false;
                 }
-                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("printer", Qt::CaseInsensitive)) {
+                //USB排除打印机显示
+                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("Printer", Qt::CaseInsensitive)) {
                     return false;
                 }
             }
@@ -1119,7 +1120,7 @@ QStringList DeviceInfoParser::getLshwPrinterList()
 
     return printerList;
 }
-
+//获得cups的打印机相关信息列表
 QStringList DeviceInfoParser::getCupsPrinterList()
 {
     QStringList printerList;
@@ -3345,6 +3346,7 @@ bool DeviceInfoParser::loadGpuInfo()
     return true;
 }
 
+//从终端命令加载关于打印机的相关信息
 bool DeviceInfoParser::loadLpstatDatabase()
 {
     // lpstat -l -p
@@ -3400,6 +3402,7 @@ bool DeviceInfoParser::loadLpstatDatabase()
     return true;
 }
 
+// 展示打印机的详细信息
 void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap)
 {
     cups_dinfo_t *info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);
@@ -3435,7 +3438,7 @@ void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QStri
         //std::cout << option << " not supported." << std::endl;
     }
 }
-
+//获取相关打印机目标字段的信息
 int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest)
 {
     if (flags & CUPS_DEST_FLAGS_REMOVED) {
@@ -3474,7 +3477,7 @@ int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest)
     return (1);
 }
 
-
+//加载cups管理的打印机的相关信息
 bool DeviceInfoParser::loadCupsDatabase()
 {
     DatabaseMap cupsDatabase;

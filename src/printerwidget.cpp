@@ -299,44 +299,41 @@ void PrinterWidget::initWidget()
 //        articles.push_back(numberUp);
 //        existArticles.insert("number-up");
 
-//        ArticleStruct orientationRequested(tr("orientation-requested"));
-//        version.queryData("Cups", device, "orientation-requested");
-//        articles.push_back(orientationRequested);
-//        existArticles.insert("orientation-requestedr");
-
-//        ArticleStruct printColorMode(tr("print-color-mode"));
-//        width.queryData("Cups", device, "print-color-mode");
-//        articles.push_back(printColorMode);
-//        existArticles.insert("print-color-mode");
-
-//        ArticleStruct printerInfo(tr("printerInfo"));
-//        clock.queryData("Cups", device, "printer-info");
-//        articles.push_back(printerInfo);
-//        existArticles.insert("printer-info");
-
-//        ArticleStruct printerIsAcceptingJobs(tr("printer-is-accepting-jobs"));
-//        capabilities.queryData("Cups", device, "printer-is-accepting-jobs");
-//        articles.push_back(printerIsAcceptingJobs);
-//        existArticles.insert("printer-is-accepting-jobs");
-
-
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("Cups", device, articles, existArticles);
 
         addDevice(device, articles, printerList.size());
 
+        //此处为添加表头，由于可以重复添加同一个打印机，printerInfo可能相同，导致在表头没区别
+        QStringList printerNameList;
+        QString printerName;
         if (printerList.size() > 1) {
+//            printerNameList << printerInfo.value;
+            char num = 0;
+            for (int j = 0; j < printerNameList.size(); j++) {
+                if (printerInfo.value == printerNameList[j]) {
+                    num++;
+                }
+            }
+            if (0 == num) {
+                printerName = printerInfo.value;
+            } else {
+                printerName = printerInfo.value + "-" + num;
+            }
+//            printerName = printerInfo.value + "-" + num;
+
             QStringList tab = {
-                printerInfo.value,
+                printerName,
                 printerMakeAndModel.value
             };
 
             tabList.push_back(tab);
+            printerNameList << printerInfo.value;
         }
 
         if (overviewInfo_.value.isEmpty()) {
-            overviewInfo_.value = printerInfo.value;
+            overviewInfo_.value = printerName;
         } else {
-            overviewInfo_.value += "/" + printerInfo.value;
+            overviewInfo_.value += "/" + printerName;
         }
     }
 
