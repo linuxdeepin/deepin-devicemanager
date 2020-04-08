@@ -26,7 +26,6 @@
 #include <QVBoxLayout>
 #include <DApplication>
 #include <QDBusInterface>
-#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 
@@ -49,6 +48,67 @@ void MemoryWidget::initWidget()
      * lshw show memory summary info without memory bank.
      * we need collect memory bank info if it exist in future version.
      */
+//    auto memorys = DeviceInfoParser::Instance().getLshwMeoryList();
+//    QSet<QString> existArticles;
+//    if (memorys.isEmpty() == false) {
+//        int index = 1;
+//        for (auto ptr = memorys.begin(); ptr != memorys.end(); ptr++) {
+//            QList<ArticleStruct> articles;
+////            auto mem = ptr.value().keys().value(index);
+////            ArticleStruct type(tr("Type"));
+////            type.queryData("lshw", mem, "Type");
+////            articles.push_back(type);
+////            existArticles.insert("Type");
+
+////            ArticleStruct description(tr("Description"));
+////            description.queryData("lshw", mem, "description");
+////            articles.push_back(description);
+////            existArticles.insert("Description");
+
+////            ArticleStruct physicalId(tr("Physical ID"));
+////            physicalId.queryData("lshw", mem, "physical id");
+////            articles.push_back(physicalId);
+////            existArticles.insert("physical id");
+
+////            ArticleStruct size(tr("Size"));
+////            size.queryData("lshw", mem, "size");
+////            articles.push_back(size);
+////            existArticles.insert("size");
+
+////            ArticleStruct slot(tr("Slot"));
+////            slot.queryData("lshw", mem, "slot");
+////            articles.push_back(slot);
+////            existArticles.insert("slot");
+////            auto mem = ptr.value().keys().value();
+//            foreach (auto key, ptr.value().keys()) {
+//                ArticleStruct art(key);
+//                art.value = ptr.value().value(key);
+
+////                ArticleStruct type(tr("Type"));
+////                type.queryData("lshw", key, "Type");
+////                articles.push_back(type);
+////                existArticles.insert("Type");
+
+//                art.value.replace(QRegExp("TiB"), "TB");
+//                art.value.replace(QRegExp("GiB"), "GB");
+//                art.value.replace(QRegExp("MiB"), "MB");
+//                art.value.replace(QRegExp("KiB"), "KB");
+
+//                if (key == QString("size")) {
+//                    overviewInfo_.value += overviewInfo_.value.isEmpty() ? "" : " /";
+//                    overviewInfo_.value += art.value;
+//                }
+////                articles.append(art);
+//            }
+//            QString title = tr("Memory");
+//            addSubInfo(memorys.count() <= 1 ?
+//                       QString("%1\n").arg(title) :
+//                       QString("%1 %2\n").arg(title).arg(index),
+//                       articles);
+//            index ++;
+//        }
+//        return;
+//    }
     auto memorys = DeviceInfoParser::Instance().getLshwMeoryList();
     if (memorys.isEmpty() == false) {
         int index = 1;
@@ -97,7 +157,6 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
     double size3 = size2 / 1024;
 //    QString size4 = QString("%1").arg(size3).mid() + "GB";
     QString sizeMemory = QString::number(size3, 'f', 1) + "GB";
-    qDebug() << sizeMemory;
 
     foreach (const QString &mem, memList) {
         if (canUpgrade_ == -1) {
@@ -283,6 +342,41 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         configSpeed.queryData("dmidecode", mem, "Configured Memory Speed");
         articles.push_back(configSpeed);
         existArticles.insert("Configured Memory Speed");
+
+        ArticleStruct arrayHandle(tr("Array Handle"));
+        arrayHandle.queryData("dmidecode", mem, "Array Handle");
+        articles.push_back(arrayHandle);
+        existArticles.insert("Array Handle");
+
+        ArticleStruct assetTag(tr("Asset Tag"));
+        assetTag.queryData("dmidecode", mem, "Asset Tag");
+        articles.push_back(assetTag);
+        existArticles.insert("Asset Tag");
+
+        ArticleStruct dataWidth(tr("Data Width"));
+        dataWidth.queryData("dmidecode", mem, "Data Width");
+        articles.push_back(dataWidth);
+        existArticles.insert("Data Width");
+
+        ArticleStruct errorInformationHandle(tr("Error Information Handle"));
+        errorInformationHandle.queryData("dmidecode", mem, "Error Information Handle");
+        articles.push_back(errorInformationHandle);
+        existArticles.insert("Error Information Handle");
+
+        ArticleStruct set(tr("Set"));
+        set.queryData("dmidecode", mem, "Set");
+        articles.push_back(set);
+        existArticles.insert("Set");
+
+        ArticleStruct totalWidth(tr("Total Width"));
+        totalWidth.queryData("dmidecode", mem, "Total Width");
+        articles.push_back(totalWidth);
+        existArticles.insert("Total Width");
+
+        ArticleStruct typeDetail(tr("Type Detail"));
+        typeDetail.queryData("dmidecode", mem, "Type Detail");
+        articles.push_back(typeDetail);
+        existArticles.insert("Type Detail");
 
 //        if (mem.contains("size", Qt::CaseInsensitive)) {
 //            DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);

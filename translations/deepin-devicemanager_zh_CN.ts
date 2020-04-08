@@ -399,48 +399,58 @@
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="166"/>
-        <location filename="../src/cpuwidget.cpp" line="194"/>
-        <location filename="../src/cpuwidget.cpp" line="274"/>
-        <location filename="../src/cpuwidget.cpp" line="277"/>
-        <location filename="../src/cpuwidget.cpp" line="279"/>
+        <location filename="../src/cpuwidget.cpp" line="210"/>
+        <location filename="../src/cpuwidget.cpp" line="290"/>
+        <location filename="../src/cpuwidget.cpp" line="293"/>
+        <location filename="../src/cpuwidget.cpp" line="295"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="274"/>
-        <location filename="../src/cpuwidget.cpp" line="277"/>
-        <location filename="../src/cpuwidget.cpp" line="279"/>
+        <location filename="../src/cpuwidget.cpp" line="290"/>
+        <location filename="../src/cpuwidget.cpp" line="293"/>
+        <location filename="../src/cpuwidget.cpp" line="295"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="172"/>
-        <location filename="../src/cpuwidget.cpp" line="200"/>
-        <location filename="../src/cpuwidget.cpp" line="274"/>
-        <location filename="../src/cpuwidget.cpp" line="277"/>
-        <location filename="../src/cpuwidget.cpp" line="279"/>
+        <location filename="../src/cpuwidget.cpp" line="216"/>
+        <location filename="../src/cpuwidget.cpp" line="290"/>
+        <location filename="../src/cpuwidget.cpp" line="293"/>
+        <location filename="../src/cpuwidget.cpp" line="295"/>
         <source>Architecture</source>
         <translation>架构</translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="277"/>
+        <location filename="../src/cpuwidget.cpp" line="195"/>
+        <source>Siblings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="197"/>
+        <source>WP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="293"/>
         <source>Max Speed</source>
         <translation>最大频率</translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="279"/>
+        <location filename="../src/cpuwidget.cpp" line="295"/>
         <source>Speed</source>
         <translation>频率</translation>
     </message>
     <message>
-        <location filename="../src/cpuwidget.cpp" line="291"/>
-        <location filename="../src/cpuwidget.cpp" line="310"/>
+        <location filename="../src/cpuwidget.cpp" line="307"/>
+        <location filename="../src/cpuwidget.cpp" line="326"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
         <source>Sockets</source>
-        <translation type="vanished">处理器</translation>
+        <translation>处理器</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="107"/>
@@ -449,94 +459,156 @@
     </message>
     <message>
         <source>Processor(s)</source>
-        <translation type="vanished">逻辑处理器</translation>
+        <translation>逻辑处理器</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="167"/>
-        <location filename="../src/cpuwidget.cpp" line="195"/>
+        <location filename="../src/cpuwidget.cpp" line="211"/>
         <source>CPU ID</source>
         <translation>处理器ID</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="168"/>
-        <location filename="../src/cpuwidget.cpp" line="196"/>
+        <location filename="../src/cpuwidget.cpp" line="212"/>
         <source>Core ID</source>
         <translation>核心ID</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="169"/>
-        <location filename="../src/cpuwidget.cpp" line="197"/>
+        <location filename="../src/cpuwidget.cpp" line="213"/>
         <source>Threads</source>
         <translation>线程数</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="170"/>
-        <location filename="../src/cpuwidget.cpp" line="198"/>
+        <location filename="../src/cpuwidget.cpp" line="214"/>
         <source>Current Speed</source>
         <translation>当前频率</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="171"/>
-        <location filename="../src/cpuwidget.cpp" line="199"/>
+        <location filename="../src/cpuwidget.cpp" line="215"/>
         <source>BogoMIPS</source>
         <translation>BogoMIPS</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="173"/>
-        <location filename="../src/cpuwidget.cpp" line="201"/>
+        <location filename="../src/cpuwidget.cpp" line="217"/>
         <source>CPU Family</source>
         <translation>家族</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="174"/>
-        <location filename="../src/cpuwidget.cpp" line="202"/>
+        <location filename="../src/cpuwidget.cpp" line="218"/>
         <source>Model</source>
         <translation>型号</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="175"/>
-        <location filename="../src/cpuwidget.cpp" line="203"/>
+        <location filename="../src/cpuwidget.cpp" line="219"/>
         <source>Stepping</source>
         <translation>步进</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="176"/>
-        <location filename="../src/cpuwidget.cpp" line="204"/>
+        <location filename="../src/cpuwidget.cpp" line="220"/>
         <source>L1d Cache</source>
         <translation>L1缓存（数据）</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="177"/>
-        <location filename="../src/cpuwidget.cpp" line="205"/>
+        <location filename="../src/cpuwidget.cpp" line="221"/>
         <source>L1i Cache</source>
         <translation>L1缓存（指令）</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="178"/>
-        <location filename="../src/cpuwidget.cpp" line="206"/>
+        <location filename="../src/cpuwidget.cpp" line="222"/>
         <source>L2 Cache</source>
         <translation>L2缓存</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="179"/>
-        <location filename="../src/cpuwidget.cpp" line="207"/>
+        <location filename="../src/cpuwidget.cpp" line="223"/>
         <source>L3 Cache</source>
         <translation>L3缓存</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="180"/>
-        <location filename="../src/cpuwidget.cpp" line="208"/>
+        <location filename="../src/cpuwidget.cpp" line="224"/>
         <source>Flags</source>
         <translation>特性</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="181"/>
+        <location filename="../src/cpuwidget.cpp" line="225"/>
         <source>Virtualization</source>
         <translation>虚拟化</translation>
     </message>
     <message>
+        <location filename="../src/cpuwidget.cpp" line="182"/>
+        <source>Address Sizes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="183"/>
+        <source>APICID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/cpuwidget.cpp" line="184"/>
-        <location filename="../src/cpuwidget.cpp" line="212"/>
+        <source>Bugs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="185"/>
+        <source>Cache Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="186"/>
+        <source>Cache Alignment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="187"/>
+        <source>Clflush Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="188"/>
+        <source>CPU Cores</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="189"/>
+        <source>CPUID Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="190"/>
+        <source>FPU</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="191"/>
+        <source>FPU Exception</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="192"/>
+        <source>Initial APICID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="193"/>
+        <source>Microcode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/cpuwidget.cpp" line="194"/>
+        <location filename="../src/cpuwidget.cpp" line="200"/>
+        <location filename="../src/cpuwidget.cpp" line="228"/>
         <source>Processor</source>
         <translation>逻辑处理器</translation>
     </message>
@@ -869,13 +941,13 @@
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="61"/>
-        <location filename="../src/displayadapterwidget.cpp" line="163"/>
+        <location filename="../src/displayadapterwidget.cpp" line="198"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="72"/>
-        <location filename="../src/displayadapterwidget.cpp" line="163"/>
+        <location filename="../src/displayadapterwidget.cpp" line="198"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
@@ -938,7 +1010,42 @@
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="186"/>
+        <location filename="../src/displayadapterwidget.cpp" line="129"/>
+        <source>Type</source>
+        <translation type="unfinished">类型</translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="134"/>
+        <source>bus info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="139"/>
+        <source>ioport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="144"/>
+        <source>irq</source>
+        <translation type="unfinished">中断</translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="149"/>
+        <source>latency</source>
+        <translation type="unfinished">延迟</translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="154"/>
+        <source>memory</source>
+        <translation type="unfinished">内存地址</translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="159"/>
+        <source>physical id</source>
+        <translation type="unfinished">物理ID</translation>
+    </message>
+    <message>
+        <location filename="../src/displayadapterwidget.cpp" line="221"/>
         <source>Failed to find display adapter information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1457,230 +1564,282 @@
 <context>
     <name>MemoryWidget</name>
     <message>
-        <location filename="../src/memorywidget.cpp" line="33"/>
-        <location filename="../src/memorywidget.cpp" line="72"/>
+        <location filename="../src/memorywidget.cpp" line="32"/>
+        <location filename="../src/memorywidget.cpp" line="102"/>
         <source>Memory</source>
         <translation>内存</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="90"/>
+        <location filename="../src/memorywidget.cpp" line="120"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="90"/>
-        <location filename="../src/memorywidget.cpp" line="212"/>
-        <location filename="../src/memorywidget.cpp" line="451"/>
+        <location filename="../src/memorywidget.cpp" line="120"/>
+        <location filename="../src/memorywidget.cpp" line="241"/>
+        <location filename="../src/memorywidget.cpp" line="515"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="90"/>
-        <location filename="../src/memorywidget.cpp" line="237"/>
+        <location filename="../src/memorywidget.cpp" line="58"/>
+        <location filename="../src/memorywidget.cpp" line="120"/>
+        <location filename="../src/memorywidget.cpp" line="266"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="90"/>
-        <location filename="../src/memorywidget.cpp" line="466"/>
+        <location filename="../src/memorywidget.cpp" line="120"/>
+        <location filename="../src/memorywidget.cpp" line="530"/>
         <source>Speed</source>
         <comment>memory info</comment>
         <translation>速度</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="90"/>
-        <location filename="../src/memorywidget.cpp" line="143"/>
+        <location filename="../src/memorywidget.cpp" line="73"/>
+        <location filename="../src/memorywidget.cpp" line="120"/>
+        <location filename="../src/memorywidget.cpp" line="172"/>
         <source>Size</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="139"/>
+        <location filename="../src/memorywidget.cpp" line="63"/>
+        <source>Description</source>
+        <translation type="unfinished">描述</translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="68"/>
+        <source>Physical ID</source>
+        <translation type="unfinished">物理ID</translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="78"/>
+        <source>Slot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="168"/>
         <source>Slot Count</source>
         <translation>插槽数</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="178"/>
-        <location filename="../src/memorywidget.cpp" line="415"/>
+        <location filename="../src/memorywidget.cpp" line="207"/>
+        <location filename="../src/memorywidget.cpp" line="479"/>
         <source>Maximum Capacity</source>
         <translation>最大容量</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="191"/>
-        <location filename="../src/memorywidget.cpp" line="430"/>
+        <location filename="../src/memorywidget.cpp" line="220"/>
+        <location filename="../src/memorywidget.cpp" line="494"/>
         <source>Upgradeable</source>
         <translation>支持升级</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="192"/>
-        <location filename="../src/memorywidget.cpp" line="431"/>
+        <location filename="../src/memorywidget.cpp" line="221"/>
+        <location filename="../src/memorywidget.cpp" line="495"/>
         <source>Yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="192"/>
-        <location filename="../src/memorywidget.cpp" line="431"/>
+        <location filename="../src/memorywidget.cpp" line="221"/>
+        <location filename="../src/memorywidget.cpp" line="495"/>
         <source>No</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="207"/>
+        <location filename="../src/memorywidget.cpp" line="236"/>
         <source>Model</source>
         <comment>memory&apos;s model</comment>
         <translation>型号</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="217"/>
-        <location filename="../src/memorywidget.cpp" line="446"/>
+        <location filename="../src/memorywidget.cpp" line="246"/>
+        <location filename="../src/memorywidget.cpp" line="510"/>
         <source>Locator</source>
         <translation>插槽</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="222"/>
+        <location filename="../src/memorywidget.cpp" line="251"/>
         <source>Size</source>
         <comment>memory&apos;s size</comment>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="242"/>
+        <location filename="../src/memorywidget.cpp" line="271"/>
         <source>Speed</source>
         <comment>memory&apos;s Speed</comment>
         <translation>速度</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="247"/>
+        <location filename="../src/memorywidget.cpp" line="276"/>
         <source>Serial Number</source>
         <translation>序列号</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="252"/>
+        <location filename="../src/memorywidget.cpp" line="281"/>
         <source>Form Factor</source>
         <translation>尺寸型号</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="257"/>
+        <location filename="../src/memorywidget.cpp" line="286"/>
         <source>Rank</source>
         <translation>位列</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="262"/>
+        <location filename="../src/memorywidget.cpp" line="291"/>
         <source>Bank Locator</source>
         <translation>内存通道</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="267"/>
-        <location filename="../src/memorywidget.cpp" line="496"/>
+        <location filename="../src/memorywidget.cpp" line="296"/>
+        <location filename="../src/memorywidget.cpp" line="560"/>
         <source>Configured Voltage</source>
         <comment>memory info</comment>
         <translation>配置电压</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="272"/>
+        <location filename="../src/memorywidget.cpp" line="301"/>
         <source>Minimum Voltage</source>
         <comment>memory&apos;s config</comment>
         <translation>最低电压</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="277"/>
+        <location filename="../src/memorywidget.cpp" line="306"/>
         <source>Maximum Voltage</source>
         <comment>memory&apos;s config</comment>
         <translation>最高电压</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="282"/>
+        <location filename="../src/memorywidget.cpp" line="311"/>
         <source>Configured Speed</source>
         <translation>配置频率</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="293"/>
-        <location filename="../src/memorywidget.cpp" line="350"/>
-        <location filename="../src/memorywidget.cpp" line="527"/>
+        <location filename="../src/memorywidget.cpp" line="316"/>
+        <source>Array Handle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="321"/>
+        <source>Asset Tag</source>
+        <translation type="unfinished">资产编号</translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="326"/>
+        <source>Data Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="331"/>
+        <source>Error Information Handle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="336"/>
+        <source>Set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="341"/>
+        <source>Total Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="346"/>
+        <source>Type Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/memorywidget.cpp" line="357"/>
+        <location filename="../src/memorywidget.cpp" line="414"/>
+        <location filename="../src/memorywidget.cpp" line="591"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="294"/>
+        <location filename="../src/memorywidget.cpp" line="358"/>
         <source>Unknown memory</source>
         <translation>未知内存</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="81"/>
+        <location filename="../src/memorywidget.cpp" line="111"/>
         <source>Failed to get memory information</source>
         <translation>获取内存信息失败</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="384"/>
+        <location filename="../src/memorywidget.cpp" line="448"/>
         <source>Slot Count</source>
         <comment>memory info</comment>
         <translation>插槽数</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="388"/>
-        <location filename="../src/memorywidget.cpp" line="396"/>
+        <location filename="../src/memorywidget.cpp" line="452"/>
+        <location filename="../src/memorywidget.cpp" line="460"/>
         <source>Size</source>
         <comment>memory info</comment>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="461"/>
+        <location filename="../src/memorywidget.cpp" line="525"/>
         <source>Type</source>
         <comment>memory info</comment>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="471"/>
+        <location filename="../src/memorywidget.cpp" line="535"/>
         <source>Serial Number</source>
         <comment>memory info</comment>
         <translation>序列号</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="476"/>
+        <location filename="../src/memorywidget.cpp" line="540"/>
         <source>Model Part Number</source>
         <comment>memory info</comment>
         <translation>部件号码</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="481"/>
+        <location filename="../src/memorywidget.cpp" line="545"/>
         <source>Form Factor</source>
         <comment>memory info</comment>
         <translation>尺寸型号</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="486"/>
+        <location filename="../src/memorywidget.cpp" line="550"/>
         <source>Rank</source>
         <comment>memory info</comment>
         <translation>位列</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="491"/>
+        <location filename="../src/memorywidget.cpp" line="555"/>
         <source>Bank Locator</source>
         <comment>memory info</comment>
         <translation>内存通道</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="501"/>
+        <location filename="../src/memorywidget.cpp" line="565"/>
         <source>Minimum Voltage</source>
         <translation>最低电压</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="506"/>
+        <location filename="../src/memorywidget.cpp" line="570"/>
         <source>Maximum Voltage</source>
         <comment>memory info</comment>
         <translation>最高电压</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="511"/>
+        <location filename="../src/memorywidget.cpp" line="575"/>
         <source>Configured Speed</source>
         <comment>memory info</comment>
         <translation>配置频率</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="529"/>
+        <location filename="../src/memorywidget.cpp" line="593"/>
         <source>Status</source>
         <comment>memory info</comment>
         <translation>状态</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="530"/>
+        <location filename="../src/memorywidget.cpp" line="594"/>
         <source>Bad</source>
         <comment>memory info</comment>
         <translation>差</translation>
@@ -1695,26 +1854,26 @@
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="85"/>
-        <location filename="../src/monitorwidget.cpp" line="246"/>
+        <location filename="../src/monitorwidget.cpp" line="247"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="86"/>
-        <location filename="../src/monitorwidget.cpp" line="246"/>
-        <location filename="../src/monitorwidget.cpp" line="360"/>
+        <location filename="../src/monitorwidget.cpp" line="247"/>
+        <location filename="../src/monitorwidget.cpp" line="361"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="87"/>
-        <location filename="../src/monitorwidget.cpp" line="361"/>
+        <location filename="../src/monitorwidget.cpp" line="362"/>
         <source>Resolution</source>
         <translation>分辨率</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="88"/>
-        <location filename="../src/monitorwidget.cpp" line="362"/>
+        <location filename="../src/monitorwidget.cpp" line="363"/>
         <source>Support Resolution</source>
         <translation>支持分辨率</translation>
     </message>
@@ -1725,7 +1884,7 @@
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="91"/>
-        <location filename="../src/monitorwidget.cpp" line="364"/>
+        <location filename="../src/monitorwidget.cpp" line="365"/>
         <source>Size</source>
         <translation>屏幕尺寸</translation>
     </message>
@@ -1736,28 +1895,28 @@
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="131"/>
-        <location filename="../src/monitorwidget.cpp" line="363"/>
+        <location filename="../src/monitorwidget.cpp" line="364"/>
         <source>Manufacture Date</source>
         <translation>生产日期</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="134"/>
         <location filename="../src/monitorwidget.cpp" line="152"/>
-        <location filename="../src/monitorwidget.cpp" line="369"/>
-        <location filename="../src/monitorwidget.cpp" line="380"/>
+        <location filename="../src/monitorwidget.cpp" line="370"/>
+        <location filename="../src/monitorwidget.cpp" line="381"/>
         <source>Year</source>
         <translation>年</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="137"/>
-        <location filename="../src/monitorwidget.cpp" line="202"/>
+        <location filename="../src/monitorwidget.cpp" line="203"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="140"/>
-        <location filename="../src/monitorwidget.cpp" line="369"/>
-        <location filename="../src/monitorwidget.cpp" line="380"/>
+        <location filename="../src/monitorwidget.cpp" line="370"/>
+        <location filename="../src/monitorwidget.cpp" line="381"/>
         <source>Week</source>
         <translation>周</translation>
     </message>
@@ -1767,12 +1926,12 @@
         <translation>型号日期（非生产日期）</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="373"/>
+        <location filename="../src/monitorwidget.cpp" line="374"/>
         <source>Notebook monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="384"/>
+        <location filename="../src/monitorwidget.cpp" line="385"/>
         <source>External monitor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1786,26 +1945,26 @@
         <translation>主显示器</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="201"/>
+        <location filename="../src/monitorwidget.cpp" line="202"/>
         <source>Connect Type</source>
         <translation>连接类型</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="236"/>
-        <location filename="../src/monitorwidget.cpp" line="239"/>
-        <location filename="../src/monitorwidget.cpp" line="267"/>
-        <location filename="../src/monitorwidget.cpp" line="280"/>
-        <location filename="../src/monitorwidget.cpp" line="332"/>
+        <location filename="../src/monitorwidget.cpp" line="237"/>
+        <location filename="../src/monitorwidget.cpp" line="240"/>
+        <location filename="../src/monitorwidget.cpp" line="268"/>
+        <location filename="../src/monitorwidget.cpp" line="281"/>
+        <location filename="../src/monitorwidget.cpp" line="333"/>
         <source>inch</source>
         <translation>英寸</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="250"/>
+        <location filename="../src/monitorwidget.cpp" line="251"/>
         <source>Failed to find monitor information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="333"/>
+        <location filename="../src/monitorwidget.cpp" line="334"/>
         <source>cm</source>
         <comment>size unit</comment>
         <translation>cm</translation>
@@ -2086,70 +2245,160 @@
         <translation>网络适配器</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="40"/>
+        <location filename="../src/networkadapterwidget.cpp" line="39"/>
         <source>No network adapter found</source>
         <translation>未发现网络适配器</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="52"/>
-        <location filename="../src/networkadapterwidget.cpp" line="144"/>
+        <location filename="../src/networkadapterwidget.cpp" line="50"/>
+        <location filename="../src/networkadapterwidget.cpp" line="226"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="57"/>
-        <location filename="../src/networkadapterwidget.cpp" line="144"/>
+        <location filename="../src/networkadapterwidget.cpp" line="55"/>
+        <location filename="../src/networkadapterwidget.cpp" line="226"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="62"/>
+        <location filename="../src/networkadapterwidget.cpp" line="60"/>
         <source>Description</source>
         <translation>描述</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="67"/>
+        <location filename="../src/networkadapterwidget.cpp" line="65"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="72"/>
+        <location filename="../src/networkadapterwidget.cpp" line="70"/>
         <source>Bus Info</source>
         <translation>总线信息</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="77"/>
+        <location filename="../src/networkadapterwidget.cpp" line="75"/>
         <source>Logical Name</source>
         <translation>逻辑名称</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="82"/>
+        <location filename="../src/networkadapterwidget.cpp" line="80"/>
         <source>MAC Address</source>
         <translation>物理地址</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="87"/>
+        <location filename="../src/networkadapterwidget.cpp" line="85"/>
         <source>Speed</source>
         <comment>Network Adapter</comment>
         <translation>速度</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="92"/>
+        <location filename="../src/networkadapterwidget.cpp" line="90"/>
         <source>Width</source>
         <comment>Network Adapter</comment>
         <translation>位宽</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="97"/>
+        <location filename="../src/networkadapterwidget.cpp" line="95"/>
         <source>Clock</source>
         <comment>Network Adapter</comment>
         <translation>时钟频率</translation>
     </message>
     <message>
-        <location filename="../src/networkadapterwidget.cpp" line="102"/>
+        <location filename="../src/networkadapterwidget.cpp" line="100"/>
         <source>Capabilities</source>
         <comment>Network Adapter</comment>
         <translation>功能</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="105"/>
+        <source>Type</source>
+        <translation type="unfinished">类型</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="110"/>
+        <source>autonegotiation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="115"/>
+        <source>broadcast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="120"/>
+        <source>capacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="125"/>
+        <source>driver</source>
+        <translation type="unfinished">驱动</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="130"/>
+        <source>driverversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="135"/>
+        <source>duplex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="140"/>
+        <source>firmware</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="145"/>
+        <source>ioport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="150"/>
+        <source>ip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="155"/>
+        <source>irq</source>
+        <translation type="unfinished">中断</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="160"/>
+        <source>latency</source>
+        <translation type="unfinished">延迟</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="165"/>
+        <source>link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="170"/>
+        <source>memory</source>
+        <translation type="unfinished">内存地址</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="175"/>
+        <source>multicast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="180"/>
+        <source>physical id</source>
+        <translation type="unfinished">物理ID</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="185"/>
+        <source>port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="190"/>
+        <source>size</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2614,13 +2863,13 @@
         <translation type="vanished">功能</translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="345"/>
+        <location filename="../src/printerwidget.cpp" line="344"/>
         <source>printer-info</source>
         <comment>Printer Info,shown on first column of table&apos;s head</comment>
         <translation>名称</translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="346"/>
+        <location filename="../src/printerwidget.cpp" line="345"/>
         <source>printer-make-and-model</source>
         <comment>Printer Info,shown on second column of table&apos;s head </comment>
         <translation>制造商和型号</translation>

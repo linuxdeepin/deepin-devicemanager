@@ -31,5 +31,7 @@ public:
     explicit OtherPciDeviceWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+
+    void loadWidget();
 };
 

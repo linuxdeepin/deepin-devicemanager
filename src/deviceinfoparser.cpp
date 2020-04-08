@@ -379,7 +379,7 @@ QMap<QString, QMap<QString, QString>> DeviceInfoParser::getLshwMeoryList()
 }
 
 //according to lshw webpage,*-storage indicates storage controller,not real storage device,
-//but real device should has same attribute with the controller,such as prodcut,vender
+//but real device should has same attribute with the controller,such as product,vender
 QStringList DeviceInfoParser::getLshwDiskNameList()
 {
     checkValueFun_t func = [](const QString & fk)->bool {
@@ -491,7 +491,8 @@ QStringList DeviceInfoParser::getHwinfoOtherUSBList()
                 fk.contains("Camera", Qt::CaseInsensitive) ||
                 fk .contains("CD-ROM", Qt::CaseInsensitive) ||
                 fk .contains("disk", Qt::CaseInsensitive) ||
-                fk .contains("Bluetooth", Qt::CaseInsensitive))
+                fk .contains("Bluetooth", Qt::CaseInsensitive) ||
+                fk.contains("BCM20702A0", Qt::CaseInsensitive))
         {
             return false;
         }
@@ -505,7 +506,8 @@ QStringList DeviceInfoParser::getHwinfoOtherUSBList()
                     deviceVal.contains("Camera", Qt::CaseInsensitive) ||
                     deviceVal .contains("CD-ROM", Qt::CaseInsensitive) ||
                     deviceVal .contains("disk", Qt::CaseInsensitive) ||
-                    deviceVal .contains("Bluetooth", Qt::CaseInsensitive)) {
+                    deviceVal .contains("Bluetooth", Qt::CaseInsensitive) ||
+                    deviceVal .contains("BCM20702A0", Qt::CaseInsensitive)) {
                 return false;
             }
         }
@@ -725,6 +727,9 @@ QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
                 }
                 // 18403
                 if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("storage", Qt::CaseInsensitive)) {
+                    return false;
+                }
+                if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("printer", Qt::CaseInsensitive)) {
                     return false;
                 }
             }

@@ -31,5 +31,7 @@ public:
     explicit OtherDevicesWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+
+    void loadWidget();
 };
 
