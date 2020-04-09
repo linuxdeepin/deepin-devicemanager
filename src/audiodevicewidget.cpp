@@ -115,10 +115,10 @@ void AudiodeviceWidget::addLshwAudioInfo(const QString &item, QStringList &tabIt
     if (overviewInfo_.value.isEmpty() == false) {
         overviewInfo_.value += " / ";
     }
-    if (vendor.isValid() && name.value.contains(vendor.value, Qt::CaseInsensitive) == false) {
-        overviewInfo_.value += vendor.value;
-        overviewInfo_.value += " ";
-    }
+//    if (vendor.isValid() && name.value.contains(vendor.value, Qt::CaseInsensitive) == false) {
+//        overviewInfo_.value += vendor.value;
+//        overviewInfo_.value += " ";
+//    }
     overviewInfo_.value += name.value;
 }
 
@@ -154,6 +154,16 @@ void AudiodeviceWidget::addCatAudioInfo(const QString &item, QStringList &tabIte
     // 获取表格内容
     tabItem.append(name.value);
     tabItem.append(vendor.value);
+
+    // 获取概况
+    if (overviewInfo_.value.isEmpty() == false) {
+        overviewInfo_.value += " / ";
+    }
+//    if (vendor.isValid() && name.value.contains(vendor.value, Qt::CaseInsensitive) == false) {
+//        overviewInfo_.value += vendor.value;
+//        overviewInfo_.value += " ";
+//    }
+    overviewInfo_.value += name.value;
 }
 
 void AudiodeviceWidget::getBusInfoAndName(const QString &item, ArticleStruct &busInfo, ArticleStruct &name, QSet<QString> &existArticles)
