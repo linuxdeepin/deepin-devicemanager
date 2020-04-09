@@ -33,5 +33,8 @@ public:
 
     /**@brief:如果从lshw读取不到摄像机的信息，则从hwinfo里面获取*/
     void initDataFromHwinfo();
+
+    /**@brief:重构界面显示部分*/
+    void initWidgetEx();
 };
 

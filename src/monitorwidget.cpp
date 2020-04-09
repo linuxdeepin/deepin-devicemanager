@@ -61,7 +61,13 @@ bool findAspectRatio(int width, int height, int &ar_w, int &ar_h)
 
 MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Monitor"))
 {
-    initWidget();
+//    name.name = tr("Name");
+//    vendor.name = tr("Vendor");
+    currentResolution.name = tr("Resolution");
+    resolutionList.name = tr("Support Resolution");
+    displayRatio.name = tr("Display Ratio");
+//    monitorSize.name = tr("Size");
+    initWidgetEX();
 }
 
 void MonitorWidget::initWidget()
@@ -70,9 +76,6 @@ void MonitorWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
-    if(DeviceInfoParser::Instance().isHuaweiAndroidUos()) {
-        return initHwMonitor();
-    }
     QStringList hwinfMonitorList = DeviceInfoParser::Instance().getHwinfoMonitorList();
     QStringList xrandrMonitorList = DeviceInfoParser::Instance().getXrandrMonitorList();
 
@@ -87,7 +90,6 @@ void MonitorWidget::initWidget()
         ArticleStruct currentResolution(tr("Resolution"));
         ArticleStruct resolutionList(tr("Support Resolution"));
         ArticleStruct displayRatio(tr("Display Ratio"));
-
         ArticleStruct monitorSize(tr("Size"));
 
         double inch = 0.0;
@@ -97,7 +99,6 @@ void MonitorWidget::initWidget()
 
             name.queryData("hwinfo", monitor, "Model");
             name.value = name.value.remove("\"");
-
             existArticles.insert("Model");
 
             vendor.queryData("hwinfo", monitor, "Vendor");
@@ -252,6 +253,175 @@ void MonitorWidget::initWidget()
     }
 }
 
+void MonitorWidget::initWidgetEX()
+{
+    QStringList hwinfoList = DeviceInfoParser::Instance().getHwinfoMonitorList();
+    QStringList xrandrList = DeviceInfoParser::Instance().getXrandrMonitorList();
+
+    initWidgetFromBoth(hwinfoList,xrandrList);
+
+    if(hwinfoList.size() > 1){
+        QStringList headers = { tr("Name"),  tr("Vendor") };
+        addTable( headers, tabList);
+    }
+}
+
+void MonitorWidget::addDeviceFromXrandr(const QString& monitor)
+{
+    ArticleStruct primaryMonitor(tr("Primary Monitor"));
+    primaryMonitor.value = "No";
+    if ( true == monitor.contains("primary", Qt::CaseInsensitive) ) {
+        primaryMonitor.value = "Yes";
+    }
+    articles.push_back(primaryMonitor);
+
+    currentResolution.queryData("xrandr", monitor, "Resolution");
+    parseCurResolution(currentResolution, resolutionList);
+    articles.push_back(currentResolution);
+
+    displayRatio.value = parseDisplayRatio(currentResolution.value);
+    articles.push_back(displayRatio);//    resolutionList.queryData("hwinfo", monitor, "Support Resolution");
+    //    articles.push_back(resolutionList);
+    //    existArticles.insert("Support Resolution");
+
+    ArticleStruct connectType(tr("Connect Type"));
+    connectType.value = monitor;
+    int index = connectType.value.indexOf(' ');
+    if ( index > 0 ) {
+        connectType.value = connectType.value.mid(0, index);
+    }
+    index = connectType.value.indexOf('-');
+    if ( index > 0 ) {
+        connectType.value = connectType.value.mid(0, index);
+    }
+    articles.push_back(connectType);
+
+}
+
+void MonitorWidget::addDeviceFromHwinfo(const QString& monitor,QString& deviceName,QSize& size,QStringList& tabItem)
+{
+    ArticleStruct name(tr("Name"));
+    ArticleStruct vendor(tr("Vendor"));
+    ArticleStruct monitorSize(tr("Size"));
+
+    name.queryData("hwinfo", monitor, "Model");
+    name.value = name.value.remove("\"");
+    existArticles.insert("Model");
+    deviceName = name.value;
+
+    vendor.queryData("hwinfo", monitor, "Vendor");
+    QString abb;
+    QRegExp rx("(^[\\s\\S]*)\"([\\s\\S]+)\"$");
+    if ( rx.exactMatch(vendor.value) ) {
+        abb = rx.cap(1).trimmed();
+        vendor.value = rx.cap(2).trimmed();
+    }
+    existArticles.insert("Vendor");
+
+    name.value.remove(abb);
+
+    if (name.value.contains(vendor.value, Qt::CaseInsensitive) == false) {
+        name.value = vendor.value + " " + name.value;
+    }
+    articles.push_back(name);
+    articles.push_back(vendor);
+
+    ArticleStruct serial(tr("Serial Number"));
+    serial.queryData("hwinfo", monitor, "Serial ID");
+    serial.value.remove("\"");
+    articles.push_back(serial);
+    existArticles.insert("Serial ID");
+
+    QString sizeDescrition = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Size");
+    QString inchValue = parseMonitorSize(sizeDescrition,size);
+    monitorSize.value = inchValue;
+    articles.push_back(monitorSize);
+    existArticles.insert("Size");
+
+    // 将信息添加到概况
+    addOverviewInfo(name.value + "  (" + monitorSize.value + ")");
+
+    ArticleStruct mDate(tr("Manufacture Date"));
+    mDate.queryData("hwinfo", monitor, "Year of Manufacture");
+    if ( mDate.isValid() && mDate.value.toInt() != 0) {
+        mDate.value = mDate.value + tr("Year");
+        QString mw = DeviceInfoParser::Instance().queryData("hwinfo", monitor, "Week of Manufacture");
+        if ( mw.isEmpty() == false && mw != tr("Unknown") && mw != "0") {
+            mDate.value += " ";
+            mDate.value += mw;
+            mDate.value += tr("Week");
+        }
+        articles.push_back(mDate);
+
+        existArticles.insert("Year of Manufacture");
+        existArticles.insert("Week of Manufacture");
+    }
+
+
+    ArticleStruct tmy(tr("The Model Year(Not Manufacture Date)"));
+    tmy.queryData("hwinfo", monitor, "The Model Year", existArticles );
+    if ( tmy.isValid() ) {
+        tmy.value = tmy.value + tr("Year");
+        articles.push_back(tmy);
+    }
+    existArticles.insert("The Model Year(Not Manufacture Date");
+
+    resolutionList.queryData("hwinfo", monitor, "Support Resolution");
+    articles.push_back(resolutionList);
+    existArticles.insert("Support Resolution");
+
+    tabItem.append(name.value);
+    tabItem.append(vendor.value);
+}
+
+void MonitorWidget::initWidgetFromBoth(const QStringList& hwinfoList,const QStringList& xrandrList)
+{
+    foreach(const QString& monitor,hwinfoList){
+        articles.clear();
+        existArticles.clear();
+        QString deviceName;
+        QSize size;
+        QStringList tabItem;
+        addDeviceFromHwinfo(monitor,deviceName,size,tabItem);
+        getInfoFromXrandr(size,xrandrList);
+
+        int num = hwinfoList.size();
+
+        if(num <= 1){
+            addDevice(deviceName,articles,num);
+        }else {
+            addSubInfo(deviceName,articles);
+        }
+
+        if(num > 1){
+            tabList.append(tabItem);
+        }
+    }
+}
+
+void MonitorWidget::getInfoFromXrandr(const QSize& size,const QStringList& xrandrList)
+{
+    foreach(const QString& monitor,xrandrList){
+        ArticleStruct monitorSize(tr("Size"));
+        monitorSize.queryData("xrandr", monitor, "Size");
+        QSize xsize;
+        parseMonitorSize(monitorSize.value,xsize);
+        if(xsize.width() == size.width() && xsize.height() == size.height()){
+            addDeviceFromXrandr(monitor);
+        }
+    }
+}
+
+void MonitorWidget::addOverviewInfo(const QString& info)
+{
+    if (overviewInfo_.value.isEmpty() == false) {
+        overviewInfo_.value += QString(" / ");
+    }
+
+    overviewInfo_.value += info;
+}
+
+
 QString MonitorWidget::parseMonitorSize(const QString &sizeDescription, double &inch, QSize &retSize)
 {
     inch = 0.0;
@@ -278,6 +448,101 @@ QString MonitorWidget::parseMonitorSize(const QString &sizeDescription, double &
         width /= 2.54;
         height /= 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+
+    return res;
+}
+
+QString MonitorWidget::parseMonitorSize(const QString& sizeDescription,QSize& retSize)
+{
+    QString res = sizeDescription;
+    QRegExp re("^([\\d]*)x([\\d]*) mm$");
+    if ( re.exactMatch(sizeDescription) ) {
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        retSize = QSize(width, height);
+        width /= 2.54;
+        height /= 2.54;
+        double inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+
+    re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
+    if ( re.exactMatch(sizeDescription) ) {
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        retSize = QSize(width, height);
+        width /= 2.54;
+        height /= 2.54;
+        double inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+
+    return res;
+}
+
+QString MonitorWidget::parseMonitorSize(const QString& sizeDescription,double& inch)
+{
+    inch = 0.0;
+
+    QString res = sizeDescription;
+    QRegExp re("^([\\d]*)x([\\d]*) mm$");
+    if ( re.exactMatch(sizeDescription) ) {
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        width /= 2.54;
+        height /= 2.54;
+        inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+
+    re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
+    if ( re.exactMatch(sizeDescription) ) {
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        width /= 2.54;
+        height /= 2.54;
+        inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+
+    return res;
+}
+
+
+QString MonitorWidget::parseMonitorSize(const QString& sizeDescription)
+{
+    QString res = sizeDescription;
+    QRegExp re("^([\\d]*)x([\\d]*) mm$");
+    if ( re.exactMatch(sizeDescription) ) {
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        width /= 2.54;
+        height /= 2.54;
+        double inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+
+    re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
+    if ( re.exactMatch(sizeDescription) ) {
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        width /= 2.54;
+        height /= 2.54;
+        double inch = std::sqrt(width * width + height * height) / 10.0;
         res = QString::number(inch, 10, 1) + " " + tr("inch") + " (";
         res += sizeDescription;
         res += ")";
