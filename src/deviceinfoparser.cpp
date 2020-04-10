@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
  *
  * Author:     AaronZhang <ya.zhang@archermind.com>
@@ -660,7 +660,7 @@ QStringList DeviceInfoParser::getLshwCameraList()
     checkValueFun_t func = [](const QString & fk)->bool {
         if (true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("description"))
         {
-            if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"] == "Video") {
+            if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("video", Qt::CaseInsensitive)) {
                 DeviceInfoParser::Instance().orderedDevices.insert(fk);
                 return true;
             }
