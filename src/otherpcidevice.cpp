@@ -76,10 +76,10 @@ void OtherPciDeviceWidget::loadWidget()
         }
 
         // 把其他PCI信息添加到overviewInfo_中显示到概况中
-        if ( overviewInfo_.value.isEmpty() == true ) {
-            overviewInfo_.value = vendor.value;
-            overviewInfo_.value += " ";
-            overviewInfo_.value += name.value;
+        if (overviewInfo_.value.isEmpty()) {
+            overviewInfo_.value = name.value;
+        } else {
+            overviewInfo_.value += "/" + name.value;
         }
     }
 

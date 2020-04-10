@@ -54,8 +54,10 @@ void UsbdeviceWidget::setTabList(int usbListSize, ArticleStruct &name, ArticleSt
     m_tabList.push_back(tab);
 
     // 添加overview_
-    if (overviewInfo_.isValid()) {
-        overviewInfo_.value += " / ";
+    if (overviewInfo_.value.isEmpty()) {
+        overviewInfo_.value = name.value;
+    } else {
+        overviewInfo_.value += "/" + name.value;
     }
 
     QList<ArticleStruct> overArticle;
