@@ -42,6 +42,7 @@ void DisplayadapterWidget::initWidget()
 
     QStringList displayadapterList = DeviceInfoParser::Instance().getLshwDiaplayadapterList();
     QStringList screenList = DeviceInfoParser::Instance().getXrandrScreenName();
+    QStringList varm = DeviceInfoParser::Instance().getDmesgVram();
 
     for (int i = 0; i < displayadapterList.size(); ++i) {
         articles.clear();
@@ -81,7 +82,9 @@ void DisplayadapterWidget::initWidget()
 
         ArticleStruct graphicMemory(tr("Graphic Memory"));
         //end with a empty char,for avoiding this article to be hidden
-        graphicMemory.value = QString("%1 ").arg(tr("Unknown"));
+//        graphicMemory.value = QString("%1 ").arg(tr("Unknown"));
+
+        graphicMemory.value = DeviceInfoParser::Instance().varmSize;
         articles.push_back(graphicMemory);
         existArticles.insert("Memory");
 

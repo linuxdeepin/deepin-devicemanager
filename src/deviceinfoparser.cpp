@@ -89,6 +89,7 @@ void DeviceInfoParser::refreshDabase()
     emit loadFinished(tr("Loading CPU Info..."));
     loadCatcpuDatabase();
     loadLscpuDatabase();
+    loadDmesgVram();
 
     emit loadFinished(tr("Loading Input Devices Info..."));
     loadCatInputDatabase();
@@ -492,7 +493,8 @@ QStringList DeviceInfoParser::getHwinfoOtherUSBList()
                 fk.contains("CD-ROM", Qt::CaseInsensitive) ||
                 fk.contains("disk", Qt::CaseInsensitive) ||
                 fk.contains("Bluetooth", Qt::CaseInsensitive) ||
-                fk.contains("Printer", Qt::CaseInsensitive))
+                fk.contains("Printer", Qt::CaseInsensitive) ||
+                fk.contains("Unclassified device",Qt::CaseInsensitive))
         {
             return false;
         }
@@ -627,6 +629,11 @@ QStringList DeviceInfoParser::getLshwBluetoothList()
     };
 
     return getMatchToolDeviceList("lshw", &func);
+}
+
+QStringList DeviceInfoParser::getDmesgVram()
+{
+    return getMatchToolDeviceList("dmesgVRAM");
 }
 
 QStringList DeviceInfoParser::getHciconfigBluetoothControllerList()
@@ -1331,6 +1338,55 @@ bool DeviceInfoParser::loadlsb_release()
     DatabaseMap rootlscuDb;
     rootlscuDb["lsb_release"] = lsb_releaseDatabase_;
     toolDatabase_["lsb_release"] = rootlscuDb;
+    return true;
+}
+
+// 为了获得显存的容量
+bool DeviceInfoParser::loadDmesgVram()
+{
+    if(false == executeProcess("sudo dmesg")){
+        return false;
+    }
+    QString dmesgVarm = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile dmesgFile(DEVICEINFO_PATH + "/dmesg.txt");
+    if (false == dmesgFile.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+
+    dmesgVarm = dmesgFile.readAll();
+    dmesgFile.close();
+#endif
+    QStringList  lines = dmesgVarm.split("\n");
+    DatabaseMap db;
+    QString key = "DisplayAdater Video Random Access Memory";
+    QMap<QString, QString> value;
+    foreach (auto line, lines) {
+        if (line.contains("VRAM",Qt::CaseSensitive)) {
+            QString varm = "VRAM";
+            int pos = line.lastIndexOf(":");
+            value.insert(varm, line.mid(pos));
+            // 显存大小
+            varmSize = line.mid(pos);
+            varmSize.remove(":");
+            int pos1 = varmSize.indexOf('M');
+            varmSize = varmSize.mid(0,pos1);
+            uint ivarmSize = varmSize.toUInt(nullptr,10)/1024;
+            varmSize = QString::number(ivarmSize,10) + "GB";
+
+//            QRegExp rxlen("(^\\d+$)(Mit|M)*");
+//            int pos1 = rxlen.indexIn(varmSize);
+//            if(pos1 > -1){
+//                QString value = rxlen.cap(0);//取出数字
+//                QString unit = rxlen.cap(1);//取出单位
+//                uint i = value.toUInt(nullptr,10)/1024;
+//                varmSize = i + "G";
+//            }
+            break;
+        }
+    }
+    db.insert(key, value);
+    toolDatabase_["dmesgVRAM"] = db;
     return true;
 }
 

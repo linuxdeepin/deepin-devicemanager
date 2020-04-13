@@ -144,6 +144,9 @@ public:
 
     QStringList getLshwBluetoothList();
 
+    //获得显存的大小
+    QStringList getDmesgVram();
+
     QStringList getHciconfigBluetoothControllerList();
     QStringList getOtherBluetoothctlPairedAndConnectedDevicesList();
 
@@ -258,7 +261,8 @@ public:
     // USB hwinfo --keybooard
     bool loadKeyboardinfoDatabase();
 
-
+    //获得显存的大小
+    bool loadDmesgVram();
 
 
     /**
@@ -300,6 +304,7 @@ public:
     QString homeUrl_;
     QString lsbRelease_;
     QString osVersion_;
+    QString varmSize = "Unknown";
     DatabaseMap                      m_KeyBoardInfo;
 
 public:

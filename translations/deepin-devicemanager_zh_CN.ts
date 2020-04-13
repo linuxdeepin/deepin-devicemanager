@@ -1012,32 +1012,32 @@
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="129"/>
         <source>Type</source>
-        <translation type="unfinished">类型</translation>
+        <translation>类型</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="134"/>
         <source>bus info</source>
-        <translation type="unfinished"></translation>
+        <translation>总线信息</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="139"/>
         <source>ioport</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="144"/>
         <source>irq</source>
-        <translation type="unfinished">中断</translation>
+        <translation>中断</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="149"/>
         <source>latency</source>
-        <translation type="unfinished">延迟</translation>
+        <translation>延迟</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="154"/>
         <source>memory</source>
-        <translation type="unfinished">内存地址</translation>
+        <translation>内存地址</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="159"/>
