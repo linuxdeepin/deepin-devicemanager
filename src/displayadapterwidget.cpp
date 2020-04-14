@@ -92,12 +92,20 @@ void DisplayadapterWidget::initWidget()
             QString screenName = screenList[i];
 
             ArticleStruct minimum(tr("Minimum Resolution"));
-            minimum.queryData("xrandr", screenName, "minimum");
+            minimum.queryData( "xrandr", screenName, "minresolution");
             articles.push_back(minimum);
 
             ArticleStruct maximum(tr("Maximum Resolution"));
-            maximum.queryData("xrandr", screenName, "maximum");
+            maximum.queryData( "xrandr", screenName, "maxresolution");
             articles.push_back(maximum);
+
+//            ArticleStruct minimum(tr("Minimum Resolution"));
+//            minimum.queryData("xrandr", screenName, "minimum");
+//            articles.push_back(minimum);
+
+//            ArticleStruct maximum(tr("Maximum Resolution"));
+//            maximum.queryData("xrandr", screenName, "maximum");
+//            articles.push_back(maximum);
         }
 
         ArticleStruct driver(tr("Driver"));

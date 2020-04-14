@@ -276,7 +276,8 @@ public:
 //    bool loadKeyBoardInfoFromHwinfoKeyboard();
 
 
-
+    // 判断分辨率
+    int judgeResolution(QString &current, QString &max, QString &min);
 
 public:
     bool getRootPassword();
