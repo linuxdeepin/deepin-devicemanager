@@ -244,7 +244,7 @@ void MainWindow::addAllDeviceinfoWidget()
         leftDeviceView_->addSeperator();
     }
 
-    addDeviceWidget(new UsbdeviceWidget(mainWidget_), "usbdevice.svg");
+    //addDeviceWidget(new UsbdeviceWidget(mainWidget_), "usbdevice.svg");
     addDeviceWidget(new OtherDevicesWidget(mainWidget_), "otherdevices.svg");
 
     overviewWidget->setOverviewInfos(staticArticles);
