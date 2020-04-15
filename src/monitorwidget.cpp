@@ -67,7 +67,55 @@ MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr(
     resolutionList.name = tr("Support Resolution");
     displayRatio.name = tr("Display Ratio");
 //    monitorSize.name = tr("Size");
-    initWidgetEX();
+    //initWidgetEX();
+    //loadXrandrDisplaySize();
+    initWidget();
+}
+
+std::string MonitorWidget::getCmdResult(const std::string &strCmd)
+{
+    char buf[10240] = {0};
+    FILE *pf = NULL;
+
+    if( (pf = popen(strCmd.c_str(), "r")) == NULL )
+    {
+        return "";
+    }
+
+    std::string strResult;
+    while(fgets(buf, sizeof buf, pf))
+    {
+        strResult += buf;
+    }
+
+    pclose(pf);
+
+    unsigned int iSize =  strResult.size();
+    if(iSize > 0 && strResult[iSize - 1] == '\n')  // linux
+    {
+        strResult = strResult.substr(0, iSize - 1);
+    }
+
+    return strResult;
+}
+
+bool MonitorWidget::loadXrandrDisplaySize()
+{
+    QString command("#!/bin/bash\nxrandr --verbose | perl -ne '\nif ((/EDID(_DATA)?:/.../:/) && !/:/) {\n  s/^\\s+//;\n  chomp;\n  $hex .= $_;\n} elsif ($hex) {\n  # Use \"|strings\" if you dont have read-edid package installed \n  # and just want to see (or grep) the human-readable parts.\n  open FH, \"|parse-edid\"; \n  print FH pack(\"H*\", $hex); \n  $hex = \"\";\n}' | grep DisplaySize\n");
+#ifdef TEST_DATA_FROM_FILE
+    command = QString("#!/bin/bash\ncat %1 | perl -ne '\nif ((/EDID(_DATA)?:/.../:/) && !/:/) {\n  s/^\\s+//;\n  chomp;\n  $hex .= $_;\n} elsif ($hex) {\n  # Use \"|strings\" if you dont have read-edid package installed \n  # and just want to see (or grep) the human-readable parts.\n  open FH, \"|parse-edid\"; \n  print FH pack(\"H*\", $hex); \n  $hex = \"\";\n}' | grep DisplaySize\n").arg(DEVICEINFO_PATH + "/xrandr.txt");
+#endif
+    QString str = getCmdResult(command.toStdString()).c_str();
+
+    QStringList lines = str.split("\n");
+    foreach(const QString& line, lines){
+        QStringList words = line.split(" ");
+
+        if(words.size() != 3){continue;}
+
+        QString str = paraseDisplaySize(words[1].toDouble(),words[2].toDouble());
+        qDebug() << str;
+    }
 }
 
 void MonitorWidget::initWidget()
@@ -190,8 +238,8 @@ void MonitorWidget::initWidget()
 
             //always get monitor size from EDID
             QString sizeValue = "";
-            sizeValue = getMonitorSizeFromEDID();
-            if (!sizeValue.isEmpty() && monitorSize.isValid() == false) {
+            sizeValue = getMonitorSizeFromEDID(i);
+            if (!sizeValue.isEmpty()) {
                 monitorSize.value = sizeValue;
             }
             if (monitorSize.isValid()) {
@@ -572,13 +620,24 @@ QString MonitorWidget::parseDisplayRatio(const QString &resulotion)
     return res;
 }
 
-QString MonitorWidget::getMonitorSizeFromEDID()
+QString MonitorWidget::paraseDisplaySize(const double& width,const double& height)
 {
-    QString edid = DeviceInfoParser::Instance().getEDID();
+    double inch = std::sqrt((width/25.4) * (width/25.4) + (height/25.4) * (height/25.4));
+    QString res = QString::number(inch, 10, 1) + " " + tr("inch") + " (";
+    res += QString("%1mm X %2mm").arg(width).arg(height);
+    res += ")";
+    return res;
+}
+
+QString MonitorWidget::getMonitorSizeFromEDID(int index)
+{
+    QString edid = DeviceInfoParser::Instance().getEDID(index);
+    qDebug() << edid;
     if (edid.isEmpty()) {
         return "";
     }
     QStringList list = edid.split('\n');
+    if(list.size() < 2){return "";}
     QString secondItem = list.at(1);
     QString width_field = secondItem.mid(10, 2);
     QString height_field = secondItem.mid(12, 2);

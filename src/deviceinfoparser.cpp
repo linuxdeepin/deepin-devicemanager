@@ -36,6 +36,7 @@
 #include "DMessageBox"
 #include <cups.h>
 #include "Logger.h"
+#include"string"
 
 DWIDGET_USE_NAMESPACE
 
@@ -534,17 +535,22 @@ QStringList DeviceInfoParser::getXrandrMonitorList()
     return getMatchToolDeviceList("xrandr", &func);
 }
 
-QString DeviceInfoParser::getEDID()
+QString DeviceInfoParser::getEDID(int index)
 {
+    int i = 0;
     QStringList monitorList = getXrandrMonitorList();
+    QString edid("");
     foreach (auto firstKey, monitorList) {
-        QString edid = queryData("xrandr", firstKey, "EDID__0");
-        if (tr("Unknown") != edid  &&
-                edid.count() % (QString("00ffffffffffff0030aed86100000000").count() + 1) == 0) {
-            return edid;
+        edid = queryData("xrandr", firstKey, QString("EDID__%1").arg(index));
+        if(i == index){
+            if (tr("Unknown") != edid  && edid.count() % (QString("00ffffffffffff0030aed86100000000").count() + 1) == 0) {
+                break;
+            }else{
+                return "";
+            }
         }
     }
-    return QString("");
+    return edid;
 }
 
 QStringList DeviceInfoParser::getLshwMultimediaList()
@@ -2372,6 +2378,8 @@ bool DeviceInfoParser::loadXrandrDatabase()
                     QString edidStr = QString("EDID__%1").arg(EDID_NO);
                     EDID_NO++;
                     DeviceInfoMap[edidStr] = EDID;
+                    qDebug() << EDID;
+
                 }
             }
         }

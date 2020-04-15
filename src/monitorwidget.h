@@ -30,6 +30,9 @@ class MonitorWidget : public DeviceInfoWidgetBase
 public:
     explicit MonitorWidget(QWidget *parent = nullptr);
 
+    bool loadXrandrDisplaySize();
+    std::string getCmdResult(const std::string &strCmd);
+
     void initWidget() override;
     void initHwMonitor();
     void initWidgetEX();
@@ -44,8 +47,9 @@ public:
     QString parseMonitorSize(const QString& sizeDescription,double& inch);
     QString parseMonitorSize(const QString& sizeDescription);
     QString parseDisplayRatio(const QString& resulotion);
+    QString paraseDisplaySize(const double& width,const double& height);
 
-    QString getMonitorSizeFromEDID();
+    QString getMonitorSizeFromEDID(int index);
 private:
     void parseCurResolution(ArticleStruct &curResolution,ArticleStruct &resolutionList);
 

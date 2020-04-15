@@ -133,7 +133,7 @@ public:
     QStringList getHwinfoPrinterList();
     QStringList getHwinfoMonitorList();
     QStringList getXrandrMonitorList();
-    QString     getEDID();
+    QString     getEDID(int index = 0);
 
     QStringList getLshwMultimediaList();
     QStringList getCatinputAudioDeviceList();
