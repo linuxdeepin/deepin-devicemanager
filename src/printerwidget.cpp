@@ -174,17 +174,16 @@ void PrinterWidget::initWidget()
 //            }
 //        }
 //    }
-
     foreach (const QString &device, printerList) {
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct copies(tr("copies"));
+        ArticleStruct copies(tr("Copies"));
         copies.queryData("Cups", device, "copies");
         articles.push_back(copies);
         existArticles.insert("copies");
 
-        ArticleStruct deviceUri(tr("Device-Uri"));
+        ArticleStruct deviceUri(tr("Device URI"));
         deviceUri.queryData("Cups", device, "device-uri");
         articles.push_back(deviceUri);
         existArticles.insert("device-uri");
@@ -194,27 +193,27 @@ void PrinterWidget::initWidget()
         articles.push_back(finishings);
         existArticles.insert("finishings");
 
-        ArticleStruct jobCancelAfter(tr("Job-cancel-after"));
+        ArticleStruct jobCancelAfter(tr("Job Cancel After"));
         jobCancelAfter.queryData("Cups", device, "job-cancel-after");
         articles.push_back(jobCancelAfter);
         existArticles.insert("job-cancel-after");
 
-        ArticleStruct jobHoldUntil(tr("Job-hold-until"));
+        ArticleStruct jobHoldUntil(tr("Job Hold Until"));
         jobHoldUntil.queryData("Cups", device, "job-hold-until");
         articles.push_back(jobHoldUntil);
         existArticles.insert("job-hold-until");
 
-        ArticleStruct jobPriority(tr("Job-priority"));
+        ArticleStruct jobPriority(tr("Job Priority"));
         jobPriority.queryData("Cups", device, "job-priority");
         articles.push_back(jobPriority);
         existArticles.insert("job-priority");
 
-        ArticleStruct jobSheets(tr("Job-Sheets"));
+        ArticleStruct jobSheets(tr("Job Sheets"));
         jobSheets.queryData("Cups", device, "job-sheets");
         articles.push_back(jobSheets);
         existArticles.insert("job-sheets");
 
-        ArticleStruct makerChangeTime(tr("marker-change-time"));
+        ArticleStruct makerChangeTime(tr("Marker Change Time"));
         makerChangeTime.queryData("Cups", device, "marker-change-time");
         articles.push_back(makerChangeTime);
         existArticles.insert("marker-change-time");
@@ -224,72 +223,72 @@ void PrinterWidget::initWidget()
         articles.push_back(media);
         existArticles.insert("media");
 
-        ArticleStruct numberUp(tr("number-up"));
+        ArticleStruct numberUp(tr("Number Up"));
         numberUp.queryData("Cups", device, "number-up");
         articles.push_back(numberUp);
         existArticles.insert("number-up");
 
-        ArticleStruct orientationRequested(tr("orientation-requested"));
+        ArticleStruct orientationRequested(tr("Orientation Requested"));
         orientationRequested.queryData("Cups", device, "orientation-requested");
         articles.push_back(orientationRequested);
         existArticles.insert("orientation-requestedr");
 
-        ArticleStruct printColorMode(tr("print-color-mode"));
+        ArticleStruct printColorMode(tr("Print Color Mode"));
         printColorMode.queryData("Cups", device, "print-color-mode");
         articles.push_back(printColorMode);
         existArticles.insert("print-color-mode");
 
-        ArticleStruct printerInfo(tr("printerInfo"));
+        ArticleStruct printerInfo(tr("PrinterInfo"));
         printerInfo.queryData("Cups", device, "printer-info");
         articles.push_back(printerInfo);
         existArticles.insert("printer-info");
 
-        ArticleStruct printerIsAcceptingJobs(tr("printer-is-accepting-jobs"));
+        ArticleStruct printerIsAcceptingJobs(tr("Printer Is Accepting Jobs"));
         printerIsAcceptingJobs.queryData("Cups", device, "printer-is-accepting-jobs");
         articles.push_back(printerIsAcceptingJobs);
         existArticles.insert("printer-is-accepting-jobs");
 
-        ArticleStruct printerIsShared(tr("printer-is-shared"));
+        ArticleStruct printerIsShared(tr("Printer Is Shared"));
         printerIsShared.queryData("Cups", device, "printer-is-shared");
         articles.push_back(printerIsShared);
         existArticles.insert("printer-is-shared");
 
-        ArticleStruct printerIsTemporary(tr("printer-is-temporary"));
+        ArticleStruct printerIsTemporary(tr("Printer Is Temporary"));
         printerIsTemporary.queryData("Cups", device, "printer-is-temporar");
         articles.push_back(printerIsTemporary);
         existArticles.insert("printer-is-temporar");
 
-        ArticleStruct printerMakeAndModel(tr("printer-make-and-model"));
+        ArticleStruct printerMakeAndModel(tr("Printer Make And Model"));
         printerMakeAndModel.queryData("Cups", device, "printer-make-and-model");
         articles.push_back(printerMakeAndModel);
         existArticles.insert("printer-make-and-model");
 
-        ArticleStruct printerState(tr("printer-state"));
+        ArticleStruct printerState(tr("Printer State"));
         printerState.queryData("Cups", device, "printer-state");
         articles.push_back(printerState);
         existArticles.insert("printer-state");
 
-        ArticleStruct printerStateChangeTime(tr("printer-state-change-time"));
+        ArticleStruct printerStateChangeTime(tr("Printer State Change Time"));
         printerStateChangeTime.queryData("Cups", device, "printer-state-change-time");
         articles.push_back(printerStateChangeTime);
         existArticles.insert("printer-state-change-time");
 
-        ArticleStruct printerStateReasons(tr("printer-state-reasons"));
+        ArticleStruct printerStateReasons(tr("Printer State Reasons"));
         printerStateReasons.queryData("Cups", device, "printer-state-reasons");
         articles.push_back(printerStateReasons);
         existArticles.insert("printer-state-reasons");
 
-        ArticleStruct printerType(tr("printer-type"));
+        ArticleStruct printerType(tr("Printer Type"));
         printerType.queryData("Cups", device, "printer-type");
         articles.push_back(printerType);
         existArticles.insert("printer-type");
 
-        ArticleStruct printerUriSupported(tr("printer-uri-supported"));
+        ArticleStruct printerUriSupported(tr("Printer URI Supported"));
         printerUriSupported.queryData("Cups", device, "printer-uri-supported");
         articles.push_back(printerUriSupported);
         existArticles.insert("printer-uri-supported");
 
-        ArticleStruct sides(tr("sides"));
+        ArticleStruct sides(tr("Sides"));
         sides.queryData("Cups", device, "sides");
         articles.push_back(sides);
         existArticles.insert("sides");
@@ -304,36 +303,19 @@ void PrinterWidget::initWidget()
         addDevice(device, articles, printerList.size());
 
         //此处为添加表头，由于可以重复添加同一个打印机，printerInfo可能相同，导致在表头没区别
-        QStringList printerNameList;
-        QString printerName;
-        if (printerList.size() > 1) {
-//            printerNameList << printerInfo.value;
-            char num = 0;
-            for (int j = 0; j < printerNameList.size(); j++) {
-                if (printerInfo.value == printerNameList[j]) {
-                    num++;
-                }
-            }
-            if (0 == num) {
-                printerName = printerInfo.value;
-            } else {
-                printerName = printerInfo.value + "-" + num;
-            }
-//            printerName = printerInfo.value + "-" + num;
+        // 因此可以添加device的toolname为表头
+        QString printerName = device;
 
-            QStringList tab = {
-                printerName,
-                printerMakeAndModel.value
-            };
+        QStringList tab = {
+            printerName,
+            printerMakeAndModel.value
+        };
 
-            tabList.push_back(tab);
-            printerNameList << printerInfo.value;
-        }
-
+        tabList.push_back(tab);
         if (overviewInfo_.value.isEmpty()) {
             overviewInfo_.value = printerName;
         } else {
-            overviewInfo_.value += "/" + printerName;
+            overviewInfo_.value += " / " + printerName;
         }
     }
 
