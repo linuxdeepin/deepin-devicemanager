@@ -286,7 +286,7 @@ void MonitorWidget::initWidget()
                 overviewInfo_.value = QString::number(inch, 10, 1) + " " + tr("inch");
             } else {
                 overviewInfo_.value += " (";
-                overviewInfo_.value += QString::number(inch, 10, 1) + " " + tr("inch");
+                overviewInfo_.value += monitorSize.value;//QString::number(inch, 10, 1) + " " + tr("inch");
                 overviewInfo_.value += ")";
             }
         }
