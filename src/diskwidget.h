@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
  *
  * Author:     AaronZhang <ya.zhang@archermind.com>
@@ -33,5 +33,12 @@ public:
     void initWidget() override;
 
     bool getDiskType(const QString& diskProperty, QString& type);
+
+    // 从hwinfo --disk中获取数据
+    void getHwinfoDiskList();
+
+private:
+//    QMap<QString, QList<ArticleStruct>> m_articlesmap;
+    QList<QStringList> m_tabList;
 };
 

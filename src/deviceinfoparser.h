@@ -128,6 +128,7 @@ public:
     QStringList getXrandrScreenName();
     QStringList getXrandrDisplayInterfaceList();
 
+    QStringList getHwinfoDiskList();
     QStringList getHwinfoKeyboardList();
     QStringList getHwinfoOtherUSBList();
     QStringList getHwinfoPrinterList();
@@ -201,6 +202,10 @@ public:
     bool loadLshwDatabase();
     // sudo lsblk -l stdout parse
     bool loadLsblKDatabase();
+
+    // 获取 存储设备 介质类型
+    QStringList getLsblkDiskTypeList();
+
     QStringList getLsblkDiskNameList();
     // lscpu parse
     bool loadLscpuDatabase();
@@ -264,6 +269,8 @@ public:
     //获得显存的大小
     bool loadDmesgVram();
 
+    // storage hwinfo --disk
+    bool loadhwinfoDiskDatabase();
 
     /**
      * @brief：获取键盘信息,键盘信息的获取只要通过两个命令获取

@@ -66,13 +66,13 @@ void KeyboardWidget::loadWidget()
         for (auto index = m_articlesmap.begin(); index != m_articlesmap.end(); index++) {
             addDevice(index.key(), index.value(), keyboard_count);
         }
-        if (keyboard_count > 1) {
+        if (keyboard_count >= 1) {
             addTable(m_heads, m_tabList);
         }
         return;
     }
 
-    if (keyboard_count <= 1) {
+    if (keyboard_count < 1) {
         m_articlesmap.clear();
         initWidget();
         return;

@@ -29,7 +29,80 @@ DWIDGET_USE_NAMESPACE
 
 DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Storage"))
 {
-    initWidget();
+//    initWidget();
+    getHwinfoDiskList();
+}
+
+void DiskWidget::getHwinfoDiskList()
+{
+    QStringList diskList = DeviceInfoParser::Instance().getHwinfoDiskList();
+    QStringList diskType = DeviceInfoParser::Instance().getLsblkDiskTypeList();
+
+    if (diskList.size() < 1) {
+        setCentralInfo(tr("No disk found"));
+        return;
+    }
+
+    foreach (auto disk, diskList)
+    {
+        m_articles.clear();
+        m_existArticles.clear();
+
+        ArticleStruct model = addArticleStruct(tr("Model"), "Storage", disk, "Model");
+        ArticleStruct vendor = addArticleStruct(tr("Vendor"),"Storage", disk, "Vendor");
+        ArticleStruct size = addArticleStruct(tr("Size"), "Storage",disk, "Capacity");
+        ArticleStruct description = addArticleStruct(tr("Description"), "Storage", "disk", "Hardware Class");
+        ArticleStruct driver = addArticleStruct(tr("Driver"), "Storage",disk, "Driver");
+        ArticleStruct deviceFile = addArticleStruct(tr("Device File"), "Storage",disk, "Device File");
+
+        QString mediaType;        // 设置介质类型
+        foreach (auto type, diskType) {
+            if (deviceFile.value.contains(type, Qt::CaseInsensitive)){
+                mediaType = DeviceInfoParser::Instance().queryData("lsblk", type, "rm");
+            }
+        }
+
+        if (mediaType == "0") {
+            mediaType = "SSD";
+        }
+        else if (mediaType == "1") {
+            mediaType = "HDD";
+        }
+        else {
+            mediaType = tr("UnKnown");
+        }
+
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("Storage", disk, m_articles, m_existArticles);
+
+        QString title = model.isValid() ? model.value : description.value;
+        //m_articlesmap.insert(title, m_articles);
+        addDevice( model.value, m_articles, diskList.size());
+        QStringList tab = {
+            title,
+            vendor.value,
+            mediaType,
+            size.value
+        };
+
+        m_tabList.push_back(tab);
+
+        if (overviewInfo_.isValid()) {
+            overviewInfo_.value += " / ";
+        }
+
+        QList<ArticleStruct> overArticle;
+        overArticle << vendor << model;
+        if (model.isValid() == false) {
+            overArticle << description;
+        }
+        overviewInfo_.value += joinArticle(overArticle);
+
+    }
+
+    if ( diskList.size() > 1 ) {
+        QStringList headers = { tr("Model"),  tr("Vendor"), tr("Media Type"), tr("Size") };
+        addTable(headers, m_tabList);
+    }
 }
 
 void DiskWidget::initWidget()
@@ -41,6 +114,7 @@ void DiskWidget::initWidget()
     if (diskList.size() < 1) {
         setCentralInfo(tr("No disk found"));
         return;
+//        getHwinfoDiskList();
     }
 
     QList<QStringList> tabList;

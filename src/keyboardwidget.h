@@ -43,7 +43,7 @@ private:
     void foundNokeyboards();
 private:
     QList<QStringList> m_tabList;
-    QMap<QString, QList<ArticleStruct>> m_articlesmap;
+    QMultiMap<QString, QList<ArticleStruct>> m_articlesmap;
     QStringList m_heads;
 };
 

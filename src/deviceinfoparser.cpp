@@ -86,6 +86,7 @@ void DeviceInfoParser::refreshDabase()
     emit loadFinished(tr("Loading Storage Info..."));
     loadLsblKDatabase();
     loadAllSmartctlDatabase();
+    loadhwinfoDiskDatabase();
 
     emit loadFinished(tr("Loading CPU Info..."));
     loadCatcpuDatabase();
@@ -482,6 +483,26 @@ QStringList DeviceInfoParser::getHwinfoMonitorList()
 QStringList DeviceInfoParser::getHwinfoKeyboardList()
 {
     return getMatchToolDeviceList("Keyboard");
+}
+
+QStringList DeviceInfoParser::getHwinfoDiskList()
+{
+    checkValueFun_t func = [](const QString & fk)->bool {
+
+
+        if (DeviceInfoParser::Instance().toolDatabase_["Storage"][fk].contains("Capacity") == false)
+        {
+            return false;
+        }
+
+        if(DeviceInfoParser::Instance().toolDatabase_["Storage"][fk]["Capacity"].startsWith("0 "))
+        {
+            return false;
+        }
+
+        return true;
+    };
+    return getMatchToolDeviceList("Storage", &func);
 }
 
 QStringList DeviceInfoParser::getHwinfoOtherUSBList()
@@ -1816,6 +1837,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
     int index_name = -1;
     int index_size = -1;
     int index_type = -1;
+    int index_rm = -1;
 
     int index = 0;
     foreach (auto it, head) {
@@ -1828,9 +1850,13 @@ bool DeviceInfoParser::loadLsblKDatabase()
         if (it.compare("TYPE", Qt::CaseInsensitive) == 0) {
             index_type = index;
         }
+        // RM 代表介质类型
+        if(it.compare("RM", Qt::CaseInsensitive) == 0) {
+            index_rm = index;
+        }
         index++;
     }
-    if (index_name + index_size + index_type <= 0) {
+    if (index_name + index_size + index_type + index_rm <= 0) {
         return false;
     }
 
@@ -1846,6 +1872,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
         QStringList cols = oneRow.split(" ", QString::SkipEmptyParts);
         QString unknow_str = tr("Unknown");
         QString name = "", size = unknow_str, type = unknow_str;
+        QString rm = unknow_str;
         int index_t = 0;
         foreach (auto it, cols) {
             if (index_t == index_name) {
@@ -1857,6 +1884,9 @@ bool DeviceInfoParser::loadLsblKDatabase()
             if (index_t == index_type) {
                 type = it;
             }
+            if (index_t == index_rm) {
+                rm = it;
+            }
             index_t ++;
         }
 
@@ -1867,6 +1897,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
         diskInfo.clear();
         diskInfo.insert("size", size);
         diskInfo.insert("type", type);
+        diskInfo.insert("rm", rm);
         diskDb.insert(name, diskInfo);
     }
 
@@ -1877,9 +1908,12 @@ bool DeviceInfoParser::loadLsblKDatabase()
     if (toolDatabase_.contains(g_lsblkDbKey)) {
         toolDatabase_.remove(g_lsblkDbKey);
     }
+    toolDatabaseSecondOrder_.insert(g_lsblkDbKey, diskDb.keys());
     toolDatabase_.insert(g_lsblkDbKey, diskDb);
     return true;
 }//end fun
+
+
 
 QStringList DeviceInfoParser::getLsblkDiskNameList()
 {
@@ -1890,6 +1924,11 @@ QStringList DeviceInfoParser::getLsblkDiskNameList()
     }
     return list;
 } //end fun
+
+QStringList DeviceInfoParser::getLsblkDiskTypeList()
+{
+    return getMatchToolDeviceList(g_lsblkDbKey);
+}
 
 bool DeviceInfoParser::loadLscpuDatabase()
 {
@@ -3317,6 +3356,105 @@ bool DeviceInfoParser::loadPrinterinfoDatabase()
     toolDatabaseSecondOrder_["printer"] = secondOrder;
     return true;
 }
+
+bool DeviceInfoParser::loadhwinfoDiskDatabase()
+{
+    if (false == executeProcess("sudo hwinfo --disk")) {
+        return false;
+    }
+
+    QString hwOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile hwinfoFile(DEVICEINFO_PATH + "/hwinfo_disk.txt");
+    if (false == hwinfoFile.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+
+    hwOut = hwinfoFile.readAll();
+    hwinfoFile.close();
+#endif
+
+    //QString hwOut = getHwMonitorString();
+    if (hwOut.size() < 1) {
+        return false;
+    }
+
+    // hciconfig
+    DatabaseMap hwinfoDatabase_;
+    QStringList secondOrder;
+
+    QMap<QString, QString> DeviceInfoMap;
+    QString deviceName;
+    int startIndex = 0;
+
+    for (int i = 0; i < hwOut.size(); ++i) {
+        if (hwOut[i] != '\n' && i != hwOut.size() - 1) {
+            continue;
+        }
+
+        QString line = hwOut.mid(startIndex, i - startIndex);
+        startIndex = i + 1;
+
+        if (i == hwOut.size() - 1 || line.trimmed().isEmpty()) {
+            if (deviceName.isEmpty() == false) {
+                hwinfoDatabase_[deviceName] = DeviceInfoMap;
+                secondOrder.push_back(deviceName);
+            }
+
+            DeviceInfoMap.clear();
+            deviceName = "";
+            continue;
+        }
+
+        if (line.startsWith(Devicetype_HwInfo_Fourspace)) {
+            int index = line.indexOf(": ");
+            if (index > 0) {
+                if (line.trimmed().contains(Devicetype_HwInfo_Resolution)) {
+                    if (DeviceInfoMap.contains(Devicetype_HwInfo_Currentresolution)) {
+                        //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] += ", ";
+                        //DeviceInfoMap[Devicetype_HwInfo_Currentresolution] +=line.mid(index+1).trimmed();
+                    } else {
+                        DeviceInfoMap[Devicetype_HwInfo_Currentresolution] = line.mid(index + 1).trimmed();
+                    }
+
+                    continue;
+                }
+                if (false == DeviceInfoMap.contains(line.mid(0, index).trimmed())) {
+                    DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
+                }
+
+            }
+            continue;
+        }
+
+        if (line.startsWith(Devicetype_HwInfo_Twospace)) {
+            int index = line.indexOf(": ");
+            if (index > 0) {
+                if (line.contains(Devicetype_HwInfo_Resolution)) {
+                    if (DeviceInfoMap.contains(Devicetype_HwInfo_ResolutionList)) {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += ", ";
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] += line.mid(index + 1).trimmed();
+                    } else {
+                        DeviceInfoMap[Devicetype_HwInfo_ResolutionList] = line.mid(index + 1).trimmed();
+                    }
+
+                    continue;
+                }
+
+                DeviceInfoMap[ line.mid(0, index).trimmed()] = line.mid(index + 1).trimmed();
+            }
+            continue;
+        }
+
+        deviceName = line.trimmed();
+    }
+
+    toolDatabase_["Storage"] = hwinfoDatabase_;
+    secondOrder.removeDuplicates();
+    toolDatabaseSecondOrder_["Storage"] = secondOrder;
+    return true;
+}
+
 
 bool DeviceInfoParser::loadKeyboardinfoDatabase()
 {
