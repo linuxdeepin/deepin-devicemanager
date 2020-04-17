@@ -1057,7 +1057,7 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
         }
 
         if (fk.contains("_firmware") || fk.contains("_memory") || fk.contains("_cache") || fk.contains("_cpu") \
-                || fk.contains("_volume") || fk.contains("_usb") /*|| fk.contains("_pci")*/  ||
+                || fk.contains("_volume") /*|| fk.contains("_usb") || fk.contains("_pci")*/  ||
                 fk.contains("_pnp") || fk.contains("_volume") || fk.contains("_volume") || fk.contains("_volume")) {
             continue;
         }
