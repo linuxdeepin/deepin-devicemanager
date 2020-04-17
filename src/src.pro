@@ -145,13 +145,13 @@ target.path = /usr/bin/
 #icons.files += ../images/cpu.svg
 #icons.path = /usr/share/deepin-devicemanager/
 icons.path = /usr/share/icons/hicolor/scalable/apps
-icons.files = ../icons/deepin/builtin/deepin-devicemanager.svg
+icons.files = $$PWD/../icons/deepin/builtin/deepin-devicemanager.svg
 
 # desktop
 desktop.files += deepin-devicemanager.desktop
 desktop.path = /usr/share/applications/
 
 translations.path = /usr/share/deepin-devicemanager/translations
-translations.files = ../translations/*.qm
+translations.files = $$PWD/../translations/*.qm
 
 INSTALLS += target icons desktop translations
