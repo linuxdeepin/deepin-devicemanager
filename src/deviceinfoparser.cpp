@@ -103,6 +103,8 @@ void DeviceInfoParser::refreshDabase()
     emit loadFinished(tr("Loading Monitor Info..."));
     loadXrandrDatabase();
     loadHwinfoDatabase();
+    //获取即时的 系统显示的屏幕刷新率和分辨率
+    loadSomeXrandrDatabase();
     loadGpuInfo();
 
     emit loadFinished(tr("Loading PCI Devices Info..."));
@@ -141,7 +143,7 @@ bool DeviceInfoParser::isToolSuccess(const QString &toolname)
 
     return false;
 }
-
+// 模糊查找
 bool DeviceInfoParser::fuzzeyQueryKey(const QString &toolname, const QString &fuzzeyKey, QString &key)
 {
     if (false == toolDatabase_.contains(toolname)) {
@@ -2477,6 +2479,60 @@ bool DeviceInfoParser::loadXrandrDatabase()
     return true;
 }
 
+//为了获得系统设置变化的刷新率
+bool DeviceInfoParser::loadSomeXrandrDatabase()
+{
+    if (false == executeProcess("xrandr")) {
+        return false;
+    }
+
+    QString xrandrOut = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile xrandrFile(DEVICEINFO_PATH + "/xrandr_some.txt");
+    if (false == xrandrFile.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+    xrandrOut = xrandrFile.readAll();
+    xrandrFile.close();
+#endif
+
+    QStringList  lines = xrandrOut.split("\n");
+    // xrandr
+//    DatabaseMap xrandrDatabase_;
+//    QStringList secondOrder;
+//    QMap<QString, QString> DeviceInfoMap;
+
+    DatabaseMap db;
+    QString refreshRatio;
+    QString key = "DisplayScreen currentResolution and refresh from xrandr";
+    QMap<QString, QString> value;
+    foreach (auto line, lines) {
+        if (line.contains("*",Qt::CaseSensitive)) {
+//            QRegExp reCurrent("[ ]([0-9]\\d*x[0-9]\\d*)");
+            //此处用正则表达式最好
+            QString current = "currentResolutionRefresh";
+            int pos = line.lastIndexOf("*");
+            value.insert(current, line.mid(pos - 5 , pos));
+            // 显示 显示屏的当前 分辨率和刷新率
+            QStringList currentLine = line.simplified().split(" ");
+            for (int i = 0; i < currentLine.size(); i++){
+//                qDebug() << currentLine[i];
+                if (currentLine[i].contains("*")) {
+                    refreshRatio = currentLine[i].remove("*");
+                }
+            }
+            currentResolutionRefresh = currentLine[0] + " @" + refreshRatio + "Hz";
+            break;
+//            qDebug() << currentResolutionRefresh;
+            //此处仅是单个显示屏,如果为多屏，会显示第一个。
+        }
+    }
+    db.insert(key, value);
+    toolDatabase_["xrandr_some"] = db;
+    return true;
+}
+
+//从DBus加载电源设置
 bool DeviceInfoParser::loadPowerSettings()
 {
     PowerInter power("com.deepin.daemon.Power", "/com/deepin/daemon/Power", QDBusConnection::sessionBus(), nullptr);

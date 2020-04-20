@@ -33,6 +33,7 @@ DisplayadapterWidget::DisplayadapterWidget(QWidget *parent) : DeviceInfoWidgetBa
 
 void DisplayadapterWidget::initWidget()
 {
+    // 华为设备从gpuinfo中进行加载信息
     if (DeviceInfoParser::Instance().isHuaweiAndroidUos()) {
         return initGpuInof();
     }
@@ -40,8 +41,10 @@ void DisplayadapterWidget::initWidget()
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
 
+    //从lshw，xrandr获取
     QStringList displayadapterList = DeviceInfoParser::Instance().getLshwDiaplayadapterList();
     QStringList screenList = DeviceInfoParser::Instance().getXrandrScreenName();
+    //获取显存大小
     QStringList varm = DeviceInfoParser::Instance().getDmesgVram();
 
     for (int i = 0; i < displayadapterList.size(); ++i) {
@@ -56,6 +59,7 @@ void DisplayadapterWidget::initWidget()
         }
 
         QString lspciDeviceName;
+        //从lspci模糊查找
         DeviceInfoParser::Instance().fuzzeyQueryKey("lspci", pci_bus, lspciDeviceName);
 
         QString lspciName = DeviceInfoParser::Instance().fuzzyQueryData("lspci", lspciDeviceName, "bus info");
@@ -79,7 +83,7 @@ void DisplayadapterWidget::initWidget()
         description.queryData("lshw", displayadapter, "description", existArticles, articles);
         articles.push_back(description);
         existArticles.insert("Description");
-
+// 显存字段
         ArticleStruct graphicMemory(tr("Graphic Memory"));
         //end with a empty char,for avoiding this article to be hidden
 //        graphicMemory.value = QString("%1 ").arg(tr("Unknown"));
@@ -90,7 +94,7 @@ void DisplayadapterWidget::initWidget()
 
         if (i < screenList.size()) {
             QString screenName = screenList[i];
-
+// 最大分辨率和最小分辨率
             ArticleStruct minimum(tr("Minimum Resolution"));
             minimum.queryData( "xrandr", screenName, "minresolution");
             articles.push_back(minimum);
@@ -98,16 +102,8 @@ void DisplayadapterWidget::initWidget()
             ArticleStruct maximum(tr("Maximum Resolution"));
             maximum.queryData( "xrandr", screenName, "maxresolution");
             articles.push_back(maximum);
-
-//            ArticleStruct minimum(tr("Minimum Resolution"));
-//            minimum.queryData("xrandr", screenName, "minimum");
-//            articles.push_back(minimum);
-
-//            ArticleStruct maximum(tr("Maximum Resolution"));
-//            maximum.queryData("xrandr", screenName, "maximum");
-//            articles.push_back(maximum);
         }
-
+//驱动从lspci中获取
         ArticleStruct driver(tr("Driver"));
         driver.queryData("lspci", lspciDeviceName, "Kernel modules");
         articles.push_back(driver);
