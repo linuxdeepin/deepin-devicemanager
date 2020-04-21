@@ -95,7 +95,7 @@ bool KeyboardWidget::findKeyboardFromHwinfo()
         // 添加Keyboard相关信息
         ArticleStruct name = addArticleStruct(tr("Name"), "Keyboard", keyboard, "Device");
         ArticleStruct vendor = addArticleStruct(tr("Vendor"), "Keyboard", keyboard, "Vendor");
-        addArticleStruct(tr("Model"), "Keyboard", keyboard, "Model");
+        ArticleStruct model = addArticleStruct(tr("Model"), "Keyboard", keyboard, "Model");
         addArticleStruct(tr("Serial ID"), "Keyboard", keyboard, "Serial ID");
         addArticleStruct(tr("Version"), "Keyboard", keyboard, "Revision");
         addArticleStruct(tr("Status"), "Keyboard", keyboard, "Config Status");
@@ -106,9 +106,9 @@ bool KeyboardWidget::findKeyboardFromHwinfo()
         addArticleStruct(tr("Unique ID"), "Keyboard", keyboard, "Unique ID");
         addArticleStruct(tr("SysFS ID"), "Keyboard", keyboard, "SysFS ID");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, m_articles, m_existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("Keyboard", keyboard, m_articles, m_existArticles);
 
-        QString title = name.isValid() ? name.value : description.value;
+        QString title = model.isValid() ? model.value : description.value;
         m_articlesmap.insert(title, m_articles);
 
         QStringList tab = {
@@ -123,8 +123,8 @@ bool KeyboardWidget::findKeyboardFromHwinfo()
         }
 
         QList<ArticleStruct> overArticle;
-        overArticle << vendor << name;
-        if (name.isValid() == false) {
+        overArticle << vendor << model;
+        if (model.isValid() == false) {
             overArticle << description;
         }
         // 此句会重复添加概况的键盘信息。
