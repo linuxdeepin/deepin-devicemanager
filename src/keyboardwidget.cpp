@@ -62,11 +62,11 @@ void KeyboardWidget::loadWidget()
     bool found = findKeyboardFromHwinfo();
     int keyboard_count = m_articlesmap.count();
 
-    if (found && keyboard_count > 1) {
+    if (found && keyboard_count >= 1) {
         for (auto index = m_articlesmap.begin(); index != m_articlesmap.end(); index++) {
             addDevice(index.key(), index.value(), keyboard_count);
         }
-        if (keyboard_count >= 1) {
+        if (keyboard_count > 1) {
             addTable(m_heads, m_tabList);
         }
         return;

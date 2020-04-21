@@ -286,6 +286,12 @@ public:
     // 判断分辨率
     int judgeResolution(QString &current, QString &max, QString &min);
 
+    // 从 smartctl 中获取磁盘的model信息
+    void getDiskModelFromSmartctlInfo(QString &model, const QString &deviceFile, const QString &attr);
+
+    // 判断该硬盘是否支持smartctl
+    bool isSmartctlSupport(QString &devicefile);
+
 public:
     bool getRootPassword();
     bool executeProcess(const QString &cmd);

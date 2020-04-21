@@ -2044,6 +2044,23 @@ bool DeviceInfoParser::loadAllSmartctlDatabase()
     return true;
 }
 
+void DeviceInfoParser::getDiskModelFromSmartctlInfo(QString &model, const QString &deviceFile, const QString &attr)
+{
+    if (DeviceInfoParser::Instance().toolDatabase_.contains("smartctl") == false) {
+        return;
+    }
+
+    if (DeviceInfoParser::Instance().toolDatabase_["smartctl"].contains(deviceFile) == false) {
+        return;
+    }
+
+    foreach (auto iter, DeviceInfoParser::Instance().toolDatabase_["smartctl"][deviceFile].keys()) {
+        if (iter.contains(attr, Qt::CaseInsensitive)) {
+            model = DeviceInfoParser::Instance().toolDatabase_["smartctl"][deviceFile][iter];
+            return;
+        }
+    }
+}
 
 bool DeviceInfoParser::loadSmartctlDatabase(const QString &diskLogical)
 {
@@ -2062,7 +2079,7 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString &diskLogical)
     //shell for smartctl has a problem:assume only one disk and it's name is sda,so the smartctl.txt may got wrong stdout;
     //after fix the shell file which is used for collect dev info,below code must be fixed too;
 #ifdef TEST_DATA_FROM_FILE
-    QFile smartctlFile(DEVICEINFO_PATH + "/smartctl.txt");
+    QFile smartctlFile(DEVICEINFO_PATH + "/smartctl_nvme0n1.txt");
     if (false == smartctlFile.open(QIODevice::ReadOnly)) {
         return false;
     }
@@ -2232,6 +2249,19 @@ bool DeviceInfoParser::loadSmartctlDatabase(const QString &diskLogical)
     } else {
         toolDatabase_["smartctl"][diskLogical] = smartctlDatabase_;
     }
+    return true;
+}
+
+bool DeviceInfoParser::isSmartctlSupport(QString &devicefile)
+{
+    if (DeviceInfoParser::Instance().toolDatabase_.contains("smartctl") == false) {
+        return false;
+    }
+
+    if (DeviceInfoParser::Instance().toolDatabase_["smartctl"].contains(devicefile) == false) {
+        return false;
+    }
+
     return true;
 }
 

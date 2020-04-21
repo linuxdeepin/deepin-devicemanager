@@ -37,6 +37,25 @@ public:
     // 从hwinfo --disk中获取数据
     void getHwinfoDiskList();
 
+    // 设置介质类型
+    // disk:从hwinfo --disk中获取的存储设备信息
+    // diskType：从lsblk中的获取的存储设备类型信息
+    QString setMediaType(QString &disk,QStringList &diskType);
+
+    // 设置硬盘大小
+    // disk:从hwinfo --disk中获取的存储设备信息
+    ArticleStruct setDiskSizeInfo(QString &disk);
+
+    // 设置硬盘Model信息
+    // disk:从hwinfo --disk中获取的存储设备信息
+    ArticleStruct setDiskModelInfo(QString &disk);
+
+    // 添加 smartctl 中获取的其他属性
+    void addOtherSmartctlInfo(QString &disk);
+
+    // 设置硬盘借口信息
+    ArticleStruct setDiskInterfaceInfo(QString &disk);
+
 private:
 //    QMap<QString, QList<ArticleStruct>> m_articlesmap;
     QList<QStringList> m_tabList;

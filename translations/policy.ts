@@ -766,207 +766,213 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="42"/>
-        <location filename="../src/diskwidget.cpp" line="115"/>
+        <location filename="../src/diskwidget.cpp" line="169"/>
+        <location filename="../src/diskwidget.cpp" line="247"/>
         <source>No disk found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="72"/>
+        <location filename="../src/diskwidget.cpp" line="54"/>
         <source>UnKnown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="163"/>
+        <location filename="../src/diskwidget.cpp" line="129"/>
+        <source>Serial Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="135"/>
+        <source>Firmware Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="144"/>
+        <source>Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="295"/>
         <source>Model</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="168"/>
+        <location filename="../src/diskwidget.cpp" line="300"/>
         <source>Vendor</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="183"/>
+        <location filename="../src/diskwidget.cpp" line="315"/>
         <source>Media Type</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="258"/>
+        <location filename="../src/diskwidget.cpp" line="390"/>
         <source>Interface</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="237"/>
-        <location filename="../src/diskwidget.cpp" line="260"/>
+        <location filename="../src/diskwidget.cpp" line="369"/>
+        <location filename="../src/diskwidget.cpp" line="392"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="54"/>
+        <location filename="../src/diskwidget.cpp" line="207"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="55"/>
-        <source>Driver</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="56"/>
-        <source>Device File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="265"/>
+        <location filename="../src/diskwidget.cpp" line="397"/>
         <source>Size</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="270"/>
+        <location filename="../src/diskwidget.cpp" line="402"/>
         <source>Serial Number</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="282"/>
+        <location filename="../src/diskwidget.cpp" line="414"/>
         <source>Model Family</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="287"/>
+        <location filename="../src/diskwidget.cpp" line="419"/>
         <source>Device Model</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="292"/>
+        <location filename="../src/diskwidget.cpp" line="424"/>
         <source>Description</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="299"/>
+        <location filename="../src/diskwidget.cpp" line="431"/>
         <source>Speed</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="310"/>
+        <location filename="../src/diskwidget.cpp" line="442"/>
         <source>Rotation Rate</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="317"/>
+        <location filename="../src/diskwidget.cpp" line="449"/>
         <source>Form Factor</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="319"/>
+        <location filename="../src/diskwidget.cpp" line="451"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="323"/>
+        <location filename="../src/diskwidget.cpp" line="455"/>
         <source>Power On Hours</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="326"/>
+        <location filename="../src/diskwidget.cpp" line="458"/>
         <source>Hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="330"/>
+        <location filename="../src/diskwidget.cpp" line="462"/>
         <source>Power_On_Minutes</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="333"/>
+        <location filename="../src/diskwidget.cpp" line="465"/>
         <source>Minutes</source>
         <comment>Power_On_Minutes</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="338"/>
+        <location filename="../src/diskwidget.cpp" line="470"/>
         <source>Power_On_Half_Minutes</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="342"/>
+        <location filename="../src/diskwidget.cpp" line="474"/>
         <source>Half Minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="347"/>
+        <location filename="../src/diskwidget.cpp" line="479"/>
         <source>Power_On_Seconds</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="351"/>
+        <location filename="../src/diskwidget.cpp" line="483"/>
         <source>Seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="355"/>
+        <location filename="../src/diskwidget.cpp" line="487"/>
         <source>Power Cycle Count</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="359"/>
+        <location filename="../src/diskwidget.cpp" line="491"/>
         <source>Times</source>
         <comment>Power Cycle Count</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="365"/>
+        <location filename="../src/diskwidget.cpp" line="497"/>
         <source>Version</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="370"/>
+        <location filename="../src/diskwidget.cpp" line="502"/>
         <source>Capabilities</source>
         <comment>stroage info</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="51"/>
-        <location filename="../src/diskwidget.cpp" line="103"/>
-        <location filename="../src/diskwidget.cpp" line="410"/>
+        <location filename="../src/diskwidget.cpp" line="102"/>
+        <location filename="../src/diskwidget.cpp" line="235"/>
+        <location filename="../src/diskwidget.cpp" line="542"/>
         <source>Model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="52"/>
-        <location filename="../src/diskwidget.cpp" line="103"/>
-        <location filename="../src/diskwidget.cpp" line="410"/>
+        <location filename="../src/diskwidget.cpp" line="181"/>
+        <location filename="../src/diskwidget.cpp" line="235"/>
+        <location filename="../src/diskwidget.cpp" line="542"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="103"/>
-        <location filename="../src/diskwidget.cpp" line="410"/>
+        <location filename="../src/diskwidget.cpp" line="57"/>
+        <location filename="../src/diskwidget.cpp" line="235"/>
+        <location filename="../src/diskwidget.cpp" line="542"/>
         <source>Media Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="53"/>
-        <location filename="../src/diskwidget.cpp" line="103"/>
-        <location filename="../src/diskwidget.cpp" line="410"/>
+        <location filename="../src/diskwidget.cpp" line="70"/>
+        <location filename="../src/diskwidget.cpp" line="235"/>
+        <location filename="../src/diskwidget.cpp" line="542"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1658,7 +1664,6 @@
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="286"/>
-        <location filename="../src/monitorwidget.cpp" line="289"/>
         <location filename="../src/monitorwidget.cpp" line="486"/>
         <location filename="../src/monitorwidget.cpp" line="499"/>
         <location filename="../src/monitorwidget.cpp" line="518"/>
@@ -1697,166 +1702,160 @@
 <context>
     <name>MotherboardWidget</name>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="30"/>
+        <location filename="../src/motherboardwidget.cpp" line="31"/>
         <source>Motherboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="40"/>
-        <location filename="../src/motherboardwidget.cpp" line="56"/>
+        <location filename="../src/motherboardwidget.cpp" line="41"/>
+        <location filename="../src/motherboardwidget.cpp" line="57"/>
         <source>Model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="41"/>
-        <location filename="../src/motherboardwidget.cpp" line="47"/>
-        <location filename="../src/motherboardwidget.cpp" line="236"/>
+        <location filename="../src/motherboardwidget.cpp" line="42"/>
+        <location filename="../src/motherboardwidget.cpp" line="48"/>
+        <location filename="../src/motherboardwidget.cpp" line="237"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="42"/>
-        <location filename="../src/motherboardwidget.cpp" line="72"/>
-        <location filename="../src/motherboardwidget.cpp" line="77"/>
+        <location filename="../src/motherboardwidget.cpp" line="43"/>
+        <location filename="../src/motherboardwidget.cpp" line="73"/>
+        <location filename="../src/motherboardwidget.cpp" line="78"/>
         <source>Chipset Family</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="43"/>
-        <location filename="../src/motherboardwidget.cpp" line="227"/>
+        <location filename="../src/motherboardwidget.cpp" line="44"/>
+        <location filename="../src/motherboardwidget.cpp" line="228"/>
         <source>BIOS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="43"/>
-        <location filename="../src/motherboardwidget.cpp" line="67"/>
+        <location filename="../src/motherboardwidget.cpp" line="44"/>
+        <location filename="../src/motherboardwidget.cpp" line="68"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="44"/>
-        <location filename="../src/motherboardwidget.cpp" line="121"/>
+        <location filename="../src/motherboardwidget.cpp" line="45"/>
+        <location filename="../src/motherboardwidget.cpp" line="122"/>
         <source>Features</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="102"/>
-        <location filename="../src/motherboardwidget.cpp" line="246"/>
+        <location filename="../src/motherboardwidget.cpp" line="103"/>
+        <location filename="../src/motherboardwidget.cpp" line="247"/>
         <source>Serial Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="117"/>
+        <location filename="../src/motherboardwidget.cpp" line="118"/>
         <source>SMBIOS Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="135"/>
+        <location filename="../src/motherboardwidget.cpp" line="136"/>
         <source>Product Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="150"/>
+        <location filename="../src/motherboardwidget.cpp" line="151"/>
         <source>UUID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="155"/>
+        <location filename="../src/motherboardwidget.cpp" line="156"/>
         <source>Wake-up Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="160"/>
+        <location filename="../src/motherboardwidget.cpp" line="161"/>
         <source>SKU Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="174"/>
+        <location filename="../src/motherboardwidget.cpp" line="175"/>
         <source>System Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="182"/>
+        <location filename="../src/motherboardwidget.cpp" line="183"/>
         <source>BIOS Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="192"/>
+        <location filename="../src/motherboardwidget.cpp" line="193"/>
         <source>Release Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="202"/>
+        <location filename="../src/motherboardwidget.cpp" line="203"/>
         <source>BIOS Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="222"/>
+        <location filename="../src/motherboardwidget.cpp" line="223"/>
         <source>Characteristics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="241"/>
+        <location filename="../src/motherboardwidget.cpp" line="242"/>
         <source>Type</source>
         <comment>Chassis Information</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="251"/>
+        <location filename="../src/motherboardwidget.cpp" line="252"/>
         <source>Version</source>
         <comment>Chassis Information</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="259"/>
+        <location filename="../src/motherboardwidget.cpp" line="260"/>
         <source>Chassis Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="275"/>
+        <location filename="../src/motherboardwidget.cpp" line="276"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="284"/>
+        <location filename="../src/motherboardwidget.cpp" line="285"/>
         <source>Slot Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="288"/>
+        <location filename="../src/motherboardwidget.cpp" line="318"/>
         <source>Size</source>
         <comment>Computer_core_memory</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="298"/>
-        <source>Size</source>
-        <comment>memory size</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="319"/>
+        <location filename="../src/motherboardwidget.cpp" line="329"/>
         <source>Maximum Capacity</source>
         <comment>PhysicMemory</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="345"/>
+        <location filename="../src/motherboardwidget.cpp" line="355"/>
         <source>Upgradeable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="346"/>
+        <location filename="../src/motherboardwidget.cpp" line="356"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="346"/>
+        <location filename="../src/motherboardwidget.cpp" line="356"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="350"/>
+        <location filename="../src/motherboardwidget.cpp" line="360"/>
         <source>Memory Info</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2467,128 +2466,128 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="182"/>
-        <source>copies</source>
+        <location filename="../src/printerwidget.cpp" line="181"/>
+        <source>Copies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="187"/>
-        <source>Device-Uri</source>
+        <location filename="../src/printerwidget.cpp" line="186"/>
+        <source>Device URI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="192"/>
+        <location filename="../src/printerwidget.cpp" line="196"/>
+        <source>Job Cancel After</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="201"/>
+        <source>Job Hold Until</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="206"/>
+        <source>Job Priority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="211"/>
+        <source>Job Sheets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="216"/>
+        <source>Marker Change Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="226"/>
+        <source>Number Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="231"/>
+        <source>Orientation Requested</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="236"/>
+        <source>Print Color Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="241"/>
+        <source>PrinterInfo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="246"/>
+        <source>Printer Is Accepting Jobs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="251"/>
+        <source>Printer Is Shared</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="256"/>
+        <source>Printer Is Temporary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="261"/>
+        <source>Printer Make And Model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="266"/>
+        <source>Printer State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="271"/>
+        <source>Printer State Change Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="276"/>
+        <source>Printer State Reasons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="281"/>
+        <source>Printer Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="286"/>
+        <source>Printer URI Supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="291"/>
+        <source>Sides</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/printerwidget.cpp" line="191"/>
         <source>Finishings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="197"/>
-        <source>Job-cancel-after</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="202"/>
-        <source>Job-hold-until</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="207"/>
-        <source>Job-priority</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="212"/>
-        <source>Job-Sheets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="217"/>
-        <source>marker-change-time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="222"/>
+        <location filename="../src/printerwidget.cpp" line="221"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="227"/>
-        <source>number-up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="232"/>
-        <source>orientation-requested</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="237"/>
-        <source>print-color-mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="242"/>
-        <source>printerInfo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="247"/>
-        <source>printer-is-accepting-jobs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="252"/>
-        <source>printer-is-shared</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="257"/>
-        <source>printer-is-temporary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="262"/>
-        <source>printer-make-and-model</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="267"/>
-        <source>printer-state</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="272"/>
-        <source>printer-state-change-time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="277"/>
-        <source>printer-state-reasons</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="282"/>
-        <source>printer-type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="287"/>
-        <source>printer-uri-supported</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="292"/>
-        <source>sides</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="341"/>
+        <location filename="../src/printerwidget.cpp" line="323"/>
         <source>printer-info</source>
         <comment>Printer Info,shown on first column of table&apos;s head</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/printerwidget.cpp" line="342"/>
+        <location filename="../src/printerwidget.cpp" line="324"/>
         <source>printer-make-and-model</source>
         <comment>Printer Info,shown on second column of table&apos;s head </comment>
         <translation type="unfinished"></translation>

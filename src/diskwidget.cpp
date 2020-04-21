@@ -33,6 +33,194 @@ DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Stora
     getHwinfoDiskList();
 }
 
+QString DiskWidget::setMediaType(QString &disk, QStringList &diskType)
+{
+    QString mediaType;
+
+    QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
+    foreach (auto type, diskType) {
+        if (devicefileStr.contains(type, Qt::CaseInsensitive)) {
+            mediaType = DeviceInfoParser::Instance().queryData("lsblk", type, "rm");
+        }
+    }
+
+    if (mediaType == "0") {
+        mediaType = "SSD";
+    } else if (mediaType == "1") {
+        mediaType = "HDD";
+    } else {
+        mediaType = tr("UnKnown");
+    }
+
+    ArticleStruct media(tr("Media Type"));
+    media.value = mediaType;
+    m_articles.push_back(media);
+    m_existArticles.insert("Media Type");
+
+    return mediaType;
+}
+
+ArticleStruct DiskWidget::setDiskSizeInfo(QString &disk)
+{
+    QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
+    int index = devicefileStr.indexOf("(");
+    devicefileStr = devicefileStr.mid(0, index).trimmed();
+
+//    QString driverStr = DeviceInfoParser::Instance().queryData("Storage",disk, "Driver");
+
+    ArticleStruct size(tr("Size"));
+    if (DeviceInfoParser::Instance().isSmartctlSupport(devicefileStr) == true)  {
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(size.value, devicefileStr, "capacity");
+
+        QRegExp reg("\\[[\\s\\S]+\\]");
+
+        // 获取 [] 中的实际大小
+        if ( reg.indexIn(size.value) > -1) {
+            size.value = reg.cap(0);
+
+            reg.setPattern("[0-9]+[\\s\\S]*[^\\]*]");
+            if ( reg.indexIn(size.value) > -1) {
+                size.value = reg.cap(0);
+            }
+        }
+    } else {
+        size.queryData("Storage", disk, "Capacity");
+        int index = size.value.indexOf("(");
+        size.value = size.value.mid(0, index).trimmed();
+    }
+
+    m_articles.push_back(size);
+    m_existArticles.insert("Capacity");
+
+    return size;
+}
+
+ArticleStruct DiskWidget::setDiskModelInfo(QString &disk)
+{
+    ArticleStruct model(tr("Model"));
+
+    QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
+//    QString driverStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Driver");
+    int index = devicefileStr.indexOf("(");
+    devicefileStr = devicefileStr.mid(0, index).trimmed();
+
+    if (DeviceInfoParser::Instance().isSmartctlSupport(devicefileStr) == true) {
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(model.value, devicefileStr, "model");
+    } else {
+        model.queryData("Storage", disk, "Model");
+        model.value = model.value.replace("\"", "").trimmed();
+    }
+
+    m_articles.push_back(model);
+    m_existArticles.insert("Model");
+
+    return model;
+}
+
+void DiskWidget::addOtherSmartctlInfo(QString &disk)
+{
+    // serial Number
+    QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
+//    QString driverStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Driver");
+    int index = devicefileStr.indexOf("(");
+    devicefileStr = devicefileStr.mid(0, index).trimmed();
+
+    if (DeviceInfoParser::Instance().isSmartctlSupport(devicefileStr) == true) {
+        // 序列号
+        ArticleStruct serial(tr("Serial Number"));
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(serial.value, devicefileStr, "serial");
+        m_articles.push_back(serial);
+        m_existArticles.insert("Serial Number");
+
+        // 固件版本
+        ArticleStruct firmware(tr("Firmware Version"));
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(firmware.value, devicefileStr, "Firmware Version");
+        m_articles.push_back(firmware);
+        m_existArticles.insert("Firmware Version");
+
+
+        QString sataVersion;
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(sataVersion, devicefileStr, "SATA Version");
+
+        int index = sataVersion.indexOf(",");
+        if (index > 0) {
+            ArticleStruct speed(tr("Speed", "stroage info"));
+            speed.value = sataVersion.mid( index + 1 );
+            speed.value = speed.value.trimmed();
+            m_articles.push_back(speed);
+        }
+
+        ArticleStruct rr(tr("Rotation Rate", "stroage info"));
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(rr.value, devicefileStr, "Rotation Rate");
+        m_articles.push_back(rr);
+        m_existArticles.insert("Rotation Rate");
+
+        ArticleStruct powerOnHours(tr("Power On Hours", "stroage info"));
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnHours.value, devicefileStr, "Power_On_Hours");
+        if (powerOnHours.isValid()) {
+            powerOnHours.value += (" " + tr("Hours"));
+        }
+        m_articles.push_back(powerOnHours);
+        m_existArticles.insert("Power_On_Hours");
+
+        ArticleStruct powerOnMinutes(tr("Power_On_Minutes", "stroage info"));
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnMinutes.value, devicefileStr, "Power_On_Minutes");
+        if (powerOnMinutes.isValid()) {
+            powerOnMinutes.value += (" " + tr("Minutes", "Power_On_Minutes"));
+        }
+        m_articles.push_back(powerOnMinutes);
+        m_existArticles.insert("Power_On_Minutes");
+
+
+        ArticleStruct powerOnHalfMinutes(tr("Power_On_Half_Minutes", "stroage info"));
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnHalfMinutes.value, devicefileStr, "Power_On_Half_Minutes");
+        if (powerOnHalfMinutes.isValid()) {
+            powerOnHalfMinutes.value += " ";
+            powerOnHalfMinutes.value += tr("Half Minutes");
+        }
+        m_articles.push_back(powerOnHalfMinutes);
+        m_existArticles.insert("Power_On_Half_Minutes");
+
+        ArticleStruct powerOnSeconds(tr("Power_On_Seconds", "stroage info"));
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnSeconds.value, devicefileStr, "Power_On_Seconds");
+        if (powerOnSeconds.isValid()) {
+            powerOnSeconds.value += " ";
+            powerOnSeconds.value += tr("Seconds");
+        }
+        m_articles.push_back(powerOnSeconds);
+        m_existArticles.insert("Power_On_Seconds");
+
+        ArticleStruct powerCycleCount(tr("Power Cycle Count", "stroage info"));
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerCycleCount.value, devicefileStr, "Power_Cycle_Count");
+        if (powerCycleCount.isValid()) {
+            powerCycleCount.value += " ";
+            powerCycleCount.value += tr("Times", "Power Cycle Count");
+        }
+        m_articles.push_back(powerCycleCount);
+        m_existArticles.insert("Power_Cycle_Count");
+    }
+}
+
+ArticleStruct DiskWidget::setDiskInterfaceInfo(QString &disk)
+{
+    ArticleStruct interface(tr("Interface"));
+    interface.queryData("Storage", disk, "Driver");
+
+    if (interface.value.contains("usb", Qt::CaseInsensitive) == true) {
+        interface.value = "USB";
+    } else {
+        QStringList strList = interface.value.split(",");
+        if (strList.size() >= 1)
+            interface.value = strList[0].toUpper().trimmed();
+        interface.value.replace("\"", "");
+    }
+
+    m_articles.push_back(interface);
+    m_existArticles.insert("Driver");
+
+    return interface;
+}
+
 void DiskWidget::getHwinfoDiskList()
 {
     QStringList diskList = DeviceInfoParser::Instance().getHwinfoDiskList();
@@ -43,36 +231,40 @@ void DiskWidget::getHwinfoDiskList()
         return;
     }
 
-    foreach (auto disk, diskList)
-    {
+    foreach (auto disk, diskList) {
         m_articles.clear();
         m_existArticles.clear();
 
-        ArticleStruct model = addArticleStruct(tr("Model"), "Storage", disk, "Model");
-        ArticleStruct vendor = addArticleStruct(tr("Vendor"),"Storage", disk, "Vendor");
-        ArticleStruct size = addArticleStruct(tr("Size"), "Storage",disk, "Capacity");
-        ArticleStruct description = addArticleStruct(tr("Description"), "Storage", "disk", "Hardware Class");
-        ArticleStruct driver = addArticleStruct(tr("Driver"), "Storage",disk, "Driver");
-        ArticleStruct deviceFile = addArticleStruct(tr("Device File"), "Storage",disk, "Device File");
 
-        QString mediaType;        // 设置介质类型
-        foreach (auto type, diskType) {
-            if (deviceFile.value.contains(type, Qt::CaseInsensitive)){
-                mediaType = DeviceInfoParser::Instance().queryData("lsblk", type, "rm");
-            }
-        }
+        ArticleStruct model = setDiskModelInfo(disk);
 
-        if (mediaType == "0") {
-            mediaType = "SSD";
-        }
-        else if (mediaType == "1") {
-            mediaType = "HDD";
-        }
-        else {
-            mediaType = tr("UnKnown");
-        }
+        ArticleStruct vendor(tr("Vendor"));
+        vendor.queryData("Storage", disk, "Vendor");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("Storage", disk, m_articles, m_existArticles);
+        // vendor 信息只显示 "" 里面的内容
+        int startIndex = vendor.value.indexOf("\"");
+        vendor.value = vendor.value.mid(startIndex);
+        vendor.value = vendor.value.replace("\"", "");
+        m_articles.push_back(vendor);
+        m_existArticles.insert("Vendor");
+
+        // 设置介质类型
+        QString mediaType = setMediaType(disk, diskType);
+
+        // 设置硬盘大小
+        ArticleStruct size = setDiskSizeInfo(disk);
+
+        // 设置硬盘接口
+        setDiskInterfaceInfo(disk);
+
+        // 设置硬盘序列号
+        addOtherSmartctlInfo(disk);
+
+        // 设置硬盘固件版本
+
+
+        // 描述
+        ArticleStruct description = addArticleStruct(tr("Description"), "Storage", disk, "Device File");
 
         QString title = model.isValid() ? model.value : description.value;
         //m_articlesmap.insert(title, m_articles);
