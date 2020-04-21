@@ -208,10 +208,18 @@ ArticleStruct DiskWidget::setDiskInterfaceInfo(QString &disk)
 
     if (interface.value.contains("usb", Qt::CaseInsensitive) == true) {
         interface.value = "USB";
-    } else {
+    }
+    else if (interface.value.contains("nvme", Qt::CaseInsensitive) == true){
         QStringList strList = interface.value.split(",");
         if (strList.size() >= 1)
             interface.value = strList[0].toUpper().trimmed();
+        interface.value.replace("\"", "");
+    }
+    else {
+        QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
+        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(interface.value, devicefileStr, "SATA Version");
+        int index = interface.value.indexOf(",");
+        interface.value = interface.value.mid(0, index);
         interface.value.replace("\"", "");
     }
 
