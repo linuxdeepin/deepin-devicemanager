@@ -74,5 +74,6 @@ const int TableViewRowHeight_ = 36;
 //const QString DEVICEINFO_PATH = "/dde_devicemanager/computers/test_monitor_refresh_rate";
 //const QString DEVICEINFO_PATH = "/home/lx777/Downloads/20200409/deviceInfo_20776_dmidecode";
 //const QString DEVICEINFO_PATH ="/home/lx777/Downloads/20200409/18053_deviceInfo_shuweiban";
+//const QString DEVICEINFO_PATH = "/home/lx777/Downloads/20200409/deviceInfo_19517_sp1";
 
 //#define TEST_DATA_FROM_FILE

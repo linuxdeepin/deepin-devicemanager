@@ -31,6 +31,7 @@
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
+//显示屏的宽高，递归，返回高度值。
 int gcd(int a, int b)
 {
     if (a < b)
@@ -41,6 +42,7 @@ int gcd(int a, int b)
         return gcd(b, a % b);
 }
 
+//发现刷新率
 bool findAspectRatio(int width, int height, int &ar_w, int &ar_h)
 {
     float r1 = float(width) / float(height);
@@ -59,12 +61,16 @@ bool findAspectRatio(int width, int height, int &ar_w, int &ar_h)
     return false;
 }
 
+//显示设备，界面
 MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Monitor"))
 {
 //    name.name = tr("Name");
 //    vendor.name = tr("Vendor");
+    //当前分辨率，支持分辨率，刷新率，显示比例
     currentResolution.name = tr("Resolution");
     resolutionList.name = tr("Support Resolution");
+    refreshRateScreen.name = tr("Refresh Rate");
+    //显示比例
     displayRatio.name = tr("Display Ratio");
 //    monitorSize.name = tr("Size");
     //initWidgetEX();
@@ -99,9 +105,14 @@ std::string MonitorWidget::getCmdResult(const std::string &strCmd)
     return strResult;
 }
 
+// 加载显示屏大小
 bool MonitorWidget::loadXrandrDisplaySize()
 {
-    QString command("#!/bin/bash\nxrandr --verbose | perl -ne '\nif ((/EDID(_DATA)?:/.../:/) && !/:/) {\n  s/^\\s+//;\n  chomp;\n  $hex .= $_;\n} elsif ($hex) {\n  # Use \"|strings\" if you dont have read-edid package installed \n  # and just want to see (or grep) the human-readable parts.\n  open FH, \"|parse-edid\"; \n  print FH pack(\"H*\", $hex); \n  $hex = \"\";\n}' | grep DisplaySize\n");
+    QString command("#!/bin/bash\nxrandr --verbose | perl -ne '\nif ((/EDID(_DATA)?:/.../:/) && !/:/) "
+                    "{\n  s/^\\s+//;\n  chomp;\n  $hex .= $_;\n} elsif ($hex) {\n  # Use \"|strings\" "
+                    "if you dont have read-edid package installed \n  # and just want to see (or grep) the human-readable parts.\n  open FH, "
+                    "\"|parse-edid\"; \n  print FH pack(\"H*\", $hex); \n  $hex = \"\";\n}' | grep DisplaySize\n");
+
 #ifdef TEST_DATA_FROM_FILE
     command = QString("#!/bin/bash\ncat %1 | perl -ne '\nif ((/EDID(_DATA)?:/.../:/) && !/:/) {\n  s/^\\s+//;\n  chomp;\n  $hex .= $_;\n} elsif ($hex) {\n  # Use \"|strings\" if you dont have read-edid package installed \n  # and just want to see (or grep) the human-readable parts.\n  open FH, \"|parse-edid\"; \n  print FH pack(\"H*\", $hex); \n  $hex = \"\";\n}' | grep DisplaySize\n").arg(DEVICEINFO_PATH + "/xrandr.txt");
 #endif
@@ -114,7 +125,7 @@ bool MonitorWidget::loadXrandrDisplaySize()
         if(words.size() != 3){continue;}
 
         QString str = paraseDisplaySize(words[1].toDouble(),words[2].toDouble());
-        qDebug() << str;
+//        qDebug() << str;
     }
 }
 
@@ -137,7 +148,9 @@ void MonitorWidget::initWidget()
         ArticleStruct vendor(tr("Vendor"));
         ArticleStruct currentResolution(tr("Resolution"));
         ArticleStruct resolutionList(tr("Support Resolution"));
+        //显示屏显示比例
         ArticleStruct displayRatio(tr("Display Ratio"));
+        //显示屏大小
         ArticleStruct monitorSize(tr("Size"));
 
         double inch = 0.0;
@@ -222,9 +235,13 @@ void MonitorWidget::initWidget()
 
             currentResolution.queryData("xrandr", xrandrMonitorList.at(i), "Resolution");
             //guarantee resulotion end with "@","\\d+","hz|HZ|Hz"
-            parseCurResolution(currentResolution, resolutionList);
+            //保证  推荐的分辨率以“ @”，“ \\ d +”，“ hz | HZ | Hz”  结尾
+            //此处获取的屏幕大小正确，但是刷新率系统改变，并不会变化
+//            parseCurResolution(currentResolution, resolutionList);
+//            articles.push_back(currentResolution);
+            currentResolution.value = DeviceInfoParser::Instance().currentResolutionRefresh;
             articles.push_back(currentResolution);
-
+            //显示比例的字段
             displayRatio.value = parseDisplayRatio(currentResolution.value);
             articles.push_back(displayRatio);
 
@@ -313,7 +330,7 @@ void MonitorWidget::initWidgetEX()
         addTable( headers, tabList);
     }
 }
-
+//添加设备的信息从xrandr
 void MonitorWidget::addDeviceFromXrandr(const QString& monitor)
 {
     ArticleStruct primaryMonitor(tr("Primary Monitor"));
@@ -323,8 +340,11 @@ void MonitorWidget::addDeviceFromXrandr(const QString& monitor)
     }
     articles.push_back(primaryMonitor);
 
-    currentResolution.queryData("xrandr", monitor, "Resolution");
-    parseCurResolution(currentResolution, resolutionList);
+    //获取分辨率和刷新率
+//    currentResolution.queryData("xrandr", monitor, "Resolution");
+//    parseCurResolution(currentResolution, resolutionList);
+//    articles.push_back(currentResolution);
+    currentResolution.value = DeviceInfoParser::Instance().currentResolutionRefresh;
     articles.push_back(currentResolution);
 
     displayRatio.value = parseDisplayRatio(currentResolution.value);
@@ -422,6 +442,7 @@ void MonitorWidget::addDeviceFromHwinfo(const QString& monitor,QString& deviceNa
     tabItem.append(vendor.value);
 }
 
+//初始化界面
 void MonitorWidget::initWidgetFromBoth(const QStringList& hwinfoList,const QStringList& xrandrList)
 {
     foreach(const QString& monitor,hwinfoList){
@@ -469,7 +490,7 @@ void MonitorWidget::addOverviewInfo(const QString& info)
     overviewInfo_.value += info;
 }
 
-
+//获得显示屏的大小
 QString MonitorWidget::parseMonitorSize(const QString &sizeDescription, double &inch, QSize &retSize)
 {
     inch = 0.0;
@@ -598,13 +619,14 @@ QString MonitorWidget::parseMonitorSize(const QString& sizeDescription)
 
     return res;
 }
-
+//获得显示比例，这个字段的值
 QString MonitorWidget::parseDisplayRatio(const QString &resulotion)
 {
     QRegExp re("^([\\d]*)x([\\d]*)(.*)$");
     QString res;
     if ( re.exactMatch(resulotion) ) {
         int width = re.cap(1).toInt();
+        //显示屏的宽度高度
         int height = re.cap(2).toInt();
         int gys = gcd(width, height);
         int w = width / gys;
@@ -620,6 +642,7 @@ QString MonitorWidget::parseDisplayRatio(const QString &resulotion)
     return res;
 }
 
+//获得屏幕尺寸
 QString MonitorWidget::paraseDisplaySize(const double& width,const double& height)
 {
     double inch = std::sqrt((width/25.4) * (width/25.4) + (height/25.4) * (height/25.4));
@@ -632,7 +655,6 @@ QString MonitorWidget::paraseDisplaySize(const double& width,const double& heigh
 QString MonitorWidget::getMonitorSizeFromEDID(int index)
 {
     QString edid = DeviceInfoParser::Instance().getEDID(index);
-    qDebug() << edid;
     if (edid.isEmpty()) {
         return "";
     }
@@ -659,21 +681,33 @@ QString MonitorWidget::getMonitorSizeFromEDID(int index)
     return ret;
 }
 
-void MonitorWidget::parseCurResolution(ArticleStruct &artOfCurResolution, ArticleStruct &artOfResolutionList)
+//解析当前分辨率，确保@结尾
+//void MonitorWidget::parseCurResolution(ArticleStruct &artOfCurResolution, ArticleStruct &artOfResolutionList)
+//{
+//    QStringList resolutionList = artOfResolutionList.value.split(",", QString::SkipEmptyParts);
+//    foreach (auto supportResolution, resolutionList) {
+//        supportResolution.remove(QRegExp("\\s"));
+//        if (supportResolution.startsWith(artOfCurResolution.value, Qt::CaseSensitive) &&
+//                QRegExp("^.*@\\d+(Hz|hz|HZ)$").exactMatch(supportResolution)
+//           ) {
+//            artOfCurResolution.value = supportResolution;
+//            break;
+//        }
+//    }
+//}
+
+ArticleStruct MonitorWidget::getRefreshRateScreen() const
 {
-    QStringList resolutionList = artOfResolutionList.value.split(",", QString::SkipEmptyParts);
-    foreach (auto supportResolution, resolutionList) {
-        supportResolution.remove(QRegExp("\\s"));
-        if (supportResolution.startsWith(artOfCurResolution.value, Qt::CaseSensitive) &&
-                QRegExp("^.*@\\d+(Hz|hz|HZ)$").exactMatch(supportResolution)
-           ) {
-            artOfCurResolution.value = supportResolution;
-            break;
-        }
-    }
-};
+    return refreshRateScreen;
+}
+
+void MonitorWidget::setRefreshRateScreen(const ArticleStruct &value)
+{
+    refreshRateScreen = value;
+}
 
 //content in table view widget is missed
+//表格视图小部件中的内容丢失
 void MonitorWidget::initHwMonitor()
 {
     QList<ArticleStruct> articles;

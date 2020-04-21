@@ -127,6 +127,7 @@ bool KeyboardWidget::findKeyboardFromHwinfo()
         if (name.isValid() == false) {
             overArticle << description;
         }
+        // 此句会重复添加概况的键盘信息。
         overviewInfo_.value += joinArticle(overArticle);
     }
 

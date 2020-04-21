@@ -50,6 +50,9 @@ public:
     QString paraseDisplaySize(const double& width,const double& height);
 
     QString getMonitorSizeFromEDID(int index);
+    ArticleStruct getRefreshRateScreen() const;
+    void setRefreshRateScreen(const ArticleStruct &value);
+
 private:
     void parseCurResolution(ArticleStruct &curResolution,ArticleStruct &resolutionList);
 
@@ -58,9 +61,13 @@ private:
     QList<QStringList> tabList;
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
-
+    //当前分辨率
     ArticleStruct currentResolution;
+    //支持分辨率
     ArticleStruct resolutionList;
+    //显示刷新率
+    ArticleStruct refreshRateScreen;
+    //显示比例字段
     ArticleStruct displayRatio;
 };
 

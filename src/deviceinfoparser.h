@@ -134,6 +134,9 @@ public:
     QStringList getHwinfoPrinterList();
     QStringList getHwinfoMonitorList();
     QStringList getXrandrMonitorList();
+    //获得“xrandr”的信息
+    QStringList getSomeXrandrMonitorList();
+
     QString     getEDID(int index = 0);
 
     QStringList getLshwMultimediaList();
@@ -216,8 +219,9 @@ public:
     bool loadSmartctlDatabase(const QString &diskLogical);
     // cat /proc/bus/input/devices
     bool loadCatInputDatabase();
-    // xrandr
+    // xrandr ,xrandr --verbose,command
     bool loadXrandrDatabase();
+    bool loadSomeXrandrDatabase();
     // get power settings
     bool loadPowerSettings();
 
@@ -318,7 +322,11 @@ public:
     QString homeUrl_;
     QString lsbRelease_;
     QString osVersion_;
+    // 获取显存的大小
     QString varmSize = "Unknown";
+    // 获取屏幕的分辨率和刷新率，一个屏幕
+    QString currentResolutionRefresh;
+
     DatabaseMap                      m_KeyBoardInfo;
 
 public:
