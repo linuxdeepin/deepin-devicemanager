@@ -56,6 +56,9 @@ public:
     // 设置硬盘借口信息
     ArticleStruct setDiskInterfaceInfo(QString &disk);
 
+    // 设置硬盘序列号
+    ArticleStruct setDiskSerialInfo(QString &disk);
+
 private:
 //    QMap<QString, QList<ArticleStruct>> m_articlesmap;
     QList<QStringList> m_tabList;

@@ -83,6 +83,13 @@ ArticleStruct DiskWidget::setDiskSizeInfo(QString &disk)
                 size.value = reg.cap(0);
             }
         }
+
+        if (size.isValid() == false) {
+            size.queryData("Storage", disk, "Capacity");
+            int index = size.value.indexOf("(");
+            size.value = size.value.mid(0, index).trimmed();
+        }
+
     } else {
         size.queryData("Storage", disk, "Capacity");
         int index = size.value.indexOf("(");
@@ -106,6 +113,13 @@ ArticleStruct DiskWidget::setDiskModelInfo(QString &disk)
 
     if (DeviceInfoParser::Instance().isSmartctlSupport(devicefileStr) == true) {
         DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(model.value, devicefileStr, "model");
+
+        // smartctl 中无法获取U盘model信息时
+        if (model.isValid() == false)
+        {
+            model.queryData("Storage", disk, "Model");
+            model.value = model.value.replace("\"", "").trimmed();
+        }
     } else {
         model.queryData("Storage", disk, "Model");
         model.value = model.value.replace("\"", "").trimmed();
@@ -119,18 +133,12 @@ ArticleStruct DiskWidget::setDiskModelInfo(QString &disk)
 
 void DiskWidget::addOtherSmartctlInfo(QString &disk)
 {
-    // serial Number
     QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
 //    QString driverStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Driver");
     int index = devicefileStr.indexOf("(");
     devicefileStr = devicefileStr.mid(0, index).trimmed();
 
     if (DeviceInfoParser::Instance().isSmartctlSupport(devicefileStr) == true) {
-        // 序列号
-        ArticleStruct serial(tr("Serial Number"));
-        DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(serial.value, devicefileStr, "serial");
-        m_articles.push_back(serial);
-        m_existArticles.insert("Serial Number");
 
         // 固件版本
         ArticleStruct firmware(tr("Firmware Version"));
@@ -160,6 +168,13 @@ void DiskWidget::addOtherSmartctlInfo(QString &disk)
         if (powerOnHours.isValid()) {
             powerOnHours.value += (" " + tr("Hours"));
         }
+        else {
+            DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnHours.value, devicefileStr, "Power On Hours");
+            if (powerOnHours.isValid()) {
+                powerOnHours.value += (" " + tr("Hours"));
+            }
+        }
+
         m_articles.push_back(powerOnHours);
         m_existArticles.insert("Power_On_Hours");
 
@@ -187,6 +202,9 @@ void DiskWidget::addOtherSmartctlInfo(QString &disk)
             powerOnSeconds.value += " ";
             powerOnSeconds.value += tr("Seconds");
         }
+        else {
+
+        }
         m_articles.push_back(powerOnSeconds);
         m_existArticles.insert("Power_On_Seconds");
 
@@ -195,6 +213,14 @@ void DiskWidget::addOtherSmartctlInfo(QString &disk)
         if (powerCycleCount.isValid()) {
             powerCycleCount.value += " ";
             powerCycleCount.value += tr("Times", "Power Cycle Count");
+        }
+        else {
+            DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerCycleCount.value, devicefileStr, "Power Cycles");
+            if (powerCycleCount.isValid()) {
+                powerCycleCount.value += " ";
+                powerCycleCount.value += tr("Times", "Power Cycle Count");
+            }
+
         }
         m_articles.push_back(powerCycleCount);
         m_existArticles.insert("Power_Cycle_Count");
@@ -227,6 +253,28 @@ ArticleStruct DiskWidget::setDiskInterfaceInfo(QString &disk)
     m_existArticles.insert("Driver");
 
     return interface;
+}
+
+ArticleStruct DiskWidget::setDiskSerialInfo(QString &disk)
+{
+    // 序列号
+    ArticleStruct serial(tr("Serial Number"));
+
+    QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
+    int index = devicefileStr.indexOf("(");
+    devicefileStr = devicefileStr.mid(0, index).trimmed();
+
+    DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(serial.value, devicefileStr, "serial");
+
+    if (serial.isValid() == false) {
+        serial.value = DeviceInfoParser::Instance().queryData("Storage", disk, "Serial ID");
+        serial.value.replace("\"", "");
+    }
+
+    m_articles.push_back(serial);
+    m_existArticles.insert("Serial Number");
+
+    return serial;
 }
 
 void DiskWidget::getHwinfoDiskList()
@@ -266,10 +314,10 @@ void DiskWidget::getHwinfoDiskList()
         setDiskInterfaceInfo(disk);
 
         // 设置硬盘序列号
+        setDiskSerialInfo(disk);
+
+        // 设置硬盘序smartctl其他信息
         addOtherSmartctlInfo(disk);
-
-        // 设置硬盘固件版本
-
 
         // 描述
         ArticleStruct description = addArticleStruct(tr("Description"), "Storage", disk, "Device File");
