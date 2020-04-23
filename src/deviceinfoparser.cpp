@@ -413,6 +413,7 @@ QStringList DeviceInfoParser::getLshwDiskNameList()
     return diskList;
 }
 
+// 获取显示适配器信息
 QStringList DeviceInfoParser::getLshwDiaplayadapterList()
 {
     checkValueFun_t func = [](const QString & fk)->bool {
@@ -428,6 +429,7 @@ QStringList DeviceInfoParser::getLshwDiaplayadapterList()
     return getMatchToolDeviceList("lshw", &func);
 }
 
+//获取显示器 屏幕名称
 QStringList DeviceInfoParser::getXrandrScreenName()
 {
     checkValueFun_t func = [](const QString & fk)->bool {
@@ -1181,11 +1183,11 @@ QStringList DeviceInfoParser::getLshwCDRomList()
     }
 
     foreach (const QString &fk, toolDatabaseSecondOrder_["lshw"]) {
-//        if(fk.contains("medium"))
-//        {
-//            continue;
+        if(fk.contains("medium"))
+        {
+            continue;
 
-//        }
+        }
         if (fk.contains("cdrom")) {
             cdromList.push_back(fk);
             orderedDevices.insert(fk);
@@ -1675,6 +1677,7 @@ bool DeviceInfoParser::loadLshwDatabase()
             continue;
         }
 
+        //行数
         ++lineNumber;
 
         QString line = lshwOut.mid(startIndex, i - startIndex);
@@ -1691,8 +1694,10 @@ bool DeviceInfoParser::loadLshwDatabase()
             continue;
         }
 
+        //*- + type名称
         if (line.contains(Devicetype_lshw_Class_Prefix)) {
             QString deviceTypeName;
+            //获得所有-* 的typename
             foreach (auto dt, deviceType) {
                 if (deviceTypeName.isEmpty() == false) {
                     deviceTypeName += Devicetype_Stitching_Symbol;
