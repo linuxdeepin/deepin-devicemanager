@@ -106,7 +106,27 @@ bool KeyboardWidget::findKeyboardFromHwinfo()
         addArticleStruct(tr("Unique ID"), "Keyboard", keyboard, "Unique ID");
         addArticleStruct(tr("SysFS ID"), "Keyboard", keyboard, "SysFS ID");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("Keyboard", keyboard, m_articles, m_existArticles);
+        ArticleStruct driver(tr("driver"));
+        driver.queryData("lshw", keyboard, "driver");
+        m_articles.push_back(driver);
+        m_existArticles.insert("driver");
+
+        ArticleStruct maxpower(tr("maxpower"));
+        maxpower.queryData("lshw", keyboard, "maxpower");
+        m_articles.push_back(maxpower);
+        m_existArticles.insert("maxpower");
+
+        ArticleStruct physicalId(tr("physical id"));
+        physicalId.queryData("lshw", keyboard, "physical id");
+        m_articles.push_back(physicalId);
+        m_existArticles.insert("physical id");
+
+        ArticleStruct speed(tr("speed"));
+        speed.queryData("lshw", keyboard, "speed");
+        m_articles.push_back(speed);
+        m_existArticles.insert("speed");
+
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, m_articles, m_existArticles,"ManulTrack__KeyBoard","KeyBoard information");
 
         QString title = model.isValid() ? model.value : description.value;
         m_articlesmap.insert(title, m_articles);
@@ -163,8 +183,32 @@ bool KeyboardWidget::findKeyboardFromLshw()
         addArticleStruct(tr("Width"), "lshw", keyboard, "width");
         addArticleStruct(tr("Clock"), "lshw", keyboard, "clock");
         addArticleStruct(tr("Capabilities"), "lshw", keyboard, "capabilities");
+        m_existArticles.insert("product");
+        m_existArticles.insert("description");
+        m_existArticles.insert("vendor");
+        m_existArticles.insert("bus info");
+        m_existArticles.insert("physical id");
+        m_existArticles.insert("logical name");
+        m_existArticles.insert("version");
+        m_existArticles.insert("width");
+        m_existArticles.insert("clock");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, m_articles, m_existArticles);
+        ArticleStruct driver(tr("driver"));
+        driver.queryData("lshw", keyboard, "driver");
+        m_articles.push_back(driver);
+        m_existArticles.insert("driver");
+
+        ArticleStruct maxpower(tr("maxpower"));
+        maxpower.queryData("lshw", keyboard, "maxpower");
+        m_articles.push_back(maxpower);
+        m_existArticles.insert("maxpower");
+
+        ArticleStruct speed(tr("speed"));
+        speed.queryData("lshw", keyboard, "speed");
+        m_articles.push_back(speed);
+        m_existArticles.insert("speed");
+
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", keyboard, m_articles, m_existArticles,"ManulTrack__KeyBoard","KeyBoard information");
 
         QString title = name.isValid() ? name.value : description.value;
         m_articlesmap.insert(title, m_articles);
@@ -254,7 +298,7 @@ bool KeyboardWidget::findKeyboardFromCatInput()
 
                 //existArticles.insert("Connected");
 
-                DeviceInfoParser::Instance().queryRemainderDeviceInfo("paired-devices", blueTooth, articles, existArticles);
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("paired-devices", blueTooth, articles, existArticles,"ManulTrack__KeyBoard","KeyBoard information");
             }
         }
 
@@ -310,7 +354,7 @@ bool KeyboardWidget::findKeyboardFromCatInput()
         articles.push_back(product);
         existArticles.insert("Product");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles,"ManulTrack__KeyBoard","KeyBoard information");
 
         if (uniq.isValid()) {
             auto upower = DeviceInfoParser::Instance().getCorrespondUpower(uniq.value);

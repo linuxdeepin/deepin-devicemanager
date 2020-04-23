@@ -168,7 +168,7 @@ void DisplayadapterWidget::initWidget()
         articles.push_back(physicalId);
         existArticles.insert("physical id");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", displayadapter, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", displayadapter, articles, existArticles,"ManulTrack__DisplayAdapter","DisplayAdapter information");
 
         QString dpName = "";
         if (displayadapterList.size() > 1) {

@@ -50,36 +50,60 @@ void CDRomWidget::initWidget()
         articles.clear();
         existArticles.clear();
 
-        ArticleStruct model("Model");
+        ArticleStruct model(tr("Model"));
         model.queryData( "lshw", device, "product");
         articles.push_back(model);
         existArticles.insert("product");
 
-        ArticleStruct vendor("Vendor");
+        ArticleStruct vendor(tr("Vendor"));
         vendor.queryData( "lshw", device, "vendor");
         articles.push_back(vendor);
         existArticles.insert("vendor");
 
-        ArticleStruct description("Description");
+        ArticleStruct description(tr("Description"));
         description.queryData( "lshw", device, "description");
         articles.push_back(description);
         existArticles.insert("description");
 
-        ArticleStruct busInfo("Bus Info");
+        ArticleStruct busInfo(tr("Bus Info"));
         busInfo.queryData( "lshw", device, "bus info");
         articles.push_back(busInfo);
         existArticles.insert("bus info");
 
-        ArticleStruct version("Version");
+        ArticleStruct version(tr("Version"));
         version.queryData( "lshw", device, "version");
         articles.push_back(version);
         existArticles.insert("version");
 
-        ArticleStruct logicalName("Logical Name");
+        ArticleStruct logicalName(tr("Logical Name"));
         logicalName.queryData( "lshw", device, "logical name");
         articles.push_back(logicalName);
         existArticles.insert("logical name");
 
+        ArticleStruct Type(tr("Type"));
+        description.queryData( "lshw", device, "Type");
+        articles.push_back(Type);
+        existArticles.insert("Type");
+
+        ArticleStruct ansiversion(tr("ansiversion"));
+        busInfo.queryData( "lshw", device, "ansiversion");
+        articles.push_back(ansiversion);
+        existArticles.insert("ansiversion");
+
+        ArticleStruct capabilities(tr("capabilities"));
+        version.queryData( "lshw", device, "capabilities");
+        articles.push_back(capabilities);
+        existArticles.insert("capabilities");
+
+        ArticleStruct physicalId(tr("physical id"));
+        logicalName.queryData( "lshw", device, "physical id");
+        articles.push_back(physicalId);
+        existArticles.insert("physical id");
+
+        ArticleStruct status(tr("status"));
+        status.queryData("lshw",device,"status");
+        articles.push_back(status);
+        existArticles.insert("status");
 
 //        DeviceInfoParser::Instance().queryRemainderDeviceInfo( "lshw", device, articles, existArticles,
 //                                                               "ManulTrack__CDROM","CDROM infomation from lshw");

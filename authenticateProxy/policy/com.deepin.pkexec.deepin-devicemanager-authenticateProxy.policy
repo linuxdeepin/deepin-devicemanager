@@ -8,7 +8,7 @@
   <action id="com.deepin.pkexec.deepin-devicemanager">
   	<description>Run Device Manager Need Authentication</description>
    <description xml:lang="zh_CN">设备管理器需要授权以读取硬件信息</description>
-    <message>Authentication is required to read Hardware Infomation</message>
+    <message>Authentication is required to read hardware information</message>
     <message xml:lang="zh_CN">需要授权以读取硬件信息</message>
     <icon_name></icon_name>
     <defaults>

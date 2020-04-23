@@ -105,6 +105,31 @@ void MotherboardWidget::initWidget()
     articles.push_back(serial);
     existArticles.insert("Serial Number");
 
+    ArticleStruct assetTag(tr("Asset Tag"));
+    assetTag.queryData("dmidecode", "Base Board Information", "Asset Tag");
+    articles.push_back(assetTag);
+    existArticles.insert("Asset Tag");
+
+    ArticleStruct ChassisHandle(tr("Chassis Handle"));
+    ChassisHandle.queryData("dmidecode", "Base Board Information", "Chassis Handle");
+    articles.push_back(ChassisHandle);
+    existArticles.insert("Chassis Handle");
+
+    ArticleStruct ContainedObjectHandles(tr("Contained Object Handles"));
+    ContainedObjectHandles.queryData("dmidecode", "Base Board Information", "Contained Object Handles");
+    articles.push_back(ContainedObjectHandles);
+    existArticles.insert("Contained Object Handles");
+
+    ArticleStruct locationInChassis(tr("Location In Chassis"));
+    locationInChassis.queryData("dmidecode", "Base Board Information", "Location In Chassis");
+    articles.push_back(locationInChassis);
+    existArticles.insert("Location In Chassis");
+
+    ArticleStruct Type(tr("Type"));
+    Type.queryData("dmidecode", "Base Board Information", "Type");
+    articles.push_back(Type);
+    existArticles.insert("Type");
+
     existArticles.insert("Features");
 
     bool res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "Base Board Information", articles, existArticles,
@@ -163,6 +188,11 @@ void MotherboardWidget::initWidget()
     articles.push_back(sku);
     existArticles.insert("SKU Number");
 
+    ArticleStruct family(tr("Family"));
+    family.queryData("dmidecode", "System Information", "Family");
+    articles.push_back(family);
+    existArticles.insert("Family");
+
     existArticles.insert("Features");
 
     res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "System Information", articles, existArticles,
@@ -209,6 +239,21 @@ void MotherboardWidget::initWidget()
     articles.push_back(biosVendor);
     existArticles.insert("Vendor");
 
+    ArticleStruct address(tr("Address"));
+    address.queryData("dmidecode", "BIOS Information", "Address");
+    articles.push_back(address);
+    existArticles.insert("Address");
+
+    ArticleStruct romSize(tr("ROM Size"));
+    romSize.queryData("dmidecode", "BIOS Information", "ROM Size");
+    articles.push_back(romSize);
+    existArticles.insert("ROM Size");
+
+    ArticleStruct runtimeSize(tr("Runtime Size"));
+    runtimeSize.queryData("dmidecode", "BIOS Information", "Runtime Size");
+    articles.push_back(runtimeSize);
+    existArticles.insert("Runtime Size");
+
     existArticles.insert("Characteristics");
     res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles,
                                                                 "ManulTrack__BiosInfo_dmi","bios info of motherboard from dmidecode");
@@ -217,6 +262,21 @@ void MotherboardWidget::initWidget()
         res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("catbaseboard", "BIOS Information", articles, existArticles,
                                                                     "ManulTrack__BiosInfo_catbaseboard","bios info of motherboard from catbaseboard");
     }
+
+    ArticleStruct currentInstalledLanguage(tr("Currently Installed Language"));
+    currentInstalledLanguage.queryData("dmidecode", "BIOS Information", "Currently Installed Language");
+    articles.push_back(currentInstalledLanguage);
+    existArticles.insert("Currently Installed Language");
+
+    ArticleStruct installableLanguages(tr("Installable Languages"));
+    installableLanguages.queryData("dmidecode", "BIOS Information", "Installable Languages");
+    articles.push_back(installableLanguages);
+    existArticles.insert("Installable Languages");
+
+    ArticleStruct languagesDescriptionFormat(tr("Languages Description Format"));
+    languagesDescriptionFormat.queryData("dmidecode", "BIOS Information", "Languages Description Format");
+    articles.push_back(languagesDescriptionFormat);
+    existArticles.insert("Languages Description Format");
 
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "BIOS Language Information", articles,QSet<QString>(),
                                                           "ManulTrack__Bios_lang","BIOS Language Information");
@@ -227,9 +287,6 @@ void MotherboardWidget::initWidget()
     if (hasValidInfo(articles)) {
         addSubInfo(tr("BIOS"), articles);
     }
-
-    articles.clear();
-    existArticles.clear();
 
     articles.clear();
     existArticles.clear();
@@ -253,6 +310,56 @@ void MotherboardWidget::initWidget()
     chassisVersion.queryData("dmidecode", "Chassis Information", "Version");
     articles.push_back(chassisVersion);
     existArticles.insert("Version");
+
+    ArticleStruct assetTag1(tr("Asset Tag","Chassis Information"));
+    assetTag1.queryData("dmidecode", "Chassis Information", "Asset Tag");
+    articles.push_back(assetTag1);
+    existArticles.insert("Asset Tag");
+
+    ArticleStruct bootUpState(tr("Boot-up State","Chassis Information"));
+    bootUpState.queryData("dmidecode", "Chassis Information", "Boot-up State");
+    articles.push_back(bootUpState);
+    existArticles.insert("Boot-up State");
+
+    ArticleStruct containedElements(tr("Contained Elements","Chassis Information"));
+    containedElements.queryData("dmidecode", "Chassis Information", "Contained Elements");
+    articles.push_back(containedElements);
+    existArticles.insert("Contained Elements");
+
+    ArticleStruct lock(tr("Lock","Chassis Information"));
+    lock.queryData("dmidecode", "Chassis Information", "Lock");
+    articles.push_back(lock);
+    existArticles.insert("Lock");
+
+    ArticleStruct numberOfPowerCords(tr("Number Of Power Cords","Chassis Information"));
+    numberOfPowerCords.queryData("dmidecode", "Chassis Information", "Number Of Power Cords");
+    articles.push_back(numberOfPowerCords);
+    existArticles.insert("Number Of Power Cords");
+
+    ArticleStruct oemInformation(tr("OEM Information","Chassis Information"));
+    oemInformation.queryData("dmidecode", "Chassis Information", "OEM Information");
+    articles.push_back(oemInformation);
+    existArticles.insert("OEM Information");
+
+    ArticleStruct powerSupplyState(tr("Power Supply State","Chassis Information"));
+    powerSupplyState.queryData("dmidecode", "Chassis Information", "Power Supply State");
+    articles.push_back(powerSupplyState);
+    existArticles.insert("Power Supply State");
+
+    ArticleStruct skuNumber(tr("SKU Number","Chassis Information"));
+    skuNumber.queryData("dmidecode", "Chassis Information", "SKU Number");
+    articles.push_back(skuNumber);
+    existArticles.insert("SKU Number");
+
+    ArticleStruct securityStatus(tr("Security Status","Chassis Information"));
+    securityStatus.queryData("dmidecode", "Chassis Information", "Security Status");
+    articles.push_back(securityStatus);
+    existArticles.insert("Security Status");
+
+    ArticleStruct thermalSate(tr("Termal State","Chassis Information"));
+    thermalSate.queryData("dmidecode", "Chassis Information", "Termal State");
+    articles.push_back(thermalSate);
+    existArticles.insert("Termal State");
 
     res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "Chassis Information", articles, existArticles,
                                                                 "ManulTrack__Chassis information","Chassis");
@@ -313,11 +420,9 @@ void MotherboardWidget::addMemoryInfo()
         size.value = QString::number(total) + " " + unitStr;
     }
 
-    size.value.replace( "GiB", " GB" );
-    size.value.replace( "MiB", " MB" );
-    //3311
-//    ArticleStruct size(tr("Size", "Computer_core_memory"));
-//        size.queryData("dmidecode", mem, "Size");
+    //因为内存大小不统一，根据pms17604任务，统一调用系统DBUS接口，显示实际大小
+//    ArticleStruct size(tr("Size", "memory's size"));
+////        size.queryData("dmidecode", mem, "Size");
 //    QDBusInterface mermorySize("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
 //    quint64 size1  = mermorySize.property("MemoryCap").toLongLong();
 //    double size2 = size1 / 1024;
@@ -325,6 +430,8 @@ void MotherboardWidget::addMemoryInfo()
 //    double size4 = size3 / 1024;
 //    //    QString size4 = QString("%1").arg(size3).mid() + "GB";
 //    size.value = QString::number(size4, 'f', 1) + "GB";
+    size.value.replace( "GiB", " GB" );
+    size.value.replace( "MiB", " MB" );
     articles.push_back(size);
 
     ArticleStruct mc(tr("Maximum Capacity","PhysicMemory"));

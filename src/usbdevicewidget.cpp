@@ -144,7 +144,7 @@ void UsbdeviceWidget::initWidget()
         addArticleStruct(tr("Capabilities"), "lshw", device, "capabilities");
 
         // 添加USB info的其他项
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, m_articles, m_existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, m_articles, m_existArticles,"ManulTrack__USB","USB Information");
 
         setTabList(usbdeviceList.size(), name, vendor, description);
     }

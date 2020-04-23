@@ -110,7 +110,27 @@ void MouseWidget::initWidget()
             articles.push_back(capabilities);
             existArticles.insert("capabilities");
 
-            DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwMouse, articles, existArticles);
+            ArticleStruct driver(tr("driver"));
+            driver.queryData("lshw", lshwMouse, "driver");
+            articles.push_back(driver);
+            existArticles.insert("driver");
+
+            ArticleStruct maxpower(tr("maxpower"));
+            maxpower.queryData("lshw", lshwMouse, "maxpower");
+            articles.push_back(maxpower);
+            existArticles.insert("maxpower");
+
+            ArticleStruct physicalId(tr("physical id"));
+            physicalId.queryData("lshw", lshwMouse, "physical id");
+            articles.push_back(physicalId);
+            existArticles.insert("physical id");
+
+            ArticleStruct speed(tr("speed"));
+            speed.queryData("lshw", lshwMouse, "speed");
+            articles.push_back(speed);
+            existArticles.insert("speed");
+
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwMouse, articles, existArticles,"ManulTrack__Mouse","Mouse information");
         }
 
         ArticleStruct uniq(tr("Uniq","Mouse Info from catinput"));
@@ -133,7 +153,7 @@ void MouseWidget::initWidget()
                     continue;
                 }
 
-                DeviceInfoParser::Instance().queryRemainderDeviceInfo("paired-devices", blueTooth, articles, existArticles);
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("paired-devices", blueTooth, articles, existArticles,"ManulTrack__Mouse","Mouse information");
             }
         }
 
@@ -186,7 +206,42 @@ void MouseWidget::initWidget()
         articles.push_back(product);
         existArticles.insert("Product");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles);
+        ArticleStruct bus(tr("Bus"));
+        bus.queryData("catinput", device, "Bus");
+        articles.push_back(bus);
+        existArticles.insert("Bus");
+
+        ArticleStruct ev(tr("EV"));
+        ev.queryData("catinput", device, "EV");
+        articles.push_back(ev);
+        existArticles.insert("EV");
+
+        ArticleStruct handlers(tr("Handlers"));
+        handlers.queryData("catinput", device, "Handlers");
+        articles.push_back(handlers);
+        existArticles.insert("Handlers");
+
+        ArticleStruct key(tr("KEY"));
+        key.queryData("catinput", device, "KEY");
+        articles.push_back(key);
+        existArticles.insert("KEY");
+
+        ArticleStruct msc(tr("MSC"));
+        msc.queryData("catinput", device, "MSC");
+        articles.push_back(msc);
+        existArticles.insert("MSC");
+
+        ArticleStruct prop(tr("PROP"));
+        prop.queryData("catinput", device, "PROP");
+        articles.push_back(prop);
+        existArticles.insert("PROP");
+
+        ArticleStruct rel(tr("REL"));
+        rel.queryData("catinput", device, "REL");
+        articles.push_back(rel);
+        existArticles.insert("REL");
+
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles,"ManulTrack__Mouse","Mouse information");
 
         if( uniq.isValid() )
         {

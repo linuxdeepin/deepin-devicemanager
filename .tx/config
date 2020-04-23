@@ -10,14 +10,14 @@ source_lang = en
 type = QT
 
 [deepin-device-manager.deepin-device-manager-desktop]
-file_filter = translations/desktop_<lang>.ts
-source_file = translations/desktop.ts
+file_filter = translations/desktop/desktop_<lang>.ts
+source_file = translations/desktop/desktop.ts
 source_lang = en
 type = QT
 
 [deepin-device-manager.deepin-device-manager-policy]
-file_filter = translations/policy_<lang>.ts
-source_file = translations/policy.ts
+file_filter = translations/policy/policy_<lang>.ts
+source_file = translations/policy/policy.ts
 source_lang = en
 type = QT
 
