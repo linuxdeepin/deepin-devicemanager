@@ -620,10 +620,111 @@ void DiskWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", disk, articles, existArticles);
+        ArticleStruct type(tr("Type", "stroage info"));
+        type.queryData("lshw", disk, "Type");
+        articles.push_back(type);
+        existArticles.insert("Type");
+
+        ArticleStruct ansiversion(tr("ansiversion", "stroage info"));
+        ansiversion.queryData("lshw", disk, "ansiversion");
+        articles.push_back(ansiversion);
+        existArticles.insert("ansiversion");
+
+        ArticleStruct guid(tr("guid", "stroage info"));
+        guid.queryData("lshw", disk, "guid");
+        articles.push_back(guid);
+        existArticles.insert("guid");
+
+        ArticleStruct busInfo(tr("bus info", "stroage info"));
+        busInfo.queryData("lshw", disk, "bus info");
+        articles.push_back(busInfo);
+        existArticles.insert("bus info");
+
+        ArticleStruct logicalName1(tr("logical name", "stroage info"));
+        logicalName1.queryData("lshw", disk, "logical name");
+        articles.push_back(logicalName1);
+        existArticles.insert("logical name");
+
+        ArticleStruct logicalsectorsize(tr("logicalsectorsize", "stroage info"));
+        logicalsectorsize.queryData("lshw", disk, "logicalsectorsize");
+        articles.push_back(logicalsectorsize);
+        existArticles.insert("logicalsectorsize");
+
+        ArticleStruct physicalId(tr("Capabilities", "physical id"));
+        physicalId.queryData("lshw", disk, "physical id");
+        articles.push_back(physicalId);
+        existArticles.insert("physical id");
+
+        ArticleStruct sectorsize(tr("sectorsize", "stroage info"));
+        sectorsize.queryData("lshw", disk, "sectorsize");
+        articles.push_back(sectorsize);
+        existArticles.insert("sectorsize");
+
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", disk, articles, existArticles,"ManulTrack__Disk","Disk Information");
 
         if ( DeviceInfoParser::Instance().isToolSuccess("smartctl") ) {
-            DeviceInfoParser::Instance().queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles);
+
+            ArticleStruct ataVersion(tr("ATA Version", "stroage info"));
+            ataVersion.queryData("smartctl", logicalName, "ATA Version");
+            articles.push_back(ataVersion);
+            existArticles.insert("ATA Version");
+
+            ArticleStruct autoOfflineDataCollection(tr("Auto Offline Data Collection", "stroage info"));
+            autoOfflineDataCollection.queryData("smartctl", logicalName, "Auto Offline Data Collection");
+            articles.push_back(autoOfflineDataCollection);
+            existArticles.insert("Auto Offline Data Collection");
+
+            ArticleStruct currentPendingSector(tr("Current_Pending_Sector", "stroage info"));
+            currentPendingSector.queryData("smartctl", logicalName, "Current_Pending_Sector");
+            articles.push_back(currentPendingSector);
+            existArticles.insert("Current_Pending_Sector");
+
+            ArticleStruct device(tr("Device", "stroage info"));
+            device.queryData("smartctl", logicalName, "Device");
+            articles.push_back(device);
+            existArticles.insert("Device");
+
+            ArticleStruct endToEndError(tr("End-to-End_Error", "stroage info"));
+            endToEndError.queryData("smartctl", logicalName, "End-to-End_Error");
+            articles.push_back(endToEndError);
+            existArticles.insert("End-to-End_Error");
+
+            ArticleStruct firmwareVersion(tr("Firmware Version", "stroage info"));
+            firmwareVersion.queryData("smartctl", logicalName, "Firmware Version");
+            articles.push_back(firmwareVersion);
+            existArticles.insert("Firmware Version");
+
+            ArticleStruct smartCapabilities(tr("SMART capabilities", "stroage info"));
+            smartCapabilities.queryData("smartctl", logicalName, "SMART capabilities");
+            articles.push_back(smartCapabilities);
+            existArticles.insert("SMART capabilities");
+
+//            ArticleStruct (tr("sectorsize", "stroage info"));
+//            sectorsize.queryData("lshw", logicalName, "sectorsize");
+//            articles.push_back(sectorsize);
+//            existArticles.insert("sectorsize");
+
+//            ArticleStruct sectorsize(tr("sectorsize", "stroage info"));
+//            sectorsize.queryData("lshw", logicalName, "sectorsize");
+//            articles.push_back(sectorsize);
+//            existArticles.insert("sectorsize");
+//            ArticleStruct sectorsize(tr("sectorsize", "stroage info"));
+//            sectorsize.queryData("lshw", logicalName, "sectorsize");
+//            articles.push_back(sectorsize);
+//            existArticles.insert("sectorsize");
+//            ArticleStruct sectorsize(tr("sectorsize", "stroage info"));
+//            sectorsize.queryData("lshw", logicalName, "sectorsize");
+//            articles.push_back(sectorsize);
+//            existArticles.insert("sectorsize");
+//            ArticleStruct sectorsize(tr("sectorsize", "stroage info"));
+//            sectorsize.queryData("lshw", logicalName, "sectorsize");
+//            articles.push_back(sectorsize);
+//            existArticles.insert("sectorsize");
+//            ArticleStruct sectorsize(tr("sectorsize", "stroage info"));
+//            sectorsize.queryData("lshw", logicalName, "sectorsize");
+//            articles.push_back(sectorsize);
+//            existArticles.insert("sectorsize");
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles,"ManulTrack__Disk","Disk Information");
         }
 
         addDevice( model.value, articles, diskList.size() );

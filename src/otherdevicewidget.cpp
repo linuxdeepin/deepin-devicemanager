@@ -61,9 +61,14 @@ void OtherDevicesWidget::loadWidget()
         addArticleStruct(tr("Width"), "lshw", device, "width");
         addArticleStruct(tr("Clock"), "lshw", device, "clock");
         addArticleStruct(tr("Capabilities"), "lshw", device, "capabilities");
+        addArticleStruct(tr("driver"),"lshw",device,"driver");
+        addArticleStruct(tr("irq"),"lshw",device,"irq");
+        addArticleStruct(tr("latency"),"lshw",device,"latency");
+        addArticleStruct(tr("memory"),"lshw",device,"memory");
+        addArticleStruct(tr("pci"),"lshw",device,"pci");
 
         // 添加未显示的属性
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, m_articles, m_existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, m_articles, m_existArticles,"ManulTrack__OtherDevice","OtherDevice information");
 
         QString titleValue = name.value;
         if (name.isValid() == false || name.value == vendor.value) {
@@ -122,7 +127,7 @@ void OtherDevicesWidget::initWidget()
         ArticleStruct type(tr("Type"));
         type.queryData("lshw", device, "Type");
         articles.push_back(type);
-        existArticles.insert("type");
+        existArticles.insert("Type");
 
         ArticleStruct description(tr("Description"));
         description.queryData("lshw", device, "description");
@@ -164,7 +169,7 @@ void OtherDevicesWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles,"ManulTrack__OtherDevice","OtherDevice information");
 
         QString titleValue = name.value;
         if (name.isValid() == false || name.value == vendor.value) {

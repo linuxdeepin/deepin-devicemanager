@@ -130,17 +130,17 @@ void PowerWidget::initWidget()
 
         if(i < upowerSwitchingList.size())
         {
-            DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", device.value, articles, existArticles1);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", device.value, articles, existArticles1,"ManulTrack__POWER","Power information");
         }
 
         if(i < lshwSwitchingpowerList.size())
         {
-            DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwSwitchingpowerList[i], articles, existArticles2);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwSwitchingpowerList[i], articles, existArticles2,"ManulTrack__POWER","Power information");
         }
 
         if(i < demidecodeSwitchingpowerList.size())
         {
-            DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", demidecodeSwitchingpowerList[i], articles, existArticles3);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", demidecodeSwitchingpowerList[i], articles, existArticles3,"ManulTrack__POWER","Power information");
         }
 
         addDevice( "Switching Power", articles, maxSwitchingSize + maxBatterySize, true );
@@ -273,17 +273,17 @@ void PowerWidget::initWidget()
 
         if(i < UpowerBatteryList.size())
         {
-            DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", device.value, articles, existArticles1);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", device.value, articles, existArticles1,"ManulTrack__POWER","Power information");
         }
 
         if(i < lshwBatteryList.size())
         {
-            DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwBatteryList[i], articles, existArticles2);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwBatteryList[i], articles, existArticles2,"ManulTrack__POWER","Power information");
         }
 
         if(i < demidecodebatteryList.size())
         {
-            DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", demidecodebatteryList[i], articles, existArticles3);
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", demidecodebatteryList[i], articles, existArticles3,"ManulTrack__POWER","Power information");
         }
 
         QString d_name = device.value;

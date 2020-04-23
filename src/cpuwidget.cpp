@@ -193,7 +193,7 @@ void CpuWidget::addDetailFromLscpuAndCatcpu(const QString &precessor)
     addArticleStruct(tr("Microcode"), "catcpu", precessor, "microcode", articles, existArticles);
     addArticleStruct(tr("Processor"), "catcpu", precessor, "processor", articles, existArticles);
     addArticleStruct(tr("Siblings"), "catcpu", precessor, "siblings", articles, existArticles);
-//    addArticleStruct(tr(""), "catcpu", precessor, "vendor_id", articles, existArticles);
+    addArticleStruct(tr("vendor_id"), "catcpu", precessor, "vendor_id", articles, existArticles);
     addArticleStruct(tr("WP"), "lscpu", "lscpu", "wp", articles, existArticles);
 
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("catcpu", precessor, articles, existArticles, "ManulTrack__CPU", "CPU Information");

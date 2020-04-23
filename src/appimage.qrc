@@ -45,5 +45,9 @@
         <file>../icons/deepin/builtin/deepin-devicemanager48.svg</file>
         <file>../icons/deepin/builtin/deepin-devicemanager32.svg</file>
         <file>../icons/deepin/builtin/deepin-devicemanager.svg</file>
+        <file>../icons/deepin/builtin/deepin-devicemanager512.svg</file>
+        <file>../icons/deepin/builtin/deepin-devicemanager96.svg</file>
+        <file>../icons/deepin/builtin/deepin-devicemanager24.svg</file>
+        <file>../icons/deepin/builtin/deepin-devicemanager16.svg</file>
     </qresource>
 </RCC>

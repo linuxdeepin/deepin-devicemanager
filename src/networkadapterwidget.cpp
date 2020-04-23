@@ -61,7 +61,7 @@ void NetworkadapterWidget::loadWidget()
         addArticleStruct(tr("Capabilities"), "lshw", networkadapter, "capabilities");
 
         // 添加网络适配器的其他属性
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", networkadapter, m_articles, m_existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", networkadapter, m_articles, m_existArticles,"ManulTrack__NetworkAdpater","NetworkAdpater information");
 
         QString deviceName = name.value;
         if (name.isValid() == false && description.isValid()) {
@@ -259,7 +259,7 @@ void NetworkadapterWidget::initWidget()
         articles.push_back(ioport);
         existArticles.insert("size");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", networkadapter, articles, existArticles);
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", networkadapter, articles, existArticles,"ManulTrack__NetworkAdpater","NetworkAdpater information");
 
         QString deviceName = name.value;
         if (name.isValid() == false && description.isValid()) {

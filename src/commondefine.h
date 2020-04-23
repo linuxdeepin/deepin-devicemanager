@@ -72,8 +72,5 @@ const int TableViewRowHeight_ = 36;
 //CF420Z deviceinfo  longxin_hardware m630  t630 ;disk bug
 //test_monitor_refresh_rate,only xrandr.txt and hwinfo.txt come from the target computer
 //const QString DEVICEINFO_PATH = "/dde_devicemanager/computers/test_monitor_refresh_rate";
-//const QString DEVICEINFO_PATH = "/home/lx777/Downloads/20200409/deviceInfo_20776_dmidecode";
-//const QString DEVICEINFO_PATH ="/home/lx777/Downloads/20200409/18053_deviceInfo_shuweiban";
-//const QString DEVICEINFO_PATH = "/home/lx777/Downloads/20200409/deviceInfo_19517_sp1";
 
 //#define TEST_DATA_FROM_FILE

@@ -243,8 +243,8 @@ void MainWindow::addAllDeviceinfoWidget()
     if (firstAdd_ == true) {
         leftDeviceView_->addSeperator();
     }
-
-    //addDeviceWidget(new UsbdeviceWidget(mainWidget_), "usbdevice.svg");
+    //去掉USB的界面
+//    addDeviceWidget(new UsbdeviceWidget(mainWidget_), "usbdevice.svg");
     addDeviceWidget(new OtherDevicesWidget(mainWidget_), "otherdevices.svg");
 
     overviewWidget->setOverviewInfos(staticArticles);
