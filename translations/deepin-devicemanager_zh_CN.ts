@@ -57,21 +57,13 @@
         <location filename="../src/audiodevicewidget.cpp" line="266"/>
         <source>multimedia</source>
         <comment>Audio Device Info</comment>
-<<<<<<< Updated upstream
         <translation type="unfinished">多媒体</translation>
-=======
-        <translation>多媒体</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="271"/>
         <source>physical id</source>
         <comment>Audio Device Info</comment>
-<<<<<<< Updated upstream
         <translation type="unfinished">物理ID</translation>
-=======
-        <translation>物理ID</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="276"/>
@@ -89,59 +81,35 @@
         <location filename="../src/audiodevicewidget.cpp" line="286"/>
         <source>driver</source>
         <comment>Audio Device Info</comment>
-<<<<<<< Updated upstream
         <translation type="unfinished">驱动</translation>
-=======
-        <translation>驱动</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="291"/>
         <source>irq</source>
         <comment>Audio Device Info</comment>
-<<<<<<< Updated upstream
         <translation type="unfinished">中断</translation>
-=======
-        <translation>中断</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="296"/>
         <source>latency</source>
         <comment>Audio Device Info</comment>
-<<<<<<< Updated upstream
         <translation type="unfinished">延迟</translation>
-=======
-        <translation>延迟</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="301"/>
         <source>memory</source>
         <comment>Audio Device Info</comment>
-<<<<<<< Updated upstream
         <translation type="unfinished">内存地址</translation>
-=======
-        <translation>内存地址</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="350"/>
         <source>Bus</source>
-<<<<<<< Updated upstream
         <translation type="unfinished">总线</translation>
-=======
-        <translation>总线</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="353"/>
         <source>Product</source>
-<<<<<<< Updated upstream
         <translation type="unfinished">产品</translation>
-=======
-        <translation>产品</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="54"/>
@@ -268,7 +236,7 @@
         <location filename="../src/bluetoothwidget.cpp" line="290"/>
         <source>Modalias</source>
         <comment>Bluetooth Info</comment>
-        <translation>设置命令别名</translation>
+        <translation>Modalias</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="143"/>
@@ -380,61 +348,6 @@
         <location filename="../src/cdromwidget.cpp" line="40"/>
         <source>No CD-ROM found</source>
         <translation>未发现光驱</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="53"/>
-        <source>Model</source>
-        <translation>型号</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="58"/>
-        <source>Vendor</source>
-        <translation>制造商</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="63"/>
-        <source>Description</source>
-        <translation>描述</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="68"/>
-        <source>Bus Info</source>
-        <translation>总线信息</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="73"/>
-        <source>Version</source>
-        <translation>版本</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="78"/>
-        <source>Logical Name</source>
-        <translation>逻辑名称</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="83"/>
-        <source>Type</source>
-        <translation>类型</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="88"/>
-        <source>ansiversion</source>
-        <translation>ANSI版本</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="93"/>
-        <source>capabilities</source>
-        <translation>功能</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="98"/>
-        <source>physical id</source>
-        <translation>物理ID</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="103"/>
-        <source>status</source>
-        <translation>状态</translation>
     </message>
 </context>
 <context>
@@ -558,17 +471,12 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="195"/>
         <source>Siblings</source>
-        <translation>逻辑单元数量</translation>
-    </message>
-    <message>
-        <location filename="../src/cpuwidget.cpp" line="196"/>
-        <source>vendor_id</source>
-        <translation>制造商</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="197"/>
         <source>WP</source>
-        <translation>写保护</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="293"/>
@@ -587,25 +495,19 @@
         <translation>未知</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <source>Sockets</source>
         <translation type="vanished">处理器</translation>
     </message>
     <message>
-=======
->>>>>>> Stashed changes
         <location filename="../src/cpuwidget.cpp" line="107"/>
         <source>Core(s)</source>
         <translation>核</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <source>Processor(s)</source>
         <translation type="vanished">逻辑处理器</translation>
     </message>
     <message>
-=======
->>>>>>> Stashed changes
         <location filename="../src/cpuwidget.cpp" line="167"/>
         <location filename="../src/cpuwidget.cpp" line="211"/>
         <source>CPU ID</source>
@@ -692,62 +594,62 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="182"/>
         <source>Address Sizes</source>
-        <translation>地址大小</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="183"/>
         <source>APICID</source>
-        <translation>APICID</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="184"/>
         <source>Bugs</source>
-        <translation>Bugs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="185"/>
         <source>Cache Size</source>
-        <translation>缓存大小</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="186"/>
         <source>Cache Alignment</source>
-        <translation>缓存对齐</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="187"/>
         <source>Clflush Size</source>
-        <translation>Clflush Size</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="188"/>
         <source>CPU Cores</source>
-        <translation>CPU核心数</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="189"/>
         <source>CPUID Level</source>
-        <translation>CPU ID等级</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="190"/>
         <source>FPU</source>
-        <translation>浮点运算</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="191"/>
         <source>FPU Exception</source>
-        <translation>浮点运算异常</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="192"/>
         <source>Initial APICID</source>
-        <translation>Initial APICID</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="193"/>
         <source>Microcode</source>
-        <translation>微代码</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="194"/>
@@ -780,7 +682,7 @@
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="83"/>
         <source>Loading Hardware Info...</source>
-        <translation>获取打印机信息...</translation>
+        <translation>获取硬件信息...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="86"/>
@@ -793,84 +695,47 @@
         <translation>获取处理器信息...</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/deviceinfoparser.cpp" line="96"/>
-=======
-        <location filename="../src/deviceinfoparser.cpp" line="94"/>
->>>>>>> Stashed changes
         <source>Loading Input Devices Info...</source>
         <translation>获取输入设备信息...</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/deviceinfoparser.cpp" line="99"/>
-=======
-        <location filename="../src/deviceinfoparser.cpp" line="97"/>
->>>>>>> Stashed changes
         <source>Loading Power Settings...</source>
         <translation>获取电源设置...</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/deviceinfoparser.cpp" line="103"/>
-=======
-        <location filename="../src/deviceinfoparser.cpp" line="101"/>
->>>>>>> Stashed changes
         <source>Loading Monitor Info...</source>
         <translation>获取显示器信息...</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/deviceinfoparser.cpp" line="108"/>
-=======
-        <location filename="../src/deviceinfoparser.cpp" line="106"/>
->>>>>>> Stashed changes
+        <location filename="../src/deviceinfoparser.cpp" line="110"/>
         <source>Loading PCI Devices Info...</source>
         <translation>获取PCI设备信息...</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/deviceinfoparser.cpp" line="111"/>
-=======
-        <location filename="../src/deviceinfoparser.cpp" line="109"/>
->>>>>>> Stashed changes
+        <location filename="../src/deviceinfoparser.cpp" line="113"/>
         <source>Loading Bluetooth Device Info...</source>
         <translation>获取蓝牙设备信息...</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/deviceinfoparser.cpp" line="116"/>
-=======
-        <location filename="../src/deviceinfoparser.cpp" line="114"/>
->>>>>>> Stashed changes
+        <location filename="../src/deviceinfoparser.cpp" line="118"/>
         <source>Loading USB Devices Info...</source>
         <translation>获取USB设备信息...</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/deviceinfoparser.cpp" line="123"/>
-=======
-        <location filename="../src/deviceinfoparser.cpp" line="121"/>
->>>>>>> Stashed changes
+        <location filename="../src/deviceinfoparser.cpp" line="125"/>
         <source>Loading Printer Info...</source>
         <translation>获取打印机信息...</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/deviceinfoparser.cpp" line="163"/>
-        <location filename="../src/deviceinfoparser.cpp" line="181"/>
-        <location filename="../src/deviceinfoparser.cpp" line="567"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1207"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1248"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1873"/>
-=======
-        <location filename="../src/deviceinfoparser.cpp" line="161"/>
-        <location filename="../src/deviceinfoparser.cpp" line="179"/>
-        <location filename="../src/deviceinfoparser.cpp" line="542"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1180"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1221"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1818"/>
->>>>>>> Stashed changes
+        <location filename="../src/deviceinfoparser.cpp" line="165"/>
+        <location filename="../src/deviceinfoparser.cpp" line="183"/>
+        <location filename="../src/deviceinfoparser.cpp" line="569"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1209"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1250"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1875"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
@@ -909,437 +774,235 @@
         <translation>存储设备</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="169"/>
-        <location filename="../src/diskwidget.cpp" line="247"/>
+        <location filename="../src/diskwidget.cpp" line="42"/>
+        <location filename="../src/diskwidget.cpp" line="115"/>
         <source>No disk found</source>
         <translation>未发现磁盘</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="54"/>
+        <location filename="../src/diskwidget.cpp" line="72"/>
         <source>UnKnown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="129"/>
-        <source>Serial Number</source>
-        <translation type="unfinished">序列号</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="144"/>
-        <source>Interface</source>
-        <translation type="unfinished">接口</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="295"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="89"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="163"/>
         <source>Model</source>
         <comment>stroage info</comment>
         <translation>型号</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="300"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="94"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="168"/>
         <source>Vendor</source>
         <comment>stroage info</comment>
         <translation>制造商</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="315"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="109"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="183"/>
         <source>Media Type</source>
         <comment>stroage info</comment>
         <translation>介质类型</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="390"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="184"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="258"/>
         <source>Interface</source>
         <comment>stroage info</comment>
         <translation>接口</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="369"/>
-        <location filename="../src/diskwidget.cpp" line="392"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="163"/>
-        <location filename="../src/diskwidget.cpp" line="186"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="237"/>
+        <location filename="../src/diskwidget.cpp" line="260"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="207"/>
+        <location filename="../src/diskwidget.cpp" line="54"/>
         <source>Description</source>
         <translation>描述</translation>
     </message>
     <message>
+        <location filename="../src/diskwidget.cpp" line="55"/>
         <source>Driver</source>
-        <translation type="vanished">驱动</translation>
+        <translation>驱动</translation>
     </message>
     <message>
+        <location filename="../src/diskwidget.cpp" line="56"/>
         <source>Device File</source>
-        <translation type="vanished">设备文件</translation>
+        <translation>设备文件</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="397"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="191"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="265"/>
         <source>Size</source>
         <comment>stroage info</comment>
         <translation>容量</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="402"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="196"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="270"/>
         <source>Serial Number</source>
         <comment>stroage info</comment>
         <translation>序列号</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="414"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="208"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="282"/>
         <source>Model Family</source>
         <comment>stroage info</comment>
         <translation>产品家族</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="419"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="213"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="287"/>
         <source>Device Model</source>
         <comment>stroage info</comment>
         <translation>设备型号</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="424"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="218"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="292"/>
         <source>Description</source>
         <comment>stroage info</comment>
         <translation>描述</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="431"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="225"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="299"/>
         <source>Speed</source>
         <comment>stroage info</comment>
         <translation>速度</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="442"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="236"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="310"/>
         <source>Rotation Rate</source>
         <comment>stroage info</comment>
         <translation>转速</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="449"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="243"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="317"/>
         <source>Form Factor</source>
         <comment>stroage info</comment>
         <translation>尺寸型号</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="451"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="245"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="319"/>
         <source>inch</source>
         <translation>英寸</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="455"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="249"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="323"/>
         <source>Power On Hours</source>
         <comment>stroage info</comment>
         <translation>通电时间</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="458"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="252"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="326"/>
         <source>Hours</source>
         <translation>小时</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <source>Device Name</source>
         <translation type="vanished">设备名称</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="462"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="256"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="330"/>
         <source>Power_On_Minutes</source>
         <comment>stroage info</comment>
         <translation>通电分钟</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="465"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="259"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="333"/>
         <source>Minutes</source>
         <comment>Power_On_Minutes</comment>
         <translation>分钟</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="470"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="264"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="338"/>
         <source>Power_On_Half_Minutes</source>
         <comment>stroage info</comment>
         <translation>Power_On_Half_Minutes</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="474"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="268"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="342"/>
         <source>Half Minutes</source>
         <translation>Half Minutes</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="479"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="273"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="347"/>
         <source>Power_On_Seconds</source>
         <comment>stroage info</comment>
         <translation>通电秒数</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="483"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="277"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="351"/>
         <source>Seconds</source>
         <translation>秒</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="487"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="281"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="355"/>
         <source>Power Cycle Count</source>
         <comment>stroage info</comment>
         <translation>通电次数</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="491"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="285"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="359"/>
         <source>Times</source>
         <comment>Power Cycle Count</comment>
         <translation>次</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="497"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="291"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="365"/>
         <source>Version</source>
         <comment>stroage info</comment>
         <translation>版本</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="502"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="296"/>
->>>>>>> Stashed changes
-        <source>Capabilities</source>
-        <comment>stroage info</comment>
-        <translation>功能</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="301"/>
-        <source>Type</source>
-        <comment>stroage info</comment>
-        <translation>类型</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="306"/>
-        <source>ansiversion</source>
-        <comment>stroage info</comment>
-        <translation>ANSI版本</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="311"/>
-        <source>guid</source>
-        <comment>stroage info</comment>
-        <translation>guid</translation>
-    </message>
-    <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="135"/>
-        <source>Firmware Version</source>
-        <translation>固件版本</translation>
-=======
-        <location filename="../src/diskwidget.cpp" line="316"/>
-        <source>bus info</source>
-        <comment>stroage info</comment>
-        <translation>总线信息</translation>
->>>>>>> Stashed changes
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="321"/>
-        <source>logical name</source>
-        <comment>stroage info</comment>
-        <translation>逻辑地址</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="326"/>
-        <source>logicalsectorsize</source>
-        <comment>stroage info</comment>
-        <translation>逻辑分区大小</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="331"/>
-        <source>Capabilities</source>
-        <comment>physical id</comment>
-        <translation>功能</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="336"/>
-        <source>sectorsize</source>
-        <comment>stroage info</comment>
-        <translation>扇区大小</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="345"/>
-        <source>ATA Version</source>
-        <comment>stroage info</comment>
-        <translation>ATA版本</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="350"/>
-        <source>Auto Offline Data Collection</source>
-        <comment>stroage info</comment>
-        <translation>自动离线数据收集</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="355"/>
-        <source>Current_Pending_Sector</source>
-        <comment>stroage info</comment>
-        <translation>当前待处理扇区</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="360"/>
-        <source>Device</source>
-        <comment>stroage info</comment>
-        <translation>设备</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="365"/>
-        <source>End-to-End_Error</source>
-        <comment>stroage info</comment>
-        <translation>末尾到末尾错误检测</translation>
-    </message>
-    <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="102"/>
-        <location filename="../src/diskwidget.cpp" line="235"/>
-        <location filename="../src/diskwidget.cpp" line="542"/>
-=======
         <location filename="../src/diskwidget.cpp" line="370"/>
+        <source>Capabilities</source>
+        <comment>stroage info</comment>
+        <translation>功能</translation>
+    </message>
+    <message>
+        <source>Model Family</source>
+        <translation type="vanished">产品家族</translation>
+    </message>
+    <message>
+        <source>Device Model</source>
+        <translation type="vanished">设备型号</translation>
+    </message>
+    <message>
+        <source>Form Factor</source>
+        <translation type="vanished">尺寸型号</translation>
+    </message>
+    <message>
         <source>Firmware Version</source>
-        <comment>stroage info</comment>
-        <translation>固件版本</translation>
+        <translation type="vanished">固件版本</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="375"/>
-        <source>SMART capabilities</source>
-        <comment>stroage info</comment>
-        <translation>SMART功能</translation>
+        <source>Rotation Rate</source>
+        <translation type="vanished">转速</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="437"/>
->>>>>>> Stashed changes
+        <source>Power Cycle Count</source>
+        <translation type="vanished">通电次数</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="51"/>
+        <location filename="../src/diskwidget.cpp" line="103"/>
+        <location filename="../src/diskwidget.cpp" line="410"/>
         <source>Model</source>
         <translation>型号</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="181"/>
-        <location filename="../src/diskwidget.cpp" line="235"/>
-        <location filename="../src/diskwidget.cpp" line="542"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="437"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="52"/>
+        <location filename="../src/diskwidget.cpp" line="103"/>
+        <location filename="../src/diskwidget.cpp" line="410"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="57"/>
-        <location filename="../src/diskwidget.cpp" line="235"/>
-        <location filename="../src/diskwidget.cpp" line="542"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="437"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="103"/>
+        <location filename="../src/diskwidget.cpp" line="410"/>
         <source>Media Type</source>
         <translation>介质类型</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/diskwidget.cpp" line="70"/>
-        <location filename="../src/diskwidget.cpp" line="235"/>
-        <location filename="../src/diskwidget.cpp" line="542"/>
-=======
-        <location filename="../src/diskwidget.cpp" line="437"/>
->>>>>>> Stashed changes
+        <location filename="../src/diskwidget.cpp" line="53"/>
+        <location filename="../src/diskwidget.cpp" line="103"/>
+        <location filename="../src/diskwidget.cpp" line="410"/>
         <source>Size</source>
         <translation>容量</translation>
     </message>
@@ -1352,37 +1015,28 @@
         <translation>显示适配器</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="62"/>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="209"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="201"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="66"/>
+        <location filename="../src/displayadapterwidget.cpp" line="205"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="73"/>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="209"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="201"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="77"/>
+        <location filename="../src/displayadapterwidget.cpp" line="205"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="78"/>
+        <location filename="../src/displayadapterwidget.cpp" line="82"/>
         <source>Description</source>
         <translation>描述</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="83"/>
+        <location filename="../src/displayadapterwidget.cpp" line="87"/>
         <source>Graphic Memory</source>
         <translation>显存</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <source>Unknown  </source>
         <translation type="vanished">未知  </translation>
     </message>
@@ -1395,133 +1049,79 @@
         <translation type="obsolete">未知</translation>
     </message>
     <message>
-=======
->>>>>>> Stashed changes
-        <location filename="../src/displayadapterwidget.cpp" line="94"/>
+        <location filename="../src/displayadapterwidget.cpp" line="98"/>
         <source>Minimum Resolution</source>
         <translation>最小分辨率</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="98"/>
+        <location filename="../src/displayadapterwidget.cpp" line="102"/>
         <source>Maximum Resolution</source>
         <translation>最大分辨率</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="111"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="103"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="107"/>
         <source>Driver</source>
         <translation>驱动</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="120"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="112"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="116"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="125"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="117"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="121"/>
         <source>Width</source>
         <translation>位宽</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="130"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="122"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="126"/>
         <source>Clock</source>
         <translation>时钟频率</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="135"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="127"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="131"/>
         <source>Capabilities</source>
         <translation>功能</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="140"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="132"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="136"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="145"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="137"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="141"/>
         <source>bus info</source>
         <translation>总线信息</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="150"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="142"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="146"/>
         <source>ioport</source>
-        <translation>IO端口</translation>
+        <translation></translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="155"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="147"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="151"/>
         <source>irq</source>
         <translation>中断</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="160"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="152"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="156"/>
         <source>latency</source>
         <translation>延迟</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="165"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="157"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="161"/>
         <source>memory</source>
         <translation>内存地址</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="170"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="162"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="166"/>
         <source>physical id</source>
-        <translation>物理ID</translation>
+        <translation type="unfinished">物理ID</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/displayadapterwidget.cpp" line="232"/>
-=======
-        <location filename="../src/displayadapterwidget.cpp" line="224"/>
->>>>>>> Stashed changes
+        <location filename="../src/displayadapterwidget.cpp" line="228"/>
         <source>Failed to find display adapter information</source>
-        <translation>获取显示适配器信息失败</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1532,168 +1132,150 @@
         <translation>键盘</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="350"/>
+        <location filename="../src/keyboardwidget.cpp" line="295"/>
         <source>Sysfs</source>
         <comment>Keyboard Info,better if dont translate，my personal opinion</comment>
         <translation>Sysfs</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="401"/>
+        <location filename="../src/keyboardwidget.cpp" line="346"/>
         <source>No keyboard found</source>
         <translation>未发现键盘</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="35"/>
         <location filename="../src/keyboardwidget.cpp" line="96"/>
-        <location filename="../src/keyboardwidget.cpp" line="187"/>
-        <location filename="../src/keyboardwidget.cpp" line="275"/>
+        <location filename="../src/keyboardwidget.cpp" line="156"/>
+        <location filename="../src/keyboardwidget.cpp" line="220"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="35"/>
         <location filename="../src/keyboardwidget.cpp" line="97"/>
-        <location filename="../src/keyboardwidget.cpp" line="189"/>
-        <location filename="../src/keyboardwidget.cpp" line="276"/>
+        <location filename="../src/keyboardwidget.cpp" line="158"/>
+        <location filename="../src/keyboardwidget.cpp" line="221"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="277"/>
+        <location filename="../src/keyboardwidget.cpp" line="222"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="105"/>
-        <location filename="../src/keyboardwidget.cpp" line="188"/>
+        <location filename="../src/keyboardwidget.cpp" line="157"/>
         <source>Description</source>
         <translation>描述</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="190"/>
+        <location filename="../src/keyboardwidget.cpp" line="159"/>
         <source>Bus Info</source>
         <translation>总线信息</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="100"/>
-        <location filename="../src/keyboardwidget.cpp" line="193"/>
-        <location filename="../src/keyboardwidget.cpp" line="358"/>
+        <location filename="../src/keyboardwidget.cpp" line="162"/>
+        <location filename="../src/keyboardwidget.cpp" line="303"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="98"/>
         <source>Model</source>
-        <translation>型号</translation>
+        <translation type="unfinished">型号</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="99"/>
         <source>Serial ID</source>
-        <translation>序列号</translation>
+        <translation type="unfinished">序列号</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="101"/>
         <source>Status</source>
-        <translation>状态</translation>
+        <translation type="unfinished">状态</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="102"/>
         <source>Driver</source>
-        <translation>驱动</translation>
+        <translation type="unfinished">驱动</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="103"/>
         <source>Speed</source>
-        <translation>速度</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="104"/>
         <source>BusID</source>
-        <translation>总线ID</translation>
+        <translation type="unfinished">总线ID</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="106"/>
         <source>Unique ID</source>
-        <translation>唯一标识码</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="107"/>
         <source>SysFS ID</source>
-        <translation>SysFS ID</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="121"/>
-        <location filename="../src/keyboardwidget.cpp" line="207"/>
-        <source>driver</source>
-        <translation>驱动</translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="126"/>
-        <location filename="../src/keyboardwidget.cpp" line="212"/>
-        <source>maxpower</source>
-        <translation>最大功率</translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="131"/>
-        <source>physical id</source>
-        <translation>物理ID</translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="136"/>
-        <location filename="../src/keyboardwidget.cpp" line="217"/>
-        <source>speed</source>
-        <translation>速度</translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="194"/>
+        <location filename="../src/keyboardwidget.cpp" line="163"/>
         <source>Width</source>
         <translation>位宽</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="195"/>
+        <location filename="../src/keyboardwidget.cpp" line="164"/>
         <source>Clock</source>
         <translation>时钟频率</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="196"/>
+        <location filename="../src/keyboardwidget.cpp" line="165"/>
         <source>Capabilities</source>
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="287"/>
+        <location filename="../src/keyboardwidget.cpp" line="232"/>
         <source>Uniq</source>
         <comment>Keyboard Info</comment>
         <translation>Uniq</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="302"/>
+        <location filename="../src/keyboardwidget.cpp" line="247"/>
         <source>Connected</source>
         <comment>Keyboard Info</comment>
         <translation>已连接</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="316"/>
+        <location filename="../src/keyboardwidget.cpp" line="261"/>
         <source>Phys</source>
         <comment>Keyboard Info</comment>
         <translation>Phys</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="363"/>
+        <source>Sysfs</source>
+        <comment>Keyboard Info,better if dont do translation ,i think</comment>
+        <translation type="vanished">Sysfs</translation>
+    </message>
+    <message>
+        <location filename="../src/keyboardwidget.cpp" line="308"/>
         <source>Product</source>
         <translation>产品</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="374"/>
+        <location filename="../src/keyboardwidget.cpp" line="319"/>
         <source>Power</source>
         <translation>电源</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="191"/>
+        <location filename="../src/keyboardwidget.cpp" line="160"/>
         <source>Physical ID</source>
         <translation>物理ID</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="192"/>
+        <location filename="../src/keyboardwidget.cpp" line="161"/>
         <source>Logical Name</source>
         <translation>逻辑名称</translation>
     </message>
@@ -1753,126 +1335,119 @@
     </message>
 </context>
 <context>
-    <name>MemoryWidget</name>
+    <name>ManulTrack__AudioDevices</name>
     <message>
-        <location filename="../src/memorywidget.cpp" line="32"/>
-        <location filename="../src/memorywidget.cpp" line="132"/>
-        <source>Memory</source>
-        <translation>内存</translation>
-    </message>
-    <message>
-        <location filename="../src/memorywidget.cpp" line="150"/>
-        <source>Name</source>
-        <translation>名称</translation>
-    </message>
-    <message>
-        <location filename="../src/memorywidget.cpp" line="150"/>
-        <location filename="../src/memorywidget.cpp" line="271"/>
-        <location filename="../src/memorywidget.cpp" line="545"/>
-        <source>Vendor</source>
-        <translation>制造商</translation>
-    </message>
-    <message>
-        <location filename="../src/memorywidget.cpp" line="150"/>
-        <location filename="../src/memorywidget.cpp" line="296"/>
         <source>Type</source>
-        <translation>类型</translation>
+        <comment>Audio device infomation from lshw</comment>
+        <translation type="vanished">类型</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="150"/>
-        <location filename="../src/memorywidget.cpp" line="560"/>
-        <source>Speed</source>
-        <comment>memory info</comment>
-        <translation>速度</translation>
+        <source>driver</source>
+        <comment>Audio device infomation from lshw</comment>
+        <translation type="vanished">驱动</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="150"/>
-        <location filename="../src/memorywidget.cpp" line="202"/>
-        <source>Size</source>
-        <translation>大小</translation>
+        <source>irq</source>
+        <comment>Audio device infomation from lshw</comment>
+        <translation type="vanished">中断</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="198"/>
-        <source>Slot Count</source>
-        <translation>插槽数</translation>
+        <source>latency</source>
+        <comment>Audio device infomation from lshw</comment>
+        <translation type="vanished">延迟</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="237"/>
-        <location filename="../src/memorywidget.cpp" line="509"/>
-        <source>Maximum Capacity</source>
-        <translation>最大容量</translation>
+        <source>memory</source>
+        <comment>Audio device infomation from lshw</comment>
+        <translation type="vanished">内存地址</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="250"/>
-        <location filename="../src/memorywidget.cpp" line="524"/>
-        <source>Upgradeable</source>
-        <translation>支持升级</translation>
+        <source>multimedia</source>
+        <comment>Audio device infomation from lshw</comment>
+        <translation type="vanished">多媒体</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="251"/>
-        <location filename="../src/memorywidget.cpp" line="525"/>
-        <source>Yes</source>
-        <translation>是</translation>
+        <source>physical id</source>
+        <comment>Audio device infomation from lshw</comment>
+        <translation type="vanished">物理ID</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="251"/>
-        <location filename="../src/memorywidget.cpp" line="525"/>
-        <source>No</source>
-        <translation>否</translation>
+        <source>Bus</source>
+        <comment>Audio device infomation from catinput</comment>
+        <translation type="vanished">总线</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="266"/>
-        <source>Model</source>
-        <comment>memory&apos;s model</comment>
-        <translation>型号</translation>
+        <source>EV</source>
+        <comment>Audio device infomation from catinput</comment>
+        <translation type="vanished">EV</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="276"/>
-        <location filename="../src/memorywidget.cpp" line="540"/>
-        <source>Locator</source>
-        <translation>插槽</translation>
+        <source>Handlers</source>
+        <comment>Audio device infomation from catinput</comment>
+        <translation type="vanished">Handlers</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="281"/>
-        <source>Size</source>
-        <comment>memory&apos;s size</comment>
-        <translation>大小</translation>
+        <source>PROP</source>
+        <comment>Audio device infomation from catinput</comment>
+        <translation type="vanished">PROP</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="301"/>
-        <source>Speed</source>
-        <comment>memory&apos;s Speed</comment>
-        <translation>速度</translation>
+        <source>Phys</source>
+        <comment>Audio device infomation from catinput</comment>
+        <translation type="vanished">Phys</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="306"/>
-        <source>Serial Number</source>
-        <translation>序列号</translation>
+        <source>Product</source>
+        <comment>Audio device infomation from catinput</comment>
+        <translation type="vanished">产品</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="311"/>
-        <source>Form Factor</source>
-        <translation>尺寸型号</translation>
+        <source>SW</source>
+        <comment>Audio device infomation from catinput</comment>
+        <translation type="vanished">SW</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="316"/>
-        <source>Rank</source>
-        <translation>位列</translation>
+        <source>Uniq</source>
+        <comment>Audio device infomation from catinput</comment>
+        <translation type="vanished">Uniq</translation>
+    </message>
+</context>
+<context>
+    <name>ManulTrack__BiosInfo_dmi</name>
+    <message>
+        <source>Address</source>
+        <comment>bios info of motherboard from dmidecode</comment>
+        <translation type="vanished">地址</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="321"/>
-        <source>Bank Locator</source>
-        <translation>内存通道</translation>
+        <source>BIOS Revision</source>
+        <comment>bios info of motherboard from dmidecode</comment>
+        <translation type="vanished">BIOS修订版本</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="326"/>
-        <location filename="../src/memorywidget.cpp" line="590"/>
-        <source>Configured Voltage</source>
-        <comment>memory info</comment>
-        <translation>配置电压</translation>
+        <source>Firmware Revision</source>
+        <comment>bios info of motherboard from dmidecode</comment>
+        <translation type="vanished">固件修订版本</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
+        <source>ROM Size</source>
+        <comment>bios info of motherboard from dmidecode</comment>
+        <translation type="vanished">存储大小</translation>
+    </message>
+    <message>
+        <source>Runtime Size</source>
+        <comment>bios info of motherboard from dmidecode</comment>
+        <translation type="vanished">运行内存大小</translation>
+    </message>
+</context>
+<context>
+    <name>ManulTrack__Bios_lang</name>
+    <message>
+        <source>Currently Installed Language</source>
+        <comment>BIOS Language Information</comment>
+        <translation type="vanished">当前语言</translation>
+    </message>
+    <message>
         <source>Installable Languages</source>
         <comment>BIOS Language Information</comment>
         <translation type="vanished">可安装语言数</translation>
@@ -2188,8 +1763,6 @@
         <translation>配置电压</translation>
     </message>
     <message>
-=======
->>>>>>> Stashed changes
         <location filename="../src/memorywidget.cpp" line="331"/>
         <source>Minimum Voltage</source>
         <comment>memory&apos;s config</comment>
@@ -2209,37 +1782,37 @@
     <message>
         <location filename="../src/memorywidget.cpp" line="346"/>
         <source>Array Handle</source>
-        <translation>数组程序</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="351"/>
         <source>Asset Tag</source>
-        <translation>资产编号</translation>
+        <translation type="unfinished">资产编号</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="356"/>
         <source>Data Width</source>
-        <translation>数据位宽</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="361"/>
         <source>Error Information Handle</source>
-        <translation>错误信息程序</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="366"/>
         <source>Set</source>
-        <translation>设置</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="371"/>
         <source>Total Width</source>
-        <translation>总位宽</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="376"/>
         <source>Type Detail</source>
-        <translation>类型详情</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="387"/>
@@ -2340,264 +1913,152 @@
 <context>
     <name>MonitorWidget</name>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="62"/>
+        <location filename="../src/monitorwidget.cpp" line="65"/>
         <source>Monitor</source>
         <translation>显示设备</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="136"/>
-        <location filename="../src/monitorwidget.cpp" line="296"/>
-        <location filename="../src/monitorwidget.cpp" line="312"/>
-        <location filename="../src/monitorwidget.cpp" line="351"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="88"/>
-        <location filename="../src/monitorwidget.cpp" line="248"/>
-        <location filename="../src/monitorwidget.cpp" line="264"/>
-        <location filename="../src/monitorwidget.cpp" line="303"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="147"/>
+        <location filename="../src/monitorwidget.cpp" line="313"/>
+        <location filename="../src/monitorwidget.cpp" line="329"/>
+        <location filename="../src/monitorwidget.cpp" line="371"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="137"/>
-        <location filename="../src/monitorwidget.cpp" line="296"/>
-        <location filename="../src/monitorwidget.cpp" line="312"/>
-        <location filename="../src/monitorwidget.cpp" line="352"/>
-        <location filename="../src/monitorwidget.cpp" line="685"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="89"/>
-        <location filename="../src/monitorwidget.cpp" line="248"/>
-        <location filename="../src/monitorwidget.cpp" line="264"/>
-        <location filename="../src/monitorwidget.cpp" line="304"/>
-        <location filename="../src/monitorwidget.cpp" line="626"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="148"/>
+        <location filename="../src/monitorwidget.cpp" line="313"/>
+        <location filename="../src/monitorwidget.cpp" line="329"/>
+        <location filename="../src/monitorwidget.cpp" line="372"/>
+        <location filename="../src/monitorwidget.cpp" line="719"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="66"/>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="138"/>
-        <location filename="../src/monitorwidget.cpp" line="686"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="90"/>
-        <location filename="../src/monitorwidget.cpp" line="627"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="70"/>
+        <location filename="../src/monitorwidget.cpp" line="149"/>
+        <location filename="../src/monitorwidget.cpp" line="720"/>
         <source>Resolution</source>
         <translation>分辨率</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="67"/>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="139"/>
-        <location filename="../src/monitorwidget.cpp" line="687"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="91"/>
-        <location filename="../src/monitorwidget.cpp" line="628"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="71"/>
+        <location filename="../src/monitorwidget.cpp" line="150"/>
+        <location filename="../src/monitorwidget.cpp" line="721"/>
         <source>Support Resolution</source>
         <translation>支持分辨率</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="68"/>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="140"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="92"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="72"/>
+        <source>Refresh Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/monitorwidget.cpp" line="74"/>
+        <location filename="../src/monitorwidget.cpp" line="152"/>
         <source>Display Ratio</source>
         <translation>显示比例</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="141"/>
-        <location filename="../src/monitorwidget.cpp" line="353"/>
-        <location filename="../src/monitorwidget.cpp" line="453"/>
-        <location filename="../src/monitorwidget.cpp" line="689"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="93"/>
-        <location filename="../src/monitorwidget.cpp" line="305"/>
-        <location filename="../src/monitorwidget.cpp" line="405"/>
-        <location filename="../src/monitorwidget.cpp" line="630"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="154"/>
+        <location filename="../src/monitorwidget.cpp" line="373"/>
+        <location filename="../src/monitorwidget.cpp" line="474"/>
+        <location filename="../src/monitorwidget.cpp" line="723"/>
         <source>Size</source>
         <translation>屏幕尺寸</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="170"/>
-        <location filename="../src/monitorwidget.cpp" line="377"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="122"/>
-        <location filename="../src/monitorwidget.cpp" line="329"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="183"/>
+        <location filename="../src/monitorwidget.cpp" line="397"/>
         <source>Serial Number</source>
         <translation>序列号</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="180"/>
-        <location filename="../src/monitorwidget.cpp" line="392"/>
-        <location filename="../src/monitorwidget.cpp" line="688"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="132"/>
-        <location filename="../src/monitorwidget.cpp" line="344"/>
-        <location filename="../src/monitorwidget.cpp" line="629"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="193"/>
+        <location filename="../src/monitorwidget.cpp" line="412"/>
+        <location filename="../src/monitorwidget.cpp" line="722"/>
         <source>Manufacture Date</source>
         <translation>生产日期</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="183"/>
-        <location filename="../src/monitorwidget.cpp" line="201"/>
-        <location filename="../src/monitorwidget.cpp" line="395"/>
-        <location filename="../src/monitorwidget.cpp" line="412"/>
-        <location filename="../src/monitorwidget.cpp" line="694"/>
-        <location filename="../src/monitorwidget.cpp" line="705"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="135"/>
-        <location filename="../src/monitorwidget.cpp" line="153"/>
-        <location filename="../src/monitorwidget.cpp" line="347"/>
-        <location filename="../src/monitorwidget.cpp" line="364"/>
-        <location filename="../src/monitorwidget.cpp" line="635"/>
-        <location filename="../src/monitorwidget.cpp" line="646"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="196"/>
+        <location filename="../src/monitorwidget.cpp" line="214"/>
+        <location filename="../src/monitorwidget.cpp" line="415"/>
+        <location filename="../src/monitorwidget.cpp" line="432"/>
+        <location filename="../src/monitorwidget.cpp" line="728"/>
+        <location filename="../src/monitorwidget.cpp" line="739"/>
         <source>Year</source>
         <translation>年</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="186"/>
-        <location filename="../src/monitorwidget.cpp" line="252"/>
-        <location filename="../src/monitorwidget.cpp" line="397"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="138"/>
-        <location filename="../src/monitorwidget.cpp" line="204"/>
-        <location filename="../src/monitorwidget.cpp" line="349"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="199"/>
+        <location filename="../src/monitorwidget.cpp" line="269"/>
+        <location filename="../src/monitorwidget.cpp" line="417"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="189"/>
-        <location filename="../src/monitorwidget.cpp" line="400"/>
-        <location filename="../src/monitorwidget.cpp" line="694"/>
-        <location filename="../src/monitorwidget.cpp" line="705"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="141"/>
-        <location filename="../src/monitorwidget.cpp" line="352"/>
-        <location filename="../src/monitorwidget.cpp" line="635"/>
-        <location filename="../src/monitorwidget.cpp" line="646"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="202"/>
+        <location filename="../src/monitorwidget.cpp" line="420"/>
+        <location filename="../src/monitorwidget.cpp" line="728"/>
+        <location filename="../src/monitorwidget.cpp" line="739"/>
         <source>Week</source>
         <translation>周</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="198"/>
-        <location filename="../src/monitorwidget.cpp" line="409"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="150"/>
-        <location filename="../src/monitorwidget.cpp" line="361"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="211"/>
+        <location filename="../src/monitorwidget.cpp" line="429"/>
         <source>The Model Year(Not Manufacture Date)</source>
         <translation>型号日期（非生产日期）</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="698"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="639"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="732"/>
         <source>Notebook monitor</source>
-        <translation>笔记本电脑显示器</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="709"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="650"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="743"/>
         <source>External monitor</source>
-        <translation>外部显示器</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <source>Frequencies</source>
         <translation type="vanished">频率</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="208"/>
-        <location filename="../src/monitorwidget.cpp" line="319"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="160"/>
-        <location filename="../src/monitorwidget.cpp" line="271"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="221"/>
+        <location filename="../src/monitorwidget.cpp" line="336"/>
         <source>Primary Monitor</source>
         <translation>主显示器</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="251"/>
-        <location filename="../src/monitorwidget.cpp" line="335"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="203"/>
-        <location filename="../src/monitorwidget.cpp" line="287"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="268"/>
+        <location filename="../src/monitorwidget.cpp" line="355"/>
         <source>Connect Type</source>
         <translation>连接类型</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="286"/>
-        <location filename="../src/monitorwidget.cpp" line="486"/>
-        <location filename="../src/monitorwidget.cpp" line="499"/>
-        <location filename="../src/monitorwidget.cpp" line="518"/>
-        <location filename="../src/monitorwidget.cpp" line="531"/>
-        <location filename="../src/monitorwidget.cpp" line="551"/>
-        <location filename="../src/monitorwidget.cpp" line="563"/>
-        <location filename="../src/monitorwidget.cpp" line="582"/>
-        <location filename="../src/monitorwidget.cpp" line="594"/>
-        <location filename="../src/monitorwidget.cpp" line="626"/>
-        <location filename="../src/monitorwidget.cpp" line="657"/>
-=======
-        <location filename="../src/monitorwidget.cpp" line="238"/>
-        <location filename="../src/monitorwidget.cpp" line="241"/>
-        <location filename="../src/monitorwidget.cpp" line="438"/>
-        <location filename="../src/monitorwidget.cpp" line="451"/>
-        <location filename="../src/monitorwidget.cpp" line="470"/>
-        <location filename="../src/monitorwidget.cpp" line="483"/>
-        <location filename="../src/monitorwidget.cpp" line="503"/>
-        <location filename="../src/monitorwidget.cpp" line="515"/>
-        <location filename="../src/monitorwidget.cpp" line="534"/>
-        <location filename="../src/monitorwidget.cpp" line="546"/>
-        <location filename="../src/monitorwidget.cpp" line="598"/>
->>>>>>> Stashed changes
+        <location filename="../src/monitorwidget.cpp" line="303"/>
+        <location filename="../src/monitorwidget.cpp" line="507"/>
+        <location filename="../src/monitorwidget.cpp" line="520"/>
+        <location filename="../src/monitorwidget.cpp" line="539"/>
+        <location filename="../src/monitorwidget.cpp" line="552"/>
+        <location filename="../src/monitorwidget.cpp" line="572"/>
+        <location filename="../src/monitorwidget.cpp" line="584"/>
+        <location filename="../src/monitorwidget.cpp" line="603"/>
+        <location filename="../src/monitorwidget.cpp" line="615"/>
+        <location filename="../src/monitorwidget.cpp" line="649"/>
+        <location filename="../src/monitorwidget.cpp" line="679"/>
         <source>inch</source>
         <translation>英寸</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
-        <location filename="../src/monitorwidget.cpp" line="300"/>
+        <location filename="../src/monitorwidget.cpp" line="317"/>
         <source>Failed to find monitor information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="658"/>
-        <source>cm</source>
-        <comment>size unit</comment>
-        <translation>cm</translation>
-=======
-        <location filename="../src/monitorwidget.cpp" line="252"/>
-        <source>Failed to find monitor information</source>
-        <translation>获取显示设备信息失败</translation>
-    </message>
-    <message>
-        <location filename="../src/monitorwidget.cpp" line="599"/>
+        <location filename="../src/monitorwidget.cpp" line="680"/>
         <source>cm</source>
         <comment>size unit</comment>
         <translation>cm</translation>
@@ -2606,127 +2067,6 @@
 <context>
     <name>MotherboardWidget</name>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="31"/>
-        <source>Motherboard</source>
-        <translation>主板</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="41"/>
-        <location filename="../src/motherboardwidget.cpp" line="57"/>
-        <source>Model</source>
-        <translation>型号</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="42"/>
-        <location filename="../src/motherboardwidget.cpp" line="48"/>
-        <location filename="../src/motherboardwidget.cpp" line="294"/>
-        <source>Vendor</source>
-        <translation>制造商</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="43"/>
-        <location filename="../src/motherboardwidget.cpp" line="73"/>
-        <location filename="../src/motherboardwidget.cpp" line="78"/>
-        <source>Chipset Family</source>
-        <translation>芯片组</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="44"/>
-        <location filename="../src/motherboardwidget.cpp" line="68"/>
-        <source>Version</source>
-        <translation>版本</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="44"/>
-        <location filename="../src/motherboardwidget.cpp" line="288"/>
-        <source>BIOS</source>
-        <translation>BIOS</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="45"/>
-        <location filename="../src/motherboardwidget.cpp" line="147"/>
-        <source>Features</source>
-        <translation>特征</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="103"/>
-        <location filename="../src/motherboardwidget.cpp" line="304"/>
-        <source>Serial Number</source>
-        <translation>序列号</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="108"/>
-        <source>Asset Tag</source>
-        <translation>资产编号</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="113"/>
-        <source>Chassis Handle</source>
-        <translation>机箱程序</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="118"/>
-        <source>Contained Object Handles</source>
-        <translation>包含对象程序</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="123"/>
-        <source>Location In Chassis</source>
-        <translation>机箱内位置</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="128"/>
-        <source>Type</source>
-        <translation>类型</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="143"/>
-        <source>SMBIOS Version</source>
-        <translation>SMBIOS版本</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="161"/>
-        <source>Product Name</source>
-        <translation>产品名称</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="176"/>
-        <source>UUID</source>
-        <translation>UUID</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="181"/>
-        <source>Wake-up Type</source>
-        <translation>唤醒类型</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="186"/>
-        <source>SKU Number</source>
-        <translation>SKU号</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="191"/>
-        <source>Family</source>
-        <translation>家族</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="205"/>
-        <source>System Information</source>
-        <translation>系统信息</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="223"/>
-        <source>Release Date</source>
-        <translation>发布日期</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="242"/>
-        <source>Address</source>
-        <translation>地址</translation>
->>>>>>> Stashed changes
-    </message>
-    <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="31"/>
         <source>Motherboard</source>
         <translation>主板</translation>
@@ -2797,82 +2137,10 @@
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="161"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="247"/>
-        <source>ROM Size</source>
-        <translation>ROM大小</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="252"/>
-        <source>Runtime Size</source>
-        <translation>运行内存大小</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="266"/>
-        <source>Currently Installed Language</source>
-        <translation>当前安装语言</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="271"/>
-        <source>Installable Languages</source>
-        <translation>可安装语言数</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="276"/>
-        <source>Languages Description Format</source>
-        <translation>语言描述格式</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="314"/>
-        <source>Asset Tag</source>
-        <comment>Chassis Information</comment>
-        <translation>资产编号</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="319"/>
-        <source>Boot-up State</source>
-        <comment>Chassis Information</comment>
-        <translation>开机状态</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="324"/>
-        <source>Contained Elements</source>
-        <comment>Chassis Information</comment>
-        <translation>包含组件数</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="329"/>
-        <source>Lock</source>
-        <comment>Chassis Information</comment>
-        <translation>锁</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="334"/>
-        <source>Number Of Power Cords</source>
-        <comment>Chassis Information</comment>
-        <translation>电源线数</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="339"/>
-        <source>OEM Information</source>
-        <comment>Chassis Information</comment>
-        <translation>OEM信息</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="344"/>
-        <source>Power Supply State</source>
-        <comment>Chassis Information</comment>
-        <translation>供电状态</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="349"/>
->>>>>>> Stashed changes
         <source>SKU Number</source>
-        <comment>Chassis Information</comment>
         <translation>SKU号</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="175"/>
         <source>System Information</source>
         <translation>系统信息</translation>
@@ -2884,106 +2152,52 @@
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="360"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="354"/>
-        <source>Security Status</source>
-        <comment>Chassis Information</comment>
-        <translation>安全状态</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="359"/>
-        <source>Termal State</source>
-        <comment>Chassis Information</comment>
-        <translation>散热状态</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="423"/>
-        <source>Size</source>
-        <comment>memory&apos;s size</comment>
-        <translation>大小</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="467"/>
->>>>>>> Stashed changes
         <source>Memory Info</source>
         <translation>内存信息</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="183"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="213"/>
->>>>>>> Stashed changes
         <source>BIOS Version</source>
         <translation>BIOS版本</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="203"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="233"/>
->>>>>>> Stashed changes
         <source>BIOS Vendor</source>
         <translation>BIOS制造商</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="223"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="283"/>
->>>>>>> Stashed changes
         <source>Characteristics</source>
         <translation>特性</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="242"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="299"/>
->>>>>>> Stashed changes
         <source>Type</source>
         <comment>Chassis Information</comment>
         <translation>类型</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="252"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="309"/>
->>>>>>> Stashed changes
         <source>Version</source>
         <comment>Chassis Information</comment>
         <translation>版本</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="260"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="367"/>
->>>>>>> Stashed changes
         <source>Chassis Information</source>
         <translation>机箱信息</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="276"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="383"/>
->>>>>>> Stashed changes
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="285"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="392"/>
->>>>>>> Stashed changes
         <source>Slot Count</source>
         <translation>插槽数</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="318"/>
         <source>Size</source>
         <comment>Computer_core_memory</comment>
@@ -2996,39 +2210,28 @@
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="329"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="436"/>
->>>>>>> Stashed changes
         <source>Maximum Capacity</source>
         <comment>PhysicMemory</comment>
         <translation>最大容量</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="355"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="462"/>
->>>>>>> Stashed changes
         <source>Upgradeable</source>
         <translation>支持升级</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="356"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="463"/>
->>>>>>> Stashed changes
         <source>Yes</source>
         <translation>是</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/motherboardwidget.cpp" line="356"/>
-=======
-        <location filename="../src/motherboardwidget.cpp" line="463"/>
->>>>>>> Stashed changes
         <source>No</source>
         <translation>否</translation>
+    </message>
+    <message>
+        <source>Memory Bank Info</source>
+        <translation type="vanished">内存插槽信息</translation>
     </message>
 </context>
 <context>
@@ -3045,19 +2248,19 @@
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="56"/>
-        <location filename="../src/mousewidget.cpp" line="284"/>
+        <location filename="../src/mousewidget.cpp" line="229"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="57"/>
-        <location filename="../src/mousewidget.cpp" line="284"/>
+        <location filename="../src/mousewidget.cpp" line="229"/>
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="58"/>
-        <location filename="../src/mousewidget.cpp" line="284"/>
+        <location filename="../src/mousewidget.cpp" line="229"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
@@ -3073,7 +2276,7 @@
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="93"/>
-        <location filename="../src/mousewidget.cpp" line="199"/>
+        <location filename="../src/mousewidget.cpp" line="179"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
@@ -3093,90 +2296,35 @@
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="113"/>
-        <source>driver</source>
-        <translation>驱动</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="118"/>
-        <source>maxpower</source>
-        <translation>最大功率</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="123"/>
-        <source>physical id</source>
-        <translation>物理ID</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="128"/>
-        <source>speed</source>
-        <translation>速度</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="136"/>
+        <location filename="../src/mousewidget.cpp" line="116"/>
         <source>Uniq</source>
         <comment>Mouse Info from catinput</comment>
         <translation>Uniq</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="147"/>
+        <location filename="../src/mousewidget.cpp" line="127"/>
         <source>Connected</source>
         <translation>已连接</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="160"/>
+        <location filename="../src/mousewidget.cpp" line="140"/>
         <source>Phys</source>
         <comment>Mouse Info from catinput</comment>
         <translation>Phys</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="191"/>
+        <location filename="../src/mousewidget.cpp" line="171"/>
         <source>Sysfs</source>
         <comment>Mouse Info from catinput</comment>
         <translation>Sysfs</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="204"/>
+        <location filename="../src/mousewidget.cpp" line="184"/>
         <source>Product</source>
         <translation>产品</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="209"/>
-        <source>Bus</source>
-        <translation>总线</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="214"/>
-        <source>EV</source>
-        <translation>EV</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="219"/>
-        <source>Handlers</source>
-        <translation>处理程序</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="224"/>
-        <source>KEY</source>
-        <translation>KEY</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="229"/>
-        <source>MSC</source>
-        <translation>MSC</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="234"/>
-        <source>PROP</source>
-        <translation>PROP</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="239"/>
-        <source>REL</source>
-        <translation>REL</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="252"/>
+        <location filename="../src/mousewidget.cpp" line="197"/>
         <source>Power</source>
         <comment>Mouse Info from upower</comment>
         <translation>电源</translation>
@@ -3244,38 +2392,22 @@
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="58"/>
         <source>Speed</source>
-<<<<<<< Updated upstream
         <translation type="unfinished"></translation>
-=======
-        <translation>速度</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="59"/>
         <source>Width</source>
-<<<<<<< Updated upstream
         <translation type="unfinished">位宽</translation>
-=======
-        <translation>位宽</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="60"/>
         <source>Clock</source>
-<<<<<<< Updated upstream
         <translation type="unfinished">时钟频率</translation>
-=======
-        <translation>时钟频率</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="61"/>
         <source>Capabilities</source>
-<<<<<<< Updated upstream
         <translation type="unfinished">功能</translation>
-=======
-        <translation>功能</translation>
->>>>>>> Stashed changes
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="152"/>
@@ -3304,92 +2436,92 @@
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="172"/>
         <source>Type</source>
-        <translation>类型</translation>
+        <translation type="unfinished">类型</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="177"/>
         <source>autonegotiation</source>
-        <translation>自动协商</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="182"/>
         <source>broadcast</source>
-        <translation>广播</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="187"/>
         <source>capacity</source>
-        <translation>容量</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="192"/>
         <source>driver</source>
-        <translation>驱动</translation>
+        <translation type="unfinished">驱动</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="197"/>
         <source>driverversion</source>
-        <translation>驱动版本</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="202"/>
         <source>duplex</source>
-        <translation>双工</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="207"/>
         <source>firmware</source>
-        <translation>固件</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="212"/>
         <source>ioport</source>
-        <translation>IO端口 </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="217"/>
         <source>ip</source>
-        <translation>IP</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="222"/>
         <source>irq</source>
-        <translation>中断</translation>
+        <translation type="unfinished">中断</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="227"/>
         <source>latency</source>
-        <translation>延迟</translation>
+        <translation type="unfinished">延迟</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="232"/>
         <source>link</source>
-        <translation>链接</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="237"/>
         <source>memory</source>
-        <translation>内存地址</translation>
+        <translation type="unfinished">内存地址</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="242"/>
         <source>multicast</source>
-        <translation>多播</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="247"/>
         <source>physical id</source>
-        <translation>物理ID</translation>
+        <translation type="unfinished">物理ID</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="252"/>
         <source>port</source>
-        <translation>端口</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="257"/>
         <source>size</source>
-        <translation>size</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3402,146 +2534,73 @@
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="40"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="105"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="110"/>
->>>>>>> Stashed changes
         <source>No other devices found</source>
         <translation>未发现其他设备</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="53"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="96"/>
         <location filename="../src/otherdevicewidget.cpp" line="117"/>
         <location filename="../src/otherdevicewidget.cpp" line="197"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="101"/>
-        <location filename="../src/otherdevicewidget.cpp" line="122"/>
-        <location filename="../src/otherdevicewidget.cpp" line="202"/>
->>>>>>> Stashed changes
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="54"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="122"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="127"/>
->>>>>>> Stashed changes
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="56"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="127"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="132"/>
->>>>>>> Stashed changes
         <source>Description</source>
         <translation>描述</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="57"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="96"/>
         <location filename="../src/otherdevicewidget.cpp" line="132"/>
         <location filename="../src/otherdevicewidget.cpp" line="197"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="101"/>
-        <location filename="../src/otherdevicewidget.cpp" line="137"/>
-        <location filename="../src/otherdevicewidget.cpp" line="202"/>
->>>>>>> Stashed changes
         <source>Vendor</source>
         <translation>制造商</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="58"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="137"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="142"/>
->>>>>>> Stashed changes
         <source>Bus Info</source>
         <translation>总线信息</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="59"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="142"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="147"/>
->>>>>>> Stashed changes
         <source>Physical ID</source>
         <translation>物理ID</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="60"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="147"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="152"/>
->>>>>>> Stashed changes
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="61"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="152"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="157"/>
->>>>>>> Stashed changes
         <source>Width</source>
         <translation>位宽</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="62"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="157"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="162"/>
->>>>>>> Stashed changes
         <source>Clock</source>
         <translation>时钟频率</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="63"/>
-<<<<<<< Updated upstream
         <location filename="../src/otherdevicewidget.cpp" line="162"/>
-=======
-        <location filename="../src/otherdevicewidget.cpp" line="167"/>
->>>>>>> Stashed changes
         <source>Capabilities</source>
         <translation>功能</translation>
-    </message>
-    <message>
-        <location filename="../src/otherdevicewidget.cpp" line="64"/>
-        <source>driver</source>
-        <translation>驱动</translation>
-    </message>
-    <message>
-        <location filename="../src/otherdevicewidget.cpp" line="65"/>
-        <source>irq</source>
-        <translation>中断</translation>
-    </message>
-    <message>
-        <location filename="../src/otherdevicewidget.cpp" line="66"/>
-        <source>latency</source>
-        <translation>延迟</translation>
-    </message>
-    <message>
-        <location filename="../src/otherdevicewidget.cpp" line="67"/>
-        <source>memory</source>
-        <translation>内存地址</translation>
-    </message>
-    <message>
-        <location filename="../src/otherdevicewidget.cpp" line="68"/>
-        <source>pci</source>
-        <translation>pci</translation>
     </message>
 </context>
 <context>
@@ -3781,7 +2840,6 @@
         <translation>未发现打印机</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/printerwidget.cpp" line="181"/>
         <source>Copies</source>
         <translation type="unfinished"></translation>
@@ -3958,134 +3016,12 @@
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="323"/>
-=======
-        <location filename="../src/printerwidget.cpp" line="182"/>
-        <source>copies</source>
-        <translation>复印数量</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="187"/>
-        <source>Device-Uri</source>
-        <translation>设备URI</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="192"/>
-        <source>Finishings</source>
-        <translation>Finishings</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="197"/>
-        <source>Job-cancel-after</source>
-        <translation>此时取消打印任务</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="202"/>
-        <source>Job-hold-until</source>
-        <translation>保留打印任务直至</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="207"/>
-        <source>Job-priority</source>
-        <translation>任务优先级</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="212"/>
-        <source>Job-Sheets</source>
-        <translation>Job-Sheets</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="217"/>
-        <source>marker-change-time</source>
-        <translation>标记修改次数</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="222"/>
-        <source>Media</source>
-        <translation>打印介质</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="227"/>
-        <source>number-up</source>
-        <translation>编号</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="232"/>
-        <source>orientation-requested</source>
-        <translation>打印方向</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="237"/>
-        <source>print-color-mode</source>
-        <translation>颜色模式</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="242"/>
-        <source>printerInfo</source>
-        <translation>打印机信息</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="247"/>
-        <source>printer-is-accepting-jobs</source>
-        <translation>当前可打印</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="252"/>
-        <source>printer-is-shared</source>
-        <translation>打印机已共享</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="257"/>
-        <source>printer-is-temporary</source>
-        <translation>临时打印机</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="262"/>
-        <source>printer-make-and-model</source>
-        <translation>制造商和型号</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="267"/>
-        <source>printer-state</source>
-        <translation>打印机状态</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="272"/>
-        <source>printer-state-change-time</source>
-        <translation>打印机状态修改时间</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="277"/>
-        <source>printer-state-reasons</source>
-        <translation>打印机状态信息</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="282"/>
-        <source>printer-type</source>
-        <translation>打印机类型</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="287"/>
-        <source>printer-uri-supported</source>
-        <translation>支持的URI</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="292"/>
-        <source>sides</source>
-        <translation>打印面数</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="341"/>
->>>>>>> Stashed changes
         <source>printer-info</source>
         <comment>Printer Info,shown on first column of table&apos;s head</comment>
         <translation>名称</translation>
     </message>
     <message>
-<<<<<<< Updated upstream
         <location filename="../src/printerwidget.cpp" line="324"/>
-=======
-        <location filename="../src/printerwidget.cpp" line="342"/>
->>>>>>> Stashed changes
         <source>printer-make-and-model</source>
         <comment>Printer Info,shown on second column of table&apos;s head </comment>
         <translation>制造商和型号</translation>
@@ -4309,32 +3245,32 @@
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="88"/>
         <source>Model</source>
-        <translation>型号</translation>
+        <translation type="unfinished">型号</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="89"/>
         <source>Serial ID</source>
-        <translation>序列号</translation>
+        <translation type="unfinished">序列号</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="91"/>
         <source>Status</source>
-        <translation>状态</translation>
+        <translation type="unfinished">状态</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="92"/>
         <source>Driver</source>
-        <translation>驱动</translation>
+        <translation type="unfinished">驱动</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="93"/>
         <source>Speed</source>
-        <translation>速度</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="94"/>
         <source>BusID</source>
-        <translation>总线ID</translation>
+        <translation type="unfinished">总线ID</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="95"/>
@@ -4353,12 +3289,12 @@
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="96"/>
         <source>Unique ID</source>
-        <translation>唯一标识码</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="97"/>
         <source>SysFS ID</source>
-        <translation>SysFS ID</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="138"/>

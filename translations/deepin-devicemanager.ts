@@ -1973,7 +1973,6 @@
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="205"/>
->>>>>>> Stashed changes
         <source>System Information</source>
         <translation type="unfinished"></translation>
     </message>
