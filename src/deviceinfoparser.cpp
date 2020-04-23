@@ -484,7 +484,26 @@ QStringList DeviceInfoParser::getHwinfoMonitorList()
 
 QStringList DeviceInfoParser::getHwinfoKeyboardList()
 {
-    return getMatchToolDeviceList("Keyboard");
+    checkValueFun_t func = [](const QString & fk)->bool {
+
+        if (DeviceInfoParser::Instance().toolDatabase_["Keyboard"][fk].contains("Model") == false)
+        {
+            return false;
+        }
+
+        if (DeviceInfoParser::Instance().toolDatabase_["Keyboard"][fk]["Model"].contains("Driver"))
+        {
+            return false;
+        }
+        if (DeviceInfoParser::Instance().toolDatabase_["Keyboard"][fk]["Model"].contains("Receiver"))
+        {
+            return false;
+        }
+
+
+        return true;
+    };
+    return getMatchToolDeviceList("Keyboard", &func);
 }
 
 QStringList DeviceInfoParser::getHwinfoDiskList()
@@ -1115,8 +1134,32 @@ QStringList DeviceInfoParser::getLshwOtherPciDeviceList()
 
         if (re.exactMatch(fk)) {
             if (orderedDevices.contains(fk) == false) {
-                otherPcideviceList.push_back(fk);
-                orderedDevices.insert(fk);
+
+                if (fk.contains("storage", Qt::CaseInsensitive)) {
+                    continue;
+                }
+
+                if (fk.contains("disk", Qt::CaseInsensitive)) {
+                    continue;
+                }
+
+                if (toolDatabase_["lshw"][fk]["product"].contains("camera", Qt::CaseInsensitive) == true) {
+                    continue;
+                }
+                if (toolDatabase_["lshw"][fk]["product"].contains("keyboard", Qt::CaseInsensitive) == true) {
+                    continue;
+                }
+                if (toolDatabase_["lshw"][fk]["product"].contains("mouse", Qt::CaseInsensitive) == true) {
+                    continue;
+                }
+
+                if (toolDatabase_["lshw"][fk]["product"].contains("Controller", Qt::CaseInsensitive) == true) {
+                    otherPcideviceList.push_back(fk);
+                    orderedDevices.insert(fk);
+                }
+
+//                otherPcideviceList.push_back(fk);
+//                orderedDevices.insert(fk);
             }
         }
     }

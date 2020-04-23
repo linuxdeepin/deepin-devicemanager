@@ -33,6 +33,7 @@ public:
 private:
     void initWidget() override;
     void loadWidget();
+    void loadWidgetEx();
 
     bool findKeyboardFromHwinfo();
 
@@ -41,9 +42,12 @@ private:
     bool findKeyboardFromCatInput();
 
     void foundNokeyboards();
+
+    bool isSameKeyBoard(QString &physStr);
 private:
     QList<QStringList> m_tabList;
     QMultiMap<QString, QList<ArticleStruct>> m_articlesmap;
     QStringList m_heads;
+    QString m_physList;
 };
 
