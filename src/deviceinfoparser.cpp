@@ -2596,6 +2596,13 @@ bool DeviceInfoParser::loadSomeXrandrDatabase()
     QString key = "DisplayScreen currentResolution and refresh from xrandr";
     QMap<QString, QString> value;
     foreach (auto line, lines) {
+        QString screen = "Screen";
+        if (line.startsWith(screen)) {
+            QStringList resolutionList = line.split(": ");
+            QStringList resolutionList1 = resolutionList[1].split(", ");
+            minResolution = resolutionList1[0].remove("minimum ");
+            maxResolution = resolutionList1[2].remove("maximum ");
+        }
         if (line.contains("*",Qt::CaseSensitive)) {
 //            QRegExp reCurrent("[ ]([0-9]\\d*x[0-9]\\d*)");
             //此处用正则表达式最好

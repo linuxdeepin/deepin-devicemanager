@@ -326,6 +326,9 @@ public:
     QString varmSize = "Unknown";
     // 获取屏幕的分辨率和刷新率，一个屏幕
     QString currentResolutionRefresh;
+    // 获取显卡的最大支持分辨率和最小支持分辨率
+    QString maxResolution;
+    QString minResolution;
 
     DatabaseMap                      m_KeyBoardInfo;
 

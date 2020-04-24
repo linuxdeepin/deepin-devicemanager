@@ -96,11 +96,15 @@ void DisplayadapterWidget::initWidget()
             QString screenName = screenList[i];
 // 最大分辨率和最小分辨率
             ArticleStruct minimum(tr("Minimum Resolution"));
-            minimum.queryData( "xrandr", screenName, "minresolution");
+//            minimum.queryData( "xrandr", screenName, "minresolution");
+//            articles.push_back(minimum);
+            minimum.value = DeviceInfoParser::Instance().minResolution;
             articles.push_back(minimum);
 
             ArticleStruct maximum(tr("Maximum Resolution"));
-            maximum.queryData( "xrandr", screenName, "maxresolution");
+//            maximum.queryData( "xrandr", screenName, "maxresolution");
+//            articles.push_back(maximum);
+            maximum.value = DeviceInfoParser::Instance().maxResolution;
             articles.push_back(maximum);
         }
 //驱动从lspci中获取
