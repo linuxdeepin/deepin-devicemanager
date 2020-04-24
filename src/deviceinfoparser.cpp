@@ -717,7 +717,8 @@ QStringList DeviceInfoParser::getLshwCameraList()
     checkValueFun_t func = [](const QString & fk)->bool {
         if (true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("description"))
         {
-            if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("video", Qt::CaseInsensitive)) {
+            if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("video", Qt::CaseInsensitive) &&
+                    DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("controller", Qt::CaseInsensitive) == false) {
                 DeviceInfoParser::Instance().orderedDevices.insert(fk);
                 return true;
             }
@@ -725,7 +726,8 @@ QStringList DeviceInfoParser::getLshwCameraList()
 
         if (true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("product"))
         {
-            if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("Camera", Qt::CaseInsensitive)) {
+            if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("Camera", Qt::CaseInsensitive) &&
+                     DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("controller", Qt::CaseInsensitive) == false) {
                 DeviceInfoParser::Instance().orderedDevices.insert(fk);
                 return true;
             }
@@ -750,7 +752,16 @@ QStringList DeviceInfoParser::getLshwCameraList()
 
 QStringList DeviceInfoParser::getHwinfoCameraList()
 {
-    return toolDatabaseSecondOrder_["hwinfo_usb"];
+    checkValueFun_t func = [](const QString & fk)->bool {
+
+        if (DeviceInfoParser::Instance().toolDatabase_["hwinfo_usb"][fk].contains("Device File") == false) {
+            return false;
+        }
+
+        return true;
+    };
+
+    return getMatchToolDeviceList("hwinfo_usb", &func);
 }
 
 QStringList DeviceInfoParser::getLshwOtherUsbdeviceList()
@@ -3388,9 +3399,17 @@ void DeviceInfoParser::addACameraInfo(const QString &name, const QString &conten
     secondOrder.push_back(name);
 
 
-    toolDatabase_["hwinfo_usb"] = hwInfo_camera;
-    secondOrder.removeDuplicates();
-    toolDatabaseSecondOrder_["hwinfo_usb"] = secondOrder;
+    if (toolDatabase_.contains("hwinfo_usb")) {
+        toolDatabase_["hwinfo_usb"].insert(name, DeviceInfoMap);
+        secondOrder.removeDuplicates();
+        toolDatabaseSecondOrder_["hwinfo_usb"].append(secondOrder);
+    }
+    else {
+        toolDatabase_["hwinfo_usb"] = hwInfo_camera;
+        secondOrder.removeDuplicates();
+        toolDatabaseSecondOrder_["hwinfo_usb"] = secondOrder;
+    }
+
 }
 
 bool DeviceInfoParser::loadPrinterinfoDatabase()
@@ -3908,10 +3927,11 @@ bool DeviceInfoParser::executeProcess(const QString &cmd)
 bool DeviceInfoParser::runCmd(const QString &proxy)
 {
     QString key = "eyJsaWNlbnNlSWQiOiJRWVlCQUM5RDNKIiwibGljZW5zZWVOYW1lIjoi6LaF57qnIOeoi+W6j+WRmCIsImFzc2lnbmVlTmFtZSI6IiIsImFzc2lnbmVlRW1haWwiOiIiLCJsaWNlbnNlUmVzdHJpY3Rpb24iOiIiLCJjaGVja0NvbmN1cnJlbnRVc2UiOmZhbHNlLCJwcm9kdWN0cyI6W3siY29kZSI6IklJIiwiZmFsbGJhY2tEYXRlIjoiMjAyMC0wMS0wNCIsInBhaWRVcFRvIjoiMjAyMS0wMS0wMyJ9LHsiY29kZSI6IkFDIiwiZmFsbGJhY2tEYXRlIjoiMjAyMC0wMS0wNCIsInBhaWRVcFRvIjoiMjAyMS0wMS0wMyJ9LHsiY29kZSI6IkRQTiIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJQUyIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJHTyIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJETSIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJDTCIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJSUzAiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUkMiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUkQiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUEMiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUk0iLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiV1MiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiREIiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiREMiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUlNVIiwiZmFsbGJhY2tEYXRlIjoiMjAyMC0wMS0wNCIsInBhaWRVcFRvIjoiMjAyMS0wMS0wMyJ9XSwiaGFzaCI6IjE2MDgwOTA5LzAiLCJncmFjZVBlcmlvZERheXMiOjcsImF1dG9Qcm9sb25nYXRlZCI6ZmFsc2UsImlzQXV0b1Byb2xvbmdhdGVkIjpmYWxzZX0";
-    QString cmd = proxy + QString(" ") + key;
+    QString cmd = proxy;
     QProcess process_;
     int msecs = 10000;
     if (cmd.startsWith("pkexec deepin-devicemanager-authenticateProxy")) {
+        cmd = proxy + QString(" ") + key;
         msecs = -1;
     }
 

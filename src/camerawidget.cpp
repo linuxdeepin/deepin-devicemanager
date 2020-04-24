@@ -149,16 +149,25 @@ void CameraWidget::initDataFromHwinfo()
 
         ArticleStruct name(tr("Name"));
         name.queryData( "hwinfo_usb", device, "Device");
+        int index = name.value.indexOf("\"");
+        name.value = name.value.mid(index);
+        name.value = name.value.replace("\"", "").trimmed();
         articles.push_back(name);
         existArticles.insert("Device");
 
         ArticleStruct description(tr("Description"));
         description.queryData("hwinfo_usb", device, "Model");
+        index = description.value.indexOf("\"");
+        description.value = description.value.mid(index);
+        description.value = description.value.replace("\"", "").trimmed();
         articles.push_back(description);
         existArticles.insert("Model");
 
         ArticleStruct vendor(tr("Vendor"));
         vendor.queryData( "hwinfo_usb", device, "Vendor");
+        index = vendor.value.indexOf("\"");
+        vendor.value = vendor.value.mid(index);
+        vendor.value = vendor.value.replace("\"", "").trimmed();
         articles.push_back(vendor);
         existArticles.insert("Vendor");
 

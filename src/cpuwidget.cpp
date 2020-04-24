@@ -57,6 +57,10 @@ void CpuWidget::initWidget()
     // 获取CPU模型
     QDBusInterface cpuModelName("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
     QString cpuModel  = cpuModelName.property("Processor").toString();
+    int index = cpuModel.indexOf("x");
+    cpuModel = cpuModel.mid(0, index);
+    cpuModel = cpuModel.replace("\"", "").trimmed();
+
     overviewInfo_.value = cpuModel;
     overviewInfo_.value.remove(" CPU", Qt::CaseInsensitive);
 
