@@ -260,15 +260,30 @@ ArticleStruct DiskWidget::setDiskSerialInfo(QString &disk)
     // 序列号
     ArticleStruct serial(tr("Serial Number"));
 
-    QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
-    int index = devicefileStr.indexOf("(");
-    devicefileStr = devicefileStr.mid(0, index).trimmed();
+//    QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
+//    int index = devicefileStr.indexOf("(");
+//    devicefileStr = devicefileStr.mid(0, index).trimmed();
 
-    DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(serial.value, devicefileStr, "serial");
+//    DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(serial.value, devicefileStr, "serial");
 
-    if (serial.isValid() == false) {
-        serial.value = DeviceInfoParser::Instance().queryData("Storage", disk, "Serial ID");
-        serial.value.replace("\"", "");
+//    if (serial.isValid() == false) {
+//        serial.value = DeviceInfoParser::Instance().queryData("Storage", disk, "Serial ID");
+//        serial.value.replace("\"", "");
+//    }
+
+    QString deviceFileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device Files");
+    QStringList itemList = deviceFileStr.split(",");
+
+    foreach (auto item, itemList) {
+        if (item.contains("by-id", Qt::CaseInsensitive)) {
+            int index;/* = item.indexOf(QRegExp("_[\\S\\d]*[\\s\\S]*$"));
+            item = item.mid(index);*/
+            index = item.lastIndexOf("_");
+            item = item.mid(index + 1);
+            item.replace(QRegExp("-[\\s\\S]*$"), "");
+            serial.value = item;
+            break;
+        }
     }
 
     m_articles.push_back(serial);
