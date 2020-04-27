@@ -27,6 +27,7 @@
 #include <DApplication>
 #include <QDBusInterface>
 #include <QDebug>
+#include <cmath>
 
 DWIDGET_USE_NAMESPACE
 
@@ -40,6 +41,7 @@ void MemoryWidget::initWidget()
     auto resultFromDmi = DeviceInfoParser::Instance().getDmidecodeMemoryList();
     if (resultFromDmi.isEmpty() == false) {
         //添加表头
+        int memoryNumber = hasNumerMemory();
         init_l_Designer_l_TableWdiget();
         //显示界面
         if (update_l_Designer_l_WholeDownWidget()) {
@@ -112,6 +114,7 @@ void MemoryWidget::initWidget()
 //        }
 //        return;
 //    }
+
     auto memorys = DeviceInfoParser::Instance().getLshwMeoryList();
     if (memorys.isEmpty() == false) {
         int index = 1;
@@ -121,13 +124,13 @@ void MemoryWidget::initWidget()
                 ArticleStruct art(key);
                 art.value = ptr.value().value(key);
 
-                art.value.replace(QRegExp("TiB"), "TB");
-                art.value.replace(QRegExp("GiB"), "GB");
-                art.value.replace(QRegExp("MiB"), "MB");
-                art.value.replace(QRegExp("KiB"), "KB");
-
+                //3311
                 if (key == QString("size")) {
-                    overviewInfo_.value += overviewInfo_.value.isEmpty() ? "" : " /";
+                    double realSize = totalMemorySize();
+                    //QString size4 = QString("%1").arg(size3).mid() + "GB";
+                    art.value = QString::number(realSize, 'f', 1) + " GB";
+
+                    overviewInfo_.value += overviewInfo_.value.isEmpty() ? "" : " / ";
                     overviewInfo_.value += art.value;
                 }
                 articles.append(art);
@@ -153,13 +156,9 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
     QStringList headers = { tr("Name"), tr("Vendor"), tr("Type"), tr("Speed", "memory info"),  tr("Size"), /* tr("Status")*/};
 
     QList<QStringList> tabList;
-//    QDBusInterface mermorySize("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
-//    quint64 size  = mermorySize.property("MemoryCap").toLongLong();
-//    double size1 = size / 1024;
-//    double size2 = size1 / 1024;
-//    double size3 = size2 / 1024;
-////    QString size4 = QString("%1").arg(size3).mid() + "GB";
-//    QString sizeMemory = QString::number(size3, 'f', 1) + "GB";
+    //从sysinfo的DBus获取总的内存
+    double totalRealSize = totalMemorySize();
+    int totalSize = sizeMap.value("totalSize");
 
     foreach (const QString &mem, memList) {
         if (canUpgrade_ == -1) {
@@ -168,16 +167,20 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
 
         QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
         QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");//3311
+        QString realSize = nullptr;
 
-//        if (isSlotValid(sizeMemory, speed) == false) {
-//            canUpgrade_ = 1;
-//            continue;
-//        }
-
-        //此处，size或speed 有问题， 就不显示表头
         if (isSlotValid(size, speed) == false) {
             canUpgrade_ = 1;
             continue;
+        }
+
+        //此处，size或speed 有问题， 就不显示表头
+//        if (isSlotValid(size, speed) == false) {
+//            canUpgrade_ = 1;
+//            continue;
+//        }
+        if (sizeMap.contains(mem) ) {
+            realSize = QString::number(totalRealSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
         }
 
         QStringList tab = {
@@ -185,8 +188,7 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Manufacturer"),
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type"),
             speed,
-            size
-//            sizeMemory,
+            realSize
             //3311
 
             //tr("Good")
@@ -210,13 +212,6 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
     articles.push_back(slotCount);
 //3311
     ArticleStruct size(tr("Size"));
-//    QDBusInterface mermorySize("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
-//    quint64 size1  = mermorySize.property("MemoryCap").toLongLong();
-//    double size2 = size1 / 1024;
-//    double size3 = size2 / 1024;
-//    double size4 = size3 / 1024;
-////    QString size4 = QString("%1").arg(size3).mid() + "GB";
-//    size.value = QString::number(size4, 'f', 1) + "GB";
     size.queryData("lshw", "Computer_core_memory", "size");
     //从lshw中获取memory的大小
 
@@ -267,7 +262,9 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
     articles.clear();
     QSet<QString> existArticles;
-
+    double totalRealSize = totalMemorySize();
+    QString realSize = QString::number(totalRealSize, 'f', 1) + " GB";
+    int totalSize = sizeMap.value("totalSize");
 
     QStringList detailMem;
     foreach (const QString &mem, memList) {
@@ -291,19 +288,13 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
         //3311
         ArticleStruct size(tr("Size", "memory's size"));
-//        size.queryData("dmidecode", mem, "Size");
-//        QDBusInterface mermorySize("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
-//        quint64 size1  = mermorySize.property("MemoryCap").toLongLong();
-//        double size2 = size1 / 1024;
-//        double size3 = size2 / 1024;
-//        double size4 = size3 / 1024;
-//        //    QString size4 = QString("%1").arg(size3).mid() + "GB";
-//        size.value = QString::number(size4, 'f', 1) + "GB";
+        // 获取机器总的内存大小
+        if (sizeMap.contains(mem) ) {
+            size.value = QString::number(totalRealSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
+        }
+        //    QString size4 = QString("%1").arg(size3).mid() + "GB";
         articles.push_back(size);
         existArticles.insert("Size");
-//        if (mem.contains("Size")) {
-//            continue;
-//        }
 
         ArticleStruct type(tr("Type"));
         type.queryData("dmidecode", mem, "Type");
@@ -390,9 +381,6 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         articles.push_back(typeDetail);
         existArticles.insert("Type Detail");
 
-//        if (mem.contains("size", Qt::CaseInsensitive)) {
-//            DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles);
-//        }
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles,"ManulTrack__Memory","Memory Information");
 
         QString deviceName = vendor.value + " " + model.value;
@@ -427,7 +415,7 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         return false;
     }
 
-    overviewInfo_.value = size.value;
+    overviewInfo_.value = realSize;
     if (detailMem.size() > 0) {
         QString detail = detailMem.join(" / ");
         if (detail.isEmpty() == false) {
@@ -663,6 +651,7 @@ void MemoryWidget::updateWholeDownWidget_Good()
     }
 }
 
+// 获得是否安装内存条
 bool MemoryWidget::isSlotValid(const QString &size, const QString &speed)
 {
     if (size.contains("Unknown", Qt::CaseInsensitive) || size.contains("No Module Installed", Qt::CaseInsensitive)) {
@@ -673,4 +662,75 @@ bool MemoryWidget::isSlotValid(const QString &size, const QString &speed)
     }
 
     return true;
+}
+
+// 获取安装的内存条的个数
+int MemoryWidget::hasNumerMemory()
+{
+    QStringList memList = DeviceInfoParser::Instance().getDmidecodeMemoryList();
+    int number = 0;
+    int valueSizeTotal = 0;
+    foreach (const QString &mem, memList) {
+        QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
+        QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");//3311
+//        int valueSizeTotal = 0;
+        int valueSize1 = 0;
+
+        if (size.contains("MB")) {
+            int pos = size.indexOf(" ", Qt::CaseSensitive);
+            int valueSize = size.mid(0,pos).toInt();
+            valueSize1 = valueSize / 1024;
+            valueSizeTotal += valueSize1;
+
+        } else if (size.contains("GB")){
+            int pos = size.indexOf(" ", Qt::CaseSensitive);
+            int valueSize1 = size.mid(0,pos).toInt();
+            valueSizeTotal += valueSize1;
+        }
+//        if (size.contains("MB")) {
+//            int pos = size.indexOf(" ",Qt::CaseSensitive);
+//            valueSize = size.mid(0,pos).toLongLong(nullptr,10);
+//            valueSize += valueSize;
+//        }
+
+        if (isSlotValid(size,speed)) {
+            sizeMap[mem] = valueSize1;
+            number++;
+        }
+    }
+    sizeMap["totalSize"] = valueSizeTotal;
+
+    return number;
+}
+
+// 获取sysinfo的Dbus总的字节数，换算成GB
+double MemoryWidget::totalMemorySize()
+{
+    QDBusInterface mermorySize("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
+    quint64 size1  = mermorySize.property("MemoryCap").toLongLong();
+    double size2 = size1 / 1024;
+    double size3 = size2 / 1024;
+    double size4 = size3 / 1024;
+    return size4;
+}
+
+// 转化为“GB”
+QString MemoryWidget::formatCap(qulonglong cap, const int size, quint8 precision)
+{
+    static QString type[] = {"B","KB","MB","GB","TB"};
+
+    qulonglong lc = cap;
+    double dc = cap;
+    double ds = size;
+
+    for (size_t p = 0; p < sizeof(type); ++p) {
+        qDebug() << sizeof(type);
+        if (cap < pow(size, p+1) || p == sizeof(type) -1) {
+            if (!precision) {
+                return  QString::number(round(lc/pow(size,p))) + type[p];
+            }
+            return QString::number(dc /pow(ds,p),'f',precision) + type[p];
+        }
+    }
+    return nullptr;
 }

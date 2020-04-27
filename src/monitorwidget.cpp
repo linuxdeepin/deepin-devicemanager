@@ -125,7 +125,6 @@ bool MonitorWidget::loadXrandrDisplaySize()
         if(words.size() != 3){continue;}
 
         QString str = paraseDisplaySize(words[1].toDouble(),words[2].toDouble());
-//        qDebug() << str;
     }
 }
 

@@ -40,8 +40,14 @@ public:
     void updateWholeDownWidget_Good();
 
     bool isSlotValid(const QString &size, const QString &speed );
+    //确定有几个插槽插有内存条
+    int hasNumerMemory();
+    //从sysinfo中的DBus获取总的内存大小
+    double totalMemorySize();
+    static QString formatCap(qulonglong cap,const int size = 1024,quint8 precision = 1);
 
 private:
     int canUpgrade_ = -1;
     QList<ArticleStruct> summaryInfo_;
+    QMap<QString,int> sizeMap;
 };
