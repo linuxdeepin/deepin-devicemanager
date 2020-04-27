@@ -73,5 +73,5 @@ const int TableViewRowHeight_ = 36;
 //test_monitor_refresh_rate,only xrandr.txt and hwinfo.txt come from the target computer
 //const QString DEVICEINFO_PATH = "/dde_devicemanager/computers/test_monitor_refresh_rate";
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/deviceInfo/deviceInfo_longxin";
-const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/deviceInfo/Bug_18333";
-#define TEST_DATA_FROM_FILE
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/deviceInfo/Bug_18333";
+//#define TEST_DATA_FROM_FILE
