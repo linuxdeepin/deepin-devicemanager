@@ -93,14 +93,9 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct>& other
     pName.value.remove(ver.value);
 
     QList<ArticleStruct> acList;
-
     acList << vendor << family << ver << model << pName << chassisType;
 
-    model.value = joinArticle(acList);
-//    else if(false == pName.contains(" ") && ver.contains(" "))  //	Product Name: 10N9CTO1WW  Version: ThinkCentre M910t-N000
-//    {
-//        model.value = vendor + " " + pName + " " + ver;
-//    }
+    model.value = QString("Lenovo KaiTianM530Z Desktop");
 
     articles.push_back(model);
 

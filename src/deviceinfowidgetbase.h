@@ -30,7 +30,7 @@
 #include "deviceattributedefine.h"
 #include "xlsxdocument.h"
 #include "document.h"
-#include "DPalette"
+//#include "DPalette"
 #include "DFrame"
 #include "commondefine.h"
 #include "DTextBrowser"

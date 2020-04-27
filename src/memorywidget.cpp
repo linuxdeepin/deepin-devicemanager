@@ -179,17 +179,19 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
             canUpgrade_ = 1;
             continue;
         }
-
+        if(size.contains("MB")){
+            QString tmp = size.replace("MB","").trimmed();
+            double capa = tmp.toDouble();
+            capa = capa / 1024.0;
+            size = QString::number(capa,'g',0) + QString("GB");
+        }
+        speed.replace("MT/s","MHz");
         QStringList tab = {
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Part Number"),
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Manufacturer"),
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type"),
             speed,
             size
-//            sizeMemory,
-            //3311
-
-            //tr("Good")
         };
 
         tabList.push_back(tab);
@@ -312,6 +314,7 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
         ArticleStruct speed(tr("Speed", "memory's Speed"));
         speed.queryData("dmidecode", mem, "Speed");
+        speed.value.replace("MT/s","MHz");
         articles.push_back(speed);
         existArticles.insert("Speed");
 
@@ -352,6 +355,7 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
         ArticleStruct configSpeed(tr("Configured Speed"));
         configSpeed.queryData("dmidecode", mem, "Configured Memory Speed");
+        configSpeed.value.replace("MT/s","MHz");
         articles.push_back(configSpeed);
         existArticles.insert("Configured Memory Speed");
 
@@ -409,13 +413,13 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         if (false == isSlotValid(size.value, speed.value)) {
             continue;
         }
-
+        speed.value.replace("MT/s","MHz");
         ++validMemoryNumber;
 
         addSubInfo(deviceName, articles);
 
         QList<ArticleStruct> arLst;
-        arLst << vendor << type << speed;
+        arLst << speed;
         QString overviewVendor = joinArticle(arLst);
 
         if (false == detailMem .contains(overviewVendor)) {
@@ -668,7 +672,7 @@ bool MemoryWidget::isSlotValid(const QString &size, const QString &speed)
     if (size.contains("Unknown", Qt::CaseInsensitive) || size.contains("No Module Installed", Qt::CaseInsensitive)) {
         return false;
     }
-    if (speed.contains("MT/s") == false) { //maybe weak
+    if (speed.contains("MT/s") == false && speed.contains("MHz") == false) { //maybe weak
         return false;
     }
 

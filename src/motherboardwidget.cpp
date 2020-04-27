@@ -51,6 +51,7 @@ void MotherboardWidget::initWidget()
     {
         vendor.queryData("catbaseboard", "Base Board Information", "Manufacturer");
     }
+    vendor.value = "Lenovo";
     articles.push_back(vendor);
     existArticles.insert("Manufacturer");
 
@@ -91,15 +92,16 @@ void MotherboardWidget::initWidget()
 
     QList<ArticleStruct> aList;
     aList << vendor << model;
-    overviewInfo_.value = joinArticle(aList);
+//    overviewInfo_.value = joinArticle(aList);
 
-    if( chipsetFamily.isValid())
-    {
-        overviewInfo_.value += " (";
-        overviewInfo_.value += chipsetFamily.value;
-        overviewInfo_.value += ")";
-    }
+//    if( chipsetFamily.isValid())
+//    {
+//        overviewInfo_.value += " (";
+//        overviewInfo_.value += chipsetFamily.value;
+//        overviewInfo_.value += ")";
+//    }
 
+    overviewInfo_.value = "LS3A4000-7A1000";
     ArticleStruct serial(tr("Serial Number"));
     serial.queryData("dmidecode", "Base Board Information", "Serial Number");
     articles.push_back(serial);
@@ -155,11 +157,12 @@ void MotherboardWidget::initWidget()
 
     vendor.value.clear();
     vendor.queryData("dmidecode", "System Information", "Manufacturer");
+    vendor.value = "Lenovo";
     articles.push_back(vendor);
     existArticles.insert("Manufacturer");
 
     ArticleStruct productName(tr("Product Name"));
-    productName.queryData("dmidecode", "System Information", "Product Name");
+    productName.queryData("dmidecode", "System Information", "Version");
     articles.push_back(productName);
     existArticles.insert("Product Name");
 
@@ -169,7 +172,7 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Serial Number");
 
     version.value.clear();
-    version.queryData("dmidecode", "System Information", "Version");
+    version.queryData("dmidecode", "System Information", "Product Name");
     articles.push_back(version);
     existArticles.insert("Version");
 
@@ -185,12 +188,12 @@ void MotherboardWidget::initWidget()
 
     ArticleStruct sku(tr("SKU Number"));
     sku.queryData("dmidecode", "System Information", "SKU Number");
-    articles.push_back(sku);
+    //articles.push_back(sku);
     existArticles.insert("SKU Number");
 
     ArticleStruct family(tr("Family"));
     family.queryData("dmidecode", "System Information", "Family");
-    articles.push_back(family);
+    //articles.push_back(family);
     existArticles.insert("Family");
 
     existArticles.insert("Features");
