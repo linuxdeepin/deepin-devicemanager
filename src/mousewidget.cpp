@@ -31,6 +31,22 @@ MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Mou
     initWidget();
 }
 
+bool MouseWidget::isSameMouse(QString &physStr)
+{
+    QStringList strList = physStr.split("/");
+    if (strList.size() > 1) {
+        int index = m_physList.indexOf(strList[0]);
+        if (index != -1) {
+            return true;
+        }
+        else {
+            m_physList.append(strList[0]);
+        }
+    }
+
+    return false;
+}
+
 void MouseWidget::initWidget()
 {
     QStringList inputdeviceList = DeviceInfoParser::Instance().getInputdeviceMouseList();
@@ -257,6 +273,9 @@ void MouseWidget::initWidget()
             }
         }
 
+        if (isSameMouse(phys.value)) {
+            continue;
+        }
         ++validMouseSize;
         addDevice( name.value , articles , inputdeviceList.size() );
 

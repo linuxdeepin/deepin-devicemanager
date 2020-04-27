@@ -31,6 +31,11 @@ public:
     explicit MouseWidget(QWidget *parent = nullptr);
 
     void initWidget() override;
+
+    bool isSameMouse(QString &physStr);
+
+private:
+    QString m_physList;
 };
 
 

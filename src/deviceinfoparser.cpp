@@ -862,10 +862,22 @@ QStringList DeviceInfoParser::getInputdeviceMouseList()
     checkValueFun_t func = [](const QString & fk)->bool {
         if (true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk].contains("Name"))
         {
+            QString t = DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"];
+            if (DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("System Control", Qt::CaseInsensitive) \
+                    || DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("Consumer Control", Qt::CaseInsensitive)) {
+                return false;
+            }
+
+            if (DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("Keyboard", Qt::CaseInsensitive)) {
+                return false;
+            }
+
             if (true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("mouse", Qt::CaseInsensitive) || \
                     true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("mice", Qt::CaseInsensitive) || \
                     true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("TouchPad", Qt::CaseInsensitive) || \
-                    true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("TrackPoint", Qt::CaseInsensitive)) {
+                    true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("TrackPoint", Qt::CaseInsensitive) || \
+                    true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("TP", Qt::CaseInsensitive) || \
+                    true == DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("Touch Panel", Qt::CaseInsensitive)) {
                 return true;
             }
         }
@@ -923,6 +935,9 @@ QStringList DeviceInfoParser::getInputdeviceKeyboardList()
                 return false;
             }
 
+            if (DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("Mouse", Qt::CaseInsensitive)) {
+                return false;
+            }
             if (DeviceInfoParser::Instance().toolDatabase_["catinput"][fk]["Name"].contains("Keyboard", Qt::CaseInsensitive)) {
                 return true;
             }
