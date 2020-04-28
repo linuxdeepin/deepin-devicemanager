@@ -162,7 +162,7 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Manufacturer");
 
     ArticleStruct productName(tr("Product Name"));
-    productName.queryData("dmidecode", "System Information", "Version");
+    productName.queryData("dmidecode", "System Information", "Product Name");
     articles.push_back(productName);
     existArticles.insert("Product Name");
 
@@ -172,7 +172,7 @@ void MotherboardWidget::initWidget()
     existArticles.insert("Serial Number");
 
     version.value.clear();
-    version.queryData("dmidecode", "System Information", "Product Name");
+    version.queryData("dmidecode", "System Information", "Version");
     articles.push_back(version);
     existArticles.insert("Version");
 
