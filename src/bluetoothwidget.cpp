@@ -50,7 +50,7 @@ void BluetoothWidget::initWidgetEX()
     getBlueToothsInfo(lshwList,hciconfigList,tabList);
 
     // 获取总览信息
-    getOverviewInfo(lshwList[0],hciconfigList[0]);
+    getOverviewInfo(lshwList);
 
     // 添加表格信息
     if( lshwList.size() > 1 )
@@ -176,39 +176,45 @@ void BluetoothWidget::getBlueToothInfo(const QString& lshwitem,const QString& hc
 }
 
 
-void BluetoothWidget::getOverviewInfo(const QString& lshwitem,const QString& hcionfigitem)
+void BluetoothWidget::getOverviewInfo(QStringList& lshwList)
 {
 
-    //获取已连接蓝牙的个数
-    int connectedDeviceNumber = DeviceInfoParser::Instance().getOtherBluetoothctlPairedAndConnectedDevicesList().size();
-    ArticleStruct vendor(tr("Vendor"));
-    vendor.queryData("lshw", lshwitem, "vendor");
-    vendor.queryData("hciconfig", hcionfigitem, "Manufacturer");
+    foreach(const QString& lshwitem,lshwList){
+        //获取已连接蓝牙的个数
+        int connectedDeviceNumber = DeviceInfoParser::Instance().getOtherBluetoothctlPairedAndConnectedDevicesList().size();
+        ArticleStruct vendor(tr("Vendor"));
+        vendor.queryData("lshw", lshwitem, "vendor");
 
-    ArticleStruct product(tr("Product"));
-    product.queryData( "lshw", lshwitem, "product");
+        ArticleStruct product(tr("Product"));
+        product.queryData( "lshw", lshwitem, "product");
 
-    ArticleStruct description(tr("Description"));
-    description.queryData("lshw", lshwitem, "description");
+        ArticleStruct description(tr("Description"));
+        description.queryData("lshw", lshwitem, "description");
 
-    overviewInfo_.value = vendor.value;
-    overviewInfo_.value += " ";
-    if( product.value.isEmpty() == false && product.value != tr("Unknown") )
-    {
-        overviewInfo_.value += product.value;
+        overviewInfo_.value += vendor.value;
+        overviewInfo_.value += " ";
+        if( product.value.isEmpty() == false && product.value != tr("Unknown") )
+        {
+            overviewInfo_.value += product.value;
+        }
+        else
+        {
+            overviewInfo_.value += description.value;
+        }
+
+        if(connectedDeviceNumber > 0 && overviewInfo_.isValid())
+        {
+            overviewInfo_.value += " (";
+            overviewInfo_.value += QString::number(connectedDeviceNumber);
+            overviewInfo_.value += (" "+tr("Bluetooth Device(s) Connected")) ;
+            overviewInfo_.value += ")";
+        }
+
+        overviewInfo_.value += " / ";
     }
-    else
-    {
-        overviewInfo_.value += description.value;
-    }
 
-    if(connectedDeviceNumber > 0 && overviewInfo_.isValid())
-    {
-        overviewInfo_.value += " (";
-        overviewInfo_.value += QString::number(connectedDeviceNumber);
-        overviewInfo_.value += (" "+tr("Bluetooth Device(s) Connected")) ;
-        overviewInfo_.value += ")";
-    }
+    overviewInfo_.value.replace(QRegExp("/\\s$"),"");
+
 }
 
 void BluetoothWidget::initWidget()

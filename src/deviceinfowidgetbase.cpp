@@ -117,7 +117,7 @@ void DeivceInfoBrower::paintEvent(QPaintEvent *event)
 //    QWidget *wnd = DApplication::activeWindow();
 //    DPalette::ColorGroup cg;
 //    if (!wnd) {
-//        cg = DPalette::Inactive;
+//        cg = DPalette::Active;
 //    } else {
 //        cg = DPalette::Active;
 //    }

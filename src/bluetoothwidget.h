@@ -52,6 +52,6 @@ public:
     /**
      * @brief:获取总览信息
      */
-    void getOverviewInfo(const QString& lshwitem,const QString& hcionfigitem);
+    void getOverviewInfo(QStringList& lshwList);
 };
 

@@ -1117,7 +1117,14 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
 
     int lshwSize = toolDatabaseSecondOrder_["lshw"].size();
     for (int i = 0; i < lshwSize; ++i) {
+
         const QString &fk = toolDatabaseSecondOrder_["lshw"][i];
+        if(toolDatabase_["lshw"][fk]["description"].compare("Mass storage device", Qt::CaseInsensitive) == 0
+                || toolDatabase_["lshw"][fk]["description"].compare("Generic USB device", Qt::CaseInsensitive) == 0){
+            otherDeviceList.push_back(fk);
+            continue;
+        }
+
         if (i < lshwSize - 1 && toolDatabaseSecondOrder_["lshw"][i + 1].startsWith(fk) == true) {
             continue;
         }
@@ -1131,7 +1138,6 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
                 fk.contains("_pnp") || fk.contains("_volume") || fk.contains("_volume") || fk.contains("_volume")) {
             continue;
         }
-
         if (toolDatabase_["lshw"][fk].contains("description")) {
             if (toolDatabase_["lshw"][fk]["description"].compare("Signal processing controller", Qt::CaseInsensitive) == 0 \
                     || toolDatabase_["lshw"][fk]["description"].compare("Communication controller", Qt::CaseInsensitive) == 0   \
@@ -1351,7 +1357,7 @@ bool DeviceInfoParser::isHuaweiAndroidUos()
 
 QString DeviceInfoParser::getLsbRelease()
 {
-    return lsbRelease_;
+    return lsbRelease_.toUpper();
 }
 
 QString DeviceInfoParser::getHomeUrl()
