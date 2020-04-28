@@ -126,22 +126,32 @@ void MouseWidget::initWidget()
             articles.push_back(capabilities);
             existArticles.insert("capabilities");
 
-            ArticleStruct driver(tr("driver"));
+            ArticleStruct driver(tr("Driver"));
             driver.queryData("lshw", lshwMouse, "driver");
             articles.push_back(driver);
             existArticles.insert("driver");
 
-            ArticleStruct maxpower(tr("maxpower"));
+            ArticleStruct maxpower(tr("Maxpower"));
             maxpower.queryData("lshw", lshwMouse, "maxpower");
             articles.push_back(maxpower);
             existArticles.insert("maxpower");
 
-            ArticleStruct physicalId(tr("physical id"));
+            ArticleStruct usb(tr("USB"));
+            usb.queryData("lshw", lshwMouse, "usb");
+            articles.push_back(usb);
+            existArticles.insert("usb");
+
+            ArticleStruct physicalId(tr("Physical Id"));
             physicalId.queryData("lshw", lshwMouse, "physical id");
             articles.push_back(physicalId);
             existArticles.insert("physical id");
 
-            ArticleStruct speed(tr("speed"));
+            ArticleStruct type(tr("Type"));
+            type.queryData("lshw", lshwMouse, "Type");
+            articles.push_back(type);
+            existArticles.insert("Type");
+
+            ArticleStruct speed(tr("Speed"));
             speed.queryData("lshw", lshwMouse, "speed");
             articles.push_back(speed);
             existArticles.insert("speed");

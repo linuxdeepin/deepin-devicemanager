@@ -30,7 +30,7 @@ DWIDGET_USE_NAMESPACE
 
 AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Sound Adapter"))
 {
-    //initWidget();
+//    initWidget();
 
     // 先从lshw命令和cat /proc/bus/input/devices 中获取音频列表
     QStringList multimediaList, inputdeviceList;
@@ -53,7 +53,6 @@ AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(par
     // 添加表格内容
     QStringList headers = { tr("Name"),  tr("Vendor")};
     addTable(headers, tabList);
-
 }
 
 int AudiodeviceWidget::getAudioList(QStringList &lshwList, QStringList &catList)
@@ -100,6 +99,40 @@ void AudiodeviceWidget::addLshwAudioInfo(const QString &item, QStringList &tabIt
     articles.push_back(vendor);
     articles.push_back(description);
     articles.push_back(busInfo);
+
+    ArticleStruct version(tr("Version", "Audio Device Info"));
+    version.queryData("lshw", item, "version", existArticles, articles);
+
+    ArticleStruct width(tr("Width", "Audio Device Info"));
+    width.queryData("lshw", item, "width", existArticles, articles);
+
+    ArticleStruct multimediaNum(tr("multimedia", "Audio Device Info"));
+    multimediaNum.queryData("lshw", item, "multimedia", existArticles, articles);
+    articles.push_back(multimediaNum);
+
+    ArticleStruct physicalId(tr("physical id", "Audio Device Info"));
+    physicalId.queryData("lshw", item, "physical id", existArticles, articles);
+
+    ArticleStruct clock(tr("Clock", "Audio Device Info"));
+    clock.queryData("lshw", item, "clock", existArticles, articles);
+
+    ArticleStruct capabilities(tr("Capabilities", "Audio Device Info"));
+    capabilities.queryData("lshw", item, "capabilities", existArticles, articles);
+
+    ArticleStruct driver(tr("driver", "Audio Device Info"));
+    driver.queryData("lshw", item, "driver", existArticles, articles);
+
+    ArticleStruct irq(tr("irq", "Audio Device Info"));
+    irq.queryData("lshw", item, "irq", existArticles, articles);
+
+    ArticleStruct latency(tr("latency", "Audio Device Info"));
+    latency.queryData("lshw", item, "latency", existArticles, articles);
+
+    ArticleStruct memory(tr("memory", "Audio Device Info"));
+    memory.queryData("lshw", item, "memory", existArticles, articles);
+
+    ArticleStruct type(tr("Type", "Audio Device Info"));
+    type.queryData("lshw", item, "Type", existArticles, articles);
 
     // 添加设备的其它信息
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", item, articles, existArticles,
@@ -303,6 +336,11 @@ void AudiodeviceWidget::initWidget()
         articles.push_back(memory);
         existArticles.insert("memory");
 
+        ArticleStruct type(tr("Type", "Audio Device Info"));
+        type.queryData("lshw", multimedia, "Type", existArticles, articles);
+        articles.push_back(type);
+        existArticles.insert("Type");
+
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", multimedia, articles, existArticles,
                                                               "ManulTrack__AudioDevices", "Audio device infomation from lshw");
         addDevice(name.value, articles, multimediaList.size() + inputdeviceList.size());
@@ -352,9 +390,6 @@ void AudiodeviceWidget::initWidget()
 
         ArticleStruct product(tr("Product"));
         vesion.queryData("catinput", device, "Product", existArticles, articles);
-
-//        ArticleStruct sysfs(tr("Sysfs", "Audio Device Info"));
-//        sysfs.queryData("catinput", device, "Sysfs", existArticles, articles);
 
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("catinput", device, articles, existArticles,
                                                               "ManulTrack__AudioDevices", "Audio device infomation from catinput");

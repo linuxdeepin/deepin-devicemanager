@@ -82,6 +82,39 @@ void PowerWidget::initWidget()
 
             ArticleStruct powerSupply(tr("Power Supply"));
             powerSupply.queryData( "upower", device.value, "power supply", existArticles1, articles);
+
+            ArticleStruct device1(tr("Device"));
+            device1.queryData( "upower", device.value, "Device", existArticles1, articles);
+
+            ArticleStruct criticalAction(tr("Critical Action"));
+            criticalAction.queryData( "upower", device.value, "critical-action", existArticles1, articles);
+
+            ArticleStruct daemonVersion(tr("Daemon Version"));
+            daemonVersion.queryData( "upower", device.value, "daemon-version", existArticles1, articles);
+
+            ArticleStruct hasHistory(tr("Has History"));
+            hasHistory.queryData( "upower", device.value, "has history", existArticles1, articles);
+
+            ArticleStruct hasStatistics(tr("Has Statistics"));
+            hasStatistics.queryData( "upower", device.value, "has statistics", existArticles1, articles);
+
+            ArticleStruct iconName(tr("Icon Name"));
+            iconName.queryData( "upower", device.value, "icon-name", existArticles1, articles);
+
+            ArticleStruct lidIsClosed(tr("Lid Is Closed"));
+            lidIsClosed.queryData( "upower", device.value, "lid-is-closed", existArticles1, articles);
+
+            ArticleStruct lidIsPresent(tr("Lid Is Present"));
+            lidIsPresent.queryData( "upower", device.value, "lid-is-present", existArticles1, articles);
+
+            ArticleStruct onbattery(tr("On Battery"));
+            onbattery.queryData( "upower", device.value, "on-battery", existArticles1, articles);
+
+            ArticleStruct updated(tr("Updated"));
+            updated.queryData( "upower", device.value, "updated", existArticles1, articles);
+
+            ArticleStruct warningLevel(tr("Warning Level"));
+            warningLevel.queryData( "upower", device.value, "warning-level", existArticles1, articles);
         }
 
         if(i < lshwSwitchingpowerList.size())
@@ -105,6 +138,7 @@ void PowerWidget::initWidget()
 
             ArticleStruct capacity(tr("Capacity"));
             capacity.queryData( "lshw", dname, "capacity", existArticles2, articles);
+
         }
 
         if(i < demidecodeSwitchingpowerList.size())

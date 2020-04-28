@@ -1,132 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.1" language="pl">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="31"/>
         <source>Sound Adapter</source>
-        <translation>Adaptateur audio</translation>
+        <translation>Adapter dźwięku</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="41"/>
         <location filename="../src/audiodevicewidget.cpp" line="238"/>
         <source>No sound adapter found</source>
-        <translation>Aucun adaptateur audio trouvé</translation>
+        <translation>Nie znaleziono adaptera dźwięku</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="80"/>
         <location filename="../src/audiodevicewidget.cpp" line="250"/>
         <source>Bus Info</source>
         <comment>Audio Device Info</comment>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="81"/>
         <location filename="../src/audiodevicewidget.cpp" line="262"/>
         <source>Name</source>
         <comment>Audio Device Info</comment>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="85"/>
         <location filename="../src/audiodevicewidget.cpp" line="272"/>
         <source>Vendor</source>
         <comment>Audio Device Info</comment>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="89"/>
         <location filename="../src/audiodevicewidget.cpp" line="275"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="103"/>
         <location filename="../src/audiodevicewidget.cpp" line="289"/>
         <source>Version</source>
         <comment>Audio Device Info</comment>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="106"/>
         <location filename="../src/audiodevicewidget.cpp" line="294"/>
         <source>Width</source>
         <comment>Audio Device Info</comment>
-        <translation>Largeur</translation>
+        <translation>Szerokość</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="109"/>
         <location filename="../src/audiodevicewidget.cpp" line="299"/>
         <source>multimedia</source>
         <comment>Audio Device Info</comment>
-        <translation>multimédia</translation>
+        <translation>multimedia</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="113"/>
         <location filename="../src/audiodevicewidget.cpp" line="304"/>
         <source>physical id</source>
         <comment>Audio Device Info</comment>
-        <translation>identifiant physique</translation>
+        <translation>identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="116"/>
         <location filename="../src/audiodevicewidget.cpp" line="309"/>
         <source>Clock</source>
         <comment>Audio Device Info</comment>
-        <translation>Horloge</translation>
+        <translation>Zegar</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="119"/>
         <location filename="../src/audiodevicewidget.cpp" line="314"/>
         <source>Capabilities</source>
         <comment>Audio Device Info</comment>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="122"/>
         <location filename="../src/audiodevicewidget.cpp" line="319"/>
         <source>driver</source>
         <comment>Audio Device Info</comment>
-        <translation>pilote</translation>
+        <translation>sterownik</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="125"/>
         <location filename="../src/audiodevicewidget.cpp" line="324"/>
         <source>irq</source>
         <comment>Audio Device Info</comment>
-        <translation>irq</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="128"/>
         <location filename="../src/audiodevicewidget.cpp" line="329"/>
         <source>latency</source>
         <comment>Audio Device Info</comment>
-        <translation>latence</translation>
+        <translation>opóźnienie</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="131"/>
         <location filename="../src/audiodevicewidget.cpp" line="334"/>
         <source>memory</source>
         <comment>Audio Device Info</comment>
-        <translation>mémoire</translation>
+        <translation>pamięć</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="134"/>
         <location filename="../src/audiodevicewidget.cpp" line="339"/>
         <source>Type</source>
         <comment>Audio Device Info</comment>
-        <translation type="unfinished">Type</translation>
+        <translation type="unfinished">Typ</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="388"/>
         <source>Bus</source>
-        <translation>Bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="391"/>
         <source>Product</source>
-        <translation>Produit</translation>
+        <translation>Produkt</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="54"/>
@@ -134,7 +134,7 @@
         <location filename="../src/audiodevicewidget.cpp" line="373"/>
         <location filename="../src/audiodevicewidget.cpp" line="409"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="54"/>
@@ -142,20 +142,20 @@
         <location filename="../src/audiodevicewidget.cpp" line="379"/>
         <location filename="../src/audiodevicewidget.cpp" line="409"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="175"/>
         <location filename="../src/audiodevicewidget.cpp" line="382"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="179"/>
         <location filename="../src/audiodevicewidget.cpp" line="385"/>
         <source>Sysfs</source>
         <comment>Audio Device Info</comment>
-        <translation>Sysfs</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -169,7 +169,7 @@
         <location filename="../src/bluetoothwidget.cpp" line="101"/>
         <location filename="../src/bluetoothwidget.cpp" line="245"/>
         <source>Bluetooth Name</source>
-        <translation>Nom du Bluetooth</translation>
+        <translation>Nazwa Bluetooth</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="58"/>
@@ -179,179 +179,179 @@
         <location filename="../src/bluetoothwidget.cpp" line="366"/>
         <location filename="../src/bluetoothwidget.cpp" line="470"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="111"/>
         <location filename="../src/bluetoothwidget.cpp" line="188"/>
         <location filename="../src/bluetoothwidget.cpp" line="247"/>
         <source>Product</source>
-        <translation>Produit</translation>
+        <translation>Produkt</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="114"/>
         <location filename="../src/bluetoothwidget.cpp" line="191"/>
         <location filename="../src/bluetoothwidget.cpp" line="248"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="117"/>
         <location filename="../src/bluetoothwidget.cpp" line="249"/>
         <source>MAC Address</source>
-        <translation>Adresse MAC</translation>
+        <translation>Adres MAC</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="68"/>
         <location filename="../src/bluetoothwidget.cpp" line="219"/>
         <source>No Bluetooth device found</source>
-        <translation>Aucun périphérique Bluetooth trouvé</translation>
+        <translation>Nie znaleziono urządzenia Bluetooth</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="120"/>
         <location filename="../src/bluetoothwidget.cpp" line="270"/>
         <source>Serial Number</source>
-        <translation>Numéro de série</translation>
+        <translation>Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="123"/>
         <location filename="../src/bluetoothwidget.cpp" line="273"/>
         <source>Link Policy</source>
         <comment>Bluetooth Info</comment>
-        <translation>Politique de lien</translation>
+        <translation>Polityka linków</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="126"/>
         <location filename="../src/bluetoothwidget.cpp" line="276"/>
         <source>Link Mode</source>
         <comment>Bluetooth Info</comment>
-        <translation>Mode lien</translation>
+        <translation>Tryb połączenia</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="131"/>
         <location filename="../src/bluetoothwidget.cpp" line="281"/>
         <source>Powered</source>
         <comment>Bluetooth Info</comment>
-        <translation>Alimenté</translation>
+        <translation>Zasilany</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="134"/>
         <location filename="../src/bluetoothwidget.cpp" line="284"/>
         <source>Discoverable</source>
         <comment>Bluetooth Info</comment>
-        <translation>Visible</translation>
+        <translation>Wykrywalne</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="137"/>
         <location filename="../src/bluetoothwidget.cpp" line="287"/>
         <source>Pairable</source>
         <comment>Bluetooth Info</comment>
-        <translation>Jumelable</translation>
+        <translation>Parowanie</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="140"/>
         <location filename="../src/bluetoothwidget.cpp" line="290"/>
         <source>Modalias</source>
         <comment>Bluetooth Info</comment>
-        <translation>Modalias</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="143"/>
         <location filename="../src/bluetoothwidget.cpp" line="293"/>
         <source>Discovering</source>
         <comment>Bluetooth Info</comment>
-        <translation>Découvrir</translation>
+        <translation>Odkrywanie</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="147"/>
         <location filename="../src/bluetoothwidget.cpp" line="298"/>
         <source>Physical ID</source>
         <comment>Bluetooth Info</comment>
-        <translation>ID physique</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="150"/>
         <location filename="../src/bluetoothwidget.cpp" line="301"/>
         <source>Bus Info</source>
         <comment>Bluetooth Info</comment>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="153"/>
         <location filename="../src/bluetoothwidget.cpp" line="304"/>
         <source>Version</source>
         <comment>Bluetooth Info</comment>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="156"/>
         <location filename="../src/bluetoothwidget.cpp" line="307"/>
         <source>Capabilities</source>
         <comment>Bluetooth Info</comment>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="196"/>
         <location filename="../src/bluetoothwidget.cpp" line="343"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="58"/>
         <location filename="../src/bluetoothwidget.cpp" line="361"/>
         <location filename="../src/bluetoothwidget.cpp" line="470"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="371"/>
         <source>Alias</source>
-        <translation>Alias ​​</translation>
+        <translation>Alias</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="376"/>
         <source>Appearance</source>
-        <translation>Apparence</translation>
+        <translation>Wygląd</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="381"/>
         <source>Icon</source>
-        <translation>Icône</translation>
+        <translation>Ikona</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="386"/>
         <source>Connected</source>
-        <translation>Connecté</translation>
+        <translation>Połączony</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="396"/>
         <source>Paired</source>
         <comment>Bluetooth Info</comment>
-        <translation>Jumelé</translation>
+        <translation>Sparowane</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="401"/>
         <source>Trusted</source>
         <comment>Bluetooth Info</comment>
-        <translation>De confiance</translation>
+        <translation>Zaufany</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="406"/>
         <source>Blocked</source>
         <comment>Bluetooth Info</comment>
-        <translation>Bloqué</translation>
+        <translation>Zablokowany</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="420"/>
         <source>Power</source>
         <comment>Bluetooth Info</comment>
-        <translation>Puissance</translation>
+        <translation>Zasilanie</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="209"/>
         <location filename="../src/bluetoothwidget.cpp" line="464"/>
         <source>Bluetooth Device(s) Connected</source>
-        <translation>Périphérique(s) Bluetooth connecté(s)</translation>
+        <translation>Podłączone urządzenie(a) Bluetooth</translation>
     </message>
 </context>
 <context>
@@ -364,62 +364,62 @@
     <message>
         <location filename="../src/cdromwidget.cpp" line="40"/>
         <source>No CD-ROM found</source>
-        <translation>Aucun CD-ROM trouvé</translation>
+        <translation>Nie znaleziono dysku CD-ROM</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="53"/>
         <source>Model</source>
-        <translation>Modèle</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="58"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="63"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="68"/>
         <source>Bus Info</source>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="73"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="78"/>
         <source>Logical Name</source>
-        <translation>Nom logique</translation>
+        <translation>Nazwa logiczna</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="83"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="88"/>
         <source>ansiversion</source>
-        <translation>version ansi</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="93"/>
         <source>capabilities</source>
-        <translation>capacités</translation>
+        <translation>możliwości</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="98"/>
         <source>physical id</source>
-        <translation>identifiant physique</translation>
+        <translation>identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="103"/>
         <source>status</source>
-        <translation>statut</translation>
+        <translation>status</translation>
     </message>
 </context>
 <context>
@@ -427,12 +427,12 @@
     <message>
         <location filename="../src/camerawidget.cpp" line="29"/>
         <source>Camera</source>
-        <translation>Appareil photo</translation>
+        <translation>Aparat</translation>
     </message>
     <message>
         <location filename="../src/camerawidget.cpp" line="140"/>
         <source>No camera found</source>
-        <translation>Aucune caméra trouvée</translation>
+        <translation>Nie znaleziono aparatu</translation>
     </message>
     <message>
         <location filename="../src/camerawidget.cpp" line="48"/>
@@ -441,7 +441,7 @@
         <location filename="../src/camerawidget.cpp" line="150"/>
         <location filename="../src/camerawidget.cpp" line="227"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/camerawidget.cpp" line="49"/>
@@ -450,44 +450,44 @@
         <location filename="../src/camerawidget.cpp" line="166"/>
         <location filename="../src/camerawidget.cpp" line="227"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/camerawidget.cpp" line="50"/>
         <location filename="../src/camerawidget.cpp" line="92"/>
         <location filename="../src/camerawidget.cpp" line="189"/>
         <source>Capabilities</source>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/camerawidget.cpp" line="67"/>
         <location filename="../src/camerawidget.cpp" line="158"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/camerawidget.cpp" line="77"/>
         <location filename="../src/camerawidget.cpp" line="174"/>
         <source>Physical ID</source>
-        <translation>ID physique</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/camerawidget.cpp" line="82"/>
         <location filename="../src/camerawidget.cpp" line="179"/>
         <source>Bus Info</source>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/camerawidget.cpp" line="87"/>
         <location filename="../src/camerawidget.cpp" line="184"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/camerawidget.cpp" line="117"/>
         <location filename="../src/camerawidget.cpp" line="214"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
 </context>
 <context>
@@ -495,17 +495,17 @@
     <message>
         <location filename="../src/computeroverviewwidget.cpp" line="31"/>
         <source>Overview</source>
-        <translation>Présentation</translation>
+        <translation>Podgląd</translation>
     </message>
     <message>
         <location filename="../src/computeroverviewwidget.cpp" line="42"/>
         <source>Device</source>
-        <translation>Appareil</translation>
+        <translation>Urządzenie</translation>
     </message>
     <message>
         <location filename="../src/computeroverviewwidget.cpp" line="107"/>
         <source>Operating System</source>
-        <translation>Système d&apos;exploitation</translation>
+        <translation>System operacyjny</translation>
     </message>
 </context>
 <context>
@@ -513,7 +513,7 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="43"/>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation>Procesor</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="169"/>
@@ -522,14 +522,14 @@
         <location filename="../src/cpuwidget.cpp" line="296"/>
         <location filename="../src/cpuwidget.cpp" line="298"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="293"/>
         <location filename="../src/cpuwidget.cpp" line="296"/>
         <location filename="../src/cpuwidget.cpp" line="298"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="175"/>
@@ -538,132 +538,132 @@
         <location filename="../src/cpuwidget.cpp" line="296"/>
         <location filename="../src/cpuwidget.cpp" line="298"/>
         <source>Architecture</source>
-        <translation>Architecture</translation>
+        <translation>Architektura</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="198"/>
         <source>Siblings</source>
-        <translation>Siblings</translation>
+        <translation>Rodzeństwo</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="199"/>
         <source>vendor_id</source>
-        <translation>ID vendeur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="200"/>
         <source>WP</source>
-        <translation>WP</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="296"/>
         <source>Max Speed</source>
-        <translation>Vitesse maximale</translation>
+        <translation>Maksymalna prędkość</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="298"/>
         <source>Speed</source>
-        <translation>Vitesse</translation>
+        <translation>Prędkość</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="310"/>
         <location filename="../src/cpuwidget.cpp" line="329"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="110"/>
         <source>Core(s)</source>
-        <translation>Noyau(x)</translation>
+        <translation>Rdzeń(ie)</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="170"/>
         <location filename="../src/cpuwidget.cpp" line="214"/>
         <source>CPU ID</source>
-        <translation>ID CPU</translation>
+        <translation>ID procesora</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="171"/>
         <location filename="../src/cpuwidget.cpp" line="215"/>
         <source>Core ID</source>
-        <translation>Core ID</translation>
+        <translation>ID rdzenia</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="172"/>
         <location filename="../src/cpuwidget.cpp" line="216"/>
         <source>Threads</source>
-        <translation>Tâches</translation>
+        <translation>Wątki</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="173"/>
         <location filename="../src/cpuwidget.cpp" line="217"/>
         <source>Current Speed</source>
-        <translation>Vitesse actuelle</translation>
+        <translation>Aktualna prędkość</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="174"/>
         <location filename="../src/cpuwidget.cpp" line="218"/>
         <source>BogoMIPS</source>
-        <translation>BogoMIPS</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="176"/>
         <location filename="../src/cpuwidget.cpp" line="220"/>
         <source>CPU Family</source>
-        <translation>Famille de CPU</translation>
+        <translation>Rodzina procesorów</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="177"/>
         <location filename="../src/cpuwidget.cpp" line="221"/>
         <source>Model</source>
-        <translation>Modèle</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="178"/>
         <location filename="../src/cpuwidget.cpp" line="222"/>
         <source>Stepping</source>
-        <translation>Étape</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="179"/>
         <location filename="../src/cpuwidget.cpp" line="223"/>
         <source>L1d Cache</source>
-        <translation>Cache L1d</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="180"/>
         <location filename="../src/cpuwidget.cpp" line="224"/>
         <source>L1i Cache</source>
-        <translation>Cache L1i</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="181"/>
         <location filename="../src/cpuwidget.cpp" line="225"/>
         <source>L2 Cache</source>
-        <translation>Cache L2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="182"/>
         <location filename="../src/cpuwidget.cpp" line="226"/>
         <source>L3 Cache</source>
-        <translation>Cache L3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="183"/>
         <location filename="../src/cpuwidget.cpp" line="227"/>
         <source>Flags</source>
-        <translation>Indicateurs</translation>
+        <translation>Flagi</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="184"/>
         <location filename="../src/cpuwidget.cpp" line="228"/>
         <source>Virtualization</source>
-        <translation>Virtualisation</translation>
+        <translation>Wirtualizacja</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="185"/>
         <source>Address Sizes</source>
-        <translation>Tailles d&apos;adresses</translation>
+        <translation>Rozmiary adresów</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="186"/>
@@ -673,32 +673,32 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="187"/>
         <source>Bugs</source>
-        <translation>Bogues</translation>
+        <translation>Błędy</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="188"/>
         <source>Cache Size</source>
-        <translation>Taille du cache</translation>
+        <translation>Rozmiar pamięci podręcznej</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="189"/>
         <source>Cache Alignment</source>
-        <translation>Alignement du cache</translation>
+        <translation>Wyrównanie pamięci podręcznej</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="190"/>
         <source>Clflush Size</source>
-        <translation>Taille Clflush</translation>
+        <translation>Rozmiar Clflush</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="191"/>
         <source>CPU Cores</source>
-        <translation>Cœurs du CPU</translation>
+        <translation>Rdzenie procesora</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="192"/>
         <source>CPUID Level</source>
-        <translation>Niveau CPUID</translation>
+        <translation>Poziom CPUID</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="193"/>
@@ -708,24 +708,24 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="194"/>
         <source>FPU Exception</source>
-        <translation>Exception FPU</translation>
+        <translation>Wyjątek FPU</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="195"/>
         <source>Initial APICID</source>
-        <translation>APICID initial</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="196"/>
         <source>Microcode</source>
-        <translation>Microcode</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="197"/>
         <location filename="../src/cpuwidget.cpp" line="203"/>
         <location filename="../src/cpuwidget.cpp" line="231"/>
         <source>Processor</source>
-        <translation>Processeur</translation>
+        <translation>Edytor</translation>
     </message>
 </context>
 <context>
@@ -733,7 +733,7 @@
     <message>
         <location filename="../src/deviceinfowidgetbase.cpp" line="92"/>
         <source>Copy (C)</source>
-        <translation>Copier (C)</translation>
+        <translation>Kopiuj (C)</translation>
     </message>
 </context>
 <context>
@@ -741,62 +741,62 @@
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="70"/>
         <source>Loading Operating System Info...</source>
-        <translation>Chargement des informations sur le système d&apos;exploitation...</translation>
+        <translation>Ładowanie informacji o systemie operacyjnym...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="79"/>
         <source>Loading SMBIOS Info...</source>
-        <translation>Chargement des informations SMBIOS ...</translation>
+        <translation>Ładowanie informacji SMBIOS...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="83"/>
         <source>Loading Hardware Info...</source>
-        <translation>Chargement des informations sur le matériel...</translation>
+        <translation>Ładowanie informacji o sprzęcie...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="86"/>
         <source>Loading Storage Info...</source>
-        <translation>Chargement des informations de stockage...</translation>
+        <translation>Ładowanie informacji o pamięci...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="91"/>
         <source>Loading CPU Info...</source>
-        <translation>Chargement des informations sur le processeur...</translation>
+        <translation>Ładowanie informacji o procesorze...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="96"/>
         <source>Loading Input Devices Info...</source>
-        <translation>Chargement des informations sur les périphériques d&apos;entrée...</translation>
+        <translation>Ładowanie informacji o urządzeniach wejściowych...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="99"/>
         <source>Loading Power Settings...</source>
-        <translation>Chargement des paramètres d&apos;alimentation...</translation>
+        <translation>Ładowanie ustawień zasilania...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="103"/>
         <source>Loading Monitor Info...</source>
-        <translation>Chargement des informations du moniteur...</translation>
+        <translation>Ładowanie informacji o monitorze...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="110"/>
         <source>Loading PCI Devices Info...</source>
-        <translation>Chargement des informations sur les périphériques PCI...</translation>
+        <translation>Ładowanie informacji o urządzeniach PCI...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="113"/>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Chargement des informations sur le périphérique Bluetooth...</translation>
+        <translation>Ładowanie informacji o urządzeniu Bluetooth...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="118"/>
         <source>Loading USB Devices Info...</source>
-        <translation>Chargement des informations sur les périphériques USB...</translation>
+        <translation>Ładowanie informacji o urządzeniach USB...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="125"/>
         <source>Loading Printer Info...</source>
-        <translation>Chargement des informations sur l&apos;imprimante...</translation>
+        <translation>Ładowanie informacji o drukarce...</translation>
     </message>
     <message>
         <location filename="../src/deviceinfoparser.cpp" line="165"/>
@@ -806,7 +806,7 @@
         <location filename="../src/deviceinfoparser.cpp" line="1306"/>
         <location filename="../src/deviceinfoparser.cpp" line="1934"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
 </context>
 <context>
@@ -814,12 +814,12 @@
     <message>
         <location filename="../src/deviceinfowidgetbase.cpp" line="246"/>
         <source>Refresh (F5)</source>
-        <translation>Actualiser (F5)</translation>
+        <translation>Odśwież (F5)</translation>
     </message>
     <message>
         <location filename="../src/deviceinfowidgetbase.cpp" line="260"/>
         <source>Export (E)</source>
-        <translation>Exporter (E)</translation>
+        <translation>Eksport (E)</translation>
     </message>
 </context>
 <context>
@@ -827,12 +827,12 @@
     <message>
         <location filename="../src/devicelistview.cpp" line="318"/>
         <source>Refresh (F5)</source>
-        <translation>Actualiser (F5)</translation>
+        <translation>Odśwież (F5)</translation>
     </message>
     <message>
         <location filename="../src/devicelistview.cpp" line="332"/>
         <source>Export (E)</source>
-        <translation>Exporter (E)</translation>
+        <translation>Eksport (E)</translation>
     </message>
 </context>
 <context>
@@ -840,105 +840,105 @@
     <message>
         <location filename="../src/diskwidget.cpp" line="30"/>
         <source>Storage</source>
-        <translation>Stockage</translation>
+        <translation>Przechowywanie</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="301"/>
         <location filename="../src/diskwidget.cpp" line="378"/>
         <source>No disk found</source>
-        <translation>Aucun disque trouvé</translation>
+        <translation>Nie znaleziono dysku</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="426"/>
         <source>Model</source>
         <comment>stroage info</comment>
-        <translation>Modèle</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="431"/>
         <source>Vendor</source>
         <comment>stroage info</comment>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="446"/>
         <source>Media Type</source>
         <comment>stroage info</comment>
-        <translation>Type de support</translation>
+        <translation>Typ mediów</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="521"/>
         <source>Interface</source>
         <comment>stroage info</comment>
-        <translation>Interface</translation>
+        <translation>Interfejs</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="500"/>
         <location filename="../src/diskwidget.cpp" line="523"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="528"/>
         <source>Size</source>
         <comment>stroage info</comment>
-        <translation>Taille</translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="533"/>
         <source>Serial Number</source>
         <comment>stroage info</comment>
-        <translation>Numéro de série</translation>
+        <translation>Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="545"/>
         <source>Model Family</source>
         <comment>stroage info</comment>
-        <translation>Famille de modèles</translation>
+        <translation>Rodzina modeli</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="550"/>
         <source>Device Model</source>
         <comment>stroage info</comment>
-        <translation>Modèle d&apos;appareil</translation>
+        <translation>Model urządzenia</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="555"/>
         <source>Description</source>
         <comment>stroage info</comment>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="155"/>
         <location filename="../src/diskwidget.cpp" line="562"/>
         <source>Speed</source>
         <comment>stroage info</comment>
-        <translation>Vitesse</translation>
+        <translation>Prędkość</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="161"/>
         <location filename="../src/diskwidget.cpp" line="573"/>
         <source>Rotation Rate</source>
         <comment>stroage info</comment>
-        <translation>Taux de rotation</translation>
+        <translation>Szybkość rotacji</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="580"/>
         <source>Form Factor</source>
         <comment>stroage info</comment>
-        <translation>Facteur de forme</translation>
+        <translation>Współczynnik kształtu</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="582"/>
         <source>inch</source>
-        <translation>pouce</translation>
+        <translation>cal</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="166"/>
         <location filename="../src/diskwidget.cpp" line="586"/>
         <source>Power On Hours</source>
         <comment>stroage info</comment>
-        <translation>Heures de mise sous tension</translation>
+        <translation>Godziny włączenia</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="52"/>
@@ -948,61 +948,61 @@
     <message>
         <location filename="../src/diskwidget.cpp" line="144"/>
         <source>Firmware Version</source>
-        <translation type="unfinished">Version du micrologiciel</translation>
+        <translation type="unfinished">Wersja firmware</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="169"/>
         <location filename="../src/diskwidget.cpp" line="174"/>
         <location filename="../src/diskwidget.cpp" line="589"/>
         <source>Hours</source>
-        <translation>Heures</translation>
+        <translation>Godziny</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="181"/>
         <location filename="../src/diskwidget.cpp" line="593"/>
         <source>Power_On_Minutes</source>
         <comment>stroage info</comment>
-        <translation>Minutes de mise sous tension</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="184"/>
         <location filename="../src/diskwidget.cpp" line="596"/>
         <source>Minutes</source>
         <comment>Power_On_Minutes</comment>
-        <translation>Minutes</translation>
+        <translation>Minuty</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="190"/>
         <location filename="../src/diskwidget.cpp" line="601"/>
         <source>Power_On_Half_Minutes</source>
         <comment>stroage info</comment>
-        <translation>Demi-minute de mise sous tension</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="194"/>
         <location filename="../src/diskwidget.cpp" line="605"/>
         <source>Half Minutes</source>
-        <translation>Demi-minutes</translation>
+        <translation>Pół minuty</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="199"/>
         <location filename="../src/diskwidget.cpp" line="610"/>
         <source>Power_On_Seconds</source>
         <comment>stroage info</comment>
-        <translation>Secondes de mise sous tension</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="203"/>
         <location filename="../src/diskwidget.cpp" line="614"/>
         <source>Seconds</source>
-        <translation>Secondes</translation>
+        <translation>Sekundy</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="211"/>
         <location filename="../src/diskwidget.cpp" line="618"/>
         <source>Power Cycle Count</source>
         <comment>stroage info</comment>
-        <translation>Nombre de cycles d&apos;alimentation</translation>
+        <translation>Liczba cykli zasilania</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="215"/>
@@ -1010,152 +1010,152 @@
         <location filename="../src/diskwidget.cpp" line="622"/>
         <source>Times</source>
         <comment>Power Cycle Count</comment>
-        <translation>Temps</translation>
+        <translation>Czasy</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="232"/>
         <source>Interface</source>
-        <translation type="unfinished">Interface</translation>
+        <translation type="unfinished">Interfejs</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="261"/>
         <source>Serial Number</source>
-        <translation type="unfinished">Numéro de série</translation>
+        <translation type="unfinished">Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="338"/>
         <source>Description</source>
-        <translation type="unfinished">Description</translation>
+        <translation type="unfinished">Opis</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="628"/>
         <source>Version</source>
         <comment>stroage info</comment>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="633"/>
         <source>Capabilities</source>
         <comment>stroage info</comment>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="638"/>
         <source>Type</source>
         <comment>stroage info</comment>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="643"/>
         <source>ansiversion</source>
         <comment>stroage info</comment>
-        <translation>version ansi</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="648"/>
         <source>guid</source>
         <comment>stroage info</comment>
-        <translation>guid</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="653"/>
         <source>bus info</source>
         <comment>stroage info</comment>
-        <translation>info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="658"/>
         <source>logical name</source>
         <comment>stroage info</comment>
-        <translation>nom logique</translation>
+        <translation>nazwa logiczna</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="663"/>
         <source>logicalsectorsize</source>
         <comment>stroage info</comment>
-        <translation>taille du secteur logique</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="668"/>
         <source>Capabilities</source>
         <comment>physical id</comment>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="673"/>
         <source>sectorsize</source>
         <comment>stroage info</comment>
-        <translation>taille du secteur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="682"/>
         <source>ATA Version</source>
         <comment>stroage info</comment>
-        <translation>Version ATA</translation>
+        <translation>Wersja ATA</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="687"/>
         <source>Auto Offline Data Collection</source>
         <comment>stroage info</comment>
-        <translation>Collecte de données hors ligne automatique</translation>
+        <translation>Automatyczne zbieranie danych offline</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="692"/>
         <source>Current_Pending_Sector</source>
         <comment>stroage info</comment>
-        <translation>Secteur_actuel_en_attente</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="697"/>
         <source>Device</source>
         <comment>stroage info</comment>
-        <translation>Appareil</translation>
+        <translation>Urządzenie</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="702"/>
         <source>End-to-End_Error</source>
         <comment>stroage info</comment>
-        <translation>Erreur de bout en bout</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="707"/>
         <source>Firmware Version</source>
         <comment>stroage info</comment>
-        <translation>Version du micrologiciel</translation>
+        <translation>Wersja firmware</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="712"/>
         <source>SMART capabilities</source>
         <comment>stroage info</comment>
-        <translation>Capacités SMART</translation>
+        <translation>Możliwości SMART</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="107"/>
         <location filename="../src/diskwidget.cpp" line="366"/>
         <location filename="../src/diskwidget.cpp" line="774"/>
         <source>Model</source>
-        <translation>Modèle</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="312"/>
         <location filename="../src/diskwidget.cpp" line="366"/>
         <location filename="../src/diskwidget.cpp" line="774"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="55"/>
         <location filename="../src/diskwidget.cpp" line="366"/>
         <location filename="../src/diskwidget.cpp" line="774"/>
         <source>Media Type</source>
-        <translation>Type de support</translation>
+        <translation>Typ mediów</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="71"/>
         <location filename="../src/diskwidget.cpp" line="366"/>
         <location filename="../src/diskwidget.cpp" line="774"/>
         <source>Size</source>
-        <translation>Taille</translation>
+        <translation>Rozmiar</translation>
     </message>
 </context>
 <context>
@@ -1163,104 +1163,104 @@
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="29"/>
         <source>Display Adapter</source>
-        <translation>Carte graphique</translation>
+        <translation>Adapter wyświetlacza</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="66"/>
         <location filename="../src/displayadapterwidget.cpp" line="209"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="77"/>
         <location filename="../src/displayadapterwidget.cpp" line="209"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="82"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="87"/>
         <source>Graphic Memory</source>
-        <translation>Mémoire graphique</translation>
+        <translation>Pamięć graficzna</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="98"/>
         <source>Minimum Resolution</source>
-        <translation>Résolution minimale</translation>
+        <translation>Minimalna rozdzielczość</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="104"/>
         <source>Maximum Resolution</source>
-        <translation>Résolution maximale</translation>
+        <translation>Maksymalna rozdzielczość</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="111"/>
         <source>Driver</source>
-        <translation>Pilote</translation>
+        <translation>Sterownik</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="120"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="125"/>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation>Width</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="130"/>
         <source>Clock</source>
-        <translation>Horloge</translation>
+        <translation>Clock</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="135"/>
         <source>Capabilities</source>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="140"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="145"/>
         <source>bus info</source>
-        <translation>info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="150"/>
         <source>ioport</source>
-        <translation>port io</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="155"/>
         <source>irq</source>
-        <translation>irq</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="160"/>
         <source>latency</source>
-        <translation>latence</translation>
+        <translation>opóźnienie</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="165"/>
         <source>memory</source>
-        <translation>mémoire</translation>
+        <translation>pamięć</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="170"/>
         <source>physical id</source>
-        <translation>identifiant physique</translation>
+        <translation>identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="232"/>
         <source>Failed to find display adapter information</source>
-        <translation>Impossible de trouver les informations sur la carte graphique</translation>
+        <translation>Nie można znaleźć informacji o karcie graficznej</translation>
     </message>
 </context>
 <context>
@@ -1268,19 +1268,19 @@
     <message>
         <location filename="../src/keyboardwidget.cpp" line="30"/>
         <source>Keyboard</source>
-        <translation>Clavier</translation>
+        <translation>Klawiatura</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="614"/>
         <source>Sysfs</source>
         <comment>Keyboard Info,better if dont translate，my personal opinion</comment>
-        <translation>Sysfs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="62"/>
         <location filename="../src/keyboardwidget.cpp" line="665"/>
         <source>No keyboard found</source>
-        <translation>Aucun clavier trouvé</translation>
+        <translation>Nie znaleziono klawiatury</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="35"/>
@@ -1290,7 +1290,7 @@
         <location filename="../src/keyboardwidget.cpp" line="449"/>
         <location filename="../src/keyboardwidget.cpp" line="539"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="35"/>
@@ -1301,7 +1301,7 @@
         <location filename="../src/keyboardwidget.cpp" line="451"/>
         <location filename="../src/keyboardwidget.cpp" line="540"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="79"/>
@@ -1309,20 +1309,20 @@
         <location filename="../src/keyboardwidget.cpp" line="284"/>
         <location filename="../src/keyboardwidget.cpp" line="541"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="104"/>
         <location filename="../src/keyboardwidget.cpp" line="371"/>
         <location filename="../src/keyboardwidget.cpp" line="450"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="109"/>
         <location filename="../src/keyboardwidget.cpp" line="452"/>
         <source>Bus Info</source>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="114"/>
@@ -1331,7 +1331,7 @@
         <location filename="../src/keyboardwidget.cpp" line="455"/>
         <location filename="../src/keyboardwidget.cpp" line="622"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="134"/>
@@ -1352,145 +1352,145 @@
     <message>
         <location filename="../src/keyboardwidget.cpp" line="167"/>
         <source>Uniq</source>
-        <translation type="unfinished">Uniq</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="178"/>
         <source>Connected</source>
-        <translation type="unfinished">Connecté</translation>
+        <translation type="unfinished">Połączony</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="191"/>
         <source>Phys</source>
-        <translation type="unfinished">Phys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="222"/>
         <source>Sysfs</source>
-        <translation type="unfinished">Sysfs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="357"/>
         <location filename="../src/keyboardwidget.cpp" line="423"/>
         <source>Model</source>
-        <translation>Modèle</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="365"/>
         <source>Serial ID</source>
-        <translation>ID de série</translation>
+        <translation>Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="367"/>
         <source>Status</source>
-        <translation>Statut</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="139"/>
         <location filename="../src/keyboardwidget.cpp" line="368"/>
         <location filename="../src/keyboardwidget.cpp" line="469"/>
         <source>Driver</source>
-        <translation>Pilote</translation>
+        <translation>Sterownik</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="154"/>
         <location filename="../src/keyboardwidget.cpp" line="369"/>
         <location filename="../src/keyboardwidget.cpp" line="479"/>
         <source>Speed</source>
-        <translation>Vitesse</translation>
+        <translation>Prędkość</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="370"/>
         <source>BusID</source>
-        <translation>ID Bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="372"/>
         <source>Unique ID</source>
-        <translation>ID unique</translation>
+        <translation>Unikalny id</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="373"/>
         <source>SysFS ID</source>
-        <translation>ID SysFS</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="375"/>
         <source>driver</source>
-        <translation>pilote</translation>
+        <translation>sterownik</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="380"/>
         <source>maxpower</source>
-        <translation>maximum d&apos;énergie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="385"/>
         <source>physical id</source>
-        <translation>identifiant physique</translation>
+        <translation>identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="390"/>
         <source>speed</source>
-        <translation>vitesse</translation>
+        <translation>prędkość</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="119"/>
         <location filename="../src/keyboardwidget.cpp" line="456"/>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation>Width</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="124"/>
         <location filename="../src/keyboardwidget.cpp" line="457"/>
         <source>Clock</source>
-        <translation>Horloge</translation>
+        <translation>Clock</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="159"/>
         <location filename="../src/keyboardwidget.cpp" line="458"/>
         <source>Capabilities</source>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="551"/>
         <source>Uniq</source>
         <comment>Keyboard Info</comment>
-        <translation>Uniq</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="566"/>
         <source>Connected</source>
         <comment>Keyboard Info</comment>
-        <translation>Connecté</translation>
+        <translation>Połączony</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="580"/>
         <source>Phys</source>
         <comment>Keyboard Info</comment>
-        <translation>Phys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="235"/>
         <location filename="../src/keyboardwidget.cpp" line="627"/>
         <source>Product</source>
-        <translation>Produit</translation>
+        <translation>Produkt</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="248"/>
         <location filename="../src/keyboardwidget.cpp" line="638"/>
         <source>Power</source>
-        <translation>Puissance</translation>
+        <translation>Zasilanie</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="453"/>
         <source>Physical ID</source>
-        <translation>ID physique</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="454"/>
         <source>Logical Name</source>
-        <translation>Nom logique</translation>
+        <translation>Nazwa logiczna</translation>
     </message>
 </context>
 <context>
@@ -1498,53 +1498,53 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="125"/>
         <source>Loading...</source>
-        <translation>Chargement...</translation>
+        <translation>Ładowanie...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="350"/>
         <source>Device Info</source>
         <comment>export file&apos;s name</comment>
-        <translation>Info appareil</translation>
+        <translation>Informacje o urządzeniu</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="440"/>
         <source>System</source>
-        <translation>Système</translation>
+        <translation>System</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="444"/>
         <source>Display shortcuts</source>
-        <translation>Afficher les raccourcis</translation>
+        <translation>Wyświetl skróty</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="449"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation>Zamknij</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="454"/>
         <source>Help</source>
-        <translation>Aide</translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="459"/>
         <source>Copy</source>
-        <translation>Copier</translation>
+        <translation>Kopiuj</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="469"/>
         <source>Device Manager</source>
-        <translation>Gestionnaire de périphériques</translation>
+        <translation>Menedżer urządzeń</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="473"/>
         <source>Export</source>
-        <translation>Exporter</translation>
+        <translation>Eksport</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="478"/>
         <source>Refresh</source>
-        <translation>Actualiser</translation>
+        <translation>Odśwież</translation>
     </message>
 </context>
 <context>
@@ -1553,194 +1553,194 @@
         <location filename="../src/memorywidget.cpp" line="34"/>
         <location filename="../src/memorywidget.cpp" line="138"/>
         <source>Memory</source>
-        <translation>Mémoire</translation>
+        <translation>Pamięć</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="156"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="156"/>
         <location filename="../src/memorywidget.cpp" line="279"/>
         <location filename="../src/memorywidget.cpp" line="545"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="156"/>
         <location filename="../src/memorywidget.cpp" line="299"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="156"/>
         <location filename="../src/memorywidget.cpp" line="560"/>
         <source>Speed</source>
         <comment>memory info</comment>
-        <translation>Vitesse</translation>
+        <translation>Prędkość</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="156"/>
         <location filename="../src/memorywidget.cpp" line="214"/>
         <location filename="../src/memorywidget.cpp" line="224"/>
         <source>Size</source>
-        <translation>Taille</translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="210"/>
         <source>Slot Count</source>
-        <translation>Nombre d&apos;emplacements</translation>
+        <translation>Liczba miejsc</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="243"/>
         <location filename="../src/memorywidget.cpp" line="509"/>
         <source>Maximum Capacity</source>
-        <translation>Capacité maximale</translation>
+        <translation>Maksymalna pojemność</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="256"/>
         <location filename="../src/memorywidget.cpp" line="524"/>
         <source>Upgradeable</source>
-        <translation>Évolutif</translation>
+        <translation>Możliwość aktualizacji</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="257"/>
         <location filename="../src/memorywidget.cpp" line="525"/>
         <source>Yes</source>
-        <translation>Oui</translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="257"/>
         <location filename="../src/memorywidget.cpp" line="525"/>
         <source>No</source>
-        <translation>Non</translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="274"/>
         <source>Model</source>
         <comment>memory&apos;s model</comment>
-        <translation>Modèle</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="284"/>
         <location filename="../src/memorywidget.cpp" line="540"/>
         <source>Locator</source>
-        <translation>Localisateur</translation>
+        <translation>Lokalizator</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="290"/>
         <source>Size</source>
         <comment>memory&apos;s size</comment>
-        <translation>Taille</translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="304"/>
         <source>Speed</source>
         <comment>memory&apos;s Speed</comment>
-        <translation>Vitesse</translation>
+        <translation>Prędkość</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="309"/>
         <source>Serial Number</source>
-        <translation>Numéro de série</translation>
+        <translation>Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="314"/>
         <source>Form Factor</source>
-        <translation>Facteur de forme</translation>
+        <translation>Współczynnik kształtu</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="319"/>
         <source>Rank</source>
-        <translation>Rang</translation>
+        <translation>Ranga</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="324"/>
         <source>Bank Locator</source>
-        <translation>Localisateur de banque</translation>
+        <translation>Lokalizator banków</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="329"/>
         <location filename="../src/memorywidget.cpp" line="590"/>
         <source>Configured Voltage</source>
         <comment>memory info</comment>
-        <translation>Tension configurée</translation>
+        <translation>Skonfigurowane napięcie</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="334"/>
         <source>Minimum Voltage</source>
         <comment>memory&apos;s config</comment>
-        <translation>Tension minimale</translation>
+        <translation>Minimalne napięcie</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="339"/>
         <source>Maximum Voltage</source>
         <comment>memory&apos;s config</comment>
-        <translation>Tension maximale</translation>
+        <translation>Maksymalne napięcie</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="344"/>
         <source>Configured Speed</source>
-        <translation>Vitesse configurée</translation>
+        <translation>Skonfigurowana prędkość</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="349"/>
         <source>Array Handle</source>
-        <translation>Poignée du tableau</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="354"/>
         <source>Asset Tag</source>
-        <translation>Élément d&apos;inventaire</translation>
+        <translation>Tag zasobu</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="359"/>
         <source>Data Width</source>
-        <translation>Largeur des données</translation>
+        <translation>Szerokość danych</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="364"/>
         <source>Error Information Handle</source>
-        <translation>Traitement des informations d&apos;erreur</translation>
+        <translation>Uchwyt informacji o błędzie</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="369"/>
         <source>Set</source>
-        <translation>Définir</translation>
+        <translation>Ustaw</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="374"/>
         <source>Total Width</source>
-        <translation>Largeur totale</translation>
+        <translation>Całkowita szerokość</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="379"/>
         <source>Type Detail</source>
-        <translation>Détails du type</translation>
+        <translation>Wpisz szczegół</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="387"/>
         <location filename="../src/memorywidget.cpp" line="444"/>
         <location filename="../src/memorywidget.cpp" line="621"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="388"/>
         <source>Unknown memory</source>
-        <translation>Mémoire inconnue</translation>
+        <translation>Nieznana pamięć</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="147"/>
         <source>Failed to get memory information</source>
-        <translation>Impossible d&apos;obtenir des informations sur la mémoire</translation>
+        <translation>Nie udało się uzyskać informacji o pamięci</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="478"/>
         <source>Slot Count</source>
         <comment>memory info</comment>
-        <translation>Nombre d&apos;emplacements</translation>
+        <translation>Liczba miejsc</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="482"/>
@@ -1748,72 +1748,72 @@
         <location filename="../src/memorywidget.cpp" line="550"/>
         <source>Size</source>
         <comment>memory info</comment>
-        <translation>Taille</translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="555"/>
         <source>Type</source>
         <comment>memory info</comment>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="565"/>
         <source>Serial Number</source>
         <comment>memory info</comment>
-        <translation>Numéro de série</translation>
+        <translation>Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="570"/>
         <source>Model Part Number</source>
         <comment>memory info</comment>
-        <translation>Numéro de pièce du modèle</translation>
+        <translation>Numer części modelu</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="575"/>
         <source>Form Factor</source>
         <comment>memory info</comment>
-        <translation>Facteur de forme</translation>
+        <translation>Współczynnik kształtu</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="580"/>
         <source>Rank</source>
         <comment>memory info</comment>
-        <translation>Rang</translation>
+        <translation>Ranga</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="585"/>
         <source>Bank Locator</source>
         <comment>memory info</comment>
-        <translation>Localisateur de banque</translation>
+        <translation>Lokalizator banków</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="595"/>
         <source>Minimum Voltage</source>
-        <translation>Tension minimale</translation>
+        <translation>Minimalne napięcie</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="600"/>
         <source>Maximum Voltage</source>
         <comment>memory info</comment>
-        <translation>Tension maximale</translation>
+        <translation>Maksymalne napięcie</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="605"/>
         <source>Configured Speed</source>
         <comment>memory info</comment>
-        <translation>Vitesse configurée</translation>
+        <translation>Skonfigurowana prędkość</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="623"/>
         <source>Status</source>
         <comment>memory info</comment>
-        <translation>Statut</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/memorywidget.cpp" line="624"/>
         <source>Bad</source>
         <comment>memory info</comment>
-        <translation>Mauvais</translation>
+        <translation> Zły</translation>
     </message>
 </context>
 <context>
@@ -1821,7 +1821,7 @@
     <message>
         <location filename="../src/monitorwidget.cpp" line="65"/>
         <source>Monitor</source>
-        <translation>Surveiller</translation>
+        <translation>Monitor</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="146"/>
@@ -1829,7 +1829,7 @@
         <location filename="../src/monitorwidget.cpp" line="328"/>
         <location filename="../src/monitorwidget.cpp" line="370"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="147"/>
@@ -1838,21 +1838,21 @@
         <location filename="../src/monitorwidget.cpp" line="371"/>
         <location filename="../src/monitorwidget.cpp" line="718"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="70"/>
         <location filename="../src/monitorwidget.cpp" line="148"/>
         <location filename="../src/monitorwidget.cpp" line="719"/>
         <source>Resolution</source>
-        <translation>Résolution</translation>
+        <translation>Rozdzielczość</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="71"/>
         <location filename="../src/monitorwidget.cpp" line="149"/>
         <location filename="../src/monitorwidget.cpp" line="720"/>
         <source>Support Resolution</source>
-        <translation>Résolution de prise en charge</translation>
+        <translation>Wsparcie rozdzielczości</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="72"/>
@@ -1863,7 +1863,7 @@
         <location filename="../src/monitorwidget.cpp" line="74"/>
         <location filename="../src/monitorwidget.cpp" line="151"/>
         <source>Display Ratio</source>
-        <translation>Ratio d&apos;affichage</translation>
+        <translation>Współczynnik wyświetlania</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="153"/>
@@ -1871,20 +1871,20 @@
         <location filename="../src/monitorwidget.cpp" line="473"/>
         <location filename="../src/monitorwidget.cpp" line="722"/>
         <source>Size</source>
-        <translation>Taille</translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="182"/>
         <location filename="../src/monitorwidget.cpp" line="396"/>
         <source>Serial Number</source>
-        <translation>Numéro de série</translation>
+        <translation>Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="192"/>
         <location filename="../src/monitorwidget.cpp" line="411"/>
         <location filename="../src/monitorwidget.cpp" line="721"/>
         <source>Manufacture Date</source>
-        <translation>Date de fabrication</translation>
+        <translation>Data produkcji</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="195"/>
@@ -1894,14 +1894,14 @@
         <location filename="../src/monitorwidget.cpp" line="727"/>
         <location filename="../src/monitorwidget.cpp" line="738"/>
         <source>Year</source>
-        <translation>Année</translation>
+        <translation>Rok</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="198"/>
         <location filename="../src/monitorwidget.cpp" line="268"/>
         <location filename="../src/monitorwidget.cpp" line="416"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="201"/>
@@ -1909,35 +1909,35 @@
         <location filename="../src/monitorwidget.cpp" line="727"/>
         <location filename="../src/monitorwidget.cpp" line="738"/>
         <source>Week</source>
-        <translation>Semaine</translation>
+        <translation>Tydzień</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="210"/>
         <location filename="../src/monitorwidget.cpp" line="428"/>
         <source>The Model Year(Not Manufacture Date)</source>
-        <translation>L&apos;année du modèle (pas la date de fabrication)</translation>
+        <translation>Rok modelowy (brak daty produkcji)</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="731"/>
         <source>Notebook monitor</source>
-        <translation>Moniteur pour ordinateur portable</translation>
+        <translation>Monitor notebooka</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="742"/>
         <source>External monitor</source>
-        <translation>Moniteur externe</translation>
+        <translation>Monitor zewnętrzny</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="220"/>
         <location filename="../src/monitorwidget.cpp" line="335"/>
         <source>Primary Monitor</source>
-        <translation>Moniteur principal</translation>
+        <translation>Główny monitor</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="267"/>
         <location filename="../src/monitorwidget.cpp" line="354"/>
         <source>Connect Type</source>
-        <translation>Type de connexion</translation>
+        <translation>Typ połączenia</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="302"/>
@@ -1952,12 +1952,12 @@
         <location filename="../src/monitorwidget.cpp" line="648"/>
         <location filename="../src/monitorwidget.cpp" line="678"/>
         <source>inch</source>
-        <translation>pouce</translation>
+        <translation>cal</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="316"/>
         <source>Failed to find monitor information</source>
-        <translation>Impossible de trouver les informations du moniteur</translation>
+        <translation>Nie można znaleźć informacji o monitorze</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="679"/>
@@ -1971,33 +1971,33 @@
     <message>
         <location filename="../src/motherboardwidget.cpp" line="31"/>
         <source>Motherboard</source>
-        <translation>Carte mère</translation>
+        <translation>Płyta główna</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="41"/>
         <location filename="../src/motherboardwidget.cpp" line="57"/>
         <source>Model</source>
-        <translation>Modèle</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="42"/>
         <location filename="../src/motherboardwidget.cpp" line="48"/>
         <location filename="../src/motherboardwidget.cpp" line="293"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="43"/>
         <location filename="../src/motherboardwidget.cpp" line="73"/>
         <location filename="../src/motherboardwidget.cpp" line="78"/>
         <source>Chipset Family</source>
-        <translation>Famille de chipsets</translation>
+        <translation>Rodzina chipsetu</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="44"/>
         <location filename="../src/motherboardwidget.cpp" line="68"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="44"/>
@@ -2009,48 +2009,48 @@
         <location filename="../src/motherboardwidget.cpp" line="45"/>
         <location filename="../src/motherboardwidget.cpp" line="147"/>
         <source>Features</source>
-        <translation>Caractéristiques</translation>
+        <translation>Funkcje</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="103"/>
         <location filename="../src/motherboardwidget.cpp" line="303"/>
         <source>Serial Number</source>
-        <translation>Numéro de série</translation>
+        <translation>Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="108"/>
         <source>Asset Tag</source>
-        <translation>Élément d&apos;inventaire</translation>
+        <translation>Tag zasobu</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="113"/>
         <source>Chassis Handle</source>
-        <translation>Poignée du châssis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="118"/>
         <source>Contained Object Handles</source>
-        <translation>Poignées d&apos;objets contenues</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="123"/>
         <source>Location In Chassis</source>
-        <translation>Emplacement dans le châssis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="128"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="143"/>
         <source>SMBIOS Version</source>
-        <translation>Version SMBIOS</translation>
+        <translation>Wersja SMBIOS</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="161"/>
         <source>Product Name</source>
-        <translation>Nom du produit</translation>
+        <translation>Nazwa produktu</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="176"/>
@@ -2060,154 +2060,154 @@
     <message>
         <location filename="../src/motherboardwidget.cpp" line="181"/>
         <source>Wake-up Type</source>
-        <translation>Type de réveil</translation>
+        <translation>Rodzaj budzenia</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="186"/>
         <source>SKU Number</source>
-        <translation>Numéro SKU</translation>
+        <translation>Numer SKU</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="191"/>
         <source>Family</source>
-        <translation>Famille</translation>
+        <translation>Rodzina</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="205"/>
         <source>System Information</source>
-        <translation>Informations système</translation>
+        <translation>Informacje o systemie</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="223"/>
         <source>Release Date</source>
-        <translation>Date de sortie</translation>
+        <translation>Data wydania</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="242"/>
         <source>Address</source>
-        <translation>Adresse</translation>
+        <translation>Adres</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="247"/>
         <source>ROM Size</source>
-        <translation>Taille de la ROM</translation>
+        <translation>Rozmiar ROM</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="252"/>
         <source>Runtime Size</source>
-        <translation>Taille d&apos;exécution</translation>
+        <translation>Rozmiar środowiska wykonawczego</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="267"/>
         <source>Currently Installed Language</source>
-        <translation>Langue actuellement installée</translation>
+        <translation>Aktualnie zainstalowany język</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="272"/>
         <source>Installable Languages</source>
-        <translation>Langues disponibles</translation>
+        <translation>Języki do zainstalowania</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="277"/>
         <source>Languages Description Format</source>
-        <translation>Format de description des langues</translation>
+        <translation>Format opisu języka</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="313"/>
         <source>Asset Tag</source>
         <comment>Chassis Information</comment>
-        <translation>Élément d&apos;inventaire</translation>
+        <translation>Tag zasobu</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="318"/>
         <source>Boot-up State</source>
         <comment>Chassis Information</comment>
-        <translation>État d&apos;amorçage</translation>
+        <translation>Stan rozruchu</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="323"/>
         <source>Contained Elements</source>
         <comment>Chassis Information</comment>
-        <translation>Éléments contenus</translation>
+        <translation>Zawarte elementy</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="328"/>
         <source>Lock</source>
         <comment>Chassis Information</comment>
-        <translation>Verrouiller</translation>
+        <translation>Zablokuj</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="333"/>
         <source>Number Of Power Cords</source>
         <comment>Chassis Information</comment>
-        <translation>Nombre de cordons d&apos;alimentation</translation>
+        <translation>Liczba kabli zasilających</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="338"/>
         <source>OEM Information</source>
         <comment>Chassis Information</comment>
-        <translation>Informations OEM</translation>
+        <translation>Informacje OEM</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="343"/>
         <source>Power Supply State</source>
         <comment>Chassis Information</comment>
-        <translation>État de l&apos;alimentation électrique</translation>
+        <translation>Stan zasilania</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="348"/>
         <source>SKU Number</source>
         <comment>Chassis Information</comment>
-        <translation>Numéro SKU</translation>
+        <translation>Numer SKU</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="353"/>
         <source>Security Status</source>
         <comment>Chassis Information</comment>
-        <translation>État de sécurité</translation>
+        <translation>Status bezpieczeństwa</translation>
     </message>
     <message>
         <source>Termal State</source>
         <comment>Chassis Information</comment>
-        <translation type="vanished">État thermique</translation>
+        <translation type="vanished">Stan termiczny</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="424"/>
         <source>Size</source>
         <comment>memory&apos;s size</comment>
-        <translation>Taille</translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="466"/>
         <source>Memory Info</source>
-        <translation>Info mémoire</translation>
+        <translation>Informacje o pamięci</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="213"/>
         <source>BIOS Version</source>
-        <translation>Version du BIOS</translation>
+        <translation>Wersja BIOSu</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="233"/>
         <source>BIOS Vendor</source>
-        <translation>Fournisseur de BIOS</translation>
+        <translation>Producent BIOSu</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="282"/>
         <source>Characteristics</source>
-        <translation>Caractéristiques</translation>
+        <translation>Charakterystyka</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="298"/>
         <source>Type</source>
         <comment>Chassis Information</comment>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="308"/>
         <source>Version</source>
         <comment>Chassis Information</comment>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="358"/>
@@ -2218,38 +2218,38 @@
     <message>
         <location filename="../src/motherboardwidget.cpp" line="367"/>
         <source>Chassis Information</source>
-        <translation>Informations sur le châssis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="383"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="392"/>
         <source>Slot Count</source>
-        <translation>Nombre d&apos;emplacements</translation>
+        <translation>Liczba miejsc</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="435"/>
         <source>Maximum Capacity</source>
         <comment>PhysicMemory</comment>
-        <translation>Capacité maximale</translation>
+        <translation>Maksymalna pojemność</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="461"/>
         <source>Upgradeable</source>
-        <translation>Évolutif</translation>
+        <translation>Możliwość aktualizacji</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="462"/>
         <source>Yes</source>
-        <translation>Oui</translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <location filename="../src/motherboardwidget.cpp" line="462"/>
         <source>No</source>
-        <translation>Non</translation>
+        <translation>Nie</translation>
     </message>
 </context>
 <context>
@@ -2257,83 +2257,79 @@
     <message>
         <location filename="../src/mousewidget.cpp" line="29"/>
         <source>Mouse</source>
-        <translation>Souris</translation>
+        <translation>Mysz</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="41"/>
         <source>No mouse found</source>
-        <translation>Aucune souris trouvée</translation>
+        <translation>Nie znaleziono myszy</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="56"/>
         <location filename="../src/mousewidget.cpp" line="294"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="57"/>
         <location filename="../src/mousewidget.cpp" line="294"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="58"/>
         <location filename="../src/mousewidget.cpp" line="133"/>
         <location filename="../src/mousewidget.cpp" line="294"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="83"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="88"/>
         <source>Bus Info</source>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="93"/>
         <location filename="../src/mousewidget.cpp" line="209"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="98"/>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation>Width</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="103"/>
         <source>Clock</source>
-        <translation>Horloge</translation>
+        <translation>Clock</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="108"/>
         <source>Capabilities</source>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <source>driver</source>
-        <translation type="vanished">pilote</translation>
-    </message>
-    <message>
-        <source>maxpower</source>
-        <translation type="vanished">maximum d&apos;énergie</translation>
+        <translation type="vanished">sterownik</translation>
     </message>
     <message>
         <source>physical id</source>
-        <translation type="vanished">identifiant physique</translation>
+        <translation type="vanished">identyfikator fizyczny</translation>
     </message>
     <message>
         <source>speed</source>
-        <translation type="vanished">vitesse</translation>
+        <translation type="vanished">prędkość</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="113"/>
         <source>Driver</source>
-        <translation type="unfinished">Pilote</translation>
+        <translation type="unfinished">Sterownik</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="118"/>
@@ -2353,76 +2349,76 @@
     <message>
         <location filename="../src/mousewidget.cpp" line="138"/>
         <source>Speed</source>
-        <translation type="unfinished">Vitesse</translation>
+        <translation type="unfinished">Prędkość</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="146"/>
         <source>Uniq</source>
         <comment>Mouse Info from catinput</comment>
-        <translation>Uniq</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="157"/>
         <source>Connected</source>
-        <translation>Connecté</translation>
+        <translation>Połączony</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="170"/>
         <source>Phys</source>
         <comment>Mouse Info from catinput</comment>
-        <translation>Phys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="201"/>
         <source>Sysfs</source>
         <comment>Mouse Info from catinput</comment>
-        <translation>Sysfs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="214"/>
         <source>Product</source>
-        <translation>Produit</translation>
+        <translation>Produkt</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="219"/>
         <source>Bus</source>
-        <translation>Bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="224"/>
         <source>EV</source>
-        <translation>EV</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="229"/>
         <source>Handlers</source>
-        <translation>Sous-routines</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="234"/>
         <source>KEY</source>
-        <translation>CLE</translation>
+        <translation>KLUCZ</translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="239"/>
         <source>MSC</source>
-        <translation>MSC</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="244"/>
         <source>PROP</source>
-        <translation>PROP</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="249"/>
         <source>REL</source>
-        <translation>REL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mousewidget.cpp" line="262"/>
         <source>Power</source>
         <comment>Mouse Info from upower</comment>
-        <translation>Puissance</translation>
+        <translation>Zasilanie</translation>
     </message>
 </context>
 <context>
@@ -2430,13 +2426,13 @@
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="29"/>
         <source>Network Adapter</source>
-        <translation>Adaptateur réseau</translation>
+        <translation>Adapter sieciowy</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="39"/>
         <location filename="../src/networkadapterwidget.cpp" line="106"/>
         <source>No network adapter found</source>
-        <translation>Aucune carte réseau trouvée</translation>
+        <translation>Nie znaleziono karty sieciowej</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="51"/>
@@ -2444,7 +2440,7 @@
         <location filename="../src/networkadapterwidget.cpp" line="117"/>
         <location filename="../src/networkadapterwidget.cpp" line="293"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="52"/>
@@ -2452,116 +2448,116 @@
         <location filename="../src/networkadapterwidget.cpp" line="122"/>
         <location filename="../src/networkadapterwidget.cpp" line="293"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="53"/>
         <location filename="../src/networkadapterwidget.cpp" line="127"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="54"/>
         <location filename="../src/networkadapterwidget.cpp" line="132"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="55"/>
         <location filename="../src/networkadapterwidget.cpp" line="137"/>
         <source>Bus Info</source>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="56"/>
         <location filename="../src/networkadapterwidget.cpp" line="142"/>
         <source>Logical Name</source>
-        <translation>Nom logique</translation>
+        <translation>Nazwa logiczna</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="57"/>
         <location filename="../src/networkadapterwidget.cpp" line="147"/>
         <source>MAC Address</source>
-        <translation>Adresse MAC</translation>
+        <translation>Adres MAC</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="58"/>
         <source>Speed</source>
-        <translation>Vitesse</translation>
+        <translation>Prędkość</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="59"/>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation>Width</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="60"/>
         <source>Clock</source>
-        <translation>Horloge</translation>
+        <translation>Clock</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="61"/>
         <source>Capabilities</source>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="152"/>
         <source>Speed</source>
         <comment>Network Adapter</comment>
-        <translation>Vitesse</translation>
+        <translation>Prędkość</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="157"/>
         <source>Width</source>
         <comment>Network Adapter</comment>
-        <translation>Largeur</translation>
+        <translation>Width</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="162"/>
         <source>Clock</source>
         <comment>Network Adapter</comment>
-        <translation>Horloge</translation>
+        <translation>Clock</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="167"/>
         <source>Capabilities</source>
         <comment>Network Adapter</comment>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="172"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="177"/>
         <source>autonegotiation</source>
-        <translation>négociation automatique</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="182"/>
         <source>broadcast</source>
-        <translation>diffusion</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="187"/>
         <source>capacity</source>
-        <translation>capacité</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="192"/>
         <source>driver</source>
-        <translation>pilote</translation>
+        <translation>sterownik</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="197"/>
         <source>driverversion</source>
-        <translation>version du pilote</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="202"/>
         <source>duplex</source>
-        <translation>duplex</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="207"/>
@@ -2571,42 +2567,42 @@
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="212"/>
         <source>ioport</source>
-        <translation>ioport</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="217"/>
         <source>ip</source>
-        <translation>ip</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="222"/>
         <source>irq</source>
-        <translation>irq</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="227"/>
         <source>latency</source>
-        <translation>latence</translation>
+        <translation>opóźnienie</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="232"/>
         <source>link</source>
-        <translation>lien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="237"/>
         <source>memory</source>
-        <translation>mémoire</translation>
+        <translation>pamięć</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="242"/>
         <source>multicast</source>
-        <translation>multidiffusion</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="247"/>
         <source>physical id</source>
-        <translation>identifiant physique</translation>
+        <translation>identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="252"/>
@@ -2616,7 +2612,7 @@
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="257"/>
         <source>size</source>
-        <translation>taille</translation>
+        <translation>rozmiar</translation>
     </message>
 </context>
 <context>
@@ -2625,13 +2621,13 @@
         <location filename="../src/otherdevicewidget.cpp" line="29"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
-        <translation>Autres appareils</translation>
+        <translation>Inne urządzenia</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="40"/>
         <location filename="../src/otherdevicewidget.cpp" line="110"/>
         <source>No other devices found</source>
-        <translation>Aucun autre appareil trouvé</translation>
+        <translation>Nie znaleziono innych urządzeń</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="53"/>
@@ -2639,19 +2635,19 @@
         <location filename="../src/otherdevicewidget.cpp" line="122"/>
         <location filename="../src/otherdevicewidget.cpp" line="202"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="54"/>
         <location filename="../src/otherdevicewidget.cpp" line="127"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="56"/>
         <location filename="../src/otherdevicewidget.cpp" line="132"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="57"/>
@@ -2659,68 +2655,68 @@
         <location filename="../src/otherdevicewidget.cpp" line="137"/>
         <location filename="../src/otherdevicewidget.cpp" line="202"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="58"/>
         <location filename="../src/otherdevicewidget.cpp" line="142"/>
         <source>Bus Info</source>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="59"/>
         <location filename="../src/otherdevicewidget.cpp" line="147"/>
         <source>Physical ID</source>
-        <translation>ID physique</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="60"/>
         <location filename="../src/otherdevicewidget.cpp" line="152"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="61"/>
         <location filename="../src/otherdevicewidget.cpp" line="157"/>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation>Width</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="62"/>
         <location filename="../src/otherdevicewidget.cpp" line="162"/>
         <source>Clock</source>
-        <translation>Horloge</translation>
+        <translation>Clock</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="63"/>
         <location filename="../src/otherdevicewidget.cpp" line="167"/>
         <source>Capabilities</source>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="64"/>
         <source>driver</source>
-        <translation>pilote</translation>
+        <translation>sterownik</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="65"/>
         <source>irq</source>
-        <translation>irq</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="66"/>
         <source>latency</source>
-        <translation>latence</translation>
+        <translation>opóźnienie</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="67"/>
         <source>memory</source>
-        <translation>mémoire</translation>
+        <translation>pamięć</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="68"/>
         <source>pci</source>
-        <translation>pci</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2728,13 +2724,13 @@
     <message>
         <location filename="../src/otherpcidevice.cpp" line="29"/>
         <source>Other PCI Devices</source>
-        <translation>Autres périphériques PCI</translation>
+        <translation>Inne urządzenia PCI</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="40"/>
         <location filename="../src/otherpcidevice.cpp" line="97"/>
         <source>No other PCI devices found</source>
-        <translation>Aucun autre périphérique PCI trouvé</translation>
+        <translation>Nie znaleziono innych urządzeń PCI</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="53"/>
@@ -2742,13 +2738,13 @@
         <location filename="../src/otherpcidevice.cpp" line="109"/>
         <location filename="../src/otherpcidevice.cpp" line="175"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="54"/>
         <location filename="../src/otherpcidevice.cpp" line="114"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="55"/>
@@ -2756,43 +2752,43 @@
         <location filename="../src/otherpcidevice.cpp" line="119"/>
         <location filename="../src/otherpcidevice.cpp" line="175"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="56"/>
         <location filename="../src/otherpcidevice.cpp" line="124"/>
         <source>Bus Info</source>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="57"/>
         <location filename="../src/otherpcidevice.cpp" line="129"/>
         <source>Physical ID</source>
-        <translation>ID physique</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="58"/>
         <location filename="../src/otherpcidevice.cpp" line="134"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="59"/>
         <location filename="../src/otherpcidevice.cpp" line="139"/>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation>Width</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="60"/>
         <location filename="../src/otherpcidevice.cpp" line="144"/>
         <source>Clock</source>
-        <translation>Horloge</translation>
+        <translation>Clock</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="61"/>
         <location filename="../src/otherpcidevice.cpp" line="149"/>
         <source>Capabilities</source>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
 </context>
 <context>
@@ -2800,51 +2796,51 @@
     <message>
         <location filename="../src/powerwidget.cpp" line="29"/>
         <source>Power</source>
-        <translation>Puissance</translation>
+        <translation>Zasilanie</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="49"/>
         <source>Failed to get power information</source>
-        <translation>Impossible d&apos;obtenir des informations sur l&apos;alimentation</translation>
+        <translation>Nie udało się uzyskać informacji o mocy</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="66"/>
         <location filename="../src/powerwidget.cpp" line="213"/>
         <location filename="../src/powerwidget.cpp" line="375"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="67"/>
         <location filename="../src/powerwidget.cpp" line="209"/>
         <location filename="../src/powerwidget.cpp" line="375"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="68"/>
         <location filename="../src/powerwidget.cpp" line="86"/>
         <location filename="../src/powerwidget.cpp" line="211"/>
         <source>Device</source>
-        <translation>Appareil</translation>
+        <translation>Urządzenie</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="69"/>
         <location filename="../src/powerwidget.cpp" line="214"/>
         <source>Serial Number</source>
-        <translation>Numéro de série</translation>
+        <translation>Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="80"/>
         <location filename="../src/powerwidget.cpp" line="212"/>
         <source>Model</source>
-        <translation>Modèle</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="83"/>
         <location filename="../src/powerwidget.cpp" line="244"/>
         <source>Power Supply</source>
-        <translation>Source de courant</translation>
+        <translation>Zasilacz</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="89"/>
@@ -2900,102 +2896,102 @@
         <location filename="../src/powerwidget.cpp" line="128"/>
         <location filename="../src/powerwidget.cpp" line="257"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="133"/>
         <location filename="../src/powerwidget.cpp" line="260"/>
         <source>Physical ID</source>
-        <translation>ID physique</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="136"/>
         <location filename="../src/powerwidget.cpp" line="263"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="139"/>
         <location filename="../src/powerwidget.cpp" line="267"/>
         <source>Capacity</source>
-        <translation>Capacité</translation>
+        <translation>Pojemność</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="154"/>
         <source>Max Power Capacity</source>
-        <translation>Capacité d&apos;alimentation maximale</translation>
+        <translation>Maksymalna moc wyjściowa</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="158"/>
         <location filename="../src/powerwidget.cpp" line="271"/>
         <location filename="../src/powerwidget.cpp" line="299"/>
         <source>Location</source>
-        <translation>Emplacement</translation>
+        <translation>Lokalizacja</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="161"/>
         <source>Asset Tag</source>
         <comment>Power Info from DMIDecode</comment>
-        <translation>Élément d&apos;inventaire</translation>
+        <translation>Tag zasobu</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="187"/>
         <location filename="../src/powerwidget.cpp" line="198"/>
         <source>Switching Power</source>
-        <translation>Puissance de commutation</translation>
+        <translation>Moc przełączania</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="210"/>
         <source>Design Energy</source>
         <comment>Power Info from Upower</comment>
-        <translation>Énergie de conception</translation>
+        <translation>Projektowanie energii</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="227"/>
         <source>State</source>
-        <translation>État</translation>
+        <translation> Stan</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="230"/>
         <source>Battery Percentage</source>
-        <translation>Pourcentage de batterie</translation>
+        <translation>Procent baterii</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="233"/>
         <source>Current Energy</source>
-        <translation>Énergie actuelle</translation>
+        <translation>Aktualna energia</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="236"/>
         <source>Full Energy</source>
-        <translation>Plein d&apos;énergie</translation>
+        <translation>Full Energy</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="241"/>
         <source>Battery Healthy</source>
-        <translation>Batterie saine</translation>
+        <translation>Zdrowa bateria</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="274"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="302"/>
         <source>Asset Tag</source>
-        <translation>Élément d&apos;inventaire</translation>
+        <translation>Tag zasobu</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="335"/>
         <location filename="../src/powerwidget.cpp" line="364"/>
         <location filename="../src/powerwidget.cpp" line="370"/>
         <source>Battery</source>
-        <translation>Batterie</translation>
+        <translation>Bateria</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="375"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Typ</translation>
     </message>
 </context>
 <context>
@@ -3003,12 +2999,12 @@
     <message>
         <location filename="../src/printerwidget.cpp" line="29"/>
         <source>Printer</source>
-        <translation>Imprimante</translation>
+        <translation>Drukarka</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="101"/>
         <source>No printer found</source>
-        <translation>Aucune imprimante trouvée</translation>
+        <translation>Nie znaleziono drukarki</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="181"/>
@@ -3117,109 +3113,29 @@
     </message>
     <message>
         <source>copies</source>
-        <translation type="vanished">copies</translation>
-    </message>
-    <message>
-        <source>Device-Uri</source>
-        <translation type="vanished">Device-Uri</translation>
+        <translation type="vanished">kopii</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="191"/>
         <source>Finishings</source>
-        <translation>Finitions</translation>
-    </message>
-    <message>
-        <source>Job-cancel-after</source>
-        <translation type="vanished">Annulation de tâche après</translation>
-    </message>
-    <message>
-        <source>Job-hold-until</source>
-        <translation type="vanished">Maintien de la tâche jusqu&apos;à</translation>
-    </message>
-    <message>
-        <source>Job-priority</source>
-        <translation type="vanished">Priorité à l&apos;emploi</translation>
-    </message>
-    <message>
-        <source>Job-Sheets</source>
-        <translation type="vanished">Fiches d&apos;emploi</translation>
-    </message>
-    <message>
-        <source>marker-change-time</source>
-        <translation type="vanished">marqueur de changement de temps</translation>
+        <translation>Wykończenia</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="221"/>
         <source>Media</source>
-        <translation>Média</translation>
-    </message>
-    <message>
-        <source>number-up</source>
-        <translation type="vanished">numéroter</translation>
-    </message>
-    <message>
-        <source>orientation-requested</source>
-        <translation type="vanished">demande d&apos;orientation</translation>
-    </message>
-    <message>
-        <source>print-color-mode</source>
-        <translation type="vanished">mode couleur d&apos;impression</translation>
-    </message>
-    <message>
-        <source>printerInfo</source>
-        <translation type="vanished">Info de l&apos;imprimante</translation>
-    </message>
-    <message>
-        <source>printer-is-accepting-jobs</source>
-        <translation type="vanished">imprimante accepte les travaux</translation>
-    </message>
-    <message>
-        <source>printer-is-shared</source>
-        <translation type="vanished">l&apos;imprimante est partagée</translation>
-    </message>
-    <message>
-        <source>printer-is-temporary</source>
-        <translation type="vanished">l&apos;imprimante est temporaire</translation>
-    </message>
-    <message>
-        <source>printer-make-and-model</source>
-        <translation type="vanished">marque et modèle de l&apos;imprimante</translation>
-    </message>
-    <message>
-        <source>printer-state</source>
-        <translation type="vanished">état de l&apos;imprimante</translation>
-    </message>
-    <message>
-        <source>printer-state-change-time</source>
-        <translation type="vanished">temps de changement d&apos;état de l&apos;imprimante</translation>
-    </message>
-    <message>
-        <source>printer-state-reasons</source>
-        <translation type="vanished">état de l&apos;imprimante</translation>
-    </message>
-    <message>
-        <source>printer-type</source>
-        <translation type="vanished">type d&apos;imprimante</translation>
-    </message>
-    <message>
-        <source>printer-uri-supported</source>
-        <translation type="vanished">imprimante uri prise en charge</translation>
-    </message>
-    <message>
-        <source>sides</source>
-        <translation type="vanished">côtés</translation>
+        <translation>Media</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="323"/>
         <source>printer-info</source>
         <comment>Printer Info,shown on first column of table&apos;s head</comment>
-        <translation>info-imprimante</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="324"/>
         <source>printer-make-and-model</source>
         <comment>Printer Info,shown on second column of table&apos;s head </comment>
-        <translation>imprimante-marque-et-modèle</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3227,193 +3143,193 @@
     <message>
         <location filename="../src/cloumnwidget.cpp" line="142"/>
         <source>Copy</source>
-        <translation>Copier</translation>
+        <translation>Kopiuj</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="117"/>
         <source>One</source>
-        <translation>Un</translation>
+        <translation>Jeden</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="118"/>
         <source>Two</source>
-        <translation>Deux</translation>
+        <translation>Dwa</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="119"/>
         <source>Four</source>
-        <translation>Quatre</translation>
+        <translation>Cztery</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="120"/>
         <source>Six</source>
-        <translation>Six</translation>
+        <translation>Sześć</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="121"/>
         <source>Eight</source>
-        <translation>Huit</translation>
+        <translation>Osiem</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="123"/>
         <source>Ten</source>
-        <translation>Dix</translation>
+        <translation>Dziesięć</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="124"/>
         <source>Twelve</source>
-        <translation>Douze</translation>
+        <translation>Dwanaście</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="125"/>
         <source>Fourteen</source>
-        <translation>Quatorze</translation>
+        <translation>Czternaście</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="126"/>
         <source>Sixteen</source>
-        <translation>Seize</translation>
+        <translation>Szesnaście</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="127"/>
         <source>Eighteen</source>
-        <translation>Dix-huit</translation>
+        <translation>Osiemnaście</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="129"/>
         <source>Twenty</source>
-        <translation>Vingt</translation>
+        <translation>Dwadzieścia</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="130"/>
         <source>Twenty-two</source>
-        <translation>Vingt-deux</translation>
+        <translation>Dwadzieścia dwa</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="131"/>
         <source>Twenty-four</source>
-        <translation>Vingt-quatre</translation>
+        <translation>Dwadzieścia cztery</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="132"/>
         <source>Twenty-six</source>
-        <translation>Vingt-six</translation>
+        <translation>Dwadzieścia sześć</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="133"/>
         <source>Twenty-eight</source>
-        <translation>Vingt-huit</translation>
+        <translation>Dwadzieścia osiem</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="134"/>
         <source>Thirty</source>
-        <translation>Trente</translation>
+        <translation>Trzydzieści</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="136"/>
         <source>Thirty-two</source>
-        <translation>Trente-deux</translation>
+        <translation>Trzydzieści dwa</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="137"/>
         <source>Thirty-four</source>
-        <translation>Trente-quatre</translation>
+        <translation>Trzydzieści cztery</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="138"/>
         <source>Thirty-six</source>
-        <translation>Trente-six</translation>
+        <translation>Trzydzieści sześć</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="139"/>
         <source>Thirty-eight</source>
-        <translation>Trente-huit</translation>
+        <translation>Trzydzieści osiem</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="140"/>
         <source>Forty</source>
-        <translation>Quarante</translation>
+        <translation>Czterdzieści</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="142"/>
         <source>Forty-two</source>
-        <translation>Quarante-deux</translation>
+        <translation>Czterdzieści dwa</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="143"/>
         <source>Forty-four</source>
-        <translation>Quarante-quatre</translation>
+        <translation>Czterdzieści cztery</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="144"/>
         <source>Forty-six</source>
-        <translation>Quarante-six</translation>
+        <translation>Czterdzieści sześć</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="145"/>
         <source>Forty-eight</source>
-        <translation>Quarante-huit</translation>
+        <translation>Czterdzieści osiem</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="146"/>
         <source>Fifty</source>
-        <translation>Cinquante</translation>
+        <translation>Pięćdziesiąt</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="148"/>
         <source>Fifty-two</source>
-        <translation>Cinquante-deux</translation>
+        <translation>Pięćdziesiąt dwa</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="149"/>
         <source>Fifty-four</source>
-        <translation>Cinquante-quatre</translation>
+        <translation>Pięćdziesiąt cztery</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="150"/>
         <source>Fifty-six</source>
-        <translation>Cinquante-six</translation>
+        <translation>Pięćdziesiąt sześć</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="151"/>
         <source>Fifty-eight</source>
-        <translation>Cinquante-huit</translation>
+        <translation>Pięćdziesiąt osiem</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="152"/>
         <source>Sixty</source>
-        <translation>Soixante</translation>
+        <translation>Sześćdziesiąt</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="154"/>
         <source>Sixty-two</source>
-        <translation>Soixante-deux</translation>
+        <translation>Sześćdziesiąt dwa</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="155"/>
         <source>Sixty-four</source>
-        <translation>Soixante-quatre</translation>
+        <translation>Sześćdziesiąt cztery</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="156"/>
         <source>One hundred and Twenty-eight</source>
-        <translation>Cent vingt-huit</translation>
+        <translation>Sto dwadzieścia osiem</translation>
     </message>
     <message>
         <location filename="../src/deviceattributedefine.cpp" line="75"/>
         <source>Unknown</source>
-        <translation>Inconnu</translation>
+        <translation>Nieznany</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="45"/>
         <location filename="../src/main.cpp" line="49"/>
         <source>Device Manager</source>
-        <translation>Gestionnaire de périphériques</translation>
+        <translation>Menedżer urządzeń</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="51"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-        <translation>Device Manager est un outil pratique pour afficher les informations sur le matériel et gérer les appareils.</translation>
+        <translation>Menedżer urządzeń to przydatne narzędzie do przeglądania informacji o sprzęcie i zarządzania urządzeniami.</translation>
     </message>
 </context>
 <context>
@@ -3421,13 +3337,13 @@
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="29"/>
         <source>USB Devices</source>
-        <translation>Périphériques USB</translation>
+        <translation>Urządzenia USB</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="76"/>
         <location filename="../src/usbdevicewidget.cpp" line="121"/>
         <source>No USB devices found</source>
-        <translation>Aucun périphérique USB trouvé</translation>
+        <translation>Nie znaleziono urządzeń USB</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="86"/>
@@ -3435,43 +3351,43 @@
         <location filename="../src/usbdevicewidget.cpp" line="135"/>
         <location filename="../src/usbdevicewidget.cpp" line="154"/>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="88"/>
         <source>Model</source>
-        <translation>Modèle</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="89"/>
         <source>Serial ID</source>
-        <translation>ID de série</translation>
+        <translation>Numer seryjny</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="91"/>
         <source>Status</source>
-        <translation>Statut</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="92"/>
         <source>Driver</source>
-        <translation>Pilote</translation>
+        <translation>Sterownik</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="93"/>
         <source>Speed</source>
-        <translation>Vitesse</translation>
+        <translation>Prędkość</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="94"/>
         <source>BusID</source>
-        <translation>ID Bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="95"/>
         <location filename="../src/usbdevicewidget.cpp" line="136"/>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="87"/>
@@ -3479,53 +3395,53 @@
         <location filename="../src/usbdevicewidget.cpp" line="137"/>
         <location filename="../src/usbdevicewidget.cpp" line="154"/>
         <source>Vendor</source>
-        <translation>Vendeur</translation>
+        <translation>Sprzedawca</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="96"/>
         <source>Unique ID</source>
-        <translation>ID unique</translation>
+        <translation>Unikalny id</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="97"/>
         <source>SysFS ID</source>
-        <translation>ID SysFS</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="138"/>
         <source>Bus Info</source>
-        <translation>Info bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="139"/>
         <source>Physical ID</source>
-        <translation>ID physique</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="140"/>
         <source>Logical Name</source>
-        <translation>Nom logique</translation>
+        <translation>Nazwa logiczna</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="90"/>
         <location filename="../src/usbdevicewidget.cpp" line="141"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="142"/>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation>Width</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="143"/>
         <source>Clock</source>
-        <translation>Horloge</translation>
+        <translation>Clock</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="144"/>
         <source>Capabilities</source>
-        <translation>Capacités</translation>
+        <translation>Możliwości</translation>
     </message>
 </context>
 </TS>

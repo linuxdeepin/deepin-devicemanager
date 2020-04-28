@@ -212,12 +212,12 @@ void MotherboardWidget::initWidget()
 
     ArticleStruct biosVersion(tr("BIOS Version"));
     biosVersion.queryData("dmidecode", "BIOS Information", "Version");
-    articles.push_back(biosVersion);
-    existArticles.insert("Version");
     if(biosVersion.isValid() == false)
     {
         biosVersion.queryData("catbaseboard", "BIOS Information", "Version");
     }
+    articles.push_back(biosVersion);
+    existArticles.insert("Version");
 
 
     ArticleStruct releaseDate(tr("Release Date"));
@@ -253,6 +253,7 @@ void MotherboardWidget::initWidget()
     runtimeSize.queryData("dmidecode", "BIOS Information", "Runtime Size");
     articles.push_back(runtimeSize);
     existArticles.insert("Runtime Size");
+    existArticles.insert("BIOS Revision");
 
     existArticles.insert("Characteristics");
     res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "BIOS Information", articles, existArticles,
@@ -264,22 +265,20 @@ void MotherboardWidget::initWidget()
     }
 
     ArticleStruct currentInstalledLanguage(tr("Currently Installed Language"));
-    currentInstalledLanguage.queryData("dmidecode", "BIOS Information", "Currently Installed Language");
+    currentInstalledLanguage.queryData("dmidecode", "BIOS Language Information", "Currently Installed Language");
     articles.push_back(currentInstalledLanguage);
     existArticles.insert("Currently Installed Language");
 
     ArticleStruct installableLanguages(tr("Installable Languages"));
-    installableLanguages.queryData("dmidecode", "BIOS Information", "Installable Languages");
+    installableLanguages.queryData("dmidecode", "BIOS Language Information", "Installable Languages");
     articles.push_back(installableLanguages);
     existArticles.insert("Installable Languages");
 
     ArticleStruct languagesDescriptionFormat(tr("Languages Description Format"));
-    languagesDescriptionFormat.queryData("dmidecode", "BIOS Information", "Languages Description Format");
+    languagesDescriptionFormat.queryData("dmidecode", "BIOS Language Information", "Languages Description Format");
     articles.push_back(languagesDescriptionFormat);
     existArticles.insert("Languages Description Format");
 
-    DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "BIOS Language Information", articles,QSet<QString>(),
-                                                          "ManulTrack__Bios_lang","BIOS Language Information");
     ArticleStruct characteristics(tr("Characteristics"));
     characteristics.queryData("dmidecode", "BIOS Information", "Characteristics");
     articles.push_back(characteristics);
@@ -356,10 +355,11 @@ void MotherboardWidget::initWidget()
     articles.push_back(securityStatus);
     existArticles.insert("Security Status");
 
-    ArticleStruct thermalSate(tr("Termal State","Chassis Information"));
-    thermalSate.queryData("dmidecode", "Chassis Information", "Termal State");
+    ArticleStruct thermalSate(tr("Thermal State","Chassis Information"));
+    thermalSate.queryData("dmidecode", "Chassis Information", "Thermal State");
     articles.push_back(thermalSate);
-    existArticles.insert("Termal State");
+    existArticles.insert("Thermal State");
+    existArticles.insert("Height");
 
     res = DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", "Chassis Information", articles, existArticles,
                                                                 "ManulTrack__Chassis information","Chassis");
