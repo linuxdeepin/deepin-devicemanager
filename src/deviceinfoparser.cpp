@@ -28,6 +28,7 @@
 #include <QProcess>
 #include <QRegExp>
 #include <DLog>
+#include <DSysInfo>
 #include <com_deepin_daemon_power.h>
 #include "commondefine.h"
 #include "deviceattributedefine.h"
@@ -1120,7 +1121,8 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
 
         const QString &fk = toolDatabaseSecondOrder_["lshw"][i];
         if(toolDatabase_["lshw"][fk]["description"].compare("Mass storage device", Qt::CaseInsensitive) == 0
-                || toolDatabase_["lshw"][fk]["description"].compare("Generic USB device", Qt::CaseInsensitive) == 0){
+                || toolDatabase_["lshw"][fk]["description"].compare("Generic USB device", Qt::CaseInsensitive) == 0
+                || toolDatabase_["lshw"][fk]["description"].compare("Human interface device", Qt::CaseInsensitive) == 0){
             otherDeviceList.push_back(fk);
             continue;
         }
@@ -1357,7 +1359,16 @@ bool DeviceInfoParser::isHuaweiAndroidUos()
 
 QString DeviceInfoParser::getLsbRelease()
 {
-    return lsbRelease_.toUpper();
+    DSysInfo::DeepinType type = DSysInfo::deepinType();
+    if(DSysInfo::DeepinProfessional == type){
+        return "UOS 20";
+    }else if(DSysInfo::DeepinPersonal == type){
+        return "UOS 20 Home";
+    }else if(DSysInfo::DeepinDesktop == type){
+        return "Deepin 20 Beta";
+    }else{
+        return lsbRelease_.toUpper();
+    }
 }
 
 QString DeviceInfoParser::getHomeUrl()
