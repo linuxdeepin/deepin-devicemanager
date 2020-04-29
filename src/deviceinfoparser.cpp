@@ -1479,17 +1479,17 @@ bool DeviceInfoParser::loadDmesgVram()
     QString key = "DisplayAdater Video Random Access Memory";
     QMap<QString, QString> value;
     foreach (auto line, lines) {
-        if (line.contains("VRAM",Qt::CaseSensitive)) {
-            QString varm = "VRAM";
-            int pos = line.lastIndexOf(":");
-            value.insert(varm, line.mid(pos));
-            // 显存大小
-            varmSize = line.mid(pos);
-            varmSize.remove(":");
-            int pos1 = varmSize.indexOf('M');
-            varmSize = varmSize.mid(0,pos1);
-            uint ivarmSize = varmSize.toUInt(nullptr,10)/1024;
-            varmSize = QString::number(ivarmSize,10) + "GB";
+//        if (line.contains("VRAM",Qt::CaseSensitive)) {
+//            QString varm = "VRAM";
+//            int pos = line.lastIndexOf(":");
+//            value.insert(varm, line.mid(pos));
+//            // 显存大小
+//            varmSize = line.mid(pos);
+//            varmSize.remove(":");
+//            int pos1 = varmSize.indexOf('M');
+//            varmSize = varmSize.mid(0,pos1);
+//            uint ivarmSize = varmSize.toUInt(nullptr,10)/1024;
+//            varmSize = QString::number(ivarmSize,10) + "GB";
 
 //            QRegExp rxlen("(^\\d+$)(Mit|M)*");
 //            int pos1 = rxlen.indexIn(varmSize);
@@ -1499,11 +1499,39 @@ bool DeviceInfoParser::loadDmesgVram()
 //                uint i = value.toUInt(nullptr,10)/1024;
 //                varmSize = i + "G";
 //            }
-            break;
+//            break;
+//        }
+        QRegExp reg("RAM=[0-9]*M");
+        int index = line.indexOf(reg);
+        if (index != -1) {
+            qDebug() << index;
+            qDebug() << reg.cap(0);
+            QString varm = "VRAM";
+            index = reg.cap(0).indexOf("=");
+            QString sizeStr = reg.cap(0).mid(index + 1);
+            sizeStr.replace("M", "MB");
+            varmSize = sizeStr;
+            value.insert(varm, sizeStr);
         }
+        else {
+            reg.setPattern("VRAM: [0-9]* MiB");
+            index = line.indexOf(reg);
+            if (index != -1) {
+                qDebug() << index;
+                qDebug() << reg.cap(0);
+                QString varm = "VRAM";
+                index = reg.cap(0).indexOf(":");
+                QString sizeStr = reg.cap(0).mid(index + 1).trimmed();
+                sizeStr.replace("MiB", " MB");
+                varmSize = sizeStr;
+                value.insert(varm, sizeStr);
+            }
+        }
+
     }
     db.insert(key, value);
     toolDatabase_["dmesgVRAM"] = db;
+    toolDatabaseSecondOrder_["dmesgVRAM"].append(key);
     return true;
 }
 int DeviceInfoParser::judgeResolution(QString &current, QString &max, QString &min)

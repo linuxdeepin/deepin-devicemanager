@@ -86,11 +86,17 @@ void DisplayadapterWidget::initWidget()
 // 显存字段
         ArticleStruct graphicMemory(tr("Graphic Memory"));
         //end with a empty char,for avoiding this article to be hidden
+//        graphicMemory.queryData("dmesgVARM","")
 //        graphicMemory.value = QString("%1 ").arg(tr("Unknown"));
-
         graphicMemory.value = DeviceInfoParser::Instance().varmSize;
-        articles.push_back(graphicMemory);
-        existArticles.insert("Memory");
+        if (graphicMemory.value.contains("Unknown")) {
+            existArticles.insert("Memory");
+        } else {
+            articles.push_back(graphicMemory);
+            existArticles.insert("Memory");
+       }
+//        articles.push_back(graphicMemory);
+//        existArticles.insert("Memory");
 
         if (i < screenList.size()) {
             QString screenName = screenList[i];
