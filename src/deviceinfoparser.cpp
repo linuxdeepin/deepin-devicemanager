@@ -1480,6 +1480,8 @@ bool DeviceInfoParser::loadDmesgVram()
     QMap<QString, QString> value;
     foreach (auto line, lines) {
 //        if (line.contains("VRAM",Qt::CaseSensitive)) {
+//        QRegExp rx("^([\\s\\S][\\s\\S])(\\s\\SRAM)$");
+//        if (rx.exactMatch(line)) {
 //            QString varm = "VRAM";
 //            int pos = line.lastIndexOf(":");
 //            value.insert(varm, line.mid(pos));
@@ -1492,12 +1494,12 @@ bool DeviceInfoParser::loadDmesgVram()
 //            varmSize = QString::number(ivarmSize,10) + "GB";
 
 //            QRegExp rxlen("(^\\d+$)(Mit|M)*");
-//            int pos1 = rxlen.indexIn(varmSize);
+//            int pos1 = rxlen.indexIn("RAM=");
 //            if(pos1 > -1){
 //                QString value = rxlen.cap(0);//取出数字
 //                QString unit = rxlen.cap(1);//取出单位
 //                uint i = value.toUInt(nullptr,10)/1024;
-//                varmSize = i + "G";
+//                varmSize = QString::number(i) + " G";
 //            }
 //            break;
 //        }
@@ -1527,7 +1529,6 @@ bool DeviceInfoParser::loadDmesgVram()
                 value.insert(varm, sizeStr);
             }
         }
-
     }
     db.insert(key, value);
     toolDatabase_["dmesgVRAM"] = db;

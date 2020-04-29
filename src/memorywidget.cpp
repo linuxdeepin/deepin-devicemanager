@@ -41,7 +41,7 @@ void MemoryWidget::initWidget()
     auto resultFromDmi = DeviceInfoParser::Instance().getDmidecodeMemoryList();
     if (resultFromDmi.isEmpty() == false) {
         //添加表头
-        int memoryNumber = hasNumerMemory();
+//        int memoryNumber = hasNumerMemory();
         init_l_Designer_l_TableWdiget();
         //显示界面
         if (update_l_Designer_l_WholeDownWidget()) {
@@ -126,9 +126,15 @@ void MemoryWidget::initWidget()
 
                 //3311
                 if (key == QString("size")) {
-                    double realSize = totalMemorySize();
-                    //QString size4 = QString("%1").arg(size3).mid() + "GB";
-                    art.value = QString::number(realSize, 'f', 1) + " GB";
+//                    double realSize = totalMemorySize();
+//                    //QString size4 = QString("%1").arg(size3).mid() + "GB";
+//                    art.value = QString::number(realSize) + " GB";
+                    if (art.value.contains("MiB") || art.value.contains("M")) {
+                        int pos = art.value.indexOf('M');
+                        art.value = QString::number(art.value.mid(pos).toInt() / 1024) + "GB";
+                    }else if (art.value.contains("GiB") || art.value.contains(" GB")) {
+                        art.value.replace("GiB","GB");
+                    }
 
                     overviewInfo_.value += overviewInfo_.value.isEmpty() ? "" : " / ";
                     overviewInfo_.value += art.value;
@@ -157,8 +163,8 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
 
     QList<QStringList> tabList;
     //从sysinfo的DBus获取总的内存
-    double totalRealSize = totalMemorySize();
-    int totalSize = sizeMap.value("totalSize");
+//    double totalRealSize = totalMemorySize();
+//    int totalSize = sizeMap.value("totalSize");
 
     foreach (const QString &mem, memList) {
         if (canUpgrade_ == -1) {
@@ -168,6 +174,12 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
         QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
         QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");//3311
         QString realSize = nullptr;
+        if (size.contains(" MB")) {
+            int pos = size.simplified().indexOf('M');
+            realSize = QString::number(size.mid(0, pos - 1).toInt() / 1024) + " GB";
+        } else if (size.contains(" GB")) {
+            realSize = size;
+        }
 
         if (isSlotValid(size, speed) == false) {
             canUpgrade_ = 1;
@@ -179,15 +191,16 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
 //            canUpgrade_ = 1;
 //            continue;
 //        }
-        if (sizeMap.contains(mem) ) {
-            realSize = QString::number(totalSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
-        }
+//        if (sizeMap.contains(mem) ) {
+//            realSize = QString::number(totalRealSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
+//        }
 
         QStringList tab = {
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Part Number"),
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Manufacturer"),
             DeviceInfoParser::Instance().queryData("dmidecode", mem, "Type"),
             speed,
+//            realSize
             realSize
             //3311
 
@@ -223,21 +236,22 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         foreach (const QString &mem, memList) {
             ArticleStruct strMem(tr("Size"));
             strMem.queryData("dmidecode", mem, "Size");
-            if (strMem.isValid() && strMem.value.contains(" ")) {
+            if (strMem.isValid() && strMem.value.contains(" MB")) {
                 QStringList lst = strMem.value.split(" ");
                 int memInstelled = lst.first().toInt();
                 if (memInstelled > 0) {
-                    total += memInstelled;
+                    total += memInstelled / 1024;
                     unitStr = lst.last();
                 }
             }
         }
 
-        size.value = QString::number(total) + " " + unitStr;
+        size.value = QString::number(total) + " GB";
     }
 
     size.value.replace("GiB", " GB");
     size.value.replace("MiB", " MB");
+    overviewInfo_.value = size.value;
     articles.push_back(size);
 
     ArticleStruct mc(tr("Maximum Capacity"));
@@ -262,9 +276,9 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
     articles.clear();
     QSet<QString> existArticles;
-    double totalRealSize = totalMemorySize();
-    QString realSize = QString::number(totalRealSize, 'f', 1) + " GB";
-    int totalSize = sizeMap.value("totalSize");
+//    double totalRealSize = totalMemorySize();
+//    QString realSize = QString::number(totalRealSize, 'f', 1) + " GB";
+//    int totalSize = sizeMap.value("totalSize");
 
     QStringList detailMem;
     foreach (const QString &mem, memList) {
@@ -289,10 +303,17 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         //3311
         ArticleStruct size(tr("Size", "memory's size"));
         // 获取机器总的内存大小
-        if (sizeMap.contains(mem) ) {
-            size.value = QString::number(totalSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
-        }
+//        if (sizeMap.contains(mem) ) {
+//            size.value = QString::number(totalRealSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
+//        }
         //    QString size4 = QString("%1").arg(size3).mid() + "GB";
+        size.queryData("dmidecode",mem,"Size");
+        if (size.value.contains(" MB")) {
+            int pos = size.value.simplified().indexOf('M');
+            size.value = QString::number(size.value.mid(0, pos - 1).toInt() / 1024) + " GB";
+        } else if (size.value.contains(" GB")) {
+            size.value = size.value;
+        }
         articles.push_back(size);
         existArticles.insert("Size");
 
@@ -415,7 +436,8 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         return false;
     }
 
-    overviewInfo_.value = QString::number(totalSize) + "GB";   // 显示实际安装大小
+//    overviewInfo_.value = QString::number(totalSize) + "GB";   // 显示实际安装大小
+//    overviewInfo_.value =
     if (detailMem.size() > 0) {
         QString detail = detailMem.join(" / ");
         if (detail.isEmpty() == false) {
