@@ -180,7 +180,7 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
 //            continue;
 //        }
         if (sizeMap.contains(mem) ) {
-            realSize = QString::number(totalRealSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
+            realSize = QString::number(totalSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
         }
 
         QStringList tab = {
@@ -290,7 +290,7 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         ArticleStruct size(tr("Size", "memory's size"));
         // 获取机器总的内存大小
         if (sizeMap.contains(mem) ) {
-            size.value = QString::number(totalRealSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
+            size.value = QString::number(totalSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
         }
         //    QString size4 = QString("%1").arg(size3).mid() + "GB";
         articles.push_back(size);
@@ -415,7 +415,7 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         return false;
     }
 
-    overviewInfo_.value = realSize;
+    overviewInfo_.value = QString::number(totalSize) + "GB";   // 显示实际安装大小
     if (detailMem.size() > 0) {
         QString detail = detailMem.join(" / ");
         if (detail.isEmpty() == false) {
