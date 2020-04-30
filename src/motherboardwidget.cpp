@@ -25,6 +25,7 @@
 #include <DApplication>
 #include "commondefine.h"
 #include <QDBusInterface>
+#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 
@@ -392,9 +393,18 @@ void MotherboardWidget::addMemoryInfo()
     ArticleStruct slotCount(tr("Slot Count"));
     slotCount.queryData("dmidecode", "Physical Memory Array", "Number Of Devices");
     articles.push_back(slotCount);
-//为了统一内存大小，调用系统DBUS接口。此处只能显示总的内存大小
+    //此处从lshw中读取memory的总的内存大小,如果读不到，从dmidecode中读取。
     ArticleStruct size(tr("Size","Computer_core_memory"));
     size.queryData("lshw", "Computer_core_memory", "size");
+//    qDebug() << size.value;
+    if (size.value.contains("GiB")) {
+        size.value.replace("GiB"," GB");
+    } else if (size.value.contains("MiB")) {
+        int pos = size.value.indexOf('M');
+        int size1 = size.value.mid(0,pos).toInt() / 1024;
+//        qDebug() << size1;
+        size.value = QString::number(size1) + " GB";
+    }
 
     if(size.isValid() == false)
     {
@@ -411,13 +421,19 @@ void MotherboardWidget::addMemoryInfo()
                 int memInstelled = lst.first().toInt();
                 if(memInstelled > 0)
                 {
-                    total += memInstelled;
+//                    total += memInstelled;
                     unitStr = lst.last();
+                    if (unitStr.contains("MB")) {
+                        total += memInstelled / 1024;
+                    } else if (unitStr.contains("GB")) {
+                        total += memInstelled;
+                    }
                 }
+                lst.clear();
             }
         }
 
-        size.value = QString::number(total) + " " + unitStr;
+        size.value = QString::number(total) + " GB";
     }
 
     //因为内存大小不统一，根据pms17604任务，统一调用系统DBUS接口，显示实际大小
@@ -428,8 +444,8 @@ void MotherboardWidget::addMemoryInfo()
 //    double size3 = size2 / 1024;
 //    double size4 = size3 / 1024;
 //    size.value = QString::number(size4, 'f', 1) + " GB";
-    size.value.replace( "GiB", " GB" );
-    size.value.replace( "MiB", " MB" );
+//    size.value.replace( "GiB", " GB" );
+//    size.value.replace( "MiB", " MB" );
     articles.push_back(size);
 
     ArticleStruct mc(tr("Maximum Capacity","PhysicMemory"));

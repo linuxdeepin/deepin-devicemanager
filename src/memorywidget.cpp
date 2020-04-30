@@ -41,7 +41,7 @@ void MemoryWidget::initWidget()
     auto resultFromDmi = DeviceInfoParser::Instance().getDmidecodeMemoryList();
     if (resultFromDmi.isEmpty() == false) {
         //添加表头
-//        int memoryNumber = hasNumerMemory();
+        int memoryNumber = hasNumerMemory();
         init_l_Designer_l_TableWdiget();
         //显示界面
         if (update_l_Designer_l_WholeDownWidget()) {
@@ -129,9 +129,9 @@ void MemoryWidget::initWidget()
 //                    double realSize = totalMemorySize();
 //                    //QString size4 = QString("%1").arg(size3).mid() + "GB";
 //                    art.value = QString::number(realSize) + " GB";
-                    if (art.value.contains("MiB") || art.value.contains("M")) {
+                    if (art.value.contains("MiB") || art.value.contains("MB")) {
                         int pos = art.value.indexOf('M');
-                        art.value = QString::number(art.value.mid(pos).toInt() / 1024) + "GB";
+                        art.value = QString::number(art.value.mid(pos).toInt() / 1024) + " GB";
                     }else if (art.value.contains("GiB") || art.value.contains(" GB")) {
                         art.value.replace("GiB","GB");
                     }
@@ -227,6 +227,14 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
     ArticleStruct size(tr("Size"));
     size.queryData("lshw", "Computer_core_memory", "size");
     //从lshw中获取memory的大小
+    if (size.value.contains("GiB")) {
+        size.value.replace("GiB"," GB");
+    } else if (size.value.contains("MiB")) {
+        int pos = size.value.indexOf('M');
+        int size1 = size.value.mid(0,pos).toInt() / 1024;
+//        qDebug() << size1;
+        size.value = QString::number(size1) + " GB";
+    }
 
     if (size.isValid() == false) {
         int total = 0;
@@ -240,18 +248,24 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
                 QStringList lst = strMem.value.split(" ");
                 int memInstelled = lst.first().toInt();
                 if (memInstelled > 0) {
-                    total += memInstelled / 1024;
+//                    total += memInstelled / 1024;
                     unitStr = lst.last();
+                    if (unitStr.contains("MB")) {
+                        total += memInstelled / 1024;
+                    } else if (unitStr.contains("GB")) {
+                        total += memInstelled;
+                    }
                 }
+                lst.clear();
             }
         }
 
         size.value = QString::number(total) + " GB";
     }
 
-    size.value.replace("GiB", " GB");
-    size.value.replace("MiB", " MB");
-    overviewInfo_.value = size.value;
+//    size.value.replace("GiB", " GB");
+//    size.value.replace("MiB", " MB");
+//    overviewInfo_.value = size.value;
     articles.push_back(size);
 
     ArticleStruct mc(tr("Maximum Capacity"));
@@ -278,7 +292,7 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
     QSet<QString> existArticles;
 //    double totalRealSize = totalMemorySize();
 //    QString realSize = QString::number(totalRealSize, 'f', 1) + " GB";
-//    int totalSize = sizeMap.value("totalSize");
+    int totalSize = sizeMap.value("totalSize");
 
     QStringList detailMem;
     foreach (const QString &mem, memList) {
@@ -436,7 +450,7 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         return false;
     }
 
-//    overviewInfo_.value = QString::number(totalSize) + "GB";   // 显示实际安装大小
+    overviewInfo_.value = QString::number(totalSize) + " GB";   // 显示实际安装大小,此值从dmidecode获得，所有size相加，单位“GB”
 //    overviewInfo_.value =
     if (detailMem.size() > 0) {
         QString detail = detailMem.join(" / ");
