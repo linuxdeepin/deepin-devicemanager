@@ -675,7 +675,7 @@ QString MonitorWidget::getMonitorSizeFromEDID(int index)
     if (height <= 0) return  "";
     if (width <= 0)return  "";
     double inchx = std::sqrt(height * height + width * width) / 2.54;
-//    inchx += 0.05;
+    inchx += 0.05;
     QString inchStr_tr = tr("inch");
     QString ret = QString("%1 %2(%3x%4 %5)").arg(QString::number(inchx, '0', 1)).arg(inchStr_tr).arg(width).arg(height).arg(tr("cm", "size unit"));
     return ret;
