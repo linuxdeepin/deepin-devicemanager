@@ -519,7 +519,7 @@ QStringList DeviceInfoParser::getHwinfoDiskList()
             return false;
         }
 
-        if(DeviceInfoParser::Instance().toolDatabase_["Storage"][fk]["Capacity"].startsWith("0 "))
+        if (DeviceInfoParser::Instance().toolDatabase_["Storage"][fk]["Capacity"].startsWith("0 "))
         {
             return false;
         }
@@ -540,7 +540,7 @@ QStringList DeviceInfoParser::getHwinfoOtherUSBList()
                 fk.contains("disk", Qt::CaseInsensitive) ||
                 fk.contains("Bluetooth", Qt::CaseInsensitive) ||
                 fk.contains("Printer", Qt::CaseInsensitive) ||
-                fk.contains("Unclassified device",Qt::CaseInsensitive))
+                fk.contains("Unclassified device", Qt::CaseInsensitive))
         {
             return false;
         }
@@ -587,10 +587,10 @@ QString DeviceInfoParser::getEDID(int index)
     QString edid("");
     foreach (auto firstKey, monitorList) {
         edid = queryData("xrandr", firstKey, QString("EDID__%1").arg(index));
-        if(i == index){
+        if (i == index) {
             if (tr("Unknown") != edid  && edid.count() % (QString("00ffffffffffff0030aed86100000000").count() + 1) == 0) {
                 break;
-            }else{
+            } else {
                 return "";
             }
         }
@@ -728,7 +728,7 @@ QStringList DeviceInfoParser::getLshwCameraList()
         if (true == DeviceInfoParser::Instance().toolDatabase_["lshw"][fk].contains("product"))
         {
             if (DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["product"].contains("Camera", Qt::CaseInsensitive) &&
-                     DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("controller", Qt::CaseInsensitive) == false) {
+                    DeviceInfoParser::Instance().toolDatabase_["lshw"][fk]["description"].contains("controller", Qt::CaseInsensitive) == false) {
                 DeviceInfoParser::Instance().orderedDevices.insert(fk);
                 return true;
             }
@@ -755,7 +755,8 @@ QStringList DeviceInfoParser::getHwinfoCameraList()
 {
     checkValueFun_t func = [](const QString & fk)->bool {
 
-        if (DeviceInfoParser::Instance().toolDatabase_["hwinfo_usb"][fk].contains("Device File") == false) {
+        if (DeviceInfoParser::Instance().toolDatabase_["hwinfo_usb"][fk].contains("Device File") == false)
+        {
             return false;
         }
 
@@ -1121,11 +1122,12 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
 
         const QString &fk = toolDatabaseSecondOrder_["lshw"][i];
 
-        if(toolDatabase_["lshw"][fk]["description"].compare("Generic USB device", Qt::CaseInsensitive) == 0
+        if (toolDatabase_["lshw"][fk]["description"].compare("Generic USB device", Qt::CaseInsensitive) == 0
                 || toolDatabase_["lshw"][fk]["description"].compare("Human interface device", Qt::CaseInsensitive) == 0
-                || toolDatabase_["lshw"][fk]["description"].compare("Mass storage device", Qt::CaseInsensitive) == 0){
+                || toolDatabase_["lshw"][fk]["description"].compare("Mass storage device", Qt::CaseInsensitive) == 0) {
 
-            if (toolDatabase_["lshw"][fk]["driver"].contains("storage", Qt::CaseInsensitive) == true) {
+            if (toolDatabase_["lshw"][fk]["driver"].contains("storage", Qt::CaseInsensitive) == true \
+                    || toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) == true) {
                 continue;
             }
             otherDeviceList.push_back(fk);
@@ -1265,8 +1267,7 @@ QStringList DeviceInfoParser::getLshwCDRomList()
     }
 
     foreach (const QString &fk, toolDatabaseSecondOrder_["lshw"]) {
-        if(fk.contains("medium"))
-        {
+        if (fk.contains("medium")) {
             continue;
 
         }
@@ -1365,13 +1366,13 @@ bool DeviceInfoParser::isHuaweiAndroidUos()
 QString DeviceInfoParser::getLsbRelease()
 {
     DSysInfo::DeepinType type = DSysInfo::deepinType();
-    if(DSysInfo::DeepinProfessional == type){
+    if (DSysInfo::DeepinProfessional == type) {
         return "UOS 20";
-    }else if(DSysInfo::DeepinPersonal == type){
+    } else if (DSysInfo::DeepinPersonal == type) {
         return "UOS 20 Home";
-    }else if(DSysInfo::DeepinDesktop == type){
+    } else if (DSysInfo::DeepinDesktop == type) {
         return "Deepin 20 Beta";
-    }else{
+    } else {
         return lsbRelease_.toUpper();
     }
 }
@@ -1466,7 +1467,7 @@ bool DeviceInfoParser::loadlsb_release()
 // 为了获得显存的容量
 bool DeviceInfoParser::loadDmesgVram()
 {
-    if(false == executeProcess("sudo dmesg")){
+    if (false == executeProcess("sudo dmesg")) {
         return false;
     }
     QString dmesgVarm = standOutput_;
@@ -1520,8 +1521,7 @@ bool DeviceInfoParser::loadDmesgVram()
             sizeStr.replace("M", "MB");
             varmSize = sizeStr;
             value.insert(varm, sizeStr);
-        }
-        else {
+        } else {
             reg.setPattern("VRAM: [0-9]* MiB");
             index = line.indexOf(reg);
             if (index != -1) {
@@ -1979,7 +1979,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
             index_type = index;
         }
         // RM 代表介质类型
-        if(it.compare("RM", Qt::CaseInsensitive) == 0) {
+        if (it.compare("RM", Qt::CaseInsensitive) == 0) {
             index_rm = index;
         }
         index++;
@@ -2670,15 +2670,15 @@ bool DeviceInfoParser::loadSomeXrandrDatabase()
             minResolution = resolutionList1[0].remove("minimum ");
             maxResolution = resolutionList1[2].remove("maximum ");
         }
-        if (line.contains("*",Qt::CaseSensitive)) {
+        if (line.contains("*", Qt::CaseSensitive)) {
 //            QRegExp reCurrent("[ ]([0-9]\\d*x[0-9]\\d*)");
             //此处用正则表达式最好
             QString current = "currentResolutionRefresh";
             int pos = line.lastIndexOf("*");
-            value.insert(current, line.mid(pos - 5 , pos));
+            value.insert(current, line.mid(pos - 5, pos));
             // 显示 显示屏的当前 分辨率和刷新率
             QStringList currentLine = line.simplified().split(" ");
-            for (int i = 0; i < currentLine.size(); i++){
+            for (int i = 0; i < currentLine.size(); i++) {
 //                qDebug() << currentLine[i];
                 if (currentLine[i].contains("*")) {
                     refreshRatio = currentLine[i].remove("*");
@@ -3477,8 +3477,7 @@ void DeviceInfoParser::addACameraInfo(const QString &name, const QString &conten
         toolDatabase_["hwinfo_usb"].insert(name, DeviceInfoMap);
         secondOrder.removeDuplicates();
         toolDatabaseSecondOrder_["hwinfo_usb"].append(secondOrder);
-    }
-    else {
+    } else {
         toolDatabase_["hwinfo_usb"] = hwInfo_camera;
         secondOrder.removeDuplicates();
         toolDatabaseSecondOrder_["hwinfo_usb"] = secondOrder;
