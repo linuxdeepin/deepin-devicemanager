@@ -238,7 +238,7 @@ void PrinterWidget::initWidget()
         articles.push_back(printColorMode);
         existArticles.insert("print-color-mode");
 
-        ArticleStruct printerInfo(tr("PrinterInfo"));
+        ArticleStruct printerInfo(tr("Printer Info"));
         printerInfo.queryData("Cups", device, "printer-info");
         articles.push_back(printerInfo);
         existArticles.insert("printer-info");
@@ -320,8 +320,8 @@ void PrinterWidget::initWidget()
     }
 
     if (printerList.size() > 1) {
-        QStringList headers = { tr("printer-info", "Printer Info,shown on first column of table's head"),
-                                tr("printer-make-and-model", "Printer Info,shown on second column of table's head ")
+        QStringList headers = { tr("Printer Info", "Printer Info,shown on first column of table's head"),
+                                tr("Printer Make And Model", "Printer Info,shown on second column of table's head ")
                               };
         addTable(headers, tabList);
     }

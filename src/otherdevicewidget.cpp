@@ -61,11 +61,15 @@ void OtherDevicesWidget::loadWidget()
         addArticleStruct(tr("Width"), "lshw", device, "width");
         addArticleStruct(tr("Clock"), "lshw", device, "clock");
         addArticleStruct(tr("Capabilities"), "lshw", device, "capabilities");
-        addArticleStruct(tr("driver"),"lshw",device,"driver");
-        addArticleStruct(tr("irq"),"lshw",device,"irq");
-        addArticleStruct(tr("latency"),"lshw",device,"latency");
-        addArticleStruct(tr("memory"),"lshw",device,"memory");
-        addArticleStruct(tr("pci"),"lshw",device,"pci");
+        addArticleStruct(tr("Driver"),"lshw",device,"driver");
+        addArticleStruct(tr("IRQ"),"lshw",device,"irq");
+        addArticleStruct(tr("Latency"),"lshw",device,"latency");
+        addArticleStruct(tr("Memory"),"lshw",device,"memory");
+        addArticleStruct(tr("PCI"),"lshw",device,"pci");
+        addArticleStruct(tr("Logical Name"),"lshw",device,"logical name");
+        addArticleStruct(tr("Slots"),"lshw",device,"slots");
+        addArticleStruct(tr("Speed"),"lshw",device,"speed");
+        addArticleStruct(tr("USB Host"),"lshw",device,"usbhost");
 
         // 添加未显示的属性
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, m_articles, m_existArticles,"ManulTrack__OtherDevice","OtherDevice information");

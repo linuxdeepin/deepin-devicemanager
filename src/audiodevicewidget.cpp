@@ -106,11 +106,11 @@ void AudiodeviceWidget::addLshwAudioInfo(const QString &item, QStringList &tabIt
     ArticleStruct width(tr("Width", "Audio Device Info"));
     width.queryData("lshw", item, "width", existArticles, articles);
 
-    ArticleStruct multimediaNum(tr("multimedia", "Audio Device Info"));
+    ArticleStruct multimediaNum(tr("Multimedia", "Audio Device Info"));
     multimediaNum.queryData("lshw", item, "multimedia", existArticles, articles);
     articles.push_back(multimediaNum);
 
-    ArticleStruct physicalId(tr("physical id", "Audio Device Info"));
+    ArticleStruct physicalId(tr("Physical ID", "Audio Device Info"));
     physicalId.queryData("lshw", item, "physical id", existArticles, articles);
 
     ArticleStruct clock(tr("Clock", "Audio Device Info"));
@@ -119,16 +119,16 @@ void AudiodeviceWidget::addLshwAudioInfo(const QString &item, QStringList &tabIt
     ArticleStruct capabilities(tr("Capabilities", "Audio Device Info"));
     capabilities.queryData("lshw", item, "capabilities", existArticles, articles);
 
-    ArticleStruct driver(tr("driver", "Audio Device Info"));
+    ArticleStruct driver(tr("Driver", "Audio Device Info"));
     driver.queryData("lshw", item, "driver", existArticles, articles);
 
-    ArticleStruct irq(tr("irq", "Audio Device Info"));
+    ArticleStruct irq(tr("IRQ", "Audio Device Info"));
     irq.queryData("lshw", item, "irq", existArticles, articles);
 
-    ArticleStruct latency(tr("latency", "Audio Device Info"));
+    ArticleStruct latency(tr("Latency", "Audio Device Info"));
     latency.queryData("lshw", item, "latency", existArticles, articles);
 
-    ArticleStruct memory(tr("memory", "Audio Device Info"));
+    ArticleStruct memory(tr("Memory", "Audio Device Info"));
     memory.queryData("lshw", item, "memory", existArticles, articles);
 
     ArticleStruct type(tr("Type", "Audio Device Info"));
@@ -296,12 +296,12 @@ void AudiodeviceWidget::initWidget()
         articles.push_back(width);
         existArticles.insert("width");
 
-        ArticleStruct multimediaNum(tr("multimedia", "Audio Device Info"));
+        ArticleStruct multimediaNum(tr("Multimedia", "Audio Device Info"));
         multimediaNum.queryData("lshw", multimedia, "multimedia", existArticles, articles);
         articles.push_back(multimediaNum);
         existArticles.insert("multimedia");
 
-        ArticleStruct physicalId(tr("physical id", "Audio Device Info"));
+        ArticleStruct physicalId(tr("Physical ID", "Audio Device Info"));
         physicalId.queryData("lshw", multimedia, "physical id", existArticles, articles);
         articles.push_back(physicalId);
         existArticles.insert("physical id");
@@ -316,22 +316,22 @@ void AudiodeviceWidget::initWidget()
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        ArticleStruct driver(tr("driver", "Audio Device Info"));
+        ArticleStruct driver(tr("Driver", "Audio Device Info"));
         driver.queryData("lshw", multimedia, "driver", existArticles, articles);
         articles.push_back(driver);
         existArticles.insert("driver");
 
-        ArticleStruct irq(tr("irq", "Audio Device Info"));
+        ArticleStruct irq(tr("IRQ", "Audio Device Info"));
         irq.queryData("lshw", multimedia, "irq", existArticles, articles);
         articles.push_back(irq);
         existArticles.insert("irq");
 
-        ArticleStruct latency(tr("latency", "Audio Device Info"));
+        ArticleStruct latency(tr("Latency", "Audio Device Info"));
         latency.queryData("lshw", multimedia, "latency", existArticles, articles);
         articles.push_back(latency);
         existArticles.insert("latency");
 
-        ArticleStruct memory(tr("memory", "Audio Device Info"));
+        ArticleStruct memory(tr("Memory", "Audio Device Info"));
         memory.queryData("lshw", multimedia, "memory", existArticles, articles);
         articles.push_back(memory);
         existArticles.insert("memory");

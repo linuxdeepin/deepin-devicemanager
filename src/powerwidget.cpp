@@ -86,8 +86,9 @@ void PowerWidget::initWidget()
             ArticleStruct device1(tr("Device"));
             device1.queryData( "upower", device.value, "Device", existArticles1, articles);
 
-            ArticleStruct criticalAction(tr("Critical Action"));
-            criticalAction.queryData( "upower", device.value, "critical-action", existArticles1, articles);
+//            ArticleStruct criticalAction(tr("Critical Action"));
+//            criticalAction.queryData( "upower", device.value, "critical-action", existArticles1, articles);
+            existArticles1.insert("critical-action");
 
             ArticleStruct daemonVersion(tr("Daemon Version"));
             daemonVersion.queryData( "upower", device.value, "daemon-version", existArticles1, articles);

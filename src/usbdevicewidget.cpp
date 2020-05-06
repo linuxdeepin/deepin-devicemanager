@@ -91,7 +91,7 @@ void UsbdeviceWidget::loadUSBWidgetFromhwinfo()
         addArticleStruct(tr("Status"), "USB", device, "Config Status");
         addArticleStruct(tr("Driver"), "USB", device, "Driver");
         addArticleStruct(tr("Speed"), "USB", device, "Speed");
-        addArticleStruct(tr("BusID"), "USB", device, "SysFS BusID");
+        addArticleStruct(tr("Bus ID"), "USB", device, "SysFS BusID");
         ArticleStruct description = addArticleStruct(tr("Description"), "USB", device, "description");
         addArticleStruct(tr("Unique ID"), "USB", device, "Unique ID");
         addArticleStruct(tr("SysFS ID"), "USB", device, "SysFS ID");

@@ -174,87 +174,87 @@ void NetworkadapterWidget::initWidget()
         articles.push_back(type);
         existArticles.insert("Type");
 
-        ArticleStruct autonegotiation(tr("autonegotiation"));
+        ArticleStruct autonegotiation(tr("Auto Negotiation"));
         vendor.queryData("lshw", networkadapter, "autonegotiation");
         articles.push_back(autonegotiation);
         existArticles.insert("autonegotiation");
 
-        ArticleStruct broadcast(tr("broadcast"));
+        ArticleStruct broadcast(tr("Broadcast"));
         broadcast.queryData("lshw", networkadapter, "broadcast");
         articles.push_back(broadcast);
         existArticles.insert("broadcast");
 
-        ArticleStruct capacity(tr("capacity"));
+        ArticleStruct capacity(tr("Capacity"));
         capacity.queryData("lshw", networkadapter, "capacity");
         articles.push_back(capacity);
         existArticles.insert("capacity");
 
-        ArticleStruct driver(tr("driver"));
+        ArticleStruct driver(tr("Driver"));
         driver.queryData("lshw", networkadapter, "driver");
         articles.push_back(driver);
         existArticles.insert("driver");
 
-        ArticleStruct driverversion(tr("driverversion"));
+        ArticleStruct driverversion(tr("Driver Version"));
         driverversion.queryData("lshw", networkadapter, "driverversion");
         articles.push_back(driverversion);
         existArticles.insert("driverversion");
 
-        ArticleStruct duplex(tr("duplex"));
+        ArticleStruct duplex(tr("Duplex"));
         duplex.queryData("lshw", networkadapter, "duplex");
         articles.push_back(duplex);
         existArticles.insert("duplex");
 
-        ArticleStruct firmware(tr("firmware"));
+        ArticleStruct firmware(tr("Firmware"));
         firmware.queryData("lshw", networkadapter, "firmware");
         articles.push_back(firmware);
         existArticles.insert("firmware");
 
-        ArticleStruct ioport(tr("ioport"));
+        ArticleStruct ioport(tr("I/O Port"));
         ioport.queryData("lshw", networkadapter, "ioport");
         articles.push_back(ioport);
         existArticles.insert("ioport");
 
-        ArticleStruct ip(tr("ip"));
+        ArticleStruct ip(tr("IP"));
         ip.queryData("lshw", networkadapter, "ip");
         articles.push_back(ip);
         existArticles.insert("ip");
 
-        ArticleStruct irq(tr("irq"));
+        ArticleStruct irq(tr("IRQ"));
         irq.queryData("lshw", networkadapter, "irq");
         articles.push_back(irq);
         existArticles.insert("irq");
 
-        ArticleStruct latency(tr("latency"));
+        ArticleStruct latency(tr("Latency"));
         latency.queryData("lshw", networkadapter, "latency");
         articles.push_back(latency);
         existArticles.insert("latency");
 
-        ArticleStruct link(tr("link"));
+        ArticleStruct link(tr("Link"));
         link.queryData("lshw", networkadapter, "link");
         articles.push_back(link);
         existArticles.insert("link");
 
-        ArticleStruct memory(tr("memory"));
+        ArticleStruct memory(tr("Memory"));
         memory.queryData("lshw", networkadapter, "memory");
         articles.push_back(memory);
         existArticles.insert("memory");
 
-        ArticleStruct multicast(tr("multicast"));
+        ArticleStruct multicast(tr("Multicast"));
         multicast.queryData("lshw", networkadapter, "multicast");
         articles.push_back(multicast);
         existArticles.insert("multicast");
 
-        ArticleStruct physicalId(tr("physical id"));
+        ArticleStruct physicalId(tr("Physical ID"));
         physicalId.queryData("lshw", networkadapter, "physical id");
         articles.push_back(physicalId);
         existArticles.insert("physical id");
 
-        ArticleStruct port(tr("port"));
+        ArticleStruct port(tr("Port"));
         port.queryData("lshw", networkadapter, "port");
         articles.push_back(port);
         existArticles.insert("port");
 
-        ArticleStruct size(tr("size"));
+        ArticleStruct size(tr("Size"));
         size.queryData("lshw", networkadapter, "size");
         articles.push_back(ioport);
         existArticles.insert("size");

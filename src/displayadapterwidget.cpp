@@ -148,32 +148,32 @@ void DisplayadapterWidget::initWidget()
         articles.push_back(type);
         existArticles.insert("Type");
 
-        ArticleStruct busInfo(tr("bus info"));
+        ArticleStruct busInfo(tr("Bus Info"));
         busInfo.queryData("lshw", displayadapter, "bus info");
         articles.push_back(busInfo);
         existArticles.insert("bus info");
 
-        ArticleStruct ioport(tr("ioport"));
+        ArticleStruct ioport(tr("I/O Port"));
         ioport.queryData("lshw", displayadapter, "ioport");
         articles.push_back(ioport);
         existArticles.insert("ioport");
 
-        ArticleStruct irq(tr("irq"));
+        ArticleStruct irq(tr("IRQ"));
         irq.queryData("lshw", displayadapter, "irq");
         articles.push_back(irq);
         existArticles.insert("irq");
 
-        ArticleStruct latency(tr("latency"));
+        ArticleStruct latency(tr("Latency"));
         ioport.queryData("lshw", displayadapter, "latency");
         articles.push_back(ioport);
         existArticles.insert("latency");
 
-        ArticleStruct memory(tr("memory"));
+        ArticleStruct memory(tr("Memory"));
         memory.queryData("lshw", displayadapter, "memory");
         articles.push_back(memory);
         existArticles.insert("memory");
 
-        ArticleStruct physicalId(tr("physical id"));
+        ArticleStruct physicalId(tr("Physical ID"));
         physicalId.queryData("lshw", displayadapter, "physical id");
         articles.push_back(physicalId);
         existArticles.insert("physical id");

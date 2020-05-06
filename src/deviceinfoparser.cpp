@@ -1493,7 +1493,8 @@ bool DeviceInfoParser::loadDmesgVram()
 //            uint ivarmSize = varmSize.toUInt(nullptr,10)/1024;
 //            varmSize = QString::number(ivarmSize,10) + "GB";
 
-//            QRegExp rxlen("(^\\d+$)(Mit|M)*");
+//
+        QRegExp rxlen("(^\\d+$)(Mit|M)*");
 //            int pos1 = rxlen.indexIn("RAM=");
 //            if(pos1 > -1){
 //                QString value = rxlen.cap(0);//取出数字

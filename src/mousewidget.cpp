@@ -131,7 +131,7 @@ void MouseWidget::initWidget()
             articles.push_back(driver);
             existArticles.insert("driver");
 
-            ArticleStruct maxpower(tr("Maxpower"));
+            ArticleStruct maxpower(tr("Max Power"));
             maxpower.queryData("lshw", lshwMouse, "maxpower");
             articles.push_back(maxpower);
             existArticles.insert("maxpower");
@@ -141,7 +141,7 @@ void MouseWidget::initWidget()
             articles.push_back(usb);
             existArticles.insert("usb");
 
-            ArticleStruct physicalId(tr("Physical Id"));
+            ArticleStruct physicalId(tr("Physical ID"));
             physicalId.queryData("lshw", lshwMouse, "physical id");
             articles.push_back(physicalId);
             existArticles.insert("physical id");

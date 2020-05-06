@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="cs">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="cs" version="2.1">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -56,25 +54,11 @@
         <translation>Šířka</translation>
     </message>
     <message>
-        <location filename="../src/audiodevicewidget.cpp" line="109"/>
-        <location filename="../src/audiodevicewidget.cpp" line="299"/>
-        <source>multimedia</source>
-        <comment>Audio Device Info</comment>
-        <translation>multimédia</translation>
-    </message>
-    <message>
-        <location filename="../src/audiodevicewidget.cpp" line="113"/>
-        <location filename="../src/audiodevicewidget.cpp" line="304"/>
-        <source>physical id</source>
-        <comment>Audio Device Info</comment>
-        <translation>fyzický identif.</translation>
-    </message>
-    <message>
         <location filename="../src/audiodevicewidget.cpp" line="116"/>
         <location filename="../src/audiodevicewidget.cpp" line="309"/>
         <source>Clock</source>
         <comment>Audio Device Info</comment>
-        <translation>Hodiny</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="119"/>
@@ -84,39 +68,25 @@
         <translation>Schopnosti</translation>
     </message>
     <message>
-        <location filename="../src/audiodevicewidget.cpp" line="122"/>
-        <location filename="../src/audiodevicewidget.cpp" line="319"/>
-        <source>driver</source>
-        <comment>Audio Device Info</comment>
-        <translation>ovladač</translation>
-    </message>
-    <message>
         <location filename="../src/audiodevicewidget.cpp" line="125"/>
         <location filename="../src/audiodevicewidget.cpp" line="324"/>
-        <source>irq</source>
+        <source>IRQ</source>
         <comment>Audio Device Info</comment>
-        <translation>přerušení (irq)</translation>
-    </message>
-    <message>
-        <location filename="../src/audiodevicewidget.cpp" line="128"/>
-        <location filename="../src/audiodevicewidget.cpp" line="329"/>
-        <source>latency</source>
-        <comment>Audio Device Info</comment>
-        <translation>prodleva</translation>
-    </message>
-    <message>
-        <location filename="../src/audiodevicewidget.cpp" line="131"/>
-        <location filename="../src/audiodevicewidget.cpp" line="334"/>
-        <source>memory</source>
-        <comment>Audio Device Info</comment>
-        <translation>operační paměť</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="134"/>
         <location filename="../src/audiodevicewidget.cpp" line="339"/>
         <source>Type</source>
         <comment>Audio Device Info</comment>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <location filename="../src/audiodevicewidget.cpp" line="109"/>
+        <location filename="../src/audiodevicewidget.cpp" line="299"/>
+        <source>Multimedia</source>
+        <comment>Audio Device Info</comment>
+        <translation>Multimédia</translation>
     </message>
     <message>
         <location filename="../src/audiodevicewidget.cpp" line="388"/>
@@ -145,6 +115,34 @@
         <translation>Výrobce</translation>
     </message>
     <message>
+        <location filename="../src/audiodevicewidget.cpp" line="113"/>
+        <location filename="../src/audiodevicewidget.cpp" line="304"/>
+        <source>Physical ID</source>
+        <comment>Audio Device Info</comment>
+        <translation>Fyzický identif.</translation>
+    </message>
+    <message>
+        <location filename="../src/audiodevicewidget.cpp" line="122"/>
+        <location filename="../src/audiodevicewidget.cpp" line="319"/>
+        <source>Driver</source>
+        <comment>Audio Device Info</comment>
+        <translation>Ovladač</translation>
+    </message>
+    <message>
+        <location filename="../src/audiodevicewidget.cpp" line="128"/>
+        <location filename="../src/audiodevicewidget.cpp" line="329"/>
+        <source>Latency</source>
+        <comment>Audio Device Info</comment>
+        <translation>Prodleva</translation>
+    </message>
+    <message>
+        <location filename="../src/audiodevicewidget.cpp" line="131"/>
+        <location filename="../src/audiodevicewidget.cpp" line="334"/>
+        <source>Memory</source>
+        <comment>Audio Device Info</comment>
+        <translation>Operační paměť</translation>
+    </message>
+    <message>
         <location filename="../src/audiodevicewidget.cpp" line="175"/>
         <location filename="../src/audiodevicewidget.cpp" line="382"/>
         <source>Version</source>
@@ -167,189 +165,189 @@
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="101"/>
-        <location filename="../src/bluetoothwidget.cpp" line="245"/>
+        <location filename="../src/bluetoothwidget.cpp" line="251"/>
         <source>Bluetooth Name</source>
-        <translation>Název v Bluetooth</translation>
+        <translation>Název pro Bluetooth</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="58"/>
         <location filename="../src/bluetoothwidget.cpp" line="107"/>
-        <location filename="../src/bluetoothwidget.cpp" line="184"/>
-        <location filename="../src/bluetoothwidget.cpp" line="246"/>
-        <location filename="../src/bluetoothwidget.cpp" line="366"/>
-        <location filename="../src/bluetoothwidget.cpp" line="470"/>
+        <location filename="../src/bluetoothwidget.cpp" line="185"/>
+        <location filename="../src/bluetoothwidget.cpp" line="252"/>
+        <location filename="../src/bluetoothwidget.cpp" line="372"/>
+        <location filename="../src/bluetoothwidget.cpp" line="476"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="111"/>
         <location filename="../src/bluetoothwidget.cpp" line="188"/>
-        <location filename="../src/bluetoothwidget.cpp" line="247"/>
+        <location filename="../src/bluetoothwidget.cpp" line="253"/>
         <source>Product</source>
         <translation>Produkt</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="114"/>
         <location filename="../src/bluetoothwidget.cpp" line="191"/>
-        <location filename="../src/bluetoothwidget.cpp" line="248"/>
+        <location filename="../src/bluetoothwidget.cpp" line="254"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="117"/>
-        <location filename="../src/bluetoothwidget.cpp" line="249"/>
+        <location filename="../src/bluetoothwidget.cpp" line="255"/>
         <source>MAC Address</source>
         <translation>MAC adresa</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="68"/>
-        <location filename="../src/bluetoothwidget.cpp" line="219"/>
+        <location filename="../src/bluetoothwidget.cpp" line="225"/>
         <source>No Bluetooth device found</source>
         <translation>Nenalezena žádná Bluetooth zařízení</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="120"/>
-        <location filename="../src/bluetoothwidget.cpp" line="270"/>
+        <location filename="../src/bluetoothwidget.cpp" line="276"/>
         <source>Serial Number</source>
         <translation>Sériové číslo</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="123"/>
-        <location filename="../src/bluetoothwidget.cpp" line="273"/>
+        <location filename="../src/bluetoothwidget.cpp" line="279"/>
         <source>Link Policy</source>
         <comment>Bluetooth Info</comment>
         <translation>Zásada linky</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="126"/>
-        <location filename="../src/bluetoothwidget.cpp" line="276"/>
+        <location filename="../src/bluetoothwidget.cpp" line="282"/>
         <source>Link Mode</source>
         <comment>Bluetooth Info</comment>
         <translation>Režim linky</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="131"/>
-        <location filename="../src/bluetoothwidget.cpp" line="281"/>
+        <location filename="../src/bluetoothwidget.cpp" line="287"/>
         <source>Powered</source>
         <comment>Bluetooth Info</comment>
         <translation>Napájeno</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="134"/>
-        <location filename="../src/bluetoothwidget.cpp" line="284"/>
+        <location filename="../src/bluetoothwidget.cpp" line="290"/>
         <source>Discoverable</source>
         <comment>Bluetooth Info</comment>
         <translation>Objevitelné</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="137"/>
-        <location filename="../src/bluetoothwidget.cpp" line="287"/>
+        <location filename="../src/bluetoothwidget.cpp" line="293"/>
         <source>Pairable</source>
         <comment>Bluetooth Info</comment>
-        <translation>Párovatelné</translation>
+        <translation>Možné spárovat</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="140"/>
-        <location filename="../src/bluetoothwidget.cpp" line="290"/>
+        <location filename="../src/bluetoothwidget.cpp" line="296"/>
         <source>Modalias</source>
         <comment>Bluetooth Info</comment>
         <translation>Alternativní název modulu</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="143"/>
-        <location filename="../src/bluetoothwidget.cpp" line="293"/>
+        <location filename="../src/bluetoothwidget.cpp" line="299"/>
         <source>Discovering</source>
         <comment>Bluetooth Info</comment>
         <translation>Objevování</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="147"/>
-        <location filename="../src/bluetoothwidget.cpp" line="298"/>
+        <location filename="../src/bluetoothwidget.cpp" line="304"/>
         <source>Physical ID</source>
         <comment>Bluetooth Info</comment>
         <translation>Fyzický identif.</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="150"/>
-        <location filename="../src/bluetoothwidget.cpp" line="301"/>
+        <location filename="../src/bluetoothwidget.cpp" line="307"/>
         <source>Bus Info</source>
         <comment>Bluetooth Info</comment>
         <translation>Informace o sběrnici</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="153"/>
-        <location filename="../src/bluetoothwidget.cpp" line="304"/>
+        <location filename="../src/bluetoothwidget.cpp" line="310"/>
         <source>Version</source>
         <comment>Bluetooth Info</comment>
         <translation>Verze</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="156"/>
-        <location filename="../src/bluetoothwidget.cpp" line="307"/>
+        <location filename="../src/bluetoothwidget.cpp" line="313"/>
         <source>Capabilities</source>
         <comment>Bluetooth Info</comment>
         <translation>Schopnosti</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="196"/>
-        <location filename="../src/bluetoothwidget.cpp" line="343"/>
+        <location filename="../src/bluetoothwidget.cpp" line="349"/>
         <source>Unknown</source>
         <translation>Neznámé</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="58"/>
-        <location filename="../src/bluetoothwidget.cpp" line="361"/>
-        <location filename="../src/bluetoothwidget.cpp" line="470"/>
+        <location filename="../src/bluetoothwidget.cpp" line="367"/>
+        <location filename="../src/bluetoothwidget.cpp" line="476"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="371"/>
+        <location filename="../src/bluetoothwidget.cpp" line="377"/>
         <source>Alias</source>
         <translation>Alternativní název</translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="376"/>
+        <location filename="../src/bluetoothwidget.cpp" line="382"/>
         <source>Appearance</source>
         <translation>Vzled</translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="381"/>
+        <location filename="../src/bluetoothwidget.cpp" line="387"/>
         <source>Icon</source>
         <translation>Ikona</translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="386"/>
+        <location filename="../src/bluetoothwidget.cpp" line="392"/>
         <source>Connected</source>
         <translation>Připojeno</translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="396"/>
+        <location filename="../src/bluetoothwidget.cpp" line="402"/>
         <source>Paired</source>
         <comment>Bluetooth Info</comment>
         <translation>Spárováno</translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="401"/>
+        <location filename="../src/bluetoothwidget.cpp" line="407"/>
         <source>Trusted</source>
         <comment>Bluetooth Info</comment>
         <translation>Důvěryhodné</translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="406"/>
+        <location filename="../src/bluetoothwidget.cpp" line="412"/>
         <source>Blocked</source>
         <comment>Bluetooth Info</comment>
         <translation>Blokováno</translation>
     </message>
     <message>
-        <location filename="../src/bluetoothwidget.cpp" line="420"/>
+        <location filename="../src/bluetoothwidget.cpp" line="426"/>
         <source>Power</source>
         <comment>Bluetooth Info</comment>
         <translation>Napájení</translation>
     </message>
     <message>
         <location filename="../src/bluetoothwidget.cpp" line="209"/>
-        <location filename="../src/bluetoothwidget.cpp" line="464"/>
+        <location filename="../src/bluetoothwidget.cpp" line="470"/>
         <source>Bluetooth Device(s) Connected</source>
         <translation>Připojená bluetooth zařízení</translation>
     </message>
@@ -403,23 +401,23 @@
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="88"/>
-        <source>ansiversion</source>
-        <translation>ansiversion</translation>
+        <source>ANSI Version</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="93"/>
-        <source>capabilities</source>
-        <translation>schopnosti</translation>
-    </message>
-    <message>
-        <location filename="../src/cdromwidget.cpp" line="98"/>
-        <source>physical id</source>
-        <translation>fyzický identif.</translation>
+        <source>Capabilities</source>
+        <translation>Schopnosti</translation>
     </message>
     <message>
         <location filename="../src/cdromwidget.cpp" line="103"/>
-        <source>status</source>
-        <translation>stav</translation>
+        <source>Status</source>
+        <translation>Stav</translation>
+    </message>
+    <message>
+        <location filename="../src/cdromwidget.cpp" line="98"/>
+        <source>Physical ID</source>
+        <translation>Fyzický identif.</translation>
     </message>
 </context>
 <context>
@@ -525,6 +523,11 @@
         <translation>Název</translation>
     </message>
     <message>
+        <location filename="../src/cpuwidget.cpp" line="199"/>
+        <source>Vendor ID</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../src/cpuwidget.cpp" line="293"/>
         <location filename="../src/cpuwidget.cpp" line="296"/>
         <location filename="../src/cpuwidget.cpp" line="298"/>
@@ -544,11 +547,6 @@
         <location filename="../src/cpuwidget.cpp" line="198"/>
         <source>Siblings</source>
         <translation>Vláken sdílejících stejnou mezipaměť</translation>
-    </message>
-    <message>
-        <location filename="../src/cpuwidget.cpp" line="199"/>
-        <source>vendor_id</source>
-        <translation>identif. výrobce</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="200"/>
@@ -574,7 +572,7 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="110"/>
         <source>Core(s)</source>
-        <translation>Jádra</translation>
+        <translation>Jader</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="170"/>
@@ -592,7 +590,7 @@
         <location filename="../src/cpuwidget.cpp" line="172"/>
         <location filename="../src/cpuwidget.cpp" line="216"/>
         <source>Threads</source>
-        <translation>Vlákna</translation>
+        <translation>Vláken</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="173"/>
@@ -652,7 +650,7 @@
         <location filename="../src/cpuwidget.cpp" line="183"/>
         <location filename="../src/cpuwidget.cpp" line="227"/>
         <source>Flags</source>
-        <translation>Příznaky</translation>
+        <translation>Výčet rozšíření instrukční sady procesoru</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="184"/>
@@ -739,72 +737,72 @@
 <context>
     <name>DeviceInfoParser</name>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="70"/>
+        <location filename="../src/deviceinfoparser.cpp" line="71"/>
         <source>Loading Operating System Info...</source>
         <translation>Načítání informací o operačním systému…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="79"/>
+        <location filename="../src/deviceinfoparser.cpp" line="80"/>
         <source>Loading SMBIOS Info...</source>
         <translation>Načítání informací z SMBIOS…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="83"/>
+        <location filename="../src/deviceinfoparser.cpp" line="84"/>
         <source>Loading Hardware Info...</source>
         <translation>Načítání informací o hardware…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="86"/>
+        <location filename="../src/deviceinfoparser.cpp" line="87"/>
         <source>Loading Storage Info...</source>
         <translation>Načítání informací o úložišti…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="91"/>
+        <location filename="../src/deviceinfoparser.cpp" line="92"/>
         <source>Loading CPU Info...</source>
         <translation>Načítání informací o procesoru…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="96"/>
+        <location filename="../src/deviceinfoparser.cpp" line="97"/>
         <source>Loading Input Devices Info...</source>
         <translation>Načítání informací o vstupních zařízeních…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="99"/>
+        <location filename="../src/deviceinfoparser.cpp" line="100"/>
         <source>Loading Power Settings...</source>
-        <translation>Načítání nastavení napájení…</translation>
+        <translation>Načítá se nastavení napájení…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="103"/>
+        <location filename="../src/deviceinfoparser.cpp" line="104"/>
         <source>Loading Monitor Info...</source>
         <translation>Načítání informací o monitoru…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="110"/>
+        <location filename="../src/deviceinfoparser.cpp" line="111"/>
         <source>Loading PCI Devices Info...</source>
         <translation>Načítání informací o PCI zařízeních…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="113"/>
+        <location filename="../src/deviceinfoparser.cpp" line="114"/>
         <source>Loading Bluetooth Device Info...</source>
         <translation>Načítání informací o Bluetooth zařízení…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="118"/>
+        <location filename="../src/deviceinfoparser.cpp" line="119"/>
         <source>Loading USB Devices Info...</source>
         <translation>Načítání informací o USB zařízeních…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="125"/>
+        <location filename="../src/deviceinfoparser.cpp" line="126"/>
         <source>Loading Printer Info...</source>
         <translation>Načítání informací o tiskárně…</translation>
     </message>
     <message>
-        <location filename="../src/deviceinfoparser.cpp" line="165"/>
-        <location filename="../src/deviceinfoparser.cpp" line="183"/>
-        <location filename="../src/deviceinfoparser.cpp" line="590"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1265"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1306"/>
-        <location filename="../src/deviceinfoparser.cpp" line="1934"/>
+        <location filename="../src/deviceinfoparser.cpp" line="166"/>
+        <location filename="../src/deviceinfoparser.cpp" line="184"/>
+        <location filename="../src/deviceinfoparser.cpp" line="591"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1288"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1329"/>
+        <location filename="../src/deviceinfoparser.cpp" line="1996"/>
         <source>Unknown</source>
         <translation>Neznámé</translation>
     </message>
@@ -849,6 +847,42 @@
         <translation>Nenalezen žádný disk</translation>
     </message>
     <message>
+        <location filename="../src/diskwidget.cpp" line="261"/>
+        <source>Serial Number</source>
+        <translation>Sériové číslo</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="144"/>
+        <source>Firmware Version</source>
+        <translation>Verze firmware</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="181"/>
+        <location filename="../src/diskwidget.cpp" line="593"/>
+        <source>Power On Minutes</source>
+        <comment>stroage info</comment>
+        <translation>Souhrn doby, po kterou bylo v chodu (minuty)</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="190"/>
+        <location filename="../src/diskwidget.cpp" line="601"/>
+        <source>Power On Half Minutes</source>
+        <comment>stroage info</comment>
+        <translation>Souhrn doby, po kterou bylo v chodu (půlminuty)</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="199"/>
+        <location filename="../src/diskwidget.cpp" line="610"/>
+        <source>Power On Seconds</source>
+        <comment>stroage info</comment>
+        <translation>Součet dob, po které bylo v chodu (sekundy)</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="232"/>
+        <source>Interface</source>
+        <translation>Rozhraní</translation>
+    </message>
+    <message>
         <location filename="../src/diskwidget.cpp" line="426"/>
         <source>Model</source>
         <comment>stroage info</comment>
@@ -873,10 +907,46 @@
         <translation>Rozhraní</translation>
     </message>
     <message>
+        <location filename="../src/diskwidget.cpp" line="653"/>
+        <source>Bus Info</source>
+        <comment>stroage info</comment>
+        <translation>Informace o sběrnici</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="658"/>
+        <source>Logical Name</source>
+        <comment>stroage info</comment>
+        <translation>Logický svazek</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="692"/>
+        <source>Current Pending Sector</source>
+        <comment>stroage info</comment>
+        <translation>Stávající počet sektorů, čekajících na přemapování</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="702"/>
+        <source>End-to-End Error</source>
+        <comment>stroage info</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="712"/>
+        <source>SMART Capabilities</source>
+        <comment>stroage info</comment>
+        <translation>Schopnosti ohledně SMART diagnostiky</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="52"/>
         <location filename="../src/diskwidget.cpp" line="500"/>
         <location filename="../src/diskwidget.cpp" line="523"/>
         <source>Unknown</source>
         <translation>Neznámé</translation>
+    </message>
+    <message>
+        <location filename="../src/diskwidget.cpp" line="338"/>
+        <source>Description</source>
+        <translation>Popis</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="528"/>
@@ -938,17 +1008,7 @@
         <location filename="../src/diskwidget.cpp" line="586"/>
         <source>Power On Hours</source>
         <comment>stroage info</comment>
-        <translation>Souhrn doby, po kterou byl v chodu (hodiny)</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="52"/>
-        <source>UnKnown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="144"/>
-        <source>Firmware Version</source>
-        <translation type="unfinished">Verze firmware</translation>
+        <translation>Souhrn doby, po kterou bylo v chodu (hodiny)</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="169"/>
@@ -958,13 +1018,6 @@
         <translation>Hodin</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="181"/>
-        <location filename="../src/diskwidget.cpp" line="593"/>
-        <source>Power_On_Minutes</source>
-        <comment>stroage info</comment>
-        <translation>Souhrn doby, po kterou byl v chodu (minuty)</translation>
-    </message>
-    <message>
         <location filename="../src/diskwidget.cpp" line="184"/>
         <location filename="../src/diskwidget.cpp" line="596"/>
         <source>Minutes</source>
@@ -972,24 +1025,10 @@
         <translation>Minut</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="190"/>
-        <location filename="../src/diskwidget.cpp" line="601"/>
-        <source>Power_On_Half_Minutes</source>
-        <comment>stroage info</comment>
-        <translation>Jak dlouho celkem zapnuto (v půlminutách)</translation>
-    </message>
-    <message>
         <location filename="../src/diskwidget.cpp" line="194"/>
         <location filename="../src/diskwidget.cpp" line="605"/>
         <source>Half Minutes</source>
         <translation>Půl minut</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="199"/>
-        <location filename="../src/diskwidget.cpp" line="610"/>
-        <source>Power_On_Seconds</source>
-        <comment>stroage info</comment>
-        <translation>Souhrn doby, po kterou byl v chodu (sekundy)</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="203"/>
@@ -1013,21 +1052,6 @@
         <translation>Časy</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="232"/>
-        <source>Interface</source>
-        <translation type="unfinished">Rozhraní</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="261"/>
-        <source>Serial Number</source>
-        <translation type="unfinished">Sériové číslo</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="338"/>
-        <source>Description</source>
-        <translation type="unfinished">Popis</translation>
-    </message>
-    <message>
         <location filename="../src/diskwidget.cpp" line="628"/>
         <source>Version</source>
         <comment>stroage info</comment>
@@ -1047,33 +1071,21 @@
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="643"/>
-        <source>ansiversion</source>
+        <source>ANSI Version</source>
         <comment>stroage info</comment>
-        <translation>ansiversion</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="648"/>
-        <source>guid</source>
+        <source>GUID</source>
         <comment>stroage info</comment>
-        <translation>globálně se neopakující identif.</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="653"/>
-        <source>bus info</source>
-        <comment>stroage info</comment>
-        <translation>informace o sběrnici</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="658"/>
-        <source>logical name</source>
-        <comment>stroage info</comment>
-        <translation>logický název</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="663"/>
-        <source>logicalsectorsize</source>
+        <source>Logical Sector Size</source>
         <comment>stroage info</comment>
-        <translation>velikost logického sektoru</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="668"/>
@@ -1083,9 +1095,9 @@
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="673"/>
-        <source>sectorsize</source>
+        <source>Sector Size</source>
         <comment>stroage info</comment>
-        <translation>velikost sektoru</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="682"/>
@@ -1100,34 +1112,16 @@
         <translation>Automatický offline sběr dat</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="692"/>
-        <source>Current_Pending_Sector</source>
-        <comment>stroage info</comment>
-        <translation>Nyní sektorů čekajících na přesunutí</translation>
-    </message>
-    <message>
         <location filename="../src/diskwidget.cpp" line="697"/>
         <source>Device</source>
         <comment>stroage info</comment>
         <translation>Zařízení</translation>
     </message>
     <message>
-        <location filename="../src/diskwidget.cpp" line="702"/>
-        <source>End-to-End_Error</source>
-        <comment>stroage info</comment>
-        <translation>Nesouhlasný kontrolní součet dat v rámci přenosu</translation>
-    </message>
-    <message>
         <location filename="../src/diskwidget.cpp" line="707"/>
         <source>Firmware Version</source>
         <comment>stroage info</comment>
         <translation>Verze firmware</translation>
-    </message>
-    <message>
-        <location filename="../src/diskwidget.cpp" line="712"/>
-        <source>SMART capabilities</source>
-        <comment>stroage info</comment>
-        <translation>SMART schopnosti</translation>
     </message>
     <message>
         <location filename="../src/diskwidget.cpp" line="107"/>
@@ -1167,13 +1161,13 @@
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="66"/>
-        <location filename="../src/displayadapterwidget.cpp" line="209"/>
+        <location filename="../src/displayadapterwidget.cpp" line="215"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="77"/>
-        <location filename="../src/displayadapterwidget.cpp" line="209"/>
+        <location filename="../src/displayadapterwidget.cpp" line="215"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
@@ -1188,77 +1182,77 @@
         <translation>Paměť pro grafiku</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="98"/>
+        <location filename="../src/displayadapterwidget.cpp" line="104"/>
         <source>Minimum Resolution</source>
         <translation>Nejnižší možné rozlišení</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="104"/>
+        <location filename="../src/displayadapterwidget.cpp" line="110"/>
         <source>Maximum Resolution</source>
-        <translation>Nejvyšší rozlišení</translation>
+        <translation>Nejvyšší možné rozlišení</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="111"/>
+        <location filename="../src/displayadapterwidget.cpp" line="117"/>
         <source>Driver</source>
         <translation>Ovladač</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="120"/>
+        <location filename="../src/displayadapterwidget.cpp" line="126"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="125"/>
+        <location filename="../src/displayadapterwidget.cpp" line="131"/>
         <source>Width</source>
         <translation>Šířka</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="130"/>
+        <location filename="../src/displayadapterwidget.cpp" line="136"/>
         <source>Clock</source>
-        <translation>Hodiny</translation>
+        <translation>Takt</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="135"/>
+        <location filename="../src/displayadapterwidget.cpp" line="141"/>
         <source>Capabilities</source>
         <translation>Schopnosti</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="140"/>
+        <location filename="../src/displayadapterwidget.cpp" line="146"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="145"/>
-        <source>bus info</source>
-        <translation>informace o sběrnici</translation>
+        <location filename="../src/displayadapterwidget.cpp" line="151"/>
+        <source>Bus Info</source>
+        <translation>Informace o sběrnici</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="150"/>
-        <source>ioport</source>
-        <translation>ioport</translation>
+        <location filename="../src/displayadapterwidget.cpp" line="156"/>
+        <source>I/O Port</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="155"/>
-        <source>irq</source>
-        <translation>přerušení (irq)</translation>
+        <location filename="../src/displayadapterwidget.cpp" line="161"/>
+        <source>IRQ</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="160"/>
-        <source>latency</source>
-        <translation>prodleva</translation>
+        <location filename="../src/displayadapterwidget.cpp" line="166"/>
+        <source>Latency</source>
+        <translation>Prodleva</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="165"/>
-        <source>memory</source>
-        <translation>operační paměť</translation>
+        <location filename="../src/displayadapterwidget.cpp" line="171"/>
+        <source>Memory</source>
+        <translation>Operační paměť</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="170"/>
-        <source>physical id</source>
-        <translation>fyzický identif.</translation>
+        <location filename="../src/displayadapterwidget.cpp" line="176"/>
+        <source>Physical ID</source>
+        <translation>Fyzický identif.</translation>
     </message>
     <message>
-        <location filename="../src/displayadapterwidget.cpp" line="232"/>
+        <location filename="../src/displayadapterwidget.cpp" line="238"/>
         <source>Failed to find display adapter information</source>
         <translation>Nepodařilo se najít informace o zobrazovacím adaptéru</translation>
     </message>
@@ -1336,38 +1330,27 @@
     <message>
         <location filename="../src/keyboardwidget.cpp" line="134"/>
         <source>USB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="144"/>
-        <location filename="../src/keyboardwidget.cpp" line="474"/>
-        <source>Maxpower</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="149"/>
-        <source>Physical Id</source>
-        <translation type="unfinished"></translation>
+        <translation>USB</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="167"/>
         <source>Uniq</source>
-        <translation type="unfinished">Uniq</translation>
+        <translation>Uniq</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="178"/>
         <source>Connected</source>
-        <translation type="unfinished">Připojeno</translation>
+        <translation>Připojeno</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="191"/>
         <source>Phys</source>
-        <translation type="unfinished">Fyz</translation>
+        <translation>Fyz</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="222"/>
         <source>Sysfs</source>
-        <translation type="unfinished">Sysfs</translation>
+        <translation>Sysfs</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="357"/>
@@ -1388,6 +1371,7 @@
     <message>
         <location filename="../src/keyboardwidget.cpp" line="139"/>
         <location filename="../src/keyboardwidget.cpp" line="368"/>
+        <location filename="../src/keyboardwidget.cpp" line="375"/>
         <location filename="../src/keyboardwidget.cpp" line="469"/>
         <source>Driver</source>
         <translation>Ovladač</translation>
@@ -1395,14 +1379,10 @@
     <message>
         <location filename="../src/keyboardwidget.cpp" line="154"/>
         <location filename="../src/keyboardwidget.cpp" line="369"/>
+        <location filename="../src/keyboardwidget.cpp" line="390"/>
         <location filename="../src/keyboardwidget.cpp" line="479"/>
         <source>Speed</source>
         <translation>Rychlost</translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="370"/>
-        <source>BusID</source>
-        <translation>Identif. sběrnice</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="372"/>
@@ -1415,26 +1395,6 @@
         <translation>Identif. SysFS</translation>
     </message>
     <message>
-        <location filename="../src/keyboardwidget.cpp" line="375"/>
-        <source>driver</source>
-        <translation>ovladač</translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="380"/>
-        <source>maxpower</source>
-        <translation>nejvýše energie</translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="385"/>
-        <source>physical id</source>
-        <translation>fyzický identif.</translation>
-    </message>
-    <message>
-        <location filename="../src/keyboardwidget.cpp" line="390"/>
-        <source>speed</source>
-        <translation>rychlost</translation>
-    </message>
-    <message>
         <location filename="../src/keyboardwidget.cpp" line="119"/>
         <location filename="../src/keyboardwidget.cpp" line="456"/>
         <source>Width</source>
@@ -1444,13 +1404,25 @@
         <location filename="../src/keyboardwidget.cpp" line="124"/>
         <location filename="../src/keyboardwidget.cpp" line="457"/>
         <source>Clock</source>
-        <translation>Hodiny</translation>
+        <translation>Takt</translation>
+    </message>
+    <message>
+        <location filename="../src/keyboardwidget.cpp" line="144"/>
+        <location filename="../src/keyboardwidget.cpp" line="380"/>
+        <location filename="../src/keyboardwidget.cpp" line="474"/>
+        <source>Max Power</source>
+        <translation>Nejvýše energie</translation>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="159"/>
         <location filename="../src/keyboardwidget.cpp" line="458"/>
         <source>Capabilities</source>
         <translation>Schopnosti</translation>
+    </message>
+    <message>
+        <location filename="../src/keyboardwidget.cpp" line="370"/>
+        <source>Bus ID</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/keyboardwidget.cpp" line="551"/>
@@ -1483,6 +1455,8 @@
         <translation>Napájení</translation>
     </message>
     <message>
+        <location filename="../src/keyboardwidget.cpp" line="149"/>
+        <location filename="../src/keyboardwidget.cpp" line="385"/>
         <location filename="../src/keyboardwidget.cpp" line="453"/>
         <source>Physical ID</source>
         <translation>Fyzický identif.</translation>
@@ -1503,7 +1477,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="350"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Informace o zařízení</translation>
     </message>
     <message>
@@ -1551,266 +1525,266 @@
     <name>MemoryWidget</name>
     <message>
         <location filename="../src/memorywidget.cpp" line="34"/>
-        <location filename="../src/memorywidget.cpp" line="138"/>
+        <location filename="../src/memorywidget.cpp" line="144"/>
         <source>Memory</source>
         <translation>Operační paměť</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="156"/>
+        <location filename="../src/memorywidget.cpp" line="162"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="156"/>
-        <location filename="../src/memorywidget.cpp" line="279"/>
-        <location filename="../src/memorywidget.cpp" line="545"/>
+        <location filename="../src/memorywidget.cpp" line="162"/>
+        <location filename="../src/memorywidget.cpp" line="307"/>
+        <location filename="../src/memorywidget.cpp" line="581"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="156"/>
-        <location filename="../src/memorywidget.cpp" line="299"/>
+        <location filename="../src/memorywidget.cpp" line="162"/>
+        <location filename="../src/memorywidget.cpp" line="334"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="156"/>
-        <location filename="../src/memorywidget.cpp" line="560"/>
+        <location filename="../src/memorywidget.cpp" line="162"/>
+        <location filename="../src/memorywidget.cpp" line="596"/>
         <source>Speed</source>
         <comment>memory info</comment>
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="156"/>
-        <location filename="../src/memorywidget.cpp" line="214"/>
-        <location filename="../src/memorywidget.cpp" line="224"/>
+        <location filename="../src/memorywidget.cpp" line="162"/>
+        <location filename="../src/memorywidget.cpp" line="227"/>
+        <location filename="../src/memorywidget.cpp" line="245"/>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="210"/>
+        <location filename="../src/memorywidget.cpp" line="223"/>
         <source>Slot Count</source>
         <translation>Počet slotů</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="243"/>
-        <location filename="../src/memorywidget.cpp" line="509"/>
+        <location filename="../src/memorywidget.cpp" line="271"/>
+        <location filename="../src/memorywidget.cpp" line="545"/>
         <source>Maximum Capacity</source>
         <translation>Nejvyšší možná kapacita</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="256"/>
-        <location filename="../src/memorywidget.cpp" line="524"/>
+        <location filename="../src/memorywidget.cpp" line="284"/>
+        <location filename="../src/memorywidget.cpp" line="560"/>
         <source>Upgradeable</source>
         <translation>Možné vyměnit za lepší</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="257"/>
-        <location filename="../src/memorywidget.cpp" line="525"/>
+        <location filename="../src/memorywidget.cpp" line="285"/>
+        <location filename="../src/memorywidget.cpp" line="561"/>
         <source>Yes</source>
         <translation>Ano</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="257"/>
-        <location filename="../src/memorywidget.cpp" line="525"/>
+        <location filename="../src/memorywidget.cpp" line="285"/>
+        <location filename="../src/memorywidget.cpp" line="561"/>
         <source>No</source>
         <translation>Ne</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="274"/>
+        <location filename="../src/memorywidget.cpp" line="302"/>
         <source>Model</source>
-        <comment>memory&apos;s model</comment>
+        <comment>memory's model</comment>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="284"/>
-        <location filename="../src/memorywidget.cpp" line="540"/>
+        <location filename="../src/memorywidget.cpp" line="312"/>
+        <location filename="../src/memorywidget.cpp" line="576"/>
         <source>Locator</source>
         <translation>Lokátor</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="290"/>
+        <location filename="../src/memorywidget.cpp" line="318"/>
         <source>Size</source>
-        <comment>memory&apos;s size</comment>
+        <comment>memory's size</comment>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="304"/>
+        <location filename="../src/memorywidget.cpp" line="339"/>
         <source>Speed</source>
-        <comment>memory&apos;s Speed</comment>
+        <comment>memory's Speed</comment>
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="309"/>
+        <location filename="../src/memorywidget.cpp" line="344"/>
         <source>Serial Number</source>
         <translation>Sériové číslo</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="314"/>
+        <location filename="../src/memorywidget.cpp" line="349"/>
         <source>Form Factor</source>
         <translation>Fyzická podoba</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="319"/>
+        <location filename="../src/memorywidget.cpp" line="354"/>
         <source>Rank</source>
-        <translation>Naráz přistupovaných čipů</translation>
+        <translation>Naráz přistupovaných čipů (rank)</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="324"/>
+        <location filename="../src/memorywidget.cpp" line="359"/>
         <source>Bank Locator</source>
         <translation>Lokátor paměťové banky</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="329"/>
-        <location filename="../src/memorywidget.cpp" line="590"/>
+        <location filename="../src/memorywidget.cpp" line="364"/>
+        <location filename="../src/memorywidget.cpp" line="626"/>
         <source>Configured Voltage</source>
         <comment>memory info</comment>
         <translation>Nastavené napětí</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="334"/>
+        <location filename="../src/memorywidget.cpp" line="369"/>
         <source>Minimum Voltage</source>
-        <comment>memory&apos;s config</comment>
+        <comment>memory's config</comment>
         <translation>Nejnižší napětí</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="339"/>
+        <location filename="../src/memorywidget.cpp" line="374"/>
         <source>Maximum Voltage</source>
-        <comment>memory&apos;s config</comment>
-        <translation>Nejvyšší napětí</translation>
+        <comment>memory's config</comment>
+        <translation>Nejvyšší napájecí napětí</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="344"/>
+        <location filename="../src/memorywidget.cpp" line="379"/>
         <source>Configured Speed</source>
         <translation>Nastavená rychlost</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="349"/>
+        <location filename="../src/memorywidget.cpp" line="384"/>
         <source>Array Handle</source>
         <translation>Array Handle</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="354"/>
+        <location filename="../src/memorywidget.cpp" line="389"/>
         <source>Asset Tag</source>
         <translation>Inventární štítek</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="359"/>
+        <location filename="../src/memorywidget.cpp" line="394"/>
         <source>Data Width</source>
         <translation>Datová šířka</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="364"/>
+        <location filename="../src/memorywidget.cpp" line="399"/>
         <source>Error Information Handle</source>
         <translation>Error Information Handle</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="369"/>
+        <location filename="../src/memorywidget.cpp" line="404"/>
         <source>Set</source>
         <translation>Sada</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="374"/>
+        <location filename="../src/memorywidget.cpp" line="409"/>
         <source>Total Width</source>
         <translation>Celková šíře</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="379"/>
+        <location filename="../src/memorywidget.cpp" line="414"/>
         <source>Type Detail</source>
         <translation>Podrobnosti o typu</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="387"/>
-        <location filename="../src/memorywidget.cpp" line="444"/>
-        <location filename="../src/memorywidget.cpp" line="621"/>
+        <location filename="../src/memorywidget.cpp" line="422"/>
+        <location filename="../src/memorywidget.cpp" line="480"/>
+        <location filename="../src/memorywidget.cpp" line="657"/>
         <source>Unknown</source>
         <translation>Neznámé</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="388"/>
+        <location filename="../src/memorywidget.cpp" line="423"/>
         <source>Unknown memory</source>
         <translation>Neznámá paměť</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="147"/>
+        <location filename="../src/memorywidget.cpp" line="153"/>
         <source>Failed to get memory information</source>
         <translation>Nepodařilo se získat informace o operační paměti</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="478"/>
+        <location filename="../src/memorywidget.cpp" line="514"/>
         <source>Slot Count</source>
         <comment>memory info</comment>
         <translation>Počet slotů</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="482"/>
-        <location filename="../src/memorywidget.cpp" line="490"/>
-        <location filename="../src/memorywidget.cpp" line="550"/>
+        <location filename="../src/memorywidget.cpp" line="518"/>
+        <location filename="../src/memorywidget.cpp" line="526"/>
+        <location filename="../src/memorywidget.cpp" line="586"/>
         <source>Size</source>
         <comment>memory info</comment>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="555"/>
+        <location filename="../src/memorywidget.cpp" line="591"/>
         <source>Type</source>
         <comment>memory info</comment>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="565"/>
+        <location filename="../src/memorywidget.cpp" line="601"/>
         <source>Serial Number</source>
         <comment>memory info</comment>
         <translation>Sériové číslo</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="570"/>
+        <location filename="../src/memorywidget.cpp" line="606"/>
         <source>Model Part Number</source>
         <comment>memory info</comment>
         <translation>Katalogové číslo modelu</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="575"/>
+        <location filename="../src/memorywidget.cpp" line="611"/>
         <source>Form Factor</source>
         <comment>memory info</comment>
         <translation>Fyzická podoba</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="580"/>
+        <location filename="../src/memorywidget.cpp" line="616"/>
         <source>Rank</source>
         <comment>memory info</comment>
-        <translation>Naráz přistupovaných čipů</translation>
+        <translation>Naráz přistupovaných čipů (rank)</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="585"/>
+        <location filename="../src/memorywidget.cpp" line="621"/>
         <source>Bank Locator</source>
         <comment>memory info</comment>
         <translation>Lokátor paměťové banky</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="595"/>
+        <location filename="../src/memorywidget.cpp" line="631"/>
         <source>Minimum Voltage</source>
-        <translation>Nejnižší napětí</translation>
+        <translation>Nejnižší napájecí napětí</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="600"/>
+        <location filename="../src/memorywidget.cpp" line="636"/>
         <source>Maximum Voltage</source>
         <comment>memory info</comment>
         <translation>Nejvyšší napájecí napětí</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="605"/>
+        <location filename="../src/memorywidget.cpp" line="641"/>
         <source>Configured Speed</source>
         <comment>memory info</comment>
         <translation>Nastavená rychlost</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="623"/>
+        <location filename="../src/memorywidget.cpp" line="659"/>
         <source>Status</source>
         <comment>memory info</comment>
         <translation>Stav</translation>
     </message>
     <message>
-        <location filename="../src/memorywidget.cpp" line="624"/>
+        <location filename="../src/memorywidget.cpp" line="660"/>
         <source>Bad</source>
         <comment>memory info</comment>
         <translation>Chybné</translation>
@@ -1836,28 +1810,28 @@
         <location filename="../src/monitorwidget.cpp" line="312"/>
         <location filename="../src/monitorwidget.cpp" line="328"/>
         <location filename="../src/monitorwidget.cpp" line="371"/>
-        <location filename="../src/monitorwidget.cpp" line="718"/>
+        <location filename="../src/monitorwidget.cpp" line="719"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="70"/>
         <location filename="../src/monitorwidget.cpp" line="148"/>
-        <location filename="../src/monitorwidget.cpp" line="719"/>
+        <location filename="../src/monitorwidget.cpp" line="720"/>
         <source>Resolution</source>
         <translation>Rozlišení</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="71"/>
         <location filename="../src/monitorwidget.cpp" line="149"/>
-        <location filename="../src/monitorwidget.cpp" line="720"/>
+        <location filename="../src/monitorwidget.cpp" line="721"/>
         <source>Support Resolution</source>
         <translation>Podpora rozlišení</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="72"/>
         <source>Refresh Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervaly opětovného načtení</translation>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="74"/>
@@ -1869,7 +1843,7 @@
         <location filename="../src/monitorwidget.cpp" line="153"/>
         <location filename="../src/monitorwidget.cpp" line="372"/>
         <location filename="../src/monitorwidget.cpp" line="473"/>
-        <location filename="../src/monitorwidget.cpp" line="722"/>
+        <location filename="../src/monitorwidget.cpp" line="723"/>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
@@ -1882,7 +1856,7 @@
     <message>
         <location filename="../src/monitorwidget.cpp" line="192"/>
         <location filename="../src/monitorwidget.cpp" line="411"/>
-        <location filename="../src/monitorwidget.cpp" line="721"/>
+        <location filename="../src/monitorwidget.cpp" line="722"/>
         <source>Manufacture Date</source>
         <translation>Datum výroby</translation>
     </message>
@@ -1891,8 +1865,8 @@
         <location filename="../src/monitorwidget.cpp" line="213"/>
         <location filename="../src/monitorwidget.cpp" line="414"/>
         <location filename="../src/monitorwidget.cpp" line="431"/>
-        <location filename="../src/monitorwidget.cpp" line="727"/>
-        <location filename="../src/monitorwidget.cpp" line="738"/>
+        <location filename="../src/monitorwidget.cpp" line="728"/>
+        <location filename="../src/monitorwidget.cpp" line="739"/>
         <source>Year</source>
         <translation>Rok</translation>
     </message>
@@ -1906,8 +1880,8 @@
     <message>
         <location filename="../src/monitorwidget.cpp" line="201"/>
         <location filename="../src/monitorwidget.cpp" line="419"/>
-        <location filename="../src/monitorwidget.cpp" line="727"/>
-        <location filename="../src/monitorwidget.cpp" line="738"/>
+        <location filename="../src/monitorwidget.cpp" line="728"/>
+        <location filename="../src/monitorwidget.cpp" line="739"/>
         <source>Week</source>
         <translation>Týden</translation>
     </message>
@@ -1918,14 +1892,14 @@
         <translation>Rok uvedení modelu na trh (nikoli datum výroby)</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="731"/>
+        <location filename="../src/monitorwidget.cpp" line="732"/>
         <source>Notebook monitor</source>
         <translation>Displej notebooku</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="742"/>
-        <source>External monitor</source>
-        <translation>Externí monitor</translation>
+        <location filename="../src/monitorwidget.cpp" line="743"/>
+        <source>External Monitor</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/monitorwidget.cpp" line="220"/>
@@ -1950,7 +1924,7 @@
         <location filename="../src/monitorwidget.cpp" line="602"/>
         <location filename="../src/monitorwidget.cpp" line="614"/>
         <location filename="../src/monitorwidget.cpp" line="648"/>
-        <location filename="../src/monitorwidget.cpp" line="678"/>
+        <location filename="../src/monitorwidget.cpp" line="679"/>
         <source>inch</source>
         <translation>palců</translation>
     </message>
@@ -1960,7 +1934,7 @@
         <translation>Nepodařilo se najít informace o monitoru</translation>
     </message>
     <message>
-        <location filename="../src/monitorwidget.cpp" line="679"/>
+        <location filename="../src/monitorwidget.cpp" line="680"/>
         <source>cm</source>
         <comment>size unit</comment>
         <translation>cm</translation>
@@ -1969,285 +1943,286 @@
 <context>
     <name>MotherboardWidget</name>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="31"/>
+        <location filename="../src/motherboardwidget.cpp" line="32"/>
         <source>Motherboard</source>
         <translation>Základní deska</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="41"/>
-        <location filename="../src/motherboardwidget.cpp" line="57"/>
+        <location filename="../src/motherboardwidget.cpp" line="42"/>
+        <location filename="../src/motherboardwidget.cpp" line="58"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="42"/>
-        <location filename="../src/motherboardwidget.cpp" line="48"/>
-        <location filename="../src/motherboardwidget.cpp" line="293"/>
+        <location filename="../src/motherboardwidget.cpp" line="43"/>
+        <location filename="../src/motherboardwidget.cpp" line="49"/>
+        <location filename="../src/motherboardwidget.cpp" line="294"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="43"/>
-        <location filename="../src/motherboardwidget.cpp" line="73"/>
-        <location filename="../src/motherboardwidget.cpp" line="78"/>
+        <location filename="../src/motherboardwidget.cpp" line="44"/>
+        <location filename="../src/motherboardwidget.cpp" line="74"/>
+        <location filename="../src/motherboardwidget.cpp" line="79"/>
         <source>Chipset Family</source>
         <translation>Generace čipové sady</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="44"/>
-        <location filename="../src/motherboardwidget.cpp" line="68"/>
+        <location filename="../src/motherboardwidget.cpp" line="45"/>
+        <location filename="../src/motherboardwidget.cpp" line="69"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="44"/>
-        <location filename="../src/motherboardwidget.cpp" line="287"/>
+        <location filename="../src/motherboardwidget.cpp" line="45"/>
+        <location filename="../src/motherboardwidget.cpp" line="288"/>
         <source>BIOS</source>
         <translation>BIOS/UEFI</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="45"/>
-        <location filename="../src/motherboardwidget.cpp" line="147"/>
+        <location filename="../src/motherboardwidget.cpp" line="46"/>
+        <location filename="../src/motherboardwidget.cpp" line="148"/>
         <source>Features</source>
         <translation>Funkce</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="103"/>
-        <location filename="../src/motherboardwidget.cpp" line="303"/>
+        <location filename="../src/motherboardwidget.cpp" line="104"/>
+        <location filename="../src/motherboardwidget.cpp" line="304"/>
         <source>Serial Number</source>
         <translation>Sériové číslo</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="108"/>
+        <location filename="../src/motherboardwidget.cpp" line="109"/>
         <source>Asset Tag</source>
         <translation>Inventární štítek</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="113"/>
+        <location filename="../src/motherboardwidget.cpp" line="114"/>
         <source>Chassis Handle</source>
         <translation>Chassis Handle</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="118"/>
+        <location filename="../src/motherboardwidget.cpp" line="119"/>
         <source>Contained Object Handles</source>
         <translation>Contained Object Handles</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="123"/>
+        <location filename="../src/motherboardwidget.cpp" line="124"/>
         <source>Location In Chassis</source>
         <translation>Umístění v šasi počítače</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="128"/>
+        <location filename="../src/motherboardwidget.cpp" line="129"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="143"/>
+        <location filename="../src/motherboardwidget.cpp" line="144"/>
         <source>SMBIOS Version</source>
         <translation>Verze SMBIOS</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="161"/>
+        <location filename="../src/motherboardwidget.cpp" line="162"/>
         <source>Product Name</source>
         <translation>Název produktu</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="176"/>
+        <location filename="../src/motherboardwidget.cpp" line="177"/>
         <source>UUID</source>
         <translation>Nikde se neopakující identif.</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="181"/>
+        <location filename="../src/motherboardwidget.cpp" line="182"/>
         <source>Wake-up Type</source>
         <translation>Typ probouzení</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="186"/>
+        <location filename="../src/motherboardwidget.cpp" line="187"/>
         <source>SKU Number</source>
         <translation>Skladové  číslo</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="191"/>
+        <location filename="../src/motherboardwidget.cpp" line="192"/>
         <source>Family</source>
         <translation>Generace</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="205"/>
+        <location filename="../src/motherboardwidget.cpp" line="206"/>
         <source>System Information</source>
         <translation>Informace o systému</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="223"/>
+        <location filename="../src/motherboardwidget.cpp" line="224"/>
         <source>Release Date</source>
         <translation>Datum vydání</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="242"/>
+        <location filename="../src/motherboardwidget.cpp" line="243"/>
         <source>Address</source>
         <translation>Adresa</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="247"/>
+        <location filename="../src/motherboardwidget.cpp" line="248"/>
         <source>ROM Size</source>
         <translation>Velikost ROM</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="252"/>
+        <location filename="../src/motherboardwidget.cpp" line="253"/>
         <source>Runtime Size</source>
         <translation>Velikost běhového prostředí</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="267"/>
+        <location filename="../src/motherboardwidget.cpp" line="268"/>
         <source>Currently Installed Language</source>
         <translation>Nyní nainstalované jazyky</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="272"/>
+        <location filename="../src/motherboardwidget.cpp" line="273"/>
         <source>Installable Languages</source>
         <translation>Jazyky, které je možné nainstalovat</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="277"/>
+        <location filename="../src/motherboardwidget.cpp" line="278"/>
         <source>Languages Description Format</source>
         <translation>Formát popisu jazyka</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="313"/>
+        <location filename="../src/motherboardwidget.cpp" line="314"/>
         <source>Asset Tag</source>
         <comment>Chassis Information</comment>
         <translation>Inventární štítek</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="318"/>
+        <location filename="../src/motherboardwidget.cpp" line="319"/>
         <source>Boot-up State</source>
         <comment>Chassis Information</comment>
-        <translation>Stav zavádění systému</translation>
+        <translation>Stav startu systému</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="323"/>
+        <location filename="../src/motherboardwidget.cpp" line="324"/>
         <source>Contained Elements</source>
         <comment>Chassis Information</comment>
         <translation>Obsažené prvky</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="328"/>
+        <location filename="../src/motherboardwidget.cpp" line="329"/>
         <source>Lock</source>
         <comment>Chassis Information</comment>
         <translation>Zámek</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="333"/>
+        <location filename="../src/motherboardwidget.cpp" line="334"/>
         <source>Number Of Power Cords</source>
         <comment>Chassis Information</comment>
         <translation>Počet napájecích kabelů</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="338"/>
+        <location filename="../src/motherboardwidget.cpp" line="339"/>
         <source>OEM Information</source>
         <comment>Chassis Information</comment>
         <translation>OEM informace</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="343"/>
+        <location filename="../src/motherboardwidget.cpp" line="344"/>
         <source>Power Supply State</source>
         <comment>Chassis Information</comment>
         <translation>Stav napájecího zdroje</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="348"/>
+        <location filename="../src/motherboardwidget.cpp" line="349"/>
         <source>SKU Number</source>
         <comment>Chassis Information</comment>
         <translation>Skladové  číslo</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="353"/>
+        <location filename="../src/motherboardwidget.cpp" line="354"/>
         <source>Security Status</source>
         <comment>Chassis Information</comment>
         <translation>Stav zabezpečení</translation>
     </message>
     <message>
-        <source>Termal State</source>
-        <comment>Chassis Information</comment>
-        <translation type="vanished">Teplotní stav</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="424"/>
-        <source>Size</source>
-        <comment>memory&apos;s size</comment>
-        <translation>Velikost</translation>
-    </message>
-    <message>
-        <location filename="../src/motherboardwidget.cpp" line="466"/>
+        <location filename="../src/motherboardwidget.cpp" line="482"/>
         <source>Memory Info</source>
         <translation>Informace o paměti</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="213"/>
+        <location filename="../src/motherboardwidget.cpp" line="214"/>
         <source>BIOS Version</source>
         <translation>Verze BIOS/UEFI</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="233"/>
+        <location filename="../src/motherboardwidget.cpp" line="234"/>
         <source>BIOS Vendor</source>
         <translation>Výrobce BIOS/UEFI</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="282"/>
+        <location filename="../src/motherboardwidget.cpp" line="283"/>
         <source>Characteristics</source>
         <translation>Charakteristiky</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="298"/>
+        <location filename="../src/motherboardwidget.cpp" line="299"/>
         <source>Type</source>
         <comment>Chassis Information</comment>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="308"/>
+        <location filename="../src/motherboardwidget.cpp" line="309"/>
         <source>Version</source>
         <comment>Chassis Information</comment>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="358"/>
+        <location filename="../src/motherboardwidget.cpp" line="359"/>
         <source>Thermal State</source>
         <comment>Chassis Information</comment>
-        <translation type="unfinished"></translation>
+        <translation>Teplotní stav</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="367"/>
+        <location filename="../src/motherboardwidget.cpp" line="368"/>
         <source>Chassis Information</source>
         <translation>Informace o šasi počítače</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="383"/>
+        <location filename="../src/motherboardwidget.cpp" line="384"/>
         <source>Unknown</source>
         <translation>Neznámé</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="392"/>
+        <location filename="../src/motherboardwidget.cpp" line="393"/>
         <source>Slot Count</source>
         <translation>Počet slotů</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="435"/>
+        <location filename="../src/motherboardwidget.cpp" line="397"/>
+        <source>Size</source>
+        <comment>Computer_core_memory</comment>
+        <translation>Velikost</translation>
+    </message>
+    <message>
+        <location filename="../src/motherboardwidget.cpp" line="416"/>
+        <source>Size</source>
+        <comment>memory size</comment>
+        <translation>Velikost</translation>
+    </message>
+    <message>
+        <location filename="../src/motherboardwidget.cpp" line="451"/>
         <source>Maximum Capacity</source>
         <comment>PhysicMemory</comment>
         <translation>Nejvyšší možná kapacita</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="461"/>
+        <location filename="../src/motherboardwidget.cpp" line="477"/>
         <source>Upgradeable</source>
         <translation>Možné nahradit lepším</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="462"/>
+        <location filename="../src/motherboardwidget.cpp" line="478"/>
         <source>Yes</source>
         <translation>Ano</translation>
     </message>
     <message>
-        <location filename="../src/motherboardwidget.cpp" line="462"/>
+        <location filename="../src/motherboardwidget.cpp" line="478"/>
         <source>No</source>
         <translation>Ne</translation>
     </message>
@@ -2260,166 +2235,150 @@
         <translation>Myš</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="41"/>
+        <location filename="../src/mousewidget.cpp" line="57"/>
         <source>No mouse found</source>
         <translation>Nenalezena žádná myš</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="56"/>
-        <location filename="../src/mousewidget.cpp" line="294"/>
+        <location filename="../src/mousewidget.cpp" line="72"/>
+        <location filename="../src/mousewidget.cpp" line="313"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="57"/>
-        <location filename="../src/mousewidget.cpp" line="294"/>
+        <location filename="../src/mousewidget.cpp" line="73"/>
+        <location filename="../src/mousewidget.cpp" line="313"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="58"/>
-        <location filename="../src/mousewidget.cpp" line="133"/>
-        <location filename="../src/mousewidget.cpp" line="294"/>
+        <location filename="../src/mousewidget.cpp" line="74"/>
+        <location filename="../src/mousewidget.cpp" line="149"/>
+        <location filename="../src/mousewidget.cpp" line="313"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="83"/>
+        <location filename="../src/mousewidget.cpp" line="99"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="88"/>
+        <location filename="../src/mousewidget.cpp" line="104"/>
         <source>Bus Info</source>
         <translation>Informace o sběrnici</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="93"/>
-        <location filename="../src/mousewidget.cpp" line="209"/>
+        <location filename="../src/mousewidget.cpp" line="109"/>
+        <location filename="../src/mousewidget.cpp" line="225"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="98"/>
+        <location filename="../src/mousewidget.cpp" line="114"/>
         <source>Width</source>
         <translation>Šířka</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="103"/>
+        <location filename="../src/mousewidget.cpp" line="119"/>
         <source>Clock</source>
-        <translation>Hodiny</translation>
+        <translation>Takt</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="108"/>
+        <location filename="../src/mousewidget.cpp" line="124"/>
         <source>Capabilities</source>
         <translation>Schopnosti</translation>
     </message>
     <message>
-        <source>driver</source>
-        <translation type="vanished">ovladač</translation>
-    </message>
-    <message>
-        <source>maxpower</source>
-        <translation type="vanished">nejvýše energie</translation>
-    </message>
-    <message>
-        <source>physical id</source>
-        <translation type="vanished">fyzický identif.</translation>
-    </message>
-    <message>
-        <source>speed</source>
-        <translation type="vanished">rychlost</translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="113"/>
+        <location filename="../src/mousewidget.cpp" line="129"/>
         <source>Driver</source>
-        <translation type="unfinished">Ovladač</translation>
+        <translation>Ovladač</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="118"/>
-        <source>Maxpower</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mousewidget.cpp" line="123"/>
+        <location filename="../src/mousewidget.cpp" line="139"/>
         <source>USB</source>
-        <translation type="unfinished"></translation>
+        <translation>USB</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="128"/>
-        <source>Physical Id</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/mousewidget.cpp" line="134"/>
+        <source>Max Power</source>
+        <translation>Nejvýše energie</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="138"/>
+        <location filename="../src/mousewidget.cpp" line="144"/>
+        <source>Physical ID</source>
+        <translation>Fyzický identif.</translation>
+    </message>
+    <message>
+        <location filename="../src/mousewidget.cpp" line="154"/>
         <source>Speed</source>
-        <translation type="unfinished">Rychlost</translation>
+        <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="146"/>
+        <location filename="../src/mousewidget.cpp" line="162"/>
         <source>Uniq</source>
         <comment>Mouse Info from catinput</comment>
         <translation>Uniq</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="157"/>
+        <location filename="../src/mousewidget.cpp" line="173"/>
         <source>Connected</source>
         <translation>Připojeno</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="170"/>
+        <location filename="../src/mousewidget.cpp" line="186"/>
         <source>Phys</source>
         <comment>Mouse Info from catinput</comment>
         <translation>Fyz</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="201"/>
+        <location filename="../src/mousewidget.cpp" line="217"/>
         <source>Sysfs</source>
         <comment>Mouse Info from catinput</comment>
         <translation>Sysfs</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="214"/>
+        <location filename="../src/mousewidget.cpp" line="230"/>
         <source>Product</source>
         <translation>Produkt</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="219"/>
+        <location filename="../src/mousewidget.cpp" line="235"/>
         <source>Bus</source>
         <translation>Sběrnice</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="224"/>
+        <location filename="../src/mousewidget.cpp" line="240"/>
         <source>EV</source>
         <translation>EV</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="229"/>
+        <location filename="../src/mousewidget.cpp" line="245"/>
         <source>Handlers</source>
         <translation>Handlers</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="234"/>
+        <location filename="../src/mousewidget.cpp" line="250"/>
         <source>KEY</source>
         <translation>KEY</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="239"/>
+        <location filename="../src/mousewidget.cpp" line="255"/>
         <source>MSC</source>
         <translation>MSC</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="244"/>
+        <location filename="../src/mousewidget.cpp" line="260"/>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="249"/>
+        <location filename="../src/mousewidget.cpp" line="265"/>
         <source>REL</source>
         <translation>REL</translation>
     </message>
     <message>
-        <location filename="../src/mousewidget.cpp" line="262"/>
+        <location filename="../src/mousewidget.cpp" line="278"/>
         <source>Power</source>
         <comment>Mouse Info from upower</comment>
         <translation>Napájení</translation>
@@ -2430,13 +2389,13 @@
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="29"/>
         <source>Network Adapter</source>
-        <translation>Síťové rozhraní</translation>
+        <translation>Síťový adaptér</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="39"/>
         <location filename="../src/networkadapterwidget.cpp" line="106"/>
         <source>No network adapter found</source>
-        <translation>Nebyl nalezen žádný síťový adaptér</translation>
+        <translation>Nenalezen žádný síťový adaptér</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="51"/>
@@ -2497,7 +2456,7 @@
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="60"/>
         <source>Clock</source>
-        <translation>Hodiny</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="61"/>
@@ -2520,7 +2479,7 @@
         <location filename="../src/networkadapterwidget.cpp" line="162"/>
         <source>Clock</source>
         <comment>Network Adapter</comment>
-        <translation>Hodiny</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="167"/>
@@ -2535,88 +2494,88 @@
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="177"/>
-        <source>autonegotiation</source>
-        <translation>automatické vyjednání</translation>
-    </message>
-    <message>
-        <location filename="../src/networkadapterwidget.cpp" line="182"/>
-        <source>broadcast</source>
-        <translation>všesměrové vysílání</translation>
-    </message>
-    <message>
-        <location filename="../src/networkadapterwidget.cpp" line="187"/>
-        <source>capacity</source>
-        <translation>kapacita</translation>
-    </message>
-    <message>
-        <location filename="../src/networkadapterwidget.cpp" line="192"/>
-        <source>driver</source>
-        <translation>ovladač</translation>
+        <source>Auto Negotiation</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="197"/>
-        <source>driverversion</source>
-        <translation>verze ovladače</translation>
-    </message>
-    <message>
-        <location filename="../src/networkadapterwidget.cpp" line="202"/>
-        <source>duplex</source>
-        <translation>naráz oběma směry (duplex)</translation>
-    </message>
-    <message>
-        <location filename="../src/networkadapterwidget.cpp" line="207"/>
-        <source>firmware</source>
-        <translation>firmware</translation>
+        <source>Driver Version</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="212"/>
-        <source>ioport</source>
-        <translation>ioport</translation>
-    </message>
-    <message>
-        <location filename="../src/networkadapterwidget.cpp" line="217"/>
-        <source>ip</source>
-        <translation>IP adresa</translation>
+        <source>I/O Port</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="222"/>
-        <source>irq</source>
-        <translation>přerušení (irq)</translation>
+        <source>IRQ</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="182"/>
+        <source>Broadcast</source>
+        <translation>Všesměrové vysílání</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="187"/>
+        <source>Capacity</source>
+        <translation>Kapacita</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="192"/>
+        <source>Driver</source>
+        <translation>Ovladač</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="202"/>
+        <source>Duplex</source>
+        <translation>Naráz oběma směry (duplex)</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="207"/>
+        <source>Firmware</source>
+        <translation>Firmware</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="217"/>
+        <source>IP</source>
+        <translation>IP adresa</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="227"/>
-        <source>latency</source>
-        <translation>prodleva</translation>
+        <source>Latency</source>
+        <translation>Prodleva</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="232"/>
-        <source>link</source>
-        <translation>spojení</translation>
+        <source>Link</source>
+        <translation>Spojení</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="237"/>
-        <source>memory</source>
-        <translation>paměť</translation>
+        <source>Memory</source>
+        <translation>Operační paměť</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="242"/>
-        <source>multicast</source>
-        <translation>vícesměrové vysílání</translation>
-    </message>
-    <message>
-        <location filename="../src/networkadapterwidget.cpp" line="247"/>
-        <source>physical id</source>
-        <translation>fyzický identif.</translation>
+        <source>Multicast</source>
+        <translation>Vícesměrové vysílání</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="252"/>
-        <source>port</source>
-        <translation>port</translation>
+        <source>Port</source>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../src/networkadapterwidget.cpp" line="257"/>
-        <source>size</source>
-        <translation>velikost</translation>
+        <source>Size</source>
+        <translation>Velikost</translation>
+    </message>
+    <message>
+        <location filename="../src/networkadapterwidget.cpp" line="247"/>
+        <source>Physical ID</source>
+        <translation>Fyzický identif.</translation>
     </message>
 </context>
 <context>
@@ -2629,98 +2588,118 @@
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="40"/>
-        <location filename="../src/otherdevicewidget.cpp" line="110"/>
+        <location filename="../src/otherdevicewidget.cpp" line="114"/>
         <source>No other devices found</source>
         <translation>Nenalezena žádná další zařízení</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="53"/>
-        <location filename="../src/otherdevicewidget.cpp" line="101"/>
-        <location filename="../src/otherdevicewidget.cpp" line="122"/>
-        <location filename="../src/otherdevicewidget.cpp" line="202"/>
+        <location filename="../src/otherdevicewidget.cpp" line="105"/>
+        <location filename="../src/otherdevicewidget.cpp" line="126"/>
+        <location filename="../src/otherdevicewidget.cpp" line="206"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="54"/>
-        <location filename="../src/otherdevicewidget.cpp" line="127"/>
+        <location filename="../src/otherdevicewidget.cpp" line="131"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="56"/>
-        <location filename="../src/otherdevicewidget.cpp" line="132"/>
+        <location filename="../src/otherdevicewidget.cpp" line="136"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="57"/>
-        <location filename="../src/otherdevicewidget.cpp" line="101"/>
-        <location filename="../src/otherdevicewidget.cpp" line="137"/>
-        <location filename="../src/otherdevicewidget.cpp" line="202"/>
+        <location filename="../src/otherdevicewidget.cpp" line="105"/>
+        <location filename="../src/otherdevicewidget.cpp" line="141"/>
+        <location filename="../src/otherdevicewidget.cpp" line="206"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="58"/>
-        <location filename="../src/otherdevicewidget.cpp" line="142"/>
+        <location filename="../src/otherdevicewidget.cpp" line="146"/>
         <source>Bus Info</source>
         <translation>Informace o sběrnici</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="59"/>
-        <location filename="../src/otherdevicewidget.cpp" line="147"/>
+        <location filename="../src/otherdevicewidget.cpp" line="151"/>
         <source>Physical ID</source>
         <translation>Fyzický identif.</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="60"/>
-        <location filename="../src/otherdevicewidget.cpp" line="152"/>
+        <location filename="../src/otherdevicewidget.cpp" line="156"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="61"/>
-        <location filename="../src/otherdevicewidget.cpp" line="157"/>
+        <location filename="../src/otherdevicewidget.cpp" line="161"/>
         <source>Width</source>
         <translation>Šířka</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="62"/>
-        <location filename="../src/otherdevicewidget.cpp" line="162"/>
+        <location filename="../src/otherdevicewidget.cpp" line="166"/>
         <source>Clock</source>
-        <translation>Hodiny</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="63"/>
-        <location filename="../src/otherdevicewidget.cpp" line="167"/>
+        <location filename="../src/otherdevicewidget.cpp" line="171"/>
         <source>Capabilities</source>
         <translation>Schopnosti</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="64"/>
-        <source>driver</source>
-        <translation>ovladač</translation>
+        <source>Driver</source>
+        <translation>Ovladač</translation>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="65"/>
-        <source>irq</source>
-        <translation>přerušení (irq)</translation>
-    </message>
-    <message>
-        <location filename="../src/otherdevicewidget.cpp" line="66"/>
-        <source>latency</source>
-        <translation>prodleva</translation>
-    </message>
-    <message>
-        <location filename="../src/otherdevicewidget.cpp" line="67"/>
-        <source>memory</source>
-        <translation>operační paměť</translation>
+        <source>IRQ</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/otherdevicewidget.cpp" line="68"/>
-        <source>pci</source>
-        <translation>pci</translation>
+        <source>PCI</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/otherdevicewidget.cpp" line="72"/>
+        <source>USB Host</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/otherdevicewidget.cpp" line="66"/>
+        <source>Latency</source>
+        <translation>Prodleva</translation>
+    </message>
+    <message>
+        <location filename="../src/otherdevicewidget.cpp" line="67"/>
+        <source>Memory</source>
+        <translation>Operační paměť</translation>
+    </message>
+    <message>
+        <location filename="../src/otherdevicewidget.cpp" line="69"/>
+        <source>Logical Name</source>
+        <translation>Logický svazek</translation>
+    </message>
+    <message>
+        <location filename="../src/otherdevicewidget.cpp" line="70"/>
+        <source>Slots</source>
+        <translation>Sloty</translation>
+    </message>
+    <message>
+        <location filename="../src/otherdevicewidget.cpp" line="71"/>
+        <source>Speed</source>
+        <translation>Rychlost</translation>
     </message>
 </context>
 <context>
@@ -2786,7 +2765,7 @@
         <location filename="../src/otherpcidevice.cpp" line="60"/>
         <location filename="../src/otherpcidevice.cpp" line="144"/>
         <source>Clock</source>
-        <translation>Hodiny</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../src/otherpcidevice.cpp" line="61"/>
@@ -2809,191 +2788,186 @@
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="66"/>
-        <location filename="../src/powerwidget.cpp" line="213"/>
-        <location filename="../src/powerwidget.cpp" line="375"/>
+        <location filename="../src/powerwidget.cpp" line="214"/>
+        <location filename="../src/powerwidget.cpp" line="376"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="67"/>
-        <location filename="../src/powerwidget.cpp" line="209"/>
-        <location filename="../src/powerwidget.cpp" line="375"/>
+        <location filename="../src/powerwidget.cpp" line="210"/>
+        <location filename="../src/powerwidget.cpp" line="376"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="68"/>
         <location filename="../src/powerwidget.cpp" line="86"/>
-        <location filename="../src/powerwidget.cpp" line="211"/>
+        <location filename="../src/powerwidget.cpp" line="212"/>
         <source>Device</source>
         <translation>Zařízení</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="69"/>
-        <location filename="../src/powerwidget.cpp" line="214"/>
+        <location filename="../src/powerwidget.cpp" line="215"/>
         <source>Serial Number</source>
         <translation>Sériové číslo</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="80"/>
-        <location filename="../src/powerwidget.cpp" line="212"/>
+        <location filename="../src/powerwidget.cpp" line="213"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/powerwidget.cpp" line="83"/>
-        <location filename="../src/powerwidget.cpp" line="244"/>
+        <location filename="../src/powerwidget.cpp" line="245"/>
         <source>Power Supply</source>
         <translation>Napájecí zdroj</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="89"/>
-        <source>Critical Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/powerwidget.cpp" line="92"/>
+        <location filename="../src/powerwidget.cpp" line="93"/>
         <source>Daemon Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Verze procesu služby</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="95"/>
+        <location filename="../src/powerwidget.cpp" line="96"/>
         <source>Has History</source>
-        <translation type="unfinished"></translation>
+        <translation>Má historii</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="98"/>
+        <location filename="../src/powerwidget.cpp" line="99"/>
         <source>Has Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Má statistiky</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="101"/>
+        <location filename="../src/powerwidget.cpp" line="102"/>
         <source>Icon Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název ikony</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="104"/>
+        <location filename="../src/powerwidget.cpp" line="105"/>
         <source>Lid Is Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrazovka je přiklopená</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="107"/>
+        <location filename="../src/powerwidget.cpp" line="108"/>
         <source>Lid Is Present</source>
-        <translation type="unfinished"></translation>
+        <translation>Má přiklápětelnou obrazovku</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="110"/>
+        <location filename="../src/powerwidget.cpp" line="111"/>
         <source>On Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Z akumulátoru</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="113"/>
+        <location filename="../src/powerwidget.cpp" line="114"/>
         <source>Updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizováno</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="116"/>
+        <location filename="../src/powerwidget.cpp" line="117"/>
         <source>Warning Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Stupeň varování</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="128"/>
-        <location filename="../src/powerwidget.cpp" line="257"/>
+        <location filename="../src/powerwidget.cpp" line="129"/>
+        <location filename="../src/powerwidget.cpp" line="258"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="133"/>
-        <location filename="../src/powerwidget.cpp" line="260"/>
+        <location filename="../src/powerwidget.cpp" line="134"/>
+        <location filename="../src/powerwidget.cpp" line="261"/>
         <source>Physical ID</source>
         <translation>Fyzický identif.</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="136"/>
-        <location filename="../src/powerwidget.cpp" line="263"/>
+        <location filename="../src/powerwidget.cpp" line="137"/>
+        <location filename="../src/powerwidget.cpp" line="264"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="139"/>
-        <location filename="../src/powerwidget.cpp" line="267"/>
+        <location filename="../src/powerwidget.cpp" line="140"/>
+        <location filename="../src/powerwidget.cpp" line="268"/>
         <source>Capacity</source>
         <translation>Kapacita</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="154"/>
+        <location filename="../src/powerwidget.cpp" line="155"/>
         <source>Max Power Capacity</source>
-        <translation>Kapacita z výroby</translation>
+        <translation>Nejvyšší úroveň nabití</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="158"/>
-        <location filename="../src/powerwidget.cpp" line="271"/>
-        <location filename="../src/powerwidget.cpp" line="299"/>
+        <location filename="../src/powerwidget.cpp" line="159"/>
+        <location filename="../src/powerwidget.cpp" line="272"/>
+        <location filename="../src/powerwidget.cpp" line="300"/>
         <source>Location</source>
         <translation>Umístění</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="161"/>
+        <location filename="../src/powerwidget.cpp" line="162"/>
         <source>Asset Tag</source>
         <comment>Power Info from DMIDecode</comment>
         <translation>Inventární štítek</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="187"/>
-        <location filename="../src/powerwidget.cpp" line="198"/>
+        <location filename="../src/powerwidget.cpp" line="188"/>
+        <location filename="../src/powerwidget.cpp" line="199"/>
         <source>Switching Power</source>
         <translation>Napájení z elekrické sítě</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="210"/>
+        <location filename="../src/powerwidget.cpp" line="211"/>
         <source>Design Energy</source>
         <comment>Power Info from Upower</comment>
         <translation>Kapacita z výroby</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="227"/>
+        <location filename="../src/powerwidget.cpp" line="228"/>
         <source>State</source>
         <translation>Stav</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="230"/>
+        <location filename="../src/powerwidget.cpp" line="231"/>
         <source>Battery Percentage</source>
         <translation>Procento nabití akumulátoru</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="233"/>
+        <location filename="../src/powerwidget.cpp" line="234"/>
         <source>Current Energy</source>
         <translation>Stávající stupeň nabití</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="236"/>
+        <location filename="../src/powerwidget.cpp" line="237"/>
         <source>Full Energy</source>
         <translation>Úplné nabití</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="241"/>
+        <location filename="../src/powerwidget.cpp" line="242"/>
         <source>Battery Healthy</source>
         <translation>Akumulátor je v pořádku</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="274"/>
+        <location filename="../src/powerwidget.cpp" line="275"/>
         <source>Unknown</source>
         <translation>Neznámé</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="302"/>
+        <location filename="../src/powerwidget.cpp" line="303"/>
         <source>Asset Tag</source>
         <translation>Inventární štítek</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="335"/>
-        <location filename="../src/powerwidget.cpp" line="364"/>
-        <location filename="../src/powerwidget.cpp" line="370"/>
+        <location filename="../src/powerwidget.cpp" line="336"/>
+        <location filename="../src/powerwidget.cpp" line="365"/>
+        <location filename="../src/powerwidget.cpp" line="371"/>
         <source>Battery</source>
         <translation>Akumulátor</translation>
     </message>
     <message>
-        <location filename="../src/powerwidget.cpp" line="375"/>
+        <location filename="../src/powerwidget.cpp" line="376"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
@@ -3013,115 +2987,119 @@
     <message>
         <location filename="../src/printerwidget.cpp" line="181"/>
         <source>Copies</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopie</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="186"/>
         <source>Device URI</source>
-        <translation type="unfinished"></translation>
+        <translation>URI identif. zařízení</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="196"/>
         <source>Job Cancel After</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušení úlohy po uplynutí</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="201"/>
         <source>Job Hold Until</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozdržet úlohu do</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="206"/>
         <source>Job Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorita úlohy</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="211"/>
         <source>Job Sheets</source>
-        <translation type="unfinished"></translation>
+        <translation>Stránek úlohy</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="216"/>
         <source>Marker Change Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Marker Change Time</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="226"/>
         <source>Number Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Number Up</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="231"/>
         <source>Orientation Requested</source>
-        <translation type="unfinished"></translation>
+        <translation>Požadovaná orientace</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="236"/>
         <source>Print Color Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim tisku barev</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="241"/>
-        <source>PrinterInfo</source>
-        <translation type="unfinished"></translation>
+        <source>Printer Info</source>
+        <translation>Informace o tiskárně</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="246"/>
         <source>Printer Is Accepting Jobs</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiskárna přijímá úlohy</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="251"/>
         <source>Printer Is Shared</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiskárna je sdílená</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="256"/>
         <source>Printer Is Temporary</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiskárna je dočasná</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="261"/>
         <source>Printer Make And Model</source>
-        <translation type="unfinished"></translation>
+        <translation>Výrobce a model tiskárny</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="266"/>
         <source>Printer State</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav tiskárny</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="271"/>
         <source>Printer State Change Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Okamžik změny stavu tiskárny</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="276"/>
         <source>Printer State Reasons</source>
-        <translation type="unfinished"></translation>
+        <translation>Důvod stavu tiskárny</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="281"/>
         <source>Printer Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ tiskárny</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="286"/>
         <source>Printer URI Supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Printer URI Supported</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="291"/>
         <source>Sides</source>
-        <translation type="unfinished"></translation>
+        <translation>Stránek</translation>
     </message>
     <message>
-        <source>copies</source>
-        <translation type="vanished">kopie</translation>
+        <location filename="../src/printerwidget.cpp" line="323"/>
+        <source>Printer Info</source>
+        <comment>Printer Info,shown on first column of table's head</comment>
+        <translation>Informace o tiskárně</translation>
     </message>
     <message>
-        <source>Device-Uri</source>
-        <translation type="vanished">URI identif. zařízení</translation>
+        <location filename="../src/printerwidget.cpp" line="324"/>
+        <source>Printer Make And Model</source>
+        <comment>Printer Info,shown on second column of table's head </comment>
+        <translation>Výrobce a model tiskárny</translation>
     </message>
     <message>
         <location filename="../src/printerwidget.cpp" line="191"/>
@@ -3129,97 +3107,9 @@
         <translation>Dokončování</translation>
     </message>
     <message>
-        <source>Job-cancel-after</source>
-        <translation type="vanished">Zrušení úlohy po uplynutí</translation>
-    </message>
-    <message>
-        <source>Job-hold-until</source>
-        <translation type="vanished">Pozdržet úlohu do</translation>
-    </message>
-    <message>
-        <source>Job-priority</source>
-        <translation type="vanished">Priorita úlohy</translation>
-    </message>
-    <message>
-        <source>Job-Sheets</source>
-        <translation type="vanished">Stran úlohy</translation>
-    </message>
-    <message>
-        <source>marker-change-time</source>
-        <translation type="vanished">marker-change-time</translation>
-    </message>
-    <message>
         <location filename="../src/printerwidget.cpp" line="221"/>
         <source>Media</source>
         <translation>Médium</translation>
-    </message>
-    <message>
-        <source>number-up</source>
-        <translation type="vanished">number-up</translation>
-    </message>
-    <message>
-        <source>orientation-requested</source>
-        <translation type="vanished">požadovaná orientace</translation>
-    </message>
-    <message>
-        <source>print-color-mode</source>
-        <translation type="vanished">režim tisku barev</translation>
-    </message>
-    <message>
-        <source>printerInfo</source>
-        <translation type="vanished">informace o tiskárně</translation>
-    </message>
-    <message>
-        <source>printer-is-accepting-jobs</source>
-        <translation type="vanished">tiskárna přijímá úlohy</translation>
-    </message>
-    <message>
-        <source>printer-is-shared</source>
-        <translation type="vanished">tiskárna je sdílená</translation>
-    </message>
-    <message>
-        <source>printer-is-temporary</source>
-        <translation type="vanished">tiskárna je dočasná</translation>
-    </message>
-    <message>
-        <source>printer-make-and-model</source>
-        <translation type="vanished">výrobce a model tiskárny</translation>
-    </message>
-    <message>
-        <source>printer-state</source>
-        <translation type="vanished">stav tiskárny</translation>
-    </message>
-    <message>
-        <source>printer-state-change-time</source>
-        <translation type="vanished">okamžik změny stavu tiskárny</translation>
-    </message>
-    <message>
-        <source>printer-state-reasons</source>
-        <translation type="vanished">důvod stavu tiskárny</translation>
-    </message>
-    <message>
-        <source>printer-type</source>
-        <translation type="vanished">typ tiskárny</translation>
-    </message>
-    <message>
-        <source>printer-uri-supported</source>
-        <translation type="vanished">printer-uri-supported</translation>
-    </message>
-    <message>
-        <source>sides</source>
-        <translation type="vanished">strany</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="323"/>
-        <source>printer-info</source>
-        <comment>Printer Info,shown on first column of table&apos;s head</comment>
-        <translation>informace o tiskárně</translation>
-    </message>
-    <message>
-        <location filename="../src/printerwidget.cpp" line="324"/>
-        <source>printer-make-and-model</source>
-        <comment>Printer Info,shown on second column of table&apos;s head </comment>
-        <translation>výrobce a model tiskárny</translation>
     </message>
 </context>
 <context>
@@ -3445,7 +3335,7 @@
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="89"/>
         <source>Serial ID</source>
-        <translation>Serial ID</translation>
+        <translation>Identifikační sériové číslo</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="91"/>
@@ -3463,11 +3353,6 @@
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../src/usbdevicewidget.cpp" line="94"/>
-        <source>BusID</source>
-        <translation>Identif. sběrnice</translation>
-    </message>
-    <message>
         <location filename="../src/usbdevicewidget.cpp" line="95"/>
         <location filename="../src/usbdevicewidget.cpp" line="136"/>
         <source>Description</source>
@@ -3480,6 +3365,11 @@
         <location filename="../src/usbdevicewidget.cpp" line="154"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
+    </message>
+    <message>
+        <location filename="../src/usbdevicewidget.cpp" line="94"/>
+        <source>Bus ID</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="96"/>
@@ -3520,7 +3410,7 @@
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="143"/>
         <source>Clock</source>
-        <translation>Hodiny</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../src/usbdevicewidget.cpp" line="144"/>

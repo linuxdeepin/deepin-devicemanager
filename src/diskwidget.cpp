@@ -49,7 +49,7 @@ QString DiskWidget::setMediaType(QString &disk, QStringList &diskType)
     } else if (mediaType == "1") {
         mediaType = "HDD";
     } else {
-        mediaType = tr("UnKnown");
+        mediaType = tr("Unknown");
     }
 
     ArticleStruct media(tr("Media Type"));
@@ -178,7 +178,7 @@ void DiskWidget::addOtherSmartctlInfo(QString &disk)
         m_articles.push_back(powerOnHours);
         m_existArticles.insert("Power_On_Hours");
 
-        ArticleStruct powerOnMinutes(tr("Power_On_Minutes", "stroage info"));
+        ArticleStruct powerOnMinutes(tr("Power On Minutes", "stroage info"));
         DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnMinutes.value, devicefileStr, "Power_On_Minutes");
         if (powerOnMinutes.isValid()) {
             powerOnMinutes.value += (" " + tr("Minutes", "Power_On_Minutes"));
@@ -187,7 +187,7 @@ void DiskWidget::addOtherSmartctlInfo(QString &disk)
         m_existArticles.insert("Power_On_Minutes");
 
 
-        ArticleStruct powerOnHalfMinutes(tr("Power_On_Half_Minutes", "stroage info"));
+        ArticleStruct powerOnHalfMinutes(tr("Power On Half Minutes", "stroage info"));
         DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnHalfMinutes.value, devicefileStr, "Power_On_Half_Minutes");
         if (powerOnHalfMinutes.isValid()) {
             powerOnHalfMinutes.value += " ";
@@ -196,7 +196,7 @@ void DiskWidget::addOtherSmartctlInfo(QString &disk)
         m_articles.push_back(powerOnHalfMinutes);
         m_existArticles.insert("Power_On_Half_Minutes");
 
-        ArticleStruct powerOnSeconds(tr("Power_On_Seconds", "stroage info"));
+        ArticleStruct powerOnSeconds(tr("Power On Seconds", "stroage info"));
         DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnSeconds.value, devicefileStr, "Power_On_Seconds");
         if (powerOnSeconds.isValid()) {
             powerOnSeconds.value += " ";
@@ -590,7 +590,7 @@ void DiskWidget::initWidget()
             }
             articles.push_back(powerOnHours);
 
-            ArticleStruct powerOnMinutes(tr("Power_On_Minutes", "stroage info"));
+            ArticleStruct powerOnMinutes(tr("Power On Minutes", "stroage info"));
             powerOnMinutes.queryData("smartctl", logicalName, "Power_On_Minutes", existArticles);
             if (powerOnMinutes.isValid()) {
                 powerOnMinutes.value += (" " + tr("Minutes", "Power_On_Minutes"));
@@ -598,7 +598,7 @@ void DiskWidget::initWidget()
             articles.push_back(powerOnMinutes);
 
 
-            ArticleStruct powerOnHalfMinutes(tr("Power_On_Half_Minutes", "stroage info"));
+            ArticleStruct powerOnHalfMinutes(tr("Power On Half Minutes", "stroage info"));
             powerOnHalfMinutes.queryData("smartctl", logicalName, "Power_On_Half_Minutes", existArticles);
             if (powerOnHalfMinutes.isValid()) {
                 powerOnHalfMinutes.value += " ";
@@ -607,7 +607,7 @@ void DiskWidget::initWidget()
             articles.push_back(powerOnHalfMinutes);
 
 
-            ArticleStruct powerOnSeconds(tr("Power_On_Seconds", "stroage info"));
+            ArticleStruct powerOnSeconds(tr("Power On Seconds", "stroage info"));
             powerOnSeconds.queryData("smartctl", logicalName, "Power_On_Seconds", existArticles);
             if (powerOnSeconds.isValid()) {
                 powerOnSeconds.value += " ";
@@ -640,27 +640,27 @@ void DiskWidget::initWidget()
         articles.push_back(type);
         existArticles.insert("Type");
 
-        ArticleStruct ansiversion(tr("ansiversion", "stroage info"));
+        ArticleStruct ansiversion(tr("ANSI Version", "stroage info"));
         ansiversion.queryData("lshw", disk, "ansiversion");
         articles.push_back(ansiversion);
         existArticles.insert("ansiversion");
 
-        ArticleStruct guid(tr("guid", "stroage info"));
+        ArticleStruct guid(tr("GUID", "stroage info"));
         guid.queryData("lshw", disk, "guid");
         articles.push_back(guid);
         existArticles.insert("guid");
 
-        ArticleStruct busInfo(tr("bus info", "stroage info"));
+        ArticleStruct busInfo(tr("Bus Info", "stroage info"));
         busInfo.queryData("lshw", disk, "bus info");
         articles.push_back(busInfo);
         existArticles.insert("bus info");
 
-        ArticleStruct logicalName1(tr("logical name", "stroage info"));
+        ArticleStruct logicalName1(tr("Logical Name", "stroage info"));
         logicalName1.queryData("lshw", disk, "logical name");
         articles.push_back(logicalName1);
         existArticles.insert("logical name");
 
-        ArticleStruct logicalsectorsize(tr("logicalsectorsize", "stroage info"));
+        ArticleStruct logicalsectorsize(tr("Logical Sector Size", "stroage info"));
         logicalsectorsize.queryData("lshw", disk, "logicalsectorsize");
         articles.push_back(logicalsectorsize);
         existArticles.insert("logicalsectorsize");
@@ -670,7 +670,7 @@ void DiskWidget::initWidget()
         articles.push_back(physicalId);
         existArticles.insert("physical id");
 
-        ArticleStruct sectorsize(tr("sectorsize", "stroage info"));
+        ArticleStruct sectorsize(tr("Sector Size", "stroage info"));
         sectorsize.queryData("lshw", disk, "sectorsize");
         articles.push_back(sectorsize);
         existArticles.insert("sectorsize");
@@ -689,7 +689,7 @@ void DiskWidget::initWidget()
             articles.push_back(autoOfflineDataCollection);
             existArticles.insert("Auto Offline Data Collection");
 
-            ArticleStruct currentPendingSector(tr("Current_Pending_Sector", "stroage info"));
+            ArticleStruct currentPendingSector(tr("Current Pending Sector", "stroage info"));
             currentPendingSector.queryData("smartctl", logicalName, "Current_Pending_Sector");
             articles.push_back(currentPendingSector);
             existArticles.insert("Current_Pending_Sector");
@@ -699,7 +699,7 @@ void DiskWidget::initWidget()
             articles.push_back(device);
             existArticles.insert("Device");
 
-            ArticleStruct endToEndError(tr("End-to-End_Error", "stroage info"));
+            ArticleStruct endToEndError(tr("End-to-End Error", "stroage info"));
             endToEndError.queryData("smartctl", logicalName, "End-to-End_Error");
             articles.push_back(endToEndError);
             existArticles.insert("End-to-End_Error");
@@ -709,7 +709,7 @@ void DiskWidget::initWidget()
             articles.push_back(firmwareVersion);
             existArticles.insert("Firmware Version");
 
-            ArticleStruct smartCapabilities(tr("SMART capabilities", "stroage info"));
+            ArticleStruct smartCapabilities(tr("SMART Capabilities", "stroage info"));
             smartCapabilities.queryData("smartctl", logicalName, "SMART capabilities");
             articles.push_back(smartCapabilities);
             existArticles.insert("SMART capabilities");

@@ -85,22 +85,22 @@ void CDRomWidget::initWidget()
         articles.push_back(Type);
         existArticles.insert("Type");
 
-        ArticleStruct ansiversion(tr("ansiversion"));
+        ArticleStruct ansiversion(tr("ANSI Version"));
         busInfo.queryData( "lshw", device, "ansiversion");
         articles.push_back(ansiversion);
         existArticles.insert("ansiversion");
 
-        ArticleStruct capabilities(tr("capabilities"));
+        ArticleStruct capabilities(tr("Capabilities"));
         version.queryData( "lshw", device, "capabilities");
         articles.push_back(capabilities);
         existArticles.insert("capabilities");
 
-        ArticleStruct physicalId(tr("physical id"));
+        ArticleStruct physicalId(tr("Physical ID"));
         logicalName.queryData( "lshw", device, "physical id");
         articles.push_back(physicalId);
         existArticles.insert("physical id");
 
-        ArticleStruct status(tr("status"));
+        ArticleStruct status(tr("Status"));
         status.queryData("lshw",device,"status");
         articles.push_back(status);
         existArticles.insert("status");

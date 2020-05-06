@@ -728,7 +728,7 @@ void MonitorWidget::initHwMonitor()
     date.value = QString("%1%2%3%4").arg(2019).arg(tr("Year")).arg(31).arg(tr("Week"));
     monitorSize.value = "296x197 mm";
     articles = {vendor, currentResolution, resolutionList, date, monitorSize};
-    addDevice("Notebook monitor", articles, monitorCount );
+    addDevice("Notebook Monitor", articles, monitorCount );
     overviewInfo_.value = tr("Notebook monitor");
     if(edidParser.isVaild()){
         //external monitor
@@ -740,7 +740,7 @@ void MonitorWidget::initHwMonitor()
         monitorSize.value = edidParser.getMaxImageSize();
         articles = {vendor,resolutionList, date, monitorSize};
         addDevice("External monitor", articles, monitorCount );
-        overviewInfo_.value += QString(" / ").arg(tr("External monitor"));
+        overviewInfo_.value += QString(" / ").arg(tr("External Monitor"));
     }
 
     return;

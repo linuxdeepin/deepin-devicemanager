@@ -141,12 +141,12 @@ void KeyboardWidget::loadWidgetEx()
             articles.push_back(driver);
             existArticles.insert("driver");
 
-            ArticleStruct maxpower(tr("Maxpower"));
+            ArticleStruct maxpower(tr("Max Power"));
             maxpower.queryData("lshw", lshwMouse, "maxpower");
             articles.push_back(maxpower);
             existArticles.insert("maxpower");
 
-            ArticleStruct physicalId(tr("Physical Id"));
+            ArticleStruct physicalId(tr("Physical ID"));
             physicalId.queryData("lshw", lshwMouse, "physical id");
             articles.push_back(physicalId);
             existArticles.insert("physical id");
@@ -367,27 +367,27 @@ bool KeyboardWidget::findKeyboardFromHwinfo()
         addArticleStruct(tr("Status"), "Keyboard", keyboard, "Config Status");
         addArticleStruct(tr("Driver"), "Keyboard", keyboard, "Driver");
         addArticleStruct(tr("Speed"), "Keyboard", keyboard, "Speed");
-        addArticleStruct(tr("BusID"), "Keyboard", keyboard, "SysFS BusID");
+        addArticleStruct(tr("Bus ID"), "Keyboard", keyboard, "SysFS BusID");
         ArticleStruct description = addArticleStruct(tr("Description"), "Keyboard", keyboard, "description");
         addArticleStruct(tr("Unique ID"), "Keyboard", keyboard, "Unique ID");
         addArticleStruct(tr("SysFS ID"), "Keyboard", keyboard, "SysFS ID");
 
-        ArticleStruct driver(tr("driver"));
+        ArticleStruct driver(tr("Driver"));
         driver.queryData("lshw", keyboard, "driver");
         m_articles.push_back(driver);
         m_existArticles.insert("driver");
 
-        ArticleStruct maxpower(tr("maxpower"));
+        ArticleStruct maxpower(tr("Max Power"));
         maxpower.queryData("lshw", keyboard, "maxpower");
         m_articles.push_back(maxpower);
         m_existArticles.insert("maxpower");
 
-        ArticleStruct physicalId(tr("physical id"));
+        ArticleStruct physicalId(tr("Physical ID"));
         physicalId.queryData("lshw", keyboard, "physical id");
         m_articles.push_back(physicalId);
         m_existArticles.insert("physical id");
 
-        ArticleStruct speed(tr("speed"));
+        ArticleStruct speed(tr("Speed"));
         speed.queryData("lshw", keyboard, "speed");
         m_articles.push_back(speed);
         m_existArticles.insert("speed");
@@ -471,7 +471,7 @@ bool KeyboardWidget::findKeyboardFromLshw()
         m_articles.push_back(driver);
         m_existArticles.insert("driver");
 
-        ArticleStruct maxpower(tr("Maxpower"));
+        ArticleStruct maxpower(tr("Max Power"));
         maxpower.queryData("lshw", keyboard, "maxpower");
         m_articles.push_back(maxpower);
         m_existArticles.insert("maxpower");
