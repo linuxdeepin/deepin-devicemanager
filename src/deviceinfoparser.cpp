@@ -1120,8 +1120,7 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
     for (int i = 0; i < lshwSize; ++i) {
 
         const QString &fk = toolDatabaseSecondOrder_["lshw"][i];
-        if(toolDatabase_["lshw"][fk]["description"].compare("Mass storage device", Qt::CaseInsensitive) == 0
-                || toolDatabase_["lshw"][fk]["description"].compare("Generic USB device", Qt::CaseInsensitive) == 0
+        if(toolDatabase_["lshw"][fk]["description"].compare("Generic USB device", Qt::CaseInsensitive) == 0
                 || toolDatabase_["lshw"][fk]["description"].compare("Human interface device", Qt::CaseInsensitive) == 0){
             otherDeviceList.push_back(fk);
             continue;
@@ -1146,7 +1145,8 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
                     || toolDatabase_["lshw"][fk]["description"].compare("Serial controller", Qt::CaseInsensitive) == 0 \
                     || toolDatabase_["lshw"][fk]["description"].compare("PCI bridge", Qt::CaseInsensitive) == 0 \
                     || toolDatabase_["lshw"][fk]["description"].compare("ISA bridge", Qt::CaseInsensitive) == 0 \
-                    || toolDatabase_["lshw"][fk]["description"].compare("SMBus", Qt::CaseInsensitive) == 0) {
+                    || toolDatabase_["lshw"][fk]["description"].compare("SMBus", Qt::CaseInsensitive) == 0 \
+                    || toolDatabase_["lshw"][fk]["description"].compare("Mass storage device", Qt::CaseInsensitive) == 0) {
                 continue;
             }
         }
