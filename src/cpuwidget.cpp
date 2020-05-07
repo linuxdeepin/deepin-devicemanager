@@ -52,13 +52,15 @@ void CpuWidget::initWidget()
 
     // 获取cpu核心列表，即有多少个CPU核
     QStringList coreList = DeviceInfoParser::Instance().getCatcpuCpuList();
-    if (coreList.size() < 1 && cpuList.size() < 1) {return;}
+    if (coreList.size() < 1 && cpuList.size() < 1) {
+        return;
+    }
 
     // 获取CPU模型
     QDBusInterface cpuModelName("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
     QString cpuModel  = cpuModelName.property("Processor").toString();
 
-    cpuModel.replace(QRegExp(" x [0-9]*$"), "");
+//    cpuModel.replace(QRegExp(" x [0-9]*$"), "");
 
     overviewInfo_.value = cpuModel;
     overviewInfo_.value.remove(" CPU", Qt::CaseInsensitive);
@@ -87,7 +89,9 @@ void CpuWidget::initWidget()
 
     // 获取显示界面里面的内容
     QList<QStringList> tabList;
-    getTableContentFromLscpu(cpuModel, coreList, tabList);
+    QString modeltmp = cpuModel;
+    modeltmp.replace(QRegExp(" x [0-9]*$"), "");
+    getTableContentFromLscpu(modeltmp, coreList, tabList);
 
     // 将获取的数据写到表格
     addTable(headers, tabList);

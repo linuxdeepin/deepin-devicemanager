@@ -180,6 +180,14 @@ DeviceInfoWidgetBase::DeviceInfoWidgetBase(DWidget *parent_, const QString &devi
     connect(DApplicationHelper::instance(), &DApplicationHelper::themeTypeChanged, this, &DeviceInfoWidgetBase::changeTheme );
 }
 
+DeviceInfoWidgetBase::~DeviceInfoWidgetBase()
+{
+    if (titleInfo_) {
+        delete titleInfo_;
+        titleInfo_ = nullptr;
+    }
+}
+
 void DeviceInfoWidgetBase::initFont()
 {
     if ( isFontInit_ == true ) {
@@ -257,7 +265,7 @@ void DeviceInfoWidgetBase::initContextMenu()
 
 
     //exportAction_ = new QAction( QIcon::fromTheme("document-save-as"), tr("Export (E)")  );
-    exportAction_ = new QAction( QIcon::fromTheme("document-new"), tr("Export (E)"));
+    exportAction_ = new QAction( QIcon::fromTheme("document-new"), tr("Export (E)"), this);
 
     QShortcut *temp = new QShortcut(this);
     temp->setKey(QKeySequence("ctrl+e"));

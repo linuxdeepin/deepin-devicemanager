@@ -50,8 +50,7 @@ DeviceListviewDelegate::DeviceListviewDelegate(QAbstractItemView *parent)
 
 void DeviceListviewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    if( index.data().toString() == "Seperator" )
-    {
+    if ( index.data().toString() == "Seperator" ) {
         return paintSeparator(painter, option);
     }
 
@@ -60,8 +59,7 @@ void DeviceListviewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 
 QSize DeviceListviewDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    if( index.data().toString() == "Seperator" )
-    {
+    if ( index.data().toString() == "Seperator" ) {
         return QSize( option.rect.width(), 5);
     }
 
@@ -78,7 +76,7 @@ void DeviceListviewDelegate::paintSeparator(QPainter *painter, const QStyleOptio
     painter->restore();
 }
 
-DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
+DeviceListView::DeviceListView(DWidget *parent): DListView(parent)
 {
 //    setResizeMode(QListView::Adjust);
 //    setOrientation(QListView::LeftToRight, true);
@@ -87,7 +85,7 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
 
     //DListView::setSelectionRectVisible(false);
 
-    navModel_ = new QStandardItemModel(navModel_);
+    navModel_ = new QStandardItemModel(this);
 
     setVerticalScrollMode(ScrollPerPixel);
     //setIconSize(QSize(24, 24));
@@ -130,7 +128,7 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     //setMar
 
 
-    auto modifyTheme = [this](){
+    auto modifyTheme = [this]() {
         pa_ = DApplicationHelper::instance()->palette(this);
         pa_.setBrush(DPalette::ItemBackground, pa_.brush(DPalette::Base));
         pa_.setBrush(DPalette::Background, pa_.brush(DPalette::Base));
@@ -151,13 +149,13 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
 
     setContextMenuPolicy(Qt::CustomContextMenu);
 
-    connect(this, SIGNAL(customContextMenuRequested(const QPoint&)), SLOT(OnlvOpRightBtn(const QPoint&)));
+    connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), SLOT(OnlvOpRightBtn(const QPoint &)));
 
     setItemSpacing(0);
 
     setIconSize( QSize(20, 20) );
 
-    setViewportMargins(10,2,10,5);
+    setViewportMargins(10, 2, 10, 5);
     this->viewport()->setAutoFillBackground(false);
 
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -165,9 +163,9 @@ DeviceListView::DeviceListView(DWidget* parent):DListView(parent)
     DFontSizeManager::instance()->bind(this, DFontSizeManager::T6);
 }
 
-void DeviceListView::addDevice(const QString& deviceName, const QString& iconFile)
+void DeviceListView::addDevice(const QString &deviceName, const QString &iconFile)
 {
-    DStandardItem* item = new DStandardItem;
+    DStandardItem *item = new DStandardItem;
 
     //DFontSizeManager::instance()->bind(nameLabel, DFontSizeManager::T8);
     //QFont itemFont = item->font();
@@ -183,7 +181,7 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
     item->setIcon(QIcon::fromTheme(iconFile));
 
     QString icon = ":images/";
-    icon += ((ct == DGuiApplicationHelper::LightType) ? "light/normal/":"dark/normal/");
+    icon += ((ct == DGuiApplicationHelper::LightType) ? "light/normal/" : "dark/normal/");
     icon += iconFile;
 
     item->setText(deviceName);
@@ -203,7 +201,7 @@ void DeviceListView::addDevice(const QString& deviceName, const QString& iconFil
 
 void DeviceListView::addSeperator()
 {
-    DStandardItem* item = new DStandardItem;
+    DStandardItem *item = new DStandardItem;
     //item->setBackgroundRole(QPalette::Base);
     //item->setAutoFillBackground(true);
     item->setText("Seperator");
@@ -218,7 +216,7 @@ QString DeviceListView::currentDevice()
     return currentDevice_;
 }
 
-void DeviceListView::setCurrentDevice(const QString& device)
+void DeviceListView::setCurrentDevice(const QString &device)
 {
     currentDevice_ = device;
 }
@@ -250,12 +248,10 @@ QString DeviceListView::indexString(int index)
 
 void DeviceListView::setAllItemsEnable(bool eable)
 {
-    for(int i = 0; i < navModel_->rowCount(); ++i)
-    {
-        QStandardItem* item = navModel_->item(i);
+    for (int i = 0; i < navModel_->rowCount(); ++i) {
+        QStandardItem *item = navModel_->item(i);
         {
-            if(item && item->isEnabled() != eable && item->isSelectable() )
-            {
+            if (item && item->isEnabled() != eable && item->isSelectable() ) {
                 item->setEnabled(eable);
             }
         }
@@ -264,20 +260,18 @@ void DeviceListView::setAllItemsEnable(bool eable)
 
 bool DeviceListView::onExportToFile()
 {
-   MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent());
-   if( nullptr == mainWindow )
-   {
-       return false;
-   }
+    MainWindow *mainWindow = dynamic_cast<MainWindow *>(this->parent()->parent());
+    if ( nullptr == mainWindow ) {
+        return false;
+    }
 
-   return mainWindow->exportTo();
+    return mainWindow->exportTo();
 }
 
-void DeviceListView::OnlvOpRightBtn( const QPoint& point)
+void DeviceListView::OnlvOpRightBtn( const QPoint &point)
 {
-    MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent()->parent());
-    if(mainWindow)
-    {
+    MainWindow *mainWindow = dynamic_cast<MainWindow *>(parent()->parent());
+    if (mainWindow) {
         refreshAction_->setDisabled(mainWindow->isRefreshing());
     }
 
@@ -288,21 +282,18 @@ void DeviceListView::changeThemeIcon()
 {
     auto type = DApplicationHelper::instance()->themeType();
 
-    QString currentFolderName = (type == DApplicationHelper::DarkType )? "/dark/":"/light/";
-    QString oldFolderName = (type == DApplicationHelper::DarkType) ? "/light/":"/dark/";
+    QString currentFolderName = (type == DApplicationHelper::DarkType ) ? "/dark/" : "/light/";
+    QString oldFolderName = (type == DApplicationHelper::DarkType) ? "/light/" : "/dark/";
 
-    for(int i = 0; i < navModel_->rowCount(); ++i)
-    {
-        QStandardItem* item = navModel_->item(i);
+    for (int i = 0; i < navModel_->rowCount(); ++i) {
+        QStandardItem *item = navModel_->item(i);
         {
-            if(item)
-            {
-                QString icon = item->data(Qt::UserRole+89).toString();
-                if(icon.isEmpty() == false)
-                {
+            if (item) {
+                QString icon = item->data(Qt::UserRole + 89).toString();
+                if (icon.isEmpty() == false) {
                     icon.replace(oldFolderName, currentFolderName);
                     item->setIcon(QIcon(icon));
-                    item->setData(icon, Qt::UserRole+89);
+                    item->setData(icon, Qt::UserRole + 89);
                 }
             }
         }
@@ -317,19 +308,17 @@ void DeviceListView::initContextMenu()
 
     refreshAction_ = new QAction( QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this);
     connect(refreshAction_, &QAction::triggered, \
-            [this]()
-            {
-                MainWindow* mainWindow = dynamic_cast<MainWindow*>(parent()->parent());
-                if(mainWindow)
-                {
-                    mainWindow->refresh();
-                }
-            }
-    );
+    [this]() {
+        MainWindow *mainWindow = dynamic_cast<MainWindow *>(parent()->parent());
+        if (mainWindow) {
+            mainWindow->refresh();
+        }
+    }
+           );
     contextMenu_->addAction(refreshAction_);
 
 
-    QAction* exportAction = new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"));
+    QAction *exportAction = new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this);
 
     connect(exportAction, &QAction::triggered, this, &DeviceListView::onExportToFile);
 
@@ -365,9 +354,8 @@ void DeviceListView::currentChanged(const QModelIndex &current, const QModelInde
     DListView::currentChanged(current, previous);
 
     QString device = current.data().toString();
-    MainWindow* mainWindow = dynamic_cast<MainWindow*>(this->parent()->parent());
-    if( nullptr == mainWindow )
-    {
+    MainWindow *mainWindow = dynamic_cast<MainWindow *>(this->parent()->parent());
+    if ( nullptr == mainWindow ) {
         return;
     }
 

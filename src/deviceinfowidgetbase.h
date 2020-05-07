@@ -94,6 +94,7 @@ class DeviceInfoWidgetBase : public Dtk::Widget::DWidget
     Q_OBJECT
 public:
     explicit DeviceInfoWidgetBase(Dtk::Widget::DWidget *parent = nullptr, const QString &deviceName = "");
+    ~DeviceInfoWidgetBase() override;
     void initFont();
 
     virtual bool getOverViewInfo(ArticleStruct &info);
