@@ -639,7 +639,7 @@ QStringList DeviceInfoParser::getCatinputInputdeviceList()
 QStringList DeviceInfoParser::getLshwNetworkadapterList()
 {
     checkValueFun_t func = [](const QString & fk)->bool {
-        if (fk.contains("network"))
+        if (fk.contains("network") && !fk.contains("UNCLAIMED"))
         {
             DeviceInfoParser::Instance().orderedDevices.insert(fk);
             return true;
@@ -1946,7 +1946,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
      */
     QString out = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile file(DEVICEINFO_PATH + "/lsblk.txt");
+    QFile file(DEVICEINFO_PATH + "/lsblk_l.txt");
     if (false == file.open(QIODevice::ReadOnly)) {
         return false;
     }
@@ -2488,7 +2488,7 @@ bool DeviceInfoParser::loadXrandrDatabase()
 
     QString xrandrOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile xrandrFile(DEVICEINFO_PATH + "/xrandr.txt");
+    QFile xrandrFile(DEVICEINFO_PATH + "/xrandr_verbose.txt");
     if (false == xrandrFile.open(QIODevice::ReadOnly)) {
         return false;
     }
@@ -2832,7 +2832,7 @@ bool DeviceInfoParser::loadLspciDatabase()
     }
     QString lspciOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile lspciFile(DEVICEINFO_PATH + "/lspci.txt");
+    QFile lspciFile(DEVICEINFO_PATH + "/lspci_v.txt");
     if (false == lspciFile.open(QIODevice::ReadOnly)) {
         return false;
     }
