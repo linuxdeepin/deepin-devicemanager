@@ -91,6 +91,7 @@ void CpuWidget::initWidget()
     QList<QStringList> tabList;
     QString modeltmp = cpuModel;
     modeltmp.replace(QRegExp(" x [0-9]*$"), "");
+    modeltmp.replace(QRegExp(" /[0-9]*$"), "");
     getTableContentFromLscpu(modeltmp, coreList, tabList);
 
     // 将获取的数据写到表格
@@ -289,7 +290,25 @@ void CpuWidget::getSpeedFromDmidecode()
 {
     QString maxMHz = DeviceInfoParser::Instance().queryData("dmidecode", "Processor Information", "Max Speed");
     QString curMHz = DeviceInfoParser::Instance().queryData("dmidecode", "Processor Information", "Current Speed");
-    speed_ = curMHz;
+
+    QRegExp reg("^[0-9]*");
+
+    int maxnum = 0;
+    int curnum = 0;
+    if (reg.indexIn(maxMHz) > -1) {
+        maxnum = reg.cap(0).toInt();
+    }
+
+    if (reg.indexIn(curMHz) > -1) {
+        curnum = reg.cap(0).toInt();
+    }
+
+    if (maxnum >= curnum) {
+        speed_ = maxMHz;
+    } else {
+        speed_ = curMHz;
+    }
+
 }
 void CpuWidget::getTableHeader(bool getSpeedFromLscpu, QStringList &headers)
 {
