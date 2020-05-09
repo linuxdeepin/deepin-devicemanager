@@ -88,6 +88,7 @@ void DeviceInfoParser::refreshDabase()
     loadLsblKDatabase();
     loadAllSmartctlDatabase();
     loadhwinfoDiskDatabase();
+    loadDiskMediaType();
 
     emit loadFinished(tr("Loading CPU Info..."));
     loadCatcpuDatabase();
@@ -1962,11 +1963,9 @@ bool DeviceInfoParser::loadLsblKDatabase()
     QStringList head = outLines.first().split(" ", QString::SkipEmptyParts);
     if (head.count() != 7) return false;
 
-
     int index_name = -1;
     int index_size = -1;
     int index_type = -1;
-    int index_rm = -1;
 
     int index = 0;
     foreach (auto it, head) {
@@ -1980,12 +1979,9 @@ bool DeviceInfoParser::loadLsblKDatabase()
             index_type = index;
         }
 
-        if (it.compare("RM", Qt::CaseInsensitive) == 0) {
-            index_rm = index;
-        }
         index++;
     }
-    if (index_name + index_size + index_type + index_rm <= 0) {
+    if (index_name + index_size + index_type <= 0) {
         return false;
     }
 
@@ -2001,7 +1997,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
         QStringList cols = oneRow.split(" ", QString::SkipEmptyParts);
         QString unknow_str = tr("Unknown");
         QString name = "", size = unknow_str, type = unknow_str;
-        QString rm = unknow_str;
+
         int index_t = 0;
         foreach (auto it, cols) {
             if (index_t == index_name) {
@@ -2013,9 +2009,6 @@ bool DeviceInfoParser::loadLsblKDatabase()
             if (index_t == index_type) {
                 type = it;
             }
-            if (index_t == index_rm) {
-                rm = it;
-            }
             index_t ++;
         }
 
@@ -2026,7 +2019,6 @@ bool DeviceInfoParser::loadLsblKDatabase()
         diskInfo.clear();
         diskInfo.insert("size", size);
         diskInfo.insert("type", type);
-        diskInfo.insert("rm", rm);
         diskDb.insert(name, diskInfo);
     }
 
@@ -2042,7 +2034,91 @@ bool DeviceInfoParser::loadLsblKDatabase()
     return true;
 }//end fun
 
+bool DeviceInfoParser::loadDiskMediaType()
+{
+    if (false == executeProcess("sudo lsblk -d -o name,rota")) {
+        return false;
+    }
 
+    QString out = standOutput_;
+#ifdef TEST_DATA_FROM_FILE
+    QFile file(DEVICEINFO_PATH + "/lsblk_mt.txt");
+    if (false == file.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+    out = file.readAll();
+    file.close();
+#endif
+
+    if (out.isEmpty()) return false;
+    QStringList outLines = out.split("\n");
+    if (outLines.count() < 2) return false;
+    if (outLines.first().isEmpty()) return false;
+    QStringList head = outLines.first().split(" ", QString::SkipEmptyParts);
+    if (head.count() != 2) return false;
+
+    int index_name = -1;
+    int index_type = -1;
+
+    int index = 0;
+    foreach (auto it, head) {
+        if (it.compare("NAME", Qt::CaseInsensitive) == 0) {
+            index_name = index;
+        }
+
+        if (it.compare("ROTA", Qt::CaseInsensitive) == 0) {
+            index_type = index;
+        }
+
+        index++;
+    }
+    if (index_name + index_type <= 0) {
+        return false;
+    }
+
+    bool first = true;
+    DatabaseMap diskDb;
+    diskDb.clear();
+    foreach (auto oneRow, outLines) {
+        if (first)  {
+            first = false;
+            continue;
+        }
+
+        QStringList cols = oneRow.split(" ", QString::SkipEmptyParts);
+        QString unknow_str = tr("Unknown");
+        QString name = "", type = unknow_str;
+
+        int index_t = 0;
+        foreach (auto it, cols) {
+            if (index_t == index_name) {
+                name = it;
+            }
+
+            if (index_t == index_type) {
+                type = it;
+            }
+            index_t ++;
+        }
+
+        if (name.isEmpty()) {
+            continue;
+        }
+        QMap<QString, QString> diskInfo;
+        diskInfo.clear();
+
+        diskInfo.insert("type", type);
+        diskDb.insert(name, diskInfo);
+    }
+
+    if (diskDb.isEmpty()) {
+        return false;
+    }
+
+    toolDatabaseSecondOrder_.insert("MediaType", diskDb.keys());
+    toolDatabase_.insert("MediaType", diskDb);
+    return true;
+}
 
 QStringList DeviceInfoParser::getLsblkDiskNameList()
 {
@@ -2056,7 +2132,7 @@ QStringList DeviceInfoParser::getLsblkDiskNameList()
 
 QStringList DeviceInfoParser::getLsblkDiskTypeList()
 {
-    return getMatchToolDeviceList(g_lsblkDbKey);
+    return getMatchToolDeviceList("MediaType");
 }
 
 bool DeviceInfoParser::loadLscpuDatabase()

@@ -33,14 +33,14 @@ DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Stora
     getHwinfoDiskList();
 }
 
-QString DiskWidget::setMediaType(QString &disk, QStringList &diskType)
+QString DiskWidget::setMediaType(QString &disk, QStringList &diskLogicName)
 {
     QString mediaType;
 
     QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
-    foreach (auto type, diskType) {
-        if (devicefileStr.contains(type, Qt::CaseInsensitive)) {
-            mediaType = DeviceInfoParser::Instance().queryData("lsblk", type, "rm");
+    foreach (auto LogicName, diskLogicName) {
+        if (devicefileStr.contains(LogicName, Qt::CaseInsensitive)) {
+            mediaType = DeviceInfoParser::Instance().queryData("MediaType", LogicName, "type");
         }
     }
 
@@ -115,8 +115,7 @@ ArticleStruct DiskWidget::setDiskModelInfo(QString &disk)
         DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(model.value, devicefileStr, "model");
 
         // smartctl 中无法获取U盘model信息时
-        if (model.isValid() == false)
-        {
+        if (model.isValid() == false) {
             model.queryData("Storage", disk, "Model");
             model.value = model.value.replace("\"", "").trimmed();
         }
@@ -167,8 +166,7 @@ void DiskWidget::addOtherSmartctlInfo(QString &disk)
         DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnHours.value, devicefileStr, "Power_On_Hours");
         if (powerOnHours.isValid()) {
             powerOnHours.value += (" " + tr("Hours"));
-        }
-        else {
+        } else {
             DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerOnHours.value, devicefileStr, "Power On Hours");
             if (powerOnHours.isValid()) {
                 powerOnHours.value += (" " + tr("Hours"));
@@ -201,8 +199,7 @@ void DiskWidget::addOtherSmartctlInfo(QString &disk)
         if (powerOnSeconds.isValid()) {
             powerOnSeconds.value += " ";
             powerOnSeconds.value += tr("Seconds");
-        }
-        else {
+        } else {
 
         }
         m_articles.push_back(powerOnSeconds);
@@ -213,8 +210,7 @@ void DiskWidget::addOtherSmartctlInfo(QString &disk)
         if (powerCycleCount.isValid()) {
             powerCycleCount.value += " ";
             powerCycleCount.value += tr("Times", "Power Cycle Count");
-        }
-        else {
+        } else {
             DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(powerCycleCount.value, devicefileStr, "Power Cycles");
             if (powerCycleCount.isValid()) {
                 powerCycleCount.value += " ";
@@ -234,14 +230,12 @@ ArticleStruct DiskWidget::setDiskInterfaceInfo(QString &disk)
 
     if (interface.value.contains("usb", Qt::CaseInsensitive) == true) {
         interface.value = "USB";
-    }
-    else if (interface.value.contains("nvme", Qt::CaseInsensitive) == true){
+    } else if (interface.value.contains("nvme", Qt::CaseInsensitive) == true) {
         QStringList strList = interface.value.split(",");
         if (strList.size() >= 1)
             interface.value = strList[0].toUpper().trimmed();
         interface.value.replace("\"", "");
-    }
-    else {
+    } else {
         QString devicefileStr = DeviceInfoParser::Instance().queryData("Storage", disk, "Device File");
         DeviceInfoParser::Instance().getDiskModelFromSmartctlInfo(interface.value, devicefileStr, "SATA Version");
         int index = interface.value.indexOf(",");
@@ -675,7 +669,7 @@ void DiskWidget::initWidget()
         articles.push_back(sectorsize);
         existArticles.insert("sectorsize");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", disk, articles, existArticles,"ManulTrack__Disk","Disk Information");
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", disk, articles, existArticles, "ManulTrack__Disk", "Disk Information");
 
         if ( DeviceInfoParser::Instance().isToolSuccess("smartctl") ) {
 
@@ -739,7 +733,7 @@ void DiskWidget::initWidget()
 //            sectorsize.queryData("lshw", logicalName, "sectorsize");
 //            articles.push_back(sectorsize);
 //            existArticles.insert("sectorsize");
-            DeviceInfoParser::Instance().queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles,"ManulTrack__Disk","Disk Information");
+            DeviceInfoParser::Instance().queryRemainderDeviceInfo("smartctl", logicalName, articles, existArticles, "ManulTrack__Disk", "Disk Information");
         }
 
         addDevice( model.value, articles, diskList.size() );

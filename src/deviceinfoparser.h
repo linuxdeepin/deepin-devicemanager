@@ -206,6 +206,9 @@ public:
     // sudo lsblk -l stdout parse
     bool loadLsblKDatabase();
 
+    // lsblk -d -o name,rota
+    bool loadDiskMediaType();
+
     // 获取 存储设备 介质类型
     QStringList getLsblkDiskTypeList();
 
