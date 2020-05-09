@@ -1127,7 +1127,8 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
                 || toolDatabase_["lshw"][fk]["description"].compare("Mass storage device", Qt::CaseInsensitive) == 0) {
 
             if (toolDatabase_["lshw"][fk]["driver"].contains("storage", Qt::CaseInsensitive) == true \
-                    || toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) == true) {
+                    || toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) == true \
+                    || toolDatabase_["lshw"][fk]["driver"].contains("usbfs", Qt::CaseInsensitive) == true) {
                 continue;
             }
             otherDeviceList.push_back(fk);
@@ -1978,7 +1979,7 @@ bool DeviceInfoParser::loadLsblKDatabase()
         if (it.compare("TYPE", Qt::CaseInsensitive) == 0) {
             index_type = index;
         }
-        // RM 代表介质类型
+
         if (it.compare("RM", Qt::CaseInsensitive) == 0) {
             index_rm = index;
         }

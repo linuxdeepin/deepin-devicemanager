@@ -556,7 +556,7 @@
     <message>
         <location filename="../src/cpuwidget.cpp" line="296"/>
         <source>Max Speed</source>
-        <translation>最大频率</translation>
+        <translation>频率</translation>
     </message>
     <message>
         <location filename="../src/cpuwidget.cpp" line="298"/>

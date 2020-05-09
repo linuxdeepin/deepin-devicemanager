@@ -299,7 +299,7 @@ void CpuWidget::getTableHeader(bool getSpeedFromLscpu, QStringList &headers)
         if (getSpeedFromLscpu) {
             headers << tr("Name") << tr("Vendor") << tr("Max Speed") << tr("Architecture");
         } else {
-            headers << tr("Name") << tr("Vendor") << tr("Speed") << tr("Architecture");
+            headers << tr("Name") << tr("Vendor") << tr("Max Speed") << tr("Architecture");
         }
     }
 }
