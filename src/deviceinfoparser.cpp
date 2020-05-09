@@ -1155,7 +1155,8 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
                     || toolDatabase_["lshw"][fk]["description"].compare("Serial controller", Qt::CaseInsensitive) == 0 \
                     || toolDatabase_["lshw"][fk]["description"].compare("PCI bridge", Qt::CaseInsensitive) == 0 \
                     || toolDatabase_["lshw"][fk]["description"].compare("ISA bridge", Qt::CaseInsensitive) == 0 \
-                    || toolDatabase_["lshw"][fk]["description"].compare("SMBus", Qt::CaseInsensitive) == 0 ) {
+                    || toolDatabase_["lshw"][fk]["description"].compare("SMBus", Qt::CaseInsensitive) == 0 \
+                    || toolDatabase_["lshw"][fk]["description"].contains("Printer", Qt::CaseInsensitive) == true) {
                 continue;
             }
         }
