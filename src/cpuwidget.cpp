@@ -52,7 +52,9 @@ void CpuWidget::initWidget()
 
     // 获取cpu核心列表，即有多少个CPU核
     QStringList coreList = DeviceInfoParser::Instance().getCatcpuCpuList();
-    if (coreList.size() < 1 && cpuList.size() < 1) {return;}
+    if (coreList.size() < 1 && cpuList.size() < 1) {
+        return;
+    }
 
     // 获取CPU模型
     QDBusInterface cpuModelName("com.deepin.daemon.SystemInfo", "/com/deepin/daemon/SystemInfo", "com.deepin.daemon.SystemInfo");
@@ -62,6 +64,7 @@ void CpuWidget::initWidget()
 
     overviewInfo_.value = cpuModel;
     overviewInfo_.value.remove(" CPU", Qt::CaseInsensitive);
+    overviewInfo_.value += QString(" x %1").arg(coreList.size());
 
     // 从 lscpu 获取 CPU 最大频率和最小频率
     QString maxSpeed = DeviceInfoParser::Instance().queryData("lscpu", "lscpu", "CPU max MHz");
