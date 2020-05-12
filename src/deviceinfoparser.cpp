@@ -1125,7 +1125,8 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
 
         if (toolDatabase_["lshw"][fk]["description"].compare("Generic USB device", Qt::CaseInsensitive) == 0
                 || toolDatabase_["lshw"][fk]["description"].compare("Human interface device", Qt::CaseInsensitive) == 0
-                || toolDatabase_["lshw"][fk]["description"].compare("Mass storage device", Qt::CaseInsensitive) == 0) {
+                || toolDatabase_["lshw"][fk]["description"].compare("Mass storage device", Qt::CaseInsensitive) == 0
+                || toolDatabase_["lshw"][fk]["description"].contains("Modem", Qt::CaseInsensitive)) {
 
             if (toolDatabase_["lshw"][fk]["driver"].contains("storage", Qt::CaseInsensitive) == true \
                     || toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) == true \
