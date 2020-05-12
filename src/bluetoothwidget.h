@@ -37,7 +37,7 @@ public:
      * @brief:从命令中获取蓝牙列表
      * @return[bool]:如果没有蓝牙则返回false
      */
-    bool getBlueToothList(QStringList& lshwList,QStringList& hcionfigList);
+    bool getBlueToothList(QStringList &lshwList, QStringList &hcionfigList);
 
     /**
      * @brief[getBlueToothsInfo]:根据蓝牙设备列表获取蓝牙设备信息
@@ -46,12 +46,12 @@ public:
      * @param[in]:lshwitem/hcionfigitem
      * @param[in/out]:tabList --> 蓝牙设备的基本信息，也就是存放在表格里面的内容
      */
-    void getBlueToothsInfo(const QStringList& lshwList,const QStringList& hcionfigList,QList<QStringList>& tabList);
-    void getBlueToothInfo(const QString& lshwitem,const QString& hcionfigitem,QList<ArticleStruct>& articles,QSet<QString>& existArticles,QSet<QString>& existArticles2,QSet<QString>& existArticles3,QStringList& tabItem);
+    void getBlueToothsInfo(const QStringList &lshwList, const QStringList &hcionfigList, QList<QStringList> &tabList);
+    void getBlueToothInfo(const QString &lshwitem, const QString &hcionfigitem, QList<ArticleStruct> &articles, QSet<QString> &existArticles, QSet<QString> &existArticles2, QSet<QString> &existArticles3, QStringList &tabItem);
 
     /**
      * @brief:获取总览信息
      */
-    void getOverviewInfo(QStringList& lshwList);
+    void getOverviewInfo(QList<QStringList> &lshwList);
 };
 

@@ -41,26 +41,25 @@ void BluetoothWidget::initWidgetEX()
      */
 
     //分别从两个命令中获取蓝牙设备列表
-    QStringList lshwList,hciconfigList;
-    bool res = getBlueToothList(lshwList,hciconfigList);
-    if(!res) return;
+    QStringList lshwList, hciconfigList;
+    bool res = getBlueToothList(lshwList, hciconfigList);
+    if (!res) return;
 
     QList<QStringList> tabList;
     // 获取蓝牙设备信息
-    getBlueToothsInfo(lshwList,hciconfigList,tabList);
+    getBlueToothsInfo(lshwList, hciconfigList, tabList);
 
     // 获取总览信息
-    getOverviewInfo(lshwList);
+    getOverviewInfo(tabList);
 
     // 添加表格信息
-    if( lshwList.size() > 1 )
-    {
-        QStringList headers = { tr("Name"),tr("Vendor") };
+    if ( lshwList.size() > 1 ) {
+        QStringList headers = { tr("Name"), tr("Vendor") };
         addTable( headers, tabList);
     }
 }
 
-bool BluetoothWidget::getBlueToothList(QStringList& lshwList,QStringList& hcionfigList)
+bool BluetoothWidget::getBlueToothList(QStringList &lshwList, QStringList &hcionfigList)
 {
     lshwList = DeviceInfoParser::Instance().getLshwBluetoothList();
     hcionfigList = DeviceInfoParser::Instance().getHciconfigBluetoothControllerList();
@@ -70,14 +69,14 @@ bool BluetoothWidget::getBlueToothList(QStringList& lshwList,QStringList& hcionf
     }
 
     if (lshwList.isEmpty()) {
-        for (int i = 0;i < hcionfigList.count();i++) {
+        for (int i = 0; i < hcionfigList.count(); i++) {
             lshwList.push_back(QString(""));
         }
     }
     return true;
 }
 
-void BluetoothWidget::getBlueToothsInfo(const QStringList& lshwList,const QStringList& hcionfigList,QList<QStringList>& tabList)
+void BluetoothWidget::getBlueToothsInfo(const QStringList &lshwList, const QStringList &hcionfigList, QList<QStringList> &tabList)
 {
     QList<ArticleStruct> articles;
     QSet<QString> existArticles;
@@ -85,10 +84,10 @@ void BluetoothWidget::getBlueToothsInfo(const QStringList& lshwList,const QStrin
     QSet<QString> existArticles3;
 
     int i = 0;
-    foreach(const QString& lshwitem, lshwList){
-        if(i < hcionfigList.size()){
+    foreach (const QString &lshwitem, lshwList) {
+        if (i < hcionfigList.size()) {
             QStringList tabItem;
-            getBlueToothInfo(lshwitem,hcionfigList[i],articles,existArticles,existArticles2,existArticles3,tabItem);
+            getBlueToothInfo(lshwitem, hcionfigList[i], articles, existArticles, existArticles2, existArticles3, tabItem);
             tabList.append(tabItem);
             i++;
         }
@@ -96,7 +95,7 @@ void BluetoothWidget::getBlueToothsInfo(const QStringList& lshwList,const QStrin
 
 }
 
-void BluetoothWidget::getBlueToothInfo(const QString& lshwitem,const QString& hcionfigitem,QList<ArticleStruct>& articles,QSet<QString>& existArticles,QSet<QString>& existArticles2,QSet<QString>& existArticles3,QStringList& tabItem)
+void BluetoothWidget::getBlueToothInfo(const QString &lshwitem, const QString &hcionfigitem, QList<ArticleStruct> &articles, QSet<QString> &existArticles, QSet<QString> &existArticles2, QSet<QString> &existArticles3, QStringList &tabItem)
 {
     ArticleStruct name(tr("Bluetooth Name"));
     name.queryData("hciconfig", hcionfigitem, "Name");
@@ -120,53 +119,51 @@ void BluetoothWidget::getBlueToothInfo(const QString& lshwitem,const QString& hc
     ArticleStruct serial(tr("Serial Number"));
     serial.queryData( "lshw", lshwitem, "serial", existArticles, articles);
 
-    ArticleStruct linkPolicy(tr("Link Policy","Bluetooth Info"));
+    ArticleStruct linkPolicy(tr("Link Policy", "Bluetooth Info"));
     linkPolicy.queryData("hciconfig", hcionfigitem, "Link policy", existArticles2, articles);
 
-    ArticleStruct linkMode(tr("Link Mode","Bluetooth Info"));
+    ArticleStruct linkMode(tr("Link Mode", "Bluetooth Info"));
     linkMode.queryData("hciconfig", hcionfigitem, "Link mode", existArticles2, articles);
 
-    if(mac.isValid())
-    {
-        ArticleStruct powered(tr("Powered","Bluetooth Info"));
+    if (mac.isValid()) {
+        ArticleStruct powered(tr("Powered", "Bluetooth Info"));
         powered.queryData("bluetoothctl", mac.value, "Powered", existArticles3, articles);
 
-        ArticleStruct discoverable(tr("Discoverable","Bluetooth Info"));
+        ArticleStruct discoverable(tr("Discoverable", "Bluetooth Info"));
         discoverable.queryData("bluetoothctl", mac.value, "Discoverable", existArticles3, articles);
 
-        ArticleStruct pairable(tr("Pairable","Bluetooth Info"));
+        ArticleStruct pairable(tr("Pairable", "Bluetooth Info"));
         pairable.queryData("bluetoothctl", mac.value, "Pairable", existArticles3, articles);
 
-        ArticleStruct modalias(tr("Modalias","Bluetooth Info"));
+        ArticleStruct modalias(tr("Modalias", "Bluetooth Info"));
         modalias.queryData("bluetoothctl", mac.value, "Modalias", existArticles3, articles);
 
-        ArticleStruct discovering(tr("Discovering","Bluetooth Info"));
+        ArticleStruct discovering(tr("Discovering", "Bluetooth Info"));
         discovering.queryData("bluetoothctl", mac.value, "Discovering", existArticles3, articles);
     }
 
-    ArticleStruct physicalId(tr("Physical ID","Bluetooth Info"));
+    ArticleStruct physicalId(tr("Physical ID", "Bluetooth Info"));
     physicalId.queryData("lshw", lshwitem, "physical id", existArticles, articles);
 
-    ArticleStruct busInfo(tr("Bus Info","Bluetooth Info"));
+    ArticleStruct busInfo(tr("Bus Info", "Bluetooth Info"));
     busInfo.queryData("lshw", lshwitem, "bus info", existArticles, articles);
 
-    ArticleStruct version(tr("Version","Bluetooth Info"));
+    ArticleStruct version(tr("Version", "Bluetooth Info"));
     version.queryData("lshw", lshwitem, "version", existArticles, articles);
 
-    ArticleStruct capabilities(tr("Capabilities","Bluetooth Info"));
+    ArticleStruct capabilities(tr("Capabilities", "Bluetooth Info"));
     capabilities.queryData("lshw", lshwitem, "capabilities", existArticles, articles);
 
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("hciconfig", hcionfigitem, articles, existArticles2,
-                                                          "ManulTrack__Bluetooth_hciconfig","Bluetooth infomation from hciconfig");
+                                                          "ManulTrack__Bluetooth_hciconfig", "Bluetooth infomation from hciconfig");
 
-    if(mac.isValid())
-    {
+    if (mac.isValid()) {
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("bluetoothctl", mac.value, articles, existArticles3,
-                                                              "ManulTrack__Bluetooth_bluetoothctl","Bluetooth infomation from bluetoothctl");
+                                                              "ManulTrack__Bluetooth_bluetoothctl", "Bluetooth infomation from bluetoothctl");
     }
 
     DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", lshwitem, articles, existArticles,
-                                                          "ManulTrack__Bluetooth_lshw","Bluetooth infomation from lshw");
+                                                          "ManulTrack__Bluetooth_lshw", "Bluetooth infomation from lshw");
 
     //addDevice( name.value, articles,  bluetoothList.size()+ pairedDevicesList.size() );
     addSubInfo(name.value, articles);
@@ -176,44 +173,19 @@ void BluetoothWidget::getBlueToothInfo(const QString& lshwitem,const QString& hc
 }
 
 
-void BluetoothWidget::getOverviewInfo(QStringList& lshwList)
+void BluetoothWidget::getOverviewInfo(QList<QStringList> &lshwList)
 {
 
-    foreach(const QString& lshwitem,lshwList){
+    foreach (const QStringList &lshwitem, lshwList) {
         //获取已连接蓝牙的个数
-        int connectedDeviceNumber = DeviceInfoParser::Instance().getOtherBluetoothctlPairedAndConnectedDevicesList().size();
-        ArticleStruct vendor(tr("Vendor"));
-        vendor.queryData("lshw", lshwitem, "vendor");
-
-        ArticleStruct product(tr("Product"));
-        product.queryData( "lshw", lshwitem, "product");
-
-        ArticleStruct description(tr("Description"));
-        description.queryData("lshw", lshwitem, "description");
-
-        overviewInfo_.value += vendor.value;
-        overviewInfo_.value += " ";
-        if( product.value.isEmpty() == false && product.value != tr("Unknown") )
-        {
-            overviewInfo_.value += product.value;
+        if (lshwitem.size() < 2) {
+            continue;
         }
-        else
-        {
-            overviewInfo_.value += description.value;
-        }
-
-        if(connectedDeviceNumber > 0 && overviewInfo_.isValid())
-        {
-            overviewInfo_.value += " (";
-            overviewInfo_.value += QString::number(connectedDeviceNumber);
-            overviewInfo_.value += (" "+tr("Bluetooth Device(s) Connected")) ;
-            overviewInfo_.value += ")";
-        }
-
+        overviewInfo_.value += lshwitem[1];
         overviewInfo_.value += " / ";
     }
 
-    overviewInfo_.value.replace(QRegExp("/\\s$"),"");
+    overviewInfo_.value.replace(QRegExp("/\\s$"), "");
 
 }
 
@@ -227,7 +199,7 @@ void BluetoothWidget::initWidget()
     }
 
     if (bluetoothList.isEmpty()) {
-        for (int i = 0;i < hciconfigBluetoothList.count();i++) {
+        for (int i = 0; i < hciconfigBluetoothList.count(); i++) {
             bluetoothList.push_back(QString(""));
         }
     }
@@ -241,8 +213,7 @@ void BluetoothWidget::initWidget()
     QSet<QString> existArticles3;
 
     int i = 0;
-    foreach(const QString& device, bluetoothList)
-    {
+    foreach (const QString &device, bluetoothList) {
         articles.clear();
         existArticles.clear();
         existArticles2.clear();
@@ -254,8 +225,7 @@ void BluetoothWidget::initWidget()
         ArticleStruct description(tr("Description"));
         ArticleStruct mac(tr("MAC Address"));
 
-        if( i < hciconfigBluetoothList.size() )
-        {
+        if ( i < hciconfigBluetoothList.size() ) {
             QString hciconfigName = hciconfigBluetoothList.at(i);
 
             product.queryData( "lshw", device, "product", existArticles, articles);
@@ -276,64 +246,59 @@ void BluetoothWidget::initWidget()
             ArticleStruct serial(tr("Serial Number"));
             serial.queryData( "lshw", device, "serial", existArticles, articles);
 
-            ArticleStruct linkPolicy(tr("Link Policy","Bluetooth Info"));
+            ArticleStruct linkPolicy(tr("Link Policy", "Bluetooth Info"));
             linkPolicy.queryData("hciconfig", hciconfigName, "Link policy", existArticles2, articles);
 
-            ArticleStruct linkMode(tr("Link Mode","Bluetooth Info"));
+            ArticleStruct linkMode(tr("Link Mode", "Bluetooth Info"));
             linkMode.queryData("hciconfig", hciconfigName, "Link mode", existArticles2, articles);
 
-            if(mac.isValid())
-            {
-                ArticleStruct powered(tr("Powered","Bluetooth Info"));
+            if (mac.isValid()) {
+                ArticleStruct powered(tr("Powered", "Bluetooth Info"));
                 powered.queryData("bluetoothctl", mac.value, "Powered", existArticles3, articles);
 
-                ArticleStruct discoverable(tr("Discoverable","Bluetooth Info"));
+                ArticleStruct discoverable(tr("Discoverable", "Bluetooth Info"));
                 discoverable.queryData("bluetoothctl", mac.value, "Discoverable", existArticles3, articles);
 
-                ArticleStruct pairable(tr("Pairable","Bluetooth Info"));
+                ArticleStruct pairable(tr("Pairable", "Bluetooth Info"));
                 pairable.queryData("bluetoothctl", mac.value, "Pairable", existArticles3, articles);
 
-                ArticleStruct modalias(tr("Modalias","Bluetooth Info"));
+                ArticleStruct modalias(tr("Modalias", "Bluetooth Info"));
                 modalias.queryData("bluetoothctl", mac.value, "Modalias", existArticles3, articles);
 
-                ArticleStruct discovering(tr("Discovering","Bluetooth Info"));
+                ArticleStruct discovering(tr("Discovering", "Bluetooth Info"));
                 discovering.queryData("bluetoothctl", mac.value, "Discovering", existArticles3, articles);
             }
         }
 
-        ArticleStruct physicalId(tr("Physical ID","Bluetooth Info"));
+        ArticleStruct physicalId(tr("Physical ID", "Bluetooth Info"));
         physicalId.queryData("lshw", device, "physical id", existArticles, articles);
 
-        ArticleStruct busInfo(tr("Bus Info","Bluetooth Info"));
+        ArticleStruct busInfo(tr("Bus Info", "Bluetooth Info"));
         busInfo.queryData("lshw", device, "bus info", existArticles, articles);
 
-        ArticleStruct version(tr("Version","Bluetooth Info"));
+        ArticleStruct version(tr("Version", "Bluetooth Info"));
         version.queryData("lshw", device, "version", existArticles, articles);
 
-        ArticleStruct capabilities(tr("Capabilities","Bluetooth Info"));
+        ArticleStruct capabilities(tr("Capabilities", "Bluetooth Info"));
         capabilities.queryData("lshw", device, "capabilities", existArticles, articles);
 
-        if( i < hciconfigBluetoothList.size() )
-        {
+        if ( i < hciconfigBluetoothList.size() ) {
             DeviceInfoParser::Instance().queryRemainderDeviceInfo("hciconfig", hciconfigBluetoothList.at(i), articles, existArticles2,
-                                                                  "ManulTrack__Bluetooth_hciconfig","Bluetooth infomation from hciconfig");
+                                                                  "ManulTrack__Bluetooth_hciconfig", "Bluetooth infomation from hciconfig");
 
-            if(mac.isValid())
-            {
+            if (mac.isValid()) {
                 DeviceInfoParser::Instance().queryRemainderDeviceInfo("bluetoothctl", mac.value, articles, existArticles3,
-                                                                      "ManulTrack__Bluetooth_bluetoothctl","Bluetooth infomation from bluetoothctl");
+                                                                      "ManulTrack__Bluetooth_bluetoothctl", "Bluetooth infomation from bluetoothctl");
             }
         }
 
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("lshw", device, articles, existArticles,
-                                                              "ManulTrack__Bluetooth_lshw","Bluetooth infomation from lshw");
+                                                              "ManulTrack__Bluetooth_lshw", "Bluetooth infomation from lshw");
 
-        addDevice( name.value, articles,  bluetoothList.size()+ pairedDevicesList.size() );
+        addDevice( name.value, articles,  bluetoothList.size() + pairedDevicesList.size() );
 
-        if( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 )
-        {
-            QStringList tab =
-            {
+        if ( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 ) {
+            QStringList tab = {
                 name.value,
 //                "Controller",
                 vendor.value
@@ -342,16 +307,12 @@ void BluetoothWidget::initWidget()
             tabList.push_back(tab);
         }
 
-        if(i == 0)
-        {
+        if (i == 0) {
             overviewInfo_.value = vendor.value;
             overviewInfo_.value += " ";
-            if( product.value.isEmpty() == false && product.value != tr("Unknown") )
-            {
+            if ( product.value.isEmpty() == false && product.value != tr("Unknown") ) {
                 overviewInfo_.value += product.value;
-            }
-            else
-            {
+            } else {
                 overviewInfo_.value += description.value;
             }
         }
@@ -359,8 +320,7 @@ void BluetoothWidget::initWidget()
         ++i;
     }
 
-    foreach(const QString& device, pairedDevicesList)
-    {
+    foreach (const QString &device, pairedDevicesList) {
         articles.clear();
         existArticles.clear();
 
@@ -399,45 +359,41 @@ void BluetoothWidget::initWidget()
 //            continue;
 //        }
 
-        ArticleStruct paired(tr("Paired","Bluetooth Info"));
+        ArticleStruct paired(tr("Paired", "Bluetooth Info"));
         paired.queryData("paired-devices", device, "Paired");
         articles.push_back(paired);
         existArticles.insert("Paired");
 
-        ArticleStruct trusted(tr("Trusted","Bluetooth Info"));
+        ArticleStruct trusted(tr("Trusted", "Bluetooth Info"));
         trusted.queryData("paired-devices", device, "Trusted");
         articles.push_back(trusted);
         existArticles.insert("Trusted");
 
-        ArticleStruct blocked(tr("Blocked","Bluetooth Info"));
+        ArticleStruct blocked(tr("Blocked", "Bluetooth Info"));
         blocked.queryData("paired-devices", device, "Blocked");
         articles.push_back(blocked);
         existArticles.insert("Blocked");
 
         DeviceInfoParser::Instance().queryRemainderDeviceInfo("paired-devices", device, articles, existArticles,
-                                                              "ManulTrack__Bluetooth_paired-devices","Bluetooth infomation from paired-devices");
+                                                              "ManulTrack__Bluetooth_paired-devices", "Bluetooth infomation from paired-devices");
 
-        if( device.isEmpty() == false )
-        {
+        if ( device.isEmpty() == false ) {
             auto upower = DeviceInfoParser::Instance().getCorrespondUpower(device);
 
-            if(upower.isEmpty() == false )
-            {
-                ArticleStruct power(tr("Power","Bluetooth Info"));
+            if (upower.isEmpty() == false ) {
+                ArticleStruct power(tr("Power", "Bluetooth Info"));
                 power.value = " ";
                 articles.push_back(power);
 
-                DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles,QSet<QString>(),
-                                                                      "ManulTrack__Bluetooth_upower","Bluetooth infomation from upower");
+                DeviceInfoParser::Instance().queryRemainderDeviceInfo("upower", upower, articles, QSet<QString>(),
+                                                                      "ManulTrack__Bluetooth_upower", "Bluetooth infomation from upower");
             }
         }
 
-        addDevice( name.value, articles,  bluetoothList.size()+ pairedDevicesList.size() );
+        addDevice( name.value, articles,  bluetoothList.size() + pairedDevicesList.size() );
 
-        if( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 )
-        {
-            QStringList tab =
-            {
+        if ( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 ) {
+            QStringList tab = {
                 name.value,
 //                "Device",
                 vendor.value
@@ -463,16 +419,14 @@ void BluetoothWidget::initWidget()
         ++i;
     }
 
-    if(connectedDeviceNumber > 0 && overviewInfo_.isValid())
-    {
+    if (connectedDeviceNumber > 0 && overviewInfo_.isValid()) {
         overviewInfo_.value += " (";
         overviewInfo_.value += QString::number(connectedDeviceNumber);
-        overviewInfo_.value += (" "+tr("Bluetooth Device(s) Connected")) ;
+        overviewInfo_.value += (" " + tr("Bluetooth Device(s) Connected")) ;
         overviewInfo_.value += ")";
     }
 
-    if( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 )
-    {
+    if ( hciconfigBluetoothList.size() + pairedDevicesList.size() > 1 ) {
         QStringList headers = { tr("Name"),  /*tr("Type"),*/ tr("Vendor") };
         addTable( headers, tabList);
     }
