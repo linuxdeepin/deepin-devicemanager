@@ -755,8 +755,7 @@ QStringList DeviceInfoParser::getLshwCameraList()
 QStringList DeviceInfoParser::getHwinfoCameraList()
 {
     checkValueFun_t func = [](const QString & fk)->bool {
-
-        if (DeviceInfoParser::Instance().toolDatabase_["hwinfo_usb"][fk].contains("Device File") == false)
+        if (DeviceInfoParser::Instance().toolDatabase_["hwinfo_usb"][fk]["Driver"].contains("snd-usb-audio") == false)
         {
             return false;
         }
@@ -3315,7 +3314,7 @@ bool DeviceInfoParser::loadHwinfoDatabase()
 
     QString hwOut = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
-    QFile hwinfoFile(DEVICEINFO_PATH + "/hwinfo.txt");
+    QFile hwinfoFile(DEVICEINFO_PATH + "/hwinfo_monitor.txt");
     if (false == hwinfoFile.open(QIODevice::ReadOnly)) {
         return false;
     }
