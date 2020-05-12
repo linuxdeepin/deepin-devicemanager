@@ -168,19 +168,16 @@ void MemoryWidget::init_l_Designer_l_TableWdiget()
         QString speed = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Speed");
         QString size = DeviceInfoParser::Instance().queryData("dmidecode", mem, "Size");//3311
         QString realSize = nullptr;
+        if (size.contains(" MB")) {
+            int pos = size.simplified().indexOf('M');
+            realSize = QString::number(size.mid(0, pos - 1).toInt() / 1024) + " GB";
+        } else if (size.contains(" GB")) {
+            realSize = size;
+        }
 
         if (isSlotValid(size, speed) == false) {
             canUpgrade_ = 1;
             continue;
-        }
-
-        //此处，size或speed 有问题， 就不显示表头
-//        if (isSlotValid(size, speed) == false) {
-//            canUpgrade_ = 1;
-//            continue;
-//        }
-        if (sizeMap.contains(mem) ) {
-            realSize = QString::number(totalRealSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
         }
 
         QStringList tab = {
@@ -288,9 +285,10 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
 
         //3311
         ArticleStruct size(tr("Size", "memory's size"));
-        // 获取机器总的内存大小
-        if (sizeMap.contains(mem) ) {
-            size.value = QString::number(totalRealSize * sizeMap.value(mem) / totalSize, 'f', 1) + " GB";
+        size.queryData("dmidecode", mem, "Size");
+        if (size.value.contains(" MB")) {
+            int pos = size.value.simplified().indexOf('M');
+            size.value = QString::number(size.value.mid(0, pos - 1).toInt() / 1024) + " GB";
         }
         //    QString size4 = QString("%1").arg(size3).mid() + "GB";
         articles.push_back(size);
@@ -381,7 +379,7 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         articles.push_back(typeDetail);
         existArticles.insert("Type Detail");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles,"ManulTrack__Memory","Memory Information");
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles, "ManulTrack__Memory", "Memory Information");
 
         QString deviceName = vendor.value + " " + model.value;
         if (vendor.value == tr("Unknown") && model.value == tr("Unknown")) {
@@ -607,7 +605,7 @@ void MemoryWidget::updateWholeDownWidget_Good()
         articles.push_back(configSpeed);
         existArticles.insert("Configured Memory Speed");
 
-        DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles,"ManulTrack__Memory","Memory Information");
+        DeviceInfoParser::Instance().queryRemainderDeviceInfo("dmidecode", mem, articles, existArticles, "ManulTrack__Memory", "Memory Information");
 
         QString deviceName;
         if (locator.isValid()) {
@@ -678,13 +676,13 @@ int MemoryWidget::hasNumerMemory()
 
         if (size.contains("MB")) {
             int pos = size.indexOf(" ", Qt::CaseSensitive);
-            int valueSize = size.mid(0,pos).toInt();
+            int valueSize = size.mid(0, pos).toInt();
             valueSize1 = valueSize / 1024;
             valueSizeTotal += valueSize1;
 
-        } else if (size.contains("GB")){
+        } else if (size.contains("GB")) {
             int pos = size.indexOf(" ", Qt::CaseSensitive);
-            int valueSize1 = size.mid(0,pos).toInt();
+            int valueSize1 = size.mid(0, pos).toInt();
             valueSizeTotal += valueSize1;
         }
 //        if (size.contains("MB")) {
@@ -693,7 +691,7 @@ int MemoryWidget::hasNumerMemory()
 //            valueSize += valueSize;
 //        }
 
-        if (isSlotValid(size,speed)) {
+        if (isSlotValid(size, speed)) {
             sizeMap[mem] = valueSize1;
             number++;
         }
@@ -717,7 +715,7 @@ double MemoryWidget::totalMemorySize()
 // 转化为“GB”
 QString MemoryWidget::formatCap(qulonglong cap, const int size, quint8 precision)
 {
-    static QString type[] = {"B","KB","MB","GB","TB"};
+    static QString type[] = {"B", "KB", "MB", "GB", "TB"};
 
     qulonglong lc = cap;
     double dc = cap;
@@ -725,11 +723,11 @@ QString MemoryWidget::formatCap(qulonglong cap, const int size, quint8 precision
 
     for (size_t p = 0; p < sizeof(type); ++p) {
         qDebug() << sizeof(type);
-        if (cap < pow(size, p+1) || p == sizeof(type) -1) {
+        if (cap < pow(size, p + 1) || p == sizeof(type) - 1) {
             if (!precision) {
-                return  QString::number(round(lc/pow(size,p))) + type[p];
+                return  QString::number(round(lc / pow(size, p))) + type[p];
             }
-            return QString::number(dc /pow(ds,p),'f',precision) + type[p];
+            return QString::number(dc / pow(ds, p), 'f', precision) + type[p];
         }
     }
     return nullptr;
