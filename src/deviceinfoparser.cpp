@@ -1130,7 +1130,8 @@ QStringList DeviceInfoParser::getLshwOtherDeviceList()
 
             if (toolDatabase_["lshw"][fk]["driver"].contains("storage", Qt::CaseInsensitive) == true \
                     || toolDatabase_["lshw"][fk]["driver"].contains("btusb", Qt::CaseInsensitive) == true \
-                    || toolDatabase_["lshw"][fk]["driver"].contains("usbfs", Qt::CaseInsensitive) == true) {
+                    || toolDatabase_["lshw"][fk]["driver"].contains("usbfs", Qt::CaseInsensitive) == true \
+                    || toolDatabase_["lshw"][fk]["driver"].contains("uas", Qt::CaseInsensitive) == true) {
                 continue;
             }
             otherDeviceList.push_back(fk);
