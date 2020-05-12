@@ -413,7 +413,7 @@ bool MemoryWidget::update_l_Designer_l_WholeDownWidget()
         return false;
     }
 
-    overviewInfo_.value = realSize;
+    overviewInfo_.value = size.value;
     if (detailMem.size() > 0) {
         QString detail = detailMem.join(" / ");
         if (detail.isEmpty() == false) {
