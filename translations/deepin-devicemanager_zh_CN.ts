@@ -1244,7 +1244,7 @@
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="171"/>
         <source>Memory</source>
-        <translation>内存</translation>
+        <translation>内存地址</translation>
     </message>
     <message>
         <location filename="../src/displayadapterwidget.cpp" line="176"/>
@@ -3416,6 +3416,22 @@
         <location filename="../src/usbdevicewidget.cpp" line="144"/>
         <source>Capabilities</source>
         <translation>功能</translation>
+    </message>
+    <message>
+        <source>Physical ID</source>
+        <translation>物理ID</translation>
+    </message>
+    <message>
+        <source>memory</source>
+        <translation>内存地址</translation>
+    </message>
+    <message>
+        <source>IO Port</source>
+        <translation>IO端口</translation>
+    </message>
+    <message>
+        <source>Bus Info</source>
+        <translation>总线信息</translation>
     </message>
 </context>
 </TS>
