@@ -116,7 +116,7 @@ void DeviceAudio::initFilterKey()
     addFilterKey(QObject::tr("Driver Activation Cmd"));
     addFilterKey(QObject::tr("Config Status"));
 
-    addFilterKey(QObject::tr("irq"));
+    //addFilterKey(QObject::tr("irq"));
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("latency"));
 }

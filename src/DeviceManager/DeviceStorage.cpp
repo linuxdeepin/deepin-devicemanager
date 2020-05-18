@@ -214,6 +214,19 @@ void DeviceStorage::initFilterKey()
     // hwinfo --disk
     addFilterKey(QObject::tr("Hardware Class"));
     addFilterKey(QObject::tr("Device File"));
+    addFilterKey(QObject::tr("ansiversion"));
+    addFilterKey(QObject::tr("bus info"));
+    addFilterKey(QObject::tr("logical name"));
+    addFilterKey(QObject::tr("logicalsectorsize"));
+    addFilterKey(QObject::tr("physical id"));
+    addFilterKey(QObject::tr("sectorsize"));
+    addFilterKey(QObject::tr("guid"));
+    addFilterKey(QObject::tr("Driver"));
+    addFilterKey(QObject::tr("Config Status"));
+    addFilterKey(QObject::tr("Device Number"));
+    addFilterKey(QObject::tr("Geometry (Logical)"));
+    addFilterKey(QObject::tr("SubDevice"));
+    addFilterKey(QObject::tr("SubVendor"));
 }
 
 void DeviceStorage::getInfoFromLshw(QMap<QString, QString> &mapInfo)

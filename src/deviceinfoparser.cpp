@@ -444,7 +444,6 @@ void DeviceInfoParser::loadDiskInfoFromHwinfo()
         DeviceStorage device;
         if (device.setHwinfoInfo(paragraph) && device.isValid()) {
             DeviceManager::instance()->addStorageDeivce(device);
-            qDebug() << "add storage info ********************************* " << paragraphs.size();
         }
     }
 }

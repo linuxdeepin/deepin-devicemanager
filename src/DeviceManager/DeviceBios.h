@@ -23,9 +23,11 @@ public:
 
     // 获取bios相关的属性
     const QString &name()const;
+    const QString &productName()const;
     const QString &vendor()const;
     const QString &version()const;
     const QString &chipsetFamily()const;
+    bool isBoard()const;
 
 protected:
     void initFilterKey() override;
@@ -35,9 +37,11 @@ protected:
 
 private:
     QString         m_Name;                   //<! 【名称】
+    QString         m_ProductName;
     QString         m_Vendor;                 //<! 【制造商】
     QString         m_Version;                //<! 【版本】
     QString         m_ChipsetFamily;          //<! 【芯片组】
+    bool            m_IsBoard;
 };
 
 #endif // DEVICEBIOS_H

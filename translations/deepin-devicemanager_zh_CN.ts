@@ -2192,7 +2192,7 @@
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="74"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="155"/>
         <source>Physical Memory Array</source>
-        <translation type="unfinished">内存信息</translation>
+        <translation type="unfinished">内存插槽信息</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="132"/>

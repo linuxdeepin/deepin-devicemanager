@@ -2,7 +2,7 @@
 #include <QDebug>
 
 DeviceBios::DeviceBios()
-    : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Version(""), m_ChipsetFamily("")
+    : DeviceBaseInfo(), m_Name(""), m_ProductName(""), m_Vendor(""), m_Version(""), m_ChipsetFamily(""), m_IsBoard(false)
 {
     initFilterKey();
 }
@@ -32,6 +32,9 @@ bool DeviceBios::setBaseBoardInfo(const QString &info, const QString &chipsetFam
     m_ChipsetFamily = chipsetFamliy;
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
+    setAttribute(mapInfo, "Product Name", m_ProductName);
+    setAttribute(mapInfo, "Board name", m_ProductName, false);
+    m_IsBoard = true;
     loadOtherDeviceInfo(mapInfo);
     return true;
 }
@@ -82,6 +85,10 @@ const QString &DeviceBios::name()const
 {
     return m_Name;
 }
+const QString &DeviceBios::productName()const
+{
+    return m_ProductName;
+}
 const QString &DeviceBios::vendor()const
 {
     return m_Vendor;
@@ -93,6 +100,10 @@ const QString &DeviceBios::version()const
 const QString &DeviceBios::chipsetFamily()const
 {
     return m_ChipsetFamily;
+}
+bool DeviceBios::isBoard()const
+{
+    return m_IsBoard;
 }
 
 void DeviceBios::initFilterKey()
