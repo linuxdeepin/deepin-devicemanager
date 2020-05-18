@@ -102,7 +102,7 @@ CT_Tbl::~CT_Tbl()
 }
 
 CT_TblGrid::CT_TblGrid(QDomDocument *dom, const QDomElement &ele)
-    : m_dom(dom), m_element(ele)
+    :  m_element(ele),m_dom(dom)
 {
     cols = m_element.childNodes().count();
 }

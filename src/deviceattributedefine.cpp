@@ -26,44 +26,44 @@
 
 DWIDGET_USE_NAMESPACE
 
-void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey)
-{
-    if( isValid() )
-    {
-        return;
-    }
+//void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey)
+//{
+//    if( isValid() )
+//    {
+//        return;
+//    }
 
-    value = DeviceInfoParser::Instance().queryData( toolname, firstKey, secondKey);
-}
+//    value = DeviceInfoParser::Instance().queryData( toolname, firstKey, secondKey);
+//}
 
-void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet)
-{
-    existSet.insert(secondKey);
+//void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet)
+//{
+//    existSet.insert(secondKey);
 
-    if( isValid() )
-    {
-        return;
-    }
+//    if( isValid() )
+//    {
+//        return;
+//    }
 
-    value = DeviceInfoParser::Instance().queryData( toolname, firstKey, secondKey);
-}
+//    value = DeviceInfoParser::Instance().queryData( toolname, firstKey, secondKey);
+//}
 
-void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet, QList<ArticleStruct>& articles)
-{
-    existSet.insert(secondKey);
+//void ArticleStruct::queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet, QList<ArticleStruct>& articles)
+//{
+//    existSet.insert(secondKey);
 
-    if( isValid() )
-    {
-        return;
-    }
+//    if( isValid() )
+//    {
+//        return;
+//    }
 
-    value = DeviceInfoParser::Instance().queryData( toolname, firstKey, secondKey);
+//    value = DeviceInfoParser::Instance().queryData( toolname, firstKey, secondKey);
 
-    if( isValid() )
-    {
-        articles.push_back(*this);
-    }
-}
+//    if( isValid() )
+//    {
+//        articles.push_back(*this);
+//    }
+//}
 
 bool ArticleStruct::isValid()
 {

@@ -56,10 +56,6 @@ struct ArticleStruct
         transContextName = other.transContextName;
         lastKey = other.lastKey;
     }
-
-    void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey);
-    void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet);
-    void queryData(const QString& toolname, const QString& firstKey, const QString& secondKey, QSet<QString>& existSet, QList<ArticleStruct>& articles);
     bool isValid();
 
     bool operator==(const ArticleStruct& other);

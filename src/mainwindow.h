@@ -31,6 +31,7 @@
 
 class DeviceListView;
 class DeviceInfoWidgetBase;
+class ThreadPool;
 
 class MainWindow : public Dtk::Widget::DMainWindow
 {
@@ -89,6 +90,8 @@ private:
 
     bool refreshing_ = false;
     QSize m_sizeForQSetting;
+
+    ThreadPool*           mp_ThreadPool;
 };
 
 #endif

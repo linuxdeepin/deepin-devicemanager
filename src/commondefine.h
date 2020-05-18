@@ -51,25 +51,21 @@ const int spinnerWidth = 32;
 const int spinnerHeight = 32;
 
 const int TableViewRowHeight_ = 36;
-#define GenerateTsItem 0
+#define GenerateTsItem 1
 
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deepin_uos_arm64_nvme_disk";
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_12417_cpu_bug";//cpu dominant frequency is zero
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_dmidecode_multiProcessor";//dmidecode show lots of processor information
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/longxin_3A400_notebook";//monitor size is in error
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_FT2000-64_server_bug13623";//unclear about usb and power
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_chuangzhicheng_memory_unknow";
-//const QString DEVICEINFO_PATH = "../../dde_devicemanager/computers/deviceInfo_loongson_memory";
-//const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceInfo_chuangzhicheng_cpu_zero";
-
-//const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/loongson_unknown_nvme_";
-//const QString DEVICEINFO_PATH = "/home/archermind/dde_devicemanager/computers/Meegopad_T02"; //bluetooth info
-//const QString DEVICEINFO_PATH = "/home/archermind/Desktop/deviceinfo_haikangweishi";
-
-//deviceInfo_bug_12495;dmidecode has no memory device
-//4Good_GM600;memory has bank
-//LENOVO_ThinkCentre M910t-N000_4 //test case like *-class UNCLAIMED in lshw
-//CF420Z deviceinfo  longxin_hardware m630  t630 ;disk bug
-//test_monitor_refresh_rate,only xrandr.txt and hwinfo.txt come from the target computer
-//const QString DEVICEINFO_PATH = "/dde_devicemanager/computers/test_monitor_refresh_rate";
 //#define TEST_DATA_FROM_FILE
+const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/TongXin/LX";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/ChuangZhiCheng/LX_B20";
+
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/LangChao/CE3000F_D";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/LangChao/CE3000L";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/LangChao/CS5260Z";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/LangChao/NF3200L";
+
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Haier/BY_G51-L02302";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Haier/BY_LX12-L0220";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Haier/BY_LX12-Z0284";
+
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/YuanJingTao/BM6J81";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/HuaWei/PanGu";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Bug/Bug_26028";

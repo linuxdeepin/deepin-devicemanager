@@ -26,316 +26,257 @@
 #include <QString>
 #include "singletondef.h"
 #include "deviceattributedefine.h"
+#include"DeviceManager/DeviceInfo.h"
 #include <QObject>
 #include <QSet>
 
-const QString Deviceype_Computer = "Computer";
-const QString Devicetype_Name = "Name";
-const QString Devicetype_lshw_Class_Prefix = "*-";
-const char Devicetype_Separator = ':';
-const QString Devicetype_Stitching_Symbol = "_";
-const char DeviceType_CatDevice_Separator = '=';
-const QString Devicetype_CatDeviceSysfs = "Sysfs";
-
-const QString Devicetype_Xrandr_Screen = "Screen";
-const QString Devicetype_Xrandr_Connected = " connected";
-const QString Devicetype_Xrandr_Disconnected = " disconnected";
-const char Devicetype_Xrandr_Space = ' ';
-const QString Devicetype_Xrandr_Screen_Separator = ", ";
-const QString Devicetype_Xrandr_Minimum = "minimum";
-const QString Devicetype_Xrandr_Current = "current";
-const QString Devicetype_Xrandr_Maximum = "maximum";
-const QString Devicetype_Xrandr_Tab = "\t";
-const QString Devicetype_Xrandr_Twotab = "\t\t";
-const QString Devicetype_Xrandr_Twospace = "  ";
-const QString Devicetype_Xrandr_TabAndspace = "\t  ";
-
-const QString Devicetype_Lspci_Seperator = ": ";
-const QString Devicetype_Lspci_Tab = "\t";
-const QString Devicetype_Lspci_Memory = "Memory";
-const QString Devicetype_Lspci_non_prefetchable = "non-prefetchable";
-const QString Devicetype_Lspci_prefetchable = "prefetchable";
-
-const QString Devicetype_Hciconfig_Hci = "hci";
-const QString Devicetype_Hciconfig_Multispace = "    ";
-const QString Devicetype_Hciconfig_Tab = "\t";
-
-const QString Devicetype_HwInfo_Twospace = "  ";
-const QString Devicetype_HwInfo_Fourspace = "    ";
-const QString Devicetype_HwInfo_Resolution = "Resolution";
-const QString Devicetype_HwInfo_ResolutionList = "Support Resolution";
-const QString Devicetype_HwInfo_Currentresolution = "Current Resolution";
-
-const QString Devicetype_lpstat_4Space = "    ";
-const QString Devicetype_lpstat_Tab = "\t";
-
-typedef QMap<QString, QMap<QString, QString>> DatabaseMap;
-
-//class LogPasswordAuth;
-
-typedef bool (*checkValueFun_t)(const QString &);
+class QDeviceMouse;
 
 class DeviceInfoParser: public QObject
 {
     Q_OBJECT
 public:
+
     static DeviceInfoParser &Instance()
     {
         static DeviceInfoParser _instance;
         return _instance;
     }
-
     DeviceInfoParser();
     ~DeviceInfoParser();
 
     void refreshDabase();
+    static void clear();
+    void loadComputerInfo();        // 计算机概况
+    void loadMouseInfo();           // 计算机鼠标信息
+    void loadCpuInfo();             // 计算机Cpu
+    void loadGpuInfo();             // 计算机显存
+    void loadMemoryInfo();          // 计算机内存
+    void loadMonitorInfo();         // 计算机显示屏
+    void loadBiosInfo();            // 计算机Bios
+    void loadAudioInfo();           // 计算机Audio
+    void loadImageInfo();           // 计算机 图像社别
+    void loadBluetoothInfo();       // 计算机蓝牙设备
+    void loadNetworkInfo();         // 计算机网络设备信息
+    void loadKeyboardInfo();        // 计算机键盘信息
+    void loadOtherDevices();        // 其它设备信息
+    void loadPowerInfo();           // 电源信息
+    void loadCdromInfo();           // Cdrom信息
+    void loadPrinterInfo();         // 打印机信息
+private:
+    void loadDiskInfo();            // 计算机存储信息
+
 
 signals:
     void loadFinished(const QString &msg);
 
-public:
-    bool isToolSuccess(const QString &toolname);
-
-    const QString &queryData(const QString &toolname, const QString &firstKey, const QString &secondKey);
-    const QString &fuzzyQueryData(const QString &toolname, const QString &firstKey, const QString &secondKey);
-
-    bool fuzzeyQueryKey(const QString &toolname, const QString &fuzzeyKey, QString &key);
-
-    bool queryDeviceInfo(const QString &toolname, const QString &deviceName, QList<ArticleStruct> &articles);
-    bool queryRemainderDeviceInfo(const QString &toolname, const QString &deviceName,
-                                  QList<ArticleStruct> &articles, const QSet<QString> &existArticles = QSet<QString>(),
-                                  const char *context = nullptr, const char *disambiguation = nullptr);
-
-    bool checkValue(const QString &toolName, const QString &device, const QString &key, const QString &contains);
-
 private:
-    QStringList getMatchToolDeviceList(const QString &toolName, checkValueFun_t *checkFunc = nullptr);
-
-public:
-    QStringList getCatcpuCpuList();
-    QStringList getlscpuCpuList();
-    /**@brief:FT2000+的环境无法获取cpu频率，只能通过dmidecode命令获取*/
-    QStringList getDmidecodeCpuList();
-
-    QStringList getDmidecodePhysicMemory();
-    QStringList getDmidecodeMemoryList();
-    //be careful about function above,the constructor and compare function of class ArticleStruct may not support some container function,such as bool contains(ArticleStruct)
-    QMap<QString, QMap<QString, QString>> getLshwMeoryList();
-
-    QStringList getLshwDiskNameList();
-
-    QStringList getLshwDiaplayadapterList();
-    QStringList getXrandrScreenName();
-    QStringList getXrandrDisplayInterfaceList();
-
-    QStringList getHwinfoDiskList();
-    QStringList getHwinfoKeyboardList();
-    QStringList getHwinfoOtherUSBList();
-    QStringList getHwinfoPrinterList();
-    QStringList getHwinfoMonitorList();
-    QStringList getXrandrMonitorList();
-    //获得“xrandr”的信息
-    QStringList getSomeXrandrMonitorList();
-
-    QString     getEDID(int index = 0);
-
-    QStringList getLshwMultimediaList();
-    QStringList getCatinputAudioDeviceList();
-
-    QStringList getCatinputInputdeviceList();
-
-    QStringList getLshwNetworkadapterList();
-
-    QStringList getLshwBluetoothList();
-
-    //获得显存的大小
-    QStringList getDmesgVram();
-
-    QStringList getHciconfigBluetoothControllerList();
-    QStringList getOtherBluetoothctlPairedAndConnectedDevicesList();
-
-    QStringList getLshwCameraList();
-    QStringList getHwinfoCameraList(); // 从hwinfo 命令中获取 cameralist
-
-    QStringList getLshwOtherUsbdeviceList();
-    QStringList getLshwUsbKeyboardDeviceList();
-
-    QStringList getInputdeviceMouseList();
-    QString getCorrespondLshwMouse(const QString &inputMouse);
-    QString getCorrespondBluetoothMouse(const QString &inputMouse);
-
-    QStringList getInputdeviceKeyboardList();
-    QString getCorrespondLshwKeyboard(const QString &inputKeyboard);
-    QString getCorrespondBluetoothKeyboard(const QString &inputKeyboard);
-
-    QString getCorrespondUpower(const QString &bluetoothDevice);
-
-    QStringList getLshwSwitchingpowerList();
-    QStringList getDemidecodeSwitchingpowerList();
-    QStringList getUpowerSwitchingList();
-
-    QStringList getLshwBatteryList();
-    QStringList getDemidecodeBatteryList();
-    QStringList getUpowerBatteryList();
-
-    QStringList getLshwOtherDeviceList();
-    QStringList getLshwOtherPciDeviceList();
-
-    QStringList getLshwPrinterList();
-    QStringList getCupsPrinterList();
-
-    QStringList getLshwCDRomList();
-
-    // get os
-    QString getOsInfo();
-    bool isHuaweiAndroidUos();
-    QString getLsbRelease();
-    QString getHomeUrl();
-
-    bool loadCatosrelelease();
-    bool loadlsb_release();
-    bool loadOSInfo();
-    QString getOsVersion();
-
-    // dmidecode parse
-    bool loadDmidecodeDatabase();
-    // cat /proc/baseboard
-    bool loadCatBoardinfoDatabase();
-    // lshw parse
-    bool loadLshwDatabase();
-    // sudo lsblk -l stdout parse
-    bool loadLsblKDatabase();
-
-    // lsblk -d -o name,rota
-    bool loadDiskMediaType();
-
-    // 获取 存储设备 介质类型
-    QStringList getLsblkDiskTypeList();
-
-    QStringList getLsblkDiskNameList();
-    // lscpu parse
-    bool loadLscpuDatabase();
-    // cat proc/cpu
-    bool loadCatcpuDatabase();
-    // smartctl www.smartmontools.org get disk info
-    bool loadAllSmartctlDatabase();
-    bool loadSmartctlDatabase(const QString &diskLogical);
-    // cat /proc/bus/input/devices
-    bool loadCatInputDatabase();
-    // xrandr ,xrandr --verbose,command
-    bool loadXrandrDatabase();
-    bool loadSomeXrandrDatabase();
-    // get power settings
-    bool loadPowerSettings();
+    /**
+     * @brief:获取计算机基本信息，获取基本信息的命令
+     *      cat /etc/os-release
+     *      cat /proc/version
+     *      sudo dmidecode -t system
+     *      sudo dmidecode -t Chassis
+     */
+    void loadComputerInfoFromCatOsRelease();
+    void loadUOS();
+    void loadComputerInfoFromCatVersion();
+    void loadComputerInfoFromDmidecode();
+    void loadComputerInfoFromLshw();
+    void loadComputerInfoFromCatBoardinfo();
 
     /**
-     * @brief[loadUpowerDatabase]:通过命令 upower --dump 获取电源信息
-     * @brief[parsePowerInfo]:解析所有电源信息中的一段
+     * @brief:获取鼠标信息，获取鼠标信息的命令主要有三个
+     *        cat /proc/bus/input/devices
+     *        sudo hwinfo --mouse
+     *        sudo lshw -C input       // 这个命令在x86机器对于ps2不支持
+     * @brief[loadMouseInfoFromCatDevices]:
+     * @brief[loadMouseInfoFromHwinfo]:
+     * @brief[loadMouseInfoFromlshw]:
      */
-    bool loadUpowerDatabase();
-    void parsePowerInfo(const QString &info, DatabaseMap &powerDataBase, QStringList &secondOrder);
-
-
-    // lspci parse
-    bool loadLspciDatabase();
-    // bluetooth
-    bool loadHciconfigDatabase();
-    bool loadAllBluetoothctlControllerDatabase();
-    bool loadBluetoothctlDatabase(const QString &controller);
-    QStringList getAllBluetoothctlPairedDevices();
-    bool loadAllBluethctlPairedDeviceDatabase();
-    bool loadBluetoothctlPairedDeviceDatabase(const QString &mac);
-    // lsusb
-    bool loadLsusbDatabase();
-    // hwinfo
-    bool loadHwinfoDatabase();// 这里面加载的是 sodu hwinfo --monitor
-    /**
-     * @brief:获取外接摄像头信息，在龙芯上lshw无法获取摄像头信息(如何升级了bios或许可以获取)，因此需要通过hwinfo来获取摄像头信息，
-     *        但是 sudo hwinfo --camera 无法获取外接的摄像头设备(可能只能获取内置摄像头，本人没有验证)，所以通过运行 sudo hwinfo --usb
-     *        然后 从中获取摄像机相关的信息，后期若有更好方法，请修改注释
-     */
-    bool loadHwinfoDatabaseOfCamera(); // 这里面执行的是 sudo hwinfo --usb
-    /**@brief:添加单个摄像机*/
-    void addACameraInfo(const QString &name, const QString &content);
-
-    bool loadGpuInfo();
-    // lpstat
-    bool loadLpstatDatabase();
-    // cups
-    bool loadCupsDatabase();
-
-    // printers
-    bool loadPrinterinfoDatabase();
-
-    // USB hwinfo --usb
-    bool loadHwinfoUSBDatabase();
-
-    // USB hwinfo --keybooard
-    bool loadKeyboardinfoDatabase();
-
-    //获得显存的大小
-    bool loadDmesgVram();
-
-    // storage hwinfo --disk
-    bool loadhwinfoDiskDatabase();
+    bool loadMouseInfoFromCatDevices();
+    bool loadMouseInfoFromHwinfo();
+    bool loadMouseInfoFromlshw();
 
     /**
-     * @brief：获取键盘信息,键盘信息的获取只要通过两个命令获取
-     *         sudo lshw -C input
-     *         sudo hwinfo --keyboard
-     * @brief[loadKeyboardInfoFromlshwInput]:从 sudo lshw -C input 中获取键盘信息
-     * @brief[loadKeyBoardInfoFromHwinfoKeyboard]:从 sudo hwinfo --keyboard 中获取键盘信息
+     * @brief:获取cpu信息，获取cpu信息主要有两个命令
+     *          lscpu
+     *          sudo lshw -C processor
+     *          sudo dmidecode -t processor
+     *          cat /proc/cpuinfo
+     * **** 特别注意，目前只能或一个cpu信息，因为没有环境(找不到哪台机器有两个cpu)
+     * @brief[loadCpuInfoFromLscpu]:获取cpu基本信息
+     * @brief[loadCpuInfoFromLshw]:获取cpu基本信息
+     * @brief[loadCpuInfoFromDmidecode]:获取cpu基本信息
+     * @brief[loadCpuInfoFromCatCpuinfo]:获取cpu里面核的信息
      */
-//    bool loadKeyboardInfoFromlshwInput();
-//    bool loadKeyBoardInfoFromHwinfoKeyboard();
+    void loadCpuInfoFromLscpu(QMap<QString, QString> &mapLscpu);
+    void loadCpuInfoFromLshw(QMap<QString, QString> &mapLshw);
+    void loadCpuInfoFromDmidecode(QMap<QString, QString> &mapDmidecode);
+    void loadCpuInfoFromCatCpuinfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode);
 
 
-    // 判断分辨率
-    int judgeResolution(QString &current, QString &max, QString &min);
+    /**
+     * @brief:获取存储设备信息,获取存储设备的命令是
+     *        sudo hwinfo --disk;
+     *        lsblk
+     *        sudo lshw -C disk
+     * @brief[loadDiskInfoFromHwinfo]:从hwinfo中获取信息
+     * @brief[loadDiskInfoFromLsblk]:从lsblk获取信息
+     * @brief[loadDiskInfoFromLshw]:从lshw获取信息
+     * @brief[loadDiskInfoFromSmartCtl]:从smartctl获取信息
+     */
+    void loadDiskInfoFromHwinfo();
+    void loadDiskInfoFromLsblk(QStringList &logicNameList);
+    void loadDiskInfoFromLshw();
+    void loadDiskInfoFromSmartCtl(QStringList &logicNameList);
 
-    // 从 smartctl 中获取磁盘的model信息
-    void getDiskModelFromSmartctlInfo(QString &model, const QString &deviceFile, const QString &attr);
+    /**
+     * @brief:获取gpu信息，获取gpu信息的命令有
+     *      sudo lshw -C display
+     *      xrandr --current 获取最大分辨率， 最小分辨率， 当前分辨率，也可以获得 刷新率。
+     * @brief[loadGpuInfoFromLshw]:从sudo lshw -C display中获取信息
+     * @brief[loadGpuInfoFromHwinfo]:从sudo hwinfo --display中获取信息
+     * @brief[loadInfoFromXrandr]: 从 xrandr 命令获取
+     */
+    void loadGpuInfoFromLshw();
+    void loadGpuInfoFromHwinfo();
+    void loadGpuInfoFromXrandr();
+    void loadGpuSizeFromDmesg();
 
-    // 判断该硬盘是否支持smartctl
-    bool isSmartctlSupport(QString &devicefile);
 
+    /**
+     * @brief:获取memory信息，获取memory信息的命令有
+     *      sudo lshw -C memory
+     *      sudo dmidecode -t memory  这个命令在龙芯下不管用
+     * @brief[loadMemoryFromLshw]:从 sudo lshw -C memory 中获取命令
+     * @brief[loadMemoryFromDmidecode]:从 sudo dmidecode -t memory 中获取命令
+     */
+    void loadMemoryFromLshw();
+    void loadMemoryFromDmidecode();
+
+
+    /**
+     * @brief:获取显示设备,获取显示设备的命令
+     *      sudo hwinfo --monitor
+     *      xrandr 获取最大分辨率， 最小分辨率， 当前分辨率，也可以获得 刷新率。
+     * @brief[loadMonitorInfoFromHwinfo]:从 sudo hwinfo --monitor 中获取信息
+     * @brief[loadMonitorInfoFromXrandr]:从 xrandr --verbose 中获取信息
+     */
+    void loadMonitorInfoFromHwinfo();
+    void loadMonitorInfoFromXrandr();
+    void loadMonitorRefreshRateFromXrandr();
+
+    /**
+     * @brief:获取主板信息，获取主板信息的命令有
+     *      sudo dmidecode -t 0  // BIOS
+     *      lspci | grep ISA
+     * @brief[loadBiosInfoFromDmidecode]:从 sudo dmidecode -t 0 中获取信息
+     * @brief[loadBiosInfoFromLspci]:从 lspci 中获取信息,用于获取芯片组，但是龙芯的不是在这获取
+     * @brief[loadBiosInfoFromCatBoardinfo]:从 cat /proc/boardinfo 中获取信息  这个仅仅用龙芯机器
+     */
+    void loadSystemInfoFromDmidecode();
+    void loadMotherBoardInfoFromDmidecode();
+    void loadBiosInfoFromDmidecode();
+    void loadChassisInfoFromDmidecode();
+    void loadMemoryInfoFromDmidecode();
+    void loadBiosInfoFromLspci(QString &chipsetFamliy);
+    void loadBiosInfoFromCatBoardinfo(const QString chipsetFamliy);
+
+    /**
+     * @brief:获取音频设备,获取音频设备的命令主要有
+     *      sudo lshw -C multimedia
+     *      sudo hwinfo --sound
+     * @brief[loadAudioInfoFromLshw]:从lshw中获取信息
+     * @brief[loadAudioInfoFromHwinfo]:从hwinfo中获取信息
+     */
+    void loadAudioInfoFromLshw();
+    void loadAudioInfoFromHwinfo();
+
+    /**
+     * @brief:获取图像设备,获取图像设备的命令有
+     *      sudo lshw -C multimedia
+     *      sudo hwinfo --usb  注意这里不能用 --camera 因为 --camera不能获取外接摄像头
+     */
+    void loadImageInfoFromLshw();
+    void loadImageInfoFromHwinfo();
+
+
+    /**
+     * @brief:获取蓝牙设备信息,获取蓝牙设备信息的命令有
+     *      sudo hwinfo --usb   注意这里要用 --usb 不能用 --bluetooth
+     *      sudo lshw -C communication -C generic
+     * @brief[loadBlueToothInfoFromHwinfo]:从hwinfo中获取信息
+     * @brief[loadBluetoothInfoFromLshw]:从lshw中获取信息
+     */
+    void loadBluetoothInfoFromHciconfig();
+    void loadBlueToothInfoFromHwinfo();
+    void loadBluetoothInfoFromLshw();
+
+    /**
+     * @brief:获取网络信息，获取网络信息的命令有
+     *      sudo lshw -C network
+     *      sudo hwinfo --network
+     */
+    void loadNetworkInfoFromLshw();
+    void loadNetworkInfoFromHwinfo();
+
+    /**
+     * @brief:获取键盘信息，获取键盘信息的命令有
+     *      cat /proc/bus/input/devices
+     *      sudo lshw -C input
+     *      sudo hwinfo --keyboard
+     */
+    void loadKeyboardInfoFromCatDevices();
+    void loadKeyboardInfoFromLshw();
+    void loadKeyboardInfoFromHwinfo();
+
+    /**
+     * @brief:获取其它设备信息,获取其他设备信息的命令有
+     *      sudo lshw -C storage
+     *      sudo lshw -C generic
+     */
+    void loadOtherDevicesFromLshwStorage();
+    void loadOtherDevicesFromLshwGeneric();
+    void loadOtherDevicesFromHwinfo();
+
+    /**@brief:获取电源信息*/
+    void loadPowerInfoFromUpower();
+
+    /**
+     * @brief:获取cdrom设备信息
+     */
+    void loadCdromInfoFromHwinfo();
+    void loadCdromInfoFromLshw();
+
+    /**
+     * @brief:获取打印机信息
+     */
+    void loadPrinterInfoFromCups();
+    void loadPrinterInfoFromHwinfo();
+
+    void getMapInfoFromHwinfo(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
+    void getMapInfoFromLshw(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
+    void getMapInfoFromDmidecode(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
+    bool getDeviceInfo(const QString &command, QString &deviceInfo, const QString &debugFile = QString(""));
 public:
     bool getRootPassword();
     bool executeProcess(const QString &cmd);
     bool runCmd(const QString &cmd);
     bool runCmd(const QStringList &cmdList);
 
-    //LogPasswordAuth* autoDialog = nullptr;
     QString standOutput_;
 
-    QMap<QString, DatabaseMap> toolDatabase_;
-    QMap<QString, QStringList> toolDatabaseSecondOrder_;
-
-    // Power settings
-    // Switchingpower
-    int switchingpowerScreenSuspendDelay_ = 0;      // screen suspend
-    int switchingpowerComputerSuspendDelay_ = 0;    // computer suspend
-    int switchingpowerAutoLockScreenDelay_ = 0;     // auto lock screen
-    // Battery
-    int batteryScreenSuspendDelay_ = 0;
-    int batteryComputerSuspendDelay_ = 0;
-    int batteryAutoLockScreenDelay_ = 0;
-
-    QString osInfo_;
-    QString homeUrl_;
-    QString lsbRelease_;
-    QString osVersion_;
-    // 获取显存的大小
-    QString varmSize = "Unknown";
-    // 获取屏幕的分辨率和刷新率，一个屏幕
-    QString currentResolutionRefresh;
-    // 获取显卡的最大支持分辨率和最小支持分辨率
-    QString maxResolution;
-    QString minResolution;
-
-    DatabaseMap                      m_KeyBoardInfo;
-
-public:
-    QSet<QString> orderedDevices;
+    // 由于同一个命令会执行多次，下面的变量是防止同一个命令执行多次
+    static QString    s_lshwInput;          // sudo lshw -C input
+    static QString    s_lshwSystem;         // sudo lshw -C system
+    static QString    s_lshwGeneric;        // sudo lshw -C generic
+    static QString    s_lshwDisk;           // sudo lshw -C disk
+    static QString    s_lshwMemory;         // sudo lshw -C memory
+    static QString    s_catDevice;          // cat /proc/bus/input/devices
+    static QString    s_dmidecodeBaseboard; // sudo dmidecode -t baseboard
+    static QString    s_xrandr;             // xrandr
+    static QString    s_hwinfoUsb;          // hwinfo --usb
+    static QMap<QString, QString>  s_hwinfoSound;
 };
 

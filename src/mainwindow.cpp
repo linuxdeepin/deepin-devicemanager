@@ -21,29 +21,30 @@
  */
 
 #include "mainwindow.h"
-#include "devicelistview.h"
+#include "Widget/devicelistview.h"
 #include <QHBoxLayout>
 #include "DStackedWidget"
 
-#include "computeroverviewwidget.h"
-#include "motherboardwidget.h"
-#include "cpuwidget.h"
-#include "memorywidget.h"
-#include "diskwidget.h"
-#include "displayadapterwidget.h"
-#include "monitorwidget.h"
-#include "audiodevicewidget.h"
-#include "networkadapterwidget.h"
-#include "bluetoothwidget.h"
-#include "camerawidget.h"
-#include "keyboardwidget.h"
-#include "mousewidget.h"
-#include "usbdevicewidget.h"
-#include "otherdevicewidget.h"
-#include "powerwidget.h"
+#include "Widget/computeroverviewwidget.h"
+#include "Widget/motherboardwidget.h"
+#include "Widget/cpuwidget.h"
+#include "Widget/memorywidget.h"
+#include "Widget/diskwidget.h"
+#include "Widget/displayadapterwidget.h"
+#include "Widget/monitorwidget.h"
+#include "Widget/audiodevicewidget.h"
+#include "Widget/networkadapterwidget.h"
+#include "Widget/bluetoothwidget.h"
+#include "Widget/camerawidget.h"
+#include "Widget/keyboardwidget.h"
+#include "Widget/mousewidget.h"
+#include "Widget/usbdevicewidget.h"
+#include "Widget/otherdevicewidget.h"
+#include "Widget/powerwidget.h"
+#include "DeviceManager/DeviceManager.h"
 #include <QStandardItemModel>
-#include "otherpcidevice.h"
-#include "printerwidget.h"
+#include "Widget/otherpcidevice.h"
+#include "Widget/printerwidget.h"
 #include "deviceinfoparser.h"
 #include "DApplication"
 #include "DApplicationHelper"
@@ -54,7 +55,7 @@
 #include <QDateTime>
 #include "DTitlebar"
 #include "DSpinner"
-#include "cdromwidget.h"
+#include "Widget/cdromwidget.h"
 #include <thread>
 #include "commondefine.h"
 #include "QStatusBar"
@@ -64,7 +65,7 @@
 #include <QJsonArray>
 #include <QScreen>
 #include <QSettings>
-
+#include "ThreadPool/ThreadPool.h"
 #include <QDebug>
 
 DWIDGET_USE_NAMESPACE
@@ -73,7 +74,8 @@ QList<ArticleStruct> staticArticles;
 
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent),
-    m_sizeForQSetting(mainWindowMinWidth_, mainWindowMinHeight_)
+    m_sizeForQSetting(mainWindowMinWidth_, mainWindowMinHeight_),
+    mp_ThreadPool(new ThreadPool(this))
 {
     if (false == DeviceInfoParser::Instance().getRootPassword()) {
         exit(-1);
@@ -87,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(loadingWidget_);
 
     connect( &DeviceInfoParser::Instance(), &DeviceInfoParser::loadFinished, this, &MainWindow::showSplashMessage);
+    connect( mp_ThreadPool, &ThreadPool::finished, this, &MainWindow::showSplashMessage);
 
     refreshDatabase();
 
@@ -227,7 +230,7 @@ void MainWindow::addAllDeviceinfoWidget()
     addDeviceWidget(new BluetoothWidget(mainWidget_), "bluetooth.svg");
     addDeviceWidget(new OtherPciDeviceWidget(mainWidget_), "otherpcidevices.svg");
 
-    if (PowerWidget::infoIsEmpty() == false) {
+    if (DeviceManager::instance()->getPowerDevices().size() > 0) {
         addDeviceWidget(new PowerWidget(mainWidget_), "battery.svg");
     }
     if (firstAdd_ == true) {
@@ -243,7 +246,7 @@ void MainWindow::addAllDeviceinfoWidget()
     if (firstAdd_ == true) {
         leftDeviceView_->addSeperator();
     }
-    //去掉USB的界面
+
 //    addDeviceWidget(new UsbdeviceWidget(mainWidget_), "usbdevice.svg");
     addDeviceWidget(new OtherDevicesWidget(mainWidget_), "otherdevices.svg");
 
@@ -320,14 +323,17 @@ void MainWindow::refresh()
 void MainWindow::refreshDatabase()
 {
     DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-    std::thread thread(
-    []() {
-        DeviceInfoParser::Instance().refreshDabase();
+    if (mp_ThreadPool) {
+        mp_ThreadPool->loadDeviceInfo();
     }
-    );
 
-    thread.detach();
+//    std::thread thread(
+//    []() {
+//        DeviceInfoParser::Instance().refreshDabase();
+//    }
+//    );
+
+//    thread.detach();
 }
 
 
@@ -525,6 +531,8 @@ void MainWindow::showSplashMessage(const QString &message)
         } else {
             refreshDeviceWidget();
         }
+        if (GenerateTsItem)
+            DeviceManager::instance()->generateTs();
 
         refreshing_ = false;
         leftDeviceView_->setEnabled(true);

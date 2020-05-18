@@ -39,6 +39,7 @@ INCLUDEPATH +=     \
 include(../thirdlib/QtXlsxWriter/src/xlsx/qtxlsx.pri)
 include(../thirdlib/docx/docx.pri)
 
+
 CONFIG(debug, debug|release) {
     TRANSLATIONS = $$files($$PWD/../translations/*.ts)
     #遍历目录中的ts文件，调用lrelease将其生成为qm文件
@@ -55,73 +56,115 @@ CONFIG(debug, debug|release) {
 #LIBS += -L../thirdlib/hd -lhd
 
 SOURCES += \
-    cdromwidget.cpp \
-    cloumnwidget.cpp \
-    logtreeview.cpp \
-    logviewheaderview.cpp \
-    logviewitemdelegate.cpp \
+    deviceattributedefine.cpp \
+    edidparser.cpp \
     main.cpp \
     mainwindow.cpp \
     deviceinfoparser.cpp \
-    deviceinfowidgetbase.cpp \
-    computeroverviewwidget.cpp \
-    motherboardwidget.cpp \
-    cpuwidget.cpp \
-    memorywidget.cpp \
-    diskwidget.cpp \
-    displayadapterwidget.cpp \
-    monitorwidget.cpp \
-    audiodevicewidget.cpp \
-    networkadapterwidget.cpp \
-    camerawidget.cpp \
-    keyboardwidget.cpp \
-    mousewidget.cpp \
-    otherdevicewidget.cpp \
-    usbdevicewidget.cpp \
-    powerwidget.cpp \
-    otherpcidevice.cpp \
-    logpasswordauth.cpp \
-    printerwidget.cpp \
-    devicelistview.cpp \
-    deviceattributedefine.cpp \
-    bluetoothwidget.cpp \
-    bottomroundframe.cpp \
-    edidparser.cpp
+    DeviceManager/DeviceInfo.cpp \
+    DeviceManager/DeviceManager.cpp \
+    DeviceManager/DeviceMouse.cpp \
+    DeviceManager/DeviceCPU.cpp \
+    DeviceManager/DeviceStorage.cpp \
+    DeviceManager/DeviceGPU.cpp \
+    DeviceManager/DeviceMemory.cpp \
+    DeviceManager/DeviceMonitor.cpp \
+    DeviceManager/DeviceBios.cpp \
+    DeviceManager/DeviceBluetooth.cpp \
+    DeviceManager/DeviceImage.cpp \
+    DeviceManager/DeviceOthers.cpp \
+    DeviceManager/DevicePower.cpp \
+    DeviceManager/DeviceNetwork.cpp \
+    DeviceManager/DeviceAudio.cpp \
+    DeviceManager/DeviceOtherPCI.cpp \
+    DeviceManager/DeviceKeyboard.cpp \
+    Widget/audiodevicewidget.cpp \
+    Widget/bluetoothwidget.cpp \
+    Widget/bottomroundframe.cpp \
+    Widget/camerawidget.cpp \
+    Widget/cdromwidget.cpp \
+    Widget/cloumnwidget.cpp \
+    Widget/computeroverviewwidget.cpp \
+    Widget/cpuwidget.cpp \
+    Widget/deviceinfowidgetbase.cpp \
+    Widget/devicelistview.cpp \
+    Widget/diskwidget.cpp \
+    Widget/displayadapterwidget.cpp \
+    Widget/keyboardwidget.cpp \
+    Widget/logpasswordauth.cpp \
+    Widget/logtreeview.cpp \
+    Widget/logviewheaderview.cpp \
+    Widget/logviewitemdelegate.cpp \
+    Widget/memorywidget.cpp \
+    Widget/monitorwidget.cpp \
+    Widget/motherboardwidget.cpp \
+    Widget/mousewidget.cpp \
+    Widget/networkadapterwidget.cpp \
+    Widget/otherdevicewidget.cpp \
+    Widget/otherpcidevice.cpp \
+    Widget/powerwidget.cpp \
+    Widget/printerwidget.cpp \
+    Widget/usbdevicewidget.cpp \
+    ThreadPool/ThreadPool.cpp \
+    DeviceManager/DevicePrint.cpp \
+    DeviceManager/DeviceComputer.cpp \
+    DeviceManager/DeviceCdrom.cpp
 
 HEADERS += \
-    cdromwidget.h \
-    cloumnwidget.h \
+    DeviceManager/DeviceInfo.h \
+    DeviceManager/DeviceManager.h \
+    DeviceManager/DeviceMouse.h \
+    DeviceManager/DeviceCpu.h \
+    DeviceManager/DeviceGpu.h \
+    DeviceManager/DeviceMemory.h \
+    DeviceManager/DeviceMonitor.h \
+    DeviceManager/DeviceBios.h \
+    DeviceManager/DeviceImage.h \
+    DeviceManager/DeviceOthers.h \
+    DeviceManager/DevicePower.h \
+    DeviceManager/DeviceNetwork.h \
+    DeviceManager/DeviceAudio.h \
+    DeviceManager/DeviceKeyboard.h \
+    DeviceManager/DevicePrint.h \
+    DeviceManager/DeviceBluetooth.h \
+    DeviceManager/DeviceOtherPCI.h \
+    DeviceManager/DeviceStorage.h \
+    Widget/usbdevicewidget.h \
     commondefine.h \
-    logtreeview.h \
-    logviewheaderview.h \
-    logviewitemdelegate.h \
-    mainwindow.h \
-    otherdevicewidget.h \
-    deviceinfoparser.h \
     deviceattributedefine.h \
-    deviceinfowidgetbase.h \
-    computeroverviewwidget.h \
+    deviceinfoparser.h \
+    hd.h \
+    mainwindow.h \
     singletondef.h \
-    motherboardwidget.h \
-    cpuwidget.h \
-    memorywidget.h \
-    diskwidget.h \
-    displayadapterwidget.h \
-    monitorwidget.h \
-    audiodevicewidget.h \
-    networkadapterwidget.h \
-    bluetoothwidget.h \
-    camerawidget.h \
-    keyboardwidget.h \
-    powerwidget.h \
-    mousewidget.h \
-    usbdevicewidget.h \
-    otherpcidevice.h \
-    logpasswordauth.h \
-    printerwidget.h \
-    devicelistview.h \
-    bottomroundframe.h \
-    edidparser.h
+    Widget/audiodevicewidget.h \
+    Widget/bluetoothwidget.h \
+    Widget/bottomroundframe.h \
+    Widget/camerawidget.h \
+    Widget/cdromwidget.h \
+    Widget/cloumnwidget.h \
+    Widget/computeroverviewwidget.h \
+    Widget/cpuwidget.h \
+    Widget/deviceinfowidgetbase.h \
+    Widget/devicelistview.h \
+    Widget/diskwidget.h \
+    Widget/displayadapterwidget.h \
+    Widget/keyboardwidget.h \
+    Widget/logpasswordauth.h \
+    Widget/logtreeview.h \
+    Widget/logviewheaderview.h \
+    Widget/logviewitemdelegate.h \
+    Widget/memorywidget.h \
+    Widget/monitorwidget.h \
+    Widget/motherboardwidget.h \
+    Widget/mousewidget.h \
+    Widget/networkadapterwidget.h \
+    Widget/otherdevicewidget.h \
+    Widget/otherpcidevice.h \
+    Widget/powerwidget.h \
+    Widget/printerwidget.h \
+    ThreadPool/ThreadPool.h \
+    DeviceManager/DeviceComputer.h \
+    DeviceManager/DeviceCdrom.h
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin
@@ -145,13 +188,13 @@ target.path = /usr/bin/
 #icons.files += ../images/cpu.svg
 #icons.path = /usr/share/deepin-devicemanager/
 icons.path = /usr/share/icons/hicolor/scalable/apps
-icons.files = $$PWD/../icons/deepin/builtin/deepin-devicemanager.svg
+icons.files = ../icons/deepin/builtin/deepin-devicemanager.svg
 
 # desktop
 desktop.files += deepin-devicemanager.desktop
 desktop.path = /usr/share/applications/
 
 translations.path = /usr/share/deepin-devicemanager/translations
-translations.files = $$PWD/../translations/*.qm
+translations.files = ../translations/*.qm
 
 INSTALLS += target icons desktop translations

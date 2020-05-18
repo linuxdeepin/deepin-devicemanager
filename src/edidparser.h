@@ -21,7 +21,7 @@
 #define EDIDPARSER_H
 
 #include <QString>
-#include "monitorwidget.h"
+#include "Widget/monitorwidget.h"
 class EDIDParser
 {
 public:
