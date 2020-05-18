@@ -27,6 +27,8 @@ void DeviceAudio::setInfoFromHwinfo(const QString &info)
 
     m_UniqueKey = mapInfo["SysFS BusID"];
 
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+
     loadOtherDeviceInfo(mapInfo);
 }
 

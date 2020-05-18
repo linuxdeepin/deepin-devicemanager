@@ -31,7 +31,7 @@ void DeviceMemory::setInfoFromLshw(const QString &info)
     setAttribute(mapInfo, "width", m_TotalBandwidth);
     setAttribute(mapInfo, "width", m_DataBandwidth);
     setAttribute(mapInfo, "serial", m_SerialNumber);
-
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
     loadOtherDeviceInfo(mapInfo);
 }
 

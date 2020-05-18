@@ -41,7 +41,7 @@ bool DeviceStorage::setHwinfoInfo(const QString &info)
     setAttribute(mapInfo, "Serial ID", m_SerialNumber, false);
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
-
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
     loadOtherDeviceInfo(mapInfo);
     return true;
 }

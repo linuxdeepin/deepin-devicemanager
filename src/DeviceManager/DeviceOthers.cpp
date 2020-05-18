@@ -1,4 +1,5 @@
 #include "DeviceOthers.h"
+#include "deviceinfoparser.h"
 
 DeviceOthers::DeviceOthers()
     : DeviceBaseInfo (), m_Name(""), m_Vendor(""), m_Model(""), m_Version("")
@@ -36,6 +37,7 @@ void DeviceOthers::setInfoFromHwinfo(const QString &info)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
+    setAttribute(mapInfo, "Unique ID", m_UniqID);
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0
@@ -46,6 +48,20 @@ void DeviceOthers::setInfoFromHwinfo(const QString &info)
             m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
+}
+
+bool DeviceOthers::isExist()
+{
+    if (DeviceInfoParser::Instance().s_usbDeiveUniq.contains(m_UniqID)) {
+        return true;
+    }
+
+    if (m_UniqID.isEmpty()) {
+        return true;
+    }
+
+    return false;
+
 }
 
 const QString &DeviceOthers::name()const

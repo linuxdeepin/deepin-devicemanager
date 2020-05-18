@@ -80,7 +80,7 @@ void DeviceKeyboard::setInfoFromHwinfo(const QString &info)
     if (re.exactMatch(mapInfo["Device File"])) {
         m_KeysToCatDevices = re.cap(1);
     }
-
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
     loadOtherDeviceInfo(mapInfo);
 }
 

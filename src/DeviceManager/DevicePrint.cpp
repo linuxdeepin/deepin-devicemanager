@@ -46,7 +46,7 @@ void DevicePrint::setInfoFromHwinfo(const QString &info)
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
     setAttribute(mapInfo, "Hotplug", m_InterfaceType);
-
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
     loadOtherDeviceInfo(mapInfo);
 }
 

@@ -278,5 +278,7 @@ public:
     static QString    s_xrandr;             // xrandr
     static QString    s_hwinfoUsb;          // hwinfo --usb
     static QMap<QString, QString>  s_hwinfoSound;
+
+    static QStringList s_usbDeiveUniq;      //hwinfo --usb unique ID
 };
 

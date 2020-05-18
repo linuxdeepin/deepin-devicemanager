@@ -13,6 +13,9 @@ public:
     /**@brief:设置从hwinfo获取的信息*/
     void setInfoFromHwinfo(const QString &info);
 
+    /**@brief:判断hwinfo设备是否存在*/
+    bool isExist();
+
     // 获取设备属性
     const QString &name()const;
     const QString &vendor()const;
@@ -38,7 +41,7 @@ private:
     QString             m_Driver;                       //<! 【驱动】
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
-
+    QString             m_UniqID;                       //<! 【唯一ID】
     QString             m_LogicalName;
 };
 

@@ -3,6 +3,8 @@
 #include<QDebug>
 #include"DeviceManager.h"
 #include <DApplication>
+#include "deviceinfoparser.h"
+
 DWIDGET_USE_NAMESPACE
 DeviceBaseInfo::DeviceBaseInfo()
 {
@@ -298,3 +300,9 @@ void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const Q
     }
 }
 
+void DeviceBaseInfo::addHwinfoUniqueID(const QString &uniqID)
+{
+    if (uniqID.isEmpty() == false) {
+        DeviceInfoParser::Instance().s_usbDeiveUniq.append(uniqID);
+    }
+}

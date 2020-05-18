@@ -65,6 +65,7 @@ QString    DeviceInfoParser::s_catDevice = "";
 QString    DeviceInfoParser::s_dmidecodeBaseboard = "";
 QString    DeviceInfoParser::s_xrandr = "";
 QString    DeviceInfoParser::s_hwinfoUsb = "";
+QStringList    DeviceInfoParser::s_usbDeiveUniq = {};
 
 DWIDGET_USE_NAMESPACE
 
@@ -1233,10 +1234,12 @@ void DeviceInfoParser::loadOtherDevicesFromHwinfo()
 
     QStringList paragraphs = s_hwinfoUsb.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
-        if (paragraph.contains("Hardware Class: modem")) {
+        if (paragraph.contains("usbcore", Qt::CaseInsensitive) == false) {
             DeviceOthers device;
             device.setInfoFromHwinfo(paragraph);
-            DeviceManager::instance()->addOthersDeviceFromHwinfo(device);
+            if (device.isExist() == false) {
+                DeviceManager::instance()->addOthersDeviceFromHwinfo(device);
+            }
         }
     }
 }

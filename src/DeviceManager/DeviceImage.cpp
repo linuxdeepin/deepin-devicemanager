@@ -36,6 +36,8 @@ void DeviceImage::setInfoFromHwinfo(const QString &info)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "", m_MaximumPower);
     setAttribute(mapInfo, "Speed", m_Speed);
+
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
 }
 
 const QString &DeviceImage::name()const

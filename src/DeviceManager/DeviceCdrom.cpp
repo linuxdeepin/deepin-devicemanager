@@ -51,9 +51,7 @@ void DeviceCdrom::setInfoFromHwinfo(const QString &info)
     setAttribute(mapInfo, "", m_MaxPower);
     setAttribute(mapInfo, "Speed", m_Speed);
 
-    if (mapInfo.find("SysFS BusID") != mapInfo.end()) {
-        m_UnikeyKey = mapInfo["SysFS BusID"].replace(":", ".");
-    }
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
 
     loadOtherDeviceInfo(mapInfo);
 }

@@ -87,6 +87,8 @@ void DeviceGpu::setHwinfoInfo(const QString &info)
     int index = mapInfo["SysFS BusID"].indexOf(re);
     m_UniqueKey = mapInfo["SysFS BusID"].mid(index + 1);
 
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+
     loadOtherDeviceInfo(mapInfo);
 }
 

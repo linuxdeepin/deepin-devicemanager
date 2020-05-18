@@ -42,6 +42,8 @@ protected:
     /**@brief:将属性设置到成员变量*/
     void setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite = true);
 
+    /**@brief:将hwinfo的unique ID属性保存,对其他设备进行识别时去除*/
+    void addHwinfoUniqueID(const QString &uniqID);
 
 protected:
     QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息

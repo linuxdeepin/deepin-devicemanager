@@ -1,8 +1,7 @@
 #include "DeviceMonitor.h"
-#include<QDebug>
-#include<QDate>
-#include<math.h>
-//#include<QObject>
+#include <QDebug>
+#include <QDate>
+#include <math.h>
 
 DeviceMonitor::DeviceMonitor()
     : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Model(""), m_DisplayInput(""), m_VGA("Disable")
@@ -44,6 +43,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QString &info)
     m_ProductionWeek  = transWeekToDate(mapInfo["Year of Manufacture"], mapInfo["Week of Manufacture"]);
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
 
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
     // 加载其他属性
     loadOtherDeviceInfo(mapInfo);
 }

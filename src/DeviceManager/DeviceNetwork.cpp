@@ -39,7 +39,7 @@ void DeviceNetwork::setInfoFromLshw(const QString &info)
     setAttribute(mapInfo, "capacity", m_Capacity);
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
-
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
     loadOtherDeviceInfo(mapInfo);
 
 }
