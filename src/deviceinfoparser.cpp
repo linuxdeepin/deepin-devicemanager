@@ -198,12 +198,12 @@ void DeviceInfoParser::loadComputerInfoFromDmidecode()
 {
     // 获取设备信息
     QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t system"), deviceInfo, "dmidecode_system.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 1"), deviceInfo, "dmidecode_1.txt")) {
         return;
     }
     DeviceManager::instance()->setComputerInfoFromDmidecode(deviceInfo);
 
-    if (!getDeviceInfo(QString("sudo dmidecode -t Chassis"), deviceInfo, "dmidecode_chassis.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 3"), deviceInfo, "dmidecode_3.txt")) {
         return;
     }
     DeviceManager::instance()->setComputerChassisInfoFromDmidecode(deviceInfo);
@@ -380,7 +380,7 @@ void DeviceInfoParser::loadCpuInfoFromLshw(QMap<QString, QString> &mapLshw)
 void DeviceInfoParser::loadCpuInfoFromDmidecode(QMap<QString, QString> &mapDmidecode)
 {
     QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t processor"), deviceInfo, "dmidecode_processor.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 4"), deviceInfo, "dmidecode_4.txt")) {
         return;
     }
 
@@ -645,7 +645,7 @@ void DeviceInfoParser::loadMemoryFromDmidecode()
 {
     // 获取设备信息
     QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t memory"), deviceInfo, "dmidecode_memory.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 17"), deviceInfo, "dmidecode_17.txt")) {
         return;
     }
 
@@ -789,7 +789,7 @@ void DeviceInfoParser::loadMotherBoardInfoFromDmidecode()
 {
     // 获取设备信息
     QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 2"), deviceInfo, "dmidecode_baseboard.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 2"), deviceInfo, "dmidecode_2.txt")) {
         return;
     }
     QString chipsetFamliy = "";
@@ -805,7 +805,7 @@ void DeviceInfoParser::loadMotherBoardInfoFromDmidecode()
 void DeviceInfoParser::loadBiosInfoFromDmidecode()
 {
     QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 0"), deviceInfo, "dmidecode_bios.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 0"), deviceInfo, "dmidecode_0.txt")) {
         return;
     }
     DeviceBios device;
