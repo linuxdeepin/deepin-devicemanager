@@ -72,7 +72,7 @@ DWIDGET_USE_NAMESPACE
 using PowerInter = com::deepin::daemon::Power;
 
 DCORE_USE_NAMESPACE
-const QString g_lsblkDbKey = "lsblk";
+//const QString g_lsblkDbKey = "lsblk";
 DeviceInfoParser::DeviceInfoParser(): QObject()
 {
 
@@ -82,11 +82,36 @@ DeviceInfoParser::~DeviceInfoParser()
 {
 
 }
+void DeviceInfoParser::test()
+{
+//    qint64 begin = QDateTime::currentDateTime().toMSecsSinceEpoch();
+//    QString deviceInfo;
+//    //getDeviceInfo(QString("sudo lshw -C system"), deviceInfo, "cat_os_release.txt");
+//    //getDeviceInfo(QString("sudo lshw -C input"), deviceInfo, "cat_os_release.txt");
+//    getDeviceInfo(QString("sudo lshw -C processor"), deviceInfo, "cat_os_release.txt");
+//    getDeviceInfo(QString("sudo lshw -C disk"), deviceInfo, "cat_os_release.txt");
+//    getDeviceInfo(QString("sudo lshw -C display"), deviceInfo, "cat_os_release.txt");
+//    getDeviceInfo(QString("sudo lshw -C memory"), deviceInfo, "cat_os_release.txt");
+//    getDeviceInfo(QString("sudo lshw -C multimedia"), deviceInfo, "cat_os_release.txt");
+//    getDeviceInfo(QString("sudo lshw -C communication"), deviceInfo, "cat_os_release.txt");
+//    getDeviceInfo(QString("sudo lshw -C generic"), deviceInfo, "cat_os_release.txt");
+//    getDeviceInfo(QString("sudo lshw -C network"), deviceInfo, "cat_os_release.txt");
+//    getDeviceInfo(QString("sudo lshw -C storage"), deviceInfo, "cat_os_release.txt");
+//    qint64 end = QDateTime::currentDateTime().toMSecsSinceEpoch();
+//    qDebug() << "1************* " << end - begin;
 
+//    begin = QDateTime::currentDateTime().toMSecsSinceEpoch();
+//    getDeviceInfo(QString("sudo lshw -C processor -C disk -C display -C memory -C multimedia -C communication -C generic -C network -C storage"), deviceInfo, "cat_os_release.txt");
+//    end = QDateTime::currentDateTime().toMSecsSinceEpoch();
+//    qDebug() << "2************* " << end - begin;
+////sudo lshw -C system -C input -C processor -C disk -C display -C memory -C multimedia -C communication -C generic -C network -C storage
+
+//    qDebug() << "end************* " << end - begin;
+
+}
 void DeviceInfoParser::refreshDabase()
 {
     QString defaultLanguage = getenv("LANGUAGE");
-
     emit loadFinished(tr("Loading Operating System Info..."));
     setenv("LANGUAGE", "en_US", 1);     //for aviod translate in lscpu...
     loadComputerInfo();
@@ -199,11 +224,6 @@ void DeviceInfoParser::loadComputerInfoFromDmidecode()
 {
     // 获取设备信息
     QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 1"), deviceInfo, "dmidecode_1.txt")) {
-        return;
-    }
-    DeviceManager::instance()->setComputerInfoFromDmidecode(deviceInfo);
-
     if (!getDeviceInfo(QString("sudo dmidecode -t 3"), deviceInfo, "dmidecode_3.txt")) {
         return;
     }

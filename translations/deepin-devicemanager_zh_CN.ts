@@ -1376,7 +1376,7 @@
     <message>
         <location filename="../src/Widget/networkadapterwidget.cpp" line="105"/>
         <source>Multicast</source>
-        <translation>多播</translation>
+        <translation>组播</translation>
     </message>
     <message>
         <location filename="../src/Widget/networkadapterwidget.cpp" line="106"/>

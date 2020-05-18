@@ -90,7 +90,9 @@ void MotherboardWidget::addDeviceDetail(const DeviceBios &device, bool withTitle
 void MotherboardWidget::setOverView(const QList<DeviceBios> &devices)
 {
     foreach (const DeviceBios &device, devices) {
-        overviewInfo_.value += QString("%1/").arg(device.name());
+        if (device.isBoard()) {
+            overviewInfo_.value += QString("%1/").arg(device.productName());
+        }
     }
     overviewInfo_.value.replace(QRegExp("/$"), "");
 }

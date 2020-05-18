@@ -139,7 +139,6 @@ public:
     void setComputerBoardInfoFromCatBoardinfo(const QString &info);
     void setComputerUOSInfoFromDSysInfo(const QString &info);
     void setComputerInfoFromCatVersion(const QString &info);
-    void setComputerInfoFromDmidecode(const QString &info);
     void setComputerChassisInfoFromDmidecode(const QString &info);
     void setComputerInfoFromLshw(const QString &info);
 

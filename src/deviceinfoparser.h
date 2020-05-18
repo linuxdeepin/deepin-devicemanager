@@ -65,6 +65,7 @@ public:
     void loadPrinterInfo();         // 打印机信息
 private:
     void loadDiskInfo();            // 计算机存储信息
+    void test();
 
 
 signals:

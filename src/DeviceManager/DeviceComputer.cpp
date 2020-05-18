@@ -59,31 +59,6 @@ void DeviceComputer::setInfoFromCatDevice(const QString &info)
         m_OS.insert(index, reg.cap(1));
     }
 }
-void DeviceComputer::setInfoFromDmidecode(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfo(mapInfo, info);
-
-    setAttribute(mapInfo, "Manufacturer", m_Vendor);
-    if (m_Vendor.contains("....")) {
-        m_Vendor = "";
-    }
-
-    setAttribute(mapInfo, "Product Name", m_ProductName);
-    if (m_ProductName.contains("....")) {
-        m_ProductName = "";
-    }
-
-    setAttribute(mapInfo, "Version", m_Version);
-    if (m_Version.contains("....")) {
-        m_Version = "";
-    }
-
-    setAttribute(mapInfo, "Family", m_Family);
-    if (m_Family.contains("None") || m_Family.contains("Not Specified")) {
-        m_Family = "";
-    }
-}
 
 void DeviceComputer::setChassisInfoFromDmidecode(const QString &info)
 {

@@ -446,15 +446,6 @@ void DeviceManager::setComputerInfoFromCatVersion(const QString &info)
     }
 }
 
-void DeviceManager::setComputerInfoFromDmidecode(const QString &info)
-{
-    QList<DeviceComputer>::iterator it = m_ListDeviceComputer.begin();
-    for (; it != m_ListDeviceComputer.end(); ++it) {
-        (*it).setInfoFromDmidecode(info);
-    }
-}
-
-
 void DeviceManager::setComputerChassisInfoFromDmidecode(const QString &info)
 {
     QList<DeviceComputer>::iterator it = m_ListDeviceComputer.begin();
