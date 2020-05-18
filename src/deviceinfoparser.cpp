@@ -594,6 +594,13 @@ void DeviceInfoParser::loadGpuSizeFromDmesg()
             double size = reg.cap(1).toDouble();
             QString sizeS = QString("%1GB").arg(size / 1024);
             DeviceManager::instance()->setGpuSizeFromDmesg(sizeS);
+        } else {
+            reg.setPattern(".*RAM: ([0-9]*) M.*");
+            if (reg.exactMatch(line)) {
+                double size = reg.cap(1).toDouble();
+                QString sizeS = QString("%1GB").arg(size / 1024);
+                DeviceManager::instance()->setGpuSizeFromDmesg(sizeS);
+            }
         }
     }
 }
