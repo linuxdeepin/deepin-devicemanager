@@ -67,8 +67,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QString &info)
 
     // 获取当前分辨率 和 当前支持分辨率
     QStringList listResolution = m_SupportResolution.split(" ");
-
-    m_CurrentResolution = listResolution.last();
+//    m_CurrentResolution = listResolution.last();
     m_SupportResolution = "";
     foreach (const QString &word, listResolution) {
         if (word.contains("@")) {
@@ -129,8 +128,12 @@ bool DeviceMonitor::setRateInfoFromXradr(const QString &main, const QString &rat
         return false;
     }
 
-    if (!m_CurrentResolution.isEmpty())
-        m_CurrentResolution += QString("@%1Hz").arg(rate);
+    if (m_CurrentResolution.isEmpty()) {
+        QStringList rateList = rate.split(" ");
+        rateList.removeAll("");
+        m_CurrentResolution = QString("%1@%2Hz").arg(rateList[0].trimmed()).arg(rateList[1].replace(QRegExp("\\*."), ""));
+    }
+
 
     // 去掉不用的信息
     QString mInfo = main;
