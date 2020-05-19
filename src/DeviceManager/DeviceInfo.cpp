@@ -274,8 +274,10 @@ void DeviceBaseInfo::getMapInfoFromHwinfo(QMap<QString, QString> &mapInfo, const
         if (re.exactMatch(words[1].trimmed())) {
             mapInfo[words[0].trimmed()] += re.cap(1);
         } else {
-            if (words[0].trimmed() == "Resolution" && words[1].trimmed().contains("@") == true) {
-                mapInfo[words[0].trimmed()] += words[1].trimmed();
+            if (words[0].trimmed() == "Resolution") {
+                if (words[1].trimmed().contains("@") == true) {
+                    mapInfo[words[0].trimmed()] += words[1].trimmed();
+                }
             } else {
                 mapInfo[words[0].trimmed()] = words[1].trimmed();
             }
@@ -292,10 +294,10 @@ void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const Q
         return;
     }
     if (overwrite) {
-        variable = mapInfo[key];
+        variable = mapInfo[key].trimmed();
     } else {
         if (variable.isEmpty()) {
-            variable = mapInfo[key];
+            variable = mapInfo[key].trimmed();
         }
     }
 }
