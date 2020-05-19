@@ -84,8 +84,8 @@ void PrinterWidget::addDeviceDetail(const DevicePrint &device, bool withTitle)
     addDeviceAttribute(tr("Name"), device.name(), attributes);
     addDeviceAttribute(tr("Model"), device.model(), attributes);
     addDeviceAttribute(tr("Vendor"), device.vendor(), attributes);
-    addDeviceAttribute(tr("Serial number"), device.serialNumber(), attributes);
-    addDeviceAttribute(tr("Interface type"), device.interfaceType(), attributes);
+    addDeviceAttribute(tr("Serial Number"), device.serialNumber(), attributes);
+    addDeviceAttribute(tr("Interface Type"), device.interfaceType(), attributes);
     addDeviceAttribute(tr("Status"), device.status(), attributes);
     addDeviceAttribute(tr("URI"), device.URI(), attributes);
     addDeviceAttribute(tr("Shared"), device.shared(), attributes);

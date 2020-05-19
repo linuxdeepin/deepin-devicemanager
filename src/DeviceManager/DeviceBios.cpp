@@ -148,7 +148,7 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("SKU Number"));
 
     addFilterKey(QObject::tr("Location"));
-    addFilterKey(QObject::tr("Use"));
+//    addFilterKey(QObject::tr("Use"));
     addFilterKey(QObject::tr("Error Correction Type"));
     addFilterKey(QObject::tr("Maximum Capacity"));
     addFilterKey(QObject::tr("Error Information Handle"));

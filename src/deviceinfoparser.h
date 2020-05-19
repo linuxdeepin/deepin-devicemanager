@@ -45,7 +45,6 @@ public:
     DeviceInfoParser();
     ~DeviceInfoParser();
 
-    void refreshDabase();
     static void clear();
     void loadComputerInfo();        // 计算机概况
     void loadMouseInfo();           // 计算机鼠标信息
@@ -65,7 +64,6 @@ public:
     void loadPrinterInfo();         // 打印机信息
 private:
     void loadDiskInfo();            // 计算机存储信息
-    void test();
 
 
 signals:
@@ -269,16 +267,48 @@ public:
     QString standOutput_;
 
     // 由于同一个命令会执行多次，下面的变量是防止同一个命令执行多次
-    static QString    s_lshwInput;          // sudo lshw -C input
-    static QString    s_lshwSystem;         // sudo lshw -C system
-    static QString    s_lshwGeneric;        // sudo lshw -C generic
-    static QString    s_lshwDisk;           // sudo lshw -C disk
-    static QString    s_lshwMemory;         // sudo lshw -C memory
-    static QString    s_catDevice;          // cat /proc/bus/input/devices
-    static QString    s_dmidecodeBaseboard; // sudo dmidecode -t baseboard
-    static QString    s_xrandr;             // xrandr
-    static QString    s_hwinfoUsb;          // hwinfo --usb
-    static QMap<QString, QString>  s_hwinfoSound;
+    static QString s_catOsRelease;
+    static QString s_catVersion;
+    static QString s_catBoardInfo;
+    static QString s_catDevice;
+    static QString s_catCpuInfo;
+
+    static QString s_dmidecode0;
+    static QString s_dmidecode1;
+    static QString s_dmidecode2;
+    static QString s_dmidecode3;
+    static QString s_dmidecode4;
+    static QString s_dmidecode16;
+    static QString s_dmidecode17;
+
+    static QString s_lshwSystem;
+    static QString s_lshwInput;
+    static QString s_lshwMultimedia;
+    static QString s_lshwCommunication;
+    static QString s_lshwGeneric;
+    static QString s_lshwStorage;
+    static QString s_lshwProcessor;
+    static QString s_lshwDisk;
+    static QString s_lshwDisplay;
+    static QString s_lshwMemory;
+    static QString s_lshwNetwork;
+
+    static QString s_hwinfoMouse;
+    static QString s_lscpu;
+    static QString s_lsblkD;
+    static QString s_xrandr;
+    static QString s_xrandrVerbose;
+    static QString s_dmesg;
+
+    static QString s_hwinfoMonitor;
+    static QString s_hwinfoSound;
+    static QString s_hwinfoUsb;
+    static QString s_hwinfoNetwork;
+    static QString s_hwinfoKeyboard;
+    static QString s_hwinfoCdrom;
+    static QString s_hwinfoDisk;
+    static QString s_hwinfoDisplay;
+    static QMap<QString, QStringList>   s_lshwInfo;
 
     static QStringList s_usbDeiveUniq;      //hwinfo --usb unique ID
 };

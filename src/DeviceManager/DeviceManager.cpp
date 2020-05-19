@@ -29,23 +29,33 @@ DeviceManager::DeviceManager()
 void DeviceManager::clear()
 {
     m_ListDeviceMouse.clear();
-    m_ListDeviceCPU.clear();
     m_ListDeviceStorage.clear();
-    m_ListDeviceGPU.clear();
-    m_ListDeviceMemory.clear();
     m_ListDeviceMonitor.clear();
-    m_ListDeviceBios.clear();
     m_ListBluetooth.clear();
     m_ListDeviceAudio.clear();
-    m_ListDeviceNetwork.clear();
     m_ListDeviceImage.clear();
     m_ListDeviceKeyboard.clear();
     m_ListDeviceOthers.clear();
     m_ListDevicePower.clear();
     m_ListDevicePrint.clear();
     m_ListDeviceOtherPCI.clear();
-    m_ListDeviceComputer.clear();
     m_ListDeviceCdrom.clear();
+
+
+    //m_ListDeviceComputer.clear();
+    //m_ListDeviceNetwork.clear();
+    //m_ListDeviceBios.clear();
+    //m_ListDeviceGPU.clear();
+    //m_ListDeviceMemory.clear();
+    //m_ListDeviceCPU.clear();
+}
+
+bool DeviceManager::isRefresh()
+{
+    if (m_ListDeviceComputer.size() > 0) {
+        return true;
+    }
+    return false;
 }
 
 void DeviceManager::addMouseDevice(const DeviceMouse &device)
@@ -348,7 +358,6 @@ void DeviceManager::addOthersDevice(const DeviceOthers &device)
 {
     bool isOtherDevice = true;
     foreach (const DeviceStorage &disk, m_ListDeviceStorage) {
-        qDebug() << disk.keyFromStorage() << "**********************************" << device.logicalName();
         if (disk.keyFromStorage() == device.logicalName() && device.logicalName() != "") {
             isOtherDevice = false;
             break;

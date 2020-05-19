@@ -81,6 +81,7 @@ MainWindow::MainWindow(QWidget *parent) :
         exit(-1);
     }
 
+    refreshDatabase();
     setSizeLimits();
     loadSettings();
 
@@ -90,8 +91,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect( &DeviceInfoParser::Instance(), &DeviceInfoParser::loadFinished, this, &MainWindow::showSplashMessage);
     connect( mp_ThreadPool, &ThreadPool::finished, this, &MainWindow::showSplashMessage);
-
-    refreshDatabase();
 
     setAttribute(Qt::WA_AcceptDrops, false);
 
@@ -326,14 +325,6 @@ void MainWindow::refreshDatabase()
     if (mp_ThreadPool) {
         mp_ThreadPool->loadDeviceInfo();
     }
-
-//    std::thread thread(
-//    []() {
-//        DeviceInfoParser::Instance().refreshDabase();
-//    }
-//    );
-
-//    thread.detach();
 }
 
 
@@ -525,14 +516,21 @@ void MainWindow::currentDeviceChanged(const QString &device)
 
 void MainWindow::showSplashMessage(const QString &message)
 {
+    static bool begin = true;
+    static qint64 b = 0;
+    static qint64 c = 0;
+    if (begin) {
+        b = QDateTime::currentDateTime().toMSecsSinceEpoch();
+    }
     if ( message == "finish" ) {
+        c = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        begin = true;
+        qDebug() << "************************&&*************************" << (c - b) / 1000.0;
         if (firstAdd_ == true) {
             loadDeviceWidget();
         } else {
             refreshDeviceWidget();
         }
-        if (GenerateTsItem)
-            DeviceManager::instance()->generateTs();
 
         refreshing_ = false;
         leftDeviceView_->setEnabled(true);
@@ -540,6 +538,7 @@ void MainWindow::showSplashMessage(const QString &message)
     }
 
     if ( loadLabel_ ) {
+        begin = false;
         loadLabel_->setText(message);
     }
 }

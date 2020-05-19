@@ -56,15 +56,47 @@
 #include <cups.h>
 #include "Logger.h"
 
-QString    DeviceInfoParser::s_lshwInput = "";
-QString    DeviceInfoParser::s_lshwSystem = "";
-QString    DeviceInfoParser::s_lshwGeneric = "";
-QString    DeviceInfoParser::s_lshwDisk = "";
-QString    DeviceInfoParser::s_lshwMemory = "";
-QString    DeviceInfoParser::s_catDevice = "";
-QString    DeviceInfoParser::s_dmidecodeBaseboard = "";
-QString    DeviceInfoParser::s_xrandr = "";
-QString    DeviceInfoParser::s_hwinfoUsb = "";
+QString DeviceInfoParser::s_catOsRelease = "";
+QString DeviceInfoParser::s_catVersion = "";
+QString DeviceInfoParser::s_catBoardInfo = "";
+QString DeviceInfoParser::s_catDevice = "";
+QString DeviceInfoParser::s_catCpuInfo = "";
+
+QString DeviceInfoParser::s_dmidecode0 = "";
+QString DeviceInfoParser::s_dmidecode1 = "";
+QString DeviceInfoParser::s_dmidecode2 = "";
+QString DeviceInfoParser::s_dmidecode3 = "";
+QString DeviceInfoParser::s_dmidecode4 = "";
+QString DeviceInfoParser::s_dmidecode16 = "";
+QString DeviceInfoParser::s_dmidecode17 = "";
+
+QString DeviceInfoParser::s_lshwSystem = "";
+QString DeviceInfoParser::s_lshwInput = "";
+QString DeviceInfoParser::s_lshwProcessor = "";
+QString DeviceInfoParser::s_lshwDisk = "";
+QString DeviceInfoParser::s_lshwDisplay = "";
+QString DeviceInfoParser::s_lshwMemory = "";
+QString DeviceInfoParser::s_lshwNetwork = "";
+QString DeviceInfoParser::s_lshwMultimedia = "";
+QString DeviceInfoParser::s_lshwCommunication = "";
+QString DeviceInfoParser::s_lshwGeneric = "";
+QString DeviceInfoParser::s_lshwStorage = "";
+
+QString DeviceInfoParser::s_hwinfoMouse = "";
+QString DeviceInfoParser::s_lscpu = "";
+QString DeviceInfoParser::s_lsblkD = "";
+QString DeviceInfoParser::s_xrandr = "";
+QString DeviceInfoParser::s_xrandrVerbose = "";
+QString DeviceInfoParser::s_dmesg = "";
+
+QString DeviceInfoParser::s_hwinfoMonitor = "";
+QString DeviceInfoParser::s_hwinfoSound = "";
+QString DeviceInfoParser::s_hwinfoUsb = "";
+QString DeviceInfoParser::s_hwinfoNetwork = "";
+QString DeviceInfoParser::s_hwinfoKeyboard = "";
+QString DeviceInfoParser::s_hwinfoCdrom = "";
+QString DeviceInfoParser::s_hwinfoDisk = "";
+QString DeviceInfoParser::s_hwinfoDisplay = "";
 QStringList    DeviceInfoParser::s_usbDeiveUniq = {};
 
 DWIDGET_USE_NAMESPACE
@@ -82,102 +114,60 @@ DeviceInfoParser::~DeviceInfoParser()
 {
 
 }
-void DeviceInfoParser::test()
-{
-//    qint64 begin = QDateTime::currentDateTime().toMSecsSinceEpoch();
-//    QString deviceInfo;
-//    //getDeviceInfo(QString("sudo lshw -C system"), deviceInfo, "cat_os_release.txt");
-//    //getDeviceInfo(QString("sudo lshw -C input"), deviceInfo, "cat_os_release.txt");
-//    getDeviceInfo(QString("sudo lshw -C processor"), deviceInfo, "cat_os_release.txt");
-//    getDeviceInfo(QString("sudo lshw -C disk"), deviceInfo, "cat_os_release.txt");
-//    getDeviceInfo(QString("sudo lshw -C display"), deviceInfo, "cat_os_release.txt");
-//    getDeviceInfo(QString("sudo lshw -C memory"), deviceInfo, "cat_os_release.txt");
-//    getDeviceInfo(QString("sudo lshw -C multimedia"), deviceInfo, "cat_os_release.txt");
-//    getDeviceInfo(QString("sudo lshw -C communication"), deviceInfo, "cat_os_release.txt");
-//    getDeviceInfo(QString("sudo lshw -C generic"), deviceInfo, "cat_os_release.txt");
-//    getDeviceInfo(QString("sudo lshw -C network"), deviceInfo, "cat_os_release.txt");
-//    getDeviceInfo(QString("sudo lshw -C storage"), deviceInfo, "cat_os_release.txt");
-//    qint64 end = QDateTime::currentDateTime().toMSecsSinceEpoch();
-//    qDebug() << "1************* " << end - begin;
 
-//    begin = QDateTime::currentDateTime().toMSecsSinceEpoch();
-//    getDeviceInfo(QString("sudo lshw -C processor -C disk -C display -C memory -C multimedia -C communication -C generic -C network -C storage"), deviceInfo, "cat_os_release.txt");
-//    end = QDateTime::currentDateTime().toMSecsSinceEpoch();
-//    qDebug() << "2************* " << end - begin;
-////sudo lshw -C system -C input -C processor -C disk -C display -C memory -C multimedia -C communication -C generic -C network -C storage
-
-//    qDebug() << "end************* " << end - begin;
-
-}
-void DeviceInfoParser::refreshDabase()
-{
-    QString defaultLanguage = getenv("LANGUAGE");
-    emit loadFinished(tr("Loading Operating System Info..."));
-    setenv("LANGUAGE", "en_US", 1);     //for aviod translate in lscpu...
-    loadComputerInfo();
-
-    emit loadFinished(tr("Loading CPU Info..."));
-    loadCpuInfo();
-
-    emit loadFinished(tr("Loading GPU Info..."));
-    loadGpuInfo();
-
-    emit loadFinished(tr("Loading BIOS Info..."));
-    loadBiosInfo();
-
-    emit loadFinished(tr("Loading Audio Device Info..."));
-    loadAudioInfo();
-
-    emit loadFinished(tr("Loading Bluetooth Device Info..."));
-    loadBluetoothInfo();
-
-    emit loadFinished(tr("Loading Memory Info..."));
-    loadMemoryInfo();
-
-    emit loadFinished(tr("Loading Monitor Info..."));
-    loadMonitorInfo();
-    loadMonitorInfoFromXrandr();
-
-    emit loadFinished(tr("Loading Network Adapter Info..."));
-    loadNetworkInfo();
-
-    emit loadFinished(tr("Loading Input Devices Info..."));
-    loadMouseInfo();
-    loadKeyboardInfo();
-
-    emit loadFinished(tr("Loading Image Devices Info..."));
-    loadImageInfo();
-
-    emit loadFinished(tr("Loading Power Info..."));
-    loadPowerInfo();
-
-    emit loadFinished(tr("Loading Other Devices Info..."));
-    loadOtherDevices();
-
-    emit loadFinished(tr("Loading CD-ROM Info..."));
-    loadCdromInfo();
-
-    emit loadFinished(tr("Loading Printer Info..."));
-    loadPrinterInfo();
-
-    setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
-
-    emit loadFinished("finish");
-}
 void DeviceInfoParser::clear()
 {
-    s_lshwInput = "";
-    s_lshwSystem = "";
-    s_lshwGeneric = "";
-    s_lshwDisk = "";
+    //s_catOsRelease = "";
+    //s_catVersion = "";
+    //s_catBoardInfo = "";
     s_catDevice = "";
-    s_dmidecodeBaseboard = "";
+    //s_catCpuInfo = "";
+
+    //s_dmidecode0 = "";
+    //s_dmidecode1 = "";
+    //s_dmidecode2 = "";
+    //s_dmidecode3 = "";
+    //s_dmidecode4 = "";
+    //s_dmidecode16 = "";
+    //s_dmidecode17 = "";
+
+    //s_lshwSystem = "";
+    s_lshwInput = "";
+    //s_lshwProcessor = "";
+    s_lshwDisk = "";
+    //s_lshwDisplay = "";
+    //s_lshwMemory = "";
+    s_lshwMultimedia = "";
+    s_lshwCommunication = "";
+    s_lshwGeneric = "";
+    //s_lshwNetwork = "";
+    s_lshwStorage = "";
+
+    s_hwinfoMouse = "";
+    //s_lscpu = "";
+    s_lsblkD = "";
     s_xrandr = "";
+    s_xrandrVerbose = "";
+    //s_dmesg = "";
+
+    s_hwinfoMonitor = "";
+    s_hwinfoSound = "";
     s_hwinfoUsb = "";
-    s_lshwMemory = "";
+    //s_hwinfoNetwork = "";
+    s_hwinfoKeyboard = "";
+    s_hwinfoCdrom = "";
+    s_hwinfoDisk = "";
+    //s_hwinfoDisplay = "";
+
+    QString defaultLanguage = getenv("LANGUAGE");
+    setenv("LANGUAGE", "en_US", 1);
+    setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
 }
 void DeviceInfoParser::loadComputerInfo()
 {
+    if (DeviceManager::instance()->isRefresh()) {
+        return;
+    }
     loadComputerInfoFromCatOsRelease();
     loadComputerInfoFromCatBoardinfo();
     loadUOS();
@@ -188,13 +178,12 @@ void DeviceInfoParser::loadComputerInfo()
 void DeviceInfoParser::loadComputerInfoFromCatOsRelease()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("cat /etc/os-release"), deviceInfo, "cat_os_release.txt")) {
+    if (!getDeviceInfo(QString("cat /etc/os-release"), s_catOsRelease, "cat_os_release.txt")) {
         return;
     }
 
     DeviceComputer device;
-    device.setInfoFromCatOsRelease(deviceInfo);
+    device.setInfoFromCatOsRelease(s_catOsRelease);
     DeviceManager::instance()->addComputerDevice(device);
 }
 void DeviceInfoParser::loadUOS()
@@ -213,30 +202,26 @@ void DeviceInfoParser::loadUOS()
 void DeviceInfoParser::loadComputerInfoFromCatVersion()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("cat /proc/version"), deviceInfo, "cat_version.txt")) {
+    if (!getDeviceInfo(QString("cat /proc/version"), s_catVersion, "cat_version.txt")) {
         return;
     }
-    DeviceManager::instance()->setComputerInfoFromCatVersion(deviceInfo);
+    DeviceManager::instance()->setComputerInfoFromCatVersion(s_catVersion);
 }
 
 void DeviceInfoParser::loadComputerInfoFromDmidecode()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 3"), deviceInfo, "dmidecode_3.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 3"), s_dmidecode3, "dmidecode_3.txt")) {
         return;
     }
-    DeviceManager::instance()->setComputerChassisInfoFromDmidecode(deviceInfo);
+    DeviceManager::instance()->setComputerChassisInfoFromDmidecode(s_dmidecode3);
 }
 
 void DeviceInfoParser::loadComputerInfoFromLshw()
 {
     // 获取设备信息
-    if (s_lshwSystem.isEmpty()) {
-        if (!getDeviceInfo(QString("sudo lshw -C system"), s_lshwSystem, "lshw_system.txt")) {
-            return;
-        }
+    if (!getDeviceInfo(QString("sudo lshw -C system"), s_lshwSystem, "lshw_system.txt")) {
+        return;
     }
 
     // 解析设备信息
@@ -252,12 +237,11 @@ void DeviceInfoParser::loadComputerInfoFromLshw()
 void DeviceInfoParser::loadComputerInfoFromCatBoardinfo()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("cat /proc/boardinfo"), deviceInfo, "cat_boardinfo.txt")) {
+    if (!getDeviceInfo(QString("cat /proc/boardinfo"), s_catBoardInfo, "cat_boardinfo.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split("\n\n");
+    QStringList paragraphs = s_catBoardInfo.split("\n\n");
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty()) {
             continue;
@@ -285,10 +269,8 @@ void DeviceInfoParser::loadMouseInfo()
 bool DeviceInfoParser::loadMouseInfoFromCatDevices()
 {
     // 获取设备信息
-    if (s_catDevice.isEmpty()) {
-        if (!getDeviceInfo(QString("cat /proc/bus/input/devices"), s_catDevice, "cat_devices.txt")) {
-            return false;
-        }
+    if (!getDeviceInfo(QString("cat /proc/bus/input/devices"), s_catDevice, "cat_devices.txt")) {
+        return false;
     }
 
 
@@ -305,13 +287,12 @@ bool DeviceInfoParser::loadMouseInfoFromCatDevices()
 bool DeviceInfoParser::loadMouseInfoFromHwinfo()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo hwinfo --mouse"), deviceInfo, "hwinfo_mouse.txt")) {
+    if (!getDeviceInfo(QString("sudo hwinfo --mouse"), s_hwinfoMouse, "hwinfo_mouse.txt")) {
         return false;
     }
 
     // 解析设备信息
-    QStringList listInfo = deviceInfo.split(QString("\n\n"));
+    QStringList listInfo = s_hwinfoMouse.split(QString("\n\n"));
     for (QStringList::iterator it = listInfo.begin(); it != listInfo.end(); ++it) {
         if ((*it).isEmpty()) {
             continue;
@@ -327,10 +308,8 @@ bool DeviceInfoParser::loadMouseInfoFromHwinfo()
 bool DeviceInfoParser::loadMouseInfoFromlshw()
 {
     // 获取设备信息
-    if (s_lshwInput.isEmpty()) {
-        if (!getDeviceInfo(QString("sudo lshw -C input"), s_lshwInput, "lshw_input.txt")) {
-            return false;
-        }
+    if (!getDeviceInfo(QString("sudo lshw -C input"), s_lshwInput, "lshw_input.txt")) {
+        return false;
     }
 
     // 解析设备信息
@@ -349,6 +328,9 @@ bool DeviceInfoParser::loadMouseInfoFromlshw()
 
 void DeviceInfoParser::loadCpuInfo()
 {
+    if (DeviceManager::instance()->isRefresh()) {
+        return;
+    }
     QMap<QString, QString> mapLscpu, mapLshw, mapDmidecode;
     loadCpuInfoFromLscpu(mapLscpu);
     loadCpuInfoFromLshw(mapLshw);
@@ -358,12 +340,11 @@ void DeviceInfoParser::loadCpuInfo()
 void DeviceInfoParser::loadCpuInfoFromLscpu(QMap<QString, QString> &mapLscpu)
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("lscpu"), deviceInfo, "lscpu.txt")) {
+    if (!getDeviceInfo(QString("lscpu"), s_lscpu, "lscpu.txt")) {
         return;
     }
 
-    QStringList lines = deviceInfo.split(QString("\n"));
+    QStringList lines = s_lscpu.split(QString("\n"));
     foreach (QString line, lines) {
         if (line.isEmpty()) {
             continue;
@@ -382,12 +363,11 @@ void DeviceInfoParser::loadCpuInfoFromLscpu(QMap<QString, QString> &mapLscpu)
 void DeviceInfoParser::loadCpuInfoFromLshw(QMap<QString, QString> &mapLshw)
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo lshw -C processor"), deviceInfo, "lshw_processor.txt")) {
+    if (!getDeviceInfo(QString("sudo lshw -C processor"), s_lshwProcessor, "lshw_processor.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_lshwProcessor.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty()) {
             continue;
@@ -400,12 +380,11 @@ void DeviceInfoParser::loadCpuInfoFromLshw(QMap<QString, QString> &mapLshw)
 }
 void DeviceInfoParser::loadCpuInfoFromDmidecode(QMap<QString, QString> &mapDmidecode)
 {
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 4"), deviceInfo, "dmidecode_4.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 4"), s_dmidecode4, "dmidecode_4.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_dmidecode4.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (!paragraph.contains("Processor Information")) {
             continue;
@@ -417,12 +396,11 @@ void DeviceInfoParser::loadCpuInfoFromDmidecode(QMap<QString, QString> &mapDmide
 void DeviceInfoParser::loadCpuInfoFromCatCpuinfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode)
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("cat /proc/cpuinfo"), deviceInfo, "cat_cpuinfo.txt")) {
+    if (!getDeviceInfo(QString("cat /proc/cpuinfo"), s_catCpuInfo, "cat_cpuinfo.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_catCpuInfo.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty()) {
             return;
@@ -452,11 +430,10 @@ void DeviceInfoParser::loadDiskInfo()
 void DeviceInfoParser::loadDiskInfoFromHwinfo()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo hwinfo --disk"), deviceInfo, "hwinfo_disk.txt")) {
+    if (!getDeviceInfo(QString("sudo hwinfo --disk"), s_hwinfoDisk, "hwinfo_disk.txt")) {
         return;
     }
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_hwinfoDisk.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty()) {
             return;
@@ -471,12 +448,11 @@ void DeviceInfoParser::loadDiskInfoFromHwinfo()
 void DeviceInfoParser::loadDiskInfoFromLsblk(QStringList &logicNameList)
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("lsblk -d -o name,rota"), deviceInfo, "lsblk_d.txt")) {
+    if (!getDeviceInfo(QString("lsblk -d -o name,rota"), s_lsblkD, "lsblk_d.txt")) {
         return;
     }
 
-    QStringList lines = deviceInfo.split("\n");
+    QStringList lines = s_lsblkD.split("\n");
     foreach (QString line, lines) {
         QStringList words = line.replace(QRegExp("[\\s]+"), " ").split(" ");
         if (words.size() != 2) {
@@ -539,6 +515,9 @@ void DeviceInfoParser::loadDiskInfoFromSmartCtl(QStringList &logicNameList)
 
 void DeviceInfoParser::loadGpuInfo()
 {
+    if (DeviceManager::instance()->isRefresh()) {
+        return;
+    }
     loadGpuInfoFromHwinfo();
     loadGpuInfoFromLshw();
     loadGpuInfoFromXrandr();
@@ -548,12 +527,11 @@ void DeviceInfoParser::loadGpuInfo()
 void DeviceInfoParser::loadGpuInfoFromLshw()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo lshw -C display"), deviceInfo, "lshw_display.txt")) {
+    if (!getDeviceInfo(QString("sudo lshw -C display"), s_lshwDisplay, "lshw_display.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("*-display"));
+    QStringList paragraphs = s_lshwDisplay.split(QString("*-display"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.trimmed().isEmpty()) {
             continue;
@@ -565,12 +543,11 @@ void DeviceInfoParser::loadGpuInfoFromLshw()
 void DeviceInfoParser::loadGpuInfoFromHwinfo()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo hwinfo --display"), deviceInfo, "hwinfo_display.txt")) {
+    if (!getDeviceInfo(QString("sudo hwinfo --display"), s_hwinfoDisplay, "hwinfo_display.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_hwinfoDisplay.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty()) {
             continue;
@@ -591,10 +568,8 @@ void DeviceInfoParser::loadGpuInfoFromHwinfo()
 void DeviceInfoParser::loadGpuInfoFromXrandr()
 {
     // 获取设备信息
-    if (s_xrandr.isEmpty()) {
-        if (!getDeviceInfo(QString("xrandr"), s_xrandr, "xrandr.txt")) {
-            return;
-        }
+    if (!getDeviceInfo(QString("xrandr"), s_xrandr, "xrandr.txt")) {
+        return;
     }
 
     DeviceManager::instance()->setGpuInfoFromXrandr(s_xrandr);
@@ -603,11 +578,10 @@ void DeviceInfoParser::loadGpuInfoFromXrandr()
 void DeviceInfoParser::loadGpuSizeFromDmesg()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmesg"), deviceInfo, "dmesg.txt")) {
+    if (!getDeviceInfo(QString("sudo dmesg"), s_dmesg, "dmesg.txt")) {
         return;
     }
-    QStringList lines = deviceInfo.split("\n");
+    QStringList lines = s_dmesg.split("\n");
     foreach (const QString &line, lines) {
         QRegExp reg(".*RAM=([0-9]*)M.*");
         if (reg.exactMatch(line)) {
@@ -627,16 +601,17 @@ void DeviceInfoParser::loadGpuSizeFromDmesg()
 
 void DeviceInfoParser::loadMemoryInfo()
 {
+    if (DeviceManager::instance()->isRefresh()) {
+        return;
+    }
     loadMemoryFromLshw();
     loadMemoryFromDmidecode();
 }
 void DeviceInfoParser::loadMemoryFromLshw()
 {
     // 获取设备信息
-    if (s_lshwMemory.isEmpty()) {
-        if (!getDeviceInfo(QString("sudo lshw -C memory"), s_lshwMemory, "lshw_memory.txt")) {
-            return;
-        }
+    if (!getDeviceInfo(QString("sudo lshw -C memory"), s_lshwMemory, "lshw_memory.txt")) {
+        return;
     }
 
     bool withBank = false;
@@ -671,12 +646,11 @@ void DeviceInfoParser::loadMemoryFromLshw()
 void DeviceInfoParser::loadMemoryFromDmidecode()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 17"), deviceInfo, "dmidecode_17.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 17"), s_dmidecode17, "dmidecode_17.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_dmidecode17.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (!paragraph.contains("Memory Device")) {
             continue;
@@ -698,12 +672,11 @@ void DeviceInfoParser::loadMonitorInfo()
 void DeviceInfoParser::loadMonitorInfoFromHwinfo()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo hwinfo --monitor"), deviceInfo, "hwinfo_monitor.txt")) {
+    if (!getDeviceInfo(QString("sudo hwinfo --monitor"), s_hwinfoMonitor, "hwinfo_monitor.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_hwinfoMonitor.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
 
         if (paragraph.isEmpty()) {
@@ -719,12 +692,11 @@ void DeviceInfoParser::loadMonitorInfoFromHwinfo()
 void DeviceInfoParser::loadMonitorInfoFromXrandr()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("xrandr --verbose"), deviceInfo, "xrandr_verbose.txt")) {
+    if (!getDeviceInfo(QString("xrandr --verbose"), s_xrandrVerbose, "xrandr_verbose.txt")) {
         return;
     }
 
-    QStringList lines = deviceInfo.split(QRegExp("\n"));
+    QStringList lines = s_xrandrVerbose.split(QRegExp("\n"));
     QString mainInfo("");
     QString edid("");
     foreach (QString line, lines) {
@@ -786,6 +758,9 @@ void DeviceInfoParser::loadMonitorRefreshRateFromXrandr()
 
 void DeviceInfoParser::loadBiosInfo()
 {
+    if (DeviceManager::instance()->isRefresh()) {
+        return;
+    }
     // 获取主办信息
     loadMotherBoardInfoFromDmidecode();
 
@@ -803,26 +778,24 @@ void DeviceInfoParser::loadBiosInfo()
 }
 void DeviceInfoParser::loadSystemInfoFromDmidecode()
 {
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 1"), deviceInfo, "dmidecode_1.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 1"), s_dmidecode1, "dmidecode_1.txt")) {
         return;
     }
     DeviceBios device;
-    if (device.setSystemInfo(deviceInfo)) {
+    if (device.setSystemInfo(s_dmidecode1)) {
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
 void DeviceInfoParser::loadMotherBoardInfoFromDmidecode()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 2"), deviceInfo, "dmidecode_2.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 2"), s_dmidecode2, "dmidecode_2.txt")) {
         return;
     }
     QString chipsetFamliy = "";
     loadBiosInfoFromLspci(chipsetFamliy);
     DeviceBios device;
-    if (device.setBaseBoardInfo(deviceInfo, chipsetFamliy)) {
+    if (device.setBaseBoardInfo(s_dmidecode2, chipsetFamliy)) {
         DeviceManager::instance()->addBiosDevice(device);
     } else {
         // 龙芯环境下无法通过dmidecode获取信息 需要通过 cat /proc/boardinfo 来获取信息
@@ -831,36 +804,33 @@ void DeviceInfoParser::loadMotherBoardInfoFromDmidecode()
 }
 void DeviceInfoParser::loadBiosInfoFromDmidecode()
 {
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 0"), deviceInfo, "dmidecode_0.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 0"), s_dmidecode0, "dmidecode_0.txt")) {
         return;
     }
     DeviceBios device;
-    if (device.setBiosInfo(deviceInfo)) {
+    if (device.setBiosInfo(s_dmidecode0)) {
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
 
 void DeviceInfoParser::loadChassisInfoFromDmidecode()
 {
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 3"), deviceInfo, "dmidecode_3.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 3"), s_dmidecode3, "dmidecode_3.txt")) {
         return;
     }
     DeviceBios device;
-    if (device.setChassisInfo(deviceInfo)) {
+    if (device.setChassisInfo(s_dmidecode3)) {
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
 
 void DeviceInfoParser::loadMemoryInfoFromDmidecode()
 {
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 16"), deviceInfo, "dmidecode_16.txt")) {
+    if (!getDeviceInfo(QString("sudo dmidecode -t 16"), s_dmidecode16, "dmidecode_16.txt")) {
         return;
     }
     DeviceBios device;
-    if (device.setMemoryInfo(deviceInfo)) {
+    if (device.setMemoryInfo(s_dmidecode16)) {
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
@@ -907,11 +877,10 @@ void DeviceInfoParser::loadBiosInfoFromLspci(QString &chipsetFamliy)
 void DeviceInfoParser::loadBiosInfoFromCatBoardinfo(const QString chipsetFamliy)
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("cat /proc/boardinfo"), deviceInfo, "cat_boardinfo.txt")) {
+    if (!getDeviceInfo(QString("cat /proc/boardinfo"), s_catBoardInfo, "cat_boardinfo.txt")) {
         return;
     }
-    QStringList paragraphs = deviceInfo.split("\n\n");
+    QStringList paragraphs = s_catBoardInfo.split("\n\n");
     foreach (const QString &paragraph, paragraphs) {
         DeviceBios device;
         if (paragraph.contains("BIOS Information")) {
@@ -934,12 +903,11 @@ void DeviceInfoParser::loadAudioInfo()
 void DeviceInfoParser::loadAudioInfoFromLshw()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo lshw -C multimedia"), deviceInfo, "lshw_multimedia.txt")) {
+    if (!getDeviceInfo(QString("sudo lshw -C multimedia"), s_lshwMultimedia, "lshw_multimedia.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("*-"));
+    QStringList paragraphs = s_lshwMultimedia.split(QString("*-"));
     foreach (const QString &paragraph, paragraphs) {
 
         if (paragraph.isEmpty()) {
@@ -956,12 +924,11 @@ void DeviceInfoParser::loadAudioInfoFromLshw()
 void DeviceInfoParser::loadAudioInfoFromHwinfo()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo hwinfo --sound"), deviceInfo, "hwinfo_sound.txt")) {
+    if (!getDeviceInfo(QString("sudo hwinfo --sound"), s_hwinfoSound, "hwinfo_sound.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_hwinfoSound.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
 
         if (paragraph.isEmpty()) {
@@ -983,12 +950,11 @@ void DeviceInfoParser::loadImageInfo()
 void DeviceInfoParser::loadImageInfoFromLshw()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo lshw -C multimedia"), deviceInfo, "lshw_multimedia.txt")) {
+    if (!getDeviceInfo(QString("sudo lshw -C multimedia"), s_lshwMultimedia, "lshw_multimedia.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("*-"));
+    QStringList paragraphs = s_lshwMultimedia.split(QString("*-"));
     foreach (const QString &paragraph, paragraphs) {
         if (!paragraph.contains("Camera", Qt::CaseInsensitive)) {
             continue;
@@ -1058,38 +1024,45 @@ void DeviceInfoParser::loadBlueToothInfoFromHwinfo()
 void DeviceInfoParser::loadBluetoothInfoFromLshw()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo lshw -C communication -C generic"), deviceInfo, "lshw_bluetooth.txt")) {
+    if (!getDeviceInfo(QString("sudo lshw -C communication"), s_lshwCommunication, "lshw_communication.txt")) {
         return;
     }
-
-    QStringList paragraphs = deviceInfo.split(QString("*-"));
+    QStringList paragraphs = s_lshwCommunication.split(QString("*-"));
     foreach (const QString &paragraph, paragraphs) {
-        if (paragraph.isEmpty()) {
-            continue;
-        }
-
         if (!paragraph.contains("usb@")) {
             continue;
         }
+        DeviceManager::instance()->setBluetoothInfoFromLshw(paragraph);
+    }
 
+
+    if (!getDeviceInfo(QString("sudo lshw -C generic"), s_lshwGeneric, "lshw_generic.txt")) {
+        return;
+    }
+    paragraphs = s_lshwGeneric.split(QString("*-"));
+    foreach (const QString &paragraph, paragraphs) {
+        if (!paragraph.contains("usb@")) {
+            continue;
+        }
         DeviceManager::instance()->setBluetoothInfoFromLshw(paragraph);
     }
 }
 
 void DeviceInfoParser::loadNetworkInfo()
 {
+    if (DeviceManager::instance()->isRefresh()) {
+        return;
+    }
     loadNetworkInfoFromLshw();
 }
 void DeviceInfoParser::loadNetworkInfoFromLshw()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo lshw -C network"), deviceInfo, "lshw_network.txt")) {
+    if (!getDeviceInfo(QString("sudo lshw -C network"), s_lshwNetwork, "lshw_network.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("*-"));
+    QStringList paragraphs = s_lshwNetwork.split(QString("*-"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty() || !paragraph.contains("description") || !paragraph.contains("product")) {
             continue;
@@ -1105,12 +1078,11 @@ void DeviceInfoParser::loadNetworkInfoFromLshw()
 void DeviceInfoParser::loadNetworkInfoFromHwinfo()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo hwinfo --network"), deviceInfo, "hwinfo_network.txt")) {
+    if (!getDeviceInfo(QString("sudo hwinfo --network"), s_hwinfoNetwork, "hwinfo_network.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_hwinfoNetwork.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty()) {
             continue;
@@ -1168,12 +1140,11 @@ void DeviceInfoParser::loadKeyboardInfoFromLshw()
 void DeviceInfoParser::loadKeyboardInfoFromHwinfo()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo hwinfo --keyboard"), deviceInfo, "hwinfo_keyboard.txt")) {
+    if (!getDeviceInfo(QString("sudo hwinfo --keyboard"), s_hwinfoKeyboard, "hwinfo_keyboard.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_hwinfoKeyboard.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
 
         if (paragraph.isEmpty() || paragraph.contains("Control Driver", Qt::CaseInsensitive)) {
@@ -1197,12 +1168,11 @@ void DeviceInfoParser::loadOtherDevices()
 void DeviceInfoParser::loadOtherDevicesFromLshwStorage()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo lshw -C storage"), deviceInfo, "lshw_storage.txt")) {
+    if (!getDeviceInfo(QString("sudo lshw -C storage"), s_lshwStorage, "lshw_storage.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("*-"));
+    QStringList paragraphs = s_lshwStorage.split(QString("*-"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.contains("Mass storage device") || paragraph.contains("Human interface device")) {
             DeviceOthers device;
@@ -1212,10 +1182,10 @@ void DeviceInfoParser::loadOtherDevicesFromLshwStorage()
     }
 
     //*****************
-    if (!getDeviceInfo(QString("sudo lshw -C communication"), deviceInfo, "lshw_communication.txt")) {
+    if (!getDeviceInfo(QString("sudo lshw -C communication"), s_lshwCommunication, "lshw_communication.txt")) {
         return;
     }
-    paragraphs = deviceInfo.split(QString("*-"));
+    paragraphs = s_lshwCommunication.split(QString("*-"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.contains("Modem")) {
             DeviceOthers device;
@@ -1227,12 +1197,11 @@ void DeviceInfoParser::loadOtherDevicesFromLshwStorage()
 void DeviceInfoParser::loadOtherDevicesFromLshwGeneric()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo lshw -C generic"), deviceInfo, "lshw_generic.txt")) {
+    if (!getDeviceInfo(QString("sudo lshw -C generic"), s_lshwGeneric, "lshw_generic.txt")) {
         return;
     }
 
-    QStringList paragraphs = deviceInfo.split(QString("*-"));
+    QStringList paragraphs = s_lshwGeneric.split(QString("*-"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty() || !paragraph.contains("Generic USB device") || paragraph.contains("driver=btusb")) {
             continue;
@@ -1257,9 +1226,9 @@ void DeviceInfoParser::loadOtherDevicesFromHwinfo()
         if (paragraph.contains("usbcore", Qt::CaseInsensitive) == false) {
             DeviceOthers device;
             device.setInfoFromHwinfo(paragraph);
-            if (device.isExist() == false) {
-                DeviceManager::instance()->addOthersDeviceFromHwinfo(device);
-            }
+//            if (device.isExist() == false) {
+//                DeviceManager::instance()->addOthersDeviceFromHwinfo(device);
+//            }
         }
     }
 }
@@ -1296,11 +1265,10 @@ void DeviceInfoParser::loadCdromInfo()
 void DeviceInfoParser::loadCdromInfoFromHwinfo()
 {
     // 获取设备信息
-    QString deviceInfo;
-    if (!getDeviceInfo(QString("hwinfo --cdrom"), deviceInfo, "hwinfo_cdrom.txt")) {
+    if (!getDeviceInfo(QString("hwinfo --cdrom"), s_hwinfoCdrom, "hwinfo_cdrom.txt")) {
         return;
     }
-    QStringList paragraphs = deviceInfo.split(QString("\n\n"));
+    QStringList paragraphs = s_hwinfoCdrom.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty()) {
             continue;
@@ -1313,10 +1281,8 @@ void DeviceInfoParser::loadCdromInfoFromHwinfo()
 void DeviceInfoParser::loadCdromInfoFromLshw()
 {
     // 获取设备信息
-    if (s_lshwDisk.isEmpty()) {
-        if (!getDeviceInfo(QString("sudo lshw -C disk"), s_lshwDisk, "lshw_disk.txt")) {
-            return;
-        }
+    if (!getDeviceInfo(QString("sudo lshw -C disk"), s_lshwDisk, "lshw_disk.txt")) {
+        return;
     }
 
     QStringList paragraphs = s_lshwDisk.split(QString("*-"));
@@ -1427,10 +1393,8 @@ void DeviceInfoParser::loadPrinterInfoFromCups()
 void DeviceInfoParser::loadPrinterInfoFromHwinfo()
 {
     // 获取设备信息
-    if (s_hwinfoUsb.isEmpty()) {
-        if (!getDeviceInfo(QString("hwinfo --usb"), s_hwinfoUsb, "hwinfo_usb.txt")) {
-            return;
-        }
+    if (!getDeviceInfo(QString("hwinfo --usb"), s_hwinfoUsb, "hwinfo_usb.txt")) {
+        return;
     }
 
     QStringList paragraphs = s_hwinfoUsb.split(QString("\n\n"));
@@ -1503,10 +1467,15 @@ void DeviceInfoParser::getMapInfoFromDmidecode(QMap<QString, QString> &mapInfo, 
 
 bool DeviceInfoParser::getDeviceInfo(const QString &command, QString &deviceInfo, const QString &debugFile)
 {
+    if (!deviceInfo.isEmpty()) {
+        return true;
+    }
+//    qint64 begin = QDateTime::currentMSecsSinceEpoch();
     if (false == executeProcess(command)) {
         return false;
     }
-
+//    qint64 end = QDateTime::currentMSecsSinceEpoch();
+//    qDebug() << command << " ******************************* " << (end - begin) / 1000.0;
     deviceInfo = standOutput_;
 #ifdef TEST_DATA_FROM_FILE
     QFile inputDeviceFile(DEVICEINFO_PATH + "/" + debugFile);

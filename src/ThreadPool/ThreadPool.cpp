@@ -56,7 +56,7 @@ void DeviceTask::run()
     case DT_Gpu:
         infoParser.loadGpuInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Gpu info..."));
+            mp_Parent->finishedTask(tr("Loading GPU Info..."));
         }
         break;
     case DT_Image:
@@ -68,7 +68,7 @@ void DeviceTask::run()
     case DT_Keyboard:
         infoParser.loadKeyboardInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Keyboard info..."));
+            mp_Parent->finishedTask(tr("Loading Keyboard Info..."));
         }
         break;
     case DT_Memory:
@@ -86,7 +86,7 @@ void DeviceTask::run()
     case DT_Mouse:
         infoParser.loadMouseInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Mouse info..."));
+            mp_Parent->finishedTask(tr("Loading Mouse Info..."));
         }
         break;
     case DT_Network:
@@ -140,12 +140,11 @@ ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
     m_ListDeviceType.push_back(DT_Memory);
     m_ListDeviceType.push_back(DT_Monitor);
     m_ListDeviceType.push_back(DT_Mouse);
+    m_ListDeviceType.push_back(DT_Others);
     m_ListDeviceType.push_back(DT_Network);
     m_ListDeviceType.push_back(DT_Power);
     m_ListDeviceType.push_back(DT_Print);
-    m_ListDeviceType.push_back(DT_Others);
     m_ListDeviceType.push_back(DT_Cdrom);
-    //setMaxThreadCount(8);
 }
 
 void ThreadPool::finishedTask(const QString &info)
