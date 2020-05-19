@@ -744,7 +744,7 @@ void DeviceInfoParser::loadMonitorRefreshRateFromXrandr()
         QRegExp reResolution("^[\\s]{3}([0-9]{3,5}x[0-9]{3,5}).*([0-9]{2,3}.[0-9]{2,3}\\*).*");
         if (reResolution.exactMatch(line)) {
             QString rate = reResolution.cap(2).replace("*", "");
-            DeviceManager::instance()->setMonitorRefreshRate(mainInfo, rate);
+            DeviceManager::instance()->setMonitorRefreshRate(mainInfo, line);
         }
         QRegExp reMain("^[A-Z].*");
         if (reMain.exactMatch(line)) {
@@ -1160,6 +1160,7 @@ void DeviceInfoParser::loadOtherDevices()
 {
     // 在获取其它设备之前必须先获取硬盘设备
     loadDiskInfo();
+    loadPrinterInfoFromHwinfo();
 
     loadOtherDevicesFromLshwStorage();
     loadOtherDevicesFromLshwGeneric();
@@ -1400,7 +1401,12 @@ void DeviceInfoParser::loadPrinterInfoFromHwinfo()
     QStringList paragraphs = s_hwinfoUsb.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.contains("Hardware Class: printer")) {
-            DeviceManager::instance()->setPrinterInfoFromHwinfo(paragraph);
+//            DeviceManager::instance()->setPrinterInfoFromHwinfo(paragraph);
+            QMap<QString, QString> mapInfo;
+            getMapInfoFromHwinfo(mapInfo, paragraph);
+            if (mapInfo["Unique ID"].isEmpty() == false) {
+                DeviceInfoParser::Instance().s_usbDeiveUniq.append(mapInfo["Unique ID"]);
+            }
         }
     }
 }
