@@ -40,7 +40,7 @@ void BluetoothWidget::initWidgetEx()
     const QList<DeviceBluetooth> &devices = DeviceManager::instance()->getBluetoothDevices();
     int deviceNum = devices.size();
     if ( deviceNum < 1 ) {
-        setCentralInfo(tr("No bluetooth found"));
+        setCentralInfo(tr("No Bluetooth device found"));
         return;
     }
 

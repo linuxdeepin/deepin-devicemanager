@@ -43,7 +43,7 @@ void AudiodeviceWidget::initWidgetEx()
     const QList<DeviceAudio> &devices = DeviceManager::instance()->getAudioDevices();
     int deviceNum = devices.size();
     if ( deviceNum < 1 ) {
-        setCentralInfo(tr("No audio found"));
+        setCentralInfo(tr("No audio device found"));
         return;
     }
 

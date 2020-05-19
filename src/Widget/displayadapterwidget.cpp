@@ -38,7 +38,7 @@ void DisplayadapterWidget::initWidgetEX()
     const QList<DeviceGpu> &devices = DeviceManager::instance()->getGPUDevices();
     int deviceNum = devices.size();
     if ( deviceNum < 1 ) {
-        setCentralInfo(tr("No gpu found"));
+        setCentralInfo(tr("No GPU found"));
         return;
     }
 
@@ -84,7 +84,7 @@ void DisplayadapterWidget::addDeviceDetail(const DeviceGpu &device, bool withTit
     addDeviceAttribute(tr("Model"), device.model(), attributes);
     addDeviceAttribute(tr("Vendor"), device.vendor(), attributes);
     addDeviceAttribute(tr("Version"), device.version(), attributes);
-    addDeviceAttribute(tr("Graphics memory"), device.graphicsMemory(), attributes);
+    addDeviceAttribute(tr("Graphics Memory"), device.graphicsMemory(), attributes);
     addDeviceAttribute(tr("Width"), device.busWidth(), attributes);
     addDeviceAttribute(tr("IRQ"), device.IRQ(), attributes);
     addDeviceAttribute(tr("Capabilities"), device.capabilities(), attributes);
@@ -101,7 +101,7 @@ void DisplayadapterWidget::addDeviceDetail(const DeviceGpu &device, bool withTit
     addDeviceAttribute(tr("Maximum Resolution"), device.maximumResolution(), attributes);
     addDeviceAttribute(tr("Bus Info"), device.busInfo(), attributes);
     addDeviceAttribute(tr("IO Port"), device.ioPort(), attributes);
-    addDeviceAttribute(tr("memory"), device.memory(), attributes);
+    addDeviceAttribute(tr("Memory"), device.memory(), attributes);
     addDeviceAttribute(tr("Physical ID"), device.physID(), attributes);
 
     // 添加其他信息

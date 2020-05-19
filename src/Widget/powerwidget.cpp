@@ -39,7 +39,7 @@ void PowerWidget::initWidgetEx()
     const QList<DevicePower> &devices = DeviceManager::instance()->getPowerDevices();
     int deviceNum = devices.size();
     if ( deviceNum < 1 ) {
-        setCentralInfo(tr("No power found"));
+        setCentralInfo(tr("No power info"));
         return;
     }
 
@@ -85,18 +85,18 @@ void PowerWidget::addDeviceDetail(const DevicePower &device, bool withTitle)
     addDeviceAttribute(tr("Model"), device.model(), attributes);
     addDeviceAttribute(tr("Vendor"), device.vendor(), attributes);
     addDeviceAttribute(tr("Model"), device.model(), attributes);
-    addDeviceAttribute(tr("Serial number"), device.serialNumber(), attributes);
+    addDeviceAttribute(tr("Serial Number"), device.serialNumber(), attributes);
     addDeviceAttribute(tr("Type"), device.type(), attributes);
     addDeviceAttribute(tr("Status"), device.status(), attributes);
     addDeviceAttribute(tr("Capacity"), device.capacity(), attributes);
     addDeviceAttribute(tr("Voltage"), device.voltage(), attributes);
     addDeviceAttribute(tr("Slot"), device.slot(), attributes);
-    addDeviceAttribute(tr("Design capacity"), device.designCapacity(), attributes);
-    addDeviceAttribute(tr("Design voltage"), device.designVoltage(), attributes);
-    addDeviceAttribute(tr("SBDS version"), device.SBDSVersion(), attributes);
-    addDeviceAttribute(tr("SBDS serial number"), device.SBDSSerialNumber(), attributes);
-    addDeviceAttribute(tr("SBDS manufacture date"), device.SBDSManufactureDate(), attributes);
-    addDeviceAttribute(tr("SBDS chemistry"), device.SBDSChemistry(), attributes);
+    addDeviceAttribute(tr("Design Capacity"), device.designCapacity(), attributes);
+    addDeviceAttribute(tr("Design Voltage"), device.designVoltage(), attributes);
+    addDeviceAttribute(tr("SBDS Version"), device.SBDSVersion(), attributes);
+    addDeviceAttribute(tr("SBDS Serial Number"), device.SBDSSerialNumber(), attributes);
+    addDeviceAttribute(tr("SBDS Manufacture Date"), device.SBDSManufactureDate(), attributes);
+    addDeviceAttribute(tr("SBDS Chemistry"), device.SBDSChemistry(), attributes);
 
     // 添加其他信息
     addOtherDeviceAttribute(device, attributes);

@@ -39,7 +39,7 @@ void NetworkadapterWidget::initWidgetEx()
     const QList<DeviceNetwork> &devices = DeviceManager::instance()->getNetworkDevices();
     int deviceNum = devices.size();
     if ( deviceNum < 1 ) {
-        setCentralInfo(tr("No network found"));
+        setCentralInfo(tr("No network adapter found"));
         return;
     }
 
@@ -95,7 +95,7 @@ void NetworkadapterWidget::addDeviceDetail(const DeviceNetwork &device, bool wit
     addDeviceAttribute(tr("Memory"), device.memory(), attributes);
     addDeviceAttribute(tr("Width"), device.width(), attributes);
     addDeviceAttribute(tr("Clock"), device.clock(), attributes);
-    addDeviceAttribute(tr("Autonegotiation"), device.autoNegotiation(), attributes);
+    addDeviceAttribute(tr("Auto Negotiation"), device.autoNegotiation(), attributes);
     addDeviceAttribute(tr("Broadcast"), device.broadcast(), attributes);
     addDeviceAttribute(tr("Duplex"), device.duplex(), attributes);
     addDeviceAttribute(tr("Firmware"), device.firmware(), attributes);

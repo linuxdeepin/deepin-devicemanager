@@ -20,13 +20,13 @@ void DeviceTask::run()
     case DT_Audio:
         infoParser.loadAudioInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Audio info..."));
+            mp_Parent->finishedTask(tr("Loading Audio Device Info..."));
         }
         break;
     case DT_Bios:
         infoParser.loadBiosInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Bios info..."));
+            mp_Parent->finishedTask(tr("Loading BIOS Info..."));
         }
         break;
     case DT_Bluetoorh:
@@ -38,7 +38,7 @@ void DeviceTask::run()
     case DT_Cdrom:
         infoParser.loadCdromInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Cdrom info..."));
+            mp_Parent->finishedTask(tr("Loading CD-ROM Info..."));
         }
         break;
     case DT_Computer:
@@ -62,7 +62,7 @@ void DeviceTask::run()
     case DT_Image:
         infoParser.loadImageInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Image info..."));
+            mp_Parent->finishedTask(tr("Loading Image Devices Info..."));
         }
         break;
     case DT_Keyboard:
@@ -74,7 +74,7 @@ void DeviceTask::run()
     case DT_Memory:
         infoParser.loadMemoryInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Memory info..."));
+            mp_Parent->finishedTask(tr("Loading Memory Info..."));
         }
         break;
     case DT_Monitor:
@@ -92,7 +92,7 @@ void DeviceTask::run()
     case DT_Network:
         infoParser.loadNetworkInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Network info..."));
+            mp_Parent->finishedTask(tr("Loading Network Adapter Info..."));
         }
         break;
     case DT_OtherPCI:
@@ -101,13 +101,13 @@ void DeviceTask::run()
     case DT_Others:
         infoParser.loadOtherDevices();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Others info..."));
+            mp_Parent->finishedTask(tr("Loading Other Devices Info..."));
         }
         break;
     case DT_Power:
         infoParser.loadPowerInfo();
         if (mp_Parent) {
-            mp_Parent->finishedTask(tr("Loading Power Settings..."));
+            mp_Parent->finishedTask(tr("Loading Power Info..."));
         }
         break;
     case DT_Print:

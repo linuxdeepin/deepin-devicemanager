@@ -21,6 +21,9 @@ public:
     // 将年周转化为年月
     QString transWeekToDate(const QString &year, const QString &week);
 
+    // 获取屏幕大小英寸
+    QString parseMonitorSize(const QString &sizeDescription, double &inch, QSize &retSize);
+
     // 获取设备属性
     const QString &name()const;
     const QString &vendor()const;

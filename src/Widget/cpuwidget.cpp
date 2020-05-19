@@ -42,7 +42,7 @@ void CpuWidget::initWidgetEX()
     const QList<DeviceCpu> &cpuDevices = DeviceManager::instance()->getCPUDevices();
     int deviceNum = cpuDevices.size();
     if ( deviceNum < 1 ) {
-        setCentralInfo(tr("No cpu found"));
+        setCentralInfo(tr("No CPU found"));
         return;
     }
 

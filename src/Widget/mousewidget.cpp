@@ -36,15 +36,15 @@ MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Mou
 void MouseWidget::initWidgetEX()
 {
     // 获取鼠标设备
-    const QList<DeviceMouse>& mouseDevices = DeviceManager::instance()->getMouseDevices();
+    const QList<DeviceMouse> &mouseDevices = DeviceManager::instance()->getMouseDevices();
     int deviceNum = mouseDevices.size();
-    if( deviceNum < 1 ){
+    if ( deviceNum < 1 ) {
         setCentralInfo(tr("No mouse found"));
         return;
     }
 
     // 初始化表格
-    if(deviceNum > 1){
+    if (deviceNum > 1) {
         initTable(mouseDevices);
     }
 
@@ -55,14 +55,13 @@ void MouseWidget::initWidgetEX()
     setOverView(mouseDevices);
 }
 
-void MouseWidget::initTable(const QList<DeviceMouse>& mouseDevices)
+void MouseWidget::initTable(const QList<DeviceMouse> &mouseDevices)
 {
     QList<QStringList> tabList;
-    QStringList headers = { tr("Name"),tr("Type"),tr("Vendor")};
+    QStringList headers = { tr("Name"), tr("Type"), tr("Vendor")};
 
-    foreach(const DeviceMouse& deviceMouse,mouseDevices){
-        QStringList tab =
-        {
+    foreach (const DeviceMouse &deviceMouse, mouseDevices) {
+        QStringList tab = {
             deviceMouse.name(),
             deviceMouse.interface(),
             deviceMouse.vendor()
@@ -74,41 +73,41 @@ void MouseWidget::initTable(const QList<DeviceMouse>& mouseDevices)
 
 }
 
-void MouseWidget::initDetails(const QList<DeviceMouse>& mouseDevices)
+void MouseWidget::initDetails(const QList<DeviceMouse> &mouseDevices)
 {
     int size = mouseDevices.size();
-    foreach(const DeviceMouse& deviceMouse,mouseDevices){
-        addDeviceDetail(deviceMouse,size==1?false:true);
+    foreach (const DeviceMouse &deviceMouse, mouseDevices) {
+        addDeviceDetail(deviceMouse, size == 1 ? false : true);
     }
 }
 
-void MouseWidget::addDeviceDetail(const DeviceMouse& mouseDevice,bool withTitle)
+void MouseWidget::addDeviceDetail(const DeviceMouse &mouseDevice, bool withTitle)
 {
     QList<ArticleStruct> attributes;
 
     // 添加基本信息
-    addDeviceAttribute(tr("Name"),mouseDevice.name(),attributes);
-    addDeviceAttribute(tr("Vendor"),mouseDevice.vendor(),attributes);
-    addDeviceAttribute(tr("Model"),mouseDevice.model(),attributes);
-    addDeviceAttribute(tr("Interface"),mouseDevice.interface(),attributes);
-    addDeviceAttribute(tr("Bus Info"),mouseDevice.busInfo(),attributes);
-    addDeviceAttribute(tr("Version"),mouseDevice.version(),attributes);
-    addDeviceAttribute(tr("Capabilities"),mouseDevice.capability(),attributes);
-    addDeviceAttribute(tr("Driver"),mouseDevice.driver(),attributes);
-    addDeviceAttribute(tr("Max Power"),mouseDevice.maxPower(),attributes);
-    addDeviceAttribute(tr("Speed"),mouseDevice.speed(),attributes);
+    addDeviceAttribute(tr("Name"), mouseDevice.name(), attributes);
+    addDeviceAttribute(tr("Vendor"), mouseDevice.vendor(), attributes);
+    addDeviceAttribute(tr("Model"), mouseDevice.model(), attributes);
+    addDeviceAttribute(tr("Interface"), mouseDevice.interface(), attributes);
+    addDeviceAttribute(tr("Bus Info"), mouseDevice.busInfo(), attributes);
+    addDeviceAttribute(tr("Version"), mouseDevice.version(), attributes);
+    addDeviceAttribute(tr("Capabilities"), mouseDevice.capability(), attributes);
+    addDeviceAttribute(tr("Driver"), mouseDevice.driver(), attributes);
+    addDeviceAttribute(tr("Maximum Power"), mouseDevice.maxPower(), attributes);
+    addDeviceAttribute(tr("Speed"), mouseDevice.speed(), attributes);
 
     // 添加其他信息
-    addOtherDeviceAttribute(mouseDevice,attributes);
+    addOtherDeviceAttribute(mouseDevice, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle?mouseDevice.name():"", attributes );
+    addSubInfo(withTitle ? mouseDevice.name() : "", attributes );
 }
 
-void MouseWidget::setOverView(const QList<DeviceMouse>& devices)
+void MouseWidget::setOverView(const QList<DeviceMouse> &devices)
 {
-    foreach(const DeviceMouse& device,devices){
+    foreach (const DeviceMouse &device, devices) {
         overviewInfo_.value += QString("%1 (%2)/").arg(device.name()).arg(device.model());
     }
-    overviewInfo_.value.replace(QRegExp("/$"),"");
+    overviewInfo_.value.replace(QRegExp("/$"), "");
 }

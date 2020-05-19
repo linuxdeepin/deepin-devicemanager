@@ -39,7 +39,7 @@ void CDRomWidget::initWidgetEx()
     const QList<DeviceCdrom> &devices = DeviceManager::instance()->getCdromDevices();
     int deviceNum = devices.size();
     if ( deviceNum < 1 ) {
-        setCentralInfo(tr("No cdrom found"));
+        setCentralInfo(tr("No CD-ROM found"));
         return;
     }
 

@@ -119,45 +119,45 @@ void DeviceInfoParser::refreshDabase()
     emit loadFinished(tr("Loading CPU Info..."));
     loadCpuInfo();
 
-    emit loadFinished(tr("Loading GPU info..."));
+    emit loadFinished(tr("Loading GPU Info..."));
     loadGpuInfo();
 
-    emit loadFinished(tr("Loading bios info..."));
+    emit loadFinished(tr("Loading BIOS Info..."));
     loadBiosInfo();
 
-    emit loadFinished(tr("Loading Audio info..."));
+    emit loadFinished(tr("Loading Audio Device Info..."));
     loadAudioInfo();
 
-    emit loadFinished(tr("Loading bluetooth info..."));
+    emit loadFinished(tr("Loading Bluetooth Device Info..."));
     loadBluetoothInfo();
 
-    emit loadFinished(tr("Loading memory info..."));
+    emit loadFinished(tr("Loading Memory Info..."));
     loadMemoryInfo();
 
-    emit loadFinished(tr("Loading monitor info..."));
+    emit loadFinished(tr("Loading Monitor Info..."));
     loadMonitorInfo();
     loadMonitorInfoFromXrandr();
 
-    emit loadFinished(tr("Loading network info..."));
+    emit loadFinished(tr("Loading Network Adapter Info..."));
     loadNetworkInfo();
 
     emit loadFinished(tr("Loading Input Devices Info..."));
     loadMouseInfo();
     loadKeyboardInfo();
 
-    emit loadFinished(tr("Loading Image Info..."));
+    emit loadFinished(tr("Loading Image Devices Info..."));
     loadImageInfo();
 
-    emit loadFinished(tr("Loading power Info..."));
+    emit loadFinished(tr("Loading Power Info..."));
     loadPowerInfo();
 
-    emit loadFinished(tr("Loading Others Info..."));
+    emit loadFinished(tr("Loading Other Devices Info..."));
     loadOtherDevices();
 
-    emit loadFinished(tr("Loading Cdrom Info..."));
+    emit loadFinished(tr("Loading CD-ROM Info..."));
     loadCdromInfo();
 
-    emit loadFinished(tr("Loading Print Info..."));
+    emit loadFinished(tr("Loading Printer Info..."));
     loadPrinterInfo();
 
     setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);

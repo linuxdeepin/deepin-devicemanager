@@ -36,15 +36,15 @@ OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(p
 void OtherDevicesWidget::initWidgetEx()
 {
     // 获取鼠标设备
-    const QList<DeviceOthers>& devices = DeviceManager::instance()->getOthersDevices();
+    const QList<DeviceOthers> &devices = DeviceManager::instance()->getOthersDevices();
     int deviceNum = devices.size();
-    if( deviceNum < 1 ){
+    if ( deviceNum < 1 ) {
         setCentralInfo(tr("No other devices found"));
         return;
     }
 
     // 初始化表格
-    if(deviceNum > 1){
+    if (deviceNum > 1) {
         initTable(devices);
     }
 
@@ -54,14 +54,13 @@ void OtherDevicesWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
-void OtherDevicesWidget::initTable(const QList<DeviceOthers>& devices)
+void OtherDevicesWidget::initTable(const QList<DeviceOthers> &devices)
 {
     QList<QStringList> tabList;
-    QStringList headers = { tr("Name"),tr("Vendor")};
+    QStringList headers = { tr("Name"), tr("Vendor")};
 
-    foreach(const DeviceOthers& device,devices){
-        QStringList tab =
-        {
+    foreach (const DeviceOthers &device, devices) {
+        QStringList tab = {
             device.name(),
             device.vendor()
         };
@@ -70,38 +69,38 @@ void OtherDevicesWidget::initTable(const QList<DeviceOthers>& devices)
 
     addTable( headers, tabList);
 }
-void OtherDevicesWidget::initDetails(const QList<DeviceOthers>& devices)
+void OtherDevicesWidget::initDetails(const QList<DeviceOthers> &devices)
 {
     int size = devices.size();
-    foreach(const DeviceOthers& device,devices){
-        addDeviceDetail(device,size==1?false:true);
+    foreach (const DeviceOthers &device, devices) {
+        addDeviceDetail(device, size == 1 ? false : true);
     }
 }
-void OtherDevicesWidget::addDeviceDetail(const DeviceOthers& device,bool withTitle)
+void OtherDevicesWidget::addDeviceDetail(const DeviceOthers &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;
 
     // 添加基本信息
-    addDeviceAttribute(tr("Name"),device.name(),attributes);
-    addDeviceAttribute(tr("Vendor"),device.vendor(),attributes);
-    addDeviceAttribute(tr("Model"),device.model(),attributes);
-    addDeviceAttribute(tr("Version"),device.version(),attributes);
-    addDeviceAttribute(tr("Bus Info"),device.busInfo(),attributes);
-    addDeviceAttribute(tr("Capabilities"),device.version(),attributes);
-    addDeviceAttribute(tr("Driver"),device.driver(),attributes);
-    addDeviceAttribute(tr("Maximum Power"),device.maxinumPower(),attributes);
-    addDeviceAttribute(tr("Speed"),device.speed(),attributes);
+    addDeviceAttribute(tr("Name"), device.name(), attributes);
+    addDeviceAttribute(tr("Vendor"), device.vendor(), attributes);
+    addDeviceAttribute(tr("Model"), device.model(), attributes);
+    addDeviceAttribute(tr("Version"), device.version(), attributes);
+    addDeviceAttribute(tr("Bus Info"), device.busInfo(), attributes);
+    addDeviceAttribute(tr("Capabilities"), device.capabilities(), attributes);
+    addDeviceAttribute(tr("Driver"), device.driver(), attributes);
+    addDeviceAttribute(tr("Maximum Power"), device.maxinumPower(), attributes);
+    addDeviceAttribute(tr("Speed"), device.speed(), attributes);
 
     // 添加其他信息mouseDevice
 
     // 显示到界面
-    addSubInfo(withTitle?device.model():"", attributes );
+    addSubInfo(withTitle ? device.model() : "", attributes );
 }
 
-void OtherDevicesWidget::setOverView(const QList<DeviceOthers>& devices)
+void OtherDevicesWidget::setOverView(const QList<DeviceOthers> &devices)
 {
-    foreach(const DeviceOthers& device,devices){
+    foreach (const DeviceOthers &device, devices) {
         overviewInfo_.value += QString("%1/").arg(device.name());
     }
-    overviewInfo_.value.replace(QRegExp("/$"),"");
+    overviewInfo_.value.replace(QRegExp("/$"), "");
 }

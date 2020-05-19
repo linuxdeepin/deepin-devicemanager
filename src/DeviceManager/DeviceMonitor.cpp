@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QDate>
 #include <math.h>
-
+#include <QSize>
 DeviceMonitor::DeviceMonitor()
     : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Model(""), m_DisplayInput(""), m_VGA("Disable")
     , m_HDMI("Disable"), m_DVI("Disable"), m_Interface(""), m_ScreenSize("")
@@ -10,6 +10,41 @@ DeviceMonitor::DeviceMonitor()
       m_Width(0), m_Height(0)
 {
 
+}
+
+// 获得显示屏的大小
+QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &inch, QSize &retSize)
+{
+    inch = 0.0;
+
+    QString res = sizeDescription;
+    QRegExp re("^([\\d]*)x([\\d]*) mm$");
+    if ( re.exactMatch(sizeDescription) ) {
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        retSize = QSize(width, height);
+        width /= 2.54;
+        height /= 2.54;
+        inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+
+    re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
+    if ( re.exactMatch(sizeDescription) ) {
+        double width = re.cap(1).toDouble();
+        double height = re.cap(2).toDouble();
+        retSize = QSize(width, height);
+        width /= 2.54;
+        height /= 2.54;
+        inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+
+    return res;
 }
 
 void DeviceMonitor::setInfoFromHwinfo(const QString &info)
@@ -25,6 +60,11 @@ void DeviceMonitor::setInfoFromHwinfo(const QString &info)
     setAttribute(mapInfo, "", m_MainScreen);
     setAttribute(mapInfo, "Resolution", m_SupportResolution);
 
+    double inch = 0.0;
+    QSize size(0, 0);
+    QString inchValue = parseMonitorSize(m_ScreenSize, inch, size);
+    m_ScreenSize = inchValue;
+
     // 获取当前分辨率 和 当前支持分辨率
     QStringList listResolution = m_SupportResolution.split(" ");
     m_CurrentResolution = listResolution.last();
@@ -33,6 +73,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QString &info)
         if (word.contains("@")) {
             m_SupportResolution.append(word);
             m_SupportResolution.append("  ,  ");
+            m_CurrentResolution = word;
         }
     }
     // 计算显示比例
@@ -53,7 +94,7 @@ QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
     int y = year.toInt();
     int w = week.toInt();
     QDate date(y, 1, 1);
-    date = date.addDays(w * 7);
+    date = date.addDays(w * 7 - 1);
     return date.toString("yyyy-MM");
 }
 
@@ -74,7 +115,9 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid)
     }
 
     // 根据edid计算屏幕大小
-    caculateScreenSize(edid);
+    if (edid.isEmpty() == false) {
+        caculateScreenSize(edid);
+    }
 
     return true;
 }
