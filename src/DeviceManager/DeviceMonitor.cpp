@@ -131,7 +131,8 @@ bool DeviceMonitor::setRateInfoFromXradr(const QString &main, const QString &rat
     if (m_CurrentResolution.isEmpty()) {
         QStringList rateList = rate.split(" ");
         rateList.removeAll("");
-        m_CurrentResolution = QString("%1@%2Hz").arg(rateList[0].trimmed()).arg(rateList[1].replace(QRegExp("\\*."), ""));
+        rateList[1].replace(QRegExp("\\*.?"), "");
+        m_CurrentResolution = QString("%1@%2Hz").arg(rateList[0].trimmed()).arg(rateList[1]);
     }
 
 
