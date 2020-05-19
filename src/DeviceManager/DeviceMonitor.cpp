@@ -67,7 +67,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QString &info)
 
     // 获取当前分辨率 和 当前支持分辨率
     QStringList listResolution = m_SupportResolution.split(" ");
-    qDebug() << listResolution;
+
     m_CurrentResolution = listResolution.last();
     m_SupportResolution = "";
     foreach (const QString &word, listResolution) {

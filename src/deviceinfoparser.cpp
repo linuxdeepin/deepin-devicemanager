@@ -577,7 +577,7 @@ void DeviceInfoParser::loadGpuInfoFromHwinfo()
         }
 
         // 过滤信息
-        if (!paragraph.contains("Driver:")) {
+        if (!paragraph.contains("Unique ID", Qt::CaseInsensitive)) {
             continue;
         }
 
