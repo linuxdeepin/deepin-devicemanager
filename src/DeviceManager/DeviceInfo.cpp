@@ -274,7 +274,7 @@ void DeviceBaseInfo::getMapInfoFromHwinfo(QMap<QString, QString> &mapInfo, const
         if (re.exactMatch(words[1].trimmed())) {
             mapInfo[words[0].trimmed()] += re.cap(1);
         } else {
-            if (words[0].trimmed() == "Resolution") {
+            if (words[0].trimmed() == "Resolution" && words[1].trimmed().contains("@") == true) {
                 mapInfo[words[0].trimmed()] += words[1].trimmed();
             } else {
                 mapInfo[words[0].trimmed()] = words[1].trimmed();

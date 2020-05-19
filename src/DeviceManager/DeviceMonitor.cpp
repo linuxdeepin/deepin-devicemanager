@@ -73,7 +73,6 @@ void DeviceMonitor::setInfoFromHwinfo(const QString &info)
         if (word.contains("@")) {
             m_SupportResolution.append(word);
             m_SupportResolution.append("  ,  ");
-            m_CurrentResolution = word;
         }
     }
     // 计算显示比例
