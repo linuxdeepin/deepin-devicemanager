@@ -165,7 +165,7 @@ void DeviceInfoParser::clear()
 }
 void DeviceInfoParser::loadComputerInfo()
 {
-    if (DeviceManager::instance()->isRefresh()) {
+    if (DeviceManager::instance()->getComputerDevices().size() > 0) {
         return;
     }
     loadComputerInfoFromCatOsRelease();
@@ -328,7 +328,7 @@ bool DeviceInfoParser::loadMouseInfoFromlshw()
 
 void DeviceInfoParser::loadCpuInfo()
 {
-    if (DeviceManager::instance()->isRefresh()) {
+    if (DeviceManager::instance()->getCPUDevices().size() > 0) {
         return;
     }
     QMap<QString, QString> mapLscpu, mapLshw, mapDmidecode;
@@ -515,7 +515,7 @@ void DeviceInfoParser::loadDiskInfoFromSmartCtl(QStringList &logicNameList)
 
 void DeviceInfoParser::loadGpuInfo()
 {
-    if (DeviceManager::instance()->isRefresh()) {
+    if (DeviceManager::instance()->getGPUDevices().size() > 0) {
         return;
     }
     loadGpuInfoFromHwinfo();
@@ -601,7 +601,7 @@ void DeviceInfoParser::loadGpuSizeFromDmesg()
 
 void DeviceInfoParser::loadMemoryInfo()
 {
-    if (DeviceManager::instance()->isRefresh()) {
+    if (DeviceManager::instance()->getMemoryDevices().size()) {
         return;
     }
     loadMemoryFromLshw();
@@ -758,7 +758,7 @@ void DeviceInfoParser::loadMonitorRefreshRateFromXrandr()
 
 void DeviceInfoParser::loadBiosInfo()
 {
-    if (DeviceManager::instance()->isRefresh()) {
+    if (DeviceManager::instance()->getBiosDevices().size() > 0) {
         return;
     }
     // 获取主办信息
@@ -1050,7 +1050,7 @@ void DeviceInfoParser::loadBluetoothInfoFromLshw()
 
 void DeviceInfoParser::loadNetworkInfo()
 {
-    if (DeviceManager::instance()->isRefresh()) {
+    if (DeviceManager::instance()->getNetworkDevices().size() > 0) {
         return;
     }
     loadNetworkInfoFromLshw();

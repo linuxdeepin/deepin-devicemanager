@@ -50,14 +50,6 @@ void DeviceManager::clear()
     //m_ListDeviceCPU.clear();
 }
 
-bool DeviceManager::isRefresh()
-{
-    if (m_ListDeviceComputer.size() > 0) {
-        return true;
-    }
-    return false;
-}
-
 void DeviceManager::addMouseDevice(const DeviceMouse &device)
 {
     // 如果不是重复设备则添加到设备列表
