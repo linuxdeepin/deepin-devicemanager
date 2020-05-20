@@ -61,6 +61,16 @@ bool DeviceNetwork::setInfoFromHwinfo(const QString &info)
     return true;
 }
 
+bool DeviceNetwork::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
+{
+    if (mapInfo["Device File"] != m_LogicalName) {
+        return false;
+    }
+
+    setAttribute(mapInfo, "Model", m_Name);
+    return true;
+}
+
 const QString &DeviceNetwork::name()const
 {
     return m_Name;

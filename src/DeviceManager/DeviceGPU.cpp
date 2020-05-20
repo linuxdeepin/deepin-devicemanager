@@ -93,6 +93,36 @@ void DeviceGpu::setHwinfoInfo(const QString &info)
     loadOtherDeviceInfo(mapInfo);
 }
 
+bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
+{
+    // 设置属性
+    setAttribute(mapInfo, "Vendor", m_Vendor, false);
+    setAttribute(mapInfo, "Model", m_Name, false);
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "Revision", m_Version, false);
+    setAttribute(mapInfo, "IRQ", m_IRQ, false);
+    setAttribute(mapInfo, "Driver", m_Driver, false);
+    setAttribute(mapInfo, "", m_GraphicsMemory);
+    setAttribute(mapInfo, "", m_DisplayOutput);
+    setAttribute(mapInfo, "", m_VGA);
+    setAttribute(mapInfo, "", m_HDMI);
+    setAttribute(mapInfo, "", m_DisplayPort);
+    setAttribute(mapInfo, "", m_Clock);
+    setAttribute(mapInfo, "", m_CurrentResolution);
+    setAttribute(mapInfo, "", m_MinimumResolution);
+    setAttribute(mapInfo, "", m_MaximumResolution);
+
+    // 获取 m_UniqueKey
+    QRegExp re(":[0-9]{2}:[0-9]{2}");
+    int index = mapInfo["SysFS BusID"].indexOf(re);
+    m_UniqueKey = mapInfo["SysFS BusID"].mid(index + 1);
+
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
+    loadOtherDeviceInfo(mapInfo);
+}
+
 void DeviceGpu::setXrandrInfo(const QString &info)
 {
     QStringList lines = info.split("\n");

@@ -49,6 +49,44 @@ bool DeviceStorage::setHwinfoInfo(const QString &info)
     return true;
 }
 
+bool DeviceStorage::setHwinfoInfo(QMap<QString, QString> mapInfo)
+{
+    // 龙芯机器中 hwinfo --disk会列出所有的分区信息
+    // 存储设备不应包含分区，根据SysFS BusID 来确定是否是分区信息
+    if (mapInfo.find("SysFS BusID") == mapInfo.end()) {
+        return false;
+    }
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+
+    setAttribute(mapInfo, "Attached to", m_Interface);
+    QRegExp re(".*\\((.*)\\).*");
+    if (re.exactMatch(m_Interface)) {
+        m_Interface = re.cap(1);
+        m_Interface.replace("Controller", "");
+        m_Interface.replace("controller", "");
+    }
+    setAttribute(mapInfo, "Revision", m_Version);
+    setAttribute(mapInfo, "Hardware Class", m_Description);
+    setAttribute(mapInfo, "Capacity", m_Size);
+    // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
+    m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+    if (m_Size.contains("0GB") || m_Size == "") {
+        return false;
+    }
+
+    setDiskSerialID(mapInfo["Device Files"]);
+    setAttribute(mapInfo, "Serial ID", m_SerialNumber, false);
+    setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
+    setAttribute(mapInfo, "Device File", m_DeviceFile);
+
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
 bool DeviceStorage::addInfoFromlshw(const QString &info)
 {
     // 如果程序运行到这儿则说明，传入的设备信息与当前设备是同一个设备

@@ -90,6 +90,46 @@ void DeviceMonitor::setInfoFromHwinfo(const QString &info)
     loadOtherDeviceInfo(mapInfo);
 }
 
+void DeviceMonitor::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
+{
+    setAttribute(mapInfo, "Model", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "", m_DisplayInput);
+    setAttribute(mapInfo, "Size", m_ScreenSize);
+    setAttribute(mapInfo, "", m_MainScreen);
+    setAttribute(mapInfo, "Resolution", m_SupportResolution);
+
+    double inch = 0.0;
+    QSize size(0, 0);
+    QString inchValue = parseMonitorSize(m_ScreenSize, inch, size);
+    m_ScreenSize = inchValue;
+
+    // 获取当前分辨率 和 当前支持分辨率
+    QStringList listResolution = m_SupportResolution.split(" ");
+//    m_CurrentResolution = listResolution.last();
+    m_SupportResolution = "";
+    foreach (const QString &word, listResolution) {
+        if (word.contains("@")) {
+            m_SupportResolution.append(word);
+            m_SupportResolution.append("  ,  ");
+        }
+    }
+    // 计算显示比例
+    caculateScreenRatio();
+
+    m_SupportResolution.replace(QRegExp(",  $"), "");
+
+    m_ProductionWeek  = transWeekToDate(mapInfo["Year of Manufacture"], mapInfo["Week of Manufacture"]);
+    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
+
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
+    // 加载其他属性
+    loadOtherDeviceInfo(mapInfo);
+}
+
 QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
 {
     int y = year.toInt();

@@ -53,6 +53,20 @@ void DevicePrint::setInfoFromHwinfo(const QString &info)
     loadOtherDeviceInfo(mapInfo);
 }
 
+void DevicePrint::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
+{
+    setAttribute(mapInfo, "Device", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
+    setAttribute(mapInfo, "Hotplug", m_InterfaceType);
+
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
+    loadOtherDeviceInfo(mapInfo);
+}
+
 const QString &DevicePrint::name()const
 {
     return m_Name;

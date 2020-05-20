@@ -57,6 +57,38 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QString &info)
     return false;
 }
 
+bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
+{
+    // 判断是不是同一个蓝牙设备，由于条件限制，现在只能通过厂商判断
+    QStringList vendor = mapInfo["Vendor"].split(" ");
+    if (vendor.size() < 1) {
+        return false;
+    }
+    if (!m_Vendor.contains(vendor[0])) {
+        return false;
+    }
+
+    setAttribute(mapInfo, "Revision", m_Version);
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "", m_MAC);
+    setAttribute(mapInfo, "", m_LogicalName);
+    setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
+    setAttribute(mapInfo, "", m_Capabilities);
+    setAttribute(mapInfo, "Driver", m_Driver);
+    setAttribute(mapInfo, "", m_DriverVersion);
+    setAttribute(mapInfo, "", m_MaximumPower);
+    setAttribute(mapInfo, "Speed", m_Speed);
+
+    parseKeyToLshw(mapInfo["SysFS BusID"]);
+
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
+
 bool DeviceBluetooth::setInfoFromLshw(const QString &info)
 {
     QMap<QString, QString> mapInfo;

@@ -10,6 +10,7 @@ public:
 
     /**@brief:设置从hwinfo里面获取的信息*/
     void setInfoFromHwinfo(const QString &info);
+    void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从lshw里面获取的信息*/
     bool setInfoFromLshw(const QString &info);

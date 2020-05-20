@@ -53,6 +53,30 @@ void DeviceOthers::setInfoFromHwinfo(const QString &info)
 
 }
 
+void DeviceOthers::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
+{
+    // 设置设备基本属性
+    setAttribute(mapInfo, "Device", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "Revision", m_Version);
+    setAttribute(mapInfo, "Driver", m_Driver);
+    setAttribute(mapInfo, "Speed", m_Speed);
+    setAttribute(mapInfo, "Unique ID", m_UniqID);
+
+    m_BusID = mapInfo["SysFS BusID"].replace(QRegExp("\\.[0-9]*$"), "");
+
+    // 获取映射到 lshw设备信息的 关键字
+    //1-2:1.0
+    QStringList words = mapInfo["SysFS BusID"].split(":");
+    if (words.size() == 2) {
+        QStringList chs = words[0].split("-");
+        if (chs.size() == 2) {
+            m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
+        }
+    }
+}
+
 bool DeviceOthers::isExist()
 {
     if (DeviceInfoParser::Instance().s_usbDeiveUniq.contains(m_UniqID) ||

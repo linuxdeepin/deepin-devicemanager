@@ -42,6 +42,22 @@ void DeviceImage::setInfoFromHwinfo(const QString &info)
 
 }
 
+void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
+{
+    setAttribute(mapInfo, "Device", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "Revision", m_Version);
+    setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
+    setAttribute(mapInfo, "", m_Capabilities);
+    setAttribute(mapInfo, "Driver", m_Driver);
+    setAttribute(mapInfo, "", m_MaximumPower);
+    setAttribute(mapInfo, "Speed", m_Speed);
+
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+}
+
 const QString &DeviceImage::name()const
 {
     return m_Name;

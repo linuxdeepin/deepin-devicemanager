@@ -12,6 +12,7 @@ public:
 
     /**设置从hwinfo里面读取的内容*/
     bool setInfoFromHwinfo(const QString &info);
+    bool setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**设置从lshw里面获取的内容*/
     bool setInfoFromLshw(const QString &info);

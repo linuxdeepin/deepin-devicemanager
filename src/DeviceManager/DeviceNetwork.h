@@ -12,6 +12,7 @@ public:
     void setInfoFromLshw(const QString &info);
     // 设置从 hwinfo 获取的信息
     bool setInfoFromHwinfo(const QString &info);
+    bool setInfoFromHwinfo(QMap<QString, QString> mapInfo);
 
     // 获取设备属性
     const QString &name()const;

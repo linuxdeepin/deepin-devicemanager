@@ -8,18 +8,19 @@ class DevicePrint : public DeviceBaseInfo
 public:
     DevicePrint();
 
-    void setInfo(const QMap<QString,QString>& info);
-    void setInfoFromHwinfo(const QString& info);
+    void setInfo(const QMap<QString, QString> &info);
+    void setInfoFromHwinfo(const QString &info);
+    void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
 
     // 获取设备属性
-    const QString& name()const;
-    const QString& vendor()const;
-    const QString& model()const;
-    const QString& serialNumber()const;
-    const QString& interfaceType()const;
-    const QString& URI()const;
-    const QString& status()const;
-    const QString& shared()const;
+    const QString &name()const;
+    const QString &vendor()const;
+    const QString &model()const;
+    const QString &serialNumber()const;
+    const QString &interfaceType()const;
+    const QString &URI()const;
+    const QString &status()const;
+    const QString &shared()const;
 
 protected:
     void initFilterKey() override;

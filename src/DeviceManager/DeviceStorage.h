@@ -9,7 +9,7 @@ public:
 
     /**@brief:解析从 sudo hwinfo --disk 中获取的消息*/
     bool setHwinfoInfo(const QString &info);
-
+    bool setHwinfoInfo(QMap<QString, QString> mapInfo);
     /**@brief:设置存储设备的介质类型*/
     bool setMediaType(const QString &name, const QString &value);
 

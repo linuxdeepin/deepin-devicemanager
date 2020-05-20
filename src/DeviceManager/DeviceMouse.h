@@ -17,32 +17,33 @@ public:
     DeviceMouse();
 
     /**@brief:添加 从 sudo hwinfo --mouse 中获取的信息 */
-    void setInfoFromHwinfo(const QString& info);
+    void setInfoFromHwinfo(const QString &info);
+    void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
 
     /**@brief:添加 从 sudo lshw -C input 中获取的信息 */
-    bool setInfoFromlshw(const QString& info);
+    bool setInfoFromlshw(const QString &info);
 
     /**@brief:添加 从 cat /proc/bus/input/devices 中获取的信息 */
-    bool setInfoFromCatInputDevices(const QString& info);
+    bool setInfoFromCatInputDevices(const QString &info);
 
 
     /**@brief:获取基本设备属性*/
-    const QString& name()const;
-    const QString& vendor()const;
-    const QString& model()const;
-    const QString& interface()const;
-    const QString& busInfo()const;
-    const QString& version()const;
-    const QString& capability()const;
-    const QString& driver()const;
-    const QString& maxPower()const;
-    const QString& speed()const;
+    const QString &name()const;
+    const QString &vendor()const;
+    const QString &model()const;
+    const QString &interface()const;
+    const QString &busInfo()const;
+    const QString &version()const;
+    const QString &capability()const;
+    const QString &driver()const;
+    const QString &maxPower()const;
+    const QString &speed()const;
 
 protected:
     void initFilterKey() override;
 private:
     /**@brief:将信息转换成QMap<QString,QString>*/
-    void getMapInfoFromCatDevice(QMap<QString,QString>& mapInfo,const QString& info,const QString& ch = QString(": "));
+    void getMapInfoFromCatDevice(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
 
 private:
     QString     m_Name;                             //<! 名称    #制造商+型号#

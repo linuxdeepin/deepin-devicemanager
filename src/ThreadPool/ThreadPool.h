@@ -22,10 +22,10 @@ enum DeviceType {
     DT_Mouse      = 12,
     DT_Network    = 13,
     DT_OtherPCI   = 14,
-    DT_Others     = 15,
+    DT_Storage    = 15,
     DT_Power      = 16,
     DT_Print      = 17,
-    DT_Storage    = 18,
+    DT_Others     = 18,
 
     DT_Dmidecode  = 19,
     DT_Lshw       = 20,

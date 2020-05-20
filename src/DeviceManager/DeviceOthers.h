@@ -12,6 +12,7 @@ public:
 
     /**@brief:设置从hwinfo获取的信息*/
     void setInfoFromHwinfo(const QString &info);
+    void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
 
     /**@brief:判断hwinfo设备是否存在*/
     bool isExist();

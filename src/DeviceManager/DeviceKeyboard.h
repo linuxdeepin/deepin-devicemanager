@@ -8,32 +8,33 @@ class DeviceKeyboard : public DeviceBaseInfo
 public:
     DeviceKeyboard();
     /**@brief:添加 从 cat /proc/bus/input/devices 中获取的信息 */
-    bool setInfoFromCatInputDevices(const QString& info);
+    bool setInfoFromCatInputDevices(const QString &info);
 
     /**@brief:添加 从 sudo lshw -C input 中获取的信息 */
-    bool setInfoFromlshw(const QString& info);
+    bool setInfoFromlshw(const QString &info);
 
     /**@brief:添加 从 sudo hwinfo --keyboard 中获取的信息 */
-    void setInfoFromHwinfo(const QString& info);
+    void setInfoFromHwinfo(const QString &info);
+    void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     // 获取设备属性
-    const QString& name()const;
-    const QString& vendor()const;
-    const QString& model()const;
-    const QString& version()const;
-    const QString& interface()const;
-    const QString& busInfo()const;
-    const QString& capabilities()const;
-    const QString& driver()const;
-    const QString& maxinumPower()const;
-    const QString& speed()const;
-    const QString& description()const;
+    const QString &name()const;
+    const QString &vendor()const;
+    const QString &model()const;
+    const QString &version()const;
+    const QString &interface()const;
+    const QString &busInfo()const;
+    const QString &capabilities()const;
+    const QString &driver()const;
+    const QString &maxinumPower()const;
+    const QString &speed()const;
+    const QString &description()const;
 
 protected:
     void initFilterKey() override;
 
 private:
-    void getKeyboardMapInfoFromInputDevice(QMap<QString,QString>& mapInfo,const QString& info);
+    void getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &mapInfo, const QString &info);
 
 private:
     QString             m_Name;                         //<! 【名称】

@@ -11,6 +11,7 @@ public:
 
     // 设置从hwinfo中获取的信息
     void setInfoFromHwinfo(const QString &info);
+    void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
 
     // 设置从xrandr中获取的信息
     bool setInfoFromXradr(const QString &main, const QString &edid);

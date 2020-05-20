@@ -8,19 +8,19 @@ public:
     DeviceCdrom();
 
     //
-    bool setInfoFromLshw(const QString& info);
-    void setInfoFromHwinfo(const QString& info);
-
+    bool setInfoFromLshw(const QString &info);
+    void setInfoFromHwinfo(const QString &info);
+    void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
     //获取属性
-    const QString& name()const;
-    const QString& vendor()const;
-    const QString& type()const;
-    const QString& version()const;
-    const QString& busInfo()const;
-    const QString& capabilities()const;
-    const QString& driver()const;
-    const QString& maxPower()const;
-    const QString& speed()const;
+    const QString &name()const;
+    const QString &vendor()const;
+    const QString &type()const;
+    const QString &version()const;
+    const QString &busInfo()const;
+    const QString &capabilities()const;
+    const QString &driver()const;
+    const QString &maxPower()const;
+    const QString &speed()const;
 
 protected:
     void initFilterKey() override;

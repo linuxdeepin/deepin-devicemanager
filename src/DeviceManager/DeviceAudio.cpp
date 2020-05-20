@@ -33,6 +33,28 @@ void DeviceAudio::setInfoFromHwinfo(const QString &info)
     loadOtherDeviceInfo(mapInfo);
 }
 
+void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
+{
+    setAttribute(mapInfo, "Device", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "", m_Version);
+    setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
+    setAttribute(mapInfo, "IRQ", m_Irq);
+    setAttribute(mapInfo, "Memory Range", m_Memory);
+    setAttribute(mapInfo, "", m_Width);
+    setAttribute(mapInfo, "", m_Clock);
+    setAttribute(mapInfo, "", m_Capabilities);
+    setAttribute(mapInfo, "Hardware Class", m_Description);
+
+    m_UniqueKey = mapInfo["SysFS BusID"];
+
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
+    loadOtherDeviceInfo(mapInfo);
+}
+
 bool DeviceAudio::setInfoFromLshw(const QString &info)
 {
     QMap<QString, QString> mapInfo;

@@ -13,6 +13,7 @@ public:
 
     /**@brief:设置从hwinfo中获取的信息*/
     void setInfoFromHwinfo(const QString &info);
+    void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     // 获取设备属性
     const QString &name()const;
