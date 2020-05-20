@@ -1183,17 +1183,17 @@ void DeviceInfoParser::loadOtherDevicesFromLshwStorage()
     }
 
     //*****************
-    if (!getDeviceInfo(QString("sudo lshw -C communication"), s_lshwCommunication, "lshw_communication.txt")) {
-        return;
-    }
-    paragraphs = s_lshwCommunication.split(QString("*-"));
-    foreach (const QString &paragraph, paragraphs) {
-        if (paragraph.contains("Modem")) {
-            DeviceOthers device;
-            device.setInfoFromLshw(paragraph);
-            DeviceManager::instance()->addOthersDevice(device);
-        }
-    }
+//    if (!getDeviceInfo(QString("sudo lshw -C communication"), s_lshwCommunication, "lshw_communication.txt")) {
+//        return;
+//    }
+//    paragraphs = s_lshwCommunication.split(QString("*-"));
+//    foreach (const QString &paragraph, paragraphs) {
+//        if (paragraph.contains("Modem")) {
+//            DeviceOthers device;
+//            device.setInfoFromLshw(paragraph);
+//            DeviceManager::instance()->addOthersDevice(device);
+//        }
+//    }
 }
 void DeviceInfoParser::loadOtherDevicesFromLshwGeneric()
 {
@@ -1227,9 +1227,9 @@ void DeviceInfoParser::loadOtherDevicesFromHwinfo()
         if (paragraph.contains("usbcore", Qt::CaseInsensitive) == false) {
             DeviceOthers device;
             device.setInfoFromHwinfo(paragraph);
-//            if (device.isExist() == false) {
-//                DeviceManager::instance()->addOthersDeviceFromHwinfo(device);
-//            }
+            if (device.isExist() == false) {
+                DeviceManager::instance()->addOthersDeviceFromHwinfo(device);
+            }
         }
     }
 }
