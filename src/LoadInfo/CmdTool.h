@@ -14,7 +14,7 @@ class CmdTool
 {
 public:
     CmdTool();
-    void loadCmdInfo(const QString &key, SplitType st, QMap<QString, QMap<QString, QString> > &cmdInfo);
+    void loadCmdInfo(QMap<QString, QMap<QString, QString> > &cmdInfo, const QString &cmd, const QString &key,  SplitType st, const QString &debugFile = QString(""));
 
 private:
     void getMapInfo(SplitType st, const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
@@ -22,6 +22,10 @@ private:
     void getMapInfoFromLshw(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromDmidecode(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
+
+    bool getDeviceInfo(const QString &command, QString &deviceInfo, const QString &debugFile = QString(""));
+    bool executeProcess(const QString &cmd, QString &deviceInfo);
+    bool runCmd(const QString &cmd, QString &deviceInfo);
 };
 
 #endif // CMDTOOL_H

@@ -1,17 +1,17 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="tr" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sq" version="2.1">
 <context>
     <name>policy</name>
     <message>
         <source>Authentication is required to read hardware information</source>
-        <translation>Donanım bilgilerini okumak için kimlik doğrulaması gerekli</translation>
+        <translation>Për të lexuar të dhëna hardware, lypset mirëfilltësim</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>İptal</translation>
+        <translation>Anuloje</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation>Onayla</translation>
+        <translation>Ripohojeni</translation>
     </message>
 </context>
 </TS>

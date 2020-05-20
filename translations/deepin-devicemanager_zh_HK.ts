@@ -1,264 +1,264 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="uk" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_HK" version="2.1">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
         <source>Sound Adapter</source>
-        <translation>Звуковий адаптер</translation>
+        <translation>音頻適配器</translation>
     </message>
     <message>
         <source>No audio device found</source>
-        <translation>Звукових пристроїв не знайдено</translation>
+        <translation>未發現音頻設備</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>IRQ</source>
-        <translation>IRQ</translation>
+        <translation>中斷</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation>Пам&apos;ять</translation>
+        <translation>內存</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation>位寬</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation>Годинник</translation>
+        <translation>時鐘頻率</translation>
     </message>
 </context>
 <context>
     <name>BluetoothWidget</name>
     <message>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
+        <translation>藍牙</translation>
     </message>
     <message>
         <source>No Bluetooth device found</source>
-        <translation>Не знайдено пристроїв Bluetooth</translation>
+        <translation>未發現藍牙設備</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>MAC Address</source>
-        <translation>MAC-адреса</translation>
+        <translation>物理地址</translation>
     </message>
     <message>
         <source>Logical Name</source>
-        <translation>Логічна назва</translation>
+        <translation>邏輯名稱</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Driver Version</source>
-        <translation>Версія драйвера</translation>
+        <translation>驅動版本</translation>
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Максимальна потужність</translation>
+        <translation>最大功率</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>速度</translation>
     </message>
 </context>
 <context>
     <name>CDRomWidget</name>
     <message>
         <source>CD-ROM</source>
-        <translation>CD-ROM</translation>
+        <translation>光驅</translation>
     </message>
     <message>
         <source>No CD-ROM found</source>
-        <translation>Не знайдено CD-ROM</translation>
+        <translation>未發現光驅</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Максимальна потужність</translation>
+        <translation>最大功率</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>速度</translation>
     </message>
 </context>
 <context>
     <name>CameraWidget</name>
     <message>
         <source>Camera</source>
-        <translation>Камера</translation>
+        <translation>圖像設備</translation>
     </message>
     <message>
         <source>No camera found</source>
-        <translation>Не знайдено камери</translation>
+        <translation>未發現圖像設備</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Максимальна потужність</translation>
+        <translation>最大功率</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>速度</translation>
     </message>
 </context>
 <context>
     <name>ComputerOverviewWidget</name>
     <message>
         <source>Overview</source>
-        <translation>Огляд</translation>
+        <translation>概況</translation>
     </message>
     <message>
         <source>Device</source>
-        <translation>Пристрій</translation>
+        <translation>設備</translation>
     </message>
     <message>
         <source>Operating System</source>
-        <translation>Операційна система</translation>
+        <translation>操作系統</translation>
     </message>
 </context>
 <context>
     <name>CpuWidget</name>
     <message>
         <source>CPU</source>
-        <translation>Процесор</translation>
+        <translation>處理器</translation>
     </message>
     <message>
         <source>No CPU found</source>
-        <translation>Процесорів не знайдено</translation>
+        <translation>未發現處理器</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>頻率</translation>
     </message>
     <message>
         <source>Architecture</source>
-        <translation>Архітектура</translation>
+        <translation>架構</translation>
     </message>
     <message>
         <source>CPU ID</source>
-        <translation>Ід. проц.</translation>
+        <translation>處理器ID</translation>
     </message>
     <message>
         <source>Core ID</source>
-        <translation>ID ядра</translation>
+        <translation>核心ID</translation>
     </message>
     <message>
         <source>Threads</source>
-        <translation>Потоки</translation>
+        <translation>線程數</translation>
     </message>
     <message>
         <source>Current Speed</source>
-        <translation>Поточна швидкість</translation>
+        <translation>當前頻率</translation>
     </message>
     <message>
         <source>BogoMIPS</source>
@@ -266,261 +266,261 @@
     </message>
     <message>
         <source>CPU Family</source>
-        <translation>Сімейство проц.</translation>
+        <translation>家族</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Stepping</source>
-        <translation>Модифікація</translation>
+        <translation>步進</translation>
     </message>
     <message>
         <source>L1d Cache</source>
-        <translation>Кеш L1d</translation>
+        <translation>L1緩存（數據）</translation>
     </message>
     <message>
         <source>L1i Cache</source>
-        <translation>Кеш L1i</translation>
+        <translation>L1緩存（指令）</translation>
     </message>
     <message>
         <source>L2 Cache</source>
-        <translation>Кеш L2</translation>
+        <translation>L2緩存</translation>
     </message>
     <message>
         <source>L3 Cache</source>
-        <translation>Кеш L3</translation>
+        <translation>L3緩存</translation>
     </message>
     <message>
         <source>Extensions</source>
-        <translation>Розширення</translation>
+        <translation>擴展指令集</translation>
     </message>
     <message>
         <source>Flags</source>
-        <translation>Прапорці</translation>
+        <translation>特性</translation>
     </message>
     <message>
         <source>Virtualization</source>
-        <translation>Віртуалізація</translation>
+        <translation>虛擬化</translation>
     </message>
     <message>
         <source>Processor</source>
-        <translation>Процесор</translation>
+        <translation>邏輯處理器</translation>
     </message>
     <message>
         <source>Core(s)</source>
-        <translation>Ядра</translation>
+        <translation>核</translation>
     </message>
 </context>
 <context>
     <name>DeivceInfoBrower</name>
     <message>
         <source>Copy (C)</source>
-        <translation>Копіювати</translation>
+        <translation>複製 (C)</translation>
     </message>
 </context>
 <context>
     <name>DeviceInfoWidgetBase</name>
     <message>
         <source>Refresh (F5)</source>
-        <translation>Освіжити (F5)</translation>
+        <translation>刷新 (F5)</translation>
     </message>
     <message>
         <source>Export (E)</source>
-        <translation>Експортувати (E)</translation>
+        <translation>導出 (E)</translation>
     </message>
 </context>
 <context>
     <name>DeviceListView</name>
     <message>
         <source>Refresh (F5)</source>
-        <translation>Освіжити (F5)</translation>
+        <translation>刷新 (F5)</translation>
     </message>
     <message>
         <source>Export (E)</source>
-        <translation>Експортувати (E)</translation>
+        <translation>導出 (E)</translation>
     </message>
 </context>
 <context>
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Завантажуємо дані щодо звукових пристроїв…</translation>
+        <translation>獲取音頻設備訊息...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Завантажуємо дані BIOS...</translation>
+        <translation>獲取BIOS訊息...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Завантажуємо дані щодо пристроїв Bluetooth…</translation>
+        <translation>獲取藍牙設備訊息...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Завантажуємо дані щодо CD-ROM...</translation>
+        <translation>獲取光驅訊息...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Завантажуємо дані щодо операційної системи…</translation>
+        <translation>獲取操作系統訊息...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Завантажуємо відомості щодо процесора…</translation>
+        <translation>獲取處理器訊息...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Завантажуємо дані щодо графічного процесора…</translation>
+        <translation>獲取GPU訊息...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Завантажуємо дані щодо графічних пристроїв…</translation>
+        <translation>獲取圖像設備訊息...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Завантажуємо дані щодо клавіатури…</translation>
+        <translation>獲取鍵盤訊息...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Завантажуємо дані щодо пам&apos;яті…</translation>
+        <translation>獲取內存訊息...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Завантажуємо дані щодо монітора…</translation>
+        <translation>獲取顯示器訊息...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Завантажуємо дані щодо миші…</translation>
+        <translation>獲取鼠標訊息...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Завантажуємо дані щодо адаптера мережі…</translation>
+        <translation>獲取網絡適配器訊息...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Завантажуємо дані щодо інших пристроїв…</translation>
+        <translation>獲取其他設備訊息...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Завантажуємо дані щодо живлення…</translation>
+        <translation>獲取電源訊息...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Завантажуємо дані щодо принтерів…</translation>
+        <translation>獲取打印機訊息...</translation>
     </message>
 </context>
 <context>
     <name>DiskWidget</name>
     <message>
         <source>Storage</source>
-        <translation>Сховище даних</translation>
+        <translation>存儲設備</translation>
     </message>
     <message>
         <source>No disk found</source>
-        <translation>Не знайдено дисків</translation>
+        <translation>未發現磁盤</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Media Type</source>
-        <translation>Тип носія</translation>
+        <translation>介質類型</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Розмір</translation>
+        <translation>容量</translation>
     </message>
     <message>
         <source>Rotation Rate</source>
-        <translation>Частота обертання</translation>
+        <translation>轉速</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation>Інтерфейс</translation>
+        <translation>接口</translation>
     </message>
     <message>
         <source>Serial Number</source>
-        <translation>Серійний номер</translation>
+        <translation>序列號</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Опис</translation>
+        <translation>描述</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <source>Firmware Version</source>
-        <translation>Версія мікропрограми</translation>
+        <translation>固件版本</translation>
     </message>
     <message>
         <source>Power On Hours</source>
-        <translation>Тривалість роботи у годинах</translation>
+        <translation>通電時間</translation>
     </message>
     <message>
         <source>Power Cycle Count</source>
-        <translation>Кількість циклів вмикання</translation>
+        <translation>通電次數</translation>
     </message>
 </context>
 <context>
     <name>DisplayadapterWidget</name>
     <message>
         <source>Display Adapter</source>
-        <translation>Адаптер дисплея</translation>
+        <translation>顯示適配器</translation>
     </message>
     <message>
         <source>No GPU found</source>
-        <translation>Графічних процесорів не виявлено</translation>
+        <translation>未發現GPU</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Graphics Memory</source>
-        <translation>Графічна пам&apos;ять</translation>
+        <translation>顯存</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation>位寬</translation>
     </message>
     <message>
         <source>IRQ</source>
-        <translation>IRQ</translation>
+        <translation>中斷</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Display Output</source>
-        <translation>Виведення на дисплей</translation>
+        <translation>顯示輸出</translation>
     </message>
     <message>
         <source>VGA</source>
@@ -540,425 +540,425 @@
     </message>
     <message>
         <source>Clock</source>
-        <translation>Годинник</translation>
+        <translation>時鐘頻率</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Опис</translation>
+        <translation>描述</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Current Resolution</source>
-        <translation>Поточна роздільність</translation>
+        <translation>當前解像度</translation>
     </message>
     <message>
         <source>Minimum Resolution</source>
-        <translation>Мінімальна роздільність</translation>
+        <translation>最小解像度</translation>
     </message>
     <message>
         <source>Maximum Resolution</source>
-        <translation>Максимальна роздільність</translation>
+        <translation>最大解像度</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>IO Port</source>
-        <translation>Порт ВВ</translation>
+        <translation>I/O端口</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation>Пам&apos;ять</translation>
+        <translation>內存</translation>
     </message>
     <message>
         <source>Physical ID</source>
-        <translation>Фізичний ID</translation>
+        <translation>物理ID</translation>
     </message>
 </context>
 <context>
     <name>KeyboardWidget</name>
     <message>
         <source>Keyboard</source>
-        <translation>Клавіатура</translation>
+        <translation>鍵盤</translation>
     </message>
     <message>
         <source>No disk found</source>
-        <translation>Не знайдено дисків</translation>
+        <translation>未發現磁盤</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation>Інтерфейс</translation>
+        <translation>接口</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Максимальна потужність</translation>
+        <translation>最大功率</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>速度</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Loading...</source>
-        <translation>Завантаження…</translation>
+        <translation>正在載入...</translation>
     </message>
     <message>
         <source>Device Info</source>
         <comment>export file's name</comment>
-        <translation>Дані щодо пристрою</translation>
+        <translation>設備訊息</translation>
     </message>
     <message>
         <source>System</source>
-        <translation>Система</translation>
+        <translation>系統</translation>
     </message>
     <message>
         <source>Display shortcuts</source>
-        <translation>Скорочення дисплея</translation>
+        <translation>顯示快捷鍵</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Закрити</translation>
+        <translation>關閉</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Довідка</translation>
+        <translation>幫助</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Копіювати</translation>
+        <translation>複製</translation>
     </message>
     <message>
         <source>Device Manager</source>
-        <translation>Менеджер пристроїв</translation>
+        <translation>設備管理器</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Експортувати</translation>
+        <translation>導出</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation>Оновити</translation>
+        <translation>刷新</translation>
     </message>
 </context>
 <context>
     <name>MemoryWidget</name>
     <message>
         <source>Memory</source>
-        <translation>Пам&apos;ять</translation>
+        <translation>內存</translation>
     </message>
     <message>
         <source>No memory found</source>
-        <translation>Пам&apos;яті не знайдено</translation>
+        <translation>未發現內存</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Тип</translation>
+        <translation>類型</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Розмір</translation>
+        <translation>大小</translation>
     </message>
     <message>
         <source>Total Width</source>
-        <translation>Загальна ширина</translation>
+        <translation>總位寬</translation>
     </message>
     <message>
         <source>Data Width</source>
-        <translation>Ширина даних</translation>
+        <translation>數據位寬</translation>
     </message>
     <message>
         <source>Locator</source>
-        <translation>Локатор</translation>
+        <translation>插槽</translation>
     </message>
     <message>
         <source>Serial Number</source>
-        <translation>Серійний номер</translation>
+        <translation>序列號</translation>
     </message>
     <message>
         <source>Configured Speed</source>
-        <translation>Налаштована швидкість</translation>
+        <translation>配置頻率</translation>
     </message>
     <message>
         <source>Minimum Voltage</source>
-        <translation>Мінімальна напруга</translation>
+        <translation>最低電壓</translation>
     </message>
     <message>
         <source>Maximum Voltage</source>
-        <translation>Максимальна напруга</translation>
+        <translation>最高電壓</translation>
     </message>
     <message>
         <source>Configured Voltage</source>
-        <translation>Поточне напруження</translation>
+        <translation>配置電壓</translation>
     </message>
 </context>
 <context>
     <name>MonitorWidget</name>
     <message>
         <source>Monitor</source>
-        <translation>Монітор</translation>
+        <translation>顯示設備</translation>
     </message>
     <message>
         <source>No monitor found</source>
-        <translation>Моніторів не знайдено</translation>
+        <translation>未發現顯示設備</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Product Date</source>
-        <translation>Дата продукту</translation>
+        <translation>生產日期</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Тип</translation>
+        <translation>類型</translation>
     </message>
     <message>
         <source>Display Input</source>
-        <translation>Вхід дисплея</translation>
+        <translation>顯示輸入</translation>
     </message>
     <message>
         <source>Interface Type</source>
-        <translation>Тип інтерфейсу</translation>
+        <translation>接口類型</translation>
     </message>
     <message>
         <source>Serial Number</source>
-        <translation>Серійний номер</translation>
+        <translation>序列號</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Розмір</translation>
+        <translation>屏幕尺寸</translation>
     </message>
     <message>
         <source>Display Ratio</source>
-        <translation>Співвідношення розмірів</translation>
+        <translation>顯示比例</translation>
     </message>
     <message>
         <source>Primary Monitor</source>
-        <translation>Основний монітор</translation>
+        <translation>主顯示器</translation>
     </message>
     <message>
         <source>Current Resolution</source>
-        <translation>Поточна роздільність</translation>
+        <translation>當前解像度</translation>
     </message>
     <message>
         <source>Support Resolution</source>
-        <translation>Підтримувана роздільність</translation>
+        <translation>支持解像度</translation>
     </message>
 </context>
 <context>
     <name>MotherboardWidget</name>
     <message>
         <source>Motherboard</source>
-        <translation>Материнська плата</translation>
+        <translation>主板</translation>
     </message>
     <message>
         <source>No motherboard found</source>
-        <translation>Материнської плати не знайдено</translation>
+        <translation>未發現主板</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Chipset</source>
-        <translation>Набір мікросхем</translation>
+        <translation>晶片組</translation>
     </message>
 </context>
 <context>
     <name>MouseWidget</name>
     <message>
         <source>Mouse</source>
-        <translation>Миша</translation>
+        <translation>鼠標</translation>
     </message>
     <message>
         <source>No mouse found</source>
-        <translation>Не знайдено миші</translation>
+        <translation>未發現鼠標</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Тип</translation>
+        <translation>類型</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation>Інтерфейс</translation>
+        <translation>接口</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Максимальна потужність</translation>
+        <translation>最大功率</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>速度</translation>
     </message>
 </context>
 <context>
     <name>NetworkadapterWidget</name>
     <message>
         <source>Network Adapter</source>
-        <translation>Адаптер мережі</translation>
+        <translation>網絡適配器</translation>
     </message>
     <message>
         <source>No network adapter found</source>
-        <translation>Не знайдено адаптера мережі</translation>
+        <translation>未發現網絡適配器</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Тип</translation>
+        <translation>類型</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Driver Version</source>
-        <translation>Версія драйвера</translation>
+        <translation>驅動版本</translation>
     </message>
     <message>
         <source>Logical Name</source>
-        <translation>Логічна назва</translation>
+        <translation>邏輯名稱</translation>
     </message>
     <message>
         <source>MAC Address</source>
-        <translation>MAC-адреса</translation>
+        <translation>物理地址</translation>
     </message>
     <message>
         <source>IRQ</source>
-        <translation>IRQ</translation>
+        <translation>中斷</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation>Пам&apos;ять</translation>
+        <translation>內存</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation>位寬</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation>Годинник</translation>
+        <translation>時鐘頻率</translation>
     </message>
     <message>
         <source>Auto Negotiation</source>
-        <translation>Автоузгодження</translation>
+        <translation>自動協商</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation>Трансляція</translation>
+        <translation>廣播</translation>
     </message>
     <message>
         <source>Duplex</source>
-        <translation>Двобічний</translation>
+        <translation>雙工</translation>
     </message>
     <message>
         <source>Firmware</source>
-        <translation>Мікропрограма</translation>
+        <translation>固件</translation>
     </message>
     <message>
         <source>IP</source>
@@ -966,27 +966,27 @@
     </message>
     <message>
         <source>Latency</source>
-        <translation>Латентність</translation>
+        <translation>延遲</translation>
     </message>
     <message>
         <source>Link</source>
-        <translation>Зв&apos;язок</translation>
+        <translation>連接</translation>
     </message>
     <message>
         <source>Multicast</source>
-        <translation>Групова трансляція</translation>
+        <translation>多播</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation>Порт</translation>
+        <translation>端口</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <source>Capacity</source>
-        <translation>Місткість</translation>
+        <translation>容量</translation>
     </message>
 </context>
 <context>
@@ -994,347 +994,347 @@
     <message>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
-        <translation>Інші пристрої</translation>
+        <translation>其他設備</translation>
     </message>
     <message>
         <source>No other devices found</source>
-        <translation>Інших пристроїв не знайдено</translation>
+        <translation>未發現其他設備</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Максимальна потужність</translation>
+        <translation>最大功率</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Швидкість</translation>
+        <translation>速度</translation>
     </message>
 </context>
 <context>
     <name>OtherPciDeviceWidget</name>
     <message>
         <source>Other PCI Devices</source>
-        <translation>Інші пристрої PCI</translation>
+        <translation>其他PCI設備</translation>
     </message>
     <message>
         <source>No other PCI devices found</source>
-        <translation>Не знайдено інших пристроїв PCI</translation>
+        <translation>未發現其他PCI設備</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>Capabilities</source>
-        <translation>Можливості</translation>
+        <translation>功能</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation>位寬</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation>Годинник</translation>
+        <translation>時鐘頻率</translation>
     </message>
     <message>
         <source>Latency</source>
-        <translation>Латентність</translation>
+        <translation>延遲</translation>
     </message>
     <message>
         <source>IRQ</source>
-        <translation>IRQ</translation>
+        <translation>中斷</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation>Пам&apos;ять</translation>
+        <translation>內存</translation>
     </message>
     <message>
         <source>Input/Output</source>
-        <translation>Вхід/Вихід</translation>
+        <translation>輸入/輸出</translation>
     </message>
 </context>
 <context>
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>Живлення</translation>
+        <translation>電源</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>Немає даних щодо живлення</translation>
+        <translation>未發現電源訊息</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Serial Number</source>
-        <translation>Серійний номер</translation>
+        <translation>序列號</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Тип</translation>
+        <translation>類型</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Стан</translation>
+        <translation>狀態</translation>
     </message>
     <message>
         <source>Capacity</source>
-        <translation>Місткість</translation>
+        <translation>容量</translation>
     </message>
     <message>
         <source>Voltage</source>
-        <translation>Напруга</translation>
+        <translation>電壓</translation>
     </message>
     <message>
         <source>Slot</source>
-        <translation>Слот</translation>
+        <translation>插槽</translation>
     </message>
     <message>
         <source>Design Capacity</source>
-        <translation>Проєктна місткість</translation>
+        <translation>設計容量</translation>
     </message>
     <message>
         <source>Design Voltage</source>
-        <translation>Проєктна напруга</translation>
+        <translation>設計電壓</translation>
     </message>
     <message>
         <source>SBDS Version</source>
-        <translation>Версія SBDS</translation>
+        <translation>SBDS版本</translation>
     </message>
     <message>
         <source>SBDS Serial Number</source>
-        <translation>Серійний номер SBDS</translation>
+        <translation>SBDS序列號</translation>
     </message>
     <message>
         <source>SBDS Manufacture Date</source>
-        <translation>Дата вироблення SBDS</translation>
+        <translation>SBDS製造日期</translation>
     </message>
     <message>
         <source>SBDS Chemistry</source>
-        <translation>Хімія SBDS</translation>
+        <translation>SBDS材料</translation>
     </message>
 </context>
 <context>
     <name>PrinterWidget</name>
     <message>
         <source>Printer</source>
-        <translation>Принтер</translation>
+        <translation>打印機</translation>
     </message>
     <message>
         <source>No printer found</source>
-        <translation>Не знайдено принтерів</translation>
+        <translation>未發現打印機</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Назва</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation>Постачальник</translation>
+        <translation>製造商</translation>
     </message>
     <message>
         <source>Model</source>
-        <translation>Модель</translation>
+        <translation>型號</translation>
     </message>
     <message>
         <source>Serial Number</source>
-        <translation>Серійний номер</translation>
+        <translation>序列號</translation>
     </message>
     <message>
         <source>Interface Type</source>
-        <translation>Тип інтерфейсу</translation>
+        <translation>接口類型</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Стан</translation>
+        <translation>狀態</translation>
     </message>
     <message>
         <source>URI</source>
-        <translation>Адреса</translation>
+        <translation>URI</translation>
     </message>
     <message>
         <source>Shared</source>
-        <translation>Спільний</translation>
+        <translation>已共享</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Device Name</source>
-        <translation>Назва пристрою</translation>
+        <translation>設備名稱</translation>
     </message>
     <message>
         <source>SubVendor</source>
-        <translation>Підрядчик</translation>
+        <translation>子製造商</translation>
     </message>
     <message>
         <source>SubDevice</source>
-        <translation>Підпристрій</translation>
+        <translation>子設備</translation>
     </message>
     <message>
         <source>Driver</source>
-        <translation>Драйвер</translation>
+        <translation>驅動</translation>
     </message>
     <message>
         <source>Driver Modules</source>
-        <translation>Модулі драйвера</translation>
+        <translation>驅動模塊</translation>
     </message>
     <message>
         <source>Driver Status</source>
-        <translation>Стан драйвера</translation>
+        <translation>驅動狀態</translation>
     </message>
     <message>
         <source>Driver Activation Cmd</source>
-        <translation>Команда активації драйвера</translation>
+        <translation>驅動啟動命令</translation>
     </message>
     <message>
         <source>Config Status</source>
-        <translation>Стан налаштувань</translation>
+        <translation>配置狀態</translation>
     </message>
     <message>
         <source>physical id</source>
-        <translation>фізичний ід.</translation>
+        <translation>物理ID</translation>
     </message>
     <message>
         <source>latency</source>
-        <translation>латентність</translation>
+        <translation>延遲</translation>
     </message>
     <message>
         <source>BIOS Information</source>
-        <translation>Дані BIOS</translation>
+        <translation>BIOS訊息</translation>
     </message>
     <message>
         <source>Base Board Information</source>
-        <translation>Базові дані щодо плати</translation>
+        <translation>主板訊息</translation>
     </message>
     <message>
         <source>System Information</source>
-        <translation>Системна інформація</translation>
+        <translation>系統訊息</translation>
     </message>
     <message>
         <source>Chassis Information</source>
-        <translation>Дані щодо основи</translation>
+        <translation>機箱訊息</translation>
     </message>
     <message>
         <source>Physical Memory Array</source>
-        <translation>Масив фізичної пам&apos;яті</translation>
+        <translation>物理內存數組</translation>
     </message>
     <message>
         <source>Release Date</source>
-        <translation>Дата випуску</translation>
+        <translation>發佈日期</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation>Адреса</translation>
+        <translation>地址</translation>
     </message>
     <message>
         <source>Runtime Size</source>
-        <translation>Динамічний розмір</translation>
+        <translation>運行內存大小</translation>
     </message>
     <message>
         <source>ROM Size</source>
-        <translation>Розмір ROM</translation>
+        <translation>ROM大小</translation>
     </message>
     <message>
         <source>Characteristics</source>
-        <translation>Характеристики</translation>
+        <translation>特性</translation>
     </message>
     <message>
         <source>BIOS Revision</source>
-        <translation>Модифікація BIOS</translation>
+        <translation>BIOS修訂版本</translation>
     </message>
     <message>
         <source>Product Name</source>
-        <translation>Назва продукту</translation>
+        <translation>產品名稱</translation>
     </message>
     <message>
         <source>Serial Number</source>
-        <translation>Серійний номер</translation>
+        <translation>序列號</translation>
     </message>
     <message>
         <source>Asset Tag</source>
-        <translation>Мітка активу</translation>
+        <translation>資產編號</translation>
     </message>
     <message>
         <source>Features</source>
-        <translation>Можливості</translation>
+        <translation>特徵</translation>
     </message>
     <message>
         <source>Location In Chassis</source>
-        <translation>Розташування на основі</translation>
+        <translation>機箱內位置</translation>
     </message>
     <message>
         <source>Chassis Handle</source>
-        <translation>Обробник основи</translation>
+        <translation>機箱程序</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Тип</translation>
+        <translation>類型</translation>
     </message>
     <message>
         <source>Contained Object Handles</source>
-        <translation>Обробники вміщених об&apos;єктів</translation>
+        <translation>包含對象程序</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версія</translation>
+        <translation>版本</translation>
     </message>
     <message>
         <source>UUID</source>
@@ -1342,175 +1342,175 @@
     </message>
     <message>
         <source>Wake-up Type</source>
-        <translation>Тип пробудження</translation>
+        <translation>喚醒類型</translation>
     </message>
     <message>
         <source>SKU Number</source>
-        <translation>Номер SKU</translation>
+        <translation>SKU號</translation>
     </message>
     <message>
         <source>Family</source>
-        <translation>Сімейство</translation>
+        <translation>家族</translation>
     </message>
     <message>
         <source>Lock</source>
-        <translation>Заблокувати</translation>
+        <translation>鎖</translation>
     </message>
     <message>
         <source>Boot-up State</source>
-        <translation>Стан завантаження</translation>
+        <translation>開機狀態</translation>
     </message>
     <message>
         <source>Power Supply State</source>
-        <translation>Стан живлення</translation>
+        <translation>供電狀態</translation>
     </message>
     <message>
         <source>Thermal State</source>
-        <translation>Термічний стан</translation>
+        <translation>散熱狀態</translation>
     </message>
     <message>
         <source>Security Status</source>
-        <translation>Стан безпеки</translation>
+        <translation>安全狀態</translation>
     </message>
     <message>
         <source>OEM Information</source>
-        <translation>Дані щодо OEM</translation>
+        <translation>OEM訊息</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Висота</translation>
+        <translation>高度</translation>
     </message>
     <message>
         <source>Number Of Power Cords</source>
-        <translation>Кількість ліній живлення</translation>
+        <translation>電源線數</translation>
     </message>
     <message>
         <source>Contained Elements</source>
-        <translation>Включені елементи</translation>
+        <translation>包含組件數</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Розташування</translation>
+        <translation>位置</translation>
     </message>
     <message>
         <source>Error Correction Type</source>
-        <translation>Тип виправлення помилок</translation>
+        <translation>糾錯類型</translation>
     </message>
     <message>
         <source>Maximum Capacity</source>
-        <translation>Максимальна місткість</translation>
+        <translation>最大容量</translation>
     </message>
     <message>
         <source>Error Information Handle</source>
-        <translation>Обробник відомостей щодо помилок</translation>
+        <translation>錯誤訊息程序</translation>
     </message>
     <message>
         <source>Number Of Devices</source>
-        <translation>Кількість пристроїв</translation>
+        <translation>卡槽數量</translation>
     </message>
     <message>
         <source>BIOS ROMSIZE</source>
-        <translation>Розмір BIOS</translation>
+        <translation>BIOS ROM大小</translation>
     </message>
     <message>
         <source>Release date</source>
-        <translation>Дата випуску</translation>
+        <translation>發佈日期</translation>
     </message>
     <message>
         <source>Board name</source>
-        <translation>Назва плати</translation>
+        <translation>主板名稱</translation>
     </message>
     <message>
         <source>Bus</source>
-        <translation>Канал</translation>
+        <translation>總線</translation>
     </message>
     <message>
         <source>BD Address</source>
-        <translation>Адреса BD</translation>
+        <translation>藍牙設備地址</translation>
     </message>
     <message>
         <source>ACL MTU</source>
-        <translation>MTU ACL</translation>
+        <translation>ACL MTU</translation>
     </message>
     <message>
         <source>SCO MTU</source>
-        <translation>MTU SCO</translation>
+        <translation>SCO MTU</translation>
     </message>
     <message>
         <source>Packet type</source>
-        <translation>Тип пакета</translation>
+        <translation>數據包類型</translation>
     </message>
     <message>
         <source>Link policy</source>
-        <translation>Правила зв&apos;язку</translation>
+        <translation>連接策略</translation>
     </message>
     <message>
         <source>Link mode</source>
-        <translation>Режим зв&apos;язку</translation>
+        <translation>連接模式</translation>
     </message>
     <message>
         <source>Class</source>
-        <translation>Клас</translation>
+        <translation>類別</translation>
     </message>
     <message>
         <source>Service Classes</source>
-        <translation>Класи служби</translation>
+        <translation>服務類別</translation>
     </message>
     <message>
         <source>Device Class</source>
-        <translation>Клас пристрою</translation>
+        <translation>設備類別</translation>
     </message>
     <message>
         <source>HCI Version</source>
-        <translation>Версія HCI</translation>
+        <translation>HCI版本</translation>
     </message>
     <message>
         <source>LMP Version</source>
-        <translation>Версія LMP</translation>
+        <translation>LMP版本</translation>
     </message>
     <message>
         <source>Subversion</source>
-        <translation>Підверсія</translation>
+        <translation>子版本</translation>
     </message>
     <message>
         <source>Device</source>
-        <translation>Пристрій</translation>
+        <translation>設備</translation>
     </message>
     <message>
         <source>Serial ID</source>
-        <translation>Послідовний ід.</translation>
+        <translation>序列號</translation>
     </message>
     <message>
         <source>product</source>
-        <translation>продукт</translation>
+        <translation>產品</translation>
     </message>
     <message>
         <source>description</source>
-        <translation>опис</translation>
+        <translation>描述</translation>
     </message>
     <message>
         <source>Device File</source>
-        <translation>Файл пристрою</translation>
+        <translation>設備文件</translation>
     </message>
     <message>
         <source>Device Files</source>
-        <translation>Файли пристроїв</translation>
+        <translation>設備文件</translation>
     </message>
     <message>
         <source>Device Number</source>
-        <translation>Номер пристрою</translation>
+        <translation>設備編號</translation>
     </message>
     <message>
         <source>Module Alias</source>
-        <translation>Альт. назва модуля</translation>
+        <translation>模塊別名</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation>Програма</translation>
+        <translation>應用</translation>
     </message>
     <message>
         <source>I/O Ports</source>
-        <translation>Порти ВВ</translation>
+        <translation>I/O端口</translation>
     </message>
     <message>
         <source>PROP</source>
@@ -1522,7 +1522,7 @@
     </message>
     <message>
         <source>KEY</source>
-        <translation>КЛЮЧ</translation>
+        <translation>KEY</translation>
     </message>
     <message>
         <source>MSC</source>
@@ -1530,207 +1530,207 @@
     </message>
     <message>
         <source>Hardware Class</source>
-        <translation>Клас обладнання</translation>
+        <translation>硬件類別</translation>
     </message>
     <message>
         <source>inch</source>
-        <translation>дюйм</translation>
+        <translation>英吋</translation>
     </message>
     <message>
         <source>ioport</source>
-        <translation>Порт ВВ</translation>
+        <translation>I/O端口</translation>
     </message>
     <message>
         <source>AC Power</source>
-        <translation>Потужність змінного струму</translation>
+        <translation>交流電源</translation>
     </message>
     <message>
         <source>battery</source>
-        <translation>акумулятор</translation>
+        <translation>電池</translation>
     </message>
     <message>
         <source>native-path</source>
-        <translation>природний шлях</translation>
+        <translation>安裝路徑</translation>
     </message>
     <message>
         <source>power supply</source>
-        <translation>живлення</translation>
+        <translation>供電</translation>
     </message>
     <message>
         <source>updated</source>
-        <translation>оновлено</translation>
+        <translation>更新時間</translation>
     </message>
     <message>
         <source>has history</source>
-        <translation>має журнал</translation>
+        <translation>歷史記錄</translation>
     </message>
     <message>
         <source>has statistics</source>
-        <translation>має статистику</translation>
+        <translation>用電統計</translation>
     </message>
     <message>
         <source>rechargeable</source>
-        <translation>перезарядка</translation>
+        <translation>可再充電</translation>
     </message>
     <message>
         <source>state</source>
-        <translation>стан</translation>
+        <translation>狀態</translation>
     </message>
     <message>
         <source>warning-level</source>
-        <translation>рівень попередження</translation>
+        <translation>警告等級</translation>
     </message>
     <message>
         <source>energy</source>
-        <translation>заряд</translation>
+        <translation>容量</translation>
     </message>
     <message>
         <source>energy-empty</source>
-        <translation>порожній</translation>
+        <translation>最低容量</translation>
     </message>
     <message>
         <source>energy-full</source>
-        <translation>повний заряд</translation>
+        <translation>完全充滿容量</translation>
     </message>
     <message>
         <source>energy-full-design</source>
-        <translation>проектний повний заряд</translation>
+        <translation>設計容量</translation>
     </message>
     <message>
         <source>energy-rate</source>
-        <translation>частка заряду</translation>
+        <translation>能量密度</translation>
     </message>
     <message>
         <source>voltage</source>
-        <translation>напруга</translation>
+        <translation>電壓</translation>
     </message>
     <message>
         <source>percentage</source>
-        <translation>частка</translation>
+        <translation>電量</translation>
     </message>
     <message>
         <source>temperature</source>
-        <translation>температура</translation>
+        <translation>溫度</translation>
     </message>
     <message>
         <source>technology</source>
-        <translation>технологія</translation>
+        <translation>電池技術</translation>
     </message>
     <message>
         <source>icon-name</source>
-        <translation>назва піктограми</translation>
+        <translation>圖標</translation>
     </message>
     <message>
         <source>online</source>
-        <translation>задіяно</translation>
+        <translation>在線</translation>
     </message>
     <message>
         <source>daemon-version</source>
-        <translation>версія фонової служби</translation>
+        <translation>Daemon版本</translation>
     </message>
     <message>
         <source>on-battery</source>
-        <translation>на акумуляторі</translation>
+        <translation>使用電池</translation>
     </message>
     <message>
         <source>lid-is-closed</source>
-        <translation>кришку закрито</translation>
+        <translation>筆記本合蓋</translation>
     </message>
     <message>
         <source>lid-is-present</source>
-        <translation>кришка є</translation>
+        <translation>打開筆記本蓋子</translation>
     </message>
     <message>
         <source>critical-action</source>
-        <translation>критична дія</translation>
+        <translation>電量極低時執行</translation>
     </message>
     <message>
         <source>copies</source>
-        <translation>копії</translation>
+        <translation>複印數量</translation>
     </message>
     <message>
         <source>job-cancel-after</source>
-        <translation>завдання скасовано після</translation>
+        <translation>此時取消打印任務</translation>
     </message>
     <message>
         <source>job-hold-until</source>
-        <translation>затримання завдання до</translation>
+        <translation>保留打印任務直至</translation>
     </message>
     <message>
         <source>job-priority</source>
-        <translation>пріоритетність завдання</translation>
+        <translation>任務優先級</translation>
     </message>
     <message>
         <source>marker-change-time</source>
-        <translation>час зміни маркера</translation>
+        <translation>標記修改次數</translation>
     </message>
     <message>
         <source>number-up</source>
-        <translation>номер згори</translation>
+        <translation>編號</translation>
     </message>
     <message>
         <source>orientation-requested</source>
-        <translation>потрібна орієнтація</translation>
+        <translation>打印方向</translation>
     </message>
     <message>
         <source>print-color-mode</source>
-        <translation>режим колірності друку</translation>
+        <translation>顏色模式</translation>
     </message>
     <message>
         <source>printer-is-accepting-jobs</source>
-        <translation>принтер приймає завдання</translation>
+        <translation>當前可打印</translation>
     </message>
     <message>
         <source>printer-is-shared</source>
-        <translation>принтер є спільним</translation>
+        <translation>打印機已共享</translation>
     </message>
     <message>
         <source>printer-is-temporary</source>
-        <translation>принтер є тимчасовим</translation>
+        <translation>臨時打印機</translation>
     </message>
     <message>
         <source>printer-make-and-model</source>
-        <translation>виробник і модель принтера</translation>
+        <translation>製造商和型號</translation>
     </message>
     <message>
         <source>printer-state-change-time</source>
-        <translation>час зміни стану принтера</translation>
+        <translation>打印機狀態修改時間</translation>
     </message>
     <message>
         <source>printer-state-reasons</source>
-        <translation>причини стану принтера</translation>
+        <translation>打印機狀態訊息</translation>
     </message>
     <message>
         <source>printer-type</source>
-        <translation>тип принтера</translation>
+        <translation>打印機類型</translation>
     </message>
     <message>
         <source>printer-uri-supported</source>
-        <translation>підтримка адреси принтера</translation>
+        <translation>支持的URI</translation>
     </message>
     <message>
         <source>sides</source>
-        <translation>боки</translation>
+        <translation>打印面數</translation>
     </message>
     <message>
         <source>ansiversion</source>
-        <translation>версія ANSI</translation>
+        <translation>ANSI版本</translation>
     </message>
     <message>
         <source>bus info</source>
-        <translation>дані щодо каналу</translation>
+        <translation>總線訊息</translation>
     </message>
     <message>
         <source>logical name</source>
-        <translation>логічна назва</translation>
+        <translation>邏輯地址</translation>
     </message>
     <message>
         <source>logicalsectorsize</source>
-        <translation>розмір логічного сектора</translation>
+        <translation>邏輯分區大小</translation>
     </message>
     <message>
         <source>sectorsize</source>
-        <translation>розмір сектора</translation>
+        <translation>扇區大小</translation>
     </message>
     <message>
         <source>guid</source>
@@ -1738,166 +1738,166 @@
     </message>
     <message>
         <source>Geometry (Logical)</source>
-        <translation>Геометрія (логічна)</translation>
+        <translation>幾何數據（邏輯）</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Копіювати</translation>
+        <translation>複製</translation>
     </message>
     <message>
         <source>One</source>
-        <translation>Одне</translation>
+        <translation>單</translation>
     </message>
     <message>
         <source>Two</source>
-        <translation>Два</translation>
+        <translation>雙</translation>
     </message>
     <message>
         <source>Four</source>
-        <translation>Чотири</translation>
+        <translation>四</translation>
     </message>
     <message>
         <source>Six</source>
-        <translation>Шістка</translation>
+        <translation>六</translation>
     </message>
     <message>
         <source>Eight</source>
-        <translation>Вісім</translation>
+        <translation>八</translation>
     </message>
     <message>
         <source>Ten</source>
-        <translation>Десятка</translation>
+        <translation>十</translation>
     </message>
     <message>
         <source>Twelve</source>
-        <translation>Дванадцять</translation>
+        <translation>十二</translation>
     </message>
     <message>
         <source>Fourteen</source>
-        <translation>Чотирнадцять</translation>
+        <translation>十四</translation>
     </message>
     <message>
         <source>Sixteen</source>
-        <translation>Шістнадцять</translation>
+        <translation>十六</translation>
     </message>
     <message>
         <source>Eighteen</source>
-        <translation>Вісімнадцять</translation>
+        <translation>十八</translation>
     </message>
     <message>
         <source>Twenty</source>
-        <translation>Двадцять</translation>
+        <translation>二十</translation>
     </message>
     <message>
         <source>Twenty-two</source>
-        <translation>Двадцять два</translation>
+        <translation>二十二</translation>
     </message>
     <message>
         <source>Twenty-four</source>
-        <translation>Двадцять чотири</translation>
+        <translation>二十四</translation>
     </message>
     <message>
         <source>Twenty-six</source>
-        <translation>Двадцять шість</translation>
+        <translation>二十六</translation>
     </message>
     <message>
         <source>Twenty-eight</source>
-        <translation>Двадцять вісім</translation>
+        <translation>二十八</translation>
     </message>
     <message>
         <source>Thirty</source>
-        <translation>Тридцять</translation>
+        <translation>三十</translation>
     </message>
     <message>
         <source>Thirty-two</source>
-        <translation>Тридцять два</translation>
+        <translation>三十二</translation>
     </message>
     <message>
         <source>Thirty-four</source>
-        <translation>Тридцять чотири</translation>
+        <translation>三十四</translation>
     </message>
     <message>
         <source>Thirty-six</source>
-        <translation>Тридцять шість</translation>
+        <translation>三十六</translation>
     </message>
     <message>
         <source>Thirty-eight</source>
-        <translation>Тридцять вісім</translation>
+        <translation>三十八</translation>
     </message>
     <message>
         <source>Forty</source>
-        <translation>Сорок</translation>
+        <translation>四十</translation>
     </message>
     <message>
         <source>Forty-two</source>
-        <translation>Сорок два</translation>
+        <translation>四十二</translation>
     </message>
     <message>
         <source>Forty-four</source>
-        <translation>Сорок чотири</translation>
+        <translation>四十四</translation>
     </message>
     <message>
         <source>Forty-six</source>
-        <translation>Сорок шість</translation>
+        <translation>四十六</translation>
     </message>
     <message>
         <source>Forty-eight</source>
-        <translation>Сорок вісім</translation>
+        <translation>四十八</translation>
     </message>
     <message>
         <source>Fifty</source>
-        <translation>П’ятдесят</translation>
+        <translation>五十</translation>
     </message>
     <message>
         <source>Fifty-two</source>
-        <translation>П&apos;ятдесят два</translation>
+        <translation>五十二</translation>
     </message>
     <message>
         <source>Fifty-four</source>
-        <translation>П&apos;ятдесят чотири</translation>
+        <translation>五十四</translation>
     </message>
     <message>
         <source>Fifty-six</source>
-        <translation>П&apos;ятдесят шість</translation>
+        <translation>五十六</translation>
     </message>
     <message>
         <source>Fifty-eight</source>
-        <translation>П&apos;ятдесят вісім</translation>
+        <translation>五十八</translation>
     </message>
     <message>
         <source>Sixty</source>
-        <translation>Шістдесят</translation>
+        <translation>六十</translation>
     </message>
     <message>
         <source>Sixty-two</source>
-        <translation>Шістдесят два</translation>
+        <translation>六十二</translation>
     </message>
     <message>
         <source>Sixty-four</source>
-        <translation>Шістдесят чотири</translation>
+        <translation>六十四</translation>
     </message>
     <message>
         <source>One hundred and Twenty-eight</source>
-        <translation>Сто двадцять вісім</translation>
+        <translation>一百二十八</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation>Невідомий</translation>
+        <translation>未知</translation>
     </message>
     <message>
         <source>Device Manager</source>
-        <translation>Менеджер пристроїв</translation>
+        <translation>設備管理器</translation>
     </message>
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-        <translation>«Керування пристроями» — зручний інструмент для перегляду відомостей щодо обладнання та керування пристроями.</translation>
+        <translation>設備管理器是查看、管理硬件設備的工具軟件。</translation>
     </message>
 </context>
 <context>
     <name>UsbdeviceWidget</name>
     <message>
         <source>USB Devices</source>
-        <translation>Пристрої USB</translation>
+        <translation>USB設備</translation>
     </message>
 </context>
 </TS>

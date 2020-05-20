@@ -323,69 +323,6 @@
     </message>
 </context>
 <context>
-    <name>DeviceInfoParser</name>
-    <message>
-        <source>Loading Operating System Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading CPU Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading GPU Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading BIOS Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Audio Device Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Bluetooth Device Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Memory Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Monitor Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Network Adapter Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Input Devices Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Image Devices Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Power Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Other Devices Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading CD-ROM Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading Printer Info...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DeviceInfoWidgetBase</name>
     <message>
         <source>Refresh (F5)</source>
@@ -434,7 +371,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Loading Gpu info...</source>
+        <source>Loading GPU Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -442,7 +379,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Loading Keyboard info...</source>
+        <source>Loading Keyboard Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -454,7 +391,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Loading Mouse info...</source>
+        <source>Loading Mouse Info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1259,11 +1196,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Serial number</source>
+        <source>Serial Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Interface type</source>
+        <source>Interface Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1455,10 +1392,6 @@
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

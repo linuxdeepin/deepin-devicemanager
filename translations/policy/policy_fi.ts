@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
 <context>
     <name>policy</name>
     <message>
         <source>Authentication is required to read hardware information</source>
-        <translation type="vanished">Laitteistotietojen lukeminen edellyttää todennusta</translation>
+        <translation>Laitteistotietojen lukeminen edellyttää todennusta</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Peru</translation>
+        <translation>Peru</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation type="vanished">Vahvista</translation>
+        <translation>Vahvista</translation>
     </message>
 </context>
 </TS>

@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="uk">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="uk" version="2.1">
 <context>
     <name>policy</name>
     <message>
         <source>Authentication is required to read hardware information</source>
-        <translation type="vanished">Для читання даних щодо обладнання слід пройти розпізнавання</translation>
+        <translation>Для читання даних щодо обладнання слід пройти розпізнавання</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Скасувати</translation>
+        <translation>Скасувати</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation type="vanished">Підтвердження</translation>
+        <translation>Підтвердження</translation>
     </message>
 </context>
 </TS>

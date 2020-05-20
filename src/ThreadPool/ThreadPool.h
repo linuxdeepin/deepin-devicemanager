@@ -50,6 +50,18 @@ private:
     ThreadPool          *mp_Parent;
 };
 
+//class CmdTask: public QObject, public QRunnable
+//{
+//    Q_OBJECT
+
+//public:
+//    CmdTask();
+//    ~CmdTask();
+//protected:
+//    void run();
+//private:
+//};
+
 
 
 class ThreadPool : public QThreadPool

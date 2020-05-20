@@ -1,17 +1,17 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="tr" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_HK" version="2.1">
 <context>
     <name>policy</name>
     <message>
         <source>Authentication is required to read hardware information</source>
-        <translation>Donanım bilgilerini okumak için kimlik doğrulaması gerekli</translation>
+        <translation>讀取硬件訊息需要認證</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>İptal</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation>Onayla</translation>
+        <translation>認證</translation>
     </message>
 </context>
 </TS>

@@ -51,22 +51,9 @@ const int spinnerWidth = 32;
 const int spinnerHeight = 32;
 
 const int TableViewRowHeight_ = 36;
-#define GenerateTsItem 1
-
+#define GenerateTsItem 0
 //#define TEST_DATA_FROM_FILE
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/TongXin/LX";
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/ChuangZhiCheng/LX_B20";
-
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/LangChao/CE3000F_D";
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/LangChao/CE3000L";
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/LangChao/CS5260Z";
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/LangChao/NF3200L";
-
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Haier/BY_G51-L02302";
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Haier/BY_LX12-L0220";
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Haier/BY_LX12-Z0284";
-
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/YuanJingTao/BM6J81";
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/HuaWei/PanGu";
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Bug/Bug_26028";
 
@@ -76,4 +63,6 @@ const int TableViewRowHeight_ = 36;
 //const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_feiteng";
 //const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_longxin";
 //const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_bug26028";
-const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_zhaoxin";
+//const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_zhaoxin";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/HuaWei/KLU";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Bug/Bug_26904";
