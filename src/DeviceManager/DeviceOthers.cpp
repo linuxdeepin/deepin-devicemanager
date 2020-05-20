@@ -39,6 +39,8 @@ void DeviceOthers::setInfoFromHwinfo(const QString &info)
     setAttribute(mapInfo, "Speed", m_Speed);
     setAttribute(mapInfo, "Unique ID", m_UniqID);
 
+    m_BusID = mapInfo["SysFS BusID"].replace(QRegExp("\\.[0-9]*$"), "");
+
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0
     QStringList words = mapInfo["SysFS BusID"].split(":");
@@ -48,20 +50,28 @@ void DeviceOthers::setInfoFromHwinfo(const QString &info)
             m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
+
 }
 
 bool DeviceOthers::isExist()
 {
-    if (DeviceInfoParser::Instance().s_usbDeiveUniq.contains(m_UniqID)) {
+    if (DeviceInfoParser::Instance().s_usbDeiveUniq.contains(m_UniqID) ||
+            DeviceInfoParser::Instance().s_usbDevicebus.contains(m_BusID)) {
         return true;
     }
 
-    if (m_UniqID.isEmpty()) {
+    if (m_UniqID.isEmpty() || m_BusID.isEmpty()) {
         return true;
     }
 
     return false;
 
+}
+
+void DeviceOthers::addUniqIDAndBusID()
+{
+    addHwinfoUniqueID(m_UniqID);
+    addHwinfoBusID(m_BusID);
 }
 
 const QString &DeviceOthers::name()const

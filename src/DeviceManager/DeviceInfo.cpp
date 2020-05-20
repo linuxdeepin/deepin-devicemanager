@@ -306,3 +306,12 @@ void DeviceBaseInfo::addHwinfoUniqueID(const QString &uniqID)
         DeviceInfoParser::Instance().s_usbDeiveUniq.append(uniqID);
     }
 }
+
+void DeviceBaseInfo::addHwinfoBusID(const QString &busID)
+{
+    if (busID.isEmpty() == false) {
+        QString uniq = busID;
+        uniq.replace(QRegExp("\\.[0-9]*$"), "");//   SysFS BusID 1-7:1.0  只截取 1-7:1
+        DeviceInfoParser::Instance().s_usbDevicebus.append(uniq);
+    }
+}

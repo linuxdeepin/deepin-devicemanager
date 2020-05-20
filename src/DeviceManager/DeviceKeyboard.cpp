@@ -81,6 +81,8 @@ void DeviceKeyboard::setInfoFromHwinfo(const QString &info)
         m_KeysToCatDevices = re.cap(1);
     }
     addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
     loadOtherDeviceInfo(mapInfo);
 }
 

@@ -311,5 +311,6 @@ public:
     static QMap<QString, QStringList>   s_lshwInfo;
 
     static QStringList s_usbDeiveUniq;      //hwinfo --usb unique ID
+    static QStringList s_usbDevicebus;      //hwinfo --usb SysFS BusID
 };
 

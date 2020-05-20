@@ -49,6 +49,7 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QString &info)
         parseKeyToLshw(mapInfo["SysFS BusID"]);
 
         addHwinfoUniqueID(mapInfo["Unique ID"]);
+        addHwinfoBusID(mapInfo["SysFS BusID"]);
 
         loadOtherDeviceInfo(mapInfo);
         return true;

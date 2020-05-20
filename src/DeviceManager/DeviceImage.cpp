@@ -38,6 +38,8 @@ void DeviceImage::setInfoFromHwinfo(const QString &info)
     setAttribute(mapInfo, "Speed", m_Speed);
 
     addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
 }
 
 const QString &DeviceImage::name()const

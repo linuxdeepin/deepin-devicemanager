@@ -16,6 +16,9 @@ public:
     /**@brief:判断hwinfo设备是否存在*/
     bool isExist();
 
+    /**@brief:将其他设备的标志符添加进列表*/
+    void addUniqIDAndBusID();
+
     // 获取设备属性
     const QString &name()const;
     const QString &vendor()const;
@@ -42,6 +45,7 @@ private:
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
     QString             m_UniqID;                       //<! 【唯一ID】
+    QString             m_BusID;                        //<! 【总线ID】
     QString             m_LogicalName;
 };
 

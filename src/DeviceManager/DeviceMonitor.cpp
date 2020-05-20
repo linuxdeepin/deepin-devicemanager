@@ -84,6 +84,8 @@ void DeviceMonitor::setInfoFromHwinfo(const QString &info)
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
 
     addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
     // 加载其他属性
     loadOtherDeviceInfo(mapInfo);
 }

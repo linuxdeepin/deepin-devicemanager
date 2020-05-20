@@ -98,6 +98,7 @@ QString DeviceInfoParser::s_hwinfoCdrom = "";
 QString DeviceInfoParser::s_hwinfoDisk = "";
 QString DeviceInfoParser::s_hwinfoDisplay = "";
 QStringList    DeviceInfoParser::s_usbDeiveUniq = {};
+QStringList    DeviceInfoParser::s_usbDevicebus = {};
 
 DWIDGET_USE_NAMESPACE
 
@@ -1162,8 +1163,8 @@ void DeviceInfoParser::loadOtherDevices()
     loadDiskInfo();
     loadPrinterInfoFromHwinfo();
 
-    loadOtherDevicesFromLshwStorage();
-    loadOtherDevicesFromLshwGeneric();
+//    loadOtherDevicesFromLshwStorage();
+//    loadOtherDevicesFromLshwGeneric();
     loadOtherDevicesFromHwinfo();
 }
 void DeviceInfoParser::loadOtherDevicesFromLshwStorage()
@@ -1224,11 +1225,12 @@ void DeviceInfoParser::loadOtherDevicesFromHwinfo()
 
     QStringList paragraphs = s_hwinfoUsb.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
-        if (paragraph.contains("usbcore", Qt::CaseInsensitive) == false) {
+        if (paragraph.contains("hub", Qt::CaseInsensitive) == false) {
             DeviceOthers device;
             device.setInfoFromHwinfo(paragraph);
             if (device.isExist() == false) {
                 DeviceManager::instance()->addOthersDeviceFromHwinfo(device);
+                device.addUniqIDAndBusID();
             }
         }
     }
@@ -1406,6 +1408,7 @@ void DeviceInfoParser::loadPrinterInfoFromHwinfo()
             getMapInfoFromHwinfo(mapInfo, paragraph);
             if (mapInfo["Unique ID"].isEmpty() == false) {
                 DeviceInfoParser::Instance().s_usbDeiveUniq.append(mapInfo["Unique ID"]);
+                DeviceInfoParser::Instance().s_usbDevicebus.append(mapInfo["SysFS BusID"].replace(QRegExp("\\.[0-9]*$"), ""));
             }
         }
     }
