@@ -258,6 +258,13 @@ private:
     void getMapInfoFromLshw(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
     void getMapInfoFromDmidecode(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
     bool getDeviceInfo(const QString &command, QString &deviceInfo, const QString &debugFile = QString(""));
+
+    /**
+      * @brief:获取USB集线器信息
+      */
+
+    void loadUSBHubInfoFromHwinfo();
+
 public:
     bool getRootPassword();
     bool executeProcess(const QString &cmd);
@@ -303,6 +310,7 @@ public:
     static QString s_hwinfoMonitor;
     static QString s_hwinfoSound;
     static QString s_hwinfoUsb;
+    static QString s_hwinfoHub;
     static QString s_hwinfoNetwork;
     static QString s_hwinfoKeyboard;
     static QString s_hwinfoCdrom;

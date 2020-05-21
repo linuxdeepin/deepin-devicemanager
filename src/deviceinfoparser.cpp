@@ -92,6 +92,7 @@ QString DeviceInfoParser::s_dmesg = "";
 QString DeviceInfoParser::s_hwinfoMonitor = "";
 QString DeviceInfoParser::s_hwinfoSound = "";
 QString DeviceInfoParser::s_hwinfoUsb = "";
+QString DeviceInfoParser::s_hwinfoHub = "";
 QString DeviceInfoParser::s_hwinfoNetwork = "";
 QString DeviceInfoParser::s_hwinfoKeyboard = "";
 QString DeviceInfoParser::s_hwinfoCdrom = "";
@@ -1162,6 +1163,7 @@ void DeviceInfoParser::loadOtherDevices()
     // 在获取其它设备之前必须先获取硬盘设备
     loadDiskInfo();
     loadPrinterInfoFromHwinfo();
+    loadUSBHubInfoFromHwinfo();
 
 //    loadOtherDevicesFromLshwStorage();
 //    loadOtherDevicesFromLshwGeneric();
@@ -1225,7 +1227,7 @@ void DeviceInfoParser::loadOtherDevicesFromHwinfo()
 
     QStringList paragraphs = s_hwinfoUsb.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
-        if (paragraph.contains("hub", Qt::CaseInsensitive) == false) {
+        /*if (paragraph.contains("Linux Foundation", Qt::CaseInsensitive) == false) */{
             DeviceOthers device;
             device.setInfoFromHwinfo(paragraph);
             if (device.isExist() == false) {
@@ -1496,6 +1498,25 @@ bool DeviceInfoParser::getDeviceInfo(const QString &command, QString &deviceInfo
 #endif
 
     return true;
+}
+
+void DeviceInfoParser::loadUSBHubInfoFromHwinfo()
+{
+    // 获取设备信息
+    if (!getDeviceInfo(QString("hwinfo --hub"), s_hwinfoHub, "hwinfo_hub.txt")) {
+        return;
+    }
+
+    QStringList paragraphs = s_hwinfoHub.split(QString("\n\n"));
+    foreach (const QString &paragraph, paragraphs) {
+        QMap<QString, QString> mapInfo;
+        getMapInfoFromHwinfo(mapInfo, paragraph);
+
+        if (mapInfo["Unique ID"].isEmpty() == false) {
+            DeviceInfoParser::Instance().s_usbDeiveUniq.append(mapInfo["Unique ID"]);
+            DeviceInfoParser::Instance().s_usbDevicebus.append(mapInfo["SysFS BusID"].replace(QRegExp("\\.[0-9]*$"), ""));
+        }
+    }
 }
 
 bool DeviceInfoParser::getRootPassword()
