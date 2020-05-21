@@ -132,8 +132,8 @@ public:
 
 
 protected:
-    void addDeviceAttribute(const QString &name, const QString &value, QList<ArticleStruct> &attributes);
-    void addOtherDeviceAttribute(const DeviceBaseInfo &device, QList<ArticleStruct> &attributes);
+    void addDeviceAttribute(const QString &name, const QString &value, QList<ArticleStruct> &attributes, bool removeZero = false);
+    void addOtherDeviceAttribute(const DeviceBaseInfo &device, QList<ArticleStruct> &attributes, bool removeZero = false);
     void contextMenuEvent(QContextMenuEvent *event) override;
     void showEvent(QShowEvent *event) override;
 

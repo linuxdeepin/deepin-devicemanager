@@ -76,12 +76,12 @@ void MotherboardWidget::addDeviceDetail(const DeviceBios &device, bool withTitle
     QList<ArticleStruct> attributes;
 
     // 添加基本信息
-    addDeviceAttribute(tr("Vendor"), device.vendor(), attributes);
-    addDeviceAttribute(tr("Version"), device.version(), attributes);
-    addDeviceAttribute(tr("Chipset"), device.chipsetFamily(), attributes);
+    addDeviceAttribute(tr("Vendor"), device.vendor(), attributes, true);
+    addDeviceAttribute(tr("Version"), device.version(), attributes, true);
+    addDeviceAttribute(tr("Chipset"), device.chipsetFamily(), attributes, true);
 
     // 添加其他信息
-    addOtherDeviceAttribute(device, attributes);
+    addOtherDeviceAttribute(device, attributes, true);
 
     // 显示到界面
     addSubInfo(withTitle ? device.name() : "", attributes );

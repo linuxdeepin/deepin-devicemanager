@@ -576,17 +576,22 @@ QString DeviceInfoWidgetBase::joinArticle(QList<ArticleStruct> &articles, const 
 
     return res;
 }
-void DeviceInfoWidgetBase::addDeviceAttribute(const QString &name, const QString &value, QList<ArticleStruct> &attributes)
+void DeviceInfoWidgetBase::addDeviceAttribute(const QString &name, const QString &value, QList<ArticleStruct> &attributes, bool removeZero)
 {
     ArticleStruct attribute(name);
     attribute.value = value;
+
+    if (removeZero) {
+        attribute.value.replace(QRegExp("^[0]+$"), "");
+    }
     attributes.append(attribute);
+
 }
-void DeviceInfoWidgetBase::addOtherDeviceAttribute(const DeviceBaseInfo &device, QList<ArticleStruct> &attributes)
+void DeviceInfoWidgetBase::addOtherDeviceAttribute(const DeviceBaseInfo &device, QList<ArticleStruct> &attributes, bool removeZero)
 {
     const QMap<QString, QString> &otherAttribs = device.getOtherAttribs();
     foreach (QString key, otherAttribs.keys()) {
-        addDeviceAttribute(tr(key.toStdString().c_str()), otherAttribs[key], attributes);
+        addDeviceAttribute(tr(key.toStdString().c_str()), otherAttribs[key], attributes, removeZero);
     }
 }
 void DeviceInfoWidgetBase::contextMenuEvent(QContextMenuEvent *event)

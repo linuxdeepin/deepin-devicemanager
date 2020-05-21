@@ -80,32 +80,32 @@ void DisplayadapterWidget::addDeviceDetail(const DeviceGpu &device, bool withTit
     QList<ArticleStruct> attributes;
 
     // 添加基本信息
-    addDeviceAttribute(tr("Name"), device.name(), attributes);
-    addDeviceAttribute(tr("Model"), device.model(), attributes);
-    addDeviceAttribute(tr("Vendor"), device.vendor(), attributes);
-    addDeviceAttribute(tr("Version"), device.version(), attributes);
-    addDeviceAttribute(tr("Graphics Memory"), device.graphicsMemory(), attributes);
-    addDeviceAttribute(tr("Width"), device.busWidth(), attributes);
-    addDeviceAttribute(tr("IRQ"), device.IRQ(), attributes);
-    addDeviceAttribute(tr("Capabilities"), device.capabilities(), attributes);
-    addDeviceAttribute(tr("Display Output"), device.displayOutput(), attributes);
-    addDeviceAttribute(tr("VGA"), device.VGA(), attributes);
-    addDeviceAttribute(tr("HDMI"), device.HDMI(), attributes);
-    addDeviceAttribute(tr("eDP"), device.eDP(), attributes);
-    addDeviceAttribute(tr("DP"), device.displayPort(), attributes);
-    addDeviceAttribute(tr("Clock"), device.clock(), attributes);
-    addDeviceAttribute(tr("Description"), device.description(), attributes);
-    addDeviceAttribute(tr("Driver"), device.driver(), attributes);
-    addDeviceAttribute(tr("Current Resolution"), device.currentResolution(), attributes);
-    addDeviceAttribute(tr("Minimum Resolution"), device.minimumResolution(), attributes);
-    addDeviceAttribute(tr("Maximum Resolution"), device.maximumResolution(), attributes);
-    addDeviceAttribute(tr("Bus Info"), device.busInfo(), attributes);
-    addDeviceAttribute(tr("IO Port"), device.ioPort(), attributes);
-    addDeviceAttribute(tr("Memory"), device.memory(), attributes);
-    addDeviceAttribute(tr("Physical ID"), device.physID(), attributes);
+    addDeviceAttribute(tr("Name"), device.name(), attributes, true);
+    addDeviceAttribute(tr("Model"), device.model(), attributes, true);
+    addDeviceAttribute(tr("Vendor"), device.vendor(), attributes, true);
+    addDeviceAttribute(tr("Version"), device.version(), attributes, true);
+    addDeviceAttribute(tr("Graphics Memory"), device.graphicsMemory(), attributes, true);
+    addDeviceAttribute(tr("Width"), device.busWidth(), attributes, true);
+    addDeviceAttribute(tr("IRQ"), device.IRQ(), attributes, true);
+    addDeviceAttribute(tr("Capabilities"), device.capabilities(), attributes, true);
+    addDeviceAttribute(tr("Display Output"), device.displayOutput(), attributes, true);
+    addDeviceAttribute(tr("VGA"), device.VGA(), attributes, true);
+    addDeviceAttribute(tr("HDMI"), device.HDMI(), attributes, true);
+    addDeviceAttribute(tr("eDP"), device.eDP(), attributes, true);
+    addDeviceAttribute(tr("DP"), device.displayPort(), attributes, true);
+    addDeviceAttribute(tr("Clock"), device.clock(), attributes, true);
+    addDeviceAttribute(tr("Description"), device.description(), attributes, true);
+    addDeviceAttribute(tr("Driver"), device.driver(), attributes, true);
+    addDeviceAttribute(tr("Current Resolution"), device.currentResolution(), attributes, true);
+    addDeviceAttribute(tr("Minimum Resolution"), device.minimumResolution(), attributes, true);
+    addDeviceAttribute(tr("Maximum Resolution"), device.maximumResolution(), attributes, true);
+    addDeviceAttribute(tr("Bus Info"), device.busInfo(), attributes, true);
+    addDeviceAttribute(tr("IO Port"), device.ioPort(), attributes, true);
+    addDeviceAttribute(tr("Memory"), device.memory(), attributes, true);
+    addDeviceAttribute(tr("Physical ID"), device.physID(), attributes, true);
 
     // 添加其他信息
-    addOtherDeviceAttribute(device, attributes);
+    addOtherDeviceAttribute(device, attributes, true);
 
     // 显示到界面
     addSubInfo(withTitle ? device.model() : "", attributes );
