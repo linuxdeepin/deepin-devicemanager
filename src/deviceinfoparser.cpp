@@ -136,7 +136,7 @@ void DeviceInfoParser::clear()
     s_lshwInput = "";
     //s_lshwProcessor = "";
     s_lshwDisk = "";
-    //s_lshwDisplay = "";
+    s_lshwDisplay = "";
     //s_lshwMemory = "";
     s_lshwMultimedia = "";
     s_lshwCommunication = "";
@@ -149,7 +149,7 @@ void DeviceInfoParser::clear()
     s_lsblkD = "";
     s_xrandr = "";
     s_xrandrVerbose = "";
-    //s_dmesg = "";
+    s_dmesg = "";
 
     s_hwinfoMonitor = "";
     s_hwinfoSound = "";
@@ -158,7 +158,7 @@ void DeviceInfoParser::clear()
     s_hwinfoKeyboard = "";
     s_hwinfoCdrom = "";
     s_hwinfoDisk = "";
-    //s_hwinfoDisplay = "";
+    s_hwinfoDisplay = "";
 
     QString defaultLanguage = getenv("LANGUAGE");
     setenv("LANGUAGE", "en_US", 1);
@@ -516,9 +516,9 @@ void DeviceInfoParser::loadDiskInfoFromSmartCtl(QStringList &logicNameList)
 
 void DeviceInfoParser::loadGpuInfo()
 {
-    if (DeviceManager::instance()->getGPUDevices().size() > 0) {
-        return;
-    }
+//    if (DeviceManager::instance()->getGPUDevices().size() > 0) {
+//        return;
+//    }
     loadGpuInfoFromHwinfo();
     loadGpuInfoFromLshw();
     loadGpuInfoFromXrandr();

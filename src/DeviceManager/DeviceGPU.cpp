@@ -15,7 +15,7 @@ void DeviceGpu::initFilterKey()
     addFilterKey(QObject::tr("SubVendor"));
     addFilterKey(QObject::tr("SubDevice"));
     addFilterKey(QObject::tr("Driver Modules"));
-    addFilterKey(QObject::tr("I/O Ports"));
+//    addFilterKey(QObject::tr("I/O Ports"));
     addFilterKey(QObject::tr("Config Status"));
     addFilterKey(QObject::tr("latency"));
 }

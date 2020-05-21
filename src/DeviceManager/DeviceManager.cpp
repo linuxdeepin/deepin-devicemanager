@@ -45,7 +45,7 @@ void DeviceManager::clear()
     //m_ListDeviceComputer.clear();
     //m_ListDeviceNetwork.clear();
     //m_ListDeviceBios.clear();
-    //m_ListDeviceGPU.clear();
+    m_ListDeviceGPU.clear();
     //m_ListDeviceMemory.clear();
     //m_ListDeviceCPU.clear();
 }
