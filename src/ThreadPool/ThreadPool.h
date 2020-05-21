@@ -50,17 +50,24 @@ private:
     ThreadPool          *mp_Parent;
 };
 
-//class CmdTask: public QObject, public QRunnable
-//{
-//    Q_OBJECT
+class CmdTask: public QObject, public QRunnable
+{
+    Q_OBJECT
 
-//public:
-//    CmdTask();
-//    ~CmdTask();
-//protected:
-//    void run();
-//private:
-//};
+public:
+    CmdTask(QString cmd, QString debugFile, QString m_paragraphSplit, QString key, QString st, QString info, ThreadPool *parent = nullptr);
+    ~CmdTask();
+protected:
+    void run();
+private:
+    QString m_Cmd;
+    QString m_DebugFile;
+    QString m_Key;
+    QString m_ST;
+    QString m_Info;
+    QString m_paragraphSplit;
+    ThreadPool          *mp_Parent;
+};
 
 
 
@@ -72,9 +79,14 @@ public:
 
     /**@brief:开始加载信息*/
     void loadDeviceInfo();
+    void loadCmdInfo();
+    void generateInfo();
 
     /**@brief:完成加载信息*/
     void finishedTask(const QString &info);
+    void finishedCmd(const QString &info);
+    void finishedGenerateDevice(const QString &info);
+
 
 signals:
     void finished(const QString &info);
@@ -82,7 +94,9 @@ signals:
 
 private:
     QList<DeviceType>      m_ListDeviceType;
+    QList<DeviceType>      m_ListDeviceTypes;
     int                    m_FinishedNum;
+    QList<QStringList>  m_ListCmd;
 
 };
 

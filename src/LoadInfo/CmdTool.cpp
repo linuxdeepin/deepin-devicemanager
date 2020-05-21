@@ -1,28 +1,75 @@
 #include "CmdTool.h"
 #include <QProcess>
 
+QMap<QString, QList<QMap<QString, QString> > > CmdTool::s_cmdInfo;
+
 CmdTool::CmdTool()
 {
 
 }
 
-void CmdTool::loadCmdInfo(QMap<QString, QMap<QString, QString> > &cmdInfo, const QString &cmd, const QString &key,  SplitType st, const QString &debugFile)
+QMap<QString, QList<QMap<QString, QString> > > &CmdTool::getCmdInfo()
+{
+    return s_cmdInfo;
+}
+
+void CmdTool::loadCmdInfo(const QString &cmd, const QString &key, const QString &paragraphSplit,  KeyValueSplit st, const QString &debugFile)
 {
     if (cmd == "sudo lshw") {
-
+        loadLshwInfo(cmd, paragraphSplit, debugFile);
     } else {
+        if (s_cmdInfo.find(key) != s_cmdInfo.end()) {
+            return;
+        }
         QString deviceInfo;
         getDeviceInfo(cmd, deviceInfo, debugFile);
-        QMap<QString, QString> mapInfo;
-        getMapInfo(st, deviceInfo, mapInfo);
-        cmdInfo.insert(cmd, mapInfo);
+        QStringList items = deviceInfo.split(paragraphSplit);
+        foreach (const QString &item, items) {
+            QMap<QString, QString> mapInfo;
+            getMapInfo(st, item, mapInfo);
+            s_cmdInfo[key].append(mapInfo);
+        }
     }
 }
 
-void CmdTool::getMapInfo(SplitType st, const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
+void CmdTool::loadLshwInfo(const QString &cmd, const QString &paragraphSplit, const QString &debugFile)
+{
+    QString deviceInfo;
+    getDeviceInfo(cmd, deviceInfo, debugFile);
+    QStringList items = deviceInfo.split(paragraphSplit);
+    foreach (const QString &item, items) {
+        QMap<QString, QString> mapInfo;
+        if (item.startsWith("cpu")) {
+            getMapInfoFromLshw(item, mapInfo);
+            s_cmdInfo["lshw_cpu"].append(mapInfo);
+        } else if (item.startsWith("disk")) {
+            getMapInfoFromLshw(item, mapInfo);
+            s_cmdInfo["lshw_disk"].append(mapInfo);
+        } else if ((item.startsWith("memory") && !item.startsWith("memory UNCLAIMED")) || item.startsWith("bank:")) {
+            getMapInfoFromLshw(item, mapInfo);
+            s_cmdInfo["lshw_memory"].append(mapInfo);
+        } else if (item.startsWith("display")) {
+            getMapInfoFromLshw(item, mapInfo);
+            s_cmdInfo["lshw_display"].append(mapInfo);
+        } else if (item.startsWith("multimedia")) {
+            getMapInfoFromLshw(item, mapInfo);
+            s_cmdInfo["lshw_multimedia"].append(mapInfo);
+        } else if (item.startsWith("network")) {
+            getMapInfoFromLshw(item, mapInfo);
+            s_cmdInfo["lshw_network"].append(mapInfo);
+        } else if (item.startsWith("usb:")) {
+            getMapInfoFromLshw(item, mapInfo);
+            s_cmdInfo["lshw_usb"].append(mapInfo);
+        }
+    }
+}
+
+void CmdTool::getMapInfo(KeyValueSplit st, const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
     switch (st) {
     case ST_Null:
+        break;
+    case ST_Common:
         getMapInfoFromCmd(info, mapInfo);
         break;
     case ST_lshw:

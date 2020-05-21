@@ -46,7 +46,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct> &other
 
     ArticleStruct model(tr("Device"));
     model.value += device.vendor() + QString(" ");
-    model.value += device.prodectName() + QString(" ");
+    model.value += device.name() + QString(" ");
     model.value += device.type() + QString(" ");
     articles.push_back(model);
 

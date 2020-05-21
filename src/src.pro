@@ -109,7 +109,8 @@ SOURCES += \
     DeviceManager/DevicePrint.cpp \
     DeviceManager/DeviceComputer.cpp \
     DeviceManager/DeviceCdrom.cpp \
-    LoadInfo/CmdTool.cpp
+    LoadInfo/CmdTool.cpp \
+    LoadInfo/GenerateDevice.cpp
 
 HEADERS += \
     DeviceManager/DeviceInfo.h \
@@ -166,7 +167,8 @@ HEADERS += \
     ThreadPool/ThreadPool.h \
     DeviceManager/DeviceComputer.h \
     DeviceManager/DeviceCdrom.h \
-    LoadInfo/CmdTool.h
+    LoadInfo/CmdTool.h \
+    LoadInfo/GenerateDevice.h
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin
