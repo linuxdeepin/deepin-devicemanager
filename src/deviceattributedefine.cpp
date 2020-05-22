@@ -123,6 +123,10 @@ bool ArticleStruct::isValid()
         return false;
     }
 
+    if ( value.compare(QString("<OUT OF SPEC>"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
     return true;
 }
 

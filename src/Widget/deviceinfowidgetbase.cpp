@@ -583,6 +583,7 @@ void DeviceInfoWidgetBase::addDeviceAttribute(const QString &name, const QString
 
     if (removeZero) {
         attribute.value.replace(QRegExp("^[0]+$"), "");
+        attribute.value.replace(QRegExp("^0 [A-Za-z]{1,2}$"), "");
     }
     attributes.append(attribute);
 
