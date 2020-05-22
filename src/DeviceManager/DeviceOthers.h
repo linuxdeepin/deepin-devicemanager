@@ -9,10 +9,11 @@ public:
 
     /**@brief:设置从lshw获取的信息*/
     void setInfoFromLshw(const QString &info);
+    void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从hwinfo获取的信息*/
     void setInfoFromHwinfo(const QString &info);
-    void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
+    void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:判断hwinfo设备是否存在*/
     bool isExist();

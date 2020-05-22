@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include <QMap>
+#include <QProcess>
+#include <QFile>
+
 enum KeyValueSplit {
     ST_Null = 0,
     ST_Common = 1,
@@ -18,6 +21,7 @@ public:
     CmdTool();
 
     static QMap<QString, QList<QMap<QString, QString> > > &getCmdInfo();
+    static void clear();
 
     /**
      * @brief:通过命令获取设备信息

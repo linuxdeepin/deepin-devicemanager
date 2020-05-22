@@ -107,7 +107,7 @@ void DeviceMonitor::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
 
     // 获取当前分辨率 和 当前支持分辨率
     QStringList listResolution = m_SupportResolution.split(" ");
-//    m_CurrentResolution = listResolution.last();
+    m_CurrentResolution = listResolution.last();
     m_SupportResolution = "";
     foreach (const QString &word, listResolution) {
         if (word.contains("@")) {

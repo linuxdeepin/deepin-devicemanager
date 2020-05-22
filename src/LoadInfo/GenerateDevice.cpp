@@ -233,6 +233,12 @@ void GenerateDevice::generatorCdromDevice()
     getCdromInfoFromLshw();
 }
 
+void GenerateDevice::generatorOthersDevice()
+{
+    getOthersInfoFromHwinfo();
+    getOthersInfoFromLshw();
+}
+
 void GenerateDevice::getBiosInfo()
 {
     const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
@@ -605,4 +611,34 @@ void GenerateDevice::getCdromInfoFromHwinfo()
 void GenerateDevice::getCdromInfoFromLshw()
 {
 
+}
+
+void GenerateDevice::getOthersInfoFromHwinfo()
+{
+    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
+    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_usb"];
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 5) {
+            continue;
+        }
+        if ((*it)["Hardware Class"] != "unknown" || (*it)["Driver"] == "btusb" || (*it)["Driver"] == "snd-usb-audio") {
+            continue;
+        }
+        DeviceOthers device;
+        device.setInfoFromHwinfo(*it);
+        DeviceManager::instance()->addOthersDevice(device);
+    }
+}
+void GenerateDevice::getOthersInfoFromLshw()
+{
+    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
+    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["lshw_usb"];
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 2) {
+            continue;
+        }
+        DeviceManager::instance()->setOthersDeviceInfoFromLshw(*it);
+    }
 }

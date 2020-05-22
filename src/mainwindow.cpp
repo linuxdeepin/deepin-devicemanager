@@ -323,7 +323,7 @@ void MainWindow::refreshDatabase()
 {
     DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     if (mp_ThreadPool) {
-        mp_ThreadPool->loadDeviceInfo();
+        mp_ThreadPool->loadCmdInfo();
     }
 }
 

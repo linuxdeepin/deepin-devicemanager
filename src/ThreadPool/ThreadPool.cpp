@@ -215,6 +215,10 @@ void GenerateTask::run()
         task.generatorCdromDevice();
         mp_Parent->finishedGenerateDevice();
         break;
+    case DT_Others:
+        task.generatorOthersDevice();
+        mp_Parent->finishedGenerateDevice();
+        break;
     }
 }
 
@@ -236,6 +240,7 @@ ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
     m_ListDeviceTypes.push_back(DT_Print);
     m_ListDeviceTypes.push_back(DT_Image);
     m_ListDeviceTypes.push_back(DT_Cdrom);
+    m_ListDeviceTypes.push_back(DT_Others);
 
 
     m_ListDeviceType.push_back(DT_Audio);
@@ -340,6 +345,8 @@ void ThreadPool::loadDeviceInfo()
 
 void ThreadPool::loadCmdInfo()
 {
+    CmdTool::clear();
+    DeviceManager::instance()->clear();
     m_FinishedNum = 0;
     foreach (QStringList item, m_ListCmd) {
         start(new CmdTask(item[0], item[1], item[2], item[3], item[4], item[5], item[6], this));

@@ -1274,7 +1274,7 @@
     </message>
     <message>
         <source>Physical Memory Array</source>
-        <translation>物理内存数组</translation>
+        <translation>内存插槽信息</translation>
     </message>
     <message>
         <source>Release Date</source>
@@ -1507,10 +1507,6 @@
     <message>
         <source>Application</source>
         <translation>应用</translation>
-    </message>
-    <message>
-        <source>I/O Ports</source>
-        <translation>I/O端口</translation>
     </message>
     <message>
         <source>PROP</source>
@@ -1891,6 +1887,73 @@
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>设备管理器是查看、管理硬件设备的工具软件。</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>获取音频设备信息...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>获取BIOS信息...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>获取光驱信息...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>获取蓝牙设备信息...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>获取图像设备信息...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>获取键盘信息...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>获取操作系统信息...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>获取处理器信息...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>获取其他设备信息...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>获取电源信息...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>获取GPU信息...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>获取打印机信息...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>获取内存信息...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>获取显示器信息...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>获取鼠标信息...</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>获取网络适配器信息...</translation>
     </message>
 </context>
 <context>

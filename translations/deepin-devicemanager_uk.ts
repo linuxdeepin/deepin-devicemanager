@@ -1509,10 +1509,6 @@
         <translation>Програма</translation>
     </message>
     <message>
-        <source>I/O Ports</source>
-        <translation>Порти ВВ</translation>
-    </message>
-    <message>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
@@ -1891,6 +1887,73 @@
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>«Керування пристроями» — зручний інструмент для перегляду відомостей щодо обладнання та керування пристроями.</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>Завантажуємо дані щодо звукових пристроїв…</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>Завантажуємо дані BIOS...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>Завантажуємо дані щодо CD-ROM...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>Завантажуємо дані щодо пристроїв Bluetooth…</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>Завантажуємо дані щодо графічних пристроїв…</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>Завантажуємо дані щодо клавіатури…</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>Завантажуємо дані щодо операційної системи…</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>Завантажуємо відомості щодо процесора…</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>Завантажуємо дані щодо інших пристроїв…</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>Завантажуємо дані щодо живлення…</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>Завантажуємо дані щодо графічного процесора…</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>Завантажуємо дані щодо принтерів…</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>Завантажуємо дані щодо пам&apos;яті…</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>Завантажуємо дані щодо монітора…</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>Завантажуємо дані щодо миші…</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>Завантажуємо дані щодо адаптера мережі…</translation>
     </message>
 </context>
 <context>

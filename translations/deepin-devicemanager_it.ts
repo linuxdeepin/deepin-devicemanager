@@ -1509,10 +1509,6 @@
         <translation>Applicazione</translation>
     </message>
     <message>
-        <source>I/O Ports</source>
-        <translation>Porte I/O</translation>
-    </message>
-    <message>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
@@ -1892,6 +1888,73 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Il Gestore Dispositivi è uno strumento utile per visualizzare informazioni sull&apos;hardware e gestire i dispositivi.
 Localizzazione italiana a cura di Massimo A. Carofano.</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>Caricamento info dispositivi audio...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>Caricamento info BIOS...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>Caricamento info CD-ROM...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>Caricamento info dispositivi Bluetooth...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>Caricamento info dispositivo di acquisizione video...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>Caricamento info tastiera...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>Caricamento info Sistema Operativo...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>Caricamento info CPU...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>Caricamento info degli altri dispositivi...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>Caricamento info alimentazione...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>Caricamento info GPU...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>Caricamento info stampanti...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>Caricamento info memoria...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>Caricamento info Monitor...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>Caricamento info mouse...</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>Caricamento info adattatore di rete...</translation>
     </message>
 </context>
 <context>

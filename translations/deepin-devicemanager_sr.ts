@@ -370,19 +370,19 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation type="unfinished"/>
+        <translation>Учитавање GPU података...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation type="unfinished"/>
+        <translation>Учитавање података уређаја за слике...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation type="unfinished"/>
+        <translation>Учитавање података о тастатури...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation type="unfinished"/>
+        <translation>Учитавање података о меморији...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
@@ -390,19 +390,19 @@
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation type="unfinished"/>
+        <translation>Учитавање података о мишу</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation type="unfinished"/>
+        <translation>Учитавање података мрежне картице...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation type="unfinished"/>
+        <translation>Учитавање података осталих уређаја...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation type="unfinished"/>
+        <translation>Учитавање података о напајању...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -484,7 +484,7 @@
     </message>
     <message>
         <source>No GPU found</source>
-        <translation type="unfinished"/>
+        <translation>Није пронађен GPU</translation>
     </message>
     <message>
         <source>Name</source>
@@ -520,7 +520,7 @@
     </message>
     <message>
         <source>Display Output</source>
-        <translation type="unfinished"/>
+        <translation>Излази екрана</translation>
     </message>
     <message>
         <source>VGA</source>
@@ -682,7 +682,7 @@
     </message>
     <message>
         <source>No memory found</source>
-        <translation type="unfinished"/>
+        <translation>Меморија није пронађена</translation>
     </message>
     <message>
         <source>Name</source>
@@ -745,7 +745,7 @@
     </message>
     <message>
         <source>No monitor found</source>
-        <translation type="unfinished"/>
+        <translation>Монитор није пронађен</translation>
     </message>
     <message>
         <source>Name</source>
@@ -757,7 +757,7 @@
     </message>
     <message>
         <source>Product Date</source>
-        <translation type="unfinished"/>
+        <translation> Датум производње</translation>
     </message>
     <message>
         <source>Type</source>
@@ -765,11 +765,11 @@
     </message>
     <message>
         <source>Display Input</source>
-        <translation type="unfinished"/>
+        <translation>Улази екрана</translation>
     </message>
     <message>
         <source>Interface Type</source>
-        <translation type="unfinished"/>
+        <translation>Врста сучеља</translation>
     </message>
     <message>
         <source>Serial Number</source>
@@ -804,7 +804,7 @@
     </message>
     <message>
         <source>No motherboard found</source>
-        <translation type="unfinished"/>
+        <translation>Матична плоча није пронађена</translation>
     </message>
     <message>
         <source>Name</source>
@@ -820,7 +820,7 @@
     </message>
     <message>
         <source>Chipset</source>
-        <translation type="unfinished"/>
+        <translation>Чипсет</translation>
     </message>
 </context>
 <context>
@@ -1097,7 +1097,7 @@
     </message>
     <message>
         <source>Input/Output</source>
-        <translation type="unfinished"/>
+        <translation>Улаз/Излаз</translation>
     </message>
 </context>
 <context>
@@ -1108,7 +1108,7 @@
     </message>
     <message>
         <source>No power info</source>
-        <translation type="unfinished"/>
+        <translation>Нема пдатака о напајању</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1132,7 +1132,7 @@
     </message>
     <message>
         <source>Status</source>
-        <translation>Статус</translation>
+        <translation>Стање</translation>
     </message>
     <message>
         <source>Capacity</source>
@@ -1199,7 +1199,7 @@
     </message>
     <message>
         <source>Interface Type</source>
-        <translation type="unfinished"/>
+        <translation>Врста сучеља</translation>
     </message>
     <message>
         <source>Status</source>
@@ -1207,26 +1207,26 @@
     </message>
     <message>
         <source>URI</source>
-        <translation type="unfinished"/>
+        <translation>URI</translation>
     </message>
     <message>
         <source>Shared</source>
-        <translation type="unfinished"/>
+        <translation>Дељено</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Device Name</source>
-        <translation type="unfinished"/>
+        <translation>Назив уређаја</translation>
     </message>
     <message>
         <source>SubVendor</source>
-        <translation type="unfinished"/>
+        <translation>Под-произвођач</translation>
     </message>
     <message>
         <source>SubDevice</source>
-        <translation type="unfinished"/>
+        <translation>Под-урећај</translation>
     </message>
     <message>
         <source>Driver</source>
@@ -1234,19 +1234,19 @@
     </message>
     <message>
         <source>Driver Modules</source>
-        <translation type="unfinished"/>
+        <translation>Модули управљача</translation>
     </message>
     <message>
         <source>Driver Status</source>
-        <translation type="unfinished"/>
+        <translation>Стање управљача</translation>
     </message>
     <message>
         <source>Driver Activation Cmd</source>
-        <translation type="unfinished"/>
+        <translation>Комада за активирање управљача</translation>
     </message>
     <message>
         <source>Config Status</source>
-        <translation type="unfinished"/>
+        <translation>Стање подешавања</translation>
     </message>
     <message>
         <source>physical id</source>
@@ -1258,11 +1258,11 @@
     </message>
     <message>
         <source>BIOS Information</source>
-        <translation type="unfinished"/>
+        <translation>Подаци БИОС-а</translation>
     </message>
     <message>
         <source>Base Board Information</source>
-        <translation type="unfinished"/>
+        <translation>Подаци основне плоче</translation>
     </message>
     <message>
         <source>System Information</source>
@@ -1274,7 +1274,7 @@
     </message>
     <message>
         <source>Physical Memory Array</source>
-        <translation type="unfinished"/>
+        <translation>Физички меморијски низ</translation>
     </message>
     <message>
         <source>Release Date</source>
@@ -1394,7 +1394,7 @@
     </message>
     <message>
         <source>Error Correction Type</source>
-        <translation type="unfinished"/>
+        <translation>Начин исправљања грешака</translation>
     </message>
     <message>
         <source>Maximum Capacity</source>
@@ -1406,19 +1406,19 @@
     </message>
     <message>
         <source>Number Of Devices</source>
-        <translation type="unfinished"/>
+        <translation>Број уређаја</translation>
     </message>
     <message>
         <source>BIOS ROMSIZE</source>
-        <translation type="unfinished"/>
+        <translation>BIOS ROMSIZE</translation>
     </message>
     <message>
         <source>Release date</source>
-        <translation type="unfinished"/>
+        <translation>Датум објаве</translation>
     </message>
     <message>
         <source>Board name</source>
-        <translation type="unfinished"/>
+        <translation>Назив плоче</translation>
     </message>
     <message>
         <source>Bus</source>
@@ -1426,15 +1426,15 @@
     </message>
     <message>
         <source>BD Address</source>
-        <translation type="unfinished"/>
+        <translation>BD адреса</translation>
     </message>
     <message>
         <source>ACL MTU</source>
-        <translation type="unfinished"/>
+        <translation>ACL MTU</translation>
     </message>
     <message>
         <source>SCO MTU</source>
-        <translation type="unfinished"/>
+        <translation>SCO MTU</translation>
     </message>
     <message>
         <source>Packet type</source>
@@ -1442,15 +1442,15 @@
     </message>
     <message>
         <source>Link policy</source>
-        <translation type="unfinished"/>
+        <translation>Политика везе</translation>
     </message>
     <message>
         <source>Link mode</source>
-        <translation type="unfinished"/>
+        <translation>Режим везе</translation>
     </message>
     <message>
         <source>Class</source>
-        <translation type="unfinished"/>
+        <translation>Класа</translation>
     </message>
     <message>
         <source>Service Classes</source>
@@ -1470,7 +1470,7 @@
     </message>
     <message>
         <source>Subversion</source>
-        <translation type="unfinished"/>
+        <translation>Подверзија</translation>
     </message>
     <message>
         <source>Device</source>
@@ -1490,27 +1490,23 @@
     </message>
     <message>
         <source>Device File</source>
-        <translation type="unfinished"/>
+        <translation>Датотека уређаја</translation>
     </message>
     <message>
         <source>Device Files</source>
-        <translation type="unfinished"/>
+        <translation>Датотеке уређаја</translation>
     </message>
     <message>
         <source>Device Number</source>
-        <translation type="unfinished"/>
+        <translation>Број уређаја</translation>
     </message>
     <message>
         <source>Module Alias</source>
-        <translation type="unfinished"/>
+        <translation>Псеудоним модула</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>I/O Ports</source>
-        <translation type="unfinished"/>
+        <translation>Примена</translation>
     </message>
     <message>
         <source>PROP</source>
@@ -1530,7 +1526,7 @@
     </message>
     <message>
         <source>Hardware Class</source>
-        <translation type="unfinished"/>
+        <translation>Класа уређаја</translation>
     </message>
     <message>
         <source>inch</source>
@@ -1542,11 +1538,11 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation type="unfinished"/>
+        <translation>AC напајање</translation>
     </message>
     <message>
         <source>battery</source>
-        <translation type="unfinished"/>
+        <translation>батерија</translation>
     </message>
     <message>
         <source>native-path</source>
@@ -1554,7 +1550,7 @@
     </message>
     <message>
         <source>power supply</source>
-        <translation type="unfinished"/>
+        <translation>напајање</translation>
     </message>
     <message>
         <source>updated</source>
@@ -1574,7 +1570,7 @@
     </message>
     <message>
         <source>state</source>
-        <translation type="unfinished"/>
+        <translation>стање</translation>
     </message>
     <message>
         <source>warning-level</source>
@@ -1582,7 +1578,7 @@
     </message>
     <message>
         <source>energy</source>
-        <translation type="unfinished"/>
+        <translation>енергија</translation>
     </message>
     <message>
         <source>energy-empty</source>
@@ -1590,11 +1586,11 @@
     </message>
     <message>
         <source>energy-full</source>
-        <translation type="unfinished"/>
+        <translation>пуна-енергија</translation>
     </message>
     <message>
         <source>energy-full-design</source>
-        <translation type="unfinished"/>
+        <translation>пројектована-пуна-енергија</translation>
     </message>
     <message>
         <source>energy-rate</source>
@@ -1606,11 +1602,11 @@
     </message>
     <message>
         <source>percentage</source>
-        <translation type="unfinished"/>
+        <translation>проценат</translation>
     </message>
     <message>
         <source>temperature</source>
-        <translation type="unfinished"/>
+        <translation>температура</translation>
     </message>
     <message>
         <source>technology</source>
@@ -1622,27 +1618,27 @@
     </message>
     <message>
         <source>online</source>
-        <translation>на мрежи</translation>
+        <translation>на-мрежи</translation>
     </message>
     <message>
         <source>daemon-version</source>
-        <translation type="unfinished"/>
+        <translation>верзија-демона</translation>
     </message>
     <message>
         <source>on-battery</source>
-        <translation type="unfinished"/>
+        <translation>на-батерији</translation>
     </message>
     <message>
         <source>lid-is-closed</source>
-        <translation type="unfinished"/>
+        <translation>поклопац-је-затворен</translation>
     </message>
     <message>
         <source>lid-is-present</source>
-        <translation type="unfinished"/>
+        <translation>поклопац-је-присутан</translation>
     </message>
     <message>
         <source>critical-action</source>
-        <translation type="unfinished"/>
+        <translation>критични-поступак</translation>
     </message>
     <message>
         <source>copies</source>
@@ -1650,15 +1646,15 @@
     </message>
     <message>
         <source>job-cancel-after</source>
-        <translation type="unfinished"/>
+        <translation>обустава-задатка-након</translation>
     </message>
     <message>
         <source>job-hold-until</source>
-        <translation type="unfinished"/>
+        <translation>задатак-чека-до</translation>
     </message>
     <message>
         <source>job-priority</source>
-        <translation type="unfinished"/>
+        <translation>приоритет-задатка</translation>
     </message>
     <message>
         <source>marker-change-time</source>
@@ -1738,7 +1734,7 @@
     </message>
     <message>
         <source>Geometry (Logical)</source>
-        <translation type="unfinished"/>
+        <translation>Геометрија (Логичка)</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -1890,7 +1886,74 @@
     </message>
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-        <translation>Управник Уређаја је користан алат за приказ података о хардверу и управљање уређајима.</translation>
+        <translation>Управник Уређаја је користан алат за приказ података о рачунару, апаратури и за управљање уређајима.</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>Учитавање података аудио уређаја...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>Учитавање БИОС података...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>Учитавање ЦД-РОМ података...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>Учитавање података блутут уређаја...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>Учитавање података уређаја за слике...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>Учитавање података о тастатури...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>Учитавање података о оперативном систему...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>Учитавање ЦПЈ података...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>Учитавање података осталих уређаја...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>Учитавање података о напајању...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>Учитавање GPU података...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>Учитавање података штампача...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>Учитавање података о меморији...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>Учитавање података монитора...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>Учитавање података о мишу</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>Учитавање података мрежне картице...</translation>
     </message>
 </context>
 <context>

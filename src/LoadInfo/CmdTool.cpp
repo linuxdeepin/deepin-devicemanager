@@ -1,6 +1,6 @@
 #include "CmdTool.h"
 #include <cups.h>
-#include <QProcess>
+#include "commondefine.h"
 extern void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap);
 extern int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest);
 
@@ -14,6 +14,10 @@ CmdTool::CmdTool()
 QMap<QString, QList<QMap<QString, QString> > > &CmdTool::getCmdInfo()
 {
     return s_cmdInfo;
+}
+void CmdTool::clear()
+{
+    s_cmdInfo.clear();
 }
 
 void CmdTool::loadCmdInfo(const QString &cmd, const QString &key, const QString &paragraphSplit,  KeyValueSplit st,  const QString &ch, const QString &debugFile)
@@ -47,7 +51,27 @@ void CmdTool::loadCmdInfo(const QString &cmd, const QString &key, const QString 
             } else {
                 getMapInfo(st, item, mapInfo, ch);
             }
-            s_cmdInfo[key].append(mapInfo);
+
+            //预防有相同的总线信息
+            if (key == "hwinfo_usb") {
+                QList<QMap<QString, QString>>::iterator it = s_cmdInfo[key].begin();
+                bool add = true;
+                for (; it != s_cmdInfo[key].end(); ++it) {
+                    QString curBus = (*it)["SysFS BusID"];
+                    QString newBus = mapInfo["SysFS BusID"];
+                    curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+                    newBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+                    if (curBus == newBus) {
+                        add = false;
+                        break;
+                    }
+                }
+                if (add) {
+                    s_cmdInfo[key].append(mapInfo);
+                }
+            } else {
+                s_cmdInfo[key].append(mapInfo);
+            }
         }
     }
 }

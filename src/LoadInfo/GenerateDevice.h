@@ -58,6 +58,9 @@ public:
     /**@brief:generator cdrom info*/
     virtual void generatorCdromDevice();
 
+    /**@brief:generator others info*/
+    virtual void generatorOthersDevice();
+
 
 private:
     /**@brief:generator bios info*/
@@ -101,6 +104,9 @@ private:
     /**@brief:generator cdrom info*/
     void getCdromInfoFromHwinfo();
     void getCdromInfoFromLshw();
+    /**@brief:generator others info*/
+    void getOthersInfoFromHwinfo();
+    void getOthersInfoFromLshw();
 };
 
 #endif // GENERATEDEVICE_H

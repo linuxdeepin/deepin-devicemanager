@@ -25,6 +25,23 @@ void DeviceOthers::setInfoFromLshw(const QString &info)
     setAttribute(mapInfo, "logical name", m_LogicalName);
 }
 
+void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    if (m_BusInfo.isEmpty() || m_BusInfo != mapInfo["bus info"]) {
+        return;
+    }
+    setAttribute(mapInfo, "product", m_Name);
+    setAttribute(mapInfo, "vendor", m_Vendor);
+    setAttribute(mapInfo, "product", m_Model);
+    setAttribute(mapInfo, "version", m_Version);
+    setAttribute(mapInfo, "bus info", m_BusInfo);
+    setAttribute(mapInfo, "capabilities", m_Capabilities);
+    setAttribute(mapInfo, "driver", m_Driver);
+    setAttribute(mapInfo, "maxpower", m_MaximumPower);
+    setAttribute(mapInfo, "speed", m_Speed);
+    setAttribute(mapInfo, "logical name", m_LogicalName);
+}
+
 void DeviceOthers::setInfoFromHwinfo(const QString &info)
 {
     QMap<QString, QString> mapInfo;
@@ -53,7 +70,7 @@ void DeviceOthers::setInfoFromHwinfo(const QString &info)
 
 }
 
-void DeviceOthers::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
+void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     // 设置设备基本属性
     setAttribute(mapInfo, "Device", m_Name);
@@ -64,7 +81,8 @@ void DeviceOthers::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
     setAttribute(mapInfo, "Speed", m_Speed);
     setAttribute(mapInfo, "Unique ID", m_UniqID);
 
-    m_BusID = mapInfo["SysFS BusID"].replace(QRegExp("\\.[0-9]*$"), "");
+    m_BusID = mapInfo["SysFS BusID"];
+    m_BusID.replace(QRegExp("\\.[0-9]*$"), "");
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0

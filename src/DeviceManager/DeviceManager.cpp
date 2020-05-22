@@ -42,12 +42,12 @@ void DeviceManager::clear()
     m_ListDeviceCdrom.clear();
 
 
-    //m_ListDeviceComputer.clear();
-    //m_ListDeviceNetwork.clear();
-    //m_ListDeviceBios.clear();
+    m_ListDeviceComputer.clear();
+    m_ListDeviceNetwork.clear();
+    m_ListDeviceBios.clear();
     m_ListDeviceGPU.clear();
-    //m_ListDeviceMemory.clear();
-    //m_ListDeviceCPU.clear();
+    m_ListDeviceMemory.clear();
+    m_ListDeviceCPU.clear();
 }
 
 void DeviceManager::addMouseDevice(const DeviceMouse &device)
@@ -470,6 +470,15 @@ const QList<DeviceOthers> &DeviceManager::getOthersDevices()
 {
     return m_ListDeviceOthers;
 }
+
+void DeviceManager::setOthersDeviceInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceOthers>::iterator it = m_ListDeviceOthers.begin();
+    for (; it != m_ListDeviceOthers.end(); ++it) {
+        (*it).setInfoFromLshw(mapInfo);
+    }
+}
+
 void DeviceManager::addPowerDevice(const DevicePower &device)
 {
     m_ListDevicePower.append(device);

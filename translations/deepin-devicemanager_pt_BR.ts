@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>No audio device found</source>
-        <translation type="unfinished"/>
+        <translation>Nenhum dispositivo de áudio encontrado</translation>
     </message>
     <message>
         <source>Name</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>Capabilities</source>
@@ -86,7 +86,7 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>Capabilities</source>
@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Potência Máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>Capabilities</source>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Potência Máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -184,7 +184,7 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>Capabilities</source>
@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Potência Máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>No CPU found</source>
-        <translation type="unfinished"/>
+        <translation>Nenhuma CPU encontrada</translation>
     </message>
     <message>
         <source>Name</source>
@@ -294,7 +294,7 @@
     </message>
     <message>
         <source>Extensions</source>
-        <translation type="unfinished"/>
+        <translation>Extensões</translation>
     </message>
     <message>
         <source>Flags</source>
@@ -346,19 +346,19 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações do Dispositivo de Áudio...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações da BIOS...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Carregando Informações dos Dispositivos Bluetooth...</translation>
+        <translation>Carregando Informações do Dispositivo Bluetooth...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações do CD-ROM...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
@@ -370,19 +370,19 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações da GPU...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações dos Dispositivos de Imagem...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações do Teclado...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações da Memória...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
@@ -390,19 +390,19 @@
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações do Mouse...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações do Adaptador de Rede...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações de Outros Dispositivos...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation type="unfinished"/>
+        <translation>Carregando Informações de Energia...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -484,7 +484,7 @@
     </message>
     <message>
         <source>No GPU found</source>
-        <translation type="unfinished"/>
+        <translation>Nenhuma GPU encontrada</translation>
     </message>
     <message>
         <source>Name</source>
@@ -504,7 +504,7 @@
     </message>
     <message>
         <source>Graphics Memory</source>
-        <translation type="unfinished"/>
+        <translation>Memória Gráfica</translation>
     </message>
     <message>
         <source>Width</source>
@@ -520,11 +520,11 @@
     </message>
     <message>
         <source>Display Output</source>
-        <translation type="unfinished"/>
+        <translation>Exibir Saída</translation>
     </message>
     <message>
         <source>VGA</source>
-        <translation type="unfinished"/>
+        <translation>VGA</translation>
     </message>
     <message>
         <source>HDMI</source>
@@ -532,11 +532,11 @@
     </message>
     <message>
         <source>eDP</source>
-        <translation type="unfinished"/>
+        <translation>eDP</translation>
     </message>
     <message>
         <source>DP</source>
-        <translation type="unfinished"/>
+        <translation>DP</translation>
     </message>
     <message>
         <source>Clock</source>
@@ -564,11 +564,11 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>IO Port</source>
-        <translation type="unfinished"/>
+        <translation>Porta de E/S</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -611,7 +611,7 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>Capabilities</source>
@@ -623,7 +623,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Potência Máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -682,7 +682,7 @@
     </message>
     <message>
         <source>No memory found</source>
-        <translation type="unfinished"/>
+        <translation>Nenhuma memória encontrada</translation>
     </message>
     <message>
         <source>Name</source>
@@ -745,7 +745,7 @@
     </message>
     <message>
         <source>No monitor found</source>
-        <translation type="unfinished"/>
+        <translation>Nenhum monitor encontrado</translation>
     </message>
     <message>
         <source>Name</source>
@@ -757,7 +757,7 @@
     </message>
     <message>
         <source>Product Date</source>
-        <translation type="unfinished"/>
+        <translation>Data do Produto</translation>
     </message>
     <message>
         <source>Type</source>
@@ -765,7 +765,7 @@
     </message>
     <message>
         <source>Display Input</source>
-        <translation type="unfinished"/>
+        <translation>Exibir Entrada</translation>
     </message>
     <message>
         <source>Interface Type</source>
@@ -820,7 +820,7 @@
     </message>
     <message>
         <source>Chipset</source>
-        <translation type="unfinished"/>
+        <translation>Chipset</translation>
     </message>
 </context>
 <context>
@@ -855,7 +855,7 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>Version</source>
@@ -871,7 +871,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Potência Máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -906,7 +906,7 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>Capabilities</source>
@@ -1018,7 +1018,7 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>Capabilities</source>
@@ -1030,7 +1030,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Potência Máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -1065,7 +1065,7 @@
     </message>
     <message>
         <source>Bus Info</source>
-        <translation>Informação de Barramento</translation>
+        <translation>Informações do Barramento</translation>
     </message>
     <message>
         <source>Capabilities</source>
@@ -1097,7 +1097,7 @@
     </message>
     <message>
         <source>Input/Output</source>
-        <translation type="unfinished"/>
+        <translation>Entrada/Saída</translation>
     </message>
 </context>
 <context>
@@ -1108,7 +1108,7 @@
     </message>
     <message>
         <source>No power info</source>
-        <translation type="unfinished"/>
+        <translation>Nenhuma informação de energia</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1140,7 +1140,7 @@
     </message>
     <message>
         <source>Voltage</source>
-        <translation type="unfinished"/>
+        <translation>Tensão</translation>
     </message>
     <message>
         <source>Slot</source>
@@ -1207,26 +1207,26 @@
     </message>
     <message>
         <source>URI</source>
-        <translation type="unfinished"/>
+        <translation>URI</translation>
     </message>
     <message>
         <source>Shared</source>
-        <translation type="unfinished"/>
+        <translation>Compartilhado</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Device Name</source>
-        <translation type="unfinished"/>
+        <translation>Nome do Dispositivo</translation>
     </message>
     <message>
         <source>SubVendor</source>
-        <translation type="unfinished"/>
+        <translation>Subfabricante</translation>
     </message>
     <message>
         <source>SubDevice</source>
-        <translation type="unfinished"/>
+        <translation>Subdispositivo</translation>
     </message>
     <message>
         <source>Driver</source>
@@ -1234,19 +1234,19 @@
     </message>
     <message>
         <source>Driver Modules</source>
-        <translation type="unfinished"/>
+        <translation>Módulos do Driver</translation>
     </message>
     <message>
         <source>Driver Status</source>
-        <translation type="unfinished"/>
+        <translation>Status do Driver</translation>
     </message>
     <message>
         <source>Driver Activation Cmd</source>
-        <translation type="unfinished"/>
+        <translation>Cmd de Ativação do Driver</translation>
     </message>
     <message>
         <source>Config Status</source>
-        <translation type="unfinished"/>
+        <translation>Status da Configuração</translation>
     </message>
     <message>
         <source>physical id</source>
@@ -1258,11 +1258,11 @@
     </message>
     <message>
         <source>BIOS Information</source>
-        <translation type="unfinished"/>
+        <translation>Informações da BIOS</translation>
     </message>
     <message>
         <source>Base Board Information</source>
-        <translation type="unfinished"/>
+        <translation>Informações da Placa de Base</translation>
     </message>
     <message>
         <source>System Information</source>
@@ -1274,7 +1274,7 @@
     </message>
     <message>
         <source>Physical Memory Array</source>
-        <translation type="unfinished"/>
+        <translation>Conjunto de Memória Física</translation>
     </message>
     <message>
         <source>Release Date</source>
@@ -1394,7 +1394,7 @@
     </message>
     <message>
         <source>Error Correction Type</source>
-        <translation type="unfinished"/>
+        <translation>Tipo de Erro da Correção</translation>
     </message>
     <message>
         <source>Maximum Capacity</source>
@@ -1406,19 +1406,19 @@
     </message>
     <message>
         <source>Number Of Devices</source>
-        <translation type="unfinished"/>
+        <translation>Número de Dispositivos</translation>
     </message>
     <message>
         <source>BIOS ROMSIZE</source>
-        <translation type="unfinished"/>
+        <translation>TAMANHO DA ROM DA BIOS</translation>
     </message>
     <message>
         <source>Release date</source>
-        <translation type="unfinished"/>
+        <translation>Data de lançamento</translation>
     </message>
     <message>
         <source>Board name</source>
-        <translation type="unfinished"/>
+        <translation>Nome da placa</translation>
     </message>
     <message>
         <source>Bus</source>
@@ -1426,15 +1426,15 @@
     </message>
     <message>
         <source>BD Address</source>
-        <translation type="unfinished"/>
+        <translation>Endereço BD</translation>
     </message>
     <message>
         <source>ACL MTU</source>
-        <translation type="unfinished"/>
+        <translation>ACL MTU</translation>
     </message>
     <message>
         <source>SCO MTU</source>
-        <translation type="unfinished"/>
+        <translation>SCO MTU</translation>
     </message>
     <message>
         <source>Packet type</source>
@@ -1442,15 +1442,15 @@
     </message>
     <message>
         <source>Link policy</source>
-        <translation type="unfinished"/>
+        <translation>Política de link</translation>
     </message>
     <message>
         <source>Link mode</source>
-        <translation type="unfinished"/>
+        <translation>Modo de link</translation>
     </message>
     <message>
         <source>Class</source>
-        <translation type="unfinished"/>
+        <translation>Classe</translation>
     </message>
     <message>
         <source>Service Classes</source>
@@ -1470,7 +1470,7 @@
     </message>
     <message>
         <source>Subversion</source>
-        <translation type="unfinished"/>
+        <translation>Subversão</translation>
     </message>
     <message>
         <source>Device</source>
@@ -1490,27 +1490,23 @@
     </message>
     <message>
         <source>Device File</source>
-        <translation type="unfinished"/>
+        <translation>Arquivo do Dispositivo</translation>
     </message>
     <message>
         <source>Device Files</source>
-        <translation type="unfinished"/>
+        <translation>Arquivos do Dispositivo</translation>
     </message>
     <message>
         <source>Device Number</source>
-        <translation type="unfinished"/>
+        <translation>Número do Dispositivo</translation>
     </message>
     <message>
         <source>Module Alias</source>
-        <translation type="unfinished"/>
+        <translation>Pseudônimo do Módulo</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>I/O Ports</source>
-        <translation type="unfinished"/>
+        <translation>Aplicativo</translation>
     </message>
     <message>
         <source>PROP</source>
@@ -1530,7 +1526,7 @@
     </message>
     <message>
         <source>Hardware Class</source>
-        <translation type="unfinished"/>
+        <translation>Classe do Hardware</translation>
     </message>
     <message>
         <source>inch</source>
@@ -1542,11 +1538,11 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation type="unfinished"/>
+        <translation>Energia CA</translation>
     </message>
     <message>
         <source>battery</source>
-        <translation type="unfinished"/>
+        <translation>bateria</translation>
     </message>
     <message>
         <source>native-path</source>
@@ -1554,7 +1550,7 @@
     </message>
     <message>
         <source>power supply</source>
-        <translation type="unfinished"/>
+        <translation>fonte de energia</translation>
     </message>
     <message>
         <source>updated</source>
@@ -1574,7 +1570,7 @@
     </message>
     <message>
         <source>state</source>
-        <translation type="unfinished"/>
+        <translation>estado</translation>
     </message>
     <message>
         <source>warning-level</source>
@@ -1582,7 +1578,7 @@
     </message>
     <message>
         <source>energy</source>
-        <translation type="unfinished"/>
+        <translation>energia</translation>
     </message>
     <message>
         <source>energy-empty</source>
@@ -1590,11 +1586,11 @@
     </message>
     <message>
         <source>energy-full</source>
-        <translation type="unfinished"/>
+        <translation>energy-full</translation>
     </message>
     <message>
         <source>energy-full-design</source>
-        <translation type="unfinished"/>
+        <translation>energy-full-design</translation>
     </message>
     <message>
         <source>energy-rate</source>
@@ -1606,11 +1602,11 @@
     </message>
     <message>
         <source>percentage</source>
-        <translation type="unfinished"/>
+        <translation>porcentagem</translation>
     </message>
     <message>
         <source>temperature</source>
-        <translation type="unfinished"/>
+        <translation>temperatura</translation>
     </message>
     <message>
         <source>technology</source>
@@ -1626,23 +1622,23 @@
     </message>
     <message>
         <source>daemon-version</source>
-        <translation type="unfinished"/>
+        <translation>daemon-version</translation>
     </message>
     <message>
         <source>on-battery</source>
-        <translation type="unfinished"/>
+        <translation>on-battery</translation>
     </message>
     <message>
         <source>lid-is-closed</source>
-        <translation type="unfinished"/>
+        <translation>lid-is-closed</translation>
     </message>
     <message>
         <source>lid-is-present</source>
-        <translation type="unfinished"/>
+        <translation>lid-is-present</translation>
     </message>
     <message>
         <source>critical-action</source>
-        <translation type="unfinished"/>
+        <translation>critical-action</translation>
     </message>
     <message>
         <source>copies</source>
@@ -1650,15 +1646,15 @@
     </message>
     <message>
         <source>job-cancel-after</source>
-        <translation type="unfinished"/>
+        <translation>job-cancel-after</translation>
     </message>
     <message>
         <source>job-hold-until</source>
-        <translation type="unfinished"/>
+        <translation>job-hold-until</translation>
     </message>
     <message>
         <source>job-priority</source>
-        <translation type="unfinished"/>
+        <translation>job-priority</translation>
     </message>
     <message>
         <source>marker-change-time</source>
@@ -1718,7 +1714,7 @@
     </message>
     <message>
         <source>bus info</source>
-        <translation>informações de barramento</translation>
+        <translation>informações do barramento</translation>
     </message>
     <message>
         <source>logical name</source>
@@ -1738,7 +1734,7 @@
     </message>
     <message>
         <source>Geometry (Logical)</source>
-        <translation type="unfinished"/>
+        <translation>Geometria (lógica)</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -1891,6 +1887,73 @@
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>O Gerenciador de Dispositivos é uma ferramenta útil para exibir informações de hardware e gerenciar os dispositivos.</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>Carregando Informações do Dispositivo de Áudio...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>Carregando Informações da BIOS...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>Carregando Informações do CD-ROM...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>Carregando Informações do Dispositivo Bluetooth...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>Carregando Informações dos Dispositivos de Imagem...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>Carregando Informações do Teclado...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>Carregando Informações do Sistema Operacional...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>Carregando Informações da CPU...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>Carregando Informações de Outros Dispositivos...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>Carregando Informações de Energia...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>Carregando Informações da GPU...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>Carregando Informações da Impressora...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>Carregando Informações da Memória...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>Carregando Informações do Monitor...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>Carregando Informações do Mouse...</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>Carregando Informações do Adaptador de Rede...</translation>
     </message>
 </context>
 <context>

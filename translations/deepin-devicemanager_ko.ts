@@ -1509,10 +1509,6 @@
         <translation>응용 프로그램</translation>
     </message>
     <message>
-        <source>I/O Ports</source>
-        <translation>I/O 포트</translation>
-    </message>
-    <message>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
@@ -1891,6 +1887,73 @@
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>장치 관리자는 하드웨어 정보를 보고 장치를 관리하기 위한 편리한 도구입니다.</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>오디오 장치 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>BIOS 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>CD-ROM 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>블루투스 장치 정보불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>이미지 장치 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>키보드 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>운영 체제 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>CPU 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>기타 장치 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>전원 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>GPU 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>프린터 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>메모리 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>모니터 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>마우스 정보 불러오는 중...</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>네트워크 정보 불러오는 중...</translation>
     </message>
 </context>
 <context>

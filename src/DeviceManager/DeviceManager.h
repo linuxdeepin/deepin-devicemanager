@@ -128,6 +128,7 @@ public:
     void addOthersDevice(const DeviceOthers &device);
     void addOthersDeviceFromHwinfo(const DeviceOthers &device);
     const QList<DeviceOthers> &getOthersDevices();
+    void setOthersDeviceInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     // 电源设备相关
     void addPowerDevice(const DevicePower &device);

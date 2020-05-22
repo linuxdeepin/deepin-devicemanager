@@ -1509,10 +1509,6 @@
         <translation>Aplicació</translation>
     </message>
     <message>
-        <source>I/O Ports</source>
-        <translation>Port d&apos;E/S</translation>
-    </message>
-    <message>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
@@ -1891,6 +1887,73 @@
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>El Gestor de dispositius és una eina pràctica per veure la informació del maquinari i gestionar els dispositius.</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>Es carrega la informació del dispositiu d&apos;àudio...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>Es carrega la informació del BIOS...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>Es carrega la informació del CD_ROM...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>Es carrega la informació del dispositiu de Bluetooth...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>Es carrega la informació dels dispositius d&apos;imatge...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>Es carrega la informació del teclat...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>Es carrega la informació del sistema operatiu...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>Es carrega la informació de la CPU...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>Es carrega la informació d&apos;altres dispositius...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>Es carrega la informació d&apos;energia...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>Es carrega la informació de la CPU...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>Es carrega la informació de la impressora...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>Es carrega la informació de la memòria...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>Es carrega la informació del monitor...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>Es carrega la informació del ratolí...</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>Es carrega la informació de l&apos;adaptador de xarxa...</translation>
     </message>
 </context>
 <context>

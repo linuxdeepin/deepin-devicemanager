@@ -1509,10 +1509,6 @@
         <translation>Uygulama</translation>
     </message>
     <message>
-        <source>I/O Ports</source>
-        <translation>I/O Portları</translation>
-    </message>
-    <message>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
@@ -1891,6 +1887,73 @@
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Aygıt Yöneticisi, donanım bilgilerini görüntülemek ve aygıtları yönetmek için kullanışlı bir araçtır.</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>Ses Aygıtı Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>BIOS Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>CD-ROM Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>Bluetooth Aygıt Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>Görüntü Aygıtları Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>Klavye Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>İşletim Sistemi Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>CPU Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>Diğer Aygıt Bilgileri Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>Güç Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>GPU Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>Yazıcı Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>Bellek Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>Ekran Bilgisi yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>Fare Bilgisi Yükleniyor...</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>Ağ Adaptörü Bilgisi Yükleniyor...</translation>
     </message>
 </context>
 <context>

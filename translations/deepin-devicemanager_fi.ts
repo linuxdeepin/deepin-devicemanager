@@ -1509,10 +1509,6 @@
         <translation>Sovellus</translation>
     </message>
     <message>
-        <source>I/O Ports</source>
-        <translation>I/O-portit</translation>
-    </message>
-    <message>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
@@ -1891,6 +1887,73 @@
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Laitehallinta on kätevä työkalu laittetietojen tarkastelemiseen ja laitteiden hallintaan.</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>Ladataan äänilaitteen tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>Ladataan BIOS-tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>Ladataan CD-ROM-tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>Ladataan Bluetooth-laitteen tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>Ladataan kuvalaitteiden tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>Ladataan näppäimistön tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>Ladataan käyttöjärjestelmän tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>Ladataan prosessorin tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>Ladataan muiden laitteiden tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>Ladataan virtatietoja...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>Ladataan GPU-tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>Ladataan tulostintietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>Ladataan muistin tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>Ladataan näytön tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>Ladataan hiiren tietoja...</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>Ladataan verkkokortin tietoja...</translation>
     </message>
 </context>
 <context>

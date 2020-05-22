@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>No audio device found</source>
-        <translation type="unfinished"/>
+        <translation>Geen audio-apparaat aangetroffen</translation>
     </message>
     <message>
         <source>Name</source>
@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Maximale energie</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Maximale energie</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Maximale energie</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>No CPU found</source>
-        <translation type="unfinished"/>
+        <translation>Geen processor aangetroffen</translation>
     </message>
     <message>
         <source>Name</source>
@@ -294,7 +294,7 @@
     </message>
     <message>
         <source>Extensions</source>
-        <translation type="unfinished"/>
+        <translation>Uitbreidingen</translation>
     </message>
     <message>
         <source>Flags</source>
@@ -346,11 +346,11 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van audio-apparaten...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van BIOS-informatie...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
@@ -358,7 +358,7 @@
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van cd-rominformatie...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
@@ -370,19 +370,19 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van videokaartinformatie...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van afbeeldingsapparaten...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van toetsenbordinformatie...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van geheugeninformatie...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
@@ -390,19 +390,19 @@
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van muisinformatie...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van netwerkadapters...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van overige apparaten...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation type="unfinished"/>
+        <translation>Bezig met laden van energie-informatie...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -484,7 +484,7 @@
     </message>
     <message>
         <source>No GPU found</source>
-        <translation type="unfinished"/>
+        <translation>Geen videokaart aangetroffen</translation>
     </message>
     <message>
         <source>Name</source>
@@ -504,7 +504,7 @@
     </message>
     <message>
         <source>Graphics Memory</source>
-        <translation type="unfinished"/>
+        <translation>Videokaartgeheugen</translation>
     </message>
     <message>
         <source>Width</source>
@@ -520,23 +520,23 @@
     </message>
     <message>
         <source>Display Output</source>
-        <translation type="unfinished"/>
+        <translation>Schermuitvoer</translation>
     </message>
     <message>
         <source>VGA</source>
-        <translation type="unfinished"/>
+        <translation>VGA</translation>
     </message>
     <message>
         <source>HDMI</source>
-        <translation type="unfinished"/>
+        <translation>HDMI</translation>
     </message>
     <message>
         <source>eDP</source>
-        <translation type="unfinished"/>
+        <translation>eDP</translation>
     </message>
     <message>
         <source>DP</source>
-        <translation type="unfinished"/>
+        <translation>DP</translation>
     </message>
     <message>
         <source>Clock</source>
@@ -552,7 +552,7 @@
     </message>
     <message>
         <source>Current Resolution</source>
-        <translation type="unfinished"/>
+        <translation>Huidige resolutie</translation>
     </message>
     <message>
         <source>Minimum Resolution</source>
@@ -568,7 +568,7 @@
     </message>
     <message>
         <source>IO Port</source>
-        <translation type="unfinished"/>
+        <translation>I/O-poort</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -623,7 +623,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Maximale energie</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -682,7 +682,7 @@
     </message>
     <message>
         <source>No memory found</source>
-        <translation type="unfinished"/>
+        <translation>Geen geheugen aangetroffen</translation>
     </message>
     <message>
         <source>Name</source>
@@ -745,7 +745,7 @@
     </message>
     <message>
         <source>No monitor found</source>
-        <translation type="unfinished"/>
+        <translation>Geen beeldscherm aangetroffen</translation>
     </message>
     <message>
         <source>Name</source>
@@ -757,7 +757,7 @@
     </message>
     <message>
         <source>Product Date</source>
-        <translation type="unfinished"/>
+        <translation>Productiedatum</translation>
     </message>
     <message>
         <source>Type</source>
@@ -765,11 +765,11 @@
     </message>
     <message>
         <source>Display Input</source>
-        <translation type="unfinished"/>
+        <translation>Scherminvoer</translation>
     </message>
     <message>
         <source>Interface Type</source>
-        <translation type="unfinished"/>
+        <translation>Soort interface</translation>
     </message>
     <message>
         <source>Serial Number</source>
@@ -789,7 +789,7 @@
     </message>
     <message>
         <source>Current Resolution</source>
-        <translation type="unfinished"/>
+        <translation>Huidige resolutie</translation>
     </message>
     <message>
         <source>Support Resolution</source>
@@ -804,7 +804,7 @@
     </message>
     <message>
         <source>No motherboard found</source>
-        <translation type="unfinished"/>
+        <translation>Geen moederbord aangetroffen</translation>
     </message>
     <message>
         <source>Name</source>
@@ -820,7 +820,7 @@
     </message>
     <message>
         <source>Chipset</source>
-        <translation type="unfinished"/>
+        <translation>Chipset</translation>
     </message>
 </context>
 <context>
@@ -871,7 +871,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Maximale energie</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -1030,7 +1030,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation type="unfinished"/>
+        <translation>Maximale energie</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -1097,7 +1097,7 @@
     </message>
     <message>
         <source>Input/Output</source>
-        <translation type="unfinished"/>
+        <translation>Invoer/Uitvoer</translation>
     </message>
 </context>
 <context>
@@ -1108,7 +1108,7 @@
     </message>
     <message>
         <source>No power info</source>
-        <translation type="unfinished"/>
+        <translation>Geen energie-informatie</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1140,7 +1140,7 @@
     </message>
     <message>
         <source>Voltage</source>
-        <translation type="unfinished"/>
+        <translation>Voltage</translation>
     </message>
     <message>
         <source>Slot</source>
@@ -1199,7 +1199,7 @@
     </message>
     <message>
         <source>Interface Type</source>
-        <translation type="unfinished"/>
+        <translation>Soort interface</translation>
     </message>
     <message>
         <source>Status</source>
@@ -1207,26 +1207,26 @@
     </message>
     <message>
         <source>URI</source>
-        <translation type="unfinished"/>
+        <translation>URI</translation>
     </message>
     <message>
         <source>Shared</source>
-        <translation type="unfinished"/>
+        <translation>Gedeeld</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Device Name</source>
-        <translation type="unfinished"/>
+        <translation>Apparaatnaam</translation>
     </message>
     <message>
         <source>SubVendor</source>
-        <translation type="unfinished"/>
+        <translation>Submaker</translation>
     </message>
     <message>
         <source>SubDevice</source>
-        <translation type="unfinished"/>
+        <translation>Subapparaat</translation>
     </message>
     <message>
         <source>Driver</source>
@@ -1234,19 +1234,19 @@
     </message>
     <message>
         <source>Driver Modules</source>
-        <translation type="unfinished"/>
+        <translation>Stuurprogrammamodules</translation>
     </message>
     <message>
         <source>Driver Status</source>
-        <translation type="unfinished"/>
+        <translation>Stuurprogrammastatus</translation>
     </message>
     <message>
         <source>Driver Activation Cmd</source>
-        <translation type="unfinished"/>
+        <translation>Stuurprogramma-activatie</translation>
     </message>
     <message>
         <source>Config Status</source>
-        <translation type="unfinished"/>
+        <translation>Configuratiestatus</translation>
     </message>
     <message>
         <source>physical id</source>
@@ -1258,11 +1258,11 @@
     </message>
     <message>
         <source>BIOS Information</source>
-        <translation type="unfinished"/>
+        <translation>BIOS-informatie</translation>
     </message>
     <message>
         <source>Base Board Information</source>
-        <translation type="unfinished"/>
+        <translation>Basisbordinformatie</translation>
     </message>
     <message>
         <source>System Information</source>
@@ -1274,7 +1274,7 @@
     </message>
     <message>
         <source>Physical Memory Array</source>
-        <translation type="unfinished"/>
+        <translation>Fysieke geheugenreeks</translation>
     </message>
     <message>
         <source>Release Date</source>
@@ -1394,7 +1394,7 @@
     </message>
     <message>
         <source>Error Correction Type</source>
-        <translation type="unfinished"/>
+        <translation>Foutieve correctie</translation>
     </message>
     <message>
         <source>Maximum Capacity</source>
@@ -1406,19 +1406,19 @@
     </message>
     <message>
         <source>Number Of Devices</source>
-        <translation type="unfinished"/>
+        <translation>Aantal apparaten</translation>
     </message>
     <message>
         <source>BIOS ROMSIZE</source>
-        <translation type="unfinished"/>
+        <translation>BIOS-ROM-grootte</translation>
     </message>
     <message>
         <source>Release date</source>
-        <translation type="unfinished"/>
+        <translation>Uitgebracht op</translation>
     </message>
     <message>
         <source>Board name</source>
-        <translation type="unfinished"/>
+        <translation>Bordnaam</translation>
     </message>
     <message>
         <source>Bus</source>
@@ -1426,15 +1426,15 @@
     </message>
     <message>
         <source>BD Address</source>
-        <translation type="unfinished"/>
+        <translation>BD-adres</translation>
     </message>
     <message>
         <source>ACL MTU</source>
-        <translation type="unfinished"/>
+        <translation>ACL MTU</translation>
     </message>
     <message>
         <source>SCO MTU</source>
-        <translation type="unfinished"/>
+        <translation>SCO MTU</translation>
     </message>
     <message>
         <source>Packet type</source>
@@ -1442,15 +1442,15 @@
     </message>
     <message>
         <source>Link policy</source>
-        <translation type="unfinished"/>
+        <translation>Koppelbeleid</translation>
     </message>
     <message>
         <source>Link mode</source>
-        <translation type="unfinished"/>
+        <translation>Koppelmodus</translation>
     </message>
     <message>
         <source>Class</source>
-        <translation type="unfinished"/>
+        <translation>Klasse</translation>
     </message>
     <message>
         <source>Service Classes</source>
@@ -1470,7 +1470,7 @@
     </message>
     <message>
         <source>Subversion</source>
-        <translation type="unfinished"/>
+        <translation>Subversie</translation>
     </message>
     <message>
         <source>Device</source>
@@ -1490,27 +1490,23 @@
     </message>
     <message>
         <source>Device File</source>
-        <translation type="unfinished"/>
+        <translation>Apparaatbestand</translation>
     </message>
     <message>
         <source>Device Files</source>
-        <translation type="unfinished"/>
+        <translation>Apparaatbestanden</translation>
     </message>
     <message>
         <source>Device Number</source>
-        <translation type="unfinished"/>
+        <translation>Apparaatnummer</translation>
     </message>
     <message>
         <source>Module Alias</source>
-        <translation type="unfinished"/>
+        <translation>Module-alias</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>I/O Ports</source>
-        <translation type="unfinished"/>
+        <translation>Applicatie</translation>
     </message>
     <message>
         <source>PROP</source>
@@ -1530,7 +1526,7 @@
     </message>
     <message>
         <source>Hardware Class</source>
-        <translation type="unfinished"/>
+        <translation>Hardwareklasse</translation>
     </message>
     <message>
         <source>inch</source>
@@ -1542,11 +1538,11 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation type="unfinished"/>
+        <translation>Netstroom</translation>
     </message>
     <message>
         <source>battery</source>
-        <translation type="unfinished"/>
+        <translation>accu</translation>
     </message>
     <message>
         <source>native-path</source>
@@ -1554,7 +1550,7 @@
     </message>
     <message>
         <source>power supply</source>
-        <translation type="unfinished"/>
+        <translation>voeding</translation>
     </message>
     <message>
         <source>updated</source>
@@ -1574,7 +1570,7 @@
     </message>
     <message>
         <source>state</source>
-        <translation type="unfinished"/>
+        <translation>status</translation>
     </message>
     <message>
         <source>warning-level</source>
@@ -1582,7 +1578,7 @@
     </message>
     <message>
         <source>energy</source>
-        <translation type="unfinished"/>
+        <translation>energie</translation>
     </message>
     <message>
         <source>energy-empty</source>
@@ -1590,11 +1586,11 @@
     </message>
     <message>
         <source>energy-full</source>
-        <translation type="unfinished"/>
+        <translation>opgeladen</translation>
     </message>
     <message>
         <source>energy-full-design</source>
-        <translation type="unfinished"/>
+        <translation>opgeladen</translation>
     </message>
     <message>
         <source>energy-rate</source>
@@ -1606,11 +1602,11 @@
     </message>
     <message>
         <source>percentage</source>
-        <translation type="unfinished"/>
+        <translation>percentage</translation>
     </message>
     <message>
         <source>temperature</source>
-        <translation type="unfinished"/>
+        <translation>temperatuur</translation>
     </message>
     <message>
         <source>technology</source>
@@ -1626,23 +1622,23 @@
     </message>
     <message>
         <source>daemon-version</source>
-        <translation type="unfinished"/>
+        <translation>achtergronddienstversie</translation>
     </message>
     <message>
         <source>on-battery</source>
-        <translation type="unfinished"/>
+        <translation>op accu</translation>
     </message>
     <message>
         <source>lid-is-closed</source>
-        <translation type="unfinished"/>
+        <translation>deksel is gesloten</translation>
     </message>
     <message>
         <source>lid-is-present</source>
-        <translation type="unfinished"/>
+        <translation>deksel is aanwezig</translation>
     </message>
     <message>
         <source>critical-action</source>
-        <translation type="unfinished"/>
+        <translation>kritieke actie</translation>
     </message>
     <message>
         <source>copies</source>
@@ -1650,15 +1646,15 @@
     </message>
     <message>
         <source>job-cancel-after</source>
-        <translation type="unfinished"/>
+        <translation>taak breekt af na</translation>
     </message>
     <message>
         <source>job-hold-until</source>
-        <translation type="unfinished"/>
+        <translation>taak wordt vastgehouden tot</translation>
     </message>
     <message>
         <source>job-priority</source>
-        <translation type="unfinished"/>
+        <translation>taakprioriteit</translation>
     </message>
     <message>
         <source>marker-change-time</source>
@@ -1738,7 +1734,7 @@
     </message>
     <message>
         <source>Geometry (Logical)</source>
-        <translation type="unfinished"/>
+        <translation>Afmetingen (logisch)</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -1891,6 +1887,73 @@
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Apparaatbeheer is een programma dat hardware-informatie toont en apparaten kan beheren.</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>Bezig met laden van audio-apparaten...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>Bezig met laden van BIOS-informatie...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>Bezig met laden van cd-rominformatie...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>Bezig met laden van Bluetooth-apparaten...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>Bezig met laden van afbeeldingsapparaten...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>Bezig met laden van toetsenbordinformatie...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>Bezig met laden van besturingssysteeminformatie...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>Bezig met laden van processorinformatie...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>Bezig met laden van overige apparaten...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>Bezig met laden van energie-informatie...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>Bezig met laden van videokaartinformatie...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>Bezig met laden van printers...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>Bezig met laden van geheugeninformatie...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>Bezig met laden van beeldscherminformatie...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>Bezig met laden van muisinformatie...</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>Bezig met laden van netwerkadapters...</translation>
     </message>
 </context>
 <context>

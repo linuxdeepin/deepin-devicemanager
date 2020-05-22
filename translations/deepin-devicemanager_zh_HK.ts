@@ -1509,10 +1509,6 @@
         <translation>應用</translation>
     </message>
     <message>
-        <source>I/O Ports</source>
-        <translation>I/O端口</translation>
-    </message>
-    <message>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
@@ -1891,6 +1887,73 @@
     <message>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>設備管理器是查看、管理硬件設備的工具軟件。</translation>
+    </message>
+</context>
+<context>
+    <name>ThreadPool</name>
+    <message>
+        <source>Loading Audio Device Info...</source>
+        <translation>獲取音頻設備訊息...</translation>
+    </message>
+    <message>
+        <source>Loading BIOS Info...</source>
+        <translation>獲取BIOS訊息...</translation>
+    </message>
+    <message>
+        <source>Loading CD-ROM Info...</source>
+        <translation>獲取光驅訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Bluetooth Device Info...</source>
+        <translation>獲取藍牙設備訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Image Devices Info...</source>
+        <translation>獲取圖像設備訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Keyboard Info...</source>
+        <translation>獲取鍵盤訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Operating System Info...</source>
+        <translation>獲取操作系統訊息...</translation>
+    </message>
+    <message>
+        <source>Loading CPU Info...</source>
+        <translation>獲取處理器訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Other Devices Info...</source>
+        <translation>獲取其他設備訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Power Info...</source>
+        <translation>獲取電源訊息...</translation>
+    </message>
+    <message>
+        <source>Loading GPU Info...</source>
+        <translation>獲取GPU訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Printer Info...</source>
+        <translation>獲取打印機訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Memory Info...</source>
+        <translation>獲取內存訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Monitor Info...</source>
+        <translation>獲取顯示器訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Mouse Info...</source>
+        <translation>獲取鼠標訊息...</translation>
+    </message>
+    <message>
+        <source>Loading Network Adapter Info...</source>
+        <translation>獲取網絡適配器訊息...</translation>
     </message>
 </context>
 <context>
