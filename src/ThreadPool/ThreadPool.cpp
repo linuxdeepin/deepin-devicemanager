@@ -207,6 +207,14 @@ void GenerateTask::run()
         task.generatorPrinterDevice();
         mp_Parent->finishedGenerateDevice();
         break;
+    case DT_Image:
+        task.generatorCameraDevice();
+        mp_Parent->finishedGenerateDevice();
+        break;
+    case DT_Cdrom:
+        task.generatorCdromDevice();
+        mp_Parent->finishedGenerateDevice();
+        break;
     }
 }
 
@@ -226,6 +234,8 @@ ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
     m_ListDeviceTypes.push_back(DT_Keyboard);
     m_ListDeviceTypes.push_back(DT_Mouse);
     m_ListDeviceTypes.push_back(DT_Print);
+    m_ListDeviceTypes.push_back(DT_Image);
+    m_ListDeviceTypes.push_back(DT_Cdrom);
 
 
     m_ListDeviceType.push_back(DT_Audio);

@@ -74,6 +74,9 @@ bool DeviceAudio::setInfoFromLshw(const QString &info)
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "version", m_Version);
+    if (m_Version == "00") {
+        m_Version = "";
+    }
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "", m_Irq);
     setAttribute(mapInfo, "", m_Memory);

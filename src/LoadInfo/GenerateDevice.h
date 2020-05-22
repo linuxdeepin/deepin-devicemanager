@@ -52,6 +52,12 @@ public:
     /**@brief:generator printer info*/
     virtual void generatorPrinterDevice();
 
+    /**@brief:generator camera info*/
+    virtual void generatorCameraDevice();
+
+    /**@brief:generator cdrom info*/
+    virtual void generatorCdromDevice();
+
 
 private:
     /**@brief:generator bios info*/
@@ -89,7 +95,12 @@ private:
     void getMouseInfoFromHwinfo();
     void getMouseInfoFromLshw();
     void getMouseInfoFromCatDevices();
-
+    /**@brief:generator camera info*/
+    void getImageInfoFromHwinfo();
+    void getImageInfoFromLshw();
+    /**@brief:generator cdrom info*/
+    void getCdromInfoFromHwinfo();
+    void getCdromInfoFromLshw();
 };
 
 #endif // GENERATEDEVICE_H

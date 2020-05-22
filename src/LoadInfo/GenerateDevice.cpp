@@ -221,6 +221,18 @@ void GenerateDevice::generatorPrinterDevice()
     }
 }
 
+void GenerateDevice::generatorCameraDevice()
+{
+    getImageInfoFromHwinfo();
+    getImageInfoFromLshw();
+}
+
+void GenerateDevice::generatorCdromDevice()
+{
+    getCdromInfoFromHwinfo();
+    getCdromInfoFromLshw();
+}
+
 void GenerateDevice::getBiosInfo()
 {
     const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
@@ -542,6 +554,55 @@ void GenerateDevice::getMouseInfoFromLshw()
 
 }
 void GenerateDevice::getMouseInfoFromCatDevices()
+{
+
+}
+
+void GenerateDevice::getImageInfoFromHwinfo()
+{
+    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
+    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_usb"];
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 5) {
+            continue;
+        }
+        if ((*it)["Model"].contains("camera", Qt::CaseInsensitive) ||
+                (*it)["Device"].contains("camera", Qt::CaseInsensitive)) {
+            DeviceImage device;
+            device.setInfoFromHwinfo(*it);
+            DeviceManager::instance()->addImageDevice(device);
+        }
+    }
+}
+void GenerateDevice::getImageInfoFromLshw()
+{
+    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
+    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["lshw_usb"];
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 2) {
+            continue;
+        }
+        DeviceManager::instance()->setCameraInfoFromLshw(*it);
+    }
+}
+
+void GenerateDevice::getCdromInfoFromHwinfo()
+{
+    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
+    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_cdrom"];
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 5) {
+            continue;
+        }
+        DeviceCdrom device;
+        device.setInfoFromHwinfo(*it);
+        DeviceManager::instance()->addCdromDevice(device);
+    }
+}
+void GenerateDevice::getCdromInfoFromLshw()
 {
 
 }

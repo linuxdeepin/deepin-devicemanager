@@ -401,6 +401,14 @@ void DeviceManager::setCameraInfoFromLshw(const QString &info)
     }
 }
 
+void DeviceManager::setCameraInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceImage>::iterator it = m_ListDeviceImage.begin();
+    for (; it != m_ListDeviceImage.end(); ++it) {
+        (*it).setInfoFromLshw(mapInfo);
+    }
+}
+
 const QList<DeviceImage> &DeviceManager::getImageDevices()
 {
     return m_ListDeviceImage;

@@ -10,6 +10,7 @@ public:
 
     /**@brief:设置从lshw中获取的信息*/
     void setInfoFromLshw(const QString &info);
+    void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从hwinfo中获取的信息*/
     void setInfoFromHwinfo(const QString &info);
@@ -25,6 +26,7 @@ public:
     const QString &driver()const;
     const QString &maxinumPower()const;
     const QString &speed()const;
+    const QString &keyToLshw()const;
 
 protected:
     void initFilterKey() override;
@@ -39,6 +41,7 @@ private:
     QString             m_Driver;                       //<! 【驱动】
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
+    QString             m_KeyToLshw;                    //<!
 };
 
 #endif // DEVICEIMAGE_H

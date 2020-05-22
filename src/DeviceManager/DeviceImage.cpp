@@ -23,6 +23,22 @@ void DeviceImage::setInfoFromLshw(const QString &info)
     setAttribute(mapInfo, "speed", m_Speed);
 }
 
+void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    if (m_KeyToLshw != mapInfo["bus info"]) {
+        return;
+    }
+    setAttribute(mapInfo, "product", m_Name);
+    setAttribute(mapInfo, "vendor", m_Vendor);
+    setAttribute(mapInfo, "product", m_Model);
+    setAttribute(mapInfo, "version", m_Version);
+    setAttribute(mapInfo, "bus info", m_BusInfo);
+    setAttribute(mapInfo, "capabilities", m_Capabilities);
+    setAttribute(mapInfo, "driver", m_Driver);
+    setAttribute(mapInfo, "maxpower", m_MaximumPower);
+    setAttribute(mapInfo, "speed", m_Speed);
+}
+
 void DeviceImage::setInfoFromHwinfo(const QString &info)
 {
     QMap<QString, QString> mapInfo;
@@ -53,6 +69,16 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "", m_MaximumPower);
     setAttribute(mapInfo, "Speed", m_Speed);
+
+    // 获取映射到 lshw设备信息的 关键字
+    //1-2:1.0
+    QStringList words = mapInfo["SysFS BusID"].split(":");
+    if (words.size() == 2) {
+        QStringList chs = words[0].split("-");
+        if (chs.size() == 2) {
+            m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
+        }
+    }
 
     addHwinfoUniqueID(mapInfo["Unique ID"]);
     addHwinfoBusID(mapInfo["SysFS BusID"]);
@@ -93,6 +119,10 @@ const QString &DeviceImage::maxinumPower()const
 const QString &DeviceImage::speed()const
 {
     return m_Speed;
+}
+const QString &DeviceImage::keyToLshw()const
+{
+    return m_KeyToLshw;
 }
 
 void DeviceImage::initFilterKey()

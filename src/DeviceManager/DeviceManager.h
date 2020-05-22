@@ -116,6 +116,7 @@ public:
     void addImageDevice(const DeviceImage &device);
     const QList<DeviceImage> &getImageDevices();
     void setCameraInfoFromLshw(const QString &info);
+    void setCameraInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     // 键盘设备相关
     void addKeyboardDevice(const DeviceKeyboard &device);
