@@ -18,6 +18,7 @@ public:
 
     // 设置从xrandr中获取的信息
     bool setRateInfoFromXradr(const QString &main, const QString &rate);
+    bool setCurrentResolution(const QString &resolution, const QString &rate);
 
     // 将年周转化为年月
     QString transWeekToDate(const QString &year, const QString &week);

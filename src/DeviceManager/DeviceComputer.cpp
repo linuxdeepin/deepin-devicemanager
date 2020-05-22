@@ -2,8 +2,8 @@
 #include <QDebug>
 
 DeviceComputer::DeviceComputer()
-    : m_HomeUrl(""), m_Description("")
-    , m_OS(""), m_Vendor(""), m_ProductName("")
+    : m_HomeUrl(""), m_OsDescription("")
+    , m_OS(""), m_Vendor(""), m_Name("")
     ,  m_Type("")
 {
 
@@ -30,12 +30,12 @@ void DeviceComputer::setInfoFromCatBoardInfo(const QString &info)
 {
     QMap<QString, QString> mapInfo;
     getMapInfo(mapInfo, info);
-    setAttribute(mapInfo, "Board name", m_ProductName);
+    setAttribute(mapInfo, "Board name", m_Name);
 }
 
 void DeviceComputer::setUOSInfo(const QString &info)
 {
-    m_Description = info;
+    m_OsDescription = info;
 }
 
 void DeviceComputer::setInfoFromCatDevice(const QString &info)
@@ -65,7 +65,7 @@ void DeviceComputer::setInfoFromLshw(const QString &info)
     QMap<QString, QString> mapInfo;
     getMapInfoFromLshw(mapInfo, info);
     setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "product", m_ProductName, false);
+    setAttribute(mapInfo, "product", m_Name, false);
 }
 
 
@@ -74,9 +74,9 @@ const QString &DeviceComputer::homeUrl()const
     return m_HomeUrl;
 }
 
-const QString &DeviceComputer::description()
+const QString &DeviceComputer::osDescription()
 {
-    return m_Description;
+    return m_OsDescription;
 }
 
 const QString &DeviceComputer::os()
@@ -89,7 +89,10 @@ const QString &DeviceComputer::vendor()
 }
 const QString &DeviceComputer::name()
 {
-    return m_ProductName;
+    if (m_Name.contains("None")) {
+        m_Name = "";
+    }
+    return m_Name;
 }
 
 const QString &DeviceComputer::type()
@@ -100,9 +103,9 @@ void DeviceComputer::setHomeUrl(const QString &value)
 {
     m_HomeUrl = value;
 }
-void DeviceComputer::setDescription(const QString &value)
+void DeviceComputer::setOsDescription(const QString &value)
 {
-    m_Description = value;
+    m_OsDescription = value;
 }
 void DeviceComputer::setOS(const QString &value)
 {
@@ -114,7 +117,7 @@ void DeviceComputer::setVendor(const QString &value)
 }
 void DeviceComputer::setName(const QString &value)
 {
-    m_ProductName = value;
+    m_Name = value;
 }
 void DeviceComputer::setType(const QString &value)
 {

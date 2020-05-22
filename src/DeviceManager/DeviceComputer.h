@@ -27,13 +27,13 @@ public:
     void setInfoFromLshw(const QString &info);
 
     const QString &homeUrl()const;
-    const QString &description();
+    const QString &osDescription();
     const QString &os();
     const QString &vendor();
     const QString &name();
     const QString &type();
     void setHomeUrl(const QString &value);
-    void setDescription(const QString &value);
+    void setOsDescription(const QString &value);
     void setOS(const QString &value);
     void setVendor(const QString &value);
     void setName(const QString &value);
@@ -44,10 +44,10 @@ protected:
 
 private:
     QString            m_HomeUrl;
-    QString            m_Description;
+    QString            m_OsDescription;
     QString            m_OS;
     QString            m_Vendor;
-    QString            m_ProductName;
+    QString            m_Name;
     QString            m_Type;
 };
 

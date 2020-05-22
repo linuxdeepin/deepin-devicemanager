@@ -47,6 +47,41 @@ void DeviceNetwork::setInfoFromLshw(const QString &info)
 
 }
 
+void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+
+    setAttribute(mapInfo, "description", m_Model);
+    setAttribute(mapInfo, "product", m_Name);
+    setAttribute(mapInfo, "vendor", m_Vendor);
+    setAttribute(mapInfo, "version", m_Version);
+    setAttribute(mapInfo, "bus info", m_BusInfo);
+    setAttribute(mapInfo, "logical name", m_LogicalName);
+    setAttribute(mapInfo, "serial", m_MACAddress);
+    setAttribute(mapInfo, "irq", m_Irq);
+    setAttribute(mapInfo, "memory", m_Memory);
+    setAttribute(mapInfo, "width", m_Width);
+    setAttribute(mapInfo, "clock", m_Clock);
+    setAttribute(mapInfo, "capabilities", m_Capabilities);
+    setAttribute(mapInfo, "autonegotiation", m_Autonegotiation);
+    setAttribute(mapInfo, "broadcast", m_Broadcast);
+    setAttribute(mapInfo, "driver", m_Driver);
+    setAttribute(mapInfo, "driverversion", m_DriverVersion);
+    setAttribute(mapInfo, "duplex", m_Duplex);
+    setAttribute(mapInfo, "firmware", m_Firmware);
+    setAttribute(mapInfo, "port", m_Port);
+    setAttribute(mapInfo, "link", m_Link);
+    setAttribute(mapInfo, "ip", m_Ip);
+    setAttribute(mapInfo, "size", m_Speed);
+    setAttribute(mapInfo, "capacity", m_Capacity);
+    setAttribute(mapInfo, "latency", m_Latency);
+    setAttribute(mapInfo, "multicast", m_Multicast);
+
+    addHwinfoUniqueID(mapInfo["Unique ID"]);
+    addHwinfoBusID(mapInfo["SysFS BusID"]);
+
+    loadOtherDeviceInfo(mapInfo);
+}
+
 bool DeviceNetwork::setInfoFromHwinfo(const QString &info)
 {
     QMap<QString, QString> mapInfo;
@@ -61,7 +96,7 @@ bool DeviceNetwork::setInfoFromHwinfo(const QString &info)
     return true;
 }
 
-bool DeviceNetwork::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
+bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo["Device File"] != m_LogicalName) {
         return false;

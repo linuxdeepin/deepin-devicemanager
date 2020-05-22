@@ -52,7 +52,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct> &other
 
     // 添加操作系统信息
     ArticleStruct os(tr("Operating System"));
-    os.value = device.description() + " " + device.os();
+    os.value = device.osDescription() + " " + device.os();
     if ( device.homeUrl().isEmpty() == false) {
         os.externalLinks = true;
     }

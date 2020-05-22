@@ -9,6 +9,7 @@ public:
 
     /**@brief:设置从lshw中获取的信息*/
     void setLshwInfo(const QString &info);
+    void setLshwInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从hwinfo中获取的信息*/
     void setHwinfoInfo(const QString &info);
@@ -16,6 +17,7 @@ public:
 
     /**@brief:设置从xrandr中获取的信息*/
     void setXrandrInfo(const QString &info);
+    void setXrandrInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从dmesg中获取的信息*/
     void setDmesgInfo(const QString &info);

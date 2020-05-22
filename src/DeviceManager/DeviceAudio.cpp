@@ -86,6 +86,34 @@ bool DeviceAudio::setInfoFromLshw(const QString &info)
     return true;
 }
 
+bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    // 先判断传入的设备信息是否是同一个
+    QStringList words = mapInfo["bus info"].split("@");
+    if (words.size() != 2) {
+        return false;
+    }
+    if (words[1] != m_UniqueKey) {
+        return false;
+    }
+
+    // 设置设备属性
+    setAttribute(mapInfo, "product", m_Name);
+    setAttribute(mapInfo, "vendor", m_Vendor);
+    setAttribute(mapInfo, "", m_Model);
+    setAttribute(mapInfo, "version", m_Version);
+    setAttribute(mapInfo, "bus info", m_BusInfo);
+    setAttribute(mapInfo, "", m_Irq);
+    setAttribute(mapInfo, "", m_Memory);
+    setAttribute(mapInfo, "width", m_Width);
+    setAttribute(mapInfo, "clock", m_Clock);
+    setAttribute(mapInfo, "capabilities", m_Capabilities);
+    setAttribute(mapInfo, "description", m_Description);
+
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
 const QString &DeviceAudio::name()const
 {
     return m_Name;

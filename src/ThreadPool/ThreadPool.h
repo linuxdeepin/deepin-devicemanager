@@ -55,7 +55,7 @@ class CmdTask: public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    CmdTask(QString cmd, QString debugFile, QString m_paragraphSplit, QString key, QString st, QString info, ThreadPool *parent = nullptr);
+    CmdTask(QString cmd, QString debugFile,  QString key, QString paragraphSplit, QString st,  QString keyValueSplit, QString info, ThreadPool *parent = nullptr);
     ~CmdTask();
 protected:
     void run();
@@ -66,6 +66,21 @@ private:
     QString m_ST;
     QString m_Info;
     QString m_paragraphSplit;
+    QString m_KeyValueSplit;
+    ThreadPool          *mp_Parent;
+};
+
+class GenerateTask: public QObject, public QRunnable
+{
+    Q_OBJECT
+
+public:
+    GenerateTask(DeviceType deviceType, ThreadPool *parent = nullptr);
+    ~GenerateTask();
+protected:
+    void run();
+private:
+    DeviceType           m_Type;
     ThreadPool          *mp_Parent;
 };
 
@@ -85,7 +100,7 @@ public:
     /**@brief:完成加载信息*/
     void finishedTask(const QString &info);
     void finishedCmd(const QString &info);
-    void finishedGenerateDevice(const QString &info);
+    void finishedGenerateDevice();
 
 
 signals:

@@ -376,7 +376,7 @@ void DeviceInfoWidgetBase::toHtmlString(QDomDocument &doc, const DeviceBase &di)
 
             QDomElement a = doc.createElement("a");
             a.setAttribute("href", device.homeUrl());
-            QDomText  href = doc.createTextNode(device.description() + " ");
+            QDomText  href = doc.createTextNode(device.osDescription() + " ");
             a.appendChild(href);
             td2.appendChild(a);
 
@@ -717,7 +717,7 @@ QTextStream &operator<<(QTextStream &ds, const DeviceBase &di)
         ds << article.name + ": ";
         ds.setFieldWidth(0);
         if (article.externalLinks) {
-            ds << device.description() + "(" +  device.homeUrl() + ") " + device.os() << "\n";
+            ds << device.osDescription() + "(" +  device.homeUrl() + ") " + device.os() << "\n";
         } else {
             ds << article.value << "\n";
         }
@@ -853,7 +853,7 @@ bool writeDeviceInfoToDoc(const DeviceBase &di, Docx::Document &doc)
         QString name = article.name;
         QString content;
         if (article.externalLinks) {
-            content = device.description() + "(" +  device.homeUrl() + ") " + device.os();
+            content = device.osDescription() + "(" +  device.homeUrl() + ") " + device.os();
         } else {
             content = article.value;
         }
@@ -957,7 +957,7 @@ bool writeDeviceInfoToXls(const DeviceBase &di, QXlsx::Document &xlsx)
         }
         xlsx.write(currentXlsRow_, 1, article.name);
         if (article.externalLinks) {
-            xlsx.write(currentXlsRow_++, 2,  device.description() + "(" +  device.homeUrl() + ")" + device.os());
+            xlsx.write(currentXlsRow_++, 2,  device.osDescription() + "(" +  device.homeUrl() + ")" + device.os());
         } else {
             xlsx.write(currentXlsRow_++, 2, article.value);
         }

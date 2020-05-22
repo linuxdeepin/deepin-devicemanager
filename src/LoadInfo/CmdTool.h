@@ -24,10 +24,16 @@ public:
      * @brief[loadCmdInfo]:一般的处理方式
      * @brief[loadLshwInfo]:lshw命令的处理方式不同
      */
-    void loadCmdInfo(const QString &cmd, const QString &key, const QString &paragraphSplit, KeyValueSplit st, const QString &debugFile = QString(""));
+    void loadCmdInfo(const QString &cmd, const QString &key, const QString &paragraphSplit, KeyValueSplit st, const QString &ch = ": ", const QString &debugFile = QString(""));
 private:
     void loadLshwInfo(const QString &cmd, const QString &paragraphSplit, const QString &debugFile = QString(""));
-
+    void loadLsblkInfo(const QString &cmd, const QString &debugfile);
+    void loadSmartCtlInfo(const QString &cmd, const QString &debugfile);
+    void loadXrandrInfo(const QString &cmd, const QString &debugfile);
+    void loadXrandrVerboseInfo(const QString &cmd, const QString &debugfile);
+    void loadDmesgInfo(const QString &cmd, const QString &debugfile);
+    void loadHciconfigInfo(const QString &cmd, const QString &debugfile);
+    void loadPrinterInfo();
 
 
 private:
@@ -39,6 +45,8 @@ private:
     void getMapInfoFromLshw(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromDmidecode(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
+    void getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
+    void getMapInfoFromHciconfig(QMap<QString, QString> &mapInfo, const QString &info);
 
     /**
      * @brief:命令的执行

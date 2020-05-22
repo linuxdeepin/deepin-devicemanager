@@ -8,18 +8,23 @@ public:
     DeviceBios();
     /**@brief:设置bios信息*/
     bool setBiosInfo(const QString &info);
+    bool setBiosInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置base信息*/
     bool setBaseBoardInfo(const QString &info, const QString &chipsetFamliy);
+    bool setBaseBoardInfo(const QMap<QString, QString> &mapInfo, const QString &chipsetFamliy);
 
     /**@brief:设置system信息*/
     bool setSystemInfo(const QString &info);
+    bool setSystemInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置Chassis信息*/
     bool setChassisInfo(const QString &info);
+    bool setChassisInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置memory信息*/
     bool setMemoryInfo(const QString &info);
+    bool setMemoryInfo(const QMap<QString, QString> &mapInfo);
 
     // 获取bios相关的属性
     const QString &name()const;

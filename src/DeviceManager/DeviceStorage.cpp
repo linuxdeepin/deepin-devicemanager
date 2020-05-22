@@ -49,7 +49,7 @@ bool DeviceStorage::setHwinfoInfo(const QString &info)
     return true;
 }
 
-bool DeviceStorage::setHwinfoInfo(QMap<QString, QString> mapInfo)
+bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 {
     // 龙芯机器中 hwinfo --disk会列出所有的分区信息
     // 存储设备不应包含分区，根据SysFS BusID 来确定是否是分区信息
@@ -122,6 +122,38 @@ bool DeviceStorage::addInfoFromlshw(const QString &info)
     return true;
 }
 
+bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
+{
+
+    // 先获取需要进行匹配的关键字
+    QStringList keys = mapInfo["bus info"].split("@");
+    if (keys.size() != 2) {
+        return false;
+    }
+    QString key = keys[1].trimmed();
+    key.replace(".", ":");
+    if (key != m_KeyToLshw) {
+        return false;
+    }
+
+
+    // 获取唯一key
+    QStringList words = mapInfo["bus info"].split(":");
+    if (words.size() == 2) {
+        m_KeyFromStorage = words[0];
+        m_KeyFromStorage.replace("@", "");
+    }
+
+
+    // 获取基本信息
+    getInfoFromLshw(mapInfo);
+
+    // 获取其它设备信息
+    loadOtherDeviceInfo(mapInfo);
+
+    return true;
+}
+
 bool DeviceStorage::addInfoFromSmartctl(const QString &name, const QString &info)
 {
     // 查看传入的设备信息与当前的设备信息是不是同一个设备信息
@@ -138,6 +170,18 @@ bool DeviceStorage::addInfoFromSmartctl(const QString &name, const QString &info
 
     return true;
 }
+
+bool DeviceStorage::addInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo)
+{
+    // 查看传入的设备信息与当前的设备信息是不是同一个设备信息
+    if (!m_DeviceFile.contains(name, Qt::CaseInsensitive)) {
+        return false;
+    }
+    // 获取基本信息
+    getInfoFromsmartctl(mapInfo);
+    return true;
+}
+
 
 bool DeviceStorage::setMediaType(const QString &name, const QString &value)
 {
@@ -270,7 +314,7 @@ void DeviceStorage::initFilterKey()
     addFilterKey(QObject::tr("SubVendor"));
 }
 
-void DeviceStorage::getInfoFromLshw(QMap<QString, QString> &mapInfo)
+void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "capabilities", m_Capabilities);
     setAttribute(mapInfo, "version", m_Version);
@@ -285,7 +329,7 @@ void DeviceStorage::getInfoFromLshw(QMap<QString, QString> &mapInfo)
     }
 }
 
-void DeviceStorage::getInfoFromsmartctl(QMap<QString, QString> &mapInfo)
+void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
 {
     // 固件版本
     m_FirmwareVersion = mapInfo["Firmware Version"];

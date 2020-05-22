@@ -21,10 +21,38 @@ bool DeviceBios::setBiosInfo(const QString &info)
     return true;
 }
 
+bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
+{
+    if (mapInfo.size() < 2) {
+        return false;
+    }
+    m_Name = QObject::tr("BIOS Information");
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Version", m_Version);
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
 bool DeviceBios::setBaseBoardInfo(const QString &info, const QString &chipsetFamliy)
 {
     QMap<QString, QString> mapInfo;
     getMapInfoFromDmidecode(mapInfo, info);
+    if (mapInfo.size() < 2) {
+        return false;
+    }
+    m_Name = QObject::tr("Base Board Information");
+    m_ChipsetFamily = chipsetFamliy;
+    setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    setAttribute(mapInfo, "Version", m_Version);
+    setAttribute(mapInfo, "Product Name", m_ProductName);
+    setAttribute(mapInfo, "Board name", m_ProductName, false);
+    m_IsBoard = true;
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
+bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo, const QString &chipsetFamliy)
+{
     if (mapInfo.size() < 2) {
         return false;
     }
@@ -53,6 +81,19 @@ bool DeviceBios::setSystemInfo(const QString &info)
     return true;
 }
 
+
+bool DeviceBios::setSystemInfo(const QMap<QString, QString> &mapInfo)
+{
+    if (mapInfo.size() < 2) {
+        return false;
+    }
+    m_Name = QObject::tr("System Information");
+    setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    setAttribute(mapInfo, "Version", m_Version);
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
 bool DeviceBios::setChassisInfo(const QString &info)
 {
     QMap<QString, QString> mapInfo;
@@ -67,10 +108,35 @@ bool DeviceBios::setChassisInfo(const QString &info)
     return true;
 }
 
+
+bool DeviceBios::setChassisInfo(const QMap<QString, QString> &mapInfo)
+{
+    if (mapInfo.size() < 2) {
+        return false;
+    }
+    m_Name = QObject::tr("Chassis Information");
+    setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    setAttribute(mapInfo, "Version", m_Version);
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
 bool DeviceBios::setMemoryInfo(const QString &info)
 {
     QMap<QString, QString> mapInfo;
     getMapInfoFromDmidecode(mapInfo, info);
+    if (mapInfo.size() < 2) {
+        return false;
+    }
+    m_Name = QObject::tr("Physical Memory Array");
+    setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    setAttribute(mapInfo, "Version", m_Version);
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
+bool DeviceBios::setMemoryInfo(const QMap<QString, QString> &mapInfo)
+{
     if (mapInfo.size() < 2) {
         return false;
     }

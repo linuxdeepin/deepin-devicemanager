@@ -111,11 +111,32 @@ void DeviceManager::addLshwinfoIntoStorageDevice(const QString &info)
     }
 }
 
+void DeviceManager::addLshwinfoIntoStorageDevice(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceStorage>::iterator it = m_ListDeviceStorage.begin();
+    for (; it != m_ListDeviceStorage.end(); ++it) {
+
+        if ((*it).addInfoFromlshw(mapInfo)) {
+            return;
+        }
+    }
+}
+
 void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QString &info)
 {
     QList<DeviceStorage>::iterator it = m_ListDeviceStorage.begin();
     for (; it != m_ListDeviceStorage.end(); ++it) {
         if ((*it).addInfoFromSmartctl(name, info)) {
+            return;
+        }
+    }
+}
+
+void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceStorage>::iterator it = m_ListDeviceStorage.begin();
+    for (; it != m_ListDeviceStorage.end(); ++it) {
+        if ((*it).addInfoFromSmartctl(name, mapInfo)) {
             return;
         }
     }
@@ -163,11 +184,27 @@ void DeviceManager::setGpuInfoFromLshw(const QString &info)
     }
 }
 
+void DeviceManager::setGpuInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceGpu>::iterator it = m_ListDeviceGPU.begin();
+    for (; it != m_ListDeviceGPU.end(); ++it) {
+        (*it).setLshwInfo(mapInfo);
+    }
+}
+
 void DeviceManager::setGpuInfoFromXrandr(const QString &info)
 {
     QList<DeviceGpu>::iterator it = m_ListDeviceGPU.begin();
     for (; it != m_ListDeviceGPU.end(); ++it) {
         (*it).setXrandrInfo(info);
+    }
+}
+
+void DeviceManager::setGpuInfoFromXrandr(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceGpu>::iterator it = m_ListDeviceGPU.begin();
+    for (; it != m_ListDeviceGPU.end(); ++it) {
+        (*it).setXrandrInfo(mapInfo);
     }
 }
 
@@ -192,6 +229,16 @@ void DeviceManager::setMemoryInfoFromDmidecode(const QString &info)
     QList<DeviceMemory>::iterator it = m_ListDeviceMemory.begin();
     for (; it != m_ListDeviceMemory.end(); ++it) {
         if ((*it).setInfoFromDmidecode(info)) {
+            return;
+        }
+    }
+}
+
+void DeviceManager::setMemoryInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceMemory>::iterator it = m_ListDeviceMemory.begin();
+    for (; it != m_ListDeviceMemory.end(); ++it) {
+        if ((*it).setInfoFromDmidecode(mapInfo)) {
             return;
         }
     }
@@ -225,6 +272,17 @@ void DeviceManager::setMonitorRefreshRate(const QString &main, const QString &ra
         }
     }
 }
+
+void DeviceManager::setCurrentResolution(const QString &resolution, const QString &rate)
+{
+    QList<DeviceMonitor>::iterator it = m_ListDeviceMonitor.begin();
+    for (; it != m_ListDeviceMonitor.end(); ++it) {
+        if ((*it).setCurrentResolution(resolution, rate)) {
+            return;
+        }
+    }
+}
+
 void DeviceManager::addBiosDevice(const DeviceBios &device)
 {
     m_ListDeviceBios.append(device);
@@ -254,11 +312,31 @@ void DeviceManager::setBluetoothInfoFromLshw(const QString &info)
     }
 }
 
+void DeviceManager::setBluetoothInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBluetooth>::iterator it = m_ListBluetooth.begin();
+    for (; it != m_ListBluetooth.end(); ++it) {
+        if ((*it).setInfoFromLshw(mapInfo)) {
+            return;
+        }
+    }
+}
+
 void DeviceManager::setBluetoothInfoFromHwinfo(const QString &info)
 {
     QList<DeviceBluetooth>::iterator it = m_ListBluetooth.begin();
     for (; it != m_ListBluetooth.end(); ++it) {
         if ((*it).setInfoFromHwinfo(info)) {
+            return;
+        }
+    }
+}
+
+void DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBluetooth>::iterator it = m_ListBluetooth.begin();
+    for (; it != m_ListBluetooth.end(); ++it) {
+        if ((*it).setInfoFromHwinfo(mapInfo)) {
             return;
         }
     }
@@ -277,6 +355,16 @@ void DeviceManager::setAudioInfoFromLshw(const QString &info)
     QList<DeviceAudio>::iterator it = m_ListDeviceAudio.begin();
     for (; it != m_ListDeviceAudio.end(); ++it) {
         if ((*it).setInfoFromLshw(info)) {
+            return;
+        }
+    }
+}
+
+void DeviceManager::setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceAudio>::iterator it = m_ListDeviceAudio.begin();
+    for (; it != m_ListDeviceAudio.end(); ++it) {
+        if ((*it).setInfoFromLshw(mapInfo)) {
             return;
         }
     }

@@ -57,30 +57,36 @@ public:
     // 存储设备相关 **************************************************************************************
     void addStorageDeivce(const DeviceStorage &device);
     void addLshwinfoIntoStorageDevice(const QString &info);
+    void addLshwinfoIntoStorageDevice(const QMap<QString, QString> &mapInfo);
     const QList<DeviceStorage> &getStorageDevices();
     bool setStorageDeviceMediaType(const QString &name, const QString &value);
     void setStorageDeviceAttribute(const QString &);
     void addsmartctlinfoIntoStorageDevice(const QString &info);
     void setStorageInfoFromSmartctl(const QString &name, const QString &info);
+    void setStorageInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo);
 
     // GPU设备相关 **************************************************************************************
     void addGpuDevice(const DeviceGpu &device);
     const QList<DeviceGpu> &getGPUDevices();
     /**@brief:设置从lshw获取的gup信息，内部会做判断是否是该设备*/
     void setGpuInfoFromLshw(const QString &info);
+    void setGpuInfoFromLshw(const QMap<QString, QString> &mapInfo);
     void setGpuInfoFromXrandr(const QString &info);
+    void setGpuInfoFromXrandr(const QMap<QString, QString> &mapInfo);
     void setGpuSizeFromDmesg(const QString &info);
 
     // 内存设备相关 *************************************************************************************
     void addMemoryDevice(const DeviceMemory &device);
     const QList<DeviceMemory> &getMemoryDevices();
     void setMemoryInfoFromDmidecode(const QString &info);
+    void setMemoryInfoFromDmidecode(const QMap<QString, QString> &mapInfo);
 
     // 显示设备相关 *************************************************************************************
     void addMonitor(const DeviceMonitor &device);
     const QList<DeviceMonitor> &getMonitorDevices();
     void setMonitorInfoFromXrandr(const QString &main, const QString &edid);
     void setMonitorRefreshRate(const QString &main, const QString &rate);
+    void setCurrentResolution(const QString &resolution, const QString &rate);
 
 
     // Bios设备相关 ************************************************************************************
@@ -91,12 +97,15 @@ public:
     void addBluetoothDevice(const DeviceBluetooth &device);
     const QList<DeviceBluetooth> &getBluetoothDevices();
     void setBluetoothInfoFromLshw(const QString &info);
+    void setBluetoothInfoFromLshw(const QMap<QString, QString> &mapInfo);
     void setBluetoothInfoFromHwinfo(const QString &info);
+    void setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     // 音频设备相关
     void addAudioDevice(const DeviceAudio &device);
     const QList<DeviceAudio> &getAudioDevices();
     void setAudioInfoFromLshw(const QString &info);
+    void setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     // 网络设备相关
     void addNetworkDevice(const DeviceNetwork &device);

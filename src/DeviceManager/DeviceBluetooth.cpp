@@ -18,6 +18,13 @@ void DeviceBluetooth::setInfoFromHciconfig(const QString &info)
     loadOtherDeviceInfo(mapInfo);
 }
 
+void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo)
+{
+    setAttribute(mapInfo, "Name", m_Name);
+    setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    loadOtherDeviceInfo(mapInfo);
+}
+
 bool DeviceBluetooth::setInfoFromHwinfo(const QString &info)
 {
     // 先过滤一定不是蓝牙的信息
@@ -112,7 +119,26 @@ bool DeviceBluetooth::setInfoFromLshw(const QString &info)
 
     return true;
 }
+bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    if (mapInfo["bus info"] != m_UniqueKey) {
+        return false;
+    }
 
+    setAttribute(mapInfo, "vendor", m_Vendor);
+    setAttribute(mapInfo, "version", m_Version);
+    setAttribute(mapInfo, "", m_Model);
+    setAttribute(mapInfo, "", m_MAC);
+    setAttribute(mapInfo, "product", m_LogicalName);
+    setAttribute(mapInfo, "bus info", m_BusInfo);
+    setAttribute(mapInfo, "capabilities", m_Capabilities);
+    setAttribute(mapInfo, "driver", m_Driver);
+    setAttribute(mapInfo, "", m_DriverVersion);
+    setAttribute(mapInfo, "maxpower", m_MaximumPower);
+    setAttribute(mapInfo, "speed", m_Speed);
+
+    return true;
+}
 const QString &DeviceBluetooth::name()const
 {
     return m_Name;

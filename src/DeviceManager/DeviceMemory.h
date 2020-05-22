@@ -9,9 +9,11 @@ public:
 
     /**@brief:设置从 sudo lshw -C memory 获取的内存信息*/
     void setInfoFromLshw(const QString &info);
+    void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从 sudo dmideocde -t memory 获取的内存信息*/
     bool setInfoFromDmidecode(const QString &info);
+    bool setInfoFromDmidecode(const QMap<QString, QString> &mapInfo);
 
     // 获取各种属性
     const QString &name()const;

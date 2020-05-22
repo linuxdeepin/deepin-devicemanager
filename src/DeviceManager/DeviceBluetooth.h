@@ -9,6 +9,7 @@ public:
 
     /**设置从hciconfig里面读取的内容*/
     void setInfoFromHciconfig(const QString &info);
+    void setInfoFromHciconfig(const QMap<QString, QString> &mapInfo);
 
     /**设置从hwinfo里面读取的内容*/
     bool setInfoFromHwinfo(const QString &info);
@@ -16,6 +17,7 @@ public:
 
     /**设置从lshw里面获取的内容*/
     bool setInfoFromLshw(const QString &info);
+    bool setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
 
 

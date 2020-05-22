@@ -25,6 +25,18 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
     m_Name.replace(QRegExp("x [0-9]*$"), "");
 }
 
+void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo)
+{
+    setInfoFromLscpu(mapLscpu);
+    setInfoFromLshw(mapLshw);
+    setInfoFromDmidecode(mapDmidecode);
+    setInfoFromCatCpuinfo(catInfo);
+
+    // CPU 名称后面不需要加个数
+    m_Name.replace(QRegExp("/[0-9]*$"), "");
+    m_Name.replace(QRegExp("x [0-9]*$"), "");
+}
+
 const QString &DeviceCpu::vendor() const
 {
     return m_Vendor;

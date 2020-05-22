@@ -14,6 +14,7 @@ public:
 
     /**@brief:设置从lshw里面获取的信息*/
     bool setInfoFromLshw(const QString &info);
+    bool setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     // 获取设备属性
     const QString &name()const;

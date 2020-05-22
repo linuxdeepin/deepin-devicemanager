@@ -189,6 +189,17 @@ bool DeviceMonitor::setRateInfoFromXradr(const QString &main, const QString &rat
     return true;
 }
 
+bool DeviceMonitor::setCurrentResolution(const QString &resolution, const QString &rate)
+{
+    // 判断该显示器设备是否已经设置过从xrandr获取的消息
+    if (m_CurrentResolution.contains("@")) {
+        return false;
+    }
+    m_CurrentResolution = QString("%1@%2Hz").arg(resolution).arg(rate);
+    m_CurrentResolution.replace(" ", "");
+    return true;
+}
+
 const QString &DeviceMonitor::name()const
 {
     return m_Name;

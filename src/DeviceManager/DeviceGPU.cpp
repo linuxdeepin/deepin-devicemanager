@@ -60,6 +60,44 @@ void DeviceGpu::setLshwInfo(const QString &info)
     loadOtherDeviceInfo(mapInfo);
 }
 
+void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
+{
+
+    // 判断是否是同一个gpu
+    QRegExp re(":[0-9]{2}:[0-9]{2}");
+    int index = mapInfo["bus info"].indexOf(re);
+    QString uniqueKey = mapInfo["bus info"].mid(index + 1);
+    if (!uniqueKey.contains(m_UniqueKey)) {
+        return;
+    }
+
+    // 设置属性
+    setAttribute(mapInfo, "product", m_Name);
+    setAttribute(mapInfo, "vendor", m_Vendor);
+    setAttribute(mapInfo, "", m_Model);
+    setAttribute(mapInfo, "version", m_Version);
+    setAttribute(mapInfo, "", m_GraphicsMemory);
+    setAttribute(mapInfo, "width", m_Width);
+    setAttribute(mapInfo, "", m_DisplayPort);
+    setAttribute(mapInfo, "clock", m_Clock);
+    setAttribute(mapInfo, "irq", m_IRQ);
+    setAttribute(mapInfo, "capabilities", m_Capabilities);
+    setAttribute(mapInfo, "", m_DisplayOutput);
+    setAttribute(mapInfo, "", m_VGA);
+    setAttribute(mapInfo, "", m_HDMI);
+    setAttribute(mapInfo, "description", m_Description);
+    setAttribute(mapInfo, "driver", m_Driver);
+    setAttribute(mapInfo, "", m_CurrentResolution);
+    setAttribute(mapInfo, "", m_MinimumResolution);
+    setAttribute(mapInfo, "", m_MaximumResolution);
+    setAttribute(mapInfo, "bus info", m_BusInfo);
+    setAttribute(mapInfo, "ioport", m_IOPort);
+    setAttribute(mapInfo, "memory", m_MemAddress);
+    setAttribute(mapInfo, "physical id", m_PhysID);
+
+    loadOtherDeviceInfo(mapInfo);
+}
+
 void DeviceGpu::setHwinfoInfo(const QString &info)
 {
     QMap<QString, QString> mapInfo;
@@ -147,6 +185,25 @@ void DeviceGpu::setXrandrInfo(const QString &info)
         } else if (line.startsWith("eDP")) {
             m_eDP = "Enable";
         }
+    }
+}
+
+void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
+{
+    m_MinimumResolution = mapInfo["minResolution"];
+    m_CurrentResolution = mapInfo["curResolution"];
+    m_MaximumResolution = mapInfo["maxResolution"];
+    if (mapInfo.find("HDMI") != mapInfo.end()) {
+        m_HDMI = mapInfo["HDMI"];
+    }
+    if (mapInfo.find("VGA") != mapInfo.end()) {
+        m_HDMI = mapInfo["VGA"];
+    }
+    if (mapInfo.find("DP") != mapInfo.end()) {
+        m_HDMI = mapInfo["DP"];
+    }
+    if (mapInfo.find("eDP") != mapInfo.end()) {
+        m_HDMI = mapInfo["eDP"];
     }
 }
 
