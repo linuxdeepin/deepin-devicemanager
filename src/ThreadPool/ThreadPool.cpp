@@ -165,7 +165,6 @@ ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
     m_ListCmd.append({ "xrandr",               "xrandr",                  "xrandr.txt",             tr("Loading CPU Info...")});
     m_ListCmd.append({ "xrandr_verbose",       "xrandr --verbose",        "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
     m_ListCmd.append({ "dmesg",                "sudo dmesg",              "dmesg.txt",              tr("Loading Power Info...")});
-    m_ListCmd.append({ "lspci",                "lspci",                   "lspci.txt",              tr("Loading GPU Info...")});
     m_ListCmd.append({ "hciconfig",            "hciconfig -a",            "hciconfig.txt",          tr("Loading Printer Info...")});
 
     m_ListCmd.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "cat_cpuinfo.txt",        tr("Loading Monitor Info...")});

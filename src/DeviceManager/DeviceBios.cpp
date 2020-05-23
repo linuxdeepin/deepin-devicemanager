@@ -19,17 +19,17 @@ bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
-bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo, const QString &chipsetFamliy)
+bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.size() < 2) {
         return false;
     }
     m_Name = QObject::tr("Base Board Information");
-    m_ChipsetFamily = chipsetFamliy;
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
     setAttribute(mapInfo, "Product Name", m_ProductName);
     setAttribute(mapInfo, "Board name", m_ProductName, false);
+    setAttribute(mapInfo, "chipset", m_ChipsetFamily);
     m_IsBoard = true;
     loadOtherDeviceInfo(mapInfo);
     return true;

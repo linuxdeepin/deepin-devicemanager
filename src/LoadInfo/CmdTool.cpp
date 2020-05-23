@@ -48,8 +48,6 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
         loadHciconfigInfo(cmd, debugFile);
     } else if (key == "printer") {
         loadPrinterInfo();
-    } else if (key == "lspci") {
-        loadLspciInfo();
     } else if (key == "upower") {
         loadUpowerInfo(key, cmd, debugFile);
     } else if (key.startsWith("hwinfo")) {
@@ -392,13 +390,13 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &cmd, const QS
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromDmidecode(item, mapInfo);
+        if (key == "dmidecode2") {
+            QString chipset;
+            loadBiosInfoFromLspci(chipset);
+            mapInfo.insert("chipset", chipset);
+        }
         addMapInfo(key, mapInfo);
     }
-}
-
-void CmdTool::loadLspciInfo()
-{
-
 }
 
 void CmdTool::loadCatInfo(const QString &key, const QString &cmd, const QString &debugfile)
@@ -442,6 +440,46 @@ void CmdTool::loadUpowerInfo(const QString &key, const QString &cmd, const QStri
             addMapInfo(key, mapInfo);
         }
     }
+}
+
+void CmdTool::loadBiosInfoFromLspci(QString &chipsetFamliy)
+{
+    // 获取设备信息
+    QString command;
+    QString deviceInfo;
+    if (!getDeviceInfo(QString("lspci"), deviceInfo, "lspci.txt")) {
+        return;
+    }
+    QStringList lines = deviceInfo.split("\n");
+    foreach (const QString &line, lines) {
+        QStringList words = line.split(" ");
+        if (words.size() < 2) {
+            continue;
+        }
+        if (words[1] == QString("ISA")) {
+            command = QString("lspci -v -s %1").arg(words[0].trimmed());
+            break;
+        }
+    }
+
+    if (command.isEmpty()) {
+        return;
+    }
+    QString chipset;
+    if (!getDeviceInfo(command, chipset, "")) {
+        return;
+    }
+    lines = chipset.split("\n");
+    foreach (const QString &line, lines) {
+        if (line.contains("Subsystem")) {
+            QStringList words = line.split(": ");
+            if (words.size() == 2) {
+                chipsetFamliy = words[1].trimmed();
+            }
+            break;
+        }
+    }
+
 }
 
 void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)

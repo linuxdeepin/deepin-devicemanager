@@ -301,7 +301,7 @@ void DeviceGenerator::getBaseBoardInfo()
             continue;
         }
         DeviceBios device;
-        device.setBaseBoardInfo(*it, "");
+        device.setBaseBoardInfo(*it);
         DeviceManager::instance()->addBiosDevice(device);
     }
 }

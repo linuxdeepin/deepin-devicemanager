@@ -10,7 +10,7 @@ public:
     bool setBiosInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置base信息*/
-    bool setBaseBoardInfo(const QMap<QString, QString> &mapInfo, const QString &chipsetFamliy);
+    bool setBaseBoardInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置system信息*/
     bool setSystemInfo(const QMap<QString, QString> &mapInfo);

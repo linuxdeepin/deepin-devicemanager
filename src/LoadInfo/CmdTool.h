@@ -32,9 +32,9 @@ private:
     void loadPrinterInfo();
     void loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadDmidecodeInfo(const QString &key, const QString &cmd, const QString &debugfile);
-    void loadLspciInfo();
     void loadCatInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadUpowerInfo(const QString &key, const QString &cmd, const QString &debugfile);
+    void loadBiosInfoFromLspci(QString &chipsetFamliy);
 
 
 private:
