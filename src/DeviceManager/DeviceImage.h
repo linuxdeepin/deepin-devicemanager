@@ -9,11 +9,9 @@ public:
     DeviceImage();
 
     /**@brief:设置从lshw中获取的信息*/
-    void setInfoFromLshw(const QString &info);
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从hwinfo中获取的信息*/
-    void setInfoFromHwinfo(const QString &info);
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     // 获取设备属性

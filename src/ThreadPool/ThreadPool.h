@@ -25,29 +25,7 @@ enum DeviceType {
     DT_Storage    = 15,
     DT_Power      = 16,
     DT_Print      = 17,
-    DT_Others     = 18,
-
-    DT_Dmidecode  = 19,
-    DT_Lshw       = 20,
-    DT_Hwinfo     = 21
-};
-
-
-/*
- * @brief:通过命令获取信息的任务
-*/
-class DeviceTask : public QObject, public QRunnable
-{
-    Q_OBJECT
-
-public:
-    DeviceTask(DeviceType deviceType, ThreadPool *parent = nullptr);
-    ~DeviceTask();
-protected:
-    void run();
-private:
-    DeviceType           m_Type;
-    ThreadPool          *mp_Parent;
+    DT_Others     = 18
 };
 
 class CmdTask: public QObject, public QRunnable
@@ -55,18 +33,15 @@ class CmdTask: public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    CmdTask(QString cmd, QString debugFile,  QString key, QString paragraphSplit, QString st,  QString keyValueSplit, QString info, ThreadPool *parent = nullptr);
+    CmdTask(QString key, QString cmd, QString debugFile, QString info, ThreadPool *parent = nullptr);
     ~CmdTask();
 protected:
     void run();
 private:
+    QString m_Key;
     QString m_Cmd;
     QString m_DebugFile;
-    QString m_Key;
-    QString m_ST;
     QString m_Info;
-    QString m_paragraphSplit;
-    QString m_KeyValueSplit;
     ThreadPool          *mp_Parent;
 };
 
@@ -93,12 +68,10 @@ public:
     explicit ThreadPool(QObject *parent = nullptr);
 
     /**@brief:开始加载信息*/
-    void loadDeviceInfo();
     void loadCmdInfo();
     void generateInfo();
 
     /**@brief:完成加载信息*/
-    void finishedTask(const QString &info);
     void finishedCmd(const QString &info);
     void finishedGenerateDevice();
 
@@ -108,10 +81,9 @@ signals:
 
 
 private:
-    QList<DeviceType>      m_ListDeviceType;
     QList<DeviceType>      m_ListDeviceTypes;
     int                    m_FinishedNum;
-    QList<QStringList>  m_ListCmd;
+    QList<QStringList>     m_ListCmd;
 
 };
 

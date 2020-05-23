@@ -9,10 +9,8 @@ public:
     DeviceNetwork();
 
     // 设置从 lshw 获取的信息
-    void setInfoFromLshw(const QString &info);
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
     // 设置从 hwinfo 获取的信息
-    bool setInfoFromHwinfo(const QString &info);
     bool setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     // 获取设备属性

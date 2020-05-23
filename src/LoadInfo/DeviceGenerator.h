@@ -1,5 +1,5 @@
-#ifndef GENERATEDEVICE_H
-#define GENERATEDEVICE_H
+#ifndef DEVICEGENERATOR_H
+#define DEVICEGENERATOR_H
 
 #include <QObject>
 #include <DApplication>
@@ -7,11 +7,11 @@
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
-class GenerateDevice
+class DeviceGenerator
 {
 public:
-    GenerateDevice();
-    virtual ~GenerateDevice();
+    DeviceGenerator();
+    virtual ~DeviceGenerator();
 
     /**@brief:generator computer info*/
     virtual void generatorComputerDevice();
@@ -61,6 +61,9 @@ public:
     /**@brief:generator others info*/
     virtual void generatorOthersDevice();
 
+    /**@brief:generator power info*/
+    virtual void generatorPowerDevice();
+
 
 private:
     /**@brief:generator bios info*/
@@ -109,4 +112,4 @@ private:
     void getOthersInfoFromLshw();
 };
 
-#endif // GENERATEDEVICE_H
+#endif // DEVICEGENERATOR_H

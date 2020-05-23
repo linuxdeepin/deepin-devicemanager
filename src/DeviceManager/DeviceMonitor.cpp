@@ -47,49 +47,6 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
     return res;
 }
 
-void DeviceMonitor::setInfoFromHwinfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromHwinfo(mapInfo, info);
-
-    setAttribute(mapInfo, "Model", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "", m_DisplayInput);
-    setAttribute(mapInfo, "Size", m_ScreenSize);
-    setAttribute(mapInfo, "", m_MainScreen);
-    setAttribute(mapInfo, "Resolution", m_SupportResolution);
-
-    double inch = 0.0;
-    QSize size(0, 0);
-    QString inchValue = parseMonitorSize(m_ScreenSize, inch, size);
-    m_ScreenSize = inchValue;
-
-    // 获取当前分辨率 和 当前支持分辨率
-    QStringList listResolution = m_SupportResolution.split(" ");
-//    m_CurrentResolution = listResolution.last();
-    m_SupportResolution = "";
-    foreach (const QString &word, listResolution) {
-        if (word.contains("@")) {
-            m_SupportResolution.append(word);
-            m_SupportResolution.append("  ,  ");
-        }
-    }
-    // 计算显示比例
-    caculateScreenRatio();
-
-    m_SupportResolution.replace(QRegExp(",  $"), "");
-
-    m_ProductionWeek  = transWeekToDate(mapInfo["Year of Manufacture"], mapInfo["Week of Manufacture"]);
-    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
-
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
-
-    // 加载其他属性
-    loadOtherDeviceInfo(mapInfo);
-}
-
 void DeviceMonitor::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
 {
     setAttribute(mapInfo, "Model", m_Name);
@@ -123,9 +80,6 @@ void DeviceMonitor::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
     m_ProductionWeek  = transWeekToDate(mapInfo["Year of Manufacture"], mapInfo["Week of Manufacture"]);
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
 
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
-
     // 加载其他属性
     loadOtherDeviceInfo(mapInfo);
 }
@@ -158,32 +112,6 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid)
     // 根据edid计算屏幕大小
     if (edid.isEmpty() == false) {
         caculateScreenSize(edid);
-    }
-
-    return true;
-}
-
-bool DeviceMonitor::setRateInfoFromXradr(const QString &main, const QString &rate)
-{
-    // 判断该显示器设备是否已经设置过从xrandr获取的消息
-    if (m_CurrentResolution.contains("@")) {
-        return false;
-    }
-
-    if (m_CurrentResolution.isEmpty()) {
-        QStringList rateList = rate.split(" ");
-        rateList.removeAll("");
-        rateList[1].replace(QRegExp("\\*.?"), "");
-        m_CurrentResolution = QString("%1@%2Hz").arg(rateList[0].trimmed()).arg(rateList[1]);
-    }
-
-
-    // 去掉不用的信息
-    QString mInfo = main;
-    mInfo.replace(QRegExp("\\(.*\\)"), "");
-    QRegExp re(".*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
-    if (!re.exactMatch(mInfo)) {
-        return false;
     }
 
     return true;

@@ -5,11 +5,8 @@ DeviceCdrom::DeviceCdrom()
     initFilterKey();
 }
 
-bool DeviceCdrom::setInfoFromLshw(const QString &info)
+bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromLshw(mapInfo, info);
-
     if (mapInfo.find("bus info") == mapInfo.end()) {
         return false;
     }
@@ -35,28 +32,6 @@ bool DeviceCdrom::setInfoFromLshw(const QString &info)
     return true;
 }
 
-
-void DeviceCdrom::setInfoFromHwinfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromHwinfo(mapInfo, info);
-
-    setAttribute(mapInfo, "Device", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Model", m_Type);
-    setAttribute(mapInfo, "Revision", m_Version);
-    setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
-    setAttribute(mapInfo, "", m_Capabilities);
-    setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "", m_MaxPower);
-    setAttribute(mapInfo, "Speed", m_Speed);
-
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
-
-    loadOtherDeviceInfo(mapInfo);
-}
-
 void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "Device", m_Name);
@@ -68,9 +43,6 @@ void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "", m_MaxPower);
     setAttribute(mapInfo, "Speed", m_Speed);
-
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
 
     loadOtherDeviceInfo(mapInfo);
 }

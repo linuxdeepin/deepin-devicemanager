@@ -7,22 +7,6 @@ DeviceImage::DeviceImage()
 
 }
 
-void DeviceImage::setInfoFromLshw(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfo(mapInfo, info);
-
-    setAttribute(mapInfo, "product", m_Name);
-    setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "product", m_Model);
-    setAttribute(mapInfo, "version", m_Version);
-    setAttribute(mapInfo, "bus info", m_BusInfo);
-    setAttribute(mapInfo, "capabilities", m_Capabilities);
-    setAttribute(mapInfo, "driver", m_Driver);
-    setAttribute(mapInfo, "maxpower", m_MaximumPower);
-    setAttribute(mapInfo, "speed", m_Speed);
-}
-
 void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     if (m_KeyToLshw != mapInfo["bus info"]) {
@@ -37,25 +21,6 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "driver", m_Driver);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
-}
-
-void DeviceImage::setInfoFromHwinfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromHwinfo(mapInfo, info);
-    setAttribute(mapInfo, "Device", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "Revision", m_Version);
-    setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
-    setAttribute(mapInfo, "", m_Capabilities);
-    setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "", m_MaximumPower);
-    setAttribute(mapInfo, "Speed", m_Speed);
-
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
-
 }
 
 void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -79,9 +44,6 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
-
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
 }
 
 const QString &DeviceImage::name()const

@@ -61,27 +61,14 @@ const QList<DeviceMouse> &DeviceManager::getMouseDevices()
     return m_ListDeviceMouse;
 }
 
-void DeviceManager::setCatDevicesIntoMouseDevice(const QString &info)
+bool DeviceManager::addMouseInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceMouse>::iterator it = m_ListDeviceMouse.begin();
     for (; it != m_ListDeviceMouse.end(); ++it) {
-
-        if ((*it).setInfoFromCatInputDevices(info)) {
-            return;
-        }
-    }
-}
-
-bool DeviceManager::setLshwinfoIntoMouseDevice(const QString &info)
-{
-    QList<DeviceMouse>::iterator it = m_ListDeviceMouse.begin();
-    for (; it != m_ListDeviceMouse.end(); ++it) {
-
-        if ((*it).setInfoFromlshw(info)) {
+        if ((*it).setInfoFromlshw(mapInfo)) {
             return true;
         }
     }
-
     return false;
 }
 
@@ -100,33 +87,12 @@ void DeviceManager::addStorageDeivce(const DeviceStorage &device)
     m_ListDeviceStorage.append(device);
 }
 
-void DeviceManager::addLshwinfoIntoStorageDevice(const QString &info)
-{
-    QList<DeviceStorage>::iterator it = m_ListDeviceStorage.begin();
-    for (; it != m_ListDeviceStorage.end(); ++it) {
-
-        if ((*it).addInfoFromlshw(info)) {
-            return;
-        }
-    }
-}
-
 void DeviceManager::addLshwinfoIntoStorageDevice(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceStorage>::iterator it = m_ListDeviceStorage.begin();
     for (; it != m_ListDeviceStorage.end(); ++it) {
 
         if ((*it).addInfoFromlshw(mapInfo)) {
-            return;
-        }
-    }
-}
-
-void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QString &info)
-{
-    QList<DeviceStorage>::iterator it = m_ListDeviceStorage.begin();
-    for (; it != m_ListDeviceStorage.end(); ++it) {
-        if ((*it).addInfoFromSmartctl(name, info)) {
             return;
         }
     }
@@ -159,14 +125,6 @@ bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString
     return  false;
 }
 
-void DeviceManager::setStorageDeviceAttribute(const QString &name)
-{
-    QList<DeviceStorage>::iterator it = m_ListDeviceStorage.begin();
-    for (; it != m_ListDeviceStorage.end(); ++it) {
-//        (*it).setLshwInfo();
-    }
-}
-
 void DeviceManager::addGpuDevice(const DeviceGpu &device)
 {
     m_ListDeviceGPU.append(device);
@@ -176,27 +134,11 @@ const QList<DeviceGpu> &DeviceManager::getGPUDevices()
     return m_ListDeviceGPU;
 }
 
-void DeviceManager::setGpuInfoFromLshw(const QString &info)
-{
-    QList<DeviceGpu>::iterator it = m_ListDeviceGPU.begin();
-    for (; it != m_ListDeviceGPU.end(); ++it) {
-        (*it).setLshwInfo(info);
-    }
-}
-
 void DeviceManager::setGpuInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceGpu>::iterator it = m_ListDeviceGPU.begin();
     for (; it != m_ListDeviceGPU.end(); ++it) {
         (*it).setLshwInfo(mapInfo);
-    }
-}
-
-void DeviceManager::setGpuInfoFromXrandr(const QString &info)
-{
-    QList<DeviceGpu>::iterator it = m_ListDeviceGPU.begin();
-    for (; it != m_ListDeviceGPU.end(); ++it) {
-        (*it).setXrandrInfo(info);
     }
 }
 
@@ -224,15 +166,6 @@ const QList<DeviceMemory> &DeviceManager::getMemoryDevices()
 {
     return m_ListDeviceMemory;
 }
-void DeviceManager::setMemoryInfoFromDmidecode(const QString &info)
-{
-    QList<DeviceMemory>::iterator it = m_ListDeviceMemory.begin();
-    for (; it != m_ListDeviceMemory.end(); ++it) {
-        if ((*it).setInfoFromDmidecode(info)) {
-            return;
-        }
-    }
-}
 
 void DeviceManager::setMemoryInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
@@ -258,16 +191,6 @@ void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString 
     QList<DeviceMonitor>::iterator it = m_ListDeviceMonitor.begin();
     for (; it != m_ListDeviceMonitor.end(); ++it) {
         if ((*it).setInfoFromXradr(main, edid)) {
-            return;
-        }
-    }
-}
-
-void DeviceManager::setMonitorRefreshRate(const QString &main, const QString &rate)
-{
-    QList<DeviceMonitor>::iterator it = m_ListDeviceMonitor.begin();
-    for (; it != m_ListDeviceMonitor.end(); ++it) {
-        if ((*it).setRateInfoFromXradr(main, rate)) {
             return;
         }
     }
@@ -302,31 +225,11 @@ const QList<DeviceBluetooth> &DeviceManager::getBluetoothDevices()
     return m_ListBluetooth;
 }
 
-void DeviceManager::setBluetoothInfoFromLshw(const QString &info)
-{
-    QList<DeviceBluetooth>::iterator it = m_ListBluetooth.begin();
-    for (; it != m_ListBluetooth.end(); ++it) {
-        if ((*it).setInfoFromLshw(info)) {
-            return;
-        }
-    }
-}
-
 void DeviceManager::setBluetoothInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceBluetooth>::iterator it = m_ListBluetooth.begin();
     for (; it != m_ListBluetooth.end(); ++it) {
         if ((*it).setInfoFromLshw(mapInfo)) {
-            return;
-        }
-    }
-}
-
-void DeviceManager::setBluetoothInfoFromHwinfo(const QString &info)
-{
-    QList<DeviceBluetooth>::iterator it = m_ListBluetooth.begin();
-    for (; it != m_ListBluetooth.end(); ++it) {
-        if ((*it).setInfoFromHwinfo(info)) {
             return;
         }
     }
@@ -350,15 +253,6 @@ const QList<DeviceAudio> &DeviceManager::getAudioDevices()
 {
     return m_ListDeviceAudio;
 }
-void DeviceManager::setAudioInfoFromLshw(const QString &info)
-{
-    QList<DeviceAudio>::iterator it = m_ListDeviceAudio.begin();
-    for (; it != m_ListDeviceAudio.end(); ++it) {
-        if ((*it).setInfoFromLshw(info)) {
-            return;
-        }
-    }
-}
 
 void DeviceManager::setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
@@ -378,11 +272,11 @@ const QList<DeviceNetwork> &DeviceManager::getNetworkDevices()
     return m_ListDeviceNetwork;
 }
 
-void DeviceManager::setNetworkInfoFromHwinfo(const QString &info)
+void DeviceManager::setNetworkInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceNetwork>::iterator it = m_ListDeviceNetwork.begin();
     for (; it != m_ListDeviceNetwork.end(); ++it) {
-        if ((*it).setInfoFromHwinfo(info)) {
+        if ((*it).setInfoFromHwinfo(mapInfo)) {
             return;
         }
     }
@@ -391,14 +285,6 @@ void DeviceManager::setNetworkInfoFromHwinfo(const QString &info)
 void DeviceManager::addImageDevice(const DeviceImage &device)
 {
     m_ListDeviceImage.append(device);
-}
-
-void DeviceManager::setCameraInfoFromLshw(const QString &info)
-{
-    QList<DeviceImage>::iterator it = m_ListDeviceImage.begin();
-    for (; it != m_ListDeviceImage.end(); ++it) {
-        (*it).setInfoFromLshw(info);
-    }
 }
 
 void DeviceManager::setCameraInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -421,22 +307,11 @@ const QList<DeviceKeyboard> &DeviceManager::getKeyboardDevices()
 {
     return m_ListDeviceKeyboard;
 }
-
-void DeviceManager::setKeyboardInfoFromCatDevices(const QString &info)
+void DeviceManager::setKeyboardInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceKeyboard>::iterator it = m_ListDeviceKeyboard.begin();
     for (; it != m_ListDeviceKeyboard.end(); ++it) {
-        if ((*it).setInfoFromCatInputDevices(info)) {
-            return;
-        }
-    }
-}
-
-void DeviceManager::setKeyboardInfoFromLshw(const QString &info)
-{
-    QList<DeviceKeyboard>::iterator it = m_ListDeviceKeyboard.begin();
-    for (; it != m_ListDeviceKeyboard.end(); ++it) {
-        if ((*it).setInfoFromlshw(info)) {
+        if ((*it).setInfoFromlshw(mapInfo)) {
             return;
         }
     }
@@ -487,11 +362,11 @@ const QList<DevicePower> &DeviceManager::getPowerDevices()
 {
     return m_ListDevicePower;
 }
-void DeviceManager::setPowerDaemonInfo(const QString &info)
+void DeviceManager::setPowerDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
     QList<DevicePower>::iterator it = m_ListDevicePower.begin();
     for (; it != m_ListDevicePower.end(); ++it) {
-        (*it).setDaemonInfo(info);
+        (*it).setDaemonInfo(mapInfo);
     }
 }
 void DeviceManager::addPrintDevice(const DevicePrint &device)
@@ -501,14 +376,6 @@ void DeviceManager::addPrintDevice(const DevicePrint &device)
 const QList<DevicePrint> &DeviceManager::getPrintDevices()
 {
     return m_ListDevicePrint;
-}
-
-void DeviceManager::setPrinterInfoFromHwinfo(const QString &info)
-{
-    QList<DevicePrint>::iterator it = m_ListDevicePrint.begin();
-    for (; it != m_ListDevicePrint.end(); ++it) {
-        (*it).setInfoFromHwinfo(info);
-    }
 }
 
 void DeviceManager::addOtherPCIDevice(const DeviceOtherPCI &device)
@@ -528,45 +395,6 @@ const QList<DeviceComputer> &DeviceManager::getComputerDevices()
 {
     return m_ListDeviceComputer;
 }
-void DeviceManager::setComputerBoardInfoFromCatBoardinfo(const QString &info)
-{
-    QList<DeviceComputer>::iterator it = m_ListDeviceComputer.begin();
-    for (; it != m_ListDeviceComputer.end(); ++it) {
-        (*it).setInfoFromCatBoardInfo(info);
-    }
-}
-void DeviceManager::setComputerUOSInfoFromDSysInfo(const QString &info)
-{
-    QList<DeviceComputer>::iterator it = m_ListDeviceComputer.begin();
-    for (; it != m_ListDeviceComputer.end(); ++it) {
-        (*it).setUOSInfo(info);
-    }
-}
-
-
-void DeviceManager::setComputerInfoFromCatVersion(const QString &info)
-{
-    QList<DeviceComputer>::iterator it = m_ListDeviceComputer.begin();
-    for (; it != m_ListDeviceComputer.end(); ++it) {
-        (*it).setInfoFromCatDevice(info);
-    }
-}
-
-void DeviceManager::setComputerChassisInfoFromDmidecode(const QString &info)
-{
-    QList<DeviceComputer>::iterator it = m_ListDeviceComputer.begin();
-    for (; it != m_ListDeviceComputer.end(); ++it) {
-        (*it).setChassisInfoFromDmidecode(info);
-    }
-}
-
-void DeviceManager::setComputerInfoFromLshw(const QString &info)
-{
-    QList<DeviceComputer>::iterator it = m_ListDeviceComputer.begin();
-    for (; it != m_ListDeviceComputer.end(); ++it) {
-        (*it).setInfoFromLshw(info);
-    }
-}
 
 void DeviceManager::addCdromDevice(const DeviceCdrom &device)
 {
@@ -576,16 +404,6 @@ const QList<DeviceCdrom> DeviceManager::getCdromDevices()
 {
     return m_ListDeviceCdrom;
 }
-void DeviceManager::setCdromInfoFromLshw(const QString &info)
-{
-    QList<DeviceCdrom>::iterator it = m_ListDeviceCdrom.begin();
-    for (; it != m_ListDeviceCdrom.end(); ++it) {
-        if ((*it).setInfoFromLshw(info)) {
-            break;
-        }
-    }
-}
-
 
 void DeviceManager::addField(const QString &key, const QString &address)
 {

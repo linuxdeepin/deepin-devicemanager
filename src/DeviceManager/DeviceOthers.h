@@ -8,18 +8,10 @@ public:
     DeviceOthers();
 
     /**@brief:设置从lshw获取的信息*/
-    void setInfoFromLshw(const QString &info);
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从hwinfo获取的信息*/
-    void setInfoFromHwinfo(const QString &info);
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
-
-    /**@brief:判断hwinfo设备是否存在*/
-    bool isExist();
-
-    /**@brief:将其他设备的标志符添加进列表*/
-    void addUniqIDAndBusID();
 
     // 获取设备属性
     const QString &name()const;

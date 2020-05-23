@@ -15,7 +15,6 @@ public:
     DeviceCpu();
 
     /**@brief:设置cpu信息*/
-    void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QString &catInfo);
     void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo);
 
     /**@brief:获取各种属性*/

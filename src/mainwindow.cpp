@@ -88,8 +88,6 @@ MainWindow::MainWindow(QWidget *parent) :
     initLoadingWidget();
 
     setCentralWidget(loadingWidget_);
-
-    connect( &DeviceInfoParser::Instance(), &DeviceInfoParser::loadFinished, this, &MainWindow::showSplashMessage);
     connect( mp_ThreadPool, &ThreadPool::finished, this, &MainWindow::showSplashMessage);
 
     setAttribute(Qt::WA_AcceptDrops, false);

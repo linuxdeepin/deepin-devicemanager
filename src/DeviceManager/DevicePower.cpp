@@ -9,11 +9,9 @@ DevicePower::DevicePower()
     initFilterKey();
 }
 
-void DevicePower::setInfoFromUpower(const QString &info)
+void DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 {
-    QMap<QString, QString> mapInfo;
-    getMapInfo(mapInfo, info);
-    if (mapInfo["Device"].contains("line_power") || mapInfo["Device"].contains("DisplayDevice")) {
+    if (mapInfo["Device"].contains("line_power")) {
         m_Name = QObject::tr("AC Power");
     } else {
         m_Name = QObject::tr("battery");
@@ -42,10 +40,8 @@ void DevicePower::setInfoFromUpower(const QString &info)
 }
 
 
-void DevicePower::setDaemonInfo(const QString &info)
+void DevicePower::setDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
-    QMap<QString, QString> mapInfo;
-    getMapInfo(mapInfo, info);
     loadOtherDeviceInfo(mapInfo);
 }
 

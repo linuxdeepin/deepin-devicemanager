@@ -110,8 +110,13 @@ SOURCES += \
     DeviceManager/DeviceComputer.cpp \
     DeviceManager/DeviceCdrom.cpp \
     LoadInfo/CmdTool.cpp \
-    LoadInfo/GenerateDevice.cpp \
-    LoadInfo/GenerateProDevice.cpp
+    LoadInfo/DeviceFactory.cpp \
+    LoadInfo/DeviceGenerator.cpp \
+    LoadInfo/X86Generator.cpp \
+    LoadInfo/MipsGenerator.cpp \
+    LoadInfo/ArmGenerator.cpp \
+    LoadInfo/PanguGenerator.cpp \
+    LoadInfo/KLUGenerator.cpp
 
 HEADERS += \
     DeviceManager/DeviceInfo.h \
@@ -169,8 +174,13 @@ HEADERS += \
     DeviceManager/DeviceComputer.h \
     DeviceManager/DeviceCdrom.h \
     LoadInfo/CmdTool.h \
-    LoadInfo/GenerateDevice.h \
-    LoadInfo/GenerateProDevice.h
+    LoadInfo/DeviceFactory.h \
+    LoadInfo/DeviceGenerator.h \
+    LoadInfo/X86Generator.h \
+    LoadInfo/MipsGenerator.h \
+    LoadInfo/ArmGenerator.h \
+    LoadInfo/PanguGenerator.h \
+    LoadInfo/KLUGenerator.h
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin

@@ -8,31 +8,6 @@ DeviceAudio::DeviceAudio()
     initFilterKey();
 }
 
-void DeviceAudio::setInfoFromHwinfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromHwinfo(mapInfo, info);
-
-    setAttribute(mapInfo, "Device", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "", m_Version);
-    setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
-    setAttribute(mapInfo, "IRQ", m_Irq);
-    setAttribute(mapInfo, "Memory Range", m_Memory);
-    setAttribute(mapInfo, "", m_Width);
-    setAttribute(mapInfo, "", m_Clock);
-    setAttribute(mapInfo, "", m_Capabilities);
-    setAttribute(mapInfo, "Hardware Class", m_Description);
-
-    m_UniqueKey = mapInfo["SysFS BusID"];
-
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
-
-    loadOtherDeviceInfo(mapInfo);
-}
-
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "Device", m_Name);
@@ -49,44 +24,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     m_UniqueKey = mapInfo["SysFS BusID"];
 
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
-
     loadOtherDeviceInfo(mapInfo);
-}
-
-bool DeviceAudio::setInfoFromLshw(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromLshw(mapInfo, info);
-
-    // 先判断传入的设备信息是否是同一个
-    QStringList words = mapInfo["bus info"].split("@");
-    if (words.size() != 2) {
-        return false;
-    }
-    if (words[1] != m_UniqueKey) {
-        return false;
-    }
-
-    // 设置设备属性
-    setAttribute(mapInfo, "product", m_Name);
-    setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "", m_Model);
-    setAttribute(mapInfo, "version", m_Version);
-    if (m_Version == "00") {
-        m_Version = "";
-    }
-    setAttribute(mapInfo, "bus info", m_BusInfo);
-    setAttribute(mapInfo, "", m_Irq);
-    setAttribute(mapInfo, "", m_Memory);
-    setAttribute(mapInfo, "width", m_Width);
-    setAttribute(mapInfo, "clock", m_Clock);
-    setAttribute(mapInfo, "capabilities", m_Capabilities);
-    setAttribute(mapInfo, "description", m_Description);
-
-    loadOtherDeviceInfo(mapInfo);
-    return true;
 }
 
 bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -105,6 +43,9 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "version", m_Version);
+    if (m_Version == "00") {
+        m_Version = "";
+    }
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "", m_Irq);
     setAttribute(mapInfo, "", m_Memory);

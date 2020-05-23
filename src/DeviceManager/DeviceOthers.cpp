@@ -8,23 +8,6 @@ DeviceOthers::DeviceOthers()
 
 }
 
-void DeviceOthers::setInfoFromLshw(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfo(mapInfo, info);
-
-    setAttribute(mapInfo, "product", m_Name);
-    setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "product", m_Model);
-    setAttribute(mapInfo, "version", m_Version);
-    setAttribute(mapInfo, "bus info", m_BusInfo);
-    setAttribute(mapInfo, "capabilities", m_Capabilities);
-    setAttribute(mapInfo, "driver", m_Driver);
-    setAttribute(mapInfo, "maxpower", m_MaximumPower);
-    setAttribute(mapInfo, "speed", m_Speed);
-    setAttribute(mapInfo, "logical name", m_LogicalName);
-}
-
 void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     if (m_BusInfo.isEmpty() || m_BusInfo != mapInfo["bus info"]) {
@@ -40,34 +23,6 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
     setAttribute(mapInfo, "logical name", m_LogicalName);
-}
-
-void DeviceOthers::setInfoFromHwinfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromHwinfo(mapInfo, info);
-
-    // 设置设备基本属性
-    setAttribute(mapInfo, "Device", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "Revision", m_Version);
-    setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "Speed", m_Speed);
-    setAttribute(mapInfo, "Unique ID", m_UniqID);
-
-    m_BusID = mapInfo["SysFS BusID"].replace(QRegExp("\\.[0-9]*$"), "");
-
-    // 获取映射到 lshw设备信息的 关键字
-    //1-2:1.0
-    QStringList words = mapInfo["SysFS BusID"].split(":");
-    if (words.size() == 2) {
-        QStringList chs = words[0].split("-");
-        if (chs.size() == 2) {
-            m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-        }
-    }
-
 }
 
 void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -93,27 +48,6 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
-}
-
-bool DeviceOthers::isExist()
-{
-    if (DeviceInfoParser::Instance().s_usbDeiveUniq.contains(m_UniqID) ||
-            DeviceInfoParser::Instance().s_usbDevicebus.contains(m_BusID)) {
-        return true;
-    }
-
-    if (m_UniqID.isEmpty() || m_BusID.isEmpty()) {
-        return true;
-    }
-
-    return false;
-
-}
-
-void DeviceOthers::addUniqIDAndBusID()
-{
-    addHwinfoUniqueID(m_UniqID);
-    addHwinfoBusID(m_BusID);
 }
 
 const QString &DeviceOthers::name()const

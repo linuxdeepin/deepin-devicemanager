@@ -9,11 +9,9 @@ public:
     DeviceAudio();
 
     /**@brief:设置从hwinfo里面获取的信息*/
-    void setInfoFromHwinfo(const QString &info);
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从lshw里面获取的信息*/
-    bool setInfoFromLshw(const QString &info);
     bool setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     // 获取设备属性

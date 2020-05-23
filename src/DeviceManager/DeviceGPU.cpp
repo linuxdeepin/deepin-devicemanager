@@ -20,49 +20,8 @@ void DeviceGpu::initFilterKey()
     addFilterKey(QObject::tr("latency"));
 }
 
-void DeviceGpu::setLshwInfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromLshw(mapInfo, info);
-
-    // 判断是否是同一个gpu
-    QRegExp re(":[0-9]{2}:[0-9]{2}");
-    int index = mapInfo["bus info"].indexOf(re);
-    QString uniqueKey = mapInfo["bus info"].mid(index + 1);
-    if (!uniqueKey.contains(m_UniqueKey)) {
-        return;
-    }
-
-    // 设置属性
-    setAttribute(mapInfo, "product", m_Name);
-    setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "", m_Model);
-    setAttribute(mapInfo, "version", m_Version);
-    setAttribute(mapInfo, "", m_GraphicsMemory);
-    setAttribute(mapInfo, "width", m_Width);
-    setAttribute(mapInfo, "", m_DisplayPort);
-    setAttribute(mapInfo, "clock", m_Clock);
-    setAttribute(mapInfo, "irq", m_IRQ);
-    setAttribute(mapInfo, "capabilities", m_Capabilities);
-    setAttribute(mapInfo, "", m_DisplayOutput);
-    setAttribute(mapInfo, "", m_VGA);
-    setAttribute(mapInfo, "", m_HDMI);
-    setAttribute(mapInfo, "description", m_Description);
-    setAttribute(mapInfo, "driver", m_Driver);
-    setAttribute(mapInfo, "", m_CurrentResolution);
-    setAttribute(mapInfo, "", m_MinimumResolution);
-    setAttribute(mapInfo, "", m_MaximumResolution);
-    setAttribute(mapInfo, "bus info", m_BusInfo);
-    setAttribute(mapInfo, "ioport", m_IOPort);
-    setAttribute(mapInfo, "memory", m_MemAddress);
-    setAttribute(mapInfo, "physical id", m_PhysID);
-
-    loadOtherDeviceInfo(mapInfo);
-}
-
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
 {
-
     // 判断是否是同一个gpu
     QRegExp re(":[0-9]{2}:[0-9]{2}");
     int index = mapInfo["bus info"].indexOf(re);
@@ -94,39 +53,6 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "ioport", m_IOPort);
     setAttribute(mapInfo, "memory", m_MemAddress);
     setAttribute(mapInfo, "physical id", m_PhysID);
-
-    loadOtherDeviceInfo(mapInfo);
-}
-
-void DeviceGpu::setHwinfoInfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromHwinfo(mapInfo, info);
-
-    // 设置属性
-    setAttribute(mapInfo, "Vendor", m_Vendor, false);
-    setAttribute(mapInfo, "Model", m_Name, false);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "Revision", m_Version, false);
-    setAttribute(mapInfo, "IRQ", m_IRQ, false);
-    setAttribute(mapInfo, "Driver", m_Driver, false);
-    setAttribute(mapInfo, "", m_GraphicsMemory);
-    setAttribute(mapInfo, "", m_DisplayOutput);
-    setAttribute(mapInfo, "", m_VGA);
-    setAttribute(mapInfo, "", m_HDMI);
-    setAttribute(mapInfo, "", m_DisplayPort);
-    setAttribute(mapInfo, "", m_Clock);
-    setAttribute(mapInfo, "", m_CurrentResolution);
-    setAttribute(mapInfo, "", m_MinimumResolution);
-    setAttribute(mapInfo, "", m_MaximumResolution);
-
-    // 获取 m_UniqueKey
-    QRegExp re(":[0-9]{2}:[0-9]{2}");
-    int index = mapInfo["SysFS BusID"].indexOf(re);
-    m_UniqueKey = mapInfo["SysFS BusID"].mid(index + 1);
-
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
 
     loadOtherDeviceInfo(mapInfo);
 }
@@ -155,38 +81,10 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     int index = mapInfo["SysFS BusID"].indexOf(re);
     m_UniqueKey = mapInfo["SysFS BusID"].mid(index + 1);
 
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
-
     loadOtherDeviceInfo(mapInfo);
+    return true;
 }
 
-void DeviceGpu::setXrandrInfo(const QString &info)
-{
-    QStringList lines = info.split("\n");
-    foreach (const QString &line, lines) {
-        QRegExp reline("[a-zA-Z]{1,3}.*");
-        if (!reline.exactMatch(line)) {
-            continue;
-        }
-        if (line.startsWith("Screen")) {
-            QRegExp re(".*([0-9]{3,5}\\sx\\s[0-9]{3,5}).*([0-9]{3,5}\\sx\\s[0-9]{3,5}).*([0-9]{3,5}\\sx\\s[0-9]{3,5}).*");
-            if (re.exactMatch(info)) {
-                m_MinimumResolution = re.cap(1);
-                m_CurrentResolution = re.cap(2);
-                m_MaximumResolution = re.cap(3);
-            }
-        } else if (line.startsWith("HDMI")) {
-            m_HDMI = "Enable";
-        } else if (line.startsWith("VGA")) {
-            m_VGA = "Enable";
-        } else if (line.startsWith("DP")) {
-            m_DisplayPort = "Enable";
-        } else if (line.startsWith("eDP")) {
-            m_eDP = "Enable";
-        }
-    }
-}
 
 void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
 {

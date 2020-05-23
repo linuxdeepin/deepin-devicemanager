@@ -9,8 +9,6 @@ public:
     DevicePrint();
 
     void setInfo(const QMap<QString, QString> &info);
-    void setInfoFromHwinfo(const QString &info);
-    void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
 
     // 获取设备属性
     const QString &name()const;

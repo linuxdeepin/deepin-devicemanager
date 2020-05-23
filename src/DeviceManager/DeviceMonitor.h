@@ -10,14 +10,12 @@ public:
     DeviceMonitor();
 
     // 设置从hwinfo中获取的信息
-    void setInfoFromHwinfo(const QString &info);
     void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
 
     // 设置从xrandr中获取的信息
     bool setInfoFromXradr(const QString &main, const QString &edid);
 
     // 设置从xrandr中获取的信息
-    bool setRateInfoFromXradr(const QString &main, const QString &rate);
     bool setCurrentResolution(const QString &resolution, const QString &rate);
 
     // 将年周转化为年月

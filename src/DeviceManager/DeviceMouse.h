@@ -17,15 +17,10 @@ public:
     DeviceMouse();
 
     /**@brief:添加 从 sudo hwinfo --mouse 中获取的信息 */
-    void setInfoFromHwinfo(const QString &info);
     void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
 
     /**@brief:添加 从 sudo lshw -C input 中获取的信息 */
-    bool setInfoFromlshw(const QString &info);
-
-    /**@brief:添加 从 cat /proc/bus/input/devices 中获取的信息 */
-    bool setInfoFromCatInputDevices(const QString &info);
-
+    bool setInfoFromlshw(QMap<QString, QString> mapInfo);
 
     /**@brief:获取基本设备属性*/
     const QString &name()const;
@@ -41,9 +36,6 @@ public:
 
 protected:
     void initFilterKey() override;
-private:
-    /**@brief:将信息转换成QMap<QString,QString>*/
-    void getMapInfoFromCatDevice(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
 
 private:
     QString     m_Name;                             //<! 名称    #制造商+型号#

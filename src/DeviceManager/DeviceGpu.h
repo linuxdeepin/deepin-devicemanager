@@ -8,15 +8,12 @@ public:
     DeviceGpu();
 
     /**@brief:设置从lshw中获取的信息*/
-    void setLshwInfo(const QString &info);
     void setLshwInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从hwinfo中获取的信息*/
-    void setHwinfoInfo(const QString &info);
     bool setHwinfoInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从xrandr中获取的信息*/
-    void setXrandrInfo(const QString &info);
     void setXrandrInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置从dmesg中获取的信息*/

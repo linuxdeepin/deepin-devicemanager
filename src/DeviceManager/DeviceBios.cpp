@@ -7,20 +7,6 @@ DeviceBios::DeviceBios()
     initFilterKey();
 }
 
-bool DeviceBios::setBiosInfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromDmidecode(mapInfo, info);
-    if (mapInfo.size() < 2) {
-        return false;
-    }
-    m_Name = QObject::tr("BIOS Information");
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
-    return true;
-}
-
 bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.size() < 2) {
@@ -29,24 +15,6 @@ bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
     m_Name = QObject::tr("BIOS Information");
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
-    return true;
-}
-
-bool DeviceBios::setBaseBoardInfo(const QString &info, const QString &chipsetFamliy)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromDmidecode(mapInfo, info);
-    if (mapInfo.size() < 2) {
-        return false;
-    }
-    m_Name = QObject::tr("Base Board Information");
-    m_ChipsetFamily = chipsetFamliy;
-    setAttribute(mapInfo, "Manufacturer", m_Vendor);
-    setAttribute(mapInfo, "Version", m_Version);
-    setAttribute(mapInfo, "Product Name", m_ProductName);
-    setAttribute(mapInfo, "Board name", m_ProductName, false);
-    m_IsBoard = true;
     loadOtherDeviceInfo(mapInfo);
     return true;
 }
@@ -67,21 +35,6 @@ bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo, const Q
     return true;
 }
 
-bool DeviceBios::setSystemInfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromDmidecode(mapInfo, info);
-    if (mapInfo.size() < 2) {
-        return false;
-    }
-    m_Name = QObject::tr("System Information");
-    setAttribute(mapInfo, "Manufacturer", m_Vendor);
-    setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
-    return true;
-}
-
-
 bool DeviceBios::setSystemInfo(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.size() < 2) {
@@ -94,41 +47,12 @@ bool DeviceBios::setSystemInfo(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
-bool DeviceBios::setChassisInfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromDmidecode(mapInfo, info);
-    if (mapInfo.size() < 2) {
-        return false;
-    }
-    m_Name = QObject::tr("Chassis Information");
-    setAttribute(mapInfo, "Manufacturer", m_Vendor);
-    setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
-    return true;
-}
-
-
 bool DeviceBios::setChassisInfo(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.size() < 2) {
         return false;
     }
     m_Name = QObject::tr("Chassis Information");
-    setAttribute(mapInfo, "Manufacturer", m_Vendor);
-    setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
-    return true;
-}
-
-bool DeviceBios::setMemoryInfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromDmidecode(mapInfo, info);
-    if (mapInfo.size() < 2) {
-        return false;
-    }
-    m_Name = QObject::tr("Physical Memory Array");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
     loadOtherDeviceInfo(mapInfo);
@@ -230,26 +154,4 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("System Information"));
     addFilterKey(QObject::tr("Chassis Information"));
     addFilterKey(QObject::tr("Physical Memory Array"));
-}
-
-void DeviceBios::getMapInfoFromDmidecode(QMap<QString, QString> &mapInfo, const QString &info)
-{
-    QStringList lines = info.split("\n");
-    QString lasKey;
-    foreach (const QString &line, lines) {
-        if (line.isEmpty()) {
-            continue;
-        }
-        QStringList words = line.split(": ");
-        if (words.size() == 1 && words[0].endsWith(":")) {
-            lasKey = words[0].replace(QRegExp(":$"), "");
-            mapInfo.insert(lasKey.trimmed(), " ");
-        } else if (words.size() == 1 && !lasKey.isEmpty()) {
-            mapInfo[lasKey.trimmed()] += words[0];
-            mapInfo[lasKey.trimmed()] += "  /  ";
-        } else if (words.size() == 2) {
-            lasKey = "";
-            mapInfo.insert(words[0].trimmed(), words[1].trimmed());
-        }
-    }
 }

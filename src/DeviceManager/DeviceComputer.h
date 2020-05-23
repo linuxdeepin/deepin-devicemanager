@@ -8,24 +8,6 @@ class DeviceComputer : public DeviceBaseInfo
 public:
     DeviceComputer();
 
-    /**@brief:获取从 cat /etc/os-release 中获取的信息 */
-    void setInfoFromCatOsRelease(const QString &info);
-
-    /**@brief:获取从 cat /proc/boradinfo 中获取的信息 */
-    void setInfoFromCatBoardInfo(const QString &info);
-
-    /**@brief:获取从 lsb_release -a 中获取的信息 */
-    void setUOSInfo(const QString &info);
-
-    /**@brief:获取从 cat /proc/version 中获取的信息 */
-    void setInfoFromCatDevice(const QString &info);
-
-    /**@brief:获取从 sudo dmidecode -t Chassis 中获取的信息 */
-    void setChassisInfoFromDmidecode(const QString &info);
-
-    /**@brief:获取从 lshw 中获取的信息*/
-    void setInfoFromLshw(const QString &info);
-
     const QString &homeUrl()const;
     const QString &osDescription();
     const QString &os();

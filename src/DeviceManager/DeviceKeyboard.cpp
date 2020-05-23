@@ -9,24 +9,8 @@ DeviceKeyboard::DeviceKeyboard()
     initFilterKey();
 }
 
-bool DeviceKeyboard::setInfoFromCatInputDevices(const QString &info)
+bool DeviceKeyboard::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
-    QMap<QString, QString> mapInfo;
-    getKeyboardMapInfoFromInputDevice(mapInfo, info);
-    if (m_KeysToCatDevices != mapInfo["HwinfoKey"]) {
-        return false;
-    }
-
-    setAttribute(mapInfo, "Name", m_Name);
-    loadOtherDeviceInfo(mapInfo);
-    return true;
-}
-
-bool DeviceKeyboard::setInfoFromlshw(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfo(mapInfo, info);
-
     if (m_KeyToLshw != mapInfo["bus info"]) {
         return false;
     }
@@ -43,47 +27,6 @@ bool DeviceKeyboard::setInfoFromlshw(const QString &info)
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
     return true;
-}
-
-void DeviceKeyboard::setInfoFromHwinfo(const QString &info)
-{
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromHwinfo(mapInfo, info);
-
-    // 设置设备基本属性
-    setAttribute(mapInfo, "Device", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "Revision", m_Version);
-    if (mapInfo.find("Hotplug") != mapInfo.end()) {
-        setAttribute(mapInfo, "Hotplug", m_Interface);
-    } else {
-        m_Interface = "PS/2";
-    }
-    setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
-    setAttribute(mapInfo, "Hardware Class", m_Description);
-    setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "Speed", m_Speed);
-
-    // 获取映射到 lshw设备信息的 关键字
-    //1-2:1.0
-    QStringList words = mapInfo["SysFS BusID"].split(":");
-    if (words.size() == 2) {
-        QStringList chs = words[0].split("-");
-        if (chs.size() == 2) {
-            m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-        }
-    }
-
-    // 获取映射到cat devices 的 关键字
-    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
-    if (re.exactMatch(mapInfo["Device File"])) {
-        m_KeysToCatDevices = re.cap(1);
-    }
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
-
-    loadOtherDeviceInfo(mapInfo);
 }
 
 void DeviceKeyboard::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -112,15 +55,6 @@ void DeviceKeyboard::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
-
-    // 获取映射到cat devices 的 关键字
-    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
-    if (re.exactMatch(mapInfo["Device File"])) {
-        m_KeysToCatDevices = re.cap(1);
-    }
-    addHwinfoUniqueID(mapInfo["Unique ID"]);
-    addHwinfoBusID(mapInfo["SysFS BusID"]);
-
     loadOtherDeviceInfo(mapInfo);
 }
 

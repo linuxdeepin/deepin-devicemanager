@@ -7,14 +7,11 @@ class DeviceKeyboard : public DeviceBaseInfo
 {
 public:
     DeviceKeyboard();
-    /**@brief:添加 从 cat /proc/bus/input/devices 中获取的信息 */
-    bool setInfoFromCatInputDevices(const QString &info);
 
     /**@brief:添加 从 sudo lshw -C input 中获取的信息 */
-    bool setInfoFromlshw(const QString &info);
+    bool setInfoFromlshw(const QMap<QString, QString> &mapInfo);
 
     /**@brief:添加 从 sudo hwinfo --keyboard 中获取的信息 */
-    void setInfoFromHwinfo(const QString &info);
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     // 获取设备属性

@@ -1,6 +1,7 @@
 #include "CmdTool.h"
 #include <cups.h>
 #include "commondefine.h"
+#include<QDebug>
 extern void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap);
 extern int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest);
 
@@ -20,10 +21,21 @@ void CmdTool::clear()
     s_cmdInfo.clear();
 }
 
-void CmdTool::loadCmdInfo(const QString &cmd, const QString &key, const QString &paragraphSplit,  KeyValueSplit st,  const QString &ch, const QString &debugFile)
+void CmdTool::addMapInfo(const QString key, const QMap<QString, QString> &mapInfo)
+{
+    if (s_cmdInfo.find(key) != s_cmdInfo.end()) {
+        s_cmdInfo[key].append(mapInfo);
+    } else {
+        QList<QMap<QString, QString> > lstMap;
+        lstMap.append(mapInfo);
+        s_cmdInfo.insert(key, lstMap);
+    }
+}
+
+void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString &debugFile)
 {
     if (key == "lshw") {
-        loadLshwInfo(cmd, paragraphSplit, debugFile);
+        loadLshwInfo(cmd, debugFile);
     } else if (key == "lsblk_d") {
         loadLsblkInfo(cmd, debugFile);
     } else if (key == "xrandr") {
@@ -36,81 +48,54 @@ void CmdTool::loadCmdInfo(const QString &cmd, const QString &key, const QString 
         loadHciconfigInfo(cmd, debugFile);
     } else if (key == "printer") {
         loadPrinterInfo();
+    } else if (key == "lspci") {
+        loadLspciInfo();
+    } else if (key == "upower") {
+        loadUpowerInfo(key, cmd, debugFile);
+    } else if (key.startsWith("hwinfo")) {
+        loadHwinfoInfo(key, cmd, debugFile);
+    } else if (key.startsWith("dmidecode")) {
+        loadDmidecodeInfo(key, cmd, debugFile);
     } else {
-        QString deviceInfo;
-        getDeviceInfo(cmd, deviceInfo, debugFile);
-        QStringList items = deviceInfo.split(paragraphSplit);
-        foreach (const QString &item, items) {
-            if (item.isEmpty()) {
-                continue;
-            }
-
-            QMap<QString, QString> mapInfo;
-            if (key == "cat_version") {
-                mapInfo["OS"] = item;
-            } else {
-                getMapInfo(st, item, mapInfo, ch);
-            }
-
-            //预防有相同的总线信息
-            if (key == "hwinfo_usb") {
-                QList<QMap<QString, QString>>::iterator it = s_cmdInfo[key].begin();
-                bool add = true;
-                for (; it != s_cmdInfo[key].end(); ++it) {
-                    QString curBus = (*it)["SysFS BusID"];
-                    QString newBus = mapInfo["SysFS BusID"];
-                    curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
-                    newBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
-                    if (curBus == newBus) {
-                        add = false;
-                        break;
-                    }
-                }
-                if (add) {
-                    s_cmdInfo[key].append(mapInfo);
-                }
-            } else {
-                s_cmdInfo[key].append(mapInfo);
-            }
-        }
+        loadCatInfo(key, cmd, debugFile);
     }
 }
 
-void CmdTool::loadLshwInfo(const QString &cmd, const QString &paragraphSplit, const QString &debugFile)
+void CmdTool::loadLshwInfo(const QString &cmd, const QString &debugFile)
 {
     QString deviceInfo;
     getDeviceInfo(cmd, deviceInfo, debugFile);
-    QStringList items = deviceInfo.split(paragraphSplit);
+    QStringList items = deviceInfo.split("*-");
     bool isFirst = true;
     foreach (const QString &item, items) {
         QMap<QString, QString> mapInfo;
         if (isFirst) {
             getMapInfoFromLshw(item, mapInfo);
-            s_cmdInfo["lshw_system"].append(mapInfo);
+            addMapInfo("lshw_system", mapInfo);
             isFirst = false;
             continue;
         }
         if (item.startsWith("cpu")) {
             getMapInfoFromLshw(item, mapInfo);
-            s_cmdInfo["lshw_cpu"].append(mapInfo);
+            addMapInfo("lshw_cpu", mapInfo);
         } else if (item.startsWith("disk")) {
             getMapInfoFromLshw(item, mapInfo);
-            s_cmdInfo["lshw_disk"].append(mapInfo);
+            addMapInfo("lshw_disk", mapInfo);
         } else if ((item.startsWith("memory") && !item.startsWith("memory UNCLAIMED")) || item.startsWith("bank:")) {
             getMapInfoFromLshw(item, mapInfo);
-            s_cmdInfo["lshw_memory"].append(mapInfo);
+            addMapInfo("lshw_memory", mapInfo);
         } else if (item.startsWith("display")) {
             getMapInfoFromLshw(item, mapInfo);
-            s_cmdInfo["lshw_display"].append(mapInfo);
+            addMapInfo("lshw_display", mapInfo);
         } else if (item.startsWith("multimedia")) {
             getMapInfoFromLshw(item, mapInfo);
-            s_cmdInfo["lshw_multimedia"].append(mapInfo);
+            addMapInfo("lshw_multimedia", mapInfo);
         } else if (item.startsWith("network")) {
             getMapInfoFromLshw(item, mapInfo);
-            s_cmdInfo["lshw_network"].append(mapInfo);
+            addMapInfo("lshw_network", mapInfo);
         } else if (item.startsWith("usb:")) {
             getMapInfoFromLshw(item, mapInfo);
-            s_cmdInfo["lshw_usb"].append(mapInfo);
+            addMapInfo("lshw_usb", mapInfo);
         }
     }
 }
@@ -134,7 +119,7 @@ void CmdTool::loadLsblkInfo(const QString &cmd, const QString &debugfile)
         QString smartCmd = QString("sudo smartctl --all /dev/%1").arg(words[0].trimmed());
         loadSmartCtlInfo(smartCmd, words[0].trimmed());
     }
-    s_cmdInfo["lsblk_d"].append(mapInfo);
+    addMapInfo("lsblk_d", mapInfo);
 }
 
 void CmdTool::loadSmartCtlInfo(const QString &cmd, const QString &debugfile)
@@ -146,7 +131,7 @@ void CmdTool::loadSmartCtlInfo(const QString &cmd, const QString &debugfile)
     QMap<QString, QString> mapInfo;
     mapInfo["ln"] = debugfile;
     getMapInfoFromSmartctl(mapInfo, deviceInfo);
-    s_cmdInfo["smart"].append(mapInfo);
+    addMapInfo("smart", mapInfo);
 }
 
 void CmdTool::loadXrandrInfo(const QString &cmd, const QString &debugfile)
@@ -186,7 +171,7 @@ void CmdTool::loadXrandrInfo(const QString &cmd, const QString &debugfile)
             mapInfo["eDP"] = "Enable";
         }
     }
-    s_cmdInfo["xrandr"].append(mapInfo);
+    addMapInfo("xrandr", mapInfo);
 }
 
 void CmdTool::loadXrandrVerboseInfo(const QString &cmd, const QString &debugfile)
@@ -213,7 +198,7 @@ void CmdTool::loadXrandrVerboseInfo(const QString &cmd, const QString &debugfile
                 QMap<QString, QString> mapInfo;
                 mapInfo.insert("mainInfo", mainInfo.trimmed());
                 mapInfo.insert("edid", edid.trimmed());
-                s_cmdInfo["xrandr_verbose"].append(mapInfo);
+                addMapInfo("xrandr_verbose", mapInfo);
             }
             mainInfo = line;
             edid = "";
@@ -229,7 +214,7 @@ void CmdTool::loadXrandrVerboseInfo(const QString &cmd, const QString &debugfile
     QMap<QString, QString> mapInfo;
     mapInfo.insert("mainInfo", mainInfo.trimmed());
     mapInfo.insert("edid", edid.trimmed());
-    s_cmdInfo["xrandr_verbose"].append(mapInfo);
+    addMapInfo("xrandr_verbose", mapInfo);
 }
 
 void CmdTool::loadDmesgInfo(const QString &cmd, const QString &debugfile)
@@ -255,7 +240,7 @@ void CmdTool::loadDmesgInfo(const QString &cmd, const QString &debugfile)
             }
         }
     }
-    s_cmdInfo["dmesg"].append(mapInfo);
+    addMapInfo("dmesg", mapInfo);
 }
 
 void CmdTool::loadHciconfigInfo(const QString &cmd, const QString &debugfile)
@@ -271,7 +256,7 @@ void CmdTool::loadHciconfigInfo(const QString &cmd, const QString &debugfile)
         }
         QMap<QString, QString> mapInfo;
         getMapInfoFromHciconfig(mapInfo, paragraph);
-        s_cmdInfo["hciconfig"].append(mapInfo);
+        addMapInfo("hciconfig", mapInfo);
     }
 }
 
@@ -356,29 +341,109 @@ void CmdTool::loadPrinterInfo()
 
     foreach (const QString &key, info.keys()) {
         info[key]["Name"] = key;
-        s_cmdInfo["printer"].append(info[key]);
+        addMapInfo("printer", info[key]);
     }
 }
 
-void CmdTool::getMapInfo(KeyValueSplit st, const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
+void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile)
 {
-    switch (st) {
-    case ST_Null:
-        break;
-    case ST_Common:
-        getMapInfoFromCmd(info, mapInfo, ch);
-        break;
-    case ST_lshw:
-        getMapInfoFromLshw(info, mapInfo);
-        break;
-    case ST_Hwinfo:
-        getMapInfoFromHwinfo(info, mapInfo);
-        break;
-    case ST_dmidecode:
-        getMapInfoFromDmidecode(info, mapInfo);
-        break;
+    QString deviceInfo;
+    getDeviceInfo(cmd, deviceInfo, debugfile);
+    QStringList items = deviceInfo.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty()) {
+            continue;
+        }
+
+        QMap<QString, QString> mapInfo;
+        getMapInfoFromHwinfo(item, mapInfo);
+
+        //预防有相同的总线信息
+        if (key == "hwinfo_usb") {
+            QList<QMap<QString, QString>>::iterator it = s_cmdInfo[key].begin();
+            bool add = true;
+            for (; it != s_cmdInfo[key].end(); ++it) {
+                QString curBus = (*it)["SysFS BusID"];
+                QString newBus = mapInfo["SysFS BusID"];
+                curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+                newBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+                if (curBus == newBus) {
+                    add = false;
+                    break;
+                }
+            }
+            if (add) {
+                addMapInfo(key, mapInfo);
+            }
+        } else {
+            addMapInfo(key, mapInfo);
+        }
     }
 }
+void CmdTool::loadDmidecodeInfo(const QString &key, const QString &cmd, const QString &debugfile)
+{
+    QString deviceInfo;
+    getDeviceInfo(cmd, deviceInfo, debugfile);
+    QStringList items = deviceInfo.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty()) {
+            continue;
+        }
+
+        QMap<QString, QString> mapInfo;
+        getMapInfoFromDmidecode(item, mapInfo);
+        addMapInfo(key, mapInfo);
+    }
+}
+
+void CmdTool::loadLspciInfo()
+{
+
+}
+
+void CmdTool::loadCatInfo(const QString &key, const QString &cmd, const QString &debugfile)
+{
+    QString deviceInfo;
+    if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
+        return;
+    }
+    QStringList items = deviceInfo.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty()) {
+            continue;
+        }
+
+        QMap<QString, QString> mapInfo;
+        if (key == "cat_version") {
+            mapInfo["OS"] = item;
+        } else {
+            getMapInfoFromCmd(item, mapInfo, key.startsWith("cat_os") ? "=" : ": ");
+        }
+        addMapInfo(key, mapInfo);
+    }
+}
+
+void CmdTool::loadUpowerInfo(const QString &key, const QString &cmd, const QString &debugfile)
+{
+    QString deviceInfo;
+    if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
+        return;
+    }
+    QStringList items = deviceInfo.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty() || item.contains("DisplayDevice")) {
+            continue;
+        }
+        QMap<QString, QString> mapInfo;
+        getMapInfoFromCmd(item, mapInfo);
+        if (item.contains("Daemon:")) {
+            addMapInfo("Daemon", mapInfo);
+        } else {
+            addMapInfo(key, mapInfo);
+        }
+    }
+}
+
 void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
     QStringList infoList = info.split("\n");
@@ -458,7 +523,7 @@ void CmdTool::getMapInfoFromDmidecode(const QString &info, QMap<QString, QString
         if (line.isEmpty()) {
             continue;
         }
-        QStringList words = line.split(": ");
+        QStringList words = line.split(ch);
         if (words.size() == 1 && words[0].endsWith(":")) {
             lasKey = words[0].replace(QRegExp(":$"), "");
             mapInfo.insert(lasKey.trimmed(), " ");

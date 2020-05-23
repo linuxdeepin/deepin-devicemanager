@@ -45,10 +45,13 @@ public:
 
     void addAllDeviceinfoWidget();
 
-    void addDeviceWidget(DeviceInfoWidgetBase* w, const QString& icon);
-    void insertDeviceWidget(int index, DeviceInfoWidgetBase* w);
+    void addDeviceWidget(DeviceInfoWidgetBase *w, const QString &icon);
+    void insertDeviceWidget(int index, DeviceInfoWidgetBase *w);
 
-    bool isRefreshing(){ return refreshing_; }
+    bool isRefreshing()
+    {
+        return refreshing_;
+    }
     void refresh();
     void refreshDatabase();
 
@@ -56,7 +59,7 @@ public:
     void showDisplayShortcutsHelpDialog();
     void windowMaximizing();
 
-    void currentDeviceChanged(const QString& device);
+    void currentDeviceChanged(const QString &device);
 
 signals:
     void startLoadingWidgetSignal();
@@ -65,7 +68,7 @@ public slots:
     void initLoadingWidget();
 
 private:
-    void showSplashMessage(const QString& message);
+    void showSplashMessage(const QString &message);
 
 protected:
     void keyPressEvent(QKeyEvent *keyEvent) override;
@@ -76,22 +79,22 @@ protected:
     void saveSettings();
     void loadSettings();
 private:
-    DeviceListView* leftDeviceView_ = nullptr;
-    Dtk::Widget::DStackedWidget* rightDeviceInfoWidget_ = nullptr;
+    DeviceListView *leftDeviceView_ = nullptr;
+    Dtk::Widget::DStackedWidget *rightDeviceInfoWidget_ = nullptr;
 
-    QMap<QString, DeviceInfoWidgetBase*> deviceInfoWidgetMap_;//widgetname　- widget
+    QMap<QString, DeviceInfoWidgetBase *> deviceInfoWidgetMap_; //widgetname　- widget
     bool firstAdd_ = true;
     QString currentDevice_;
 
-    Dtk::Widget::DMenu* contextMenu_ = nullptr;
-    Dtk::Widget::DLabel* loadLabel_ = nullptr;
-    Dtk::Widget::DWidget* mainWidget_ = nullptr;
-    Dtk::Widget::DWidget* loadingWidget_ = nullptr;
+    Dtk::Widget::DMenu *contextMenu_ = nullptr;
+    Dtk::Widget::DLabel *loadLabel_ = nullptr;
+    Dtk::Widget::DWidget *mainWidget_ = nullptr;
+    Dtk::Widget::DWidget *loadingWidget_ = nullptr;
 
     bool refreshing_ = false;
     QSize m_sizeForQSetting;
 
-    ThreadPool*           mp_ThreadPool;
+    ThreadPool           *mp_ThreadPool;
 };
 
 #endif

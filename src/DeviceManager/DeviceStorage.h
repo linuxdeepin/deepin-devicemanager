@@ -8,17 +8,14 @@ public:
     DeviceStorage();
 
     /**@brief:解析从 sudo hwinfo --disk 中获取的消息*/
-    bool setHwinfoInfo(const QString &info);
     bool setHwinfoInfo(const QMap<QString, QString> &mapInfo);
     /**@brief:设置存储设备的介质类型*/
     bool setMediaType(const QString &name, const QString &value);
 
     /**@brief:解析从 sudo lshw -C disk 中获取的消息*/
-    bool addInfoFromlshw(const QString &info);
     bool addInfoFromlshw(const QMap<QString, QString> &mapInfo);
 
     /**@brief:解析从 sudo smartctl --all /dev/sda中获取的消息*/
-    bool addInfoFromSmartctl(const QString &name, const QString &info);
     bool addInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo);
 
     /**@brief:从sudo lshw -C disk 中获取信息*/

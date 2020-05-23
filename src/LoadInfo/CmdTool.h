@@ -6,15 +6,6 @@
 #include <QProcess>
 #include <QFile>
 
-enum KeyValueSplit {
-    ST_Null = 0,
-    ST_Common = 1,
-    ST_lshw = 2,
-    ST_dmidecode = 3,
-    ST_Hwinfo = 4,
-};
-
-
 class CmdTool
 {
 public:
@@ -22,15 +13,16 @@ public:
 
     static QMap<QString, QList<QMap<QString, QString> > > &getCmdInfo();
     static void clear();
+    static void addMapInfo(const QString key, const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief:通过命令获取设备信息
      * @brief[loadCmdInfo]:一般的处理方式
      * @brief[loadLshwInfo]:lshw命令的处理方式不同
      */
-    void loadCmdInfo(const QString &cmd, const QString &key, const QString &paragraphSplit, KeyValueSplit st, const QString &ch = ": ", const QString &debugFile = QString(""));
+    void loadCmdInfo(const QString &key, const QString &cmd, const QString &debugFile = QString(""));
 private:
-    void loadLshwInfo(const QString &cmd, const QString &paragraphSplit, const QString &debugFile = QString(""));
+    void loadLshwInfo(const QString &cmd, const QString &debugFile = QString("lshw.txt"));
     void loadLsblkInfo(const QString &cmd, const QString &debugfile);
     void loadSmartCtlInfo(const QString &cmd, const QString &debugfile);
     void loadXrandrInfo(const QString &cmd, const QString &debugfile);
@@ -38,13 +30,17 @@ private:
     void loadDmesgInfo(const QString &cmd, const QString &debugfile);
     void loadHciconfigInfo(const QString &cmd, const QString &debugfile);
     void loadPrinterInfo();
+    void loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile);
+    void loadDmidecodeInfo(const QString &key, const QString &cmd, const QString &debugfile);
+    void loadLspciInfo();
+    void loadCatInfo(const QString &key, const QString &cmd, const QString &debugfile);
+    void loadUpowerInfo(const QString &key, const QString &cmd, const QString &debugfile);
 
 
 private:
     /**
      * @brief:将通过命令获取的信息，转化为map形式
      */
-    void getMapInfo(KeyValueSplit st, const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromLshw(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
