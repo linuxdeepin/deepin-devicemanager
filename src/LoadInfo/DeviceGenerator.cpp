@@ -582,6 +582,12 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         if ((*it).size() < 1) {
             continue;
         }
+
+        // 不让数位板显示在鼠标设备里面(武汉那边的数位板)
+        if ((*it)["Device"].contains("PM")) {
+            continue;
+        }
+
         DeviceMouse device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addMouseDevice(device);
@@ -662,6 +668,15 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         if ((*it).size() < 5) {
             continue;
         }
+
+        // 这里特殊处理数位板问题(武汉那边的数位板)
+        if ((*it)["Device"].contains("PM")) {
+            DeviceOthers device;
+            device.setInfoFromHwinfo(*it);
+            DeviceManager::instance()->addOthersDevice(device);
+        }
+
+        // 过滤
         if ((*it)["Hardware Class"] != "unknown" || (*it)["Driver"] == "btusb" || (*it)["Driver"] == "snd-usb-audio") {
             continue;
         }
