@@ -91,7 +91,7 @@ void CmdTool::loadLshwInfo(const QString &cmd, const QString &debugFile)
         } else if (item.startsWith("network")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_network", mapInfo);
-        } else if (item.startsWith("usb:")) {
+        } else if (item.startsWith("usb")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_usb", mapInfo);
         }

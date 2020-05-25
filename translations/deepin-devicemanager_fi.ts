@@ -310,7 +310,7 @@
     </message>
     <message>
         <source>Core(s)</source>
-        <translation>Ytimi(ä)</translation>
+        <translation>Ytimet</translation>
     </message>
 </context>
 <context>

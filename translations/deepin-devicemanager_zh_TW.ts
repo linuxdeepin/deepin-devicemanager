@@ -974,7 +974,7 @@
     </message>
     <message>
         <source>Multicast</source>
-        <translation>多播</translation>
+        <translation>組播</translation>
     </message>
     <message>
         <source>Port</source>

@@ -1909,7 +1909,7 @@
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Načítání informací o zařízeních získávání obrazu…</translation>
+        <translation>Načítání informací o zařízeních pro získávání obrazu…</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>

@@ -1,6 +1,6 @@
 #include "DeviceFactory.h"
 #include "X86Generator.h"
-
+#include "MipsGenerator.h"
 DeviceFactory::DeviceFactory()
 {
 

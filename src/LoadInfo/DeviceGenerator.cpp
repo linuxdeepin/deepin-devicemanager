@@ -19,6 +19,8 @@
 #include "DeviceManager/DeviceCdrom.h"
 #include "DeviceManager/DevicePrint.h"
 
+#include <QDebug>
+
 
 DeviceGenerator::DeviceGenerator()
 {
@@ -669,15 +671,16 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
             continue;
         }
 
-        // 这里特殊处理数位板问题(武汉那边的数位板)
-        if ((*it)["Device"].contains("PM")) {
+        // 这里特殊处理数位板问题(武汉那边的数位板) 以及 Bug21892 所做的特殊处理
+        // 这里本不应该做这种处理，但是由于数位板被系统归类为mouse，所以不得不这么做
+        if ((*it)["Model"].contains("Wacom") || (*it)["Device"].contains("PM")) {
             DeviceOthers device;
             device.setInfoFromHwinfo(*it);
             DeviceManager::instance()->addOthersDevice(device);
         }
 
         // 过滤
-        if ((*it)["Hardware Class"] != "unknown" || (*it)["Driver"] == "btusb" || (*it)["Driver"] == "snd-usb-audio") {
+        if ((*it)["Driver"] != "usbfs") {
             continue;
         }
         DeviceOthers device;

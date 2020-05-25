@@ -44,7 +44,6 @@ bool DeviceMouse::setInfoFromlshw(QMap<QString, QString> mapInfo)
 {
     QString key = mapInfo["bus info"];
     key.replace("a", "10");
-    qDebug() << m_KeyToLshw << "********" << key;
     if (m_KeyToLshw != key) {
         return false;
     }

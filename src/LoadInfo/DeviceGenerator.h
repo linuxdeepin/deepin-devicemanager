@@ -65,7 +65,7 @@ public:
     virtual void generatorPowerDevice();
 
 
-private:
+protected:
     /**@brief:generator bios info*/
     void getBiosInfo();
     void getSystemInfo();
@@ -108,7 +108,7 @@ private:
     void getCdromInfoFromHwinfo();
     void getCdromInfoFromLshw();
     /**@brief:generator others info*/
-    void getOthersInfoFromHwinfo();
+    virtual void getOthersInfoFromHwinfo();
     void getOthersInfoFromLshw();
 };
 

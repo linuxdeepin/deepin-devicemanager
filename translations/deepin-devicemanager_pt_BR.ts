@@ -886,7 +886,7 @@
     </message>
     <message>
         <source>No network adapter found</source>
-        <translation>Nenhum adaptador de rede encontrado</translation>
+        <translation>Nenhuma placa de rede encontrada</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1266,7 +1266,7 @@
     </message>
     <message>
         <source>System Information</source>
-        <translation>Informação do Sistema</translation>
+        <translation>Informações do Sistema</translation>
     </message>
     <message>
         <source>Chassis Information</source>
@@ -1618,7 +1618,7 @@
     </message>
     <message>
         <source>online</source>
-        <translation>online</translation>
+        <translation>on-line</translation>
     </message>
     <message>
         <source>daemon-version</source>
@@ -1953,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Carregando Informações do Adaptador de Rede...</translation>
+        <translation>Carregando Informações da Placa de Rede...</translation>
     </message>
 </context>
 <context>
