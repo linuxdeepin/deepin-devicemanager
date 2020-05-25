@@ -226,10 +226,7 @@ void MainWindow::addAllDeviceinfoWidget()
 
     addDeviceWidget(new BluetoothWidget(mainWidget_), "bluetooth.svg");
     addDeviceWidget(new OtherPciDeviceWidget(mainWidget_), "otherpcidevices.svg");
-
-    if (DeviceManager::instance()->getPowerDevices().size() > 0) {
-        addDeviceWidget(new PowerWidget(mainWidget_), "battery.svg");
-    }
+    addDeviceWidget(new PowerWidget(mainWidget_), "battery.svg");
     if (firstAdd_ == true) {
         leftDeviceView_->addSeperator();
     }
