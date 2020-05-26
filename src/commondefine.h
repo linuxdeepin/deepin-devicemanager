@@ -54,5 +54,3 @@ const int TableViewRowHeight_ = 36;
 #define GenerateTsItem 0
 //#define TEST_DATA_FROM_FILE
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/TongXin/FT";
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/HuaWei/PanGu";
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Bug/Bug_21892";
