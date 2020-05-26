@@ -565,10 +565,12 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
         if ((*it).size() < 1) {
             continue;
         }
-        DeviceKeyboard device;
-        device.setInfoFromHwinfo(*it);
-        DeviceManager::instance()->addKeyboardDevice(device);
-        getBusIDFromHwinfo((*it)["SysFS BusID"]);
+        if ((*it).contains("Device Files")) {
+            DeviceKeyboard device;
+            device.setInfoFromHwinfo(*it);
+            DeviceManager::instance()->addKeyboardDevice(device);
+            getBusIDFromHwinfo((*it)["SysFS BusID"]);
+        }
     }
 }
 void DeviceGenerator::getKeyboardInfoFromLshw()
