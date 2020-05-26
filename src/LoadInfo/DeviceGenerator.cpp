@@ -538,7 +538,7 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
         if ((*it)["Hardware Class"] == "hub" || (*it)["Hardware Class"] == "mouse" || (*it)["Hardware Class"] == "keyboard") {
             continue;
         }
-        if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb") {
+        if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0") {
             if (DeviceManager::instance()->setBluetoothInfoFromHwinfo(*it))
                 getBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
