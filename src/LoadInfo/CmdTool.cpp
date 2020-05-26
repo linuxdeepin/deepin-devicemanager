@@ -380,6 +380,11 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
                 add = false;
             }
 
+            // 答应几信息不从hwinfo --usb里面获取，需要过滤
+            if (item.contains("Printer", Qt::CaseInsensitive)) {
+                add = false;
+            }
+
             if (add) {
                 addMapInfo(key, mapInfo);
             }
