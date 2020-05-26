@@ -73,7 +73,10 @@ protected:
     void getSystemInfo();
     void getBaseBoardInfo();
     void getChassisInfo();
-    void getMemoryInfo();
+    void getBiosMemoryInfo();
+    /**@brief:generator memory info*/
+    void getMemoryInfoFromLshw();
+    void getMemoryInfoFromDmidecode();
     /**@brief:generator disk info*/
     void getDiskInfoFromHwinfo();
     void getDiskInfoFromLshw();

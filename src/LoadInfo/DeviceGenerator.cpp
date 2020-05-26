@@ -110,40 +110,13 @@ void DeviceGenerator::generatorBiosDevice()
     getSystemInfo();
     getBaseBoardInfo();
     getChassisInfo();
-    getMemoryInfo();
+    getBiosMemoryInfo();
 }
 
 void DeviceGenerator::generatorMemoryDevice()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMemory  = cmdInfo["lshw_memory"];
-    if (lstMemory.size() == 0) {
-        return;
-    } else if (lstMemory.size() == 1) {
-        DeviceMemory device;
-        device.setInfoFromLshw(lstMemory[0]);
-        DeviceManager::instance()->addMemoryDevice(device);
-    } else if (lstMemory.size() > 1) {
-        QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
-        for (; it != lstMemory.end(); ++it) {
-            if ((*it)["description"] == "DIMM [empty]" || (*it)["description"] == "[empty]" || (*it)["description"] == "DDR4 [empty]" || (*it)["description"] == "System Memory") {
-                continue;
-            }
-            DeviceMemory device;
-            device.setInfoFromLshw(*it);
-            DeviceManager::instance()->addMemoryDevice(device);
-        }
-    }
-
-    // 加载从dmidecode获取的信息
-    const QList< QMap<QString, QString> > &dmiMemory  = cmdInfo["dmidecode17"];
-    QList<QMap<QString, QString> >::const_iterator dIt = dmiMemory.begin();
-    for (; dIt != dmiMemory.end(); ++dIt) {
-        if ((*dIt).size() < 2 || (*dIt)["size"] == "No Module Installed") {
-            continue;
-        }
-        DeviceManager::instance()->setMemoryInfoFromDmidecode(*dIt);
-    }
+    getMemoryInfoFromLshw();
+    getMemoryInfoFromDmidecode();
 }
 
 void DeviceGenerator::generatorDiskDevice()
@@ -327,7 +300,7 @@ void DeviceGenerator::getChassisInfo()
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
-void DeviceGenerator::getMemoryInfo()
+void DeviceGenerator::getBiosMemoryInfo()
 {
     const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
     const QList<QMap<QString, QString>> lstInfo = cmdInfo["dmidecode16"];
@@ -339,6 +312,42 @@ void DeviceGenerator::getMemoryInfo()
         DeviceBios device;
         device.setMemoryInfo(*it);
         DeviceManager::instance()->addBiosDevice(device);
+    }
+}
+
+void DeviceGenerator::getMemoryInfoFromLshw()
+{
+    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
+    const QList< QMap<QString, QString> > &lstMemory  = cmdInfo["lshw_memory"];
+    if (lstMemory.size() == 0) {
+        return;
+    } else if (lstMemory.size() == 1) {
+        DeviceMemory device;
+        device.setInfoFromLshw(lstMemory[0]);
+        DeviceManager::instance()->addMemoryDevice(device);
+    } else if (lstMemory.size() > 1) {
+        QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
+        for (; it != lstMemory.end(); ++it) {
+            if (!(*it)["size"].contains("GiB") || (*it)["description"] == "System Memory") {
+                continue;
+            }
+            DeviceMemory device;
+            device.setInfoFromLshw(*it);
+            DeviceManager::instance()->addMemoryDevice(device);
+        }
+    }
+}
+void DeviceGenerator::getMemoryInfoFromDmidecode()
+{
+    // 加载从dmidecode获取的信息
+    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
+    const QList< QMap<QString, QString> > &dmiMemory  = cmdInfo["dmidecode17"];
+    QList<QMap<QString, QString> >::const_iterator dIt = dmiMemory.begin();
+    for (; dIt != dmiMemory.end(); ++dIt) {
+        if ((*dIt).size() < 2 || (*dIt)["size"] == "No Module Installed") {
+            continue;
+        }
+        DeviceManager::instance()->setMemoryInfoFromDmidecode(*dIt);
     }
 }
 
