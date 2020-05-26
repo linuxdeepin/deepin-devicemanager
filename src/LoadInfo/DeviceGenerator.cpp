@@ -21,6 +21,7 @@
 
 #include <QDebug>
 
+QStringList DeviceGenerator::m_ListBusID = {};
 
 DeviceGenerator::DeviceGenerator()
 {
@@ -348,6 +349,7 @@ void DeviceGenerator::getDiskInfoFromHwinfo()
         DeviceStorage device;
         if (device.setHwinfoInfo(*dIt) && device.isValid()) {
             DeviceManager::instance()->addStorageDeivce(device);
+            getBusIDFromHwinfo((*dIt)["SysFS BusID"]);
         }
     }
 }
@@ -400,6 +402,7 @@ void DeviceGenerator::getGpuInfoFromHwinfo()
         DeviceGpu device;
         device.setHwinfoInfo(*it);
         DeviceManager::instance()->addGpuDevice(device);
+        getBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 
@@ -448,6 +451,7 @@ void DeviceGenerator::getMonitorInfoFromHwinfo()
         DeviceMonitor device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addMonitor(device);
+        getBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getMonitorInfoFromXrandrVerbose()
@@ -487,6 +491,7 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
         DeviceAudio device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addAudioDevice(device);
+        getBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getAudioInfoFromLshw()
@@ -530,6 +535,7 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
         }
         if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb") {
             DeviceManager::instance()->setBluetoothInfoFromHwinfo(*it);
+            getBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
     }
 }
@@ -557,6 +563,7 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
         DeviceKeyboard device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addKeyboardDevice(device);
+        getBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getKeyboardInfoFromLshw()
@@ -593,6 +600,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         DeviceMouse device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addMouseDevice(device);
+        getBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getMouseInfoFromLshw()
@@ -626,6 +634,7 @@ void DeviceGenerator::getImageInfoFromHwinfo()
             DeviceImage device;
             device.setInfoFromHwinfo(*it);
             DeviceManager::instance()->addImageDevice(device);
+            getBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
     }
 }
@@ -654,6 +663,7 @@ void DeviceGenerator::getCdromInfoFromHwinfo()
         DeviceCdrom device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addCdromDevice(device);
+        getBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getCdromInfoFromLshw()
@@ -685,6 +695,8 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         }
         DeviceOthers device;
         device.setInfoFromHwinfo(*it);
+
+
         DeviceManager::instance()->addOthersDevice(device);
     }
 }
@@ -700,3 +712,12 @@ void DeviceGenerator::getOthersInfoFromLshw()
         DeviceManager::instance()->setOthersDeviceInfoFromLshw(*it);
     }
 }
+
+void DeviceGenerator::getBusIDFromHwinfo(const QString &sysfsBusID)
+{
+    QString busID = sysfsBusID;
+    busID.replace(QRegExp("\\.[0-9]+$"), "");
+
+    m_ListBusID.append(busID);
+}
+

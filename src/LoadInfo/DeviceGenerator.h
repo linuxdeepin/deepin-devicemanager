@@ -110,6 +110,11 @@ protected:
     /**@brief:generator others info*/
     virtual void getOthersInfoFromHwinfo();
     void getOthersInfoFromLshw();
+
+    /**@brief:get BusID unique from Hwinfo*/
+    void getBusIDFromHwinfo(const QString &sysfsBusID);
+protected:
+    static QList<QString> m_ListBusID;
 };
 
 #endif // DEVICEGENERATOR_H
