@@ -127,6 +127,14 @@ bool ArticleStruct::isValid()
         return false;
     }
 
+    if ( value.compare(QString("Other"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if ( value.compare(QString("TBD"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
     return true;
 }
 
