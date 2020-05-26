@@ -114,7 +114,7 @@ protected:
     /**@brief:get BusID unique from Hwinfo*/
     void getBusIDFromHwinfo(const QString &sysfsBusID);
 protected:
-    static QList<QString> m_ListBusID;
+    static QStringList m_ListBusID;
 };
 
 #endif // DEVICEGENERATOR_H
