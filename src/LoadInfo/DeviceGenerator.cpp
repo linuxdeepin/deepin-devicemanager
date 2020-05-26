@@ -425,7 +425,7 @@ void DeviceGenerator::getGpuInfoFromXrandr()
         if ((*it).size() < 1) {
             continue;
         }
-        DeviceManager::instance()->setGpuInfoFromLshw(*it);
+        DeviceManager::instance()->setGpuInfoFromXrandr(*it);
     }
 }
 void DeviceGenerator::getGpuSizeFromDmesg()

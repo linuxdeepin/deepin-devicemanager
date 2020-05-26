@@ -95,13 +95,13 @@ void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
         m_HDMI = mapInfo["HDMI"];
     }
     if (mapInfo.find("VGA") != mapInfo.end()) {
-        m_HDMI = mapInfo["VGA"];
+        m_VGA = mapInfo["VGA"];
     }
     if (mapInfo.find("DP") != mapInfo.end()) {
-        m_HDMI = mapInfo["DP"];
+        m_DisplayPort = mapInfo["DP"];
     }
     if (mapInfo.find("eDP") != mapInfo.end()) {
-        m_HDMI = mapInfo["eDP"];
+        m_eDP = mapInfo["eDP"];
     }
 }
 

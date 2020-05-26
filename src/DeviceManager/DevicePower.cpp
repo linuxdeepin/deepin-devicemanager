@@ -42,7 +42,8 @@ void DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 
 void DevicePower::setDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
-    loadOtherDeviceInfo(mapInfo);
+    if (m_Name == QObject::tr("battery"))
+        loadOtherDeviceInfo(mapInfo);
 }
 
 const QString &DevicePower::name()const

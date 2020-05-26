@@ -356,10 +356,14 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
 
-        //预防有相同的总线信息
+        // hwinfo --usb 里面有很多的无用信息，可以先过滤
         if (key == "hwinfo_usb") {
             QList<QMap<QString, QString>>::iterator it = s_cmdInfo[key].begin();
             bool add = true;
+
+            // 有的是有同一个设备有两段信息，我们只需要一个
+            // 比如 SysFS BusID: 1-3:1.2   和  SysFS BusID: 1-3:1.0 这个是同一个设备
+            // 我们只需要一个
             for (; it != s_cmdInfo[key].end(); ++it) {
                 QString curBus = (*it)["SysFS BusID"];
                 QString newBus = mapInfo["SysFS BusID"];
@@ -370,6 +374,12 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
                     break;
                 }
             }
+
+            // 这个是用来过滤，没有接入任何设备的usb接口
+            if (mapInfo["Model"].contains("Linux Foundation")) {
+                add = false;
+            }
+
             if (add) {
                 addMapInfo(key, mapInfo);
             }
