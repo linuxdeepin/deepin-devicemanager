@@ -235,14 +235,15 @@ void DeviceManager::setBluetoothInfoFromLshw(const QMap<QString, QString> &mapIn
     }
 }
 
-void DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
+bool DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceBluetooth>::iterator it = m_ListBluetooth.begin();
     for (; it != m_ListBluetooth.end(); ++it) {
         if ((*it).setInfoFromHwinfo(mapInfo)) {
-            return;
+            return true;
         }
     }
+    return false;
 }
 
 void DeviceManager::addAudioDevice(const DeviceAudio &device)

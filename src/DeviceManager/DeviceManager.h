@@ -83,7 +83,7 @@ public:
     void addBluetoothDevice(const DeviceBluetooth &device);
     const QList<DeviceBluetooth> &getBluetoothDevices();
     void setBluetoothInfoFromLshw(const QMap<QString, QString> &mapInfo);
-    void setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
+    bool setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     // 音频设备相关
     void addAudioDevice(const DeviceAudio &device);

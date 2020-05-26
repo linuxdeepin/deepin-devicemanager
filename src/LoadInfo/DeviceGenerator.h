@@ -10,6 +10,8 @@ DCORE_USE_NAMESPACE
 class DeviceGenerator
 {
 public:
+    static void clear();
+
     DeviceGenerator();
     virtual ~DeviceGenerator();
 

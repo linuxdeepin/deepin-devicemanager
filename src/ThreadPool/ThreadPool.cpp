@@ -207,6 +207,7 @@ void ThreadPool::loadCmdInfo()
 void ThreadPool::generateInfo()
 {
     DeviceManager::instance()->clear();
+    DeviceGenerator::clear();
     foreach (DeviceType type, m_ListDeviceTypes) {
         start(new GenerateTask(type, this));
     }

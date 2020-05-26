@@ -23,6 +23,11 @@
 
 QStringList DeviceGenerator::m_ListBusID = {};
 
+void DeviceGenerator::clear()
+{
+    m_ListBusID.clear();
+}
+
 DeviceGenerator::DeviceGenerator()
 {
 
@@ -534,8 +539,8 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
             continue;
         }
         if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb") {
-            DeviceManager::instance()->setBluetoothInfoFromHwinfo(*it);
-            getBusIDFromHwinfo((*it)["SysFS BusID"]);
+            if (DeviceManager::instance()->setBluetoothInfoFromHwinfo(*it))
+                getBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
     }
 }
@@ -681,23 +686,20 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
             continue;
         }
 
-        // 这里特殊处理数位板问题(武汉那边的数位板) 以及 Bug21892 所做的特殊处理
-        // 这里本不应该做这种处理，但是由于数位板被系统归类为mouse，所以不得不这么做
-        if ((*it)["Model"].contains("Wacom") || (*it)["Device"].contains("PM")) {
+        bool isOtherDevice = true;
+        QString curBus = (*it)["SysFS BusID"];
+        curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+        foreach (const QString &bus, m_ListBusID) {
+            if (curBus == bus) {
+                isOtherDevice = false;
+            }
+        }
+
+        if (isOtherDevice) {
             DeviceOthers device;
             device.setInfoFromHwinfo(*it);
             DeviceManager::instance()->addOthersDevice(device);
         }
-
-        // 过滤
-        if ((*it)["Driver"] != "usbfs") {
-            continue;
-        }
-        DeviceOthers device;
-        device.setInfoFromHwinfo(*it);
-
-
-        DeviceManager::instance()->addOthersDevice(device);
     }
 }
 void DeviceGenerator::getOthersInfoFromLshw()

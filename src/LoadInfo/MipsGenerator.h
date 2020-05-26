@@ -6,9 +6,6 @@ class MipsGenerator : public DeviceGenerator
 {
 public:
     MipsGenerator();
-
-protected:
-    void getOthersInfoFromHwinfo();
 };
 
 #endif // MIPSGENERATOR_H
