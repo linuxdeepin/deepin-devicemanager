@@ -8,7 +8,7 @@ public:
     DevicePower();
 
     /**@brief:设置从upower获取的信息*/
-    void setInfoFromUpower(const QMap<QString, QString> &mapInfo);
+    bool setInfoFromUpower(const QMap<QString, QString> &mapInfo);
     void setDaemonInfo(const QMap<QString, QString> &mapInfo);
 
     // 获取设备属性

@@ -380,8 +380,8 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
                 add = false;
             }
 
-            // 答应几信息不从hwinfo --usb里面获取，需要过滤
-            if (item.contains("Printer", Qt::CaseInsensitive)) {
+            // 打印机几信息不从hwinfo --usb里面获取，需要过滤
+            if (item.contains("Printer", Qt::CaseInsensitive) || item.contains("LaserJet", Qt::CaseInsensitive)) {
                 add = false;
             }
 

@@ -54,11 +54,11 @@ const int TableViewRowHeight_ = 36;
 #define GenerateTsItem 0
 //#define TEST_DATA_FROM_FILE
 
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/TongXin/FT";
+//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/TongXin/LX_Keyboard";
 //const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_bug28371";
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Bug/Bug_28298";
 
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/ChuangZhiCheng/LX_B20";
+const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/ChuangZhiCheng/LX_B20";
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/HuaWei/PanGu";
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Bug/Bug_26028";
 
@@ -75,5 +75,5 @@ const int TableViewRowHeight_ = 36;
 //const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfobug27829";
 //const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_bug26613";
 //const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_bug23952";
-const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_bug28298";
+//const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_bug28298";
 

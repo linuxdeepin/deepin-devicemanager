@@ -1,5 +1,6 @@
 #include "ThreadPool.h"
 #include<QDebug>
+#include<QMutex>
 #include <unistd.h>
 #include "deviceinfoparser.h"
 #include "DeviceManager/DeviceManager.h"
@@ -116,68 +117,16 @@ void GenerateTask::run()
 
 ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
 {
-    m_ListDeviceTypes.push_back(DT_Computer);
-    m_ListDeviceTypes.push_back(DT_Cpu);
-    m_ListDeviceTypes.push_back(DT_Bios);
-    m_ListDeviceTypes.push_back(DT_Memory);
-    m_ListDeviceTypes.push_back(DT_Storage);
-    m_ListDeviceTypes.push_back(DT_Gpu);
-    m_ListDeviceTypes.push_back(DT_Monitor);
-    m_ListDeviceTypes.push_back(DT_Network);
-    m_ListDeviceTypes.push_back(DT_Audio);
-    m_ListDeviceTypes.push_back(DT_Bluetoorh);
-    m_ListDeviceTypes.push_back(DT_Keyboard);
-    m_ListDeviceTypes.push_back(DT_Mouse);
-    m_ListDeviceTypes.push_back(DT_Print);
-    m_ListDeviceTypes.push_back(DT_Image);
-    m_ListDeviceTypes.push_back(DT_Cdrom);
-    m_ListDeviceTypes.push_back(DT_Others);
-    m_ListDeviceTypes.push_back(DT_Power);
 
-
-
-    m_ListCmd.append({ "lshw",                 "sudo lshw",               "lshw.txt",               tr("Loading Audio Device Info...") });
-    m_ListCmd.append({ "printer",              "********",                "printer.txt",            ""});
-
-    m_ListCmd.append({ "dmidecode0",           "sudo dmidecode -t 0",     "dmidecode_0.txt",        tr("Loading BIOS Info...")});
-    m_ListCmd.append({ "dmidecode1",           "sudo dmidecode -t 1",     "dmidecode_1.txt",        ""});
-    m_ListCmd.append({ "dmidecode2",           "sudo dmidecode -t 2",     "dmidecode_2.txt",        ""});
-    m_ListCmd.append({ "dmidecode3",           "sudo dmidecode -t 3",     "dmidecode_3.txt",        ""});
-    m_ListCmd.append({ "dmidecode4",           "sudo dmidecode -t 4",     "dmidecode_4.txt",        ""});
-    m_ListCmd.append({ "dmidecode16",          "sudo dmidecode -t 16",    "dmidecode_16.txt",       ""});
-    m_ListCmd.append({ "dmidecode17",          "sudo dmidecode -t 17",    "dmidecode_17.txt",       ""});
-
-
-    m_ListCmd.append({ "hwinfo_monitor",       "hwinfo --monitor",        "hwinfo_monitor.txt",     tr("Loading CD-ROM Info...")});
-    m_ListCmd.append({ "hwinfo_sound",         "hwinfo --sound",          "hwinfo_sound.txt",       ""});
-    m_ListCmd.append({ "hwinfo_usb",           "hwinfo --usb",            "hwinfo_usb.txt",         ""});
-    m_ListCmd.append({ "hwinfo_network",       "hwinfo --network",        "hwinfo_network.txt",     ""});
-    m_ListCmd.append({ "hwinfo_keyboard",      "hwinfo --keyboard",       "hwinfo_keyboard.txt",    tr("Loading Bluetooth Device Info...")});
-    m_ListCmd.append({ "hwinfo_cdrom",         "hwinfo --cdrom",          "hwinfo_cdrom.txt",       tr("Loading Image Devices Info...")});
-    m_ListCmd.append({ "hwinfo_disk",          "sudo hwinfo --disk",      "hwinfo_disk.txt",        tr("Loading Keyboard Info...")});
-    m_ListCmd.append({ "hwinfo_display",       "hwinfo --display",        "hwinfo_display.txt",     ""});
-    m_ListCmd.append({ "hwinfo_mouse",         "hwinfo --mouse",          "hwinfo_mouse.txt",       ""});
-
-
-    m_ListCmd.append({ "upower",               "upower --dump",           "upower_dump.txt",        ""});
-    m_ListCmd.append({ "lscpu",                "lscpu",                   "lscpu.txt",              tr("Loading Operating System Info...")});
-    m_ListCmd.append({ "lsblk_d",              "lsblk -d -o name,rota",   "lsblk_d.txt",            ""});
-    m_ListCmd.append({ "xrandr",               "xrandr",                  "xrandr.txt",             tr("Loading CPU Info...")});
-    m_ListCmd.append({ "xrandr_verbose",       "xrandr --verbose",        "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
-    m_ListCmd.append({ "dmesg",                "sudo dmesg",              "dmesg.txt",              tr("Loading Power Info...")});
-    m_ListCmd.append({ "hciconfig",            "hciconfig -a",            "hciconfig.txt",          tr("Loading Printer Info...")});
-
-    m_ListCmd.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "cat_cpuinfo.txt",        tr("Loading Monitor Info...")});
-    m_ListCmd.append({ "cat_boardinfo",        "cat /proc/boardinfo",     "cat_boardinfo.txt",      tr("Loading Mouse Info...")});
-    m_ListCmd.append({ "cat_os_release",       "cat /etc/os-release",     "cat_os_release.txt",     tr("Loading Network Adapter Info...")});
-    m_ListCmd.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
 }
 
 void ThreadPool::finishedCmd(const QString &info)
 {
-    m_FinishedNum++;
-    if (m_FinishedNum == m_ListCmd.size()) {
-        m_FinishedNum = 0;
+    m_lock.tryLock();
+    m_FinishedCmd++;
+    m_lock.unlock();
+    if (m_FinishedCmd == m_AllCmdNum) {
+        qDebug() << m_FinishedCmd << "****************" << m_AllCmdNum;
         generateInfo();
     } else {
         if (!info.isEmpty())
@@ -187,19 +136,28 @@ void ThreadPool::finishedCmd(const QString &info)
 
 void ThreadPool::finishedGenerateDevice()
 {
-    m_FinishedNum++;
-    if (m_FinishedNum == m_ListDeviceTypes.size()) {
+    m_lock.tryLock();
+    m_FinishedGenerator++;
+    if (m_FinishedGenerator == m_AllTypeNum) {
         emit finished("finish");
     }
+    m_lock.unlock();
 }
 
 void ThreadPool::loadCmdInfo()
 {
+    // 初始化信息
     CmdTool::clear();
     DeviceManager::instance()->clear();
-    m_FinishedNum = 0;
-    foreach (QStringList item, m_ListCmd) {
-        start(new CmdTask(item[0], item[1], item[2], item[3], this));
+    m_FinishedCmd = 0;
+    m_FinishedGenerator = 0;
+
+    // 开始线程池处理
+    QList<QStringList> lstCmd;
+    getCmdList(lstCmd);
+    QList<QStringList>::iterator it = lstCmd.begin();
+    for (; it != lstCmd.end(); ++it) {
+        start(new CmdTask((*it)[0], (*it)[1], (*it)[2], (*it)[3], this));
     }
 }
 
@@ -208,8 +166,77 @@ void ThreadPool::generateInfo()
 {
     DeviceManager::instance()->clear();
     DeviceGenerator::clear();
-    foreach (DeviceType type, m_ListDeviceTypes) {
-        start(new GenerateTask(type, this));
+
+    // 开始生成设备信息
+    QList<DeviceType> typeList;
+    getTypeList(typeList);
+    QList<DeviceType>::iterator it = typeList.begin();
+    for (; it != typeList.end(); ++it) {
+        start(new GenerateTask(*it, this));
     }
+}
+
+
+void ThreadPool::getCmdList(QList<QStringList> &cmdList)
+{
+    cmdList.append({ "lshw",                 "sudo lshw",               "lshw.txt",               tr("Loading Audio Device Info...") });
+    cmdList.append({ "printer",              "",                "printer.txt",            ""});
+
+    cmdList.append({ "dmidecode0",           "sudo dmidecode -t 0",     "dmidecode_0.txt",        tr("Loading BIOS Info...")});
+    cmdList.append({ "dmidecode1",           "sudo dmidecode -t 1",     "dmidecode_1.txt",        ""});
+    cmdList.append({ "dmidecode2",           "sudo dmidecode -t 2",     "dmidecode_2.txt",        ""});
+    cmdList.append({ "dmidecode3",           "sudo dmidecode -t 3",     "dmidecode_3.txt",        ""});
+    cmdList.append({ "dmidecode4",           "sudo dmidecode -t 4",     "dmidecode_4.txt",        ""});
+    cmdList.append({ "dmidecode16",          "sudo dmidecode -t 16",    "dmidecode_16.txt",       ""});
+    cmdList.append({ "dmidecode17",          "sudo dmidecode -t 17",    "dmidecode_17.txt",       ""});
+
+
+    cmdList.append({ "hwinfo_monitor",       "hwinfo --monitor",        "hwinfo_monitor.txt",     tr("Loading CD-ROM Info...")});
+    cmdList.append({ "hwinfo_sound",         "hwinfo --sound",          "hwinfo_sound.txt",       ""});
+    cmdList.append({ "hwinfo_usb",           "hwinfo --usb",            "hwinfo_usb.txt",         ""});
+    cmdList.append({ "hwinfo_network",       "hwinfo --network",        "hwinfo_network.txt",     ""});
+    cmdList.append({ "hwinfo_keyboard",      "hwinfo --keyboard",       "hwinfo_keyboard.txt",    tr("Loading Bluetooth Device Info...")});
+    cmdList.append({ "hwinfo_cdrom",         "hwinfo --cdrom",          "hwinfo_cdrom.txt",       tr("Loading Image Devices Info...")});
+    cmdList.append({ "hwinfo_disk",          "sudo hwinfo --disk",      "hwinfo_disk.txt",        tr("Loading Keyboard Info...")});
+    cmdList.append({ "hwinfo_display",       "hwinfo --display",        "hwinfo_display.txt",     ""});
+    cmdList.append({ "hwinfo_mouse",         "hwinfo --mouse",          "hwinfo_mouse.txt",       ""});
+
+
+    cmdList.append({ "upower",               "upower --dump",           "upower_dump.txt",        ""});
+    cmdList.append({ "lscpu",                "lscpu",                   "lscpu.txt",              tr("Loading Operating System Info...")});
+    cmdList.append({ "lsblk_d",              "lsblk -d -o name,rota",   "lsblk_d.txt",            ""});
+    cmdList.append({ "xrandr",               "xrandr",                  "xrandr.txt",             tr("Loading CPU Info...")});
+    cmdList.append({ "xrandr_verbose",       "xrandr --verbose",        "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
+    cmdList.append({ "dmesg",                "sudo dmesg",              "dmesg.txt",              tr("Loading Power Info...")});
+    cmdList.append({ "hciconfig",            "hciconfig -a",            "hciconfig.txt",          tr("Loading Printer Info...")});
+
+    cmdList.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "cat_cpuinfo.txt",        tr("Loading Monitor Info...")});
+    cmdList.append({ "cat_boardinfo",        "cat /proc/boardinfo",     "cat_boardinfo.txt",      tr("Loading Mouse Info...")});
+    cmdList.append({ "cat_os_release",       "cat /etc/os-release",     "cat_os_release.txt",     tr("Loading Network Adapter Info...")});
+    cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
+
+    m_AllCmdNum = cmdList.size();
+}
+
+void ThreadPool::getTypeList(QList<DeviceType> &typeList)
+{
+    typeList.push_back(DT_Computer);
+    typeList.push_back(DT_Cpu);
+    typeList.push_back(DT_Bios);
+    typeList.push_back(DT_Memory);
+    typeList.push_back(DT_Storage);
+    typeList.push_back(DT_Gpu);
+    typeList.push_back(DT_Monitor);
+    typeList.push_back(DT_Network);
+    typeList.push_back(DT_Audio);
+    typeList.push_back(DT_Bluetoorh);
+    typeList.push_back(DT_Keyboard);
+    typeList.push_back(DT_Mouse);
+    typeList.push_back(DT_Print);
+    typeList.push_back(DT_Image);
+    typeList.push_back(DT_Cdrom);
+    typeList.push_back(DT_Others);
+    typeList.push_back(DT_Power);
+    m_AllTypeNum = typeList.size();
 }
 

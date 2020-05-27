@@ -4,6 +4,7 @@
 #include <QObject>
 #include <DApplication>
 #include <DSysInfo>
+#include <QMutex>
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
@@ -120,6 +121,8 @@ protected:
     void getBusIDFromHwinfo(const QString &sysfsBusID);
 protected:
     static QStringList m_ListBusID;
+private:
+    QMutex m_Mutex;
 };
 
 #endif // DEVICEGENERATOR_H

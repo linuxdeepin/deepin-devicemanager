@@ -1,6 +1,7 @@
 #ifndef DEVICEMANAGER_H
 #define DEVICEMANAGER_H
 #include<QList>
+#include<QMutex>
 class DeviceMouse;
 class DeviceCpu;
 class DeviceStorage;
@@ -30,7 +31,6 @@ public:
         if (!sInstance) {
             sInstance = new DeviceManager;
         }
-
         return sInstance;
     }
 

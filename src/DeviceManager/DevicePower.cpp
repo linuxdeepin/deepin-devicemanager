@@ -9,13 +9,12 @@ DevicePower::DevicePower()
     initFilterKey();
 }
 
-void DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
+bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo["Device"].contains("line_power")) {
-        m_Name = QObject::tr("AC Power");
-    } else {
-        m_Name = QObject::tr("battery");
+    if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive)) {
+        return false;
     }
+    m_Name = QObject::tr("battery");
 
     setAttribute(mapInfo, "", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
@@ -36,7 +35,7 @@ void DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_SBDSSerialNumber);
     setAttribute(mapInfo, "", m_SBDSVersion);
     loadOtherDeviceInfo(mapInfo);
-
+    return true;
 }
 
 

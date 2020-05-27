@@ -236,7 +236,9 @@ void DeviceGenerator::generatorPowerDevice()
             continue;
         }
         DevicePower device;
-        device.setInfoFromUpower(*it);
+        if (!device.setInfoFromUpower(*it)) {
+            continue;
+        }
         if (hasDaemon) {
             device.setDaemonInfo(cmdInfo["Daemon"][0]);
         }
@@ -727,9 +729,11 @@ void DeviceGenerator::getOthersInfoFromLshw()
 
 void DeviceGenerator::getBusIDFromHwinfo(const QString &sysfsBusID)
 {
+    m_Mutex.tryLock();
     QString busID = sysfsBusID;
     busID.replace(QRegExp("\\.[0-9]+$"), "");
 
     m_ListBusID.append(busID);
+    m_Mutex.unlock();
 }
 

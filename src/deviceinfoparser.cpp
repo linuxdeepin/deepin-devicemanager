@@ -143,10 +143,9 @@ void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QStri
                 } else {
                     DeviceInfoMap[option] = ippGetString(finishings, i, nullptr);
                 }
-
-                //std::cout << option<<" : " << ippGetString(finishings, i, nullptr) << std::endl;
             }
         }
+//        delete finishings;
     } else {
         //std::cout << option << " not supported." << std::endl;
     }
@@ -182,7 +181,6 @@ int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest)
 
     for (int i = 0; i < dest->num_options; ++i) {
         DeviceInfoMap[(dest->options + i)->name] = (dest->options + i)->value;
-        //std::cout << (dest->options + i)->name <<" : " << (dest->options + i)->value << std::endl;
     }
 
     cupsDatabase[dest->name] = DeviceInfoMap;

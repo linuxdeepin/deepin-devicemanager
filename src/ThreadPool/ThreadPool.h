@@ -4,6 +4,7 @@
 #include <QThreadPool>
 #include <QRunnable>
 #include <QObject>
+#include <QMutex>
 class ThreadPool;
 
 enum DeviceType {
@@ -75,15 +76,22 @@ public:
     void finishedCmd(const QString &info);
     void finishedGenerateDevice();
 
+private:
+    void getCmdList(QList<QStringList> &cmdList);
+    void getTypeList(QList<DeviceType> &typeList);
+
 
 signals:
     void finished(const QString &info);
 
 
 private:
-    QList<DeviceType>      m_ListDeviceTypes;
-    int                    m_FinishedNum;
-    QList<QStringList>     m_ListCmd;
+    int                    m_FinishedCmd;
+    int                    m_FinishedGenerator;
+    int                    m_AllCmdNum;
+    int                    m_AllTypeNum;
+
+    QMutex                 m_lock;
 
 };
 
