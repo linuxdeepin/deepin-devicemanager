@@ -80,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent) :
     if (false == DeviceInfoParser::Instance().getRootPassword()) {
         exit(-1);
     }
-
+    DeviceManager::instance();
     refreshDatabase();
     setSizeLimits();
     loadSettings();
