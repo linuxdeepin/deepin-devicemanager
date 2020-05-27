@@ -77,3 +77,4 @@ const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/Ch
 //const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_bug23952";
 //const QString DEVICEINFO_PATH = "/home/lx777/Desktop/JiXiaoMei/New/deviceInfo_bug28298";
 
+
