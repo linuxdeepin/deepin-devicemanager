@@ -29,19 +29,19 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
     inputDeviceFile.close();
 #endif
 
-
-    if (!s_Generator) {
+    DeviceGenerator *generator = nullptr;
+    if (!generator) {
         if (struction == "x86_64")
-            s_Generator = new X86Generator();
+            generator = new X86Generator();
         else if (struction == "mips64") {
-            s_Generator = new MipsGenerator();
+            generator = new MipsGenerator();
         } else if (struction == "aarch64") {
-            s_Generator = new ArmGenerator();
+            generator = new ArmGenerator();
         } else {
-            s_Generator = new X86Generator();
+            generator = new X86Generator();
         }
     }
-    return s_Generator;
+    return generator;
 }
 
 void DeviceFactory::clear()

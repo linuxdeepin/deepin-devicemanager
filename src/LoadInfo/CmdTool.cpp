@@ -2,9 +2,10 @@
 #include <cups.h>
 #include "commondefine.h"
 #include<QDebug>
+#include<QMutex>
 extern void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap);
 extern int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest);
-
+QMutex mutex;
 QMap<QString, QList<QMap<QString, QString> > > CmdTool::s_cmdInfo;
 
 CmdTool::CmdTool()
@@ -23,6 +24,7 @@ void CmdTool::clear()
 
 void CmdTool::addMapInfo(const QString key, const QMap<QString, QString> &mapInfo)
 {
+    mutex.tryLock();
     if (s_cmdInfo.find(key) != s_cmdInfo.end()) {
         s_cmdInfo[key].append(mapInfo);
     } else {
@@ -30,6 +32,7 @@ void CmdTool::addMapInfo(const QString key, const QMap<QString, QString> &mapInf
         lstMap.append(mapInfo);
         s_cmdInfo.insert(key, lstMap);
     }
+    mutex.unlock();
 }
 
 void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString &debugFile)

@@ -21,7 +21,8 @@
 
 #include <QDebug>
 
-DeviceGenerator::DeviceGenerator()
+DeviceGenerator::DeviceGenerator(QObject *parent)
+    : QObject (parent)
 {
 
 }

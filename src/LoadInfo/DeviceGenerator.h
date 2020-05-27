@@ -8,10 +8,11 @@
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
-class DeviceGenerator
+class DeviceGenerator : public QObject
 {
+    Q_OBJECT
 public:
-    DeviceGenerator();
+    DeviceGenerator(QObject *parent = nullptr);
     virtual ~DeviceGenerator();
 
     /**@brief:generator computer info*/

@@ -36,10 +36,9 @@ GenerateTask::~GenerateTask()
 }
 void GenerateTask::run()
 {
-    QMutex mutex;
-    mutex.tryLock();
+
     DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
-    mutex.unlock();
+
     if (!generator) {
         return;
     }
