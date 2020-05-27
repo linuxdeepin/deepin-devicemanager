@@ -9,6 +9,7 @@ DeviceFactory::DeviceFactory()
 {
 
 }
+DeviceGenerator *DeviceFactory::s_Generator = nullptr;
 DeviceGenerator *DeviceFactory::getDeviceGenerator()
 {
     QProcess process;
@@ -28,15 +29,24 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
     inputDeviceFile.close();
 #endif
 
-    DeviceGenerator *generator = nullptr;
-    if (struction == "x86_64")
-        generator = new X86Generator();
-    else if (struction == "mips64") {
-        generator = new MipsGenerator();
-    } else if (struction == "aarch64") {
-        generator = new ArmGenerator();
-    } else {
-        generator = new X86Generator();
+
+    if (!s_Generator) {
+        if (struction == "x86_64")
+            s_Generator = new X86Generator();
+        else if (struction == "mips64") {
+            s_Generator = new MipsGenerator();
+        } else if (struction == "aarch64") {
+            s_Generator = new ArmGenerator();
+        } else {
+            s_Generator = new X86Generator();
+        }
     }
-    return generator;
+    return s_Generator;
+}
+
+void DeviceFactory::clear()
+{
+    if (s_Generator) {
+        s_Generator->clear();
+    }
 }

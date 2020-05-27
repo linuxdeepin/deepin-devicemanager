@@ -115,9 +115,6 @@ void GenerateTask::run()
     default:
         break;
     }
-
-    delete generator;
-    generator = nullptr;
 }
 
 
@@ -171,7 +168,7 @@ void ThreadPool::loadCmdInfo()
 void ThreadPool::generateInfo()
 {
     DeviceManager::instance()->clear();
-    DeviceGenerator::clear();
+    DeviceFactory::clear();
 
     // 开始生成设备信息
     QList<DeviceType> typeList;

@@ -11,8 +11,6 @@ DCORE_USE_NAMESPACE
 class DeviceGenerator
 {
 public:
-    static void clear();
-
     DeviceGenerator();
     virtual ~DeviceGenerator();
 
@@ -67,6 +65,8 @@ public:
     /**@brief:generator power info*/
     virtual void generatorPowerDevice();
 
+    virtual void clear();
+
 
 protected:
     /**@brief:generator bios info*/
@@ -120,7 +120,7 @@ protected:
     /**@brief:get BusID unique from Hwinfo*/
     void getBusIDFromHwinfo(const QString &sysfsBusID);
 protected:
-    static QStringList m_ListBusID;
+    QStringList m_ListBusID;
 private:
     QMutex m_Mutex;
 };

@@ -21,13 +21,6 @@
 
 #include <QDebug>
 
-QStringList DeviceGenerator::m_ListBusID = {};
-
-void DeviceGenerator::clear()
-{
-    m_ListBusID.clear();
-}
-
 DeviceGenerator::DeviceGenerator()
 {
 
@@ -245,6 +238,13 @@ void DeviceGenerator::generatorPowerDevice()
         DeviceManager::instance()->addPowerDevice(device);
     }
 }
+
+
+void DeviceGenerator::clear()
+{
+    m_ListBusID.clear();
+}
+
 
 void DeviceGenerator::getBiosInfo()
 {
