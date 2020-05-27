@@ -28,6 +28,8 @@ DeviceManager::DeviceManager()
 
 void DeviceManager::clear()
 {
+    m_cmdInfo.clear();
+
     m_ListDeviceMouse.clear();
     m_ListDeviceStorage.clear();
     m_ListDeviceMonitor.clear();
@@ -406,34 +408,22 @@ const QList<DeviceCdrom> DeviceManager::getCdromDevices()
     return m_ListDeviceCdrom;
 }
 
-void DeviceManager::addField(const QString &key, const QString &address)
+void DeviceManager::addBusId(const QStringList &busId)
 {
-    m_TsField[address].insert(key);
+    m_BusIdList.append(busId);
 }
-void DeviceManager::generateTs()
+const QStringList &DeviceManager::getBusId()
 {
-    QFile file(QString("./ManulTrack.txt"));
-    QTextStream *out = nullptr;
-    if (file.exists())
-        file.remove();
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Append)) {
-        return;
+    return m_BusIdList;
+}
+
+void DeviceManager::addCmdInfo(const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
+{
+    foreach (const QString &key, cmdInfo.keys()) {
+        m_cmdInfo[key].append(cmdInfo[key]);
     }
-    out = new QTextStream(&file);
-    foreach (const QString &key, m_TsField.keys()) {
-        *out << "<context>\n"
-             << "<name>" << key << "</name>\n";
-        const QSet<QString> &values = m_TsField[key];
-        foreach (const QString &value, values) {
-            if (out != nullptr) {
-                *out << "   <message>\n"
-                     "       <source>"  << value.trimmed().toStdString().data() << "</source>\n"
-                     "       <translation type =\"unfinished\"></translation>\n"
-                     "   </message>\n";
-            }
-        }
-        *out << "</context>\n";
-    }
-    file.close();
-    delete out;
+}
+const QList<QMap<QString, QString>> &DeviceManager::cmdInfo(const QString &key)
+{
+    return m_cmdInfo[key];
 }

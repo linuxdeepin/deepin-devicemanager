@@ -73,8 +73,8 @@ public:
     void generateInfo();
 
     /**@brief:完成加载信息*/
-    void finishedCmd(const QString &info);
-    void finishedGenerateDevice();
+    void finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &);
+    void finishedGenerateDevice(const QStringList &lst);
 
 private:
     void getCmdList(QList<QStringList> &cmdList);

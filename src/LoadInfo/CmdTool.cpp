@@ -5,34 +5,22 @@
 #include<QMutex>
 extern void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap);
 extern int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest);
-QMutex mutex;
-QMap<QString, QList<QMap<QString, QString> > > CmdTool::s_cmdInfo;
 
 CmdTool::CmdTool()
 {
 
 }
 
-QMap<QString, QList<QMap<QString, QString> > > &CmdTool::getCmdInfo()
+void CmdTool::addMapInfo(const QString &key, const QMap<QString, QString> &mapInfo)
 {
-    return s_cmdInfo;
-}
-void CmdTool::clear()
-{
-    s_cmdInfo.clear();
-}
-
-void CmdTool::addMapInfo(const QString key, const QMap<QString, QString> &mapInfo)
-{
-    mutex.tryLock();
-    if (s_cmdInfo.find(key) != s_cmdInfo.end()) {
-        s_cmdInfo[key].append(mapInfo);
+    if (m_cmdInfo.find(key) != m_cmdInfo.end()) {
+        m_cmdInfo[key].append(mapInfo);
     } else {
         QList<QMap<QString, QString> > lstMap;
         lstMap.append(mapInfo);
-        s_cmdInfo.insert(key, lstMap);
+        m_cmdInfo.insert(key, lstMap);
     }
-    mutex.unlock();
+
 }
 
 void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString &debugFile)
@@ -61,6 +49,12 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
         loadCatInfo(key, cmd, debugFile);
     }
 }
+
+QMap<QString, QList<QMap<QString, QString> > > &CmdTool::cmdInfo()
+{
+    return m_cmdInfo;
+}
+
 
 void CmdTool::loadLshwInfo(const QString &cmd, const QString &debugFile)
 {
@@ -361,13 +355,13 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
 
         // hwinfo --usb 里面有很多的无用信息，可以先过滤
         if (key == "hwinfo_usb") {
-            QList<QMap<QString, QString>>::iterator it = s_cmdInfo[key].begin();
+            QList<QMap<QString, QString>>::iterator it = m_cmdInfo["hwinfo_usb"].begin();
             bool add = true;
 
             // 有的是有同一个设备有两段信息，我们只需要一个
             // 比如 SysFS BusID: 1-3:1.2   和  SysFS BusID: 1-3:1.0 这个是同一个设备
             // 我们只需要一个
-            for (; it != s_cmdInfo[key].end(); ++it) {
+            for (; it != m_cmdInfo["hwinfo_usb"].end(); ++it) {
                 QString curBus = (*it)["SysFS BusID"];
                 QString newBus = mapInfo["SysFS BusID"];
                 curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");

@@ -21,7 +21,8 @@ void CmdTask::run()
 {
     CmdTool tool;
     tool.loadCmdInfo(m_Key, m_Cmd, m_DebugFile);
-    mp_Parent->finishedCmd(m_Info);
+    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = tool.cmdInfo();
+    mp_Parent->finishedCmd(m_Info, cmdInfo);
 }
 
 
@@ -45,71 +46,71 @@ void GenerateTask::run()
     switch (m_Type) {
     case DT_Computer:
         generator->generatorComputerDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Cpu:
         generator->generatorCpuDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Bios:
         generator->generatorBiosDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Memory:
         generator->generatorMemoryDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Storage:
         generator->generatorDiskDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Gpu:
         generator->generatorGpuDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Monitor:
         generator->generatorMonitorDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Network:
         generator->generatorNetworkDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Audio:
         generator->generatorAudioDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Bluetoorh:
         generator->generatorBluetoothDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Keyboard:
         generator->generatorKeyboardDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Mouse:
         generator->generatorMouseDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Print:
         generator->generatorPrinterDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Image:
         generator->generatorCameraDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Cdrom:
         generator->generatorCdromDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Others:
         generator->generatorOthersDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     case DT_Power:
         generator->generatorPowerDevice();
-        mp_Parent->finishedGenerateDevice();
+        mp_Parent->finishedGenerateDevice(generator->getBusIDFromHwinfo());
         break;
     default:
         break;
@@ -122,10 +123,11 @@ ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
 
 }
 
-void ThreadPool::finishedCmd(const QString &info)
+void ThreadPool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
     m_lock.tryLock();
     m_FinishedCmd++;
+    DeviceManager::instance()->addCmdInfo(cmdInfo);
     m_lock.unlock();
     if (m_FinishedCmd == m_AllCmdNum) {
         qDebug() << m_FinishedCmd << "****************" << m_AllCmdNum;
@@ -136,10 +138,13 @@ void ThreadPool::finishedCmd(const QString &info)
     }
 }
 
-void ThreadPool::finishedGenerateDevice()
+void ThreadPool::finishedGenerateDevice(const QStringList &lst)
 {
     m_lock.tryLock();
     m_FinishedGenerator++;
+    if (lst.size() > 0) {
+        DeviceManager::instance()->addBusId(lst);
+    }
     if (m_FinishedGenerator == m_AllTypeNum) {
         emit finished("finish");
     }
@@ -149,7 +154,6 @@ void ThreadPool::finishedGenerateDevice()
 void ThreadPool::loadCmdInfo()
 {
     // 初始化信息
-    CmdTool::clear();
     DeviceManager::instance()->clear();
     m_FinishedCmd = 0;
     m_FinishedGenerator = 0;
@@ -166,8 +170,7 @@ void ThreadPool::loadCmdInfo()
 
 void ThreadPool::generateInfo()
 {
-    DeviceManager::instance()->clear();
-    DeviceFactory::clear();
+    //DeviceManager::instance()->clear();
 
     // 开始生成设备信息
     QList<DeviceType> typeList;

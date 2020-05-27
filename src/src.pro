@@ -62,7 +62,6 @@ SOURCES += \
     mainwindow.cpp \
     deviceinfoparser.cpp \
     DeviceManager/DeviceInfo.cpp \
-    DeviceManager/DeviceManager.cpp \
     DeviceManager/DeviceMouse.cpp \
     DeviceManager/DeviceCPU.cpp \
     DeviceManager/DeviceStorage.cpp \
@@ -116,11 +115,11 @@ SOURCES += \
     LoadInfo/ArmGenerator.cpp \
     LoadInfo/PanguGenerator.cpp \
     LoadInfo/KLUGenerator.cpp \
-    LoadInfo/DeviceGenerator.cpp
+    LoadInfo/DeviceGenerator.cpp \
+    DeviceManager/DeviceManager.cpp
 
 HEADERS += \
     DeviceManager/DeviceInfo.h \
-    DeviceManager/DeviceManager.h \
     DeviceManager/DeviceMouse.h \
     DeviceManager/DeviceCpu.h \
     DeviceManager/DeviceGpu.h \
@@ -180,7 +179,8 @@ HEADERS += \
     LoadInfo/ArmGenerator.h \
     LoadInfo/PanguGenerator.h \
     LoadInfo/KLUGenerator.h \
-    LoadInfo/DeviceGenerator.h
+    LoadInfo/DeviceGenerator.h \
+    DeviceManager/DeviceManager.h
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin

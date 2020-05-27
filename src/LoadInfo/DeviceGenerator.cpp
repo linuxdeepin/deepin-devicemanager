@@ -33,21 +33,22 @@ DeviceGenerator::~DeviceGenerator()
 
 void DeviceGenerator::generatorComputerDevice()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
+    const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
 
     DeviceComputer device;
 
     // home url
-    if (cmdInfo["cat_os_release"].size() > 0) {
-        QString value = cmdInfo["cat_os_release"][0]["HOME_URL"];
+    if (cmdInfo.size() > 0) {
+        QString value = cmdInfo[0]["HOME_URL"];
         device.setHomeUrl(value.replace("\"", ""));
     }
 
     // name type
-    if (cmdInfo["lshw_system"].size() > 0) {
-        device.setType(cmdInfo["lshw_system"][0]["description"]);
-        device.setVendor(cmdInfo["lshw_system"][0]["vendor"]);
-        device.setName(cmdInfo["lshw_system"][0]["product"]);
+    const QList<QMap<QString, QString> >  &sysInfo = DeviceManager::instance()->cmdInfo("lshw_system");
+    if (sysInfo.size() > 0) {
+        device.setType(sysInfo[0]["description"]);
+        device.setVendor(sysInfo[0]["vendor"]);
+        device.setName(sysInfo[0]["product"]);
     }
 
     // setOsDescription
@@ -63,8 +64,9 @@ void DeviceGenerator::generatorComputerDevice()
     device.setOsDescription(os);
 
     // os
-    if (cmdInfo["cat_version"].size() > 0) {
-        QString info = cmdInfo["cat_version"][0]["OS"].trimmed();
+    const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
+    if (verInfo.size() > 0) {
+        QString info = verInfo[0]["OS"].trimmed();
         info = info.trimmed();
         QRegExp reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)", Qt::CaseSensitive);
         int index = reg.indexIn(info);
@@ -80,15 +82,19 @@ void DeviceGenerator::generatorComputerDevice()
 
 void DeviceGenerator::generatorCpuDevice()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstCatCpu  = cmdInfo["cat_cpuinfo"];
+    const QList<QMap<QString, QString> >  &lstCatCpu = DeviceManager::instance()->cmdInfo("cat_cpuinfo");
     if (lstCatCpu.size() == 0) {
         return;
     }
 
-    const QMap<QString, QString> &lscpu = cmdInfo["lscpu"].size() > 0 ? cmdInfo["lscpu"][0] : QMap<QString, QString>();
-    const QMap<QString, QString> &lshw = cmdInfo["lshw_cpu"].size() > 0 ? cmdInfo["lshw_cpu"][0] : QMap<QString, QString>();
-    const QMap<QString, QString> &dmidecode = cmdInfo["dmidecode4"].size() > 0 ? cmdInfo["dmidecode4"][0] : QMap<QString, QString>();
+    const QList<QMap<QString, QString> >  &lsCpu = DeviceManager::instance()->cmdInfo("lscpu");
+    const QMap<QString, QString> &lscpu = lsCpu.size() > 0 ? lsCpu[0] : QMap<QString, QString>();
+
+    const QList<QMap<QString, QString> >  &lshwCpu = DeviceManager::instance()->cmdInfo("lshw_cpu");
+    const QMap<QString, QString> &lshw = lshwCpu.size() > 0 ? lshwCpu[0] : QMap<QString, QString>();
+
+    const QList<QMap<QString, QString> >  &dmidecode4 = DeviceManager::instance()->cmdInfo("dmidecode4");
+    const QMap<QString, QString> &dmidecode = dmidecode4.size() > 0 ? dmidecode4[0] : QMap<QString, QString>();
 
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
     for (; it != lstCatCpu.end(); ++it) {
@@ -141,8 +147,7 @@ void DeviceGenerator::generatorMonitorDevice()
 
 void DeviceGenerator::generatorNetworkDevice()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList<QMap<QString, QString>> lstInfo = cmdInfo["lshw_network"];
+    const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2) {
@@ -183,8 +188,7 @@ void DeviceGenerator::generatorMouseDevice()
 
 void DeviceGenerator::generatorPrinterDevice()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList<QMap<QString, QString>> lstInfo = cmdInfo["printer"];
+    const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("printer");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2) {
@@ -216,14 +220,14 @@ void DeviceGenerator::generatorOthersDevice()
 
 void DeviceGenerator::generatorPowerDevice()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
+    const QList<QMap<QString, QString> > &daemon = DeviceManager::instance()->cmdInfo("Daemon");
     bool hasDaemon = false;
     // 守护进程信息
-    if (cmdInfo.find("Daemon") != cmdInfo.end() && cmdInfo["Daemon"].size() > 0) {
+    if (daemon.size() > 0) {
         hasDaemon = true;
     }
     // 电池或这电源信息
-    const QList<QMap<QString, QString>> lstInfo = cmdInfo["upower"];
+    const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("upower");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2) {
@@ -234,23 +238,16 @@ void DeviceGenerator::generatorPowerDevice()
             continue;
         }
         if (hasDaemon) {
-            device.setDaemonInfo(cmdInfo["Daemon"][0]);
+            device.setDaemonInfo(daemon[0]);
         }
         DeviceManager::instance()->addPowerDevice(device);
     }
 }
 
 
-void DeviceGenerator::clear()
-{
-    m_ListBusID.clear();
-}
-
-
 void DeviceGenerator::getBiosInfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList<QMap<QString, QString>> lstInfo = cmdInfo["dmidecode0"];
+    const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode0");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2) {
@@ -263,8 +260,7 @@ void DeviceGenerator::getBiosInfo()
 }
 void DeviceGenerator::getSystemInfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList<QMap<QString, QString>> lstInfo = cmdInfo["dmidecode1"];
+    const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode1");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2) {
@@ -277,8 +273,7 @@ void DeviceGenerator::getSystemInfo()
 }
 void DeviceGenerator::getBaseBoardInfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList<QMap<QString, QString>> lstInfo = cmdInfo["dmidecode2"];
+    const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode2");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2) {
@@ -291,8 +286,7 @@ void DeviceGenerator::getBaseBoardInfo()
 }
 void DeviceGenerator::getChassisInfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList<QMap<QString, QString>> lstInfo = cmdInfo["dmidecode3"];
+    const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode3");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2) {
@@ -305,8 +299,7 @@ void DeviceGenerator::getChassisInfo()
 }
 void DeviceGenerator::getBiosMemoryInfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList<QMap<QString, QString>> lstInfo = cmdInfo["dmidecode16"];
+    const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode16");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2) {
@@ -320,8 +313,7 @@ void DeviceGenerator::getBiosMemoryInfo()
 
 void DeviceGenerator::getMemoryInfoFromLshw()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMemory  = cmdInfo["lshw_memory"];
+    const QList<QMap<QString, QString>> lstMemory = DeviceManager::instance()->cmdInfo("lshw_memory");
     if (lstMemory.size() == 0) {
         return;
     } else if (lstMemory.size() == 1) {
@@ -343,8 +335,7 @@ void DeviceGenerator::getMemoryInfoFromLshw()
 void DeviceGenerator::getMemoryInfoFromDmidecode()
 {
     // 加载从dmidecode获取的信息
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &dmiMemory  = cmdInfo["dmidecode17"];
+    const QList<QMap<QString, QString>> dmiMemory = DeviceManager::instance()->cmdInfo("dmidecode17");
     QList<QMap<QString, QString> >::const_iterator dIt = dmiMemory.begin();
     for (; dIt != dmiMemory.end(); ++dIt) {
         if ((*dIt).size() < 2 || (*dIt)["size"] == "No Module Installed") {
@@ -356,8 +347,7 @@ void DeviceGenerator::getMemoryInfoFromDmidecode()
 
 void DeviceGenerator::getDiskInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstDisk  = cmdInfo["hwinfo_disk"];
+    const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("hwinfo_disk");
     QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
     for (; dIt != lstDisk.end(); ++dIt) {
         if ((*dIt).size() < 2) {
@@ -366,15 +356,14 @@ void DeviceGenerator::getDiskInfoFromHwinfo()
         DeviceStorage device;
         if (device.setHwinfoInfo(*dIt) && device.isValid()) {
             DeviceManager::instance()->addStorageDeivce(device);
-            getBusIDFromHwinfo((*dIt)["SysFS BusID"]);
+            addBusIDFromHwinfo((*dIt)["SysFS BusID"]);
         }
     }
 }
 
 void DeviceGenerator::getDiskInfoFromLshw()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstDisk  = cmdInfo["lshw_disk"];
+    const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_disk");
     QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
     for (; dIt != lstDisk.end(); ++dIt) {
         if ((*dIt).size() < 2) {
@@ -386,18 +375,17 @@ void DeviceGenerator::getDiskInfoFromLshw()
 
 void DeviceGenerator::getDiskInfoFromLsblk()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    if (cmdInfo["lsblk_d"].size() > 0) {
-        QMap<QString, QString>::const_iterator it = cmdInfo["lsblk_d"][0].begin();
-        for (; it != cmdInfo["lsblk_d"][0].end(); ++it) {
+    const QList<QMap<QString, QString>> lstblk = DeviceManager::instance()->cmdInfo("lsblk_d");
+    if (lstblk.size() > 0) {
+        QMap<QString, QString>::const_iterator it = lstblk[0].begin();
+        for (; it != lstblk[0].end(); ++it) {
             DeviceManager::instance()->setStorageDeviceMediaType(it.key(), it.value());
         }
     }
 }
 void DeviceGenerator::getDiskInfoFromSmartCtl()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["smart"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("smart");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -409,8 +397,7 @@ void DeviceGenerator::getDiskInfoFromSmartCtl()
 
 void DeviceGenerator::getGpuInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_display"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_display");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -419,14 +406,13 @@ void DeviceGenerator::getGpuInfoFromHwinfo()
         DeviceGpu device;
         device.setHwinfoInfo(*it);
         DeviceManager::instance()->addGpuDevice(device);
-        getBusIDFromHwinfo((*it)["SysFS BusID"]);
+        addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 
 void DeviceGenerator::getGpuInfoFromLshw()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["lshw_display"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_display");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -438,8 +424,7 @@ void DeviceGenerator::getGpuInfoFromLshw()
 
 void DeviceGenerator::getGpuInfoFromXrandr()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["xrandr"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("xrandr");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -450,16 +435,15 @@ void DeviceGenerator::getGpuInfoFromXrandr()
 }
 void DeviceGenerator::getGpuSizeFromDmesg()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    if (cmdInfo["dmesg"].size() > 0) {
-        DeviceManager::instance()->setGpuSizeFromDmesg(cmdInfo["dmesg"][0]["Size"]);
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("dmesg");
+    if (lstMap.size() > 0) {
+        DeviceManager::instance()->setGpuSizeFromDmesg(lstMap[0]["Size"]);
     }
 }
 
 void DeviceGenerator::getMonitorInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_monitor"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_monitor");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -468,13 +452,12 @@ void DeviceGenerator::getMonitorInfoFromHwinfo()
         DeviceMonitor device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addMonitor(device);
-        getBusIDFromHwinfo((*it)["SysFS BusID"]);
+        addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getMonitorInfoFromXrandrVerbose()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["xrandr_verbose"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("xrandr_verbose");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -485,8 +468,7 @@ void DeviceGenerator::getMonitorInfoFromXrandrVerbose()
 }
 void DeviceGenerator::getMonitorRefreshRateFromXrandr()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["xrandr"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("xrandr");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -498,8 +480,7 @@ void DeviceGenerator::getMonitorRefreshRateFromXrandr()
 
 void DeviceGenerator::getAudioInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_sound"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_sound");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -508,13 +489,12 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
         DeviceAudio device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addAudioDevice(device);
-        getBusIDFromHwinfo((*it)["SysFS BusID"]);
+        addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getAudioInfoFromLshw()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["lshw_multimedia"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_multimedia");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -526,8 +506,7 @@ void DeviceGenerator::getAudioInfoFromLshw()
 
 void DeviceGenerator::getBluetoothInfoFromHciconfig()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hciconfig"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hciconfig");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -540,8 +519,7 @@ void DeviceGenerator::getBluetoothInfoFromHciconfig()
 }
 void DeviceGenerator::getBlueToothInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_usb"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -552,14 +530,13 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
         }
         if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0") {
             if (DeviceManager::instance()->setBluetoothInfoFromHwinfo(*it))
-                getBusIDFromHwinfo((*it)["SysFS BusID"]);
+                addBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
     }
 }
 void DeviceGenerator::getBluetoothInfoFromLshw()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["lshw_usb"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -570,8 +547,7 @@ void DeviceGenerator::getBluetoothInfoFromLshw()
 }
 void DeviceGenerator::getKeyboardInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_keyboard"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_keyboard");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -581,14 +557,13 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
             DeviceKeyboard device;
             device.setInfoFromHwinfo(*it);
             DeviceManager::instance()->addKeyboardDevice(device);
-            getBusIDFromHwinfo((*it)["SysFS BusID"]);
+            addBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
     }
 }
 void DeviceGenerator::getKeyboardInfoFromLshw()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["lshw_usb"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -603,8 +578,7 @@ void DeviceGenerator::getKeyboardInfoFromCatDevices()
 }
 void DeviceGenerator::getMouseInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_mouse"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_mouse");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -619,13 +593,12 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         DeviceMouse device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addMouseDevice(device);
-        getBusIDFromHwinfo((*it)["SysFS BusID"]);
+        addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getMouseInfoFromLshw()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["lshw_usb"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
@@ -641,8 +614,7 @@ void DeviceGenerator::getMouseInfoFromCatDevices()
 
 void DeviceGenerator::getImageInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_usb"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -654,14 +626,13 @@ void DeviceGenerator::getImageInfoFromHwinfo()
             DeviceImage device;
             device.setInfoFromHwinfo(*it);
             DeviceManager::instance()->addImageDevice(device);
-            getBusIDFromHwinfo((*it)["SysFS BusID"]);
+            addBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
     }
 }
 void DeviceGenerator::getImageInfoFromLshw()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["lshw_usb"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 2) {
@@ -673,8 +644,7 @@ void DeviceGenerator::getImageInfoFromLshw()
 
 void DeviceGenerator::getCdromInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_cdrom"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_cdrom");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -683,7 +653,7 @@ void DeviceGenerator::getCdromInfoFromHwinfo()
         DeviceCdrom device;
         device.setInfoFromHwinfo(*it);
         DeviceManager::instance()->addCdromDevice(device);
-        getBusIDFromHwinfo((*it)["SysFS BusID"]);
+        addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getCdromInfoFromLshw()
@@ -693,8 +663,7 @@ void DeviceGenerator::getCdromInfoFromLshw()
 
 void DeviceGenerator::getOthersInfoFromHwinfo()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["hwinfo_usb"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -704,7 +673,8 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         bool isOtherDevice = true;
         QString curBus = (*it)["SysFS BusID"];
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
-        if (m_ListBusID.indexOf(curBus) != -1) {
+        const QStringList &lstBusId = DeviceManager::instance()->getBusId();
+        if (lstBusId.indexOf(curBus) != -1) {
             isOtherDevice = false;
         }
 
@@ -717,8 +687,7 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
 }
 void DeviceGenerator::getOthersInfoFromLshw()
 {
-    const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = CmdTool::getCmdInfo();
-    const QList< QMap<QString, QString> > &lstMap  = cmdInfo["lshw_usb"];
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 2) {
@@ -728,13 +697,16 @@ void DeviceGenerator::getOthersInfoFromLshw()
     }
 }
 
-void DeviceGenerator::getBusIDFromHwinfo(const QString &sysfsBusID)
+void DeviceGenerator::addBusIDFromHwinfo(const QString &sysfsBusID)
 {
-    m_Mutex.tryLock();
     QString busID = sysfsBusID;
     busID.replace(QRegExp("\\.[0-9]+$"), "");
 
     m_ListBusID.append(busID);
-    m_Mutex.unlock();
+}
+
+const QStringList &DeviceGenerator::getBusIDFromHwinfo()
+{
+    return m_ListBusID;
 }
 

@@ -66,8 +66,9 @@ public:
     /**@brief:generator power info*/
     virtual void generatorPowerDevice();
 
-    virtual void clear();
-
+    /**@brief:get BusID unique from Hwinfo*/
+    void addBusIDFromHwinfo(const QString &sysfsBusID);
+    const QStringList &getBusIDFromHwinfo();
 
 protected:
     /**@brief:generator bios info*/
@@ -117,13 +118,8 @@ protected:
     /**@brief:generator others info*/
     virtual void getOthersInfoFromHwinfo();
     void getOthersInfoFromLshw();
-
-    /**@brief:get BusID unique from Hwinfo*/
-    void getBusIDFromHwinfo(const QString &sysfsBusID);
 protected:
     QStringList m_ListBusID;
-private:
-    QMutex m_Mutex;
 };
 
 #endif // DEVICEGENERATOR_H

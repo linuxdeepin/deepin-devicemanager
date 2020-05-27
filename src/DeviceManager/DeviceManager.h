@@ -132,9 +132,11 @@ public:
     void addCdromDevice(const DeviceCdrom &device);
     const QList<DeviceCdrom> getCdromDevices();
 
-    // 其他设备属性的翻译
-    void addField(const QString &key, const QString &address);
-    void generateTs();
+    void addBusId(const QStringList &busId);
+    const QStringList &getBusId();
+
+    void addCmdInfo(const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo);
+    const QList<QMap<QString, QString>> &cmdInfo(const QString &key);
 
 
 protected:
@@ -162,7 +164,8 @@ private:
     QList<DeviceComputer>           m_ListDeviceComputer;             //<! 计算机基本信息
     QList<DeviceCdrom>              m_ListDeviceCdrom;                //<! cdrom设备
 
-    QMap<QString, QSet<QString> >                   m_TsField;
+    QStringList                     m_BusIdList;
+    QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;
 };
 
 #endif // DEVICEMANAGER_H

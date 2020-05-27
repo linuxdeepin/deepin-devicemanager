@@ -11,16 +11,14 @@ class CmdTool
 public:
     CmdTool();
 
-    static QMap<QString, QList<QMap<QString, QString> > > &getCmdInfo();
-    static void clear();
-    static void addMapInfo(const QString key, const QMap<QString, QString> &mapInfo);
-
     /**
      * @brief:通过命令获取设备信息
      * @brief[loadCmdInfo]:一般的处理方式
-     * @brief[loadLshwInfo]:lshw命令的处理方式不同
      */
     void loadCmdInfo(const QString &key, const QString &cmd, const QString &debugFile = QString(""));
+
+    QMap<QString, QList<QMap<QString, QString> > > &cmdInfo();
+
 private:
     void loadLshwInfo(const QString &cmd, const QString &debugFile = QString("lshw.txt"));
     void loadLsblkInfo(const QString &cmd, const QString &debugfile);
@@ -47,6 +45,7 @@ private:
     void getMapInfoFromDmidecode(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
     void getMapInfoFromHciconfig(QMap<QString, QString> &mapInfo, const QString &info);
+    void addMapInfo(const QString &key, const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief:命令的执行
@@ -56,7 +55,7 @@ private:
     bool runCmd(const QString &cmd, QString &deviceInfo);
 
 private:
-    static QMap<QString, QList<QMap<QString, QString> > > s_cmdInfo;
+    QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;
 };
 
 #endif // CMDTOOL_H
