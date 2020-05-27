@@ -701,10 +701,8 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         bool isOtherDevice = true;
         QString curBus = (*it)["SysFS BusID"];
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
-        foreach (const QString &bus, m_ListBusID) {
-            if (curBus == bus) {
-                isOtherDevice = false;
-            }
+        if (m_ListBusID.indexOf(curBus) != -1) {
+            isOtherDevice = false;
         }
 
         if (isOtherDevice) {
