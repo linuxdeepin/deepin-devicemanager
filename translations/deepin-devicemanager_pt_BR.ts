@@ -1148,11 +1148,11 @@
     </message>
     <message>
         <source>Design Capacity</source>
-        <translation>Capacidade do Projeto</translation>
+        <translation>Capacidade de Projeto</translation>
     </message>
     <message>
         <source>Design Voltage</source>
-        <translation>Tensão do Projeto</translation>
+        <translation>Tensão de Projeto</translation>
     </message>
     <message>
         <source>SBDS Version</source>
@@ -1270,7 +1270,7 @@
     </message>
     <message>
         <source>Chassis Information</source>
-        <translation>Informação do Chassi</translation>
+        <translation>Informações do Chassi</translation>
     </message>
     <message>
         <source>Physical Memory Array</source>
@@ -1322,7 +1322,7 @@
     </message>
     <message>
         <source>Chassis Handle</source>
-        <translation>Controlador de Chassi</translation>
+        <translation>Identificador do Chassi</translation>
     </message>
     <message>
         <source>Type</source>
@@ -1330,7 +1330,7 @@
     </message>
     <message>
         <source>Contained Object Handles</source>
-        <translation>Controladores de Objetos Contidos</translation>
+        <translation>Identificador de Objetos Contidos</translation>
     </message>
     <message>
         <source>Version</source>
@@ -1374,7 +1374,7 @@
     </message>
     <message>
         <source>OEM Information</source>
-        <translation>Informação OEM</translation>
+        <translation>Informações OEM</translation>
     </message>
     <message>
         <source>Height</source>
@@ -1402,7 +1402,7 @@
     </message>
     <message>
         <source>Error Information Handle</source>
-        <translation>Controlador das Informações de Erro</translation>
+        <translation>Identificador das Informações de Erro</translation>
     </message>
     <message>
         <source>Number Of Devices</source>
@@ -1478,7 +1478,7 @@
     </message>
     <message>
         <source>Serial ID</source>
-        <translation>ID Serial</translation>
+        <translation>Identificação de Série</translation>
     </message>
     <message>
         <source>product</source>
@@ -1558,11 +1558,11 @@
     </message>
     <message>
         <source>has history</source>
-        <translation>tem histórico</translation>
+        <translation>possui histórico</translation>
     </message>
     <message>
         <source>has statistics</source>
-        <translation>tem estatística</translation>
+        <translation>possui estatísticas</translation>
     </message>
     <message>
         <source>rechargeable</source>
@@ -1610,7 +1610,7 @@
     </message>
     <message>
         <source>technology</source>
-        <translation>technologia</translation>
+        <translation>tecnologia</translation>
     </message>
     <message>
         <source>icon-name</source>

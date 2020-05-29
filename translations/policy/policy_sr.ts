@@ -3,7 +3,7 @@
     <name>policy</name>
     <message>
         <source>Authentication is required to read hardware information</source>
-        <translation>Аутентификација је неопходна за преглед података о уеђајима</translation>
+        <translation>Идентификација је неопходна за преглед података о уеђајима</translation>
     </message>
     <message>
         <source>Cancel</source>

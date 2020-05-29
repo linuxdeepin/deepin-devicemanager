@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>No audio device found</source>
-        <translation>No se encontró ningún dispositivo de audio</translation>
+        <translation>No se encontraron dispositivos de audio</translation>
     </message>
     <message>
         <source>Name</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>No Bluetooth device found</source>
-        <translation>No se encontró dispositivo Bluetooth</translation>
+        <translation>No se encontraron dispositivos Bluetooth</translation>
     </message>
     <message>
         <source>Name</source>
@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Máxima potencia</translation>
+        <translation>Potencia máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>No CD-ROM found</source>
-        <translation>CD-ROM no encontrado</translation>
+        <translation>No se encontró ningún CD-ROM</translation>
     </message>
     <message>
         <source>Name</source>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Máxima potencia</translation>
+        <translation>Potencia máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>No camera found</source>
-        <translation>No se encontró una cámara</translation>
+        <translation>No se encontró ninguna cámara</translation>
     </message>
     <message>
         <source>Name</source>
@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Máxima potencia</translation>
+        <translation>Potencia máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>No CPU found</source>
-        <translation>No se identificó la CPU</translation>
+        <translation>No se encontró ningún CPU</translation>
     </message>
     <message>
         <source>Name</source>
@@ -354,7 +354,7 @@
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Cargando información de dispositivo Bluetooth…</translation>
+        <translation>Cargando información del dispositivo Bluetooth…</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
@@ -417,7 +417,7 @@
     </message>
     <message>
         <source>No disk found</source>
-        <translation>Disco no encontrado</translation>
+        <translation>No se encontró ningún disco</translation>
     </message>
     <message>
         <source>Model</source>
@@ -484,7 +484,7 @@
     </message>
     <message>
         <source>No GPU found</source>
-        <translation>No se encontró la GPU</translation>
+        <translation>No se encontró ninguna GPU</translation>
     </message>
     <message>
         <source>Name</source>
@@ -520,7 +520,7 @@
     </message>
     <message>
         <source>Display Output</source>
-        <translation>Salida de la pantalla</translation>
+        <translation>Salida de pantalla</translation>
     </message>
     <message>
         <source>VGA</source>
@@ -587,7 +587,7 @@
     </message>
     <message>
         <source>No disk found</source>
-        <translation>Disco no encontrado</translation>
+        <translation>No se encontró ningún disco</translation>
     </message>
     <message>
         <source>Model</source>
@@ -623,7 +623,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Máxima potencia</translation>
+        <translation>Potencia máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -682,7 +682,7 @@
     </message>
     <message>
         <source>No memory found</source>
-        <translation>No se identificó la memoria</translation>
+        <translation>No se encontró la memoria</translation>
     </message>
     <message>
         <source>Name</source>
@@ -714,7 +714,7 @@
     </message>
     <message>
         <source>Locator</source>
-        <translation>Buscador</translation>
+        <translation>Ubicación</translation>
     </message>
     <message>
         <source>Serial Number</source>
@@ -745,7 +745,7 @@
     </message>
     <message>
         <source>No monitor found</source>
-        <translation>No se identificó algún monitor</translation>
+        <translation>No se encontró ningún monitor</translation>
     </message>
     <message>
         <source>Name</source>
@@ -804,7 +804,7 @@
     </message>
     <message>
         <source>No motherboard found</source>
-        <translation>No se identificó la placa madre</translation>
+        <translation>No se encontró la tarjeta madre</translation>
     </message>
     <message>
         <source>Name</source>
@@ -831,7 +831,7 @@
     </message>
     <message>
         <source>No mouse found</source>
-        <translation>No se encontró un ratón</translation>
+        <translation>No se encontró ningún ratón</translation>
     </message>
     <message>
         <source>Name</source>
@@ -871,7 +871,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Máxima potencia</translation>
+        <translation>Potencia máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -886,7 +886,7 @@
     </message>
     <message>
         <source>No network adapter found</source>
-        <translation>No se encontró adaptador de red</translation>
+        <translation>No se encontraron adaptadores de red</translation>
     </message>
     <message>
         <source>Name</source>
@@ -950,7 +950,7 @@
     </message>
     <message>
         <source>Broadcast</source>
-        <translation>Transmitir</translation>
+        <translation>Difusión</translation>
     </message>
     <message>
         <source>Duplex</source>
@@ -1030,7 +1030,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>Máxima potencia</translation>
+        <translation>Potencia máxima</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -1108,7 +1108,7 @@
     </message>
     <message>
         <source>No power info</source>
-        <translation>No hay información de Energía</translation>
+        <translation>No hay información de energía</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1179,7 +1179,7 @@
     </message>
     <message>
         <source>No printer found</source>
-        <translation>No se encontró impresora</translation>
+        <translation>No se encontraron impresoras</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1222,7 +1222,7 @@
     </message>
     <message>
         <source>SubVendor</source>
-        <translation>Ensamblador</translation>
+        <translation>Subvendedor</translation>
     </message>
     <message>
         <source>SubDevice</source>
@@ -1242,7 +1242,7 @@
     </message>
     <message>
         <source>Driver Activation Cmd</source>
-        <translation type="unfinished"/>
+        <translation>Comando de activación del controlador</translation>
     </message>
     <message>
         <source>Config Status</source>
@@ -1262,7 +1262,7 @@
     </message>
     <message>
         <source>Base Board Information</source>
-        <translation>Información de la Placa Base</translation>
+        <translation>Información de la placa base</translation>
     </message>
     <message>
         <source>System Information</source>
@@ -1394,7 +1394,7 @@
     </message>
     <message>
         <source>Error Correction Type</source>
-        <translation>Tipo de corrección erronea</translation>
+        <translation>Tipo de corrección de errores</translation>
     </message>
     <message>
         <source>Maximum Capacity</source>
@@ -1402,7 +1402,7 @@
     </message>
     <message>
         <source>Error Information Handle</source>
-        <translation>Manejador de información de error</translation>
+        <translation>Manejador de información de errores</translation>
     </message>
     <message>
         <source>Number Of Devices</source>
@@ -1434,7 +1434,7 @@
     </message>
     <message>
         <source>SCO MTU</source>
-        <translation type="unfinished"/>
+        <translation>SCO MTU</translation>
     </message>
     <message>
         <source>Packet type</source>
@@ -1526,7 +1526,7 @@
     </message>
     <message>
         <source>Hardware Class</source>
-        <translation>Clase de Hardware</translation>
+        <translation>Clase de hardware</translation>
     </message>
     <message>
         <source>inch</source>
@@ -1570,7 +1570,7 @@
     </message>
     <message>
         <source>state</source>
-        <translation>Estado</translation>
+        <translation>estado</translation>
     </message>
     <message>
         <source>warning-level</source>
@@ -1582,19 +1582,19 @@
     </message>
     <message>
         <source>energy-empty</source>
-        <translation>energía-vacía</translation>
+        <translation>carga-vacía</translation>
     </message>
     <message>
         <source>energy-full</source>
-        <translation type="unfinished"/>
+        <translation>carga-completa</translation>
     </message>
     <message>
         <source>energy-full-design</source>
-        <translation type="unfinished"/>
+        <translation>carga-completa-diseño</translation>
     </message>
     <message>
         <source>energy-rate</source>
-        <translation>tasa-energía</translation>
+        <translation>tasa-carga</translation>
     </message>
     <message>
         <source>voltage</source>
@@ -1622,23 +1622,23 @@
     </message>
     <message>
         <source>daemon-version</source>
-        <translation>Versión del Daemon</translation>
+        <translation>versión-demonio</translation>
     </message>
     <message>
         <source>on-battery</source>
-        <translation type="unfinished"/>
+        <translation>con-batería</translation>
     </message>
     <message>
         <source>lid-is-closed</source>
-        <translation type="unfinished"/>
+        <translation>tapa-está-cerrada</translation>
     </message>
     <message>
         <source>lid-is-present</source>
-        <translation type="unfinished"/>
+        <translation>tapa-está-abierta</translation>
     </message>
     <message>
         <source>critical-action</source>
-        <translation type="unfinished"/>
+        <translation>acción-crítica</translation>
     </message>
     <message>
         <source>copies</source>
@@ -1646,11 +1646,11 @@
     </message>
     <message>
         <source>job-cancel-after</source>
-        <translation type="unfinished"/>
+        <translation>cancelar-trabajo-después</translation>
     </message>
     <message>
         <source>job-hold-until</source>
-        <translation type="unfinished"/>
+        <translation>mantener-trabajo-hasta</translation>
     </message>
     <message>
         <source>job-priority</source>
@@ -1734,7 +1734,7 @@
     </message>
     <message>
         <source>Geometry (Logical)</source>
-        <translation>Geometría (Lógica)</translation>
+        <translation>Geometría (lógica)</translation>
     </message>
     <message>
         <source>Copy</source>

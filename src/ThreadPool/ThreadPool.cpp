@@ -170,8 +170,6 @@ void ThreadPool::loadCmdInfo()
 
 void ThreadPool::generateInfo()
 {
-    //DeviceManager::instance()->clear();
-
     // 开始生成设备信息
     QList<DeviceType> typeList;
     getTypeList(typeList);
@@ -225,23 +223,23 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList)
 
 void ThreadPool::getTypeList(QList<DeviceType> &typeList)
 {
+    typeList.push_back(DT_Bluetoorh);
+    typeList.push_back(DT_Keyboard);
+    typeList.push_back(DT_Mouse);
+    typeList.push_back(DT_Image);
+    typeList.push_back(DT_Storage);
     typeList.push_back(DT_Computer);
     typeList.push_back(DT_Cpu);
     typeList.push_back(DT_Bios);
     typeList.push_back(DT_Memory);
-    typeList.push_back(DT_Storage);
     typeList.push_back(DT_Gpu);
     typeList.push_back(DT_Monitor);
     typeList.push_back(DT_Network);
     typeList.push_back(DT_Audio);
-    typeList.push_back(DT_Bluetoorh);
-    typeList.push_back(DT_Keyboard);
-    typeList.push_back(DT_Mouse);
     typeList.push_back(DT_Print);
-    typeList.push_back(DT_Image);
     typeList.push_back(DT_Cdrom);
-    typeList.push_back(DT_Others);
     typeList.push_back(DT_Power);
+    typeList.push_back(DT_Others);
     m_AllTypeNum = typeList.size();
 }
 

@@ -402,7 +402,7 @@
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>获取电源信息...</translation>
+        <translation>获取电池信息...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1104,11 +1104,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>电源</translation>
+        <translation>电池</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>未发现电源信息</translation>
+        <translation>未发现电池信息</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1929,7 +1929,7 @@
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>获取电源信息...</translation>
+        <translation>获取电池信息...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>

@@ -14,7 +14,6 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     }
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "product", m_Model);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "capabilities", m_Capabilities);
