@@ -58,6 +58,24 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
+{
+    setAttribute(mapInfo, "Name", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "", m_Model);
+    setAttribute(mapInfo, "Version", m_Version);
+    setAttribute(mapInfo, "Bus", m_BusInfo);
+    setAttribute(mapInfo, "", m_Irq);
+    setAttribute(mapInfo, "", m_Memory);
+    setAttribute(mapInfo, "", m_Width);
+    setAttribute(mapInfo, "", m_Clock);
+    setAttribute(mapInfo, "", m_Capabilities);
+    setAttribute(mapInfo, "", m_Description);
+
+
+    loadOtherDeviceInfo(mapInfo);
+}
+
 const QString &DeviceAudio::name()const
 {
     return m_Name;
@@ -116,4 +134,11 @@ void DeviceAudio::initFilterKey()
     //addFilterKey(QObject::tr("irq"));
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("latency"));
+
+    addFilterKey(QObject::tr("Phys"));
+    addFilterKey(QObject::tr("Sysfs"));
+    addFilterKey(QObject::tr("Handlers"));
+    addFilterKey(QObject::tr("PROP"));
+    addFilterKey(QObject::tr("EV"));
+    addFilterKey(QObject::tr("KEY"));
 }

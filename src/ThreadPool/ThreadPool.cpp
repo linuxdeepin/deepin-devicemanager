@@ -217,7 +217,7 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList)
     cmdList.append({ "cat_boardinfo",        "cat /proc/boardinfo",     "cat_boardinfo.txt",      tr("Loading Mouse Info...")});
     cmdList.append({ "cat_os_release",       "cat /etc/os-release",     "cat_os_release.txt",     tr("Loading Network Adapter Info...")});
     cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
-
+    cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "cat_devices.txt",     ""});
     m_AllCmdNum = cmdList.size();
 }
 

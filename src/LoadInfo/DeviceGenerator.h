@@ -97,6 +97,7 @@ protected:
     /**@brief:generator audio info*/
     void getAudioInfoFromHwinfo();
     void getAudioInfoFromLshw();
+    void getAudioInfoFromCatInput();
     /**@brief:generator bluetooth info*/
     void getBluetoothInfoFromHciconfig();
     void getBlueToothInfoFromHwinfo();

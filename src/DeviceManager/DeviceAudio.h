@@ -14,6 +14,9 @@ public:
     /**@brief:设置从lshw里面获取的信息*/
     bool setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
+    /**@brief:设置从cat /proc/bus/input/devices里面获取的信息*/
+    bool setInfoFromCatDevices(const QMap<QString, QString> &mapInfo);
+
     // 获取设备属性
     const QString &name()const;
     const QString &vendor()const;

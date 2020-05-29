@@ -45,9 +45,12 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
         loadHwinfoInfo(key, cmd, debugFile);
     } else if (key.startsWith("dmidecode")) {
         loadDmidecodeInfo(key, cmd, debugFile);
+    } else if (key == "cat_devices") {
+        loadCatInputDeviceInfo(key, cmd, debugFile);
     } else {
         loadCatInfo(key, cmd, debugFile);
     }
+
 }
 
 QMap<QString, QList<QMap<QString, QString> > > &CmdTool::cmdInfo()
@@ -76,7 +79,7 @@ void CmdTool::loadLshwInfo(const QString &cmd, const QString &debugFile)
         } else if (item.startsWith("disk")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_disk", mapInfo);
-        } else if ((item.startsWith("memory") && !item.startsWith("memory UNCLAIMED")) || item.startsWith("bank:")) {
+        } else if ((item.startsWith("memory") && !item.startsWith("memory UNCLAIMED")) || item.startsWith("bank")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_memory", mapInfo);
         } else if (item.startsWith("display")) {
@@ -494,6 +497,26 @@ void CmdTool::loadBiosInfoFromLspci(QString &chipsetFamliy)
 
 }
 
+void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, const QString &debugfile)
+{
+    QString deviceInfo;
+    if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
+        return;
+    }
+    QStringList items = deviceInfo.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty()) {
+            continue;
+        }
+
+        QMap<QString, QString> mapInfo;
+
+        getMapInfoFromInput(item, mapInfo, "=");
+
+        addMapInfo(key, mapInfo);
+    }
+}
+
 void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
     QStringList infoList = info.split("\n");
@@ -501,6 +524,32 @@ void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &map
         QStringList words = (*it).split(ch);
         if (words.size() == 2) {
             mapInfo.insert(words[0].trimmed(), words[1].trimmed());
+        }
+    }
+}
+
+void CmdTool::getMapInfoFromInput(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
+{
+    QStringList infoList = info.split("\n");
+    for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
+        *it = (*it).replace(QRegExp("[A-Z]: "), "");
+        *it = (*it).trimmed();
+        if ((*it).count(ch) > 2) {
+            QStringList words = (*it).split(" ");
+            foreach (auto attri, words) {
+                QStringList attriList = attri.split(ch);
+
+                if (attriList.size() == 2) {
+                    mapInfo.insert(attriList[0].trimmed(), attriList[1].trimmed());
+                }
+            }
+        } else {
+            QStringList attriList = (*it).split(ch);
+            if (attriList.size() == 2) {
+                mapInfo.insert(attriList[0].trimmed(), attriList[1].trimmed());
+            } else if (attriList.size() == 3) {
+                mapInfo.insert(attriList[0].trimmed(), attriList[1].trimmed() + attriList[2].trimmed());
+            }
         }
     }
 }

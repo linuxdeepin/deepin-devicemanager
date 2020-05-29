@@ -33,13 +33,14 @@ private:
     void loadCatInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadUpowerInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadBiosInfoFromLspci(QString &chipsetFamliy);
-
+    void loadCatInputDeviceInfo(const QString &key, const QString &cmd, const QString &debugfile);
 
 private:
     /**
      * @brief:将通过命令获取的信息，转化为map形式
      */
     void getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
+    void getMapInfoFromInput(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromLshw(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromDmidecode(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));

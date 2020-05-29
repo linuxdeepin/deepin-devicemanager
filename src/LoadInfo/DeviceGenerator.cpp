@@ -163,6 +163,7 @@ void DeviceGenerator::generatorAudioDevice()
 {
     getAudioInfoFromHwinfo();
     getAudioInfoFromLshw();
+    getAudioInfoFromCatInput();
 }
 
 void DeviceGenerator::generatorBluetoothDevice()
@@ -501,6 +502,19 @@ void DeviceGenerator::getAudioInfoFromLshw()
             continue;
         }
         DeviceManager::instance()->setAudioInfoFromLshw(*it);
+    }
+}
+
+void DeviceGenerator::getAudioInfoFromCatInput()
+{
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("cat_devices");
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it)["Sysfs"].contains("sound", Qt::CaseInsensitive) == true) {
+            DeviceAudio device;
+            device.setInfoFromCatDevices(*it);
+            DeviceManager::instance()->addAudioDevice(device);
+        }
     }
 }
 
