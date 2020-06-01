@@ -856,12 +856,12 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
 }
 bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
 {
-    QDateTime dt = QDateTime::currentDateTime();
-    QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
-    QString dtInt = QString::number(dt.toMSecsSinceEpoch());
-    QString key = getPKStr(dtStr, dtInt);
+//    QDateTime dt = QDateTime::currentDateTime();
+//    QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
+//    QString dtInt = QString::number(dt.toMSecsSinceEpoch());
+//    QString key = getPKStr(dtStr, dtInt);
 
-    //QString key = "devicemanager";
+    QString key = "devicemanager";
     QString cmd = proxy;
     QProcess process_;
     int msecs = 10000;
