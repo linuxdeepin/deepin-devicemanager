@@ -56,4 +56,3 @@ const int TableViewRowHeight_ = 36;
 
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/TongXin/LX_Keyboard";
 
-
