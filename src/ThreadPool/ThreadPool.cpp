@@ -183,41 +183,41 @@ void ThreadPool::generateInfo()
 void ThreadPool::getCmdList(QList<QStringList> &cmdList)
 {
     cmdList.append({ "lshw",                 "sudo lshw",               "lshw.txt",               tr("Loading Audio Device Info...") });
-//    cmdList.append({ "printer",              "",                "printer.txt",            ""});
+    cmdList.append({ "printer",              "",                "printer.txt",            ""});
 
-//    cmdList.append({ "dmidecode0",           "sudo dmidecode -t 0",     "dmidecode_0.txt",        tr("Loading BIOS Info...")});
-//    cmdList.append({ "dmidecode1",           "sudo dmidecode -t 1",     "dmidecode_1.txt",        ""});
-//    cmdList.append({ "dmidecode2",           "sudo dmidecode -t 2",     "dmidecode_2.txt",        ""});
-//    cmdList.append({ "dmidecode3",           "sudo dmidecode -t 3",     "dmidecode_3.txt",        ""});
-//    cmdList.append({ "dmidecode4",           "sudo dmidecode -t 4",     "dmidecode_4.txt",        ""});
-//    cmdList.append({ "dmidecode16",          "sudo dmidecode -t 16",    "dmidecode_16.txt",       ""});
-//    cmdList.append({ "dmidecode17",          "sudo dmidecode -t 17",    "dmidecode_17.txt",       ""});
-
-
-//    cmdList.append({ "hwinfo_monitor",       "hwinfo --monitor",        "hwinfo_monitor.txt",     tr("Loading CD-ROM Info...")});
-//    cmdList.append({ "hwinfo_sound",         "hwinfo --sound",          "hwinfo_sound.txt",       ""});
-//    cmdList.append({ "hwinfo_usb",           "hwinfo --usb",            "hwinfo_usb.txt",         ""});
-//    cmdList.append({ "hwinfo_network",       "hwinfo --network",        "hwinfo_network.txt",     ""});
-//    cmdList.append({ "hwinfo_keyboard",      "hwinfo --keyboard",       "hwinfo_keyboard.txt",    tr("Loading Bluetooth Device Info...")});
-//    cmdList.append({ "hwinfo_cdrom",         "hwinfo --cdrom",          "hwinfo_cdrom.txt",       tr("Loading Image Devices Info...")});
-//    cmdList.append({ "hwinfo_disk",          "sudo hwinfo --disk",      "hwinfo_disk.txt",        tr("Loading Keyboard Info...")});
-//    cmdList.append({ "hwinfo_display",       "hwinfo --display",        "hwinfo_display.txt",     ""});
-//    cmdList.append({ "hwinfo_mouse",         "hwinfo --mouse",          "hwinfo_mouse.txt",       ""});
+    cmdList.append({ "dmidecode0",           "sudo dmidecode -t 0",     "dmidecode_0.txt",        tr("Loading BIOS Info...")});
+    cmdList.append({ "dmidecode1",           "sudo dmidecode -t 1",     "dmidecode_1.txt",        ""});
+    cmdList.append({ "dmidecode2",           "sudo dmidecode -t 2",     "dmidecode_2.txt",        ""});
+    cmdList.append({ "dmidecode3",           "sudo dmidecode -t 3",     "dmidecode_3.txt",        ""});
+    cmdList.append({ "dmidecode4",           "sudo dmidecode -t 4",     "dmidecode_4.txt",        ""});
+    cmdList.append({ "dmidecode16",          "sudo dmidecode -t 16",    "dmidecode_16.txt",       ""});
+    cmdList.append({ "dmidecode17",          "sudo dmidecode -t 17",    "dmidecode_17.txt",       ""});
 
 
-//    cmdList.append({ "upower",               "upower --dump",           "upower_dump.txt",        ""});
-//    cmdList.append({ "lscpu",                "lscpu",                   "lscpu.txt",              tr("Loading Operating System Info...")});
-//    cmdList.append({ "lsblk_d",              "lsblk -d -o name,rota",   "lsblk_d.txt",            ""});
-//    cmdList.append({ "xrandr",               "xrandr",                  "xrandr.txt",             tr("Loading CPU Info...")});
-//    cmdList.append({ "xrandr_verbose",       "xrandr --verbose",        "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
-//    cmdList.append({ "dmesg",                "sudo dmesg",              "dmesg.txt",              tr("Loading Power Info...")});
-//    cmdList.append({ "hciconfig",            "hciconfig -a",            "hciconfig.txt",          tr("Loading Printer Info...")});
+    cmdList.append({ "hwinfo_monitor",       "hwinfo --monitor",        "hwinfo_monitor.txt",     tr("Loading CD-ROM Info...")});
+    cmdList.append({ "hwinfo_sound",         "hwinfo --sound",          "hwinfo_sound.txt",       ""});
+    cmdList.append({ "hwinfo_usb",           "hwinfo --usb",            "hwinfo_usb.txt",         ""});
+    cmdList.append({ "hwinfo_network",       "hwinfo --network",        "hwinfo_network.txt",     ""});
+    cmdList.append({ "hwinfo_keyboard",      "hwinfo --keyboard",       "hwinfo_keyboard.txt",    tr("Loading Bluetooth Device Info...")});
+    cmdList.append({ "hwinfo_cdrom",         "hwinfo --cdrom",          "hwinfo_cdrom.txt",       tr("Loading Image Devices Info...")});
+    cmdList.append({ "hwinfo_disk",          "sudo hwinfo --disk",      "hwinfo_disk.txt",        tr("Loading Keyboard Info...")});
+    cmdList.append({ "hwinfo_display",       "hwinfo --display",        "hwinfo_display.txt",     ""});
+    cmdList.append({ "hwinfo_mouse",         "hwinfo --mouse",          "hwinfo_mouse.txt",       ""});
 
-//    cmdList.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "cat_cpuinfo.txt",        tr("Loading Monitor Info...")});
-//    cmdList.append({ "cat_boardinfo",        "cat /proc/boardinfo",     "cat_boardinfo.txt",      tr("Loading Mouse Info...")});
-//    cmdList.append({ "cat_os_release",       "cat /etc/os-release",     "cat_os_release.txt",     tr("Loading Network Adapter Info...")});
-//    cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
-//    cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "cat_devices.txt",     ""});
+
+    cmdList.append({ "upower",               "upower --dump",           "upower_dump.txt",        ""});
+    cmdList.append({ "lscpu",                "lscpu",                   "lscpu.txt",              tr("Loading Operating System Info...")});
+    cmdList.append({ "lsblk_d",              "lsblk -d -o name,rota",   "lsblk_d.txt",            ""});
+    cmdList.append({ "xrandr",               "xrandr",                  "xrandr.txt",             tr("Loading CPU Info...")});
+    cmdList.append({ "xrandr_verbose",       "xrandr --verbose",        "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
+    cmdList.append({ "dmesg",                "sudo dmesg",              "dmesg.txt",              tr("Loading Power Info...")});
+    cmdList.append({ "hciconfig",            "hciconfig -a",            "hciconfig.txt",          tr("Loading Printer Info...")});
+
+    cmdList.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "cat_cpuinfo.txt",        tr("Loading Monitor Info...")});
+    cmdList.append({ "cat_boardinfo",        "cat /proc/boardinfo",     "cat_boardinfo.txt",      tr("Loading Mouse Info...")});
+    cmdList.append({ "cat_os_release",       "cat /etc/os-release",     "cat_os_release.txt",     tr("Loading Network Adapter Info...")});
+    cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
+    cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "cat_devices.txt",     ""});
     m_AllCmdNum = cmdList.size();
 }
 
