@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Chargement des informations du périphérique audio...</translation>
+        <translation type="vanished">Chargement des informations du périphérique audio...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Chargement des informations du BIOS...</translation>
+        <translation type="vanished">Chargement des informations du BIOS...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Chargement des informations sur le périphérique Bluetooth...</translation>
+        <translation type="vanished">Chargement des informations sur le périphérique Bluetooth...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Chargement des informations du lecteur CD-ROM...</translation>
+        <translation type="vanished">Chargement des informations du lecteur CD-ROM...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Chargement des informations sur le système d&apos;exploitation...</translation>
+        <translation type="vanished">Chargement des informations sur le système d&apos;exploitation...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Chargement des informations sur le processeur...</translation>
+        <translation type="vanished">Chargement des informations sur le processeur...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Chargement des informations du GPU...</translation>
+        <translation type="vanished">Chargement des informations du GPU...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Chargement des informations des périphériques d&apos;image...</translation>
+        <translation type="vanished">Chargement des informations des périphériques d&apos;image...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Chargement des informations du clavier...</translation>
+        <translation type="vanished">Chargement des informations du clavier...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Chargement des informations de la mémoire...</translation>
+        <translation type="vanished">Chargement des informations de la mémoire...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Chargement des informations du moniteur...</translation>
+        <translation type="vanished">Chargement des informations du moniteur...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Chargement des informations de la sou...</translation>
+        <translation type="vanished">Chargement des informations de la sou...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Chargement des informations de l&apos;adaptateur réseau...</translation>
+        <translation type="vanished">Chargement des informations de l&apos;adaptateur réseau...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Chargement des informations des autres périphériques...</translation>
+        <translation type="vanished">Chargement des informations des autres périphériques...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Chargement des informations de la batterie...</translation>
+        <translation type="vanished">Chargement des informations de la batterie...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Chargement des informations sur l&apos;imprimante...</translation>
+        <translation type="vanished">Chargement des informations sur l&apos;imprimante...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Clavier</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>Aucun disque trouvé</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Modèle</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Vitesse</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>Aucun clavier trouvé</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>Batterie alternative (AC)</translation>
+        <translation type="vanished">Batterie alternative (AC)</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Device Manager est un outil pratique pour afficher les informations sur le matériel et gérer les appareils.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Sous-routines</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Chargement des informations du GPU...</translation>
+        <translation type="vanished">Chargement des informations du GPU...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Chargement des informations de la mémoire...</translation>
+        <translation type="vanished">Chargement des informations de la mémoire...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

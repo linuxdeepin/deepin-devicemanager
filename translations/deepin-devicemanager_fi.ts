@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Ladataan äänilaitteen tietoja...</translation>
+        <translation type="vanished">Ladataan äänilaitteen tietoja...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Ladataan BIOS-tietoja...</translation>
+        <translation type="vanished">Ladataan BIOS-tietoja...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Ladataan Bluetooth-laitteen tietoja...</translation>
+        <translation type="vanished">Ladataan Bluetooth-laitteen tietoja...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Ladataan CD-ROM-tietoja...</translation>
+        <translation type="vanished">Ladataan CD-ROM-tietoja...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Ladataan käyttöjärjestelmän tietoja...</translation>
+        <translation type="vanished">Ladataan käyttöjärjestelmän tietoja...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Ladataan prosessorin tietoja...</translation>
+        <translation type="vanished">Ladataan prosessorin tietoja...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Ladataan GPU-tietoja...</translation>
+        <translation type="vanished">Ladataan GPU-tietoja...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Ladataan kuvalaitteiden tietoja...</translation>
+        <translation type="vanished">Ladataan kuvalaitteiden tietoja...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Ladataan näppäimistön tietoja...</translation>
+        <translation type="vanished">Ladataan näppäimistön tietoja...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Ladataan muistin tietoja...</translation>
+        <translation type="vanished">Ladataan muistin tietoja...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Ladataan näytön tietoja...</translation>
+        <translation type="vanished">Ladataan näytön tietoja...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Ladataan hiiren tietoja...</translation>
+        <translation type="vanished">Ladataan hiiren tietoja...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Ladataan verkkokortin tietoja...</translation>
+        <translation type="vanished">Ladataan verkkokortin tietoja...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Ladataan muiden laitteiden tietoja...</translation>
+        <translation type="vanished">Ladataan muiden laitteiden tietoja...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Ladataan virtatietoja...</translation>
+        <translation type="vanished">Ladataan virtatietoja...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Ladataan tulostintietoja...</translation>
+        <translation type="vanished">Ladataan tulostintietoja...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Näppäimistö</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>Levyä ei löytynyt</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Malli</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Nopeus</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>Näppäimistöä ei löytynyt</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>Verkkovirta</translation>
+        <translation type="vanished">Verkkovirta</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Laitehallinta on kätevä työkalu laittetietojen tarkastelemiseen ja laitteiden hallintaan.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Käsittelijät</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Ladataan GPU-tietoja...</translation>
+        <translation type="vanished">Ladataan GPU-tietoja...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Ladataan muistin tietoja...</translation>
+        <translation type="vanished">Ladataan muistin tietoja...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

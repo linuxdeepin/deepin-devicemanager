@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>获取音频设备信息...</translation>
+        <translation type="vanished">获取音频设备信息...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>获取BIOS信息...</translation>
+        <translation type="vanished">获取BIOS信息...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>获取蓝牙设备信息...</translation>
+        <translation type="vanished">获取蓝牙设备信息...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>获取光驱信息...</translation>
+        <translation type="vanished">获取光驱信息...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>获取操作系统信息...</translation>
+        <translation type="vanished">获取操作系统信息...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>获取处理器信息...</translation>
+        <translation type="vanished">获取处理器信息...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>获取GPU信息...</translation>
+        <translation type="vanished">获取GPU信息...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>获取图像设备信息...</translation>
+        <translation type="vanished">获取图像设备信息...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>获取键盘信息...</translation>
+        <translation type="vanished">获取键盘信息...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>获取内存信息...</translation>
+        <translation type="vanished">获取内存信息...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>获取显示器信息...</translation>
+        <translation type="vanished">获取显示器信息...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>获取鼠标信息...</translation>
+        <translation type="vanished">获取鼠标信息...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>获取网络适配器信息...</translation>
+        <translation type="vanished">获取网络适配器信息...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>获取其他设备信息...</translation>
+        <translation type="vanished">获取其他设备信息...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>获取电池信息...</translation>
+        <translation type="vanished">获取电池信息...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>获取打印机信息...</translation>
+        <translation type="vanished">获取打印机信息...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>键盘</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>未发现磁盘</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>型号</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>速度</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>未发现键盘</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>交流电源</translation>
+        <translation type="vanished">交流电源</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>设备管理器是查看、管理硬件设备的工具软件。</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>处理程序</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>获取GPU信息...</translation>
+        <translation type="vanished">获取GPU信息...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>获取内存信息...</translation>
+        <translation type="vanished">获取内存信息...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

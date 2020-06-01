@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Ses Aygıtı Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Ses Aygıtı Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>BIOS Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">BIOS Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Bluetooth Aygıt Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Bluetooth Aygıt Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>CD-ROM Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">CD-ROM Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>İşletim Sistemi Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">İşletim Sistemi Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>CPU Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">CPU Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>GPU Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">GPU Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Görüntü Aygıtları Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Görüntü Aygıtları Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Klavye Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Klavye Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Bellek Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Bellek Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Ekran Bilgisi yükleniyor...</translation>
+        <translation type="vanished">Ekran Bilgisi yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Fare Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Fare Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Ağ Adaptörü Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Ağ Adaptörü Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Diğer Aygıt Bilgileri Yükleniyor...</translation>
+        <translation type="vanished">Diğer Aygıt Bilgileri Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Güç Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Güç Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Yazıcı Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Yazıcı Bilgisi Yükleniyor...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Klavye</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>Disk bulunamadı</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Model</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Hız</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>Klavye bulunamadı</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>AC Güç</translation>
+        <translation type="vanished">AC Güç</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Aygıt Yöneticisi, donanım bilgilerini görüntülemek ve aygıtları yönetmek için kullanışlı bir araçtır.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>İşleyiciler</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>GPU Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">GPU Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Bellek Bilgisi Yükleniyor...</translation>
+        <translation type="vanished">Bellek Bilgisi Yükleniyor...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

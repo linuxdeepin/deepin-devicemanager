@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Carregando Informações do Dispositivo de Áudio...</translation>
+        <translation type="vanished">Carregando Informações do Dispositivo de Áudio...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Carregando Informações da BIOS...</translation>
+        <translation type="vanished">Carregando Informações da BIOS...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Carregando Informações do Dispositivo Bluetooth...</translation>
+        <translation type="vanished">Carregando Informações do Dispositivo Bluetooth...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Carregando Informações do CD-ROM...</translation>
+        <translation type="vanished">Carregando Informações do CD-ROM...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Carregando Informações do Sistema Operacional...</translation>
+        <translation type="vanished">Carregando Informações do Sistema Operacional...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Carregando Informações da CPU...</translation>
+        <translation type="vanished">Carregando Informações da CPU...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Carregando Informações da GPU...</translation>
+        <translation type="vanished">Carregando Informações da GPU...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Carregando Informações dos Dispositivos de Imagem...</translation>
+        <translation type="vanished">Carregando Informações dos Dispositivos de Imagem...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Carregando Informações do Teclado...</translation>
+        <translation type="vanished">Carregando Informações do Teclado...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Carregando Informações da Memória...</translation>
+        <translation type="vanished">Carregando Informações da Memória...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Carregando Informações do Monitor...</translation>
+        <translation type="vanished">Carregando Informações do Monitor...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Carregando Informações do Mouse...</translation>
+        <translation type="vanished">Carregando Informações do Mouse...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Carregando Informações do Adaptador de Rede...</translation>
+        <translation type="vanished">Carregando Informações do Adaptador de Rede...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Carregando Informações de Outros Dispositivos...</translation>
+        <translation type="vanished">Carregando Informações de Outros Dispositivos...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Carregando Informações de Energia...</translation>
+        <translation type="vanished">Carregando Informações de Energia...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Carregando Informações da Impressora...</translation>
+        <translation type="vanished">Carregando Informações da Impressora...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Teclado</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>Nenhum disco encontrado</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Modelo</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Velocidade</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>Nenhum teclado encontrado</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>Energia CA</translation>
+        <translation type="vanished">Energia CA</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>O Gerenciador de Dispositivos é uma ferramenta útil para exibir informações de hardware e gerenciar os dispositivos.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Controladores</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Carregando Informações da GPU...</translation>
+        <translation type="vanished">Carregando Informações da GPU...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Carregando Informações da Memória...</translation>
+        <translation type="vanished">Carregando Informações da Memória...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

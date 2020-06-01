@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Завантажуємо дані щодо звукових пристроїв…</translation>
+        <translation type="vanished">Завантажуємо дані щодо звукових пристроїв…</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Завантажуємо дані BIOS...</translation>
+        <translation type="vanished">Завантажуємо дані BIOS...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Завантажуємо дані щодо пристроїв Bluetooth…</translation>
+        <translation type="vanished">Завантажуємо дані щодо пристроїв Bluetooth…</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Завантажуємо дані щодо CD-ROM...</translation>
+        <translation type="vanished">Завантажуємо дані щодо CD-ROM...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Завантажуємо дані щодо операційної системи…</translation>
+        <translation type="vanished">Завантажуємо дані щодо операційної системи…</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Завантажуємо відомості щодо процесора…</translation>
+        <translation type="vanished">Завантажуємо відомості щодо процесора…</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Завантажуємо дані щодо графічного процесора…</translation>
+        <translation type="vanished">Завантажуємо дані щодо графічного процесора…</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Завантажуємо дані щодо графічних пристроїв…</translation>
+        <translation type="vanished">Завантажуємо дані щодо графічних пристроїв…</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Завантажуємо дані щодо клавіатури…</translation>
+        <translation type="vanished">Завантажуємо дані щодо клавіатури…</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Завантажуємо дані щодо пам&apos;яті…</translation>
+        <translation type="vanished">Завантажуємо дані щодо пам&apos;яті…</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Завантажуємо дані щодо монітора…</translation>
+        <translation type="vanished">Завантажуємо дані щодо монітора…</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Завантажуємо дані щодо миші…</translation>
+        <translation type="vanished">Завантажуємо дані щодо миші…</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Завантажуємо дані щодо адаптера мережі…</translation>
+        <translation type="vanished">Завантажуємо дані щодо адаптера мережі…</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Завантажуємо дані щодо інших пристроїв…</translation>
+        <translation type="vanished">Завантажуємо дані щодо інших пристроїв…</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Завантажуємо дані щодо живлення…</translation>
+        <translation type="vanished">Завантажуємо дані щодо живлення…</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Завантажуємо дані щодо принтерів…</translation>
+        <translation type="vanished">Завантажуємо дані щодо принтерів…</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Клавіатура</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>Не знайдено дисків</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Модель</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Швидкість</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>Не знайдено клавіатури</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>Потужність змінного струму</translation>
+        <translation type="vanished">Потужність змінного струму</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>«Керування пристроями» — зручний інструмент для перегляду відомостей щодо обладнання та керування пристроями.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Фіз.</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Обробники</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Завантажуємо дані щодо графічного процесора…</translation>
+        <translation type="vanished">Завантажуємо дані щодо графічного процесора…</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Завантажуємо дані щодо пам&apos;яті…</translation>
+        <translation type="vanished">Завантажуємо дані щодо пам&apos;яті…</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

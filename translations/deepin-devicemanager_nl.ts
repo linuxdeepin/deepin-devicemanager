@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Bezig met laden van audio-apparaten...</translation>
+        <translation type="vanished">Bezig met laden van audio-apparaten...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Bezig met laden van BIOS-informatie...</translation>
+        <translation type="vanished">Bezig met laden van BIOS-informatie...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Bezig met laden van Bluetooth-apparaten...</translation>
+        <translation type="vanished">Bezig met laden van Bluetooth-apparaten...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Bezig met laden van cd-rominformatie...</translation>
+        <translation type="vanished">Bezig met laden van cd-rominformatie...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Bezig met laden van besturingssysteeminformatie...</translation>
+        <translation type="vanished">Bezig met laden van besturingssysteeminformatie...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Bezig met laden van processorinformatie...</translation>
+        <translation type="vanished">Bezig met laden van processorinformatie...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Bezig met laden van videokaartinformatie...</translation>
+        <translation type="vanished">Bezig met laden van videokaartinformatie...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Bezig met laden van afbeeldingsapparaten...</translation>
+        <translation type="vanished">Bezig met laden van afbeeldingsapparaten...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Bezig met laden van toetsenbordinformatie...</translation>
+        <translation type="vanished">Bezig met laden van toetsenbordinformatie...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Bezig met laden van geheugeninformatie...</translation>
+        <translation type="vanished">Bezig met laden van geheugeninformatie...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Bezig met laden van beeldscherminformatie...</translation>
+        <translation type="vanished">Bezig met laden van beeldscherminformatie...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Bezig met laden van muisinformatie...</translation>
+        <translation type="vanished">Bezig met laden van muisinformatie...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Bezig met laden van netwerkadapters...</translation>
+        <translation type="vanished">Bezig met laden van netwerkadapters...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Bezig met laden van overige apparaten...</translation>
+        <translation type="vanished">Bezig met laden van overige apparaten...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Bezig met laden van energie-informatie...</translation>
+        <translation type="vanished">Bezig met laden van energie-informatie...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Bezig met laden van printers...</translation>
+        <translation type="vanished">Bezig met laden van printers...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Toetsenbord</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>Geen schijf aangetroffen</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Model</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Snelheid</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>Geen toetsenbord aangetroffen</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>Netstroom</translation>
+        <translation type="vanished">Netstroom</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Apparaatbeheer is een programma dat hardware-informatie toont en apparaten kan beheren.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Behandeld door</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Bezig met laden van videokaartinformatie...</translation>
+        <translation type="vanished">Bezig met laden van videokaartinformatie...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Bezig met laden van geheugeninformatie...</translation>
+        <translation type="vanished">Bezig met laden van geheugeninformatie...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

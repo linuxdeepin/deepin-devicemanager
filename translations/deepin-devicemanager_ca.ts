@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Es carrega la informació del dispositiu d&apos;àudio...</translation>
+        <translation type="vanished">Es carrega la informació del dispositiu d&apos;àudio...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Es carrega la informació del BIOS...</translation>
+        <translation type="vanished">Es carrega la informació del BIOS...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Es carrega la informació del dispositiu de Bluetooth...</translation>
+        <translation type="vanished">Es carrega la informació del dispositiu de Bluetooth...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Es carrega la informació del CD_ROM...</translation>
+        <translation type="vanished">Es carrega la informació del CD_ROM...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Es carrega la informació del sistema operatiu...</translation>
+        <translation type="vanished">Es carrega la informació del sistema operatiu...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Es carrega la informació de la CPU...</translation>
+        <translation type="vanished">Es carrega la informació de la CPU...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Es carrega la informació de la CPU...</translation>
+        <translation type="vanished">Es carrega la informació de la CPU...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Es carrega la informació dels dispositius d&apos;imatge...</translation>
+        <translation type="vanished">Es carrega la informació dels dispositius d&apos;imatge...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Es carrega la informació del teclat...</translation>
+        <translation type="vanished">Es carrega la informació del teclat...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Es carrega la informació de la memòria...</translation>
+        <translation type="vanished">Es carrega la informació de la memòria...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Es carrega la informació del monitor...</translation>
+        <translation type="vanished">Es carrega la informació del monitor...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Es carrega la informació del ratolí...</translation>
+        <translation type="vanished">Es carrega la informació del ratolí...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Es carrega la informació de l&apos;adaptador de xarxa...</translation>
+        <translation type="vanished">Es carrega la informació de l&apos;adaptador de xarxa...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Es carrega la informació d&apos;altres dispositius...</translation>
+        <translation type="vanished">Es carrega la informació d&apos;altres dispositius...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Es carrega la informació d&apos;energia...</translation>
+        <translation type="vanished">Es carrega la informació d&apos;energia...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Es carrega la informació de la impressora...</translation>
+        <translation type="vanished">Es carrega la informació de la impressora...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Teclat</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>No s&apos;ha trobat cap disc.</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Model</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Velocitat</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>No s&apos;ha trobat cap teclat.</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>Energia d&apos;AC</translation>
+        <translation type="vanished">Energia d&apos;AC</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>El Gestor de dispositius és una eina pràctica per veure la informació del maquinari i gestionar els dispositius.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Gestors</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Es carrega la informació de la CPU...</translation>
+        <translation type="vanished">Es carrega la informació de la CPU...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Es carrega la informació de la memòria...</translation>
+        <translation type="vanished">Es carrega la informació de la memòria...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Caricamento info dispositivi audio...</translation>
+        <translation type="vanished">Caricamento info dispositivi audio...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Caricamento info BIOS...</translation>
+        <translation type="vanished">Caricamento info BIOS...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Caricamento info dispositivi Bluetooth...</translation>
+        <translation type="vanished">Caricamento info dispositivi Bluetooth...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Caricamento info CD-ROM...</translation>
+        <translation type="vanished">Caricamento info CD-ROM...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Caricamento info Sistema Operativo...</translation>
+        <translation type="vanished">Caricamento info Sistema Operativo...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Caricamento info CPU...</translation>
+        <translation type="vanished">Caricamento info CPU...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Caricamento info GPU...</translation>
+        <translation type="vanished">Caricamento info GPU...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Caricamento info dispositivo di acquisizione video...</translation>
+        <translation type="vanished">Caricamento info dispositivo di acquisizione video...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Caricamento info tastiera...</translation>
+        <translation type="vanished">Caricamento info tastiera...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Caricamento info memoria...</translation>
+        <translation type="vanished">Caricamento info memoria...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Caricamento info Monitor...</translation>
+        <translation type="vanished">Caricamento info Monitor...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Caricamento info mouse...</translation>
+        <translation type="vanished">Caricamento info mouse...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Caricamento info adattatore di rete...</translation>
+        <translation type="vanished">Caricamento info adattatore di rete...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Caricamento info degli altri dispositivi...</translation>
+        <translation type="vanished">Caricamento info degli altri dispositivi...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Caricamento info alimentazione...</translation>
+        <translation type="vanished">Caricamento info alimentazione...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Caricamento info stampanti...</translation>
+        <translation type="vanished">Caricamento info stampanti...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Tastiera</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>Nessun disco rilevato</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Modello</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Velocità</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>Nessuna tastiera rilevata</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>Alimentazione AC</translation>
+        <translation type="vanished">Alimentazione AC</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1889,6 +1889,18 @@
         <translation>Il Gestore Dispositivi è uno strumento utile per visualizzare informazioni sull&apos;hardware e gestire i dispositivi.
 Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Handlers</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1934,7 +1946,7 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Caricamento info GPU...</translation>
+        <translation type="vanished">Caricamento info GPU...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1942,7 +1954,7 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Caricamento info memoria...</translation>
+        <translation type="vanished">Caricamento info memoria...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>獲取音訊裝置訊息...</translation>
+        <translation type="vanished">獲取音訊裝置訊息...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>獲取BIOS訊息...</translation>
+        <translation type="vanished">獲取BIOS訊息...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>獲取藍牙設備訊息...</translation>
+        <translation type="vanished">獲取藍牙設備訊息...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>獲取光碟機訊息...</translation>
+        <translation type="vanished">獲取光碟機訊息...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>獲取操作系統訊息...</translation>
+        <translation type="vanished">獲取操作系統訊息...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>獲取處理器訊息...</translation>
+        <translation type="vanished">獲取處理器訊息...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>獲取GPU訊息...</translation>
+        <translation type="vanished">獲取GPU訊息...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>獲取圖像裝置訊息...</translation>
+        <translation type="vanished">獲取圖像裝置訊息...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>獲取鍵盤訊息...</translation>
+        <translation type="vanished">獲取鍵盤訊息...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>獲取記憶體訊息...</translation>
+        <translation type="vanished">獲取記憶體訊息...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>獲取顯示器訊息...</translation>
+        <translation type="vanished">獲取顯示器訊息...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>獲取滑鼠訊息...</translation>
+        <translation type="vanished">獲取滑鼠訊息...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>獲取網路適配器訊息...</translation>
+        <translation type="vanished">獲取網路適配器訊息...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>獲取其他裝置訊息...</translation>
+        <translation type="vanished">獲取其他裝置訊息...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>獲取電池訊息...</translation>
+        <translation type="vanished">獲取電池訊息...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>獲取印表機訊息...</translation>
+        <translation type="vanished">獲取印表機訊息...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>鍵盤</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>未發現磁碟</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>型號</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>頻率</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>未發現鍵盤</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>交流電源</translation>
+        <translation type="vanished">交流電源</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>設備管理器是查看、管理硬體設備的工具軟體。</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>處理程序</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>獲取GPU訊息...</translation>
+        <translation type="vanished">獲取GPU訊息...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>獲取記憶體訊息...</translation>
+        <translation type="vanished">獲取記憶體訊息...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

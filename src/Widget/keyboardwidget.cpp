@@ -38,15 +38,15 @@ KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, t
 void KeyboardWidget::initWidgetEX()
 {
     // 获取存储设备
-    const QList<DeviceKeyboard>& devices = DeviceManager::instance()->getKeyboardDevices();
+    const QList<DeviceKeyboard> &devices = DeviceManager::instance()->getKeyboardDevices();
     int deviceNum = devices.size();
-    if( deviceNum < 1 ){
-        setCentralInfo(tr("No disk found"));
+    if ( deviceNum < 1 ) {
+        setCentralInfo(tr("No keyboard found"));
         return;
     }
 
     // 初始化表格
-    if(deviceNum > 1){
+    if (deviceNum > 1) {
         initTable(devices);
     }
 
@@ -56,14 +56,13 @@ void KeyboardWidget::initWidgetEX()
     // 设置overview
     setOverView(devices);
 }
-void KeyboardWidget::initTable(const QList<DeviceKeyboard>& devices)
+void KeyboardWidget::initTable(const QList<DeviceKeyboard> &devices)
 {
     QList<QStringList> tabList;
     QStringList headers = { tr("Model"),  tr("Vendor") };
 
-    foreach(const DeviceKeyboard& device,devices){
-        QStringList tab =
-        {
+    foreach (const DeviceKeyboard &device, devices) {
+        QStringList tab = {
             device.model(),
             device.vendor()
         };
@@ -72,42 +71,42 @@ void KeyboardWidget::initTable(const QList<DeviceKeyboard>& devices)
 
     addTable( headers, tabList);
 }
-void KeyboardWidget::initDetails(const QList<DeviceKeyboard>& devices)
+void KeyboardWidget::initDetails(const QList<DeviceKeyboard> &devices)
 {
     int size = devices.size();
-    foreach(const DeviceKeyboard& device,devices){
-        addDeviceDetail(device,size==1?false:true);
+    foreach (const DeviceKeyboard &device, devices) {
+        addDeviceDetail(device, size == 1 ? false : true);
     }
 }
-void KeyboardWidget::addDeviceDetail(const DeviceKeyboard& device,bool withTitle)
+void KeyboardWidget::addDeviceDetail(const DeviceKeyboard &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;
 
     // 添加基本信息
-    addDeviceAttribute(tr("Name"),device.name(),attributes);
-    addDeviceAttribute(tr("Model"),device.model(),attributes);
-    addDeviceAttribute(tr("Vendor"),device.vendor(),attributes);
-    addDeviceAttribute(tr("Interface"),device.interface(),attributes);
-    addDeviceAttribute(tr("Version"),device.version(),attributes);
-    addDeviceAttribute(tr("Bus Info"),device.busInfo(),attributes);
-    addDeviceAttribute(tr("Capabilities"),device.version(),attributes);
-    addDeviceAttribute(tr("Driver"),device.driver(),attributes);
-    addDeviceAttribute(tr("Maximum Power"),device.maxinumPower(),attributes);
-    addDeviceAttribute(tr("Speed"),device.speed(),attributes);
+    addDeviceAttribute(tr("Name"), device.name(), attributes);
+    addDeviceAttribute(tr("Model"), device.model(), attributes);
+    addDeviceAttribute(tr("Vendor"), device.vendor(), attributes);
+    addDeviceAttribute(tr("Interface"), device.interface(), attributes);
+    addDeviceAttribute(tr("Version"), device.version(), attributes);
+    addDeviceAttribute(tr("Bus Info"), device.busInfo(), attributes);
+    addDeviceAttribute(tr("Capabilities"), device.version(), attributes);
+    addDeviceAttribute(tr("Driver"), device.driver(), attributes);
+    addDeviceAttribute(tr("Maximum Power"), device.maxinumPower(), attributes);
+    addDeviceAttribute(tr("Speed"), device.speed(), attributes);
 
     // 添加其他信息
-    addOtherDeviceAttribute(device,attributes);
+    addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle?device.model():"", attributes );
+    addSubInfo(withTitle ? device.model() : "", attributes );
 }
 
-void KeyboardWidget::setOverView(const QList<DeviceKeyboard>& devices)
+void KeyboardWidget::setOverView(const QList<DeviceKeyboard> &devices)
 {
-    foreach(const DeviceKeyboard& device,devices){
+    foreach (const DeviceKeyboard &device, devices) {
         overviewInfo_.value += QString("%1 (%2)/").arg(device.name()).arg(device.model());
     }
-    overviewInfo_.value.replace(QRegExp("/$"),"");
+    overviewInfo_.value.replace(QRegExp("/$"), "");
 }
 
 

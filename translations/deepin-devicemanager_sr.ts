@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Учитавање података аудио уређаја...</translation>
+        <translation type="vanished">Учитавање података аудио уређаја...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Учитавање БИОС података...</translation>
+        <translation type="vanished">Учитавање БИОС података...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Учитавање података блутут уређаја...</translation>
+        <translation type="vanished">Учитавање података блутут уређаја...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Учитавање ЦД-РОМ података...</translation>
+        <translation type="vanished">Учитавање ЦД-РОМ података...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Учитавање података о оперативном систему...</translation>
+        <translation type="vanished">Учитавање података о оперативном систему...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Учитавање ЦПЈ података...</translation>
+        <translation type="vanished">Учитавање ЦПЈ података...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Учитавање GPU података...</translation>
+        <translation type="vanished">Учитавање GPU података...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Учитавање података уређаја за слике...</translation>
+        <translation type="vanished">Учитавање података уређаја за слике...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Учитавање података о тастатури...</translation>
+        <translation type="vanished">Учитавање података о тастатури...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Учитавање података о меморији...</translation>
+        <translation type="vanished">Учитавање података о меморији...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Учитавање података монитора...</translation>
+        <translation type="vanished">Учитавање података монитора...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Учитавање података о мишу</translation>
+        <translation type="vanished">Учитавање података о мишу</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Учитавање података мрежне картице...</translation>
+        <translation type="vanished">Учитавање података мрежне картице...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Учитавање података осталих уређаја...</translation>
+        <translation type="vanished">Учитавање података осталих уређаја...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Учитавање података о напајању...</translation>
+        <translation type="vanished">Учитавање података о напајању...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Учитавање података штампача...</translation>
+        <translation type="vanished">Учитавање података штампача...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Тастатура</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>Није пронађен диск</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Модел</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Брзина</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>Тастатура није проађена</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>AC напајање</translation>
+        <translation type="vanished">AC напајање</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Управник Уређаја је користан алат за приказ података о рачунару, апаратури и за управљање уређајима.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Обрађивачи</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Учитавање GPU података...</translation>
+        <translation type="vanished">Учитавање GPU података...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Учитавање података о меморији...</translation>
+        <translation type="vanished">Учитавање података о меморији...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

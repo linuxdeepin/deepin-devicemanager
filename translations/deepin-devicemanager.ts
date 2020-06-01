@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Loading Audio Device Info...</translation>
+        <translation type="vanished">Loading Audio Device Info...</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Loading BIOS Info...</translation>
+        <translation type="vanished">Loading BIOS Info...</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Loading Bluetooth Device Info...</translation>
+        <translation type="vanished">Loading Bluetooth Device Info...</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Loading CD-ROM Info...</translation>
+        <translation type="vanished">Loading CD-ROM Info...</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Loading Operating System Info...</translation>
+        <translation type="vanished">Loading Operating System Info...</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Loading CPU Info...</translation>
+        <translation type="vanished">Loading CPU Info...</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Loading GPU Info...</translation>
+        <translation type="vanished">Loading GPU Info...</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Loading Image Devices Info...</translation>
+        <translation type="vanished">Loading Image Devices Info...</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Loading Keyboard Info...</translation>
+        <translation type="vanished">Loading Keyboard Info...</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Loading Memory Info...</translation>
+        <translation type="vanished">Loading Memory Info...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Loading Monitor Info...</translation>
+        <translation type="vanished">Loading Monitor Info...</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Loading Mouse Info...</translation>
+        <translation type="vanished">Loading Mouse Info...</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Loading Network Adapter Info...</translation>
+        <translation type="vanished">Loading Network Adapter Info...</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Loading Other Devices Info...</translation>
+        <translation type="vanished">Loading Other Devices Info...</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Loading Power Info...</translation>
+        <translation type="vanished">Loading Power Info...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Loading Printer Info...</translation>
+        <translation type="vanished">Loading Printer Info...</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Keyboard</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>No disk found</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>Model</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Speed</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>No keyboard found</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>AC Power</translation>
+        <translation type="vanished">AC Power</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Device Manager is a handy tool for viewing hardware information and managing the devices.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Phys</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Handlers</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Loading GPU Info...</translation>
+        <translation type="vanished">Loading GPU Info...</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Loading Memory Info...</translation>
+        <translation type="vanished">Loading Memory Info...</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>

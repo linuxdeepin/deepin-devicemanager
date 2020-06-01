@@ -346,67 +346,67 @@
     <name>DeviceTask</name>
     <message>
         <source>Loading Audio Device Info...</source>
-        <translation>Načítání informací o zvukových zařízení…</translation>
+        <translation type="vanished">Načítání informací o zvukových zařízení…</translation>
     </message>
     <message>
         <source>Loading BIOS Info...</source>
-        <translation>Načítání informací o BIOS/UEFI…</translation>
+        <translation type="vanished">Načítání informací o BIOS/UEFI…</translation>
     </message>
     <message>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Načítání informací o Bluetooth zařízení…</translation>
+        <translation type="vanished">Načítání informací o Bluetooth zařízení…</translation>
     </message>
     <message>
         <source>Loading CD-ROM Info...</source>
-        <translation>Načítání informací o jednotce optických disků…</translation>
+        <translation type="vanished">Načítání informací o jednotce optických disků…</translation>
     </message>
     <message>
         <source>Loading Operating System Info...</source>
-        <translation>Načítání informací o operačním systému…</translation>
+        <translation type="vanished">Načítání informací o operačním systému…</translation>
     </message>
     <message>
         <source>Loading CPU Info...</source>
-        <translation>Načítání informací o procesoru…</translation>
+        <translation type="vanished">Načítání informací o procesoru…</translation>
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Načítání informací o grafickém čipu…</translation>
+        <translation type="vanished">Načítání informací o grafickém čipu…</translation>
     </message>
     <message>
         <source>Loading Image Devices Info...</source>
-        <translation>Načítání informací o zařízeních získávání obrazu…</translation>
+        <translation type="vanished">Načítání informací o zařízeních získávání obrazu…</translation>
     </message>
     <message>
         <source>Loading Keyboard Info...</source>
-        <translation>Načítání informací o klávesnici…</translation>
+        <translation type="vanished">Načítání informací o klávesnici…</translation>
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Načítání informací o paměti…</translation>
+        <translation type="vanished">Načítání informací o paměti…</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
-        <translation>Načítání informací o monitoru…</translation>
+        <translation type="vanished">Načítání informací o monitoru…</translation>
     </message>
     <message>
         <source>Loading Mouse Info...</source>
-        <translation>Načítání informací o myši…</translation>
+        <translation type="vanished">Načítání informací o myši…</translation>
     </message>
     <message>
         <source>Loading Network Adapter Info...</source>
-        <translation>Načítání informací o síťovém adaptéru…</translation>
+        <translation type="vanished">Načítání informací o síťovém adaptéru…</translation>
     </message>
     <message>
         <source>Loading Other Devices Info...</source>
-        <translation>Načítání informací o ostatních zařízeních…</translation>
+        <translation type="vanished">Načítání informací o ostatních zařízeních…</translation>
     </message>
     <message>
         <source>Loading Power Info...</source>
-        <translation>Načítání informací o napájení…</translation>
+        <translation type="vanished">Načítání informací o napájení…</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
-        <translation>Načítání informací o tiskárně…</translation>
+        <translation type="vanished">Načítání informací o tiskárně…</translation>
     </message>
 </context>
 <context>
@@ -586,10 +586,6 @@
         <translation>Klávesnice</translation>
     </message>
     <message>
-        <source>No disk found</source>
-        <translation>Nenalezen žádný disk</translation>
-    </message>
-    <message>
         <source>Model</source>
         <translation>model</translation>
     </message>
@@ -628,6 +624,10 @@
     <message>
         <source>Speed</source>
         <translation>Rychlost</translation>
+    </message>
+    <message>
+        <source>No keyboard found</source>
+        <translation>Nenalezena žádná klávesnice</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@
     </message>
     <message>
         <source>AC Power</source>
-        <translation>Napájení z elektrické sítě</translation>
+        <translation type="vanished">Napájení z elektrické sítě</translation>
     </message>
     <message>
         <source>battery</source>
@@ -1888,6 +1888,18 @@
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Správa zařízení je užitečný nástroj pro zobrazování informací o hardware a správu zařízení.</translation>
     </message>
+    <message>
+        <source>Phys</source>
+        <translation>Fyz</translation>
+    </message>
+    <message>
+        <source>Sysfs</source>
+        <translation>Sysfs</translation>
+    </message>
+    <message>
+        <source>Handlers</source>
+        <translation>Handlers</translation>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>
@@ -1933,7 +1945,7 @@
     </message>
     <message>
         <source>Loading GPU Info...</source>
-        <translation>Načítání informací o grafickém čipu…</translation>
+        <translation type="vanished">Načítání informací o grafickém čipu…</translation>
     </message>
     <message>
         <source>Loading Printer Info...</source>
@@ -1941,7 +1953,7 @@
     </message>
     <message>
         <source>Loading Memory Info...</source>
-        <translation>Načítání informací o paměti…</translation>
+        <translation type="vanished">Načítání informací o paměti…</translation>
     </message>
     <message>
         <source>Loading Monitor Info...</source>
