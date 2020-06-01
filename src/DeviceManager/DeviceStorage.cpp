@@ -258,4 +258,16 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     if (m_PowerCycleCount == "") {
         m_PowerCycleCount = mapInfo["Power Cycles"];
     }
+
+    QString capacity = mapInfo["User Capacity"];
+    if (capacity == "") {
+        capacity = mapInfo["Total NVM Capacity"];
+    }
+
+    if (capacity != "") {
+        QRegExp reg(".*\\[(.*)\\]$");
+        if (reg.exactMatch(capacity)) {
+            m_Size = reg.cap(1);
+        }
+    }
 }

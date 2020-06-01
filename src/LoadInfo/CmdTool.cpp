@@ -116,19 +116,19 @@ void CmdTool::loadLsblkInfo(const QString &cmd, const QString &debugfile)
 
         //****************
         QString smartCmd = QString("sudo smartctl --all /dev/%1").arg(words[0].trimmed());
-        loadSmartCtlInfo(smartCmd, words[0].trimmed());
+        loadSmartCtlInfo(smartCmd, words[0].trimmed(), words[0].trimmed() + ".txt");
     }
     addMapInfo("lsblk_d", mapInfo);
 }
 
-void CmdTool::loadSmartCtlInfo(const QString &cmd, const QString &debugfile)
+void CmdTool::loadSmartCtlInfo(const QString &cmd, const QString &logicalName, const QString &debugfile)
 {
     QString deviceInfo;
     if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
         return;
     }
     QMap<QString, QString> mapInfo;
-    mapInfo["ln"] = debugfile;
+    mapInfo["ln"] = logicalName;
     getMapInfoFromSmartctl(mapInfo, deviceInfo);
     addMapInfo("smart", mapInfo);
 }
@@ -240,6 +240,16 @@ void CmdTool::loadDmesgInfo(const QString &cmd, const QString &debugfile)
         }
     }
     addMapInfo("dmesg", mapInfo);
+
+    mapInfo.clear();
+    foreach (const QString &line, lines) {
+        QRegExp reg(".*autoconfig for ([A-Za-z0-9]+):.*");
+        if (reg.exactMatch(line)) {
+            QString chip = reg.cap(1);
+            mapInfo["chip"] = chip;
+        }
+    }
+    addMapInfo("audiochip", mapInfo);
 }
 
 void CmdTool::loadHciconfigInfo(const QString &cmd, const QString &debugfile)

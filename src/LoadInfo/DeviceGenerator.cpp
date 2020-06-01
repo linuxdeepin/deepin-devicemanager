@@ -162,6 +162,7 @@ void DeviceGenerator::generatorNetworkDevice()
 void DeviceGenerator::generatorAudioDevice()
 {
     getAudioInfoFromHwinfo();
+    getAudioChipInfoFromDmesg();
     getAudioInfoFromLshw();
     getAudioInfoFromCatInput();
 }
@@ -515,6 +516,14 @@ void DeviceGenerator::getAudioInfoFromCatInput()
             device.setInfoFromCatDevices(*it);
             DeviceManager::instance()->addAudioDevice(device);
         }
+    }
+}
+
+void DeviceGenerator::getAudioChipInfoFromDmesg()
+{
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("audiochip");
+    if (lstMap.size() > 0) {
+        DeviceManager::instance()->setAudioChipFromDmesg(lstMap[0]["chip"]);
     }
 }
 

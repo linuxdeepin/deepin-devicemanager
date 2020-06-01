@@ -266,6 +266,15 @@ void DeviceManager::setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo)
         }
     }
 }
+
+void DeviceManager::setAudioChipFromDmesg(const QString &info)
+{
+    QList<DeviceAudio>::iterator it = m_ListDeviceAudio.begin();
+    for (; it != m_ListDeviceAudio.end(); ++it) {
+        (*it).setAudioChipFromDmesg(info);
+    }
+}
+
 void DeviceManager::addNetworkDevice(const DeviceNetwork &device)
 {
     m_ListDeviceNetwork.append(device);

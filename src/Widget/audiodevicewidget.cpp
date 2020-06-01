@@ -95,7 +95,7 @@ void AudiodeviceWidget::addDeviceDetail(const DeviceAudio &device, bool withTitl
     addDeviceAttribute(tr("Memory"), device.memory(), attributes);
     addDeviceAttribute(tr("Width"), device.width(), attributes);
     addDeviceAttribute(tr("Clock"), device.clock(), attributes);
-
+    addDeviceAttribute(tr("Chip"), device.chip(), attributes);
     // 添加其他信息
     addOtherDeviceAttribute(device, attributes);
 

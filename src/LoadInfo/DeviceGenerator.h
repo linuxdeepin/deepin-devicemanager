@@ -98,6 +98,7 @@ protected:
     void getAudioInfoFromHwinfo();
     void getAudioInfoFromLshw();
     void getAudioInfoFromCatInput();
+    void getAudioChipInfoFromDmesg();
     /**@brief:generator bluetooth info*/
     void getBluetoothInfoFromHciconfig();
     void getBlueToothInfoFromHwinfo();

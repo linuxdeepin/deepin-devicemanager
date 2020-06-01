@@ -17,6 +17,8 @@ public:
     /**@brief:设置从cat /proc/bus/input/devices里面获取的信息*/
     bool setInfoFromCatDevices(const QMap<QString, QString> &mapInfo);
 
+    bool setAudioChipFromDmesg(const QString &info);
+
     // 获取设备属性
     const QString &name()const;
     const QString &vendor()const;
@@ -29,6 +31,7 @@ public:
     const QString &clock()const;
     const QString &capabilities()const;
     const QString &description()const;
+    const QString &chip() const;
 
 protected:
     void initFilterKey() override;
@@ -45,6 +48,7 @@ private:
     QString             m_Clock;                        //<! 【时钟频率】
     QString             m_Capabilities;                 //<! 【功能】
     QString             m_Description;                  //<! 【描述】
+    QString             m_Chip;                         //<! 【芯片型号】
 
     QString             m_UniqueKey;                    //<! 【标识唯一设备】
 };

@@ -89,6 +89,7 @@ public:
     void addAudioDevice(const DeviceAudio &device);
     const QList<DeviceAudio> &getAudioDevices();
     void setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo);
+    void setAudioChipFromDmesg(const QString &info);
 
     // 网络设备相关
     void addNetworkDevice(const DeviceNetwork &device);

@@ -77,6 +77,11 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+bool DeviceAudio::setAudioChipFromDmesg(const QString &info)
+{
+    m_Chip = info;
+}
+
 const QString &DeviceAudio::name()const
 {
     return m_Name;
@@ -120,6 +125,11 @@ const QString &DeviceAudio::capabilities()const
 const QString &DeviceAudio::description()const
 {
     return m_Description;
+}
+
+const QString &DeviceAudio::chip() const
+{
+    return m_Chip;
 }
 void DeviceAudio::initFilterKey()
 {

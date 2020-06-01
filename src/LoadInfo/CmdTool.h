@@ -22,7 +22,7 @@ public:
 private:
     void loadLshwInfo(const QString &cmd, const QString &debugFile = QString("lshw.txt"));
     void loadLsblkInfo(const QString &cmd, const QString &debugfile);
-    void loadSmartCtlInfo(const QString &cmd, const QString &debugfile);
+    void loadSmartCtlInfo(const QString &cmd, const QString &logicalName, const QString &debugfile);
     void loadXrandrInfo(const QString &cmd, const QString &debugfile);
     void loadXrandrVerboseInfo(const QString &cmd, const QString &debugfile);
     void loadDmesgInfo(const QString &cmd, const QString &debugfile);
