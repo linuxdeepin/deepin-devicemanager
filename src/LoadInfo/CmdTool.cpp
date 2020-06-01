@@ -856,16 +856,12 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
 }
 bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
 {
-//    QDateTime dt = QDateTime::currentDateTime();
-//    QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
-//    QString dtInt = QString::number(dt.toMSecsSinceEpoch());
-//    QString key = getPKStr(dtStr, dtInt);
+    QDateTime dt = QDateTime::currentDateTime();
+    QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
+    QString dtInt = QString::number(dt.toMSecsSinceEpoch());
+    QString key = getPKStr(dtStr, dtInt);
 
-//    QString str1;
-//    QString str2;
-//    getPKStr(str1, str2, key);
-
-    QString key = "devicemanager";
+    //QString key = "devicemanager";
     QString cmd = proxy;
     QProcess process_;
     int msecs = 10000;
@@ -921,22 +917,4 @@ QString CmdTool::getPKStr(const QString &dtStr, const QString &dtInt)
     QString newDtStr = QString("%1%2%3%4%5%6%7%8%9%10%11").arg(value4).arg(dayStr).arg(value2).arg(secondStr).arg(value1).arg(hourStr).arg(value3).arg(monthStr).arg(yearStr).arg(minusStr).arg(value5);
 
     return newDtStr;
-}
-
-void CmdTool::getPKStr(QString &dtStr, QString &dtInt, const QString &cStr)
-{
-    QString value4 = cStr.mid(0, 4);
-    QString dayStr = QString("%1").arg(cStr.mid(4, 2).toInt() / 3, 2, 10, QLatin1Char('0'));
-    QString value2 = cStr.mid(6, 2);
-    QString secondStr = QString("%1").arg(cStr.mid(8, 2).toInt(), 2, 10, QLatin1Char('0'));
-    QString value1 = cStr.mid(10, 1);
-    QString hourStr = QString("%1").arg(cStr.mid(11, 2).toInt() / 4, 2, 10, QLatin1Char('0'));
-    QString value3 = cStr.mid(13, 3);
-    QString monthStr = QString("%1").arg(cStr.mid(16, 2).toInt() / 7, 2, 10, QLatin1Char('0'));
-    QString yearStr = QString("%1").arg(cStr.mid(18, 4).toInt(), 4, 10, QLatin1Char('0'));
-    QString minuStr = cStr.mid(22, 2);
-    QString value5 = cStr.mid(24);
-
-    dtStr = QString("%1:%2:%3:%4:%5:%6").arg(yearStr, monthStr, dayStr, hourStr, minuStr, secondStr);
-    dtInt = QString("%1%2%3%4%5").arg(value1).arg(value2).arg(value3).arg(value4).arg(value5);
 }

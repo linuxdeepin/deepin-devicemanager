@@ -55,7 +55,6 @@ private:
     bool executeProcess(const QString &cmd, QString &deviceInfo);
     bool runCmd(const QString &cmd, QString &deviceInfo);
     QString getPKStr(const QString &dtStr, const QString &dtInt);
-    void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr);
 
 private:
     QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;

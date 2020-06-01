@@ -29,17 +29,36 @@
 #include <QStringList>
 #include <QThread>
 #include <iostream>
+#include <QDateTime>
 
 //for avodi deepin system pkexec interface bug
 //绕开获取权限窗口为显卡字样 的bug
 
+
+void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr)
+{
+    QString value4 = cStr.mid(0, 4);
+    QString dayStr = QString("%1").arg(cStr.mid(4, 2).toInt() / 3, 2, 10, QLatin1Char('0'));
+    QString value2 = cStr.mid(6, 2);
+    QString secondStr = QString("%1").arg(cStr.mid(8, 2).toInt(), 2, 10, QLatin1Char('0'));
+    QString value1 = cStr.mid(10, 1);
+    QString hourStr = QString("%1").arg(cStr.mid(11, 2).toInt() / 4, 2, 10, QLatin1Char('0'));
+    QString value3 = cStr.mid(13, 3);
+    QString monthStr = QString("%1").arg(cStr.mid(16, 2).toInt() / 7, 2, 10, QLatin1Char('0'));
+    QString yearStr = QString("%1").arg(cStr.mid(18, 4).toInt() + 253, 4, 10, QLatin1Char('0'));
+    QString minuStr = cStr.mid(22, 2);
+    QString value5 = cStr.mid(24);
+
+    dtStr = QString("%1:%2:%3:%4:%5:%6").arg(yearStr, monthStr, dayStr, hourStr, minuStr, secondStr);
+    dtInt = QString("%1%2%3%4%5").arg(value1).arg(value2).arg(value3).arg(value4).arg(value5);
+}
+
 int main(int argc, char *argv[])
 {
     if ( argc < 3 ||
-        QString(argv[1]) == "--help" || \
-        QString(argv[1]) == "--h" ||\
-        QString(argv[1]) == "-h")
-    {
+            QString(argv[1]) == "--help" || \
+            QString(argv[1]) == "--h" || \
+            QString(argv[1]) == "-h") {
         std::cout << "deepin-devicemanager-authenticateProxy is a Proxy for replace polkit gui interface!" << std::endl;
         std::cout << "Usage: " << std::endl;
         std::cout << "\tdeepin-devicemanager-authenticateProxy --help(--h): " << std::endl;
@@ -52,12 +71,20 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    // QString key = "eyJsaWNlbnNlSWQiOiJRWVlCQUM5RDNKIiwibGljZW5zZWVOYW1lIjoi6LaF57qnIOeoi+W6j+WRmCIsImFzc2lnbmVlTmFtZSI6IiIsImFzc2lnbmVlRW1haWwiOiIiLCJsaWNlbnNlUmVzdHJpY3Rpb24iOiIiLCJjaGVja0NvbmN1cnJlbnRVc2UiOmZhbHNlLCJwcm9kdWN0cyI6W3siY29kZSI6IklJIiwiZmFsbGJhY2tEYXRlIjoiMjAyMC0wMS0wNCIsInBhaWRVcFRvIjoiMjAyMS0wMS0wMyJ9LHsiY29kZSI6IkFDIiwiZmFsbGJhY2tEYXRlIjoiMjAyMC0wMS0wNCIsInBhaWRVcFRvIjoiMjAyMS0wMS0wMyJ9LHsiY29kZSI6IkRQTiIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJQUyIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJHTyIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJETSIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJDTCIsImZhbGxiYWNrRGF0ZSI6IjIwMjAtMDEtMDQiLCJwYWlkVXBUbyI6IjIwMjEtMDEtMDMifSx7ImNvZGUiOiJSUzAiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUkMiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUkQiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUEMiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUk0iLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiV1MiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiREIiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiREMiLCJmYWxsYmFja0RhdGUiOiIyMDIwLTAxLTA0IiwicGFpZFVwVG8iOiIyMDIxLTAxLTAzIn0seyJjb2RlIjoiUlNVIiwiZmFsbGJhY2tEYXRlIjoiMjAyMC0wMS0wNCIsInBhaWRVcFRvIjoiMjAyMS0wMS0wMyJ9XSwiaGFzaCI6IjE2MDgwOTA5LzAiLCJncmFjZVBlcmlvZERheXMiOjcsImF1dG9Qcm9sb25nYXRlZCI6ZmFsc2UsImlzQXV0b1Byb2xvbmdhdGVkIjpmYWxzZX0";
-    QString key = "devicemanager";
-    if(QString(argv[2]) != key){
+    QString dtStr, dtInt;
+    QString key = QString(argv[2]);
+    getPKStr(dtStr, dtInt, key);
+    qint64 i = dtInt.toLongLong();
+    QDateTime dtFromInt = QDateTime::fromMSecsSinceEpoch(i);
+    QString dtStrFromInt = dtFromInt.toString("yyyy:MM:dd:hh:mm:ss");
+    if (dtStr != dtStrFromInt) {
+        std::cout << dtInt.toStdString() << std::endl;
+        std::cout << dtStr.toStdString() << std::endl;
         std::cout << "deepin-devicemanager-authenticateProxy is a Proxy for replace polkit gui interface!" << std::endl;
         return 0;
     }
+
+
 
     QString defaultLanguage = getenv("LANGUAGE");
     setenv ("LANGUAGE", "en_US", 1);    //for aviod translate in lscpu...
@@ -71,8 +98,7 @@ int main(int argc, char *argv[])
 
     proc.close();
 
-    if(res == false)
-    {
+    if (res == false) {
         setenv ("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
         return -1;
     }
