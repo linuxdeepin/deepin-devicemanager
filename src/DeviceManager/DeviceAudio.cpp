@@ -74,6 +74,7 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
 
 
     loadOtherDeviceInfo(mapInfo);
+    return true;
 }
 
 const QString &DeviceAudio::name()const
