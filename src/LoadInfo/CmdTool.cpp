@@ -516,10 +516,8 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, con
         }
 
         QMap<QString, QString> mapInfo;
-
-        //getMapInfoFromInput(item, mapInfo, "=");
-
-        //addMapInfo(key, mapInfo);
+        getMapInfoFromInput(item, mapInfo, "=");
+        addMapInfo(key, mapInfo);
     }
 }
 
