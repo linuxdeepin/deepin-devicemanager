@@ -1,4 +1,0 @@
-Distributor ID:	Fedora
-Description:	Fedora release 30 (Thirty)
-Release:	30
-Codename:	Thirty

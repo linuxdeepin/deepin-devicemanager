@@ -36,8 +36,8 @@ INCLUDEPATH +=     \
             /usr/include/libdframeworkdbus-2.0/ \
 
 
-include(../thirdlib/QtXlsxWriter/src/xlsx/qtxlsx.pri)
-include(../thirdlib/docx/docx.pri)
+include(../3rdparty/QtXlsxWriter/src/xlsx/qtxlsx.pri)
+include(../3rdparty/docx/docx.pri)
 
 
 CONFIG(debug, debug|release) {
@@ -53,7 +53,7 @@ CONFIG(debug, debug|release) {
     INSTALLS += dtk_translations
 }
 #LIBS += -L/usr/lib/x86_64-linux-gnu/ -lhd
-#LIBS += -L../thirdlib/hd -lhd
+#LIBS += -L../3rdparty/hd -lhd
 
 SOURCES += \
     deviceattributedefine.cpp \
@@ -188,7 +188,7 @@ HEADERS += \
 #!isEmpty(target.path): INSTALLS += target
 
 
-RESOURCES += appimage.qrc
+RESOURCES += ../assets/qrc/appimage.qrc
 
 DISTFILES += \
     ../README.md \

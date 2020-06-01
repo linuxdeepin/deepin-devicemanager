@@ -1,3 +1,0 @@
-# dmidecode 3.2
-Scanning /dev/mem for entry point.
-# No SMBIOS nor DMI entry point found, sorry.

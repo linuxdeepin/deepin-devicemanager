@@ -1,7 +1,0 @@
-PRETTY_NAME="uos 20"
-NAME="ubuntu"
-VERSION_ID="20"
-VERSION="20"
-ID=uos
-HOME_URL="https://www.deepin.com/"
-BUG_REPORT_URL="http://feedback.deepin.org/feedback/"

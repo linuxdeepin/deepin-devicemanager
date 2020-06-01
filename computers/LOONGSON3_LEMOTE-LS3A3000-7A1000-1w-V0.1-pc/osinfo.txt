@@ -1,1 +1,0 @@
-Linux version 4.19.55-deepin-loongson-3-generic-desktop+ (deepin@deepin-PC) (gcc version 8.3.0 (Debian 8.3.0-6)) #598 SMP PREEMPT Sat Oct 26 14:54:09 CST 2019

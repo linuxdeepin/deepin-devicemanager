@@ -2,6 +2,7 @@
 #include <cups.h>
 #include "commondefine.h"
 #include<QDebug>
+#include<QDateTime>
 #include<QMutex>
 extern void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap);
 extern int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest);
@@ -382,6 +383,11 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
 
             // 打印机几信息不从hwinfo --usb里面获取，需要过滤
             if (item.contains("Printer", Qt::CaseInsensitive) || item.contains("LaserJet", Qt::CaseInsensitive)) {
+                add = false;
+            }
+
+            // 提前过滤掉键盘鼠标
+            if (item.contains("mouse", Qt::CaseInsensitive) || item.contains("keyboard", Qt::CaseInsensitive)) {
                 add = false;
             }
 
@@ -814,12 +820,9 @@ bool CmdTool::getDeviceInfo(const QString &command, QString &deviceInfo, const Q
     if (!deviceInfo.isEmpty()) {
         return true;
     }
-//    qint64 begin = QDateTime::currentMSecsSinceEpoch();
     if (false == executeProcess(command, deviceInfo)) {
         return false;
     }
-//    qint64 end = QDateTime::currentMSecsSinceEpoch();
-//    qDebug() << command << " ******************************* " << (end - begin) / 1000.0;
 #ifdef TEST_DATA_FROM_FILE
     QFile inputDeviceFile(DEVICEINFO_PATH + "/" + debugFile);
     if (false == inputDeviceFile.open(QIODevice::ReadOnly)) {
@@ -853,6 +856,15 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
 }
 bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
 {
+//    QDateTime dt = QDateTime::currentDateTime();
+//    QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
+//    QString dtInt = QString::number(dt.toMSecsSinceEpoch());
+//    QString key = getPKStr(dtStr, dtInt);
+
+//    QString str1;
+//    QString str2;
+//    getPKStr(str1, str2, key);
+
     QString key = "devicemanager";
     QString cmd = proxy;
     QProcess process_;
@@ -877,4 +889,54 @@ bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
     }
 
     return res;
+}
+
+QString CmdTool::getPKStr(const QString &dtStr, const QString &dtInt)
+{
+    QString res = "";
+    QString str = dtStr;
+    str.replace(":", "");
+
+    int year = str.mid(0, 4).toInt() - 253;
+    int month = str.mid(4, 2).toInt() * 7;
+    int day = str.mid(6, 2).toInt() * 3;
+    int hour = str.mid(8, 2).toInt() * 4;
+    int minus = str.mid(10, 2).toInt();
+    int second = str.mid(12, 2).toInt();
+
+    QString yearStr = QString("%1").arg(year, 4, 10, QLatin1Char('0'));
+    QString monthStr = QString("%1").arg(month, 2, 10, QLatin1Char('0'));
+    QString dayStr = QString("%1").arg(day, 2, 10, QLatin1Char('0'));
+    QString hourStr = QString("%1").arg(hour, 2, 10, QLatin1Char('0'));
+    QString minusStr = QString("%1").arg(minus, 2, 10, QLatin1Char('0'));
+    QString secondStr = QString("%1").arg(second, 2, 10, QLatin1Char('0'));
+
+    str = dtInt;
+    QString value1 = str.mid(0, 1);
+    QString value2 = str.mid(1, 2);
+    QString value3 = str.mid(3, 3);
+    QString value4 = str.mid(6, 4);
+    QString value5 = str.mid(10);
+
+    QString newDtStr = QString("%1%2%3%4%5%6%7%8%9%10%11").arg(value4).arg(dayStr).arg(value2).arg(secondStr).arg(value1).arg(hourStr).arg(value3).arg(monthStr).arg(yearStr).arg(minusStr).arg(value5);
+
+    return newDtStr;
+}
+
+void CmdTool::getPKStr(QString &dtStr, QString &dtInt, const QString &cStr)
+{
+    QString value4 = cStr.mid(0, 4);
+    QString dayStr = QString("%1").arg(cStr.mid(4, 2).toInt() / 3, 2, 10, QLatin1Char('0'));
+    QString value2 = cStr.mid(6, 2);
+    QString secondStr = QString("%1").arg(cStr.mid(8, 2).toInt(), 2, 10, QLatin1Char('0'));
+    QString value1 = cStr.mid(10, 1);
+    QString hourStr = QString("%1").arg(cStr.mid(11, 2).toInt() / 4, 2, 10, QLatin1Char('0'));
+    QString value3 = cStr.mid(13, 3);
+    QString monthStr = QString("%1").arg(cStr.mid(16, 2).toInt() / 7, 2, 10, QLatin1Char('0'));
+    QString yearStr = QString("%1").arg(cStr.mid(18, 4).toInt(), 4, 10, QLatin1Char('0'));
+    QString minuStr = cStr.mid(22, 2);
+    QString value5 = cStr.mid(24);
+
+    dtStr = QString("%1:%2:%3:%4:%5:%6").arg(yearStr, monthStr, dayStr, hourStr, minuStr, secondStr);
+    dtInt = QString("%1%2%3%4%5").arg(value1).arg(value2).arg(value3).arg(value4).arg(value5);
 }

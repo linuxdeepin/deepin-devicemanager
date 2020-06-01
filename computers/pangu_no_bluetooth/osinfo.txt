@@ -1,1 +1,0 @@
-Linux version 4.19.34-2-arm64-974deepin-generic (root@huawei-PC) (gcc version 9.2.1 20191102 (Debian 9.2.1-17)) #1 SMP Fri Feb 21 02:39:16 UTC 2020

@@ -1,8 +1,0 @@
-smartctl 6.6 2017-11-05 r4594 [aarch64-linux-4.19.34-2-arm64-974deepin-generic] (local build)
-Copyright (C) 2002-17, Bruce Allen, Christian Franke, www.smartmontools.org
-
-/dev/sda: Unknown USB bridge [0x0951:0x1666 (0x110)]
-Please specify device type with the -d option.
-
-Use smartctl -h to get a usage summary
-

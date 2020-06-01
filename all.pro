@@ -2,4 +2,4 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
         src   \
-        authenticateProxy
+        tool/authenticateProxy

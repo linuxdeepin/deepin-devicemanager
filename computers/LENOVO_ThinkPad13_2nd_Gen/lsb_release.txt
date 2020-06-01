@@ -1,4 +1,0 @@
-Distributor ID:	Arch
-Description:	Arch Linux
-Release:	rolling
-Codename:	n/a

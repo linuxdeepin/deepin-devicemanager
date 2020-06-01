@@ -1,4 +1,0 @@
-Distributor ID:	Fedora
-Description:	Fedora release 28 (Twenty Eight)
-Release:	28
-Codename:	TwentyEight

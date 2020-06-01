@@ -1,4 +1,0 @@
-Distributor ID:	CitrixHypervisor
-Description:	Citrix Hypervisor release 8.0.0 (xenenterprise)
-Release:	8.0.0
-Codename:	xenenterprise

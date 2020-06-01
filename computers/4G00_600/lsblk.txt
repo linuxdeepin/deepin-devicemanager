@@ -1,9 +1,0 @@
-NAME MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-sda    8:0    0 465.8G  0 disk 
-sda1   8:1    0   1.5G  0 part /boot
-sda2   8:2    0  93.2G  0 part /
-sda3   8:3    0  93.2G  0 part /media/archermind/Rootb
-sda4   8:4    0     1K  0 part 
-sda5   8:5    0   262G  0 part /data
-sda6   8:6    0    10G  0 part /media/archermind/Backup
-sda7   8:7    0     6G  0 part [SWAP]

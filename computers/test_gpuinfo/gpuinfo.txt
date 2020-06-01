@@ -1,4 +1,0 @@
-Integrated Graphics Controller
-cap: 8GB
-vendor:ARM
-other:test
