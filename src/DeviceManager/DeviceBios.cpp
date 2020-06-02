@@ -104,6 +104,7 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("ROM Size"));
     addFilterKey(QObject::tr("Characteristics"));
     addFilterKey(QObject::tr("BIOS Revision"));
+    addFilterKey(QObject::tr("Firmware Revision"));
 
     addFilterKey(QObject::tr("Product Name"));
     addFilterKey(QObject::tr("Serial Number"));

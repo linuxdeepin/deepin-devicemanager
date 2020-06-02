@@ -19,6 +19,9 @@ public:
     /**@brief:设置从dmesg中获取的信息*/
     void setDmesgInfo(const QString &info);
 
+    /**@brief:设置从gpuinfo命令中获取的信息，华为KLU笔记本和PanGuV机器专用*/
+    void setGpuInfo(const QMap<QString, QString> &mapInfo);
+
     /**@brief:获取设备信息*/
     const QString &name() const;
     const QString &vendor() const;

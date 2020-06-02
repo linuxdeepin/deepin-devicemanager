@@ -9,7 +9,7 @@ DeviceMemory::DeviceMemory()
 void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "product", m_Name, false);
-    setAttribute(mapInfo, "description", m_Name, false);
+    setAttribute(mapInfo, "description", m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "slot", m_Locator);
     setAttribute(mapInfo, "size", m_Size);
@@ -61,7 +61,26 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 
 void DeviceMemory::initFilterKey()
 {
-
+    addFilterKey(QObject::tr("Array Handle"));  // 数组程序
+    addFilterKey(QObject::tr("Error Information Handle")); //错误信息程序
+    addFilterKey(QObject::tr("Form Factor")); // 尺寸型号
+    addFilterKey(QObject::tr("Set"));    // 设置
+    addFilterKey(QObject::tr("Bank Locator")); // 内存通道
+    addFilterKey(QObject::tr("Type Detail"));   // 类型详细信息
+    addFilterKey(QObject::tr("Asset Tag"));    // 资产标签
+    addFilterKey(QObject::tr("Part Number"));
+    addFilterKey(QObject::tr("Rank"));
+    addFilterKey(QObject::tr("Memory Technology"));  // 内存技术
+    addFilterKey(QObject::tr("Memory Operating Mode Capability"));  // 内存操作模式
+    addFilterKey(QObject::tr("Firmware Version"));   //固件版本
+    addFilterKey(QObject::tr("Module Manufacturer ID"));
+    addFilterKey(QObject::tr("Module Product ID"));
+    addFilterKey(QObject::tr("Memory Subsystem Controller Manufacturer ID"));
+    addFilterKey(QObject::tr("Memory Subsystem Controller Product ID"));
+    addFilterKey(QObject::tr("Non-Volatile Size"));   // 不易丢失大小
+    addFilterKey(QObject::tr("Volatile Size"));       // 易丢失大小
+    addFilterKey(QObject::tr("Cache Size"));   // 缓存大小
+    addFilterKey(QObject::tr("Logical Size"));  // 逻辑大小
 }
 
 const QString &DeviceMemory::name()const

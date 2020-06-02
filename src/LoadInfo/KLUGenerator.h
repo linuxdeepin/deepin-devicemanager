@@ -6,6 +6,10 @@ class KLUGenerator : public DeviceGenerator
 {
 public:
     KLUGenerator();
+
+protected:
+    /**@brief:generator gpu info*/
+    virtual void generatorGpuDevice();
 };
 
 #endif // KLUGENERATOR_H

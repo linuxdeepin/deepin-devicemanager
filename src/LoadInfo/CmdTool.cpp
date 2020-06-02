@@ -48,6 +48,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
         loadDmidecodeInfo(key, cmd, debugFile);
     } else if (key == "cat_devices") {
         loadCatInputDeviceInfo(key, cmd, debugFile);
+    }  else if (key == "gpuinfo") {
+        loadGpuInfo(key, cmd, debugFile);
     } else {
         loadCatInfo(key, cmd, debugFile);
     }
@@ -531,6 +533,28 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, con
     }
 }
 
+void CmdTool::loadGpuInfo(const QString &key, const QString &cmd, const QString &debugfile)
+{
+    QString deviceInfo;
+    if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
+        return;
+    }
+    QStringList items = deviceInfo.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty()) {
+            continue;
+        }
+
+        QMap<QString, QString> mapInfo;
+        QStringList lines = item.split("\n");
+        if (lines.size() > 0) {
+            mapInfo.insert("Name", lines[0].trimmed());
+        }
+        getMapInfoFromCmd(item, mapInfo, ": ");
+        addMapInfo(key, mapInfo);
+    }
+}
+
 void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
     QStringList infoList = info.split("\n");
@@ -864,11 +888,6 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
 }
 bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
 {
-//    QDateTime dt = QDateTime::currentDateTime();
-//    QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
-//    QString dtInt = QString::number(dt.toMSecsSinceEpoch());
-//    QString key = getPKStr(dtStr, dtInt);
-
     QString key = "devicemanager";
     QString cmd = proxy;
     QProcess process_;

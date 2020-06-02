@@ -34,6 +34,7 @@ private:
     void loadUpowerInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadBiosInfoFromLspci(QString &chipsetFamliy);
     void loadCatInputDeviceInfo(const QString &key, const QString &cmd, const QString &debugfile);
+    void loadGpuInfo(const QString &key, const QString &cmd, const QString &debugfile);
 
 private:
     /**

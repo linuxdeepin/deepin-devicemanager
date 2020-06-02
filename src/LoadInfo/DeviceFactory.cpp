@@ -2,6 +2,7 @@
 #include "X86Generator.h"
 #include "MipsGenerator.h"
 #include "ArmGenerator.h"
+#include "KLUGenerator.h"
 #include <QProcess>
 #include <QFile>
 #include "../commondefine.h"
@@ -43,5 +44,5 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
 //    }
 //    return generator;
 
-    return new DeviceGenerator();
+    return new KLUGenerator();
 }

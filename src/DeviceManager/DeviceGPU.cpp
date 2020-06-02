@@ -18,6 +18,15 @@ void DeviceGpu::initFilterKey()
 //    addFilterKey(QObject::tr("I/O Ports"));
     addFilterKey(QObject::tr("Config Status"));
     addFilterKey(QObject::tr("latency"));
+
+    // gpuinfo 华为KLU和PanGuV
+    addFilterKey(QObject::tr("GDDR capacity"));
+    addFilterKey(QObject::tr("GPU vendor"));
+    addFilterKey(QObject::tr("GPU type"));
+    addFilterKey(QObject::tr("EGL version"));
+    addFilterKey(QObject::tr("EGL client APIs"));
+    addFilterKey(QObject::tr("GL version"));
+    addFilterKey(QObject::tr("GLSL version"));
 }
 
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
@@ -108,6 +117,18 @@ void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
 void DeviceGpu::setDmesgInfo(const QString &info)
 {
     m_GraphicsMemory = info;
+}
+
+void DeviceGpu::setGpuInfo(const QMap<QString, QString> &mapInfo)
+{
+    // 华为KLU和PanGuV机器中不需要显示以下信息
+    m_HDMI = "";
+    m_VGA = "";
+    m_DisplayPort = "";
+    m_eDP = "";
+
+    setAttribute(mapInfo, "Name", m_Name);
+    loadOtherDeviceInfo(mapInfo);
 }
 
 const QString &DeviceGpu::name() const
