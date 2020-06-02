@@ -259,6 +259,7 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
         m_PowerCycleCount = mapInfo["Power Cycles"];
     }
 
+    // 安装大小
     QString capacity = mapInfo["User Capacity"];
     if (capacity == "") {
         capacity = mapInfo["Total NVM Capacity"];
@@ -269,5 +270,15 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
         if (reg.exactMatch(capacity)) {
             m_Size = reg.cap(1);
         }
+    }
+
+    // 型号
+    //SATA
+    if (mapInfo["Device Model"].isEmpty() == false) {
+        m_Model = mapInfo["Device Model"];
+    }
+    //NVME
+    if (mapInfo["Model Number"].isEmpty() == false) {
+        m_Model = mapInfo["Model Number"];
     }
 }
