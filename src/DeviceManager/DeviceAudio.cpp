@@ -80,6 +80,7 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
 bool DeviceAudio::setAudioChipFromDmesg(const QString &info)
 {
     m_Chip = info;
+    return true;
 }
 
 const QString &DeviceAudio::name()const
