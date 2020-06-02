@@ -1,6 +1,7 @@
 #include "KLUGenerator.h"
 #include "DeviceManager/DeviceManager.h"
 #include "DeviceManager/DeviceGpu.h"
+#include "DeviceManager/DeviceMonitor.h"
 
 KLUGenerator::KLUGenerator()
 {
@@ -19,4 +20,19 @@ void KLUGenerator::generatorGpuDevice()
         device.setGpuInfo(*it);
         DeviceManager::instance()->addGpuDevice(device);
     }
+}
+
+void KLUGenerator::generatorMonitorDevice()
+{
+    QMap<QString, QString> mapInfo;
+    mapInfo.insert("Name", "Notebook monitor");
+    mapInfo.insert("Vendor", "HUAWEI");
+    mapInfo.insert("CurResolution", "2160x1440@60Hz");
+    mapInfo.insert("SupportResolution", "2160x1440@60Hz");
+    mapInfo.insert("Size", "296x197mm");
+    mapInfo.insert("Date", "2019年7月");
+
+    DeviceMonitor monitor;
+    monitor.setInfoFromSelfDefine(mapInfo);
+    DeviceManager::instance()->addMonitor(monitor);
 }

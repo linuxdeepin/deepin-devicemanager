@@ -14,6 +14,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
+    setAttribute(mapInfo, "description", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
@@ -155,4 +156,5 @@ void DeviceNetwork::initFilterKey()
 {
     addFilterKey(QObject::tr("ioport"));
     addFilterKey(QObject::tr("physical id"));
+    addFilterKey(QObject::tr("network"));
 }

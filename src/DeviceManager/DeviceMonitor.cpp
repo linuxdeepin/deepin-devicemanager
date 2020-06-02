@@ -22,7 +22,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
     if ( re.exactMatch(sizeDescription) ) {
         double width = re.cap(1).toDouble();
         double height = re.cap(2).toDouble();
-        retSize = QSize(width, height);
+        retSize = QSize(int(width), int(height));
         width /= 2.54;
         height /= 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
@@ -35,7 +35,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
     if ( re.exactMatch(sizeDescription) ) {
         double width = re.cap(1).toDouble();
         double height = re.cap(2).toDouble();
-        retSize = QSize(width, height);
+        retSize = QSize(int(width), int(height));
         width /= 2.54;
         height /= 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
@@ -47,7 +47,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
     return res;
 }
 
-void DeviceMonitor::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
+void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "Model", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -82,6 +82,18 @@ void DeviceMonitor::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
 
     // 加载其他属性
     loadOtherDeviceInfo(mapInfo);
+}
+
+void DeviceMonitor::setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo)
+{
+    setAttribute(mapInfo, "Name", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "CurResolution", m_CurrentResolution);
+    setAttribute(mapInfo, "SupportResolution", m_SupportResolution);
+    setAttribute(mapInfo, "Size", m_ScreenSize);
+    setAttribute(mapInfo, "Date", m_ProductionWeek);
+    // 加载其他属性
+    //loadOtherDeviceInfo(mapInfo);
 }
 
 QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)

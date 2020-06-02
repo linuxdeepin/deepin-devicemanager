@@ -79,14 +79,6 @@ bool ArticleStruct::isValid()
         return false;
     }
 
-    if ( value == QString("Unknown")) {
-        return false;
-    }
-
-    if ( value.compare(QString("no"), Qt::CaseInsensitive) == 0) {
-        return false;
-    }
-
     if ( value.compare(QString("N/A"), Qt::CaseInsensitive) == 0) {
         return false;
     }

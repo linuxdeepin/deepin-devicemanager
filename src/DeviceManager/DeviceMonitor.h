@@ -10,7 +10,7 @@ public:
     DeviceMonitor();
 
     // 设置从hwinfo中获取的信息
-    void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
+    void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     // 设置从xrandr中获取的信息
     bool setInfoFromXradr(const QString &main, const QString &edid);
@@ -23,6 +23,9 @@ public:
 
     // 获取屏幕大小英寸
     QString parseMonitorSize(const QString &sizeDescription, double &inch, QSize &retSize);
+
+    /**@brief:华为KLU项目里面的显示屏信息是写死的*/
+    void setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo);
 
     // 获取设备属性
     const QString &name()const;
