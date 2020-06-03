@@ -49,6 +49,7 @@ private:
     void getMapInfoFromDmidecode(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
     void getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch = QString(": "));
     void getMapInfoFromHciconfig(QMap<QString, QString> &mapInfo, const QString &info);
+    void getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const QString &info);
     void addMapInfo(const QString &key, const QMap<QString, QString> &mapInfo);
 
     /**

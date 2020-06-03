@@ -267,13 +267,25 @@ void CmdTool::loadHciconfigInfo(const QString &cmd, const QString &debugfile)
         }
         QMap<QString, QString> mapInfo;
         getMapInfoFromHciconfig(mapInfo, paragraph);
-        addMapInfo("hciconfig", mapInfo);
+        loadBluetoothCtlInfo(mapInfo);
     }
 }
 
 void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
 {
+    if (mapInfo.find("BD Address") == mapInfo.end()) {
+        addMapInfo("hciconfig", mapInfo);
+        return;
+    }
+    QString deviceInfo;
+    if (!getDeviceInfo("bluetoothctl show " + mapInfo["BD Address"], deviceInfo, "bluetoothctl.txt")) {
+        addMapInfo("hciconfig", mapInfo);
+        return;
+    }
 
+    getMapInfoFromBluetoothCtl(mapInfo, deviceInfo);
+
+    addMapInfo("hciconfig", mapInfo);
 }
 
 //void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap)
@@ -849,6 +861,26 @@ void CmdTool::getMapInfoFromHciconfig(QMap<QString, QString> &mapInfo, const QSt
                 mapInfo[keyValue[0].trimmed()] = keyValue[1].trimmed();
             }
         }
+    }
+}
+
+void CmdTool::getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const QString &info)
+{
+    QStringList lines = info.split("\n");
+    QString uuid = "";
+    foreach (const QString &line, lines) {
+        QStringList keyValue = line.trimmed().split(": ");
+        if (keyValue.size() == 2) {
+            if (keyValue[0] == "UUID") {
+                uuid.append(keyValue[1]);
+                uuid.append("\n");
+            } else {
+                mapInfo[keyValue[0].trimmed()] = keyValue[1].trimmed();
+            }
+        }
+    }
+    if (uuid != "") {
+        mapInfo["UUID"] = uuid;
     }
 }
 
