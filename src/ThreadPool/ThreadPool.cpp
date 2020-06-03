@@ -190,6 +190,7 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList)
     cmdList.append({ "dmidecode2",           "sudo dmidecode -t 2",     "dmidecode_2.txt",        ""});
     cmdList.append({ "dmidecode3",           "sudo dmidecode -t 3",     "dmidecode_3.txt",        ""});
     cmdList.append({ "dmidecode4",           "sudo dmidecode -t 4",     "dmidecode_4.txt",        ""});
+    cmdList.append({ "dmidecode13",          "sudo dmidecode -t 13",    "dmidecode_13.txt",       ""});
     cmdList.append({ "dmidecode16",          "sudo dmidecode -t 16",    "dmidecode_16.txt",       ""});
     cmdList.append({ "dmidecode17",          "sudo dmidecode -t 17",    "dmidecode_17.txt",       ""});
 

@@ -111,6 +111,8 @@ void DeviceKeyboard::initFilterKey()
     addFilterKey(QObject::tr("MSC"));
     addFilterKey(QObject::tr("Device File"));
     addFilterKey(QObject::tr("Hardware Class"));
+
+    addFilterKey(QObject::tr("physical id"));
 }
 
 void DeviceKeyboard::getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &mapInfo, const QString &info)

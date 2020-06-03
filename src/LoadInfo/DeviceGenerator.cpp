@@ -259,6 +259,19 @@ void DeviceGenerator::getBiosInfo()
         device.setBiosInfo(*it);
         DeviceManager::instance()->addBiosDevice(device);
     }
+
+    const QList<QMap<QString, QString>> lanInfo = DeviceManager::instance()->cmdInfo("dmidecode13");
+    QList<QMap<QString, QString> >::const_iterator iter = lanInfo.begin();
+    for (; iter != lanInfo.end(); ++iter) {
+        if ((*iter).size() < 2) {
+            continue;
+        }
+
+        DeviceManager::instance()->setLanguageInfo(*iter);
+
+
+    }
+
 }
 void DeviceGenerator::getSystemInfo()
 {
@@ -681,7 +694,14 @@ void DeviceGenerator::getCdromInfoFromHwinfo()
 }
 void DeviceGenerator::getCdromInfoFromLshw()
 {
-
+    const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_cdrom");
+    QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
+    for (; dIt != lstDisk.end(); ++dIt) {
+        if ((*dIt).size() < 2) {
+            continue;
+        }
+        DeviceManager::instance()->addLshwinfoIntoCdromDevice(*dIt);
+    }
 }
 
 void DeviceGenerator::getOthersInfoFromHwinfo()

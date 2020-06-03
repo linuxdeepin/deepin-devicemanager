@@ -9,7 +9,7 @@ DeviceMemory::DeviceMemory()
 void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "product", m_Name, false);
-    setAttribute(mapInfo, "description", m_Name);
+    setAttribute(mapInfo, "description", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "slot", m_Locator);
     setAttribute(mapInfo, "size", m_Size);
@@ -38,7 +38,7 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     if (mapInfo["Locator"] != m_Locator) {
         return false;
     }
-
+    setAttribute(mapInfo, "Part Number", m_Name);
     setAttribute(mapInfo, "Serial Number", m_SerialNumber);
     setAttribute(mapInfo, "Configured Memory Speed", m_ConfiguredSpeed);
     if (m_ConfiguredSpeed.contains("MT/s")) {

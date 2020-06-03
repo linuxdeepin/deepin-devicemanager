@@ -97,6 +97,9 @@ void CmdTool::loadLshwInfo(const QString &cmd, const QString &debugFile)
         } else if (item.startsWith("usb")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_usb", mapInfo);
+        } else if (item.startsWith("cdrom")) {
+            getMapInfoFromLshw(item, mapInfo);
+            addMapInfo("lshw_cdrom", mapInfo);
         }
     }
 }
@@ -410,6 +413,10 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
                 add = false;
             }
 
+            if (mapInfo["Hardware Class"].contains("hub", Qt::CaseInsensitive)) {
+                add = false;
+            }
+
             // 打印机几信息不从hwinfo --usb里面获取，需要过滤
             if (item.contains("Printer", Qt::CaseInsensitive) || item.contains("LaserJet", Qt::CaseInsensitive)) {
                 add = false;
@@ -430,23 +437,49 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
 }
 void CmdTool::loadDmidecodeInfo(const QString &key, const QString &cmd, const QString &debugfile)
 {
+    if (key == "dmidecode2") {
+        loadDmidecode2Info(key, cmd, debugfile);
+        return;
+    }
     QString deviceInfo;
     getDeviceInfo(cmd, deviceInfo, debugfile);
     QStringList items = deviceInfo.split("\n\n");
+
+    foreach (const QString &item, items) {
+        if (item.isEmpty()) {
+            continue;
+        }
+        QMap<QString, QString> mapInfo;
+        getMapInfoFromDmidecode(item, mapInfo);
+        addMapInfo(key, mapInfo);
+    }
+}
+
+void CmdTool::loadDmidecode2Info(const QString &key, const QString &cmd, const QString &debugfile)
+{
+    QString deviceInfo;
+    getDeviceInfo(cmd, deviceInfo, debugfile);
+    QStringList items = deviceInfo.split("\n\n");
+    QMap<QString, QString> mapInfo;
+    bool isGetInfo = false;
     foreach (const QString &item, items) {
         if (item.isEmpty()) {
             continue;
         }
 
-        QMap<QString, QString> mapInfo;
         getMapInfoFromDmidecode(item, mapInfo);
-        if (key == "dmidecode2") {
+        if (isGetInfo == false) {
             QString chipset;
             loadBiosInfoFromLspci(chipset);
             mapInfo.insert("chipset", chipset);
+            QString version;
+            getSMBIOSVersion(item, version);
+            mapInfo.insert("SMBIOS Version", version);
+            isGetInfo = true;
         }
-        addMapInfo(key, mapInfo);
     }
+
+    addMapInfo(key, mapInfo);
 }
 
 void CmdTool::loadCatInfo(const QString &key, const QString &cmd, const QString &debugfile)
@@ -569,6 +602,20 @@ void CmdTool::loadGpuInfo(const QString &key, const QString &cmd, const QString 
         }
         getMapInfoFromCmd(item, mapInfo, ": ");
         addMapInfo(key, mapInfo);
+    }
+}
+
+void CmdTool::getSMBIOSVersion(const QString &info, QString &version)
+{
+    QStringList lineList = info.split("\n");
+
+    foreach (auto line, lineList) {
+        //  SMBIOS 3.0.0 present.
+        QRegExp rx("^SMBIOS ([\\d]*.[\\d]*.[\\d])+ present.$");
+        if (rx.indexIn(line) > -1) {
+            version = rx.cap(1);
+            break;
+        }
     }
 }
 

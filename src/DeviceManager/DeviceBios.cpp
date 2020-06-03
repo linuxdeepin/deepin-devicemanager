@@ -19,6 +19,12 @@ bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+bool DeviceBios::setBiosLanguageInfo(const QMap<QString, QString> &mapInfo)
+{
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
 bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.size() < 2) {
@@ -155,4 +161,10 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("System Information"));
     addFilterKey(QObject::tr("Chassis Information"));
     addFilterKey(QObject::tr("Physical Memory Array"));
+
+    addFilterKey(QObject::tr("SMBIOS Version"));
+
+    addFilterKey(QObject::tr("Language Description Format"));
+    addFilterKey(QObject::tr("Installable Languages"));
+    addFilterKey(QObject::tr("Currently Installed Language"));
 }

@@ -78,6 +78,7 @@ public:
     // Bios设备相关 ************************************************************************************
     void addBiosDevice(const DeviceBios &device);
     const QList<DeviceBios> &getBiosDevices();
+    void setLanguageInfo(const QMap<QString, QString> &mapInfo);
 
     // 蓝牙设备相关
     void addBluetoothDevice(const DeviceBluetooth &device);
@@ -132,6 +133,7 @@ public:
     // 获取cdrom设备
     void addCdromDevice(const DeviceCdrom &device);
     const QList<DeviceCdrom> getCdromDevices();
+    void addLshwinfoIntoCdromDevice(const QMap<QString, QString> &mapInfo);
 
     void addBusId(const QStringList &busId);
     const QStringList &getBusId();

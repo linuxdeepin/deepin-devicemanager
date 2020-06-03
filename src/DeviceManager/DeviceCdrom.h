@@ -36,6 +36,7 @@ private:
     QString        m_Speed;                 //<!速度
 
     QString        m_UnikeyKey;
+    QString        m_KeyToLshw;            //<!
 };
 
 #endif // DEVICECDROM_H

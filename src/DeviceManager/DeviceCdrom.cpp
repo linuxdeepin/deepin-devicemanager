@@ -14,16 +14,17 @@ bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if (words.size() != 2) {
         return false;
     }
-    if (m_UnikeyKey != words[1].replace(":", ".").trimmed()) {
+    QString busInfo = words[1].replace(".", ":").trimmed();
+    if (m_KeyToLshw != busInfo) {
         return false;
     }
 
-    setAttribute(mapInfo, "product", m_Name);
-    setAttribute(mapInfo, "vendor", m_Vendor);
+    setAttribute(mapInfo, "product", m_Name, false);
+    setAttribute(mapInfo, "vendor", m_Vendor, false);
     setAttribute(mapInfo, "", m_Type);
-    setAttribute(mapInfo, "version", m_Version);
-    setAttribute(mapInfo, "bus info", m_BusInfo);
-    setAttribute(mapInfo, "capabilities", m_Capabilities);
+    setAttribute(mapInfo, "version", m_Version, false);
+    setAttribute(mapInfo, "bus info", m_BusInfo, false);
+    setAttribute(mapInfo, "capabilities", m_Capabilities, false);
     setAttribute(mapInfo, "", m_Driver);
     setAttribute(mapInfo, "", m_MaxPower);
     setAttribute(mapInfo, "", m_Speed);
@@ -43,6 +44,9 @@ void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "", m_MaxPower);
     setAttribute(mapInfo, "Speed", m_Speed);
+
+    // 获取映射到 lshw设备信息的 关键字
+    m_KeyToLshw = mapInfo["SysFS BusID"];
 
     loadOtherDeviceInfo(mapInfo);
 }
@@ -93,5 +97,10 @@ void DeviceCdrom::initFilterKey()
     addFilterKey(QObject::tr("Module Alias"));
     addFilterKey(QObject::tr("Config Status"));
     addFilterKey(QObject::tr("Application"));
-//    addFilterKey(QObject::tr("physical id"));
+    addFilterKey(QObject::tr("physical id"));
+
+    addFilterKey(QObject::tr("status"));
+    addFilterKey(QObject::tr("logical name"));
+//    addFilterKey(QObject::tr("bus info"));
+    addFilterKey(QObject::tr("ansiversion"));
 }

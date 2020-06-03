@@ -75,9 +75,9 @@ void MemoryWidget::initTable(const QList<DeviceMemory> &devices)
 }
 void MemoryWidget::initDetails(const QList<DeviceMemory> &devices)
 {
-    int size = devices.size();
+//    int size = devices.size();
     foreach (const DeviceMemory &device, devices) {
-        addDeviceDetail(device, size == 1 ? false : true);
+        addDeviceDetail(device, true);
     }
 }
 void MemoryWidget::addDeviceDetail(const DeviceMemory &device, bool withTitle)

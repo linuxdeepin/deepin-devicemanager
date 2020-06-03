@@ -8,6 +8,7 @@ public:
     DeviceBios();
     /**@brief:设置bios信息*/
     bool setBiosInfo(const QMap<QString, QString> &mapInfo);
+    bool setBiosLanguageInfo(const QMap<QString, QString> &mapInfo);
 
     /**@brief:设置base信息*/
     bool setBaseBoardInfo(const QMap<QString, QString> &mapInfo);

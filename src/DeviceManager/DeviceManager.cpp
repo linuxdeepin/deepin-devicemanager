@@ -217,6 +217,16 @@ const QList<DeviceBios> &DeviceManager::getBiosDevices()
     return m_ListDeviceBios;
 }
 
+void DeviceManager::setLanguageInfo(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBios>::iterator it = m_ListDeviceBios.begin();
+    for (; it != m_ListDeviceBios.end(); ++it) {
+        if ((*it).setBiosLanguageInfo(mapInfo)) {
+            return;
+        }
+    }
+}
+
 
 void DeviceManager::addBluetoothDevice(const DeviceBluetooth &device)
 {
@@ -415,6 +425,14 @@ void DeviceManager::addCdromDevice(const DeviceCdrom &device)
 const QList<DeviceCdrom> DeviceManager::getCdromDevices()
 {
     return m_ListDeviceCdrom;
+}
+
+void DeviceManager::addLshwinfoIntoCdromDevice(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceCdrom>::iterator it = m_ListDeviceCdrom.begin();
+    for (; it != m_ListDeviceCdrom.end(); ++it) {
+        (*it).setInfoFromLshw(mapInfo);
+    }
 }
 
 void DeviceManager::addBusId(const QStringList &busId)
