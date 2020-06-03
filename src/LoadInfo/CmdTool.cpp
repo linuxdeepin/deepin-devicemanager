@@ -271,6 +271,11 @@ void CmdTool::loadHciconfigInfo(const QString &cmd, const QString &debugfile)
     }
 }
 
+void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
+{
+
+}
+
 //void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap)
 //{
 //    cups_dinfo_t *info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);

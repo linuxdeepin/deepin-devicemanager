@@ -49,6 +49,10 @@
         <source>Clock</source>
         <translation>Kello</translation>
     </message>
+    <message>
+        <source>Chip</source>
+        <translation>Piiri</translation>
+    </message>
 </context>
 <context>
     <name>BluetoothWidget</name>
@@ -1899,6 +1903,134 @@
     <message>
         <source>Handlers</source>
         <translation>Käsittelijät</translation>
+    </message>
+    <message>
+        <source>Firmware Revision</source>
+        <translation>Firmware-versio</translation>
+    </message>
+    <message>
+        <source>CPU implementer</source>
+        <translation>CPU-valmistaja</translation>
+    </message>
+    <message>
+        <source>CPU architecture</source>
+        <translation>CPU-arkkitehtuuri</translation>
+    </message>
+    <message>
+        <source>CPU variant</source>
+        <translation>CPU-muunnelma</translation>
+    </message>
+    <message>
+        <source>CPU part</source>
+        <translation>CPU-osa</translation>
+    </message>
+    <message>
+        <source>CPU revision</source>
+        <translation>CPU-versio</translation>
+    </message>
+    <message>
+        <source>GDDR capacity</source>
+        <translation>GDDR-kapasiteetti</translation>
+    </message>
+    <message>
+        <source>GPU vendor</source>
+        <translation>GPU-valmistaja</translation>
+    </message>
+    <message>
+        <source>GPU type</source>
+        <translation>GPU-tyyppi</translation>
+    </message>
+    <message>
+        <source>EGL version</source>
+        <translation>EGL-versio</translation>
+    </message>
+    <message>
+        <source>EGL client APIs</source>
+        <translation>EGL-rajapinnat</translation>
+    </message>
+    <message>
+        <source>GL version</source>
+        <translation>GL-versio</translation>
+    </message>
+    <message>
+        <source>GLSL version</source>
+        <translation>GLSL-versio</translation>
+    </message>
+    <message>
+        <source>Array Handle</source>
+        <translation>Matriisin käsittely</translation>
+    </message>
+    <message>
+        <source>Form Factor</source>
+        <translation>Muotoseikka</translation>
+    </message>
+    <message>
+        <source>Set</source>
+        <translation>Aseta</translation>
+    </message>
+    <message>
+        <source>Bank Locator</source>
+        <translation>Muistin sijainti</translation>
+    </message>
+    <message>
+        <source>Type Detail</source>
+        <translation>Tyypin tiedot</translation>
+    </message>
+    <message>
+        <source>Part Number</source>
+        <translation>Osanumero</translation>
+    </message>
+    <message>
+        <source>Rank</source>
+        <translation>Sijoitus</translation>
+    </message>
+    <message>
+        <source>Memory Technology</source>
+        <translation>Muistitekniikka</translation>
+    </message>
+    <message>
+        <source>Memory Operating Mode Capability</source>
+        <translation>Muistin käyttötilan ominaisuus</translation>
+    </message>
+    <message>
+        <source>Firmware Version</source>
+        <translation>Firmware versio</translation>
+    </message>
+    <message>
+        <source>Module Manufacturer ID</source>
+        <translation>Moduulin valmistajan tunnus</translation>
+    </message>
+    <message>
+        <source>Module Product ID</source>
+        <translation>Moduulin tuotetunnus</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Manufacturer ID</source>
+        <translation>Muistin alihankkijan tunnus</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Product ID</source>
+        <translation>Muistin alihankkijan tuotetunnus</translation>
+    </message>
+    <message>
+        <source>Non-Volatile Size</source>
+        <translation>Pysyvä koko</translation>
+    </message>
+    <message>
+        <source>Volatile Size</source>
+        <translation>Kiinteä koko</translation>
+    </message>
+    <message>
+        <source>Cache Size</source>
+        <translation>Välimuistin koko</translation>
+    </message>
+    <message>
+        <source>Logical Size</source>
+        <translation>Looginen koko</translation>
+    </message>
+    <message>
+        <source>network</source>
+        <translation>lähiverkko</translation>
     </message>
 </context>
 <context>

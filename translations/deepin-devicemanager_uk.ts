@@ -49,6 +49,10 @@
         <source>Clock</source>
         <translation>Годинник</translation>
     </message>
+    <message>
+        <source>Chip</source>
+        <translation>Мікросхема</translation>
+    </message>
 </context>
 <context>
     <name>BluetoothWidget</name>
@@ -1899,6 +1903,134 @@
     <message>
         <source>Handlers</source>
         <translation>Обробники</translation>
+    </message>
+    <message>
+        <source>Firmware Revision</source>
+        <translation>Модифікація мікропрограми</translation>
+    </message>
+    <message>
+        <source>CPU implementer</source>
+        <translation>Реалізатор процесора</translation>
+    </message>
+    <message>
+        <source>CPU architecture</source>
+        <translation>Архітектура процесора</translation>
+    </message>
+    <message>
+        <source>CPU variant</source>
+        <translation>Варіант процесора</translation>
+    </message>
+    <message>
+        <source>CPU part</source>
+        <translation>Частина процесора</translation>
+    </message>
+    <message>
+        <source>CPU revision</source>
+        <translation>Модифікація процесора</translation>
+    </message>
+    <message>
+        <source>GDDR capacity</source>
+        <translation>Місткість GDDR</translation>
+    </message>
+    <message>
+        <source>GPU vendor</source>
+        <translation>Виробник графічного процесора</translation>
+    </message>
+    <message>
+        <source>GPU type</source>
+        <translation>Тип графічного процесора</translation>
+    </message>
+    <message>
+        <source>EGL version</source>
+        <translation>Версія EGL</translation>
+    </message>
+    <message>
+        <source>EGL client APIs</source>
+        <translation>Клієнтські програмні інтерфейси EGL</translation>
+    </message>
+    <message>
+        <source>GL version</source>
+        <translation>Версія GL</translation>
+    </message>
+    <message>
+        <source>GLSL version</source>
+        <translation>Версія GLSL</translation>
+    </message>
+    <message>
+        <source>Array Handle</source>
+        <translation>Обробник масивів</translation>
+    </message>
+    <message>
+        <source>Form Factor</source>
+        <translation>Формфактор</translation>
+    </message>
+    <message>
+        <source>Set</source>
+        <translation>Набір</translation>
+    </message>
+    <message>
+        <source>Bank Locator</source>
+        <translation>Локатор банків</translation>
+    </message>
+    <message>
+        <source>Type Detail</source>
+        <translation>Подробиці щодо типу</translation>
+    </message>
+    <message>
+        <source>Part Number</source>
+        <translation>Номер частини</translation>
+    </message>
+    <message>
+        <source>Rank</source>
+        <translation>Ранг</translation>
+    </message>
+    <message>
+        <source>Memory Technology</source>
+        <translation>Технологія пам&apos;яті</translation>
+    </message>
+    <message>
+        <source>Memory Operating Mode Capability</source>
+        <translation>Можливості режиму керування пам&apos;яттю</translation>
+    </message>
+    <message>
+        <source>Firmware Version</source>
+        <translation>Версія мікропрограми</translation>
+    </message>
+    <message>
+        <source>Module Manufacturer ID</source>
+        <translation>Ідентифікатор виробника модуля</translation>
+    </message>
+    <message>
+        <source>Module Product ID</source>
+        <translation>Ідентифікатор продукту модуля</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Manufacturer ID</source>
+        <translation>Ідентифікатор виробника контролера підсистеми пам&apos;яті</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Product ID</source>
+        <translation>Ідентифікатор продукту контролера підсистеми пам&apos;яті</translation>
+    </message>
+    <message>
+        <source>Non-Volatile Size</source>
+        <translation>Сталий розмір</translation>
+    </message>
+    <message>
+        <source>Volatile Size</source>
+        <translation>Мінливий розмір</translation>
+    </message>
+    <message>
+        <source>Cache Size</source>
+        <translation>Розмір кешу</translation>
+    </message>
+    <message>
+        <source>Logical Size</source>
+        <translation>Логічний розмір</translation>
+    </message>
+    <message>
+        <source>network</source>
+        <translation>мережа</translation>
     </message>
 </context>
 <context>

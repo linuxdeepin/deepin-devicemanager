@@ -49,6 +49,10 @@
         <source>Clock</source>
         <translation>Takt</translation>
     </message>
+    <message>
+        <source>Chip</source>
+        <translation>Čip</translation>
+    </message>
 </context>
 <context>
     <name>BluetoothWidget</name>
@@ -1899,6 +1903,134 @@
     <message>
         <source>Handlers</source>
         <translation>Handlers</translation>
+    </message>
+    <message>
+        <source>Firmware Revision</source>
+        <translation>Revize firmware</translation>
+    </message>
+    <message>
+        <source>CPU implementer</source>
+        <translation>Implementátor procesoru</translation>
+    </message>
+    <message>
+        <source>CPU architecture</source>
+        <translation>Architektura procesoru</translation>
+    </message>
+    <message>
+        <source>CPU variant</source>
+        <translation>Varianta procesoru</translation>
+    </message>
+    <message>
+        <source>CPU part</source>
+        <translation>Část procesoru</translation>
+    </message>
+    <message>
+        <source>CPU revision</source>
+        <translation>Revize procesoru</translation>
+    </message>
+    <message>
+        <source>GDDR capacity</source>
+        <translation>Kapacita GDDR</translation>
+    </message>
+    <message>
+        <source>GPU vendor</source>
+        <translation>Výrobce graf. čipu</translation>
+    </message>
+    <message>
+        <source>GPU type</source>
+        <translation>Typ graf. čipu</translation>
+    </message>
+    <message>
+        <source>EGL version</source>
+        <translation>Verze EGL</translation>
+    </message>
+    <message>
+        <source>EGL client APIs</source>
+        <translation>API rozhraní EGL klienta</translation>
+    </message>
+    <message>
+        <source>GL version</source>
+        <translation>Verze GL</translation>
+    </message>
+    <message>
+        <source>GLSL version</source>
+        <translation>Verze GLSL</translation>
+    </message>
+    <message>
+        <source>Array Handle</source>
+        <translation>Array Handle</translation>
+    </message>
+    <message>
+        <source>Form Factor</source>
+        <translation>Fyzická podoba</translation>
+    </message>
+    <message>
+        <source>Set</source>
+        <translation>Sada</translation>
+    </message>
+    <message>
+        <source>Bank Locator</source>
+        <translation>Lokátor paměťové banky</translation>
+    </message>
+    <message>
+        <source>Type Detail</source>
+        <translation>Podrobnosti o typu</translation>
+    </message>
+    <message>
+        <source>Part Number</source>
+        <translation>Katalogové číslo</translation>
+    </message>
+    <message>
+        <source>Rank</source>
+        <translation>Naráz přistupovaných čipů (rank)</translation>
+    </message>
+    <message>
+        <source>Memory Technology</source>
+        <translation>Technologie paměti</translation>
+    </message>
+    <message>
+        <source>Memory Operating Mode Capability</source>
+        <translation>Schopnost režimu fungování oper. paměti</translation>
+    </message>
+    <message>
+        <source>Firmware Version</source>
+        <translation>Verze firmware</translation>
+    </message>
+    <message>
+        <source>Module Manufacturer ID</source>
+        <translation>Identif. výrobce modulu</translation>
+    </message>
+    <message>
+        <source>Module Product ID</source>
+        <translation>Produktový identif. modulu</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Manufacturer ID</source>
+        <translation>Identif. výrobce řadiče paměťového podsystému</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Product ID</source>
+        <translation>Produktový identif. řadiče paměťového podsystému</translation>
+    </message>
+    <message>
+        <source>Non-Volatile Size</source>
+        <translation>Neměnná velikost</translation>
+    </message>
+    <message>
+        <source>Volatile Size</source>
+        <translation>Proměnlivá velikost</translation>
+    </message>
+    <message>
+        <source>Cache Size</source>
+        <translation>Velikost mezipaměti</translation>
+    </message>
+    <message>
+        <source>Logical Size</source>
+        <translation>Logická velikost</translation>
+    </message>
+    <message>
+        <source>network</source>
+        <translation>síť</translation>
     </message>
 </context>
 <context>

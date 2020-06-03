@@ -49,6 +49,10 @@
         <source>Clock</source>
         <translation>Saat</translation>
     </message>
+    <message>
+        <source>Chip</source>
+        <translation>Yonga</translation>
+    </message>
 </context>
 <context>
     <name>BluetoothWidget</name>
@@ -1899,6 +1903,134 @@
     <message>
         <source>Handlers</source>
         <translation>İşleyiciler</translation>
+    </message>
+    <message>
+        <source>Firmware Revision</source>
+        <translation>Ürün Yazılımı Revizyonu</translation>
+    </message>
+    <message>
+        <source>CPU implementer</source>
+        <translation>CPU uygulayıcısı</translation>
+    </message>
+    <message>
+        <source>CPU architecture</source>
+        <translation>CPU mimarisi</translation>
+    </message>
+    <message>
+        <source>CPU variant</source>
+        <translation>CPU varyantı</translation>
+    </message>
+    <message>
+        <source>CPU part</source>
+        <translation>CPU bölümü</translation>
+    </message>
+    <message>
+        <source>CPU revision</source>
+        <translation>CPU revizyonu</translation>
+    </message>
+    <message>
+        <source>GDDR capacity</source>
+        <translation>GDDR kapasitesi</translation>
+    </message>
+    <message>
+        <source>GPU vendor</source>
+        <translation>GPU satıcısı</translation>
+    </message>
+    <message>
+        <source>GPU type</source>
+        <translation>GPU türü</translation>
+    </message>
+    <message>
+        <source>EGL version</source>
+        <translation>EGL sürümü</translation>
+    </message>
+    <message>
+        <source>EGL client APIs</source>
+        <translation>EGL istemci API&apos;ları</translation>
+    </message>
+    <message>
+        <source>GL version</source>
+        <translation>GL sürümü</translation>
+    </message>
+    <message>
+        <source>GLSL version</source>
+        <translation>GLSL sürümü</translation>
+    </message>
+    <message>
+        <source>Array Handle</source>
+        <translation>Dizi Kolu</translation>
+    </message>
+    <message>
+        <source>Form Factor</source>
+        <translation>Form Yöntemi</translation>
+    </message>
+    <message>
+        <source>Set</source>
+        <translation>Ayarla</translation>
+    </message>
+    <message>
+        <source>Bank Locator</source>
+        <translation>Yuva Konumlandırıcı</translation>
+    </message>
+    <message>
+        <source>Type Detail</source>
+        <translation>Tür Ayrıntıları</translation>
+    </message>
+    <message>
+        <source>Part Number</source>
+        <translation>Parça Numarası</translation>
+    </message>
+    <message>
+        <source>Rank</source>
+        <translation>Derece</translation>
+    </message>
+    <message>
+        <source>Memory Technology</source>
+        <translation>Bellek Teknolojisi</translation>
+    </message>
+    <message>
+        <source>Memory Operating Mode Capability</source>
+        <translation>Bellek Çalışma Kipi Özelliği</translation>
+    </message>
+    <message>
+        <source>Firmware Version</source>
+        <translation>Yazılım Sürümü</translation>
+    </message>
+    <message>
+        <source>Module Manufacturer ID</source>
+        <translation>Modül Üretici Kimliği</translation>
+    </message>
+    <message>
+        <source>Module Product ID</source>
+        <translation>Modül Ürün Kimliği</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Manufacturer ID</source>
+        <translation>Bellek Alt Sistem Kontrolcü Üretici Kimliği</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Product ID</source>
+        <translation>Bellek Alt Sistem Kontrolcü Ürün Kimliği</translation>
+    </message>
+    <message>
+        <source>Non-Volatile Size</source>
+        <translation>Uçucu Olmayan Boyut</translation>
+    </message>
+    <message>
+        <source>Volatile Size</source>
+        <translation>Uçucu Boyut</translation>
+    </message>
+    <message>
+        <source>Cache Size</source>
+        <translation>Önbellek Boyutu</translation>
+    </message>
+    <message>
+        <source>Logical Size</source>
+        <translation>Mantıksal Boyut</translation>
+    </message>
+    <message>
+        <source>network</source>
+        <translation>ağ</translation>
     </message>
 </context>
 <context>

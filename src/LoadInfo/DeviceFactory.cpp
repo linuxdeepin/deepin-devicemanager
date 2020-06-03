@@ -44,5 +44,5 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
 //    }
 //    return generator;
 
-    return new KLUGenerator();
+    return new X86Generator();
 }

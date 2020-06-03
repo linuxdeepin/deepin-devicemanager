@@ -49,6 +49,10 @@
         <source>Clock</source>
         <translation>时钟频率</translation>
     </message>
+    <message>
+        <source>Chip</source>
+        <translation>芯片</translation>
+    </message>
 </context>
 <context>
     <name>BluetoothWidget</name>
@@ -1899,6 +1903,134 @@
     <message>
         <source>Handlers</source>
         <translation>处理程序</translation>
+    </message>
+    <message>
+        <source>Firmware Revision</source>
+        <translation>固件修订版本</translation>
+    </message>
+    <message>
+        <source>CPU implementer</source>
+        <translation>CPU程序</translation>
+    </message>
+    <message>
+        <source>CPU architecture</source>
+        <translation>CPU架构</translation>
+    </message>
+    <message>
+        <source>CPU variant</source>
+        <translation>CPU变量</translation>
+    </message>
+    <message>
+        <source>CPU part</source>
+        <translation>CPU部件</translation>
+    </message>
+    <message>
+        <source>CPU revision</source>
+        <translation>CPU版本</translation>
+    </message>
+    <message>
+        <source>GDDR capacity</source>
+        <translation>GDDR容量</translation>
+    </message>
+    <message>
+        <source>GPU vendor</source>
+        <translation>GPU供应商</translation>
+    </message>
+    <message>
+        <source>GPU type</source>
+        <translation>GPU类型</translation>
+    </message>
+    <message>
+        <source>EGL version</source>
+        <translation>EGL版本</translation>
+    </message>
+    <message>
+        <source>EGL client APIs</source>
+        <translation>EGL接口</translation>
+    </message>
+    <message>
+        <source>GL version</source>
+        <translation>GL版本</translation>
+    </message>
+    <message>
+        <source>GLSL version</source>
+        <translation>GLSL版本</translation>
+    </message>
+    <message>
+        <source>Array Handle</source>
+        <translation>数组程序</translation>
+    </message>
+    <message>
+        <source>Form Factor</source>
+        <translation>尺寸型号</translation>
+    </message>
+    <message>
+        <source>Set</source>
+        <translation>设置</translation>
+    </message>
+    <message>
+        <source>Bank Locator</source>
+        <translation>内存通道</translation>
+    </message>
+    <message>
+        <source>Type Detail</source>
+        <translation>类型详情</translation>
+    </message>
+    <message>
+        <source>Part Number</source>
+        <translation>部件号码</translation>
+    </message>
+    <message>
+        <source>Rank</source>
+        <translation>位列</translation>
+    </message>
+    <message>
+        <source>Memory Technology</source>
+        <translation>内存技术</translation>
+    </message>
+    <message>
+        <source>Memory Operating Mode Capability</source>
+        <translation>内存操作模式</translation>
+    </message>
+    <message>
+        <source>Firmware Version</source>
+        <translation>固件版本</translation>
+    </message>
+    <message>
+        <source>Module Manufacturer ID</source>
+        <translation>组件制造商</translation>
+    </message>
+    <message>
+        <source>Module Product ID</source>
+        <translation>组件产品ID</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Manufacturer ID</source>
+        <translation>内存子系统控制器制造商</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Product ID</source>
+        <translation>内存子系统控制器产品ID</translation>
+    </message>
+    <message>
+        <source>Non-Volatile Size</source>
+        <translation>不易丢失大小</translation>
+    </message>
+    <message>
+        <source>Volatile Size</source>
+        <translation>易丢失大小</translation>
+    </message>
+    <message>
+        <source>Cache Size</source>
+        <translation>缓存大小</translation>
+    </message>
+    <message>
+        <source>Logical Size</source>
+        <translation>逻辑大小</translation>
+    </message>
+    <message>
+        <source>network</source>
+        <translation>网络</translation>
     </message>
 </context>
 <context>

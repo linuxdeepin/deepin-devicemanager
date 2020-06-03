@@ -17,6 +17,7 @@ public:
      */
     void loadCmdInfo(const QString &key, const QString &cmd, const QString &debugFile = QString(""));
 
+    /**@brief:获取命令的解析结果*/
     QMap<QString, QList<QMap<QString, QString> > > &cmdInfo();
 
 private:
@@ -27,6 +28,7 @@ private:
     void loadXrandrVerboseInfo(const QString &cmd, const QString &debugfile);
     void loadDmesgInfo(const QString &cmd, const QString &debugfile);
     void loadHciconfigInfo(const QString &cmd, const QString &debugfile);
+    void loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo); // 这个函数是对LoadHciconfigInfo的扩展
     void loadPrinterInfo();
     void loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadDmidecodeInfo(const QString &key, const QString &cmd, const QString &debugfile);

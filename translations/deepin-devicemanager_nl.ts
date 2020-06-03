@@ -49,6 +49,10 @@
         <source>Clock</source>
         <translation>Klok</translation>
     </message>
+    <message>
+        <source>Chip</source>
+        <translation>Chip</translation>
+    </message>
 </context>
 <context>
     <name>BluetoothWidget</name>
@@ -1899,6 +1903,134 @@
     <message>
         <source>Handlers</source>
         <translation>Behandeld door</translation>
+    </message>
+    <message>
+        <source>Firmware Revision</source>
+        <translation>Firmware-revisie</translation>
+    </message>
+    <message>
+        <source>CPU implementer</source>
+        <translation>Processorimplementaat</translation>
+    </message>
+    <message>
+        <source>CPU architecture</source>
+        <translation>Processorarchitectuur</translation>
+    </message>
+    <message>
+        <source>CPU variant</source>
+        <translation>Processorvariant</translation>
+    </message>
+    <message>
+        <source>CPU part</source>
+        <translation>Processoronderdeel</translation>
+    </message>
+    <message>
+        <source>CPU revision</source>
+        <translation>Processorrevisie</translation>
+    </message>
+    <message>
+        <source>GDDR capacity</source>
+        <translation>GDDR-capaciteit</translation>
+    </message>
+    <message>
+        <source>GPU vendor</source>
+        <translation>GPU-maker</translation>
+    </message>
+    <message>
+        <source>GPU type</source>
+        <translation>Soort GPU</translation>
+    </message>
+    <message>
+        <source>EGL version</source>
+        <translation>EGL-versie</translation>
+    </message>
+    <message>
+        <source>EGL client APIs</source>
+        <translation>EGL-client-API&apos;s</translation>
+    </message>
+    <message>
+        <source>GL version</source>
+        <translation>GL-versie</translation>
+    </message>
+    <message>
+        <source>GLSL version</source>
+        <translation>GLSL-versie</translation>
+    </message>
+    <message>
+        <source>Array Handle</source>
+        <translation>Reekshandgreep</translation>
+    </message>
+    <message>
+        <source>Form Factor</source>
+        <translation>Vormfactor</translation>
+    </message>
+    <message>
+        <source>Set</source>
+        <translation>Instellen</translation>
+    </message>
+    <message>
+        <source>Bank Locator</source>
+        <translation>Bank Locator</translation>
+    </message>
+    <message>
+        <source>Type Detail</source>
+        <translation>Type-informatie</translation>
+    </message>
+    <message>
+        <source>Part Number</source>
+        <translation>Onderdeelnummer</translation>
+    </message>
+    <message>
+        <source>Rank</source>
+        <translation>Rang</translation>
+    </message>
+    <message>
+        <source>Memory Technology</source>
+        <translation>Geheugentechnologie</translation>
+    </message>
+    <message>
+        <source>Memory Operating Mode Capability</source>
+        <translation>Geheugenoperatiemodi</translation>
+    </message>
+    <message>
+        <source>Firmware Version</source>
+        <translation>Firmwareversie</translation>
+    </message>
+    <message>
+        <source>Module Manufacturer ID</source>
+        <translation>ID van modulemaker</translation>
+    </message>
+    <message>
+        <source>Module Product ID</source>
+        <translation>Productnummer van module</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Manufacturer ID</source>
+        <translation>ID van maker van geheugensubsysteem</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Product ID</source>
+        <translation>Productnummer van geheugensubsysteem</translation>
+    </message>
+    <message>
+        <source>Non-Volatile Size</source>
+        <translation>Niet-volatilegrootte</translation>
+    </message>
+    <message>
+        <source>Volatile Size</source>
+        <translation>Volatilegrootte</translation>
+    </message>
+    <message>
+        <source>Cache Size</source>
+        <translation>Cachegrootte</translation>
+    </message>
+    <message>
+        <source>Logical Size</source>
+        <translation>Logische grootte</translation>
+    </message>
+    <message>
+        <source>network</source>
+        <translation>netwerk</translation>
     </message>
 </context>
 <context>

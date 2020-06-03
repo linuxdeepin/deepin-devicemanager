@@ -49,6 +49,10 @@
         <source>Clock</source>
         <translation>Rellotge</translation>
     </message>
+    <message>
+        <source>Chip</source>
+        <translation>Xip</translation>
+    </message>
 </context>
 <context>
     <name>BluetoothWidget</name>
@@ -1899,6 +1903,134 @@
     <message>
         <source>Handlers</source>
         <translation>Gestors</translation>
+    </message>
+    <message>
+        <source>Firmware Revision</source>
+        <translation>Revisió del microprogramari</translation>
+    </message>
+    <message>
+        <source>CPU implementer</source>
+        <translation>Implementador de CPU</translation>
+    </message>
+    <message>
+        <source>CPU architecture</source>
+        <translation>Arquitectura de CPU</translation>
+    </message>
+    <message>
+        <source>CPU variant</source>
+        <translation>Variant de CPU</translation>
+    </message>
+    <message>
+        <source>CPU part</source>
+        <translation>Part de CPU</translation>
+    </message>
+    <message>
+        <source>CPU revision</source>
+        <translation>Revisió de CPU</translation>
+    </message>
+    <message>
+        <source>GDDR capacity</source>
+        <translation>Capacitat de GDDR</translation>
+    </message>
+    <message>
+        <source>GPU vendor</source>
+        <translation>Proveïdor de GPU</translation>
+    </message>
+    <message>
+        <source>GPU type</source>
+        <translation>Tipus de GPU</translation>
+    </message>
+    <message>
+        <source>EGL version</source>
+        <translation>Versió d&apos;EGL</translation>
+    </message>
+    <message>
+        <source>EGL client APIs</source>
+        <translation>APIs de client d&apos;EGL</translation>
+    </message>
+    <message>
+        <source>GL version</source>
+        <translation>Versió de GL</translation>
+    </message>
+    <message>
+        <source>GLSL version</source>
+        <translation>Versió de GLSL</translation>
+    </message>
+    <message>
+        <source>Array Handle</source>
+        <translation>Gestió de matriu</translation>
+    </message>
+    <message>
+        <source>Form Factor</source>
+        <translation>Factor de forma</translation>
+    </message>
+    <message>
+        <source>Set</source>
+        <translation>Establiment</translation>
+    </message>
+    <message>
+        <source>Bank Locator</source>
+        <translation>Localitzador de bancs</translation>
+    </message>
+    <message>
+        <source>Type Detail</source>
+        <translation>Detall del tipus</translation>
+    </message>
+    <message>
+        <source>Part Number</source>
+        <translation>Número de part</translation>
+    </message>
+    <message>
+        <source>Rank</source>
+        <translation>Rang</translation>
+    </message>
+    <message>
+        <source>Memory Technology</source>
+        <translation>Tecnologia de memòria</translation>
+    </message>
+    <message>
+        <source>Memory Operating Mode Capability</source>
+        <translation>Capacitat del mode operatiu de memòria</translation>
+    </message>
+    <message>
+        <source>Firmware Version</source>
+        <translation>Versió del microprogramari</translation>
+    </message>
+    <message>
+        <source>Module Manufacturer ID</source>
+        <translation>ID del fabricant del mòdul</translation>
+    </message>
+    <message>
+        <source>Module Product ID</source>
+        <translation>ID del producte del mòdul</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Manufacturer ID</source>
+        <translation>ID del fabricant del controlador del subsistema de memòria</translation>
+    </message>
+    <message>
+        <source>Memory Subsystem Controller Product ID</source>
+        <translation>ID del producte del controlador del susbsistema de memòria</translation>
+    </message>
+    <message>
+        <source>Non-Volatile Size</source>
+        <translation>Mida no volàtil</translation>
+    </message>
+    <message>
+        <source>Volatile Size</source>
+        <translation>Mida volàtil</translation>
+    </message>
+    <message>
+        <source>Cache Size</source>
+        <translation>Mida de la cau</translation>
+    </message>
+    <message>
+        <source>Logical Size</source>
+        <translation>Mida lògica</translation>
+    </message>
+    <message>
+        <source>network</source>
+        <translation>xarxa</translation>
     </message>
 </context>
 <context>
