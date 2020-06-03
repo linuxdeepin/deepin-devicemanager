@@ -105,7 +105,7 @@ void BluetoothWidget::addDeviceDetail(const DeviceBluetooth &device, bool withTi
 void BluetoothWidget::setOverView(const QList<DeviceBluetooth> &devices)
 {
     foreach (const DeviceBluetooth &device, devices) {
-        overviewInfo_.value += QString("%1 (%2)/").arg(device.name()).arg(device.model());
+        overviewInfo_.value += QString("%1 /").arg(device.name());
     }
     overviewInfo_.value.replace(QRegExp("/$"), "");
 }

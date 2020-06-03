@@ -14,6 +14,9 @@ public:
     /**@brief:添加 从 sudo hwinfo --keyboard 中获取的信息 */
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
+    /**@brief:特殊处理KLU设备 */
+    void setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
+
     // 获取设备属性
     const QString &name()const;
     const QString &vendor()const;

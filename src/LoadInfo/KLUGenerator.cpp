@@ -2,6 +2,7 @@
 #include "DeviceManager/DeviceManager.h"
 #include "DeviceManager/DeviceGpu.h"
 #include "DeviceManager/DeviceMonitor.h"
+#include "DeviceManager/DeviceKeyboard.h"
 
 KLUGenerator::KLUGenerator()
 {
@@ -35,4 +36,21 @@ void KLUGenerator::generatorMonitorDevice()
     DeviceMonitor monitor;
     monitor.setInfoFromSelfDefine(mapInfo);
     DeviceManager::instance()->addMonitor(monitor);
+}
+
+void KLUGenerator::getKeyboardInfoFromHwinfo()
+{
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_keyboard");
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 1) {
+            continue;
+        }
+        if ((*it).contains("Device Files")) {
+            DeviceKeyboard device;
+            device.setKLUInfoFromHwinfo(*it);
+            DeviceManager::instance()->addKeyboardDevice(device);
+            addBusIDFromHwinfo((*it)["SysFS BusID"]);
+        }
+    }
 }

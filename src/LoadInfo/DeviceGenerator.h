@@ -104,7 +104,7 @@ protected:
     void getBlueToothInfoFromHwinfo();
     void getBluetoothInfoFromLshw();
     /**@brief:generator keyboard info*/
-    void getKeyboardInfoFromHwinfo();
+    virtual void getKeyboardInfoFromHwinfo();
     void getKeyboardInfoFromLshw();
     void getKeyboardInfoFromCatDevices();
     /**@brief:generator mouse info*/

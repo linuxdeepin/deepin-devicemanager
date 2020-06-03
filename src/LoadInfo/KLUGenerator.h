@@ -13,6 +13,10 @@ protected:
 
     /**@brief:generator monitor info*/
     virtual void generatorMonitorDevice();
+
+protected:
+    /**@brief:generator keyboard info from hwinfo*/
+    virtual void getKeyboardInfoFromHwinfo();
 };
 
 #endif // KLUGENERATOR_H
