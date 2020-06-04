@@ -123,7 +123,17 @@ bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString
             return true;
         }
     }
+    return  false;
+}
 
+bool DeviceManager::setKLUStorageDeviceMediaType(const QString &name, const QString &value)
+{
+    QList<DeviceStorage>::iterator it = m_ListDeviceStorage.begin();
+    for (; it != m_ListDeviceStorage.end(); ++it) {
+        if ((*it).setKLUMediaType(name, value)) {
+            return true;
+        }
+    }
     return  false;
 }
 

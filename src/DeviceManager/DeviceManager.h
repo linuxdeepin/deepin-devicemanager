@@ -53,6 +53,7 @@ public:
     void addLshwinfoIntoStorageDevice(const QMap<QString, QString> &mapInfo);
     const QList<DeviceStorage> &getStorageDevices();
     bool setStorageDeviceMediaType(const QString &name, const QString &value);
+    bool setKLUStorageDeviceMediaType(const QString &name, const QString &value);
     void setStorageInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo);
 
     // GPU设备相关 **************************************************************************************

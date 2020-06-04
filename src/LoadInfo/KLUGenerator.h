@@ -17,6 +17,13 @@ protected:
 protected:
     /**@brief:generator keyboard info from hwinfo*/
     virtual void getKeyboardInfoFromHwinfo();
+
+    /**@brief:generator others info from hwinfo*/
+    virtual void getOthersInfoFromHwinfo();
+
+    /**@brief:generator disk info from hwinfo*/
+    virtual void getDiskInfoFromHwinfo();
+    virtual void getDiskInfoFromLsblk();
 };
 
 #endif // KLUGENERATOR_H

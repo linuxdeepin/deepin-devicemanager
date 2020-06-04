@@ -72,54 +72,54 @@ public:
 
 protected:
     /**@brief:generator bios info*/
-    void getBiosInfo();
-    void getSystemInfo();
-    void getBaseBoardInfo();
-    void getChassisInfo();
-    void getBiosMemoryInfo();
+    virtual void getBiosInfo();
+    virtual void getSystemInfo();
+    virtual void getBaseBoardInfo();
+    virtual void getChassisInfo();
+    virtual void getBiosMemoryInfo();
     /**@brief:generator memory info*/
-    void getMemoryInfoFromLshw();
-    void getMemoryInfoFromDmidecode();
+    virtual void getMemoryInfoFromLshw();
+    virtual void getMemoryInfoFromDmidecode();
     /**@brief:generator disk info*/
-    void getDiskInfoFromHwinfo();
-    void getDiskInfoFromLshw();
-    void getDiskInfoFromLsblk();
-    void getDiskInfoFromSmartCtl();
+    virtual void getDiskInfoFromHwinfo();
+    virtual void getDiskInfoFromLshw();
+    virtual void getDiskInfoFromLsblk();
+    virtual void getDiskInfoFromSmartCtl();
     /**@brief:generator gpu info*/
-    void getGpuInfoFromHwinfo();
-    void getGpuInfoFromLshw();
-    void getGpuInfoFromXrandr();
-    void getGpuSizeFromDmesg();
+    virtual void getGpuInfoFromHwinfo();
+    virtual void getGpuInfoFromLshw();
+    virtual void getGpuInfoFromXrandr();
+    virtual void getGpuSizeFromDmesg();
     /**@brief:generator monitor info*/
-    void getMonitorInfoFromHwinfo();
-    void getMonitorInfoFromXrandrVerbose();
-    void getMonitorRefreshRateFromXrandr();
+    virtual void getMonitorInfoFromHwinfo();
+    virtual void getMonitorInfoFromXrandrVerbose();
+    virtual void getMonitorRefreshRateFromXrandr();
     /**@brief:generator audio info*/
-    void getAudioInfoFromHwinfo();
-    void getAudioInfoFromLshw();
-    void getAudioInfoFromCatInput();
-    void getAudioChipInfoFromDmesg();
+    virtual void getAudioInfoFromHwinfo();
+    virtual void getAudioInfoFromLshw();
+    virtual void getAudioInfoFromCatInput();
+    virtual void getAudioChipInfoFromDmesg();
     /**@brief:generator bluetooth info*/
-    void getBluetoothInfoFromHciconfig();
-    void getBlueToothInfoFromHwinfo();
-    void getBluetoothInfoFromLshw();
+    virtual void getBluetoothInfoFromHciconfig();
+    virtual void getBlueToothInfoFromHwinfo();
+    virtual void getBluetoothInfoFromLshw();
     /**@brief:generator keyboard info*/
     virtual void getKeyboardInfoFromHwinfo();
-    void getKeyboardInfoFromLshw();
-    void getKeyboardInfoFromCatDevices();
+    virtual void getKeyboardInfoFromLshw();
+    virtual void getKeyboardInfoFromCatDevices();
     /**@brief:generator mouse info*/
-    void getMouseInfoFromHwinfo();
-    void getMouseInfoFromLshw();
-    void getMouseInfoFromCatDevices();
+    virtual void getMouseInfoFromHwinfo();
+    virtual void getMouseInfoFromLshw();
+    virtual void getMouseInfoFromCatDevices();
     /**@brief:generator camera info*/
-    void getImageInfoFromHwinfo();
-    void getImageInfoFromLshw();
+    virtual void getImageInfoFromHwinfo();
+    virtual void getImageInfoFromLshw();
     /**@brief:generator cdrom info*/
-    void getCdromInfoFromHwinfo();
-    void getCdromInfoFromLshw();
+    virtual void getCdromInfoFromHwinfo();
+    virtual void getCdromInfoFromLshw();
     /**@brief:generator others info*/
     virtual void getOthersInfoFromHwinfo();
-    void getOthersInfoFromLshw();
+    virtual void getOthersInfoFromLshw();
 protected:
     QStringList m_ListBusID;
 };

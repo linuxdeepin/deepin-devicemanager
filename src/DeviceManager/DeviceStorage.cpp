@@ -43,6 +43,47 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
+{
+    // 龙芯机器中 hwinfo --disk会列出所有的分区信息
+    // 存储设备不应包含分区，根据SysFS BusID 来确定是否是分区信息
+    if (mapInfo.find("SysFS BusID") == mapInfo.end()) {
+        return false;
+    }
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+
+    setAttribute(mapInfo, "Attached to", m_Interface);
+    QRegExp re(".*\\((.*)\\).*");
+    if (re.exactMatch(m_Interface)) {
+        m_Interface = re.cap(1);
+        m_Interface.replace("Controller", "");
+        m_Interface.replace("controller", "");
+    }
+    setAttribute(mapInfo, "Revision", m_Version);
+    setAttribute(mapInfo, "Hardware Class", m_Description);
+    setAttribute(mapInfo, "Capacity", m_Size);
+    // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
+    m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+    if (m_Size.contains("0GB") || m_Size == "") {
+        return false;
+    }
+
+    setDiskSerialID(mapInfo["Device Files"]);
+    setAttribute(mapInfo, "Serial ID", m_SerialNumber, false);
+    setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
+    setAttribute(mapInfo, "Device File", m_DeviceFile);
+
+    // KLU里面的介质类型的处理方式比较特殊
+    if (mapInfo["Driver"].contains("usb-storage")) {
+        m_MediaType = "USB";
+    }
+
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
+
 bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
 
@@ -91,6 +132,27 @@ bool DeviceStorage::setMediaType(const QString &name, const QString &value)
 {
     if (!m_DeviceFile.contains(name)) {
         return false;
+    }
+
+    if (QString("0") == value) {
+        m_MediaType = "SSD";
+    } else if (QString("1") == value) {
+        m_MediaType = "HDD";
+    } else {
+        m_MediaType = "UnKnow";
+    }
+
+    return true;
+}
+
+bool DeviceStorage::setKLUMediaType(const QString &name, const QString &value)
+{
+    if (!m_DeviceFile.contains(name)) {
+        return false;
+    }
+
+    if (m_MediaType == "USB") {
+        return true;
     }
 
     if (QString("0") == value) {
