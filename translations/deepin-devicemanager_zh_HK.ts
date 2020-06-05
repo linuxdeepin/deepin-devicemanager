@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_HK" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_HK">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -642,7 +644,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file's name</comment>
+        <comment>export file&apos;s name</comment>
         <translation>設備訊息</translation>
     </message>
     <message>
@@ -1108,11 +1110,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>電池</translation>
+        <translation type="vanished">電池</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>未發現電池訊息</translation>
+        <translation type="vanished">未發現電池訊息</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1173,6 +1175,14 @@
     <message>
         <source>SBDS Chemistry</source>
         <translation>SBDS材料</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No battery info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2041,54 @@
     <message>
         <source>network</source>
         <translation>網絡</translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>型號</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation>製造商</translation>
+    </message>
+    <message>
+        <source>SMBIOS Version</source>
+        <translation>SMBIOS版本</translation>
+    </message>
+    <message>
+        <source>Language Description Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installable Languages</source>
+        <translation>可安裝語言數</translation>
+    </message>
+    <message>
+        <source>Currently Installed Language</source>
+        <translation>當前安裝語言</translation>
+    </message>
+    <message>
+        <source>Powered</source>
+        <translation>供電</translation>
+    </message>
+    <message>
+        <source>Discoverable</source>
+        <translation>可發現</translation>
+    </message>
+    <message>
+        <source>Pairable</source>
+        <translation>可配對</translation>
+    </message>
+    <message>
+        <source>Modalias</source>
+        <translation>設置命令別名</translation>
+    </message>
+    <message>
+        <source>Discovering</source>
+        <translation>搜索中</translation>
+    </message>
+    <message>
+        <source>status</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

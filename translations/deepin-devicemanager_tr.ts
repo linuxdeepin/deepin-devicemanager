@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="tr" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="tr">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -642,7 +644,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file's name</comment>
+        <comment>export file&apos;s name</comment>
         <translation>Aygıt Bilgisi</translation>
     </message>
     <message>
@@ -1108,11 +1110,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>Güç</translation>
+        <translation type="vanished">Güç</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>Güç bilgisi yok</translation>
+        <translation type="vanished">Güç bilgisi yok</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1173,6 +1175,14 @@
     <message>
         <source>SBDS Chemistry</source>
         <translation>SBDS Yapı</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No battery info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2041,54 @@
     <message>
         <source>network</source>
         <translation>ağ</translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>Model</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation>Satıcı</translation>
+    </message>
+    <message>
+        <source>SMBIOS Version</source>
+        <translation>SMBİOS Sürümü</translation>
+    </message>
+    <message>
+        <source>Language Description Format</source>
+        <translation>Dil Açıklama Biçimi</translation>
+    </message>
+    <message>
+        <source>Installable Languages</source>
+        <translation>Kurulabilir Diller</translation>
+    </message>
+    <message>
+        <source>Currently Installed Language</source>
+        <translation>Şu Anki Yüklü Dil</translation>
+    </message>
+    <message>
+        <source>Powered</source>
+        <translation>Dolu</translation>
+    </message>
+    <message>
+        <source>Discoverable</source>
+        <translation>Bulunabilir</translation>
+    </message>
+    <message>
+        <source>Pairable</source>
+        <translation>Eşleşebilir</translation>
+    </message>
+    <message>
+        <source>Modalias</source>
+        <translation>Modalias</translation>
+    </message>
+    <message>
+        <source>Discovering</source>
+        <translation>Keşfet</translation>
+    </message>
+    <message>
+        <source>status</source>
+        <translation>durum</translation>
     </message>
 </context>
 <context>

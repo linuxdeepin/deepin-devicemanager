@@ -5,10 +5,61 @@
 #include "DeviceManager/DeviceKeyboard.h"
 #include "DeviceManager/DeviceOthers.h"
 #include "DeviceManager/DeviceStorage.h"
+#include "DeviceManager/DeviceAudio.h"
+#include "DeviceManager/DeviceComputer.h"
 
 KLUGenerator::KLUGenerator()
 {
 
+}
+
+void KLUGenerator::generatorComputerDevice()
+{
+    const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
+
+    DeviceComputer device;
+
+    // home url
+    if (cmdInfo.size() > 0) {
+        QString value = cmdInfo[0]["HOME_URL"];
+        device.setHomeUrl(value.replace("\"", ""));
+    }
+
+    // name type
+    const QList<QMap<QString, QString> >  &sysInfo = DeviceManager::instance()->cmdInfo("lshw_system");
+    if (sysInfo.size() > 0) {
+        device.setType(sysInfo[0]["description"]);
+        //device.setVendor(sysInfo[0]["vendor"]);
+        device.setName(sysInfo[0]["product"]);
+    }
+
+    // setOsDescription
+    QString os = "UOS";
+    DSysInfo::DeepinType type = DSysInfo::deepinType();
+    if (DSysInfo::DeepinProfessional == type) {
+        os =  "UOS 20";
+    } else if (DSysInfo::DeepinPersonal == type) {
+        os =  "UOS 20 Home";
+    } else if (DSysInfo::DeepinDesktop == type) {
+        os =  "Deepin 20 Beta";
+    }
+    device.setOsDescription(os);
+
+    // os
+    const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
+    if (verInfo.size() > 0) {
+        QString info = verInfo[0]["OS"].trimmed();
+        info = info.trimmed();
+        QRegExp reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)", Qt::CaseSensitive);
+        int index = reg.indexIn(info);
+        if (index != -1) {
+            QString tmp = reg.cap(0);
+            info.remove(tmp);
+            info.insert(index, reg.cap(1));
+        }
+        device.setOS(info);
+    }
+    DeviceManager::instance()->addComputerDevice(device);
 }
 
 void KLUGenerator::generatorGpuDevice()
@@ -38,6 +89,11 @@ void KLUGenerator::generatorMonitorDevice()
     DeviceMonitor monitor;
     monitor.setInfoFromSelfDefine(mapInfo);
     DeviceManager::instance()->addMonitor(monitor);
+}
+
+void KLUGenerator::generatorAudioDevice()
+{
+    getAudioInfoFromCatAudio();
 }
 
 void KLUGenerator::getKeyboardInfoFromHwinfo()
@@ -110,5 +166,19 @@ void KLUGenerator::getDiskInfoFromLsblk()
         for (; it != lstblk[0].end(); ++it) {
             DeviceManager::instance()->setKLUStorageDeviceMediaType(it.key(), it.value());
         }
+    }
+}
+
+void KLUGenerator::getAudioInfoFromCatAudio()
+{
+    const QList<QMap<QString, QString>> lstAudio = DeviceManager::instance()->cmdInfo("cat_audio");
+    QList<QMap<QString, QString> >::const_iterator it = lstAudio.begin();
+    for (; it != lstAudio.end(); ++it) {
+        if ((*it).size() < 2) {
+            continue;
+        }
+        DeviceAudio device;
+        device.setInfoFromCatAudio(*it);
+        DeviceManager::instance()->addAudioDevice(device);
     }
 }

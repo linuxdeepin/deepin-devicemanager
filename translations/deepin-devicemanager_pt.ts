@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="pt">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -51,7 +53,7 @@
     </message>
     <message>
         <source>Chip</source>
-        <translation type="unfinished"/>
+        <translation>Chip</translation>
     </message>
 </context>
 <context>
@@ -642,7 +644,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file's name</comment>
+        <comment>export file&apos;s name</comment>
         <translation>Info dispositivo</translation>
     </message>
     <message>
@@ -1108,11 +1110,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>Energia</translation>
+        <translation type="vanished">Energia</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>Nenhuma informação de energia</translation>
+        <translation type="vanished">Nenhuma informação de energia</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1173,6 +1175,14 @@
     <message>
         <source>SBDS Chemistry</source>
         <translation>Química do SBDS</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No battery info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1910,51 +1920,51 @@
     </message>
     <message>
         <source>CPU implementer</source>
-        <translation type="unfinished"/>
+        <translation>Implementador da CPU</translation>
     </message>
     <message>
         <source>CPU architecture</source>
-        <translation type="unfinished"/>
+        <translation>Arquitetura da CPU</translation>
     </message>
     <message>
         <source>CPU variant</source>
-        <translation type="unfinished"/>
+        <translation>Variante da CPU</translation>
     </message>
     <message>
         <source>CPU part</source>
-        <translation type="unfinished"/>
+        <translation>Peça da CPU</translation>
     </message>
     <message>
         <source>CPU revision</source>
-        <translation type="unfinished"/>
+        <translation>Revisão da CPU</translation>
     </message>
     <message>
         <source>GDDR capacity</source>
-        <translation type="unfinished"/>
+        <translation>Capacidade da GDDR</translation>
     </message>
     <message>
         <source>GPU vendor</source>
-        <translation type="unfinished"/>
+        <translation>Fabricante da GPU</translation>
     </message>
     <message>
         <source>GPU type</source>
-        <translation type="unfinished"/>
+        <translation>Tipo de GPU</translation>
     </message>
     <message>
         <source>EGL version</source>
-        <translation type="unfinished"/>
+        <translation>Versão da EGL</translation>
     </message>
     <message>
         <source>EGL client APIs</source>
-        <translation type="unfinished"/>
+        <translation>APIs do cliente EGL</translation>
     </message>
     <message>
         <source>GL version</source>
-        <translation type="unfinished"/>
+        <translation>Versão da GL</translation>
     </message>
     <message>
         <source>GLSL version</source>
-        <translation type="unfinished"/>
+        <translation>Versão da GLSL</translation>
     </message>
     <message>
         <source>Array Handle</source>
@@ -1978,7 +1988,7 @@
     </message>
     <message>
         <source>Part Number</source>
-        <translation type="unfinished"/>
+        <translation>Número da peça</translation>
     </message>
     <message>
         <source>Rank</source>
@@ -1986,11 +1996,11 @@
     </message>
     <message>
         <source>Memory Technology</source>
-        <translation type="unfinished"/>
+        <translation>Tecnologia de memória</translation>
     </message>
     <message>
         <source>Memory Operating Mode Capability</source>
-        <translation type="unfinished"/>
+        <translation>Capacidade do modo de funcionamento da memória</translation>
     </message>
     <message>
         <source>Firmware Version</source>
@@ -1998,27 +2008,27 @@
     </message>
     <message>
         <source>Module Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ID do fabricante do módulo</translation>
     </message>
     <message>
         <source>Module Product ID</source>
-        <translation type="unfinished"/>
+        <translation>ID do produto do módulo</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ID do fabricante do controlador do subsistema da memória</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation type="unfinished"/>
+        <translation>ID do produto controlador do subsistema da memória</translation>
     </message>
     <message>
         <source>Non-Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Tamanho não volátil</translation>
     </message>
     <message>
         <source>Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Tamanho volátil</translation>
     </message>
     <message>
         <source>Cache Size</source>
@@ -2026,11 +2036,59 @@
     </message>
     <message>
         <source>Logical Size</source>
-        <translation type="unfinished"/>
+        <translation>Tamanho lógico</translation>
     </message>
     <message>
         <source>network</source>
-        <translation type="unfinished"/>
+        <translation>rede</translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>Modelo</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation>Fabricante</translation>
+    </message>
+    <message>
+        <source>SMBIOS Version</source>
+        <translation>Versão da SMBIOS</translation>
+    </message>
+    <message>
+        <source>Language Description Format</source>
+        <translation>Formato da descrição do idioma</translation>
+    </message>
+    <message>
+        <source>Installable Languages</source>
+        <translation>Idiomas instaláveis</translation>
+    </message>
+    <message>
+        <source>Currently Installed Language</source>
+        <translation>Idioma atualmente instalado</translation>
+    </message>
+    <message>
+        <source>Powered</source>
+        <translation>Alimentado</translation>
+    </message>
+    <message>
+        <source>Discoverable</source>
+        <translation>Detetável</translation>
+    </message>
+    <message>
+        <source>Pairable</source>
+        <translation>Emparelhável</translation>
+    </message>
+    <message>
+        <source>Modalias</source>
+        <translation>Modalias</translation>
+    </message>
+    <message>
+        <source>Discovering</source>
+        <translation>Descobrindo</translation>
+    </message>
+    <message>
+        <source>status</source>
+        <translation>estado</translation>
     </message>
 </context>
 <context>

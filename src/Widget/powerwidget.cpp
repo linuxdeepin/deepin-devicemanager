@@ -28,7 +28,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Power"))
+PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Battery"))
 {
     initWidgetEx();
 }
@@ -39,7 +39,7 @@ void PowerWidget::initWidgetEx()
     const QList<DevicePower> &devices = DeviceManager::instance()->getPowerDevices();
     int deviceNum = devices.size();
     if ( deviceNum < 1 ) {
-        setCentralInfo(tr("No power info"));
+        setCentralInfo(tr("No battery info"));
         return;
     }
 

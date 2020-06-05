@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ko" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ko">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -51,7 +53,7 @@
     </message>
     <message>
         <source>Chip</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -642,7 +644,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file's name</comment>
+        <comment>export file&apos;s name</comment>
         <translation>장치 정보</translation>
     </message>
     <message>
@@ -1108,11 +1110,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>전원</translation>
+        <translation type="vanished">전원</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>전원 정보 없음</translation>
+        <translation type="vanished">전원 정보 없음</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1173,6 +1175,14 @@
     <message>
         <source>SBDS Chemistry</source>
         <translation>SBDS 화학</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No battery info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1910,51 +1920,51 @@
     </message>
     <message>
         <source>CPU implementer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>CPU architecture</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>CPU variant</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>CPU part</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>CPU revision</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GDDR capacity</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GPU vendor</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GPU type</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>EGL version</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>EGL client APIs</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GL version</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>GLSL version</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Array Handle</source>
@@ -1978,7 +1988,7 @@
     </message>
     <message>
         <source>Part Number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rank</source>
@@ -1986,11 +1996,11 @@
     </message>
     <message>
         <source>Memory Technology</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Memory Operating Mode Capability</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Firmware Version</source>
@@ -1998,27 +2008,27 @@
     </message>
     <message>
         <source>Module Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Module Product ID</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Non-Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cache Size</source>
@@ -2026,11 +2036,59 @@
     </message>
     <message>
         <source>Logical Size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>network</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>모델</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation>공급 업체</translation>
+    </message>
+    <message>
+        <source>SMBIOS Version</source>
+        <translation>SMBIOS 버전</translation>
+    </message>
+    <message>
+        <source>Language Description Format</source>
+        <translation>언어 설명 형식</translation>
+    </message>
+    <message>
+        <source>Installable Languages</source>
+        <translation>설치 가능한 언어</translation>
+    </message>
+    <message>
+        <source>Currently Installed Language</source>
+        <translation>현재 설치된 언어</translation>
+    </message>
+    <message>
+        <source>Powered</source>
+        <translation>전원 공급됨</translation>
+    </message>
+    <message>
+        <source>Discoverable</source>
+        <translation>발견 가능</translation>
+    </message>
+    <message>
+        <source>Pairable</source>
+        <translation>페어링 가능</translation>
+    </message>
+    <message>
+        <source>Modalias</source>
+        <translation>Modalias</translation>
+    </message>
+    <message>
+        <source>Discovering</source>
+        <translation>발견 중</translation>
+    </message>
+    <message>
+        <source>status</source>
+        <translation>상태</translation>
     </message>
 </context>
 <context>

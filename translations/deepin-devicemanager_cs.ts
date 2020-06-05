@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="cs" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="cs">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -642,7 +644,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file's name</comment>
+        <comment>export file&apos;s name</comment>
         <translation>Informace o zařízení</translation>
     </message>
     <message>
@@ -1108,11 +1110,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>Napájení</translation>
+        <translation type="vanished">Napájení</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>Žádné informace o napájení</translation>
+        <translation type="vanished">Žádné informace o napájení</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1173,6 +1175,14 @@
     <message>
         <source>SBDS Chemistry</source>
         <translation>Chemické složení SBDS</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No battery info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2041,54 @@
     <message>
         <source>network</source>
         <translation>síť</translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>Model</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation>Výrobce</translation>
+    </message>
+    <message>
+        <source>SMBIOS Version</source>
+        <translation>Verze SMBIOS</translation>
+    </message>
+    <message>
+        <source>Language Description Format</source>
+        <translation>Formát popisu jazyka</translation>
+    </message>
+    <message>
+        <source>Installable Languages</source>
+        <translation>Jazyky, které je možné nainstalovat</translation>
+    </message>
+    <message>
+        <source>Currently Installed Language</source>
+        <translation>Nyní nainstalované jazyky</translation>
+    </message>
+    <message>
+        <source>Powered</source>
+        <translation>Napájeno</translation>
+    </message>
+    <message>
+        <source>Discoverable</source>
+        <translation>Objevitelné</translation>
+    </message>
+    <message>
+        <source>Pairable</source>
+        <translation>Možné spárovat</translation>
+    </message>
+    <message>
+        <source>Modalias</source>
+        <translation>Alternativní název modulu</translation>
+    </message>
+    <message>
+        <source>Discovering</source>
+        <translation>Objevování</translation>
+    </message>
+    <message>
+        <source>status</source>
+        <translation>stav</translation>
     </message>
 </context>
 <context>

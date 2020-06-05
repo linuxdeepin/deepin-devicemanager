@@ -116,7 +116,8 @@ SOURCES += \
     LoadInfo/PanguGenerator.cpp \
     LoadInfo/KLUGenerator.cpp \
     LoadInfo/DeviceGenerator.cpp \
-    DeviceManager/DeviceManager.cpp
+    DeviceManager/DeviceManager.cpp \
+    LoadInfo/PanguVGenerator.cpp
 
 HEADERS += \
     DeviceManager/DeviceInfo.h \
@@ -180,7 +181,8 @@ HEADERS += \
     LoadInfo/PanguGenerator.h \
     LoadInfo/KLUGenerator.h \
     LoadInfo/DeviceGenerator.h \
-    DeviceManager/DeviceManager.h
+    DeviceManager/DeviceManager.h \
+    LoadInfo/PanguVGenerator.h
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin

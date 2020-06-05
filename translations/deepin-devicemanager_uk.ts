@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="uk" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="uk">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -642,7 +644,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file's name</comment>
+        <comment>export file&apos;s name</comment>
         <translation>Дані щодо пристрою</translation>
     </message>
     <message>
@@ -1108,11 +1110,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>Живлення</translation>
+        <translation type="vanished">Живлення</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>Немає даних щодо живлення</translation>
+        <translation type="vanished">Немає даних щодо живлення</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1173,6 +1175,14 @@
     <message>
         <source>SBDS Chemistry</source>
         <translation>Хімія SBDS</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No battery info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2041,54 @@
     <message>
         <source>network</source>
         <translation>мережа</translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>Модель</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation>Постачальник</translation>
+    </message>
+    <message>
+        <source>SMBIOS Version</source>
+        <translation>Версія SMBIOS</translation>
+    </message>
+    <message>
+        <source>Language Description Format</source>
+        <translation>Формат опису мови</translation>
+    </message>
+    <message>
+        <source>Installable Languages</source>
+        <translation>Придатні до встановлення мови</translation>
+    </message>
+    <message>
+        <source>Currently Installed Language</source>
+        <translation>Поточна встановлена мова</translation>
+    </message>
+    <message>
+        <source>Powered</source>
+        <translation>Живлення</translation>
+    </message>
+    <message>
+        <source>Discoverable</source>
+        <translation>Може визначатися</translation>
+    </message>
+    <message>
+        <source>Pairable</source>
+        <translation>Може пов&apos;язуватися</translation>
+    </message>
+    <message>
+        <source>Modalias</source>
+        <translation>Мод-прив&apos;язка</translation>
+    </message>
+    <message>
+        <source>Discovering</source>
+        <translation>Визначення</translation>
+    </message>
+    <message>
+        <source>status</source>
+        <translation>стан</translation>
     </message>
 </context>
 <context>

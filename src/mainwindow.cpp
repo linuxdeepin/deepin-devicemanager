@@ -67,6 +67,7 @@
 #include <QSettings>
 #include "ThreadPool/ThreadPool.h"
 #include <QDebug>
+#include "LoadInfo/DeviceFactory.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -80,6 +81,11 @@ MainWindow::MainWindow(QWidget *parent) :
     if (false == DeviceInfoParser::Instance().getRootPassword()) {
         exit(-1);
     }
+
+    // 获取计算机架构信息,x86 arm mips
+    QString arch = getArchString();
+    DeviceFactory::setGeneratorKey(arch);
+
     DeviceManager::instance();
     refreshDatabase();
     setSizeLimits();
@@ -558,6 +564,28 @@ void MainWindow::loadSettings()
         }
     }
     setting.endGroup();
+}
+
+QString MainWindow::getArchString()
+{
+    QProcess process;
+    process.start("uname -m");
+    process.waitForFinished(1000);
+    QString struction = process.readAllStandardOutput().trimmed();
+    process.exitCode();
+
+#ifdef TEST_DATA_FROM_FILE
+    QFile inputDeviceFile(DEVICEINFO_PATH + "/" + "uname_m.txt");
+    bool res = inputDeviceFile.open(QIODevice::ReadOnly);
+    if (res) {
+        struction = inputDeviceFile.readAll().trimmed();
+    } else {
+        struction = "x86_64";
+    }
+    inputDeviceFile.close();
+#endif
+
+    return struction;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)

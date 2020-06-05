@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fi">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -642,7 +644,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file's name</comment>
+        <comment>export file&apos;s name</comment>
         <translation>Laiteen tiedot</translation>
     </message>
     <message>
@@ -1108,11 +1110,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>Virta</translation>
+        <translation type="vanished">Virta</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>Ei virtatietoja</translation>
+        <translation type="vanished">Ei virtatietoja</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1173,6 +1175,14 @@
     <message>
         <source>SBDS Chemistry</source>
         <translation>SBDS kemia</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No battery info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2041,54 @@
     <message>
         <source>network</source>
         <translation>lähiverkko</translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>Malli</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation>Valmistaja</translation>
+    </message>
+    <message>
+        <source>SMBIOS Version</source>
+        <translation>SMBIOS Versio</translation>
+    </message>
+    <message>
+        <source>Language Description Format</source>
+        <translation>Kieli Kuvaus Formaatti</translation>
+    </message>
+    <message>
+        <source>Installable Languages</source>
+        <translation>Asennettavat kielet</translation>
+    </message>
+    <message>
+        <source>Currently Installed Language</source>
+        <translation>Asennettu kieli</translation>
+    </message>
+    <message>
+        <source>Powered</source>
+        <translation>Käytössä</translation>
+    </message>
+    <message>
+        <source>Discoverable</source>
+        <translation>Löydettävissä</translation>
+    </message>
+    <message>
+        <source>Pairable</source>
+        <translation>Liitettävissä</translation>
+    </message>
+    <message>
+        <source>Modalias</source>
+        <translation>Modpeite</translation>
+    </message>
+    <message>
+        <source>Discovering</source>
+        <translation>Hakemassa</translation>
+    </message>
+    <message>
+        <source>status</source>
+        <translation>tila</translation>
     </message>
 </context>
 <context>

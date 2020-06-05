@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="it" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="it">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -51,7 +53,7 @@
     </message>
     <message>
         <source>Chip</source>
-        <translation type="unfinished"/>
+        <translation>Chip</translation>
     </message>
 </context>
 <context>
@@ -642,7 +644,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file's name</comment>
+        <comment>export file&apos;s name</comment>
         <translation>Info dispositivo</translation>
     </message>
     <message>
@@ -1108,11 +1110,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>Alimentazione</translation>
+        <translation type="vanished">Alimentazione</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>Nessuna info sull&apos;alimentazione</translation>
+        <translation type="vanished">Nessuna info sull&apos;alimentazione</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1173,6 +1175,14 @@
     <message>
         <source>SBDS Chemistry</source>
         <translation>Chimica SBDS</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No battery info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1911,51 +1921,51 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
     <message>
         <source>CPU implementer</source>
-        <translation type="unfinished"/>
+        <translation>CPU implementer</translation>
     </message>
     <message>
         <source>CPU architecture</source>
-        <translation type="unfinished"/>
+        <translation>Architettura CPU</translation>
     </message>
     <message>
         <source>CPU variant</source>
-        <translation type="unfinished"/>
+        <translation>Variante CPU</translation>
     </message>
     <message>
         <source>CPU part</source>
-        <translation type="unfinished"/>
+        <translation>Parte CPU</translation>
     </message>
     <message>
         <source>CPU revision</source>
-        <translation type="unfinished"/>
+        <translation>Revisione CPU</translation>
     </message>
     <message>
         <source>GDDR capacity</source>
-        <translation type="unfinished"/>
+        <translation>Capacità GDDR</translation>
     </message>
     <message>
         <source>GPU vendor</source>
-        <translation type="unfinished"/>
+        <translation>Marca CPU</translation>
     </message>
     <message>
         <source>GPU type</source>
-        <translation type="unfinished"/>
+        <translation>Tipo CPU</translation>
     </message>
     <message>
         <source>EGL version</source>
-        <translation type="unfinished"/>
+        <translation>Versione EGL</translation>
     </message>
     <message>
         <source>EGL client APIs</source>
-        <translation type="unfinished"/>
+        <translation>API Client EGL</translation>
     </message>
     <message>
         <source>GL version</source>
-        <translation type="unfinished"/>
+        <translation>Versione GL</translation>
     </message>
     <message>
         <source>GLSL version</source>
-        <translation type="unfinished"/>
+        <translation>Versione GLSL</translation>
     </message>
     <message>
         <source>Array Handle</source>
@@ -1979,7 +1989,7 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
     <message>
         <source>Part Number</source>
-        <translation type="unfinished"/>
+        <translation>Numero componente</translation>
     </message>
     <message>
         <source>Rank</source>
@@ -1987,11 +1997,11 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
     <message>
         <source>Memory Technology</source>
-        <translation type="unfinished"/>
+        <translation>Tecnologia della memoria</translation>
     </message>
     <message>
         <source>Memory Operating Mode Capability</source>
-        <translation type="unfinished"/>
+        <translation>Capacità modalità operativa della memoria</translation>
     </message>
     <message>
         <source>Firmware Version</source>
@@ -1999,27 +2009,27 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
     <message>
         <source>Module Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ID modulo fabbricante</translation>
     </message>
     <message>
         <source>Module Product ID</source>
-        <translation type="unfinished"/>
+        <translation>ID Prodotti del modulo</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ID produttore controller sottosistema memoria</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation type="unfinished"/>
+        <translation>ID prodotto controller sottosistema memoria</translation>
     </message>
     <message>
         <source>Non-Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Dimensione Non-Volatile</translation>
     </message>
     <message>
         <source>Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Dimensione Volatile</translation>
     </message>
     <message>
         <source>Cache Size</source>
@@ -2027,11 +2037,59 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
     <message>
         <source>Logical Size</source>
-        <translation type="unfinished"/>
+        <translation>Dimensione logica</translation>
     </message>
     <message>
         <source>network</source>
-        <translation type="unfinished"/>
+        <translation>rete</translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>Modello</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation>Marca</translation>
+    </message>
+    <message>
+        <source>SMBIOS Version</source>
+        <translation>Versione SMBIOS</translation>
+    </message>
+    <message>
+        <source>Language Description Format</source>
+        <translation>Formato linguaggi supportato</translation>
+    </message>
+    <message>
+        <source>Installable Languages</source>
+        <translation>Linguaggi installabili</translation>
+    </message>
+    <message>
+        <source>Currently Installed Language</source>
+        <translation>Linguaggi attualmente installati</translation>
+    </message>
+    <message>
+        <source>Powered</source>
+        <translation>Alimentato</translation>
+    </message>
+    <message>
+        <source>Discoverable</source>
+        <translation>Identificabile</translation>
+    </message>
+    <message>
+        <source>Pairable</source>
+        <translation>Associabile</translation>
+    </message>
+    <message>
+        <source>Modalias</source>
+        <translation>Modalias</translation>
+    </message>
+    <message>
+        <source>Discovering</source>
+        <translation>Mostra</translation>
+    </message>
+    <message>
+        <source>status</source>
+        <translation>stato</translation>
     </message>
 </context>
 <context>

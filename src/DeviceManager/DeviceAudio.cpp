@@ -77,6 +77,12 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+void DeviceAudio::setInfoFromCatAudio(const QMap<QString, QString> &mapInfo)
+{
+    setAttribute(mapInfo, "Name", m_Name);
+    loadOtherDeviceInfo(mapInfo);
+}
+
 bool DeviceAudio::setAudioChipFromDmesg(const QString &info)
 {
     m_Chip = info;
@@ -153,4 +159,9 @@ void DeviceAudio::initFilterKey()
     addFilterKey(QObject::tr("PROP"));
     addFilterKey(QObject::tr("EV"));
     addFilterKey(QObject::tr("KEY"));
+
+    addFilterKey(QObject::tr("Model"));
+    addFilterKey(QObject::tr("Vendor"));
+    addFilterKey(QObject::tr("Version"));
+    addFilterKey(QObject::tr("Bus"));
 }

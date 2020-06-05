@@ -115,6 +115,9 @@ void GenerateTask::run()
     default:
         break;
     }
+
+    delete generator;
+    generator = nullptr;
 }
 
 
@@ -220,6 +223,7 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList)
     cmdList.append({ "cat_os_release",       "cat /etc/os-release",     "cat_os_release.txt",     tr("Loading Network Adapter Info...")});
     cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
     cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "cat_devices.txt",     ""});
+    cmdList.append({ "cat_audio",            "cat /proc/asound/card0/codec#0", "cat_audio.txt",     ""});
     m_AllCmdNum = cmdList.size();
 }
 

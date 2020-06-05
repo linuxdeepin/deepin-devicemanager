@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ca" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ca">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -642,7 +644,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file's name</comment>
+        <comment>export file&apos;s name</comment>
         <translation>Informació del dispositiu</translation>
     </message>
     <message>
@@ -1108,11 +1110,11 @@
     <name>PowerWidget</name>
     <message>
         <source>Power</source>
-        <translation>Energia</translation>
+        <translation type="vanished">Energia</translation>
     </message>
     <message>
         <source>No power info</source>
-        <translation>No hi ha informació d&apos;energia.</translation>
+        <translation type="vanished">No hi ha informació d&apos;energia.</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1173,6 +1175,14 @@
     <message>
         <source>SBDS Chemistry</source>
         <translation>Química d&apos;SBDS</translation>
+    </message>
+    <message>
+        <source>Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No battery info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2031,6 +2041,54 @@
     <message>
         <source>network</source>
         <translation>xarxa</translation>
+    </message>
+    <message>
+        <source>Model</source>
+        <translation>Model</translation>
+    </message>
+    <message>
+        <source>Vendor</source>
+        <translation>Proveïdor</translation>
+    </message>
+    <message>
+        <source>SMBIOS Version</source>
+        <translation>Versió d&apos;SMBIOS</translation>
+    </message>
+    <message>
+        <source>Language Description Format</source>
+        <translation>Format de la descripció de la llengua</translation>
+    </message>
+    <message>
+        <source>Installable Languages</source>
+        <translation>Llengües instal·lables</translation>
+    </message>
+    <message>
+        <source>Currently Installed Language</source>
+        <translation>Llengua instal·lada actualment</translation>
+    </message>
+    <message>
+        <source>Powered</source>
+        <translation>Amb energia</translation>
+    </message>
+    <message>
+        <source>Discoverable</source>
+        <translation>Descobrible</translation>
+    </message>
+    <message>
+        <source>Pairable</source>
+        <translation>Aparellable</translation>
+    </message>
+    <message>
+        <source>Modalias</source>
+        <translation>Modalias</translation>
+    </message>
+    <message>
+        <source>Discovering</source>
+        <translation>Es descobreix</translation>
+    </message>
+    <message>
+        <source>status</source>
+        <translation>estat</translation>
     </message>
 </context>
 <context>

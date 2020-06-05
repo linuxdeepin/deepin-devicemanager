@@ -1,3 +1,11 @@
+
+/**
+ * @brief: A class used to describe audio devices, an object of DeviceAudio is an audio device
+ * @author: Jun.Liu  liujuna@uniontech.com
+ * @maintainer : XiaoMei.Ji  jixiaomei@uniontech.com
+ * @date: 2020.5
+*/
+
 #ifndef DEVICEAUDIO_H
 #define DEVICEAUDIO_H
 #include"DeviceInfo.h"
@@ -16,6 +24,9 @@ public:
 
     /**@brief:设置从cat /proc/bus/input/devices里面获取的信息*/
     bool setInfoFromCatDevices(const QMap<QString, QString> &mapInfo);
+
+    /**@brief:设置从cat /proc/asound/card0/codec#0里面获取的信息 , KLU专用*/
+    void setInfoFromCatAudio(const QMap<QString, QString> &mapInfo);
 
     bool setAudioChipFromDmesg(const QString &info);
 

@@ -78,6 +78,8 @@ protected:
     void setSizeLimits();
     void saveSettings();
     void loadSettings();
+    /**@brief:获取计算机架构字符串*/
+    QString getArchString();
 private:
     DeviceListView *leftDeviceView_ = nullptr;
     Dtk::Widget::DStackedWidget *rightDeviceInfoWidget_ = nullptr;

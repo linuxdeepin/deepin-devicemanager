@@ -106,7 +106,7 @@ void AudiodeviceWidget::addDeviceDetail(const DeviceAudio &device, bool withTitl
 void AudiodeviceWidget::setOverView(const QList<DeviceAudio> &devices)
 {
     foreach (const DeviceAudio &device, devices) {
-        overviewInfo_.value += QString("%1 (%2)/").arg(device.name()).arg(device.model());
+        overviewInfo_.value += QString("%1 /").arg(device.name());
     }
     overviewInfo_.value.replace(QRegExp("/$"), "");
 }

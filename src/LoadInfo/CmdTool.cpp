@@ -50,6 +50,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
         loadCatInputDeviceInfo(key, cmd, debugFile);
     }  else if (key == "gpuinfo") {
         loadGpuInfo(key, cmd, debugFile);
+    }  else if (key == "cat_audio") {
+        loadCatAudioInfo(key, cmd, debugFile);
     } else {
         loadCatInfo(key, cmd, debugFile);
     }
@@ -579,6 +581,24 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, con
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromInput(item, mapInfo, "=");
+        addMapInfo(key, mapInfo);
+    }
+}
+
+void CmdTool::loadCatAudioInfo(const QString &key, const QString &cmd, const QString &debugfile)
+{
+    QString deviceInfo;
+    if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
+        return;
+    }
+    QStringList items = deviceInfo.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty()) {
+            continue;
+        }
+
+        QMap<QString, QString> mapInfo;
+        getMapInfoFromCmd(item, mapInfo, ":");
         addMapInfo(key, mapInfo);
     }
 }

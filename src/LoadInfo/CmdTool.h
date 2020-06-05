@@ -37,8 +37,10 @@ private:
     void loadUpowerInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadBiosInfoFromLspci(QString &chipsetFamliy);
     void loadCatInputDeviceInfo(const QString &key, const QString &cmd, const QString &debugfile);
+    void loadCatAudioInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadGpuInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void getSMBIOSVersion(const QString &info, QString &version);
+
 private:
     /**
      * @brief:将通过命令获取的信息，转化为map形式

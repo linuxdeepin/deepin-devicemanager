@@ -167,7 +167,7 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 //    setAttribute(mapInfo,"CPU(s)",m_LogicalCPUNum);
 
     setAttribute(mapInfo, "capacity", m_Frequency, false);
-    setAttribute(mapInfo, "capacity", m_CurFrequency);
+    setAttribute(mapInfo, "capacity", m_CurFrequency, false);
 
     // 联想FT的环境没有capacity字段，但是有size字段
     setAttribute(mapInfo, "size", m_Frequency, false);
@@ -179,6 +179,7 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    setAttribute(mapInfo, "Current Speed", m_CurFrequency);
 //    setAttribute(mapInfo,"Thread(s) per core",m_ThreadNum);
 //    setAttribute(mapInfo,"BogoMIPS",m_BogoMIPS);
 //    setAttribute(mapInfo,"Architecture",m_Architecture);
