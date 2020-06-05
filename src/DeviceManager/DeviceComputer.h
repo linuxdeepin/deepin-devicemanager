@@ -21,6 +21,9 @@ public:
     void setName(const QString &value);
     void setType(const QString &value);
 
+    void setVendor(const QString &dm1Vendor, const QString &dm2Vendor);
+    void setName(const QString &dm1Name, const QString &dm2Name, const QString &dm1Family, const QString &dm1Version);
+
 protected:
     void initFilterKey() override;
 
