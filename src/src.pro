@@ -57,7 +57,6 @@ CONFIG(debug, debug|release) {
 
 SOURCES += \
     deviceattributedefine.cpp \
-    edidparser.cpp \
     main.cpp \
     mainwindow.cpp \
     deviceinfoparser.cpp \

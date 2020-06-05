@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // 获取计算机架构信息,x86 arm mips
     QString arch = getArchString();
+    arch = "KLU";
     DeviceFactory::setGeneratorKey(arch);
 
     DeviceManager::instance();
