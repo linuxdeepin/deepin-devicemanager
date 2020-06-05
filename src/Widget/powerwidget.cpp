@@ -39,7 +39,7 @@ void PowerWidget::initWidgetEx()
     const QList<DevicePower> &devices = DeviceManager::instance()->getPowerDevices();
     int deviceNum = devices.size();
     if ( deviceNum < 1 ) {
-        setCentralInfo(tr("No battery info"));
+        setCentralInfo(tr("No battery found"));
         return;
     }
 

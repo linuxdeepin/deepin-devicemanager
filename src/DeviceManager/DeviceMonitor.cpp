@@ -292,7 +292,7 @@ void DeviceMonitor::caculateScreenSize()
 
         double inch = std::sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54)) / 10.0;
 //        m_ScreenSize = QString("%1英寸(%2mm X %3mm)").arg(QString::number(inch, 'f', 1)).arg(m_Width).arg(m_Height);
-        m_ScreenSize = QString("%1%2(%3mm X %4mm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
     }
 }
 
@@ -319,5 +319,5 @@ void DeviceMonitor::caculateScreenSize(const QString &edid)
     if (width <= 0)return;
     double inch = std::sqrt(height * height + width * width) / 2.54;
 //    m_ScreenSize = QString("%1英寸(%2cm X %3cm)").arg(QString::number(inch, 'f', 1)).arg(width).arg(height);
-    m_ScreenSize = QString("%1%2(%3cm X %4cm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(width).arg(height);
+    m_ScreenSize = QString("%1 %2(%3cm X %4cm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(width).arg(height);
 }

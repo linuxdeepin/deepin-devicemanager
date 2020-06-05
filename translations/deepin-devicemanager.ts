@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="en">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="en" version="2.1">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -644,7 +642,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Device Info</translation>
     </message>
     <message>
@@ -1178,11 +1176,11 @@
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Battery</translation>
     </message>
     <message>
-        <source>No battery info</source>
-        <translation type="unfinished"></translation>
+        <source>No battery found</source>
+        <translation>No battery found</translation>
     </message>
 </context>
 <context>
@@ -2044,51 +2042,51 @@
     </message>
     <message>
         <source>Model</source>
-        <translation type="unfinished">Model</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <source>Vendor</source>
-        <translation type="unfinished">Vendor</translation>
+        <translation>Vendor</translation>
     </message>
     <message>
         <source>SMBIOS Version</source>
-        <translation type="unfinished"></translation>
+        <translation>SMBIOS Version</translation>
     </message>
     <message>
         <source>Language Description Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Language Description Format</translation>
     </message>
     <message>
         <source>Installable Languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Installable Languages</translation>
     </message>
     <message>
         <source>Currently Installed Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Currently Installed Language</translation>
     </message>
     <message>
         <source>Powered</source>
-        <translation type="unfinished"></translation>
+        <translation>Powered</translation>
     </message>
     <message>
         <source>Discoverable</source>
-        <translation type="unfinished"></translation>
+        <translation>Discoverable</translation>
     </message>
     <message>
         <source>Pairable</source>
-        <translation type="unfinished"></translation>
+        <translation>Pairable</translation>
     </message>
     <message>
         <source>Modalias</source>
-        <translation type="unfinished"></translation>
+        <translation>Modalias</translation>
     </message>
     <message>
         <source>Discovering</source>
-        <translation type="unfinished"></translation>
+        <translation>Discovering</translation>
     </message>
     <message>
         <source>status</source>
-        <translation type="unfinished"></translation>
+        <translation>status</translation>
     </message>
 </context>
 <context>

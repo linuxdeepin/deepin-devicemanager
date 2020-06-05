@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.1">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -644,7 +642,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Informações do Dispositivo</translation>
     </message>
     <message>
@@ -1178,11 +1176,11 @@
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Bateria</translation>
     </message>
     <message>
-        <source>No battery info</source>
-        <translation type="unfinished"></translation>
+        <source>No battery found</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt" version="2.1">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -644,7 +642,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Info dispositivo</translation>
     </message>
     <message>
@@ -806,11 +804,11 @@
     <name>MotherboardWidget</name>
     <message>
         <source>Motherboard</source>
-        <translation>Placa-mãe</translation>
+        <translation>Motherboard</translation>
     </message>
     <message>
         <source>No motherboard found</source>
-        <translation>Nenhuma placa-mãe encontrada</translation>
+        <translation>Nenhuma motherboard encontrada</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1114,7 +1112,7 @@
     </message>
     <message>
         <source>No power info</source>
-        <translation type="vanished">Nenhuma informação de energia</translation>
+        <translation type="vanished">Sem informações de energia</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1178,11 +1176,11 @@
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Bateria</translation>
     </message>
     <message>
-        <source>No battery info</source>
-        <translation type="unfinished"></translation>
+        <source>No battery found</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1932,7 +1930,7 @@
     </message>
     <message>
         <source>CPU part</source>
-        <translation>Peça da CPU</translation>
+        <translation>Peça de CPU</translation>
     </message>
     <message>
         <source>CPU revision</source>
@@ -1976,7 +1974,7 @@
     </message>
     <message>
         <source>Set</source>
-        <translation>Set</translation>
+        <translation>Conjunto</translation>
     </message>
     <message>
         <source>Bank Locator</source>

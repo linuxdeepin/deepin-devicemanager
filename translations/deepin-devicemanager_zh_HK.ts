@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_HK">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_HK" version="2.1">
 <context>
     <name>AudiodeviceWidget</name>
     <message>
@@ -644,7 +642,7 @@
     </message>
     <message>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>設備訊息</translation>
     </message>
     <message>
@@ -1178,11 +1176,11 @@
     </message>
     <message>
         <source>Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>電池</translation>
     </message>
     <message>
-        <source>No battery info</source>
-        <translation type="unfinished"></translation>
+        <source>No battery found</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2056,7 +2054,7 @@
     </message>
     <message>
         <source>Language Description Format</source>
-        <translation type="unfinished"></translation>
+        <translation>語言描述格式</translation>
     </message>
     <message>
         <source>Installable Languages</source>
@@ -2088,7 +2086,7 @@
     </message>
     <message>
         <source>status</source>
-        <translation type="unfinished"></translation>
+        <translation>狀態</translation>
     </message>
 </context>
 <context>
