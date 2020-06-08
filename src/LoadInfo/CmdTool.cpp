@@ -4,6 +4,7 @@
 #include<QDebug>
 #include<QDateTime>
 #include<QMutex>
+#include "EDIDParser.h"
 extern void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap);
 extern int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest);
 
@@ -52,6 +53,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
         loadGpuInfo(key, cmd, debugFile);
     }  else if (key == "cat_audio") {
         loadCatAudioInfo(key, cmd, debugFile);
+    }   else if (key == "EDID_HDMI" || key == "EDID_VGA") {
+        loadEdidInfo(key, cmd, debugFile);
     } else {
         loadCatInfo(key, cmd, debugFile);
     }
@@ -600,6 +603,40 @@ void CmdTool::loadCatAudioInfo(const QString &key, const QString &cmd, const QSt
         QMap<QString, QString> mapInfo;
         getMapInfoFromCmd(item, mapInfo, ":");
         addMapInfo(key, mapInfo);
+    }
+}
+
+void CmdTool::loadEdidInfo(const QString &key, const QString &cmd, const QString &debugfile)
+{
+    QString deviceInfo;
+    if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
+        return;
+    }
+
+    QString edid;
+    QStringList lines = deviceInfo.split("\n");
+    foreach (const QString &line, lines) {
+        QStringList words = line.trimmed().split(" ");
+        if (words.size() != 9) {
+            continue;
+        }
+        QString l;
+        QStringList::const_iterator it = words.begin();
+        ++it;
+        for (; it != words.end(); ++it) {
+            l.append(*it);
+        }
+        l.append("\n");
+        edid.append(l);
+    }
+
+    QStringList liness = edid.split("\n");
+    if (liness.size() > 3) {
+        EDIDParser edidParser;
+        QString errorMsg;
+        edidParser.setEdid(edid, errorMsg);
+
+        QMap<QString, QString> mapInfo;
     }
 }
 

@@ -122,7 +122,7 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("Contained Object Handles"));
 
     addFilterKey(QObject::tr("Product Name"));
-    addFilterKey(QObject::tr("Version"));
+//    addFilterKey(QObject::tr("Version"));
     addFilterKey(QObject::tr("Serial Number"));
     addFilterKey(QObject::tr("UUID"));
     addFilterKey(QObject::tr("Wake-up Type"));

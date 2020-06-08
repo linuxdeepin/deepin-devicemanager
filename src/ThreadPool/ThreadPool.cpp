@@ -178,7 +178,16 @@ void ThreadPool::generateInfo()
     getTypeList(typeList);
     QList<DeviceType>::iterator it = typeList.begin();
     for (; it != typeList.end(); ++it) {
-        start(new GenerateTask(*it, this));
+        if (*it == DT_Others) {  // 这里是为了确保所有设备执行完毕后，生成其它设备
+            while (1) {
+                if (m_FinishedGenerator == m_AllTypeNum - 1) {
+                    start(new GenerateTask(*it, this));
+                    break;
+                }
+            }
+        } else {
+            start(new GenerateTask(*it, this));
+        }
     }
 }
 
@@ -224,6 +233,8 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList)
     cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
     cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "cat_devices.txt",     ""});
     cmdList.append({ "cat_audio",            "cat /proc/asound/card0/codec#0", "cat_audio.txt",     ""});
+    cmdList.append({ "EDID_HDMI",            "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid", "EDID_HDMI.txt",     ""});
+    cmdList.append({ "EDID_VGA",             "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid", "EDID_VGA.txt",     ""});
     m_AllCmdNum = cmdList.size();
 }
 

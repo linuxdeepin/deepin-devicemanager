@@ -306,9 +306,9 @@ void DeviceMonitor::caculateScreenSize(const QString &edid)
     QString width_field = secondItem.mid(10, 2);
     QString height_field = secondItem.mid(12, 2);
 
-    int width = 0;
+    double width = 0;
     bool trWidthOk = false;
-    int height = 0;
+    double height = 0;
     bool trHeightOk = false;
     width = width_field.toInt(&trWidthOk, 16);
     height = height_field.toInt(&trHeightOk, 16);
@@ -319,5 +319,5 @@ void DeviceMonitor::caculateScreenSize(const QString &edid)
     if (width <= 0)return;
     double inch = std::sqrt(height * height + width * width) / 2.54;
 //    m_ScreenSize = QString("%1英寸(%2cm X %3cm)").arg(QString::number(inch, 'f', 1)).arg(width).arg(height);
-    m_ScreenSize = QString("%1 %2(%3cm X %4cm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(width).arg(height);
+    m_ScreenSize = QString("%1 %2(%3cm X %4cm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(width).arg(height);
 }

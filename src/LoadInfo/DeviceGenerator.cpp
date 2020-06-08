@@ -266,10 +266,7 @@ void DeviceGenerator::getBiosInfo()
         if ((*iter).size() < 2) {
             continue;
         }
-
         DeviceManager::instance()->setLanguageInfo(*iter);
-
-
     }
 
 }
