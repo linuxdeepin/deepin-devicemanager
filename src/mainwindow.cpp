@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // 获取计算机架构信息,x86 arm mips
     QString arch = getArchString();
-//    arch = "PanGuV";
+    qDebug() << arch;
     DeviceFactory::setGeneratorKey(arch);
 
     DeviceManager::instance();
@@ -394,7 +394,7 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
     }
 
     if (selectFilter == "Doc (*.docx)") {
-        Docx::Document doc(":/thirdlib/docx/doc_template/template.docx");
+        Docx::Document doc(":/../../3rdparty/docx/doc_template/template.docx");
 
         for (int i = 0; i < leftDeviceView_->count(); ++i) {
             QString device = leftDeviceView_->indexString(i);
@@ -585,6 +585,13 @@ QString MainWindow::getArchString()
     }
     inputDeviceFile.close();
 #endif
+
+    if (struction == "aarch64") {
+        QString hw = DeviceInfoParser::Instance().loadGeneratorKey();
+        if (!hw.isEmpty()) {
+            struction = hw;
+        }
+    }
 
     return struction;
 }

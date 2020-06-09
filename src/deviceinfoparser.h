@@ -47,19 +47,10 @@ public:
 
 
 private:
-
-    /**
-     * @brief:获取主板信息，获取主板信息的命令有
-     *      sudo dmidecode -t 0  // BIOS
-     *      lspci | grep ISA
-     * @brief[loadBiosInfoFromDmidecode]:从 sudo dmidecode -t 0 中获取信息
-     * @brief[loadBiosInfoFromLspci]:从 lspci 中获取信息,用于获取芯片组，但是龙芯的不是在这获取
-     * @brief[loadBiosInfoFromCatBoardinfo]:从 cat /proc/boardinfo 中获取信息  这个仅仅用龙芯机器
-     */
-    void loadBiosInfoFromLspci(QString &chipsetFamliy);
     bool getDeviceInfo(const QString &command, QString &deviceInfo, const QString &debugFile = QString(""));
 
 public:
+    QString loadGeneratorKey();
     bool getRootPassword();
     bool executeProcess(const QString &cmd);
     bool runCmd(const QString &cmd);

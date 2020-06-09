@@ -76,7 +76,7 @@ CT_Picture::~CT_Picture()
 
 
 CT_Inline::CT_Inline(QDomDocument *dom, double cx, double cy, const QString &shapeId, CT_Picture *pic)
-    : m_dom(dom), m_pic(pic)
+    :  m_pic(pic), m_dom(dom)
 {
     createInlineXml(cx, cy, shapeId);
 }

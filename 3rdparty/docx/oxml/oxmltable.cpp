@@ -41,46 +41,46 @@ void CT_Tbl::setStyle(const QString &style)
         QDomElement styleEle = m_dom->createElement(strstyle);
         QDomElement tblBorders = m_dom->createElement("w:tblBorders");
         QDomElement top = m_dom->createElement("w:top");
-        top.setAttribute("w:val","single");
-        top.setAttribute("w:color","auto");
-        top.setAttribute("w:sz","4");
-        top.setAttribute("w:space","0");
+        top.setAttribute("w:val", "single");
+        top.setAttribute("w:color", "auto");
+        top.setAttribute("w:sz", "4");
+        top.setAttribute("w:space", "0");
         tblBorders.appendChild(top);
 
         QDomElement left = m_dom->createElement("w:left");
 
-        left.setAttribute("w:val","single");
-        left.setAttribute("w:color","auto");
-        left.setAttribute("w:sz","4");
-        left.setAttribute("w:space","0");
+        left.setAttribute("w:val", "single");
+        left.setAttribute("w:color", "auto");
+        left.setAttribute("w:sz", "4");
+        left.setAttribute("w:space", "0");
         tblBorders.appendChild(left);
 
         QDomElement bottom = m_dom->createElement("w:bottom");
-        bottom.setAttribute("w:val","single");
-        bottom.setAttribute("w:color","auto");
-        bottom.setAttribute("w:sz","4");
-        bottom.setAttribute("w:space","0");
+        bottom.setAttribute("w:val", "single");
+        bottom.setAttribute("w:color", "auto");
+        bottom.setAttribute("w:sz", "4");
+        bottom.setAttribute("w:space", "0");
         tblBorders.appendChild(bottom);
 
         QDomElement right = m_dom->createElement("w:right");
-        right.setAttribute("w:val","single");
-        right.setAttribute("w:color","auto");
-        right.setAttribute("w:sz","4");
-        right.setAttribute("w:space","0");
+        right.setAttribute("w:val", "single");
+        right.setAttribute("w:color", "auto");
+        right.setAttribute("w:sz", "4");
+        right.setAttribute("w:space", "0");
         tblBorders.appendChild(right);
 
         QDomElement insideH = m_dom->createElement("w:insideH");
-        insideH.setAttribute("w:val","single");
-        insideH.setAttribute("w:color","auto");
-        insideH.setAttribute("w:sz","4");
-        insideH.setAttribute("w:space","0");
+        insideH.setAttribute("w:val", "single");
+        insideH.setAttribute("w:color", "auto");
+        insideH.setAttribute("w:sz", "4");
+        insideH.setAttribute("w:space", "0");
         tblBorders.appendChild(insideH);
 
         QDomElement insideV = m_dom->createElement("w:insideV");
-        insideV.setAttribute("w:val","single");
-        insideV.setAttribute("w:color","auto");
-        insideV.setAttribute("w:sz","4");
-        insideV.setAttribute("w:space","0");
+        insideV.setAttribute("w:val", "single");
+        insideV.setAttribute("w:color", "auto");
+        insideV.setAttribute("w:sz", "4");
+        insideV.setAttribute("w:space", "0");
         tblBorders.appendChild(insideV);
         styleEle.appendChild(tblBorders);
 
@@ -102,7 +102,7 @@ CT_Tbl::~CT_Tbl()
 }
 
 CT_TblGrid::CT_TblGrid(QDomDocument *dom, const QDomElement &ele)
-    :  m_element(ele),m_dom(dom)
+    :  m_element(ele), m_dom(dom)
 {
     cols = m_element.childNodes().count();
 }
@@ -140,7 +140,7 @@ const QString strJc = QStringLiteral("w:jc");
  * \param ele
  */
 CT_TblPr::CT_TblPr(QDomDocument *dom, const QDomElement &ele)
-    : m_dom(dom), m_element(ele)
+    : m_element(ele), m_dom(dom)
 {
     initAlignsMap();
     loadExistStyle();
@@ -224,7 +224,7 @@ CT_Tc::CT_Tc(Cell *cell, const QDomElement &ele)
  * \brief 合并单元格
  * \param other
  */
-CT_Tc * CT_Tc::merge(QSharedPointer<CT_Tc> other)
+CT_Tc *CT_Tc::merge(QSharedPointer<CT_Tc> other)
 {
     int top, left, height, width;
     spanDimensions(other, top, left, height, width);
@@ -304,8 +304,8 @@ void CT_Tc::setGridSpan(int span)
 {
     checktcPr();
     if (m_gridSpan.isNull()) {
-       m_gridSpan = m_cell->m_dom->createElement(QStringLiteral("w:gridSpan"));
-       m_tcPr.appendChild(m_gridSpan);
+        m_gridSpan = m_cell->m_dom->createElement(QStringLiteral("w:gridSpan"));
+        m_tcPr.appendChild(m_gridSpan);
     }
     m_gridSpan.setAttribute(QStringLiteral("w:val"), QString::number(span));
 
@@ -458,12 +458,12 @@ Cell *CT_Tc::tcAbove() const
 Cell *CT_Tc::tcBelow() const
 {
     Row *row = trBelow();
-    int rowIndex = row->rowIndex();
+    //int rowIndex = row->rowIndex();
     if (row) {
         int index = m_cell->cellIndex();
         Cell *cell = row->cells().at(index);
         CT_Tc *tc = cell->m_tc.data();
-        rowIndex = tc->m_cell->rowIndex();        
+        //rowIndex = tc->m_cell->rowIndex();
         if (tc->m_ele == m_ele)
             return tc->tcBelow();
 
@@ -522,7 +522,7 @@ void CT_Tc::growTo(int width, int height, CT_Tc *top_tc)
 
         int belowRowIndex = belowCell->rowIndex();
         int currentRowIndex = this->m_cell->rowIndex();
-        int calculateIndex = belowRowIndex - currentRowIndex -1;
+        int calculateIndex = belowRowIndex - currentRowIndex - 1;
         if (calculateIndex > 0)
             height -= calculateIndex;
         belowCell->m_tc->growTo(width, height - 1, top_tc);
@@ -557,7 +557,7 @@ QString CT_Tc::vMergeVal(int height, CT_Tc *tc)
  */
 void CT_Tc::spanToWidth(int grid_width, CT_Tc *top_tc, const QString &vmerge)
 {
-    moveContentTo(top_tc);    
+    moveContentTo(top_tc);
     while (this->gridSpan() < grid_width) {
         this->swallowNextTc(grid_width, top_tc);
     }
@@ -631,7 +631,7 @@ void CT_Tc::swallowNextTc(int grid_width, CT_Tc *top_tc)
 
 void CT_Tc::addWidthOf(CT_Tc *other_tc)
 {
-    if (this->width() > 0 && other_tc->width() >0)
+    if (this->width() > 0 && other_tc->width() > 0)
         setWidth(this->width() + other_tc->width());
 }
 
@@ -685,7 +685,7 @@ void CT_Tc::copyCt(CT_Tc *otherCell)
     m_tcPr = QDomElement(otherCell->m_tcPr);
     m_vMerge = QDomElement(otherCell->m_vMerge);
     m_tcW = QDomElement(otherCell->m_tcW);
-    m_gridSpan = QDomElement(otherCell->m_gridSpan);    
+    m_gridSpan = QDomElement(otherCell->m_gridSpan);
 }
 
 

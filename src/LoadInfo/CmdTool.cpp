@@ -961,6 +961,7 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
 }
 bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
 {
+//    qint64 begin = QDateTime::currentMSecsSinceEpoch();
     QString key = "devicemanager";
     QString cmd = proxy;
     QProcess process_;
@@ -975,6 +976,8 @@ bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
     bool res = process_.waitForFinished(msecs);
     deviceInfo = process_.readAllStandardOutput();
     int exitCode = process_.exitCode();
+//    qint64 end = QDateTime::currentMSecsSinceEpoch();
+//    qDebug() << cmd << "*********" << (end - begin) / 1000.0;
     if (cmd.startsWith("pkexec deepin-devicemanager-authenticateProxy") && (exitCode == 127 || exitCode == 126)) {
         //dError("Run \'" + cmd + "\' failed: Password Error! " + QString::number(exitCode) + "\n");
         return false;

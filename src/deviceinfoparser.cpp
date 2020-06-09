@@ -78,42 +78,23 @@ DeviceInfoParser::~DeviceInfoParser()
 //setenv("LANGUAGE", "en_US", 1);
 //setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
 
-void DeviceInfoParser::loadBiosInfoFromLspci(QString &chipsetFamliy)
+QString DeviceInfoParser::loadGeneratorKey()
 {
     // 获取设备信息
-    QString command;
+    QString key = "";
     QString deviceInfo;
-    if (!getDeviceInfo(QString("lspci"), deviceInfo, "lspci.txt")) {
-        return;
-    }
-    QStringList lines = deviceInfo.split("\n");
-    foreach (const QString &line, lines) {
-        QStringList words = line.split(" ");
-        if (words.size() < 2) {
-            continue;
-        }
-        if (words[1] == QString("ISA")) {
-            command = QString("lspci -v -s %1").arg(words[0].trimmed());
-        }
+    if (!getDeviceInfo(QString("sudo dmidecode -t 1"), deviceInfo, "dmidecode_1.txt")) {
+        return key;
     }
 
-    if (command.isEmpty()) {
-        return;
+    if (deviceInfo.contains("HUAWEIPGU-WBY0")) {  // pangu
+        key = "PanGu";
+    } else if (deviceInfo.contains("HUAWEI L410 KLVU-WDU0")) { // klu
+        key = "KLU";
+    } else if (deviceInfo.contains("HUAWEI PGUV-WBX0")) { // panguv
+        key = "PanGuV";
     }
-    if (!getDeviceInfo(command, deviceInfo, "")) {
-        return;
-    }
-    lines = deviceInfo.split("\n");
-    foreach (const QString &line, lines) {
-        if (line.contains("Subsystem")) {
-            QStringList words = line.split(": ");
-            if (words.size() == 2) {
-                chipsetFamliy = words[1].trimmed();
-            }
-            break;
-        }
-    }
-
+    return key;
 }
 
 void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap)
