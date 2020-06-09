@@ -34,7 +34,6 @@ DeviceGenerator::~DeviceGenerator()
 void DeviceGenerator::generatorComputerDevice()
 {
     const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
-
     DeviceComputer device;
 
     // home url

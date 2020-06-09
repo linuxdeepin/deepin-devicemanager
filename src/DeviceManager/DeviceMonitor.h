@@ -27,6 +27,9 @@ public:
     /**@brief:华为KLU项目里面的显示屏信息是写死的*/
     void setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo);
 
+    /**@brief:华为PanGuV项目里面的显示屏信息是从edid里面获取的*/
+    void setInfoFromEdid(const QMap<QString, QString> &mapInfo);
+
     // 获取设备属性
     const QString &name()const;
     const QString &vendor()const;

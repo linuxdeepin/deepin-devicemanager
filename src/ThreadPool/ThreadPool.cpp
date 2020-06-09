@@ -1,6 +1,7 @@
 #include "ThreadPool.h"
 #include<QDebug>
 #include<QMutex>
+#include<QDateTime>
 #include <unistd.h>
 #include "deviceinfoparser.h"
 #include "DeviceManager/DeviceManager.h"
@@ -133,7 +134,6 @@ void ThreadPool::finishedCmd(const QString &info, const QMap<QString, QList<QMap
     DeviceManager::instance()->addCmdInfo(cmdInfo);
     m_lock.unlock();
     if (m_FinishedCmd == m_AllCmdNum) {
-        qDebug() << m_FinishedCmd << "****************" << m_AllCmdNum;
         generateInfo();
     } else {
         if (!info.isEmpty())
@@ -179,14 +179,18 @@ void ThreadPool::generateInfo()
     QList<DeviceType>::iterator it = typeList.begin();
     for (; it != typeList.end(); ++it) {
         if (*it == DT_Others) {  // 这里是为了确保所有设备执行完毕后，生成其它设备
-            while (1) {
-                if (m_FinishedGenerator == m_AllTypeNum - 1) {
-                    start(new GenerateTask(*it, this));
-                    break;
-                }
-            }
-        } else {
-            start(new GenerateTask(*it, this));
+            break;
+        }
+        start(new GenerateTask(*it, this));
+    }
+
+    // 这里是为了确保所有设备执行完毕后，生成其它设备
+    qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
+    while (true) {
+        qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
+        if (m_FinishedGenerator == m_AllTypeNum - 1  || curMSecond - beginMSecond > 4000) {
+            start(new GenerateTask(DT_Others, this));
+            break;
         }
     }
 }

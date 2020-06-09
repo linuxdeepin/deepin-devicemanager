@@ -296,79 +296,6 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
     addMapInfo("hciconfig", mapInfo);
 }
 
-//void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap)
-//{
-//    cups_dinfo_t *info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);
-
-//    if (true == cupsCheckDestSupported(CUPS_HTTP_DEFAULT, dest, info, option, nullptr)) {
-//        ipp_attribute_t *finishings = cupsFindDestSupported(CUPS_HTTP_DEFAULT, dest, info, option);
-//        int i, count = ippGetCount(finishings);
-
-//        //std::cout << option << " support" << std::endl;
-//        for (i = 0; i < count; i ++) {
-//            if (option == CUPS_FINISHINGS || option == CUPS_COPIES /*|| option == CUPS_MEDIA */ || \
-//                    option == CUPS_NUMBER_UP || option == CUPS_ORIENTATION || option == CUPS_PRINT_QUALITY) {
-//                if (DeviceInfoMap.contains(option)) {
-//                    DeviceInfoMap[option] += ", ";
-//                    DeviceInfoMap[option] += QString::number(ippGetInteger(finishings, i));
-//                } else {
-//                    DeviceInfoMap[option] = QString::number(ippGetInteger(finishings, i));
-//                }
-
-//                //std::cout << option<<" : "<<ippGetInteger(finishings, i)  << std::endl;
-//            } else {
-//                if (DeviceInfoMap.contains(option)) {
-//                    DeviceInfoMap[option] += ", ";
-//                    DeviceInfoMap[option] += ippGetString(finishings, i, nullptr);
-//                } else {
-//                    DeviceInfoMap[option] = ippGetString(finishings, i, nullptr);
-//                }
-
-//                //std::cout << option<<" : " << ippGetString(finishings, i, nullptr) << std::endl;
-//            }
-//        }
-//    } else {
-//        //std::cout << option << " not supported." << std::endl;
-//    }
-//}
-////获取相关打印机目标字段的信息
-//int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest)
-//{
-//    if (flags & CUPS_DEST_FLAGS_REMOVED) {
-//        return -1;
-//    }
-
-//    QMap<QString, QMap<QString, QString> > &cupsDatabase = *(reinterpret_cast<QMap<QString, QMap<QString, QString> > *>(user_data));
-
-//    if (dest == nullptr) {
-//        return -1;
-//    }
-
-//    QMap<QString, QString> DeviceInfoMap;
-
-//    showDetailedInfo(dest, CUPS_FINISHINGS, DeviceInfoMap);
-//    showDetailedInfo(dest, CUPS_COPIES, DeviceInfoMap);
-//    showDetailedInfo(dest, CUPS_MEDIA, DeviceInfoMap);
-//    showDetailedInfo(dest, CUPS_MEDIA_SOURCE, DeviceInfoMap);
-//    showDetailedInfo(dest, CUPS_MEDIA_TYPE, DeviceInfoMap);
-//    showDetailedInfo(dest, CUPS_NUMBER_UP, DeviceInfoMap);
-//    showDetailedInfo(dest, CUPS_ORIENTATION, DeviceInfoMap);
-//    showDetailedInfo(dest, CUPS_PRINT_COLOR_MODE, DeviceInfoMap);
-//    showDetailedInfo(dest, CUPS_PRINT_QUALITY, DeviceInfoMap);
-//    showDetailedInfo(dest, CUPS_SIDES, DeviceInfoMap);
-
-
-//    //cups_dinfo_t* info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);
-
-//    for (int i = 0; i < dest->num_options; ++i) {
-//        DeviceInfoMap[(dest->options + i)->name] = (dest->options + i)->value;
-//        //std::cout << (dest->options + i)->name <<" : " << (dest->options + i)->value << std::endl;
-//    }
-
-//    cupsDatabase[dest->name] = DeviceInfoMap;
-
-//    return (1);
-//}
 void CmdTool::loadPrinterInfo()
 {
     QMap<QString, QMap<QString, QString> > info;
@@ -637,6 +564,10 @@ void CmdTool::loadEdidInfo(const QString &key, const QString &cmd, const QString
         edidParser.setEdid(edid, errorMsg);
 
         QMap<QString, QString> mapInfo;
+        mapInfo.insert("Vendor", edidParser.vendor());
+        mapInfo.insert("Date", edidParser.releaseDate());
+        mapInfo.insert("Size", edidParser.screenSize());
+        addMapInfo(key, mapInfo);
     }
 }
 
@@ -1011,7 +942,7 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
 {
 #ifdef TEST_DATA_FROM_FILE
     return true;
-#endif
+#else
     if (false == cmd.startsWith("sudo")) {
         return runCmd(cmd, deviceInfo);
     }
@@ -1026,6 +957,7 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
     newCmd += "\"";
     newCmd.remove("sudo");
     return runCmd(newCmd, deviceInfo);
+#endif
 }
 bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
 {

@@ -139,7 +139,7 @@ void EDIDParser::parseScreenSize()
     int width = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt();
     int height = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt();
     double inch = sqrt((width / 2.54) * (width / 2.54) + (height / 2.54) * (height / 2.54));
-    m_ScreenSize = QString("%1英寸\(%2cm * %3cm\)").arg(QString::number(inch, 'f', 1)).arg(width).arg(height);
+    m_ScreenSize = QString("%1英寸(%2cm * %3cm)").arg(QString::number(inch, 'f', 1)).arg(width).arg(height);
 }
 
 QString EDIDParser::binToDec(QString strBin)   //二进制转十进制

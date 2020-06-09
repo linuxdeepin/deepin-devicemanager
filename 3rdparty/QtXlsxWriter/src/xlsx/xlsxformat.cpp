@@ -187,7 +187,7 @@ Format::Format()
    Creates a new format with the same attributes as the \a other format.
  */
 Format::Format(const Format &other)
-    :d(other.d)
+    : d(other.d)
 {
 
 }
@@ -259,7 +259,7 @@ bool Format::isDateTimeFormat() const
         //Custom numFmt, so
         //Gauss from the number string
         return NumFormatParser::isDateTime(numberFormat());
-    } else if (hasProperty(FormatPrivate::P_NumFmt_Id)){
+    } else if (hasProperty(FormatPrivate::P_NumFmt_Id)) {
         //Non-custom numFmt
         int idx = numberFormatIndex();
 
@@ -461,15 +461,15 @@ void Format::setFontName(const QString &name)
  */
 QFont Format::font() const
 {
-   QFont font;
-   font.setFamily(fontName());
-   if (fontSize() > 0)
-       font.setPointSize(fontSize());
-   font.setBold(fontBold());
-   font.setItalic(fontItalic());
-   font.setUnderline(fontUnderline()!=FontUnderlineNone);
-   font.setStrikeOut(fontStrikeOut());
-   return font;
+    QFont font;
+    font.setFamily(fontName());
+    if (fontSize() > 0)
+        font.setPointSize(fontSize());
+    font.setBold(fontBold());
+    font.setItalic(fontItalic());
+    font.setUnderline(fontUnderline() != FontUnderlineNone);
+    font.setStrikeOut(fontStrikeOut());
+    return font;
 }
 
 /*!
@@ -529,13 +529,13 @@ QByteArray Format::fontKey() const
     if (d->font_dirty) {
         QByteArray key;
         QDataStream stream(&key, QIODevice::WriteOnly);
-        for (int i=FormatPrivate::P_Font_STARTID; i<FormatPrivate::P_Font_ENDID; ++i) {
+        for (int i = FormatPrivate::P_Font_STARTID; i < FormatPrivate::P_Font_ENDID; ++i) {
             if (d->properties.contains(i))
                 stream << i << d->properties[i];
         };
 
-        const_cast<Format*>(this)->d->font_key = key;
-        const_cast<Format*>(this)->d->font_dirty = false;
+        const_cast<Format *>(this)->d->font_key = key;
+        const_cast<Format *>(this)->d->font_dirty = false;
     }
 
     return d->font_key;
@@ -550,7 +550,7 @@ bool Format::hasFontData() const
     if (!d)
         return false;
 
-    for (int i=FormatPrivate::P_Font_STARTID; i<FormatPrivate::P_Font_ENDID; ++i) {
+    for (int i = FormatPrivate::P_Font_STARTID; i < FormatPrivate::P_Font_ENDID; ++i) {
         if (hasProperty(i))
             return true;
     }
@@ -571,7 +571,7 @@ Format::HorizontalAlignment Format::horizontalAlignment() const
 void Format::setHorizontalAlignment(HorizontalAlignment align)
 {
     if (hasProperty(FormatPrivate::P_Alignment_Indent)
-            &&(align != AlignHGeneral && align != AlignLeft && align != AlignRight && align != AlignHDistributed)) {
+            && (align != AlignHGeneral && align != AlignLeft && align != AlignRight && align != AlignHDistributed)) {
         clearProperty(FormatPrivate::P_Alignment_Indent);
     }
 
@@ -650,7 +650,7 @@ void Format::setIndent(int indent)
     if (indent && hasProperty(FormatPrivate::P_Alignment_AlignH)) {
         HorizontalAlignment hl = horizontalAlignment();
 
-        if (hl != AlignHGeneral && hl != AlignLeft && hl!= AlignRight && hl!= AlignHJustify) {
+        if (hl != AlignHGeneral && hl != AlignLeft && hl != AlignRight && hl != AlignHJustify) {
             setHorizontalAlignment(AlignLeft);
         }
     }
@@ -691,7 +691,7 @@ bool Format::hasAlignmentData() const
     if (!d)
         return false;
 
-    for (int i=FormatPrivate::P_Alignment_STARTID; i<FormatPrivate::P_Alignment_ENDID; ++i) {
+    for (int i = FormatPrivate::P_Alignment_STARTID; i < FormatPrivate::P_Alignment_ENDID; ++i) {
         if (hasProperty(i))
             return true;
     }
@@ -937,13 +937,13 @@ QByteArray Format::borderKey() const
     if (d->border_dirty) {
         QByteArray key;
         QDataStream stream(&key, QIODevice::WriteOnly);
-        for (int i=FormatPrivate::P_Border_STARTID; i<FormatPrivate::P_Border_ENDID; ++i) {
+        for (int i = FormatPrivate::P_Border_STARTID; i < FormatPrivate::P_Border_ENDID; ++i) {
             if (d->properties.contains(i))
                 stream << i << d->properties[i];
         };
 
-        const_cast<Format*>(this)->d->border_key = key;
-        const_cast<Format*>(this)->d->border_dirty = false;
+        const_cast<Format *>(this)->d->border_key = key;
+        const_cast<Format *>(this)->d->border_dirty = false;
     }
 
     return d->border_key;
@@ -958,7 +958,7 @@ bool Format::hasBorderData() const
     if (!d)
         return false;
 
-    for (int i=FormatPrivate::P_Border_STARTID; i<FormatPrivate::P_Border_ENDID; ++i) {
+    for (int i = FormatPrivate::P_Border_STARTID; i < FormatPrivate::P_Border_ENDID; ++i) {
         if (hasProperty(i))
             return true;
     }
@@ -1057,13 +1057,13 @@ QByteArray Format::fillKey() const
     if (d->fill_dirty) {
         QByteArray key;
         QDataStream stream(&key, QIODevice::WriteOnly);
-        for (int i=FormatPrivate::P_Fill_STARTID; i<FormatPrivate::P_Fill_ENDID; ++i) {
+        for (int i = FormatPrivate::P_Fill_STARTID; i < FormatPrivate::P_Fill_ENDID; ++i) {
             if (d->properties.contains(i))
                 stream << i << d->properties[i];
         };
 
-        const_cast<Format*>(this)->d->fill_key = key;
-        const_cast<Format*>(this)->d->fill_dirty = false;
+        const_cast<Format *>(this)->d->fill_key = key;
+        const_cast<Format *>(this)->d->fill_dirty = false;
     }
 
     return d->fill_key;
@@ -1078,7 +1078,7 @@ bool Format::hasFillData() const
     if (!d)
         return false;
 
-    for (int i=FormatPrivate::P_Fill_STARTID; i<FormatPrivate::P_Fill_ENDID; ++i) {
+    for (int i = FormatPrivate::P_Fill_STARTID; i < FormatPrivate::P_Fill_ENDID; ++i) {
         if (hasProperty(i))
             return true;
     }
@@ -1127,7 +1127,7 @@ bool Format::hasProtectionData() const
         return false;
 
     if (hasProperty(FormatPrivate::P_Protection_Hidden
-            || FormatPrivate::P_Protection_Locked)) {
+                    || FormatPrivate::P_Protection_Locked)) {
         return true;
     }
     return false;
@@ -1147,7 +1147,7 @@ void Format::mergeFormat(const Format &modifier)
     }
 
     QMapIterator<int, QVariant> it(modifier.d->properties);
-    while(it.hasNext()) {
+    while (it.hasNext()) {
         it.next();
         setProperty(it.key(), it.value());
     }
@@ -1188,7 +1188,7 @@ QByteArray Format::formatKey() const
         QMapIterator<int, QVariant> i(d->properties);
         while (i.hasNext()) {
             i.next();
-            stream<<i.key()<<i.value();
+            stream << i.key() << i.value();
         }
 
         d->formatKey = key;

@@ -53,4 +53,8 @@ const int spinnerHeight = 32;
 const int TableViewRowHeight_ = 36;
 #define GenerateTsItem 0
 //#define TEST_DATA_FROM_FILE
-const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/HuaWei/KLU";
+const QString DEVICEINFO_PATH = "/home/liujun/Work/CommonlyUsed/newDeviceinfo/HuaWei/panguV";
+// /home/liujun/Work/CommonlyUsed/newDeviceinfo/HuaWei/KLU
+// /home/liujun/Work/CommonlyUsed/newDeviceinfo/Bug/TwoCpu
+// /home/liujun/Work/CommonlyUsed/newDeviceinfo/Bug/Bug_30698FT
+// /home/liujun/Work/CommonlyUsed/newDeviceinfo/HuaWei/panguV

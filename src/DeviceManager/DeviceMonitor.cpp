@@ -9,7 +9,7 @@ DeviceMonitor::DeviceMonitor()
     , m_AspectRatio(""), m_MainScreen(""), m_CurrentResolution(""), m_SerialNumber(""), m_ProductionWeek(""),
       m_Width(0), m_Height(0)
 {
-
+    initFilterKey();
 }
 
 // 获得显示屏的大小
@@ -94,6 +94,14 @@ void DeviceMonitor::setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Date", m_ProductionWeek);
     // 加载其他属性
     //loadOtherDeviceInfo(mapInfo);
+}
+
+void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
+{
+    m_Name = "Monitor " + mapInfo["Vendor"];
+    setAttribute(mapInfo, "Size", m_ScreenSize);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    loadOtherDeviceInfo(mapInfo);
 }
 
 QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
@@ -203,20 +211,11 @@ const QString &DeviceMonitor::supportResolutions()const
 
 void DeviceMonitor::initFilterKey()
 {
-
+    addFilterKey(QObject::tr("Date"));
 }
 
 bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
 {
-//    // 去掉不用的信息
-//    QString mInfo = info;
-//    mInfo.replace(QRegExp("\\(.*\\)"),"");
-//    QRegExp re(".*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
-//    if(!re.exactMatch(mInfo)){return false;}
-
-//    if(m_Width != re.cap(1).toInt()){return false;}
-//    if(m_Height != re.cap(2).toInt()){return false;}
-
     // 设置用的是哪个接口
     if (info.startsWith("VGA")) {
         m_Interface = "VGA";

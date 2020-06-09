@@ -8,7 +8,7 @@ namespace Docx {
 
 
 Relationship::Relationship(const QString &rId, const QString &reltype, const QString &targetRef, Part *target, const QString &baseURI, bool external)
-    : m_rId(rId),m_targetRef(targetRef), m_reltype(reltype), m_baseURI(baseURI), m_isexternal(external), m_target(target)
+    : m_rId(rId), m_reltype(reltype), m_targetRef(targetRef), m_target(target), m_baseURI(baseURI), m_isexternal(external)
 {
 
 }
@@ -74,7 +74,7 @@ QByteArray Relationships::blob() const
     writer.writeAttribute(QStringLiteral("xmlns"), QStringLiteral("http://schemas.openxmlformats.org/package/2006/relationships"));
 
     QMapIterator<QString, Relationship *> iter(m_rels);
-    while(iter.hasNext()) {
+    while (iter.hasNext()) {
         iter.next();
         Relationship *rel = iter.value();
         writer.writeStartElement(QStringLiteral("Relationship"));
@@ -162,11 +162,12 @@ QString Relationships::nextrId()
     int size = m_rels.count() + 2;
     QList<QString> keys = m_rels.keys();
     QString rId(QStringLiteral("rId1"));
-    for (int i = 1; i< size; i++) {
+    for (int i = 1; i < size; i++) {
         rId = QString("rId%1").arg(i);
         if (!keys.contains(rId))
             return rId;
     }
+    return "";
 }
 
 
