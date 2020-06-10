@@ -30,6 +30,7 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
     if (key == "lshw") {
         loadLshwInfo(cmd, debugFile);
     } else if (key == "lsblk_d") {
+        qDebug() << "key == lsblk_d";
         loadLsblkInfo(cmd, debugFile);
     } else if (key == "xrandr") {
         loadXrandrInfo(cmd, debugFile);
@@ -111,17 +112,27 @@ void CmdTool::loadLshwInfo(const QString &cmd, const QString &debugFile)
 
 void CmdTool::loadLsblkInfo(const QString &cmd, const QString &debugfile)
 {
+    qDebug() << "loadLsblkInfo       1";
     QString deviceInfo;
     if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
         return;
     }
+    qDebug() << "loadLsblkInfo         2";
+
     QStringList lines = deviceInfo.split("\n");
     QMap<QString, QString> mapInfo;
+
+    qDebug() << lines.size();
+
     foreach (QString line, lines) {
+        qDebug() << line;
+
         QStringList words = line.replace(/*QRegExp("[\\s]+")*/" ", " ").split(" ");
         if (words.size() != 2 || words[0] == "NAME") {
             continue;
         }
+        qDebug() << words;
+
         mapInfo.insert(words[0].trimmed(), words[1].trimmed());
 
         //****************

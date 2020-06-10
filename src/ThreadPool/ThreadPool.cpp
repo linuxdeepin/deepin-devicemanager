@@ -27,7 +27,6 @@ void CmdTask::run()
     mp_Parent->finishedCmd(m_Info, cmdInfo);
 }
 
-
 GenerateTask::GenerateTask(DeviceType deviceType, ThreadPool *parent)
     : QObject(parent), m_Type(deviceType), mp_Parent(parent)
 {
