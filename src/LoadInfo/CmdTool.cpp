@@ -126,6 +126,7 @@ void CmdTool::loadLsblkInfo(const QString &cmd, const QString &debugfile)
 
         //****************
         QString smartCmd = QString("sudo smartctl --all /dev/%1").arg(words[0].trimmed());
+        qDebug() << smartCmd;
         loadSmartCtlInfo(smartCmd, words[0].trimmed(), words[0].trimmed() + ".txt");
     }
     addMapInfo("lsblk_d", mapInfo);
@@ -141,6 +142,8 @@ void CmdTool::loadSmartCtlInfo(const QString &cmd, const QString &logicalName, c
     mapInfo["ln"] = logicalName;
     getMapInfoFromSmartctl(mapInfo, deviceInfo);
     addMapInfo("smart", mapInfo);
+
+    qDebug() << mapInfo["ln"] << mapInfo["Total NVM Capacity"];
 }
 
 void CmdTool::loadXrandrInfo(const QString &cmd, const QString &debugfile)

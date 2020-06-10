@@ -402,6 +402,9 @@ void DeviceGenerator::getDiskInfoFromSmartCtl()
         if ((*it).size() < 5) {
             continue;
         }
+
+        qDebug() << "ln: " << (*it)["ln"];
+        qDebug() << "size" << (*it)["Total NVM Capacity"];
         DeviceManager::instance()->setStorageInfoFromSmartctl((*it)["ln"], *it);
     }
 }
