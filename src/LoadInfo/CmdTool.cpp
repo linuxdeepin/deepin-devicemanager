@@ -118,7 +118,7 @@ void CmdTool::loadLsblkInfo(const QString &cmd, const QString &debugfile)
     QStringList lines = deviceInfo.split("\n");
     QMap<QString, QString> mapInfo;
     foreach (QString line, lines) {
-        QStringList words = line.replace(QRegExp("[\\s]+"), " ").split(" ");
+        QStringList words = line.replace(/*QRegExp("[\\s]+")*/" ", " ").split(" ");
         if (words.size() != 2 || words[0] == "NAME") {
             continue;
         }

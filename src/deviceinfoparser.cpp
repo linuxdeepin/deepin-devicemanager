@@ -99,73 +99,73 @@ QString DeviceInfoParser::loadGeneratorKey()
 
 void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap)
 {
-//    cups_dinfo_t *info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);
+    cups_dinfo_t *info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);
 
-//    if (true == cupsCheckDestSupported(CUPS_HTTP_DEFAULT, dest, info, option, nullptr)) {
-//        ipp_attribute_t *finishings = cupsFindDestSupported(CUPS_HTTP_DEFAULT, dest, info, option);
-//        int i, count = ippGetCount(finishings);
+    if (true == cupsCheckDestSupported(CUPS_HTTP_DEFAULT, dest, info, option, nullptr)) {
+        ipp_attribute_t *finishings = cupsFindDestSupported(CUPS_HTTP_DEFAULT, dest, info, option);
+        int i, count = ippGetCount(finishings);
 
-//        //std::cout << option << " support" << std::endl;
-//        for (i = 0; i < count; i ++) {
-//            if (option == CUPS_FINISHINGS || option == CUPS_COPIES /*|| option == CUPS_MEDIA */ || \
-//                    option == CUPS_NUMBER_UP || option == CUPS_ORIENTATION || option == CUPS_PRINT_QUALITY) {
-//                if (DeviceInfoMap.contains(option)) {
-//                    DeviceInfoMap[option] += ", ";
-//                    DeviceInfoMap[option] += QString::number(ippGetInteger(finishings, i));
-//                } else {
-//                    DeviceInfoMap[option] = QString::number(ippGetInteger(finishings, i));
-//                }
+        //std::cout << option << " support" << std::endl;
+        for (i = 0; i < count; i ++) {
+            if (option == CUPS_FINISHINGS || option == CUPS_COPIES /*|| option == CUPS_MEDIA */ || \
+                    option == CUPS_NUMBER_UP || option == CUPS_ORIENTATION || option == CUPS_PRINT_QUALITY) {
+                if (DeviceInfoMap.contains(option)) {
+                    DeviceInfoMap[option] += ", ";
+                    DeviceInfoMap[option] += QString::number(ippGetInteger(finishings, i));
+                } else {
+                    DeviceInfoMap[option] = QString::number(ippGetInteger(finishings, i));
+                }
 
-//                //std::cout << option<<" : "<<ippGetInteger(finishings, i)  << std::endl;
-//            } else {
-//                if (DeviceInfoMap.contains(option)) {
-//                    DeviceInfoMap[option] += ", ";
-//                    DeviceInfoMap[option] += ippGetString(finishings, i, nullptr);
-//                } else {
-//                    DeviceInfoMap[option] = ippGetString(finishings, i, nullptr);
-//                }
-//            }
-//        }
-////        delete finishings;
-//    } else {
-//        //std::cout << option << " not supported." << std::endl;
-//    }
+                //std::cout << option<<" : "<<ippGetInteger(finishings, i)  << std::endl;
+            } else {
+                if (DeviceInfoMap.contains(option)) {
+                    DeviceInfoMap[option] += ", ";
+                    DeviceInfoMap[option] += ippGetString(finishings, i, nullptr);
+                } else {
+                    DeviceInfoMap[option] = ippGetString(finishings, i, nullptr);
+                }
+            }
+        }
+//        delete finishings;
+    } else {
+        //std::cout << option << " not supported." << std::endl;
+    }
 }
 //获取相关打印机目标字段的信息
 int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest)
 {
-    /*
-       if (flags & CUPS_DEST_FLAGS_REMOVED) {
-           return -1;
-       }
 
-       QMap<QString, QMap<QString, QString> > &cupsDatabase = *(reinterpret_cast<QMap<QString, QMap<QString, QString> > *>(user_data));
+    if (flags & CUPS_DEST_FLAGS_REMOVED) {
+        return -1;
+    }
 
-       if (dest == nullptr) {
-           return -1;
-       }
+    QMap<QString, QMap<QString, QString> > &cupsDatabase = *(reinterpret_cast<QMap<QString, QMap<QString, QString> > *>(user_data));
 
-       QMap<QString, QString> DeviceInfoMap;
+    if (dest == nullptr) {
+        return -1;
+    }
 
-       showDetailedInfo(dest, CUPS_FINISHINGS, DeviceInfoMap);
-       showDetailedInfo(dest, CUPS_COPIES, DeviceInfoMap);
-       showDetailedInfo(dest, CUPS_MEDIA, DeviceInfoMap);
-       showDetailedInfo(dest, CUPS_MEDIA_SOURCE, DeviceInfoMap);
-       showDetailedInfo(dest, CUPS_MEDIA_TYPE, DeviceInfoMap);
-       showDetailedInfo(dest, CUPS_NUMBER_UP, DeviceInfoMap);
-       showDetailedInfo(dest, CUPS_ORIENTATION, DeviceInfoMap);
-       showDetailedInfo(dest, CUPS_PRINT_COLOR_MODE, DeviceInfoMap);
-       showDetailedInfo(dest, CUPS_PRINT_QUALITY, DeviceInfoMap);
-       showDetailedInfo(dest, CUPS_SIDES, DeviceInfoMap);
+    QMap<QString, QString> DeviceInfoMap;
+
+    showDetailedInfo(dest, CUPS_FINISHINGS, DeviceInfoMap);
+    showDetailedInfo(dest, CUPS_COPIES, DeviceInfoMap);
+    showDetailedInfo(dest, CUPS_MEDIA, DeviceInfoMap);
+    showDetailedInfo(dest, CUPS_MEDIA_SOURCE, DeviceInfoMap);
+    showDetailedInfo(dest, CUPS_MEDIA_TYPE, DeviceInfoMap);
+    showDetailedInfo(dest, CUPS_NUMBER_UP, DeviceInfoMap);
+    showDetailedInfo(dest, CUPS_ORIENTATION, DeviceInfoMap);
+    showDetailedInfo(dest, CUPS_PRINT_COLOR_MODE, DeviceInfoMap);
+    showDetailedInfo(dest, CUPS_PRINT_QUALITY, DeviceInfoMap);
+    showDetailedInfo(dest, CUPS_SIDES, DeviceInfoMap);
 
 
-       //cups_dinfo_t* info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);
+    //cups_dinfo_t* info = cupsCopyDestInfo(CUPS_HTTP_DEFAULT, dest);
 
-       for (int i = 0; i < dest->num_options; ++i) {
-           DeviceInfoMap[(dest->options + i)->name] = (dest->options + i)->value;
-       }
+    for (int i = 0; i < dest->num_options; ++i) {
+        DeviceInfoMap[(dest->options + i)->name] = (dest->options + i)->value;
+    }
 
-       cupsDatabase[dest->name] = DeviceInfoMap;*/
+    cupsDatabase[dest->name] = DeviceInfoMap;
 
     return (1);
 }
