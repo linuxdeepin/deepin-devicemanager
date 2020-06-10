@@ -1180,7 +1180,7 @@
     </message>
     <message>
         <source>No battery found</source>
-        <translation type="unfinished"/>
+        <translation>Nessuna batteria rilevata</translation>
     </message>
 </context>
 <context>
@@ -2088,6 +2088,10 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     <message>
         <source>status</source>
         <translation>stato</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

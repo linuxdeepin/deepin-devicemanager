@@ -1742,7 +1742,7 @@
     </message>
     <message>
         <source>guid</source>
-        <translation>guid</translation>
+        <translation>全局唯一标识符</translation>
     </message>
     <message>
         <source>Geometry (Logical)</source>
@@ -2087,6 +2087,10 @@
     <message>
         <source>status</source>
         <translation>状态</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>日期</translation>
     </message>
 </context>
 <context>

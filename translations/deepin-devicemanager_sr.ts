@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Chip</source>
-        <translation type="unfinished"/>
+        <translation>Чип</translation>
     </message>
 </context>
 <context>
@@ -1180,7 +1180,7 @@
     </message>
     <message>
         <source>No battery found</source>
-        <translation type="unfinished"/>
+        <translation>Није пронађена батерија</translation>
     </message>
 </context>
 <context>
@@ -1918,51 +1918,51 @@
     </message>
     <message>
         <source>CPU implementer</source>
-        <translation type="unfinished"/>
+        <translation>ЦПЈ реализатор</translation>
     </message>
     <message>
         <source>CPU architecture</source>
-        <translation type="unfinished"/>
+        <translation>ЦПЈ архитектура</translation>
     </message>
     <message>
         <source>CPU variant</source>
-        <translation type="unfinished"/>
+        <translation>ЦПЈ варијанта</translation>
     </message>
     <message>
         <source>CPU part</source>
-        <translation type="unfinished"/>
+        <translation>ЦПЈ део</translation>
     </message>
     <message>
         <source>CPU revision</source>
-        <translation type="unfinished"/>
+        <translation>ЦПЈ ревизија</translation>
     </message>
     <message>
         <source>GDDR capacity</source>
-        <translation type="unfinished"/>
+        <translation>GDDR капацитет</translation>
     </message>
     <message>
         <source>GPU vendor</source>
-        <translation type="unfinished"/>
+        <translation>GPU произвођач</translation>
     </message>
     <message>
         <source>GPU type</source>
-        <translation type="unfinished"/>
+        <translation>GPU врста</translation>
     </message>
     <message>
         <source>EGL version</source>
-        <translation type="unfinished"/>
+        <translation>EGL верзија</translation>
     </message>
     <message>
         <source>EGL client APIs</source>
-        <translation type="unfinished"/>
+        <translation>EGL клијент API-ји</translation>
     </message>
     <message>
         <source>GL version</source>
-        <translation type="unfinished"/>
+        <translation>GL верзија</translation>
     </message>
     <message>
         <source>GLSL version</source>
-        <translation type="unfinished"/>
+        <translation>GLSL верзија</translation>
     </message>
     <message>
         <source>Array Handle</source>
@@ -1986,7 +1986,7 @@
     </message>
     <message>
         <source>Part Number</source>
-        <translation type="unfinished"/>
+        <translation>Произвођачки број</translation>
     </message>
     <message>
         <source>Rank</source>
@@ -1994,11 +1994,11 @@
     </message>
     <message>
         <source>Memory Technology</source>
-        <translation type="unfinished"/>
+        <translation>Технологија меморије</translation>
     </message>
     <message>
         <source>Memory Operating Mode Capability</source>
-        <translation type="unfinished"/>
+        <translation>Капацитет меморије у радном режиму</translation>
     </message>
     <message>
         <source>Firmware Version</source>
@@ -2006,27 +2006,27 @@
     </message>
     <message>
         <source>Module Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ИД произвођача модула</translation>
     </message>
     <message>
         <source>Module Product ID</source>
-        <translation type="unfinished"/>
+        <translation>ИД производа</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ИД произвођача контолера меморијског подсистема</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation type="unfinished"/>
+        <translation>Ид производа контолера меморијског подсистема</translation>
     </message>
     <message>
         <source>Non-Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Постојана величина</translation>
     </message>
     <message>
         <source>Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Непостојана величина</translation>
     </message>
     <message>
         <source>Cache Size</source>
@@ -2034,11 +2034,11 @@
     </message>
     <message>
         <source>Logical Size</source>
-        <translation type="unfinished"/>
+        <translation>Логичка величина</translation>
     </message>
     <message>
         <source>network</source>
-        <translation type="unfinished"/>
+        <translation>мрежа</translation>
     </message>
     <message>
         <source>Model</source>
@@ -2087,6 +2087,10 @@
     <message>
         <source>status</source>
         <translation>статус</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

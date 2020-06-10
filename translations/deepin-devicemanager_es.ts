@@ -2088,6 +2088,10 @@
         <source>status</source>
         <translation>estado</translation>
     </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ThreadPool</name>

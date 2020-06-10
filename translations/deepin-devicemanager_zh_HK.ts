@@ -1180,7 +1180,7 @@
     </message>
     <message>
         <source>No battery found</source>
-        <translation type="unfinished"/>
+        <translation>未發現電池</translation>
     </message>
 </context>
 <context>
@@ -1742,7 +1742,7 @@
     </message>
     <message>
         <source>guid</source>
-        <translation>guid</translation>
+        <translation>全局唯一標識符</translation>
     </message>
     <message>
         <source>Geometry (Logical)</source>
@@ -2087,6 +2087,10 @@
     <message>
         <source>status</source>
         <translation>狀態</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>日期</translation>
     </message>
 </context>
 <context>

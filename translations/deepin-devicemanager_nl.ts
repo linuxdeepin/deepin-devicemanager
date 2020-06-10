@@ -1180,7 +1180,7 @@
     </message>
     <message>
         <source>No battery found</source>
-        <translation type="unfinished"/>
+        <translation>Geen accu aangetroffen</translation>
     </message>
 </context>
 <context>
@@ -2087,6 +2087,10 @@
     <message>
         <source>status</source>
         <translation>status</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
