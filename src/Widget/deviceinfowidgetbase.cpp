@@ -33,6 +33,7 @@
 #include "DFileDialog"
 #include <QTextStream>
 #include <QFile>
+#include <QDebug>
 #include "mainwindow.h"
 #include <QDate>
 #include "DApplication"
