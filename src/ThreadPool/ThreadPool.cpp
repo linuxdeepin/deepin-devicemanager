@@ -11,7 +11,7 @@
 #include "LoadInfo/DeviceFactory.h"
 
 CmdTask::CmdTask(QString key, QString cmd, QString debugFile, QString info, ThreadPool *parent)
-    : QObject (parent), m_Key(key), m_Cmd(cmd), m_DebugFile(debugFile), m_Info(info), mp_Parent(parent)
+    : m_Key(key), m_Cmd(cmd), m_DebugFile(debugFile), m_Info(info), mp_Parent(parent)
 {
     this->setAutoDelete(true);
 }
@@ -28,7 +28,7 @@ void CmdTask::run()
 }
 
 GenerateTask::GenerateTask(DeviceType deviceType, ThreadPool *parent)
-    : QObject(parent), m_Type(deviceType), mp_Parent(parent)
+    : m_Type(deviceType), mp_Parent(parent)
 {
 
 }
@@ -165,15 +165,13 @@ void ThreadPool::loadCmdInfo()
     QList<QStringList> lstCmd;
     getCmdList(lstCmd);
     QList<QStringList>::iterator it = lstCmd.begin();
-//    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
+    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
     for (; it != lstCmd.end(); ++it) {
         CmdTask *task = new CmdTask((*it)[0], (*it)[1], (*it)[2], (*it)[3], this);
+        cleaner->add(task);
         start(task);
-
-//        cleaner->add(task);
+        task->setAutoDelete(true);
     }
-
-//    cleaner->deleteLater();
 }
 
 

@@ -118,8 +118,6 @@ bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
 
 bool DeviceStorage::addInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo)
 {
-
-    qDebug() << name << "======" << m_DeviceFile;
     // 查看传入的设备信息与当前的设备信息是不是同一个设备信息
     if (!m_DeviceFile.contains(name, Qt::CaseInsensitive)) {
         return false;
@@ -324,9 +322,6 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     }
 
     // 安装大小
-
-    qDebug() << mapInfo["Total NVM Capacity"];
-
     QString capacity = mapInfo["User Capacity"];
     if (capacity == "") {
         capacity = mapInfo["Total NVM Capacity"];
