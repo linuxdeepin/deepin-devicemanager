@@ -76,8 +76,11 @@ public:
     void finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &);
     void finishedGenerateDevice(const QStringList &lst);
 
+    /**设置机器架构*/
+    void setFramework(const QString &arch);
+
 private:
-    void getCmdList(QList<QStringList> &cmdList);
+    void getCmdList(QList<QStringList> &cmdList, const QString &arch);
     void getTypeList(QList<DeviceType> &typeList);
 
 
@@ -92,6 +95,8 @@ private:
     int                    m_AllTypeNum;
 
     QMutex                 m_lock;
+
+    QString                m_Arch;
 
 };
 

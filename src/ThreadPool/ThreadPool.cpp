@@ -154,6 +154,11 @@ void ThreadPool::finishedGenerateDevice(const QStringList &lst)
     m_lock.unlock();
 }
 
+void ThreadPool::setFramework(const QString &arch)
+{
+    m_Arch = arch;
+}
+
 void ThreadPool::loadCmdInfo()
 {
     // 初始化信息
@@ -163,15 +168,18 @@ void ThreadPool::loadCmdInfo()
 
     // 开始线程池处理
     QList<QStringList> lstCmd;
-    getCmdList(lstCmd);
+    getCmdList(lstCmd, m_Arch);
     QList<QStringList>::iterator it = lstCmd.begin();
+
     QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
+    cleaner->setParent(this);
     for (; it != lstCmd.end(); ++it) {
         CmdTask *task = new CmdTask((*it)[0], (*it)[1], (*it)[2], (*it)[3], this);
         cleaner->add(task);
         start(task);
         task->setAutoDelete(true);
     }
+
 }
 
 
@@ -200,7 +208,7 @@ void ThreadPool::generateInfo()
 }
 
 
-void ThreadPool::getCmdList(QList<QStringList> &cmdList)
+void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
 {
     cmdList.append({ "lshw",                 "sudo lshw",               "lshw.txt",               tr("Loading Audio Device Info...") });
     cmdList.append({ "printer",              "",                "printer.txt",            ""});
@@ -233,7 +241,10 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList)
     cmdList.append({ "xrandr_verbose",       "xrandr --verbose",        "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
     cmdList.append({ "dmesg",                "sudo dmesg",              "dmesg.txt",              tr("Loading Power Info...")});
     cmdList.append({ "hciconfig",            "hciconfig -a",            "hciconfig.txt",          tr("Loading Printer Info...")});
-    cmdList.append({ "gpuinfo",              "gpuinfo",                 "gpuinfo.txt",            ""});
+
+    if (arch == "KLU" || arch == "PanGuV") {
+        cmdList.append({ "gpuinfo",              "gpuinfo",                 "gpuinfo.txt",            ""});
+    }
 
     cmdList.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "cat_cpuinfo.txt",        tr("Loading Monitor Info...")});
     cmdList.append({ "cat_boardinfo",        "cat /proc/boardinfo",     "cat_boardinfo.txt",      tr("Loading Mouse Info...")});
@@ -241,8 +252,12 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList)
     cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
     cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "cat_devices.txt",     ""});
     cmdList.append({ "cat_audio",            "cat /proc/asound/card0/codec#0", "cat_audio.txt",     ""});
-    cmdList.append({ "EDID_HDMI",            "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid", "EDID_HDMI.txt",     ""});
-    cmdList.append({ "EDID_VGA",             "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid", "EDID_VGA.txt",     ""});
+
+    if (arch == "PanGuV") {
+        cmdList.append({ "EDID_HDMI",            "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid", "EDID_HDMI.txt",     ""});
+        cmdList.append({ "EDID_VGA",             "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid", "EDID_VGA.txt",     ""});
+    }
+
     m_AllCmdNum = cmdList.size();
 }
 
