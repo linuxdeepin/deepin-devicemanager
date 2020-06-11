@@ -126,6 +126,7 @@ void CmdTool::loadLsblkInfo(const QString &cmd, const QString &debugfile)
 
     foreach (QString line, lines) {
         QStringList words = line.replace(QRegExp("[\\s]+"), " ").split(" ");
+        qDebug() << words.size() << "   " << words;
         if (words.size() != 2 || words[0] == "NAME") {
             continue;
         }
