@@ -18,11 +18,19 @@ void DeviceMouse::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
+
+    // 获取鼠标的接口类型
     if (mapInfo.find("Hotplug") != mapInfo.end()) {
         setAttribute(mapInfo, "Hotplug", m_Interface);
     } else {
         m_Interface = "PS/2";
     }
+
+    // 上面的方法不适合蓝牙鼠标的获取方法
+    if (mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive) || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
+        m_Interface = "Bluetooth";
+    }
+
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);

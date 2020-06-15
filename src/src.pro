@@ -117,7 +117,8 @@ SOURCES += \
     LoadInfo/DeviceGenerator.cpp \
     DeviceManager/DeviceManager.cpp \
     LoadInfo/PanguVGenerator.cpp \
-    LoadInfo/EDIDParser.cpp
+    LoadInfo/EDIDParser.cpp \
+    Widget/TextBrowser.cpp
 
 HEADERS += \
     DeviceManager/DeviceInfo.h \
@@ -183,7 +184,8 @@ HEADERS += \
     LoadInfo/DeviceGenerator.h \
     DeviceManager/DeviceManager.h \
     LoadInfo/PanguVGenerator.h \
-    LoadInfo/EDIDParser.h
+    LoadInfo/EDIDParser.h \
+    Widget/TextBrowser.h
 
 # Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin

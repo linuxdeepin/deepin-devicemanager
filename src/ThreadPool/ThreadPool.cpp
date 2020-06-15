@@ -196,7 +196,7 @@ void ThreadPool::generateInfo()
         start(new GenerateTask(*it, this));
     }
 
-    // 这里是为了确保所有设备执行完毕后，生成其它设备
+    // 这里是为了确保其它设备在最后一个生成
     qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
     while (true) {
         qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();

@@ -124,7 +124,6 @@ void CmdTool::loadLsblkInfo(const QString &cmd, const QString &debugfile)
         if (words.size() != 2 || words[0] == "NAME") {
             continue;
         }
-
         mapInfo.insert(words[0].trimmed(), words[1].trimmed());
 
         //****************

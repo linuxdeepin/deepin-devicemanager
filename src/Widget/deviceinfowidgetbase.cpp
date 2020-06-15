@@ -68,7 +68,7 @@ bool DeviceInfoWidgetBase::isPaletteInit_ = false;
 DPalette DeviceInfoWidgetBase::defaultPa_;
 
 
-int currentXlsRow_ = 1;
+static int currentXlsRow_ = 1;
 
 DeivceInfoBrower::DeivceInfoBrower(DeviceInfoWidgetBase *parent): DTextBrowser(parent), deviceInfoWidget_(parent)
 {
@@ -524,7 +524,7 @@ void DeviceInfoWidgetBase::initDownWidget()
 
     changeTheme();
 
-    htmlBrower_ = new DeivceInfoBrower(this);
+    htmlBrower_ = new TextBrowser(this);
     htmlBrower_->setFrameShape(QFrame::NoFrame);
     htmlBrower_->setOpenExternalLinks(true);
 
@@ -616,7 +616,7 @@ void DeviceInfoWidgetBase::showEvent(QShowEvent *event)
     firstShow_ = false;
 
     if (htmlBrower_ == nullptr) {
-        htmlBrower_ = new DeivceInfoBrower(this);
+        htmlBrower_ = new TextBrowser(this);
         htmlBrower_->setFrameShape(QFrame::NoFrame);
         htmlBrower_->setOpenExternalLinks(true);
 
@@ -738,7 +738,7 @@ QTextStream &operator<<(QTextStream &ds, LogTreeView *tableWidget)
         auto item = tableWidget->m_pModel->horizontalHeaderItem(col);
 
         QString text = tableWidget->m_pModel->horizontalHeaderItem(col)->text();
-        ds.setFieldWidth(text.size() * 1.5);
+        ds.setFieldWidth(int(text.size() * 1.5));
         ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
         if (item) {
             ds << text;
@@ -754,7 +754,7 @@ QTextStream &operator<<(QTextStream &ds, LogTreeView *tableWidget)
         for (int col = 0; col < tableWidget->m_pModel->columnCount(); ++col) {
             QString text = tableWidget->m_pModel->item(row, col)->text();
 
-            ds.setFieldWidth(text.size() * 1.5);
+            ds.setFieldWidth(int(text.size() * 1.5));
             ds.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
             ds << text;
             ds.setFieldWidth(0);
@@ -1077,14 +1077,4 @@ bool DeviceInfoWidgetBase::exportToHtml(const QString &htmlFile)
     exportToHtml(html);
     html.close();
     return true;
-}
-
-
-ArticleStruct DeviceInfoWidgetBase::addArticleStruct(const QString &name, const QString &command, const QString &item, const QString &attri)
-{
-    ArticleStruct Name(name);
-    //Name.queryData(command, item, attri);
-    m_articles.push_back(Name);
-    m_existArticles.insert(attri);
-    return Name;
 }

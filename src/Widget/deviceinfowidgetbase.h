@@ -34,6 +34,7 @@
 #include "DFrame"
 #include "commondefine.h"
 #include "DTextBrowser"
+#include "TextBrowser.h"
 #include <QDomDocument>
 
 class QLabel;
@@ -128,8 +129,6 @@ public:
 
     QString joinArticle(QList<ArticleStruct> &articles, const QString &split = " ");
 
-    ArticleStruct addArticleStruct(const QString &name, const QString &command, const QString &item, const QString &attri);
-
 
 protected:
     void addDeviceAttribute(const QString &name, const QString &value, QList<ArticleStruct> &attributes, bool removeZero = false);
@@ -164,8 +163,8 @@ public:
 
     QFrame *downFrame_ = nullptr;
 
-    Dtk::Widget::DTextBrowser *htmlBrower_ = nullptr;
-//    QVBoxLayout* downWidgetLayout = nullptr;
+//    Dtk::Widget::DTextBrowser *htmlBrower_ = nullptr;
+    TextBrowser *htmlBrower_ = nullptr;
 
     Dtk::Widget::DMenu *contextMenu_ = nullptr;
 

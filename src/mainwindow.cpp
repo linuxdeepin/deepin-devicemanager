@@ -71,7 +71,7 @@
 
 DWIDGET_USE_NAMESPACE
 
-QList<ArticleStruct> staticArticles;
+static QList<ArticleStruct> staticArticles;
 
 MainWindow::MainWindow(QWidget *parent) :
     DMainWindow(parent),
@@ -84,7 +84,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // 获取计算机架构信息,x86 arm mips
     QString arch = getArchString();
-    qDebug() << arch;
     mp_ThreadPool->setFramework(arch);
     DeviceFactory::setGeneratorKey(arch);
 
