@@ -36,11 +36,19 @@ void DeviceKeyboard::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
+
+    // 获取键盘的接口类型
     if (mapInfo.find("Hotplug") != mapInfo.end()) {
         setAttribute(mapInfo, "Hotplug", m_Interface);
     } else {
         m_Interface = "PS/2";
     }
+
+    // 上面的方法不适合蓝牙键盘的获取方法
+    if (mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive) || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
+        m_Interface = "Bluetooth";
+    }
+
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);

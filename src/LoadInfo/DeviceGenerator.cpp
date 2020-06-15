@@ -585,12 +585,14 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
         if ((*it).size() < 1) {
             continue;
         }
-        if ((*it).contains("Device Files")) {
-            DeviceKeyboard device;
-            device.setInfoFromHwinfo(*it);
-            DeviceManager::instance()->addKeyboardDevice(device);
-            addBusIDFromHwinfo((*it)["SysFS BusID"]);
-        }
+
+        // 下面这句代码忘了这么写的原因，先去掉
+        //if ((*it).contains("Device Files")) {}
+
+        DeviceKeyboard device;
+        device.setInfoFromHwinfo(*it);
+        DeviceManager::instance()->addKeyboardDevice(device);
+        addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
 void DeviceGenerator::getKeyboardInfoFromLshw()
@@ -738,6 +740,10 @@ void DeviceGenerator::getOthersInfoFromLshw()
 
 void DeviceGenerator::addBusIDFromHwinfo(const QString &sysfsBusID)
 {
+    if (sysfsBusID.isEmpty()) {
+        return;
+    }
+
     QString busID = sysfsBusID;
     busID.replace(QRegExp("\\.[0-9]+$"), "");
 
