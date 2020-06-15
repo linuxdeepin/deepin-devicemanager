@@ -49,5 +49,6 @@
         <file>../icons/deepin/builtin/deepin-devicemanager96.svg</file>
         <file>../icons/deepin/builtin/deepin-devicemanager24.svg</file>
         <file>../icons/deepin/builtin/deepin-devicemanager16.svg</file>
+        <file>doc_template/template.docx</file>
     </qresource>
 </RCC>

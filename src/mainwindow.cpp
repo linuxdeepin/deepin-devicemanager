@@ -348,7 +348,7 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
                        this,
                        "Export", saveDir + tr("Device Info", "export file's name") + \
                        QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
-                       "Text (*.txt);; Xls (*.xls);; Html (*.html)", &selectFilter);  //  Doc (*.docx);;
+                       "Text (*.txt);; Xls (*.xls);; Doc (*.docx);; Html (*.html)", &selectFilter);  //
 
     if ( file.isEmpty() == true ) {
         return true;
@@ -394,7 +394,7 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
     }
 
     if (selectFilter == "Doc (*.docx)") {
-        Docx::Document doc(":/../../3rdparty/docx/doc_template/template.docx");
+        Docx::Document doc(":/doc_template/template.docx");
 
         for (int i = 0; i < leftDeviceView_->count(); ++i) {
             QString device = leftDeviceView_->indexString(i);
