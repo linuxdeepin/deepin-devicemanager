@@ -316,6 +316,10 @@
         <source>Core(s)</source>
         <translation>Ytimet</translation>
     </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>Maksimi nopeus</translation>
+    </message>
 </context>
 <context>
     <name>DeivceInfoBrower</name>
@@ -2090,7 +2094,14 @@
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"/>
+        <translation>Päivämäärä</translation>
+    </message>
+</context>
+<context>
+    <name>TextBrowser</name>
+    <message>
+        <source>Copy (C)</source>
+        <translation>Kopio (C)</translation>
     </message>
 </context>
 <context>

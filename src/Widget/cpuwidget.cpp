@@ -60,7 +60,7 @@ void CpuWidget::initWidgetEX()
 void CpuWidget::initTable(const QList<DeviceCpu> &devices)
 {
     QList<QStringList> tabList;
-    QStringList headers = { tr("Name"), tr("Vendor"), tr("Speed"), tr("Architecture")};
+    QStringList headers = { tr("Name"), tr("Vendor"), devices[0].frequencyIsRange() ? tr("Speed") : tr("Max Speed"), tr("Architecture")};
 
     foreach (const DeviceCpu &device, devices) {
         QStringList tab = {

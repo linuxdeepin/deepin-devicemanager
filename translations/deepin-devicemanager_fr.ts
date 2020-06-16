@@ -316,6 +316,10 @@
         <source>Core(s)</source>
         <translation>Noyau(x)</translation>
     </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>Vitesse maximale</translation>
+    </message>
 </context>
 <context>
     <name>DeivceInfoBrower</name>
@@ -2091,6 +2095,13 @@
     <message>
         <source>Date</source>
         <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>TextBrowser</name>
+    <message>
+        <source>Copy (C)</source>
+        <translation>Copier (C)</translation>
     </message>
 </context>
 <context>

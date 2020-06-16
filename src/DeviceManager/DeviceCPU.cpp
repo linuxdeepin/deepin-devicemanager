@@ -1,6 +1,11 @@
 #include "DeviceCpu.h"
 
 DeviceCpu::DeviceCpu()
+    : m_Vendor(""), m_Name(""), m_PhysicalID(""), m_CoreID(""), m_ThreadNum(""),
+      m_Frequency(""), m_CurFrequency(""), m_BogoMIPS(""), m_Architecture(""),
+      m_Familly(""), m_Model(""), m_Step(""), m_CacheL1Data(""), m_CacheL1Order(""),
+      m_CacheL2(""), m_CacheL3(""), m_Extensions(""), m_Flags(""), m_HardwareVirtual(""),
+      m_LogicalCPUNum(""), m_CPUCoreNum(""), m_FrequencyIsRange(false)
 {
     initFilterKey();
 }
@@ -111,6 +116,11 @@ const QString &DeviceCpu::cpuCores() const
     return m_CPUCoreNum;
 }
 
+bool DeviceCpu::frequencyIsRange()const
+{
+    return m_FrequencyIsRange;
+}
+
 
 void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 {
@@ -136,6 +146,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         double minHz = mapInfo["CPU min MHz"].toDouble() / 1000;
         double maxHz = mapInfo["CPU max MHz"].toDouble() / 1000;
         m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
+        m_FrequencyIsRange = true;
     }
 
     //获取扩展指令集
@@ -166,12 +177,12 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 //    setAttribute(mapInfo,"Virtualization",m_HardwareVirtual);
 //    setAttribute(mapInfo,"CPU(s)",m_LogicalCPUNum);
 
-    setAttribute(mapInfo, "capacity", m_Frequency, false);
-    setAttribute(mapInfo, "capacity", m_CurFrequency, false);
+//    setAttribute(mapInfo, "capacity", m_Frequency, false);
+//    setAttribute(mapInfo, "capacity", m_CurFrequency, false);
 
-    // 联想FT的环境没有capacity字段，但是有size字段
-    setAttribute(mapInfo, "size", m_Frequency, false);
-    setAttribute(mapInfo, "size", m_CurFrequency, false);
+//    // 联想FT的环境没有capacity字段，但是有size字段
+//    setAttribute(mapInfo, "size", m_Frequency, false);
+//    setAttribute(mapInfo, "size", m_CurFrequency, false);
 
     loadOtherDeviceInfo(mapInfo);
 }
@@ -179,6 +190,7 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    setAttribute(mapInfo, "Max Speed", m_Frequency, false);
     setAttribute(mapInfo, "Current Speed", m_CurFrequency);
 //    setAttribute(mapInfo,"Thread(s) per core",m_ThreadNum);
 //    setAttribute(mapInfo,"BogoMIPS",m_BogoMIPS);

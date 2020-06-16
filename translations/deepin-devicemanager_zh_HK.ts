@@ -316,6 +316,10 @@
         <source>Core(s)</source>
         <translation>核</translation>
     </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>最大頻率</translation>
+    </message>
 </context>
 <context>
     <name>DeivceInfoBrower</name>
@@ -2091,6 +2095,13 @@
     <message>
         <source>Date</source>
         <translation>日期</translation>
+    </message>
+</context>
+<context>
+    <name>TextBrowser</name>
+    <message>
+        <source>Copy (C)</source>
+        <translation>複製 (C)</translation>
     </message>
 </context>
 <context>

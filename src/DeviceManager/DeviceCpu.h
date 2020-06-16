@@ -39,6 +39,7 @@ public:
     const QString &hardwareVirtual() const;
     const QString &logicalCPUNum() const;
     const QString &cpuCores() const;
+    bool frequencyIsRange()const;
 
 protected:
     void initFilterKey() override;
@@ -73,6 +74,7 @@ private:
     // 这个是cpu的逻辑处理器个数，而不是core的逻辑处理器个数
     QString           m_LogicalCPUNum;      //<! 逻辑处理器个数
     QString           m_CPUCoreNum;         //<! cpu核数
+    bool              m_FrequencyIsRange;   //<! 频率显示的是范围还是最大值
 };
 
 #endif // DEVICECPU_H

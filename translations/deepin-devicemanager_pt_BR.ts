@@ -316,6 +316,10 @@
         <source>Core(s)</source>
         <translation>Núcleo(s)</translation>
     </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>Velocidade Máxima</translation>
+    </message>
 </context>
 <context>
     <name>DeivceInfoBrower</name>
@@ -1918,11 +1922,11 @@
     </message>
     <message>
         <source>CPU implementer</source>
-        <translation>Implementação do CPU</translation>
+        <translation>Implementador da CPU</translation>
     </message>
     <message>
         <source>CPU architecture</source>
-        <translation>Arquitetura do CPU</translation>
+        <translation>Arquitetura da CPU</translation>
     </message>
     <message>
         <source>CPU variant</source>
@@ -1930,7 +1934,7 @@
     </message>
     <message>
         <source>CPU part</source>
-        <translation>CPU part</translation>
+        <translation>Peça da CPU</translation>
     </message>
     <message>
         <source>CPU revision</source>
@@ -1950,23 +1954,23 @@
     </message>
     <message>
         <source>EGL version</source>
-        <translation>Versão EGL</translation>
+        <translation>Versão do EGL</translation>
     </message>
     <message>
         <source>EGL client APIs</source>
-        <translation>APIs de cliente EGL</translation>
+        <translation>APIs do cliente EGL</translation>
     </message>
     <message>
         <source>GL version</source>
-        <translation>Versão EGL</translation>
+        <translation>Versão do GL</translation>
     </message>
     <message>
         <source>GLSL version</source>
-        <translation>Versão GLSL</translation>
+        <translation>Versão do GLSL</translation>
     </message>
     <message>
         <source>Array Handle</source>
-        <translation>Controlador Matriz</translation>
+        <translation>Controlador de Matriz</translation>
     </message>
     <message>
         <source>Form Factor</source>
@@ -1978,7 +1982,7 @@
     </message>
     <message>
         <source>Bank Locator</source>
-        <translation>Localizador de Bancos</translation>
+        <translation>Localizador de Banco</translation>
     </message>
     <message>
         <source>Type Detail</source>
@@ -1986,7 +1990,7 @@
     </message>
     <message>
         <source>Part Number</source>
-        <translation>Part Number</translation>
+        <translation>Número da Peça</translation>
     </message>
     <message>
         <source>Rank</source>
@@ -1994,7 +1998,7 @@
     </message>
     <message>
         <source>Memory Technology</source>
-        <translation>Tecnologia da memória</translation>
+        <translation>Tecnologia da Memória</translation>
     </message>
     <message>
         <source>Memory Operating Mode Capability</source>
@@ -2006,23 +2010,23 @@
     </message>
     <message>
         <source>Module Manufacturer ID</source>
-        <translation>ID do fabricante do Módulo</translation>
+        <translation>ID do Fabricante do Módulo</translation>
     </message>
     <message>
         <source>Module Product ID</source>
-        <translation>ID do fabricante do Módulo</translation>
+        <translation>ID do Módulo de Produto</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation>ID do fabricante do Controlador do Subsistema de Memória</translation>
+        <translation>ID do Fabricante do Controlador do Subsistema de Memória</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation>ID de Produto do Controlador do Subsistema de Memória</translation>
+        <translation>ID do Produto do Controlador do Subsistema de Memória</translation>
     </message>
     <message>
         <source>Non-Volatile Size</source>
-        <translation>Tamanho Não-volátil</translation>
+        <translation>Tamanho Não Volátil</translation>
     </message>
     <message>
         <source>Volatile Size</source>
@@ -2082,7 +2086,7 @@
     </message>
     <message>
         <source>Discovering</source>
-        <translation>Descobrindo</translation>
+        <translation>Procurando</translation>
     </message>
     <message>
         <source>status</source>
@@ -2090,7 +2094,14 @@
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"/>
+        <translation>Data</translation>
+    </message>
+</context>
+<context>
+    <name>TextBrowser</name>
+    <message>
+        <source>Copy (C)</source>
+        <translation>Copiar (C)</translation>
     </message>
 </context>
 <context>

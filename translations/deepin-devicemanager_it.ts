@@ -316,6 +316,10 @@
         <source>Core(s)</source>
         <translation> Core(s)</translation>
     </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>Velocità massima</translation>
+    </message>
 </context>
 <context>
     <name>DeivceInfoBrower</name>
@@ -2091,7 +2095,14 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"/>
+        <translation>Data</translation>
+    </message>
+</context>
+<context>
+    <name>TextBrowser</name>
+    <message>
+        <source>Copy (C)</source>
+        <translation>Copia (C)</translation>
     </message>
 </context>
 <context>

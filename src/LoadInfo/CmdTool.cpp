@@ -128,7 +128,7 @@ void CmdTool::loadLsblkInfo(const QString &cmd, const QString &debugfile)
 
         //****************
         QString smartCmd = QString("sudo smartctl --all /dev/%1").arg(words[0].trimmed());
-        loadSmartCtlInfo(smartCmd, words[0].trimmed(), words[0].trimmed() + ".txt");
+        loadSmartCtlInfo(smartCmd, words[0].trimmed(), "smartctl_" + words[0].trimmed() + ".txt");
     }
     addMapInfo("lsblk_d", mapInfo);
 }

@@ -316,6 +316,10 @@
         <source>Core(s)</source>
         <translation> Kern(en)</translation>
     </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>Max. snelheid</translation>
+    </message>
 </context>
 <context>
     <name>DeivceInfoBrower</name>
@@ -2090,7 +2094,14 @@
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"/>
+        <translation>Datum</translation>
+    </message>
+</context>
+<context>
+    <name>TextBrowser</name>
+    <message>
+        <source>Copy (C)</source>
+        <translation>Kopiëren(C)</translation>
     </message>
 </context>
 <context>

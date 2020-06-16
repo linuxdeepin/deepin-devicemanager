@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Chip</source>
-        <translation type="unfinished"/>
+        <translation>칩</translation>
     </message>
 </context>
 <context>
@@ -315,6 +315,10 @@
     <message>
         <source>Core(s)</source>
         <translation>코어</translation>
+    </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>최대 속도</translation>
     </message>
 </context>
 <context>
@@ -1180,7 +1184,7 @@
     </message>
     <message>
         <source>No battery found</source>
-        <translation type="unfinished"/>
+        <translation>배터리를 찾을 수 없음</translation>
     </message>
 </context>
 <context>
@@ -1918,51 +1922,51 @@
     </message>
     <message>
         <source>CPU implementer</source>
-        <translation type="unfinished"/>
+        <translation>CPU 구현도구</translation>
     </message>
     <message>
         <source>CPU architecture</source>
-        <translation type="unfinished"/>
+        <translation>CPU 아키텍처</translation>
     </message>
     <message>
         <source>CPU variant</source>
-        <translation type="unfinished"/>
+        <translation>CPU 변종</translation>
     </message>
     <message>
         <source>CPU part</source>
-        <translation type="unfinished"/>
+        <translation>CPU 부품</translation>
     </message>
     <message>
         <source>CPU revision</source>
-        <translation type="unfinished"/>
+        <translation>CPU 리비전</translation>
     </message>
     <message>
         <source>GDDR capacity</source>
-        <translation type="unfinished"/>
+        <translation>GDDR 용량</translation>
     </message>
     <message>
         <source>GPU vendor</source>
-        <translation type="unfinished"/>
+        <translation>GPU 공급업체</translation>
     </message>
     <message>
         <source>GPU type</source>
-        <translation type="unfinished"/>
+        <translation>GPU 유형</translation>
     </message>
     <message>
         <source>EGL version</source>
-        <translation type="unfinished"/>
+        <translation>EGL 버전</translation>
     </message>
     <message>
         <source>EGL client APIs</source>
-        <translation type="unfinished"/>
+        <translation>EGL 클라이언트 API</translation>
     </message>
     <message>
         <source>GL version</source>
-        <translation type="unfinished"/>
+        <translation>GL 버전</translation>
     </message>
     <message>
         <source>GLSL version</source>
-        <translation type="unfinished"/>
+        <translation>GLSL 버전</translation>
     </message>
     <message>
         <source>Array Handle</source>
@@ -1986,7 +1990,7 @@
     </message>
     <message>
         <source>Part Number</source>
-        <translation type="unfinished"/>
+        <translation>부품 번호</translation>
     </message>
     <message>
         <source>Rank</source>
@@ -1994,11 +1998,11 @@
     </message>
     <message>
         <source>Memory Technology</source>
-        <translation type="unfinished"/>
+        <translation>메모리 기술</translation>
     </message>
     <message>
         <source>Memory Operating Mode Capability</source>
-        <translation type="unfinished"/>
+        <translation>메모리 작동 모드 기능</translation>
     </message>
     <message>
         <source>Firmware Version</source>
@@ -2006,27 +2010,27 @@
     </message>
     <message>
         <source>Module Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>모듈 제조업체 ID</translation>
     </message>
     <message>
         <source>Module Product ID</source>
-        <translation type="unfinished"/>
+        <translation>모듈 제품 ID</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>메모리 서브시스템 컨트롤러 제조업체 ID</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation type="unfinished"/>
+        <translation>메모리 서브시스템 컨트롤러 제품 ID</translation>
     </message>
     <message>
         <source>Non-Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>비휘발성 크기</translation>
     </message>
     <message>
         <source>Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>휘발성 크기</translation>
     </message>
     <message>
         <source>Cache Size</source>
@@ -2034,11 +2038,11 @@
     </message>
     <message>
         <source>Logical Size</source>
-        <translation type="unfinished"/>
+        <translation>논리적 크기</translation>
     </message>
     <message>
         <source>network</source>
-        <translation type="unfinished"/>
+        <translation>네트워크</translation>
     </message>
     <message>
         <source>Model</source>
@@ -2090,7 +2094,14 @@
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"/>
+        <translation>날짜</translation>
+    </message>
+</context>
+<context>
+    <name>TextBrowser</name>
+    <message>
+        <source>Copy (C)</source>
+        <translation>복사 (C)</translation>
     </message>
 </context>
 <context>

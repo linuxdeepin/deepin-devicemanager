@@ -316,6 +316,10 @@
         <source>Core(s)</source>
         <translation>Ядра</translation>
     </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>Макс. швидкість</translation>
+    </message>
 </context>
 <context>
     <name>DeivceInfoBrower</name>
@@ -2090,7 +2094,14 @@
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"/>
+        <translation>Дата</translation>
+    </message>
+</context>
+<context>
+    <name>TextBrowser</name>
+    <message>
+        <source>Copy (C)</source>
+        <translation>Копіювати</translation>
     </message>
 </context>
 <context>

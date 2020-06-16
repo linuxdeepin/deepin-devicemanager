@@ -316,6 +316,10 @@
         <source>Core(s)</source>
         <translation>Nucli/s</translation>
     </message>
+    <message>
+        <source>Max Speed</source>
+        <translation>Velocitat màxima</translation>
+    </message>
 </context>
 <context>
     <name>DeivceInfoBrower</name>
@@ -2090,7 +2094,14 @@
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"/>
+        <translation>Data</translation>
+    </message>
+</context>
+<context>
+    <name>TextBrowser</name>
+    <message>
+        <source>Copy (C)</source>
+        <translation>Copia (C)</translation>
     </message>
 </context>
 <context>
