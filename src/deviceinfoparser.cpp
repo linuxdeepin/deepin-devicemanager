@@ -126,9 +126,6 @@ void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QStri
                 }
             }
         }
-//        delete finishings;
-    } else {
-        //std::cout << option << " not supported." << std::endl;
     }
 }
 //获取相关打印机目标字段的信息

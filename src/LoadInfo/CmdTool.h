@@ -31,6 +31,7 @@ private:
     void loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo); // 这个函数是对LoadHciconfigInfo的扩展
     void loadPrinterInfo();
     void loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile);
+    void loadHwinfoUsbInfo(const QString &item, const QMap<QString, QString> &mapInfo);
     void loadDmidecodeInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadDmidecode2Info(const QString &key, const QString &cmd, const QString &debugfile);
     void loadCatInfo(const QString &key, const QString &cmd, const QString &debugfile);

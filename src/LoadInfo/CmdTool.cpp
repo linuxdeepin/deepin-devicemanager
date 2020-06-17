@@ -323,45 +323,12 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
 
-        // hwinfo --usb 里面有很多的无用信息，可以先过滤
+        // hwinfo --usb 里面有很多的无用信息，需要特殊处理
         if (key == "hwinfo_usb") {
-            QList<QMap<QString, QString>>::iterator it = m_cmdInfo["hwinfo_usb"].begin();
-            bool add = true;
-
-            // 有的是有同一个设备有两段信息，我们只需要一个
-            // 比如 SysFS BusID: 1-3:1.2   和  SysFS BusID: 1-3:1.0 这个是同一个设备
-            // 我们只需要一个
-            for (; it != m_cmdInfo["hwinfo_usb"].end(); ++it) {
-                QString curBus = (*it)["SysFS BusID"];
-                QString newBus = mapInfo["SysFS BusID"];
-                curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
-                newBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
-                if (curBus == newBus) {
-                    add = false;
-                    break;
-                }
-            }
-
-            // 这个是用来过滤，没有接入任何设备的usb接口
-            if (mapInfo["Model"].contains("Linux Foundation")) {
-                add = false;
-            }
-
-            if (mapInfo["Hardware Class"].contains("hub", Qt::CaseInsensitive)) {
-                add = false;
-            }
-
-            // 打印机几信息不从hwinfo --usb里面获取，需要过滤
-            if (item.contains("Printer", Qt::CaseInsensitive) || item.contains("LaserJet", Qt::CaseInsensitive)) {
-                add = false;
-            }
-
-            // 提前过滤掉键盘鼠标
-            if (item.contains("mouse", Qt::CaseInsensitive) || item.contains("keyboard", Qt::CaseInsensitive)) {
-                add = false;
-            }
-
-            if (add) {
+            loadHwinfoUsbInfo(item, mapInfo);
+        } else if (key == "hwinfo_mouse" || key == "hwinfo_keyboard") {
+            // 在服务器版本中发现，hwinfo --mouse 和 hwinfo --keyboard获取的信息里面有多余的无用信息，需要过滤
+            if (!item.contains("Linux Foundation")) {
                 addMapInfo(key, mapInfo);
             }
         } else {
@@ -369,6 +336,50 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
         }
     }
 }
+
+void CmdTool::loadHwinfoUsbInfo(const QString &item, const QMap<QString, QString> &mapInfo)
+{
+    QList<QMap<QString, QString>>::iterator it = m_cmdInfo["hwinfo_usb"].begin();
+    bool add = true;
+
+    // 有的是有同一个设备有两段信息，我们只需要一个
+    // 比如 SysFS BusID: 1-3:1.2   和  SysFS BusID: 1-3:1.0 这个是同一个设备
+    // 我们只需要一个
+    for (; it != m_cmdInfo["hwinfo_usb"].end(); ++it) {
+        QString curBus = (*it)["SysFS BusID"];
+        QString newBus = mapInfo["SysFS BusID"];
+        curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+        newBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+        if (curBus == newBus) {
+            add = false;
+            break;
+        }
+    }
+
+    // 这个是用来过滤，没有接入任何设备的usb接口
+    if (mapInfo["Model"].contains("Linux Foundation")) {
+        add = false;
+    }
+
+    if (mapInfo["Hardware Class"].contains("hub", Qt::CaseInsensitive)) {
+        add = false;
+    }
+
+    // 打印机几信息不从hwinfo --usb里面获取，需要过滤
+    if (item.contains("Printer", Qt::CaseInsensitive) || item.contains("LaserJet", Qt::CaseInsensitive)) {
+        add = false;
+    }
+
+    // 提前过滤掉键盘鼠标
+    if (item.contains("mouse", Qt::CaseInsensitive) || item.contains("keyboard", Qt::CaseInsensitive)) {
+        add = false;
+    }
+
+    if (add) {
+        addMapInfo("hwinfo_usb", mapInfo);
+    }
+}
+
 void CmdTool::loadDmidecodeInfo(const QString &key, const QString &cmd, const QString &debugfile)
 {
     if (key == "dmidecode2") {
