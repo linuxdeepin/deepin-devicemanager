@@ -1,12 +1,9 @@
 #include "CmdTool.h"
-#include <cups.h>
 #include "commondefine.h"
 #include<QDebug>
 #include<QDateTime>
 #include<QMutex>
 #include "EDIDParser.h"
-extern void showDetailedInfo(cups_dest_t *dest, const char *option, QMap<QString, QString> &DeviceInfoMap);
-extern int getDestInfo(void *user_data, unsigned flags, cups_dest_t *dest);
 
 CmdTool::CmdTool()
 {
@@ -21,6 +18,15 @@ void CmdTool::addMapInfo(const QString &key, const QMap<QString, QString> &mapIn
         QList<QMap<QString, QString> > lstMap;
         lstMap.append(mapInfo);
         m_cmdInfo.insert(key, lstMap);
+    }
+
+}
+
+void CmdTool::getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src)
+{
+    mapInfo.insert("Name", src->name);
+    for (int i = 0; i < src->num_options; i++) {
+        mapInfo.insert(src->options[i].name, src->options[i].value);
     }
 
 }
@@ -300,14 +306,30 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
 
 void CmdTool::loadPrinterInfo()
 {
-    QMap<QString, QMap<QString, QString> > info;
-    //获得所有的句柄
-    cupsEnumDests(CUPS_DEST_FLAGS_NONE, 1000, nullptr, CUPS_PRINTER_CLASS, 0, getDestInfo, &info);
 
-    foreach (const QString &key, info.keys()) {
-        info[key]["Name"] = key;
-        addMapInfo("printer", info[key]);
+    cups_dest_t *dests = nullptr;
+    int num_dests;
+    num_dests = cupsGetDests(&dests);
+    if (dests == nullptr) {
+        return;
     }
+    for (int i = 0; i < num_dests; i++) {
+        cups_dest_t *dest = nullptr;
+        QMap<QString, QString> mapInfo;
+        dest = dests + i;
+        getMapInfo(mapInfo, dest);
+        addMapInfo("printer", mapInfo);
+    }
+
+
+//    QMap<QString, QMap<QString, QString> > info;
+//    //获得所有的句柄
+//    cupsEnumDests(CUPS_DEST_FLAGS_NONE, 1000, nullptr, CUPS_PRINTER_CLASS, 0, getDestInfo, &info);
+
+//    foreach (const QString &key, info.keys()) {
+//        info[key]["Name"] = key;
+//        addMapInfo("printer", info[key]);
+//    }
 }
 
 void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile)

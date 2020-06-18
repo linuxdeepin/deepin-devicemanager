@@ -5,6 +5,7 @@
 #include <QMap>
 #include <QProcess>
 #include <QFile>
+#include <cups.h>
 
 class CmdTool
 {
@@ -56,6 +57,7 @@ private:
     void getMapInfoFromHciconfig(QMap<QString, QString> &mapInfo, const QString &info);
     void getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const QString &info);
     void addMapInfo(const QString &key, const QMap<QString, QString> &mapInfo);
+    void getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src);
 
     /**
      * @brief:命令的执行
