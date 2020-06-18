@@ -306,11 +306,22 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
 
 void CmdTool::loadPrinterInfo()
 {
+    // 先判断有没有打印机
+    QString deviceInfo;
+    if (!getDeviceInfo("lpstat -a", deviceInfo, "lpstat.txt")) {
+        return;
+    }
+    if (deviceInfo.isEmpty()) {
+        return;
+    }
 
+    // 通过cups获取打印机信息
     cups_dest_t *dests = nullptr;
+    http_t *http = nullptr;
     int num_dests;
-    num_dests = cupsGetDests(&dests);
+    num_dests = cupsGetDests2(http, &dests);
     if (dests == nullptr) {
+        cupsFreeDests(num_dests, dests);
         return;
     }
     for (int i = 0; i < num_dests; i++) {
@@ -320,16 +331,23 @@ void CmdTool::loadPrinterInfo()
         getMapInfo(mapInfo, dest);
         addMapInfo("printer", mapInfo);
     }
+    cupsFreeDests(num_dests, dests);
 
 
-//    QMap<QString, QMap<QString, QString> > info;
-//    //获得所有的句柄
-//    cupsEnumDests(CUPS_DEST_FLAGS_NONE, 1000, nullptr, CUPS_PRINTER_CLASS, 0, getDestInfo, &info);
-
-//    foreach (const QString &key, info.keys()) {
-//        info[key]["Name"] = key;
-//        addMapInfo("printer", info[key]);
+//    cups_dest_t *dests = nullptr;
+//    int num_dests;
+//    num_dests = cupsGetDests(&dests);
+//    if (dests == nullptr) {
+//        return;
 //    }
+//    for (int i = 0; i < num_dests; i++) {
+//        cups_dest_t *dest = nullptr;
+//        QMap<QString, QString> mapInfo;
+//        dest = dests + i;
+//        getMapInfo(mapInfo, dest);
+//        addMapInfo("printer", mapInfo);
+//    }
+//    cupsFreeDests(num_dests, dests);
 }
 
 void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile)
