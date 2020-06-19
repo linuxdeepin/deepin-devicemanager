@@ -61,7 +61,7 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
         loadCatAudioInfo(key, cmd, debugFile);
     }   else if (key == "EDID_HDMI" || key == "EDID_VGA") {
         loadEdidInfo(key, cmd, debugFile);
-    } else {
+    }  else {
         loadCatInfo(key, cmd, debugFile);
     }
 
@@ -332,22 +332,6 @@ void CmdTool::loadPrinterInfo()
         addMapInfo("printer", mapInfo);
     }
     cupsFreeDests(num_dests, dests);
-
-
-//    cups_dest_t *dests = nullptr;
-//    int num_dests;
-//    num_dests = cupsGetDests(&dests);
-//    if (dests == nullptr) {
-//        return;
-//    }
-//    for (int i = 0; i < num_dests; i++) {
-//        cups_dest_t *dest = nullptr;
-//        QMap<QString, QString> mapInfo;
-//        dest = dests + i;
-//        getMapInfo(mapInfo, dest);
-//        addMapInfo("printer", mapInfo);
-//    }
-//    cupsFreeDests(num_dests, dests);
 }
 
 void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile)
