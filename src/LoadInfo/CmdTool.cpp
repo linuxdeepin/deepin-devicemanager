@@ -332,6 +332,22 @@ void CmdTool::loadPrinterInfo()
         addMapInfo("printer", mapInfo);
     }
     cupsFreeDests(num_dests, dests);
+
+
+    //    cups_dest_t *dests = nullptr;
+    //    int num_dests;
+    //    num_dests = cupsGetDests(&dests);
+    //    if (dests == nullptr) {
+    //        return;
+    //    }
+    //    for (int i = 0; i < num_dests; i++) {
+    //        cups_dest_t *dest = nullptr;
+    //        QMap<QString, QString> mapInfo;
+    //        dest = dests + i;
+    //        getMapInfo(mapInfo, dest);
+    //        addMapInfo("printer", mapInfo);
+    //    }
+    //    cupsFreeDests(num_dests, dests);
 }
 
 void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile)
@@ -352,7 +368,8 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
             loadHwinfoUsbInfo(item, mapInfo);
         } else if (key == "hwinfo_mouse" || key == "hwinfo_keyboard") {
             // 在服务器版本中发现，hwinfo --mouse 和 hwinfo --keyboard获取的信息里面有多余的无用信息，需要过滤
-            if (!item.contains("Linux Foundation")) {
+            // 在笔记本中发现了一个多余信息，做特殊处理 Elite Remote Control Driver
+            if (!item.contains("Linux Foundation") && !item.contains("Elite Remote Control Driver")) {
                 addMapInfo(key, mapInfo);
             }
         } else {
