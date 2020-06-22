@@ -367,9 +367,11 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &cmd, const QStri
         if (key == "hwinfo_usb") {
             loadHwinfoUsbInfo(item, mapInfo);
         } else if (key == "hwinfo_mouse" || key == "hwinfo_keyboard") {
-            // 在服务器版本中发现，hwinfo --mouse 和 hwinfo --keyboard获取的信息里面有多余的无用信息，需要过滤
-            // 在笔记本中发现了一个多余信息，做特殊处理 Elite Remote Control Driver
-            if (!item.contains("Linux Foundation") && !item.contains("Elite Remote Control Driver")) {
+            if (!item.contains("Linux Foundation") && // 在服务器版本中发现，hwinfo --mouse 和 hwinfo --keyboard获取的信息里面有多余的无用信息，需要过滤
+                    !item.contains("Elite Remote Control Driver") && // 在笔记本中发现了一个多余信息，做特殊处理 Elite Remote Control Driver
+                    !item.contains("Model: \"serial console\"") && // 鲲鹏台式机子上发现一条多余信息  Model: "serial console"
+                    !item.contains("Wacom", Qt::CaseInsensitive)) { // 数位板信息被显示成了mouse信息,这里需要做特殊处理(搞不懂数位板为什么不能显示成鼠标)
+
                 addMapInfo(key, mapInfo);
             }
         } else {
@@ -414,6 +416,12 @@ void CmdTool::loadHwinfoUsbInfo(const QString &item, const QMap<QString, QString
     // 提前过滤掉键盘鼠标
     if (item.contains("mouse", Qt::CaseInsensitive) || item.contains("keyboard", Qt::CaseInsensitive)) {
         add = false;
+    }
+
+    // 这里特殊处理数位板信息，通过hwinfo --mouse可以获取到数位板信息，但是根据需求数位板应该在其它设备里面(虽然这很不合理)
+    // 所以这里需要做特殊处理 即 item 里面包含了 Wacom 的 就说明是数位板设备，那就应该添加到其它设备里面
+    if (item.contains("Wacom", Qt::CaseInsensitive)) {
+        add = true;
     }
 
     if (add) {
