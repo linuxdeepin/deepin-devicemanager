@@ -52,6 +52,23 @@ void DeviceManager::clear()
     m_ListDeviceCPU.clear();
 }
 
+void DeviceManager::exportToTxt(const QString &fileName)
+{
+
+}
+void DeviceManager::exportToHtml(const QString &fileName)
+{
+
+}
+void DeviceManager::exportToDoc(const QString &fileName)
+{
+
+}
+void DeviceManager::exportToExcel(const QString &fileName)
+{
+
+}
+
 void DeviceManager::addMouseDevice(const DeviceMouse &device)
 {
     // 如果不是重复设备则添加到设备列表

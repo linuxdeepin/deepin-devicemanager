@@ -37,6 +37,11 @@ public:
     /**@brief:清楚所有设备信息*/
     void clear();
 
+    /**@brief:将设备信息导出到文档*/
+    void exportToTxt(const QString &fileName);
+    void exportToHtml(const QString &fileName);
+    void exportToDoc(const QString &fileName);
+    void exportToExcel(const QString &fileName);
 
     // 鼠标设备相关 **************************************************************************************
     void addMouseDevice(const DeviceMouse &device);
