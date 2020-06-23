@@ -2,6 +2,7 @@
 #define DEVICEMANAGER_H
 #include<QList>
 #include<QMutex>
+#include<QDomDocument>
 class DeviceMouse;
 class DeviceCpu;
 class DeviceStorage;
@@ -20,6 +21,7 @@ class DevicePrint;
 class DeviceOtherPCI;
 class DeviceComputer;
 class DeviceCdrom;
+class DeviceBaseInfo;
 
 /*管理设备信息的单例*/
 
@@ -150,6 +152,27 @@ public:
 
 protected:
     DeviceManager();
+
+private:
+    /**@brief:导出单个设备到html*/
+    void exportMouseDeviceToHtml(QFile &htmlFile);
+    void exportCpuDeviceToHtml(QFile &htmlFile);
+    void exportStorageDeviceToHtml(QFile &htmlFile);
+    void exportGpuDeviceToHtml(QFile &htmlFile);
+    void exportMemoryDeviceToHtml(QFile &htmlFile);
+    void exportMonitorDeviceToHtml(QFile &htmlFile);
+    void exportBiosDeviceToHtml(QFile &htmlFile);
+    void exportBluetoothDeviceToHtml(QFile &htmlFile);
+    void exportAudioDeviceToHtml(QFile &htmlFile);
+    void exportNetworkDeviceToHtml(QFile &htmlFile);
+    void exportImageDeviceToHtml(QFile &htmlFile);
+    void exportKeyboardDeviceToHtml(QFile &htmlFile);
+    void exportOthersDeviceToHtml(QFile &htmlFile);
+    void exportPowerDeviceToHtml(QFile &htmlFile);
+    void exportPrintDeviceToHtml(QFile &htmlFile);
+    void exportOtherPCIDeviceToHtml(QFile &htmlFile);
+    void exportComputerDeviceToHtml(QFile &htmlFile);
+    void exportCdromDeviceToHtml(QFile &htmlFile);
 
 private:
     static DeviceManager    *sInstance;
