@@ -332,6 +332,10 @@ void MainWindow::refreshDatabase()
 
 bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
 {
+//    qint64 begin = QDateTime::currentDateTime().toMSecsSinceEpoch();
+//    qint64 end = QDateTime::currentDateTime().toMSecsSinceEpoch();
+//    double s = (end - begin) / 1000.0;
+//    qDebug() << QString::number(s, 'f', 6);
     QString selectFilter;
 
     static QString saveDir = []() {
@@ -371,7 +375,6 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
         }
 
         textFile.close();
-
         return true;
     }
 

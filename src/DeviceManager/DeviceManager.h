@@ -39,12 +39,6 @@ public:
     /**@brief:清楚所有设备信息*/
     void clear();
 
-    /**@brief:将设备信息导出到文档*/
-    void exportToTxt(const QString &fileName);
-    void exportToHtml(const QString &fileName);
-    void exportToDoc(const QString &fileName);
-    void exportToExcel(const QString &fileName);
-
     // 鼠标设备相关 **************************************************************************************
     void addMouseDevice(const DeviceMouse &device);
     const QList<DeviceMouse> &getMouseDevices();
@@ -152,27 +146,6 @@ public:
 
 protected:
     DeviceManager();
-
-private:
-    /**@brief:导出单个设备到html*/
-    void exportMouseDeviceToHtml(QFile &htmlFile);
-    void exportCpuDeviceToHtml(QFile &htmlFile);
-    void exportStorageDeviceToHtml(QFile &htmlFile);
-    void exportGpuDeviceToHtml(QFile &htmlFile);
-    void exportMemoryDeviceToHtml(QFile &htmlFile);
-    void exportMonitorDeviceToHtml(QFile &htmlFile);
-    void exportBiosDeviceToHtml(QFile &htmlFile);
-    void exportBluetoothDeviceToHtml(QFile &htmlFile);
-    void exportAudioDeviceToHtml(QFile &htmlFile);
-    void exportNetworkDeviceToHtml(QFile &htmlFile);
-    void exportImageDeviceToHtml(QFile &htmlFile);
-    void exportKeyboardDeviceToHtml(QFile &htmlFile);
-    void exportOthersDeviceToHtml(QFile &htmlFile);
-    void exportPowerDeviceToHtml(QFile &htmlFile);
-    void exportPrintDeviceToHtml(QFile &htmlFile);
-    void exportOtherPCIDeviceToHtml(QFile &htmlFile);
-    void exportComputerDeviceToHtml(QFile &htmlFile);
-    void exportCdromDeviceToHtml(QFile &htmlFile);
 
 private:
     static DeviceManager    *sInstance;

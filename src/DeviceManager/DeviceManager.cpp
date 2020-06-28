@@ -52,49 +52,6 @@ void DeviceManager::clear()
     m_ListDeviceCPU.clear();
 }
 
-void DeviceManager::exportToTxt(const QString &fileName)
-{
-
-}
-void DeviceManager::exportToHtml(const QString &fileName)
-{
-    QFile htmlFile(fileName);
-
-    htmlFile.write("<!DOCTYPE html>\n");
-    htmlFile.write("<html>\n");
-    htmlFile.write("<body>\n");
-//    htmlFile.write((QString("<h2>") + overviewInfo_.name + "</h2>").toUtf8());
-
-//    if (tableWidget_) {
-//        writeTabwidgetToHtml(tableWidget_, htmlFile);
-//        htmlFile.write("<br />\n");
-//    }
-
-    QDomDocument doc;
-
-//    if (titleInfo_) {
-//        toHtmlString(doc, *titleInfo_);
-//        doc.appendChild(doc.createElement("br"));
-//    }
-
-//    foreach (auto di, deviceInfos_) {
-//        toHtmlString(doc, di);
-//    }
-
-    htmlFile.write(doc.toString().toStdString().data());
-
-    htmlFile.write("</body>\n");
-    htmlFile.write("</html>\n");
-}
-void DeviceManager::exportToDoc(const QString &fileName)
-{
-
-}
-void DeviceManager::exportToExcel(const QString &fileName)
-{
-
-}
-
 void DeviceManager::addMouseDevice(const DeviceMouse &device)
 {
     // 如果不是重复设备则添加到设备列表
@@ -506,78 +463,5 @@ void DeviceManager::addCmdInfo(const QMap<QString, QList<QMap<QString, QString> 
 const QList<QMap<QString, QString>> &DeviceManager::cmdInfo(const QString &key)
 {
     return m_cmdInfo[key];
-}
-
-void DeviceManager::exportMouseDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportCpuDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportStorageDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportGpuDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportMemoryDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportMonitorDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportBiosDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportBluetoothDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportAudioDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportNetworkDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportImageDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportKeyboardDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportOthersDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportPowerDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportPrintDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportOtherPCIDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportComputerDeviceToHtml(QFile &htmlFile)
-{
-
-}
-void DeviceManager::exportCdromDeviceToHtml(QFile &htmlFile)
-{
-
 }
 

@@ -65,7 +65,7 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Capacity", m_Size);
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
     m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
-    if (m_Size.contains("0GB") || m_Size == "") {
+    if (m_Size.startsWith("0") || m_Size == "") {
         return false;
     }
 
