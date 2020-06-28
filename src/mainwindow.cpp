@@ -352,7 +352,7 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
                        this,
                        "Export", saveDir + tr("Device Info", "export file's name") + \
                        QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
-                       "Text (*.txt);; Xls (*.xls);; Doc (*.docx);; Html (*.html)", &selectFilter);  //
+                       "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter);  //
 
     if ( file.isEmpty() == true ) {
         return true;
