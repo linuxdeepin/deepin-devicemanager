@@ -444,7 +444,7 @@ void MainWindow::showDisplayShortcutsHelpDialog()
 
     QJsonObject shortcutItem;
     shortcutItem.insert("name", tr("Display shortcuts"));
-    shortcutItem.insert("value", "Ctrl+Shift+/");
+    shortcutItem.insert("value", "Ctrl+Shift+?");
     windowJsonItems.append(shortcutItem);
 
     QJsonObject closeItem;
