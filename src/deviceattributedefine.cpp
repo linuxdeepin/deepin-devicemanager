@@ -22,7 +22,7 @@
 
 #include "deviceattributedefine.h"
 #include "deviceinfoparser.h"
-#include "DApplication"
+#include <DApplication>
 
 DWIDGET_USE_NAMESPACE
 

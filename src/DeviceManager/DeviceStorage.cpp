@@ -34,8 +34,8 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         return false;
     }
 
+    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
     setDiskSerialID(mapInfo["Device Files"]);
-    setAttribute(mapInfo, "Serial ID", m_SerialNumber, false);
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
 
@@ -178,6 +178,9 @@ bool DeviceStorage::isValid()
 
 void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
 {
+    if (deviceFiles.contains(m_SerialNumber)) {
+        return;
+    }
     QStringList itemList = deviceFiles.split(",");
 
     foreach (auto item, itemList) {
