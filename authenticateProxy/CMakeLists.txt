@@ -53,3 +53,4 @@ target_link_libraries(${APP_BIN_NAME}
 # Install files
 install(FILES ${APP_POLICY_FILES} DESTINATION /usr/share/polkit-1/actions)
 install(TARGETS deepin-devicemanager-authenticateProxy DESTINATION bin)
+

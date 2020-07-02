@@ -29,11 +29,13 @@ set(APP_BIN_NAME "deepin-devicemanager")
 set(APP_TRANS_SCRIPT "${APP_RES_DIR}/translate_generation.sh")
 set(APP_DESKTOP "${APP_RES_DIR}/deepin-devicemanager.desktop")
 set(APP_QRC "${APP_RES_DIR}/appimage.qrc")
+set(APP_ICON_FILE "${APP_RES_DIR}/icons/deepin/builtin/deepin-devicemanager.svg")
+
 #message(${APP_RES_DIR})
 #message(${APP_BIN_NAME})
 #message(${APP_TRANS_SCRIPT})
 #message(${APP_DESKTOP})
-#message(${APP_QRC})
+#message(********************************+++++++++++++++++++++++${APP_ICON_FILE})
 project(${APP_BIN_NAME})
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -138,5 +140,6 @@ install(TARGETS deepin-devicemanager DESTINATION bin)
 file(GLOB APP_QM_FILES "translations/*.qm")
 install(FILES ${APP_QM_FILES} DESTINATION share/deepin-devicemanager/translations)
 install(FILES ${APP_DESKTOP} DESTINATION share/applications)
+install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/apps)
 
 
