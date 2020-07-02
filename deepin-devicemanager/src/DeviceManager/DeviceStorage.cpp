@@ -179,7 +179,7 @@ bool DeviceStorage::isValid()
 
 void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
 {
-    if (deviceFiles.contains(m_SerialNumber)) {
+    if (!m_SerialNumber.isEmpty() && deviceFiles.contains(m_SerialNumber)) {
         return;
     }
     QStringList itemList = deviceFiles.split(",");

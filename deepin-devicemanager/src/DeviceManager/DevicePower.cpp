@@ -28,8 +28,8 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "capacity", m_Capacity);
     setAttribute(mapInfo, "voltage", m_Voltage);
     setAttribute(mapInfo, "", m_Slot);
-    setAttribute(mapInfo, "capacity", m_DesignCapacity);
-    setAttribute(mapInfo, "voltage", m_DesignVoltage);
+//    setAttribute(mapInfo, "capacity", m_DesignCapacity);
+//    setAttribute(mapInfo, "voltage", m_DesignVoltage);
     setAttribute(mapInfo, "", m_SBDSChemistry);
     setAttribute(mapInfo, "", m_SBDSManufactureDate);
     setAttribute(mapInfo, "", m_SBDSSerialNumber);

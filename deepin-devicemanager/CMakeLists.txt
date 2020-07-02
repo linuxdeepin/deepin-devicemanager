@@ -20,7 +20,7 @@
 cmake_minimum_required(VERSION 3.7)
 
 if (NOT DEFINED VERSION)
-    set(VERSION 1.2.2)
+    set(VERSION 5.5.10.1)
 endif ()
 
 #common resource names
@@ -65,6 +65,7 @@ endif()
 #Generate the qm file
 #message(${CMAKE_CURRENT_SOURCE_DIR})
 execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
+configure_file(src/environments.h.in environments.h @ONLY)
 
 macro(SUBDIRLIST result curdir)
 #    message(************************************************SUBDIRLIST:${SUBDIRLIST})

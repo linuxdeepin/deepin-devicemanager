@@ -335,18 +335,21 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
 {
     QString selectFilter;
 
-    QString fileName = QDir::homePath() + "/" + QObject::tr("Device Info", "export file's name") + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt";
-    QDir dir( QDir::homePath() + "/Documents/");
-    if (dir.exists()) {
-        fileName = QDir::homePath() + "/Documents/" + QObject::tr("Device Info", "export file's name") + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt";
+    static QString saveDir = []() {
+        QString dirStr = "./";
+        QDir dir( QDir::homePath() + "/Desktop/");
+        if (dir.exists()) {
+            dirStr = QDir::homePath() + "/Desktop/";
+        }
+        return dirStr;
     }
+    ();
 
     QString file = DFileDialog::getSaveFileName(
-                       nullptr
-                       , "Export"
-                       , "/home/liujun/Documents/Device Info20200701_103307.txt"
-                       , "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter
-                   ); //
+                       this,
+                       "Export", saveDir + tr("Device Info", "export file's name") + \
+                       QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
+                       "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter);  //
 
     if ( file.isEmpty() == true ) {
         return true;

@@ -29,6 +29,7 @@
 #include "DTitlebar"
 #include "DApplicationSettings"
 #include "deviceinfoparser.h"
+#include "environments.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -44,7 +45,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("deepin-devicemanager");
     app.setApplicationDisplayName(QObject::tr("Device Manager"));
 
-    app.setApplicationVersion(DApplication::buildVersion(QDate::currentDate().toString("yyyyMMdd")));
+    app.setApplicationVersion(VERSION);
 
     app.setProductName(QObject::tr("Device Manager"));
 

@@ -329,7 +329,10 @@ void CmdTool::loadPrinterInfo()
         QMap<QString, QString> mapInfo;
         dest = dests + i;
         getMapInfo(mapInfo, dest);
-        addMapInfo("printer", mapInfo);
+
+        // 这里为了和打印机管理保持一致，做出限制
+        if (mapInfo.size() > 10)
+            addMapInfo("printer", mapInfo);
     }
     cupsFreeDests(num_dests, dests);
 
@@ -1023,8 +1026,15 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
 }
 bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
 {
-//    qint64 begin = QDateTime::currentMSecsSinceEpoch();
-    QString key = "devicemanager";
+    QDateTime dt = QDateTime::currentDateTime();
+    QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
+    QString dtInt = QString::number(dt.toMSecsSinceEpoch());
+    QString key = getPKStr(dtStr, dtInt);
+
+//    用于测试
+//    QString str1, str2;
+//    getPKStr(str1, str2, key);
+
     QString cmd = proxy;
     QProcess process_;
     int msecs = 10000;
@@ -1038,8 +1048,6 @@ bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
     bool res = process_.waitForFinished(msecs);
     deviceInfo = process_.readAllStandardOutput();
     int exitCode = process_.exitCode();
-//    qint64 end = QDateTime::currentMSecsSinceEpoch();
-//    qDebug() << cmd << "*********" << (end - begin) / 1000.0;
     if (cmd.startsWith("pkexec deepin-devicemanager-authenticateProxy") && (exitCode == 127 || exitCode == 126)) {
         //dError("Run \'" + cmd + "\' failed: Password Error! " + QString::number(exitCode) + "\n");
         return false;
@@ -1079,7 +1087,39 @@ QString CmdTool::getPKStr(const QString &dtStr, const QString &dtInt)
     QString value4 = str.mid(6, 4);
     QString value5 = str.mid(10);
 
-    QString newDtStr = QString("%1%2%3%4%5%6%7%8%9%10%11").arg(value4).arg(dayStr).arg(value2).arg(secondStr).arg(value1).arg(hourStr).arg(value3).arg(monthStr).arg(yearStr).arg(minusStr).arg(value5);
+    QTime time = QTime::currentTime();
+    qsrand(uint(time.msec()) + uint(time.second()) * 1000);
+    int random = (qrand() % 10000 + 10000) * 3;  //产生随机数
+    QString randomS = QString::number(random);
+
+    QString newDtStr = QString("%1%2%3%4%5%6%7%8%9%10%11%12").arg(value4).arg(dayStr).arg(value2).arg(secondStr).arg(value1).arg(hourStr).arg(value3).arg(monthStr).arg(yearStr).arg(minusStr).arg(value5).arg(randomS);
 
     return newDtStr;
+}
+
+void CmdTool::getPKStr(QString &dtStr, QString &dtInt, const QString &cStr)
+{
+    QString value4 = cStr.mid(0, 4);
+    QString dayStr = QString("%1").arg(cStr.mid(4, 2).toInt() / 3, 2, 10, QLatin1Char('0'));
+    QString value2 = cStr.mid(6, 2);
+    QString secondStr = QString("%1").arg(cStr.mid(8, 2).toInt(), 2, 10, QLatin1Char('0'));
+    QString value1 = cStr.mid(10, 1);
+    QString hourStr = QString("%1").arg(cStr.mid(11, 2).toInt() / 4, 2, 10, QLatin1Char('0'));
+    QString value3 = cStr.mid(13, 3);
+    QString monthStr = QString("%1").arg(cStr.mid(16, 2).toInt() / 7, 2, 10, QLatin1Char('0'));
+    QString yearStr = QString("%1").arg(cStr.mid(18, 4).toInt() + 253, 4, 10, QLatin1Char('0'));
+    QString minuStr = cStr.mid(22, 2);
+
+    QString value5 = cStr.mid(24);
+    QString extraS = value5.right(5);
+    value5.replace(extraS, "");
+
+    int extraInt = extraS.toInt();
+    if (extraInt % 3 != 0) {
+        dtStr = "111";
+        return;
+    }
+
+    dtStr = QString("%1:%2:%3:%4:%5:%6").arg(yearStr, monthStr, dayStr, hourStr, minuStr, secondStr);
+    dtInt = QString("%1%2%3%4%5").arg(value1).arg(value2).arg(value3).arg(value4).arg(value5);
 }
