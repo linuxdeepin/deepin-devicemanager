@@ -92,7 +92,7 @@ void NetworkadapterWidget::addDeviceDetail(const DeviceNetwork &device, bool wit
     addDeviceAttribute(tr("Logical Name"), device.logicalName(), attributes);
     addDeviceAttribute(tr("MAC Address"), device.MACAddress(), attributes);
     addDeviceAttribute(tr("IRQ"), device.irq(), attributes);
-    addDeviceAttribute(tr("Memory"), device.memory(), attributes);
+    addDeviceAttribute(tr("Memory Address"), device.memory(), attributes);
     addDeviceAttribute(tr("Width"), device.width(), attributes);
     addDeviceAttribute(tr("Clock"), device.clock(), attributes);
     addDeviceAttribute(tr("Auto Negotiation"), device.autoNegotiation(), attributes);

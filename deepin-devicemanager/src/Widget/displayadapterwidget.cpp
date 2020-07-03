@@ -101,7 +101,7 @@ void DisplayadapterWidget::addDeviceDetail(const DeviceGpu &device, bool withTit
     addDeviceAttribute(tr("Maximum Resolution"), device.maximumResolution(), attributes, true);
     addDeviceAttribute(tr("Bus Info"), device.busInfo(), attributes, true);
     addDeviceAttribute(tr("IO Port"), device.ioPort(), attributes, true);
-    addDeviceAttribute(tr("Memory"), device.memory(), attributes, true);
+    addDeviceAttribute(tr("Memory Address"), device.memory(), attributes, true);
     addDeviceAttribute(tr("Physical ID"), device.physID(), attributes, true);
 
     // 添加其他信息

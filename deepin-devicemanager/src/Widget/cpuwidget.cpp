@@ -131,7 +131,7 @@ const QString getTrNumber(int i)
 {
     static const  QStringList trNumbers = {
         QObject::tr("One"),
-        QObject::tr("Two"),
+        QObject::tr("One"),
         QObject::tr("Two"),
         QObject::tr("Four"),
         QObject::tr("Four"),

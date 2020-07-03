@@ -759,7 +759,15 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
         }
         QRegExp re(".*\"(.*)\".*");
         if (re.exactMatch(words[1].trimmed())) {
-            mapInfo[words[0].trimmed()] += re.cap(1);
+            QString key = words[0].trimmed();
+            QString value = re.cap(1);
+
+            //这里是为了防止  "usb-storage", "sr"  -》 usb-storage", "sr
+            if (key == "Driver") {
+                value.replace("\"", "");
+            }
+            mapInfo[key] += value;
+
         } else {
             if (words[0].trimmed() == "Resolution") {
                 mapInfo[words[0].trimmed()] += words[1].trimmed();

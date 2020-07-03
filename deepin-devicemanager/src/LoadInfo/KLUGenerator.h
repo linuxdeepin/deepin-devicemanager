@@ -29,7 +29,9 @@ protected:
 
     /**@brief:generator disk info from hwinfo*/
     virtual void getDiskInfoFromHwinfo();
+    virtual void getDiskInfoFromLshw();
     virtual void getDiskInfoFromLsblk();
+    virtual void getDiskInfoFromSmartCtl();
 
     /**@brief:generator audio info*/
     virtual void getAudioInfoFromCatAudio();
