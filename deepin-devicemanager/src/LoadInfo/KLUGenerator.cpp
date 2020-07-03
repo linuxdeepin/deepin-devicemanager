@@ -57,6 +57,15 @@ void KLUGenerator::generatorComputerDevice()
             info.remove(tmp);
             info.insert(index, reg.cap(1));
         }
+
+        // 按照华为要求,去除所有括号中的信息
+        reg.setPattern("\\([\\s\\S]*\\)");
+        index = reg.indexIn(info);
+        if (index != -1) {
+            QString tmp = reg.cap(0);
+            info.remove(tmp);
+        }
+
         device.setOS(info);
     }
     DeviceManager::instance()->addComputerDevice(device);
