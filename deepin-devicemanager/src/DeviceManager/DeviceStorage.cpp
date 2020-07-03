@@ -179,13 +179,20 @@ bool DeviceStorage::isValid()
 
 void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
 {
+    // Serial ID 与 device Files 中信息一致
     if (!m_SerialNumber.isEmpty() && deviceFiles.contains(m_SerialNumber)) {
         return;
     }
+
     QStringList itemList = deviceFiles.split(",");
 
+    QString modelName = m_Model;
+    modelName.replace(" ", "_");
+
     foreach (auto item, itemList) {
-        if (item.contains("by-id", Qt::CaseInsensitive)) {
+        if (item.contains("by-id", Qt::CaseInsensitive) &&
+                item.contains(modelName, Qt::CaseInsensitive)) {
+
             int index;/* = item.indexOf(QRegExp("_[\\S\\d]*[\\s\\S]*$"));
             item = item.mid(index);*/
             index = item.lastIndexOf("_");

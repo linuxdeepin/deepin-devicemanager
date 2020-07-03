@@ -50,6 +50,10 @@ void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const Q
         if (variable.isEmpty()) {
             variable = mapInfo[key].trimmed();
         }
+
+        if (variable.contains("Unknown", Qt::CaseInsensitive)) {
+            variable = mapInfo[key].trimmed();
+        }
     }
 }
 
