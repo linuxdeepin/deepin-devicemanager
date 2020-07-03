@@ -38,8 +38,8 @@
         <translation>中断</translation>
     </message>
     <message>
-        <source>Memory</source>
-        <translation>内存</translation>
+        <source>Memory Address</source>
+        <translation>内存地址</translation>
     </message>
     <message>
         <source>Width</source>
@@ -579,8 +579,8 @@
         <translation>I/O端口</translation>
     </message>
     <message>
-        <source>Memory</source>
-        <translation>内存</translation>
+        <source>Memory Address</source>
+        <translation>内存地址</translation>
     </message>
     <message>
         <source>Physical ID</source>
@@ -941,8 +941,8 @@
         <translation>中断</translation>
     </message>
     <message>
-        <source>Memory</source>
-        <translation>内存</translation>
+        <source>Memory Address</source>
+        <translation>内存地址</translation>
     </message>
     <message>
         <source>Width</source>

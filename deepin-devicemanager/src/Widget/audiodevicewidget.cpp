@@ -92,7 +92,7 @@ void AudiodeviceWidget::addDeviceDetail(const DeviceAudio &device, bool withTitl
     addDeviceAttribute(tr("Bus Info"), device.busInfo(), attributes);
     addDeviceAttribute(tr("Capabilities"), device.capabilities(), attributes);
     addDeviceAttribute(tr("IRQ"), device.irq(), attributes);
-    addDeviceAttribute(tr("Memory"), device.memory(), attributes);
+    addDeviceAttribute(tr("Memory Address"), device.memory(), attributes);
     addDeviceAttribute(tr("Width"), device.width(), attributes);
     addDeviceAttribute(tr("Clock"), device.clock(), attributes);
     addDeviceAttribute(tr("Chip"), device.chip(), attributes);

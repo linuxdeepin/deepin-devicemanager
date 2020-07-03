@@ -92,7 +92,7 @@ void OtherPciDeviceWidget::addDeviceDetail(const DeviceOtherPCI &device, bool wi
     addDeviceAttribute(tr("Clock"), device.clock(), attributes);
     addDeviceAttribute(tr("Latency"), device.latency(), attributes);
     addDeviceAttribute(tr("IRQ"), device.irq(), attributes);
-    addDeviceAttribute(tr("Memory"), device.memory(), attributes);
+    addDeviceAttribute(tr("Memory Address"), device.memory(), attributes);
     addDeviceAttribute(tr("Input/Output"), device.inputOutput(), attributes);
 
     // 添加其他信息
