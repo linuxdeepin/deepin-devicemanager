@@ -35,7 +35,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     }
 
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
-    setDiskSerialID(mapInfo["Device Files"]);
+    ///setDiskSerialID(mapInfo["Device Files"]);
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
 
@@ -71,7 +71,7 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
 
 
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
-    setDiskSerialID(mapInfo["Device Files"]);
+//    setDiskSerialID(mapInfo["Device Files"]);
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
 
@@ -354,4 +354,6 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     if (mapInfo["Model Number"].isEmpty() == false) {
         m_Model = mapInfo["Model Number"];
     }
+
+    setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
 }
