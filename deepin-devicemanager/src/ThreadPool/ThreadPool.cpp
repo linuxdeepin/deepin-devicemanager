@@ -229,6 +229,7 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
     cmdList.append({ "hwinfo_network",       "hwinfo --network",        "hwinfo_network.txt",     ""});
     cmdList.append({ "hwinfo_keyboard",      "hwinfo --keyboard",       "hwinfo_keyboard.txt",    tr("Loading Bluetooth Device Info...")});
     cmdList.append({ "hwinfo_cdrom",         "hwinfo --cdrom",          "hwinfo_cdrom.txt",       tr("Loading Image Devices Info...")});
+                                            // 注意：这里一定要用 sudo hwinfo --disk,因为很多机器只有加上sudo 才能获取硬盘的大小
     cmdList.append({ "hwinfo_disk",          "sudo hwinfo --disk",           "hwinfo_disk.txt",        tr("Loading Keyboard Info...")});
     cmdList.append({ "hwinfo_display",       "hwinfo --display",        "hwinfo_display.txt",     ""});
     cmdList.append({ "hwinfo_mouse",         "hwinfo --mouse",          "hwinfo_mouse.txt",       ""});
