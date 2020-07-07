@@ -46,15 +46,18 @@ public:
     ~DeviceInfoParser();
 
 
-private:
+//    /**
+//     * @brief:命令的执行
+//     */
     bool getDeviceInfo(const QString &command, QString &deviceInfo, const QString &debugFile = QString(""));
+    bool executeProcess(const QString &cmd, QString &deviceInfo);
+    bool runCmd(const QString &cmd, QString &deviceInfo);
+    QString getPKStr(const QString &dtStr, const QString &dtInt);
+    void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr);
 
 public:
     QString loadGeneratorKey();
     bool getRootPassword();
-    bool executeProcess(const QString &cmd);
-    bool runCmd(const QString &cmd);
-    bool runCmd(const QStringList &cmdList);
 
     QString standOutput_;
 };
