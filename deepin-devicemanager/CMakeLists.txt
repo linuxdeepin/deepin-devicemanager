@@ -96,7 +96,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/include/Qt
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/docx)
 #add cups
 include_directories("/usr/include/cups/")
-link_directories("/usr/lib/cups/")
+#link_directories("/usr/lib/cups/")
 link_libraries("cups")
 
 file(GLOB_RECURSE DEVICE_SRC ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)

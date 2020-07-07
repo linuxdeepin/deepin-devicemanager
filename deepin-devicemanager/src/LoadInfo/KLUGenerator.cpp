@@ -169,6 +169,13 @@ void KLUGenerator::getDiskInfoFromHwinfo()
 
 void KLUGenerator::getDiskInfoFromLshw()
 {
+    QString modelStr = "";
+    const QList<QMap<QString, QString>> listMapInfo = DeviceManager::instance()->cmdInfo("bootdevice");
+    if(listMapInfo.size() > 0){
+        QMap<QString, QString> map = listMapInfo[0];
+        modelStr = map["Model"];
+    }
+
     const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_disk");
     QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
     for (; dIt != lstDisk.end(); ++dIt) {
@@ -182,8 +189,9 @@ void KLUGenerator::getDiskInfoFromLshw()
             tempMap.insert(key, (*dIt)[key]);
         }
 
+
         // HW写死
-        if (tempMap["product"] == "THR920GFCV100HAF" && tempMap["vendor"] == "HISI") {
+        if (tempMap["product"] == modelStr) {
             // 应HW的要求，将描述固定为   Universal Flash Storage
             tempMap["description"] = "Universal Flash Storage";
             // 应HW的要求，添加interface   UFS 3.0

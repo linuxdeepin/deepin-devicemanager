@@ -107,6 +107,9 @@ bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
         m_KeyFromStorage.replace("@", "");
     }
 
+    // 更新接口
+    setAttribute(mapInfo,"interface",m_Interface,false);
+
 
     // 获取基本信息
     getInfoFromLshw(mapInfo);
@@ -136,11 +139,11 @@ bool DeviceStorage::setMediaType(const QString &name, const QString &value)
     }
 
     if (QString("0") == value) {
-        m_MediaType = "SSD";
+        m_MediaType = QObject::tr("SSD");
     } else if (QString("1") == value) {
-        m_MediaType = "HDD";
+        m_MediaType = QObject::tr("HDD");
     } else {
-        m_MediaType = "UnKnow";
+        m_MediaType = QObject::tr("UnKnow");
     }
 
     return true;
@@ -157,11 +160,11 @@ bool DeviceStorage::setKLUMediaType(const QString &name, const QString &value)
     }
 
     if (QString("0") == value) {
-        m_MediaType = "SSD";
+        m_MediaType = QObject::tr("SSD");
     } else if (QString("1") == value) {
-        m_MediaType = "HDD";
+        m_MediaType = QObject::tr("HDD");
     } else {
-        m_MediaType = "UnKnow";
+        m_MediaType = QObject::tr("UnKnow");
     }
 
     return true;

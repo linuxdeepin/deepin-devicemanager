@@ -245,6 +245,7 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
 
     if (arch == "KLU" || arch == "PanGuV") {
         cmdList.append({ "gpuinfo",              "gpuinfo",                 "gpuinfo.txt",            ""});
+        cmdList.append({ "bootdevice",           "cat /proc/bootdevice/manfid",                 "bootdevice.txt",            ""});
     }
 
     cmdList.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "cat_cpuinfo.txt",        tr("Loading Monitor Info...")});
