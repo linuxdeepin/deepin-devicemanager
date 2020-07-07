@@ -143,7 +143,7 @@ bool DeviceStorage::setMediaType(const QString &name, const QString &value)
     } else if (QString("1") == value) {
         m_MediaType = QObject::tr("HDD");
     } else {
-        m_MediaType = QObject::tr("UnKnow");
+        m_MediaType = QObject::tr("Unknown");
     }
 
     return true;
@@ -164,7 +164,7 @@ bool DeviceStorage::setKLUMediaType(const QString &name, const QString &value)
     } else if (QString("1") == value) {
         m_MediaType = QObject::tr("HDD");
     } else {
-        m_MediaType = QObject::tr("UnKnow");
+        m_MediaType = QObject::tr("Unknown");
     }
 
     return true;
