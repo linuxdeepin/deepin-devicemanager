@@ -134,6 +134,7 @@ target_link_libraries(${APP_BIN_NAME}
 
 set(CMAKE_INSTALL_PREFIX /usr)
 
+
 # Install files
 install(TARGETS deepin-devicemanager DESTINATION bin)
 

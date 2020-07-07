@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Operační paměť</translation>
+        <translation type="vanished">Operační paměť</translation>
     </message>
     <message>
         <source>Width</source>
@@ -52,6 +52,10 @@
     <message>
         <source>Chip</source>
         <translation>Čip</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -580,11 +584,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Operační paměť</translation>
+        <translation type="vanished">Operační paměť</translation>
     </message>
     <message>
         <source>Physical ID</source>
         <translation>Fyzický identif.</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -942,7 +950,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Operační paměť</translation>
+        <translation type="vanished">Operační paměť</translation>
     </message>
     <message>
         <source>Width</source>
@@ -995,6 +1003,10 @@
     <message>
         <source>Capacity</source>
         <translation>Kapacita</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1101,11 +1113,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Operační paměť</translation>
+        <translation type="vanished">Operační paměť</translation>
     </message>
     <message>
         <source>Input/Output</source>
         <translation>Vstup/výstup</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2095,6 +2111,14 @@
     <message>
         <source>Date</source>
         <translation>Datum</translation>
+    </message>
+    <message>
+        <source>SSD</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>HDD</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

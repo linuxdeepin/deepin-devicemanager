@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Пам&apos;ять</translation>
+        <translation type="vanished">Пам&apos;ять</translation>
     </message>
     <message>
         <source>Width</source>
@@ -52,6 +52,10 @@
     <message>
         <source>Chip</source>
         <translation>Мікросхема</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -580,11 +584,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Пам&apos;ять</translation>
+        <translation type="vanished">Пам&apos;ять</translation>
     </message>
     <message>
         <source>Physical ID</source>
         <translation>Фізичний ID</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -942,7 +950,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Пам&apos;ять</translation>
+        <translation type="vanished">Пам&apos;ять</translation>
     </message>
     <message>
         <source>Width</source>
@@ -995,6 +1003,10 @@
     <message>
         <source>Capacity</source>
         <translation>Місткість</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1101,11 +1113,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Пам&apos;ять</translation>
+        <translation type="vanished">Пам&apos;ять</translation>
     </message>
     <message>
         <source>Input/Output</source>
         <translation>Вхід/Вихід</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2095,6 +2111,14 @@
     <message>
         <source>Date</source>
         <translation>Дата</translation>
+    </message>
+    <message>
+        <source>SSD</source>
+        <translation>SSD</translation>
+    </message>
+    <message>
+        <source>HDD</source>
+        <translation>HDD</translation>
     </message>
 </context>
 <context>

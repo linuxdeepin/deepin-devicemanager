@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>內存</translation>
+        <translation type="vanished">內存</translation>
     </message>
     <message>
         <source>Width</source>
@@ -52,6 +52,10 @@
     <message>
         <source>Chip</source>
         <translation>晶片</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation>內存地址</translation>
     </message>
 </context>
 <context>
@@ -580,11 +584,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>內存</translation>
+        <translation type="vanished">內存</translation>
     </message>
     <message>
         <source>Physical ID</source>
         <translation>物理ID</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation>內存地址</translation>
     </message>
 </context>
 <context>
@@ -942,7 +950,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>內存</translation>
+        <translation type="vanished">內存</translation>
     </message>
     <message>
         <source>Width</source>
@@ -995,6 +1003,10 @@
     <message>
         <source>Capacity</source>
         <translation>容量</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation>內存地址</translation>
     </message>
 </context>
 <context>
@@ -1101,11 +1113,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>內存</translation>
+        <translation type="vanished">內存</translation>
     </message>
     <message>
         <source>Input/Output</source>
         <translation>輸入/輸出</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation>內存地址</translation>
     </message>
 </context>
 <context>
@@ -2095,6 +2111,14 @@
     <message>
         <source>Date</source>
         <translation>日期</translation>
+    </message>
+    <message>
+        <source>SSD</source>
+        <translation>固態</translation>
+    </message>
+    <message>
+        <source>HDD</source>
+        <translation>機械</translation>
     </message>
 </context>
 <context>

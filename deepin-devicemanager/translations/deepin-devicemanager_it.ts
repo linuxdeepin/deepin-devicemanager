@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation type="vanished">Memoria</translation>
     </message>
     <message>
         <source>Width</source>
@@ -52,6 +52,10 @@
     <message>
         <source>Chip</source>
         <translation>Chip</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -580,11 +584,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation type="vanished">Memoria</translation>
     </message>
     <message>
         <source>Physical ID</source>
         <translation>ID Fisico</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -942,7 +950,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation type="vanished">Memoria</translation>
     </message>
     <message>
         <source>Width</source>
@@ -995,6 +1003,10 @@
     <message>
         <source>Capacity</source>
         <translation>Capacità</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1101,11 +1113,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation type="vanished">Memoria</translation>
     </message>
     <message>
         <source>Input/Output</source>
         <translation>Ingressi/Uscite</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2096,6 +2112,14 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     <message>
         <source>Date</source>
         <translation>Data</translation>
+    </message>
+    <message>
+        <source>SSD</source>
+        <translation>SSD</translation>
+    </message>
+    <message>
+        <source>HDD</source>
+        <translation>HDD</translation>
     </message>
 </context>
 <context>

@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation type="vanished">Memoria</translation>
     </message>
     <message>
         <source>Width</source>
@@ -51,6 +51,10 @@
     </message>
     <message>
         <source>Chip</source>
+        <translation>Chip</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -580,11 +584,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation type="vanished">Memoria</translation>
     </message>
     <message>
         <source>Physical ID</source>
         <translation>ID físico</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -942,7 +950,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation type="vanished">Memoria</translation>
     </message>
     <message>
         <source>Width</source>
@@ -995,6 +1003,10 @@
     <message>
         <source>Capacity</source>
         <translation>Capacidad</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1101,11 +1113,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation type="vanished">Memoria</translation>
     </message>
     <message>
         <source>Input/Output</source>
         <translation>Entrada/Salida</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1184,7 +1200,7 @@
     </message>
     <message>
         <source>No battery found</source>
-        <translation type="unfinished"/>
+        <translation>No se encontró batería</translation>
     </message>
 </context>
 <context>
@@ -1922,51 +1938,51 @@
     </message>
     <message>
         <source>CPU implementer</source>
-        <translation type="unfinished"/>
+        <translation>Implementador de CPU</translation>
     </message>
     <message>
         <source>CPU architecture</source>
-        <translation type="unfinished"/>
+        <translation>Arquitectura de CPU</translation>
     </message>
     <message>
         <source>CPU variant</source>
-        <translation type="unfinished"/>
+        <translation>Variante de CPU</translation>
     </message>
     <message>
         <source>CPU part</source>
-        <translation type="unfinished"/>
+        <translation>Parte de CPU</translation>
     </message>
     <message>
         <source>CPU revision</source>
-        <translation type="unfinished"/>
+        <translation>Versión de CPU</translation>
     </message>
     <message>
         <source>GDDR capacity</source>
-        <translation type="unfinished"/>
+        <translation>Capacidad de GDDR</translation>
     </message>
     <message>
         <source>GPU vendor</source>
-        <translation type="unfinished"/>
+        <translation>Vendedor de GPU</translation>
     </message>
     <message>
         <source>GPU type</source>
-        <translation type="unfinished"/>
+        <translation>Tipo de GPU</translation>
     </message>
     <message>
         <source>EGL version</source>
-        <translation type="unfinished"/>
+        <translation>Versión de EGL</translation>
     </message>
     <message>
         <source>EGL client APIs</source>
-        <translation type="unfinished"/>
+        <translation>Cliente de APIs EGL</translation>
     </message>
     <message>
         <source>GL version</source>
-        <translation type="unfinished"/>
+        <translation>Versión de GL</translation>
     </message>
     <message>
         <source>GLSL version</source>
-        <translation type="unfinished"/>
+        <translation>Versión de GLSL</translation>
     </message>
     <message>
         <source>Array Handle</source>
@@ -1990,7 +2006,7 @@
     </message>
     <message>
         <source>Part Number</source>
-        <translation type="unfinished"/>
+        <translation>Número de parte</translation>
     </message>
     <message>
         <source>Rank</source>
@@ -1998,11 +2014,11 @@
     </message>
     <message>
         <source>Memory Technology</source>
-        <translation type="unfinished"/>
+        <translation>Tecnología de memoria</translation>
     </message>
     <message>
         <source>Memory Operating Mode Capability</source>
-        <translation type="unfinished"/>
+        <translation>Capacidad de modo operativo de memoria</translation>
     </message>
     <message>
         <source>Firmware Version</source>
@@ -2010,27 +2026,27 @@
     </message>
     <message>
         <source>Module Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ID del fabricante del módulo</translation>
     </message>
     <message>
         <source>Module Product ID</source>
-        <translation type="unfinished"/>
+        <translation>ID del producto del módulo</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ID del fabricante del controlador del subsistema de memoria</translation>
     </message>
     <message>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation type="unfinished"/>
+        <translation>ID del producto del controlador del subsistema de memoria</translation>
     </message>
     <message>
         <source>Non-Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Tamaño no volátil</translation>
     </message>
     <message>
         <source>Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Tamaño volátil</translation>
     </message>
     <message>
         <source>Cache Size</source>
@@ -2038,11 +2054,11 @@
     </message>
     <message>
         <source>Logical Size</source>
-        <translation type="unfinished"/>
+        <translation>Tamaño lógico</translation>
     </message>
     <message>
         <source>network</source>
-        <translation type="unfinished"/>
+        <translation>red</translation>
     </message>
     <message>
         <source>Model</source>
@@ -2094,6 +2110,14 @@
     </message>
     <message>
         <source>Date</source>
+        <translation>Fecha</translation>
+    </message>
+    <message>
+        <source>SSD</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>HDD</source>
         <translation type="unfinished"/>
     </message>
 </context>

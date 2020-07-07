@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Mémoire</translation>
+        <translation type="vanished">Mémoire</translation>
     </message>
     <message>
         <source>Width</source>
@@ -52,6 +52,10 @@
     <message>
         <source>Chip</source>
         <translation>Carte</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -318,7 +322,7 @@
     </message>
     <message>
         <source>Max Speed</source>
-        <translation>Vitesse maximale</translation>
+        <translation>Vitesse max</translation>
     </message>
 </context>
 <context>
@@ -580,11 +584,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Mémoire</translation>
+        <translation type="vanished">Mémoire</translation>
     </message>
     <message>
         <source>Physical ID</source>
         <translation>ID physique</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -942,7 +950,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Mémoire</translation>
+        <translation type="vanished">Mémoire</translation>
     </message>
     <message>
         <source>Width</source>
@@ -995,6 +1003,10 @@
     <message>
         <source>Capacity</source>
         <translation>Capacité</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1101,11 +1113,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>Mémoire</translation>
+        <translation type="vanished">Mémoire</translation>
     </message>
     <message>
         <source>Input/Output</source>
         <translation>Entrée/Sortie</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1914,7 +1930,7 @@
     </message>
     <message>
         <source>Handlers</source>
-        <translation>Sous-routines</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Firmware Revision</source>
@@ -1970,7 +1986,7 @@
     </message>
     <message>
         <source>Array Handle</source>
-        <translation>Poignée du tableau</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Form Factor</source>
@@ -2094,6 +2110,14 @@
     </message>
     <message>
         <source>Date</source>
+        <translation>Date</translation>
+    </message>
+    <message>
+        <source>SSD</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>HDD</source>
         <translation type="unfinished"/>
     </message>
 </context>

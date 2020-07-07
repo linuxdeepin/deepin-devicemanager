@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>메모리</translation>
+        <translation type="vanished">메모리</translation>
     </message>
     <message>
         <source>Width</source>
@@ -52,6 +52,10 @@
     <message>
         <source>Chip</source>
         <translation>칩</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -580,11 +584,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>메모리</translation>
+        <translation type="vanished">메모리</translation>
     </message>
     <message>
         <source>Physical ID</source>
         <translation>물리적 ID</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -942,7 +950,7 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>메모리</translation>
+        <translation type="vanished">메모리</translation>
     </message>
     <message>
         <source>Width</source>
@@ -995,6 +1003,10 @@
     <message>
         <source>Capacity</source>
         <translation>용량</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1101,11 +1113,15 @@
     </message>
     <message>
         <source>Memory</source>
-        <translation>메모리</translation>
+        <translation type="vanished">메모리</translation>
     </message>
     <message>
         <source>Input/Output</source>
         <translation>입력/출력</translation>
+    </message>
+    <message>
+        <source>Memory Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2095,6 +2111,14 @@
     <message>
         <source>Date</source>
         <translation>날짜</translation>
+    </message>
+    <message>
+        <source>SSD</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>HDD</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
