@@ -34,6 +34,9 @@ public:
     /**@brief:设置序列号属性 from Device Files*/
     void setDiskSerialID(const QString &deviceFiles);
 
+    /**@brief:比较nvme提供的两个容量值的大小*/
+    QString compareSize(const QString &size1, const QString &size2);
+
     /**@brief:获取各种设备属性*/
     const QString &model()const;
     const QString &vendor()const;

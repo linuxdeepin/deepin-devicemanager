@@ -204,6 +204,33 @@ void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
     }
 }
 
+QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
+{
+    if (size1.isEmpty() || size2.isEmpty()) {
+        return size1 + size2;
+    }
+
+    QRegExp reg("[0-9]*");
+    int index = reg.indexIn(size1);
+    int num1 = 0;
+    int num2 = 0;
+    if (index > 0) {
+        num1 = reg.cap(0).toInt();
+    }
+
+    index = reg.indexIn(size2);
+
+    if (index > 0) {
+        num2 = reg.cap(0).toInt();
+    }
+
+    if (num1 > num2) {
+        return size1;
+    } else {
+        return size2;
+    }
+}
+
 const QString &DeviceStorage::model()const
 {
     return m_Model;
@@ -335,7 +362,7 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     // 安装大小
     QString capacity = mapInfo["User Capacity"];
     if (capacity == "") {
-        capacity = mapInfo["Total NVM Capacity"];
+        capacity = compareSize(mapInfo["Total NVM Capacity"], mapInfo["Namespace 1 Size/Capacity"]);
     }
 
     if (capacity != "") {
@@ -344,6 +371,8 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
             m_Size = reg.cap(1);
         }
     }
+
+
 
     // 型号
     //SATA
