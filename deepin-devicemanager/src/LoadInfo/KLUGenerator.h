@@ -20,6 +20,9 @@ protected:
     /**@brief:generator audio info*/
     virtual void generatorAudioDevice();
 
+    /**@brief:generator power info*/
+    virtual void generatorPowerDevice();
+
 protected:
     /**@brief:generator keyboard info from hwinfo*/
     virtual void getKeyboardInfoFromHwinfo();

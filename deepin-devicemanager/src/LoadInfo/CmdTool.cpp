@@ -520,7 +520,6 @@ void CmdTool::loadUpowerInfo(const QString &key, const QString &cmd, const QStri
             addMapInfo("Daemon", mapInfo);
         } else {
             addMapInfo(key, mapInfo);
-            mapInfo["critical-action"] = "Suspend";
         }
     }
 }

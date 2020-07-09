@@ -7,6 +7,7 @@
 #include "DeviceManager/DeviceStorage.h"
 #include "DeviceManager/DeviceAudio.h"
 #include "DeviceManager/DeviceComputer.h"
+#include "DeviceManager/DevicePower.h"
 #include<QDebug>
 
 KLUGenerator::KLUGenerator()
@@ -106,6 +107,41 @@ void KLUGenerator::generatorAudioDevice()
     getAudioInfoFromCatAudio();
 }
 
+void KLUGenerator::generatorPowerDevice()
+{
+    const QList<QMap<QString, QString> > &daemon = DeviceManager::instance()->cmdInfo("Daemon");
+    bool hasDaemon = false;
+    // 守护进程信息
+    if (daemon.size() > 0) {
+        hasDaemon = true;
+    }
+    // 电池或这电源信息
+    const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("upower");
+    QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
+    for (; it != lstInfo.end(); ++it) {
+        if ((*it).size() < 2) {
+            continue;
+        }
+        DevicePower device;
+        if (!device.setInfoFromUpower(*it)) {
+            continue;
+        }
+        if (hasDaemon) {
+            // KLU的问题特殊处理
+            QMap<QString, QString> tempMap = daemon[0];
+
+            // HW写死
+            // 应HW的要求，将电量极低时执行固定为  Suspend
+            tempMap["critical-action"] = "Suspend";
+
+
+//            device.setDaemonInfo(daemon[0]);
+            device.setDaemonInfo(tempMap);
+        }
+        DeviceManager::instance()->addPowerDevice(device);
+    }
+}
+
 void KLUGenerator::getKeyboardInfoFromHwinfo()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_keyboard");
@@ -172,7 +208,7 @@ void KLUGenerator::getDiskInfoFromLshw()
 {
     QString modelStr = "";
     const QList<QMap<QString, QString>> listMapInfo = DeviceManager::instance()->cmdInfo("bootdevice");
-    if(listMapInfo.size() > 0){
+    if (listMapInfo.size() > 0) {
         QMap<QString, QString> map = listMapInfo[0];
         modelStr = map["Model"];
     }
@@ -190,7 +226,7 @@ void KLUGenerator::getDiskInfoFromLshw()
             tempMap.insert(key, (*dIt)[key]);
         }
 
-        qDebug() << tempMap["product"] << " ***** " << modelStr << " " << (tempMap["product"]==modelStr);
+        qDebug() << tempMap["product"] << " ***** " << modelStr << " " << (tempMap["product"] == modelStr);
         // HW写死
         if (tempMap["product"] == modelStr) {
             // 应HW的要求，将描述固定为   Universal Flash Storage
