@@ -61,9 +61,9 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
         loadCatAudioInfo(key, cmd, debugFile);
     }   else if (key == "EDID_HDMI" || key == "EDID_VGA") {
         loadEdidInfo(key, cmd, debugFile);
-    }  else if(key == "bootdevice"){
-        loadBootDeviceManfid(key,cmd,debugFile);
-    }else {
+    }  else if (key == "bootdevice") {
+        loadBootDeviceManfid(key, cmd, debugFile);
+    } else {
         loadCatInfo(key, cmd, debugFile);
     }
 
@@ -520,6 +520,7 @@ void CmdTool::loadUpowerInfo(const QString &key, const QString &cmd, const QStri
             addMapInfo("Daemon", mapInfo);
         } else {
             addMapInfo(key, mapInfo);
+            mapInfo["critical-action"] = "Suspend";
         }
     }
 }
