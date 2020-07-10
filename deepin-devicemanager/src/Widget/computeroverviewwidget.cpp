@@ -30,12 +30,13 @@
 
 DWIDGET_USE_NAMESPACE
 
-ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Overview"))
+ComputerOverviewWidget::ComputerOverviewWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Overview"))
 {
 
 }
 
-void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct> &others )
+void ComputerOverviewWidget::setOverviewInfos(const QList<ArticleStruct> &others)
 {
     QList<ArticleStruct> articles;
     DeviceComputer device;
@@ -53,7 +54,7 @@ void ComputerOverviewWidget::setOverviewInfos( const QList<ArticleStruct> &other
     // 添加操作系统信息
     ArticleStruct os(tr("Operating System"));
     os.value = device.osDescription() + " " + device.os();
-    if ( device.homeUrl().isEmpty() == false) {
+    if (device.homeUrl().isEmpty() == false) {
         os.externalLinks = true;
     }
     articles.push_back(os);

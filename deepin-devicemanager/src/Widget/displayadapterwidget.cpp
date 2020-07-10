@@ -28,7 +28,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-DisplayadapterWidget::DisplayadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Display Adapter"))
+DisplayadapterWidget::DisplayadapterWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Display Adapter"))
 {
     initWidgetEX();
 }
@@ -37,7 +38,7 @@ void DisplayadapterWidget::initWidgetEX()
     // 获取鼠标设备
     const QList<DeviceGpu> &devices = DeviceManager::instance()->getGPUDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No GPU found"));
         return;
     }
@@ -66,7 +67,7 @@ void DisplayadapterWidget::initTable(const QList<DeviceGpu> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void DisplayadapterWidget::initDetails(const QList<DeviceGpu> &devices)
 {
@@ -108,7 +109,7 @@ void DisplayadapterWidget::addDeviceDetail(const DeviceGpu &device, bool withTit
     addOtherDeviceAttribute(device, attributes, true);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.model() : "", attributes );
+    addSubInfo(withTitle ? device.model() : "", attributes);
 }
 
 void DisplayadapterWidget::setOverView(const QList<DeviceGpu> &devices)

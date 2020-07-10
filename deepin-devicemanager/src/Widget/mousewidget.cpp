@@ -28,7 +28,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-MouseWidget::MouseWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Mouse"))
+MouseWidget::MouseWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Mouse"))
 {
     //initWidget();
     initWidgetEX();
@@ -38,7 +39,7 @@ void MouseWidget::initWidgetEX()
     // 获取鼠标设备
     const QList<DeviceMouse> &mouseDevices = DeviceManager::instance()->getMouseDevices();
     int deviceNum = mouseDevices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No mouse found"));
         return;
     }
@@ -69,7 +70,7 @@ void MouseWidget::initTable(const QList<DeviceMouse> &mouseDevices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 
 }
 
@@ -101,7 +102,7 @@ void MouseWidget::addDeviceDetail(const DeviceMouse &mouseDevice, bool withTitle
     addOtherDeviceAttribute(mouseDevice, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? mouseDevice.name() : "", attributes );
+    addSubInfo(withTitle ? mouseDevice.name() : "", attributes);
 }
 
 void MouseWidget::setOverView(const QList<DeviceMouse> &devices)

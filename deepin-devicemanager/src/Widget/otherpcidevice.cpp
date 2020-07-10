@@ -28,7 +28,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Other PCI Devices"))
+OtherPciDeviceWidget::OtherPciDeviceWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Other PCI Devices"))
 {
     initWidgetEx();
 }
@@ -38,7 +39,7 @@ void OtherPciDeviceWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DeviceOtherPCI> &devices = DeviceManager::instance()->getOtherPCIDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No other PCI devices found"));
         return;
     }
@@ -67,7 +68,7 @@ void OtherPciDeviceWidget::initTable(const QList<DeviceOtherPCI> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void OtherPciDeviceWidget::initDetails(const QList<DeviceOtherPCI> &devices)
 {
@@ -99,7 +100,7 @@ void OtherPciDeviceWidget::addDeviceDetail(const DeviceOtherPCI &device, bool wi
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.model() : "", attributes );
+    addSubInfo(withTitle ? device.model() : "", attributes);
 }
 
 void OtherPciDeviceWidget::setOverView(const QList<DeviceOtherPCI> &devices)

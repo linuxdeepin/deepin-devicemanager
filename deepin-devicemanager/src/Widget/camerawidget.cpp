@@ -28,7 +28,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-CameraWidget::CameraWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Camera"))
+CameraWidget::CameraWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Camera"))
 {
     initWidgetEx();
 }
@@ -37,7 +38,7 @@ void CameraWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DeviceImage> &devices = DeviceManager::instance()->getImageDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No camera found"));
         return;
     }
@@ -66,7 +67,7 @@ void CameraWidget::initTable(const QList<DeviceImage> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void CameraWidget::initDetails(const QList<DeviceImage> &devices)
 {
@@ -94,7 +95,7 @@ void CameraWidget::addDeviceDetail(const DeviceImage &device, bool withTitle)
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.name() : "", attributes );
+    addSubInfo(withTitle ? device.name() : "", attributes);
 }
 
 void CameraWidget::setOverView(const QList<DeviceImage> &devices)

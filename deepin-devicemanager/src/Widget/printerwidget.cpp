@@ -28,7 +28,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-PrinterWidget::PrinterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Printer"))
+PrinterWidget::PrinterWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Printer"))
 {
     initWidgetEx();
 }
@@ -38,7 +39,7 @@ void PrinterWidget::initWidgetEx()
     // 获取打印机设备
     const QList<DevicePrint> &devices = DeviceManager::instance()->getPrintDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No printer found"));
         return;
     }
@@ -67,7 +68,7 @@ void PrinterWidget::initTable(const QList<DevicePrint> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void PrinterWidget::initDetails(const QList<DevicePrint> &devices)
 {
@@ -94,7 +95,7 @@ void PrinterWidget::addDeviceDetail(const DevicePrint &device, bool withTitle)
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.name() : "", attributes );
+    addSubInfo(withTitle ? device.name() : "", attributes);
 }
 
 void PrinterWidget::setOverView(const QList<DevicePrint> &devices)

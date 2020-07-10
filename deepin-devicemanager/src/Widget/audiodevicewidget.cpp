@@ -30,7 +30,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-AudiodeviceWidget::AudiodeviceWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Sound Adapter"))
+AudiodeviceWidget::AudiodeviceWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Sound Adapter"))
 {
     initWidgetEx();
 

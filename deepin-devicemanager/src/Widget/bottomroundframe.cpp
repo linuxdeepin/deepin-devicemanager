@@ -27,7 +27,10 @@
 #include <DApplicationHelper>
 #include <QDebug>
 DWIDGET_USE_NAMESPACE
-BottomRoundFrame::BottomRoundFrame(QWidget *parent) : QFrame(parent),m_textBrowser(nullptr),m_roundedRadius(18)
+BottomRoundFrame::BottomRoundFrame(QWidget *parent)
+    : QFrame(parent)
+    , m_textBrowser(nullptr)
+    , m_roundedRadius(18)
 {
     this->setFrameStyle(QFrame::Plain);
     this->setLineWidth(0);
@@ -38,7 +41,7 @@ BottomRoundFrame::BottomRoundFrame(QWidget *parent) : QFrame(parent),m_textBrows
 
 void BottomRoundFrame::setTextBroser(QTextBrowser *textBrowser)
 {
-   m_textBrowser = textBrowser;
+    m_textBrowser = textBrowser;
 //   setBackgroundRole(m_textBrowser->foregroundRole());
 }
 
@@ -51,14 +54,14 @@ void BottomRoundFrame::paintEvent(QPaintEvent *event)
     painter.setOpacity(1);
     painter.setClipping(true);
 
-    QPainterPath roundedPath,topPath;
+    QPainterPath roundedPath, topPath;
     QRect rect = this->rect();
-    topPath.addRect(QRect(rect.x(),rect.y(),width(),height()/2));
-    roundedPath.addRoundedRect(this->rect(),m_roundedRadius,m_roundedRadius);
+    topPath.addRect(QRect(rect.x(), rect.y(), width(), height() / 2));
+    roundedPath.addRoundedRect(this->rect(), m_roundedRadius, m_roundedRadius);
     roundedPath += topPath;
     painter.setClipPath(roundedPath);
 
-    painter.fillRect(QRect(rect.x(),rect.y(),rect.width(),rect.height()),m_textBrowser->viewport()->palette().base());
+    painter.fillRect(QRect(rect.x(), rect.y(), rect.width(), rect.height()), m_textBrowser->viewport()->palette().base());
     painter.restore();
 
     QFrame::paintEvent(event);

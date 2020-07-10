@@ -31,7 +31,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-MemoryWidget::MemoryWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Memory"))
+MemoryWidget::MemoryWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Memory"))
 {
     initWidgetEX();
 }
@@ -41,7 +42,7 @@ void MemoryWidget::initWidgetEX()
     // 获取鼠标设备
     const QList<DeviceMemory> &devices = DeviceManager::instance()->getMemoryDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No memory found"));
         return;
     }
@@ -71,7 +72,7 @@ void MemoryWidget::initTable(const QList<DeviceMemory> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void MemoryWidget::initDetails(const QList<DeviceMemory> &devices)
 {
@@ -103,7 +104,7 @@ void MemoryWidget::addDeviceDetail(const DeviceMemory &device, bool withTitle)
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.vendor() + " " + device.name() : "", attributes );
+    addSubInfo(withTitle ? device.vendor() + " " + device.name() : "", attributes);
 }
 
 void MemoryWidget::setOverView(const QList<DeviceMemory> &devices)

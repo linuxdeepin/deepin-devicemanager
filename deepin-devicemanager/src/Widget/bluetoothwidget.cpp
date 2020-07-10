@@ -29,7 +29,8 @@
 DWIDGET_USE_NAMESPACE
 
 
-BluetoothWidget::BluetoothWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Bluetooth"))
+BluetoothWidget::BluetoothWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Bluetooth"))
 {
     initWidgetEx();
 }
@@ -39,7 +40,7 @@ void BluetoothWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DeviceBluetooth> &devices = DeviceManager::instance()->getBluetoothDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No Bluetooth device found"));
         return;
     }
@@ -68,7 +69,7 @@ void BluetoothWidget::initTable(const QList<DeviceBluetooth> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void BluetoothWidget::initDetails(const QList<DeviceBluetooth> &devices)
 {
@@ -99,7 +100,7 @@ void BluetoothWidget::addDeviceDetail(const DeviceBluetooth &device, bool withTi
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.name() : "", attributes );
+    addSubInfo(withTitle ? device.name() : "", attributes);
 }
 
 void BluetoothWidget::setOverView(const QList<DeviceBluetooth> &devices)

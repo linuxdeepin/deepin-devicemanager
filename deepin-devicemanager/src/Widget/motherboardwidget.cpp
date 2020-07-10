@@ -29,7 +29,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-MotherboardWidget::MotherboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Motherboard"))
+MotherboardWidget::MotherboardWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Motherboard"))
 {
     initWidgetEx();
 }
@@ -39,7 +40,7 @@ void MotherboardWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DeviceBios> &devices = DeviceManager::instance()->getBiosDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No motherboard found"));
         return;
     }
@@ -63,7 +64,7 @@ void MotherboardWidget::initTable(const QList<DeviceBios> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void MotherboardWidget::initDetails(const QList<DeviceBios> &devices)
 {
@@ -84,7 +85,7 @@ void MotherboardWidget::addDeviceDetail(const DeviceBios &device, bool withTitle
     addOtherDeviceAttribute(device, attributes, true);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.name() : "", attributes );
+    addSubInfo(withTitle ? device.name() : "", attributes);
 }
 
 void MotherboardWidget::setOverView(const QList<DeviceBios> &devices)

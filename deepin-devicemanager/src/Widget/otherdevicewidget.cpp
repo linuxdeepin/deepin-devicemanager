@@ -28,7 +28,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-OtherDevicesWidget::OtherDevicesWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Other Devices", "Other Input Devices"))
+OtherDevicesWidget::OtherDevicesWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Other Devices", "Other Input Devices"))
 {
     initWidgetEx();
 }
@@ -38,7 +39,7 @@ void OtherDevicesWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DeviceOthers> &devices = DeviceManager::instance()->getOthersDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No other devices found"));
         return;
     }
@@ -67,7 +68,7 @@ void OtherDevicesWidget::initTable(const QList<DeviceOthers> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void OtherDevicesWidget::initDetails(const QList<DeviceOthers> &devices)
 {
@@ -94,7 +95,7 @@ void OtherDevicesWidget::addDeviceDetail(const DeviceOthers &device, bool withTi
     // 添加其他信息mouseDevice
 
     // 显示到界面
-    addSubInfo(withTitle ? device.model() : "", attributes );
+    addSubInfo(withTitle ? device.model() : "", attributes);
 }
 
 void OtherDevicesWidget::setOverView(const QList<DeviceOthers> &devices)

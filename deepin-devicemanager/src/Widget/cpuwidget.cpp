@@ -31,7 +31,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-CpuWidget::CpuWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("CPU"))
+CpuWidget::CpuWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("CPU"))
 {
     initWidgetEX();
 }
@@ -41,7 +42,7 @@ void CpuWidget::initWidgetEX()
     // 获取鼠标设备
     const QList<DeviceCpu> &cpuDevices = DeviceManager::instance()->getCPUDevices();
     int deviceNum = cpuDevices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No CPU found"));
         return;
     }
@@ -72,7 +73,7 @@ void CpuWidget::initTable(const QList<DeviceCpu> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void CpuWidget::initDetails(const QList<DeviceCpu> &devices)
 {
@@ -111,7 +112,7 @@ void CpuWidget::addDeviceDetail(const DeviceCpu &device, int index, bool withTit
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? QString("%1 %2").arg(tr("Processor")).arg(index) : "", attributes );
+    addSubInfo(withTitle ? QString("%1 %2").arg(tr("Processor")).arg(index) : "", attributes);
 }
 
 void CpuWidget::setOverView(const QList<DeviceCpu> &devices)

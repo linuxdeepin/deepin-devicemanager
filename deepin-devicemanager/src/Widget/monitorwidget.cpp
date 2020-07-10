@@ -33,7 +33,8 @@
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
-MonitorWidget::MonitorWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Monitor"))
+MonitorWidget::MonitorWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Monitor"))
 {
     initWidgetEx();
 }
@@ -43,7 +44,7 @@ void MonitorWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DeviceMonitor> &devices = DeviceManager::instance()->getMonitorDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No monitor found"));
         return;
     }
@@ -72,7 +73,7 @@ void MonitorWidget::initTable(const QList<DeviceMonitor> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void MonitorWidget::initDetails(const QList<DeviceMonitor> &devices)
 {
@@ -104,7 +105,7 @@ void MonitorWidget::addDeviceDetail(const DeviceMonitor &device, bool withTitle)
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.name() : "", attributes );
+    addSubInfo(withTitle ? device.name() : "", attributes);
 }
 
 void MonitorWidget::setOverView(const QList<DeviceMonitor> &devices)

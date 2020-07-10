@@ -70,7 +70,9 @@ DPalette DeviceInfoWidgetBase::defaultPa_;
 
 static int currentXlsRow_ = 1;
 
-DeivceInfoBrower::DeivceInfoBrower(DeviceInfoWidgetBase *parent): DTextBrowser(parent), deviceInfoWidget_(parent)
+DeivceInfoBrower::DeivceInfoBrower(DeviceInfoWidgetBase *parent)
+    : DTextBrowser(parent)
+    , deviceInfoWidget_(parent)
 {
 
 }

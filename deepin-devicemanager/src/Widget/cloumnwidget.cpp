@@ -39,7 +39,9 @@ bool ColumnWidget::isPaletteInit_ = false;
 DPalette ColumnWidget::paHighlight_;
 DPalette ColumnWidget::paNormal_;
 
-ColumnLabel::ColumnLabel(const QString &text, ColumnWidget *parent): DLabel(text, parent), columnWidget_(parent)
+ColumnLabel::ColumnLabel(const QString &text, ColumnWidget *parent)
+    : DLabel(text, parent)
+    , columnWidget_(parent)
 {
 
 
@@ -69,23 +71,23 @@ ColumnWidget::ColumnWidget(const QString &strLeft, const QString &strRight, cons
     hly->setMargin(0);
 
 
-    l1 = new ColumnLabel( strLeft, this);
+    l1 = new ColumnLabel(strLeft, this);
     l1->setFont(font);
-    DFontSizeManager::instance()->bind(l1, DFontSizeManager::SizeType(fontSizetype) );
+    DFontSizeManager::instance()->bind(l1, DFontSizeManager::SizeType(fontSizetype));
     l1->setWordWrap(true);
     l1->setMinimumWidth(NameLength_);
     //l1->setAutoFillBackground(true);
     l1->setScaledContents(true);
     l1->setMinimumHeight(columnHeight);
 
-    l2 = new ColumnLabel( strRight, this);
+    l2 = new ColumnLabel(strRight, this);
     l2->setFont(font);
-    DFontSizeManager::instance()->bind(l2, DFontSizeManager::SizeType(fontSizetype) );
+    DFontSizeManager::instance()->bind(l2, DFontSizeManager::SizeType(fontSizetype));
     l2->setWordWrap(true);
-    int textWidth = QFontMetrics( font ).width(strRight);
+    int textWidth = QFontMetrics(font).width(strRight);
     l2->setScaledContents(true);
 
-    if ( isRightLink ) {
+    if (isRightLink) {
         l2->setOpenExternalLinks(true);
         //textWidth = QFontMetrics( font ).width(DeviceInfoParser::Instance().getOsInfo());
     }
@@ -94,7 +96,7 @@ ColumnWidget::ColumnWidget(const QString &strLeft, const QString &strRight, cons
         textWidth = DeviceWidgetContentWidth_;
     }
 
-    l2->setMinimumWidth( textWidth + 10);
+    l2->setMinimumWidth(textWidth + 10);
     //l2->setAutoFillBackground(true);
     l2->setMinimumHeight(columnHeight);
 
@@ -148,7 +150,7 @@ void ColumnWidget::labelContextMenuEvent(QContextMenuEvent *event)
 
     contextMenu->clear();
 
-    contextMenu->addAction( &copyAction);
+    contextMenu->addAction(&copyAction);
     contextMenu->addSeparator();
     contextMenu->addActions(lst);
 
@@ -162,7 +164,7 @@ void ColumnWidget::setHilight(bool highLight)
 {
     //setAutoFillBackground(highLight);
     DApplicationHelper::instance()->setPalette(l1, highLight ? paHighlight_ : paNormal_);
-    if (l2->openExternalLinks() == true ) {
+    if (l2->openExternalLinks() == true) {
         if (highLight) {
             //l2->setText( DeviceInfoParser::Instance().getOsInfo() );
         }
@@ -185,7 +187,7 @@ void ColumnWidget::changeTheme()
 
     paHighlight_.setBrush(QPalette::Background, paNormal_.highlight());
     paHighlight_.setBrush(QPalette::WindowText, paNormal_.highlightedText());
-    paHighlight_.setBrush(QPalette::Link, paNormal_.highlightedText() );
+    paHighlight_.setBrush(QPalette::Link, paNormal_.highlightedText());
 
     setHilight(false);
 }

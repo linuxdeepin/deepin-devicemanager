@@ -29,7 +29,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-KeyboardWidget::KeyboardWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Keyboard"))
+KeyboardWidget::KeyboardWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Keyboard"))
 {
     initWidgetEX();
 }
@@ -40,7 +41,7 @@ void KeyboardWidget::initWidgetEX()
     // 获取存储设备
     const QList<DeviceKeyboard> &devices = DeviceManager::instance()->getKeyboardDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No keyboard found"));
         return;
     }
@@ -69,7 +70,7 @@ void KeyboardWidget::initTable(const QList<DeviceKeyboard> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void KeyboardWidget::initDetails(const QList<DeviceKeyboard> &devices)
 {
@@ -98,7 +99,7 @@ void KeyboardWidget::addDeviceDetail(const DeviceKeyboard &device, bool withTitl
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.model() : "", attributes );
+    addSubInfo(withTitle ? device.model() : "", attributes);
 }
 
 void KeyboardWidget::setOverView(const QList<DeviceKeyboard> &devices)

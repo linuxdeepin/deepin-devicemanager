@@ -29,7 +29,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-DiskWidget::DiskWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Storage"))
+DiskWidget::DiskWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Storage"))
 {
     initWidgetEX();
 }
@@ -39,7 +40,7 @@ void DiskWidget::initWidgetEX()
     // 获取存储设备
     const QList<DeviceStorage> &devices = DeviceManager::instance()->getStorageDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No disk found"));
         return;
     }
@@ -70,7 +71,7 @@ void DiskWidget::initTable(const QList<DeviceStorage> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void DiskWidget::initDetails(const QList<DeviceStorage> &devices)
 {
@@ -103,7 +104,7 @@ void DiskWidget::addDeviceDetail(const DeviceStorage &device, bool withTitle)
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.model() : "", attributes );
+    addSubInfo(withTitle ? device.model() : "", attributes);
 }
 
 void DiskWidget::setOverView(const QList<DeviceStorage> &devices)

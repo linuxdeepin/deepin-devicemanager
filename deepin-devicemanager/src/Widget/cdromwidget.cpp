@@ -28,7 +28,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-CDRomWidget::CDRomWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("CD-ROM"))
+CDRomWidget::CDRomWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("CD-ROM"))
 {
     initWidgetEx();
 }
@@ -38,7 +39,7 @@ void CDRomWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DeviceCdrom> &devices = DeviceManager::instance()->getCdromDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No CD-ROM found"));
         return;
     }
@@ -67,7 +68,7 @@ void CDRomWidget::initTable(const QList<DeviceCdrom> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void CDRomWidget::initDetails(const QList<DeviceCdrom> &devices)
 {
@@ -95,7 +96,7 @@ void CDRomWidget::addDeviceDetail(const DeviceCdrom &device, bool withTitle)
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.name() : "", attributes );
+    addSubInfo(withTitle ? device.name() : "", attributes);
 }
 
 void CDRomWidget::setOverView(const QList<DeviceCdrom> &devices)

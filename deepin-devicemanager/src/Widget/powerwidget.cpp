@@ -28,7 +28,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-PowerWidget::PowerWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Battery"))
+PowerWidget::PowerWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Battery"))
 {
     initWidgetEx();
 }
@@ -38,7 +39,7 @@ void PowerWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DevicePower> &devices = DeviceManager::instance()->getPowerDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No battery found"));
         return;
     }
@@ -67,7 +68,7 @@ void PowerWidget::initTable(const QList<DevicePower> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void PowerWidget::initDetails(const QList<DevicePower> &devices)
 {
@@ -102,7 +103,7 @@ void PowerWidget::addDeviceDetail(const DevicePower &device, bool withTitle)
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.name() : "", attributes );
+    addSubInfo(withTitle ? device.name() : "", attributes);
 }
 
 void PowerWidget::setOverView(const QList<DevicePower> &devices)

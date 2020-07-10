@@ -28,7 +28,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-NetworkadapterWidget::NetworkadapterWidget(QWidget *parent) : DeviceInfoWidgetBase(parent, tr("Network Adapter"))
+NetworkadapterWidget::NetworkadapterWidget(QWidget *parent)
+    : DeviceInfoWidgetBase(parent, tr("Network Adapter"))
 {
     initWidgetEx();
 }
@@ -38,7 +39,7 @@ void NetworkadapterWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DeviceNetwork> &devices = DeviceManager::instance()->getNetworkDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No network adapter found"));
         return;
     }
@@ -67,7 +68,7 @@ void NetworkadapterWidget::initTable(const QList<DeviceNetwork> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void NetworkadapterWidget::initDetails(const QList<DeviceNetwork> &devices)
 {
@@ -110,7 +111,7 @@ void NetworkadapterWidget::addDeviceDetail(const DeviceNetwork &device, bool wit
     // 添加其他信息
     addOtherDeviceAttribute(device, attributes);
     // 显示到界面
-    addSubInfo(withTitle ? device.name() : "", attributes );
+    addSubInfo(withTitle ? device.name() : "", attributes);
 }
 
 void NetworkadapterWidget::setOverView(const QList<DeviceNetwork> &devices)
