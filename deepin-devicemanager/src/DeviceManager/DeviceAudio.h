@@ -16,35 +16,132 @@ class DeviceAudio : public DeviceBaseInfo
 public:
     DeviceAudio();
 
-    /**@brief:设置从hwinfo里面获取的信息*/
+    /**
+       * @brief setInfoFromHwinfo:设置由hwinfo --sound命令获取的设备信息
+       * @param mapInfo:由hwinfo获取的信息map
+       * @return 无
+       */
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
-    /**@brief:设置从lshw里面获取的信息*/
+    /**
+       * @brief setInfoFromLshw:设置从lshw里面获取的信息
+       * @param mapInfo:由lshw获取的信息map
+       * @return 布尔值，true:信息设置成功；false:信息设置失败
+       */
     bool setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
-    /**@brief:设置从cat /proc/bus/input/devices里面获取的信息*/
+    /**
+       * @brief setInfoFromCatDevices:设置从cat /proc/bus/input/devices里面获取的信息
+       * @param mapInfo:由cat /proc/bus/input/devices获取的信息map
+       * @return 布尔值，true:信息设置成功；false:信息设置失败
+       */
     bool setInfoFromCatDevices(const QMap<QString, QString> &mapInfo);
 
-    /**@brief:设置从cat /proc/asound/card0/codec#0里面获取的信息 , KLU专用*/
+    /**
+       * @brief setInfoFromCatAudio:设置从cat /proc/asound/card0/codec#0里面获取的信息 , KLU专用
+       * @param mapInfo:由cat /proc/asound/card0/codec#0获取的信息map
+       * @return 无
+       */
     void setInfoFromCatAudio(const QMap<QString, QString> &mapInfo);
 
+    /**
+       * @brief setAudioChipFromDmesg:设置从dmesg里面获取的有关声卡型号信息
+       * @param mapInfo:由dmesg获取的有关声卡型号信息
+       * @return 无
+       */
     bool setAudioChipFromDmesg(const QString &info);
 
-    // 获取设备属性
+    /**
+       * @brief name:获取名称属性值
+       * @param 无
+       * @return QString:名称属性值
+       */
     const QString &name()const;
+
+    /**
+       * @brief vendor:获取制造商属性值
+       * @param 无
+       * @return QString:制造商属性值
+       */
     const QString &vendor()const;
+
+    /**
+       * @brief model:获取型号属性值
+       * @param 无
+       * @return QString:型号属性值
+       */
     const QString &model()const;
+
+    /**
+       * @brief version:获取版本号属性值
+       * @param 无
+       * @return QString:版本号属性值
+       */
     const QString &version()const;
+
+    /**
+       * @brief busInfo:获取总线信息属性值
+       * @param 无
+       * @return QString:总线信息属性值
+       */
     const QString &busInfo()const;
+
+    /**
+       * @brief irq:获取中断属性值
+       * @param 无
+       * @return QString:中断属性值
+       */
     const QString &irq()const;
+
+    /**
+       * @brief memory:获取内存地址属性值
+       * @param 无
+       * @return QString:内存地址属性值
+       */
     const QString &memory()const;
+
+    /**
+       * @brief width:获取位宽属性值
+       * @param 无
+       * @return QString:位宽属性值
+       */
     const QString &width()const;
+
+    /**
+       * @brief clock:获取时钟频率属性值
+       * @param 无
+       * @return QString:时钟频率属性值
+       */
     const QString &clock()const;
+
+    /**
+       * @brief capabilities:获取功能属性值
+       * @param 无
+       * @return QString:功能属性值
+       */
     const QString &capabilities()const;
+
+    /**
+       * @brief description:获取描述属性值
+       * @param 无
+       * @return QString:描述属性值
+       */
     const QString &description()const;
+
+    /**
+       * @brief chip:获取芯片型号属性值
+       * @param 无
+       * @return QString:芯片属性值
+       */
     const QString &chip() const;
 
 protected:
+
+    /**
+       * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
+       * @param 无
+       * @return 无
+       */
     void initFilterKey() override;
 
 private:

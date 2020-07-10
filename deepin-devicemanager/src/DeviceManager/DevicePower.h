@@ -7,32 +7,138 @@ class DevicePower : public DeviceBaseInfo
 public:
     DevicePower();
 
-    /**@brief:设置从upower获取的信息*/
+    /**
+     * @brief setInfoFromUpower:设置从upower获取的电池信息
+     * @param mapInfo:由upower --dump获取的信息map
+     * @return 布尔值，true-信息设置成功；false-信息设置失败
+     */
     bool setInfoFromUpower(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief setDaemonInfo:设置从upower获取的与电池有关的守护进程信息
+     * @param mapInfo:由upower --dump获取的守护进程信息信息map
+     */
     void setDaemonInfo(const QMap<QString, QString> &mapInfo);
 
-    // 获取设备属性
+    /**
+     * @brief name:获取名称属性值
+     * @return QString 名称属性值
+     */
     const QString &name()const;
+
+    /**
+     * @brief vendor:获取制造商属性值
+     * @return QString:制造商属性值
+     */
     const QString &vendor()const;
+
+    /**
+     * @brief model:获取型号属性值
+     * @return QString:型号属性值
+     */
     const QString &model()const;
+
+    /**
+     * @brief type:获取类型属性值
+     * @return QString:类型属性值
+     */
     const QString &type()const;
+
+    /**
+     * @brief serialNumber:获取序列号属性值
+     * @return QString:序列号属性值
+     */
     const QString &serialNumber()const;
+
+    /**
+     * @brief electircType:获取electircType属性值
+     * @return QString:electircType属性值
+     */
     const QString &electircType()const;
+
+    /**
+     * @brief maxPower:获取最大电压属性值
+     * @return QString:最大电压属性值
+     */
     const QString &maxPower()const;
+
+    /**
+     * @brief status:获取状态属性值
+     * @return QString:状态属性值
+     */
     const QString &status()const;
+
+    /**
+     * @brief enabled:获取enabled属性值
+     * @return QString:enabled属性值
+     */
     const QString &enabled()const;
+
+    /**
+     * @brief hotSwitch:获取hotswitch属性值
+     * @return QString:hotswitch属性值
+     */
     const QString &hotSwitch()const;
+
+    /**
+     * @brief capacity:获取电池容量属性值
+     * @return QString:电源容量属性值
+     */
     const QString &capacity()const;
+
+    /**
+     * @brief voltage:获取电压属性值
+     * @return QString:电压属性值
+     */
     const QString &voltage()const;
+
+    /**
+     * @brief slot:获取slot属性值
+     * @return QString:slot属性值
+     */
     const QString &slot()const;
+
+    /**
+     * @brief designCapacity:获取designCapacity属性值
+     * @return QString:designCapacity属性值
+     */
     const QString &designCapacity()const;
+
+    /**
+     * @brief designVoltage:获取designVoltage属性值
+     * @return QString:designVoltage属性值
+     */
     const QString &designVoltage()const;
+
+    /**
+     * @brief SBDSChemistry:获取SBDSChemistry属性值
+     * @return QString:SBDSChemistry属性值
+     */
     const QString &SBDSChemistry()const;
+
+    /**
+     * @brief SBDSManufactureDate:获取SBDSManufactureDate属性值
+     * @return QString:SBDSManufactureDate属性值
+     */
     const QString &SBDSManufactureDate()const;
+
+    /**
+     * @brief SBDSSerialNumber:获取SBDSSerialNumber属性值
+     * @return QString:SBDSSerialNumber属性值
+     */
     const QString &SBDSSerialNumber()const;
+
+    /**
+     * @brief SBDSVersion:获取SBDSVersion属性值
+     * @return QString:SBDSVersion属性值
+     */
     const QString &SBDSVersion()const;
 
 protected:
+
+    /**
+     * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
+     */
     void initFilterKey() override;
 
 private:

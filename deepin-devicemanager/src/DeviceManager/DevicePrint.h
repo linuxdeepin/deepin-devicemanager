@@ -8,19 +8,65 @@ class DevicePrint : public DeviceBaseInfo
 public:
     DevicePrint();
 
+    /**
+     * @brief setInfo:设置打印机信息
+     * @param info:由cups第三方库获取的打印机信息map
+     */
     void setInfo(const QMap<QString, QString> &info);
 
-    // 获取设备属性
+    /**
+     * @brief name:获取名称属性值
+     * @return QString 名称属性值
+     */
     const QString &name()const;
+
+    /**
+     * @brief vendor:获取制造商属性值
+     * @return QString:制造商属性值
+     */
     const QString &vendor()const;
+
+    /**
+     * @brief model:获取型号属性值
+     * @return QString:型号属性值
+     */
     const QString &model()const;
+
+    /**
+     * @brief serialNumber:获取序列号属性值
+     * @return Qstring:序列号属性值
+     */
     const QString &serialNumber()const;
+
+    /**
+     * @brief interfaceType:获取接口类型属性值
+     * @return QString:接口类型属性值
+     */
     const QString &interfaceType()const;
+
+    /**
+     * @brief URI:获取URL属性值
+     * @return QString:URL属性值
+     */
     const QString &URI()const;
+
+    /**
+     * @brief status:获取状态属性值
+     * @return QString:状态属性值
+     */
     const QString &status()const;
+
+    /**
+     * @brief shared:获取shared属性值
+     * @return QString:shared属性值
+     */
     const QString &shared()const;
 
 protected:
+
+    /**
+     * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
+     */
     void initFilterKey() override;
 
 private:
