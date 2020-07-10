@@ -26,7 +26,9 @@
 #include <QStyleOptionFrame>
 #include <DApplicationHelper>
 #include <QDebug>
+
 DWIDGET_USE_NAMESPACE
+
 BottomRoundFrame::BottomRoundFrame(QWidget *parent)
     : QFrame(parent)
     , m_textBrowser(nullptr)
@@ -44,7 +46,6 @@ void BottomRoundFrame::setTextBroser(QTextBrowser *textBrowser)
     m_textBrowser = textBrowser;
 //   setBackgroundRole(m_textBrowser->foregroundRole());
 }
-
 
 void BottomRoundFrame::paintEvent(QPaintEvent *event)
 {

@@ -55,6 +55,7 @@ void PrinterWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void PrinterWidget::initTable(const QList<DevicePrint> &devices)
 {
     QList<QStringList> tabList;
@@ -70,6 +71,7 @@ void PrinterWidget::initTable(const QList<DevicePrint> &devices)
 
     addTable(headers, tabList);
 }
+
 void PrinterWidget::initDetails(const QList<DevicePrint> &devices)
 {
     int size = devices.size();
@@ -77,6 +79,7 @@ void PrinterWidget::initDetails(const QList<DevicePrint> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void PrinterWidget::addDeviceDetail(const DevicePrint &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

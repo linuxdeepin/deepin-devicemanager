@@ -95,7 +95,6 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
-
 bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
 
@@ -141,7 +140,6 @@ bool DeviceStorage::addInfoFromSmartctl(const QString &name, const QMap<QString,
     getInfoFromsmartctl(mapInfo);
     return true;
 }
-
 
 bool DeviceStorage::setMediaType(const QString &name, const QString &value)
 {
@@ -249,14 +247,17 @@ const QString &DeviceStorage::model()const
 {
     return m_Model;
 }
+
 const QString &DeviceStorage::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceStorage::mediaType()const
 {
     return m_MediaType;
 }
+
 const QString &DeviceStorage::size()const
 {
     return m_Size;
@@ -265,27 +266,31 @@ const QString &DeviceStorage::rotationRate()const
 {
     return m_RotationRate;
 }
+
 const QString &DeviceStorage::interface()const
 {
     return m_Interface;
 }
+
 const QString &DeviceStorage::serialNumber()const
 {
     return m_SerialNumber;
 }
+
 const QString &DeviceStorage::version()const
 {
     return m_Version;
 }
+
 const QString &DeviceStorage::capabilities()const
 {
     return m_Capabilities;
 }
+
 const QString &DeviceStorage::description()const
 {
     return m_Description;
 }
-
 
 const QString &DeviceStorage::keyFromStorage()const
 {
@@ -386,13 +391,12 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
         }
     }
 
-
-
     // 型号
     //SATA
     if (mapInfo["Device Model"].isEmpty() == false) {
         m_Model = mapInfo["Device Model"];
     }
+
     //NVME
     if (mapInfo["Model Number"].isEmpty() == false) {
         m_Model = mapInfo["Model Number"];

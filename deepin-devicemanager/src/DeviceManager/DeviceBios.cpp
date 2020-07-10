@@ -87,22 +87,27 @@ const QString &DeviceBios::name()const
 {
     return m_Name;
 }
+
 const QString &DeviceBios::productName()const
 {
     return m_ProductName;
 }
+
 const QString &DeviceBios::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceBios::version()const
 {
     return m_Version;
 }
+
 const QString &DeviceBios::chipsetFamily()const
 {
     return m_ChipsetFamily;
 }
+
 bool DeviceBios::isBoard()const
 {
     return m_IsBoard;

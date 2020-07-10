@@ -77,8 +77,6 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
     return true;
 }
 
-
-
 const QString &EDIDParser::vendor()const
 {
     return m_Vendor;
@@ -88,6 +86,7 @@ const QString &EDIDParser::releaseDate()const
 {
     return m_ReleaseDate;
 }
+
 const QString &EDIDParser::screenSize()const
 {
     return m_ScreenSize;
@@ -161,6 +160,7 @@ QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
     decimal = QString::number(nDec);
     return decimal;
 }
+
 QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
 {
     int nDec = strDec.toInt();
@@ -168,14 +168,14 @@ QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
     QString strBin, strTemp;
     //TCHAR buf[2];
     bool bContinue = true;
-    while ( bContinue ) {
+    while (bContinue) {
         nYushu = nDec % 2;
         nShang = nDec / 2;
         strBin = QString::number(nYushu) + strBin; //qDebug()<<strBin;
         strTemp = strBin;
         //strBin.Format("%s%s", buf, strTemp);
         nDec = nShang;
-        if ( nShang == 0 )
+        if (nShang == 0)
             bContinue = false;
     }
     int nTemp = strBin.length() % 4;
@@ -200,12 +200,14 @@ QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
     }
     return strBin;
 }
+
 QString EDIDParser::decToHex(QString strDec)   //十进制转十六进制
 {
     int hex = strDec.toInt();
     QString hex1 = QString("%1").arg(hex, 8, 16, QLatin1Char('0'));
     return hex1;
 }
+
 int EDIDParser::hex2(unsigned char ch)           //十六进制转换工具
 {
     if ((ch >= '0') && (ch <= '9'))
@@ -216,6 +218,7 @@ int EDIDParser::hex2(unsigned char ch)           //十六进制转换工具
         return ch - 'a' + 10;
     return 0;
 }
+
 QString EDIDParser::hexToDec(QString strHex)   //十六进制转十进制
 {
     int i;

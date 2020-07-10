@@ -33,6 +33,7 @@ DisplayadapterWidget::DisplayadapterWidget(QWidget *parent)
 {
     initWidgetEX();
 }
+
 void DisplayadapterWidget::initWidgetEX()
 {
     // 获取鼠标设备
@@ -54,6 +55,7 @@ void DisplayadapterWidget::initWidgetEX()
     // 设置overview
     setOverView(devices);
 }
+
 void DisplayadapterWidget::initTable(const QList<DeviceGpu> &devices)
 {
     QList<QStringList> tabList;
@@ -69,6 +71,7 @@ void DisplayadapterWidget::initTable(const QList<DeviceGpu> &devices)
 
     addTable(headers, tabList);
 }
+
 void DisplayadapterWidget::initDetails(const QList<DeviceGpu> &devices)
 {
     int size = devices.size();
@@ -76,6 +79,7 @@ void DisplayadapterWidget::initDetails(const QList<DeviceGpu> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void DisplayadapterWidget::addDeviceDetail(const DeviceGpu &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

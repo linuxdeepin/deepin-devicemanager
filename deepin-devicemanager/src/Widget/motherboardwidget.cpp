@@ -51,6 +51,7 @@ void MotherboardWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void MotherboardWidget::initTable(const QList<DeviceBios> &devices)
 {
     QList<QStringList> tabList;
@@ -66,12 +67,14 @@ void MotherboardWidget::initTable(const QList<DeviceBios> &devices)
 
     addTable(headers, tabList);
 }
+
 void MotherboardWidget::initDetails(const QList<DeviceBios> &devices)
 {
     foreach (const DeviceBios &device, devices) {
         addDeviceDetail(device, true);
     }
 }
+
 void MotherboardWidget::addDeviceDetail(const DeviceBios &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;
@@ -97,4 +100,3 @@ void MotherboardWidget::setOverView(const QList<DeviceBios> &devices)
     }
     overviewInfo_.value.replace(QRegExp("/$"), "");
 }
-

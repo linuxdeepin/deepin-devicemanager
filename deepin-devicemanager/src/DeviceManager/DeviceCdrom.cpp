@@ -50,42 +50,52 @@ void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     loadOtherDeviceInfo(mapInfo);
 }
+
 const QString &DeviceCdrom::name()const
 {
     return m_Name;
 }
+
 const QString &DeviceCdrom::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceCdrom::type()const
 {
     return m_Type;
 }
+
 const QString &DeviceCdrom::version()const
 {
     return m_Version;
 }
+
 const QString &DeviceCdrom::busInfo()const
 {
     return m_BusInfo;
 }
+
 const QString &DeviceCdrom::capabilities()const
 {
     return m_Capabilities;
 }
+
 const QString &DeviceCdrom::driver()const
 {
     return m_Driver;
 }
+
 const QString &DeviceCdrom::maxPower()const
 {
     return m_MaxPower;
 }
+
 const QString &DeviceCdrom::speed()const
 {
     return m_Speed;
 }
+
 
 void DeviceCdrom::initFilterKey()
 {

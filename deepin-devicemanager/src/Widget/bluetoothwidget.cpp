@@ -56,6 +56,7 @@ void BluetoothWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void BluetoothWidget::initTable(const QList<DeviceBluetooth> &devices)
 {
     QList<QStringList> tabList;
@@ -71,6 +72,7 @@ void BluetoothWidget::initTable(const QList<DeviceBluetooth> &devices)
 
     addTable(headers, tabList);
 }
+
 void BluetoothWidget::initDetails(const QList<DeviceBluetooth> &devices)
 {
     int size = devices.size();
@@ -78,6 +80,7 @@ void BluetoothWidget::initDetails(const QList<DeviceBluetooth> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void BluetoothWidget::addDeviceDetail(const DeviceBluetooth &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;
@@ -110,4 +113,3 @@ void BluetoothWidget::setOverView(const QList<DeviceBluetooth> &devices)
     }
     overviewInfo_.value.replace(QRegExp("/$"), "");
 }
-

@@ -29,5 +29,6 @@ DWIDGET_USE_NAMESPACE
 UsbdeviceWidget::UsbdeviceWidget(QWidget *parent)
     : DeviceInfoWidgetBase(parent, tr("USB Devices"))
 {
+
 }
 

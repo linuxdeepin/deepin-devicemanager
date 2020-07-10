@@ -55,6 +55,7 @@ void PowerWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void PowerWidget::initTable(const QList<DevicePower> &devices)
 {
     QList<QStringList> tabList;
@@ -70,6 +71,7 @@ void PowerWidget::initTable(const QList<DevicePower> &devices)
 
     addTable(headers, tabList);
 }
+
 void PowerWidget::initDetails(const QList<DevicePower> &devices)
 {
     int size = devices.size();
@@ -77,6 +79,7 @@ void PowerWidget::initDetails(const QList<DevicePower> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void PowerWidget::addDeviceDetail(const DevicePower &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;
@@ -114,6 +117,7 @@ void PowerWidget::setOverView(const QList<DevicePower> &devices)
     }
     overviewInfo_.value.replace(QRegExp("/$"), "");
 }
+
 bool PowerWidget::infoIsEmpty()
 {
     return true;

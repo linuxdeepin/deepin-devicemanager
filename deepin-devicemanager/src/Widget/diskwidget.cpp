@@ -56,6 +56,7 @@ void DiskWidget::initWidgetEX()
     // 设置overview
     setOverView(devices);
 }
+
 void DiskWidget::initTable(const QList<DeviceStorage> &devices)
 {
     QList<QStringList> tabList;
@@ -73,6 +74,7 @@ void DiskWidget::initTable(const QList<DeviceStorage> &devices)
 
     addTable(headers, tabList);
 }
+
 void DiskWidget::initDetails(const QList<DeviceStorage> &devices)
 {
     int size = devices.size();
@@ -80,6 +82,7 @@ void DiskWidget::initDetails(const QList<DeviceStorage> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void DiskWidget::addDeviceDetail(const DeviceStorage &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

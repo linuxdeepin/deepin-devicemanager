@@ -34,9 +34,7 @@ AudiodeviceWidget::AudiodeviceWidget(QWidget *parent)
     : DeviceInfoWidgetBase(parent, tr("Sound Adapter"))
 {
     initWidgetEx();
-
 }
-
 
 void AudiodeviceWidget::initWidgetEx()
 {
@@ -59,6 +57,7 @@ void AudiodeviceWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void AudiodeviceWidget::initTable(const QList<DeviceAudio> &devices)
 {
     QList<QStringList> tabList;
@@ -74,6 +73,7 @@ void AudiodeviceWidget::initTable(const QList<DeviceAudio> &devices)
 
     addTable(headers, tabList);
 }
+
 void AudiodeviceWidget::initDetails(const QList<DeviceAudio> &devices)
 {
     int size = devices.size();
@@ -81,6 +81,7 @@ void AudiodeviceWidget::initDetails(const QList<DeviceAudio> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void AudiodeviceWidget::addDeviceDetail(const DeviceAudio &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

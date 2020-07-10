@@ -165,22 +165,27 @@ const QString &DeviceMonitor::name()const
 {
     return m_Name;
 }
+
 const QString &DeviceMonitor::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceMonitor::model()const
 {
     return m_Model;
 }
+
 const QString &DeviceMonitor::displayInput()const
 {
     return m_DisplayInput;
 }
+
 const QString &DeviceMonitor::VGA()const
 {
     return m_VGA;
 }
+
 const QString &DeviceMonitor::HDMI()const
 {
     return m_HDMI;
@@ -189,34 +194,42 @@ const QString &DeviceMonitor::DVI()const
 {
     return m_DVI;
 }
+
 const QString &DeviceMonitor::interface()const
 {
     return m_Interface;
 }
+
 const QString &DeviceMonitor::screenSize()const
 {
     return m_ScreenSize;
 }
+
 const QString &DeviceMonitor::aspectRatio()const
 {
     return m_AspectRatio;
 }
+
 const QString &DeviceMonitor::mainScreen()const
 {
     return m_MainScreen;
 }
+
 const QString &DeviceMonitor::currentResolution()const
 {
     return m_CurrentResolution;
 }
+
 const QString &DeviceMonitor::serialNumber()const
 {
     return m_SerialNumber;
 }
+
 const QString &DeviceMonitor::productionWeek()const
 {
     return m_ProductionWeek;
 }
+
 const QString &DeviceMonitor::supportResolutions()const
 {
     return m_SupportResolution;
@@ -276,6 +289,7 @@ int DeviceMonitor::gcd(int a, int b)
     else
         return gcd(b, a % b);
 }
+
 bool DeviceMonitor::findAspectRatio(int width, int height, int &ar_w, int &ar_h)
 {
     float r1 = float(width) / float(height);

@@ -60,6 +60,7 @@ void MonitorWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void MonitorWidget::initTable(const QList<DeviceMonitor> &devices)
 {
     QList<QStringList> tabList;
@@ -75,6 +76,7 @@ void MonitorWidget::initTable(const QList<DeviceMonitor> &devices)
 
     addTable(headers, tabList);
 }
+
 void MonitorWidget::initDetails(const QList<DeviceMonitor> &devices)
 {
     int size = devices.size();
@@ -82,6 +84,7 @@ void MonitorWidget::initDetails(const QList<DeviceMonitor> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void MonitorWidget::addDeviceDetail(const DeviceMonitor &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

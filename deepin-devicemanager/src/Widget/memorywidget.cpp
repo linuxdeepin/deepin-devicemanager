@@ -56,6 +56,7 @@ void MemoryWidget::initWidgetEX()
     // 设置overview
     setOverView(devices);
 }
+
 void MemoryWidget::initTable(const QList<DeviceMemory> &devices)
 {
     QList<QStringList> tabList;
@@ -74,6 +75,7 @@ void MemoryWidget::initTable(const QList<DeviceMemory> &devices)
 
     addTable(headers, tabList);
 }
+
 void MemoryWidget::initDetails(const QList<DeviceMemory> &devices)
 {
 //    int size = devices.size();
@@ -81,6 +83,7 @@ void MemoryWidget::initDetails(const QList<DeviceMemory> &devices)
         addDeviceDetail(device, true);
     }
 }
+
 void MemoryWidget::addDeviceDetail(const DeviceMemory &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

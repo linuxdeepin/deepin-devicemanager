@@ -36,6 +36,7 @@ DWIDGET_USE_NAMESPACE
 LogViewItemDelegate::LogViewItemDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
 {
+
 }
 
 void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
@@ -69,7 +70,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
 
     int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
-    int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option)-4;
+    int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option) - 4;
 
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
@@ -96,55 +97,55 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     QRect textRect = rect;
 
     switch (opt.viewItemPosition) {
-        case QStyleOptionViewItem::Beginning: {
-            rect.setX(rect.x() + margin);  // left margin
+    case QStyleOptionViewItem::Beginning: {
+        rect.setX(rect.x() + margin);  // left margin
 
-            QPainterPath rectPath, roundedPath;
-            roundedPath.addRoundedRect(rect.x(), rect.y()+1, rect.width() * 2, rect.height()-2, radius,
-                                       radius);
-            rectPath.addRect(rect.x() + rect.width(), rect.y() +1, rect.width(), rect.height()-2);
-            clipPath = roundedPath.subtracted(rectPath);
-            painter->setClipPath(clipPath);
-            path.addRect(rect);
-        } break;
-        case QStyleOptionViewItem::Middle: {
-            QRect rect2(rect.left(), rect.top()+1, rect.width(), rect.height()-2);
-            path.addRect(rect2);
-        } break;
-        case QStyleOptionViewItem::End: {
-            rect.setWidth(rect.width() - margin);  // right margin
+        QPainterPath rectPath, roundedPath;
+        roundedPath.addRoundedRect(rect.x(), rect.y() + 1, rect.width() * 2, rect.height() - 2, radius,
+                                   radius);
+        rectPath.addRect(rect.x() + rect.width(), rect.y() + 1, rect.width(), rect.height() - 2);
+        clipPath = roundedPath.subtracted(rectPath);
+        painter->setClipPath(clipPath);
+        path.addRect(rect);
+    } break;
+    case QStyleOptionViewItem::Middle: {
+        QRect rect2(rect.left(), rect.top() + 1, rect.width(), rect.height() - 2);
+        path.addRect(rect2);
+    } break;
+    case QStyleOptionViewItem::End: {
+        rect.setWidth(rect.width() - margin);  // right margin
 
-            QPainterPath rectPath, roundedPath;
-            roundedPath.addRoundedRect(rect.x() - rect.width(), rect.y()+1, rect.width() * 2,
-                                       rect.height()-2, radius, radius);
-            rectPath.addRect(rect.x() - rect.width(), rect.y()+1, rect.width(), rect.height()-2);
-            clipPath = roundedPath.subtracted(rectPath);
-            painter->setClipPath(clipPath);
-            path.addRect(rect);
-        } break;
-        case QStyleOptionViewItem::OnlyOne: {
-            rect.setX(rect.x() + margin);          // left margin
-            rect.setWidth(rect.width() - margin);  // right margin
-            path.addRoundedRect(rect, radius, radius);
-        } break;
-        default: {
-            painter->restore();
-            QStyledItemDelegate::paint(painter, option, index);
-            return;
-        }
+        QPainterPath rectPath, roundedPath;
+        roundedPath.addRoundedRect(rect.x() - rect.width(), rect.y() + 1, rect.width() * 2,
+                                   rect.height() - 2, radius, radius);
+        rectPath.addRect(rect.x() - rect.width(), rect.y() + 1, rect.width(), rect.height() - 2);
+        clipPath = roundedPath.subtracted(rectPath);
+        painter->setClipPath(clipPath);
+        path.addRect(rect);
+    } break;
+    case QStyleOptionViewItem::OnlyOne: {
+        rect.setX(rect.x() + margin);          // left margin
+        rect.setWidth(rect.width() - margin);  // right margin
+        path.addRoundedRect(rect, radius, radius);
+    } break;
+    default: {
+        painter->restore();
+        QStyledItemDelegate::paint(painter, option, index);
+        return;
+    }
     }
     painter->fillPath(path, background);
 
     QRect iconRect = rect;
     if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
-        index.data(Qt::DecorationRole).isValid()) {
+            index.data(Qt::DecorationRole).isValid()) {
         iconRect.setX(rect.x() - margin);
         iconRect.setWidth(64);
         QIcon ic = index.data(Qt::DecorationRole).value<QIcon>();
         ic.paint(painter, iconRect);
     }
     textRect = rect;
-    textRect.setX(textRect.x() + margin +3);
+    textRect.setX(textRect.x() + margin + 3);
 
     /*
     *@author yaobin
@@ -152,7 +153,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     *@Modify Reason:省略符(...)后预留两个英文字母的空间
     */
     int leftElideSpace = fm.width(QString("yy"));
-    textRect.setWidth(textRect.width()-leftElideSpace);
+    textRect.setWidth(textRect.width() - leftElideSpace);
 
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
     painter->drawText(textRect, static_cast<int>(opt.displayAlignment), text);

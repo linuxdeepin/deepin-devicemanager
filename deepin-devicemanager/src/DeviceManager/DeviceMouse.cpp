@@ -84,38 +84,47 @@ const QString &DeviceMouse::name()const
 {
     return m_Name;
 }
+
 const QString &DeviceMouse::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceMouse::model()const
 {
     return m_Model;
 }
+
 const QString &DeviceMouse::interface()const
 {
     return m_Interface;
 }
+
 const QString &DeviceMouse::busInfo()const
 {
     return m_BusInfo;
 }
+
 const QString &DeviceMouse::version()const
 {
     return m_Version;
 }
+
 const QString &DeviceMouse::capability()const
 {
     return m_Capabilities;
 }
+
 const QString &DeviceMouse::driver()const
 {
     return m_Driver;
 }
+
 const QString &DeviceMouse::maxPower()const
 {
     return m_MaximumPower;
 }
+
 const QString &DeviceMouse::speed()const
 {
     return m_Speed;

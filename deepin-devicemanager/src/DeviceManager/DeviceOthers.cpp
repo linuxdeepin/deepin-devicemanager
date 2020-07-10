@@ -63,34 +63,42 @@ const QString &DeviceOthers::name()const
 {
     return m_Name;
 }
+
 const QString &DeviceOthers::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceOthers::model()const
 {
     return m_Model;
 }
+
 const QString &DeviceOthers::version()const
 {
     return m_Version;
 }
+
 const QString &DeviceOthers::busInfo()const
 {
     return m_BusInfo;
 }
+
 const QString &DeviceOthers::capabilities()const
 {
     return m_Capabilities;
 }
+
 const QString &DeviceOthers::driver()const
 {
     return m_Driver;
 }
+
 const QString &DeviceOthers::maxinumPower()const
 {
     return m_MaximumPower;
 }
+
 const QString &DeviceOthers::speed()const
 {
     return m_Speed;
@@ -100,6 +108,7 @@ const QString &DeviceOthers::logicalName()const
 {
     return m_LogicalName;
 }
+
 void DeviceOthers::initFilterKey()
 {
 

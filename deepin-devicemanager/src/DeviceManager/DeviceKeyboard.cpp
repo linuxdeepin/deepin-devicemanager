@@ -111,42 +111,52 @@ const QString &DeviceKeyboard::name()const
 {
     return m_Name;
 }
+
 const QString &DeviceKeyboard::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceKeyboard::model()const
 {
     return m_Model;
 }
+
 const QString &DeviceKeyboard::version()const
 {
     return m_Version;
 }
+
 const QString &DeviceKeyboard::interface()const
 {
     return m_Interface;
 }
+
 const QString &DeviceKeyboard::busInfo()const
 {
     return m_BusInfo;
 }
+
 const QString &DeviceKeyboard::capabilities()const
 {
     return m_Capabilities;
 }
+
 const QString &DeviceKeyboard::driver()const
 {
     return m_Driver;
 }
+
 const QString &DeviceKeyboard::maxinumPower()const
 {
     return m_MaximumPower;
 }
+
 const QString &DeviceKeyboard::speed()const
 {
     return m_Speed;
 }
+
 const QString &DeviceKeyboard::description()const
 {
     return m_Description;

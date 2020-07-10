@@ -58,6 +58,7 @@ void CpuWidget::initWidgetEX()
     // 设置overview
     setOverView(cpuDevices);
 }
+
 void CpuWidget::initTable(const QList<DeviceCpu> &devices)
 {
     QList<QStringList> tabList;
@@ -75,6 +76,7 @@ void CpuWidget::initTable(const QList<DeviceCpu> &devices)
 
     addTable(headers, tabList);
 }
+
 void CpuWidget::initDetails(const QList<DeviceCpu> &devices)
 {
     int index = 0;
@@ -84,6 +86,7 @@ void CpuWidget::initDetails(const QList<DeviceCpu> &devices)
         index++;
     }
 }
+
 void CpuWidget::addDeviceDetail(const DeviceCpu &device, int index, bool withTitle)
 {
     QList<ArticleStruct> attributes;

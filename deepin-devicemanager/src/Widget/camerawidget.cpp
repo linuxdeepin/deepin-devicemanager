@@ -33,6 +33,7 @@ CameraWidget::CameraWidget(QWidget *parent)
 {
     initWidgetEx();
 }
+
 void CameraWidget::initWidgetEx()
 {
     // 获取鼠标设备
@@ -54,6 +55,7 @@ void CameraWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void CameraWidget::initTable(const QList<DeviceImage> &devices)
 {
     QList<QStringList> tabList;
@@ -69,6 +71,7 @@ void CameraWidget::initTable(const QList<DeviceImage> &devices)
 
     addTable(headers, tabList);
 }
+
 void CameraWidget::initDetails(const QList<DeviceImage> &devices)
 {
     int size = devices.size();
@@ -76,6 +79,7 @@ void CameraWidget::initDetails(const QList<DeviceImage> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void CameraWidget::addDeviceDetail(const DeviceImage &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

@@ -159,7 +159,6 @@ void KLUGenerator::getKeyboardInfoFromHwinfo()
     }
 }
 
-
 void KLUGenerator::getOthersInfoFromHwinfo()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");

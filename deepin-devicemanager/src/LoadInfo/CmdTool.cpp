@@ -74,7 +74,6 @@ QMap<QString, QList<QMap<QString, QString> > > &CmdTool::cmdInfo()
     return m_cmdInfo;
 }
 
-
 void CmdTool::loadLshwInfo(const QString &cmd, const QString &debugFile)
 {
     QString deviceInfo;
@@ -672,7 +671,6 @@ void CmdTool::loadBootDeviceManfid(const QString &key, const QString &cmd, const
     addMapInfo(key, mapInfo);
 }
 
-
 void CmdTool::getSMBIOSVersion(const QString &info, QString &version)
 {
     QStringList lineList = info.split("\n");
@@ -723,6 +721,7 @@ void CmdTool::getMapInfoFromInput(const QString &info, QMap<QString, QString> &m
         }
     }
 }
+
 void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
     QStringList infoList = info.split("\n");
@@ -761,6 +760,7 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
         }
     }
 }
+
 void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
     QStringList infoList = info.split("\n");
@@ -792,6 +792,7 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
         }
     }
 }
+
 void CmdTool::getMapInfoFromDmidecode(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
     QStringList lines = info.split("\n");
@@ -1027,6 +1028,7 @@ bool CmdTool::getDeviceInfo(const QString &command, QString &deviceInfo, const Q
 
     return true;
 }
+
 bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
 {
 #ifdef TEST_DATA_FROM_FILE
@@ -1048,6 +1050,7 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
     return runCmd(newCmd, deviceInfo);
 #endif
 }
+
 bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
 {
     QDateTime dt = QDateTime::currentDateTime();

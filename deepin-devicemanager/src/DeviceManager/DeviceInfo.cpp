@@ -16,11 +16,11 @@ DeviceBaseInfo::~DeviceBaseInfo()
 {
 
 }
+
 const QMap<QString, QString> &DeviceBaseInfo::getOtherAttribs()const
 {
     return m_MapOtherInfo;
 }
-
 
 void DeviceBaseInfo::addFilterKey(const QString &key)
 {
@@ -59,4 +59,3 @@ void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const Q
         }
     }
 }
-

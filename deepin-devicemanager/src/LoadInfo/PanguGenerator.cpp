@@ -68,7 +68,6 @@ void PanguGenerator::generatorComputerDevice()
         info.remove("version");
         device.setOS(info);
     }
+
     DeviceManager::instance()->addComputerDevice(device);
-
-
 }

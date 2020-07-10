@@ -55,6 +55,7 @@ void OtherPciDeviceWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void OtherPciDeviceWidget::initTable(const QList<DeviceOtherPCI> &devices)
 {
     QList<QStringList> tabList;
@@ -70,6 +71,7 @@ void OtherPciDeviceWidget::initTable(const QList<DeviceOtherPCI> &devices)
 
     addTable(headers, tabList);
 }
+
 void OtherPciDeviceWidget::initDetails(const QList<DeviceOtherPCI> &devices)
 {
     int size = devices.size();
@@ -77,6 +79,7 @@ void OtherPciDeviceWidget::initDetails(const QList<DeviceOtherPCI> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void OtherPciDeviceWidget::addDeviceDetail(const DeviceOtherPCI &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;
@@ -110,5 +113,3 @@ void OtherPciDeviceWidget::setOverView(const QList<DeviceOtherPCI> &devices)
     }
     overviewInfo_.value.replace(QRegExp("/$"), "");
 }
-
-

@@ -19,10 +19,12 @@ CmdTask::CmdTask(QString key, QString cmd, QString debugFile, QString info, Thre
 {
     this->setAutoDelete(true);
 }
+
 CmdTask::~CmdTask()
 {
 
 }
+
 void CmdTask::run()
 {
     CmdTool tool;
@@ -36,10 +38,12 @@ GenerateTask::GenerateTask(DeviceType deviceType, ThreadPool *parent)
 {
 
 }
+
 GenerateTask::~GenerateTask()
 {
 
 }
+
 void GenerateTask::run()
 {
 
@@ -125,7 +129,6 @@ void GenerateTask::run()
     generator = nullptr;
 }
 
-
 ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
 {
 
@@ -186,7 +189,6 @@ void ThreadPool::loadCmdInfo()
 
 }
 
-
 void ThreadPool::generateInfo()
 {
     // 开始生成设备信息
@@ -210,7 +212,6 @@ void ThreadPool::generateInfo()
         }
     }
 }
-
 
 void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
 {
@@ -288,4 +289,3 @@ void ThreadPool::getTypeList(QList<DeviceType> &typeList)
     typeList.push_back(DT_Others);
     m_AllTypeNum = typeList.size();
 }
-

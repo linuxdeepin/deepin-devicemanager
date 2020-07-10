@@ -62,7 +62,7 @@ DWIDGET_USE_NAMESPACE
 using PowerInter = com::deepin::daemon::Power;
 
 DCORE_USE_NAMESPACE
-//const QString g_lsblkDbKey = "lsblk";
+
 DeviceInfoParser::DeviceInfoParser()
     : QObject()
 {
@@ -73,11 +73,6 @@ DeviceInfoParser::~DeviceInfoParser()
 {
 
 }
-
-
-//QString defaultLanguage = getenv("LANGUAGE");
-//setenv("LANGUAGE", "en_US", 1);
-//setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
 
 QString DeviceInfoParser::loadGeneratorKey()
 {
@@ -138,6 +133,7 @@ bool DeviceInfoParser::getDeviceInfo(const QString &command, QString &deviceInfo
 
     return true;
 }
+
 bool DeviceInfoParser::executeProcess(const QString &cmd, QString &deviceInfo)
 {
 #ifdef TEST_DATA_FROM_FILE
@@ -159,6 +155,7 @@ bool DeviceInfoParser::executeProcess(const QString &cmd, QString &deviceInfo)
     return runCmd(newCmd, deviceInfo);
 #endif
 }
+
 bool DeviceInfoParser::runCmd(const QString &proxy, QString &deviceInfo)
 {
     QDateTime dt = QDateTime::currentDateTime();

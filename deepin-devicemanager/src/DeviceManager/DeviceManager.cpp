@@ -141,6 +141,7 @@ void DeviceManager::addGpuDevice(const DeviceGpu &device)
 {
     m_ListDeviceGPU.append(device);
 }
+
 const QList<DeviceGpu> &DeviceManager::getGPUDevices()
 {
     return m_ListDeviceGPU;
@@ -174,6 +175,7 @@ void DeviceManager::addMemoryDevice(const DeviceMemory &device)
 {
     m_ListDeviceMemory.append(device);
 }
+
 const QList<DeviceMemory> &DeviceManager::getMemoryDevices()
 {
     return m_ListDeviceMemory;
@@ -193,6 +195,7 @@ void DeviceManager::addMonitor(const DeviceMonitor &device)
 {
     m_ListDeviceMonitor.append(device);
 }
+
 const QList<DeviceMonitor> &DeviceManager::getMonitorDevices()
 {
     return m_ListDeviceMonitor;
@@ -222,6 +225,7 @@ void DeviceManager::addBiosDevice(const DeviceBios &device)
 {
     m_ListDeviceBios.append(device);
 }
+
 const QList<DeviceBios> &DeviceManager::getBiosDevices()
 {
     return m_ListDeviceBios;
@@ -237,11 +241,11 @@ void DeviceManager::setLanguageInfo(const QMap<QString, QString> &mapInfo)
     }
 }
 
-
 void DeviceManager::addBluetoothDevice(const DeviceBluetooth &device)
 {
     m_ListBluetooth.append(device);
 }
+
 const QList<DeviceBluetooth> &DeviceManager::getBluetoothDevices()
 {
     return m_ListBluetooth;
@@ -272,6 +276,7 @@ void DeviceManager::addAudioDevice(const DeviceAudio &device)
 {
     m_ListDeviceAudio.append(device);
 }
+
 const QList<DeviceAudio> &DeviceManager::getAudioDevices()
 {
     return m_ListDeviceAudio;
@@ -299,6 +304,7 @@ void DeviceManager::addNetworkDevice(const DeviceNetwork &device)
 {
     m_ListDeviceNetwork.append(device);
 }
+
 const QList<DeviceNetwork> &DeviceManager::getNetworkDevices()
 {
     return m_ListDeviceNetwork;
@@ -331,14 +337,17 @@ const QList<DeviceImage> &DeviceManager::getImageDevices()
 {
     return m_ListDeviceImage;
 }
+
 void DeviceManager::addKeyboardDevice(const DeviceKeyboard &device)
 {
     m_ListDeviceKeyboard.append(device);
 }
+
 const QList<DeviceKeyboard> &DeviceManager::getKeyboardDevices()
 {
     return m_ListDeviceKeyboard;
 }
+
 void DeviceManager::setKeyboardInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceKeyboard>::iterator it = m_ListDeviceKeyboard.begin();
@@ -390,10 +399,12 @@ void DeviceManager::addPowerDevice(const DevicePower &device)
 {
     m_ListDevicePower.append(device);
 }
+
 const QList<DevicePower> &DeviceManager::getPowerDevices()
 {
     return m_ListDevicePower;
 }
+
 void DeviceManager::setPowerDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
     QList<DevicePower>::iterator it = m_ListDevicePower.begin();
@@ -401,10 +412,12 @@ void DeviceManager::setPowerDaemonInfo(const QMap<QString, QString> &mapInfo)
         (*it).setDaemonInfo(mapInfo);
     }
 }
+
 void DeviceManager::addPrintDevice(const DevicePrint &device)
 {
     m_ListDevicePrint.append(device);
 }
+
 const QList<DevicePrint> &DeviceManager::getPrintDevices()
 {
     return m_ListDevicePrint;
@@ -414,6 +427,7 @@ void DeviceManager::addOtherPCIDevice(const DeviceOtherPCI &device)
 {
     m_ListDeviceOtherPCI.append(device);
 }
+
 const QList<DeviceOtherPCI> &DeviceManager::getOtherPCIDevices()
 {
     return m_ListDeviceOtherPCI;
@@ -423,6 +437,7 @@ void DeviceManager::addComputerDevice(const DeviceComputer &device)
 {
     m_ListDeviceComputer.append(device);
 }
+
 const QList<DeviceComputer> &DeviceManager::getComputerDevices()
 {
     return m_ListDeviceComputer;
@@ -432,6 +447,7 @@ void DeviceManager::addCdromDevice(const DeviceCdrom &device)
 {
     m_ListDeviceCdrom.append(device);
 }
+
 const QList<DeviceCdrom> DeviceManager::getCdromDevices()
 {
     return m_ListDeviceCdrom;
@@ -449,6 +465,7 @@ void DeviceManager::addBusId(const QStringList &busId)
 {
     m_BusIdList.append(busId);
 }
+
 const QStringList &DeviceManager::getBusId()
 {
     return m_BusIdList;
@@ -460,8 +477,8 @@ void DeviceManager::addCmdInfo(const QMap<QString, QList<QMap<QString, QString> 
         m_cmdInfo[key].append(cmdInfo[key]);
     }
 }
+
 const QList<QMap<QString, QString>> &DeviceManager::cmdInfo(const QString &key)
 {
     return m_cmdInfo[key];
 }
-

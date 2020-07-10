@@ -44,7 +44,6 @@ ColumnLabel::ColumnLabel(const QString &text, ColumnWidget *parent)
     , columnWidget_(parent)
 {
 
-
 }
 
 //void ColumnLabel::mousePressEvent(QMouseEvent *event)
@@ -58,8 +57,9 @@ ColumnLabel::ColumnLabel(const QString &text, ColumnWidget *parent)
 //    columnWidget_->labelContextMenuEvent(event);
 //}
 
-ColumnWidget::ColumnWidget(const QString &strLeft, const QString &strRight, const QFont &font, int fontSizetype, int columnHeight, bool isRightLink, Dtk::Widget::DWidget *parent, DeviceInfoWidgetBase *di): \
-    DWidget(parent), deviceInfoWidget_(di)
+ColumnWidget::ColumnWidget(const QString &strLeft, const QString &strRight, const QFont &font, int fontSizetype, int columnHeight, bool isRightLink, Dtk::Widget::DWidget *parent, DeviceInfoWidgetBase *di)
+    : DWidget(parent)
+    , deviceInfoWidget_(di)
 {
     //setAutoFillBackground(true);
 

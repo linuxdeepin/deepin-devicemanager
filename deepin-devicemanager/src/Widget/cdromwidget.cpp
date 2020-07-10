@@ -55,6 +55,7 @@ void CDRomWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void CDRomWidget::initTable(const QList<DeviceCdrom> &devices)
 {
     QList<QStringList> tabList;
@@ -70,6 +71,7 @@ void CDRomWidget::initTable(const QList<DeviceCdrom> &devices)
 
     addTable(headers, tabList);
 }
+
 void CDRomWidget::initDetails(const QList<DeviceCdrom> &devices)
 {
     int size = devices.size();
@@ -77,6 +79,7 @@ void CDRomWidget::initDetails(const QList<DeviceCdrom> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void CDRomWidget::addDeviceDetail(const DeviceCdrom &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

@@ -77,102 +77,127 @@ const QString &DeviceNetwork::name()const
 {
     return m_Name;
 }
+
 const QString &DeviceNetwork::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceNetwork::model()const
 {
     return m_Model;
 }
+
 const QString &DeviceNetwork::version()const
 {
     return m_Version;
 }
+
 const QString &DeviceNetwork::busInfo()const
 {
     return m_BusInfo;
 }
+
 const QString &DeviceNetwork::logicalName()const
 {
     return m_LogicalName;
 }
+
 const QString &DeviceNetwork::MACAddress()const
 {
     return m_MACAddress;
 }
+
 const QString &DeviceNetwork::irq()const
 {
     return m_Irq;
 }
+
 const QString &DeviceNetwork::memory()const
 {
     return m_Memory;
 }
+
 const QString &DeviceNetwork::width()const
 {
     return m_Width;
 }
+
 const QString &DeviceNetwork::clock()const
 {
     return m_Clock;
 }
+
 const QString &DeviceNetwork::capabilities()const
 {
     return m_Capabilities;
 }
+
 const QString &DeviceNetwork::autoNegotiation()const
 {
     return m_Autonegotiation;
 }
+
 const QString &DeviceNetwork::broadcast()const
 {
     return m_Broadcast;
 }
+
 const QString &DeviceNetwork::driver()const
 {
     return m_Driver;
 }
+
 const QString &DeviceNetwork::driverVersion()const
 {
     return m_DriverVersion;
 }
+
 const QString &DeviceNetwork::duplex()const
 {
     return m_Duplex;
 }
+
 const QString &DeviceNetwork::firmware()const
 {
     return m_Firmware;
 }
+
 const QString &DeviceNetwork::port()const
 {
     return m_Port;
 }
+
 const QString &DeviceNetwork::link()const
 {
     return m_Link;
 }
+
 const QString &DeviceNetwork::ip()const
 {
     return m_Ip;
 }
+
 const QString &DeviceNetwork::speed()const
 {
     return m_Speed;
 }
+
 const QString &DeviceNetwork::capacity()const
 {
     return m_Capacity;
 }
+
 const QString &DeviceNetwork::latency()const
 {
     return m_Latency;
 }
+
 const QString &DeviceNetwork::multicast()const
 {
     return m_Multicast;
 }
+
 void DeviceNetwork::initFilterKey()
 {
     addFilterKey(QObject::tr("ioport"));

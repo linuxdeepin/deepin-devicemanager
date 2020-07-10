@@ -103,42 +103,52 @@ const QString &DeviceAudio::name()const
 {
     return m_Name;
 }
+
 const QString &DeviceAudio::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceAudio::model()const
 {
     return m_Model;
 }
+
 const QString &DeviceAudio::version()const
 {
     return m_Version;
 }
+
 const QString &DeviceAudio::busInfo()const
 {
     return m_BusInfo;
 }
+
 const QString &DeviceAudio::irq()const
 {
     return m_Irq;
 }
+
 const QString &DeviceAudio::memory()const
 {
     return m_Memory;
 }
+
 const QString &DeviceAudio::width()const
 {
     return m_Width;
 }
+
 const QString &DeviceAudio::clock()const
 {
     return m_Clock;
 }
+
 const QString &DeviceAudio::capabilities()const
 {
     return m_Capabilities;
 }
+
 const QString &DeviceAudio::description()const
 {
     return m_Description;
@@ -148,6 +158,7 @@ const QString &DeviceAudio::chip() const
 {
     return m_Chip;
 }
+
 void DeviceAudio::initFilterKey()
 {
     addFilterKey(QObject::tr("Device Name"));

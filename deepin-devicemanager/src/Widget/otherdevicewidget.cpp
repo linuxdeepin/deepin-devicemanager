@@ -55,6 +55,7 @@ void OtherDevicesWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void OtherDevicesWidget::initTable(const QList<DeviceOthers> &devices)
 {
     QList<QStringList> tabList;
@@ -70,6 +71,7 @@ void OtherDevicesWidget::initTable(const QList<DeviceOthers> &devices)
 
     addTable(headers, tabList);
 }
+
 void OtherDevicesWidget::initDetails(const QList<DeviceOthers> &devices)
 {
     int size = devices.size();
@@ -77,6 +79,7 @@ void OtherDevicesWidget::initDetails(const QList<DeviceOthers> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void OtherDevicesWidget::addDeviceDetail(const DeviceOthers &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

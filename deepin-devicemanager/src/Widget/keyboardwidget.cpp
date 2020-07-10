@@ -35,7 +35,6 @@ KeyboardWidget::KeyboardWidget(QWidget *parent)
     initWidgetEX();
 }
 
-
 void KeyboardWidget::initWidgetEX()
 {
     // 获取存储设备
@@ -57,6 +56,7 @@ void KeyboardWidget::initWidgetEX()
     // 设置overview
     setOverView(devices);
 }
+
 void KeyboardWidget::initTable(const QList<DeviceKeyboard> &devices)
 {
     QList<QStringList> tabList;
@@ -72,6 +72,7 @@ void KeyboardWidget::initTable(const QList<DeviceKeyboard> &devices)
 
     addTable(headers, tabList);
 }
+
 void KeyboardWidget::initDetails(const QList<DeviceKeyboard> &devices)
 {
     int size = devices.size();
@@ -79,6 +80,7 @@ void KeyboardWidget::initDetails(const QList<DeviceKeyboard> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void KeyboardWidget::addDeviceDetail(const DeviceKeyboard &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;
@@ -109,5 +111,3 @@ void KeyboardWidget::setOverView(const QList<DeviceKeyboard> &devices)
     }
     overviewInfo_.value.replace(QRegExp("/$"), "");
 }
-
-

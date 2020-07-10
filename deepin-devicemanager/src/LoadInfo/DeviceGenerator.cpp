@@ -245,7 +245,6 @@ void DeviceGenerator::generatorPowerDevice()
     }
 }
 
-
 void DeviceGenerator::getBiosInfo()
 {
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode0");
@@ -269,6 +268,7 @@ void DeviceGenerator::getBiosInfo()
     }
 
 }
+
 void DeviceGenerator::getSystemInfo()
 {
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode1");
@@ -282,6 +282,7 @@ void DeviceGenerator::getSystemInfo()
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
+
 void DeviceGenerator::getBaseBoardInfo()
 {
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode2");
@@ -295,6 +296,7 @@ void DeviceGenerator::getBaseBoardInfo()
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
+
 void DeviceGenerator::getChassisInfo()
 {
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode3");
@@ -308,6 +310,7 @@ void DeviceGenerator::getChassisInfo()
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
+
 void DeviceGenerator::getBiosMemoryInfo()
 {
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("dmidecode16");
@@ -343,6 +346,7 @@ void DeviceGenerator::getMemoryInfoFromLshw()
         }
     }
 }
+
 void DeviceGenerator::getMemoryInfoFromDmidecode()
 {
     // 加载从dmidecode获取的信息
@@ -394,6 +398,7 @@ void DeviceGenerator::getDiskInfoFromLsblk()
         }
     }
 }
+
 void DeviceGenerator::getDiskInfoFromSmartCtl()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("smart");
@@ -444,6 +449,7 @@ void DeviceGenerator::getGpuInfoFromXrandr()
         DeviceManager::instance()->setGpuInfoFromXrandr(*it);
     }
 }
+
 void DeviceGenerator::getGpuSizeFromDmesg()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("dmesg");
@@ -466,6 +472,7 @@ void DeviceGenerator::getMonitorInfoFromHwinfo()
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
+
 void DeviceGenerator::getMonitorInfoFromXrandrVerbose()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("xrandr_verbose");
@@ -477,6 +484,7 @@ void DeviceGenerator::getMonitorInfoFromXrandrVerbose()
         DeviceManager::instance()->setMonitorInfoFromXrandr((*it)["mainInfo"], (*it)["edid"]);
     }
 }
+
 void DeviceGenerator::getMonitorRefreshRateFromXrandr()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("xrandr");
@@ -503,6 +511,7 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
+
 void DeviceGenerator::getAudioInfoFromLshw()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_multimedia");
@@ -549,6 +558,7 @@ void DeviceGenerator::getBluetoothInfoFromHciconfig()
         DeviceManager::instance()->addBluetoothDevice(device);
     }
 }
+
 void DeviceGenerator::getBlueToothInfoFromHwinfo()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
@@ -566,6 +576,7 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
         }
     }
 }
+
 void DeviceGenerator::getBluetoothInfoFromLshw()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
@@ -577,6 +588,7 @@ void DeviceGenerator::getBluetoothInfoFromLshw()
         DeviceManager::instance()->setBluetoothInfoFromLshw(*it);
     }
 }
+
 void DeviceGenerator::getKeyboardInfoFromHwinfo()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_keyboard");
@@ -595,6 +607,8 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
+
+
 void DeviceGenerator::getKeyboardInfoFromLshw()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
@@ -606,10 +620,12 @@ void DeviceGenerator::getKeyboardInfoFromLshw()
         DeviceManager::instance()->setKeyboardInfoFromLshw(*it);
     }
 }
+
 void DeviceGenerator::getKeyboardInfoFromCatDevices()
 {
 
 }
+
 void DeviceGenerator::getMouseInfoFromHwinfo()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_mouse");
@@ -630,6 +646,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
+
 void DeviceGenerator::getMouseInfoFromLshw()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
@@ -641,6 +658,7 @@ void DeviceGenerator::getMouseInfoFromLshw()
         DeviceManager::instance()->addMouseInfoFromLshw(*it);
     }
 }
+
 void DeviceGenerator::getMouseInfoFromCatDevices()
 {
 
@@ -664,6 +682,7 @@ void DeviceGenerator::getImageInfoFromHwinfo()
         }
     }
 }
+
 void DeviceGenerator::getImageInfoFromLshw()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
@@ -690,6 +709,7 @@ void DeviceGenerator::getCdromInfoFromHwinfo()
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
 }
+
 void DeviceGenerator::getCdromInfoFromLshw()
 {
     const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_cdrom");
@@ -726,6 +746,7 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         }
     }
 }
+
 void DeviceGenerator::getOthersInfoFromLshw()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");

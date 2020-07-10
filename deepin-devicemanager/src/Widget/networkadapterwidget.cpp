@@ -55,6 +55,7 @@ void NetworkadapterWidget::initWidgetEx()
     // 设置overview
     setOverView(devices);
 }
+
 void NetworkadapterWidget::initTable(const QList<DeviceNetwork> &devices)
 {
     QList<QStringList> tabList;
@@ -70,6 +71,7 @@ void NetworkadapterWidget::initTable(const QList<DeviceNetwork> &devices)
 
     addTable(headers, tabList);
 }
+
 void NetworkadapterWidget::initDetails(const QList<DeviceNetwork> &devices)
 {
     int size = devices.size();
@@ -77,6 +79,7 @@ void NetworkadapterWidget::initDetails(const QList<DeviceNetwork> &devices)
         addDeviceDetail(device, size == 1 ? false : true);
     }
 }
+
 void NetworkadapterWidget::addDeviceDetail(const DeviceNetwork &device, bool withTitle)
 {
     QList<ArticleStruct> attributes;

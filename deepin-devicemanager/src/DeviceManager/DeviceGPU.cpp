@@ -112,7 +112,6 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
-
 void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
 {
     m_MinimumResolution = mapInfo["minResolution"];
@@ -153,26 +152,32 @@ const QString &DeviceGpu::name() const
 {
     return m_Name;
 }
+
 const QString &DeviceGpu::vendor() const
 {
     return m_Vendor;
 }
+
 const QString &DeviceGpu::model() const
 {
     return m_Model;
 }
+
 const QString &DeviceGpu::version() const
 {
     return m_Version;
 }
+
 const QString &DeviceGpu::graphicsMemory() const
 {
     return m_GraphicsMemory;
 }
+
 const QString &DeviceGpu::busWidth() const
 {
     return m_Width;
 }
+
 const QString &DeviceGpu::IRQ() const
 {
     return m_IRQ;
@@ -181,46 +186,58 @@ const QString &DeviceGpu::capabilities() const
 {
     return m_Capabilities;
 }
+
 const QString &DeviceGpu::displayOutput() const
 {
     return m_DisplayOutput;
 }
+
 const QString &DeviceGpu::VGA() const
 {
     return m_VGA;
 }
+
 const QString &DeviceGpu::HDMI() const
 {
     return m_HDMI;
 }
+
 const QString &DeviceGpu::eDP() const
 {
     return m_eDP;
 }
+
 const QString &DeviceGpu::displayPort() const
 {
     return m_DisplayPort;
 }
+
 const QString &DeviceGpu::clock() const
 {
     return m_Clock;
 }
+
 const QString &DeviceGpu::description() const
 {
     return m_Description;
 }
+
 const QString &DeviceGpu::driver() const
 {
     return m_Driver;
 }
+
+
 const QString &DeviceGpu::currentResolution() const
 {
     return m_CurrentResolution;
 }
+
 const QString &DeviceGpu::minimumResolution() const
 {
     return m_MinimumResolution;
 }
+
 const QString &DeviceGpu::maximumResolution() const
 {
     return m_MaximumResolution;
@@ -230,14 +247,17 @@ const QString &DeviceGpu::busInfo() const
 {
     return m_BusInfo;
 }
+
 const QString &DeviceGpu::ioPort() const
 {
     return  m_IOPort;
 }
+
 const QString &DeviceGpu::memory() const
 {
     return m_MemAddress;
 }
+
 const QString &DeviceGpu::physID() const
 {
     return m_PhysID;

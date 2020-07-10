@@ -34,6 +34,7 @@ MouseWidget::MouseWidget(QWidget *parent)
     //initWidget();
     initWidgetEX();
 }
+
 void MouseWidget::initWidgetEX()
 {
     // 获取鼠标设备

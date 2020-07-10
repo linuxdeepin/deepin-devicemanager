@@ -74,8 +74,8 @@ DWIDGET_USE_NAMESPACE
 
 static QList<ArticleStruct> staticArticles;
 
-MainWindow::MainWindow(QWidget *parent) :
-    DMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent)
+    : DMainWindow(parent)
     , m_sizeForQSetting(mainWindowMinWidth_, mainWindowMinHeight_)
     , mp_ThreadPool(new ThreadPool(this))
 {

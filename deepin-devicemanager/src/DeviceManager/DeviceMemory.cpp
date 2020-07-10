@@ -87,50 +87,62 @@ const QString &DeviceMemory::name()const
 {
     return m_Name;
 }
+
 const QString &DeviceMemory::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceMemory::size()const
 {
     return m_Size;
 }
+
 const QString &DeviceMemory::type()const
 {
     return m_Type;
 }
+
 const QString &DeviceMemory::speed()const
 {
     return m_Speed;
 }
+
 const QString &DeviceMemory::totalBandwidth()const
 {
     return m_TotalBandwidth;
 }
+
 const QString &DeviceMemory::dataBandwidth()const
 {
     return m_DataBandwidth;
 }
+
 const QString &DeviceMemory::locator()const
 {
     return m_Locator;
 }
+
 const QString &DeviceMemory::serialNumber()const
 {
     return m_SerialNumber;
 }
+
 const QString &DeviceMemory::configuredSpeed()const
 {
     return m_ConfiguredSpeed;
 }
+
 const QString &DeviceMemory::minimumVoltage()const
 {
     return m_MinimumVoltage;
 }
+
 const QString &DeviceMemory::maximumVoltage()const
 {
     return m_MaximumVoltage;
 }
+
 const QString &DeviceMemory::configuredVoltage()const
 {
     return m_ConfiguredVoltage;
