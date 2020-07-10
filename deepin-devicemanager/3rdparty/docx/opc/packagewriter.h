@@ -12,7 +12,7 @@ class PackageWriter
 {
 public:
     PackageWriter(const QString &pkgFile);
-    PackageWriter(const QString &pkgFile, const Relationships *pkgRels, const QList<Part *> &parts);
+//    PackageWriter(const QString &pkgFile, const Relationships *pkgRels, const QList<Part *> &parts);
     void writePkgRels(const Relationships *pkgRels);
     void writeContentTypes(const QList<Part *> &parts);
     void writeParts(const QList<Part *> &parts);

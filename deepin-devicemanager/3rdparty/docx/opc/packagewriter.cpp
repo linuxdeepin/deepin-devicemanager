@@ -14,11 +14,11 @@ PackageWriter::PackageWriter(const QString &pkgFile)
     m_writer = new PhysPkgWriter(pkgFile);
 }
 
-PackageWriter::PackageWriter(const QString &pkgFile, const Relationships *pkgRels, const QList<Part *> &parts)
-    : PackageWriter(pkgFile)
-{
+//PackageWriter::PackageWriter(const QString &pkgFile, const Relationships *pkgRels, const QList<Part *> &parts)
+//    : PackageWriter(pkgFile)
+//{
 
-}
+//}
 
 void PackageWriter::writePkgRels(const Relationships *pkgRels)
 {

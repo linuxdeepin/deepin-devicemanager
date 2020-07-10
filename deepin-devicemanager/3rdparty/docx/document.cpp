@@ -73,7 +73,7 @@ Paragraph *Document::addHeading(const QString &text, int level)
     return addParagraph(text, style);
 }
 
-Table *Document::addTable(int rows, int cols, const QString &style)
+Table *Document::addTable(int rows, int cols)
 {
     return m_docPart->addTable(rows, cols);
 }
