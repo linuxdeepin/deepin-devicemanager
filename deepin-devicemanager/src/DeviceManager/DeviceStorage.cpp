@@ -2,8 +2,19 @@
 #include<QDebug>
 
 DeviceStorage::DeviceStorage()
-    : DeviceBaseInfo(), m_Model(""), m_Vendor(""), m_MediaType(""), m_Size(""), m_RotationRate(""), m_Interface("")
-    , m_SerialNumber(""), m_Version(""), m_Capabilities(""), m_Description(""), m_KeyToLshw(""), m_KeyFromStorage("")
+    : DeviceBaseInfo()
+    , m_Model("")
+    , m_Vendor("")
+    , m_MediaType("")
+    , m_Size("")
+    , m_RotationRate("")
+    , m_Interface("")
+    , m_SerialNumber("")
+    , m_Version("")
+    , m_Capabilities("")
+    , m_Description("")
+    , m_KeyToLshw("")
+    , m_KeyFromStorage("")
 {
     initFilterKey();
 }
@@ -108,7 +119,7 @@ bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
     }
 
     // 更新接口
-    setAttribute(mapInfo,"interface",m_Interface,false);
+    setAttribute(mapInfo, "interface", m_Interface, false);
 
 
     // 获取基本信息

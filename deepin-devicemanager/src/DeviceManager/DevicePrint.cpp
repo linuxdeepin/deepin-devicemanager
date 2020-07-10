@@ -2,8 +2,15 @@
 #include <QDebug>
 
 DevicePrint::DevicePrint()
-    : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Model(""), m_SerialNumber("")
-    , m_InterfaceType(""), m_URI(""), m_Status(""), m_Shared("")
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Model("")
+    , m_SerialNumber("")
+    , m_InterfaceType("")
+    , m_URI("")
+    , m_Status("")
+    , m_Shared("")
 {
     initFilterKey();
 }

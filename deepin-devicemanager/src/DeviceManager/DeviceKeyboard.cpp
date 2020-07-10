@@ -2,8 +2,17 @@
 #include <QDebug>
 
 DeviceKeyboard::DeviceKeyboard()
-    : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Model(""), m_Version("")
-    , m_BusInfo(""), m_Capabilities(""), m_Description(""), m_Driver(""), m_MaximumPower(""), m_Speed("")
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Model("")
+    , m_Version("")
+    , m_BusInfo("")
+    , m_Capabilities("")
+    , m_Description("")
+    , m_Driver("")
+    , m_MaximumPower("")
+    , m_Speed("")
     , m_KeyToLshw("")
 {
     initFilterKey();

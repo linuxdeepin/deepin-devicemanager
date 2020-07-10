@@ -2,9 +2,19 @@
 #include<QDebug>
 
 DeviceBluetooth::DeviceBluetooth()
-    : DeviceBaseInfo (), m_Name(""), m_Vendor(""), m_Version(""), m_Model("")
-    , m_MAC(""), m_LogicalName(""), m_BusInfo(""), m_Capabilities("")
-    , m_Driver(""), m_DriverVersion(""), m_MaximumPower(""), m_Speed("")
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Version("")
+    , m_Model("")
+    , m_MAC("")
+    , m_LogicalName("")
+    , m_BusInfo("")
+    , m_Capabilities("")
+    , m_Driver("")
+    , m_DriverVersion("")
+    , m_MaximumPower("")
+    , m_Speed("")
 {
     initFilterKey();
 }

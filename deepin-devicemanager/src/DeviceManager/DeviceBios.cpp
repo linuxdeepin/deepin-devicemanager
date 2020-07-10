@@ -2,7 +2,13 @@
 #include <QDebug>
 
 DeviceBios::DeviceBios()
-    : DeviceBaseInfo(), m_Name(""), m_ProductName(""), m_Vendor(""), m_Version(""), m_ChipsetFamily(""), m_IsBoard(false)
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_ProductName("")
+    , m_Vendor("")
+    , m_Version("")
+    , m_ChipsetFamily("")
+    , m_IsBoard(false)
 {
     initFilterKey();
 }

@@ -42,7 +42,7 @@ void AudiodeviceWidget::initWidgetEx()
     // 获取鼠标设备
     const QList<DeviceAudio> &devices = DeviceManager::instance()->getAudioDevices();
     int deviceNum = devices.size();
-    if ( deviceNum < 1 ) {
+    if (deviceNum < 1) {
         setCentralInfo(tr("No audio device found"));
         return;
     }
@@ -71,7 +71,7 @@ void AudiodeviceWidget::initTable(const QList<DeviceAudio> &devices)
         tabList.append(tab);
     }
 
-    addTable( headers, tabList);
+    addTable(headers, tabList);
 }
 void AudiodeviceWidget::initDetails(const QList<DeviceAudio> &devices)
 {
@@ -100,7 +100,7 @@ void AudiodeviceWidget::addDeviceDetail(const DeviceAudio &device, bool withTitl
     addOtherDeviceAttribute(device, attributes);
 
     // 显示到界面
-    addSubInfo(withTitle ? device.name() : "", attributes );
+    addSubInfo(withTitle ? device.name() : "", attributes);
 }
 
 void AudiodeviceWidget::setOverView(const QList<DeviceAudio> &devices)

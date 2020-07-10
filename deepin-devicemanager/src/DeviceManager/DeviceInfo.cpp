@@ -6,9 +6,12 @@
 #include "../deviceinfoparser.h"
 
 DWIDGET_USE_NAMESPACE
+
 DeviceBaseInfo::DeviceBaseInfo()
 {
+
 }
+
 DeviceBaseInfo::~DeviceBaseInfo()
 {
 

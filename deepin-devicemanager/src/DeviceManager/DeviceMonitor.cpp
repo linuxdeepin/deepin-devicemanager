@@ -4,10 +4,23 @@
 #include <math.h>
 #include <QSize>
 DeviceMonitor::DeviceMonitor()
-    : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Model(""), m_DisplayInput(""), m_VGA("Disable")
-    , m_HDMI("Disable"), m_DVI("Disable"), m_Interface(""), m_ScreenSize("")
-    , m_AspectRatio(""), m_MainScreen(""), m_CurrentResolution(""), m_SerialNumber(""), m_ProductionWeek(""),
-      m_Width(0), m_Height(0)
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Model("")
+    , m_DisplayInput("")
+    , m_VGA("Disable")
+    , m_HDMI("Disable")
+    , m_DVI("Disable")
+    , m_Interface("")
+    , m_ScreenSize("")
+    , m_AspectRatio("")
+    , m_MainScreen("")
+    , m_CurrentResolution("")
+    , m_SerialNumber("")
+    , m_ProductionWeek("")
+    , m_Width(0)
+    , m_Height(0)
 {
     initFilterKey();
 }
@@ -19,7 +32,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
 
     QString res = sizeDescription;
     QRegExp re("^([\\d]*)x([\\d]*) mm$");
-    if ( re.exactMatch(sizeDescription) ) {
+    if (re.exactMatch(sizeDescription)) {
         double width = re.cap(1).toDouble();
         double height = re.cap(2).toDouble();
         retSize = QSize(int(width), int(height));
@@ -32,7 +45,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
     }
 
     re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
-    if ( re.exactMatch(sizeDescription) ) {
+    if (re.exactMatch(sizeDescription)) {
         double width = re.cap(1).toDouble();
         double height = re.cap(2).toDouble();
         retSize = QSize(int(width), int(height));
@@ -239,7 +252,7 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
 void DeviceMonitor::caculateScreenRatio()
 {
     QRegExp re("^([\\d]*)x([\\d]*)(.*)$");
-    if ( re.exactMatch(m_CurrentResolution) ) {
+    if (re.exactMatch(m_CurrentResolution)) {
         int width = re.cap(1).toInt();
         int height = re.cap(2).toInt();
         int gys = gcd(width, height);
@@ -269,7 +282,7 @@ bool DeviceMonitor::findAspectRatio(int width, int height, int &ar_w, int &ar_h)
 
     for (ar_w = 21; ar_w > 0; --ar_w) {
         for (ar_h = 21; ar_h > 0; --ar_h) {
-            if ( std::abs(r1 - float(ar_w) / float(ar_h)) / r1 < 0.01) {
+            if (std::abs(r1 - float(ar_w) / float(ar_h)) / r1 < 0.01) {
                 int r = gcd(ar_w, ar_h);
                 ar_w /= r;
                 ar_h /= r;

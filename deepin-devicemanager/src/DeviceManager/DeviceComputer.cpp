@@ -2,8 +2,11 @@
 #include <QDebug>
 
 DeviceComputer::DeviceComputer()
-    : m_HomeUrl(""), m_OsDescription("")
-    , m_OS(""), m_Vendor(""), m_Name("")
+    : m_HomeUrl("")
+    , m_OsDescription("")
+    , m_OS("")
+    , m_Vendor("")
+    , m_Name("")
     ,  m_Type("")
 {
 

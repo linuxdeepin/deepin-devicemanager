@@ -4,9 +4,19 @@
 
 
 DeviceMouse::DeviceMouse()
-    : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Model(""), m_Interface(""), m_BusInfo("")
-    , m_Version(""), m_Capabilities(""), m_Driver(""), m_MaximumPower(""), m_Speed("")
-    , m_KeysToCatDevices(""), m_KeyToLshw("")
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Model("")
+    , m_Interface("")
+    , m_BusInfo("")
+    , m_Version("")
+    , m_Capabilities("")
+    , m_Driver("")
+    , m_MaximumPower("")
+    , m_Speed("")
+    , m_KeysToCatDevices("")
+    , m_KeyToLshw("")
 {
     initFilterKey();
 }

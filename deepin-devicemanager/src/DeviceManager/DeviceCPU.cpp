@@ -1,11 +1,28 @@
 #include "DeviceCpu.h"
 
 DeviceCpu::DeviceCpu()
-    : m_Vendor(""), m_Name(""), m_PhysicalID(""), m_CoreID(""), m_ThreadNum(""),
-      m_Frequency(""), m_CurFrequency(""), m_BogoMIPS(""), m_Architecture(""),
-      m_Familly(""), m_Model(""), m_Step(""), m_CacheL1Data(""), m_CacheL1Order(""),
-      m_CacheL2(""), m_CacheL3(""), m_Extensions(""), m_Flags(""), m_HardwareVirtual(""),
-      m_LogicalCPUNum(""), m_CPUCoreNum(""), m_FrequencyIsRange(false)
+    : m_Vendor("")
+    , m_Name("")
+    , m_PhysicalID("")
+    , m_CoreID("")
+    , m_ThreadNum("")
+    , m_Frequency("")
+    , m_CurFrequency("")
+    , m_BogoMIPS("")
+    , m_Architecture(""),
+      m_Familly("")
+    , m_Model("")
+    , m_Step("")
+    , m_CacheL1Data("")
+    , m_CacheL1Order("")
+    , m_CacheL2("")
+    , m_CacheL3("")
+    , m_Extensions("")
+    , m_Flags("")
+    , m_HardwareVirtual("")
+    , m_LogicalCPUNum("")
+    , m_CPUCoreNum("")
+    , m_FrequencyIsRange(false)
 {
     initFilterKey();
 }

@@ -1,8 +1,18 @@
 #include "DeviceAudio.h"
 
 DeviceAudio::DeviceAudio()
-    : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Model(""), m_Version(""), m_BusInfo("")
-    , m_Irq(""), m_Memory(""), m_Width(""), m_Clock(""), m_Capabilities(""), m_Description("")
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Model("")
+    , m_Version("")
+    , m_BusInfo("")
+    , m_Irq("")
+    , m_Memory("")
+    , m_Width("")
+    , m_Clock("")
+    , m_Capabilities("")
+    , m_Description("")
     , m_UniqueKey("")
 {
     initFilterKey();

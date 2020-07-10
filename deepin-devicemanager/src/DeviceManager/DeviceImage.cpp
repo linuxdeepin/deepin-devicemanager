@@ -1,8 +1,16 @@
 #include "DeviceImage.h"
 
 DeviceImage::DeviceImage()
-    : DeviceBaseInfo (), m_Name(""), m_Vendor(""), m_Model(""), m_Version("")
-    , m_BusInfo(""), m_Capabilities(""), m_Driver(""), m_MaximumPower(""), m_Speed("")
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Model("")
+    , m_Version("")
+    , m_BusInfo("")
+    , m_Capabilities("")
+    , m_Driver("")
+    , m_MaximumPower("")
+    , m_Speed("")
 {
 
 }

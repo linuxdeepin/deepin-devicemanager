@@ -2,3 +2,4 @@ all.pro.user
 all.pro.user.*
 *.autosave
 *.o
+CMakeLists.txt.user

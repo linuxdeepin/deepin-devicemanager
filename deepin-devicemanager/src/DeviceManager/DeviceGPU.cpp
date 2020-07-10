@@ -2,9 +2,27 @@
 #include<QDebug>
 
 DeviceGpu::DeviceGpu()
-    : DeviceBaseInfo (), m_Name(""), m_Vendor(""), m_Model(""), m_Version(""), m_GraphicsMemory(""), m_Width(""), m_DisplayPort("Unable")
-    , m_Clock(""), m_IRQ(""), m_Capabilities(""), m_DisplayOutput(""), m_VGA("Unable"), m_HDMI("Unable"), m_eDP("Unable")
-    , m_Description(""), m_Driver(""), m_CurrentResolution(""), m_MinimumResolution(""), m_MaximumResolution(""), m_UniqueKey("")
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Model("")
+    , m_Version("")
+    , m_GraphicsMemory("")
+    , m_Width("")
+    , m_DisplayPort("Unable")
+    , m_Clock("")
+    , m_IRQ("")
+    , m_Capabilities("")
+    , m_DisplayOutput("")
+    , m_VGA("Unable")
+    , m_HDMI("Unable")
+    , m_eDP("Unable")
+    , m_Description("")
+    , m_Driver("")
+    , m_CurrentResolution("")
+    , m_MinimumResolution("")
+    , m_MaximumResolution("")
+    , m_UniqueKey("")
 {
     initFilterKey();
 }

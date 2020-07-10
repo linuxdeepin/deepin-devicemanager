@@ -22,7 +22,7 @@
 #include <QDebug>
 
 DeviceGenerator::DeviceGenerator(QObject *parent)
-    : QObject (parent)
+    : QObject(parent)
 {
 
 }

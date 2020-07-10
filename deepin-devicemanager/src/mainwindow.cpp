@@ -75,9 +75,9 @@ DWIDGET_USE_NAMESPACE
 static QList<ArticleStruct> staticArticles;
 
 MainWindow::MainWindow(QWidget *parent) :
-    DMainWindow(parent),
-    m_sizeForQSetting(mainWindowMinWidth_, mainWindowMinHeight_),
-    mp_ThreadPool(new ThreadPool(this))
+    DMainWindow(parent)
+    , m_sizeForQSetting(mainWindowMinWidth_, mainWindowMinHeight_)
+    , mp_ThreadPool(new ThreadPool(this))
 {
     if (false == DeviceInfoParser::Instance().getRootPassword()) {
         exit(-1);
@@ -97,7 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initLoadingWidget();
 
     setCentralWidget(loadingWidget_);
-    connect( mp_ThreadPool, &ThreadPool::finished, this, &MainWindow::showSplashMessage);
+    connect(mp_ThreadPool, &ThreadPool::finished, this, &MainWindow::showSplashMessage);
 
     setAttribute(Qt::WA_AcceptDrops, false);
 
@@ -114,7 +114,7 @@ MainWindow::~MainWindow()
 void MainWindow::initLoadingWidget()
 {
     loadingWidget_ = new DWidget(this);
-    DFontSizeManager::instance()->bind( loadingWidget_, DFontSizeManager::T6);
+    DFontSizeManager::instance()->bind(loadingWidget_, DFontSizeManager::T6);
 
     QVBoxLayout *vly = new QVBoxLayout;
     //vly->setMargin(0);
@@ -197,7 +197,7 @@ void MainWindow::refreshDeviceWidget()
 
     addAllDeviceinfoWidget();
 
-    if (  deviceInfoWidgetMap_.contains(currentDevice) ) {
+    if (deviceInfoWidgetMap_.contains(currentDevice)) {
         rightDeviceInfoWidget_->setCurrentWidget(deviceInfoWidgetMap_[currentDevice]);
     }
 
@@ -279,7 +279,7 @@ void MainWindow::addDeviceWidget(DeviceInfoWidgetBase *w,  const QString &icon)
     }
 
     ArticleStruct overviweInfo;
-    if ( true == w->getOverViewInfo(overviweInfo) ) {
+    if (true == w->getOverViewInfo(overviweInfo)) {
         staticArticles.push_back(overviweInfo);
     }
 
@@ -338,7 +338,7 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
 
     static QString saveDir = []() {
         QString dirStr = "./";
-        QDir dir( QDir::homePath() + "/Desktop/");
+        QDir dir(QDir::homePath() + "/Desktop/");
         if (dir.exists()) {
             dirStr = QDir::homePath() + "/Desktop/";
         }
@@ -352,22 +352,22 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
                        QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
                        "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter);  //
 
-    if ( file.isEmpty() == true ) {
+    if (file.isEmpty() == true) {
         return true;
     }
 
     QFileInfo fileInfo(file);
     //saveDir = fileInfo.absolutePath() + "/";
 
-    if ( selectFilter == "Text (*.txt)" ) {
-        QFile textFile( file );
-        if ( false == textFile.open(QIODevice::WriteOnly)) {
+    if (selectFilter == "Text (*.txt)") {
+        QFile textFile(file);
+        if (false == textFile.open(QIODevice::WriteOnly)) {
             return false;
         }
 
         for (int i = 0; i < leftDeviceView_->count(); ++i) {
             QString device = leftDeviceView_->indexString(i);
-            if ( deviceInfoWidgetMap_.contains(device) ) {
+            if (deviceInfoWidgetMap_.contains(device)) {
                 deviceInfoWidgetMap_[device]->exportToTxt(textFile);
             }
         }
@@ -377,14 +377,14 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
     }
 
     if (selectFilter == "Html (*.html)") {
-        QFile htmlFile( file );
-        if ( false == htmlFile.open(QIODevice::WriteOnly)) {
+        QFile htmlFile(file);
+        if (false == htmlFile.open(QIODevice::WriteOnly)) {
             return false;
         }
 
         for (int i = 0; i < leftDeviceView_->count(); ++i) {
             QString device = leftDeviceView_->indexString(i);
-            if ( deviceInfoWidgetMap_.contains(device) ) {
+            if (deviceInfoWidgetMap_.contains(device)) {
                 deviceInfoWidgetMap_[device]->exportToHtml(htmlFile);
             }
         }
@@ -399,7 +399,7 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
 
         for (int i = 0; i < leftDeviceView_->count(); ++i) {
             QString device = leftDeviceView_->indexString(i);
-            if ( deviceInfoWidgetMap_.contains(device) ) {
+            if (deviceInfoWidgetMap_.contains(device)) {
                 deviceInfoWidgetMap_[device]->exportToDoc(doc);
             }
         }
@@ -408,14 +408,14 @@ bool MainWindow::exportTo(/*const QString& file, const QString& selectFilter*/)
         return true;
     }
 
-    if ( selectFilter == "Xls (*.xls)") {
+    if (selectFilter == "Xls (*.xls)") {
         QXlsx::Document xlsx;
 
         DeviceInfoWidgetBase::resetXlsRowCount();
 
         for (int i = 0; i < leftDeviceView_->count(); ++i) {
             QString device = leftDeviceView_->indexString(i);
-            if ( deviceInfoWidgetMap_.contains(device) ) {
+            if (deviceInfoWidgetMap_.contains(device)) {
                 deviceInfoWidgetMap_[device]->exportToXls(xlsx);
             }
         }
@@ -509,7 +509,7 @@ void MainWindow::windowMaximizing()
 
 void MainWindow::currentDeviceChanged(const QString &device)
 {
-    if ( false == deviceInfoWidgetMap_.contains(device) ) {
+    if (false == deviceInfoWidgetMap_.contains(device)) {
         return;
     }
 
@@ -525,7 +525,7 @@ void MainWindow::showSplashMessage(const QString &message)
     if (begin) {
         b = QDateTime::currentDateTime().toMSecsSinceEpoch();
     }
-    if ( message == "finish" ) {
+    if (message == "finish") {
         c = QDateTime::currentDateTime().toMSecsSinceEpoch();
         begin = true;
         qDebug() << "************************&&*************************" << (c - b) / 1000.0;
@@ -540,7 +540,7 @@ void MainWindow::showSplashMessage(const QString &message)
         return;
     }
 
-    if ( loadLabel_ ) {
+    if (loadLabel_) {
         begin = false;
         loadLabel_->setText(message);
     }
@@ -599,7 +599,7 @@ QString MainWindow::getArchString()
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
-    if (e->key() == Qt::Key_E ) {
+    if (e->key() == Qt::Key_E) {
         Qt::KeyboardModifiers modifiers = e->modifiers();
         if (modifiers != Qt::NoModifier) {
             if (modifiers.testFlag(Qt::ControlModifier)) {
@@ -608,7 +608,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
             }
         }
     }
-    if (e->key() == Qt::Key_F5 ) {
+    if (e->key() == Qt::Key_F5) {
         refresh();
         return;
     }
@@ -624,7 +624,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
     if (e->key() == Qt::Key_F) {
         Qt::KeyboardModifiers modifiers = e->modifiers();
         if (modifiers != Qt::NoModifier) {
-            if ( modifiers.testFlag(Qt::ControlModifier) && modifiers.testFlag(Qt::AltModifier) ) {
+            if (modifiers.testFlag(Qt::ControlModifier) && modifiers.testFlag(Qt::AltModifier)) {
                 windowMaximizing();
                 return;
             }
@@ -648,7 +648,7 @@ void MainWindow::setSizeLimits()
     QList<QScreen *> lst = QGuiApplication::screens();
     if (lst.size() > 0) {
         QSize rect = lst.at(0)->size();
-        if ( rect.width() * 2 / 3 < normal.width() && rect.height() * 2 / 3 < normal.height() ) {
+        if (rect.width() * 2 / 3 < normal.width() && rect.height() * 2 / 3 < normal.height()) {
             normal.setWidth(rect.width() * 2 / 3);
             normal.setHeight(rect.height() * 2 / 3);
         }

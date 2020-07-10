@@ -63,7 +63,8 @@ using PowerInter = com::deepin::daemon::Power;
 
 DCORE_USE_NAMESPACE
 //const QString g_lsblkDbKey = "lsblk";
-DeviceInfoParser::DeviceInfoParser(): QObject()
+DeviceInfoParser::DeviceInfoParser()
+    : QObject()
 {
 
 }
@@ -87,7 +88,7 @@ QString DeviceInfoParser::loadGeneratorKey()
         return key;
     }
 
-    qDebug() << "@@@@@@@" <<deviceInfo << "@@@@@@@@";
+    qDebug() << "@@@@@@@" << deviceInfo << "@@@@@@@@";
     if (deviceInfo.contains("PGU-WBY0")) {  // pangu
         key = "PanGu";
     } else if (deviceInfo.contains("HUAWEI L410 KLVU-WDU0")) { // klu
@@ -102,7 +103,7 @@ QString DeviceInfoParser::loadGeneratorKey()
 bool DeviceInfoParser::getRootPassword()
 {
     QString deviceInfo;
-    bool res = runCmd("id -un",deviceInfo);  // file path is fixed. So write cmd direct
+    bool res = runCmd("id -un", deviceInfo); // file path is fixed. So write cmd direct
     if (res == true && standOutput_.trimmed() == "root") {
         return true;
     }
@@ -110,7 +111,7 @@ bool DeviceInfoParser::getRootPassword()
 #ifdef TEST_DATA_FROM_FILE
     return true;
 #endif
-    if (false == executeProcess("sudo whoami",deviceInfo)) {
+    if (false == executeProcess("sudo whoami", deviceInfo)) {
         return false;
     }
 

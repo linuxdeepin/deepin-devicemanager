@@ -2,9 +2,26 @@
 #include<QFileInfo>
 
 DevicePower::DevicePower()
-    : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Model(""), m_Type(""), m_SerialNumber(""), m_ElectricType("")
-    , m_MaxPower(""), m_Status(""), m_Enabled(""), m_HotSwitch(""), m_Capacity(""), m_Voltage(""), m_Slot(""), m_DesignCapacity("")
-    , m_DesignVoltage(""), m_SBDSChemistry(""), m_SBDSManufactureDate(""), m_SBDSSerialNumber(""), m_SBDSVersion("")
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Model("")
+    , m_Type("")
+    , m_SerialNumber("")
+    , m_ElectricType("")
+    , m_MaxPower("")
+    , m_Status("")
+    , m_Enabled("")
+    , m_HotSwitch("")
+    , m_Capacity("")
+    , m_Voltage("")
+    , m_Slot("")
+    , m_DesignCapacity("")
+    , m_DesignVoltage("")
+    , m_SBDSChemistry("")
+    , m_SBDSManufactureDate("")
+    , m_SBDSSerialNumber("")
+    , m_SBDSVersion("")
 {
     initFilterKey();
 }
