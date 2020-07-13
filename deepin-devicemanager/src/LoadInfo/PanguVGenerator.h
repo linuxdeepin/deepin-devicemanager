@@ -9,7 +9,9 @@ class PanguVGenerator : public KLUGenerator
 public:
     PanguVGenerator();
 
-    /**@brief:generator monitor info*/
+    /**
+     * @brief generatorMonitorDevice:生成显示设备信息
+     */
     virtual void generatorMonitorDevice();
 };
 

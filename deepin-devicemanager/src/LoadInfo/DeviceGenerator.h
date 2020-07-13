@@ -15,111 +15,293 @@ public:
     DeviceGenerator(QObject *parent = nullptr);
     virtual ~DeviceGenerator();
 
-    /**@brief:generator computer info*/
+    /**
+     * @brief generatorComputerDevice:生成计算机概况
+     */
     virtual void generatorComputerDevice();
 
-    /**@brief:generator cpu info*/
+    /**
+     * @brief generatorCpuDevice:生成CPU设备
+     */
     virtual void generatorCpuDevice();
 
-    /**@brief:generator bios info*/
+    /**
+     * @brief generatorBiosDevice:生成主板
+     */
     virtual void generatorBiosDevice();
 
-    /**@brief:generator memory info*/
+    /**
+     * @brief generatorMemoryDevice:生成内存设备
+     */
     virtual void generatorMemoryDevice();
 
-    /**@brief:generator disk info*/
+    /**
+     * @brief generatorDiskDevice生成存储设备信息
+     */
     virtual void generatorDiskDevice();
 
-    /**@brief:generator gpu info*/
+    /**
+     * @brief generatorGpuDevice:生成显卡信息
+     */
     virtual void generatorGpuDevice();
 
-    /**@brief:generator monitor info*/
+    /**
+     * @brief generatorMonitorDevice:生成显示设备
+     */
     virtual void generatorMonitorDevice();
 
-    /**@brief:generator network info*/
+    /**
+     * @brief generatorNetworkDevice:生成网卡
+     */
     virtual void generatorNetworkDevice();
 
-    /**@brief:generator audio info*/
+    /**
+     * @brief generatorAudioDevice:生成音频适配器
+     */
     virtual void generatorAudioDevice();
 
-    /**@brief:generator bluetooth info*/
+    /**
+     * @brief generatorBluetoothDevice:生成蓝牙设备
+     */
     virtual void generatorBluetoothDevice();
 
-    /**@brief:generator keyboard info*/
+    /**
+     * @brief generatorKeyboardDevice:生成键盘设备
+     */
     virtual void generatorKeyboardDevice();
 
-    /**@brief:generator mouse info*/
+    /**
+     * @brief generatorMouseDevice:生成鼠标设备
+     */
     virtual void generatorMouseDevice();
 
-    /**@brief:generator printer info*/
+    /**
+     * @brief generatorPrinterDevice:生成打印机设备
+     */
     virtual void generatorPrinterDevice();
 
-    /**@brief:generator camera info*/
+    /**
+     * @brief generatorCameraDevice:生成图像设备
+     */
     virtual void generatorCameraDevice();
 
-    /**@brief:generator cdrom info*/
+    /**
+     * @brief generatorCdromDevice:生成CDrom设备
+     */
     virtual void generatorCdromDevice();
 
-    /**@brief:generator others info*/
+    /**
+     * @brief generatorOthersDevice:生成其他设备
+     */
     virtual void generatorOthersDevice();
 
-    /**@brief:generator power info*/
+    /**
+     * @brief generatorPowerDevice:生成电池设备
+     */
     virtual void generatorPowerDevice();
 
-    /**@brief:get BusID unique from Hwinfo*/
+    /**
+     * @brief addBusIDFromHwinfo:添加从hwinfo中获取的BusID
+     * @param sysfsBusID:被添加的BusID
+     */
     void addBusIDFromHwinfo(const QString &sysfsBusID);
+
+    /**
+     * @brief getBusIDFromHwinfo:获取所有从hwinfo中添加的BusID
+     * @return 所有BusID组成的StringList
+     */
     const QStringList &getBusIDFromHwinfo();
 
 protected:
-    /**@brief:generator bios info*/
+
+    /**
+     * @brief getBiosInfo:获取BIOS信息
+     */
     virtual void getBiosInfo();
+
+    /**
+     * @brief getSystemInfo:获取系统信息
+     */
     virtual void getSystemInfo();
+
+    /**
+     * @brief getBaseBoardInfo:获取主板信息
+     */
     virtual void getBaseBoardInfo();
+
+    /**
+     * @brief getChassisInfo:获取机箱信息
+     */
     virtual void getChassisInfo();
+
+    /**
+     * @brief getBiosMemoryInfo:获取内存插槽信息
+     */
     virtual void getBiosMemoryInfo();
-    /**@brief:generator memory info*/
+
+    /**
+     * @brief getMemoryInfoFromLshw:从lshw获取内存信息
+     */
     virtual void getMemoryInfoFromLshw();
+
+    /**
+     * @brief getMemoryInfoFromDmidecode:从dmidecode获取内存信息
+     */
     virtual void getMemoryInfoFromDmidecode();
-    /**@brief:generator disk info*/
+
+    /**
+     * @brief getDiskInfoFromHwinfo:从hwinfo获取存储设备信息
+     */
     virtual void getDiskInfoFromHwinfo();
+
+    /**
+     * @brief getDiskInfoFromLshw:从lshw获取存储设备信息
+     */
     virtual void getDiskInfoFromLshw();
+
+    /**
+     * @brief getDiskInfoFromLsblk:从lsblk获取存储设备信息
+     */
     virtual void getDiskInfoFromLsblk();
+
+    /**
+     * @brief getDiskInfoFromSmartCtl:从smartctl获取存储设备信息
+     */
     virtual void getDiskInfoFromSmartCtl();
+
     /**@brief:generator gpu info*/
+    /**
+     * @brief getGpuInfoFromHwinfo:从hwinfo获取显卡信息
+     */
     virtual void getGpuInfoFromHwinfo();
+
+    /**
+     * @brief getGpuInfoFromLshw:从lshw获取显卡信息
+     */
     virtual void getGpuInfoFromLshw();
+
+    /**
+     * @brief getGpuInfoFromXrandr:从xrandr获取显卡信息
+     */
     virtual void getGpuInfoFromXrandr();
+
+    /**
+     * @brief getGpuSizeFromDmesg:从Dmesg获取显存信息
+     */
     virtual void getGpuSizeFromDmesg();
+
     /**@brief:generator monitor info*/
+    /**
+     * @brief getMonitorInfoFromHwinfo:从hwinfo获取显示设备信息
+     */
     virtual void getMonitorInfoFromHwinfo();
+
+    /**
+     * @brief getMonitorInfoFromXrandrVerbose:从xrandr --verbose获取显示设备信息
+     */
     virtual void getMonitorInfoFromXrandrVerbose();
+
+    /**
+     * @brief getMonitorRefreshRateFromXrandr:从xrandr获取显示设备刷新率
+     */
     virtual void getMonitorRefreshRateFromXrandr();
+
     /**@brief:generator audio info*/
+    /**
+     * @brief getAudioInfoFromHwinfo:从hwinfo获取声卡信息
+     */
     virtual void getAudioInfoFromHwinfo();
+
+    /**
+     * @brief getAudioInfoFromLshw:从lshw获取声卡信息
+     */
     virtual void getAudioInfoFromLshw();
+
+    /**
+     * @brief getAudioInfoFromCatInput:从cat /proc/bus/input/devices获取音频设备信息
+     */
     virtual void getAudioInfoFromCatInput();
+
+    /**
+     * @brief getAudioChipInfoFromDmesg:从dmesg获取声卡芯片信息
+     */
     virtual void getAudioChipInfoFromDmesg();
-    /**@brief:generator bluetooth info*/
+
+    /**
+     * @brief getBluetoothInfoFromHciconfig:hciconfig获取蓝牙信息
+     */
     virtual void getBluetoothInfoFromHciconfig();
+
+    /**
+     * @brief getBlueToothInfoFromHwinfo:从hwinfo获取蓝牙信息
+     */
     virtual void getBlueToothInfoFromHwinfo();
+
+    /**
+     * @brief getBluetoothInfoFromLshw:从lshw获取蓝牙信息
+     */
     virtual void getBluetoothInfoFromLshw();
-    /**@brief:generator keyboard info*/
+
+    /**
+     * @brief getKeyboardInfoFromHwinfo:从hwinfo获取键盘信息
+     */
     virtual void getKeyboardInfoFromHwinfo();
+
+    /**
+     * @brief getKeyboardInfoFromLshw:从lshw获取键盘信息
+     */
     virtual void getKeyboardInfoFromLshw();
+
+    /**
+     * @brief getKeyboardInfoFromCatDevices:从cat /proc/bus/input/devices获取键盘信息
+     */
     virtual void getKeyboardInfoFromCatDevices();
-    /**@brief:generator mouse info*/
+
+    /**
+     * @brief getMouseInfoFromHwinfo:从hwinfo中获取鼠标信息
+     */
     virtual void getMouseInfoFromHwinfo();
+
+    /**
+     * @brief getMouseInfoFromLshw:从lshw中获取鼠标信息
+     */
     virtual void getMouseInfoFromLshw();
+
+    /**
+     * @brief getMouseInfoFromCatDevices
+     */
     virtual void getMouseInfoFromCatDevices();
-    /**@brief:generator camera info*/
+
+    /**
+     * @brief getImageInfoFromHwinfo:从hwinfo中获取图像设备信息
+     */
     virtual void getImageInfoFromHwinfo();
+
+    /**
+     * @brief getImageInfoFromLshw:从lshw中获取图像设备信息
+     */
     virtual void getImageInfoFromLshw();
-    /**@brief:generator cdrom info*/
+
+    /**
+     * @brief getCdromInfoFromHwinfo:从hwinfo中获取CDrom信息
+     */
     virtual void getCdromInfoFromHwinfo();
+
+    /**
+     * @brief getCdromInfoFromLshw:从lshw中获取CDRom信息
+     */
     virtual void getCdromInfoFromLshw();
-    /**@brief:generator others info*/
+
+    /**
+     * @brief getOthersInfoFromHwinfo:从hwinfo中获取其他设备信息
+     */
     virtual void getOthersInfoFromHwinfo();
+
+    /**
+     * @brief getOthersInfoFromLshw:从lshw中获取其他设备信息
+     */
     virtual void getOthersInfoFromLshw();
+
 protected:
     QStringList m_ListBusID;
 };

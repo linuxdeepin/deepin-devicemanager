@@ -14,40 +14,178 @@ class DeviceCpu : public DeviceBaseInfo
 public:
     DeviceCpu();
 
-    /**@brief:设置cpu信息*/
+    /**
+     * @brief setCpuInfo:设置cpu信息
+     * @param mapLscpu:由lscpu获取的信息map
+     * @param mapLshw:由lshw获取的信息map
+     * @param mapDmidecode:由dmidecode -t 4获取的信息的map
+     * @param catInfo:由cat /proc/cpuinfo获取的信息
+     */
     void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo);
 
-    /**@brief:获取各种属性*/
+    /**
+     * @brief vendor:获取制造商属性值
+     * @return QString:制造商属性值
+     */
     const QString &vendor() const;
+
+    /**
+     * @brief name:获取名称属性值
+     * @return QString:名称属性值
+     */
     const QString &name() const;
+
+    /**
+     * @brief physicalID:获取物理ID属性值
+     * @return QString:物理ID属性值
+     */
     const QString &physicalID() const;
+
+    /**
+     * @brief coreID:获取核心ID属性值
+     * @return QString:核心ID属性值
+     */
     const QString &coreID() const;
+
+    /**
+     * @brief threadNum:获取线程数属性值
+     * @return QString:线程数属性值
+     */
     const QString &threadNum() const;
+
+    /**
+     * @brief frequency:获取频率属性值
+     * @return QString:频率属性值
+     */
     const QString &frequency() const;
+
+    /**
+     * @brief curFrequency:获取当前频率属性值
+     * @return QString:当前频率属性值
+     */
     const QString &curFrequency() const;
+
+    /**
+     * @brief bogoMIPS:获取BogoMIPS属性值
+     * @return QString:BogoMIPS属性值
+     */
     const QString &bogoMIPS() const;
+
+    /**
+     * @brief architecture:获取架构属性值
+     * @return QString:架构属性值
+     */
     const QString &architecture() const;
+
+    /**
+     * @brief familly:获取家族属性值
+     * @return QString:家族属性值
+     */
     const QString &familly() const;
+
+    /**
+     * @brief model:获取型号属性值
+     * @return QString:型号属性值
+     */
     const QString &model() const;
+
+    /**
+     * @brief step:获取步进属性值
+     * @return QString:步进属性值
+     */
     const QString &step() const;
+
+    /**
+     * @brief cacheL1Data:获取L1缓存（数据）属性值
+     * @return QString:L1缓存（数据）属性值
+     */
     const QString &cacheL1Data() const;
+
+    /**
+     * @brief cacheL1Order:获取L1缓存（指令）属性值
+     * @return QString:L1缓存（指令）属性值
+     */
     const QString &cacheL1Order() const;
+
+    /**
+     * @brief cacheL2:获取L2缓存属性值
+     * @return QString:L2缓存属性值
+     */
     const QString &cacheL2() const;
+
+    /**
+     * @brief cacheL3:获取L3缓存属性值
+     * @return QString:L3缓存属性值
+     */
     const QString &cacheL3() const;
+
+    /**
+     * @brief extensions:获取扩展指令集属性值
+     * @return QString:扩展指令集属性值
+     */
     const QString &extensions() const;
+
+    /**
+     * @brief flags:获取特性属性值
+     * @return QString:特性属性值
+     */
     const QString &flags() const;
+
+    /**
+     * @brief hardwareVirtual:获取硬件虚拟化属性值
+     * @return QString:硬件虚拟化属性值
+     */
     const QString &hardwareVirtual() const;
+
+    /**
+     * @brief logicalCPUNum:获取逻辑处理器个数属性值
+     * @return QString:逻辑处理器个数属性值
+     */
     const QString &logicalCPUNum() const;
+
+    /**
+     * @brief frequencyIsRangecpuCores:获取cpu核数属性值
+     * @return QString:cpu核数属性值
+     */
     const QString &cpuCores() const;
+
+    /**
+     * @brief frequencyIsRange:频率是否是范围
+     * @return 布尔值:true-频率显示范围;false-频率不显示范围
+     */
     bool frequencyIsRange()const;
 
 protected:
+
+    /**
+     * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
+     */
     void initFilterKey() override;
 
 private:
+
+    /**
+     * @brief setInfoFromLscpu:设置由lscpu获取的CPU信息
+     * @param mapInfo:由lscpu获取的CPU信息map
+     */
     void setInfoFromLscpu(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief setInfoFromLshw:设置由lshw获取的CPU信息
+     * @param mapInfo:由lshw获取的CPU信息map
+     */
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief setInfoFromDmidecode:设置由dmidecode -t 4获取的CPU信息
+     * @param mapInfo:由dmidecode -t 4获取的CPU信息map
+     */
     void setInfoFromDmidecode(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief setInfoFromCatCpuinfo:设置由cat /proc/cpuinfo获取的信息
+     * @param mapInfo:由cat /proc/cpuinfo获取的信息map
+     */
     void setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo);
 
 private:

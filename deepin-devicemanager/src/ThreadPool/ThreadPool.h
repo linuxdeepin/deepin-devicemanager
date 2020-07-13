@@ -68,23 +68,55 @@ class ThreadPool : public QThreadPool
 public:
     explicit ThreadPool(QObject *parent = nullptr);
 
-    /**@brief:开始加载信息*/
+    /**
+     * @brief loadCmdInfo:开始加载信息
+     */
     void loadCmdInfo();
+
+    /**
+     * @brief generateInfo:生成设备信息
+     */
     void generateInfo();
 
-    /**@brief:完成加载信息*/
+    /**
+     * @brief finishedCmd:完成加载信息
+     * @param info:命令执行结束提示信息
+     */
     void finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &);
+
+    /**
+     * @brief finishedGenerateDevice:完成生成设备信息
+     * @param lst:busID
+     */
     void finishedGenerateDevice(const QStringList &lst);
 
-    /**设置机器架构*/
+    /**
+     * @brief setFramework:设置机器架构
+     * @param arch:架构字符串
+     */
     void setFramework(const QString &arch);
 
 private:
+
+    /**
+     * @brief getCmdList:获取命令列表
+     * @param cmdList:命令列表
+     * @param arch:架构
+     */
     void getCmdList(QList<QStringList> &cmdList, const QString &arch);
+
+    /**
+     * @brief getTypeList:获取设备类型列表
+     * @param typeList:设备类型列表
+     */
     void getTypeList(QList<DeviceType> &typeList);
 
 
 signals:
+    /**
+     * @brief finished:命令执行结束信号
+     * @param info:命令执行结束信息
+     */
     void finished(const QString &info);
 
 

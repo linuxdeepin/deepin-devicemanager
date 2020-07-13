@@ -6,7 +6,9 @@ class PanguGenerator : public DeviceGenerator
 public:
     PanguGenerator();
 
-    /**@brief:generator computer info*/
+    /**
+     * @brief generatorComputerDevice:生成概况设备信息
+     */
     virtual void generatorComputerDevice();
 };
 

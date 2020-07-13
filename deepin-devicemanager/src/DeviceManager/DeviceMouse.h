@@ -16,25 +16,84 @@ class DeviceMouse : public DeviceBaseInfo
 public:
     DeviceMouse();
 
-    /**@brief:添加 从 sudo hwinfo --mouse 中获取的信息 */
+    /**
+     * @brief setInfoFromHwinfo:设置由hwinfo --mouse 命令获取的设备信息
+     * @param mapInfo:由hwinfo获取的信息map
+     */
     void setInfoFromHwinfo(QMap<QString, QString> mapInfo);
 
-    /**@brief:添加 从 sudo lshw -C input 中获取的信息 */
+    /**
+     * @brief setInfoFromlshw:设置从lshw里面获取的信息
+     * @param mapInfo:由lshw获取的信息map
+     * @return 布尔值，true:信息设置成功；false:信息设置失败
+     */
     bool setInfoFromlshw(QMap<QString, QString> mapInfo);
 
-    /**@brief:获取基本设备属性*/
+    /**
+     * @brief name:获取名称属性值
+     * @return QString 名称属性值
+     */
     const QString &name()const;
+
+    /**
+     * @brief vendor:获取制造商属性值
+     * @return QString:制造商属性值
+     */
     const QString &vendor()const;
+
+    /**
+     * @brief model:获取型号属性值
+     * @return QString:型号属性值
+     */
     const QString &model()const;
+
+    /**
+     * @brief interface:获取接口属性值
+     * @return QString:接口属性值
+     */
     const QString &interface()const;
+
+    /**
+     * @brief busInfo:获取总线信息属性值
+     * @return QString:总线信息属性值
+     */
     const QString &busInfo()const;
+
+    /**
+       * @brief version:获取版本号属性值
+       * @return QString:版本号属性值
+       */
     const QString &version()const;
+
+    /**
+       * @brief capabilities:获取功能属性值
+       * @return QString:功能属性值
+       */
     const QString &capability()const;
+
+    /**
+     * @brief driver:获取驱动属性值
+     * @return QString:驱动属性值
+     */
     const QString &driver()const;
+
+    /**
+     * @brief maxPower:获取最大功耗属性值
+     * @return QString:最大功耗属性值
+     */
     const QString &maxPower()const;
+
+    /**
+     * @brief speed:获取速度属性值
+     * @return QString:速度属性值
+     */
     const QString &speed()const;
 
 protected:
+
+    /**
+     * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
+     */
     void initFilterKey() override;
 
 private:

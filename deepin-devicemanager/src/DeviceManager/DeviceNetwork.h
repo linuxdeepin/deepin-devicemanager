@@ -8,9 +8,17 @@ class DeviceNetwork : public DeviceBaseInfo
 public:
     DeviceNetwork();
 
-    // 设置从 lshw 获取的信息
+    /**
+     * @brief setInfoFromLshw:设置从lshw里面获取的信息
+     * @param mapInfo:由lshw获取的信息map
+     */
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
-    // 设置从 hwinfo 获取的信息
+
+    /**
+     * @brief setInfoFromHwinfo:设置由hwinfo --network命令获取的设备信息
+     * @param mapInfo:由hwinfo获取的信息map
+     * @return 布尔值，true:信息设置成功；false:信息设置失败
+     */
     bool setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**
@@ -50,8 +58,8 @@ public:
     const QString &logicalName()const;
 
     /**
-     * @brief MACAddress
-     * @return
+     * @brief MACAddress:获取MAC地址属性值
+     * @return QString:MAC地址属性值
      */
     const QString &MACAddress()const;
 
@@ -86,14 +94,14 @@ public:
     const QString &capabilities()const;
 
     /**
-     * @brief autoNegotiation
-     * @return
+     * @brief autoNegotiation:获取自动协商属性值
+     * @return QString:自动协商属性值
      */
     const QString &autoNegotiation()const;
 
     /**
-     * @brief broadcast
-     * @return
+     * @brief broadcast:获取广播属性值
+     * @return QString:广播属性值
      */
     const QString &broadcast()const;
 
@@ -104,38 +112,38 @@ public:
     const QString &driver()const;
 
     /**
-     * @brief driverVersion
-     * @return
+     * @brief driverVersion:获取驱动版本属性值
+     * @return QString:驱动版本属性值
      */
     const QString &driverVersion()const;
 
     /**
-     * @brief duplex
-     * @return
+     * @brief duplex:获取双工属性值
+     * @return QString:双工属性值
      */
     const QString &duplex()const;
 
     /**
-     * @brief firmware
-     * @return
+     * @brief firmware:获取固件属性值
+     * @return QString:固件属性值
      */
     const QString &firmware()const;
 
     /**
-     * @brief port
-     * @return
+     * @brief port:获取端口属性值
+     * @return QString:端口属性值
      */
     const QString &port()const;
 
     /**
-     * @brief link
-     * @return
+     * @brief link:获取链接属性值
+     * @return QString:链接属性值
      */
     const QString &link()const;
 
     /**
-     * @brief ip
-     * @return
+     * @brief ip:获取IP地址属性值
+     * @return QString:IP地址属性值
      */
     const QString &ip()const;
 
@@ -146,14 +154,14 @@ public:
     const QString &speed()const;
 
     /**
-     * @brief capacity
-     * @return
+     * @brief capacity:获取最大速度属性值
+     * @return QString:最大速度属性值
      */
     const QString &capacity()const;
 
     /**
-     * @brief latency:获取latency属性值
-     * @return QString:latency属性值
+     * @brief latency:获取延迟属性值
+     * @return QString:延迟属性值
      */
     const QString &latency()const;
 
