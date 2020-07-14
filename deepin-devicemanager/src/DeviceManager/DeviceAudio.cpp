@@ -183,7 +183,7 @@ const QString &DeviceAudio::chip() const
 
 void DeviceAudio::initFilterKey()
 {
-    addFilterKey(QObject::tr("Device Name"));
+    addFilterKey(tr("Device Name"));
     addFilterKey(QObject::tr("SubVendor"));
     addFilterKey(QObject::tr("SubDevice"));
     addFilterKey(QObject::tr("Driver"));

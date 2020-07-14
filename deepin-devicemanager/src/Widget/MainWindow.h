@@ -16,7 +16,7 @@ class MainWindow : public DMainWindow
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow()override;
 
 protected:
     /**

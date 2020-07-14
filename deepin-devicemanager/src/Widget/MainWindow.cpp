@@ -104,16 +104,11 @@ void MainWindow::refreshDataBase()
 
 void MainWindow::loadingFinishSlot(const QString &message)
 {
-    static bool begin = true;
-    static qint64 b = 0;
-    static qint64 c = 0;
+    static qint64 b = QDateTime::currentDateTime().toMSecsSinceEpoch();
+    static qint64 c = QDateTime::currentDateTime().toMSecsSinceEpoch();
 
-    if (begin) {
-        b = QDateTime::currentDateTime().toMSecsSinceEpoch();
-    }
     if (message == "finish") {
         c = QDateTime::currentDateTime().toMSecsSinceEpoch();
-        begin = true;
         qDebug() << "************************&&*************************" << (c - b) / 1000.0;
         DApplication::restoreOverrideCursor();
         mp_MainStackWidget->setCurrentWidget(mp_DetailWidget);

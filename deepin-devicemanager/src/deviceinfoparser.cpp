@@ -83,7 +83,6 @@ QString DeviceInfoParser::loadGeneratorKey()
         return key;
     }
 
-    qDebug() << "@@@@@@@" << deviceInfo << "@@@@@@@@";
     if (deviceInfo.contains("PGU-WBY0")) {  // pangu
         key = "PanGu";
     } else if (deviceInfo.contains("HUAWEI L410 KLVU-WDU0")) { // klu
