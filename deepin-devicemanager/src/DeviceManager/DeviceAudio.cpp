@@ -20,6 +20,7 @@ DeviceAudio::DeviceAudio()
 
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    //1. 获取设备的基本信息
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
@@ -32,14 +33,23 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Hardware Class", m_Description);
 
+    //2. 获取设备的唯一标识
+    /*
+     * 在这里将设备的总线信息作为一个设备的唯一标识
+     * 我们会通过总线信息判断从两个不同的命令获取的设备信息是不是同一个设备的信息
+     * 如果从两个命令中获取的设备信息的总线信息一样，我们就认为是同一个设备
+     * 比如从hwinfo里面获取到的  SysFS BusID: 1-3:1.0   和
+     *    从lshw里面获取到的    bus info: usb@1:3       是同一个设备
+     */
     m_UniqueKey = mapInfo["SysFS BusID"];
 
+    //3. 获取设备的其它信息
     loadOtherDeviceInfo(mapInfo);
 }
 
 bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    // 先判断传入的设备信息是否是同一个
+    //1. 先判断传入的设备信息是否是该设备信息，根据总线信息来判断
     QStringList words = mapInfo["bus info"].split("@");
     if (words.size() != 2) {
         return false;
@@ -48,10 +58,15 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
         return false;
     }
 
-    // 设置设备属性
+    //2. 确定了是该设备信息，则获取设备的基本信息
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
+
+    /*
+     * 再过去设备的版本号的时候，会出现版本号为00的情况，
+     * 这不符合常理，所以当版本号为00时，默认版本号获取不到
+    */
     setAttribute(mapInfo, "version", m_Version);
     if (m_Version == "00") {
         m_Version = "";
@@ -64,12 +79,15 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "capabilities", m_Capabilities);
     setAttribute(mapInfo, "description", m_Description);
 
+    //3. 获取设备的其它信息
     loadOtherDeviceInfo(mapInfo);
+
     return true;
 }
 
 bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
 {
+    //1. 获取设备的基本信息
     setAttribute(mapInfo, "Name", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
@@ -82,14 +100,18 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "", m_Description);
 
-
+    //2. 获取设备的其它信息
     loadOtherDeviceInfo(mapInfo);
+
     return true;
 }
 
 void DeviceAudio::setInfoFromCatAudio(const QMap<QString, QString> &mapInfo)
 {
+    //1. 获取设备的基本信息
     setAttribute(mapInfo, "Name", m_Name);
+
+    //2. 获取设备的其它信息
     loadOtherDeviceInfo(mapInfo);
 }
 

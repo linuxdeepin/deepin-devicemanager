@@ -25,8 +25,8 @@
 #include <QString>
 
 const QString commonFontFamily_ = "Noto Sans CJK TC";
-const int mainWindowMinWidth_ = 1070;
-const int mainWindowMinHeight_ = 790;
+//const int mainWindowMinWidth_ = 1070;
+//const int mainWindowMinHeight_ = 790;
 
 //const int mainWindowMinWidth_ = 768;
 //const int mainWindowMinHeight_ = 562;
@@ -42,15 +42,15 @@ const int DeviceWidgetContentMarginTop_ = 10;
 const int DeviceWidgetContentMarginRight_ = 0;
 const int DeviceWidgetContentMarginBottom_ = 20;
 
-const int DeviceWidgetDownWidgehWidth_ = mainWindowMinWidth_ - leftDeviceListViewMinWidth_ - DeviceWidgetMargin_ * 2 - NameLength_ - DeviceWidgetContentMarginLeft_ - DeviceWidgetContentMarginRight_;
-const int DeviceWidgetContentWidth_ = DeviceWidgetDownWidgehWidth_ - NameLength_;
+//const int DeviceWidgetDownWidgehWidth_ = mainWindowMinWidth_ - leftDeviceListViewMinWidth_ - DeviceWidgetMargin_ * 2 - NameLength_ - DeviceWidgetContentMarginLeft_ - DeviceWidgetContentMarginRight_;
+//const int DeviceWidgetContentWidth_ = DeviceWidgetDownWidgehWidth_ - NameLength_;
 
 const int contextMenuWidth_ = 150;
 
-const int spinnerWidth = 32;
-const int spinnerHeight = 32;
+//const int spinnerWidth = 32;
+//const int spinnerHeight = 32;
 
-const int TableViewRowHeight_ = 36;
+//const int TableViewRowHeight_ = 36;
 #define GenerateTsItem 0
 //#define TEST_DATA_FROM_FILE
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/Job/GetHardwareInfo/deviceInfo/KLU/Task_28260_02";

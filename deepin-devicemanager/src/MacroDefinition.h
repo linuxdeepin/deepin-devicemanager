@@ -1,10 +1,10 @@
 /*
  * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
  *
- * Author:     AaronZhang <ya.zhang@archermind.com>
+ * Author:     liujun <liujuna@uniontech.com>
  *
- * Maintainer: AaronZhang <ya.zhang@archermind.com>
- * Maintainer: Yaobin <yao.bin@archermind.com>
+ * Maintainer: liujun <liujuna@uniontech.com>
+ * Maintainer: jixiaomei <jixiaomei@uniontech.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,15 +20,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "usbdevicewidget.h"
-#include "../deviceinfoparser.h"
-#include <DApplication>
+#pragma once
 
-DWIDGET_USE_NAMESPACE
 
-UsbdeviceWidget::UsbdeviceWidget(QWidget *parent)
-    : DeviceInfoWidgetBase(parent, tr("USB Devices"))
-{
+/**@brief:定义一个删除指针的宏*/
+#define DELETE_PTR(p) \
+    if (p) { \
+        delete p; \
+        p = nullptr; \
+    } \
 
-}
 

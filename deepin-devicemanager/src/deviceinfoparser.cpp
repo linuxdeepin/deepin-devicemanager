@@ -30,7 +30,7 @@
 #include <DLog>
 #include <com_deepin_daemon_power.h>
 #include "commondefine.h"
-#include "deviceattributedefine.h"
+//#include "deviceattributedefine.h"
 #include "DeviceManager/DeviceManager.h"
 #include "DeviceManager/DeviceMouse.h"
 #include "DeviceManager/DeviceCpu.h"
