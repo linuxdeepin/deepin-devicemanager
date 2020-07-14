@@ -11,12 +11,12 @@ void PanguGenerator::generatorComputerDevice()
 {
     const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
 
-    DeviceComputer device;
+    DeviceComputer *device = new  DeviceComputer();
 
     // home url
     if (cmdInfo.size() > 0) {
         QString value = cmdInfo[0]["HOME_URL"];
-        device.setHomeUrl(value.replace("\"", ""));
+        device->setHomeUrl(value.replace("\"", ""));
     }
 
     // name type
@@ -25,12 +25,12 @@ void PanguGenerator::generatorComputerDevice()
     const QList<QMap<QString, QString> >  &dmidecode3List = DeviceManager::instance()->cmdInfo("dmidecode3");
 
     if (dmidecode1List.size() > 1) {
-        device.setVendor(dmidecode1List[1]["Manufacturer"], dmidecode2List[0]["Manufacturer"]);
-        device.setName(dmidecode1List[1]["Product Name"], dmidecode2List[0]["Product Name"], dmidecode1List[1]["Family"], dmidecode1List[1]["Version"]);
+        device->setVendor(dmidecode1List[1]["Manufacturer"], dmidecode2List[0]["Manufacturer"]);
+        device->setName(dmidecode1List[1]["Product Name"], dmidecode2List[0]["Product Name"], dmidecode1List[1]["Family"], dmidecode1List[1]["Version"]);
     }
 
     if (dmidecode3List.size() > 1) {
-        device.setType(dmidecode3List[1]["Type"]);
+        device->setType(dmidecode3List[1]["Type"]);
     }
 
     // setOsDescription
@@ -43,7 +43,7 @@ void PanguGenerator::generatorComputerDevice()
     } else if (DSysInfo::DeepinDesktop == type) {
         os =  "Deepin 20 Beta";
     }
-    device.setOsDescription(os);
+    device->setOsDescription(os);
 
     // os
     const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
@@ -66,7 +66,7 @@ void PanguGenerator::generatorComputerDevice()
         }
 
         info.remove("version");
-        device.setOS(info);
+        device->setOS(info);
     }
 
     DeviceManager::instance()->addComputerDevice(device);

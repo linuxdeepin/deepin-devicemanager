@@ -48,13 +48,13 @@ public:
      * @brief addMouseDevice:添加鼠标设备
      * @param device:被添加的鼠标设备
      */
-    void addMouseDevice(const DeviceMouse &device);
+    void addMouseDevice(DeviceMouse *const device);
 
     /**
      * @brief getMouseDevices:获取所有鼠标设备
      * @return 所有鼠标设备组成的List
      */
-    const QList<DeviceMouse> &getMouseDevices();
+    const QList<DeviceMouse *> &getMouseDevices();
 
     /**
      * @brief addMouseInfoFromLshw:添加从lshw获取的鼠标信息
@@ -69,20 +69,20 @@ public:
      * @brief addCpuDevice:添加CPU设备
      * @param device:被添加的CPU设备
      */
-    void addCpuDevice(const DeviceCpu &device);
+    void addCpuDevice(DeviceCpu *const device);
 
     /**
      * @brief getCPUDevices:获取所有CPU设备
      * @return:所有CPU设备组成的List
      */
-    const QList<DeviceCpu> &getCPUDevices();
+    const QList<DeviceCpu *> &getCPUDevices();
 
     // 存储设备相关 **************************************************************************************
     /**
      * @brief addStorageDeivce:添加存储设备
      * @param device:被添加的存储设备
      */
-    void addStorageDeivce(const DeviceStorage &device);
+    void addStorageDeivce(DeviceStorage *const device);
 
     /**
      * @brief addLshwinfoIntoStorageDevice:添加由lshw获取的存储设备信息
@@ -94,7 +94,7 @@ public:
      * @brief getStorageDevices:获取所有存储设备
      * @return 所有存储设备组成的List
      */
-    const QList<DeviceStorage> &getStorageDevices();
+    const QList<DeviceStorage *> &getStorageDevices();
 
     /**
      * @brief setStorageDeviceMediaType:设置存储设备介质类型
@@ -124,13 +124,13 @@ public:
      * @brief addGpuDevice:添加显卡
      * @param device:被添加的显卡
      */
-    void addGpuDevice(const DeviceGpu &device);
+    void addGpuDevice(DeviceGpu *const device);
 
     /**
      * @brief getGPUDevices:获取所有显卡
      * @return 所有显卡组成的List
      */
-    const QList<DeviceGpu> &getGPUDevices();
+    const QList<DeviceGpu *> &getGPUDevices();
     /**@brief:设置从lshw获取的gup信息，内部会做判断是否是该设备*/
     /**
      * @brief setGpuInfoFromLshw:设置由lshw获取的显卡信息
@@ -155,13 +155,13 @@ public:
      * @brief addMemoryDevice:添加内存设备
      * @param device:被添加的内存设备
      */
-    void addMemoryDevice(const DeviceMemory &device);
+    void addMemoryDevice(DeviceMemory *const device);
 
     /**
      * @brief getMemoryDevices:获取所有内存设备
      * @return 所有内存设备组成的List
      */
-    const QList<DeviceMemory> &getMemoryDevices();
+    const QList<DeviceMemory *> &getMemoryDevices();
 
     /**
      * @brief setMemoryInfoFromDmidecode:设置由dmidecode获取的内存信息
@@ -174,13 +174,13 @@ public:
      * @brief addMonitor:添加显示设备
      * @param device:被添加的显示设备
      */
-    void addMonitor(const DeviceMonitor &device);
+    void addMonitor(DeviceMonitor *const device);
 
     /**
      * @brief getMonitorDevices:获取所有显示设备
      * @return 所有显示设备组成的List
      */
-    const QList<DeviceMonitor> &getMonitorDevices();
+    const QList<DeviceMonitor *> &getMonitorDevices();
 
     /**
      * @brief setMonitorInfoFromXrandr:设置由xrandr获取的显示设备信息
@@ -202,13 +202,13 @@ public:
      * @brief addBiosDevice:添加BIOS设备
      * @param device:被添加的BIOS设备
      */
-    void addBiosDevice(const DeviceBios &device);
+    void addBiosDevice(DeviceBios *const device);
 
     /**
      * @brief getBiosDevices:获取BIOS设备
      * @return 所有BIOS设备组成的List
      */
-    const QList<DeviceBios> &getBiosDevices();
+    const QList<DeviceBios *> &getBiosDevices();
 
     /**
      * @brief setLanguageInfo:设置语言信息
@@ -221,13 +221,13 @@ public:
      * @brief addBluetoothDevice:添加蓝牙设备
      * @param device:被添加的蓝牙设备
      */
-    void addBluetoothDevice(const DeviceBluetooth &device);
+    void addBluetoothDevice(DeviceBluetooth *const device);
 
     /**
      * @brief getBluetoothDevices:获取所有蓝牙设备
      * @return:所有蓝牙设备组成的List
      */
-    const QList<DeviceBluetooth> &getBluetoothDevices();
+    const QList<DeviceBluetooth *> &getBluetoothDevices();
 
     /**
      * @brief setBluetoothInfoFromLshw:设置由lshw获取的蓝牙信息
@@ -247,13 +247,13 @@ public:
      * @brief addAudioDevice:添加声卡
      * @param device:被添加的声卡
      */
-    void addAudioDevice(const DeviceAudio &device);
+    void addAudioDevice(DeviceAudio *const device);
 
     /**
      * @brief getAudioDevices:获取所有的声卡
      * @return 所有声卡组成的List
      */
-    const QList<DeviceAudio> &getAudioDevices();
+    const QList<DeviceAudio *> &getAudioDevices();
 
     /**
      * @brief setAudioInfoFromLshw:设置由lshw获取的声卡信息
@@ -272,13 +272,13 @@ public:
      * @brief addNetworkDevice:添加网络适配器
      * @param device:被添加的网络适配器
      */
-    void addNetworkDevice(const DeviceNetwork &device);
+    void addNetworkDevice(DeviceNetwork *const device);
 
     /**
      * @brief getNetworkDevices:获取所有网络适配器
      * @return 所有网络适配器组成的List
      */
-    const QList<DeviceNetwork> &getNetworkDevices();
+    const QList<DeviceNetwork *> &getNetworkDevices();
 
     /**
      * @brief setNetworkInfoFromHwinfo:设置由hwinfo获取的网络适配器信息
@@ -291,13 +291,13 @@ public:
      * @brief addImageDevice:添加图像设备
      * @param device:被添加的图像设备
      */
-    void addImageDevice(const DeviceImage &device);
+    void addImageDevice(DeviceImage *const device);
 
     /**
      * @brief getImageDevices:获取所有图像设备
      * @return 所有图像设备组成的List
      */
-    const QList<DeviceImage> &getImageDevices();
+    const QList<DeviceImage *> &getImageDevices();
 
     /**
      * @brief setCameraInfoFromLshw:设置由lshw获取的图像设备信息
@@ -310,13 +310,13 @@ public:
      * @brief addKeyboardDevice:添加键盘设备
      * @param device:被添加的键盘设备
      */
-    void addKeyboardDevice(const DeviceKeyboard &device);
+    void addKeyboardDevice(DeviceKeyboard *const device);
 
     /**
      * @brief getKeyboardDevices:获取所有键盘设备
      * @return 所有键盘设备组成的List
      */
-    const QList<DeviceKeyboard> &getKeyboardDevices();
+    const QList<DeviceKeyboard *> &getKeyboardDevices();
 
     /**
      * @brief setKeyboardInfoFromLshw:设置由lshw获取的键盘信息
@@ -329,19 +329,19 @@ public:
      * @brief addOthersDevice:添加其他设备设备信息
      * @param device:其他设备设备信息
      */
-    void addOthersDevice(const DeviceOthers &device);
+    void addOthersDevice(DeviceOthers *const device);
 
     /**
      * @brief addOthersDeviceFromHwinfo:添加由hwinfo获取的其他设备信息
      * @param device:其他设备信息
      */
-    void addOthersDeviceFromHwinfo(const DeviceOthers &device);
+    void addOthersDeviceFromHwinfo(DeviceOthers *const device);
 
     /**
      * @brief getOthersDevices: 获取所有其他设备
      * @return 所有其他设备组成的List
      */
-    const QList<DeviceOthers> &getOthersDevices();
+    const QList<DeviceOthers *> &getOthersDevices();
 
     /**
      * @brief setOthersDeviceInfoFromLshw:设置由lshw获取的其他设备信息
@@ -354,13 +354,13 @@ public:
      * @brief addPowerDevice:添加电池设备
      * @param device:被添加的电池设备
      */
-    void addPowerDevice(const DevicePower &device);
+    void addPowerDevice(DevicePower *const device);
 
     /**
      * @brief getPowerDevices:获取所有电池设备
      * @return 所有电池设备组成的List
      */
-    const QList<DevicePower> &getPowerDevices();
+    const QList<DevicePower *> &getPowerDevices();
 
     /**
      * @brief setPowerDaemonInfo:设置电池守护进程信息
@@ -373,51 +373,51 @@ public:
      * @brief addPrintDevice:添加打印机设备
      * @param device:被添加的打印机设备
      */
-    void addPrintDevice(const DevicePrint &device);
+    void addPrintDevice(DevicePrint *const device);
 
     /**
      * @brief getPrintDevices:获取所有打印机设备
      * @return 所有打印机设备组成的List
      */
-    const QList<DevicePrint> &getPrintDevices();
+    const QList<DevicePrint *> &getPrintDevices();
 
     // 其它pci设备相关
     /**
      * @brief addOtherPCIDevice:添加其他PCI设备
      * @param device:被添加的其他PCI设备
      */
-    void addOtherPCIDevice(const DeviceOtherPCI &device);
+    void addOtherPCIDevice(DeviceOtherPCI *const device);
     /**
      * @brief getOtherPCIDevices:获取所有其他PCI设备
      * @return 所有其他PCI设备组成的List
      */
-    const QList<DeviceOtherPCI> &getOtherPCIDevices();
+    const QList<DeviceOtherPCI *> &getOtherPCIDevices();
 
     // 计算机概况相关
     /**
      * @brief addComputerDevice:添加计算机设备信息
      * @param device:被添加的计算机设备信息
      */
-    void addComputerDevice(const DeviceComputer &device);
+    void addComputerDevice(DeviceComputer *const device);
 
     /**
      * @brief getComputerDevices:获取所有计算机设备
      * @return 所有计算机设备组成的List
      */
-    const QList<DeviceComputer> &getComputerDevices();
+    const QList<DeviceComputer *> &getComputerDevices();
 
     // 获取cdrom设备
     /**
      * @brief addCdromDevice:添加CDrom设备
      * @param device:被添加的CDrom设备
      */
-    void addCdromDevice(const DeviceCdrom &device);
+    void addCdromDevice(DeviceCdrom *const device);
 
     /**
      * @brief getCdromDevices:获取所有CDrom设备
      * @return 所有CDrom设备组成的List
      */
-    const QList<DeviceCdrom> getCdromDevices();
+    const QList<DeviceCdrom *> getCdromDevices();
 
     /**
      * @brief addLshwinfoIntoCdromDevice:添加由lshw获取的信息到CDrom设备
@@ -453,28 +453,29 @@ public:
 
 protected:
     DeviceManager();
+    ~DeviceManager();
 
 private:
     static DeviceManager    *sInstance;
 
-    QList<DeviceMouse>              m_ListDeviceMouse;                //<! 鼠标设备
-    QList<DeviceCpu>                m_ListDeviceCPU;                  //<! cpu设备
-    QList<DeviceStorage>            m_ListDeviceStorage;              //<! 存储设备
-    QList<DeviceGpu>                m_ListDeviceGPU;                  //<! gpu设备
-    QList<DeviceMemory>             m_ListDeviceMemory;               //<! memory设备
-    QList<DeviceMonitor>            m_ListDeviceMonitor;              //<! monitor设备
-    QList<DeviceBios>               m_ListDeviceBios;                 //<! bios设备
-    QList<DeviceBluetooth>          m_ListBluetooth;                  //<! 蓝牙设备
-    QList<DeviceAudio>              m_ListDeviceAudio;                //<! 音频设备
-    QList<DeviceNetwork>            m_ListDeviceNetwork;              //<! 网络设备
-    QList<DeviceImage>              m_ListDeviceImage;                //<! 图像设备
-    QList<DeviceKeyboard>           m_ListDeviceKeyboard;             //<! 键盘设备
-    QList<DeviceOthers>             m_ListDeviceOthers;               //<! 其它设备
-    QList<DevicePower>              m_ListDevicePower;                //<! 电源
-    QList<DevicePrint>              m_ListDevicePrint;                //<! 打印机
-    QList<DeviceOtherPCI>           m_ListDeviceOtherPCI;             //<! 其它PCI设备
-    QList<DeviceComputer>           m_ListDeviceComputer;             //<! 计算机基本信息
-    QList<DeviceCdrom>              m_ListDeviceCdrom;                //<! cdrom设备
+    QList<DeviceMouse *>              m_ListDeviceMouse;                //<! 鼠标设备
+    QList<DeviceCpu *>                m_ListDeviceCPU;                  //<! cpu设备
+    QList<DeviceStorage *>            m_ListDeviceStorage;              //<! 存储设备
+    QList<DeviceGpu *>                m_ListDeviceGPU;                  //<! gpu设备
+    QList<DeviceMemory *>             m_ListDeviceMemory;               //<! memory设备
+    QList<DeviceMonitor *>            m_ListDeviceMonitor;              //<! monitor设备
+    QList<DeviceBios *>               m_ListDeviceBios;                 //<! bios设备
+    QList<DeviceBluetooth *>          m_ListBluetooth;                  //<! 蓝牙设备
+    QList<DeviceAudio *>              m_ListDeviceAudio;                //<! 音频设备
+    QList<DeviceNetwork *>            m_ListDeviceNetwork;              //<! 网络设备
+    QList<DeviceImage *>              m_ListDeviceImage;                //<! 图像设备
+    QList<DeviceKeyboard *>           m_ListDeviceKeyboard;             //<! 键盘设备
+    QList<DeviceOthers *>             m_ListDeviceOthers;               //<! 其它设备
+    QList<DevicePower *>              m_ListDevicePower;                //<! 电源
+    QList<DevicePrint *>              m_ListDevicePrint;                //<! 打印机
+    QList<DeviceOtherPCI *>           m_ListDeviceOtherPCI;             //<! 其它PCI设备
+    QList<DeviceComputer *>           m_ListDeviceComputer;             //<! 计算机基本信息
+    QList<DeviceCdrom *>              m_ListDeviceCdrom;                //<! cdrom设备
 
     QStringList                     m_BusIdList;
     QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;

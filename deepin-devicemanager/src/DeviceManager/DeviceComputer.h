@@ -1,10 +1,12 @@
 #ifndef DEVICECOMPUTER_H
 #define DEVICECOMPUTER_H
-#include"DeviceInfo.h"
+#include "DeviceInfo.h"
 
 
 class DeviceComputer : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceComputer)
 public:
     DeviceComputer();
 

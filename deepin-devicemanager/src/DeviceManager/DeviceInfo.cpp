@@ -7,7 +7,8 @@
 
 DWIDGET_USE_NAMESPACE
 
-DeviceBaseInfo::DeviceBaseInfo()
+DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
+    : QObject(parent)
 {
 
 }

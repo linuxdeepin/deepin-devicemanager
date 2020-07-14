@@ -13,6 +13,8 @@
 // 鼠标设备信息
 class DeviceMouse : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceMouse)
 public:
     DeviceMouse();
 

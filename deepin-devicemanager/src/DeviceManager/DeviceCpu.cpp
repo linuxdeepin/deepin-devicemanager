@@ -1,7 +1,8 @@
 #include "DeviceCpu.h"
 
 DeviceCpu::DeviceCpu()
-    : m_Vendor("")
+    : DeviceBaseInfo()
+    , m_Vendor("")
     , m_Name("")
     , m_PhysicalID("")
     , m_CoreID("")

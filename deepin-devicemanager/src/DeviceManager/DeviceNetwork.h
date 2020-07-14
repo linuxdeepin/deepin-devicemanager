@@ -5,6 +5,8 @@
 
 class DeviceNetwork : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceNetwork)
 public:
     DeviceNetwork();
 

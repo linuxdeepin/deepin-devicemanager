@@ -4,6 +4,8 @@
 
 class DeviceBios : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceBios)
 public:
     DeviceBios();
 

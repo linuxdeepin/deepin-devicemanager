@@ -4,6 +4,8 @@
 
 class DeviceGpu: public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceGpu)
 public:
     DeviceGpu();
 

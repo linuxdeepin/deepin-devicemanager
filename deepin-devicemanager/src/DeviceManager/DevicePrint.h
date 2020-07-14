@@ -5,6 +5,8 @@
 
 class DevicePrint : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DevicePrint)
 public:
     DevicePrint();
 

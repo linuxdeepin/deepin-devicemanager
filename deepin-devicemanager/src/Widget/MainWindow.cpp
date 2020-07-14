@@ -1,10 +1,16 @@
 #include "MainWindow.h"
 
 #include <QResizeEvent>
+#include <QDateTime>
+#include <QDebug>
+
+#include <DApplication>
 
 #include "WaitingWidget.h"
 #include "DetailWidget.h"
 #include "MacroDefinition.h"
+#include "ThreadPool.h"
+#include "deviceinfoparser.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -19,9 +25,21 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_MainStackWidget(new DStackedWidget(this))
     , mp_WaitingWidget(new WaitingWidget(this))
     , mp_DetailWidget(new DetailWidget(this))
+    , mp_ThreadPool(new ThreadPool(this))
 {
-    //1. 初始化窗口相关的嗯内容，比如界面布局，控件大小
+    // 加载授权框
+    if (false == DeviceInfoParser::Instance().getRootPassword()) {
+        exit(-1);
+    }
+
+    // 初始化窗口相关的嗯内容，比如界面布局，控件大小
     initWindow();
+
+    // 加载设备信息
+    refreshDataBase();
+
+    // 关联信号槽
+    connect(mp_ThreadPool, &ThreadPool::finished, this, &MainWindow::loadingFinishSlot);
 }
 
 MainWindow::~MainWindow()
@@ -29,6 +47,7 @@ MainWindow::~MainWindow()
     DELETE_PTR(mp_WaitingWidget);
     DELETE_PTR(mp_DetailWidget);
     DELETE_PTR(mp_MainStackWidget);
+    DELETE_PTR(mp_ThreadPool);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -66,8 +85,38 @@ void MainWindow::initWidgets()
     mp_MainStackWidget->addWidget(mp_WaitingWidget);
     mp_WaitingWidget->start();
 
-    // 添加加载等待的界面
+
+    // 添加信息显示界面
     mp_MainStackWidget->addWidget(mp_DetailWidget);
-    mp_MainStackWidget->setCurrentIndex(1);
+
+}
+
+void MainWindow::refreshDataBase()
+{
+    // 设置应用程序强制光标为cursor
+    DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+
+    // 启动线程加载设备信息
+    if (mp_ThreadPool) {
+        mp_ThreadPool->loadCmdInfo();
+    }
+}
+
+void MainWindow::loadingFinishSlot(const QString &message)
+{
+    static bool begin = true;
+    static qint64 b = 0;
+    static qint64 c = 0;
+
+    if (begin) {
+        b = QDateTime::currentDateTime().toMSecsSinceEpoch();
+    }
+    if (message == "finish") {
+        c = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        begin = true;
+        qDebug() << "************************&&*************************" << (c - b) / 1000.0;
+        DApplication::restoreOverrideCursor();
+        mp_MainStackWidget->setCurrentWidget(mp_DetailWidget);
+    }
 
 }

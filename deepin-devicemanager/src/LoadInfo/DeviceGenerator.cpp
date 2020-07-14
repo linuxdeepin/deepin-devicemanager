@@ -34,20 +34,20 @@ DeviceGenerator::~DeviceGenerator()
 void DeviceGenerator::generatorComputerDevice()
 {
     const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
-    DeviceComputer device;
+    DeviceComputer *device = new DeviceComputer() ;
 
     // home url
     if (cmdInfo.size() > 0) {
         QString value = cmdInfo[0]["HOME_URL"];
-        device.setHomeUrl(value.replace("\"", ""));
+        device->setHomeUrl(value.replace("\"", ""));
     }
 
     // name type
     const QList<QMap<QString, QString> >  &sysInfo = DeviceManager::instance()->cmdInfo("lshw_system");
     if (sysInfo.size() > 0) {
-        device.setType(sysInfo[0]["description"]);
-        device.setVendor(sysInfo[0]["vendor"]);
-        device.setName(sysInfo[0]["product"]);
+        device->setType(sysInfo[0]["description"]);
+        device->setVendor(sysInfo[0]["vendor"]);
+        device->setName(sysInfo[0]["product"]);
     }
 
     // setOsDescription
@@ -60,7 +60,7 @@ void DeviceGenerator::generatorComputerDevice()
     } else if (DSysInfo::DeepinDesktop == type) {
         os =  "Deepin 20 Beta";
     }
-    device.setOsDescription(os);
+    device->setOsDescription(os);
 
     // os
     const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
@@ -74,7 +74,7 @@ void DeviceGenerator::generatorComputerDevice()
             info.remove(tmp);
             info.insert(index, reg.cap(1));
         }
-        device.setOS(info);
+        device->setOS(info);
     }
     DeviceManager::instance()->addComputerDevice(device);
 }
@@ -97,8 +97,8 @@ void DeviceGenerator::generatorCpuDevice()
 
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
     for (; it != lstCatCpu.end(); ++it) {
-        DeviceCpu device;
-        device.setCpuInfo(lscpu, lshw, dmidecode, *it);
+        DeviceCpu *device = new DeviceCpu();
+        device->setCpuInfo(lscpu, lshw, dmidecode, *it);
         DeviceManager::instance()->addCpuDevice(device);
     }
 }
@@ -152,8 +152,8 @@ void DeviceGenerator::generatorNetworkDevice()
         if ((*it).size() < 2) {
             continue;
         }
-        DeviceNetwork device;
-        device.setInfoFromLshw(*it);
+        DeviceNetwork *device = new DeviceNetwork();
+        device->setInfoFromLshw(*it);
         DeviceManager::instance()->addNetworkDevice(device);
     }
 }
@@ -195,8 +195,8 @@ void DeviceGenerator::generatorPrinterDevice()
         if ((*it).size() < 2) {
             continue;
         }
-        DevicePrint device;
-        device.setInfo(*it);
+        DevicePrint *device = new DevicePrint() ;
+        device->setInfo(*it);
         DeviceManager::instance()->addPrintDevice(device);
     }
 }
@@ -234,12 +234,12 @@ void DeviceGenerator::generatorPowerDevice()
         if ((*it).size() < 2) {
             continue;
         }
-        DevicePower device;
-        if (!device.setInfoFromUpower(*it)) {
+        DevicePower *device = new DevicePower();
+        if (!device->setInfoFromUpower(*it)) {
             continue;
         }
         if (hasDaemon) {
-            device.setDaemonInfo(daemon[0]);
+            device->setDaemonInfo(daemon[0]);
         }
         DeviceManager::instance()->addPowerDevice(device);
     }
@@ -253,8 +253,8 @@ void DeviceGenerator::getBiosInfo()
         if ((*it).size() < 2) {
             continue;
         }
-        DeviceBios device;
-        device.setBiosInfo(*it);
+        DeviceBios *device = new DeviceBios();
+        device->setBiosInfo(*it);
         DeviceManager::instance()->addBiosDevice(device);
     }
 
@@ -277,8 +277,8 @@ void DeviceGenerator::getSystemInfo()
         if ((*it).size() < 2) {
             continue;
         }
-        DeviceBios device;
-        device.setSystemInfo(*it);
+        DeviceBios *device = new DeviceBios();
+        device->setSystemInfo(*it);
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
@@ -291,8 +291,8 @@ void DeviceGenerator::getBaseBoardInfo()
         if ((*it).size() < 2) {
             continue;
         }
-        DeviceBios device;
-        device.setBaseBoardInfo(*it);
+        DeviceBios *device = new DeviceBios();
+        device->setBaseBoardInfo(*it);
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
@@ -305,8 +305,8 @@ void DeviceGenerator::getChassisInfo()
         if ((*it).size() < 2) {
             continue;
         }
-        DeviceBios device;
-        device.setChassisInfo(*it);
+        DeviceBios *device = new DeviceBios();
+        device->setChassisInfo(*it);
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
@@ -319,8 +319,8 @@ void DeviceGenerator::getBiosMemoryInfo()
         if ((*it).size() < 2) {
             continue;
         }
-        DeviceBios device;
-        device.setMemoryInfo(*it);
+        DeviceBios *device = new DeviceBios();
+        device->setMemoryInfo(*it);
         DeviceManager::instance()->addBiosDevice(device);
     }
 }
@@ -331,8 +331,8 @@ void DeviceGenerator::getMemoryInfoFromLshw()
     if (lstMemory.size() == 0) {
         return;
     } else if (lstMemory.size() == 1) {
-        DeviceMemory device;
-        device.setInfoFromLshw(lstMemory[0]);
+        DeviceMemory *device = new DeviceMemory();
+        device->setInfoFromLshw(lstMemory[0]);
         DeviceManager::instance()->addMemoryDevice(device);
     } else if (lstMemory.size() > 1) {
         QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
@@ -340,8 +340,8 @@ void DeviceGenerator::getMemoryInfoFromLshw()
             if (!(*it)["size"].contains("GiB") || (*it)["description"] == "System Memory") {
                 continue;
             }
-            DeviceMemory device;
-            device.setInfoFromLshw(*it);
+            DeviceMemory *device = new DeviceMemory();
+            device->setInfoFromLshw(*it);
             DeviceManager::instance()->addMemoryDevice(device);
         }
     }
@@ -368,8 +368,8 @@ void DeviceGenerator::getDiskInfoFromHwinfo()
         if ((*dIt).size() < 2) {
             continue;
         }
-        DeviceStorage device;
-        if (device.setHwinfoInfo(*dIt) && device.isValid()) {
+        DeviceStorage *device = new DeviceStorage();
+        if (device->setHwinfoInfo(*dIt) && device->isValid()) {
             DeviceManager::instance()->addStorageDeivce(device);
             addBusIDFromHwinfo((*dIt)["SysFS BusID"]);
         }
@@ -419,8 +419,8 @@ void DeviceGenerator::getGpuInfoFromHwinfo()
         if ((*it).size() < 5) {
             continue;
         }
-        DeviceGpu device;
-        device.setHwinfoInfo(*it);
+        DeviceGpu *device = new DeviceGpu();
+        device->setHwinfoInfo(*it);
         DeviceManager::instance()->addGpuDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
@@ -466,8 +466,8 @@ void DeviceGenerator::getMonitorInfoFromHwinfo()
         if ((*it).size() < 5) {
             continue;
         }
-        DeviceMonitor device;
-        device.setInfoFromHwinfo(*it);
+        DeviceMonitor *device = new DeviceMonitor();
+        device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addMonitor(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
@@ -505,8 +505,8 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
         if ((*it).size() < 5) {
             continue;
         }
-        DeviceAudio device;
-        device.setInfoFromHwinfo(*it);
+        DeviceAudio *device = new DeviceAudio();
+        device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addAudioDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
@@ -530,8 +530,8 @@ void DeviceGenerator::getAudioInfoFromCatInput()
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it)["Sysfs"].contains("sound", Qt::CaseInsensitive) == true) {
-            DeviceAudio device;
-            device.setInfoFromCatDevices(*it);
+            DeviceAudio *device = new DeviceAudio();
+            device->setInfoFromCatDevices(*it);
             DeviceManager::instance()->addAudioDevice(device);
         }
     }
@@ -553,8 +553,8 @@ void DeviceGenerator::getBluetoothInfoFromHciconfig()
         if ((*it).size() < 1) {
             continue;
         }
-        DeviceBluetooth device;
-        device.setInfoFromHciconfig(*it);
+        DeviceBluetooth *device = new DeviceBluetooth();
+        device->setInfoFromHciconfig(*it);
         DeviceManager::instance()->addBluetoothDevice(device);
     }
 }
@@ -601,8 +601,8 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
         // 下面这句代码忘了这么写的原因，先去掉
         //if ((*it).contains("Device Files")) {}
 
-        DeviceKeyboard device;
-        device.setInfoFromHwinfo(*it);
+        DeviceKeyboard *device = new DeviceKeyboard();
+        device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addKeyboardDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
@@ -640,8 +640,8 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
             continue;
         }
 
-        DeviceMouse device;
-        device.setInfoFromHwinfo(*it);
+        DeviceMouse *device = new DeviceMouse();
+        device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addMouseDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
@@ -675,8 +675,8 @@ void DeviceGenerator::getImageInfoFromHwinfo()
         if ((*it)["Model"].contains("camera", Qt::CaseInsensitive) ||
                 (*it)["Device"].contains("camera", Qt::CaseInsensitive) ||
                 (*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive)) {
-            DeviceImage device;
-            device.setInfoFromHwinfo(*it);
+            DeviceImage *device = new DeviceImage();
+            device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addImageDevice(device);
             addBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
@@ -703,8 +703,8 @@ void DeviceGenerator::getCdromInfoFromHwinfo()
         if ((*it).size() < 5) {
             continue;
         }
-        DeviceCdrom device;
-        device.setInfoFromHwinfo(*it);
+        DeviceCdrom *device = new DeviceCdrom();
+        device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addCdromDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
@@ -740,8 +740,8 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         }
 
         if (isOtherDevice) {
-            DeviceOthers device;
-            device.setInfoFromHwinfo(*it);
+            DeviceOthers *device = new DeviceOthers();
+            device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addOthersDevice(device);
         }
     }

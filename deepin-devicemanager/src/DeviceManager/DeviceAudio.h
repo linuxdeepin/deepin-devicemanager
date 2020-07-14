@@ -13,6 +13,8 @@
 
 class DeviceAudio : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceAudio)
 public:
     DeviceAudio();
 

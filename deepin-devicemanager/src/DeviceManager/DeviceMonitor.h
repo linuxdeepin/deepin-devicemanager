@@ -5,6 +5,8 @@
 
 class DeviceMonitor : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceMonitor)
 public:
     DeviceMonitor();
 

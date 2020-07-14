@@ -15,8 +15,8 @@ void PanguVGenerator::generatorMonitorDevice()
         if ((*itHDMI).size() < 1) {
             continue;
         }
-        DeviceMonitor device;
-        device.setInfoFromEdid(*itHDMI);
+        DeviceMonitor *device = new  DeviceMonitor();
+        device->setInfoFromEdid(*itHDMI);
         DeviceManager::instance()->addMonitor(device);
     }
 
@@ -26,8 +26,8 @@ void PanguVGenerator::generatorMonitorDevice()
         if ((*it).size() < 1) {
             continue;
         }
-        DeviceMonitor device;
-        device.setInfoFromEdid(*it);
+        DeviceMonitor *device = new DeviceMonitor();
+        device->setInfoFromEdid(*it);
         DeviceManager::instance()->addMonitor(device);
     }
 }

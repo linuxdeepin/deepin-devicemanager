@@ -5,6 +5,8 @@
 
 class DeviceKeyboard : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceKeyboard)
 public:
     DeviceKeyboard();
 

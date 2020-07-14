@@ -4,6 +4,8 @@
 
 class DeviceStorage: public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceStorage)
 public:
     DeviceStorage();
 

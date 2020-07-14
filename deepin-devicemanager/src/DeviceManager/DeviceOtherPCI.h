@@ -4,6 +4,8 @@
 
 class DeviceOtherPCI : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceOtherPCI)
 public:
     DeviceOtherPCI();
 

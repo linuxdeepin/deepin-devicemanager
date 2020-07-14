@@ -4,6 +4,8 @@
 
 class DeviceOthers : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceOthers)
 public:
     DeviceOthers();
 

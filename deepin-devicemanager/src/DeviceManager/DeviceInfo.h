@@ -5,15 +5,17 @@
 */
 #ifndef DEVICEINFO_H
 #define DEVICEINFO_H
-#include<QString>
-#include<QMap>
-#include<QSet>
+#include <QString>
+#include <QMap>
+#include <QSet>
 #include <QObject>
 
-class DeviceBaseInfo
+class DeviceBaseInfo : public QObject
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceBaseInfo)
 public:
-    DeviceBaseInfo();
+    explicit DeviceBaseInfo(QObject *parent = nullptr);
     virtual ~DeviceBaseInfo();
 
     /**

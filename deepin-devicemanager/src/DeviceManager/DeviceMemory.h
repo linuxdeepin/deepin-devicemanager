@@ -4,6 +4,8 @@
 
 class DeviceMemory : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceMemory)
 public:
     DeviceMemory();
 

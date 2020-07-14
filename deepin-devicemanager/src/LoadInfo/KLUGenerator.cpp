@@ -19,20 +19,20 @@ void KLUGenerator::generatorComputerDevice()
 {
     const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
 
-    DeviceComputer device;
+    DeviceComputer *device = new DeviceComputer();
 
     // home url
     if (cmdInfo.size() > 0) {
         QString value = cmdInfo[0]["HOME_URL"];
-        device.setHomeUrl(value.replace("\"", ""));
+        device->setHomeUrl(value.replace("\"", ""));
     }
 
     // name type
     const QList<QMap<QString, QString> >  &sysInfo = DeviceManager::instance()->cmdInfo("lshw_system");
     if (sysInfo.size() > 0) {
-        device.setType(sysInfo[0]["description"]);
-        //device.setVendor(sysInfo[0]["vendor"]);
-        device.setName(sysInfo[0]["product"]);
+        device->setType(sysInfo[0]["description"]);
+        //device->setVendor(sysInfo[0]["vendor"]);
+        device->setName(sysInfo[0]["product"]);
     }
 
     // setOsDescription
@@ -45,7 +45,7 @@ void KLUGenerator::generatorComputerDevice()
     } else if (DSysInfo::DeepinDesktop == type) {
         os =  "Deepin 20 Beta";
     }
-    device.setOsDescription(os);
+    device->setOsDescription(os);
 
     // os
     const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
@@ -68,7 +68,7 @@ void KLUGenerator::generatorComputerDevice()
             info.remove(tmp);
         }
 
-        device.setOS(info);
+        device->setOS(info);
     }
     DeviceManager::instance()->addComputerDevice(device);
 }
@@ -81,8 +81,8 @@ void KLUGenerator::generatorGpuDevice()
         if ((*it).size() < 2) {
             continue;
         }
-        DeviceGpu device;
-        device.setGpuInfo(*it);
+        DeviceGpu *device = new DeviceGpu();
+        device->setGpuInfo(*it);
         DeviceManager::instance()->addGpuDevice(device);
     }
 }
@@ -97,8 +97,8 @@ void KLUGenerator::generatorMonitorDevice()
     mapInfo.insert("Size", "296x197mm");
     mapInfo.insert("Date", "2019年7月");
 
-    DeviceMonitor monitor;
-    monitor.setInfoFromSelfDefine(mapInfo);
+    DeviceMonitor *monitor = new  DeviceMonitor();
+    monitor->setInfoFromSelfDefine(mapInfo);
     DeviceManager::instance()->addMonitor(monitor);
 }
 
@@ -122,8 +122,8 @@ void KLUGenerator::generatorPowerDevice()
         if ((*it).size() < 2) {
             continue;
         }
-        DevicePower device;
-        if (!device.setInfoFromUpower(*it)) {
+        DevicePower *device = new DevicePower();
+        if (!device->setInfoFromUpower(*it)) {
             continue;
         }
         if (hasDaemon) {
@@ -135,8 +135,8 @@ void KLUGenerator::generatorPowerDevice()
             tempMap["critical-action"] = "Suspend";
 
 
-//            device.setDaemonInfo(daemon[0]);
-            device.setDaemonInfo(tempMap);
+//            device->setDaemonInfo(daemon[0]);
+            device->setDaemonInfo(tempMap);
         }
         DeviceManager::instance()->addPowerDevice(device);
     }
@@ -151,8 +151,8 @@ void KLUGenerator::getKeyboardInfoFromHwinfo()
             continue;
         }
         if ((*it).contains("Device Files")) {
-            DeviceKeyboard device;
-            device.setKLUInfoFromHwinfo(*it);
+            DeviceKeyboard *device = new DeviceKeyboard();
+            device->setKLUInfoFromHwinfo(*it);
             DeviceManager::instance()->addKeyboardDevice(device);
             addBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
@@ -180,8 +180,8 @@ void KLUGenerator::getOthersInfoFromHwinfo()
         }
 
         if (isOtherDevice) {
-            DeviceOthers device;
-            device.setInfoFromHwinfo(*it);
+            DeviceOthers *device = new DeviceOthers();
+            device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addOthersDevice(device);
         }
     }
@@ -195,8 +195,8 @@ void KLUGenerator::getDiskInfoFromHwinfo()
         if ((*dIt).size() < 2) {
             continue;
         }
-        DeviceStorage device;
-        if (device.setKLUHwinfoInfo(*dIt) && device.isValid()) {
+        DeviceStorage *device = new DeviceStorage();
+        if (device->setKLUHwinfoInfo(*dIt) && device->isValid()) {
             DeviceManager::instance()->addStorageDeivce(device);
             addBusIDFromHwinfo((*dIt)["SysFS BusID"]);
         }
@@ -281,8 +281,8 @@ void KLUGenerator::getAudioInfoFromCatAudio()
         if ((*it).size() < 2) {
             continue;
         }
-        DeviceAudio device;
-        device.setInfoFromCatAudio(*it);
+        DeviceAudio *device = new DeviceAudio();
+        device->setInfoFromCatAudio(*it);
         DeviceManager::instance()->addAudioDevice(device);
     }
 }

@@ -6,11 +6,13 @@
 */
 #ifndef DEVICECPU_H
 #define DEVICECPU_H
-#include"DeviceInfo.h"
+#include "DeviceInfo.h"
 
 
 class DeviceCpu : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceCpu)
 public:
     DeviceCpu();
 
