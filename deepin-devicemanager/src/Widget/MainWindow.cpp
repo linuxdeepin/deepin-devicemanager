@@ -5,6 +5,10 @@
 #include <QDebug>
 
 #include <DApplication>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QProcess>
 
 #include "WaitingWidget.h"
 #include "DetailWidget.h"
@@ -48,6 +52,115 @@ MainWindow::~MainWindow()
     DELETE_PTR(mp_DetailWidget);
     DELETE_PTR(mp_MainStackWidget);
     DELETE_PTR(mp_ThreadPool);
+}
+
+void MainWindow::refresh()
+{
+    if (m_refreshing) {
+        return;
+    }
+
+    // 授权框
+    if (false == DeviceInfoParser::Instance().getRootPassword()) {
+        return;
+    }
+
+    // 正在刷新标志
+    m_refreshing = true;
+
+    // 初始化窗口相关的嗯内容，比如界面布局，控件大小
+    initWindow();
+
+    // 加载设备信息
+    refreshDataBase();
+
+}
+
+void MainWindow::exportTo()
+{
+
+}
+
+
+
+void MainWindow::showDisplayShortcutsHelpDialog()
+{
+    QJsonDocument doc;
+
+    //获取快捷键json文本
+    getJsonDoc(doc);
+
+    // 快捷键窗口位置
+    QRect rect = this->window()->geometry();
+    QPoint pos(rect.x() + rect.width() / 2,
+               rect.y() + rect.height() / 2);
+
+    // 快捷键窗口显示进程
+    QProcess *shortcutViewProcess = new QProcess();
+    QStringList shortcutString;
+    QString param1 = "-j=" + QString(doc.toJson().data());
+    QString param2 = "-p=" + QString::number(pos.x()) + "," + QString::number(pos.y());
+    shortcutString << param1 << param2;
+
+    // 启动子进程
+    shortcutViewProcess->startDetached("deepin-shortcut-viewer", shortcutString);
+
+    connect(shortcutViewProcess, SIGNAL(finished(int)), shortcutViewProcess, SLOT(deleteLater()));
+}
+
+void MainWindow::addJsonArrayItem(QJsonArray &windowJsonItems, const QString &name, const QString &value)
+{
+    QJsonObject jsonObject;
+    jsonObject.insert("name", name);
+    jsonObject.insert("value", value);
+    windowJsonItems.append(jsonObject);
+}
+
+void MainWindow::getJsonDoc(QJsonDocument &doc)
+{
+    QJsonArray jsonGroups;
+
+    // 窗口快捷键组
+    QJsonArray windowJsonItems;
+
+    addJsonArrayItem(windowJsonItems, tr("Display shortcuts"), "Ctrl+Shift+?");
+    addJsonArrayItem(windowJsonItems, tr("Close"), "Alt+F4");
+    addJsonArrayItem(windowJsonItems, tr("Help"), "F1");
+    addJsonArrayItem(windowJsonItems, tr("Copy"), "Ctrl+C");
+
+    // 窗口快捷键添加到 系统分类
+    QJsonObject windowJsonGroup;
+    windowJsonGroup.insert("groupName", tr("System"));
+    windowJsonGroup.insert("groupItems", windowJsonItems);
+    jsonGroups.append(windowJsonGroup);
+
+    // 编辑快捷键组
+    QJsonArray editorJsonItems;
+
+    addJsonArrayItem(editorJsonItems, tr("Export"), "Ctrl+E");
+    addJsonArrayItem(editorJsonItems, tr("Refresh"), "F5");
+
+    // 编辑快捷键添加到 设备管理器分类
+    QJsonObject editorJsonGroup;
+    editorJsonGroup.insert("groupName", tr("Device Manager"));
+    editorJsonGroup.insert("groupItems", editorJsonItems);
+    jsonGroups.append(editorJsonGroup);
+
+    // 添加快捷键组到对象
+    QJsonObject shortcutObj;
+    shortcutObj.insert("shortcut", jsonGroups);
+
+    doc.setObject(shortcutObj);
+}
+
+void MainWindow::windowMaximizing()
+{
+    if (isMaximized()) {
+        showNormal();
+    }  else {
+        //setWindowState(Qt::WindowMaximized);
+        showMaximized();
+    }
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -104,14 +217,73 @@ void MainWindow::refreshDataBase()
 
 void MainWindow::loadingFinishSlot(const QString &message)
 {
+    static bool begin = true;
     static qint64 b = QDateTime::currentDateTime().toMSecsSinceEpoch();
     static qint64 c = QDateTime::currentDateTime().toMSecsSinceEpoch();
 
-    if (message == "finish") {
-        c = QDateTime::currentDateTime().toMSecsSinceEpoch();
-        qDebug() << "************************&&*************************" << (c - b) / 1000.0;
-        DApplication::restoreOverrideCursor();
-        mp_MainStackWidget->setCurrentWidget(mp_DetailWidget);
+    if (begin) {
+        b = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        begin = false;
     }
 
+    // finish 表示所有设备信息加载完成
+    if (message == "finish") {
+        c = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        begin = true;
+        qDebug() << "************************&&*************************" << (c - b) ;
+
+        // 一定要有否则指针一直显示圆圈与setOverrideCursor成对使用
+        DApplication::restoreOverrideCursor();
+
+        // 信息显示界面
+        mp_MainStackWidget->setCurrentWidget(mp_DetailWidget);
+
+        // 刷新结束
+        m_refreshing = false;
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *e)
+{
+    // ctrl+e:导出
+    if (e->key() == Qt::Key_E) {
+        Qt::KeyboardModifiers modifiers = e->modifiers();
+        if (modifiers != Qt::NoModifier) {
+            if (modifiers.testFlag(Qt::ControlModifier)) {
+                exportTo();
+                return;
+            }
+        }
+    }
+
+    // F5:界面刷新
+    if (e->key() == Qt::Key_F5) {
+        refresh();
+        return;
+    }
+
+    // ctrl+shift+command:快捷键提示界面
+    if (e->key() == Qt::Key_Question) {
+        Qt::KeyboardModifiers modifiers = e->modifiers();
+        if (modifiers != Qt::NoModifier) {
+            if (modifiers.testFlag(Qt::ControlModifier)) {
+                showDisplayShortcutsHelpDialog();
+                return;
+            }
+        }
+    }
+
+
+    // ctrl+alt：窗口最大化
+    if (e->key() == Qt::Key_F) {
+        Qt::KeyboardModifiers modifiers = e->modifiers();
+        if (modifiers != Qt::NoModifier) {
+            if (modifiers.testFlag(Qt::ControlModifier) && modifiers.testFlag(Qt::AltModifier)) {
+                windowMaximizing();
+                return;
+            }
+        }
+    }
+
+    return DMainWindow::keyPressEvent(e);
 }
