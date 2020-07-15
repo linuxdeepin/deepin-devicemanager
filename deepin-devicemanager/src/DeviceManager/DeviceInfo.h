@@ -44,6 +44,13 @@ public:
      */
     const QString &subTitle()const;
 
+    /**
+     * @brief isValid：判断属性值是否有效
+     * @param value：属性值
+     * @return true:属性值有效
+     */
+    bool isValueValid(QString &value);
+
 protected:
     /**
      * @brief:初始化过滤信息

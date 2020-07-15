@@ -40,6 +40,71 @@ const QString &DeviceBaseInfo::subTitle() const
     return m_SubTitle;
 }
 
+bool DeviceBaseInfo::isValueValid(QString &value)
+{
+    if (value.isEmpty()) {
+        return false;
+    }
+
+    if (value == QObject::tr("Unknown")) {
+        return false;
+    }
+
+    if (value == QString("Unknown")) {
+        return false;
+    }
+
+    if (value.compare(QString("N/A"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value == QString("")) {
+        return false;
+    }
+
+    if (value.compare(QString("Null"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value.compare(QString("none"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value.compare(QString("Not Provided"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value.compare(QString("Not Specified"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value.compare(QString("Default string"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value.compare(QString("Unspecified"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value.compare(QString("Not Present"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value.compare(QString("<OUT OF SPEC>"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value.compare(QString("Other"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    if (value.compare(QString("TBD"), Qt::CaseInsensitive) == 0) {
+        return false;
+    }
+
+    return true;
+}
+
 void DeviceBaseInfo::addFilterKey(const QString &key)
 {
 

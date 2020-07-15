@@ -478,6 +478,12 @@ public:
      */
     bool exportToHtml(const QString &filePath);
 
+    /**
+     * @brief currentXlsRow:获取xlsx当前行
+     * @return
+     */
+    int currentXlsRow();
+
 protected:
     DeviceManager();
     ~DeviceManager();
@@ -506,6 +512,8 @@ private:
 
     QStringList                     m_BusIdList;
     QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;
+
+    static int m_CurrentXlsRow;
 };
 
 #endif // DEVICEMANAGER_H
