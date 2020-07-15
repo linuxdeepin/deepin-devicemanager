@@ -50,7 +50,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -91,7 +91,7 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
         m_MediaType = "USB";
     }
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -125,7 +125,7 @@ bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
     getInfoFromLshw(mapInfo);
 
     // 获取其它设备信息
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 
     return true;
 }
@@ -358,6 +358,11 @@ void DeviceStorage::loadBaseDeviceInfo()
     if (!m_Vendor.isEmpty()) {
         m_OverviewStr += QString("(%1)").arg(m_Vendor);
     }
+}
+
+void DeviceStorage::loadOtherDeviceInfo()
+{
+
 }
 
 void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)

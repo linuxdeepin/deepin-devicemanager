@@ -32,6 +32,17 @@ ListViewWidget::~ListViewWidget()
 
 }
 
+void ListViewWidget::updateListItems(const QList<QPair<QString, QString> > &lst)
+{
+    if (! mp_ListView) {
+        return;
+    }
+
+    foreach (auto it, lst) {
+        mp_ListView->addItem(it.first, it.second);
+    }
+}
+
 void ListViewWidget::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色

@@ -29,7 +29,7 @@ bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_MaxPower);
     setAttribute(mapInfo, "", m_Speed);
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -48,7 +48,7 @@ void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 获取映射到 lshw设备信息的 关键字
     m_KeyToLshw = mapInfo["SysFS BusID"];
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 const QString &DeviceCdrom::name()const
@@ -133,4 +133,9 @@ void DeviceCdrom::loadBaseDeviceInfo()
             m_OverviewStr += QString("(%1)").arg(m_Type);
         }
     }
+}
+
+void DeviceCdrom::loadOtherDeviceInfo()
+{
+
 }

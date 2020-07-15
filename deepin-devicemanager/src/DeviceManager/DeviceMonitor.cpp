@@ -94,7 +94,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
 
     // 加载其他属性
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 void DeviceMonitor::setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo)
@@ -114,7 +114,7 @@ void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
     m_Name = "Monitor " + mapInfo["Vendor"];
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "Vendor", m_Vendor);
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
@@ -263,6 +263,11 @@ void DeviceMonitor::loadBaseDeviceInfo()
 //    addBaseDeviceInfo(tr(""), m_VGA);
 //    addBaseDeviceInfo(tr(""), m_HDMI);
 //    addBaseDeviceInfo(tr(""), m_DVI);
+}
+
+void DeviceMonitor::loadOtherDeviceInfo()
+{
+
 }
 
 bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)

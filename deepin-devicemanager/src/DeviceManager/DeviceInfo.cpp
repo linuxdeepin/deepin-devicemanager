@@ -18,9 +18,15 @@ DeviceBaseInfo::~DeviceBaseInfo()
 
 }
 
-const QMap<QString, QString> &DeviceBaseInfo::getOtherAttribs()const
+//const QMap<QString, QString> &DeviceBaseInfo::getOtherAttribs()const
+//{
+//    return m_MapOtherInfo;
+//}
+
+const QList<QPair<QString, QString>> &DeviceBaseInfo::getOtherAttribs()
 {
-    return m_MapOtherInfo;
+    m_LstOtherInfo.clear();
+    return m_LstBaseInfo;
 }
 
 const QList<QPair<QString, QString> > &DeviceBaseInfo::getBaseAttribs()
@@ -111,13 +117,14 @@ void DeviceBaseInfo::addFilterKey(const QString &key)
     m_FilterKey.insert(key);
 }
 
-void DeviceBaseInfo::loadOtherDeviceInfo(const QMap<QString, QString> &mapInfo)
+void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
 {
     QMap<QString, QString>::const_iterator it = mapInfo.begin();
     for (; it != mapInfo.end(); ++it) {
         QString k = DApplication::translate("QObject", it.key().trimmed().toStdString().data());
         if (m_FilterKey.find(k) != m_FilterKey.end()) {
             m_MapOtherInfo.insert(k, it.value().trimmed());
+//            m_LstOtherInfo.append(QPair<QString, QString>(k, it.value().trimmed()));
         }
     }
 }

@@ -220,7 +220,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         }
     }
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -248,7 +248,7 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 //    setAttribute(mapInfo, "size", m_Frequency, false);
 //    setAttribute(mapInfo, "size", m_CurFrequency, false);
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
@@ -272,7 +272,7 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Core Count", m_CPUCoreNum);
 
     // 获取其他cpu信息
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 void DeviceCpu::setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo)
@@ -308,5 +308,10 @@ void DeviceCpu::setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo)
     }
 
     // 获取其他cpu信息
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
+}
+
+void DeviceCpu::loadOtherDeviceInfo()
+{
+
 }

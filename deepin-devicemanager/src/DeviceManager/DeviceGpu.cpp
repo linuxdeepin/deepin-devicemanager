@@ -109,7 +109,7 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "memory", m_MemAddress);
     setAttribute(mapInfo, "physical id", m_PhysID);
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
@@ -136,7 +136,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     int index = mapInfo["SysFS BusID"].indexOf(re);
     m_UniqueKey = mapInfo["SysFS BusID"].mid(index + 1);
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -173,7 +173,7 @@ void DeviceGpu::setGpuInfo(const QMap<QString, QString> &mapInfo)
     m_eDP = "";
 
     setAttribute(mapInfo, "Name", m_Name);
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 const QString &DeviceGpu::name() const
@@ -289,4 +289,9 @@ const QString &DeviceGpu::memory() const
 const QString &DeviceGpu::physID() const
 {
     return m_PhysID;
+}
+
+void DeviceGpu::loadOtherDeviceInfo()
+{
+
 }

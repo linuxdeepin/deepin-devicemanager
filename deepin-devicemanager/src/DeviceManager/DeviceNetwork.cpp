@@ -60,7 +60,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -237,4 +237,9 @@ void DeviceNetwork::loadBaseDeviceInfo()
     if (!m_Model.isEmpty()) {
         m_OverviewStr += QString("(%1)").arg(m_Model);
     }
+}
+
+void DeviceNetwork::loadOtherDeviceInfo()
+{
+
 }

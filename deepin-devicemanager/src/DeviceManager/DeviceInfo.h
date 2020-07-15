@@ -24,7 +24,8 @@ public:
      * @brief getOtherAttribs:获取设备的其它信息
      * @return 其他信息组成的map
      */
-    const QMap<QString, QString> &getOtherAttribs()const;
+    //const QMap<QString, QString> &getOtherAttribs()const;
+    const QList<QPair<QString, QString>> &getOtherAttribs();
 
     /**
      * @brief getBaseAttribs::获取基本设备信息
@@ -62,6 +63,11 @@ protected:
      */
     virtual void loadBaseDeviceInfo() = 0;
     /**
+     * @brief loadOtherDeviceInfo
+     */
+    virtual void loadOtherDeviceInfo() = 0;
+
+    /**
      * @brief addFilterKey:添加过滤信息
      * @param key:过滤信息的字符串
      */
@@ -71,7 +77,7 @@ protected:
      * @brief loadOtherDeviceInfo:加载其它设备信息
      * @param mapInfo:其他设备信息map
      */
-    void loadOtherDeviceInfo(const QMap<QString, QString> &mapInfo);
+    void getOtherMapInfo(const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief addBaseDeviceInfo:添加基本信息
@@ -92,6 +98,7 @@ protected:
 
 protected:
     QList<QPair<QString, QString>> m_LstBaseInfo;//<! 基本信息
+    QList<QPair<QString, QString>> m_LstOtherInfo;
     QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息
     QSet<QString>          m_FilterKey;             //<! 用于避免添加重复信息
 

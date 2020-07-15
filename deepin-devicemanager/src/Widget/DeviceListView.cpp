@@ -59,32 +59,6 @@ DeviceListView::DeviceListView(QWidget *parent)
     setItemSpacing(0);
     setAutoFillBackground(true); //与背景色有关
     setViewportMargins(10, 2, 10, 5);
-
-    // 测试
-    addItem("overview", "overview");
-    addItem("cpu", "cpu");
-    addItem("motherboard", "motherboard");
-    addItem("memory", "memory");
-    addItem("storage", "storage");
-    addItem("displayadapter", "displayadapter");
-    addItem("monitor", "monitor");
-    addItem("networkadapter", "networkadapter");
-    addItem("audiodevice", "audiodevice");
-    addItem("bluetooth", "bluetooth");
-    addItem("otherpcidevices", "otherpcidevices");
-    addItem("battery", "battery");
-    addItem("overview", "overview");
-    addItem("cpu", "cpu");
-    addItem("motherboard", "motherboard");
-    addItem("memory", "memory");
-    addItem("storage", "storage");
-    addItem("displayadapter", "displayadapter");
-    addItem("monitor", "monitor");
-    addItem("networkadapter", "networkadapter");
-    addItem("audiodevice", "audiodevice");
-    addItem("bluetooth", "bluetooth");
-    addItem("otherpcidevices", "otherpcidevices");
-    addItem("battery", "battery");
 }
 
 DeviceListView::~DeviceListView()

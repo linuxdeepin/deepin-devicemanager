@@ -51,14 +51,14 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_SBDSManufactureDate);
     setAttribute(mapInfo, "", m_SBDSSerialNumber);
     setAttribute(mapInfo, "", m_SBDSVersion);
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
 void DevicePower::setDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
     if (m_Name == QObject::tr("battery"))
-        loadOtherDeviceInfo(mapInfo);
+        getOtherMapInfo(mapInfo);
 }
 
 const QString &DevicePower::name()const
@@ -210,4 +210,9 @@ void DevicePower::loadBaseDeviceInfo()
     if (!m_Model.isEmpty()) {
         m_OverviewStr += QString("(%1)").arg(m_Model);
     }
+}
+
+void DevicePower::loadOtherDeviceInfo()
+{
+
 }

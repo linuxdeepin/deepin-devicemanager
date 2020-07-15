@@ -4,6 +4,7 @@
 #include <DWidget>
 #include <QAction>
 #include <QMenu>
+#include <QList>
 
 class DeviceListView;
 
@@ -14,6 +15,8 @@ class ListViewWidget : public DWidget
 public:
     ListViewWidget(DWidget *parent = nullptr);
     ~ListViewWidget();
+
+    void updateListItems(const QList<QPair<QString, QString> > &lst);
 
 protected:
     /**@brief:事件重写*/

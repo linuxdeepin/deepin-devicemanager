@@ -44,7 +44,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     m_UniqueKey = mapInfo["SysFS BusID"];
 
     //3. 获取设备的其它信息
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -80,7 +80,7 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "description", m_Description);
 
     //3. 获取设备的其它信息
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 
     return true;
 }
@@ -101,7 +101,7 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_Description);
 
     //2. 获取设备的其它信息
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 
     return true;
 }
@@ -112,7 +112,7 @@ void DeviceAudio::setInfoFromCatAudio(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Name", m_Name);
 
     //2. 获取设备的其它信息
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 bool DeviceAudio::setAudioChipFromDmesg(const QString &info)
@@ -225,4 +225,9 @@ void DeviceAudio::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Chip"), m_Chip);
     m_SubTitle = m_Name;
     m_OverviewStr = m_Name;
+}
+
+void DeviceAudio::loadOtherDeviceInfo()
+{
+
 }

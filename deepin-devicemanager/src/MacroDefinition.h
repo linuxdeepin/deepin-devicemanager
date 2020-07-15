@@ -78,7 +78,6 @@
         }\
         \
         TXT_BASE_INFO(out,device); \
-        TXT_OTHER_INFO(out,device); \
     }\
     \
     out << "\n"; \

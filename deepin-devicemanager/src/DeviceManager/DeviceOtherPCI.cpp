@@ -117,3 +117,8 @@ void DeviceOtherPCI::loadBaseDeviceInfo()
         m_OverviewStr += QString("(%1)").arg(m_Model);
     }
 }
+
+void DeviceOtherPCI::loadOtherDeviceInfo()
+{
+
+}

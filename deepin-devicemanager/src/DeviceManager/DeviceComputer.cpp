@@ -133,3 +133,8 @@ void DeviceComputer::loadBaseDeviceInfo()
 {
     addBaseDeviceInfo(tr("Name"), m_Name);
 }
+
+void DeviceComputer::loadOtherDeviceInfo()
+{
+
+}

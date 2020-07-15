@@ -113,6 +113,11 @@ protected:
      */
     void loadBaseDeviceInfo() override;
 
+    /**
+     * @brief loadOtherDeviceInfo:加载基本信息
+     */
+    void loadOtherDeviceInfo() override;
+
 private:
 
     /**

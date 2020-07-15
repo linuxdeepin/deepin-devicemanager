@@ -40,7 +40,7 @@ void DevicePrint::setInfo(const QMap<QString, QString> &info)
     }
 
 
-    loadOtherDeviceInfo(info);
+    getOtherMapInfo(info);
 }
 
 const QString &DevicePrint::name()const
@@ -129,4 +129,9 @@ void DevicePrint::loadBaseDeviceInfo()
     if (!m_Model.isEmpty()) {
         m_OverviewStr += QString("(%1)").arg(m_Model);
     }
+}
+
+void DevicePrint::loadOtherDeviceInfo()
+{
+
 }

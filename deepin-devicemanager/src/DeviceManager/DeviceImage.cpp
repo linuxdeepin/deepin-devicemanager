@@ -125,3 +125,8 @@ void DeviceImage::loadBaseDeviceInfo()
         m_OverviewStr += QString("(%1)").arg(m_Model);
     }
 }
+
+void DeviceImage::loadOtherDeviceInfo()
+{
+
+}

@@ -55,7 +55,7 @@ void DeviceMouse::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
         }
     }
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 bool DeviceMouse::setInfoFromlshw(QMap<QString, QString> mapInfo)
@@ -76,7 +76,7 @@ bool DeviceMouse::setInfoFromlshw(QMap<QString, QString> mapInfo)
     setAttribute(mapInfo, "driver", m_Driver);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -161,4 +161,9 @@ void DeviceMouse::loadBaseDeviceInfo()
     if (!m_Model.isEmpty()) {
         m_OverviewStr += QString("(%1)").arg(m_Model);
     }
+}
+
+void DeviceMouse::loadOtherDeviceInfo()
+{
+
 }

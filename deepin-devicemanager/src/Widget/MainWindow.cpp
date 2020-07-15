@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
     , mp_MainStackWidget(new DStackedWidget(this))
     , mp_WaitingWidget(new WaitingWidget(this))
-    , mp_DetailWidget(new DeviceWidget(this))
+    , mp_DeviceWidget(new DeviceWidget(this))
     , mp_ThreadPool(new ThreadPool(this))
 {
     // 加载授权框
@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     DELETE_PTR(mp_WaitingWidget);
-    DELETE_PTR(mp_DetailWidget);
+    DELETE_PTR(mp_DeviceWidget);
     DELETE_PTR(mp_MainStackWidget);
     DELETE_PTR(mp_ThreadPool);
 }
@@ -245,7 +245,7 @@ void MainWindow::initWidgets()
 
 
     // 添加信息显示界面
-    mp_MainStackWidget->addWidget(mp_DetailWidget);
+    mp_MainStackWidget->addWidget(mp_DeviceWidget);
 
 }
 
@@ -281,7 +281,9 @@ void MainWindow::loadingFinishSlot(const QString &message)
         DApplication::restoreOverrideCursor();
 
         // 信息显示界面
-        mp_MainStackWidget->setCurrentWidget(mp_DetailWidget);
+        const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
+        mp_DeviceWidget->updateData(types);
+        mp_MainStackWidget->setCurrentWidget(mp_DeviceWidget);
 
         // 刷新结束
         m_refreshing = false;

@@ -72,7 +72,7 @@ void DeviceKeyboard::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 void DeviceKeyboard::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -104,7 +104,7 @@ void DeviceKeyboard::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 const QString &DeviceKeyboard::name()const
@@ -215,4 +215,9 @@ void DeviceKeyboard::getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &m
             }
         }
     }
+}
+
+void DeviceKeyboard::loadOtherDeviceInfo()
+{
+
 }

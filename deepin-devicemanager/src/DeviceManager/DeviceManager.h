@@ -4,6 +4,8 @@
 #include<QMap>
 #include<QMutex>
 #include<QDomDocument>
+#include<QObject>
+
 class DeviceMouse;
 class DeviceCpu;
 class DeviceStorage;
@@ -26,8 +28,9 @@ class DeviceBaseInfo;
 
 /*管理设备信息的单例*/
 
-class DeviceManager
+class DeviceManager : public QObject
 {
+    Q_OBJECT
 public:
     static DeviceManager *instance()
     {
@@ -41,6 +44,12 @@ public:
      * @brief clear:清除所有设备信息
      */
     void clear();
+
+    /**
+     * @brief getDeviceTypes
+     * @return 返回设备类型列表
+     */
+    const QList<QPair<QString, QString>> &getDeviceTypes();
 
     // 鼠标设备相关 **************************************************************************************
 
@@ -509,6 +518,8 @@ private:
     QList<DeviceOtherPCI *>           m_ListDeviceOtherPCI;             //<! 其它PCI设备
     QList<DeviceComputer *>           m_ListDeviceComputer;             //<! 计算机基本信息
     QList<DeviceCdrom *>              m_ListDeviceCdrom;                //<! cdrom设备
+
+    QList<QPair<QString, QString>>     m_ListDeviceType;                //<! 所有的设备类型及其对应的图标
 
     QStringList                     m_BusIdList;
     QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;

@@ -21,13 +21,13 @@ bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
     m_Name = QObject::tr("BIOS Information");
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
 bool DeviceBios::setBiosLanguageInfo(const QMap<QString, QString> &mapInfo)
 {
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -43,7 +43,7 @@ bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Board name", m_ProductName, false);
     setAttribute(mapInfo, "chipset", m_ChipsetFamily);
     m_IsBoard = true;
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -55,7 +55,7 @@ bool DeviceBios::setSystemInfo(const QMap<QString, QString> &mapInfo)
     m_Name = QObject::tr("System Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -67,7 +67,7 @@ bool DeviceBios::setChassisInfo(const QMap<QString, QString> &mapInfo)
     m_Name = QObject::tr("Chassis Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -79,7 +79,7 @@ bool DeviceBios::setMemoryInfo(const QMap<QString, QString> &mapInfo)
     m_Name = QObject::tr("Physical Memory Array");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -188,4 +188,9 @@ void DeviceBios::loadBaseDeviceInfo()
     m_SubTitle = m_Name;
     if (m_IsBoard && !m_ProductName.isEmpty())
         m_OverviewStr = m_ProductName;
+}
+
+void DeviceBios::loadOtherDeviceInfo()
+{
+
 }

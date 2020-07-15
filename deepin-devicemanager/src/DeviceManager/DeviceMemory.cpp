@@ -30,7 +30,7 @@ void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "width", m_DataBandwidth);
     setAttribute(mapInfo, "serial", m_SerialNumber);
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
@@ -54,7 +54,7 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
         m_Type = "";
     }
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 
     return true;
 }
@@ -103,6 +103,11 @@ void DeviceMemory::loadBaseDeviceInfo()
 //    if (!m_Vendor.isEmpty()) {
 //        m_OverviewStr += QString("(%1)").arg(m_Vendor);
 //    }
+}
+
+void DeviceMemory::loadOtherDeviceInfo()
+{
+
 }
 
 const QString &DeviceMemory::name()const

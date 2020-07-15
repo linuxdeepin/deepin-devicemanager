@@ -16,6 +16,8 @@ public:
     DeviceWidget(QWidget *parent = nullptr);
     ~DeviceWidget();
 
+    void updateData(const QList<QPair<QString, QString> > &lst);
+
 private:
     /**@brief:初始化界面布局*/
     void initWidgets();

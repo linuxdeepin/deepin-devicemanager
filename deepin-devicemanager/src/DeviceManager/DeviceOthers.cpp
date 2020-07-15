@@ -134,3 +134,8 @@ void DeviceOthers::loadBaseDeviceInfo()
         m_OverviewStr += QString("(%1)").arg(m_Model);
     }
 }
+
+void DeviceOthers::loadOtherDeviceInfo()
+{
+
+}

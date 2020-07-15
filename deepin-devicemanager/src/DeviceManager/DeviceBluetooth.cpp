@@ -23,7 +23,7 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
 {
     setAttribute(mapInfo, "Name", m_Name);
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
 }
 
 bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -50,7 +50,7 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     parseKeyToLshw(mapInfo["SysFS BusID"]);
 
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -199,4 +199,9 @@ void DeviceBluetooth::parseKeyToLshw(const QString &info)
         return;
     }
     m_UniqueKey = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
+}
+
+void DeviceBluetooth::loadOtherDeviceInfo()
+{
+
 }

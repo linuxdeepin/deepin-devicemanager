@@ -93,7 +93,7 @@ private:
     /**@brief:主窗口的stackWidget，主要有两个widget，一个是等待界面，还有一个是信息显示界面*/
     DStackedWidget        *mp_MainStackWidget;
     WaitingWidget         *mp_WaitingWidget;
-    DeviceWidget          *mp_DetailWidget;
+    DeviceWidget          *mp_DeviceWidget;
 
     ThreadPool            *mp_ThreadPool;
 

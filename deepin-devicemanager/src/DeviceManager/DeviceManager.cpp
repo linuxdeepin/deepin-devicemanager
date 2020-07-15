@@ -130,6 +130,41 @@ void DeviceManager::clear()
     m_ListDeviceCPU.clear();
 }
 
+const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
+{
+    m_ListDeviceType.clear();
+
+    if (true) m_ListDeviceType.append(QPair<QString, QString>(tr("overview"), "overview"));
+
+    if (m_ListDeviceCPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("cpu"), "cpu"));
+
+    // 板载接口设备
+    if (m_ListDeviceBios.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("motherboard"), "motherboard"));
+    if (m_ListDeviceMemory.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("memory"), "memory"));
+    if (m_ListDeviceGPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("displayadapter"), "displayadapter"));
+    if (m_ListDeviceAudio.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("audiodevice"), "audiodevice"));
+    if (m_ListDeviceStorage.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("storage"), "storage"));
+    if (m_ListDeviceOtherPCI.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("otherpcidevices"), "otherpcidevices"));
+    if (m_ListDevicePower.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("battery"), "battery"));
+
+    // 网络设备
+    if (m_ListBluetooth.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("bluetooth"), "bluetooth"));
+    if (m_ListDeviceNetwork.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("networkadapter"), "networkadapter"));
+
+    // 输入设备
+    if (m_ListDeviceMouse.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("mouse"), "mouse"));
+    if (m_ListDeviceKeyboard.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("keyboard"), "keyboard"));
+
+    // 外设设备
+    if (m_ListDeviceMonitor.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("monitor"), "monitor"));
+    if (m_ListDeviceCdrom.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("cdrom"), "cdrom"));
+    if (m_ListDevicePrint.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("printer"), "printer"));
+    if (m_ListDeviceImage.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("camera"), "camera"));
+    if (m_ListDeviceOthers.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("otherdevices"), "otherdevices"));
+
+    return m_ListDeviceType;
+}
+
 void DeviceManager::addMouseDevice(DeviceMouse   *const device)
 {
     // 如果不是重复设备则添加到设备列表

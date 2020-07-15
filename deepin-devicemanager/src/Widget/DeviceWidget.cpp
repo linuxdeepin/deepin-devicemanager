@@ -23,6 +23,18 @@ DeviceWidget::~DeviceWidget()
     DELETE_PTR(mp_Splitter);
 }
 
+void DeviceWidget::updateData(const QList<QPair<QString, QString> > &lst)
+{
+    // 更新左边的列表
+    if (mp_ListView)
+        mp_ListView->updateListItems(lst);
+
+    // 更新右边的详细内容
+    if (mp_InfoPage) {
+
+    }
+}
+
 void DeviceWidget::initWidgets()
 {
     QHBoxLayout *hLayout = new QHBoxLayout(this);
