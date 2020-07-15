@@ -115,8 +115,6 @@ void DeviceManager::clear()
     m_ListDevicePrint.clear();
     m_ListDeviceOtherPCI.clear();
     m_ListDeviceCdrom.clear();
-
-
     m_ListDeviceComputer.clear();
     m_ListDeviceNetwork.clear();
     m_ListDeviceBios.clear();

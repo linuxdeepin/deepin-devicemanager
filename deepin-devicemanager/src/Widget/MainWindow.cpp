@@ -11,7 +11,7 @@
 #include <QProcess>
 
 #include "WaitingWidget.h"
-#include "DetailWidget.h"
+#include "DeviceWidget.h"
 #include "MacroDefinition.h"
 #include "ThreadPool.h"
 #include "deviceinfoparser.h"
@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
     , mp_MainStackWidget(new DStackedWidget(this))
     , mp_WaitingWidget(new WaitingWidget(this))
-    , mp_DetailWidget(new DetailWidget(this))
+    , mp_DetailWidget(new DeviceWidget(this))
     , mp_ThreadPool(new ThreadPool(this))
 {
     // 加载授权框
@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
         exit(-1);
     }
 
-    // 初始化窗口相关的嗯内容，比如界面布局，控件大小
+    // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
 
     // 加载设备信息

@@ -6,15 +6,15 @@
 #include <DSplitter>
 
 class ListViewWidget;
-class DeviceDetailPage;
+class DeviceInfoPage;
 
 using namespace Dtk::Widget;
 
-class DetailWidget : public DWidget
+class DeviceWidget : public DWidget
 {
 public:
-    DetailWidget(QWidget *parent);
-    ~DetailWidget();
+    DeviceWidget(QWidget *parent = nullptr);
+    ~DeviceWidget();
 
 private:
     /**@brief:初始化界面布局*/
@@ -22,7 +22,7 @@ private:
 
 private:
     ListViewWidget            *mp_ListView;          //<! 左边的list
-    DeviceDetailPage          *mp_DetailPage;        //<! 右边的详细内容
+    DeviceInfoPage            *mp_InfoPage;          //<! 右边的详细内容
     DSplitter                 *mp_Splitter;          //<! 左右两边分页器
 };
 

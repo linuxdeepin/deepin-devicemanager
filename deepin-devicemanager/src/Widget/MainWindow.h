@@ -7,7 +7,7 @@
 #include <DStackedWidget>
 
 class WaitingWidget;
-class DetailWidget;
+class DeviceWidget;
 class ThreadPool;
 
 using namespace Dtk::Widget;
@@ -87,7 +87,7 @@ private:
     /**@brief:主窗口的stackWidget，主要有两个widget，一个是等待界面，还有一个是信息显示界面*/
     DStackedWidget        *mp_MainStackWidget;
     WaitingWidget         *mp_WaitingWidget;
-    DetailWidget          *mp_DetailWidget;
+    DeviceWidget          *mp_DetailWidget;
 
     ThreadPool            *mp_ThreadPool;
 

@@ -31,7 +31,7 @@ class DeviceListView : public DListView
     Q_OBJECT
 public:
     DeviceListView(QWidget *parent = nullptr);
-    ~DeviceListView();
+    ~DeviceListView()override;
 
     /**
      * @brief:添加item
