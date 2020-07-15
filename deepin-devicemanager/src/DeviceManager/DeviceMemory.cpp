@@ -83,6 +83,28 @@ void DeviceMemory::initFilterKey()
     addFilterKey(QObject::tr("Logical Size"));  // 逻辑大小
 }
 
+void DeviceMemory::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Size"), m_Size);
+    addBaseDeviceInfo(tr("Type"), m_Type);
+    addBaseDeviceInfo(tr("Speed"), m_Speed);
+    addBaseDeviceInfo(tr("Total Width"), m_TotalBandwidth);
+    addBaseDeviceInfo(tr("Data Width"), m_DataBandwidth);
+    addBaseDeviceInfo(tr("Locator"), m_Locator);
+    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
+    addBaseDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
+    addBaseDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
+    addBaseDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
+    addBaseDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
+    m_SubTitle = m_Name;
+    m_OverviewStr = m_Name;
+//    if (!m_Vendor.isEmpty()) {
+//        m_OverviewStr += QString("(%1)").arg(m_Vendor);
+//    }
+}
+
 const QString &DeviceMemory::name()const
 {
     return m_Name;

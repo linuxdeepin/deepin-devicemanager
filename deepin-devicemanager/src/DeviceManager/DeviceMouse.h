@@ -98,6 +98,11 @@ protected:
      */
     void initFilterKey() override;
 
+    /**
+     * @brief loadBaseDeviceInfo:加载基本信息
+     */
+    void loadBaseDeviceInfo() override;
+
 private:
     QString     m_Name;                             //<! 名称    #制造商+型号#
     QString     m_Vendor;                           //<! 制造商

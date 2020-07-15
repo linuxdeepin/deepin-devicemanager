@@ -9,12 +9,15 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QProcess>
+#include <QDir>
+#include <DFileDialog>
 
 #include "WaitingWidget.h"
 #include "DeviceWidget.h"
 #include "MacroDefinition.h"
 #include "ThreadPool.h"
 #include "deviceinfoparser.h"
+#include "DeviceManager.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -76,9 +79,51 @@ void MainWindow::refresh()
 
 }
 
-void MainWindow::exportTo()
+bool MainWindow::exportTo()
 {
+    QString selectFilter;
 
+    static QString saveDir = []() {
+        QString dirStr = "./";
+        QDir dir(QDir::homePath() + "/Desktop/");
+        if (dir.exists()) {
+            dirStr = QDir::homePath() + "/Desktop/";
+        }
+        return dirStr;
+    }
+    ();
+
+    QString file = DFileDialog::getSaveFileName(
+                       this,
+                       "Export", saveDir + tr("Device Info", "export file's name") + \
+                       QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
+                       "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter);  //
+
+    if (file.isEmpty() == true) {
+        return true;
+    }
+
+    QFileInfo fileInfo(file);
+    //saveDir = fileInfo.absolutePath() + "/";
+
+    if (selectFilter == "Text (*.txt)") {
+        return DeviceManager::instance()->exportToTxt(file);
+
+    }
+
+    if (selectFilter == "Html (*.html)") {
+        return DeviceManager::instance()->exportToHtml(file);
+    }
+
+    if (selectFilter == "Doc (*.docx)") {
+        return DeviceManager::instance()->exportToDoc(file);
+    }
+
+    if (selectFilter == "Xls (*.xls)") {
+        return DeviceManager::instance()->exportToXlsx(file);
+    }
+
+    return false;
 }
 
 

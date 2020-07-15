@@ -37,6 +37,32 @@ void DeviceCpu::initFilterKey()
     addFilterKey(QObject::tr("CPU revision"));
 }
 
+void DeviceCpu::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("CPU ID"), m_PhysicalID);
+    addBaseDeviceInfo(tr("Core ID"), m_CoreID);
+    addBaseDeviceInfo(tr("Threads"), m_ThreadNum);
+    addBaseDeviceInfo(tr("Current Speed"), m_CurFrequency);
+    addBaseDeviceInfo(tr("BogoMIPS"), m_BogoMIPS);
+    addBaseDeviceInfo(tr("Architecture"), m_Architecture);
+    addBaseDeviceInfo(tr("CPU Family"), m_Familly);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Stepping"), m_Step);
+    addBaseDeviceInfo(tr("L1d Cache"), m_CacheL1Data);
+    addBaseDeviceInfo(tr("L1i Cache"), m_CacheL1Order);
+    addBaseDeviceInfo(tr("L2 Cache"), m_CacheL2);
+    addBaseDeviceInfo(tr("L3 Cache"), m_CacheL3);
+    addBaseDeviceInfo(tr("Extensions"), m_Extensions);
+    addBaseDeviceInfo(tr("Flags"), m_Flags);
+    addBaseDeviceInfo(tr("Virtualization"), m_HardwareVirtual);
+    m_SubTitle = tr("Processor") + " " + m_CoreID;
+    if (!m_Name.isEmpty()) {
+        m_OverviewStr = m_Name + QString("(%1%2 / %3%4)").arg(m_CPUCoreNum).arg(tr("Core(s)")).arg(m_LogicalCPUNum).arg(tr("Processor"));
+    }
+}
+
 void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo)
 {
     setInfoFromLscpu(mapLscpu);

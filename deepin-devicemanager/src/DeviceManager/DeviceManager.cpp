@@ -1,23 +1,28 @@
-#include"DeviceManager.h"
-#include"DeviceCpu.h"
-#include"DeviceGpu.h"
-#include"DeviceMouse.h"
-#include"DeviceStorage.h"
-#include"DeviceMemory.h"
-#include"DeviceMonitor.h"
-#include"DeviceBios.h"
-#include"DeviceBluetooth.h"
-#include"DeviceAudio.h"
-#include"DeviceNetwork.h"
-#include"DeviceImage.h"
-#include"DeviceKeyboard.h"
-#include"DeviceOthers.h"
-#include"DevicePower.h"
-#include"DevicePrint.h"
-#include"DeviceOtherPCI.h"
-#include"DeviceComputer.h"
-#include"DeviceCdrom.h"
-#include<QDebug>
+#include "DeviceManager.h"
+#include "DeviceCpu.h"
+#include "DeviceGpu.h"
+#include "DeviceMouse.h"
+#include "DeviceStorage.h"
+#include "DeviceMemory.h"
+#include "DeviceMonitor.h"
+#include "DeviceBios.h"
+#include "DeviceBluetooth.h"
+#include "DeviceAudio.h"
+#include "DeviceNetwork.h"
+#include "DeviceImage.h"
+#include "DeviceKeyboard.h"
+#include "DeviceOthers.h"
+#include "DevicePower.h"
+#include "DevicePrint.h"
+#include "DeviceOtherPCI.h"
+#include "DeviceComputer.h"
+#include "DeviceCdrom.h"
+
+#include <QDebug>
+#include <QFile>
+
+#include "document.h"
+#include "xlsxdocument.h"
 
 DeviceManager    *DeviceManager::sInstance = nullptr;
 
@@ -552,4 +557,69 @@ void DeviceManager::addCmdInfo(const QMap<QString, QList<QMap<QString, QString> 
 const QList<QMap<QString, QString>> &DeviceManager::cmdInfo(const QString &key)
 {
     return m_cmdInfo[key];
+}
+
+bool DeviceManager::exportToTxt(const QString &filePath)
+{
+    QFile txtFile(filePath);
+    if (false == txtFile.open(QIODevice::WriteOnly)) {
+        return false;
+    }
+
+    QTextStream out(&txtFile);
+
+//    out <<  "[" << overviewInfo_.name << "]\n-------------------------------------------------";
+
+//    if (tableWidget_) {
+//        out << "\n";
+//        out << tableWidget_;
+//    }
+
+//    if (titleInfo_) {
+//        out << "\n";
+//        out << *titleInfo_;
+//    }
+
+//    foreach (const DeviceBase &di, deviceInfos_) {
+//        out << "\n";
+//        out << di;
+//    }
+//    out << "\n";
+
+
+    txtFile.close();
+
+    return true;
+}
+
+bool DeviceManager::exportToXlsx(const QString &filePath)
+{
+    QXlsx::Document xlsx;
+
+
+    xlsx.saveAs(filePath);
+
+    return true;
+}
+
+bool DeviceManager::exportToDoc(const QString &filePath)
+{
+    Docx::Document doc(":/template.docx");
+
+
+    doc.save(filePath);
+
+    return true;
+}
+
+bool DeviceManager::exportToHtml(const QString &filePath)
+{
+    QFile htmlFile(filePath);
+    if (false == htmlFile.open(QIODevice::WriteOnly)) {
+        return false;
+    }
+
+    htmlFile.close();
+
+    return true;
 }

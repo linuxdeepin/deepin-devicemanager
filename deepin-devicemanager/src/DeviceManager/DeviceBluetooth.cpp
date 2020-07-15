@@ -168,6 +168,24 @@ void DeviceBluetooth::initFilterKey()
     addFilterKey(QObject::tr("Discovering"));
 }
 
+void DeviceBluetooth::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("MAC Address"), m_MAC);
+    addBaseDeviceInfo(tr("Logical Name"), m_LogicalName);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(tr("Driver"), m_Driver);
+    addBaseDeviceInfo(tr("Driver Version"), m_DriverVersion);
+    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addBaseDeviceInfo(tr("Speed"), m_Speed);
+    m_SubTitle = m_Name;
+    m_OverviewStr += m_Name;
+}
+
 void DeviceBluetooth::parseKeyToLshw(const QString &info)
 {
     //1-2:1.0

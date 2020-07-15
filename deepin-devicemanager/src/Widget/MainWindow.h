@@ -26,8 +26,9 @@ public:
 
     /**
      * @brief exportTo:导出设备信息
+     * @return true:导出成功，false:导出失败
      */
-    void exportTo();
+    bool exportTo();
 
     /**
      * @brief showDisplayShortcutsHelpDialog:显示快捷键帮主窗口
@@ -81,6 +82,11 @@ private:
     void keyPressEvent(QKeyEvent *e) override;
 
 private slots:
+
+    /**
+     * @brief loadingFinishSlot:加载设备信息结束 槽
+     * @param message:提示信息
+     */
     void loadingFinishSlot(const QString &message);
 
 private:

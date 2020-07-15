@@ -450,6 +450,33 @@ public:
      */
     const QList<QMap<QString, QString>> &cmdInfo(const QString &key);
 
+    /**
+     * @brief exportToTxt
+     * @param filePath
+     * @return
+     */
+    bool exportToTxt(const QString &filePath);
+
+    /**
+     * @brief exportToXlsx
+     * @param filePath
+     * @return
+     */
+    bool exportToXlsx(const QString &filePath);
+
+    /**
+     * @brief exportToDoc
+     * @param filePath
+     * @return
+     */
+    bool exportToDoc(const QString &filePath);
+
+    /**
+     * @brief exportToHtml
+     * @param filePath
+     * @return
+     */
+    bool exportToHtml(const QString &filePath);
 
 protected:
     DeviceManager();

@@ -174,6 +174,25 @@ void DeviceKeyboard::initFilterKey()
     addFilterKey(QObject::tr("physical id"));
 }
 
+void DeviceKeyboard::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Interface"), m_Interface);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(tr("Driver"), m_Driver);
+    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addBaseDeviceInfo(tr("Speed"), m_Speed);
+    m_SubTitle = m_Name;
+    m_OverviewStr = m_Name;
+    if (!m_Model.isEmpty()) {
+        m_OverviewStr += QString("(%1)").arg(m_Model);
+    }
+}
+
 void DeviceKeyboard::getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &mapInfo, const QString &info)
 {
     QMap<QString, QString> mapTemp;

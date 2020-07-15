@@ -208,3 +208,21 @@ void DeviceAudio::initFilterKey()
     addFilterKey(QObject::tr("Version"));
     addFilterKey(QObject::tr("Bus"));
 }
+
+void DeviceAudio::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("IRQ"), m_Irq);
+    addBaseDeviceInfo(tr("Memory"), m_Memory);
+    addBaseDeviceInfo(tr("Width"), m_Width);
+    addBaseDeviceInfo(tr("Clock"), m_Clock);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    //addBaseDeviceInfo(tr("Name"), m_Description);
+    addBaseDeviceInfo(tr("Chip"), m_Chip);
+    m_SubTitle = m_Name;
+    m_OverviewStr = m_Name;
+}

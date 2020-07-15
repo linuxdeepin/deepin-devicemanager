@@ -113,3 +113,20 @@ void DevicePrint::initFilterKey()
     addFilterKey(QObject::tr("printer-uri-supported"));
     addFilterKey(QObject::tr("sides"));
 }
+
+void DevicePrint::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
+    addBaseDeviceInfo(tr("Interface Type"), m_InterfaceType);
+    addBaseDeviceInfo(tr("Status"), m_Status);
+    addBaseDeviceInfo(tr("URI"), m_URI);
+    addBaseDeviceInfo(tr("Shared"), m_Shared);
+    m_SubTitle = m_Name;
+    m_OverviewStr = m_Name;
+    if (!m_Model.isEmpty()) {
+        m_OverviewStr += QString("(%1)").arg(m_Model);
+    }
+}

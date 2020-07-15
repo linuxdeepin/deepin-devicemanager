@@ -204,3 +204,37 @@ void DeviceNetwork::initFilterKey()
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("network"));
 }
+
+void DeviceNetwork::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Type"), m_Model);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(tr("Driver"), m_Driver);
+    addBaseDeviceInfo(tr("Driver Version"), m_DriverVersion);
+    addBaseDeviceInfo(tr("Logical Name"), m_LogicalName);
+    addBaseDeviceInfo(tr("MAC Address"), m_MACAddress);
+    addBaseDeviceInfo(tr("IRQ"), m_Irq);
+    addBaseDeviceInfo(tr("Memory"), m_Memory);
+    addBaseDeviceInfo(tr("Width"), m_Width);
+    addBaseDeviceInfo(tr("Clock"), m_Clock);
+    addBaseDeviceInfo(tr("Auto Negotiation"), m_Autonegotiation);
+    addBaseDeviceInfo(tr("Broadcast"), m_Broadcast);
+    addBaseDeviceInfo(tr("Duplex"), m_Duplex);
+    addBaseDeviceInfo(tr("Firmware"), m_Firmware);
+    addBaseDeviceInfo(tr("IP"), m_Ip);
+    addBaseDeviceInfo(tr("Latency"), m_Latency);
+    addBaseDeviceInfo(tr("Link"), m_Link);
+    addBaseDeviceInfo(tr("Multicast"), m_Multicast);
+    addBaseDeviceInfo(tr("Port"), m_Port);
+    addBaseDeviceInfo(tr("Speed"), m_Speed);
+    addBaseDeviceInfo(tr("Capacity"), m_Capacity);
+    m_SubTitle = m_Name;
+    m_OverviewStr = m_Name;
+    if (!m_Model.isEmpty()) {
+        m_OverviewStr += QString("(%1)").arg(m_Model);
+    }
+}

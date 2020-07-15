@@ -98,7 +98,12 @@ protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
      */
-    void initFilterKey();
+    void initFilterKey() override;
+
+    /**
+     * @brief loadBaseDeviceInfo:加载基本信息
+     */
+    void loadBaseDeviceInfo() override;
 
 private:
     QString             m_Name;                         //<! 【名称】

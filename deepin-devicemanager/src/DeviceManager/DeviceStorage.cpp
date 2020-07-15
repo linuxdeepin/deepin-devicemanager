@@ -337,6 +337,29 @@ void DeviceStorage::initFilterKey()
     addFilterKey(QObject::tr("SubVendor"));
 }
 
+void DeviceStorage::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Media Type"), m_MediaType);
+    addBaseDeviceInfo(tr("Size"), m_Size);
+    addBaseDeviceInfo(tr("Rotation Rate"), m_RotationRate);
+    addBaseDeviceInfo(tr("Interface"), m_Interface);
+    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(tr("Description"), m_Description);
+    addBaseDeviceInfo(tr("Speed"), m_Speed);
+    addBaseDeviceInfo(tr("Firmware Version"), m_FirmwareVersion);
+    addBaseDeviceInfo(tr("Power On Hours"), m_PowerOnHours);
+    addBaseDeviceInfo(tr("Power Cycle Count"), m_PowerCycleCount);
+    m_SubTitle = m_Model;
+    m_OverviewStr = m_Model;
+    if (!m_Vendor.isEmpty()) {
+        m_OverviewStr += QString("(%1)").arg(m_Vendor);
+    }
+}
+
 void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "capabilities", m_Capabilities);

@@ -30,4 +30,22 @@
         p = nullptr; \
     } \
 
+#define GET_BASE_INFO(out, pDevice) \
+    foreach (auto item, pDevice->getBaseAttribs()) {\
+        out << "\n";\
+        out << "";\
+    }\
+
+
+#define GET_OTHER_INFO(pDevice, name, value) \
+    \
+
+
+#define EXPORT_TO_TXT(out, deviceLst, type) \
+    out <<  "[" << type << "]\n-------------------------------------------------"; \
+    foreach (auto device, deviceLst) {\
+        out << "\n";\
+        out << device->subTitle();\
+        \
+    }\
 

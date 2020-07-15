@@ -114,3 +114,23 @@ void DeviceCdrom::initFilterKey()
 //    addFilterKey(QObject::tr("bus info"));
     addFilterKey(QObject::tr("ansiversion"));
 }
+
+void DeviceCdrom::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Model"), m_Type);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(tr("Driver"), m_Driver);
+    addBaseDeviceInfo(tr("Maximum Power"), m_MaxPower);
+    addBaseDeviceInfo(tr("Speed"), m_Speed);
+    m_SubTitle = m_Name;
+    if (!m_Name.isEmpty()) {
+        m_OverviewStr += m_Name;
+        if (!m_Type.isEmpty()) {
+            m_OverviewStr += QString("(%1)").arg(m_Type);
+        }
+    }
+}

@@ -9,6 +9,8 @@
 #include <QMap>
 #include <QSet>
 #include <QObject>
+#include <QList>
+#include <QPair>
 
 class DeviceBaseInfo : public QObject
 {
@@ -24,12 +26,34 @@ public:
      */
     const QMap<QString, QString> &getOtherAttribs()const;
 
+    /**
+     * @brief getBaseAttribs::获取基本设备信息
+     * @return 基本信息组成的list
+     */
+    const QList<QPair<QString, QString>> &getBaseAttribs();
+
+    /**
+     * @brief overviewStr:获取概况
+     * @return 概况
+     */
+    const QString &overviewStr()const;
+
+    /**
+     * @brief subTitle:获取子标题
+     * @return 子标题
+     */
+    const QString &subTitle()const;
+
 protected:
     /**
      * @brief:初始化过滤信息
     */
     virtual void initFilterKey() = 0;
 
+    /**
+     * @brief loadBaseDeviceInfo:加载基本信息
+     */
+    virtual void loadBaseDeviceInfo() = 0;
     /**
      * @brief addFilterKey:添加过滤信息
      * @param key:过滤信息的字符串
@@ -42,6 +66,13 @@ protected:
      */
     void loadOtherDeviceInfo(const QMap<QString, QString> &mapInfo);
 
+    /**
+     * @brief addBaseDeviceInfo:添加基本信息
+     * @param key:属性名称
+     * @param value:属性值
+     */
+    void addBaseDeviceInfo(const QString &key, const QString &value);
+
     /**@brief:将属性设置到成员变量*/
     /**
      * @brief setAttribute:将属性设置到成员变量
@@ -53,7 +84,11 @@ protected:
     void setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite = true);
 
 protected:
+    QList<QPair<QString, QString>> m_LstBaseInfo;//<! 基本信息
     QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息
     QSet<QString>          m_FilterKey;             //<! 用于避免添加重复信息
+
+    QString                m_SubTitle;
+    QString                m_OverviewStr;
 };
 #endif // DEVICEINFO_H

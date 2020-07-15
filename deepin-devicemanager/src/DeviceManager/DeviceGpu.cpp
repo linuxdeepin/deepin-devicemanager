@@ -47,6 +47,34 @@ void DeviceGpu::initFilterKey()
     addFilterKey(QObject::tr("GLSL version"));
 }
 
+void DeviceGpu::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Graphics Memory"), m_GraphicsMemory);
+    addBaseDeviceInfo(tr("Width"), m_Width);
+    addBaseDeviceInfo(tr("IRQ"), m_IRQ);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(tr("Display Output"), m_DisplayOutput);
+    addBaseDeviceInfo(tr("VGA"), m_VGA);
+    addBaseDeviceInfo(tr("HDMI"), m_HDMI);
+    addBaseDeviceInfo(tr("eDP"), m_eDP);
+    addBaseDeviceInfo(tr("DP"), m_DisplayPort);
+    addBaseDeviceInfo(tr("Clock"), m_Clock);
+    addBaseDeviceInfo(tr("Description"), m_Description);
+    addBaseDeviceInfo(tr("Driver"), m_Driver);
+    addBaseDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
+    addBaseDeviceInfo(tr("Minimum Resolution"), m_MinimumResolution);
+    addBaseDeviceInfo(tr("Maximum Resolution"), m_MaximumResolution);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("IO Port"), m_IOPort);
+    addBaseDeviceInfo(tr("Memory"), m_MemAddress);
+    addBaseDeviceInfo(tr("Physical ID"), m_PhysID);
+    m_SubTitle = m_Name;
+}
+
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
 {
     // 判断是否是同一个gpu

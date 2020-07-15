@@ -113,3 +113,24 @@ void DeviceOthers::initFilterKey()
 {
 
 }
+
+void DeviceOthers::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(tr("Driver"), m_Driver);
+    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addBaseDeviceInfo(tr("Speed"), m_Speed);
+//    addBaseDeviceInfo(tr("Unique ID"), m_UniqID);
+//    addBaseDeviceInfo(tr("SysFS BusID"), m_BusID);
+//    addBaseDeviceInfo(tr("logical name"), m_LogicalName);
+    m_SubTitle = m_Name;
+    m_OverviewStr = m_Name;
+    if (!m_Model.isEmpty()) {
+        m_OverviewStr += QString("(%1)").arg(m_Model);
+    }
+}

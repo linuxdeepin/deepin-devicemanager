@@ -105,6 +105,11 @@ protected:
      */
     void initFilterKey() override;
 
+    /**
+     * @brief loadBaseDeviceInfo:加载基本信息
+     */
+    void loadBaseDeviceInfo() override;
+
 private:
     QString            m_HomeUrl;
     QString            m_OsDescription;

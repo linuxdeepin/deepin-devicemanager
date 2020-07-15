@@ -240,6 +240,31 @@ void DeviceMonitor::initFilterKey()
     addFilterKey(QObject::tr("Date"));
 }
 
+void DeviceMonitor::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Product Date"), m_ProductionWeek);
+    addBaseDeviceInfo(tr("Type"), m_Model);
+    addBaseDeviceInfo(tr("Display Input"), m_DisplayInput);
+    addBaseDeviceInfo(tr("Interface Type"), m_Interface);
+    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
+    addBaseDeviceInfo(tr("Size"), m_ScreenSize);
+    addBaseDeviceInfo(tr("Display Ratio"), m_AspectRatio);
+    addBaseDeviceInfo(tr("Primary Monitor"), m_MainScreen);
+    addBaseDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
+    addBaseDeviceInfo(tr("Support Resolution"), m_SupportResolution);
+    m_SubTitle = m_Name;
+    m_OverviewStr = m_Name;
+    if (!m_Model.isEmpty() && m_Model != m_Name) {
+        m_OverviewStr += QString("(%1)").arg(m_Model);
+    }
+
+//    addBaseDeviceInfo(tr(""), m_VGA);
+//    addBaseDeviceInfo(tr(""), m_HDMI);
+//    addBaseDeviceInfo(tr(""), m_DVI);
+}
+
 bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
 {
     // 设置用的是哪个接口

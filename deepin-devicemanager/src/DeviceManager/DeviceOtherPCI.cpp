@@ -94,3 +94,26 @@ void DeviceOtherPCI::initFilterKey()
 {
 
 }
+
+void DeviceOtherPCI::loadBaseDeviceInfo()
+{
+    //    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("Capabilities"), m_Version);
+    addBaseDeviceInfo(tr("Driver"), m_Driver);
+    addBaseDeviceInfo(tr("Width"), m_Width);
+    addBaseDeviceInfo(tr("Clock"), m_Clock);
+    addBaseDeviceInfo(tr("Latency"), m_Latency);
+    addBaseDeviceInfo(tr("IRQ"), m_Irq);
+    addBaseDeviceInfo(tr("Memory"), m_Memory);
+    addBaseDeviceInfo(tr("Input/Output"), m_InputOutput);
+    //    addBaseDeviceInfo(tr(""), m_Description);
+    m_SubTitle = m_Name;
+    m_OverviewStr = m_Name;
+    if (!m_Model.isEmpty()) {
+        m_OverviewStr += QString("(%1)").arg(m_Model);
+    }
+}

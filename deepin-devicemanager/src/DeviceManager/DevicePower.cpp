@@ -183,3 +183,31 @@ void DevicePower::initFilterKey()
     addFilterKey(QObject::tr("lid-is-present"));
     addFilterKey(QObject::tr("critical-action"));
 }
+
+void DevicePower::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
+    addBaseDeviceInfo(tr("Type"), m_Type);
+    addBaseDeviceInfo(tr("Status"), m_Status);
+    addBaseDeviceInfo(tr("Capacity"), m_Capacity);
+    addBaseDeviceInfo(tr("Voltage"), m_Voltage);
+    addBaseDeviceInfo(tr("Slot"), m_Slot);
+    addBaseDeviceInfo(tr("Design Capacity"), m_DesignCapacity);
+    addBaseDeviceInfo(tr("Design Voltage"), m_DesignVoltage);
+    addBaseDeviceInfo(tr("SBDS Version"), m_SBDSVersion);
+    addBaseDeviceInfo(tr("SBDS Serial Number"), m_SBDSSerialNumber);
+    addBaseDeviceInfo(tr("SBDS Manufacture Date"), m_SBDSManufactureDate);
+    addBaseDeviceInfo(tr("SBDS Chemistry"), m_SBDSChemistry);
+//    addBaseDeviceInfo(tr(""), m_ElectricType);
+//    addBaseDeviceInfo(tr(""), m_MaxPower);
+//    addBaseDeviceInfo(tr(""), m_Enabled);
+//    addBaseDeviceInfo(tr(""), m_HotSwitch);
+    m_SubTitle = m_Name;
+    m_OverviewStr = m_Name;
+    if (!m_Model.isEmpty()) {
+        m_OverviewStr += QString("(%1)").arg(m_Model);
+    }
+}

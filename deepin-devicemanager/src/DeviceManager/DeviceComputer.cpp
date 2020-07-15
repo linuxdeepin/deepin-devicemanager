@@ -128,3 +128,8 @@ void DeviceComputer::initFilterKey()
 {
 
 }
+
+void DeviceComputer::loadBaseDeviceInfo()
+{
+    addBaseDeviceInfo(tr("Name"), m_Name);
+}
