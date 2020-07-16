@@ -16,6 +16,7 @@
 
 #include "document.h"
 #include "xlsxdocument.h"
+#include "table.h"
 
 class DeviceBaseInfo : public QObject
 {
@@ -129,8 +130,8 @@ public:
     void tableInfoToHtml(QFile &html);
     void tableHeaderToHtml(QFile &html);
 
-    void tableInfoToHtml(QFile &html);
-    void tableHeaderToHtml(QFile &html);
+    void tableInfoToDoc(Docx::Table *tab, int &row);
+    void tableHeaderToDoc(Docx::Table *tab);
 protected:
     /**
      * @brief:初始化过滤信息

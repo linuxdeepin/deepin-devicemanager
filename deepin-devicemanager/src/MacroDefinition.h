@@ -127,6 +127,15 @@
         doc.addParagraph(msg);                                                      \
     }                                                                               \
     \
+    /**添加表格信息**/\
+    if (deviceLst.size() > 1) {\
+        Docx::Table *tab = doc.addTable(1,0);\
+        deviceLst[0]->tableHeaderToDoc(tab);\
+        for (int row = 1; row <= deviceLst.size(); ++row) {\
+            tab->addRow();\
+            deviceLst[0]->tableInfoToDoc(tab, row);\
+        }\
+    }\
     /**添加每个设备的信息**/                                                           \
     foreach (auto device, deviceLst) {                                              \
         \
@@ -164,7 +173,7 @@
         htmlFile.write((QString("<h2>") + msg + "</h2>").toUtf8());                 \
     }                                                                               \
     \
-    /****/\
+    /**添加表格信息**/\
     if(deviceLst.size() > 1) {\
         html.write("<table border=\"0\" white-space:pre>\n");\
         deviceLst[0]->tableHeaderToHtml(html);\

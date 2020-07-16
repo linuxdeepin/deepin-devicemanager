@@ -305,21 +305,37 @@ void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
     html.write("</tr></thead>\n");
 }
 
-void DeviceBaseInfo::tableInfoToDoc(Docx::Document &doc)
+void DeviceBaseInfo::tableInfoToDoc(Docx::Table *tab, int &row)
 {
+    if (tab == nullptr) {
+        return;
+    }
+
     getTableData();
 
     if (m_TableData.size() < 1) {
         return;
     }
+
+    for (int col = 0; col < m_TableData.size(); ++col) {
+        auto cel = tab->cell(row, col);
+        cel->addText(m_TableData[col]);
+    }
 }
 
-void DeviceBaseInfo::tableHeaderToDoc(Docx::Document &doc)
+void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
 {
     getTableHeader();
 
     if (m_TableHeader.size() < 1) {
         return;
+    }
+
+    for (int col = 0; col < m_TableHeader.size(); ++col)  {
+        tab->addColumn();
+        auto cel = tab->cell(0, col);
+        cel->addText(m_TableHeader[col]);
+
     }
 }
 
