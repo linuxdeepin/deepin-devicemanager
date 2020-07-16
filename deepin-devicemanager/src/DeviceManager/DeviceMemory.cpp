@@ -106,9 +106,22 @@ void DeviceMemory::loadOtherDeviceInfo()
 
 }
 
+void DeviceMemory::loadTableHeader()
+{
+    m_TableHeader.append(tr("Name"));
+    m_TableHeader.append(tr("Vendor"));
+    m_TableHeader.append(tr("Type"));
+    m_TableHeader.append(tr("Speed"));
+    m_TableHeader.append(tr("Size"));
+}
+
 void DeviceMemory::loadTableData()
 {
-
+    m_TableData.append(m_Name);
+    m_TableData.append(m_Vendor);
+    m_TableData.append(m_Type);
+    m_TableData.append(m_Speed);
+    m_TableData.append(m_Size);
 }
 
 const QString &DeviceMemory::name()const

@@ -192,6 +192,11 @@ void DeviceBios::loadOtherDeviceInfo()
 
 }
 
+void DeviceBios::loadTableHeader()
+{
+    m_TableHeader.clear();
+}
+
 void DeviceBios::loadTableData()
 {
 

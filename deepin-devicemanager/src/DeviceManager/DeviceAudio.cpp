@@ -230,7 +230,14 @@ void DeviceAudio::loadOtherDeviceInfo()
 
 }
 
+void DeviceAudio::loadTableHeader()
+{
+    m_TableHeader.append(tr("Name"));
+    m_TableHeader.append(tr("Vendor"));
+}
+
 void DeviceAudio::loadTableData()
 {
-
+    m_TableData.append(m_Name);
+    m_TableData.append(m_Vendor);
 }

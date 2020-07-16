@@ -46,13 +46,22 @@
         out << msg;                                                                 \
     }                                                                               \
     \
+    /**添加Table信息**/                                                              \
+    if (deviceLst.size() > 1) {                                                     \
+        deviceLst[0]->tableHeaderToTxt(out);                                        \
+        foreach (auto device, deviceLst) {                                          \
+            device->tableInfoToTxt(out);                                            \
+        }                                                                           \
+    }                                                                               \
+    \
     /**添加每个设备的信息**/\
     foreach (auto device, deviceLst) {                                              \
         out << "\n";                                                                \
         \
+        device->getBaseAttribs();                                                   \
+        device->getOtherAttribs();                                                  \
         /**设备数目大于1，添加子标题**/                                                 \
         if (deviceLst.size() > 1) {                                                 \
-            device->getBaseAttribs();                                               \
             out << device->subTitle();                                              \
             out << "\n";                                                            \
         }                                                                           \
@@ -85,6 +94,7 @@
     /**添加每个设备的信息**/                                                           \
     foreach (auto device, deviceLst) {                                              \
         device->getBaseAttribs();                                                   \
+        device->getOtherAttribs();                                                  \
         \
         /**设备数目大于1，添加子标题**/                                                 \
         if (deviceLst.size() > 1) {                                                 \
@@ -120,9 +130,10 @@
     /**添加每个设备的信息**/                                                           \
     foreach (auto device, deviceLst) {                                              \
         \
+        device->getBaseAttribs();                                                   \
+        device->getOtherAttribs();                                                  \
         /**设备数目大于1，添加子标题**/                                                 \
         if (deviceLst.size() > 1) {                                                 \
-            device->getBaseAttribs();                                               \
             doc.addParagraph(device->subTitle());                                   \
         }                                                                           \
         \
@@ -153,13 +164,24 @@
         htmlFile.write((QString("<h2>") + msg + "</h2>").toUtf8());                 \
     }                                                                               \
     \
+    /****/\
+    if(deviceLst.size() > 1) {\
+        html.write("<table border=\"0\" white-space:pre>\n");\
+        deviceLst[0]->tableHeaderToHtml(html);\
+        foreach(auto device, deviceLst) {\
+            device->tableInfoToHtml(html);\
+        }\
+        html.write("</table>\n");\
+    }\
+    \
     /**添加每个设备的信息**/                                                           \
     foreach (auto device, deviceLst) {                                              \
         QDomDocument doc;                                                           \
         \
+        device->getBaseAttribs();                                                   \
+        device->getOtherAttribs();                                                  \
         /**设备数目大于1，添加子标题**/                                                 \
-        if (deviceLst.size()) {                                                     \
-            device->getBaseAttribs();                                               \
+        if (deviceLst.size() > 1) {                                                     \
             device->subTitleToHTML(doc);                                            \
         }                                                                           \
         \

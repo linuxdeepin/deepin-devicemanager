@@ -219,5 +219,7 @@ void DeviceKeyboard::loadOtherDeviceInfo()
 
 void DeviceKeyboard::loadTableData()
 {
-
+    m_TableData.append(m_Name);
+    m_TableData.append(m_Vendor);
+    m_TableData.append(m_Model);
 }

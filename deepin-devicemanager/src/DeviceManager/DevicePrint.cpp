@@ -134,5 +134,7 @@ void DevicePrint::loadOtherDeviceInfo()
 
 void DevicePrint::loadTableData()
 {
-
+    m_TableData.append(m_Name);
+    m_TableData.append(m_Vendor);
+    m_TableData.append(m_Model);
 }

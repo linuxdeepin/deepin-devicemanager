@@ -361,9 +361,20 @@ void DeviceStorage::loadOtherDeviceInfo()
 
 }
 
+void DeviceStorage::loadTableHeader()
+{
+    m_TableHeader.append(tr("Model"));
+    m_TableHeader.append(tr("Vendor"));
+    m_TableHeader.append(tr("Media Type"));
+    m_TableHeader.append(tr("Size"));
+}
+
 void DeviceStorage::loadTableData()
 {
-
+    m_TableData.append(m_Model);
+    m_TableData.append(m_Vendor);
+    m_TableData.append(m_MediaType);
+    m_TableData.append(m_Size);
 }
 
 void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)

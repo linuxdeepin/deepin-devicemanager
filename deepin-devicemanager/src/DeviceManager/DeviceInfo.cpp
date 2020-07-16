@@ -236,6 +236,93 @@ void DeviceBaseInfo::baseInfoToTxt(QTextStream &out, QList<QPair<QString, QStrin
     }
 }
 
+void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
+{
+    getTableData();
+    if (m_TableData.size() < 1) {
+        return;
+    }
+    QString text = m_TableData[0];
+    out.setFieldWidth(int(text.size() * 1.5));
+    out.setFieldAlignment(QTextStream::FieldAlignment::AlignRight);
+
+    foreach (auto item, m_TableData) {
+        out.setFieldWidth(28);
+        out << item;
+
+    }
+    out.setFieldWidth(0);
+    out << "\n";
+}
+
+void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
+{
+    getTableHeader();
+    if (m_TableHeader.size() < 1) {
+        return;
+    }
+    QString text = m_TableHeader[0];
+    out.setFieldWidth(int(text.size() * 1.5));
+    out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
+
+    out << "\n";
+    foreach (auto item, m_TableHeader) {
+        out.setFieldWidth(30);
+        out << item;
+    }
+    out.setFieldWidth(0);
+    out << "\n";
+}
+
+void DeviceBaseInfo::tableInfoToHtml(QFile &html)
+{
+    getTableData();
+
+    if (m_TableData.size() < 1) {
+        return;
+    }
+
+    foreach (auto item, m_TableData) {
+        html.write(QString("<td style=\"width:200px;text-align:left;\">" + item + "</td>").toUtf8().data());
+    }
+    html.write("</tr>\n");
+}
+
+void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
+{
+    getTableHeader();
+
+    if (m_TableHeader.size() < 1) {
+        return;
+    }
+
+    html.write("<thead><tr>\n");
+
+    foreach (auto item, m_TableHeader) {
+        html.write(QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + item + "</th>").toUtf8().data());
+    }
+
+    html.write("</tr></thead>\n");
+}
+
+void DeviceBaseInfo::tableInfoToDoc(Docx::Document &doc)
+{
+    getTableData();
+
+    if (m_TableData.size() < 1) {
+        return;
+    }
+}
+
+void DeviceBaseInfo::tableHeaderToDoc(Docx::Document &doc)
+{
+    getTableHeader();
+
+    if (m_TableHeader.size() < 1) {
+        return;
+    }
+}
+
 void DeviceBaseInfo::loadTableHeader()
 {
     m_TableHeader.append(tr("Name"));
@@ -245,7 +332,6 @@ void DeviceBaseInfo::loadTableHeader()
 
 void DeviceBaseInfo::addFilterKey(const QString &key)
 {
-
     m_FilterKey.insert(key);
 }
 

@@ -124,6 +124,11 @@ protected:
     void loadOtherDeviceInfo() override;
 
     /**
+     * @brief loadTableHeader : 过去表格的表头数据
+     */
+    void loadTableHeader() override;
+
+    /**
      * @brief loadTableData:加载表头信息
      */
     void loadTableData() override;

@@ -123,6 +123,14 @@ public:
      */
     void baseInfoToTxt(QTextStream &out, QList<QPair<QString, QString>> &infoLst);
 
+    void tableInfoToTxt(QTextStream &out);
+    void tableHeaderToTxt(QTextStream &out);
+
+    void tableInfoToHtml(QFile &html);
+    void tableHeaderToHtml(QFile &html);
+
+    void tableInfoToHtml(QFile &html);
+    void tableHeaderToHtml(QFile &html);
 protected:
     /**
      * @brief:初始化过滤信息
