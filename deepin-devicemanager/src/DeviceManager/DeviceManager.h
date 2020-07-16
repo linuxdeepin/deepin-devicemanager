@@ -1,10 +1,11 @@
 #ifndef DEVICEMANAGER_H
 #define DEVICEMANAGER_H
-#include<QList>
-#include<QMap>
-#include<QMutex>
-#include<QDomDocument>
-#include<QObject>
+#include <QList>
+#include <QMap>
+#include <QMutex>
+#include <QDomDocument>
+#include <QObject>
+#include <QFile>
 
 class DeviceMouse;
 class DeviceCpu;
@@ -460,38 +461,38 @@ public:
     const QList<QMap<QString, QString>> &cmdInfo(const QString &key);
 
     /**
-     * @brief exportToTxt
-     * @param filePath
-     * @return
+     * @brief exportToTxt:导出到txt
+     * @param filePath:文件路径
+     * @return true:导出成功，false:导出失败
      */
     bool exportToTxt(const QString &filePath);
 
     /**
-     * @brief exportToXlsx
-     * @param filePath
-     * @return
+     * @brief exportToXlsx:导出到xlsx
+     * @param filePath:文件路径
+     * @return true:导出成功，false:导出失败
      */
     bool exportToXlsx(const QString &filePath);
 
     /**
-     * @brief exportToDoc
-     * @param filePath
-     * @return
+     * @brief exportToDoc:导出到doc
+     * @param filePath:文件路径
+     * @return true:导出成功，false:导出失败
      */
     bool exportToDoc(const QString &filePath);
 
     /**
-     * @brief exportToHtml
-     * @param filePath
-     * @return
+     * @brief exportToHtml:导出到html
+     * @param filePath:文件路径
+     * @return true:导出成功，false:导出失败
      */
     bool exportToHtml(const QString &filePath);
 
     /**
      * @brief currentXlsRow:获取xlsx当前行
-     * @return
+     * @return xlsx当前行
      */
-    int currentXlsRow();
+    static int currentXlsRow();
 
 protected:
     DeviceManager();

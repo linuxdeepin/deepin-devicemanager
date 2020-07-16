@@ -677,8 +677,26 @@ bool DeviceManager::exportToTxt(const QString &filePath)
 bool DeviceManager::exportToXlsx(const QString &filePath)
 {
     QXlsx::Document xlsx;
+    QXlsx::Format boldFont;
 
-//    EXPORT_TO_XLSX(xlsx, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceBios, QObject::tr("Motherboard"), QObject::tr("No motherboard found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceMemory, QObject::tr("Memory"), QObject::tr("No memory found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceStorage, QObject::tr("Storage"), QObject::tr("No disk found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceGPU, QObject::tr("Display Adapter"), QObject::tr("No GPU found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceMonitor, QObject::tr("Monitor"), QObject::tr("No monitor found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceNetwork, QObject::tr("Network Adapter"), QObject::tr("No network adapter found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceAudio, QObject::tr("Sound Adapter"), QObject::tr("No audio device found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceOtherPCI, QObject::tr("Other PCI Devices"), QObject::tr("No other PCI devices found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDevicePower, QObject::tr("Power"), QObject::tr("No battery found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceKeyboard, QObject::tr("Keyboard"), QObject::tr("No keyboard found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceMouse, QObject::tr("Mouse"), QObject::tr("No mouse found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDevicePrint, QObject::tr("Printer"), QObject::tr("No printer found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceImage, QObject::tr("Camera"), QObject::tr("No camera found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceCdrom, QObject::tr("CD-ROM"), QObject::tr("No CD-ROM found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceOthers, QObject::tr("Other Devices"), QObject::tr("No other devices found"));
+    m_CurrentXlsRow = 1;
     xlsx.saveAs(filePath);
 
     return true;
@@ -688,6 +706,23 @@ bool DeviceManager::exportToDoc(const QString &filePath)
 {
     Docx::Document doc(":/template.docx");
 
+    EXPORT_TO_DOC(doc, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceBios, QObject::tr("Motherboard"), QObject::tr("No motherboard found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceMemory, QObject::tr("Memory"), QObject::tr("No memory found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceStorage, QObject::tr("Storage"), QObject::tr("No disk found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceGPU, QObject::tr("Display Adapter"), QObject::tr("No GPU found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceMonitor, QObject::tr("Monitor"), QObject::tr("No monitor found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceNetwork, QObject::tr("Network Adapter"), QObject::tr("No network adapter found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceAudio, QObject::tr("Sound Adapter"), QObject::tr("No audio device found"));
+    EXPORT_TO_DOC(doc, m_ListBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceOtherPCI, QObject::tr("Other PCI Devices"), QObject::tr("No other PCI devices found"));
+    EXPORT_TO_DOC(doc, m_ListDevicePower, QObject::tr("Power"), QObject::tr("No battery found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceKeyboard, QObject::tr("Keyboard"), QObject::tr("No keyboard found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceMouse, QObject::tr("Mouse"), QObject::tr("No mouse found"));
+    EXPORT_TO_DOC(doc, m_ListDevicePrint, QObject::tr("Printer"), QObject::tr("No printer found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceImage, QObject::tr("Camera"), QObject::tr("No camera found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceCdrom, QObject::tr("CD-ROM"), QObject::tr("No CD-ROM found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceOthers, QObject::tr("Other Devices"), QObject::tr("No other devices found"));
 
     doc.save(filePath);
 
@@ -696,12 +731,30 @@ bool DeviceManager::exportToDoc(const QString &filePath)
 
 bool DeviceManager::exportToHtml(const QString &filePath)
 {
-    QFile htmlFile(filePath);
-    if (false == htmlFile.open(QIODevice::WriteOnly)) {
+    QFile html(filePath);
+    if (false == html.open(QIODevice::WriteOnly)) {
         return false;
     }
 
-    htmlFile.close();
+    EXPORT_TO_HTML(html, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
+    EXPORT_TO_HTML(html, m_ListDeviceBios, QObject::tr("Motherboard"), QObject::tr("No motherboard found"));
+    EXPORT_TO_HTML(html, m_ListDeviceMemory, QObject::tr("Memory"), QObject::tr("No memory found"));
+    EXPORT_TO_HTML(html, m_ListDeviceStorage, QObject::tr("Storage"), QObject::tr("No disk found"));
+    EXPORT_TO_HTML(html, m_ListDeviceGPU, QObject::tr("Display Adapter"), QObject::tr("No GPU found"));
+    EXPORT_TO_HTML(html, m_ListDeviceMonitor, QObject::tr("Monitor"), QObject::tr("No monitor found"));
+    EXPORT_TO_HTML(html, m_ListDeviceNetwork, QObject::tr("Network Adapter"), QObject::tr("No network adapter found"));
+    EXPORT_TO_HTML(html, m_ListDeviceAudio, QObject::tr("Sound Adapter"), QObject::tr("No audio device found"));
+    EXPORT_TO_HTML(html, m_ListBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
+    EXPORT_TO_HTML(html, m_ListDeviceOtherPCI, QObject::tr("Other PCI Devices"), QObject::tr("No other PCI devices found"));
+    EXPORT_TO_HTML(html, m_ListDevicePower, QObject::tr("Power"), QObject::tr("No battery found"));
+    EXPORT_TO_HTML(html, m_ListDeviceKeyboard, QObject::tr("Keyboard"), QObject::tr("No keyboard found"));
+    EXPORT_TO_HTML(html, m_ListDeviceMouse, QObject::tr("Mouse"), QObject::tr("No mouse found"));
+    EXPORT_TO_HTML(html, m_ListDevicePrint, QObject::tr("Printer"), QObject::tr("No printer found"));
+    EXPORT_TO_HTML(html, m_ListDeviceImage, QObject::tr("Camera"), QObject::tr("No camera found"));
+    EXPORT_TO_HTML(html, m_ListDeviceCdrom, QObject::tr("CD-ROM"), QObject::tr("No CD-ROM found"));
+    EXPORT_TO_HTML(html, m_ListDeviceOthers, QObject::tr("Other Devices"), QObject::tr("No other devices found"));
+
+    html.close();
 
     return true;
 }

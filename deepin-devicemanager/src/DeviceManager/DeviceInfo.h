@@ -11,6 +11,11 @@
 #include <QObject>
 #include <QList>
 #include <QPair>
+#include <QDomDocument>
+#include <QFile>
+
+#include "document.h"
+#include "xlsxdocument.h"
 
 class DeviceBaseInfo : public QObject
 {
@@ -51,6 +56,66 @@ public:
      * @return true:属性值有效
      */
     bool isValueValid(QString &value);
+
+    /**
+     * @brief toHtmlString:导出信息为html格式
+     * @param doc xml格式文本
+     */
+    void toHtmlString(QDomDocument &doc);
+
+    /**
+     * @brief baseInfoToHTML:基本信息导出html
+     * @param doc:xml格式文本
+     * @param infoLst:信息列表
+     */
+    void baseInfoToHTML(QDomDocument &doc, QList<QPair<QString, QString>> &infoLst);
+
+    /**
+     * @brief subTitleToHTML:子标题导出
+     * @param doc:xml格式文本
+     */
+    void subTitleToHTML(QDomDocument &doc);
+
+    /**
+     * @brief toDocString:导出信息为html格式
+     * @param doc:doc文档
+     */
+    void toDocString(Docx::Document &doc);
+
+    /**
+     * @brief baseInfoToDoc:基本信息导出doc
+     * @param doc:doc文档
+     * @param infoLst:信息列表
+     */
+    void baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QString>> &infoLst);
+
+    /**
+     * @brief toXlsxString:导出信息为xlsx格式
+     * @param xlsx:xlsx文档
+     * @param boldFontc:字体格式
+     */
+    void toXlsxString(QXlsx::Document &xlsx, QXlsx::Format &boldFont);
+
+    /**
+     * @brief baseInfoToXlsx:基本信息导出xlsx
+     * @param xlsx:xlsx文档
+     * @param boldFont:字体格式
+     * @param infoLst:信息列表
+     */
+    void baseInfoToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont, QList<QPair<QString, QString>> &infoLst);
+
+    /**
+     * @brief toTxtString:导出信息为txt格式
+     * @param out:文本输出流
+     */
+    void toTxtString(QTextStream &out);
+
+    /**
+     * @brief baseInfoToTxt:导出信息为txt格式
+     * @param out:文本输出流
+     * @param infoLst:信息列表
+     */
+    void baseInfoToTxt(QTextStream &out, QList<QPair<QString, QString>> &infoLst);
 
 protected:
     /**
