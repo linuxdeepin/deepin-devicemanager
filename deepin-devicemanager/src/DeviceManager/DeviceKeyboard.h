@@ -111,6 +111,11 @@ protected:
      */
     void loadOtherDeviceInfo() override;
 
+    /**
+     * @brief loadTableData:加载表头信息
+     */
+    void loadTableData() override;
+
 private:
     void getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &mapInfo, const QString &info);
 

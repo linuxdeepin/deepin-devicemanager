@@ -12,11 +12,18 @@ using namespace Dtk::Widget;
 
 class DeviceWidget : public DWidget
 {
+    Q_OBJECT
 public:
     DeviceWidget(QWidget *parent = nullptr);
     ~DeviceWidget();
 
     void updateData(const QList<QPair<QString, QString> > &lst);
+
+signals:
+    void itemClicked(const QString &itemStr);
+
+private slots:
+    void slotListViewWidgetItemClicked(const QString &itemStr);
 
 private:
     /**@brief:初始化界面布局*/

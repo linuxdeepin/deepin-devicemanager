@@ -57,10 +57,6 @@ void DeviceCpu::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Extensions"), m_Extensions);
     addBaseDeviceInfo(tr("Flags"), m_Flags);
     addBaseDeviceInfo(tr("Virtualization"), m_HardwareVirtual);
-    m_SubTitle = tr("Processor") + " " + m_CoreID;
-    if (!m_Name.isEmpty()) {
-        m_OverviewStr = m_Name + QString("(%1%2 / %3%4)").arg(m_CPUCoreNum).arg(tr("Core(s)")).arg(m_LogicalCPUNum).arg(tr("Processor"));
-    }
 }
 
 void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo)
@@ -315,3 +311,21 @@ void DeviceCpu::loadOtherDeviceInfo()
 {
 
 }
+
+void DeviceCpu::loadTableHeader()
+{
+    m_TableHeader.append(tr("Name"));
+    m_TableHeader.append(tr("Vendor"));
+    m_TableHeader.append(frequencyIsRange() ? tr("Speed") : tr("Max Speed"));
+    m_TableHeader.append(tr("Architecture"));
+}
+
+void DeviceCpu::loadTableData()
+{
+    m_TableData.append(m_Name);
+    m_TableData.append(m_Vendor);
+    m_TableData.append(m_Frequency);
+    m_TableData.append(m_Architecture);
+}
+
+

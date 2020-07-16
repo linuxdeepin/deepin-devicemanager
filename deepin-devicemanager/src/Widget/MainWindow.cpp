@@ -290,6 +290,11 @@ void MainWindow::loadingFinishSlot(const QString &message)
     }
 }
 
+void MainWindow::slotListItemClicked(const QString &itemStr)
+{
+
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
     // ctrl+e:导出

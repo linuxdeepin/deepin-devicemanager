@@ -138,3 +138,8 @@ void DeviceComputer::loadOtherDeviceInfo()
 {
 
 }
+
+void DeviceComputer::loadTableData()
+{
+
+}

@@ -157,13 +157,14 @@ void DeviceMouse::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
     addBaseDeviceInfo(tr("Speed"), m_Speed);
     m_SubTitle = m_Name;
-    m_OverviewStr = m_Name;
-    if (!m_Model.isEmpty()) {
-        m_OverviewStr += QString("(%1)").arg(m_Model);
-    }
 }
 
 void DeviceMouse::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceMouse::loadTableData()
 {
 
 }

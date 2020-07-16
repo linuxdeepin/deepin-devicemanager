@@ -112,13 +112,14 @@ void DeviceOtherPCI::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Input/Output"), m_InputOutput);
     //    addBaseDeviceInfo(tr(""), m_Description);
     m_SubTitle = m_Name;
-    m_OverviewStr = m_Name;
-    if (!m_Model.isEmpty()) {
-        m_OverviewStr += QString("(%1)").arg(m_Model);
-    }
 }
 
 void DeviceOtherPCI::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceOtherPCI::loadTableData()
 {
 
 }

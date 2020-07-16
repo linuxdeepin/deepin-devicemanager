@@ -39,10 +39,16 @@ public:
     const QList<QPair<QString, QString>> &getBaseAttribs();
 
     /**
-     * @brief overviewStr:获取概况
-     * @return 概况
+     * @brief getTableHeader : 用于存放表格的头部
+     * @return : 用于存放表格的头部
      */
-    const QString &overviewStr()const;
+    const QStringList &getTableHeader();
+
+    /**
+     * @brief getTableData ：获取表头数据
+     * @return 返回表头数据
+     */
+    const QStringList &getTableData();
 
     /**
      * @brief subTitle:获取子标题
@@ -128,9 +134,19 @@ protected:
      */
     virtual void loadBaseDeviceInfo() = 0;
     /**
-     * @brief loadOtherDeviceInfo
+     * @brief loadOtherDeviceInfo:获取其它设备信息
      */
     virtual void loadOtherDeviceInfo() = 0;
+
+    /**
+     * @brief loadTableHeader : 过去表格的表头数据
+     */
+    virtual void loadTableHeader();
+
+    /**
+     * @brief loadTableData : 获取表格数据信息
+     */
+    virtual void loadTableData() = 0;
 
     /**
      * @brief addFilterKey:添加过滤信息
@@ -162,12 +178,14 @@ protected:
     void setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite = true);
 
 protected:
-    QList<QPair<QString, QString>> m_LstBaseInfo;//<! 基本信息
-    QList<QPair<QString, QString>> m_LstOtherInfo;
-    QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息
-    QSet<QString>          m_FilterKey;             //<! 用于避免添加重复信息
+    QList<QPair<QString, QString>> m_LstBaseInfo;   //<! 基本信息
+    QList<QPair<QString, QString>> m_LstOtherInfo;  //<! 其它信息
+    QStringList                    m_TableHeader;   //<! 用于存放表格的表头
+    QStringList                    m_TableData;     //<! 用于存放表格的内容
+    QSet<QString>                  m_FilterKey;     //<! 用于避免添加重复信息
+    QString                        m_SubTitle;
 
-    QString                m_SubTitle;
-    QString                m_OverviewStr;
+private:
+    QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息
 };
 #endif // DEVICEINFO_H

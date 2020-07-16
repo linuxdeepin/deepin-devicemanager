@@ -206,13 +206,14 @@ void DevicePower::loadBaseDeviceInfo()
 //    addBaseDeviceInfo(tr(""), m_Enabled);
 //    addBaseDeviceInfo(tr(""), m_HotSwitch);
     m_SubTitle = m_Name;
-    m_OverviewStr = m_Name;
-    if (!m_Model.isEmpty()) {
-        m_OverviewStr += QString("(%1)").arg(m_Model);
-    }
 }
 
 void DevicePower::loadOtherDeviceInfo()
+{
+
+}
+
+void DevicePower::loadTableData()
 {
 
 }

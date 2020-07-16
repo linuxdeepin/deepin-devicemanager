@@ -182,8 +182,6 @@ void DeviceBluetooth::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Driver Version"), m_DriverVersion);
     addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
     addBaseDeviceInfo(tr("Speed"), m_Speed);
-    m_SubTitle = m_Name;
-    m_OverviewStr += m_Name;
 }
 
 void DeviceBluetooth::parseKeyToLshw(const QString &info)
@@ -202,6 +200,11 @@ void DeviceBluetooth::parseKeyToLshw(const QString &info)
 }
 
 void DeviceBluetooth::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceBluetooth::loadTableData()
 {
 
 }

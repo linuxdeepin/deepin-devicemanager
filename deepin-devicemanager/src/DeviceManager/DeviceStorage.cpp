@@ -354,13 +354,14 @@ void DeviceStorage::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Power On Hours"), m_PowerOnHours);
     addBaseDeviceInfo(tr("Power Cycle Count"), m_PowerCycleCount);
     m_SubTitle = m_Model;
-    m_OverviewStr = m_Model;
-    if (!m_Vendor.isEmpty()) {
-        m_OverviewStr += QString("(%1)").arg(m_Vendor);
-    }
 }
 
 void DeviceStorage::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceStorage::loadTableData()
 {
 
 }

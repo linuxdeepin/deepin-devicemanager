@@ -172,6 +172,11 @@ protected:
      */
     void loadOtherDeviceInfo() override;
 
+    /**
+     * @brief loadTableData:加载表头信息
+     */
+    void loadTableData() override;
+
 private:
     /**@brief:设置是否主显示屏幕等信息*/
     /**

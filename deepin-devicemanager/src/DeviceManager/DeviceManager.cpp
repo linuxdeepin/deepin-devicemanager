@@ -113,7 +113,7 @@ void DeviceManager::clear()
     m_ListDeviceMouse.clear();
     m_ListDeviceStorage.clear();
     m_ListDeviceMonitor.clear();
-    m_ListBluetooth.clear();
+    m_ListDeviceBluetooth.clear();
     m_ListDeviceAudio.clear();
     m_ListDeviceImage.clear();
     m_ListDeviceKeyboard.clear();
@@ -134,33 +134,33 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
 {
     m_ListDeviceType.clear();
 
-    if (true) m_ListDeviceType.append(QPair<QString, QString>(tr("overview"), "overview"));
+    if (true) m_ListDeviceType.append(QPair<QString, QString>(tr("Overview"), "overview##Overview7777777"));
 
-    if (m_ListDeviceCPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("cpu"), "cpu"));
+    if (m_ListDeviceCPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU"), "cpu##CPU"));
 
     // 板载接口设备
-    if (m_ListDeviceBios.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("motherboard"), "motherboard"));
-    if (m_ListDeviceMemory.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("memory"), "memory"));
-    if (m_ListDeviceGPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("displayadapter"), "displayadapter"));
-    if (m_ListDeviceAudio.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("audiodevice"), "audiodevice"));
-    if (m_ListDeviceStorage.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("storage"), "storage"));
-    if (m_ListDeviceOtherPCI.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("otherpcidevices"), "otherpcidevices"));
-    if (m_ListDevicePower.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("battery"), "battery"));
+    if (m_ListDeviceBios.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Motherboard"), "motherboard##Bios"));
+    if (m_ListDeviceMemory.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Memory"), "memory##Memory"));
+    if (m_ListDeviceGPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Display Adapter"), "displayadapter##GPU"));
+    if (m_ListDeviceAudio.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Sound Adapter"), "audiodevice##Audio"));
+    if (m_ListDeviceStorage.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Storage"), "storage##Storage"));
+    if (m_ListDeviceOtherPCI.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Other PCI Devices"), "otherpcidevices##OtherPCI"));
+    if (m_ListDevicePower.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Battery"), "battery##Power"));
 
     // 网络设备
-    if (m_ListBluetooth.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("bluetooth"), "bluetooth"));
-    if (m_ListDeviceNetwork.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("networkadapter"), "networkadapter"));
+    if (m_ListDeviceBluetooth.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Bluetooth"), "bluetooth##Bluetooth"));
+    if (m_ListDeviceNetwork.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Network Adapter"), "network##Network"));
 
     // 输入设备
-    if (m_ListDeviceMouse.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("mouse"), "mouse"));
-    if (m_ListDeviceKeyboard.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("keyboard"), "keyboard"));
+    if (m_ListDeviceMouse.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Mouse"), "mouse##Mouse"));
+    if (m_ListDeviceKeyboard.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Keyboard"), "keyboard##Keyboard"));
 
     // 外设设备
-    if (m_ListDeviceMonitor.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("monitor"), "monitor"));
-    if (m_ListDeviceCdrom.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("cdrom"), "cdrom"));
-    if (m_ListDevicePrint.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("printer"), "printer"));
-    if (m_ListDeviceImage.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("camera"), "camera"));
-    if (m_ListDeviceOthers.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("otherdevices"), "otherdevices"));
+    if (m_ListDeviceMonitor.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Monitor"), "monitor##Monitor"));
+    if (m_ListDeviceCdrom.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("CD-ROM"), "cdrom##Cdrom"));
+    if (m_ListDevicePrint.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Printer"), "printer##Print"));
+    if (m_ListDeviceImage.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Camera"), "camera##Image"));
+    if (m_ListDeviceOthers.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Other Devices", "Other Input Devices"), "otherdevices##Others"));
 
     return m_ListDeviceType;
 }
@@ -379,18 +379,18 @@ void DeviceManager::setLanguageInfo(const QMap<QString, QString> &mapInfo)
 
 void DeviceManager::addBluetoothDevice(DeviceBluetooth *const device)
 {
-    m_ListBluetooth.append(device);
+    m_ListDeviceBluetooth.append(device);
 }
 
 const QList<DeviceBaseInfo *> &DeviceManager::getBluetoothDevices()
 {
-    return m_ListBluetooth;
+    return m_ListDeviceBluetooth;
 }
 
 void DeviceManager::setBluetoothInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    QList<DeviceBaseInfo *>::iterator it = m_ListBluetooth.begin();
-    for (; it != m_ListBluetooth.end(); ++it) {
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceBluetooth.begin();
+    for (; it != m_ListDeviceBluetooth.end(); ++it) {
         DeviceBluetooth *device = dynamic_cast<DeviceBluetooth *>(*it);
         if (!device) continue;
         if (device->setInfoFromLshw(mapInfo)) {
@@ -401,8 +401,8 @@ void DeviceManager::setBluetoothInfoFromLshw(const QMap<QString, QString> &mapIn
 
 bool DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    QList<DeviceBaseInfo *>::iterator it = m_ListBluetooth.begin();
-    for (; it != m_ListBluetooth.end(); ++it) {
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceBluetooth.begin();
+    for (; it != m_ListDeviceBluetooth.end(); ++it) {
         DeviceBluetooth *device = dynamic_cast<DeviceBluetooth *>(*it);
         if (!device) continue;
         if (device->setInfoFromHwinfo(mapInfo)) {
@@ -660,7 +660,7 @@ bool DeviceManager::exportToTxt(const QString &filePath)
     EXPORT_TO_TXT(out, m_ListDeviceMonitor, QObject::tr("Monitor"), QObject::tr("No monitor found"));
     EXPORT_TO_TXT(out, m_ListDeviceNetwork, QObject::tr("Network Adapter"), QObject::tr("No network adapter found"));
     EXPORT_TO_TXT(out, m_ListDeviceAudio, QObject::tr("Sound Adapter"), QObject::tr("No audio device found"));
-    EXPORT_TO_TXT(out, m_ListBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
+    EXPORT_TO_TXT(out, m_ListDeviceBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
     EXPORT_TO_TXT(out, m_ListDeviceOtherPCI, QObject::tr("Other PCI Devices"), QObject::tr("No other PCI devices found"));
     EXPORT_TO_TXT(out, m_ListDevicePower, QObject::tr("Power"), QObject::tr("No battery found"));
     EXPORT_TO_TXT(out, m_ListDeviceKeyboard, QObject::tr("Keyboard"), QObject::tr("No keyboard found"));
@@ -687,7 +687,7 @@ bool DeviceManager::exportToXlsx(const QString &filePath)
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceMonitor, QObject::tr("Monitor"), QObject::tr("No monitor found"));
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceNetwork, QObject::tr("Network Adapter"), QObject::tr("No network adapter found"));
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceAudio, QObject::tr("Sound Adapter"), QObject::tr("No audio device found"));
-    EXPORT_TO_XLSX(xlsx, boldFont, m_ListBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
+    EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceOtherPCI, QObject::tr("Other PCI Devices"), QObject::tr("No other PCI devices found"));
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDevicePower, QObject::tr("Power"), QObject::tr("No battery found"));
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceKeyboard, QObject::tr("Keyboard"), QObject::tr("No keyboard found"));
@@ -714,7 +714,7 @@ bool DeviceManager::exportToDoc(const QString &filePath)
     EXPORT_TO_DOC(doc, m_ListDeviceMonitor, QObject::tr("Monitor"), QObject::tr("No monitor found"));
     EXPORT_TO_DOC(doc, m_ListDeviceNetwork, QObject::tr("Network Adapter"), QObject::tr("No network adapter found"));
     EXPORT_TO_DOC(doc, m_ListDeviceAudio, QObject::tr("Sound Adapter"), QObject::tr("No audio device found"));
-    EXPORT_TO_DOC(doc, m_ListBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
+    EXPORT_TO_DOC(doc, m_ListDeviceBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
     EXPORT_TO_DOC(doc, m_ListDeviceOtherPCI, QObject::tr("Other PCI Devices"), QObject::tr("No other PCI devices found"));
     EXPORT_TO_DOC(doc, m_ListDevicePower, QObject::tr("Power"), QObject::tr("No battery found"));
     EXPORT_TO_DOC(doc, m_ListDeviceKeyboard, QObject::tr("Keyboard"), QObject::tr("No keyboard found"));
@@ -744,7 +744,7 @@ bool DeviceManager::exportToHtml(const QString &filePath)
     EXPORT_TO_HTML(html, m_ListDeviceMonitor, QObject::tr("Monitor"), QObject::tr("No monitor found"));
     EXPORT_TO_HTML(html, m_ListDeviceNetwork, QObject::tr("Network Adapter"), QObject::tr("No network adapter found"));
     EXPORT_TO_HTML(html, m_ListDeviceAudio, QObject::tr("Sound Adapter"), QObject::tr("No audio device found"));
-    EXPORT_TO_HTML(html, m_ListBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
+    EXPORT_TO_HTML(html, m_ListDeviceBluetooth, QObject::tr("Bluetooth"), QObject::tr("No Bluetooth device found"));
     EXPORT_TO_HTML(html, m_ListDeviceOtherPCI, QObject::tr("Other PCI Devices"), QObject::tr("No other PCI devices found"));
     EXPORT_TO_HTML(html, m_ListDevicePower, QObject::tr("Power"), QObject::tr("No battery found"));
     EXPORT_TO_HTML(html, m_ListDeviceKeyboard, QObject::tr("Keyboard"), QObject::tr("No keyboard found"));

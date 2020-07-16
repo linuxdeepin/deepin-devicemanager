@@ -14,6 +14,9 @@ DeviceWidget::DeviceWidget(QWidget *parent)
 {
     // 初始化界面布局
     initWidgets();
+
+    // 连接曹函数
+    connect(mp_ListView, &ListViewWidget::itemClicked, this, &DeviceWidget::slotListViewWidgetItemClicked);
 }
 
 DeviceWidget::~DeviceWidget()
@@ -33,6 +36,11 @@ void DeviceWidget::updateData(const QList<QPair<QString, QString> > &lst)
     if (mp_InfoPage) {
 
     }
+}
+
+void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
+{
+    emit itemClicked(itemStr);
 }
 
 void DeviceWidget::initWidgets()

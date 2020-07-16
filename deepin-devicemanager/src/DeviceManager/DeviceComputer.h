@@ -115,6 +115,11 @@ protected:
      */
     void loadOtherDeviceInfo() override;
 
+    /**
+     * @brief loadTableData:加载表头信息
+     */
+    void loadTableData() override;
+
 private:
     QString            m_HomeUrl;
     QString            m_OsDescription;

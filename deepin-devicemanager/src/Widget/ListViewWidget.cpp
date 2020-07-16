@@ -3,6 +3,8 @@
 #include <QHBoxLayout>
 #include <DApplicationHelper>
 
+#include <QDebug>
+
 #include "DeviceListView.h"
 #include "MacroDefinition.h"
 
@@ -25,6 +27,9 @@ ListViewWidget::ListViewWidget(DWidget *parent)
     connect(mp_Disable, &QAction::triggered, this, &ListViewWidget::slotActionDisable);
     connect(mp_ListView, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(slotShowMenu(const QPoint &)));
+
+    // 连接item点击事件
+    connect(mp_ListView, &DListView::clicked, this, &ListViewWidget::slotListViewItemClicked);
 }
 
 ListViewWidget::~ListViewWidget()
@@ -74,4 +79,12 @@ void ListViewWidget::slotActionEnable()
 void ListViewWidget::slotActionDisable()
 {
     mp_ListView->setCurItemEnable(false);
+}
+
+void ListViewWidget::slotListViewItemClicked(const QModelIndex &index)
+{
+    QString concateStr = mp_ListView->getConcatenateStrings(index);
+    if (!concateStr.isEmpty()) {
+        emit itemClicked(concateStr);
+    }
 }

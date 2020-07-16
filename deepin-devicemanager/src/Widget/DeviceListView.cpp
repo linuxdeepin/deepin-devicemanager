@@ -68,11 +68,17 @@ DeviceListView::~DeviceListView()
 
 void DeviceListView::addItem(const QString &name, const QString &iconFile)
 {
+    QStringList lst = iconFile.split("##");
+    if (lst.size() != 2) {
+        return;
+    }
+
     DStandardItem *item = new DStandardItem;
-    item->setText(name);
+    item->setData(name, Qt::DisplayRole);
+    item->setData(lst[1], Qt::UserRole);
     item->setTextAlignment(Qt::AlignLeft);
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
-    item->setIcon(QIcon::fromTheme(iconFile));
+    item->setIcon(QIcon::fromTheme(lst[0]));
     mp_ItemModel->appendRow(item);
 }
 
@@ -93,6 +99,15 @@ void DeviceListView::setCurItemEnable(bool enable)
     QStandardItem *item = mp_ItemModel->item(rowNum);
     if (item)
         item->setEnabled(enable);
+}
+
+QString DeviceListView::getConcatenateStrings(const QModelIndex &index)
+{
+    QStandardItem *item = mp_ItemModel->item(index.row());
+    if (item) {
+        return item->data(Qt::UserRole).toString();
+    }
+    return "";
 }
 
 void DeviceListView::paintEvent(QPaintEvent *event)

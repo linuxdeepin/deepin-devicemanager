@@ -125,13 +125,14 @@ void DevicePrint::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("URI"), m_URI);
     addBaseDeviceInfo(tr("Shared"), m_Shared);
     m_SubTitle = m_Name;
-    m_OverviewStr = m_Name;
-    if (!m_Model.isEmpty()) {
-        m_OverviewStr += QString("(%1)").arg(m_Model);
-    }
 }
 
 void DevicePrint::loadOtherDeviceInfo()
+{
+
+}
+
+void DevicePrint::loadTableData()
 {
 
 }

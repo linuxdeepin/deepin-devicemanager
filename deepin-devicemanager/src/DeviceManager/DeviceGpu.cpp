@@ -72,7 +72,6 @@ void DeviceGpu::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("IO Port"), m_IOPort);
     addBaseDeviceInfo(tr("Memory"), m_MemAddress);
     addBaseDeviceInfo(tr("Physical ID"), m_PhysID);
-    m_SubTitle = m_Name;
 }
 
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
@@ -292,6 +291,11 @@ const QString &DeviceGpu::physID() const
 }
 
 void DeviceGpu::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceGpu::loadTableData()
 {
 
 }

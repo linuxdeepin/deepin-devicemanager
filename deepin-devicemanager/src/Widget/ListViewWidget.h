@@ -22,10 +22,14 @@ protected:
     /**@brief:事件重写*/
     void paintEvent(QPaintEvent *event) override;
 
+signals:
+    void itemClicked(const QString &txt);
+
 private slots:
     void slotShowMenu(const QPoint &point);
     void slotActionEnable();
     void slotActionDisable();
+    void slotListViewItemClicked(const QModelIndex &index);
 
 private:
     DeviceListView            *mp_ListView;

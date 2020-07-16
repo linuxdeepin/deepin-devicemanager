@@ -52,6 +52,12 @@ public:
      */
     void setCurItemEnable(bool enable);
 
+    /**
+     * @brief getConcatenateStrings
+     * @return
+     */
+    QString getConcatenateStrings(const QModelIndex &index);
+
 protected:
     /**@brief:事件重写*/
     void paintEvent(QPaintEvent *event) override;

@@ -233,13 +233,14 @@ void DeviceNetwork::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Speed"), m_Speed);
     addBaseDeviceInfo(tr("Capacity"), m_Capacity);
     m_SubTitle = m_Name;
-    m_OverviewStr = m_Name;
-    if (!m_Model.isEmpty()) {
-        m_OverviewStr += QString("(%1)").arg(m_Model);
-    }
 }
 
 void DeviceNetwork::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceNetwork::loadTableData()
 {
 
 }

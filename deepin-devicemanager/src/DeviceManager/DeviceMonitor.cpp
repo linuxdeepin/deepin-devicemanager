@@ -255,10 +255,6 @@ void DeviceMonitor::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
     addBaseDeviceInfo(tr("Support Resolution"), m_SupportResolution);
     m_SubTitle = m_Name;
-    m_OverviewStr = m_Name;
-    if (!m_Model.isEmpty() && m_Model != m_Name) {
-        m_OverviewStr += QString("(%1)").arg(m_Model);
-    }
 
 //    addBaseDeviceInfo(tr(""), m_VGA);
 //    addBaseDeviceInfo(tr(""), m_HDMI);
@@ -266,6 +262,11 @@ void DeviceMonitor::loadBaseDeviceInfo()
 }
 
 void DeviceMonitor::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceMonitor::loadTableData()
 {
 
 }

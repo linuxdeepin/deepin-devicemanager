@@ -508,7 +508,7 @@ private:
     QList<DeviceBaseInfo *>              m_ListDeviceMemory;               //<! memory设备
     QList<DeviceBaseInfo *>              m_ListDeviceMonitor;              //<! monitor设备
     QList<DeviceBaseInfo *>              m_ListDeviceBios;                 //<! bios设备
-    QList<DeviceBaseInfo *>              m_ListBluetooth;                  //<! 蓝牙设备
+    QList<DeviceBaseInfo *>              m_ListDeviceBluetooth;            //<! 蓝牙设备
     QList<DeviceBaseInfo *>              m_ListDeviceAudio;                //<! 音频设备
     QList<DeviceBaseInfo *>              m_ListDeviceNetwork;              //<! 网络设备
     QList<DeviceBaseInfo *>              m_ListDeviceImage;                //<! 图像设备

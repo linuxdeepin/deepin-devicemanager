@@ -174,6 +174,16 @@ protected:
      */
     void loadOtherDeviceInfo() override;
 
+    /**
+     * @brief loadTableHeader : 加载表格的头部
+     */
+    void loadTableHeader() override;
+
+    /**
+     * @brief loadTableData:加载表格的内容
+     */
+    void loadTableData() override;
+
 private:
 
     /**

@@ -129,13 +129,14 @@ void DeviceOthers::loadBaseDeviceInfo()
 //    addBaseDeviceInfo(tr("SysFS BusID"), m_BusID);
 //    addBaseDeviceInfo(tr("logical name"), m_LogicalName);
     m_SubTitle = m_Name;
-    m_OverviewStr = m_Name;
-    if (!m_Model.isEmpty()) {
-        m_OverviewStr += QString("(%1)").arg(m_Model);
-    }
 }
 
 void DeviceOthers::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceOthers::loadTableData()
 {
 
 }

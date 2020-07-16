@@ -36,12 +36,21 @@ const QList<QPair<QString, QString> > &DeviceBaseInfo::getBaseAttribs()
     return m_LstBaseInfo;
 }
 
-const QString &DeviceBaseInfo::overviewStr() const
+const QStringList &DeviceBaseInfo::getTableHeader()
 {
-    return m_OverviewStr;
+    if (m_TableHeader.size() == 0)
+        loadTableHeader();
+    return m_TableHeader;
 }
 
-const QString &DeviceBaseInfo::subTitle() const
+const QStringList &DeviceBaseInfo::getTableData()
+{
+    m_TableData.clear();
+    loadTableData();
+    return m_TableData;
+}
+
+const QString &DeviceBaseInfo::subTitle()const
 {
     return m_SubTitle;
 }
@@ -225,6 +234,13 @@ void DeviceBaseInfo::baseInfoToTxt(QTextStream &out, QList<QPair<QString, QStrin
         out << item.second;
         out << "\n";
     }
+}
+
+void DeviceBaseInfo::loadTableHeader()
+{
+    m_TableHeader.append(tr("Name"));
+    m_TableHeader.append(tr("Vendor"));
+    m_TableHeader.append(tr("Model"));
 }
 
 void DeviceBaseInfo::addFilterKey(const QString &key)

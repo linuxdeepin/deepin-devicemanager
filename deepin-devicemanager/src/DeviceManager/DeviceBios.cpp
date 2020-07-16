@@ -185,12 +185,14 @@ void DeviceBios::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Chipset"), m_ChipsetFamily);
-    m_SubTitle = m_Name;
-    if (m_IsBoard && !m_ProductName.isEmpty())
-        m_OverviewStr = m_ProductName;
 }
 
 void DeviceBios::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceBios::loadTableData()
 {
 
 }

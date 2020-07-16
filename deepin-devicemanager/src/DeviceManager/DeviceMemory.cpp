@@ -99,13 +99,14 @@ void DeviceMemory::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
     addBaseDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
     m_SubTitle = m_Name;
-    m_OverviewStr = m_Name;
-//    if (!m_Vendor.isEmpty()) {
-//        m_OverviewStr += QString("(%1)").arg(m_Vendor);
-//    }
 }
 
 void DeviceMemory::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceMemory::loadTableData()
 {
 
 }

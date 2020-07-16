@@ -92,6 +92,11 @@ protected:
      */
     void loadOtherDeviceInfo() override;
 
+    /**
+     * @brief loadTableData:加载表头信息
+     */
+    void loadTableData() override;
+
 private:
     QString             m_Name;                         //<! 【名称】
     QString             m_Vendor;                       //<! 【制造商】

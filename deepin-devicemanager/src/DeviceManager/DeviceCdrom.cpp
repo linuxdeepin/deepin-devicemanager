@@ -126,16 +126,14 @@ void DeviceCdrom::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Driver"), m_Driver);
     addBaseDeviceInfo(tr("Maximum Power"), m_MaxPower);
     addBaseDeviceInfo(tr("Speed"), m_Speed);
-    m_SubTitle = m_Name;
-    if (!m_Name.isEmpty()) {
-        m_OverviewStr += m_Name;
-        if (!m_Type.isEmpty()) {
-            m_OverviewStr += QString("(%1)").arg(m_Type);
-        }
-    }
 }
 
 void DeviceCdrom::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceCdrom::loadTableData()
 {
 
 }

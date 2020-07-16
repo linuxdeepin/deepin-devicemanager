@@ -223,11 +223,14 @@ void DeviceAudio::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
     //addBaseDeviceInfo(tr("Name"), m_Description);
     addBaseDeviceInfo(tr("Chip"), m_Chip);
-    m_SubTitle = m_Name;
-    m_OverviewStr = m_Name;
 }
 
 void DeviceAudio::loadOtherDeviceInfo()
+{
+
+}
+
+void DeviceAudio::loadTableData()
 {
 
 }
