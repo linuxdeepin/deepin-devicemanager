@@ -40,7 +40,7 @@ private:
 
     void keyPressEvent(QKeyEvent *event) override;
 
-    int calulateColumnSize(int column) const;
+    int calulateColumnSize() const;
 
 private:
     void resizeEvent(QResizeEvent *event) override;

@@ -130,9 +130,8 @@ void LogTreeView::keyPressEvent(QKeyEvent *event)
     }
 }
 
-int LogTreeView::calulateColumnSize(int column) const
+int LogTreeView::calulateColumnSize() const
 {
-    qDebug() << column;
     /*
     int columnCount = m_headerDelegate->count();
 
