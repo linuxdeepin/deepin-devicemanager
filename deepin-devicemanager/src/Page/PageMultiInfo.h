@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <DWidget>
-#include <DSplitter>
 
 #include "PageInfo.h"
 
@@ -29,7 +28,6 @@ private:
 private:
     PageTableHeader           *mp_Table;       //<! 上面的表格
     PageDetail                *mp_Detail;      //<! 下面的详细内容
-    DSplitter                 *mp_Splitter;    //<! 左右两边分页器
 };
 
 #endif // DEVICEPAGE_H

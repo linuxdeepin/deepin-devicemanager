@@ -29,12 +29,6 @@ PageTableHeader::~PageTableHeader()
 
 void PageTableHeader::initWidgets()
 {
-    // 设置表格的参数
-    DFontSizeManager::instance()->bind(mp_Table, DFontSizeManager::T8);
-//    DFontSizeManager::instance()->bind(mp_Table->m_headerDelegate, DFontSizeManager::T6);
-    mp_Table->setSortingEnabled(true);
-    mp_Table->setFixedHeight(180);
-
     // 布局
     QHBoxLayout *hLayout = new QHBoxLayout(this);
     hLayout->setContentsMargins(0, 0, 0, 0);
@@ -52,12 +46,15 @@ void PageTableHeader::initWidgets()
 void PageTableHeader::updateTable(const QList<QStringList> &lst)
 {
     // 提前清楚内容
+    mp_Table->clear();
 
+    // 如果lst.size() == 1 则说明改设备只有一个
     if (lst.size() == 1) {
         return;
     }
 
     // 设置表头
+    mp_Table->setHeaderLabels(lst[0]);
 
     // 设置表格的内容
     int row = lst.size();
@@ -65,7 +62,7 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
     for (int i = 0; i < row - 1; i++) {
         for (int j = 0; j < column; j++) {
             DStandardItem *item = new DStandardItem(lst[i + 1][j]);
-//            mp_Table->m_pModel->setItem(i, j, item);
+            mp_Table->setItem(i, j, item);
         }
     }
 

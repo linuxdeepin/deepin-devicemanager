@@ -14,7 +14,6 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     : PageInfo(parent)
     , mp_Table(new PageTableHeader(this))
     , mp_Detail(new PageDetail(this))
-    , mp_Splitter(new DSplitter(Qt::Vertical, this))
 {
     initWidgets();
 }
@@ -40,10 +39,8 @@ void PageMultiInfo::updateTable(const QList<DeviceBaseInfo *> &lst)
 void PageMultiInfo::initWidgets()
 {
     QHBoxLayout *hLayout = new QHBoxLayout(this);
-    mp_Splitter->addWidget(mp_Table);
-    mp_Splitter->addWidget(mp_Detail);
-    mp_Splitter->setStretchFactor(0, 1);
-    mp_Splitter->setStretchFactor(1, 4);
-    hLayout->addWidget(mp_Splitter);
+    mp_Table->setFixedHeight(100);
+    hLayout->addWidget(mp_Table);
+    hLayout->addWidget(mp_Detail);
     setLayout(hLayout);
 }

@@ -10,7 +10,7 @@
 DeviceWidget::DeviceWidget(QWidget *parent)
     : DWidget(parent)
     , mp_ListView(new PageListView(this))
-    , mp_InfoPage(new PageMultiInfo(this))
+    , mp_PageInfo(new PageMultiInfo(this))
     , mp_Splitter(new DSplitter(Qt::Horizontal, this))
 {
     // 初始化界面布局
@@ -23,7 +23,7 @@ DeviceWidget::DeviceWidget(QWidget *parent)
 DeviceWidget::~DeviceWidget()
 {
     DELETE_PTR(mp_ListView);
-    DELETE_PTR(mp_InfoPage);
+    DELETE_PTR(mp_PageInfo);
     DELETE_PTR(mp_Splitter);
 }
 
@@ -41,8 +41,8 @@ void DeviceWidget::updateDevice(const QList<DeviceBaseInfo *> &lst)
     }
 
     // 更新右边的详细内容
-    if (mp_InfoPage) {
-        mp_InfoPage->updateTable(lst);
+    if (mp_PageInfo) {
+        mp_PageInfo->updateTable(lst);
     }
 }
 
@@ -57,7 +57,7 @@ void DeviceWidget::initWidgets()
     hLayout->setContentsMargins(0, 0, 0, 0);
     hLayout->addWidget(mp_Splitter);
     mp_Splitter->addWidget(mp_ListView);
-    mp_Splitter->addWidget(mp_InfoPage);
+    mp_Splitter->addWidget(mp_PageInfo);
     mp_Splitter->setStretchFactor(0, 1);
     mp_Splitter->setStretchFactor(1, 4);
     setLayout(hLayout);

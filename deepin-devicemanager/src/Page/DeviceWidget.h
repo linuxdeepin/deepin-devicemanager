@@ -6,7 +6,7 @@
 #include <DSplitter>
 
 class PageListView;
-class PageMultiInfo;
+class PageInfo;
 class DeviceBaseInfo;
 
 using namespace Dtk::Widget;
@@ -33,7 +33,7 @@ private:
 
 private:
     PageListView              *mp_ListView;          //<! 左边的list
-    PageMultiInfo             *mp_InfoPage;          //<! 右边的详细内容
+    PageInfo                  *mp_PageInfo;          //<! 右边的详细内容
     DSplitter                 *mp_Splitter;          //<! 左右两边分页器
 };
 
