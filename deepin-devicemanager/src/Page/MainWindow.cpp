@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 关联信号槽
     connect(mp_ThreadPool, &ThreadPool::finished, this, &MainWindow::loadingFinishSlot);
+    connect(mp_DeviceWidget, &DeviceWidget::itemClicked, this, &MainWindow::slotListItemClicked);
 }
 
 MainWindow::~MainWindow()
@@ -282,7 +283,7 @@ void MainWindow::loadingFinishSlot(const QString &message)
 
         // 信息显示界面
         const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
-        mp_DeviceWidget->updateData(types);
+        mp_DeviceWidget->updateListView(types);
         mp_MainStackWidget->setCurrentWidget(mp_DeviceWidget);
 
         // 刷新结束
@@ -292,7 +293,9 @@ void MainWindow::loadingFinishSlot(const QString &message)
 
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
-
+    QList<DeviceBaseInfo *> lst;
+    DeviceManager::instance()->getDeviceList(itemStr, lst);
+    mp_DeviceWidget->updateDevice(lst);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)

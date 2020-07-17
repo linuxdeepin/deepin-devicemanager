@@ -9,12 +9,12 @@
 class DeviceListView;
 
 using namespace Dtk::Widget;
-class ListViewWidget : public DWidget
+class PageListView : public DWidget
 {
     Q_OBJECT
 public:
-    ListViewWidget(DWidget *parent = nullptr);
-    ~ListViewWidget();
+    PageListView(DWidget *parent = nullptr);
+    ~PageListView() override;
 
     void updateListItems(const QList<QPair<QString, QString> > &lst);
 

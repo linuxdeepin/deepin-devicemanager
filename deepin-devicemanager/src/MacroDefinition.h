@@ -213,3 +213,6 @@
     }                                                                               \
     \
 
+
+// 添加获取设备列表的宏定义
+#define GET_DEVICE_LIST(name) m_ListDevice###name

@@ -52,6 +52,13 @@ public:
      */
     const QList<QPair<QString, QString>> &getDeviceTypes();
 
+    /**
+     * @brief getDeviceList : 获取设备列表
+     * @param name : 该设备的类型
+     * @return ：返回设备列表
+     */
+    bool getDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst);
+
     // 鼠标设备相关 **************************************************************************************
 
     /**

@@ -20,7 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Widget/MainWindow.h"
+#include "Page/MainWindow.h"
 #include <DApplication>
 #include <DWidgetUtil>
 #include <DLog>

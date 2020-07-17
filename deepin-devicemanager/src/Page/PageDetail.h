@@ -5,15 +5,11 @@
 #include <DWidget>
 
 using namespace Dtk::Widget;
-class DeviceDetailPage : public DWidget
+class PageDetail : public DWidget
 {
     Q_OBJECT
 public:
-    explicit DeviceDetailPage(QWidget *parent = nullptr);
-
-signals:
-
-public slots:
+    explicit PageDetail(QWidget *parent = nullptr);
 };
 
 #endif // DEVICEDETAILPAGE_H

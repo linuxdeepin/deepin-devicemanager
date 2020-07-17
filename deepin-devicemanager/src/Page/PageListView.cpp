@@ -1,4 +1,4 @@
-#include "ListViewWidget.h"
+#include "PageListView.h"
 
 #include <QHBoxLayout>
 #include <DApplicationHelper>
@@ -8,7 +8,7 @@
 #include "DeviceListView.h"
 #include "MacroDefinition.h"
 
-ListViewWidget::ListViewWidget(DWidget *parent)
+PageListView::PageListView(DWidget *parent)
     : DWidget(parent)
     , mp_ListView(new DeviceListView(this))
     , mp_Enable(new QAction(tr("Enable"), this))
@@ -23,21 +23,21 @@ ListViewWidget::ListViewWidget(DWidget *parent)
 
     // 初始化右键菜单
     mp_ListView->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(mp_Enable, &QAction::triggered, this, &ListViewWidget::slotActionEnable);
-    connect(mp_Disable, &QAction::triggered, this, &ListViewWidget::slotActionDisable);
     connect(mp_ListView, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(slotShowMenu(const QPoint &)));
+    connect(mp_Enable, &QAction::triggered, this, &PageListView::slotActionEnable);
+    connect(mp_Disable, &QAction::triggered, this, &PageListView::slotActionDisable);
 
     // 连接item点击事件
-    connect(mp_ListView, &DListView::clicked, this, &ListViewWidget::slotListViewItemClicked);
+    connect(mp_ListView, &DListView::clicked, this, &PageListView::slotListViewItemClicked);
 }
 
-ListViewWidget::~ListViewWidget()
+PageListView::~PageListView()
 {
 
 }
 
-void ListViewWidget::updateListItems(const QList<QPair<QString, QString> > &lst)
+void PageListView::updateListItems(const QList<QPair<QString, QString> > &lst)
 {
     if (! mp_ListView) {
         return;
@@ -48,7 +48,7 @@ void ListViewWidget::updateListItems(const QList<QPair<QString, QString> > &lst)
     }
 }
 
-void ListViewWidget::paintEvent(QPaintEvent *event)
+void PageListView::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色
     DPalette pa;
@@ -59,7 +59,7 @@ void ListViewWidget::paintEvent(QPaintEvent *event)
     return DWidget::paintEvent(event);
 }
 
-void ListViewWidget::slotShowMenu(const QPoint &)
+void PageListView::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
     bool enable = mp_ListView->curItemEnable();
@@ -71,17 +71,17 @@ void ListViewWidget::slotShowMenu(const QPoint &)
     mp_Menu->exec(QCursor::pos());
 }
 
-void ListViewWidget::slotActionEnable()
+void PageListView::slotActionEnable()
 {
     mp_ListView->setCurItemEnable(true);
 }
 
-void ListViewWidget::slotActionDisable()
+void PageListView::slotActionDisable()
 {
     mp_ListView->setCurItemEnable(false);
 }
 
-void ListViewWidget::slotListViewItemClicked(const QModelIndex &index)
+void PageListView::slotListViewItemClicked(const QModelIndex &index)
 {
     QString concateStr = mp_ListView->getConcatenateStrings(index);
     if (!concateStr.isEmpty()) {

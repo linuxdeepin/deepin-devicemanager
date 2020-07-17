@@ -134,7 +134,7 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
 {
     m_ListDeviceType.clear();
 
-    if (true) m_ListDeviceType.append(QPair<QString, QString>(tr("Overview"), "overview##Overview7777777"));
+    if (true) m_ListDeviceType.append(QPair<QString, QString>(tr("Overview"), "overview##Overview"));
 
     if (m_ListDeviceCPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU"), "cpu##CPU"));
 
@@ -149,7 +149,7 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
 
     // 网络设备
     if (m_ListDeviceBluetooth.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Bluetooth"), "bluetooth##Bluetooth"));
-    if (m_ListDeviceNetwork.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Network Adapter"), "network##Network"));
+    if (m_ListDeviceNetwork.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Network Adapter"), "networkadapter##Network"));
 
     // 输入设备
     if (m_ListDeviceMouse.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Mouse"), "mouse##Mouse"));
@@ -165,7 +165,31 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
     return m_ListDeviceType;
 }
 
-void DeviceManager::addMouseDevice(DeviceMouse   *const device)
+bool DeviceManager::getDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst)
+{
+    if (name == "Overview") {return false;}
+    else if (name == "CPU") {lst =  m_ListDeviceCPU;}
+    else if (name == "Bios") {lst =  m_ListDeviceBios;}
+    else if (name == "Memory") {lst =  m_ListDeviceMemory;}
+    else if (name == "GPU") {lst =  m_ListDeviceGPU;}
+    else if (name == "Audio") {lst =  m_ListDeviceAudio;}
+    else if (name == "Storage") {lst =  m_ListDeviceStorage;}
+    else if (name == "OtherPCI") {lst =  m_ListDeviceOtherPCI;}
+    else if (name == "Power") {lst =  m_ListDevicePower;}
+    else if (name == "Bluetooth") {lst =  m_ListDeviceBluetooth;}
+    else if (name == "Network") {lst =  m_ListDeviceNetwork;}
+    else if (name == "Mouse") {lst =  m_ListDeviceMouse;}
+    else if (name == "Keyboard") {lst =  m_ListDeviceKeyboard;}
+    else if (name == "Monitor") {lst =  m_ListDeviceMonitor;}
+    else if (name == "Cdrom") {lst =  m_ListDeviceCdrom;}
+    else if (name == "Print") {lst =  m_ListDevicePrint;}
+    else if (name == "Image") {lst =  m_ListDeviceImage;}
+    else if (name == "Others") {lst =  m_ListDeviceOthers;}
+
+    return true;
+}
+
+void DeviceManager::addMouseDevice(DeviceMouse    *const device)
 {
     // 如果不是重复设备则添加到设备列表
     m_ListDeviceMouse.append(device);
