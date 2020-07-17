@@ -91,6 +91,14 @@
         xlsx.write(m_CurrentXlsRow++, 1, msg, boldFont);                            \
     }                                                                               \
     \
+    /**添加Table信息**/                                                              \
+    if (deviceLst.size() > 1) {                                                     \
+        deviceLst[0]->tableHeaderToXlsx(xlsx);                                      \
+        foreach (auto device, deviceLst) {                                          \
+            device->tableInfoToXlsx(xlsx);                                          \
+        }                                                                           \
+    }                                                                               \
+    \
     /**添加每个设备的信息**/                                                           \
     foreach (auto device, deviceLst) {                                              \
         device->getBaseAttribs();                                                   \

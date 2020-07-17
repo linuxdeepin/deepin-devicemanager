@@ -132,6 +132,10 @@ public:
 
     void tableInfoToDoc(Docx::Table *tab, int &row);
     void tableHeaderToDoc(Docx::Table *tab);
+
+    void tableInfoToXlsx(QXlsx::Document &xlsx);
+    void tableHeaderToXlsx(QXlsx::Document &xlsx);
+
 protected:
     /**
      * @brief:初始化过滤信息

@@ -206,7 +206,7 @@ void DeviceBaseInfo::baseInfoToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFo
         if (isValueValid(value) == false) {
             continue;
         }
-        int _row = DeviceManager::currentXlsRow();
+        int _row = DeviceManager::instance()->currentXlsRow();
         xlsx.write(_row, 1, item.first, boldFont);
         xlsx.write(_row, 2, item.second, boldFont);
     }
@@ -337,6 +337,38 @@ void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
         cel->addText(m_TableHeader[col]);
 
     }
+}
+
+void DeviceBaseInfo::tableInfoToXlsx(QXlsx::Document &xlsx)
+{
+    getTableData();
+
+    if (m_TableData.size() < 1) {
+        return;
+    }
+
+    int curRow = DeviceManager::instance()->currentXlsRow();
+    for (int col = 0; col < m_TableData.size(); ++col) {
+        xlsx.write(curRow, col + 1, m_TableData[col]);
+    }
+}
+
+void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
+{
+    getTableHeader();
+
+    if (m_TableHeader.size() < 1) {
+        return;
+    }
+
+    int curRow = DeviceManager::instance()->currentXlsRow();
+    for (int col = 0; col < m_TableHeader.size(); ++col) {
+        QXlsx::Format boldFont;
+        boldFont.setFontSize(10);
+        boldFont.setFontBold(true);
+        xlsx.write(curRow, col + 1, m_TableHeader[col], boldFont);
+    }
+
 }
 
 void DeviceBaseInfo::loadTableHeader()
