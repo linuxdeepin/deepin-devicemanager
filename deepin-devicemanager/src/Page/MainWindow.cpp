@@ -244,10 +244,8 @@ void MainWindow::initWidgets()
     mp_MainStackWidget->addWidget(mp_WaitingWidget);
     mp_WaitingWidget->start();
 
-
     // 添加信息显示界面
     mp_MainStackWidget->addWidget(mp_DeviceWidget);
-
 }
 
 void MainWindow::refreshDataBase()

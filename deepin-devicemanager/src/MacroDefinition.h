@@ -214,5 +214,7 @@
     \
 
 
-// 添加获取设备列表的宏定义
-#define GET_DEVICE_LIST(name) m_ListDevice###name
+//HeaderTableView的相关宏定义
+#define TABLE_HEIGHT 180   // Table的高度
+#define ROW_HEIGHT   40    // 每一行的高度
+#define LINE_WIDTH   2     // 表头的线宽

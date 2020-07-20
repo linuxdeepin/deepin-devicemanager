@@ -38,9 +38,11 @@ void PageMultiInfo::updateTable(const QList<DeviceBaseInfo *> &lst)
 
 void PageMultiInfo::initWidgets()
 {
-    QHBoxLayout *hLayout = new QHBoxLayout(this);
-    mp_Table->setFixedHeight(100);
+    QVBoxLayout *hLayout = new QVBoxLayout(this);
+    hLayout->setContentsMargins(0, 0, 0, 0);
+    mp_Table->setFixedHeight(TABLE_HEIGHT);
     hLayout->addWidget(mp_Table);
     hLayout->addWidget(mp_Detail);
+//    hLayout->addStretch();
     setLayout(hLayout);
 }

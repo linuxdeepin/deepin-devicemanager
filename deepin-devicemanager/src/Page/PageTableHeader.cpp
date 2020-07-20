@@ -1,9 +1,15 @@
 #include "PageTableHeader.h"
 
-#include <DFontSizeManager>
-#include <DStandardItem>
+
 #include <QHBoxLayout>
 #include <QMenu>
+#include <QPainter>
+#include <QDebug>
+
+#include <DFontSizeManager>
+#include <DStandardItem>
+#include <DApplication>
+#include <DApplicationHelper>
 
 #include "HeaderTableView.h"
 #include "MacroDefinition.h"
@@ -31,7 +37,7 @@ void PageTableHeader::initWidgets()
 {
     // 布局
     QHBoxLayout *hLayout = new QHBoxLayout(this);
-    hLayout->setContentsMargins(0, 0, 0, 0);
+    hLayout->setContentsMargins(10, 10, 10, 10);
     hLayout->addWidget(mp_Table);
     setLayout(hLayout);
 
@@ -66,6 +72,12 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
         }
     }
 
+}
+
+
+void PageTableHeader::paintEvent(QPaintEvent *e)
+{
+    DWidget::paintEvent(e);
 }
 
 

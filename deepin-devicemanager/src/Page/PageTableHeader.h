@@ -15,6 +15,9 @@ public:
 
     void updateTable(const QList<QStringList> &lst);
 
+protected:
+    void paintEvent(QPaintEvent *e) override;
+
 private slots:
     void slotShowMenu(const QPoint &);
     void slotActionRefresh();

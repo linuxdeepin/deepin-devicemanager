@@ -1,7 +1,7 @@
 #include "DeviceWidget.h"
 
 #include "PageListView.h"
-#include "PageMultiInfo.h"
+#include "PageInfoWidget.h"
 #include "../DeviceManager/DeviceInfo.h"
 #include "MacroDefinition.h"
 
@@ -10,7 +10,7 @@
 DeviceWidget::DeviceWidget(QWidget *parent)
     : DWidget(parent)
     , mp_ListView(new PageListView(this))
-    , mp_PageInfo(new PageMultiInfo(this))
+    , mp_PageInfo(new PageInfoWidget(this))
     , mp_Splitter(new DSplitter(Qt::Horizontal, this))
 {
     // 初始化界面布局
