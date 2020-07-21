@@ -7,45 +7,14 @@
 #include <DStandardItem>
 #include <DHeaderView>
 
+class LogTreeView;
+
 using namespace Dtk::Widget;
 
-/**
- * @brief The HeaderView class : HeaderTableView的表头
- */
-class HeaderView : public DHeaderView
+class TableWidget : public DWidget
 {
 public:
-    HeaderView(Qt::Orientation orientation, QWidget *parent = nullptr);
-
-protected:
-    // 重新绘制单元格
-    void paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const override;
-    // 重新绘制表头
-    void paintEvent(QPaintEvent *e) override;
-
-};
-
-
-
-class TableViewItemDelegate : public QStyledItemDelegate
-{
-    Q_OBJECT
-public:
-    TableViewItemDelegate(QObject *parent);
-protected:
-    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-    QWidget *createEditor(QWidget *, const QStyleOptionViewItem &, const QModelIndex &) const override;
-    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-    void initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const override;
-};
-
-
-class HeaderTableView : public DTableView
-{
-    Q_OBJECT
-public:
-    HeaderTableView(QWidget *parent = nullptr);
-    ~HeaderTableView();
+    TableWidget(QWidget *parent = nullptr);
 
     /**
      * @brief setHeaderLabels : 设置table的表头
@@ -70,15 +39,15 @@ protected:
     void paintEvent(QPaintEvent *e) override;
 
 private:
-    /**
-     * @brief initWidgets : 表格的初始化工作
-     */
-    void initWidgets();
+    void initWidget();
 
 private:
-    QStandardItemModel       *mp_Model;
-    HeaderView               *mp_HeaderView;        //<! 设置自己的表头
-    TableViewItemDelegate    *mp_ItemDelegate;      //<! 委托代理
+    LogTreeView      *mp_Table;
 };
+
+
+
+
+
 
 #endif // HEADERTABLEVIEW_H

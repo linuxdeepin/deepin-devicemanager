@@ -16,7 +16,7 @@
 
 PageTableHeader::PageTableHeader(QWidget *parent)
     : DWidget(parent)
-    , mp_Table(new HeaderTableView(this))
+    , mp_Table(new TableWidget(this))
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
     , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))

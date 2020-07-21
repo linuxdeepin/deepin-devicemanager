@@ -4,7 +4,7 @@
 #include <QObject>
 #include <DWidget>
 
-class HeaderTableView;
+class TableWidget;
 
 using namespace Dtk::Widget;
 class PageTableHeader : public DWidget
@@ -31,7 +31,7 @@ private:
     void initWidgets();
 
 private:
-    HeaderTableView           *mp_Table;
+    TableWidget           *mp_Table;
 
     QAction                   *mp_Refresh;     //<! 右键刷新
     QAction                   *mp_Export;      //<! 右键导出

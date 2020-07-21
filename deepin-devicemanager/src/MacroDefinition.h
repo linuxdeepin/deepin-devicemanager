@@ -215,6 +215,6 @@
 
 
 //HeaderTableView的相关宏定义
-#define TABLE_HEIGHT 180   // Table的高度
+#define TABLE_HEIGHT 210   // Table的高度
 #define ROW_HEIGHT   40    // 每一行的高度
 #define LINE_WIDTH   2     // 表头的线宽
