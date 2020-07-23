@@ -33,10 +33,16 @@ public:
 
     /**重构后的代码************************************************************/
     void initWidgetEX();
-    void initTable(const QList<DeviceCpu>& devices);
-    void initDetails(const QList<DeviceCpu>& devices);
-    void addDeviceDetail(const DeviceCpu& device,int index,bool withTitle = false);
-    void setOverView(const QList<DeviceCpu>& devices);
+    void initTable(const QList<DeviceCpu> &devices);
+    void initDetails(const QList<DeviceCpu> &devices);
+    void addDeviceDetail(const DeviceCpu &device, int index, bool withTitle = false);
+    void setOverView(const QList<DeviceCpu> &devices);
     //***********************************************************************
+
+    void getTrNumber();
+
+private:
+
+    QMap<int, QString>        m_trNumber;
 };
-const QString getTrNumber(int i);
+
