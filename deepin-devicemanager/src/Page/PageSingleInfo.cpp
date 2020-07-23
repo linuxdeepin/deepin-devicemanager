@@ -17,7 +17,7 @@ PageSingleInfo::~PageSingleInfo()
     DELETE_PTR(mp_Content);
 }
 
-void PageSingleInfo::updateTable(const QList<DeviceBaseInfo *> &lst)
+void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
     QList<QPair<QString, QString>> baseInfoMap = lst[0]->getBaseAttribs();
     QList<QPair<QString, QString>> otherInfoMap = lst[0]->getBaseAttribs();

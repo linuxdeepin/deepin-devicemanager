@@ -22,10 +22,9 @@ PageMultiInfo::~PageMultiInfo()
 {
     DELETE_PTR(mp_Table);
     DELETE_PTR(mp_Detail);
-
 }
 
-void PageMultiInfo::updateTable(const QList<DeviceBaseInfo *> &lst)
+void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
     QList<QStringList> deviceList;
     deviceList.append(lst[0]->getTableHeader());
@@ -34,6 +33,7 @@ void PageMultiInfo::updateTable(const QList<DeviceBaseInfo *> &lst)
             deviceList.append(info->getTableData());
     }
     mp_Table->updateTable(deviceList);
+    mp_Detail->showDeviceInfo(lst);
 }
 
 void PageMultiInfo::initWidgets()
@@ -43,6 +43,5 @@ void PageMultiInfo::initWidgets()
     mp_Table->setFixedHeight(TABLE_HEIGHT);
     hLayout->addWidget(mp_Table);
     hLayout->addWidget(mp_Detail);
-//    hLayout->addStretch();
     setLayout(hLayout);
 }

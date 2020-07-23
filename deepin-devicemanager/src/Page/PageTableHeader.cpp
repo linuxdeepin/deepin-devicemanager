@@ -11,7 +11,7 @@
 #include <DApplication>
 #include <DApplicationHelper>
 
-#include "HeaderTableView.h"
+#include "TableWidget.h"
 #include "MacroDefinition.h"
 
 PageTableHeader::PageTableHeader(QWidget *parent)

@@ -15,7 +15,7 @@ PageInfoWidget::PageInfoWidget(QWidget *parent)
 void PageInfoWidget::updateTable(const QList<DeviceBaseInfo *> &lst)
 {
     if (mp_PageInfo) {
-        mp_PageInfo->updateTable(lst);
+        mp_PageInfo->updateInfo(lst);
     }
 }
 

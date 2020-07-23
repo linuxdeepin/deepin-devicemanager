@@ -18,7 +18,7 @@ public:
     PageSingleInfo(QWidget *parent = nullptr);
     ~PageSingleInfo() override;
 
-    void updateTable(const QList<DeviceBaseInfo *> &lst)override;
+    void updateInfo(const QList<DeviceBaseInfo *> &lst)override;
 
     void loadDeviceInfo(const QList<QPair<QString, QString>> &lst);
 private:

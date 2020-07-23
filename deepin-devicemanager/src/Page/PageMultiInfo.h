@@ -17,7 +17,7 @@ public:
     PageMultiInfo(QWidget *parent = nullptr);
     ~PageMultiInfo() override;
 
-    void updateTable(const QList<DeviceBaseInfo *> &lst)override;
+    void updateInfo(const QList<DeviceBaseInfo *> &lst)override;
 
 private:
     /**
