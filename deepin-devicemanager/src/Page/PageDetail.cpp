@@ -8,6 +8,7 @@
 #include <DApplicationHelper>
 #include <DApplication>
 #include <DStyle>
+#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 
@@ -48,15 +49,10 @@ void DetailButton::paintEvent(QPaintEvent *e)
     DCommandLinkButton::paintEvent(e);
 }
 
-void DetailButton::initWidgets()
-{
-
-}
-
 DetailSeperator::DetailSeperator(DWidget *parent)
     : DWidget(parent)
 {
-    setFixedHeight(2);
+    setFixedHeight(18);
 }
 
 void DetailSeperator::paintEvent(QPaintEvent *e)
@@ -92,6 +88,7 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     // 计算绘制区域
     rect.setX(rect.x() + spacing);
     rect.setWidth(rect.width() - spacing);
+    rect.setY(rect.y() + height() - 2);
     QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
     painter.fillRect(rect, bgBrush);
 
@@ -99,6 +96,38 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     DWidget::paintEvent(e);
 }
 
+ScrollAreaWidget::ScrollAreaWidget(DWidget *parent)
+    : DWidget(parent)
+{
+
+}
+
+void ScrollAreaWidget::paintEvent(QPaintEvent *e)
+{
+    QPainter painter(this);
+    painter.save();
+    painter.setRenderHints(QPainter::Antialiasing, true);
+    painter.setOpacity(1);
+    painter.setClipping(true);
+    QRect rect = this->rect();
+
+    // 获取调色板
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
+
+    // 获取窗口当前的状态,激活，禁用，未激活
+    DPalette::ColorGroup cg;
+    DWidget *wid = DApplication::activeWindow();
+    if (wid/* && wid == this*/) {
+        cg = DPalette::Active;
+    } else {
+        cg = DPalette::Inactive;
+    }
+
+    // 清除背景色颜色
+    QBrush clearBrush(palette.color(cg, DPalette::Base));
+    painter.fillRect(rect, clearBrush);
+}
 
 PageDetail::PageDetail(QWidget *parent)
     : Dtk::Widget::DWidget(parent)
@@ -118,24 +147,27 @@ PageDetail::PageDetail(QWidget *parent)
 
 
     // 设置ScrollArea里面的widget,这个widget是必须要的
-    DWidget *widget = new DWidget(this);
+    ScrollAreaWidget *widget = new ScrollAreaWidget(this);
     widget->setContentsMargins(0, 0, 0, 0);
     widget->setLayout(mp_ScrollAreaLayout);
     mp_ScrollArea->setWidget(widget);
     hLayout->addWidget(mp_ScrollArea);
     setLayout(hLayout);
-
-//    mp_ToolBox->setContentsMargins(0, 0, 0, 0);
 }
 
 void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
 {
+    // Clear widgets first
+    clearWidget();
+
+    // Create widgets for showing device info
     foreach (auto device, lstInfo) {
         if (!device) {continue;}
         TextBrowser *txtBrowser = new TextBrowser(this);
         txtBrowser->showDeviceInfo(device);
         addWidgets(txtBrowser);
     }
+    mp_ScrollAreaLayout->addStretch();
 }
 
 void PageDetail::paintEvent(QPaintEvent *e)
@@ -178,13 +210,13 @@ void PageDetail::paintEvent(QPaintEvent *e)
     DWidget::paintEvent(e);
 }
 
-void PageDetail::addWidgets(QWidget *widget)
+void PageDetail::addWidgets(TextBrowser *widget)
 {
     mp_ScrollAreaLayout->addWidget(widget);
 
     // 添加按钮
     QHBoxLayout *vLayout = new QHBoxLayout(this);
-    vLayout->addSpacing(30);
+    vLayout->addSpacing(34);
     DetailButton *button = new DetailButton(tr("Details"));
     vLayout->addWidget(button);
     vLayout->addStretch(-1);
@@ -193,5 +225,35 @@ void PageDetail::addWidgets(QWidget *widget)
     // 添加分割线
     DetailSeperator *seperator = new DetailSeperator(widget);
     mp_ScrollAreaLayout->addWidget(seperator);
-//    widget->setMinimumHeight(500);
+
+    m_ListTextBrowser.append(widget);
+    m_ListHlayout.append(vLayout);
+    m_ListDetailButton.append(button);
+    m_ListDetailSeperator.append(seperator);
+}
+
+void PageDetail::clearWidget()
+{
+    foreach (auto widget, m_ListTextBrowser) {
+        delete widget;
+    }
+    foreach (auto widget, m_ListHlayout) {
+        delete widget;
+    }
+    foreach (auto widget, m_ListDetailButton) {
+        delete widget;
+    }
+    foreach (auto widget, m_ListDetailSeperator) {
+        delete widget;
+    }
+
+    m_ListTextBrowser.clear();
+    m_ListHlayout.clear();
+    m_ListDetailButton.clear();
+    m_ListDetailSeperator.clear();
+
+    // 删除最后的一个弹簧
+    QLayoutItem *layoutItem = mp_ScrollAreaLayout->itemAt(0);
+    mp_ScrollAreaLayout->removeItem(layoutItem);
+    delete  layoutItem;
 }

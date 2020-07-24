@@ -45,7 +45,7 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
 
         // 该行的第一列
         QDomElement td = doc.createElement("td");
-        td.setAttribute("width", "20%");
+        td.setAttribute("width", "25%");
         td.setAttribute("style", "text-align:left;");
         td.setAttribute("style", "text-indent:25px;");
 
@@ -55,7 +55,7 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
 
         // 改行的第二列
         QDomElement td2 = doc.createElement("td");
-        td2.setAttribute("width", "80%");
+        td2.setAttribute("width", "75%");
         QDomText valueText;
         valueText = doc.createTextNode(pair.second);
         td2.appendChild(valueText);
