@@ -1905,6 +1905,10 @@
         <translation>六十四</translation>
     </message>
     <message>
+        <source>Ninety-six</source>
+        <translation>九十六</translation>
+    </message>
+    <message>
         <source>One hundred and Twenty-eight</source>
         <translation>一百二十八</translation>
     </message>

@@ -1,0 +1,8 @@
+/data/home/liujun/Work/Project/DeviceManager/sp2/dde_devicemanager/build-deepin-devicemanager-unknown-Default/CMakeFiles/install/strip.dir
+/data/home/liujun/Work/Project/DeviceManager/sp2/dde_devicemanager/build-deepin-devicemanager-unknown-Default/CMakeFiles/edit_cache.dir
+/data/home/liujun/Work/Project/DeviceManager/sp2/dde_devicemanager/build-deepin-devicemanager-unknown-Default/CMakeFiles/list_install_components.dir
+/data/home/liujun/Work/Project/DeviceManager/sp2/dde_devicemanager/build-deepin-devicemanager-unknown-Default/CMakeFiles/install/local.dir
+/data/home/liujun/Work/Project/DeviceManager/sp2/dde_devicemanager/build-deepin-devicemanager-unknown-Default/CMakeFiles/deepin-devicemanager.dir
+/data/home/liujun/Work/Project/DeviceManager/sp2/dde_devicemanager/build-deepin-devicemanager-unknown-Default/CMakeFiles/rebuild_cache.dir
+/data/home/liujun/Work/Project/DeviceManager/sp2/dde_devicemanager/build-deepin-devicemanager-unknown-Default/CMakeFiles/install.dir
+/data/home/liujun/Work/Project/DeviceManager/sp2/dde_devicemanager/build-deepin-devicemanager-unknown-Default/CMakeFiles/deepin-devicemanager_autogen.dir
