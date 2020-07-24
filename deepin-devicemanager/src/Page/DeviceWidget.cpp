@@ -34,7 +34,7 @@ void DeviceWidget::updateListView(const QList<QPair<QString, QString> > &lst)
         mp_ListView->updateListItems(lst);
 }
 
-void DeviceWidget::updateDevice(const QList<DeviceBaseInfo *> &lst)
+void DeviceWidget::updateDevice(const QString &itemStr, const QList<DeviceBaseInfo *> &lst)
 {
     if (lst.size() == 0) {
         return;
@@ -42,7 +42,7 @@ void DeviceWidget::updateDevice(const QList<DeviceBaseInfo *> &lst)
 
     // 更新右边的详细内容
     if (mp_PageInfo) {
-        mp_PageInfo->updateTable(lst);
+        mp_PageInfo->updateTable(itemStr, lst);
     }
 }
 

@@ -15,6 +15,11 @@ PageInfo::PageInfo(QWidget *parent)
 
 }
 
+void PageInfo::clearContent()
+{
+
+}
+
 void PageInfo::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);

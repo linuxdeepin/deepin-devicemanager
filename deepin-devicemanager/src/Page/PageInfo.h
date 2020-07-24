@@ -18,6 +18,10 @@ public:
      */
     virtual void updateInfo(const QList<DeviceBaseInfo *> &lst) = 0;
 
+    virtual void setLabel(const QString &itemstr) = 0;
+
+    virtual void clearContent();
+
 protected:
     void paintEvent(QPaintEvent *e) override;
 };

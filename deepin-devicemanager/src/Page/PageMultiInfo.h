@@ -17,7 +17,11 @@ public:
     PageMultiInfo(QWidget *parent = nullptr);
     ~PageMultiInfo() override;
 
+
     void updateInfo(const QList<DeviceBaseInfo *> &lst)override;
+
+
+    void setLabel(const QString &itemstr) override;
 
 private:
     /**

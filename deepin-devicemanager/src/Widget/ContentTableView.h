@@ -1,18 +1,17 @@
 #ifndef CONTENTTABLEVIEW_H
 #define CONTENTTABLEVIEW_H
 
-#include <QObject>
-#include <DTableView>
-#include <QStandardItemModel>
+#include <DWidget>
 #include <DStandardItem>
 
-using namespace Dtk::Widget;
-class ContentTableView : public DTableView
+DWIDGET_USE_NAMESPACE
+
+class DetailTreeView;
+
+class ContentWidget : public DWidget
 {
-    Q_OBJECT
 public:
-    ContentTableView(QWidget *parent = nullptr);
-    ~ContentTableView();
+    ContentWidget(QWidget *parent = nullptr);
 
     /**
      * @brief setItem : 设置表格的item
@@ -27,9 +26,18 @@ public:
      */
     void clear();
 
-private:
-    QStandardItemModel       *mp_Model;
+protected:
+    void paintEvent(QPaintEvent *e) override;
 
+private:
+    void initWidget();
+
+private:
+    DetailTreeView      *mp_Table;
 };
+
+
+
+
 
 #endif // CONTENTTABLEVIEW_H

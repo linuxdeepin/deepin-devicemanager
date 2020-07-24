@@ -22,8 +22,8 @@
 DWIDGET_USE_NAMESPACE
 
 // 主界面需要的一些宏定义
-#define INIT_WIDTH  1070    // 窗口的初始化宽度
-#define INIT_HEIGHT 790     // 窗口的初始化高度
+#define INIT_WIDTH  1000    // 窗口的初始化宽度
+#define INIT_HEIGHT 720     // 窗口的初始化高度
 #define MIN_WIDTH  840      // 窗口的最小宽度
 #define MIN_HEIGHT 360      // 窗口的最小高度
 
@@ -293,7 +293,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 {
     QList<DeviceBaseInfo *> lst;
     DeviceManager::instance()->getDeviceList(itemStr, lst);
-    mp_DeviceWidget->updateDevice(lst);
+    mp_DeviceWidget->updateDevice(itemStr, lst);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)

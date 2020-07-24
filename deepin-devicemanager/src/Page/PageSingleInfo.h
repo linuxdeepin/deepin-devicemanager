@@ -7,7 +7,7 @@
 #include <DLabel>
 
 #include "PageInfo.h"
-#include "ContentTableView.h"
+#include "DetailTreeView.h"
 
 DWIDGET_USE_NAMESPACE
 using namespace Dtk::Widget;
@@ -20,7 +20,11 @@ public:
 
     void updateInfo(const QList<DeviceBaseInfo *> &lst)override;
 
+    void setLabel(const QString &itemstr) override;
+
     void loadDeviceInfo(const QList<QPair<QString, QString>> &lst);
+
+    void clearContent() override;
 private:
     /**
      * @brief initWidgets : 初始化控件布局
@@ -28,8 +32,8 @@ private:
     void initWidgets();
 
 private:
-    ContentTableView          *mp_Content;
-    DLabel                    *mpLabel;
+    DetailTreeView          *mp_Content;
+    DLabel                  *mp_Label;
 };
 
 #endif // PAGESINGLEINFO_H

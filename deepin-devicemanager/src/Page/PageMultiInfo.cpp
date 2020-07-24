@@ -36,6 +36,11 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     mp_Detail->showDeviceInfo(lst);
 }
 
+void PageMultiInfo::setLabel(const QString &itemstr)
+{
+
+}
+
 void PageMultiInfo::initWidgets()
 {
     QVBoxLayout *hLayout = new QVBoxLayout(this);

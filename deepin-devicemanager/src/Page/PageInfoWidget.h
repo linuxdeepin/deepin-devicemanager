@@ -17,7 +17,7 @@ public:
      * @brief updateTable : 更新数据
      * @param lst ：需要更新的数据
      */
-    void updateTable(const QList<DeviceBaseInfo *> &lst);
+    void updateTable(const QString &itemStr, const QList<DeviceBaseInfo *> &lst);
 
 private:
     void initWidgets();
