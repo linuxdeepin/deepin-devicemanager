@@ -273,6 +273,8 @@ void DeviceCpu::setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo)
 
 
     setAttribute(mapInfo, "CPU MHz", m_Frequency, false);
+    setAttribute(mapInfo, "cpu MHz", m_Frequency, false);
+
     if (m_Frequency.contains(".")) {
         m_Frequency.replace(QRegExp("\\.00"), "MHz");
     }
