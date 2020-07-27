@@ -1,6 +1,7 @@
 #include "DetailViewDelegate.h"
 
 #include <QPainter>
+#include <QDebug>
 
 #include <DApplication>
 #include <DStyle>
@@ -60,7 +61,14 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QRect rectpath = rect;
     rectpath.setWidth(rect.width() - 1);
     path.addRect(rectpath);
-    painter->fillPath(path, background);
+
+    if (index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
+            && index.row() != 0) {
+        painter->fillPath(path, palette.color(cg, DPalette::Base));
+        qDebug() << index.row();
+    } else {
+        painter->fillPath(path, background);
+    }
 
     QRect textRect = rect;
     textRect.setX(textRect.x() + margin);
@@ -73,6 +81,8 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         painter->setPen(palette.color(cg, DPalette::FrameShadowBorder));
         painter->drawLine(rect.topRight(), rect.bottomRight());
     }
+
+
     painter->restore();
 }
 

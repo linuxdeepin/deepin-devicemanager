@@ -104,7 +104,6 @@ int DetailTreeView::setTableHeight(int paintHeight)
             return this->height();
 
         } else {
-            qDebug() << maxRow;
             // 展开，表格高度<父窗口高度
             this->setFixedHeight(ROW_HEIGHT * std::min(rowCount(), maxRow));
             return this->height();
@@ -117,12 +116,12 @@ void DetailTreeView::expandCommandLinkClicked()
     // 当前已展开详细信息
     if (m_IsExpand) {
         m_IsExpand = false;
-        for (int i = m_LimitRow + 1; i < rowCount() - 1; ++i) {
+        for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
             hideRow(i);
         }
     } else { // 当前未展开详细信息
         m_IsExpand = true;
-        for (int i = m_LimitRow + 1; i < rowCount() - 1; ++i) {
+        for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
             showRow(i);
         }
     }
