@@ -290,6 +290,11 @@ const QString &DeviceGpu::physID() const
     return m_PhysID;
 }
 
+QString DeviceGpu::subTitle()
+{
+    return m_Model;
+}
+
 void DeviceGpu::loadOtherDeviceInfo()
 {
     m_TableData.append(m_Name);

@@ -52,6 +52,12 @@ public:
      */
     int setTableHeight(int paintHeight);
 
+    /**
+     * @brief hasExpendInfo:是否由详细信息按钮
+     * @return 布尔值：true有详细信息按钮，false没有xiangzx详细信息按钮
+     */
+    bool hasExpendInfo();
+
 public slots:
     /**
      * @brief expandCommandLinkClicked:展开button点击槽函数

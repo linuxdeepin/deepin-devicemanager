@@ -181,6 +181,11 @@ const QString &DeviceAudio::chip() const
     return m_Chip;
 }
 
+QString DeviceAudio::subTitle()
+{
+    return m_Name;
+}
+
 void DeviceAudio::initFilterKey()
 {
     addFilterKey(tr("Device Name"));

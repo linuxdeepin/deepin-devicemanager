@@ -198,6 +198,11 @@ const QString &DeviceNetwork::multicast()const
     return m_Multicast;
 }
 
+QString DeviceNetwork::subTitle()
+{
+    return m_Name;
+}
+
 void DeviceNetwork::initFilterKey()
 {
     addFilterKey(QObject::tr("ioport"));

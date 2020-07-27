@@ -93,6 +93,12 @@ public:
        */
     bool isBoard()const;
 
+    /**
+     * @brief subTitle:获取子标题
+     * @return 子标题
+     */
+    QString subTitle() override;
+
 protected:
 
     /**
@@ -119,6 +125,7 @@ protected:
      * @brief loadTableData:加载表头信息
      */
     void loadTableData() override;
+
 
 private:
     QString         m_Name;                   //<! 【名称】

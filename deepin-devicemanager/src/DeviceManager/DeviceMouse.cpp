@@ -130,6 +130,11 @@ const QString &DeviceMouse::speed()const
     return m_Speed;
 }
 
+QString DeviceMouse::subTitle()
+{
+    return m_Name;
+}
+
 void DeviceMouse::initFilterKey()
 {
     // from cat devices

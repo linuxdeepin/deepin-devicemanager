@@ -135,6 +135,11 @@ const QString &DeviceBluetooth::speed()const
     return m_Speed;
 }
 
+QString DeviceBluetooth::subTitle()
+{
+    return m_Name;
+}
+
 void DeviceBluetooth::initFilterKey()
 {
     addFilterKey(QObject::tr("Bus"));

@@ -90,6 +90,11 @@ const QString &DeviceOtherPCI::inputOutput()const
     return m_InputOutput;
 }
 
+QString DeviceOtherPCI::subTitle()
+{
+    return m_Model;
+}
+
 void DeviceOtherPCI::initFilterKey()
 {
 

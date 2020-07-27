@@ -317,6 +317,11 @@ const QString &DeviceStorage::powerCycleCount()const
     return m_PowerCycleCount;
 }
 
+QString DeviceStorage::subTitle()
+{
+    return m_Model;
+}
+
 void DeviceStorage::initFilterKey()
 {
     // hwinfo --disk

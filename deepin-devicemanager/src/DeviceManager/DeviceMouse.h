@@ -91,6 +91,12 @@ public:
      */
     const QString &speed()const;
 
+    /**
+     * @brief subTitle:获取子标题
+     * @return 子标题
+     */
+    QString subTitle() override;
+
 protected:
 
     /**

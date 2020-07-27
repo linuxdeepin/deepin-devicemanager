@@ -188,3 +188,8 @@ const QString &DeviceMemory::configuredVoltage()const
 {
     return m_ConfiguredVoltage;
 }
+
+QString DeviceMemory::subTitle()
+{
+    return m_Vendor + " " + m_Name;
+}

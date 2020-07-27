@@ -63,9 +63,8 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     path.addRect(rectpath);
 
     if (index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
-            && index.row() != 0) {
+            && index.row() != 0 && dynamic_cast<DetailTreeView *>(this->parent())->hasExpendInfo()) {
         painter->fillPath(path, palette.color(cg, DPalette::Base));
-        qDebug() << index.row();
     } else {
         painter->fillPath(path, background);
     }

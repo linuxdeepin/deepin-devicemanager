@@ -109,6 +109,11 @@ const QString &DeviceOthers::logicalName()const
     return m_LogicalName;
 }
 
+QString DeviceOthers::subTitle()
+{
+    return m_Model;
+}
+
 void DeviceOthers::initFilterKey()
 {
 

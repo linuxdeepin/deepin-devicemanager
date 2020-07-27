@@ -162,6 +162,11 @@ const QString &DeviceKeyboard::description()const
     return m_Description;
 }
 
+QString DeviceKeyboard::subTitle()
+{
+    return m_Model;
+}
+
 void DeviceKeyboard::initFilterKey()
 {
     addFilterKey(QObject::tr("PROP"));

@@ -156,6 +156,11 @@ const QString &DevicePower::SBDSVersion()const
     return m_SBDSVersion;
 }
 
+QString DevicePower::subTitle()
+{
+    return m_Name;
+}
+
 void DevicePower::initFilterKey()
 {
     addFilterKey(QObject::tr("native-path"));

@@ -34,6 +34,10 @@ void DetailTreeView::setColumnAndRow(int row, int column)
     if (row > m_LimitRow) {
         setCommanLinkButton(row);
     }
+
+    if (row == m_LimitRow) {
+        hideRow(row - 1);
+    }
 }
 
 void DetailTreeView::setItem(int row, int column, QTableWidgetItem *item)
@@ -108,6 +112,15 @@ int DetailTreeView::setTableHeight(int paintHeight)
             this->setFixedHeight(ROW_HEIGHT * std::min(rowCount(), maxRow));
             return this->height();
         }
+    }
+}
+
+bool DetailTreeView::hasExpendInfo()
+{
+    if (mp_CommandBtn != nullptr) {
+        return true;
+    } else {
+        return false;
     }
 }
 

@@ -113,6 +113,11 @@ bool DeviceBios::isBoard()const
     return m_IsBoard;
 }
 
+QString DeviceBios::subTitle()
+{
+    return m_Name;
+}
+
 void DeviceBios::initFilterKey()
 {
     addFilterKey(QObject::tr("Release Date"));

@@ -103,6 +103,11 @@ const QString &DeviceImage::keyToLshw()const
     return m_KeyToLshw;
 }
 
+QString DeviceImage::subTitle()
+{
+    return m_Name;
+}
+
 void DeviceImage::initFilterKey()
 {
 

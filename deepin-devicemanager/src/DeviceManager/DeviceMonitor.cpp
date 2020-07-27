@@ -235,6 +235,11 @@ const QString &DeviceMonitor::supportResolutions()const
     return m_SupportResolution;
 }
 
+QString DeviceMonitor::subTitle()
+{
+    return m_Name;
+}
+
 void DeviceMonitor::initFilterKey()
 {
     addFilterKey(QObject::tr("Date"));
