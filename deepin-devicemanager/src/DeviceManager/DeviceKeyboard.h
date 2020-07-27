@@ -95,6 +95,12 @@ public:
      */
     const QString &description()const;
 
+    /**
+     * @brief subTitle:获取子标题
+     * @return 子标题
+     */
+    QString subTitle() override;
+
 protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey

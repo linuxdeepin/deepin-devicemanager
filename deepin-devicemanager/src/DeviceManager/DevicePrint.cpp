@@ -83,6 +83,11 @@ const QString &DevicePrint::shared()const
     return m_Shared;
 }
 
+QString DevicePrint::subTitle()
+{
+
+}
+
 void DevicePrint::initFilterKey()
 {
     addFilterKey(QObject::tr("copies"));

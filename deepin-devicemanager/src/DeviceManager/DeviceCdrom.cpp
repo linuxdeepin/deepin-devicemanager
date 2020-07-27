@@ -96,6 +96,11 @@ const QString &DeviceCdrom::speed()const
     return m_Speed;
 }
 
+QString DeviceCdrom::subTitle()
+{
+    return m_Name;
+}
+
 
 void DeviceCdrom::initFilterKey()
 {
@@ -139,3 +144,4 @@ void DeviceCdrom::loadTableData()
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Type);
 }
+

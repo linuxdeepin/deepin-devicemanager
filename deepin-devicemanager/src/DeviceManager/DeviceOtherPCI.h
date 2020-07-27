@@ -93,6 +93,12 @@ public:
      */
     const QString &inputOutput()const;
 
+    /**
+     * @brief subTitle:获取子标题
+     * @return 子标题
+     */
+    QString subTitle() override;
+
 protected:
 
     /**
