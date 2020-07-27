@@ -1,6 +1,7 @@
 #include "PageOverview.h"
 
-PageOverview::PageOverview()
+PageOverview::PageOverview(DWidget *parent)
+    : PageInfo(parent)
 {
 
 }
