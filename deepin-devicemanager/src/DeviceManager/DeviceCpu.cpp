@@ -181,6 +181,11 @@ bool DeviceCpu::frequencyIsRange()const
     return m_FrequencyIsRange;
 }
 
+QString DeviceCpu::subTitle()
+{
+    return QString("%1 %2").arg(tr("Processor")).arg(m_CoreID);
+}
+
 void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "Model name", m_Name);

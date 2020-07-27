@@ -50,7 +50,7 @@ const QStringList &DeviceBaseInfo::getTableData()
     return m_TableData;
 }
 
-const QString &DeviceBaseInfo::subTitle()const
+QString DeviceBaseInfo::subTitle()
 {
     return m_SubTitle;
 }

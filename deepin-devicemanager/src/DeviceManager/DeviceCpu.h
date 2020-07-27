@@ -157,6 +157,12 @@ public:
      */
     bool frequencyIsRange()const;
 
+    /**
+     * @brief subTitle : 详细信息里面的子标题
+     * @return
+     */
+    QString subTitle() override;
+
 protected:
 
     /**

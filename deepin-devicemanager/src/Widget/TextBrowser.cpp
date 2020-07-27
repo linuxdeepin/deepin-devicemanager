@@ -33,6 +33,17 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
     const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
     if (baseInfo.size() < 1) {return;}
 
+    // 添加子标题
+    const QString &title = info->subTitle();
+    if (!title.isEmpty()) {
+        QDomElement h3 = doc.createElement("h3");
+        h3.setAttribute("cellpadding", "3");
+        h3.setAttribute("style", "text-indent:25px;");
+        QDomText valueText = doc.createTextNode(title);
+        h3.appendChild(valueText);
+        doc.appendChild(h3);
+    }
+
     // 添加一个表格
     QDomElement table = doc.createElement("table");
     table.setAttribute("border", "0");

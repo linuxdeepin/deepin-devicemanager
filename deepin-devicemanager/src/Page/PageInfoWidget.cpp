@@ -8,7 +8,7 @@
 DWIDGET_USE_NAMESPACE
 PageInfoWidget::PageInfoWidget(QWidget *parent)
     : DWidget(parent)
-    , mp_PageInfo(new PageSingleInfo(this))
+    , mp_PageInfo(new PageMultiInfo(this))
 {
     initWidgets();
 }

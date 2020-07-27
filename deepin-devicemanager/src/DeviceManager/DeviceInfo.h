@@ -55,7 +55,7 @@ public:
      * @brief subTitle:获取子标题
      * @return 子标题
      */
-    const QString &subTitle()const;
+    virtual QString subTitle();
 
     /**
      * @brief isValid：判断属性值是否有效
