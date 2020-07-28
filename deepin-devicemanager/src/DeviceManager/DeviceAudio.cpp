@@ -186,6 +186,11 @@ QString DeviceAudio::subTitle()
     return m_Name;
 }
 
+const QString DeviceAudio::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceAudio::initFilterKey()
 {
     addFilterKey(tr("Device Name"));
@@ -221,18 +226,18 @@ void DeviceAudio::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("IRQ"), m_Irq);
-    addBaseDeviceInfo(tr("Memory"), m_Memory);
-    addBaseDeviceInfo(tr("Width"), m_Width);
-    addBaseDeviceInfo(tr("Clock"), m_Clock);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    //addBaseDeviceInfo(tr("Name"), m_Description);
-    addBaseDeviceInfo(tr("Chip"), m_Chip);
 }
 
 void DeviceAudio::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Chip"), m_Chip);
+    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(tr("Clock"), m_Clock);
+    addOtherDeviceInfo(tr("Width"), m_Width);
+    addOtherDeviceInfo(tr("Memory"), m_Memory);
+    addOtherDeviceInfo(tr("IRQ"), m_Irq);
 
+    mapInfoToList();
 }
 
 void DeviceAudio::loadTableHeader()

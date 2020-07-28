@@ -118,6 +118,15 @@ QString DeviceBios::subTitle()
     return m_Name;
 }
 
+const QString DeviceBios::getOverviewInfo()
+{
+    if (isBoard()) {
+        return m_ProductName;
+    } else {
+        return QString("");
+    }
+}
+
 void DeviceBios::initFilterKey()
 {
     addFilterKey(QObject::tr("Release Date"));
@@ -194,7 +203,7 @@ void DeviceBios::loadBaseDeviceInfo()
 
 void DeviceBios::loadOtherDeviceInfo()
 {
-
+    mapInfoToList();
 }
 
 void DeviceBios::loadTableHeader()

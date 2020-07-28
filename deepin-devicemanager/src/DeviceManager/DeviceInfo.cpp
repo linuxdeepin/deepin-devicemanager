@@ -26,6 +26,7 @@ DeviceBaseInfo::~DeviceBaseInfo()
 const QList<QPair<QString, QString>> &DeviceBaseInfo::getOtherAttribs()
 {
     m_LstOtherInfo.clear();
+    loadOtherDeviceInfo();
     return m_LstOtherInfo;
 }
 
@@ -52,7 +53,7 @@ const QStringList &DeviceBaseInfo::getTableData()
 
 QString DeviceBaseInfo::subTitle()
 {
-    return m_SubTitle;
+    return "";
 }
 
 bool DeviceBaseInfo::isValueValid(QString &value)
@@ -163,9 +164,9 @@ void DeviceBaseInfo::baseInfoToHTML(QDomDocument &doc, QList<QPair<QString, QStr
 
 void DeviceBaseInfo::subTitleToHTML(QDomDocument &doc)
 {
-    if (this->m_SubTitle.isEmpty() == false) {
+    if (this->subTitle().isEmpty() == false) {
         QDomElement h3 = doc.createElement("h3");
-        QDomText valueText = doc.createTextNode(m_SubTitle);
+        QDomText valueText = doc.createTextNode(this->subTitle());
         h3.appendChild(valueText);
         doc.appendChild(h3);
     }
@@ -371,6 +372,11 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
 
 }
 
+const QString DeviceBaseInfo::getOverviewInfo()
+{
+    return QString("");
+}
+
 void DeviceBaseInfo::loadTableHeader()
 {
     m_TableHeader.append(tr("Name"));
@@ -391,6 +397,7 @@ void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
         if (m_FilterKey.find(k) != m_FilterKey.end()) {
             m_MapOtherInfo.insert(k, it.value().trimmed());
 //            m_LstOtherInfo.append(QPair<QString, QString>(k, it.value().trimmed()));
+            qDebug() << m_LstOtherInfo.size() << "-------------" << k << ":" << it.value().trimmed();
         }
     }
 }
@@ -399,6 +406,13 @@ void DeviceBaseInfo::addBaseDeviceInfo(const QString &key, const QString &value)
 {
     if (!value.isEmpty()) {
         m_LstBaseInfo.append(QPair<QString, QString>(key, value));
+    }
+}
+
+void DeviceBaseInfo::addOtherDeviceInfo(const QString &key, const QString &value)
+{
+    if (!value.isEmpty()) {
+        m_LstOtherInfo.insert(0, QPair<QString, QString>(key, value));
     }
 }
 
@@ -419,6 +433,19 @@ void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const Q
 
         if (variable.contains("Unknown", Qt::CaseInsensitive)) {
             variable = mapInfo[key].trimmed();
+        }
+    }
+}
+
+void DeviceBaseInfo::mapInfoToList()
+{
+//    m_MapOtherInfo --> m_LstOtherInfo
+
+    auto iter = m_MapOtherInfo.begin();
+
+    for (; iter != m_MapOtherInfo.end(); ++iter) {
+        if (isValueValid(iter.value())) {
+            m_LstOtherInfo.append(QPair<QString, QString>(iter.key(), iter.value()));
         }
     }
 }

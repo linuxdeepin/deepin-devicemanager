@@ -140,6 +140,11 @@ QString DeviceBluetooth::subTitle()
     return m_Name;
 }
 
+const QString DeviceBluetooth::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceBluetooth::initFilterKey()
 {
     addFilterKey(QObject::tr("Bus"));
@@ -179,14 +184,6 @@ void DeviceBluetooth::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("MAC Address"), m_MAC);
-    addBaseDeviceInfo(tr("Logical Name"), m_LogicalName);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Driver Version"), m_DriverVersion);
-    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
 }
 
 void DeviceBluetooth::parseKeyToLshw(const QString &info)
@@ -206,7 +203,16 @@ void DeviceBluetooth::parseKeyToLshw(const QString &info)
 
 void DeviceBluetooth::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Speed"), m_Speed);
+    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addOtherDeviceInfo(tr("Driver Version"), m_DriverVersion);
+    addOtherDeviceInfo(tr("Driver"), m_Driver);
+    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addOtherDeviceInfo(tr("Logical Name"), m_LogicalName);
+    addOtherDeviceInfo(tr("MAC Address"), m_MAC);
 
+    mapInfoToList();
 }
 
 void DeviceBluetooth::loadTableData()

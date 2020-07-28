@@ -4,11 +4,12 @@
 
 #include "PageMultiInfo.h"
 #include "PageSingleInfo.h"
+#include "PageOverview.h"
 
 DWIDGET_USE_NAMESPACE
 PageInfoWidget::PageInfoWidget(QWidget *parent)
     : DWidget(parent)
-    , mp_PageInfo(new PageMultiInfo(this))
+    , mp_PageInfo(new PageSingleInfo(this))
 {
     initWidgets();
 }
@@ -19,7 +20,15 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseI
 
         mp_PageInfo->updateInfo(lst);
         mp_PageInfo->setLabel(itemStr);
+    }
+}
 
+void PageInfoWidget::updateTable(const QString &itemStr, const QMap<QString, QString> &map)
+{
+    if (mp_PageInfo) {
+
+        mp_PageInfo->updateInfo(map);
+        mp_PageInfo->setLabel(itemStr);
     }
 }
 

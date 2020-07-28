@@ -108,6 +108,11 @@ QString DeviceImage::subTitle()
     return m_Name;
 }
 
+const QString DeviceImage::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceImage::initFilterKey()
 {
 
@@ -120,15 +125,18 @@ void DeviceImage::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
+
+//    m_SubTitle = m_Name;
 }
 
 void DeviceImage::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Speed"), m_Speed);
+    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addOtherDeviceInfo(tr("Driver"), m_Driver);
+    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
 
+    mapInfoToList();
 }
 
 void DeviceImage::loadTableData()

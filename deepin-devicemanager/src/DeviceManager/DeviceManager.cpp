@@ -165,26 +165,34 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
     return m_ListDeviceType;
 }
 
+void DeviceManager::setDeviceListClass()
+{
+    m_DeviceClassMap["CPU"] = m_ListDeviceCPU;
+    m_DeviceClassMap["Bios"] =  m_ListDeviceBios;
+    m_DeviceClassMap["Memory"]  =  m_ListDeviceMemory;
+    m_DeviceClassMap["GPU"] =  m_ListDeviceGPU;
+    m_DeviceClassMap["Audio"] =  m_ListDeviceAudio;
+    m_DeviceClassMap["Storage"]  =  m_ListDeviceStorage;
+    m_DeviceClassMap["OtherPCI"] =  m_ListDeviceOtherPCI;
+    m_DeviceClassMap["Power"] =  m_ListDevicePower;
+    m_DeviceClassMap["Bluetooth"] =  m_ListDeviceBluetooth;
+    m_DeviceClassMap["Network"]  =  m_ListDeviceNetwork;
+    m_DeviceClassMap["Mouse"] =  m_ListDeviceMouse;
+    m_DeviceClassMap["Keyboard"]  =  m_ListDeviceKeyboard;
+    m_DeviceClassMap["Monitor"] =  m_ListDeviceMonitor;
+    m_DeviceClassMap["Cdrom"] =  m_ListDeviceCdrom;
+    m_DeviceClassMap["Print"] =  m_ListDevicePrint;
+    m_DeviceClassMap["Image"] =  m_ListDeviceImage;
+    m_DeviceClassMap["Others"] =  m_ListDeviceOthers;
+}
+
 bool DeviceManager::getDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst)
 {
     if (name == "Overview") {return false;}
-    else if (name == "CPU") {lst =  m_ListDeviceCPU;}
-    else if (name == "Bios") {lst =  m_ListDeviceBios;}
-    else if (name == "Memory") {lst =  m_ListDeviceMemory;}
-    else if (name == "GPU") {lst =  m_ListDeviceGPU;}
-    else if (name == "Audio") {lst =  m_ListDeviceAudio;}
-    else if (name == "Storage") {lst =  m_ListDeviceStorage;}
-    else if (name == "OtherPCI") {lst =  m_ListDeviceOtherPCI;}
-    else if (name == "Power") {lst =  m_ListDevicePower;}
-    else if (name == "Bluetooth") {lst =  m_ListDeviceBluetooth;}
-    else if (name == "Network") {lst =  m_ListDeviceNetwork;}
-    else if (name == "Mouse") {lst =  m_ListDeviceMouse;}
-    else if (name == "Keyboard") {lst =  m_ListDeviceKeyboard;}
-    else if (name == "Monitor") {lst =  m_ListDeviceMonitor;}
-    else if (name == "Cdrom") {lst =  m_ListDeviceCdrom;}
-    else if (name == "Print") {lst =  m_ListDevicePrint;}
-    else if (name == "Image") {lst =  m_ListDeviceImage;}
-    else if (name == "Others") {lst =  m_ListDeviceOthers;}
+
+    if (m_DeviceClassMap.find(name) != m_DeviceClassMap.end()) {
+        lst = m_DeviceClassMap[name];
+    }
 
     return true;
 }
@@ -787,3 +795,49 @@ int DeviceManager::currentXlsRow()
 {
     return m_CurrentXlsRow++;
 }
+
+const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
+{
+    m_OveriewMap.clear();
+
+//    foreach (auto iter, m_ListDeviceType) {
+//        QStringList strList = iter.second.split("##");
+//        if (strList.size() != 2) {
+//            continue;
+//        }
+
+//        if (m_DeviceClassMap.find(strList[1]) != m_DeviceClassMap.end()) {
+//            foreach (auto device, m_DeviceClassMap[strList[1]]) {
+//                QString ov = device->getOverviewInfo();
+//                if (ov.isEmpty() == false) {
+//                    if (m_OveriewMap.find(strList[1]) == m_OveriewMap.end()) {
+//                        m_OveriewMap[strList[1]] = device->getOverviewInfo();
+//                    } else {
+//                        m_OveriewMap[strList[1]] += "/";
+//                        m_OveriewMap[strList[1]] += device->getOverviewInfo();
+//                    }
+//                }
+
+//            }
+//        }
+//    }
+    auto iter = m_DeviceClassMap.begin();
+    for (; iter != m_DeviceClassMap.end(); ++iter) {
+        if (m_OveriewMap.find(iter.key()) == m_OveriewMap.end()) {
+            foreach (auto device, iter.value()) {
+                QString ov = device->getOverviewInfo();
+                if (ov.isEmpty() == false) {
+                    if (m_OveriewMap.find(iter.key()) == m_OveriewMap.end()) {
+                        m_OveriewMap[iter.key()] = ov;
+                    } else {
+                        m_OveriewMap[iter.key()] += "/";
+                        m_OveriewMap[iter.key()] += ov;
+                    }
+                }
+            }
+        }
+    }
+
+    return m_OveriewMap;
+}
+

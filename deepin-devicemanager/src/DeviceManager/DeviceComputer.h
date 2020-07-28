@@ -98,6 +98,12 @@ public:
      */
     void setName(const QString &dm1Name, const QString &dm2Name, const QString &dm1Family, const QString &dm1Version);
 
+    /**
+     * @brief getOverviewInfo:获取概况信息
+     * @return 概况信息
+     */
+    const QString getOverviewInfo() override;
+
 protected:
 
     /**

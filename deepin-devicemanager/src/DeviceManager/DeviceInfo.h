@@ -58,6 +58,13 @@ public:
     virtual QString subTitle();
 
     /**
+     * @brief getOverviewInfo:获取概况信息
+     * @return 概况信息
+     */
+    virtual const QString getOverviewInfo();
+
+
+    /**
      * @brief isValid：判断属性值是否有效
      * @param value：属性值
      * @return true:属性值有效
@@ -136,6 +143,7 @@ public:
     void tableInfoToXlsx(QXlsx::Document &xlsx);
     void tableHeaderToXlsx(QXlsx::Document &xlsx);
 
+
 protected:
     /**
      * @brief:初始化过滤信息
@@ -180,6 +188,13 @@ protected:
      */
     void addBaseDeviceInfo(const QString &key, const QString &value);
 
+    /**
+     * @brief addOtherDeviceInfo:添加其他信息信息
+     * @param key:属性名称
+     * @param value:属性值
+     */
+    void addOtherDeviceInfo(const QString &key, const QString &value);
+
     /**@brief:将属性设置到成员变量*/
     /**
      * @brief setAttribute:将属性设置到成员变量
@@ -190,13 +205,15 @@ protected:
      */
     void setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite = true);
 
+    void mapInfoToList();
+
 protected:
     QList<QPair<QString, QString>> m_LstBaseInfo;   //<! 基本信息
     QList<QPair<QString, QString>> m_LstOtherInfo;  //<! 其它信息
     QStringList                    m_TableHeader;   //<! 用于存放表格的表头
     QStringList                    m_TableData;     //<! 用于存放表格的内容
     QSet<QString>                  m_FilterKey;     //<! 用于避免添加重复信息
-    QString                        m_SubTitle;
+//    QString                        m_SubTitle;
 
 private:
     QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息

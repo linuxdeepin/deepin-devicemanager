@@ -49,14 +49,6 @@ void DeviceCpu::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Architecture"), m_Architecture);
     addBaseDeviceInfo(tr("CPU Family"), m_Familly);
     addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Stepping"), m_Step);
-    addBaseDeviceInfo(tr("L1d Cache"), m_CacheL1Data);
-    addBaseDeviceInfo(tr("L1i Cache"), m_CacheL1Order);
-    addBaseDeviceInfo(tr("L2 Cache"), m_CacheL2);
-    addBaseDeviceInfo(tr("L3 Cache"), m_CacheL3);
-    addBaseDeviceInfo(tr("Extensions"), m_Extensions);
-    addBaseDeviceInfo(tr("Flags"), m_Flags);
-    addBaseDeviceInfo(tr("Virtualization"), m_HardwareVirtual);
 }
 
 void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo)
@@ -184,6 +176,11 @@ bool DeviceCpu::frequencyIsRange()const
 QString DeviceCpu::subTitle()
 {
     return QString("%1 %2").arg(tr("Processor")).arg(m_CoreID);
+}
+
+const QString DeviceCpu::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
 void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
@@ -314,7 +311,17 @@ void DeviceCpu::setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo)
 
 void DeviceCpu::loadOtherDeviceInfo()
 {
+    // 倒序，头插，保证原来的顺序
+    addOtherDeviceInfo(tr("Virtualization"), m_HardwareVirtual);
+    addOtherDeviceInfo(tr("Flags"), m_Flags);
+    addOtherDeviceInfo(tr("Extensions"), m_Extensions);
+    addOtherDeviceInfo(tr("L3 Cache"), m_CacheL3);
+    addOtherDeviceInfo(tr("L2 Cache"), m_CacheL2);
+    addOtherDeviceInfo(tr("L1i Cache"), m_CacheL1Order);
+    addOtherDeviceInfo(tr("L1d Cache"), m_CacheL1Data);
+    addOtherDeviceInfo(tr("Stepping"), m_Step);
 
+    mapInfoToList();
 }
 
 void DeviceCpu::loadTableHeader()

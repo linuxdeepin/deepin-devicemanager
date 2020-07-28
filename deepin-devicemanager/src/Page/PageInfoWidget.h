@@ -19,6 +19,9 @@ public:
      */
     void updateTable(const QString &itemStr, const QList<DeviceBaseInfo *> &lst);
 
+    void updateTable(const QString &itemStr, const QMap<QString, QString> &map);
+
+
 private:
     void initWidgets();
 

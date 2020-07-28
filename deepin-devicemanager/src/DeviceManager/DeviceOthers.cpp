@@ -114,6 +114,11 @@ QString DeviceOthers::subTitle()
     return m_Model;
 }
 
+const QString DeviceOthers::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceOthers::initFilterKey()
 {
 
@@ -133,12 +138,12 @@ void DeviceOthers::loadBaseDeviceInfo()
 //    addBaseDeviceInfo(tr("Unique ID"), m_UniqID);
 //    addBaseDeviceInfo(tr("SysFS BusID"), m_BusID);
 //    addBaseDeviceInfo(tr("logical name"), m_LogicalName);
-    m_SubTitle = m_Name;
+//    m_SubTitle = m_Name;
 }
 
 void DeviceOthers::loadOtherDeviceInfo()
 {
-
+    mapInfoToList();
 }
 
 void DeviceOthers::loadTableData()

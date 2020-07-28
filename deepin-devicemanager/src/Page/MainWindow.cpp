@@ -280,6 +280,7 @@ void MainWindow::loadingFinishSlot(const QString &message)
         DApplication::restoreOverrideCursor();
 
         // 信息显示界面
+        DeviceManager::instance()->setDeviceListClass();
         const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
         mp_DeviceWidget->updateListView(types);
         mp_MainStackWidget->setCurrentWidget(mp_DeviceWidget);
@@ -292,8 +293,14 @@ void MainWindow::loadingFinishSlot(const QString &message)
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
     QList<DeviceBaseInfo *> lst;
-    DeviceManager::instance()->getDeviceList(itemStr, lst);
-    mp_DeviceWidget->updateDevice(itemStr, lst);
+    bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
+    if (ret) {
+        mp_DeviceWidget->updateDevice(itemStr, lst);
+    } else {
+        QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
+        mp_DeviceWidget->updateOverview(itemStr, overviewMap);
+    }
+
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)

@@ -167,6 +167,11 @@ QString DeviceKeyboard::subTitle()
     return m_Model;
 }
 
+const QString DeviceKeyboard::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceKeyboard::initFilterKey()
 {
     addFilterKey(QObject::tr("PROP"));
@@ -182,15 +187,12 @@ void DeviceKeyboard::initFilterKey()
 void DeviceKeyboard::loadBaseDeviceInfo()
 {
     addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Interface"), m_Interface);
-    addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
+
+//    m_SubTitle = m_Model;
 }
 
 void DeviceKeyboard::getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &mapInfo, const QString &info)
@@ -219,7 +221,13 @@ void DeviceKeyboard::getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &m
 
 void DeviceKeyboard::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Speed"), m_Speed);
+    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addOtherDeviceInfo(tr("Driver"), m_Driver);
+    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(tr("Version"), m_Version);
 
+    mapInfoToList();
 }
 
 void DeviceKeyboard::loadTableData()

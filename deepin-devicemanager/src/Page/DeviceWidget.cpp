@@ -46,6 +46,18 @@ void DeviceWidget::updateDevice(const QString &itemStr, const QList<DeviceBaseIn
     }
 }
 
+void DeviceWidget::updateOverview(const QString &itemStr, const QMap<QString, QString> &map)
+{
+    if (map.size() == 0) {
+        return;
+    }
+
+    // 更新右边的详细内容
+    if (mp_PageInfo) {
+        mp_PageInfo->updateTable(itemStr, map);
+    }
+}
+
 void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
 {
     emit itemClicked(itemStr);

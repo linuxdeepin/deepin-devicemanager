@@ -20,7 +20,7 @@ public:
 
     void updateListView(const QList<QPair<QString, QString> > &lst);
     void updateDevice(const QString &itemStr, const QList<DeviceBaseInfo *> &lst);
-
+    void updateOverview(const QString &itemStr, const QMap<QString, QString> &map);
 signals:
     void itemClicked(const QString &itemStr);
 

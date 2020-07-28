@@ -53,6 +53,11 @@ public:
     const QList<QPair<QString, QString>> &getDeviceTypes();
 
     /**
+     * @brief setDeviceListClass:设置设备信息List的分类
+     */
+    void setDeviceListClass();
+
+    /**
      * @brief getDeviceList : 获取设备列表
      * @param name : 该设备的类型
      * @return ：返回设备列表
@@ -501,6 +506,12 @@ public:
      */
     static int currentXlsRow();
 
+    /**
+     * @brief getDeviceOverview:获取所有设备设备概况信息
+     * @param overiewMap:所有设备概况Map
+     */
+    const QMap<QString, QString>  &getDeviceOverview();
+
 protected:
     DeviceManager();
     ~DeviceManager();
@@ -529,8 +540,12 @@ private:
 
     QList<QPair<QString, QString>>       m_ListDeviceType;                //<! 所有的设备类型及其对应的图标
 
-    QStringList                     m_BusIdList;
+    QStringList                          m_BusIdList;
     QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;
+
+    QMap<QString, QString>               m_OveriewMap;
+
+    QMap<QString, QList<DeviceBaseInfo *>>   m_DeviceClassMap;
 
     static int m_CurrentXlsRow;
 };

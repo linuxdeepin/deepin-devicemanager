@@ -95,6 +95,11 @@ QString DeviceOtherPCI::subTitle()
     return m_Model;
 }
 
+const QString DeviceOtherPCI::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceOtherPCI::initFilterKey()
 {
 
@@ -102,26 +107,27 @@ void DeviceOtherPCI::initFilterKey()
 
 void DeviceOtherPCI::loadBaseDeviceInfo()
 {
-    //    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Name"), m_Name.isEmpty() ? m_Vendor + m_Model : m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Capabilities"), m_Version);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Width"), m_Width);
-    addBaseDeviceInfo(tr("Clock"), m_Clock);
-    addBaseDeviceInfo(tr("Latency"), m_Latency);
-    addBaseDeviceInfo(tr("IRQ"), m_Irq);
-    addBaseDeviceInfo(tr("Memory"), m_Memory);
-    addBaseDeviceInfo(tr("Input/Output"), m_InputOutput);
-    //    addBaseDeviceInfo(tr(""), m_Description);
-    m_SubTitle = m_Name;
+    addBaseDeviceInfo(tr("Version"), m_Version);
+
+//    m_SubTitle = m_Name;
 }
 
 void DeviceOtherPCI::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Input/Output"), m_InputOutput);
+    addOtherDeviceInfo(tr("Memory"), m_Memory);
+    addOtherDeviceInfo(tr("IRQ"), m_Irq);
+    addOtherDeviceInfo(tr("Latency"), m_Latency);
+    addOtherDeviceInfo(tr("Clock"), m_Clock);
+    addOtherDeviceInfo(tr("Width"), m_Width);
+    addOtherDeviceInfo(tr("Driver"), m_Driver);
+    addOtherDeviceInfo(tr("Capabilities"), m_Version);
 
+    mapInfoToList();
 }
 
 void DeviceOtherPCI::loadTableData()

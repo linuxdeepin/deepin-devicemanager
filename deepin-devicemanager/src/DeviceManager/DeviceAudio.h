@@ -128,6 +128,12 @@ public:
      */
     QString subTitle() override;
 
+    /**
+     * @brief getOverviewInfo:获取概况信息
+     * @return 概况信息
+     */
+    const QString getOverviewInfo() override;
+
 protected:
 
     /**

@@ -124,6 +124,11 @@ void DeviceComputer::setName(const QString &dm1Name, const QString &dm2Name, con
     m_Name = family + " " + version + " " + pname;
 }
 
+const QString DeviceComputer::getOverviewInfo()
+{
+    return m_Name;
+}
+
 void DeviceComputer::initFilterKey()
 {
 
@@ -136,7 +141,7 @@ void DeviceComputer::loadBaseDeviceInfo()
 
 void DeviceComputer::loadOtherDeviceInfo()
 {
-
+    mapInfoToList();
 }
 
 void DeviceComputer::loadTableData()

@@ -101,6 +101,11 @@ QString DeviceCdrom::subTitle()
     return m_Name;
 }
 
+const QString DeviceCdrom::getOverviewInfo()
+{
+    return m_Name;
+}
+
 
 void DeviceCdrom::initFilterKey()
 {
@@ -135,7 +140,7 @@ void DeviceCdrom::loadBaseDeviceInfo()
 
 void DeviceCdrom::loadOtherDeviceInfo()
 {
-
+    mapInfoToList();
 }
 
 void DeviceCdrom::loadTableData()

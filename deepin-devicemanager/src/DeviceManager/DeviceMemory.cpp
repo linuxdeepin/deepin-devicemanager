@@ -91,19 +91,21 @@ void DeviceMemory::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Type"), m_Type);
     addBaseDeviceInfo(tr("Speed"), m_Speed);
     addBaseDeviceInfo(tr("Total Width"), m_TotalBandwidth);
-    addBaseDeviceInfo(tr("Data Width"), m_DataBandwidth);
     addBaseDeviceInfo(tr("Locator"), m_Locator);
     addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
-    addBaseDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
-    addBaseDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
-    addBaseDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
-    addBaseDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
-    m_SubTitle = m_Name;
+//    m_SubTitle = m_Name;
 }
 
 void DeviceMemory::loadOtherDeviceInfo()
 {
+    // 倒序，头插，保证原来的顺序
+    addOtherDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
+    addOtherDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
+    addOtherDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
+    addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
+    addOtherDeviceInfo(tr("Data Width"), m_DataBandwidth);
 
+    mapInfoToList();
 }
 
 void DeviceMemory::loadTableHeader()
@@ -192,4 +194,9 @@ const QString &DeviceMemory::configuredVoltage()const
 QString DeviceMemory::subTitle()
 {
     return m_Vendor + " " + m_Name;
+}
+
+const QString DeviceMemory::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
 }

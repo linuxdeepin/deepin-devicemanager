@@ -1,6 +1,10 @@
 #include "DevicePower.h"
 #include<QFileInfo>
 
+#include <DApplication>
+
+DWIDGET_USE_NAMESPACE
+
 DevicePower::DevicePower()
     : DeviceBaseInfo()
     , m_Name("")
@@ -161,6 +165,12 @@ QString DevicePower::subTitle()
     return m_Name;
 }
 
+const QString DevicePower::getOverviewInfo()
+{
+    QString value = DApplication::translate("ManulTrack", m_Name.trimmed().toStdString().data(), "");
+    return value;
+}
+
 void DevicePower::initFilterKey()
 {
     addFilterKey(QObject::tr("native-path"));
@@ -210,12 +220,12 @@ void DevicePower::loadBaseDeviceInfo()
 //    addBaseDeviceInfo(tr(""), m_MaxPower);
 //    addBaseDeviceInfo(tr(""), m_Enabled);
 //    addBaseDeviceInfo(tr(""), m_HotSwitch);
-    m_SubTitle = m_Name;
+//    m_SubTitle = m_Name;
 }
 
 void DevicePower::loadOtherDeviceInfo()
 {
-
+    mapInfoToList();
 }
 
 void DevicePower::loadTableData()

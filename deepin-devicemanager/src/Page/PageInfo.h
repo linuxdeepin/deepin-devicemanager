@@ -9,6 +9,7 @@ class DeviceBaseInfo;
 using namespace Dtk::Widget;
 class PageInfo : public DWidget
 {
+    Q_OBJECT
 public:
     PageInfo(QWidget *parent = nullptr);
 
@@ -17,6 +18,8 @@ public:
      * @param lst ：需要更新的数据
      */
     virtual void updateInfo(const QList<DeviceBaseInfo *> &lst) = 0;
+
+    virtual void updateInfo(const QMap<QString, QString> &map);
 
     virtual void setLabel(const QString &itemstr) = 0;
 

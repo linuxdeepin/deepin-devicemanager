@@ -50,29 +50,12 @@ void DeviceGpu::initFilterKey()
 void DeviceGpu::loadBaseDeviceInfo()
 {
     addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Graphics Memory"), m_GraphicsMemory);
-    addBaseDeviceInfo(tr("Width"), m_Width);
-    addBaseDeviceInfo(tr("IRQ"), m_IRQ);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Display Output"), m_DisplayOutput);
-    addBaseDeviceInfo(tr("VGA"), m_VGA);
-    addBaseDeviceInfo(tr("HDMI"), m_HDMI);
-    addBaseDeviceInfo(tr("eDP"), m_eDP);
-    addBaseDeviceInfo(tr("DP"), m_DisplayPort);
-    addBaseDeviceInfo(tr("Clock"), m_Clock);
-    addBaseDeviceInfo(tr("Description"), m_Description);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
-    addBaseDeviceInfo(tr("Minimum Resolution"), m_MinimumResolution);
-    addBaseDeviceInfo(tr("Maximum Resolution"), m_MaximumResolution);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("IO Port"), m_IOPort);
-    addBaseDeviceInfo(tr("Memory"), m_MemAddress);
-    addBaseDeviceInfo(tr("Physical ID"), m_PhysID);
 }
+
 
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
 {
@@ -295,11 +278,33 @@ QString DeviceGpu::subTitle()
     return m_Model;
 }
 
+const QString DeviceGpu::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceGpu::loadOtherDeviceInfo()
 {
-    m_TableData.append(m_Name);
-    m_TableData.append(m_Vendor);
-    m_TableData.append(m_Model);
+    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
+    addOtherDeviceInfo(tr("Memory"), m_MemAddress);
+    addOtherDeviceInfo(tr("IO Port"), m_IOPort);
+    addOtherDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addOtherDeviceInfo(tr("Maximum Resolution"), m_MaximumResolution);
+    addOtherDeviceInfo(tr("Minimum Resolution"), m_MinimumResolution);
+    addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
+    addOtherDeviceInfo(tr("Driver"), m_Driver);
+    addOtherDeviceInfo(tr("Description"), m_Description);
+    addOtherDeviceInfo(tr("Clock"), m_Clock);
+    addOtherDeviceInfo(tr("DP"), m_DisplayPort);
+    addOtherDeviceInfo(tr("eDP"), m_eDP);
+    addOtherDeviceInfo(tr("HDMI"), m_HDMI);
+    addOtherDeviceInfo(tr("VGA"), m_VGA);
+    addOtherDeviceInfo(tr("Display Output"), m_DisplayOutput);
+    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(tr("IRQ"), m_IRQ);
+    addOtherDeviceInfo(tr("Width"), m_Width);
+
+    mapInfoToList();
 }
 
 void DeviceGpu::loadTableData()

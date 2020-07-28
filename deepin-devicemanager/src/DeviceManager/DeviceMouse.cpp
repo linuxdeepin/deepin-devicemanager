@@ -135,6 +135,11 @@ QString DeviceMouse::subTitle()
     return m_Name;
 }
 
+const QString DeviceMouse::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceMouse::initFilterKey()
 {
     // from cat devices
@@ -156,17 +161,19 @@ void DeviceMouse::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Interface"), m_Interface);
     addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
-    m_SubTitle = m_Name;
+
+//    m_SubTitle = m_Name;
 }
 
 void DeviceMouse::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Speed"), m_Speed);
+    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addOtherDeviceInfo(tr("Driver"), m_Driver);
+    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(tr("Version"), m_Version);
 
+    mapInfoToList();
 }
 
 void DeviceMouse::loadTableData()

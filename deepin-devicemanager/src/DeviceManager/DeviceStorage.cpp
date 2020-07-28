@@ -322,6 +322,11 @@ QString DeviceStorage::subTitle()
     return m_Model;
 }
 
+const QString DeviceStorage::getOverviewInfo()
+{
+    return m_Model;
+}
+
 void DeviceStorage::initFilterKey()
 {
     // hwinfo --disk
@@ -348,22 +353,24 @@ void DeviceStorage::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Media Type"), m_MediaType);
     addBaseDeviceInfo(tr("Size"), m_Size);
-    addBaseDeviceInfo(tr("Rotation Rate"), m_RotationRate);
-    addBaseDeviceInfo(tr("Interface"), m_Interface);
-    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
     addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Description"), m_Description);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
-    addBaseDeviceInfo(tr("Firmware Version"), m_FirmwareVersion);
-    addBaseDeviceInfo(tr("Power On Hours"), m_PowerOnHours);
-    addBaseDeviceInfo(tr("Power Cycle Count"), m_PowerCycleCount);
-    m_SubTitle = m_Model;
+
+//    m_SubTitle = m_Model;
 }
 
 void DeviceStorage::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Power Cycle Count"), m_PowerCycleCount);
+    addOtherDeviceInfo(tr("Power On Hours"), m_PowerOnHours);
+    addOtherDeviceInfo(tr("Firmware Version"), m_FirmwareVersion);
+    addOtherDeviceInfo(tr("Speed"), m_Speed);
+    addOtherDeviceInfo(tr("Description"), m_Description);
+    addOtherDeviceInfo(tr("Serial Number"), m_SerialNumber);
+    addOtherDeviceInfo(tr("Interface"), m_Interface);
+    addOtherDeviceInfo(tr("Rotation Rate"), m_RotationRate);
 
+    mapInfoToList();
 }
 
 void DeviceStorage::loadTableHeader()

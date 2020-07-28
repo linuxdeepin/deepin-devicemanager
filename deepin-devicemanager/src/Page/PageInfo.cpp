@@ -15,6 +15,11 @@ PageInfo::PageInfo(QWidget *parent)
 
 }
 
+void PageInfo::updateInfo(const QMap<QString, QString> &map)
+{
+
+}
+
 void PageInfo::clearContent()
 {
 

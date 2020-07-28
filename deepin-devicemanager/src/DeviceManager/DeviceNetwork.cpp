@@ -203,6 +203,11 @@ QString DeviceNetwork::subTitle()
     return m_Name;
 }
 
+const QString DeviceNetwork::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceNetwork::initFilterKey()
 {
     addFilterKey(QObject::tr("ioport"));
@@ -220,29 +225,31 @@ void DeviceNetwork::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
     addBaseDeviceInfo(tr("Driver"), m_Driver);
     addBaseDeviceInfo(tr("Driver Version"), m_DriverVersion);
-    addBaseDeviceInfo(tr("Logical Name"), m_LogicalName);
-    addBaseDeviceInfo(tr("MAC Address"), m_MACAddress);
-    addBaseDeviceInfo(tr("IRQ"), m_Irq);
-    addBaseDeviceInfo(tr("Memory"), m_Memory);
-    addBaseDeviceInfo(tr("Width"), m_Width);
-    addBaseDeviceInfo(tr("Clock"), m_Clock);
-    addBaseDeviceInfo(tr("Auto Negotiation"), m_Autonegotiation);
-    addBaseDeviceInfo(tr("Broadcast"), m_Broadcast);
-    addBaseDeviceInfo(tr("Duplex"), m_Duplex);
-    addBaseDeviceInfo(tr("Firmware"), m_Firmware);
-    addBaseDeviceInfo(tr("IP"), m_Ip);
-    addBaseDeviceInfo(tr("Latency"), m_Latency);
-    addBaseDeviceInfo(tr("Link"), m_Link);
-    addBaseDeviceInfo(tr("Multicast"), m_Multicast);
-    addBaseDeviceInfo(tr("Port"), m_Port);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
-    addBaseDeviceInfo(tr("Capacity"), m_Capacity);
-    m_SubTitle = m_Name;
+
+//    m_SubTitle = m_Name;
 }
 
 void DeviceNetwork::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Capacity"), m_Capacity);
+    addOtherDeviceInfo(tr("Speed"), m_Speed);
+    addOtherDeviceInfo(tr("Port"), m_Port);
+    addOtherDeviceInfo(tr("Multicast"), m_Multicast);
+    addOtherDeviceInfo(tr("Link"), m_Link);
+    addOtherDeviceInfo(tr("Latency"), m_Latency);
+    addOtherDeviceInfo(tr("IP"), m_Ip);
+    addOtherDeviceInfo(tr("Firmware"), m_Firmware);
+    addOtherDeviceInfo(tr("Duplex"), m_Duplex);
+    addOtherDeviceInfo(tr("Broadcast"), m_Broadcast);
+    addOtherDeviceInfo(tr("Auto Negotiation"), m_Autonegotiation);
+    addOtherDeviceInfo(tr("Clock"), m_Clock);
+    addOtherDeviceInfo(tr("Width"), m_Width);
+    addOtherDeviceInfo(tr("Memory"), m_Memory);
+    addOtherDeviceInfo(tr("IRQ"), m_Irq);
+    addOtherDeviceInfo(tr("MAC Address"), m_MACAddress);
+    addOtherDeviceInfo(tr("Logical Name"), m_LogicalName);
 
+    mapInfoToList();
 }
 
 void DeviceNetwork::loadTableData()

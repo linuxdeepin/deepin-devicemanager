@@ -85,7 +85,12 @@ const QString &DevicePrint::shared()const
 
 QString DevicePrint::subTitle()
 {
+    return m_Name;
+}
 
+const QString DevicePrint::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
 void DevicePrint::initFilterKey()
@@ -125,16 +130,18 @@ void DevicePrint::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
-    addBaseDeviceInfo(tr("Interface Type"), m_InterfaceType);
-    addBaseDeviceInfo(tr("Status"), m_Status);
-    addBaseDeviceInfo(tr("URI"), m_URI);
-    addBaseDeviceInfo(tr("Shared"), m_Shared);
-    m_SubTitle = m_Name;
+
+//    m_SubTitle = m_Name;
 }
 
 void DevicePrint::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Shared"), m_Shared);
+    addOtherDeviceInfo(tr("URI"), m_URI);
+    addOtherDeviceInfo(tr("Status"), m_Status);
+    addOtherDeviceInfo(tr("Interface Type"), m_InterfaceType);
 
+    mapInfoToList();
 }
 
 void DevicePrint::loadTableData()

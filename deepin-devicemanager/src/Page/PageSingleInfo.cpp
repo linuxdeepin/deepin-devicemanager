@@ -35,7 +35,7 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     clearContent();
 
     QList<QPair<QString, QString>> baseInfoMap = lst[0]->getBaseAttribs();
-    QList<QPair<QString, QString>> otherInfoMap = lst[0]->getBaseAttribs();
+    QList<QPair<QString, QString>> otherInfoMap = lst[0]->getOtherAttribs();
     baseInfoMap = baseInfoMap + otherInfoMap;
 
     loadDeviceInfo(baseInfoMap);

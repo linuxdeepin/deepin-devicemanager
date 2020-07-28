@@ -101,6 +101,12 @@ public:
      */
     QString subTitle() override;
 
+    /**
+     * @brief getOverviewInfo:获取概况信息
+     * @return 概况信息
+     */
+    const QString getOverviewInfo() override;
+
 protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
