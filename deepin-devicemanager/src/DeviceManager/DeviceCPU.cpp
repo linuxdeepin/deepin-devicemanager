@@ -198,7 +198,14 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 
 void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    setAttribute(mapInfo, "version", m_Name);
+    // longxin CPU型号不从lshw中获取
+    // bug39874
+    if (m_Name.contains("Loongson", Qt::CaseInsensitive)) {
+        setAttribute(mapInfo, "version", m_Name, false);
+    } else {
+        setAttribute(mapInfo, "version", m_Name);
+    }
+
     setAttribute(mapInfo, "vendor", m_Vendor);
 //    setAttribute(mapInfo,"Thread(s) per core",m_ThreadNum);
 //    setAttribute(mapInfo,"BogoMIPS",m_BogoMIPS);
@@ -226,7 +233,14 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
-    setAttribute(mapInfo, "product", m_Name);
+    // longxin CPU型号不从dmidecode中获取
+    // bug39874
+    if (m_Name.contains("Loongson", Qt::CaseInsensitive)) {
+        setAttribute(mapInfo, "product", m_Name, false);
+    } else {
+        setAttribute(mapInfo, "product", m_Name);
+    }
+
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Max Speed", m_Frequency, false);
     setAttribute(mapInfo, "Current Speed", m_CurFrequency);
