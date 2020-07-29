@@ -674,7 +674,8 @@ void DeviceGenerator::getImageInfoFromHwinfo()
         }
         if ((*it)["Model"].contains("camera", Qt::CaseInsensitive) ||
                 (*it)["Device"].contains("camera", Qt::CaseInsensitive) ||
-                (*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive)) {
+                (*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive) ||
+                (*it)["Model"].contains("webcam", Qt::CaseInsensitive)) { // "webcam"  bug39981
             DeviceImage device;
             device.setInfoFromHwinfo(*it);
             DeviceManager::instance()->addImageDevice(device);

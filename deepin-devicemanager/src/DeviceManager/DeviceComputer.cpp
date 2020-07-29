@@ -34,7 +34,7 @@ const QString &DeviceComputer::vendor()
 
 const QString &DeviceComputer::name()
 {
-    if (m_Name.contains("None")) {
+    if (m_Name.contains("None", Qt::CaseInsensitive)) {
         m_Name = "";
     }
     return m_Name;
