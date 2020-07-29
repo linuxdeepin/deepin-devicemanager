@@ -23,6 +23,9 @@ public:
 
     void setLabel(const QString &itemstr) override;
 
+private slots:
+    void slotItemClicked(int row);
+
 private:
     /**
      * @brief initWidgets : 初始化控件布局

@@ -23,6 +23,9 @@ PageTableHeader::PageTableHeader(QWidget *parent)
     , mp_Menu(new DMenu(this))
 {
     initWidgets();
+
+    // 连接曹函数
+    connect(mp_Table, &TableWidget::itemClicked, this, &PageTableHeader::slotItemClicked);
 }
 
 PageTableHeader::~PageTableHeader()
@@ -72,8 +75,14 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
         }
     }
 
+    mp_Table->setColumnAverage();
 }
 
+void PageTableHeader::setColumnAverage()
+{
+    if (mp_Table)
+        mp_Table->setColumnAverage();
+}
 
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
@@ -102,4 +111,10 @@ void PageTableHeader::slotActionCopy()
 {
 
 }
+
+void PageTableHeader::slotItemClicked(int row)
+{
+    emit itemClicked(row);
+}
+
 

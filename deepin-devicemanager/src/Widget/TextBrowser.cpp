@@ -14,6 +14,7 @@
 
 TextBrowser::TextBrowser(QWidget *parent)
     : DTextBrowser(parent)
+    , m_ShowOtherInfo(false)
 {
     DFontSizeManager::instance()->bind(this, DFontSizeManager::SizeType(DFontSizeManager::T7));
     setFrameShape(QFrame::NoFrame);
@@ -22,6 +23,7 @@ TextBrowser::TextBrowser(QWidget *parent)
 
 void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
 {
+    mp_Info = info;
     // 先清空内容 *************************************************
     clear();
     if (!info) {
@@ -30,54 +32,42 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
 
     // 显示设备的信息 *************************************************
     QDomDocument doc;
-    const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
-    if (baseInfo.size() < 1) {return;}
 
     // 添加子标题
-    const QString &title = info->subTitle();
-    if (!title.isEmpty()) {
-        QDomElement h3 = doc.createElement("h3");
-        h3.setAttribute("cellpadding", "3");
-        h3.setAttribute("style", "text-indent:25px;");
-        QDomText valueText = doc.createTextNode(title);
-        h3.appendChild(valueText);
-        doc.appendChild(h3);
-    }
+    domTitleInfo(doc, mp_Info);
 
     // 添加一个表格
-    QDomElement table = doc.createElement("table");
-    table.setAttribute("border", "0");
-    table.setAttribute("width", "100%");
-    table.setAttribute("cellpadding", "3");
+    const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
+    domTableInfo(doc, baseInfo);
 
-    foreach (auto pair, baseInfo) {
-        // 添加一行
-        QDomElement tr = doc.createElement("tr");
+    // 将设备信息显示到TextBrowser
+    setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
+}
 
-        // 该行的第一列
-        QDomElement td = doc.createElement("td");
-        td.setAttribute("width", "25%");
-        td.setAttribute("style", "text-align:left;");
-        td.setAttribute("style", "text-indent:25px;");
-
-        QDomText nameText = doc.createTextNode(pair.first + ":");
-        td.appendChild(nameText);
-        tr.appendChild(td);
-
-        // 改行的第二列
-        QDomElement td2 = doc.createElement("td");
-        td2.setAttribute("width", "75%");
-        QDomText valueText;
-        valueText = doc.createTextNode(pair.second);
-        td2.appendChild(valueText);
-        tr.appendChild(td2);
-
-        // 将改行添加到表格
-        table.appendChild(tr);
+void TextBrowser::updateInfo()
+{
+    // 先清空内容 *************************************************
+    clear();
+    if (!mp_Info) {
+        return;
     }
 
-    // 添加该表格到doc
-    doc.appendChild(table);
+    // 显示设备的信息 *************************************************
+    QDomDocument doc;
+
+    // 添加子标题
+    domTitleInfo(doc, mp_Info);
+
+    // 添加一个表格
+    const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
+    domTableInfo(doc, baseInfo);
+    if (!m_ShowOtherInfo) {
+        const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
+        domTableInfo(doc, otherInfo);
+        m_ShowOtherInfo = true;
+    } else {
+        m_ShowOtherInfo = false;
+    }
 
     // 将设备信息显示到TextBrowser
     setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
@@ -147,4 +137,54 @@ void TextBrowser::keyPressEvent(QKeyEvent *event)
 void TextBrowser::wheelEvent(QWheelEvent *event)
 {
 
+}
+
+void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
+{
+    const QString &title = info->subTitle();
+    if (!title.isEmpty()) {
+        QDomElement h3 = doc.createElement("h3");
+        h3.setAttribute("cellpadding", "3");
+        h3.setAttribute("style", "text-indent:25px;");
+        QDomText valueText = doc.createTextNode(title);
+        h3.appendChild(valueText);
+        doc.appendChild(h3);
+    }
+}
+
+void TextBrowser::domTableInfo(QDomDocument &doc, const QList<QPair<QString, QString>> &info)
+{
+    QDomElement table = doc.createElement("table");
+    table.setAttribute("border", "0");
+    table.setAttribute("width", "100%");
+    table.setAttribute("cellpadding", "3");
+
+    foreach (auto pair, info) {
+        // 添加一行
+        QDomElement tr = doc.createElement("tr");
+
+        // 该行的第一列
+        QDomElement td = doc.createElement("td");
+        td.setAttribute("width", "25%");
+        td.setAttribute("style", "text-align:left;");
+        td.setAttribute("style", "text-indent:25px;");
+
+        QDomText nameText = doc.createTextNode(pair.first + ":");
+        td.appendChild(nameText);
+        tr.appendChild(td);
+
+        // 改行的第二列
+        QDomElement td2 = doc.createElement("td");
+        td2.setAttribute("width", "75%");
+        QDomText valueText;
+        valueText = doc.createTextNode(pair.second);
+        td2.appendChild(valueText);
+        tr.appendChild(td2);
+
+        // 将改行添加到表格
+        table.appendChild(tr);
+    }
+
+    // 添加该表格到doc
+    doc.appendChild(table);
 }

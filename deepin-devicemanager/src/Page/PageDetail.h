@@ -55,6 +55,12 @@ public:
      */
     void showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo);
 
+    /**
+     * @brief showInfoOfNum : 点击表头时，详细信息显示到相应的位置
+     * @param index : 需要显示到相应的位置
+     */
+    void showInfoOfNum(int index);
+
 protected:
     void paintEvent(QPaintEvent *e) override;
 
@@ -69,6 +75,9 @@ private:
      * @brief clearWidget : 清楚widget
      */
     void clearWidget();
+
+private slots:
+    void slotBtnClicked();
 
 private:
     QVBoxLayout      *mp_ScrollAreaLayout;

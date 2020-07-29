@@ -9,11 +9,17 @@ class TableWidget;
 using namespace Dtk::Widget;
 class PageTableHeader : public DWidget
 {
+    Q_OBJECT
 public:
     PageTableHeader(QWidget *parent = nullptr);
     ~PageTableHeader();
 
     void updateTable(const QList<QStringList> &lst);
+
+    void setColumnAverage();
+
+signals:
+    void itemClicked(int row);
 
 protected:
     void paintEvent(QPaintEvent *e) override;
@@ -23,6 +29,7 @@ private slots:
     void slotActionRefresh();
     void slotActionExport();
     void slotActionCopy();
+    void slotItemClicked(int row);
 
 private:
     /**
@@ -31,7 +38,7 @@ private:
     void initWidgets();
 
 private:
-    TableWidget           *mp_Table;
+    TableWidget               *mp_Table;
 
     QAction                   *mp_Refresh;     //<! 右键刷新
     QAction                   *mp_Export;      //<! 右键导出

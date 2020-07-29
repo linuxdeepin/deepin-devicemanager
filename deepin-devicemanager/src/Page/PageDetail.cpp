@@ -9,6 +9,7 @@
 #include <DApplication>
 #include <DStyle>
 #include <QDebug>
+#include <QScrollBar>
 
 DWIDGET_USE_NAMESPACE
 
@@ -170,6 +171,23 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
     mp_ScrollAreaLayout->addStretch();
 }
 
+void PageDetail::showInfoOfNum(int index)
+{
+    if (index >= m_ListHlayout.size()
+            || index >= m_ListTextBrowser.size()
+            || index >= m_ListDetailButton.size()
+            || index >= m_ListDetailSeperator.size()) {
+        return;
+    }
+    int value = 0;
+    for (int i = 0; i <= index - 1; i++) {
+        value += m_ListTextBrowser[i]->height();
+        value += m_ListDetailButton[i]->height();
+        value += m_ListDetailSeperator[i]->height();
+    }
+    mp_ScrollArea->verticalScrollBar()->setValue(value);
+}
+
 void PageDetail::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
@@ -218,6 +236,7 @@ void PageDetail::addWidgets(TextBrowser *widget)
     QHBoxLayout *vLayout = new QHBoxLayout(this);
     vLayout->addSpacing(34);
     DetailButton *button = new DetailButton(tr("Details"));
+    connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
     vLayout->addWidget(button);
     vLayout->addStretch(-1);
     mp_ScrollAreaLayout->addLayout(vLayout);
@@ -256,4 +275,24 @@ void PageDetail::clearWidget()
     QLayoutItem *layoutItem = mp_ScrollAreaLayout->itemAt(0);
     mp_ScrollAreaLayout->removeItem(layoutItem);
     delete  layoutItem;
+}
+
+void PageDetail::slotBtnClicked()
+{
+    DetailButton *button = qobject_cast<DetailButton *>(sender());
+    int index = 0;
+    foreach (DetailButton *b, m_ListDetailButton) {
+        if (button == b) {
+            break;
+        }
+        index++;
+    }
+
+    TextBrowser *browser = m_ListTextBrowser[index];
+    browser->updateInfo();
+    if (button->text() == tr("Details")) {
+        button->setText(tr("Put away"));
+    } else {
+        button->setText(tr("Details"));
+    }
 }

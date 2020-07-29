@@ -13,6 +13,7 @@ using namespace Dtk::Widget;
 
 class TableWidget : public DWidget
 {
+    Q_OBJECT
 public:
     TableWidget(QWidget *parent = nullptr);
 
@@ -30,13 +31,21 @@ public:
      */
     void setItem(int row, int column, DStandardItem *item);
 
+    void setColumnAverage();
+
     /**
      * @brief clear : 清空数据
      */
     void clear();
 
+signals:
+    void itemClicked(int row);
+
 protected:
     void paintEvent(QPaintEvent *e) override;
+
+private slots:
+    void slotItemClicked(const QModelIndex &index);
 
 private:
     void initWidget();

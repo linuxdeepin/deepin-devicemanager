@@ -21,6 +21,9 @@ TableWidget::TableWidget(QWidget *parent)
     , mp_Table(new LogTreeView(this))
 {
     initWidget();
+
+    // 连接信号和曹函数
+    connect(mp_Table, &LogTreeView::clicked, this, &TableWidget::slotItemClicked);
 }
 
 void TableWidget::setHeaderLabels(const QStringList &lst)
@@ -34,6 +37,14 @@ void TableWidget::setItem(int row, int column, DStandardItem *item)
 {
     if (mp_Table) {
         mp_Table->setItem(row, column, item);
+    }
+}
+
+void TableWidget::setColumnAverage()
+{
+    if (mp_Table) {
+        qDebug() << "*************PageTableHeader::updateTable**************" << mp_Table->width();
+        mp_Table->setColumnAverage();
     }
 }
 
@@ -89,6 +100,14 @@ void TableWidget::paintEvent(QPaintEvent *e)
 
     painter.restore();
     DWidget::paintEvent(e);
+}
+
+void TableWidget::slotItemClicked(const QModelIndex &index)
+{
+    int row = index.row();
+    if (row >= 0) {
+        emit itemClicked(row);
+    }
 }
 
 void TableWidget::initWidget()

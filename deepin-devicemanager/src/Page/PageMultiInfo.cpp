@@ -4,6 +4,7 @@
 #include <QAction>
 #include <QIcon>
 #include <DMenu>
+#include <QDebug>
 
 #include "PageTableHeader.h"
 #include "PageDetail.h"
@@ -16,6 +17,7 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     , mp_Detail(new PageDetail(this))
 {
     initWidgets();
+    connect(mp_Table, &PageTableHeader::itemClicked, this, &PageMultiInfo::slotItemClicked);
 }
 
 PageMultiInfo::~PageMultiInfo()
@@ -39,6 +41,13 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 void PageMultiInfo::setLabel(const QString &itemstr)
 {
 
+}
+
+void PageMultiInfo::slotItemClicked(int row)
+{
+    if (mp_Detail) {
+        mp_Detail->showInfoOfNum(row);
+    }
 }
 
 void PageMultiInfo::initWidgets()

@@ -175,7 +175,7 @@ bool DeviceCpu::frequencyIsRange()const
 
 QString DeviceCpu::subTitle()
 {
-    return QString("%1 %2").arg(tr("Processor")).arg(m_CoreID);
+    return QString("%1 %2").arg(tr("Processor")).arg(m_PhysicalID);
 }
 
 const QString DeviceCpu::getOverviewInfo()

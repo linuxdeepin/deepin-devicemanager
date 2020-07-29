@@ -6,6 +6,7 @@
 #include "MacroDefinition.h"
 
 #include <QHBoxLayout>
+#include <QDebug>
 
 DeviceWidget::DeviceWidget(QWidget *parent)
     : DWidget(parent)

@@ -48,6 +48,11 @@ public:
     void setItem(int row, int column, QStandardItem *item);
 
     /**
+     * @brief setColumnAverage : 设置表头等宽
+     */
+    void setColumnAverage();
+
+    /**
      * @brief clear : 清空数据
      */
     void clear();
