@@ -169,7 +169,11 @@ QString DeviceKeyboard::subTitle()
 
 const QString DeviceKeyboard::getOverviewInfo()
 {
-    return m_Name.isEmpty() ? m_Model : m_Name;
+    QString ov = QString("%1 (%2)") \
+                 .arg(m_Name) \
+                 .arg(m_Model);
+
+    return ov;
 }
 
 void DeviceKeyboard::initFilterKey()

@@ -46,9 +46,13 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseI
 
 void PageInfoWidget::updateTable(const QString &itemStr, const QMap<QString, QString> &map)
 {
+    mp_PageOverviewInfo->setVisible(true);
+    mp_PageSignalInfo->setVisible(false);
+    mp_PageMutilInfo->setVisible(false);
+    mp_PageInfo = mp_PageOverviewInfo;
     if (mp_PageInfo) {
         mp_PageInfo->updateInfo(map);
-        mp_PageInfo->setLabel(itemStr);
+        mp_PageInfo->setLabel(map["Overview"]);
     }
 }
 

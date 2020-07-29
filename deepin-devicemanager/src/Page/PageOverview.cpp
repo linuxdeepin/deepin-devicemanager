@@ -7,6 +7,8 @@
 
 #include <DFontSizeManager>
 
+#include <QDebug>
+
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
     , mp_PicLabel(new DLabel(this))
@@ -24,9 +26,14 @@ void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &lst)
 void PageOverview::updateInfo(const QMap<QString, QString> &map)
 {
     int row = map.size();
-    mp_Overview->setColumnAndRow(row);
+    mp_Overview->setColumnAndRow(row - 1);
 
-    int i = 0;
+    QTableWidgetItem *itemFirst = new QTableWidgetItem(map.find("OS").key());
+    mp_Overview->setItem(0, 0, itemFirst);
+    QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find("OS").value());
+    mp_Overview->setItem(0, 1, itemSecond);
+
+    int i = 1;
 
     const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
 
@@ -34,7 +41,11 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
         QStringList strList = iter.second.split("##");
 
         if (strList.size() != 2) {
-            return;
+            continue;
+        }
+
+        if (strList[1] == "Overview") {
+            continue;
         }
 
         if (map.find(strList[1]) != map.end()) {
@@ -52,8 +63,32 @@ void PageOverview::setLabel(const QString &itemstr)
     mp_TextLabel->setText(itemstr);
     DFontSizeManager::instance()->bind(mp_TextLabel, DFontSizeManager::T3);
 
+    // 系统中获取
+//    QIcon icon(QIcon::fromTheme("computer"));
+//    QPixmap pic = icon.pixmap(96, 96);
+//    mp_PicLabel->setPixmap(pic);
+
+    // 资源文件获取、
     QPixmap pic(96, 96);
-    pic.load(QString::fromLocal8Bit("/home/jxm/Desktop/device/台式.svg"));
+
+    QString path = ":/icons/deepin/builtin/device/";
+    if (itemstr.contains("desktop", Qt::CaseInsensitive)) {
+        path += "desktop.svg";
+    }
+    if (itemstr.contains("server", Qt::CaseInsensitive)) {
+        path += "server.svg";
+    }
+    if (itemstr.contains("ternimal", Qt::CaseInsensitive)) {
+        path += "ternimal.svg";
+    }
+    if (itemstr.contains("laptop", Qt::CaseInsensitive)) {
+        path += "laptop.svg";
+    }
+    if (itemstr.contains("Tablet", Qt::CaseInsensitive)) {
+        path += "Tablet.svg";
+    }
+
+    pic.load(path);
     mp_PicLabel->setPixmap(pic);
 }
 

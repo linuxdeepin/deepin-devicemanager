@@ -800,27 +800,6 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
 {
     m_OveriewMap.clear();
 
-//    foreach (auto iter, m_ListDeviceType) {
-//        QStringList strList = iter.second.split("##");
-//        if (strList.size() != 2) {
-//            continue;
-//        }
-
-//        if (m_DeviceClassMap.find(strList[1]) != m_DeviceClassMap.end()) {
-//            foreach (auto device, m_DeviceClassMap[strList[1]]) {
-//                QString ov = device->getOverviewInfo();
-//                if (ov.isEmpty() == false) {
-//                    if (m_OveriewMap.find(strList[1]) == m_OveriewMap.end()) {
-//                        m_OveriewMap[strList[1]] = device->getOverviewInfo();
-//                    } else {
-//                        m_OveriewMap[strList[1]] += "/";
-//                        m_OveriewMap[strList[1]] += device->getOverviewInfo();
-//                    }
-//                }
-
-//            }
-//        }
-//    }
     auto iter = m_DeviceClassMap.begin();
     for (; iter != m_DeviceClassMap.end(); ++iter) {
         if (m_OveriewMap.find(iter.key()) == m_OveriewMap.end()) {
@@ -837,6 +816,15 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
             }
         }
     }
+
+    // 设备名称
+    m_OveriewMap["Overview"] = m_ListDeviceComputer[0]->getOverviewInfo();
+
+    // 操作系统
+    m_OveriewMap["OS"] = dynamic_cast<DeviceComputer *>(m_ListDeviceComputer[0])->getOSInfo();
+
+    // CPU 概况显示 样式"Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz (四核 / 四逻辑处理器)"
+    m_OveriewMap["CPU"] = m_ListDeviceCPU[0] ->getOverviewInfo();
 
     return m_OveriewMap;
 }

@@ -242,7 +242,11 @@ QString DeviceMonitor::subTitle()
 
 const QString DeviceMonitor::getOverviewInfo()
 {
-    return m_Name.isEmpty() ? m_Model : m_Name;
+    QString ov;
+
+    ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
+
+    return ov;
 }
 
 void DeviceMonitor::initFilterKey()

@@ -53,7 +53,7 @@ void DeviceWidget::updateOverview(const QString &itemStr, const QMap<QString, QS
         return;
     }
 
-    // 更新右边的详细内容
+    // 更新概况
     if (mp_PageInfo) {
         mp_PageInfo->updateTable(itemStr, map);
     }

@@ -246,6 +246,8 @@ void MainWindow::initWidgets()
 
     // 添加信息显示界面
     mp_MainStackWidget->addWidget(mp_DeviceWidget);
+
+    //
 }
 
 void MainWindow::refreshDataBase()
@@ -282,7 +284,12 @@ void MainWindow::loadingFinishSlot(const QString &message)
         // 信息显示界面
         DeviceManager::instance()->setDeviceListClass();
         const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
+
+        QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
+
+        mp_DeviceWidget->updateOverview("Overview", overviewMap);
         mp_DeviceWidget->updateListView(types);
+
         mp_MainStackWidget->setCurrentWidget(mp_DeviceWidget);
 
         // 刷新结束

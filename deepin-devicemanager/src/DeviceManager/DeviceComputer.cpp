@@ -68,6 +68,9 @@ void DeviceComputer::setVendor(const QString &value)
 void DeviceComputer::setName(const QString &value)
 {
     m_Name = value;
+    if (m_Name.contains("None", Qt::CaseInsensitive)) {
+        m_Name = "";
+    }
 }
 
 void DeviceComputer::setType(const QString &value)
@@ -126,7 +129,17 @@ void DeviceComputer::setName(const QString &dm1Name, const QString &dm2Name, con
 
 const QString DeviceComputer::getOverviewInfo()
 {
-    return m_Name;
+    QString model;
+    model += m_Vendor + QString(" ");
+    model += m_Name + QString(" ");
+    model += m_Type + QString(" ");
+
+    return model;
+}
+
+const QString DeviceComputer::getOSInfo()
+{
+    return m_OsDescription + " " + m_OS;
 }
 
 void DeviceComputer::initFilterKey()

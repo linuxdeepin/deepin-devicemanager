@@ -397,7 +397,6 @@ void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
         if (m_FilterKey.find(k) != m_FilterKey.end()) {
             m_MapOtherInfo.insert(k, it.value().trimmed());
 //            m_LstOtherInfo.append(QPair<QString, QString>(k, it.value().trimmed()));
-            qDebug() << m_LstOtherInfo.size() << "-------------" << k << ":" << it.value().trimmed();
         }
     }
 }

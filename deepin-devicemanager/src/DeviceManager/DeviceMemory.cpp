@@ -198,5 +198,12 @@ QString DeviceMemory::subTitle()
 
 const QString DeviceMemory::getOverviewInfo()
 {
-    return m_Name.isEmpty() ? m_Model : m_Name;
+    QString ov;
+    ov += QString("%1(%2 %3 %4)") \
+          .arg(m_Size) \
+          .arg(m_Name != "" ? m_Name : m_Vendor) \
+          .arg(m_Type) \
+          .arg(m_Speed);
+
+    return ov;
 }

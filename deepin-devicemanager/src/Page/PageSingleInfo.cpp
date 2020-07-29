@@ -29,8 +29,6 @@ void PageSingleInfo::setLabel(const QString &itemstr)
 }
 
 void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
-
-
 {
     clearContent();
 

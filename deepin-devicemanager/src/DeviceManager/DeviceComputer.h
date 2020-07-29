@@ -104,6 +104,8 @@ public:
      */
     const QString getOverviewInfo() override;
 
+    const QString getOSInfo();
+
 protected:
 
     /**

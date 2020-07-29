@@ -196,6 +196,8 @@ protected:
      */
     void loadTableData() override;
 
+    void getTrNumber();
+
 private:
 
     /**
@@ -247,6 +249,8 @@ private:
     QString           m_LogicalCPUNum;      //<! 逻辑处理器个数
     QString           m_CPUCoreNum;         //<! cpu核数
     bool              m_FrequencyIsRange;   //<! 频率显示的是范围还是最大值
+
+    QMap<int, QString>        m_trNumber;
 };
 
 #endif // DEVICECPU_H
