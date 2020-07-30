@@ -17,39 +17,27 @@
 PageTableHeader::PageTableHeader(QWidget *parent)
     : DWidget(parent)
     , mp_Table(new TableWidget(this))
-    , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
-    , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
-    , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
-    , mp_Menu(new DMenu(this))
 {
     initWidgets();
 
     // 连接曹函数
     connect(mp_Table, &TableWidget::itemClicked, this, &PageTableHeader::slotItemClicked);
+    connect(mp_Table, &TableWidget::refreshInfo, this, &PageTableHeader::slotRefreshInfo);
+    connect(mp_Table, &TableWidget::exportInfo, this, &PageTableHeader::slotExportInfo);
 }
 
 PageTableHeader::~PageTableHeader()
 {
-    DELETE_PTR(mp_Refresh);
-    DELETE_PTR(mp_Export);
-    DELETE_PTR(mp_Copy);
-    DELETE_PTR(mp_Menu);
+
 }
 
 void PageTableHeader::initWidgets()
 {
     // 布局
     QHBoxLayout *hLayout = new QHBoxLayout(this);
-    hLayout->setContentsMargins(10, 10, 10, 10);
+    hLayout->setContentsMargins(10, 10, 10, 1);
     hLayout->addWidget(mp_Table);
     setLayout(hLayout);
-
-    mp_Table->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(mp_Table, SIGNAL(customContextMenuRequested(const QPoint &)),
-            this, SLOT(slotShowMenu(const QPoint &)));
-    connect(mp_Copy, &QAction::triggered, this, &PageTableHeader::slotActionCopy);
-    connect(mp_Refresh, &QAction::triggered, this, &PageTableHeader::slotActionRefresh);
-    connect(mp_Export, &QAction::triggered, this, &PageTableHeader::slotActionExport);
 }
 
 void PageTableHeader::updateTable(const QList<QStringList> &lst)
@@ -89,32 +77,18 @@ void PageTableHeader::paintEvent(QPaintEvent *e)
     DWidget::paintEvent(e);
 }
 
-
-void PageTableHeader::slotShowMenu(const QPoint &)
-{
-    mp_Menu->clear();
-    mp_Menu->addAction(mp_Copy);
-    mp_Menu->addSeparator();
-    mp_Menu->addAction(mp_Refresh);
-    mp_Menu->addAction(mp_Export);
-    mp_Menu->exec(QCursor::pos());
-}
-void PageTableHeader::slotActionRefresh()
-{
-
-}
-void PageTableHeader::slotActionExport()
-{
-
-}
-void PageTableHeader::slotActionCopy()
-{
-
-}
-
 void PageTableHeader::slotItemClicked(int row)
 {
     emit itemClicked(row);
+}
+
+void PageTableHeader::slotRefreshInfo()
+{
+    emit refreshInfo();
+}
+void PageTableHeader::slotExportInfo()
+{
+    emit exportInfo();
 }
 
 

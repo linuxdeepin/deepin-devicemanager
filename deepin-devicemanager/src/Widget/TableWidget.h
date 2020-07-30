@@ -40,11 +40,16 @@ public:
 
 signals:
     void itemClicked(int row);
+    void refreshInfo();
+    void exportInfo();
 
 protected:
     void paintEvent(QPaintEvent *e) override;
 
 private slots:
+    void slotShowMenu(const QPoint &);
+    void slotActionRefresh();
+    void slotActionExport();
     void slotItemClicked(const QModelIndex &index);
 
 private:
@@ -52,6 +57,9 @@ private:
 
 private:
     LogTreeView      *mp_Table;
+    QAction          *mp_Refresh;     //<! 右键刷新
+    QAction          *mp_Export;      //<! 右键导出
+    QMenu            *mp_Menu;        //<! 右键菜单
 };
 
 

@@ -12,6 +12,7 @@
 #include <DApplication>
 #include <DApplicationHelper>
 #include <DStyle>
+#include "PageInfo.h"
 
 DetailTreeView::DetailTreeView(DWidget *parent)
     : DTableWidget(parent)
@@ -93,10 +94,16 @@ void DetailTreeView::setCommanLinkButton(int row)
 int DetailTreeView::setTableHeight(int paintHeight)
 {
     // 父窗口
-    DWidget *p = dynamic_cast<DWidget *>(this->parent());
+    PageInfo *p = dynamic_cast<PageInfo *>(this->parent());
 
     // 父窗口可显示的最大表格行数
-    int maxRow = p->height() / ROW_HEIGHT - 2;
+    int maxRow = 0;
+    if (p->isOverview()) {
+        maxRow = p->height() / ROW_HEIGHT - 4;
+    } else {
+        maxRow = p->height() / ROW_HEIGHT - 2;
+    }
+
 
     // 信息行 <= 13 不影响表格大小
     if (rowCount() <= m_LimitRow) {
@@ -122,6 +129,11 @@ bool DetailTreeView::hasExpendInfo()
     } else {
         return false;
     }
+}
+
+void DetailTreeView::setLimitRow(int row)
+{
+    m_LimitRow = row;
 }
 
 void DetailTreeView::expandCommandLinkClicked()

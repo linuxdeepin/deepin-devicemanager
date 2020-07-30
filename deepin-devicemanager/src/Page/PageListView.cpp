@@ -14,6 +14,7 @@ PageListView::PageListView(DWidget *parent)
     , mp_Enable(new QAction(tr("Enable"), this))
     , mp_Disable(new QAction(tr("Disable"), this))
     , mp_Menu(new QMenu(this))
+    , m_CurType(tr("Overview"))
 {
     //初始化界面
     QHBoxLayout *hLayout = new QHBoxLayout(this);
@@ -43,9 +44,17 @@ void PageListView::updateListItems(const QList<QPair<QString, QString> > &lst)
         return;
     }
 
+    // 更新之前先清理
+    mp_ListView->clearItem();
+
+    // 更新 list
     foreach (auto it, lst) {
         mp_ListView->addItem(it.first, it.second);
     }
+
+    // 更新之后恢复之前显示的设备
+    mp_ListView->setCurItem(m_CurType);
+    emit itemClicked(m_CurType);
 }
 
 void PageListView::paintEvent(QPaintEvent *event)
@@ -86,5 +95,6 @@ void PageListView::slotListViewItemClicked(const QModelIndex &index)
     QString concateStr = mp_ListView->getConcatenateStrings(index);
     if (!concateStr.isEmpty()) {
         emit itemClicked(concateStr);
+        m_CurType = concateStr;
     }
 }

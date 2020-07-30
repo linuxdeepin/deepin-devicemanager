@@ -100,7 +100,6 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
 ScrollAreaWidget::ScrollAreaWidget(DWidget *parent)
     : DWidget(parent)
 {
-
 }
 
 void ScrollAreaWidget::paintEvent(QPaintEvent *e)

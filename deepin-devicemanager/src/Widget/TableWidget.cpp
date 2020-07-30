@@ -5,6 +5,7 @@
 #include <DStyle>
 #include <DApplicationHelper>
 #include <DHeaderView>
+#include <DMenu>
 
 #include <QPainter>
 #include <QDebug>
@@ -19,11 +20,20 @@
 TableWidget::TableWidget(QWidget *parent)
     : DWidget(parent)
     , mp_Table(new LogTreeView(this))
+    , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
+    , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
+    , mp_Menu(new DMenu(this))
+
 {
     initWidget();
 
     // 连接信号和曹函数
     connect(mp_Table, &LogTreeView::clicked, this, &TableWidget::slotItemClicked);
+    setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this, SIGNAL(customContextMenuRequested(const QPoint &)),
+            this, SLOT(slotShowMenu(const QPoint &)));
+    connect(mp_Refresh, &QAction::triggered, this, &TableWidget::slotActionRefresh);
+    connect(mp_Export, &QAction::triggered, this, &TableWidget::slotActionExport);
 }
 
 void TableWidget::setHeaderLabels(const QStringList &lst)
@@ -102,6 +112,25 @@ void TableWidget::paintEvent(QPaintEvent *e)
     DWidget::paintEvent(e);
 }
 
+void TableWidget::slotShowMenu(const QPoint &)
+{
+    mp_Menu->clear();
+    mp_Menu->addSeparator();
+    mp_Menu->addAction(mp_Refresh);
+    mp_Menu->addAction(mp_Export);
+    mp_Menu->exec(QCursor::pos());
+}
+
+void TableWidget::slotActionRefresh()
+{
+    emit refreshInfo();
+}
+
+void TableWidget::slotActionExport()
+{
+    emit exportInfo();
+}
+
 void TableWidget::slotItemClicked(const QModelIndex &index)
 {
     int row = index.row();
@@ -114,7 +143,7 @@ void TableWidget::initWidget()
 {
     QHBoxLayout *hLayout = new QHBoxLayout(this);
     int margin = 3;
-    hLayout->setContentsMargins(margin, margin, margin, margin);
+    hLayout->setContentsMargins(margin, margin, margin, 3);
     hLayout->addWidget(mp_Table);
     setLayout(hLayout);
 }

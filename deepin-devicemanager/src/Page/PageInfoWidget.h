@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <DWidget>
-#include <QHBoxLayout>
+//#include <QHBoxLayout>
 
 class DeviceBaseInfo;
 class PageInfo;
@@ -14,6 +14,7 @@ class PageOverview;
 using namespace Dtk::Widget;
 class PageInfoWidget : public DWidget
 {
+    Q_OBJECT
 public:
     PageInfoWidget(QWidget *parent = nullptr);
 
@@ -30,6 +31,13 @@ public:
      */
     void updateTable(const QString &itemStr, const QMap<QString, QString> &map);
 
+signals:
+    void refreshInfo();
+    void exportInfo();
+
+private slots:
+    void slotRefreshInfo();
+    void slotExportInfo();
 
 private:
     void initWidgets();

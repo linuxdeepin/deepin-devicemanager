@@ -101,6 +101,21 @@ void DeviceListView::setCurItemEnable(bool enable)
         item->setEnabled(enable);
 }
 
+void DeviceListView::setCurItem(const QString &str)
+{
+    if (!mp_ItemModel) {
+        return;
+    }
+
+    QList<QStandardItem *> lstItems = mp_ItemModel->findItems(str);
+    if (lstItems.size() != 1) {
+        return;
+    }
+
+    QModelIndex index = mp_ItemModel->indexFromItem(lstItems[0]);
+    setCurrentIndex(index);
+}
+
 QString DeviceListView::getConcatenateStrings(const QModelIndex &index)
 {
     QStandardItem *item = mp_ItemModel->item(index.row());
@@ -108,6 +123,11 @@ QString DeviceListView::getConcatenateStrings(const QModelIndex &index)
         return item->data(Qt::UserRole).toString();
     }
     return "";
+}
+
+void DeviceListView::clearItem()
+{
+    mp_ItemModel->clear();
 }
 
 void DeviceListView::paintEvent(QPaintEvent *event)

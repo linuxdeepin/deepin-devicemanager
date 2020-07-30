@@ -2,20 +2,26 @@
 
 #include <QHBoxLayout>
 #include <QDebug>
+#include <QAction>
+#include <DMenu>
 
 #include "PageMultiInfo.h"
 #include "PageSingleInfo.h"
 #include "PageOverview.h"
 
-DWIDGET_USE_NAMESPACE
+
 PageInfoWidget::PageInfoWidget(QWidget *parent)
     : DWidget(parent)
     , mp_PageInfo(nullptr)
     , mp_PageSignalInfo(new PageSingleInfo(this))
     , mp_PageMutilInfo(new PageMultiInfo(this))
     , mp_PageOverviewInfo(new PageOverview(this))
+//    , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
 {
     initWidgets();
+
+    connect(mp_PageMutilInfo, &PageMultiInfo::refreshInfo, this, &PageInfoWidget::slotRefreshInfo);
+    connect(mp_PageMutilInfo, &PageMultiInfo::exportInfo, this, &PageInfoWidget::slotExportInfo);
 }
 
 void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseInfo *> &lst)
@@ -54,6 +60,15 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QMap<QString, QSt
         mp_PageInfo->updateInfo(map);
         mp_PageInfo->setLabel(map["Overview"]);
     }
+}
+
+void PageInfoWidget::slotRefreshInfo()
+{
+    emit refreshInfo();
+}
+void PageInfoWidget::slotExportInfo()
+{
+    emit exportInfo();
 }
 
 void PageInfoWidget::initWidgets()

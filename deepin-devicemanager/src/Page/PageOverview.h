@@ -26,6 +26,8 @@ public:
 
     void setLabel(const QString &itemstr) override;
 
+    bool isOverview() override {return  true;}
+
 private:
     /**
      * @brief initWidgets : 初始化控件布局

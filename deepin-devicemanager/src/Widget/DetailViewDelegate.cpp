@@ -83,6 +83,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
 
     painter->restore();
+//    QStyledItemDelegate::paint(painter, option, index);
 }
 
 QWidget *DetailViewDelegate::createEditor(QWidget *, const QStyleOptionViewItem &, const QModelIndex &) const

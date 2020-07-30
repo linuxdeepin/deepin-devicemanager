@@ -48,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent)
     // 关联信号槽
     connect(mp_ThreadPool, &ThreadPool::finished, this, &MainWindow::loadingFinishSlot);
     connect(mp_DeviceWidget, &DeviceWidget::itemClicked, this, &MainWindow::slotListItemClicked);
+    connect(mp_DeviceWidget, &DeviceWidget::refreshInfo, this, &MainWindow::slotRefreshInfo);
+    connect(mp_DeviceWidget, &DeviceWidget::exportInfo, this, &MainWindow::slotExportInfo);
 }
 
 MainWindow::~MainWindow()
@@ -72,8 +74,8 @@ void MainWindow::refresh()
     // 正在刷新标志
     m_refreshing = true;
 
-    // 初始化窗口相关的嗯内容，比如界面布局，控件大小
-    initWindow();
+    mp_WaitingWidget->start();
+    mp_MainStackWidget->setCurrentIndex(0);
 
     // 加载设备信息
     refreshDataBase();
@@ -307,7 +309,16 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
         mp_DeviceWidget->updateOverview(itemStr, overviewMap);
     }
+}
 
+void MainWindow::slotRefreshInfo()
+{
+    refresh();
+}
+
+void MainWindow::slotExportInfo()
+{
+    exportTo();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)

@@ -20,16 +20,16 @@ public:
 
 signals:
     void itemClicked(int row);
+    void refreshInfo();
+    void exportInfo();
 
 protected:
     void paintEvent(QPaintEvent *e) override;
 
 private slots:
-    void slotShowMenu(const QPoint &);
-    void slotActionRefresh();
-    void slotActionExport();
-    void slotActionCopy();
     void slotItemClicked(int row);
+    void slotRefreshInfo();
+    void slotExportInfo();
 
 private:
     /**
@@ -39,11 +39,6 @@ private:
 
 private:
     TableWidget               *mp_Table;
-
-    QAction                   *mp_Refresh;     //<! 右键刷新
-    QAction                   *mp_Export;      //<! 右键导出
-    QAction                   *mp_Copy;        //<! 右键拷贝
-    QMenu                     *mp_Menu;        //<! 右键菜单
 };
 
 #endif // DEVICETABLEPAGE_H

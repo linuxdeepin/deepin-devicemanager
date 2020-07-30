@@ -25,6 +25,8 @@ public:
 
     virtual void clearContent();
 
+    virtual bool isOverview() {return false;}
+
 protected:
     void paintEvent(QPaintEvent *e) override;
 };

@@ -58,6 +58,8 @@ public:
      */
     bool hasExpendInfo();
 
+    void setLimitRow(int row = 13);
+
 public slots:
     /**
      * @brief expandCommandLinkClicked:展开button点击槽函数

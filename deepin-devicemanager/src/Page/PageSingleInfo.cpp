@@ -7,13 +7,22 @@
 
 #include <DStandardItem>
 #include <DTableWidget>
+#include <DMenu>
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
     : PageInfo(parent)
     , mp_Content(new DetailTreeView(this))
     , mp_Label(new DLabel(this))
+    , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
+    , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
+    , mp_Menu(new DMenu(this))
 {
     initWidgets();
+
+    mp_Content->setContextMenuPolicy(Qt::CustomContextMenu);
+    bool a = connect(mp_Content, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
+    connect(mp_Refresh, &QAction::triggered, this, &PageSingleInfo::slotActionRefresh);
+    connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::slotActionExport);
 }
 
 PageSingleInfo::~PageSingleInfo()
@@ -60,6 +69,23 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
 void PageSingleInfo::clearContent()
 {
     mp_Content->clear();
+}
+
+void PageSingleInfo::slotShowMenu(const QPoint &)
+{
+    mp_Menu->clear();
+    mp_Menu->addSeparator();
+    mp_Menu->addAction(mp_Refresh);
+    mp_Menu->addAction(mp_Export);
+    mp_Menu->exec(QCursor::pos());
+}
+void PageSingleInfo::slotActionRefresh()
+{
+
+}
+void PageSingleInfo::slotActionExport()
+{
+
 }
 
 void PageSingleInfo::initWidgets()

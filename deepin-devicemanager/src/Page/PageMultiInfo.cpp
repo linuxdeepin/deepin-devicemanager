@@ -18,6 +18,8 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
 {
     initWidgets();
     connect(mp_Table, &PageTableHeader::itemClicked, this, &PageMultiInfo::slotItemClicked);
+    connect(mp_Table, &PageTableHeader::refreshInfo, this, &PageMultiInfo::slotRefreshInfo);
+    connect(mp_Table, &PageTableHeader::exportInfo, this, &PageMultiInfo::slotExportInfo);
 }
 
 PageMultiInfo::~PageMultiInfo()
@@ -50,10 +52,20 @@ void PageMultiInfo::slotItemClicked(int row)
     }
 }
 
+void PageMultiInfo::slotRefreshInfo()
+{
+    emit refreshInfo();
+}
+void PageMultiInfo::slotExportInfo()
+{
+    emit exportInfo();
+}
+
 void PageMultiInfo::initWidgets()
 {
     QVBoxLayout *hLayout = new QVBoxLayout(this);
     hLayout->setContentsMargins(0, 0, 0, 0);
+//    hLayout->setSpacing(2);
     mp_Table->setFixedHeight(TABLE_HEIGHT);
     hLayout->addWidget(mp_Table);
     hLayout->addWidget(mp_Detail);

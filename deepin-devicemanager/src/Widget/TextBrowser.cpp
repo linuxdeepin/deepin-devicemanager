@@ -19,6 +19,10 @@ TextBrowser::TextBrowser(QWidget *parent)
     DFontSizeManager::instance()->bind(this, DFontSizeManager::SizeType(DFontSizeManager::T7));
     setFrameShape(QFrame::NoFrame);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+//    setContextMenuPolicy(Qt::CustomContextMenu);
+//    connect(this, SIGNAL(customContextMenuRequested(const QPoint &)),
+//            this, SLOT(slotShowMenu(const QPoint &)));
 }
 
 void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)

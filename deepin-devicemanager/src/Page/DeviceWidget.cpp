@@ -19,6 +19,8 @@ DeviceWidget::DeviceWidget(QWidget *parent)
 
     // 连接曹函数
     connect(mp_ListView, &PageListView::itemClicked, this, &DeviceWidget::slotListViewWidgetItemClicked);
+    connect(mp_PageInfo, &PageInfoWidget::refreshInfo, this, &DeviceWidget::slotRefreshInfo);
+    connect(mp_PageInfo, &PageInfoWidget::exportInfo, this, &DeviceWidget::slotExportInfo);
 }
 
 DeviceWidget::~DeviceWidget()
@@ -62,6 +64,15 @@ void DeviceWidget::updateOverview(const QString &itemStr, const QMap<QString, QS
 void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
 {
     emit itemClicked(itemStr);
+}
+
+void DeviceWidget::slotRefreshInfo()
+{
+    emit refreshInfo();
+}
+void DeviceWidget::slotExportInfo()
+{
+    emit exportInfo();
 }
 
 void DeviceWidget::initWidgets()

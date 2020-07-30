@@ -26,7 +26,8 @@ void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &lst)
 void PageOverview::updateInfo(const QMap<QString, QString> &map)
 {
     int row = map.size();
-    mp_Overview->setColumnAndRow(row - 1);
+    mp_Overview->setLimitRow(11);
+    mp_Overview->setColumnAndRow(row);
 
     QTableWidgetItem *itemFirst = new QTableWidgetItem(map.find("OS").key());
     mp_Overview->setItem(0, 0, itemFirst);
@@ -81,7 +82,8 @@ void PageOverview::setLabel(const QString &itemstr)
     if (itemstr.contains("ternimal", Qt::CaseInsensitive)) {
         path += "ternimal.svg";
     }
-    if (itemstr.contains("laptop", Qt::CaseInsensitive)) {
+    if (itemstr.contains("laptop", Qt::CaseInsensitive) ||
+            itemstr.contains("notebook", Qt::CaseInsensitive)) {
         path += "laptop.svg";
     }
     if (itemstr.contains("Tablet", Qt::CaseInsensitive)) {

@@ -36,6 +36,7 @@ private:
     QAction                   *mp_Enable;
     QAction                   *mp_Disable;
     QMenu                     *mp_Menu;
+    QString                   m_CurType;        // 当前显示的设备类型
 };
 
 #endif // LISTVIEWWIDGET_H

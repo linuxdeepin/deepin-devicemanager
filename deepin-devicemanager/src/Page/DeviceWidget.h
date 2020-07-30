@@ -23,9 +23,13 @@ public:
     void updateOverview(const QString &itemStr, const QMap<QString, QString> &map);
 signals:
     void itemClicked(const QString &itemStr);
+    void refreshInfo();
+    void exportInfo();
 
 private slots:
     void slotListViewWidgetItemClicked(const QString &itemStr);
+    void slotRefreshInfo();
+    void slotExportInfo();
 
 private:
     /**@brief:初始化界面布局*/

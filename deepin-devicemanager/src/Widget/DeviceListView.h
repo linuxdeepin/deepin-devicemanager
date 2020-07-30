@@ -53,10 +53,21 @@ public:
     void setCurItemEnable(bool enable);
 
     /**
+     * @brief setCurItem : 根据str设置当前的item
+     * @param str
+     */
+    void setCurItem(const QString &str);
+
+    /**
      * @brief getConcatenateStrings
      * @return
      */
     QString getConcatenateStrings(const QModelIndex &index);
+
+    /**
+     * @brief clearItem : 清楚列表
+     */
+    void clearItem();
 
 protected:
     /**@brief:事件重写*/
