@@ -53,6 +53,7 @@ public:
     // 存储设备相关 **************************************************************************************
     void addStorageDeivce(const DeviceStorage &device);
     void addLshwinfoIntoStorageDevice(const QMap<QString, QString> &mapInfo);
+    void addLshwinfoIntoNVMEStorageDevice(const QMap<QString, QString> &mapInfo);
     const QList<DeviceStorage> &getStorageDevices();
     bool setStorageDeviceMediaType(const QString &name, const QString &value);
     bool setKLUStorageDeviceMediaType(const QString &name, const QString &value);

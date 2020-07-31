@@ -94,6 +94,9 @@ void CmdTool::loadLshwInfo(const QString &cmd, const QString &debugFile)
         } else if (item.startsWith("disk")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_disk", mapInfo);
+        } else if (item.startsWith("storage")) {
+            getMapInfoFromLshw(item, mapInfo);
+            addMapInfo("lshw_storage", mapInfo);
         } else if ((item.startsWith("memory") && !item.startsWith("memory UNCLAIMED")) || item.startsWith("bank")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_memory", mapInfo);

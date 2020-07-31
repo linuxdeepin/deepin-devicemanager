@@ -386,6 +386,17 @@ void DeviceGenerator::getDiskInfoFromLshw()
         }
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(*dIt);
     }
+
+    /*if (lstDisk.size() == 0)*/ {
+        const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_storage");
+        QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
+        for (; dIt != lstDisk.end(); ++dIt) {
+            if ((*dIt).size() < 2) {
+                continue;
+            }
+            DeviceManager::instance()->addLshwinfoIntoNVMEStorageDevice(*dIt);
+        }
+    }
 }
 
 void DeviceGenerator::getDiskInfoFromLsblk()

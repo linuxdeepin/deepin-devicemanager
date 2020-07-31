@@ -45,6 +45,13 @@ public:
     bool addInfoFromlshw(const QMap<QString, QString> &mapInfo);
 
     /**
+     * @brief addNVMEInfoFromlshw:将lshw获取的信息与存储设备进行匹配
+     * @param mapInfo:由lshw获取的信息map
+     * @return 布尔值:true-设置成功；false--设置失败
+     */
+    bool addNVMEInfoFromlshw(const QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief addInfoFromSmartctl:将sudo smartctl --all /dev/xxx中获取的信息与存储设备进行匹配
      * @param name:存储设备逻辑名称
      * @param mapInfo:由smartctl获取的信息map
@@ -215,6 +222,8 @@ private:
     QString               m_DeviceFile;         //<
     QString               m_KeyToLshw;          //<!  用于表示存储文件
     QString               m_KeyFromStorage;     //<!  有些其他设备与usb重复，需要用这个进行唯一标识
+
+    QString               m_NvmeKey;             //<!  用于表示NVME的存储文件
 };
 
 #endif // DEVICESTORAGE_H
