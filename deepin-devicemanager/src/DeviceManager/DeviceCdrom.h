@@ -26,7 +26,7 @@ public:
        * @brief name:获取名称属性值
        * @return QString:名称属性值
        */
-    const QString &name()const;
+    const QString &name()const override;
 
     /**
        * @brief vendor:获取制造商属性值
@@ -62,7 +62,7 @@ public:
        * @brief driver:获取驱动属性值
        * @return QString:驱动属性值
        */
-    const QString &driver()const;
+    const QString &driver()const override;
 
     /**
        * @brief maxPower:获取maxPower属性值

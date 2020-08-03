@@ -48,6 +48,11 @@ const QString &DevicePrint::name()const
     return m_Name;
 }
 
+const QString &DevicePrint::driver() const
+{
+    return m_Driver;
+}
+
 const QString &DevicePrint::vendor()const
 {
     return m_Vendor;

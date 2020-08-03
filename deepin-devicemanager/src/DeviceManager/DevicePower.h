@@ -26,7 +26,9 @@ public:
      * @brief name:获取名称属性值
      * @return QString 名称属性值
      */
-    const QString &name()const;
+    const QString &name()const override;
+
+    const QString &driver()const override;
 
     /**
      * @brief vendor:获取制造商属性值
@@ -190,6 +192,8 @@ private:
     QString             m_SBDSManufactureDate;      //<! 【SBDS制造日期】
     QString             m_SBDSSerialNumber;         //<! 【SBDS序列号】
     QString             m_SBDSVersion;              //<! 【SBDS版本】
+    QString             m_Driver;
+
 };
 
 #endif // DEVICEPOWER_H

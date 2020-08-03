@@ -19,6 +19,7 @@ DeviceMonitor::DeviceMonitor()
     , m_CurrentResolution("")
     , m_SerialNumber("")
     , m_ProductionWeek("")
+    , m_Driver("")
     , m_Width(0)
     , m_Height(0)
 {
@@ -164,6 +165,11 @@ bool DeviceMonitor::setCurrentResolution(const QString &resolution, const QStrin
 const QString &DeviceMonitor::name()const
 {
     return m_Name;
+}
+
+const QString &DeviceMonitor::driver() const
+{
+    return m_Driver;
 }
 
 const QString &DeviceMonitor::vendor()const

@@ -54,7 +54,9 @@ public:
        * @brief name:获取名称属性值
        * @return QString:名称属性值
        */
-    const QString &name()const;
+    const QString &name()const override;
+
+    const QString &driver()const override;
 
     /**
        * @brief vendor:获取制造商属性值
@@ -161,6 +163,8 @@ protected:
      */
     void loadTableData() override;
 
+
+
 private:
     QString             m_Name;                         //<! 【名称】
     QString             m_Vendor;                       //<! 【制造商】
@@ -174,6 +178,7 @@ private:
     QString             m_Capabilities;                 //<! 【功能】
     QString             m_Description;                  //<! 【描述】
     QString             m_Chip;                         //<! 【芯片型号】
+    QString             m_Driver;                       //<! 【驱动】
 
     QString             m_UniqueKey;                    //<! 【标识唯一设备】
 };

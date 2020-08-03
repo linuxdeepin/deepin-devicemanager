@@ -71,9 +71,17 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     QRect textRect = rect;
     textRect.setX(textRect.x() + margin);
+    QFont fo = opt.font;
+    if (index.column() == 0) {
+        fo.setBold(true);
+    } else {
+        fo.setBold(false);
+    }
+    painter->setFont(fo);
 
     QFontMetrics fm(opt.font);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
+
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
 
     if (index.column() == 0) {

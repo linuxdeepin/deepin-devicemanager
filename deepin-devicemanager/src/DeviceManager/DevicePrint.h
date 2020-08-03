@@ -20,8 +20,9 @@ public:
      * @brief name:获取名称属性值
      * @return QString 名称属性值
      */
-    const QString &name()const;
+    const QString &name()const override;
 
+    const QString &driver()const override;
     /**
      * @brief vendor:获取制造商属性值
      * @return QString:制造商属性值
@@ -107,6 +108,7 @@ private:
     QString             m_URI;                          //<! 【URI】
     QString             m_Status;                       //<! 【状态】
     QString             m_Shared;                       //<! 【共享】
+    QString             m_Driver;
 };
 
 #endif // DEVICEPRINT_H

@@ -35,7 +35,9 @@ public:
      * @brief name:获取名称属性值
      * @return QString:名称属性值
      */
-    const QString &name() const;
+    const QString &name() const override;
+
+    const QString &driver() const override;
 
     /**
      * @brief physicalID:获取物理ID属性值
@@ -248,6 +250,7 @@ private:
     // 这个是cpu的逻辑处理器个数，而不是core的逻辑处理器个数
     QString           m_LogicalCPUNum;      //<! 逻辑处理器个数
     QString           m_CPUCoreNum;         //<! cpu核数
+    QString           m_Driver;
     bool              m_FrequencyIsRange;   //<! 频率显示的是范围还是最大值
 
     QMap<int, QString>        m_trNumber;

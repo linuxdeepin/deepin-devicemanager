@@ -13,6 +13,8 @@ DeviceAudio::DeviceAudio()
     , m_Clock("")
     , m_Capabilities("")
     , m_Description("")
+    , m_Chip("")
+    , m_Driver("")
     , m_UniqueKey("")
 {
     initFilterKey();
@@ -32,7 +34,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_Clock);
     setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Hardware Class", m_Description);
-
+    setAttribute(mapInfo, "Driver", m_Driver);
     //2. 获取设备的唯一标识
     /*
      * 在这里将设备的总线信息作为一个设备的唯一标识
@@ -124,6 +126,11 @@ bool DeviceAudio::setAudioChipFromDmesg(const QString &info)
 const QString &DeviceAudio::name()const
 {
     return m_Name;
+}
+
+const QString &DeviceAudio::driver() const
+{
+    return m_Driver;
 }
 
 const QString &DeviceAudio::vendor()const

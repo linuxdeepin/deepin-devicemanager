@@ -7,7 +7,8 @@ DeviceComputer::DeviceComputer()
     , m_OS("")
     , m_Vendor("")
     , m_Name("")
-    ,  m_Type("")
+    , m_Type("")
+    , m_Driver("")
 {
 
 }
@@ -32,12 +33,14 @@ const QString &DeviceComputer::vendor()
     return m_Vendor;
 }
 
-const QString &DeviceComputer::name()
+const QString &DeviceComputer::name() const
 {
-    if (m_Name.contains("None")) {
-        m_Name = "";
-    }
     return m_Name;
+}
+
+const QString &DeviceComputer::driver() const
+{
+    return m_Driver;
 }
 
 const QString &DeviceComputer::type()

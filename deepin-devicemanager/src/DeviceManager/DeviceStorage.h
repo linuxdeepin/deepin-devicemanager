@@ -86,6 +86,9 @@ public:
      */
     QString compareSize(const QString &size1, const QString &size2);
 
+    const QString &name()const override;
+    const QString &driver()const override;
+
     /**
        * @brief model:获取型号属性值
        * @param 无
@@ -245,6 +248,7 @@ private:
     QString               m_PowerCycleCount;    //<! 【通电次数】10
     QString               m_FirmwareVersion;    //<! 【固件版本】8
     QString               m_Speed;              //<! 【速度】5
+    QString               m_Driver;
 
     QString               m_DeviceFile;         //<
     QString               m_KeyToLshw;          //<!  用于表示存储文件

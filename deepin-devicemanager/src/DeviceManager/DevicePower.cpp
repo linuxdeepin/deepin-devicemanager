@@ -70,6 +70,11 @@ const QString &DevicePower::name()const
     return m_Name;
 }
 
+const QString &DevicePower::driver() const
+{
+    return m_Driver;
+}
+
 const QString &DevicePower::vendor()const
 {
     return m_Vendor;

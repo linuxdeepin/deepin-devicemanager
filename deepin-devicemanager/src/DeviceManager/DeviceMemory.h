@@ -26,7 +26,9 @@ public:
      * @brief name:获取名称属性值
      * @return QString 名称属性值
      */
-    const QString &name()const;
+    const QString &name()const override;
+
+    const QString &driver()const override;
 
     /**
      * @brief vendor:获取制造商属性值
@@ -160,6 +162,7 @@ private:
     QString           m_MinimumVoltage;         //<! 【最小电压】
     QString           m_MaximumVoltage;         //<! 【最大电压】
     QString           m_ConfiguredVoltage;      //<! 【配置电压】
+    QString           m_Driver;
 };
 
 #endif // DEVICEMEMORY_H

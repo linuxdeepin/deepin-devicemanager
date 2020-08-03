@@ -69,7 +69,9 @@ public:
      * @brief name:获取名称属性值
      * @return QString 名称属性值
      */
-    const QString &name()const;
+    const QString &name()const override;
+
+    const QString &driver()const override;
 
     /**
      * @brief vendor:获取制造商属性值
@@ -252,6 +254,7 @@ private:
     QString         m_SerialNumber;      //<! 【流水号】
     QString         m_ProductionWeek;    //<! 【生产年月】
     QString         m_SupportResolution; //<!  支持的屏幕分辨率
+    QString         m_Driver;
 
     int             m_Width;             //<!  屏幕的宽度
     int             m_Height;            //<!  屏幕的高度

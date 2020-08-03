@@ -53,7 +53,7 @@ const QStringList &DeviceBaseInfo::getTableData()
 
 QString DeviceBaseInfo::subTitle()
 {
-    return "";
+    return QString("");
 }
 
 bool DeviceBaseInfo::isValueValid(QString &value)

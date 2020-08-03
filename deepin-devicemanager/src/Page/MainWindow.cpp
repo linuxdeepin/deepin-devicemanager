@@ -288,6 +288,7 @@ void MainWindow::loadingFinishSlot(const QString &message)
         const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
 
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
+        DeviceManager::instance()->getDeviceDriverPool();
 
         mp_DeviceWidget->updateOverview("Overview", overviewMap);
         mp_DeviceWidget->updateListView(types);

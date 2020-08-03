@@ -56,7 +56,9 @@ public:
        * @param 无
        * @return QString:名称属性值
        */
-    const QString &name()const;
+    const QString &name()const override;
+
+    const QString &driver() const override;
 
     /**
        * @brief productName:获取产品名称属性值
@@ -139,6 +141,8 @@ private:
     QString         m_Vendor;                 //<! 【制造商】
     QString         m_Version;                //<! 【版本】
     QString         m_ChipsetFamily;          //<! 【芯片组】
+    QString         m_Driver;
+
     bool            m_IsBoard;
 };
 

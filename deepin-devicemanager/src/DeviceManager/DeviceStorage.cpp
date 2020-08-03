@@ -28,6 +28,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     }
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Drive", m_Driver);
 
     setAttribute(mapInfo, "Attached to", m_Interface);
     QRegExp re(".*\\((.*)\\).*");
@@ -63,6 +64,7 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     }
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Drive", m_Driver);
 
     setAttribute(mapInfo, "Attached to", m_Interface);
     QRegExp re(".*\\((.*)\\).*");
@@ -243,6 +245,16 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
     }
 }
 
+const QString &DeviceStorage::name() const
+{
+    return m_Model;
+}
+
+const QString &DeviceStorage::driver() const
+{
+    return m_Driver;
+}
+
 const QString &DeviceStorage::model()const
 {
     return m_Model;
@@ -339,7 +351,6 @@ void DeviceStorage::initFilterKey()
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("sectorsize"));
     addFilterKey(QObject::tr("guid"));
-    addFilterKey(QObject::tr("Driver"));
     addFilterKey(QObject::tr("Config Status"));
     addFilterKey(QObject::tr("Device Number"));
     addFilterKey(QObject::tr("Geometry (Logical)"));

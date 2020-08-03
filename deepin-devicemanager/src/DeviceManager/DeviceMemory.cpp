@@ -131,6 +131,11 @@ const QString &DeviceMemory::name()const
     return m_Name;
 }
 
+const QString &DeviceMemory::driver() const
+{
+    return m_Driver;
+}
+
 const QString &DeviceMemory::vendor()const
 {
     return m_Vendor;

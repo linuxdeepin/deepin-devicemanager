@@ -515,11 +515,14 @@ public:
     void overviewToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont);
 
     void infoToHtml(QDomDocument &doc, const QString &key, const QString &value);
+
     /**
      * @brief getDeviceOverview:获取所有设备设备概况信息
      * @param overiewMap:所有设备概况Map
      */
     const QMap<QString, QString>  &getDeviceOverview();
+
+    const QMap<QString, QMap<QString, QStringList>> &getDeviceDriverPool();
 
 protected:
     DeviceManager();
@@ -555,6 +558,8 @@ private:
     QMap<QString, QString>               m_OveriewMap;
 
     QMap<QString, QList<DeviceBaseInfo *>>   m_DeviceClassMap;
+
+    QMap<QString, QMap<QString, QStringList>> m_DeviceDriverPool;
 
     static int m_CurrentXlsRow;
 };

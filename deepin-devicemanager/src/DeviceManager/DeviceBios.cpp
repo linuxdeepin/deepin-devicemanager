@@ -8,6 +8,7 @@ DeviceBios::DeviceBios()
     , m_Vendor("")
     , m_Version("")
     , m_ChipsetFamily("")
+    , m_Driver("")
     , m_IsBoard(false)
 {
     initFilterKey();
@@ -86,6 +87,11 @@ bool DeviceBios::setMemoryInfo(const QMap<QString, QString> &mapInfo)
 const QString &DeviceBios::name()const
 {
     return m_Name;
+}
+
+const QString &DeviceBios::driver() const
+{
+    return m_Driver;
 }
 
 const QString &DeviceBios::productName()const

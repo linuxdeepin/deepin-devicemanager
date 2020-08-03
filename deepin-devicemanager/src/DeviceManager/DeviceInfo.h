@@ -63,6 +63,10 @@ public:
      */
     virtual const QString getOverviewInfo();
 
+    virtual const QString &name() const = 0;
+
+    virtual const QString &driver() const = 0;
+
 
     /**
      * @brief isValid：判断属性值是否有效

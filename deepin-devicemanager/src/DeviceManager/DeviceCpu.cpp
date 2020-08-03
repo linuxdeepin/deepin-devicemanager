@@ -23,6 +23,7 @@ DeviceCpu::DeviceCpu()
     , m_HardwareVirtual("")
     , m_LogicalCPUNum("")
     , m_CPUCoreNum("")
+    , m_Driver("")
     , m_FrequencyIsRange(false)
 {
     initFilterKey();
@@ -71,6 +72,11 @@ const QString &DeviceCpu::vendor() const
 const QString &DeviceCpu::name() const
 {
     return m_Name;
+}
+
+const QString &DeviceCpu::driver() const
+{
+    return m_Driver;
 }
 
 const QString &DeviceCpu::physicalID() const

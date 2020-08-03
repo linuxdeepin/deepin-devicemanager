@@ -38,7 +38,9 @@ public:
      * @brief name:获取名称属性值
      * @return QString:名称属性值
      */
-    const QString &name();
+    const QString &name() const override;
+
+    const QString &driver() const override;
 
     /**
      * @brief type:获取类型属性值
@@ -135,6 +137,7 @@ private:
     QString            m_Vendor;
     QString            m_Name;
     QString            m_Type;
+    QString            m_Driver;
 };
 
 #endif // DEVICECOMPUTER_H

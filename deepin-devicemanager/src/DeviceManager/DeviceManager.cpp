@@ -1000,3 +1000,29 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
     return m_OveriewMap;
 }
 
+const QMap<QString, QMap<QString, QStringList> > &DeviceManager::getDeviceDriverPool()
+{
+    auto iter = m_DeviceClassMap.begin();
+
+    for (; iter != m_DeviceClassMap.end(); ++iter) {
+
+        foreach (auto device, iter.value()) {
+            if (m_DeviceDriverPool.find(device->driver()) != m_DeviceDriverPool.end()) {
+                // 驱动内容不为空时添加
+                if (device->driver().isEmpty() == false) {
+                    m_DeviceDriverPool[device->driver()][iter.key()] += device->name();
+                }
+            } else {
+                if (device->driver().isEmpty() == false) {
+                    m_DeviceDriverPool[device->driver()][iter.key()] += device->name();
+                }
+            }
+
+        }
+    }
+
+    qDebug() << m_DeviceDriverPool;
+    return m_DeviceDriverPool;
+}
+
+
