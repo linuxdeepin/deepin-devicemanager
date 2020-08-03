@@ -64,7 +64,13 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     if (index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
             && index.row() != 0 && dynamic_cast<DetailTreeView *>(this->parent())->hasExpendInfo()) {
+        // 展开 行背景色为白色
         painter->fillPath(path, palette.color(cg, DPalette::Base));
+
+        // 展开行绘制横线
+        painter->setPen(palette.color(cg, DPalette::FrameShadowBorder));
+        painter->drawLine(rect.x(), rect.y() + 1, rect.x() + rect.width() - 1, rect.y() + 1);
+
     } else {
         painter->fillPath(path, background);
     }
@@ -84,7 +90,10 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
 
-    if (index.column() == 0) {
+
+    // 第一列 单元格后画竖线，展开收起行不画竖线
+    if (index.column() == 0 && !(index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
+                                 && index.row() != 0 && dynamic_cast<DetailTreeView *>(this->parent())->hasExpendInfo())) {
         painter->setPen(palette.color(cg, DPalette::FrameShadowBorder));
         painter->drawLine(rect.topRight(), rect.bottomRight());
     }
