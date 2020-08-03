@@ -22,9 +22,6 @@
 #include <QDebug>
 #include <QFile>
 
-#include "document.h"
-#include "xlsxdocument.h"
-
 DeviceManager    *DeviceManager::sInstance = nullptr;
 int DeviceManager::m_CurrentXlsRow = 1;
 
@@ -683,7 +680,7 @@ bool DeviceManager::exportToTxt(const QString &filePath)
     }
 
     QTextStream out(&txtFile);
-
+    overviewToTxt(out);
     EXPORT_TO_TXT(out, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
     EXPORT_TO_TXT(out, m_ListDeviceBios, QObject::tr("Motherboard"), QObject::tr("No motherboard found"));
     EXPORT_TO_TXT(out, m_ListDeviceMemory, QObject::tr("Memory"), QObject::tr("No memory found"));
@@ -710,7 +707,7 @@ bool DeviceManager::exportToXlsx(const QString &filePath)
 {
     QXlsx::Document xlsx;
     QXlsx::Format boldFont;
-
+    overviewToXlsx(xlsx, boldFont);
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceBios, QObject::tr("Motherboard"), QObject::tr("No motherboard found"));
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceMemory, QObject::tr("Memory"), QObject::tr("No memory found"));
@@ -737,7 +734,7 @@ bool DeviceManager::exportToXlsx(const QString &filePath)
 bool DeviceManager::exportToDoc(const QString &filePath)
 {
     Docx::Document doc(":/template.docx");
-
+    overviewToDoc(doc);
     EXPORT_TO_DOC(doc, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
     EXPORT_TO_DOC(doc, m_ListDeviceBios, QObject::tr("Motherboard"), QObject::tr("No motherboard found"));
     EXPORT_TO_DOC(doc, m_ListDeviceMemory, QObject::tr("Memory"), QObject::tr("No memory found"));
@@ -767,6 +764,11 @@ bool DeviceManager::exportToHtml(const QString &filePath)
     if (false == html.open(QIODevice::WriteOnly)) {
         return false;
     }
+    html.write("<!DOCTYPE html>\n");
+    html.write("<html>\n");
+    html.write("<body>\n");
+
+    overviewToHtml(html);
 
     EXPORT_TO_HTML(html, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
     EXPORT_TO_HTML(html, m_ListDeviceBios, QObject::tr("Motherboard"), QObject::tr("No motherboard found"));
@@ -786,6 +788,9 @@ bool DeviceManager::exportToHtml(const QString &filePath)
     EXPORT_TO_HTML(html, m_ListDeviceCdrom, QObject::tr("CD-ROM"), QObject::tr("No CD-ROM found"));
     EXPORT_TO_HTML(html, m_ListDeviceOthers, QObject::tr("Other Devices"), QObject::tr("No other devices found"));
 
+    html.write("</body>\n");                                                \
+    html.write("</html>\n");
+
     html.close();
 
     return true;
@@ -794,6 +799,172 @@ bool DeviceManager::exportToHtml(const QString &filePath)
 int DeviceManager::currentXlsRow()
 {
     return m_CurrentXlsRow++;
+}
+
+void DeviceManager::overviewToTxt(QTextStream &out)
+{
+    out << "[" << tr("Overview") << "]\n-------------------------------------------------";
+    out << "\n";
+
+    out.setFieldWidth(21);
+    out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
+    out << tr("Device") + ": ";
+    out.setFieldWidth(0);
+    out << m_OveriewMap["Overview"];
+    out << "\n";
+
+    out.setFieldWidth(21);
+    out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
+    out << tr("OS") + ": ";
+    out.setFieldWidth(0);
+    out << m_OveriewMap["OS"];
+    out << "\n";
+
+    foreach (auto iter, m_ListDeviceType) {
+        QStringList strList = iter.second.split("##");
+
+        if (strList.size() != 2) {
+            continue;
+        }
+
+        if (strList[1] == "Overview") {
+            continue;
+        }
+
+        if (m_OveriewMap.find(strList[1]) != m_OveriewMap.end()) {
+            out.setFieldWidth(21);
+            out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
+            out << tr(strList[1].toStdString().c_str()) + ": ";
+            out.setFieldWidth(0);
+            out << m_OveriewMap[strList[1]];
+            out << "\n";
+        }
+    }
+    out << "\n";
+}
+
+
+
+void DeviceManager::overviewToHtml(QFile &html)
+{
+    html.write((QString("<h2>") + "[" + tr("Overview") + "]" + "</h2>").toUtf8());
+    QDomDocument doc;
+    infoToHtml(doc, "Device", m_OveriewMap["Overview"]);
+    infoToHtml(doc, "OS", m_OveriewMap["OS"]);
+
+
+    foreach (auto iter, m_ListDeviceType) {
+        QStringList strList = iter.second.split("##");
+
+        if (strList.size() != 2) {
+            continue;
+        }
+
+        if (strList[1] == "Overview") {
+            continue;
+        }
+
+        if (m_OveriewMap.find(strList[1]) != m_OveriewMap.end()) {
+            infoToHtml(doc, strList[1], m_OveriewMap[strList[1]]);
+        }
+    }
+
+    doc.appendChild(doc.createElement("br"));
+    html.write(doc.toString().toStdString().data());
+}
+
+void DeviceManager::overviewToDoc(Docx::Document &doc)
+{
+    doc.addHeading("[" + tr("Overview") + "]");
+    doc.addParagraph("-------------------------------------------------");
+
+    QString line = tr("Device") + ":  " + m_OveriewMap["Overview"];
+    doc.addParagraph(line);
+
+    line = tr("OS") + ":  " + m_OveriewMap["OS"];
+    doc.addParagraph(line);
+
+    foreach (auto iter, m_ListDeviceType) {
+        QStringList strList = iter.second.split("##");
+
+        if (strList.size() != 2) {
+            continue;
+        }
+
+        if (strList[1] == "Overview") {
+            continue;
+        }
+
+        if (m_OveriewMap.find(strList[1]) != m_OveriewMap.end()) {
+            line = tr(strList[1].toStdString().c_str()) + ":  " + m_OveriewMap[strList[1]];
+            doc.addParagraph(line);
+        }
+    }
+    doc.addParagraph("\n");
+}
+
+void DeviceManager::overviewToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont)
+{
+    boldFont.setFontBold(true);
+    xlsx.write(m_CurrentXlsRow++, 1, "[" + tr("Overview") + "]", boldFont);
+
+    boldFont.setFontBold(false);
+    boldFont.setFontSize(10);
+
+    xlsx.write(m_CurrentXlsRow, 1, tr("Device"), boldFont);
+    xlsx.write(m_CurrentXlsRow++, 2, m_OveriewMap["Overview"], boldFont);
+    xlsx.write(m_CurrentXlsRow, 1, tr("OS"), boldFont);
+    xlsx.write(m_CurrentXlsRow++, 2, m_OveriewMap["OS"], boldFont);
+
+    foreach (auto iter, m_ListDeviceType) {
+        QStringList strList = iter.second.split("##");
+
+        if (strList.size() != 2) {
+            continue;
+        }
+
+        if (strList[1] == "Overview") {
+            continue;
+        }
+
+        if (m_OveriewMap.find(strList[1]) != m_OveriewMap.end()) {
+
+            xlsx.write(m_CurrentXlsRow, 1, tr(strList[1].toStdString().c_str()), boldFont);
+            xlsx.write(m_CurrentXlsRow++, 2, m_OveriewMap[strList[1]], boldFont);
+        }
+    }
+    m_CurrentXlsRow++;
+}
+
+void DeviceManager::infoToHtml(QDomDocument &doc, const QString &key, const QString &value)
+{
+    QDomElement table = doc.createElement("table");
+    table.setAttribute("border", "0");
+    table.setAttribute("width", "100%");
+    table.setAttribute("cellpadding", "3");
+
+    QDomElement tr = doc.createElement("tr");
+
+    QDomElement td = doc.createElement("td");
+    td.setAttribute("width", "15%");
+    td.setAttribute("style", "text-align:left;");
+
+    QDomText nameText = doc.createTextNode(QObject::tr(key.toStdString().c_str()) + ": ");
+    td.appendChild(nameText);
+    tr.appendChild(td);
+
+    QDomElement td2 = doc.createElement("td");
+    td2.setAttribute("width", "85%");
+
+    QDomText valueText;
+    valueText = doc.createTextNode(value);
+    td2.appendChild(valueText);
+
+    tr.appendChild(td2);
+
+    table.appendChild(tr);
+
+    doc.appendChild(table);
 }
 
 const QMap<QString, QString>  &DeviceManager::getDeviceOverview()

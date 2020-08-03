@@ -169,9 +169,6 @@
  * @param msg:没有设备时的提示信息
  */
 #define EXPORT_TO_HTML(htmlFile, deviceLst, type, msg)                              \
-    htmlFile.write("<!DOCTYPE html>\n");                                            \
-    htmlFile.write("<html>\n");                                                     \
-    htmlFile.write("<body>\n");                                                     \
     \
     /**添加设备类型**/                                                                \
     htmlFile.write((QString("<h2>") + "[" + type + "]" + "</h2>").toUtf8());        \
@@ -208,8 +205,6 @@
         \
         htmlFile.write(doc.toString().toStdString().data());                        \
         \
-        htmlFile.write("</body>\n");                                                \
-        htmlFile.write("</html>\n");                                                \
     }                                                                               \
     \
 

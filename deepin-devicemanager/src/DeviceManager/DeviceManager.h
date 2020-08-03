@@ -7,6 +7,9 @@
 #include <QObject>
 #include <QFile>
 
+#include "document.h"
+#include "xlsxdocument.h"
+
 class DeviceMouse;
 class DeviceCpu;
 class DeviceStorage;
@@ -506,6 +509,12 @@ public:
      */
     static int currentXlsRow();
 
+    void overviewToTxt(QTextStream &out);
+    void overviewToHtml(QFile &html);
+    void overviewToDoc(Docx::Document &doc);
+    void overviewToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont);
+
+    void infoToHtml(QDomDocument &doc, const QString &key, const QString &value);
     /**
      * @brief getDeviceOverview:获取所有设备设备概况信息
      * @param overiewMap:所有设备概况Map
