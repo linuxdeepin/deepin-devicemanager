@@ -10,7 +10,7 @@
 #include "document.h"
 #include "xlsxdocument.h"
 
-class DeviceMouse;
+//class DeviceMouse;
 class DeviceCpu;
 class DeviceStorage;
 class DeviceGpu;
@@ -21,13 +21,14 @@ class DeviceBluetooth;
 class DeviceAudio;
 class DeviceNetwork;
 class DeviceImage;
-class DeviceKeyboard;
+//class DeviceKeyboard;
 class DeviceOthers;
 class DevicePower;
 class DevicePrint;
 class DeviceOtherPCI;
 class DeviceComputer;
 class DeviceCdrom;
+class DeviceInput;
 class DeviceBaseInfo;
 
 /*管理设备信息的单例*/
@@ -73,7 +74,7 @@ public:
      * @brief addMouseDevice:添加鼠标设备
      * @param device:被添加的鼠标设备
      */
-    void addMouseDevice(DeviceMouse *const device);
+    void addMouseDevice(DeviceInput *const device);
 
     /**
      * @brief getMouseDevices:获取所有鼠标设备
@@ -336,7 +337,7 @@ public:
      * @brief addKeyboardDevice:添加键盘设备
      * @param device:被添加的键盘设备
      */
-    void addKeyboardDevice(DeviceKeyboard *const device);
+    void addKeyboardDevice(DeviceInput *const device);
 
     /**
      * @brief getKeyboardDevices:获取所有键盘设备

@@ -2,12 +2,14 @@
 #include "DeviceManager/DeviceManager.h"
 #include "DeviceManager/DeviceGpu.h"
 #include "DeviceManager/DeviceMonitor.h"
-#include "DeviceManager/DeviceKeyboard.h"
+//#include "DeviceManager/DeviceKeyboard.h"
 #include "DeviceManager/DeviceOthers.h"
 #include "DeviceManager/DeviceStorage.h"
 #include "DeviceManager/DeviceAudio.h"
 #include "DeviceManager/DeviceComputer.h"
 #include "DeviceManager/DevicePower.h"
+#include "DeviceManager/DeviceInput.h"
+
 #include<QDebug>
 
 KLUGenerator::KLUGenerator()
@@ -151,7 +153,7 @@ void KLUGenerator::getKeyboardInfoFromHwinfo()
             continue;
         }
         if ((*it).contains("Device Files")) {
-            DeviceKeyboard *device = new DeviceKeyboard();
+            DeviceInput *device = new DeviceInput();
             device->setKLUInfoFromHwinfo(*it);
             DeviceManager::instance()->addKeyboardDevice(device);
             addBusIDFromHwinfo((*it)["SysFS BusID"]);

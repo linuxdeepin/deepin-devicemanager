@@ -1,14 +1,15 @@
-#ifndef DEVICEKEYBOARD_H
-#define DEVICEKEYBOARD_H
+#ifndef DEVICEINPUT_H
+#define DEVICEINPUT_H
 
-#include"DeviceInfo.h"
+#include "DeviceInfo.h"
 
-class DeviceKeyboard : public DeviceBaseInfo
+class DeviceInput : public DeviceBaseInfo
 {
     Q_OBJECT
-    Q_DISABLE_COPY(DeviceKeyboard)
+    Q_DISABLE_COPY(DeviceInput)
+
 public:
-    DeviceKeyboard();
+    DeviceInput();
 
     /**
      * @brief setInfoFromlshw:设置从lshw里面获取的信息
@@ -36,64 +37,10 @@ public:
     const QString &name()const override;
 
     /**
-     * @brief vendor:获取制造商属性值
-     * @return QString:制造商属性值
-     */
-    const QString &vendor()const;
-
-    /**
-     * @brief model:获取型号属性值
-     * @return QString:型号属性值
-     */
-    const QString &model()const;
-
-    /**
-       * @brief version:获取版本号属性值
-       * @return QString:版本号属性值
-       */
-    const QString &version()const;
-
-    /**
-     * @brief interface:获取接口属性值
-     * @return QString:接口属性值
-     */
-    const QString &interface()const;
-
-    /**
-     * @brief busInfo:获取总线信息属性值
-     * @return QString:总线信息属性值
-     */
-    const QString &busInfo()const;
-
-    /**
-       * @brief capabilities:获取功能属性值
-       * @return QString:功能属性值
-       */
-    const QString &capabilities()const;
-
-    /**
-     * @brief driver:获取驱动属性值
-     * @return QString:驱动属性值
+     * @brief name:获取名称属性值
+     * @return QString 名称属性值
      */
     const QString &driver()const override;
-
-    /**
-     * @brief maxinumPower:获取最大功耗属性值
-     * @return QString:最大功耗属性值
-     */
-    const QString &maxinumPower()const;
-
-    /**
-     * @brief speed:获取速度属性值
-     * @return QString:速度属性值
-     */
-    const QString &speed()const;
-
-    /**
-     * @brief description:获取描述属性值
-     * @return QString:描述属性值
-     */
-    const QString &description()const;
 
     /**
      * @brief subTitle:获取子标题
@@ -148,4 +95,4 @@ private:
     QString             m_KeysToCatDevices;                 //<! 【用来标识唯一键盘】
 };
 
-#endif // DEVICEKEYBOARD_H
+#endif // DEVICEINPUT_H

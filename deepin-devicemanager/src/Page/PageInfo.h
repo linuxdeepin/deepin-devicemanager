@@ -27,6 +27,8 @@ public:
 
     virtual bool isOverview() {return false;}
 
+    virtual bool isBaseBoard() {return false;}
+
 protected:
     void paintEvent(QPaintEvent *e) override;
 };

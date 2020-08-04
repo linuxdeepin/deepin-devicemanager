@@ -1,7 +1,7 @@
 #include "DeviceGenerator.h"
 #include "CmdTool.h"
 #include "../DeviceManager/DeviceManager.h"
-#include "../DeviceManager/DeviceMouse.h"
+//#include "../DeviceManager/DeviceMouse.h"
 #include "../DeviceManager/DeviceCpu.h"
 #include "../DeviceManager/DeviceGpu.h"
 #include "../DeviceManager/DeviceStorage.h"
@@ -11,13 +11,14 @@
 #include "../DeviceManager/DeviceAudio.h"
 #include "../DeviceManager/DeviceBluetooth.h"
 #include "../DeviceManager/DeviceNetwork.h"
-#include "../DeviceManager/DeviceKeyboard.h"
+//#include "../DeviceManager/DeviceKeyboard.h"
 #include "../DeviceManager/DeviceImage.h"
 #include "../DeviceManager/DeviceOthers.h"
 #include "../DeviceManager/DeviceComputer.h"
 #include "../DeviceManager/DevicePower.h"
 #include "../DeviceManager/DeviceCdrom.h"
 #include "../DeviceManager/DevicePrint.h"
+#include "../DeviceManager/DeviceInput.h"
 
 #include <QDebug>
 
@@ -612,7 +613,7 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
         // 下面这句代码忘了这么写的原因，先去掉
         //if ((*it).contains("Device Files")) {}
 
-        DeviceKeyboard *device = new DeviceKeyboard();
+        DeviceInput *device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addKeyboardDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
@@ -651,7 +652,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
             continue;
         }
 
-        DeviceMouse *device = new DeviceMouse();
+        DeviceInput *device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addMouseDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
@@ -686,7 +687,7 @@ void DeviceGenerator::getImageInfoFromHwinfo()
         if ((*it)["Model"].contains("camera", Qt::CaseInsensitive) ||
                 (*it)["Device"].contains("camera", Qt::CaseInsensitive) ||
                 (*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive) ||
-(*it)["Model"].contains("webcam", Qt::CaseInsensitive)) { // "webcam"  bug39981) 
+                (*it)["Model"].contains("webcam", Qt::CaseInsensitive)) { // "webcam"  bug39981)
             DeviceImage *device = new DeviceImage();
             device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addImageDevice(device);

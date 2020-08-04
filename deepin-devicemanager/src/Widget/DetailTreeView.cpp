@@ -32,7 +32,7 @@ void DetailTreeView::setColumnAndRow(int row, int column)
     setColumnCount(column);
 
     // 表格行数大于限制行数时，添加展开button
-    if (row > m_LimitRow) {
+    if (row > m_LimitRow + 1) {
         setCommanLinkButton(row);
     }
 
@@ -104,9 +104,23 @@ int DetailTreeView::setTableHeight(int paintHeight)
         maxRow = p->height() / ROW_HEIGHT - 2;
     }
 
+    // 主板界面的表格高度
+    if (p->isBaseBoard()) {
+        // 表格未展开
+        if (m_IsExpand == false) {
+            this->setFixedHeight(ROW_HEIGHT * (m_LimitRow + 1));
+            return this->height();
+        } else {
+            // 表格展开,父窗口最大容纳高度
+            this->setFixedHeight(ROW_HEIGHT * maxRow);
+            return this->height();
+        }
+
+    }
+
 
     // 信息行 <= 13 不影响表格大小
-    if (rowCount() <= m_LimitRow) {
+    if (rowCount() <= m_LimitRow + 1) {
         return paintHeight;
     } else {
         // 未展开,窗口高度始终等于ROW_HEIGHT * (m_LimitRow+1)
@@ -140,7 +154,7 @@ void DetailTreeView::expandCommandLinkClicked()
 {
     // 当前已展开详细信息
     if (m_IsExpand) {
-        mp_CommandBtn->setText("Details");
+        mp_CommandBtn->setText("More");
         m_IsExpand = false;
         for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
             hideRow(i);

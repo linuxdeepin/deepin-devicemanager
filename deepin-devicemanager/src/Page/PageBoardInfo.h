@@ -40,6 +40,8 @@ public:
      */
     void getValueInfo(DeviceBaseInfo *device, QPair<QString, QString> &pair);
 
+    bool isBaseBoard() override {return true;}
+
 private:
     RichTextDelegate     *mp_ItemDelegate;
 };

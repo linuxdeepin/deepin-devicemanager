@@ -1,12 +1,12 @@
-#include "DeviceKeyboard.h"
-#include <QDebug>
+#include "DeviceInput.h"
 
-DeviceKeyboard::DeviceKeyboard()
+DeviceInput::DeviceInput()
     : DeviceBaseInfo()
     , m_Name("")
     , m_Vendor("")
     , m_Model("")
     , m_Version("")
+    , m_Interface("")
     , m_BusInfo("")
     , m_Capabilities("")
     , m_Description("")
@@ -18,10 +18,15 @@ DeviceKeyboard::DeviceKeyboard()
     initFilterKey();
 }
 
-bool DeviceKeyboard::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
+bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
     if (m_KeyToLshw != mapInfo["bus info"]) {
-        return false;
+        QString key = mapInfo["bus info"];
+        key.replace("a", "10");
+
+        if (m_KeyToLshw != key) {
+            return false;
+        }
     }
 
     setAttribute(mapInfo, "product", m_Name);
@@ -35,10 +40,11 @@ bool DeviceKeyboard::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "driver", m_Driver);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
-void DeviceKeyboard::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
+void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     // 设置设备基本属性
     setAttribute(mapInfo, "Device", m_Name);
@@ -75,7 +81,7 @@ void DeviceKeyboard::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     getOtherMapInfo(mapInfo);
 }
 
-void DeviceKeyboard::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
+void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     // 设置设备基本属性
     setAttribute(mapInfo, "Device", m_Name);
@@ -87,8 +93,9 @@ void DeviceKeyboard::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     } else {
         m_Interface = "PS/2";
     }
-    if (m_Name.contains("")) {
-        m_Interface = "";
+    // 上面的方法不适合蓝牙键盘的获取方法
+    if (mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive) || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
+        m_Interface = "Bluetooth";
     }
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Hardware Class", m_Description);
@@ -107,67 +114,22 @@ void DeviceKeyboard::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     getOtherMapInfo(mapInfo);
 }
 
-const QString &DeviceKeyboard::name()const
+const QString &DeviceInput::name() const
 {
     return m_Name;
 }
 
-const QString &DeviceKeyboard::vendor()const
-{
-    return m_Vendor;
-}
-
-const QString &DeviceKeyboard::model()const
-{
-    return m_Model;
-}
-
-const QString &DeviceKeyboard::version()const
-{
-    return m_Version;
-}
-
-const QString &DeviceKeyboard::interface()const
-{
-    return m_Interface;
-}
-
-const QString &DeviceKeyboard::busInfo()const
-{
-    return m_BusInfo;
-}
-
-const QString &DeviceKeyboard::capabilities()const
-{
-    return m_Capabilities;
-}
-
-const QString &DeviceKeyboard::driver()const
+const QString &DeviceInput::driver() const
 {
     return m_Driver;
 }
 
-const QString &DeviceKeyboard::maxinumPower()const
-{
-    return m_MaximumPower;
-}
-
-const QString &DeviceKeyboard::speed()const
-{
-    return m_Speed;
-}
-
-const QString &DeviceKeyboard::description()const
-{
-    return m_Description;
-}
-
-QString DeviceKeyboard::subTitle()
+QString DeviceInput::subTitle()
 {
     return m_Model;
 }
 
-const QString DeviceKeyboard::getOverviewInfo()
+const QString DeviceInput::getOverviewInfo()
 {
     QString ov = QString("%1 (%2)") \
                  .arg(m_Name) \
@@ -176,7 +138,7 @@ const QString DeviceKeyboard::getOverviewInfo()
     return ov;
 }
 
-void DeviceKeyboard::initFilterKey()
+void DeviceInput::initFilterKey()
 {
     addFilterKey(QObject::tr("PROP"));
     addFilterKey(QObject::tr("EV"));
@@ -188,7 +150,7 @@ void DeviceKeyboard::initFilterKey()
     addFilterKey(QObject::tr("physical id"));
 }
 
-void DeviceKeyboard::loadBaseDeviceInfo()
+void DeviceInput::loadBaseDeviceInfo()
 {
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
@@ -196,10 +158,27 @@ void DeviceKeyboard::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Interface"), m_Interface);
     addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
 
-//    m_SubTitle = m_Model;
 }
 
-void DeviceKeyboard::getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &mapInfo, const QString &info)
+void DeviceInput::loadOtherDeviceInfo()
+{
+    addOtherDeviceInfo(tr("Speed"), m_Speed);
+    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addOtherDeviceInfo(tr("Driver"), m_Driver);
+    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(tr("Version"), m_Version);
+
+    mapInfoToList();
+}
+
+void DeviceInput::loadTableData()
+{
+    m_TableData.append(m_Name);
+    m_TableData.append(m_Vendor);
+    m_TableData.append(m_Model);
+}
+
+void DeviceInput::getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &mapInfo, const QString &info)
 {
     QMap<QString, QString> mapTemp;
     QStringList lines = info.split("\n");
@@ -221,22 +200,4 @@ void DeviceKeyboard::getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &m
             }
         }
     }
-}
-
-void DeviceKeyboard::loadOtherDeviceInfo()
-{
-    addOtherDeviceInfo(tr("Speed"), m_Speed);
-    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addOtherDeviceInfo(tr("Driver"), m_Driver);
-    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addOtherDeviceInfo(tr("Version"), m_Version);
-
-    mapInfoToList();
-}
-
-void DeviceKeyboard::loadTableData()
-{
-    m_TableData.append(m_Name);
-    m_TableData.append(m_Vendor);
-    m_TableData.append(m_Model);
 }

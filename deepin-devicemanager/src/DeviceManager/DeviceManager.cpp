@@ -1,7 +1,7 @@
 #include "DeviceManager.h"
 #include "DeviceCpu.h"
 #include "DeviceGpu.h"
-#include "DeviceMouse.h"
+//#include "DeviceMouse.h"
 #include "DeviceStorage.h"
 #include "DeviceMemory.h"
 #include "DeviceMonitor.h"
@@ -10,13 +10,15 @@
 #include "DeviceAudio.h"
 #include "DeviceNetwork.h"
 #include "DeviceImage.h"
-#include "DeviceKeyboard.h"
+//#include "DeviceKeyboard.h"
 #include "DeviceOthers.h"
 #include "DevicePower.h"
 #include "DevicePrint.h"
 #include "DeviceOtherPCI.h"
 #include "DeviceComputer.h"
 #include "DeviceCdrom.h"
+#include "DeviceInput.h"
+
 #include "MacroDefinition.h"
 
 #include <QDebug>
@@ -194,7 +196,7 @@ bool DeviceManager::getDeviceList(const QString &name, QList<DeviceBaseInfo *> &
     return true;
 }
 
-void DeviceManager::addMouseDevice(DeviceMouse    *const device)
+void DeviceManager::addMouseDevice(DeviceInput *const device)
 {
     // 如果不是重复设备则添加到设备列表
     m_ListDeviceMouse.append(device);
@@ -209,7 +211,7 @@ bool DeviceManager::addMouseInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMouse.begin();
     for (; it != m_ListDeviceMouse.end(); ++it) {
-        DeviceMouse *device = dynamic_cast<DeviceMouse *>(*it);
+        DeviceInput *device = dynamic_cast<DeviceInput *>(*it);
         if (!device) continue;
         if (device->setInfoFromlshw(mapInfo)) {
             return true;
@@ -527,7 +529,7 @@ const QList<DeviceBaseInfo *> &DeviceManager::getImageDevices()
     return m_ListDeviceImage;
 }
 
-void DeviceManager::addKeyboardDevice(DeviceKeyboard *const device)
+void DeviceManager::addKeyboardDevice(DeviceInput *const device)
 {
     m_ListDeviceKeyboard.append(device);
 }
@@ -541,7 +543,7 @@ void DeviceManager::setKeyboardInfoFromLshw(const QMap<QString, QString> &mapInf
 {
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceKeyboard.begin();
     for (; it != m_ListDeviceKeyboard.end(); ++it) {
-        DeviceKeyboard *device = dynamic_cast<DeviceKeyboard *>(*it);
+        DeviceInput *device = dynamic_cast<DeviceInput *>(*it);
         if (!device) continue;
         if (device->setInfoFromlshw(mapInfo)) {
             return;
