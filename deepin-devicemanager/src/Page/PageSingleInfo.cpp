@@ -20,7 +20,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     initWidgets();
 
     mp_Content->setContextMenuPolicy(Qt::CustomContextMenu);
-    bool a = connect(mp_Content, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
+    connect(mp_Content, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
     connect(mp_Refresh, &QAction::triggered, this, &PageSingleInfo::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::slotActionExport);
 }
@@ -58,7 +58,6 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
     mp_Content->setColumnAndRow(row + 1, 2);
 
     for (int i = 0; i < row; ++i) {
-
         QTableWidgetItem *itemFirst = new QTableWidgetItem(lst[i].first);
         mp_Content->setItem(i, 0, itemFirst);
         QTableWidgetItem *itemSecond = new QTableWidgetItem(lst[i].second);
@@ -81,11 +80,11 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
 }
 void PageSingleInfo::slotActionRefresh()
 {
-
+    emit refreshInfo();
 }
 void PageSingleInfo::slotActionExport()
 {
-
+    emit exportInfo();
 }
 
 void PageSingleInfo::initWidgets()

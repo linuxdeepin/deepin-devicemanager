@@ -14,6 +14,7 @@ using namespace Dtk::Widget;
 
 class PageSingleInfo : public PageInfo
 {
+    Q_OBJECT
 public:
     PageSingleInfo(QWidget *parent = nullptr);
     ~PageSingleInfo() override;
@@ -22,7 +23,7 @@ public:
      * @brief updateInfo
      * @param lst
      */
-    void updateInfo(const QList<DeviceBaseInfo *> &lst)override;
+    virtual void updateInfo(const QList<DeviceBaseInfo *> &lst)override;
 
     /**
      * @brief setLabel
@@ -34,7 +35,7 @@ public:
      * @brief loadDeviceInfo
      * @param lst
      */
-    void loadDeviceInfo(const QList<QPair<QString, QString>> &lst);
+    virtual void loadDeviceInfo(const QList<QPair<QString, QString>> &lst);
 
     /**
      * @brief clearContent
@@ -45,17 +46,17 @@ signals:
     void refreshInfo();
     void exportInfo();
 
-private slots:
+protected slots:
     void slotShowMenu(const QPoint &);
     void slotActionRefresh();
     void slotActionExport();
-private:
+protected:
     /**
      * @brief initWidgets : 初始化控件布局
      */
     void initWidgets();
 
-private:
+protected:
     DetailTreeView          *mp_Content;
     DLabel                  *mp_Label;
     QAction                 *mp_Refresh;     //<! 右键刷新

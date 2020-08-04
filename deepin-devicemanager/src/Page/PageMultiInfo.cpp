@@ -20,6 +20,8 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     connect(mp_Table, &PageTableHeader::itemClicked, this, &PageMultiInfo::slotItemClicked);
     connect(mp_Table, &PageTableHeader::refreshInfo, this, &PageMultiInfo::slotRefreshInfo);
     connect(mp_Table, &PageTableHeader::exportInfo, this, &PageMultiInfo::slotExportInfo);
+    connect(mp_Detail, &PageDetail::refreshInfo, this, &PageMultiInfo::slotRefreshInfo);
+    connect(mp_Detail, &PageDetail::exportInfo, this, &PageMultiInfo::slotExportInfo);
 }
 
 PageMultiInfo::~PageMultiInfo()

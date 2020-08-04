@@ -5,11 +5,14 @@
 #include <QHBoxLayout>
 #include <QPainter>
 #include <QPalette>
+#include <QDebug>
+#include <QScrollBar>
+#include <QAction>
+
 #include <DApplicationHelper>
 #include <DApplication>
 #include <DStyle>
-#include <QDebug>
-#include <QScrollBar>
+#include <DMenu>
 
 DWIDGET_USE_NAMESPACE
 
@@ -100,6 +103,7 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
 ScrollAreaWidget::ScrollAreaWidget(DWidget *parent)
     : DWidget(parent)
 {
+
 }
 
 void ScrollAreaWidget::paintEvent(QPaintEvent *e)
@@ -165,6 +169,8 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         if (!device) {continue;}
         TextBrowser *txtBrowser = new TextBrowser(this);
         txtBrowser->showDeviceInfo(device);
+        connect(txtBrowser, &TextBrowser::refreshInfo, this, &PageDetail::slotRefreshInfo);
+        connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::slotExportInfo);
         addWidgets(txtBrowser);
     }
     mp_ScrollAreaLayout->addStretch();
@@ -234,7 +240,7 @@ void PageDetail::addWidgets(TextBrowser *widget)
     // 添加按钮
     QHBoxLayout *vLayout = new QHBoxLayout(this);
     vLayout->addSpacing(34);
-    DetailButton *button = new DetailButton(tr("Details"));
+    DetailButton *button = new DetailButton(tr("More"));
     connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
     vLayout->addWidget(button);
     vLayout->addStretch(-1);
@@ -289,9 +295,18 @@ void PageDetail::slotBtnClicked()
 
     TextBrowser *browser = m_ListTextBrowser[index];
     browser->updateInfo();
-    if (button->text() == tr("Details")) {
-        button->setText(tr("Put away"));
+    if (button->text() == tr("More")) {
+        button->setText(tr("Collapse"));
     } else {
-        button->setText(tr("Details"));
+        button->setText(tr("More"));
     }
+}
+
+void PageDetail::slotRefreshInfo()
+{
+    emit refreshInfo();
+}
+void PageDetail::slotExportInfo()
+{
+    emit exportInfo();
 }

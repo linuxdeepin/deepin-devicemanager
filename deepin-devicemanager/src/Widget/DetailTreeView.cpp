@@ -66,7 +66,7 @@ void DetailTreeView::clear()
 void DetailTreeView::setCommanLinkButton(int row)
 {
     // 设置mp_CommandBtn属性
-    mp_CommandBtn = new DCommandLinkButton(tr("Details"), this);
+    mp_CommandBtn = new DCommandLinkButton(tr("More"), this);
     mp_CommandBtn->setMinimumSize(150, 100);
 
     //  合并最后一行
@@ -86,7 +86,7 @@ void DetailTreeView::setCommanLinkButton(int row)
 
     // 将btnwidget填充到表格中，并隐藏
     setCellWidget(row - 1, 0, btnwidget);
-    hideRow(row - 1);
+//    hideRow(row - 1);
 
     connect(mp_CommandBtn, &DCommandLinkButton::clicked, this, &DetailTreeView::expandCommandLinkClicked);
 }
@@ -146,7 +146,7 @@ void DetailTreeView::expandCommandLinkClicked()
             hideRow(i);
         }
     } else { // 当前未展开详细信息
-        mp_CommandBtn->setText("Put away");
+        mp_CommandBtn->setText("Collapse");
         m_IsExpand = true;
         for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
             showRow(i);

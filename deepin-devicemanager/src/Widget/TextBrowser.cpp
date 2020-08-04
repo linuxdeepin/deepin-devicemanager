@@ -8,6 +8,8 @@
 #include <QClipboard>
 #include <QContextMenuEvent>
 #include <QScrollBar>
+#include <QAction>
+#include <DMenu>
 
 #include "DeviceManager/DeviceInfo.h"
 
@@ -15,14 +17,19 @@
 TextBrowser::TextBrowser(QWidget *parent)
     : DTextBrowser(parent)
     , m_ShowOtherInfo(false)
+    , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
+    , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
+    , mp_Menu(new DMenu(this))
 {
     DFontSizeManager::instance()->bind(this, DFontSizeManager::SizeType(DFontSizeManager::T7));
     setFrameShape(QFrame::NoFrame);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-//    setContextMenuPolicy(Qt::CustomContextMenu);
-//    connect(this, SIGNAL(customContextMenuRequested(const QPoint &)),
-//            this, SLOT(slotShowMenu(const QPoint &)));
+    // 初始化右键菜单
+    setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
+    connect(mp_Refresh, &QAction::triggered, this, &TextBrowser::slotActionRefresh);
+    connect(mp_Export, &QAction::triggered, this, &TextBrowser::slotActionExport);
 }
 
 void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
@@ -39,6 +46,31 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
 
     // 添加子标题
     domTitleInfo(doc, mp_Info);
+
+    // 添加一个表格
+    const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
+    domTableInfo(doc, baseInfo);
+
+    // 将设备信息显示到TextBrowser
+    setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
+}
+
+void TextBrowser::showBoardInfo(DeviceBaseInfo *info)
+{
+    setWindowOpacity(1.0);
+//    setAttribute(Qt::WA_TranslucentBackground, true);
+    mp_Info = info;
+    // 先清空内容 *************************************************
+    clear();
+    if (!info) {
+        return;
+    }
+
+    // 显示设备的信息 *************************************************
+    QDomDocument doc;
+
+    // 添加子标题
+//    domTitleInfo(doc, mp_Info);
 
     // 添加一个表格
     const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
@@ -142,6 +174,25 @@ void TextBrowser::wheelEvent(QWheelEvent *event)
 {
 
 }
+
+
+void TextBrowser::slotShowMenu(const QPoint &)
+{
+    mp_Menu->clear();
+    mp_Menu->addSeparator();
+    mp_Menu->addAction(mp_Refresh);
+    mp_Menu->addAction(mp_Export);
+    mp_Menu->exec(QCursor::pos());
+}
+void TextBrowser::slotActionRefresh()
+{
+    emit refreshInfo();
+}
+void TextBrowser::slotActionExport()
+{
+    emit exportInfo();
+}
+
 
 void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
 {

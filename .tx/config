@@ -4,20 +4,23 @@ minimum_perc = 80
 mode = developer
 
 [deepin-device-manager.deepin-device-manager]
-file_filter = translations/deepin-devicemanager_<lang>.ts
-source_file = translations/deepin-devicemanager.ts
+file_filter = deepin-devicemanager/translations/deepin-devicemanager_<lang>.ts
+source_file = deepin-devicemanager/translations/deepin-devicemanager.ts
+preTranslate_file = deepin-devicemanager/translations/policy
 source_lang = en
 type = QT
 
 [deepin-device-manager.deepin-device-manager-desktop]
-file_filter = translations/desktop/desktop_<lang>.ts
-source_file = translations/desktop/desktop.ts
+file_filter = deepin-devicemanager/translations/desktop/desktop_<lang>.ts
+source_file = deepin-devicemanager/translations/desktop/desktop.ts
+preTranslate_file = deepin-devicemanager/translations/policy
 source_lang = en
 type = QT
 
 [deepin-device-manager.deepin-device-manager-policy]
-file_filter = translations/policy/policy_<lang>.ts
-source_file = translations/policy/policy.ts
+file_filter = deepin-devicemanager/translations/policy/policy_<lang>.ts
+source_file = deepin-devicemanager/translations/policy/policy.ts
+preTranslate_file = deepin-devicemanager/translations/policy
 source_lang = en
 type = QT
 

@@ -78,12 +78,9 @@ protected:
 
 private:
     DetailViewDelegate        *mp_ItemDelegate;   // Item自定义代理
-
-    DCommandLinkButton        *mp_CommandBtn;    // 展开命令Button
-
-    int            m_LimitRow;     // 正常状态下，表格显示的行数
-
-    bool           m_IsExpand;     // 是否展开
+    DCommandLinkButton        *mp_CommandBtn;     // 展开命令Button
+    int                       m_LimitRow;         // 正常状态下，表格显示的行数
+    bool                      m_IsExpand;         // 是否展开
 };
 
 #endif // DETAILTREEVIEW_H

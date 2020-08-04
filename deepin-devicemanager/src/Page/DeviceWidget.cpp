@@ -82,8 +82,8 @@ void DeviceWidget::initWidgets()
     hLayout->addWidget(mp_Splitter);
     mp_Splitter->addWidget(mp_ListView);
     mp_Splitter->addWidget(mp_PageInfo);
-    mp_Splitter->setStretchFactor(0, 1);
-    mp_Splitter->setStretchFactor(1, 4);
+    mp_Splitter->setStretchFactor(0, 2);
+    mp_Splitter->setStretchFactor(1, 6);
     setLayout(hLayout);
 }
 

@@ -84,7 +84,6 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         fo.setBold(false);
     }
     painter->setFont(fo);
-
     QFontMetrics fm(opt.font);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 

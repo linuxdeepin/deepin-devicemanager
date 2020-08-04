@@ -293,6 +293,16 @@ void DeviceMonitor::loadTableData()
 
 bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
 {
+    // 判断是否是同一个设备
+    // 这个代码一开始是有的，但是后来被删除了(目前没有搞清楚为什么被删除了)，现在有加上了(为了解决Bug37377)
+    // 代码的主要作用是判断是否是同一个设备，如果需要删除这个，请务必考虑到Bug37377
+    QString mInfo = info;
+    mInfo.replace(QRegExp("\\(.*\\)"), "");
+    QRegExp re(".*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
+    if (!re.exactMatch(mInfo)) {return false;}
+    if (m_Width != re.cap(1).toInt()) {return false;}
+    if (m_Height != re.cap(2).toInt()) {return false;}
+
     // 设置用的是哪个接口
     if (info.startsWith("VGA")) {
         m_Interface = "VGA";

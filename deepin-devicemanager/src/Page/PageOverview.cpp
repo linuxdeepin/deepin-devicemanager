@@ -4,21 +4,30 @@
 
 #include <QVBoxLayout>
 #include <QTableWidgetItem>
+#include <QAction>
+#include <QDebug>
 
 #include <DFontSizeManager>
-
-#include <QDebug>
+#include <DMenu>
 
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
     , mp_PicLabel(new DLabel(this))
     , mp_TextLabel(new DLabel(this))
     , mp_Overview(new DetailTreeView(this))
+    , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
+    , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
+    , mp_Menu(new DMenu(this))
 {
     initWidgets();
+
+    mp_Overview->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(mp_Overview, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
+    connect(mp_Refresh, &QAction::triggered, this, &PageOverview::slotActionRefresh);
+    connect(mp_Export, &QAction::triggered, this, &PageOverview::slotActionExport);
 }
 
-void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &lst)
+void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &)
 {
 
 }
@@ -29,7 +38,7 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     mp_Overview->setLimitRow(11);
     mp_Overview->setColumnAndRow(row);
 
-    QTableWidgetItem *itemFirst = new QTableWidgetItem(map.find("OS").key());
+    QTableWidgetItem *itemFirst = new QTableWidgetItem(tr("OS"));
     mp_Overview->setItem(0, 0, itemFirst);
     QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find("OS").value());
     mp_Overview->setItem(0, 1, itemSecond);
@@ -50,7 +59,7 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
         }
 
         if (map.find(strList[1]) != map.end()) {
-            QTableWidgetItem *itemFirst = new QTableWidgetItem(map.find(strList[1]).key());
+            QTableWidgetItem *itemFirst = new QTableWidgetItem(iter.first);
             mp_Overview->setItem(i, 0, itemFirst);
             QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find(strList[1]).value());
             mp_Overview->setItem(i, 1, itemSecond);
@@ -92,6 +101,25 @@ void PageOverview::setLabel(const QString &itemstr)
 
     pic.load(path);
     mp_PicLabel->setPixmap(pic);
+}
+
+void PageOverview::slotShowMenu(const QPoint &)
+{
+    mp_Menu->clear();
+    mp_Menu->addSeparator();
+    mp_Menu->addAction(mp_Refresh);
+    mp_Menu->addAction(mp_Export);
+    mp_Menu->exec(QCursor::pos());
+}
+
+void PageOverview::slotActionRefresh()
+{
+    emit refreshInfo();
+}
+
+void PageOverview::slotActionExport()
+{
+    emit exportInfo();
 }
 
 void PageOverview::initWidgets()

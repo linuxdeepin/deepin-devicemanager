@@ -40,6 +40,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *e) override;
+
 };
 
 
@@ -76,8 +77,15 @@ private:
      */
     void clearWidget();
 
+signals:
+    void refreshInfo();
+    void exportInfo();
+
 private slots:
     void slotBtnClicked();
+    void slotRefreshInfo();
+    void slotExportInfo();
+
 
 private:
     QVBoxLayout      *mp_ScrollAreaLayout;

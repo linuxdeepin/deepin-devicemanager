@@ -10,6 +10,7 @@ class PageInfo;
 class PageMultiInfo;
 class PageSingleInfo;
 class PageOverview;
+class PageBoardInfo;
 
 using namespace Dtk::Widget;
 class PageInfoWidget : public DWidget
@@ -47,6 +48,7 @@ private:
     PageSingleInfo *mp_PageSignalInfo;
     PageMultiInfo  *mp_PageMutilInfo;
     PageOverview   *mp_PageOverviewInfo;
+    PageBoardInfo  *mp_PageBoardInfo;
 };
 
 #endif // PAGEINFOWIDGET_H
