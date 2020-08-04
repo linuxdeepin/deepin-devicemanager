@@ -82,8 +82,6 @@ QString DeviceInfoParser::loadGeneratorKey()
     if (!getDeviceInfo(QString("sudo dmidecode -t 1"), deviceInfo, "dmidecode_1.txt")) {
         return key;
     }
-
-    qDebug() << "@@@@@@@" << deviceInfo << "@@@@@@@@";
     if (deviceInfo.contains("PGU-WBY0")) {  // pangu
         key = "PanGu";
     } else if (deviceInfo.contains("HUAWEI L410 KLVU-WDU0")) { // klu
