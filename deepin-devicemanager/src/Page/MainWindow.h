@@ -60,6 +60,12 @@ protected:
      */
     virtual void resizeEvent(QResizeEvent *event)override;
 
+    /**
+     * @brief keyPressEvent:相应键盘按键事件
+     * @param keyEvent:按键：E导出，F大小调整，F5刷新，C复制
+     */
+    void keyPressEvent(QKeyEvent *keyEvent) override;
+
 private:
     /** @brief initWindow:对窗口进行一系列的初始化操作*/
     void initWindow();
@@ -74,12 +80,6 @@ private:
      * @brief refreshDataBase:刷新设备信息
      */
     void refreshDataBase();
-
-    /**
-     * @brief keyPressEvent:相应键盘按键事件
-     * @param e:按键：E导出，F大小调整，F5刷新，C复制
-     */
-    void keyPressEvent(QKeyEvent *e) override;
 
 private slots:
 

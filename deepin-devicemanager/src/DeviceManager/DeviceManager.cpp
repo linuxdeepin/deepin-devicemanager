@@ -245,6 +245,18 @@ void DeviceManager::addLshwinfoIntoStorageDevice(const QMap<QString, QString> &m
     }
 }
 
+void DeviceManager::addLshwinfoIntoNVMEStorageDevice(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceStorage.begin();
+    for (; it != m_ListDeviceStorage.end(); ++it) {
+        DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
+        if (!device) continue;
+        if (device->addNVMEInfoFromlshw(mapInfo)) {
+            return;
+        }
+    }
+}
+
 void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceStorage.begin();

@@ -22,6 +22,7 @@ PageListView::PageListView(DWidget *parent)
     hLayout->setContentsMargins(0, 0, 0, 0);
     setLayout(hLayout);
 
+    this->setMinimumWidth(152);
     // 初始化右键菜单
     mp_ListView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(mp_ListView, SIGNAL(customContextMenuRequested(const QPoint &)),

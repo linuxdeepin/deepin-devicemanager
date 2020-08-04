@@ -137,7 +137,11 @@ QString DeviceMouse::subTitle()
 
 const QString DeviceMouse::getOverviewInfo()
 {
-    return m_Name.isEmpty() ? m_Model : m_Name;
+    QString ov = QString("%1 (%2)") \
+                 .arg(m_Name) \
+                 .arg(m_Model);
+
+    return ov;
 }
 
 void DeviceMouse::initFilterKey()

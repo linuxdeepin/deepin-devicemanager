@@ -7,6 +7,7 @@
 #include <DApplication>
 
 #include "MacroDefinition.h"
+#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 PageInfo::PageInfo(QWidget *parent)

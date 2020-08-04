@@ -114,6 +114,7 @@ public:
      * @param mapInfo:由lshw获取的存储设备信息
      */
     void addLshwinfoIntoStorageDevice(const QMap<QString, QString> &mapInfo);
+    void addLshwinfoIntoNVMEStorageDevice(const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief getStorageDevices:获取所有存储设备

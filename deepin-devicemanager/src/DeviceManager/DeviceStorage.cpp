@@ -29,6 +29,10 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Drive", m_Driver);
+    QRegExp exp("pci 0x[0-9a-zA-Z]*");
+    if (exp.indexIn(m_Vendor) != -1) {
+        m_Vendor = "";
+    }
 
     setAttribute(mapInfo, "Attached to", m_Interface);
     QRegExp re(".*\\((.*)\\).*");
@@ -50,7 +54,9 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     ///setDiskSerialID(mapInfo["Device Files"]);
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
-
+    if (m_KeyToLshw.contains("nvme0", Qt::CaseInsensitive)) {
+        setAttribute(mapInfo, "SysFS Device Link", m_NvmeKey);
+    }
     getOtherMapInfo(mapInfo);
     return true;
 }
@@ -130,6 +136,26 @@ bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
     getOtherMapInfo(mapInfo);
 
     return true;
+}
+
+bool DeviceStorage::addNVMEInfoFromlshw(const QMap<QString, QString> &mapInfo)
+{
+    QStringList keys = mapInfo["bus info"].split("@");
+    if (keys.size() != 2) {
+        return false;
+    }
+
+    QString key = keys[1].trimmed();
+
+    // SysFS Device Link: /devices/pci0000:00/0000:00:05.0/0000:0d:00.0/nvme/nvme0
+    //bus info: pci@0000:0d:00.0
+    // 确认为同一设备
+    if (m_NvmeKey.contains(key, Qt::CaseInsensitive)) {
+        setAttribute(mapInfo, "vendor", m_Vendor);
+    }
+
+    return true;
+
 }
 
 bool DeviceStorage::addInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo)
@@ -336,7 +362,7 @@ QString DeviceStorage::subTitle()
 
 const QString DeviceStorage::getOverviewInfo()
 {
-    return m_Model;
+    return QString("%1 (%2)").arg(m_Model).arg(m_Size);;
 }
 
 void DeviceStorage::initFilterKey()

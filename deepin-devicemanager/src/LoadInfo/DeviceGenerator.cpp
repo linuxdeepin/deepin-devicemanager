@@ -54,11 +54,11 @@ void DeviceGenerator::generatorComputerDevice()
     QString os = "UOS";
     DSysInfo::DeepinType type = DSysInfo::deepinType();
     if (DSysInfo::DeepinProfessional == type) {
-        os =  "UOS 20";
+        os =  "UnionTect OS 20";
     } else if (DSysInfo::DeepinPersonal == type) {
         os =  "UOS 20 Home";
     } else if (DSysInfo::DeepinDesktop == type) {
-        os =  "Deepin 20 Beta";
+        os =  "Deepin 20";
     }
     device->setOsDescription(os);
 
@@ -386,6 +386,17 @@ void DeviceGenerator::getDiskInfoFromLshw()
         }
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(*dIt);
     }
+
+    /*if (lstDisk.size() == 0)*/ {
+        const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_storage");
+        QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
+        for (; dIt != lstDisk.end(); ++dIt) {
+            if ((*dIt).size() < 2) {
+                continue;
+            }
+            DeviceManager::instance()->addLshwinfoIntoNVMEStorageDevice(*dIt);
+        }
+    }
 }
 
 void DeviceGenerator::getDiskInfoFromLsblk()
@@ -674,7 +685,8 @@ void DeviceGenerator::getImageInfoFromHwinfo()
         }
         if ((*it)["Model"].contains("camera", Qt::CaseInsensitive) ||
                 (*it)["Device"].contains("camera", Qt::CaseInsensitive) ||
-                (*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive)) {
+                (*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive) ||
+(*it)["Model"].contains("webcam", Qt::CaseInsensitive)) { // "webcam"  bug39981) 
             DeviceImage *device = new DeviceImage();
             device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addImageDevice(device);

@@ -79,6 +79,9 @@ void PageInfoWidget::initWidgets()
     hLayout->addWidget(mp_PageOverviewInfo);
     setLayout(hLayout);
 
+    // 设置边距为2
+    this->setContentsMargins(2, 2, 2, 2);
+
     mp_PageSignalInfo->setVisible(false);
     mp_PageMutilInfo->setVisible(false);
 }
