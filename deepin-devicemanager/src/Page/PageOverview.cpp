@@ -13,7 +13,8 @@
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
     , mp_PicLabel(new DLabel(this))
-    , mp_TextLabel(new DLabel(this))
+    , mp_DeviceLabel(new DLabel(this))
+    , mp_OSLabel(new DLabel(this))
     , mp_Overview(new DetailTreeView(this))
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
@@ -35,15 +36,10 @@ void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &)
 void PageOverview::updateInfo(const QMap<QString, QString> &map)
 {
     int row = map.size();
-    mp_Overview->setLimitRow(11);
-    mp_Overview->setColumnAndRow(row);
+    mp_Overview->setLimitRow(10);
+    mp_Overview->setColumnAndRow(row - 2);
 
-    QTableWidgetItem *itemFirst = new QTableWidgetItem(tr("OS"));
-    mp_Overview->setItem(0, 0, itemFirst);
-    QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find("OS").value());
-    mp_Overview->setItem(0, 1, itemSecond);
-
-    int i = 1;
+    int i = 0;
 
     const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
 
@@ -66,12 +62,14 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
             ++i;
         }
     }
+
+    qDebug() << "=======================" << i;
 }
 
 void PageOverview::setLabel(const QString &itemstr)
 {
-    mp_TextLabel->setText(itemstr);
-    DFontSizeManager::instance()->bind(mp_TextLabel, DFontSizeManager::T3);
+    mp_DeviceLabel->setText(itemstr);
+    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T3);
 
     // 系统中获取
 //    QIcon icon(QIcon::fromTheme("computer"));
@@ -103,6 +101,44 @@ void PageOverview::setLabel(const QString &itemstr)
     mp_PicLabel->setPixmap(pic);
 }
 
+void PageOverview::setLabel(const QString &str1, const QString &str2)
+{
+    mp_DeviceLabel->setText(str1);
+    mp_OSLabel->setText(str2);
+    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T3);
+
+    // 系统中获取
+//    QIcon icon(QIcon::fromTheme("computer"));
+//    QPixmap pic = icon.pixmap(96, 96);
+//    mp_PicLabel->setPixmap(pic);
+
+    // 资源文件获取、
+    QPixmap pic(96, 96);
+
+    QString path = ":/icons/deepin/builtin/device/";
+    if (str1.contains("desktop", Qt::CaseInsensitive)) {
+        path += "desktop.svg";
+    }
+    if (str1.contains("server", Qt::CaseInsensitive)) {
+        path += "server.svg";
+    }
+    if (str1.contains("ternimal", Qt::CaseInsensitive)) {
+        path += "ternimal.svg";
+    }
+    if (str1.contains("laptop", Qt::CaseInsensitive) ||
+            str1.contains("notebook", Qt::CaseInsensitive)) {
+        path += "laptop.svg";
+    }
+    if (str1.contains("Tablet", Qt::CaseInsensitive)) {
+        path += "Tablet.svg";
+    }
+
+    pic.load(path);
+    mp_PicLabel->setPixmap(pic);
+
+
+}
+
 void PageOverview::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
@@ -125,9 +161,23 @@ void PageOverview::slotActionExport()
 void PageOverview::initWidgets()
 {
     QVBoxLayout *hLayout = new QVBoxLayout(this);
-    hLayout->addWidget(mp_PicLabel);
-    hLayout->addWidget(mp_TextLabel);
+    QHBoxLayout *hLayoutTop = new QHBoxLayout(this);
+    QVBoxLayout *vLayoutLabel = new  QVBoxLayout(this);
+
+    vLayoutLabel->addStretch();
+    vLayoutLabel->addWidget(mp_DeviceLabel);
+    vLayoutLabel->addWidget(mp_OSLabel);
+    vLayoutLabel->addStretch();
+
+    hLayoutTop->addWidget(mp_PicLabel);
+    hLayoutTop->addSpacing(10);
+    hLayoutTop->addLayout(vLayoutLabel);
+    hLayoutTop->addStretch();
+
+    hLayout->addLayout(hLayoutTop);
+    hLayout->addSpacing(10);
     hLayout->addWidget(mp_Overview);
     hLayout->addStretch();
     setLayout(hLayout);
+
 }

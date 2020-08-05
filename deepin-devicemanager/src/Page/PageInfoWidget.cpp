@@ -77,7 +77,7 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QMap<QString, QSt
     mp_PageInfo = mp_PageOverviewInfo;
     if (mp_PageInfo) {
         mp_PageInfo->updateInfo(map);
-        mp_PageInfo->setLabel(map["Overview"]);
+        mp_PageInfo->setLabel(map["Overview"], map["OS"]);
     }
 }
 

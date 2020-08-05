@@ -23,6 +23,8 @@ public:
 
     virtual void setLabel(const QString &itemstr) = 0;
 
+    virtual void setLabel(const QString &str1, const QString &str2);
+
     virtual void clearContent();
 
     virtual bool isOverview() {return false;}

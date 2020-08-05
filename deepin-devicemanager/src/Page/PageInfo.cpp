@@ -21,6 +21,11 @@ void PageInfo::updateInfo(const QMap<QString, QString> &map)
 
 }
 
+void PageInfo::setLabel(const QString &str1, const QString &str2)
+{
+
+}
+
 void PageInfo::clearContent()
 {
 

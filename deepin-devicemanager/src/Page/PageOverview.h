@@ -35,6 +35,8 @@ public:
      */
     void setLabel(const QString &itemstr) override;
 
+    void setLabel(const QString &str1, const QString &str2) override;
+
     /**
      * @brief isOverview
      * @return
@@ -58,7 +60,8 @@ private:
 
 private:
     DLabel                  *mp_PicLabel;
-    DLabel                  *mp_TextLabel;
+    DLabel                  *mp_DeviceLabel;
+    DLabel                  *mp_OSLabel;
     DetailTreeView          *mp_Overview;
     QAction                 *mp_Refresh;     //<! 右键刷新
     QAction                 *mp_Export;      //<! 右键导出
