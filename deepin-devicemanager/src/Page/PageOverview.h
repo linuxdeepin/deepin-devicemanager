@@ -61,7 +61,7 @@ private:
 private:
     DLabel                  *mp_PicLabel;
     DLabel                  *mp_DeviceLabel;
-    DLabel                  *mp_OSLabel;
+    QLabel                  *mp_OSLabel;
     DetailTreeView          *mp_Overview;
     QAction                 *mp_Refresh;     //<! 右键刷新
     QAction                 *mp_Export;      //<! 右键导出

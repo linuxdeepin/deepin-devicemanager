@@ -9,12 +9,15 @@
 
 #include <DFontSizeManager>
 #include <DMenu>
+#include <DSysInfo>
+
+DCORE_USE_NAMESPACE
 
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
     , mp_PicLabel(new DLabel(this))
     , mp_DeviceLabel(new DLabel(this))
-    , mp_OSLabel(new DLabel(this))
+    , mp_OSLabel(new QLabel(this))
     , mp_Overview(new DetailTreeView(this))
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
@@ -23,6 +26,7 @@ PageOverview::PageOverview(DWidget *parent)
     initWidgets();
 
     mp_Overview->setContextMenuPolicy(Qt::CustomContextMenu);
+
     connect(mp_Overview, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
     connect(mp_Refresh, &QAction::triggered, this, &PageOverview::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &PageOverview::slotActionExport);
@@ -36,8 +40,8 @@ void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &)
 void PageOverview::updateInfo(const QMap<QString, QString> &map)
 {
     int row = map.size();
-    mp_Overview->setLimitRow(10);
-    mp_Overview->setColumnAndRow(row - 2);
+    mp_Overview->setLimitRow(11);
+    mp_Overview->setColumnAndRow(row - 1);
 
     int i = 0;
 
@@ -103,8 +107,26 @@ void PageOverview::setLabel(const QString &itemstr)
 
 void PageOverview::setLabel(const QString &str1, const QString &str2)
 {
+    QString os = str2;
+    QString linkStr = "<a style = \"text-decoration:none\" href = https://www.chinauos.com/home>";
+    DSysInfo::DeepinType type = DSysInfo::deepinType();
+    if (DSysInfo::DeepinProfessional == type) {
+        linkStr += "UnionTech OS 20 </a>" + os.remove("UnionTech OS 20");
+    } else if (DSysInfo::DeepinPersonal == type) {
+        linkStr += "UOS 20 Home </a>" + os.remove("UOS 20 Home");
+    } else if (DSysInfo::DeepinDesktop == type) {
+        linkStr += "Deepin 20 RC </a>" + os.remove("Deepin 20 RC");
+    }
+
+    // 打开超链接属性
+    mp_OSLabel->setOpenExternalLinks(true);
+
+    // 设置操作系统内容，并自动换行
+    mp_OSLabel->setText(linkStr);
+    mp_OSLabel->setWordWrap(true);
+
+    // 设置设备信息
     mp_DeviceLabel->setText(str1);
-    mp_OSLabel->setText(str2);
     DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T3);
 
     // 系统中获取
@@ -135,8 +157,6 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     pic.load(path);
     mp_PicLabel->setPixmap(pic);
-
-
 }
 
 void PageOverview::slotShowMenu(const QPoint &)
@@ -164,20 +184,22 @@ void PageOverview::initWidgets()
     QHBoxLayout *hLayoutTop = new QHBoxLayout(this);
     QVBoxLayout *vLayoutLabel = new  QVBoxLayout(this);
 
-    vLayoutLabel->addStretch();
+    mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    vLayoutLabel->addSpacing(20);
     vLayoutLabel->addWidget(mp_DeviceLabel);
     vLayoutLabel->addWidget(mp_OSLabel);
-    vLayoutLabel->addStretch();
+    vLayoutLabel->addSpacing(20);
 
+    hLayoutTop->setMargin(2);
     hLayoutTop->addWidget(mp_PicLabel);
     hLayoutTop->addSpacing(10);
     hLayoutTop->addLayout(vLayoutLabel);
-    hLayoutTop->addStretch();
+//    hLayoutTop->addStretch();
 
     hLayout->addLayout(hLayoutTop);
     hLayout->addSpacing(10);
     hLayout->addWidget(mp_Overview);
     hLayout->addStretch();
     setLayout(hLayout);
-
 }

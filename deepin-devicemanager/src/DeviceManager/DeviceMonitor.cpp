@@ -34,11 +34,11 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
     QString res = sizeDescription;
     QRegExp re("^([\\d]*)x([\\d]*) mm$");
     if (re.exactMatch(sizeDescription)) {
-        double width = re.cap(1).toDouble();
-        double height = re.cap(2).toDouble();
-        retSize = QSize(int(width), int(height));
-        width /= 2.54;
-        height /= 2.54;
+        m_Width = re.cap(1).toInt();
+        m_Height = re.cap(2).toInt();
+        retSize = QSize(m_Width, m_Height);
+        double width = m_Width / 2.54;
+        double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
         res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
         res += sizeDescription;
@@ -47,11 +47,11 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
 
     re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
     if (re.exactMatch(sizeDescription)) {
-        double width = re.cap(1).toDouble();
-        double height = re.cap(2).toDouble();
-        retSize = QSize(int(width), int(height));
-        width /= 2.54;
-        height /= 2.54;
+        m_Width = re.cap(1).toInt();
+        m_Height = re.cap(2).toInt();
+        retSize = QSize(m_Width, m_Height);
+        double width = m_Width / 2.54;
+        double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
         res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
         res += sizeDescription;

@@ -36,7 +36,7 @@ void DetailTreeView::setColumnAndRow(int row, int column)
         setCommanLinkButton(row);
     }
 
-    if (row == m_LimitRow) {
+    if (row <= m_LimitRow + 1) {
         hideRow(row - 1);
     }
 }
@@ -101,7 +101,7 @@ int DetailTreeView::setTableHeight(int paintHeight)
     if (p->isOverview()) {
         maxRow = p->height() / ROW_HEIGHT - 4;
     } else {
-        maxRow = p->height() / ROW_HEIGHT - 2;
+        maxRow = p->height() / ROW_HEIGHT - 3;
     }
 
     // 主板界面的表格高度
