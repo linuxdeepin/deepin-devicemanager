@@ -54,7 +54,7 @@ void DeviceGenerator::generatorComputerDevice()
     QString os = "UOS";
     DSysInfo::DeepinType type = DSysInfo::deepinType();
     if (DSysInfo::DeepinProfessional == type) {
-        os =  "UnionTect OS 20";
+        os =  "UnionTech OS 20";
     } else if (DSysInfo::DeepinPersonal == type) {
         os =  "UOS 20 Home";
     } else if (DSysInfo::DeepinDesktop == type) {
