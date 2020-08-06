@@ -36,6 +36,7 @@ public:
     const QString &HDMI() const;
     const QString &eDP() const;
     const QString &displayPort() const;
+    const QString &DVI() const;
     const QString &clock() const;
     const QString &description() const;
     const QString &driver() const;
@@ -64,6 +65,7 @@ private:
     QString            m_VGA;                     //<! 【VGA】
     QString            m_HDMI;                    //<! 【HDMI】
     QString            m_eDP;
+    QString            m_DVI;
     QString            m_Description;             //<! 【描述】
     QString            m_Driver;                  //<! 【驱动】
     QString            m_CurrentResolution;       //<! 【当前分辨率】

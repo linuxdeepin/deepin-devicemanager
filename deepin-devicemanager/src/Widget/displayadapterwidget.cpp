@@ -98,6 +98,7 @@ void DisplayadapterWidget::addDeviceDetail(const DeviceGpu &device, bool withTit
     addDeviceAttribute(tr("HDMI"), device.HDMI(), attributes, true);
     addDeviceAttribute(tr("eDP"), device.eDP(), attributes, true);
     addDeviceAttribute(tr("DP"), device.displayPort(), attributes, true);
+    addDeviceAttribute(tr("DVI"), device.DVI(), attributes, true);
     addDeviceAttribute(tr("Clock"), device.clock(), attributes, true);
     addDeviceAttribute(tr("Description"), device.description(), attributes, true);
     addDeviceAttribute(tr("Driver"), device.driver(), attributes, true);

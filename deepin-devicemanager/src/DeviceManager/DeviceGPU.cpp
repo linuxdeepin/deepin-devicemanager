@@ -17,6 +17,7 @@ DeviceGpu::DeviceGpu()
     , m_VGA("Unable")
     , m_HDMI("Unable")
     , m_eDP("Unable")
+    , m_DVI("Unable")
     , m_Description("")
     , m_Driver("")
     , m_CurrentResolution("")
@@ -129,6 +130,9 @@ void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
     if (mapInfo.find("eDP") != mapInfo.end()) {
         m_eDP = mapInfo["eDP"];
     }
+    if (mapInfo.find("DVI") != mapInfo.end()) {
+        m_DVI = mapInfo["DVI"];
+    }
 }
 
 void DeviceGpu::setDmesgInfo(const QString &info)
@@ -143,6 +147,7 @@ void DeviceGpu::setGpuInfo(const QMap<QString, QString> &mapInfo)
     m_VGA = "";
     m_DisplayPort = "";
     m_eDP = "";
+    m_DVI = "";
 
     setAttribute(mapInfo, "Name", m_Name);
     loadOtherDeviceInfo(mapInfo);
@@ -210,6 +215,11 @@ const QString &DeviceGpu::eDP() const
 const QString &DeviceGpu::displayPort() const
 {
     return m_DisplayPort;
+}
+
+const QString &DeviceGpu::DVI() const
+{
+    return m_DVI;
 }
 
 const QString &DeviceGpu::clock() const

@@ -186,10 +186,12 @@ void CmdTool::loadXrandrInfo(const QString &cmd, const QString &debugfile)
             mapInfo["HDMI"] = "Enable";
         } else if (line.startsWith("VGA")) {
             mapInfo["VGA"] = "Enable";
-        } else if (line.startsWith("DP")) {
+        } else if (line.startsWith("DP") || line.startsWith("DisplayPort")) {
             mapInfo["DP"] = "Enable";
         } else if (line.startsWith("eDP")) {
             mapInfo["eDP"] = "Enable";
+        } else if (line.startsWith("DVI")) {
+            mapInfo["DVI"] = "Enable";
         }
     }
     addMapInfo("xrandr", mapInfo);
