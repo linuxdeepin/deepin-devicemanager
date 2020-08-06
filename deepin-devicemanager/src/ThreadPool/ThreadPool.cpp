@@ -228,7 +228,7 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
     cmdList.append({ "dmidecode17",          "sudo dmidecode -t 17",    "dmidecode_17.txt",       ""});
 
 
-    cmdList.append({ "hwinfo_monitor",       "hwinfo --monitor",        "hwinfo_monitor.txt",     tr("Loading CD-ROM Info...")});
+    cmdList.append({ "hwinfo_monitor",       "sudo hwinfo --monitor",        "hwinfo_monitor.txt",     tr("Loading CD-ROM Info...")});
     cmdList.append({ "hwinfo_sound",         "hwinfo --sound",          "hwinfo_sound.txt",       ""});
     cmdList.append({ "hwinfo_usb",           "hwinfo --usb",            "hwinfo_usb.txt",         ""});
     cmdList.append({ "hwinfo_network",       "hwinfo --network",        "hwinfo_network.txt",     ""});
