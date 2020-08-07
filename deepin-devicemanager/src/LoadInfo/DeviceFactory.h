@@ -1,3 +1,4 @@
+
 #ifndef DEVICEFACTORY_H
 #define DEVICEFACTORY_H
 

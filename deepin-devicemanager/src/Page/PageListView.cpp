@@ -83,11 +83,13 @@ void PageListView::slotShowMenu(const QPoint &)
 
 void PageListView::slotActionEnable()
 {
+    qDebug() << mp_ListView->currentIndex().row();
     mp_ListView->setCurItemEnable(true);
 }
 
 void PageListView::slotActionDisable()
 {
+    qDebug() << mp_ListView->currentIndex().row();
     mp_ListView->setCurItemEnable(false);
 }
 

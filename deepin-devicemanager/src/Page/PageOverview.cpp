@@ -66,8 +66,6 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
             ++i;
         }
     }
-
-    qDebug() << "=======================" << i;
 }
 
 void PageOverview::setLabel(const QString &itemstr)

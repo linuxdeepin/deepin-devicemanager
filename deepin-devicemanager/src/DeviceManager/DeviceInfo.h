@@ -1,3 +1,23 @@
+/*
+ * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
+ *
+ * Author:     LZ <zhou.lu@archermind.com>
+ *
+ * Maintainer: LZ <zhou.lu@archermind.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 /**
 * @brief: 设备信息的基类
 * @author: liujun
@@ -63,8 +83,16 @@ public:
      */
     virtual const QString getOverviewInfo();
 
+    /**
+     * @brief name:获取设备名称
+     * @return 设备名称
+     */
     virtual const QString &name() const = 0;
 
+    /**
+     * @brief driver:获取设备驱动
+     * @return 设备驱动
+     */
     virtual const QString &driver() const = 0;
 
 
@@ -135,16 +163,53 @@ public:
      */
     void baseInfoToTxt(QTextStream &out, QList<QPair<QString, QString>> &infoLst);
 
+    /**
+     * @brief tableInfoToTxt:表格内容写到txt
+     * @param out:txt文件流
+     */
     void tableInfoToTxt(QTextStream &out);
+
+    /**
+     * @brief tableHeaderToTxt:表头信息写到txt
+     * @param out:txt文件流
+     */
     void tableHeaderToTxt(QTextStream &out);
 
+    /**
+     * @brief tableInfoToHtml:表格内容写到html
+     * @param html:html文档
+     */
     void tableInfoToHtml(QFile &html);
+
+    /**
+     * @brief tableHeaderToHtml:表头信息写到html
+     * @param html:html文档
+     */
     void tableHeaderToHtml(QFile &html);
 
+    /**
+     * @brief tableInfoToDoc:表格信息写到doc
+     * @param tab:doc文档表格
+     * @param row:表格行数，第row行
+     */
     void tableInfoToDoc(Docx::Table *tab, int &row);
+
+    /**
+     * @brief tableHeaderToDoc:表头信息写到doc
+     * @param tab doc文档的表格
+     */
     void tableHeaderToDoc(Docx::Table *tab);
 
+    /**
+     * @brief tableInfoToXlsx:表格信息写到xlsx
+     * @param xlsx xlsx文件
+     */
     void tableInfoToXlsx(QXlsx::Document &xlsx);
+
+    /**
+     * @brief tableHeaderToXlsx:表头信息写到xlsx
+     * @param xlsx xlsx文件
+     */
     void tableHeaderToXlsx(QXlsx::Document &xlsx);
 
 
@@ -209,6 +274,9 @@ protected:
      */
     void setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite = true);
 
+    /**
+     * @brief mapInfoToList:QMap转换为QList
+     */
     void mapInfoToList();
 
 protected:

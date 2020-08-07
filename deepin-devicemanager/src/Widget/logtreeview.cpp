@@ -29,7 +29,7 @@
 #include <QFileInfo>
 #include <QHeaderView>
 #include <QScrollBar>
-//#include "structdef.h"
+#include "MacroDefinition.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -78,29 +78,43 @@ void LogTreeView::clear()
 
 void LogTreeView::initUI()
 {
+    // 模型
     mp_Model = new QStandardItemModel(this);
     setModel(mp_Model);
 
+    // Item 代理
     mp_ItemDelegate = new LogViewItemDelegate(this);
     setItemDelegate(mp_ItemDelegate);
 
+    // 表头
     mp_HeaderView = new LogViewHeaderView(Qt::Horizontal, this);
     setHeader(mp_HeaderView);
 
+    // 设置不可编辑
     this->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //隐藏根节点项前的图标（展开折叠图标）
     this->setRootIsDecorated(false);
+
 
     // this is setting is necessary,because scrollperpixel is default in dtk!!
     this->setVerticalScrollMode(QAbstractItemView::ScrollMode::ScrollPerItem);
 
+    // 设置选择模式
     setSelectionMode(QAbstractItemView::SingleSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
     this->header()->setStretchLastSection(true);
 
+    // 水平右对齐
     this->header()->setDefaultAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    this->header()->setFixedHeight(37);
-    setRootIsDecorated(false);
+
+    // 设置的固定高度
+    this->header()->setFixedHeight(ROW_HEIGHT);
+
+    // Item 不可扩展
     setItemsExpandable(false);
+
+    // 设置无边框
     setFrameStyle(QFrame::NoFrame);
     this->viewport()->setAutoFillBackground(false);
 
@@ -133,19 +147,16 @@ void LogTreeView::paintEvent(QPaintEvent *event)
 
     QStyleOptionFrame option;
     initStyleOption(&option);
-    //    int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
 
+    // 计算绘制背景色有问题
     QRect rect = viewport()->rect();
     QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
     QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
     QPainterPath clipPath, subPath;
-    //    clipPath.addRoundedRect(clipRect, radius, radius);
-    //    subPath.addRect(subRect);
-    //    clipPath = clipPath.subtracted(subPath);
+
+    // 填充背景色
     clipPath.addRect(rect);
-
     painter.fillPath(clipPath, bgBrush);
-
     painter.restore();
 
     DTreeView::paintEvent(event);
@@ -180,23 +191,28 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
 
     auto *style = dynamic_cast<DStyle *>(DApplication::style());
 
+    // 圆角以及边距
     auto radius = style->pixelMetric(DStyle::PM_FrameRadius, &options);
     auto margin = style->pixelMetric(DStyle::PM_ContentsMargins, &options);
 
     auto palette = options.palette;
     QBrush background;
+
+    // 隔行变色
     if (!(index.row() & 1)) {
         background = palette.color(cg, DPalette::AlternateBase);
     } else {
         background = palette.color(cg, DPalette::Base);
     }
+
+    // 选中状态背景色
     if (options.state & DStyle::State_Enabled) {
         if (selectionModel()->isSelected(index)) {
             background = palette.color(cg, DPalette::Highlight);
         }
     }
 
-    // draw row background
+    // 绘制背景色
     QPainterPath path;
     QRect rowRect { options.rect.x() - header()->offset(),
                     options.rect.y() + 1,
@@ -209,15 +225,6 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
     painter->fillPath(path, background);
 
     QTreeView::drawRow(painter, options, index);
-
-    // draw focus
-//    if (hasFocus() && currentIndex().row() == index.row()) {
-//        QStyleOptionFocusRect o;
-//        o.QStyleOption::operator=(options);
-//        o.state |= QStyle::State_KeyboardFocusChange | QStyle::State_HasFocus;
-//        o.rect = style->visualRect(layoutDirection(), viewport()->rect(), rowRect);
-//        style->drawPrimitive(DStyle::PE_FrameFocusRect, &o, painter);
-//    }
 
     painter->restore();
 }

@@ -35,7 +35,7 @@ void DetailTreeView::setColumnAndRow(int row, int column)
     if (row > m_LimitRow + 1) {
         setCommanLinkButton(row);
     }
-
+    // 如果行数少于限制行数，则影藏最后一行
     if (row <= m_LimitRow + 1) {
         hideRow(row - 1);
     }
@@ -58,7 +58,10 @@ void DetailTreeView::setItem(int row, int column, QTableWidgetItem *item)
 
 void DetailTreeView::clear()
 {
+    // 清空表格内容
     DTableWidget::clear();
+
+    // 删除表格行列
     setRowCount(0);
     setColumnCount(0);
 }
@@ -119,7 +122,7 @@ int DetailTreeView::setTableHeight(int paintHeight)
     }
 
 
-    // 信息行 <= 13 不影响表格大小
+    // 信息行 <= m_LimitRow + 1 不影响表格大小
     if (rowCount() <= m_LimitRow + 1) {
         return paintHeight;
     } else {
@@ -138,9 +141,11 @@ int DetailTreeView::setTableHeight(int paintHeight)
 
 bool DetailTreeView::hasExpendInfo()
 {
+    // 指针不为空，设备有其他信息
     if (mp_CommandBtn != nullptr) {
         return true;
     } else {
+        // 指针为空，设备没有更多信息
         return false;
     }
 }

@@ -141,7 +141,7 @@
         deviceLst[0]->tableHeaderToDoc(tab);\
         for (int row = 1; row <= deviceLst.size(); ++row) {\
             tab->addRow();\
-            deviceLst[0]->tableInfoToDoc(tab, row);\
+            deviceLst[row - 1]->tableInfoToDoc(tab, row);\
         }\
     }\
     /**添加每个设备的信息**/                                                           \

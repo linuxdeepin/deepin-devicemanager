@@ -1,3 +1,24 @@
+/*
+ * Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
+ *
+ * Author:     LZ <zhou.lu@archermind.com>
+ *
+ * Maintainer: LZ <zhou.lu@archermind.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #ifndef DEVICEMANAGER_H
 #define DEVICEMANAGER_H
 #include <QList>
@@ -511,11 +532,37 @@ public:
      */
     static int currentXlsRow();
 
+    /**
+     * @brief overviewToTxt:概况信息写到txt
+     * @param out:txt文件流
+     */
     void overviewToTxt(QTextStream &out);
+
+    /**
+     * @brief overviewToHtml:概况信息写到html
+     * @param html:html文件
+     */
     void overviewToHtml(QFile &html);
+
+    /**
+     * @brief overviewToDoc:概况信息写到doc
+     * @param doc:doc文件
+     */
     void overviewToDoc(Docx::Document &doc);
+
+    /**
+     * @brief overviewToXlsx:概况信息写到表格
+     * @param xlsx:xlsx文件
+     * @param boldFont:字体格式
+     */
     void overviewToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont);
 
+    /**
+     * @brief infoToHtml:将信息写到html中
+     * @param doc:文本
+     * @param key:关键字
+     * @param value:值
+     */
     void infoToHtml(QDomDocument &doc, const QString &key, const QString &value);
 
     /**
@@ -524,6 +571,10 @@ public:
      */
     const QMap<QString, QString>  &getDeviceOverview();
 
+    /**
+     * @brief getDeviceDriverPool：获取所有设备驱动与设备关联map
+     * @return 所有设备的驱动与设备关联map
+     */
     const QMap<QString, QMap<QString, QStringList>> &getDeviceDriverPool();
 
 protected:
@@ -552,18 +603,19 @@ private:
     QList<DeviceBaseInfo *>              m_ListDeviceComputer;             //<! 计算机基本信息
     QList<DeviceBaseInfo *>              m_ListDeviceCdrom;                //<! cdrom设备
 
-    QList<QPair<QString, QString>>       m_ListDeviceType;                //<! 所有的设备类型及其对应的图标
+    QList<QPair<QString, QString>>       m_ListDeviceType;                 //<! 所有的设备类型及其对应的图标
 
-    QStringList                          m_BusIdList;
-    QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;
+    QStringList                                    m_BusIdList;            //<! 所有的设备总线ID
 
-    QMap<QString, QString>               m_OveriewMap;
+    QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;              //<! 所有设备信息获取命令
 
-    QMap<QString, QList<DeviceBaseInfo *>>   m_DeviceClassMap;
+    QMap<QString, QString>                         m_OveriewMap;           //<! 所有的设备与其对应概况信息
 
-    QMap<QString, QMap<QString, QStringList>> m_DeviceDriverPool;
+    QMap<QString, QList<DeviceBaseInfo *>>         m_DeviceClassMap;       //<! 所有的设备类型与其对应设备列表
 
-    static int m_CurrentXlsRow;
+    QMap<QString, QMap<QString, QStringList>>      m_DeviceDriverPool;     //<! 所有的设备驱动与与其对应的设备类型，设备名称列表
+
+    static int m_CurrentXlsRow;       //<! xlsx表格当前行
 };
 
 #endif // DEVICEMANAGER_H

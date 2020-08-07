@@ -44,7 +44,8 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
 
-    int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
+
+
 
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
@@ -62,6 +63,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     rectpath.setWidth(rect.width() - 1);
     path.addRect(rectpath);
 
+    // 更多信息按钮行，背景色为白色，单元格上边框要绘制横线以
     if (index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
             && index.row() != 0 && dynamic_cast<DetailTreeView *>(this->parent())->hasExpendInfo()) {
         // 展开 行背景色为白色
@@ -76,8 +78,12 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     }
 
     QRect textRect = rect;
+    int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);   // 边距
+
     textRect.setX(textRect.x() + margin);
     QFont fo = opt.font;
+
+    // 表格第一列，字体加粗
     if (index.column() == 0) {
         fo.setBold(true);
     } else {
