@@ -13,6 +13,7 @@
 #include <DApplication>
 #include <DStyle>
 #include <DMenu>
+#include <QClipboard>
 
 DWIDGET_USE_NAMESPACE
 
@@ -56,7 +57,7 @@ void DetailButton::paintEvent(QPaintEvent *e)
 DetailSeperator::DetailSeperator(DWidget *parent)
     : DWidget(parent)
 {
-    setFixedHeight(18);
+    setFixedHeight(2);
 }
 
 void DetailSeperator::paintEvent(QPaintEvent *e)
@@ -92,7 +93,7 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     // 计算绘制区域
     rect.setX(rect.x() + spacing);
     rect.setWidth(rect.width() - spacing);
-    rect.setY(rect.y() + height() - 2);
+//    rect.setY(rect.y() + height() - 2);
     QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
     painter.fillRect(rect, bgBrush);
 
@@ -171,6 +172,7 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         txtBrowser->showDeviceInfo(device);
         connect(txtBrowser, &TextBrowser::refreshInfo, this, &PageDetail::slotRefreshInfo);
         connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::slotExportInfo);
+        connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
         addWidgets(txtBrowser);
     }
     mp_ScrollAreaLayout->addStretch();
@@ -239,7 +241,7 @@ void PageDetail::addWidgets(TextBrowser *widget)
 
     // 添加按钮
     QHBoxLayout *vLayout = new QHBoxLayout(this);
-    vLayout->addSpacing(34);
+    vLayout->addSpacing(20);
     DetailButton *button = new DetailButton(tr("More"));
     connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
     vLayout->addWidget(button);
@@ -309,4 +311,16 @@ void PageDetail::slotRefreshInfo()
 void PageDetail::slotExportInfo()
 {
     emit exportInfo();
+}
+
+void PageDetail::slotCopyAllInfo()
+{
+    QString str;
+    foreach (TextBrowser *tb, m_ListTextBrowser) {
+        if (tb) {
+            str.append(tb->toPlainText());
+        }
+    }
+    QClipboard *clipboard = DApplication::clipboard();
+    clipboard->setText(str);
 }

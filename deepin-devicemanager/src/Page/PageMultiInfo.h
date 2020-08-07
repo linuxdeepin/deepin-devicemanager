@@ -24,14 +24,17 @@
 
 #include <QObject>
 #include <DWidget>
+#include <DLabel>
 
 #include "PageInfo.h"
+
+
+using namespace Dtk::Widget;
 
 class PageTableHeader;
 class PageDetail;
 class DeviceBaseInfo;
 
-using namespace Dtk::Widget;
 class PageMultiInfo : public PageInfo
 {
     Q_OBJECT
@@ -86,6 +89,7 @@ private:
     void initWidgets();
 
 private:
+    DLabel                    *mp_Label;
     PageTableHeader           *mp_Table;       //<! 上面的表格
     PageDetail                *mp_Detail;      //<! 下面的详细内容
 };

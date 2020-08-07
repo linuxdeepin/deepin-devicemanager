@@ -3,11 +3,14 @@
 #include "DeviceInfo.h"
 
 #include <QVBoxLayout>
+#include <QClipboard>
 
-
+#include <DApplication>
 #include <DStandardItem>
 #include <DTableWidget>
 #include <DMenu>
+#include <DMessageManager>
+#include <DNotifySender>
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
     : PageInfo(parent)
@@ -15,6 +18,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Label(new DLabel(this))
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
+    , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
     , mp_Menu(new DMenu(this))
 {
     initWidgets();
@@ -23,6 +27,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     connect(mp_Content, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
     connect(mp_Refresh, &QAction::triggered, this, &PageSingleInfo::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::slotActionExport);
+    connect(mp_Copy, &QAction::triggered, this, &PageSingleInfo::slotActionCopy);
 }
 
 PageSingleInfo::~PageSingleInfo()
@@ -73,6 +78,7 @@ void PageSingleInfo::clearContent()
 void PageSingleInfo::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
+    mp_Menu->addAction(mp_Copy);
     mp_Menu->addSeparator();
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
@@ -85,6 +91,17 @@ void PageSingleInfo::slotActionRefresh()
 void PageSingleInfo::slotActionExport()
 {
     emit exportInfo();
+}
+
+void PageSingleInfo::slotActionCopy()
+{
+    QClipboard *clipboard = DApplication::clipboard();
+    clipboard->setText(mp_Content->toString());
+//    DMessageManager::instance()->sendMessage(mp_Content, QIcon::fromTheme("emblem-checked"), tr("Successfully copied device information"));
+//    DUtil::DNotifySender sender(tr("Successfully copied device information"));
+//    sender.appIcon("deepin-devicemanager");
+//    sender.timeOut(2000);
+//    sender.call();
 }
 
 void PageSingleInfo::initWidgets()

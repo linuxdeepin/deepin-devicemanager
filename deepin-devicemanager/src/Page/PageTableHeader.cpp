@@ -35,7 +35,7 @@ void PageTableHeader::initWidgets()
 {
     // 布局
     QHBoxLayout *hLayout = new QHBoxLayout(this);
-    hLayout->setContentsMargins(10, 10, 10, 1);
+    hLayout->setContentsMargins(0, 0, 0, 1);
     hLayout->addWidget(mp_Table);
     setLayout(hLayout);
 }

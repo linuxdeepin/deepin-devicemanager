@@ -27,6 +27,7 @@
 #include <QScrollArea>
 #include <QHBoxLayout>
 #include <DCommandLinkButton>
+#include <DHorizontalLine>
 
 class TextBrowser;
 class DeviceBaseInfo;
@@ -125,6 +126,7 @@ private slots:
      * @brief slotExportInfo:右键菜单导出槽函数
      */
     void slotExportInfo();
+    void slotCopyAllInfo();
 
 
 

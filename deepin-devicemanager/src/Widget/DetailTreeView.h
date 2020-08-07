@@ -38,6 +38,7 @@ class DetailButton;
 
 class DetailTreeView: public DTableWidget//DTreeView
 {
+    Q_OBJECT
 public:
     DetailTreeView(DWidget *parent = nullptr);
 
@@ -80,10 +81,21 @@ public:
     bool hasExpendInfo();
 
     /**
+<<<<<<< Updated upstream
      * @brief setLimitRow:设置表格最多显示行
      * @param row：行数，默认13
+=======
+     * @brief setLimitRow
+     * @param row
+>>>>>>> Stashed changes
      */
     void setLimitRow(int row = 13);
+
+    /**
+     * @brief toString
+     * @return
+     */
+    QString toString();
 
 public slots:
     /**

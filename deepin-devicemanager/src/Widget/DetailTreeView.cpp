@@ -155,17 +155,35 @@ void DetailTreeView::setLimitRow(int row)
     m_LimitRow = row;
 }
 
+QString DetailTreeView::toString()
+{
+    QString str;
+    int row = rowCount();
+    int column = columnCount();
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < column; j++) {
+            QTableWidgetItem *sItem = this->item(i, j);
+            if (sItem) {
+                QString se = (j == 0) ? " : " : "\n";
+                str += sItem->text() + se;
+            }
+        }
+//        str += "\n";
+    }
+    return str;
+}
+
 void DetailTreeView::expandCommandLinkClicked()
 {
     // 当前已展开详细信息
     if (m_IsExpand) {
-        mp_CommandBtn->setText("More");
+        mp_CommandBtn->setText(tr("More"));
         m_IsExpand = false;
         for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
             hideRow(i);
         }
     } else { // 当前未展开详细信息
-        mp_CommandBtn->setText("Collapse");
+        mp_CommandBtn->setText(tr("Collapse"));
         m_IsExpand = true;
         for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
             showRow(i);
@@ -180,13 +198,14 @@ void DetailTreeView::initUI()
     setItemDelegate(mp_ItemDelegate);
 
     // 设置不可编辑模式
-    this->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //this->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // 设置表格一次滚动一个Item，dtk默认一次滚动一个像素
-    this->setVerticalScrollMode(QAbstractItemView::ScrollMode::ScrollPerItem);
+    this->setVerticalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
 
     // 设置不可选择
-    setSelectionMode(QAbstractItemView::NoSelection);
+    setSelectionBehavior(QAbstractItemView::SelectItems);
+    setSelectionMode(QAbstractItemView::MultiSelection);
 
     // 设置无边框
     this->setFrameStyle(QFrame::NoFrame);

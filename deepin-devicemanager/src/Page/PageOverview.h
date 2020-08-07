@@ -29,6 +29,7 @@
 #include "PageInfo.h"
 
 DWIDGET_USE_NAMESPACE
+DCORE_USE_NAMESPACE
 
 class DetailTreeView;
 
@@ -95,6 +96,7 @@ private slots:
      * @brief slotActionExport:右键菜单导出槽函数
      */
     void slotActionExport();
+    void slotActionCopy();
 
 private:
     /**
@@ -109,6 +111,7 @@ private:
     DetailTreeView          *mp_Overview;
     QAction                 *mp_Refresh;     //<! 右键刷新
     QAction                 *mp_Export;      //<! 右键导出
+    QAction                 *mp_Copy;        //<! 拷贝
     QMenu                   *mp_Menu;        //<! 右键菜单
 };
 

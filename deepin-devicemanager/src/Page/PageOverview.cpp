@@ -6,12 +6,14 @@
 #include <QTableWidgetItem>
 #include <QAction>
 #include <QDebug>
+#include <QClipboard>
 
+#include <DApplication>
 #include <DFontSizeManager>
 #include <DMenu>
 #include <DSysInfo>
-
-DCORE_USE_NAMESPACE
+#include <DMessageManager>
+#include <DNotifySender>
 
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
@@ -21,6 +23,7 @@ PageOverview::PageOverview(DWidget *parent)
     , mp_Overview(new DetailTreeView(this))
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
+    , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
     , mp_Menu(new DMenu(this))
 {
     initWidgets();
@@ -30,6 +33,7 @@ PageOverview::PageOverview(DWidget *parent)
     connect(mp_Overview, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
     connect(mp_Refresh, &QAction::triggered, this, &PageOverview::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &PageOverview::slotActionExport);
+    connect(mp_Copy, &QAction::triggered, this, &PageOverview::slotActionCopy);
 }
 
 void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &)
@@ -62,6 +66,7 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
             QTableWidgetItem *itemFirst = new QTableWidgetItem(iter.first);
             mp_Overview->setItem(i, 0, itemFirst);
             QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find(strList[1]).value());
+            itemSecond->setToolTip(map.find(strList[1]).value());
             mp_Overview->setItem(i, 1, itemSecond);
             ++i;
         }
@@ -160,6 +165,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 void PageOverview::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
+    mp_Menu->addAction(mp_Copy);
     mp_Menu->addSeparator();
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
@@ -174,6 +180,17 @@ void PageOverview::slotActionRefresh()
 void PageOverview::slotActionExport()
 {
     emit exportInfo();
+}
+
+void PageOverview::slotActionCopy()
+{
+    QClipboard *clipboard = DApplication::clipboard();
+    clipboard->setText(mp_Overview->toString());
+//    DMessageManager::instance()->sendMessage(mp_Overview, QIcon::fromTheme("emblem-checked"), tr("Successfully copied device information"));
+//    DUtil::DNotifySender sender(tr("Successfully copied device information"));
+//    sender.appIcon("deepin-devicemanager");
+//    sender.timeOut(2000);
+//    sender.call();
 }
 
 void PageOverview::initWidgets()

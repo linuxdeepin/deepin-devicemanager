@@ -26,8 +26,10 @@
 #include <QWidget>
 #include <DTextBrowser>
 #include <QDomDocument>
+#include <DNotifySender>
 
 DWIDGET_USE_NAMESPACE
+DCORE_USE_NAMESPACE
 
 class DeviceBaseInfo;
 
@@ -63,16 +65,20 @@ protected:
     virtual void contextMenuEvent(QContextMenuEvent *event) override;
     virtual void keyPressEvent(QKeyEvent *event) override;
     virtual void wheelEvent(QWheelEvent *event) override;
+    virtual void focusInEvent(QFocusEvent *e) override;
+    virtual void focusOutEvent(QFocusEvent *e) override;
 
 
 signals:
     void refreshInfo();
     void exportInfo();
+    void copyAllInfo();
 
 private slots:
     void slotShowMenu(const QPoint &);
     void slotActionRefresh();
     void slotActionExport();
+    void slotActionCopy();
 
 private:
     void domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info);
@@ -83,6 +89,7 @@ private:
     DeviceBaseInfo          *mp_Info;
     QAction                 *mp_Refresh;     //<! 右键刷新
     QAction                 *mp_Export;      //<! 右键导出
+    QAction                 *mp_Copy;        //<! 拷贝
     QMenu                   *mp_Menu;        //<! 右键菜单
 };
 

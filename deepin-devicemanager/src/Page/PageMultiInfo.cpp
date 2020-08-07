@@ -5,14 +5,18 @@
 #include <QIcon>
 #include <DMenu>
 #include <QDebug>
+#include <DFontSizeManager>
 
 #include "PageTableHeader.h"
 #include "PageDetail.h"
 #include "MacroDefinition.h"
 #include "DeviceManager/DeviceInfo.h"
 
+DWIDGET_USE_NAMESPACE
+
 PageMultiInfo::PageMultiInfo(QWidget *parent)
     : PageInfo(parent)
+    , mp_Label(new DLabel(this))
     , mp_Table(new PageTableHeader(this))
     , mp_Detail(new PageDetail(this))
 {
@@ -44,7 +48,10 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
 void PageMultiInfo::setLabel(const QString &itemstr)
 {
-
+    if (mp_Label) {
+        mp_Label->setText(itemstr);
+        DFontSizeManager::instance()->bind(mp_Label, DFontSizeManager::T3);
+    }
 }
 
 void PageMultiInfo::slotItemClicked(int row)
@@ -66,8 +73,8 @@ void PageMultiInfo::slotExportInfo()
 void PageMultiInfo::initWidgets()
 {
     QVBoxLayout *hLayout = new QVBoxLayout(this);
-    hLayout->setContentsMargins(0, 0, 0, 0);
-//    hLayout->setSpacing(2);
+//    hLayout->setContentsMargins(0, 0, 0, 0);
+    hLayout->addWidget(mp_Label);
     mp_Table->setFixedHeight(TABLE_HEIGHT);
     hLayout->addWidget(mp_Table);
     hLayout->addWidget(mp_Detail);

@@ -31,6 +31,8 @@
 #include "DetailTreeView.h"
 
 DWIDGET_USE_NAMESPACE
+DCORE_USE_NAMESPACE
+
 using namespace Dtk::Widget;
 
 class PageSingleInfo : public PageInfo
@@ -90,6 +92,10 @@ protected slots:
      */
     void slotActionExport();
 
+    /**
+     * @brief slotActionCopy
+     */
+    void slotActionCopy();
 protected:
     /**
      * @brief initWidgets : 初始化控件布局
@@ -101,6 +107,7 @@ protected:
     DLabel                  *mp_Label;
     QAction                 *mp_Refresh;     //<! 右键刷新
     QAction                 *mp_Export;      //<! 右键导出
+    QAction                 *mp_Copy;        //<! 拷贝
     QMenu                   *mp_Menu;        //<! 右键菜单
 };
 
