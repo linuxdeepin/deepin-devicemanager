@@ -1,4 +1,3 @@
-
 /**
  * @brief: A class used to describe audio devices, an object of DeviceAudio is an audio device
  * @author: Jun.Liu  liujuna@uniontech.com
