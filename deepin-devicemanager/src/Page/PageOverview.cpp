@@ -52,21 +52,16 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
 
     foreach (auto iter, types) {
-        QStringList strList = iter.second.split("##");
 
-        if (strList.size() != 2) {
+        if (iter.first == tr("Overview")) {
             continue;
         }
 
-        if (strList[1] == "Overview") {
-            continue;
-        }
-
-        if (map.find(strList[1]) != map.end()) {
+        if (map.find(iter.first) != map.end()) {
             QTableWidgetItem *itemFirst = new QTableWidgetItem(iter.first);
             mp_Overview->setItem(i, 0, itemFirst);
-            QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find(strList[1]).value());
-            itemSecond->setToolTip(map.find(strList[1]).value());
+            QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find(iter.first).value());
+            itemSecond->setToolTip(map.find(iter.first).value());
             mp_Overview->setItem(i, 1, itemSecond);
             ++i;
         }
@@ -76,7 +71,7 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
 void PageOverview::setLabel(const QString &itemstr)
 {
     mp_DeviceLabel->setText(itemstr);
-    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T3);
+    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
 
     // 系统中获取
 //    QIcon icon(QIcon::fromTheme("computer"));
@@ -126,18 +121,19 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     // 设置操作系统内容，并自动换行
     mp_OSLabel->setText(linkStr);
-    mp_OSLabel->setWordWrap(true);
+    //mp_OSLabel->setWordWrap(true);
+    DFontSizeManager::instance()->bind(mp_OSLabel, DFontSizeManager::T8);
 
     // 设置设备信息
     mp_DeviceLabel->setText(str1);
 
     // 设备信息加粗
     QFont font = mp_DeviceLabel->font();
-    font.setBold(true);
+    font.setWeight(63);
     mp_DeviceLabel->setFont(font);
 
     // 设置字号
-    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T3);
+    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
 
     // 系统中获取
 //    QIcon icon(QIcon::fromTheme("computer"));

@@ -166,28 +166,28 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
 
 void DeviceManager::setDeviceListClass()
 {
-    m_DeviceClassMap["CPU"] = m_ListDeviceCPU;
-    m_DeviceClassMap["Bios"] =  m_ListDeviceBios;
-    m_DeviceClassMap["Memory"]  =  m_ListDeviceMemory;
-    m_DeviceClassMap["GPU"] =  m_ListDeviceGPU;
-    m_DeviceClassMap["Audio"] =  m_ListDeviceAudio;
-    m_DeviceClassMap["Storage"]  =  m_ListDeviceStorage;
-    m_DeviceClassMap["OtherPCI"] =  m_ListDeviceOtherPCI;
-    m_DeviceClassMap["Power"] =  m_ListDevicePower;
-    m_DeviceClassMap["Bluetooth"] =  m_ListDeviceBluetooth;
-    m_DeviceClassMap["Network"]  =  m_ListDeviceNetwork;
-    m_DeviceClassMap["Mouse"] =  m_ListDeviceMouse;
-    m_DeviceClassMap["Keyboard"]  =  m_ListDeviceKeyboard;
-    m_DeviceClassMap["Monitor"] =  m_ListDeviceMonitor;
-    m_DeviceClassMap["Cdrom"] =  m_ListDeviceCdrom;
-    m_DeviceClassMap["Print"] =  m_ListDevicePrint;
-    m_DeviceClassMap["Image"] =  m_ListDeviceImage;
-    m_DeviceClassMap["Others"] =  m_ListDeviceOthers;
+    m_DeviceClassMap[tr("CPU")] = m_ListDeviceCPU;
+    m_DeviceClassMap[tr("Motherboard")] =  m_ListDeviceBios;
+    m_DeviceClassMap[tr("Memory")]  =  m_ListDeviceMemory;
+    m_DeviceClassMap[tr("Display Adapter")] =  m_ListDeviceGPU;
+    m_DeviceClassMap[tr("Sound Adapter")] =  m_ListDeviceAudio;
+    m_DeviceClassMap[tr("Storage")]  =  m_ListDeviceStorage;
+    m_DeviceClassMap[tr("Other PCI Devices")] =  m_ListDeviceOtherPCI;
+    m_DeviceClassMap[tr("Battery")] =  m_ListDevicePower;
+    m_DeviceClassMap[tr("Bluetooth")] =  m_ListDeviceBluetooth;
+    m_DeviceClassMap[tr("Network Adapter")]  =  m_ListDeviceNetwork;
+    m_DeviceClassMap[tr("Mouse")] =  m_ListDeviceMouse;
+    m_DeviceClassMap[tr("Keyboard")]  =  m_ListDeviceKeyboard;
+    m_DeviceClassMap[tr("Monitor")] =  m_ListDeviceMonitor;
+    m_DeviceClassMap[tr("CD-ROM")] =  m_ListDeviceCdrom;
+    m_DeviceClassMap[tr("Printer")] =  m_ListDevicePrint;
+    m_DeviceClassMap[tr("Camera")] =  m_ListDeviceImage;
+    m_DeviceClassMap[tr("Other Devices", "Other Input Devices")] =  m_ListDeviceOthers;
 }
 
 bool DeviceManager::getDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst)
 {
-    if (name == "Overview") {return false;}
+    if (name == tr("Overview")) {return false;}
 
     if (m_DeviceClassMap.find(name) != m_DeviceClassMap.end()) {
         lst = m_DeviceClassMap[name];
@@ -835,22 +835,17 @@ void DeviceManager::overviewToTxt(QTextStream &out)
     out << "\n";
 
     foreach (auto iter, m_ListDeviceType) {
-        QStringList strList = iter.second.split("##");
 
-        if (strList.size() != 2) {
+        if (iter.first == tr("Overview")) {
             continue;
         }
 
-        if (strList[1] == "Overview") {
-            continue;
-        }
-
-        if (m_OveriewMap.find(strList[1]) != m_OveriewMap.end()) {
+        if (m_OveriewMap.find(iter.first) != m_OveriewMap.end()) {
             out.setFieldWidth(21);
             out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
-            out << tr(strList[1].toStdString().c_str()) + ": ";
+            out << iter.first + ": ";
             out.setFieldWidth(0);
-            out << m_OveriewMap[strList[1]];
+            out << m_OveriewMap[iter.first];
             out << "\n";
         }
     }
@@ -868,18 +863,13 @@ void DeviceManager::overviewToHtml(QFile &html)
 
 
     foreach (auto iter, m_ListDeviceType) {
-        QStringList strList = iter.second.split("##");
 
-        if (strList.size() != 2) {
+        if (iter.first == tr("Overview")) {
             continue;
         }
 
-        if (strList[1] == "Overview") {
-            continue;
-        }
-
-        if (m_OveriewMap.find(strList[1]) != m_OveriewMap.end()) {
-            infoToHtml(doc, strList[1], m_OveriewMap[strList[1]]);
+        if (m_OveriewMap.find(iter.first) != m_OveriewMap.end()) {
+            infoToHtml(doc, iter.first, m_OveriewMap[iter.first]);
         }
     }
 
@@ -899,18 +889,12 @@ void DeviceManager::overviewToDoc(Docx::Document &doc)
     doc.addParagraph(line);
 
     foreach (auto iter, m_ListDeviceType) {
-        QStringList strList = iter.second.split("##");
-
-        if (strList.size() != 2) {
+        if (iter.first == tr("Overview")) {
             continue;
         }
 
-        if (strList[1] == "Overview") {
-            continue;
-        }
-
-        if (m_OveriewMap.find(strList[1]) != m_OveriewMap.end()) {
-            line = tr(strList[1].toStdString().c_str()) + ":  " + m_OveriewMap[strList[1]];
+        if (m_OveriewMap.find(iter.first) != m_OveriewMap.end()) {
+            line = iter.first + ":  " + m_OveriewMap[iter.first];
             doc.addParagraph(line);
         }
     }
@@ -931,20 +915,14 @@ void DeviceManager::overviewToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFon
     xlsx.write(m_CurrentXlsRow++, 2, m_OveriewMap["OS"], boldFont);
 
     foreach (auto iter, m_ListDeviceType) {
-        QStringList strList = iter.second.split("##");
-
-        if (strList.size() != 2) {
+        if (iter.first == tr("Overview")) {
             continue;
         }
 
-        if (strList[1] == "Overview") {
-            continue;
-        }
+        if (m_OveriewMap.find(iter.first) != m_OveriewMap.end()) {
 
-        if (m_OveriewMap.find(strList[1]) != m_OveriewMap.end()) {
-
-            xlsx.write(m_CurrentXlsRow, 1, tr(strList[1].toStdString().c_str()), boldFont);
-            xlsx.write(m_CurrentXlsRow++, 2, m_OveriewMap[strList[1]], boldFont);
+            xlsx.write(m_CurrentXlsRow, 1, iter.first, boldFont);
+            xlsx.write(m_CurrentXlsRow++, 2, m_OveriewMap[iter.first], boldFont);
         }
     }
     m_CurrentXlsRow++;
@@ -989,6 +967,7 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
     for (; iter != m_DeviceClassMap.end(); ++iter) {
         if (m_OveriewMap.find(iter.key()) == m_OveriewMap.end()) {
             foreach (auto device, iter.value()) {
+                qDebug() << iter.key();
                 QString ov = device->getOverviewInfo();
                 if (ov.isEmpty() == false) {
                     if (m_OveriewMap.find(iter.key()) == m_OveriewMap.end()) {
@@ -1009,7 +988,7 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
     m_OveriewMap["OS"] = dynamic_cast<DeviceComputer *>(m_ListDeviceComputer[0])->getOSInfo();
 
     // CPU 概况显示 样式"Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz (四核 / 四逻辑处理器)"
-    m_OveriewMap["CPU"] = m_ListDeviceCPU[0] ->getOverviewInfo();
+    m_OveriewMap[tr("CPU")] = m_ListDeviceCPU[0] ->getOverviewInfo();
 
     return m_OveriewMap;
 }

@@ -120,7 +120,7 @@ QString DeviceListView::getConcatenateStrings(const QModelIndex &index)
 {
     QStandardItem *item = mp_ItemModel->item(index.row());
     if (item) {
-        return item->data(Qt::UserRole).toString();
+        return item->data(Qt::DisplayRole).toString();
     }
     return "";
 }

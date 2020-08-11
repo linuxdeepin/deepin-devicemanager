@@ -41,11 +41,11 @@ void PageSingleInfo::setLabel(const QString &itemstr)
 
     // 设备类型加粗
     QFont font = mp_Label->font();
-    font.setBold(true);
+    font.setWeight(63);
     mp_Label->setFont(font);
 
     // 设置字号
-    DFontSizeManager::instance()->bind(mp_Label, DFontSizeManager::T3);
+    DFontSizeManager::instance()->bind(mp_Label, DFontSizeManager::T5);
 
 }
 

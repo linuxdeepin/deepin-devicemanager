@@ -78,10 +78,9 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     } else {
         QFont fo = opt.font;
         if (index.column() == 0) {
-            fo.setBold(true);
-        } else {
-            fo.setBold(false);
+            fo.setWeight(63);
         }
+
         painter->setFont(fo);
         QRect textRect = opt.rect;
         textRect.setX(textRect.x() + margin);

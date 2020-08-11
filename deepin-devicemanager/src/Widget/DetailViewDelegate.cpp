@@ -6,6 +6,8 @@
 #include <DApplication>
 #include <DStyle>
 #include <DApplicationHelper>
+#include <DFontSizeManager>
+
 #include "DetailTreeView.h"
 
 DWIDGET_USE_NAMESPACE
@@ -84,16 +86,18 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);   // 边距
 
     textRect.setX(textRect.x() + margin);
-    QFont fo = opt.font;
 
+    QFont fo;
     // 表格第一列，字体加粗
     if (index.column() == 0) {
-        fo.setBold(true);
+        fo = opt.font;
+        fo.setWeight(63);
     } else {
-        fo.setBold(false);
+        fo = DFontSizeManager::instance()->t8();
     }
+
     painter->setFont(fo);
-    QFontMetrics fm(opt.font);
+    QFontMetrics fm(fo);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);

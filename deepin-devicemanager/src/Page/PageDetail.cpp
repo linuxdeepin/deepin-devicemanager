@@ -132,6 +132,8 @@ void ScrollAreaWidget::paintEvent(QPaintEvent *e)
     // 清除背景色颜色
     QBrush clearBrush(palette.color(cg, DPalette::Base));
     painter.fillRect(rect, clearBrush);
+
+    painter.restore();
 }
 
 PageDetail::PageDetail(QWidget *parent)
@@ -240,7 +242,7 @@ void PageDetail::addWidgets(TextBrowser *widget)
     mp_ScrollAreaLayout->addWidget(widget);
 
     // 添加按钮
-    QHBoxLayout *vLayout = new QHBoxLayout(this);
+    QHBoxLayout *vLayout = new QHBoxLayout();
     vLayout->addSpacing(20);
     DetailButton *button = new DetailButton(tr("More"));
     connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
