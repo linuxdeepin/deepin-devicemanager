@@ -12,6 +12,8 @@
 #include <DApplication>
 #include <DApplicationHelper>
 #include <DStyle>
+#include <DFontSizeManager>
+
 #include "PageInfo.h"
 
 DetailTreeView::DetailTreeView(DWidget *parent)
@@ -70,7 +72,11 @@ void DetailTreeView::setCommanLinkButton(int row)
 {
     // 设置mp_CommandBtn属性
     mp_CommandBtn = new DCommandLinkButton(tr("More"), this);
-    mp_CommandBtn->setMinimumSize(150, 100);
+
+    // 设置字号
+    DFontSizeManager::instance()->bind(mp_CommandBtn, DFontSizeManager::T8);
+
+    //mp_CommandBtn->setMinimumSize(150, 100);
 
     //  合并最后一行
     this->setSpan(row - 1, 0, 1, 2);
@@ -88,7 +94,7 @@ void DetailTreeView::setCommanLinkButton(int row)
     btnwidget->setLayout(pVBoxLayout);
 
     // 将btnwidget填充到表格中，并隐藏
-    setCellWidget(row - 1, 0, btnwidget);
+    setCellWidget(row - 1, 1, btnwidget);
 //    hideRow(row - 1);
 
     connect(mp_CommandBtn, &DCommandLinkButton::clicked, this, &DetailTreeView::expandCommandLinkClicked);
