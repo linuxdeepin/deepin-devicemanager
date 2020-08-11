@@ -212,7 +212,7 @@ void DetailTreeView::initUI()
 
     // 隐藏网格线
     this->setShowGrid(false);
-//    this->viewport()->setAutoFillBackground(false);
+    this->viewport()->setAutoFillBackground(false);
 
     // 设置各行变色
     setAlternatingRowColors(true);
@@ -240,9 +240,9 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
 
     QPainter painter(viewport());
     painter.save();
-    painter.setRenderHints(QPainter::Antialiasing);
-    painter.setOpacity(1);
-    painter.setClipping(true);
+    painter.setRenderHints(QPainter::Antialiasing, true);
+//    painter.setOpacity(1);
+//    painter.setClipping(true);
 
     QWidget *wnd = DApplication::activeWindow();
     DPalette::ColorGroup cg;
@@ -269,7 +269,7 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
 
     // 圆角矩形路径
     QPainterPath clipPath;
-    clipPath.addRoundedRect(rect, radius, radius);
+    clipPath.addRoundedRect(rect, 10, 10);
 
     // 绘制圆角矩形
     QPen pen(palette.color(cg, DPalette::FrameShadowBorder));

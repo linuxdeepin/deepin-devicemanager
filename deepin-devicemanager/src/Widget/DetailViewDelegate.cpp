@@ -44,9 +44,6 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
 
-
-
-
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
@@ -60,7 +57,10 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QRect rect = opt.rect;
     QPainterPath path;
     QRect rectpath = rect;
-    rectpath.setWidth(rect.width() - 1);
+    rectpath.setX(rect.x() + 1);
+    rectpath.setY(rect.y() + 1);
+    rectpath.setWidth(rect.width() - 2);
+    rectpath.setHeight(rect.height() - 2);
     path.addRect(rectpath);
 
     // 更多信息按钮行，背景色为白色，单元格上边框要绘制横线以
@@ -70,7 +70,10 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         painter->fillPath(path, palette.color(cg, DPalette::Base));
 
         // 展开行绘制横线
-        painter->setPen(palette.color(cg, DPalette::FrameShadowBorder));
+        QPen pen = painter->pen();
+        pen.setColor(palette.color(cg, DPalette::FrameShadowBorder));
+        pen.setWidth(1);
+        painter->setPen(pen);
         painter->drawLine(rect.x(), rect.y() + 1, rect.x() + rect.width() - 1, rect.y() + 1);
 
     } else {
@@ -99,8 +102,13 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     // 第一列 单元格后画竖线，展开收起行不画竖线
     if (index.column() == 0 && !(index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
                                  && index.row() != 0 && dynamic_cast<DetailTreeView *>(this->parent())->hasExpendInfo())) {
-        painter->setPen(palette.color(cg, DPalette::FrameShadowBorder));
-        painter->drawLine(rect.topRight(), rect.bottomRight());
+
+        QPen pen = painter->pen();
+        pen.setColor(palette.color(cg, DPalette::FrameShadowBorder));
+        pen.setWidth(1);
+        painter->setPen(pen);
+
+        painter->drawLine(rect.topRight().x() + 1, rect.topRight().y(), rect.bottomRight().x() + 1, rect.bottomRight().y());
     }
 
 
