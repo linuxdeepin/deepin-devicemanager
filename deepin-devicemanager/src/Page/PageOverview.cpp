@@ -130,6 +130,13 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     // 设置设备信息
     mp_DeviceLabel->setText(str1);
+
+    // 设备信息加粗
+    QFont font = mp_DeviceLabel->font();
+    font.setBold(true);
+    mp_DeviceLabel->setFont(font);
+
+    // 设置字号
     DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T3);
 
     // 系统中获取

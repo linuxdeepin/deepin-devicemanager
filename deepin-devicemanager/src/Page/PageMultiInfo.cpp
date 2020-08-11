@@ -50,6 +50,12 @@ void PageMultiInfo::setLabel(const QString &itemstr)
 {
     if (mp_Label) {
         mp_Label->setText(itemstr);
+
+        // 设备类型加粗
+        QFont font = mp_Label->font();
+        font.setBold(true);
+        mp_Label->setFont(font);
+
         DFontSizeManager::instance()->bind(mp_Label, DFontSizeManager::T3);
     }
 }

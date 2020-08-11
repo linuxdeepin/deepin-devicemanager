@@ -38,6 +38,13 @@ PageSingleInfo::~PageSingleInfo()
 void PageSingleInfo::setLabel(const QString &itemstr)
 {
     mp_Label->setText(itemstr);
+
+    // 设备类型加粗
+    QFont font = mp_Label->font();
+    font.setBold(true);
+    mp_Label->setFont(font);
+
+    // 设置字号
     DFontSizeManager::instance()->bind(mp_Label, DFontSizeManager::T3);
 
 }
