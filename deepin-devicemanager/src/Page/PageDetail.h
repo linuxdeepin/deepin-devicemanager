@@ -92,7 +92,7 @@ private:
      * @brief addWidgets 添加widget到布局
      * @param widget ：需要添加的widget
      */
-    void addWidgets(TextBrowser *widget);
+    void addWidgets(TextBrowser *widget, bool enable);
 
     /**
      * @brief clearWidget : 清楚widget

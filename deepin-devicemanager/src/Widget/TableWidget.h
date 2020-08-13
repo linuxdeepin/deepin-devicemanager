@@ -60,22 +60,10 @@ public:
     void clear();
 
 signals:
-    /**
-     * @brief itemClicked:点击item发出信号
-     * @param row : 点击某行的行号
-     */
     void itemClicked(int row);
-
-    /**
-     * @brief refreshInfo:刷新信息发出信号
-     */
     void refreshInfo();
-
-    /**
-     * @brief exportInfo:导出信息发出信号
-     */
     void exportInfo();
-
+    void enableDevice(int row, bool enable);
 protected:
     void paintEvent(QPaintEvent *e) override;
 
@@ -97,6 +85,11 @@ private slots:
     void slotActionExport();
 
     /**
+     * @brief slotActionEnable:判断是否启用
+     */
+    void slotActionEnable();
+
+    /**
      * @brief slotItemClicked:ListView Item 点击槽函数
      * @param index:点击Item的索引
      */
@@ -107,6 +100,7 @@ private:
 
 private:
     LogTreeView      *mp_Table;
+    QAction          *mp_Enable;      //<! 启用禁用
     QAction          *mp_Refresh;     //<! 右键刷新
     QAction          *mp_Export;      //<! 右键导出
     QMenu            *mp_Menu;        //<! 右键菜单

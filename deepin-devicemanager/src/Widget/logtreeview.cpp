@@ -70,6 +70,26 @@ void LogTreeView::setColumnAverage()
     }
 }
 
+bool LogTreeView::currentRowEnable()
+{
+    QModelIndex index = currentIndex();
+    int row = index.row();
+    QStandardItem *item = mp_Model->item(row, 0);
+    if (item) {
+        QString str = item->text();
+        if (str.startsWith("(" + tr("Disable") + ")")) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int LogTreeView::currentRow()
+{
+    QModelIndex index = currentIndex();
+    return index.row();
+}
+
 void LogTreeView::clear()
 {
     if (mp_Model)

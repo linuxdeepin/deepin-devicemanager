@@ -49,8 +49,11 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
     domTitleInfo(doc, mp_Info);
 
     // 添加一个表格
-    const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
-    domTableInfo(doc, baseInfo);
+    if (mp_Info->enable()) {
+        const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
+        domTableInfo(doc, baseInfo);
+    }
+
 
     // 将设备信息显示到TextBrowser
     setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
@@ -256,7 +259,9 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
     if (!title.isEmpty()) {
         QDomElement h3 = doc.createElement("h3");
 //        h3.setAttribute("cellpadding", "3");
-        h3.setAttribute("style", "text-indent:17px;font-weight:550");
+        h3.setAttribute("style", "text-indent:17px;font-weight:550;");
+        if (!info->enable())
+            h3.setAttribute("style", "color:#FF5736;");
         QDomText valueText = doc.createTextNode(title);
         h3.appendChild(valueText);
         doc.appendChild(h3);

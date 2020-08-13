@@ -10,7 +10,7 @@ DWIDGET_USE_NAMESPACE
 DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     : QObject(parent)
 {
-
+    m_Enable = true;
 }
 
 DeviceBaseInfo::~DeviceBaseInfo()
@@ -370,6 +370,16 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
         xlsx.write(curRow, col + 1, m_TableHeader[col], boldFont);
     }
 
+}
+
+void DeviceBaseInfo::setEnable(bool _enable)
+{
+    m_Enable = _enable;
+}
+
+bool DeviceBaseInfo::enable()
+{
+    return m_Enable;
 }
 
 const QString DeviceBaseInfo::getOverviewInfo()

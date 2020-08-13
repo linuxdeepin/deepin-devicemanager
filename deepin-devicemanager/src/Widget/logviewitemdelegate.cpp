@@ -80,11 +80,13 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         background = palette.color(cg, DPalette::Base);
     }
 
+    bool enableAndSelect = false;
     forground.setColor(palette.color(cg, DPalette::Text));
     if (opt.state & DStyle::State_Enabled) {
         if (opt.state & DStyle::State_Selected) {
             background = palette.color(cg, DPalette::Highlight);
             forground.setColor(palette.color(cg, DPalette::HighlightedText));
+            enableAndSelect = true;
         }
     }
     painter->setPen(forground);
@@ -136,7 +138,6 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         return;
     }
     }
-    //  painter->fillPath(path, background);
 
     QRect iconRect = rect;
     if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
@@ -151,8 +152,12 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     //    textRect.setWidth(textRect.width() - margin * 2);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
+    if (text.startsWith("(" + tr("Disable") + ")") && !enableAndSelect) {
+        QPen p = painter->pen();
+        p.setColor(QColor("#FF5736"));
+        painter->setPen(p);
+    }
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
-
     painter->restore();
 }
 

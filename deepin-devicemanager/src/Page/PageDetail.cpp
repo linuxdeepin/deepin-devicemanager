@@ -15,6 +15,8 @@
 #include <DMenu>
 #include <QClipboard>
 
+#include "DeviceInfo.h"
+
 DWIDGET_USE_NAMESPACE
 
 DetailButton::DetailButton(const QString &txt)
@@ -175,7 +177,7 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         connect(txtBrowser, &TextBrowser::refreshInfo, this, &PageDetail::slotRefreshInfo);
         connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::slotExportInfo);
         connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
-        addWidgets(txtBrowser);
+        addWidgets(txtBrowser, device->enable());
     }
     mp_ScrollAreaLayout->addStretch();
 }
@@ -237,7 +239,7 @@ void PageDetail::paintEvent(QPaintEvent *e)
     DWidget::paintEvent(e);
 }
 
-void PageDetail::addWidgets(TextBrowser *widget)
+void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 {
     mp_ScrollAreaLayout->addWidget(widget);
 
@@ -247,6 +249,9 @@ void PageDetail::addWidgets(TextBrowser *widget)
     DetailButton *button = new DetailButton(tr("More"));
     connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
     vLayout->addWidget(button);
+    if (!enable) {
+        button->setVisible(false);
+    }
     vLayout->addStretch(-1);
     mp_ScrollAreaLayout->addLayout(vLayout);
 

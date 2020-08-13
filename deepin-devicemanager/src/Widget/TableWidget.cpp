@@ -20,8 +20,9 @@
 TableWidget::TableWidget(QWidget *parent)
     : DWidget(parent)
     , mp_Table(new LogTreeView(this))
-    , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
-    , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
+    , mp_Enable(new QAction(tr("Disable"), this))
+    , mp_Refresh(new QAction(/*QIcon::fromTheme("view-refresh"), */tr("Refresh (F5)"), this))
+    , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export (E)"), this))
     , mp_Menu(new DMenu(this))
 
 {
@@ -34,6 +35,7 @@ TableWidget::TableWidget(QWidget *parent)
             this, SLOT(slotShowMenu(const QPoint &)));
     connect(mp_Refresh, &QAction::triggered, this, &TableWidget::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &TableWidget::slotActionExport);
+    connect(mp_Enable, &QAction::triggered, this, &TableWidget::slotActionEnable);
 }
 
 void TableWidget::setHeaderLabels(const QStringList &lst)
@@ -115,7 +117,13 @@ void TableWidget::paintEvent(QPaintEvent *e)
 void TableWidget::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
-    mp_Menu->addSeparator();
+//    mp_Menu->addSeparator();
+    if (mp_Table->currentRowEnable()) {
+        mp_Enable->setText(tr("Disable"));
+    } else {
+        mp_Enable->setText(tr("Enable"));
+    }
+    mp_Menu->addAction(mp_Enable);
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());
@@ -129,6 +137,19 @@ void TableWidget::slotActionRefresh()
 void TableWidget::slotActionExport()
 {
     emit exportInfo();
+}
+
+void TableWidget::slotActionEnable()
+{
+    if (!mp_Table) {
+        return;
+    }
+
+    if (mp_Enable->text() == tr("Enable")) {
+        emit enableDevice(mp_Table->currentRow(), false);
+    } else {
+        emit enableDevice(mp_Table->currentRow(), true);
+    }
 }
 
 void TableWidget::slotItemClicked(const QModelIndex &index)

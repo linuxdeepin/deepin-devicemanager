@@ -212,6 +212,18 @@ public:
      */
     void tableHeaderToXlsx(QXlsx::Document &xlsx);
 
+    /**
+     * @brief setEnable 设置设备的禁用状态
+     * @param enable 是否禁用
+     */
+    void setEnable(bool enable);
+
+    /**
+     * @brief enable 获取设备的禁用状态
+     * @return
+     */
+    bool enable();
+
 
 protected:
     /**
@@ -285,7 +297,7 @@ protected:
     QStringList                    m_TableHeader;   //<! 用于存放表格的表头
     QStringList                    m_TableData;     //<! 用于存放表格的内容
     QSet<QString>                  m_FilterKey;     //<! 用于避免添加重复信息
-//    QString                        m_SubTitle;
+    bool                           m_Enable;        //<! 设备是否是启用状态
 
 private:
     QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息

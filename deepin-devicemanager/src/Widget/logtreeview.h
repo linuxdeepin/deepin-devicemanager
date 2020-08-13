@@ -53,6 +53,18 @@ public:
     void setColumnAverage();
 
     /**
+     * @brief currentRowEnable : 获取当前行是否是选中状态
+     * @return : 返回状态
+     */
+    bool currentRowEnable();
+
+    /**
+     * @brief currentRow
+     * @return
+     */
+    int currentRow();
+
+    /**
      * @brief clear : 清空数据
      */
     void clear();

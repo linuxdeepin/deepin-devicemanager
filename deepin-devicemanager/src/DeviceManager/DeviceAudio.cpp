@@ -18,6 +18,7 @@ DeviceAudio::DeviceAudio()
     , m_UniqueKey("")
 {
     initFilterKey();
+    m_Enable = false;
 }
 
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -190,7 +191,13 @@ const QString &DeviceAudio::chip() const
 
 QString DeviceAudio::subTitle()
 {
-    return m_Name;
+    QString name;
+    if (!m_Enable) {
+        name = "(" + tr("Disable") + ") " + m_Name;
+    } else {
+        name = m_Name;
+    }
+    return name;
 }
 
 const QString DeviceAudio::getOverviewInfo()
@@ -255,6 +262,12 @@ void DeviceAudio::loadTableHeader()
 
 void DeviceAudio::loadTableData()
 {
-    m_TableData.append(m_Name);
+    QString name;
+    if (!m_Enable) {
+        name = "(" + tr("Disable") + ") " + m_Name;
+    } else {
+        name = m_Name;
+    }
+    m_TableData.append(name);
     m_TableData.append(m_Vendor);
 }

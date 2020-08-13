@@ -173,7 +173,13 @@ void DeviceInput::loadOtherDeviceInfo()
 
 void DeviceInput::loadTableData()
 {
-    m_TableData.append(m_Name);
+    QString name;
+    if (!m_Enable) {
+        name = "(" + tr("Disable") + ") " + m_Name;
+    } else {
+        name = m_Name;
+    }
+    m_TableData.append(name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }
