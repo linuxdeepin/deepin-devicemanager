@@ -112,7 +112,7 @@ void TableWidget::paintEvent(QPaintEvent *e)
 
     paintPath = paintPathOut.subtracted(paintPathIn);
 
-    QBrush bgBrush(palette.color(cg, DPalette::TextWarning));
+    QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
     painter.fillPath(paintPath, bgBrush);
 
 //    QPen pen = painter.pen();
