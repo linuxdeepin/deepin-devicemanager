@@ -1,6 +1,8 @@
 #include "PageOverview.h"
 #include "DetailTreeView.h"
 #include "DeviceManager.h"
+#include "PageInfoWidget.h"
+#include "LongTextLabel.h"
 
 #include <QVBoxLayout>
 #include <QTableWidgetItem>
@@ -14,12 +16,13 @@
 #include <DSysInfo>
 #include <DMessageManager>
 #include <DNotifySender>
+#include <DTextBrowser>
 
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
     , mp_PicLabel(new DLabel(this))
     , mp_DeviceLabel(new DLabel(this))
-    , mp_OSLabel(new QLabel(this))
+    , mp_OSLabel(new LongTextLabel(this))
     , mp_Overview(new DetailTreeView(this))
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
@@ -105,8 +108,22 @@ void PageOverview::setLabel(const QString &itemstr)
 
 void PageOverview::setLabel(const QString &str1, const QString &str2)
 {
+    // 打开超链接属性
+    mp_OSLabel->setOpenExternalLinks(true);
+
+    // 设置ToolTip
+    mp_OSLabel->setToolTip(str2);
+
+    // 设置操作系统内容
+//    mp_OSLabel->setText(str2);
+
+    // 字体大小设置T8
+//    DFontSizeManager::instance()->bind(mp_OSLabel, DFontSizeManager::T8);
+
+    // 超过控件长度用...代替
     QString os = str2;
     QString linkStr = "<a style = \"text-decoration:none\" href = https://www.chinauos.com/home>";
+
     DSysInfo::DeepinType type = DSysInfo::deepinType();
     if (DSysInfo::DeepinProfessional == type) {
         linkStr += "UnionTech OS 20 </a>" + os.remove("UnionTech OS 20");
@@ -116,13 +133,9 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
         linkStr += "Deepin 20 RC </a>" + os.remove("Deepin 20 RC");
     }
 
-    // 打开超链接属性
-    mp_OSLabel->setOpenExternalLinks(true);
-
-    // 设置操作系统内容，并自动换行
+    // 设置自动换行
+    //mp_OSLabel->setWordWrap(false);
     mp_OSLabel->setText(linkStr);
-    //mp_OSLabel->setWordWrap(true);
-    DFontSizeManager::instance()->bind(mp_OSLabel, DFontSizeManager::T8);
 
     // 设置设备信息
     mp_DeviceLabel->setText(str1);
@@ -198,10 +211,10 @@ void PageOverview::slotActionCopy()
 
 void PageOverview::initWidgets()
 {
-    QVBoxLayout *hLayout = new QVBoxLayout(this);
-    QHBoxLayout *hLayoutTop = new QHBoxLayout(this);
-    QVBoxLayout *vLayoutLabel = new  QVBoxLayout(this);
-
+    QVBoxLayout *hLayout = new QVBoxLayout();
+    QHBoxLayout *hLayoutTop = new QHBoxLayout();
+    QVBoxLayout *vLayoutLabel = new  QVBoxLayout();
+    vLayoutLabel->setContentsMargins(0, 0, 0, 0);
     mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     vLayoutLabel->addSpacing(20);

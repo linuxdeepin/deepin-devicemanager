@@ -138,7 +138,7 @@ void ScrollAreaWidget::paintEvent(QPaintEvent *e)
 
 PageDetail::PageDetail(QWidget *parent)
     : Dtk::Widget::DWidget(parent)
-    , mp_ScrollAreaLayout(new QVBoxLayout(this))
+    , mp_ScrollAreaLayout(new QVBoxLayout())
     , mp_ScrollArea(new QScrollArea(this))
 {
     setContentsMargins(0, 0, 0, 0);

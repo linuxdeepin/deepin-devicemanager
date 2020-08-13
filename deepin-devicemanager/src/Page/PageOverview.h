@@ -32,6 +32,7 @@ DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
 class DetailTreeView;
+class LongTextLabel;
 
 class PageOverview : public PageInfo
 {
@@ -107,7 +108,7 @@ private:
 private:
     DLabel                  *mp_PicLabel;
     DLabel                  *mp_DeviceLabel;
-    QLabel                  *mp_OSLabel;
+    LongTextLabel           *mp_OSLabel;
     DetailTreeView          *mp_Overview;
     QAction                 *mp_Refresh;     //<! 右键刷新
     QAction                 *mp_Export;      //<! 右键导出

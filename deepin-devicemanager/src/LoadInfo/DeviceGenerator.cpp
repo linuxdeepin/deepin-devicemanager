@@ -98,7 +98,7 @@ void DeviceGenerator::generatorCpuDevice()
 
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
     for (; it != lstCatCpu.end(); ++it) {
-        DeviceCpu *device = new DeviceCpu();
+        DeviceCpu *device = new DeviceCpu;
         device->setCpuInfo(lscpu, lshw, dmidecode, *it);
         DeviceManager::instance()->addCpuDevice(device);
     }
