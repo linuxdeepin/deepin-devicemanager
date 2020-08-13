@@ -114,11 +114,8 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     // 设置ToolTip
     mp_OSLabel->setToolTip(str2);
 
-    // 设置操作系统内容
-//    mp_OSLabel->setText(str2);
-
     // 字体大小设置T8
-//    DFontSizeManager::instance()->bind(mp_OSLabel, DFontSizeManager::T8);
+    DFontSizeManager::instance()->bind(mp_OSLabel, DFontSizeManager::T8);
 
     // 超过控件长度用...代替
     QString os = str2;

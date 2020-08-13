@@ -5,6 +5,7 @@
 
 #include <QDebug>
 #include <QAbstractTextDocumentLayout>
+#include <QDomDocument>
 
 LongTextLabel::LongTextLabel(DWidget *parent)
     : DLabel(parent)
@@ -21,36 +22,14 @@ void LongTextLabel::setLinkText(const QString &linkstr)
 
 void LongTextLabel::paintEvent(QPaintEvent *event)
 {
-//    QPainter painter(this);
-
-//    painter.save();
-//    int margin = 2;   // 边距
-//    QRect rect = this->rect();
-//    rect.setX(rect.x() + margin);
-//    qDebug() << painter.font();
-//    QFontMetrics fm = this->fontMetrics();
-
-//    QString text = fm.elidedText(this->text(), Qt::ElideRight, rect.width());
-//    setOpenExternalLinks(true);
-//    painter.drawText(rect, Qt::TextSingleLine, text);
-
-//    m_width = rect.width();
-//    setLinkText(text());
-//    painter.restore();
-
-    QStyleOption opt;
-    opt.initFrom(this);
-
     QPainter painter(this);
-    painter.save();
+    QTextDocument docText;
 
-    QTextDocument doc;
-    doc.setHtml(text());
+    QFont fo = painter.font();
+    QFontMetrics fm(fo);
+    QString text = fm.elidedText(this->text(), Qt::TextElideMode::ElideRight, this->width());
 
-//    DStyle *style = this->style();
-
-
-    painter.restore();
-
-
+    docText.setHtml(text);
+    docText.drawContents(&painter, this->rect());
+    return DWidget::paintEvent(event);
 }
