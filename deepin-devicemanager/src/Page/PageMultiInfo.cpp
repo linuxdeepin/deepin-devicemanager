@@ -83,6 +83,7 @@ void PageMultiInfo::initWidgets()
     hLayout->addWidget(mp_Label);
     mp_Table->setFixedHeight(TABLE_HEIGHT);
     hLayout->addWidget(mp_Table);
+    hLayout->addSpacing(10);
     hLayout->addWidget(mp_Detail);
     setLayout(hLayout);
 }

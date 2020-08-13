@@ -74,6 +74,7 @@ void PageTableHeader::setColumnAverage()
 
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
+    this->setFixedHeight(206);
     DWidget::paintEvent(e);
 }
 

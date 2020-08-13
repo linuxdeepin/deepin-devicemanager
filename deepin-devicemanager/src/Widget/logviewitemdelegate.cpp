@@ -92,52 +92,54 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     painter->setPen(forground);
 
     QRect rect = opt.rect;
+
     // QRectF a;
 //    rect.setWidth(rect.width() + 2);
 //    rect.setX(rect.x() - 1);
     QFontMetrics fm(opt.font);
     QPainterPath path, clipPath;
+
     QRect textRect = rect;
 
-    switch (opt.viewItemPosition) {
-    case QStyleOptionViewItem::Beginning: {
-        rect.setX(rect.x() + margin);  // left margin
-        //去除焦点时的蓝线，减少行高
-        QPainterPath rectPath, roundedPath;
-        roundedPath.addRoundedRect(rect.x(), rect.y() + 1, rect.width() * 2, rect.height() - 2, radius,
-                                   radius);
-        rectPath.addRect(rect.x() + rect.width(), rect.y() + 1, rect.width(), rect.height() - 2);
-        clipPath = roundedPath.subtracted(rectPath);
-        painter->setClipPath(clipPath);
-        path.addRect(rect);
-    } break;
-    case QStyleOptionViewItem::Middle: {
-        //去除焦点时的蓝线，减少行高
-        QRectF rect2(rect.left(), rect.top() + 1, rect.width(), rect.height() - 2);
-        path.addRect(rect2);
-    } break;
-    case QStyleOptionViewItem::End: {
-        rect.setWidth(rect.width() - margin);  // right margin
-        //去除焦点时的蓝线，减少行高
-        QPainterPath rectPath, roundedPath;
-        roundedPath.addRoundedRect(rect.x() - rect.width(), rect.y() + 1, rect.width() * 2,
-                                   rect.height() - 2, radius, radius);
-        rectPath.addRect(rect.x() - rect.width(), rect.y() + 1, rect.width(), rect.height() - 2);
-        clipPath = roundedPath.subtracted(rectPath);
-        painter->setClipPath(clipPath);
-        path.addRect(rect);
-    } break;
-    case QStyleOptionViewItem::OnlyOne: {
-        rect.setX(rect.x() + margin);          // left margin
-        rect.setWidth(rect.width() - margin);  // right margin
-        path.addRoundedRect(rect, radius, radius);
-    } break;
-    default: {
-        painter->restore();
-        QStyledItemDelegate::paint(painter, option, index);
-        return;
-    }
-    }
+//    switch (opt.viewItemPosition) {
+//    case QStyleOptionViewItem::Beginning: {
+//        rect.setX(rect.x() + margin);  // left margin
+//        //去除焦点时的蓝线，减少行高
+//        QPainterPath rectPath, roundedPath;
+//        roundedPath.addRoundedRect(rect.x(), rect.y() + 1, rect.width() * 2, rect.height() - 2, radius,
+//                                   radius);
+//        rectPath.addRect(rect.x() + rect.width(), rect.y() + 1, rect.width(), rect.height() - 2);
+//        clipPath = roundedPath.subtracted(rectPath);
+//        painter->setClipPath(clipPath);
+//        path.addRect(rect);
+//    } break;
+//    case QStyleOptionViewItem::Middle: {
+//        //去除焦点时的蓝线，减少行高
+//        QRectF rect2(rect.left(), rect.top() + 1, rect.width(), rect.height() - 2);
+//        path.addRect(rect2);
+//    } break;
+//    case QStyleOptionViewItem::End: {
+//        rect.setWidth(rect.width() - margin);  // right margin
+//        //去除焦点时的蓝线，减少行高
+//        QPainterPath rectPath, roundedPath;
+//        roundedPath.addRoundedRect(rect.x() - rect.width(), rect.y() + 1, rect.width() * 2,
+//                                   rect.height() - 2, radius, radius);
+//        rectPath.addRect(rect.x() - rect.width(), rect.y() + 1, rect.width(), rect.height() - 2);
+//        clipPath = roundedPath.subtracted(rectPath);
+//        painter->setClipPath(clipPath);
+//        path.addRect(rect);
+//    } break;
+//    case QStyleOptionViewItem::OnlyOne: {
+//        rect.setX(rect.x() + margin);          // left margin
+//        rect.setWidth(rect.width() - margin);  // right margin
+//        path.addRoundedRect(rect, radius, radius);
+//    } break;
+//    default: {
+//        painter->restore();
+//        QStyledItemDelegate::paint(painter, option, index);
+//        return;
+//    }
+//    }
 
     QRect iconRect = rect;
     if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
@@ -148,6 +150,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         ic.paint(painter, iconRect);
     }
     textRect = rect;
+    qDebug() << rect.y();
     textRect.setX(textRect.x() + margin - 2);
     //    textRect.setWidth(textRect.width() - margin * 2);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
@@ -171,7 +174,7 @@ QSize LogViewItemDelegate::sizeHint(const QStyleOptionViewItem &option,
                                     const QModelIndex &index) const
 {
     QSize size = QStyledItemDelegate::sizeHint(option, index);
-    size.setHeight(std::max(36, size.height()));
+    size.setHeight(std::max(40, size.height()));
     return size;
 }
 

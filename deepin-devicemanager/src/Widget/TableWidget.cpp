@@ -55,7 +55,7 @@ void TableWidget::setItem(int row, int column, DStandardItem *item)
 void TableWidget::setColumnAverage()
 {
     if (mp_Table) {
-        qDebug() << "*************PageTableHeader::updateTable**************" << mp_Table->width();
+        qDebug() << "*************PageTableHeader::updateTable**************" << mp_Table->height();
         mp_Table->setColumnAverage();
     }
 }
@@ -69,25 +69,25 @@ void TableWidget::clear()
 
 void TableWidget::paintEvent(QPaintEvent *e)
 {
+    DWidget::paintEvent(e);
     QPainter painter(this);
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing, true);
     painter.setOpacity(1);
     painter.setClipping(true);
-    QRect rect = this->rect();
 
     // 获取调色板
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
-    // 获取系统默认的圆角半径
+//     获取系统默认的圆角半径
 //    QStyleOptionFrame option;
 //    initStyleOption(&option);
 //    DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
 //    int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
     int radius = 8;
 
-    // 获取窗口当前的状态,激活，禁用，未激活
+//     获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
     if (wid/* && wid == this*/) {
@@ -96,9 +96,14 @@ void TableWidget::paintEvent(QPaintEvent *e)
         cg = DPalette::Inactive;
     }
 
+//    this->setFixedHeight(mp_Table->height() + 10);
+    this->setFixedHeight(204);
+    QRect rect  = this->rect();
+
+    qDebug() << this->rect();
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
-    int width = 2;
+    int width = 1;
     QPainterPath paintPath, paintPathOut, paintPathIn;
     paintPathOut.addRoundedRect(rect, radius, radius);
 
@@ -107,11 +112,22 @@ void TableWidget::paintEvent(QPaintEvent *e)
 
     paintPath = paintPathOut.subtracted(paintPathIn);
 
-    QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
+    QBrush bgBrush(palette.color(cg, DPalette::TextWarning));
     painter.fillPath(paintPath, bgBrush);
 
+//    QPen pen = painter.pen();
+//    pen.setColor(palette.color(cg, DPalette::TextWarning));
+//    pen.setWidth(1);
+
+//    painter.setPen(pen);
+
+//    QRect rect = mp_Table->geometry();
+//    this->setFixedHeight(rect.height() + 2);
+
+//    painter.drawRect(this->rect());
+//    qDebug() << rect << this->rect();
     painter.restore();
-    DWidget::paintEvent(e);
+//    DWidget::paintEvent(e);
 }
 
 void TableWidget::slotShowMenu(const QPoint &)
@@ -162,9 +178,9 @@ void TableWidget::slotItemClicked(const QModelIndex &index)
 
 void TableWidget::initWidget()
 {
-    QHBoxLayout *hLayout = new QHBoxLayout(this);
-    int margin = 3;
-    hLayout->setContentsMargins(margin, margin, margin, 3);
+    QHBoxLayout *hLayout = new QHBoxLayout();
+    int margin = 2;
+    hLayout->setContentsMargins(margin, margin, margin, margin);
     hLayout->addWidget(mp_Table);
     setLayout(hLayout);
 }

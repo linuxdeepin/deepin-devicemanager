@@ -30,6 +30,7 @@
 #include <QHeaderView>
 #include <QScrollBar>
 #include "MacroDefinition.h"
+#include "TableWidget.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -40,6 +41,7 @@ LogTreeView::LogTreeView(QWidget *parent)
     , mp_HeaderView(nullptr)
 {
     initUI();
+
 }
 
 void LogTreeView::setHeaderLabels(const QStringList &lst)
@@ -130,6 +132,8 @@ void LogTreeView::initUI()
 
     // 设置的固定高度
     this->header()->setFixedHeight(ROW_HEIGHT);
+    this->setFixedHeight(200);
+
 
     // Item 不可扩展
     setItemsExpandable(false);
@@ -170,16 +174,17 @@ void LogTreeView::paintEvent(QPaintEvent *event)
 
     // 计算绘制背景色有问题
     QRect rect = viewport()->rect();
-    QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
-    QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
-    QPainterPath clipPath, subPath;
+
+    QPainterPath clipPath;
 
     // 填充背景色
-    clipPath.addRect(rect);
+    clipPath.addRoundedRect(rect, 8, 8);
+
     painter.fillPath(clipPath, bgBrush);
     painter.restore();
 
     DTreeView::paintEvent(event);
+
 }
 
 void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const
@@ -244,9 +249,10 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
     path.addRoundedRect(rowRect, radius, radius);
     painter->fillPath(path, background);
 
+    painter->restore();
+
     QTreeView::drawRow(painter, options, index);
 
-    painter->restore();
 }
 
 void LogTreeView::keyPressEvent(QKeyEvent *event)
