@@ -14,6 +14,7 @@
 #include <DStyle>
 #include <DMenu>
 #include <QClipboard>
+#include <DFontSizeManager>
 
 #include "DeviceInfo.h"
 
@@ -247,6 +248,7 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     QHBoxLayout *vLayout = new QHBoxLayout();
     vLayout->addSpacing(20);
     DetailButton *button = new DetailButton(tr("More"));
+    DFontSizeManager::instance()->bind(button, DFontSizeManager::T8);
     connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
     vLayout->addWidget(button);
     if (!enable) {

@@ -107,7 +107,7 @@ private:
 
 private:
     DLabel                  *mp_PicLabel;
-    DLabel                  *mp_DeviceLabel;
+    LongTextLabel                  *mp_DeviceLabel;
     LongTextLabel           *mp_OSLabel;
     DetailTreeView          *mp_Overview;
     QAction                 *mp_Refresh;     //<! 右键刷新

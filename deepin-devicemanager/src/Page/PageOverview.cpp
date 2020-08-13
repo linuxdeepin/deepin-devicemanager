@@ -21,7 +21,7 @@
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
     , mp_PicLabel(new DLabel(this))
-    , mp_DeviceLabel(new DLabel(this))
+    , mp_DeviceLabel(new LongTextLabel(this))
     , mp_OSLabel(new LongTextLabel(this))
     , mp_Overview(new DetailTreeView(this))
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
@@ -114,8 +114,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     // 设置ToolTip
     mp_OSLabel->setToolTip(str2);
 
-    // 字体大小设置T8
-    DFontSizeManager::instance()->bind(mp_OSLabel, DFontSizeManager::T8);
+
 
     // 超过控件长度用...代替
     QString os = str2;
