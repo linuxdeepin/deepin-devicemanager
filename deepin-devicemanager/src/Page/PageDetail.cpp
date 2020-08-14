@@ -180,6 +180,7 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
         addWidgets(txtBrowser, device->enable());
 
+        // 当添加到最后一个设备详细信息时，隐藏分隔符
         if (device == lstInfo.last()) {
             m_ListDetailSeperator[lstInfo.size() - 1]->setVisible(false);
         }

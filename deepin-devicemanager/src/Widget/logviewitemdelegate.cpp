@@ -150,7 +150,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         ic.paint(painter, iconRect);
     }
     textRect = rect;
-    qDebug() << rect.y();
+//    qDebug() << rect.y();
     textRect.setX(textRect.x() + margin - 2);
     //    textRect.setWidth(textRect.width() - margin * 2);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
@@ -174,7 +174,7 @@ QSize LogViewItemDelegate::sizeHint(const QStyleOptionViewItem &option,
                                     const QModelIndex &index) const
 {
     QSize size = QStyledItemDelegate::sizeHint(option, index);
-    size.setHeight(std::max(40, size.height()));
+    size.setHeight(std::max(36, size.height()));
     return size;
 }
 

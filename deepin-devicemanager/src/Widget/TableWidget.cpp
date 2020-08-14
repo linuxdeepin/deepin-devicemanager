@@ -97,7 +97,7 @@ void TableWidget::paintEvent(QPaintEvent *e)
     }
 
 //    this->setFixedHeight(mp_Table->height() + 10);
-    this->setFixedHeight(204);
+    this->setFixedHeight(36 * 5 + 4);
     QRect rect  = this->rect();
 
     qDebug() << this->rect();

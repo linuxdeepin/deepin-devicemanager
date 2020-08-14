@@ -131,8 +131,8 @@ void LogTreeView::initUI()
     this->header()->setDefaultAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     // 设置的固定高度
-    this->header()->setFixedHeight(ROW_HEIGHT);
-    this->setFixedHeight(200);
+    this->header()->setFixedHeight(36);
+    this->setFixedHeight(36 * 5);
 
 
     // Item 不可扩展
