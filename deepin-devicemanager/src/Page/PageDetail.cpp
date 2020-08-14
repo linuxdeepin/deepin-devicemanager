@@ -26,6 +26,15 @@ DetailButton::DetailButton(const QString &txt)
 
 }
 
+void DetailButton::updateText()
+{
+    if (this->text() == tr("More")) {
+        this->setText(tr("Collapse"));
+    } else {
+        this->setText(tr("More"));
+    }
+}
+
 void DetailButton::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
@@ -205,6 +214,25 @@ void PageDetail::showInfoOfNum(int index)
     mp_ScrollArea->verticalScrollBar()->setValue(value);
 }
 
+void PageDetail::slotEnableDevice(int row, bool enable)
+{
+    if (m_ListTextBrowser.size() <= row) {
+        return;
+    }
+
+    // 设置 TextBrowser 可用
+    TextBrowser *browser = m_ListTextBrowser.at(row);
+    if (browser)
+        browser->setDeviceEnabled(enable);
+
+    // 设置 展开收起按钮 可见和可用
+    DetailButton *button = m_ListDetailButton.at(row);
+    if (button) {
+        button->setVisible(true);
+        button->setEnabled(true);
+    }
+}
+
 void PageDetail::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
@@ -247,6 +275,7 @@ void PageDetail::paintEvent(QPaintEvent *e)
 
 void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 {
+    // 添加 textBrowser
     mp_ScrollAreaLayout->addWidget(widget);
 
     // 添加按钮
@@ -255,10 +284,10 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     DetailButton *button = new DetailButton(tr("More"));
     DFontSizeManager::instance()->bind(button, DFontSizeManager::T8);
     connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
-    vLayout->addWidget(button);
     if (!enable) {
         button->setVisible(false);
     }
+    vLayout->addWidget(button);
     vLayout->addStretch(-1);
     mp_ScrollAreaLayout->addLayout(vLayout);
 
@@ -266,6 +295,7 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     DetailSeperator *seperator = new DetailSeperator(widget);
     mp_ScrollAreaLayout->addWidget(seperator);
 
+    // **********************************
     m_ListTextBrowser.append(widget);
     m_ListHlayout.append(vLayout);
     m_ListDetailButton.append(button);
@@ -309,12 +339,16 @@ void PageDetail::slotBtnClicked()
         index++;
     }
 
+    // 改变按钮的状态，展开和收起的切换
+    if (button) {
+        button->updateText();
+    }
+
+    // 显示内容发生相应变化，也就是是否显示其它信息
     TextBrowser *browser = m_ListTextBrowser[index];
-    browser->updateInfo();
-    if (button->text() == tr("More")) {
-        button->setText(tr("Collapse"));
-    } else {
-        button->setText(tr("More"));
+    if (browser) {
+        browser->updateShowOtherInfo();
+        browser->updateInfo();
     }
 }
 

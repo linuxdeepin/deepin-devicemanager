@@ -40,6 +40,12 @@ class DetailButton: public DCommandLinkButton
     Q_OBJECT
 public:
     explicit DetailButton(const QString &txt);
+
+    /**
+     * @brief updateText 更新按钮的显示信息
+     */
+    void updateText();
+
 protected:
     void paintEvent(QPaintEvent *e) override;
 };
@@ -83,6 +89,9 @@ public:
      * @param index : 需要显示到相应的位置
      */
     void showInfoOfNum(int index);
+
+public slots:
+    void slotEnableDevice(int row, bool enable);
 
 protected:
     void paintEvent(QPaintEvent *e) override;

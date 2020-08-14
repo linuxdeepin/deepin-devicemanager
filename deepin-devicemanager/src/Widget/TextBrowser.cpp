@@ -59,31 +59,6 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
     setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
 }
 
-void TextBrowser::showBoardInfo(DeviceBaseInfo *info)
-{
-    setWindowOpacity(1.0);
-//    setAttribute(Qt::WA_TranslucentBackground, true);
-    mp_Info = info;
-    // 先清空内容 *************************************************
-    clear();
-    if (!info) {
-        return;
-    }
-
-    // 显示设备的信息 *************************************************
-    QDomDocument doc;
-
-    // 添加子标题
-//    domTitleInfo(doc, mp_Info);
-
-    // 添加一个表格
-    const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
-    domTableInfo(doc, baseInfo);
-
-    // 将设备信息显示到TextBrowser
-    setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
-}
-
 void TextBrowser::updateInfo()
 {
     // 先清空内容 *************************************************
@@ -99,18 +74,31 @@ void TextBrowser::updateInfo()
     domTitleInfo(doc, mp_Info);
 
     // 添加一个表格
-    const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
-    domTableInfo(doc, baseInfo);
-    if (!m_ShowOtherInfo) {
-        const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
-        domTableInfo(doc, otherInfo);
-        m_ShowOtherInfo = true;
-    } else {
-        m_ShowOtherInfo = false;
+    if (mp_Info->enable()) {
+        const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
+        domTableInfo(doc, baseInfo);
+        if (m_ShowOtherInfo) {
+            const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
+            domTableInfo(doc, otherInfo);
+        }
+    }
+    //将设备信息显示到TextBrowser
+    setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
+}
+
+void TextBrowser::setDeviceEnabled(bool enable)
+{
+    if (!mp_Info) {
+        return;
     }
 
-    // 将设备信息显示到TextBrowser
-    setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
+    mp_Info->setEnable(enable);
+    updateInfo();
+}
+
+void TextBrowser::updateShowOtherInfo()
+{
+    m_ShowOtherInfo = !m_ShowOtherInfo;
 }
 
 void TextBrowser::fillClipboard()
@@ -198,11 +186,13 @@ void TextBrowser::focusOutEvent(QFocusEvent *e)
         domTitleInfo(doc, mp_Info);
 
         // 添加一个表格
-        const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
-        domTableInfo(doc, baseInfo);
-        if (m_ShowOtherInfo) {
-            const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
-            domTableInfo(doc, otherInfo);
+        if (mp_Info->enable()) {
+            const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
+            domTableInfo(doc, baseInfo);
+            if (m_ShowOtherInfo) {
+                const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
+                domTableInfo(doc, otherInfo);
+            }
         }
 
         // 将设备信息显示到TextBrowser
@@ -259,7 +249,7 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
     if (!title.isEmpty()) {
         QDomElement h3 = doc.createElement("h3");
 //        h3.setAttribute("cellpadding", "3");
-        h3.setAttribute("style", "text-indent:17px;font-weight:550;");
+        h3.setAttribute("style", "text-indent:17px;");
         if (!info->enable())
             h3.setAttribute("style", "color:#FF5736;");
         QDomText valueText = doc.createTextNode(title);
@@ -280,11 +270,9 @@ void TextBrowser::domTableInfo(QDomDocument &doc, const QList<QPair<QString, QSt
         QDomElement tr = doc.createElement("tr");
 
         // 该行的第一列
-        QDomElement td = doc.createElement("td");
+        QDomElement td = doc.createElement("th");
         td.setAttribute("width", "25%");
-        td.setAttribute("style", "text-align:left;");
-        td.setAttribute("style", "text-indent:15px;");
-
+        td.setAttribute("style", "text-indent:15px;text-align:left;font-weight:504;");
         QDomText nameText = doc.createTextNode(pair.first + ":");
         td.appendChild(nameText);
         tr.appendChild(td);

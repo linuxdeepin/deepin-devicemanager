@@ -46,15 +46,20 @@ public:
     void showDeviceInfo(DeviceBaseInfo *info);
 
     /**
-     * @brief showBoardInfo
-     * @param info
-     */
-    void showBoardInfo(DeviceBaseInfo *info);
-
-    /**
      * @brief updateInfo : 点击详细按钮之后的展开和收起操作
      */
     void updateInfo();
+
+    /**
+     * @brief setDeviceEnabled
+     * @param enable
+     */
+    void setDeviceEnabled(bool enable);
+
+    /**
+     * @brief updateShowOtherInfo 更新是否需要显示其它信息
+     */
+    void updateShowOtherInfo();
 
 
 public slots:

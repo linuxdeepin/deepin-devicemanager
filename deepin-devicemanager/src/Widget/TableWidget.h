@@ -52,6 +52,9 @@ public:
      */
     void setItem(int row, int column, DStandardItem *item);
 
+    /**
+     * @brief setColumnAverage
+     */
     void setColumnAverage();
 
     /**

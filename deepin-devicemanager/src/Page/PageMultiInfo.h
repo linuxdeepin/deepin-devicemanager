@@ -65,6 +65,8 @@ signals:
      */
     void exportInfo();
 
+    void enableDevice(int row, bool enable);
+
 private slots:
     /**
      * @brief slotItemClicked:点击表格Item
@@ -81,6 +83,13 @@ private slots:
      * @brief slotExportInfo:单导出槽函数
      */
     void slotExportInfo();
+
+    /**
+     * @brief slotEnableDevice
+     * @param row
+     * @param enable
+     */
+    void slotEnableDevice(int row, bool enable);
 
 private:
     /**

@@ -24,6 +24,7 @@ PageTableHeader::PageTableHeader(QWidget *parent)
     connect(mp_Table, &TableWidget::itemClicked, this, &PageTableHeader::slotItemClicked);
     connect(mp_Table, &TableWidget::refreshInfo, this, &PageTableHeader::slotRefreshInfo);
     connect(mp_Table, &TableWidget::exportInfo, this, &PageTableHeader::slotExportInfo);
+    connect(mp_Table, &TableWidget::enableDevice, this, &PageTableHeader::slotEnableDevice);
 }
 
 PageTableHeader::~PageTableHeader()
@@ -90,6 +91,11 @@ void PageTableHeader::slotRefreshInfo()
 void PageTableHeader::slotExportInfo()
 {
     emit exportInfo();
+}
+
+void PageTableHeader::slotEnableDevice(int row, bool enable)
+{
+    emit enableDevice(row, enable);
 }
 
 

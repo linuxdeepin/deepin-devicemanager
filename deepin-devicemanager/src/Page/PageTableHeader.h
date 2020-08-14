@@ -62,6 +62,7 @@ signals:
      * @brief exportInfo:导出信息发出信号
      */
     void exportInfo();
+    void enableDevice(int row, bool enable);
 
 protected:
     void paintEvent(QPaintEvent *e) override;
@@ -82,6 +83,7 @@ private slots:
      * @brief slotExportInfo:导出信息槽函数
      */
     void slotExportInfo();
+    void slotEnableDevice(int row, bool enable);
 
 private:
     /**

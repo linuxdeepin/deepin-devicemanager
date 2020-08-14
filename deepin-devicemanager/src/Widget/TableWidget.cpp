@@ -162,9 +162,9 @@ void TableWidget::slotActionEnable()
     }
 
     if (mp_Enable->text() == tr("Enable")) {
-        emit enableDevice(mp_Table->currentRow(), false);
-    } else {
         emit enableDevice(mp_Table->currentRow(), true);
+    } else {
+        emit enableDevice(mp_Table->currentRow(), false);
     }
 }
 
