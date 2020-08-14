@@ -59,15 +59,35 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QRect rect = opt.rect;
     QPainterPath path;
     QRect rectpath = rect;
-    rectpath.setX(rect.x() + 1);
-    rectpath.setY(rect.y() + 1);
-    rectpath.setWidth(rect.width() - 2);
-    rectpath.setHeight(rect.height() - 2);
-    path.addRect(rectpath);
 
-    // 更多信息按钮行，背景色为白色，单元格上边框要绘制横线以
+    // 确定绘制区域的形状，单元格
+    if (index.column() == 0) {
+        // 第一列左右各空一个像素
+        rectpath.setX(rect.x() + 1);
+        rectpath.setWidth(rect.width() - 2);
+    } else {
+        // 其他列右空一个像素，除最后一列，其他用于绘制单元格竖线
+        rectpath.setWidth(rect.width() - 1);
+    }
+
+    if (index.row() == 0) {
+        // 第一行上方空一个像素
+        rectpath.setY(rect.y() + 1);
+        rectpath.setHeight(rect.height() - 1);
+    } else if (index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1) {
+        // 最后一行，下方空一个像素
+        rectpath.setHeight(rect.height() - 1);
+    }
+
+//    qDebug() << index;
+
+    // 最后一行是更多信息按钮行，背景色为白色，单元格上边框要绘制横线以
     if (index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
             && index.row() != 0 && dynamic_cast<DetailTreeView *>(this->parent())->hasExpendInfo()) {
+        // 上方要空一个像素用来绘制横线
+        rectpath.setY(rect.y() + 1);
+        path.addRect(rectpath);
+
         // 展开 行背景色为白色
         painter->fillPath(path, palette.color(cg, DPalette::Base));
 
@@ -76,16 +96,32 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         pen.setColor(palette.color(cg, DPalette::FrameShadowBorder));
         pen.setWidth(1);
         painter->setPen(pen);
-        painter->drawLine(rect.x(), rect.y() + 1, rect.x() + rect.width() - 1, rect.y() + 1);
+        painter->drawLine(rect.x(), rect.y(), rect.x() + rect.width() - 1, rect.y());
 
     } else {
+        path.addRect(rectpath);
         painter->fillPath(path, background);
+
+        // 第一列 单元格后画竖线，展开收起行不画竖线
+        if (index.column() != dynamic_cast<DetailTreeView *>(this->parent())->columnCount() - 1) {
+            painter->save();
+            QPen pen = painter->pen();
+            pen.setColor(palette.color(cg, DPalette::FrameShadowBorder));
+            pen.setWidth(1);
+            painter->setPen(pen);
+
+            painter->drawLine(rectpath.topRight().x() + 1, rectpath.topRight().y(), rectpath.bottomRight().x() + 1, rectpath.bottomRight().y());
+//            qDebug() << QLine(rectpath.topRight().x() + 1, rectpath.topRight().y(), rectpath.bottomRight().x() + 1, rectpath.bottomRight().y() + 1);
+            painter->restore();
+        }
     }
 
-    QRect textRect = rect;
+    // 绘制文字信息
+    QRect textRect = rectpath;
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);   // 边距
 
     textRect.setX(textRect.x() + margin);
+    textRect.setWidth(textRect.width() - margin);
 
     QFont fo;
     // 表格第一列，字体加粗
@@ -101,19 +137,6 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
-
-
-    // 第一列 单元格后画竖线，展开收起行不画竖线
-    if (index.column() == 0 && !(index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
-                                 && index.row() != 0 && dynamic_cast<DetailTreeView *>(this->parent())->hasExpendInfo())) {
-
-        QPen pen = painter->pen();
-        pen.setColor(palette.color(cg, DPalette::FrameShadowBorder));
-        pen.setWidth(1);
-        painter->setPen(pen);
-
-        painter->drawLine(rect.topRight().x() + 1, rect.topRight().y(), rect.bottomRight().x() + 1, rect.bottomRight().y());
-    }
 
 
     painter->restore();

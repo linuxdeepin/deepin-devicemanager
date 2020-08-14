@@ -110,7 +110,7 @@ int DetailTreeView::setTableHeight(int paintHeight)
     if (p->isOverview()) {
         maxRow = p->height() / ROW_HEIGHT - 4;
     } else {
-        maxRow = p->height() / ROW_HEIGHT - 3;
+        maxRow = p->height() / ROW_HEIGHT - 2;
     }
 
     // 主板界面的表格高度
@@ -204,14 +204,14 @@ void DetailTreeView::initUI()
     setItemDelegate(mp_ItemDelegate);
 
     // 设置不可编辑模式
-    //this->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    this->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // 设置表格一次滚动一个Item，dtk默认一次滚动一个像素
     this->setVerticalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
 
     // 设置不可选择
-    setSelectionBehavior(QAbstractItemView::SelectItems);
-    setSelectionMode(QAbstractItemView::MultiSelection);
+//    setSelectionBehavior(QAbstractItemView::SelectItems);
+    setSelectionMode(QAbstractItemView::NoSelection);
 
     // 设置无边框
     this->setFrameStyle(QFrame::NoFrame);
@@ -327,11 +327,3 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
 
 //    painter->restore();
 //}
-
-void DetailTreeView::keyPressEvent(QKeyEvent *event)
-{
-    DTableView::keyPressEvent(event);
-    if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Down) {
-        emit clicked(this->currentIndex());
-    }
-}

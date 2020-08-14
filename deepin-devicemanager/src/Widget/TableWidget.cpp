@@ -100,7 +100,7 @@ void TableWidget::paintEvent(QPaintEvent *e)
     this->setFixedHeight(36 * 5 + 4);
     QRect rect  = this->rect();
 
-    qDebug() << this->rect();
+//    qDebug() << this->rect();
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
     int width = 1;

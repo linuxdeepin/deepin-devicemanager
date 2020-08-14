@@ -81,13 +81,8 @@ public:
     bool hasExpendInfo();
 
     /**
-<<<<<<< Updated upstream
      * @brief setLimitRow:设置表格最多显示行
      * @param row：行数，默认13
-=======
-     * @brief setLimitRow
-     * @param row
->>>>>>> Stashed changes
      */
     void setLimitRow(int row = 13);
 
@@ -110,8 +105,6 @@ protected:
     void initUI();
 
     void paintEvent(QPaintEvent *event) override;
-
-    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     DetailViewDelegate        *mp_ItemDelegate;   // Item自定义代理
