@@ -179,6 +179,10 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::slotExportInfo);
         connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
         addWidgets(txtBrowser, device->enable());
+
+        if (device == lstInfo.last()) {
+            m_ListDetailSeperator[lstInfo.size() - 1]->setVisible(false);
+        }
     }
     mp_ScrollAreaLayout->addStretch();
 }
