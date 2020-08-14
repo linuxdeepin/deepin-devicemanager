@@ -228,8 +228,8 @@ void PageDetail::slotEnableDevice(int row, bool enable)
     // 设置 展开收起按钮 可见和可用
     DetailButton *button = m_ListDetailButton.at(row);
     if (button) {
-        button->setVisible(true);
-        button->setEnabled(true);
+        button->setVisible(enable);
+        button->setEnabled(enable);
     }
 }
 

@@ -18,7 +18,7 @@ DeviceAudio::DeviceAudio()
     , m_UniqueKey("")
 {
     initFilterKey();
-    m_Enable = false;
+    //m_Enable = false;
 }
 
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)

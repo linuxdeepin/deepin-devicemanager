@@ -133,12 +133,6 @@ void TableWidget::paintEvent(QPaintEvent *e)
 void TableWidget::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
-//    mp_Menu->addSeparator();
-    if (mp_Table->currentRowEnable()) {
-        mp_Enable->setText(tr("Disable"));
-    } else {
-        mp_Enable->setText(tr("Enable"));
-    }
     mp_Menu->addAction(mp_Enable);
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
@@ -163,8 +157,10 @@ void TableWidget::slotActionEnable()
 
     if (mp_Enable->text() == tr("Enable")) {
         emit enableDevice(mp_Table->currentRow(), true);
+        mp_Enable->setText(tr("Disable"));
     } else {
         emit enableDevice(mp_Table->currentRow(), false);
+        mp_Enable->setText(tr("Enable"));
     }
 }
 
