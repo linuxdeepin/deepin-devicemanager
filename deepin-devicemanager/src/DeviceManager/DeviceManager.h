@@ -577,6 +577,14 @@ public:
      */
     const QMap<QString, QMap<QString, QStringList>> &getDeviceDriverPool();
 
+    /**
+     * @brief addInputInfo : 管理从 cat /proc/bus/input/devices 获取到的信息
+     * @param key
+     * @param mapInfo
+     */
+    void addInputInfo(const QString &key, const QMap<QString, QString> &mapInfo);
+    const QMap<QString, QString> &inputInfo(const QString &key);
+
 protected:
     DeviceManager();
     ~DeviceManager();
@@ -604,16 +612,12 @@ private:
     QList<DeviceBaseInfo *>              m_ListDeviceCdrom;                //<! cdrom设备
 
     QList<QPair<QString, QString>>       m_ListDeviceType;                 //<! 所有的设备类型及其对应的图标
-
     QStringList                                    m_BusIdList;            //<! 所有的设备总线ID
-
     QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;              //<! 所有设备信息获取命令
-
     QMap<QString, QString>                         m_OveriewMap;           //<! 所有的设备与其对应概况信息
-
     QMap<QString, QList<DeviceBaseInfo *>>         m_DeviceClassMap;       //<! 所有的设备类型与其对应设备列表
-
     QMap<QString, QMap<QString, QStringList>>      m_DeviceDriverPool;     //<! 所有的设备驱动与与其对应的设备类型，设备名称列表
+    QMap<QString, QMap<QString, QString> >         m_InputDeviceInfo;
 
     static int m_CurrentXlsRow;       //<! xlsx表格当前行
 };

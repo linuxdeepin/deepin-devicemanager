@@ -1,4 +1,5 @@
 #include "DeviceAudio.h"
+#include "EnableManager.h"
 
 DeviceAudio::DeviceAudio()
     : DeviceBaseInfo()
@@ -132,6 +133,15 @@ const QString &DeviceAudio::name()const
 const QString &DeviceAudio::driver() const
 {
     return m_Driver;
+}
+
+bool DeviceAudio::setEnable(bool enable)
+{
+    bool res = EnableManager::instance()->enableDeviceByInput(m_Name, enable);
+    if (res) {
+        m_Enable = enable;
+    }
+    return res;
 }
 
 const QString &DeviceAudio::vendor()const

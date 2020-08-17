@@ -4,6 +4,7 @@
 #include<QDateTime>
 #include<QMutex>
 #include "EDIDParser.h"
+#include "DeviceManager.h"
 
 CmdTool::CmdTool()
 {
@@ -580,7 +581,18 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, con
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromInput(item, mapInfo, "=");
-        addMapInfo(key, mapInfo);
+        QRegExp re = QRegExp(".*(mouse[0-9]{1,2}).*");
+        if (re.exactMatch(mapInfo["Handlers"])) {
+            QString name = re.cap(1);
+            DeviceManager::instance()->addInputInfo(name, mapInfo);
+        } else {
+            QRegExp rem = QRegExp(".*(event[0-9]{1,2}).*");
+            if (rem.exactMatch(mapInfo["Handlers"])) {
+                QString name = rem.cap(1);
+                DeviceManager::instance()->addInputInfo(name, mapInfo);
+            }
+        }
+        //addMapInfo(key, mapInfo);
     }
 }
 
@@ -711,13 +723,13 @@ void CmdTool::getMapInfoFromInput(const QString &info, QMap<QString, QString> &m
                 QStringList attriList = attri.split(ch);
 
                 if (attriList.size() == 2) {
-                    mapInfo.insert(attriList[0].trimmed(), attriList[1].trimmed());
+                    mapInfo.insert(attriList[0].trimmed(), attriList[1].trimmed().replace("\"", ""));
                 }
             }
         } else {
             QStringList attriList = (*it).split(ch);
             if (attriList.size() == 2) {
-                mapInfo.insert(attriList[0].trimmed(), attriList[1].trimmed());
+                mapInfo.insert(attriList[0].trimmed(), attriList[1].trimmed().replace("\"", ""));
             } else if (attriList.size() == 3) {
                 mapInfo.insert(attriList[0].trimmed(), attriList[1].trimmed() + attriList[2].trimmed());
             }
@@ -1079,7 +1091,6 @@ bool CmdTool::runCmd(const QString &proxy, QString &deviceInfo)
     deviceInfo = process_.readAllStandardOutput();
     int exitCode = process_.exitCode();
     if (cmd.startsWith("pkexec deepin-devicemanager-authenticateProxy") && (exitCode == 127 || exitCode == 126)) {
-        //dError("Run \'" + cmd + "\' failed: Password Error! " + QString::number(exitCode) + "\n");
         return false;
     }
 

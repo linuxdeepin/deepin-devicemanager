@@ -1,4 +1,7 @@
 #include "DeviceInput.h"
+#include "EnableManager.h"
+#include "DeviceManager.h"
+#include <QDebug>
 
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()
@@ -29,7 +32,7 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
         }
     }
 
-    setAttribute(mapInfo, "product", m_Name);
+//    setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "version", m_Version);
@@ -41,6 +44,7 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
     getOtherMapInfo(mapInfo);
+
     return true;
 }
 
@@ -78,6 +82,20 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
+
+    // 获取映射到  cat /proc/bus/input/devices 里面的关键字
+    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
+    if (re.exactMatch(mapInfo["Device File"])) {
+        m_KeysToCatDevices = re.cap(1);
+    } else {
+        QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
+        if (rem.exactMatch(mapInfo["Device File"])) {
+            m_KeysToCatDevices = rem.cap(1);
+        }
+    }
+
+    setInfoFromInput();
+
     getOtherMapInfo(mapInfo);
 }
 
@@ -111,7 +129,27 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
+
+    // 获取映射到  cat /proc/bus/input/devices 里面的关键字
+    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
+    if (re.exactMatch(mapInfo["Device File"])) {
+        m_KeysToCatDevices = re.cap(1);
+    } else {
+        QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
+        if (rem.exactMatch(mapInfo["Device File"])) {
+            m_KeysToCatDevices = rem.cap(1);
+        }
+    }
+
+    setInfoFromInput();
+
     getOtherMapInfo(mapInfo);
+}
+
+void DeviceInput::setInfoFromInput()
+{
+    const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
+    setAttribute(mapInfo, "Name", m_Name, true);
 }
 
 const QString &DeviceInput::name() const
@@ -126,6 +164,8 @@ const QString &DeviceInput::driver() const
 
 QString DeviceInput::subTitle()
 {
+    if (!m_Name.isEmpty())
+        return m_Name;
     return m_Model;
 }
 
@@ -136,6 +176,15 @@ const QString DeviceInput::getOverviewInfo()
                  .arg(m_Model);
 
     return ov;
+}
+
+bool DeviceInput::setEnable(bool enable)
+{
+    bool res = EnableManager::instance()->enableDeviceByInput(m_Name, enable);
+    if (res) {
+        m_Enable = enable;
+    }
+    return res;
 }
 
 void DeviceInput::initFilterKey()
@@ -157,7 +206,6 @@ void DeviceInput::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Interface"), m_Interface);
     addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-
 }
 
 void DeviceInput::loadOtherDeviceInfo()
@@ -184,26 +232,3 @@ void DeviceInput::loadTableData()
     m_TableData.append(m_Model);
 }
 
-void DeviceInput::getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &mapInfo, const QString &info)
-{
-    QMap<QString, QString> mapTemp;
-    QStringList lines = info.split("\n");
-    foreach (const QString &line, lines) {
-        QStringList words = line.split(": ");
-        if (words.size() != 2) {
-            continue;
-        }
-
-        if (words[0] == QString("N") || words[0] == QString("B")) { // Name="AT Translated Set 2 keyboard"
-            QStringList keys = words[1].split("=");
-            if (keys.size() == 2) {
-                mapInfo.insert(keys[0].trimmed(), keys[1].trimmed().replace(QRegExp("^\""), "").replace(QRegExp("\"$"), ""));
-            }
-        } else if (words[0] == QString("H")) { // Handlers=sysrq kbd leds event14
-            QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
-            if (re.exactMatch(words[1])) {
-                mapInfo.insert("HwinfoKey", re.cap(1));
-            }
-        }
-    }
-}

@@ -214,10 +214,10 @@ void PageDetail::showInfoOfNum(int index)
     mp_ScrollArea->verticalScrollBar()->setValue(value);
 }
 
-void PageDetail::slotEnableDevice(int row, bool enable)
+bool PageDetail::enableDevice(int row, bool enable)
 {
     if (m_ListTextBrowser.size() <= row) {
-        return;
+        return false;
     }
 
     // 设置 TextBrowser 可用
@@ -231,6 +231,7 @@ void PageDetail::slotEnableDevice(int row, bool enable)
         button->setVisible(enable);
         button->setEnabled(enable);
     }
+    return true;
 }
 
 void PageDetail::paintEvent(QPaintEvent *e)

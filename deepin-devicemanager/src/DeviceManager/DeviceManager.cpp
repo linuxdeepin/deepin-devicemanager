@@ -982,7 +982,8 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
     }
 
     // 设备名称
-    m_OveriewMap["Overview"] = m_ListDeviceComputer[0]->getOverviewInfo();
+    if (m_ListDeviceComputer.size() > 0)
+        m_OveriewMap["Overview"] = m_ListDeviceComputer[0]->getOverviewInfo();
 
     // 操作系统
     m_OveriewMap["OS"] = dynamic_cast<DeviceComputer *>(m_ListDeviceComputer[0])->getOSInfo();
@@ -1013,9 +1014,17 @@ const QMap<QString, QMap<QString, QStringList> > &DeviceManager::getDeviceDriver
 
         }
     }
-
-    qDebug() << m_DeviceDriverPool;
+//    qDebug() << m_DeviceDriverPool;
     return m_DeviceDriverPool;
+}
+
+void DeviceManager::addInputInfo(const QString &key, const QMap<QString, QString> &mapInfo)
+{
+    m_InputDeviceInfo.insert(key, mapInfo);
+}
+const QMap<QString, QString> &DeviceManager::inputInfo(const QString &key)
+{
+    return m_InputDeviceInfo[key];
 }
 
 

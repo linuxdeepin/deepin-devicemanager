@@ -65,6 +65,13 @@ public:
     int currentRow();
 
     /**
+     * @brief updateCurItemEnable
+     * @param row
+     * @param enable
+     */
+    void updateCurItemEnable(int row, int enable);
+
+    /**
      * @brief clear : 清空数据
      */
     void clear();

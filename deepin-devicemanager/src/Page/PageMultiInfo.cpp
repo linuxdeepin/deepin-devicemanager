@@ -26,7 +26,7 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     connect(mp_Table, &PageTableHeader::exportInfo, this, &PageMultiInfo::slotExportInfo);
     connect(mp_Detail, &PageDetail::refreshInfo, this, &PageMultiInfo::slotRefreshInfo);
     connect(mp_Detail, &PageDetail::exportInfo, this, &PageMultiInfo::slotExportInfo);
-    connect(mp_Table, &PageTableHeader::enableDevice, mp_Detail, &PageDetail::slotEnableDevice);
+    connect(mp_Table, &PageTableHeader::enableDevice, this, &PageMultiInfo::slotEnableDevice);
 }
 
 PageMultiInfo::~PageMultiInfo()
@@ -79,7 +79,14 @@ void PageMultiInfo::slotExportInfo()
 
 void PageMultiInfo::slotEnableDevice(int row, bool enable)
 {
-    emit enableDevice(row, enable);
+    if (!mp_Detail) {
+        return;
+    }
+
+    bool res = mp_Detail->enableDevice(row, enable);
+    if (res) {
+        mp_Table->updateCurItemEnable(row, enable);
+    }
 }
 
 void PageMultiInfo::initWidgets()

@@ -90,8 +90,13 @@ public:
      */
     void showInfoOfNum(int index);
 
-public slots:
-    void slotEnableDevice(int row, bool enable);
+    /**
+     * @brief enableDevice
+     * @param row
+     * @param enable
+     * @return
+     */
+    bool enableDevice(int row, bool enable);
 
 protected:
     void paintEvent(QPaintEvent *e) override;

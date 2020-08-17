@@ -95,6 +95,13 @@ public:
      */
     virtual const QString &driver() const = 0;
 
+    /**
+     * @brief setEnable 设置设备的禁用状态
+     * @param enable 是否禁用
+     * @return 禁用是否成功
+     */
+    virtual bool setEnable(bool enable);
+
 
     /**
      * @brief isValid：判断属性值是否有效
@@ -211,12 +218,6 @@ public:
      * @param xlsx xlsx文件
      */
     void tableHeaderToXlsx(QXlsx::Document &xlsx);
-
-    /**
-     * @brief setEnable 设置设备的禁用状态
-     * @param enable 是否禁用
-     */
-    void setEnable(bool enable);
 
     /**
      * @brief enable 获取设备的禁用状态

@@ -55,7 +55,18 @@ public:
        */
     const QString &name()const override;
 
+    /**
+     * @brief driver
+     * @return
+     */
     const QString &driver()const override;
+
+    /**
+     * @brief setEnable
+     * @param enable
+     * @return
+     */
+    bool setEnable(bool enable) override;
 
     /**
        * @brief vendor:获取制造商属性值

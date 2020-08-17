@@ -46,6 +46,13 @@ public:
      */
     void setColumnAverage();
 
+    /**
+     * @brief updateCurItemEnable
+     * @param row
+     * @param enable
+     */
+    void updateCurItemEnable(int row, int enable);
+
 signals:
     /**
      * @brief itemClicked:点击item发出信号

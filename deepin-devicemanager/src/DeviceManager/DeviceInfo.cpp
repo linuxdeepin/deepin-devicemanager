@@ -369,12 +369,11 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
         boldFont.setFontBold(true);
         xlsx.write(curRow, col + 1, m_TableHeader[col], boldFont);
     }
-
 }
 
-void DeviceBaseInfo::setEnable(bool _enable)
+bool DeviceBaseInfo::setEnable(bool)
 {
-    m_Enable = _enable;
+    return false;
 }
 
 bool DeviceBaseInfo::enable()

@@ -73,6 +73,11 @@ void PageTableHeader::setColumnAverage()
         mp_Table->setColumnAverage();
 }
 
+void PageTableHeader::updateCurItemEnable(int row, int enable)
+{
+    mp_Table->updateCurItemEnable(row, enable);
+}
+
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
     this->setFixedHeight(36 * 5 + 4 + 2);

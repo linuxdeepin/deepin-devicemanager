@@ -92,6 +92,21 @@ int LogTreeView::currentRow()
     return index.row();
 }
 
+void LogTreeView::updateCurItemEnable(int row, int enable)
+{
+    QStandardItem *item = mp_Model->item(row, 0);
+    if (item) {
+        QString str = item->text();
+        if (enable) {
+            str.replace("(" + tr("Disable") + ")", "");
+        } else {
+            str = "(" + tr("Disable") + ")" + str;
+        }
+
+        item->setText(str);
+    }
+}
+
 void LogTreeView::clear()
 {
     if (mp_Model)

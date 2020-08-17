@@ -58,6 +58,13 @@ public:
     void setColumnAverage();
 
     /**
+     * @brief updateCurItemEnable
+     * @param row
+     * @param enable
+     */
+    void updateCurItemEnable(int row, bool enable);
+
+    /**
      * @brief clear : 清空数据
      */
     void clear();

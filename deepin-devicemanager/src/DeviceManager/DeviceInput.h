@@ -75,6 +75,13 @@ public:
      */
     const QString getOverviewInfo() override;
 
+    /**
+     * @brief setEnable : 设置禁用
+     * @param enable : 启用禁用
+     * @return 返回操作是否成功
+     */
+    bool setEnable(bool enable)override;
+
 protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
@@ -97,13 +104,10 @@ protected:
     void loadTableData() override;
 
 private:
-
     /**
-     * @brief getKeyboardMapInfoFromInputDevice:从cat /proc/bus/input/devices获取设备信息
-     * @param mapInfo:解析得到的map
-     * @param info:文件中获取的String
+     * @brief setNameFromInput:从cat /proc/bus/input/devices获取设备信息
      */
-    void getKeyboardMapInfoFromInputDevice(QMap<QString, QString> &mapInfo, const QString &info);
+    void setInfoFromInput();
 
 private:
     QString             m_Name;                         //<! 【名称】
