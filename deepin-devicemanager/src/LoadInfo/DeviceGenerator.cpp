@@ -58,7 +58,7 @@ void DeviceGenerator::generatorComputerDevice()
     } else if (DSysInfo::DeepinPersonal == type) {
         os =  "UOS 20 Home";
     } else if (DSysInfo::DeepinDesktop == type) {
-        os =  "Deepin 20 RC";
+        os =  "Deepin 20";
     }
     device.setOsDescription(os);
 
