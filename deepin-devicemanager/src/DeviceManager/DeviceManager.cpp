@@ -967,7 +967,6 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
     for (; iter != m_DeviceClassMap.end(); ++iter) {
         if (m_OveriewMap.find(iter.key()) == m_OveriewMap.end()) {
             foreach (auto device, iter.value()) {
-                qDebug() << iter.key();
                 QString ov = device->getOverviewInfo();
                 if (ov.isEmpty() == false) {
                     if (m_OveriewMap.find(iter.key()) == m_OveriewMap.end()) {
@@ -1014,7 +1013,6 @@ const QMap<QString, QMap<QString, QStringList> > &DeviceManager::getDeviceDriver
 
         }
     }
-//    qDebug() << m_DeviceDriverPool;
     return m_DeviceDriverPool;
 }
 

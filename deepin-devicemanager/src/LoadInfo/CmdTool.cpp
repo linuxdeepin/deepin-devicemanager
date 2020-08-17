@@ -1025,7 +1025,6 @@ void CmdTool::getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const 
 
 bool CmdTool::getDeviceInfo(const QString &command, QString &deviceInfo, const QString &debugFile)
 {
-    qDebug() << debugFile;
     if (!deviceInfo.isEmpty()) {
         return true;
     }

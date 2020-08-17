@@ -1,5 +1,5 @@
 #include "PageOverview.h"
-#include "DetailTreeView.h"
+#include "PageTableWidget.h"
 #include "DeviceManager.h"
 #include "PageInfoWidget.h"
 #include "LongTextLabel.h"
@@ -23,7 +23,7 @@ PageOverview::PageOverview(DWidget *parent)
     , mp_PicLabel(new DLabel(this))
     , mp_DeviceLabel(new LongTextLabel(this))
     , mp_OSLabel(new LongTextLabel(this))
-    , mp_Overview(new DetailTreeView(this))
+    , mp_Overview(new PageTableWidget(this))
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
     , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
@@ -46,6 +46,8 @@ void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &)
 
 void PageOverview::updateInfo(const QMap<QString, QString> &map)
 {
+    mp_Overview->clear();
+
     int row = map.size();
     mp_Overview->setLimitRow(11);
     mp_Overview->setColumnAndRow(row - 1);
@@ -226,6 +228,7 @@ void PageOverview::initWidgets()
 
     hLayout->addLayout(hLayoutTop);
     hLayout->addSpacing(10);
+
     hLayout->addWidget(mp_Overview);
     hLayout->addStretch();
     setLayout(hLayout);

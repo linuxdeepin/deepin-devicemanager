@@ -1,6 +1,7 @@
 #include "PageSingleInfo.h"
 #include "MacroDefinition.h"
 #include "DeviceInfo.h"
+#include "PageTableWidget.h"
 
 #include <QVBoxLayout>
 #include <QClipboard>
@@ -14,7 +15,7 @@
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
     : PageInfo(parent)
-    , mp_Content(new DetailTreeView(this))
+    , mp_Content(new PageTableWidget(this))
     , mp_Label(new DLabel(this))
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))

@@ -77,7 +77,7 @@ void DeviceWidget::slotExportInfo()
 
 void DeviceWidget::initWidgets()
 {
-    QHBoxLayout *hLayout = new QHBoxLayout(this);
+    QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->setContentsMargins(0, 0, 0, 0);
     hLayout->addWidget(mp_Splitter);
     mp_Splitter->addWidget(mp_ListView);

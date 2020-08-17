@@ -85,11 +85,6 @@ void TableWidget::paintEvent(QPaintEvent *e)
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
-//     获取系统默认的圆角半径
-//    QStyleOptionFrame option;
-//    initStyleOption(&option);
-//    DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-//    int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
     int radius = 8;
 
 //     获取窗口当前的状态,激活，禁用，未激活
@@ -101,11 +96,9 @@ void TableWidget::paintEvent(QPaintEvent *e)
         cg = DPalette::Inactive;
     }
 
-//    this->setFixedHeight(mp_Table->height() + 10);
     this->setFixedHeight(36 * 5 + 4);
     QRect rect  = this->rect();
 
-//    qDebug() << this->rect();
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
     int width = 1;
@@ -120,19 +113,8 @@ void TableWidget::paintEvent(QPaintEvent *e)
     QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
     painter.fillPath(paintPath, bgBrush);
 
-//    QPen pen = painter.pen();
-//    pen.setColor(palette.color(cg, DPalette::TextWarning));
-//    pen.setWidth(1);
-
-//    painter.setPen(pen);
-
-//    QRect rect = mp_Table->geometry();
-//    this->setFixedHeight(rect.height() + 2);
-
-//    painter.drawRect(this->rect());
-//    qDebug() << rect << this->rect();
     painter.restore();
-//    DWidget::paintEvent(e);
+
 }
 
 void TableWidget::slotShowMenu(const QPoint &)

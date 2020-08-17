@@ -7,6 +7,9 @@
 #include "DeviceBios.h"
 #include "TextBrowser.h"
 #include "RichTextDelegate.h"
+#include "PageTableWidget.h"
+
+#include <QTableWidgetItem>
 
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)

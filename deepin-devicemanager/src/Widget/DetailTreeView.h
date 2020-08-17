@@ -34,7 +34,7 @@ DWIDGET_USE_NAMESPACE
 
 class DetailViewDelegate;
 class ButtonDelegate;
-class DetailButton;
+class CmdButtonWidget;
 
 class DetailTreeView: public DTableWidget//DTreeView
 {
@@ -73,6 +73,9 @@ public:
      * @return 重绘矩形的高度
      */
     int setTableHeight(int paintHeight);
+
+    // 界面上最多显示行数
+    int maxRowofWidget();
 
     /**
      * @brief hasExpendInfo:是否由详细信息按钮

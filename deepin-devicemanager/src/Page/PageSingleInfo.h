@@ -28,12 +28,13 @@
 #include <DLabel>
 
 #include "PageInfo.h"
-#include "DetailTreeView.h"
 
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
 using namespace Dtk::Widget;
+
+class PageTableWidget;
 
 class PageSingleInfo : public PageInfo
 {
@@ -103,7 +104,7 @@ protected:
     void initWidgets();
 
 protected:
-    DetailTreeView          *mp_Content;
+    PageTableWidget         *mp_Content;
     DLabel                  *mp_Label;
     QAction                 *mp_Refresh;     //<! 右键刷新
     QAction                 *mp_Export;      //<! 右键导出

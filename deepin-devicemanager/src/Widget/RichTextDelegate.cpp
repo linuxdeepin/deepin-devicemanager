@@ -105,7 +105,7 @@ QWidget *RichTextDelegate::createEditor(QWidget *, const QStyleOptionViewItem &,
 QSize RichTextDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QSize size = QStyledItemDelegate::sizeHint(option, index);
-    size.setHeight(std::max(50, size.height()));
+    size.setHeight(std::max(40, size.height()));
 
     if (index.column()) {
         size.setWidth(std::max(150, size.width()));
@@ -149,7 +149,6 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
         pair.second = keyValue[1];
 
         // 添加一行
-//        qDebug() << pair.first << ":" << strLenth(pair.first);
         addRow(doc, table, pair);
     }
     // 添加该表格到doc

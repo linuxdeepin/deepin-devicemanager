@@ -22,7 +22,7 @@ PageListView::PageListView(DWidget *parent)
     hLayout->setContentsMargins(0, 0, 0, 0);
     setLayout(hLayout);
 
-    this->setMinimumWidth(152);
+    this->setFixedWidth(152);
     // 初始化右键菜单
     mp_ListView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(mp_ListView, SIGNAL(customContextMenuRequested(const QPoint &)),
@@ -83,13 +83,11 @@ void PageListView::slotShowMenu(const QPoint &)
 
 void PageListView::slotActionEnable()
 {
-    qDebug() << mp_ListView->currentIndex().row();
     mp_ListView->setCurItemEnable(true);
 }
 
 void PageListView::slotActionDisable()
 {
-    qDebug() << mp_ListView->currentIndex().row();
     mp_ListView->setCurItemEnable(false);
 }
 

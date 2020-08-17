@@ -2,6 +2,9 @@
 #include "PageDetail.h"
 #include "DetailViewDelegate.h"
 #include "MacroDefinition.h"
+#include "PageInfo.h"
+#include "PageTableWidget.h"
+#include "CmdButtonWidget.h"
 
 #include <QHeaderView>
 #include <QPainter>
@@ -13,8 +16,6 @@
 #include <DApplicationHelper>
 #include <DStyle>
 #include <DFontSizeManager>
-
-#include "PageInfo.h"
 
 DetailTreeView::DetailTreeView(DWidget *parent)
     : DTableWidget(parent)
@@ -66,6 +67,13 @@ void DetailTreeView::clear()
     // 删除表格行列
     setRowCount(0);
     setColumnCount(0);
+
+    if (mp_CommandBtn != nullptr) {
+        delete mp_CommandBtn;
+        mp_CommandBtn = nullptr;
+    }
+
+    m_IsExpand = false;
 }
 
 void DetailTreeView::setCommanLinkButton(int row)
@@ -87,7 +95,7 @@ void DetailTreeView::setCommanLinkButton(int row)
     pHBoxLayout->addWidget(mp_CommandBtn);
     pHBoxLayout->addStretch();
 
-    QVBoxLayout *pVBoxLayout = new QVBoxLayout(this);
+    QVBoxLayout *pVBoxLayout = new QVBoxLayout();
     pVBoxLayout->addLayout(pHBoxLayout);
 
     DWidget *btnwidget = new DWidget();
@@ -95,7 +103,6 @@ void DetailTreeView::setCommanLinkButton(int row)
 
     // 将btnwidget填充到表格中，并隐藏
     setCellWidget(row - 1, 1, btnwidget);
-//    hideRow(row - 1);
 
     connect(mp_CommandBtn, &DCommandLinkButton::clicked, this, &DetailTreeView::expandCommandLinkClicked);
 }
@@ -103,14 +110,15 @@ void DetailTreeView::setCommanLinkButton(int row)
 int DetailTreeView::setTableHeight(int paintHeight)
 {
     // 父窗口
-    PageInfo *p = dynamic_cast<PageInfo *>(this->parent());
+    PageTableWidget *p = dynamic_cast<PageTableWidget *>(this->parent());
 
     // 父窗口可显示的最大表格行数
     int maxRow = 0;
-    if (p->isOverview()) {
-        maxRow = p->height() / ROW_HEIGHT - 4;
+    if (p->isBaseBoard()) {
+        PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
+        maxRow = par->height() / ROW_HEIGHT - 1;
     } else {
-        maxRow = p->height() / ROW_HEIGHT - 2;
+        maxRow = p->height() / ROW_HEIGHT;
     }
 
     // 主板界面的表格高度
@@ -127,7 +135,6 @@ int DetailTreeView::setTableHeight(int paintHeight)
 
     }
 
-
     // 信息行 <= m_LimitRow + 1 不影响表格大小
     if (rowCount() <= m_LimitRow + 1) {
         return paintHeight;
@@ -143,6 +150,12 @@ int DetailTreeView::setTableHeight(int paintHeight)
             return this->height();
         }
     }
+
+}
+
+int DetailTreeView::maxRowofWidget()
+{
+    return 0;
 }
 
 bool DetailTreeView::hasExpendInfo()
@@ -218,7 +231,7 @@ void DetailTreeView::initUI()
 
     // 隐藏网格线
     this->setShowGrid(false);
-    this->viewport()->setAutoFillBackground(false);
+    this->viewport()->setAutoFillBackground(true);
 
     // 设置各行变色
     setAlternatingRowColors(true);
@@ -238,17 +251,12 @@ void DetailTreeView::initUI()
 
     // 设置section行宽
     this->horizontalHeader()->setDefaultSectionSize(180);
+
 }
 
 void DetailTreeView::paintEvent(QPaintEvent *event)
 {
     DTableView::paintEvent(event);
-
-    QPainter painter(viewport());
-    painter.save();
-    painter.setRenderHints(QPainter::Antialiasing, true);
-//    painter.setOpacity(1);
-//    painter.setClipping(true);
 
     QWidget *wnd = DApplication::activeWindow();
     DPalette::ColorGroup cg;
@@ -261,29 +269,57 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
     auto *dAppHelper = DApplicationHelper::instance();
     auto palette = dAppHelper->applicationPalette();
 
-    QStyleOptionFrame option;
-    initStyleOption(&option);
-
     QRect rect = viewport()->rect();
     int pHeight = setTableHeight(rect.height());
 
     // 窗口大小发生变化时，需重新设置表格大小
     rect.setHeight(pHeight);
+    this->rect().setHeight(pHeight);
 
-    DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
 
-    // 圆角矩形路径
-    QPainterPath clipPath;
-    clipPath.addRoundedRect(rect, 10, 10);
+    QPainter painter(this->viewport());
+    painter.save();
 
-    // 绘制圆角矩形
-    QPen pen(palette.color(cg, DPalette::FrameShadowBorder));
-    pen.setWidth(LINE_WIDTH);
+    QPen pen = painter.pen();
+    pen.setWidth(1);
+    pen.setColor(palette.color(cg, DPalette::FrameShadowBorder));
+
     painter.setPen(pen);
-    painter.drawPath(clipPath);
-    painter.restore();
 
+    QLine line(rect.topLeft().x() + 179, rect.topLeft().y(), rect.bottomLeft().x() + 179, rect.bottomLeft().y());
+
+    // 有展开信息，且未展开，button行不绘制竖线
+    if (this->hasExpendInfo() && !m_IsExpand) {
+        line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - 40));
+
+        // 绘制横线
+        QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - 39, rect.bottomRight().x(), rect.bottomRight().y() - 39);
+        painter.drawLine(hline);
+
+    } else if (hasExpendInfo() && m_IsExpand) {
+
+        QTableWidgetItem *it = this->itemAt(QPoint(this->rect().bottomLeft().x(), this->rect().bottomLeft().y()));
+        if (it == nullptr) {
+            // 由于展开按钮行是DWidget无法获取item，所以，再在这种情况下，展开按钮行开始出现再可视区域
+            for (int i = 1; i <= 40; ++i) {
+
+                // 获取上一行item的下边距离表格边框的像素距离
+                QTableWidgetItem *lastItem = this->itemAt(QPoint(this->rect().bottomLeft().x(), this->rect().bottomLeft().y() - i));
+                if (lastItem != nullptr) {
+                    // 竖线再 button行不显示
+                    line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - i));
+
+                    // 绘制横线
+                    QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - i + 1, rect.bottomRight().x(), rect.bottomRight().y() - i + 1);
+                    painter.drawLine(hline);
+                }
+            }
+        }
+    }
+
+    painter.drawLine(line);
+
+    painter.restore();
 }
 
 //void DetailTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const
