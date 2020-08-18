@@ -518,7 +518,7 @@ void DeviceManager::setCameraInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceImage.begin();
     for (; it != m_ListDeviceImage.end(); ++it) {
-        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
+        DeviceImage *device = dynamic_cast<DeviceImage *>(*it);
         if (!device) continue;
         device->setInfoFromLshw(mapInfo);
     }

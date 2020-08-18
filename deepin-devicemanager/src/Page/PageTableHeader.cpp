@@ -56,7 +56,7 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
 
     // 设置表格的内容
     int row = lst.size();
-    int column = lst[0].size();
+    int column = lst[0].size() - 1;
     for (int i = 0; i < row - 1; i++) {
         for (int j = 0; j < column; j++) {
             DStandardItem *item = new DStandardItem(lst[i + 1][j]);

@@ -119,11 +119,6 @@ void PageSingleInfo::slotActionCopy()
 {
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Content->toString());
-//    DMessageManager::instance()->sendMessage(mp_Content, QIcon::fromTheme("emblem-checked"), tr("Successfully copied device information"));
-//    DUtil::DNotifySender sender(tr("Successfully copied device information"));
-//    sender.appIcon("deepin-devicemanager");
-//    sender.timeOut(2000);
-    //    sender.call();
 }
 
 void PageSingleInfo::slotActionEnable()

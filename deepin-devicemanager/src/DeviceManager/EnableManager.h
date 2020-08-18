@@ -21,8 +21,39 @@ public:
      */
     bool enableDeviceByInput(const QString &name, bool enable);
 
+    /**
+     * @brief isDeviceEnable : 用来启用和禁用设备
+     * @param name
+     * @return
+     */
+    bool isDeviceEnable(const QString &name);
+
+    /**
+     * @brief enableDeviceByDriver
+     * @param driver
+     * @return
+     */
+    bool enableDeviceByDriver(bool enable, const QString &driver);
+
+    /**
+     * @brief isDeviceEnableByDriver
+     * @param name
+     * @return
+     */
+    bool isDeviceEnableByDriver(const QString &driver);
+
 protected:
     EnableManager();
+
+private:
+    /**
+     * @brief:命令的执行
+     */
+    QString getPKStr(const QString &dtStr, const QString &dtInt);
+    void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr);
+
+    QString getDriverPath(const QString &driver);
+
 
 private:
     static EnableManager *s_Instance;

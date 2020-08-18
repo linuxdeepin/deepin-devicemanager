@@ -24,9 +24,6 @@
 
 #include <QMap>
 #include <QString>
-//#include "singletondef.h"
-//#include "deviceattributedefine.h"
-//#include"DeviceManager/DeviceInfo.h"
 #include <QObject>
 #include <QSet>
 

@@ -41,11 +41,6 @@ public:
     void updateInfo(const QList<DeviceBaseInfo *> &lst)override;
 
     /**
-     * @brief loadDeviceInfo
-     * @param lst
-     */
-
-    /**
      * @brief loadDeviceInfo:加载设备信息
      * @param lst:设备信息列表
      * @param limiteNum:界面表格限制显示条数

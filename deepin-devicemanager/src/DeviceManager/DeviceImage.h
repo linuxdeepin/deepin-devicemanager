@@ -116,6 +116,19 @@ public:
      */
     const QString getOverviewInfo() override;
 
+    /**
+     * @brief setEnable 设置设备的禁用状态
+     * @param enable 是否禁用
+     * @return 禁用是否成功
+     */
+    bool setEnable(bool enable);
+
+    /**
+     * @brief enable : 判断当前是否是禁用状态
+     * @return
+     */
+    bool enable();
+
 protected:
 
     /**
@@ -149,6 +162,7 @@ private:
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
     QString             m_KeyToLshw;                    //<!
+    QString             m_KeysToCatDevices;             //<! 【用来标识唯一键盘】
 };
 
 #endif // DEVICEIMAGE_H

@@ -63,7 +63,7 @@ public:
      * @brief getTableHeader : 用于存放表格的头部
      * @return : 用于存放表格的头部
      */
-    const QStringList &getTableHeader();
+    QStringList &getTableHeader();
 
     /**
      * @brief getTableData ：获取表头数据
@@ -102,6 +102,18 @@ public:
      */
     virtual bool setEnable(bool enable);
 
+
+    /**
+     * @brief enable 获取设备的禁用状态
+     * @return
+     */
+    virtual bool enable();
+
+    /**
+     * @brief canEnable : 该设备是否可以禁用
+     * @return
+     */
+    bool canEnable();
 
     /**
      * @brief isValid：判断属性值是否有效
@@ -219,12 +231,6 @@ public:
      */
     void tableHeaderToXlsx(QXlsx::Document &xlsx);
 
-    /**
-     * @brief enable 获取设备的禁用状态
-     * @return
-     */
-    bool enable();
-
 
 protected:
     /**
@@ -299,6 +305,7 @@ protected:
     QStringList                    m_TableData;     //<! 用于存放表格的内容
     QSet<QString>                  m_FilterKey;     //<! 用于避免添加重复信息
     bool                           m_Enable;        //<! 设备是否是启用状态
+    bool                           m_CanEnable;     //<! 设备是否可以启用禁用
 
 private:
     QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息

@@ -19,6 +19,7 @@ DeviceInput::DeviceInput()
     , m_KeyToLshw("")
 {
     initFilterKey();
+    m_CanEnable = true;
 }
 
 bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
@@ -95,7 +96,6 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     }
 
     setInfoFromInput();
-
     getOtherMapInfo(mapInfo);
 }
 
@@ -150,6 +150,7 @@ void DeviceInput::setInfoFromInput()
 {
     const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
     setAttribute(mapInfo, "Name", m_Name, true);
+    m_Enable = EnableManager::instance()->isDeviceEnable(m_Name);
 }
 
 const QString &DeviceInput::name() const

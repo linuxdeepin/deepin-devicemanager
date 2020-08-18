@@ -1,4 +1,6 @@
 #include "DeviceImage.h"
+#include "DeviceManager.h"
+#include "EnableManager.h"
 
 DeviceImage::DeviceImage()
     : DeviceBaseInfo()
@@ -12,7 +14,7 @@ DeviceImage::DeviceImage()
     , m_MaximumPower("")
     , m_Speed("")
 {
-
+    m_CanEnable = true;
 }
 
 void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -115,6 +117,18 @@ const QString DeviceImage::getOverviewInfo()
                  .arg(m_Model);
 
     return ov;
+}
+
+bool DeviceImage::setEnable(bool enable)
+{
+    bool res = EnableManager::instance()->enableDeviceByDriver(enable, m_Driver);
+    return res;
+}
+
+bool DeviceImage::enable()
+{
+    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+    return m_Enable;
 }
 
 void DeviceImage::initFilterKey()
