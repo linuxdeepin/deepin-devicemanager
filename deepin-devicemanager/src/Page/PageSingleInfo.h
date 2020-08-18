@@ -120,10 +120,11 @@ protected:
     QAction                 *mp_Refresh;     //<! 右键刷新
     QAction                 *mp_Export;      //<! 右键导出
     QAction                 *mp_Copy;        //<! 拷贝
-    QAction                 *mp_Enable;     //<! 启用/禁用
+    QAction                 *mp_Enable;      //<! 启用/禁用
     QMenu                   *mp_Menu;        //<! 右键菜单
 
-    DeviceBaseInfo          *mp_Device;
+    DeviceBaseInfo          *mp_Device;      //<! 设备
+
 
 };
 

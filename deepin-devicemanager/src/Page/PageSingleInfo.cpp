@@ -106,13 +106,15 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
 
-    if (mp_Content->isCurDeviceEnable()) {
-        mp_Enable->setText(tr("Disable"));
-    } else {
-        mp_Enable->setText(tr("Enable"));
+    if (mp_Device->canEnable()) {
+        if (mp_Content->isCurDeviceEnable()) {
+            mp_Enable->setText(tr("Disable"));
+        } else {
+            mp_Enable->setText(tr("Enable"));
+        }
+        mp_Menu->addAction(mp_Enable);
     }
 
-    mp_Menu->addAction(mp_Enable);
     mp_Menu->addSeparator();
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
