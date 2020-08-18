@@ -65,6 +65,18 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     baseInfoMap = baseInfoMap + otherInfoMap;
 
     loadDeviceInfo(baseInfoMap);
+
+    if (!lst[0]->enable()) {
+        emit enableDevice();
+
+        mp_Enable->setText(tr("Enable"));
+        mp_Copy->setEnabled(false);
+        mp_Export->setEnabled(false);
+        mp_Refresh->setEnabled(false);
+
+
+        mp_Device->setEnable(false);
+    }
 }
 
 void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
