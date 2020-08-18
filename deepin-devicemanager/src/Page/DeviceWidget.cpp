@@ -21,6 +21,9 @@ DeviceWidget::DeviceWidget(QWidget *parent)
     connect(mp_ListView, &PageListView::itemClicked, this, &DeviceWidget::slotListViewWidgetItemClicked);
     connect(mp_PageInfo, &PageInfoWidget::refreshInfo, this, &DeviceWidget::slotRefreshInfo);
     connect(mp_PageInfo, &PageInfoWidget::exportInfo, this, &DeviceWidget::slotExportInfo);
+
+    connect(mp_ListView, &PageListView::refreshActionTrigger, this, &DeviceWidget::slotRefreshInfo);
+    connect(mp_ListView, &PageListView::exportActionTrigger, this, &DeviceWidget::slotExportInfo);
 }
 
 DeviceWidget::~DeviceWidget()

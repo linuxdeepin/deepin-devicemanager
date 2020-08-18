@@ -77,6 +77,11 @@ signals:
      */
     void exportInfo();
 
+    /**
+     * @brief EnableDevice:启用禁用设备
+     */
+    void enableDevice();
+
 protected slots:
     /**
      * @brief slotShowMenu:鼠标右键菜单槽函数
@@ -94,9 +99,15 @@ protected slots:
     void slotActionExport();
 
     /**
-     * @brief slotActionCopy
+     * @brief slotActionCopy:右键菜单拷贝信息
      */
     void slotActionCopy();
+
+    /**
+     * @brief slotActionEnable:右键菜单禁用启用
+     */
+    void slotActionEnable();
+
 protected:
     /**
      * @brief initWidgets : 初始化控件布局
@@ -109,7 +120,11 @@ protected:
     QAction                 *mp_Refresh;     //<! 右键刷新
     QAction                 *mp_Export;      //<! 右键导出
     QAction                 *mp_Copy;        //<! 拷贝
+    QAction                 *mp_Enable;     //<! 启用/禁用
     QMenu                   *mp_Menu;        //<! 右键菜单
+
+    DeviceBaseInfo          *mp_Device;
+
 };
 
 #endif // PAGESINGLEINFO_H

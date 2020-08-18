@@ -13,6 +13,8 @@ class RichTextDelegate;
 
 class PageTableWidget : public DWidget
 {
+    Q_OBJECT
+
 public:
     PageTableWidget(DWidget *parent = nullptr);
 
@@ -44,6 +46,25 @@ public:
     void setRowHeight(int row, int height);
 
     void setItemDelegateForRow(int row, RichTextDelegate *itemDelegate);
+
+    /**
+     * @brief isCurDeviceEnable:当前设备是否启用
+     * @return true:启用，false:禁用
+     */
+    bool isCurDeviceEnable();
+
+    /**
+     * @brief setCurDeviceState:设置当前设备状态
+     * @param state true:启用;false:禁用
+     */
+    void setCurDeviceState(bool state);
+signals:
+    void enableDeviceSignal();
+
+public slots:
+    void enableDevice();
+
+    void changeSize();
 
 protected:
     void paintEvent(QPaintEvent *event) override;

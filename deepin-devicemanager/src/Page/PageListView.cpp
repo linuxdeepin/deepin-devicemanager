@@ -11,13 +11,13 @@
 PageListView::PageListView(DWidget *parent)
     : DWidget(parent)
     , mp_ListView(new DeviceListView(this))
-    , mp_Enable(new QAction(tr("Enable"), this))
-    , mp_Disable(new QAction(tr("Disable"), this))
+    , mp_Refresh(new QAction(tr("Refresh"), this))
+    , mp_Export(new QAction(tr("Export"), this))
     , mp_Menu(new QMenu(this))
     , m_CurType(tr("Overview"))
 {
     //初始化界面
-    QHBoxLayout *hLayout = new QHBoxLayout(this);
+    QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->addWidget(mp_ListView);
     hLayout->setContentsMargins(0, 0, 0, 0);
     setLayout(hLayout);
@@ -27,8 +27,8 @@ PageListView::PageListView(DWidget *parent)
     mp_ListView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(mp_ListView, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(slotShowMenu(const QPoint &)));
-    connect(mp_Enable, &QAction::triggered, this, &PageListView::slotActionEnable);
-    connect(mp_Disable, &QAction::triggered, this, &PageListView::slotActionDisable);
+    connect(mp_Refresh, &QAction::triggered, this, &PageListView::slotActionRefresh);
+    connect(mp_Export, &QAction::triggered, this, &PageListView::slotActionExport);
 
     // 连接item点击事件
     connect(mp_ListView, &DListView::clicked, this, &PageListView::slotListViewItemClicked);
@@ -72,23 +72,21 @@ void PageListView::paintEvent(QPaintEvent *event)
 void PageListView::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
-    bool enable = mp_ListView->curItemEnable();
-    if (enable) {
-        mp_Menu->addAction(mp_Disable);
-    } else {
-        mp_Menu->addAction(mp_Enable);
-    }
+
+    mp_Menu->addAction(mp_Export);
+    mp_Menu->addAction(mp_Refresh);
+
     mp_Menu->exec(QCursor::pos());
 }
 
-void PageListView::slotActionEnable()
+void PageListView::slotActionRefresh()
 {
-    mp_ListView->setCurItemEnable(true);
+    emit refreshActionTrigger();
 }
 
-void PageListView::slotActionDisable()
+void PageListView::slotActionExport()
 {
-    mp_ListView->setCurItemEnable(false);
+    emit exportActionTrigger();
 }
 
 void PageListView::slotListViewItemClicked(const QModelIndex &index)

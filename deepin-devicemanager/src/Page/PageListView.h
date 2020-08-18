@@ -50,6 +50,10 @@ signals:
      */
     void itemClicked(const QString &txt);
 
+    void refreshActionTrigger();
+
+    void exportActionTrigger();
+
 private slots:
     /**
      * @brief slotShowMenu:鼠标右键菜单槽函数
@@ -60,12 +64,12 @@ private slots:
     /**
      * @brief slotActionEnable:右键启用按钮槽函数
      */
-    void slotActionEnable();
+    void slotActionRefresh();
 
     /**
      * @brief slotActionDisable:右键禁用按钮槽函数
      */
-    void slotActionDisable();
+    void slotActionExport();
 
     /**
      * @brief slotListViewItemClicked:ListView Item 点击槽函数
@@ -75,8 +79,8 @@ private slots:
 
 private:
     DeviceListView            *mp_ListView;
-    QAction                   *mp_Enable;
-    QAction                   *mp_Disable;
+    QAction                   *mp_Refresh;
+    QAction                   *mp_Export;
     QMenu                     *mp_Menu;
     QString                   m_CurType;        // 当前显示的设备类型
 };

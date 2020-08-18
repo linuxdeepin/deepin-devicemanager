@@ -102,6 +102,19 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QFontMetrics fm(fo);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
+    if (dynamic_cast<DetailTreeView *>(this->parent())->isCurDeviceEnable()) {
+        if (index.row() == 0 && index.column() == 1) {
+            text = text.remove("(" + tr("Disable") + ")");
+        }
+    } else {
+        if (index.row() == 0 && index.column() == 1) {
+            text = "(" + tr("Disable") + ")" + text;
+            QPen pen = painter->pen();
+            pen.setColor(QColor("#FF5736"));
+            painter->setPen(pen);
+        }
+    }
+
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
 
 

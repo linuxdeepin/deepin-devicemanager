@@ -90,16 +90,36 @@ public:
     void setLimitRow(int row = 13);
 
     /**
-     * @brief toString
+     * @brief toString:
      * @return
      */
     QString toString();
+
+    /**
+     * @brief isCurDeviceEnable:当前设备是否启用
+     * @return true:启用，false:禁用
+     */
+    bool isCurDeviceEnable();
+
+    /**
+     * @brief setCurDeviceState:设置当前设备状态
+     * @param state true:启用;false:禁用
+     */
+    void setCurDeviceState(bool state);
+
+signals:
+    void heightChange();
 
 public slots:
     /**
      * @brief expandCommandLinkClicked:展开button点击槽函数
      */
     void expandCommandLinkClicked();
+
+    /**
+     * @brief enableDevice
+     */
+    void enableDevice();
 
 protected:
     /**
@@ -109,11 +129,15 @@ protected:
 
     void paintEvent(QPaintEvent *event) override;
 
+    void resizeEvent(QResizeEvent *event) override;
+
 private:
     DetailViewDelegate        *mp_ItemDelegate;   // Item自定义代理
     DCommandLinkButton        *mp_CommandBtn;     // 展开命令Button
     int                       m_LimitRow;         // 正常状态下，表格显示的行数
     bool                      m_IsExpand;         // 是否展开
+
+    bool                      m_IsEnable;         // 是否启用
 };
 
 #endif // DETAILTREEVIEW_H

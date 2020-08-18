@@ -23,6 +23,7 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     , mp_CommandBtn(nullptr)
     , m_LimitRow(13)
     , m_IsExpand(false)
+    , m_IsEnable(true)
 {
     // 初始化界面
     initUI();
@@ -109,6 +110,11 @@ void DetailTreeView::setCommanLinkButton(int row)
 
 int DetailTreeView::setTableHeight(int paintHeight)
 {
+    if (!m_IsEnable) {
+        this->setFixedHeight(40);
+        return 40;
+    }
+
     // 父窗口
     PageTableWidget *p = dynamic_cast<PageTableWidget *>(this->parent());
 
@@ -118,7 +124,8 @@ int DetailTreeView::setTableHeight(int paintHeight)
         PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
         maxRow = par->height() / ROW_HEIGHT - 1;
     } else {
-        maxRow = p->height() / ROW_HEIGHT;
+        PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
+        maxRow = par->height() / ROW_HEIGHT - 1;
     }
 
     // 主板界面的表格高度
@@ -137,7 +144,8 @@ int DetailTreeView::setTableHeight(int paintHeight)
 
     // 信息行 <= m_LimitRow + 1 不影响表格大小
     if (rowCount() <= m_LimitRow + 1) {
-        return paintHeight;
+        this->setFixedHeight((rowCount() - 1)*ROW_HEIGHT);
+        return (rowCount() - 1) * ROW_HEIGHT;
     } else {
         // 未展开,窗口高度始终等于ROW_HEIGHT * (m_LimitRow+1)
         if (m_IsExpand == false) {
@@ -192,6 +200,16 @@ QString DetailTreeView::toString()
     return str;
 }
 
+bool DetailTreeView::isCurDeviceEnable()
+{
+    return m_IsEnable;
+}
+
+void DetailTreeView::setCurDeviceState(bool state)
+{
+    m_IsEnable = state;
+}
+
 void DetailTreeView::expandCommandLinkClicked()
 {
     // 当前已展开详细信息
@@ -207,6 +225,46 @@ void DetailTreeView::expandCommandLinkClicked()
         for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
             showRow(i);
         }
+    }
+}
+
+void DetailTreeView::enableDevice()
+{
+    if (m_IsEnable) {
+        // 禁用设备
+        this->setCurDeviceState(false);
+
+        for (int i = 1; i < this->rowCount(); ++i) {
+            this->hideRow(i);
+        }
+
+        this->setTableHeight(40);
+    } else {
+        // 启用设备
+        this->setCurDeviceState(true);
+        this->setTableHeight(40);
+
+        if (m_IsExpand) {
+            for (int i = 1; i < this->rowCount(); ++i) {
+                this->showRow(i);
+            }
+        }
+
+        if (!m_IsExpand && hasExpendInfo()) {
+            for (int i = 1; i < this->m_LimitRow; ++i) {
+                this->showRow(i);
+            }
+
+            this->showRow(this->rowCount() - 1);
+        }
+
+        if (!hasExpendInfo()) {
+            for (int i = 1; i < this->rowCount() - 1; ++i) {
+                this->showRow(i);
+
+            }
+        }
+
     }
 }
 
@@ -273,9 +331,8 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
     int pHeight = setTableHeight(rect.height());
 
     // 窗口大小发生变化时，需重新设置表格大小
-    rect.setHeight(pHeight);
-    this->rect().setHeight(pHeight);
-
+    this->setFixedHeight(pHeight);
+    qDebug() << this->rect() << pHeight;
 
     QPainter painter(this->viewport());
     painter.save();
@@ -293,8 +350,11 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
         line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - 40));
 
         // 绘制横线
-        QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - 39, rect.bottomRight().x(), rect.bottomRight().y() - 39);
-        painter.drawLine(hline);
+
+        if (m_IsEnable) {
+            QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - 39, rect.bottomRight().x(), rect.bottomRight().y() - 39);
+            painter.drawLine(hline);
+        }
 
     } else if (hasExpendInfo() && m_IsExpand) {
 
@@ -310,8 +370,12 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
                     line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - i));
 
                     // 绘制横线
-                    QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - i + 1, rect.bottomRight().x(), rect.bottomRight().y() - i + 1);
-                    painter.drawLine(hline);
+
+                    if (m_IsEnable) {
+                        QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - i + 1, rect.bottomRight().x(), rect.bottomRight().y() - i + 1);
+                        painter.drawLine(hline);
+                    }
+
                 }
             }
         }
@@ -320,6 +384,12 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
     painter.drawLine(line);
 
     painter.restore();
+}
+
+void DetailTreeView::resizeEvent(QResizeEvent *event)
+{
+    DTableWidget::resizeEvent(event);
+    emit heightChange();
 }
 
 //void DetailTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const

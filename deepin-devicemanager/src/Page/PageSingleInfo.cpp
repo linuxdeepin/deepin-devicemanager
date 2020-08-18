@@ -20,7 +20,9 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
     , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
+    , mp_Enable(new QAction(QIcon::fromTheme("edit-copy"), tr("Enabled"), this))
     , mp_Menu(new DMenu(this))
+    , mp_Device(nullptr)
 {
     initWidgets();
 
@@ -29,6 +31,8 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     connect(mp_Refresh, &QAction::triggered, this, &PageSingleInfo::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::slotActionExport);
     connect(mp_Copy, &QAction::triggered, this, &PageSingleInfo::slotActionCopy);
+    connect(mp_Enable, &QAction::triggered, this, &PageSingleInfo::slotActionEnable);
+    connect(this, &PageSingleInfo::enableDevice, mp_Content, &PageTableWidget::enableDevice);
 }
 
 PageSingleInfo::~PageSingleInfo()
@@ -52,6 +56,8 @@ void PageSingleInfo::setLabel(const QString &itemstr)
 
 void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
+    mp_Device = lst[0];
+
     clearContent();
 
     QList<QPair<QString, QString>> baseInfoMap = lst[0]->getBaseAttribs();
@@ -87,6 +93,14 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
+
+    if (mp_Content->isCurDeviceEnable()) {
+        mp_Enable->setText(tr("Disable"));
+    } else {
+        mp_Enable->setText(tr("Enable"));
+    }
+
+    mp_Menu->addAction(mp_Enable);
     mp_Menu->addSeparator();
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
@@ -109,7 +123,31 @@ void PageSingleInfo::slotActionCopy()
 //    DUtil::DNotifySender sender(tr("Successfully copied device information"));
 //    sender.appIcon("deepin-devicemanager");
 //    sender.timeOut(2000);
-//    sender.call();
+    //    sender.call();
+}
+
+void PageSingleInfo::slotActionEnable()
+{
+    if (mp_Content->isCurDeviceEnable()) {
+
+        // 当前设备是可用状态
+        mp_Enable->setText(tr("Enable"));
+        mp_Copy->setEnabled(false);
+        mp_Export->setEnabled(false);
+        mp_Refresh->setEnabled(false);
+
+
+        mp_Device->setEnable(false);
+    } else {
+        mp_Enable->setText(tr("Disable"));
+        mp_Copy->setEnabled(true);
+        mp_Export->setEnabled(true);
+        mp_Refresh->setEnabled(true);
+
+        mp_Device->setEnable(true);
+    }
+
+    emit enableDevice();
 }
 
 void PageSingleInfo::initWidgets()

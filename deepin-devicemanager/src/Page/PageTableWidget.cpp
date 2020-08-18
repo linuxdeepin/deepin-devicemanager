@@ -17,6 +17,9 @@ PageTableWidget::PageTableWidget(DWidget *parent)
     , mp_Table(new DetailTreeView(parent))
 {
     initUI();
+
+    connect(this, &PageTableWidget::enableDeviceSignal, mp_Table, &DetailTreeView::enableDevice);
+    connect(mp_Table, &DetailTreeView::heightChange, this, &PageTableWidget::changeSize);
 }
 
 void PageTableWidget::setLimitRow(int row)
@@ -66,9 +69,29 @@ void PageTableWidget::setItemDelegateForRow(int row, RichTextDelegate *itemDeleg
     mp_Table->setItemDelegateForRow(row, itemDelegate);
 }
 
+bool PageTableWidget::isCurDeviceEnable()
+{
+    return mp_Table->isCurDeviceEnable();
+}
+
+void PageTableWidget::setCurDeviceState(bool state)
+{
+    mp_Table->setCurDeviceState(state);
+}
+
+void PageTableWidget::enableDevice()
+{
+    emit enableDeviceSignal();
+}
+
+void PageTableWidget::changeSize()
+{
+    setFixedHeight(mp_Table->height() + 4);
+}
+
 void PageTableWidget::paintEvent(QPaintEvent *event)
 {
-    DWidget::paintEvent(event);
+//    DWidget::paintEvent(event);
 
 
     QPainter painter(this);
@@ -92,8 +115,9 @@ void PageTableWidget::paintEvent(QPaintEvent *event)
         cg = DPalette::Inactive;
     }
 
+    this->setFixedHeight(mp_Table->height() + 4);
     QRect rect  = this->rect();
-
+    qDebug() << mp_Table->rect() << this->rect();
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
     int width = 1;
@@ -109,14 +133,13 @@ void PageTableWidget::paintEvent(QPaintEvent *event)
     painter.fillPath(paintPath, bgBrush);
 
     painter.restore();
-
+    DWidget::paintEvent(event);
 }
 
 void PageTableWidget::initUI()
 {
-    QHBoxLayout *whLayout = new QHBoxLayout();
+    QVBoxLayout *whLayout = new QVBoxLayout();
     whLayout->setContentsMargins(2, 2, 2, 2);
     whLayout->addWidget(mp_Table);
-
     this->setLayout(whLayout);
 }
