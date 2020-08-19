@@ -181,7 +181,7 @@ const QString DeviceInput::getOverviewInfo()
 
 bool DeviceInput::setEnable(bool enable)
 {
-    bool res = EnableManager::instance()->enableDeviceByInput(m_Name, enable);
+    bool res = EnableManager::instance()->enableDeviceByInput(m_Name, enable, m_Index);
     if (res) {
         m_Enable = enable;
     }
@@ -223,7 +223,7 @@ void DeviceInput::loadOtherDeviceInfo()
 void DeviceInput::loadTableData()
 {
     QString name;
-    if (!m_Enable) {
+    if (!enable()) {
         name = "(" + tr("Disable") + ") " + m_Name;
     } else {
         name = m_Name;

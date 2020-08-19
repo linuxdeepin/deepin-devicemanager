@@ -62,11 +62,17 @@ public:
     const QString &driver()const override;
 
     /**
-     * @brief setEnable
-     * @param enable
+     * @brief setEnable 设置设备的禁用状态
+     * @param enable 是否禁用
+     * @return 禁用是否成功
+     */
+    bool setEnable(bool enable);
+
+    /**
+     * @brief enable : 判断当前是否是禁用状态
      * @return
      */
-    bool setEnable(bool enable) override;
+    bool enable();
 
     /**
        * @brief vendor:获取制造商属性值

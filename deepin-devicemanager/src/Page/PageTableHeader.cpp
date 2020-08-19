@@ -78,6 +78,11 @@ void PageTableHeader::updateCurItemEnable(int row, int enable)
     mp_Table->updateCurItemEnable(row, enable);
 }
 
+int PageTableHeader::indexFromTheSameName(int row)
+{
+    return mp_Table->indexFromTheSameName(row);
+}
+
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
     this->setFixedHeight(36 * 5 + 4 + 2);

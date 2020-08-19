@@ -1,4 +1,6 @@
 #include "DevicePrint.h"
+#include "EnableManager.h"
+
 #include <QDebug>
 
 DevicePrint::DevicePrint()
@@ -13,6 +15,7 @@ DevicePrint::DevicePrint()
     , m_Shared("")
 {
     initFilterKey();
+    m_CanEnable = true;
 }
 
 void DevicePrint::setInfo(const QMap<QString, QString> &info)
@@ -96,6 +99,17 @@ QString DevicePrint::subTitle()
 const QString DevicePrint::getOverviewInfo()
 {
     return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
+bool DevicePrint::setEnable(bool e)
+{
+    return EnableManager::instance()->enablePrinter(m_Name, e);
+//    return e == enable();
+}
+
+bool DevicePrint::enable()
+{
+    return m_Status == "5" ? false : true;
 }
 
 void DevicePrint::initFilterKey()

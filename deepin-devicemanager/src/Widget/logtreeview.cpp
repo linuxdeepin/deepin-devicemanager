@@ -106,6 +106,25 @@ void LogTreeView::updateCurItemEnable(int row, int enable)
     }
 }
 
+int LogTreeView::indexFromTheSameName(int row)
+{
+    QStandardItem *item = mp_Model->item(row, 0);
+    if (!item) {
+        return -1;
+    }
+
+    int res = -1;
+    QString text = item->text();
+    int rowCount = mp_Model->rowCount();
+    for (int i = 0; i < rowCount; i++) {
+        item = mp_Model->item(i, 0);
+        if (i <= row && item->text() == text) {
+            res++;
+        }
+    }
+    return res;
+}
+
 void LogTreeView::clear()
 {
     if (mp_Model)

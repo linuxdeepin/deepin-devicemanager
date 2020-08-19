@@ -19,7 +19,7 @@ DeviceAudio::DeviceAudio()
     , m_UniqueKey("")
 {
     initFilterKey();
-    //m_Enable = false;
+    m_CanEnable = true;
 }
 
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -135,13 +135,16 @@ const QString &DeviceAudio::driver() const
     return m_Driver;
 }
 
-bool DeviceAudio::setEnable(bool enable)
+bool DeviceAudio::setEnable(bool e)
 {
-    bool res = EnableManager::instance()->enableDeviceByInput(m_Name, enable);
-    if (res) {
-        m_Enable = enable;
-    }
-    return res;
+    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
+    return e == enable();
+}
+
+bool DeviceAudio::enable()
+{
+    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+    return m_Enable;
 }
 
 const QString &DeviceAudio::vendor()const

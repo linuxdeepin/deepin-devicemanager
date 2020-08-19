@@ -135,6 +135,19 @@ public:
      */
     const QString getOverviewInfo() override;
 
+    /**
+     * @brief setEnable 设置设备的禁用状态
+     * @param enable 是否禁用
+     * @return 禁用是否成功
+     */
+    bool setEnable(bool enable)override;
+
+    /**
+     * @brief enable : 判断当前是否是禁用状态
+     * @return
+     */
+    bool enable()override;
+
 protected:
 
     /**

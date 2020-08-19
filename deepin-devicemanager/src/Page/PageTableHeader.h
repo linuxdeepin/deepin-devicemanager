@@ -53,6 +53,13 @@ public:
      */
     void updateCurItemEnable(int row, int enable);
 
+    /**
+     * @brief indexFromTheSameName : 当初现同样的设备时获取该设备是同样设备的第几个
+     * @param row
+     * @return
+     */
+    int indexFromTheSameName(int row);
+
 signals:
     /**
      * @brief itemClicked:点击item发出信号

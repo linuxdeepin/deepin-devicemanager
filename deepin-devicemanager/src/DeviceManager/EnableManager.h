@@ -19,7 +19,7 @@ public:
      * @param name : 该设备名称
      * @return : 返回是否禁用成功
      */
-    bool enableDeviceByInput(const QString &name, bool enable);
+    bool enableDeviceByInput(const QString &name, bool enable, int index = 0);
 
     /**
      * @brief isDeviceEnable : 用来启用和禁用设备
@@ -41,6 +41,21 @@ public:
      * @return
      */
     bool isDeviceEnableByDriver(const QString &driver);
+
+    /**
+     * @brief enablePrinter : 禁用打印机
+     * @param name : 打印机名称
+     * @return　: 禁用是否成功
+     */
+    bool enablePrinter(const QString &name, bool enable);
+
+    /**
+     * @brief getDeviceID
+     * @param name
+     * @param index
+     * @return
+     */
+    int getDeviceID(const QString &name, int index);
 
 protected:
     EnableManager();

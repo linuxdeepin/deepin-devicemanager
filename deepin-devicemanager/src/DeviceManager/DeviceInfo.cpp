@@ -390,6 +390,10 @@ bool DeviceBaseInfo::canEnable()
     return m_CanEnable;
 }
 
+void DeviceBaseInfo::setIndex(int index)
+{
+    m_Index = index;
+}
 
 const QString DeviceBaseInfo::getOverviewInfo()
 {

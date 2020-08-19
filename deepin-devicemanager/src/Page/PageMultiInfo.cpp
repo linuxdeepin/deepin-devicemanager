@@ -6,6 +6,7 @@
 #include <DMenu>
 #include <QDebug>
 #include <DFontSizeManager>
+#include <DMessageBox>
 
 #include "PageTableHeader.h"
 #include "PageDetail.h"
@@ -83,9 +84,12 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
         return;
     }
 
-    bool res = mp_Detail->enableDevice(row, enable);
+    int index = mp_Table->indexFromTheSameName(row);
+    bool res = mp_Detail->enableDevice(row, enable, index);
     if (res) {
         mp_Table->updateCurItemEnable(row, enable);
+    } else {
+        DMessageBox::information(this, tr("Notice"), tr("Ｆailed to disable the camera !"), DMessageBox::StandardButton::Ok);
     }
 }
 

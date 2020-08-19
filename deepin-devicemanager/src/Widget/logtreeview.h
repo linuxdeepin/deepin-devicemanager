@@ -65,11 +65,18 @@ public:
     int currentRow();
 
     /**
-     * @brief updateCurItemEnable
+     * @brief updateCurItemEnable : 判断当前行是否是被禁用状态
      * @param row
      * @param enable
      */
     void updateCurItemEnable(int row, int enable);
+
+    /**
+     * @brief indexFromTheSameName
+     * @param row
+     * @return
+     */
+    int indexFromTheSameName(int row);
 
     /**
      * @brief clear : 清空数据

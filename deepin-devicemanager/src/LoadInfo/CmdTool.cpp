@@ -581,6 +581,7 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, con
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromInput(item, mapInfo, "=");
+
         QRegExp re = QRegExp(".*(mouse[0-9]{1,2}).*");
         if (re.exactMatch(mapInfo["Handlers"])) {
             QString name = re.cap(1);
@@ -592,6 +593,10 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, con
                 DeviceManager::instance()->addInputInfo(name, mapInfo);
             }
         }
+
+        //Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0/input/input40
+        //QRegExp re = QRegExp(".*(usb[0-9]\\/[0-9]-[0-9]\\/[0-9]-[0-9]:[0-9]).*");
+
         //addMapInfo(key, mapInfo);
     }
 }
@@ -715,7 +720,7 @@ void CmdTool::getMapInfoFromInput(const QString &info, QMap<QString, QString> &m
 {
     QStringList infoList = info.split("\n");
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
-        *it = (*it).replace(QRegExp("[A-Z]: "), "");
+        *it = (*it).replace(QRegExp("^[A-Z]: "), "");
         *it = (*it).trimmed();
         if ((*it).count(ch) > 2) {
             QStringList words = (*it).split(" ");

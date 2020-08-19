@@ -74,6 +74,13 @@ void TableWidget::updateCurItemEnable(int row, bool enable)
         mp_Table->updateCurItemEnable(row, enable);
 }
 
+int TableWidget::indexFromTheSameName(int row)
+{
+    if (mp_Table) {
+        return mp_Table->indexFromTheSameName(row);
+    }
+}
+
 void TableWidget::clear()
 {
     if (mp_Table) {

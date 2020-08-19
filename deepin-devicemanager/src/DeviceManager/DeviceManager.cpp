@@ -1018,7 +1018,8 @@ const QMap<QString, QMap<QString, QStringList> > &DeviceManager::getDeviceDriver
 
 void DeviceManager::addInputInfo(const QString &key, const QMap<QString, QString> &mapInfo)
 {
-    m_InputDeviceInfo.insert(key, mapInfo);
+    if (m_InputDeviceInfo.find(key) == m_InputDeviceInfo.end())
+        m_InputDeviceInfo.insert(key, mapInfo);
 }
 const QMap<QString, QString> &DeviceManager::inputInfo(const QString &key)
 {

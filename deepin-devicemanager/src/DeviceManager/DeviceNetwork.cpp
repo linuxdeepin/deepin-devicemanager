@@ -1,4 +1,5 @@
 #include "DeviceNetwork.h"
+#include "EnableManager.h"
 
 DeviceNetwork::DeviceNetwork()
     : DeviceBaseInfo()
@@ -28,6 +29,7 @@ DeviceNetwork::DeviceNetwork()
     , m_Multicast("")
 {
     initFilterKey();
+    m_CanEnable = true;
 }
 
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -206,6 +208,18 @@ QString DeviceNetwork::subTitle()
 const QString DeviceNetwork::getOverviewInfo()
 {
     return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
+bool DeviceNetwork::setEnable(bool e)
+{
+    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
+    return e == enable();
+}
+
+bool DeviceNetwork::enable()
+{
+    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+    return m_Enable;
 }
 
 void DeviceNetwork::initFilterKey()

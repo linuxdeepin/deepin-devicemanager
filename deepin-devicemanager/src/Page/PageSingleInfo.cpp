@@ -12,6 +12,7 @@
 #include <DMenu>
 #include <DMessageManager>
 #include <DNotifySender>
+#include <DMessageBox>
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
     : PageInfo(parent)
@@ -140,23 +141,26 @@ void PageSingleInfo::slotActionEnable()
     if (mp_Content->isCurDeviceEnable()) {
 
         // 当前设备是可用状态
-        mp_Enable->setText(tr("Enable"));
-        mp_Copy->setEnabled(false);
-        mp_Export->setEnabled(false);
-        mp_Refresh->setEnabled(false);
-
-
-        mp_Device->setEnable(false);
+        if (mp_Device->setEnable(false)) {
+            mp_Enable->setText(tr("Enable"));
+            mp_Copy->setEnabled(false);
+            mp_Export->setEnabled(false);
+            mp_Refresh->setEnabled(false);
+            emit enableDevice();
+        } else {
+            DMessageBox::information(this, tr("Notice"), tr("Ｆailed to disable the camera !"), DMessageBox::StandardButton::Ok);
+        }
     } else {
-        mp_Enable->setText(tr("Disable"));
-        mp_Copy->setEnabled(true);
-        mp_Export->setEnabled(true);
-        mp_Refresh->setEnabled(true);
-
-        mp_Device->setEnable(true);
+        if (mp_Device->setEnable(true)) {
+            mp_Enable->setText(tr("Disable"));
+            mp_Copy->setEnabled(true);
+            mp_Export->setEnabled(true);
+            mp_Refresh->setEnabled(true);
+            emit enableDevice();
+        } else {
+            DMessageBox::information(this, tr("Notice"), tr("Ｆailed to enable the camera !"), DMessageBox::StandardButton::Ok);
+        }
     }
-
-    emit enableDevice();
 }
 
 void PageSingleInfo::initWidgets()

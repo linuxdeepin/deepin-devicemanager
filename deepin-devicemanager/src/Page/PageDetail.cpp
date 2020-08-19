@@ -18,6 +18,8 @@
 
 #include "DeviceInfo.h"
 
+#include "DeviceInfo.h"
+
 DWIDGET_USE_NAMESPACE
 
 DetailButton::DetailButton(const QString &txt)
@@ -188,7 +190,6 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::slotExportInfo);
         connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
         addWidgets(txtBrowser, device->enable());
-
         // 当添加到最后一个设备详细信息时，隐藏分隔符
         if (device == lstInfo.last()) {
             m_ListDetailSeperator[lstInfo.size() - 1]->setVisible(false);
@@ -214,7 +215,7 @@ void PageDetail::showInfoOfNum(int index)
     mp_ScrollArea->verticalScrollBar()->setValue(value);
 }
 
-bool PageDetail::enableDevice(int row, bool enable)
+bool PageDetail::enableDevice(int row, bool enable, int index)
 {
     if (m_ListTextBrowser.size() <= row) {
         return false;
@@ -222,8 +223,12 @@ bool PageDetail::enableDevice(int row, bool enable)
 
     // 设置 TextBrowser 可用
     TextBrowser *browser = m_ListTextBrowser.at(row);
-    if (browser)
-        browser->setDeviceEnabled(enable);
+    if (!browser) {
+        return false;
+    }
+    if (!browser->setDeviceEnabled(enable, index)) {
+        return false;
+    }
 
     // 设置 展开收起按钮 可见和可用
     DetailButton *button = m_ListDetailButton.at(row);
@@ -289,6 +294,9 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
         button->setVisible(false);
     }
     vLayout->addWidget(button);
+    if (!enable) {
+        button->setVisible(false);
+    }
     vLayout->addStretch(-1);
     mp_ScrollAreaLayout->addLayout(vLayout);
 

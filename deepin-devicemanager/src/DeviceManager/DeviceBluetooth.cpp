@@ -1,5 +1,6 @@
 #include "DeviceBluetooth.h"
-#include<QDebug>
+#include <QDebug>
+#include "EnableManager.h"
 
 DeviceBluetooth::DeviceBluetooth()
     : DeviceBaseInfo()
@@ -11,12 +12,13 @@ DeviceBluetooth::DeviceBluetooth()
     , m_LogicalName("")
     , m_BusInfo("")
     , m_Capabilities("")
-    , m_Driver("")
+    , m_Driver("btusb")
     , m_DriverVersion("")
     , m_MaximumPower("")
     , m_Speed("")
 {
     initFilterKey();
+    m_CanEnable = true;
 }
 
 void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo)
@@ -143,6 +145,18 @@ QString DeviceBluetooth::subTitle()
 const QString DeviceBluetooth::getOverviewInfo()
 {
     return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
+bool DeviceBluetooth::setEnable(bool e)
+{
+    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
+    return e == enable();
+}
+
+bool DeviceBluetooth::enable()
+{
+    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+    return m_Enable;
 }
 
 void DeviceBluetooth::initFilterKey()

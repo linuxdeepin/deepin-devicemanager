@@ -11,18 +11,21 @@ EnableManager::EnableManager()
 
 }
 
-bool EnableManager::enableDeviceByInput(const QString &name, bool enable)
+bool EnableManager::enableDeviceByInput(const QString &name, bool enable, int index)
 {
-    QString cmd = "xinput set-prop \"" + name + "\" " + "\"Device Enabled\" " + QString("%1").arg(enable ? 1 : 0);
+    int id = getDeviceID(name, index);
+
+    QString cmd = QString("xinput %1 %2").arg(enable ? "enable" : "disable").arg(id);
     QProcess process;
     int msecs = -1;
     process.start(cmd);
     process.waitForFinished(msecs);
     int exitCode = process.exitCode();
-    if (exitCode == 127 || exitCode == 126) {
-        return false;
+    QString output = process.readAllStandardOutput();
+    if (exitCode == 0) {
+        return true;
     }
-    return true;
+    return false;
 }
 
 bool EnableManager::isDeviceEnable(const QString &name)
@@ -80,6 +83,10 @@ bool EnableManager::enableDeviceByDriver(bool enable, const QString &driver)
 
 bool EnableManager::isDeviceEnableByDriver(const QString &driver)
 {
+    if (driver == "") {
+        return false;
+    }
+
     QString cmd = "lsmod";
     QProcess process;
     int msecs = -1;
@@ -93,6 +100,54 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
         }
     }
     return false;
+}
+
+bool EnableManager::enablePrinter(const QString &name, bool enable)
+{
+    QString cmd;
+    if (true == enable) {
+        cmd = "cupsenable " + name;
+    } else {
+        cmd = "cupsdisable " + name;
+    }
+
+    QProcess process;
+    int msecs = -1;
+    process.start(cmd);
+    process.waitForFinished(msecs);
+    QString output = process.readAllStandardOutput();
+    if (output == "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+int EnableManager::getDeviceID(const QString &name, int index)
+{
+    // 先判断有没有同名
+    QString cmd = "xinput list";
+    QProcess process;
+    int msecs = -1;
+    process.start(cmd);
+    process.waitForFinished(msecs);
+    QString output = process.readAllStandardOutput();
+    QStringList items = output.split("\n");
+    int id = -1;
+    int curIndex = -1;
+    foreach (const QString &d, items) {
+        if (!d.contains(name)) {
+            continue;
+        }
+        curIndex++;
+        if (index == curIndex) {
+            QRegExp re = QRegExp(".*id=([0-9]{1,2}).*");
+            if (re.exactMatch(d)) {
+                id = re.cap(1).toInt();
+            }
+        }
+    }
+    return id;
 }
 
 QString EnableManager::getPKStr(const QString &dtStr, const QString &dtInt)

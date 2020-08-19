@@ -152,6 +152,12 @@ protected:
     void loadTableData() override;
 
 private:
+    /**
+     * @brief setNameFromInput:从cat /proc/bus/input/devices获取设备信息
+     */
+    void setInfoFromInput();
+
+private:
     QString             m_Name;                         //<! 【名称】
     QString             m_Vendor;                       //<! 【制造商】
     QString             m_Model;                        //<! 【型号】

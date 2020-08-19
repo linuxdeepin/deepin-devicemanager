@@ -10,7 +10,7 @@ DeviceImage::DeviceImage()
     , m_Version("")
     , m_BusInfo("")
     , m_Capabilities("")
-    , m_Driver("")
+    , m_Driver("uvcvideo")
     , m_MaximumPower("")
     , m_Speed("")
 {
@@ -22,12 +22,12 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if (m_KeyToLshw != mapInfo["bus info"]) {
         return;
     }
-    setAttribute(mapInfo, "product", m_Name);
+    setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "capabilities", m_Capabilities);
-    setAttribute(mapInfo, "driver", m_Driver);
+    setAttribute(mapInfo, "driver", m_Driver, false);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
 }
@@ -40,7 +40,8 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "", m_Capabilities);
-    setAttribute(mapInfo, "Driver", m_Driver);
+    setAttribute(mapInfo, "Driver", m_Driver, true);//
+    setAttribute(mapInfo, "Driver Modules", m_Driver, true);
     setAttribute(mapInfo, "", m_MaximumPower);
     setAttribute(mapInfo, "Speed", m_Speed);
 
@@ -119,10 +120,10 @@ const QString DeviceImage::getOverviewInfo()
     return ov;
 }
 
-bool DeviceImage::setEnable(bool enable)
+bool DeviceImage::setEnable(bool e)
 {
-    bool res = EnableManager::instance()->enableDeviceByDriver(enable, m_Driver);
-    return res;
+    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
+    return e == enable();
 }
 
 bool DeviceImage::enable()
@@ -160,7 +161,7 @@ void DeviceImage::loadOtherDeviceInfo()
 void DeviceImage::loadTableData()
 {
     QString name;
-    if (!m_Enable) {
+    if (!enable()) {
         name = "(" + tr("Disable") + ") " + m_Name;
     } else {
         name = m_Name;
@@ -168,4 +169,11 @@ void DeviceImage::loadTableData()
     m_TableData.append(name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
+}
+
+void DeviceImage::setInfoFromInput()
+{
+    const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
+    setAttribute(mapInfo, "Name", m_Name, true);
+    m_Enable = EnableManager::instance()->isDeviceEnable(m_Name);
 }
