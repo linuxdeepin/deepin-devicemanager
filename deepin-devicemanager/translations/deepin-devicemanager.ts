@@ -1442,13 +1442,13 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="91"/>
-        <source>Notice</source>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="93"/>
+        <source>Failed to enable the device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="91"/>
-        <source>Ｆailed to disable the camera !</source>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
+        <source>Failed to disable the device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1506,24 +1506,18 @@
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="110"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="158"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="159"/>
         <source>Disable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="154"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="164"/>
-        <source>Notice</source>
+        <source>Failed to disable the device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="154"/>
-        <source>Ｆailed to disable the camera !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="164"/>
-        <source>Ｆailed to enable the camera !</source>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="165"/>
+        <source>Failed to enable the device</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
