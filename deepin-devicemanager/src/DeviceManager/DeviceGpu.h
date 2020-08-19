@@ -133,6 +133,8 @@ public:
      */
     const QString &eDP() const;
 
+    const QString &DVI() const;
+
     /**
      * @brief displayPort:获取DisplayPort属性值
      * @return QString:DisplayPort属性值
@@ -248,6 +250,7 @@ private:
     QString            m_VGA;                     //<! 【VGA】
     QString            m_HDMI;                    //<! 【HDMI】
     QString            m_eDP;
+    QString            m_DVI;
     QString            m_Description;             //<! 【描述】
     QString            m_Driver;                  //<! 【驱动】
     QString            m_CurrentResolution;       //<! 【当前分辨率】
