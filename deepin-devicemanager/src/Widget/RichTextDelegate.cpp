@@ -89,10 +89,10 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
     }
 
-    if (index.column() == 0) {
-        painter->setPen(palette.color(cg, DPalette::FrameShadowBorder));
-        painter->drawLine(opt.rect.topRight(), opt.rect.bottomRight());
-    }
+//    if (index.column() == 0) {
+//        painter->setPen(palette.color(cg, DPalette::FrameShadowBorder));
+//        painter->drawLine(opt.rect.topRight(), opt.rect.bottomRight());
+//    }
 
     painter->restore();
 }
@@ -172,8 +172,9 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
     QDomElement td = doc.createElement("td");
     td.setAttribute("width", "50%");
     td.setAttribute("style", "text-align:left;");
-//        td.setAttribute("style", "text-indent:25px;");
-    td.setAttribute("style", "font-weight:bold;");
+//    td.setAttribute("style", "text-indent:25px;");
+    td.setAttribute("style", "font-weight:504;");
+
     QString nt = pair.first.isEmpty() ? "" : pair.first + ":";
     roundStr(nt);
     QDomText nameText = doc.createTextNode(nt);
@@ -194,10 +195,12 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
         tr.appendChild(td2);
         table.appendChild(tr);
         ++it;
-
+        static int i = 0;
         for (; it != strList.end(); ++it) {
+            ++i;
             QPair<QString, QString> tempPair;
             tempPair.first = "";
+//            tempPair.first = pair.first;
             tempPair.second = *it;
             addRow(doc, table, tempPair);
         }
