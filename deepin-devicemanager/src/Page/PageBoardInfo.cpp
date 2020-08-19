@@ -105,7 +105,7 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
             QStringList attris = (*it).split("  /  \t\t");
             size += attris.size();
         }
-        mp_Content->setRowHeight(i, size * 32);
+        mp_Content->setRowHeight(i, size * 30);
     }
 }
 
