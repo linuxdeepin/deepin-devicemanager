@@ -114,11 +114,11 @@ int LogTreeView::indexFromTheSameName(int row)
     }
 
     int res = -1;
-    QString text = item->text();
+    QString text = item->text().replace("(" + tr("Disable") + ")", "");
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
         item = mp_Model->item(i, 0);
-        if (i <= row && item->text() == text) {
+        if (i <= row && item->text().replace("(" + tr("Disable") + ")", "") == text) {
             res++;
         }
     }
