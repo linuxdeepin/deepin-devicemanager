@@ -82,6 +82,12 @@ public:
      */
     bool setEnable(bool enable)override;
 
+    /**
+     * @brief enable : 判断当前是否是禁用状态
+     * @return
+     */
+    bool enable();
+
 protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey

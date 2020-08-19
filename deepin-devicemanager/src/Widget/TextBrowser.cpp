@@ -86,15 +86,14 @@ void TextBrowser::updateInfo()
     setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
 }
 
-bool TextBrowser::setDeviceEnabled(bool enable, int index)
+bool TextBrowser::setDeviceEnabled(bool enable)
 {
     if (!mp_Info) {
         return false;
     }
 
-    mp_Info->setIndex(index);
     if (mp_Info->setEnable(enable)) {
-        updateInfo();
+        //updateInfo();
         return true;
     }
     return false;

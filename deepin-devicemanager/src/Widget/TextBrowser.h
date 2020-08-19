@@ -54,7 +54,7 @@ public:
      * @brief setDeviceEnabled
      * @param enable
      */
-    bool setDeviceEnabled(bool enable, int index = 0);
+    bool setDeviceEnabled(bool enable);
 
     /**
      * @brief updateShowOtherInfo 更新是否需要显示其它信息

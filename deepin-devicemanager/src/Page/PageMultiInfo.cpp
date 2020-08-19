@@ -84,10 +84,9 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
         return;
     }
 
-    int index = mp_Table->indexFromTheSameName(row);
-    bool res = mp_Detail->enableDevice(row, enable, index);
+    bool res = mp_Detail->enableDevice(row, enable);
     if (res) {
-        mp_Table->updateCurItemEnable(row, enable);
+        emit updateUI();
     } else {
         DMessageBox::information(this, tr("Notice"), tr("Ｆailed to disable the camera !"), DMessageBox::StandardButton::Ok);
     }

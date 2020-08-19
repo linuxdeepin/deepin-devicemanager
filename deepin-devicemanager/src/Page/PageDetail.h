@@ -96,7 +96,7 @@ public:
      * @param enable
      * @return
      */
-    bool enableDevice(int row, bool enable, int index = 0);
+    bool enableDevice(int row, bool enable);
 
 protected:
     void paintEvent(QPaintEvent *e) override;

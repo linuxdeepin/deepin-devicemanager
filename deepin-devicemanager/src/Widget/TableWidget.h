@@ -65,13 +65,6 @@ public:
     void updateCurItemEnable(int row, bool enable);
 
     /**
-     * @brief indexFromTheSameName 当初现同样的设备时获取该设备是同样设备的第几个
-     * @param row
-     * @return
-     */
-    int indexFromTheSameName(int row);
-
-    /**
      * @brief clear : 清空数据
      */
     void clear();

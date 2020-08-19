@@ -179,13 +179,26 @@ const QString DeviceInput::getOverviewInfo()
     return ov;
 }
 
-bool DeviceInput::setEnable(bool enable)
+bool DeviceInput::setEnable(bool e)
 {
-    bool res = EnableManager::instance()->enableDeviceByInput(m_Name, enable, m_Index);
-    if (res) {
-        m_Enable = enable;
+    if (m_Driver.isEmpty()) {
+        bool res = EnableManager::instance()->enableDeviceByInput(m_Name, e, m_Index);
+        if (res) {
+            m_Enable = e;
+        }
+        return res;
+    } else {
+        EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
+        return e == enable();
     }
-    return res;
+}
+
+bool DeviceInput::enable()
+{
+    if (!m_Driver.isEmpty()) {
+        m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+    }
+    return m_Enable;
 }
 
 void DeviceInput::initFilterKey()

@@ -72,13 +72,6 @@ public:
     void updateCurItemEnable(int row, int enable);
 
     /**
-     * @brief indexFromTheSameName
-     * @param row
-     * @return
-     */
-    int indexFromTheSameName(int row);
-
-    /**
      * @brief clear : 清空数据
      */
     void clear();

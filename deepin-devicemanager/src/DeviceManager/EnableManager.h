@@ -27,6 +27,7 @@ public:
      * @return
      */
     bool isDeviceEnable(const QString &name);
+    bool isDeviceEnable(int id);
 
     /**
      * @brief enableDeviceByDriver
@@ -55,7 +56,7 @@ public:
      * @param index
      * @return
      */
-    int getDeviceID(const QString &name, int index);
+    int getDeviceID(const QString &name, bool enable, int index);
 
 protected:
     EnableManager();

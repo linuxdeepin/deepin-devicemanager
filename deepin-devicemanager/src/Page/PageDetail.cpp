@@ -215,7 +215,7 @@ void PageDetail::showInfoOfNum(int index)
     mp_ScrollArea->verticalScrollBar()->setValue(value);
 }
 
-bool PageDetail::enableDevice(int row, bool enable, int index)
+bool PageDetail::enableDevice(int row, bool enable)
 {
     if (m_ListTextBrowser.size() <= row) {
         return false;
@@ -226,16 +226,16 @@ bool PageDetail::enableDevice(int row, bool enable, int index)
     if (!browser) {
         return false;
     }
-    if (!browser->setDeviceEnabled(enable, index)) {
+    if (!browser->setDeviceEnabled(enable)) {
         return false;
     }
 
     // 设置 展开收起按钮 可见和可用
-    DetailButton *button = m_ListDetailButton.at(row);
-    if (button) {
-        button->setVisible(enable);
-        button->setEnabled(enable);
-    }
+//    DetailButton *button = m_ListDetailButton.at(row);
+//    if (button) {
+//        button->setVisible(enable);
+//        button->setEnabled(enable);
+//    }
     return true;
 }
 

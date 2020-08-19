@@ -13,6 +13,7 @@ DeviceWidget::DeviceWidget(QWidget *parent)
     , mp_ListView(new PageListView(this))
     , mp_PageInfo(new PageInfoWidget(this))
     , mp_Splitter(new DSplitter(Qt::Horizontal, this))
+    , m_CurItemStr("")
 {
     // 初始化界面布局
     initWidgets();
@@ -21,6 +22,7 @@ DeviceWidget::DeviceWidget(QWidget *parent)
     connect(mp_ListView, &PageListView::itemClicked, this, &DeviceWidget::slotListViewWidgetItemClicked);
     connect(mp_PageInfo, &PageInfoWidget::refreshInfo, this, &DeviceWidget::slotRefreshInfo);
     connect(mp_PageInfo, &PageInfoWidget::exportInfo, this, &DeviceWidget::slotExportInfo);
+    connect(mp_PageInfo, &PageInfoWidget::updateUI, this, &DeviceWidget::slotUpdateUI);
 
     connect(mp_ListView, &PageListView::refreshActionTrigger, this, &DeviceWidget::slotRefreshInfo);
     connect(mp_ListView, &PageListView::exportActionTrigger, this, &DeviceWidget::slotExportInfo);
@@ -66,6 +68,7 @@ void DeviceWidget::updateOverview(const QString &itemStr, const QMap<QString, QS
 
 void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
 {
+    m_CurItemStr = itemStr;
     emit itemClicked(itemStr);
 }
 
@@ -76,6 +79,12 @@ void DeviceWidget::slotRefreshInfo()
 void DeviceWidget::slotExportInfo()
 {
     emit exportInfo();
+}
+
+void DeviceWidget::slotUpdateUI()
+{
+
+    emit itemClicked(m_CurItemStr);
 }
 
 void DeviceWidget::initWidgets()

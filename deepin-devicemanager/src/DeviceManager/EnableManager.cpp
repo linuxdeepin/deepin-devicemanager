@@ -13,7 +13,7 @@ EnableManager::EnableManager()
 
 bool EnableManager::enableDeviceByInput(const QString &name, bool enable, int index)
 {
-    int id = getDeviceID(name, index);
+    int id = getDeviceID(name, enable, index);
 
     QString cmd = QString("xinput %1 %2").arg(enable ? "enable" : "disable").arg(id);
     QProcess process;
@@ -31,6 +31,33 @@ bool EnableManager::enableDeviceByInput(const QString &name, bool enable, int in
 bool EnableManager::isDeviceEnable(const QString &name)
 {
     QString cmd = "xinput list-props \"" + name + "\" ";
+    QProcess process;
+    int msecs = -1;
+    process.start(cmd);
+    process.waitForFinished(msecs);
+    QString output = process.readAllStandardOutput();
+    QStringList listOutput = output.split("\n");
+    foreach (const QString &str, listOutput) {
+        if (!str.contains("Device Enabled")) {
+            continue;
+        }
+        QStringList items = str.trimmed().split(":");
+        if (items.size() != 2) {
+            return true;
+        }
+
+        if (items[1].trimmed() == "1") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool EnableManager::isDeviceEnable(int id)
+{
+    QString cmd = QString("xinput list-props %1").arg(id);
     QProcess process;
     int msecs = -1;
     process.start(cmd);
@@ -123,8 +150,10 @@ bool EnableManager::enablePrinter(const QString &name, bool enable)
     }
 }
 
-int EnableManager::getDeviceID(const QString &name, int index)
+int EnableManager::getDeviceID(const QString &name, bool enable, int index)
 {
+    int id = -1;
+    int curIndex = -1;
     // 先判断有没有同名
     QString cmd = "xinput list";
     QProcess process;
@@ -133,18 +162,17 @@ int EnableManager::getDeviceID(const QString &name, int index)
     process.waitForFinished(msecs);
     QString output = process.readAllStandardOutput();
     QStringList items = output.split("\n");
-    int id = -1;
-    int curIndex = -1;
-    foreach (const QString &d, items) {
-        qDebug() << d;
-        if (!d.contains(name + "    ")) {
-            continue;
-        }
-        curIndex++;
-        if (index == curIndex) {
-            QRegExp re = QRegExp(".*id=([0-9]{1,2}).*");
-            if (re.exactMatch(d)) {
-                id = re.cap(1).toInt();
+
+    foreach (const QString &item, items) {
+        QRegExp re = QRegExp(".*↳(.*)id=([0-9]{1,2}).*");
+        if (re.exactMatch(item)) {
+            QString n = re.cap(1).trimmed();
+            int curId = re.cap(2).toInt();
+            if (n == name && enable == isDeviceEnable(curId)) {
+                curIndex++;
+                if (index == curIndex) {
+                    id = curId;
+                }
             }
         }
     }

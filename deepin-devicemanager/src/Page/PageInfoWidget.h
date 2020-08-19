@@ -69,6 +69,7 @@ signals:
      * @brief exportInfo:导出信息信号
      */
     void exportInfo();
+    void updateUI();
 
 private slots:
 
@@ -81,6 +82,8 @@ private slots:
      * @brief slotExportInfo:导出信息槽函数
      */
     void slotExportInfo();
+
+    void slotUpdateUI();
 
 private:
     /**

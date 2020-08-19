@@ -65,7 +65,14 @@ signals:
      */
     void exportInfo();
 
+    /**
+     * @brief enableDevice
+     * @param row
+     * @param enable
+     */
     void enableDevice(int row, bool enable);
+
+    void updateUI();
 
 private slots:
     /**
