@@ -24,7 +24,6 @@ TableWidget::TableWidget(QWidget *parent)
     , mp_Refresh(new QAction(/*QIcon::fromTheme("view-refresh"), */tr("Refresh (F5)"), this))
     , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export (E)"), this))
     , mp_Menu(new DMenu(this))
-    , m_CanEnable(false)
 
 {
     initWidget();
@@ -41,16 +40,8 @@ TableWidget::TableWidget(QWidget *parent)
 
 void TableWidget::setHeaderLabels(const QStringList &lst)
 {
-    QStringList labels;
-    for (int i = 0; i < lst.size(); i++) {
-        if (i == lst.size() - 1) {
-            m_CanEnable = lst[i] == "yes" ? true : false;
-        } else {
-            labels.append(lst[i]);
-        }
-    }
     if (mp_Table) {
-        mp_Table->setHeaderLabels(labels);
+        mp_Table->setHeaderLabels(lst);
     }
 }
 
@@ -136,16 +127,12 @@ void TableWidget::paintEvent(QPaintEvent *e)
 void TableWidget::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
-
-    if (m_CanEnable) {
-        if (mp_Table->currentRowEnable()) {
-            mp_Enable->setText(tr("Disable"));
-        } else {
-            mp_Enable->setText(tr("Enable"));
-        }
-        mp_Menu->addAction(mp_Enable);
+    if (mp_Table->currentRowEnable()) {
+        mp_Enable->setText(tr("Disable"));
+    } else {
+        mp_Enable->setText(tr("Enable"));
     }
-
+    mp_Menu->addAction(mp_Enable);
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());

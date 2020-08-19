@@ -117,7 +117,6 @@ void PageTableWidget::paintEvent(QPaintEvent *event)
 
     this->setFixedHeight(mp_Table->height() + 4);
     QRect rect  = this->rect();
-    qDebug() << mp_Table->rect() << this->rect();
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
     int width = 1;

@@ -70,13 +70,11 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     if (!lst[0]->enable()) {
         emit enableDevice();
 
+        //当前设备是禁用状态
         mp_Enable->setText(tr("Enable"));
         mp_Copy->setEnabled(false);
         mp_Export->setEnabled(false);
         mp_Refresh->setEnabled(false);
-
-
-        mp_Device->setEnable(false);
     }
 }
 
@@ -134,6 +132,11 @@ void PageSingleInfo::slotActionCopy()
 {
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Content->toString());
+//    DMessageManager::instance()->sendMessage(mp_Content, QIcon::fromTheme("emblem-checked"), tr("Successfully copied device information"));
+//    DUtil::DNotifySender sender(tr("Successfully copied device information"));
+//    sender.appIcon("deepin-devicemanager");
+//    sender.timeOut(2000);
+    //    sender.call();
 }
 
 void PageSingleInfo::slotActionEnable()

@@ -63,7 +63,7 @@ public:
      * @brief getTableHeader : 用于存放表格的头部
      * @return : 用于存放表格的头部
      */
-    QStringList &getTableHeader();
+    const QStringList &getTableHeader();
 
     /**
      * @brief getTableData ：获取表头数据
@@ -121,6 +121,8 @@ public:
     void setIndex(int index);
 
     /**
+    =======
+    >>>>>>> Stashed changes
      * @brief isValid：判断属性值是否有效
      * @param value：属性值
      * @return true:属性值有效

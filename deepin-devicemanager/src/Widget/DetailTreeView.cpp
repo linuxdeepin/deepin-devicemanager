@@ -332,7 +332,6 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
 
     // 窗口大小发生变化时，需重新设置表格大小
     this->setFixedHeight(pHeight);
-    qDebug() << this->rect() << pHeight;
 
     QPainter painter(this->viewport());
     painter.save();
@@ -370,11 +369,12 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
                     line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - i));
 
                     // 绘制横线
-
                     if (m_IsEnable) {
                         QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - i + 1, rect.bottomRight().x(), rect.bottomRight().y() - i + 1);
                         painter.drawLine(hline);
                     }
+
+                    break;
 
                 }
             }

@@ -121,7 +121,6 @@ private:
     QAction          *mp_Refresh;     //<! 右键刷新
     QAction          *mp_Export;      //<! 右键导出
     QMenu            *mp_Menu;        //<! 右键菜单
-    bool             m_CanEnable;     //<! 该表格能不能有禁用选项
 };
 
 

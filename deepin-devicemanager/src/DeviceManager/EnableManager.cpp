@@ -136,7 +136,8 @@ int EnableManager::getDeviceID(const QString &name, int index)
     int id = -1;
     int curIndex = -1;
     foreach (const QString &d, items) {
-        if (!d.contains(name)) {
+        qDebug() << d;
+        if (!d.contains(name + "    ")) {
             continue;
         }
         curIndex++;

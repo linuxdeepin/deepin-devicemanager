@@ -71,7 +71,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
             && index.row() != 0 && dynamic_cast<DetailTreeView *>(this->parent())->hasExpendInfo()) {
         // 上方要空一个像素用来绘制横线
         rectpath.setY(rect.y() + 1);
-        path.addRect(rectpath);
+        path.addRoundedRect(rectpath, 8, 8);
 
         // 展开 行背景色为白色
         painter->fillPath(path, palette.color(cg, DPalette::Base));

@@ -11,7 +11,7 @@ DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     : QObject(parent)
 {
     m_Enable = true;
-    m_CanEnable = false;
+    m_Index = 0;
 }
 
 DeviceBaseInfo::~DeviceBaseInfo()
@@ -38,13 +38,10 @@ const QList<QPair<QString, QString> > &DeviceBaseInfo::getBaseAttribs()
     return m_LstBaseInfo;
 }
 
-QStringList &DeviceBaseInfo::getTableHeader()
+const QStringList &DeviceBaseInfo::getTableHeader()
 {
-    if (m_TableHeader.size() == 0) {
+    if (m_TableHeader.size() == 0)
         loadTableHeader();
-        // 标识是否可以添加数据
-        m_TableHeader.append(m_CanEnable ? "yes" : "no");
-    }
     return m_TableHeader;
 }
 
@@ -383,7 +380,9 @@ bool DeviceBaseInfo::setEnable(bool)
 bool DeviceBaseInfo::enable()
 {
     return m_Enable;
+//    return false;
 }
+
 
 bool DeviceBaseInfo::canEnable()
 {
