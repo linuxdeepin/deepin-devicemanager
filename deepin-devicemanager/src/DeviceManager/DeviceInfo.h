@@ -103,7 +103,6 @@ public:
     virtual bool setEnable(bool enable);
 
     /**
-    <<<<<<< Updated upstream
      * @brief enable 获取设备的禁用状态
      * @return
      */
@@ -122,10 +121,6 @@ public:
     void setIndex(int index);
 
     /**
-    =======
-    >>>>>>> Stashed changes
-    =======
-    >>>>>>> Stashed changes
      * @brief isValid：判断属性值是否有效
      * @param value：属性值
      * @return true:属性值有效

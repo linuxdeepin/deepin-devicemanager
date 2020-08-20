@@ -12,6 +12,7 @@ DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
 {
     m_Enable = true;
     m_Index = 0;
+    m_CanEnable = false;
 }
 
 DeviceBaseInfo::~DeviceBaseInfo()
@@ -40,8 +41,10 @@ const QList<QPair<QString, QString> > &DeviceBaseInfo::getBaseAttribs()
 
 const QStringList &DeviceBaseInfo::getTableHeader()
 {
-    if (m_TableHeader.size() == 0)
+    if (m_TableHeader.size() == 0) {
         loadTableHeader();
+        m_TableHeader.append(m_CanEnable ? "yes" : "no");
+    }
     return m_TableHeader;
 }
 
