@@ -26,7 +26,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     }
 
     painter->save();
-    painter->setRenderHint(QPainter::Antialiasing);
+    painter->setRenderHint(QPainter::Antialiasing, true);
     painter->setOpacity(1);
 
     QStyleOptionViewItem opt = option;
@@ -61,10 +61,10 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QRect rectpath = rect;
 
     // 确定绘制区域的形状，单元格
-    if (index.column() == 0) {
-        // 第一列右空一个像素
-        rectpath.setWidth(rect.width() - 1);
-    }
+
+    // 第一列右空一个像素
+    rectpath.setWidth(rect.width() - 1);
+    qDebug() << index.row() << rect;
 
     // 最后一行是更多信息按钮行，背景色为白色，单元格上边框要绘制横线以
     if (index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
@@ -78,7 +78,126 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
 
     } else {
-        path.addRect(rectpath);
+        if (rectpath.y() <= 0) {
+            QRect tmpRect = rectpath;
+            tmpRect.setY(0);
+            path.addRoundedRect(tmpRect, 8, 8);
+
+            // 填充第一行空白
+            if (rectpath.bottomLeft().y() > 8) {
+
+                // 填充第一列空白
+                if (index.column() == 0) {
+
+                    // 左下空白
+                    QRect rect1(tmpRect.bottomLeft().x(), tmpRect.bottomLeft().y() - 7, 8, 8);
+
+                    // 第一列后移一个像素
+                    rect1.setX(rect1.x() + 1);
+
+                    QPainterPath pathLeftBottom;
+                    pathLeftBottom.addRect(rect1);
+
+                    // 左下角绘制区域
+                    pathLeftBottom = pathLeftBottom.subtracted(path);
+                    painter->fillPath(pathLeftBottom, background);
+
+                    // 右侧空白
+                    QRect rect2(tmpRect.topRight().x() - 7, tmpRect.topRight().y() + 1, 8, tmpRect.height());
+
+                    QPainterPath pathRight;
+                    pathRight.addRect(rect2);
+
+                    // 右侧绘制区域
+                    pathRight = pathRight.subtracted(path);
+                    painter->fillPath(pathRight, background);
+                }
+
+                // 填充第二列空白
+                if (index.column() == 1) {
+                    // 左侧空白
+                    QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y() + 1, 8, tmpRect.height());
+
+                    QPainterPath pathLeft;
+                    pathLeft.addRect(rect1);
+
+                    // 左侧绘制区域
+                    pathLeft = pathLeft.subtracted(path);
+                    painter->fillPath(pathLeft, background);
+
+                    // 右下角
+                    QRect rect2(tmpRect.bottomRight().x() - 7, tmpRect.bottomRight().y() - 7, 8, 8);
+
+                    QPainterPath pathRightBottom;
+                    pathRightBottom.addRect(rect2);
+
+                    // 左侧绘制区域
+                    pathRightBottom = pathRightBottom.subtracted(path);
+                    painter->fillPath(pathRightBottom, background);
+                }
+
+            }
+
+        } else if (rectpath.y() + rect.height() >= dynamic_cast<DetailTreeView *>(this->parent())->height()) {
+            QRect tmpRect = rectpath;
+            tmpRect.setHeight(dynamic_cast<DetailTreeView *>(this->parent())->height() - rectpath.y());
+            path.addRoundedRect(tmpRect, 8, 8);
+
+            if (tmpRect.height() > 8) {
+                // 填充第列空白
+                if (index.column() == 0) {
+                    // 左上空白
+                    QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y(), 8, tmpRect.height() - 8);
+
+                    // 第一列后移一个像素
+                    rect1.setX(rect1.x() + 1);
+
+                    QPainterPath pathLeftTop;
+                    pathLeftTop.addRect(rect1);
+
+                    // 左下角绘制区域
+                    pathLeftTop = pathLeftTop.subtracted(path);
+                    painter->fillPath(pathLeftTop, background);
+
+                    // 右侧空白
+                    QRect rect2(tmpRect.topRight().x() - 7, tmpRect.topRight().y(), 8, tmpRect.height());
+
+                    QPainterPath pathRight;
+                    pathRight.addRect(rect2);
+
+                    // 右侧绘制区域
+                    pathRight = pathRight.subtracted(path);
+                    painter->fillPath(pathRight, background);
+
+                }
+
+                if (index.column() == 1) {
+                    // 左侧空白
+                    QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y(), 8, tmpRect.height());
+
+                    QPainterPath pathLeft;
+                    pathLeft.addRect(rect1);
+
+                    // 左侧绘制区域
+                    pathLeft = pathLeft.subtracted(path);
+                    painter->fillPath(pathLeft, background);
+
+                    // 右上空白
+                    QRect rect2(tmpRect.topRight().x() - 7, tmpRect.topRight().y(), 8, tmpRect.height() - 8);
+
+                    QPainterPath pathRightTop;
+                    pathRightTop.addRect(rect2);
+
+                    // 右上绘制区域
+                    pathRightTop = pathRightTop.subtracted(path);
+                    painter->fillPath(pathRightTop, background);
+                }
+            }
+
+
+        } else {
+            path.addRect(rectpath);
+        }
         painter->fillPath(path, background);
     }
 

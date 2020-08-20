@@ -8,6 +8,8 @@
 #include <QTextDocument>
 #include <QAbstractTextDocumentLayout>
 #include <QDebug>
+#include "DetailTreeView.h"
+#include <DFontSizeManager>
 
 DWIDGET_USE_NAMESPACE
 
@@ -56,8 +58,164 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     }
 
     // 绘制背景色
+//    QPainterPath path;
+//    path.addRect(opt.rect);
+//    painter->fillPath(path, background);
+
+    QRect rect = opt.rect;
     QPainterPath path;
-    path.addRect(opt.rect);
+    QRect rectpath = rect;
+
+    // 确定绘制区域的形状，单元格
+    rectpath.setWidth(rect.width() - 1);
+//    path.addRoundedRect(rectpath, 8, 8);
+
+//    if (rectpath.y() < 0) {
+//        QRect tmpRect = rectpath;
+//        tmpRect.setY(0);
+//        //
+//        if (tmpRect.y() + tmpRect.height() > dynamic_cast<QWidget *>(this->parent())->height() - 1) {
+//            tmpRect.setHeight(dynamic_cast<QWidget *>(this->parent())->height() - 1);
+//        }
+//        path.addRoundedRect(tmpRect, 8, 8);
+//    }
+
+//    if (rectpath.y() + rectpath.height() > dynamic_cast<QWidget *>(this->parent())->height() - 1) {
+//        QRect tmpRect = rectpath;
+//    }
+
+    DWidget *par = dynamic_cast<DWidget *>(this->parent());
+    if (rectpath.y() > 0) {
+
+        // 高度不超过表格高度
+        if (rectpath.y() + rectpath.height() < 40 * (par->height() / 40 - 1)) {
+            path.addRect(rectpath);
+        } else {
+            // 单元格超过表格下边框
+            QRect tmpRect = rectpath;
+            tmpRect.setHeight(40 * (par->height() / 40 - 1) - rectpath.y());
+
+            path.addRoundedRect(tmpRect, 8, 8);
+
+            if (index.column() == 0) {
+
+                // 填充左上，右侧
+                // 左上空白
+                QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y(), 8, tmpRect.height() - 8);
+
+                // 第一列后移一个像素
+                rect1.setX(rect1.x() + 1);
+
+                QPainterPath pathLeftTop;
+                pathLeftTop.addRect(rect1);
+
+                // 左下角绘制区域
+                pathLeftTop = pathLeftTop.subtracted(path);
+                painter->fillPath(pathLeftTop, background);
+
+                // 右侧空白
+                QRect rect2(tmpRect.topRight().x() - 7, tmpRect.topRight().y(), 8, tmpRect.height());
+
+                QPainterPath pathRight;
+                pathRight.addRect(rect2);
+
+                // 右侧绘制区域
+                pathRight = pathRight.subtracted(path);
+                painter->fillPath(pathRight, background);
+            }
+
+            if (index.column() == 1) {
+
+                //填充左侧,右上
+                // 左侧空白
+                QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y(), 8, tmpRect.height());
+
+                QPainterPath pathLeft;
+                pathLeft.addRect(rect1);
+
+                // 左侧绘制区域
+                pathLeft = pathLeft.subtracted(path);
+                painter->fillPath(pathLeft, background);
+
+                // 右上空白
+                QRect rect2(tmpRect.topRight().x() - 7, tmpRect.topRight().y(), 8, tmpRect.height() - 8);
+
+                QPainterPath pathRightTop;
+                pathRightTop.addRect(rect2);
+
+                // 右上绘制区域
+                pathRightTop = pathRightTop.subtracted(path);
+                painter->fillPath(pathRightTop, background);
+            }
+
+        }
+    }
+
+    if (rectpath.y() <= 0) {
+        QRect tmpRect = rectpath;
+        tmpRect.setY(0);
+
+        // 高度超过表格下边框
+        if (rectpath.y() + rectpath.height() > 40 * (par->height() / 40 - 1) - rectpath.y()) {
+            tmpRect.setHeight(40 * (par->height() / 40 - 1));
+            path.addRect(rectpath);
+        } else {
+
+            path.addRoundedRect(tmpRect, 8, 8);
+            // 填充第一列空白
+            if (index.column() == 0) {
+
+                // 左下空白
+                QRect rect1(tmpRect.bottomLeft().x(), tmpRect.bottomLeft().y() - 7, 8, 8);
+
+                // 第一列后移一个像素
+                rect1.setX(rect1.x() + 1);
+
+                QPainterPath pathLeftBottom;
+                pathLeftBottom.addRect(rect1);
+
+                // 左下角绘制区域
+                pathLeftBottom = pathLeftBottom.subtracted(path);
+                painter->fillPath(pathLeftBottom, background);
+
+                // 右侧空白
+                QRect rect2(tmpRect.topRight().x() - 7, tmpRect.topRight().y() + 1, 8, tmpRect.height());
+
+                QPainterPath pathRight;
+                pathRight.addRect(rect2);
+
+                // 右侧绘制区域
+                pathRight = pathRight.subtracted(path);
+                painter->fillPath(pathRight, background);
+            }
+
+            // 填充第二列空白
+            if (index.column() == 1) {
+                // 左侧空白
+                QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y() + 1, 8, tmpRect.height());
+
+                QPainterPath pathLeft;
+                pathLeft.addRect(rect1);
+
+                // 左侧绘制区域
+                pathLeft = pathLeft.subtracted(path);
+                painter->fillPath(pathLeft, background);
+
+                // 右下角
+                QRect rect2(tmpRect.bottomRight().x() - 7, tmpRect.bottomRight().y() - 7, 8, 8);
+
+                QPainterPath pathRightBottom;
+                pathRightBottom.addRect(rect2);
+
+                // 左侧绘制区域
+                pathRightBottom = pathRightBottom.subtracted(path);
+                painter->fillPath(pathRightBottom, background);
+            }
+
+        }
+    }
+
+
     painter->fillPath(path, background);
 
     QStringList lstStr = opt.text.split("\n");
@@ -79,6 +237,9 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         QFont fo = opt.font;
         if (index.column() == 0) {
             fo.setWeight(63);
+        }
+        if (index.column() == 1) {
+            fo = DFontSizeManager::instance()->t8();
         }
 
         painter->setFont(fo);

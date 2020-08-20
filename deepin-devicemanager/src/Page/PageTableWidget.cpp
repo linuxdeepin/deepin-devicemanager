@@ -129,7 +129,7 @@ void PageTableWidget::paintEvent(QPaintEvent *event)
     paintPath = paintPathOut.subtracted(paintPathIn);
 
     QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
-    painter.fillPath(paintPath, bgBrush);
+//    painter.fillPath(paintPath, bgBrush);
 
     painter.restore();
     DWidget::paintEvent(event);

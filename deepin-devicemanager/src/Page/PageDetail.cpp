@@ -301,6 +301,7 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     mp_ScrollAreaLayout->addLayout(vLayout);
 
     // 添加分割线
+    mp_ScrollAreaLayout->addSpacing(10);
     DetailSeperator *seperator = new DetailSeperator(widget);
     mp_ScrollAreaLayout->addWidget(seperator);
 

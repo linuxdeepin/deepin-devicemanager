@@ -111,8 +111,9 @@ void DetailTreeView::setCommanLinkButton(int row)
 int DetailTreeView::setTableHeight(int paintHeight)
 {
     if (!m_IsEnable) {
-        this->setFixedHeight(40);
-        return 40;
+        paintHeight = 40;
+        this->setFixedHeight(paintHeight);
+        return paintHeight;
     }
 
     // 父窗口
@@ -310,6 +311,9 @@ void DetailTreeView::initUI()
     // 设置section行宽
     this->horizontalHeader()->setDefaultSectionSize(180);
 
+    this->setAttribute(Qt::WA_TranslucentBackground);//设置窗口背景透明
+    this->setWindowFlags(Qt::FramelessWindowHint);   //设置无边框窗口
+
 }
 
 void DetailTreeView::paintEvent(QPaintEvent *event)
@@ -332,9 +336,23 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
 
     // 窗口大小发生变化时，需重新设置表格大小
     this->setFixedHeight(pHeight);
+    rect = viewport()->rect();
 
     QPainter painter(this->viewport());
     painter.save();
+
+    int width = 1;
+    int radius = 8;
+    QPainterPath paintPath, paintPathOut, paintPathIn;
+    paintPathOut.addRoundedRect(rect, radius, radius);
+
+    QRect rectIn = QRect(rect.x() + width, rect.y() + width, rect.width() - width * 2, rect.height() - width * 2);
+    paintPathIn.addRoundedRect(rectIn, radius, radius);
+
+    paintPath = paintPathOut.subtracted(paintPathIn);
+
+    QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
+    painter.fillPath(paintPath, bgBrush);
 
     QPen pen = painter.pen();
     pen.setWidth(1);
