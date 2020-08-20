@@ -212,13 +212,15 @@ const QString DeviceNetwork::getOverviewInfo()
 
 bool DeviceNetwork::setEnable(bool e)
 {
-    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    return e == enable();
+//    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
+//    return e == enable();
+    return EnableManager::instance()->enableNetworkByIfconfig(m_LogicalName, e);
 }
 
 bool DeviceNetwork::enable()
 {
-    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+//    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+    m_Enable = EnableManager::instance()->isNetworkEnableByIfconfig(m_LogicalName);
     return m_Enable;
 }
 

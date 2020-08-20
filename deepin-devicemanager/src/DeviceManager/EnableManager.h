@@ -51,6 +51,21 @@ public:
     bool enablePrinter(const QString &name, bool enable);
 
     /**
+     * @brief enableNetworkByIfconfig : 禁用网络设备
+     * @param logicalName : 该网卡的逻辑名称
+     * @param enable
+     * @return
+     */
+    bool enableNetworkByIfconfig(const QString &logicalName, bool enable);
+
+    /**
+     * @brief isNetworkEnableByIfconfig　: 判断该设备是否被禁用
+     * @param logicalName : 该网卡的逻辑名称
+     * @return
+     */
+    bool isNetworkEnableByIfconfig(const QString &logicalName);
+
+    /**
      * @brief getDeviceID
      * @param name
      * @param index

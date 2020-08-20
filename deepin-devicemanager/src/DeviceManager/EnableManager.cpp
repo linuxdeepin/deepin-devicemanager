@@ -150,6 +150,49 @@ bool EnableManager::enablePrinter(const QString &name, bool enable)
     }
 }
 
+bool EnableManager::enableNetworkByIfconfig(const QString &logicalName, bool enable)
+{
+    QDateTime dt = QDateTime::currentDateTime();
+    QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
+    QString dtInt = QString::number(dt.toMSecsSinceEpoch());
+    QString key = getPKStr(dtStr, dtInt);
+
+    QString cmd;
+    if (enable) {
+        cmd = QString("pkexec deepin-devicemanager-authenticateProxy \"ifconfig %1 up\" %2").arg(logicalName).arg(key);
+    } else {
+        cmd = QString("pkexec deepin-devicemanager-authenticateProxy \"ifconfig %1 down\" %2").arg(logicalName).arg(key);
+    }
+
+    QProcess process;
+    int msecs = -1;
+    process.start(cmd);
+    process.waitForFinished(msecs);
+    QString output = process.readAllStandardOutput();
+    if (output == "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool EnableManager::isNetworkEnableByIfconfig(const QString &logicalName)
+{
+    QString cmd = "ifconfig";
+    QProcess process;
+    int msecs = -1;
+    process.start(cmd);
+    process.waitForFinished(msecs);
+    QString output = process.readAllStandardOutput();
+    QStringList items = output.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.startsWith(logicalName)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 int EnableManager::getDeviceID(const QString &name, bool enable, int index)
 {
     int id = -1;
