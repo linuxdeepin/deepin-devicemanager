@@ -22,6 +22,7 @@ DevicePower::DevicePower()
     , m_SBDSManufactureDate("")
     , m_SBDSSerialNumber("")
     , m_SBDSVersion("")
+    , m_Temp("")
 {
     initFilterKey();
 }
@@ -51,6 +52,12 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_SBDSManufactureDate);
     setAttribute(mapInfo, "", m_SBDSSerialNumber);
     setAttribute(mapInfo, "", m_SBDSVersion);
+    setAttribute(mapInfo, "temperature", m_Temp);
+    if (!m_Temp.isEmpty()) {
+        double temp = m_Temp.replace("degrees C", "").trimmed().toDouble();
+        temp = temp * 10;
+        m_Temp = QString("%1 degrees C").arg(temp);
+    }
     loadOtherDeviceInfo(mapInfo);
     return true;
 }
@@ -136,6 +143,11 @@ const QString &DevicePower::designVoltage()const
     return m_DesignVoltage;
 }
 
+const QString &DevicePower::temprature()const
+{
+    return m_Temp;
+}
+
 const QString &DevicePower::SBDSChemistry()const
 {
     return m_SBDSChemistry;
@@ -173,7 +185,7 @@ void DevicePower::initFilterKey()
     addFilterKey(QObject::tr("energy-rate"));
     addFilterKey(QObject::tr("voltage"));
     addFilterKey(QObject::tr("percentage"));
-    addFilterKey(QObject::tr("temperature"));
+    //addFilterKey(QObject::tr("temperature"));
     addFilterKey(QObject::tr("technology"));
     addFilterKey(QObject::tr("icon-name"));
     addFilterKey(QObject::tr("online"));

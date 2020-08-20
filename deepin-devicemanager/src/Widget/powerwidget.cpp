@@ -97,6 +97,7 @@ void PowerWidget::addDeviceDetail(const DevicePower &device, bool withTitle)
     addDeviceAttribute(tr("Slot"), device.slot(), attributes);
     addDeviceAttribute(tr("Design Capacity"), device.designCapacity(), attributes);
     addDeviceAttribute(tr("Design Voltage"), device.designVoltage(), attributes);
+    addDeviceAttribute(tr("Temprature"), device.temprature(), attributes);
     addDeviceAttribute(tr("SBDS Version"), device.SBDSVersion(), attributes);
     addDeviceAttribute(tr("SBDS Serial Number"), device.SBDSSerialNumber(), attributes);
     addDeviceAttribute(tr("SBDS Manufacture Date"), device.SBDSManufactureDate(), attributes);

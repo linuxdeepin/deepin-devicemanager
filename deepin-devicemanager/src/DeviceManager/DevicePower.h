@@ -111,6 +111,12 @@ public:
     const QString &designVoltage()const;
 
     /**
+     * @brief temprature
+     * @return
+     */
+    const QString &temprature()const;
+
+    /**
      * @brief SBDSChemistry:获取SBDSChemistry属性值
      * @return QString:SBDSChemistry属性值
      */
@@ -161,6 +167,7 @@ private:
     QString             m_SBDSManufactureDate;      //<! 【SBDS制造日期】
     QString             m_SBDSSerialNumber;         //<! 【SBDS序列号】
     QString             m_SBDSVersion;              //<! 【SBDS版本】
+    QString             m_Temp;                     //<! 【wendu】
 };
 
 #endif // DEVICEPOWER_H
