@@ -180,7 +180,7 @@ void PageOverview::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
-    mp_Menu->addSeparator();
+//    mp_Menu->addSeparator();
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());

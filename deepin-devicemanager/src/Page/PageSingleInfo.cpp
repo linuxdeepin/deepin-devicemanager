@@ -118,7 +118,7 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
         mp_Menu->addAction(mp_Enable);
     }
 
-    mp_Menu->addSeparator();
+//    mp_Menu->addSeparator();
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());
@@ -136,11 +136,6 @@ void PageSingleInfo::slotActionCopy()
 {
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Content->toString());
-//    DMessageManager::instance()->sendMessage(mp_Content, QIcon::fromTheme("emblem-checked"), tr("Successfully copied device information"));
-//    DUtil::DNotifySender sender(tr("Successfully copied device information"));
-//    sender.appIcon("deepin-devicemanager");
-//    sender.timeOut(2000);
-    //    sender.call();
 }
 
 void PageSingleInfo::slotActionEnable()
