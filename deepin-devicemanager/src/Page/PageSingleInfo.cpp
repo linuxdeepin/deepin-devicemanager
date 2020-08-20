@@ -105,6 +105,10 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
 
+    if (!mp_Device) {
+        return;
+    }
+
     if (mp_Device->canEnable()) {
         if (mp_Content->isCurDeviceEnable()) {
             mp_Enable->setText(tr("Disable"));
