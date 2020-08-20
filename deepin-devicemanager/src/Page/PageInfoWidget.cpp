@@ -19,7 +19,6 @@ PageInfoWidget::PageInfoWidget(QWidget *parent)
     , mp_PageMutilInfo(new PageMultiInfo(this))
     , mp_PageOverviewInfo(new PageOverview(this))
     , mp_PageBoardInfo(new PageBoardInfo(this))
-//    , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
 {
     initWidgets();
 

@@ -24,9 +24,9 @@ PageOverview::PageOverview(DWidget *parent)
     , mp_DeviceLabel(new LongTextLabel(this))
     , mp_OSLabel(new LongTextLabel(this))
     , mp_Overview(new PageTableWidget(this))
-    , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
-    , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
-    , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
+    , mp_Refresh(new QAction(/*QIcon::fromTheme("view-refresh"), */tr("Refresh"), this))
+    , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export"), this))
+    , mp_Copy(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Copy"), this))
     , mp_Menu(new DMenu(this))
 {
     initWidgets();
