@@ -168,7 +168,7 @@ int EnableManager::getDeviceID(const QString &name, bool enable, int index)
         if (re.exactMatch(item)) {
             QString n = re.cap(1).trimmed();
             int curId = re.cap(2).toInt();
-            if (n == name && enable == isDeviceEnable(curId)) {
+            if (n == name && (!enable) == isDeviceEnable(curId)) {
                 curIndex++;
                 if (index == curIndex) {
                     id = curId;

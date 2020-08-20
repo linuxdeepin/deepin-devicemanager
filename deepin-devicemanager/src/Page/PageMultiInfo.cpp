@@ -88,7 +88,13 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
     if (res) {
         emit updateUI();
     } else {
-        DMessageBox::information(this, tr("Notice"), tr("Ｆailed to disable the camera !"), DMessageBox::StandardButton::Ok);
+        QString con;
+        if (enable) {
+            con = tr("Failed to enable the device");
+        } else {
+            con = tr("Failed to disable the device");
+        }
+        DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);
     }
 }
 

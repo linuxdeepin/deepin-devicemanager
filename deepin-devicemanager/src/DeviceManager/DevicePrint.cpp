@@ -165,7 +165,13 @@ void DevicePrint::loadOtherDeviceInfo()
 
 void DevicePrint::loadTableData()
 {
-    m_TableData.append(m_Name);
+    QString name;
+    if (!enable()) {
+        name = "(" + tr("Disable") + ") " + m_Name;
+    } else {
+        name = m_Name;
+    }
+    m_TableData.append(name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }

@@ -30,6 +30,7 @@
 
 class LogTreeView : public Dtk::Widget::DTreeView
 {
+    Q_OBJECT
 public:
     LogTreeView(QWidget *parent = nullptr);
 
@@ -87,7 +88,6 @@ private:
     QStandardItemModel         *mp_Model;
     LogViewItemDelegate        *mp_ItemDelegate;
     LogViewHeaderView          *mp_HeaderView;
-
 };
 
 #endif  // LOGTREEVIEW_H

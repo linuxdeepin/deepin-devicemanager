@@ -21,7 +21,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
     , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
     , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
-    , mp_Enable(new QAction(QIcon::fromTheme("edit-copy"), tr("Enabled"), this))
+    , mp_Enable(new QAction(QIcon::fromTheme("edit-copy"), tr("Enable"), this))
     , mp_Menu(new DMenu(this))
     , mp_Device(nullptr)
 {
@@ -151,7 +151,8 @@ void PageSingleInfo::slotActionEnable()
             mp_Refresh->setEnabled(false);
             emit enableDevice();
         } else {
-            DMessageBox::information(this, tr("Notice"), tr("Ｆailed to disable the camera !"), DMessageBox::StandardButton::Ok);
+            QString con = tr("Failed to disable the device");
+            DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);
         }
     } else {
         if (mp_Device->setEnable(true)) {
@@ -161,7 +162,8 @@ void PageSingleInfo::slotActionEnable()
             mp_Refresh->setEnabled(true);
             emit enableDevice();
         } else {
-            DMessageBox::information(this, tr("Notice"), tr("Ｆailed to enable the camera !"), DMessageBox::StandardButton::Ok);
+            QString con = tr("Failed to enable the device");
+            DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);
         }
     }
 }
