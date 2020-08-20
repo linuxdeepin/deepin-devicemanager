@@ -497,7 +497,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="313"/>
         <source>DVI</source>
-        <translation type="unfinished"/>
+        <translation>DVI</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="314"/>
@@ -1029,6 +1029,11 @@
         <source>Logical Name</source>
         <translation>Nome lógico</translation>
     </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="273"/>
+        <source>Disable</source>
+        <translation>Desativar</translation>
+    </message>
 </context>
 <context>
     <name>DeviceOtherPCI</name>
@@ -1266,6 +1271,11 @@
         <source>Interface Type</source>
         <translation>Tipo de interface</translation>
     </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="170"/>
+        <source>Disable</source>
+        <translation>Desativar</translation>
+    </message>
 </context>
 <context>
     <name>DeviceStorage</name>
@@ -1442,12 +1452,12 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="93"/>
         <source>Failed to enable the device</source>
-        <translation type="unfinished"/>
+        <translation>Falha ao ativar o dispositivo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
         <source>Failed to disable the device</source>
-        <translation type="unfinished"/>
+        <translation>Falha ao desativar o dispositivo</translation>
     </message>
 </context>
 <context>
@@ -1492,10 +1502,6 @@
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="24"/>
-        <source>Enabled</source>
-        <translation>Ativado</translation>
-    </message>
-    <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="74"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="112"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="148"/>
@@ -1511,12 +1517,12 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="154"/>
         <source>Failed to disable the device</source>
-        <translation type="unfinished"/>
+        <translation>Falha ao desativar o dispositivo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="165"/>
         <source>Failed to enable the device</source>
-        <translation type="unfinished"/>
+        <translation>Falha ao ativar o dispositivo</translation>
     </message>
 </context>
 <context>

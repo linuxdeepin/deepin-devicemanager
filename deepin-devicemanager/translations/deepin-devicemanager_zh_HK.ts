@@ -1029,6 +1029,11 @@
         <source>Logical Name</source>
         <translation>邏輯名稱</translation>
     </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="273"/>
+        <source>Disable</source>
+        <translation>禁用</translation>
+    </message>
 </context>
 <context>
     <name>DeviceOtherPCI</name>
@@ -1266,6 +1271,11 @@
         <source>Interface Type</source>
         <translation>接口類型</translation>
     </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="170"/>
+        <source>Disable</source>
+        <translation>禁用</translation>
+    </message>
 </context>
 <context>
     <name>DeviceStorage</name>
@@ -1492,10 +1502,6 @@
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="24"/>
-        <source>Enabled</source>
-        <translation>啟用</translation>
-    </message>
-    <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="74"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="112"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="148"/>

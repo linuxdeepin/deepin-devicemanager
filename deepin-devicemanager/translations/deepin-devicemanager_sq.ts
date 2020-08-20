@@ -477,7 +477,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="309"/>
         <source>DP</source>
-        <translation type="unfinished"/>
+        <translation>DP</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="310"/>
@@ -497,12 +497,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="313"/>
         <source>DVI</source>
-        <translation type="unfinished"/>
+        <translation>DVI</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="314"/>
         <source>Display Output</source>
-        <translation type="unfinished"/>
+        <translation>Dalje Ekrani</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="315"/>
@@ -859,7 +859,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="268"/>
         <source>Display Input</source>
-        <translation type="unfinished"/>
+        <translation>Hyrje Ekrani</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="269"/>
@@ -1028,6 +1028,11 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="264"/>
         <source>Logical Name</source>
         <translation>Emër Logjik</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="273"/>
+        <source>Disable</source>
+        <translation>Çaktivizoje</translation>
     </message>
 </context>
 <context>
@@ -1266,6 +1271,11 @@
         <source>Interface Type</source>
         <translation>Lloj Ndërfaqeje</translation>
     </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="170"/>
+        <source>Disable</source>
+        <translation>Çaktivizoje</translation>
+    </message>
 </context>
 <context>
     <name>DeviceStorage</name>
@@ -1442,12 +1452,12 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="93"/>
         <source>Failed to enable the device</source>
-        <translation type="unfinished"/>
+        <translation>S’u arrit të aktivizohej pajisja</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
         <source>Failed to disable the device</source>
-        <translation type="unfinished"/>
+        <translation>S’u arrit të çaktivizohej pajisja</translation>
     </message>
 </context>
 <context>
@@ -1492,10 +1502,6 @@
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="24"/>
-        <source>Enabled</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="74"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="112"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="148"/>
@@ -1511,12 +1517,12 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="154"/>
         <source>Failed to disable the device</source>
-        <translation type="unfinished"/>
+        <translation>S’u arrit të çaktivizohej pajisja</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="165"/>
         <source>Failed to enable the device</source>
-        <translation type="unfinished"/>
+        <translation>S’u arrit të aktivizohej pajisja</translation>
     </message>
 </context>
 <context>
@@ -2851,7 +2857,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="186"/>
         <source>rechargeable</source>
-        <translation type="unfinished"/>
+        <translation>e ringarkueshme</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="187"/>
