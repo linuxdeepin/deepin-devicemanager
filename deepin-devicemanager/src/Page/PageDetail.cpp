@@ -153,8 +153,9 @@ void ScrollAreaWidget::paintEvent(QPaintEvent *e)
 
 PageDetail::PageDetail(QWidget *parent)
     : Dtk::Widget::DWidget(parent)
-    , mp_ScrollAreaLayout(new QVBoxLayout())
+    , mp_ScrollAreaLayout(nullptr)
     , mp_ScrollArea(new QScrollArea(this))
+    , mp_ScrollWidget(new ScrollAreaWidget(this))
 {
     setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *hLayout = new QVBoxLayout();
@@ -164,17 +165,15 @@ PageDetail::PageDetail(QWidget *parent)
     mp_ScrollArea->setWidgetResizable(true);
     mp_ScrollArea->setFrameShape(QFrame::NoFrame);
     mp_ScrollArea->setContentsMargins(0, 0, 0, 0);
-    mp_ScrollAreaLayout->setContentsMargins(0, 0, 0, 0);
-    mp_ScrollAreaLayout->setSpacing(0);
 
 
     // 设置ScrollArea里面的widget,这个widget是必须要的
-    ScrollAreaWidget *widget = new ScrollAreaWidget(this);
-    widget->setContentsMargins(0, 0, 0, 0);
-    widget->setLayout(mp_ScrollAreaLayout);
-    mp_ScrollArea->setWidget(widget);
+    mp_ScrollWidget->setContentsMargins(0, 0, 0, 0);
+    mp_ScrollArea->setWidget(mp_ScrollWidget);
     hLayout->addWidget(mp_ScrollArea);
     setLayout(hLayout);
+
+    clearWidget();
 }
 
 void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
@@ -339,10 +338,19 @@ void PageDetail::clearWidget()
     m_ListDetailSeperator.clear();
 
     // 删除最后的一个弹簧
-    QLayoutItem *layoutItem = mp_ScrollAreaLayout->itemAt(0);
-    mp_ScrollAreaLayout->removeItem(layoutItem);
-    qDebug() << mp_ScrollAreaLayout->count();
-    delete  layoutItem;
+    if (mp_ScrollAreaLayout) {
+        while (!mp_ScrollAreaLayout->isEmpty()) {
+            QLayoutItem *layoutItem = mp_ScrollAreaLayout->itemAt(0);
+            mp_ScrollAreaLayout->removeItem(layoutItem);
+            delete  layoutItem;
+        }
+        delete  mp_ScrollAreaLayout;
+    }
+
+    mp_ScrollAreaLayout = new QVBoxLayout();
+    mp_ScrollAreaLayout->setContentsMargins(0, 0, 0, 0);
+    mp_ScrollAreaLayout->setSpacing(0);
+    mp_ScrollWidget->setLayout(mp_ScrollAreaLayout);
 }
 
 void PageDetail::slotBtnClicked()

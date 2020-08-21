@@ -147,6 +147,7 @@ private slots:
 private:
     QVBoxLayout      *mp_ScrollAreaLayout;
     QScrollArea      *mp_ScrollArea;
+    ScrollAreaWidget *mp_ScrollWidget;
 
     QList<TextBrowser *>           m_ListTextBrowser;
     QList<QHBoxLayout *>           m_ListHlayout;

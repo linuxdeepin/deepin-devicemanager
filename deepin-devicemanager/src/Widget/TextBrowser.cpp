@@ -274,7 +274,7 @@ void TextBrowser::domTableInfo(QDomDocument &doc, const QList<QPair<QString, QSt
 
         // 该行的第一列
         QDomElement td = doc.createElement("th");
-        td.setAttribute("width", "25%");
+        td.setAttribute("width", "20%");
         td.setAttribute("style", "text-indent:15px;text-align:left;font-weight:504;");
         QDomText nameText = doc.createTextNode(pair.first + ":");
         td.appendChild(nameText);
@@ -282,7 +282,7 @@ void TextBrowser::domTableInfo(QDomDocument &doc, const QList<QPair<QString, QSt
 
         // 改行的第二列
         QDomElement td2 = doc.createElement("td");
-        td2.setAttribute("width", "75%");
+        td2.setAttribute("width", "80%");
         QDomText valueText;
         valueText = doc.createTextNode(pair.second);
         td2.appendChild(valueText);
