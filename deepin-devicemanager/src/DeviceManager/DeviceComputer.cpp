@@ -50,26 +50,31 @@ const QString &DeviceComputer::type()
 
 void DeviceComputer::setHomeUrl(const QString &value)
 {
+    // 设置主页网站
     m_HomeUrl = value;
 }
 
 void DeviceComputer::setOsDescription(const QString &value)
 {
+    // 设置操作系统描述
     m_OsDescription = value;
 }
 
 void DeviceComputer::setOS(const QString &value)
 {
+    // 设置操作系统
     m_OS = value;
 }
 
 void DeviceComputer::setVendor(const QString &value)
 {
+    // 设置制造商
     m_Vendor = value;
 }
 
 void DeviceComputer::setName(const QString &value)
 {
+    // 设置计算机名称
     m_Name = value;
     if (m_Name.contains("None", Qt::CaseInsensitive)) {
         m_Name = "";
@@ -78,11 +83,13 @@ void DeviceComputer::setName(const QString &value)
 
 void DeviceComputer::setType(const QString &value)
 {
+    // 设置设备类型
     m_Type = value;
 }
 
 void DeviceComputer::setVendor(const QString &dm1Vendor, const QString &dm2Vendor)
 {
+    // 设置制造商
     if (dm1Vendor.contains("System manufacturer")) {
         m_Vendor = dm2Vendor;
     } else {
@@ -120,6 +127,7 @@ void DeviceComputer::setName(const QString &dm1Name, const QString &dm2Name, con
         version = "";
     }
 
+    // 去除 name,vendor,family中的重复字段.再拼接
     pname = pname.remove(m_Vendor, Qt::CaseInsensitive);
     pname = pname.remove(version, Qt::CaseInsensitive);
     version = version.remove(m_Vendor, Qt::CaseInsensitive);
@@ -132,6 +140,7 @@ void DeviceComputer::setName(const QString &dm1Name, const QString &dm2Name, con
 
 const QString DeviceComputer::getOverviewInfo()
 {
+    // 获取概况信息
     QString model;
     model += m_Vendor + QString(" ");
     model += m_Name + QString(" ");
@@ -152,11 +161,13 @@ void DeviceComputer::initFilterKey()
 
 void DeviceComputer::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
 }
 
 void DeviceComputer::loadOtherDeviceInfo()
 {
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 

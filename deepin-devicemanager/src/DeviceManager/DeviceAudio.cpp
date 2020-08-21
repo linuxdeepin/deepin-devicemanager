@@ -18,7 +18,10 @@ DeviceAudio::DeviceAudio()
     , m_Driver("")
     , m_UniqueKey("")
 {
+    // 初始化可显示属性
     initFilterKey();
+
+    // 设置可禁用
     m_CanEnable = true;
 }
 
@@ -75,6 +78,8 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if (m_Version == "00") {
         m_Version = "";
     }
+
+    // 获取设备的基本信息
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "", m_Irq);
     setAttribute(mapInfo, "", m_Memory);
@@ -121,6 +126,7 @@ void DeviceAudio::setInfoFromCatAudio(const QMap<QString, QString> &mapInfo)
 
 bool DeviceAudio::setAudioChipFromDmesg(const QString &info)
 {
+    // 设置声卡芯片型号
     m_Chip = info;
     return true;
 }
@@ -137,12 +143,14 @@ const QString &DeviceAudio::driver() const
 
 bool DeviceAudio::setEnable(bool e)
 {
+    // 设置设备状态
     EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
     return e == enable();
 }
 
 bool DeviceAudio::enable()
 {
+    // 获取设备状态
     m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
     return m_Enable;
 }
@@ -204,6 +212,7 @@ const QString &DeviceAudio::chip() const
 
 QString DeviceAudio::subTitle()
 {
+    // 设备信息子标题
     QString name;
     if (!m_Enable) {
         name = "(" + tr("Disable") + ") " + m_Name;
@@ -215,11 +224,13 @@ QString DeviceAudio::subTitle()
 
 const QString DeviceAudio::getOverviewInfo()
 {
+    // 获取概况信息
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
 void DeviceAudio::initFilterKey()
 {
+    // 添加可显示的属性
     addFilterKey(tr("Device Name"));
     addFilterKey(QObject::tr("SubVendor"));
     addFilterKey(QObject::tr("SubDevice"));
@@ -248,6 +259,7 @@ void DeviceAudio::initFilterKey()
 
 void DeviceAudio::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Model"), m_Model);
@@ -257,6 +269,7 @@ void DeviceAudio::loadBaseDeviceInfo()
 
 void DeviceAudio::loadOtherDeviceInfo()
 {
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Chip"), m_Chip);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
     addOtherDeviceInfo(tr("Clock"), m_Clock);
@@ -264,17 +277,20 @@ void DeviceAudio::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Memory"), m_Memory);
     addOtherDeviceInfo(tr("IRQ"), m_Irq);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 
 void DeviceAudio::loadTableHeader()
 {
+    // 表头信息
     m_TableHeader.append(tr("Name"));
     m_TableHeader.append(tr("Vendor"));
 }
 
 void DeviceAudio::loadTableData()
 {
+    // 记载表格内容
     QString name;
     if (!m_Enable) {
         name = "(" + tr("Disable") + ") " + m_Name;

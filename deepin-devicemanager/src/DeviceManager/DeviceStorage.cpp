@@ -386,18 +386,18 @@ void DeviceStorage::initFilterKey()
 
 void DeviceStorage::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Media Type"), m_MediaType);
     addBaseDeviceInfo(tr("Size"), m_Size);
     addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-
-//    m_SubTitle = m_Model;
 }
 
 void DeviceStorage::loadOtherDeviceInfo()
 {
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Power Cycle Count"), m_PowerCycleCount);
     addOtherDeviceInfo(tr("Power On Hours"), m_PowerOnHours);
     addOtherDeviceInfo(tr("Firmware Version"), m_FirmwareVersion);
@@ -407,6 +407,7 @@ void DeviceStorage::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Interface"), m_Interface);
     addOtherDeviceInfo(tr("Rotation Rate"), m_RotationRate);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 

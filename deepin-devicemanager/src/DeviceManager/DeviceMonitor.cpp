@@ -262,17 +262,17 @@ void DeviceMonitor::initFilterKey()
 
 void DeviceMonitor::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Type"), m_Model);
     addBaseDeviceInfo(tr("Display Input"), m_DisplayInput);
     addBaseDeviceInfo(tr("Interface Type"), m_Interface);
-
-//    m_SubTitle = m_Name;
 }
 
 void DeviceMonitor::loadOtherDeviceInfo()
 {
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Support Resolution"), m_SupportResolution);
     addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
     addOtherDeviceInfo(tr("Primary Monitor"), m_MainScreen);

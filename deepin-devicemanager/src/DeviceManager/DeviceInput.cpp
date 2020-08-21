@@ -222,6 +222,7 @@ void DeviceInput::initFilterKey()
 
 void DeviceInput::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Model"), m_Model);
@@ -231,12 +232,14 @@ void DeviceInput::loadBaseDeviceInfo()
 
 void DeviceInput::loadOtherDeviceInfo()
 {
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
     addOtherDeviceInfo(tr("Driver"), m_Driver);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
     addOtherDeviceInfo(tr("Version"), m_Version);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 

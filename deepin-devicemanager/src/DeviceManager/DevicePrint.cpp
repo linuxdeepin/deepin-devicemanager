@@ -145,21 +145,22 @@ void DevicePrint::initFilterKey()
 
 void DevicePrint::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
-
-//    m_SubTitle = m_Name;
 }
 
 void DevicePrint::loadOtherDeviceInfo()
 {
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Shared"), m_Shared);
     addOtherDeviceInfo(tr("URI"), m_URI);
     addOtherDeviceInfo(tr("Status"), m_Status);
     addOtherDeviceInfo(tr("Interface Type"), m_InterfaceType);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 

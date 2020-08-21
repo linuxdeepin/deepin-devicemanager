@@ -122,12 +122,14 @@ const QString DeviceImage::getOverviewInfo()
 
 bool DeviceImage::setEnable(bool e)
 {
+    // 设置设备状态
     EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
     return e == enable();
 }
 
 bool DeviceImage::enable()
 {
+    // 获取设备状态
     m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
     return m_Enable;
 }
@@ -139,27 +141,29 @@ void DeviceImage::initFilterKey()
 
 void DeviceImage::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-
-//    m_SubTitle = m_Name;
 }
 
 void DeviceImage::loadOtherDeviceInfo()
 {
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
     addOtherDeviceInfo(tr("Driver"), m_Driver);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 
 void DeviceImage::loadTableData()
 {
+    // 记载表格内容
     QString name;
     if (!enable()) {
         name = "(" + tr("Disable") + ") " + m_Name;
@@ -173,7 +177,10 @@ void DeviceImage::loadTableData()
 
 void DeviceImage::setInfoFromInput()
 {
+    // 设置设备名称
     const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
     setAttribute(mapInfo, "Name", m_Name, true);
+
+    // 设置是否可禁用
     m_Enable = EnableManager::instance()->isDeviceEnable(m_Name);
 }

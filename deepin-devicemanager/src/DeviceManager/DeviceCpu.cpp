@@ -40,6 +40,7 @@ void DeviceCpu::initFilterKey()
 
 void DeviceCpu::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("CPU ID"), m_PhysicalID);
@@ -246,28 +247,10 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
         setAttribute(mapInfo, "version", m_Name);
     }
 
+    // 获取设备基本信息
     setAttribute(mapInfo, "vendor", m_Vendor);
-//    setAttribute(mapInfo,"Thread(s) per core",m_ThreadNum);
-//    setAttribute(mapInfo,"BogoMIPS",m_BogoMIPS);
-//    setAttribute(mapInfo,"Architecture",m_Architecture);
-//    setAttribute(mapInfo,"CPU family",m_Familly);
-//    setAttribute(mapInfo,"Model",m_Model);
-//    setAttribute(mapInfo,"Stepping",m_Step);
-//    setAttribute(mapInfo,"L1d cache",m_CacheL1Data);
-//    setAttribute(mapInfo,"L1i cache",m_CacheL1Order);
-//    setAttribute(mapInfo,"L2 cache",m_CacheL2);
-//    setAttribute(mapInfo,"L3 cache",m_CacheL3);
-//    setAttribute(mapInfo,"Flags",m_Flags);
-//    setAttribute(mapInfo,"Virtualization",m_HardwareVirtual);
-//    setAttribute(mapInfo,"CPU(s)",m_LogicalCPUNum);
 
-//    setAttribute(mapInfo, "capacity", m_Frequency, false);
-//    setAttribute(mapInfo, "capacity", m_CurFrequency, false);
-
-//    // 联想FT的环境没有capacity字段，但是有size字段
-//    setAttribute(mapInfo, "size", m_Frequency, false);
-//    setAttribute(mapInfo, "size", m_CurFrequency, false);
-
+    // 获取设备其他信息
     getOtherMapInfo(mapInfo);
 }
 
@@ -281,21 +264,11 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
         setAttribute(mapInfo, "product", m_Name);
     }
 
+    // 获取设备基本信息
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Max Speed", m_Frequency, false);
     setAttribute(mapInfo, "Current Speed", m_CurFrequency);
-//    setAttribute(mapInfo,"Thread(s) per core",m_ThreadNum);
-//    setAttribute(mapInfo,"BogoMIPS",m_BogoMIPS);
-//    setAttribute(mapInfo,"Architecture",m_Architecture);
     setAttribute(mapInfo, "Family", m_Familly);
-//    setAttribute(mapInfo,"Model",m_Model);
-//    setAttribute(mapInfo,"Stepping",m_Step);
-//    setAttribute(mapInfo,"L1d cache",m_CacheL1Data);
-//    setAttribute(mapInfo,"L1i cache",m_CacheL1Order);
-//    setAttribute(mapInfo,"L2 cache",m_CacheL2);
-//    setAttribute(mapInfo,"L3 cache",m_CacheL3);
-//    setAttribute(mapInfo,"Flags",m_Flags);
-//    setAttribute(mapInfo,"Virtualization",m_HardwareVirtual);
     setAttribute(mapInfo, "Core Count", m_CPUCoreNum);
 
     // 获取其他cpu信息
@@ -325,10 +298,11 @@ void DeviceCpu::setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo)
     // 龙芯机器无法获取特性，需要在cat cpu中使用Loongson Features
     setAttribute(mapInfo, "Loongson Features", m_Flags, false);
 
-
+    // 设置频率
     setAttribute(mapInfo, "CPU MHz", m_Frequency, false);
     setAttribute(mapInfo, "cpu MHz", m_Frequency, false);
 
+    // 将频率的单位换为MHz
     if (m_Frequency.contains(".")) {
         m_Frequency.replace(QRegExp("\\.00"), "MHz");
     }
@@ -343,6 +317,7 @@ void DeviceCpu::setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo)
 void DeviceCpu::loadOtherDeviceInfo()
 {
     // 倒序，头插，保证原来的顺序
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Virtualization"), m_HardwareVirtual);
     addOtherDeviceInfo(tr("Flags"), m_Flags);
     addOtherDeviceInfo(tr("Extensions"), m_Extensions);
@@ -352,11 +327,13 @@ void DeviceCpu::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("L1d Cache"), m_CacheL1Data);
     addOtherDeviceInfo(tr("Stepping"), m_Step);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 
 void DeviceCpu::loadTableHeader()
 {
+    // 加载表头
     m_TableHeader.append(tr("Name"));
     m_TableHeader.append(tr("Vendor"));
     m_TableHeader.append(frequencyIsRange() ? tr("Speed") : tr("Max Speed"));
@@ -365,6 +342,7 @@ void DeviceCpu::loadTableHeader()
 
 void DeviceCpu::loadTableData()
 {
+    // 加载表格信息
     m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Frequency);
@@ -373,6 +351,7 @@ void DeviceCpu::loadTableData()
 
 void DeviceCpu::getTrNumber()
 {
+    // 将数字转换为英文翻译
     m_trNumber.insert(1, QObject::tr("One"));
     m_trNumber.insert(2, QObject::tr("Two"));
     m_trNumber.insert(4, QObject::tr("Four"));

@@ -85,6 +85,7 @@ void DeviceMemory::initFilterKey()
 
 void DeviceMemory::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Size"), m_Size);
@@ -93,18 +94,19 @@ void DeviceMemory::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Total Width"), m_TotalBandwidth);
     addBaseDeviceInfo(tr("Locator"), m_Locator);
     addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
-//    m_SubTitle = m_Name;
 }
 
 void DeviceMemory::loadOtherDeviceInfo()
 {
     // 倒序，头插，保证原来的顺序
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
     addOtherDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
     addOtherDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
     addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
     addOtherDeviceInfo(tr("Data Width"), m_DataBandwidth);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 

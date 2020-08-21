@@ -206,6 +206,7 @@ void DevicePower::initFilterKey()
 
 void DevicePower::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
@@ -221,15 +222,11 @@ void DevicePower::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("SBDS Serial Number"), m_SBDSSerialNumber);
     addBaseDeviceInfo(tr("SBDS Manufacture Date"), m_SBDSManufactureDate);
     addBaseDeviceInfo(tr("SBDS Chemistry"), m_SBDSChemistry);
-//    addBaseDeviceInfo(tr(""), m_ElectricType);
-//    addBaseDeviceInfo(tr(""), m_MaxPower);
-//    addBaseDeviceInfo(tr(""), m_Enabled);
-//    addBaseDeviceInfo(tr(""), m_HotSwitch);
-//    m_SubTitle = m_Name;
 }
 
 void DevicePower::loadOtherDeviceInfo()
 {
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 

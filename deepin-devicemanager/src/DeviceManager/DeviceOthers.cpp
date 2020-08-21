@@ -126,6 +126,7 @@ void DeviceOthers::initFilterKey()
 
 void DeviceOthers::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Model"), m_Model);
@@ -135,10 +136,6 @@ void DeviceOthers::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Driver"), m_Driver);
     addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
     addBaseDeviceInfo(tr("Speed"), m_Speed);
-//    addBaseDeviceInfo(tr("Unique ID"), m_UniqID);
-//    addBaseDeviceInfo(tr("SysFS BusID"), m_BusID);
-//    addBaseDeviceInfo(tr("logical name"), m_LogicalName);
-//    m_SubTitle = m_Name;
 }
 
 void DeviceOthers::loadOtherDeviceInfo()

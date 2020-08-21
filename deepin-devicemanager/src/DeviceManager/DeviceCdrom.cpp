@@ -1,24 +1,42 @@
 #include "DeviceCdrom.h"
 
 DeviceCdrom::DeviceCdrom()
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Type("")
+    , m_Version("")
+    , m_BusInfo("")
+    , m_Capabilities("")
+    , m_Driver("")
+    , m_MaxPower("")
+    , m_Speed("")
+    , m_UnikeyKey("")
+    , m_KeyToLshw("")
 {
+    // 初始化可显示属性
     initFilterKey();
 }
 
 bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
+    // 通过总线信息判断是否是同一台设备
     if (mapInfo.find("bus info") == mapInfo.end()) {
         return false;
     }
+
+    // 解析总线信息
     QStringList words = mapInfo["bus info"].split("@");
     if (words.size() != 2) {
         return false;
     }
+
     QString busInfo = words[1].replace(".", ":").trimmed();
     if (m_KeyToLshw != busInfo) {
         return false;
     }
 
+    // 获取设备的基本信息
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor, false);
     setAttribute(mapInfo, "", m_Type);
@@ -29,12 +47,14 @@ bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_MaxPower);
     setAttribute(mapInfo, "", m_Speed);
 
+    // 获取其他设备信息
     getOtherMapInfo(mapInfo);
     return true;
 }
 
 void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    // 获取设备的基本信息
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Type);
@@ -48,6 +68,7 @@ void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 获取映射到 lshw设备信息的 关键字
     m_KeyToLshw = mapInfo["SysFS BusID"];
 
+    // 获取其他设备信息
     getOtherMapInfo(mapInfo);
 }
 
@@ -109,6 +130,7 @@ const QString DeviceCdrom::getOverviewInfo()
 
 void DeviceCdrom::initFilterKey()
 {
+    // 添加可显示的属性
     addFilterKey(QObject::tr("Serial ID"));
     addFilterKey(QObject::tr("Driver Modules"));
     addFilterKey(QObject::tr("Device File"));
@@ -127,6 +149,7 @@ void DeviceCdrom::initFilterKey()
 
 void DeviceCdrom::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Model"), m_Type);
@@ -140,11 +163,13 @@ void DeviceCdrom::loadBaseDeviceInfo()
 
 void DeviceCdrom::loadOtherDeviceInfo()
 {
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 
 void DeviceCdrom::loadTableData()
 {
+    // 加载表格内容
     QString name;
     if (!m_Enable) {
         name = "(" + tr("Disable") + ") " + m_Name;

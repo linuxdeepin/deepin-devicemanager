@@ -25,16 +25,17 @@ DeviceGpu::DeviceGpu()
     , m_MaximumResolution("")
     , m_UniqueKey("")
 {
+    // 初始化可显示属性
     initFilterKey();
 }
 
 void DeviceGpu::initFilterKey()
 {
+    // 添加可显示属性
     addFilterKey(QObject::tr("Device"));
     addFilterKey(QObject::tr("SubVendor"));
     addFilterKey(QObject::tr("SubDevice"));
     addFilterKey(QObject::tr("Driver Modules"));
-//    addFilterKey(QObject::tr("I/O Ports"));
     addFilterKey(QObject::tr("Config Status"));
     addFilterKey(QObject::tr("latency"));
 
@@ -50,6 +51,7 @@ void DeviceGpu::initFilterKey()
 
 void DeviceGpu::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Model"), m_Model);
@@ -92,6 +94,7 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "memory", m_MemAddress);
     setAttribute(mapInfo, "physical id", m_PhysID);
 
+    // 获取其他属性
     getOtherMapInfo(mapInfo);
 }
 
@@ -125,29 +128,36 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 
 void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
 {
+    // 设置分辨率属性
     m_MinimumResolution = mapInfo["minResolution"];
     m_CurrentResolution = mapInfo["curResolution"];
     m_MaximumResolution = mapInfo["maxResolution"];
+
+    // 设置显卡支持的接口
     if (mapInfo.find("HDMI") != mapInfo.end()) {
         m_HDMI = mapInfo["HDMI"];
     }
+
     if (mapInfo.find("VGA") != mapInfo.end()) {
         m_VGA = mapInfo["VGA"];
     }
+
     if (mapInfo.find("DP") != mapInfo.end()) {
         m_DisplayPort = mapInfo["DP"];
     }
+
     if (mapInfo.find("eDP") != mapInfo.end()) {
         m_eDP = mapInfo["eDP"];
     }
+
     if (mapInfo.find("DVI") != mapInfo.end()) {
         m_DVI = mapInfo["DVI"];
     }
-
 }
 
 void DeviceGpu::setDmesgInfo(const QString &info)
 {
+    // 设置显存大小
     m_GraphicsMemory = info;
 }
 
@@ -161,6 +171,8 @@ void DeviceGpu::setGpuInfo(const QMap<QString, QString> &mapInfo)
     m_DVI = "";
 
     setAttribute(mapInfo, "Name", m_Name);
+
+    // 获取其他属性
     getOtherMapInfo(mapInfo);
 }
 
@@ -291,11 +303,13 @@ QString DeviceGpu::subTitle()
 
 const QString DeviceGpu::getOverviewInfo()
 {
+    // 获取概况信息
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
 void DeviceGpu::loadOtherDeviceInfo()
 {
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
     addOtherDeviceInfo(tr("Memory"), m_MemAddress);
     addOtherDeviceInfo(tr("IO Port"), m_IOPort);
@@ -316,11 +330,13 @@ void DeviceGpu::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("IRQ"), m_IRQ);
     addOtherDeviceInfo(tr("Width"), m_Width);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 
 void DeviceGpu::loadTableData()
 {
+    // 加载表格内容
     m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);

@@ -107,17 +107,17 @@ void DeviceOtherPCI::initFilterKey()
 
 void DeviceOtherPCI::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name.isEmpty() ? m_Vendor + m_Model : m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Model"), m_Model);
     addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
     addBaseDeviceInfo(tr("Version"), m_Version);
-
-//    m_SubTitle = m_Name;
 }
 
 void DeviceOtherPCI::loadOtherDeviceInfo()
 {
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Input/Output"), m_InputOutput);
     addOtherDeviceInfo(tr("Memory"), m_Memory);
     addOtherDeviceInfo(tr("IRQ"), m_Irq);
@@ -127,6 +127,7 @@ void DeviceOtherPCI::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Driver"), m_Driver);
     addOtherDeviceInfo(tr("Capabilities"), m_Version);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 

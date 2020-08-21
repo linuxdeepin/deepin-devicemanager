@@ -233,6 +233,7 @@ void DeviceNetwork::initFilterKey()
 
 void DeviceNetwork::loadBaseDeviceInfo()
 {
+    // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Type"), m_Model);
@@ -241,12 +242,11 @@ void DeviceNetwork::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
     addBaseDeviceInfo(tr("Driver"), m_Driver);
     addBaseDeviceInfo(tr("Driver Version"), m_DriverVersion);
-
-//    m_SubTitle = m_Name;
 }
 
 void DeviceNetwork::loadOtherDeviceInfo()
 {
+    // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Capacity"), m_Capacity);
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Port"), m_Port);
@@ -265,6 +265,7 @@ void DeviceNetwork::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("MAC Address"), m_MACAddress);
     addOtherDeviceInfo(tr("Logical Name"), m_LogicalName);
 
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 
