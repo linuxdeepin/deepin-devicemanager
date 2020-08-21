@@ -36,7 +36,7 @@ void PageTableHeader::initWidgets()
 {
     // 布局
     QHBoxLayout *hLayout = new QHBoxLayout(this);
-    hLayout->setContentsMargins(0, 0, 0, 1);
+    hLayout->setContentsMargins(0, 0, 0, 10);
     hLayout->addWidget(mp_Table);
     setLayout(hLayout);
 }
@@ -80,7 +80,7 @@ void PageTableHeader::updateCurItemEnable(int row, int enable)
 
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
-    this->setFixedHeight(36 * 5 + 4 + 2);
+    this->setFixedHeight(36 * 5 + 4 + 11);
     DWidget::paintEvent(e);
 }
 

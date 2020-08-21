@@ -150,8 +150,8 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         ic.paint(painter, iconRect);
     }
     textRect = rect;
-//    qDebug() << rect.y();
-    textRect.setX(textRect.x() + margin - 2);
+
+    textRect.setX(textRect.x() + margin * 2);
     //    textRect.setWidth(textRect.width() - margin * 2);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 

@@ -71,7 +71,7 @@ void DetailButton::paintEvent(QPaintEvent *e)
 DetailSeperator::DetailSeperator(DWidget *parent)
     : DWidget(parent)
 {
-    setFixedHeight(2);
+    setFixedHeight(1);
 }
 
 void DetailSeperator::paintEvent(QPaintEvent *e)
@@ -107,6 +107,7 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     // 计算绘制区域
     rect.setX(rect.x() + spacing);
     rect.setWidth(rect.width() - spacing);
+    rect.setHeight(1);
 //    rect.setY(rect.y() + height() - 2);
     QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
     painter.fillRect(rect, bgBrush);
@@ -156,7 +157,7 @@ PageDetail::PageDetail(QWidget *parent)
     , mp_ScrollArea(new QScrollArea(this))
 {
     setContentsMargins(0, 0, 0, 0);
-    QVBoxLayout *hLayout = new QVBoxLayout(this);
+    QVBoxLayout *hLayout = new QVBoxLayout();
     hLayout->setContentsMargins(0, 0, 0, 0);
 
     // 设置scrollarea的属性
@@ -282,6 +283,10 @@ void PageDetail::paintEvent(QPaintEvent *e)
 void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 {
     // 添加 textBrowser
+    if (widget != nullptr && m_ListTextBrowser.size() != 0) {
+        mp_ScrollAreaLayout->addSpacing(10);
+    }
+
     mp_ScrollAreaLayout->addWidget(widget);
 
     // 添加按钮
@@ -297,11 +302,12 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     if (!enable) {
         button->setVisible(false);
     }
-    vLayout->addStretch(-1);
+//    vLayout->addStretch(-1);
     mp_ScrollAreaLayout->addLayout(vLayout);
 
     // 添加分割线
     mp_ScrollAreaLayout->addSpacing(10);
+
     DetailSeperator *seperator = new DetailSeperator(widget);
     mp_ScrollAreaLayout->addWidget(seperator);
 
@@ -335,6 +341,7 @@ void PageDetail::clearWidget()
     // 删除最后的一个弹簧
     QLayoutItem *layoutItem = mp_ScrollAreaLayout->itemAt(0);
     mp_ScrollAreaLayout->removeItem(layoutItem);
+    qDebug() << mp_ScrollAreaLayout->count();
     delete  layoutItem;
 }
 

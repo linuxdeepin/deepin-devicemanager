@@ -251,8 +251,8 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
     const QString &title = info->subTitle();
     if (!title.isEmpty()) {
         QDomElement h3 = doc.createElement("h3");
-//        h3.setAttribute("cellpadding", "3");
-        h3.setAttribute("style", "text-indent:17px;");
+        h3.setAttribute("style", "text-indent:17px;text-align:left;font-weight:504;padding:10px");
+
         if (!info->enable())
             h3.setAttribute("style", "color:#FF5736;");
         QDomText valueText = doc.createTextNode(title);

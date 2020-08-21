@@ -91,6 +91,7 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
         QTableWidgetItem *itemFirst = new QTableWidgetItem(lst[i].first);
         mp_Content->setItem(i, 0, itemFirst);
         QTableWidgetItem *itemSecond = new QTableWidgetItem(lst[i].second);
+        itemSecond->setToolTip(lst[i].second);
         mp_Content->setItem(i, 1, itemSecond);
     }
 }
@@ -169,8 +170,14 @@ void PageSingleInfo::slotActionEnable()
 
 void PageSingleInfo::initWidgets()
 {
-    QVBoxLayout *hLayout = new QVBoxLayout(this);
-    hLayout->addWidget(mp_Label);
+    QVBoxLayout *hLayout = new QVBoxLayout();
+    QHBoxLayout *labelLayout = new QHBoxLayout();
+    labelLayout->addSpacing(10);
+    labelLayout->addWidget(mp_Label);
+
+    hLayout->addSpacing(5);
+    hLayout->addLayout(labelLayout);
+    hLayout->addSpacing(5);
     hLayout->addWidget(mp_Content);
     hLayout->addStretch();
     setLayout(hLayout);

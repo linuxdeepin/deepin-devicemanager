@@ -100,12 +100,20 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
 
 void PageMultiInfo::initWidgets()
 {
-    QVBoxLayout *hLayout = new QVBoxLayout(this);
-//    hLayout->setContentsMargins(0, 0, 0, 0);
-    hLayout->addWidget(mp_Label);
+    QVBoxLayout *hLayout = new QVBoxLayout();
+    QHBoxLayout *labelLayout = new QHBoxLayout();
+    labelLayout->addSpacing(10);
+    labelLayout->addWidget(mp_Label);
+
+    hLayout->addSpacing(5);
+    hLayout->addLayout(labelLayout);
+    hLayout->addSpacing(5);
+
     mp_Table->setFixedHeight(TABLE_HEIGHT);
     hLayout->addWidget(mp_Table);
-    hLayout->addSpacing(10);
+//    hLayout->addSpacing(5);
     hLayout->addWidget(mp_Detail);
+    hLayout->setContentsMargins(10, 10, 10, 0);
+//    qDebug() << hLayout->contentsMargins();
     setLayout(hLayout);
 }
