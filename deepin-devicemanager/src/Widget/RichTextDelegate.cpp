@@ -284,7 +284,7 @@ void RichTextDelegate::initStyleOption(QStyleOptionViewItem *option, const QMode
     }
 
     if (!ok)
-        option->displayAlignment = Qt::AlignLeft | Qt::AlignVCenter;
+        option->displayAlignment = Qt::AlignLeft | Qt::AlignTop;
     option->textElideMode = Qt::ElideRight;
     option->features = QStyleOptionViewItem::HasDisplay;
     if (index.row() % 2 == 0)
