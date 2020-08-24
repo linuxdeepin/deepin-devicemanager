@@ -58,7 +58,7 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
     int row = lst.size();
     int column = lst[0].size() - 1;
     for (int i = 0; i < row - 1; i++) {
-        bool enable = lst[i + 1][0].startsWith("(" + tr("禁用") + ")");
+        bool enable = lst[i + 1][0].startsWith("(" + tr("Disable") + ")");
         int co = column;
         if (enable) {co = 1;}
         for (int j = 0; j < co; j++) {
