@@ -64,6 +64,11 @@ void PageTableWidget::setRowHeight(int row, int height)
     mp_Table->setRowHeight(row, height);
 }
 
+void PageTableWidget::resizeRowToContent(int row)
+{
+    mp_Table->resizeRowToContents(row);
+}
+
 void PageTableWidget::setItemDelegateForRow(int row, RichTextDelegate *itemDelegate)
 {
     mp_Table->setItemDelegateForRow(row, itemDelegate);
@@ -137,6 +142,7 @@ void PageTableWidget::paintEvent(QPaintEvent *event)
 
 void PageTableWidget::initUI()
 {
+    mp_Table->resizeRowsToContents();
     QVBoxLayout *whLayout = new QVBoxLayout();
     whLayout->setContentsMargins(2, 2, 2, 2);
     whLayout->addWidget(mp_Table);

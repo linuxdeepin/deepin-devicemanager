@@ -98,14 +98,19 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         QTableWidgetItem *itemSecond = new QTableWidgetItem(pairs[i - limitSize].second);
         mp_Content->setItem(i, 1, itemSecond);
 
-//        int size = 0;
-//        QStringList strList = pairs[i - limitSize].second.split("\n");
-//        QStringList::iterator it = strList.begin();
-//        for (; it != strList.end(); ++it) {
-//            QStringList attris = (*it).split("  /  \t\t");
-//            size += attris.size();
-//        }
-//        mp_Content->setRowHeight(i, size * 30);
+        int size = 0;
+        QStringList strList = pairs[i - limitSize].second.split("\n");
+        QStringList::iterator it = strList.begin();
+        for (; it != strList.end(); ++it) {
+            QStringList attris = (*it).split("  /  \t\t");
+            size += attris.size();
+        }
+
+        if (size > strList.size()) {
+            size += 1;
+        }
+
+        mp_Content->setRowHeight(i, size * 30 + 18);
     }
 }
 

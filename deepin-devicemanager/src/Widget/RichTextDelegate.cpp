@@ -68,21 +68,6 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
 
     // 确定绘制区域的形状，单元格
     rectpath.setWidth(rect.width() - 1);
-//    path.addRoundedRect(rectpath, 8, 8);
-
-//    if (rectpath.y() < 0) {
-//        QRect tmpRect = rectpath;
-//        tmpRect.setY(0);
-//        //
-//        if (tmpRect.y() + tmpRect.height() > dynamic_cast<QWidget *>(this->parent())->height() - 1) {
-//            tmpRect.setHeight(dynamic_cast<QWidget *>(this->parent())->height() - 1);
-//        }
-//        path.addRoundedRect(tmpRect, 8, 8);
-//    }
-
-//    if (rectpath.y() + rectpath.height() > dynamic_cast<QWidget *>(this->parent())->height() - 1) {
-//        QRect tmpRect = rectpath;
-//    }
 
     DWidget *par = dynamic_cast<DWidget *>(this->parent());
     if (rectpath.y() > 0) {
@@ -220,38 +205,22 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
 
     QStringList lstStr = opt.text.split("\n");
     if (lstStr.size() > 1) {
-//        QDomDocument doc;
-//        getDocFromLst(doc, lstStr);
-//        QAbstractTextDocumentLayout::PaintContext paintContext;
-//        QRect textRect = style->subElementRect(QStyle::SE_ItemViewItemText, &opt);
-//        // 坐标变换，将左上角设置为原点
-//        painter->translate(textRect.topLeft());
-//        // 设置HTML绘制区域
-//        painter->setClipRect(textRect.translated(-textRect.topLeft()));
-//        QTextDocument docText;
-//        docText.setHtml(doc.toString());
-
-//        paintContext.palette.setCurrentColorGroup(cg);
-//        docText.documentLayout()->draw(painter, paintContext);
-
         QTextDocument  textDoc;
         //设置文字居中显示
         textDoc.setTextWidth(option.rect.width());
-//        textDoc.setDefaultTextOption(Qt::AlignCenter);
         //设置文本内容
         QDomDocument doc;
         getDocFromLst(doc, lstStr);
         textDoc.setHtml(doc.toString());
 
         QAbstractTextDocumentLayout::PaintContext   paintContext;
+        paintContext.palette.setCurrentColorGroup(cg);
         QRect  textRect = style->subElementRect(QStyle::SE_ItemViewItemText,  &opt);
         QPoint point(option.rect.topLeft());
         painter->save();
         painter->translate(point);
         painter->setClipRect(textRect.translated(-point));
         textDoc.documentLayout()->draw(painter, paintContext);
-        painter->restore();
-
     } else {
         QFont fo = opt.font;
         if (index.column() == 0) {
@@ -284,14 +253,13 @@ QWidget *RichTextDelegate::createEditor(QWidget *, const QStyleOptionViewItem &,
 
 QSize RichTextDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    QVariant value = index.data(Qt::SizeHintRole);
-    if (value.isValid())
-        return qvariant_cast<QSize>(value);
+    QSize size = QStyledItemDelegate::sizeHint(option, index);
+    size.setHeight(std::max(40, size.height()));
 
-    QStyleOptionViewItem opt = option;
-    initStyleOption(&opt, index);
-    QStyle *style = QApplication::style();
-    return style->sizeFromContents(QStyle::CT_ItemViewItem, &opt, QSize());
+    if (index.column()) {
+        size.setWidth(std::max(150, size.width()));
+    }
+    return size;
 }
 
 void RichTextDelegate::initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const
@@ -336,37 +304,52 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
     doc.appendChild(table);
 }
 
-void RichTextDelegate::roundStr(QString &str)const
-{
-    int qLenth = str.length();
-    int cLenth = str.toLocal8Bit().length();
-    int chLenth = (cLenth - qLenth) / 2;
-    cLenth = cLenth - chLenth;
-    str = str + QString(14 - cLenth, QChar(' '));
-}
-
 void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair)const
 {
     QDomElement tr = doc.createElement("tr");
 
     // 该行的第一列
     QDomElement td = doc.createElement("td");
-    td.setAttribute("width", "25%");
+    td.setAttribute("width", "20%");
     td.setAttribute("style", "text-align:left;");
 //    td.setAttribute("style", "text-indent:25px;");
     td.setAttribute("style", "font-weight:504;");
+
     QString nt = pair.first.isEmpty() ? "" : pair.first + ":";
-    //roundStr(nt);
     QDomText nameText = doc.createTextNode(nt);
     td.appendChild(nameText);
     tr.appendChild(td);
 
     // 该行的第二列
-    QDomElement td2 = doc.createElement("td");
-    td2.setAttribute("width", "75%");
-    QDomText valueText;
-    valueText = doc.createTextNode(pair.second);
-    td2.appendChild(valueText);
-    tr.appendChild(td2);
-    table.appendChild(tr);
+    // 如果该列的内容很多则分行显示
+    QStringList strList = pair.second.split("  /  \t\t");
+    if (strList.size() > 2) {
+
+        QStringList::iterator it = strList.begin();
+        QDomElement td2 = doc.createElement("td");
+//        td2.setAttribute("width", "80%");
+        QDomText valueText;
+        valueText = doc.createTextNode(*it);
+        td2.appendChild(valueText);
+        tr.appendChild(td2);
+        table.appendChild(tr);
+        ++it;
+        static int i = 0;
+        for (; it != strList.end(); ++it) {
+            ++i;
+            QPair<QString, QString> tempPair;
+            tempPair.first = "";
+//            tempPair.first = pair.first;
+            tempPair.second = *it;
+            addRow(doc, table, tempPair);
+        }
+    } else {
+        QDomElement td2 = doc.createElement("td");
+//        td2.setAttribute("width", "70%");
+        QDomText valueText;
+        valueText = doc.createTextNode(pair.second);
+        td2.appendChild(valueText);
+        tr.appendChild(td2);
+        table.appendChild(tr);
+    }
 }

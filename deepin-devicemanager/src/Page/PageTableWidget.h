@@ -44,6 +44,7 @@ public:
     void clear();
 
     void setRowHeight(int row, int height);
+    void resizeRowToContent(int row);
 
     void setItemDelegateForRow(int row, RichTextDelegate *itemDelegate);
 

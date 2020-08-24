@@ -41,7 +41,6 @@ protected:
 private:
     void getDocFromLst(QDomDocument &doc, const QStringList &lst)const;
     void addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair)const;
-    void roundStr(QString &str)const;
 };
 
 #endif // RICHTEXTDELEGATE_H
