@@ -209,31 +209,7 @@ bool DetailTreeView::isCurDeviceEnable()
 void DetailTreeView::setCurDeviceState(bool state)
 {
     m_IsEnable = state;
-}
-
-void DetailTreeView::expandCommandLinkClicked()
-{
-    // 当前已展开详细信息
-    if (m_IsExpand) {
-        mp_CommandBtn->setText(tr("More"));
-        m_IsExpand = false;
-        for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
-            hideRow(i);
-        }
-    } else { // 当前未展开详细信息
-        mp_CommandBtn->setText(tr("Collapse"));
-        m_IsExpand = true;
-        for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
-            showRow(i);
-        }
-    }
-}
-
-void DetailTreeView::enableDevice()
-{
-    if (m_IsEnable) {
-        // 禁用设备
-        this->setCurDeviceState(false);
+    if (!m_IsEnable) {
 
         for (int i = 1; i < this->rowCount(); ++i) {
             this->hideRow(i);
@@ -241,8 +217,6 @@ void DetailTreeView::enableDevice()
 
         this->setTableHeight(40);
     } else {
-        // 启用设备
-        this->setCurDeviceState(true);
         this->setTableHeight(40);
 
         if (m_IsExpand) {
@@ -265,7 +239,24 @@ void DetailTreeView::enableDevice()
 
             }
         }
+    }
+}
 
+void DetailTreeView::expandCommandLinkClicked()
+{
+    // 当前已展开详细信息
+    if (m_IsExpand) {
+        mp_CommandBtn->setText(tr("More"));
+        m_IsExpand = false;
+        for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
+            hideRow(i);
+        }
+    } else { // 当前未展开详细信息
+        mp_CommandBtn->setText(tr("Collapse"));
+        m_IsExpand = true;
+        for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
+            showRow(i);
+        }
     }
 }
 

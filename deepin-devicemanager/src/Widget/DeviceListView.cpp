@@ -15,7 +15,7 @@ DWIDGET_USE_NAMESPACE
 DeviceListviewDelegate::DeviceListviewDelegate(QAbstractItemView *parent)
     : DStyledItemDelegate(parent)
 {
-    setItemSpacing(10);
+    //setItemSpacing(10);
 }
 
 void DeviceListviewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -51,7 +51,7 @@ DeviceListView::DeviceListView(QWidget *parent)
     setModel(mp_ItemModel);
 
     // 设置item的代理
-    setItemDelegate(new DeviceListviewDelegate(this));
+//    setItemDelegate(new DeviceListviewDelegate(this));
 
     // 设置item的其它属性
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -76,7 +76,7 @@ void DeviceListView::addItem(const QString &name, const QString &iconFile)
     DStandardItem *item = new DStandardItem;
     item->setData(name, Qt::DisplayRole);
     item->setData(lst[1], Qt::UserRole);
-    item->setTextAlignment(Qt::AlignLeft);
+    item->setTextAlignment(Qt::AlignVCenter);
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
     item->setIcon(QIcon::fromTheme(lst[0]));
     mp_ItemModel->appendRow(item);

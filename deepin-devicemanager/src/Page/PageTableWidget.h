@@ -39,6 +39,12 @@ public:
     virtual bool isBaseBoard();
 
     /**
+     * @brief setDeviceEnable
+     * @param e
+     */
+    void setDeviceEnable(bool e);
+
+    /**
      * @brief clear : 清空数据
      */
     void clear();
@@ -63,8 +69,6 @@ signals:
     void enableDeviceSignal();
 
 public slots:
-    void enableDevice();
-
     void changeSize();
 
 protected:

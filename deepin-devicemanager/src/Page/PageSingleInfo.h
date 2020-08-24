@@ -77,11 +77,6 @@ signals:
      */
     void exportInfo();
 
-    /**
-     * @brief EnableDevice:启用禁用设备
-     */
-    void enableDevice();
-
 protected slots:
     /**
      * @brief slotShowMenu:鼠标右键菜单槽函数

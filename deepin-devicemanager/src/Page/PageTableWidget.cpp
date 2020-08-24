@@ -17,8 +17,6 @@ PageTableWidget::PageTableWidget(DWidget *parent)
     , mp_Table(new DetailTreeView(parent))
 {
     initUI();
-
-    connect(this, &PageTableWidget::enableDeviceSignal, mp_Table, &DetailTreeView::enableDevice);
     connect(mp_Table, &DetailTreeView::heightChange, this, &PageTableWidget::changeSize);
 }
 
@@ -84,9 +82,9 @@ void PageTableWidget::setCurDeviceState(bool state)
     mp_Table->setCurDeviceState(state);
 }
 
-void PageTableWidget::enableDevice()
+void PageTableWidget::setDeviceEnable(bool e)
 {
-    emit enableDeviceSignal();
+    mp_Table->setCurDeviceState(e);
 }
 
 void PageTableWidget::changeSize()
@@ -97,7 +95,6 @@ void PageTableWidget::changeSize()
 void PageTableWidget::paintEvent(QPaintEvent *event)
 {
 //    DWidget::paintEvent(event);
-
 
     QPainter painter(this);
     painter.save();

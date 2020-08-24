@@ -33,7 +33,6 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::slotActionExport);
     connect(mp_Copy, &QAction::triggered, this, &PageSingleInfo::slotActionCopy);
     connect(mp_Enable, &QAction::triggered, this, &PageSingleInfo::slotActionEnable);
-    connect(this, &PageSingleInfo::enableDevice, mp_Content, &PageTableWidget::enableDevice);
 }
 
 PageSingleInfo::~PageSingleInfo()
@@ -67,9 +66,10 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     loadDeviceInfo(baseInfoMap);
 
+    if (mp_Content) {
+        mp_Content->setDeviceEnable(mp_Device->enable());
+    }
     if (!lst[0]->enable()) {
-        emit enableDevice();
-
         //当前设备是禁用状态
         mp_Enable->setText(tr("Enable"));
         mp_Copy->setEnabled(false);
@@ -149,7 +149,7 @@ void PageSingleInfo::slotActionEnable()
             mp_Copy->setEnabled(false);
             mp_Export->setEnabled(false);
             mp_Refresh->setEnabled(false);
-            emit enableDevice();
+            mp_Content->setDeviceEnable(false);
         } else {
             QString con = tr("Failed to disable the device");
             DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);
@@ -160,7 +160,7 @@ void PageSingleInfo::slotActionEnable()
             mp_Copy->setEnabled(true);
             mp_Export->setEnabled(true);
             mp_Refresh->setEnabled(true);
-            emit enableDevice();
+            mp_Content->setDeviceEnable(true);
         } else {
             QString con = tr("Failed to enable the device");
             DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);

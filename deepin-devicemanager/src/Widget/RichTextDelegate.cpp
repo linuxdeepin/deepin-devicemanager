@@ -216,26 +216,35 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         QAbstractTextDocumentLayout::PaintContext   paintContext;
         paintContext.palette.setCurrentColorGroup(cg);
         QRect  textRect = style->subElementRect(QStyle::SE_ItemViewItemText,  &opt);
-        QPoint point(option.rect.topLeft());
+        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 3));
         painter->save();
         painter->translate(point);
         painter->setClipRect(textRect.translated(-point));
         textDoc.documentLayout()->draw(painter, paintContext);
     } else {
-        QFont fo = opt.font;
-        if (index.column() == 0) {
-            fo.setWeight(63);
-        }
-        if (index.column() == 1) {
-            fo = DFontSizeManager::instance()->t8();
-        }
+        QTextDocument  textDoc;
+        //设置文字居中显示
+        textDoc.setTextWidth(option.rect.width());
+        //设置文本内容
+        QDomDocument doc;
+        QDomElement p = doc.createElement("p");
+        p.setAttribute("width", "100%");
+        p.setAttribute("border", "0");
+        p.setAttribute("style", "text-align:left;");
+        p.setAttribute("style", "font-weight:504;");
+        QDomText nameText = doc.createTextNode(opt.text);
+        p.appendChild(nameText);
+        doc.appendChild(p);
+        textDoc.setHtml(doc.toString());
 
-        painter->setFont(fo);
-        QRect textRect = opt.rect;
-        textRect.setX(textRect.x() + margin);
-        QFontMetrics fm(opt.font);
-        QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
-        painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
+        QAbstractTextDocumentLayout::PaintContext   paintContext;
+        paintContext.palette.setCurrentColorGroup(cg);
+        QRect  textRect = style->subElementRect(QStyle::SE_ItemViewItemText,  &opt);
+        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 6)); //option.rect.topLeft()
+        painter->save();
+        painter->translate(point);
+        painter->setClipRect(textRect.translated(-point));
+        textDoc.documentLayout()->draw(painter, paintContext);
     }
 
 //    if (index.column() == 0) {
@@ -286,7 +295,7 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
     QDomElement table = doc.createElement("table");
     table.setAttribute("border", "0");
     table.setAttribute("width", "100%");
-    table.setAttribute("cellpadding", "3");
+//    table.setAttribute("style", "border-collapse:separate; border-spacing:0px 100px;");
 
     foreach (auto kv, lst) {
         QStringList keyValue = kv.split(":");
@@ -312,7 +321,6 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
     QDomElement td = doc.createElement("td");
     td.setAttribute("width", "20%");
     td.setAttribute("style", "text-align:left;");
-//    td.setAttribute("style", "text-indent:25px;");
     td.setAttribute("style", "font-weight:504;");
 
     QString nt = pair.first.isEmpty() ? "" : pair.first + ":";

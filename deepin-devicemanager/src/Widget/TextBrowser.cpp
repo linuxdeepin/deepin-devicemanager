@@ -248,13 +248,19 @@ void TextBrowser::slotActionCopy()
 
 void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
 {
-    const QString &title = info->subTitle();
+    if (!info) {
+        return;
+    }
+    QString title = info->subTitle();
     if (!title.isEmpty()) {
         QDomElement h3 = doc.createElement("h3");
-        h3.setAttribute("style", "text-indent:17px;text-align:left;font-weight:504;padding:10px");
 
-        if (!info->enable())
-            h3.setAttribute("style", "color:#FF5736;");
+        if (!info->enable()) {
+            title = "(" + tr("Disable") + ")" + title;
+            h3.setAttribute("style", "text-indent:17px;text-align:left;font-weight:504;padding:10px;color:#FF5736;");
+        } else {
+            h3.setAttribute("style", "text-indent:17px;text-align:left;font-weight:504;padding:10px;");
+        }
         QDomText valueText = doc.createTextNode(title);
         h3.appendChild(valueText);
         doc.appendChild(h3);

@@ -116,11 +116,6 @@ public slots:
      */
     void expandCommandLinkClicked();
 
-    /**
-     * @brief enableDevice
-     */
-    void enableDevice();
-
 protected:
     /**
      * @brief initUI:初始化界面
