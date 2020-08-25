@@ -41,6 +41,8 @@ protected:
 private:
     void getDocFromLst(QDomDocument &doc, const QStringList &lst)const;
     void addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair)const;
+    void addTd1(QDomDocument &doc, QDomElement &tr, const QString &value)const;
+    void addTd2(QDomDocument &doc, QDomElement &tr, const QString &value)const;
 };
 
 #endif // RICHTEXTDELEGATE_H

@@ -316,17 +316,11 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
 void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair)const
 {
     QDomElement tr = doc.createElement("tr");
+    tr.setAttribute("height", "100");
 
     // 该行的第一列
-    QDomElement td = doc.createElement("td");
-    td.setAttribute("width", "20%");
-    td.setAttribute("style", "text-align:left;");
-    td.setAttribute("style", "font-weight:504;");
-
     QString nt = pair.first.isEmpty() ? "" : pair.first + ":";
-    QDomText nameText = doc.createTextNode(nt);
-    td.appendChild(nameText);
-    tr.appendChild(td);
+    addTd1(doc, tr, nt);
 
     // 该行的第二列
     // 如果该列的内容很多则分行显示
@@ -334,30 +328,42 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
     if (strList.size() > 2) {
 
         QStringList::iterator it = strList.begin();
-        QDomElement td2 = doc.createElement("td");
-//        td2.setAttribute("width", "80%");
-        QDomText valueText;
-        valueText = doc.createTextNode(*it);
-        td2.appendChild(valueText);
-        tr.appendChild(td2);
-        table.appendChild(tr);
+        addTd2(doc, tr, *it);
         ++it;
         static int i = 0;
         for (; it != strList.end(); ++it) {
             ++i;
             QPair<QString, QString> tempPair;
             tempPair.first = "";
-//            tempPair.first = pair.first;
             tempPair.second = *it;
             addRow(doc, table, tempPair);
         }
     } else {
-        QDomElement td2 = doc.createElement("td");
-//        td2.setAttribute("width", "70%");
-        QDomText valueText;
-        valueText = doc.createTextNode(pair.second);
-        td2.appendChild(valueText);
-        tr.appendChild(td2);
-        table.appendChild(tr);
+        addTd2(doc, tr, pair.second);
     }
+
+    table.appendChild(tr);
+}
+
+void RichTextDelegate::addTd1(QDomDocument &doc, QDomElement &tr, const QString &value)const
+{
+    QDomElement td = doc.createElement("td");
+    td.setAttribute("width", "20%");
+    td.setAttribute("style", "text-align:left; font-weight:504;");
+
+    QDomText valueText = doc.createTextNode(value);
+    td.appendChild(valueText);
+
+    tr.appendChild(td);
+}
+
+void RichTextDelegate::addTd2(QDomDocument &doc, QDomElement &tr, const QString &value)const
+{
+    QDomElement td = doc.createElement("td");
+    td.setAttribute("width", "80%");
+
+    QDomText valueText = doc.createTextNode(value);
+    td.appendChild(valueText);
+
+    tr.appendChild(td);
 }
