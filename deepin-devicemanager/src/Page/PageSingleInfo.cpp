@@ -56,6 +56,9 @@ void PageSingleInfo::setLabel(const QString &itemstr)
 
 void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
+    if (lst.size() < 1) {
+        return;
+    }
     mp_Device = lst[0];
 
     clearContent();

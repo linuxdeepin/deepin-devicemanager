@@ -21,6 +21,7 @@ PageBoardInfo::PageBoardInfo(QWidget *parent)
 
 void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
+    mp_Device = lst[0];
     clearContent();
 
     DeviceBaseInfo *board = nullptr;
