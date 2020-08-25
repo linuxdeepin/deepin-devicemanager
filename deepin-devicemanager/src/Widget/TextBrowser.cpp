@@ -16,9 +16,9 @@
 TextBrowser::TextBrowser(QWidget *parent)
     : DTextBrowser(parent)
     , m_ShowOtherInfo(false)
-    , mp_Refresh(new QAction(QIcon::fromTheme("view-refresh"), tr("Refresh (F5)"), this))
-    , mp_Export(new QAction(QIcon::fromTheme("document-new"), tr("Export (E)"), this))
-    , mp_Copy(new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this))
+    , mp_Refresh(new QAction(tr("Refresh"), this))
+    , mp_Export(new QAction(tr("Export"), this))
+    , mp_Copy(new QAction(tr("Copy"), this))
     , mp_Menu(new DMenu(this))
 {
     DFontSizeManager::instance()->bind(this, DFontSizeManager::SizeType(DFontSizeManager::T7));
