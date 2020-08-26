@@ -80,7 +80,7 @@ public:
      * @param enable : 启用禁用
      * @return 返回操作是否成功
      */
-    bool setEnable(bool enable)override;
+    EnableDeviceStatus setEnable(bool enable)override;
 
     /**
      * @brief enable : 判断当前是否是禁用状态

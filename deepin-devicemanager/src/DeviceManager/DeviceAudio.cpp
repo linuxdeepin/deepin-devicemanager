@@ -141,11 +141,14 @@ const QString &DeviceAudio::driver() const
     return m_Driver;
 }
 
-bool DeviceAudio::setEnable(bool e)
+EnableDeviceStatus DeviceAudio::setEnable(bool e)
 {
     // 设置设备状态
-    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    return e == enable();
+    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
+    if (e != enable()) {
+        res = EDS_Faild;
+    }
+    return res;
 }
 
 bool DeviceAudio::enable()

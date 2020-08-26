@@ -11,7 +11,7 @@ EnableManager::EnableManager()
 
 }
 
-bool EnableManager::enableDeviceByInput(const QString &name, bool enable, int index)
+EnableDeviceStatus EnableManager::enableDeviceByInput(const QString &name, bool enable, int index)
 {
     int id = getDeviceID(name, enable, index);
 
@@ -23,9 +23,9 @@ bool EnableManager::enableDeviceByInput(const QString &name, bool enable, int in
     int exitCode = process.exitCode();
     QString output = process.readAllStandardOutput();
     if (exitCode == 0) {
-        return true;
+        return EDS_Success;
     }
-    return false;
+    return EDS_Faild;
 }
 
 bool EnableManager::isDeviceEnable(const QString &name)
@@ -82,7 +82,7 @@ bool EnableManager::isDeviceEnable(int id)
     return true;
 }
 
-bool EnableManager::enableDeviceByDriver(bool enable, const QString &driver)
+EnableDeviceStatus EnableManager::enableDeviceByDriver(bool enable, const QString &driver)
 {
     QDateTime dt = QDateTime::currentDateTime();
     QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
@@ -100,11 +100,15 @@ bool EnableManager::enableDeviceByDriver(bool enable, const QString &driver)
     int msecs = -1;
     process.start(cmd);
     process.waitForFinished(msecs);
+    int exitcode = process.exitCode();
+    if (exitcode == 127 || exitcode == 126) {
+        return EDS_Cancle;
+    }
     QString output = process.readAllStandardOutput();
     if (output == "") {
-        return true;
+        return EDS_Success;
     } else {
-        return false;
+        return EDS_Faild;
     }
 }
 
@@ -129,7 +133,7 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
     return false;
 }
 
-bool EnableManager::enablePrinter(const QString &name, bool enable)
+EnableDeviceStatus EnableManager::enablePrinter(const QString &name, bool enable)
 {
     QString cmd;
     if (true == enable) {
@@ -144,13 +148,13 @@ bool EnableManager::enablePrinter(const QString &name, bool enable)
     process.waitForFinished(msecs);
     QString output = process.readAllStandardOutput();
     if (output == "") {
-        return true;
+        return EDS_Success;
     } else {
-        return false;
+        return EDS_Faild;
     }
 }
 
-bool EnableManager::enableNetworkByIfconfig(const QString &logicalName, bool enable)
+EnableDeviceStatus EnableManager::enableNetworkByIfconfig(const QString &logicalName, bool enable)
 {
     QDateTime dt = QDateTime::currentDateTime();
     QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
@@ -168,11 +172,17 @@ bool EnableManager::enableNetworkByIfconfig(const QString &logicalName, bool ena
     int msecs = -1;
     process.start(cmd);
     process.waitForFinished(msecs);
+
+    int exitCode = process.exitCode();
+    if (exitCode == 126 || exitCode == 127) {
+        return EDS_Cancle;
+    }
+
     QString output = process.readAllStandardOutput();
     if (output == "") {
-        return true;
+        return EDS_Success;
     } else {
-        return false;
+        return EDS_Faild;
     }
 }
 

@@ -28,6 +28,8 @@
 #include <QDomDocument>
 #include <DNotifySender>
 
+#include "DeviceInfo.h"
+
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
@@ -54,7 +56,7 @@ public:
      * @brief setDeviceEnabled
      * @param enable
      */
-    bool setDeviceEnabled(bool enable);
+    EnableDeviceStatus setDeviceEnabled(bool enable);
 
     /**
      * @brief updateShowOtherInfo 更新是否需要显示其它信息

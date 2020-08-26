@@ -30,6 +30,7 @@
 using namespace Dtk::Widget;
 class WaitingWidget : public DWidget
 {
+    Q_OBJECT
 public:
     WaitingWidget(QWidget *parent = nullptr);
     ~WaitingWidget();

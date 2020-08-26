@@ -145,9 +145,11 @@ void PageSingleInfo::slotActionCopy()
 void PageSingleInfo::slotActionEnable()
 {
     if (mp_Content->isCurDeviceEnable()) {
-
         // 当前设备是可用状态
-        if (mp_Device->setEnable(false)) {
+        EnableDeviceStatus res = mp_Device->setEnable(false);
+        if (res == EDS_Cancle) {
+            return;
+        } else if (res == EDS_Success) {
             mp_Enable->setText(tr("Enable"));
             mp_Copy->setEnabled(false);
             mp_Export->setEnabled(false);
@@ -158,7 +160,11 @@ void PageSingleInfo::slotActionEnable()
             DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);
         }
     } else {
-        if (mp_Device->setEnable(true)) {
+        // 当前设备是可用状态
+        EnableDeviceStatus res = mp_Device->setEnable(true);
+        if (res == EDS_Cancle) {
+            return;
+        } else if (res == EDS_Success) {
             mp_Enable->setText(tr("Disable"));
             mp_Copy->setEnabled(true);
             mp_Export->setEnabled(true);

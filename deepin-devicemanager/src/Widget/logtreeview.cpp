@@ -75,6 +75,7 @@ bool LogTreeView::currentRowEnable()
 {
     QModelIndex index = currentIndex();
     int row = index.row();
+    if (row < 0) {return false;}
     QStandardItem *item = mp_Model->item(row, 0);
     if (item) {
         QString str = item->text();

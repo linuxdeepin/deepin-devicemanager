@@ -29,6 +29,8 @@
 #include <DCommandLinkButton>
 #include <DHorizontalLine>
 
+#include "DeviceInfo.h"
+
 class TextBrowser;
 class DeviceBaseInfo;
 class QVBoxLayout;
@@ -96,7 +98,7 @@ public:
      * @param enable
      * @return
      */
-    bool enableDevice(int row, bool enable);
+    EnableDeviceStatus enableDevice(int row, bool enable);
 
 protected:
     void paintEvent(QPaintEvent *e) override;

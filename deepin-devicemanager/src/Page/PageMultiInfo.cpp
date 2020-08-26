@@ -84,8 +84,10 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
         return;
     }
 
-    bool res = mp_Detail->enableDevice(row, enable);
-    if (res) {
+    EnableDeviceStatus res = mp_Detail->enableDevice(row, enable);
+    if (res == EDS_Cancle) {
+        return;
+    } else if (res == EDS_Success) {
         emit updateUI();
     } else {
         QString con;

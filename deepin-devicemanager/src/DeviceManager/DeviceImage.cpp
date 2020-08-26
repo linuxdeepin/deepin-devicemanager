@@ -120,11 +120,14 @@ const QString DeviceImage::getOverviewInfo()
     return ov;
 }
 
-bool DeviceImage::setEnable(bool e)
+EnableDeviceStatus DeviceImage::setEnable(bool e)
 {
     // 设置设备状态
-    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    return e == enable();
+    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
+    if (e != enable()) {
+        res = EDS_Faild;
+    }
+    return res;
 }
 
 bool DeviceImage::enable()

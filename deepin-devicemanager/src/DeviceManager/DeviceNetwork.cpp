@@ -210,10 +210,8 @@ const QString DeviceNetwork::getOverviewInfo()
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
-bool DeviceNetwork::setEnable(bool e)
+EnableDeviceStatus DeviceNetwork::setEnable(bool e)
 {
-//    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-//    return e == enable();
     return EnableManager::instance()->enableNetworkByIfconfig(m_LogicalName, e);
 }
 

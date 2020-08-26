@@ -86,17 +86,13 @@ void TextBrowser::updateInfo()
     setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
 }
 
-bool TextBrowser::setDeviceEnabled(bool enable)
+EnableDeviceStatus TextBrowser::setDeviceEnabled(bool enable)
 {
     if (!mp_Info) {
-        return false;
+        return EDS_Cancle;
     }
 
-    if (mp_Info->setEnable(enable)) {
-        //updateInfo();
-        return true;
-    }
-    return false;
+    return mp_Info->setEnable(enable);
 }
 
 void TextBrowser::updateShowOtherInfo()
@@ -215,7 +211,6 @@ void TextBrowser::slotShowMenu(const QPoint &)
 
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
-    mp_Menu->addSeparator();
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());

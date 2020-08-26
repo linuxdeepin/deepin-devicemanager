@@ -38,6 +38,12 @@
 #include "xlsxdocument.h"
 #include "table.h"
 
+enum EnableDeviceStatus {
+    EDS_Cancle,
+    EDS_Faild,
+    EDS_Success
+};
+
 class DeviceBaseInfo : public QObject
 {
     Q_OBJECT
@@ -100,7 +106,7 @@ public:
      * @param enable 是否禁用
      * @return 禁用是否成功
      */
-    virtual bool setEnable(bool enable);
+    virtual EnableDeviceStatus setEnable(bool enable);
 
     /**
      * @brief enable 获取设备的禁用状态

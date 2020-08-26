@@ -2,6 +2,7 @@
 #define ENABLEMANAGER_H
 
 #include <QObject>
+#include "DeviceInfo.h"
 
 class EnableManager : public QObject
 {
@@ -19,7 +20,7 @@ public:
      * @param name : 该设备名称
      * @return : 返回是否禁用成功
      */
-    bool enableDeviceByInput(const QString &name, bool enable, int index = 0);
+    EnableDeviceStatus enableDeviceByInput(const QString &name, bool enable, int index = 0);
 
     /**
      * @brief isDeviceEnable : 用来启用和禁用设备
@@ -34,7 +35,7 @@ public:
      * @param driver
      * @return
      */
-    bool enableDeviceByDriver(bool enable, const QString &driver);
+    EnableDeviceStatus enableDeviceByDriver(bool enable, const QString &driver);
 
     /**
      * @brief isDeviceEnableByDriver
@@ -48,7 +49,7 @@ public:
      * @param name : 打印机名称
      * @return　: 禁用是否成功
      */
-    bool enablePrinter(const QString &name, bool enable);
+    EnableDeviceStatus enablePrinter(const QString &name, bool enable);
 
     /**
      * @brief enableNetworkByIfconfig : 禁用网络设备
@@ -56,7 +57,7 @@ public:
      * @param enable
      * @return
      */
-    bool enableNetworkByIfconfig(const QString &logicalName, bool enable);
+    EnableDeviceStatus enableNetworkByIfconfig(const QString &logicalName, bool enable);
 
     /**
      * @brief isNetworkEnableByIfconfig　: 判断该设备是否被禁用

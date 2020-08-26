@@ -409,9 +409,9 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
     }
 }
 
-bool DeviceBaseInfo::setEnable(bool)
+EnableDeviceStatus DeviceBaseInfo::setEnable(bool)
 {
-    return false;
+    return EDS_Success;
 }
 
 bool DeviceBaseInfo::enable()

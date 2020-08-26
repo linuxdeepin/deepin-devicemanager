@@ -101,10 +101,9 @@ const QString DevicePrint::getOverviewInfo()
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
-bool DevicePrint::setEnable(bool e)
+EnableDeviceStatus DevicePrint::setEnable(bool e)
 {
     return EnableManager::instance()->enablePrinter(m_Name, e);
-//    return e == enable();
 }
 
 bool DevicePrint::enable()

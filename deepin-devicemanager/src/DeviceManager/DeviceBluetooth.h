@@ -140,7 +140,7 @@ public:
      * @param enable 是否禁用
      * @return 禁用是否成功
      */
-    bool setEnable(bool enable)override;
+    EnableDeviceStatus setEnable(bool enable)override;
 
     /**
      * @brief enable : 判断当前是否是禁用状态

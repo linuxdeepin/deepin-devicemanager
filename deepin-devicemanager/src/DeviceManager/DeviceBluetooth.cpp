@@ -159,11 +159,14 @@ const QString DeviceBluetooth::getOverviewInfo()
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
-bool DeviceBluetooth::setEnable(bool e)
+EnableDeviceStatus DeviceBluetooth::setEnable(bool e)
 {
     // 设置设备状态
-    EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    return e == enable();
+    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
+    if (e != enable()) {
+        res = EDS_Faild;
+    }
+    return res;
 }
 
 bool DeviceBluetooth::enable()

@@ -215,28 +215,18 @@ void PageDetail::showInfoOfNum(int index)
     mp_ScrollArea->verticalScrollBar()->setValue(value);
 }
 
-bool PageDetail::enableDevice(int row, bool enable)
+EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
 {
     if (m_ListTextBrowser.size() <= row) {
-        return false;
+        return EDS_Cancle;
     }
 
     // 设置 TextBrowser 可用
     TextBrowser *browser = m_ListTextBrowser.at(row);
     if (!browser) {
-        return false;
+        return EDS_Cancle;
     }
-    if (!browser->setDeviceEnabled(enable)) {
-        return false;
-    }
-
-    // 设置 展开收起按钮 可见和可用
-//    DetailButton *button = m_ListDetailButton.at(row);
-//    if (button) {
-//        button->setVisible(enable);
-//        button->setEnabled(enable);
-//    }
-    return true;
+    return browser->setDeviceEnabled(enable);
 }
 
 void PageDetail::paintEvent(QPaintEvent *e)
