@@ -82,9 +82,27 @@ private:
      * @brief:命令的执行
      */
     QString getPKStr(const QString &dtStr, const QString &dtInt);
+
+    /**
+     * @brief getPKStr
+     * @param dtStr
+     * @param dtInt
+     * @param cStr
+     */
     void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr);
 
+    /**
+     * @brief getDriverPath
+     * @param driver
+     * @return
+     */
     QString getDriverPath(const QString &driver);
+
+    /**
+     * @brief getPasswd
+     * @return
+     */
+    bool getPasswd();
 
 
 private:

@@ -84,6 +84,10 @@ bool EnableManager::isDeviceEnable(int id)
 
 EnableDeviceStatus EnableManager::enableDeviceByDriver(bool enable, const QString &driver)
 {
+    if (!getPasswd()) {
+        return EDS_Cancle;
+    }
+
     QDateTime dt = QDateTime::currentDateTime();
     QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
     QString dtInt = QString::number(dt.toMSecsSinceEpoch());
@@ -156,6 +160,10 @@ EnableDeviceStatus EnableManager::enablePrinter(const QString &name, bool enable
 
 EnableDeviceStatus EnableManager::enableNetworkByIfconfig(const QString &logicalName, bool enable)
 {
+    if (!getPasswd()) {
+        return EDS_Cancle;
+    }
+
     QDateTime dt = QDateTime::currentDateTime();
     QString dtStr = dt.toString("yyyy:MM:dd:hh:mm:ss");
     QString dtInt = QString::number(dt.toMSecsSinceEpoch());
@@ -315,5 +323,19 @@ QString EnableManager::getDriverPath(const QString &driver)
         }
     }
     return path;
+}
+
+bool EnableManager::getPasswd()
+{
+    QString cmd = QString("pkexec deepin-devicemanager-authenticateProxy \"whoami\"");
+    QProcess process;
+    int msecs = -1;
+    process.start(cmd);
+    bool res = process.waitForFinished(msecs);
+    int exitcode = process.exitCode();
+    if (exitcode == 127 || exitcode == 126) {
+        return false;
+    }
+    return res;
 }
 
