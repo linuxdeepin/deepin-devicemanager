@@ -1,10 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="it" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sr" version="2.1">
 <context>
     <name>CmdButtonWidget</name>
     <message>
         <location filename="../src/Widget/CmdButtonWidget.cpp" line="14"/>
         <source>More</source>
-        <translation>Di più</translation>
+        <translation>Више</translation>
     </message>
 </context>
 <context>
@@ -13,12 +13,12 @@
         <location filename="../src/Page/PageDetail.cpp" line="33"/>
         <location filename="../src/Page/PageDetail.cpp" line="36"/>
         <source>More</source>
-        <translation>Di più</translation>
+        <translation>Више</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDetail.cpp" line="34"/>
         <source>Collapse</source>
-        <translation>Collassa</translation>
+        <translation>Скупи</translation>
     </message>
 </context>
 <context>
@@ -27,12 +27,12 @@
         <location filename="../src/Widget/DetailTreeView.cpp" line="83"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="249"/>
         <source>More</source>
-        <translation>Di più</translation>
+        <translation>Више</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetailTreeView.cpp" line="255"/>
         <source>Collapse</source>
-        <translation>Collassa</translation>
+        <translation>Скупи</translation>
     </message>
 </context>
 <context>
@@ -41,7 +41,7 @@
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="226"/>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="230"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -50,64 +50,64 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="221"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="299"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="237"/>
         <source>Device Name</source>
-        <translation>Nome dispositivo</translation>
+        <translation>Назив уређаја</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="266"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="290"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="267"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="291"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="268"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="269"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="270"/>
         <source>Bus Info</source>
-        <translation>Info BUS</translation>
+        <translation>Бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="276"/>
         <source>Chip</source>
-        <translation>Chip</translation>
+        <translation>Чип</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="277"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="278"/>
         <source>Clock</source>
-        <translation>Clock</translation>
+        <translation>Радни такт</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="279"/>
         <source>Width</source>
-        <translation>Larghezza</translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="280"/>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation>Меморија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="281"/>
@@ -120,17 +120,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="441"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="442"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="443"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
 </context>
 <context>
@@ -138,17 +138,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="231"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="232"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="233"/>
         <source>Chipset</source>
-        <translation>Chipset</translation>
+        <translation>Чипсет</translation>
     </message>
 </context>
 <context>
@@ -156,67 +156,67 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="216"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="217"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="218"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="219"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="244"/>
         <source>Speed</source>
-        <translation>Velocità</translation>
+        <translation>Брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="245"/>
         <source>Maximum Power</source>
-        <translation>Potenza massima</translation>
+        <translation>Максимална снага</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="246"/>
         <source>Driver Version</source>
-        <translation>Versione driver</translation>
+        <translation>Верзија управљача</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="247"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation>Управљач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="248"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="249"/>
         <source>Bus Info</source>
-        <translation>Info BUS</translation>
+        <translation>Бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="250"/>
         <source>Logical Name</source>
-        <translation>Nome logico</translation>
+        <translation>Логички назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="251"/>
         <source>MAC Address</source>
-        <translation>Indirizzo MAC</translation>
+        <translation>МАК адреса</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="262"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -224,52 +224,52 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="153"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="154"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="155"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="156"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="157"/>
         <source>Bus Info</source>
-        <translation>Info BUS</translation>
+        <translation>Бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="158"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="159"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation>Управљач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="160"/>
         <source>Maximum Power</source>
-        <translation>Potenza massima</translation>
+        <translation>Максимална снага</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="161"/>
         <source>Speed</source>
-        <translation>Velocità</translation>
+        <translation>Брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="175"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -277,7 +277,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceComputer.cpp" line="165"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
 </context>
 <context>
@@ -286,115 +286,115 @@
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="44"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="337"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="45"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="338"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="46"/>
         <source>CPU ID</source>
-        <translation>CPU</translation>
+        <translation>ЦПЈ ИД</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="47"/>
         <source>Core ID</source>
-        <translation>ID Core</translation>
+        <translation>ИД језгра</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="48"/>
         <source>Threads</source>
-        <translation>Thread</translation>
+        <translation>Нити</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="49"/>
         <source>Current Speed</source>
-        <translation>Velocità attuale</translation>
+        <translation>Тренутна брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="50"/>
         <source>BogoMIPS</source>
-        <translation>BogoMIPS</translation>
+        <translation>БогоМИПС</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="51"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="340"/>
         <source>Architecture</source>
-        <translation>Architettura</translation>
+        <translation>Архитектура</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="52"/>
         <source>CPU Family</source>
-        <translation>Famiglia CPU</translation>
+        <translation>ЦПЈ породица</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="53"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="185"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="197"/>
         <source>Processor</source>
-        <translation>Processore</translation>
+        <translation>Процесор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="195"/>
         <source>Core(s)</source>
-        <translation> Core(s)</translation>
+        <translation>Језгра</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
         <source>Virtualization</source>
-        <translation>Virtualizzazione</translation>
+        <translation>Виртуелизација</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
         <source>Flags</source>
-        <translation>Flag</translation>
+        <translation>Индикатори</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="323"/>
         <source>Extensions</source>
-        <translation>Estensioni</translation>
+        <translation>Проширења</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="324"/>
         <source>L3 Cache</source>
-        <translation>Cache L3</translation>
+        <translation>L3 Кеш</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="325"/>
         <source>L2 Cache</source>
-        <translation>Cache L2</translation>
+        <translation>L2 Кеш</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
         <source>L1i Cache</source>
-        <translation>Cache L1i</translation>
+        <translation>L1i Кеш</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
         <source>L1d Cache</source>
-        <translation>Cache L1d</translation>
+        <translation>L1d Кеш</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="328"/>
         <source>Stepping</source>
-        <translation>Stepping</translation>
+        <translation>Степинг</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="339"/>
         <source>Speed</source>
-        <translation>Velocità</translation>
+        <translation>Брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="339"/>
         <source>Max Speed</source>
-        <translation>Velocità massima</translation>
+        <translation>Брзина</translation>
     </message>
 </context>
 <context>
@@ -402,77 +402,77 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="55"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="56"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="57"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="58"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="59"/>
         <source>Graphics Memory</source>
-        <translation>Memoria grafica</translation>
+        <translation>Графичка меморија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="313"/>
         <source>Physical ID</source>
-        <translation>ID Fisico</translation>
+        <translation>Физички ИД</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="314"/>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation>Меморија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="315"/>
         <source>IO Port</source>
-        <translation>Porta IO</translation>
+        <translation>IO прикључак</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="316"/>
         <source>Bus Info</source>
-        <translation>Info BUS</translation>
+        <translation>Бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="317"/>
         <source>Maximum Resolution</source>
-        <translation>Risoluzione massima</translation>
+        <translation>Максимална резолуција</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="318"/>
         <source>Minimum Resolution</source>
-        <translation>Risoluzione minima</translation>
+        <translation>Минимална резолуција</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="319"/>
         <source>Current Resolution</source>
-        <translation>Risoluzione corrente</translation>
+        <translation>Тренутна резолуција</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="320"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation>Управљач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="321"/>
         <source>Description</source>
-        <translation>Descrizione</translation>
+        <translation>Опис</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="322"/>
         <source>Clock</source>
-        <translation>Clock</translation>
+        <translation>Радни такт</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="323"/>
@@ -502,12 +502,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="328"/>
         <source>Display Output</source>
-        <translation>Uscita video</translation>
+        <translation>Излази екрана</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="329"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="330"/>
@@ -517,7 +517,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="331"/>
         <source>Width</source>
-        <translation>Larghezza</translation>
+        <translation>Ширина</translation>
     </message>
 </context>
 <context>
@@ -525,52 +525,52 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="148"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="149"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="150"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="151"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="152"/>
         <source>Bus Info</source>
-        <translation>Info BUS</translation>
+        <translation>Бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="158"/>
         <source>Speed</source>
-        <translation>Velocità</translation>
+        <translation>Брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="159"/>
         <source>Maximum Power</source>
-        <translation>Potenza massima</translation>
+        <translation>Максимална снага</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="160"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation>Управљач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="161"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="172"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -578,57 +578,57 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="211"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="212"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="213"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="214"/>
         <source>Interface</source>
-        <translation>Interfaccia</translation>
+        <translation>Сучеље</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="215"/>
         <source>Bus Info</source>
-        <translation>Info BUS</translation>
+        <translation>Бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="221"/>
         <source>Speed</source>
-        <translation>Velocità</translation>
+        <translation>Брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="222"/>
         <source>Maximum Power</source>
-        <translation>Potenza massima</translation>
+        <translation>Максимална снага</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="223"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation>Управљач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="224"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="225"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="235"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -645,125 +645,125 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
         <source>Overview</source>
-        <translation>Panoramica</translation>
+        <translation>Генерално</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="138"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="169"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="991"/>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation>ЦПЈ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="141"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="170"/>
         <source>Motherboard</source>
-        <translation>Scheda Madre</translation>
+        <translation>Матична плоча</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="142"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation>Меморија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="143"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="172"/>
         <source>Display Adapter</source>
-        <translation>Adattatore video</translation>
+        <translation>Графичка картица</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="144"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="173"/>
         <source>Sound Adapter</source>
-        <translation>Adattatore audio</translation>
+        <translation>Звучнa картица</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="145"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="174"/>
         <source>Storage</source>
-        <translation>Archiviazione</translation>
+        <translation>Складиште</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="146"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="175"/>
         <source>Other PCI Devices</source>
-        <translation>Altri Dispositivi PCI</translation>
+        <translation>Остали PCI уређаји</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="147"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
         <source>Battery</source>
-        <translation>Batteria</translation>
+        <translation>Батерија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="150"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="177"/>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
+        <translation>Блутут</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="151"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="178"/>
         <source>Network Adapter</source>
-        <translation>Adattatore di Rete</translation>
+        <translation>Мрежна картица</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="154"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="179"/>
         <source>Mouse</source>
-        <translation>Mouse</translation>
+        <translation>Миш</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="155"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="180"/>
         <source>Keyboard</source>
-        <translation>Tastiera</translation>
+        <translation>Тастатура</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="158"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="181"/>
         <source>Monitor</source>
-        <translation>Monitor</translation>
+        <translation>Монитор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="159"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="182"/>
         <source>CD-ROM</source>
-        <translation>CD-ROM</translation>
+        <translation>ЦД-РОМ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="160"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="183"/>
         <source>Printer</source>
-        <translation>Stampante</translation>
+        <translation>Штампач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="161"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="184"/>
         <source>Camera</source>
-        <translation>Camera</translation>
+        <translation>Камера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="162"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="185"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
-        <translation>Altri dispositivi</translation>
+        <translation>Остали уређаји</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="825"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
         <source>Device</source>
-        <translation>Dispositivo</translation>
+        <translation>Уређај</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="832"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="888"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
         <source>OS</source>
-        <translation>OS</translation>
+        <translation>ОС</translation>
     </message>
 </context>
 <context>
@@ -772,71 +772,71 @@
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="89"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="115"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="90"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="116"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="91"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="119"/>
         <source>Size</source>
-        <translation>Dimensione</translation>
+        <translation>Величина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="92"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="117"/>
         <source>Type</source>
-        <translation>Tipo</translation>
+        <translation>Врста</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="93"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="118"/>
         <source>Speed</source>
-        <translation>Velocità</translation>
+        <translation>Брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="94"/>
         <source>Total Width</source>
-        <translation>Dimensioni totali</translation>
+        <translation>Укупна ширина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="95"/>
         <source>Locator</source>
-        <translation>Locazione</translation>
+        <translation>Локатор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="96"/>
         <source>Serial Number</source>
-        <translation>Numero di serie</translation>
+        <translation>Серијски број</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="103"/>
         <source>Configured Voltage</source>
-        <translation>Voltaggio configurato</translation>
+        <translation>Подешени напон</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="104"/>
         <source>Maximum Voltage</source>
-        <translation>Voltaggio Massimo</translation>
+        <translation>Максимални напон</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="105"/>
         <source>Minimum Voltage</source>
-        <translation>Voltaggio minimo</translation>
+        <translation>Минимални напон</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="106"/>
         <source>Configured Speed</source>
-        <translation>Velocita configurata</translation>
+        <translation>Подешена брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="107"/>
         <source>Data Width</source>
-        <translation>Dimensione dei dati</translation>
+        <translation>Ширина података</translation>
     </message>
 </context>
 <context>
@@ -844,62 +844,62 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="266"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="267"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="268"/>
         <source>Type</source>
-        <translation>Tipo</translation>
+        <translation>Врста</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="269"/>
         <source>Display Input</source>
-        <translation>Ingresso video</translation>
+        <translation>Улази екрана</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="270"/>
         <source>Interface Type</source>
-        <translation>Tipo interfaccia</translation>
+        <translation>Врста сучеља</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="276"/>
         <source>Support Resolution</source>
-        <translation>Risoluzione supportata</translation>
+        <translation>Подржане резолуције</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="277"/>
         <source>Current Resolution</source>
-        <translation>Risoluzione corrente</translation>
+        <translation>Тренутна резолуција</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="278"/>
         <source>Primary Monitor</source>
-        <translation>Monitor primario</translation>
+        <translation>Главни монитор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="279"/>
         <source>Display Ratio</source>
-        <translation>Frequenza di aggiornamento</translation>
+        <translation>Размера екрана</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="280"/>
         <source>Size</source>
-        <translation>Dimensione</translation>
+        <translation>Величина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="281"/>
         <source>Serial Number</source>
-        <translation>Numero di serie</translation>
+        <translation>Серијски број</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="282"/>
         <source>Product Date</source>
-        <translation>Data produzione</translation>
+        <translation> Датум производње</translation>
     </message>
 </context>
 <context>
@@ -907,57 +907,57 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="235"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="236"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="237"/>
         <source>Type</source>
-        <translation>Tipo</translation>
+        <translation>Врста</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="238"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="239"/>
         <source>Bus Info</source>
-        <translation>Info BUS</translation>
+        <translation>Бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="240"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="241"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation>Управљач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="242"/>
         <source>Driver Version</source>
-        <translation>Versione driver</translation>
+        <translation>Верзија управљача</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="248"/>
         <source>Capacity</source>
-        <translation>Capacità</translation>
+        <translation>Капацитет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="249"/>
         <source>Speed</source>
-        <translation>Velocità</translation>
+        <translation>Брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="250"/>
         <source>Port</source>
-        <translation>Porta</translation>
+        <translation>Прикључак</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="251"/>
@@ -967,52 +967,52 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="252"/>
         <source>Link</source>
-        <translation>Link</translation>
+        <translation>Веза</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="253"/>
         <source>Latency</source>
-        <translation>Latenza</translation>
+        <translation>Кашњење</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="254"/>
         <source>IP</source>
-        <translation>IP</translation>
+        <translation>ИП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="255"/>
         <source>Firmware</source>
-        <translation>Firmware</translation>
+        <translation>Фирмвер</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="256"/>
         <source>Duplex</source>
-        <translation>Duplex</translation>
+        <translation>Дуплекс</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="257"/>
         <source>Broadcast</source>
-        <translation>Broadcast</translation>
+        <translation>Емитовање</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="258"/>
         <source>Auto Negotiation</source>
-        <translation>Negoziazione automatica</translation>
+        <translation>Само-преговарање</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="259"/>
         <source>Clock</source>
-        <translation>Clock</translation>
+        <translation>Радни такт</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="260"/>
         <source>Width</source>
-        <translation>Larghezza</translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="261"/>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation>Меморија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="262"/>
@@ -1022,17 +1022,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="263"/>
         <source>MAC Address</source>
-        <translation>Indirizzo MAC</translation>
+        <translation>МАК адреса</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="264"/>
         <source>Logical Name</source>
-        <translation>Nome logico</translation>
+        <translation>Логички назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="274"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -1040,37 +1040,37 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="111"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="112"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="113"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="114"/>
         <source>Bus Info</source>
-        <translation>Info BUS</translation>
+        <translation>Бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="115"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="121"/>
         <source>Input/Output</source>
-        <translation>Ingressi/Uscite</translation>
+        <translation>Улаз/Излаз</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="122"/>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation>Меморија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="123"/>
@@ -1080,27 +1080,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="124"/>
         <source>Latency</source>
-        <translation>Latenza</translation>
+        <translation>Кашњење</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="125"/>
         <source>Clock</source>
-        <translation>Clock</translation>
+        <translation>Радни такт</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="126"/>
         <source>Width</source>
-        <translation>Larghezza</translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="127"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation>Управљач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="128"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
 </context>
 <context>
@@ -1108,47 +1108,47 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="130"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="131"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="132"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="133"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="134"/>
         <source>Bus Info</source>
-        <translation>Info BUS</translation>
+        <translation>Бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="135"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="136"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation>Управљач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="137"/>
         <source>Maximum Power</source>
-        <translation>Potenza massima</translation>
+        <translation>Максимална снага</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
         <source>Speed</source>
-        <translation>Velocità</translation>
+        <translation>Брзина</translation>
     </message>
 </context>
 <context>
@@ -1156,77 +1156,77 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="210"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="211"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="212"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="213"/>
         <source>Serial Number</source>
-        <translation>Numero di serie</translation>
+        <translation>Серијски број</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="214"/>
         <source>Type</source>
-        <translation>Tipo</translation>
+        <translation>Врста</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="215"/>
         <source>Status</source>
-        <translation>Stato</translation>
+        <translation>Стање</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="216"/>
         <source>Capacity</source>
-        <translation>Capacità</translation>
+        <translation>Капацитет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="217"/>
         <source>Voltage</source>
-        <translation>Voltaggio</translation>
+        <translation>Напон</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="218"/>
         <source>Slot</source>
-        <translation>Slot</translation>
+        <translation>Лежиште</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="219"/>
         <source>Design Capacity</source>
-        <translation>Capacità designata</translation>
+        <translation>Пројектовани капацитет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="220"/>
         <source>Design Voltage</source>
-        <translation>Voltaggio designato</translation>
+        <translation>Пројектовани напон</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="221"/>
         <source>SBDS Version</source>
-        <translation>Versione SBDS</translation>
+        <translation>SBDS верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="222"/>
         <source>SBDS Serial Number</source>
-        <translation>Serial Number SBDS</translation>
+        <translation>SBDS серијски број</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="223"/>
         <source>SBDS Manufacture Date</source>
-        <translation>Data di produzione SBDS</translation>
+        <translation>SBDS датум производње</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="224"/>
         <source>SBDS Chemistry</source>
-        <translation>Chimica SBDS</translation>
+        <translation>SBDS хемија</translation>
     </message>
 </context>
 <context>
@@ -1234,27 +1234,27 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="148"/>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation>Назив</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="149"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="150"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="151"/>
         <source>Serial Number</source>
-        <translation>Numero di serie</translation>
+        <translation>Серијски број</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="157"/>
         <source>Shared</source>
-        <translation>Condivisa</translation>
+        <translation>Дељено</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="158"/>
@@ -1264,17 +1264,17 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="159"/>
         <source>Status</source>
-        <translation>Stato</translation>
+        <translation>Стање</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="160"/>
         <source>Interface Type</source>
-        <translation>Tipo interfaccia</translation>
+        <translation>Врста сучеља</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="170"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -1283,75 +1283,75 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="390"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="416"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="391"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="417"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="392"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="418"/>
         <source>Media Type</source>
-        <translation>Tipo Media</translation>
+        <translation>Врста медија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="393"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="419"/>
         <source>Size</source>
-        <translation>Dimensione</translation>
+        <translation>Величина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="394"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="395"/>
         <source>Capabilities</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="401"/>
         <source>Power Cycle Count</source>
-        <translation>Conteggio cicli</translation>
+        <translation>Број радних циклуса</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="402"/>
         <source>Power On Hours</source>
-        <translation>Ore in attività</translation>
+        <translation>Сати у раду</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="403"/>
         <source>Firmware Version</source>
-        <translation>Versione firmware</translation>
+        <translation>Верзија фирмвера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="404"/>
         <source>Speed</source>
-        <translation>Velocità</translation>
+        <translation>Брзина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="405"/>
         <source>Description</source>
-        <translation>Descrizione</translation>
+        <translation>Опис</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="406"/>
         <source>Serial Number</source>
-        <translation>Numero di serie</translation>
+        <translation>Серијски број</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="407"/>
         <source>Interface</source>
-        <translation>Interfaccia</translation>
+        <translation>Сучеље</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="408"/>
         <source>Rotation Rate</source>
-        <translation>Velocità rotazione</translation>
+        <translation>Брзина ротације</translation>
     </message>
 </context>
 <context>
@@ -1361,7 +1361,7 @@
         <location filename="../src/Widget/logtreeview.cpp" line="101"/>
         <location filename="../src/Widget/logtreeview.cpp" line="103"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -1369,7 +1369,7 @@
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="158"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -1378,47 +1378,47 @@
         <location filename="../src/Page/MainWindow.cpp" line="101"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
-        <translation>Info dispositivo</translation>
+        <translation>Подаци уређаја</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="174"/>
         <source>Display shortcuts</source>
-        <translation>Visualizza scorciatoie</translation>
+        <translation>Прикажи пречице</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="175"/>
         <source>Close</source>
-        <translation>Chiudi</translation>
+        <translation>Затвори</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="176"/>
         <source>Help</source>
-        <translation>Aiuto</translation>
+        <translation>Помоћ</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="177"/>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="181"/>
         <source>System</source>
-        <translation>Sistema</translation>
+        <translation>Систем</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="188"/>
         <source>Export</source>
-        <translation>Esporta</translation>
+        <translation>Извези</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="189"/>
         <source>Refresh</source>
-        <translation>Aggiorna</translation>
+        <translation>Освежи</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="193"/>
         <source>Device Manager</source>
-        <translation>Gestore dispositivi</translation>
+        <translation>Упраник Уређаја</translation>
     </message>
 </context>
 <context>
@@ -1426,7 +1426,7 @@
     <message>
         <location filename="../src/Page/PageDetail.cpp" line="284"/>
         <source>More</source>
-        <translation>Di più</translation>
+        <translation>Више</translation>
     </message>
 </context>
 <context>
@@ -1434,17 +1434,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="14"/>
         <source>Refresh</source>
-        <translation>Aggiorna</translation>
+        <translation>Освежи</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="15"/>
         <source>Export</source>
-        <translation>Esporta</translation>
+        <translation>Извези</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="17"/>
         <source>Overview</source>
-        <translation>Panoramica</translation>
+        <translation>Генерално</translation>
     </message>
 </context>
 <context>
@@ -1452,12 +1452,12 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
         <source>Failed to enable the device</source>
-        <translation>Attivazione dispositivo fallita</translation>
+        <translation>Неуспешно омогућавање уређаја</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="97"/>
         <source>Failed to disable the device</source>
-        <translation>Attivazione dispositivo fallita</translation>
+        <translation>Неуспешно онемогућавање уређаја</translation>
     </message>
 </context>
 <context>
@@ -1465,22 +1465,22 @@
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="27"/>
         <source>Refresh</source>
-        <translation>Aggiorna</translation>
+        <translation>Освежи</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="28"/>
         <source>Export</source>
-        <translation>Esporta</translation>
+        <translation>Извези</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="29"/>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="61"/>
         <source>Overview</source>
-        <translation>Panoramica</translation>
+        <translation>Генерално</translation>
     </message>
 </context>
 <context>
@@ -1488,17 +1488,17 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="21"/>
         <source>Refresh</source>
-        <translation>Aggiorna</translation>
+        <translation>Освежи</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="22"/>
         <source>Export</source>
-        <translation>Esporta</translation>
+        <translation>Извези</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="23"/>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="24"/>
@@ -1506,23 +1506,23 @@
         <location filename="../src/Page/PageSingleInfo.cpp" line="120"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="153"/>
         <source>Enable</source>
-        <translation>Abilita</translation>
+        <translation>Омогући</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="118"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="168"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="159"/>
         <source>Failed to disable the device</source>
-        <translation>Attivazione dispositivo fallita</translation>
+        <translation>Неуспешно онемогућавање уређаја</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="174"/>
         <source>Failed to enable the device</source>
-        <translation>Attivazione dispositivo fallita</translation>
+        <translation>Неуспешно омогућавање уређаја</translation>
     </message>
 </context>
 <context>
@@ -1530,7 +1530,7 @@
     <message>
         <location filename="../src/Page/PageTableHeader.cpp" line="61"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -1540,36 +1540,36 @@
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="36"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="384"/>
         <source>SubVendor</source>
-        <translation>Vendor secondario</translation>
+        <translation>Под-произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="37"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="383"/>
         <source>SubDevice</source>
-        <translation>Dispositivo secondario</translation>
+        <translation>Под-урећај</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="240"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation>Управљач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="241"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="135"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="38"/>
         <source>Driver Modules</source>
-        <translation>Moduli driver</translation>
+        <translation>Модули управљача</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="242"/>
         <source>Driver Status</source>
-        <translation>Stato driver</translation>
+        <translation>Стање управљача</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="243"/>
         <source>Driver Activation Cmd</source>
-        <translation>Comandi di attivazione driver</translation>
+        <translation>Комада за активирање управљача</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="244"/>
@@ -1577,7 +1577,7 @@
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="380"/>
         <source>Config Status</source>
-        <translation>Stato configurazione</translation>
+        <translation>Стање подешавања</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="247"/>
@@ -1587,13 +1587,13 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="228"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="377"/>
         <source>physical id</source>
-        <translation>ID Fisico</translation>
+        <translation>физички ид</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="248"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>latency</source>
-        <translation>latenza</translation>
+        <translation>кашњење</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="250"/>
@@ -1608,19 +1608,19 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="252"/>
         <source>Handlers</source>
-        <translation>Handlers</translation>
+        <translation>Обрађивачи</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="253"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="198"/>
         <source>PROP</source>
-        <translation>PROP</translation>
+        <translation>ПРОП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="254"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="199"/>
         <source>EV</source>
-        <translation>EV</translation>
+        <translation>ЕВ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="255"/>
@@ -1631,269 +1631,269 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="257"/>
         <source>Model</source>
-        <translation>Modello</translation>
+        <translation>Модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
         <source>Vendor</source>
-        <translation>Marca</translation>
+        <translation>Произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="259"/>
         <source>Version</source>
-        <translation>Versione</translation>
+        <translation>Верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="260"/>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="182"/>
         <source>Bus</source>
-        <translation>BUS</translation>
+        <translation>Бус</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="25"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="215"/>
         <source>BIOS Information</source>
-        <translation>Info BIOS</translation>
+        <translation>Подаци БИОС-а</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="47"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="216"/>
         <source>Base Board Information</source>
-        <translation>Info base scheda</translation>
+        <translation>Подаци основне плоче</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="69"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="217"/>
         <source>System Information</source>
-        <translation>Info Sistema</translation>
+        <translation>Подаци система</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="85"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="218"/>
         <source>Chassis Information</source>
-        <translation>Info Chassis</translation>
+        <translation>Подаци о шасији</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="101"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="219"/>
         <source>Physical Memory Array</source>
-        <translation>Matrice di memoria fisica</translation>
+        <translation>Физички меморијски низ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="163"/>
         <source>Release Date</source>
-        <translation>Data di rilascio</translation>
+        <translation>Датум објаве</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="164"/>
         <source>Address</source>
-        <translation>Indirizzi</translation>
+        <translation>Адреса</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="165"/>
         <source>Runtime Size</source>
-        <translation>Dimensione Runtime</translation>
+        <translation>Величина извршавања</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="166"/>
         <source>ROM Size</source>
-        <translation>Dimensione ROM</translation>
+        <translation>Величина РОМ-а</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="167"/>
         <source>Characteristics</source>
-        <translation>Caratteristiche</translation>
+        <translation>Особине</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="168"/>
         <source>BIOS Revision</source>
-        <translation>Revisione BIOS</translation>
+        <translation>БИОС ревизија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="169"/>
         <source>Firmware Revision</source>
-        <translation>Revisione Firmware</translation>
+        <translation>Рвизија фирмвера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="171"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="180"/>
         <source>Product Name</source>
-        <translation>Nome Prodotto</translation>
+        <translation>Назив производа</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="172"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="182"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="191"/>
         <source>Serial Number</source>
-        <translation>Numero di serie</translation>
+        <translation>Серијски број</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="173"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="192"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="70"/>
         <source>Asset Tag</source>
-        <translation>Etichetta risorsa</translation>
+        <translation>Ознака ресурса</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="174"/>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="186"/>
         <source>Features</source>
-        <translation>Funzionalità</translation>
+        <translation>Могућности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="175"/>
         <source>Location In Chassis</source>
-        <translation>Locazione nello Chassis</translation>
+        <translation>Локација у шасији</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="176"/>
         <source>Chassis Handle</source>
-        <translation>Chassis Handle</translation>
+        <translation>Ручка шасије</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="177"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="189"/>
         <source>Type</source>
-        <translation>Tipo</translation>
+        <translation>Врста</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="178"/>
         <source>Contained Object Handles</source>
-        <translation>Contenuto dello Chassis</translation>
+        <translation>Садржане ручке предмета</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="183"/>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="208"/>
         <source>UUID</source>
-        <translation>UUID</translation>
+        <translation>УУИД</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="184"/>
         <source>Wake-up Type</source>
-        <translation>Tempo di attività</translation>
+        <translation>Врста буђења</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="185"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="201"/>
         <source>SKU Number</source>
-        <translation>Numero SKU</translation>
+        <translation>СКУ број</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="186"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="213"/>
         <source>Family</source>
-        <translation>Famiglia</translation>
+        <translation>Породица</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="190"/>
         <source>Lock</source>
-        <translation>Blocco</translation>
+        <translation>Брава</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="193"/>
         <source>Boot-up State</source>
-        <translation>Stato Boot-up</translation>
+        <translation>Стање покретања</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="194"/>
         <source>Power Supply State</source>
-        <translation>Stato dell&apos;alimentazione</translation>
+        <translation>Стање напајања</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="195"/>
         <source>Thermal State</source>
-        <translation>Stato termico</translation>
+        <translation>Термичко стање</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="196"/>
         <source>Security Status</source>
-        <translation>Stato sicurezza</translation>
+        <translation>Безбедносни статус</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="197"/>
         <source>OEM Information</source>
-        <translation>Info OEM</translation>
+        <translation>ОЕМ подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="198"/>
         <source>Height</source>
-        <translation>Altezza</translation>
+        <translation>Висина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="199"/>
         <source>Number Of Power Cords</source>
-        <translation>Numero di cavi di alimentazione</translation>
+        <translation>Број напојних каблова</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="200"/>
         <source>Contained Elements</source>
-        <translation>Elementi contenuti</translation>
+        <translation>Садржани елементи</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="203"/>
         <source>Location</source>
-        <translation>Locazione</translation>
+        <translation>Локација</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="205"/>
         <source>Error Correction Type</source>
-        <translation>Tipo di correzione errori</translation>
+        <translation>Начин исправљања грешака</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="206"/>
         <source>Maximum Capacity</source>
-        <translation>Capacità massima</translation>
+        <translation>Максимални капацитет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="207"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="65"/>
         <source>Error Information Handle</source>
-        <translation>Gestione delle informazioni sull&apos;errore</translation>
+        <translation>Ручка подтака грешке</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="208"/>
         <source>Number Of Devices</source>
-        <translation>Numero di dispositivi</translation>
+        <translation>Број уређаја</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="210"/>
         <source>BIOS ROMSIZE</source>
-        <translation>Dimensione ROM del BIOS</translation>
+        <translation>BIOS ROMSIZE</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="211"/>
         <source>Release date</source>
-        <translation>Data di rilascio</translation>
+        <translation>Датум објаве</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="212"/>
         <source>Board name</source>
-        <translation>Nome scheda</translation>
+        <translation>Назив плоче</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="221"/>
         <source>SMBIOS Version</source>
-        <translation>Versione SMBIOS</translation>
+        <translation>СМБИОС верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="223"/>
         <source>Language Description Format</source>
-        <translation>Formato linguaggi supportato</translation>
+        <translation>Формат описа језика</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="224"/>
         <source>Installable Languages</source>
-        <translation>Linguaggi installabili</translation>
+        <translation>Уградиви језици</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="225"/>
         <source>Currently Installed Language</source>
-        <translation>Linguaggi attualmente installati</translation>
+        <translation>Тренутно инсталирани језик</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="183"/>
         <source>BD Address</source>
-        <translation>Indirizzo BD</translation>
+        <translation>BD адреса</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="184"/>
@@ -1908,85 +1908,85 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="187"/>
         <source>Packet type</source>
-        <translation>Tipo pacchetto</translation>
+        <translation>Тип пакета</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="188"/>
         <source>Link policy</source>
-        <translation>Link policy</translation>
+        <translation>Политика везе</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="189"/>
         <source>Link mode</source>
-        <translation>Link mode</translation>
+        <translation>Режим везе</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="190"/>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="204"/>
         <source>Class</source>
-        <translation>Classe</translation>
+        <translation>Класа</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="191"/>
         <source>Service Classes</source>
-        <translation>Classi Servizio</translation>
+        <translation>Сервисне класе</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="192"/>
         <source>Device Class</source>
-        <translation>Classe Dispositivo</translation>
+        <translation>Класа уређаја</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="193"/>
         <source>HCI Version</source>
-        <translation>Versione HCI</translation>
+        <translation>ХЦИ верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="195"/>
         <source>LMP Version</source>
-        <translation>Versione LMP</translation>
+        <translation>ЛМП верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="196"/>
         <source>Subversion</source>
-        <translation>Sottoversione</translation>
+        <translation>Подверзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="198"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="35"/>
         <source>Device</source>
-        <translation>Dispositivo</translation>
+        <translation>Уређај</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="199"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="134"/>
         <source>Serial ID</source>
-        <translation>ID Seriale</translation>
+        <translation>Серијски ИД</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="201"/>
         <source>product</source>
-        <translation>prodotto</translation>
+        <translation>производ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="202"/>
         <source>description</source>
-        <translation>descrizione</translation>
+        <translation>опис</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="205"/>
         <source>Powered</source>
-        <translation>Alimentato</translation>
+        <translation>Напојено</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="206"/>
         <source>Discoverable</source>
-        <translation>Identificabile</translation>
+        <translation>Може се открити</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="207"/>
         <source>Pairable</source>
-        <translation>Associabile</translation>
+        <translation>Упариво</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="209"/>
@@ -1996,444 +1996,444 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="210"/>
         <source>Discovering</source>
-        <translation>Mostra</translation>
+        <translation>Откривање</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="136"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="202"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="372"/>
         <source>Device File</source>
-        <translation>File dispositivo</translation>
+        <translation>Датотека уређаја</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="137"/>
         <source>Device Files</source>
-        <translation>File dispositivo</translation>
+        <translation>Датотеке уређаја</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="138"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="381"/>
         <source>Device Number</source>
-        <translation>Numero dispositivo</translation>
+        <translation>Број уређаја</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="139"/>
         <source>Module Alias</source>
-        <translation>Alias modulo</translation>
+        <translation>Псеудоним модула</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="141"/>
         <source>Application</source>
-        <translation>Applicazione</translation>
+        <translation>Примена</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="144"/>
         <source>status</source>
-        <translation>stato</translation>
+        <translation>статус</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="145"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="375"/>
         <source>logical name</source>
-        <translation>Nome logico</translation>
+        <translation>логичко име</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="147"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="373"/>
         <source>ansiversion</source>
-        <translation>versione ANSI</translation>
+        <translation>ANSI верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="34"/>
         <source>CPU implementer</source>
-        <translation>CPU implementer</translation>
+        <translation>ЦПЈ реализатор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="35"/>
         <source>CPU architecture</source>
-        <translation>Architettura CPU</translation>
+        <translation>ЦПЈ архитектура</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="36"/>
         <source>CPU variant</source>
-        <translation>Variante CPU</translation>
+        <translation>ЦПЈ варијанта</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="37"/>
         <source>CPU part</source>
-        <translation>Parte CPU</translation>
+        <translation>ЦПЈ део</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="38"/>
         <source>CPU revision</source>
-        <translation>Revisione CPU</translation>
+        <translation>ЦПЈ ревизија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="355"/>
         <source>One</source>
-        <translation>Uno</translation>
+        <translation>Једно</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="356"/>
         <source>Two</source>
-        <translation>Due</translation>
+        <translation>Два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="357"/>
         <source>Four</source>
-        <translation>Quattro</translation>
+        <translation>Четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="358"/>
         <source>Six</source>
-        <translation>Sei</translation>
+        <translation>Шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="359"/>
         <source>Eight</source>
-        <translation>Otto</translation>
+        <translation>Осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="361"/>
         <source>Ten</source>
-        <translation>Dieci</translation>
+        <translation>Десет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="362"/>
         <source>Twelve</source>
-        <translation>Dodici</translation>
+        <translation>Дванест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="363"/>
         <source>Fourteen</source>
-        <translation>Quattordici</translation>
+        <translation>Четрнест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="364"/>
         <source>Sixteen</source>
-        <translation>Sedici</translation>
+        <translation>Шеснест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="365"/>
         <source>Eighteen</source>
-        <translation>Diciotto</translation>
+        <translation>Осамнест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="367"/>
         <source>Twenty</source>
-        <translation>Venti</translation>
+        <translation>Двадесет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="368"/>
         <source>Twenty-two</source>
-        <translation>Ventidue</translation>
+        <translation>Двадесет два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="369"/>
         <source>Twenty-four</source>
-        <translation>Ventiquattro</translation>
+        <translation>Двадесет четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="370"/>
         <source>Twenty-six</source>
-        <translation>Ventisei</translation>
+        <translation>Двадесет шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="371"/>
         <source>Twenty-eight</source>
-        <translation>Ventotto</translation>
+        <translation>Двадесет осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="373"/>
         <source>Thirty</source>
-        <translation>Trenta</translation>
+        <translation>Тридесет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="374"/>
         <source>Thirty-two</source>
-        <translation>Trentadue</translation>
+        <translation>Тридесет два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="375"/>
         <source>Thirty-four</source>
-        <translation>Trentaquattro</translation>
+        <translation>Тридесет четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="376"/>
         <source>Thirty-six</source>
-        <translation>Tentasei</translation>
+        <translation>Тридесет шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="377"/>
         <source>Thirty-eight</source>
-        <translation>Trentotto</translation>
+        <translation>Тридесет осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="379"/>
         <source>Forty</source>
-        <translation>Quaranta</translation>
+        <translation>Четрдесет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="380"/>
         <source>Forty-two</source>
-        <translation>Quarantadue</translation>
+        <translation>Четрдесет два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="381"/>
         <source>Forty-four</source>
-        <translation>Quarantaquattro</translation>
+        <translation>Четрдесет четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="382"/>
         <source>Forty-six</source>
-        <translation>Quarantasei</translation>
+        <translation>Четрдесет шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="383"/>
         <source>Forty-eight</source>
-        <translation>Quarantotto</translation>
+        <translation>Четрдесет осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="385"/>
         <source>Fifty</source>
-        <translation>Cinquanta</translation>
+        <translation>Педесет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="386"/>
         <source>Fifty-two</source>
-        <translation>Cinquantadue</translation>
+        <translation>Педесет два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="387"/>
         <source>Fifty-four</source>
-        <translation>Cinquataquattro</translation>
+        <translation>Педесет четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="388"/>
         <source>Fifty-six</source>
-        <translation>Cinquantasei</translation>
+        <translation>Педесет шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="389"/>
         <source>Fifty-eight</source>
-        <translation>Cinquantotto</translation>
+        <translation>Педесет осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="391"/>
         <source>Sixty</source>
-        <translation>Sessanta</translation>
+        <translation>Шездесет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="392"/>
         <source>Sixty-two</source>
-        <translation>Sessantadue</translation>
+        <translation>Шездесет два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="393"/>
         <source>Sixty-four</source>
-        <translation>Sessantaquattro</translation>
+        <translation>Шездесет четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="394"/>
         <source>Sixty-six</source>
-        <translation>Sessantasei</translation>
+        <translation>Шездесет-шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="395"/>
         <source>Sixty-eight</source>
-        <translation>Sessantotto</translation>
+        <translation>Педесет-осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="397"/>
         <source>Seventy</source>
-        <translation>Settanta</translation>
+        <translation>Седамдесет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="398"/>
         <source>Seventy-two</source>
-        <translation>Settandadue</translation>
+        <translation>Седамдесет-два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="399"/>
         <source>Seventy-four</source>
-        <translation>Settantaquattro</translation>
+        <translation>Седамдесет-четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="400"/>
         <source>Seventy-six</source>
-        <translation>Settantasei</translation>
+        <translation>Седамдесет-шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="401"/>
         <source>Seventy-eight</source>
-        <translation>Sessantotto</translation>
+        <translation>Седамдесет-осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="403"/>
         <source>Eighty</source>
-        <translation>Ottanta</translation>
+        <translation>Осамдесет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="404"/>
         <source>Eighty-two</source>
-        <translation>Ottantadue</translation>
+        <translation>Осамдесет-два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="405"/>
         <source>Eighty-four</source>
-        <translation>Ottantaquattro</translation>
+        <translation>Осамдесет-четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="406"/>
         <source>Eighty-six</source>
-        <translation>Ottantasei</translation>
+        <translation>Осамдесет-шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="407"/>
         <source>Eighty-eight</source>
-        <translation>Ottantotto</translation>
+        <translation>Осамдесет-осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="409"/>
         <source>Ninety</source>
-        <translation>Novanta</translation>
+        <translation>Деведесет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="410"/>
         <source>Ninety-two</source>
-        <translation>Novantadue</translation>
+        <translation>Деведесет-два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="411"/>
         <source>Ninety-four</source>
-        <translation>Novantaquattro</translation>
+        <translation>Деведесет-четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="412"/>
         <source>Ninety-six</source>
-        <translation>Novantasei</translation>
+        <translation>Деведесет-шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="413"/>
         <source>Ninety-eight</source>
-        <translation>Novantotto</translation>
+        <translation>Деведесет-осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="415"/>
         <source>One hundred</source>
-        <translation>Cento</translation>
+        <translation>Сто</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="416"/>
         <source>One hundred and Two</source>
-        <translation>Centodue</translation>
+        <translation>Сто-два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="417"/>
         <source>One hundred and four</source>
-        <translation>Centoquattro</translation>
+        <translation>Сто-четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="418"/>
         <source>One hundred and Six</source>
-        <translation>Centosei</translation>
+        <translation>Сто-шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="419"/>
         <source>One hundred and Eight</source>
-        <translation>Centootto</translation>
+        <translation>Сто-осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="421"/>
         <source>One hundred and Ten</source>
-        <translation>Centodieci</translation>
+        <translation>Сто-десет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="422"/>
         <source>One hundred and Twelve</source>
-        <translation>Centododici</translation>
+        <translation>Сто-дванаест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>One hundred and Fourteen</source>
-        <translation>Centoquattordici</translation>
+        <translation>Сто-четрнаест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="424"/>
         <source>One hundred and Sixteen</source>
-        <translation>Centosedici</translation>
+        <translation>Сто-шеснаест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="425"/>
         <source>One hundred and Eighteen</source>
-        <translation>Centodiciotto</translation>
+        <translation>Сто-осамнаест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="427"/>
         <source>One hundred and Twenty</source>
-        <translation>Centoventi</translation>
+        <translation>Сто-двадесет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="428"/>
         <source>One hundred and Twenty-two</source>
-        <translation>Centoventidue</translation>
+        <translation>Сто-двадесет-два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="429"/>
         <source>One hundred and Twenty-four</source>
-        <translation>Centoventiquattro</translation>
+        <translation>Сто-двадесет-четири</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="430"/>
         <source>One hundred and Twenty-six</source>
-        <translation>Centoventisei</translation>
+        <translation>Сто-двадесет-шест</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="431"/>
         <source>One hundred and Twenty-eight</source>
-        <translation>Centoventotto</translation>
+        <translation>Сто двадесет осам</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
         <source>GDDR capacity</source>
-        <translation>Capacità GDDR</translation>
+        <translation>GDDR капацитет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
         <source>GPU vendor</source>
-        <translation>Marca CPU</translation>
+        <translation>GPU произвођач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="45"/>
         <source>GPU type</source>
-        <translation>Tipo CPU</translation>
+        <translation>GPU врста</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="46"/>
         <source>EGL version</source>
-        <translation>Versione EGL</translation>
+        <translation>EGL верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
         <source>EGL client APIs</source>
-        <translation>API Client EGL</translation>
+        <translation>EGL клијент API-ји</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
         <source>GL version</source>
-        <translation>Versione GL</translation>
+        <translation>GL верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
         <source>GLSL version</source>
-        <translation>Versione GLSL</translation>
+        <translation>GLSL верзија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="69"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="183"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="204"/>
         <source>Unknown</source>
-        <translation>Sconosciuto</translation>
+        <translation>Непознато</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="201"/>
@@ -2444,7 +2444,7 @@
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="203"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="371"/>
         <source>Hardware Class</source>
-        <translation>Classe hardware</translation>
+        <translation>Класа уређаја</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="698"/>
@@ -2452,7 +2452,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="752"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="787"/>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation>ЦПЈ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="698"/>
@@ -2460,7 +2460,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="752"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="787"/>
         <source>No CPU found</source>
-        <translation>Nessuna CPU rilevata</translation>
+        <translation>Није пронађен ЦПЈ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="699"/>
@@ -2468,7 +2468,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="753"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="788"/>
         <source>Motherboard</source>
-        <translation>Scheda Madre</translation>
+        <translation>Матична плоча</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="699"/>
@@ -2476,7 +2476,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="753"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="788"/>
         <source>No motherboard found</source>
-        <translation>Nessuna scheda madre rilevata</translation>
+        <translation>Матична плоча није пронађена</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="700"/>
@@ -2484,7 +2484,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="754"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="789"/>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation>Меморија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="700"/>
@@ -2492,7 +2492,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="754"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="789"/>
         <source>No memory found</source>
-        <translation>Nessuna memoria rilevata</translation>
+        <translation>Меморија није пронађена</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="701"/>
@@ -2500,7 +2500,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="755"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="790"/>
         <source>Storage</source>
-        <translation>Archiviazione</translation>
+        <translation>Складиште</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="701"/>
@@ -2508,7 +2508,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="755"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="790"/>
         <source>No disk found</source>
-        <translation>Nessun disco rilevato</translation>
+        <translation>Није пронађен диск</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="702"/>
@@ -2516,7 +2516,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="756"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="791"/>
         <source>Display Adapter</source>
-        <translation>Adattatore video</translation>
+        <translation>Графичка картица</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="702"/>
@@ -2524,7 +2524,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="756"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="791"/>
         <source>No GPU found</source>
-        <translation>Nessuna GPU rilevata</translation>
+        <translation>Није пронађен GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="703"/>
@@ -2532,7 +2532,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="757"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="792"/>
         <source>Monitor</source>
-        <translation>Monitor</translation>
+        <translation>Монитор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="703"/>
@@ -2540,7 +2540,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="757"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="792"/>
         <source>No monitor found</source>
-        <translation>Nessuno schermo rilevato</translation>
+        <translation>Монитор није пронађен</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="704"/>
@@ -2548,7 +2548,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="758"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="793"/>
         <source>Network Adapter</source>
-        <translation>Adattatore di Rete</translation>
+        <translation>Мрежна картица</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="704"/>
@@ -2556,7 +2556,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="758"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="793"/>
         <source>No network adapter found</source>
-        <translation>Nessun adattatore di rete rilevato</translation>
+        <translation>Мрежна картица није пронађена</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="705"/>
@@ -2564,7 +2564,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="759"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="794"/>
         <source>Sound Adapter</source>
-        <translation>Adattatore audio</translation>
+        <translation>Звучнa картица</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="705"/>
@@ -2572,7 +2572,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="759"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="794"/>
         <source>No audio device found</source>
-        <translation>Nessun dispositivo audio rilevato</translation>
+        <translation>Није пронађен аудио уређај</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="706"/>
@@ -2580,7 +2580,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="760"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="795"/>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
+        <translation>Блутут</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="706"/>
@@ -2588,7 +2588,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="760"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="795"/>
         <source>No Bluetooth device found</source>
-        <translation>Nessun adattatore Bluetooth rilevato</translation>
+        <translation>Није пронађен блутут уређај</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="707"/>
@@ -2596,7 +2596,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="761"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="796"/>
         <source>Other PCI Devices</source>
-        <translation>Altri Dispositivi PCI</translation>
+        <translation>Остали PCI уређаји</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="707"/>
@@ -2604,7 +2604,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="761"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="796"/>
         <source>No other PCI devices found</source>
-        <translation>Nessun altro dispositivo rilevato</translation>
+        <translation>Нису пронађени други PCI уређаји</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="708"/>
@@ -2612,7 +2612,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="762"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="797"/>
         <source>Power</source>
-        <translation>Alimentazione</translation>
+        <translation>Напајање</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="708"/>
@@ -2620,7 +2620,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="762"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="797"/>
         <source>No battery found</source>
-        <translation>Nessuna batteria rilevata</translation>
+        <translation>Није пронађена батерија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="709"/>
@@ -2628,7 +2628,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="763"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="798"/>
         <source>Keyboard</source>
-        <translation>Tastiera</translation>
+        <translation>Тастатура</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="709"/>
@@ -2636,7 +2636,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="763"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="798"/>
         <source>No keyboard found</source>
-        <translation>Nessuna tastiera rilevata</translation>
+        <translation>Тастатура није проађена</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="710"/>
@@ -2644,7 +2644,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="764"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="799"/>
         <source>Mouse</source>
-        <translation>Mouse</translation>
+        <translation>Миш</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="710"/>
@@ -2652,7 +2652,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="764"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="799"/>
         <source>No mouse found</source>
-        <translation>Nessun mouse rilevato</translation>
+        <translation>Миш није пронађен</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="711"/>
@@ -2660,7 +2660,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="765"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="800"/>
         <source>Printer</source>
-        <translation>Stampante</translation>
+        <translation>Штампач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="711"/>
@@ -2668,7 +2668,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="765"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="800"/>
         <source>No printer found</source>
-        <translation>Nessuna stampante rilevata</translation>
+        <translation>Штампач није пронађен</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="712"/>
@@ -2676,7 +2676,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="766"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="801"/>
         <source>Camera</source>
-        <translation>Camera</translation>
+        <translation>Камера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="712"/>
@@ -2684,7 +2684,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="766"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="801"/>
         <source>No camera found</source>
-        <translation>Nessuna Camera rilevata</translation>
+        <translation>Камера није пронађена</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="713"/>
@@ -2692,7 +2692,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="767"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="802"/>
         <source>CD-ROM</source>
-        <translation>CD-ROM</translation>
+        <translation>ЦД-РОМ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="713"/>
@@ -2700,7 +2700,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="767"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="802"/>
         <source>No CD-ROM found</source>
-        <translation>Nessun CD-ROM rilevato</translation>
+        <translation>Није пронађен ЦД-РОМ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="714"/>
@@ -2708,7 +2708,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="768"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="803"/>
         <source>Other Devices</source>
-        <translation>Altri dispositivi</translation>
+        <translation>Остали уређаји</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="714"/>
@@ -2716,97 +2716,97 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="768"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="803"/>
         <source>No other devices found</source>
-        <translation>Nessun altro dispositivo rilevato</translation>
+        <translation>Нису пронађени други уређаји</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="64"/>
         <source>Array Handle</source>
-        <translation>Array Handle</translation>
+        <translation>Ручка низа</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="66"/>
         <source>Form Factor</source>
-        <translation>Fattore forma</translation>
+        <translation>Формат</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="67"/>
         <source>Set</source>
-        <translation>Imposta</translation>
+        <translation>Комплет</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="68"/>
         <source>Bank Locator</source>
-        <translation>Locazione Banco</translation>
+        <translation>Локатор банке</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="69"/>
         <source>Type Detail</source>
-        <translation>Dettagli</translation>
+        <translation>Детаљи типа</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="71"/>
         <source>Part Number</source>
-        <translation>Numero componente</translation>
+        <translation>Произвођачки број</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="72"/>
         <source>Rank</source>
-        <translation>Classifica</translation>
+        <translation>Ранг</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="73"/>
         <source>Memory Technology</source>
-        <translation>Tecnologia della memoria</translation>
+        <translation>Технологија меморије</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="74"/>
         <source>Memory Operating Mode Capability</source>
-        <translation>Capacità modalità operativa della memoria</translation>
+        <translation>Капацитет меморије у радном режиму</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="75"/>
         <source>Firmware Version</source>
-        <translation>Versione firmware</translation>
+        <translation>Верзија фирмвера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="76"/>
         <source>Module Manufacturer ID</source>
-        <translation>ID modulo fabbricante</translation>
+        <translation>ИД произвођача модула</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="77"/>
         <source>Module Product ID</source>
-        <translation>ID Prodotti del modulo</translation>
+        <translation>ИД производа</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="78"/>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation>ID produttore controller sottosistema memoria</translation>
+        <translation>ИД произвођача контолера меморијског подсистема</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="79"/>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation>ID prodotto controller sottosistema memoria</translation>
+        <translation>Ид производа контолера меморијског подсистема</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="80"/>
         <source>Non-Volatile Size</source>
-        <translation>Dimensione Non-Volatile</translation>
+        <translation>Постојана величина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="81"/>
         <source>Volatile Size</source>
-        <translation>Dimensione Volatile</translation>
+        <translation>Непостојана величина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="82"/>
         <source>Cache Size</source>
-        <translation>Dimensioni Cache</translation>
+        <translation>Величина кеша</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="83"/>
         <source>Logical Size</source>
-        <translation>Dimensione logica</translation>
+        <translation>Логичка величина</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="43"/>
@@ -2814,12 +2814,12 @@
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="382"/>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="409"/>
         <source>inch</source>
-        <translation>pollici</translation>
+        <translation>инча</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="260"/>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation>Датум</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="227"/>
@@ -2829,218 +2829,218 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="229"/>
         <source>network</source>
-        <translation>rete</translation>
+        <translation>мрежа</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="38"/>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="64"/>
         <source>battery</source>
-        <translation>Batteria</translation>
+        <translation>батерија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="181"/>
         <source>native-path</source>
-        <translation>percorso-nativo</translation>
+        <translation>месна-путања</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="182"/>
         <source>power supply</source>
-        <translation>alimentatore</translation>
+        <translation>напајање</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="183"/>
         <source>updated</source>
-        <translation>aggiornato</translation>
+        <translation>ажурирано</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="184"/>
         <source>has history</source>
-        <translation>ha la cronologia</translation>
+        <translation>има историју</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="185"/>
         <source>has statistics</source>
-        <translation>ha delle statistiche</translation>
+        <translation>има статистику</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="186"/>
         <source>rechargeable</source>
-        <translation>ricaricabile</translation>
+        <translation>пуњиво</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="187"/>
         <source>state</source>
-        <translation>stato</translation>
+        <translation>стање</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="188"/>
         <source>warning-level</source>
-        <translation>livello-avviso</translation>
+        <translation>ниво-упозорења</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="189"/>
         <source>energy</source>
-        <translation>energia</translation>
+        <translation>енергија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="190"/>
         <source>energy-empty</source>
-        <translation>batteria-scarica</translation>
+        <translation>без-енергије</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="191"/>
         <source>energy-full</source>
-        <translation>energia-completa</translation>
+        <translation>пуна-енергија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="192"/>
         <source>energy-full-design</source>
-        <translation>energia-completa-tipologia</translation>
+        <translation>пројектована-пуна-енергија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="193"/>
         <source>energy-rate</source>
-        <translation>indice-energetico</translation>
+        <translation>енергетска-оцена</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="194"/>
         <source>voltage</source>
-        <translation>voltaggio</translation>
+        <translation>напон</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="195"/>
         <source>percentage</source>
-        <translation>percentuale</translation>
+        <translation>проценат</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="196"/>
         <source>temperature</source>
-        <translation>temperatura</translation>
+        <translation>температура</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="197"/>
         <source>technology</source>
-        <translation>tecnologia</translation>
+        <translation>технологија</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="198"/>
         <source>icon-name</source>
-        <translation>nome-icona</translation>
+        <translation>име-иконице</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="199"/>
         <source>online</source>
-        <translation>online</translation>
+        <translation>на-мрежи</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="200"/>
         <source>daemon-version</source>
-        <translation>versione-demone</translation>
+        <translation>верзија-демона</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="201"/>
         <source>on-battery</source>
-        <translation>a-batteria</translation>
+        <translation>на-батерији</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="202"/>
         <source>lid-is-closed</source>
-        <translation>coperchio-chiuso</translation>
+        <translation>поклопац-је-затворен</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="203"/>
         <source>lid-is-present</source>
-        <translation>coperchio-presente</translation>
+        <translation>поклопац-је-присутан</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="204"/>
         <source>critical-action</source>
-        <translation>azione-critica</translation>
+        <translation>критични-поступак</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="116"/>
         <source>copies</source>
-        <translation>copie</translation>
+        <translation>копије</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="119"/>
         <source>job-cancel-after</source>
-        <translation>azione-cancellata-dopo</translation>
+        <translation>обустава-задатка-након</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="120"/>
         <source>job-hold-until</source>
-        <translation>azione-sospesa-sino</translation>
+        <translation>задатак-чека-до</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="121"/>
         <source>job-priority</source>
-        <translation>priorità-azione</translation>
+        <translation>приоритет-задатка</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="123"/>
         <source>marker-change-time</source>
-        <translation>marker-change-time</translation>
+        <translation> време-промене-маркера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="126"/>
         <source>number-up</source>
-        <translation>number-up</translation>
+        <translation> више-страница-на-листу</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="127"/>
         <source>orientation-requested</source>
-        <translation>orientation-requested</translation>
+        <translation> тражена-оријентација</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="128"/>
         <source>print-color-mode</source>
-        <translation>print-color-mode</translation>
+        <translation>режим-боје-штампања</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="132"/>
         <source>printer-is-accepting-jobs</source>
-        <translation>printer-is-accepting-jobs</translation>
+        <translation>штампач-прихвата-задатке</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="133"/>
         <source>printer-is-shared</source>
-        <translation>printer-is-shared</translation>
+        <translation>штампач-је-дељен</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="134"/>
         <source>printer-is-temporary</source>
-        <translation>printer-is-temporary</translation>
+        <translation>привремени-штампач</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="136"/>
         <source>printer-make-and-model</source>
-        <translation>marca-modello-stampante</translation>
+        <translation>штампач-произвођач-и-модел</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="138"/>
         <source>printer-state-change-time</source>
-        <translation>printer-state-change-time</translation>
+        <translation> Време-промене-стања-штампача</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="139"/>
         <source>printer-state-reasons</source>
-        <translation>printer-state-reasons</translation>
+        <translation>разлози-стања-штампача</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="140"/>
         <source>printer-type</source>
-        <translation>printer-type</translation>
+        <translation>врста-штампача</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="141"/>
         <source>printer-uri-supported</source>
-        <translation>printer-uri-supported</translation>
+        <translation>ури-штампача-подржан</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="142"/>
         <source>sides</source>
-        <translation>sides</translation>
+        <translation>стране</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="179"/>
@@ -3057,17 +3057,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="374"/>
         <source>bus info</source>
-        <translation>Info BUS</translation>
+        <translation>бус подаци</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="376"/>
         <source>logicalsectorsize</source>
-        <translation>dimensione settore logico</translation>
+        <translation>величина логичких сектора</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="378"/>
         <source>sectorsize</source>
-        <translation>dimensioni settore</translation>
+        <translation>величина сектора</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="379"/>
@@ -3077,19 +3077,18 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="382"/>
         <source>Geometry (Logical)</source>
-        <translation>Geometria (logica)</translation>
+        <translation>Геометрија (Логичка)</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="46"/>
         <location filename="../src/main.cpp" line="50"/>
         <source>Device Manager</source>
-        <translation>Gestore dispositivi</translation>
+        <translation>Упраник Уређаја</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="52"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-        <translation>Il Gestore Dispositivi è uno strumento utile per visualizzare informazioni sull&apos;hardware e gestire i dispositivi.
-Localizzazione italiana a cura di Massimo A. Carofano.</translation>
+        <translation>Управник Уређаја је користан алат за приказ података о рачунару, апаратури и за управљање уређајима.</translation>
     </message>
 </context>
 <context>
@@ -3098,23 +3097,23 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
         <location filename="../src/Widget/TableWidget.cpp" line="23"/>
         <location filename="../src/Widget/TableWidget.cpp" line="135"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="24"/>
         <source>Refresh</source>
-        <translation>Aggiorna</translation>
+        <translation>Освежи</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="25"/>
         <source>Export</source>
-        <translation>Esporta</translation>
+        <translation>Извези</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="137"/>
         <location filename="../src/Widget/TableWidget.cpp" line="167"/>
         <source>Enable</source>
-        <translation>Abilita</translation>
+        <translation>Омогући</translation>
     </message>
 </context>
 <context>
@@ -3122,22 +3121,22 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="19"/>
         <source>Refresh</source>
-        <translation>Aggiorna</translation>
+        <translation>Освежи</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="20"/>
         <source>Export</source>
-        <translation>Esporta</translation>
+        <translation>Извези</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="21"/>
         <source>Copy</source>
-        <translation>Copia</translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="254"/>
         <source>Disable</source>
-        <translation>Disabilita</translation>
+        <translation>Онемогући</translation>
     </message>
 </context>
 <context>
@@ -3145,72 +3144,72 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="218"/>
         <source>Loading Audio Device Info...</source>
-        <translation>Caricamento info dispositivi audio...</translation>
+        <translation>Учитавање података аудио уређаја...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="221"/>
         <source>Loading BIOS Info...</source>
-        <translation>Caricamento info BIOS...</translation>
+        <translation>Учитавање БИОС података...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="231"/>
         <source>Loading CD-ROM Info...</source>
-        <translation>Caricamento info CD-ROM...</translation>
+        <translation>Учитавање ЦД-РОМ података...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="235"/>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Caricamento info dispositivi Bluetooth...</translation>
+        <translation>Учитавање података блутут уређаја...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="236"/>
         <source>Loading Image Devices Info...</source>
-        <translation>Caricamento info dispositivo di acquisizione video...</translation>
+        <translation>Учитавање података уређаја за слике...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="238"/>
         <source>Loading Keyboard Info...</source>
-        <translation>Caricamento info tastiera...</translation>
+        <translation>Учитавање података о тастатури...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="244"/>
         <source>Loading Operating System Info...</source>
-        <translation>Caricamento info Sistema Operativo...</translation>
+        <translation>Учитавање података о оперативном систему...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="246"/>
         <source>Loading CPU Info...</source>
-        <translation>Caricamento info CPU...</translation>
+        <translation>Учитавање ЦПЈ података...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="247"/>
         <source>Loading Other Devices Info...</source>
-        <translation>Caricamento info degli altri dispositivi...</translation>
+        <translation>Учитавање података осталих уређаја...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="248"/>
         <source>Loading Power Info...</source>
-        <translation>Caricamento info alimentazione...</translation>
+        <translation>Учитавање података о напајању...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="249"/>
         <source>Loading Printer Info...</source>
-        <translation>Caricamento info stampanti...</translation>
+        <translation>Учитавање података штампача...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="256"/>
         <source>Loading Monitor Info...</source>
-        <translation>Caricamento info Monitor...</translation>
+        <translation>Учитавање података монитора...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="257"/>
         <source>Loading Mouse Info...</source>
-        <translation>Caricamento info mouse...</translation>
+        <translation>Учитавање података о мишу</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="258"/>
         <source>Loading Network Adapter Info...</source>
-        <translation>Caricamento info adattatore di rete...</translation>
+        <translation>Учитавање података мрежне картице...</translation>
     </message>
 </context>
 <context>
@@ -3218,7 +3217,7 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     <message>
         <location filename="../src/Page/WaitingWidget.cpp" line="15"/>
         <source>Loading...</source>
-        <translation>Caricamento...</translation>
+        <translation>Учитавање...</translation>
     </message>
 </context>
 </TS>

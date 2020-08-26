@@ -47,70 +47,70 @@
 <context>
     <name>DeviceAudio</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="218"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="296"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="221"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="299"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="234"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="237"/>
         <source>Device Name</source>
         <translation>장치 이름</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="263"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="287"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="266"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="290"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="264"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="288"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="267"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="291"/>
         <source>Vendor</source>
         <translation>공급 업체</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="265"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="268"/>
         <source>Model</source>
         <translation>모델</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="266"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="269"/>
         <source>Version</source>
         <translation>버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="267"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="270"/>
         <source>Bus Info</source>
         <translation>버스 정보</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="273"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="276"/>
         <source>Chip</source>
         <translation>칩</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="274"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="277"/>
         <source>Capabilities</source>
         <translation>기능</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="275"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="278"/>
         <source>Clock</source>
         <translation>클럭</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="276"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="279"/>
         <source>Width</source>
         <translation>너비</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="277"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="280"/>
         <source>Memory</source>
         <translation>메모리</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="278"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="281"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
     </message>
@@ -154,67 +154,67 @@
 <context>
     <name>DeviceBluetooth</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="216"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="217"/>
         <source>Vendor</source>
         <translation>공급 업체</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="218"/>
         <source>Version</source>
         <translation>버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="219"/>
         <source>Model</source>
         <translation>모델</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="241"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="244"/>
         <source>Speed</source>
         <translation>속도</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="242"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="245"/>
         <source>Maximum Power</source>
         <translation>최대 전원</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="243"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="246"/>
         <source>Driver Version</source>
         <translation>드라이버 버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="244"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="247"/>
         <source>Driver</source>
         <translation>드라이버</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="245"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="248"/>
         <source>Capabilities</source>
         <translation>기능</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="246"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="249"/>
         <source>Bus Info</source>
         <translation>버스 정보</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="247"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="250"/>
         <source>Logical Name</source>
         <translation>논리 이름</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="248"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="251"/>
         <source>MAC Address</source>
         <translation>MAC 주소</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="259"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="262"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
@@ -523,52 +523,52 @@
 <context>
     <name>DeviceImage</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="145"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="148"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="146"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="149"/>
         <source>Vendor</source>
         <translation>공급 업체</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="147"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="150"/>
         <source>Version</source>
         <translation>버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="148"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="151"/>
         <source>Model</source>
         <translation>모델</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="149"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="152"/>
         <source>Bus Info</source>
         <translation>버스 정보</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="155"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="158"/>
         <source>Speed</source>
         <translation>속도</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="156"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="159"/>
         <source>Maximum Power</source>
         <translation>최대 전원</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="157"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="160"/>
         <source>Driver</source>
         <translation>드라이버</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="158"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="161"/>
         <source>Capabilities</source>
         <translation>기능</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="169"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="172"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
@@ -576,57 +576,57 @@
 <context>
     <name>DeviceInput</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="226"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="211"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="227"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="212"/>
         <source>Vendor</source>
         <translation>공급 업체</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="213"/>
         <source>Model</source>
         <translation>모델</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="229"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="214"/>
         <source>Interface</source>
         <translation>인터페이스</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="230"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="215"/>
         <source>Bus Info</source>
         <translation>버스 정보</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="221"/>
         <source>Speed</source>
         <translation>속도</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="222"/>
         <source>Maximum Power</source>
         <translation>최대 전원</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="223"/>
         <source>Driver</source>
         <translation>드라이버</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="239"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="224"/>
         <source>Capabilities</source>
         <translation>기능</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="240"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="225"/>
         <source>Version</source>
         <translation>버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="250"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="235"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
@@ -905,132 +905,132 @@
 <context>
     <name>DeviceNetwork</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="235"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="236"/>
         <source>Vendor</source>
         <translation>공급 업체</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="239"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="237"/>
         <source>Type</source>
         <translation>유형</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="240"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="238"/>
         <source>Version</source>
         <translation>버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="241"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="239"/>
         <source>Bus Info</source>
         <translation>버스 정보</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="242"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="240"/>
         <source>Capabilities</source>
         <translation>기능</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="243"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="241"/>
         <source>Driver</source>
         <translation>드라이버</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="244"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="242"/>
         <source>Driver Version</source>
         <translation>드라이버 버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="250"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="248"/>
         <source>Capacity</source>
         <translation>용량</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="251"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="249"/>
         <source>Speed</source>
         <translation>속도</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="252"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="250"/>
         <source>Port</source>
         <translation>포트</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="253"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="251"/>
         <source>Multicast</source>
         <translation>멀티캐스트</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="254"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="252"/>
         <source>Link</source>
         <translation>링크</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="255"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="253"/>
         <source>Latency</source>
         <translation>지연 시간</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="256"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="254"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="257"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="255"/>
         <source>Firmware</source>
         <translation>펌웨어</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="258"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="256"/>
         <source>Duplex</source>
         <translation>이중</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="259"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="257"/>
         <source>Broadcast</source>
         <translation>방송</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="260"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="258"/>
         <source>Auto Negotiation</source>
         <translation>자동 협상</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="261"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="259"/>
         <source>Clock</source>
         <translation>클럭</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="262"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="260"/>
         <source>Width</source>
         <translation>너비</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="263"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="261"/>
         <source>Memory</source>
         <translation>메모리</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="264"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="262"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="265"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="263"/>
         <source>MAC Address</source>
         <translation>MAC 주소</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="266"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="264"/>
         <source>Logical Name</source>
         <translation>논리 이름</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="276"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="274"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
@@ -1232,47 +1232,47 @@
 <context>
     <name>DevicePrint</name>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="149"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="148"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="150"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="149"/>
         <source>Model</source>
         <translation>모델</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="151"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="150"/>
         <source>Vendor</source>
         <translation>공급 업체</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="152"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="151"/>
         <source>Serial Number</source>
         <translation>일련 번호</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="158"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="157"/>
         <source>Shared</source>
         <translation>공유됨</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="159"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="158"/>
         <source>URI</source>
         <translation>URI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="160"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="159"/>
         <source>Status</source>
         <translation>상태</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="161"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="160"/>
         <source>Interface Type</source>
         <translation>인터페이스 유형</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="171"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="170"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
@@ -1357,9 +1357,9 @@
 <context>
     <name>LogTreeView</name>
     <message>
-        <location filename="../src/Widget/logtreeview.cpp" line="81"/>
-        <location filename="../src/Widget/logtreeview.cpp" line="100"/>
-        <location filename="../src/Widget/logtreeview.cpp" line="102"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="82"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="101"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="103"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
@@ -1424,7 +1424,7 @@
 <context>
     <name>PageDetail</name>
     <message>
-        <location filename="../src/Page/PageDetail.cpp" line="294"/>
+        <location filename="../src/Page/PageDetail.cpp" line="284"/>
         <source>More</source>
         <translation type="unfinished"/>
     </message>
@@ -1450,12 +1450,12 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="93"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
         <source>Failed to enable the device</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="97"/>
         <source>Failed to disable the device</source>
         <translation type="unfinished"/>
     </message>
@@ -1502,25 +1502,25 @@
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="24"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="74"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="117"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="148"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="77"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="120"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="153"/>
         <source>Enable</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="115"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="159"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="118"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="168"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="154"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="159"/>
         <source>Failed to disable the device</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="165"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="174"/>
         <source>Failed to enable the device</source>
         <translation type="unfinished"/>
     </message>
@@ -1536,43 +1536,43 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="235"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="238"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="36"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="384"/>
         <source>SubVendor</source>
         <translation>하위 공급업체</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="37"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="383"/>
         <source>SubDevice</source>
         <translation>보조장치</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="240"/>
         <source>Driver</source>
         <translation>드라이버</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="241"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="135"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="38"/>
         <source>Driver Modules</source>
         <translation>드라이버 모듈</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="242"/>
         <source>Driver Status</source>
         <translation>드라이버 상태</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="240"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="243"/>
         <source>Driver Activation Cmd</source>
         <translation>드라이버 활성화 Cmd</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="241"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="244"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="140"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="380"/>
@@ -1580,72 +1580,72 @@
         <translation>구성 상태</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="244"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="200"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="247"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="203"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="142"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="220"/>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="230"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="205"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="228"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="377"/>
         <source>physical id</source>
         <translation>물리적 id</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="245"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="248"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>latency</source>
         <translation>레이턴시</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="247"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="250"/>
         <source>Phys</source>
         <translation>Phys</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="248"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="251"/>
         <source>Sysfs</source>
         <translation>Sysfs</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="249"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="252"/>
         <source>Handlers</source>
         <translation>핸들러</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="250"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="253"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="198"/>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="251"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="254"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="199"/>
         <source>EV</source>
         <translation>EV</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="252"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="255"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="200"/>
         <source>KEY</source>
         <translation>키</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="254"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="257"/>
         <source>Model</source>
         <translation>모델</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="255"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
         <source>Vendor</source>
         <translation>공급 업체</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="256"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="259"/>
         <source>Version</source>
         <translation>버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="257"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="179"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="260"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="182"/>
         <source>Bus</source>
         <translation>버스</translation>
     </message>
@@ -1736,7 +1736,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="174"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="183"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="186"/>
         <source>Features</source>
         <translation>기능</translation>
     </message>
@@ -1763,7 +1763,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="183"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="205"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="208"/>
         <source>UUID</source>
         <translation>UUID</translation>
     </message>
@@ -1891,116 +1891,116 @@
         <translation>현재 설치된 언어</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="180"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="183"/>
         <source>BD Address</source>
         <translation>BD 주소</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="181"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="184"/>
         <source>ACL MTU</source>
         <translation>ACL MTU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="182"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="185"/>
         <source>SCO MTU</source>
         <translation>SCO MTU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="184"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="187"/>
         <source>Packet type</source>
         <translation>패킷 유형</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="185"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="188"/>
         <source>Link policy</source>
         <translation>링크 정책</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="186"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="189"/>
         <source>Link mode</source>
         <translation>링크 모드</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="187"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="190"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="204"/>
         <source>Class</source>
         <translation>클래스</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="188"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="191"/>
         <source>Service Classes</source>
         <translation>서비스 클래스</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="189"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="192"/>
         <source>Device Class</source>
         <translation>장치 클래스</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="190"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="193"/>
         <source>HCI Version</source>
         <translation>HCI 버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="192"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="195"/>
         <source>LMP Version</source>
         <translation>LMP 버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="193"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="196"/>
         <source>Subversion</source>
         <translation>서브버전</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="195"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="198"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="35"/>
         <source>Device</source>
         <translation>장치</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="196"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="199"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="134"/>
         <source>Serial ID</source>
         <translation>직렬 ID</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="198"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="201"/>
         <source>product</source>
         <translation>제품</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="199"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="202"/>
         <source>description</source>
         <translation>설명</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="205"/>
         <source>Powered</source>
         <translation>전원 공급됨</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="206"/>
         <source>Discoverable</source>
         <translation>발견 가능</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="204"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="207"/>
         <source>Pairable</source>
         <translation>페어링 가능</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="206"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="209"/>
         <source>Modalias</source>
         <translation>Modalias</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="207"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="210"/>
         <source>Discovering</source>
         <translation>발견 중</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="136"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="202"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="372"/>
         <source>Device File</source>
         <translation>장치 파일</translation>
@@ -2436,12 +2436,12 @@
         <translation>알 수 없음</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="201"/>
         <source>MSC</source>
         <translation>MSC</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="203"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="371"/>
         <source>Hardware Class</source>
         <translation>하드웨어 클래스</translation>
@@ -2822,12 +2822,12 @@
         <translation>날짜</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="229"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="227"/>
         <source>ioport</source>
         <translation>io포트</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="231"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="229"/>
         <source>network</source>
         <translation>네트워크</translation>
     </message>
@@ -2958,87 +2958,87 @@
         <translation>중요 작업</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="117"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="116"/>
         <source>copies</source>
         <translation>복사</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="120"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="119"/>
         <source>job-cancel-after</source>
         <translation>작업-취소-후</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="121"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="120"/>
         <source>job-hold-until</source>
         <translation>작업-보류-까지</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="122"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="121"/>
         <source>job-priority</source>
         <translation>작업-우선순위</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="124"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="123"/>
         <source>marker-change-time</source>
         <translation>마커-변경-시간</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="127"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="126"/>
         <source>number-up</source>
         <translation>번호-증가</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="128"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="127"/>
         <source>orientation-requested</source>
         <translation>요청된-방향</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="129"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="128"/>
         <source>print-color-mode</source>
         <translation>인쇄-색상-모드</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="133"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="132"/>
         <source>printer-is-accepting-jobs</source>
         <translation>프린터가-작업을-수락하는-중</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="133"/>
         <source>printer-is-shared</source>
         <translation>프린터-공유됨</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="134"/>
         <source>printer-is-temporary</source>
         <translation>프린터-임시</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="137"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="136"/>
         <source>printer-make-and-model</source>
         <translation>printer-make-and-model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="139"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="138"/>
         <source>printer-state-change-time</source>
         <translation>프린터-상태-변경-시간</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="140"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="139"/>
         <source>printer-state-reasons</source>
         <translation>프린터-상태-이유</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="141"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="140"/>
         <source>printer-type</source>
         <translation>프린터-유형</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="142"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="141"/>
         <source>printer-uri-supported</source>
         <translation>프린터-uri-지원됨</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="143"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="142"/>
         <source>sides</source>
         <translation>sides</translation>
     </message>
@@ -3095,7 +3095,7 @@
     <name>TableWidget</name>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="23"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="134"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="135"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
@@ -3110,8 +3110,8 @@
         <translation>내보내기</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="136"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="161"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="137"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="167"/>
         <source>Enable</source>
         <translation type="unfinished"/>
     </message>
@@ -3120,21 +3120,21 @@
     <name>TextBrowser</name>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="19"/>
-        <source>Refresh (F5)</source>
-        <translation>새로고침 (F5)</translation>
+        <source>Refresh</source>
+        <translation>새로고침</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="20"/>
-        <source>Export (E)</source>
-        <translation>내보내기 (E)</translation>
+        <source>Export</source>
+        <translation>내보내기</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="21"/>
-        <source>Copy (C)</source>
-        <translation>복사 (C)</translation>
+        <source>Copy</source>
+        <translation>복사</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="259"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="254"/>
         <source>Disable</source>
         <translation type="unfinished"/>
     </message>
