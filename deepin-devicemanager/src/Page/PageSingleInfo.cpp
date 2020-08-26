@@ -72,13 +72,6 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     if (mp_Content) {
         mp_Content->setDeviceEnable(mp_Device->enable());
     }
-    if (!lst[0]->enable()) {
-        //当前设备是禁用状态
-        mp_Enable->setText(tr("Enable"));
-        mp_Copy->setEnabled(false);
-        mp_Export->setEnabled(false);
-        mp_Refresh->setEnabled(false);
-    }
 }
 
 void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
@@ -107,6 +100,9 @@ void PageSingleInfo::clearContent()
 void PageSingleInfo::slotShowMenu(const QPoint &)
 {
     mp_Menu->clear();
+    mp_Refresh->setEnabled(true);
+    mp_Export->setEnabled(true);
+    mp_Copy->setEnabled(true);
     mp_Menu->addAction(mp_Copy);
 
     if (!mp_Device) {
@@ -118,11 +114,12 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
             mp_Enable->setText(tr("Disable"));
         } else {
             mp_Enable->setText(tr("Enable"));
+            mp_Refresh->setEnabled(false);
+            mp_Export->setEnabled(false);
+            mp_Copy->setEnabled(false);
         }
         mp_Menu->addAction(mp_Enable);
     }
-
-//    mp_Menu->addSeparator();
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());
@@ -151,9 +148,6 @@ void PageSingleInfo::slotActionEnable()
             return;
         } else if (res == EDS_Success) {
             mp_Enable->setText(tr("Enable"));
-            mp_Copy->setEnabled(false);
-            mp_Export->setEnabled(false);
-            mp_Refresh->setEnabled(false);
             mp_Content->setDeviceEnable(false);
         } else {
             QString con = tr("Failed to disable the device");
@@ -166,9 +160,6 @@ void PageSingleInfo::slotActionEnable()
             return;
         } else if (res == EDS_Success) {
             mp_Enable->setText(tr("Disable"));
-            mp_Copy->setEnabled(true);
-            mp_Export->setEnabled(true);
-            mp_Refresh->setEnabled(true);
             mp_Content->setDeviceEnable(true);
         } else {
             QString con = tr("Failed to enable the device");
