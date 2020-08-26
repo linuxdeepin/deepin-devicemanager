@@ -154,9 +154,8 @@ EnableDeviceStatus DeviceAudio::setEnable(bool e)
 bool DeviceAudio::enable()
 {
     // 获取设备状态
-    return false;
-//    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
-//    return m_Enable;
+    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+    return m_Enable;
 }
 
 const QString &DeviceAudio::vendor()const
