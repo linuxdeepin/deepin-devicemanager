@@ -304,7 +304,6 @@ void DetailTreeView::initUI()
 
     this->setAttribute(Qt::WA_TranslucentBackground);//设置窗口背景透明
     this->setWindowFlags(Qt::FramelessWindowHint);   //设置无边框窗口
-
 }
 
 void DetailTreeView::paintEvent(QPaintEvent *event)

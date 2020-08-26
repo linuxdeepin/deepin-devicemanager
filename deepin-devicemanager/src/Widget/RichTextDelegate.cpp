@@ -240,7 +240,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         QAbstractTextDocumentLayout::PaintContext   paintContext;
         paintContext.palette.setCurrentColorGroup(cg);
         QRect  textRect = style->subElementRect(QStyle::SE_ItemViewItemText,  &opt);
-        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 6)); //option.rect.topLeft()
+        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 6));
         painter->save();
         painter->translate(point);
         painter->setClipRect(textRect.translated(-point));
@@ -293,9 +293,7 @@ void RichTextDelegate::initStyleOption(QStyleOptionViewItem *option, const QMode
 void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)const
 {
     QDomElement table = doc.createElement("table");
-    table.setAttribute("border", "0");
-    table.setAttribute("width", "100%");
-//    table.setAttribute("style", "border-collapse:separate; border-spacing:0px 100px;");
+    table.setAttribute("style", "border-collapse: collapse;border-spacing: 0;");
 
     foreach (auto kv, lst) {
         QStringList keyValue = kv.split(":");
@@ -316,7 +314,7 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
 void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair)const
 {
     QDomElement tr = doc.createElement("tr");
-    tr.setAttribute("height", "100");
+//    tr.setAttribute("style", "line-height:100;height:100;");
 
     // 该行的第一列
     QString nt = pair.first.isEmpty() ? "" : pair.first + ":";
@@ -348,8 +346,8 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
 void RichTextDelegate::addTd1(QDomDocument &doc, QDomElement &tr, const QString &value)const
 {
     QDomElement td = doc.createElement("td");
-    td.setAttribute("width", "20%");
-    td.setAttribute("style", "text-align:left; font-weight:504;");
+    td.setAttribute("width", "120");
+    td.setAttribute("style", "text-align:left;font-weight:504;");
 
     QDomText valueText = doc.createTextNode(value);
     td.appendChild(valueText);
@@ -360,7 +358,7 @@ void RichTextDelegate::addTd1(QDomDocument &doc, QDomElement &tr, const QString 
 void RichTextDelegate::addTd2(QDomDocument &doc, QDomElement &tr, const QString &value)const
 {
     QDomElement td = doc.createElement("td");
-    td.setAttribute("width", "80%");
+//    td.setAttribute("width", "80%");
 
     QDomText valueText = doc.createTextNode(value);
     td.appendChild(valueText);

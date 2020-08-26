@@ -1,16 +1,18 @@
 #include "PageTableWidget.h"
-#include "DetailTreeView.h"
-#include "PageInfo.h"
-#include "RichTextDelegate.h"
+
+#include <DApplicationHelper>
+#include <DPalette>
+#include <DApplication>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPainter>
 #include <QDebug>
+#include <QHeaderView>
 
-#include <DApplicationHelper>
-#include <DPalette>
-#include <DApplication>
+#include "DetailTreeView.h"
+#include "PageInfo.h"
+#include "RichTextDelegate.h"
 
 PageTableWidget::PageTableWidget(DWidget *parent)
     : DWidget(parent)
@@ -64,6 +66,7 @@ void PageTableWidget::setRowHeight(int row, int height)
 
 void PageTableWidget::resizeRowToContent(int row)
 {
+//    mp_Table->verticalHeader()->setSectionResizeMode(row, QHeaderView::ResizeToContents);
     mp_Table->resizeRowToContents(row);
 }
 
@@ -139,7 +142,7 @@ void PageTableWidget::paintEvent(QPaintEvent *event)
 
 void PageTableWidget::initUI()
 {
-    mp_Table->resizeRowsToContents();
+//    mp_Table->resizeRowsToContents();
     QVBoxLayout *whLayout = new QVBoxLayout();
     whLayout->setContentsMargins(2, 2, 2, 2);
     whLayout->addWidget(mp_Table);

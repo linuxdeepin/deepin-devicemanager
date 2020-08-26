@@ -42,13 +42,6 @@ public:
 
     /**
      * @brief loadDeviceInfo:加载设备信息
-     * @param lst:设备信息列表
-     * @param limiteNum:界面表格限制显示条数
-     */
-    void loadDeviceInfo(const QList<QPair<QString, QString>> &lst, int limiteNum);
-
-    /**
-     * @brief loadDeviceInfo:加载设备信息
      * @param devices:设备列表
      * @param lst:设备信息列表
      */

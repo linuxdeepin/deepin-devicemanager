@@ -4,13 +4,15 @@
 #include <DPalette>
 #include <DFontSizeManager>
 
+#include <QTableWidgetItem>
+#include <QDebug>
+
 #include "DeviceInfo.h"
 #include "DeviceBios.h"
 #include "TextBrowser.h"
 #include "RichTextDelegate.h"
 #include "PageTableWidget.h"
 
-#include <QTableWidgetItem>
 
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)
@@ -43,30 +45,6 @@ void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     QList<QPair<QString, QString>> otherInfoMap = board->getOtherAttribs();
     baseInfoMap = baseInfoMap + otherInfoMap;
     loadDeviceInfo(lstOther, baseInfoMap);
-}
-
-void PageBoardInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst, int limiteNum)
-{
-    if (lst.size() < 1) {
-        return;
-    }
-
-    int row = lst.size();
-    if (mp_Content) {
-        mp_Content->setLimitRow(limiteNum);
-    }
-    mp_Content->setColumnAndRow(row + 1, 2);
-
-    for (int i = 0; i < row; ++i) {
-        QTableWidgetItem *itemFirst = new QTableWidgetItem(lst[i].first);
-        mp_Content->setItem(i, 0, itemFirst);
-        QTableWidgetItem *itemSecond = new QTableWidgetItem(lst[i].second);
-        mp_Content->setItem(i, 1, itemSecond);
-        if (lst[i].second.contains("\n")) {
-            QStringList lstStr = lst[i].second.split("\n");
-            mp_Content->setRowHeight(i, 20 * (lstStr.size() + 2));
-        }
-    }
 }
 
 void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const QList<QPair<QString, QString>> &lst)
@@ -105,12 +83,23 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         QFontMetrics fm(font);
         int height = 0;
         QStringList strList = pairs[i - limitSize].second.split("\n");
+        int fontHeight = fm.boundingRect(pairs[i - limitSize].second).height() + 6;
+
         foreach (const QString &str, strList) {
+            QStringList lst = str.split(":");
+            if (lst.size() == 2) {
+                int width = fm.boundingRect(lst[0]).width();
+                int num = width / 100;
+                int num0 = width % 100;
+                if (num0 == 0) {
+                    num = num - 1;
+                }
+                height += num * fontHeight;
+            }
             QStringList attris = str.split("  /  \t\t");
-            foreach (const QString &attri, attris)
-                height += (fm.boundingRect(attri).height() + 4);
+            height += attris.size() * fontHeight;
         }
-        height += 20;
+        height += 10;
         mp_Content->setRowHeight(i, height);
     }
 }

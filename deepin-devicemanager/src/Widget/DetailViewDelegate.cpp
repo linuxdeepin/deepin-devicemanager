@@ -255,6 +255,7 @@ QSize DetailViewDelegate::sizeHint(const QStyleOptionViewItem &option, const QMo
         size.setWidth(std::max(150, size.width()));
     }
     return size;
+//    return QStyledItemDelegate::sizeHint(option, index);
 }
 
 void DetailViewDelegate::initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const
