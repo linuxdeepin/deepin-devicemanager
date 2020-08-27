@@ -152,7 +152,6 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     textRect = rect;
 
     textRect.setX(textRect.x() + margin * 2);
-    //    textRect.setWidth(textRect.width() - margin * 2);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
     if (text.startsWith("(" + tr("Disable") + ")") && !enableAndSelect) {
