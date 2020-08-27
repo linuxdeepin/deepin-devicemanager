@@ -12,6 +12,7 @@
 #include <QKeyEvent>
 #include <QHBoxLayout>
 #include <QDebug>
+#include <QThread>
 
 #include <DApplication>
 #include <DApplicationHelper>
@@ -26,6 +27,8 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     , m_LimitRow(13)
     , m_IsExpand(false)
     , m_IsEnable(true)
+    , mp_OldMouseItem(nullptr)
+    , m_FirstMoveMouse(false)
 {
     setMouseTracking(true);
     // 初始化界面
@@ -86,6 +89,14 @@ void DetailTreeView::clear()
     }
 
     m_IsExpand = false;
+
+    // 每次更新都需要重新new tooltips
+    m_FirstMoveMouse = false;
+    if (mp_ToolTips) {
+        delete mp_ToolTips;
+        mp_ToolTips = nullptr;
+    }
+    mp_ToolTips = new TipsWidget(this);
 }
 
 void DetailTreeView::setCommanLinkButton(int row)
@@ -399,9 +410,7 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
             }
         }
     }
-
     painter.drawLine(line);
-
     painter.restore();
 }
 
@@ -413,30 +422,21 @@ void DetailTreeView::resizeEvent(QResizeEvent *event)
 
 void DetailTreeView::mouseMoveEvent(QMouseEvent *event)
 {
-    QPoint point = event->pos();
-//    qDebug() << point;
-
-    QTableWidgetItem *it = this->itemAt(point);
-//    qDebug() << it->text();
-
-    if (mp_ToolTips == nullptr) {
-        mp_ToolTips = new TipsWidget(this);
+    if (!m_FirstMoveMouse) {
+        m_FirstMoveMouse = true;
+        return DTableWidget::mouseMoveEvent(event);
     }
-
-    QString text = it->text();
-    mp_ToolTips->hide();
-    if (!text.isEmpty()) {
+    QPoint point = event->pos();
+    QTableWidgetItem *it = this->itemAt(point);
+    if (it && (mp_OldMouseItem != it)) {
+        mp_OldMouseItem = it;
+        QString text = it->text();
         mp_ToolTips->setText(text);
         QPoint showRealPos(QCursor::pos().x(), QCursor::pos().y() + 20);
-        mp_ToolTips->move(showRealPos);
         mp_ToolTips->show();
-//        setCursor(QCursor(Qt::PointingHandCursor));
-    } else {
-        mp_ToolTips->hide();
+        mp_ToolTips->move(showRealPos);
     }
-
     DTableWidget::mouseMoveEvent(event);
-
 }
 
 void DetailTreeView::leaveEvent(QEvent *event)
@@ -444,6 +444,16 @@ void DetailTreeView::leaveEvent(QEvent *event)
     if (mp_ToolTips != nullptr) {
         mp_ToolTips->hide();
     }
+    DTableWidget::leaveEvent(event);
+}
+
+void DetailTreeView::enterEvent(QEvent *event)
+{
+    if (mp_ToolTips == nullptr) {
+        mp_ToolTips = new TipsWidget(this);
+    }
+    mp_ToolTips->show();
+    DTableWidget::enterEvent(event);
 }
 
 //void DetailTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const

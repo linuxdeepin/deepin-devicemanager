@@ -54,8 +54,6 @@ void TipsWidget::onUpdateTheme()
 
 void TipsWidget::setText(const QString &text)
 {
-    qDebug() << text;
-
     if (text != m_text) {
         m_text = text;
         m_text.replace(QChar('\n'), QString(""));

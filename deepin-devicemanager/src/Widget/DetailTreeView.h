@@ -129,17 +129,18 @@ protected:
 
     void mouseMoveEvent(QMouseEvent *event) override;
 
-    void leaveEvent(QEvent *event);
+    void leaveEvent(QEvent *event)override;
+    void enterEvent(QEvent *event)override;
 
 private:
     DetailViewDelegate        *mp_ItemDelegate;   // Item自定义代理
     DCommandLinkButton        *mp_CommandBtn;     // 展开命令Button
     TipsWidget                *mp_ToolTips;
-
     int                       m_LimitRow;         // 正常状态下，表格显示的行数
     bool                      m_IsExpand;         // 是否展开
-
     bool                      m_IsEnable;         // 是否启用
+    QTableWidgetItem         *mp_OldMouseItem;
+    bool                     m_FirstMoveMouse;
 };
 
 #endif // DETAILTREEVIEW_H
