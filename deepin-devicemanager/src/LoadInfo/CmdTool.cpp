@@ -565,7 +565,6 @@ void CmdTool::loadBiosInfoFromLspci(QString &chipsetFamliy)
             break;
         }
     }
-
 }
 
 void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, const QString &debugfile)

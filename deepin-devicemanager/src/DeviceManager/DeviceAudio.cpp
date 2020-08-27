@@ -72,6 +72,9 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "Name", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
+    if (m_Vendor == "0000") {
+        m_Vendor = "";
+    }
     setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "Version", m_Version);
     setAttribute(mapInfo, "Bus", m_BusInfo);
