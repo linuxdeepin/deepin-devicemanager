@@ -5,6 +5,7 @@
 #include "PageInfo.h"
 #include "PageTableWidget.h"
 #include "CmdButtonWidget.h"
+#include "TipsWidget.h"
 
 #include <QHeaderView>
 #include <QPainter>
@@ -21,12 +22,16 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     : DTableWidget(parent)
     , mp_ItemDelegate(nullptr)
     , mp_CommandBtn(nullptr)
+    , mp_ToolTips(nullptr)
     , m_LimitRow(13)
     , m_IsExpand(false)
     , m_IsEnable(true)
 {
+    setMouseTracking(true);
     // 初始化界面
     initUI();
+
+//    connect(this, &DTableWidget::cellEntered, this, &DetailTreeView::cellEnteredSlot);
 }
 
 void DetailTreeView::setColumnAndRow(int row, int column)
@@ -72,6 +77,12 @@ void DetailTreeView::clear()
     if (mp_CommandBtn != nullptr) {
         delete mp_CommandBtn;
         mp_CommandBtn = nullptr;
+    }
+
+    if (mp_ToolTips != nullptr) {
+        mp_ToolTips->hide();
+        delete mp_ToolTips;
+        mp_ToolTips = nullptr;
     }
 
     m_IsExpand = false;
@@ -398,6 +409,41 @@ void DetailTreeView::resizeEvent(QResizeEvent *event)
 {
     DTableWidget::resizeEvent(event);
     emit heightChange();
+}
+
+void DetailTreeView::mouseMoveEvent(QMouseEvent *event)
+{
+    QPoint point = event->pos();
+//    qDebug() << point;
+
+    QTableWidgetItem *it = this->itemAt(point);
+//    qDebug() << it->text();
+
+    if (mp_ToolTips == nullptr) {
+        mp_ToolTips = new TipsWidget(this);
+    }
+
+    QString text = it->text();
+    mp_ToolTips->hide();
+    if (!text.isEmpty()) {
+        mp_ToolTips->setText(text);
+        QPoint showRealPos(QCursor::pos().x(), QCursor::pos().y() + 20);
+        mp_ToolTips->move(showRealPos);
+        mp_ToolTips->show();
+//        setCursor(QCursor(Qt::PointingHandCursor));
+    } else {
+        mp_ToolTips->hide();
+    }
+
+    DTableWidget::mouseMoveEvent(event);
+
+}
+
+void DetailTreeView::leaveEvent(QEvent *event)
+{
+    if (mp_ToolTips != nullptr) {
+        mp_ToolTips->hide();
+    }
 }
 
 //void DetailTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const

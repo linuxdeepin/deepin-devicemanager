@@ -87,7 +87,7 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
         QTableWidgetItem *itemFirst = new QTableWidgetItem(lst[i].first);
         mp_Content->setItem(i, 0, itemFirst);
         QTableWidgetItem *itemSecond = new QTableWidgetItem(lst[i].second);
-        itemSecond->setToolTip(lst[i].second);
+//        itemSecond->setToolTip(lst[i].second);
         mp_Content->setItem(i, 1, itemSecond);
     }
 }

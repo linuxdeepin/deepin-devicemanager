@@ -54,10 +54,14 @@ void TipsWidget::onUpdateTheme()
 
 void TipsWidget::setText(const QString &text)
 {
-    m_text = text;
-    m_text.replace(QChar('\n'), QString(""));
-    m_text.replace(QChar('\t'), QString(""));
-    update();
+    qDebug() << text;
+
+    if (text != m_text) {
+        m_text = text;
+        m_text.replace(QChar('\n'), QString(""));
+        m_text.replace(QChar('\t'), QString(""));
+        update();
+    }
 }
 
 void TipsWidget::setAlignment(Qt::Alignment alignment)
@@ -91,6 +95,7 @@ void TipsWidget::paintEvent(QPaintEvent *event)
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
     QTextOption option;
     const QString &text = m_text;
+    qDebug() << text;
     adjustContent(text);
     option.setAlignment(m_alignment);
     option.setWrapMode(QTextOption::WrapAnywhere);
@@ -100,6 +105,7 @@ void TipsWidget::paintEvent(QPaintEvent *event)
 
 void TipsWidget::adjustContent(const QString &text)
 {
+    qDebug() << text;
     QFontMetricsF fontMetris(this->font());
     int wordHeight = static_cast<int>(fontMetris.boundingRect(QRectF(0, 0, this->width() - 2 * m_lrMargin, 0),
                                                               static_cast<int>(m_alignment | Qt::TextWrapAnywhere), text).height() + 2 * m_tbMargin);

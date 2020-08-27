@@ -66,7 +66,7 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
             QTableWidgetItem *itemFirst = new QTableWidgetItem(iter.first);
             mp_Overview->setItem(i, 0, itemFirst);
             QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find(iter.first).value());
-            itemSecond->setToolTip(map.find(iter.first).value());
+//            itemSecond->setToolTip(map.find(iter.first).value());
             mp_Overview->setItem(i, 1, itemSecond);
             ++i;
         }
