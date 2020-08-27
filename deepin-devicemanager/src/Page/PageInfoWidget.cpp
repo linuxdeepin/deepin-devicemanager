@@ -98,6 +98,7 @@ void PageInfoWidget::slotUpdateUI()
 void PageInfoWidget::initWidgets()
 {
     QHBoxLayout *hLayout = new QHBoxLayout(this);
+    hLayout->setContentsMargins(10, 10, 10, 10);
     hLayout->addWidget(mp_PageSignalInfo);
     hLayout->addWidget(mp_PageMutilInfo);
     hLayout->addWidget(mp_PageOverviewInfo);
@@ -105,7 +106,7 @@ void PageInfoWidget::initWidgets()
     setLayout(hLayout);
 
     // 设置边距为2
-    this->setContentsMargins(2, 2, 2, 2);
+//    this->setContentsMargins(2, 2, 2, 2);
 
     mp_PageSignalInfo->setVisible(false);
     mp_PageMutilInfo->setVisible(false);

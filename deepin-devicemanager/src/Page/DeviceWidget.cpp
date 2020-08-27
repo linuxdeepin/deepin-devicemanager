@@ -89,6 +89,7 @@ void DeviceWidget::initWidgets()
 {
     QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->setContentsMargins(0, 0, 0, 0);
+    hLayout->setSpacing(0);
     hLayout->addWidget(mp_ListView);
     hLayout->addWidget(mp_PageInfo);
     setLayout(hLayout);
