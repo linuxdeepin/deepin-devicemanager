@@ -99,7 +99,7 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
             QStringList attris = str.split("  /  \t\t");
             height += attris.size() * fontHeight;
         }
-        height += 10;
+        height += 20;
         mp_Content->setRowHeight(i, height);
     }
 }
