@@ -101,46 +101,6 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     QRect textRect = rect;
 
-//    switch (opt.viewItemPosition) {
-//    case QStyleOptionViewItem::Beginning: {
-//        rect.setX(rect.x() + margin);  // left margin
-//        //去除焦点时的蓝线，减少行高
-//        QPainterPath rectPath, roundedPath;
-//        roundedPath.addRoundedRect(rect.x(), rect.y() + 1, rect.width() * 2, rect.height() - 2, radius,
-//                                   radius);
-//        rectPath.addRect(rect.x() + rect.width(), rect.y() + 1, rect.width(), rect.height() - 2);
-//        clipPath = roundedPath.subtracted(rectPath);
-//        painter->setClipPath(clipPath);
-//        path.addRect(rect);
-//    } break;
-//    case QStyleOptionViewItem::Middle: {
-//        //去除焦点时的蓝线，减少行高
-//        QRectF rect2(rect.left(), rect.top() + 1, rect.width(), rect.height() - 2);
-//        path.addRect(rect2);
-//    } break;
-//    case QStyleOptionViewItem::End: {
-//        rect.setWidth(rect.width() - margin);  // right margin
-//        //去除焦点时的蓝线，减少行高
-//        QPainterPath rectPath, roundedPath;
-//        roundedPath.addRoundedRect(rect.x() - rect.width(), rect.y() + 1, rect.width() * 2,
-//                                   rect.height() - 2, radius, radius);
-//        rectPath.addRect(rect.x() - rect.width(), rect.y() + 1, rect.width(), rect.height() - 2);
-//        clipPath = roundedPath.subtracted(rectPath);
-//        painter->setClipPath(clipPath);
-//        path.addRect(rect);
-//    } break;
-//    case QStyleOptionViewItem::OnlyOne: {
-//        rect.setX(rect.x() + margin);          // left margin
-//        rect.setWidth(rect.width() - margin);  // right margin
-//        path.addRoundedRect(rect, radius, radius);
-//    } break;
-//    default: {
-//        painter->restore();
-//        QStyledItemDelegate::paint(painter, option, index);
-//        return;
-//    }
-//    }
-
     QRect iconRect = rect;
     if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
             index.data(Qt::DecorationRole).isValid()) {
@@ -149,9 +109,12 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         QIcon ic = index.data(Qt::DecorationRole).value<QIcon>();
         ic.paint(painter, iconRect);
     }
-    textRect = rect;
 
-    textRect.setX(textRect.x() + margin * 2);
+    if (opt.viewItemPosition == QStyleOptionViewItem::Beginning) {
+        textRect.setX(textRect.x() + margin * 2);
+    } else {
+        textRect.setX(textRect.x() + margin);
+    }
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
     if (text.startsWith("(" + tr("Disable") + ")") && !enableAndSelect) {
