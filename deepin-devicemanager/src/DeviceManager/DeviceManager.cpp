@@ -136,6 +136,7 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
     if (true) m_ListDeviceType.append(QPair<QString, QString>(tr("Overview"), "overview##Overview"));
 
     if (m_ListDeviceCPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU"), "cpu##CPU"));
+    m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 板载接口设备
     if (m_ListDeviceBios.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Motherboard"), "motherboard##Bios"));
@@ -145,14 +146,17 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
     if (m_ListDeviceStorage.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Storage"), "storage##Storage"));
     if (m_ListDeviceOtherPCI.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Other PCI Devices"), "otherpcidevices##OtherPCI"));
     if (m_ListDevicePower.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Battery"), "battery##Power"));
+    m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 网络设备
     if (m_ListDeviceBluetooth.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Bluetooth"), "bluetooth##Bluetooth"));
     if (m_ListDeviceNetwork.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Network Adapter"), "networkadapter##Network"));
+    m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 输入设备
     if (m_ListDeviceMouse.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Mouse"), "mouse##Mouse"));
     if (m_ListDeviceKeyboard.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Keyboard"), "keyboard##Keyboard"));
+    m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 外设设备
     if (m_ListDeviceMonitor.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Monitor"), "monitor##Monitor"));
