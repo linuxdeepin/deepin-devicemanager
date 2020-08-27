@@ -213,12 +213,12 @@ void PageOverview::initWidgets()
     QHBoxLayout *hLayoutTop = new QHBoxLayout();
     QVBoxLayout *vLayoutLabel = new  QVBoxLayout();
     vLayoutLabel->setContentsMargins(0, 0, 0, 0);
-    mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-    mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     vLayoutLabel->addSpacing(20);
     vLayoutLabel->addWidget(mp_DeviceLabel);
     vLayoutLabel->addWidget(mp_OSLabel);
-    vLayoutLabel->addSpacing(20);
+    vLayoutLabel->addSpacing(15);
 
     hLayoutTop->setMargin(2);
     hLayoutTop->addWidget(mp_PicLabel);
