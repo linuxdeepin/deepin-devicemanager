@@ -221,6 +221,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         painter->translate(point);
         painter->setClipRect(textRect.translated(-point));
         textDoc.documentLayout()->draw(painter, paintContext);
+        painter->restore();
     } else {
         QTextDocument  textDoc;
         //设置文字居中显示
@@ -347,7 +348,9 @@ void RichTextDelegate::addTd1(QDomDocument &doc, QDomElement &tr, const QString 
 {
     QDomElement td = doc.createElement("td");
     td.setAttribute("width", "120");
-    td.setAttribute("style", "text-align:left;font-weight:504;");
+    int px = DFontSizeManager::instance()->t8().pixelSize();
+    QString fontSize = QString("text-align:left;font-weight:504;font-size:%1px;").arg(px);
+    td.setAttribute("style", fontSize);
 
     QDomText valueText = doc.createTextNode(value);
     td.appendChild(valueText);
@@ -358,7 +361,9 @@ void RichTextDelegate::addTd1(QDomDocument &doc, QDomElement &tr, const QString 
 void RichTextDelegate::addTd2(QDomDocument &doc, QDomElement &tr, const QString &value)const
 {
     QDomElement td = doc.createElement("td");
-//    td.setAttribute("width", "80%");
+    int px = DFontSizeManager::instance()->t8().pixelSize();
+    QString fontSize = QString("font-size:%1px;").arg(px);
+    td.setAttribute("style", fontSize);
 
     QDomText valueText = doc.createTextNode(value);
     td.appendChild(valueText);

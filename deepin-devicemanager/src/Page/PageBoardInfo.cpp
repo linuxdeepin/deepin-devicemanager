@@ -78,23 +78,26 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         QTableWidgetItem *itemSecond = new QTableWidgetItem(pairs[i - limitSize].second);
         mp_Content->setItem(i, 1, itemSecond);
 
+        qDebug() << pairs[i - limitSize].first;
 
         QFont font = DFontSizeManager::instance()->t8();
         QFontMetrics fm(font);
         int height = 0;
         QStringList strList = pairs[i - limitSize].second.split("\n");
-        int fontHeight = fm.boundingRect(pairs[i - limitSize].second).height() + 6;
+        int fontHeight = fm.boundingRect(pairs[i - limitSize].second).height() + 2;
 
         foreach (const QString &str, strList) {
             QStringList lst = str.split(":");
             if (lst.size() == 2) {
                 int width = fm.boundingRect(lst[0]).width();
-                int num = width / 100;
-                int num0 = width % 100;
+                qDebug() << lst[0];
+                int num = width / 110;
+                int num0 = width % 110;
                 if (num0 == 0) {
                     num = num - 1;
                 }
-                height += num * fontHeight;
+                if (num > 0)
+                    height += num * fontHeight;
             }
             QStringList attris = str.split("  /  \t\t");
             height += attris.size() * fontHeight;
