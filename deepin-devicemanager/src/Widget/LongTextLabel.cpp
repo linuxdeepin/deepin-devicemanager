@@ -60,5 +60,5 @@ void LongTextLabel::paintEvent(QPaintEvent *event)
     docText.setHtml(dst);
     docText.setDefaultFont(fo);
     docText.drawContents(&painter, this->rect());
-    return DWidget::paintEvent(event);
+//    return DWidget::paintEvent(event);
 }
