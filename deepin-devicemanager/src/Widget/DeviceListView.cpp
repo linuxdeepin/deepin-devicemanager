@@ -98,7 +98,8 @@ void DeviceListView::addItem(const QString &name, const QString &iconFile)
     item->setData(lst[1], Qt::UserRole);
     item->setTextAlignment(Qt::AlignVCenter);
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
-    item->setToolTip(name);
+    if (name != QString("Separator"))
+        item->setToolTip(name);
     item->setIcon(QIcon::fromTheme(lst[0]));
     setIconSize(QSize(20, 20));
     QIcon icon = QIcon::fromTheme(lst[0]);
