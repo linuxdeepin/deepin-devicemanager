@@ -1,8 +1,11 @@
 #include "DeviceInfo.h"
-#include "../commondefine.h"
-#include<QDebug>
-#include"DeviceManager.h"
+
 #include <DApplication>
+
+#include<QDebug>
+
+#include "../commondefine.h"
+#include"DeviceManager.h"
 #include "../deviceinfoparser.h"
 
 DWIDGET_USE_NAMESPACE

@@ -1,7 +1,11 @@
+// 项目自身文件
 #include "DeviceInput.h"
+
+// Qt库文件
+#include <QDebug>
+
 #include "EnableManager.h"
 #include "DeviceManager.h"
-#include <QDebug>
 
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()

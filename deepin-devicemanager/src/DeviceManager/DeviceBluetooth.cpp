@@ -1,5 +1,7 @@
 #include "DeviceBluetooth.h"
+
 #include <QDebug>
+
 #include "EnableManager.h"
 
 DeviceBluetooth::DeviceBluetooth()
