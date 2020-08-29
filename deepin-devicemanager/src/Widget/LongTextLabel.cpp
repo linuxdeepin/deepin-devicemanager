@@ -25,40 +25,40 @@ void LongTextLabel::setLinkText(const QString &linkstr)
 
 void LongTextLabel::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
-    QTextDocument docText;
+//    QPainter painter(this);
+//    QTextDocument docText;
 
-    QFont fo = painter.font();
-    QFontMetrics fm(fo);
+//    QFont fo = painter.font();
+//    QFontMetrics fm(fo);
 
-    QString html;
-    QString OS;
+//    QString html;
+//    QString OS;
 
-    QRegExp reg("[\\s\\S]*</a>");
-    if (reg.indexIn(this->text()) != -1) {
-        html = reg.cap(0);
+//    QRegExp reg("[\\s\\S]*</a>");
+//    if (reg.indexIn(this->text()) != -1) {
+//        html = reg.cap(0);
 
-        reg.setPattern("<[\\s\\S]*>([\\s\\S]*)</a>");
+//        reg.setPattern("<[\\s\\S]*>([\\s\\S]*)</a>");
 
-        if (reg.indexIn(html) != -1) {
-            OS = reg.cap(1);
-        }
-    }
+//        if (reg.indexIn(html) != -1) {
+//            OS = reg.cap(1);
+//        }
+//    }
 
-    QString src = this->text();
-    if (!html.isEmpty() && !OS.isEmpty()) {
-        src  = OS + this->text().remove(html);
-    }
+//    QString src = this->text();
+//    if (!html.isEmpty() && !OS.isEmpty()) {
+//        src  = OS + this->text().remove(html);
+//    }
 
-    QString text = fm.elidedText(src, Qt::TextElideMode::ElideRight, this->rect().width());
+//    QString text = fm.elidedText(src, Qt::TextElideMode::ElideRight, this->rect().width());
 
-    QString dst = text;
-    if (!html.isEmpty() && !OS.isEmpty()) {
-        dst = html + text.remove(OS);
-    }
+//    QString dst = text;
+//    if (!html.isEmpty() && !OS.isEmpty()) {
+//        dst = html + text.remove(OS);
+//    }
 
-    docText.setHtml(dst);
-    docText.setDefaultFont(fo);
-    docText.drawContents(&painter, this->rect());
-//    return DWidget::paintEvent(event);
+//    docText.setHtml(dst);
+//    docText.setDefaultFont(fo);
+//    docText.drawContents(&painter, this->rect());
+    return DLabel::paintEvent(event);
 }
