@@ -25,7 +25,7 @@ DWIDGET_USE_NAMESPACE
 DetailButton::DetailButton(const QString &txt)
     : DCommandLinkButton(txt)
 {
-
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
 }
 
 void DetailButton::updateText()
@@ -279,20 +279,21 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     mp_ScrollAreaLayout->addWidget(widget);
 
     // 添加按钮
-    QHBoxLayout *vLayout = new QHBoxLayout();
-    vLayout->addSpacing(20);
+    QHBoxLayout *hLayout = new QHBoxLayout();
+    hLayout->addSpacing(20);
     DetailButton *button = new DetailButton(tr("More"));
     DFontSizeManager::instance()->bind(button, DFontSizeManager::T8);
     connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
     if (!enable) {
         button->setVisible(false);
     }
-    vLayout->addWidget(button);
+    hLayout->addWidget(button);
+    hLayout->addStretch();
     if (!enable) {
         button->setVisible(false);
     }
 //    vLayout->addStretch(-1);
-    mp_ScrollAreaLayout->addLayout(vLayout);
+    mp_ScrollAreaLayout->addLayout(hLayout);
 
     // 添加分割线
     mp_ScrollAreaLayout->addSpacing(10);
@@ -302,7 +303,7 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 
     // **********************************
     m_ListTextBrowser.append(widget);
-    m_ListHlayout.append(vLayout);
+    m_ListHlayout.append(hLayout);
     m_ListDetailButton.append(button);
     m_ListDetailSeperator.append(seperator);
 }
