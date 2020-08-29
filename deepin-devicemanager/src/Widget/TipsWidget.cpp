@@ -93,7 +93,6 @@ void TipsWidget::paintEvent(QPaintEvent *event)
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
     QTextOption option;
     const QString &text = m_text;
-    qDebug() << text;
     adjustContent(text);
     option.setAlignment(m_alignment);
     option.setWrapMode(QTextOption::WrapAnywhere);

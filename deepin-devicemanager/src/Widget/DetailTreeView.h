@@ -123,24 +123,58 @@ protected:
      */
     void initUI();
 
+    /**
+     * @brief paintEvent
+     * @param event
+     */
     void paintEvent(QPaintEvent *event) override;
 
+    /**
+     * @brief resizeEvent
+     * @param event
+     */
     void resizeEvent(QResizeEvent *event) override;
 
+    /**
+     * @brief mouseMoveEvent
+     * @param event
+     */
     void mouseMoveEvent(QMouseEvent *event) override;
 
+    /**
+     * @brief leaveEvent
+     * @param event
+     */
     void leaveEvent(QEvent *event)override;
+
+    /**
+     * @brief enterEvent
+     * @param event
+     */
     void enterEvent(QEvent *event)override;
+
+private slots:
+    void slotTimeOut();
+
+private:
+    /**
+     * @brief showTips
+     * @param txt
+     */
+    void showTips(QTableWidgetItem *item);
 
 private:
     DetailViewDelegate        *mp_ItemDelegate;   // Item自定义代理
     DCommandLinkButton        *mp_CommandBtn;     // 展开命令Button
-    TipsWidget                *mp_ToolTips;
     int                       m_LimitRow;         // 正常状态下，表格显示的行数
     bool                      m_IsExpand;         // 是否展开
     bool                      m_IsEnable;         // 是否启用
-    QTableWidgetItem         *mp_OldMouseItem;
-    bool                     m_FirstMoveMouse;
+    QTableWidgetItem          *mp_OldItem;
+    qint64                    m_TimeStep;
+    QTimer                    *mp_Timer;
+    QPoint                    mp_Point;
+    TipsWidget                *mp_ToolTips;
+    bool                      m_In;
 };
 
 #endif // DETAILTREEVIEW_H

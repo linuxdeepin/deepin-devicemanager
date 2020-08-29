@@ -13,6 +13,9 @@
 #include <QHBoxLayout>
 #include <QDebug>
 #include <QThread>
+#include <QToolTip>
+#include <QDateTime>
+#include <QTimer>
 
 #include <DApplication>
 #include <DApplicationHelper>
@@ -23,18 +26,20 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     : DTableWidget(parent)
     , mp_ItemDelegate(nullptr)
     , mp_CommandBtn(nullptr)
-    , mp_ToolTips(nullptr)
     , m_LimitRow(13)
     , m_IsExpand(false)
     , m_IsEnable(true)
-    , mp_OldMouseItem(nullptr)
-    , m_FirstMoveMouse(false)
+    , mp_OldItem(nullptr)
+    , m_TimeStep(0)
+    , mp_Timer(new QTimer)
+    , mp_ToolTips(nullptr)
+    , m_In(false)
 {
     setMouseTracking(true);
     // 初始化界面
     initUI();
-
-//    connect(this, &DTableWidget::cellEntered, this, &DetailTreeView::cellEnteredSlot);
+    connect(mp_Timer, &QTimer::timeout, this, &DetailTreeView::slotTimeOut);
+    mp_Timer->start(100);
 }
 
 void DetailTreeView::setColumnAndRow(int row, int column)
@@ -81,22 +86,7 @@ void DetailTreeView::clear()
         delete mp_CommandBtn;
         mp_CommandBtn = nullptr;
     }
-
-    if (mp_ToolTips != nullptr) {
-        mp_ToolTips->hide();
-        delete mp_ToolTips;
-        mp_ToolTips = nullptr;
-    }
-
     m_IsExpand = false;
-
-    // 每次更新都需要重新new tooltips
-    m_FirstMoveMouse = false;
-    if (mp_ToolTips) {
-        delete mp_ToolTips;
-        mp_ToolTips = nullptr;
-    }
-    mp_ToolTips = new TipsWidget(this);
 }
 
 void DetailTreeView::setCommanLinkButton(int row)
@@ -422,26 +412,14 @@ void DetailTreeView::resizeEvent(QResizeEvent *event)
 
 void DetailTreeView::mouseMoveEvent(QMouseEvent *event)
 {
-    if (!m_FirstMoveMouse) {
-        m_FirstMoveMouse = true;
-        return DTableWidget::mouseMoveEvent(event);
-    }
-    QPoint point = event->pos();
-    QTableWidgetItem *it = this->itemAt(point);
-    if (it && (mp_OldMouseItem != it)) {
-        mp_OldMouseItem = it;
-        QString text = it->text();
-        mp_ToolTips->setText(text);
-        QPoint showRealPos(QCursor::pos().x(), QCursor::pos().y() + 20);
-        mp_ToolTips->show();
-        mp_ToolTips->move(showRealPos);
-    }
+    mp_Point = event->pos();
     DTableWidget::mouseMoveEvent(event);
 }
 
 void DetailTreeView::leaveEvent(QEvent *event)
 {
-    if (mp_ToolTips != nullptr) {
+    m_In = false;
+    if (mp_ToolTips) {
         mp_ToolTips->hide();
     }
     DTableWidget::leaveEvent(event);
@@ -449,51 +427,41 @@ void DetailTreeView::leaveEvent(QEvent *event)
 
 void DetailTreeView::enterEvent(QEvent *event)
 {
-    if (mp_ToolTips == nullptr) {
+    m_In = true;
+    if (!mp_ToolTips) {
         mp_ToolTips = new TipsWidget(this);
     }
-    mp_ToolTips->show();
+    mp_ToolTips->hide();
     DTableWidget::enterEvent(event);
 }
 
-//void DetailTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const
-//{
-//    painter->save();
-//    painter->setRenderHint(QPainter::Antialiasing);
+void DetailTreeView::slotTimeOut()
+{
+    if (!m_In)return;
+    QTableWidgetItem *it = this->itemAt(mp_Point);
+    if (it) {
+        showTips(it);
+    }
+}
 
-//#ifdef ENABLE_INACTIVE_DISPLAY
-//    QWidget *wnd = DApplication::activeWindow();
-//#endif
-//    DPalette::ColorGroup cg;
-//    if (!(options.state & DStyle::State_Enabled)) {
-//        cg = DPalette::Disabled;
-//    } else {
-//#ifdef ENABLE_INACTIVE_DISPLAY
-//        if (!wnd) {
-//            cg = DPalette::Inactive;
-//        } else {
-//            if (wnd->isModal()) {
-//                cg = DPalette::Inactive;
-//            } else {
-//                cg = DPalette::Active;
-//            }
-//        }
-//#else
-//        cg = DPalette::Active;
-//#endif
-//    }
-
-//    auto *style = dynamic_cast<DStyle *>(DApplication::style());
-
-//    auto radius = style->pixelMetric(DStyle::PM_FrameRadius, &options);
-//    auto margin = style->pixelMetric(DStyle::PM_ContentsMargins, &options);
-
-//    auto palette = options.palette;
-//    QBrush background;
-
-//    if (index.row() == m_LimitRow - 1) {
-
-//    }
-
-//    painter->restore();
-//}
+void DetailTreeView::showTips(QTableWidgetItem *item)
+{
+    if (item == mp_OldItem) {
+        qint64 curMS = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        if (curMS - m_TimeStep > 1000 && mp_ToolTips->isHidden()) {
+            QString text = item->text();
+            QPoint showRealPos(QCursor::pos().x(), QCursor::pos().y() + 10);
+            if (mp_ToolTips) {
+                mp_ToolTips->setText(text);
+                mp_ToolTips->move(showRealPos);
+                mp_ToolTips->show();
+            }
+        }
+    } else {
+        m_TimeStep = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        mp_OldItem = item;
+        if (mp_ToolTips) {
+            mp_ToolTips->hide();
+        }
+    }
+}

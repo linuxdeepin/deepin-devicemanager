@@ -15,7 +15,7 @@ DeviceAudio::DeviceAudio()
     , m_Capabilities("")
     , m_Description("")
     , m_Chip("")
-    , m_Driver("")
+    , m_Driver("snd_hda_intel")
     , m_UniqueKey("")
 {
     // 初始化可显示属性
