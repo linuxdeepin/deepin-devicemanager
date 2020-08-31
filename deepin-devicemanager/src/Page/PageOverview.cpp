@@ -139,7 +139,6 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     // 设置字号
     DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
-    DFontSizeManager::instance()->bind(mp_OSLabel, DFontSizeManager::T5);
 
     // 系统中获取
 //    QIcon icon(QIcon::fromTheme("computer"));
