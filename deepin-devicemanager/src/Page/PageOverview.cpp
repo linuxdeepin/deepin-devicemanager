@@ -127,7 +127,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     // 设置自动换行
     //mp_OSLabel->setWordWrap(false);
-    mp_OSLabel->setText(str1);
+    mp_OSLabel->setText(linkStr);
 
     // 设置设备信息
     mp_DeviceLabel->setText(str1);
