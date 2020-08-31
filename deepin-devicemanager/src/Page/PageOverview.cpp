@@ -21,7 +21,7 @@
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
     , mp_PicLabel(new DLabel(this))
-    , mp_DeviceLabel(new LongTextLabel(this))
+      //, mp_DeviceLabel(new LongTextLabel(this))
     , mp_OSLabel(new LongTextLabel(this))
     , mp_Overview(new PageTableWidget(this))
     , mp_Refresh(new QAction(/*QIcon::fromTheme("view-refresh"), */tr("Refresh"), this))
@@ -66,7 +66,6 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
             QTableWidgetItem *itemFirst = new QTableWidgetItem(iter.first);
             mp_Overview->setItem(i, 0, itemFirst);
             QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find(iter.first).value());
-//            itemSecond->setToolTip(map.find(iter.first).value());
             mp_Overview->setItem(i, 1, itemSecond);
             ++i;
         }
@@ -75,8 +74,8 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
 
 void PageOverview::setLabel(const QString &itemstr)
 {
-    mp_DeviceLabel->setText(itemstr);
-    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
+//    mp_DeviceLabel->setText(itemstr);
+//    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
 
     // 系统中获取
 //    QIcon icon(QIcon::fromTheme("computer"));
@@ -136,15 +135,15 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     mp_OSLabel->setText(linkStr);
 
     // 设置设备信息
-    mp_DeviceLabel->setText(str1);
+//    mp_DeviceLabel->setText(str1);
 
-    // 设备信息加粗
-    QFont font = mp_DeviceLabel->font();
-    font.setWeight(63);
-    mp_DeviceLabel->setFont(font);
+//    // 设备信息加粗
+//    QFont font = mp_DeviceLabel->font();
+//    font.setWeight(63);
+//    mp_DeviceLabel->setFont(font);
 
-    // 设置字号
-    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
+//    // 设置字号
+//    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
 
     // 系统中获取
 //    QIcon icon(QIcon::fromTheme("computer"));
@@ -214,9 +213,9 @@ void PageOverview::initWidgets()
     QVBoxLayout *vLayoutLabel = new  QVBoxLayout();
     vLayoutLabel->setContentsMargins(0, 0, 0, 0);
     mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    //mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     vLayoutLabel->addSpacing(20);
-    vLayoutLabel->addWidget(mp_DeviceLabel);
+    //vLayoutLabel->addWidget(mp_DeviceLabel);
     vLayoutLabel->addWidget(mp_OSLabel);
     vLayoutLabel->addSpacing(15);
 
