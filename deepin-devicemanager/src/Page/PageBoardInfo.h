@@ -67,6 +67,13 @@ public:
      */
     bool isBaseBoard() override {return true;}
 
+signals:
+    void fontChange();
+
+protected:
+    bool event(QEvent *event)override;
+
+
 private:
     RichTextDelegate     *mp_ItemDelegate;
 };

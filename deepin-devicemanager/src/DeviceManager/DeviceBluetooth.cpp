@@ -260,7 +260,7 @@ void DeviceBluetooth::loadTableData()
 {
     // 加载表格数据
     QString name;
-    if (!enable) {
+    if (!enable()) {
         name = "(" + tr("Disable") + ") " + m_Name;
     } else {
         name = m_Name;

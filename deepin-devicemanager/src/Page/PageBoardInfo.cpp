@@ -7,18 +7,20 @@
 #include <QTableWidgetItem>
 #include <QDebug>
 
+#include <unistd.h>
+
 #include "DeviceInfo.h"
 #include "DeviceBios.h"
 #include "TextBrowser.h"
 #include "RichTextDelegate.h"
 #include "PageTableWidget.h"
+#include "DeviceManager/DeviceManager.h"
 
 
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)
     , mp_ItemDelegate(new RichTextDelegate(this))
 {
-
 }
 
 void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
@@ -78,8 +80,6 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         QTableWidgetItem *itemSecond = new QTableWidgetItem(pairs[i - limitSize].second);
         mp_Content->setItem(i, 1, itemSecond);
 
-        qDebug() << pairs[i - limitSize].first;
-
         QFont font = DFontSizeManager::instance()->t8();
         QFontMetrics fm(font);
         int height = 0;
@@ -105,6 +105,10 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         height += 20;
         mp_Content->setRowHeight(i, height);
     }
+
+//    if (m_SameDevice) {
+//        expandTable();
+//    }
 }
 
 void PageBoardInfo::getOtherInfoPair(const QList<DeviceBaseInfo *> &lst, QList<QPair<QString, QString>> &lstPair)
@@ -132,4 +136,13 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
         pair.second += "\n";
     }
     pair.second.replace(QRegExp("\n$"), "");
+}
+
+bool PageBoardInfo::event(QEvent *event)
+{
+    if (QEvent::FontChange == event->type()) {
+        DWidget::event(event);
+        emit fontChange();
+    }
+    return DWidget::event(event);
 }

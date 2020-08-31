@@ -109,6 +109,11 @@ protected:
      */
     void initWidgets();
 
+    /**
+     * @brief expandTable 手动张开表格
+     */
+    void expandTable();
+
 protected:
     PageTableWidget         *mp_Content;
     DLabel                  *mp_Label;
@@ -119,6 +124,7 @@ protected:
     QMenu                   *mp_Menu;        //<! 右键菜单
 
     DeviceBaseInfo          *mp_Device;      //<! 设备
+    bool                    m_SameDevice;
 
 
 };

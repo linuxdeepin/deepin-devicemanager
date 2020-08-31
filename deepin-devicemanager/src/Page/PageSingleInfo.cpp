@@ -24,6 +24,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Enable(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Enable"), this))
     , mp_Menu(new DMenu(this))
     , mp_Device(nullptr)
+    , m_SameDevice(false)
 {
     initWidgets();
 
@@ -42,6 +43,12 @@ PageSingleInfo::~PageSingleInfo()
 
 void PageSingleInfo::setLabel(const QString &itemstr)
 {
+    if (mp_Label->text() == itemstr) {
+        m_SameDevice = true;
+    } else {
+        m_SameDevice = false;
+    }
+
     mp_Label->setText(itemstr);
 
     // 设备类型加粗
@@ -181,4 +188,11 @@ void PageSingleInfo::initWidgets()
     hLayout->addWidget(mp_Content);
     hLayout->addStretch();
     setLayout(hLayout);
+}
+
+void PageSingleInfo::expandTable()
+{
+    if (mp_Content) {
+        mp_Content->expandTable();
+    }
 }

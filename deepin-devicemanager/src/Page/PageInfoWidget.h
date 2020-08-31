@@ -83,6 +83,9 @@ private slots:
      */
     void slotExportInfo();
 
+    /**
+     * @brief slotUpdateUI
+     */
     void slotUpdateUI();
 
 private:

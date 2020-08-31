@@ -85,6 +85,13 @@ void PageTableWidget::setCurDeviceState(bool state)
     mp_Table->setCurDeviceState(state);
 }
 
+void PageTableWidget::expandTable()
+{
+    if (mp_Table) {
+        mp_Table->expandCommandLinkClicked();
+    }
+}
+
 void PageTableWidget::setDeviceEnable(bool e)
 {
     mp_Table->setCurDeviceState(e);
