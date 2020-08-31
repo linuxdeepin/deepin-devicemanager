@@ -216,13 +216,7 @@ const QString &DeviceAudio::chip() const
 QString DeviceAudio::subTitle()
 {
     // 设备信息子标题
-    QString name;
-    if (!m_Enable) {
-        name = "(" + tr("Disable") + ") " + m_Name;
-    } else {
-        name = m_Name;
-    }
-    return name;
+    return m_Name;
 }
 
 const QString DeviceAudio::getOverviewInfo()
