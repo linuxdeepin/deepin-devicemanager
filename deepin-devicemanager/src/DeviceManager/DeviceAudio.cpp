@@ -295,7 +295,7 @@ void DeviceAudio::loadTableData()
 {
     // 记载表格内容
     QString name;
-    if (!m_Enable) {
+    if (!enable()) {
         name = "(" + tr("Disable") + ") " + m_Name;
     } else {
         name = m_Name;
