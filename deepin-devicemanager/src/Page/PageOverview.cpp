@@ -120,14 +120,14 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     if (DSysInfo::DeepinProfessional == type) {
         linkStr += "UnionTech OS 20 </a>" + os.remove("UnionTech OS 20");
     } else if (DSysInfo::DeepinPersonal == type) {
-        linkStr += "UOS 20 Home </a>" + os.remove("UnionTech OS 20 Home");
+        linkStr += "UnionTech OS 20 Home </a>" + os.remove("UnionTech OS 20 Home");
     } else if (DSysInfo::DeepinDesktop == type) {
-        linkStr += "Deepin 20 RC </a>" + os.remove("Deepin 20 RC");
+        linkStr += "Deepin 20 </a>" + os.remove("Deepin 20");
     }
 
     // 设置自动换行
     //mp_OSLabel->setWordWrap(false);
-    mp_OSLabel->setText(linkStr);
+    mp_OSLabel->setText(str2);
 
     // 设置设备信息
     mp_DeviceLabel->setText(str1);
