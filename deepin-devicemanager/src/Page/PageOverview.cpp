@@ -114,7 +114,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     // 超过控件长度用...代替
     QString os = str2;
-    QString linkStr = "<a style = \"text-decoration:none\" href = https://www.chinauos.com/home>";
+    QString linkStr = "<a style=\"text-decoration:none\" href=https://www.chinauos.com/home>";
 
     DSysInfo::DeepinType type = DSysInfo::deepinType();
     if (DSysInfo::DeepinProfessional == type) {
@@ -136,7 +136,6 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     QFont font = mp_DeviceLabel->font();
     font.setWeight(63);
     mp_DeviceLabel->setFont(font);
-    mp_OSLabel->setFont(font);
 
     // 设置字号
     DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
