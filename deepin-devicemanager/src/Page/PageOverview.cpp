@@ -77,11 +77,6 @@ void PageOverview::setLabel(const QString &itemstr)
     mp_DeviceLabel->setText(itemstr);
     DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
 
-    // 系统中获取
-//    QIcon icon(QIcon::fromTheme("computer"));
-//    QPixmap pic = icon.pixmap(96, 96);
-//    mp_PicLabel->setPixmap(pic);
-
     // 资源文件获取、
     QPixmap pic(96, 96);
 
@@ -125,14 +120,14 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     if (DSysInfo::DeepinProfessional == type) {
         linkStr += "UnionTech OS 20 </a>" + os.remove("UnionTech OS 20");
     } else if (DSysInfo::DeepinPersonal == type) {
-        linkStr += "UOS 20 Home </a>" + os.remove("UOS 20 Home");
+        linkStr += "UOS 20 Home </a>" + os.remove("UnionTech OS 20 Home");
     } else if (DSysInfo::DeepinDesktop == type) {
         linkStr += "Deepin 20 RC </a>" + os.remove("Deepin 20 RC");
     }
 
     // 设置自动换行
     //mp_OSLabel->setWordWrap(false);
-    mp_OSLabel->setText(linkStr);
+    mp_OSLabel->setText(str1);
 
     // 设置设备信息
     mp_DeviceLabel->setText(str1);
@@ -141,9 +136,11 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     QFont font = mp_DeviceLabel->font();
     font.setWeight(63);
     mp_DeviceLabel->setFont(font);
+    mp_OSLabel->setFont(font);
 
     // 设置字号
     DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
+    DFontSizeManager::instance()->bind(mp_OSLabel, DFontSizeManager::T5);
 
     // 系统中获取
 //    QIcon icon(QIcon::fromTheme("computer"));
@@ -199,11 +196,6 @@ void PageOverview::slotActionCopy()
 {
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Overview->toString());
-//    DMessageManager::instance()->sendMessage(mp_Overview, QIcon::fromTheme("emblem-checked"), tr("Successfully copied device information"));
-//    DUtil::DNotifySender sender(tr("Successfully copied device information"));
-//    sender.appIcon("deepin-devicemanager");
-//    sender.timeOut(2000);
-//    sender.call();
 }
 
 void PageOverview::initWidgets()

@@ -57,9 +57,9 @@ void DeviceGenerator::generatorComputerDevice()
     if (DSysInfo::DeepinProfessional == type) {
         os =  "UnionTech OS 20";
     } else if (DSysInfo::DeepinPersonal == type) {
-        os =  "UOS 20 Home";
+        os =  "UnionTech OS 20 Home";
     } else if (DSysInfo::DeepinDesktop == type) {
-        os =  "Deepin 20 RC";
+        os =  "Deepin 20";
     }
     device->setOsDescription(os);
 
