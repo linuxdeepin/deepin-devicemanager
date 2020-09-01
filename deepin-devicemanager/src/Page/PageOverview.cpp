@@ -201,23 +201,29 @@ void PageOverview::slotActionCopy()
 
 void PageOverview::initWidgets()
 {
-    mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     QVBoxLayout *vLayout = new QVBoxLayout(this);
 
     // 上部分
     QHBoxLayout *uphLayout = new QHBoxLayout(this);
+
     // 上左
     uphLayout->addWidget(mp_PicLabel);
     // 上右
     QVBoxLayout *uplvLayout = new QVBoxLayout(this);
+    uplvLayout->setContentsMargins(0, 0, 0, 0);
+    uplvLayout->addSpacing(15);
     uplvLayout->addWidget(mp_DeviceLabel);
+    uplvLayout->addSpacing(5);
     uplvLayout->addWidget(mp_OSLabel);
+    uplvLayout->addSpacing(15);
     uphLayout->addLayout(uplvLayout);
     vLayout->addLayout(uphLayout);
 
     // 下部分
     vLayout->addWidget(mp_Overview);
+    vLayout->addStretch();
     setLayout(vLayout);
 }

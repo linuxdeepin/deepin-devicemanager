@@ -45,7 +45,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
+    //int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
 
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();

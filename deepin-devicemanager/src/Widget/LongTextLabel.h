@@ -14,7 +14,6 @@ class LongTextLabel : public DLabel
 
 public:
     LongTextLabel(DWidget *parent = nullptr);
-    void setLinkText(const QString &linkstr);
     void paintEvent(QPaintEvent *event) override;
 
 private:

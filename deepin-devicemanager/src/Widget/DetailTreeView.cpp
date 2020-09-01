@@ -22,6 +22,27 @@
 #include <DStyle>
 #include <DFontSizeManager>
 
+
+
+
+BtnWidget::BtnWidget()
+{
+
+}
+void BtnWidget::enterEvent(QEvent *event)
+{
+    emit enter();
+    return DWidget::enterEvent(event);
+}
+
+void BtnWidget::leaveEvent(QEvent *event)
+{
+    emit leave();
+    return DWidget::leaveEvent(event);
+}
+
+
+
 DetailTreeView::DetailTreeView(DWidget *parent)
     : DTableWidget(parent)
     , mp_ItemDelegate(nullptr)
@@ -30,15 +51,16 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     , m_IsExpand(false)
     , m_IsEnable(true)
     , mp_OldItem(nullptr)
+    , mp_CurItem(nullptr)
     , m_TimeStep(0)
     , mp_Timer(new QTimer)
     , mp_ToolTips(nullptr)
-    , m_In(false)
 {
     setMouseTracking(true);
     // 初始化界面
     initUI();
     connect(mp_Timer, &QTimer::timeout, this, &DetailTreeView::slotTimeOut);
+    connect(this, &DetailTreeView::itemEntered, this, &DetailTreeView::slotItemEnterd);
     mp_Timer->start(100);
 }
 
@@ -111,7 +133,9 @@ void DetailTreeView::setCommanLinkButton(int row)
     QVBoxLayout *pVBoxLayout = new QVBoxLayout();
     pVBoxLayout->addLayout(pHBoxLayout);
 
-    DWidget *btnwidget = new DWidget();
+    BtnWidget *btnwidget = new BtnWidget();
+    connect(btnwidget, &BtnWidget::enter, this, &DetailTreeView::slotEnterBtnWidget);
+    connect(btnwidget, &BtnWidget::leave, this, &DetailTreeView::slotLeaveBtnWidget);
     btnwidget->setLayout(pVBoxLayout);
 
     // 将btnwidget填充到表格中，并隐藏
@@ -418,35 +442,41 @@ void DetailTreeView::mouseMoveEvent(QMouseEvent *event)
 
 void DetailTreeView::leaveEvent(QEvent *event)
 {
-    m_In = false;
     if (mp_ToolTips) {
+        mp_CurItem = nullptr;
         mp_ToolTips->hide();
     }
     DTableWidget::leaveEvent(event);
 }
 
-void DetailTreeView::enterEvent(QEvent *event)
-{
-    m_In = true;
-    if (!mp_ToolTips) {
-        mp_ToolTips = new TipsWidget(this);
-    }
-    mp_ToolTips->hide();
-    DTableWidget::enterEvent(event);
-}
-
 void DetailTreeView::slotTimeOut()
 {
-    if (!m_In)return;
-    QTableWidgetItem *it = this->itemAt(mp_Point);
-    if (it) {
-        showTips(it);
-    }
+    showTips(mp_CurItem);
+}
+
+void DetailTreeView::slotItemEnterd(QTableWidgetItem *item)
+{
+    mp_CurItem = item;
+}
+
+void DetailTreeView::slotEnterBtnWidget()
+{
+    mp_CurItem = nullptr;
+}
+
+void DetailTreeView::slotLeaveBtnWidget()
+{
+    QPoint pt = this->mapFromGlobal(QCursor::pos());
+    mp_CurItem = itemAt(pt);
 }
 
 void DetailTreeView::showTips(QTableWidgetItem *item)
 {
-    if (item == mp_OldItem) {
+    if (!mp_ToolTips) {
+        mp_ToolTips = new TipsWidget(this);
+    }
+
+    if (item && item == mp_OldItem) {
         qint64 curMS = QDateTime::currentDateTime().toMSecsSinceEpoch();
         if (curMS - m_TimeStep > 1000 && mp_ToolTips->isHidden()) {
             QString text = item->text();

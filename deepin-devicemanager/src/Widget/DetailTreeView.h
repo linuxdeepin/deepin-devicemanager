@@ -37,6 +37,25 @@ class ButtonDelegate;
 class CmdButtonWidget;
 class TipsWidget;
 
+
+class BtnWidget: public DWidget
+{
+    Q_OBJECT
+public:
+    BtnWidget();
+protected:
+    void enterEvent(QEvent *event)override;
+    void leaveEvent(QEvent *event)override;
+signals:
+    void enter();
+    void leave();
+};
+
+
+
+
+
+
 class DetailTreeView: public DTableWidget//DTreeView
 {
     Q_OBJECT
@@ -147,14 +166,11 @@ protected:
      */
     void leaveEvent(QEvent *event)override;
 
-    /**
-     * @brief enterEvent
-     * @param event
-     */
-    void enterEvent(QEvent *event)override;
-
 private slots:
     void slotTimeOut();
+    void slotItemEnterd(QTableWidgetItem *item);
+    void slotEnterBtnWidget();
+    void slotLeaveBtnWidget();
 
 private:
     /**
@@ -170,11 +186,11 @@ private:
     bool                      m_IsExpand;         // 是否展开
     bool                      m_IsEnable;         // 是否启用
     QTableWidgetItem          *mp_OldItem;
+    QTableWidgetItem          *mp_CurItem;
     qint64                    m_TimeStep;
     QTimer                    *mp_Timer;
     QPoint                    mp_Point;
     TipsWidget                *mp_ToolTips;
-    bool                      m_In;
 };
 
 #endif // DETAILTREEVIEW_H

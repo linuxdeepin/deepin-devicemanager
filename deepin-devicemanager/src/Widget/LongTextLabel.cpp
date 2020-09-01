@@ -14,51 +14,48 @@ LongTextLabel::LongTextLabel(DWidget *parent)
     : DLabel(parent)
     , m_width(width())
 {
-    setOpenExternalLinks(true);
+    setAlignment(Qt::AlignVCenter);
     DFontSizeManager::instance()->bind(this, DFontSizeManager::T8);
 }
 
-void LongTextLabel::setLinkText(const QString &linkstr)
+void LongTextLabel::paintEvent(QPaintEvent *)
 {
+    QPainter painter(this);
+    QTextDocument docText;
+    painter.save();
 
-}
+    QFont fo = painter.font();
+    QFontMetrics fm(fo);
 
-void LongTextLabel::paintEvent(QPaintEvent *event)
-{
-//    QPainter painter(this);
-//    QTextDocument docText;
+    QString html;
+    QString OS;
 
-//    QFont fo = painter.font();
-//    QFontMetrics fm(fo);
+    QRegExp reg("[\\s\\S]*</a>");
+    if (reg.indexIn(this->text()) != -1) {
+        html = reg.cap(0);
 
-//    QString html;
-//    QString OS;
+        reg.setPattern("<[\\s\\S]*>([\\s\\S]*)</a>");
 
-//    QRegExp reg("[\\s\\S]*</a>");
-//    if (reg.indexIn(this->text()) != -1) {
-//        html = reg.cap(0);
+        if (reg.indexIn(html) != -1) {
+            OS = reg.cap(1);
+        }
+    }
 
-//        reg.setPattern("<[\\s\\S]*>([\\s\\S]*)</a>");
+    QString src = this->text();
+    if (!html.isEmpty() && !OS.isEmpty()) {
+        src  = OS + this->text().remove(html);
+    }
 
-//        if (reg.indexIn(html) != -1) {
-//            OS = reg.cap(1);
-//        }
-//    }
+    QString text = fm.elidedText(src, Qt::TextElideMode::ElideRight, this->rect().width());
 
-//    QString src = this->text();
-//    if (!html.isEmpty() && !OS.isEmpty()) {
-//        src  = OS + this->text().remove(html);
-//    }
+    QString dst = text;
+    if (!html.isEmpty() && !OS.isEmpty()) {
+        dst = html + text.remove(OS);
+    }
 
-//    QString text = fm.elidedText(src, Qt::TextElideMode::ElideRight, this->rect().width());
-
-//    QString dst = text;
-//    if (!html.isEmpty() && !OS.isEmpty()) {
-//        dst = html + text.remove(OS);
-//    }
-
-//    docText.setHtml(dst);
-//    docText.setDefaultFont(fo);
-//    docText.drawContents(&painter, this->rect());
-    return DLabel::paintEvent(event);
+    docText.setHtml(dst);
+    docText.setDefaultFont(fo);
+    docText.drawContents(&painter, this->rect());
+    painter.restore();
+//    return DLabel::paintEvent(event);
 }
