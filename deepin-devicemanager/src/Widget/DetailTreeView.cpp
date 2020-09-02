@@ -432,6 +432,9 @@ void DetailTreeView::resizeEvent(QResizeEvent *event)
 {
     DTableWidget::resizeEvent(event);
     emit heightChange();
+    // 解决　调整窗口大小时tooltip未及时刷新
+    QPoint pt = this->mapFromGlobal(QCursor::pos());
+    mp_CurItem = itemAt(pt);
 }
 
 void DetailTreeView::mouseMoveEvent(QMouseEvent *event)
