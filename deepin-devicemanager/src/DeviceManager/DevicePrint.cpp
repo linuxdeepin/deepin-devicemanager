@@ -103,7 +103,13 @@ const QString DevicePrint::getOverviewInfo()
 
 EnableDeviceStatus DevicePrint::setEnable(bool e)
 {
-    return EnableManager::instance()->enablePrinter(m_Name, e);
+    EnableDeviceStatus res = EnableManager::instance()->enablePrinter(m_Name, e);
+    if (res == EDS_Success && e == false) {
+        m_Status = "5";
+    } else if (res == EDS_Success && e == true) {
+        m_Status = "3";
+    }
+    return res;
 }
 
 bool DevicePrint::enable()
