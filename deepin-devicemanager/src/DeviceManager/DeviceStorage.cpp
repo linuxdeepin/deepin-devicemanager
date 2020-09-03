@@ -455,6 +455,10 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     }
 
     setAttribute(mapInfo, "Rotation Rate", m_RotationRate);
+    // 解决Bug45428,INTEL SSDSA2BW160G3L 这个型号的硬盘通过lsblk获取的rota是１，所以这里需要特殊处理
+    if (m_RotationRate == QString("Solid State Device")) {
+        m_MediaType = QObject::tr("SSD");
+    }
 
     // 通电时间
     m_PowerOnHours = mapInfo["Power_On_Hours"];
