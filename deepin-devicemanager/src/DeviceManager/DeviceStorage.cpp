@@ -395,6 +395,9 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     }
 
     setAttribute(mapInfo, "Rotation Rate", m_RotationRate);
+    if (m_RotationRate == QString("Solid State Device")) {
+        m_MediaType = QObject::tr("SSD");
+    }
 
     // 通电时间
     m_PowerOnHours = mapInfo["Power_On_Hours"];
