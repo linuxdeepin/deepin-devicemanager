@@ -149,27 +149,24 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 //    mp_PicLabel->setPixmap(pic);
 
     // 资源文件获取、
-    QPixmap pic(96, 96);
-
-    QString path = ":/icons/deepin/builtin/device/";
+    QString path = "";
     if (str1.contains("desktop", Qt::CaseInsensitive)) {
-        path += "desktop.svg";
-    }
-    if (str1.contains("server", Qt::CaseInsensitive)) {
-        path += "server.svg";
-    }
-    if (str1.contains("ternimal", Qt::CaseInsensitive)) {
-        path += "ternimal.svg";
-    }
-    if (str1.contains("laptop", Qt::CaseInsensitive) ||
-            str1.contains("notebook", Qt::CaseInsensitive)) {
-        path += "laptop.svg";
-    }
-    if (str1.contains("Tablet", Qt::CaseInsensitive)) {
-        path += "Tablet.svg";
+        path = "device_desktop";
+    } else if (str1.contains("laptop", Qt::CaseInsensitive) ||
+               str1.contains("notebook", Qt::CaseInsensitive)) {
+        path = "device_laptop";
+    } else if (str1.contains("ternimal", Qt::CaseInsensitive)) {
+        path = "device_terminal";
+    } else if (str1.contains("Tablet", Qt::CaseInsensitive)) {
+        path = "device_tablet";
+    } else if (str1.contains("server", Qt::CaseInsensitive)) {
+        path = "device_server";
+    } else {
+        path = "device_desktop";
     }
 
-    pic.load(path);
+    QIcon icon(QIcon::fromTheme(path));
+    QPixmap pic = icon.pixmap(96, 96);
     mp_PicLabel->setPixmap(pic);
 }
 

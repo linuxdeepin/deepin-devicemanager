@@ -49,10 +49,10 @@
         <file>icons/deepin/builtin/deepin-devicemanager96.svg</file>
         <file>icons/deepin/builtin/deepin-devicemanager24.svg</file>
         <file>icons/deepin/builtin/deepin-devicemanager16.svg</file>
-        <file>icons/deepin/builtin/device/terminal.svg</file>
-        <file>icons/deepin/builtin/device/desktop.svg</file>
-        <file>icons/deepin/builtin/device/laptop.svg</file>
-        <file>icons/deepin/builtin/device/server.svg</file>
-        <file>icons/deepin/builtin/device/Tablet.svg</file>
+        <file>icons/deepin/builtin/icons/device_terminal_96px.svg</file>
+        <file>icons/deepin/builtin/icons/device_desktop_96px.svg</file>
+        <file>icons/deepin/builtin/icons/device_laptop_96px.svg</file>
+        <file>icons/deepin/builtin/icons/device_server_96px.svg</file>
+        <file>icons/deepin/builtin/icons/device_tablet_96px.svg</file>
     </qresource>
 </RCC>
