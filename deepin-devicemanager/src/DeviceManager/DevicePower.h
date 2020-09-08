@@ -49,6 +49,10 @@ public:
      */
     const QString &name()const override;
 
+    /**
+     * @brief driver:获取驱动名称
+     * @return  QString 驱动名称
+     */
     const QString &driver()const override;
 
     /**

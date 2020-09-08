@@ -31,6 +31,7 @@ DeviceCpu::DeviceCpu()
 
 void DeviceCpu::initFilterKey()
 {
+    // 添加可显示的属性
     addFilterKey(QObject::tr("CPU implementer"));
     addFilterKey(QObject::tr("CPU architecture"));
     addFilterKey(QObject::tr("CPU variant"));
@@ -55,6 +56,7 @@ void DeviceCpu::loadBaseDeviceInfo()
 
 void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo)
 {
+    // 设置CPU信息
     setInfoFromLscpu(mapLscpu);
     setInfoFromLshw(mapLshw);
     setInfoFromDmidecode(mapDmidecode);
@@ -187,6 +189,7 @@ QString DeviceCpu::subTitle()
 
 const QString DeviceCpu::getOverviewInfo()
 {
+    // 获取阿拉伯数字的英文翻译
     getTrNumber();
 
     QString ov = QString("%1 (%2%3 / %4%5)") \
@@ -201,6 +204,7 @@ const QString DeviceCpu::getOverviewInfo()
 
 void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 {
+    // 设置CPU属性
     setAttribute(mapInfo, "Model name", m_Name);
     setAttribute(mapInfo, "Vendor ID", m_Vendor);
     setAttribute(mapInfo, "Thread(s) per core", m_ThreadNum);
@@ -216,6 +220,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Flags", m_Flags);
     setAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
     setAttribute(mapInfo, "CPU(s)", m_LogicalCPUNum);
+
     // 计算频率范围
     bool min = mapInfo.find("CPU min MHz") != mapInfo.end();
     bool max = mapInfo.find("CPU max MHz") != mapInfo.end();
@@ -234,6 +239,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         }
     }
 
+    // 获取其他属性
     getOtherMapInfo(mapInfo);
 }
 

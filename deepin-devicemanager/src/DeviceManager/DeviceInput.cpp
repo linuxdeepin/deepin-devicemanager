@@ -28,6 +28,7 @@ DeviceInput::DeviceInput()
 
 bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
+    // 根据bus info属性值与m_KeyToLshw对比,判断是否为同一设备
     if (m_KeyToLshw != mapInfo["bus info"]) {
         QString key = mapInfo["bus info"];
         key.replace("a", "10");
@@ -37,7 +38,7 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
         }
     }
 
-//    setAttribute(mapInfo, "product", m_Name, false);
+    // 设置基础设备信息
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "version", m_Version);
@@ -48,6 +49,8 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "driver", m_Driver);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
+
+    // 获取其他设备信息
     getOtherMapInfo(mapInfo);
 
     return true;
@@ -99,7 +102,10 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         }
     }
 
+    // 由cat /proc/bus/devices/input设置设备信息
     setInfoFromInput();
+
+    // 获取其他设备信息
     getOtherMapInfo(mapInfo);
 }
 
@@ -145,15 +151,22 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         }
     }
 
+    // 由cat /proc/bus/devices/input设置设备信息
     setInfoFromInput();
 
+    // 获取其他设备信息
     getOtherMapInfo(mapInfo);
 }
 
 void DeviceInput::setInfoFromInput()
 {
+    // 获取对应的由cat /proc/bus/devices/input读取的设备信息
     const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
+
+    // 设置Name属性
     setAttribute(mapInfo, "Name", m_Name, true);
+
+    // 设置设备是否可用
     m_Enable = EnableManager::instance()->isDeviceEnable(m_Name);
 }
 
@@ -169,6 +182,7 @@ const QString &DeviceInput::driver() const
 
 QString DeviceInput::subTitle()
 {
+    // 获取子标题
     if (!m_Name.isEmpty())
         return m_Name;
     return m_Model;
@@ -176,6 +190,7 @@ QString DeviceInput::subTitle()
 
 const QString DeviceInput::getOverviewInfo()
 {
+    // 获取概况信息
     QString ov = QString("%1 (%2)") \
                  .arg(m_Name) \
                  .arg(m_Model);
@@ -185,6 +200,7 @@ const QString DeviceInput::getOverviewInfo()
 
 EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
+    // 设置设备状态
     EnableDeviceStatus res = EnableManager::instance()->enableDeviceByInput(m_Name, e, m_Index);
     if (res == EDS_Success) {
         m_Enable = e;
@@ -199,6 +215,7 @@ bool DeviceInput::enable()
 
 void DeviceInput::initFilterKey()
 {
+    // 添加可显示的设备信息
     addFilterKey(QObject::tr("PROP"));
     addFilterKey(QObject::tr("EV"));
     addFilterKey(QObject::tr("KEY"));
@@ -234,6 +251,7 @@ void DeviceInput::loadOtherDeviceInfo()
 
 void DeviceInput::loadTableData()
 {
+    // 加载表格数据
     QString name;
     if (!enable()) {
         name = "(" + tr("Disable") + ") " + m_Name;

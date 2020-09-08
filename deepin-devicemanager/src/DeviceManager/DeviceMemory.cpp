@@ -3,21 +3,26 @@
 DeviceMemory::DeviceMemory()
     : DeviceBaseInfo()
 {
+    // 初始化可显示属性
     initFilterKey();
 }
 
 void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
+    // 由lshw设置基本信息
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "description", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "slot", m_Locator);
     setAttribute(mapInfo, "size", m_Size);
+
+    // 替换内存大小单位
     if (m_Size.contains("GiB")) {
         m_Size.replace("GiB", "GB");
     }
     if (m_Size.contains("MiB")) {
         m_Size.replace("MiB", "");
+        // MiB换算MB
         double size = m_Size.toDouble() / 1024.0;
         m_Size = QString::number(size, 'g', 0) + QString("GB");
     }

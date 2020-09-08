@@ -23,24 +23,31 @@ public:
     EnableDeviceStatus enableDeviceByInput(const QString &name, bool enable, int index = 0);
 
     /**
-     * @brief isDeviceEnable : 用来启用和禁用设备
-     * @param name
-     * @return
+     * @brief isDeviceEnable : 判断设备是否可用
+     * @param name:设备名称
+     * @return true可用,false不可用
      */
     bool isDeviceEnable(const QString &name);
+
+    /**
+     * @brief isDeviceEnable:判断设备是否可用
+     * @param id:设备ID
+     * @return true可用,false不可用
+     */
     bool isDeviceEnable(int id);
 
     /**
-     * @brief enableDeviceByDriver
-     * @param driver
-     * @return
+     * @brief enableDeviceByDriver:过驱动禁用设备
+     * @param enable:设备禁用false,启用true
+     * @param driver:驱动名称
+     * @return 设备禁用状态
      */
     EnableDeviceStatus enableDeviceByDriver(bool enable, const QString &driver);
 
     /**
-     * @brief isDeviceEnableByDriver
-     * @param name
-     * @return
+     * @brief isDeviceEnableByDriver:判断是否通过驱动禁用设备
+     * @param name:设备名称
+     * @return true:该设备通过驱动禁用
      */
     bool isDeviceEnableByDriver(const QString &driver);
 
@@ -54,23 +61,23 @@ public:
     /**
      * @brief enableNetworkByIfconfig : 禁用网络设备
      * @param logicalName : 该网卡的逻辑名称
-     * @param enable
-     * @return
+     * @param enable:false禁用,true启用
+     * @return 设备禁用状态
      */
     EnableDeviceStatus enableNetworkByIfconfig(const QString &logicalName, bool enable);
 
     /**
      * @brief isNetworkEnableByIfconfig　: 判断该设备是否被禁用
      * @param logicalName : 该网卡的逻辑名称
-     * @return
+     * @return true:已被禁用,false:未被禁用
      */
     bool isNetworkEnableByIfconfig(const QString &logicalName);
 
     /**
-     * @brief getDeviceID
-     * @param name
-     * @param index
-     * @return
+     * @brief getDeviceID:获取设备ID号
+     * @param name:设备名称
+     * @param index:设备索引号
+     * @return 设备ID
      */
     int getDeviceID(const QString &name, bool enable, int index);
 
@@ -78,29 +85,33 @@ protected:
     EnableManager();
 
 private:
+
     /**
-     * @brief:命令的执行
+     * @brief getPKStr:获取授权码
+     * @param dtStr:年月日时分秒格式时间
+     * @param dtInt:秒数时间
+     * @return 授权码
      */
     QString getPKStr(const QString &dtStr, const QString &dtInt);
 
     /**
-     * @brief getPKStr
-     * @param dtStr
-     * @param dtInt
-     * @param cStr
+     * @brief getPKStr:解析授权码
+     * @param dtStr:年月日时分秒格式时间
+     * @param dtInt:秒数时间
+     * @param cStr:授权码
      */
     void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr);
 
     /**
-     * @brief getDriverPath
-     * @param driver
-     * @return
+     * @brief getDriverPath:获取驱动路径
+     * @param driver:驱动名称
+     * @return 驱动路径
      */
     QString getDriverPath(const QString &driver);
 
     /**
-     * @brief getPasswd
-     * @return
+     * @brief getPasswd:获取密码
+     * @return 密码
      */
     bool getPasswd();
 

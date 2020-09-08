@@ -13,8 +13,13 @@ DWIDGET_USE_NAMESPACE
 DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     : QObject(parent)
 {
+    // 设备可用
     m_Enable = true;
+
+    // 设备ID
     m_Index = 0;
+
+    // 设备不可被禁用
     m_CanEnable = false;
 }
 
@@ -137,7 +142,7 @@ void DeviceBaseInfo::toHtmlString(QDomDocument &doc)
 
 void DeviceBaseInfo::baseInfoToHTML(QDomDocument &doc, QList<QPair<QString, QString> > &infoLst)
 {
-    // 设备信息抓为HTML
+    // 设备信息转为HTML
     QDomElement table = doc.createElement("table");
     table.setAttribute("border", "0");
     table.setAttribute("width", "100%");
@@ -194,7 +199,7 @@ void DeviceBaseInfo::toDocString(Docx::Document &doc)
 
 void DeviceBaseInfo::baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QString> > &infoLst)
 {
-    // c
+    // 设备信息保存为Doc
     foreach (auto item, infoLst) {
         QString value = item.second;
 
@@ -203,6 +208,7 @@ void DeviceBaseInfo::baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QSt
             continue;
         }
 
+        // 添加doc段落
         QString line = item.first + ":  " + item.second;
         doc.addParagraph(line);
     }
@@ -349,16 +355,19 @@ void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
 
 void DeviceBaseInfo::tableInfoToDoc(Docx::Table *tab, int &row)
 {
+    // 表格信息保存为Doc
     if (tab == nullptr) {
         return;
     }
 
+    // 获取表格数据
     getTableData();
 
     if (m_TableData.size() < 1) {
         return;
     }
 
+    // 添加doc表格
     for (int col = 0; col < m_TableData.size(); ++col) {
         auto cel = tab->cell(row, col);
         cel->addText(m_TableData[col]);
@@ -367,12 +376,14 @@ void DeviceBaseInfo::tableInfoToDoc(Docx::Table *tab, int &row)
 
 void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
 {
+    // 表头保存为doc
     getTableHeader();
 
     if (m_TableHeader.size() < 1) {
         return;
     }
 
+    // 添加表头信息
     for (int col = 0; col < m_TableHeader.size(); ++col)  {
         tab->addColumn();
         auto cel = tab->cell(0, col);
@@ -383,12 +394,14 @@ void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
 
 void DeviceBaseInfo::tableInfoToXlsx(QXlsx::Document &xlsx)
 {
+    // 获取表格信息
     getTableData();
 
     if (m_TableData.size() < 1) {
         return;
     }
 
+    // 添加表格信息
     int curRow = DeviceManager::instance()->currentXlsRow();
     for (int col = 0; col < m_TableData.size(); ++col) {
         xlsx.write(curRow, col + 1, m_TableData[col]);
@@ -397,12 +410,14 @@ void DeviceBaseInfo::tableInfoToXlsx(QXlsx::Document &xlsx)
 
 void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
 {
+    // 获取表头
     getTableHeader();
 
     if (m_TableHeader.size() < 1) {
         return;
     }
 
+    // 添加表头信息
     int curRow = DeviceManager::instance()->currentXlsRow();
     for (int col = 0; col < m_TableHeader.size(); ++col) {
         QXlsx::Format boldFont;
@@ -431,6 +446,7 @@ bool DeviceBaseInfo::canEnable()
 
 void DeviceBaseInfo::setIndex(int index)
 {
+    // 设置设备ID
     m_Index = index;
 }
 
@@ -441,6 +457,7 @@ const QString DeviceBaseInfo::getOverviewInfo()
 
 void DeviceBaseInfo::loadTableHeader()
 {
+    // 添加表头信息
     m_TableHeader.append(tr("Name"));
     m_TableHeader.append(tr("Vendor"));
     m_TableHeader.append(tr("Model"));
@@ -448,14 +465,18 @@ void DeviceBaseInfo::loadTableHeader()
 
 void DeviceBaseInfo::addFilterKey(const QString &key)
 {
+    // 添加可显示设备属性
     m_FilterKey.insert(key);
 }
 
 void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
 {
+    // 获取其他设备信息
     QMap<QString, QString>::const_iterator it = mapInfo.begin();
     for (; it != mapInfo.end(); ++it) {
         QString k = DApplication::translate("QObject", it.key().trimmed().toStdString().data());
+
+        // 可显示设备属性中存在该属性
         if (m_FilterKey.find(k) != m_FilterKey.end()) {
             m_MapOtherInfo.insert(k, it.value().trimmed());
 //            m_LstOtherInfo.append(QPair<QString, QString>(k, it.value().trimmed()));
@@ -465,6 +486,7 @@ void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
 
 void DeviceBaseInfo::addBaseDeviceInfo(const QString &key, const QString &value)
 {
+    // 添加基础设备信息
     if (!value.isEmpty()) {
         m_LstBaseInfo.append(QPair<QString, QString>(key, value));
     }
@@ -472,6 +494,7 @@ void DeviceBaseInfo::addBaseDeviceInfo(const QString &key, const QString &value)
 
 void DeviceBaseInfo::addOtherDeviceInfo(const QString &key, const QString &value)
 {
+    // 添加其他设备信息
     if (!value.isEmpty()) {
         m_LstOtherInfo.insert(0, QPair<QString, QString>(key, value));
     }
@@ -479,15 +502,22 @@ void DeviceBaseInfo::addOtherDeviceInfo(const QString &key, const QString &value
 
 void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite)
 {
+    // map中存在该属性
     if (mapInfo.find(key) == mapInfo.end()) {
         return;
     }
+
+    // 属性值不能为空
     if (mapInfo[key] == "") {
         return;
     }
+
+    // overwrite 为true直接覆盖
     if (overwrite) {
         variable = mapInfo[key].trimmed();
     } else {
+
+        // overwrite 为false,如果当前属性值为空或unknown时可覆盖
         if (variable.isEmpty()) {
             variable = mapInfo[key].trimmed();
         }
@@ -500,8 +530,8 @@ void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const Q
 
 void DeviceBaseInfo::mapInfoToList()
 {
-//    m_MapOtherInfo --> m_LstOtherInfo
-
+    // m_MapOtherInfo --> m_LstOtherInfo
+    // QMap内容转为QList存储
     auto iter = m_MapOtherInfo.begin();
 
     for (; iter != m_MapOtherInfo.end(); ++iter) {
