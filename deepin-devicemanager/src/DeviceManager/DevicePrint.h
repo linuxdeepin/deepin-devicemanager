@@ -24,6 +24,10 @@
 #define DEVICEPRINT_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DevicePrint class
+ * 用来描述打印机的类
+ */
 
 class DevicePrint : public DeviceBaseInfo
 {

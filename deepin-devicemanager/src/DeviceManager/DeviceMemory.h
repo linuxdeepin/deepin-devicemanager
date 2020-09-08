@@ -24,6 +24,11 @@
 #define DEVICEMEMORY_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceMemory class
+ * 用来描述内存条的类
+ */
+
 class DeviceMemory : public DeviceBaseInfo
 {
     Q_OBJECT

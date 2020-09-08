@@ -23,6 +23,10 @@
 #define DEVICEGPU_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceGpu class
+ * 用来描述显示适配器的类
+ */
 class DeviceGpu: public DeviceBaseInfo
 {
     Q_OBJECT

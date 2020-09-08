@@ -53,7 +53,10 @@ class DeviceCdrom;
 class DeviceInput;
 class DeviceBaseInfo;
 
-/*管理设备信息的单例*/
+/**
+ * @brief The DeviceManager class
+ * 设备的管理类(包括设备的获取、增加、修改)
+ */
 
 class DeviceManager : public QObject
 {

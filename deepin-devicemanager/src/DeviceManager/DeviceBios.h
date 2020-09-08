@@ -23,6 +23,10 @@
 #define DEVICEBIOS_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceBios class
+ * 用来描述主板的类
+ */
 class DeviceBios : public DeviceBaseInfo
 {
     Q_OBJECT

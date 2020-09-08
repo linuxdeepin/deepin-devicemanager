@@ -24,6 +24,11 @@
 #define DEVICEOTHERPCI_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceOtherPCI class
+ * 用来描述PCI设备的类
+ */
+
 class DeviceOtherPCI : public DeviceBaseInfo
 {
     Q_OBJECT

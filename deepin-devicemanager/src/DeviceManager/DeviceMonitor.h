@@ -24,6 +24,10 @@
 #define DEVICEMONITOR_H
 #include "DeviceInfo.h"
 
+/**
+ * @brief The DeviceMonitor class
+ * 用来描述显示屏的类
+ */
 
 class DeviceMonitor : public DeviceBaseInfo
 {

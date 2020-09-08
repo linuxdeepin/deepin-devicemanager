@@ -24,6 +24,10 @@
 #define DEVICENETWORK_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceNetwork class
+ * 用来描述网络适配器的类
+ */
 
 class DeviceNetwork : public DeviceBaseInfo
 {

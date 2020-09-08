@@ -26,6 +26,11 @@
 #include <QObject>
 #include "DeviceInfo.h"
 
+/**
+ * @brief The EnableManager class
+ * 封装启用和禁用设备的接口
+ */
+
 class EnableManager : public QObject
 {
     Q_OBJECT

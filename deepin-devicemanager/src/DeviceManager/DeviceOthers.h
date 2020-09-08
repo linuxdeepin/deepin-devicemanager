@@ -24,6 +24,11 @@
 #define DEVICEOTHERS_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceOthers class
+ * 用来描述其它设备的类
+ */
+
 class DeviceOthers : public DeviceBaseInfo
 {
     Q_OBJECT

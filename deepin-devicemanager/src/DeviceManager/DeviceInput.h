@@ -24,6 +24,10 @@
 
 #include "DeviceInfo.h"
 
+/**
+ * @brief The DeviceInput class
+ * 用来描述输入设备的类
+ */
 class DeviceInput : public DeviceBaseInfo
 {
     Q_OBJECT

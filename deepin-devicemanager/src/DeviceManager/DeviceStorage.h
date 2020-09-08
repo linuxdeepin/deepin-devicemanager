@@ -24,6 +24,11 @@
 #define DEVICESTORAGE_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceStorage class
+ * 用来描述存储设备的类
+ */
+
 class DeviceStorage: public DeviceBaseInfo
 {
     Q_OBJECT

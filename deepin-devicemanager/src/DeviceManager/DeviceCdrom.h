@@ -23,6 +23,10 @@
 #define DEVICECDROM_H
 #include "DeviceInfo.h"
 
+/**
+ * @brief The DeviceCdrom class
+ * 用来描述光驱的类
+ */
 class DeviceCdrom : public DeviceBaseInfo
 {
     Q_OBJECT

@@ -34,12 +34,20 @@
 #include "xlsxdocument.h"
 #include "table.h"
 
+/**
+ * @brief The EnableDeviceStatus enum
+ * 用来标识对设备启用禁用的结果(包括成功、失败、取消三种情况)
+ */
 enum EnableDeviceStatus {
     EDS_Cancle,
     EDS_Faild,
     EDS_Success
 };
 
+/**
+ * @brief The DeviceBaseInfo class
+ * 各个摄像头描述类的基类
+ */
 class DeviceBaseInfo : public QObject
 {
     Q_OBJECT

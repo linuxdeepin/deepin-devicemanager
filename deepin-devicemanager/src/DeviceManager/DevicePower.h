@@ -24,6 +24,11 @@
 #define DEVICEPOWER_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DevicePower class
+ * 用来描述电源设备的类
+ */
+
 class DevicePower : public DeviceBaseInfo
 {
     Q_OBJECT

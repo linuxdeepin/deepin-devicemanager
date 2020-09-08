@@ -24,7 +24,10 @@
 #define DEVICEAUDIO_H
 #include"DeviceInfo.h"
 
-
+/**
+ * @brief The DeviceAudio class
+ * 用来描述音频适配器的类
+ */
 class DeviceAudio : public DeviceBaseInfo
 {
     Q_OBJECT

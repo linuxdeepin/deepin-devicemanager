@@ -23,7 +23,10 @@
 #define DEVICECPU_H
 #include "DeviceInfo.h"
 
-
+/**
+ * @brief The DeviceCpu class
+ * 用来描述CPU的类
+ */
 class DeviceCpu : public DeviceBaseInfo
 {
     Q_OBJECT

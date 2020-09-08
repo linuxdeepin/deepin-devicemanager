@@ -23,7 +23,10 @@
 #define DEVICEIMAGE_H
 #include"DeviceInfo.h"
 
-
+/**
+ * @brief The DeviceImage class
+ * 用来描述摄像头的类
+ */
 class DeviceImage : public DeviceBaseInfo
 {
     Q_OBJECT

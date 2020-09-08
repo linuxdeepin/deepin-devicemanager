@@ -23,6 +23,10 @@
 #define DEVICEBLUETOOTH_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceBluetooth class
+ * 用来描述蓝牙的类
+ */
 class DeviceBluetooth : public DeviceBaseInfo
 {
     Q_OBJECT

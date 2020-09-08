@@ -23,7 +23,10 @@
 #define DEVICECOMPUTER_H
 #include "DeviceInfo.h"
 
-
+/**
+ * @brief The DeviceComputer class
+ * 用来描述计算机信息的类(包括厂商，系统等信息)
+ */
 class DeviceComputer : public DeviceBaseInfo
 {
     Q_OBJECT
