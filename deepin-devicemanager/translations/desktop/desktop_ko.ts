@@ -13,8 +13,8 @@
 </message>
 <message>
 <location filename="Desktop Entry]Name" line="0"/>
-<source>Deepin Device Manager</source>
-<translation>Deepin 장치 관리자</translation>
+<source>Device Manager</source>
+<translation>장치 관리자</translation>
 </message>
 </context>
 </TS>
