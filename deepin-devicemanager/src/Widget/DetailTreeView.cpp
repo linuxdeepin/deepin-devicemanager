@@ -16,6 +16,7 @@
 #include <QToolTip>
 #include <QDateTime>
 #include <QTimer>
+#include <QDesktopWidget>
 
 #include <DApplication>
 #include <DApplicationHelper>
@@ -484,7 +485,12 @@ void DetailTreeView::showTips(QTableWidgetItem *item)
         if (curMS - m_TimeStep > 1000 && mp_ToolTips->isHidden()) {
             QString text = item->text();
             QPoint showRealPos(QCursor::pos().x(), QCursor::pos().y() + 10);
+            QRect screenRect = QApplication::desktop()->screenGeometry();
             if (mp_ToolTips) {
+                // 确保tips不会出现一半在窗口，一半看不到
+                if (showRealPos.x() + mp_ToolTips->width() > screenRect.width()) {
+                    showRealPos.setX(showRealPos.x() - mp_ToolTips->width());
+                }
                 mp_ToolTips->setText(text);
                 mp_ToolTips->move(showRealPos);
                 mp_ToolTips->show();

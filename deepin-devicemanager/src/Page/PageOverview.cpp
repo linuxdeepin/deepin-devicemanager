@@ -108,7 +108,12 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     mp_OSLabel->setOpenExternalLinks(true);
 
     // 设置ToolTip
-    mp_OSLabel->setToolTip(str2);
+    QString tips = str2;
+    if (tips.length() > 60)
+        tips.insert(60, QChar('\n'));
+    if (tips.length() > 120)
+        tips.insert(120, QChar('\n'));
+    mp_OSLabel->setToolTip(tips);
 
 
 
@@ -147,11 +152,6 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     // 设置字号
     DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
-
-    // 系统中获取
-//    QIcon icon(QIcon::fromTheme("computer"));
-//    QPixmap pic = icon.pixmap(96, 96);
-//    mp_PicLabel->setPixmap(pic);
 
     // 资源文件获取、
     QString path = "";
