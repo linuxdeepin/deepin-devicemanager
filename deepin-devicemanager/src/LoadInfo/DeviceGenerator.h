@@ -30,6 +30,10 @@
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
+/**
+ * @brief The DeviceGenerator class
+ * 将获取的设备信息生成设备对象
+ */
 class DeviceGenerator : public QObject
 {
     Q_OBJECT

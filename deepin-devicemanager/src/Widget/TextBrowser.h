@@ -35,7 +35,10 @@ DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
 class DeviceBaseInfo;
-
+/**
+ * @brief The TextBrowser class
+ * 封装富文本控件
+ */
 class TextBrowser : public DTextBrowser
 {
     Q_OBJECT

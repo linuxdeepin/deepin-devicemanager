@@ -26,6 +26,10 @@
 #include<QString>
 class DeviceGenerator;
 
+/**
+ * @brief The DeviceFactory class
+ * 用于获取当前的系统架构，并生成对应的生成器
+ */
 
 class DeviceFactory
 {

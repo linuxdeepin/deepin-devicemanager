@@ -33,6 +33,10 @@ class DeviceBaseInfo;
 
 using namespace Dtk::Widget;
 
+/**
+ * @brief The DeviceWidget class
+ * 界面类，设备信息的主界面类
+ */
 class DeviceWidget : public DWidget
 {
     Q_OBJECT

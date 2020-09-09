@@ -25,6 +25,11 @@
 
 #include "DeviceGenerator.h"
 
+/**
+ * @brief The X86Generator class
+ * 将获取的设备信息生成设备对象，x86架构下的生成器
+ */
+
 class X86Generator : public DeviceGenerator
 {
 public:

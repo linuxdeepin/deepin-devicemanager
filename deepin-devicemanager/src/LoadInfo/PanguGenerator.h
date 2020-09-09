@@ -23,6 +23,12 @@
 #ifndef PANGUGENERATOR_H
 #define PANGUGENERATOR_H
 #include"DeviceGenerator.h"
+
+/**
+ * @brief The PanguGenerator class
+ * 将获取的设备信息生成设备对象，pangu下的生成器
+ */
+
 class PanguGenerator : public DeviceGenerator
 {
 public:

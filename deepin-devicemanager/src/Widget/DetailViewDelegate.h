@@ -26,6 +26,10 @@
 #include <QStyledItemDelegate>
 #include <QObject>
 
+/**
+ * @brief The DetailViewDelegate class
+ * 表格代理类
+ */
 class DetailViewDelegate : public QStyledItemDelegate
 {
     Q_OBJECT

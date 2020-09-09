@@ -29,6 +29,11 @@
 #include <QFile>
 #include <cups.h>
 
+/**
+ * @brief The CmdTool class
+ * 用于获取设备信息的类，主要执行命令获取信息，然后解析生成对应的map
+ */
+
 class CmdTool
 {
 public:

@@ -35,6 +35,12 @@ class PageOverview;
 class PageBoardInfo;
 
 using namespace Dtk::Widget;
+
+/**
+ * @brief The PageInfoWidget class
+ * UI 设备信息的展示类
+ */
+
 class PageInfoWidget : public DWidget
 {
     Q_OBJECT

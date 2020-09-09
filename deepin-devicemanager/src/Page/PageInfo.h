@@ -29,6 +29,11 @@
 class DeviceBaseInfo;
 
 using namespace Dtk::Widget;
+
+/**
+ * @brief The PageInfo class
+ * UI 设备信息展示的基类
+ */
 class PageInfo : public DWidget
 {
     Q_OBJECT

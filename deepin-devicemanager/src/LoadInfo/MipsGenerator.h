@@ -23,6 +23,11 @@
 #define MIPSGENERATOR_H
 #include "DeviceGenerator.h"
 
+/**
+ * @brief The MipsGenerator class
+ * 将获取的设备信息生成设备对象，mips架构下的生成器
+ */
+
 class MipsGenerator : public DeviceGenerator
 {
 public:

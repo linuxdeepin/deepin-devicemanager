@@ -26,12 +26,15 @@
 #include<QStringList>
 #include<QMap>
 
+/**
+ * @brief The EDIDParser class
+ * 用于解析edid的类
+ */
+
 class EDIDParser
 {
 public:
     EDIDParser();
-
-    /**@brief:设置edid原始数据*/
     /**
      * @brief setEdid:设置edid原始数据
      * @param edid:edid信息

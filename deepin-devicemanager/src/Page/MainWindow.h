@@ -33,6 +33,11 @@ class DeviceWidget;
 class ThreadPool;
 
 using namespace Dtk::Widget;
+
+/**
+ * @brief The MainWindow class
+ * 界面，主窗口
+ */
 class MainWindow : public DMainWindow
 {
     Q_OBJECT

@@ -31,6 +31,12 @@
 class DeviceListView;
 
 using namespace Dtk::Widget;
+
+/**
+ * @brief The PageListView class
+ * 设备列表的展示类
+ */
+
 class PageListView : public DWidget
 {
     Q_OBJECT

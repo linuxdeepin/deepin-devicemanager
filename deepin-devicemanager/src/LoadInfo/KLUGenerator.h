@@ -24,6 +24,11 @@
 #define KLUGENERATOR_H
 
 #include"DeviceGenerator.h"
+
+/**
+ * @brief The KLUGenerator class
+ * 将获取的设备信息生成设备对象，KLU笔记本下的生成器
+ */
 class KLUGenerator : public DeviceGenerator
 {
 public:

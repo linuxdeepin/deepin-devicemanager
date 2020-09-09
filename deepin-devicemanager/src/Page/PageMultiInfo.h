@@ -36,6 +36,10 @@ class PageTableHeader;
 class PageDetail;
 class DeviceBaseInfo;
 
+/**
+ * @brief The PageMultiInfo class
+ * 多个设备信息的展示类
+ */
 class PageMultiInfo : public PageInfo
 {
     Q_OBJECT

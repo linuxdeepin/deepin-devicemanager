@@ -27,6 +27,10 @@
 #include <QStyledItemDelegate>
 #include <QDomDocument>
 
+/**
+ * @brief The RichTextDelegate class
+ * 封装富文本标签
+ */
 class RichTextDelegate : public QStyledItemDelegate
 {
     Q_OBJECT

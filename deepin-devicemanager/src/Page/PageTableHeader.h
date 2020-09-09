@@ -29,6 +29,11 @@
 class TableWidget;
 
 using namespace Dtk::Widget;
+
+/**
+ * @brief The PageTableHeader class
+ * UI 表头的封装
+ */
 class PageTableHeader : public DWidget
 {
     Q_OBJECT
@@ -70,6 +75,12 @@ signals:
      * @brief exportInfo:导出信息发出信号
      */
     void exportInfo();
+
+    /**
+     * @brief enableDevice 判断设备是否可以启用
+     * @param row
+     * @param enable
+     */
     void enableDevice(int row, bool enable);
 
 protected:
@@ -91,6 +102,12 @@ private slots:
      * @brief slotExportInfo:导出信息槽函数
      */
     void slotExportInfo();
+
+    /**
+     * @brief slotEnableDevice 启用禁用设备
+     * @param row
+     * @param enable
+     */
     void slotEnableDevice(int row, bool enable);
 
 private:

@@ -30,6 +30,10 @@
 
 DWIDGET_USE_NAMESPACE
 
+/**
+ * @brief The LongTextLabel class
+ * 封装富文本标签
+ */
 class LongTextLabel : public DLabel
 {
     Q_OBJECT

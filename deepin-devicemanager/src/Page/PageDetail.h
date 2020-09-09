@@ -38,6 +38,11 @@ class QVBoxLayout;
 
 using namespace Dtk::Widget;
 
+/**
+ * @brief The DetailButton class
+ * 控件，展开和收起
+ */
+
 class DetailButton: public DCommandLinkButton
 {
     Q_OBJECT
@@ -53,6 +58,10 @@ protected:
     void paintEvent(QPaintEvent *e) override;
 };
 
+/**
+ * @brief The DetailSeperator class
+ * 分割线
+ */
 class DetailSeperator: public DWidget
 {
     Q_OBJECT
@@ -63,6 +72,10 @@ protected:
     void paintEvent(QPaintEvent *e) override;
 };
 
+/**
+ * @brief The ScrollAreaWidget class
+ * 滑动区域
+ */
 class ScrollAreaWidget: public DWidget
 {
     Q_OBJECT
@@ -74,7 +87,10 @@ protected:
 
 };
 
-
+/**
+ * @brief The PageDetail class
+ * UI 设备详细信息的展示
+ */
 class PageDetail : public DWidget
 {
     Q_OBJECT

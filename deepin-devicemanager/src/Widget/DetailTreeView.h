@@ -38,7 +38,10 @@ class ButtonDelegate;
 class CmdButtonWidget;
 class TipsWidget;
 
-
+/**
+ * @brief The BtnWidget class
+ * 控件：按钮
+ */
 class BtnWidget: public DWidget
 {
     Q_OBJECT
@@ -56,7 +59,10 @@ signals:
 
 
 
-
+/**
+ * @brief The DetailTreeView class
+ * 封装的表格
+ */
 class DetailTreeView: public DTableWidget//DTreeView
 {
     Q_OBJECT

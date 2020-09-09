@@ -35,6 +35,10 @@ DCORE_USE_NAMESPACE
 class PageTableWidget;
 class LongTextLabel;
 
+/**
+ * @brief The PageOverview class
+ * UI 概况界面的展示类
+ */
 class PageOverview : public PageInfo
 {
     Q_OBJECT

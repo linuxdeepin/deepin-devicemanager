@@ -37,6 +37,10 @@ using namespace Dtk::Widget;
 
 class PageTableWidget;
 
+/**
+ * @brief The PageSingleInfo class
+ * UI 单个设备的界面展示类
+ */
 class PageSingleInfo : public PageInfo
 {
     Q_OBJECT

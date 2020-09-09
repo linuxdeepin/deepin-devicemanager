@@ -29,6 +29,11 @@
 class DeviceBios;
 class RichTextDelegate;
 
+/**
+ * @brief The PageBoardInfo class
+ * 主板的界面展示类
+ */
+
 class PageBoardInfo : public PageSingleInfo
 {
     Q_OBJECT

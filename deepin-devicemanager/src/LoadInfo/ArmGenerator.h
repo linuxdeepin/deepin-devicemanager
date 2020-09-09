@@ -24,6 +24,10 @@
 #define ARMGENERATOR_H
 #include "DeviceGenerator.h"
 
+/**
+ * @brief The ArmGenerator class
+ * 将获取的设备信息生成设备对象，arm架构下的生成器
+ */
 class ArmGenerator : public DeviceGenerator
 {
 public:

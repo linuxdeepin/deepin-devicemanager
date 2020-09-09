@@ -33,6 +33,10 @@ class LogTreeView;
 
 using namespace Dtk::Widget;
 
+/**
+ * @brief The TableWidget class
+ * UI : 自定义tablewidget
+ */
 class TableWidget : public DWidget
 {
     Q_OBJECT

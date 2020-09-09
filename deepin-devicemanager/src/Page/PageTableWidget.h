@@ -33,6 +33,10 @@ DWIDGET_USE_NAMESPACE
 class DetailTreeView;
 class RichTextDelegate;
 
+/**
+ * @brief The PageTableWidget class
+ * 表头控件
+ */
 class PageTableWidget : public DWidget
 {
     Q_OBJECT

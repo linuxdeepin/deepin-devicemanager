@@ -33,7 +33,10 @@
 using namespace Dtk::Widget;
 
 
-
+/**
+ * @brief The DeviceListviewDelegate class
+ * listView代理类
+ */
 class DeviceListviewDelegate : public DStyledItemDelegate
 {
     Q_OBJECT
@@ -48,6 +51,10 @@ private:
 };
 
 
+/**
+ * @brief The DeviceListView class
+ * listView的控件
+ */
 class DeviceListView : public DListView
 {
     Q_OBJECT

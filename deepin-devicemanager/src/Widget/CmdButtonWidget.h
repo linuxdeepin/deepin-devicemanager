@@ -32,6 +32,10 @@ DWIDGET_USE_NAMESPACE
 
 class DetailTreeView;
 
+/**
+ * @brief The CmdButtonWidget class
+ * 展开详细信息的按钮
+ */
 class CmdButtonWidget : public DWidget
 {
     Q_OBJECT

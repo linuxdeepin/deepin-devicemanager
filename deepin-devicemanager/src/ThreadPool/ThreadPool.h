@@ -51,6 +51,10 @@ enum DeviceType {
     DT_Others     = 18
 };
 
+/**
+ * @brief The CmdTask class
+ * 线程池的任务类,执行命令的任务类
+ */
 class CmdTask: public QObject, public QRunnable
 {
     Q_OBJECT
@@ -68,6 +72,10 @@ private:
     ThreadPool          *mp_Parent;
 };
 
+/**
+ * @brief The GenerateTask class
+ * 线程池的任务类，生成设备的任务类
+ */
 class GenerateTask: public QObject, public QRunnable
 {
     Q_OBJECT
@@ -83,7 +91,10 @@ private:
 };
 
 
-
+/**
+ * @brief The ThreadPool class
+ * 线程池：多线程处理
+ */
 class ThreadPool : public QThreadPool
 {
     Q_OBJECT

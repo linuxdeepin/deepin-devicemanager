@@ -26,6 +26,11 @@
 #include <QObject>
 #include "KLUGenerator.h"
 
+/**
+ * @brief The PanguVGenerator class
+ * 将获取的设备信息生成设备对象，panguV下的生成器
+ */
+
 class PanguVGenerator : public KLUGenerator
 {
 public:

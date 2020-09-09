@@ -29,6 +29,11 @@
 #include <DLabel>
 
 using namespace Dtk::Widget;
+
+/**
+ * @brief The WaitingWidget class
+ * 等待窗口
+ */
 class WaitingWidget : public DWidget
 {
     Q_OBJECT
