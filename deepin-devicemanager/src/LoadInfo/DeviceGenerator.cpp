@@ -51,16 +51,23 @@ void DeviceGenerator::generatorComputerDevice()
     }
 
     // setOsDescription
-    QString os = "UOS";
-    DSysInfo::DeepinType type = DSysInfo::deepinType();
-    if (DSysInfo::DeepinProfessional == type) {
-        os =  "UnionTech OS 20";
-    } else if (DSysInfo::DeepinPersonal == type) {
+    QString os = "UnionTech OS";
+    DSysInfo::UosEdition type = DSysInfo::uosEditionType();
+    if (DSysInfo::UosProfessional == type) {
+        os =  "UnionTech OS Desktop 20 Professional";
+    } else if (DSysInfo::UosHome == type) {
         os =  "UnionTech OS Desktop 20 Home";
-    } else if (DSysInfo::DeepinDesktop == type) {
+    } else if (DSysInfo::UosCommunity == type) {
         os =  "Deepin 20";
+    } else if (DSysInfo::UosEnterprise == type) {
+        os =  "UnionTech OS Server 20 Enterprise";
+    } else if (DSysInfo::UosEnterpriseC == type) {
+        os =  "UnionTech OS Server 20 Enterprise-C";
+    } else if (DSysInfo::UosEuler == type) {
+        os =  "UnionTech OS Server 20 Euler";
     }
     device.setOsDescription(os);
+
 
     // os
     const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
