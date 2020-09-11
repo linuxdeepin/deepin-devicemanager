@@ -1,4 +1,7 @@
+// 项目自身文件
 #include "DeviceAudio.h"
+
+// 其它头文件
 #include "EnableManager.h"
 
 DeviceAudio::DeviceAudio()

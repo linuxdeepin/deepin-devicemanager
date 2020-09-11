@@ -1,8 +1,13 @@
+// 项目自身文件
 #include "CmdTool.h"
-#include "../commondefine.h"
+
+// Qt库文件
 #include<QDebug>
 #include<QDateTime>
 #include<QMutex>
+
+// 其它头文件
+#include "../commondefine.h"
 #include "EDIDParser.h"
 #include "DeviceManager.h"
 

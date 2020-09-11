@@ -1,4 +1,7 @@
+// 项目自身文件
 #include "PanguGenerator.h"
+
+// 其它头文件
 #include "../DeviceManager/DeviceManager.h"
 #include "../DeviceManager/DeviceComputer.h"
 

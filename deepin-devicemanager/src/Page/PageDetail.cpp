@@ -1,6 +1,8 @@
+// 项目自身文件
 #include "PageDetail.h"
 #include "TextBrowser.h"
 
+// Qt库文件
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPainter>
@@ -8,16 +10,17 @@
 #include <QDebug>
 #include <QScrollBar>
 #include <QAction>
+#include <QClipboard>
 
+// Dtk头文件
 #include <DApplicationHelper>
 #include <DApplication>
 #include <DStyle>
 #include <DMenu>
-#include <QClipboard>
 #include <DFontSizeManager>
 
+// 其它头文件
 #include "DeviceInfo.h"
-
 #include "DeviceInfo.h"
 
 DWIDGET_USE_NAMESPACE

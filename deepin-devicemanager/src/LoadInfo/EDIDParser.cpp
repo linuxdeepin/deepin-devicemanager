@@ -1,6 +1,11 @@
+// 项目自身文件
 #include "EDIDParser.h"
+
+// Qt库文件
 #include<QDebug>
 #include<QDate>
+
+// 其它头文件
 #include<qmath.h>
 
 EDIDParser::EDIDParser()

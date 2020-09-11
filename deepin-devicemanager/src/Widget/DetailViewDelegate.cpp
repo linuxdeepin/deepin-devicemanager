@@ -1,13 +1,17 @@
+// 项目自身文件
 #include "DetailViewDelegate.h"
 
+// Qt库文件
 #include <QPainter>
 #include <QDebug>
 
+// Dtk头文件
 #include <DApplication>
 #include <DStyle>
 #include <DApplicationHelper>
 #include <DFontSizeManager>
 
+// 其它头文件
 #include "DetailTreeView.h"
 
 DWIDGET_USE_NAMESPACE

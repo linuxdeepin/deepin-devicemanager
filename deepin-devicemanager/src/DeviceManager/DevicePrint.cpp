@@ -1,7 +1,11 @@
+// 项目自身文件
 #include "DevicePrint.h"
-#include "EnableManager.h"
 
+// Qt库文件
 #include <QDebug>
+
+// 其它头文件
+#include "EnableManager.h"
 
 DevicePrint::DevicePrint()
     : DeviceBaseInfo()

@@ -1,4 +1,7 @@
+// 项目自身文件
 #include "DeviceStorage.h"
+
+// Qt库文件
 #include<QDebug>
 
 DeviceStorage::DeviceStorage()

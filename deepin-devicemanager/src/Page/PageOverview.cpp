@@ -1,15 +1,14 @@
+// 项目自身文件
 #include "PageOverview.h"
-#include "PageTableWidget.h"
-#include "DeviceManager.h"
-#include "PageInfoWidget.h"
-#include "LongTextLabel.h"
 
+// Qt库文件
 #include <QVBoxLayout>
 #include <QTableWidgetItem>
 #include <QAction>
 #include <QDebug>
 #include <QClipboard>
 
+// Dtk头文件
 #include <DApplication>
 #include <DFontSizeManager>
 #include <DMenu>
@@ -17,6 +16,12 @@
 #include <DMessageManager>
 #include <DNotifySender>
 #include <DTextBrowser>
+
+// 其它头文件
+#include "PageTableWidget.h"
+#include "DeviceManager.h"
+#include "PageInfoWidget.h"
+#include "LongTextLabel.h"
 
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)

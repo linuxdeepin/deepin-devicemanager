@@ -1,7 +1,13 @@
+// 项目自身文件
 #include "DeviceManager.h"
+
+// Qt库文件
+#include <QDebug>
+#include <QFile>
+
+// 其它头文件
 #include "DeviceCpu.h"
 #include "DeviceGpu.h"
-//#include "DeviceMouse.h"
 #include "DeviceStorage.h"
 #include "DeviceMemory.h"
 #include "DeviceMonitor.h"
@@ -10,7 +16,6 @@
 #include "DeviceAudio.h"
 #include "DeviceNetwork.h"
 #include "DeviceImage.h"
-//#include "DeviceKeyboard.h"
 #include "DeviceOthers.h"
 #include "DevicePower.h"
 #include "DevicePrint.h"
@@ -18,11 +23,7 @@
 #include "DeviceComputer.h"
 #include "DeviceCdrom.h"
 #include "DeviceInput.h"
-
 #include "MacroDefinition.h"
-
-#include <QDebug>
-#include <QFile>
 
 DeviceManager    *DeviceManager::sInstance = nullptr;
 int DeviceManager::m_CurrentXlsRow = 1;

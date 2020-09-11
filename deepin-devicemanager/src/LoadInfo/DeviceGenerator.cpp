@@ -1,7 +1,10 @@
+// 项目自身文件
 #include "DeviceGenerator.h"
 
+// Qt库文件
 #include <QDebug>
 
+// 其它头文件
 #include "CmdTool.h"
 #include "../DeviceManager/DeviceManager.h"
 #include "../DeviceManager/DeviceCpu.h"

@@ -1,3 +1,4 @@
+// 项目自身文件
 #include "DeviceCpu.h"
 
 DeviceCpu::DeviceCpu()

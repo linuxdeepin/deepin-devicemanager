@@ -1,4 +1,7 @@
+// 项目自身文件
 #include "DeviceGpu.h"
+
+// Qt库文件
 #include<QDebug>
 
 DeviceGpu::DeviceGpu()

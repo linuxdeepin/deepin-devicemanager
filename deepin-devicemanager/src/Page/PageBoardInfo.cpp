@@ -1,14 +1,17 @@
+// 项目自身文件
 #include "PageBoardInfo.h"
 
+// Qt库文件
+#include <QTableWidgetItem>
+#include <QDebug>
+
+// Dtk头文件
 #include <DApplicationHelper>
 #include <DPalette>
 #include <DFontSizeManager>
 
-#include <QTableWidgetItem>
-#include <QDebug>
-
+// 其它头文件
 #include <unistd.h>
-
 #include "DeviceInfo.h"
 #include "DeviceBios.h"
 #include "TextBrowser.h"

@@ -1,10 +1,13 @@
+// 项目自身文件
 #include "CmdButtonWidget.h"
 #include "DetailTreeView.h"
 
+// Qt库文件
 #include <QHBoxLayout>
 #include <QPainter>
 #include <QDebug>
 
+// Dtk头文件
 #include <DFontSizeManager>
 #include <DApplication>
 #include <DApplicationHelper>

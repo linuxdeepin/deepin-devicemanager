@@ -1,4 +1,7 @@
+// 项目自身文件
 #include "DeviceNetwork.h"
+
+// 其它头文件
 #include "EnableManager.h"
 
 DeviceNetwork::DeviceNetwork()

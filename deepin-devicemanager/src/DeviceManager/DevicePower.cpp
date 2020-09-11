@@ -1,6 +1,10 @@
+// 项目自身文件
 #include "DevicePower.h"
+
+// Qt库文件
 #include<QFileInfo>
 
+// Dtk头文件
 #include <DApplication>
 
 DWIDGET_USE_NAMESPACE

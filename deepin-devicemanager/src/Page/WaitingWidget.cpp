@@ -1,7 +1,10 @@
+// 项目自身文件
 #include "WaitingWidget.h"
 
+// Qt库文件
 #include <QHBoxLayout>
 
+// 其它头文件
 #include "MacroDefinition.h"
 
 

@@ -1,16 +1,21 @@
+// 项目自身文件
 #include "TextBrowser.h"
 
-#include <QDebug>
+// Dtk头文件
 #include <DApplicationHelper>
 #include <DApplication>
 #include <DFontSizeManager>
+#include <DMenu>
+
+// Qt库文件
 #include <QTextDocumentFragment>
 #include <QClipboard>
 #include <QContextMenuEvent>
 #include <QScrollBar>
 #include <QAction>
-#include <DMenu>
+#include <QDebug>
 
+// 其它头文件
 #include "DeviceManager/DeviceInfo.h"
 
 TextBrowser::TextBrowser(QWidget *parent)

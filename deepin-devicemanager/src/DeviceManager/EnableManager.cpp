@@ -1,7 +1,12 @@
+// 项目自身文件
 #include "EnableManager.h"
+
+// Qt库文件
 #include <QDebug>
 #include <QProcess>
 #include <QTime>
+
+// 其它头文件
 #include <stdlib.h>
 
 EnableManager *EnableManager::s_Instance = nullptr;

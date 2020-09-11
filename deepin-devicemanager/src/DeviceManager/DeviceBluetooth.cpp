@@ -1,7 +1,10 @@
+// 项目自身文件
 #include "DeviceBluetooth.h"
 
+// Qt库文件
 #include <QDebug>
 
+// 其它头文件
 #include "EnableManager.h"
 
 DeviceBluetooth::DeviceBluetooth()

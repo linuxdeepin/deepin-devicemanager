@@ -1,15 +1,20 @@
+// 项目自身文件
 #include "RichTextDelegate.h"
 
+// Dtk头文件
 #include <DApplication>
 #include <DStyle>
 #include <DApplicationHelper>
 
+// Qt库文件
 #include <QPainter>
 #include <QTextDocument>
 #include <QAbstractTextDocumentLayout>
 #include <QDebug>
-#include "DetailTreeView.h"
 #include <DFontSizeManager>
+
+// 其它头文件
+#include "DetailTreeView.h"
 
 DWIDGET_USE_NAMESPACE
 

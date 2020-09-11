@@ -1,8 +1,14 @@
+// 项目自身文件
 #include "DeviceMonitor.h"
+
+// Qt库文件
 #include <QDebug>
 #include <QDate>
-#include <math.h>
 #include <QSize>
+
+// 其它头文件
+#include <math.h>
+
 DeviceMonitor::DeviceMonitor()
     : DeviceBaseInfo()
     , m_Name("")

@@ -1,11 +1,11 @@
+// 项目自身文件
 #include "PageSingleInfo.h"
-#include "MacroDefinition.h"
-#include "DeviceInfo.h"
-#include "PageTableWidget.h"
 
+// Qt库文件
 #include <QVBoxLayout>
 #include <QClipboard>
 
+// Dtk头文件
 #include <DApplication>
 #include <DStandardItem>
 #include <DTableWidget>
@@ -13,6 +13,11 @@
 #include <DMessageManager>
 #include <DNotifySender>
 #include <DMessageBox>
+
+// 其它头文件
+#include "MacroDefinition.h"
+#include "DeviceInfo.h"
+#include "PageTableWidget.h"
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
     : PageInfo(parent)

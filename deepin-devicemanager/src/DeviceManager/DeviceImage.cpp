@@ -1,4 +1,7 @@
+// 项目自身文件
 #include "DeviceImage.h"
+
+// 其它头文件
 #include "DeviceManager.h"
 #include "EnableManager.h"
 

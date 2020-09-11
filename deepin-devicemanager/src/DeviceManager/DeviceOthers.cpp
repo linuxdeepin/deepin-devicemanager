@@ -1,4 +1,7 @@
+// 项目自身文件
 #include "DeviceOthers.h"
+
+// 其它头文件
 #include "../deviceinfoparser.h"
 
 DeviceOthers::DeviceOthers()

@@ -1,9 +1,13 @@
+// 项目自身文件
 #include "DeviceInfo.h"
 
+// Qt库文件
+#include <QDebug>
+
+// Dtk头文件
 #include <DApplication>
 
-#include<QDebug>
-
+// 其它头文件
 #include "../commondefine.h"
 #include"DeviceManager.h"
 #include "../deviceinfoparser.h"

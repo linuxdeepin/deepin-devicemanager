@@ -1,9 +1,14 @@
+// 项目自身文件
 #include "ThreadPool.h"
+
+// Qt库文件
 #include<QDebug>
 #include<QMutex>
 #include<QDateTime>
-#include <unistd.h>
 #include <QObjectCleanupHandler>
+
+// 其它头文件
+#include <unistd.h>
 #include "../deviceinfoparser.h"
 #include "../DeviceManager/DeviceManager.h"
 #include "../LoadInfo/CmdTool.h"

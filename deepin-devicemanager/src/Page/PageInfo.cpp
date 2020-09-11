@@ -1,13 +1,17 @@
+// 项目自身文件
 #include "PageInfo.h"
 
+// Qt库文件
 #include <QPainter>
 #include <QStyleOptionFrame>
+#include <QDebug>
 
+// Dtk头文件
 #include <DApplicationHelper>
 #include <DApplication>
 
+// 其它头文件
 #include "MacroDefinition.h"
-#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 PageInfo::PageInfo(QWidget *parent)

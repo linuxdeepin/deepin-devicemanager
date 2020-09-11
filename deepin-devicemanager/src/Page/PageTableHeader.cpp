@@ -1,16 +1,19 @@
+// 项目自身文件
 #include "PageTableHeader.h"
 
-
+// Qt库文件
 #include <QHBoxLayout>
 #include <QMenu>
 #include <QPainter>
 #include <QDebug>
 
+// Dtk头文件
 #include <DFontSizeManager>
 #include <DStandardItem>
 #include <DApplication>
 #include <DApplicationHelper>
 
+// 其它头文件
 #include "TableWidget.h"
 #include "MacroDefinition.h"
 

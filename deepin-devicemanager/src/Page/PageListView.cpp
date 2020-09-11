@@ -1,10 +1,14 @@
+// 项目自身文件
 #include "PageListView.h"
 
+// Qt库文件
 #include <QHBoxLayout>
-#include <DApplicationHelper>
-
 #include <QDebug>
 
+// Dtk头文件
+#include <DApplicationHelper>
+
+// 其它头文件
 #include "DeviceListView.h"
 #include "MacroDefinition.h"
 

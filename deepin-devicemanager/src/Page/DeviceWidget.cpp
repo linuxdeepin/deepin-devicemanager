@@ -1,12 +1,15 @@
+// 项目自身文件
 #include "DeviceWidget.h"
 
+// Qt库文件
+#include <QHBoxLayout>
+#include <QDebug>
+
+// 其它头文件
 #include "PageListView.h"
 #include "PageInfoWidget.h"
 #include "../DeviceManager/DeviceInfo.h"
 #include "MacroDefinition.h"
-
-#include <QHBoxLayout>
-#include <QDebug>
 
 DeviceWidget::DeviceWidget(QWidget *parent)
     : DWidget(parent)

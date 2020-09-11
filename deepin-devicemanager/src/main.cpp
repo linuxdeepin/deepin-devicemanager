@@ -21,9 +21,11 @@
  */
 
 #include "Page/MainWindow.h"
+
 #include <DApplication>
 #include <DWidgetUtil>
 #include <DLog>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "DTitlebar"

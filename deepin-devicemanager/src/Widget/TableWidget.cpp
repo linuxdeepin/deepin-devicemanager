@@ -1,5 +1,7 @@
+// 项目自身文件
 #include "TableWidget.h"
 
+// Dtk头文件
 #include <DFontSizeManager>
 #include <DApplication>
 #include <DStyle>
@@ -7,10 +9,12 @@
 #include <DHeaderView>
 #include <DMenu>
 
+// Qt库文件
 #include <QPainter>
 #include <QDebug>
 #include <QHBoxLayout>
 
+// 其它头文件
 #include "MacroDefinition.h"
 #include "logviewitemdelegate.h"
 #include "logtreeview.h"

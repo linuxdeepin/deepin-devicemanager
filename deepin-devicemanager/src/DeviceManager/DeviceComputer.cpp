@@ -1,4 +1,7 @@
+// 项目自身文件
 #include "DeviceComputer.h"
+
+// Qt库文件
 #include <QDebug>
 
 DeviceComputer::DeviceComputer()

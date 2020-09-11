@@ -1,17 +1,21 @@
+// 项目自身文件
 #include "MainWindow.h"
 
+// Qt库文件
 #include <QResizeEvent>
 #include <QDateTime>
 #include <QDebug>
-
-#include <DApplication>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QProcess>
 #include <QDir>
-#include <DFileDialog>
 
+// Dtk头文件
+#include <DFileDialog>
+#include <DApplication>
+
+// 其它头文件
 #include "WaitingWidget.h"
 #include "DeviceWidget.h"
 #include "MacroDefinition.h"

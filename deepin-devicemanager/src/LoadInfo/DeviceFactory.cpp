@@ -1,12 +1,17 @@
+// 项目自身文件
 #include "DeviceFactory.h"
+
+// Qt库文件
+#include <QProcess>
+#include <QFile>
+
+// 其它头文件
 #include "X86Generator.h"
 #include "MipsGenerator.h"
 #include "ArmGenerator.h"
 #include "KLUGenerator.h"
 #include "PanguGenerator.h"
 #include "PanguVGenerator.h"
-#include <QProcess>
-#include <QFile>
 #include "../commondefine.h"
 
 QString DeviceFactory::s_GeneratorKey = "";

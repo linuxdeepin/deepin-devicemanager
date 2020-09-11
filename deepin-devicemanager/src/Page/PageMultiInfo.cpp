@@ -1,13 +1,18 @@
+// 项目自身文件
 #include "PageMultiInfo.h"
 
+// Qt库文件
 #include <QVBoxLayout>
 #include <QAction>
 #include <QIcon>
-#include <DMenu>
 #include <QDebug>
+
+// Dtk头文件
 #include <DFontSizeManager>
 #include <DMessageBox>
+#include <DMenu>
 
+// 其它头文件
 #include "PageTableHeader.h"
 #include "PageDetail.h"
 #include "MacroDefinition.h"

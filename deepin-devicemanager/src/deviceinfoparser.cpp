@@ -21,46 +21,26 @@
  */
 
 #include "deviceinfoparser.h"
+
+
+#include <DLog>
+#include <DApplication>
+#include <DSysInfo>
+#include "DMessageBox"
+
 #include <QObject>
-#include <sys/utsname.h>
-#include <iostream>
 #include <QFile>
 #include <QProcess>
 #include <QRegExp>
-#include <DLog>
-#include <com_deepin_daemon_power.h>
+
 #include "commondefine.h"
-//#include "deviceattributedefine.h"
-#include "DeviceManager/DeviceManager.h"
-//#include "DeviceManager/DeviceMouse.h"
-#include "DeviceManager/DeviceCpu.h"
-#include "DeviceManager/DeviceGpu.h"
-#include "DeviceManager/DeviceStorage.h"
-#include "DeviceManager/DeviceMemory.h"
-#include "DeviceManager/DeviceMonitor.h"
-#include "DeviceManager/DeviceBios.h"
-#include "DeviceManager/DeviceAudio.h"
-#include "DeviceManager/DeviceBluetooth.h"
-#include "DeviceManager/DeviceNetwork.h"
-//#include "DeviceManager/DeviceKeyboard.h"
-#include "DeviceManager/DeviceImage.h"
-#include "DeviceManager/DeviceOthers.h"
-#include "DeviceManager/DeviceComputer.h"
-#include "DeviceManager/DevicePower.h"
-#include "DeviceManager/DeviceCdrom.h"
-#include "DeviceManager/DevicePrint.h"
-#include <DApplication>
-#include <DSysInfo>
-//#include "logpasswordauth.h"
-#include "DMessageBox"
 #include <cups.h>
 #include "Logger.h"
+#include <sys/utsname.h>
+#include <iostream>
 
 
 DWIDGET_USE_NAMESPACE
-
-using PowerInter = com::deepin::daemon::Power;
-
 DCORE_USE_NAMESPACE
 
 DeviceInfoParser::DeviceInfoParser()

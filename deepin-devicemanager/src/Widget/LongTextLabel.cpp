@@ -1,9 +1,12 @@
+// 项目自身文件
 #include "LongTextLabel.h"
 
+// Dtk头文件
 #include <DFontSizeManager>
 #include <DApplication>
 #include <DSysInfo>
 
+// Qt库文件
 #include <QDebug>
 #include <QAbstractTextDocumentLayout>
 #include <QDomDocument>

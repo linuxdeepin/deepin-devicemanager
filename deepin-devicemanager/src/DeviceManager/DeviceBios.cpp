@@ -1,4 +1,7 @@
+// 项目自身文件
 #include "DeviceBios.h"
+
+// Qt库文件
 #include <QDebug>
 
 DeviceBios::DeviceBios()

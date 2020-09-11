@@ -1,12 +1,16 @@
+// 项目自身文件
 #include "DeviceListView.h"
 
+// Dtk头文件
 #include <DApplicationHelper>
 #include <DApplication>
 
+// Qt库文件
 #include <qdrawutil.h>
 #include <QPainter>
 #include <QDebug>
 
+// 其它头文件
 #include "MacroDefinition.h"
 
 DWIDGET_USE_NAMESPACE

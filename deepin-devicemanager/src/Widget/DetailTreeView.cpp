@@ -1,12 +1,7 @@
+// 项目自身文件
 #include "DetailTreeView.h"
-#include "PageDetail.h"
-#include "DetailViewDelegate.h"
-#include "MacroDefinition.h"
-#include "PageInfo.h"
-#include "PageTableWidget.h"
-#include "CmdButtonWidget.h"
-#include "TipsWidget.h"
 
+// Qt库文件
 #include <QHeaderView>
 #include <QPainter>
 #include <QKeyEvent>
@@ -18,10 +13,20 @@
 #include <QTimer>
 #include <QDesktopWidget>
 
+// Dtk头文件
 #include <DApplication>
 #include <DApplicationHelper>
 #include <DStyle>
 #include <DFontSizeManager>
+
+// 其它头文件
+#include "PageDetail.h"
+#include "DetailViewDelegate.h"
+#include "MacroDefinition.h"
+#include "PageInfo.h"
+#include "PageTableWidget.h"
+#include "CmdButtonWidget.h"
+#include "TipsWidget.h"
 
 
 

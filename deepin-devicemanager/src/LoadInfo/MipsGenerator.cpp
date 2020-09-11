@@ -1,7 +1,9 @@
+// 项目自身文件
 #include "MipsGenerator.h"
+
+// 其它头文件
 #include "CmdTool.h"
 #include "../DeviceManager/DeviceManager.h"
-//#include "../DeviceManager/DeviceMouse.h"
 #include "../DeviceManager/DeviceCpu.h"
 #include "../DeviceManager/DeviceGpu.h"
 #include "../DeviceManager/DeviceStorage.h"
@@ -11,7 +13,6 @@
 #include "../DeviceManager/DeviceAudio.h"
 #include "../DeviceManager/DeviceBluetooth.h"
 #include "../DeviceManager/DeviceNetwork.h"
-//#include "../DeviceManager/DeviceKeyboard.h"
 #include "../DeviceManager/DeviceImage.h"
 #include "../DeviceManager/DeviceOthers.h"
 #include "../DeviceManager/DeviceComputer.h"
