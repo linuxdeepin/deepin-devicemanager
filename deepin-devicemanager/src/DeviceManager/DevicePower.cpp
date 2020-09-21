@@ -30,6 +30,8 @@ DevicePower::DevicePower()
     , m_SBDSManufactureDate("")
     , m_SBDSSerialNumber("")
     , m_SBDSVersion("")
+    , m_Temp("")
+
 {
     initFilterKey();
 }
@@ -59,6 +61,15 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_SBDSManufactureDate);
     setAttribute(mapInfo, "", m_SBDSSerialNumber);
     setAttribute(mapInfo, "", m_SBDSVersion);
+
+    // 添加电池温度
+    setAttribute(mapInfo, "temperature", m_Temp);
+    if (!m_Temp.isEmpty()) {
+        double temp = m_Temp.replace("degrees C", "").trimmed().toDouble();
+        temp = temp * 10;
+        m_Temp = QString("%1 degrees C").arg(temp);
+    }
+
     getOtherMapInfo(mapInfo);
     return true;
 }
@@ -197,7 +208,7 @@ void DevicePower::initFilterKey()
     addFilterKey(QObject::tr("energy-rate"));
     addFilterKey(QObject::tr("voltage"));
     addFilterKey(QObject::tr("percentage"));
-    addFilterKey(QObject::tr("temperature"));
+//    addFilterKey(QObject::tr("temperature"));    // 温度已经常规显示
     addFilterKey(QObject::tr("technology"));
     addFilterKey(QObject::tr("icon-name"));
     addFilterKey(QObject::tr("online"));
@@ -226,6 +237,7 @@ void DevicePower::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("SBDS Serial Number"), m_SBDSSerialNumber);
     addBaseDeviceInfo(tr("SBDS Manufacture Date"), m_SBDSManufactureDate);
     addBaseDeviceInfo(tr("SBDS Chemistry"), m_SBDSChemistry);
+    addBaseDeviceInfo(tr("Temprature"), m_Temp);
 }
 
 void DevicePower::loadOtherDeviceInfo()

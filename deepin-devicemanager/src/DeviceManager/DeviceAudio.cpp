@@ -71,6 +71,10 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     //2. 确定了是该设备信息，则获取设备的基本信息
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
+    if (m_Vendor == "0000") {
+        m_Vendor = "";
+    }
+
     setAttribute(mapInfo, "", m_Model);
 
     /*

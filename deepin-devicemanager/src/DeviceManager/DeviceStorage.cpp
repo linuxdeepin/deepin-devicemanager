@@ -410,6 +410,10 @@ void DeviceStorage::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Interface"), m_Interface);
     addOtherDeviceInfo(tr("Rotation Rate"), m_RotationRate);
 
+    if (m_RotationRate == QString("Solid State Device")) {
+        m_MediaType = QObject::tr("SSD");
+    }
+
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }

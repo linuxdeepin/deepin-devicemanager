@@ -29,6 +29,7 @@ DeviceMonitor::DeviceMonitor()
     , m_Width(0)
     , m_Height(0)
 {
+    // 初始化可显示属性
     initFilterKey();
 }
 
@@ -37,12 +38,17 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
 {
     inch = 0.0;
 
+    // 根据不同的正则表达式解析屏幕大小字符串
     QString res = sizeDescription;
     QRegExp re("^([\\d]*)x([\\d]*) mm$");
     if (re.exactMatch(sizeDescription)) {
+
+        // 获取屏幕宽高 int
         m_Width = re.cap(1).toInt();
         m_Height = re.cap(2).toInt();
         retSize = QSize(m_Width, m_Height);
+
+        // 获取屏幕尺寸大小 inch
         double width = m_Width / 2.54;
         double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
@@ -53,9 +59,13 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
 
     re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
     if (re.exactMatch(sizeDescription)) {
+
+        // 获取屏幕宽高 int
         m_Width = re.cap(1).toInt();
         m_Height = re.cap(2).toInt();
         retSize = QSize(m_Width, m_Height);
+
+        // 获取屏幕尺寸大小 inch
         double width = m_Width / 2.54;
         double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
@@ -69,6 +79,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
 
 void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+
     setAttribute(mapInfo, "Model", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);

@@ -46,7 +46,7 @@ public:
 
     /**
      * @brief setLimitRow 限制行数
-     * @param row
+     * @param row 行数
      */
     void setLimitRow(int row);
 
@@ -61,13 +61,13 @@ public:
      * @brief setItem 设置item
      * @param row　行
      * @param column　列
-     * @param item
+     * @param item 表格项
      */
     void setItem(int row, int column, QTableWidgetItem *item);
 
     /**
      * @brief toString 以字符串的方式获取信息
-     * @return
+     * @return 单元格内容以字符串显示
      */
     QString toString();
 
@@ -85,7 +85,7 @@ public:
 
     /**
      * @brief setDeviceEnable
-     * @param e
+     * @param e true:启用 false:禁用
      */
     void setDeviceEnable(bool e);
 

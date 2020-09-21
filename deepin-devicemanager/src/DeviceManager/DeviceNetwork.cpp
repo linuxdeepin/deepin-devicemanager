@@ -37,7 +37,7 @@ DeviceNetwork::DeviceNetwork()
 
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-
+    //
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "description", m_Name, false);

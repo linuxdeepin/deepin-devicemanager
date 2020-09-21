@@ -1,6 +1,8 @@
 // 项目自身文件
 #include "DeviceCpu.h"
 
+#include <math.h>
+
 DeviceCpu::DeviceCpu()
     : DeviceBaseInfo()
     , m_Vendor("")
@@ -230,6 +232,12 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         double maxHz = mapInfo["CPU max MHz"].toDouble() / 1000;
         m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
         m_FrequencyIsRange = true;
+
+        // 如果最大最小频率相等则不显示范围
+        if (fabs(minHz - maxHz) < 0.001) {
+            m_FrequencyIsRange = false;
+        }
+
     }
 
     //获取扩展指令集

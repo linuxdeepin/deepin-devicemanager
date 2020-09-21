@@ -53,9 +53,9 @@ public:
     void setColumnAverage();
 
     /**
-     * @brief updateCurItemEnable
-     * @param row
-     * @param enable
+     * @brief updateCurItemEnable :更新当前item是否可用状态
+     * @param row 行号
+     * @param enable true:启用 false:禁用
      */
     void updateCurItemEnable(int row, int enable);
 
@@ -78,8 +78,8 @@ signals:
 
     /**
      * @brief enableDevice 判断设备是否可以启用
-     * @param row
-     * @param enable
+     * @param row 行号
+     * @param enable 禁用/启用
      */
     void enableDevice(int row, bool enable);
 
@@ -105,8 +105,8 @@ private slots:
 
     /**
      * @brief slotEnableDevice 启用禁用设备
-     * @param row
-     * @param enable
+     * @param row 行号
+     * @param enable 禁用/启用
      */
     void slotEnableDevice(int row, bool enable);
 

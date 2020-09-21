@@ -498,6 +498,7 @@ void CmdTool::loadCatInfo(const QString &key, const QString &cmd, const QString 
     if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
         return;
     }
+
     QStringList items = deviceInfo.split("\n\n");
     foreach (const QString &item, items) {
         if (item.isEmpty()) {
@@ -581,6 +582,7 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, con
     if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
         return;
     }
+
     QStringList items = deviceInfo.split("\n\n");
     foreach (const QString &item, items) {
         if (item.isEmpty()) {
