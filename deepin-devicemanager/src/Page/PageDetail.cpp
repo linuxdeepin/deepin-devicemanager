@@ -23,6 +23,10 @@
 #include "DeviceInfo.h"
 #include "DeviceInfo.h"
 
+// 宏定义
+#define SPACE_HEIGHT 20  //
+#define SEPERATOR_HEIGHT 10  // 分割线上下距离
+
 DWIDGET_USE_NAMESPACE
 
 DetailButton::DetailButton(const QString &txt)
@@ -214,6 +218,7 @@ void PageDetail::showInfoOfNum(int index)
         value += m_ListTextBrowser[i]->height();
         value += m_ListDetailButton[i]->height();
         value += m_ListDetailSeperator[i]->height();
+        value += SPACE_HEIGHT;
     }
     mp_ScrollArea->verticalScrollBar()->setValue(value);
 }
@@ -276,14 +281,14 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 {
     // 添加 textBrowser
     if (widget != nullptr && m_ListTextBrowser.size() != 0) {
-        mp_ScrollAreaLayout->addSpacing(10);
+        mp_ScrollAreaLayout->addSpacing(SEPERATOR_HEIGHT);
     }
 
     mp_ScrollAreaLayout->addWidget(widget);
 
     // 添加按钮
     QHBoxLayout *hLayout = new QHBoxLayout();
-    hLayout->addSpacing(20);
+    hLayout->addSpacing(SPACE_HEIGHT);
     DetailButton *button = new DetailButton(tr("More"));
     DFontSizeManager::instance()->bind(button, DFontSizeManager::T8);
     connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
@@ -299,8 +304,7 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     mp_ScrollAreaLayout->addLayout(hLayout);
 
     // 添加分割线
-    mp_ScrollAreaLayout->addSpacing(10);
-
+    mp_ScrollAreaLayout->addSpacing(SEPERATOR_HEIGHT);
     DetailSeperator *seperator = new DetailSeperator(widget);
     mp_ScrollAreaLayout->addWidget(seperator);
 
