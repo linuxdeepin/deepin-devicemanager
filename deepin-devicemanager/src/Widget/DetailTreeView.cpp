@@ -171,6 +171,14 @@ int DetailTreeView::setTableHeight(int paintHeight)
     } else {
         PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
         maxRow = par->height() / ROW_HEIGHT - 2;
+
+        // 当前页面为概况时，展开更多信息，页面显示的表格的最大行数需减一，避免表格边框显示不完整
+        if (p->isOverview()) {
+            // 有更多信息并且已展开
+            if (hasExpendInfo() && m_IsExpand) {
+                maxRow--;
+            }
+        }
     }
 
     // 主板界面的表格高度
