@@ -187,9 +187,11 @@ void PageSingleInfo::initWidgets()
     labelLayout->addSpacing(10);
     labelLayout->addWidget(mp_Label);
 
-    hLayout->addSpacing(5);
+    // Label距离上下控件的距离 LABEL_MARGIN
+    hLayout->addSpacing(LABEL_MARGIN);
     hLayout->addLayout(labelLayout);
-    hLayout->addSpacing(5);
+    hLayout->addSpacing(LABEL_MARGIN);
+
     hLayout->addWidget(mp_Content);
     hLayout->addStretch();
     setLayout(hLayout);

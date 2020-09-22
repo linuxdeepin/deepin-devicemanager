@@ -165,10 +165,12 @@ int DetailTreeView::setTableHeight(int paintHeight)
     int maxRow = 0;
     if (p->isBaseBoard()) {
         PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
-        maxRow = par->height() / ROW_HEIGHT - 1;
+
+        // 最多显示行数与父窗口高度相关,需减去Label以及Spacing占用空间
+        maxRow = par->height() / ROW_HEIGHT - 2;
     } else {
         PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
-        maxRow = par->height() / ROW_HEIGHT - 1;
+        maxRow = par->height() / ROW_HEIGHT - 2;
     }
 
     // 主板界面的表格高度

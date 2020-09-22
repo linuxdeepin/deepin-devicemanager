@@ -112,9 +112,10 @@ void PageMultiInfo::initWidgets()
     labelLayout->addSpacing(10);
     labelLayout->addWidget(mp_Label);
 
-    hLayout->addSpacing(5);
+    // Label 距离上下控件的距离LABEL_MARGIN
+    hLayout->addSpacing(LABEL_MARGIN);
     hLayout->addLayout(labelLayout);
-    hLayout->addSpacing(5);
+    hLayout->addSpacing(LABEL_MARGIN);
 
     mp_Table->setFixedHeight(TABLE_HEIGHT);
     hLayout->addWidget(mp_Table);

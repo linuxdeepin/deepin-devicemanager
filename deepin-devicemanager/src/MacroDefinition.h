@@ -217,3 +217,4 @@
 #define   TREE_ROW_HEIGHT    36    // TreeWidget 行高
 #define   WIDGET_MARGIN      2     // 页边距
 #define   BOTTOM_MARGIN      11    // 下边距
+#define   LABEL_MARGIN       12    // 页面标签的上下边距
