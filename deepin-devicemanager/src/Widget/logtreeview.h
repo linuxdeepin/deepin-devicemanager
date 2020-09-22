@@ -77,6 +77,18 @@ public:
      */
     void clear();
 
+    /**
+     * @brief setRowNum: 设置表格总行数
+     * @param row: 行数
+     */
+    void setRowNum(int row);
+
+    /**
+     * @brief RowNum:获取表格行数
+     * @return  行数
+     */
+    int RowNum()const;
+
 protected:
     void initUI();
     void paintEvent(QPaintEvent *event) override;
@@ -85,6 +97,8 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 private:
+    int           m_RowCount;          // 表格行数
+
     QStandardItemModel         *mp_Model;
     LogViewItemDelegate        *mp_ItemDelegate;
     LogViewHeaderView          *mp_HeaderView;

@@ -21,7 +21,7 @@
 
 // 其它头文件
 #include "DeviceInfo.h"
-#include "DeviceInfo.h"
+#include "MacroDefinition.h"
 
 // 宏定义
 #define SPACE_HEIGHT 20  //
@@ -78,7 +78,7 @@ void DetailButton::paintEvent(QPaintEvent *e)
 DetailSeperator::DetailSeperator(DWidget *parent)
     : DWidget(parent)
 {
-    setFixedHeight(1);
+    setFixedHeight(LINE_WIDTH);
 }
 
 void DetailSeperator::paintEvent(QPaintEvent *e)

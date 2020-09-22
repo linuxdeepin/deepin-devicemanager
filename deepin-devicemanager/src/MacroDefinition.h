@@ -210,6 +210,10 @@
 
 
 //HeaderTableView的相关宏定义
-#define TABLE_HEIGHT 180   // Table的高度
-#define ROW_HEIGHT   40    // 每一行的高度
-#define LINE_WIDTH   1     // 表头的线宽
+#define   TABLE_HEIGHT       180   // Table的高度
+#define   ROW_HEIGHT         40    // 每一行的高度
+#define   LINE_WIDTH         1     // 表头的线宽
+#define   ROW_NUM            4     // TreeWidget 默认行数
+#define   TREE_ROW_HEIGHT    36    // TreeWidget 行高
+#define   WIDGET_MARGIN      2     // 页边距
+#define   BOTTOM_MARGIN      11    // 下边距

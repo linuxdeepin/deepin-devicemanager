@@ -85,6 +85,12 @@ void TableWidget::clear()
     }
 }
 
+void TableWidget::setRowNum(int row)
+{
+    // 设置表格行数
+    mp_Table->setRowNum(row);
+}
+
 void TableWidget::paintEvent(QPaintEvent *e)
 {
     DWidget::paintEvent(e);
@@ -109,7 +115,8 @@ void TableWidget::paintEvent(QPaintEvent *e)
         cg = DPalette::Inactive;
     }
 
-    this->setFixedHeight(36 * 5 + 4);
+    // 设置Widget固定高度,(+1)表示包含表头高度,(*2)表示上下边距
+    this->setFixedHeight(TREE_ROW_HEIGHT * (mp_Table->RowNum() + 1) + WIDGET_MARGIN * 2);
     QRect rect  = this->rect();
 
     // 开始绘制边框 *********************************************************

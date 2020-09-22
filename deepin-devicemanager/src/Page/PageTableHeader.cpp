@@ -60,6 +60,19 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
     // 设置表格的内容
     int row = lst.size();
     int column = lst[0].size() - 1;
+
+    // 设置表格行数以及背景Widget高度
+    //(+1)表示包含表头高度,(*2)表示上下边距,
+    if (row - 1 < ROW_NUM) {
+        // 表格内容行数小于4,表格高度与行数一致
+        mp_Table->setRowNum(row - 1);
+        this->setFixedHeight(TREE_ROW_HEIGHT * row + WIDGET_MARGIN * 2 + BOTTOM_MARGIN);
+    } else {
+        // 表格内容行数大于等于4,表格行数固定为4
+        mp_Table->setRowNum(4);
+        this->setFixedHeight(TREE_ROW_HEIGHT * (ROW_NUM + 1) + WIDGET_MARGIN * 2 + BOTTOM_MARGIN);
+    }
+
     for (int i = 0; i < row - 1; i++) {
         bool enable = lst[i + 1][0].startsWith("(" + tr("Disable") + ")");
         qDebug() << enable << "**********" << lst[i + 1][0];
@@ -87,7 +100,7 @@ void PageTableHeader::updateCurItemEnable(int row, int enable)
 
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
-    this->setFixedHeight(36 * 5 + 4 + 11);
+//    this->setFixedHeight(36 * 5 + 4 + 11);
     DWidget::paintEvent(e);
 }
 

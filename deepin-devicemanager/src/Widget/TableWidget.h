@@ -74,6 +74,12 @@ public:
      */
     void clear();
 
+    /**
+     * @brief setRowNum: 设置表格行数
+     * @param row : 总行数
+     */
+    void setRowNum(int row);
+
 signals:
     void itemClicked(int row);
     void refreshInfo();
