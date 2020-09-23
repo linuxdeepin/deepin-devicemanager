@@ -28,13 +28,11 @@
 #include "CmdButtonWidget.h"
 #include "TipsWidget.h"
 
-
-
-
 BtnWidget::BtnWidget()
 {
 
 }
+
 void BtnWidget::enterEvent(QEvent *event)
 {
     emit enter();
@@ -46,8 +44,6 @@ void BtnWidget::leaveEvent(QEvent *event)
     emit leave();
     return DWidget::leaveEvent(event);
 }
-
-
 
 DetailTreeView::DetailTreeView(DWidget *parent)
     : DTableWidget(parent)
@@ -139,6 +135,7 @@ void DetailTreeView::setCommanLinkButton(int row)
     QVBoxLayout *pVBoxLayout = new QVBoxLayout();
     pVBoxLayout->addLayout(pHBoxLayout);
 
+    // 新建放置按钮的widget,并设置鼠标出入对应的槽函数
     BtnWidget *btnwidget = new BtnWidget();
     connect(btnwidget, &BtnWidget::enter, this, &DetailTreeView::slotEnterBtnWidget);
     connect(btnwidget, &BtnWidget::leave, this, &DetailTreeView::slotLeaveBtnWidget);
@@ -147,11 +144,13 @@ void DetailTreeView::setCommanLinkButton(int row)
     // 将btnwidget填充到表格中，并隐藏
     setCellWidget(row - 1, 1, btnwidget);
 
+    // 点击按钮槽函数
     connect(mp_CommandBtn, &DCommandLinkButton::clicked, this, &DetailTreeView::expandCommandLinkClicked);
 }
 
 int DetailTreeView::setTableHeight(int paintHeight)
 {
+    // 设备禁用状态下,只显示一行
     if (!m_IsEnable) {
         paintHeight = 40;
         this->setFixedHeight(paintHeight);
@@ -232,23 +231,29 @@ bool DetailTreeView::hasExpendInfo()
 
 void DetailTreeView::setLimitRow(int row)
 {
+    // 设置页面显示行数
     m_LimitRow = row;
 }
 
 QString DetailTreeView::toString()
 {
+    // 表格行内容转为字符串
     QString str;
+
+    // 表格行,列
     int row = rowCount();
     int column = columnCount();
+
+    // 遍历所有行
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
             QTableWidgetItem *sItem = this->item(i, j);
             if (sItem) {
+                // 第一列内容后加冒号,否则后面加换行符
                 QString se = (j == 0) ? " : " : "\n";
                 str += sItem->text() + se;
             }
         }
-//        str += "\n";
     }
     return str;
 }
@@ -260,35 +265,47 @@ bool DetailTreeView::isCurDeviceEnable()
 
 void DetailTreeView::setCurDeviceState(bool state)
 {
+    // 设置当前设备状态
     m_IsEnable = state;
+
+    // 禁用状态
     if (!m_IsEnable) {
 
+        // 隐藏除第一行以外的所有行
         for (int i = 1; i < this->rowCount(); ++i) {
             this->hideRow(i);
         }
 
-        this->setTableHeight(40);
+        // 设置表格高度为单行高度
+        this->setTableHeight(ROW_HEIGHT);
     } else {
-        this->setTableHeight(40);
+        this->setTableHeight(ROW_HEIGHT);
 
+        // 展开状态
         if (m_IsExpand) {
             for (int i = 1; i < this->rowCount(); ++i) {
                 this->showRow(i);
             }
         }
 
+        // 未展开,但是由更多信息
         if (!m_IsExpand && hasExpendInfo()) {
+
+            // 按照限制行数显示
             for (int i = 1; i < this->m_LimitRow; ++i) {
                 this->showRow(i);
             }
 
+            // 显示展开按钮
             this->showRow(this->rowCount() - 1);
         }
 
+        // 没有更多信息
         if (!hasExpendInfo()) {
+
+            // 显示所有信息
             for (int i = 1; i < this->rowCount() - 1; ++i) {
                 this->showRow(i);
-
             }
         }
     }
@@ -383,16 +400,22 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
     QPainter painter(this->viewport());
     painter.save();
 
+    // 绘制表格外边框采用填充方式,通过内矩形与外矩形相差得到填充区域
     int width = 1;
     int radius = 8;
     QPainterPath paintPath, paintPathOut, paintPathIn;
+
+    // 外圆角矩形路径,即表格的外边框路径
     paintPathOut.addRoundedRect(rect, radius, radius);
 
+    // 内圆角矩形路径,与外圆角矩形上下左右相差1个像素
     QRect rectIn = QRect(rect.x() + width, rect.y() + width, rect.width() - width * 2, rect.height() - width * 2);
     paintPathIn.addRoundedRect(rectIn, radius, radius);
 
+    // 填充路径
     paintPath = paintPathOut.subtracted(paintPathIn);
 
+    // 填充
     QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
     painter.fillPath(paintPath, bgBrush);
 
@@ -409,7 +432,6 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
         line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - 40));
 
         // 绘制横线
-
         if (m_IsEnable) {
             QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - 39, rect.bottomRight().x(), rect.bottomRight().y() - 39);
             painter.drawLine(hline);
@@ -455,13 +477,16 @@ void DetailTreeView::resizeEvent(QResizeEvent *event)
 
 void DetailTreeView::mouseMoveEvent(QMouseEvent *event)
 {
+    // 鼠标移动获取位置
     mp_Point = event->pos();
     DTableWidget::mouseMoveEvent(event);
 }
 
 void DetailTreeView::leaveEvent(QEvent *event)
 {
+    // 鼠标移出事件
     if (mp_ToolTips) {
+        // 隐藏toopTips
         mp_CurItem = nullptr;
         mp_ToolTips->hide();
     }
@@ -470,35 +495,45 @@ void DetailTreeView::leaveEvent(QEvent *event)
 
 void DetailTreeView::slotTimeOut()
 {
+    // tooltips显示当前Item内容
     showTips(mp_CurItem);
 }
 
 void DetailTreeView::slotItemEnterd(QTableWidgetItem *item)
 {
+    // 设置当前鼠标所在位置Item
     mp_CurItem = item;
 }
 
 void DetailTreeView::slotEnterBtnWidget()
 {
+    // 鼠标进入BtnWidget,当前Item设置为nullptr,防止tooltips显示
     mp_CurItem = nullptr;
 }
 
 void DetailTreeView::slotLeaveBtnWidget()
 {
+    // 鼠标移出btnWidget,根据鼠标位置获取当前item
     QPoint pt = this->mapFromGlobal(QCursor::pos());
     mp_CurItem = itemAt(pt);
 }
 
 void DetailTreeView::showTips(QTableWidgetItem *item)
 {
+    // 确保tooltips Widget有效存在
     if (!mp_ToolTips) {
         mp_ToolTips = new TipsWidget(this);
     }
 
+    // 当前Item不为空且与上一个显示的Item一致
     if (item && item == mp_OldItem) {
+        // 通过计时器控制toolTips的刷新
         qint64 curMS = QDateTime::currentDateTime().toMSecsSinceEpoch();
         if (curMS - m_TimeStep > 1000 && mp_ToolTips->isHidden()) {
+            // tooltips内容
             QString text = item->text();
+
+            // 设置toolTips显示位置
             QPoint showRealPos(QCursor::pos().x(), QCursor::pos().y() + 10);
             QRect screenRect = QApplication::desktop()->screenGeometry();
             if (mp_ToolTips) {
@@ -506,14 +541,19 @@ void DetailTreeView::showTips(QTableWidgetItem *item)
                 if (showRealPos.x() + mp_ToolTips->width() > screenRect.width()) {
                     showRealPos.setX(showRealPos.x() - mp_ToolTips->width());
                 }
+
+                // 显示toolTips
                 mp_ToolTips->setText(text);
                 mp_ToolTips->move(showRealPos);
                 mp_ToolTips->show();
             }
         }
     } else {
+        // 重新计时,等待下一个tooltips的显示
         m_TimeStep = QDateTime::currentDateTime().toMSecsSinceEpoch();
         mp_OldItem = item;
+
+        // 隐藏tooltips
         if (mp_ToolTips) {
             mp_ToolTips->hide();
         }

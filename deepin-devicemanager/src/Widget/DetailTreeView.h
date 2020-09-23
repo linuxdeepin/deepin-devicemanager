@@ -48,16 +48,28 @@ class BtnWidget: public DWidget
 public:
     BtnWidget();
 protected:
+    /**
+     * @brief enterEvent:鼠标进入事件
+     * @param event
+     */
     void enterEvent(QEvent *event)override;
+
+    /**
+     * @brief leaveEvent:鼠标移出事件
+     * @param event
+     */
     void leaveEvent(QEvent *event)override;
 signals:
+    /**
+     * @brief enter:信号,鼠标进入
+     */
     void enter();
+
+    /**
+     * @brief leave:信号,鼠标移出
+     */
     void leave();
 };
-
-
-
-
 
 /**
  * @brief The DetailTreeView class

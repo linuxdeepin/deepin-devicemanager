@@ -69,6 +69,7 @@ void PageMultiInfo::setLabel(const QString &itemstr)
 
 void PageMultiInfo::slotItemClicked(int row)
 {
+    qDebug() << row;
     if (mp_Detail) {
         mp_Detail->showInfoOfNum(row);
     }

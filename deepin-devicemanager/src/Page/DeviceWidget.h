@@ -45,39 +45,39 @@ public:
     ~DeviceWidget();
 
     /**
-     * @brief updateListView:
-     * @param lst
+     * @brief updateListView:更新ListView
+     * @param lst:设备类别
      */
     void updateListView(const QList<QPair<QString, QString> > &lst);
 
     /**
-     * @brief updateDevice
-     * @param itemStr
-     * @param lst
+     * @brief updateDevice:更新设备
+     * @param itemStr:设备类别
+     * @param lst:该设备类别的所有设备指针lst
      */
     void updateDevice(const QString &itemStr, const QList<DeviceBaseInfo *> &lst);
 
     /**
-     * @brief updateOverview
-     * @param itemStr
-     * @param map
+     * @brief updateOverview:更新概况界面
+     * @param itemStr:概况
+     * @param map:概况信息map
      */
     void updateOverview(const QString &itemStr, const QMap<QString, QString> &map);
 signals:
 
     /**
-     * @brief itemClicked
-     * @param itemStr
+     * @brief itemClicked:item点击信号
+     * @param itemStr:item内容
      */
     void itemClicked(const QString &itemStr);
 
     /**
-     * @brief refreshInfo
+     * @brief refreshInfo:刷新信息
      */
     void refreshInfo();
 
     /**
-     * @brief exportInfo
+     * @brief exportInfo:导出信息
      */
     void exportInfo();
 
@@ -100,7 +100,7 @@ private slots:
     void slotExportInfo();
 
     /**
-     * @brief slotUpdateUI
+     * @brief slotUpdateUI:更新UI界面
      */
     void slotUpdateUI();
 
@@ -111,7 +111,7 @@ private:
 private:
     PageListView              *mp_ListView;          //<! 左边的list
     PageInfoWidget            *mp_PageInfo;          //<! 右边的详细内容
-    QString                   m_CurItemStr;
+    QString                   m_CurItemStr;          //<! 当前Item内容
 };
 
 #endif // DETAILWIDGET_H

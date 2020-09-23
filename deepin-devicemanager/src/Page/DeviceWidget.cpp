@@ -20,7 +20,7 @@ DeviceWidget::DeviceWidget(QWidget *parent)
     // 初始化界面布局
     initWidgets();
 
-    // 连接曹函数
+    // 连接槽函数
     connect(mp_ListView, &PageListView::itemClicked, this, &DeviceWidget::slotListViewWidgetItemClicked);
     connect(mp_PageInfo, &PageInfoWidget::refreshInfo, this, &DeviceWidget::slotRefreshInfo);
     connect(mp_PageInfo, &PageInfoWidget::exportInfo, this, &DeviceWidget::slotExportInfo);

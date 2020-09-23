@@ -202,6 +202,8 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
             m_ListDetailSeperator[lstInfo.size() - 1]->setVisible(false);
         }
     }
+    // 刷新展示页面时,滚动条还原
+    mp_ScrollArea->verticalScrollBar()->setValue(0);
     mp_ScrollAreaLayout->addStretch();
 }
 
@@ -317,17 +319,28 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 
 void PageDetail::clearWidget()
 {
+    //  清空TextBrowser
     foreach (auto widget, m_ListTextBrowser) {
         delete widget;
+        widget = nullptr;
     }
+
+    //  清空layout
     foreach (auto widget, m_ListHlayout) {
         delete widget;
+        widget = nullptr;
     }
+
+    // 清空DetailButton
     foreach (auto widget, m_ListDetailButton) {
         delete widget;
+        widget = nullptr;
     }
+
+    // 清空Seperator
     foreach (auto widget, m_ListDetailSeperator) {
         delete widget;
+        widget = nullptr;
     }
 
     m_ListTextBrowser.clear();
