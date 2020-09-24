@@ -344,7 +344,7 @@ void DeviceGenerator::getMemoryInfoFromLshw()
     } else if (lstMemory.size() > 1) {
         QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
         for (; it != lstMemory.end(); ++it) {
-            if (!(*it)["size"].contains("GiB") || (*it)["description"] == "System Memory") {
+            if ((!(*it)["size"].contains("GiB") && !(*it)["size"].contains("MiB")) || (*it)["description"] == "System Memory") {
                 continue;
             }
             DeviceMemory device;

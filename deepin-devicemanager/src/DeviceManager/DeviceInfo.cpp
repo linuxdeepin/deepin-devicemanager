@@ -44,7 +44,7 @@ void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const Q
     if (mapInfo.find(key) == mapInfo.end()) {
         return;
     }
-    if (mapInfo[key] == "") {
+    if (mapInfo[key] == "" || mapInfo[key] == "0000") {
         return;
     }
     if (overwrite) {

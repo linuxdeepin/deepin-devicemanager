@@ -167,6 +167,8 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Thread(s) per core", m_ThreadNum);
     setAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
     setAttribute(mapInfo, "Architecture", m_Architecture);
+    // 服务器欧拉版，是中文 架构 不是 Architecture
+    setAttribute(mapInfo, "架构", m_Architecture);
     setAttribute(mapInfo, "CPU family", m_Familly);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Stepping", m_Step);
