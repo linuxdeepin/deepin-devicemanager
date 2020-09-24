@@ -399,6 +399,13 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
         m_MediaType = QObject::tr("SSD");
     }
 
+
+    // 按照华为的需求，如果是固态硬盘就不显示转速
+    if (m_RotationRate == QString("KLU_SSD")) {
+        m_MediaType = QObject::tr("SSD");
+        m_RotationRate = "";
+    }
+
     // 通电时间
     m_PowerOnHours = mapInfo["Power_On_Hours"];
     if (m_PowerOnHours == "") {

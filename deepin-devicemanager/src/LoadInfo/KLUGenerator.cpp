@@ -266,7 +266,7 @@ void KLUGenerator::getDiskInfoFromSmartCtl()
 
         // 按照华为的需求，如果是固态硬盘就不显示转速
         if (tempMap["Rotation Rate"] == "Solid State Device") {
-            tempMap["Rotation Rate"] = "";
+            tempMap["Rotation Rate"] = "KLU_SSD";
         }
 
         DeviceManager::instance()->setStorageInfoFromSmartctl(tempMap["ln"], tempMap);
