@@ -10,6 +10,7 @@
 #include <QJsonDocument>
 #include <QProcess>
 #include <QDir>
+#include <QVBoxLayout>
 
 // Dtk头文件
 #include <DFileDialog>
@@ -252,8 +253,6 @@ void MainWindow::initWidgets()
 
     // 添加信息显示界面
     mp_MainStackWidget->addWidget(mp_DeviceWidget);
-
-    //
 }
 
 void MainWindow::refreshDataBase()

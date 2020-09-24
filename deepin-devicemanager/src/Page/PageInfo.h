@@ -82,8 +82,16 @@ public:
      */
     virtual bool isBaseBoard() {return false;}
 
+    virtual void setDeviceInfoNum(int num);
+
+    virtual int getDeviceInfoNum();
 protected:
     void paintEvent(QPaintEvent *e) override;
+
+private:
+
+    int m_AllInfoNum;
+
 };
 
 #endif // PAGEINFO_H

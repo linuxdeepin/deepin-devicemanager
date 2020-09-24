@@ -251,6 +251,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         painter->translate(point);
         painter->setClipRect(textRect.translated(-point));
         textDoc.documentLayout()->draw(painter, paintContext);
+        painter->restore();
     }
 
 //    if (index.column() == 0) {

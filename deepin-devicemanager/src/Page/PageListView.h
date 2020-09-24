@@ -46,6 +46,12 @@ public:
 
     void updateListItems(const QList<QPair<QString, QString> > &lst);
 
+    /**
+     * @brief currentIndex 当前Item类别
+     * @return  类别
+     */
+    QString currentIndex();
+
 protected:
     /**@brief:事件重写*/
     void paintEvent(QPaintEvent *event) override;

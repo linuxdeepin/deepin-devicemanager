@@ -92,6 +92,10 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
         return;
     }
 
+    // 设置单个设备界面信息显示的行数
+    int maxRow = this->height() / ROW_HEIGHT - 3;
+    mp_Content->setLimitRow(std::min(13, maxRow));
+
     int row = lst.size();
     mp_Content->setColumnAndRow(row + 1, 2);
 

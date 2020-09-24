@@ -21,19 +21,20 @@ WaitingWidget::WaitingWidget(QWidget *parent)
     mp_Spinner->setFixedSize(SPINNER_WIDTH, SPINNER_HEIGHT);
 
     // 初始化布局
-    QHBoxLayout *hLayout = new QHBoxLayout(this);
+    // 新建Layout,不需要指定父窗口
+    QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->addStretch();
 
-    QVBoxLayout *vLayout = new QVBoxLayout(this);
+    QVBoxLayout *vLayout = new QVBoxLayout();
     vLayout->addStretch();
 
-    QHBoxLayout *spinnerLayout = new QHBoxLayout(this);
+    QHBoxLayout *spinnerLayout = new QHBoxLayout();
     spinnerLayout->addStretch();
     spinnerLayout->addWidget(mp_Spinner);
     spinnerLayout->addStretch();
     vLayout->addLayout(spinnerLayout);
 
-    QHBoxLayout *labelLayout = new QHBoxLayout(this);
+    QHBoxLayout *labelLayout = new QHBoxLayout();
     labelLayout->addStretch();
     labelLayout->addWidget(mp_Label);
     labelLayout->addStretch();

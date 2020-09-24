@@ -104,6 +104,12 @@ private slots:
      */
     void slotUpdateUI();
 
+protected:
+    /**
+     * @brief: 事件的重写
+     */
+    virtual void resizeEvent(QResizeEvent *event)override;
+
 private:
     /**@brief:初始化界面布局*/
     void initWidgets();

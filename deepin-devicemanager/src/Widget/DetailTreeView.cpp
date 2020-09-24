@@ -72,15 +72,24 @@ void DetailTreeView::setColumnAndRow(int row, int column)
     setRowCount(row);
     setColumnCount(column);
 
-    // 表格行数大于限制行数时，添加展开button
-    if (row > m_LimitRow + 1) {
+    // 当前页为主板页面时,且信息已展开,展示更多/收起按钮
+    PageTableWidget *p = dynamic_cast<PageTableWidget *>(this->parent());
+    if (p->isBaseBoard() && m_IsExpand) {
         setCommanLinkButton(row);
-    }
-    // 如果行数少于限制行数，则影藏最后一行
-    if (row <= m_LimitRow + 1) {
-        hideRow(row - 1);
+        showRow(row - 1);
+    } else {
+        // 表格行数大于限制行数时，添加展开button
+        if (row > m_LimitRow + 1) {
+            setCommanLinkButton(row);
+        }
+        // 如果行数少于限制行数，则影藏最后一行
+        if (row <= m_LimitRow + 1) {
+            hideRow(row - 1);
+        }
     }
 }
+
+
 
 void DetailTreeView::setItem(int row, int column, QTableWidgetItem *item)
 {
@@ -91,9 +100,11 @@ void DetailTreeView::setItem(int row, int column, QTableWidgetItem *item)
     DTableWidget::setItem(row, column, item);
 
     // 行数大于限制行数隐藏信息，展示展开button
-    if (row >= m_LimitRow) {
-        hideRow(row);
-        showRow(this->rowCount() - 1);
+    if (!m_IsExpand) {
+        if (row >= m_LimitRow) {
+            hideRow(row);
+            showRow(this->rowCount() - 1);
+        }
     }
 }
 
@@ -110,7 +121,9 @@ void DetailTreeView::clear()
         delete mp_CommandBtn;
         mp_CommandBtn = nullptr;
     }
-    m_IsExpand = false;
+
+    //清空页面内容时,需要保存页面的展开收起状态
+    //m_IsExpand = false;
 }
 
 void DetailTreeView::setCommanLinkButton(int row)
@@ -118,6 +131,10 @@ void DetailTreeView::setCommanLinkButton(int row)
     // 设置mp_CommandBtn属性
     mp_CommandBtn = new DCommandLinkButton(tr("More"), this);
 
+    // 当页面已展开按钮文字为收起
+    if (m_IsExpand) {
+        mp_CommandBtn->setText(tr("Collapse"));
+    }
     // 设置字号
     DFontSizeManager::instance()->bind(mp_CommandBtn, DFontSizeManager::T8);
 
@@ -233,6 +250,19 @@ void DetailTreeView::setLimitRow(int row)
 {
     // 设置页面显示行数
     m_LimitRow = row;
+
+    // 父窗口
+    PageTableWidget *p = dynamic_cast<PageTableWidget *>(this->parent());
+    PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
+
+    // 最多显示行数与父窗口高度相关,需减去Label以及Spacing占用空间
+    int maxRow = par->height() / ROW_HEIGHT - 3;
+
+    // 主板界面可显示的行数与主板信息内容有关
+    if (p->isBaseBoard() && m_IsExpand) {
+        m_LimitRow = std::min(maxRow, par->getDeviceInfoNum());
+    }
+
 }
 
 QString DetailTreeView::toString()
@@ -317,12 +347,14 @@ void DetailTreeView::expandCommandLinkClicked()
     if (m_IsExpand) {
         mp_CommandBtn->setText(tr("More"));
         m_IsExpand = false;
+
         for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
             hideRow(i);
         }
     } else { // 当前未展开详细信息
         mp_CommandBtn->setText(tr("Collapse"));
         m_IsExpand = true;
+
         for (int i = m_LimitRow; i < rowCount() - 1; ++i) {
             showRow(i);
         }

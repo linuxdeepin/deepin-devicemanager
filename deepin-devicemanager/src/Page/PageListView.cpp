@@ -62,6 +62,12 @@ void PageListView::updateListItems(const QList<QPair<QString, QString> > &lst)
     emit itemClicked(m_CurType);
 }
 
+QString PageListView::currentIndex()
+{
+    // 获取当前Index的UserRole
+    return mp_ListView->currentIndex().data(Qt::UserRole).toString();
+}
+
 void PageListView::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色

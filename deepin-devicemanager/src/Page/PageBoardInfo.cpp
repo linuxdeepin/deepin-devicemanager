@@ -18,7 +18,7 @@
 #include "RichTextDelegate.h"
 #include "PageTableWidget.h"
 #include "DeviceManager/DeviceManager.h"
-
+#include "MacroDefinition.h"
 
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)
@@ -58,15 +58,23 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         return;
     }
 
-    int limitSize = lst.size();
+    // 比较页面可显示的最大行数与主板信息,取小值
+    int maxRow = this->height() / ROW_HEIGHT - 3;
+    int limitSize = std::min(lst.size(), maxRow);
+
     if (mp_Content) {
         mp_Content->setLimitRow(limitSize);
     }
 
-    int row = limitSize + devices.size();
+    // 表格所有行数应等于主板信息行+其他信息行
+    int row = lst.size() + devices.size();
+
+    // 设置主板信息行数,此接口目前仅在主板界面中使用,用来配合更多/收起按钮的使用
+    setDeviceInfoNum(lst.size());
     mp_Content->setColumnAndRow(row + 1, 2);
 
-    for (int i = 0; i < limitSize; ++i) {
+    // 主板信息正常显示
+    for (int i = 0; i < lst.size(); ++i) {
         QTableWidgetItem *itemFirst = new QTableWidgetItem(lst[i].first);
         mp_Content->setItem(i, 0, itemFirst);
         QTableWidgetItem *itemSecond = new QTableWidgetItem(lst[i].second);
@@ -75,25 +83,28 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
 
     QList<QPair<QString, QString>> pairs;
     getOtherInfoPair(devices, pairs);
-    for (int i = limitSize; i < row; ++i) {
+
+    // 其他信息使用富文本代理
+    // 其他信息的Id是出去所有BIOS信息以外的信息,使用Richtext进行显示
+    for (int i = lst.size(); i < row; ++i) {
         mp_Content->setItemDelegateForRow(i, mp_ItemDelegate);
-        QTableWidgetItem *itemFirst = new QTableWidgetItem(pairs[i - limitSize].first);
+        QTableWidgetItem *itemFirst = new QTableWidgetItem(pairs[i - lst.size()].first);
         mp_Content->setItem(i, 0, itemFirst);
 
-        QTableWidgetItem *itemSecond = new QTableWidgetItem(pairs[i - limitSize].second);
+        QTableWidgetItem *itemSecond = new QTableWidgetItem(pairs[i - lst.size()].second);
         mp_Content->setItem(i, 1, itemSecond);
 
         QFont font = DFontSizeManager::instance()->t8();
         QFontMetrics fm(font);
         int height = 0;
-        QStringList strList = pairs[i - limitSize].second.split("\n");
-        int fontHeight = fm.boundingRect(pairs[i - limitSize].second).height() + 2;
+        QStringList strList = pairs[i - lst.size()].second.split("\n");
+        int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height() + 2;
 
         foreach (const QString &str, strList) {
             QStringList lst = str.split(":");
             if (lst.size() == 2) {
                 int width = fm.boundingRect(lst[0]).width();
-                qDebug() << lst[0];
+//                qDebug() << lst[0];
                 int num = width / 110;
                 int num0 = width % 110;
                 if (num0 == 0) {

@@ -22,6 +22,7 @@
 #include "DeviceManager.h"
 #include "PageInfoWidget.h"
 #include "LongTextLabel.h"
+#include "MacroDefinition.h"
 
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
@@ -54,7 +55,17 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     mp_Overview->clear();
 
     int row = map.size();
-    mp_Overview->setLimitRow(11);
+
+    // 根据页面高度确定表格最多显示行数
+    int maxRow = this->height() / ROW_HEIGHT - 4;
+    qDebug() << maxRow;
+    if (maxRow < 1) {
+        mp_Overview->setLimitRow(11);
+
+    } else {
+        mp_Overview->setLimitRow(std::min(11, maxRow));
+    }
+
     mp_Overview->setColumnAndRow(row - 1);
 
     int i = 0;
@@ -211,15 +222,16 @@ void PageOverview::initWidgets()
     mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    QVBoxLayout *vLayout = new QVBoxLayout(this);
+    // 新建Layout不要给定父窗口
+    QVBoxLayout *vLayout = new QVBoxLayout();
 
     // 上部分
-    QHBoxLayout *uphLayout = new QHBoxLayout(this);
+    QHBoxLayout *uphLayout = new QHBoxLayout();
 
     // 上左
     uphLayout->addWidget(mp_PicLabel);
     // 上右
-    QVBoxLayout *uplvLayout = new QVBoxLayout(this);
+    QVBoxLayout *uplvLayout = new QVBoxLayout();
     uplvLayout->setContentsMargins(0, 0, 0, 0);
     uplvLayout->addSpacing(15);
     uplvLayout->addWidget(mp_DeviceLabel);
