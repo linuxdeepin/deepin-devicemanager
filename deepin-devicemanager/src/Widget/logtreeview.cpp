@@ -29,6 +29,7 @@
 #include <QFileInfo>
 #include <QHeaderView>
 #include <QScrollBar>
+#include <QPainterPath>
 //#include "structdef.h"
 #include "deviceinfowidgetbase.h"
 #include "../commondefine.h"

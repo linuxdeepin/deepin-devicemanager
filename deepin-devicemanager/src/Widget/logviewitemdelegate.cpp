@@ -28,6 +28,7 @@
 #include <QModelIndex>
 #include <QPainter>
 #include <QStyleOptionViewItem>
+#include <QPainterPath>
 
 #include "logviewitemdelegate.h"
 

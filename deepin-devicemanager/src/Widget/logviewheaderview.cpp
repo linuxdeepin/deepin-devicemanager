@@ -26,6 +26,7 @@
 #include <QDebug>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QPainterPath>
 
 #include "logviewheaderview.h"
 
@@ -75,7 +76,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     // vertical spacing
     QBrush vSpacingBrush(palette.color(cg, DPalette::FrameBorder));
     QRectF vSpacingRect(rect.x(), rect.y() + kSpacingMargin, m_spacing,
-                        rect.height() - kSpacingMargin * 2-4);
+                        rect.height() - kSpacingMargin * 2 - 4);
     QBrush clearBrush(palette.color(cg, DPalette::Window));
 
     painter->fillRect(hSpacingRect, clearBrush);
@@ -92,17 +93,19 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     QRect textRect;
     if (sortIndicatorSection() == logicalIndex) {
         textRect = {contentRect.x() + margin, contentRect.y(), contentRect.width() - margin * 3 - 8,
-                    contentRect.height()};
+                    contentRect.height()
+                   };
     } else {
         textRect = {contentRect.x() + margin, contentRect.y(), contentRect.width() - margin,
-                    contentRect.height()};
+                    contentRect.height()
+                   };
     }
     /*
     *@author yaobin
     *@date 2020-01-02
     *@Modify Reason:使文字居中
     */
-    textRect.adjust(0,-2,0,-2);
+    textRect.adjust(0, -2, 0, -2);
 
     QString title = model()->headerData(logicalIndex, orientation(), Qt::DisplayRole).toString();
     //    int align = model()->headerData(logicalIndex, orientation(),
@@ -113,7 +116,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
 
     if (logicalIndex == 0) {
         QRect col0Rect = textRect;
-        col0Rect.setX(textRect.x() + 4 );
+        col0Rect.setX(textRect.x() + 4);
         painter->drawText(col0Rect, static_cast<int>(align), title);
     } else {
         painter->drawText(textRect, static_cast<int>(align), title);
