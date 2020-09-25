@@ -132,15 +132,28 @@ public:
     void expandTable();
 
 signals:
+    /**
+     * @brief enableDeviceSignal:禁用启用设备信号
+     */
     void enableDeviceSignal();
 
 public slots:
+    /**
+     * @brief changeSize:改变表格高度
+     */
     void changeSize();
 
 protected:
+    /**
+     * @brief paintEvent:重绘事件
+     * @param event:事件
+     */
     void paintEvent(QPaintEvent *event) override;
 
 private:
+    /**
+     * @brief initUI:初始化页面布局
+     */
     void initUI();
 
 private:

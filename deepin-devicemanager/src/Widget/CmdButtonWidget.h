@@ -42,9 +42,16 @@ class CmdButtonWidget : public DWidget
 public:
     CmdButtonWidget(DetailTreeView *parent = nullptr);
 
+    /**
+     * @brief setButtonText:设置Button文字
+     * @param str:Button文字
+     */
     void setButtonText(const QString &str);
 
 signals:
+    /**
+     * @brief cmdButtonClicked:Button点击信号
+     */
     void cmdButtonClicked();
 
 public slots:
@@ -54,13 +61,20 @@ public slots:
     void expandCommandLinkClicked();
 
 protected:
+    /**
+     * @brief paintEvent:重绘事件
+     * @param event:事件
+     */
     void paintEvent(QPaintEvent *event) override;
 
 private:
+    /**
+     * @brief initUI:舒适化UI界面
+     */
     void initUI();
 
 private:
-    DCommandLinkButton *mp_cmdButton;
+    DCommandLinkButton *mp_cmdButton;             // 展开/收起按钮
 
 };
 

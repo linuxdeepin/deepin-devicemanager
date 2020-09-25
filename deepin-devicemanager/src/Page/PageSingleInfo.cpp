@@ -31,9 +31,13 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Device(nullptr)
     , m_SameDevice(false)
 {
+    // 初始化页面布局
     initWidgets();
 
+    // 设置右键快捷菜单属性
     mp_Content->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    // 连接槽函数
     connect(mp_Content, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
     connect(mp_Refresh, &QAction::triggered, this, &PageSingleInfo::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::slotActionExport);
@@ -48,6 +52,7 @@ PageSingleInfo::~PageSingleInfo()
 
 void PageSingleInfo::setLabel(const QString &itemstr)
 {
+    // 判断是否是同一界面刷新
     if (mp_Label->text() == itemstr) {
         m_SameDevice = true;
     } else {
@@ -63,7 +68,6 @@ void PageSingleInfo::setLabel(const QString &itemstr)
 
     // 设置字号
     DFontSizeManager::instance()->bind(mp_Label, DFontSizeManager::T5);
-
 }
 
 void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
@@ -73,14 +77,18 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     }
     mp_Device = lst[0];
 
+    // 清空内容
     clearContent();
 
+    //获取设备信息
     QList<QPair<QString, QString>> baseInfoMap = lst[0]->getBaseAttribs();
     QList<QPair<QString, QString>> otherInfoMap = lst[0]->getOtherAttribs();
     baseInfoMap = baseInfoMap + otherInfoMap;
 
+    // 加载设备信息
     loadDeviceInfo(baseInfoMap);
 
+    // 设置设备状态
     if (mp_Content) {
         mp_Content->setDeviceEnable(mp_Device->enable());
     }
@@ -92,29 +100,35 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
         return;
     }
 
-    // 设置单个设备界面信息显示的行数
+    // 设置单个设备界面信息显示的行数,与表格高度相关
     int maxRow = this->height() / ROW_HEIGHT - 3;
     mp_Content->setLimitRow(std::min(13, maxRow));
 
+    // 设置表格行数
     int row = lst.size();
     mp_Content->setColumnAndRow(row + 1, 2);
 
+    // 设置单元格内容
     for (int i = 0; i < row; ++i) {
+        // 第一列
         QTableWidgetItem *itemFirst = new QTableWidgetItem(lst[i].first);
         mp_Content->setItem(i, 0, itemFirst);
+
+        // 第二列
         QTableWidgetItem *itemSecond = new QTableWidgetItem(lst[i].second);
-//        itemSecond->setToolTip(lst[i].second);
         mp_Content->setItem(i, 1, itemSecond);
     }
 }
 
 void PageSingleInfo::clearContent()
 {
+    // 清空表格内容
     mp_Content->clear();
 }
 
 void PageSingleInfo::slotShowMenu(const QPoint &)
 {
+    // 显示右键菜单
     mp_Menu->clear();
     mp_Refresh->setEnabled(true);
     mp_Export->setEnabled(true);

@@ -16,24 +16,28 @@ CmdButtonWidget::CmdButtonWidget(DetailTreeView *parent)
     : DWidget(parent)
     , mp_cmdButton(new DCommandLinkButton(tr("More"), this))
 {
+    // 初始化UI界面
     initUI();
+
+    // 连接槽函数
     connect(mp_cmdButton, &DCommandLinkButton::clicked, this, &CmdButtonWidget::expandCommandLinkClicked);
 }
 
 void CmdButtonWidget::setButtonText(const QString &str)
 {
+    // 设置Button文字
     mp_cmdButton->setText(str);
 }
 
 void CmdButtonWidget::expandCommandLinkClicked()
 {
+    // Button点击信号发送
     emit cmdButtonClicked();
 }
 
 void CmdButtonWidget::paintEvent(QPaintEvent *event)
 {
     DWidget::paintEvent(event);
-
 
     QPainter painter(this);
     painter.save();
