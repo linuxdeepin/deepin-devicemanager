@@ -11,6 +11,7 @@
 #include "../DeviceManager/DeviceInfo.h"
 #include "MacroDefinition.h"
 #include "DeviceManager.h"
+#include "DeviceBios.h"
 
 DeviceWidget::DeviceWidget(QWidget *parent)
     : DWidget(parent)
@@ -70,22 +71,25 @@ void DeviceWidget::updateOverview(const QString &itemStr, const QMap<QString, QS
 
 void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
 {
+    // ListView Item 点击
     m_CurItemStr = itemStr;
     emit itemClicked(itemStr);
 }
 
 void DeviceWidget::slotRefreshInfo()
 {
+    // 刷新信息
     emit refreshInfo();
 }
 void DeviceWidget::slotExportInfo()
 {
+    // 导出信息
     emit exportInfo();
 }
 
 void DeviceWidget::slotUpdateUI()
 {
-
+    // 更新当前UI界面
     emit itemClicked(m_CurItemStr);
 }
 
@@ -111,7 +115,16 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
     bool ret = DeviceManager::instance()->getDeviceList(deviceType, lst);
     if (ret) {
         // 更新设备信息界面
-        mp_PageInfo->updateTable(deviceType, lst);
+        if (lst.size() > 1) {
+            // 判断是否是BIOS界面
+            DeviceBios *bios = dynamic_cast<DeviceBios *>(lst[0]);
+            if (bios) {
+                mp_PageInfo->updateTable(deviceType, lst);
+            }
+        } else {
+            mp_PageInfo->updateTable(deviceType, lst);
+        }
+
     } else {
         // 更新Overview界面
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
@@ -124,6 +137,7 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
 
 void DeviceWidget::initWidgets()
 {
+    // 初始化页面布局
     QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->setContentsMargins(0, 0, 0, 0);
     hLayout->setSpacing(0);

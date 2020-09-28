@@ -35,10 +35,13 @@ PageOverview::PageOverview(DWidget *parent)
     , mp_Copy(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Copy"), this))
     , mp_Menu(new DMenu(this))
 {
+    // 初始化界面布局
     initWidgets();
 
+    // 设置右键按钮策略
     mp_Overview->setContextMenuPolicy(Qt::CustomContextMenu);
 
+    // 连接槽函数
     connect(mp_Overview, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
     connect(mp_Refresh, &QAction::triggered, this, &PageOverview::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &PageOverview::slotActionExport);
@@ -58,7 +61,6 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
 
     // 根据页面高度确定表格最多显示行数
     int maxRow = this->height() / ROW_HEIGHT - 4;
-    qDebug() << maxRow;
     if (maxRow < 1) {
         mp_Overview->setLimitRow(11);
 
@@ -66,6 +68,7 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
         mp_Overview->setLimitRow(std::min(11, maxRow));
     }
 
+    // 设置表格行数
     mp_Overview->setColumnAndRow(row - 1);
 
     int i = 0;
@@ -73,11 +76,11 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
 
     foreach (auto iter, types) {
-
         if (iter.first == tr("Overview")) {
             continue;
         }
 
+        // 按设备类型列表顺序显示概况信息
         if (map.find(iter.first) != map.end()) {
             QTableWidgetItem *itemFirst = new QTableWidgetItem(iter.first);
             mp_Overview->setItem(i, 0, itemFirst);
@@ -90,32 +93,7 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
 
 void PageOverview::setLabel(const QString &itemstr)
 {
-    mp_DeviceLabel->setText(itemstr);
-    DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
 
-    // 资源文件获取、
-    QPixmap pic(96, 96);
-
-    QString path = ":/icons/deepin/builtin/device/";
-    if (itemstr.contains("desktop", Qt::CaseInsensitive)) {
-        path += "desktop.svg";
-    }
-    if (itemstr.contains("server", Qt::CaseInsensitive)) {
-        path += "server.svg";
-    }
-    if (itemstr.contains("ternimal", Qt::CaseInsensitive)) {
-        path += "ternimal.svg";
-    }
-    if (itemstr.contains("laptop", Qt::CaseInsensitive) ||
-            itemstr.contains("notebook", Qt::CaseInsensitive)) {
-        path += "laptop.svg";
-    }
-    if (itemstr.contains("Tablet", Qt::CaseInsensitive)) {
-        path += "Tablet.svg";
-    }
-
-    pic.load(path);
-    mp_PicLabel->setPixmap(pic);
 }
 
 void PageOverview::setLabel(const QString &str1, const QString &str2)
@@ -137,6 +115,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     QString os = str2;
     QString linkStr = "<a style=\"text-decoration:none\" href=https://www.chinauos.com/home>";
 
+    // 系统类型+链接
     DSysInfo::UosEdition type = DSysInfo::uosEditionType();
     if (DSysInfo::UosProfessional == type) {
         linkStr += "UnionTech OS Desktop 20 Professional </a>" + os.remove("UnionTech OS Desktop 20 Professional");
@@ -154,8 +133,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
         linkStr += "UnionTech OS </a>" + os.remove("UnionTech OS");
     }
 
-    // 设置自动换行
-    //mp_OSLabel->setWordWrap(false);
+    // 设置系统描述
     mp_OSLabel->setText(linkStr);
 
     // 设置设备信息
@@ -169,7 +147,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     // 设置字号
     DFontSizeManager::instance()->bind(mp_DeviceLabel, DFontSizeManager::T5);
 
-    // 资源文件获取、
+    // 资源文件获取
     QString path = "";
     if (str1.contains("desktop", Qt::CaseInsensitive)) {
         path = "device_desktop";
@@ -186,6 +164,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
         path = "device_desktop";
     }
 
+    // 设置计算器图片
     QIcon icon(QIcon::fromTheme(path));
     QPixmap pic = icon.pixmap(96, 96);
     mp_PicLabel->setPixmap(pic);
@@ -193,9 +172,9 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
 void PageOverview::slotShowMenu(const QPoint &)
 {
+    // 右键菜单
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
-//    mp_Menu->addSeparator();
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());
@@ -203,22 +182,26 @@ void PageOverview::slotShowMenu(const QPoint &)
 
 void PageOverview::slotActionRefresh()
 {
+    // 刷新
     emit refreshInfo();
 }
 
 void PageOverview::slotActionExport()
 {
+    // 导出
     emit exportInfo();
 }
 
 void PageOverview::slotActionCopy()
 {
+    // 拷贝
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Overview->toString());
 }
 
 void PageOverview::initWidgets()
 {
+    // 初始化页面布局
     mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 

@@ -146,9 +146,6 @@ public:
      */
     void setCurDeviceState(bool state);
 
-signals:
-    void heightChange();
-
 public slots:
     /**
      * @brief expandCommandLinkClicked:展开button点击槽函数

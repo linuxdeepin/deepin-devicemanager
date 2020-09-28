@@ -156,15 +156,18 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
 }
 void PageSingleInfo::slotActionRefresh()
 {
+    // 刷新
     emit refreshInfo();
 }
 void PageSingleInfo::slotActionExport()
 {
+    // 导出
     emit exportInfo();
 }
 
 void PageSingleInfo::slotActionCopy()
 {
+    // 拷贝
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Content->toString());
 }
@@ -200,6 +203,7 @@ void PageSingleInfo::slotActionEnable()
 
 void PageSingleInfo::initWidgets()
 {
+    // 初始化页面布局
     QVBoxLayout *hLayout = new QVBoxLayout();
     QHBoxLayout *labelLayout = new QHBoxLayout();
     labelLayout->addSpacing(10);
@@ -217,6 +221,7 @@ void PageSingleInfo::initWidgets()
 
 void PageSingleInfo::expandTable()
 {
+    // 展开表格
     if (mp_Content) {
         mp_Content->expandTable();
     }

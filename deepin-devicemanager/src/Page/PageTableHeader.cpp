@@ -21,9 +21,10 @@ PageTableHeader::PageTableHeader(QWidget *parent)
     : DWidget(parent)
     , mp_Table(new TableWidget(this))
 {
+    // 初始化页面布局
     initWidgets();
 
-    // 连接曹函数
+    // 连接槽函数函数
     connect(mp_Table, &TableWidget::itemClicked, this, &PageTableHeader::slotItemClicked);
     connect(mp_Table, &TableWidget::refreshInfo, this, &PageTableHeader::slotRefreshInfo);
     connect(mp_Table, &TableWidget::exportInfo, this, &PageTableHeader::slotExportInfo);
@@ -75,8 +76,8 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
 
     for (int i = 0; i < row - 1; i++) {
         bool enable = lst[i + 1][0].startsWith("(" + tr("Disable") + ")");
-//        qDebug() << enable << "**********" << lst[i + 1][0];
         int co = column;
+
         if (enable) {co = 1;}
         for (int j = 0; j < co; j++) {
             DStandardItem *item = new DStandardItem(lst[i + 1][j]);
@@ -84,42 +85,48 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
         }
     }
 
+    // 列宽平均分配
     mp_Table->setColumnAverage();
 }
 
 void PageTableHeader::setColumnAverage()
 {
+    // 列宽平均分配
     if (mp_Table)
         mp_Table->setColumnAverage();
 }
 
 void PageTableHeader::updateCurItemEnable(int row, int enable)
 {
+    // 禁用/启用当前设备
     mp_Table->updateCurItemEnable(row, enable);
 }
 
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
-//    this->setFixedHeight(36 * 5 + 4 + 11);
     DWidget::paintEvent(e);
 }
 
 void PageTableHeader::slotItemClicked(int row)
 {
+    // 点击行
     emit itemClicked(row);
 }
 
 void PageTableHeader::slotRefreshInfo()
 {
+    // 刷新
     emit refreshInfo();
 }
 void PageTableHeader::slotExportInfo()
 {
+    // 导出
     emit exportInfo();
 }
 
 void PageTableHeader::slotEnableDevice(int row, bool enable)
 {
+    // 启用/禁用设备
     emit enableDevice(row, enable);
 }
 

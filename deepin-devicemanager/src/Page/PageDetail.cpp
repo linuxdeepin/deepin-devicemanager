@@ -78,6 +78,7 @@ void DetailButton::paintEvent(QPaintEvent *e)
 DetailSeperator::DetailSeperator(DWidget *parent)
     : DWidget(parent)
 {
+    // 设置分隔符高度一个像素
     setFixedHeight(LINE_WIDTH);
 }
 
@@ -173,7 +174,6 @@ PageDetail::PageDetail(QWidget *parent)
     mp_ScrollArea->setFrameShape(QFrame::NoFrame);
     mp_ScrollArea->setContentsMargins(0, 0, 0, 0);
 
-
     // 设置ScrollArea里面的widget,这个widget是必须要的
     mp_ScrollWidget->setContentsMargins(0, 0, 0, 0);
     mp_ScrollArea->setWidget(mp_ScrollWidget);
@@ -204,7 +204,7 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
     }
     // 刷新展示页面时,滚动条还原
     mp_ScrollArea->verticalScrollBar()->setValue(0);
-    mp_ScrollAreaLayout->addStretch();
+//    mp_ScrollAreaLayout->addStretch();s
 }
 
 void PageDetail::showInfoOfNum(int index)
@@ -279,6 +279,13 @@ void PageDetail::paintEvent(QPaintEvent *e)
     DWidget::paintEvent(e);
 }
 
+void PageDetail::resizeEvent(QResizeEvent *event)
+{
+    qDebug() << mp_ScrollArea->size() << this->size() << mp_ScrollWidget->size();
+
+    DWidget::resizeEvent(event);
+}
+
 void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 {
     // 添加 textBrowser
@@ -302,7 +309,7 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     if (!enable) {
         button->setVisible(false);
     }
-//    vLayout->addStretch(-1);
+
     mp_ScrollAreaLayout->addLayout(hLayout);
 
     // 添加分割线
@@ -343,6 +350,7 @@ void PageDetail::clearWidget()
         widget = nullptr;
     }
 
+    // 清空List列表
     m_ListTextBrowser.clear();
     m_ListHlayout.clear();
     m_ListDetailButton.clear();

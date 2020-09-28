@@ -176,24 +176,18 @@ int DetailTreeView::setTableHeight(int paintHeight)
 
     // 父窗口
     PageTableWidget *p = dynamic_cast<PageTableWidget *>(this->parent());
+    PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
 
     // 父窗口可显示的最大表格行数
+    // 最多显示行数与父窗口高度相关,需减去Label以及Spacing占用空间
     int maxRow = 0;
-    if (p->isBaseBoard()) {
-        PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
+    maxRow = par->height() / ROW_HEIGHT - 2;
 
-        // 最多显示行数与父窗口高度相关,需减去Label以及Spacing占用空间
-        maxRow = par->height() / ROW_HEIGHT - 2;
-    } else {
-        PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
-        maxRow = par->height() / ROW_HEIGHT - 2;
-
-        // 当前页面为概况时，展开更多信息，页面显示的表格的最大行数需减一，避免表格边框显示不完整
-        if (p->isOverview()) {
-            // 有更多信息并且已展开
-            if (hasExpendInfo() && m_IsExpand) {
-                maxRow--;
-            }
+    // 当前页面为概况时，展开更多信息，页面显示的表格的最大行数需减一，避免表格边框显示不完整
+    if (p->isOverview()) {
+        // 有更多信息并且已展开
+        if (hasExpendInfo() && m_IsExpand) {
+            --maxRow;
         }
     }
 
@@ -227,7 +221,6 @@ int DetailTreeView::setTableHeight(int paintHeight)
             return this->height();
         }
     }
-
 }
 
 int DetailTreeView::maxRowofWidget()
@@ -501,7 +494,7 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
 void DetailTreeView::resizeEvent(QResizeEvent *event)
 {
     DTableWidget::resizeEvent(event);
-    emit heightChange();
+
     // 解决　调整窗口大小时tooltip未及时刷新
     QPoint pt = this->mapFromGlobal(QCursor::pos());
     mp_CurItem = itemAt(pt);

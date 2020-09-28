@@ -120,6 +120,8 @@ public:
 protected:
     void paintEvent(QPaintEvent *e) override;
 
+    void resizeEvent(QResizeEvent *event) override;
+
 private:
     /**
      * @brief addWidgets 添加widget到布局
@@ -160,8 +162,6 @@ private slots:
      */
     void slotExportInfo();
     void slotCopyAllInfo();
-
-
 
 private:
     QVBoxLayout      *mp_ScrollAreaLayout;

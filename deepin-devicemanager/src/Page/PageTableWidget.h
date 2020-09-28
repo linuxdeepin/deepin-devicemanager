@@ -137,12 +137,6 @@ signals:
      */
     void enableDeviceSignal();
 
-public slots:
-    /**
-     * @brief changeSize:改变表格高度
-     */
-    void changeSize();
-
 protected:
     /**
      * @brief paintEvent:重绘事件

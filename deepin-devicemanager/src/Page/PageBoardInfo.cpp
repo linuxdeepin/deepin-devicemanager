@@ -31,12 +31,14 @@ void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     mp_Device = lst[0];
     clearContent();
 
+    // 获取主板信息
     DeviceBaseInfo *board = nullptr;
     QList<DeviceBaseInfo *> lstOther;
     foreach (DeviceBaseInfo *info, lst) {
         DeviceBios *bios = dynamic_cast<DeviceBios *>(info);
         if (!bios) {continue;}
 
+        // 判断是否是主板
         if (bios->isBoard()) {
             board = info;
         } else {
@@ -46,6 +48,7 @@ void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     if (!board) {return;}
 
+    // 获取主板信息并加载
     QList<QPair<QString, QString>> baseInfoMap = board->getBaseAttribs();
     QList<QPair<QString, QString>> otherInfoMap = board->getOtherAttribs();
     baseInfoMap = baseInfoMap + otherInfoMap;
@@ -94,17 +97,18 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         QTableWidgetItem *itemSecond = new QTableWidgetItem(pairs[i - lst.size()].second);
         mp_Content->setItem(i, 1, itemSecond);
 
+        // 计算行高
         QFont font = DFontSizeManager::instance()->t8();
         QFontMetrics fm(font);
         int height = 0;
         QStringList strList = pairs[i - lst.size()].second.split("\n");
         int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height() + 2;
 
+        // 根据行数增加行高
         foreach (const QString &str, strList) {
             QStringList lst = str.split(":");
             if (lst.size() == 2) {
                 int width = fm.boundingRect(lst[0]).width();
-//                qDebug() << lst[0];
                 int num = width / 110;
                 int num0 = width % 110;
                 if (num0 == 0) {
@@ -119,14 +123,11 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         height += 20;
         mp_Content->setRowHeight(i, height);
     }
-
-//    if (m_SameDevice) {
-//        expandTable();
-//    }
 }
 
 void PageBoardInfo::getOtherInfoPair(const QList<DeviceBaseInfo *> &lst, QList<QPair<QString, QString>> &lstPair)
 {
+    // 获取其他信息键值对
     foreach (DeviceBaseInfo *dev, lst) {
         DeviceBios *bios = dynamic_cast<DeviceBios *>(dev);
         if (!bios) {continue;}
@@ -139,6 +140,7 @@ void PageBoardInfo::getOtherInfoPair(const QList<DeviceBaseInfo *> &lst, QList<Q
 
 void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString> &pair)
 {
+    // 获取信息并保存为pair
     QList<QPair<QString, QString>> baseInfoMap = device->getBaseAttribs();
     QList<QPair<QString, QString>> otherInfoMap = device->getOtherAttribs();
     baseInfoMap = baseInfoMap + otherInfoMap;
@@ -154,6 +156,7 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
 
 bool PageBoardInfo::event(QEvent *event)
 {
+    // 字体大小改变
     if (QEvent::FontChange == event->type()) {
         DWidget::event(event);
         emit fontChange();

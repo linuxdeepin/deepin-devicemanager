@@ -59,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    // 释放指针
     DELETE_PTR(mp_WaitingWidget);
     DELETE_PTR(mp_DeviceWidget);
     DELETE_PTR(mp_MainStackWidget);
@@ -67,6 +68,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::refresh()
 {
+    // 正在刷新,避免重复操作
     if (m_refreshing) {
         return;
     }
@@ -91,6 +93,7 @@ bool MainWindow::exportTo()
 {
     QString selectFilter;
 
+    // 导出信息文件保存路径
     static QString saveDir = []() {
         QString dirStr = "./";
         QDir dir(QDir::homePath() + "/Desktop/");
@@ -101,6 +104,7 @@ bool MainWindow::exportTo()
     }
     ();
 
+    // 导出信息文件名称
     QString file = DFileDialog::getSaveFileName(
                        this,
                        "Export", saveDir + tr("Device Info", "export file's name") + \
@@ -114,19 +118,23 @@ bool MainWindow::exportTo()
     QFileInfo fileInfo(file);
     //saveDir = fileInfo.absolutePath() + "/";
 
+    // 文件类型txt
     if (selectFilter == "Text (*.txt)") {
         return DeviceManager::instance()->exportToTxt(file);
 
     }
 
+    // 文件类型html
     if (selectFilter == "Html (*.html)") {
         return DeviceManager::instance()->exportToHtml(file);
     }
 
+    // 文件类型docx
     if (selectFilter == "Doc (*.docx)") {
         return DeviceManager::instance()->exportToDoc(file);
     }
 
+    // 文件类型xls
     if (selectFilter == "Xls (*.xls)") {
         return DeviceManager::instance()->exportToXlsx(file);
     }
@@ -163,6 +171,7 @@ void MainWindow::showDisplayShortcutsHelpDialog()
 
 void MainWindow::addJsonArrayItem(QJsonArray &windowJsonItems, const QString &name, const QString &value)
 {
+    // 添加json数组对
     QJsonObject jsonObject;
     jsonObject.insert("name", name);
     jsonObject.insert("value", value);
@@ -209,9 +218,10 @@ void MainWindow::getJsonDoc(QJsonDocument &doc)
 void MainWindow::windowMaximizing()
 {
     if (isMaximized()) {
+        // 正常窗口大小
         showNormal();
     }  else {
-        //setWindowState(Qt::WindowMaximized);
+        // 窗口最大化
         showMaximized();
     }
 }
@@ -287,15 +297,17 @@ void MainWindow::loadingFinishSlot(const QString &message)
         DApplication::restoreOverrideCursor();
 
         // 信息显示界面
+        // 获取设备类型列表
         DeviceManager::instance()->setDeviceListClass();
         const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
 
-//        QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
+        // 获取设备驱动列表
         DeviceManager::instance()->getDeviceDriverPool();
 
-        //mp_DeviceWidget->updateOverview("Overview", overviewMap);
+        // 更新左侧ListView
         mp_DeviceWidget->updateListView(types);
 
+        // 设置当前页面设备信息页
         mp_MainStackWidget->setCurrentWidget(mp_DeviceWidget);
 
         // 刷新结束
@@ -317,11 +329,13 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 
 void MainWindow::slotRefreshInfo()
 {
+    // 界面刷新
     refresh();
 }
 
 void MainWindow::slotExportInfo()
 {
+    // 设备信息导出
     exportTo();
 }
 
@@ -354,7 +368,6 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
             }
         }
     }
-
 
     // ctrl+alt：窗口最大化
     if (e->key() == Qt::Key_F) {

@@ -81,8 +81,10 @@ void PageListView::paintEvent(QPaintEvent *event)
 
 void PageListView::slotShowMenu(const QPoint &)
 {
+    // 右键菜单
     mp_Menu->clear();
 
+    // 导出/刷新
     mp_Menu->addAction(mp_Export);
     mp_Menu->addAction(mp_Refresh);
 
@@ -91,16 +93,19 @@ void PageListView::slotShowMenu(const QPoint &)
 
 void PageListView::slotActionRefresh()
 {
+    // 刷新
     emit refreshActionTrigger();
 }
 
 void PageListView::slotActionExport()
 {
+    // 导出
     emit exportActionTrigger();
 }
 
 void PageListView::slotListViewItemClicked(const QModelIndex &index)
 {
+    // Item 点击事件
     QString concateStr = mp_ListView->getConcatenateStrings(index);
     if (!concateStr.isEmpty()) {
         emit itemClicked(concateStr);

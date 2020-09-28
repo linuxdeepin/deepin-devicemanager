@@ -66,6 +66,9 @@ public:
      */
     void updateTable(const QString &itemStr, const QMap<QString, QString> &map);
 
+protected:
+    virtual void resizeEvent(QResizeEvent *event) override;
+
 signals:
     /**
      * @brief refreshInfo:刷新信息信号
