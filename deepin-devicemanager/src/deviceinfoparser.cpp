@@ -84,7 +84,7 @@ QString DeviceInfoParser::loadGeneratorKey()
     }
     if (deviceInfo.contains("PGU-WBY0")) {  // pangu
         key = "PanGu";
-    } else if (deviceInfo.contains("HUAWEI L410 KLVU-WDU0")) { // klu
+    } else if (deviceInfo.contains("L410 KLVU-WDU0")) { // klu 华为确认将判断条件改为L410 KLVU-WDU0
         key = "KLU";
     } else if (deviceInfo.contains("HUAWEI PGUV-WBX0")) { // panguv
         key = "PanGuV";
