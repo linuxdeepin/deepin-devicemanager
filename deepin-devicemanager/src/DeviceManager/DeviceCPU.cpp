@@ -164,21 +164,41 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "Model name", m_Name);
     setAttribute(mapInfo, "Vendor ID", m_Vendor);
+
     setAttribute(mapInfo, "Thread(s) per core", m_ThreadNum);
+    setAttribute(mapInfo, "每个核的线程数", m_ThreadNum);   // 服务器欧拉版
+
     setAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
     setAttribute(mapInfo, "Architecture", m_Architecture);
+
     // 服务器欧拉版，是中文 架构 不是 Architecture
     setAttribute(mapInfo, "架构", m_Architecture);
     setAttribute(mapInfo, "CPU family", m_Familly);
+
     setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "型号", m_Model);              // 服务器欧拉版
+
     setAttribute(mapInfo, "Stepping", m_Step);
+    setAttribute(mapInfo, "步进", m_Step);              // 服务器欧拉版
+
     setAttribute(mapInfo, "L1d cache", m_CacheL1Data);
+    setAttribute(mapInfo, "L1d 缓存", m_CacheL1Data);
     setAttribute(mapInfo, "L1i cache", m_CacheL1Order);
+    setAttribute(mapInfo, "L1i 缓存", m_CacheL1Order);
     setAttribute(mapInfo, "L2 cache", m_CacheL2);
+    setAttribute(mapInfo, "L2 缓存", m_CacheL2);
     setAttribute(mapInfo, "L3 cache", m_CacheL3);
+    setAttribute(mapInfo, "L3 缓存", m_CacheL3);
+
     setAttribute(mapInfo, "Flags", m_Flags);
+    setAttribute(mapInfo, "标记", m_Flags);
+
     setAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
+    setAttribute(mapInfo, "虚拟化", m_HardwareVirtual);
+
     setAttribute(mapInfo, "CPU(s)", m_LogicalCPUNum);
+    setAttribute(mapInfo, "CPU", m_LogicalCPUNum);
+
     // 计算频率范围
     bool min = mapInfo.find("CPU min MHz") != mapInfo.end();
     bool max = mapInfo.find("CPU max MHz") != mapInfo.end();
@@ -198,6 +218,9 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     QStringList orders = {"MMX", "SSE", "SSE2", "SSE3", "3D Now", "SSE4", "SSSE3", "SSE4_1", "SSE4_2", "AMD64", "EM64T"};
     foreach (const QString &order, orders) {
         if (mapInfo["Flags"].contains(order, Qt::CaseInsensitive)) {
+            m_Extensions += QString("%1 ").arg(order);
+        }
+        if (mapInfo["标记"].contains(order, Qt::CaseInsensitive)) {
             m_Extensions += QString("%1 ").arg(order);
         }
     }

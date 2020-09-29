@@ -1027,6 +1027,9 @@ bool CmdTool::getDeviceInfo(const QString &command, QString &deviceInfo, const Q
         return false;
     }
     deviceInfo = inputDeviceFile.readAll();
+
+    // 将所有中文冒号替换为英文冒号
+    deviceInfo.replace("：", ":");
     inputDeviceFile.close();
 #endif
 
@@ -1051,6 +1054,9 @@ bool CmdTool::executeProcess(const QString &cmd, QString &deviceInfo)
     newCmd += cmd;
     newCmd += "\"";
     newCmd.remove("sudo");
+
+    // 将所有中文冒号替换为英文冒号
+    deviceInfo.replace("：", ":");
     return runCmd(newCmd, deviceInfo);
 #endif
 }
