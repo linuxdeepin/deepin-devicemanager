@@ -453,6 +453,15 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &cmd, const QS
     }
     QString deviceInfo;
     getDeviceInfo(cmd, deviceInfo, debugfile);
+
+    // According to the latest demand , The notebook should not have chassis information
+    if (key == "dmidecode3") {
+        if (deviceInfo.contains("laptop", Qt::CaseInsensitive) ||
+                deviceInfo.contains("notebook", Qt::CaseInsensitive)) {
+            return;
+        }
+    }
+
     QStringList items = deviceInfo.split("\n\n");
 
     foreach (const QString &item, items) {
