@@ -30,7 +30,7 @@ DWIDGET_USE_NAMESPACE
 #define INIT_WIDTH  1000    // 窗口的初始化宽度
 #define INIT_HEIGHT 720     // 窗口的初始化高度
 #define MIN_WIDTH  840      // 窗口的最小宽度
-#define MIN_HEIGHT 360      // 窗口的最小高度
+#define MIN_HEIGHT 420      // 窗口的最小高度
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
