@@ -1031,7 +1031,10 @@ bool CmdTool::getDeviceInfo(const QString &command, QString &deviceInfo, const Q
 #endif
 
     // 将所有中文冒号替换为英文冒号
-    deviceInfo.replace("：", ":");
+    // only used in lscpu
+    if ("lscpu" == command) {
+        deviceInfo.replace("：", ":");
+    }
 
     return true;
 }
