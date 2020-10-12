@@ -52,6 +52,12 @@ public:
      */
     QString currentIndex();
 
+    /**
+     * @brief currentType:当前展示设备
+     * @return 设备
+     */
+    QString currentType();
+
 protected:
     /**@brief:事件重写*/
     void paintEvent(QPaintEvent *event) override;

@@ -63,6 +63,12 @@ public:
      * @param map:概况信息map
      */
     void updateOverview(const QString &itemStr, const QMap<QString, QString> &map);
+
+    /**
+     * @brief currentIndex:当前设备类型
+     * @return 设备类型
+     */
+    QString currentIndex() const;
 signals:
 
     /**

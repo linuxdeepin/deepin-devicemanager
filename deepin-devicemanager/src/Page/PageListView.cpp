@@ -68,6 +68,12 @@ QString PageListView::currentIndex()
     return mp_ListView->currentIndex().data(Qt::UserRole).toString();
 }
 
+QString PageListView::currentType()
+{
+    // 获取当前设备类型
+    return m_CurType;
+}
+
 void PageListView::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色

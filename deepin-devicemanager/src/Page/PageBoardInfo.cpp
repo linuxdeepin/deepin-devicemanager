@@ -153,13 +153,3 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
     }
     pair.second.replace(QRegExp("\n$"), "");
 }
-
-bool PageBoardInfo::event(QEvent *event)
-{
-    // 字体大小改变
-    if (QEvent::FontChange == event->type()) {
-        DWidget::event(event);
-        emit fontChange();
-    }
-    return DWidget::event(event);
-}

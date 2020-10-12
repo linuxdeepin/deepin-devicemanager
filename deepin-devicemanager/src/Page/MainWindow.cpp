@@ -15,6 +15,7 @@
 // Dtk头文件
 #include <DFileDialog>
 #include <DApplication>
+#include <DFontSizeManager>
 
 // 其它头文件
 #include "WaitingWidget.h"
@@ -55,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mp_DeviceWidget, &DeviceWidget::itemClicked, this, &MainWindow::slotListItemClicked);
     connect(mp_DeviceWidget, &DeviceWidget::refreshInfo, this, &MainWindow::slotRefreshInfo);
     connect(mp_DeviceWidget, &DeviceWidget::exportInfo, this, &MainWindow::slotExportInfo);
+    connect(this, &MainWindow::fontChange, this, &MainWindow::changeUI);
 }
 
 MainWindow::~MainWindow()
@@ -339,6 +341,12 @@ void MainWindow::slotExportInfo()
     exportTo();
 }
 
+void MainWindow::changeUI()
+{
+    // 更新当前设备界面设备
+    slotListItemClicked(mp_DeviceWidget->currentIndex());
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
     // ctrl+e:导出
@@ -381,4 +389,15 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
     }
 
     return DMainWindow::keyPressEvent(e);
+}
+
+bool MainWindow::event(QEvent *event)
+{
+    // 字体大小改变
+    if (QEvent::ApplicationFontChange == event->type()) {
+        emit fontChange();
+        DWidget::event(event);
+    }
+
+    return DMainWindow::event(event);
 }

@@ -93,6 +93,13 @@ protected:
      */
     void keyPressEvent(QKeyEvent *keyEvent) override;
 
+    /**
+     * @brief event:事件变化
+     * @param event事件
+     * @return 布尔
+     */
+    bool event(QEvent *event) override;
+
 private:
     /** @brief initWindow:对窗口进行一系列的初始化操作*/
     void initWindow();
@@ -131,6 +138,17 @@ private slots:
      * @brief slotExportInfo:导出信息槽函数
      */
     void slotExportInfo();
+
+    /**
+     * @brief changeUI:UI界面变化,BIOS界面行高
+     */
+    void changeUI();
+
+signals:
+    /**
+     * @brief fontChange:系统字体变化
+     */
+    void fontChange();
 
 private:
     /**@brief:主窗口的stackWidget，主要有两个widget，一个是等待界面，还有一个是信息显示界面*/

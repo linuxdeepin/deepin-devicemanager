@@ -32,7 +32,6 @@ PageInfoWidget::PageInfoWidget(QWidget *parent)
     connect(mp_PageMutilInfo, &PageMultiInfo::refreshInfo, this, &PageInfoWidget::slotRefreshInfo);
     connect(mp_PageMutilInfo, &PageMultiInfo::exportInfo, this, &PageInfoWidget::slotExportInfo);
     connect(mp_PageMutilInfo, &PageMultiInfo::updateUI, this, &PageInfoWidget::slotUpdateUI);
-    connect(mp_PageBoardInfo, &PageBoardInfo::fontChange, this, &PageInfoWidget::slotUpdateUI);
     connect(mp_PageSignalInfo, &PageSingleInfo::refreshInfo, this, &PageInfoWidget::slotRefreshInfo);
     connect(mp_PageSignalInfo, &PageSingleInfo::exportInfo, this, &PageInfoWidget::slotExportInfo);
     connect(mp_PageOverviewInfo, &PageOverview::refreshInfo, this, &PageInfoWidget::slotRefreshInfo);

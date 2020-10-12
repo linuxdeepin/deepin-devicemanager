@@ -69,6 +69,12 @@ void DeviceWidget::updateOverview(const QString &itemStr, const QMap<QString, QS
     }
 }
 
+QString DeviceWidget::currentIndex() const
+{
+    // 当前设备类型
+    return mp_ListView->currentType();
+}
+
 void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
 {
     // ListView Item 点击
