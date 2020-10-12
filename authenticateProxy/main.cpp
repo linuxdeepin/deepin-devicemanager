@@ -65,7 +65,7 @@ void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr)
 
 int main(int argc, char *argv[])
 {
-    if ( argc < 3 ||
+    if (argc < 3 ||
             QString(argv[1]) == "--help" || \
             QString(argv[1]) == "--h" || \
             QString(argv[1]) == "-h") {
@@ -93,7 +93,9 @@ int main(int argc, char *argv[])
     qint64 sCur = dtCur.toMSecsSinceEpoch();
 
     QString dtStrFromInt = dtFromInt.toString("yyyy:MM:dd:hh:mm:ss");
-    if (dtStr != dtStrFromInt || sCur - sFromInt < 0 || sCur - sFromInt > 1000) {
+
+    // 验证bug48018时发现信息获取时长超过1000ms,导致设备信息显示不完整
+    if (dtStr != dtStrFromInt || sCur - sFromInt < 0 || sCur - sFromInt > 2000) {
         std::cout << "***deepin-devicemanager-authenticateProxy is a Proxy for replace polkit gui interface!" << std::endl;
         return 0;
     }
@@ -101,11 +103,11 @@ int main(int argc, char *argv[])
 
 
     QString defaultLanguage = getenv("LANGUAGE");
-    setenv ("LANGUAGE", "en_US", 1);    //for aviod translate in lscpu...
+    setenv("LANGUAGE", "en_US", 1);     //for aviod translate in lscpu...
 
     QProcess proc;
 
-    proc.start( argv[1] );
+    proc.start(argv[1]);
     bool res = proc.waitForFinished(-1);
 
     std::cout << proc.readAllStandardOutput().data();
@@ -113,10 +115,10 @@ int main(int argc, char *argv[])
     proc.close();
 
     if (res == false) {
-        setenv ("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
+        setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
         return -1;
     }
 
-    setenv ("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
+    setenv("LANGUAGE", defaultLanguage.toStdString().c_str(), 1);
     return 0;
 }
