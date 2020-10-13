@@ -119,6 +119,11 @@ private:
      */
     void setInfoFromInput();
 
+    /**
+     * @brief setInfoFromBluetoothctl:由bluetoothctl paired-devices设置设备接口
+     */
+    void setInfoFromBluetoothctl();
+
 private:
     QString             m_Name;                         //<! 【名称】
     QString             m_Vendor;                       //<! 【制造商】
@@ -133,7 +138,8 @@ private:
     QString             m_Speed;                        //<! 【速度】
     QString             m_KeyToLshw;                    //<!
 
-    QString             m_KeysToCatDevices;                 //<! 【用来标识唯一键盘】
+    QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
+    QString             m_KeysToCatDevices;             //<! 【用来标识唯一键盘】
 };
 
 #endif // DEVICEINPUT_H

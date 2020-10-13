@@ -210,6 +210,14 @@ private:
     void loadBootDeviceManfid(const QString &key, const QString &cmd, const QString &debugfile);
 
     /**
+     * @brief loadBluetoothPairedDevices:加载蓝牙设备配对信息
+     * @param key:bt_device
+     * @param cmd:bluetoothctl paired-devices
+     * @param debugfile:调试文件名
+     */
+    void loadBluetoothPairedDevices(const QString &key, const QString &cmd, const QString &debugfile);
+
+    /**
      * @brief getSMBIOSVersion:获取SMBIOS版本号
      * @param info:dmidecode获取的片断信息
      * @param version:SMBIOS版本号

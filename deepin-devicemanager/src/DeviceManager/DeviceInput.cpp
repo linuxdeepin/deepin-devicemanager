@@ -106,6 +106,9 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 由cat /proc/bus/devices/input设置设备信息
     setInfoFromInput();
 
+    // 由bluetoothctl paired-devices设置设备接口
+    setInfoFromBluetoothctl();
+
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
 }
@@ -155,6 +158,9 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 由cat /proc/bus/devices/input设置设备信息
     setInfoFromInput();
 
+    // 由bluetoothctl paired-devices设置设备接口
+    setInfoFromBluetoothctl();
+
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
 }
@@ -167,9 +173,25 @@ void DeviceInput::setInfoFromInput()
     // 设置Name属性
     setAttribute(mapInfo, "Name", m_Name, true);
 
+    // Uniq属性标识蓝牙设备Mac地址
+    m_keysToPairedDevice = mapInfo["Uniq"].toUpper();
+
     // 设置设备是否可用
     m_Enable = EnableManager::instance()->isDeviceEnable(m_Name);
 }
+
+void DeviceInput::setInfoFromBluetoothctl()
+{
+    // 判断该设备信息是否存在于Bluetoothctl中
+    if (isValueValid(m_keysToPairedDevice)) {
+        bool isExist = DeviceManager::instance()->isDeviceExistInPairedDevice(m_keysToPairedDevice.toUpper());
+
+        if (isExist) {
+            m_Interface = "Bluetooth";
+        }
+    }
+}
+
 
 const QString &DeviceInput::name() const
 {
@@ -217,6 +239,7 @@ bool DeviceInput::enable()
 void DeviceInput::initFilterKey()
 {
     // 添加可显示的设备信息
+    addFilterKey(QObject::tr("Uniq"));
     addFilterKey(QObject::tr("PROP"));
     addFilterKey(QObject::tr("EV"));
     addFilterKey(QObject::tr("KEY"));

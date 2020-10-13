@@ -1124,4 +1124,20 @@ const QMap<QString, QString> &DeviceManager::inputInfo(const QString &key)
     return m_InputDeviceInfo[key];
 }
 
+bool DeviceManager::isDeviceExistInPairedDevice(const QString &mac)
+{
+    // 获取蓝牙设备配对信息
+    const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("bt_device");
+
+    // 判断mac是否在蓝牙设备列表中
+    foreach (auto item, cmdInfo) {
+        for (auto it = item.begin(); it != item.end(); ++it) {
+            if (it.value() == mac) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 

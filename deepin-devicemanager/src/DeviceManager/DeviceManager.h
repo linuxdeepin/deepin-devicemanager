@@ -589,6 +589,9 @@ public:
     void addInputInfo(const QString &key, const QMap<QString, QString> &mapInfo);
     const QMap<QString, QString> &inputInfo(const QString &key);
 
+    // 设备是否存在于蓝牙设备配对信息中
+    bool isDeviceExistInPairedDevice(const QString &name);
+
 protected:
     DeviceManager();
     ~DeviceManager();
