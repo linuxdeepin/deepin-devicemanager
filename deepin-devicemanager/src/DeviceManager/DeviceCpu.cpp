@@ -285,6 +285,7 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Current Speed", m_CurFrequency);
     setAttribute(mapInfo, "Family", m_Familly);
     setAttribute(mapInfo, "Core Count", m_CPUCoreNum);
+    setAttribute(mapInfo, "Thread Count", m_LogicalCPUNum);
 
     // 获取其他cpu信息
     getOtherMapInfo(mapInfo);
