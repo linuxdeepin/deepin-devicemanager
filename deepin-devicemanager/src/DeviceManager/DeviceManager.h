@@ -145,6 +145,17 @@ public:
     void addCmdInfo(const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo);
     const QList<QMap<QString, QString>> &cmdInfo(const QString &key);
 
+    // 设备是否存在于蓝牙设备配对信息中
+    bool isDeviceExistInPairedDevice(const QString &name);
+
+    /**
+     * @brief addInputInfo : 管理从 cat /proc/bus/input/devices 获取到的信息
+     * @param key
+     * @param mapInfo
+     */
+    void addInputInfo(const QString &key, const QMap<QString, QString> &mapInfo);
+    const QMap<QString, QString> &inputInfo(const QString &key);
+
 
 protected:
     DeviceManager();
@@ -170,6 +181,8 @@ private:
     QList<DeviceOtherPCI>           m_ListDeviceOtherPCI;             //<! 其它PCI设备
     QList<DeviceComputer>           m_ListDeviceComputer;             //<! 计算机基本信息
     QList<DeviceCdrom>              m_ListDeviceCdrom;                //<! cdrom设备
+
+    QMap<QString, QMap<QString, QString> >         m_InputDeviceInfo;     // 输入设备信息
 
     QStringList                     m_BusIdList;
     QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;

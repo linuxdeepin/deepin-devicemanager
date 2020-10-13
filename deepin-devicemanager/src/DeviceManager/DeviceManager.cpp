@@ -493,3 +493,29 @@ const QList<QMap<QString, QString>> &DeviceManager::cmdInfo(const QString &key)
 {
     return m_cmdInfo[key];
 }
+
+bool DeviceManager::isDeviceExistInPairedDevice(const QString &mac)
+{
+    const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("bt_device");
+
+    foreach (auto item, cmdInfo) {
+        for (auto it = item.begin(); it != item.end(); ++it) {
+            if (it.value() == mac) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void DeviceManager::addInputInfo(const QString &key, const QMap<QString, QString> &mapInfo)
+{
+    // 添加输入设备信息
+    if (m_InputDeviceInfo.find(key) == m_InputDeviceInfo.end())
+        m_InputDeviceInfo.insert(key, mapInfo);
+}
+
+const QMap<QString, QString> &DeviceManager::inputInfo(const QString &key)
+{
+    return m_InputDeviceInfo[key];
+}

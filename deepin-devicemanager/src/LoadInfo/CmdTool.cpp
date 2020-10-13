@@ -4,6 +4,7 @@
 #include<QDateTime>
 #include<QMutex>
 #include "EDIDParser.h"
+#include "DeviceManager.h"
 
 CmdTool::CmdTool()
 {
@@ -63,6 +64,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &cmd, const QString 
         loadEdidInfo(key, cmd, debugFile);
     }  else if (key == "bootdevice") {
         loadBootDeviceManfid(key, cmd, debugFile);
+    } else if (key == "bt_device") {
+        loadBluetoothPairedDevices(key, cmd, debugFile);     // 加载蓝牙设备配对信息
     } else {
         loadCatInfo(key, cmd, debugFile);
     }
@@ -581,7 +584,19 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &cmd, con
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromInput(item, mapInfo, "=");
-        addMapInfo(key, mapInfo);
+
+        QRegExp re = QRegExp(".*(mouse[0-9]{1,2}).*");
+        if (re.exactMatch(mapInfo["Handlers"])) {
+            QString name = re.cap(1);
+            DeviceManager::instance()->addInputInfo(name, mapInfo);
+        } else {
+            QRegExp rem = QRegExp(".*(event[0-9]{1,2}).*");
+            if (rem.exactMatch(mapInfo["Handlers"])) {
+                QString name = rem.cap(1);
+                DeviceManager::instance()->addInputInfo(name, mapInfo);
+            }
+        }
+//        addMapInfo(key, mapInfo);
     }
 }
 
@@ -672,6 +687,40 @@ void CmdTool::loadBootDeviceManfid(const QString &key, const QString &cmd, const
 
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Model", deviceInfo.trimmed());
+    addMapInfo(key, mapInfo);
+}
+
+void CmdTool::loadBluetoothPairedDevices(const QString &key, const QString &cmd, const QString &debugfile)
+{
+    QString deviceInfo;
+    if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
+        return;
+    }
+
+    // 解析蓝牙配对设备信息
+    QMap<QString, QString> mapInfo;
+    QStringList items = deviceInfo.split("\n");
+
+    foreach (const QString &item, items) {
+        if (item.isEmpty()) {
+            continue;
+        }
+
+        // 行信息必须以"Device"开头,eg:Device 00:1F:20:A8:B9:E8 Logitech K810
+        if (item.startsWith("Device", Qt::CaseInsensitive) == false) {
+            continue;
+        }
+
+        // 保存设备名称与设备Mac地址
+        QStringList lines = item.split(" ");
+        if (lines.size() >= 3) {
+            QString name = item.mid(item.indexOf(lines[2]));
+            QString mac = item.mid(item.indexOf(lines[1]), lines[1].size());
+            mac = mac.toUpper();
+            mapInfo.insert(name, mac);   // <设备名称,Mac地址>
+        }
+    }
+
     addMapInfo(key, mapInfo);
 }
 

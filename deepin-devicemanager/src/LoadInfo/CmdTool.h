@@ -43,6 +43,15 @@ private:
     void loadEdidInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadGpuInfo(const QString &key, const QString &cmd, const QString &debugfile);
     void loadBootDeviceManfid(const QString &key, const QString &cmd, const QString &debugfile);
+
+    /**
+     * @brief loadBluetoothPairedDevices:加载蓝牙设备配对信息
+     * @param key:bt_device
+     * @param cmd:bluetoothctl paired-devices
+     * @param debugfile:调试文件名
+     */
+    void loadBluetoothPairedDevices(const QString &key, const QString &cmd, const QString &debugfile);
+
     void getSMBIOSVersion(const QString &info, QString &version);
 
 private:

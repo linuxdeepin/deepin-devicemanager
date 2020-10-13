@@ -1,5 +1,6 @@
 #include "DeviceMouse.h"
 #include <QDebug>
+#include "DeviceManager.h"
 //*******************************************************************************************************************************
 
 
@@ -54,6 +55,23 @@ void DeviceMouse::setInfoFromHwinfo(QMap<QString, QString> mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
         }
     }
+
+    // 获取映射到  cat /proc/bus/input/devices 里面的关键字
+    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
+    if (re.exactMatch(mapInfo["Device File"])) {
+        m_KeysToCatDevices = re.cap(1);
+    } else {
+        QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
+        if (rem.exactMatch(mapInfo["Device File"])) {
+            m_KeysToCatDevices = rem.cap(1);
+        }
+    }
+
+    // 由cat /proc/bus/devices/input设置设备信息
+    setInfoFromInput();
+
+    // 由bluetoothctl paired-devices设置设备接口
+    setInfoFromBluetoothctl();
 
     loadOtherDeviceInfo(mapInfo);
 }
@@ -142,4 +160,28 @@ void DeviceMouse::initFilterKey()
 
     addFilterKey(QObject::tr("physical id"));
 
+}
+
+void DeviceMouse::setInfoFromBluetoothctl()
+{
+    // 判断该设备信息是否存在于Bluetoothctl中
+    if (!m_keysToPairedDevice.isEmpty()) {
+        bool isExist = DeviceManager::instance()->isDeviceExistInPairedDevice(m_keysToPairedDevice.toUpper());
+
+        if (isExist) {
+            m_Interface = "Bluetooth";
+        }
+    }
+}
+
+void DeviceMouse::setInfoFromInput()
+{
+    // 获取对应的由cat /proc/bus/devices/input读取的设备信息
+    const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
+
+    // 设置Name属性
+    setAttribute(mapInfo, "Name", m_Name, true);
+
+    // Uniq属性标识蓝牙设备Mac地址
+    m_keysToPairedDevice = mapInfo["Uniq"].toUpper();
 }

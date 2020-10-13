@@ -38,6 +38,17 @@ protected:
     void initFilterKey() override;
 
 private:
+    /**
+     * @brief setInfoFromBluetoothctl:由bluetoothctl paired-devices设置设备接口
+     */
+    void setInfoFromBluetoothctl();
+
+    /**
+     * @brief setNameFromInput:从cat /proc/bus/input/devices获取设备信息
+     */
+    void setInfoFromInput();
+
+private:
     QString     m_Name;                             //<! 名称    #制造商+型号#
     QString     m_Vendor;                           //<! 制造商
     QString     m_Model;                            //<! 型号
@@ -51,6 +62,8 @@ private:
 
     /*通过该标识匹配从 cat /proc/bus/input/devices 中获取的信息 */
     QString     m_KeysToCatDevices;
+
+    QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
 
     /*通过该标识匹配从 lshw 中获取的信息*/
     QString     m_KeyToLshw;
