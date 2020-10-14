@@ -59,15 +59,13 @@ QString DeviceInfoParser::loadGeneratorKey()
     // 获取设备信息
     QString key = "";
     QString deviceInfo;
-    if (!getDeviceInfo(QString("sudo dmidecode -t 1"), deviceInfo, "dmidecode_1.txt")) {
+    // According to Huawei's requirements , Modify the way of judging klu and panguv
+    if (!getDeviceInfo(QString("gdbus introspect -y -d com.deepin.system.SystemInfo -o /com/deepin/system/SystemInfo -p"), deviceInfo, "gdbus.txt")) {
         return key;
     }
-
-    if (deviceInfo.contains("PGU-WBY0")) {  // pangu
-        key = "PanGu";
-    } else if (deviceInfo.contains("HUAWEI L410 KLVU-WDU0")) { // klu
+    if (deviceInfo.contains("klu")) { // klu 华为确认将判断条件改为L410 KLVU-WDU0
         key = "KLU";
-    } else if (deviceInfo.contains("HUAWEI PGUV-WBX0")) { // panguv
+    } else if (deviceInfo.contains("panguV")) { // panguv
         key = "PanGuV";
     }
     return key;

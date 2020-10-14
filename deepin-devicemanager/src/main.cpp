@@ -40,6 +40,15 @@ int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     DApplication app(argc, argv);
 
+
+    // 保证进程唯一性
+    qputenv("DTK_USE_SEMAPHORE_SINGLEINSTANCE", "1");
+    if (!DGuiApplicationHelper::instance()->setSingleInstance(app.applicationName(),
+                                                              DGuiApplicationHelper::UserScope)) {
+        qDebug() << "DGuiApplicationHelper::instance()->setSingleInstance";
+        exit(0);
+    }
+
     app.loadTranslator();
     app.setOrganizationName("deepin");
     app.setApplicationName("deepin-devicemanager");
