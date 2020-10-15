@@ -65,9 +65,3 @@ void WaitingWidget::stop()
         mp_Spinner->stop();
     }
 }
-
-void WaitingWidget::setLabelTxt(const QString &txt)
-{
-    if (mp_Label)
-        mp_Label->setText(txt);
-}

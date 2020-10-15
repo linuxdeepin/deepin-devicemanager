@@ -166,10 +166,6 @@ void TextBrowser::keyPressEvent(QKeyEvent *event)
     Dtk::Widget::DTextBrowser::keyPressEvent(event);
 }
 
-void TextBrowser::wheelEvent(QWheelEvent *event)
-{
-
-}
 void TextBrowser::focusInEvent(QFocusEvent *e)
 {
 //    setTextInteractionFlags(Qt::TextBrowserInteraction);

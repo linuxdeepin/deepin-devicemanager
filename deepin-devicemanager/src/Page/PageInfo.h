@@ -38,7 +38,7 @@ class PageInfo : public DWidget
 {
     Q_OBJECT
 public:
-    PageInfo(QWidget *parent = nullptr);
+    explicit PageInfo(QWidget *parent = nullptr);
 
     /**
      * @brief updateTable : 更新表格

@@ -37,7 +37,7 @@ public:
     /**
      * @brief generatorComputerDevice:生成概况设备信息
      */
-    virtual void generatorComputerDevice();
+    virtual void generatorComputerDevice() override;
 };
 
 #endif // PANGUGENERATOR_H

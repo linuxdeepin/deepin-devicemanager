@@ -35,7 +35,7 @@ class RichTextDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    RichTextDelegate(QObject *parent);
+    explicit RichTextDelegate(QObject *parent);
 
 protected:
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;

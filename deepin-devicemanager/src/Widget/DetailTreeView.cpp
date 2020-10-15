@@ -223,11 +223,6 @@ int DetailTreeView::setTableHeight(int paintHeight)
     }
 }
 
-int DetailTreeView::maxRowofWidget()
-{
-    return 0;
-}
-
 bool DetailTreeView::hasExpendInfo()
 {
     // 指针不为空，设备有其他信息

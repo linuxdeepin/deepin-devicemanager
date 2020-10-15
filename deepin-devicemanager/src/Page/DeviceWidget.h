@@ -41,7 +41,7 @@ class DeviceWidget : public DWidget
 {
     Q_OBJECT
 public:
-    DeviceWidget(QWidget *parent = nullptr);
+    explicit DeviceWidget(QWidget *parent = nullptr);
     ~DeviceWidget();
 
     /**

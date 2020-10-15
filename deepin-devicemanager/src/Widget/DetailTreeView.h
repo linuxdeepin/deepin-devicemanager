@@ -79,7 +79,7 @@ class DetailTreeView: public DTableWidget//DTreeView
 {
     Q_OBJECT
 public:
-    DetailTreeView(DWidget *parent = nullptr);
+    explicit DetailTreeView(DWidget *parent = nullptr);
 
     /**
      * @brief setColumnAndRow:设置表格行数和列数
@@ -112,9 +112,6 @@ public:
      * @return 重绘矩形的高度
      */
     int setTableHeight(int paintHeight);
-
-    // 界面上最多显示行数
-    int maxRowofWidget();
 
     /**
      * @brief hasExpendInfo:是否由详细信息按钮

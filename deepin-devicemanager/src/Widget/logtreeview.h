@@ -32,7 +32,7 @@ class LogTreeView : public Dtk::Widget::DTreeView
 {
     Q_OBJECT
 public:
-    LogTreeView(QWidget *parent = nullptr);
+    explicit LogTreeView(QWidget *parent = nullptr);
 
     /**
      * @brief setHeaderLabels : 设置table的表头

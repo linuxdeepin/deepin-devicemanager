@@ -38,7 +38,7 @@ class DeviceGenerator : public QObject
 {
     Q_OBJECT
 public:
-    DeviceGenerator(QObject *parent = nullptr);
+    explicit DeviceGenerator(QObject *parent = nullptr);
     virtual ~DeviceGenerator();
 
     /**

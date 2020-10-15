@@ -44,7 +44,7 @@ class PageMultiInfo : public PageInfo
 {
     Q_OBJECT
 public:
-    PageMultiInfo(QWidget *parent = nullptr);
+    explicit PageMultiInfo(QWidget *parent = nullptr);
     ~PageMultiInfo() override;
 
     /**

@@ -34,7 +34,7 @@ class DetailViewDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    DetailViewDelegate(QObject *parent);
+    explicit DetailViewDelegate(QObject *parent);
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option,
                const QModelIndex &index) const override;

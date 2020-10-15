@@ -86,13 +86,6 @@ public:
     const QString &driver() const override;
 
     /**
-       * @brief productName:获取产品名称属性值
-       * @param 无
-       * @return QString:产品名称属性值
-       */
-    const QString &productName()const;
-
-    /**
        * @brief vendor:获取制造商属性值
        * @param 无
        * @return QString:制造商属性值
@@ -105,13 +98,6 @@ public:
        * @return QString:版本号属性值
        */
     const QString &version()const;
-
-    /**
-       * @brief chipsetFamily:获取芯片组属性值
-       * @param 无
-       * @return QString:芯片组属性值
-       */
-    const QString &chipsetFamily()const;
 
     /**
        * @brief isBoard:判断是否有主板信息

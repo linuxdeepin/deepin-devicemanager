@@ -43,7 +43,7 @@ class PageOverview : public PageInfo
 {
     Q_OBJECT
 public:
-    PageOverview(DWidget *parent = nullptr);
+    explicit PageOverview(DWidget *parent = nullptr);
 
     /**
      * @brief updateTable : 更新表格

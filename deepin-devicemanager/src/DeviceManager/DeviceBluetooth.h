@@ -61,77 +61,16 @@ public:
     const QString &name()const override;
 
     /**
-       * @brief vendor:获取制造商属性值
-       * @return QString:制造商属性值
-       */
-    const QString &vendor()const;
-
-    /**
-       * @brief version:获取名称属性值
-       * @return QString:版本号属性值
-       */
-    const QString &version()const;
-
-    /**
-       * @brief model:获取型号属性值
-       * @return QString:型号属性值
-       */
-    const QString &model()const;
-
-    /**
-       * @brief MAC:获取MAC属性值
-       * @return QString:MAC属性值
-       */
-    const QString &MAC()const;
-
-    /**
-       * @brief logicalName:获取逻辑名称属性值
-       * @return QString:逻辑名称属性值
-       */
-    const QString &logicalName()const;
-
-    /**
-       * @brief busInfo:获取总线信息属性值
-       * @return QString:总线信息属性值
-       */
-    const QString &busInfo()const;
-
-    /**
-       * @brief capabilities:获取功能属性值
-       * @return QString:功能属性值
-       */
-    const QString &capabilities()const;
-
-    /**
        * @brief driver:获取驱动属性值
        * @return QString:驱动属性值
        */
     const QString &driver()const override;
 
     /**
-       * @brief driverVersion:获取驱动版本号属性值
-       * @return QString:驱动版本号属性值
-       */
-    const QString &driverVersion()const;
-
-    /**
-       * @brief maximumPower:获取最大电压属性值
-       * @return QString:最大电压号属性值
-       */
-    const QString &maximumPower()const;
-
-    /**
-       * @brief speed:获取速率属性值
-       * @return QString:速率属性值
-       */
-    const QString &speed()const;
-
-    /**
      * @brief subTitle:获取子标题
      * @return 子标题
      */
     QString subTitle() override;
-
 
     /**
      * @brief getOverviewInfo:获取概况信息

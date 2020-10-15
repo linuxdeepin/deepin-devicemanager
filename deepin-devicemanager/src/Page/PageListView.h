@@ -41,7 +41,7 @@ class PageListView : public DWidget
 {
     Q_OBJECT
 public:
-    PageListView(DWidget *parent = nullptr);
+    explicit PageListView(DWidget *parent = nullptr);
     ~PageListView() override;
 
     void updateListItems(const QList<QPair<QString, QString> > &lst);

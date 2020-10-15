@@ -43,7 +43,7 @@ class TextBrowser : public DTextBrowser
 {
     Q_OBJECT
 public:
-    TextBrowser(QWidget *parent = nullptr);
+    explicit TextBrowser(QWidget *parent = nullptr);
 
     /**
      * @brief showDeviceInfo : 显示设备信息
@@ -75,7 +75,6 @@ protected:
     virtual void paintEvent(QPaintEvent *event)override;
     virtual void contextMenuEvent(QContextMenuEvent *event) override;
     virtual void keyPressEvent(QKeyEvent *event) override;
-    virtual void wheelEvent(QWheelEvent *event) override;
     virtual void focusInEvent(QFocusEvent *e) override;
     virtual void focusOutEvent(QFocusEvent *e) override;
 

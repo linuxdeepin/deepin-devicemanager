@@ -67,7 +67,6 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
 
-    int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
 
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();

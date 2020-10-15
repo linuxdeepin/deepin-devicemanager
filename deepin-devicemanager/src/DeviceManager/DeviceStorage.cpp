@@ -284,78 +284,9 @@ const QString &DeviceStorage::driver() const
     return m_Driver;
 }
 
-const QString &DeviceStorage::model()const
-{
-    return m_Model;
-}
-
-const QString &DeviceStorage::vendor()const
-{
-    return m_Vendor;
-}
-
-const QString &DeviceStorage::mediaType()const
-{
-    return m_MediaType;
-}
-
-const QString &DeviceStorage::size()const
-{
-    return m_Size;
-}
-const QString &DeviceStorage::rotationRate()const
-{
-    return m_RotationRate;
-}
-
-const QString &DeviceStorage::interface()const
-{
-    return m_Interface;
-}
-
-const QString &DeviceStorage::serialNumber()const
-{
-    return m_SerialNumber;
-}
-
-const QString &DeviceStorage::version()const
-{
-    return m_Version;
-}
-
-const QString &DeviceStorage::capabilities()const
-{
-    return m_Capabilities;
-}
-
-const QString &DeviceStorage::description()const
-{
-    return m_Description;
-}
-
 const QString &DeviceStorage::keyFromStorage()const
 {
     return m_KeyFromStorage;
-}
-
-const QString &DeviceStorage::firmwareVersion()const
-{
-    return m_FirmwareVersion;
-}
-
-const QString &DeviceStorage::speed()const
-{
-    return m_Speed;
-}
-
-const QString &DeviceStorage::powerOnHours()const
-{
-    return m_PowerOnHours;
-}
-
-const QString &DeviceStorage::powerCycleCount()const
-{
-    return m_PowerCycleCount;
 }
 
 QString DeviceStorage::subTitle()

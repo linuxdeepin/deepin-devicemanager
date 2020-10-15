@@ -68,24 +68,6 @@ void TipsWidget::setAlignment(Qt::Alignment alignment)
     update();
 }
 
-void TipsWidget::setLeftRightMargin(int margin)
-{
-    m_lrMargin = margin;
-    update();
-}
-
-void TipsWidget::setTopBottomMargin(int margin)
-{
-    m_tbMargin = margin;
-    update();
-}
-
-void TipsWidget::setMaxLineCount(int maxLinecnt)
-{
-    m_maxLineCount = maxLinecnt;
-    update();
-}
-
 void TipsWidget::paintEvent(QPaintEvent *event)
 {
     DWidget::paintEvent(event);

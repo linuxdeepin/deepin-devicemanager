@@ -60,41 +60,6 @@ const QString &DevicePrint::driver() const
     return m_Driver;
 }
 
-const QString &DevicePrint::vendor()const
-{
-    return m_Vendor;
-}
-
-const QString &DevicePrint::model()const
-{
-    return m_Model;
-}
-
-const QString &DevicePrint::serialNumber()const
-{
-    return m_SerialNumber;
-}
-
-const QString &DevicePrint::interfaceType()const
-{
-    return m_InterfaceType;
-}
-
-const QString &DevicePrint::URI()const
-{
-    return m_URI;
-}
-
-const QString &DevicePrint::status()const
-{
-    return m_Status;
-}
-
-const QString &DevicePrint::shared()const
-{
-    return m_Shared;
-}
-
 QString DevicePrint::subTitle()
 {
     return m_Name;

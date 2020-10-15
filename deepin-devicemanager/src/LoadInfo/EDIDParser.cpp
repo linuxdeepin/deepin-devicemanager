@@ -169,7 +169,8 @@ QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
 QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
 {
     int nDec = strDec.toInt();
-    int nYushu, nShang;
+    int nYushu = 0;
+    int nShang = 0;
     QString strBin, strTemp;
     //TCHAR buf[2];
     bool bContinue = true;

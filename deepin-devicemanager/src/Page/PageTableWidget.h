@@ -42,7 +42,7 @@ class PageTableWidget : public DWidget
     Q_OBJECT
 
 public:
-    PageTableWidget(DWidget *parent = nullptr);
+    explicit PageTableWidget(DWidget *parent = nullptr);
 
     /**
      * @brief setLimitRow 限制行数
@@ -100,12 +100,6 @@ public:
      * @param height　行高
      */
     void setRowHeight(int row, int height);
-
-    /**
-     * @brief resizeRowToContent 设置行高适应内容
-     * @param row 指定行
-     */
-    void resizeRowToContent(int row);
 
     /**
      * @brief setItemDelegateForRow 设置每一行的委托

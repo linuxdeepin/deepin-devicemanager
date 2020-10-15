@@ -38,7 +38,7 @@ class PageTableHeader : public DWidget
 {
     Q_OBJECT
 public:
-    PageTableHeader(QWidget *parent = nullptr);
+    explicit PageTableHeader(QWidget *parent = nullptr);
     ~PageTableHeader();
 
     /**

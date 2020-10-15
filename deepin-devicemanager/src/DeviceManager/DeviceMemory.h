@@ -62,84 +62,6 @@ public:
     const QString &driver()const override;
 
     /**
-     * @brief vendor:获取制造商属性值
-     * @return QString:制造商属性值
-     */
-    const QString &vendor()const;
-
-    /**
-     * @brief model:获取型号属性值
-     * @return QString:型号属性值
-     */
-    const QString &model()const;
-
-    /**
-     * @brief size:获取大小属性值
-     * @return QString:大小属性值
-     */
-    const QString &size()const;
-
-    /**
-     * @brief type:获取类型属性值
-     * @return QString:类型属性值
-     */
-    const QString &type()const;
-
-    /**
-     * @brief speed:获取速度属性值
-     * @return QString:速度属性值
-     */
-    const QString &speed()const;
-
-    /**
-     * @brief totalBandwidth:获取总带宽属性值
-     * @return QString:总带宽属性值
-     */
-    const QString &totalBandwidth()const;
-
-    /**
-     * @brief dataBandwidth:获取数据带宽属性值
-     * @return QString:数据带宽属性值
-     */
-    const QString &dataBandwidth()const;
-
-    /**
-     * @brief locator:获取内存槽位属性值
-     * @return QString:内存槽位属性值
-     */
-    const QString &locator()const;
-
-    /**
-     * @brief serialNumber:获取序列号属性值
-     * @return Qstring:序列号属性值
-     */
-    const QString &serialNumber()const;
-
-    /**
-     * @brief configuredSpeed:获取配置速度属性值
-     * @return QString:配置速度属性值
-     */
-    const QString &configuredSpeed()const;
-
-    /**
-     * @brief minimumVoltage:获取最小电压属性值
-     * @return QString:最小电压属性值
-     */
-    const QString &minimumVoltage()const;
-
-    /**
-     * @brief maximumVoltage:获取最大电压属性值
-     * @return QString:最大电压属性值
-     */
-    const QString &maximumVoltage()const;
-
-    /**
-     * @brief configuredVoltage:获取配置电压属性值
-     * @return QString:配置电压属性值
-     */
-    const QString &configuredVoltage()const;
-
-    /**
      * @brief subTitle:获取子标题
      * @return 子标题
      */
@@ -156,7 +78,7 @@ protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
      */
-    virtual void initFilterKey() override;
+    void initFilterKey() override;
 
     /**
      * @brief loadBaseDeviceInfo:加载基本信息

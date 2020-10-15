@@ -54,52 +54,10 @@ public:
     const QString &name()const override;
 
     /**
-       * @brief vendor:获取制造商属性值
-       * @return QString:制造商属性值
-       */
-    const QString &vendor()const;
-
-    /**
-       * @brief type:获取类型属性值
-       * @return QString:类型属性值
-       */
-    const QString &type()const;
-
-    /**
-       * @brief version:获取名称属性值
-       * @return QString:版本号属性值
-       */
-    const QString &version()const;
-
-    /**
-       * @brief busInfo:获取总线信息属性值
-       * @return QString:总线信息属性值
-       */
-    const QString &busInfo()const;
-
-    /**
-       * @brief capabilities:获取功能属性值
-       * @return QString:功能属性值
-       */
-    const QString &capabilities()const;
-
-    /**
        * @brief driver:获取驱动属性值
        * @return QString:驱动属性值
        */
     const QString &driver()const override;
-
-    /**
-       * @brief maxPower:获取maxPower属性值
-       * @return QString:maxPower属性值
-       */
-    const QString &maxPower()const;
-
-    /**
-       * @brief speed:获取速率属性值
-       * @return QString:速率属性值
-       */
-    const QString &speed()const;
 
     /**
      * @brief subTitle:获取子标题

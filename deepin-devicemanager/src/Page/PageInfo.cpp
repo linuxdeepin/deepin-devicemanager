@@ -16,6 +16,7 @@
 DWIDGET_USE_NAMESPACE
 PageInfo::PageInfo(QWidget *parent)
     : QWidget(parent)
+    , m_AllInfoNum(0)
 {
 
 }

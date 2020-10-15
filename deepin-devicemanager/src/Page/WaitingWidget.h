@@ -38,7 +38,7 @@ class WaitingWidget : public DWidget
 {
     Q_OBJECT
 public:
-    WaitingWidget(QWidget *parent = nullptr);
+    explicit WaitingWidget(QWidget *parent = nullptr);
     ~WaitingWidget();
 
     /**
@@ -50,12 +50,6 @@ public:
      * @brief stop:停止转动小圈圈
      */
     void stop();
-
-    /**
-     * @brief setLabelTxt:设置Label文本
-     * @param txt :[in]需要设置成的文本
-     */
-    void setLabelTxt(const QString &txt);
 
 private:
     DSpinner        *mp_Spinner;       // 小圈圈

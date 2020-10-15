@@ -714,6 +714,15 @@ void CmdTool::loadBootDeviceManfid(const QString &key, const QString &cmd, const
 
 void CmdTool::loadBluetoothPairedDevices(const QString &key, const QString &cmd, const QString &debugfile)
 {
+    // 当机器上没有蓝牙适配器时,不查找匹配信息
+    if (m_cmdInfo.find("hciconfig") == m_cmdInfo.end()) {
+        return;
+    }
+
+    if (m_cmdInfo["hciconfig"].empty()) {
+        return;
+    }
+
     QString deviceInfo;
     if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
         return;

@@ -23,12 +23,6 @@ CmdButtonWidget::CmdButtonWidget(DetailTreeView *parent)
     connect(mp_cmdButton, &DCommandLinkButton::clicked, this, &CmdButtonWidget::expandCommandLinkClicked);
 }
 
-void CmdButtonWidget::setButtonText(const QString &str)
-{
-    // 设置Button文字
-    mp_cmdButton->setText(str);
-}
-
 void CmdButtonWidget::expandCommandLinkClicked()
 {
     // Button点击信号发送

@@ -39,7 +39,7 @@ class LongTextLabel : public DLabel
     Q_OBJECT
 
 public:
-    LongTextLabel(DWidget *parent = nullptr);
+    explicit LongTextLabel(DWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
 
 private:

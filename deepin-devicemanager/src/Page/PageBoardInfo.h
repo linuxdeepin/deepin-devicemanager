@@ -38,7 +38,7 @@ class PageBoardInfo : public PageSingleInfo
 {
     Q_OBJECT
 public:
-    PageBoardInfo(QWidget *parent = nullptr);
+    explicit PageBoardInfo(QWidget *parent = nullptr);
 
     /**
      * @brief updateInfo:更新主板信息

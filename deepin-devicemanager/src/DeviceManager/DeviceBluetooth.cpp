@@ -98,59 +98,9 @@ const QString &DeviceBluetooth::name()const
     return m_Name;
 }
 
-const QString &DeviceBluetooth::vendor()const
-{
-    return m_Vendor;
-}
-
-const QString &DeviceBluetooth::version()const
-{
-    return m_Version;
-}
-
-const QString &DeviceBluetooth::model()const
-{
-    return m_Model;
-}
-
-const QString &DeviceBluetooth::MAC()const
-{
-    return m_MAC;
-}
-
-const QString &DeviceBluetooth::logicalName()const
-{
-    return m_LogicalName;
-}
-
-const QString &DeviceBluetooth::busInfo()const
-{
-    return m_BusInfo;
-}
-
-const QString &DeviceBluetooth::capabilities()const
-{
-    return m_Capabilities;
-}
-
 const QString &DeviceBluetooth::driver()const
 {
     return m_Driver;
-}
-
-const QString &DeviceBluetooth::driverVersion()const
-{
-    return m_DriverVersion;
-}
-
-const QString &DeviceBluetooth::maximumPower()const
-{
-    return m_MaximumPower;
-}
-
-const QString &DeviceBluetooth::speed()const
-{
-    return m_Speed;
 }
 
 QString DeviceBluetooth::subTitle()

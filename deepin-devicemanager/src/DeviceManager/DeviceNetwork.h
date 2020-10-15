@@ -56,148 +56,10 @@ public:
     const QString &name()const override;
 
     /**
-     * @brief vendor:获取制造商属性值
-     * @return QString:制造商属性值
-     */
-    const QString &vendor()const;
-
-    /**
-     * @brief model:获取型号属性值
-     * @return QString:型号属性值
-     */
-    const QString &model()const;
-
-    /**
-       * @brief version:获取版本号属性值
-       * @return QString:版本号属性值
-       */
-    const QString &version()const;
-
-    /**
-     * @brief busInfo:获取总线信息属性值
-     * @return QString:总线信息属性值
-     */
-    const QString &busInfo()const;
-
-    /**
-     * @brief logicalName:获取逻辑名称属性值
-     * @return QString:逻辑名称属性值
-     */
-    const QString &logicalName()const;
-
-    /**
-     * @brief MACAddress:获取MAC地址属性值
-     * @return QString:MAC地址属性值
-     */
-    const QString &MACAddress()const;
-
-    /**
-       * @brief irq:获取中断属性值
-       * @return QString:中断属性值
-       */
-    const QString &irq()const;
-
-    /**
-       * @brief memory:获取内存地址属性值
-       * @return QString:内存地址属性值
-       */
-    const QString &memory()const;
-
-    /**
-       * @brief width获取位宽属性值
-       * @return QString:位宽属性值
-       */
-    const QString &width()const;
-
-    /**
-       * @brief clock:获取时钟频率属性值
-       * @return QString:时钟频率属性值
-       */
-    const QString &clock()const;
-
-    /**
-       * @brief capabilities:获取功能属性值
-       * @return QString:功能属性值
-       */
-    const QString &capabilities()const;
-
-    /**
-     * @brief autoNegotiation:获取自动协商属性值
-     * @return QString:自动协商属性值
-     */
-    const QString &autoNegotiation()const;
-
-    /**
-     * @brief broadcast:获取广播属性值
-     * @return QString:广播属性值
-     */
-    const QString &broadcast()const;
-
-    /**
      * @brief driver:获取驱动属性值
      * @return QString:驱动属性值
      */
     const QString &driver()const override;
-
-    /**
-     * @brief driverVersion:获取驱动版本属性值
-     * @return QString:驱动版本属性值
-     */
-    const QString &driverVersion()const;
-
-    /**
-     * @brief duplex:获取双工属性值
-     * @return QString:双工属性值
-     */
-    const QString &duplex()const;
-
-    /**
-     * @brief firmware:获取固件属性值
-     * @return QString:固件属性值
-     */
-    const QString &firmware()const;
-
-    /**
-     * @brief port:获取端口属性值
-     * @return QString:端口属性值
-     */
-    const QString &port()const;
-
-    /**
-     * @brief link:获取链接属性值
-     * @return QString:链接属性值
-     */
-    const QString &link()const;
-
-    /**
-     * @brief ip:获取IP地址属性值
-     * @return QString:IP地址属性值
-     */
-    const QString &ip()const;
-
-    /**
-       * @brief speed:获取速率属性值
-       * @return QString:速率属性值
-       */
-    const QString &speed()const;
-
-    /**
-     * @brief capacity:获取最大速度属性值
-     * @return QString:最大速度属性值
-     */
-    const QString &capacity()const;
-
-    /**
-     * @brief latency:获取延迟属性值
-     * @return QString:延迟属性值
-     */
-    const QString &latency()const;
-
-    /**
-     * @brief multicast:获取组播属性值
-     * @return QString:组播属性值
-     */
-    const QString &multicast()const;
 
     /**
      * @brief subTitle:获取子标题
@@ -216,13 +78,13 @@ public:
      * @param enable 是否禁用
      * @return 禁用是否成功
      */
-    EnableDeviceStatus setEnable(bool enable);
+    EnableDeviceStatus setEnable(bool enable) override;
 
     /**
      * @brief enable : 判断当前是否是禁用状态
      * @return
      */
-    bool enable();
+    bool enable() override;
 
 protected:
 

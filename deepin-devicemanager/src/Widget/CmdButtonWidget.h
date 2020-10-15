@@ -40,13 +40,7 @@ class CmdButtonWidget : public DWidget
 {
     Q_OBJECT
 public:
-    CmdButtonWidget(DetailTreeView *parent = nullptr);
-
-    /**
-     * @brief setButtonText:设置Button文字
-     * @param str:Button文字
-     */
-    void setButtonText(const QString &str);
+    explicit CmdButtonWidget(DetailTreeView *parent = nullptr);
 
 signals:
     /**

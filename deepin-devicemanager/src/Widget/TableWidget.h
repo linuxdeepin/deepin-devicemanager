@@ -41,7 +41,7 @@ class TableWidget : public DWidget
 {
     Q_OBJECT
 public:
-    TableWidget(QWidget *parent = nullptr);
+    explicit TableWidget(QWidget *parent = nullptr);
 
     /**
      * @brief setHeaderLabels : 设置table的表头

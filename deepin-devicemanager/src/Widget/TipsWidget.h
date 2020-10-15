@@ -28,9 +28,6 @@ public:
 
     void setText(const QString &text);
     void setAlignment(Qt::Alignment);
-    void setLeftRightMargin(int margin);
-    void setTopBottomMargin(int margin);
-    void setMaxLineCount(int maxLinecnt);
 
 private:
     void initWidget();

@@ -90,7 +90,7 @@ public:
      * @brief enable : 判断当前是否是禁用状态
      * @return
      */
-    bool enable();
+    bool enable() override;
 
 protected:
     /**

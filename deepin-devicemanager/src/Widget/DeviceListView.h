@@ -41,7 +41,7 @@ class DeviceListviewDelegate : public DStyledItemDelegate
 {
     Q_OBJECT
 public:
-    DeviceListviewDelegate(QAbstractItemView *parent = nullptr);
+    explicit DeviceListviewDelegate(QAbstractItemView *parent = nullptr);
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
@@ -59,7 +59,7 @@ class DeviceListView : public DListView
 {
     Q_OBJECT
 public:
-    DeviceListView(QWidget *parent = nullptr);
+    explicit DeviceListView(QWidget *parent = nullptr);
     ~DeviceListView()override;
 
     /**

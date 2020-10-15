@@ -120,11 +120,6 @@ const QString &DeviceBios::driver() const
     return m_Driver;
 }
 
-const QString &DeviceBios::productName()const
-{
-    return m_ProductName;
-}
-
 const QString &DeviceBios::vendor()const
 {
     return m_Vendor;
@@ -133,11 +128,6 @@ const QString &DeviceBios::vendor()const
 const QString &DeviceBios::version()const
 {
     return m_Version;
-}
-
-const QString &DeviceBios::chipsetFamily()const
-{
-    return m_ChipsetFamily;
 }
 
 bool DeviceBios::isBoard()const

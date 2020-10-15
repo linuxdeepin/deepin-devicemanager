@@ -35,42 +35,12 @@ public:
     DeviceComputer();
 
     /**
-     * @brief homeUrl:获取URL属性值
-     * @return QString:URL属性值
-     */
-    const QString &homeUrl()const;
-
-    /**
-     * @brief osDescription:获取操作系统描述属性值
-     * @return QString:操作系统描述属性值
-     */
-    const QString &osDescription();
-
-    /**
-     * @brief os:获取操作系统属性值
-     * @return QString:操作系统属性值
-     */
-    const QString &os();
-
-    /**
-     * @brief vendor:获取制造商属性值
-     * @return QString:制造商属性值
-     */
-    const QString &vendor();
-
-    /**
      * @brief name:获取名称属性值
      * @return QString:名称属性值
      */
     const QString &name() const override;
 
     const QString &driver() const override;
-
-    /**
-     * @brief type:获取类型属性值
-     * @return QString:类型属性值
-     */
-    const QString &type();
 
     /**
      * @brief setHomeUrl:设置URL属性值

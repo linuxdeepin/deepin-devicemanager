@@ -64,49 +64,9 @@ const QString &DeviceImage::name()const
     return m_Name;
 }
 
-const QString &DeviceImage::vendor()const
-{
-    return m_Vendor;
-}
-
-const QString &DeviceImage::model()const
-{
-    return m_Model;
-}
-
-const QString &DeviceImage::version()const
-{
-    return m_Version;
-}
-
-const QString &DeviceImage::busInfo()const
-{
-    return m_BusInfo;
-}
-
-const QString &DeviceImage::capabilities()const
-{
-    return m_Capabilities;
-}
-
 const QString &DeviceImage::driver()const
 {
     return m_Driver;
-}
-
-const QString &DeviceImage::maxinumPower()const
-{
-    return m_MaximumPower;
-}
-
-const QString &DeviceImage::speed()const
-{
-    return m_Speed;
-}
-
-const QString &DeviceImage::keyToLshw()const
-{
-    return m_KeyToLshw;
 }
 
 QString DeviceImage::subTitle()

@@ -45,7 +45,7 @@ class PageSingleInfo : public PageInfo
 {
     Q_OBJECT
 public:
-    PageSingleInfo(QWidget *parent = nullptr);
+    explicit PageSingleInfo(QWidget *parent = nullptr);
     ~PageSingleInfo() override;
 
     /**

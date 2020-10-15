@@ -51,7 +51,6 @@ GenerateTask::~GenerateTask()
 
 void GenerateTask::run()
 {
-
     DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
 
     if (!generator) {
@@ -134,7 +133,12 @@ void GenerateTask::run()
     generator = nullptr;
 }
 
-ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
+ThreadPool::ThreadPool(QObject *parent)
+    : QThreadPool(parent)
+    , m_FinishedCmd(0)
+    , m_FinishedGenerator(0)
+    , m_AllCmdNum(0)
+    , m_AllTypeNum(0)
 {
 
 }

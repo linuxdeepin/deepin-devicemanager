@@ -76,12 +76,6 @@ void PageTableWidget::setRowHeight(int row, int height)
     mp_Table->setRowHeight(row, height);
 }
 
-void PageTableWidget::resizeRowToContent(int row)
-{
-    // 设置表格宽度随内容变化
-    mp_Table->resizeRowToContents(row);
-}
-
 void PageTableWidget::setItemDelegateForRow(int row, RichTextDelegate *itemDelegate)
 {
     // 设置单元格代理
