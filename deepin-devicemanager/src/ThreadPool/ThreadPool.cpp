@@ -259,7 +259,7 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
     cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
     cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "cat_devices.txt",     ""});
     cmdList.append({ "cat_audio",            "cat /proc/asound/card0/codec#0", "cat_audio.txt",     ""});
-    cmdList.append({ "bt_device",            "bluetoothctl paired-devices",    "bt_device.txt",     ""});   // 蓝牙设备配对信息
+//    cmdList.append({ "bt_device",            "bluetoothctl paired-devices",    "bt_device.txt",     ""});   // 蓝牙设备配对信息
 
     if (arch == "PanGuV") {
         cmdList.append({ "EDID_HDMI",            "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid", "EDID_HDMI.txt",     ""});

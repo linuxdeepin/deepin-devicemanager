@@ -506,7 +506,10 @@ void CmdTool::loadCatInfo(const QString &key, const QString &cmd, const QString 
         } else {
             getMapInfoFromCmd(item, mapInfo, key.startsWith("cat_os") ? "=" : ": ");
         }
-        addMapInfo(key, mapInfo);
+
+        // Filter some useless equipment
+        if (mapInfo.size() > 1)
+            addMapInfo(key, mapInfo);
     }
 }
 
