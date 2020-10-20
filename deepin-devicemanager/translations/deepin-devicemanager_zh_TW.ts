@@ -1393,7 +1393,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="176"/>
         <source>Help</source>
-        <translation>幫助</translation>
+        <translation>說明</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="177"/>

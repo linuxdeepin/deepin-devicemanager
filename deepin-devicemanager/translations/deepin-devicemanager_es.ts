@@ -645,7 +645,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
         <source>Overview</source>
-        <translation>Visión general</translation>
+        <translation>Resumen</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="138"/>
@@ -1444,7 +1444,7 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="17"/>
         <source>Overview</source>
-        <translation>Visión general</translation>
+        <translation>Resumen</translation>
     </message>
 </context>
 <context>
@@ -1480,7 +1480,7 @@
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="61"/>
         <source>Overview</source>
-        <translation>Visión general</translation>
+        <translation>Resumen</translation>
     </message>
 </context>
 <context>

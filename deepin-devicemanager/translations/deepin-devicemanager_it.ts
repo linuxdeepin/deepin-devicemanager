@@ -339,7 +339,7 @@
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="185"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="197"/>
         <source>Processor</source>
-        <translation>Processore</translation>
+        <translation> Thread</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="195"/>

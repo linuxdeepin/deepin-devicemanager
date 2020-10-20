@@ -87,7 +87,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="276"/>
         <source>Chip</source>
-        <translation>Carte</translation>
+        <translation>Puce</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="277"/>
@@ -962,7 +962,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="251"/>
         <source>Multicast</source>
-        <translation>Multicast</translation>
+        <translation>Multidiffusion</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="252"/>
@@ -1732,7 +1732,7 @@
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="192"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="70"/>
         <source>Asset Tag</source>
-        <translation>Élément d&apos;inventaire</translation>
+        <translation>Numéro d&apos;inventaire</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="174"/>
@@ -2532,7 +2532,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="757"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="792"/>
         <source>Monitor</source>
-        <translation>Surveiller</translation>
+        <translation>Écran</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="703"/>
@@ -2746,7 +2746,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="71"/>
         <source>Part Number</source>
-        <translation>Numéro de la partie</translation>
+        <translation>Numéro de pièce</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="72"/>
@@ -2845,7 +2845,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="182"/>
         <source>power supply</source>
-        <translation>source de courant</translation>
+        <translation>Alimentation</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="183"/>
@@ -2880,12 +2880,12 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="189"/>
         <source>energy</source>
-        <translation>énergie</translation>
+        <translation>Charge</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="190"/>
         <source>energy-empty</source>
-        <translation>sans énergie</translation>
+        <translation>Charge vide</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="191"/>
@@ -2895,7 +2895,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="192"/>
         <source>energy-full-design</source>
-        <translation>charge complète théorique</translation>
+        <translation>conception énergie complète</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="193"/>
@@ -2935,7 +2935,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="200"/>
         <source>daemon-version</source>
-        <translation>version du service</translation>
+        <translation>version du daemon</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="201"/>
@@ -3020,7 +3020,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="138"/>
         <source>printer-state-change-time</source>
-        <translation>temps de changement d&apos;état de l&apos;imprimante</translation>
+        <translation>Heure de changement d&apos;état de l&apos;imprimante</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="139"/>
@@ -3159,7 +3159,7 @@
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="235"/>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Chargement des informations sur le périphérique Bluetooth...</translation>
+        <translation>Chargement des informations du périphérique Bluetooth...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="236"/>
@@ -3174,12 +3174,12 @@
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="244"/>
         <source>Loading Operating System Info...</source>
-        <translation>Chargement des informations sur le système d&apos;exploitation...</translation>
+        <translation>Chargement des informations du système d&apos;exploitation...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="246"/>
         <source>Loading CPU Info...</source>
-        <translation>Chargement des informations sur le processeur...</translation>
+        <translation>Chargement des informations du processeur...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="247"/>
@@ -3194,7 +3194,7 @@
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="249"/>
         <source>Loading Printer Info...</source>
-        <translation>Chargement des informations sur l&apos;imprimante...</translation>
+        <translation>Chargement des informations de l&apos;imprimante...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="256"/>
@@ -3204,7 +3204,7 @@
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="257"/>
         <source>Loading Mouse Info...</source>
-        <translation>Chargement des informations de la sou...</translation>
+        <translation>Chargement des informations de la souris...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ThreadPool.cpp" line="258"/>
