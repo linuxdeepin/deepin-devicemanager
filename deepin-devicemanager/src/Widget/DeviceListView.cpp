@@ -82,7 +82,10 @@ DeviceListView::DeviceListView(QWidget *parent)
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setItemSpacing(0);
     setAutoFillBackground(true); //与背景色有关
-    setViewportMargins(5, 2, 5, 5);
+
+    // bug51444
+    setViewportMargins(5, 2, 11, 5);
+
 }
 
 DeviceListView::~DeviceListView()

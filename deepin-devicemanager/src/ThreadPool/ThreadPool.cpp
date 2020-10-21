@@ -33,7 +33,8 @@ CmdTask::~CmdTask()
 void CmdTask::run()
 {
     CmdTool tool;
-    tool.loadCmdInfo(m_Key, m_Cmd, m_DebugFile);
+//    tool.loadCmdInfo(m_Key, m_Cmd, m_DebugFile);
+    tool.loadCmdInfo(m_Key, m_DebugFile);
     const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = tool.cmdInfo();
     mp_Parent->finishedCmd(m_Info, cmdInfo);
 }

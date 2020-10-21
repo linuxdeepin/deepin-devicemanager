@@ -1084,7 +1084,9 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
     m_OveriewMap["OS"] = dynamic_cast<DeviceComputer *>(m_ListDeviceComputer[0])->getOSInfo();
 
     // CPU 概况显示 样式"Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz (四核 / 四逻辑处理器)"
-    m_OveriewMap[tr("CPU")] = m_ListDeviceCPU[0] ->getOverviewInfo();
+    if (!m_ListDeviceCPU.isEmpty()) {
+        m_OveriewMap[tr("CPU")] = m_ListDeviceCPU[0] ->getOverviewInfo();
+    }
 
     return m_OveriewMap;
 }

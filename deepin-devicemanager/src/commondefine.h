@@ -35,4 +35,4 @@ const int DeviceWidgetContentMarginBottom_ = 20;
 const int contextMenuWidth_ = 150;
 #define GenerateTsItem 0
 //#define TEST_DATA_FROM_FILE
-//const QString DEVICEINFO_PATH = "/home/liujun/Work/Job/GetHardwareInfo/deviceInfo/Bug/Bug_49431";
+const QString DEVICEINFO_PATH = "/home/jxm/Desktop/info/my_deviceinfo";
