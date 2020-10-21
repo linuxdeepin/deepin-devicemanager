@@ -23,6 +23,8 @@
 #pragma once
 
 #include <QString>
+#include "DebugTimeManager.h"
+#include "config.h"
 
 const QString commonFontFamily_ = "Noto Sans CJK TC";
 const int leftDeviceListViewMinWidth_ = 177;
@@ -33,6 +35,19 @@ const int DeviceWidgetContentMarginTop_ = 10;
 const int DeviceWidgetContentMarginRight_ = 0;
 const int DeviceWidgetContentMarginBottom_ = 20;
 const int contextMenuWidth_ = 150;
+
+#ifdef PERF_ON
+#define PERF_PRINT_BEGIN(point, desc) DebugTimeManager::getInstance()->beginPointLinux(point, desc)
+#define PERF_PRINT_END(point) DebugTimeManager::getInstance()->endPointLinux(point)
+#define END_SUB_POINT(point) DebugTimeManager::getInstance()->endSubPoint(point)
+#define PERF_PRINT_END_SUB(point,sub) DebugTimeManager::getInstance()->endPointLinux(point,sub)
+#else
+#define PERF_PRINT_BEGIN(point,desc)
+#define PERF_PRINT_END(point)
+#define END_SUB_POINT(point)
+#define PERF_PRINT_END_SUB(point,sub)
+#endif
+
 #define GenerateTsItem 0
 //#define TEST_DATA_FROM_FILE
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/Job/GetHardwareInfo/deviceInfo/Bug/Bug_49431";
