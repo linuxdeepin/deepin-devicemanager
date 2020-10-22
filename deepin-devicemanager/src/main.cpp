@@ -32,11 +32,13 @@
 #include "DApplicationSettings"
 #include "deviceinfoparser.h"
 #include "environments.h"
+#include "commondefine.h"
 
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    PERF_PRINT_BEGIN("POINT-01", "");
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     DApplication app(argc, argv);
 

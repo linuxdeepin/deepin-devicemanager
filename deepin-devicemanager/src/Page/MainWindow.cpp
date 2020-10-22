@@ -24,6 +24,7 @@
 #include "ThreadPool.h"
 #include "deviceinfoparser.h"
 #include "DeviceManager.h"
+#include "commondefine.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -41,9 +42,12 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_ThreadPool(new ThreadPool(this))
 {
     // 加载授权框
+    PERF_PRINT_BEGIN("SUB_POINT-01", "");
     if (false == DeviceInfoParser::Instance().getRootPassword()) {
         exit(-1);
     }
+    END_SUB_POINT("SUB_POINT-01");
+
 
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
@@ -314,6 +318,8 @@ void MainWindow::loadingFinishSlot(const QString &message)
 
         // 刷新结束
         m_refreshing = false;
+
+        PERF_PRINT_END_SUB("POINT-01", "SUB_POINT-01");
     }
 }
 

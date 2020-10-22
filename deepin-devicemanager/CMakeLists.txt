@@ -47,6 +47,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS "-Wl,--as-need -fPIE")
 set(CMAKE_EXE_LINKER_FLAGS "-pie")
 
+option (PERF_ON "Use provided math implementation" OFF)
 
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "sw_64")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mieee")
@@ -71,6 +72,7 @@ endif()
 #message(${CMAKE_CURRENT_SOURCE_DIR})
 execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 configure_file(src/environments.h.in environments.h @ONLY)
+configure_file(src/config.h.in config.h @ONLY)
 
 macro(SUBDIRLIST result curdir)
 #    message(************************************************SUBDIRLIST:${SUBDIRLIST})

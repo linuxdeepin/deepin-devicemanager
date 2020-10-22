@@ -83,9 +83,8 @@ DeviceListView::DeviceListView(QWidget *parent)
     setItemSpacing(0);
     setAutoFillBackground(true); //与背景色有关
 
-    // bug51444
+    // bug51444左侧菜单和滚动条不重叠重叠
     setViewportMargins(5, 2, 11, 5);
-
 }
 
 DeviceListView::~DeviceListView()
