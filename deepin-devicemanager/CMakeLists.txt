@@ -47,7 +47,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS "-Wl,--as-need -fPIE")
 set(CMAKE_EXE_LINKER_FLAGS "-pie")
 
-option (PERF_ON "Use provided math implementation" OFF)
+option (PERF_ON "Use provided math implementation" ON)
 
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "sw_64")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mieee")

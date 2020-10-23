@@ -157,6 +157,7 @@ private:
     DeviceWidget          *mp_DeviceWidget;
     ThreadPool            *mp_ThreadPool;
     bool                  m_refreshing = false;                  // 判断界面是否正在刷新
+    bool                  m_IsFirstRefresh = true;
 };
 
 #endif // MAINWINDOW_H
