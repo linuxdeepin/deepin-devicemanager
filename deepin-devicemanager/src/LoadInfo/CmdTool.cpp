@@ -726,6 +726,7 @@ void CmdTool::loadBootDeviceManfid(const QString &key, const QString &cmd, const
 
 void CmdTool::loadBluetoothPairedDevices(const QString &key, const QString &cmd, const QString &debugfile)
 {
+    // 多线程中不能保证hciconfig在该命令之前执行完成，所以不能以命令判断是否执行下一步
     // 当机器上没有蓝牙适配器时,不查找匹配信息
 //    if (m_cmdInfo.find("hciconfig") == m_cmdInfo.end()) {
 //        return;
@@ -734,13 +735,6 @@ void CmdTool::loadBluetoothPairedDevices(const QString &key, const QString &cmd,
 //    if (m_cmdInfo["hciconfig"].empty()) {
 //        return;
 //    }
-    if (m_cmdInfo.find("hciconfig") == m_cmdInfo.end()) {
-        return;
-    }
-
-    if (m_cmdInfo["hciconfig"].empty()) {
-        return;
-    }
 
     QString deviceInfo;
     if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
