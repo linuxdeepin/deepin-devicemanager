@@ -9,6 +9,7 @@
 #include <qdrawutil.h>
 #include <QPainter>
 #include <QDebug>
+#include <QKeyEvent>
 
 // 其它头文件
 #include "MacroDefinition.h"
@@ -85,6 +86,8 @@ DeviceListView::DeviceListView(QWidget *parent)
 
     // bug51444左侧菜单和滚动条不重叠重叠
     setViewportMargins(5, 2, 11, 5);
+
+    setMovement(QListView::Static);
 }
 
 DeviceListView::~DeviceListView()
@@ -169,4 +172,22 @@ void DeviceListView::paintEvent(QPaintEvent *event)
     DApplicationHelper::instance()->setPalette(this, pa);
 
     DListView::paintEvent(event);
+}
+
+void DeviceListView::mousePressEvent(QMouseEvent *event)
+{
+    if ((QApplication::keyboardModifiers() == Qt::ControlModifier) && (event->button() == Qt::LeftButton)) {
+        // 当键盘按住ctrl，不响应鼠标点击事件
+    } else {
+        DListView::mousePressEvent(event);
+    }
+}
+
+void DeviceListView::mouseMoveEvent(QMouseEvent *event)
+{
+    if ((QApplication::keyboardModifiers() == Qt::ControlModifier)/* && (event->button() == Qt::LeftButton)*/) {
+        // 当键盘按住ctrl，不响应鼠标移动事件
+    } else {
+        DListView::mouseMoveEvent(event);
+    }
 }
