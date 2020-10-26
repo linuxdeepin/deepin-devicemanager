@@ -129,6 +129,7 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     if (mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive) || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
         m_Interface = "Bluetooth";
     }
+
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
@@ -282,6 +283,7 @@ void DeviceInput::loadTableData()
     } else {
         name = m_Name;
     }
+
     m_TableData.append(name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);

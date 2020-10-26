@@ -303,11 +303,15 @@ bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceStorage.begin();
     for (; it != m_ListDeviceStorage.end(); ++it) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
+        // 设置介质类型
         if (device->setMediaType(name, value)) {
             return true;
         }
     }
+
     return  false;
 }
 
@@ -317,7 +321,11 @@ bool DeviceManager::setKLUStorageDeviceMediaType(const QString &name, const QStr
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceStorage.begin();
     for (; it != m_ListDeviceStorage.end(); ++it) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
-        if (!device) continue;
+
+        if (!device)
+            continue;
+
+        // 设置KLU介质类型
         if (device->setKLUMediaType(name, value)) {
             return true;
         }
@@ -342,7 +350,9 @@ void DeviceManager::setGpuInfoFromLshw(const QMap<QString, QString> &mapInfo)
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceGPU.begin();
     for (; it != m_ListDeviceGPU.end(); ++it) {
         DeviceGpu *device = dynamic_cast<DeviceGpu *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         device->setLshwInfo(mapInfo);
     }
 }
@@ -353,7 +363,9 @@ void DeviceManager::setGpuInfoFromXrandr(const QMap<QString, QString> &mapInfo)
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceGPU.begin();
     for (; it != m_ListDeviceGPU.end(); ++it) {
         DeviceGpu *device = dynamic_cast<DeviceGpu *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         device->setXrandrInfo(mapInfo);
     }
 }
@@ -364,7 +376,9 @@ void DeviceManager::setGpuSizeFromDmesg(const QString &info)
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceGPU.begin();
     for (; it != m_ListDeviceGPU.end(); ++it) {
         DeviceGpu *device = dynamic_cast<DeviceGpu *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         device->setDmesgInfo(info);
     }
 }
@@ -386,7 +400,9 @@ void DeviceManager::setMemoryInfoFromDmidecode(const QMap<QString, QString> &map
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMemory.begin();
     for (; it != m_ListDeviceMemory.end(); ++it) {
         DeviceMemory *device = dynamic_cast<DeviceMemory *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         if (device->setInfoFromDmidecode(mapInfo)) {
             return;
         }
@@ -410,7 +426,9 @@ void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString 
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMonitor.begin();
     for (; it != m_ListDeviceMonitor.end(); ++it) {
         DeviceMonitor *device = dynamic_cast<DeviceMonitor *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         if (device->setInfoFromXradr(main, edid)) {
             return;
         }
@@ -423,7 +441,9 @@ void DeviceManager::setCurrentResolution(const QString &resolution, const QStrin
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMonitor.begin();
     for (; it != m_ListDeviceMonitor.end(); ++it) {
         DeviceMonitor *device = dynamic_cast<DeviceMonitor *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         if (device->setCurrentResolution(resolution, rate)) {
             return;
         }
@@ -447,7 +467,9 @@ void DeviceManager::setLanguageInfo(const QMap<QString, QString> &mapInfo)
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceBios.begin();
     for (; it != m_ListDeviceBios.end(); ++it) {
         DeviceBios *device = dynamic_cast<DeviceBios *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         if (device->setBiosLanguageInfo(mapInfo)) {
             return;
         }
@@ -470,7 +492,9 @@ void DeviceManager::setBluetoothInfoFromLshw(const QMap<QString, QString> &mapIn
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceBluetooth.begin();
     for (; it != m_ListDeviceBluetooth.end(); ++it) {
         DeviceBluetooth *device = dynamic_cast<DeviceBluetooth *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         if (device->setInfoFromLshw(mapInfo)) {
             return;
         }
@@ -483,7 +507,9 @@ bool DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &map
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceBluetooth.begin();
     for (; it != m_ListDeviceBluetooth.end(); ++it) {
         DeviceBluetooth *device = dynamic_cast<DeviceBluetooth *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         if (device->setInfoFromHwinfo(mapInfo)) {
             return true;
         }
@@ -507,7 +533,9 @@ void DeviceManager::setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo)
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceAudio.begin();
     for (; it != m_ListDeviceAudio.end(); ++it) {
         DeviceAudio *device = dynamic_cast<DeviceAudio *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         if (device->setInfoFromLshw(mapInfo)) {
             return;
         }
@@ -520,7 +548,9 @@ void DeviceManager::setAudioChipFromDmesg(const QString &info)
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceAudio.begin();
     for (; it != m_ListDeviceAudio.end(); ++it) {
         DeviceAudio *device = dynamic_cast<DeviceAudio *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         device->setAudioChipFromDmesg(info);
     }
 }
@@ -542,7 +572,9 @@ void DeviceManager::setNetworkInfoFromHwinfo(const QMap<QString, QString> &mapIn
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin();
     for (; it != m_ListDeviceNetwork.end(); ++it) {
         DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         if (device->setInfoFromHwinfo(mapInfo)) {
             return;
         }
@@ -561,7 +593,9 @@ void DeviceManager::setCameraInfoFromLshw(const QMap<QString, QString> &mapInfo)
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceImage.begin();
     for (; it != m_ListDeviceImage.end(); ++it) {
         DeviceImage *device = dynamic_cast<DeviceImage *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         device->setInfoFromLshw(mapInfo);
     }
 }
@@ -588,7 +622,9 @@ void DeviceManager::setKeyboardInfoFromLshw(const QMap<QString, QString> &mapInf
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceKeyboard.begin();
     for (; it != m_ListDeviceKeyboard.end(); ++it) {
         DeviceInput *device = dynamic_cast<DeviceInput *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         if (device->setInfoFromlshw(mapInfo)) {
             return;
         }
@@ -601,7 +637,8 @@ void DeviceManager::addOthersDevice(DeviceOthers *const device)
     bool isOtherDevice = true;
     foreach (auto disk, m_ListDeviceStorage) {
         DeviceStorage *deviceDisk = dynamic_cast<DeviceStorage *>(disk);
-        if (!deviceDisk) continue;
+        if (!deviceDisk)
+            continue;
 
         // 排除存储设备
         if (deviceDisk->keyFromStorage() == device->logicalName() && device->logicalName() != "") {
@@ -621,7 +658,9 @@ void DeviceManager::addOthersDeviceFromHwinfo(DeviceOthers *const device)
     // 从hwinfo中获取其他设备信息
     foreach (auto cur, m_ListDeviceOthers) {
         DeviceOthers *deviceOthers = dynamic_cast<DeviceOthers *>(cur);
-        if (!deviceOthers) continue;
+        if (!deviceOthers)
+            continue;
+
         if (deviceOthers->busInfo() == device->busInfo() && deviceOthers->busInfo() != "") {
             return;
         }
@@ -640,7 +679,9 @@ void DeviceManager::setOthersDeviceInfoFromLshw(const QMap<QString, QString> &ma
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceOthers.begin();
     for (; it != m_ListDeviceOthers.end(); ++it) {
         DeviceOthers *device = dynamic_cast<DeviceOthers *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         device->setInfoFromLshw(mapInfo);
     }
 }
@@ -662,7 +703,9 @@ void DeviceManager::setPowerDaemonInfo(const QMap<QString, QString> &mapInfo)
     QList<DeviceBaseInfo *>::iterator it = m_ListDevicePower.begin();
     for (; it != m_ListDevicePower.end(); ++it) {
         DevicePower *device = dynamic_cast<DevicePower *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         device->setDaemonInfo(mapInfo);
     }
 }
@@ -717,7 +760,9 @@ void DeviceManager::addLshwinfoIntoCdromDevice(const QMap<QString, QString> &map
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceCdrom.begin();
     for (; it != m_ListDeviceCdrom.end(); ++it) {
         DeviceCdrom *device = dynamic_cast<DeviceCdrom *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
+
         device->setInfoFromLshw(mapInfo);
     }
 }

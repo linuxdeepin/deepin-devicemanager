@@ -55,6 +55,7 @@ const QStringList &DeviceBaseInfo::getTableHeader()
         loadTableHeader();
         m_TableHeader.append(m_CanEnable ? "yes" : "no");
     }
+
     return m_TableHeader;
 }
 
@@ -282,6 +283,7 @@ void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
     if (m_TableData.size() < 1) {
         return;
     }
+
     // 设置占位宽度
     QString text = m_TableData[0];
     out.setFieldWidth(int(text.size() * 1.5));
@@ -290,8 +292,8 @@ void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
     foreach (auto item, m_TableData) {
         out.setFieldWidth(28);
         out << item;
-
     }
+
     out.setFieldWidth(0);
     out << "\n";
 }
@@ -316,6 +318,7 @@ void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
         out.setFieldWidth(30);
         out << item;
     }
+
     out.setFieldWidth(0);
     out << "\n";
 }
@@ -334,6 +337,7 @@ void DeviceBaseInfo::tableInfoToHtml(QFile &html)
     foreach (auto item, m_TableData) {
         html.write(QString("<td style=\"width:200px;text-align:left;\">" + item + "</td>").toUtf8().data());
     }
+
     html.write("</tr>\n");
 }
 

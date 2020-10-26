@@ -25,6 +25,7 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if (m_KeyToLshw != mapInfo["bus info"]) {
         return;
     }
+
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "version", m_Version);
@@ -90,6 +91,7 @@ EnableDeviceStatus DeviceImage::setEnable(bool e)
     if (e != enable()) {
         res = EDS_Faild;
     }
+
     return res;
 }
 
@@ -136,6 +138,7 @@ void DeviceImage::loadTableData()
     } else {
         name = m_Name;
     }
+
     m_TableData.append(name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);

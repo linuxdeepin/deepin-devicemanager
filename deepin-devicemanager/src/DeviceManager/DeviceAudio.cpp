@@ -64,6 +64,7 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if (words.size() != 2) {
         return false;
     }
+
     if (words[1] != m_UniqueKey) {
         return false;
     }
@@ -155,6 +156,7 @@ EnableDeviceStatus DeviceAudio::setEnable(bool e)
     if (e != enable()) {
         res = EDS_Faild;
     }
+
     return res;
 }
 
@@ -246,6 +248,7 @@ void DeviceAudio::loadTableData()
     } else {
         name = m_Name;
     }
+
     m_TableData.append(name);
     m_TableData.append(m_Vendor);
 }
