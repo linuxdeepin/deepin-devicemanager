@@ -21,6 +21,7 @@ void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if (m_Size.contains("GiB")) {
         m_Size.replace("GiB", "GB");
     }
+
     if (m_Size.contains("MiB")) {
         m_Size.replace("MiB", "");
         // MiB换算MB

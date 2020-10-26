@@ -103,6 +103,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_SupportResolution.append("  ,  ");
         }
     }
+
     // 计算显示比例
     caculateScreenRatio();
 
