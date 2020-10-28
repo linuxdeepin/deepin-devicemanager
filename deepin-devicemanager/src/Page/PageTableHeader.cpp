@@ -65,13 +65,13 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
     // 设置表格行数以及背景Widget高度
     //(+1)表示包含表头高度,(*2)表示上下边距,
     if (row - 1 < ROW_NUM) {
-        // 表格内容行数小于4,表格高度与行数一致
+        // 表格内容行数小于4,表格高度与行数一致，为保证treewidget横向滚动条与item不重叠，添加滚动条高度
         mp_Table->setRowNum(row - 1);
-        this->setFixedHeight(TREE_ROW_HEIGHT * row + WIDGET_MARGIN * 2 + BOTTOM_MARGIN);
+        this->setFixedHeight(TREE_ROW_HEIGHT * row + HORSCROLL_WIDTH + WIDGET_MARGIN * 2 + BOTTOM_MARGIN);
     } else {
-        // 表格内容行数大于等于4,表格行数固定为4
+        // 表格内容行数大于等于4,表格行数固定为4，为保证treewidget横向滚动条与item不重叠，添加滚动条高度
         mp_Table->setRowNum(4);
-        this->setFixedHeight(TREE_ROW_HEIGHT * (ROW_NUM + 1) + WIDGET_MARGIN * 2 + BOTTOM_MARGIN);
+        this->setFixedHeight(TREE_ROW_HEIGHT * (ROW_NUM + 1) + HORSCROLL_WIDTH + WIDGET_MARGIN * 2  + BOTTOM_MARGIN);
     }
 
     for (int i = 0; i < row - 1; i++) {
