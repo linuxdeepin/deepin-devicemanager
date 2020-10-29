@@ -23,6 +23,7 @@ if (NOT DEFINED VERSION)
     set(VERSION 5.5.10.1)
 endif ()
 
+
 #common resource names
 set(APP_RES_DIR "assets")
 set(APP_BIN_NAME "deepin-devicemanager")
