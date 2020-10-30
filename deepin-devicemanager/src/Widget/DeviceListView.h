@@ -102,8 +102,12 @@ protected:
     /**@brief:事件重写*/
     void paintEvent(QPaintEvent *event) override;
 
+    void mousePressEvent(QMouseEvent *event) override;
+
+    void mouseMoveEvent(QMouseEvent *event) override;
+
 private:
-    QStandardItemModel       *mp_ItemModel;                    // Model View 模式里面的 Model
+    QStandardItemModel        *mp_ItemModel;                   // Model View 模式里面的 Model
 };
 
 #endif // DEVICELISTVIEW_H

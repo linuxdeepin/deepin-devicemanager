@@ -338,6 +338,7 @@ void DeviceGenerator::getBiosMemoryInfo()
 void DeviceGenerator::getMemoryInfoFromLshw()
 {
     const QList<QMap<QString, QString>> lstMemory = DeviceManager::instance()->cmdInfo("lshw_memory");
+
     if (lstMemory.size() == 0) {
         return;
     } else if (lstMemory.size() == 1) {
@@ -346,8 +347,13 @@ void DeviceGenerator::getMemoryInfoFromLshw()
         DeviceManager::instance()->addMemoryDevice(device);
     } else if (lstMemory.size() > 1) {
         QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
+
         for (; it != lstMemory.end(); ++it) {
-            if (!(*it)["size"].contains("GiB") || (*it)["description"] == "System Memory") {
+
+            // bug47194 size属性包含MiB
+            if ((!(*it)["size"].contains("GiB") && !(*it)["size"].contains("MiB"))
+                    || (*it)["description"] == "System Memory"
+               ) {
                 continue;
             }
             DeviceMemory *device = new DeviceMemory();

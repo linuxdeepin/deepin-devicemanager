@@ -319,7 +319,11 @@ void MainWindow::loadingFinishSlot(const QString &message)
         // 刷新结束
         m_refreshing = false;
 
-        PERF_PRINT_END_SUB("POINT-01", "SUB_POINT-01");
+        //
+        if (m_IsFirstRefresh) {
+            PERF_PRINT_END_SUB("POINT-01", "SUB_POINT-01");
+            m_IsFirstRefresh = false;
+        }
     }
 }
 

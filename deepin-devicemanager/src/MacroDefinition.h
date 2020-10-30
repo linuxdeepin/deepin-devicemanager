@@ -218,3 +218,4 @@
 #define   WIDGET_MARGIN      2     // 页边距
 #define   BOTTOM_MARGIN      11    // 下边距
 #define   LABEL_MARGIN       12    // 页面标签的上下边距
+#define   HORSCROLL_WIDTH    11    // TreeWidget 横向滚动条高度

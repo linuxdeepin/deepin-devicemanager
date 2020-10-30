@@ -115,8 +115,8 @@ void TableWidget::paintEvent(QPaintEvent *e)
         cg = DPalette::Inactive;
     }
 
-    // 设置Widget固定高度,(+1)表示包含表头高度,(*2)表示上下边距
-    this->setFixedHeight(TREE_ROW_HEIGHT * (mp_Table->RowNum() + 1) + WIDGET_MARGIN * 2);
+    // 设置Widget固定高度,(+1)表示包含表头高度,(*2)表示上下边距，为保证treewidget横向滚动条与item不重叠，添加滚动条高度
+    this->setFixedHeight(TREE_ROW_HEIGHT * (mp_Table->RowNum() + 1) + HORSCROLL_WIDTH + WIDGET_MARGIN * 2);
     QRect rect  = this->rect();
 
     // 开始绘制边框 *********************************************************
