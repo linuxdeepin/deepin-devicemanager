@@ -81,6 +81,9 @@ public:
      */
     void windowMaximizing();
 
+    /**@brief:获取计算机架构字符串*/
+    QString getArchString();
+
 protected:
     /**
      * @brief: 事件的重写

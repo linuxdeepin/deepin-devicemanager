@@ -204,7 +204,9 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
     }
     // 刷新展示页面时,滚动条还原
     mp_ScrollArea->verticalScrollBar()->setValue(0);
-//    mp_ScrollAreaLayout->addStretch();s
+
+    // 页面布局时将所有的textBrowser靠上显示
+    mp_ScrollAreaLayout->addStretch();
 }
 
 void PageDetail::showInfoOfNum(int index)

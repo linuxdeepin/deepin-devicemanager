@@ -25,6 +25,7 @@
 #include "deviceinfoparser.h"
 #include "DeviceManager.h"
 #include "commondefine.h"
+#include "DeviceFactory.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -48,6 +49,10 @@ MainWindow::MainWindow(QWidget *parent)
     }
     END_SUB_POINT("SUB_POINT-01");
 
+    // 获取计算机架构信息,x86 arm mips
+    QString arch = getArchString();
+    mp_ThreadPool->setFramework(arch);
+    DeviceFactory::setGeneratorKey(arch);
 
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
@@ -230,6 +235,36 @@ void MainWindow::windowMaximizing()
         // 窗口最大化
         showMaximized();
     }
+}
+
+QString MainWindow::getArchString()
+{
+    QProcess process;
+    process.start("uname -m");
+    process.waitForFinished(1000);
+    QString struction = process.readAllStandardOutput().trimmed();
+    process.exitCode();
+
+#ifdef TEST_DATA_FROM_FILE
+    QFile inputDeviceFile(DEVICEINFO_PATH + "/" + "uname_m.txt");
+    bool res = inputDeviceFile.open(QIODevice::ReadOnly);
+    if (res) {
+        struction = inputDeviceFile.readAll().trimmed();
+    } else {
+        struction = "x86_64";
+    }
+    inputDeviceFile.close();
+#endif
+
+    // 华为机器需要区分KLU与PanGuV
+    if (struction == "aarch64") {
+        QString hw = DeviceInfoParser::Instance().loadGeneratorKey();
+        if (!hw.isEmpty()) {
+            struction = hw;
+        }
+    }
+
+    return struction;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
