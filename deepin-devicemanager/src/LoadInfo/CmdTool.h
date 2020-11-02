@@ -38,15 +38,6 @@ class CmdTool
 {
 public:
     CmdTool();
-
-    /**
-     * @brief loadCmdInfo:通过命令获取设备信息,[loadCmdInfo]:一般的处理方式
-     * @param key:与命令对应的关键字
-     * @param cmd:命令
-     * @param debugFile:调试时所需文件名
-     */
-    void loadCmdInfo(const QString &key, const QString &cmd, const QString &debugFile);
-
     /**
      * @brief loadCmdInfo:通过命令获取设备信息,[loadCmdInfo]:一般的处理方式
      * @param key:与命令对应的关键字
@@ -61,12 +52,6 @@ public:
     QMap<QString, QList<QMap<QString, QString> > > &cmdInfo();
 
 private:
-    /**
-     * @brief loadLshwInfo:加载lshw获取的信息
-     * @param cmd:lshw
-     * @param debugFile:调试文件名
-     */
-    void loadLshwInfo(const QString &cmd, const QString &debugFile);
 
     /**
      * @brief loadLshwInfo:文件加载lshw获取的信息
@@ -76,24 +61,9 @@ private:
 
     /**
      * @brief loadLsblkInfo:加载lsblk -d -o name,rota获取的信息
-     * @param cmd:lsblk -d -o name,rota
-     * @param debugfile:调试文件名
-     */
-    void loadLsblkInfo(const QString &cmd, const QString &debugfile);
-
-    /**
-     * @brief loadLsblkInfo:加载lsblk -d -o name,rota获取的信息
      * @param debugfile:调试文件名
      */
     void loadLsblkInfo(const QString &debugfile);
-
-    /**
-     * @brief loadSmartCtlInfo:加载smartctl获取的信息
-     * @param cmd:smartctl
-     * @param logicalName:逻辑名称
-     * @param debugfile:调试文件名
-     */
-    void loadSmartCtlInfo(const QString &cmd, const QString &logicalName, const QString &debugfile);
 
     /**
      * @brief loadSmartCtlInfo:加载smartctl获取的信息
@@ -104,23 +74,9 @@ private:
 
     /**
      * @brief loadXrandrInfo:加载xrandr获取的信息
-     * @param cmd:xrandr
-     * @param debugfile:调试文件名
-     */
-    void loadXrandrInfo(const QString &cmd, const QString &debugfile);
-
-    /**
-     * @brief loadXrandrInfo:加载xrandr获取的信息
      * @param debugfile:调试文件名
      */
     void loadXrandrInfo(const QString &debugfile);
-
-    /**
-     * @brief loadXrandrVerboseInfo:加载xrandr --verbose获取的信息
-     * @param cmd:xrandr --verbose
-     * @param debugfile:调试文件名
-     */
-    void loadXrandrVerboseInfo(const QString &cmd, const QString &debugfile);
 
     /**
      * @brief loadXrandrVerboseInfo:加载xrandr --verbose获取的信息
@@ -130,23 +86,9 @@ private:
 
     /**
      * @brief loadDmesgInfo:加载dmesg获取的信息
-     * @param cmd:dmesg
-     * @param debugfile:调试文件名
-     */
-    void loadDmesgInfo(const QString &cmd, const QString &debugfile);
-
-    /**
-     * @brief loadDmesgInfo:加载dmesg获取的信息
      * @param debugfile:调试文件名
      */
     void loadDmesgInfo(const QString &debugfile);
-
-    /**
-     * @brief loadHciconfigInfo:加载hciconfig -a获取的信息
-     * @param cmd:hciconfig -a
-     * @param debugfile:调试文件名
-     */
-    void loadHciconfigInfo(const QString &cmd, const QString &debugfile);
 
     /**
      * @brief loadHciconfigInfo:加载hciconfig -a获取的信息
@@ -168,32 +110,16 @@ private:
     /**
      * @brief loadHwinfoInfo:加载hwinfo信息
      * @param key:与cmd对应的关键字
-     * @param cmd:hwinfo --xxx
-     * @param debugfile:调试文件名
-     */
-    void loadHwinfoInfo(const QString &key, const QString &cmd, const QString &debugfile);
-
-    /**
-     * @brief loadHwinfoInfo:加载hwinfo信息
-     * @param key:与cmd对应的关键字
      * @param debugfile:调试文件名
      */
     void loadHwinfoInfo(const QString &key, const QString &debugfile);
 
     /**
-     * @brief loadHwinfoUsbInfo:加载hwinfo --usb信息
-     * @param item:段落信息
-     * @param mapInfo:hwinfo --usb解析得到的信息map
+     * @brief loadHwinfoUsbInfo
+     * @param item
+     * @param mapInfo
      */
     void loadHwinfoUsbInfo(const QString &item, const QMap<QString, QString> &mapInfo);
-
-    /**
-     * @brief loadDmidecodeInfo:加载dmidecode信息
-     * @param key:与cmd对应的关键字
-     * @param cmd:dmidecode -t xxx
-     * @param debugfile:调试文件名
-     */
-    void loadDmidecodeInfo(const QString &key, const QString &cmd, const QString &debugfile);
 
     /**
      * @brief loadDmidecodeInfo:加载dmidecode信息
@@ -205,14 +131,6 @@ private:
     /**
      * @brief loadDmidecode2Info:加载dmidecode -t 2信息
      * @param key:dmidecode2
-     * @param cmd:dmidecode -t 2
-     * @param debugfile:调试文件名
-     */
-    void loadDmidecode2Info(const QString &key, const QString &cmd, const QString &debugfile);
-
-    /**
-     * @brief loadDmidecode2Info:加载dmidecode -t 2信息
-     * @param key:dmidecode2
      * @param debugfile:调试文件名
      */
     void loadDmidecode2Info(const QString &key, const QString &debugfile);
@@ -220,25 +138,9 @@ private:
     /**
      * @brief loadCatInfo:加载cat xxx信息
      * @param key:与cmd对应的关键字
-     * @param cmd: cat xxx
-     * @param debugfile:调试文件名
-     */
-    void loadCatInfo(const QString &key, const QString &cmd, const QString &debugfile);
-
-    /**
-     * @brief loadCatInfo:加载cat xxx信息
-     * @param key:与cmd对应的关键字
      * @param debugfile:调试文件名
      */
     void loadCatInfo(const QString &key, const QString &debugfile);
-
-    /**
-     * @brief loadUpowerInfo:加载upower --dump
-     * @param key:upower
-     * @param cmd:upower --dump
-     * @param debugfile:调试文件名
-     */
-    void loadUpowerInfo(const QString &key, const QString &cmd, const QString &debugfile);
 
     /**
      * @brief loadUpowerInfo:加载upower --dump
@@ -256,25 +158,9 @@ private:
     /**
      * @brief loadCatInputDeviceInfo:加载cat /proc/bus/input/devices信息
      * @param key:cat_devices
-     * @param cmd:cat /proc/bus/input/devices
-     * @param debugfile:调试文件名
-     */
-    void loadCatInputDeviceInfo(const QString &key, const QString &cmd, const QString &debugfile);
-
-    /**
-     * @brief loadCatInputDeviceInfo:加载cat /proc/bus/input/devices信息
-     * @param key:cat_devices
      * @param debugfile:调试文件名
      */
     void loadCatInputDeviceInfo(const QString &key, const QString &debugfile);
-
-    /**
-     * @brief loadCatAudioInfo:加载cat /proc/asound/card0/codec#0信息
-     * @param key:cat_audio
-     * @param cmd:cat /proc/asound/card0/codec#0
-     * @param debugfile:调试文件名
-     */
-    void loadCatAudioInfo(const QString &key, const QString &cmd, const QString &debugfile);
 
     /**
      * @brief loadCatAudioInfo:加载cat /proc/asound/card0/codec#0信息
@@ -286,26 +172,10 @@ private:
     /**
      * @brief loadEdidInfo
      * @param key:EDID_HDMI、EDID_VGA
-     * @param cmdhexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid
-     * hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid
-     * @param debugfile:调试文件名
-     */
-    void loadEdidInfo(const QString &key, const QString &cmd, const QString &debugfile);
-
-    /**
-     * @brief loadEdidInfo
-     * @param key:EDID_HDMI、EDID_VGA
      * @param debugfile:调试文件名
      */
     void loadEdidInfo(const QString &key, const QString &debugfile);
 
-    /**
-     * @brief loadGpuInfo:加载gpuinfo信息
-     * @param key:gpuinfo
-     * @param cmd:gpuinfo
-     * @param debugfile:调试文件名
-     */
-    void loadGpuInfo(const QString &key, const QString &cmd, const QString &debugfile);
     /**
      * @brief loadGpuInfo:加载gpuinfo信息
      * @param key:gpuinfo
@@ -316,25 +186,9 @@ private:
     /**
      * @brief loadBootDeviceManfid:加载本机自带硬盘
      * @param key:bootdevice
-     * @param cmd:cat /proc/bootdevice/product_name
-     * @param debugfile:调试文件名
-     */
-    void loadBootDeviceManfid(const QString &key, const QString &cmd, const QString &debugfile);
-
-    /**
-     * @brief loadBootDeviceManfid:加载本机自带硬盘
-     * @param key:bootdevice
      * @param debugfile:调试文件名
      */
     void loadBootDeviceManfid(const QString &key, const QString &debugfile);
-
-    /**
-     * @brief loadBluetoothPairedDevices:加载蓝牙设备配对信息
-     * @param key:bt_device
-     * @param cmd:bluetoothctl paired-devices
-     * @param debugfile:调试文件名
-     */
-    void loadBluetoothPairedDevices(const QString &key, const QString &cmd, const QString &debugfile);
 
     /**
      * @brief loadBluetoothPairedDevices:加载蓝牙设备配对信息
@@ -429,15 +283,6 @@ private:
     void getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src);
 
     /**
-     * @brief getDeviceInfo:通过命令获取设备信息字符串
-     * @param command:命令
-     * @param deviceInfo:设备信息
-     * @param debugFile:调试文件名称
-     * @return
-     */
-    bool getDeviceInfo(const QString &command, QString &deviceInfo, const QString &debugFile = QString(""));
-
-    /**
      * @brief getDeviceInfo:通过文件获取设备信息字符
      * @param deviceInfo:设备信息
      * @param debugFile:调试文件名称
@@ -446,36 +291,12 @@ private:
     bool getDeviceInfo(QString &deviceInfo, const QString &debugFile);
 
     /**
-     * @brief executeProcess执行命令获取设备信息
-     * @param cmd:命令
-     * @param deviceInfo:设备信息命令执行结果
-     * @return 布尔值:true执行成功；false执行失败
+     * @brief getDeviceInfo:通过文件获取设备信息字符
+     * @param deviceInfo:设备信息
+     * @param debugFile:调试文件名称
+     * @return true:获取信息成功;false:获取信息失败
      */
-    bool executeProcess(const QString &cmd, QString &deviceInfo);
-
-    /**
-     * @brief runCmd:运行命令 获取设备信息
-     * @param cmd:命令
-     * @param deviceInfo:设备信息命令执行结果
-     * @return 布尔值:true执行成功；false执行失败
-     */
-    bool runCmd(const QString &cmd, QString &deviceInfo);
-
-    /**
-     * @brief getPKStr:生成授权码
-     * @param dtStr:时间日期字符串格式
-     * @param dtInt:时间日期int格式
-     * @return 授权码
-     */
-    QString getPKStr(const QString &dtStr, const QString &dtInt);
-
-    /**
-     * @brief getPKStr:调试生成授权码
-     * @param dtStr:解析时间日期字符串
-     * @param dtInt:解析日期时间int格式
-     * @param cStr:授权码
-     */
-    void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr);
+    bool getCatDeviceInfo(QString &deviceInfo, const QString &debugFile);
 
 private:
     QMap<QString, QList<QMap<QString, QString> > > m_cmdInfo;

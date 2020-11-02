@@ -49,5 +49,4 @@ const int contextMenuWidth_ = 150;
 #endif
 
 #define GenerateTsItem 0
-//#define TEST_DATA_FROM_FILE
-const QString DEVICEINFO_PATH = "/home/jxm/Desktop/info/my_deviceinfo";
+const QString DEVICEINFO_PATH = "/tmp/device-info";

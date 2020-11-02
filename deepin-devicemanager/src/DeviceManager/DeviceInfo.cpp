@@ -10,7 +10,6 @@
 // 其它头文件
 #include "../commondefine.h"
 #include"DeviceManager.h"
-#include "../deviceinfoparser.h"
 
 DWIDGET_USE_NAMESPACE
 

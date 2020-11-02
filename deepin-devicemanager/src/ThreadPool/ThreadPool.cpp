@@ -9,7 +9,6 @@
 
 // 其它头文件
 #include <unistd.h>
-#include "../deviceinfoparser.h"
 #include "../DeviceManager/DeviceManager.h"
 #include "../LoadInfo/CmdTool.h"
 #include "../LoadInfo/DeviceGenerator.h"
@@ -263,12 +262,12 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
         cmdList.append({ "bootdevice",           "cat /proc/bootdevice/product_name",                 "bootdevice.txt",            ""});
     }
 
-    cmdList.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "cat_cpuinfo.txt",        tr("Loading Monitor Info...")});
-    cmdList.append({ "cat_boardinfo",        "cat /proc/boardinfo",     "cat_boardinfo.txt",      tr("Loading Mouse Info...")});
-    cmdList.append({ "cat_os_release",       "cat /etc/os-release",     "cat_os_release.txt",     tr("Loading Network Adapter Info...")});
-    cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
-    cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "cat_devices.txt",     ""});
-    cmdList.append({ "cat_audio",            "cat /proc/asound/card0/codec#0", "cat_audio.txt",     ""});
+    cmdList.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "/proc/cpuinfo",        tr("Loading Monitor Info...")});
+    cmdList.append({ "cat_boardinfo",        "cat /proc/boardinfo",     "/proc/boardinfo",      tr("Loading Mouse Info...")});
+    cmdList.append({ "cat_os_release",       "cat /etc/os-release",     "/etc/os-release",     tr("Loading Network Adapter Info...")});
+    cmdList.append({ "cat_version",          "cat /proc/version",       "/proc/version",        ""});
+    cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "/proc/bus/input/devices",     ""});
+    cmdList.append({ "cat_audio",            "cat /proc/asound/card0/codec#0", "/proc/asound/card0/codec#0",     ""});
     cmdList.append({ "bt_device",            "bluetoothctl paired-devices",    "bt_device.txt",     ""});      // 蓝牙设备配对信息
 
     if (arch == "PanGuV") {

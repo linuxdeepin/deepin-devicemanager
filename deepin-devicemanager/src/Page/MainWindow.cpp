@@ -22,9 +22,9 @@
 #include "DeviceWidget.h"
 #include "MacroDefinition.h"
 #include "ThreadPool.h"
-#include "deviceinfoparser.h"
 #include "DeviceManager.h"
 #include "commondefine.h"
+#include "ZmqManager.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -41,14 +41,6 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_DeviceWidget(new DeviceWidget(this))
     , mp_ThreadPool(new ThreadPool(this))
 {
-    // 加载授权框
-    PERF_PRINT_BEGIN("SUB_POINT-01", "");
-    if (false == DeviceInfoParser::Instance().getRootPassword()) {
-        exit(-1);
-    }
-    END_SUB_POINT("SUB_POINT-01");
-
-
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
 
@@ -76,11 +68,6 @@ void MainWindow::refresh()
 {
     // 正在刷新,避免重复操作
     if (m_refreshing) {
-        return;
-    }
-
-    // 授权框
-    if (false == DeviceInfoParser::Instance().getRootPassword()) {
         return;
     }
 
@@ -276,6 +263,10 @@ void MainWindow::refreshDataBase()
     // 设置应用程序强制光标为cursor
     DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
+    qint64 begin = QDateTime::currentMSecsSinceEpoch();
+    ZmqManager::getInstance()->updateData();
+    qDebug() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << QDateTime::currentMSecsSinceEpoch() - begin;
+
     // 启动线程加载设备信息
     if (mp_ThreadPool) {
         mp_ThreadPool->loadCmdInfo();
@@ -321,7 +312,7 @@ void MainWindow::loadingFinishSlot(const QString &message)
 
         //
         if (m_IsFirstRefresh) {
-            PERF_PRINT_END_SUB("POINT-01", "SUB_POINT-01");
+            PERF_PRINT_END("POINT-01");
             m_IsFirstRefresh = false;
         }
     }
