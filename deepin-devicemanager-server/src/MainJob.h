@@ -2,6 +2,7 @@
 #define MAINJOB_H
 
 #include <QObject>
+#include <QMutex>
 
 class ThreadPool;
 class RRServer;
@@ -16,8 +17,22 @@ public:
 
     void working();
 
+    /**
+     * @brief executeClientInstruction
+     * @param instructions
+     */
+    void executeClientInstruction(const QString &instructions);
+
 private slots:
+    /**
+     * @brief slotUsbChanged
+     */
     void slotUsbChanged();
+
+    /**
+     * @brief slotExecuteClientInstructions
+     * @param instructions
+     */
     void slotExecuteClientInstructions(const QString &instructions);
 private:
 
@@ -62,9 +77,11 @@ private:
     QString getDriverPath(const QString &driver);
 
 private:
-    ThreadPool   *mp_Pool;
-    RRServer     *mp_ZmqServer;
-    DetectThread *mp_DetectThread;
+    ThreadPool   *mp_Pool;               //<! 生成文件的线程池
+    RRServer     *mp_ZmqServer;          //<! 监听后台的服务端
+    DetectThread *mp_DetectThread;       //<! 检测usb的线程
+    qint64       m_UpdateTime;           //<! 更新时间
+    bool         m_Delay;                //<! 延迟时间
 };
 
 #endif // MAINJOB_H

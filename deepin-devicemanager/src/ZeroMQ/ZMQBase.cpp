@@ -52,6 +52,14 @@ bool ZMQBase::connect(char *_endpoint)
         return false;
 }
 
+bool ZMQBase::disConnect(char *_endpoint)
+{
+    if (0 == zmq_disconnect(mpSocket, _endpoint))
+        return true;
+    else
+        return false;
+}
+
 bool ZMQBase::bind(char *_endpoint)
 {
     if (0 == zmq_bind(mpSocket, _endpoint))

@@ -28,6 +28,9 @@
 #include <QList>
 #include <QVector>
 
+/**
+ * @brief The Cmd struct
+ */
 struct Cmd {
     Cmd()
     {
@@ -36,12 +39,16 @@ struct Cmd {
         canNotReplace = false;
         waitingTime = -1;
     }
-    QString cmd;
-    QString file;
-    bool canNotReplace;
-    int waitingTime;
+
+    QString cmd;         //<! the cmd
+    QString file;        //<! the file
+    bool canNotReplace;  //<! mark can replace or not
+    int waitingTime;     //<! waiting time
 };
 
+/**
+ * @brief The ThreadPool class
+ */
 class ThreadPool : public QThreadPool
 {
     Q_OBJECT
@@ -54,39 +61,16 @@ public:
     void generateDeviceFile();
 
     /**
-     * @brief generateMonitor
+     * @brief generateMonitor : generator xrandr hwinfo --monitor
      */
     void generateMonitor();
-
-    /**
-     * @brief setRunning : Set the working status of the thread pool
-     * @param status : status
-     */
-    void setRunning(bool status);
-
-    /**
-     * @brief running : Get the working status of the thread pool
-     * @return : status
-     */
-    bool running();
-
-    /**
-     * @brief finishedNum
-     * @return
-     */
-    int finishedNum();
 
 private:
     void initCmd();
 
-private slots:
-    void slotFinished();
-
 private:
-    bool              m_Running;             // Mark the working status of the thread pool
     QList<Cmd>        m_ListCmd;             // all cmd
     QList<Cmd>        m_ListCmdMonitor;      // monitor cmd
-    int               m_FinishedNum;
 };
 
 #endif // THREADPOOL_H

@@ -4,6 +4,7 @@
 // Qt库文件
 #include <QDebug>
 #include <QFile>
+#include <QMutexLocker>
 
 // 其它头文件
 #include "DeviceCpu.h"
@@ -27,6 +28,8 @@
 
 DeviceManager    *DeviceManager::sInstance = nullptr;
 int DeviceManager::m_CurrentXlsRow = 1;
+
+QMutex addCmdMutex;
 
 DeviceManager::DeviceManager()
 {
@@ -780,14 +783,20 @@ const QStringList &DeviceManager::getBusId()
 
 void DeviceManager::addCmdInfo(const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
+    QMutexLocker locker(&addCmdMutex);
     // 添加命令信息
     foreach (const QString &key, cmdInfo.keys()) {
-        m_cmdInfo[key].append(cmdInfo[key]);
+        if (m_cmdInfo.find(key) == m_cmdInfo.end()) {
+            m_cmdInfo.insert(key, cmdInfo[key]);
+        } else {
+            m_cmdInfo[key].append(cmdInfo[key]);
+        }
     }
 }
 
 const QList<QMap<QString, QString>> &DeviceManager::cmdInfo(const QString &key)
 {
+    QMutexLocker locker(&addCmdMutex);
     return m_cmdInfo[key];
 }
 
@@ -1121,12 +1130,12 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
         }
     }
 
-    // 设备名称
-    if (m_ListDeviceComputer.size() > 0)
+    // 设备名称 and 操作系统
+    if (m_ListDeviceComputer.size() > 0) {
         m_OveriewMap["Overview"] = m_ListDeviceComputer[0]->getOverviewInfo();
+        m_OveriewMap["OS"] = dynamic_cast<DeviceComputer *>(m_ListDeviceComputer[0])->getOSInfo();
+    }
 
-    // 操作系统
-    m_OveriewMap["OS"] = dynamic_cast<DeviceComputer *>(m_ListDeviceComputer[0])->getOSInfo();
 
     // CPU 概况显示 样式"Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz (四核 / 四逻辑处理器)"
     if (!m_ListDeviceCPU.isEmpty()) {

@@ -1,0 +1,11 @@
+[Unit]
+Description=Deepin Device Manager Daemon
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/deepin-devicemanager-server
+RemainAfterExit=yes
+User=root
+
+[Install]
+WantedBy=multi-user.target

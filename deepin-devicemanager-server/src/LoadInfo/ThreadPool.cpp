@@ -10,7 +10,7 @@
 #define PATH "/tmp/device-info/"
 
 ThreadPool::ThreadPool(QObject *parent)
-    : QThreadPool(parent), m_FinishedNum(0)
+    : QThreadPool(parent)
 {
     initCmd();
 
@@ -20,13 +20,11 @@ ThreadPool::ThreadPool(QObject *parent)
 
 void ThreadPool::generateDeviceFile()
 {
-    m_Running = true;
     QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
     cleaner->setParent(this);
     QList<Cmd>::iterator it = m_ListCmd.begin();
     for (; it != m_ListCmd.end(); ++it) {
         ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-        connect(task, &ThreadPoolTask::finished, this, &ThreadPool::slotFinished);
         cleaner->add(task);
         start(task);
         task->setAutoDelete(true);
@@ -40,35 +38,9 @@ void ThreadPool::generateMonitor()
     QList<Cmd>::iterator it = m_ListCmdMonitor.begin();
     for (; it != m_ListCmdMonitor.end(); ++it) {
         ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-        connect(task, &ThreadPoolTask::finished, this, &ThreadPool::slotFinished);
         cleaner->add(task);
         start(task);
         task->setAutoDelete(true);
-    }
-}
-
-void ThreadPool::setRunning(bool status)
-{
-    m_Running = status;
-}
-
-bool ThreadPool::running()
-{
-    return m_Running;
-}
-
-int ThreadPool::finishedNum()
-{
-    return m_FinishedNum;
-}
-
-void ThreadPool::slotFinished()
-{
-    m_FinishedNum += 1;
-    if (m_FinishedNum == m_ListCmd.size()) {
-        m_FinishedNum = 0;
-        m_Running = false;
-        qDebug() << "ThreadPool::slotFinished()";
     }
 }
 

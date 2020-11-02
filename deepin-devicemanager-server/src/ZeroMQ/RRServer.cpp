@@ -3,14 +3,16 @@
 #include <QDebug>
 #include <QDateTime>
 
+#include "MainJob.h"
+
 RRServer::RRServer(QObject *parent)
     : QThread(parent)
     , mpRep(new ZMQServer)
     , mpContext(nullptr)
     , m_Waiting(false)
     , m_ReturnStr("")
+    , mp_MainJob(dynamic_cast<MainJob *>(parent))
 {
-
 }
 
 RRServer::~RRServer()
@@ -41,8 +43,8 @@ void RRServer::run()
     qint64 begin = 0, end = 0;
     while (1) {
         if (!m_Waiting) {
-            begin = QDateTime::currentMSecsSinceEpoch();
             char *msg = mpRep->recvMsg();
+            begin = QDateTime::currentMSecsSinceEpoch();
             emit instruction(QString::fromLocal8Bit(msg));
             m_Waiting = true;
         } else {
@@ -54,8 +56,20 @@ void RRServer::run()
                 qDebug() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << end - begin;
             }
         }
-        usleep(100);
+//        usleep(100);
     }
+
+
+//    while (true) {
+//        if (!mp_MainJob) {
+//            qDebug() << "**************** 重大问题 mp_MainJob = nullptr *********************************";
+//            break;
+//        }
+//        char *msg = mpRep->recvMsg();
+//        mp_MainJob->executeClientInstruction(QString::fromLocal8Bit(msg));
+//        char ch[] = "1";
+//        mpRep->sendMsg(ch);
+//    }
 }
 
 void RRServer::sendMsg(const QString &info)

@@ -3,6 +3,8 @@
 
 #include <QThread>
 
+class MainJob;
+
 class RRServer : public QThread
 {
     Q_OBJECT
@@ -27,5 +29,6 @@ private:
     void                     *mpContext;
     bool                     m_Waiting;
     QString                  m_ReturnStr;
+    MainJob                  *mp_MainJob;
 };
 #endif // RRSERVER_H

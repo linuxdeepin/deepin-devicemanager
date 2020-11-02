@@ -21,10 +21,9 @@
 #include "WaitingWidget.h"
 #include "DeviceWidget.h"
 #include "MacroDefinition.h"
-#include "ThreadPool.h"
 #include "DeviceManager.h"
 #include "commondefine.h"
-#include "ZmqManager.h"
+#include "LoadInfoThread.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -39,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_MainStackWidget(new DStackedWidget(this))
     , mp_WaitingWidget(new WaitingWidget(this))
     , mp_DeviceWidget(new DeviceWidget(this))
-    , mp_ThreadPool(new ThreadPool(this))
+    , mp_WorkingThread(new LoadInfoThread)
 {
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
@@ -48,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     refreshDataBase();
 
     // 关联信号槽
-    connect(mp_ThreadPool, &ThreadPool::finished, this, &MainWindow::loadingFinishSlot);
+    connect(mp_WorkingThread, &LoadInfoThread::finished, this, &MainWindow::loadingFinishSlot);
     connect(mp_DeviceWidget, &DeviceWidget::itemClicked, this, &MainWindow::slotListItemClicked);
     connect(mp_DeviceWidget, &DeviceWidget::refreshInfo, this, &MainWindow::slotRefreshInfo);
     connect(mp_DeviceWidget, &DeviceWidget::exportInfo, this, &MainWindow::slotExportInfo);
@@ -61,7 +60,7 @@ MainWindow::~MainWindow()
     DELETE_PTR(mp_WaitingWidget);
     DELETE_PTR(mp_DeviceWidget);
     DELETE_PTR(mp_MainStackWidget);
-    DELETE_PTR(mp_ThreadPool);
+//    DELETE_PTR(mp_WorkingThread);
 }
 
 void MainWindow::refresh()
@@ -263,13 +262,8 @@ void MainWindow::refreshDataBase()
     // 设置应用程序强制光标为cursor
     DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-    qint64 begin = QDateTime::currentMSecsSinceEpoch();
-    ZmqManager::getInstance()->updateData();
-    qDebug() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << QDateTime::currentMSecsSinceEpoch() - begin;
-
-    // 启动线程加载设备信息
-    if (mp_ThreadPool) {
-        mp_ThreadPool->loadCmdInfo();
+    if (mp_WorkingThread) {
+        mp_WorkingThread->start();
     }
 }
 

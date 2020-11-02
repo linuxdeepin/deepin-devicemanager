@@ -10,12 +10,18 @@
 #include <QDateTime>
 #include <QThread>
 #include <QProcess>
+#include <QMutex>
+#include <QMutexLocker>
+
+QMutex mutex;
 
 MainJob::MainJob(QObject *parent)
     : QObject(parent)
     , mp_Pool(new ThreadPool)
     , mp_ZmqServer(nullptr)
     , mp_DetectThread(nullptr)
+    , m_UpdateTime(QDateTime::currentMSecsSinceEpoch())
+    , m_Delay(false)
 {
 }
 
@@ -43,6 +49,11 @@ void MainJob::working()
     connect(mp_DetectThread, &DetectThread::usbChanged, this, &MainJob::slotUsbChanged, Qt::ConnectionType::QueuedConnection);
 }
 
+void MainJob::executeClientInstruction(const QString &instructions)
+{
+    handleInstruction("ZMQ#" + instructions);
+}
+
 void MainJob::slotUsbChanged()
 {
     handleInstruction("DETECT");
@@ -55,10 +66,22 @@ void MainJob::slotExecuteClientInstructions(const QString &instructions)
 
 void MainJob::handleInstruction(const QString &instruction)
 {
+    QMutexLocker locker(&mutex);
     if (instruction.startsWith("DETECT")) {
+        // 如果正在刷新，则延迟热插拔触发的自动更新
+        if (m_Delay) {
+            while (true) {
+                if (QDateTime::currentMSecsSinceEpoch() - m_UpdateTime > 2000)
+                    break;
+            }
+            m_Delay = false;
+        }
+
         updateAllDevice();
     } else if (instruction.startsWith("ZMQ")) {
         if (instruction.startsWith("ZMQ#UPDATE")) {
+            m_UpdateTime = QDateTime::currentMSecsSinceEpoch();
+            m_Delay = true;
             updateMonitor();
         } else if (instruction.startsWith("ZMQ#DRIVER")) {
             driverInstruction(instruction);
@@ -87,9 +110,6 @@ void MainJob::updateMonitor()
     mp_Pool->waitForDone(-1);
     mp_ZmqServer->setReturnStr("1");
     PERF_PRINT_END("POINT-01");
-
-    // 停止3秒钟的时间
-//    sleep(3);
 }
 
 void MainJob::nullInstruction()

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(deepin-devicemanager-server LANGUAGES CXX)
+set(APP_BIN_NAME "deepin-devicemanager-server")
+set(SYSTEMD_SERVER "${CMAKE_CURRENT_SOURCE_DIR}/deepin-devicemanager-server.service")
+project(${APP_BIN_NAME})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -40,5 +42,9 @@ find_package(Qt5Core)
 file(GLOB_RECURSE DEVICE_SRC ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 add_executable(${PROJECT_NAME} ${DEVICE_SRC})
 
-target_link_libraries(deepin-devicemanager-server Qt5::Core)
+target_link_libraries(${APP_BIN_NAME} Qt5::Core)
+
+# Install files
+install(TARGETS ${APP_BIN_NAME} DESTINATION bin)
+install(FILES ${SYSTEMD_SERVER} DESTINATION /lib/systemd/system)
 

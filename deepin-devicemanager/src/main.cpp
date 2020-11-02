@@ -33,7 +33,6 @@
 #include "environments.h"
 #include "commondefine.h"
 #include "application.h"
-#include "ZmqManager.h"
 #include "zmq.h"
 #include "zhelpers.h"
 
@@ -42,8 +41,6 @@ DWIDGET_USE_NAMESPACE
 int main(int argc, char *argv[])
 {
     PERF_PRINT_BEGIN("POINT-01", "");
-    // init zeromq
-    bool a = ZmqManager::getInstance()->connectTo("tcp://127.0.0.1:8700");
 
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     Application app(argc, argv);

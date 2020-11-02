@@ -30,7 +30,7 @@
 
 class WaitingWidget;
 class DeviceWidget;
-class ThreadPool;
+class LoadInfoThread;
 
 using namespace Dtk::Widget;
 
@@ -155,7 +155,7 @@ private:
     DStackedWidget        *mp_MainStackWidget;
     WaitingWidget         *mp_WaitingWidget;
     DeviceWidget          *mp_DeviceWidget;
-    ThreadPool            *mp_ThreadPool;
+    LoadInfoThread        *mp_WorkingThread;
     bool                  m_refreshing = false;                  // 判断界面是否正在刷新
     bool                  m_IsFirstRefresh = true;
 };
