@@ -22,7 +22,7 @@ void LoadInfoThread::run()
         order.updateData();
     }
 
-    qDebug() << "**************************************** 001";
+    qDebug() << "**************************************** 005";
 
     m_Running = true;
     if (mp_ReadFilePool) {
@@ -30,7 +30,7 @@ void LoadInfoThread::run()
         mp_ReadFilePool->waitForDone(-1);
     }
 
-    qDebug() << "**************************************** 002";
+    qDebug() << "**************************************** 006";
     // 为了保证上面那个线程池完全结束
     while (true) {
         if (m_FinishedReadFilePool)
@@ -38,7 +38,7 @@ void LoadInfoThread::run()
         usleep(100000);
     }
     m_FinishedReadFilePool = false;
-    qDebug() << "**************************************** 004";
+    qDebug() << "**************************************** 007";
 
     if (mp_GenerateDevicePool) {
         mp_GenerateDevicePool->generateDevice();

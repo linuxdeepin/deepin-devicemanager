@@ -41,16 +41,20 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_DeviceWidget(new DeviceWidget(this))
     , mp_WorkingThread(new LoadInfoThread)
 {
+    qDebug() << " ******************************************* 001";
     // 获取计算机架构信息,x86 arm mips
     QString arch = getArchString();
     mp_WorkingThread->setFramework(arch);
     DeviceFactory::setGeneratorKey(arch);
 
+    qDebug() << " ******************************************* 002";
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
+    qDebug() << " ******************************************* 003";
 
     // 加载设备信息
     refreshDataBase();
+
 
     // 关联信号槽
     connect(mp_WorkingThread, &LoadInfoThread::finished, this, &MainWindow::loadingFinishSlot);
@@ -318,6 +322,7 @@ void MainWindow::refreshDataBase()
     DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
     if (mp_WorkingThread) {
+        qDebug() << " ******************************************* 004";
         mp_WorkingThread->start();
     }
 }
