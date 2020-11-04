@@ -71,6 +71,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
         loadBootDeviceManfid(key, debugFile);
     } else if (key == "bt_device") {
         loadBluetoothPairedDevices(key, debugFile);     // 加载蓝牙设备配对信息
+    } else if (key == "lscpu") {
+        loadLscpuInfo(key, debugFile);
     } else {
         loadCatInfo(key, debugFile);
     }
@@ -533,6 +535,24 @@ void CmdTool::loadDmidecode2Info(const QString &key, const QString &debugfile)
     }
 
     addMapInfo(key, mapInfo);
+}
+
+void CmdTool::loadLscpuInfo(const QString &key, const QString &debugfile)
+{
+    // 通过命令获取设备信息
+    QString deviceInfo;
+    getDeviceInfo(deviceInfo, debugfile);
+
+    QStringList items = deviceInfo.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty()) {
+            continue;
+        }
+
+        QMap<QString, QString> mapInfo;
+        getMapInfoFromCmd(item, mapInfo, key.startsWith("cat_os") ? "=" : ": ");
+        addMapInfo(key, mapInfo);
+    }
 }
 
 void CmdTool::loadCatInfo(const QString &key, const QString &debugfile)
@@ -1126,9 +1146,9 @@ bool CmdTool::getDeviceInfo(QString &deviceInfo, const QString &debugFile)
     // 从文件中获取设备信息
     QFile inputDeviceFile(DEVICEINFO_PATH + "/" + debugFile);
     if (false == inputDeviceFile.open(QIODevice::ReadOnly)) {
-        qDebug() << "**************** " << debugFile;
         return false;
     }
+
     deviceInfo = inputDeviceFile.readAll();
     inputDeviceFile.close();
 

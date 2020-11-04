@@ -25,10 +25,18 @@ signals:
 protected:
     void run() override;
 
+private slots:
+    /**
+     * @brief slotFinishedReadFilePool
+     * @param info
+     */
+    void slotFinishedReadFilePool(const QString &info);
+
 private:
-    ReadFilePool          *mp_ReadFilePool;
-    GenerateDevicePool    *mp_GenerateDevicePool;
-    bool            m_Running;    //<!  标识是否正在运行
+    ReadFilePool          *mp_ReadFilePool;         //<!  生成读文件的线程池
+    GenerateDevicePool    *mp_GenerateDevicePool;   //<!  生成设备线程池
+    bool            m_Running;                      //<!  标识是否正在运行
+    bool            m_FinishedReadFilePool;         //<!  标识生成读文件的线程池是否结束
 };
 
 #endif // LOADINFOTHREAD_H

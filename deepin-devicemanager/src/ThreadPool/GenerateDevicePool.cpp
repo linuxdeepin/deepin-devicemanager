@@ -98,10 +98,6 @@ void GenerateDevicePool::generateDevice()
 
     QList<DeviceType>::iterator it = m_TypeList.begin();
     for (; it != m_TypeList.end(); ++it) {
-        if (*it == DT_Others) {  // 这里是为了确保所有设备执行完毕后，生成其它设备
-            continue;
-        }
-
         GenerateTask *task = new GenerateTask((*it));
         connect(task, &GenerateTask::finished, this, &GenerateDevicePool::slotFinished);
         QThreadPool::globalInstance()->start(task);
@@ -113,10 +109,7 @@ void GenerateDevicePool::generateDevice()
     qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
     while (true) {
         qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
-        if (m_FinishedGenerator == m_TypeList.size() - 1  || curMSecond - beginMSecond > 4000) {
-//            GenerateTask *task = new GenerateTask(DT_Others);
-//            QThreadPool::globalInstance()->start(task);
-//            task->setAutoDelete(true);
+        if (m_FinishedGenerator == m_TypeList.size()  || curMSecond - beginMSecond > 4000) {
             DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
             generator->generatorOthersDevice();
             break;
@@ -142,7 +135,7 @@ void GenerateDevicePool::initType()
     m_TypeList.push_back(DT_Print);
     m_TypeList.push_back(DT_Cdrom);
     m_TypeList.push_back(DT_Power);
-    m_TypeList.push_back(DT_Others);
+//    m_TypeList.push_back(DT_Others);
 }
 
 void GenerateDevicePool::slotFinished(const QStringList &lst)

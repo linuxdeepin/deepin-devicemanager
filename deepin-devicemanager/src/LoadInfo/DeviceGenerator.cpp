@@ -106,6 +106,7 @@ void DeviceGenerator::generatorCpuDevice()
     const QMap<QString, QString> &dmidecode = dmidecode4.size() > 1 ? dmidecode4[1] : QMap<QString, QString>();
 
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
+    qDebug() << " ****************************004 -  " << lstCatCpu.size();
     for (; it != lstCatCpu.end(); ++it) {
         DeviceCpu *device = new DeviceCpu;
         device->setCpuInfo(lscpu, lshw, dmidecode, *it);

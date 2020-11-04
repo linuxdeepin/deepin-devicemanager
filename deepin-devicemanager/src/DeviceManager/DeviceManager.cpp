@@ -30,6 +30,7 @@ DeviceManager    *DeviceManager::sInstance = nullptr;
 int DeviceManager::m_CurrentXlsRow = 1;
 
 QMutex addCmdMutex;
+QMutex getCmdMutex;
 
 DeviceManager::DeviceManager()
 {
@@ -796,7 +797,7 @@ void DeviceManager::addCmdInfo(const QMap<QString, QList<QMap<QString, QString> 
 
 const QList<QMap<QString, QString>> &DeviceManager::cmdInfo(const QString &key)
 {
-    QMutexLocker locker(&addCmdMutex);
+    QMutexLocker locker(&getCmdMutex);
     return m_cmdInfo[key];
 }
 

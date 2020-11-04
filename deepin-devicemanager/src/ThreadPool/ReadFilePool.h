@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QThreadPool>
-#include <QMutex>
 
 class ReadFilePool;
 
@@ -18,6 +17,7 @@ public:
     ~CmdTask();
 protected:
     void run() override;
+
 private:
     QString m_Key;
     QString m_File;
@@ -28,6 +28,7 @@ private:
 
 class ReadFilePool : public QThreadPool
 {
+    Q_OBJECT
 public:
     ReadFilePool();
 
@@ -43,6 +44,9 @@ public:
      */
     void finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo);
 
+signals:
+    void finishedAll(const QString &info);
+
 private:
     /**
      * @brief initCmd : 初始化命令列表
@@ -52,7 +56,7 @@ private:
 private:
     QString                      m_Arch;
     QList<QStringList>           m_CmdList;
-    QMutex m_lock;
+    int                          m_FinishedNum;
 };
 
 #endif // READFILEPOOL_H

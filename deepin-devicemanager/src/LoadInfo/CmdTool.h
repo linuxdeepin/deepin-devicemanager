@@ -136,6 +136,13 @@ private:
     void loadDmidecode2Info(const QString &key, const QString &debugfile);
 
     /**
+     * @brief loadLscpuInfo load lscpu info
+     * @param key
+     * @param debugfile
+     */
+    void loadLscpuInfo(const QString &key, const QString &debugfile);
+
+    /**
      * @brief loadCatInfo:加载cat xxx信息
      * @param key:与cmd对应的关键字
      * @param debugfile:调试文件名

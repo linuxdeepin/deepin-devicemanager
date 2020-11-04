@@ -8,8 +8,9 @@ LoadInfoThread::LoadInfoThread()
     : mp_ReadFilePool(new ReadFilePool)
     , mp_GenerateDevicePool(new GenerateDevicePool)
     , m_Running(false)
+    , m_FinishedReadFilePool(false)
 {
-
+    connect(mp_ReadFilePool, &ReadFilePool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
 }
 
 void LoadInfoThread::run()
@@ -25,6 +26,13 @@ void LoadInfoThread::run()
         mp_ReadFilePool->waitForDone(-1);
     }
 
+    // 为了保证上面那个线程池完全结束
+    while (true) {
+        if (m_FinishedReadFilePool)
+            break;
+    }
+    m_FinishedReadFilePool = false;
+
     if (mp_GenerateDevicePool) {
         mp_GenerateDevicePool->generateDevice();
         mp_GenerateDevicePool->waitForDone(-1);
@@ -32,6 +40,11 @@ void LoadInfoThread::run()
 
     emit finished("finish");
     m_Running = false;
+}
+
+void LoadInfoThread::slotFinishedReadFilePool(const QString &info)
+{
+    m_FinishedReadFilePool = true;
 }
 
 bool LoadInfoThread::isRunning()

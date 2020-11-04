@@ -21,7 +21,6 @@ CmdTask::~CmdTask()
 
 void CmdTask::run()
 {
-//    usleep(100000);
     CmdTool tool;
     tool.loadCmdInfo(m_Key, m_File);
     const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = tool.cmdInfo();
@@ -30,7 +29,7 @@ void CmdTask::run()
 
 ReadFilePool::ReadFilePool()
     : m_Arch("")
-    , m_lock()
+    , m_FinishedNum(0)
 {
     initCmd();
 }
@@ -49,10 +48,12 @@ void ReadFilePool::readAllFile()
 
 void ReadFilePool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
-    m_lock.tryLock();
     DeviceManager::instance()->addCmdInfo(cmdInfo);
-    m_lock.unlock();
-
+    m_FinishedNum++;
+    if (m_FinishedNum == m_CmdList.size()) {
+        emit finishedAll(info);
+        m_FinishedNum = 0;
+    }
 }
 
 void ReadFilePool::initCmd()
