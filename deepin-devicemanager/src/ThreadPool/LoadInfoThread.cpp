@@ -32,7 +32,7 @@ void LoadInfoThread::run()
     while (true) {
         if (m_FinishedReadFilePool)
             break;
-        usleep(100);
+        usleep(100000);
     }
     m_FinishedReadFilePool = false;
 
