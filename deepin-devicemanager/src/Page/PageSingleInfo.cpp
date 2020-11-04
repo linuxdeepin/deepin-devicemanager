@@ -177,9 +177,9 @@ void PageSingleInfo::slotActionEnable()
     if (mp_Content->isCurDeviceEnable()) {
         // 当前设备是可用状态
         EnableDeviceStatus res = mp_Device->setEnable(false);
-        if (res == EDS_Cancle) {
-            return;
-        } else if (res == EDS_Success) {
+
+        // 除禁用成功的情况，其他情况需要提示禁用失败
+        if (res == EDS_Success) {
             mp_Enable->setText(tr("Enable"));
             mp_Content->setDeviceEnable(false);
         } else {
@@ -189,9 +189,9 @@ void PageSingleInfo::slotActionEnable()
     } else {
         // 当前设备是可用状态
         EnableDeviceStatus res = mp_Device->setEnable(true);
-        if (res == EDS_Cancle) {
-            return;
-        } else if (res == EDS_Success) {
+
+        // 除启用成功的情况，其他情况需要提示启用失败
+        if (res == EDS_Success) {
             mp_Enable->setText(tr("Disable"));
             mp_Content->setDeviceEnable(true);
         } else {
