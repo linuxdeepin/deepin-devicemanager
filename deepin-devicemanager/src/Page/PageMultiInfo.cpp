@@ -103,9 +103,9 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
 
     // 禁用/启用设备
     EnableDeviceStatus res = mp_Detail->enableDevice(row, enable);
-    if (res == EDS_Cancle) {
-        return;
-    } else if (res == EDS_Success) {
+
+    // 除设置成功的情况，其他情况需要提示设置失败
+    if (res == EDS_Success) {
         // 设置成功,更新界面
         emit updateUI();
     } else {
