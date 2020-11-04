@@ -1,5 +1,7 @@
 #include "LoadInfoThread.h"
 
+#include <QDebug>
+
 #include "ReadFilePool.h"
 #include "GenerateDevicePool.h"
 #include "ZmqOrder.h"
@@ -30,6 +32,7 @@ void LoadInfoThread::run()
     while (true) {
         if (m_FinishedReadFilePool)
             break;
+        usleep(100);
     }
     m_FinishedReadFilePool = false;
 

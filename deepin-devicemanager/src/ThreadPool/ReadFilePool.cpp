@@ -1,6 +1,7 @@
 #include "ReadFilePool.h"
 
 #include <QObjectCleanupHandler>
+#include <QDebug>
 
 #include "CmdTool.h"
 #include "DeviceManager.h"

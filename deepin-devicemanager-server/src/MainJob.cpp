@@ -23,6 +23,8 @@ MainJob::MainJob(QObject *parent)
     , m_UpdateTime(QDateTime::currentMSecsSinceEpoch())
     , m_Delay(false)
 {
+    // 守护进程启动的时候加载所有信息
+    updateAllDevice();
 }
 
 MainJob::~MainJob()
