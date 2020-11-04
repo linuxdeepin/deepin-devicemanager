@@ -81,6 +81,15 @@ public:
      */
     void windowMaximizing();
 
+    /**@brief:获取计算机架构字符串*/
+    QString getArchString();
+
+    /**
+     * @brief loadGeneratorKey:获取计算机dbus信息，区分机器类型
+     * @return panguV，klu
+     */
+    QString loadGeneratorKey();
+
 protected:
     /**
      * @brief: 事件的重写

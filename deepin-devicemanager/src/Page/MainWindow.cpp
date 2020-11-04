@@ -24,6 +24,7 @@
 #include "DeviceManager.h"
 #include "commondefine.h"
 #include "LoadInfoThread.h"
+#include "DeviceFactory.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -40,6 +41,11 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_DeviceWidget(new DeviceWidget(this))
     , mp_WorkingThread(new LoadInfoThread)
 {
+    // 获取计算机架构信息,x86 arm mips
+    QString arch = getArchString();
+    mp_WorkingThread->setFramework(arch);
+    DeviceFactory::setGeneratorKey(arch);
+
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
 
@@ -216,6 +222,55 @@ void MainWindow::windowMaximizing()
         // 窗口最大化
         showMaximized();
     }
+}
+
+QString MainWindow::getArchString()
+{
+    QString struction;
+
+    // 架构信息文件
+    QFile inputDeviceFile(DEVICEINFO_PATH + "/" + "uname_m.txt");
+    bool res = inputDeviceFile.open(QIODevice::ReadOnly);
+
+    // 读取架构信息
+    if (res) {
+        struction = inputDeviceFile.readAll().trimmed();
+    } else {
+        struction = "x86_64";
+    }
+    inputDeviceFile.close();
+
+    // 华为机器需要区分KLU与PanGuV
+    if (struction == "aarch64") {
+        QString hw = loadGeneratorKey();
+        if (!hw.isEmpty()) {
+            struction = hw;
+        }
+    }
+
+    return struction;
+}
+
+QString MainWindow::loadGeneratorKey()
+{
+    // 获取设备信息
+    QString key = "";
+    QString deviceInfo;
+
+    // gdbus introspect -y -d com.deepin.system.SystemInfo -o /com/deepin/system/SystemInfo -p
+    QFile inputDeviceFile(DEVICEINFO_PATH + "/gdbus.txt");
+    if (false == inputDeviceFile.open(QIODevice::ReadOnly)) {
+        return key;
+    }
+    deviceInfo = inputDeviceFile.readAll();
+    inputDeviceFile.close();
+
+    if (deviceInfo.contains("klu")) { // klu 华为确认将判断条件改为L410 KLVU-WDU0
+        key = "KLU";
+    } else if (deviceInfo.contains("panguV")) { // panguv
+        key = "PanGuV";
+    }
+    return key;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)

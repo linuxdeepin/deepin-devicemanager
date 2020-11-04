@@ -56,6 +56,12 @@ void ReadFilePool::finishedCmd(const QString &info, const QMap<QString, QList<QM
     }
 }
 
+void ReadFilePool::setFramework(const QString &arch)
+{
+    // 设置架构
+    m_Arch = arch;
+}
+
 void ReadFilePool::initCmd()
 {
     m_CmdList.append({ "lshw",                 "lshw.txt",               tr("Loading Audio Device Info...") });

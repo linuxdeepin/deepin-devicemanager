@@ -51,3 +51,10 @@ bool LoadInfoThread::isRunning()
 {
     return m_Running;
 }
+
+void LoadInfoThread::setFramework(const QString &arch)
+{
+    // 设置架构
+    mp_ReadFilePool->setFramework(arch);
+}
+

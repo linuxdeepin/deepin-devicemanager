@@ -43,6 +43,11 @@ public:
      * @param cmdInfo
      */
     void finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo);
+    /**
+     * @brief setFramework：设置架构
+     * @param arch:架构
+     */
+    void setFramework(const QString &arch);
 
 signals:
     void finishedAll(const QString &info);

@@ -47,10 +47,19 @@ void ThreadPool::generateMonitor()
 void ThreadPool::initCmd()
 {
     // According to Huawei's requirements , Modify the way of judging klu and panguv
-    QProcess process;
-    process.start("gdbus introspect -y -d com.deepin.system.SystemInfo -o /com/deepin/system/SystemInfo -p");
-    process.waitForFinished(-1);
-    QString info = process.readAllStandardOutput();
+    // 获取华为KLU、PanguV信息
+    Cmd cmdDbus;
+    cmdDbus.cmd = QString("%1 %2%3").arg("gdbus introspect -y -d com.deepin.system.SystemInfo -o /com/deepin/system/SystemInfo -p >").arg(PATH).arg("gdbus.txt");
+    cmdDbus.file = "gdbus.txt";
+    cmdDbus.canNotReplace = false;
+    m_ListCmd.append(cmdDbus);
+
+    // 获取架构信息
+    Cmd cmdUname;
+    cmdUname.cmd = QString("%1 %2%3").arg("uname -m > ").arg(PATH).arg("uname_m.txt");
+    cmdUname.file = "uname_m.txt";
+    cmdUname.canNotReplace = false;
+    m_ListCmd.append(cmdUname);
 
 
     Cmd cmdLshw;

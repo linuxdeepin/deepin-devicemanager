@@ -19,6 +19,12 @@ public:
      */
     bool isRunning();
 
+    /**
+     * @brief setFramework：设置架构
+     * @param arch:架构
+     */
+    void setFramework(const QString &arch);
+
 signals:
     void finished(const QString &message);
 
