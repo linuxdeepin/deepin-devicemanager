@@ -89,8 +89,6 @@ void DetailTreeView::setColumnAndRow(int row, int column)
     }
 }
 
-
-
 void DetailTreeView::setItem(int row, int column, QTableWidgetItem *item)
 {
     // 设置表格高度
@@ -297,10 +295,11 @@ void DetailTreeView::setCurDeviceState(bool state)
         // 设置表格高度为单行高度
         this->setTableHeight(ROW_HEIGHT);
     } else {
+        // 启用状态
         this->setTableHeight(ROW_HEIGHT);
 
-        // 展开状态
-        if (m_IsExpand) {
+        // 展开状态，且有更多信息
+        if (m_IsExpand && hasExpendInfo()) {
             for (int i = 1; i < this->rowCount(); ++i) {
                 this->showRow(i);
             }
@@ -321,10 +320,11 @@ void DetailTreeView::setCurDeviceState(bool state)
         // 没有更多信息
         if (!hasExpendInfo()) {
 
-            // 显示所有信息
+            // 显示所有信息,但不显示最后一行
             for (int i = 1; i < this->rowCount() - 1; ++i) {
                 this->showRow(i);
             }
+            this->hideRow(this->rowCount() - 1);
         }
     }
 }

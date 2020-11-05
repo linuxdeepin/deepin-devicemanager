@@ -172,7 +172,7 @@ void ThreadPool::initCmd()
     m_ListCmd.append(cmdHwinfoMouse);
 
     Cmd cmdUpower;
-    cmdUpower.cmd = QString("%1 %2%3").arg("hwinfo --dump > ").arg(PATH).arg("upower_dump.txt");
+    cmdUpower.cmd = QString("%1 %2%3").arg("upower --dump > ").arg(PATH).arg("upower_dump.txt");
     cmdUpower.file = "upower_dump.txt";
     cmdUpower.canNotReplace = true;
     m_ListCmd.append(cmdUpower);
