@@ -17,14 +17,10 @@ LoadInfoThread::LoadInfoThread()
 
 void LoadInfoThread::run()
 {
-    qDebug() << "**************************************** 0050";
-
     ZmqOrder order;
     if (order.connect()) {
         order.updateData();
     }
-
-    qDebug() << "**************************************** 0051";
 
     m_Running = true;
     if (mp_ReadFilePool) {
@@ -32,15 +28,13 @@ void LoadInfoThread::run()
         mp_ReadFilePool->waitForDone(-1);
     }
 
-    qDebug() << "**************************************** 006";
     // 为了保证上面那个线程池完全结束
     while (true) {
         if (m_FinishedReadFilePool)
             break;
-        usleep(100000);
+        usleep(100);
     }
     m_FinishedReadFilePool = false;
-    qDebug() << "**************************************** 007";
 
     if (mp_GenerateDevicePool) {
         mp_GenerateDevicePool->generateDevice();
@@ -53,8 +47,8 @@ void LoadInfoThread::run()
 
 void LoadInfoThread::slotFinishedReadFilePool(const QString &info)
 {
+//    emit finished(info);
     m_FinishedReadFilePool = true;
-    qDebug() << "**************************************** 003";
 }
 
 bool LoadInfoThread::isRunning()
