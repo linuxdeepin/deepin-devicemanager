@@ -43,13 +43,17 @@ void RRServer::run()
     qint64 begin = 0, end = 0;
     while (1) {
         if (!m_Waiting) {
+            m_Waiting = true;
+            qDebug() << " ************** begin 001";
             char *msg = mpRep->recvMsg();
+            qDebug() << " ************** begin 002";
             begin = QDateTime::currentMSecsSinceEpoch();
             emit instruction(QString::fromLocal8Bit(msg));
-            m_Waiting = true;
         } else {
             if (!m_ReturnStr.isEmpty()) {
+                qDebug() << " ************** begin 003";
                 sendMsg(m_ReturnStr);
+                qDebug() << " ************** begin 004";
                 m_ReturnStr = "";
                 m_Waiting = false;
                 end = QDateTime::currentMSecsSinceEpoch();

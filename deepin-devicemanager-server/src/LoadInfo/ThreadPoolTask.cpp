@@ -51,7 +51,6 @@ void ThreadPoolTask::runCmd(const QString &cmd)
     options << "-c" << cmd;
     process.start("/bin/bash", options);
     process.waitForFinished(m_Waiting);
-    qDebug() << " **************** " << m_Waiting;
 }
 
 void ThreadPoolTask::loadSmartctlFile(QFile &file)
