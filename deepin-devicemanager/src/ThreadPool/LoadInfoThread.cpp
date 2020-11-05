@@ -17,12 +17,14 @@ LoadInfoThread::LoadInfoThread()
 
 void LoadInfoThread::run()
 {
+    qDebug() << "**************************************** 0050";
+
     ZmqOrder order;
     if (order.connect()) {
         order.updateData();
     }
 
-    qDebug() << "**************************************** 005";
+    qDebug() << "**************************************** 0051";
 
     m_Running = true;
     if (mp_ReadFilePool) {
