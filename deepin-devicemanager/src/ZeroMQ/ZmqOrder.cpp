@@ -31,12 +31,19 @@ bool ZmqOrder::connectTo(char *end)
 
 void ZmqOrder::updateData()
 {
+    qDebug() << " updateDate ************************* 001";
     char ch[128] = "UPDATE";
     mp_Req->sendMsg(ch);
+
+    qDebug() << " updateDate ************************* 002";
     mp_Req->recvMsg();
+
+    qDebug() << " updateDate ************************* 003";
     char end[64];
     sprintf(end, "%s", m_EndPoint.toStdString().c_str());
     mp_Req->disConnect(end);
+
+    qDebug() << " updateDate ************************* 004";
 }
 
 void ZmqOrder::run()
