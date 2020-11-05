@@ -25,6 +25,20 @@ public:
      */
     void updateData();
 
+    /**
+     * @brief execDriverOrder
+     * @param cmd
+     * @return
+     */
+    bool execDriverOrder(const QString &cmd);
+
+    /**
+     * @brief execIfconfigOrder
+     * @param cmd
+     * @return
+     */
+    bool execIfconfigOrder(const QString &cmd);
+
 protected:
     void run() override;
 

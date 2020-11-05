@@ -137,6 +137,7 @@ void MainJob::driverInstruction(const QString &instruction)
         mp_ZmqServer->setReturnStr("0");
     } else {
         QString output = process.readAllStandardOutput();
+        qDebug() << output;
         if (output == "") {
             mp_ZmqServer->setReturnStr("2");
         } else {
@@ -163,6 +164,7 @@ void MainJob::ifconfigInstruction(const QString &instruction)
         mp_ZmqServer->setReturnStr("0");
     } else {
         QString output = process.readAllStandardOutput();
+        qDebug() << output;
         if (output == "") {
             mp_ZmqServer->setReturnStr("2");
         } else {

@@ -114,33 +114,11 @@ protected:
 private:
 
     /**
-     * @brief getPKStr:获取授权码
-     * @param dtStr:年月日时分秒格式时间
-     * @param dtInt:秒数时间
-     * @return 授权码
-     */
-    QString getPKStr(const QString &dtStr, const QString &dtInt);
-
-    /**
-     * @brief getPKStr:解析授权码
-     * @param dtStr:年月日时分秒格式时间
-     * @param dtInt:秒数时间
-     * @param cStr:授权码
-     */
-    void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr);
-
-    /**
      * @brief getDriverPath:获取驱动路径
      * @param driver:驱动名称
      * @return 驱动路径
      */
     QString getDriverPath(const QString &driver);
-
-    /**
-     * @brief getPasswd:获取密码
-     * @return 密码
-     */
-    bool getPasswd();
 
 
 private:

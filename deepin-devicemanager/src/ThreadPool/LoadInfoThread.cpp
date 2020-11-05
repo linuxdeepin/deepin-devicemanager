@@ -47,7 +47,6 @@ void LoadInfoThread::run()
 
 void LoadInfoThread::slotFinishedReadFilePool(const QString &info)
 {
-//    emit finished(info);
     m_FinishedReadFilePool = true;
 }
 
