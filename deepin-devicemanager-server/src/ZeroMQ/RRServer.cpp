@@ -50,6 +50,7 @@ void RRServer::run()
             begin = QDateTime::currentMSecsSinceEpoch();
             emit instruction(QString::fromLocal8Bit(msg));
         } else {
+            qDebug() << " ************** begin 000  " << m_ReturnStr;
             if (!m_ReturnStr.isEmpty()) {
                 qDebug() << " ************** begin 003";
                 sendMsg(m_ReturnStr);
@@ -60,7 +61,7 @@ void RRServer::run()
                 qDebug() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << end - begin;
             }
         }
-//        usleep(100);
+        usleep(100);
     }
 
 
