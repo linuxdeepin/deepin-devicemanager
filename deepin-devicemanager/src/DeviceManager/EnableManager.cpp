@@ -163,17 +163,21 @@ EnableDeviceStatus EnableManager::enableNetworkByIfconfig(const QString &logical
     } else {
         cmd = QString("ifconfig %1 down").arg(logicalName);
     }
-
+    qDebug() << cmd;
     // 连接到后台
     ZmqOrder order;
     if (!order.connect()) {
+        qDebug() << "!order.connect()";
+
         return  EDS_Faild;
     }
 
     // 执行命令
     if (order.execIfconfigOrder(cmd)) {
+        qDebug() << "order.execIfconfigOrder(cmd)" << "EDS_Success";
         return EDS_Success;
     } else {
+        qDebug() << "order.execIfconfigOrder(cmd)" << "EDS_Faild";
         return EDS_Faild;
     }
 }

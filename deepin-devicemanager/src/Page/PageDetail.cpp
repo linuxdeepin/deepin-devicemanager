@@ -230,12 +230,15 @@ void PageDetail::showInfoOfNum(int index)
 EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
 {
     if (m_ListTextBrowser.size() <= row) {
+        qDebug() << "m_ListTextBrowser.size() <= row";
+        qDebug() << m_ListTextBrowser.size() << row;
         return EDS_Cancle;
     }
 
     // 设置 TextBrowser 可用
     TextBrowser *browser = m_ListTextBrowser.at(row);
     if (!browser) {
+        qDebug() << "!browser";
         return EDS_Cancle;
     }
     return browser->setDeviceEnabled(enable);

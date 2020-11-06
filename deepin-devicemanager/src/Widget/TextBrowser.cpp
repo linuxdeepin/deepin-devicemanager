@@ -94,6 +94,7 @@ void TextBrowser::updateInfo()
 EnableDeviceStatus TextBrowser::setDeviceEnabled(bool enable)
 {
     if (!mp_Info) {
+        qDebug() << "!mp_Info";
         return EDS_Cancle;
     }
 
