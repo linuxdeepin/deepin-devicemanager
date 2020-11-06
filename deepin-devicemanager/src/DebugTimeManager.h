@@ -25,6 +25,20 @@
 #include <QMap>
 #include <QString>
 
+#include "config.h"
+
+#ifdef PERF_ON
+#define PERF_PRINT_BEGIN(point, desc) DebugTimeManager::getInstance()->beginPointLinux(point, desc)
+#define PERF_PRINT_END(point) DebugTimeManager::getInstance()->endPointLinux(point)
+#define END_SUB_POINT(point) DebugTimeManager::getInstance()->endSubPoint(point)
+#define PERF_PRINT_END_SUB(point,sub) DebugTimeManager::getInstance()->endPointLinux(point,sub)
+#else
+#define PERF_PRINT_BEGIN(point,desc)
+#define PERF_PRINT_END(point)
+#define END_SUB_POINT(point)
+#define PERF_PRINT_END_SUB(point,sub)
+#endif
+
 /**
  * @brief The PointInfo struct
  */

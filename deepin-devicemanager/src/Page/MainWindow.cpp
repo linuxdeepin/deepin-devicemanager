@@ -22,6 +22,7 @@
 #include "DeviceWidget.h"
 #include "MacroDefinition.h"
 #include "DeviceManager.h"
+#include "DebugTimeManager.h"
 #include "commondefine.h"
 #include "LoadInfoThread.h"
 #include "DeviceFactory.h"

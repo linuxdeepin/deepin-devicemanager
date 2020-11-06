@@ -31,7 +31,7 @@
 #include "DTitlebar"
 #include "DApplicationSettings"
 #include "environments.h"
-#include "commondefine.h"
+#include "DebugTimeManager.h"
 #include "application.h"
 #include "zmq.h"
 #include "zhelpers.h"
