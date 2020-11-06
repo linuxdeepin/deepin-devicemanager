@@ -98,17 +98,15 @@ void PageMultiInfo::slotExportInfo()
 void PageMultiInfo::slotEnableDevice(int row, bool enable)
 {
     if (!mp_Detail) {
-        qDebug() << "!mp_Detail";
         return;
     }
-    qDebug() << mp_Label->text() << row << enable;
+
     // 禁用/启用设备
     EnableDeviceStatus res = mp_Detail->enableDevice(row, enable);
-    qDebug() << res;
+
     // 除设置成功的情况，其他情况需要提示设置失败
     if (res == EDS_Success) {
         // 设置成功,更新界面
-        qDebug() << "设置成功";
         emit updateUI();
     } else {
         // 设置失败
@@ -120,8 +118,6 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
             // 无法禁用设备
             con = tr("Failed to disable the device");
         }
-
-        qDebug() << "设置失败";
         DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);
     }
 }

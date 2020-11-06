@@ -167,15 +167,12 @@ void TableWidget::slotActionExport()
 void TableWidget::slotActionEnable()
 {
     if (!mp_Table) {
-        qDebug() << "!mp_Table";
         return;
     }
 
     if (mp_Enable->text() == tr("Enable")) {
-        qDebug() << "mp_Enable->text() ==Enable";
         emit enableDevice(mp_Table->currentRow(), true);
     } else {
-        qDebug() << "mp_Enable->text() ==UnEnable";
         emit enableDevice(mp_Table->currentRow(), false);
     }
 }
