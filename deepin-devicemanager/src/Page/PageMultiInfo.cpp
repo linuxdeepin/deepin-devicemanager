@@ -98,6 +98,7 @@ void PageMultiInfo::slotExportInfo()
 void PageMultiInfo::slotEnableDevice(int row, bool enable)
 {
     if (!mp_Detail) {
+        qDebug() << "!mp_Detail";
         return;
     }
     qDebug() << mp_Label->text() << row << enable;
