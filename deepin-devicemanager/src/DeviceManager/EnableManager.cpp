@@ -156,7 +156,7 @@ EnableDeviceStatus EnableManager::enablePrinter(const QString &name, bool enable
 
 EnableDeviceStatus EnableManager::enableNetworkByIfconfig(const QString &logicalName, bool enable)
 {
-    qDebug() << "enableNetworkByIfconfig **************** 001";
+    qInfo() << "enableNetworkByIfconfig **************** 001";
     // 生成命令
     QString cmd;
     if (enable) {
@@ -164,7 +164,7 @@ EnableDeviceStatus EnableManager::enableNetworkByIfconfig(const QString &logical
     } else {
         cmd = QString("ifconfig %1 down").arg(logicalName);
     }
-    qDebug() << "enableNetworkByIfconfig **************** 002";
+    qInfo() << "enableNetworkByIfconfig **************** 002";
 
     // 连接到后台
     ZmqOrder order;
@@ -172,13 +172,13 @@ EnableDeviceStatus EnableManager::enableNetworkByIfconfig(const QString &logical
         return  EDS_Faild;
     }
 
-    qDebug() << "enableNetworkByIfconfig **************** 003";
+    qInfo() << "enableNetworkByIfconfig **************** 003";
     // 执行命令
     if (order.execIfconfigOrder(cmd)) {
-        qDebug() << "enableNetworkByIfconfig **************** 004";
+        qInfo() << "enableNetworkByIfconfig **************** 004";
         return EDS_Success;
     } else {
-        qDebug() << "enableNetworkByIfconfig **************** 004";
+        qInfo() << "enableNetworkByIfconfig **************** 004";
         return EDS_Faild;
     }
 

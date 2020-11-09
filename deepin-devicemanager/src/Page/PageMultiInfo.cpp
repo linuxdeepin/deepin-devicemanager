@@ -55,10 +55,10 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
             deviceList.append(info->getTableData());
     }
 
-    qDebug() << "PageMultiInfo::updateInfo ************************* 001";
+    qInfo() << "PageMultiInfo::updateInfo ************************* 001";
     // 更新表格
     mp_Table->updateTable(deviceList);
-    qDebug() << "PageMultiInfo::updateInfo ************************* 002";
+    qInfo() << "PageMultiInfo::updateInfo ************************* 002";
     // 更新详细信息
     mp_Detail->showDeviceInfo(lst);
 }
@@ -98,23 +98,23 @@ void PageMultiInfo::slotExportInfo()
 
 void PageMultiInfo::slotEnableDevice(int row, bool enable)
 {
-    qDebug() << "PageMultiInfo::slotEnableDevice ********************* 001";
+    qInfo() << "PageMultiInfo::slotEnableDevice ********************* 001";
     if (!mp_Detail) {
         return;
     }
-    qDebug() << "PageMultiInfo::slotEnableDevice ********************* 002";
+    qInfo() << "PageMultiInfo::slotEnableDevice ********************* 002";
     // 禁用/启用设备
     EnableDeviceStatus res = mp_Detail->enableDevice(row, enable);
 
-    qDebug() << "PageMultiInfo::slotEnableDevice ********************* 003";
+    qInfo() << "PageMultiInfo::slotEnableDevice ********************* 003";
     // 除设置成功的情况，其他情况需要提示设置失败
     if (res == EDS_Success) {
 
-        qDebug() << "PageMultiInfo::slotEnableDevice ********************* 004";
+        qInfo() << "PageMultiInfo::slotEnableDevice ********************* 004";
         // 设置成功,更新界面
         emit updateUI();
     } else {
-        qDebug() << "PageMultiInfo::slotEnableDevice ********************* 005";
+        qInfo() << "PageMultiInfo::slotEnableDevice ********************* 005";
         // 设置失败
         QString con;
         if (enable) {

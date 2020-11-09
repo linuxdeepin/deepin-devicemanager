@@ -75,7 +75,7 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseI
 
     // 设置页面Label以及显示设备信息
     if (mp_PageInfo) {
-        qDebug() << "PageInfoWidget::updateTable ****************** 002";
+        qInfo() << "PageInfoWidget::updateTable ****************** 002";
         mp_PageInfo->setLabel(itemStr);
         mp_PageInfo->updateInfo(lst);
     }

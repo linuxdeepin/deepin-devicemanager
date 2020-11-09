@@ -53,7 +53,7 @@ void RRServer::run()
                 m_ReturnStr = "";
                 m_Waiting = false;
                 end = QDateTime::currentMSecsSinceEpoch();
-                qDebug() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << end - begin;
+                qInfo() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << end - begin;
             }
         }
         usleep(100);
@@ -62,7 +62,7 @@ void RRServer::run()
 
 //    while (true) {
 //        if (!mp_MainJob) {
-//            qDebug() << "**************** 重大问题 mp_MainJob = nullptr *********************************";
+//            qInfo() << "**************** 重大问题 mp_MainJob = nullptr *********************************";
 //            break;
 //        }
 //        char *msg = mpRep->recvMsg();

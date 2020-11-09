@@ -41,7 +41,7 @@ void MainJob::working()
     mp_ZmqServer = new RRServer(this);
     char ch[] = "tcp://127.0.0.1:8700";
     bool suc = mp_ZmqServer->initTo(ch);
-    qDebug() << "Bind to tcp://127.0.0.1:8700 ************ " << suc;
+    qInfo() << "Bind to tcp://127.0.0.1:8700 ************ " << suc;
     mp_ZmqServer->start();
     connect(mp_ZmqServer, &RRServer::instruction, this, &MainJob::slotExecuteClientInstructions);
 
@@ -137,7 +137,7 @@ void MainJob::driverInstruction(const QString &instruction)
         mp_ZmqServer->setReturnStr("0");
     } else {
         QString output = process.readAllStandardOutput();
-        qDebug() << output;
+        qInfo() << output;
         if (output == "") {
             mp_ZmqServer->setReturnStr("2");
         } else {
@@ -164,7 +164,7 @@ void MainJob::ifconfigInstruction(const QString &instruction)
         mp_ZmqServer->setReturnStr("0");
     } else {
         QString output = process.readAllStandardOutput();
-        qDebug() << output;
+        qInfo() << output;
         if (output == "") {
             mp_ZmqServer->setReturnStr("2");
         } else {

@@ -96,7 +96,7 @@ EnableDeviceStatus TextBrowser::setDeviceEnabled(bool enable)
     if (!mp_Info) {
         return EDS_Cancle;
     }
-    qDebug() << "TextBrowser::setDeviceEnabled ******************* 001";
+    qInfo() << "TextBrowser::setDeviceEnabled ******************* 001";
     return mp_Info->setEnable(enable);
 }
 

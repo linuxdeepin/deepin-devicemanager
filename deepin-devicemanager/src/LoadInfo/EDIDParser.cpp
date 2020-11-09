@@ -177,7 +177,7 @@ QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
     while (bContinue) {
         nYushu = nDec % 2;
         nShang = nDec / 2;
-        strBin = QString::number(nYushu) + strBin; //qDebug()<<strBin;
+        strBin = QString::number(nYushu) + strBin; //qInfo()<<strBin;
         strTemp = strBin;
         //strBin.Format("%s%s", buf, strTemp);
         nDec = nShang;

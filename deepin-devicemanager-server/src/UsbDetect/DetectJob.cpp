@@ -54,7 +54,7 @@ void DetectJob::working()
         if (midLen != -1) {
             qint64 curTime = QDateTime::currentMSecsSinceEpoch();
             if (curTime - m_LaskTime > (m_Elapse / 1000 + 2000)) {
-                qDebug() << Buf.mid(0, midLen);
+                qInfo() << Buf.mid(0, midLen);
                 emit usbChanged(/*Buf.mid(0, midLen)*/);
                 m_LaskTime = curTime;
             }

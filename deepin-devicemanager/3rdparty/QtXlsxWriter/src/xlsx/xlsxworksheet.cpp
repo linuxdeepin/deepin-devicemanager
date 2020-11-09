@@ -1955,7 +1955,7 @@ void WorksheetPrivate::loadXmlSheetData(QXmlStreamReader &reader)
                     format = workbook->styles()->xfFormat(idx);
                     ////Empty format exists in styles xf table of real .xlsx files, see issue #65.
                     //if (!format.isValid())
-                    //    qDebug()<<QStringLiteral("<c s=\"%1\">Invalid style index: ").arg(idx)<<idx;
+                    //    qInfo()<<QStringLiteral("<c s=\"%1\">Invalid style index: ").arg(idx)<<idx;
                 }
 
                 Cell::CellType cellType = Cell::NumberType;

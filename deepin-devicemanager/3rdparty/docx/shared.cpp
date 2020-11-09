@@ -95,12 +95,12 @@ QByteArray byteHash(const QByteArray &bytes)
 InvalidSpanError::InvalidSpanError(const QString &errorStr)
     : m_error(errorStr)
 {
-    qDebug() << m_error;
+    qInfo() << m_error;
 }
 
 void InvalidSpanError::raise() const
 {
-    qDebug() << m_error;
+    qInfo() << m_error;
     throw *this;
 }
 

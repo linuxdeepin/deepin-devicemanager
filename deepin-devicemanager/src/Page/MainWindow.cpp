@@ -339,7 +339,7 @@ void MainWindow::loadingFinishSlot(const QString &message)
     if (message == "finish") {
         c = QDateTime::currentDateTime().toMSecsSinceEpoch();
         begin = true;
-        qDebug() << "************************&&*************************" << (c - b) ;
+        qInfo() << "************************&&*************************" << (c - b) ;
 
         // 一定要有否则指针一直显示圆圈与setOverrideCursor成对使用
         DApplication::restoreOverrideCursor();
@@ -371,14 +371,14 @@ void MainWindow::loadingFinishSlot(const QString &message)
 
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
-    qDebug() << "MainWindow::slotListItemClicked ****************** 001";
+    qInfo() << "MainWindow::slotListItemClicked ****************** 001";
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
     if (ret) {
-        qDebug() << "MainWindow::slotListItemClicked ****************** 002";
+        qInfo() << "MainWindow::slotListItemClicked ****************** 002";
         mp_DeviceWidget->updateDevice(itemStr, lst);
     } else {
-        qDebug() << "MainWindow::slotListItemClicked ****************** 003";
+        qInfo() << "MainWindow::slotListItemClicked ****************** 003";
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
         mp_DeviceWidget->updateOverview(itemStr, overviewMap);
     }

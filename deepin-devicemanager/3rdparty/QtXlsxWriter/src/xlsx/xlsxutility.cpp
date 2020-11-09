@@ -258,7 +258,7 @@ QString convertSharedFormula(const QString &rootFormula, const CellReference &ro
     QStringList result;
     typedef QPair<QString, int> PairType;
     foreach (PairType p, segments) {
-        //qDebug()<<p.first<<p.second;
+        //qInfo()<<p.first<<p.second;
         if (p.second != -1 && p.second != 3) {
             CellReference oldRef(p.first);
             int row = p.second & 0x02 ? oldRef.row() : oldRef.row()-rootCell.row()+cell.row();

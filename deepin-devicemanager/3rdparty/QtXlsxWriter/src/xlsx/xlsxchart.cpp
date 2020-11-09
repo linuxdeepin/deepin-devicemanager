@@ -268,7 +268,7 @@ bool ChartPrivate::loadXmlXxxChart(QXmlStreamReader &reader)
     else if (name == QLatin1String("areaChart")) chartType = Chart::CT_Area;
     else if (name == QLatin1String("area3DChart")) chartType = Chart::CT_Area3D;
     else if (name == QLatin1String("doughnutChart")) chartType = Chart::CT_Doughnut;
-    else qDebug()<<"Cann't load chart: "<<name;
+    else qInfo()<<"Cann't load chart: "<<name;
 
     while (!reader.atEnd()) {
         reader.readNextStartElement();
