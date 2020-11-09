@@ -146,9 +146,12 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
     baseInfoMap = baseInfoMap + otherInfoMap;
     QList<QPair<QString, QString>>::iterator it = baseInfoMap.begin();
     for (; it != baseInfoMap.end(); ++it) {
-        pair.second += "AAAAAAAA\n";//(*it).first;  // debug info
+        QString first = (*it).first;
+        QString second = (*it).second;
+        // 防止字符串本的 : 带来影响
+        pair.second += first.replace(":", " ");
         pair.second += ":";
-        pair.second += "BBBBBBBB";//(*it).second;
+        pair.second += second.replace(":", " ");
         pair.second += "\n";
     }
     pair.second.replace(QRegExp("\n$"), "");

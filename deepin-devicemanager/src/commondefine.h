@@ -37,4 +37,3 @@ const int contextMenuWidth_ = 150;
 #define GenerateTsItem 0
 const QString DEVICEINFO_PATH = "/tmp/device-info";
 //const QString DEVICEINFO_PATH = "/home/liujun/Work/Job/GetHardwareInfo/deviceInfo/Bug/device-info";
-

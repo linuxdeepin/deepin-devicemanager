@@ -391,7 +391,7 @@ void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
     }
 
     // 添加表头信息
-    for (int col = 0; col < m_TableHeader.size(); ++col)  {
+    for (int col = 0; col < m_TableHeader.size() - 1; ++col)  {
         tab->addColumn();
         auto cel = tab->cell(0, col);
         cel->addText(m_TableHeader[col]);
