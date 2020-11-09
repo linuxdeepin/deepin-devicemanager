@@ -133,8 +133,7 @@ void PageBoardInfo::getOtherInfoPair(const QList<DeviceBaseInfo *> &lst, QList<Q
         if (!bios) {continue;}
         QPair<QString, QString> pair;
         pair.first = bios->name();
-        pair.second = "这里是测试bug52699";
-//        getValueInfo(bios, pair);
+        getValueInfo(bios, pair);
         lstPair.append(pair);
     }
 }
@@ -147,9 +146,9 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
     baseInfoMap = baseInfoMap + otherInfoMap;
     QList<QPair<QString, QString>>::iterator it = baseInfoMap.begin();
     for (; it != baseInfoMap.end(); ++it) {
-        pair.second += (*it).first;
+        pair.second += "AAAAAAAA";//(*it).first;  // debug info
         pair.second += ":";
-        pair.second += (*it).second;
+        pair.second += "BBBBBBBB";//(*it).second;
         pair.second += "\n";
     }
     pair.second.replace(QRegExp("\n$"), "");
