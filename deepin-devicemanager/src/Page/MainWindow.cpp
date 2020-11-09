@@ -371,11 +371,14 @@ void MainWindow::loadingFinishSlot(const QString &message)
 
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
+    qDebug() << "MainWindow::slotListItemClicked ****************** 001";
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
     if (ret) {
+        qDebug() << "MainWindow::slotListItemClicked ****************** 002";
         mp_DeviceWidget->updateDevice(itemStr, lst);
     } else {
+        qDebug() << "MainWindow::slotListItemClicked ****************** 003";
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
         mp_DeviceWidget->updateOverview(itemStr, overviewMap);
     }

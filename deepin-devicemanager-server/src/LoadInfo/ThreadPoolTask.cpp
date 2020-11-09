@@ -45,12 +45,14 @@ void ThreadPoolTask::run()
 
 void ThreadPoolTask::runCmd(const QString &cmd)
 {
-    // smartctl --all /dev/sda > smartctl_sda.txt
+    qint64 begin = QDateTime::currentMSecsSinceEpoch();
     QProcess process;
     QStringList options;
     options << "-c" << cmd;
     process.start("/bin/bash", options);
     process.waitForFinished(m_Waiting);
+    qint64 end = QDateTime::currentMSecsSinceEpoch();
+    qDebug() << cmd << " *********************************** " << end - begin << "ms";
 }
 
 void ThreadPoolTask::loadSmartctlFile(QFile &file)
