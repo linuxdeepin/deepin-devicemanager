@@ -133,7 +133,8 @@ void PageBoardInfo::getOtherInfoPair(const QList<DeviceBaseInfo *> &lst, QList<Q
         if (!bios) {continue;}
         QPair<QString, QString> pair;
         pair.first = bios->name();
-        getValueInfo(bios, pair);
+        pair.second = "这里是测试bug52699";
+//        getValueInfo(bios, pair);
         lstPair.append(pair);
     }
 }
