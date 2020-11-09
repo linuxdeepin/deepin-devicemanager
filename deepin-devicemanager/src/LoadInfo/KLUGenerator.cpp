@@ -231,7 +231,7 @@ void KLUGenerator::getDiskInfoFromLshw()
             tempMap.insert(key, (*dIt)[key]);
         }
 
-        qInfo() << tempMap["product"] << " ***** " << modelStr << " " << (tempMap["product"] == modelStr);
+//        qInfo() << tempMap["product"] << " ***** " << modelStr << " " << (tempMap["product"] == modelStr);
         // HW写死
         if (tempMap["product"] == modelStr) {
             // 应HW的要求，将描述固定为   Universal Flash Storage

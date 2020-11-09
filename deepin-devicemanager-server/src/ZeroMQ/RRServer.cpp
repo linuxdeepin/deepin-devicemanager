@@ -40,11 +40,11 @@ void RRServer::connectToDealer(char *_endpoint, void *_context)
 
 void RRServer::run()
 {
-    qint64 begin = 0, end = 0;
+//    qint64 begin = 0, end = 0;
     while (1) {
         if (!m_Waiting) {
             char *msg = mpRep->recvMsg();
-            begin = QDateTime::currentMSecsSinceEpoch();
+//            begin = QDateTime::currentMSecsSinceEpoch();
             emit instruction(QString::fromLocal8Bit(msg));
             m_Waiting = true;
         } else {
@@ -52,24 +52,12 @@ void RRServer::run()
                 sendMsg(m_ReturnStr);
                 m_ReturnStr = "";
                 m_Waiting = false;
-                end = QDateTime::currentMSecsSinceEpoch();
-                qInfo() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << end - begin;
+//                end = QDateTime::currentMSecsSinceEpoch();
+//                qInfo() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << end - begin;
             }
         }
         usleep(100);
     }
-
-
-//    while (true) {
-//        if (!mp_MainJob) {
-//            qInfo() << "**************** 重大问题 mp_MainJob = nullptr *********************************";
-//            break;
-//        }
-//        char *msg = mpRep->recvMsg();
-//        mp_MainJob->executeClientInstruction(QString::fromLocal8Bit(msg));
-//        char ch[] = "1";
-//        mpRep->sendMsg(ch);
-//    }
 }
 
 void RRServer::sendMsg(const QString &info)

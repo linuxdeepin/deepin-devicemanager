@@ -118,7 +118,9 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
             addMapInfo("lshw_multimedia", mapInfo);
         } else if (item.startsWith("network")) {
             getMapInfoFromLshw(item, mapInfo);
-            addMapInfo("lshw_network", mapInfo);
+            if (!item.contains(QRegExp(".*network:[0-9] DISABLED.*"))) {
+                addMapInfo("lshw_network", mapInfo);
+            }
         } else if (item.startsWith("usb")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_usb", mapInfo);

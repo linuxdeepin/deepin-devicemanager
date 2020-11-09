@@ -229,19 +229,16 @@ void PageDetail::showInfoOfNum(int index)
 
 EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
 {
-    qInfo() << "PageDetail::enableDevice ********************* 001";
     if (m_ListTextBrowser.size() <= row) {
         return EDS_Cancle;
     }
 
-    qInfo() << "PageDetail::enableDevice ********************* 002";
     // 设置 TextBrowser 可用
     TextBrowser *browser = m_ListTextBrowser.at(row);
     if (!browser) {
         return EDS_Cancle;
     }
 
-    qInfo() << "PageDetail::enableDevice ********************* 003";
     return browser->setDeviceEnabled(enable);
 }
 
@@ -287,8 +284,6 @@ void PageDetail::paintEvent(QPaintEvent *e)
 
 void PageDetail::resizeEvent(QResizeEvent *event)
 {
-    qInfo() << mp_ScrollArea->size() << this->size() << mp_ScrollWidget->size();
-
     DWidget::resizeEvent(event);
 }
 

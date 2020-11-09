@@ -166,16 +166,12 @@ void TableWidget::slotActionExport()
 
 void TableWidget::slotActionEnable()
 {
-    qInfo() << "TableWidget::slotActionEnable ************************** 001";
     if (!mp_Table) {
         return;
     }
-    qInfo() << "TableWidget::slotActionEnable ************************** 002";
     if (mp_Enable->text() == tr("Enable")) {
-        qInfo() << "TableWidget::slotActionEnable ************************** 003";
         emit enableDevice(mp_Table->currentRow(), true);
     } else {
-        qInfo() << "TableWidget::slotActionEnable ************************** 004";
         emit enableDevice(mp_Table->currentRow(), false);
     }
 }

@@ -327,19 +327,14 @@ void MainWindow::refreshDataBase()
 void MainWindow::loadingFinishSlot(const QString &message)
 {
     static bool begin = true;
-    static qint64 b = QDateTime::currentDateTime().toMSecsSinceEpoch();
-    static qint64 c = QDateTime::currentDateTime().toMSecsSinceEpoch();
 
     if (begin) {
-        b = QDateTime::currentDateTime().toMSecsSinceEpoch();
         begin = false;
     }
 
     // finish 表示所有设备信息加载完成
     if (message == "finish") {
-        c = QDateTime::currentDateTime().toMSecsSinceEpoch();
         begin = true;
-        qInfo() << "************************&&*************************" << (c - b) ;
 
         // 一定要有否则指针一直显示圆圈与setOverrideCursor成对使用
         DApplication::restoreOverrideCursor();
@@ -371,14 +366,11 @@ void MainWindow::loadingFinishSlot(const QString &message)
 
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
-    qInfo() << "MainWindow::slotListItemClicked ****************** 001";
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
     if (ret) {
-        qInfo() << "MainWindow::slotListItemClicked ****************** 002";
         mp_DeviceWidget->updateDevice(itemStr, lst);
     } else {
-        qInfo() << "MainWindow::slotListItemClicked ****************** 003";
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
         mp_DeviceWidget->updateOverview(itemStr, overviewMap);
     }

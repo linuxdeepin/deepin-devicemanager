@@ -55,10 +55,9 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
             deviceList.append(info->getTableData());
     }
 
-    qInfo() << "PageMultiInfo::updateInfo ************************* 001";
     // 更新表格
     mp_Table->updateTable(deviceList);
-    qInfo() << "PageMultiInfo::updateInfo ************************* 002";
+
     // 更新详细信息
     mp_Detail->showDeviceInfo(lst);
 }
@@ -98,23 +97,18 @@ void PageMultiInfo::slotExportInfo()
 
 void PageMultiInfo::slotEnableDevice(int row, bool enable)
 {
-    qInfo() << "PageMultiInfo::slotEnableDevice ********************* 001";
     if (!mp_Detail) {
         return;
     }
-    qInfo() << "PageMultiInfo::slotEnableDevice ********************* 002";
+
     // 禁用/启用设备
     EnableDeviceStatus res = mp_Detail->enableDevice(row, enable);
 
-    qInfo() << "PageMultiInfo::slotEnableDevice ********************* 003";
     // 除设置成功的情况，其他情况需要提示设置失败
     if (res == EDS_Success) {
-
-        qInfo() << "PageMultiInfo::slotEnableDevice ********************* 004";
         // 设置成功,更新界面
         emit updateUI();
     } else {
-        qInfo() << "PageMultiInfo::slotEnableDevice ********************* 005";
         // 设置失败
         QString con;
         if (enable) {

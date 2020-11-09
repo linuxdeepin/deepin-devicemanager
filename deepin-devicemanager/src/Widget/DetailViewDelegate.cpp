@@ -68,7 +68,6 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     // 第一列右空一个像素
     rectpath.setWidth(rect.width() - 1);
-//    qInfo() << index.row() << rect;
 
     // 最后一行是更多信息按钮行，背景色为白色，单元格上边框要绘制横线以
     if (index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
