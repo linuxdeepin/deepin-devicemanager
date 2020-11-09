@@ -146,7 +146,7 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
     baseInfoMap = baseInfoMap + otherInfoMap;
     QList<QPair<QString, QString>>::iterator it = baseInfoMap.begin();
     for (; it != baseInfoMap.end(); ++it) {
-        pair.second += "AAAAAAAA";//(*it).first;  // debug info
+        pair.second += "AAAAAAAA\n";//(*it).first;  // debug info
         pair.second += ":";
         pair.second += "BBBBBBBB";//(*it).second;
         pair.second += "\n";
