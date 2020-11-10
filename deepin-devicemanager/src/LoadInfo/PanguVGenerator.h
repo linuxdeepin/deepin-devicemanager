@@ -11,6 +11,9 @@ public:
 
     /**@brief:generator monitor info*/
     virtual void generatorMonitorDevice();
+
+    /**@brief:generator disk info from smartctl*/
+    virtual void getDiskInfoFromSmartCtl();
 };
 
 #endif // PANGUVGENERATOR_H
