@@ -313,11 +313,10 @@ void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
     out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
 
     out << "\n";
-    foreach (auto item, m_TableHeader) {
+    for (int col = 0; col < m_TableHeader.size() - 1; ++col) {
         out.setFieldWidth(30);
-        out << item;
+        out << m_TableHeader[col];
     }
-
     out.setFieldWidth(0);
     out << "\n";
 }
@@ -353,8 +352,8 @@ void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
     html.write("<thead><tr>\n");
 
     // 写表头内容
-    foreach (auto item, m_TableHeader) {
-        html.write(QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + item + "</th>").toUtf8().data());
+    for (int col = 0; col < m_TableHeader.size() - 1; ++col)  {
+        html.write(QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + m_TableHeader[col] + "</th>").toUtf8().data());
     }
 
     html.write("</tr></thead>\n");
@@ -395,7 +394,6 @@ void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
         tab->addColumn();
         auto cel = tab->cell(0, col);
         cel->addText(m_TableHeader[col]);
-
     }
 }
 
@@ -426,7 +424,7 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
 
     // 添加表头信息
     int curRow = DeviceManager::instance()->currentXlsRow();
-    for (int col = 0; col < m_TableHeader.size(); ++col) {
+    for (int col = 0; col < m_TableHeader.size() - 1; ++col) {
         QXlsx::Format boldFont;
         boldFont.setFontSize(10);
         boldFont.setFontBold(true);
