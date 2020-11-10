@@ -14,6 +14,9 @@ public:
 
     /**@brief:generator disk info from smartctl*/
     virtual void getDiskInfoFromSmartCtl();
+
+    /**@brief:generator disk info from lshw*/
+    virtual void getDiskInfoFromLshw();
 };
 
 #endif // PANGUVGENERATOR_H
