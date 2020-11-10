@@ -85,7 +85,7 @@ QString DeviceInfoParser::loadGeneratorKey()
     }
     if (deviceInfo.contains("klu")) { // klu 华为确认将判断条件改为L410 KLVU-WDU0
         key = "KLU";
-    } else if (deviceInfo.contains("panguV")) { // panguv
+    }  else if (deviceInfo.contains("PGUV")) { // panguv PGUV-WBX0/PGUV-WBY0包含PGUV即为PanGuV机器
         key = "PanGuV";
     }
     return key;
