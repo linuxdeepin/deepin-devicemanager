@@ -401,7 +401,7 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
 
 
     // 按照华为的需求，如果是固态硬盘就不显示转速
-    if (m_RotationRate == QString("KLU_SSD")) {
+    if (m_RotationRate == QString("KLU_SSD") || m_RotationRate == QString("PanGuV_SSD")) {
         m_MediaType = QObject::tr("SSD");
         m_RotationRate = "";
     }
