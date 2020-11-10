@@ -17,6 +17,9 @@ public:
 
     /**@brief:generator disk info from lshw*/
     virtual void getDiskInfoFromLshw();
+
+    /**@brief:generator computer info*/
+    virtual void generatorComputerDevice();
 };
 
 #endif // PANGUVGENERATOR_H
