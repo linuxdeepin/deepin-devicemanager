@@ -52,7 +52,7 @@ void ThreadPoolTask::runCmd(const QString &cmd)
     process.start("/bin/bash", options);
     process.waitForFinished(m_Waiting);
     qint64 end = QDateTime::currentMSecsSinceEpoch();
-    qInfo() << cmd << " *********************************** " << end - begin << "ms";
+    qDebug() << cmd << " *********************************** " << end - begin << "ms";
 }
 
 void ThreadPoolTask::loadSmartctlFile(QFile &file)

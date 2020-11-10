@@ -22,9 +22,9 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if (m_BusInfo.isEmpty() || m_BusInfo != mapInfo["bus info"]) {
         return;
     }
-    setAttribute(mapInfo, "product", m_Name);
-    setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "product", m_Model);
+    setAttribute(mapInfo, "product", m_Name, false);
+    setAttribute(mapInfo, "vendor", m_Vendor, false);
+    setAttribute(mapInfo, "product", m_Model, false);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "capabilities", m_Capabilities);

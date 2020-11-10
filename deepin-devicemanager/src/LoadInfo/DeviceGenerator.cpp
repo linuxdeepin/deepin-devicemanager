@@ -666,6 +666,11 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         if ((*it)["Device"].contains("PM")) {
             continue;
         }
+        // 不让数位板显示在鼠标设备里面(nanjing的数位板)
+        if ((*it)["Device"].contains("T70")) {
+            continue;
+        }
+
 
         DeviceInput *device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
