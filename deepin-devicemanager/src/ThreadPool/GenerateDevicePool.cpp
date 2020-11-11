@@ -101,7 +101,7 @@ void GenerateDevicePool::generateDevice()
         GenerateTask *task = new GenerateTask((*it));
         connect(task, &GenerateTask::finished, this, &GenerateDevicePool::slotFinished);
         QThreadPool::globalInstance()->start(task);
-        task->setAutoDelete(true);
+//        task->setAutoDelete(true);
     }
 
     // 当所有设备执行完毕之后，开始执行生成其它设备的任务
@@ -112,6 +112,13 @@ void GenerateDevicePool::generateDevice()
         if (m_FinishedGenerator == m_TypeList.size()  || curMSecond - beginMSecond > 4000) {
             DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
             generator->generatorOthersDevice();
+
+            // 指针使用结束释放
+            if (generator != nullptr) {
+                delete generator;
+                generator = nullptr;
+            }
+
             break;
         }
     }

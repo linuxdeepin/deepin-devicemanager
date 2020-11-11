@@ -55,7 +55,7 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     , mp_OldItem(nullptr)
     , mp_CurItem(nullptr)
     , m_TimeStep(0)
-    , mp_Timer(new QTimer)
+    , mp_Timer(new QTimer(this))
     , mp_ToolTips(nullptr)
 {
     setMouseTracking(true);

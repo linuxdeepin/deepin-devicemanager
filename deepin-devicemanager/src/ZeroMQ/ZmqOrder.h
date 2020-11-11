@@ -11,6 +11,9 @@ class ZmqOrder : public QThread
 public:
     explicit ZmqOrder(QObject *parent = nullptr);
 
+    // 析构
+    ~ZmqOrder();
+
     /**
      * @brief connectTo
      * @param end

@@ -6,10 +6,19 @@
 
 ZmqOrder::ZmqOrder(QObject *parent)
     : QThread(parent)
-    , mp_Req(new ZMQBase)
+    , mp_Req(new ZMQBase())
     , m_EndPoint("tcp://127.0.0.1:8700")
 {
 
+}
+
+ZmqOrder::~ZmqOrder()
+{
+    // mp_Req没有父指针需要手动释放
+    if (mp_Req != nullptr) {
+        delete mp_Req;
+        mp_Req = nullptr;
+    }
 }
 
 bool ZmqOrder::connect()
