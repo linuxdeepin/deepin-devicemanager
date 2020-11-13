@@ -127,9 +127,9 @@ void CpuWidget::setOverView(const QList<DeviceCpu> &devices)
 
     overviewInfo_.value = QString("%1 (%2%3 / %4%5)").\
                           arg(device.name()).\
-                          arg(m_trNumber[device.cpuCores().toInt()]).\
+                          arg(m_trNumber[device.cpuCores()]).\
                           arg(tr("Core(s)")).
-                          arg(m_trNumber[device.logicalCPUNum().toInt()]).
+                          arg(m_trNumber[device.logicalCPUNum()]).
                           arg(tr("Processor"));
 }
 

@@ -15,7 +15,7 @@ public:
     DeviceCpu();
 
     /**@brief:设置cpu信息*/
-    void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo);
+    void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo, int logicalNum, int coreNum);
 
     /**@brief:获取各种属性*/
     const QString &vendor() const;
@@ -37,8 +37,8 @@ public:
     const QString &extensions() const;
     const QString &flags() const;
     const QString &hardwareVirtual() const;
-    const QString &logicalCPUNum() const;
-    const QString &cpuCores() const;
+    int logicalCPUNum() const;
+    int cpuCores() const;
     bool frequencyIsRange()const;
 
 protected:
@@ -75,6 +75,9 @@ private:
     QString           m_LogicalCPUNum;      //<! 逻辑处理器个数
     QString           m_CPUCoreNum;         //<! cpu核数
     bool              m_FrequencyIsRange;   //<! 频率显示的是范围还是最大值
+
+    int               m_LogicalNum;         //<! logical num
+    int               m_CoreNum;            //<! cores num
 };
 
 #endif // DEVICECPU_H

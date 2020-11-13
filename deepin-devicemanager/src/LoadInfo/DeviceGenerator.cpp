@@ -102,10 +102,19 @@ void DeviceGenerator::generatorCpuDevice()
     const QList<QMap<QString, QString> >  &dmidecode4 = DeviceManager::instance()->cmdInfo("dmidecode4");
     const QMap<QString, QString> &dmidecode = dmidecode4.size() > 1 ? dmidecode4[1] : QMap<QString, QString>();
 
+    // calculate core num
+    int coreNum = 0;
+    QList<QMap<QString, QString> >::const_iterator dit = dmidecode4.begin();
+    for (; dit != dmidecode4.end(); ++dit) {
+        if ((*dit).find("Core Count") != (*dit).end()) {
+            coreNum += (*dit)["Core Count"].trimmed().toInt();
+        }
+    }
+
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
     for (; it != lstCatCpu.end(); ++it) {
         DeviceCpu device;
-        device.setCpuInfo(lscpu, lshw, dmidecode, *it);
+        device.setCpuInfo(lscpu, lshw, dmidecode, *it, lstCatCpu.size(), coreNum);
         DeviceManager::instance()->addCpuDevice(device);
     }
 }

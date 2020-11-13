@@ -25,6 +25,8 @@ DeviceCpu::DeviceCpu()
     , m_LogicalCPUNum("")
     , m_CPUCoreNum("")
     , m_FrequencyIsRange(false)
+    , m_LogicalNum(0)
+    , m_CoreNum(0)
 {
     initFilterKey();
 }
@@ -38,8 +40,12 @@ void DeviceCpu::initFilterKey()
     addFilterKey(QObject::tr("CPU revision"));
 }
 
-void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo)
+void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo, int logicalNum, int coreNum)
 {
+    // logical num and core num
+    m_LogicalNum = logicalNum;
+    m_CoreNum = coreNum;
+
     setInfoFromLscpu(mapLscpu);
     setInfoFromLshw(mapLshw);
     setInfoFromDmidecode(mapDmidecode);
@@ -145,14 +151,14 @@ const QString &DeviceCpu::hardwareVirtual() const
     return m_HardwareVirtual;
 }
 
-const QString &DeviceCpu::logicalCPUNum() const
+int DeviceCpu::logicalCPUNum() const
 {
-    return m_LogicalCPUNum;
+    return m_LogicalNum;
 }
 
-const QString &DeviceCpu::cpuCores() const
+int DeviceCpu::cpuCores() const
 {
-    return m_CPUCoreNum;
+    return m_CoreNum;
 }
 
 bool DeviceCpu::frequencyIsRange()const
