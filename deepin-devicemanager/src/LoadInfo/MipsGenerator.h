@@ -32,6 +32,11 @@ class MipsGenerator : public DeviceGenerator
 {
 public:
     MipsGenerator();
+
+    /**
+     * @brief generatorComputerDevice:生成计算机概况
+     */
+    virtual void generatorComputerDevice() override;
 };
 
 #endif // MIPSGENERATOR_H
