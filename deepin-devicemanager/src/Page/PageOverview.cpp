@@ -120,7 +120,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     if (DSysInfo::UosProfessional == type) {
         linkStr += "UnionTech OS Desktop 20 Professional </a>" + os.remove("UnionTech OS Desktop 20 Professional");
     } else if (DSysInfo::UosHome == type) {
-        linkStr += "UnionTech OS 20 Home </a>" + os.remove("UnionTech OS 20 Home");
+        linkStr += "UnionTech OS Desktop 20 Home </a>" + os.remove("UnionTech OS Desktop 20 Home");
     } else if (DSysInfo::UosCommunity == type) {
         linkStr += "Deepin 20 </a>" + os.remove("Deepin 20");
     } else if (DSysInfo::UosEnterprise == type) {
