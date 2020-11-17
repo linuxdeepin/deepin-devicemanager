@@ -54,6 +54,12 @@ private:
     void runCmd(const QString &cmd);
 
     /**
+     * @brief runCmdToStandIO : generate file from standard io
+     * @param cmd : the command
+     */
+    void runCmdToStandIO(const QString &cmd);
+
+    /**
      * @brief loadSmartctlFile : smartctl needs handing
      * @param file
      */

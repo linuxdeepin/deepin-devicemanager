@@ -32,7 +32,11 @@ void ThreadPoolTask::run()
     }
 
     // 执行命令
-    runCmd(m_Cmd);
+    if (m_File == "hciconfig.txt") {
+        runCmdToStandIO(m_Cmd);
+    } else {
+        runCmd(m_Cmd);
+    }
 
     if (m_File == "lsblk_d.txt") {
         // 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
@@ -53,6 +57,24 @@ void ThreadPoolTask::runCmd(const QString &cmd)
     process.waitForFinished(m_Waiting);
     qint64 end = QDateTime::currentMSecsSinceEpoch();
     qDebug() << cmd << " *********************************** " << end - begin << "ms";
+}
+
+void ThreadPoolTask::runCmdToStandIO(const QString &cmd)
+{
+    // 执行命令获取设备信息
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(m_Waiting);
+    QString deviceInfo = process.readAllStandardOutput();
+
+    // 将获取的信息写到文件里面
+    QString path = "/tmp/device-info/" + m_File;
+    QFile f(path);
+    bool res = f.open(QIODevice::WriteOnly);
+    if (res) {
+        f.write(deviceInfo.toStdString().data());
+    }
+    f.close();
 }
 
 void ThreadPoolTask::loadSmartctlFile(QFile &file)
