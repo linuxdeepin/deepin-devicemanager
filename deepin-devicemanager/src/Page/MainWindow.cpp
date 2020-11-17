@@ -368,7 +368,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 {
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
-    if (ret) {
+    if (ret && lst.size() > 0) {//当设备大小为0时，显示概况信息
         mp_DeviceWidget->updateDevice(itemStr, lst);
     } else {
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
