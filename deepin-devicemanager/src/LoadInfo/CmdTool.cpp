@@ -303,11 +303,31 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
 
 void CmdTool::loadHciconfigInfo(const QString &debugfile)
 {
-    // 获取文件信息
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile)) {
-        return;
+
+    // 判断是否是系统是否是个人版
+    DSysInfo::UosEdition type = DSysInfo::uosEditionType();
+    if (DSysInfo::UosHome == type) {
+        // 如果是个人版则直接执行命令获取设备信息
+        // bug 目前服务端与直接执行命令获取结果不一致
+        QProcess process;
+        int msecs = 10000;
+        QString cmd = "hciconfig --all";
+        process.start(cmd);
+
+        // 获取命令执行结果
+        bool res = process.waitForFinished(msecs);
+        if (res) {
+            deviceInfo = process.readAllStandardOutput();
+        }
+
+    } else {
+        // 获取文件信息
+        if (!getDeviceInfo(deviceInfo, debugfile)) {
+            return;
+        }
     }
+
     QStringList paragraphs = deviceInfo.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty()) {
