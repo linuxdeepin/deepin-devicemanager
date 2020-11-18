@@ -25,18 +25,14 @@ ThreadPoolTask::~ThreadPoolTask()
 void ThreadPoolTask::run()
 {
     // 不用重新采集的信息，如果文件存在就不需要重新采集
-    QString path = "/tmp/device-info/" + m_File;
+    QString path = PATH + m_File;
     QFile file(path);
     if (m_CanNotReplace && file.exists()) {
         return;
     }
 
     // 执行命令
-    if (m_File == "hciconfig.txt") {
-        runCmdToStandIO(m_Cmd);
-    } else {
-        runCmd(m_Cmd);
-    }
+    runCmd(m_Cmd);
 
     if (m_File == "lsblk_d.txt") {
         // 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令

@@ -6,16 +6,13 @@
 #include <QDir>
 #include <QDebug>
 
-//#define PATH "/home/liujun/device-info/"
-#define PATH "/tmp/device-info/"
-
 ThreadPool::ThreadPool(QObject *parent)
     : QThreadPool(parent)
 {
     initCmd();
 
     QDir dir;
-    dir.mkdir("/tmp/device-info");
+    dir.mkdir(PATH);
 }
 
 void ThreadPool::generateDeviceFile()
