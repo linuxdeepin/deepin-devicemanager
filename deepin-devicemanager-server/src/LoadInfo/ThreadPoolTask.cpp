@@ -32,7 +32,12 @@ void ThreadPoolTask::run()
     }
 
     // 执行命令
-    runCmd(m_Cmd);
+    // 添加调试代码，用于定位问题
+    if (m_File == "xrandr.txt"  || m_File == "xrandr_verbose.txt") {
+        runCmdToStandIO(m_Cmd);
+    } else {
+        runCmd(m_Cmd);
+    }
 
     if (m_File == "lsblk_d.txt") {
         // 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
