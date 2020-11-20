@@ -119,6 +119,12 @@ public:
     virtual bool enable();
 
     /**
+     * @brief setCanEnale : set can enable or not
+     * @param can
+     */
+    void setCanEnale(bool can);
+
+    /**
      * @brief canEnable : 该设备是否可以禁用
      * @return
      */

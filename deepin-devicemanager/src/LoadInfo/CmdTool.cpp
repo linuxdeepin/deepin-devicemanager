@@ -679,7 +679,7 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &debugfil
         //Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0/input/input40
         //QRegExp re = QRegExp(".*(usb[0-9]\\/[0-9]-[0-9]\\/[0-9]-[0-9]:[0-9]).*");
 
-        //addMapInfo(key, mapInfo);
+        addMapInfo(key, mapInfo);
     }
 }
 

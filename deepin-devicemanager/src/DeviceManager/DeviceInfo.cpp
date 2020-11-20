@@ -443,6 +443,10 @@ bool DeviceBaseInfo::enable()
 //    return false;
 }
 
+void DeviceBaseInfo::setCanEnale(bool can)
+{
+    m_CanEnable = can;
+}
 
 bool DeviceBaseInfo::canEnable()
 {
