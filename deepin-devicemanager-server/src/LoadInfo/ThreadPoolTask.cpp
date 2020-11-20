@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QDir>
+
 #include <unistd.h>
 
 ThreadPoolTask::ThreadPoolTask(QString cmd, QString file, bool replace, int waiting, QObject *parent)
@@ -45,18 +46,25 @@ void ThreadPoolTask::run()
 
 void ThreadPoolTask::runCmd(const QString &cmd)
 {
+    // 开始时刻
     qint64 begin = QDateTime::currentMSecsSinceEpoch();
+
     QProcess process;
     QStringList options;
+
+    // QProcess执行带管道的命令
     options << "-c" << cmd;
     process.start("/bin/bash", options);
     process.waitForFinished(m_Waiting);
+
+    // 结束时刻
     qint64 end = QDateTime::currentMSecsSinceEpoch();
     qDebug() << cmd << " *********************************** " << end - begin << "ms";
 }
 
 void ThreadPoolTask::loadSmartctlFile(QFile &file)
 {
+    // 加载smartctl信息
     if (file.open(QIODevice::ReadOnly)) {
         QString info = file.readAll();
         QStringList lines = info.split("\n");
@@ -76,6 +84,7 @@ void ThreadPoolTask::loadSmartctlFile(QFile &file)
 
 void ThreadPoolTask::loadLspciVSFile(QFile &file)
 {
+    // 加载lspci -v -s xxx信息
     if (file.open(QIODevice::ReadOnly)) {
         QString info = file.readAll();
         QStringList lines = info.split("\n");
@@ -84,6 +93,8 @@ void ThreadPoolTask::loadLspciVSFile(QFile &file)
             if (words.size() < 2) {
                 continue;
             }
+
+            // 获取ISA bridge唯一标识
             if (words[1] == QString("ISA")) {
                 QString cmd = QString("lspci -v -s %1 > /tmp/device-info/lspci_vs.txt").arg(words[0].trimmed());
                 runCmd(cmd);

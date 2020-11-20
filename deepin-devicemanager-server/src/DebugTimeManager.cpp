@@ -1,4 +1,5 @@
 #include "DebugTimeManager.h"
+
 #include <QDateTime>
 #include <QDebug>
 

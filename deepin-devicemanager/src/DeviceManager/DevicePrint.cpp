@@ -18,7 +18,10 @@ DevicePrint::DevicePrint()
     , m_Status("")
     , m_Shared("")
 {
+    // 初始化可显示属性
     initFilterKey();
+
+    // 设备可禁用
     m_CanEnable = true;
 }
 
@@ -67,15 +70,20 @@ QString DevicePrint::subTitle()
 
 const QString DevicePrint::getOverviewInfo()
 {
+    // 获取概况信息
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
 EnableDeviceStatus DevicePrint::setEnable(bool e)
 {
+    // 设置启用禁用状态
     EnableDeviceStatus res = EnableManager::instance()->enablePrinter(m_Name, e);
+
+    // 禁用成功，状态设为5
     if (res == EDS_Success && e == false) {
         m_Status = "5";
     } else if (res == EDS_Success && e == true) {
+        // 启用成功状态设为3
         m_Status = "3";
     }
     return res;
@@ -88,6 +96,7 @@ bool DevicePrint::enable()
 
 void DevicePrint::initFilterKey()
 {
+    // 初始化可显示属性
     addFilterKey(QObject::tr("copies"));
     //addFilterKey(QObject::tr("device-uri"));
     //addFilterKey(QObject::tr("finishings"));
@@ -140,6 +149,7 @@ void DevicePrint::loadOtherDeviceInfo()
 
 void DevicePrint::loadTableData()
 {
+    // 加载表格数据
     QString name;
     if (!enable()) {
         name = "(" + tr("Disable") + ") " + m_Name;

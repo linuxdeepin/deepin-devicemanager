@@ -23,6 +23,7 @@ DeviceFactory::DeviceFactory()
 
 DeviceGenerator *DeviceFactory::getDeviceGenerator()
 {
+    // 根据架构创建设备信息生成器
     DeviceGenerator *generator = nullptr;
     if (!generator) {
         if (s_GeneratorKey == "x86_64")
@@ -46,5 +47,6 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
 
 void DeviceFactory::setGeneratorKey(const QString &key)
 {
+    // 设置机器架构
     s_GeneratorKey = key;
 }

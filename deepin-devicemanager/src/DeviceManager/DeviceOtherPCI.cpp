@@ -74,6 +74,7 @@ void DeviceOtherPCI::loadOtherDeviceInfo()
 
 void DeviceOtherPCI::loadTableData()
 {
+    // 加载表格数据
     m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);

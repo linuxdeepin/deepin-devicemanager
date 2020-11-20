@@ -62,7 +62,6 @@ void DeviceGpu::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Graphics Memory"), m_GraphicsMemory);
 }
 
-
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
 {
     // 判断是否是同一个gpu

@@ -1,13 +1,15 @@
 #include "DetectJob.h"
 
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <linux/netlink.h>
 #include <unistd.h>
 #include <QDateTime>
 #include <QDebug>
 
-DetectJob::DetectJob(QObject *parent) : QObject(parent)
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <linux/netlink.h>
+
+DetectJob::DetectJob(QObject *parent)
+    : QObject(parent)
     , m_LaskTime(QDateTime::currentMSecsSinceEpoch())
     , m_Elapse(10000)
 {

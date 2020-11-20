@@ -19,6 +19,7 @@ DeviceStorage::DeviceStorage()
     , m_KeyToLshw("")
     , m_KeyFromStorage("")
 {
+    // 初始化可显示属性
     initFilterKey();
 }
 
@@ -47,6 +48,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Capacity", m_Size);
+
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
     m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
     if (m_Size.startsWith("0") || m_Size == "") {
@@ -249,10 +251,12 @@ void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
 
 QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
 {
+    // 比较smartctl中可能提供的两个大小，取大值作为存储设备的大小
     if (size1.isEmpty() || size2.isEmpty()) {
         return size1 + size2;
     }
 
+    // 将字符串转为数字大小进行比较
     QRegExp reg("[0-9]*");
     int index = reg.indexIn(size1);
     int num1 = 0;
@@ -267,6 +271,7 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
         num2 = reg.cap(0).toInt();
     }
 
+    // 返回较大值
     if (num1 > num2) {
         return size1;
     } else {
@@ -351,6 +356,7 @@ void DeviceStorage::loadOtherDeviceInfo()
 
 void DeviceStorage::loadTableHeader()
 {
+    // 加载表头信息
     m_TableHeader.append(tr("Model"));
     m_TableHeader.append(tr("Vendor"));
     m_TableHeader.append(tr("Media Type"));
@@ -359,6 +365,7 @@ void DeviceStorage::loadTableHeader()
 
 void DeviceStorage::loadTableData()
 {
+    // 加载表格数据
     m_TableData.append(m_Model);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_MediaType);
@@ -367,6 +374,7 @@ void DeviceStorage::loadTableData()
 
 void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
+    // lshw信息获取
     setAttribute(mapInfo, "capabilities", m_Capabilities);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "serial", m_SerialNumber, false);

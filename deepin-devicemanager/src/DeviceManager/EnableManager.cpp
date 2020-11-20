@@ -19,8 +19,10 @@ EnableManager::EnableManager()
 
 EnableDeviceStatus EnableManager::enableDeviceByInput(const QString &name, bool enable, int index)
 {
+    // 获取输入设备ID
     int id = getDeviceID(name, enable, index);
 
+    // 通过ID禁用启用设备
     QString cmd = QString("xinput %1 %2").arg(enable ? "enable" : "disable").arg(id);
     QProcess process;
     int msecs = -1;
@@ -36,6 +38,7 @@ EnableDeviceStatus EnableManager::enableDeviceByInput(const QString &name, bool 
 
 bool EnableManager::isDeviceEnable(const QString &name)
 {
+    // 根据输入设备名称判断设备禁用启用状态
     QString cmd = "xinput list-props \"" + name + "\" ";
     QProcess process;
     int msecs = -1;
@@ -43,6 +46,8 @@ bool EnableManager::isDeviceEnable(const QString &name)
     process.waitForFinished(msecs);
     QString output = process.readAllStandardOutput();
     QStringList listOutput = output.split("\n");
+
+    // 获取禁用启用信息
     foreach (const QString &str, listOutput) {
         if (!str.contains("Device Enabled")) {
             continue;
@@ -63,6 +68,7 @@ bool EnableManager::isDeviceEnable(const QString &name)
 
 bool EnableManager::isDeviceEnable(int id)
 {
+    // 根据输入设备ID判断设备禁用启用状态
     QString cmd = QString("xinput list-props %1").arg(id);
     QProcess process;
     int msecs = -1;
@@ -70,15 +76,19 @@ bool EnableManager::isDeviceEnable(int id)
     process.waitForFinished(msecs);
     QString output = process.readAllStandardOutput();
     QStringList listOutput = output.split("\n");
+
+    // 获取禁用启用信息
     foreach (const QString &str, listOutput) {
         if (!str.contains("Device Enabled")) {
             continue;
         }
+
         QStringList items = str.trimmed().split(":");
         if (items.size() != 2) {
             return true;
         }
 
+        // 1:启用状态
         if (items[1].trimmed() == "1") {
             return true;
         } else {
@@ -118,6 +128,7 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
         return false;
     }
 
+    // 获取lsmod信息
     QString cmd = "lsmod";
     QProcess process;
     int msecs = -1;
@@ -125,6 +136,8 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
     process.waitForFinished(msecs);
     QString output = process.readAllStandardOutput();
     QStringList drivers = output.split("\n");
+
+    // 判断驱动是否在lsmod列表中
     foreach (const QString &d, drivers) {
         if (d.startsWith(driver)) {
             return true;
@@ -135,6 +148,7 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
 
 EnableDeviceStatus EnableManager::enablePrinter(const QString &name, bool enable)
 {
+    // 打印机禁用、启用
     QString cmd;
     if (true == enable) {
         cmd = "cupsenable " + name;
@@ -181,12 +195,15 @@ EnableDeviceStatus EnableManager::enableNetworkByIfconfig(const QString &logical
 
 bool EnableManager::isNetworkEnableByIfconfig(const QString &logicalName)
 {
+    // 获取ifconfig信息
     QString cmd = "ifconfig";
     QProcess process;
     int msecs = -1;
     process.start(cmd);
     process.waitForFinished(msecs);
     QString output = process.readAllStandardOutput();
+
+    // 判断网卡是否通过ifconfig配置
     QStringList items = output.split("\n\n");
     foreach (const QString &item, items) {
         if (item.startsWith(logicalName)) {
@@ -198,8 +215,10 @@ bool EnableManager::isNetworkEnableByIfconfig(const QString &logicalName)
 
 int EnableManager::getDeviceID(const QString &name, bool enable, int index)
 {
+    // 获取输入设备ID
     int id = -1;
     int curIndex = -1;
+
     // 先判断有没有同名
     QString cmd = "xinput list";
     QProcess process;
@@ -227,12 +246,15 @@ int EnableManager::getDeviceID(const QString &name, bool enable, int index)
 
 QString EnableManager::getDriverPath(const QString &driver)
 {
+    // 执行modinfo命令
     QString path;
     QString cmd = QString("modinfo %1").arg(driver);
     QProcess process;
     int msecs = -1;
     process.start(cmd);
     process.waitForFinished(msecs);
+
+    // 获取驱动路径
     QString output = process.readAllStandardOutput();
     QStringList lst = output.split("\n");
     foreach (const QString &item, lst) {

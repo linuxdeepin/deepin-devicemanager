@@ -33,11 +33,13 @@ DevicePower::DevicePower()
     , m_Temp("")
 
 {
+    // 初始化可显示属性
     initFilterKey();
 }
 
 bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 {
+    // 设置upower中获取的信息
     if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive)) {
         return false;
     }
@@ -76,6 +78,7 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 
 void DevicePower::setDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
+    // 设置守护进程信息
     if (m_Name == QObject::tr("battery"))
         getOtherMapInfo(mapInfo);
 }
@@ -97,12 +100,14 @@ QString DevicePower::subTitle()
 
 const QString DevicePower::getOverviewInfo()
 {
+    // 获取概况信息
     QString value = DApplication::translate("ManulTrack", m_Name.trimmed().toStdString().data(), "");
     return value;
 }
 
 void DevicePower::initFilterKey()
 {
+    // 初始化可显示属性
     addFilterKey(QObject::tr("native-path"));
     addFilterKey(QObject::tr("power supply"));
     addFilterKey(QObject::tr("updated"));
@@ -158,6 +163,7 @@ void DevicePower::loadOtherDeviceInfo()
 
 void DevicePower::loadTableData()
 {
+    // 加载表格信息
     m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);

@@ -79,7 +79,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
 
 void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-
+    //设置由hwinfo --monitor获取信息
     setAttribute(mapInfo, "Model", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
