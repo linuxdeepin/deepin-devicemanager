@@ -318,9 +318,30 @@ void CmdTool::loadHciconfigInfo(const QString &debugfile)
 {
     // 获取hciconfig文件信息
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile)) {
-        return;
+
+    // 判断是否是系统是否是个人版
+    DSysInfo::UosEdition type = DSysInfo::uosEditionType();
+    if (DSysInfo::UosHome == type) {
+        // 如果是个人版则直接执行命令获取设备信息
+        // bug 目前服务端与直接执行命令获取结果不一致
+        QProcess process;
+        int msecs = 10000;
+        QString cmd = "hciconfig --all";
+        process.start(cmd);
+
+        // 获取命令执行结果
+        bool res = process.waitForFinished(msecs);
+        if (res) {
+            deviceInfo = process.readAllStandardOutput();
+        }
+
+    } else {
+        // 获取文件信息
+        if (!getDeviceInfo(deviceInfo, debugfile)) {
+            return;
+        }
     }
+
     QStringList paragraphs = deviceInfo.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
         if (paragraph.isEmpty()) {
@@ -672,7 +693,7 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &debugfil
         //Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0/input/input40
         //QRegExp re = QRegExp(".*(usb[0-9]\\/[0-9]-[0-9]\\/[0-9]-[0-9]:[0-9]).*");
 
-        //addMapInfo(key, mapInfo);
+        addMapInfo(key, mapInfo);
     }
 }
 

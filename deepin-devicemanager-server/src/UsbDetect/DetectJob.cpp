@@ -30,9 +30,9 @@ void DetectJob::working()
     sa.nl_groups = NETLINK_KOBJECT_UEVENT;
     sa.nl_pid = 0;//getpid(); both is ok
     memset(&msg, 0, sizeof(msg));
-    iov.iov_base = (void *)buf;
+    iov.iov_base = static_cast<void *>(buf);
     iov.iov_len = sizeof(buf);
-    msg.msg_name = (void *)&sa;
+    msg.msg_name = static_cast<void *>(&sa);
     msg.msg_namelen = sizeof(sa);
     msg.msg_iov = &iov;
     msg.msg_iovlen = 1;
@@ -40,10 +40,11 @@ void DetectJob::working()
     sockfd = socket(AF_NETLINK/*PF_NETLINK*/, SOCK_RAW, NETLINK_KOBJECT_UEVENT);
     if (sockfd == -1)
         printf("socket creating failed:%s\n", strerror(errno));
-    if (bind(sockfd, (struct sockaddr *)&sa, sizeof(sa)) == -1)
+    if (bind(sockfd, reinterpret_cast<struct sockaddr *>(&sa), sizeof(sa)) == -1)
         printf("bind error:%s\n", strerror(errno));
 
     while (true) {
+        // len未使用到，但是，这句话不可删除，否则影响USB插拔时，/tmp/device-info的自动属性
         int len = int(recvmsg(sockfd, &msg, 0)); //MSG_WAITALL
         int midLen = -1;
         QString Buf(buf);

@@ -24,6 +24,7 @@ void DebugTimeManager::beginPointQt(const QString &point, const QString &status)
     info.time = QDateTime::currentMSecsSinceEpoch();
     m_MapPoint.insert(point, info);
 }
+
 void DebugTimeManager::endPointQt(const QString &point)
 {
     if (m_MapPoint.find(point) != m_MapPoint.end()) {
@@ -42,6 +43,7 @@ void DebugTimeManager::beginPointLinux(const QString &point, const QString &stat
     info.time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
     m_MapPoint.insert(point, info);
 }
+
 void DebugTimeManager::endPointLinux(const QString &point)
 {
     if (m_MapPoint.find(point) != m_MapPoint.end()) {

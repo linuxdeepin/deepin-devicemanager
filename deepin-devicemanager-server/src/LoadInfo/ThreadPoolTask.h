@@ -27,6 +27,7 @@
 #include <QRunnable>
 #include <QFile>
 
+#define PATH "/tmp/device-info/"  // 设备文件存放的目录
 /**
  * @brief The ThreadPoolTask class
  */

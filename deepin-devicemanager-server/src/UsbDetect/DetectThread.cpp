@@ -5,7 +5,7 @@ DetectThread::DetectThread(QObject *parent)
     : QThread(parent)
     , mp_DectectJob(new DetectJob(this))
 {
-
+    // 连接槽函数
     connect(mp_DectectJob, &DetectJob::usbChanged, this, &DetectThread::slotUsbChanged);
 }
 

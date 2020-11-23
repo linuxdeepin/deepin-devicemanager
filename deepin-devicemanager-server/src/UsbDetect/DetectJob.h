@@ -37,7 +37,7 @@ public:
     /**
      * @brief working : main job
      */
-    void working();
+    [[noreturn]]void working();
 
     /**
      * @brief setUSleepElapse : 设置while循环sleep时间

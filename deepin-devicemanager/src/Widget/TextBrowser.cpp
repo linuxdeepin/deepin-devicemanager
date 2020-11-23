@@ -252,9 +252,9 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
 
         if (!info->enable()) {
             title = "(" + tr("Disable") + ")" + title;
-            h3.setAttribute("style", "text-indent:17px;text-align:left;font-weight:504;padding:10px;color:#FF5736;");
+            h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#FF5736;");
         } else {
-            h3.setAttribute("style", "text-indent:17px;text-align:left;font-weight:504;padding:10px;");
+            h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;");
         }
         QDomText valueText = doc.createTextNode(title);
         h3.appendChild(valueText);
@@ -276,7 +276,7 @@ void TextBrowser::domTableInfo(QDomDocument &doc, const QList<QPair<QString, QSt
         // 该行的第一列
         QDomElement td = doc.createElement("th");
         td.setAttribute("width", "20%");
-        td.setAttribute("style", "text-indent:15px;text-align:left;font-weight:504;");
+        td.setAttribute("style", "text-indent:0px;text-align:left;font-weight:504;");
         QDomText nameText = doc.createTextNode(pair.first + ":");
         td.appendChild(nameText);
         tr.appendChild(td);

@@ -26,7 +26,7 @@ ThreadPoolTask::~ThreadPoolTask()
 void ThreadPoolTask::run()
 {
     // 不用重新采集的信息，如果文件存在就不需要重新采集
-    QString path = "/tmp/device-info/" + m_File;
+    QString path = PATH + m_File;
     QFile file(path);
     if (m_CanNotReplace && file.exists()) {
         return;

@@ -4,7 +4,8 @@
 #include"QDebug"
 
 ZMQBase::ZMQBase()
-    : mpContext(nullptr), mpSocket(nullptr)
+    : mpContext(nullptr)
+    , mpSocket(nullptr)
 {
 }
 
@@ -24,6 +25,7 @@ ZMQBase::~ZMQBase()
 
 void ZMQBase::init(int _type)
 {
+    //  初始化ZMQ
     mpContext = zmq_init(1);
     mpSocket = zmq_socket(mpContext, _type);
 }
@@ -33,7 +35,7 @@ void ZMQBase::init(int _type, void *_context)
     mpSocket = zmq_socket(_context, _type);
 }
 
-bool ZMQBase::setID(int _id)
+bool ZMQBase::setID(/*int _id*/)
 {
     if (!mpSocket) {
         return false;

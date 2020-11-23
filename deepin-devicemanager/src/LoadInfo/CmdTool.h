@@ -29,6 +29,12 @@
 #include <QFile>
 #include <cups.h>
 
+#include <DWidget>
+#include <DSysInfo>
+
+DWIDGET_USE_NAMESPACE
+DCORE_USE_NAMESPACE
+
 /**
  * @brief The CmdTool class
  * 用于获取设备信息的类，主要执行命令获取信息，然后解析生成对应的map

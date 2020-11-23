@@ -440,7 +440,12 @@ EnableDeviceStatus DeviceBaseInfo::setEnable(bool)
 bool DeviceBaseInfo::enable()
 {
     return m_Enable;
-//    return false;
+    //    return false;
+}
+
+void DeviceBaseInfo::setCanEnale(bool can)
+{
+    m_CanEnable = can;
 }
 
 

@@ -62,6 +62,7 @@ void RRServer::run()
 
 void RRServer::sendMsg(const QString &info)
 {
+    // 发送信息
     char ch[256];
     sprintf(ch, "%s", info.toStdString().c_str());
     mpRep->sendMsg(ch);

@@ -24,6 +24,8 @@
 #include "LongTextLabel.h"
 #include "MacroDefinition.h"
 
+#define ENTER_ONE 60    // 换行的位置 1
+#define ENTER_TWO 120   // 换行的位置 2
 
 const QString LINK_STR = "<a style=\"text-decoration:none\" href=https://www.chinauos.com/home>";        // uos官网链接
 const QString COMMUNITY_LINK_STR = "<a style=\"text-decoration:none\" href=https://www.deepin.org/zh>";  // community uos官网链接
@@ -35,7 +37,6 @@ const QString ENTERPRISEC_STR = "UnionTech OS Server 20 Enterprise-C";          
 const QString EULER_STR = "UnionTech OS Server 20 Euler";                                                // 服务器欧拉版
 const QString DEFAULT_STR = "UnionTech OS";                                                              // 默认值
 const QString END_STR = " </a>";                                                                         // end html
-
 
 PageOverview::PageOverview(DWidget *parent)
     : PageInfo(parent)
@@ -116,10 +117,11 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     // 设置ToolTip
     QString tips = str2;
-    if (tips.length() > 60)
-        tips.insert(60, QChar('\n'));
-    if (tips.length() > 120)
-        tips.insert(120, QChar('\n'));
+    if (tips.length() > ENTER_ONE)
+        tips.insert(ENTER_ONE, QChar('\n'));
+    if (tips.length() > ENTER_TWO)
+        tips.insert(ENTER_TWO, QChar('\n'));
+
     mp_OSLabel->setToolTip(tips);
 
     // 超过控件长度用...代替

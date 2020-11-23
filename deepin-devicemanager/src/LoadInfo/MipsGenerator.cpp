@@ -45,7 +45,7 @@ void MipsGenerator::generatorComputerDevice()
     }
 
     const QList<QMap<QString, QString> >  &dmiInfo = DeviceManager::instance()->cmdInfo("dmidecode1");
-    if (dmiInfo.size() > 0) {
+    if (dmiInfo.size() > 1) {
         device->setName(dmiInfo[1]["Product Name"]);
     }
 
