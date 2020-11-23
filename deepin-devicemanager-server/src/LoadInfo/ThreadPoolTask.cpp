@@ -69,7 +69,7 @@ void ThreadPoolTask::runCmdToStandIO(const QString &cmd)
     QString deviceInfo = process.readAllStandardOutput();
 
     // 将获取的信息写到文件里面
-    QString path = "/tmp/device-info/" + m_File;
+    QString path = PATH + m_File;
     QFile f(path);
     bool res = f.open(QIODevice::WriteOnly);
     if (res) {

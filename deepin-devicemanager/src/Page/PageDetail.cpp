@@ -24,7 +24,7 @@
 #include "MacroDefinition.h"
 
 // 宏定义
-#define SPACE_HEIGHT 20  //
+#define SPACE_HEIGHT 0  //
 #define SEPERATOR_HEIGHT 10  // 分割线上下距离
 
 DWIDGET_USE_NAMESPACE
@@ -96,7 +96,7 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     DPalette palette = dAppHelper->applicationPalette();
 
     // 分割线两端到边框的边距
-    int spacing = 20;
+    int spacing = 5;
 
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
@@ -175,7 +175,7 @@ PageDetail::PageDetail(QWidget *parent)
     mp_ScrollArea->setContentsMargins(0, 0, 0, 0);
 
     // 设置ScrollArea里面的widget,这个widget是必须要的
-    mp_ScrollWidget->setContentsMargins(0, 0, 0, 0);
+    mp_ScrollWidget->setContentsMargins(15, 0, 0, 0);
     mp_ScrollArea->setWidget(mp_ScrollWidget);
     hLayout->addWidget(mp_ScrollArea);
     setLayout(hLayout);
