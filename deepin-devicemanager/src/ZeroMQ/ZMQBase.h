@@ -30,7 +30,7 @@ public:
     void init(int _type, void *_context);
 
     /** @brief 标识消息的来源 */
-    bool setID(int _id);
+    bool setID();
 
     /*
     * @brief: connects to the specified IP and port

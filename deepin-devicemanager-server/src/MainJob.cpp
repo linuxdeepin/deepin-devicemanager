@@ -13,7 +13,7 @@
 #include <QMutex>
 #include <QMutexLocker>
 
-QMutex mutex;
+static QMutex mutex;
 
 MainJob::MainJob(QObject *parent)
     : QObject(parent)
@@ -38,6 +38,11 @@ MainJob::~MainJob()
 void MainJob::working()
 {
     // 启动线程监听客户端询问
+    if (mp_ZmqServer != nullptr) {
+        delete  mp_ZmqServer;
+        mp_ZmqServer = nullptr;
+    }
+
     mp_ZmqServer = new RRServer(this);
     char ch[] = "tcp://127.0.0.1:8700";
     bool suc = mp_ZmqServer->initTo(ch);

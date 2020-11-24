@@ -24,7 +24,7 @@ ZmqOrder::~ZmqOrder()
 bool ZmqOrder::connect()
 {
     mp_Req->init(ZMQ_REQ);
-    mp_Req->setID(rand());
+    mp_Req->setID();      // 更新接口，删除未使用id
     char end[64];
     sprintf(end, "%s", m_EndPoint.toStdString().c_str());
     return mp_Req->connect(end);
@@ -34,7 +34,7 @@ bool ZmqOrder::connectTo(char *end)
 {
     m_EndPoint = QString::fromLocal8Bit(end);
     mp_Req->init(ZMQ_REQ);
-    mp_Req->setID(rand());
+    mp_Req->setID();      // 更新接口，删除未使用id
     return mp_Req->connect(end);
 }
 

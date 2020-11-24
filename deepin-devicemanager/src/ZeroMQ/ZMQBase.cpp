@@ -33,7 +33,7 @@ void ZMQBase::init(int _type, void *_context)
     mpSocket = zmq_socket(_context, _type);
 }
 
-bool ZMQBase::setID(int _id)
+bool ZMQBase::setID()
 {
     if (!mpSocket) {
         return false;
@@ -41,7 +41,6 @@ bool ZMQBase::setID(int _id)
         s_set_id(mpSocket/*, _id*/);
         return true;
     }
-
 }
 
 bool ZMQBase::connect(char *_endpoint)

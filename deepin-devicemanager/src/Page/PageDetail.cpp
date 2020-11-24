@@ -157,6 +157,7 @@ void ScrollAreaWidget::paintEvent(QPaintEvent *e)
     painter.fillRect(rect, clearBrush);
 
     painter.restore();
+    DWidget::paintEvent(e);
 }
 
 PageDetail::PageDetail(QWidget *parent)
