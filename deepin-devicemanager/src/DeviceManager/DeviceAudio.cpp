@@ -90,6 +90,7 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
 void DeviceAudio::setInfoFromCatAudio(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "Name", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
     loadOtherDeviceInfo(mapInfo);
 }
 

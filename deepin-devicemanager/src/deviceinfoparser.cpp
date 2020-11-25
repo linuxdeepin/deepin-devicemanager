@@ -88,6 +88,8 @@ QString DeviceInfoParser::loadGeneratorKey()
     }  else if (deviceInfo.contains("PGUV")) { // panguv PGUV-WBX0/PGUV-WBY0包含PGUV即为PanGuV机器
         key = "PanGuV";
     }
+
+    qDebug() << key;
     return key;
 }
 
