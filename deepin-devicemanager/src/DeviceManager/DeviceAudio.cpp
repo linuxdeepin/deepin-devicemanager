@@ -90,7 +90,10 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
 void DeviceAudio::setInfoFromCatAudio(const QMap<QString, QString> &mapInfo)
 {
     setAttribute(mapInfo, "Name", m_Name);
+
+    //设置基本信息 厂商,初始化可显示信息时没有厂商信息
     setAttribute(mapInfo, "Vendor", m_Vendor);
+
     loadOtherDeviceInfo(mapInfo);
 }
 

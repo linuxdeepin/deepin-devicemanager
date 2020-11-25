@@ -89,7 +89,6 @@ QString DeviceInfoParser::loadGeneratorKey()
         key = "PanGuV";
     }
 
-    qDebug() << key;
     return key;
 }
 

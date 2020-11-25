@@ -527,7 +527,6 @@ void DeviceGenerator::getMonitorRefreshRateFromXrandr()
 void DeviceGenerator::getAudioInfoFromHwinfo()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_sound");
-    qDebug() << "hwinfo_sound" << lstMap;
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 5) {
@@ -543,7 +542,6 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
 void DeviceGenerator::getAudioInfoFromLshw()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_multimedia");
-    qDebug() << "lshw_multimedia" << lstMap;
 
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
@@ -557,7 +555,6 @@ void DeviceGenerator::getAudioInfoFromLshw()
 void DeviceGenerator::getAudioInfoFromCatInput()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("cat_devices");
-    qDebug() << "cat_devices" << lstMap;
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it)["Sysfs"].contains("sound", Qt::CaseInsensitive) == true) {
@@ -571,7 +568,6 @@ void DeviceGenerator::getAudioInfoFromCatInput()
 void DeviceGenerator::getAudioChipInfoFromDmesg()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("audiochip");
-    qDebug() << "audiochip" << lstMap;
     if (lstMap.size() > 0) {
         DeviceManager::instance()->setAudioChipFromDmesg(lstMap[0]["chip"]);
     }
