@@ -106,6 +106,12 @@ protected:
 
     void mouseMoveEvent(QMouseEvent *event) override;
 
+    /**
+     * @brief keyPressEvent:相应键盘按键事件
+     * @param keyEvent:按键：上，下键
+     */
+    void keyPressEvent(QKeyEvent *keyEvent) override;
+
 private:
     QStandardItemModel        *mp_ItemModel;                   // Model View 模式里面的 Model
 };
