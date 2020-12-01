@@ -20,15 +20,19 @@
  */
 
 #include "logtreeview.h"
+
 #include <DApplication>
 #include <DApplicationHelper>
 #include <DStyledItemDelegate>
+
 #include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QHeaderView>
 #include <QScrollBar>
+#include <QPainterPath>
+
 #include "MacroDefinition.h"
 #include "TableWidget.h"
 

@@ -136,9 +136,6 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
         mp_PageInfo->updateTable(deviceType, overviewMap);
     }
-
-
-
 }
 
 void DeviceWidget::initWidgets()
@@ -151,4 +148,3 @@ void DeviceWidget::initWidgets()
     hLayout->addWidget(mp_PageInfo);
     setLayout(hLayout);
 }
-

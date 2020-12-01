@@ -11,6 +11,7 @@
 #include <QScrollBar>
 #include <QAction>
 #include <QClipboard>
+#include <QPainterPath>
 
 // Dtk头文件
 #include <DApplicationHelper>
@@ -18,6 +19,7 @@
 #include <DStyle>
 #include <DMenu>
 #include <DFontSizeManager>
+#include <QPainterPath>
 
 // 其它头文件
 #include "DeviceInfo.h"

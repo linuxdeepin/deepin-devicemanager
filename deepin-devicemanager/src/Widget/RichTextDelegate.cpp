@@ -12,6 +12,7 @@
 #include <QAbstractTextDocumentLayout>
 #include <QDebug>
 #include <DFontSizeManager>
+#include <QPainterPath>
 
 // 其它头文件
 #include "DetailTreeView.h"

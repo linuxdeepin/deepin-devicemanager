@@ -12,6 +12,7 @@
 #include <QDateTime>
 #include <QTimer>
 #include <QDesktopWidget>
+#include <QPainterPath>
 
 // Dtk头文件
 #include <DApplication>

@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QStyleOptionFrame>
 #include <QDebug>
+#include <QPainterPath>
 
 // Dtk头文件
 #include <DApplicationHelper>

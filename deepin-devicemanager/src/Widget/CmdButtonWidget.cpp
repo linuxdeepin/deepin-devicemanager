@@ -6,6 +6,7 @@
 #include <QHBoxLayout>
 #include <QPainter>
 #include <QDebug>
+#include <QPainterPath>
 
 // Dtk头文件
 #include <DFontSizeManager>

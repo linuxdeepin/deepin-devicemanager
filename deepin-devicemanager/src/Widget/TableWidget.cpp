@@ -13,6 +13,7 @@
 #include <QPainter>
 #include <QDebug>
 #include <QHBoxLayout>
+#include <QPainterPath>
 
 // 其它头文件
 #include "MacroDefinition.h"

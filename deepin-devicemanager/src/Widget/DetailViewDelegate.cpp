@@ -4,6 +4,7 @@
 // Qt库文件
 #include <QPainter>
 #include <QDebug>
+#include <QPainterPath>
 
 // Dtk头文件
 #include <DApplication>
