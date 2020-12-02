@@ -191,3 +191,35 @@ void DeviceListView::mouseMoveEvent(QMouseEvent *event)
         DListView::mouseMoveEvent(event);
     }
 }
+
+void DeviceListView::keyPressEvent(QKeyEvent *keyEvent)
+{
+    DListView::keyPressEvent(keyEvent);
+
+    // 当前Item 为Separator时，需要跳过Separator
+    if (this->currentIndex().data(Qt::DisplayRole) == "Separator") {
+        // 按键：下一个
+        if (keyEvent->key() == Qt::Key_Down) {
+            int curRow = this->currentIndex().row();
+
+            // 当前 Separator 不是最后一个Item，显示下一个Item
+            if (curRow != mp_ItemModel->rowCount() - 1) {
+                QModelIndex index = this->currentIndex().siblingAtRow(curRow + 1);
+                this->setCurrentIndex(index);
+            }
+        }
+
+        // 按键：上一个
+        if (keyEvent->key() == Qt::Key_Up) {
+            int curRow = this->currentIndex().row();
+            // 当前 Separator 不是第一个Item，显示上一个Item
+            if (curRow != 0) {
+                QModelIndex index = this->currentIndex().siblingAtRow(curRow - 1);
+                this->setCurrentIndex(index);
+            }
+        }
+    }
+
+    // 切换对应设备信息页面
+    emit clicked(this->currentIndex());
+}
