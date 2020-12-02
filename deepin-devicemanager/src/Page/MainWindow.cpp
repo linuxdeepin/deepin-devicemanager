@@ -42,26 +42,16 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_DeviceWidget(new DeviceWidget(this))
     , mp_WorkingThread(new LoadInfoThread)
 {
-
-    qInfo() << " ************** 000";
     // 获取计算机架构信息,x86 arm mips
     QString arch = getArchString();
     mp_WorkingThread->setFramework(arch);
     DeviceFactory::setGeneratorKey(arch);
 
-    qInfo() << " ************** 001";
-
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
 
-
-    qInfo() << " ************** 002";
-
     // 加载设备信息
     refreshDataBase();
-
-
-    qInfo() << " ************** 003";
 
 
     // 关联信号槽
