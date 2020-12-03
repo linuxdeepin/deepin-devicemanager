@@ -47,14 +47,16 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Capacity", m_Size);
+    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
+
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
     m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
-    if (m_Size.startsWith("0") || m_Size == "") {
+
+    // 如果既没有capacity也没有序列号则认为该磁盘无效,否则都属于有效磁盘
+    if ((m_Size.startsWith("0") || m_Size == "") && m_SerialNumber == "") {
         return false;
     }
 
-    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
-    ///setDiskSerialID(mapInfo["Device Files"]);
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
     if (m_KeyToLshw.contains("nvme0", Qt::CaseInsensitive)) {
