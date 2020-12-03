@@ -23,6 +23,7 @@
 #include "../DeviceManager/DeviceCdrom.h"
 #include "../DeviceManager/DevicePrint.h"
 #include "../DeviceManager/DeviceInput.h"
+#include "MacroDefinition.h"
 
 
 DeviceGenerator::DeviceGenerator(QObject *parent)
@@ -55,20 +56,20 @@ void DeviceGenerator::generatorComputerDevice()
     }
 
     // setOsDescription
-    QString os = "UnionTech OS";
+    QString os = DEFAULT_STR;
     DSysInfo::UosEdition type = DSysInfo::uosEditionType();
     if (DSysInfo::UosProfessional == type) {
-        os =  "UnionTech OS Desktop 20 Professional";
+        os =  PROF_STR;
     } else if (DSysInfo::UosHome == type) {
-        os =  "UnionTech OS Desktop 20 Home";
+        os =  HOME_STR;
     } else if (DSysInfo::UosCommunity == type) {
-        os =  "Deepin 20";
+        os =  COMMUNITY_STR;
     } else if (DSysInfo::UosEnterprise == type) {
-        os =  "UnionTech OS Server 20 Enterprise";
+        os =  ENTERPRISE_STR;
     } else if (DSysInfo::UosEnterpriseC == type) {
-        os =  "UnionTech OS Server 20 Enterprise-C";
+        os =  ENTERPRISEC_STR;
     } else if (DSysInfo::UosEuler == type) {
-        os =  "UnionTech OS Server 20 Euler";
+        os =  EULER_STR;
     }
     device->setOsDescription(os);
 

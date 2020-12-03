@@ -21,6 +21,7 @@
 */
 
 #pragma once
+#include <QString>
 
 /**@brief:定义一个删除指针的宏*/
 #define DELETE_PTR(p) \
@@ -219,3 +220,21 @@
 #define   BOTTOM_MARGIN      11    // 下边距
 #define   LABEL_MARGIN       12    // 页面标签的上下边距
 #define   HORSCROLL_WIDTH    11    // TreeWidget 横向滚动条高度
+
+
+const QString LINK_STR = "<a style=\"text-decoration:none\" href=https://www.chinauos.com/home>";        // uos官网链接
+const QString COMMUNITY_LINK_STR = "<a style=\"text-decoration:none\" href=https://www.deepin.org/zh>";  // community uos官网链接
+const QString PROF_STR = "UnionTech OS Desktop 20 Professional";                                         // 桌面专业版系统名称
+const QString HOME_STR = "UnionTech OS Desktop 20 Home";                                                 // 个人版系统名称
+const QString COMMUNITY_STR = "Deepin 20.1 Beta";                                                        // 社区版系统名称
+const QString ENTERPRISE_STR = "UnionTech OS Server 20 Enterprise";                                      // 服务器企业版
+const QString ENTERPRISEC_STR = "UnionTech OS Server 20 Enterprise-C";                                   // 服务器行业版
+const QString EULER_STR = "UnionTech OS Server 20 Euler";                                                // 服务器欧拉版
+const QString DEFAULT_STR = "UnionTech OS";                                                              // 默认值
+const QString END_STR = " </a>";                                                                         // end html
+
+
+
+
+
+
