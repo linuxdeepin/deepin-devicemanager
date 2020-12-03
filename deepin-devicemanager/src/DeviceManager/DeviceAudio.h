@@ -149,6 +149,8 @@ private:
     QString             m_Driver;                       //<! 【驱动】
 
     QString             m_UniqueKey;                    //<! 【标识唯一设备】
+
+    bool                m_IsCatDevice;                  //<!  标识该设备是从cat /input/devices里面获取的
 };
 
 #endif // DEVICEAUDIO_H

@@ -26,6 +26,7 @@ DeviceAudio::DeviceAudio()
 
     // 设置可禁用
     m_CanEnable = true;
+    m_IsCatDevice = false;
 }
 
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -120,6 +121,9 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
     //2. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
 
+    //3. get from cat /input/devices
+    m_IsCatDevice = true;
+
     return true;
 }
 
@@ -164,6 +168,12 @@ bool DeviceAudio::enable()
 {
     // 获取设备状态
     m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+
+    // 如果是从cat /input/devices里面获取的则返回true
+    if (m_IsCatDevice) {
+        return true;
+    }
+
     return m_Enable;
 }
 
