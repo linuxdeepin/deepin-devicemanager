@@ -44,8 +44,9 @@ void MipsGenerator::generatorComputerDevice()
         device->setName(sysInfo[0]["product"]);
     }
 
+    // 龙心机器从sudo dmidecode -t 1中获取机器信息
     const QList<QMap<QString, QString> >  &dmiInfo = DeviceManager::instance()->cmdInfo("dmidecode1");
-    if (dmiInfo.size() > 0) {
+    if (dmiInfo.size() > 1) {
         device->setName(dmiInfo[1]["Product Name"]);
     }
 

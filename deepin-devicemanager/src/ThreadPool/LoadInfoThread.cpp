@@ -17,20 +17,17 @@ LoadInfoThread::LoadInfoThread()
 
 void LoadInfoThread::run()
 {
-    qDebug() << " ****************************** 001";
     ZmqOrder order;
     if (order.connect()) {
         order.updateData();
     }
 
-    qDebug() << " ****************************** 002";
     m_Running = true;
     if (mp_ReadFilePool) {
         mp_ReadFilePool->readAllFile();
         mp_ReadFilePool->waitForDone(-1);
     }
 
-    qDebug() << " ****************************** 003";
     // 为了保证上面那个线程池完全结束
     while (true) {
         if (m_FinishedReadFilePool)
@@ -38,13 +35,11 @@ void LoadInfoThread::run()
         usleep(100);
     }
     m_FinishedReadFilePool = false;
-    qDebug() << " ****************************** 004";
 
     if (mp_GenerateDevicePool) {
         mp_GenerateDevicePool->generateDevice();
         mp_GenerateDevicePool->waitForDone(-1);
     }
-    qDebug() << " ****************************** 005";
 
     emit finished("finish");
     m_Running = false;
