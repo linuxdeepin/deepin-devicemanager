@@ -19,6 +19,7 @@ DeviceAudio::DeviceAudio()
     , m_Description("")
     , m_Chip("")
     , m_Driver("snd_hda_intel")
+    , m_DriverModules("")
     , m_UniqueKey("")
 {
     // 初始化可显示属性
@@ -172,7 +173,9 @@ bool DeviceAudio::enable()
     }
 
     // 获取设备状态
-    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+    bool eDriver = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
+    bool eDriverM = EnableManager::instance()->isDeviceEnableByDriver(m_DriverModules);
+    m_Enable = eDriver || eDriverM;
     return m_Enable;
 }
 

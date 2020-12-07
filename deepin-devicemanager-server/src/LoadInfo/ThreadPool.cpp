@@ -117,14 +117,13 @@ void ThreadPool::initCmd()
     cmdHwinfoMonitor.cmd = QString("%1 %2%3").arg("hwinfo --monitor > ").arg(PATH).arg("hwinfo_monitor.txt");
     cmdHwinfoMonitor.file = "hwinfo_monitor.txt";
     cmdHwinfoMonitor.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoMonitor);
     m_ListCmdMonitor.append(cmdHwinfoMonitor);
 
     Cmd cmdHwinfoSound;
     cmdHwinfoSound.cmd = QString("%1 %2%3").arg("hwinfo --sound > ").arg(PATH).arg("hwinfo_sound.txt");
     cmdHwinfoSound.file = "hwinfo_sound.txt";
     cmdHwinfoSound.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoSound);
+    m_ListCmdMonitor.append(cmdHwinfoSound);
 
     Cmd cmdHwinfoUsb;
     cmdHwinfoUsb.cmd = QString("%1 %2%3").arg("hwinfo --usb > ").arg(PATH).arg("hwinfo_usb.txt");
@@ -202,14 +201,12 @@ void ThreadPool::initCmd()
     cmdXrandr.cmd = QString("%1 %2%3").arg("xrandr > ").arg(PATH).arg("xrandr.txt");
     cmdXrandr.file = "xrandr.txt";
     cmdXrandr.canNotReplace = false;
-    m_ListCmd.append(cmdXrandr);
     m_ListCmdMonitor.append(cmdXrandr);
 
     Cmd cmdXrandrVerbose;
     cmdXrandrVerbose.cmd = QString("%1 %2%3").arg("xrandr --verbose > ").arg(PATH).arg("xrandr_verbose.txt");
     cmdXrandrVerbose.file = "xrandr_verbose.txt";
     cmdXrandrVerbose.canNotReplace = false;
-    m_ListCmd.append(cmdXrandrVerbose);
     m_ListCmdMonitor.append(cmdXrandrVerbose);
 
     Cmd cmdDmesg;
