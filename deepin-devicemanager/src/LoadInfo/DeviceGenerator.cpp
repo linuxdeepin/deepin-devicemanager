@@ -106,10 +106,18 @@ void DeviceGenerator::generatorCpuDevice()
     const QList<QMap<QString, QString> >  &dmidecode4 = DeviceManager::instance()->cmdInfo("dmidecode4");
     const QMap<QString, QString> &dmidecode = dmidecode4.size() > 1 ? dmidecode4[1] : QMap<QString, QString>();
 
+    //  获取逻辑数和core数
+    int coreNum = 0, logicalNum = 0;
+    QList<QMap<QString, QString> >::const_iterator itd = dmidecode4.begin();
+    for (; itd != dmidecode4.end(); ++itd) {
+        coreNum += (*itd)["Core Count"].toInt();
+        logicalNum += (*itd)["Thread Count"].toInt();
+    }
+
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
     for (; it != lstCatCpu.end(); ++it) {
         DeviceCpu *device = new DeviceCpu;
-        device->setCpuInfo(lscpu, lshw, dmidecode, *it);
+        device->setCpuInfo(lscpu, lshw, dmidecode, *it, coreNum, logicalNum);
         DeviceManager::instance()->addCpuDevice(device);
     }
 }
