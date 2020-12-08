@@ -321,8 +321,6 @@ void DeviceStorage::initFilterKey()
     addFilterKey(QObject::tr("Config Status"));
     addFilterKey(QObject::tr("Device Number"));
     addFilterKey(QObject::tr("Geometry (Logical)"));
-    addFilterKey(QObject::tr("SubDevice"));
-    addFilterKey(QObject::tr("SubVendor"));
 }
 
 void DeviceStorage::loadBaseDeviceInfo()

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QMutex>
+#include <QTimer>
 
 class ThreadPool;
 class RRServer;
@@ -34,6 +35,12 @@ private slots:
      * @param instructions
      */
     void slotExecuteClientInstructions(const QString &instructions);
+
+    /**
+     * @brief slotTimeout
+     */
+    void slotTimeout();
+
 private:
 
     /**
@@ -82,6 +89,9 @@ private:
     DetectThread *mp_DetectThread;       //<! 检测usb的线程
     qint64       m_UpdateTime;           //<! 更新时间
     bool         m_Delay;                //<! 延迟时间
+    bool         m_Detected;             //<! 标识是否检测到信息了
+    QTimer       *mp_Timer;              //<! 定时器
+
 };
 
 #endif // MAINJOB_H

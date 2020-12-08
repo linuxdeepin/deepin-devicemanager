@@ -128,7 +128,6 @@ void ThreadPool::initCmd()
     cmdHwinfoMonitor.cmd = QString("%1 %2%3").arg("hwinfo --monitor > ").arg(PATH).arg("hwinfo_monitor.txt");
     cmdHwinfoMonitor.file = "hwinfo_monitor.txt";
     cmdHwinfoMonitor.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoMonitor);
     m_ListCmdMonitor.append(cmdHwinfoMonitor);
 
     // 添加hwinfo --sound命令
@@ -136,7 +135,7 @@ void ThreadPool::initCmd()
     cmdHwinfoSound.cmd = QString("%1 %2%3").arg("hwinfo --sound > ").arg(PATH).arg("hwinfo_sound.txt");
     cmdHwinfoSound.file = "hwinfo_sound.txt";
     cmdHwinfoSound.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoSound);
+    m_ListCmdMonitor.append(cmdHwinfoSound);
 
     // 添加hwinfo --usb命令
     Cmd cmdHwinfoUsb;
@@ -227,7 +226,6 @@ void ThreadPool::initCmd()
     cmdXrandr.cmd = QString("%1 %2%3").arg("xrandr > ").arg(PATH).arg("xrandr.txt");
     cmdXrandr.file = "xrandr.txt";
     cmdXrandr.canNotReplace = false;
-    m_ListCmd.append(cmdXrandr);
     m_ListCmdMonitor.append(cmdXrandr);
 
     // 添加xrandr --vercose命令
@@ -235,7 +233,6 @@ void ThreadPool::initCmd()
     cmdXrandrVerbose.cmd = QString("%1 %2%3").arg("xrandr --verbose > ").arg(PATH).arg("xrandr_verbose.txt");
     cmdXrandrVerbose.file = "xrandr_verbose.txt";
     cmdXrandrVerbose.canNotReplace = false;
-    m_ListCmd.append(cmdXrandrVerbose);
     m_ListCmdMonitor.append(cmdXrandrVerbose);
 
     // 添加dmesg命令

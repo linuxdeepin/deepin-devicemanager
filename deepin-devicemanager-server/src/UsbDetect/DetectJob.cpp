@@ -54,14 +54,12 @@ void DetectJob::working()
             midLen = 39;
         }
 
-        if (midLen != -1) {
-            qint64 curTime = QDateTime::currentMSecsSinceEpoch();
-            if (curTime - m_LaskTime > (m_Elapse / 1000 + 2000)) {
-//                qInfo() << Buf.mid(0, midLen);
-                emit usbChanged(/*Buf.mid(0, midLen)*/);
-                m_LaskTime = curTime;
-            }
+        // 过滤部分信息
+        if (midLen == -1) {
+            continue;
         }
+
+        emit usbChanged();
 
         memset(buf, 0, sizeof(buf));
         usleep(m_Elapse);

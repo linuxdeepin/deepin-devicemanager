@@ -41,8 +41,7 @@ public:
      * @param mapDmidecode:由dmidecode -t 4获取的信息的map
      * @param catInfo:由cat /proc/cpuinfo获取的信息
      */
-    void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo);
-
+    void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo, int coreNum, int logicalNum);
     /**
      * @brief vendor:获取制造商属性值
      * @return QString:制造商属性值
@@ -152,8 +151,8 @@ private:
     QString           m_HardwareVirtual;    //<! 硬件虚拟化
 
     // 这个是cpu的逻辑处理器个数，而不是core的逻辑处理器个数
-    QString           m_LogicalCPUNum;      //<! 逻辑处理器个数
-    QString           m_CPUCoreNum;         //<! cpu核数
+    int               m_LogicalCPUNum;      //<! 逻辑处理器个数
+    int               m_CPUCoreNum;         //<! cpu核数
     QString           m_Driver;
     bool              m_FrequencyIsRange;   //<! 频率显示的是范围还是最大值
 

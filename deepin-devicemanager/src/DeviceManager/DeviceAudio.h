@@ -147,6 +147,7 @@ private:
     QString             m_Description;                  //<! 【描述】
     QString             m_Chip;                         //<! 【芯片型号】
     QString             m_Driver;                       //<! 【驱动】
+    QString             m_DriverModules;                //<!  driver modules
 
     QString             m_UniqueKey;                    //<! 【标识唯一设备】
 

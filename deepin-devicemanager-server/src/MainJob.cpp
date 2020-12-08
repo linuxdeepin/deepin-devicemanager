@@ -22,9 +22,15 @@ MainJob::MainJob(QObject *parent)
     , mp_DetectThread(nullptr)
     , m_UpdateTime(QDateTime::currentMSecsSinceEpoch())
     , m_Delay(false)
+    , m_Detected(false)
+    , mp_Timer(new QTimer)
 {
     // 守护进程启动的时候加载所有信息
     updateAllDevice();
+
+    // 连接定时器槽函数
+    connect(mp_Timer, &QTimer::timeout, this, &MainJob::slotTimeout);
+    mp_Timer->start(1500);
 }
 
 MainJob::~MainJob()
@@ -63,12 +69,20 @@ void MainJob::executeClientInstruction(const QString &instructions)
 
 void MainJob::slotUsbChanged()
 {
-    handleInstruction("DETECT");
+    m_Detected = true;
 }
 
 void MainJob::slotExecuteClientInstructions(const QString &instructions)
 {
     handleInstruction("ZMQ#" + instructions);
+}
+
+void MainJob::slotTimeout()
+{
+    if (m_Detected) {
+        handleInstruction("DETECT");
+        m_Detected = false;
+    }
 }
 
 void MainJob::handleInstruction(const QString &instruction)
