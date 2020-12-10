@@ -15,6 +15,13 @@ public:
     bool setInfoFromUpower(const QMap<QString, QString> &mapInfo);
 
     /**
+     * @brief setKLUInfoFromUpower:设置从upower获取的电池信息
+     * @param mapInfo:由upower --dump获取的信息map
+     * @return 布尔值，true-信息设置成功；false-信息设置失败
+     */
+    bool setKLUInfoFromUpower(const QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief setDaemonInfo:设置从upower获取的与电池有关的守护进程信息
      * @param mapInfo:由upower --dump获取的守护进程信息信息map
      */

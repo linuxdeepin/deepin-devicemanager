@@ -62,6 +62,45 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+bool DevicePower::setKLUInfoFromUpower(const QMap<QString, QString> &mapInfo)
+{
+    if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive)) {
+        return false;
+    }
+
+    // KLU要求 "battery" 不翻译
+    m_Name = "battery";
+
+    // 设置电池属性
+    setAttribute(mapInfo, "", m_Vendor);
+    setAttribute(mapInfo, "", m_Model);
+    setAttribute(mapInfo, "", m_Type);
+    setAttribute(mapInfo, "serial", m_SerialNumber);
+    setAttribute(mapInfo, "", m_ElectricType);
+    setAttribute(mapInfo, "", m_MaxPower);
+    setAttribute(mapInfo, "", m_Status);
+    setAttribute(mapInfo, "", m_Enabled);
+    setAttribute(mapInfo, "", m_HotSwitch);
+    setAttribute(mapInfo, "capacity", m_Capacity);
+    setAttribute(mapInfo, "voltage", m_Voltage);
+    setAttribute(mapInfo, "", m_Slot);
+
+    setAttribute(mapInfo, "", m_SBDSChemistry);
+    setAttribute(mapInfo, "", m_SBDSManufactureDate);
+    setAttribute(mapInfo, "", m_SBDSSerialNumber);
+    setAttribute(mapInfo, "", m_SBDSVersion);
+    setAttribute(mapInfo, "temperature", m_Temp);
+
+    if (!m_Temp.isEmpty()) {
+        double temp = m_Temp.replace("degrees C", "").trimmed().toDouble();
+        temp = temp * 10;
+        m_Temp = QString("%1 degrees C").arg(temp);
+    }
+
+    loadOtherDeviceInfo(mapInfo);
+    return true;
+}
+
 void DevicePower::setDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
     if (m_Name == QObject::tr("battery"))

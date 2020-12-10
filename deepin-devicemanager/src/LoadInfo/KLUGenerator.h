@@ -23,6 +23,9 @@ protected:
     /**@brief:generator power info*/
     virtual void generatorPowerDevice();
 
+    /**@brief:generator memory info*/
+    virtual void getMemoryInfoFromLshw();
+
 protected:
     /**@brief:generator keyboard info from hwinfo*/
     virtual void getKeyboardInfoFromHwinfo();

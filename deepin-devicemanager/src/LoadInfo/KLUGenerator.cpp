@@ -8,6 +8,8 @@
 #include "DeviceManager/DeviceAudio.h"
 #include "DeviceManager/DeviceComputer.h"
 #include "DeviceManager/DevicePower.h"
+#include "DeviceManager/DeviceMemory.h"
+
 #include<QDebug>
 
 KLUGenerator::KLUGenerator()
@@ -115,7 +117,7 @@ void KLUGenerator::generatorPowerDevice()
     if (daemon.size() > 0) {
         hasDaemon = true;
     }
-    // 电池或这电源信息
+    // 电池信息
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("upower");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
@@ -123,7 +125,7 @@ void KLUGenerator::generatorPowerDevice()
             continue;
         }
         DevicePower device;
-        if (!device.setInfoFromUpower(*it)) {
+        if (!device.setKLUInfoFromUpower(*it)) {
             continue;
         }
         if (hasDaemon) {
@@ -142,6 +144,27 @@ void KLUGenerator::generatorPowerDevice()
     }
 }
 
+void KLUGenerator::getMemoryInfoFromLshw()
+{
+    const QList<QMap<QString, QString>> lstMemory = DeviceManager::instance()->cmdInfo("lshw_memory");
+    if (lstMemory.size() == 0) {
+        return;
+    } else if (lstMemory.size() == 1) {
+        DeviceMemory device;
+        device.setInfoFromLshw(lstMemory[0]);
+        DeviceManager::instance()->addMemoryDevice(device);
+    } else if (lstMemory.size() > 1) {
+        QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
+        for (; it != lstMemory.end(); ++it) {
+            if ((!(*it)["size"].contains("GiB") && !(*it)["size"].contains("MiB")) || (*it)["description"] == "System Memory") {
+                continue;
+            }
+            DeviceMemory device;
+            device.setKLUInfoFromLshw(*it);
+            DeviceManager::instance()->addMemoryDevice(device);
+        }
+    }
+}
 void KLUGenerator::getKeyboardInfoFromHwinfo()
 {
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_keyboard");

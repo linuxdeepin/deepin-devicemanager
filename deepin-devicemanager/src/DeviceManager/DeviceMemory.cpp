@@ -33,6 +33,42 @@ void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     loadOtherDeviceInfo(mapInfo);
 }
 
+void DeviceMemory::setKLUInfoFromLshw(const QMap<QString, QString> &mapInfo)
+{
+    // 设置KLU内存属性
+    setAttribute(mapInfo, "product", m_Name, false);
+    setAttribute(mapInfo, "description", m_Name, false);
+    setAttribute(mapInfo, "vendor", m_Vendor);
+    setAttribute(mapInfo, "slot", m_Locator);
+    setAttribute(mapInfo, "size", m_Size);
+    if (m_Size.contains("GiB")) {
+        m_Size.replace("GiB", "GB");
+    }
+    if (m_Size.contains("MiB")) {
+        m_Size.replace("MiB", "");
+        double size = m_Size.toDouble() / 1024.0;
+        m_Size = QString::number(size, 'g', 0) + QString("GB");
+    }
+
+    // 设置速度
+    setAttribute(mapInfo, "clock", m_Speed);
+    if (m_Speed.contains("MT/s")) {
+        m_Speed.replace("MT/s", "MHz");
+    }
+
+    // KLU要求 去除2667MHz（0.4ns） 中的 （0.4ns）
+    QRegExp reg("([\\s\\S]*)\\([\\s\\S]*\\)");
+    if (reg.indexIn(m_Speed) != -1) {
+        m_Speed = reg.cap(1);
+    }
+
+    setAttribute(mapInfo, "width", m_TotalBandwidth);
+    setAttribute(mapInfo, "width", m_DataBandwidth);
+    setAttribute(mapInfo, "serial", m_SerialNumber);
+
+    loadOtherDeviceInfo(mapInfo);
+}
+
 bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo["Locator"] != m_Locator) {
