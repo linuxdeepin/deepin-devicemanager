@@ -17,11 +17,6 @@ LoadInfoThread::LoadInfoThread()
 
 void LoadInfoThread::run()
 {
-    ZmqOrder order;
-    if (order.connect()) {
-        order.updateData();
-    }
-
     m_Running = true;
     if (mp_ReadFilePool) {
         mp_ReadFilePool->readAllFile();

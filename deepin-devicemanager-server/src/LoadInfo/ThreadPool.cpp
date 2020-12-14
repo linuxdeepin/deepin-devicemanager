@@ -29,20 +29,6 @@ void ThreadPool::generateDeviceFile()
     }
 }
 
-void ThreadPool::generateMonitor()
-{
-    // 生成显示设备信息
-    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
-    cleaner->setParent(this);
-    QList<Cmd>::iterator it = m_ListCmdMonitor.begin();
-    for (; it != m_ListCmdMonitor.end(); ++it) {
-        ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-        cleaner->add(task);
-        start(task);
-        task->setAutoDelete(true);
-    }
-}
-
 void ThreadPool::initCmd()
 {
     // According to Huawei's requirements , Modify the way of judging klu and panguv
@@ -123,19 +109,12 @@ void ThreadPool::initCmd()
     cmdDmi17.canNotReplace = true;
     m_ListCmd.append(cmdDmi17);
 
-    // 添加hwinfo --monitor命令
-    Cmd cmdHwinfoMonitor;
-    cmdHwinfoMonitor.cmd = QString("%1 %2%3").arg("hwinfo --monitor > ").arg(PATH).arg("hwinfo_monitor.txt");
-    cmdHwinfoMonitor.file = "hwinfo_monitor.txt";
-    cmdHwinfoMonitor.canNotReplace = false;
-    m_ListCmdMonitor.append(cmdHwinfoMonitor);
-
     // 添加hwinfo --sound命令
     Cmd cmdHwinfoSound;
     cmdHwinfoSound.cmd = QString("%1 %2%3").arg("hwinfo --sound > ").arg(PATH).arg("hwinfo_sound.txt");
     cmdHwinfoSound.file = "hwinfo_sound.txt";
     cmdHwinfoSound.canNotReplace = false;
-    m_ListCmdMonitor.append(cmdHwinfoSound);
+    m_ListCmd.append(cmdHwinfoSound);
 
     // 添加hwinfo --usb命令
     Cmd cmdHwinfoUsb;
@@ -220,20 +199,6 @@ void ThreadPool::initCmd()
     cmdLpstate.file = "lpstat.txt";
     cmdLpstate.canNotReplace = false;
     m_ListCmd.append(cmdLpstate);
-
-    // 添加xrandr命令
-    Cmd cmdXrandr;
-    cmdXrandr.cmd = QString("%1 %2%3").arg("xrandr > ").arg(PATH).arg("xrandr.txt");
-    cmdXrandr.file = "xrandr.txt";
-    cmdXrandr.canNotReplace = false;
-    m_ListCmdMonitor.append(cmdXrandr);
-
-    // 添加xrandr --vercose命令
-    Cmd cmdXrandrVerbose;
-    cmdXrandrVerbose.cmd = QString("%1 %2%3").arg("xrandr --verbose > ").arg(PATH).arg("xrandr_verbose.txt");
-    cmdXrandrVerbose.file = "xrandr_verbose.txt";
-    cmdXrandrVerbose.canNotReplace = false;
-    m_ListCmdMonitor.append(cmdXrandrVerbose);
 
     // 添加dmesg命令
     Cmd cmdDmesg;

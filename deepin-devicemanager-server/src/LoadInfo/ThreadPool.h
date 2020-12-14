@@ -60,17 +60,11 @@ public:
      */
     void generateDeviceFile();
 
-    /**
-     * @brief generateMonitor : generator xrandr hwinfo --monitor
-     */
-    void generateMonitor();
-
 private:
     void initCmd();
 
 private:
     QList<Cmd>        m_ListCmd;             // all cmd
-    QList<Cmd>        m_ListCmdMonitor;      // monitor cmd
 };
 
 #endif // THREADPOOL_H

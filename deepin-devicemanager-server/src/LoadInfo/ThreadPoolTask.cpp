@@ -47,27 +47,6 @@ void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
     info = process.readAllStandardOutput();
 }
 
-void ThreadPoolTask::runCmdToFile(const QString &cmd)
-{
-    // 1. 先判断通过该命令获取的信息是不是需要刷新的,如果是cpu，内存条，主板等信息则只需要开机获取即可
-    QString path = PATH + m_File;
-    QFile file(path);
-    if (m_CanNotReplace && file.exists()) {
-        return;
-    }
-
-    // 2. 执行命令获取设备信息
-    runCmd(m_Cmd);
-
-    if (m_File == "lsblk_d.txt") {
-        // 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
-        loadSmartctlInfoToFile(file);
-    } else if (m_File == "lspci.txt") {
-        // 如果命令是 lspci  , 则需要执行 lspci -v -s %1 > lspci_vs.txt 命令
-        loadLspciVSInfoToFile(file);
-    }
-}
-
 void ThreadPoolTask::runCmdToCache(const QString &cmd)
 {
     QString key = m_File;
@@ -84,15 +63,16 @@ void ThreadPoolTask::runCmdToCache(const QString &cmd)
     runCmd(cmd, info);
 
     // 3. 管理设备信息
-    // 3. 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
-    // 3. 如果命令是 lspci  , 则需要执行 lspci -v -s %1 > lspci_vs.txt 命令
+    // 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
     if (m_File == "lsblk_d.txt") {
         loadSmartCtlInfoToCache(info);
-    } else if (m_File == "lspci.txt") {
-        loadLspciVSInfoToCache(info);
-    } else {
-        DeviceInfoManager::getInstance()->addInfo(key, info);
     }
+    // 如果命令是 lspci  , 则需要执行 lspci -v -s %1 > lspci_vs.txt 命令
+    if (m_File == "lspci.txt") {
+        loadLspciVSInfoToCache(info);
+    }
+
+    DeviceInfoManager::getInstance()->addInfo(key, info);
 }
 
 void ThreadPoolTask::loadSmartCtlInfoToCache(const QString &info)
@@ -129,6 +109,29 @@ void ThreadPoolTask::loadLspciVSInfoToCache(const QString &info)
         }
     }
 }
+
+
+void ThreadPoolTask::runCmdToFile(const QString &cmd)
+{
+    // 1. 先判断通过该命令获取的信息是不是需要刷新的,如果是cpu，内存条，主板等信息则只需要开机获取即可
+    QString path = PATH + m_File;
+    QFile file(path);
+    if (m_CanNotReplace && file.exists()) {
+        return;
+    }
+
+    // 2. 执行命令获取设备信息
+    runCmd(cmd);
+
+    if (m_File == "lsblk_d.txt") {
+        // 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
+        loadSmartctlInfoToFile(file);
+    } else if (m_File == "lspci.txt") {
+        // 如果命令是 lspci  , 则需要执行 lspci -v -s %1 > lspci_vs.txt 命令
+        loadLspciVSInfoToFile(file);
+    }
+}
+
 
 void ThreadPoolTask::loadSmartctlInfoToFile(QFile &file)
 {

@@ -14,7 +14,6 @@ DeviceInfoManager::DeviceInfoManager(QObject *parent)
 
 void DeviceInfoManager::addInfo(const QString &key, const QString &value)
 {
-    qInfo() << key << " ******************* " << value;
     QMutexLocker locker(&mutex);
     if (m_MapInfo.find(key) != m_MapInfo.end()) {
         m_MapInfo[key] = value;

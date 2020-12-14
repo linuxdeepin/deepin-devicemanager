@@ -1,10 +1,10 @@
 #ifndef ZMQORDER_H
 #define ZMQORDER_H
 
-#include <QThread>
+#include <QObject>
 class ZMQBase;
 
-class ZmqOrder : public QThread
+class ZmqOrder : QObject
 {
     Q_OBJECT
 
@@ -23,12 +23,6 @@ public:
     bool connectTo(char *end);
 
     /**
-     * @brief updateData
-     * @return
-     */
-    void updateData();
-
-    /**
      * @brief execDriverOrder
      * @param cmd
      * @return
@@ -41,9 +35,6 @@ public:
      * @return
      */
     bool execIfconfigOrder(const QString &cmd);
-
-protected:
-    void run() override;
 
 private:
     ZMQBase                   *mp_Req;

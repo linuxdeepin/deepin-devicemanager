@@ -10,6 +10,7 @@
 #include "../commondefine.h"
 #include "EDIDParser.h"
 #include "DeviceManager.h"
+#include "DBusInterface.h"
 
 CmdTool::CmdTool()
 {
@@ -47,9 +48,9 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
     } else if (key == "lsblk_d") {
         loadLsblkInfo(debugFile);
     } else if (key == "xrandr") {
-        loadXrandrInfo(debugFile);
+        loadXrandrInfo("xrandr");
     } else if (key == "xrandr_verbose") {
-        loadXrandrVerboseInfo(debugFile);
+        loadXrandrVerboseInfo("xrandr --verbose");
     } else if (key == "dmesg") {
         loadDmesgInfo(debugFile);
     } else if (key == "hciconfig") {
@@ -188,7 +189,7 @@ void CmdTool::loadXrandrInfo(const QString &debugfile)
 {
     // 读取信息
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile)) {
+    if (!getDeviceInfoFromCmd(deviceInfo, debugfile)) {
         return;
     }
 
@@ -210,17 +211,19 @@ void CmdTool::loadXrandrInfo(const QString &debugfile)
                 mapInfo["curResolution"] = re.cap(2);
                 mapInfo["maxResolution"] = re.cap(3);
             }
-        } else if (line.startsWith("HDMI")) {           // HDMI 接口
-            mapInfo["HDMI"] = "Enable";
-        } else if (line.startsWith("VGA")) {            // HDMI 接口
-            mapInfo["VGA"] = "Enable";
-        } else if (line.startsWith("DP")
-                   || line.startsWith("DisplayPort"))  {        // DP 接口
-            mapInfo["DP"] = "Enable";
-        } else if (line.startsWith("eDP")) {                    // eDP 接口
-            mapInfo["eDP"] = "Enable";
-        } else if (line.startsWith("DVI")) {                    // DVI 接口
-            mapInfo["DVI"] = "Enable";
+        } else if (!line.contains("disconnected")) {
+            if (line.startsWith("HDMI")) {           // HDMI 接口
+                mapInfo["HDMI"] = "Enable";
+            } else if (line.startsWith("VGA")) {            // HDMI 接口
+                mapInfo["VGA"] = "Enable";
+            } else if (line.startsWith("DP")
+                       || line.startsWith("DisplayPort"))  {        // DP 接口
+                mapInfo["DP"] = "Enable";
+            } else if (line.startsWith("eDP")) {                    // eDP 接口
+                mapInfo["eDP"] = "Enable";
+            } else if (line.startsWith("DVI")) {                    // DVI 接口
+                mapInfo["DVI"] = "Enable";
+            }
         }
     }
     addMapInfo("xrandr", mapInfo);
@@ -230,7 +233,7 @@ void CmdTool::loadXrandrVerboseInfo(const QString &debugfile)
 {
     // 读取文件信息
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile)) {
+    if (!getDeviceInfoFromCmd(deviceInfo, debugfile)) {
         return;
     }
 
@@ -435,7 +438,11 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 {
     // 获取文件信息
     QString deviceInfo;
-    getDeviceInfo(deviceInfo, debugfile);
+    if (key == "hwinfo_monitor") {
+        getDeviceInfoFromCmd(deviceInfo, "hwinfo --monitor");
+    } else {
+        getDeviceInfo(deviceInfo, debugfile);
+    }
 
     QStringList items = deviceInfo.split("\n\n");
     foreach (const QString &item, items) {
@@ -1174,6 +1181,12 @@ void CmdTool::getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const 
 
 bool CmdTool::getDeviceInfo(QString &deviceInfo, const QString &debugFile)
 {
+    QString key = debugFile;
+    key.replace(".txt", "");
+    if (DBusInterface::getInstance()->getInfo(key, deviceInfo)) {
+        return true;
+    }
+
     // deviceInfo 不为空时信息已读取
     if (!deviceInfo.isEmpty()) {
         return true;
@@ -1188,6 +1201,18 @@ bool CmdTool::getDeviceInfo(QString &deviceInfo, const QString &debugFile)
     deviceInfo = inputDeviceFile.readAll();
     inputDeviceFile.close();
 
+    return true;
+}
+
+bool CmdTool::getDeviceInfoFromCmd(QString &deviceInfo, const QString &cmd)
+{
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(-1);
+    deviceInfo = process.readAllStandardOutput();
+
+    qInfo() << deviceInfo;
+    qInfo() << " ********************************************************************** " << cmd;
     return true;
 }
 

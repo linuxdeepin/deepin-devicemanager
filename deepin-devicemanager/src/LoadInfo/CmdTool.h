@@ -304,6 +304,14 @@ private:
     bool getDeviceInfo(QString &deviceInfo, const QString &debugFile);
 
     /**
+     * @brief getDeviceInfoFromCmd:通过文件获取设备信息字符
+     * @param deviceInfo:设备信息
+     * @param cmd:调试文件名称
+     * @return true:获取信息成功;false:获取信息失败
+     */
+    bool getDeviceInfoFromCmd(QString &deviceInfo, const QString &cmd);
+
+    /**
      * @brief getDeviceInfo:通过文件获取设备信息字符
      * @param deviceInfo:设备信息
      * @param debugFile:调试文件名称

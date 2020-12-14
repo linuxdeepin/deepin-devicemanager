@@ -73,7 +73,10 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     }
 
     // 上面的方法不适合蓝牙键盘的获取方法
-    if (mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive) || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
+    if (mapInfo.find("Model") != mapInfo.end() && mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive)) {
+        m_Interface = "Bluetooth";
+    }
+    if (mapInfo.find("Device") != mapInfo.end() || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
         m_Interface = "Bluetooth";
     }
 

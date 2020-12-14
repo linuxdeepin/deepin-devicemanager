@@ -56,11 +56,6 @@ private:
     void updateAllDevice();
 
     /**
-     * @brief updateDevice : 更新设备
-     */
-    void updateMonitor();
-
-    /**
      * @brief nullInstruction
      */
     void nullInstruction();

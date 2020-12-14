@@ -6,6 +6,7 @@
 #include "DetectThread.h"
 #include "DebugTimeManager.h"
 #include "DBusInterface.h"
+#include "DeviceInfoManager.h"
 
 #include <unistd.h>
 #include <QDateTime>
@@ -111,11 +112,7 @@ void MainJob::handleInstruction(const QString &instruction)
 
         updateAllDevice();
     } else if (instruction.startsWith("ZMQ")) {
-        if (instruction.startsWith("ZMQ#UPDATE")) {
-            m_UpdateTime = QDateTime::currentMSecsSinceEpoch();
-            m_Delay = true;
-            updateMonitor();
-        } else if (instruction.startsWith("ZMQ#DRIVER")) {
+        if (instruction.startsWith("ZMQ#DRIVER")) {
             driverInstruction(instruction);
         } else if (instruction.startsWith("ZMQ#IFCONFIG")) {
             ifconfigInstruction(instruction);
@@ -132,15 +129,6 @@ void MainJob::updateAllDevice()
     PERF_PRINT_BEGIN("POINT-01", "MainJob::updateAllDevice()");
     mp_Pool->generateDeviceFile();
     mp_Pool->waitForDone(-1);
-    PERF_PRINT_END("POINT-01");
-}
-
-void MainJob::updateMonitor()
-{
-    PERF_PRINT_BEGIN("POINT-01", "MainJob::updateMonitor()");
-    mp_Pool->generateMonitor();
-    mp_Pool->waitForDone(-1);
-    mp_ZmqServer->setReturnStr("1");
     PERF_PRINT_END("POINT-01");
 }
 
