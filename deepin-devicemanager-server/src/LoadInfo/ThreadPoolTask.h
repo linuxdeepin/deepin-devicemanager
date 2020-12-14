@@ -27,7 +27,9 @@
 #include <QRunnable>
 #include <QFile>
 
+//#define PATH "/home/liujun/device-info/"
 #define PATH "/tmp/device-info/"  // 设备文件存放的目录
+
 /**
  * @brief The ThreadPoolTask class
  */
@@ -53,18 +55,43 @@ private:
      * @param cmd : the command
      */
     void runCmd(const QString &cmd);
+    void runCmd(const QString &cmd, QString &info);
 
     /**
-     * @brief loadSmartctlFile : smartctl needs handing
-     * @param file
+     * @brief runCmdToCache
+     * @param cmd
      */
-    void loadSmartctlFile(QFile &file);
+    void runCmdToCache(const QString &cmd);
 
     /**
-     * @brief loadLspciVSFile : smartctl needs handing
+     * @brief loadSmartCtlInfoToCache
+     * @param info
+     */
+    void loadSmartCtlInfoToCache(const QString &info);
+
+    /**
+     * @brief loadLspciVSInfoToCache
+     * @param info
+     */
+    void loadLspciVSInfoToCache(const QString &info);
+
+    /**
+     * @brief runCmdToTxt
+     * @param cmd
+     */
+    void runCmdToFile(const QString &cmd);
+
+    /**
+     * @brief loadSmartctlInfoToFile
      * @param file
      */
-    void loadLspciVSFile(QFile &file);
+    void loadSmartctlInfoToFile(QFile &file);
+
+    /**
+     * @brief loadLspciVSInfoToFile
+     * @param file
+     */
+    void loadLspciVSInfoToFile(QFile &file);
 
 private:
     QString   m_Cmd;                  //<! cmd

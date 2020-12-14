@@ -37,14 +37,17 @@ endforeach()
 link_libraries("zmq")
 # 引用ZeroMQ的库 end  *****************************************************************
 
-find_package(Qt5Core)
+find_package(Qt5 COMPONENTS
+    Core
+    DBus REQUIRED)
 
 file(GLOB_RECURSE DEVICE_SRC ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 add_executable(${PROJECT_NAME} ${DEVICE_SRC})
 
-target_link_libraries(${APP_BIN_NAME} Qt5::Core)
+target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus)
 
 # Install files
 install(TARGETS ${APP_BIN_NAME} DESTINATION bin)
 install(FILES ${SYSTEMD_SERVER} DESTINATION /lib/systemd/system)
+install(FILES ${DBUS_CONFIG} DESTINATION /etc/dbus-1/system.d)
 

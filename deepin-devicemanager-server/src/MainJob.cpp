@@ -5,6 +5,7 @@
 #include "RRServer.h"
 #include "DetectThread.h"
 #include "DebugTimeManager.h"
+#include "DBusInterface.h"
 
 #include <unistd.h>
 #include <QDateTime>
@@ -12,8 +13,11 @@
 #include <QProcess>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QDBusConnection>
 
 static QMutex mutex;
+const QString SERVICE_NAME = "com.deepin.devicemanager";
+const QString SERVICE_PATH = "/com/deepin/devicemanager";
 
 MainJob::MainJob(QObject *parent)
     : QObject(parent)
@@ -24,6 +28,7 @@ MainJob::MainJob(QObject *parent)
     , m_Delay(false)
     , m_Detected(false)
     , mp_Timer(new QTimer)
+    , mp_IFace(new DBusInterface)
 {
     // 守护进程启动的时候加载所有信息
     updateAllDevice();
@@ -43,6 +48,12 @@ MainJob::~MainJob()
 
 void MainJob::working()
 {
+    // 启动dbus
+    if (!initDBus()) {
+        qInfo() << " Failed to init dbus ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ";
+        exit(1);
+    }
+
     // 启动线程监听客户端询问
     if (mp_ZmqServer != nullptr) {
         delete  mp_ZmqServer;
@@ -192,4 +203,25 @@ void MainJob::ifconfigInstruction(const QString &instruction)
     }
 
     PERF_PRINT_END("POINT-04");
+}
+
+bool MainJob::initDBus()
+{
+    //1. 申请一个总线连接
+    if (!QDBusConnection::systemBus().isConnected()) {
+        return false;
+    }
+
+    //2. 在总线连接上挂载服务，这样其他进程才能请求该服务
+    if (!QDBusConnection::systemBus().registerService(SERVICE_NAME)) {
+        return false;
+    }
+
+    //3. 在挂载的服务上注册一个执行服务的对象
+    if (!QDBusConnection::systemBus().registerObject(SERVICE_PATH, mp_IFace, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
+        qInfo() << QDBusConnection::systemBus().lastError();
+        return false;
+    }
+
+    return true;
 }

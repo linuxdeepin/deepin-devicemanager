@@ -5,8 +5,9 @@
 #include <QFile>
 #include <QDebug>
 #include <QDir>
-
 #include <unistd.h>
+
+#include<DeviceInfoManager.h>
 
 ThreadPoolTask::ThreadPoolTask(QString cmd, QString file, bool replace, int waiting, QObject *parent)
     : QObject(parent),
@@ -25,46 +26,112 @@ ThreadPoolTask::~ThreadPoolTask()
 
 void ThreadPoolTask::run()
 {
-    // 不用重新采集的信息，如果文件存在就不需要重新采集
+    runCmdToCache(m_Cmd);
+}
+
+void ThreadPoolTask::runCmd(const QString &cmd)
+{
+    QProcess process;
+    QStringList options;
+    options << "-c" << cmd;
+    process.start("/bin/bash", options);
+    process.waitForFinished(m_Waiting);
+}
+
+void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
+{
+    QProcess process;
+    QString cmdT = cmd;
+    process.start(cmdT.replace(QString(" >  ") + PATH + m_File, ""));
+    process.waitForFinished(m_Waiting);
+    info = process.readAllStandardOutput();
+}
+
+void ThreadPoolTask::runCmdToFile(const QString &cmd)
+{
+    // 1. 先判断通过该命令获取的信息是不是需要刷新的,如果是cpu，内存条，主板等信息则只需要开机获取即可
     QString path = PATH + m_File;
     QFile file(path);
     if (m_CanNotReplace && file.exists()) {
         return;
     }
 
-    // 执行命令
+    // 2. 执行命令获取设备信息
     runCmd(m_Cmd);
 
     if (m_File == "lsblk_d.txt") {
         // 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
-        loadSmartctlFile(file);
+        loadSmartctlInfoToFile(file);
     } else if (m_File == "lspci.txt") {
         // 如果命令是 lspci  , 则需要执行 lspci -v -s %1 > lspci_vs.txt 命令
-        loadLspciVSFile(file);
+        loadLspciVSInfoToFile(file);
     }
 }
 
-void ThreadPoolTask::runCmd(const QString &cmd)
+void ThreadPoolTask::runCmdToCache(const QString &cmd)
 {
-    // 开始时刻
-    qint64 begin = QDateTime::currentMSecsSinceEpoch();
+    QString key = m_File;
+    key.replace(".txt", "");
+    bool existed = DeviceInfoManager::getInstance()->isInfoExisted(key);
 
-    QProcess process;
-    QStringList options;
+    // 1. 先判断通过该命令获取的信息是不是需要刷新的,如果是cpu，内存条，主板等信息则只需要开机获取即可
+    if (m_CanNotReplace && existed) {
+        return;
+    }
 
-    // QProcess执行带管道的命令
-    options << "-c" << cmd;
-    process.start("/bin/bash", options);
-    process.waitForFinished(m_Waiting);
+    // 2. 执行命令获取设备信息
+    QString info;
+    runCmd(cmd, info);
 
-    // 结束时刻
-    qint64 end = QDateTime::currentMSecsSinceEpoch();
-    qDebug() << cmd << " *********************************** " << end - begin << "ms";
+    // 3. 管理设备信息
+    // 3. 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
+    // 3. 如果命令是 lspci  , 则需要执行 lspci -v -s %1 > lspci_vs.txt 命令
+    if (m_File == "lsblk_d.txt") {
+        loadSmartCtlInfoToCache(info);
+    } else if (m_File == "lspci.txt") {
+        loadLspciVSInfoToCache(info);
+    } else {
+        DeviceInfoManager::getInstance()->addInfo(key, info);
+    }
 }
 
-void ThreadPoolTask::loadSmartctlFile(QFile &file)
+void ThreadPoolTask::loadSmartCtlInfoToCache(const QString &info)
 {
-    // 加载smartctl信息
+    QStringList lines = info.split("\n");
+    foreach (QString line, lines) {
+        QStringList words = line.replace(QRegExp("[\\s]+"), " ").split(" ");
+        // NAME ROTA
+        if (words.size() != 2 || words[0] == "NAME") {
+            continue;
+        }
+
+        QString smartCmd = QString("smartctl --all /dev/%1").arg(words[0].trimmed());
+        QString sInfo;
+        runCmd(smartCmd, sInfo);
+        DeviceInfoManager::getInstance()->addInfo(QString("smartctl_%1").arg(words[0].trimmed()), sInfo);
+    }
+}
+
+void ThreadPoolTask::loadLspciVSInfoToCache(const QString &info)
+{
+    QStringList lines = info.split("\n");
+    foreach (const QString &line, lines) {
+        QStringList words = line.split(" ");
+        if (words.size() < 2) {
+            continue;
+        }
+        if (words[1] == QString("ISA")) {
+            QString cmd = QString("lspci -v -s %1").arg(words[0].trimmed()); //  > /tmp/device-info/lspci_vs.txt
+            QString sInfo;
+            runCmd(cmd, sInfo);
+            DeviceInfoManager::getInstance()->addInfo("lspci_vs", sInfo);
+            break;
+        }
+    }
+}
+
+void ThreadPoolTask::loadSmartctlInfoToFile(QFile &file)
+{
     if (file.open(QIODevice::ReadOnly)) {
         QString info = file.readAll();
         QStringList lines = info.split("\n");
@@ -82,9 +149,8 @@ void ThreadPoolTask::loadSmartctlFile(QFile &file)
     }
 }
 
-void ThreadPoolTask::loadLspciVSFile(QFile &file)
+void ThreadPoolTask::loadLspciVSInfoToFile(QFile &file)
 {
-    // 加载lspci -v -s xxx信息
     if (file.open(QIODevice::ReadOnly)) {
         QString info = file.readAll();
         QStringList lines = info.split("\n");
@@ -93,8 +159,6 @@ void ThreadPoolTask::loadLspciVSFile(QFile &file)
             if (words.size() < 2) {
                 continue;
             }
-
-            // 获取ISA bridge唯一标识
             if (words[1] == QString("ISA")) {
                 QString cmd = QString("lspci -v -s %1 > /tmp/device-info/lspci_vs.txt").arg(words[0].trimmed());
                 runCmd(cmd);
