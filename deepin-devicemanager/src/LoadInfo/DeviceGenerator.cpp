@@ -104,17 +104,36 @@ void DeviceGenerator::generatorCpuDevice()
 
     // calculate core num
     int coreNum = 0;
+    QList<int> coreCountList;
     QList<QMap<QString, QString> >::const_iterator dit = dmidecode4.begin();
     for (; dit != dmidecode4.end(); ++dit) {
         if ((*dit).find("Core Count") != (*dit).end()) {
             coreNum += (*dit)["Core Count"].trimmed().toInt();
+            coreCountList << (*dit)["Core Count"].trimmed().toInt();  // 统计物理CPU以及其中的核数
         }
     }
 
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
     for (; it != lstCatCpu.end(); ++it) {
         DeviceCpu device;
-        device.setCpuInfo(lscpu, lshw, dmidecode, *it, lstCatCpu.size(), coreNum);
+
+        int i = 0;
+        int count = 0;
+        int cpuSize = DeviceManager::instance()->getCPUDevices().size();   // 现已添加的逻辑CPU个数
+
+        // 判断当前逻辑CPU属于哪个物理CPU信息
+        while (i < coreCountList.size()) {
+            count += coreCountList[i];  // 累加CPU核数
+            if (cpuSize < count) {
+                break;
+            }
+            if (cpuSize == count) {
+                ++i;
+            }
+        }
+
+        // 设置逻辑CPU信息
+        device.setCpuInfo(lscpu, lshw, dmidecode4[i + 1], *it, lstCatCpu.size(), coreNum);
         DeviceManager::instance()->addCpuDevice(device);
     }
 }
