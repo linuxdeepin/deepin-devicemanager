@@ -92,11 +92,11 @@ void KLUGenerator::generatorGpuDevice()
 void KLUGenerator::generatorMonitorDevice()
 {
     QMap<QString, QString> mapInfo;
-    mapInfo.insert("Name", "Notebook monitor");
+    mapInfo.insert("Name", "LCD");
     mapInfo.insert("Vendor", "HUAWEI");
     mapInfo.insert("CurResolution", "2160x1440@60Hz");
     mapInfo.insert("SupportResolution", "2160x1440@60Hz");
-    mapInfo.insert("Size", "296x197mm");
+    mapInfo.insert("Size", "14 inch");
     mapInfo.insert("Date", "2019年7月");
 
     DeviceMonitor monitor;
