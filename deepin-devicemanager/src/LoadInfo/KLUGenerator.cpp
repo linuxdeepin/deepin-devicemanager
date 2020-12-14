@@ -96,7 +96,7 @@ void KLUGenerator::generatorMonitorDevice()
     mapInfo.insert("Vendor", "HUAWEI");
     mapInfo.insert("CurResolution", "2160x1440@60Hz");
     mapInfo.insert("SupportResolution", "2160x1440@60Hz");
-    mapInfo.insert("Size", "14 inch");
+    mapInfo.insert("Size", "14 Inch");
     mapInfo.insert("Date", "2019年7月");
 
     DeviceMonitor monitor;
