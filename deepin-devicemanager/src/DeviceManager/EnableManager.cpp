@@ -143,6 +143,24 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
             return true;
         }
     }
+
+    cmd = "cat /boot/config* | grep '=y'";
+    QStringList options;
+
+    // QProcess执行带管道的命令
+    options << "-c" << cmd;
+    process.start("/bin/bash", options);
+    process.waitForFinished(msecs);
+    output = process.readAllStandardOutput();
+    drivers = output.split("\n");
+
+    // 判断驱动是否在/boot/config* 列表中
+    foreach (const QString &d, drivers) {
+        if (d.contains(driver, Qt::CaseInsensitive)) {
+            return true;
+        }
+    }
+
     return false;
 }
 
