@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 set(APP_BIN_NAME "deepin-devicemanager-server")
 set(SYSTEMD_SERVER "${CMAKE_CURRENT_SOURCE_DIR}/deepin-devicemanager-server.service")
+set(DBUS_CONFIG "${CMAKE_CURRENT_SOURCE_DIR}/com.deepin.devicemanager.conf")
 project(${APP_BIN_NAME})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
