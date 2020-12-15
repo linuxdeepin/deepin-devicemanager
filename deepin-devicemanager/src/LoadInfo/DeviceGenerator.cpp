@@ -192,7 +192,7 @@ void DeviceGenerator::generatorAudioDevice()
     getAudioInfoFromHwinfo();
     getAudioChipInfoFromDmesg();
     getAudioInfoFromLshw();
-    getAudioInfoFromCatInput();
+    //getAudioInfoFromCatInput();
 }
 
 void DeviceGenerator::generatorBluetoothDevice()

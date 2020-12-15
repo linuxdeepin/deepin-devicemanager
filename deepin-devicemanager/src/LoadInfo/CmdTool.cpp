@@ -209,19 +209,17 @@ void CmdTool::loadXrandrInfo(const QString &debugfile)
                 mapInfo["curResolution"] = re.cap(2);
                 mapInfo["maxResolution"] = re.cap(3);
             }
-        } else if (!line.contains("disconnected")) {
-            if (line.startsWith("HDMI")) {           // HDMI 接口
-                mapInfo["HDMI"] = "Enable";
-            } else if (line.startsWith("VGA")) {            // HDMI 接口
-                mapInfo["VGA"] = "Enable";
-            } else if (line.startsWith("DP")
-                       || line.startsWith("DisplayPort"))  {        // DP 接口
-                mapInfo["DP"] = "Enable";
-            } else if (line.startsWith("eDP")) {                    // eDP 接口
-                mapInfo["eDP"] = "Enable";
-            } else if (line.startsWith("DVI")) {                    // DVI 接口
-                mapInfo["DVI"] = "Enable";
-            }
+        } else if (line.startsWith("HDMI")) {           // HDMI 接口
+            mapInfo["HDMI"] = "Enable";
+        } else if (line.startsWith("VGA")) {            // HDMI 接口
+            mapInfo["VGA"] = "Enable";
+        } else if (line.startsWith("DP")
+                   || line.startsWith("DisplayPort"))  {        // DP 接口
+            mapInfo["DP"] = "Enable";
+        } else if (line.startsWith("eDP")) {                    // eDP 接口
+            mapInfo["eDP"] = "Enable";
+        } else if (line.startsWith("DVI")) {                    // DVI 接口
+            mapInfo["DVI"] = "Enable";
         }
     }
     addMapInfo("xrandr", mapInfo);
