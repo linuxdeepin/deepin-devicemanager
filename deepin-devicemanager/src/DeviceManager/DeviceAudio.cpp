@@ -45,6 +45,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
+    setAttribute(mapInfo, "Driver Modules", m_Driver);   // 驱动模块
     //2. 获取设备的唯一标识
     /*
      * 在这里将设备的总线信息作为一个设备的唯一标识
@@ -200,7 +201,7 @@ void DeviceAudio::initFilterKey()
     addFilterKey(QObject::tr("SubVendor"));
     addFilterKey(QObject::tr("SubDevice"));
     addFilterKey(QObject::tr("Driver"));
-    addFilterKey(QObject::tr("Driver Modules"));
+//    addFilterKey(QObject::tr("Driver Modules"));
     addFilterKey(QObject::tr("Driver Status"));
     addFilterKey(QObject::tr("Driver Activation Cmd"));
     addFilterKey(QObject::tr("Config Status"));
