@@ -32,6 +32,10 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     }
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Vendor", m_Vendor);
+    // 希捷硬盘为ATA硬盘，无法直接获取厂商信息,只能特殊处理
+    if (m_Model.startsWith("ST") && m_Vendor.isEmpty()) {
+        m_Vendor = "ST";
+    }
     setAttribute(mapInfo, "Drive", m_Driver);
     QRegExp exp("pci 0x[0-9a-zA-Z]*");
     if (exp.indexIn(m_Vendor) != -1) {

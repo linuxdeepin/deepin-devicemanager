@@ -116,9 +116,7 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
         } else if (item.startsWith("storage")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_storage", mapInfo);
-        } else if ((item.startsWith("memory")
-                    && !item.startsWith("memory UNCLAIMED"))
-                   || item.startsWith("bank")) {      // 内存信息
+        } else if (item.startsWith("bank")) {      // 内存信息
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_memory", mapInfo);
         } else if (item.startsWith("display")) {      // 显卡信息
@@ -1210,9 +1208,6 @@ bool CmdTool::getDeviceInfoFromCmd(QString &deviceInfo, const QString &cmd)
     process.start(cmd);
     process.waitForFinished(-1);
     deviceInfo = process.readAllStandardOutput();
-
-    qInfo() << deviceInfo;
-    qInfo() << " ********************************************************************** " << cmd;
     return true;
 }
 

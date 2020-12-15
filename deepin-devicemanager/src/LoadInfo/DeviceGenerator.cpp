@@ -372,30 +372,18 @@ void DeviceGenerator::getMemoryInfoFromLshw()
 {
     // 从lshw中获取内存信息
     const QList<QMap<QString, QString>> &lstMemory = DeviceManager::instance()->cmdInfo("lshw_memory");
+    QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
 
-    if (lstMemory.size() == 0) {
-        return;
-    } else if (lstMemory.size() == 1) {
-        DeviceMemory *device = new DeviceMemory();
-        device->setInfoFromLshw(lstMemory[0]);
-        DeviceManager::instance()->addMemoryDevice(device);
-    } else if (lstMemory.size() > 1) {
-        QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
+    for (; it != lstMemory.end(); ++it) {
 
-        for (; it != lstMemory.end(); ++it) {
-
-            // bug47194 size属性包含MiB
-            // 目前处理内存信息时，bank下一定要显示内存信息，否则无法生成内存
-            if ((!(*it)["size"].contains("GiB")
-                    && !(*it)["size"].contains("MiB"))
-                    || (*it)["description"] == "System Memory"
-               ) {
-                continue;
-            }
-            DeviceMemory *device = new DeviceMemory();
-            device->setInfoFromLshw(*it);
-            DeviceManager::instance()->addMemoryDevice(device);
+        // bug47194 size属性包含MiB
+        // 目前处理内存信息时，bank下一定要显示内存信息，否则无法生成内存
+        if (!(*it)["size"].contains("GiB") && !(*it)["size"].contains("MiB")) {
+            continue;
         }
+        DeviceMemory *device = new DeviceMemory();
+        device->setInfoFromLshw(*it);
+        DeviceManager::instance()->addMemoryDevice(device);
     }
 }
 
