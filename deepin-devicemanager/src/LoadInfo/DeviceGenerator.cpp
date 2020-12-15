@@ -118,7 +118,7 @@ void DeviceGenerator::generatorCpuDevice()
         DeviceCpu device;
 
         int i = 0;
-        int count = 0;
+        int count = 0;   // 累计逻辑CPU数目
         int cpuSize = DeviceManager::instance()->getCPUDevices().size();   // 现已添加的逻辑CPU个数
 
         // 判断当前逻辑CPU属于哪个物理CPU信息
