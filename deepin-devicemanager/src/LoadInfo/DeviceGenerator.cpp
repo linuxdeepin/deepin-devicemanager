@@ -100,7 +100,7 @@ void DeviceGenerator::generatorCpuDevice()
     const QMap<QString, QString> &lshw = lshwCpu.size() > 0 ? lshwCpu[0] : QMap<QString, QString>();
 
     const QList<QMap<QString, QString> >  &dmidecode4 = DeviceManager::instance()->cmdInfo("dmidecode4");
-    const QMap<QString, QString> &dmidecode = dmidecode4.size() > 1 ? dmidecode4[1] : QMap<QString, QString>();
+//    const QMap<QString, QString> &dmidecode = dmidecode4.size() > 1 ? dmidecode4[1] : QMap<QString, QString>();
 
     // calculate core num
     int coreNum = 0;
@@ -123,12 +123,17 @@ void DeviceGenerator::generatorCpuDevice()
 
         // 判断当前逻辑CPU属于哪个物理CPU信息
         while (i < coreCountList.size()) {
-            count += coreCountList[i];  // 累加CPU核数
+            // 从第一个物理CPU开始匹配
+            if (count == 0) {
+                count += coreCountList[i];
+            }
+
+            // 已有逻辑CPU小于已统计的物理CPU中的逻辑个数
             if (cpuSize < count) {
                 break;
-            }
-            if (cpuSize == count) {
+            } else {
                 ++i;
+                count += coreCountList[i];  // 累加CPU核数
             }
         }
 
