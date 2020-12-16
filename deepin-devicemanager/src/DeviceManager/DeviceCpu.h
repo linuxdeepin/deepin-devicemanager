@@ -17,6 +17,12 @@ public:
     /**@brief:设置cpu信息*/
     void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo, int logicalNum, int coreNum);
 
+    /**
+     * @brief setfrequencyShowRange
+     * @param isRange
+     */
+    void setfrequencyShowRange(bool isRange, const QString &maxSpeed);
+
     /**@brief:获取各种属性*/
     const QString &vendor() const;
     const QString &name() const;

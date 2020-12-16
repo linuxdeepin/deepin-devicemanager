@@ -56,6 +56,16 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
     m_Name.replace(QRegExp("x [0-9]*$"), "");
 }
 
+void DeviceCpu::setfrequencyShowRange(bool isRange, const QString &maxSpeed)
+{
+    // 针对HW定制
+    // 设置频率不显示范围
+    m_FrequencyIsRange = isRange;
+
+    // 频率显示为dmidecode -t 4 中的最大值
+    m_Frequency = maxSpeed;
+}
+
 const QString &DeviceCpu::vendor() const
 {
     return m_Vendor;

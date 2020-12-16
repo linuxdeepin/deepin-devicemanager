@@ -20,6 +20,9 @@ public:
 
     /**@brief:generator computer info*/
     virtual void generatorComputerDevice();
+
+    /**@brief:generator cpu info*/
+    virtual void generatorCpuDevice();
 };
 
 #endif // PANGUVGENERATOR_H
