@@ -725,6 +725,23 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         DeviceManager::instance()->addMouseDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
+
+    //  加载从hwinfo --usb中获取的触摸屏信息具有鼠标功能，放到鼠标设备中
+    const QList<QMap<QString, QString>> &lstMapUSB = DeviceManager::instance()->cmdInfo("hwinfo_usb");
+    QList<QMap<QString, QString> >::const_iterator iter = lstMapUSB.begin();
+    for (; iter != lstMapUSB.end(); ++iter) {
+        if ((*iter).size() < 1) {
+            continue;
+        }
+
+        // 指定型号触摸屏，显示在鼠标设备中
+        if ((*iter)["Model"].contains("Melfas LGDisplay Incell Touch")) {
+            DeviceInput *device = new DeviceInput();
+            device->setInfoFromHwinfo(*iter);
+            DeviceManager::instance()->addMouseDevice(device);
+            addBusIDFromHwinfo((*iter)["SysFS BusID"]);
+        }
+    }
 }
 
 void DeviceGenerator::getMouseInfoFromLshw()

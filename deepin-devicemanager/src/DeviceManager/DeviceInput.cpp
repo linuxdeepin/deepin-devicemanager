@@ -76,7 +76,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     if (mapInfo.find("Model") != mapInfo.end() && mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive)) {
         m_Interface = "Bluetooth";
     }
-    if (mapInfo.find("Device") != mapInfo.end() || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
+    if (mapInfo.find("Device") != mapInfo.end() && mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
         m_Interface = "Bluetooth";
     }
 
