@@ -220,6 +220,7 @@
 #define   BOTTOM_MARGIN      11    // 下边距
 #define   LABEL_MARGIN       12    // 页面标签的上下边距
 #define   HORSCROLL_WIDTH    11    // TreeWidget 横向滚动条高度
+#define   MIN_NUM            5     // num
 
 const QString LINK_STR = "<a style=\"text-decoration:none\" href=https://www.chinauos.com/home>";        // uos官网链接
 const QString COMMUNITY_LINK_STR = "<a style=\"text-decoration:none\" href=https://www.deepin.org/zh>";  // community uos官网链接

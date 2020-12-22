@@ -592,6 +592,12 @@ public:
     // 设备是否存在于蓝牙设备配对信息中
     bool isDeviceExistInPairedDevice(const QString &name);
 
+    /**
+     * @brief setCpuNum
+     * @param num
+     */
+    void setCpuNum(int num);
+
 protected:
     DeviceManager();
     ~DeviceManager();
@@ -625,6 +631,8 @@ private:
     QMap<QString, QList<DeviceBaseInfo *>>         m_DeviceClassMap;       //<! 所有的设备类型与其对应设备列表
     QMap<QString, QMap<QString, QStringList>>      m_DeviceDriverPool;     //<! 所有的设备驱动与与其对应的设备类型，设备名称列表
     QMap<QString, QMap<QString, QString> >         m_InputDeviceInfo;
+
+    int                                            m_CpuNum;               //<! 物理cpu个数
 
     static int m_CurrentXlsRow;       //<! xlsx表格当前行
 };

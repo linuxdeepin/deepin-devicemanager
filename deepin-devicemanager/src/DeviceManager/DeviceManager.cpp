@@ -32,6 +32,7 @@ int DeviceManager::m_CurrentXlsRow = 1;
 QMutex addCmdMutex;
 
 DeviceManager::DeviceManager()
+    : m_CpuNum(1)
 {
 
 }
@@ -147,6 +148,7 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
 
     // 添加cpu信息
     if (m_ListDeviceCPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU"), "cpu##CPU"));
+    if (m_CpuNum > 1) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU quantity"), "cpun##CPUN"));
     m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 板载接口设备
@@ -1142,6 +1144,9 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
         m_OveriewMap[tr("CPU")] = m_ListDeviceCPU[0] ->getOverviewInfo();
     }
 
+    if (m_CpuNum > 1)
+        m_OveriewMap[tr("CPU quantity")] = QString::number(m_CpuNum);
+
     return m_OveriewMap;
 }
 
@@ -1194,6 +1199,11 @@ bool DeviceManager::isDeviceExistInPairedDevice(const QString &mac)
         }
     }
     return false;
+}
+
+void DeviceManager::setCpuNum(int num)
+{
+    m_CpuNum = num;
 }
 
 

@@ -11,6 +11,7 @@
 #include "EDIDParser.h"
 #include "DeviceManager.h"
 #include "DBusInterface.h"
+#include "MacroDefinition.h"
 
 CmdTool::CmdTool()
 {
@@ -541,7 +542,8 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
         }
         QMap<QString, QString> mapInfo;
         getMapInfoFromDmidecode(item, mapInfo);
-        addMapInfo(key, mapInfo);
+        if (mapInfo.size() > MIN_NUM)
+            addMapInfo(key, mapInfo);
     }
 }
 

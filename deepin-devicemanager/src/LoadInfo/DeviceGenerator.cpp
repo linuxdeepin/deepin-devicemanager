@@ -109,6 +109,9 @@ void DeviceGenerator::generatorCpuDevice()
     const QList<QMap<QString, QString> >  &dmidecode4 = DeviceManager::instance()->cmdInfo("dmidecode4");
     const QMap<QString, QString> &dmidecode = dmidecode4.size() > 1 ? dmidecode4[1] : QMap<QString, QString>();
 
+    // 设置cpu个数
+    DeviceManager::instance()->setCpuNum(dmidecode4.size());
+
     //  获取逻辑数和core数
     int coreNum = 0, logicalNum = 0;
     QList<QMap<QString, QString> >::const_iterator itd = dmidecode4.begin();

@@ -152,7 +152,7 @@ void DevicePower::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("SBDS Serial Number"), m_SBDSSerialNumber);
     addBaseDeviceInfo(tr("SBDS Manufacture Date"), m_SBDSManufactureDate);
     addBaseDeviceInfo(tr("SBDS Chemistry"), m_SBDSChemistry);
-    addBaseDeviceInfo(tr("Temprature"), m_Temp);
+    addBaseDeviceInfo(tr("Temperature"), m_Temp);
 }
 
 void DevicePower::loadOtherDeviceInfo()
