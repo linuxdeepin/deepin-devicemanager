@@ -34,6 +34,11 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         m_Vendor = "";
     }
 
+    // 希捷硬盘为ATA硬盘，无法直接获取厂商信息,只能特殊处理
+    if (m_Model.startsWith("ST") && m_Vendor.isEmpty()) {
+        m_Vendor = "Seagate";
+    }
+
     setAttribute(mapInfo, "Attached to", m_Interface);
     QRegExp re(".*\\((.*)\\).*");
     if (re.exactMatch(m_Interface)) {
@@ -72,6 +77,10 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     }
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Vendor", m_Vendor);
+    // 希捷硬盘为ATA硬盘，无法直接获取厂商信息,只能特殊处理
+    if (m_Model.startsWith("ST") && m_Vendor.isEmpty()) {
+        m_Vendor = "Seagate";
+    }
 
     setAttribute(mapInfo, "Attached to", m_Interface);
     QRegExp re(".*\\((.*)\\).*");
