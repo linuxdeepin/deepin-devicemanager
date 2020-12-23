@@ -658,7 +658,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="151"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1148"/>
         <source>CPU quantity</source>
-        <translation type="unfinished"/>
+        <translation>Quantità CPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="155"/>
@@ -1237,7 +1237,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="155"/>
         <source>Temperature</source>
-        <translation type="unfinished"/>
+        <translation>Temperatura</translation>
     </message>
 </context>
 <context>
@@ -1386,50 +1386,60 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="110"/>
+        <location filename="../src/Page/MainWindow.cpp" line="111"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
         <translation>Info dispositivo</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="188"/>
+        <location filename="../src/Page/MainWindow.cpp" line="189"/>
         <source>Display shortcuts</source>
         <translation>Visualizza scorciatoie</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="189"/>
+        <location filename="../src/Page/MainWindow.cpp" line="190"/>
         <source>Close</source>
         <translation>Chiudi</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="190"/>
+        <location filename="../src/Page/MainWindow.cpp" line="191"/>
         <source>Help</source>
         <translation>Aiuto</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="191"/>
+        <location filename="../src/Page/MainWindow.cpp" line="192"/>
         <source>Copy</source>
         <translation>Copia</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="195"/>
+        <location filename="../src/Page/MainWindow.cpp" line="196"/>
         <source>System</source>
         <translation>Sistema</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="202"/>
+        <location filename="../src/Page/MainWindow.cpp" line="203"/>
         <source>Export</source>
         <translation>Esporta</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="203"/>
+        <location filename="../src/Page/MainWindow.cpp" line="204"/>
         <source>Refresh</source>
         <translation>Aggiorna</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="207"/>
+        <location filename="../src/Page/MainWindow.cpp" line="208"/>
         <source>Device Manager</source>
         <translation>Gestore dispositivi</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="371"/>
+        <source>Monitor</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="375"/>
+        <source>Display Adapter</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

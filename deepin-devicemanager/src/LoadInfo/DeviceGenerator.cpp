@@ -162,7 +162,6 @@ void DeviceGenerator::generatorGpuDevice()
     // 生成显示适配器
     getGpuInfoFromHwinfo();
     getGpuInfoFromLshw();
-    getGpuInfoFromXrandr();
     getGpuSizeFromDmesg();
 }
 
@@ -170,8 +169,6 @@ void DeviceGenerator::generatorMonitorDevice()
 {
     // 生成显示设备
     getMonitorInfoFromHwinfo();
-    getMonitorInfoFromXrandrVerbose();
-    getMonitorRefreshRateFromXrandr();
 }
 
 void DeviceGenerator::generatorNetworkDevice()

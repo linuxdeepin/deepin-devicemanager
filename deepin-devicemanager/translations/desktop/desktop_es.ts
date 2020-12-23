@@ -4,7 +4,7 @@
 <message>
 <location filename="Desktop Entry]Comment" line="0"/>
 <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-<translation>Administrador de dispositivos es una herramienta útil para ver la información de hardware y administrar los dispositivos.</translation>
+<translation>Administrador de dispositivos de Deepin es una herramienta útil para ver la información del hardware y administrarlo.</translation>
 </message>
 <message>
 <location filename="Desktop Entry]GenericName" line="0"/>
@@ -14,7 +14,7 @@
 <message>
 <location filename="Desktop Entry]Name" line="0"/>
 <source>Deepin Device Manager</source>
-<translation>Administrador de dispositivos Deepin</translation>
+<translation>Administrador de dispositivos</translation>
 </message>
 </context>
 </TS>

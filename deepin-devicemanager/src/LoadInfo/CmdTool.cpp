@@ -48,10 +48,6 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
         loadLshwInfo(debugFile);
     } else if (key == "lsblk_d") {
         loadLsblkInfo(debugFile);
-    } else if (key == "xrandr") {
-        loadXrandrInfo("xrandr");
-    } else if (key == "xrandr_verbose") {
-        loadXrandrVerboseInfo("xrandr --verbose");
     } else if (key == "dmesg") {
         loadDmesgInfo(debugFile);
     } else if (key == "hciconfig") {

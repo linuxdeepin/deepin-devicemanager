@@ -176,7 +176,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="199"/>
         <source>Speed</source>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="200"/>
@@ -264,7 +264,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="127"/>
         <source>Speed</source>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="141"/>
@@ -550,7 +550,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="123"/>
         <source>Speed</source>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="124"/>
@@ -802,7 +802,7 @@
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="114"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="140"/>
         <source>Speed</source>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="115"/>
@@ -958,7 +958,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="145"/>
         <source>Speed</source>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="146"/>
@@ -1154,7 +1154,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="108"/>
         <source>Speed</source>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
 </context>
 <context>
@@ -1342,7 +1342,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="347"/>
         <source>Speed</source>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="348"/>
@@ -1386,50 +1386,60 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="110"/>
+        <location filename="../src/Page/MainWindow.cpp" line="111"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
         <translation>设备信息</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="188"/>
+        <location filename="../src/Page/MainWindow.cpp" line="189"/>
         <source>Display shortcuts</source>
         <translation>显示快捷键</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="189"/>
+        <location filename="../src/Page/MainWindow.cpp" line="190"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="190"/>
+        <location filename="../src/Page/MainWindow.cpp" line="191"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="191"/>
+        <location filename="../src/Page/MainWindow.cpp" line="192"/>
         <source>Copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="195"/>
+        <location filename="../src/Page/MainWindow.cpp" line="196"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="202"/>
+        <location filename="../src/Page/MainWindow.cpp" line="203"/>
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="203"/>
+        <location filename="../src/Page/MainWindow.cpp" line="204"/>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="207"/>
+        <location filename="../src/Page/MainWindow.cpp" line="208"/>
         <source>Device Manager</source>
         <translation>设备管理器</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="371"/>
+        <source>Monitor</source>
+        <translation>显示设备</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="375"/>
+        <source>Display Adapter</source>
+        <translation>显示适配器</translation>
     </message>
 </context>
 <context>

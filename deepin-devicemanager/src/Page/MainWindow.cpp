@@ -26,6 +26,7 @@
 #include "commondefine.h"
 #include "LoadInfoThread.h"
 #include "DeviceFactory.h"
+#include "ThreadExecXrandr.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -366,6 +367,17 @@ void MainWindow::loadingFinishSlot(const QString &message)
 
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
+    // xrandr would be execed later
+    if (tr("Monitor") == itemStr) {
+        ThreadExecXrandr tx(false);
+        tx.start();
+        tx.wait();
+    } else if (tr("Display Adapter") == itemStr) {
+        ThreadExecXrandr tx(true);
+        tx.start();
+        tx.wait();
+    }
+
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
 
