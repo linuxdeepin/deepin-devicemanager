@@ -151,6 +151,7 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid)
     if (!m_Interface.isEmpty()) {
         return false;
     }
+
     if (main.contains("disconnected")) {
         return false;
     }
@@ -175,6 +176,7 @@ bool DeviceMonitor::setCurrentResolution(const QString &resolution, const QStrin
     if (m_CurrentResolution.contains("@")) {
         return false;
     }
+
     m_CurrentResolution = QString("%1@%2Hz").arg(resolution).arg(rate);
     m_CurrentResolution.replace(" ", "");
     return true;
@@ -248,9 +250,17 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
     QString mInfo = info;
     mInfo.replace(QRegExp("\\(.*\\)"), "");
     QRegExp re(".*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
-    if (!re.exactMatch(mInfo)) {return false;}
-    if (m_Width != re.cap(1).toInt()) {return false;}
-    if (m_Height != re.cap(2).toInt()) {return false;}
+    if (!re.exactMatch(mInfo)) {
+        return false;
+    }
+
+    if (m_Width != re.cap(1).toInt()) {
+        return false;
+    }
+
+    if (m_Height != re.cap(2).toInt()) {
+        return false;
+    }
 
     // 设置用的是哪个接口
     if (info.startsWith("VGA")) {
@@ -269,6 +279,7 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
     } else {
         m_MainScreen = "NO";
     }
+
     return true;
 }
 
@@ -292,12 +303,15 @@ void DeviceMonitor::caculateScreenRatio()
 
 int DeviceMonitor::gcd(int a, int b)
 {
-    if (a < b)
+    if (a < b) {
         std::swap(a, b);
-    if (a % b == 0)
+    }
+
+    if (a % b == 0) {
         return b;
-    else
+    } else {
         return gcd(b, a % b);
+    }
 }
 
 bool DeviceMonitor::findAspectRatio(int width, int height, int &ar_w, int &ar_h)
@@ -338,6 +352,7 @@ void DeviceMonitor::caculateScreenSize(const QString &edid)
     if (list.size() < 2) {
         return;
     }
+
     QString secondItem = list.at(1);
     QString width_field = secondItem.mid(10, 2);
     QString height_field = secondItem.mid(12, 2);
@@ -351,8 +366,15 @@ void DeviceMonitor::caculateScreenSize(const QString &edid)
     if (trWidthOk == false || trHeightOk == false) {
         return;
     }
-    if (height <= 0) return;
-    if (width <= 0)return;
+
+    if (height <= 0) {
+        return;
+    }
+
+    if (width <= 0) {
+        return;
+    }
+
     double inch = std::sqrt(height * height + width * width) / 2.54;
 //    m_ScreenSize = QString("%1英寸(%2cm X %3cm)").arg(QString::number(inch, 'f', 1)).arg(width).arg(height);
     m_ScreenSize = QString("%1 %2(%3cm X %4cm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(width).arg(height);

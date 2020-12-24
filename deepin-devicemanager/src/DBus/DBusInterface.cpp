@@ -32,11 +32,13 @@ const QString SERVICE_PATH = "/com/deepin/devicemanager";
 DBusInterface::DBusInterface()
     : mp_Iface(nullptr)
 {
+    // 初始化dbus
     init();
 }
 
 bool DBusInterface::getInfo(const QString &key, QString &info)
 {
+    // 调用dbus接口获取设备信息
     QDBusReply<QString> reply = mp_Iface->call("getInfo", key);
     if (reply.isValid()) {
         info = reply.value();

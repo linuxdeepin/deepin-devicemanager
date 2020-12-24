@@ -128,6 +128,7 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     } else {
         m_Interface = "PS/2";
     }
+
     // 上面的方法不适合蓝牙键盘的获取方法
     if (mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive) || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
         m_Interface = "Bluetooth";
@@ -232,6 +233,7 @@ EnableDeviceStatus DeviceInput::setEnable(bool e)
     if (res == EDS_Success) {
         m_Enable = e;
     }
+
     return res;
 }
 

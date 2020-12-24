@@ -32,10 +32,12 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     }
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Vendor", m_Vendor);
+
     // 希捷硬盘为ATA硬盘，无法直接获取厂商信息,只能特殊处理
     if (m_Model.startsWith("ST") && m_Vendor.isEmpty()) {
         m_Vendor = "ST";
     }
+
     setAttribute(mapInfo, "Drive", m_Driver);
     QRegExp exp("pci 0x[0-9a-zA-Z]*");
     if (exp.indexIn(m_Vendor) != -1) {
@@ -49,6 +51,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         m_Interface.replace("Controller", "");
         m_Interface.replace("controller", "");
     }
+
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Capacity", m_Size);
@@ -68,6 +71,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (m_KeyToLshw.contains("nvme0", Qt::CaseInsensitive)) {
         setAttribute(mapInfo, "SysFS Device Link", m_NvmeKey);
     }
+
     getOtherMapInfo(mapInfo);
     return true;
 }
@@ -79,6 +83,7 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (mapInfo.find("SysFS BusID") == mapInfo.end()) {
         return false;
     }
+
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Drive", m_Driver);
@@ -90,15 +95,16 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
         m_Interface.replace("Controller", "");
         m_Interface.replace("controller", "");
     }
+
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Capacity", m_Size);
+
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
     m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
     if (m_Size.startsWith("0") || m_Size == "") {
         return false;
     }
-
 
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
 //    setDiskSerialID(mapInfo["Device Files"]);
@@ -122,12 +128,12 @@ bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
     if (keys.size() != 2) {
         return false;
     }
+
     QString key = keys[1].trimmed();
     key.replace(".", ":");
     if (key != m_KeyToLshw) {
         return false;
     }
-
 
     // 获取唯一key
     QStringList words = mapInfo["bus info"].split(":");
@@ -138,7 +144,6 @@ bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
 
     // 更新接口
     setAttribute(mapInfo, "interface", m_Interface, false);
-
 
     // 获取基本信息
     getInfoFromLshw(mapInfo);
@@ -166,7 +171,6 @@ bool DeviceStorage::addNVMEInfoFromlshw(const QMap<QString, QString> &mapInfo)
     }
 
     return true;
-
 }
 
 bool DeviceStorage::addInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo)
@@ -175,6 +179,7 @@ bool DeviceStorage::addInfoFromSmartctl(const QString &name, const QMap<QString,
     if (!m_DeviceFile.contains(name, Qt::CaseInsensitive)) {
         return false;
     }
+
     // 获取基本信息
     getInfoFromsmartctl(mapInfo);
     return true;

@@ -62,8 +62,12 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     setMouseTracking(true);
     // 初始化界面
     initUI();
+
+    // 连接槽函数
     connect(mp_Timer, &QTimer::timeout, this, &DetailTreeView::slotTimeOut);
     connect(this, &DetailTreeView::itemEntered, this, &DetailTreeView::slotItemEnterd);
+
+    // 启动定时器
     mp_Timer->start(100);
 }
 
@@ -249,7 +253,6 @@ void DetailTreeView::setLimitRow(int row)
     if (p->isBaseBoard() && m_IsExpand) {
         m_LimitRow = std::min(maxRow, par->getDeviceInfoNum());
     }
-
 }
 
 QString DetailTreeView::toString()

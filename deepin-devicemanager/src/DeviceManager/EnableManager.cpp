@@ -30,9 +30,11 @@ EnableDeviceStatus EnableManager::enableDeviceByInput(const QString &name, bool 
     process.waitForFinished(msecs);
     int exitCode = process.exitCode();
     QString output = process.readAllStandardOutput();
+
     if (exitCode == 0) {
         return EDS_Success;
     }
+
     return EDS_Faild;
 }
 
@@ -52,6 +54,7 @@ bool EnableManager::isDeviceEnable(const QString &name)
         if (!str.contains("Device Enabled")) {
             continue;
         }
+
         QStringList items = str.trimmed().split(":");
         if (items.size() != 2) {
             return true;
@@ -144,6 +147,7 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
         }
     }
 
+    // 获取cat /boot/config* | grep '=y'信息
     cmd = "cat /boot/config* | grep '=y'";
     QStringList options;
 

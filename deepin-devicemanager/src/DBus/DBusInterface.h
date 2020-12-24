@@ -16,10 +16,10 @@ public:
     }
 
     /**
-     * @brief getInfo
-     * @param key
-     * @param info
-     * @return
+     * @brief getInfo：获取信息
+     * @param key：命令关键字
+     * @param info：获取的设备信息
+     * @return 信息是否有效
      */
     bool getInfo(const QString &key, QString &info);
 
@@ -28,7 +28,7 @@ protected:
 
 private:
     /**
-     * @brief init
+     * @brief init:初始化DBus
      */
     void init();
 

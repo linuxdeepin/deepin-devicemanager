@@ -28,6 +28,7 @@
 #include "DeviceFactory.h"
 #include "ThreadExecXrandr.h"
 
+
 DWIDGET_USE_NAMESPACE
 
 // 主界面需要的一些宏定义
@@ -54,7 +55,6 @@ MainWindow::MainWindow(QWidget *parent)
     // 加载设备信息
     refreshDataBase();
 
-
     // 关联信号槽
     connect(mp_WorkingThread, &LoadInfoThread::finished, this, &MainWindow::loadingFinishSlot);
     connect(mp_DeviceWidget, &DeviceWidget::itemClicked, this, &MainWindow::slotListItemClicked);
@@ -69,7 +69,6 @@ MainWindow::~MainWindow()
     DELETE_PTR(mp_WaitingWidget);
     DELETE_PTR(mp_DeviceWidget);
     DELETE_PTR(mp_MainStackWidget);
-//    DELETE_PTR(mp_WorkingThread);
 }
 
 void MainWindow::refresh()
@@ -117,7 +116,6 @@ bool MainWindow::exportTo()
     }
 
     QFileInfo fileInfo(file);
-    //saveDir = fileInfo.absolutePath() + "/";
 
     // 文件类型txt
     if (selectFilter == "Text (*.txt)") {
@@ -241,6 +239,7 @@ QString MainWindow::getArchString()
     } else {
         struction = "x86_64";
     }
+
     inputDeviceFile.close();
 
     // 华为机器需要区分KLU与PanGuV
@@ -265,6 +264,7 @@ QString MainWindow::loadGeneratorKey()
     if (false == inputDeviceFile.open(QIODevice::ReadOnly)) {
         return key;
     }
+
     deviceInfo = inputDeviceFile.readAll();
     inputDeviceFile.close();
 
@@ -273,6 +273,7 @@ QString MainWindow::loadGeneratorKey()
     } else if (deviceInfo.contains("panguV")) { // panguv
         key = "PanGuV";
     }
+
     return key;
 }
 

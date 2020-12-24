@@ -38,7 +38,6 @@ void CmdTool::getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src)
     for (int i = 0; i < src->num_options; i++) {
         mapInfo.insert(src->options[i].name, src->options[i].value);
     }
-
 }
 
 void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)

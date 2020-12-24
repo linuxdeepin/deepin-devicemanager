@@ -28,6 +28,8 @@
 #include <DMainWindow>
 #include <DStackedWidget>
 
+#include "DBusInterface.h"
+
 class WaitingWidget;
 class DeviceWidget;
 class LoadInfoThread;

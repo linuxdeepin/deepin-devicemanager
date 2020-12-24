@@ -86,6 +86,7 @@ EnableDeviceStatus DevicePrint::setEnable(bool e)
         // 启用成功状态设为3
         m_Status = "3";
     }
+
     return res;
 }
 
@@ -98,27 +99,17 @@ void DevicePrint::initFilterKey()
 {
     // 初始化可显示属性
     addFilterKey(QObject::tr("copies"));
-    //addFilterKey(QObject::tr("device-uri"));
-    //addFilterKey(QObject::tr("finishings"));
     addFilterKey(QObject::tr("job-cancel-after"));
     addFilterKey(QObject::tr("job-hold-until"));
     addFilterKey(QObject::tr("job-priority"));
-    //addFilterKey(QObject::tr("job-sheets"));
     addFilterKey(QObject::tr("marker-change-time"));
-    //addFilterKey(QObject::tr("media-source"));
-    //addFilterKey(QObject::tr("media-type"));
     addFilterKey(QObject::tr("number-up"));
     addFilterKey(QObject::tr("orientation-requested"));
     addFilterKey(QObject::tr("print-color-mode"));
-    //addFilterKey(QObject::tr("print-quality"));
-    //addFilterKey(QObject::tr("printer-commands"));
-    //addFilterKey(QObject::tr("printer-info"));
     addFilterKey(QObject::tr("printer-is-accepting-jobs"));
     addFilterKey(QObject::tr("printer-is-shared"));
     addFilterKey(QObject::tr("printer-is-temporary"));
-    //addFilterKey(QObject::tr("printer-location"));
     addFilterKey(QObject::tr("printer-make-and-model"));
-    //addFilterKey(QObject::tr("printer-state"));
     addFilterKey(QObject::tr("printer-state-change-time"));
     addFilterKey(QObject::tr("printer-state-reasons"));
     addFilterKey(QObject::tr("printer-type"));
@@ -156,6 +147,7 @@ void DevicePrint::loadTableData()
     } else {
         name = m_Name;
     }
+
     m_TableData.append(name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);

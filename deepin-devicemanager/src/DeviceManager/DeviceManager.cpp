@@ -234,6 +234,7 @@ bool DeviceManager::addMouseInfoFromLshw(const QMap<QString, QString> &mapInfo)
     for (; it != m_ListDeviceMouse.end(); ++it) {
         DeviceInput *device = dynamic_cast<DeviceInput *>(*it);
         if (!device) continue;
+
         if (device->setInfoFromlshw(mapInfo)) {
             return true;
         }
@@ -265,6 +266,7 @@ void DeviceManager::addLshwinfoIntoStorageDevice(const QMap<QString, QString> &m
     for (; it != m_ListDeviceStorage.end(); ++it) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
         if (!device) continue;
+
         if (device->addInfoFromlshw(mapInfo)) {
             return;
         }
@@ -278,6 +280,7 @@ void DeviceManager::addLshwinfoIntoNVMEStorageDevice(const QMap<QString, QString
     for (; it != m_ListDeviceStorage.end(); ++it) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
         if (!device) continue;
+
         if (device->addNVMEInfoFromlshw(mapInfo)) {
             return;
         }
@@ -291,6 +294,7 @@ void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QMap<Q
     for (; it != m_ListDeviceStorage.end(); ++it) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
         if (!device) continue;
+
         if (device->addInfoFromSmartctl(name, mapInfo)) {
             return;
         }

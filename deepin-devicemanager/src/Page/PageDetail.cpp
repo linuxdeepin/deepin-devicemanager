@@ -259,10 +259,6 @@ void PageDetail::paintEvent(QPaintEvent *e)
     DPalette palette = dAppHelper->applicationPalette();
 
     // 获取系统默认的圆角半径
-//    QStyleOptionFrame option;
-//    initStyleOption(&option);
-//    DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-//    int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
     int radius = 8;
 
     // 获取窗口当前的状态,激活，禁用，未激活
@@ -308,11 +304,12 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     if (!enable) {
         button->setVisible(false);
     }
+
     hLayout->addWidget(button);
     hLayout->addStretch();
-    if (!enable) {
-        button->setVisible(false);
-    }
+//    if (!enable) {
+//        button->setVisible(false);
+//    }
 
     mp_ScrollAreaLayout->addLayout(hLayout);
 
