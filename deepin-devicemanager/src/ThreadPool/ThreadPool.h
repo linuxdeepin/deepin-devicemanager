@@ -94,8 +94,6 @@ private:
     int                    m_AllCmdNum;
     int                    m_AllTypeNum;
 
-    QMutex                 m_lock;
-
     QString                m_Arch;
 
 };

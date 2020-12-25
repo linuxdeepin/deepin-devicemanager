@@ -20,6 +20,7 @@
 #include<QDebug>
 
 DeviceManager    *DeviceManager::sInstance = nullptr;
+QMutex addCmdMutex;
 
 DeviceManager::DeviceManager()
 {
@@ -484,6 +485,7 @@ const QStringList &DeviceManager::getBusId()
 
 void DeviceManager::addCmdInfo(const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
+    QMutexLocker locker(&addCmdMutex);
     foreach (const QString &key, cmdInfo.keys()) {
         m_cmdInfo[key].append(cmdInfo[key]);
     }
@@ -491,6 +493,7 @@ void DeviceManager::addCmdInfo(const QMap<QString, QList<QMap<QString, QString> 
 
 const QList<QMap<QString, QString>> &DeviceManager::cmdInfo(const QString &key)
 {
+    QMutexLocker locker(&addCmdMutex);
     return m_cmdInfo[key];
 }
 

@@ -10,6 +10,8 @@
 #include "../LoadInfo/DeviceGenerator.h"
 #include "../LoadInfo/DeviceFactory.h"
 
+QMutex             lock;
+
 CmdTask::CmdTask(QString key, QString cmd, QString debugFile, QString info, ThreadPool *parent)
     : m_Key(key)
     , m_Cmd(cmd)
@@ -136,10 +138,10 @@ ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
 
 void ThreadPool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
-    m_lock.tryLock();
+//    QMutexLocker locker(&lock);
     m_FinishedCmd++;
     DeviceManager::instance()->addCmdInfo(cmdInfo);
-    m_lock.unlock();
+//    locker.unlock();
     if (m_FinishedCmd == m_AllCmdNum) {
         generateInfo();
     } else {
@@ -150,7 +152,7 @@ void ThreadPool::finishedCmd(const QString &info, const QMap<QString, QList<QMap
 
 void ThreadPool::finishedGenerateDevice(const QStringList &lst)
 {
-    m_lock.tryLock();
+    QMutexLocker locker(&lock);
     m_FinishedGenerator++;
     if (lst.size() > 0) {
         DeviceManager::instance()->addBusId(lst);
@@ -158,7 +160,6 @@ void ThreadPool::finishedGenerateDevice(const QStringList &lst)
     if (m_FinishedGenerator == m_AllTypeNum) {
         emit finished("finish");
     }
-    m_lock.unlock();
 }
 
 void ThreadPool::setFramework(const QString &arch)
