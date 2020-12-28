@@ -14,7 +14,11 @@ CmdTool::CmdTool()
 void CmdTool::addMapInfo(const QString &key, const QMap<QString, QString> &mapInfo)
 {
     if (m_cmdInfo.find(key) != m_cmdInfo.end()) {
-        m_cmdInfo[key].append(mapInfo);
+        // klu insert from top
+        if ("dmidecode4" == key) {
+            m_cmdInfo[key].insert(0, mapInfo);
+        } else
+            m_cmdInfo[key].append(mapInfo);
     } else {
         QList<QMap<QString, QString> > lstMap;
         lstMap.append(mapInfo);

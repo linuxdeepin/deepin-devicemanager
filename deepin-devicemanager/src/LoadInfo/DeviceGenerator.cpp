@@ -138,7 +138,7 @@ void DeviceGenerator::generatorCpuDevice()
         }
 
         // 设置逻辑CPU信息
-        device.setCpuInfo(lscpu, lshw, dmidecode4[i + 1], *it, lstCatCpu.size(), coreNum);
+        device.setCpuInfo(lscpu, lshw, dmidecode4[i], *it, lstCatCpu.size(), coreNum);
         DeviceManager::instance()->addCpuDevice(device);
     }
 }
@@ -391,8 +391,8 @@ void DeviceGenerator::getMemoryInfoFromDmidecode()
 {
     // 加载从dmidecode获取的信息
     const QList<QMap<QString, QString>> dmiMemory = DeviceManager::instance()->cmdInfo("dmidecode17");
-    QList<QMap<QString, QString> >::const_reverse_iterator dIt = dmiMemory.rbegin();
-    for (; dIt != dmiMemory.rend(); ++dIt) {
+    QList<QMap<QString, QString> >::const_iterator dIt = dmiMemory.begin();
+    for (; dIt != dmiMemory.end(); ++dIt) {
         if ((*dIt).size() < 2 || (*dIt)["size"] == "No Module Installed") {
             continue;
         }
