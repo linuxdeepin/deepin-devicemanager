@@ -367,8 +367,8 @@ void KLUGenerator::generatorCpuDevice()
         device.setCpuInfo(lscpu, lshw, dmidecode4[i], *it, lstCatCpu.size(), coreNum);
 
         // HW要求将CPU界面的表格上 频率 改为 最大频率，不显示范围
-        if (dmidecode4[i + 1].find("Max Speed") != dmidecode4[i + 1].end()) {
-            device.setfrequencyShowRange(false, dmidecode4[i + 1]["Max Speed"]);
+        if (dmidecode4[i].find("Max Speed") != dmidecode4[i].end()) {
+            device.setfrequencyShowRange(false, dmidecode4[i]["Max Speed"]);
         }
 
 
