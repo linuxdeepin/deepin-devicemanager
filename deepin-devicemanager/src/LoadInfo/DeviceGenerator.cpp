@@ -111,7 +111,7 @@ void DeviceGenerator::generatorCpuDevice()
             coreNum += (*dit)["Core Count"].trimmed().toInt();
             coreCountList << (*dit)["Core Count"].trimmed().toInt();  // 统计物理CPU以及其中的核数
         }
-        qInfo() << " ************************* 000 " << (*dit)["Current Speed"];
+        qDebug() << " ************************* 000 " << (*dit)["Current Speed"];
     }
 
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
@@ -140,7 +140,7 @@ void DeviceGenerator::generatorCpuDevice()
 
         // 设置逻辑CPU信息
         device.setCpuInfo(lscpu, lshw, dmidecode4[i], *it, lstCatCpu.size(), coreNum);
-        qInfo() << " ************************* 01 " << i;
+        qDebug() << " ************************* 01 " << i;
         DeviceManager::instance()->addCpuDevice(device);
     }
 }
