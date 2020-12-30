@@ -5,6 +5,7 @@ Exec=deepin-devicemanager
 GenericName=Device Manager
 Icon=deepin-devicemanager
 Name=Device Manager
+Keywords=Monitor;System;Process;CPU;Memory;Network;History;Usage;Performance;Task;Manager;Activity;
 Terminal=false
 Type=Application
 X-Ayatana-Desktop-Shortcuts=deepin-devicemanager
