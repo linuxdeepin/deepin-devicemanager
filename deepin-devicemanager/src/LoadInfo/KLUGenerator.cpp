@@ -94,11 +94,11 @@ void KLUGenerator::generatorMonitorDevice()
 {
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Name", "LCD");
-    mapInfo.insert("Vendor", "HUAWEI");
+//    mapInfo.insert("Vendor", "HUAWEI");
     mapInfo.insert("CurResolution", "2160x1440@60Hz");
     mapInfo.insert("SupportResolution", "2160x1440@60Hz");
     mapInfo.insert("Size", "14 Inch");
-    mapInfo.insert("Date", "2019年7月");
+//    mapInfo.insert("Date", "2019年7月");
 
     DeviceMonitor monitor;
     monitor.setInfoFromSelfDefine(mapInfo);
