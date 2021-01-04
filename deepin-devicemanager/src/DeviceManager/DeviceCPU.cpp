@@ -64,6 +64,14 @@ void DeviceCpu::setfrequencyShowRange(bool isRange, const QString &maxSpeed)
 
     // 频率显示为dmidecode -t 4 中的最大值
     m_Frequency = maxSpeed;
+
+    // 单位由 MHz 改为 GHz
+    if (m_Frequency.contains("MHz")) {
+        m_Frequency = m_Frequency.replace("MHz", "").trimmed();
+        double frequencyNum = m_Frequency.toDouble() / 1000.0;
+
+        m_Frequency = QString::number(frequencyNum) + " GHz";
+    }
 }
 
 const QString &DeviceCpu::vendor() const
