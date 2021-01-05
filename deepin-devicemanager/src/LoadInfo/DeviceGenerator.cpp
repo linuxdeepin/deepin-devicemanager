@@ -412,8 +412,11 @@ void DeviceGenerator::getDiskInfoFromHwinfo()
         DeviceStorage *device = new DeviceStorage();
         if (device->setHwinfoInfo(*dIt) && device->isValid()) {
             DeviceManager::instance()->addStorageDeivce(device);
-            addBusIDFromHwinfo((*dIt)["SysFS BusID"]);
         }
+
+        // Add all disk including no size disk to filter list
+        if ((*dIt).find("SysFS BusID") != (*dIt).end())
+            addBusIDFromHwinfo((*dIt)["SysFS BusID"]);
     }
 }
 
