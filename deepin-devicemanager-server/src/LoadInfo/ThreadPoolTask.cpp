@@ -42,7 +42,12 @@ void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
 {
     QProcess process;
     QString cmdT = cmd;
-    process.start(cmdT.replace(QString(" >  ") + PATH + m_File, ""));
+//    process.start(cmdT.replace(QString(" >  ") + PATH + m_File, ""));
+
+    QStringList options;
+    options << "-c" << cmdT.replace(QString(" >  ") + PATH + m_File, "");
+    process.start("/bin/bash", options);
+
     process.waitForFinished(m_Waiting);
     info = process.readAllStandardOutput();
 }
@@ -67,6 +72,12 @@ void ThreadPoolTask::runCmdToCache(const QString &cmd)
     if (m_File == "lsblk_d.txt") {
         loadSmartCtlInfoToCache(info);
     }
+
+    // 如果命令是 ls /dev/sg* ,则需要执行 smartctl --all /dev/*** 命令
+    if (m_File == "ls_sg.txt") {
+        loadSgSmartCtlInfoToCache(info);
+    }
+
     // 如果命令是 lspci  , 则需要执行 lspci -v -s %1 > lspci_vs.txt 命令
     if (m_File == "lspci.txt") {
         loadLspciVSInfoToCache(info);
@@ -89,6 +100,24 @@ void ThreadPoolTask::loadSmartCtlInfoToCache(const QString &info)
         QString sInfo;
         runCmd(smartCmd, sInfo);
         DeviceInfoManager::getInstance()->addInfo(QString("smartctl_%1").arg(words[0].trimmed()), sInfo);
+    }
+}
+
+void ThreadPoolTask::loadSgSmartCtlInfoToCache(const QString &info)
+{
+    QStringList lines = info.split("\n");
+
+    foreach (QString line, lines) {
+        if (line.isEmpty()) {
+            continue;
+        }
+
+        QStringList words = line.split("/");
+
+        QString smartCmd = QString("smartctl --all /dev/%1").arg(words[2].trimmed());
+        QString sInfo;
+        runCmd(smartCmd, sInfo);
+        DeviceInfoManager::getInstance()->addInfo(QString("smartctl_%1").arg(words[2]), sInfo);
     }
 }
 

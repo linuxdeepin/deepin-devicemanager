@@ -72,6 +72,13 @@ private:
     void loadLsblkInfo(const QString &debugfile);
 
     /**
+     * @brief loadLssgInfo:加载ls /dev/sg*获取的信息
+     * @param debugfile:调试文件名
+     */
+    void loadLssgInfo(const QString &debugfile);
+
+
+    /**
      * @brief loadSmartCtlInfo:加载smartctl获取的信息
      * @param logicalName:逻辑名称
      * @param debugfile:调试文件名

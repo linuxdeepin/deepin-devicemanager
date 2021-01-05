@@ -186,6 +186,13 @@ void ThreadPool::initCmd()
     cmdLsblk.canNotReplace = false;
     m_ListCmd.append(cmdLsblk);
 
+    // 添加lsblk -d -o name,rota命令
+    Cmd cmdLssg;
+    cmdLssg.cmd = QString("%1 %2%3").arg("ls /dev/sg* > ").arg(PATH).arg("ls_sg.txt");
+    cmdLssg.file = "ls_sg.txt";
+    cmdLssg.canNotReplace = false;
+    m_ListCmd.append(cmdLssg);
+
     // 添加lspci命令
     Cmd cmdLspci;
     cmdLspci.cmd = QString("%1 %2%3").arg("lspci > ").arg(PATH).arg("lspci.txt");

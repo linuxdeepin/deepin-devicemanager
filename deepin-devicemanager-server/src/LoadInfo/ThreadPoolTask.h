@@ -70,6 +70,12 @@ private:
     void loadSmartCtlInfoToCache(const QString &info);
 
     /**
+     * @brief loadSgSmartCtlInfoToCache
+     * @param info
+     */
+    void loadSgSmartCtlInfoToCache(const QString &info);
+
+    /**
      * @brief loadLspciVSInfoToCache
      * @param info
      */

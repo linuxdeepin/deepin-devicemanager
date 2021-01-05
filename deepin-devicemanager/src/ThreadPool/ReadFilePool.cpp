@@ -93,6 +93,7 @@ void ReadFilePool::initCmd()
     m_CmdList.append({ "upower",               "upower_dump.txt",        ""});
     m_CmdList.append({ "lscpu",                "lscpu.txt",              tr("Loading Operating System Info...")});
     m_CmdList.append({ "lsblk_d",              "lsblk_d.txt",            ""});
+    m_CmdList.append({ "ls_sg",                "ls_sg.txt",              ""});
     m_CmdList.append({ "xrandr",               "xrandr.txt",             tr("Loading CPU Info...")});
     m_CmdList.append({ "xrandr_verbose",       "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
     m_CmdList.append({ "dmesg",                "dmesg.txt",              tr("Loading Power Info...")});

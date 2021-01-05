@@ -47,6 +47,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
         loadLshwInfo(debugFile);
     } else if (key == "lsblk_d") {
         loadLsblkInfo(debugFile);
+    } else if (key == "ls_sg") {
+        loadLssgInfo(debugFile);
     } else if (key == "dmesg") {
         loadDmesgInfo(debugFile);
     } else if (key == "hciconfig") {
@@ -159,6 +161,30 @@ void CmdTool::loadLsblkInfo(const QString &debugfile)
         loadSmartCtlInfo(words[0].trimmed(), "smartctl_" + words[0].trimmed() + ".txt");
     }
     addMapInfo("lsblk_d", mapInfo);
+}
+
+void CmdTool::loadLssgInfo(const QString &debugfile)
+{
+    // 加载ls /dev/sg*信息
+    QString deviceInfo;
+    if (!getDeviceInfo(deviceInfo, debugfile)) {
+        return;
+    }
+
+    QStringList lines = deviceInfo.split("\n");
+    QMap<QString, QString> mapInfo;
+
+    // 获取存储设备逻辑名称以及ROTA信息
+    foreach (QString line, lines) {
+        if (line.isEmpty()) {
+            continue;
+        }
+
+        QStringList words = line.split("/");
+
+        //sudo smartctl --all /dev/%1   文件信息
+        loadSmartCtlInfo(words[2].trimmed(), "smartctl_" + words[2].trimmed() + ".txt");
+    }
 }
 
 void CmdTool::loadSmartCtlInfo(const QString &logicalName, const QString &debugfile)
