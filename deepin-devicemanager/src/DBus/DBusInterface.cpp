@@ -25,7 +25,9 @@
 #include <QDBusReply>
 #include <QDebug>
 
-DBusInterface *DBusInterface::s_Instance = nullptr;
+std::atomic<DBusInterface *> DBusInterface::s_Instance;
+std::mutex DBusInterface::m_mutex;
+
 const QString SERVICE_NAME = "com.deepin.devicemanager";
 const QString SERVICE_PATH = "/com/deepin/devicemanager";
 

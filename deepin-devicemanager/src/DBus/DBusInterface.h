@@ -3,16 +3,30 @@
 
 #include <QObject>
 
+#include <mutex>
+
 class QDBusInterface;
 
 class DBusInterface
 {
 public:
-    static DBusInterface *getInstance()
+    inline static DBusInterface *getInstance()
     {
-        if (!s_Instance)
-            s_Instance = new DBusInterface();
-        return s_Instance;
+        // 利用原子变量解决，单例模式造成的内存泄露
+        DBusInterface *sin = s_Instance.load();
+
+        if (!sin) {
+            // std::lock_guard 自动加锁解锁
+            std::lock_guard<std::mutex> lock(m_mutex);
+            sin = s_Instance.load();
+
+            if (!sin) {
+                sin = new DBusInterface();
+                s_Instance.store(sin);
+            }
+        }
+
+        return sin;
     }
 
     /**
@@ -33,7 +47,9 @@ private:
     void init();
 
 private:
-    static DBusInterface *s_Instance;
+    static std::atomic<DBusInterface *> s_Instance;
+    static std::mutex m_mutex;
+
     QDBusInterface       *mp_Iface;
 };
 
