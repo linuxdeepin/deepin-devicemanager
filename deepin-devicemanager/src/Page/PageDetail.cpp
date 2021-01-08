@@ -416,4 +416,6 @@ void PageDetail::slotCopyAllInfo()
     }
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(str);
+
+    qInfo() << clipboard->text();
 }

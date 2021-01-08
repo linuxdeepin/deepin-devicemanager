@@ -191,6 +191,7 @@ void PageOverview::slotActionRefresh()
 
 void PageOverview::slotActionExport()
 {
+    qDebug() << "export";
     // 导出
     emit exportInfo();
 }
@@ -200,6 +201,8 @@ void PageOverview::slotActionCopy()
     // 拷贝
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Overview->toString());
+
+    qInfo() << clipboard->text();
 }
 
 void PageOverview::initWidgets()

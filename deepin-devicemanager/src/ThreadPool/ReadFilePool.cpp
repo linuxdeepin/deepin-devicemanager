@@ -110,6 +110,7 @@ void ReadFilePool::initCmd()
     m_CmdList.append({ "cat_version",          "/proc/version",          ""});
     m_CmdList.append({ "cat_devices",          "/proc/bus/input/devices", ""});
     m_CmdList.append({ "cat_audio",            "/proc/asound/card0/codec#0",     ""});
+    m_CmdList.append({ "cat_gpuinfo",          "/proc/gpuinfo_0 ",     ""});
     m_CmdList.append({ "bt_device",            "bt_device.txt",          ""}); // 蓝牙设备配对信息
 
     if (m_Arch == "PanGuV") {
