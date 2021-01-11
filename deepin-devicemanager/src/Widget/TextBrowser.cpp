@@ -113,8 +113,6 @@ void TextBrowser::fillClipboard()
     QClipboard *clipboard = DApplication::clipboard();
     QTextDocumentFragment frag = textCursor().selection();
     clipboard->setText(frag.toPlainText().trimmed() + "\n");
-
-    qInfo() << clipboard->text();
 }
 
 void TextBrowser::paintEvent(QPaintEvent *event)
@@ -234,8 +232,6 @@ void TextBrowser::slotActionCopy()
 //        mp_Copy->setText(tr("Copy Selected Text"));
         QClipboard *clipboard = DApplication::clipboard();
         clipboard->setText(str);
-
-        qInfo() << clipboard->text();
     }
 
 //    DUtil::DNotifySender sender(tr("Successfully copied device information"));

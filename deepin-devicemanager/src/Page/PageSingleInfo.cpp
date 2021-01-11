@@ -170,8 +170,6 @@ void PageSingleInfo::slotActionCopy()
     // 拷贝
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Content->toString());
-
-    qInfo() << clipboard->text();
 }
 
 void PageSingleInfo::slotActionEnable()
