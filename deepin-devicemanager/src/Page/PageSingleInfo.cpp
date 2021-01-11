@@ -177,7 +177,7 @@ void PageSingleInfo::slotActionCopy()
 void PageSingleInfo::slotActionEnable()
 {
     if (mp_Content->isCurDeviceEnable()) {
-        // 当前设备是可用状态
+        // 当前设备是不可用状态
         EnableDeviceStatus res = mp_Device->setEnable(false);
 
         // 除设置成功的情况，其他情况需要提示设置失败
@@ -186,7 +186,9 @@ void PageSingleInfo::slotActionEnable()
             mp_Content->setDeviceEnable(false);
         } else {
             QString con = tr("Failed to disable the device");
-            DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);
+
+            // 启用失败提示
+            DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         }
     } else {
         // 当前设备是可用状态
@@ -198,7 +200,9 @@ void PageSingleInfo::slotActionEnable()
             mp_Content->setDeviceEnable(true);
         } else {
             QString con = tr("Failed to enable the device");
-            DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);
+
+            // 禁用失败提示
+            DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         }
     }
 }

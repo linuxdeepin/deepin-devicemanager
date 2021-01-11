@@ -11,6 +11,7 @@
 #include <DFontSizeManager>
 #include <DMessageBox>
 #include <DMenu>
+#include <DMessageManager>
 
 // 其它头文件
 #include "PageTableHeader.h"
@@ -118,7 +119,10 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
             // 无法禁用设备
             con = tr("Failed to disable the device");
         }
-        DMessageBox::information(this, tr(""), con, DMessageBox::StandardButton::Ok);
+
+        // 禁用、启用失败提示
+        DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
+
     }
 }
 
