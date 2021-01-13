@@ -144,5 +144,4 @@ file(GLOB APP_QM_FILES "translations/*.qm")
 install(FILES ${APP_QM_FILES} DESTINATION share/deepin-devicemanager/translations)
 install(FILES ${APP_DESKTOP} DESTINATION share/applications)
 install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/apps)
-
-
+install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
