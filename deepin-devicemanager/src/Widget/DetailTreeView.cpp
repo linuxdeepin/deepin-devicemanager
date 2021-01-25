@@ -520,8 +520,12 @@ void DetailTreeView::leaveEvent(QEvent *event)
 void DetailTreeView::slotTimeOut()
 {
     // tooltips显示当前Item内容
-    if (this->isActiveWindow())
+    if (this->isActiveWindow()) {
         showTips(mp_CurItem);
+    } else {// 如果窗口不是激活状态，则影藏tips
+        if (mp_ToolTips)
+            mp_ToolTips->hide();
+    }
 }
 
 void DetailTreeView::slotItemEnterd(QTableWidgetItem *item)
