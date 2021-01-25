@@ -180,9 +180,25 @@ protected:
     void leaveEvent(QEvent *event)override;
 
 private slots:
+    /**
+     * @brief slotTimeOut
+     */
     void slotTimeOut();
+
+    /**
+     * @brief slotItemEnterd
+     * @param item
+     */
     void slotItemEnterd(QTableWidgetItem *item);
+
+    /**
+     * @brief slotEnterBtnWidget
+     */
     void slotEnterBtnWidget();
+
+    /**
+     * @brief slotLeaveBtnWidget
+     */
     void slotLeaveBtnWidget();
 
 private:

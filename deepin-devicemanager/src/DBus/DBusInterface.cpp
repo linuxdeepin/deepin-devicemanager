@@ -25,6 +25,7 @@
 #include <QDBusReply>
 #include <QDebug>
 
+// 以下这个问题可以避免单例的内存泄露问题
 std::atomic<DBusInterface *> DBusInterface::s_Instance;
 std::mutex DBusInterface::m_mutex;
 

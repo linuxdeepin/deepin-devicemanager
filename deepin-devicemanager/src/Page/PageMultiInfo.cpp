@@ -42,8 +42,8 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
 PageMultiInfo::~PageMultiInfo()
 {
     // 清空指针
-    DELETE_PTR(mp_Table);
-    DELETE_PTR(mp_Detail);
+    DELETE_PTR(mp_Table)
+    DELETE_PTR(mp_Detail)
 }
 
 void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)

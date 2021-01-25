@@ -66,9 +66,9 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     // 释放指针
-    DELETE_PTR(mp_WaitingWidget);
-    DELETE_PTR(mp_DeviceWidget);
-    DELETE_PTR(mp_MainStackWidget);
+    DELETE_PTR(mp_WaitingWidget)
+    DELETE_PTR(mp_DeviceWidget)
+    DELETE_PTR(mp_MainStackWidget)
 }
 
 void MainWindow::refresh()

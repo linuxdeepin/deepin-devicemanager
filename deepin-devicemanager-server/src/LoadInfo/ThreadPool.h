@@ -61,6 +61,9 @@ public:
     void generateDeviceFile();
 
 private:
+    /**
+     * @brief initCmd init all cmd
+     */
     void initCmd();
 
 private:

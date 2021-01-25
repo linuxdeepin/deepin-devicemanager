@@ -77,6 +77,9 @@ signals:
      */
     void enableDevice(int row, bool enable);
 
+    /**
+     * @brief updateUI : update UI
+     */
     void updateUI();
 
 private slots:

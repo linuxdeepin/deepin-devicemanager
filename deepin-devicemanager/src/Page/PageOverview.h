@@ -102,6 +102,10 @@ private slots:
      * @brief slotActionExport:右键菜单导出槽函数
      */
     void slotActionExport();
+
+    /**
+     * @brief slotActionCopy
+     */
     void slotActionCopy();
 
 private:
