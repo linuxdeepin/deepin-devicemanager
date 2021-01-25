@@ -12,9 +12,9 @@
 
 ### 运行设备管理器
 
-1. 单击任务栏上的启动器 ![deepin_launcher](../common/deepin_launcher.svg)，进入启动器界面。
+1. 单击任务栏上的启动器图标 ![deepin_launcher](../common/deepin_launcher.svg)，进入启动器界面。
 
-2. 上下滚动鼠标滚轮浏览或通过搜索，找到设备管理器 ![deepin_devicemanager](../common/deepin_devicemanager.svg) ，并单击运行。
+2. 上下滚动鼠标滚轮浏览或通过搜索，找到设备管理器图标 ![deepin_devicemanager](../common/deepin_devicemanager.svg) ，并单击运行。
 
 3. 右键单击![deepin_devicemanager](../common/deepin_devicemanager.svg) ，您可以：
 
@@ -28,7 +28,7 @@
 ### 关闭设备管理器
 
 - 在设备管理器界面，单击  ![close](../common/close.svg) ，退出设备管理器。
-- 右键单击任务栏上的 ![deepin_devicemanager](../common/deepin_devicemanager.svg)  图标，选择 **关闭所有** 来退出设备管理器。
+- 右键单击任务栏上的 ![deepin_devicemanager](../common/deepin_devicemanager.svg) ，选择 **关闭所有** 来退出设备管理器。
 - 在设备管理器界面单击 ![icon_menu](../common/icon_menu.svg) ，选择 **退出** 来退出设备管理器。
 
 ## 操作介绍
@@ -37,7 +37,7 @@
 ### 概况
 
 1. 在设备管理器界面，单击 **概况**。
-2. 查看操作系统内核信息，各硬件设备的列表，以及对应的详细信息如品牌、名称和规格等。
+2. 查看操作系统内核信息及各硬件设备列表。
 
 ![0|overview](fig/p_overview.png)
 
