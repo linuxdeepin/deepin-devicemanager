@@ -26,6 +26,10 @@ void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
         m_Size.replace("MiB", "");
         // MiB换算MB
         double size = m_Size.toDouble() / 1024.0;
+#ifdef __sw_64__ //lutianyu 2021-2-4 num is not even
+	if (int(size) % 2 != 0 )
+		size = size + 1;
+#endif
         m_Size = QString::number(size, 'g', 0) + QString("GB");
     }
 
