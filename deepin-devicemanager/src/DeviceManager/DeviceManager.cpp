@@ -148,7 +148,7 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
 
     // 添加cpu信息
     if (m_ListDeviceCPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU"), "cpu##CPU"));
-    if (m_CpuNum > 1) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU quantity"), "cpun##CPUN"));
+    if (m_CpuNum > 1) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU quantity"), ""));
     m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 板载接口设备
