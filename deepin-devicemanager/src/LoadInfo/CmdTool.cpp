@@ -971,13 +971,18 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
             if (key == "Driver") {
                 value.replace("\"", "");
             }
-            mapInfo[key] += value;
+
+            // 如果信息中有unknown 则过滤
+            if (!value.contains("unknown"))
+                mapInfo[key] += value;
 
         } else {
             if (words[0].trimmed() == "Resolution") {
                 mapInfo[words[0].trimmed()] += words[1].trimmed();
             } else {
-                mapInfo[words[0].trimmed()] = words[1].trimmed();
+                // 如果信息中有unknown 则过滤
+                if (!words[1].trimmed().contains("unknown"))
+                    mapInfo[words[0].trimmed()] = words[1].trimmed();
             }
         }
     }
