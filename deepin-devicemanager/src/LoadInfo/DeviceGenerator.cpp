@@ -123,6 +123,11 @@ void DeviceGenerator::generatorCpuDevice()
         logicalNum += (*itd)["Thread Count"].toInt();
     }
 
+    // 如果获取不到逻辑数，就按照core算 bug53921
+    if (logicalNum == 0) {
+        logicalNum = coreNum;
+    }
+
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
     for (; it != lstCatCpu.end(); ++it) {
         DeviceCpu *device = new DeviceCpu;
