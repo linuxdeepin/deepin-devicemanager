@@ -1434,12 +1434,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>Monitor</source>
-        <translation type="unfinished"/>
+        <translation>Монітор</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Display Adapter</source>
-        <translation type="unfinished"/>
+        <translation>Адаптер дисплея</translation>
     </message>
 </context>
 <context>

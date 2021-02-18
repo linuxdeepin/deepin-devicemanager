@@ -658,7 +658,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="151"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1148"/>
         <source>CPU quantity</source>
-        <translation type="unfinished"/>
+        <translation>CPU مىقدارى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="155"/>
@@ -1237,7 +1237,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="155"/>
         <source>Temperature</source>
-        <translation type="unfinished"/>
+        <translation>تېمپېراتۇرا</translation>
     </message>
 </context>
 <context>
@@ -1434,12 +1434,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>Monitor</source>
-        <translation type="unfinished"/>
+        <translation>كۆرسىتىش ئۈسكۈنىسى</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Display Adapter</source>
-        <translation type="unfinished"/>
+        <translation>كۆرسەتكۈچ ماسلاشتۇرغۇچ</translation>
     </message>
 </context>
 <context>
@@ -2455,7 +2455,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="246"/>
         <source>Uniq</source>
-        <translation type="unfinished"/>
+        <translation>تەكرارلانغان قۇرنى ئۆچۈرۈۋېتىش</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="250"/>

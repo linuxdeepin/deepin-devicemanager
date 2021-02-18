@@ -297,7 +297,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
         <source>CPU ID</source>
-        <translation>CPE ID</translation>
+        <translation>ID procesorja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
@@ -652,13 +652,13 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="187"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1144"/>
         <source>CPU</source>
-        <translation>CPE</translation>
+        <translation>Procesor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="151"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1148"/>
         <source>CPU quantity</source>
-        <translation type="unfinished"/>
+        <translation>Število procesorjev</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="155"/>
@@ -1237,7 +1237,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="155"/>
         <source>Temperature</source>
-        <translation type="unfinished"/>
+        <translation>Temperatura</translation>
     </message>
 </context>
 <context>
@@ -1434,12 +1434,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>Monitor</source>
-        <translation type="unfinished"/>
+        <translation>Monitor</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Display Adapter</source>
-        <translation type="unfinished"/>
+        <translation>Grafični vmesnik</translation>
     </message>
 </context>
 <context>
@@ -2063,27 +2063,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
         <source>CPU implementer</source>
-        <translation>CPE izvedbenik</translation>
+        <translation>Implementacija procesorja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
         <source>CPU architecture</source>
-        <translation>CPU arhitektura</translation>
+        <translation>Arhitektura procesorja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
         <source>CPU variant</source>
-        <translation>CPU varianta</translation>
+        <translation>Izvedba procesorja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>CPU part</source>
-        <translation>CPU del</translation>
+        <translation>Del procesorja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
         <source>CPU revision</source>
-        <translation>CPU revizija</translation>
+        <translation>Revizija procesorja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
@@ -2455,7 +2455,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="246"/>
         <source>Uniq</source>
-        <translation type="unfinished"/>
+        <translation>Uniq</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="250"/>
@@ -2474,7 +2474,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
         <source>CPU</source>
-        <translation>CPE</translation>
+        <translation>Procesor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="815"/>
@@ -2482,7 +2482,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
         <source>No CPU found</source>
-        <translation>Ni najdene CPE</translation>
+        <translation>Procesor ni bil najden</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="816"/>
@@ -3150,7 +3150,7 @@
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="96"/>
         <source>Loading CPU Info...</source>
-        <translation>Nalaganje podatkov o CPE...</translation>
+        <translation>Nalaganje podatkov o procesorju...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="97"/>

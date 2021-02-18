@@ -676,13 +676,13 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="157"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="190"/>
         <source>Display Adapter</source>
-        <translation>Adaptador de Vídeo</translation>
+        <translation>Placa de Vídeo</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="158"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="191"/>
         <source>Sound Adapter</source>
-        <translation>Adaptador de Som</translation>
+        <translation>Placa de Som</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="159"/>
@@ -712,7 +712,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="166"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="196"/>
         <source>Network Adapter</source>
-        <translation>Adaptador de Rede</translation>
+        <translation>Placa de Rede</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="170"/>
@@ -1434,12 +1434,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>Monitor</source>
-        <translation type="unfinished"/>
+        <translation>Monitor</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Display Adapter</source>
-        <translation type="unfinished"/>
+        <translation>Placa de Vídeo</translation>
     </message>
 </context>
 <context>
@@ -2143,22 +2143,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="284"/>
         <source>Twenty-two</source>
-        <translation>Vinte e Dois</translation>
+        <translation>Vinte e dois</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
         <source>Twenty-four</source>
-        <translation>Vinte e Quatro</translation>
+        <translation>Vinte e quatro</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
         <source>Twenty-six</source>
-        <translation>Vinte e Seis</translation>
+        <translation>Vinte e seis</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="287"/>
         <source>Twenty-eight</source>
-        <translation>Vinte e Oito</translation>
+        <translation>Vinte e oito</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="289"/>
@@ -2168,22 +2168,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
         <source>Thirty-two</source>
-        <translation>Trinta e Dois</translation>
+        <translation>Trinta e dois</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="291"/>
         <source>Thirty-four</source>
-        <translation>Trinta e Quatro</translation>
+        <translation>Trinta e quatro</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="292"/>
         <source>Thirty-six</source>
-        <translation>Trinta e Seis</translation>
+        <translation>Trinta e seis</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="293"/>
         <source>Thirty-eight</source>
-        <translation>Trinta e Oito</translation>
+        <translation>Trinta e oito</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="295"/>
@@ -2193,22 +2193,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="296"/>
         <source>Forty-two</source>
-        <translation>Quarenta e Dois</translation>
+        <translation>Quarenta e dois</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="297"/>
         <source>Forty-four</source>
-        <translation>Quarenta e Quatro</translation>
+        <translation>Quarenta e quatro</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="298"/>
         <source>Forty-six</source>
-        <translation>Quarenta e Seis</translation>
+        <translation>Quarenta e seis</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="299"/>
         <source>Forty-eight</source>
-        <translation>Quarenta e Oito</translation>
+        <translation>Quarenta e oito</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="301"/>
@@ -2218,22 +2218,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="302"/>
         <source>Fifty-two</source>
-        <translation>Cinquenta e Dois</translation>
+        <translation>Cinquenta e dois</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="303"/>
         <source>Fifty-four</source>
-        <translation>Cinquenta e Quatro</translation>
+        <translation>Cinquenta e quatro</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="304"/>
         <source>Fifty-six</source>
-        <translation>Cinquenta e Seis</translation>
+        <translation>Cinquenta e seis</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="305"/>
         <source>Fifty-eight</source>
-        <translation>Cinquenta e Oito</translation>
+        <translation>Cinquenta e oito</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="307"/>
@@ -2243,12 +2243,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="308"/>
         <source>Sixty-two</source>
-        <translation>Sessenta e Dois</translation>
+        <translation>Sessenta e dois</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="309"/>
         <source>Sixty-four</source>
-        <translation>Sessenta e Quatro</translation>
+        <translation>Sessenta e quatro</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
@@ -2408,7 +2408,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="347"/>
         <source>One hundred and Twenty-eight</source>
-        <translation>Cento e Vinte e Oito</translation>
+        <translation>Cento e vinte e oito</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="46"/>
@@ -2538,7 +2538,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <source>Display Adapter</source>
-        <translation>Adaptador de Vídeo</translation>
+        <translation>Placa de Vídeo</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="819"/>
@@ -2570,7 +2570,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
         <source>Network Adapter</source>
-        <translation>Adaptador de Rede</translation>
+        <translation>Placa de Rede</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="821"/>
@@ -2586,7 +2586,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
         <source>Sound Adapter</source>
-        <translation>Adaptador de Som</translation>
+        <translation>Placa de Som</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="822"/>
@@ -3115,72 +3115,72 @@
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="68"/>
         <source>Loading Audio Device Info...</source>
-        <translation>Carregando Informações do Dispositivo de Áudio...</translation>
+        <translation>Carregando as Informações do Dispositivo de Áudio...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="71"/>
         <source>Loading BIOS Info...</source>
-        <translation>Carregando Informações da BIOS...</translation>
+        <translation>Carregando as Informações da BIOS...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="81"/>
         <source>Loading CD-ROM Info...</source>
-        <translation>Carregando Informações do CD-ROM...</translation>
+        <translation>Carregando as Informações do CD-ROM...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="85"/>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Carregando Informações do Dispositivo Bluetooth...</translation>
+        <translation>Carregando as Informações do Dispositivo Bluetooth...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="86"/>
         <source>Loading Image Devices Info...</source>
-        <translation>Carregando Informações dos Dispositivos de Imagem...</translation>
+        <translation>Carregando as Informações do Dispositivo de Imagem...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="88"/>
         <source>Loading Keyboard Info...</source>
-        <translation>Carregando Informações do Teclado...</translation>
+        <translation>Carregando as Informações do Teclado...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="94"/>
         <source>Loading Operating System Info...</source>
-        <translation>Carregando Informações do Sistema Operacional...</translation>
+        <translation>Carregando as Informações do Sistema Operacional...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="96"/>
         <source>Loading CPU Info...</source>
-        <translation>Carregando Informações da CPU...</translation>
+        <translation>Carregando as Informações da CPU...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="97"/>
         <source>Loading Other Devices Info...</source>
-        <translation>Carregando Informações de Outros Dispositivos...</translation>
+        <translation>Carregando as Informações de Outros Dispositivos...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="98"/>
         <source>Loading Power Info...</source>
-        <translation>Carregando Informações de Energia...</translation>
+        <translation>Carregando as Informações de Energia...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="99"/>
         <source>Loading Printer Info...</source>
-        <translation>Carregando Informações da Impressora...</translation>
+        <translation>Carregando as Informações da Impressora...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="106"/>
         <source>Loading Monitor Info...</source>
-        <translation>Carregando Informações do Monitor...</translation>
+        <translation>Carregando as Informações do Monitor...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="107"/>
         <source>Loading Mouse Info...</source>
-        <translation>Carregando Informações do Mouse...</translation>
+        <translation>Carregando as Informações do Mouse...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="108"/>
         <source>Loading Network Adapter Info...</source>
-        <translation>Carregando Informações da Placa de Rede...</translation>
+        <translation>Carregando as Informações da Placa de Rede...</translation>
     </message>
 </context>
 <context>
