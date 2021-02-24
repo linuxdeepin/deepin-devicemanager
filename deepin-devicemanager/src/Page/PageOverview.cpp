@@ -120,12 +120,15 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     // 系统类型+链接
     DSysInfo::UosEdition type = DSysInfo::uosEditionType();
     if (DSysInfo::UosProfessional == type) { // 桌面专业版
-        linkStr += PROF_STR + END_STR + os.remove(PROF_STR);
+        //linkStr += PROF_STR + END_STR + os.remove(PROF_STR);
+        linkStr += EDUC_STR + END_STR + os.remove(EDUC_STR);
     } else if (DSysInfo::UosHome == type) {  // 个人版
         linkStr += HOME_STR + END_STR + os.remove(HOME_STR);
     } else if (DSysInfo::UosCommunity == type) { // 社区版
         linkStr = COMMUNITY_LINK_STR;  // 社区版的链接与其它的不同
         linkStr += COMMUNITY_STR + END_STR + os.remove(COMMUNITY_STR);
+    } else if (DSysInfo::UosEducation == type) {// 教育版
+        linkStr += EDUC_STR + END_STR + os.remove(EDUC_STR);
     } else if (DSysInfo::UosEnterprise == type) {// 服务器企业版
         linkStr += ENTERPRISE_STR + END_STR + os.remove(ENTERPRISE_STR);
     } else if (DSysInfo::UosEnterpriseC == type) {// 服务器行业版
