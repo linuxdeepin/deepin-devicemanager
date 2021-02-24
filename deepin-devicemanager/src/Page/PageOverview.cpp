@@ -120,8 +120,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     // 系统类型+链接
     DSysInfo::UosEdition type = DSysInfo::uosEditionType();
     if (DSysInfo::UosProfessional == type) { // 桌面专业版
-        //linkStr += PROF_STR + END_STR + os.remove(PROF_STR);
-        linkStr += EDUC_STR + END_STR + os.remove(EDUC_STR);
+        linkStr += PROF_STR + END_STR + os.remove(PROF_STR);
     } else if (DSysInfo::UosHome == type) {  // 个人版
         linkStr += HOME_STR + END_STR + os.remove(HOME_STR);
     } else if (DSysInfo::UosCommunity == type) { // 社区版
