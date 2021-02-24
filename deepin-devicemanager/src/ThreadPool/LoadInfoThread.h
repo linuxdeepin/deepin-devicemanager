@@ -33,12 +33,6 @@ public:
     LoadInfoThread();
 
     /**
-     * @brief isRunning :判断当前进程是否正在运行
-     * @return
-     */
-    bool isRunning();
-
-    /**
      * @brief setFramework：设置架构
      * @param arch:架构
      */

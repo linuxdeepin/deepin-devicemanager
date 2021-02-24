@@ -454,12 +454,6 @@ bool DeviceBaseInfo::canEnable()
     return m_CanEnable;
 }
 
-void DeviceBaseInfo::setIndex(int index)
-{
-    // 设置设备ID
-    m_Index = index;
-}
-
 const QString DeviceBaseInfo::getOverviewInfo()
 {
     return QString("");

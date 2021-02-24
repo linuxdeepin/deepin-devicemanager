@@ -65,6 +65,8 @@ void DeviceGenerator::generatorComputerDevice()
         os =  HOME_STR;
     } else if (DSysInfo::UosCommunity == type) {
         os =  COMMUNITY_STR;
+    } else if (DSysInfo::UosEducation == type) {
+        os = EDUC_STR;
     } else if (DSysInfo::UosEnterprise == type) {
         os =  ENTERPRISE_STR;
     } else if (DSysInfo::UosEnterpriseC == type) {
@@ -121,6 +123,11 @@ void DeviceGenerator::generatorCpuDevice()
     for (; itd != dmidecode4.end(); ++itd) {
         coreNum += (*itd)["Core Count"].toInt();
         logicalNum += (*itd)["Thread Count"].toInt();
+    }
+
+    // 如果获取不到逻辑数，就按照core算 bug53921
+    if (logicalNum == 0) {
+        logicalNum = coreNum;
     }
 
     QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();

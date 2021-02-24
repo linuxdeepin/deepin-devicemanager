@@ -116,16 +116,6 @@ void DeviceListView::addItem(const QString &name, const QString &iconFile)
     mp_ItemModel->appendRow(item);
 }
 
-bool DeviceListView::curItemEnable()
-{
-    const QModelIndex &index =  this->currentIndex();
-    int rowNum = index.row();
-    QStandardItem *item = mp_ItemModel->item(rowNum);
-    if (!item)
-        return false;
-    return item->isEnabled();
-}
-
 void DeviceListView::setCurItemEnable(bool enable)
 {
     const QModelIndex &index =  this->currentIndex();

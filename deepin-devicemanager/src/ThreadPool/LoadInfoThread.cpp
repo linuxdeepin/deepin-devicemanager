@@ -45,11 +45,6 @@ void LoadInfoThread::slotFinishedReadFilePool(const QString &info)
     m_FinishedReadFilePool = true;
 }
 
-bool LoadInfoThread::isRunning()
-{
-    return m_Running;
-}
-
 void LoadInfoThread::setFramework(const QString &arch)
 {
     // 设置架构

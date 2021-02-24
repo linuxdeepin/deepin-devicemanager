@@ -222,11 +222,6 @@ void DeviceManager::addMouseDevice(DeviceInput *const device)
     m_ListDeviceMouse.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getMouseDevices()
-{
-    return m_ListDeviceMouse;
-}
-
 bool DeviceManager::addMouseInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // 从lshw中添加鼠标信息
@@ -246,11 +241,6 @@ void DeviceManager::addCpuDevice(DeviceCpu *const device)
 {
     // 添加CPU设备
     m_ListDeviceCPU.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getCPUDevices()
-{
-    return m_ListDeviceCPU;
 }
 
 void DeviceManager::addStorageDeivce(DeviceStorage *const device)
@@ -301,11 +291,6 @@ void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QMap<Q
     }
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getStorageDevices()
-{
-    return m_ListDeviceStorage;
-}
-
 bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString &value)
 {
     // 设置存储设备介质类型
@@ -346,11 +331,6 @@ void DeviceManager::addGpuDevice(DeviceGpu *const device)
 {
     // 添加显示适配器
     m_ListDeviceGPU.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getGPUDevices()
-{
-    return m_ListDeviceGPU;
 }
 
 void DeviceManager::setGpuInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -398,11 +378,6 @@ void DeviceManager::addMemoryDevice(DeviceMemory *const device)
     m_ListDeviceMemory.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getMemoryDevices()
-{
-    return m_ListDeviceMemory;
-}
-
 void DeviceManager::setMemoryInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
     // 从dmidecode中添加内存信息
@@ -422,11 +397,6 @@ void DeviceManager::addMonitor(DeviceMonitor *const device)
 {
     // 添加显示设备
     m_ListDeviceMonitor.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getMonitorDevices()
-{
-    return m_ListDeviceMonitor;
 }
 
 void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString &edid)
@@ -465,11 +435,6 @@ void DeviceManager::addBiosDevice(DeviceBios *const device)
     m_ListDeviceBios.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getBiosDevices()
-{
-    return m_ListDeviceBios;
-}
-
 void DeviceManager::setLanguageInfo(const QMap<QString, QString> &mapInfo)
 {
     // 设置语言信息
@@ -488,11 +453,6 @@ void DeviceManager::setLanguageInfo(const QMap<QString, QString> &mapInfo)
 void DeviceManager::addBluetoothDevice(DeviceBluetooth *const device)
 {
     m_ListDeviceBluetooth.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getBluetoothDevices()
-{
-    return m_ListDeviceBluetooth;
 }
 
 void DeviceManager::setBluetoothInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -531,11 +491,6 @@ void DeviceManager::addAudioDevice(DeviceAudio *const device)
     m_ListDeviceAudio.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getAudioDevices()
-{
-    return m_ListDeviceAudio;
-}
-
 void DeviceManager::setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // 从lshw中获取音频适配器信息
@@ -570,26 +525,6 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     m_ListDeviceNetwork.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getNetworkDevices()
-{
-    return m_ListDeviceNetwork;
-}
-
-void DeviceManager::setNetworkInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
-{
-    // 从hwinfo中获取网络适配器信息
-    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin();
-    for (; it != m_ListDeviceNetwork.end(); ++it) {
-        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
-        if (!device)
-            continue;
-
-        if (device->setInfoFromHwinfo(mapInfo)) {
-            return;
-        }
-    }
-}
-
 void DeviceManager::addImageDevice(DeviceImage *const device)
 {
     // 添加图像设备
@@ -609,20 +544,10 @@ void DeviceManager::setCameraInfoFromLshw(const QMap<QString, QString> &mapInfo)
     }
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getImageDevices()
-{
-    return m_ListDeviceImage;
-}
-
 void DeviceManager::addKeyboardDevice(DeviceInput *const device)
 {
     // 添加键盘
     m_ListDeviceKeyboard.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getKeyboardDevices()
-{
-    return m_ListDeviceKeyboard;
 }
 
 void DeviceManager::setKeyboardInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -677,11 +602,6 @@ void DeviceManager::addOthersDeviceFromHwinfo(DeviceOthers *const device)
     m_ListDeviceOthers.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getOthersDevices()
-{
-    return m_ListDeviceOthers;
-}
-
 void DeviceManager::setOthersDeviceInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     //从lshw中获取其他设备信息
@@ -701,33 +621,10 @@ void DeviceManager::addPowerDevice(DevicePower *const device)
     m_ListDevicePower.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getPowerDevices()
-{
-    return m_ListDevicePower;
-}
-
-void DeviceManager::setPowerDaemonInfo(const QMap<QString, QString> &mapInfo)
-{
-    // 设置电池守护进程信息
-    QList<DeviceBaseInfo *>::iterator it = m_ListDevicePower.begin();
-    for (; it != m_ListDevicePower.end(); ++it) {
-        DevicePower *device = dynamic_cast<DevicePower *>(*it);
-        if (!device)
-            continue;
-
-        device->setDaemonInfo(mapInfo);
-    }
-}
-
 void DeviceManager::addPrintDevice(DevicePrint *const device)
 {
     // 添加打印机信息
     m_ListDevicePrint.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getPrintDevices()
-{
-    return m_ListDevicePrint;
 }
 
 void DeviceManager::addOtherPCIDevice(DeviceOtherPCI *const device)
@@ -736,31 +633,16 @@ void DeviceManager::addOtherPCIDevice(DeviceOtherPCI *const device)
     m_ListDeviceOtherPCI.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getOtherPCIDevices()
-{
-    return m_ListDeviceOtherPCI;
-}
-
 void DeviceManager::addComputerDevice(DeviceComputer *const device)
 {
     // 添加计算机设备
     m_ListDeviceComputer.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getComputerDevices()
-{
-    return m_ListDeviceComputer;
-}
-
 void DeviceManager::addCdromDevice(DeviceCdrom *const device)
 {
     // 添加CDROM
     m_ListDeviceCdrom.append(device);
-}
-
-const QList<DeviceBaseInfo *> DeviceManager::getCdromDevices()
-{
-    return m_ListDeviceCdrom;
 }
 
 void DeviceManager::addLshwinfoIntoCdromDevice(const QMap<QString, QString> &mapInfo)
