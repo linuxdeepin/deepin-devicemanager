@@ -240,9 +240,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
 
-
     painter->restore();
-//    QStyledItemDelegate::paint(painter, option, index);
 }
 
 QWidget *DetailViewDelegate::createEditor(QWidget *, const QStyleOptionViewItem &, const QModelIndex &) const
@@ -259,7 +257,6 @@ QSize DetailViewDelegate::sizeHint(const QStyleOptionViewItem &option, const QMo
         size.setWidth(std::max(150, size.width()));
     }
     return size;
-//    return QStyledItemDelegate::sizeHint(option, index);
 }
 
 void DetailViewDelegate::initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const

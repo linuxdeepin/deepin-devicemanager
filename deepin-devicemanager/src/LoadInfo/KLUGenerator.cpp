@@ -15,7 +15,6 @@
 #include "DeviceManager/DevicePower.h"
 #include "DeviceManager/DeviceInput.h"
 
-
 KLUGenerator::KLUGenerator()
 {
 
@@ -132,6 +131,7 @@ void KLUGenerator::generatorPowerDevice()
         if (!device->setInfoFromUpower(*it)) {
             continue;
         }
+
         if (hasDaemon) {
             // KLU的问题特殊处理
             QMap<QString, QString> tempMap = daemon[0];
@@ -140,8 +140,6 @@ void KLUGenerator::generatorPowerDevice()
             // 应HW的要求，将电量极低时执行固定为  Suspend
             tempMap["critical-action"] = "Suspend";
 
-
-//            device->setDaemonInfo(daemon[0]);
             device->setDaemonInfo(tempMap);
         }
         DeviceManager::instance()->addPowerDevice(device);
@@ -201,6 +199,7 @@ void KLUGenerator::getDiskInfoFromHwinfo()
         if ((*dIt).size() < 2) {
             continue;
         }
+
         DeviceStorage *device = new DeviceStorage();
         if (device->setKLUHwinfoInfo(*dIt) && device->isValid()) {
             DeviceManager::instance()->addStorageDeivce(device);

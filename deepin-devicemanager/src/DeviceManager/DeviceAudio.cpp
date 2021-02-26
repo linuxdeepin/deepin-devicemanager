@@ -201,12 +201,10 @@ void DeviceAudio::initFilterKey()
     addFilterKey(QObject::tr("SubVendor"));
     addFilterKey(QObject::tr("SubDevice"));
     addFilterKey(QObject::tr("Driver"));
-//    addFilterKey(QObject::tr("Driver Modules"));
     addFilterKey(QObject::tr("Driver Status"));
     addFilterKey(QObject::tr("Driver Activation Cmd"));
     addFilterKey(QObject::tr("Config Status"));
 
-    //addFilterKey(QObject::tr("irq"));
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("latency"));
 

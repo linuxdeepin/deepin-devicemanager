@@ -109,6 +109,7 @@ void GenerateDevicePool::generateDevice()
     qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
     while (true) {
         qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
+        qInfo() << m_FinishedGenerator << " " << m_TypeList.size() << " " << curMSecond - beginMSecond << "\n";
         if (m_FinishedGenerator == m_TypeList.size()  || curMSecond - beginMSecond > 4000) {
             DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
             generator->generatorOthersDevice();
@@ -149,4 +150,5 @@ void GenerateDevicePool::slotFinished(const QStringList &lst)
 {
     DeviceManager::instance()->addBusId(lst);
     m_FinishedGenerator++;
+    qInfo() << m_FinishedGenerator << "\n";
 }

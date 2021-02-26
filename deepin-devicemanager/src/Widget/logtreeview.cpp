@@ -178,8 +178,6 @@ void LogTreeView::initUI()
 
     setAlternatingRowColors(false);
     setAllColumnsShowFocus(false);
-    //  setFocusPolicy(Qt::TabFocus);
-
 }
 
 void LogTreeView::paintEvent(QPaintEvent *event)
@@ -198,7 +196,6 @@ void LogTreeView::paintEvent(QPaintEvent *event)
         cg = DPalette::Active;
     }
 
-    //    auto style = dynamic_cast<DStyle *>(DApplication::style());
     auto *dAppHelper = DApplicationHelper::instance();
     auto palette = dAppHelper->applicationPalette();
 
@@ -287,7 +284,6 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
     painter->restore();
 
     QTreeView::drawRow(painter, options, index);
-
 }
 
 void LogTreeView::keyPressEvent(QKeyEvent *event)

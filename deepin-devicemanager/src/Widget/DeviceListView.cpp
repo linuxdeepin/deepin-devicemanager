@@ -112,7 +112,6 @@ void DeviceListView::addItem(const QString &name, const QString &iconFile)
         item->setToolTip(name);
     item->setIcon(QIcon::fromTheme(lst[0]));
     setIconSize(QSize(20, 20));
-    QIcon icon = QIcon::fromTheme(lst[0]);
     mp_ItemModel->appendRow(item);
 }
 

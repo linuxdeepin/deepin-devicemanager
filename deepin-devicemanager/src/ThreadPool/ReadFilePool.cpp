@@ -51,7 +51,9 @@ void ReadFilePool::finishedCmd(const QString &info, const QMap<QString, QList<QM
 {
     DeviceManager::instance()->addCmdInfo(cmdInfo);
     m_FinishedNum++;
+    qInfo() << m_FinishedNum << " " << m_CmdList.size() << "\n";
     if (m_FinishedNum == m_CmdList.size()) {
+        qInfo() << "m_FinishedNum == m_CmdList.size()" << "\n";
         emit finishedAll(info);
         m_FinishedNum = 0;
     }
