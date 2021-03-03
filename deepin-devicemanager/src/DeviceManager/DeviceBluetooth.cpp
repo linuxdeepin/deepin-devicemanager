@@ -146,7 +146,6 @@ void DeviceBluetooth::initFilterKey()
     addFilterKey(QObject::tr("Service Classes"));
     addFilterKey(QObject::tr("Device Class"));
     addFilterKey(QObject::tr("HCI Version"));
-    //addFilterKey(QObject::tr("Revision"));
     addFilterKey(QObject::tr("LMP Version"));
     addFilterKey(QObject::tr("Subversion"));
 

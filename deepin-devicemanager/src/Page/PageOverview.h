@@ -58,6 +58,11 @@ public:
     void updateInfo(const QMap<QString, QString> &map) override;
 
     /**
+     * @brief clearWidgets clear widgets
+     */
+    void clearWidgets() override;
+
+    /**
      * @brief setLabel:设置Label
      * @param itemstr:Label信息
      */

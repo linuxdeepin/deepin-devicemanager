@@ -55,6 +55,11 @@ public:
     virtual void updateInfo(const QList<DeviceBaseInfo *> &lst)override;
 
     /**
+     * @brief clearWidgets clear widgets
+     */
+    void clearWidgets() override;
+
+    /**
      * @brief setLabel:设置类型Label
      * @param itemstr:类型字符串
      */

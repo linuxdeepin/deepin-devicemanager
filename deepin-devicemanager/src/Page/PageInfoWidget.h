@@ -48,11 +48,6 @@ public:
     explicit PageInfoWidget(QWidget *parent = nullptr);
 
     /**
-     * @brief updateTable
-     * @param lst ：某类设备信息列表
-     */
-
-    /**
      * @brief updateTable: 更新表格
      * @param itemStr:设备类型
      * @param lst:设备类型对应的所有设备列表

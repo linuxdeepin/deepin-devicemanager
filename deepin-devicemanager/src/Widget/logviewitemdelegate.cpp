@@ -19,17 +19,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// DTK
 #include <DApplication>
 #include <DApplicationHelper>
 #include <DPalette>
 #include <DStyle>
 #include <DStyleHelper>
+
+// Qt
 #include <QDebug>
 #include <QModelIndex>
 #include <QPainter>
 #include <QStyleOptionViewItem>
 #include <QPainterPath>
 
+// other
 #include "logviewitemdelegate.h"
 
 DWIDGET_USE_NAMESPACE
@@ -93,9 +97,6 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     QRect rect = opt.rect;
 
-    // QRectF a;
-//    rect.setWidth(rect.width() + 2);
-//    rect.setX(rect.x() - 1);
     QFontMetrics fm(opt.font);
     QPainterPath path, clipPath;
 
@@ -115,6 +116,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     } else {
         textRect.setX(textRect.x() + margin);
     }
+
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
     if (text.startsWith("(" + tr("Disable") + ")") && !enableAndSelect) {
@@ -156,6 +158,7 @@ void LogViewItemDelegate::initStyleOption(QStyleOptionViewItem *option,
     option->features = QStyleOptionViewItem::HasDisplay;
     if (index.row() % 2 == 0)
         option->features |= QStyleOptionViewItem::Alternate;
+
     if (index.data(Qt::DisplayRole).isValid())
         option->text = index.data().toString();
 }

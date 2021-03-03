@@ -131,12 +131,6 @@ public:
     bool canEnable();
 
     /**
-     * @brief setIndex
-     * @param index
-     */
-    void setIndex(int index);
-
-    /**
      * @brief isValid：判断属性值是否有效
      * @param value：属性值
      * @return true:属性值有效

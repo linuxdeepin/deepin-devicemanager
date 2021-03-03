@@ -37,6 +37,7 @@ TableWidget::TableWidget(QWidget *parent)
     // 连接信号和曹函数
     connect(mp_Table, &LogTreeView::clicked, this, &TableWidget::slotItemClicked);
     setContextMenuPolicy(Qt::CustomContextMenu);
+
     connect(this, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(slotShowMenu(const QPoint &)));
     connect(mp_Refresh, &QAction::triggered, this, &TableWidget::slotActionRefresh);
@@ -54,6 +55,7 @@ void TableWidget::setHeaderLabels(const QStringList &lst)
             m_Enable = lst[i] == "yes" ? true : false;
         }
     }
+
     if (mp_Table) {
         mp_Table->setHeaderLabels(headers);
     }
@@ -140,16 +142,20 @@ void TableWidget::paintEvent(QPaintEvent *e)
 
 void TableWidget::slotShowMenu(const QPoint &)
 {
+    // right-click menu
     mp_Menu->clear();
     QModelIndex index = mp_Table->currentIndex();
+
     if (m_Enable && index.row() >= 0) {
         if (mp_Table->currentRowEnable()) {
             mp_Enable->setText(tr("Disable"));
         } else {
             mp_Enable->setText(tr("Enable"));
         }
+
         mp_Menu->addAction(mp_Enable);
     }
+
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());
@@ -170,15 +176,19 @@ void TableWidget::slotActionEnable()
     if (!mp_Table) {
         return;
     }
+
+    // enble device
     if (mp_Enable->text() == tr("Enable")) {
         emit enableDevice(mp_Table->currentRow(), true);
     } else {
+        // unenable device
         emit enableDevice(mp_Table->currentRow(), false);
     }
 }
 
 void TableWidget::slotItemClicked(const QModelIndex &index)
 {
+    // click table item
     int row = index.row();
     if (row >= 0) {
         emit itemClicked(row);
@@ -187,6 +197,7 @@ void TableWidget::slotItemClicked(const QModelIndex &index)
 
 void TableWidget::initWidget()
 {
+    // init widget layout
     QHBoxLayout *hLayout = new QHBoxLayout();
     int margin = 2;
     hLayout->setContentsMargins(margin, margin, margin, margin);

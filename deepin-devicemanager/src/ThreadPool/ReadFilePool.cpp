@@ -6,6 +6,8 @@
 #include "CmdTool.h"
 #include "DeviceManager.h"
 
+static QMutex mutex;
+
 CmdTask::CmdTask(QString key, QString file, QString info, ReadFilePool *parent)
     : m_Key(key)
     , m_File(file)
@@ -50,6 +52,7 @@ void ReadFilePool::readAllFile()
 void ReadFilePool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
     DeviceManager::instance()->addCmdInfo(cmdInfo);
+    QMutexLocker m_lock(&mutex);
     m_FinishedNum++;
     if (m_FinishedNum == m_CmdList.size()) {
         emit finishedAll(info);

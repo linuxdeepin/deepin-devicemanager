@@ -12,12 +12,15 @@ PanguVGenerator::PanguVGenerator()
 
 void PanguVGenerator::generatorMonitorDevice()
 {
+    // 生成显示设备信息
     const QList<QMap<QString, QString>> lstMapHDMI = DeviceManager::instance()->cmdInfo("EDID_HDMI");
     QList<QMap<QString, QString> >::const_iterator itHDMI = lstMapHDMI.begin();
     for (; itHDMI != lstMapHDMI.end(); ++itHDMI) {
         if ((*itHDMI).size() < 1) {
             continue;
         }
+
+        //HDMI interface EDID information
         DeviceMonitor *device = new  DeviceMonitor();
         device->setInfoFromEdid(*itHDMI);
         DeviceManager::instance()->addMonitor(device);
@@ -29,6 +32,8 @@ void PanguVGenerator::generatorMonitorDevice()
         if ((*it).size() < 1) {
             continue;
         }
+
+        //VGA interface EDID information
         DeviceMonitor *device = new DeviceMonitor();
         device->setInfoFromEdid(*it);
         DeviceManager::instance()->addMonitor(device);
