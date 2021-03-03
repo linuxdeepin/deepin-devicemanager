@@ -59,6 +59,11 @@ public:
      */
     void setLabel(const QString &itemstr) override;
 
+    /**
+     * @brief clearWidgets clear widgets
+     */
+    void clearWidgets() override;
+
 signals:
     /**
      * @brief refreshInfo:刷新信息信号

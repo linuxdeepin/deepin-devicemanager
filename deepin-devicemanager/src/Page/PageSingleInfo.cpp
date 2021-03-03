@@ -94,6 +94,11 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     }
 }
 
+void PageSingleInfo::clearWidgets()
+{
+    return;
+}
+
 void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
 {
     if (lst.size() < 1) {
@@ -102,6 +107,9 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
 
     // 设置单个设备界面信息显示的行数,与表格高度相关
     int maxRow = this->height() / ROW_HEIGHT - 3;
+    if (maxRow < 0) {
+        maxRow = 13;
+    }
     mp_Content->setLimitRow(std::min(13, maxRow));
 
     // 设置表格行数

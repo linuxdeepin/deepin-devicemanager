@@ -77,6 +77,11 @@ void PageMultiInfo::setLabel(const QString &itemstr)
     }
 }
 
+void PageMultiInfo::clearWidgets()
+{
+    mp_Detail->clearWidget();
+}
+
 void PageMultiInfo::slotItemClicked(int row)
 {
     // 显示表格中选择设备的详细信息

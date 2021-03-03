@@ -94,6 +94,11 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     }
 }
 
+void PageOverview::clearWidgets()
+{
+    return;
+}
+
 void PageOverview::setLabel(const QString &itemstr)
 {
 
