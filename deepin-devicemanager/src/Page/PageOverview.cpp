@@ -132,7 +132,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
         linkStr = COMMUNITY_LINK_STR;  // 社区版的链接与其它的不同
         linkStr += COMMUNITY_STR + END_STR + os.remove(COMMUNITY_STR);
     }
-#if(DTK_VERSION > DTK_VERSION_CHECK(5,4,1,0))
+#if(DTK_VERSION > DTK_VERSION_CHECK(5,4,10,0))
     else if (DSysInfo::UosEducation == type) {// 教育版
         linkStr += EDUC_STR + END_STR + os.remove(EDUC_STR);
     }

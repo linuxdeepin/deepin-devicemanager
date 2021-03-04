@@ -61,7 +61,7 @@ void MipsGenerator::generatorComputerDevice()
     } else if (DSysInfo::UosCommunity == type) {
         os =  COMMUNITY_STR;
     }
-#if(DTK_VERSION > DTK_VERSION_CHECK(5,4,1,0))
+#if(DTK_VERSION > DTK_VERSION_CHECK(5,4,10,0))
     else if (DSysInfo::UosEducation == type) {
         os = EDUC_STR;
     }
