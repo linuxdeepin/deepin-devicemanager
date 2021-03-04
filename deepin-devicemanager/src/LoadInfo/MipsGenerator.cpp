@@ -60,9 +60,13 @@ void MipsGenerator::generatorComputerDevice()
         os =  HOME_STR;
     } else if (DSysInfo::UosCommunity == type) {
         os =  COMMUNITY_STR;
-    } else if (DSysInfo::UosEducation == type) {
+    }
+#if(DTK_VERSION > DTK_VERSION_CHECK(5,4,10,0))
+    else if (DSysInfo::UosEducation == type) {
         os = EDUC_STR;
-    } else if (DSysInfo::UosEnterprise == type) {
+    }
+#endif
+    else if (DSysInfo::UosEnterprise == type) {
         os =  ENTERPRISE_STR;
     } else if (DSysInfo::UosEnterpriseC == type) {
         os =  ENTERPRISEC_STR;
