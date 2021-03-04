@@ -131,9 +131,13 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     } else if (DSysInfo::UosCommunity == type) { // 社区版
         linkStr = COMMUNITY_LINK_STR;  // 社区版的链接与其它的不同
         linkStr += COMMUNITY_STR + END_STR + os.remove(COMMUNITY_STR);
-    } else if (DSysInfo::UosEducation == type) {// 教育版
+    }
+#if(DTK_VERSION > DTK_VERSION_CHECK(5,4,1,0))
+    else if (DSysInfo::UosEducation == type) {// 教育版
         linkStr += EDUC_STR + END_STR + os.remove(EDUC_STR);
-    } else if (DSysInfo::UosEnterprise == type) {// 服务器企业版
+    }
+#endif
+    else if (DSysInfo::UosEnterprise == type) {// 服务器企业版
         linkStr += ENTERPRISE_STR + END_STR + os.remove(ENTERPRISE_STR);
     } else if (DSysInfo::UosEnterpriseC == type) {// 服务器行业版
         linkStr += ENTERPRISEC_STR + END_STR + os.remove(ENTERPRISEC_STR);
