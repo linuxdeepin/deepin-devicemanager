@@ -3,4 +3,3 @@ all.pro.user.*
 *.autosave
 *.o
 CMakeLists.txt.user
-*qm
