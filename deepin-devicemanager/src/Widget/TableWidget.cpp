@@ -133,7 +133,7 @@ void TableWidget::paintEvent(QPaintEvent *e)
 
     paintPath = paintPathOut.subtracted(paintPathIn);
 
-    QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
+    QBrush bgBrush(palette.color(cg, DPalette::FrameBorder));
     painter.fillPath(paintPath, bgBrush);
 
     painter.restore();

@@ -119,7 +119,7 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     rect.setWidth(rect.width() - spacing);
     rect.setHeight(1);
 //    rect.setY(rect.y() + height() - 2);
-    QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
+    QBrush bgBrush(palette.color(cg, DPalette::FrameBorder));
     painter.fillRect(rect, bgBrush);
 
     painter.restore();

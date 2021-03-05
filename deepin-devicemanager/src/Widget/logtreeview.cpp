@@ -252,12 +252,14 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
     auto radius = style->pixelMetric(DStyle::PM_FrameRadius, &options);
     auto margin = style->pixelMetric(DStyle::PM_ContentsMargins, &options);
 
-    auto palette = options.palette;
+    // modify background color acorrding to UI designer
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
 
     // 隔行变色
     if (!(index.row() & 1)) {
-        background = palette.color(cg, DPalette::AlternateBase);
+        background = palette.color(cg, DPalette::ItemBackground);
     } else {
         background = palette.color(cg, DPalette::Base);
     }
