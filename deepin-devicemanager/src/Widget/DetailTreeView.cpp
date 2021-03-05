@@ -440,12 +440,12 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
     paintPath = paintPathOut.subtracted(paintPathIn);
 
     // 填充
-    QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
+    QBrush bgBrush(palette.color(cg, DPalette::FrameBorder));
     painter.fillPath(paintPath, bgBrush);
 
     QPen pen = painter.pen();
     pen.setWidth(1);
-    pen.setColor(palette.color(cg, DPalette::FrameShadowBorder));
+    pen.setColor(palette.color(cg, DPalette::FrameBorder));
 
     painter.setPen(pen);
 
