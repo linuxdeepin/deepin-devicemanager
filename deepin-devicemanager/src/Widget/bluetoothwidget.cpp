@@ -88,6 +88,7 @@ void BluetoothWidget::addDeviceDetail(const DeviceBluetooth &device, bool withTi
     // 添加基本信息
     addDeviceAttribute(tr("Name"), device.name(), attributes);
     addDeviceAttribute(tr("Vendor"), device.vendor(), attributes);
+    addDeviceAttribute(tr("Type"), device.type(), attributes);
     addDeviceAttribute(tr("Version"), device.version(), attributes);
     addDeviceAttribute(tr("Model"), device.model(), attributes);
     addDeviceAttribute(tr("MAC Address"), device.MAC(), attributes);

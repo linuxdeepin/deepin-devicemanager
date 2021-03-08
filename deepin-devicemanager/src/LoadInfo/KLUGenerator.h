@@ -29,6 +29,12 @@ protected:
     /**@brief:generator cpu info*/
     virtual void generatorCpuDevice();
 
+    /**@brief:generator bluetooth info*/
+    virtual void generatorBluetoothDevice();
+
+    /**@brief:generator network info*/
+    virtual void generatorNetworkDevice();
+
 protected:
     /**@brief:generator keyboard info from hwinfo*/
     virtual void getKeyboardInfoFromHwinfo();
@@ -44,6 +50,12 @@ protected:
 
     /**@brief:generator audio info*/
     virtual void getAudioInfoFromCatAudio();
+
+    /**@brief:generator bluetooth info*/
+    virtual void getBluetoothInfoFromCatWifiInfo();
+
+    /**@brief:generator network info*/
+    virtual void getNetworkInfoFromCatWifiInfo();
 };
 
 #endif // KLUGENERATOR_H

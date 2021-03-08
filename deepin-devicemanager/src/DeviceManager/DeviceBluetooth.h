@@ -29,6 +29,13 @@ public:
     bool setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**
+     * @brief setInfoFromWifiInfo:设置从cat /sys/hisys/wal/wifi_devices_info里面获取的信息
+     * @param mapInfo: 由cat /sys/hisys/wal/wifi_devices_info获取的信息map
+     * @return 布尔值，true：信息设置成功；false：信息设置失败
+     */
+    bool setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo);
+
+    /**
        * @brief name：获取名称属性值
        * @param 无
        * @return QString：名称属性值
@@ -41,6 +48,13 @@ public:
        * @return QString：制造商属性值
        */
     const QString &vendor()const;
+
+    /**
+       * @brief vendor：获取类型属性值
+       * @param 无
+       * @return QString：类型属性值
+       */
+    const QString &type()const;
 
     /**
        * @brief version：获取名称属性值
@@ -140,6 +154,8 @@ private:
     QString         m_DriverVersion;          //<! 【驱动版本】
     QString         m_MaximumPower;           //<! 【最大功耗】
     QString         m_Speed;                  //<! 【速度】
+
+    QString         m_Type;                   //<! 【类型】
 
     QString         m_UniqueKey;              //<!  鼠标设备的唯一标识
 };

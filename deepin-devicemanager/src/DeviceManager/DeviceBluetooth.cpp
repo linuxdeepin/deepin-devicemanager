@@ -75,6 +75,20 @@ bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+bool DeviceBluetooth::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
+{
+    // 机器自身蓝牙
+    if (m_Name.contains("uos-PC")) {
+        setAttribute(mapInfo, "Chip Type", m_Name);
+        setAttribute(mapInfo, "Vendor", m_Vendor);
+        setAttribute(mapInfo, "Type", m_Type);
+
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const QString &DeviceBluetooth::name()const
 {
     return m_Name;
@@ -83,6 +97,11 @@ const QString &DeviceBluetooth::name()const
 const QString &DeviceBluetooth::vendor()const
 {
     return m_Vendor;
+}
+
+const QString &DeviceBluetooth::type() const
+{
+    return m_Type;
 }
 
 const QString &DeviceBluetooth::version()const

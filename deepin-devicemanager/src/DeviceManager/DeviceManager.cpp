@@ -284,6 +284,17 @@ bool DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &map
     return false;
 }
 
+bool DeviceManager::setBluetoothInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBluetooth>::iterator it = m_ListBluetooth.begin();
+    for (; it != m_ListBluetooth.end(); ++it) {
+        if ((*it).setInfoFromWifiInfo(mapInfo)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void DeviceManager::addAudioDevice(const DeviceAudio &device)
 {
     m_ListDeviceAudio.append(device);
@@ -330,6 +341,17 @@ void DeviceManager::setNetworkInfoFromHwinfo(const QMap<QString, QString> &mapIn
             return;
         }
     }
+}
+
+bool DeviceManager::setNetworkInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceNetwork>::iterator it = m_ListDeviceNetwork.begin();
+    for (; it != m_ListDeviceNetwork.end(); ++it) {
+        if ((*it).setInfoFromWifiInfo(mapInfo)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void DeviceManager::addImageDevice(const DeviceImage &device)

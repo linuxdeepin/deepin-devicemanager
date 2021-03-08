@@ -310,6 +310,70 @@ void KLUGenerator::getAudioInfoFromCatAudio()
     }
 }
 
+void KLUGenerator::getBluetoothInfoFromCatWifiInfo()
+{
+    const QList<QMap<QString, QString> >  &lstWifiInfo = DeviceManager::instance()->cmdInfo("wifiinfo");
+    if (lstWifiInfo.size() == 0) {
+        return;
+    }
+    QList<QMap<QString, QString> >::const_iterator it = lstWifiInfo.begin();
+
+    for (; it != lstWifiInfo.end(); ++it) {
+        if ((*it).size() < 3) {
+            continue;
+        }
+
+        // KLU的问题特殊处理
+        QMap<QString, QString> tempMap;
+        foreach (const QString &key, (*it).keys()) {
+            tempMap.insert(key, (*it)[key]);
+        }
+
+        // cat /sys/hisys/wal/wifi_devices_info  获取结果为 HUAWEI HI103
+        if (tempMap["Chip Type"].contains("HUAWEI", Qt::CaseInsensitive)) {
+            tempMap["Chip Type"] = tempMap["Chip Type"].remove("HUAWEI").trimmed();
+        }
+
+        // 按照华为的需求，设置蓝牙制造商和类型
+        tempMap["Vendor"] = "HISILICON";
+        tempMap["Type"] = "Bluetooth Device";
+
+        DeviceManager::instance()->setBluetoothInfoFromWifiInfo(tempMap);
+    }
+}
+
+void KLUGenerator::getNetworkInfoFromCatWifiInfo()
+{
+    const QList<QMap<QString, QString> >  &lstWifiInfo = DeviceManager::instance()->cmdInfo("wifiinfo");
+    if (lstWifiInfo.size() == 0) {
+        return;
+    }
+    QList<QMap<QString, QString> >::const_iterator it = lstWifiInfo.begin();
+
+    for (; it != lstWifiInfo.end(); ++it) {
+        if ((*it).size() < 3) {
+            continue;
+        }
+
+        // KLU的问题特殊处理
+        QMap<QString, QString> tempMap;
+        foreach (const QString &key, (*it).keys()) {
+            tempMap.insert(key, (*it)[key]);
+        }
+
+        // cat /sys/hisys/wal/wifi_devices_info  获取结果为 HUAWEI HI103
+        if (tempMap["Chip Type"].contains("HUAWEI", Qt::CaseInsensitive)) {
+            tempMap["Chip Type"] = tempMap["Chip Type"].remove("HUAWEI").trimmed();
+        }
+
+        // 按照华为的需求，设置蓝牙制造商和类型
+        tempMap["Vendor"] = "HISILICON";
+        tempMap["Type"] = "Network Device";
+
+        DeviceManager::instance()->setNetworkInfoFromWifiInfo(tempMap);
+    }
+}
+
 void KLUGenerator::generatorCpuDevice()
 {
     const QList<QMap<QString, QString> >  &lstCatCpu = DeviceManager::instance()->cmdInfo("cat_cpuinfo");
@@ -372,4 +436,20 @@ void KLUGenerator::generatorCpuDevice()
 
         DeviceManager::instance()->addCpuDevice(device);
     }
+}
+
+void KLUGenerator::generatorBluetoothDevice()
+{
+    DeviceGenerator::generatorBluetoothDevice();
+
+    // HW 要求修改名称,制造商以及类型
+    getBluetoothInfoFromCatWifiInfo();
+}
+
+void KLUGenerator::generatorNetworkDevice()
+{
+    DeviceGenerator::generatorNetworkDevice();
+
+    // HW 要求修改名称,制造商以及类型
+    getBluetoothInfoFromCatWifiInfo();
 }

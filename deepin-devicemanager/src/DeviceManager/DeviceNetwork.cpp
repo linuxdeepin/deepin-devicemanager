@@ -73,6 +73,20 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+bool DeviceNetwork::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
+{
+    // 机器自身蓝牙
+    if (m_Name.contains("Huawei", Qt::CaseInsensitive)) {
+        setAttribute(mapInfo, "Chip Type", m_Name);
+        setAttribute(mapInfo, "Vendor", m_Vendor);
+        setAttribute(mapInfo, "Type", m_Model);
+
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const QString &DeviceNetwork::name()const
 {
     return m_Name;
