@@ -451,5 +451,5 @@ void KLUGenerator::generatorNetworkDevice()
     DeviceGenerator::generatorNetworkDevice();
 
     // HW 要求修改名称,制造商以及类型
-    getBluetoothInfoFromCatWifiInfo();
+    getNetworkInfoFromCatWifiInfo();
 }
