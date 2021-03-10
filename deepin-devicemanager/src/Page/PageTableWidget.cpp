@@ -117,6 +117,9 @@ void PageTableWidget::initUI()
 {
     // 初始化页面布局
     QVBoxLayout *whLayout = new QVBoxLayout();
+
+    // set Contents margin 0,bug66137
+    whLayout->setContentsMargins(0, 0, 0, 0);
     whLayout->addWidget(mp_Table);
     this->setLayout(whLayout);
 }
