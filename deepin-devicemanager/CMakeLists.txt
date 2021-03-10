@@ -31,7 +31,6 @@ set(APP_TRANS_SCRIPT "${APP_RES_DIR}/translate_generation.sh")
 set(APP_DESKTOP "${APP_RES_DIR}/deepin-devicemanager.desktop")
 set(APP_QRC "${APP_RES_DIR}/appimage.qrc")
 set(APP_ICON_FILE "${APP_RES_DIR}/icons/deepin/builtin/deepin-devicemanager.svg")
-
 project(${APP_BIN_NAME})
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -119,6 +118,7 @@ include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
 # Tell CMake to create the executable
 add_executable(${PROJECT_NAME} ${DEVICE_SRC} ${THIRD_PARTY} ${APP_QRC})
+
 target_include_directories(${APP_BIN_NAME}
     PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
 
@@ -145,3 +145,71 @@ install(FILES ${APP_QM_FILES} DESTINATION share/deepin-devicemanager/translation
 install(FILES ${APP_DESKTOP} DESTINATION share/applications)
 install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/apps)
 install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
+
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager/tests/)
+## Test--------deepin-devicemanager
+#find_package(GTest REQUIRED)
+#include_directories(${GTEST_INCLUDE_DIRS})
+
+#set(PROJECT_NAME_TEST
+#    ${PROJECT_NAME}_test)
+
+#ADD_COMPILE_OPTIONS(-fno-access-control)
+
+##Include all third
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/docx/)
+##add cups
+#include_directories("/usr/include/cups/")
+##link_directories("/usr/lib/cups/")
+#link_libraries("cups")
+#link_libraries("zmq")
+
+#file(GLOB_RECURSE APP_SRCS
+#    ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/src/application.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/src/DebugTimeManager.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/src/DBus/*.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/src/DeviceManager/*.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/src/LoadInfo/*.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/src/Page/*.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/src/ThreadPool/*.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/src/Widget/*.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/src/ZeroMQ/*.cpp
+#    )
+#FILE(GLOB allTestSource
+#  tests/*.cpp
+#  tests/DBus/*.cpp
+#  tests/DeviceManager/*.cpp
+#  tests/LoadInfo/*.cpp
+#  tests/Page/*.cpp
+#  tests/ThreadPool/*.cpp
+#  tests/Widget/*.cpp
+#  tests/ZeroMQ/*.cpp
+#)
+#add_executable(${PROJECT_NAME_TEST} ${APP_SRCS} ${allTestSource})
+
+#target_include_directories(${PROJECT_NAME_TEST}
+#    PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
+
+#target_link_libraries(${PROJECT_NAME_TEST}
+#    Qt5::Core
+#    Qt5::Gui
+#    Qt5::Widgets
+#    Qt5::DBus
+#    Qt5::Xml
+#    ${DtkWidget_LIBRARIES}
+#    ${DtkCore_LIBRARIES}
+#    ${DtkGUI_LIBRARIES}
+#    ${DFrameworkdbus_LIBRARIES}
+#    ${GTEST_LIBRARIES}
+#    ${GTEST_MAIN_LIBRARIES}
+#    pthread
+#)
+
+#add_custom_target(test
+#    COMMAND echo " =================== TEST BEGIN ==================== "
+#    COMMAND ${CMAKE_BINARY_DIR}/tests/${PROJECT_NAME_TEST}
+#    COMMAND echo " =================== TEST END ==================== "
+#)
