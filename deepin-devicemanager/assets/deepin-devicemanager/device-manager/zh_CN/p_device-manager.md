@@ -1,4 +1,4 @@
-# 设备管理器|../common/deepin_devicemanager_96.svg|
+# 设备管理器|deepin-devicemanager|
 
 ## 概述
 

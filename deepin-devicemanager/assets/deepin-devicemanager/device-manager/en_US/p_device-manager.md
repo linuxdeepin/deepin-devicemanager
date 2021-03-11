@@ -1,4 +1,4 @@
-# Device Manager|../common/deepin_devicemanager_96.svg|
+# Device Manager|deepin-devicemanager|
 
 ## Overview 
 
@@ -16,7 +16,7 @@ You can run, close or create a shortcut for Device Manager as follows.
 
 2. Locate ![deepin_devicemanager](../common/deepin_devicemanager.svg) by scrolling the mouse wheel or searching "Device Manager" in the Launcher interface and click it to run. 
 
-3. Right_click![deepin_devicemanager](../common/deepin_devicemanager.svg) to:
+3. Right-click![deepin_devicemanager](../common/deepin_devicemanager.svg) to:
 
    - Select **Send to desktop** to create a shortcut on the desktop.
 
@@ -29,7 +29,7 @@ You can run, close or create a shortcut for Device Manager as follows.
 ### Exit Device Manager
 
 - On the main interface, click![close_icon](../common/close.svg) to exit.
-- Right_click ![deepin_devicemanager](../common/deepin_devicemanager.svg)  on the Dock, select **Close all** or **Force Quit** to exit.
+- Right-click ![deepin_devicemanager](../common/deepin_devicemanager.svg)  on the Dock, select **Close all** to exit.
 - On interface of Device Manager, click ![icon_menu](../common/icon_menu.svg)  and select **Exit** to exit.
 
 ## Operations
@@ -39,28 +39,28 @@ The following hardware device information is for reference only. If there is no 
 ### Overview
 
 1. On the main interface, click **Overview**.
-2. You can see a list containing **CPU**, **Motherboard**, **Memory** and so on in this interface, and particular info such as brands, names, models and specifications in it as well. 
+2. You can see a list containing **CPU**, **Motherboard**, **Memory** and so on in this interface, and summary info. 
 
 ![0|overview](fig/p_overview.png)
 
 ### CPU
 
 1. On the main interface, click **CPU**.
-2. You can view a CPU list and particular info such as name, vendor, architecture, model and so on. 
+2. You can view a CPU list and particular info such as name, vendor, CPU ID and so on. 
 
 ![0|cpu](fig/cpu.png)
 
 ### Motherboard 
 
 1. On the main interface, click **Motherboard**. 
-2. You can view info about motherboard, memory bank, system, BIOS, chassis, and so on.
+2. You can view info about motherboard, such as vendor, version, chipset, and so on.
 
 ![0|board](fig/board.png)
 
 ### Memory
 
 1. On the main interface, click **Memory**.
-2. You can view a memory list and particular info such as name, vendor, size, type, speed and so on.
+2. You can view a memory list and particular info such as name, size, type, and so on.
 
 ![0|RAM](fig/RAM.png)
 
@@ -81,28 +81,28 @@ The following hardware device information is for reference only. If there is no 
 ### Storage
 
 1. On the main interface, click **Storage**.
-2. You can view a storage device list and particular info such as model, vendor, media type, size, and so on.
+2. You can view a storage device list and particular info such as model, vendor, media type, and so on.
 
 ![0|storagedevice](fig/storagedevice.png)
 
 ### Network Adapter
 
 1. On the main interface, click **Network Adapter**.
-2. You can view info about Network Adapter such as name, vendor, type, driver and so on.!
+2. You can view info about Network Adapter such as name, vendor, type, and so on.
 
 ![0|networkadapter](fig/networkadapter.png)
 
 ### Mouse
 
 1. On the main interface, click **Mouse**.
-2. You can view info such as name, vendor, bus info, driver, speed and so on.
+2. You can view info such as name, vendor, model, and so on.
 
 ![0|mouse](fig/mouse.png)
 
 ### Keyboard
 
 1. On the main interface, click **Keyboard **.
-2. You can view info such as name, vendor, model, bus info, driver and so on.
+2. You can view info such as name, vendor, model, and so on.
 
 ![0|keyboard](fig/keyboard.png)
 
@@ -116,19 +116,19 @@ The following hardware device information is for reference only. If there is no 
 ### Printer
 
 1. On the main interface, click **Printer**.
-2. You can view a list of printers connected and info such as name, model, vendor, URI and so on.
+2. You can view a list of printers connected and info such as name, model, vendor, and so on.
 
 ![0|printer](fig/printer.png)
 
 
 
-### Right_click Operations 
+### Right-click Operations 
 
-**Copy**: To copy contents selected by cursor, right_click to select  **Copy**.
+**Copy**: To copy contents selected by cursor, right-click to select  **Copy**.
 
-**Disable/Enable**: You can disable some hardware drives. You can judge whether the hardware device supports the disable function according to the right_click menu options. 
+**Disable/Enable**: You can disable some hardware drives. You can judge whether the hardware device supports the disable function according to the right-click menu options. 
 
-**Refresh**: Right_click and select  **Refresh** to reload info of all devices of the operating system. You can also use shortcut key F5 to realize this function.
+**Refresh**: Right-click and select  **Refresh** to reload info of all devices of the operating system. You can also use shortcut key F5 to realize this function.
 
 **Export**: You can export the device information to the specified folder,formats such as txt/docx/xls/html are supported. 
 
