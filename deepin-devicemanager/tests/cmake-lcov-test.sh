@@ -23,7 +23,7 @@ lcov -d ../ --capture -o ./coverage/coverage.info
 
 lcov --extract ./coverage/coverage.info '*/src/*' -o ./coverage/coverage.info
 
-lcov --remove ./coverage/coverage.info '*/tests/*' -o  ./coverage/coverage.info
+lcov --remove ./coverage/coverage.info '*/tests/*' '*/3rdparty/*' -o  ./coverage/coverage.info
 
 mkdir ../report
 genhtml -o ../report ./coverage/coverage.info
