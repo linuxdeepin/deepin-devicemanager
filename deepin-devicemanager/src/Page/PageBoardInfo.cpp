@@ -103,19 +103,32 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         int height = 0;
         QStringList strList = pairs[i - lst.size()].second.split("\n");
         int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height() + 2;
-
+        //qInfo() << strList;
         // 根据行数增加行高
         foreach (const QString &str, strList) {
             QStringList lst = str.split(":");
             if (lst.size() == 2) {
+                // 属性名称
                 int width = fm.boundingRect(lst[0]).width();
                 int num = width / 110;
                 int num0 = width % 110;
                 if (num0 == 0) {
                     num = num - 1;
                 }
-                if (num > 0)
-                    height += num * fontHeight;
+
+                int line = 0;
+                // 属性值
+                if (!lst[1].contains("  /  \t\t")) {
+                    width = fm.boundingRect(lst[1]).width();
+                    line = width / 480;
+                    int line0 = width % 480;
+                    if (line0 == 0) {
+                        line = line - 1;
+                    }
+                }
+
+                if (num > 0 || line > 0)
+                    height += std::max(num, line) * fontHeight;
             }
             QStringList attris = str.split("  /  \t\t");
             height += attris.size() * fontHeight;
