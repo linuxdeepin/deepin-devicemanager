@@ -15,13 +15,13 @@ pathname=$(find . -name obj*)
 
 echo $pathname
 
-cd $pathname/tests
+cd $pathname
 
 mkdir -p coverage
 
 lcov -d ../ --capture -o ./coverage/coverage.info
 
-lcov --extract ./coverage/coverage.info '*/deepin-devicemanager/src/*' -o ./coverage/coverage.info
+lcov --extract ./coverage/coverage.info '*/src/*' -o ./coverage/coverage.info
 
 lcov --remove ./coverage/coverage.info '*/tests/*' -o  ./coverage/coverage.info
 
