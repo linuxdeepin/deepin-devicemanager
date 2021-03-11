@@ -52,4 +52,34 @@ TEST_F(TableWidget_UT, ut_setItem)
     delete item;
     m_tableWidget->setColumnAverage();
     m_tableWidget->updateCurItemEnable(0, true);
+    m_tableWidget->clear();
+    m_tableWidget->setRowNum(0);
+}
+
+TEST_F(TableWidget_UT, ut_PaintEvent)
+{
+    m_tableWidget = new TableWidget;
+    QPaintEvent paint(QRect(m_tableWidget->rect()));
+    m_tableWidget->paintEvent(&paint);
+}
+
+TEST_F(TableWidget_UT, ut_slotActionExport)
+{
+    m_tableWidget = new TableWidget;
+    m_tableWidget->slotActionExport();
+    m_tableWidget->slotActionRefresh();
+    m_tableWidget->slotActionEnable();
+}
+
+TEST_F(TableWidget_UT, ut_slotItemClicked)
+{
+    m_tableWidget = new TableWidget;
+    QModelIndex index;
+    m_tableWidget->slotItemClicked(index);
+}
+
+TEST_F(TableWidget_UT, ut_initWidget)
+{
+    m_tableWidget = new TableWidget;
+    m_tableWidget->initWidget();
 }
