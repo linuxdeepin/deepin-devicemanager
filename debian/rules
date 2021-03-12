@@ -1,23 +1,20 @@
 #!/usr/bin/make -f
-
-export QT_SELECT=5
+export QT_SELECT := 5
+# see FEATURE AREAS in dpkg-buildflags(1)
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# package maintainers to append LDFLAGS
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 include /usr/share/dpkg/default.mk
-
-DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
-DH_AUTO_ARGS = --parallel --buildsystem=cmake
-
-# Uncomment this to turn on verbose mode.
-export DH_VERBOSE=1
-
-%:
-	dh $@ --parallel
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
-	  -DCMAKE_BUILD_TYPE=Release \
-	  -DAPP_VERSION=$(DEB_VERSION_UPSTREAM) -DVERSION=$(DEB_VERSION_UPSTREAM) LIB_INSTALL_DIR=/usr/lib/$(DEB_HOST_MULTIARCH)
+    -DCMAKE_BUILD_TYPE=Release \
+    -DAPP_VERSION=$(DEB_VERSION_UPSTREAM) -DVERSION=$(DEB_VERSION_UPSTREAM) LIB_INSTALL_DIR=/usr/lib/$(DEB_HOST_MULTIARCH)
+%:
+	dh $@
 
-#Ignore the dpkg-shlibdeps: warning (it uses none of the library's symbols)
-#Qt Mutidedia lib will ref to network libraray.
 override_dh_shlibdeps:
-	dh_shlibdeps --dpkg-shlibdeps-params=--warnings=0
+	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
