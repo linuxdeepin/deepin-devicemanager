@@ -22,7 +22,6 @@
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../tests/stub.h"
 
 class CmdButtonWidget_UT : public UT_HEAD
 {
