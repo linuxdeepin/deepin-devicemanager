@@ -226,7 +226,7 @@ const QString LINK_STR = "<a style=\"text-decoration:none\" href=https://www.chi
 const QString COMMUNITY_LINK_STR = "<a style=\"text-decoration:none\" href=https://www.deepin.org/zh>";  // community uos官网链接
 const QString PROF_STR = "UnionTech OS Desktop 20 Professional";                                         // 桌面专业版系统名称
 const QString HOME_STR = "UnionTech OS Desktop 20 Home";                                                 // 个人版系统名称
-const QString COMMUNITY_STR = "Deepin 20.1";                                                             // 社区版系统名称
+const QString COMMUNITY_STR = "Deepin 20.2";                                                             // 社区版系统名称
 const QString EDUC_STR = "UnionTech OS Desktop 20 Education";                                                    // 教育版名称
 const QString ENTERPRISE_STR = "UnionTech OS Server 20 Enterprise";                                      // 服务器企业版
 const QString ENTERPRISEC_STR = "UnionTech OS Server 20 Enterprise-C";                                   // 服务器行业版
