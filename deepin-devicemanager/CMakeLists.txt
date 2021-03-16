@@ -168,7 +168,6 @@ link_libraries("zmq")
 
 file(GLOB_RECURSE APP_SRCS
     ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/application.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/DebugTimeManager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/DBus/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/DeviceManager/*.cpp

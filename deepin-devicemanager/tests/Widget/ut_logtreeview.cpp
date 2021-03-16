@@ -69,3 +69,10 @@ TEST_F(LogTreeView_UT, UT_setRowNum)
     m_logTreeView->clear();
     ASSERT_EQ(m_logTreeView->RowNum(), 0);
 }
+
+TEST_F(LogTreeView_UT, ut_keyPressEvent)
+{
+    m_logTreeView = new LogTreeView;
+    QKeyEvent keyPressEvent(QEvent::KeyPress, Qt::Key_Up, Qt::ShiftModifier);
+    QCoreApplication::sendEvent(m_logTreeView, &keyPressEvent);
+}
