@@ -102,7 +102,7 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         QFontMetrics fm(font);
         int height = 0;
         QStringList strList = pairs[i - lst.size()].second.split("\n");
-        int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height() + 2;
+        int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height();   // 根据社区版显示情况进行调整
         //qInfo() << strList;
         // 根据行数增加行高
         foreach (const QString &str, strList) {
@@ -133,7 +133,7 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
             QStringList attris = str.split("  /  \t\t");
             height += attris.size() * fontHeight;
         }
-        height += 20;
+        height += 10;    // 根据社区版显示情况进行调整
         mp_Content->setRowHeight(i, height);
     }
 }
