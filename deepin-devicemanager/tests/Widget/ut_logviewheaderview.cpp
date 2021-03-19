@@ -27,8 +27,9 @@
 class LogviewHeaderView_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_logViewHeaderView = new LogViewHeaderView(Qt::Horizontal);
     }
     void TearDown()
     {
@@ -44,26 +45,22 @@ int ut_dstyle_pixelMetric()
 
 TEST_F(LogviewHeaderView_UT, UT_paintSection)
 {
-    m_logViewHeaderView = new LogViewHeaderView(Qt::Horizontal);
     QPainter painter(m_logViewHeaderView);
     //    m_logViewHeaderView->paintSection(&painter,QRect(10,10,10,10),0);
 }
 
 TEST_F(LogviewHeaderView_UT, ut_paintEvent)
 {
-    m_logViewHeaderView = new LogViewHeaderView(Qt::Horizontal);
     QPaintEvent paint(QRect(m_logViewHeaderView->rect()));
     //    m_logViewHeaderView->paintEvent(&paint);
 }
 
 TEST_F(LogviewHeaderView_UT, ut_sizeHint)
 {
-    m_logViewHeaderView = new LogViewHeaderView(Qt::Horizontal);
     m_logViewHeaderView->sizeHint();
 }
 
 TEST_F(LogviewHeaderView_UT, ut_sectionSizeHint)
 {
-    m_logViewHeaderView = new LogViewHeaderView(Qt::Horizontal);
     //    m_logViewHeaderView->sectionSizeHint(0);
 }

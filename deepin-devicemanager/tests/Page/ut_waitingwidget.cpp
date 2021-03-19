@@ -29,8 +29,9 @@
 class WaitingWidget_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_waitingWidget = new WaitingWidget;
     }
     void TearDown()
     {
@@ -41,7 +42,6 @@ public:
 
 TEST_F(WaitingWidget_UT, WaitingWidget_UT_start)
 {
-    m_waitingWidget = new WaitingWidget;
     m_waitingWidget->start();
     m_waitingWidget->stop();
 }

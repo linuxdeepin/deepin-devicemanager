@@ -27,8 +27,9 @@
 class DeviceMonitor_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceMonitor = new DeviceMonitor;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_parseMonitorSize)
 {
-    m_deviceMonitor = new DeviceMonitor;
     double inch = 32.00;
     QSize size = QSize(100, 100);
     m_deviceMonitor->parseMonitorSize("test", inch, size);
@@ -47,7 +47,6 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_parseMonitorSize)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromHwinfo)
 {
-    m_deviceMonitor = new DeviceMonitor;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_deviceMonitor->setInfoFromHwinfo(mapinfo);
@@ -55,7 +54,6 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromHwinfo)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromSelfDefine)
 {
-    m_deviceMonitor = new DeviceMonitor;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_deviceMonitor->setInfoFromSelfDefine(mapinfo);
@@ -63,7 +61,6 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromSelfDefine)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromEdid)
 {
-    m_deviceMonitor = new DeviceMonitor;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_deviceMonitor->setInfoFromEdid(mapinfo);
@@ -71,13 +68,11 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromEdid)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setMainInfoFromXrandr)
 {
-    m_deviceMonitor = new DeviceMonitor;
     m_deviceMonitor->setMainInfoFromXrandr("/");
 }
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_initFilterKey)
 {
-    m_deviceMonitor = new DeviceMonitor;
     m_deviceMonitor->initFilterKey();
     m_deviceMonitor->loadBaseDeviceInfo();
     m_deviceMonitor->loadOtherDeviceInfo();
@@ -87,7 +82,6 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_initFilterKey)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_name)
 {
-    m_deviceMonitor = new DeviceMonitor;
     m_deviceMonitor->name();
     m_deviceMonitor->driver();
     m_deviceMonitor->getOverviewInfo();
@@ -95,14 +89,12 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_name)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_caculateScreenRatio)
 {
-    m_deviceMonitor = new DeviceMonitor;
     m_deviceMonitor->caculateScreenRatio();
     m_deviceMonitor->gcd(2, 1);
 }
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_findAspectRatio)
 {
-    m_deviceMonitor = new DeviceMonitor;
     int arw = 5;
     int arh = 5;
     ASSERT_TRUE(m_deviceMonitor->findAspectRatio(10, 5, arw, arh));
@@ -110,7 +102,6 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_findAspectRatio)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_caculateScreenSize)
 {
-    m_deviceMonitor = new DeviceMonitor;
     m_deviceMonitor->caculateScreenSize();
     m_deviceMonitor->caculateScreenSize("abc\n");
 }

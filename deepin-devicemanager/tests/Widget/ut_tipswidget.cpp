@@ -25,8 +25,9 @@
 class TipsWidget_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        tWidget = new TipsWidget;
     }
     void TearDown()
     {
@@ -37,31 +38,26 @@ public:
 
 TEST_F(TipsWidget_UT, ut_onUpdateTheme)
 {
-    tWidget = new TipsWidget;
     tWidget->onUpdateTheme();
 }
 
 TEST_F(TipsWidget_UT, ut_setText)
 {
-    tWidget = new TipsWidget;
     tWidget->setText(" ");
 }
 
 TEST_F(TipsWidget_UT, ut_setAlignment)
 {
-    tWidget = new TipsWidget;
     tWidget->setAlignment(Qt::AlignTop);
 }
 
 TEST_F(TipsWidget_UT, ut_adjustContent)
 {
-    tWidget = new TipsWidget;
     tWidget->adjustContent("/");
 }
 
 TEST_F(TipsWidget_UT, ut_PaintEvent)
 {
-    tWidget = new TipsWidget;
     QPaintEvent paint(QRect(tWidget->rect()));
     tWidget->paintEvent(&paint);
 }

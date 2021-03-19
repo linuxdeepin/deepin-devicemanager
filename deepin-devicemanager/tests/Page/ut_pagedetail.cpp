@@ -30,8 +30,9 @@
 class PageDetail_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_pageDetail = new PageDetail;
     }
     void TearDown()
     {
@@ -43,8 +44,9 @@ public:
 class DetailButton_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_detailButton = new DetailButton("More");
     }
     void TearDown()
     {
@@ -56,7 +58,7 @@ public:
 class DetailSeperator_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
     }
     void TearDown()
@@ -69,7 +71,7 @@ public:
 class ScrollAreaWidget_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
     }
     void TearDown()
@@ -81,13 +83,11 @@ public:
 
 TEST_F(DetailButton_UT, DetailButton_UT_updateText)
 {
-    m_detailButton = new DetailButton("More");
     m_detailButton->updateText();
 }
 
 TEST_F(DetailButton_UT, DetailButton_UT_paintEvent)
 {
-    m_detailButton = new DetailButton("More");
     QPaintEvent paint(QRect(m_detailButton->rect()));
     m_detailButton->paintEvent(&paint);
 }
@@ -108,7 +108,6 @@ TEST_F(ScrollAreaWidget_UT, ScrollAreaWidget_UT_paintEvent)
 
 TEST_F(PageDetail_UT, PageDetail_UT_showDeviceInfo)
 {
-    m_pageDetail = new PageDetail;
     DeviceBios *device = new DeviceBios;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
@@ -121,28 +120,24 @@ TEST_F(PageDetail_UT, PageDetail_UT_showDeviceInfo)
 
 TEST_F(PageDetail_UT, PageDetail_UT_showInfoOfNum)
 {
-    m_pageDetail = new PageDetail;
     m_pageDetail->showInfoOfNum(0);
     m_pageDetail->enableDevice(0, true);
 }
 
 TEST_F(PageDetail_UT, PageDetail_UT_paintEvent)
 {
-    m_pageDetail = new PageDetail;
     QPaintEvent paint(QRect(m_pageDetail->rect()));
     m_pageDetail->paintEvent(&paint);
 }
 
 TEST_F(PageDetail_UT, PageDetail_UT_resizeEvent)
 {
-    m_pageDetail = new PageDetail;
     QResizeEvent resizeevent(QSize(10, 10), QSize(10, 10));
     m_pageDetail->resizeEvent(&resizeevent);
 }
 
 TEST_F(PageDetail_UT, PageDetail_UT_addWidgets)
 {
-    m_pageDetail = new PageDetail;
     TextBrowser *m_tBrowser = new TextBrowser;
     m_pageDetail->addWidgets(m_tBrowser, true);
     m_pageDetail->slotExportInfo();

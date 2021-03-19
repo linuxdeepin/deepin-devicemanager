@@ -26,8 +26,9 @@
 class CmdButtonWidget_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_cmdBtnWidget = new CmdButtonWidget;
     }
     void TearDown()
     {
@@ -38,7 +39,6 @@ public:
 
 TEST_F(CmdButtonWidget_UT, ut_paintEvent)
 {
-    m_cmdBtnWidget = new CmdButtonWidget;
     QPaintEvent paint(QRect(m_cmdBtnWidget->rect()));
     m_cmdBtnWidget->paintEvent(&paint);
     m_cmdBtnWidget->expandCommandLinkClicked();

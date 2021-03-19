@@ -27,8 +27,9 @@
 class DeviceOthers_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceOthers = new DeviceOthers;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceOthers_UT, DeviceOthers_UT_setInfoFromLshw)
 {
-    m_deviceOthers = new DeviceOthers;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("bus info", "bus");
     m_deviceOthers->m_BusInfo = "bus";
@@ -48,7 +48,6 @@ TEST_F(DeviceOthers_UT, DeviceOthers_UT_setInfoFromLshw)
 
 TEST_F(DeviceOthers_UT, DeviceOthers_UT_setInfoFromHwinfo)
 {
-    m_deviceOthers = new DeviceOthers;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("SysFS BusID", "st:");
     m_deviceOthers->setInfoFromHwinfo(mapinfo);
@@ -56,7 +55,6 @@ TEST_F(DeviceOthers_UT, DeviceOthers_UT_setInfoFromHwinfo)
 
 TEST_F(DeviceOthers_UT, DeviceOthers_UT_name)
 {
-    m_deviceOthers = new DeviceOthers;
     m_deviceOthers->name();
     m_deviceOthers->driver();
     m_deviceOthers->initFilterKey();
@@ -64,7 +62,6 @@ TEST_F(DeviceOthers_UT, DeviceOthers_UT_name)
 
 TEST_F(DeviceOthers_UT, DeviceOthers_UT_busInfo)
 {
-    m_deviceOthers = new DeviceOthers;
     m_deviceOthers->busInfo();
     m_deviceOthers->loadTableData();
     m_deviceOthers->getOverviewInfo();

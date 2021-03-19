@@ -28,8 +28,9 @@
 class PageMultiInfo_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_pageMultiInfo = new PageMultiInfo;
     }
     void TearDown()
     {
@@ -40,7 +41,6 @@ public:
 
 TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_updateInfo)
 {
-    m_pageMultiInfo = new PageMultiInfo;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
@@ -53,14 +53,12 @@ TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_updateInfo)
 
 TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_setLabel)
 {
-    m_pageMultiInfo = new PageMultiInfo;
     m_pageMultiInfo->setLabel("/");
     m_pageMultiInfo->clearWidgets();
 }
 
 TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_slotItemClicked)
 {
-    m_pageMultiInfo = new PageMultiInfo;
     m_pageMultiInfo->slotItemClicked(0);
     m_pageMultiInfo->slotRefreshInfo();
     m_pageMultiInfo->slotExportInfo();

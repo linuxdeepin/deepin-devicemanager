@@ -31,8 +31,9 @@
 class PageBoardInfo_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_pageBoardInfo = new PageBoardInfo;
     }
     void TearDown()
     {
@@ -43,7 +44,6 @@ public:
 
 TEST_F(PageBoardInfo_UT, ut_updateInfo)
 {
-    m_pageBoardInfo = new PageBoardInfo;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
@@ -56,7 +56,6 @@ TEST_F(PageBoardInfo_UT, ut_updateInfo)
 
 TEST_F(PageBoardInfo_UT, ut_loadDeviceInfo)
 {
-    m_pageBoardInfo = new PageBoardInfo;
     DeviceBios *device = new DeviceBios;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
@@ -71,7 +70,6 @@ TEST_F(PageBoardInfo_UT, ut_loadDeviceInfo)
 
 TEST_F(PageBoardInfo_UT, ut_getOtherInfoPair)
 {
-    m_pageBoardInfo = new PageBoardInfo;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
@@ -86,7 +84,6 @@ TEST_F(PageBoardInfo_UT, ut_getOtherInfoPair)
 
 TEST_F(PageBoardInfo_UT, ut_getValueInfo)
 {
-    m_pageBoardInfo = new PageBoardInfo;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");

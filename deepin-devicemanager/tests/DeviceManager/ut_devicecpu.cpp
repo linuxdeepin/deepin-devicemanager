@@ -27,8 +27,9 @@
 class DeviceCpu_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceCpu = new DeviceCpu;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceCpu_UT, DeviceCpu_UT_setCpuInfo)
 {
-    m_deviceCpu = new DeviceCpu;
     QMap<QString, QString> mapLscpu;
     QMap<QString, QString> mapLshw;
     QMap<QString, QString> mapDmidecode;
@@ -53,7 +53,6 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_setCpuInfo)
 
 TEST_F(DeviceCpu_UT, DeviceCpu_UT_initFilterKey)
 {
-    m_deviceCpu = new DeviceCpu;
     m_deviceCpu->initFilterKey();
     m_deviceCpu->getOverviewInfo();
     m_deviceCpu->loadBaseDeviceInfo();
@@ -64,7 +63,6 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_initFilterKey)
 
 TEST_F(DeviceCpu_UT, DeviceCpu_UT_name)
 {
-    m_deviceCpu = new DeviceCpu;
     m_deviceCpu->name();
     m_deviceCpu->driver();
     m_deviceCpu->subTitle();
@@ -73,7 +71,6 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_name)
 
 TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromLscpu)
 {
-    m_deviceCpu = new DeviceCpu;
     QMap<QString, QString> mapLscpu;
     QMap<QString, QString> mapLshw;
     QMap<QString, QString> mapDmidecode;
@@ -87,7 +84,6 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromLscpu)
 
 TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromLshw)
 {
-    m_deviceCpu = new DeviceCpu;
     QMap<QString, QString> mapLscpu;
     QMap<QString, QString> mapLshw;
     QMap<QString, QString> mapDmidecode;
@@ -101,7 +97,6 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromLshw)
 
 TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromDmidecode)
 {
-    m_deviceCpu = new DeviceCpu;
     QMap<QString, QString> mapLscpu;
     QMap<QString, QString> mapLshw;
     QMap<QString, QString> mapDmidecode;
@@ -115,7 +110,6 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromDmidecode)
 
 TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromCatCpuinfo)
 {
-    m_deviceCpu = new DeviceCpu;
     QMap<QString, QString> mapLscpu;
     QMap<QString, QString> mapLshw;
     QMap<QString, QString> mapDmidecode;
@@ -129,6 +123,5 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromCatCpuinfo)
 
 TEST_F(DeviceCpu_UT, DeviceCpu_UT_getTrNumber)
 {
-    m_deviceCpu = new DeviceCpu;
     m_deviceCpu->getTrNumber();
 }

@@ -27,8 +27,9 @@
 class DeviceCdrom_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceCdrom = new DeviceCdrom;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceCdrom_UT, DeviceCdrom_UT_setInfoFromLshw)
 {
-    m_deviceCdrom = new DeviceCdrom;
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Name", "1@n");
     mapInfo.insert("Vendor", "/1.0");
@@ -49,7 +49,6 @@ TEST_F(DeviceCdrom_UT, DeviceCdrom_UT_setInfoFromLshw)
 
 TEST_F(DeviceCdrom_UT, DeviceCdrom_UT_setInfoFromHwinfo)
 {
-    m_deviceCdrom = new DeviceCdrom;
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Name", "1@n");
     mapInfo.insert("Vendor", "/1.0");
@@ -59,23 +58,20 @@ TEST_F(DeviceCdrom_UT, DeviceCdrom_UT_setInfoFromHwinfo)
 
 TEST_F(DeviceCdrom_UT, DeviceCdrom_UT_name)
 {
-    m_deviceCdrom = new DeviceCdrom;
     m_deviceCdrom->name();
     m_deviceCdrom->driver();
 }
 
 TEST_F(DeviceCdrom_UT, DeviceCdrom_UT_subTitle)
 {
-    m_deviceCdrom = new DeviceCdrom;
-    //    m_deviceCdrom->subTitle();
-    //    m_deviceCdrom->getOverviewInfo();
+    m_deviceCdrom->subTitle();
+    m_deviceCdrom->getOverviewInfo();
     //    m_deviceCdrom->setEnable(true);
     //    m_deviceCdrom->enable();
 }
 
 TEST_F(DeviceCdrom_UT, DeviceCdrom_UT_initFilterKey)
 {
-    m_deviceCdrom = new DeviceCdrom;
     m_deviceCdrom->initFilterKey();
     m_deviceCdrom->loadBaseDeviceInfo();
     m_deviceCdrom->loadOtherDeviceInfo();

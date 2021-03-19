@@ -27,8 +27,10 @@
 class RichTextDelegate_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        widget = new PageTableWidget;
+        m_rtDelegate = new RichTextDelegate(widget);
     }
     void TearDown()
     {
@@ -41,8 +43,6 @@ public:
 
 TEST_F(RichTextDelegate_UT, ut_paint)
 {
-    widget = new PageTableWidget;
-    m_rtDelegate = new RichTextDelegate(widget);
     QStyleOptionViewItem option;
     QPainter painter(widget);
     QModelIndex index;
@@ -51,8 +51,6 @@ TEST_F(RichTextDelegate_UT, ut_paint)
 
 TEST_F(RichTextDelegate_UT, ut_createEditor)
 {
-    widget = new PageTableWidget;
-    m_rtDelegate = new RichTextDelegate(widget);
     QStyleOptionViewItem option;
     QPainter painter(widget);
     QModelIndex index;
@@ -61,8 +59,6 @@ TEST_F(RichTextDelegate_UT, ut_createEditor)
 
 TEST_F(RichTextDelegate_UT, ut_sizeHint)
 {
-    widget = new PageTableWidget;
-    m_rtDelegate = new RichTextDelegate(widget);
     QStyleOptionViewItem option;
     QPainter painter(widget);
     QModelIndex index;
@@ -71,8 +67,6 @@ TEST_F(RichTextDelegate_UT, ut_sizeHint)
 
 TEST_F(RichTextDelegate_UT, ut_addRow)
 {
-    widget = new PageTableWidget;
-    m_rtDelegate = new RichTextDelegate(widget);
     QDomDocument doc;
     QDomElement table;
     doc.setNodeValue("/");

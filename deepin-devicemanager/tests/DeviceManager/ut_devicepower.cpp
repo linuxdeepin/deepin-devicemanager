@@ -27,8 +27,9 @@
 class DevicePower_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_DevicePower = new DevicePower;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DevicePower_UT, DevicePower_UT_setInfoFromUpower)
 {
-    m_DevicePower = new DevicePower;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("Device", "/");
     mapinfo.insert("temperature", "12");
@@ -48,7 +48,6 @@ TEST_F(DevicePower_UT, DevicePower_UT_setInfoFromUpower)
 
 TEST_F(DevicePower_UT, DevicePower_UT_setDaemonInfo)
 {
-    m_DevicePower = new DevicePower;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("SysFS BusID", "st:");
     m_DevicePower->setDaemonInfo(mapinfo);
@@ -56,7 +55,6 @@ TEST_F(DevicePower_UT, DevicePower_UT_setDaemonInfo)
 
 TEST_F(DevicePower_UT, DevicePower_UT_name)
 {
-    m_DevicePower = new DevicePower;
     m_DevicePower->name();
     m_DevicePower->driver();
     m_DevicePower->initFilterKey();
@@ -64,7 +62,6 @@ TEST_F(DevicePower_UT, DevicePower_UT_name)
 
 TEST_F(DevicePower_UT, DevicePower_UT_loadBaseDeviceInfo)
 {
-    m_DevicePower = new DevicePower;
     m_DevicePower->loadBaseDeviceInfo();
     m_DevicePower->loadOtherDeviceInfo();
     m_DevicePower->loadTableData();

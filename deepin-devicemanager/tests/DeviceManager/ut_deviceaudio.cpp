@@ -27,8 +27,9 @@
 class DeviceAudio_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceAudio = new DeviceAudio;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceAudio_UT, DeviceAudio_UT_setInfoFromHwinfo)
 {
-    m_deviceAudio = new DeviceAudio;
     QMap<QString, QString> map;
     map.insert("SysFS BusID", "x86");
     m_deviceAudio->setInfoFromHwinfo(map);
@@ -47,7 +47,6 @@ TEST_F(DeviceAudio_UT, DeviceAudio_UT_setInfoFromHwinfo)
 
 TEST_F(DeviceAudio_UT, DeviceAudio_UT_setInfoFromLshw)
 {
-    m_deviceAudio = new DeviceAudio;
     QMap<QString, QString> map;
     map.insert("SysFS BusID", "x86");
     map.insert("bus info", "x86@");
@@ -57,7 +56,6 @@ TEST_F(DeviceAudio_UT, DeviceAudio_UT_setInfoFromLshw)
 
 TEST_F(DeviceAudio_UT, DeviceAudio_UT_setInfoFromCatDevices)
 {
-    m_deviceAudio = new DeviceAudio;
     QMap<QString, QString> map;
     map.insert("Device", "x86");
     m_deviceAudio->setInfoFromCatDevices(map);
@@ -67,23 +65,20 @@ TEST_F(DeviceAudio_UT, DeviceAudio_UT_setInfoFromCatDevices)
 
 TEST_F(DeviceAudio_UT, DeviceAudio_UT_name)
 {
-    m_deviceAudio = new DeviceAudio;
     m_deviceAudio->name();
     m_deviceAudio->driver();
 }
 
 TEST_F(DeviceAudio_UT, DeviceAudio_UT_setEnable)
 {
-    m_deviceAudio = new DeviceAudio;
     //    m_deviceAudio->enable();
     //    m_deviceAudio->setEnable(false);
-    //    m_deviceAudio->subTitle();
-    //    m_deviceAudio->getOverviewInfo();
+    m_deviceAudio->subTitle();
+    m_deviceAudio->getOverviewInfo();
 }
 
 TEST_F(DeviceAudio_UT, DeviceAudio_UT_initFilterKey)
 {
-    m_deviceAudio = new DeviceAudio;
     m_deviceAudio->initFilterKey();
     m_deviceAudio->loadBaseDeviceInfo();
     m_deviceAudio->loadOtherDeviceInfo();

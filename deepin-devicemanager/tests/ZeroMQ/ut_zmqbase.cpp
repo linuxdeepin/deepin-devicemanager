@@ -14,3 +14,28 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include "../src/ZeroMQ/ZMQBase.h"
+#include "../tests/ut_Head.h"
+#include <QCoreApplication>
+#include <gtest/gtest.h>
+#include <tests/stub.h>
+
+class ZMQBase_UT : public UT_HEAD
+{
+public:
+    void SetUp()
+    {
+        m_zmqBase = new ZMQBase;
+    }
+    void TearDown()
+    {
+        delete m_zmqBase;
+    }
+    ZMQBase *m_zmqBase = nullptr;
+};
+
+TEST_F(ZMQBase_UT, ZMQBase_UT_init)
+{
+    void *context = nullptr;
+    m_zmqBase->init(1, context);
+}

@@ -27,8 +27,10 @@
 class LogViewItemDelegate_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_view = new LogTreeView;
+        m_logDelegate = new LogViewItemDelegate(m_view);
     }
     void TearDown()
     {
@@ -41,8 +43,6 @@ public:
 
 TEST_F(LogViewItemDelegate_UT, ut_paint)
 {
-    m_view = new LogTreeView;
-    m_logDelegate = new LogViewItemDelegate(m_view);
     QPainter painter(m_view);
     QStyleOptionViewItem option;
     QModelIndex index = m_view->model()->index(0, 0);
@@ -51,8 +51,6 @@ TEST_F(LogViewItemDelegate_UT, ut_paint)
 
 TEST_F(LogViewItemDelegate_UT, ut_createEditor)
 {
-    m_view = new LogTreeView;
-    m_logDelegate = new LogViewItemDelegate(m_view);
     QPainter painter(m_view);
     QStyleOptionViewItem option;
     QModelIndex index = m_view->model()->index(0, 0);
@@ -61,8 +59,6 @@ TEST_F(LogViewItemDelegate_UT, ut_createEditor)
 
 TEST_F(LogViewItemDelegate_UT, ut_sizeHint)
 {
-    m_view = new LogTreeView;
-    m_logDelegate = new LogViewItemDelegate(m_view);
     QPainter painter(m_view);
     QStyleOptionViewItem option;
     QModelIndex index = m_view->model()->index(0, 0);

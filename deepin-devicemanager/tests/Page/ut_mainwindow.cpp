@@ -39,7 +39,7 @@ void ut_refreshDataBase()
 class MainWindow_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
     }
     void TearDown()
@@ -80,7 +80,7 @@ bool ut_process_startDetached()
 
 TEST_F(MainWindow_UT, MainWindow_UT_showDisplayShortcutsHelpDialog)
 {
-    //        m_mainWindow = new MainWindow;
+    //
     //        Stub stub;
     //        stub.set((bool (QProcess::*)(const QString &, const QStringList &))ADDR(QProcess,startDetached), ut_process_startDetached);
     //        m_mainWindow->showDisplayShortcutsHelpDialog();

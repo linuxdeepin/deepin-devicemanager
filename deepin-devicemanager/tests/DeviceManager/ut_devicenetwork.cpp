@@ -27,8 +27,9 @@
 class DeviceNetwork_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceNetwork = new DeviceNetwork;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceNetwork_UT, DeviceNetwork_UT_setInfoFromHwinfo)
 {
-    m_deviceNetwork = new DeviceNetwork;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_deviceNetwork->setInfoFromHwinfo(mapinfo);
@@ -47,7 +47,6 @@ TEST_F(DeviceNetwork_UT, DeviceNetwork_UT_setInfoFromHwinfo)
 
 TEST_F(DeviceNetwork_UT, DeviceNetwork_UT_setInfoFromLshw)
 {
-    m_deviceNetwork = new DeviceNetwork;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_deviceNetwork->setInfoFromLshw(mapinfo);
@@ -55,7 +54,6 @@ TEST_F(DeviceNetwork_UT, DeviceNetwork_UT_setInfoFromLshw)
 
 TEST_F(DeviceNetwork_UT, DeviceNetwork_UT_loadBaseDeviceInfo)
 {
-    m_deviceNetwork = new DeviceNetwork;
     m_deviceNetwork->loadBaseDeviceInfo();
     m_deviceNetwork->loadOtherDeviceInfo();
     m_deviceNetwork->loadTableHeader();
@@ -64,7 +62,6 @@ TEST_F(DeviceNetwork_UT, DeviceNetwork_UT_loadBaseDeviceInfo)
 
 TEST_F(DeviceNetwork_UT, DeviceNetwork_UT_name)
 {
-    m_deviceNetwork = new DeviceNetwork;
     m_deviceNetwork->name();
     m_deviceNetwork->driver();
     m_deviceNetwork->getOverviewInfo();

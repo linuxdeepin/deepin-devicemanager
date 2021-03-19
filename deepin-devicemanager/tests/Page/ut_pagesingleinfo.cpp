@@ -29,8 +29,9 @@
 class PageSingleInfo_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_PageSingleInfo = new PageSingleInfo;
     }
     void TearDown()
     {
@@ -41,7 +42,6 @@ public:
 
 TEST_F(PageSingleInfo_UT, PageSingleInfo_UT_updateInfo)
 {
-    m_PageSingleInfo = new PageSingleInfo;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
@@ -54,14 +54,12 @@ TEST_F(PageSingleInfo_UT, PageSingleInfo_UT_updateInfo)
 
 TEST_F(PageSingleInfo_UT, PageSingleInfo_UT_setLabel)
 {
-    m_PageSingleInfo = new PageSingleInfo;
     m_PageSingleInfo->setLabel("/");
     m_PageSingleInfo->clearWidgets();
 }
 
 TEST_F(PageSingleInfo_UT, PageSingleInfo_UT_slotActionRefresh)
 {
-    m_PageSingleInfo = new PageSingleInfo;
     m_PageSingleInfo->slotActionRefresh();
     m_PageSingleInfo->slotActionExport();
     m_PageSingleInfo->slotActionCopy();
@@ -70,7 +68,6 @@ TEST_F(PageSingleInfo_UT, PageSingleInfo_UT_slotActionRefresh)
 
 TEST_F(PageSingleInfo_UT, PageSingleInfo_UT_slotActionEnable)
 {
-    m_PageSingleInfo = new PageSingleInfo;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");

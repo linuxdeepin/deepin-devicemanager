@@ -26,8 +26,9 @@
 class LongTextLabel_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_ltLabel = new LongTextLabel;
     }
     void TearDown()
     {
@@ -38,7 +39,6 @@ public:
 
 TEST_F(LongTextLabel_UT, ut_paintEvent)
 {
-    m_ltLabel = new LongTextLabel;
     QPaintEvent paint(QRect(m_ltLabel->rect()));
     m_ltLabel->paintEvent(&paint);
 }

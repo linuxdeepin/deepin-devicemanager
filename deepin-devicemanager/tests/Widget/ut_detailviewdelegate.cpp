@@ -27,8 +27,9 @@
 class DetailViewDelegate_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_dViewDelegate = new DetailViewDelegate(nullptr);
     }
     void TearDown()
     {
@@ -40,7 +41,7 @@ public:
 TEST_F(DetailViewDelegate_UT, ut_paint)
 {
     DetailTreeView *m_treeView = new DetailTreeView;
-    m_dViewDelegate = new DetailViewDelegate(nullptr);
+
     QStyleOptionViewItem option;
     QPainter painter(m_treeView);
 
@@ -57,7 +58,7 @@ TEST_F(DetailViewDelegate_UT, ut_paint)
 TEST_F(DetailViewDelegate_UT, ut_createEditor)
 {
     DetailTreeView *m_treeView = new DetailTreeView;
-    m_dViewDelegate = new DetailViewDelegate(nullptr);
+
     QStyleOptionViewItem m_item;
 
     QTableWidgetItem *item = new QTableWidgetItem;
@@ -73,7 +74,7 @@ TEST_F(DetailViewDelegate_UT, ut_createEditor)
 TEST_F(DetailViewDelegate_UT, ut_sizeHint)
 {
     DetailTreeView *m_treeView = new DetailTreeView;
-    m_dViewDelegate = new DetailViewDelegate(nullptr);
+
     QStyleOptionViewItem m_item;
 
     QTableWidgetItem *item = new QTableWidgetItem;

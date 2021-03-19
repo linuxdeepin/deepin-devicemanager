@@ -26,8 +26,9 @@
 class DeviceStorage_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceStorage = new DeviceStorage;
     }
     void TearDown()
     {
@@ -38,7 +39,6 @@ public:
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_setHwinfoInfo)
 {
-    m_deviceStorage = new DeviceStorage;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("SysFS BusID", "123");
     m_deviceStorage->m_Size = "16";
@@ -49,7 +49,6 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_setHwinfoInfo)
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_setKLUHwinfoInfo)
 {
-    m_deviceStorage = new DeviceStorage;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("SysFS BusID", "123");
     mapinfo.insert("Driver", "usb-storage");
@@ -60,7 +59,6 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_setKLUHwinfoInfo)
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_addInfoFromlshw)
 {
-    m_deviceStorage = new DeviceStorage;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("bus info", "1:2@34");
     mapinfo.insert("Driver", "usb-storage");
@@ -71,7 +69,6 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_addInfoFromlshw)
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_addNVMEInfoFromlshw)
 {
-    m_deviceStorage = new DeviceStorage;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("bus info", "1:2@34");
     mapinfo.insert("Driver", "usb-storage");
@@ -82,7 +79,6 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_addNVMEInfoFromlshw)
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_setMediaType)
 {
-    m_deviceStorage = new DeviceStorage;
     m_deviceStorage->m_DeviceFile = "/test";
     ASSERT_TRUE(m_deviceStorage->setMediaType("/test", "0"));
     ASSERT_TRUE(m_deviceStorage->setMediaType("/test", "1"));
@@ -91,7 +87,6 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_setMediaType)
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_setKLUMediaType)
 {
-    m_deviceStorage = new DeviceStorage;
     m_deviceStorage->m_DeviceFile = "/test";
     ASSERT_TRUE(m_deviceStorage->setKLUMediaType("/test", "0"));
     ASSERT_TRUE(m_deviceStorage->setKLUMediaType("/test", "1"));
@@ -100,27 +95,23 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_setKLUMediaType)
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_isValid)
 {
-    m_deviceStorage = new DeviceStorage;
     m_deviceStorage->m_Size = "32";
     ASSERT_TRUE(m_deviceStorage->isValid());
 }
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_setDiskSerialID)
 {
-    m_deviceStorage = new DeviceStorage;
     m_deviceStorage->m_SerialNumber = "32";
     m_deviceStorage->setDiskSerialID("by-id,test");
 }
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_compareSize)
 {
-    m_deviceStorage = new DeviceStorage;
     ASSERT_EQ(m_deviceStorage->compareSize("16", "32"), "32");
 }
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_name)
 {
-    m_deviceStorage = new DeviceStorage;
     m_deviceStorage->name();
     m_deviceStorage->driver();
     m_deviceStorage->initFilterKey();
@@ -128,21 +119,18 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_name)
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_subTitle)
 {
-    m_deviceStorage = new DeviceStorage;
     m_deviceStorage->subTitle();
     m_deviceStorage->getOverviewInfo();
 }
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_loadTableHeader)
 {
-    m_deviceStorage = new DeviceStorage;
     m_deviceStorage->loadTableHeader();
     m_deviceStorage->loadTableData();
 }
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_getInfoFromLshw)
 {
-    m_deviceStorage = new DeviceStorage;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("bus info", "1:2@34");
     mapinfo.insert("Driver", "usb-storage");
@@ -153,7 +141,6 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_getInfoFromLshw)
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_getInfoFromsmartctl)
 {
-    m_deviceStorage = new DeviceStorage;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("Device Model", "1:2@34");
     mapinfo.insert("User Capacity", "1");

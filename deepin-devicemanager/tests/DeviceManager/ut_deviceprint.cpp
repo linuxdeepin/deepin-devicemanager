@@ -26,8 +26,9 @@
 class DevicePrint_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_devicePrint = new DevicePrint;
     }
     void TearDown()
     {
@@ -38,7 +39,6 @@ public:
 
 TEST_F(DevicePrint_UT, DevicePrint_UT_setInfoFromUpower)
 {
-    m_devicePrint = new DevicePrint;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("device-uri", "http://");
     mapinfo.insert("printer-info", "Print info");
@@ -47,7 +47,6 @@ TEST_F(DevicePrint_UT, DevicePrint_UT_setInfoFromUpower)
 
 TEST_F(DevicePrint_UT, DevicePrint_UT_name)
 {
-    m_devicePrint = new DevicePrint;
     m_devicePrint->name();
     m_devicePrint->driver();
     m_devicePrint->initFilterKey();
@@ -55,13 +54,11 @@ TEST_F(DevicePrint_UT, DevicePrint_UT_name)
 
 TEST_F(DevicePrint_UT, DevicePrint_UT_subTitle)
 {
-    m_devicePrint = new DevicePrint;
     m_devicePrint->subTitle();
 }
 
 TEST_F(DevicePrint_UT, DevicePrint_UT_loadBaseDeviceInfo)
 {
-    m_devicePrint = new DevicePrint;
     m_devicePrint->loadBaseDeviceInfo();
     m_devicePrint->loadOtherDeviceInfo();
     m_devicePrint->loadTableData();

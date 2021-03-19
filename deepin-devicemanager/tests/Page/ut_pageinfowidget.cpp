@@ -30,8 +30,9 @@
 class PageInfoWidget_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_pageInfoWidget = new PageInfoWidget;
     }
     void TearDown()
     {
@@ -42,7 +43,6 @@ public:
 
 TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_updateTable)
 {
-    m_pageInfoWidget = new PageInfoWidget;
     PageMultiInfo *p = new PageMultiInfo;
     m_pageInfoWidget->mp_PageInfo = dynamic_cast<PageInfo *>(p);
     DeviceInput *device = new DeviceInput;
@@ -57,7 +57,6 @@ TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_updateTable)
 
 TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_updateTable2)
 {
-    m_pageInfoWidget = new PageInfoWidget;
     PageMultiInfo *p = new PageMultiInfo;
     m_pageInfoWidget->mp_PageInfo = dynamic_cast<PageInfo *>(p);
     QMap<QString, QString> map;
@@ -68,14 +67,12 @@ TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_updateTable2)
 
 TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_resizeEvent)
 {
-    m_pageInfoWidget = new PageInfoWidget;
     QResizeEvent resizeevent(QSize(10, 10), QSize(10, 10));
     m_pageInfoWidget->resizeEvent(&resizeevent);
 }
 
 TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_slotRefreshInfo)
 {
-    m_pageInfoWidget = new PageInfoWidget;
     m_pageInfoWidget->slotRefreshInfo();
     m_pageInfoWidget->slotExportInfo();
     m_pageInfoWidget->slotUpdateUI();

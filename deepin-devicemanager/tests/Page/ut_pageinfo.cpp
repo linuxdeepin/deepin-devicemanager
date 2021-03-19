@@ -27,7 +27,7 @@
 class PageInfo_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
     }
     void TearDown()

@@ -29,8 +29,9 @@
 class DeviceWidget_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_dWidget = new DeviceWidget;
     }
     void TearDown()
     {
@@ -41,7 +42,6 @@ public:
 
 TEST_F(DeviceWidget_UT, ut_updateListView)
 {
-    m_dWidget = new DeviceWidget;
     QList<QPair<QString, QString>> list;
     list.append(QPair<QString, QString>("/", "/"));
     m_dWidget->updateListView(list);
@@ -49,7 +49,6 @@ TEST_F(DeviceWidget_UT, ut_updateListView)
 
 TEST_F(DeviceWidget_UT, ut_updateDevice)
 {
-    m_dWidget = new DeviceWidget;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
@@ -65,7 +64,6 @@ TEST_F(DeviceWidget_UT, ut_updateDevice)
 
 TEST_F(DeviceWidget_UT, ut_updateOverview)
 {
-    m_dWidget = new DeviceWidget;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_dWidget->updateOverview("/", mapinfo);
@@ -73,7 +71,6 @@ TEST_F(DeviceWidget_UT, ut_updateOverview)
 
 TEST_F(DeviceWidget_UT, ut_slotRefreshInfo)
 {
-    m_dWidget = new DeviceWidget;
     m_dWidget->initWidgets();
     m_dWidget->slotRefreshInfo();
     m_dWidget->slotExportInfo();
@@ -82,7 +79,6 @@ TEST_F(DeviceWidget_UT, ut_slotRefreshInfo)
 
 TEST_F(DeviceWidget_UT, ut_resizeEvent)
 {
-    m_dWidget = new DeviceWidget;
     QResizeEvent resizeevent(QSize(10, 10), QSize(10, 10));
     m_dWidget->resizeEvent(&resizeevent);
 }

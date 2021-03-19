@@ -27,8 +27,9 @@
 class DeviceBios_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceBios = new DeviceBios;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceBios_UT, DeviceBios_UT_setBiosInfo)
 {
-    m_deviceBios = new DeviceBios;
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Vendor", "1@n");
     mapInfo.insert("Version", "1.0");
@@ -53,7 +53,6 @@ TEST_F(DeviceBios_UT, DeviceBios_UT_setBiosInfo)
 
 TEST_F(DeviceBios_UT, DeviceBios_UT_name)
 {
-    m_deviceBios = new DeviceBios;
     m_deviceBios->name();
     m_deviceBios->vendor();
     m_deviceBios->driver();
@@ -63,14 +62,12 @@ TEST_F(DeviceBios_UT, DeviceBios_UT_name)
 
 TEST_F(DeviceBios_UT, DeviceBios_UT_subTitle)
 {
-    m_deviceBios = new DeviceBios;
     m_deviceBios->subTitle();
     m_deviceBios->getOverviewInfo();
 }
 
 TEST_F(DeviceBios_UT, DeviceBios_UT_initFilterKey)
 {
-    m_deviceBios = new DeviceBios;
     m_deviceBios->initFilterKey();
     m_deviceBios->loadBaseDeviceInfo();
     m_deviceBios->loadOtherDeviceInfo();

@@ -27,8 +27,9 @@
 class DeviceBluetooth_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceBluetooth = new DeviceBluetooth;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceBluetooth_UT, DeviceBluetooth_UT_setInfoFromHciconfig)
 {
-    m_deviceBluetooth = new DeviceBluetooth;
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Name", "1@n");
     mapInfo.insert("Vendor", "/1.0");
@@ -51,7 +51,6 @@ TEST_F(DeviceBluetooth_UT, DeviceBluetooth_UT_setInfoFromHciconfig)
 
 TEST_F(DeviceBluetooth_UT, DeviceBluetooth_UT_setInfoFromLshw)
 {
-    m_deviceBluetooth = new DeviceBluetooth;
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Name", "1@n");
     mapInfo.insert("Vendor", "/1.0");
@@ -62,23 +61,20 @@ TEST_F(DeviceBluetooth_UT, DeviceBluetooth_UT_setInfoFromLshw)
 
 TEST_F(DeviceBluetooth_UT, DeviceBluetooth_UT_name)
 {
-    m_deviceBluetooth = new DeviceBluetooth;
     m_deviceBluetooth->name();
     m_deviceBluetooth->driver();
 }
 
 TEST_F(DeviceBluetooth_UT, DeviceBluetooth_UT_subTitle)
 {
-    m_deviceBluetooth = new DeviceBluetooth;
-    //    m_deviceBluetooth->subTitle();
-    //    m_deviceBluetooth->getOverviewInfo();
+    m_deviceBluetooth->subTitle();
+    m_deviceBluetooth->getOverviewInfo();
     //    m_deviceBluetooth->enable();
     //    m_deviceBluetooth->setEnable(true);
 }
 
 TEST_F(DeviceBluetooth_UT, DeviceBluetooth_UT_initFilterKey)
 {
-    m_deviceBluetooth = new DeviceBluetooth;
     m_deviceBluetooth->initFilterKey();
     m_deviceBluetooth->loadBaseDeviceInfo();
     m_deviceBluetooth->loadOtherDeviceInfo();
@@ -88,6 +84,5 @@ TEST_F(DeviceBluetooth_UT, DeviceBluetooth_UT_initFilterKey)
 
 TEST_F(DeviceBluetooth_UT, DeviceBluetooth_UT_parseKeyToLshw)
 {
-    m_deviceBluetooth = new DeviceBluetooth;
     m_deviceBluetooth->parseKeyToLshw("http://abc");
 }

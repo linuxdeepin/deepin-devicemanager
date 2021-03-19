@@ -27,8 +27,9 @@
 class DeviceInput_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceInput = new DeviceInput;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceInput_UT, DeviceInput_UT_setInfoFromHwinfo)
 {
-    m_deviceInput = new DeviceInput;
     QMap<QString, QString> map;
     map.insert("bus info", "abc");
     m_deviceInput->m_KeyToLshw = "abcd";
@@ -49,7 +49,6 @@ TEST_F(DeviceInput_UT, DeviceInput_UT_setInfoFromHwinfo)
 
 TEST_F(DeviceInput_UT, DeviceInput_UT_setKLUInfoFromHwinfo)
 {
-    m_deviceInput = new DeviceInput;
     QMap<QString, QString> map;
     map.insert("Model", "Bluetooth");
     m_deviceInput->setKLUInfoFromHwinfo(map);
@@ -57,14 +56,12 @@ TEST_F(DeviceInput_UT, DeviceInput_UT_setKLUInfoFromHwinfo)
 
 TEST_F(DeviceInput_UT, DeviceInput_UT_setInfoFromInput)
 {
-    m_deviceInput = new DeviceInput;
     m_deviceInput->setInfoFromInput();
     m_deviceInput->setInfoFromBluetoothctl();
 }
 
 TEST_F(DeviceInput_UT, DeviceInput_UT_name)
 {
-    m_deviceInput = new DeviceInput;
     m_deviceInput->name();
     m_deviceInput->driver();
     m_deviceInput->subTitle();
@@ -72,7 +69,6 @@ TEST_F(DeviceInput_UT, DeviceInput_UT_name)
 
 TEST_F(DeviceInput_UT, DeviceInput_UT_initFilterKey)
 {
-    m_deviceInput = new DeviceInput;
     m_deviceInput->initFilterKey();
     m_deviceInput->getOverviewInfo();
     m_deviceInput->loadBaseDeviceInfo();

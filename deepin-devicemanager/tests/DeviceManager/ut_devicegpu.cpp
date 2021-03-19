@@ -27,8 +27,9 @@
 class DeviceGpu_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceGpu = new DeviceGpu;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceGpu_UT, DeviceGpu_UT_initFilterKey)
 {
-    m_deviceGpu = new DeviceGpu;
     m_deviceGpu->initFilterKey();
     m_deviceGpu->getOverviewInfo();
     m_deviceGpu->loadBaseDeviceInfo();
@@ -50,7 +50,6 @@ TEST_F(DeviceGpu_UT, DeviceGpu_UT_initFilterKey)
 
 TEST_F(DeviceGpu_UT, DeviceGpu_UT_name)
 {
-    m_deviceGpu = new DeviceGpu;
     m_deviceGpu->name();
     m_deviceGpu->driver();
     m_deviceGpu->subTitle();
@@ -58,7 +57,6 @@ TEST_F(DeviceGpu_UT, DeviceGpu_UT_name)
 
 TEST_F(DeviceGpu_UT, DeviceGpu_UT_setLshwInfo)
 {
-    m_deviceGpu = new DeviceGpu;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("Vendor", "1@n");
     m_deviceGpu->setLshwInfo(mapinfo);

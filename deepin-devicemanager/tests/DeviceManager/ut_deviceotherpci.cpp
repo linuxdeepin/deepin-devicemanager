@@ -27,8 +27,9 @@
 class DeviceOtherPCI_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceOtherPCI = new DeviceOtherPCI;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceOtherPCI_UT, DeviceOtherPCI_UT_name)
 {
-    m_deviceOtherPCI = new DeviceOtherPCI;
     m_deviceOtherPCI->name();
     m_deviceOtherPCI->driver();
     m_deviceOtherPCI->initFilterKey();

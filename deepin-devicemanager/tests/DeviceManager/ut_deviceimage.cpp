@@ -27,8 +27,9 @@
 class DeviceImage_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceImage = new DeviceImage;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceImage_UT, DeviceImage_UT_setInfoFromLshw)
 {
-    m_deviceImage = new DeviceImage;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("bus info", "1@n");
     m_deviceImage->m_KeyToLshw = "1@n";
@@ -48,7 +48,6 @@ TEST_F(DeviceImage_UT, DeviceImage_UT_setInfoFromLshw)
 
 TEST_F(DeviceImage_UT, DeviceImage_UT_setInfoFromHwinfo)
 {
-    m_deviceImage = new DeviceImage;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("SysFS BusID", "//:");
     m_deviceImage->setInfoFromHwinfo(mapinfo);
@@ -56,7 +55,6 @@ TEST_F(DeviceImage_UT, DeviceImage_UT_setInfoFromHwinfo)
 
 TEST_F(DeviceImage_UT, DeviceImage_UT_name)
 {
-    m_deviceImage = new DeviceImage;
     m_deviceImage->name();
     m_deviceImage->driver();
     m_deviceImage->subTitle();
@@ -64,15 +62,13 @@ TEST_F(DeviceImage_UT, DeviceImage_UT_name)
 
 TEST_F(DeviceImage_UT, DeviceImage_UT_getOverviewInfo)
 {
-    m_deviceImage = new DeviceImage;
-    //    m_deviceImage->getOverviewInfo();
+    m_deviceImage->getOverviewInfo();
     //    m_deviceImage->setEnable(true);
     //    m_deviceImage->enable();
 }
 
 TEST_F(DeviceImage_UT, DeviceImage_UT_initFilterKey)
 {
-    m_deviceImage = new DeviceImage;
     m_deviceImage->initFilterKey();
     m_deviceImage->loadBaseDeviceInfo();
     m_deviceImage->loadOtherDeviceInfo();
@@ -82,6 +78,5 @@ TEST_F(DeviceImage_UT, DeviceImage_UT_initFilterKey)
 
 TEST_F(DeviceImage_UT, DeviceImage_UT_setInfoFromInput)
 {
-    m_deviceImage = new DeviceImage;
     m_deviceImage->setInfoFromInput();
 }

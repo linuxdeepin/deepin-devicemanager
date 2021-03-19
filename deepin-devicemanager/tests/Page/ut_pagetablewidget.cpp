@@ -27,8 +27,9 @@
 class PageTableWidget_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_pageTableWidget = new PageTableWidget;
     }
     void TearDown()
     {
@@ -39,20 +40,17 @@ public:
 
 TEST_F(PageTableWidget_UT, PageTableWidget_UT_paintEvent)
 {
-    m_pageTableWidget = new PageTableWidget;
     QPaintEvent paint(QRect(m_pageTableWidget->rect()));
     m_pageTableWidget->paintEvent(&paint);
 }
 
 TEST_F(PageTableWidget_UT, PageTableWidget_UT_setCurDeviceState)
 {
-    m_pageTableWidget = new PageTableWidget;
     m_pageTableWidget->setCurDeviceState(false);
 }
 
 TEST_F(PageTableWidget_UT, PageTableWidget_UT_expandTable)
 {
-    m_pageTableWidget = new PageTableWidget;
     m_pageTableWidget->mp_Table->mp_CommandBtn = new DCommandLinkButton("");
     m_pageTableWidget->mp_Table->m_IsExpand = true;
     m_pageTableWidget->expandTable();

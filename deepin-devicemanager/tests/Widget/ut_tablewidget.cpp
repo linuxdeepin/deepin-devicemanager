@@ -28,8 +28,9 @@
 class TableWidget_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_tableWidget = new TableWidget;
     }
     void TearDown()
     {
@@ -40,13 +41,11 @@ public:
 
 TEST_F(TableWidget_UT, ut_setHeaderLabels)
 {
-    m_tableWidget = new TableWidget;
     m_tableWidget->setHeaderLabels(QStringList() << "no");
 }
 
 TEST_F(TableWidget_UT, ut_setItem)
 {
-    m_tableWidget = new TableWidget;
     DStandardItem *item = new DStandardItem;
     m_tableWidget->setItem(0, 0, item);
     delete item;
@@ -58,14 +57,12 @@ TEST_F(TableWidget_UT, ut_setItem)
 
 TEST_F(TableWidget_UT, ut_PaintEvent)
 {
-    m_tableWidget = new TableWidget;
     QPaintEvent paint(QRect(m_tableWidget->rect()));
     m_tableWidget->paintEvent(&paint);
 }
 
 TEST_F(TableWidget_UT, ut_slotActionExport)
 {
-    m_tableWidget = new TableWidget;
     m_tableWidget->slotActionExport();
     m_tableWidget->slotActionRefresh();
     m_tableWidget->slotActionEnable();
@@ -73,13 +70,11 @@ TEST_F(TableWidget_UT, ut_slotActionExport)
 
 TEST_F(TableWidget_UT, ut_slotItemClicked)
 {
-    m_tableWidget = new TableWidget;
     QModelIndex index;
     m_tableWidget->slotItemClicked(index);
 }
 
 TEST_F(TableWidget_UT, ut_initWidget)
 {
-    m_tableWidget = new TableWidget;
     m_tableWidget->initWidget();
 }

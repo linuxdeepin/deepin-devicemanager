@@ -26,8 +26,9 @@
 class LogTreeView_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_logTreeView = new LogTreeView;
     }
     void TearDown()
     {
@@ -38,33 +39,28 @@ public:
 
 TEST_F(LogTreeView_UT, UT_setHeaderLabels)
 {
-    m_logTreeView = new LogTreeView;
     m_logTreeView->setHeaderLabels(QStringList() << "/");
 }
 
 TEST_F(LogTreeView_UT, UT_currentRowEnable)
 {
-    m_logTreeView = new LogTreeView;
     ASSERT_FALSE(m_logTreeView->currentRowEnable());
     ASSERT_NE(m_logTreeView->currentRow(), 0);
 }
 
 TEST_F(LogTreeView_UT, UT_updateCurItemEnable)
 {
-    m_logTreeView = new LogTreeView;
     m_logTreeView->updateCurItemEnable(0, 1);
 }
 
 TEST_F(LogTreeView_UT, UT_paintEvent)
 {
-    m_logTreeView = new LogTreeView;
     QPaintEvent paint(QRect(m_logTreeView->rect()));
     m_logTreeView->paintEvent(&paint);
 }
 
 TEST_F(LogTreeView_UT, UT_setRowNum)
 {
-    m_logTreeView = new LogTreeView;
     m_logTreeView->setRowNum(0);
     m_logTreeView->clear();
     ASSERT_EQ(m_logTreeView->RowNum(), 0);
@@ -72,7 +68,6 @@ TEST_F(LogTreeView_UT, UT_setRowNum)
 
 TEST_F(LogTreeView_UT, ut_keyPressEvent)
 {
-    m_logTreeView = new LogTreeView;
     QKeyEvent keyPressEvent(QEvent::KeyPress, Qt::Key_Up, Qt::ShiftModifier);
     QCoreApplication::sendEvent(m_logTreeView, &keyPressEvent);
 }

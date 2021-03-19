@@ -27,8 +27,9 @@
 class DeviceMemory_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceMemory = new DeviceMemory;
     }
     void TearDown()
     {
@@ -39,7 +40,6 @@ public:
 
 TEST_F(DeviceMemory_UT, DeviceMemory_UT_setInfoFromLshw)
 {
-    m_deviceMemory = new DeviceMemory;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_deviceMemory->setInfoFromLshw(mapinfo);
@@ -47,7 +47,6 @@ TEST_F(DeviceMemory_UT, DeviceMemory_UT_setInfoFromLshw)
 
 TEST_F(DeviceMemory_UT, DeviceMemory_UT_setInfoFromDmidecode)
 {
-    m_deviceMemory = new DeviceMemory;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_deviceMemory->setInfoFromDmidecode(mapinfo);
@@ -55,7 +54,6 @@ TEST_F(DeviceMemory_UT, DeviceMemory_UT_setInfoFromDmidecode)
 
 TEST_F(DeviceMemory_UT, DeviceMemory_UT_initFilterKey)
 {
-    m_deviceMemory = new DeviceMemory;
     m_deviceMemory->initFilterKey();
     m_deviceMemory->loadBaseDeviceInfo();
     m_deviceMemory->loadOtherDeviceInfo();
@@ -65,7 +63,6 @@ TEST_F(DeviceMemory_UT, DeviceMemory_UT_initFilterKey)
 
 TEST_F(DeviceMemory_UT, DeviceMemory_UT_name)
 {
-    m_deviceMemory = new DeviceMemory;
     m_deviceMemory->name();
     m_deviceMemory->driver();
     m_deviceMemory->getOverviewInfo();

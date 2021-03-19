@@ -29,8 +29,9 @@
 class TextBrowser_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        tBrowser = new TextBrowser;
     }
     void TearDown()
     {
@@ -41,7 +42,6 @@ public:
 
 TEST_F(TextBrowser_UT, ut_showDeviceInfo)
 {
-    tBrowser = new TextBrowser;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("Device", "/");
@@ -54,7 +54,6 @@ TEST_F(TextBrowser_UT, ut_showDeviceInfo)
 
 TEST_F(TextBrowser_UT, ut_updateInfo)
 {
-    tBrowser = new TextBrowser;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("Device", "/");
@@ -68,7 +67,6 @@ TEST_F(TextBrowser_UT, ut_updateInfo)
 
 TEST_F(TextBrowser_UT, ut_setDeviceEnabled)
 {
-    tBrowser = new TextBrowser;
     tBrowser->mp_Info = nullptr;
     EXPECT_EQ(tBrowser->setDeviceEnabled(true), EDS_Cancle);
     tBrowser->updateShowOtherInfo();
@@ -77,34 +75,29 @@ TEST_F(TextBrowser_UT, ut_setDeviceEnabled)
 
 TEST_F(TextBrowser_UT, ut_PaintEvent)
 {
-    tBrowser = new TextBrowser;
     QPaintEvent paint(QRect(tBrowser->rect()));
     tBrowser->paintEvent(&paint);
 }
 
 TEST_F(TextBrowser_UT, ut_keyPressEvent)
 {
-    tBrowser = new TextBrowser;
     QKeyEvent keyPressEvent(QEvent::KeyPress, Qt::Key_C, Qt::ShiftModifier);
     QCoreApplication::sendEvent(tBrowser, &keyPressEvent);
 }
 
 TEST_F(TextBrowser_UT, ut_slotActionRefresh)
 {
-    tBrowser = new TextBrowser;
     tBrowser->slotActionRefresh();
     tBrowser->slotActionExport();
 }
 
 TEST_F(TextBrowser_UT, ut_slotActionCopy)
 {
-    tBrowser = new TextBrowser;
     tBrowser->slotActionCopy();
 }
 
 TEST_F(TextBrowser_UT, ut_domTitleInfo)
 {
-    tBrowser = new TextBrowser;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("Device", "/");
@@ -118,7 +111,6 @@ TEST_F(TextBrowser_UT, ut_domTitleInfo)
 
 TEST_F(TextBrowser_UT, ut_focusInEvent)
 {
-    tBrowser = new TextBrowser;
     QFocusEvent focus(QFocusEvent::FocusIn);
     QCoreApplication::sendEvent(tBrowser, &focus);
     QFocusEvent focusd(QFocusEvent::FocusOut);

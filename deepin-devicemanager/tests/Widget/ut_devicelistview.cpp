@@ -26,8 +26,9 @@
 class DeviceListView_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceListView = new DeviceListView;
     }
     void TearDown()
     {
@@ -39,8 +40,10 @@ public:
 class DeviceListviewDelegate_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_listView = new DeviceListView;
+        m_deviceListViewDelegate = new DeviceListviewDelegate(m_listView);
     }
     void TearDown()
     {
@@ -53,7 +56,6 @@ public:
 
 TEST_F(DeviceListView_UT, ut_addItem)
 {
-    m_deviceListView = new DeviceListView;
     m_deviceListView->addItem("/", "/###");
     m_deviceListView->setCurItem("/");
     m_deviceListView->setCurItemEnable(true);
@@ -62,43 +64,36 @@ TEST_F(DeviceListView_UT, ut_addItem)
 
 TEST_F(DeviceListView_UT, ut_getConcatenateStrings)
 {
-    m_deviceListView = new DeviceListView;
     QModelIndex index;
     m_deviceListView->getConcatenateStrings(index);
 }
 
 TEST_F(DeviceListView_UT, ut_paintEvent)
 {
-    m_deviceListView = new DeviceListView;
     QPaintEvent paint(QRect(m_deviceListView->rect()));
     m_deviceListView->paintEvent(&paint);
 }
 
 TEST_F(DeviceListView_UT, UT_mousePressEvent)
 {
-    m_deviceListView = new DeviceListView;
     QMouseEvent mousePressEvent(QEvent::MouseButtonPress, QPoint(10, 10), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     m_deviceListView->mousePressEvent(&mousePressEvent);
 }
 
 TEST_F(DeviceListView_UT, UT_mouseMoveEvent)
 {
-    m_deviceListView = new DeviceListView;
     QMouseEvent mouseMoveEvent(QEvent::MouseMove, QPoint(10, 10), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     m_deviceListView->mouseMoveEvent(&mouseMoveEvent);
 }
 
 TEST_F(DeviceListView_UT, UT_keyPressEvent)
 {
-    m_deviceListView = new DeviceListView;
     QKeyEvent keyPressEvent(QEvent::KeyPress, Qt::Key_Space, Qt::NoModifier);
     QCoreApplication::sendEvent(m_deviceListView, &keyPressEvent);
 }
 
 TEST_F(DeviceListviewDelegate_UT, ut_paint)
 {
-    m_listView = new DeviceListView;
-    m_deviceListViewDelegate = new DeviceListviewDelegate(m_listView);
     QPainter painter(m_listView);
     QStyleOptionViewItem option;
     QModelIndex index = m_listView->model()->index(0, 0);
@@ -107,8 +102,6 @@ TEST_F(DeviceListviewDelegate_UT, ut_paint)
 
 TEST_F(DeviceListviewDelegate_UT, ut_paintSeparator)
 {
-    m_listView = new DeviceListView;
-    m_deviceListViewDelegate = new DeviceListviewDelegate(m_listView);
     QPainter painter(m_listView);
     QStyleOptionViewItem option;
     QModelIndex index = m_listView->model()->index(0, 0);
@@ -117,8 +110,6 @@ TEST_F(DeviceListviewDelegate_UT, ut_paintSeparator)
 
 TEST_F(DeviceListviewDelegate_UT, ut_sizeHint)
 {
-    m_listView = new DeviceListView;
-    m_deviceListViewDelegate = new DeviceListviewDelegate(m_listView);
     QPainter painter(m_listView);
     QStyleOptionViewItem option;
     QModelIndex index = m_listView->model()->index(0, 0);

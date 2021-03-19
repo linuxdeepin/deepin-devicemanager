@@ -27,8 +27,9 @@
 class DeviceComputer_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_deviceComputer = new DeviceComputer;
     }
     void TearDown()
     {
@@ -39,14 +40,12 @@ public:
 
 TEST_F(DeviceComputer_UT, DeviceComputer_UT_name)
 {
-    m_deviceComputer = new DeviceComputer;
     m_deviceComputer->name();
     m_deviceComputer->driver();
 }
 
 TEST_F(DeviceComputer_UT, DeviceComputer_UT_setHomeUrl)
 {
-    m_deviceComputer = new DeviceComputer;
     m_deviceComputer->setHomeUrl("http://");
     m_deviceComputer->setOsDescription("test");
     m_deviceComputer->setOS("UOS");
@@ -59,7 +58,6 @@ TEST_F(DeviceComputer_UT, DeviceComputer_UT_setHomeUrl)
 
 TEST_F(DeviceComputer_UT, DeviceComputer_UT_initFilterKey)
 {
-    m_deviceComputer = new DeviceComputer;
     m_deviceComputer->initFilterKey();
     m_deviceComputer->getOverviewInfo();
     m_deviceComputer->loadBaseDeviceInfo();

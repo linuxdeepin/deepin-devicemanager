@@ -28,8 +28,9 @@
 class PageOverview_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_pageOverview = new PageOverview;
     }
     void TearDown()
     {
@@ -40,7 +41,6 @@ public:
 
 TEST_F(PageOverview_UT, PageOverview_UT_updateInfo)
 {
-    m_pageOverview = new PageOverview;
     DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
@@ -53,7 +53,6 @@ TEST_F(PageOverview_UT, PageOverview_UT_updateInfo)
 
 TEST_F(PageOverview_UT, PageOverview_UT_updateInfo2)
 {
-    m_pageOverview = new PageOverview;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_pageOverview->updateInfo(mapinfo);
@@ -63,7 +62,6 @@ TEST_F(PageOverview_UT, PageOverview_UT_updateInfo2)
 
 TEST_F(PageOverview_UT, PageOverview_UT_setLabel)
 {
-    m_pageOverview = new PageOverview;
     m_pageOverview->setLabel("/desktop", "/#");
     m_pageOverview->setLabel("/ternimal", "/#");
     m_pageOverview->setLabel("/Tablet", "/#");
@@ -73,7 +71,6 @@ TEST_F(PageOverview_UT, PageOverview_UT_setLabel)
 
 TEST_F(PageOverview_UT, PageOverview_UT_slotActionRefresh)
 {
-    m_pageOverview = new PageOverview;
     m_pageOverview->slotActionRefresh();
     m_pageOverview->slotActionExport();
     m_pageOverview->slotActionCopy();

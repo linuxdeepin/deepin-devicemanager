@@ -30,8 +30,9 @@
 class PageListView_UT : public UT_HEAD
 {
 public:
-    virtual void setup()
+    void SetUp()
     {
+        m_pageListView = new PageListView;
     }
     void TearDown()
     {
@@ -42,7 +43,6 @@ public:
 
 TEST_F(PageListView_UT, PageListView_UT_updateListItems)
 {
-    m_pageListView = new PageListView;
     QList<QPair<QString, QString>> list;
     list.append(QPair<QString, QString>("/", "/"));
     m_pageListView->updateListItems(list);
@@ -50,21 +50,18 @@ TEST_F(PageListView_UT, PageListView_UT_updateListItems)
 
 TEST_F(PageListView_UT, PageListView_UT_currentIndex)
 {
-    m_pageListView = new PageListView;
     ASSERT_EQ(m_pageListView->currentIndex(), "");
     ASSERT_NE(m_pageListView->currentType(), "");
 }
 
 TEST_F(PageListView_UT, PageListView_UT_paintEvent)
 {
-    m_pageListView = new PageListView;
     QPaintEvent paint(QRect(m_pageListView->rect()));
     m_pageListView->paintEvent(&paint);
 }
 
 TEST_F(PageListView_UT, PageListView_UT_slotActionRefresh)
 {
-    m_pageListView = new PageListView;
     m_pageListView->slotActionRefresh();
     m_pageListView->slotActionExport();
     QModelIndex index;
