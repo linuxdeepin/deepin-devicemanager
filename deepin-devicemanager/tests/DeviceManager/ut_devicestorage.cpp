@@ -37,6 +37,11 @@ public:
     DeviceStorage *m_deviceStorage;
 };
 
+bool ut_DeviceStorage_exacMatch()
+{
+    return true;
+}
+
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_setHwinfoInfo)
 {
     QMap<QString, QString> mapinfo;
@@ -44,6 +49,9 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_setHwinfoInfo)
     m_deviceStorage->m_Size = "16";
     m_deviceStorage->m_SerialNumber = "Test123";
     m_deviceStorage->m_KeyToLshw = "nvme0";
+    m_deviceStorage->m_Model = "ST";
+    Stub stub;
+    stub.set(ADDR(QRegExp, exactMatch), ut_DeviceStorage_exacMatch);
     ASSERT_TRUE(m_deviceStorage->setHwinfoInfo(mapinfo));
 }
 
@@ -54,6 +62,8 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_setKLUHwinfoInfo)
     mapinfo.insert("Driver", "usb-storage");
     m_deviceStorage->m_Size = "16";
     m_deviceStorage->m_SerialNumber = "Test123";
+    Stub stub;
+    stub.set(ADDR(QRegExp, exactMatch), ut_DeviceStorage_exacMatch);
     ASSERT_TRUE(m_deviceStorage->setKLUHwinfoInfo(mapinfo));
 }
 

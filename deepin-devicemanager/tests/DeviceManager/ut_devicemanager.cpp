@@ -118,23 +118,38 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addStorageDeivce)
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addLshwinfoIntoStorageDevice)
 {
+    DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
+    device->setInfoFromlshw(mapinfo);
+    DeviceManager::instance()->m_ListDeviceStorage.append(device);
     DeviceManager::instance()->addLshwinfoIntoStorageDevice(mapinfo);
+    DeviceManager::instance()->m_ListDeviceStorage.clear();
+    delete device;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addLshwinfoIntoNVMEStorageDevice)
 {
+    DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
+    device->setInfoFromlshw(mapinfo);
+    DeviceManager::instance()->m_ListDeviceStorage.append(device);
     DeviceManager::instance()->addLshwinfoIntoNVMEStorageDevice(mapinfo);
+    DeviceManager::instance()->m_ListDeviceStorage.clear();
+    delete device;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setStorageInfoFromSmartctl)
 {
+    DeviceInput *device = new DeviceInput;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
+    device->setInfoFromlshw(mapinfo);
+    DeviceManager::instance()->m_ListDeviceStorage.append(device);
     DeviceManager::instance()->setStorageInfoFromSmartctl("test", mapinfo);
+    DeviceManager::instance()->m_ListDeviceStorage.clear();
+    delete device;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setStorageDeviceMediaType)
@@ -159,7 +174,11 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_setGpuInfoFromXrandr)
 {
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
+    DeviceGpu *gpu = new DeviceGpu;
+    DeviceManager::instance()->m_ListDeviceGPU.append(gpu);
     DeviceManager::instance()->setGpuInfoFromXrandr(mapinfo);
+    DeviceManager::instance()->m_ListDeviceGPU.clear();
+    delete gpu;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setGpuSizeFromDmesg)

@@ -14,46 +14,34 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "src/DeviceManager/DeviceOtherPCI.h"
-#include "src/DeviceManager/DeviceBios.h"
+#include "../src/ZeroMQ/ZmqOrder.h"
+#include "../src/ZeroMQ/zhelpers.h"
+#include "zmq.h"
 #include "../tests/ut_Head.h"
 #include <QCoreApplication>
-#include <QPaintEvent>
-#include <QPainter>
-
 #include <gtest/gtest.h>
 #include <tests/stub.h>
 
-class DeviceOtherPCI_UT : public UT_HEAD
+class ZmqOrder_UT : public UT_HEAD
 {
 public:
     void SetUp()
     {
-        m_deviceOtherPCI = new DeviceOtherPCI;
+        m_zmqOrder = new ZmqOrder;
     }
     void TearDown()
     {
-        delete m_deviceOtherPCI;
+        delete m_zmqOrder;
     }
-    DeviceOtherPCI *m_deviceOtherPCI;
+    ZmqOrder *m_zmqOrder = nullptr;
 };
 
-TEST_F(DeviceOtherPCI_UT, DeviceOtherPCI_UT_name)
+TEST_F(ZmqOrder_UT, ZmqOrder_UT_execDriverOrder)
 {
-    m_deviceOtherPCI->name();
-    m_deviceOtherPCI->driver();
-    m_deviceOtherPCI->initFilterKey();
-    m_deviceOtherPCI->getOverviewInfo();
-    m_deviceOtherPCI->loadTableData();
+    m_zmqOrder->execIfconfigOrder("/n");
 }
 
-TEST_F(DeviceOtherPCI_UT, DeviceOtherPCI_UT_loadBaseDeviceInfo)
+TEST_F(ZmqOrder_UT, ZmqOrder_UT_execIfconfigOrder)
 {
-    m_deviceOtherPCI->loadBaseDeviceInfo();
-    m_deviceOtherPCI->loadOtherDeviceInfo();
-}
-
-TEST_F(DeviceOtherPCI_UT, DeviceOtherPCI_UT_subTitle)
-{
-    m_deviceOtherPCI->subTitle();
+    m_zmqOrder->execIfconfigOrder("/n");
 }

@@ -66,3 +66,15 @@ TEST_F(DeviceOthers_UT, DeviceOthers_UT_busInfo)
     m_deviceOthers->loadTableData();
     m_deviceOthers->getOverviewInfo();
 }
+
+TEST_F(DeviceOthers_UT, DeviceOthers_UT_loadBaseDeviceInfo)
+{
+    m_deviceOthers->loadBaseDeviceInfo();
+    m_deviceOthers->loadOtherDeviceInfo();
+}
+
+TEST_F(DeviceOthers_UT, DeviceOthers_UT_subTitle)
+{
+    m_deviceOthers->subTitle();
+    m_deviceOthers->logicalName();
+}

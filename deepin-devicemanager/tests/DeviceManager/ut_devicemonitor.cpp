@@ -38,10 +38,17 @@ public:
     DeviceMonitor *m_deviceMonitor;
 };
 
+bool ut_exacMatch()
+{
+    return true;
+}
+
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_parseMonitorSize)
 {
     double inch = 32.00;
     QSize size = QSize(100, 100);
+    Stub stub;
+    stub.set(ADDR(QRegExp, exactMatch), ut_exacMatch);
     m_deviceMonitor->parseMonitorSize("test", inch, size);
 }
 
@@ -68,7 +75,9 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromEdid)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setMainInfoFromXrandr)
 {
-    m_deviceMonitor->setMainInfoFromXrandr("/");
+    Stub stub;
+    stub.set(ADDR(QRegExp, exactMatch), ut_exacMatch);
+    m_deviceMonitor->setMainInfoFromXrandr(".*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
 }
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_initFilterKey)
@@ -87,10 +96,18 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_name)
     m_deviceMonitor->getOverviewInfo();
 }
 
+int ut_gcd()
+{
+    return 2;
+}
+
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_caculateScreenRatio)
 {
+    m_deviceMonitor->gcd(2, 2);
+    Stub stub;
+    stub.set(ADDR(QRegExp, exactMatch), ut_exacMatch);
+    stub.set(ADDR(DeviceMonitor, gcd), ut_gcd);
     m_deviceMonitor->caculateScreenRatio();
-    m_deviceMonitor->gcd(2, 1);
 }
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_findAspectRatio)
@@ -102,6 +119,18 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_findAspectRatio)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_caculateScreenSize)
 {
+    Stub stub;
+    stub.set(ADDR(QRegExp, exactMatch), ut_exacMatch);
     m_deviceMonitor->caculateScreenSize();
     m_deviceMonitor->caculateScreenSize("abc\n");
+}
+
+TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromXradr)
+{
+    m_deviceMonitor->setInfoFromXradr("connect", "/n");
+}
+
+TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setCurrentResolution)
+{
+    m_deviceMonitor->setCurrentResolution("connect", "/n");
 }
