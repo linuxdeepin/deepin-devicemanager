@@ -1,0 +1,4 @@
+专业版：p_device-manager.md
+社区版：d_device-manager.md
+
+设备概况中各版本系统信息不一致。
