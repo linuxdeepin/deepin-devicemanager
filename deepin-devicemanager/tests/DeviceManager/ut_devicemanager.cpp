@@ -49,9 +49,7 @@ public:
     }
     void TearDown()
     {
-        //        delete m_deviceManager;
     }
-    //    DeviceManager *m_deviceManager;
 };
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_clear)
@@ -88,6 +86,7 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addMouseDevice)
     mapinfo.insert("/", "/");
     device->setInfoFromHwinfo(mapinfo);
     DeviceManager::instance()->addMouseDevice(device);
+    DeviceManager::instance()->m_ListDeviceMouse.clear();
     delete device;
 }
 
@@ -97,20 +96,24 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addMouseInfoFromLshw)
     QMap<QString, QString> mapinfo;
     mapinfo.insert("bus info", "1@n");
     device->setInfoFromHwinfo(mapinfo);
-    DeviceManager::instance()->m_ListDeviceMouse.append(device);
     DeviceManager::instance()->addMouseInfoFromLshw(mapinfo);
+    delete device;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addCpuDevice)
 {
     DeviceCpu *cpu = new DeviceCpu;
     DeviceManager::instance()->addCpuDevice(cpu);
+    DeviceManager::instance()->m_ListDeviceCPU.clear();
+    delete cpu;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addStorageDeivce)
 {
     DeviceStorage *st = new DeviceStorage;
     DeviceManager::instance()->addStorageDeivce(st);
+    DeviceManager::instance()->m_ListDeviceStorage.clear();
+    delete st;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addLshwinfoIntoStorageDevice)
@@ -148,6 +151,8 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addGpuDevice)
 {
     DeviceGpu *gpu = new DeviceGpu;
     DeviceManager::instance()->addGpuDevice(gpu);
+    DeviceManager::instance()->m_ListDeviceGPU.clear();
+    delete gpu;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setGpuInfoFromXrandr)
@@ -166,19 +171,19 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addMemoryDevice)
 {
     DeviceMemory *m = new DeviceMemory;
     DeviceManager::instance()->addMemoryDevice(m);
-}
-
-TEST_F(DeviceManager_UT, DeviceManager_UT_setMemoryInfoFromDmidecode)
-{
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     DeviceManager::instance()->setMemoryInfoFromDmidecode(mapinfo);
+    DeviceManager::instance()->m_ListDeviceMemory.clear();
+    delete m;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addMonitor)
 {
     DeviceMonitor *m = new DeviceMonitor;
     DeviceManager::instance()->addMonitor(m);
+    DeviceManager::instance()->m_ListDeviceMonitor.clear();
+    delete m;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setMonitorInfoFromXrandr)
@@ -195,6 +200,8 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addBiosDevice)
 {
     DeviceBios *bios = new DeviceBios;
     DeviceManager::instance()->addBiosDevice(bios);
+    DeviceManager::instance()->m_ListDeviceBios.clear();
+    delete bios;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setLanguageInfo)
@@ -208,6 +215,8 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addBluetoothDevice)
 {
     DeviceBluetooth *b = new DeviceBluetooth;
     DeviceManager::instance()->addBluetoothDevice(b);
+    DeviceManager::instance()->m_ListDeviceBluetooth.clear();
+    delete b;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setBluetoothInfoFromLshw)
@@ -221,6 +230,8 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addAudioDevice)
 {
     DeviceAudio *a = new DeviceAudio;
     DeviceManager::instance()->addAudioDevice(a);
+    DeviceManager::instance()->m_ListDeviceAudio.clear();
+    delete a;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setAudioInfoFromLshw)
@@ -239,12 +250,16 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addNetworkDevice)
 {
     DeviceNetwork *n = new DeviceNetwork;
     DeviceManager::instance()->addNetworkDevice(n);
+    DeviceManager::instance()->m_ListDeviceNetwork.clear();
+    delete n;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addImageDevice)
 {
     DeviceImage *i = new DeviceImage;
     DeviceManager::instance()->addImageDevice(i);
+    DeviceManager::instance()->m_ListDeviceImage.clear();
+    delete i;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addKeyboardDevice)
@@ -254,6 +269,8 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addKeyboardDevice)
     mapinfo.insert("/", "/");
     device->setInfoFromHwinfo(mapinfo);
     DeviceManager::instance()->addKeyboardDevice(device);
+    DeviceManager::instance()->m_ListDeviceKeyboard.clear();
+    delete device;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setKeyboardInfoFromLshw)
@@ -267,6 +284,8 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addOthersDevice)
 {
     DeviceOthers *o = new DeviceOthers;
     DeviceManager::instance()->addOthersDevice(o);
+    DeviceManager::instance()->m_ListDeviceOthers.clear();
+    delete o;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setOthersDeviceInfoFromLshw)
@@ -280,30 +299,40 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_addPowerDevice)
 {
     DevicePower *p = new DevicePower;
     DeviceManager::instance()->addPowerDevice(p);
+    DeviceManager::instance()->m_ListDevicePower.clear();
+    delete p;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addPrintDevice)
 {
     DevicePrint *print = new DevicePrint;
     DeviceManager::instance()->addPrintDevice(print);
+    DeviceManager::instance()->m_ListDevicePrint.clear();
+    delete print;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addOtherPCIDevice)
 {
     DeviceOtherPCI *o = new DeviceOtherPCI;
     DeviceManager::instance()->addOtherPCIDevice(o);
+    DeviceManager::instance()->m_ListDeviceOtherPCI.clear();
+    delete o;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addComputerDevice)
 {
     DeviceComputer *c = new DeviceComputer;
     DeviceManager::instance()->addComputerDevice(c);
+    DeviceManager::instance()->m_ListDeviceComputer.clear();
+    delete c;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addCdromDevice)
 {
     DeviceCdrom *c = new DeviceCdrom;
     DeviceManager::instance()->addCdromDevice(c);
+    DeviceManager::instance()->m_ListDeviceCdrom.clear();
+    delete c;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addLshwinfoIntoCdromDevice)

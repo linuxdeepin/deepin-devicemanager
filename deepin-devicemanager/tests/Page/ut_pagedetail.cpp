@@ -116,6 +116,7 @@ TEST_F(PageDetail_UT, PageDetail_UT_showDeviceInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     m_pageDetail->showDeviceInfo(bInfo);
+    delete device;
 }
 
 TEST_F(PageDetail_UT, PageDetail_UT_showInfoOfNum)

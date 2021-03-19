@@ -45,8 +45,10 @@ public:
     void TearDown()
     {
         delete m_deviceListViewDelegate;
+        delete m_listView;
     }
     DeviceListviewDelegate *m_deviceListViewDelegate;
+    DeviceListView *m_listView;
 };
 
 TEST_F(DeviceListView_UT, ut_addItem)
@@ -95,7 +97,7 @@ TEST_F(DeviceListView_UT, UT_keyPressEvent)
 
 TEST_F(DeviceListviewDelegate_UT, ut_paint)
 {
-    DeviceListView *m_listView = new DeviceListView;
+    m_listView = new DeviceListView;
     m_deviceListViewDelegate = new DeviceListviewDelegate(m_listView);
     QPainter painter(m_listView);
     QStyleOptionViewItem option;
@@ -105,7 +107,7 @@ TEST_F(DeviceListviewDelegate_UT, ut_paint)
 
 TEST_F(DeviceListviewDelegate_UT, ut_paintSeparator)
 {
-    DeviceListView *m_listView = new DeviceListView;
+    m_listView = new DeviceListView;
     m_deviceListViewDelegate = new DeviceListviewDelegate(m_listView);
     QPainter painter(m_listView);
     QStyleOptionViewItem option;
@@ -115,7 +117,7 @@ TEST_F(DeviceListviewDelegate_UT, ut_paintSeparator)
 
 TEST_F(DeviceListviewDelegate_UT, ut_sizeHint)
 {
-    DeviceListView *m_listView = new DeviceListView;
+    m_listView = new DeviceListView;
     m_deviceListViewDelegate = new DeviceListviewDelegate(m_listView);
     QPainter painter(m_listView);
     QStyleOptionViewItem option;

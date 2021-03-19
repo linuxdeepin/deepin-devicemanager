@@ -49,6 +49,7 @@ TEST_F(TextBrowser_UT, ut_showDeviceInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     tBrowser->showDeviceInfo(bInfo.at(0));
+    delete device;
 }
 
 TEST_F(TextBrowser_UT, ut_updateInfo)
@@ -62,6 +63,7 @@ TEST_F(TextBrowser_UT, ut_updateInfo)
     bInfo.append(device);
     tBrowser->mp_Info = bInfo.at(0);
     tBrowser->updateInfo();
+    delete device;
 }
 
 TEST_F(TextBrowser_UT, ut_setDeviceEnabled)
@@ -111,6 +113,7 @@ TEST_F(TextBrowser_UT, ut_domTitleInfo)
     bInfo.append(device);
     QDomDocument doc("h3");
     tBrowser->domTitleInfo(doc, bInfo.at(0));
+    delete device;
 }
 
 TEST_F(TextBrowser_UT, ut_focusInEvent)

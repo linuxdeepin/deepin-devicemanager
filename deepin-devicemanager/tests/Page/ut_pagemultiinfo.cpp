@@ -48,6 +48,7 @@ TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_updateInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     m_pageMultiInfo->updateInfo(bInfo);
+    delete device;
 }
 
 TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_setLabel)

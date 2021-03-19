@@ -33,14 +33,16 @@ public:
     void TearDown()
     {
         delete m_rtDelegate;
+        delete widget;
     }
     RichTextDelegate *m_rtDelegate;
+    PageTableWidget *widget;
 };
 
 TEST_F(RichTextDelegate_UT, ut_paint)
 {
-    m_rtDelegate = new RichTextDelegate(nullptr);
-    PageTableWidget *widget = new PageTableWidget;
+    widget = new PageTableWidget;
+    m_rtDelegate = new RichTextDelegate(widget);
     QStyleOptionViewItem option;
     QPainter painter(widget);
     QModelIndex index;
@@ -49,8 +51,8 @@ TEST_F(RichTextDelegate_UT, ut_paint)
 
 TEST_F(RichTextDelegate_UT, ut_createEditor)
 {
-    m_rtDelegate = new RichTextDelegate(nullptr);
-    PageTableWidget *widget = new PageTableWidget;
+    widget = new PageTableWidget;
+    m_rtDelegate = new RichTextDelegate(widget);
     QStyleOptionViewItem option;
     QPainter painter(widget);
     QModelIndex index;
@@ -59,8 +61,8 @@ TEST_F(RichTextDelegate_UT, ut_createEditor)
 
 TEST_F(RichTextDelegate_UT, ut_sizeHint)
 {
-    m_rtDelegate = new RichTextDelegate(nullptr);
-    PageTableWidget *widget = new PageTableWidget;
+    widget = new PageTableWidget;
+    m_rtDelegate = new RichTextDelegate(widget);
     QStyleOptionViewItem option;
     QPainter painter(widget);
     QModelIndex index;
@@ -69,7 +71,8 @@ TEST_F(RichTextDelegate_UT, ut_sizeHint)
 
 TEST_F(RichTextDelegate_UT, ut_addRow)
 {
-    m_rtDelegate = new RichTextDelegate(nullptr);
+    widget = new PageTableWidget;
+    m_rtDelegate = new RichTextDelegate(widget);
     QDomDocument doc;
     QDomElement table;
     doc.setNodeValue("/");

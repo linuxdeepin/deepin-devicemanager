@@ -44,6 +44,7 @@ TEST_F(DeviceWidget_UT, ut_updateListView)
     m_dWidget = new DeviceWidget;
     QList<QPair<QString, QString>> list;
     list.append(QPair<QString, QString>("/", "/"));
+    m_dWidget->updateListView(list);
 }
 
 TEST_F(DeviceWidget_UT, ut_updateDevice)

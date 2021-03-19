@@ -32,7 +32,7 @@ public:
     }
     void TearDown()
     {
-        delete m_deviceBaseInfo;
+        delete bios;
     }
     DeviceBaseInfo *m_deviceBaseInfo;
     DeviceBios *bios = new DeviceBios;

@@ -51,6 +51,7 @@ TEST_F(PageBoardInfo_UT, ut_updateInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     m_pageBoardInfo->updateInfo(bInfo);
+    delete device;
 }
 
 TEST_F(PageBoardInfo_UT, ut_loadDeviceInfo)
@@ -65,6 +66,7 @@ TEST_F(PageBoardInfo_UT, ut_loadDeviceInfo)
     QList<QPair<QString, QString>> lst;
     lst.append(QPair<QString, QString>("/", "/"));
     m_pageBoardInfo->loadDeviceInfo(bInfo, lst);
+    delete device;
 }
 
 TEST_F(PageBoardInfo_UT, ut_getOtherInfoPair)
@@ -79,6 +81,7 @@ TEST_F(PageBoardInfo_UT, ut_getOtherInfoPair)
     QList<QPair<QString, QString>> lst;
     lst.append(QPair<QString, QString>("/", "/"));
     m_pageBoardInfo->getOtherInfoPair(bInfo, lst);
+    delete device;
 }
 
 TEST_F(PageBoardInfo_UT, ut_getValueInfo)
@@ -92,4 +95,5 @@ TEST_F(PageBoardInfo_UT, ut_getValueInfo)
     bInfo.append(device);
     QPair<QString, QString> pair = QPair<QString, QString>("/", "/");
     m_pageBoardInfo->getValueInfo(bInfo.at(0), pair);
+    delete device;
 }

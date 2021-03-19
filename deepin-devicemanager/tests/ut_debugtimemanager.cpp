@@ -30,6 +30,7 @@ TEST(DebugTimeManager_Test, DebugTimeManager_UT_001)
     DebugTimeManager *dtm = new DebugTimeManager();
     dtm->beginPointLinux("001", "");
     ASSERT_FALSE(dtm->m_MapPoint.isEmpty());
+    delete dtm;
 }
 
 TEST(DebugTimeManager_Test, DebugTimeManager_UT_002)
@@ -38,6 +39,7 @@ TEST(DebugTimeManager_Test, DebugTimeManager_UT_002)
     dtm->beginPointLinux("001", "");
     dtm->endPointLinux("001");
     ASSERT_TRUE(dtm->m_MapPoint["001"].time >= 0);
+    delete dtm;
 }
 
 TEST(DebugTimeManager_Test, DebugTimeManager_UT_003)
@@ -46,4 +48,5 @@ TEST(DebugTimeManager_Test, DebugTimeManager_UT_003)
     dtm->clear();
 
     ASSERT_TRUE(dtm->m_MapPoint.isEmpty());
+    delete dtm;
 }

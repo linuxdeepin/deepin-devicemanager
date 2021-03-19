@@ -26,6 +26,7 @@
 #include <QProcess>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QIODevice>
 
 #include <gtest/gtest.h>
 #include <tests/stub.h>
@@ -101,6 +102,9 @@ TEST_F(MainWindow_UT, MainWindow_UT_getJsonDoc)
     stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
     m_mainWindow = new MainWindow;
     QJsonDocument doc;
+    QJsonArray array;
+    array.insert(0, QJsonValue("/"));
+    doc.setArray(array);
     m_mainWindow->getJsonDoc(doc);
     m_mainWindow->windowMaximizing();
 }
@@ -139,4 +143,20 @@ TEST_F(MainWindow_UT, MainWindow_UT_event)
     m_mainWindow = new MainWindow;
     QEvent event(QEvent::ApplicationFontChange);
     QCoreApplication::sendEvent(m_mainWindow, &event);
+}
+
+TEST_F(MainWindow_UT, MainWindow_UT_initWindow)
+{
+    Stub stub;
+    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
+    m_mainWindow = new MainWindow;
+    m_mainWindow->initWindow();
+}
+
+TEST_F(MainWindow_UT, MainWindow_UT_loadingFinishSlot)
+{
+    Stub stub;
+    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
+    m_mainWindow = new MainWindow;
+    m_mainWindow->loadingFinishSlot("finish");
 }

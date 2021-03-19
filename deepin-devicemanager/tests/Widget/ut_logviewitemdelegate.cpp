@@ -33,13 +33,15 @@ public:
     void TearDown()
     {
         delete m_logDelegate;
+        delete m_view;
     }
     LogViewItemDelegate *m_logDelegate;
+    LogTreeView *m_view;
 };
 
 TEST_F(LogViewItemDelegate_UT, ut_paint)
 {
-    LogTreeView *m_view = new LogTreeView;
+    m_view = new LogTreeView;
     m_logDelegate = new LogViewItemDelegate(m_view);
     QPainter painter(m_view);
     QStyleOptionViewItem option;
@@ -49,7 +51,7 @@ TEST_F(LogViewItemDelegate_UT, ut_paint)
 
 TEST_F(LogViewItemDelegate_UT, ut_createEditor)
 {
-    LogTreeView *m_view = new LogTreeView;
+    m_view = new LogTreeView;
     m_logDelegate = new LogViewItemDelegate(m_view);
     QPainter painter(m_view);
     QStyleOptionViewItem option;
@@ -59,7 +61,7 @@ TEST_F(LogViewItemDelegate_UT, ut_createEditor)
 
 TEST_F(LogViewItemDelegate_UT, ut_sizeHint)
 {
-    LogTreeView *m_view = new LogTreeView;
+    m_view = new LogTreeView;
     m_logDelegate = new LogViewItemDelegate(m_view);
     QPainter painter(m_view);
     QStyleOptionViewItem option;
