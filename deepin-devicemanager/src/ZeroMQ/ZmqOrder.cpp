@@ -75,4 +75,22 @@ bool ZmqOrder::execIfconfigOrder(const QString &cmd)
     }
 }
 
+bool ZmqOrder::reqUpdateUI()
+{
+    char ch[128] = "UPDATE_UI";
+    mp_Req->sendMsg(ch);
+    // 2:success   1:failed
+    char *msg = mp_Req->recvMsg();
+
+    char end[64];
+    sprintf(end, "%s", m_EndPoint.toStdString().c_str());
+    mp_Req->disConnect(end);
+
+    if (QString::fromLocal8Bit(msg) == "2") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 

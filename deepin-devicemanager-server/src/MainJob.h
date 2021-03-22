@@ -73,6 +73,11 @@ private:
     void ifconfigInstruction(const QString &instruction);
 
     /**
+     * @brief reqUpdateInstruction
+     */
+    void reqUpdateInstruction();
+
+    /**
      * @brief initDBus : 初始化dbus
      * @return : 返回bool
      */
@@ -82,11 +87,10 @@ private:
     ThreadPool            *mp_Pool;               //<! 生成文件的线程池
     RRServer              *mp_ZmqServer;          //<! 监听后台的服务端
     DetectThread          *mp_DetectThread;       //<! 检测usb的线程
-    qint64                m_UpdateTime;           //<! 更新时间
-    bool                  m_Delay;                //<! 延迟时间
+    bool                  m_UpdateUI;             //<! 客户端请求更新
     bool                  m_Detected;             //<! 标识是否检测到信息了
     QTimer                *mp_Timer;              //<! 定时器
-    DBusInterface         *mp_IFace;             //<! Dbus interface
+    DBusInterface         *mp_IFace;              //<! Dbus interface
 
 };
 

@@ -21,8 +21,16 @@ LoadInfoThread::~LoadInfoThread()
     delete mp_GenerateDevicePool;
 }
 
+
 void LoadInfoThread::run()
 {
+    // 请求后台更新信息
+    ZmqOrder order;
+    if (!order.connect() || !order.reqUpdateUI()) {
+        emit finished("finish");
+        return;
+    }
+
     m_Running = true;
     if (mp_ReadFilePool) {
         mp_ReadFilePool->readAllFile();

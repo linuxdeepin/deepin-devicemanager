@@ -45,7 +45,6 @@ void ReadFilePool::readAllFile()
     for (; it != m_CmdList.end(); ++it) {
         CmdTask *task = new CmdTask((*it)[0], (*it)[1], (*it)[2], this);
         QThreadPool::globalInstance()->start(task);
-//        task->setAutoDelete(true);
     }
 }
 

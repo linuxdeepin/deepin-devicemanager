@@ -44,7 +44,6 @@ void RRServer::run()
     while (1) {
         if (!m_Waiting) {
             char *msg = mpRep->recvMsg();
-//            begin = QDateTime::currentMSecsSinceEpoch();
             emit instruction(QString::fromLocal8Bit(msg));
             m_Waiting = true;
         } else {
@@ -52,8 +51,6 @@ void RRServer::run()
                 sendMsg(m_ReturnStr);
                 m_ReturnStr = "";
                 m_Waiting = false;
-//                end = QDateTime::currentMSecsSinceEpoch();
-//                qInfo() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << end - begin;
             }
         }
         usleep(100);
