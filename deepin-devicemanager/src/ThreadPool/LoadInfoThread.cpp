@@ -15,6 +15,12 @@ LoadInfoThread::LoadInfoThread()
     connect(mp_ReadFilePool, &ReadFilePool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
 }
 
+LoadInfoThread::~LoadInfoThread()
+{
+    delete mp_ReadFilePool;
+    delete mp_GenerateDevicePool;
+}
+
 void LoadInfoThread::run()
 {
     m_Running = true;

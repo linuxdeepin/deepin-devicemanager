@@ -69,6 +69,7 @@ MainWindow::~MainWindow()
     DELETE_PTR(mp_WaitingWidget)
     DELETE_PTR(mp_DeviceWidget)
     DELETE_PTR(mp_MainStackWidget)
+    DELETE_PTR(mp_WorkingThread)
 }
 
 void MainWindow::refresh()
