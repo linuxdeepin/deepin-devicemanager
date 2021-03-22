@@ -4,7 +4,8 @@
 #include <QDebug>
 
 QMutex mutex;
-DeviceInfoManager *DeviceInfoManager::s_Instance = nullptr;
+std::atomic<DeviceInfoManager *> DeviceInfoManager::s_Instance;
+std::mutex DeviceInfoManager::m_mutex;
 
 DeviceInfoManager::DeviceInfoManager(QObject *parent)
     : QObject(parent)

@@ -25,16 +25,30 @@
 
 #include <QObject>
 #include <QMap>
+#include <mutex>
 
 class DeviceInfoManager : public QObject
 {
     Q_OBJECT
 public:
-    static inline DeviceInfoManager *getInstance()
+    inline static DeviceInfoManager *getInstance()
     {
-        if (!s_Instance)
-            s_Instance = new DeviceInfoManager;
-        return s_Instance;
+        // 利用原子变量解决，单例模式造成的内存泄露
+        DeviceInfoManager *sin = s_Instance.load();
+
+        if (!sin) {
+            // std::lock_guard 自动加锁解锁
+            std::lock_guard<std::mutex> lock(m_mutex);
+            sin = s_Instance.load();
+
+            if (!sin) {
+                sin = new DeviceInfoManager();
+                s_Instance.store(sin);
+            }
+        }
+
+        return sin;
+
     }
 
     /**
@@ -62,7 +76,9 @@ protected:
     explicit DeviceInfoManager(QObject *parent = nullptr);
 
 private:
-    static DeviceInfoManager *s_Instance;
+    static std::atomic<DeviceInfoManager *> s_Instance;
+    static std::mutex m_mutex;
+
     QMap<QString, QString>     m_MapInfo;
 };
 
