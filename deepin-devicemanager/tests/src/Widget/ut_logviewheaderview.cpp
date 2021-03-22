@@ -38,20 +38,34 @@ public:
     LogViewHeaderView *m_logViewHeaderView;
 };
 
-int ut_dstyle_pixelMetric()
+//typedef QVariant (*fptr)(QAbstractItemModel *, int, Qt::Orientation, int);
+//fptr header = (fptr)(&QAbstractItemModel::headerData);
+
+int ut_headerview_pixelMetric()
 {
-    return 0;
+    return 10;
+}
+
+QVariant ut_model_headerData()
+{
+    return "header";
 }
 
 TEST_F(LogviewHeaderView_UT, UT_paintSection)
 {
-    QPainter painter(m_logViewHeaderView);
+    //    QPainter painter(m_logViewHeaderView);
+    //    Stub stub;
+    //    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
+    //    stub.set(header, ut_model_headerData);
+
     //    m_logViewHeaderView->paintSection(&painter,QRect(10,10,10,10),0);
 }
 
 TEST_F(LogviewHeaderView_UT, ut_paintEvent)
 {
-    QPaintEvent paint(QRect(m_logViewHeaderView->rect()));
+    //    QPaintEvent paint(QRect(m_logViewHeaderView->rect()));
+    //    Stub stub;
+    //    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
     //    m_logViewHeaderView->paintEvent(&paint);
 }
 
@@ -62,5 +76,8 @@ TEST_F(LogviewHeaderView_UT, ut_sizeHint)
 
 TEST_F(LogviewHeaderView_UT, ut_sectionSizeHint)
 {
+    //    Stub stub;
+    //    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
+    //    stub.set(header, ut_model_headerData);
     //    m_logViewHeaderView->sectionSizeHint(0);
 }

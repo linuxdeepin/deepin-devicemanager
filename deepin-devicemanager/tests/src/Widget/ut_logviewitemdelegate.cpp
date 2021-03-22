@@ -41,11 +41,26 @@ public:
     LogTreeView *m_view;
 };
 
+int ut_itemdelegate_pixelMetric()
+{
+    return 10;
+}
+
+bool ut_itemdelegate_isValid()
+{
+    return true;
+}
+
 TEST_F(LogViewItemDelegate_UT, ut_paint)
 {
     QPainter painter(m_view);
     QStyleOptionViewItem option;
     QModelIndex index = m_view->model()->index(0, 0);
+
+    Stub stub;
+    stub.set(ADDR(QModelIndex, isValid), ut_itemdelegate_isValid);
+    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_itemdelegate_pixelMetric);
+
     m_logDelegate->paint(&painter, option, index);
 }
 

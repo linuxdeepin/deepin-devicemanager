@@ -20,6 +20,10 @@
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QCommonStyle>
+#include <QStyle>
+#include <QWidget>
+#include <DStyle>
 
 #include <gtest/gtest.h>
 #include "../stub.h"
@@ -29,19 +33,39 @@ class DetailViewDelegate_UT : public UT_HEAD
 public:
     void SetUp()
     {
-        m_dViewDelegate = new DetailViewDelegate(nullptr);
+        m_treeView = new DetailTreeView;
+        m_dViewDelegate = new DetailViewDelegate(m_treeView);
     }
     void TearDown()
     {
-        delete m_dViewDelegate;
+        delete m_treeView;
     }
     DetailViewDelegate *m_dViewDelegate;
+    DetailTreeView *m_treeView;
 };
+
+bool ut_isValid()
+{
+    return true;
+}
+
+int ut_detailview_pixelMetric()
+{
+    return 10;
+}
+
+int ut_y()
+{
+    return 10;
+}
+
+int ut_column()
+{
+    return 0;
+}
 
 TEST_F(DetailViewDelegate_UT, ut_paint)
 {
-    DetailTreeView *m_treeView = new DetailTreeView;
-
     QStyleOptionViewItem option;
     QPainter painter(m_treeView);
 
@@ -50,15 +74,17 @@ TEST_F(DetailViewDelegate_UT, ut_paint)
     m_treeView->setItem(0, 0, item);
     QModelIndex index = m_treeView->model()->index(0, 0);
 
+    Stub stub;
+    stub.set(ADDR(QModelIndex, isValid), ut_isValid);
+    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_detailview_pixelMetric);
+    stub.set(ADDR(QPoint, y), ut_y);
+    stub.set(ADDR(QModelIndex, column), ut_column);
     m_dViewDelegate->paint(&painter, option, index);
     delete item;
-    delete m_treeView;
 }
 
 TEST_F(DetailViewDelegate_UT, ut_createEditor)
 {
-    DetailTreeView *m_treeView = new DetailTreeView;
-
     QStyleOptionViewItem m_item;
 
     QTableWidgetItem *item = new QTableWidgetItem;
@@ -68,13 +94,10 @@ TEST_F(DetailViewDelegate_UT, ut_createEditor)
 
     m_dViewDelegate->createEditor(nullptr, m_item, index);
     delete item;
-    delete m_treeView;
 }
 
 TEST_F(DetailViewDelegate_UT, ut_sizeHint)
 {
-    DetailTreeView *m_treeView = new DetailTreeView;
-
     QStyleOptionViewItem m_item;
 
     QTableWidgetItem *item = new QTableWidgetItem;
@@ -84,5 +107,4 @@ TEST_F(DetailViewDelegate_UT, ut_sizeHint)
 
     m_dViewDelegate->sizeHint(m_item, index);
     delete item;
-    delete m_treeView;
 }

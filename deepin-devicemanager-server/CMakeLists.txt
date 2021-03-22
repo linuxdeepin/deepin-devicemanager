@@ -52,3 +52,5 @@ install(TARGETS ${APP_BIN_NAME} DESTINATION bin)
 install(FILES ${SYSTEMD_SERVER} DESTINATION /lib/systemd/system)
 install(FILES ${DBUS_CONFIG} DESTINATION /etc/dbus-1/system.d)
 
+#TEST--------------------------------------------------
+add_subdirectory(./tests)

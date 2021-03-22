@@ -20,8 +20,12 @@
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QStyle>
+#include <QWidget>
+#include <DStyle>
 
 #include <gtest/gtest.h>
+#include "../stub.h"
 
 class LogTreeView_UT : public UT_HEAD
 {
@@ -57,6 +61,21 @@ TEST_F(LogTreeView_UT, UT_paintEvent)
 {
     QPaintEvent paint(QRect(m_logTreeView->rect()));
     m_logTreeView->paintEvent(&paint);
+}
+
+int ut_treeview_pixelMetric()
+{
+    return 10;
+}
+
+TEST_F(LogTreeView_UT, UT_drawRow)
+{
+    //    QStyleOptionViewItem option;
+    //    QPainter painter(m_logTreeView);
+    //    QModelIndex index;
+    //    Stub stub;
+    //    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_treeview_pixelMetric);
+    //    m_logTreeView->drawRow(&painter, option, index);
 }
 
 TEST_F(LogTreeView_UT, UT_setRowNum)

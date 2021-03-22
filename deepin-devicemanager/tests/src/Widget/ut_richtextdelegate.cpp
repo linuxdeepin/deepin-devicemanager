@@ -20,6 +20,9 @@
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QWidget>
+
+#include <DStyle>
 
 #include <gtest/gtest.h>
 #include "../stub.h"
@@ -41,11 +44,24 @@ public:
     PageTableWidget *widget;
 };
 
+bool ut_richTextDelegate_isValid()
+{
+    return true;
+}
+
+QRect ut_richTextDelegate_subElementRect()
+{
+    return QRect(10, 10, 10, 10);
+}
+
 TEST_F(RichTextDelegate_UT, ut_paint)
 {
     QStyleOptionViewItem option;
     QPainter painter(widget);
     QModelIndex index;
+    Stub stub;
+    //    stub.set(ADDR(QModelIndex,isValid),ut_richTextDelegate_isValid);
+    stub.set((QRect(DStyle::*)(DStyle::SubElement, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, subElementRect), ut_richTextDelegate_subElementRect);
     m_rtDelegate->paint(&painter, option, index);
 }
 
