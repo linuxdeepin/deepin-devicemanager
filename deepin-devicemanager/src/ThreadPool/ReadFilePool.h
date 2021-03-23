@@ -29,8 +29,9 @@ class ReadFilePool;
  * @brief The CmdTask class
  * 线程池的任务类,执行命令的任务类
  */
-class CmdTask: public QRunnable
+class CmdTask: public QObject, public QRunnable
 {
+    Q_OBJECT
 public:
     CmdTask(QString key, QString file, QString info, ReadFilePool *parent);
     ~CmdTask();
