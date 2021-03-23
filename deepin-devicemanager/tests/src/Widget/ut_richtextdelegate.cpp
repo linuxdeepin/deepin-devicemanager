@@ -61,7 +61,7 @@ TEST_F(RichTextDelegate_UT, ut_paint)
     QModelIndex index;
     Stub stub;
     //    stub.set(ADDR(QModelIndex,isValid),ut_richTextDelegate_isValid);
-    stub.set((QRect(DStyle::*)(DStyle::SubElement, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, subElementRect), ut_richTextDelegate_subElementRect);
+    //    stub.set((QRect(DStyle::*)(DStyle::SubElement, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, subElementRect), ut_richTextDelegate_subElementRect);
     m_rtDelegate->paint(&painter, option, index);
 }
 
@@ -86,6 +86,14 @@ TEST_F(RichTextDelegate_UT, ut_addRow)
     QDomDocument doc;
     QDomElement table;
     doc.setNodeValue("/");
-    QPair<QString, QString> pair = QPair<QString, QString>("/", "/");
+    QPair<QString, QString> pair = QPair<QString, QString>("/  /  \t\t/  /  \t\t/", "/  /  \t\t/  /  \t\t");
     m_rtDelegate->addRow(doc, table, pair);
+}
+
+TEST_F(RichTextDelegate_UT, ut_getDocFromLst)
+{
+    QDomDocument doc;
+    doc.setNodeValue("/");
+    m_rtDelegate->getDocFromLst(doc, QStringList() << "/:/"
+                                                   << "/");
 }

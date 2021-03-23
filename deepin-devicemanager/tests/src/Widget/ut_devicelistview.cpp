@@ -90,6 +90,8 @@ TEST_F(DeviceListView_UT, UT_keyPressEvent)
 {
     QKeyEvent keyPressEvent(QEvent::KeyPress, Qt::Key_Space, Qt::NoModifier);
     QCoreApplication::sendEvent(m_deviceListView, &keyPressEvent);
+    QKeyEvent keyPressEvent1(QEvent::KeyPress, Qt::Key_Up, Qt::NoModifier);
+    QCoreApplication::sendEvent(m_deviceListView, &keyPressEvent1);
 }
 
 TEST_F(DeviceListviewDelegate_UT, ut_paint)

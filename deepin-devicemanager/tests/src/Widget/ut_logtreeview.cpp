@@ -46,9 +46,16 @@ TEST_F(LogTreeView_UT, UT_setHeaderLabels)
     m_logTreeView->setHeaderLabels(QStringList() << "/");
 }
 
+int ut_row()
+{
+    return 1;
+}
+
 TEST_F(LogTreeView_UT, UT_currentRowEnable)
 {
-    ASSERT_FALSE(m_logTreeView->currentRowEnable());
+    Stub stub;
+    stub.set(ADDR(QModelIndex, row), ut_row);
+    m_logTreeView->currentRowEnable();
     ASSERT_NE(m_logTreeView->currentRow(), 0);
 }
 
@@ -70,11 +77,11 @@ int ut_treeview_pixelMetric()
 
 TEST_F(LogTreeView_UT, UT_drawRow)
 {
-    //    QStyleOptionViewItem option;
-    //    QPainter painter(m_logTreeView);
-    //    QModelIndex index;
     //    Stub stub;
     //    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_treeview_pixelMetric);
+    //    QStyleOptionViewItem option;
+    //    QPainter painter(m_logTreeView);
+    //    QModelIndex index = m_logTreeView->model()->index(0,0);
     //    m_logTreeView->drawRow(&painter, option, index);
 }
 

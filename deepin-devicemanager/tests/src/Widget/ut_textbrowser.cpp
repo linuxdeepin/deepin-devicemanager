@@ -24,8 +24,10 @@
 #include <QPainter>
 #include <QMap>
 #include <QDomDocument>
-
+#include <QMenu>
 #include <gtest/gtest.h>
+#include "../stub.h"
+
 class TextBrowser_UT : public UT_HEAD
 {
 public:
@@ -109,10 +111,25 @@ TEST_F(TextBrowser_UT, ut_domTitleInfo)
     delete device;
 }
 
+bool ut_rect_contains()
+{
+    return false;
+}
+
 TEST_F(TextBrowser_UT, ut_focusInEvent)
 {
     QFocusEvent focus(QFocusEvent::FocusIn);
     QCoreApplication::sendEvent(tBrowser, &focus);
+
+    Stub stub;
+    stub.set((bool (QRect::*)(const QPoint &, bool) const)ADDR(QRect, contains), ut_rect_contains);
+    DeviceInput *device = new DeviceInput;
+    QMap<QString, QString> mapinfo;
+    mapinfo.insert("Device", "/");
+    device->setInfoFromHwinfo(mapinfo);
+
+    tBrowser->mp_Info = dynamic_cast<DeviceBaseInfo *>(device);
     QFocusEvent focusd(QFocusEvent::FocusOut);
     QCoreApplication::sendEvent(tBrowser, &focusd);
+    delete device;
 }
