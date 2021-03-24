@@ -18,12 +18,13 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <iostream>
-using namespace std;
-
-#include <limits.h>
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include <QApplication>
+
+#ifndef __mips__
+#include <sanitizer/asan_interface.h>
+#endif
+
 //  gtest的入口函数
 int main(int argc, char **argv)
 {
@@ -31,6 +32,12 @@ int main(int argc, char **argv)
     QApplication a(argc, argv);
     ::testing::InitGoogleTest(&argc, argv);
     auto c = RUN_ALL_TESTS();
+
+#ifndef __mips__
+#if defined(CMAKE_SAFETYTEST_ARG_ON)
+    __sanitizer_set_report_path("asan.log");
+#endif
+#endif
     //Q_UNUSED(c);
     return c;
 }
