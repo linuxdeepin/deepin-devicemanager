@@ -21,7 +21,7 @@
 #include <gtest/gtest.h>
 #include <QApplication>
 
-#ifndef __mips__
+#if defined(CMAKE_SAFETYTEST_ARG_ON)
 #include <sanitizer/asan_interface.h>
 #endif
 
@@ -33,10 +33,8 @@ int main(int argc, char **argv)
     ::testing::InitGoogleTest(&argc, argv);
     auto c = RUN_ALL_TESTS();
 
-#ifndef __mips__
 #if defined(CMAKE_SAFETYTEST_ARG_ON)
     __sanitizer_set_report_path("asan.log");
-#endif
 #endif
     //Q_UNUSED(c);
     return c;
