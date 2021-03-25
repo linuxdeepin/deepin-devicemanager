@@ -93,12 +93,17 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 set(PROJECT_NAME_TEST
-    ${PROJECT_NAME}_test)
+    ${PROJECT_NAME}-test)
 
 ADD_COMPILE_OPTIONS(-fno-access-control)
 
 #安全测试的开关
 set(CMAKE_SAFETYTEST "${CMAKE_SAFETYTEST_ARG}")
+
+if(CMAKE_SAFETYTEST STREQUAL "")
+    set(CMAKE_SAFETYTEST "CMAKE_SAFETYTEST_ARG_OFF")
+endif()
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D${CMAKE_SAFETYTEST}")
 
 #Include all third
