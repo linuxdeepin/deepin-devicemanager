@@ -1,6 +1,7 @@
 #include "LoadInfoThread.h"
 
 #include <QDebug>
+#include <QDateTime>
 
 #include "ReadFilePool.h"
 #include "GenerateDevicePool.h"
@@ -38,9 +39,14 @@ void LoadInfoThread::run()
     }
 
     // 为了保证上面那个线程池完全结束
+    long long begin = QDateTime::currentMSecsSinceEpoch();
     while (true) {
         if (m_FinishedReadFilePool)
             break;
+        long long end = QDateTime::currentSecsSinceEpoch();
+        if (end - begin > 6000) {
+            break;
+        }
         usleep(100);
     }
     m_FinishedReadFilePool = false;
