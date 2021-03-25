@@ -25,19 +25,22 @@ LoadInfoThread::~LoadInfoThread()
 
 void LoadInfoThread::run()
 {
+    qInfo() << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^begin" ;
     // 请求后台更新信息
     ZmqOrder order;
     if (!order.connect() || !order.reqUpdateUI()) {
         emit finished("finish");
+        m_Running = false;
+        qInfo() << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^end1" ;
         return;
     }
-
+    qInfo() << "********************************************************************-001" ;
     m_Running = true;
     if (mp_ReadFilePool) {
         mp_ReadFilePool->readAllFile();
         mp_ReadFilePool->waitForDone(-1);
     }
-
+    qInfo() << "********************************************************************-002" ;
     // 为了保证上面那个线程池完全结束
     long long begin = QDateTime::currentMSecsSinceEpoch();
     while (true) {
@@ -50,14 +53,15 @@ void LoadInfoThread::run()
         usleep(100);
     }
     m_FinishedReadFilePool = false;
-
+    qInfo() << "********************************************************************-003" ;
     if (mp_GenerateDevicePool) {
         mp_GenerateDevicePool->generateDevice();
         mp_GenerateDevicePool->waitForDone(-1);
     }
-
+    qInfo() << "********************************************************************-004" ;
     emit finished("finish");
     m_Running = false;
+    qInfo() << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^end2" ;
 }
 
 void LoadInfoThread::slotFinishedReadFilePool(const QString &info)
