@@ -17,9 +17,9 @@ mkdir -p report
 
 lcov -d $workdir -c -o ./report/coverage.info
 
-lcov --extract ./coverage/coverage.info '*/src/*' -o ./coverage/coverage.info
+lcov --extract ./report/coverage.info '*/src/*' -o ./report/coverage.info
 
-lcov --remove ./coverage/coverage.info '*/tests/*' '*/3rdparty/*' -o  ./coverage/coverage.info
+lcov --remove ./report/coverage.info '*/tests/*' '*/3rdparty/*' -o  ./report/coverage.info
 
 genhtml -o ./report ./report/coverage.info
 
