@@ -25,6 +25,7 @@
 
 class ReadFilePool;
 class GenerateDevicePool;
+class ZmqOrder;
 
 class LoadInfoThread : public QThread
 {
@@ -57,6 +58,7 @@ private:
     GenerateDevicePool    *mp_GenerateDevicePool;   //<!  生成设备线程池
     bool            m_Running;                      //<!  标识是否正在运行
     bool            m_FinishedReadFilePool;         //<!  标识生成读文件的线程池是否结束
+    ZmqOrder       *mp_ZmqOrder;
 };
 
 #endif // LOADINFOTHREAD_H

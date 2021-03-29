@@ -47,7 +47,6 @@ void CmdButtonWidget::paintEvent(QPaintEvent *event)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-
     if (wid/* && wid == this*/) {
         cg = DPalette::Active;
     } else {
@@ -62,6 +61,7 @@ void CmdButtonWidget::paintEvent(QPaintEvent *event)
     int width = 1;
     QPainterPath paintPath, paintPathOut, paintPathIn;
     paintPathOut.addRect(rect);
+
     QRect rectIn = QRect(rect.x(), rect.y() + width, rect.width(), rect.height() - width);
     paintPathIn.addRect(rectIn);
 

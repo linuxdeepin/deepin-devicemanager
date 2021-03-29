@@ -12,35 +12,52 @@ LoadInfoThread::LoadInfoThread()
     , mp_GenerateDevicePool(new GenerateDevicePool)
     , m_Running(false)
     , m_FinishedReadFilePool(false)
+    , mp_ZmqOrder(nullptr)
 {
     connect(mp_ReadFilePool, &ReadFilePool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
 }
 
 LoadInfoThread::~LoadInfoThread()
 {
-    delete mp_ReadFilePool;
-    delete mp_GenerateDevicePool;
+    if (mp_ReadFilePool) {
+        delete mp_ReadFilePool;
+        mp_ReadFilePool = nullptr;
+    }
+    if (mp_GenerateDevicePool) {
+        delete mp_GenerateDevicePool;
+        mp_GenerateDevicePool = nullptr;
+    }
+    if (mp_ZmqOrder) {
+        delete mp_ZmqOrder;
+        mp_ZmqOrder = nullptr;
+    }
 }
 
 
 void LoadInfoThread::run()
 {
-    qInfo() << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^begin" ;
+    if (!mp_ZmqOrder) {
+        mp_ZmqOrder = new ZmqOrder;
+        if (!mp_ZmqOrder->connect()) {
+            emit finished("finish");
+            m_Running = false;
+            return;
+        }
+    }
+
     // 请求后台更新信息
-    ZmqOrder order;
-    if (!order.connect() || !order.reqUpdateUI()) {
+    if (!mp_ZmqOrder->reqUpdateUI()) {
         emit finished("finish");
         m_Running = false;
-        qInfo() << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^end1" ;
         return;
     }
-    qInfo() << "********************************************************************-001" ;
+
     m_Running = true;
     if (mp_ReadFilePool) {
         mp_ReadFilePool->readAllFile();
         mp_ReadFilePool->waitForDone(-1);
     }
-    qInfo() << "********************************************************************-002" ;
+
     // 为了保证上面那个线程池完全结束
     long long begin = QDateTime::currentMSecsSinceEpoch();
     while (true) {
@@ -53,15 +70,12 @@ void LoadInfoThread::run()
         usleep(100);
     }
     m_FinishedReadFilePool = false;
-    qInfo() << "********************************************************************-003" ;
     if (mp_GenerateDevicePool) {
         mp_GenerateDevicePool->generateDevice();
         mp_GenerateDevicePool->waitForDone(-1);
     }
-    qInfo() << "********************************************************************-004" ;
     emit finished("finish");
     m_Running = false;
-    qInfo() << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^end2" ;
 }
 
 void LoadInfoThread::slotFinishedReadFilePool(const QString &info)

@@ -84,8 +84,6 @@ bool ZmqOrder::reqUpdateUI()
 
     char end[64];
     sprintf(end, "%s", m_EndPoint.toStdString().c_str());
-    mp_Req->disConnect(end);
-
     if (QString::fromLocal8Bit(msg) == "2") {
         return true;
     } else {

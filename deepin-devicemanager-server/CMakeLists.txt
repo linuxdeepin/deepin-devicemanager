@@ -36,6 +36,7 @@ endforeach()
 
 # 引用ZeroMQ的库 begin ****************************************************************
 link_libraries("zmq")
+link_libraries("udev")
 # 引用ZeroMQ的库 end  *****************************************************************
 
 find_package(Qt5 COMPONENTS

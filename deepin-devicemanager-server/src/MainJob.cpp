@@ -75,6 +75,10 @@ void MainJob::working()
 
 void MainJob::executeClientInstruction(const QString &instructions)
 {
+    if (m_Detected && instructions.startsWith("UPDATE_UI")) {
+        mp_ZmqServer->setReturnStr("0");
+        return ;
+    }
     handleInstruction("ZMQ#" + instructions);
 }
 
