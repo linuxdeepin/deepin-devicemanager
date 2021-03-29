@@ -37,11 +37,6 @@ private slots:
      */
     void slotExecuteClientInstructions(const QString &instructions);
 
-    /**
-     * @brief slotTimeout
-     */
-    void slotTimeout();
-
 private:
 
     /**
@@ -88,7 +83,6 @@ private:
     RRServer              *mp_ZmqServer;          //<! 监听后台的服务端
     DetectThread          *mp_DetectThread;       //<! 检测usb的线程
     bool                  m_UpdateUI;             //<! 客户端请求更新
-    bool                  m_Detected;             //<! 标识是否检测到信息了
     QTimer                *mp_Timer;              //<! 定时器
     DBusInterface         *mp_IFace;              //<! Dbus interface
 

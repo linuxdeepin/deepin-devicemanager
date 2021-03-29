@@ -1,16 +1,14 @@
 #include "MonitorUsb.h"
+#include "QDebug"
 MonitorUsb::MonitorUsb()
-    : udev(nullptr)
-    , devices()
-    , dev_list_entry()
-    , dev(nullptr)
+    : m_Udev(nullptr)
 {
-    udev = udev_new();
-    if (!udev) {
+    m_Udev = udev_new();
+    if (!m_Udev) {
         printf("error!!!\n");
     }
     // 创建一个新的monitor
-    mon = udev_monitor_new_from_netlink(udev, "udev");
+    mon = udev_monitor_new_from_netlink(m_Udev, "udev");
     // 增加一个udev事件过滤器
     udev_monitor_filter_add_match_subsystem_devtype(mon, "usb", nullptr);
     // 启动监控
@@ -39,14 +37,27 @@ void MonitorUsb::monitor()
             continue;
 
         // 获取产生事件的设备映射
-        dev = udev_monitor_receive_device(mon);
-        if (!udev)
+        struct udev_device *dev = udev_monitor_receive_device(mon);
+        if (!dev)
             continue;
 
         // 获取事件并判断是否是插拔
+        unsigned long long curNum = udev_device_get_devnum(dev);
+        if (curNum == 0) {
+            continue;
+        }
         strcpy(buf, udev_device_get_action(dev));
-        udev_device_unref(dev);
-        if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf))
+        if (0 == strcmp("add", buf) && m_DevAddNum != curNum) {
+            qInfo() << " add ***************************** DETECT  " << curNum << " ** " << m_DevAddNum;
+            m_DevAddNum = curNum;
             emit usbChanged();
+        }
+        if (0 == strcmp("remove", buf) && m_DevRemoveNum != curNum) {
+            qInfo() << " remove ***************************** DETECT  " << curNum << " ** " << m_DevRemoveNum;
+            m_DevRemoveNum = curNum;
+            emit usbChanged();
+        }
+
+        udev_device_unref(dev);
     }
 }

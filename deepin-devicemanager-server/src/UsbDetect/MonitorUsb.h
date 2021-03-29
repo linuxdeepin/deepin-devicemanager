@@ -25,11 +25,11 @@ signals:
     void usbChanged();
 
 private:
-    struct udev *udev;
-    struct udev_list_entry *devices, *dev_list_entry;
-    struct udev_device *dev;
-    struct udev_monitor *mon;
-    int fd;
+    struct udev                       *m_Udev;              //<! udev Environment
+    struct udev_monitor               *mon;                 //<! object of mon
+    int                               fd;                   //<! fd
+    unsigned long long                m_DevAddNum;          //<! add devicce num
+    unsigned long long                m_DevRemoveNum;       //<! remove device num
 
 };
 
