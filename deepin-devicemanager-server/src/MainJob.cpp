@@ -70,7 +70,7 @@ void MainJob::working()
 void MainJob::executeClientInstruction(const QString &instructions)
 {
     if (instructions.startsWith("UPDATE_UI")) {
-        mp_ZmqServer->setReturnStr("0");
+        mp_ZmqServer->setReturnStr("2");
         return ;
     }
     handleInstruction("ZMQ#" + instructions);
