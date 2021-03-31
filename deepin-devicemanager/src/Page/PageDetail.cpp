@@ -366,6 +366,8 @@ void PageDetail::clearWidget()
 void PageDetail::slotBtnClicked()
 {
     DetailButton *button = qobject_cast<DetailButton *>(sender());
+    if (!button)
+        return;
     int index = 0;
     foreach (DetailButton *b, m_ListDetailButton) {
         if (button == b)

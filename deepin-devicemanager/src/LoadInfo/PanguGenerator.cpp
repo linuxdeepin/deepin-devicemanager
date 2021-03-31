@@ -39,13 +39,13 @@ void PanguGenerator::generatorComputerDevice()
     // setOsDescription
     QString os = "UOS";
     DSysInfo::DeepinType type = DSysInfo::deepinType();
-    if (DSysInfo::DeepinProfessional == type) {
+    if (DSysInfo::DeepinProfessional == type)
         os =  "UOS 20";
-    } else if (DSysInfo::DeepinPersonal == type) {
+    else if (DSysInfo::DeepinPersonal == type)
         os =  "UOS 20 Home";
-    } else if (DSysInfo::DeepinDesktop == type) {
+    else if (DSysInfo::DeepinDesktop == type)
         os =  "Deepin 20 Beta";
-    }
+
     device->setOsDescription(os);
 
     // os

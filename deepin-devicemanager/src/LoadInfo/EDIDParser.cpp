@@ -57,9 +57,9 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
 
     QStringList lines = edid.split(ch);
     foreach (const QString &line, lines) {
-        if (line == "") {
+        if (line == "")
             continue;
-        }
+
         m_ListEdid.append(line);
     }
 
@@ -96,11 +96,10 @@ void EDIDParser::parserVendor()
     QString vendorStr;
     QString h08 = getBytes(0, 8);
     QString h09 = getBytes(0, 9);
-    if (m_LittleEndianMode) {
+    if (m_LittleEndianMode)
         vendorStr = h08 + h09;
-    } else {
+    else
         vendorStr = h09 + h08;
-    }
 
     // 将16进制的厂商信息转换成二进制的厂商信息
     QString binStr = hexToBin(vendorStr);
@@ -242,12 +241,12 @@ QString EDIDParser::getBytes(int l, int n)
 {
     // 获取指定字节
     int index = n * 2;
-    if (m_ListEdid.size() < l + 1) {
+    if (m_ListEdid.size() < l + 1)
         return "";
-    }
+
     QString line = m_ListEdid[l];
-    if (line.length() < n + 1) {
+    if (line.length() < n + 1)
         return "";
-    }
+
     return line.mid(index, 2);
 }

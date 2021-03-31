@@ -28,19 +28,18 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
     if (!generator) {
         if (s_GeneratorKey == "x86_64")
             generator = new X86Generator();
-        else if (s_GeneratorKey == "mips64") {
+        else if (s_GeneratorKey == "mips64")
             generator = new MipsGenerator();
-        } else if (s_GeneratorKey == "aarch64") {
+        else if (s_GeneratorKey == "aarch64")
             generator = new ArmGenerator();
-        }  else if (s_GeneratorKey == "KLU") {
+        else if (s_GeneratorKey == "KLU")
             generator = new KLUGenerator();
-        }  else if (s_GeneratorKey == "PanGu") {
+        else if (s_GeneratorKey == "PanGu")
             generator = new PanguGenerator();
-        }  else if (s_GeneratorKey == "PanGuV") {
+        else if (s_GeneratorKey == "PanGuV")
             generator = new PanguVGenerator();
-        } else {
+        else
             generator = new X86Generator();
-        }
     }
     return generator;
 }

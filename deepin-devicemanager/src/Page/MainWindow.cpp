@@ -110,7 +110,7 @@ bool MainWindow::exportTo()
                        QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
                        "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter);  //
 
-    if (file.isEmpty() == true)
+    if (file.isEmpty())
         return true;
 
     QFileInfo fileInfo(file);

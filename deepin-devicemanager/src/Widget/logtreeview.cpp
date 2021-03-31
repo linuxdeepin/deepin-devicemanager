@@ -247,7 +247,8 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
     }
 
     auto *style = dynamic_cast<DStyle *>(DApplication::style());
-
+    if (!style)
+        return;
     // 圆角以及边距
     auto radius = style->pixelMetric(DStyle::PM_FrameRadius, &options);
     auto margin = style->pixelMetric(DStyle::PM_ContentsMargins, &options);

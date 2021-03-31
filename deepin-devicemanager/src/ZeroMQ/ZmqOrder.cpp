@@ -50,11 +50,10 @@ bool ZmqOrder::execDriverOrder(const QString &cmd)
     sprintf(end, "%s", m_EndPoint.toStdString().c_str());
     mp_Req->disConnect(end);
 
-    if (QString::fromLocal8Bit(msg) == "2") {
+    if (QString::fromLocal8Bit(msg) == "2")
         return true;
-    } else {
+    else
         return false;
-    }
 }
 
 bool ZmqOrder::execIfconfigOrder(const QString &cmd)
@@ -69,11 +68,10 @@ bool ZmqOrder::execIfconfigOrder(const QString &cmd)
     sprintf(end, "%s", m_EndPoint.toStdString().c_str());
     mp_Req->disConnect(end);
 
-    if (QString::fromLocal8Bit(msg) == "2") {
+    if (QString::fromLocal8Bit(msg) == "2")
         return true;
-    } else {
+    else
         return false;
-    }
 }
 
 bool ZmqOrder::reqUpdateUI()
@@ -85,11 +83,10 @@ bool ZmqOrder::reqUpdateUI()
 
     char end[64];
     sprintf(end, "%s", m_EndPoint.toStdString().c_str());
-    if (QString::fromLocal8Bit(msg) == "2") {
+    if (QString::fromLocal8Bit(msg) == "2")
         return true;
-    } else {
+    else
         return false;
-    }
 }
 
 

@@ -52,6 +52,8 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style)
+        return;
 
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
@@ -71,6 +73,8 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     rectpath.setWidth(rect.width() - 1);
 
     DWidget *par = dynamic_cast<DWidget *>(this->parent());
+    if (!par)
+        return;
     if (rectpath.y() > 0) {
 
         // 高度不超过表格高度

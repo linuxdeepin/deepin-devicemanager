@@ -64,9 +64,9 @@ void LoadInfoThread::run()
         if (m_FinishedReadFilePool)
             break;
         long long end = QDateTime::currentSecsSinceEpoch();
-        if (end - begin > 6000) {
+        if (end - begin > 6000)
             break;
-        }
+
         usleep(100);
     }
     m_FinishedReadFilePool = false;

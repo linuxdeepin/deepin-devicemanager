@@ -60,6 +60,8 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style)
+        return;
 
     QStyleOptionHeader option;
     initStyleOption(&option);
@@ -152,6 +154,8 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style)
+        return;
 
     QBrush bgBrush(palette.color(cg, DPalette::Base));
 

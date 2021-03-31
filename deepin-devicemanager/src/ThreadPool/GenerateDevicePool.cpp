@@ -22,9 +22,9 @@ void GenerateTask::run()
 {
     DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
 
-    if (!generator) {
+    if (!generator)
         return;
-    }
+
     switch (m_Type) {
     case DT_Computer:
         generator->generatorComputerDevice();

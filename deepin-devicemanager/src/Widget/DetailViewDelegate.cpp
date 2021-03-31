@@ -50,6 +50,8 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style)
+        return;
 
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();

@@ -75,13 +75,12 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
     QString mainInfo("");
     QString edid("");
     foreach (QString line, lines) {
-        if (line.startsWith("Screen")) {
+        if (line.startsWith("Screen"))
             continue;
-        }
+
         QRegExp reResolution("^[\\s]{2}([0-9]{3,4}x[0-9]{3,4}).*");
-        if (reResolution.exactMatch(line)) {
+        if (reResolution.exactMatch(line))
             continue;
-        }
 
         // 主屏幕信息
         QRegExp reMain("^[a-zA-Z].*");
@@ -117,9 +116,9 @@ void ThreadExecXrandr::getMonitorInfoFromXrandrVerbose()
     loadXrandrVerboseInfo(lstMap, "xrandr --verbose");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 1) {
+        if ((*it).size() < 1)
             continue;
-        }
+
         DeviceManager::instance()->setMonitorInfoFromXrandr((*it)["mainInfo"], (*it)["edid"]);
     }
 }
@@ -130,9 +129,9 @@ void ThreadExecXrandr::getMonitorRefreshRateFromXrandr()
     loadXrandrInfo(lstMap, "xrandr");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 1) {
+        if ((*it).size() < 1)
             continue;
-        }
+
         DeviceManager::instance()->setCurrentResolution((*it)["curResolution"], (*it)["rate"]);
     }
 }
@@ -143,9 +142,9 @@ void ThreadExecXrandr::getGpuInfoFromXrandr()
     loadXrandrInfo(lstMap, "xrandr");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 1) {
+        if ((*it).size() < 1)
             continue;
-        }
+
         DeviceManager::instance()->setGpuInfoFromXrandr(*it);
     }
 }

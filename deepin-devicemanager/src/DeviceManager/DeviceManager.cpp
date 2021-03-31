@@ -1003,7 +1003,7 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
                 QString ov = device->getOverviewInfo();
 
                 // 每一类别获取首个设备概况信息
-                if (ov.isEmpty() == false) {
+                if (false == ov.isEmpty()) {
                     if (m_OveriewMap.find(iter.key()) == m_OveriewMap.end()) {
                         m_OveriewMap[iter.key()] = ov;
                     } else {
@@ -1043,10 +1043,10 @@ const QMap<QString, QMap<QString, QStringList> > &DeviceManager::getDeviceDriver
         foreach (auto device, iter.value()) {
             if (m_DeviceDriverPool.find(device->driver()) != m_DeviceDriverPool.end()) {
                 // 驱动内容不为空时添加
-                if (device->driver().isEmpty() == false)
+                if (false == device->driver().isEmpty())
                     m_DeviceDriverPool[device->driver()][iter.key()] += device->name();
             } else {
-                if (device->driver().isEmpty() == false)
+                if (false == device->driver().isEmpty())
                     m_DeviceDriverPool[device->driver()][iter.key()] += device->name();
             }
 

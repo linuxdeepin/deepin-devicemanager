@@ -209,7 +209,7 @@ bool DeviceStorage::setKLUMediaType(const QString &name, const QString &value)
 bool DeviceStorage::isValid()
 {
     // 若是m_Size为空则 该设备无效
-    if (m_Size.isEmpty() == true)
+    if (m_Size.isEmpty())
         return false;
 
     return true;
@@ -412,11 +412,11 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
 
     // 型号
     //SATA
-    if (mapInfo["Device Model"].isEmpty() == false)
+    if (false == mapInfo["Device Model"].isEmpty())
         m_Model = mapInfo["Device Model"];
 
     //NVME
-    if (mapInfo["Model Number"].isEmpty() == false)
+    if (false == mapInfo["Model Number"].isEmpty())
         m_Model = mapInfo["Model Number"];
 
     setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);

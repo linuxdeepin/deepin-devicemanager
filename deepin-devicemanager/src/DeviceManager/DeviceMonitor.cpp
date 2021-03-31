@@ -160,7 +160,7 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid)
         return false;
 
     // 根据edid计算屏幕大小
-    if (edid.isEmpty() == false)
+    if (false == edid.isEmpty())
         caculateScreenSize(edid);
 
     return true;
@@ -350,7 +350,7 @@ void DeviceMonitor::caculateScreenSize(const QString &edid)
     bool trHeightOk = false;
     width = width_field.toInt(&trWidthOk, 16);
     height = height_field.toInt(&trHeightOk, 16);
-    if (trWidthOk == false || trHeightOk == false)
+    if (false == trWidthOk || false == trHeightOk)
         return;
 
     if (height <= 0)

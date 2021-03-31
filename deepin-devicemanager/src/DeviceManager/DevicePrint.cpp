@@ -78,9 +78,9 @@ EnableDeviceStatus DevicePrint::setEnable(bool e)
     EnableDeviceStatus res = EnableManager::instance()->enablePrinter(m_Name, e);
 
     // 禁用成功，状态设为5
-    if (res == EDS_Success && e == false)
+    if (res == EDS_Success && false == e)
         m_Status = "5";
-    else if (res == EDS_Success && e == true)
+    else if (res == EDS_Success && true == e)
         // 启用成功状态设为3
         m_Status = "3";
 
