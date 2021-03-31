@@ -71,8 +71,6 @@ TEST_F(PageOverview_UT, PageOverview_UT_setLabel)
 
 TEST_F(PageOverview_UT, PageOverview_UT_slotActionRefresh)
 {
-    m_pageOverview->slotActionRefresh();
-    m_pageOverview->slotActionExport();
     m_pageOverview->slotActionCopy();
     m_pageOverview->isOverview();
 }

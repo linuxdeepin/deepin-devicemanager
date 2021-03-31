@@ -152,15 +152,6 @@ private slots:
      */
     void slotBtnClicked();
 
-    /**
-     * @brief slotRefreshInfo:右键菜单刷新槽函数
-     */
-    void slotRefreshInfo();
-
-    /**
-     * @brief slotExportInfo:右键菜单导出槽函数
-     */
-    void slotExportInfo();
     void slotCopyAllInfo();
 
 private:

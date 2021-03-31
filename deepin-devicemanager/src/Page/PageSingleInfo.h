@@ -94,16 +94,6 @@ protected slots:
     void slotShowMenu(const QPoint &);
 
     /**
-     * @brief slotActionRefresh:右键菜单刷新槽函数
-     */
-    void slotActionRefresh();
-
-    /**
-     * @brief slotActionExport:右键菜单导出槽函数
-     */
-    void slotActionExport();
-
-    /**
      * @brief slotActionCopy:右键菜单拷贝信息
      */
     void slotActionCopy();

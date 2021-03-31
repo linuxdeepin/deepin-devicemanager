@@ -46,8 +46,8 @@ PageOverview::PageOverview(DWidget *parent)
 
     // 连接槽函数
     connect(mp_Overview, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
-    connect(mp_Refresh, &QAction::triggered, this, &PageOverview::slotActionRefresh);
-    connect(mp_Export, &QAction::triggered, this, &PageOverview::slotActionExport);
+    connect(mp_Refresh, &QAction::triggered, this, &PageOverview::refreshInfo);
+    connect(mp_Export, &QAction::triggered, this, &PageOverview::exportInfo);
     connect(mp_Copy, &QAction::triggered, this, &PageOverview::slotActionCopy);
 }
 
@@ -192,19 +192,6 @@ void PageOverview::slotShowMenu(const QPoint &)
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());
-}
-
-void PageOverview::slotActionRefresh()
-{
-    // 刷新
-    emit refreshInfo();
-}
-
-void PageOverview::slotActionExport()
-{
-    qDebug() << "export";
-    // 导出
-    emit exportInfo();
 }
 
 void PageOverview::slotActionCopy()

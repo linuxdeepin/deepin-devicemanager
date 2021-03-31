@@ -75,9 +75,8 @@ MainWindow::~MainWindow()
 void MainWindow::refresh()
 {
     // 正在刷新,避免重复操作
-    if (m_refreshing) {
+    if (m_refreshing)
         return;
-    }
 
     // 正在刷新标志
     m_refreshing = true;
@@ -98,9 +97,8 @@ bool MainWindow::exportTo()
     static QString saveDir = []() {
         QString dirStr = "./";
         QDir dir(QDir::homePath() + "/Desktop/");
-        if (dir.exists()) {
+        if (dir.exists())
             dirStr = QDir::homePath() + "/Desktop/";
-        }
         return dirStr;
     }
     ();
@@ -112,32 +110,26 @@ bool MainWindow::exportTo()
                        QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
                        "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter);  //
 
-    if (file.isEmpty() == true) {
+    if (file.isEmpty() == true)
         return true;
-    }
 
     QFileInfo fileInfo(file);
 
     // 文件类型txt
-    if (selectFilter == "Text (*.txt)") {
+    if (selectFilter == "Text (*.txt)")
         return DeviceManager::instance()->exportToTxt(file);
 
-    }
-
     // 文件类型html
-    if (selectFilter == "Html (*.html)") {
+    if (selectFilter == "Html (*.html)")
         return DeviceManager::instance()->exportToHtml(file);
-    }
 
     // 文件类型docx
-    if (selectFilter == "Doc (*.docx)") {
+    if (selectFilter == "Doc (*.docx)")
         return DeviceManager::instance()->exportToDoc(file);
-    }
 
     // 文件类型xls
-    if (selectFilter == "Xls (*.xls)") {
+    if (selectFilter == "Xls (*.xls)")
         return DeviceManager::instance()->exportToXlsx(file);
-    }
 
     return false;
 }
@@ -217,13 +209,12 @@ void MainWindow::getJsonDoc(QJsonDocument &doc)
 
 void MainWindow::windowMaximizing()
 {
-    if (isMaximized()) {
+    if (isMaximized())
         // 正常窗口大小
         showNormal();
-    }  else {
+    else
         // 窗口最大化
         showMaximized();
-    }
 }
 
 QString MainWindow::getArchString()

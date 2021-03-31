@@ -54,9 +54,8 @@ void DeviceComputer::setName(const QString &value)
 {
     // 设置计算机名称
     m_Name = value;
-    if (m_Name.contains("None", Qt::CaseInsensitive)) {
+    if (m_Name.contains("None", Qt::CaseInsensitive))
         m_Name = "";
-    }
 }
 
 void DeviceComputer::setType(const QString &value)
@@ -68,22 +67,20 @@ void DeviceComputer::setType(const QString &value)
 void DeviceComputer::setVendor(const QString &dm1Vendor, const QString &dm2Vendor)
 {
     // 设置制造商
-    if (dm1Vendor.contains("System manufacturer")) {
+    if (dm1Vendor.contains("System manufacturer"))
         m_Vendor = dm2Vendor;
-    } else {
+    else
         m_Vendor = dm1Vendor;
-    }
 }
 
 void DeviceComputer::setName(const QString &dm1Name, const QString &dm2Name, const QString &dm1Family, const QString &dm1Version)
 {
     // name
     QString pname;
-    if (dm1Name.contains("System Product Name")) {
+    if (dm1Name.contains("System Product Name"))
         pname = dm2Name;
-    } else {
+    else
         pname = dm1Name;
-    }
 
     // family
     QString family = dm1Family;

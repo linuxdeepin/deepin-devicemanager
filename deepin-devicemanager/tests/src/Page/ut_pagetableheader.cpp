@@ -50,10 +50,3 @@ TEST_F(PageTableHeader_UT, PageTableHeader_UT_paintEvent)
     QPaintEvent paint(QRect(m_pageTableHeader->rect()));
     m_pageTableHeader->paintEvent(&paint);
 }
-
-TEST_F(PageTableHeader_UT, PageTableHeader_UT_slotRefreshInfo)
-{
-    m_pageTableHeader->slotRefreshInfo();
-    m_pageTableHeader->slotExportInfo();
-    m_pageTableHeader->slotEnableDevice(0, true);
-}

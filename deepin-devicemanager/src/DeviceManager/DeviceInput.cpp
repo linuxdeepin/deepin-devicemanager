@@ -34,9 +34,8 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
         QString key = mapInfo["bus info"];
         key.replace("a", "10");
 
-        if (m_KeyToLshw != key) {
+        if (m_KeyToLshw != key)
             return false;
-        }
     }
 
     // 设置基础设备信息
@@ -66,19 +65,17 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
 
     // 获取键盘的接口类型
-    if (mapInfo.find("Hotplug") != mapInfo.end()) {
+    if (mapInfo.find("Hotplug") != mapInfo.end())
         setAttribute(mapInfo, "Hotplug", m_Interface);
-    } else {
+    else
         m_Interface = "PS/2";
-    }
 
     // 上面的方法不适合蓝牙键盘的获取方法
-    if (mapInfo.find("Model") != mapInfo.end() && mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive)) {
+    if (mapInfo.find("Model") != mapInfo.end() && mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive))
         m_Interface = "Bluetooth";
-    }
-    if (mapInfo.find("Device") != mapInfo.end() && mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
+
+    if (mapInfo.find("Device") != mapInfo.end() && mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive))
         m_Interface = "Bluetooth";
-    }
 
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Hardware Class", m_Description);
@@ -90,9 +87,8 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     QStringList words = mapInfo["SysFS BusID"].split(":");
     if (words.size() == 2) {
         QStringList chs = words[0].split("-");
-        if (chs.size() == 2) {
+        if (chs.size() == 2)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-        }
     }
 
     // 获取映射到  cat /proc/bus/input/devices 里面的关键字
@@ -101,9 +97,8 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_KeysToCatDevices = re.cap(1);
     } else {
         QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
-        if (rem.exactMatch(mapInfo["Device File"])) {
+        if (rem.exactMatch(mapInfo["Device File"]))
             m_KeysToCatDevices = rem.cap(1);
-        }
     }
 
     // 由cat /proc/bus/devices/input设置设备信息
@@ -123,16 +118,14 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
-    if (mapInfo.find("Hotplug") != mapInfo.end()) {
+    if (mapInfo.find("Hotplug") != mapInfo.end())
         setAttribute(mapInfo, "Hotplug", m_Interface);
-    } else {
+    else
         m_Interface = "PS/2";
-    }
 
     // 上面的方法不适合蓝牙键盘的获取方法
-    if (mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive) || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
+    if (mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive) || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive))
         m_Interface = "Bluetooth";
-    }
 
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Hardware Class", m_Description);
@@ -144,9 +137,8 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     QStringList words = mapInfo["SysFS BusID"].split(":");
     if (words.size() == 2) {
         QStringList chs = words[0].split("-");
-        if (chs.size() == 2) {
+        if (chs.size() == 2)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-        }
     }
 
     // 获取映射到  cat /proc/bus/input/devices 里面的关键字
@@ -155,9 +147,8 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_KeysToCatDevices = re.cap(1);
     } else {
         QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
-        if (rem.exactMatch(mapInfo["Device File"])) {
+        if (rem.exactMatch(mapInfo["Device File"]))
             m_KeysToCatDevices = rem.cap(1);
-        }
     }
 
     // 由cat /proc/bus/devices/input设置设备信息
@@ -191,9 +182,8 @@ void DeviceInput::setInfoFromBluetoothctl()
     if (isValueValid(m_keysToPairedDevice)) {
         bool isExist = DeviceManager::instance()->isDeviceExistInPairedDevice(m_keysToPairedDevice.toUpper());
 
-        if (isExist) {
+        if (isExist)
             m_Interface = "Bluetooth";
-        }
     }
 }
 
@@ -230,9 +220,8 @@ EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
     // 设置设备状态
     EnableDeviceStatus res = EnableManager::instance()->enableDeviceByInput(m_Name, e, m_Index);
-    if (res == EDS_Success) {
+    if (res == EDS_Success)
         m_Enable = e;
-    }
 
     return res;
 }
@@ -283,11 +272,10 @@ void DeviceInput::loadTableData()
 {
     // 加载表格数据
     QString name;
-    if (!enable()) {
+    if (!enable())
         name = "(" + tr("Disable") + ") " + m_Name;
-    } else {
+    else
         name = m_Name;
-    }
 
     m_TableData.append(name);
     m_TableData.append(m_Vendor);

@@ -71,9 +71,3 @@ TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_resizeEvent)
     m_pageInfoWidget->resizeEvent(&resizeevent);
 }
 
-TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_slotRefreshInfo)
-{
-    m_pageInfoWidget->slotRefreshInfo();
-    m_pageInfoWidget->slotExportInfo();
-    m_pageInfoWidget->slotUpdateUI();
-}

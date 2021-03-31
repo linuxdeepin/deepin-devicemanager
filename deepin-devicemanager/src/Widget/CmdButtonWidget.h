@@ -48,12 +48,6 @@ signals:
      */
     void cmdButtonClicked();
 
-public slots:
-    /**
-     * @brief expandCommandLinkClicked:展开button点击槽函数
-     */
-    void expandCommandLinkClicked();
-
 protected:
     /**
      * @brief paintEvent:重绘事件

@@ -39,8 +39,8 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
 
     // 连接槽函数
     connect(mp_Content, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
-    connect(mp_Refresh, &QAction::triggered, this, &PageSingleInfo::slotActionRefresh);
-    connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::slotActionExport);
+    connect(mp_Refresh, &QAction::triggered, this, &PageSingleInfo::refreshInfo);
+    connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::exportInfo);
     connect(mp_Copy, &QAction::triggered, this, &PageSingleInfo::slotActionCopy);
     connect(mp_Enable, &QAction::triggered, this, &PageSingleInfo::slotActionEnable);
 }
@@ -53,11 +53,10 @@ PageSingleInfo::~PageSingleInfo()
 void PageSingleInfo::setLabel(const QString &itemstr)
 {
     // 判断是否是同一界面刷新
-    if (mp_Label->text() == itemstr) {
+    if (mp_Label->text() == itemstr)
         m_SameDevice = true;
-    } else {
+    else
         m_SameDevice = false;
-    }
 
     mp_Label->setText(itemstr);
 
@@ -72,9 +71,8 @@ void PageSingleInfo::setLabel(const QString &itemstr)
 
 void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
-    if (lst.size() < 1) {
+    if (lst.size() < 1)
         return;
-    }
     mp_Device = lst[0];
 
     // 清空内容
@@ -101,15 +99,13 @@ void PageSingleInfo::clearWidgets()
 
 void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
 {
-    if (lst.size() < 1) {
+    if (lst.size() < 1)
         return;
-    }
 
     // 设置单个设备界面信息显示的行数,与表格高度相关
     int maxRow = this->height() / ROW_HEIGHT - 3;
-    if (maxRow < 0) {
+    if (maxRow < 0)
         maxRow = 13;
-    }
     mp_Content->setLimitRow(std::min(13, maxRow));
 
     // 设置表格行数
@@ -143,9 +139,8 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     mp_Copy->setEnabled(true);
     mp_Menu->addAction(mp_Copy);
 
-    if (!mp_Device) {
+    if (!mp_Device)
         return;
-    }
 
     if (mp_Device->canEnable()) {
         if (mp_Content->isCurDeviceEnable()) {
@@ -161,16 +156,6 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());
-}
-void PageSingleInfo::slotActionRefresh()
-{
-    // 刷新
-    emit refreshInfo();
-}
-void PageSingleInfo::slotActionExport()
-{
-    // 导出
-    emit exportInfo();
 }
 
 void PageSingleInfo::slotActionCopy()
@@ -234,7 +219,6 @@ void PageSingleInfo::initWidgets()
 void PageSingleInfo::expandTable()
 {
     // 展开表格
-    if (mp_Content) {
+    if (mp_Content)
         mp_Content->expandTable();
-    }
 }

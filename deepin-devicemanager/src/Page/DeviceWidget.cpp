@@ -24,12 +24,12 @@ DeviceWidget::DeviceWidget(QWidget *parent)
 
     // 连接槽函数
     connect(mp_ListView, &PageListView::itemClicked, this, &DeviceWidget::slotListViewWidgetItemClicked);
-    connect(mp_PageInfo, &PageInfoWidget::refreshInfo, this, &DeviceWidget::slotRefreshInfo);
-    connect(mp_PageInfo, &PageInfoWidget::exportInfo, this, &DeviceWidget::slotExportInfo);
+    connect(mp_PageInfo, &PageInfoWidget::refreshInfo, this, &DeviceWidget::refreshInfo);
+    connect(mp_PageInfo, &PageInfoWidget::exportInfo, this, &DeviceWidget::exportInfo);
     connect(mp_PageInfo, &PageInfoWidget::updateUI, this, &DeviceWidget::slotUpdateUI);
 
-    connect(mp_ListView, &PageListView::refreshActionTrigger, this, &DeviceWidget::slotRefreshInfo);
-    connect(mp_ListView, &PageListView::exportActionTrigger, this, &DeviceWidget::slotExportInfo);
+    connect(mp_ListView, &PageListView::refreshActionTrigger, this, &DeviceWidget::refreshInfo);
+    connect(mp_ListView, &PageListView::exportActionTrigger, this, &DeviceWidget::exportInfo);
 }
 
 DeviceWidget::~DeviceWidget()
@@ -47,26 +47,22 @@ void DeviceWidget::updateListView(const QList<QPair<QString, QString> > &lst)
 
 void DeviceWidget::updateDevice(const QString &itemStr, const QList<DeviceBaseInfo *> &lst)
 {
-    if (lst.size() == 0) {
+    if (lst.size() == 0)
         return;
-    }
 
     // 更新右边的详细内容
-    if (mp_PageInfo) {
+    if (mp_PageInfo)
         mp_PageInfo->updateTable(itemStr, lst);
-    }
 }
 
 void DeviceWidget::updateOverview(const QMap<QString, QString> &map)
 {
-    if (map.size() == 0) {
+    if (map.size() == 0)
         return;
-    }
 
     // 更新概况
-    if (mp_PageInfo) {
+    if (mp_PageInfo)
         mp_PageInfo->updateTable(map);
-    }
 }
 
 QString DeviceWidget::currentIndex() const
@@ -80,17 +76,6 @@ void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
     // ListView Item 点击
     m_CurItemStr = itemStr;
     emit itemClicked(itemStr);
-}
-
-void DeviceWidget::slotRefreshInfo()
-{
-    // 刷新信息
-    emit refreshInfo();
-}
-void DeviceWidget::slotExportInfo()
-{
-    // 导出信息
-    emit exportInfo();
 }
 
 void DeviceWidget::slotUpdateUI()
@@ -124,9 +109,8 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
         if (lst.size() > 1) {
             // 判断是否是BIOS界面
             DeviceBios *bios = dynamic_cast<DeviceBios *>(lst[0]);
-            if (bios) {
+            if (bios)
                 mp_PageInfo->updateTable(deviceType, lst);
-            }
         } else {
             mp_PageInfo->updateTable(deviceType, lst);
         }

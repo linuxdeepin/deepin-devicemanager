@@ -68,9 +68,8 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     QRegExp re(":[0-9]{2}:[0-9]{2}");
     int index = mapInfo["bus info"].indexOf(re);
     QString uniqueKey = mapInfo["bus info"].mid(index + 1);
-    if (!uniqueKey.contains(m_UniqueKey)) {
+    if (!uniqueKey.contains(m_UniqueKey))
         return;
-    }
 
     // 设置属性
     setAttribute(mapInfo, "product", m_Name);
@@ -136,25 +135,20 @@ void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
     m_MaximumResolution = mapInfo["maxResolution"];
 
     // 设置显卡支持的接口
-    if (mapInfo.find("HDMI") != mapInfo.end()) {
+    if (mapInfo.find("HDMI") != mapInfo.end())
         m_HDMI = mapInfo["HDMI"];
-    }
 
-    if (mapInfo.find("VGA") != mapInfo.end()) {
+    if (mapInfo.find("VGA") != mapInfo.end())
         m_VGA = mapInfo["VGA"];
-    }
 
-    if (mapInfo.find("DP") != mapInfo.end()) {
+    if (mapInfo.find("DP") != mapInfo.end())
         m_DisplayPort = mapInfo["DP"];
-    }
 
-    if (mapInfo.find("eDP") != mapInfo.end()) {
+    if (mapInfo.find("eDP") != mapInfo.end())
         m_eDP = mapInfo["eDP"];
-    }
 
-    if (mapInfo.find("DVI") != mapInfo.end()) {
+    if (mapInfo.find("DVI") != mapInfo.end())
         m_DVI = mapInfo["DVI"];
-    }
 }
 
 void DeviceGpu::setDmesgInfo(const QString &info)

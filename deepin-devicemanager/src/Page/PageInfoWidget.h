@@ -75,23 +75,6 @@ signals:
     void exportInfo();
     void updateUI();
 
-private slots:
-
-    /**
-     * @brief slotRefreshInfo:刷新信息槽函数
-     */
-    void slotRefreshInfo();
-
-    /**
-     * @brief slotExportInfo:导出信息槽函数
-     */
-    void slotExportInfo();
-
-    /**
-     * @brief slotUpdateUI
-     */
-    void slotUpdateUI();
-
 private:
     /**
      * @brief initWidgets

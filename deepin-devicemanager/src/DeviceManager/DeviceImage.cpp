@@ -22,9 +22,8 @@ DeviceImage::DeviceImage()
 
 void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (m_KeyToLshw != mapInfo["bus info"]) {
+    if (m_KeyToLshw != mapInfo["bus info"])
         return;
-    }
 
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
@@ -54,9 +53,8 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     QStringList words = mapInfo["SysFS BusID"].split(":");
     if (words.size() == 2) {
         QStringList chs = words[0].split("-");
-        if (chs.size() == 2) {
+        if (chs.size() == 2)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-        }
     }
 }
 
@@ -88,9 +86,8 @@ EnableDeviceStatus DeviceImage::setEnable(bool e)
 {
     // 设置设备状态
     EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    if (e != enable()) {
+    if (e != enable())
         res = EDS_Faild;
-    }
 
     return res;
 }
@@ -133,11 +130,10 @@ void DeviceImage::loadTableData()
 {
     // 记载表格内容
     QString name;
-    if (!enable()) {
+    if (!enable())
         name = "(" + tr("Disable") + ") " + m_Name;
-    } else {
+    else
         name = m_Name;
-    }
 
     m_TableData.append(name);
     m_TableData.append(m_Vendor);

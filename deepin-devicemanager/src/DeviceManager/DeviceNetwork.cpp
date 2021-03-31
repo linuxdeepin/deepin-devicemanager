@@ -75,9 +75,8 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     // 设置由hwinfo获取的信息
-    if (mapInfo["Device File"] != m_LogicalName) {
+    if (mapInfo["Device File"] != m_LogicalName)
         return false;
-    }
 
     setAttribute(mapInfo, "Model", m_Name);
     return true;
@@ -167,11 +166,10 @@ void DeviceNetwork::loadTableData()
 {
     // 根据是否禁用设置设备名称
     QString name;
-    if (!enable()) {
+    if (!enable())
         name = "(" + tr("Disable") + ") " + m_Name;
-    } else {
+    else
         name = m_Name;
-    }
 
     // 加载表格数据信息
     m_TableData.append(name);

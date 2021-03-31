@@ -25,10 +25,10 @@ PageTableHeader::PageTableHeader(QWidget *parent)
     initWidgets();
 
     // 连接槽函数函数
-    connect(mp_Table, &TableWidget::itemClicked, this, &PageTableHeader::slotItemClicked);
-    connect(mp_Table, &TableWidget::refreshInfo, this, &PageTableHeader::slotRefreshInfo);
-    connect(mp_Table, &TableWidget::exportInfo, this, &PageTableHeader::slotExportInfo);
-    connect(mp_Table, &TableWidget::enableDevice, this, &PageTableHeader::slotEnableDevice);
+    connect(mp_Table, &TableWidget::itemClicked, this, &PageTableHeader::itemClicked);
+    connect(mp_Table, &TableWidget::refreshInfo, this, &PageTableHeader::refreshInfo);
+    connect(mp_Table, &TableWidget::exportInfo, this, &PageTableHeader::exportInfo);
+    connect(mp_Table, &TableWidget::enableDevice, this, &PageTableHeader::enableDevice);
 }
 
 PageTableHeader::~PageTableHeader()
@@ -51,9 +51,8 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
     mp_Table->clear();
 
     // 如果lst.size() == 1 则说明改设备只有一个
-    if (lst.size() == 1) {
+    if (lst.size() == 1)
         return;
-    }
 
     // 设置表头
     mp_Table->setHeaderLabels(lst[0]);
@@ -78,7 +77,8 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
         bool enable = lst[i + 1][0].startsWith("(" + tr("Disable") + ")");
         int co = column;
 
-        if (enable) {co = 1;}
+        if (enable)
+            co = 1;
         for (int j = 0; j < co; j++) {
             DStandardItem *item = new DStandardItem(lst[i + 1][j]);
             mp_Table->setItem(i, j, item);
@@ -105,29 +105,6 @@ void PageTableHeader::updateCurItemEnable(int row, int enable)
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
     DWidget::paintEvent(e);
-}
-
-void PageTableHeader::slotItemClicked(int row)
-{
-    // 点击行
-    emit itemClicked(row);
-}
-
-void PageTableHeader::slotRefreshInfo()
-{
-    // 刷新
-    emit refreshInfo();
-}
-void PageTableHeader::slotExportInfo()
-{
-    // 导出
-    emit exportInfo();
-}
-
-void PageTableHeader::slotEnableDevice(int row, bool enable)
-{
-    // 启用/禁用设备
-    emit enableDevice(row, enable);
 }
 
 

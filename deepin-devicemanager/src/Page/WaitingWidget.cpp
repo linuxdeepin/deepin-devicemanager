@@ -56,14 +56,12 @@ WaitingWidget::~WaitingWidget()
 void WaitingWidget::start()
 {
     // 开始转动
-    if (mp_Spinner) {
+    if (mp_Spinner)
         mp_Spinner->start();
-    }
 }
 void WaitingWidget::stop()
 {
     // 停止转动
-    if (mp_Spinner) {
+    if (mp_Spinner)
         mp_Spinner->stop();
-    }
 }

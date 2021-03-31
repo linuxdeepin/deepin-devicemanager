@@ -97,9 +97,8 @@ void PageTableWidget::setCurDeviceState(bool state)
 void PageTableWidget::expandTable()
 {
     // 表格展开
-    if (mp_Table) {
+    if (mp_Table)
         mp_Table->expandCommandLinkClicked();
-    }
 }
 
 void PageTableWidget::setDeviceEnable(bool e)

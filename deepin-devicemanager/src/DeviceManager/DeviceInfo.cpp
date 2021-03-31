@@ -74,65 +74,50 @@ QString DeviceBaseInfo::subTitle()
 bool DeviceBaseInfo::isValueValid(QString &value)
 {
     // 判断属性值是否有效
-    if (value.isEmpty()) {
+    if (value.isEmpty())
         return false;
-    }
 
-    if (value == QObject::tr("Unknown")) {
+    if (value == QObject::tr("Unknown"))
         return false;
-    }
 
-    if (value == QString("Unknown")) {
+    if (value == QString("Unknown"))
         return false;
-    }
 
-    if (value.compare(QString("N/A"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("N/A"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value == QString("")) {
+    if (value == QString(""))
         return false;
-    }
 
-    if (value.compare(QString("Null"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("Null"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value.compare(QString("none"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("none"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value.compare(QString("Not Provided"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("Not Provided"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value.compare(QString("Not Specified"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("Not Specified"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value.compare(QString("Default string"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("Default string"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value.compare(QString("Unspecified"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("Unspecified"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value.compare(QString("Not Present"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("Not Present"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value.compare(QString("<OUT OF SPEC>"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("<OUT OF SPEC>"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value.compare(QString("Other"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("Other"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
-    if (value.compare(QString("TBD"), Qt::CaseInsensitive) == 0) {
+    if (value.compare(QString("TBD"), Qt::CaseInsensitive) == 0)
         return false;
-    }
 
     return true;
 }
@@ -186,7 +171,7 @@ void DeviceBaseInfo::baseInfoToHTML(QDomDocument &doc, QList<QPair<QString, QStr
 void DeviceBaseInfo::subTitleToHTML(QDomDocument &doc)
 {
     // 子标题转为HTML格式
-    if (this->subTitle().isEmpty() == false) {
+    if (false == this->subTitle().isEmpty()) {
         QDomElement h3 = doc.createElement("h3");
         QDomText valueText = doc.createTextNode(this->subTitle());
         h3.appendChild(valueText);
@@ -208,9 +193,8 @@ void DeviceBaseInfo::baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QSt
         QString value = item.second;
 
         // 判断属性值是否有效
-        if (isValueValid(value) == false) {
+        if (false == isValueValid(value))
             continue;
-        }
 
         // 添加doc段落
         QString line = item.first + ":  " + item.second;
@@ -235,9 +219,8 @@ void DeviceBaseInfo::baseInfoToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFo
         QString value = item.second;
 
         // 判断属性值是否有效
-        if (isValueValid(value) == false) {
+        if (false == isValueValid(value))
             continue;
-        }
 
         // 获取行数
         int _row = DeviceManager::instance()->currentXlsRow();
@@ -259,9 +242,8 @@ void DeviceBaseInfo::baseInfoToTxt(QTextStream &out, QList<QPair<QString, QStrin
         QString value = item.second;
 
         // 判断属性值是否有效
-        if (isValueValid(value) == false) {
+        if (false == isValueValid(value))
             continue;
-        }
 
         // 设置第一列占21个字符
         out.setFieldWidth(21);
@@ -279,9 +261,8 @@ void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
     getTableData();
 
     // 判断是否有表格内容
-    if (m_TableData.size() < 1) {
+    if (m_TableData.size() < 1)
         return;
-    }
 
     // 设置占位宽度
     QString text = m_TableData[0];
@@ -303,9 +284,8 @@ void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
     getTableHeader();
 
     // 判断是否有表头
-    if (m_TableHeader.size() < 1) {
+    if (m_TableHeader.size() < 1)
         return;
-    }
 
     // 设置占位宽度
     QString text = m_TableHeader[0];
@@ -327,9 +307,8 @@ void DeviceBaseInfo::tableInfoToHtml(QFile &html)
     getTableData();
 
     // 判断是否有表格内容
-    if (m_TableData.size() < 1) {
+    if (m_TableData.size() < 1)
         return;
-    }
 
     // 写表格内容
     foreach (auto item, m_TableData) {
@@ -345,16 +324,14 @@ void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
     getTableHeader();
 
     // 判断是否有表头
-    if (m_TableHeader.size() < 1) {
+    if (m_TableHeader.size() < 1)
         return;
-    }
 
     html.write("<thead><tr>\n");
 
     // 写表头内容
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col)  {
+    for (int col = 0; col < m_TableHeader.size() - 1; ++col)
         html.write(QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + m_TableHeader[col] + "</th>").toUtf8().data());
-    }
 
     html.write("</tr></thead>\n");
 }
@@ -362,16 +339,14 @@ void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
 void DeviceBaseInfo::tableInfoToDoc(Docx::Table *tab, int &row)
 {
     // 表格信息保存为Doc
-    if (tab == nullptr) {
+    if (nullptr == tab)
         return;
-    }
 
     // 获取表格数据
     getTableData();
 
-    if (m_TableData.size() < 1) {
+    if (m_TableData.size() < 1)
         return;
-    }
 
     // 添加doc表格
     for (int col = 0; col < m_TableData.size(); ++col) {
@@ -385,9 +360,8 @@ void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
     // 表头保存为doc
     getTableHeader();
 
-    if (m_TableHeader.size() < 1) {
+    if (m_TableHeader.size() < 1)
         return;
-    }
 
     // 添加表头信息
     for (int col = 0; col < m_TableHeader.size() - 1; ++col)  {
@@ -402,15 +376,13 @@ void DeviceBaseInfo::tableInfoToXlsx(QXlsx::Document &xlsx)
     // 获取表格信息
     getTableData();
 
-    if (m_TableData.size() < 1) {
+    if (m_TableData.size() < 1)
         return;
-    }
 
     // 添加表格信息
     int curRow = DeviceManager::instance()->currentXlsRow();
-    for (int col = 0; col < m_TableData.size(); ++col) {
+    for (int col = 0; col < m_TableData.size(); ++col)
         xlsx.write(curRow, col + 1, m_TableData[col]);
-    }
 }
 
 void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
@@ -418,9 +390,8 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
     // 获取表头
     getTableHeader();
 
-    if (m_TableHeader.size() < 1) {
+    if (m_TableHeader.size() < 1)
         return;
-    }
 
     // 添加表头信息
     int curRow = DeviceManager::instance()->currentXlsRow();
@@ -481,40 +452,34 @@ void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
         QString k = DApplication::translate("QObject", it.key().trimmed().toStdString().data());
 
         // 可显示设备属性中存在该属性
-        if (m_FilterKey.find(k) != m_FilterKey.end()) {
+        if (m_FilterKey.find(k) != m_FilterKey.end())
             m_MapOtherInfo.insert(k, it.value().trimmed());
-//            m_LstOtherInfo.append(QPair<QString, QString>(k, it.value().trimmed()));
-        }
     }
 }
 
 void DeviceBaseInfo::addBaseDeviceInfo(const QString &key, const QString &value)
 {
     // 添加基础设备信息
-    if (!value.isEmpty()) {
+    if (!value.isEmpty())
         m_LstBaseInfo.append(QPair<QString, QString>(key, value));
-    }
 }
 
 void DeviceBaseInfo::addOtherDeviceInfo(const QString &key, const QString &value)
 {
     // 添加其他设备信息
-    if (!value.isEmpty()) {
+    if (!value.isEmpty())
         m_LstOtherInfo.insert(0, QPair<QString, QString>(key, value));
-    }
 }
 
 void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite)
 {
     // map中存在该属性
-    if (mapInfo.find(key) == mapInfo.end()) {
+    if (mapInfo.find(key) == mapInfo.end())
         return;
-    }
 
     // 属性值不能为空
-    if (mapInfo[key] == "") {
+    if (mapInfo[key] == "")
         return;
-    }
 
     // overwrite 为true直接覆盖
     if (overwrite) {
@@ -522,13 +487,11 @@ void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const Q
     } else {
 
         // overwrite 为false,如果当前属性值为空或unknown时可覆盖
-        if (variable.isEmpty()) {
+        if (variable.isEmpty())
             variable = mapInfo[key].trimmed();
-        }
 
-        if (variable.contains("Unknown", Qt::CaseInsensitive)) {
+        if (variable.contains("Unknown", Qt::CaseInsensitive))
             variable = mapInfo[key].trimmed();
-        }
     }
 }
 
@@ -539,8 +502,7 @@ void DeviceBaseInfo::mapInfoToList()
     auto iter = m_MapOtherInfo.begin();
 
     for (; iter != m_MapOtherInfo.end(); ++iter) {
-        if (isValueValid(iter.value())) {
+        if (isValueValid(iter.value()))
             m_LstOtherInfo.append(QPair<QString, QString>(iter.key(), iter.value()));
-        }
     }
 }

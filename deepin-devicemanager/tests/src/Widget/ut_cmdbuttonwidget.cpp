@@ -41,5 +41,5 @@ TEST_F(CmdButtonWidget_UT, ut_paintEvent)
 {
     QPaintEvent paint(QRect(m_cmdBtnWidget->rect()));
     m_cmdBtnWidget->paintEvent(&paint);
-    m_cmdBtnWidget->expandCommandLinkClicked();
+    //    m_cmdBtnWidget->expandCommandLinkClicked();
 }

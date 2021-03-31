@@ -62,8 +62,6 @@ TEST_F(PageListView_UT, PageListView_UT_paintEvent)
 
 TEST_F(PageListView_UT, PageListView_UT_slotActionRefresh)
 {
-    m_pageListView->slotActionRefresh();
-    m_pageListView->slotActionExport();
     QModelIndex index;
     m_pageListView->slotListViewItemClicked(index);
 }

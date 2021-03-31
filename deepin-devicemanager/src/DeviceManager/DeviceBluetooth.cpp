@@ -43,12 +43,11 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     // 判断是不是同一个蓝牙设备，由于条件限制，现在只能通过厂商判断
     QStringList vendor = mapInfo["Vendor"].split(" ");
-    if (vendor.size() < 1) {
+    if (vendor.size() < 1)
         return false;
-    }
-    if (!m_Vendor.contains(vendor[0])) {
+
+    if (!m_Vendor.contains(vendor[0]))
         return false;
-    }
 
     // 获取设备基本信息
     setAttribute(mapInfo, "Revision", m_Version);
@@ -73,9 +72,8 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // 根据 总线信息 与 设备信息中的唯一key值 判断是否是同一台设备
-    if (mapInfo["bus info"] != m_UniqueKey) {
+    if (mapInfo["bus info"] != m_UniqueKey)
         return false;
-    }
 
     // 获取基本信息
     setAttribute(mapInfo, "vendor", m_Vendor);
@@ -118,9 +116,9 @@ EnableDeviceStatus DeviceBluetooth::setEnable(bool e)
 {
     // 设置设备状态
     EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    if (e != enable()) {
+    if (e != enable())
         res = EDS_Faild;
-    }
+
     return res;
 }
 
@@ -179,14 +177,12 @@ void DeviceBluetooth::parseKeyToLshw(const QString &info)
 
     //1-2:1.0
     QStringList words = info.split(":");
-    if (words.size() != 2) {
+    if (words.size() != 2)
         return;
-    }
 
     QStringList chs = words[0].split("-");
-    if (chs.size() != 2) {
+    if (chs.size() != 2)
         return;
-    }
 
     // usb@%1:%2
     m_UniqueKey = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
@@ -212,11 +208,10 @@ void DeviceBluetooth::loadTableData()
 {
     // 加载表格数据
     QString name;
-    if (!enable()) {
+    if (!enable())
         name = "(" + tr("Disable") + ") " + m_Name;
-    } else {
+    else
         name = m_Name;
-    }
 
     m_TableData.append(name);
     m_TableData.append(m_Vendor);

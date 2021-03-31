@@ -99,16 +99,6 @@ private slots:
     void slotShowMenu(const QPoint &);
 
     /**
-     * @brief slotActionRefresh:右键菜单刷新槽函数
-     */
-    void slotActionRefresh();
-
-    /**
-     * @brief slotActionExport:右键菜单导出槽函数
-     */
-    void slotActionExport();
-
-    /**
      * @brief slotActionCopy
      */
     void slotActionCopy();

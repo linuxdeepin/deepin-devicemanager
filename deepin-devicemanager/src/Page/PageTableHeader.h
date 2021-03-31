@@ -86,30 +86,6 @@ signals:
 protected:
     void paintEvent(QPaintEvent *e) override;
 
-private slots:
-    /**
-     * @brief slotItemClicked:Item 点击槽函数
-     * @param row:点击某行的行号
-     */
-    void slotItemClicked(int row);
-
-    /**
-     * @brief slotRefreshInfo:刷新信息槽函数
-     */
-    void slotRefreshInfo();
-
-    /**
-     * @brief slotExportInfo:导出信息槽函数
-     */
-    void slotExportInfo();
-
-    /**
-     * @brief slotEnableDevice 启用禁用设备
-     * @param row 行号
-     * @param enable 禁用/启用
-     */
-    void slotEnableDevice(int row, bool enable);
-
 private:
     /**
      * @brief initWidgets : 初始化界面布局

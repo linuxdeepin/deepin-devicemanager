@@ -142,18 +142,16 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         m_FrequencyIsRange = true;
 
         // 如果最大最小频率相等则不显示范围
-        if (fabs(minHz - maxHz) < 0.001) {
+        if (fabs(minHz - maxHz) < 0.001)
             m_FrequencyIsRange = false;
-        }
 
     }
 
     //获取扩展指令集
     QStringList orders = {"MMX", "SSE", "SSE2", "SSE3", "3D Now", "SSE4", "SSSE3", "SSE4_1", "SSE4_2", "AMD64", "EM64T"};
     foreach (const QString &order, orders) {
-        if (mapInfo["Flags"].contains(order, Qt::CaseInsensitive)) {
+        if (mapInfo["Flags"].contains(order, Qt::CaseInsensitive))
             m_Extensions += QString("%1 ").arg(order);
-        }
     }
 
     // 获取其他属性
@@ -164,11 +162,10 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // longxin CPU型号不从lshw中获取
     // bug39874
-    if (m_Name.contains("Loongson", Qt::CaseInsensitive)) {
+    if (m_Name.contains("Loongson", Qt::CaseInsensitive))
         setAttribute(mapInfo, "version", m_Name, false);
-    } else {
+    else
         setAttribute(mapInfo, "version", m_Name);
-    }
 
     // 获取设备基本信息
     setAttribute(mapInfo, "vendor", m_Vendor);
@@ -219,12 +216,11 @@ void DeviceCpu::setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "cpu MHz", m_Frequency, false);
 
     // 将频率的单位换为MHz
-    if (m_Frequency.contains(".")) {
+    if (m_Frequency.contains("."))
         m_Frequency.replace(QRegExp("\\.00"), "MHz");
-    }
-    if (!m_Frequency.contains("MHz") && !m_Frequency.contains("GHz")) {
+
+    if (!m_Frequency.contains("MHz") && !m_Frequency.contains("GHz"))
         m_Frequency += "MHz";
-    }
 
     // 获取其他cpu信息
     getOtherMapInfo(mapInfo);

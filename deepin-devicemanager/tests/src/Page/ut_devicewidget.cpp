@@ -72,8 +72,6 @@ TEST_F(DeviceWidget_UT, ut_updateOverview)
 TEST_F(DeviceWidget_UT, ut_slotRefreshInfo)
 {
     m_dWidget->initWidgets();
-    m_dWidget->slotRefreshInfo();
-    m_dWidget->slotExportInfo();
     m_dWidget->slotUpdateUI();
 }
 

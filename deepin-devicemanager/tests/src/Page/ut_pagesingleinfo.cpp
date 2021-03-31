@@ -60,8 +60,6 @@ TEST_F(PageSingleInfo_UT, PageSingleInfo_UT_setLabel)
 
 TEST_F(PageSingleInfo_UT, PageSingleInfo_UT_slotActionRefresh)
 {
-    m_PageSingleInfo->slotActionRefresh();
-    m_PageSingleInfo->slotActionExport();
     m_PageSingleInfo->slotActionCopy();
     m_PageSingleInfo->slotShowMenu(QPoint(0, 0));
 }

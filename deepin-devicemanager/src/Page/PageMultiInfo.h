@@ -95,16 +95,6 @@ private slots:
     void slotItemClicked(int row);
 
     /**
-     * @brief slotRefreshInfo:刷新槽函数
-     */
-    void slotRefreshInfo();
-
-    /**
-     * @brief slotExportInfo:单导出槽函数
-     */
-    void slotExportInfo();
-
-    /**
      * @brief slotEnableDevice
      * @param row
      * @param enable

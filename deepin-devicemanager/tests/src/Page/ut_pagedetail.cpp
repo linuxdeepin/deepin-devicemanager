@@ -140,8 +140,6 @@ TEST_F(PageDetail_UT, PageDetail_UT_addWidgets)
 {
     TextBrowser *m_tBrowser = new TextBrowser;
     m_pageDetail->addWidgets(m_tBrowser, true);
-    m_pageDetail->slotExportInfo();
     m_pageDetail->slotCopyAllInfo();
-    m_pageDetail->slotRefreshInfo();
     delete m_tBrowser;
 }

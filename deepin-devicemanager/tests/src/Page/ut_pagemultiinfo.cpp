@@ -60,7 +60,5 @@ TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_setLabel)
 TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_slotItemClicked)
 {
     m_pageMultiInfo->slotItemClicked(0);
-    m_pageMultiInfo->slotRefreshInfo();
-    m_pageMultiInfo->slotExportInfo();
     m_pageMultiInfo->slotEnableDevice(0, true);
 }
