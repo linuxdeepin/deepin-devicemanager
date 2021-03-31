@@ -66,7 +66,7 @@ TEST_F(DeviceWidget_UT, ut_updateOverview)
 {
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
-    m_dWidget->updateOverview("/", mapinfo);
+    m_dWidget->updateOverview(mapinfo);
 }
 
 TEST_F(DeviceWidget_UT, ut_slotRefreshInfo)

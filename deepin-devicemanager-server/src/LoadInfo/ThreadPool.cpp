@@ -29,6 +29,20 @@ void ThreadPool::generateDeviceFile()
     }
 }
 
+void ThreadPool::updateDeviceFile()
+{
+    // 根据m_ListCmd生成所有设备信息
+    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
+    cleaner->setParent(this);
+    QList<Cmd>::iterator it = m_ListUpdate.begin();
+    for (; it != m_ListUpdate.end(); ++it) {
+        ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
+        cleaner->add(task);
+        start(task);
+        task->setAutoDelete(true);
+    }
+}
+
 void ThreadPool::initCmd()
 {
     // According to Huawei's requirements , Modify the way of judging klu and panguv
@@ -52,6 +66,7 @@ void ThreadPool::initCmd()
     cmdLshw.file = "lshw.txt";
     cmdLshw.canNotReplace = false;
     m_ListCmd.append(cmdLshw);
+    m_ListUpdate.append(cmdLshw);
 
     // 添加dmidecode -t 0命令
     Cmd cmdDmi0;
@@ -115,6 +130,7 @@ void ThreadPool::initCmd()
     cmdHwinfoSound.file = "hwinfo_sound.txt";
     cmdHwinfoSound.canNotReplace = false;
     m_ListCmd.append(cmdHwinfoSound);
+    m_ListUpdate.append(cmdHwinfoSound);
 
     // 添加hwinfo --usb命令
     Cmd cmdHwinfoUsb;
@@ -122,6 +138,7 @@ void ThreadPool::initCmd()
     cmdHwinfoUsb.file = "hwinfo_usb.txt";
     cmdHwinfoUsb.canNotReplace = false;
     m_ListCmd.append(cmdHwinfoUsb);
+    m_ListUpdate.append(cmdHwinfoUsb);
 
     // 添加hwinfo --network命令
     Cmd cmdHwinfoNetwork;
@@ -129,6 +146,7 @@ void ThreadPool::initCmd()
     cmdHwinfoNetwork.file = "hwinfo_network.txt";
     cmdHwinfoNetwork.canNotReplace = false;
     m_ListCmd.append(cmdHwinfoNetwork);
+    m_ListUpdate.append(cmdHwinfoNetwork);
 
     // 添加hwinfo --keyboard命令
     Cmd cmdHwinfoKeyboard;
@@ -136,6 +154,7 @@ void ThreadPool::initCmd()
     cmdHwinfoKeyboard.file = "hwinfo_keyboard.txt";
     cmdHwinfoKeyboard.canNotReplace = false;
     m_ListCmd.append(cmdHwinfoKeyboard);
+    m_ListUpdate.append(cmdHwinfoKeyboard);
 
     // 添加hwinfo --network命令
     Cmd cmdHwinfoCdrom;
@@ -143,6 +162,7 @@ void ThreadPool::initCmd()
     cmdHwinfoCdrom.file = "hwinfo_cdrom.txt";
     cmdHwinfoCdrom.canNotReplace = false;
     m_ListCmd.append(cmdHwinfoCdrom);
+    m_ListUpdate.append(cmdHwinfoCdrom);
 
     // 添加hwinfo --disk命令
     Cmd cmdHwinfoDisk;
@@ -150,6 +170,7 @@ void ThreadPool::initCmd()
     cmdHwinfoDisk.file = "hwinfo_disk.txt";
     cmdHwinfoDisk.canNotReplace = false;
     m_ListCmd.append(cmdHwinfoDisk);
+    m_ListUpdate.append(cmdHwinfoDisk);
 
     // 添加hwinfo --display命令
     Cmd cmdHwinfoDisplay;
@@ -157,6 +178,7 @@ void ThreadPool::initCmd()
     cmdHwinfoDisplay.file = "hwinfo_display.txt";
     cmdHwinfoDisplay.canNotReplace = true;
     m_ListCmd.append(cmdHwinfoDisplay);
+    m_ListUpdate.append(cmdHwinfoDisplay);
 
     // 添加hwinfo --mouse命令
     Cmd cmdHwinfoMouse;
@@ -164,6 +186,7 @@ void ThreadPool::initCmd()
     cmdHwinfoMouse.file = "hwinfo_mouse.txt";
     cmdHwinfoMouse.canNotReplace = false;
     m_ListCmd.append(cmdHwinfoMouse);
+    m_ListUpdate.append(cmdHwinfoMouse);
 
     // 添加hwinfo --power命令
     Cmd cmdUpower;
@@ -171,6 +194,7 @@ void ThreadPool::initCmd()
     cmdUpower.file = "upower_dump.txt";
     cmdUpower.canNotReplace = true;
     m_ListCmd.append(cmdUpower);
+    m_ListUpdate.append(cmdUpower);
 
     // 添加lscpu命令
     Cmd cmdLscpu;
@@ -178,6 +202,7 @@ void ThreadPool::initCmd()
     cmdLscpu.file = "lscpu.txt";
     cmdLscpu.canNotReplace = true;
     m_ListCmd.append(cmdLscpu);
+    m_ListUpdate.append(cmdLscpu);
 
     // 添加lsblk -d -o name,rota命令
     Cmd cmdLsblk;
@@ -185,6 +210,7 @@ void ThreadPool::initCmd()
     cmdLsblk.file = "lsblk_d.txt";
     cmdLsblk.canNotReplace = false;
     m_ListCmd.append(cmdLsblk);
+    m_ListUpdate.append(cmdLsblk);
 
     // 添加lsblk -d -o name,rota命令
     Cmd cmdLssg;
@@ -192,6 +218,7 @@ void ThreadPool::initCmd()
     cmdLssg.file = "ls_sg.txt";
     cmdLssg.canNotReplace = false;
     m_ListCmd.append(cmdLssg);
+    m_ListUpdate.append(cmdLssg);
 
     // 添加lspci命令
     Cmd cmdLspci;
@@ -199,6 +226,7 @@ void ThreadPool::initCmd()
     cmdLspci.file = "lspci.txt";
     cmdLspci.canNotReplace = false;
     m_ListCmd.append(cmdLspci);
+    m_ListUpdate.append(cmdLspci);
 
     // 添加lpstat -a命令
     Cmd cmdLpstate;
@@ -206,12 +234,14 @@ void ThreadPool::initCmd()
     cmdLpstate.file = "lpstat.txt";
     cmdLpstate.canNotReplace = false;
     m_ListCmd.append(cmdLpstate);
+    m_ListUpdate.append(cmdLpstate);
 
     // 添加dmesg命令
     Cmd cmdDmesg;
     cmdDmesg.cmd = QString("%1 %2%3").arg("dmesg > ").arg(PATH).arg("dmesg.txt");
     cmdDmesg.file = "dmesg.txt";
     cmdDmesg.canNotReplace = true;
+    m_ListCmd.append(cmdDmesg);
     m_ListCmd.append(cmdDmesg);
 
     // 添加hciconfig -a命令
@@ -220,6 +250,7 @@ void ThreadPool::initCmd()
     cmdHciconfig.file = "hciconfig.txt";
     cmdHciconfig.canNotReplace = false;
     m_ListCmd.append(cmdHciconfig);
+    m_ListCmd.append(cmdHciconfig);
 
     // 添加bluetoothctl paired-devices命令
     Cmd cmdBluetooth;
@@ -227,6 +258,7 @@ void ThreadPool::initCmd()
     cmdBluetooth.file = "bt_device.txt";
     cmdBluetooth.canNotReplace = false;
     cmdBluetooth.waitingTime = 500;
+    m_ListCmd.append(cmdBluetooth);
     m_ListCmd.append(cmdBluetooth);
 
 

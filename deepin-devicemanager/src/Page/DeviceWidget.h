@@ -59,10 +59,9 @@ public:
 
     /**
      * @brief updateOverview:更新概况界面
-     * @param itemStr:概况
      * @param map:概况信息map
      */
-    void updateOverview(const QString &itemStr, const QMap<QString, QString> &map);
+    void updateOverview(const QMap<QString, QString> &map);
 
     /**
      * @brief currentIndex:当前设备类型

@@ -57,7 +57,7 @@ void DeviceWidget::updateDevice(const QString &itemStr, const QList<DeviceBaseIn
     }
 }
 
-void DeviceWidget::updateOverview(const QString &itemStr, const QMap<QString, QString> &map)
+void DeviceWidget::updateOverview(const QMap<QString, QString> &map)
 {
     if (map.size() == 0) {
         return;
@@ -65,7 +65,7 @@ void DeviceWidget::updateOverview(const QString &itemStr, const QMap<QString, QS
 
     // 更新概况
     if (mp_PageInfo) {
-        mp_PageInfo->updateTable(itemStr, map);
+        mp_PageInfo->updateTable(map);
     }
 }
 
@@ -134,7 +134,7 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
     } else {
         // 更新Overview界面
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
-        mp_PageInfo->updateTable(deviceType, overviewMap);
+        mp_PageInfo->updateTable(overviewMap);
     }
 }
 

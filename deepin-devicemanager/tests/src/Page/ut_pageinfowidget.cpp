@@ -61,7 +61,7 @@ TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_updateTable2)
     m_pageInfoWidget->mp_PageInfo = dynamic_cast<PageInfo *>(p);
     QMap<QString, QString> map;
     map.insert("/", "/");
-    m_pageInfoWidget->updateTable("", map);
+    m_pageInfoWidget->updateTable(map);
     delete p;
 }
 

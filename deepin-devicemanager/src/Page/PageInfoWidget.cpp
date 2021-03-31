@@ -82,7 +82,7 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseI
     }
 }
 
-void PageInfoWidget::updateTable(const QString &itemStr, const QMap<QString, QString> &map)
+void PageInfoWidget::updateTable(const QMap<QString, QString> &map)
 {
     // 更新概况界面
     mp_PageOverviewInfo->setVisible(true);

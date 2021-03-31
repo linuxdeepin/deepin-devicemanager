@@ -22,12 +22,12 @@ PageInfo::PageInfo(QWidget *parent)
 
 }
 
-void PageInfo::updateInfo(const QMap<QString, QString> &map)
+void PageInfo::updateInfo(const QMap<QString, QString> &)
 {
 
 }
 
-void PageInfo::setLabel(const QString &str1, const QString &str2)
+void PageInfo::setLabel(const QString &, const QString &)
 {
 
 }

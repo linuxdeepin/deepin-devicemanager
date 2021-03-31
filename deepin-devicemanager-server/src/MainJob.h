@@ -25,6 +25,12 @@ public:
      */
     void executeClientInstruction(const QString &instructions);
 
+    /**
+     * @brief isZhaoXin
+     * @return
+     */
+    bool isZhaoXin();
+
 private slots:
     /**
      * @brief slotUsbChanged
@@ -36,6 +42,11 @@ private slots:
      * @param instructions
      */
     void slotExecuteClientInstructions(const QString &instructions);
+
+    /**
+     * @brief onFirstUpdate
+     */
+    void onFirstUpdate();
 
 private:
 
@@ -85,6 +96,7 @@ private:
     bool                  m_UpdateUI;             //<! 客户端请求更新
     QTimer                *mp_Timer;              //<! 定时器
     DBusInterface         *mp_IFace;              //<! Dbus interface
+    bool                  m_FirstUpdate;
 
 };
 

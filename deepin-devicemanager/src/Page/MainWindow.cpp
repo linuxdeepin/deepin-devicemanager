@@ -387,7 +387,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         mp_DeviceWidget->updateDevice(itemStr, lst);
     } else {
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
-        mp_DeviceWidget->updateOverview(itemStr, overviewMap);
+        mp_DeviceWidget->updateOverview(overviewMap);
     }
 }
 

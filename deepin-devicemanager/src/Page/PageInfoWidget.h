@@ -56,10 +56,9 @@ public:
 
     /**
      * @brief updateTable: 更新表格
-     * @param itemStr:概况
      * @param map:概况信息map
      */
-    void updateTable(const QString &itemStr, const QMap<QString, QString> &map);
+    void updateTable(const QMap<QString, QString> &map);
 
 protected:
     virtual void resizeEvent(QResizeEvent *event) override;

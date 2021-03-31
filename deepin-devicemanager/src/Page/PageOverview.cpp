@@ -99,7 +99,7 @@ void PageOverview::clearWidgets()
     return;
 }
 
-void PageOverview::setLabel(const QString &itemstr)
+void PageOverview::setLabel(const QString &)
 {
 
 }

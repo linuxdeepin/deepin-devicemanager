@@ -27,9 +27,16 @@ MainJob::MainJob(QObject *parent)
     , mp_DetectThread(nullptr)
     , m_UpdateUI(false)
     , mp_IFace(new DBusInterface)
+    , m_FirstUpdate(true)
 {
     // 守护进程启动的时候加载所有信息
-    updateAllDevice();
+    if (!isZhaoXin()) {
+        qInfo() << "001 ************************************* Not ZhaoXin Meche";
+        updateAllDevice();
+    } else {
+        qInfo() << "002 ************************************* ZhaoXin Meche";
+        QTimer::singleShot(40 * 1000, this, &MainJob::onFirstUpdate);
+    }
 }
 
 MainJob::~MainJob()
@@ -44,7 +51,7 @@ void MainJob::working()
 {
     // 启动dbus
     if (!initDBus()) {
-        qInfo() << " Failed to init dbus ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ";
+        qInfo() << "005 ************************************* Failed to Init Dbus";
         exit(1);
     }
 
@@ -70,10 +77,27 @@ void MainJob::working()
 void MainJob::executeClientInstruction(const QString &instructions)
 {
     if (instructions.startsWith("UPDATE_UI")) {
+        if (m_FirstUpdate) {
+            updateAllDevice();
+        }
         mp_ZmqServer->setReturnStr("2");
         return ;
     }
     handleInstruction("ZMQ#" + instructions);
+}
+
+bool MainJob::isZhaoXin()
+{
+    QString cmd = "sudo dmidecode -t 4";
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(-1);
+    QString info = process.readAllStandardOutput();
+    if (info.contains("ZHAOXIN KaiXian KX-U")) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void MainJob::slotUsbChanged()
@@ -84,6 +108,16 @@ void MainJob::slotUsbChanged()
 void MainJob::slotExecuteClientInstructions(const QString &instructions)
 {
     handleInstruction("ZMQ#" + instructions);
+}
+
+void MainJob::onFirstUpdate()
+{
+    if (m_FirstUpdate) {
+        qInfo() << "003 ************************************* First Update In QTimer";
+        updateAllDevice();
+    } else {
+        qInfo() << "004 ************************************* Not Update but In QTimer";
+    }
 }
 
 void MainJob::handleInstruction(const QString &instruction)
@@ -114,10 +148,14 @@ void MainJob::handleInstruction(const QString &instruction)
 void MainJob::updateAllDevice()
 {
     PERF_PRINT_BEGIN("POINT-01", "MainJob::updateAllDevice()");
-    mp_Pool->generateDeviceFile();
+    if (m_FirstUpdate)
+        mp_Pool->generateDeviceFile();
+    else
+        mp_Pool->updateDeviceFile();
     mp_Pool->waitForDone(-1);
     sleep(1);
     PERF_PRINT_END("POINT-01");
+    m_FirstUpdate = false;
 }
 
 void MainJob::nullInstruction()

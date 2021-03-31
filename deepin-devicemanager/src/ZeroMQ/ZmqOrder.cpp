@@ -5,7 +5,8 @@
 #include <QDateTime>
 
 ZmqOrder::ZmqOrder(QObject *parent)
-    : mp_Req(new ZMQBase())
+    : QObject(parent)
+    , mp_Req(new ZMQBase())
     , m_EndPoint("tcp://127.0.0.1:8700")
 {
 

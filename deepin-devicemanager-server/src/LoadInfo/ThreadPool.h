@@ -60,6 +60,11 @@ public:
      */
     void generateDeviceFile();
 
+    /**
+     * @brief updateDeviceFile
+     */
+    void updateDeviceFile();
+
 private:
     /**
      * @brief initCmd init all cmd
@@ -68,6 +73,7 @@ private:
 
 private:
     QList<Cmd>        m_ListCmd;             // all cmd
+    QList<Cmd>        m_ListUpdate;          // update cmd
 };
 
 #endif // THREADPOOL_H
