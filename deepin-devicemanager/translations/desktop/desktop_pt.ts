@@ -4,7 +4,7 @@
 <message>
 <location filename="Desktop Entry]Comment" line="0"/>
 <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-<translation>O Gestor de Dispositivos é uma ferramenta útil para visualizar informações de hardware e gerir os dispositivos.</translation>
+<translation>O Gestor de Dispositivos é uma ferramenta útil para visualizar informações do equipamento e gerir os dispositivos.</translation>
 </message>
 <message>
 <location filename="Desktop Entry]GenericName" line="0"/>
