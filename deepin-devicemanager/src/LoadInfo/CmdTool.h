@@ -259,6 +259,12 @@ private:
     void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
 
     /**
+     * @brief addWidthToMap
+     * @param mapInfo
+     */
+    void addWidthToMap(QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief getMapInfoFromDmidecode:将通过命令获取的信息字符串，转化为map形式
      * @param info:命令获取的信息字符串
      * @param mapInfo:解析字符串保存为map形式

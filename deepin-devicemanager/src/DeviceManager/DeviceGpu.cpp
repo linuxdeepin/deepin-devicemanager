@@ -77,7 +77,7 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "", m_GraphicsMemory);
-    setAttribute(mapInfo, "width", m_Width);
+    setAttribute(mapInfo, "width", m_Width, false);
     setAttribute(mapInfo, "", m_DisplayPort);
     setAttribute(mapInfo, "clock", m_Clock);
     setAttribute(mapInfo, "irq", m_IRQ);
@@ -108,6 +108,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version, false);
     setAttribute(mapInfo, "IRQ", m_IRQ, false);
     setAttribute(mapInfo, "Driver", m_Driver, false);
+    setAttribute(mapInfo, "Width", m_Width);
     setAttribute(mapInfo, "", m_GraphicsMemory);
     setAttribute(mapInfo, "", m_DisplayOutput);
     setAttribute(mapInfo, "", m_VGA);

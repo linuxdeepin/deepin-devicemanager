@@ -83,6 +83,10 @@ void ThreadPoolTask::runCmdToCache(const QString &cmd)
         loadLspciVSInfoToCache(info);
     }
 
+    if ("hwinfo_display.txt" == m_File) {
+        loadDisplayWidth(info);
+    }
+
     DeviceInfoManager::getInstance()->addInfo(key, info);
 }
 
@@ -139,6 +143,48 @@ void ThreadPoolTask::loadLspciVSInfoToCache(const QString &info)
     }
 }
 
+void ThreadPoolTask::loadDisplayWidth(const QString &info)
+{
+    QString widthS;
+    QStringList params = info.split("\n\n");
+    foreach (const QString &param, params) {
+
+        QStringList lines = param.split("\n");
+        if (lines.size() < 5)
+            continue;
+        foreach (const QString &line, lines) {
+            if (line.contains("SysFS ID")) {
+                QString pci = line.right(7);
+                int width = getDisplayWidthFromLspci(pci);
+                widthS += pci;
+                widthS += "-";
+                widthS += QString::number(width);
+                widthS += "\n";
+                break;
+            }
+        }
+
+        DeviceInfoManager::getInstance()->addInfo("width", widthS);
+    }
+}
+
+int ThreadPoolTask::getDisplayWidthFromLspci(const QString &info)
+{
+    QString cmd = QString("lspci -v -s %1").arg(info);
+    QString sInfo;
+    runCmd(cmd, sInfo);
+    QStringList lines = sInfo.split("\n");
+    foreach (const QString &line, lines) {
+        if (!line.contains("Memory at")) {
+            continue;
+        }
+        if (line.contains("32-bit"))
+            return 32;
+        else
+            return 64;
+    }
+    return 64;
+}
 
 void ThreadPoolTask::runCmdToFile(const QString &cmd)
 {

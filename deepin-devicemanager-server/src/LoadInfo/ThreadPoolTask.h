@@ -82,6 +82,19 @@ private:
     void loadLspciVSInfoToCache(const QString &info);
 
     /**
+     * @brief loadDisplayWidth
+     * @param info
+     */
+    void loadDisplayWidth(const QString &info);
+
+    /**
+     * @brief getDisplayWidthFromLspci
+     * @param info
+     * @return
+     */
+    int getDisplayWidthFromLspci(const QString &info);
+
+    /**
      * @brief runCmdToTxt
      * @param cmd
      */
