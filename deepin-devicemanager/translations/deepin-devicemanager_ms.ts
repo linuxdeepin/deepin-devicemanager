@@ -216,7 +216,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="217"/>
         <source>Disable</source>
-        <translation>Lumpuhkan</translation>
+        <translation>Lumpuh</translation>
     </message>
 </context>
 <context>
@@ -269,7 +269,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="141"/>
         <source>Disable</source>
-        <translation>Lumpuhkan</translation>
+        <translation>Lumpuh</translation>
     </message>
 </context>
 <context>
@@ -1951,7 +1951,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="147"/>
         <source>Device Class</source>
-        <translation>Kelas</translation>
+        <translation>Kelas Peranti</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="148"/>

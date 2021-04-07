@@ -502,7 +502,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="220"/>
         <source>Display Output</source>
-        <translation>Dalje Ekrani</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
@@ -865,7 +865,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="218"/>
         <source>Display Input</source>
-        <translation>Hyrje Ekrani</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="219"/>
@@ -2538,7 +2538,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <source>Display Adapter</source>
-        <translation>Përshtatës Ekrani</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="819"/>

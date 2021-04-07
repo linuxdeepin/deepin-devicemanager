@@ -302,7 +302,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
         <source>Core ID</source>
-        <translation>Core ID</translation>
+        <translation>ID Nucleu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
@@ -1177,7 +1177,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="143"/>
         <source>Serial Number</source>
-        <translation>Numar Serie</translation>
+        <translation>Număr Serie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="144"/>
@@ -1312,7 +1312,7 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="336"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="367"/>
         <source>Size</source>
-        <translation>Capacitate</translation>
+        <translation>Mărime</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="337"/>
