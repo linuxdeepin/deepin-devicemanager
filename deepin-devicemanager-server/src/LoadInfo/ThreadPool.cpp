@@ -242,7 +242,7 @@ void ThreadPool::initCmd()
     cmdDmesg.file = "dmesg.txt";
     cmdDmesg.canNotReplace = true;
     m_ListCmd.append(cmdDmesg);
-    m_ListCmd.append(cmdDmesg);
+    //m_ListUpdate.append(cmdDmesg);
 
     // 添加hciconfig -a命令
     Cmd cmdHciconfig;
@@ -250,7 +250,7 @@ void ThreadPool::initCmd()
     cmdHciconfig.file = "hciconfig.txt";
     cmdHciconfig.canNotReplace = false;
     m_ListCmd.append(cmdHciconfig);
-    m_ListCmd.append(cmdHciconfig);
+    m_ListUpdate.append(cmdHciconfig);
 
     // 添加bluetoothctl paired-devices命令
     Cmd cmdBluetooth;
@@ -259,7 +259,7 @@ void ThreadPool::initCmd()
     cmdBluetooth.canNotReplace = false;
     cmdBluetooth.waitingTime = 500;
     m_ListCmd.append(cmdBluetooth);
-    m_ListCmd.append(cmdBluetooth);
+    m_ListUpdate.append(cmdBluetooth);
 
 
 

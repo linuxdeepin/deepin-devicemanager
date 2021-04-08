@@ -454,8 +454,8 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
         getMapInfoFromHwinfo(item, mapInfo);
 
         // 添加显卡位宽
-        if (key == "hwinfo_display")
-            addWidthToMap(mapInfo);
+//        if (key == "hwinfo_display")
+//            addWidthToMap(mapInfo);
 
         // hwinfo --usb 里面有很多的无用信息，需要特殊处理
         if (key == "hwinfo_usb") {

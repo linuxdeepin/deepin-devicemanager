@@ -1,6 +1,5 @@
 #include "MainJob.h"
 #include <QDebug>
-#include "DetectJob.h"
 #include "ThreadPool.h"
 #include "RRServer.h"
 #include "DetectThread.h"

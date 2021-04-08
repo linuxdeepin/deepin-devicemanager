@@ -43,18 +43,15 @@ void MonitorUsb::monitor()
 
         // 获取事件并判断是否是插拔
         unsigned long long curNum = udev_device_get_devnum(dev);
-        if (curNum == 0) {
+        if (curNum <= 0) {
+            udev_device_unref(dev);
             continue;
         }
+
+        // 只有add和remove事件才会更新缓存信息
         strcpy(buf, udev_device_get_action(dev));
-        if (0 == strcmp("add", buf) && m_DevAddNum != curNum) {
-            qInfo() << " add ***************************** DETECT  " << curNum << " ** " << m_DevAddNum;
-            m_DevAddNum = curNum;
-            emit usbChanged();
-        }
-        if (0 == strcmp("remove", buf) && m_DevRemoveNum != curNum) {
-            qInfo() << " remove ***************************** DETECT  " << curNum << " ** " << m_DevRemoveNum;
-            m_DevRemoveNum = curNum;
+        if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) {
+            qInfo() << QString::fromLocal8Bit(buf) << " ***************************** DETECT  " << curNum ;
             emit usbChanged();
         }
 
