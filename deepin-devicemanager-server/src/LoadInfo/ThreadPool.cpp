@@ -242,7 +242,7 @@ void ThreadPool::initCmd()
     cmdDmesg.file = "dmesg.txt";
     cmdDmesg.canNotReplace = true;
     m_ListCmd.append(cmdDmesg);
-    //m_ListUpdate.append(cmdDmesg);
+    m_ListUpdate.append(cmdDmesg);
 
     // 添加hciconfig -a命令
     Cmd cmdHciconfig;
@@ -261,44 +261,49 @@ void ThreadPool::initCmd()
     m_ListCmd.append(cmdBluetooth);
     m_ListUpdate.append(cmdBluetooth);
 
+    // 获取cat /boot/config* | grep '=y'信息
+    Cmd cmdLsMod;
+    cmdLsMod.cmd = QString("%1 %2%3").arg("cat /boot/config* | grep '=y' > ").arg(PATH).arg("dr_config.txt");
+    cmdLsMod.file = "dr_config.txt";
+    cmdLsMod.canNotReplace = true;
+    m_ListCmd.append(cmdLsMod);
 
+    //    if (info.contains("klu")) {
+    //        Cmd cmdGpuinfo;
+    //        cmdGpuinfo.cmd = "gpuinfo";
+    //        cmdGpuinfo.file = "gpuinfo.txt";
+    //        cmdGpuinfo.canNotReplace = true;
+    //        m_ListCmd.append(cmdGpuinfo);
 
-//    if (info.contains("klu")) {
-//        Cmd cmdGpuinfo;
-//        cmdGpuinfo.cmd = "gpuinfo";
-//        cmdGpuinfo.file = "gpuinfo.txt";
-//        cmdGpuinfo.canNotReplace = true;
-//        m_ListCmd.append(cmdGpuinfo);
+    //        Cmd cmdBootdevice;
+    //        cmdBootdevice.cmd = "cat /proc/bootdevice/product_name";
+    //        cmdBootdevice.file = "bootdevice.txt";
+    //        cmdBootdevice.canNotReplace = false;
+    //        m_ListCmd.append(cmdBootdevice);
 
-//        Cmd cmdBootdevice;
-//        cmdBootdevice.cmd = "cat /proc/bootdevice/product_name";
-//        cmdBootdevice.file = "bootdevice.txt";
-//        cmdBootdevice.canNotReplace = false;
-//        m_ListCmd.append(cmdBootdevice);
+    //    } else if (info.contains("panguV")) {
+    //        Cmd cmdGpuinfo;
+    //        cmdGpuinfo.cmd = "gpuinfo";
+    //        cmdGpuinfo.file = "gpuinfo.txt";
+    //        cmdGpuinfo.canNotReplace = true;
+    //        m_ListCmd.append(cmdGpuinfo);
 
-//    } else if (info.contains("panguV")) {
-//        Cmd cmdGpuinfo;
-//        cmdGpuinfo.cmd = "gpuinfo";
-//        cmdGpuinfo.file = "gpuinfo.txt";
-//        cmdGpuinfo.canNotReplace = true;
-//        m_ListCmd.append(cmdGpuinfo);
+    //        Cmd cmdBootdevice;
+    //        cmdBootdevice.cmd = "cat /proc/bootdevice/product_name";
+    //        cmdBootdevice.file = "bootdevice.txt";
+    //        cmdBootdevice.canNotReplace = false;
+    //        m_ListCmd.append(cmdBootdevice);
 
-//        Cmd cmdBootdevice;
-//        cmdBootdevice.cmd = "cat /proc/bootdevice/product_name";
-//        cmdBootdevice.file = "bootdevice.txt";
-//        cmdBootdevice.canNotReplace = false;
-//        m_ListCmd.append(cmdBootdevice);
+    //        Cmd cmdEdidHdmi;
+    //        cmdEdidHdmi.cmd = "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid";
+    //        cmdEdidHdmi.file = "EDID_HDMI.txt";
+    //        cmdEdidHdmi.canNotReplace = false;
+    //        m_ListCmd.append(cmdEdidHdmi);
 
-//        Cmd cmdEdidHdmi;
-//        cmdEdidHdmi.cmd = "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid";
-//        cmdEdidHdmi.file = "EDID_HDMI.txt";
-//        cmdEdidHdmi.canNotReplace = false;
-//        m_ListCmd.append(cmdEdidHdmi);
-
-//        Cmd cmdEdidVGA;
-//        cmdEdidVGA.cmd = "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid";
-//        cmdEdidVGA.file = "EDID_VGA.txt";
-//        cmdEdidVGA.canNotReplace = false;
-//        m_ListCmd.append(cmdEdidVGA);
-//    }
+    //        Cmd cmdEdidVGA;
+    //        cmdEdidVGA.cmd = "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid";
+    //        cmdEdidVGA.file = "EDID_VGA.txt";
+    //        cmdEdidVGA.canNotReplace = false;
+    //        m_ListCmd.append(cmdEdidVGA);
+    //    }
 }

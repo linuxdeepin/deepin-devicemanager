@@ -204,6 +204,12 @@ private:
     void loadGpuInfo(const QString &key, const QString &debugfile);
 
     /**
+     * @brief loadCatConfigInfo:cat /boot/config* | grep '=y'信息
+     * @param key:dr_config
+     * @param debugfile:调试文件名
+     */
+    void loadCatConfigInfo(const QString &key, const QString &debugfile);
+    /**
      * @brief loadBootDeviceManfid:加载本机自带硬盘
      * @param key:bootdevice
      * @param debugfile:调试文件名

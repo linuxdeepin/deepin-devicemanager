@@ -74,6 +74,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
         loadBluetoothPairedDevices(key, debugFile);     // 加载蓝牙设备配对信息
     else if (key == "lscpu")
         loadLscpuInfo(key, debugFile);
+    else if (key == "dr_config")
+        loadCatConfigInfo(key, debugFile);
     else
         loadCatInfo(key, debugFile);
 }
@@ -766,6 +768,24 @@ void CmdTool::loadGpuInfo(const QString &key, const QString &debugfile)
             mapInfo.insert("Name", lines[0].trimmed());
 
         getMapInfoFromCmd(item, mapInfo, ": ");
+        addMapInfo(key, mapInfo);
+    }
+}
+
+void CmdTool::loadCatConfigInfo(const QString &key, const QString &debugfile)
+{
+    QString deviceInfo;
+    if (!getDeviceInfo(deviceInfo, debugfile))
+        return;
+    QStringList items = deviceInfo.split("\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty())
+            continue;
+
+        QMap<QString, QString> mapInfo;
+        QStringList lines = item.split("\n");
+        mapInfo.insert("drivers", lines[0].trimmed());
+
         addMapInfo(key, mapInfo);
     }
 }

@@ -1,5 +1,7 @@
 // 项目自身文件
 #include "EnableManager.h"
+#include "DBus/DBusInterface.h"
+#include "DeviceManager.h"
 
 // Qt库文件
 #include <QDebug>
@@ -134,7 +136,7 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
         if (d.startsWith(driver))
             return true;
     }
-
+    /*
     // 获取cat /boot/config* | grep '=y'信息
     cmd = "cat /boot/config* | grep '=y'";
     QStringList options;
@@ -151,7 +153,12 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
         if (d.contains(driver, Qt::CaseInsensitive))
             return true;
     }
-
+    */
+    QList<QMap<QString, QString>> cmdInfo = DeviceManager::instance()->cmdInfo("dr_config");
+    foreach (auto info, cmdInfo) {
+        if (info["drivers"].contains(driver, Qt::CaseInsensitive))
+            return true;
+    }
     return false;
 }
 
