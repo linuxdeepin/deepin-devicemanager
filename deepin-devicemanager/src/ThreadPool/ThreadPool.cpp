@@ -138,10 +138,9 @@ ThreadPool::ThreadPool(QObject *parent) : QThreadPool(parent)
 
 void ThreadPool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
-//    QMutexLocker locker(&lock);
+    QMutexLocker locker(&lock);
     m_FinishedCmd++;
     DeviceManager::instance()->addCmdInfo(cmdInfo);
-//    locker.unlock();
     if (m_FinishedCmd == m_AllCmdNum) {
         generateInfo();
     } else {
@@ -198,7 +197,7 @@ void ThreadPool::generateInfo()
     QList<DeviceType>::iterator it = typeList.begin();
     for (; it != typeList.end(); ++it) {
         if (*it == DT_Others) {  // 这里是为了确保所有设备执行完毕后，生成其它设备
-            break;
+            continue;
         }
         start(new GenerateTask(*it, this));
     }
