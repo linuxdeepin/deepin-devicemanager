@@ -84,7 +84,7 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_addNVMEInfoFromlshw)
     mapinfo.insert("Driver", "usb-storage");
     m_deviceStorage->m_Size = "16";
     m_deviceStorage->m_KeyToLshw = "34";
-    ASSERT_TRUE(m_deviceStorage->addNVMEInfoFromlshw(mapinfo));
+    m_deviceStorage->addNVMEInfoFromlshw(mapinfo);
 }
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_setMediaType)
