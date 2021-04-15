@@ -23,6 +23,7 @@ BuildRequires: qt5-qttools-devel
 BuildRequires: cups-devel
 BuildRequires: pkgconfig(dframeworkdbus)
 BuildRequires: zeromq3-devel
+BuildRequires: gtest-devel
 
 
 
