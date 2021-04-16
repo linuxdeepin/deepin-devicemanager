@@ -66,6 +66,7 @@ popd
 /lib/systemd/system/deepin-devicemanager-server.service
 %{_bindir}/deepin-devicemanager-server
 %{_datadir}/deepin-manual/manual-assets/application/deepin-devicemanager/device-manager/*
+/etc/dbus-1/system.d/com.deepin.devicemanager.conf
 
 %changelog
 * Thu Apr 15 2021 zhangdingwen <zhangdingwen@uniontech.com> - 5.6.0.40-1
