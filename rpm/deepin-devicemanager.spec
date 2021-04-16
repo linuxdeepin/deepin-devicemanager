@@ -65,6 +65,7 @@ popd
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 /lib/systemd/system/deepin-devicemanager-server.service
 %{_bindir}/deepin-devicemanager-server
+%{_datadir}/deepin-manual/manual-assets/application/deepin-devicemanager/device-manager/*
 
 %changelog
 * Thu Apr 15 2021 zhangdingwen <zhangdingwen@uniontech.com> - 5.6.0.40-1
