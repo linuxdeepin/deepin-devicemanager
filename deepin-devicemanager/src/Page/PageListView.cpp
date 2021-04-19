@@ -85,16 +85,18 @@ void PageListView::paintEvent(QPaintEvent *event)
     return DWidget::paintEvent(event);
 }
 
-void PageListView::slotShowMenu(const QPoint &)
+void PageListView::slotShowMenu(const QPoint &point)
 {
     // 右键菜单
     mp_Menu->clear();
 
     // 导出/刷新
-    mp_Menu->addAction(mp_Export);
-    mp_Menu->addAction(mp_Refresh);
+    if (mp_ListView->indexAt(point).isValid()) {
+        mp_Menu->addAction(mp_Export);
+        mp_Menu->addAction(mp_Refresh);
 
-    mp_Menu->exec(QCursor::pos());
+        mp_Menu->exec(QCursor::pos());
+    }
 }
 
 void PageListView::slotListViewItemClicked(const QModelIndex &index)
