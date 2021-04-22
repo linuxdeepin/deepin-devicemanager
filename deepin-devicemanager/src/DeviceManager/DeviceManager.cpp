@@ -622,6 +622,18 @@ void DeviceManager::setOthersDeviceInfoFromLshw(const QMap<QString, QString> &ma
     }
 }
 
+void DeviceManager::setCpuRefreshInfoFromlscpu(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceCPU.begin();
+    for (; it != m_ListDeviceCPU.end(); ++it) {
+        DeviceCpu *device = dynamic_cast<DeviceCpu *>(*it);
+        if (!device)
+            continue;
+
+        device->setInfoFromLscpu(mapInfo);
+    }
+}
+
 void DeviceManager::addPowerDevice(DevicePower *const device)
 {
     // 添加电池设备

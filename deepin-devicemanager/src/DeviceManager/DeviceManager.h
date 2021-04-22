@@ -317,6 +317,8 @@ public:
      */
     void setOthersDeviceInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
+    void setCpuRefreshInfoFromlscpu(const QMap<QString, QString> &mapInfo);
+
     // 电源设备相关
     /**
      * @brief addPowerDevice:添加电池设备

@@ -27,7 +27,7 @@
 #include "LoadInfoThread.h"
 #include "DeviceFactory.h"
 #include "ThreadExecXrandr.h"
-
+#include "LoadCpuInfoThread.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -369,6 +369,10 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         ThreadExecXrandr tx(true);
         tx.start();
         tx.wait();
+    } else if (tr("CPU") == itemStr) {
+        LoadCpuInfoThread lct;
+        lct.start();
+        lct.wait();
     }
 
     QList<DeviceBaseInfo *> lst;

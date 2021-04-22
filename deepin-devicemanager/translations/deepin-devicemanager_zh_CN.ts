@@ -1441,6 +1441,11 @@
         <source>Display Adapter</source>
         <translation>显示适配器</translation>
     </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="373"/>
+        <source>CPU</source>
+        <translation>处理器</translation>
+    </message>
 </context>
 <context>
     <name>PageDetail</name>

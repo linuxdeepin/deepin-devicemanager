@@ -1,10 +1,12 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="en" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1">
 <context>
     <name>CmdButtonWidget</name>
     <message>
         <location filename="../src/Widget/CmdButtonWidget.cpp" line="18"/>
         <source>More</source>
-        <translation>More</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13,388 +15,388 @@
         <location filename="../src/Page/PageDetail.cpp" line="42"/>
         <location filename="../src/Page/PageDetail.cpp" line="45"/>
         <source>More</source>
-        <translation>More</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageDetail.cpp" line="43"/>
         <source>Collapse</source>
-        <translation>Collapse</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DetailTreeView</name>
     <message>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="131"/>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="337"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="137"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="339"/>
         <source>More</source>
-        <translation>More</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="135"/>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="344"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="141"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="346"/>
         <source>Collapse</source>
-        <translation>Collapse</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DetailViewDelegate</name>
     <message>
-        <location filename="../src/Widget/DetailViewDelegate.cpp" line="230"/>
-        <location filename="../src/Widget/DetailViewDelegate.cpp" line="234"/>
+        <location filename="../src/Widget/DetailViewDelegate.cpp" line="232"/>
+        <location filename="../src/Widget/DetailViewDelegate.cpp" line="236"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceAudio</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="262"/>
-        <source>Disable</source>
-        <translation>Disable</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="200"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="194"/>
         <source>Device Name</source>
-        <translation>Device Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="229"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="253"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="221"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="245"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="230"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="254"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="222"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="246"/>
         <source>Vendor</source>
-        <translation>Vendor</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="223"/>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="224"/>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="225"/>
+        <source>Bus Info</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="231"/>
-        <source>Model</source>
-        <translation>Model</translation>
+        <source>Chip</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="232"/>
-        <source>Version</source>
-        <translation>Version</translation>
+        <source>Capabilities</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="233"/>
-        <source>Bus Info</source>
-        <translation>Bus Info</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
-        <source>Chip</source>
-        <translation>Chip</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="240"/>
-        <source>Capabilities</source>
-        <translation>Capabilities</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="241"/>
         <source>Clock</source>
-        <translation>Clock</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="242"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="234"/>
         <source>Width</source>
-        <translation>Width</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="243"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="235"/>
         <source>Memory</source>
-        <translation>Memory</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="244"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="236"/>
         <source>IRQ</source>
-        <translation>IRQ</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="254"/>
+        <source>Disable</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceBaseInfo</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="471"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="436"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="472"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="437"/>
         <source>Vendor</source>
-        <translation>Vendor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="473"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="438"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceBios</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="224"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="216"/>
         <source>Vendor</source>
-        <translation>Vendor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="225"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="217"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="226"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="218"/>
         <source>Chipset</source>
-        <translation>Chipset</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceBluetooth</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="171"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="168"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="172"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="169"/>
         <source>Vendor</source>
-        <translation>Vendor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="173"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="170"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="174"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="171"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="194"/>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="195"/>
+        <source>Maximum Power</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="196"/>
+        <source>Driver Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="197"/>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="198"/>
+        <source>Capabilities</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="199"/>
-        <source>Speed</source>
-        <translation>Speed</translation>
+        <source>Bus Info</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="200"/>
-        <source>Maximum Power</source>
-        <translation>Maximum Power</translation>
+        <source>Logical Name</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="201"/>
-        <source>Driver Version</source>
-        <translation>Driver Version</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="202"/>
-        <source>Driver</source>
-        <translation>Driver</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="203"/>
-        <source>Capabilities</source>
-        <translation>Capabilities</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="204"/>
-        <source>Bus Info</source>
-        <translation>Bus Info</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="205"/>
-        <source>Logical Name</source>
-        <translation>Logical Name</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="206"/>
         <source>MAC Address</source>
-        <translation>MAC Address</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="212"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceCdrom</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="119"/>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="116"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="117"/>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="118"/>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="119"/>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="120"/>
-        <source>Vendor</source>
-        <translation>Vendor</translation>
+        <source>Bus Info</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="121"/>
-        <source>Model</source>
-        <translation>Model</translation>
+        <source>Capabilities</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="122"/>
-        <source>Version</source>
-        <translation>Version</translation>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="123"/>
-        <source>Bus Info</source>
-        <translation>Bus Info</translation>
+        <source>Maximum Power</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="124"/>
-        <source>Capabilities</source>
-        <translation>Capabilities</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="125"/>
-        <source>Driver</source>
-        <translation>Driver</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="126"/>
-        <source>Maximum Power</source>
-        <translation>Maximum Power</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="127"/>
         <source>Speed</source>
-        <translation>Speed</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="141"/>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="138"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceComputer</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceComputer.cpp" line="143"/>
+        <location filename="../src/DeviceManager/DeviceComputer.cpp" line="140"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceCpu</name>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="253"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="250"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="66"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="254"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="251"/>
         <source>Vendor</source>
-        <translation>Vendor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
         <source>CPU ID</source>
-        <translation>CPU ID</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
         <source>Core ID</source>
-        <translation>Core ID</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
         <source>Threads</source>
-        <translation>Threads</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
         <source>Current Speed</source>
-        <translation>Current Speed</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
         <source>BogoMIPS</source>
-        <translation>BogoMIPS</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="256"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="253"/>
         <source>Architecture</source>
-        <translation>Architecture</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
         <source>CPU Family</source>
-        <translation>CPU Family</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="99"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="112"/>
         <source>Processor</source>
-        <translation>Processor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="110"/>
         <source>Core(s)</source>
-        <translation>Core(s)</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="234"/>
+        <source>Virtualization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="235"/>
+        <source>Flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="236"/>
+        <source>Extensions</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="237"/>
-        <source>Virtualization</source>
-        <translation>Virtualization</translation>
+        <source>L3 Cache</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="238"/>
-        <source>Flags</source>
-        <translation>Flags</translation>
+        <source>L2 Cache</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="239"/>
-        <source>Extensions</source>
-        <translation>Extensions</translation>
+        <source>L1i Cache</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="240"/>
-        <source>L3 Cache</source>
-        <translation>L3 Cache</translation>
+        <source>L1d Cache</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="241"/>
-        <source>L2 Cache</source>
-        <translation>L2 Cache</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="242"/>
-        <source>L1i Cache</source>
-        <translation>L1i Cache</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="243"/>
-        <source>L1d Cache</source>
-        <translation>L1d Cache</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="244"/>
         <source>Stepping</source>
-        <translation>Stepping</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="255"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="252"/>
         <source>Speed</source>
-        <translation>Speed</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="255"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="252"/>
         <source>Max Speed</source>
-        <translation>Max Speed</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -402,643 +404,643 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="58"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="59"/>
         <source>Vendor</source>
-        <translation>Vendor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="60"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="61"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="62"/>
         <source>Graphics Memory</source>
-        <translation>Graphics Memory</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="200"/>
+        <source>Physical ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="201"/>
+        <source>Memory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="202"/>
+        <source>IO Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="203"/>
+        <source>Bus Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="204"/>
+        <source>Maximum Resolution</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="205"/>
-        <source>Physical ID</source>
-        <translation>Physical ID</translation>
+        <source>Minimum Resolution</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="206"/>
-        <source>Memory</source>
-        <translation>Memory</translation>
+        <source>Current Resolution</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="207"/>
-        <source>IO Port</source>
-        <translation>IO Port</translation>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="208"/>
-        <source>Bus Info</source>
-        <translation>Bus Info</translation>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
-        <source>Maximum Resolution</source>
-        <translation>Maximum Resolution</translation>
+        <source>Clock</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
-        <source>Minimum Resolution</source>
-        <translation>Minimum Resolution</translation>
+        <source>DP</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
-        <source>Current Resolution</source>
-        <translation>Current Resolution</translation>
+        <source>eDP</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="212"/>
-        <source>Driver</source>
-        <translation>Driver</translation>
+        <source>HDMI</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
-        <source>Description</source>
-        <translation>Description</translation>
+        <source>VGA</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
-        <source>Clock</source>
-        <translation>Clock</translation>
+        <source>DVI</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
-        <source>DP</source>
-        <translation>DP</translation>
+        <source>Display Output</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
-        <source>eDP</source>
-        <translation>eDP</translation>
+        <source>Capabilities</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
-        <source>HDMI</source>
-        <translation>HDMI</translation>
+        <source>IRQ</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="218"/>
-        <source>VGA</source>
-        <translation>VGA</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="219"/>
-        <source>DVI</source>
-        <translation>DVI</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="220"/>
-        <source>Display Output</source>
-        <translation>Display Output</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
-        <source>Capabilities</source>
-        <translation>Capabilities</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="222"/>
-        <source>IRQ</source>
-        <translation>IRQ</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="223"/>
         <source>Width</source>
-        <translation>Width</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceImage</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="113"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="110"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="111"/>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="112"/>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="113"/>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="114"/>
-        <source>Vendor</source>
-        <translation>Vendor</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="115"/>
-        <source>Version</source>
-        <translation>Version</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="116"/>
-        <source>Model</source>
-        <translation>Model</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="117"/>
         <source>Bus Info</source>
-        <translation>Bus Info</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="120"/>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="121"/>
+        <source>Maximum Power</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="122"/>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="123"/>
-        <source>Speed</source>
-        <translation>Speed</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="124"/>
-        <source>Maximum Power</source>
-        <translation>Maximum Power</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="125"/>
-        <source>Driver</source>
-        <translation>Driver</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="126"/>
         <source>Capabilities</source>
-        <translation>Capabilities</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="137"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="134"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceInput</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="260"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="251"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="252"/>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="253"/>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="254"/>
+        <source>Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="255"/>
+        <source>Bus Info</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="261"/>
-        <source>Vendor</source>
-        <translation>Vendor</translation>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="262"/>
-        <source>Model</source>
-        <translation>Model</translation>
+        <source>Maximum Power</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="263"/>
-        <source>Interface</source>
-        <translation>Interface</translation>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="264"/>
-        <source>Bus Info</source>
-        <translation>Bus Info</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="270"/>
-        <source>Speed</source>
-        <translation>Speed</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="271"/>
-        <source>Maximum Power</source>
-        <translation>Maximum Power</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="272"/>
-        <source>Driver</source>
-        <translation>Driver</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="273"/>
         <source>Capabilities</source>
-        <translation>Capabilities</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="274"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="265"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="285"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="276"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceManager</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="147"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="209"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="941"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="962"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="984"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="996"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1012"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1025"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1041"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1057"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="131"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="844"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="864"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="896"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="923"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="954"/>
         <source>Overview</source>
-        <translation>Overview</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="206"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1040"/>
+        <source>CPU</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1043"/>
+        <source>CPU quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="144"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="207"/>
+        <source>Motherboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="147"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="208"/>
+        <source>Memory</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="150"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="187"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1144"/>
-        <source>CPU</source>
-        <translation>CPU</translation>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="209"/>
+        <source>Display Adapter</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="151"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1148"/>
-        <source>CPU quantity</source>
-        <translation>CPU quantity</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="155"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="188"/>
-        <source>Motherboard</source>
-        <translation>Motherboard</translation>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="153"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="210"/>
+        <source>Sound Adapter</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="156"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="189"/>
-        <source>Memory</source>
-        <translation>Memory</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="157"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="190"/>
-        <source>Display Adapter</source>
-        <translation>Display Adapter</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="158"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="191"/>
-        <source>Sound Adapter</source>
-        <translation>Sound Adapter</translation>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="211"/>
+        <source>Storage</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="159"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="192"/>
-        <source>Storage</source>
-        <translation>Storage</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="160"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="193"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="212"/>
         <source>Other PCI Devices</source>
-        <translation>Other PCI Devices</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="161"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="194"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="162"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="213"/>
         <source>Battery</source>
-        <translation>Battery</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="165"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="195"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="168"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="214"/>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="166"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="196"/>
-        <source>Network Adapter</source>
-        <translation>Network Adapter</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="170"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="197"/>
-        <source>Mouse</source>
-        <translation>Mouse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="198"/>
-        <source>Keyboard</source>
-        <translation>Keyboard</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="175"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="199"/>
-        <source>Monitor</source>
-        <translation>Monitor</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="200"/>
-        <source>CD-ROM</source>
-        <translation>CD-ROM</translation>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="215"/>
+        <source>Network Adapter</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="177"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="216"/>
+        <source>Mouse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="180"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="217"/>
+        <source>Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="186"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="218"/>
+        <source>Monitor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="189"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="219"/>
+        <source>CD-ROM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="192"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="220"/>
         <source>Printer</source>
-        <translation>Printer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="178"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="195"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="221"/>
         <source>Camera</source>
-        <translation>Camera</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="179"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="198"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="222"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
-        <translation>Other Devices</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="947"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1016"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1048"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="850"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
         <source>Device</source>
-        <translation>Device</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="955"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1020"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1052"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="858"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="949"/>
         <source>OS</source>
-        <translation>OS</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceMemory</name>
     <message>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="109"/>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="136"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="110"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="137"/>
-        <source>Name</source>
-        <translation>Name</translation>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="111"/>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="138"/>
-        <source>Vendor</source>
-        <translation>Vendor</translation>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="140"/>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="112"/>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="141"/>
-        <source>Size</source>
-        <translation>Size</translation>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="138"/>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="113"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="139"/>
-        <source>Type</source>
-        <translation>Type</translation>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="114"/>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="140"/>
-        <source>Speed</source>
-        <translation>Speed</translation>
+        <source>Total Width</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="115"/>
-        <source>Total Width</source>
-        <translation>Total Width</translation>
+        <source>Locator</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="116"/>
-        <source>Locator</source>
-        <translation>Locator</translation>
+        <source>Serial Number</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="117"/>
-        <source>Serial Number</source>
-        <translation>Serial Number</translation>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="123"/>
+        <source>Configured Voltage</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="124"/>
-        <source>Configured Voltage</source>
-        <translation>Configured Voltage</translation>
+        <source>Maximum Voltage</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="125"/>
-        <source>Maximum Voltage</source>
-        <translation>Maximum Voltage</translation>
+        <source>Minimum Voltage</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="126"/>
-        <source>Minimum Voltage</source>
-        <translation>Minimum Voltage</translation>
+        <source>Configured Speed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="127"/>
-        <source>Configured Speed</source>
-        <translation>Configured Speed</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="128"/>
         <source>Data Width</source>
-        <translation>Data Width</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceMonitor</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="213"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="214"/>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="215"/>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="216"/>
-        <source>Vendor</source>
-        <translation>Vendor</translation>
+        <source>Display Input</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="217"/>
-        <source>Type</source>
-        <translation>Type</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="218"/>
-        <source>Display Input</source>
-        <translation>Display Input</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="219"/>
         <source>Interface Type</source>
-        <translation>Interface Type</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="223"/>
+        <source>Support Resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="224"/>
+        <source>Current Resolution</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="225"/>
-        <source>Support Resolution</source>
-        <translation>Support Resolution</translation>
+        <source>Primary Monitor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="226"/>
-        <source>Current Resolution</source>
-        <translation>Current Resolution</translation>
+        <source>Display Ratio</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="227"/>
-        <source>Primary Monitor</source>
-        <translation>Primary Monitor</translation>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="228"/>
-        <source>Display Ratio</source>
-        <translation>Display Ratio</translation>
+        <source>Serial Number</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="229"/>
-        <source>Size</source>
-        <translation>Size</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="230"/>
-        <source>Serial Number</source>
-        <translation>Serial Number</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="231"/>
         <source>Product Date</source>
-        <translation>Product Date</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceNetwork</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="131"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="130"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="131"/>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="132"/>
-        <source>Vendor</source>
-        <translation>Vendor</translation>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="133"/>
-        <source>Type</source>
-        <translation>Type</translation>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="134"/>
-        <source>Version</source>
-        <translation>Version</translation>
+        <source>Bus Info</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="135"/>
-        <source>Bus Info</source>
-        <translation>Bus Info</translation>
+        <source>Capabilities</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="136"/>
-        <source>Capabilities</source>
-        <translation>Capabilities</translation>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="137"/>
-        <source>Driver</source>
-        <translation>Driver</translation>
+        <source>Driver Version</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="138"/>
-        <source>Driver Version</source>
-        <translation>Driver Version</translation>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="143"/>
+        <source>Capacity</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="144"/>
-        <source>Capacity</source>
-        <translation>Capacity</translation>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="145"/>
-        <source>Speed</source>
-        <translation>Speed</translation>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="146"/>
-        <source>Port</source>
-        <translation>Port</translation>
+        <source>Multicast</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="147"/>
-        <source>Multicast</source>
-        <translation>Multicast</translation>
+        <source>Link</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="148"/>
-        <source>Link</source>
-        <translation>Link</translation>
+        <source>Latency</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="149"/>
-        <source>Latency</source>
-        <translation>Latency</translation>
+        <source>IP</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="150"/>
-        <source>IP</source>
-        <translation>IP</translation>
+        <source>Firmware</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="151"/>
-        <source>Firmware</source>
-        <translation>Firmware</translation>
+        <source>Duplex</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="152"/>
-        <source>Duplex</source>
-        <translation>Duplex</translation>
+        <source>Broadcast</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="153"/>
-        <source>Broadcast</source>
-        <translation>Broadcast</translation>
+        <source>Auto Negotiation</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="154"/>
-        <source>Auto Negotiation</source>
-        <translation>Auto Negotiation</translation>
+        <source>Clock</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="155"/>
-        <source>Clock</source>
-        <translation>Clock</translation>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="156"/>
-        <source>Width</source>
-        <translation>Width</translation>
+        <source>Memory</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="157"/>
-        <source>Memory</source>
-        <translation>Memory</translation>
+        <source>IRQ</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="158"/>
-        <source>IRQ</source>
-        <translation>IRQ</translation>
+        <source>MAC Address</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="159"/>
-        <source>MAC Address</source>
-        <translation>MAC Address</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="160"/>
         <source>Logical Name</source>
-        <translation>Logical Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="171"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="170"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1046,115 +1048,115 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="52"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="53"/>
         <source>Vendor</source>
-        <translation>Vendor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="54"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="55"/>
         <source>Bus Info</source>
-        <translation>Bus Info</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="56"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="62"/>
         <source>Input/Output</source>
-        <translation>Input/Output</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="63"/>
         <source>Memory</source>
-        <translation>Memory</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="64"/>
         <source>IRQ</source>
-        <translation>IRQ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="65"/>
         <source>Latency</source>
-        <translation>Latency</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="66"/>
         <source>Clock</source>
-        <translation>Clock</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="67"/>
         <source>Width</source>
-        <translation>Width</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="68"/>
         <source>Driver</source>
-        <translation>Driver</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="69"/>
         <source>Capabilities</source>
-        <translation>Capabilities</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceOthers</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="100"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="99"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="100"/>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="101"/>
-        <source>Vendor</source>
-        <translation>Vendor</translation>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="102"/>
-        <source>Model</source>
-        <translation>Model</translation>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="103"/>
-        <source>Version</source>
-        <translation>Version</translation>
+        <source>Bus Info</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="104"/>
-        <source>Bus Info</source>
-        <translation>Bus Info</translation>
+        <source>Capabilities</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="105"/>
-        <source>Capabilities</source>
-        <translation>Capabilities</translation>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="106"/>
-        <source>Driver</source>
-        <translation>Driver</translation>
+        <source>Maximum Power</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="107"/>
-        <source>Maximum Power</source>
-        <translation>Maximum Power</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="108"/>
         <source>Speed</source>
-        <translation>Speed</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1162,207 +1164,207 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="140"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="141"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="142"/>
         <source>Vendor</source>
-        <translation>Vendor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="143"/>
         <source>Serial Number</source>
-        <translation>Serial Number</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="144"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="145"/>
         <source>Status</source>
-        <translation>Status</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="146"/>
         <source>Capacity</source>
-        <translation>Capacity</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="147"/>
         <source>Voltage</source>
-        <translation>Voltage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="148"/>
         <source>Slot</source>
-        <translation>Slot</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="149"/>
         <source>Design Capacity</source>
-        <translation>Design Capacity</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="150"/>
         <source>Design Voltage</source>
-        <translation>Design Voltage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="151"/>
         <source>SBDS Version</source>
-        <translation>SBDS Version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="152"/>
         <source>SBDS Serial Number</source>
-        <translation>SBDS Serial Number</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="153"/>
         <source>SBDS Manufacture Date</source>
-        <translation>SBDS Manufacture Date</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="154"/>
         <source>SBDS Chemistry</source>
-        <translation>SBDS Chemistry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="155"/>
         <source>Temperature</source>
-        <translation>Temperature</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DevicePrint</name>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="132"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="120"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="133"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="121"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="122"/>
         <source>Vendor</source>
-        <translation>Vendor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="123"/>
         <source>Serial Number</source>
-        <translation>Serial Number</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="141"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="129"/>
         <source>Shared</source>
-        <translation>Shared</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="142"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="130"/>
         <source>URI</source>
-        <translation>URI</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="131"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="132"/>
+        <source>Interface Type</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="143"/>
-        <source>Status</source>
-        <translation>Status</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="144"/>
-        <source>Interface Type</source>
-        <translation>Interface Type</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="155"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeviceStorage</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="333"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="364"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="318"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="349"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="319"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="350"/>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="320"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="351"/>
+        <source>Media Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="321"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="352"/>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="322"/>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="323"/>
+        <source>Capabilities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="329"/>
+        <source>Power Cycle Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="330"/>
+        <source>Power On Hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="331"/>
+        <source>Firmware Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="332"/>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="333"/>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="334"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="365"/>
-        <source>Vendor</source>
-        <translation>Vendor</translation>
+        <source>Serial Number</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="335"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="366"/>
-        <source>Media Type</source>
-        <translation>Media Type</translation>
+        <source>Interface</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="336"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="367"/>
-        <source>Size</source>
-        <translation>Size</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="337"/>
-        <source>Version</source>
-        <translation>Version</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="338"/>
-        <source>Capabilities</source>
-        <translation>Capabilities</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="344"/>
-        <source>Power Cycle Count</source>
-        <translation>Power Cycle Count</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="345"/>
-        <source>Power On Hours</source>
-        <translation>Power On Hours</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="346"/>
-        <source>Firmware Version</source>
-        <translation>Firmware Version</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="347"/>
-        <source>Speed</source>
-        <translation>Speed</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="348"/>
-        <source>Description</source>
-        <translation>Description</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="349"/>
-        <source>Serial Number</source>
-        <translation>Serial Number</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="350"/>
-        <source>Interface</source>
-        <translation>Interface</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="351"/>
         <source>Rotation Rate</source>
-        <translation>Rotation Rate</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1372,82 +1374,87 @@
         <location filename="../src/Widget/logtreeview.cpp" line="106"/>
         <location filename="../src/Widget/logtreeview.cpp" line="108"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>LogViewItemDelegate</name>
     <message>
-        <location filename="../src/Widget/logviewitemdelegate.cpp" line="120"/>
+        <location filename="../src/Widget/logviewitemdelegate.cpp" line="123"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="111"/>
+        <location filename="../src/Page/MainWindow.cpp" line="110"/>
         <source>Device Info</source>
-        <comment>export file's name</comment>
-        <translation>Device Info</translation>
+        <comment>export file&apos;s name</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="189"/>
+        <location filename="../src/Page/MainWindow.cpp" line="181"/>
         <source>Display shortcuts</source>
-        <translation>Display shortcuts</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="190"/>
+        <location filename="../src/Page/MainWindow.cpp" line="182"/>
         <source>Close</source>
-        <translation>Close</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="191"/>
+        <location filename="../src/Page/MainWindow.cpp" line="183"/>
         <source>Help</source>
-        <translation>Help</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="192"/>
+        <location filename="../src/Page/MainWindow.cpp" line="184"/>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="188"/>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="195"/>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="196"/>
-        <source>System</source>
-        <translation>System</translation>
-    </message>
-    <message>
-        <location filename="../src/Page/MainWindow.cpp" line="203"/>
-        <source>Export</source>
-        <translation>Export</translation>
-    </message>
-    <message>
-        <location filename="../src/Page/MainWindow.cpp" line="204"/>
         <source>Refresh</source>
-        <translation>Refresh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="208"/>
+        <location filename="../src/Page/MainWindow.cpp" line="200"/>
         <source>Device Manager</source>
-        <translation>Device Manager</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="371"/>
+        <location filename="../src/Page/MainWindow.cpp" line="365"/>
         <source>Monitor</source>
-        <translation>Monitor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="375"/>
+        <location filename="../src/Page/MainWindow.cpp" line="369"/>
         <source>Display Adapter</source>
-        <translation>Display Adapter</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="373"/>
+        <source>CPU</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PageDetail</name>
     <message>
-        <location filename="../src/Page/PageDetail.cpp" line="305"/>
+        <location filename="../src/Page/PageDetail.cpp" line="292"/>
         <source>More</source>
-        <translation>More</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1455,30 +1462,30 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="18"/>
         <source>Refresh</source>
-        <translation>Refresh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="19"/>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="21"/>
         <source>Overview</source>
-        <translation>Overview</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="116"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="109"/>
         <source>Failed to enable the device</source>
-        <translation>Failed to enable the device</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="119"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="112"/>
         <source>Failed to disable the device</source>
-        <translation>Failed to disable the device</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1486,22 +1493,22 @@
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="36"/>
         <source>Refresh</source>
-        <translation>Refresh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="37"/>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="38"/>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="82"/>
         <source>Overview</source>
-        <translation>Overview</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1509,1703 +1516,1703 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="26"/>
         <source>Refresh</source>
-        <translation>Refresh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="27"/>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="28"/>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="29"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="146"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="183"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="149"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="176"/>
         <source>Enable</source>
-        <translation>Enable</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="144"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="195"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="147"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="190"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="186"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="179"/>
         <source>Failed to disable the device</source>
-        <translation>Failed to disable the device</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="198"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="193"/>
         <source>Failed to enable the device</source>
-        <translation>Failed to enable the device</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PageTableHeader</name>
     <message>
-        <location filename="../src/Page/PageTableHeader.cpp" line="78"/>
+        <location filename="../src/Page/PageTableHeader.cpp" line="77"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="195"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
         <source>SubVendor</source>
-        <translation>SubVendor</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="196"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
+        <source>SubDevice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="197"/>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="198"/>
+        <source>Driver Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="199"/>
+        <source>Driver Activation Cmd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="200"/>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="103"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="42"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="310"/>
+        <source>Config Status</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="202"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
-        <source>SubDevice</source>
-        <translation>SubDevice</translation>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="155"/>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="105"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="245"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="123"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="307"/>
+        <source>physical id</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
-        <source>Driver</source>
-        <translation>Driver</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="101"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
-        <source>Driver Modules</source>
-        <translation>Driver Modules</translation>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
+        <source>latency</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="205"/>
-        <source>Driver Status</source>
-        <translation>Driver Status</translation>
+        <source>Phys</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
-        <source>Driver Activation Cmd</source>
-        <translation>Driver Activation Cmd</translation>
+        <source>Sysfs</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="207"/>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="106"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="42"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="325"/>
-        <source>Config Status</source>
-        <translation>Config Status</translation>
+        <source>Handlers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="208"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="238"/>
+        <source>PROP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="239"/>
+        <source>EV</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="210"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="158"/>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="108"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="254"/>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="124"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="322"/>
-        <source>physical id</source>
-        <translation>physical id</translation>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="240"/>
+        <source>KEY</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="211"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
-        <source>latency</source>
-        <translation>latency</translation>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="212"/>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="213"/>
-        <source>Phys</source>
-        <translation>Phys</translation>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="214"/>
-        <source>Sysfs</source>
-        <translation>Sysfs</translation>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="215"/>
-        <source>Handlers</source>
-        <translation>Handlers</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="216"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="247"/>
-        <source>PROP</source>
-        <translation>PROP</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="217"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="248"/>
-        <source>EV</source>
-        <translation>EV</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="218"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="249"/>
-        <source>KEY</source>
-        <translation>KEY</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="220"/>
-        <source>Model</source>
-        <translation>Model</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="221"/>
-        <source>Vendor</source>
-        <translation>Vendor</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="222"/>
-        <source>Version</source>
-        <translation>Version</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="223"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="137"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="135"/>
         <source>Bus</source>
-        <translation>Bus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="28"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="208"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="27"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="200"/>
         <source>BIOS Information</source>
-        <translation>BIOS Information</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="50"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="48"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="201"/>
         <source>Base Board Information</source>
-        <translation>Base Board Information</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="72"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="210"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="69"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="202"/>
         <source>System Information</source>
-        <translation>System Information</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="88"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="211"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="84"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="203"/>
         <source>Chassis Information</source>
-        <translation>Chassis Information</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="104"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="212"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="99"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="204"/>
         <source>Physical Memory Array</source>
-        <translation>Physical Memory Array</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="150"/>
+        <source>Release Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="151"/>
+        <source>Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="152"/>
+        <source>Runtime Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="153"/>
+        <source>ROM Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="154"/>
+        <source>Characteristics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="155"/>
+        <source>BIOS Revision</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="156"/>
-        <source>Release Date</source>
-        <translation>Release Date</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="157"/>
-        <source>Address</source>
-        <translation>Address</translation>
+        <source>Firmware Revision</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="158"/>
-        <source>Runtime Size</source>
-        <translation>Runtime Size</translation>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="167"/>
+        <source>Product Name</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="159"/>
-        <source>ROM Size</source>
-        <translation>ROM Size</translation>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="168"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="177"/>
+        <source>Serial Number</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="160"/>
-        <source>Characteristics</source>
-        <translation>Characteristics</translation>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="178"/>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="90"/>
+        <source>Asset Tag</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="161"/>
-        <source>BIOS Revision</source>
-        <translation>BIOS Revision</translation>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="139"/>
+        <source>Features</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="162"/>
-        <source>Firmware Revision</source>
-        <translation>Firmware Revision</translation>
+        <source>Location In Chassis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="163"/>
+        <source>Chassis Handle</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="164"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="173"/>
-        <source>Product Name</source>
-        <translation>Product Name</translation>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="175"/>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="165"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="175"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="184"/>
-        <source>Serial Number</source>
-        <translation>Serial Number</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="166"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="185"/>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="91"/>
-        <source>Asset Tag</source>
-        <translation>Asset Tag</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="167"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="141"/>
-        <source>Features</source>
-        <translation>Features</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="168"/>
-        <source>Location In Chassis</source>
-        <translation>Location In Chassis</translation>
+        <source>Contained Object Handles</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="169"/>
-        <source>Chassis Handle</source>
-        <translation>Chassis Handle</translation>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="160"/>
+        <source>UUID</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="170"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="182"/>
-        <source>Type</source>
-        <translation>Type</translation>
+        <source>Wake-up Type</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="171"/>
-        <source>Contained Object Handles</source>
-        <translation>Contained Object Handles</translation>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="187"/>
+        <source>SKU Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="172"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="198"/>
+        <source>Family</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="176"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="163"/>
-        <source>UUID</source>
-        <translation>UUID</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="177"/>
-        <source>Wake-up Type</source>
-        <translation>Wake-up Type</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="178"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="194"/>
-        <source>SKU Number</source>
-        <translation>SKU Number</translation>
+        <source>Lock</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="179"/>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="206"/>
-        <source>Family</source>
-        <translation>Family</translation>
+        <source>Boot-up State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="180"/>
+        <source>Power Supply State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="181"/>
+        <source>Thermal State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="182"/>
+        <source>Security Status</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="183"/>
-        <source>Lock</source>
-        <translation>Lock</translation>
+        <source>OEM Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="184"/>
+        <source>Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="185"/>
+        <source>Number Of Power Cords</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="186"/>
-        <source>Boot-up State</source>
-        <translation>Boot-up State</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="187"/>
-        <source>Power Supply State</source>
-        <translation>Power Supply State</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="188"/>
-        <source>Thermal State</source>
-        <translation>Thermal State</translation>
+        <source>Contained Elements</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="189"/>
-        <source>Security Status</source>
-        <translation>Security Status</translation>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="190"/>
-        <source>OEM Information</source>
-        <translation>OEM Information</translation>
+        <source>Error Correction Type</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="191"/>
-        <source>Height</source>
-        <translation>Height</translation>
+        <source>Maximum Capacity</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="192"/>
-        <source>Number Of Power Cords</source>
-        <translation>Number Of Power Cords</translation>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="85"/>
+        <source>Error Information Handle</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="193"/>
-        <source>Contained Elements</source>
-        <translation>Contained Elements</translation>
+        <source>Number Of Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="195"/>
+        <source>BIOS ROMSIZE</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="196"/>
-        <source>Location</source>
-        <translation>Location</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="198"/>
-        <source>Error Correction Type</source>
-        <translation>Error Correction Type</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="199"/>
-        <source>Maximum Capacity</source>
-        <translation>Maximum Capacity</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="200"/>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="86"/>
-        <source>Error Information Handle</source>
-        <translation>Error Information Handle</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="201"/>
-        <source>Number Of Devices</source>
-        <translation>Number Of Devices</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="203"/>
-        <source>BIOS ROMSIZE</source>
-        <translation>BIOS ROMSIZE</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="204"/>
         <source>Release date</source>
-        <translation>Release date</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="205"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="197"/>
         <source>Board name</source>
-        <translation>Board name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="206"/>
         <source>SMBIOS Version</source>
-        <translation>SMBIOS Version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="208"/>
         <source>Language Description Format</source>
-        <translation>Language Description Format</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="209"/>
         <source>Installable Languages</source>
-        <translation>Installable Languages</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBios.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceBios.cpp" line="210"/>
         <source>Currently Installed Language</source>
-        <translation>Currently Installed Language</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="136"/>
+        <source>BD Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="137"/>
+        <source>ACL MTU</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="138"/>
-        <source>BD Address</source>
-        <translation>BD Address</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="139"/>
-        <source>ACL MTU</source>
-        <translation>ACL MTU</translation>
+        <source>SCO MTU</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="140"/>
-        <source>SCO MTU</source>
-        <translation>SCO MTU</translation>
+        <source>Packet type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="141"/>
+        <source>Link policy</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="142"/>
-        <source>Packet type</source>
-        <translation>Packet type</translation>
+        <source>Link mode</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="143"/>
-        <source>Link policy</source>
-        <translation>Link policy</translation>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="156"/>
+        <source>Class</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="144"/>
-        <source>Link mode</source>
-        <translation>Link mode</translation>
+        <source>Service Classes</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="145"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="159"/>
-        <source>Class</source>
-        <translation>Class</translation>
+        <source>Device Class</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="146"/>
-        <source>Service Classes</source>
-        <translation>Service Classes</translation>
+        <source>HCI Version</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="147"/>
-        <source>Device Class</source>
-        <translation>Device Class</translation>
+        <source>LMP Version</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="148"/>
-        <source>HCI Version</source>
-        <translation>HCI Version</translation>
+        <source>Subversion</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="150"/>
-        <source>LMP Version</source>
-        <translation>LMP Version</translation>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="38"/>
+        <source>Device</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="151"/>
-        <source>Subversion</source>
-        <translation>Subversion</translation>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="97"/>
+        <source>Serial ID</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="153"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="38"/>
-        <source>Device</source>
-        <translation>Device</translation>
+        <source>product</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="154"/>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="100"/>
-        <source>Serial ID</source>
-        <translation>Serial ID</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="156"/>
-        <source>product</source>
-        <translation>product</translation>
+        <source>description</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="157"/>
-        <source>description</source>
-        <translation>description</translation>
+        <source>Powered</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="160"/>
-        <source>Powered</source>
-        <translation>Powered</translation>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="158"/>
+        <source>Discoverable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="159"/>
+        <source>Pairable</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="161"/>
-        <source>Discoverable</source>
-        <translation>Discoverable</translation>
+        <source>Modalias</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="162"/>
-        <source>Pairable</source>
-        <translation>Pairable</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="164"/>
-        <source>Modalias</source>
-        <translation>Modalias</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="165"/>
         <source>Discovering</source>
-        <translation>Discovering</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="98"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
+        <source>Driver Modules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="99"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="242"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="302"/>
+        <source>Device File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="100"/>
+        <source>Device Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="101"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="311"/>
+        <source>Device Number</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="102"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="251"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="317"/>
-        <source>Device File</source>
-        <translation>Device File</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="103"/>
-        <source>Device Files</source>
-        <translation>Device Files</translation>
+        <source>Module Alias</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="104"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="326"/>
-        <source>Device Number</source>
-        <translation>Device Number</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="105"/>
-        <source>Module Alias</source>
-        <translation>Module Alias</translation>
+        <source>Application</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="107"/>
-        <source>Application</source>
-        <translation>Application</translation>
+        <source>status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="108"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="305"/>
+        <source>logical name</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="110"/>
-        <source>status</source>
-        <translation>status</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="111"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="320"/>
-        <source>logical name</source>
-        <translation>logical name</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="113"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="318"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="303"/>
         <source>ansiversion</source>
-        <translation>ansiversion</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
         <source>CPU implementer</source>
-        <translation>CPU implementer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
         <source>CPU architecture</source>
-        <translation>CPU architecture</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
         <source>CPU variant</source>
-        <translation>CPU variant</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>CPU part</source>
-        <translation>CPU part</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
         <source>CPU revision</source>
-        <translation>CPU revision</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="268"/>
+        <source>One</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="269"/>
+        <source>Two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="270"/>
+        <source>Four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
-        <source>One</source>
-        <translation>One</translation>
+        <source>Six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="272"/>
-        <source>Two</source>
-        <translation>Two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
-        <source>Four</source>
-        <translation>Four</translation>
+        <source>Eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
-        <source>Six</source>
-        <translation>Six</translation>
+        <source>Ten</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="275"/>
-        <source>Eight</source>
-        <translation>Eight</translation>
+        <source>Twelve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="276"/>
+        <source>Fourteen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="277"/>
-        <source>Ten</source>
-        <translation>Ten</translation>
+        <source>Sixteen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="278"/>
-        <source>Twelve</source>
-        <translation>Twelve</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="279"/>
-        <source>Fourteen</source>
-        <translation>Fourteen</translation>
+        <source>Eighteen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="280"/>
-        <source>Sixteen</source>
-        <translation>Sixteen</translation>
+        <source>Twenty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="281"/>
-        <source>Eighteen</source>
-        <translation>Eighteen</translation>
+        <source>Twenty-two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="282"/>
+        <source>Twenty-four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="283"/>
-        <source>Twenty</source>
-        <translation>Twenty</translation>
+        <source>Twenty-six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="284"/>
-        <source>Twenty-two</source>
-        <translation>Twenty-two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
-        <source>Twenty-four</source>
-        <translation>Twenty-four</translation>
+        <source>Twenty-eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
-        <source>Twenty-six</source>
-        <translation>Twenty-six</translation>
+        <source>Thirty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="287"/>
-        <source>Twenty-eight</source>
-        <translation>Twenty-eight</translation>
+        <source>Thirty-two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="288"/>
+        <source>Thirty-four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="289"/>
-        <source>Thirty</source>
-        <translation>Thirty</translation>
+        <source>Thirty-six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
-        <source>Thirty-two</source>
-        <translation>Thirty-two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="291"/>
-        <source>Thirty-four</source>
-        <translation>Thirty-four</translation>
+        <source>Thirty-eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="292"/>
-        <source>Thirty-six</source>
-        <translation>Thirty-six</translation>
+        <source>Forty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="293"/>
-        <source>Thirty-eight</source>
-        <translation>Thirty-eight</translation>
+        <source>Forty-two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="294"/>
+        <source>Forty-four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="295"/>
-        <source>Forty</source>
-        <translation>Forty</translation>
+        <source>Forty-six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="296"/>
-        <source>Forty-two</source>
-        <translation>Forty-two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="297"/>
-        <source>Forty-four</source>
-        <translation>Forty-four</translation>
+        <source>Forty-eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="298"/>
-        <source>Forty-six</source>
-        <translation>Forty-six</translation>
+        <source>Fifty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="299"/>
-        <source>Forty-eight</source>
-        <translation>Forty-eight</translation>
+        <source>Fifty-two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="300"/>
+        <source>Fifty-four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="301"/>
-        <source>Fifty</source>
-        <translation>Fifty</translation>
+        <source>Fifty-six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="302"/>
-        <source>Fifty-two</source>
-        <translation>Fifty-two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="303"/>
-        <source>Fifty-four</source>
-        <translation>Fifty-four</translation>
+        <source>Fifty-eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="304"/>
-        <source>Fifty-six</source>
-        <translation>Fifty-six</translation>
+        <source>Sixty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="305"/>
-        <source>Fifty-eight</source>
-        <translation>Fifty-eight</translation>
+        <source>Sixty-two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="306"/>
+        <source>Sixty-four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="307"/>
-        <source>Sixty</source>
-        <translation>Sixty</translation>
+        <source>Sixty-six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="308"/>
-        <source>Sixty-two</source>
-        <translation>Sixty-two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="309"/>
-        <source>Sixty-four</source>
-        <translation>Sixty-four</translation>
+        <source>Sixty-eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
-        <source>Sixty-six</source>
-        <translation>Sixty-six</translation>
+        <source>Seventy</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
-        <source>Sixty-eight</source>
-        <translation>Sixty-eight</translation>
+        <source>Seventy-two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="312"/>
+        <source>Seventy-four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="313"/>
-        <source>Seventy</source>
-        <translation>Seventy</translation>
+        <source>Seventy-six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="314"/>
-        <source>Seventy-two</source>
-        <translation>Seventy-two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="315"/>
-        <source>Seventy-four</source>
-        <translation>Seventy-four</translation>
+        <source>Seventy-eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="316"/>
-        <source>Seventy-six</source>
-        <translation>Seventy-six</translation>
+        <source>Eighty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="317"/>
-        <source>Seventy-eight</source>
-        <translation>Seventy-eight</translation>
+        <source>Eighty-two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="318"/>
+        <source>Eighty-four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="319"/>
-        <source>Eighty</source>
-        <translation>Eighty</translation>
+        <source>Eighty-six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="320"/>
-        <source>Eighty-two</source>
-        <translation>Eighty-two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
-        <source>Eighty-four</source>
-        <translation>Eighty-four</translation>
+        <source>Eighty-eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
-        <source>Eighty-six</source>
-        <translation>Eighty-six</translation>
+        <source>Ninety</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="323"/>
-        <source>Eighty-eight</source>
-        <translation>Eighty-eight</translation>
+        <source>Ninety-two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="324"/>
+        <source>Ninety-four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="325"/>
-        <source>Ninety</source>
-        <translation>Ninety</translation>
+        <source>Ninety-six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
-        <source>Ninety-two</source>
-        <translation>Ninety-two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
-        <source>Ninety-four</source>
-        <translation>Ninety-four</translation>
+        <source>Ninety-eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="328"/>
-        <source>Ninety-six</source>
-        <translation>Ninety-six</translation>
+        <source>One hundred</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="329"/>
-        <source>Ninety-eight</source>
-        <translation>Ninety-eight</translation>
+        <source>One hundred and Two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
+        <source>One hundred and four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
-        <source>One hundred</source>
-        <translation>One hundred</translation>
+        <source>One hundred and Six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="332"/>
-        <source>One hundred and Two</source>
-        <translation>One hundred and Two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="333"/>
-        <source>One hundred and four</source>
-        <translation>One hundred and four</translation>
+        <source>One hundred and Eight</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="334"/>
-        <source>One hundred and Six</source>
-        <translation>One hundred and Six</translation>
+        <source>One hundred and Ten</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="335"/>
-        <source>One hundred and Eight</source>
-        <translation>One hundred and Eight</translation>
+        <source>One hundred and Twelve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="336"/>
+        <source>One hundred and Fourteen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="337"/>
-        <source>One hundred and Ten</source>
-        <translation>One hundred and Ten</translation>
+        <source>One hundred and Sixteen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="338"/>
-        <source>One hundred and Twelve</source>
-        <translation>One hundred and Twelve</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="339"/>
-        <source>One hundred and Fourteen</source>
-        <translation>One hundred and Fourteen</translation>
+        <source>One hundred and Eighteen</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="340"/>
-        <source>One hundred and Sixteen</source>
-        <translation>One hundred and Sixteen</translation>
+        <source>One hundred and Twenty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="341"/>
-        <source>One hundred and Eighteen</source>
-        <translation>One hundred and Eighteen</translation>
+        <source>One hundred and Twenty-two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="342"/>
+        <source>One hundred and Twenty-four</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="343"/>
-        <source>One hundred and Twenty</source>
-        <translation>One hundred and Twenty</translation>
+        <source>One hundred and Twenty-six</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="344"/>
-        <source>One hundred and Twenty-two</source>
-        <translation>One hundred and Twenty-two</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="345"/>
-        <source>One hundred and Twenty-four</source>
-        <translation>One hundred and Twenty-four</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="346"/>
-        <source>One hundred and Twenty-six</source>
-        <translation>One hundred and Twenty-six</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="347"/>
         <source>One hundred and Twenty-eight</source>
-        <translation>One hundred and Twenty-eight</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="46"/>
         <source>GDDR capacity</source>
-        <translation>GDDR capacity</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
         <source>GPU vendor</source>
-        <translation>GPU vendor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
         <source>GPU type</source>
-        <translation>GPU type</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
         <source>EGL version</source>
-        <translation>EGL version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="50"/>
         <source>EGL client APIs</source>
-        <translation>EGL client APIs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="51"/>
         <source>GL version</source>
-        <translation>GL version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="52"/>
         <source>GLSL version</source>
-        <translation>GLSL version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="81"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="194"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="80"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="189"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="207"/>
         <source>Unknown</source>
-        <translation>Unknown</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="246"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="237"/>
         <source>Uniq</source>
-        <translation>Uniq</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="250"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="241"/>
         <source>MSC</source>
-        <translation>MSC</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="252"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="316"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="243"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="301"/>
         <source>Hardware Class</source>
-        <translation>Hardware Class</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="815"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="843"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="718"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="746"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="774"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="810"/>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="815"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="843"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="718"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="746"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="774"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="810"/>
         <source>No CPU found</source>
-        <translation>No CPU found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="816"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="844"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="719"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="747"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="775"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="811"/>
         <source>Motherboard</source>
-        <translation>Motherboard</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="816"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="844"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="719"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="747"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="775"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="811"/>
         <source>No motherboard found</source>
-        <translation>No motherboard found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="817"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="845"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="720"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="748"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="776"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="812"/>
         <source>Memory</source>
-        <translation>Memory</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="817"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="845"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="720"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="748"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="776"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="812"/>
         <source>No memory found</source>
-        <translation>No memory found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="818"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="846"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="721"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="749"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="777"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="813"/>
         <source>Storage</source>
-        <translation>Storage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="818"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="846"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="721"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="749"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="777"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="813"/>
         <source>No disk found</source>
-        <translation>No disk found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="819"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="847"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="722"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="750"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="778"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="814"/>
         <source>Display Adapter</source>
-        <translation>Display Adapter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="819"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="847"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="722"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="750"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="778"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="814"/>
         <source>No GPU found</source>
-        <translation>No GPU found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="820"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="848"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="723"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="751"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="779"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="815"/>
         <source>Monitor</source>
-        <translation>Monitor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="820"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="848"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="723"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="751"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="779"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="815"/>
         <source>No monitor found</source>
-        <translation>No monitor found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="821"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="849"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="724"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="752"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="780"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="816"/>
         <source>Network Adapter</source>
-        <translation>Network Adapter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="821"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="849"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="724"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="752"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="780"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="816"/>
         <source>No network adapter found</source>
-        <translation>No network adapter found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="822"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="850"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="725"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="753"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="781"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="817"/>
         <source>Sound Adapter</source>
-        <translation>Sound Adapter</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="822"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="850"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="725"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="753"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="781"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="817"/>
         <source>No audio device found</source>
-        <translation>No audio device found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="823"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="851"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="726"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="754"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="782"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="818"/>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="823"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="851"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="726"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="754"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="782"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="818"/>
         <source>No Bluetooth device found</source>
-        <translation>No Bluetooth device found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="824"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="852"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="727"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="755"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="783"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="819"/>
         <source>Other PCI Devices</source>
-        <translation>Other PCI Devices</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="824"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="852"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="727"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="755"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="783"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="819"/>
         <source>No other PCI devices found</source>
-        <translation>No other PCI devices found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="825"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="853"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="728"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="756"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="784"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="820"/>
         <source>Power</source>
-        <translation>Power</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="825"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="853"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="728"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="756"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="784"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="820"/>
         <source>No battery found</source>
-        <translation>No battery found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="826"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="854"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="729"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="757"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="785"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="821"/>
         <source>Keyboard</source>
-        <translation>Keyboard</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="826"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="854"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="729"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="757"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="785"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="821"/>
         <source>No keyboard found</source>
-        <translation>No keyboard found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="827"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="855"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="919"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="730"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="758"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="786"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="822"/>
         <source>Mouse</source>
-        <translation>Mouse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="827"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="855"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="919"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="730"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="758"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="786"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="822"/>
         <source>No mouse found</source>
-        <translation>No mouse found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="828"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="856"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="731"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="759"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="787"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="823"/>
         <source>Printer</source>
-        <translation>Printer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="828"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="856"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="731"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="759"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="787"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="823"/>
         <source>No printer found</source>
-        <translation>No printer found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="829"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="857"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="921"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="732"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="760"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="788"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="824"/>
         <source>Camera</source>
-        <translation>Camera</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="829"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="857"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="921"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="732"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="760"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="788"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="824"/>
         <source>No camera found</source>
-        <translation>No camera found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="830"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="858"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="922"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="733"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="761"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="789"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="825"/>
         <source>CD-ROM</source>
-        <translation>CD-ROM</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="830"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="858"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="922"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="733"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="761"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="789"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="825"/>
         <source>No CD-ROM found</source>
-        <translation>No CD-ROM found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="831"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="859"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="923"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="734"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="762"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="790"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="826"/>
         <source>Other Devices</source>
-        <translation>Other Devices</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="831"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="859"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="923"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="734"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="762"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="790"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="826"/>
         <source>No other devices found</source>
-        <translation>No other devices found</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="85"/>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="84"/>
         <source>Array Handle</source>
-        <translation>Array Handle</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="86"/>
+        <source>Form Factor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="87"/>
-        <source>Form Factor</source>
-        <translation>Form Factor</translation>
+        <source>Set</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="88"/>
-        <source>Set</source>
-        <translation>Set</translation>
+        <source>Bank Locator</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="89"/>
-        <source>Bank Locator</source>
-        <translation>Bank Locator</translation>
+        <source>Type Detail</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="90"/>
-        <source>Type Detail</source>
-        <translation>Type Detail</translation>
+        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="91"/>
+        <source>Part Number</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="92"/>
-        <source>Part Number</source>
-        <translation>Part Number</translation>
+        <source>Rank</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="93"/>
-        <source>Rank</source>
-        <translation>Rank</translation>
+        <source>Memory Technology</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="94"/>
-        <source>Memory Technology</source>
-        <translation>Memory Technology</translation>
+        <source>Memory Operating Mode Capability</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="95"/>
-        <source>Memory Operating Mode Capability</source>
-        <translation>Memory Operating Mode Capability</translation>
+        <source>Firmware Version</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="96"/>
-        <source>Firmware Version</source>
-        <translation>Firmware Version</translation>
+        <source>Module Manufacturer ID</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="97"/>
-        <source>Module Manufacturer ID</source>
-        <translation>Module Manufacturer ID</translation>
+        <source>Module Product ID</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="98"/>
-        <source>Module Product ID</source>
-        <translation>Module Product ID</translation>
+        <source>Memory Subsystem Controller Manufacturer ID</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="99"/>
-        <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation>Memory Subsystem Controller Manufacturer ID</translation>
+        <source>Memory Subsystem Controller Product ID</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="100"/>
-        <source>Memory Subsystem Controller Product ID</source>
-        <translation>Memory Subsystem Controller Product ID</translation>
+        <source>Non-Volatile Size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="101"/>
-        <source>Non-Volatile Size</source>
-        <translation>Non-Volatile Size</translation>
+        <source>Volatile Size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="102"/>
-        <source>Volatile Size</source>
-        <translation>Volatile Size</translation>
+        <source>Cache Size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="103"/>
-        <source>Cache Size</source>
-        <translation>Cache Size</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceMemory.cpp" line="104"/>
         <source>Logical Size</source>
-        <translation>Logical Size</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="55"/>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="72"/>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="331"/>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="358"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="333"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="364"/>
         <source>inch</source>
-        <translation>inch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="207"/>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="123"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="122"/>
         <source>ioport</source>
-        <translation>ioport</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="125"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="124"/>
         <source>network</source>
-        <translation>network</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="46"/>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="82"/>
         <source>battery</source>
-        <translation>battery</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="111"/>
         <source>native-path</source>
-        <translation>native-path</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="112"/>
         <source>power supply</source>
-        <translation>power supply</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="113"/>
         <source>updated</source>
-        <translation>updated</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="114"/>
         <source>has history</source>
-        <translation>has history</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="115"/>
         <source>has statistics</source>
-        <translation>has statistics</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="116"/>
         <source>rechargeable</source>
-        <translation>rechargeable</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="117"/>
         <source>state</source>
-        <translation>state</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="118"/>
         <source>warning-level</source>
-        <translation>warning-level</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="119"/>
         <source>energy</source>
-        <translation>energy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="120"/>
         <source>energy-empty</source>
-        <translation>energy-empty</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="121"/>
         <source>energy-full</source>
-        <translation>energy-full</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="122"/>
         <source>energy-full-design</source>
-        <translation>energy-full-design</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="123"/>
         <source>energy-rate</source>
-        <translation>energy-rate</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="124"/>
         <source>voltage</source>
-        <translation>voltage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="125"/>
         <source>percentage</source>
-        <translation>percentage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="127"/>
         <source>technology</source>
-        <translation>technology</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="128"/>
         <source>icon-name</source>
-        <translation>icon-name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="129"/>
         <source>online</source>
-        <translation>online</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="130"/>
         <source>daemon-version</source>
-        <translation>daemon-version</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="131"/>
         <source>on-battery</source>
-        <translation>on-battery</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="132"/>
         <source>lid-is-closed</source>
-        <translation>lid-is-closed</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="133"/>
         <source>lid-is-present</source>
-        <translation>lid-is-present</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="134"/>
         <source>critical-action</source>
-        <translation>critical-action</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="98"/>
+        <source>copies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="99"/>
+        <source>job-cancel-after</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="100"/>
-        <source>copies</source>
-        <translation>copies</translation>
+        <source>job-hold-until</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="101"/>
+        <source>job-priority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="102"/>
+        <source>marker-change-time</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="103"/>
-        <source>job-cancel-after</source>
-        <translation>job-cancel-after</translation>
+        <source>number-up</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="104"/>
-        <source>job-hold-until</source>
-        <translation>job-hold-until</translation>
+        <source>orientation-requested</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="105"/>
-        <source>job-priority</source>
-        <translation>job-priority</translation>
+        <source>print-color-mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="106"/>
+        <source>printer-is-accepting-jobs</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="107"/>
-        <source>marker-change-time</source>
-        <translation>marker-change-time</translation>
+        <source>printer-is-shared</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="108"/>
+        <source>printer-is-temporary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="109"/>
+        <source>printer-make-and-model</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="110"/>
-        <source>number-up</source>
-        <translation>number-up</translation>
+        <source>printer-state-change-time</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="111"/>
-        <source>orientation-requested</source>
-        <translation>orientation-requested</translation>
+        <source>printer-state-reasons</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="112"/>
-        <source>print-color-mode</source>
-        <translation>print-color-mode</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="116"/>
-        <source>printer-is-accepting-jobs</source>
-        <translation>printer-is-accepting-jobs</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="117"/>
-        <source>printer-is-shared</source>
-        <translation>printer-is-shared</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="118"/>
-        <source>printer-is-temporary</source>
-        <translation>printer-is-temporary</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="120"/>
-        <source>printer-make-and-model</source>
-        <translation>printer-make-and-model</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="122"/>
-        <source>printer-state-change-time</source>
-        <translation>printer-state-change-time</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="123"/>
-        <source>printer-state-reasons</source>
-        <translation>printer-state-reasons</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="124"/>
         <source>printer-type</source>
-        <translation>printer-type</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="125"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="113"/>
         <source>printer-uri-supported</source>
-        <translation>printer-uri-supported</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DevicePrint.cpp" line="126"/>
+        <location filename="../src/DeviceManager/DevicePrint.cpp" line="114"/>
         <source>sides</source>
-        <translation>sides</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="190"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="211"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="354"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="410"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="185"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="339"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="393"/>
         <source>SSD</source>
-        <translation>SSD</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="192"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="187"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="205"/>
         <source>HDD</source>
-        <translation>HDD</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="319"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="304"/>
         <source>bus info</source>
-        <translation>bus info</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="321"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="306"/>
         <source>logicalsectorsize</source>
-        <translation>logicalsectorsize</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="323"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="308"/>
         <source>sectorsize</source>
-        <translation>sectorsize</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="324"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="309"/>
         <source>guid</source>
-        <translation>guid</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="327"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="312"/>
         <source>Geometry (Logical)</source>
-        <translation>Geometry (Logical)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="57"/>
         <location filename="../src/main.cpp" line="59"/>
         <source>Device Manager</source>
-        <translation>Device Manager</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="60"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-        <translation>Device Manager is a handy tool for viewing hardware information and managing the devices.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ReadFilePool</name>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="68"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="74"/>
         <source>Loading Audio Device Info...</source>
-        <translation>Loading Audio Device Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="71"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="77"/>
         <source>Loading BIOS Info...</source>
-        <translation>Loading BIOS Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="81"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="87"/>
         <source>Loading CD-ROM Info...</source>
-        <translation>Loading CD-ROM Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="85"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="91"/>
         <source>Loading Bluetooth Device Info...</source>
-        <translation>Loading Bluetooth Device Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="86"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="92"/>
         <source>Loading Image Devices Info...</source>
-        <translation>Loading Image Devices Info...</translation>
-    </message>
-    <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="88"/>
-        <source>Loading Keyboard Info...</source>
-        <translation>Loading Keyboard Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="94"/>
+        <source>Loading Keyboard Info...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="100"/>
         <source>Loading Operating System Info...</source>
-        <translation>Loading Operating System Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="96"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="103"/>
         <source>Loading CPU Info...</source>
-        <translation>Loading CPU Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="97"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="104"/>
         <source>Loading Other Devices Info...</source>
-        <translation>Loading Other Devices Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="98"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="105"/>
         <source>Loading Power Info...</source>
-        <translation>Loading Power Info...</translation>
-    </message>
-    <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="99"/>
-        <source>Loading Printer Info...</source>
-        <translation>Loading Printer Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="106"/>
+        <source>Loading Printer Info...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="113"/>
         <source>Loading Monitor Info...</source>
-        <translation>Loading Monitor Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="107"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="114"/>
         <source>Loading Mouse Info...</source>
-        <translation>Loading Mouse Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="108"/>
+        <location filename="../src/ThreadPool/ReadFilePool.cpp" line="115"/>
         <source>Loading Network Adapter Info...</source>
-        <translation>Loading Network Adapter Info...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TableWidget</name>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="28"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="147"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="151"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="29"/>
         <source>Refresh</source>
-        <translation>Refresh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="30"/>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="149"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="173"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="153"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="181"/>
         <source>Enable</source>
-        <translation>Enable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3213,22 +3220,22 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="24"/>
         <source>Refresh</source>
-        <translation>Refresh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="25"/>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="26"/>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="254"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="225"/>
         <source>Disable</source>
-        <translation>Disable</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3236,7 +3243,7 @@
     <message>
         <location filename="../src/Page/WaitingWidget.cpp" line="18"/>
         <source>Loading...</source>
-        <translation>Loading...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

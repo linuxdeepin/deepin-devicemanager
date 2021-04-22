@@ -74,6 +74,12 @@ public:
      */
     const QString getOverviewInfo() override;
 
+    /**
+     * @brief setInfoFromLscpu:设置由lscpu获取的CPU信息
+     * @param mapInfo:由lscpu获取的CPU信息map
+     */
+    void setInfoFromLscpu(const QMap<QString, QString> &mapInfo);
+
 protected:
 
     /**
@@ -106,12 +112,6 @@ protected:
 private:
 
     /**
-     * @brief setInfoFromLscpu:设置由lscpu获取的CPU信息
-     * @param mapInfo:由lscpu获取的CPU信息map
-     */
-    void setInfoFromLscpu(const QMap<QString, QString> &mapInfo);
-
-    /**
      * @brief setInfoFromLshw:设置由lshw获取的CPU信息
      * @param mapInfo:由lshw获取的CPU信息map
      */
@@ -128,6 +128,12 @@ private:
      * @param mapInfo:由cat /proc/cpuinfo获取的信息map
      */
     void setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief setRefreshInfoFromLscpu:刷新时重新获取cpu信息
+     * @param mapInfo:由lscpu获取的信息
+     */
+    void setRefreshInfoFromLscpu(const QMap<QString, QString> &mapInfo);
 
 private:
     QString           m_Vendor;             //<! 制造商
