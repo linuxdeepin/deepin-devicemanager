@@ -89,6 +89,13 @@ public:
      */
     int RowNum()const;
 
+public slots:
+    /**
+     * @brief setColumWidth:设置列宽
+     * @param width
+     */
+    void setColumWidth(int width);
+
 protected:
     void initUI();
     void paintEvent(QPaintEvent *event) override;
@@ -102,6 +109,7 @@ private:
     QStandardItemModel         *mp_Model;
     LogViewItemDelegate        *mp_ItemDelegate;
     LogViewHeaderView          *mp_HeaderView;
+    int m_width = 0;
 };
 
 #endif  // LOGTREEVIEW_H
