@@ -120,5 +120,6 @@ void PageTableWidget::initUI()
     // set Contents margin 0,bug66137
     whLayout->setContentsMargins(0, 0, 0, 0);
     whLayout->addWidget(mp_Table);
+    whLayout->addStretch();
     this->setLayout(whLayout);
 }
