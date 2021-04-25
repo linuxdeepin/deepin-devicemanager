@@ -56,6 +56,10 @@ popd
 %install
 %make_install -C build INSTALL_ROOT="%buildroot"
 
+%post
+systemctl enable deepin-devicemanager-server.service
+
+
 %files
 %doc README.md
 %license LICENSE
