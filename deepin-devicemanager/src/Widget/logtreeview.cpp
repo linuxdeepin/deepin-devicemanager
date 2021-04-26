@@ -129,7 +129,7 @@ int LogTreeView::RowNum() const
     return m_RowCount;
 }
 
-void LogTreeView::setColumWidth(int width)
+void LogTreeView::slotColumWidth(int width)
 {
     m_width = width;
     setColumnAverage();
@@ -148,7 +148,7 @@ void LogTreeView::initUI()
     // 表头
     mp_HeaderView = new LogViewHeaderView(Qt::Horizontal, this);
     setHeader(mp_HeaderView);
-    connect(mp_HeaderView, &LogViewHeaderView::columnWidth, this, &LogTreeView::setColumWidth);
+    connect(mp_HeaderView, &LogViewHeaderView::columnWidth, this, &LogTreeView::slotColumWidth);
 
     // 设置不可编辑
     this->setEditTriggers(QAbstractItemView::NoEditTriggers);

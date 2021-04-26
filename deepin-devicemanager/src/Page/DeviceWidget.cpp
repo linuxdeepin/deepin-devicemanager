@@ -89,39 +89,6 @@ void DeviceWidget::slotUpdateUI()
 void DeviceWidget::resizeEvent(QResizeEvent *event)
 {
     DWidget::resizeEvent(event);
-    // 获取所有设备类别
-    //    const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
-
-    //    // 根据右侧Listview当前Index获取当前设备类别的
-    //    QString userStr = mp_ListView->currentIndex();
-
-    //    QString deviceType = "";
-    //    foreach (auto iter, types) {
-    //        if (iter.second.contains(userStr)) {
-    //            deviceType = iter.first;
-    //            break;
-    //        }
-    //    }
-
-    //    // 根据设备类别获取设备指针
-    //    QList<DeviceBaseInfo *> lst;
-    //    bool ret = DeviceManager::instance()->getDeviceList(deviceType, lst);
-    //    if (ret) {
-    //        // 更新设备信息界面
-    //        if (lst.size() > 1) {
-    //            // 判断是否是BIOS界面
-    //            DeviceBios *bios = dynamic_cast<DeviceBios *>(lst[0]);
-    //            if (bios)
-    //                mp_PageInfo->updateTable(deviceType, lst);
-    //        } else {
-    //            mp_PageInfo->updateTable(deviceType, lst);
-    //        }
-
-    //    } else {
-    //        // 更新Overview界面
-    //        QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
-    //        mp_PageInfo->updateTable(overviewMap);
-    //    }
 }
 
 void DeviceWidget::initWidgets()

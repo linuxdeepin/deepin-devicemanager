@@ -94,7 +94,7 @@ public slots:
      * @brief setColumWidth:设置列宽
      * @param width
      */
-    void setColumWidth(int width);
+    void slotColumWidth(int width);
 
 protected:
     void initUI();

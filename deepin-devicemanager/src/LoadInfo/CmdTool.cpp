@@ -169,7 +169,6 @@ void CmdTool::loadLssgInfo(const QString &debugfile)
         return;
 
     QStringList lines = deviceInfo.split("\n");
-    QMap<QString, QString> mapInfo;
 
     // 获取存储设备逻辑名称以及ROTA信息
     foreach (QString line, lines) {
@@ -179,7 +178,8 @@ void CmdTool::loadLssgInfo(const QString &debugfile)
         QStringList words = line.split("/");
 
         //sudo smartctl --all /dev/%1   文件信息
-        loadSmartCtlInfo(words[2].trimmed(), "smartctl_" + words[2].trimmed() + ".txt");
+        if (words.count() > 2)
+            loadSmartCtlInfo(words[2].trimmed(), "smartctl_" + words[2].trimmed() + ".txt");
     }
 }
 
@@ -347,9 +347,8 @@ void CmdTool::loadHciconfigInfo(const QString &debugfile)
 
     } else {
         // 获取文件信息
-        if (!getDeviceInfo(deviceInfo, debugfile)) {
+        if (!getDeviceInfo(deviceInfo, debugfile))
             return;
-        }
     }
 
     QStringList paragraphs = deviceInfo.split(QString("\n\n"));
@@ -369,10 +368,6 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
         return;
     }
     QString deviceInfo;
-//    if (!getDeviceInfo("bluetoothctl show " + mapInfo["BD Address"], deviceInfo, "bluetoothctl.txt")) {
-//        addMapInfo("hciconfig", mapInfo);
-//        return;
-//    }
 
     // 读取文件信息
     if (!getDeviceInfo(deviceInfo, "bluetoothctl.txt")) {
@@ -389,9 +384,6 @@ void CmdTool::loadPrinterInfo()
 {
     // 先判断有没有打印机
     QString deviceInfo;
-//    if (!getDeviceInfo("lpstat -a", deviceInfo, "lpstat.txt")) {
-//        return;
-//    }
 
     // 通过文件获取lpstat -a信息
     if (!getDeviceInfo(deviceInfo, "lpstat.txt"))
@@ -420,22 +412,6 @@ void CmdTool::loadPrinterInfo()
             addMapInfo("printer", mapInfo);
     }
     cupsFreeDests(num_dests, dests);
-
-
-    //    cups_dest_t *dests = nullptr;
-    //    int num_dests;
-    //    num_dests = cupsGetDests(&dests);
-    //    if (dests == nullptr) {
-    //        return;
-    //    }
-    //    for (int i = 0; i < num_dests; i++) {
-    //        cups_dest_t *dest = nullptr;
-    //        QMap<QString, QString> mapInfo;
-    //        dest = dests + i;
-    //        getMapInfo(mapInfo, dest);
-    //        addMapInfo("printer", mapInfo);
-    //    }
-    //    cupsFreeDests(num_dests, dests);
 }
 
 void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
@@ -454,10 +430,6 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
-
-        // 添加显卡位宽
-//        if (key == "hwinfo_display")
-//            addWidthToMap(mapInfo);
 
         // hwinfo --usb 里面有很多的无用信息，需要特殊处理
         if (key == "hwinfo_usb") {
@@ -687,9 +659,6 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &debugfil
             }
         }
 
-        //Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0/input/input40
-        //QRegExp re = QRegExp(".*(usb[0-9]\\/[0-9]-[0-9]\\/[0-9]-[0-9]:[0-9]).*");
-
         addMapInfo(key, mapInfo);
     }
 }
@@ -728,9 +697,8 @@ void CmdTool::loadEdidInfo(const QString &key, const QString &debugfile)
         QString l;
         QStringList::const_iterator it = words.begin();
         ++it;
-        for (; it != words.end(); ++it) {
+        for (; it != words.end(); ++it)
             l.append(*it);
-        }
         l.append("\n");
         edid.append(l);
     }
