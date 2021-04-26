@@ -84,9 +84,9 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     // 获取计算机架构信息,x86 arm mips
-    QString arch = getArchString();
-    mp_ThreadPool->setFramework(arch);
-    DeviceFactory::setGeneratorKey(arch);
+    //QString arch = getArchString();
+    mp_ThreadPool->setFramework("KLU");
+    DeviceFactory::setGeneratorKey("KLU");
 
     DeviceManager::instance();
     refreshDatabase();
