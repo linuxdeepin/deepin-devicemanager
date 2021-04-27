@@ -117,27 +117,27 @@ const QString DeviceCpu::getOverviewInfo()
 void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 {
     // 设置CPU属性
-    setAttribute(mapInfo, "Model name", m_Name);
-    setAttribute(mapInfo, "Vendor ID", m_Vendor);
-    setAttribute(mapInfo, "Thread(s) per core", m_ThreadNum);
+    setAttribute(mapInfo, "型号名称", m_Name);
+    setAttribute(mapInfo, "厂商 ID", m_Vendor);
+    setAttribute(mapInfo, "每个核的线程数", m_ThreadNum);
     setAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
-    setAttribute(mapInfo, "Architecture", m_Architecture);
-    setAttribute(mapInfo, "CPU family", m_Familly);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "Stepping", m_Step);
-    setAttribute(mapInfo, "L1d cache", m_CacheL1Data);
-    setAttribute(mapInfo, "L1i cache", m_CacheL1Order);
-    setAttribute(mapInfo, "L2 cache", m_CacheL2);
-    setAttribute(mapInfo, "L3 cache", m_CacheL3);
-    setAttribute(mapInfo, "Flags", m_Flags);
-    setAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
+    setAttribute(mapInfo, "架构", m_Architecture);
+    setAttribute(mapInfo, "CPU 系列", m_Familly);
+    setAttribute(mapInfo, "型号", m_Model);
+    setAttribute(mapInfo, "步进", m_Step);
+    setAttribute(mapInfo, "L1d 缓存", m_CacheL1Data);
+    setAttribute(mapInfo, "L1i 缓存", m_CacheL1Order);
+    setAttribute(mapInfo, "L2 缓存", m_CacheL2);
+    setAttribute(mapInfo, "L3 缓存", m_CacheL3);
+    setAttribute(mapInfo, "标记", m_Flags);
+    setAttribute(mapInfo, "虚拟化", m_HardwareVirtual);
 
     // 计算频率范围
-    bool min = mapInfo.find("CPU min MHz") != mapInfo.end();
-    bool max = mapInfo.find("CPU max MHz") != mapInfo.end();
+    bool min = mapInfo.find("CPU 最小 MHz") != mapInfo.end();
+    bool max = mapInfo.find("CPU 最大 MHz") != mapInfo.end();
     if (min && max) {
-        double minHz = mapInfo["CPU min MHz"].toDouble() / 1000;
-        double maxHz = mapInfo["CPU max MHz"].toDouble() / 1000;
+        double minHz = mapInfo["CPU 最小 MHz"].toDouble() / 1000;
+        double maxHz = mapInfo["CPU 最大 MHz"].toDouble() / 1000;
         m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
         m_FrequencyIsRange = true;
 
@@ -150,7 +150,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     //获取扩展指令集
     QStringList orders = {"MMX", "SSE", "SSE2", "SSE3", "3D Now", "SSE4", "SSSE3", "SSE4_1", "SSE4_2", "AMD64", "EM64T"};
     foreach (const QString &order, orders) {
-        if (mapInfo["Flags"].contains(order, Qt::CaseInsensitive))
+        if (mapInfo["标记"].contains(order, Qt::CaseInsensitive))
             m_Extensions += QString("%1 ").arg(order);
     }
 

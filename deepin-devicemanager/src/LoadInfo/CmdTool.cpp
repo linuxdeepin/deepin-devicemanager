@@ -589,7 +589,11 @@ void CmdTool::loadLscpuInfo(const QString &key, const QString &debugfile)
             continue;
 
         QMap<QString, QString> mapInfo;
-        getMapInfoFromCmd(item, mapInfo, key.startsWith("cat_os") ? "=" : ": ");
+        if (key == "lscpu") {
+            getMapInfoFromCmd(item, mapInfo, "： ");
+        } else {
+            getMapInfoFromCmd(item, mapInfo, key.startsWith("cat_os") ? "=" : ": ");
+        }
         addMapInfo(key, mapInfo);
     }
 }
