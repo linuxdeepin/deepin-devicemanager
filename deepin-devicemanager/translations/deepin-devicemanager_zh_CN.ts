@@ -1446,6 +1446,11 @@
         <source>CPU</source>
         <translation>处理器</translation>
     </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="377"/>
+        <source>Network Adapter</source>
+        <translation>网络适配器</translation>
+    </message>
 </context>
 <context>
     <name>PageDetail</name>

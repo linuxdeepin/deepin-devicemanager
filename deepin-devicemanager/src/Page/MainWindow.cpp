@@ -28,6 +28,7 @@
 #include "DeviceFactory.h"
 #include "ThreadExecXrandr.h"
 #include "LoadCpuInfoThread.h"
+#include "CmdTool.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -373,6 +374,9 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         LoadCpuInfoThread lct;
         lct.start();
         lct.wait();
+    } else if (tr("Network Adapter") == itemStr) {
+        CmdTool tool;
+        DeviceManager::instance()->correctNetworkLinkStatus(tool.getCurNetworkLinkStatus());
     }
 
     QList<DeviceBaseInfo *> lst;

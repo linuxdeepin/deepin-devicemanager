@@ -272,6 +272,12 @@ public:
      */
     void addNetworkDevice(DeviceNetwork *const device);
 
+    /**
+     * @brief correctNetworkLinkStatus:校正网络连接状态
+     * @param linkStatus:连接状态
+     */
+    void correctNetworkLinkStatus(QString linkStatus);
+
     // 图像设备相关
     /**
      * @brief addImageDevice:添加图像设备

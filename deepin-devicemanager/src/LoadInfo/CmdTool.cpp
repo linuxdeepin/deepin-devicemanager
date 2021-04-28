@@ -895,6 +895,23 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
     }
 }
 
+QString CmdTool::getCurNetworkLinkStatus()
+{
+    QProcess process;
+    QString cmd = "lshw -C network";
+    process.start(cmd);
+    QString networkInfo;
+
+    // 获取命令执行结果
+    bool res = process.waitForFinished(-1);
+    if (!res)
+        return "";
+    networkInfo = process.readAllStandardOutput();
+    QMap<QString, QString> mapInfo;
+    getMapInfoFromLshw(networkInfo, mapInfo);
+    return mapInfo["link"];
+}
+
 void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
     QStringList infoList = info.split("\n");

@@ -52,6 +52,12 @@ public:
     void loadCmdInfo(const QString &key, const QString &debugFile);
 
     /**
+     * @brief getCurNetworkLinkStatus:lshw -C network获取当前连接状态
+     * @return
+     */
+    QString getCurNetworkLinkStatus();
+
+    /**
      * @brief cmdInfo:获取命令的解析结果
      * @return 解析结果以map形式返回
      */
