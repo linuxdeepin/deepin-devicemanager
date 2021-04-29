@@ -19,10 +19,14 @@ EnableManager::EnableManager()
 
 }
 
-EnableDeviceStatus EnableManager::enableDeviceByInput(const QString &name, bool enable, int index)
+EnableDeviceStatus EnableManager::enableDeviceByInput(bool enable, int id)
 {
     // 获取输入设备ID
-    int id = getDeviceID(name, enable, index);
+    //    if ((!enable) != isDeviceEnable(id))
+    //        id = -1;
+
+    if (enable == isDeviceEnable(id))
+        return EDS_Faild;
 
     // 通过ID禁用启用设备
     QString cmd = QString("xinput %1 %2").arg(enable ? "enable" : "disable").arg(id);
@@ -32,7 +36,6 @@ EnableDeviceStatus EnableManager::enableDeviceByInput(const QString &name, bool 
     process.waitForFinished(msecs);
     int exitCode = process.exitCode();
     QString output = process.readAllStandardOutput();
-
     if (exitCode == 0)
         return EDS_Success;
 
@@ -212,12 +215,8 @@ bool EnableManager::isNetworkEnableByIfconfig(const QString &logicalName)
     return false;
 }
 
-int EnableManager::getDeviceID(const QString &name, bool enable, int index)
+int EnableManager::getDeviceID(const QString &name, const QString &key)
 {
-    // 获取输入设备ID
-    int id = -1;
-    int curIndex = -1;
-
     // 先判断有没有同名
     QString cmd = "xinput list";
     QProcess process;
@@ -232,14 +231,33 @@ int EnableManager::getDeviceID(const QString &name, bool enable, int index)
         if (re.exactMatch(item)) {
             QString n = re.cap(1).trimmed();
             int curId = re.cap(2).toInt();
-            if (n == name && (!enable) == isDeviceEnable(curId)) {
-                curIndex++;
-                if (index == curIndex)
-                    id = curId;
-            }
+            if (n != name)
+                continue;
+            if (isDeviceId(curId, key))
+                return curId;
         }
     }
-    return id;
+    return -1;
+}
+
+bool EnableManager::isDeviceId(const int &id, const QString key)
+{
+    QString cmd = QString("xinput list-props %1").arg(id);
+    QProcess process;
+    int msecs = -1;
+    process.start(cmd);
+    process.waitForFinished(msecs);
+
+    QString output = process.readAllStandardOutput();
+    QStringList items = output.split("\n");
+    foreach (const QString &item, items) {
+        if (!item.contains(key))
+            continue;
+        else
+            return true;
+    }
+
+    return false;
 }
 
 QString EnableManager::getDriverPath(const QString &driver)

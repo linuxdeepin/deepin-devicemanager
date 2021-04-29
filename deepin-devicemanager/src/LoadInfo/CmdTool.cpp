@@ -640,14 +640,14 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &debugfil
         getMapInfoFromInput(item, mapInfo, "=");
 
         // 获取与正则表达式匹配的输入设备
-        QRegExp re = QRegExp(".*(mouse[0-9]{1,2}).*");
-        if (re.exactMatch(mapInfo["Handlers"])) {
-            QString name = re.cap(1);
+        QRegExp rem = QRegExp(".*(event[0-9]{1,2}).*");
+        if (rem.exactMatch(mapInfo["Handlers"])) {
+            QString name = rem.cap(1);
             DeviceManager::instance()->addInputInfo(name, mapInfo);
         } else {
-            QRegExp rem = QRegExp(".*(event[0-9]{1,2}).*");
-            if (rem.exactMatch(mapInfo["Handlers"])) {
-                QString name = rem.cap(1);
+            QRegExp re = QRegExp(".*(mouse[0-9]{1,2}).*");
+            if (re.exactMatch(mapInfo["Handlers"])) {
+                QString name = re.cap(1);
                 DeviceManager::instance()->addInputInfo(name, mapInfo);
             }
         }
