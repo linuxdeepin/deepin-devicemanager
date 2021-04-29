@@ -296,18 +296,11 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
     QMap<QString, QString> mapInfo;
     QStringList lines = deviceInfo.split("\n");
     foreach (const QString &line, lines) {
-        QRegExp reg(".*RAM=([0-9]*)M.*");
+        QRegExp reg(".*([0-9]{2}:[0-9]{2}.[0-9]{1}): VRAM([=:]{1}) ([0-9]*)M.*");
         if (reg.exactMatch(line)) {
-            double size = reg.cap(1).toDouble();
+            double size = reg.cap(3).toDouble();
             QString sizeS = QString("%1GB").arg(size / 1024);
-            mapInfo["Size"] = sizeS;
-        } else {
-            reg.setPattern(".*RAM: ([0-9]*) M.*");
-            if (reg.exactMatch(line)) {
-                double size = reg.cap(1).toDouble();
-                QString sizeS = QString("%1GB").arg(size / 1024);
-                mapInfo["Size"] = sizeS;
-            }
+            mapInfo["Size"] = reg.cap(1) + "=" + sizeS;
         }
     }
     addMapInfo("dmesg", mapInfo);
