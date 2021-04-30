@@ -118,7 +118,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 {
     // 设置CPU属性
     setAttribute(mapInfo, "Model name", m_Name);
-    setAttribute(mapInfo, "Vendor ID", m_Vendor);
+    setAttribute(mapInfo, "Vendor ID", m_Vendor, false);
     setAttribute(mapInfo, "Thread(s) per core", m_ThreadNum);
     setAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
     setAttribute(mapInfo, "Architecture", m_Architecture);

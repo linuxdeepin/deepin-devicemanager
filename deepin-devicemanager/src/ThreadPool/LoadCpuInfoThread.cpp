@@ -44,7 +44,6 @@ void LoadCpuInfoThread::loadCpuInfo(QList<QMap<QString, QString>> &lstMap, const
     QString cpuInfo;
     runCmd(cpuInfo, cmd);
     QStringList items = cpuInfo.split("\n");
-    //    qInfo() << items;
     foreach (const QString &item, items) {
         if (item.isEmpty())
             continue;

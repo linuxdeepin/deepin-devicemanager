@@ -163,7 +163,6 @@ void DeviceInput::setInfoFromInput()
 {
     // 获取对应的由cat /proc/bus/devices/input读取的设备信息
     const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
-    qInfo() << m_KeysToCatDevices << mapInfo["Name"];
     // 设置Name属性
     setAttribute(mapInfo, "Name", m_Name, true);
 
