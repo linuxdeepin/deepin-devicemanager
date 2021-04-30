@@ -212,7 +212,7 @@ void PageSingleInfo::initWidgets()
     hLayout->addSpacing(LABEL_MARGIN);
 
     hLayout->addWidget(mp_Content);
-    //    hLayout->addStretch();          // 考虑禁用后表格只有一行，靠上显示
+    hLayout->addStretch(1); // 考虑禁用后表格只有一行，靠上显示
     setLayout(hLayout);
 }
 

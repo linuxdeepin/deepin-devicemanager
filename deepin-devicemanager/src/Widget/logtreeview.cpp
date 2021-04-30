@@ -69,8 +69,10 @@ void LogTreeView::setColumnAverage()
     }
     // 设置每一行等宽
     int colCount = mp_HeaderView->count();
-    for (int i = 0; i < colCount; i++)
-        setColumnWidth(i, m_width / mp_HeaderView->count());
+    int avgColWidth = width() / colCount;
+    for (int i = 0; i < colCount; i++) {
+        setColumnWidth(i, avgColWidth);
+    }
 }
 
 bool LogTreeView::currentRowEnable()
@@ -129,12 +131,6 @@ int LogTreeView::RowNum() const
     return m_RowCount;
 }
 
-void LogTreeView::slotColumWidth(int width)
-{
-    m_width = width;
-    setColumnAverage();
-}
-
 void LogTreeView::initUI()
 {
     // 模型
@@ -148,7 +144,6 @@ void LogTreeView::initUI()
     // 表头
     mp_HeaderView = new LogViewHeaderView(Qt::Horizontal, this);
     setHeader(mp_HeaderView);
-    connect(mp_HeaderView, &LogViewHeaderView::columnWidth, this, &LogTreeView::slotColumWidth);
 
     // 设置不可编辑
     this->setEditTriggers(QAbstractItemView::NoEditTriggers);

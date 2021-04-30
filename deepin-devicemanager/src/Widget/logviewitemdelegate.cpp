@@ -118,7 +118,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         textRect.setX(textRect.x() + margin);
     }
 
-    QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width() - 10);
+    QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
     if (text.startsWith("(" + tr("Disable") + ")") && !enableAndSelect) {
         QPen p = painter->pen();

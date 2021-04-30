@@ -65,10 +65,10 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     // 根据页面高度确定表格最多显示行数
     int maxRow = this->height() / ROW_HEIGHT - 4;
     if (maxRow < 1) {
-        mp_Overview->setLimitRow(10);
+        mp_Overview->setLimitRow(11);
 
     } else {
-        mp_Overview->setLimitRow(std::min(10, maxRow));
+        mp_Overview->setLimitRow(std::min(11, maxRow));
     }
 
     // 设置表格行数
@@ -228,5 +228,6 @@ void PageOverview::initWidgets()
 
     // 下部分
     vLayout->addWidget(mp_Overview);
+    vLayout->addStretch();
     setLayout(vLayout);
 }

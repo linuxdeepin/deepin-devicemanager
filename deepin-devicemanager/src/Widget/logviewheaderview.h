@@ -29,7 +29,6 @@ DWIDGET_USE_NAMESPACE
 
 class LogViewHeaderView : public DHeaderView
 {
-    Q_OBJECT
 public:
     LogViewHeaderView(Qt::Orientation orientation, QWidget *parent = nullptr);
 
@@ -43,8 +42,6 @@ protected:
     void paintEvent(QPaintEvent *e) override;
     virtual void paintSection(QPainter *painter, const QRect &rect,
                               int logicalIndex) const override;
-signals:
-    void columnWidth(int width) const;
 
 private:
     int m_spacing {1};

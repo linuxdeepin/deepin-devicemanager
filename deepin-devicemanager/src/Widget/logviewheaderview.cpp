@@ -66,6 +66,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     QStyleOptionHeader option;
     initStyleOption(&option);
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
+
     // title
     QRect contentRect(rect.x(), rect.y(), rect.width(), rect.height() - m_spacing);
     QRect hSpacingRect(rect.x(), contentRect.height(), rect.width(),
@@ -97,7 +98,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
                     contentRect.height()
                    };
     } else {
-        textRect = {contentRect.x() + margin, contentRect.y(), width() / this->count() - margin,
+        textRect = {contentRect.x() + margin, contentRect.y(), contentRect.width() - margin,
                     contentRect.height()};
     }
     QString title = model()->headerData(logicalIndex, orientation(), Qt::DisplayRole).toString();
@@ -177,7 +178,6 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
 
 QSize LogViewHeaderView::sizeHint() const
 {
-    emit columnWidth(width());
     return QSize(width(), 36 + m_spacing);
 }
 
