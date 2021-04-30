@@ -549,6 +549,22 @@ void DeviceManager::correctNetworkLinkStatus(QString linkStatus)
     }
 }
 
+void DeviceManager::correctPowerInfo(const QMap<QString, QMap<QString, QString>> &mapInfo)
+{
+    if (m_ListDevicePower.size() == 0)
+        return;
+    QList<DeviceBaseInfo *>::iterator it = m_ListDevicePower.begin();
+    for (; it != m_ListDevicePower.end(); ++it) {
+        DevicePower *device = dynamic_cast<DevicePower *>(*it);
+        if (!device)
+            continue;
+
+        //根据获取到的数据，重新设置电池信息
+        device->setInfoFromUpower(mapInfo["upower"]);
+        device->setDaemonInfo(mapInfo["Daemon"]);
+    }
+}
+
 void DeviceManager::addImageDevice(DeviceImage *const device)
 {
     // 添加图像设备

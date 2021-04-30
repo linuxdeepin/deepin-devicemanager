@@ -362,21 +362,24 @@ void MainWindow::loadingFinishSlot(const QString &message)
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
     // xrandr would be execed later
-    if (tr("Monitor") == itemStr) {
+    if (tr("Monitor") == itemStr) { //点击显示设备，执行线程加载信息
         ThreadExecXrandr tx(false);
         tx.start();
         tx.wait();
-    } else if (tr("Display Adapter") == itemStr) {
+    } else if (tr("Display Adapter") == itemStr) { //点击显示适配器，执行线程加载信息
         ThreadExecXrandr tx(true);
         tx.start();
         tx.wait();
-    } else if (tr("CPU") == itemStr) {
+    } else if (tr("CPU") == itemStr) { //点击处理器，执行加载处理器信息线程
         LoadCpuInfoThread lct;
         lct.start();
         lct.wait();
-    } else if (tr("Network Adapter") == itemStr) {
+    } else if (tr("Network Adapter") == itemStr) { //点击网络适配器，更新网络连接的信息
         CmdTool tool;
         DeviceManager::instance()->correctNetworkLinkStatus(tool.getCurNetworkLinkStatus());
+    } else if (tr("Power") == itemStr) { //点击电池，重新加载电池显示信息
+        CmdTool tool;
+        DeviceManager::instance()->correctPowerInfo(tool.getCurPowerInfo());
     }
 
     QList<DeviceBaseInfo *> lst;

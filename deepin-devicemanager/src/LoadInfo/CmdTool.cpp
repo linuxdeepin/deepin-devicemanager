@@ -905,6 +905,34 @@ QString CmdTool::getCurNetworkLinkStatus()
     return mapInfo["link"];
 }
 
+QMap<QString, QMap<QString, QString>> CmdTool::getCurPowerInfo()
+{
+    QString powerInfo;
+    QMap<QString, QMap<QString, QString>> map;
+    QProcess process;
+
+    //执行"upower --dump"命令获取电池相关信息
+    QString cmd = "upower --dump";
+    process.start(cmd);
+
+    // 获取命令执行结果
+    process.waitForFinished(-1);
+    powerInfo = process.readAllStandardOutput();
+    QStringList items = powerInfo.split("\n\n");
+    foreach (const QString &item, items) {
+        if (item.isEmpty() || item.contains("DisplayDevice"))
+            continue;
+
+        QMap<QString, QString> mapInfo;
+        getMapInfoFromCmd(item, mapInfo);
+        if (!item.contains("Daemon:"))
+            map.insert("upower", mapInfo);
+        else
+            map.insert("Daemon", mapInfo);
+    }
+    return map;
+}
+
 void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
     QStringList infoList = info.split("\n");

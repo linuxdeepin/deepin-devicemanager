@@ -278,6 +278,12 @@ public:
      */
     void correctNetworkLinkStatus(QString linkStatus);
 
+    /**
+     * @brief correctPowerOtherInfo:校正电池信息
+     * @param mapInfo：电池信息
+     */
+    void correctPowerInfo(const QMap<QString, QMap<QString, QString>> &mapInfo);
+
     // 图像设备相关
     /**
      * @brief addImageDevice:添加图像设备
