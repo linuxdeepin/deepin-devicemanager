@@ -215,7 +215,13 @@ void LogTreeView::paintEvent(QPaintEvent *event)
     painter.restore();
 
     DTreeView::paintEvent(event);
+}
 
+void LogTreeView::showEvent(QShowEvent *event)
+{
+    //在show之前平均分布表头 Bug-73605
+    setColumnAverage();
+    return QTreeView::showEvent(event);
 }
 
 void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const
