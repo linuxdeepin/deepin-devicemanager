@@ -69,6 +69,9 @@ void LogTreeView::setColumnAverage()
     }
     // 设置每一行等宽
     int colCount = mp_HeaderView->count();
+    if (colCount == 0)
+        return;
+
     int avgColWidth = width() / colCount;
     for (int i = 0; i < colCount; i++) {
         setColumnWidth(i, avgColWidth);
