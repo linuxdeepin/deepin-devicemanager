@@ -332,6 +332,11 @@ void DetailTreeView::setCurDeviceState(bool state)
     }
 }
 
+bool DetailTreeView::isExpanded()
+{
+    return m_IsExpand;
+}
+
 void DetailTreeView::expandCommandLinkClicked()
 {
     // 当前已展开详细信息

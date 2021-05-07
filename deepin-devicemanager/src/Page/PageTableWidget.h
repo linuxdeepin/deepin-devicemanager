@@ -125,6 +125,12 @@ public:
      */
     void expandTable();
 
+    /**
+     * @brief isExpanded 判断时候是扩展状态
+     * @return 判断时候是扩展状态
+     */
+    bool isExpanded();
+
 signals:
     /**
      * @brief enableDeviceSignal:禁用启用设备信号

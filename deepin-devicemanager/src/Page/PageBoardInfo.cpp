@@ -29,7 +29,6 @@ PageBoardInfo::PageBoardInfo(QWidget *parent)
 void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
     mp_Device = lst[0];
-    clearContent();
 
     // 获取主板信息
     DeviceBaseInfo *board = nullptr;
@@ -64,9 +63,15 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
     // 比较页面可显示的最大行数与主板信息,取小值
     int maxRow = this->height() / ROW_HEIGHT - 3;
     int limitSize = std::min(lst.size(), maxRow);
-
     if (mp_Content)
         mp_Content->setLimitRow(limitSize);
+
+    // 如果是展开状态则不更新
+    if (isExpanded())
+        return;
+
+    // clear info
+    clearContent();
 
     // 表格所有行数应等于主板信息行+其他信息行
     int row = lst.size() + devices.size();

@@ -130,6 +130,13 @@ void PageSingleInfo::clearContent()
     mp_Content->clear();
 }
 
+bool PageSingleInfo::isExpanded()
+{
+    if (mp_Content)
+        return mp_Content->isExpanded();
+    return false;
+}
+
 void PageSingleInfo::slotShowMenu(const QPoint &)
 {
     // 显示右键菜单

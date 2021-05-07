@@ -76,6 +76,12 @@ public:
      */
     void clearContent() override;
 
+    /**
+     * @brief isExpanded 判断是否展开
+     * @return 是否展开
+     */
+    bool isExpanded();
+
 signals:
     /**
      * @brief refreshInfo:刷新信息信号
