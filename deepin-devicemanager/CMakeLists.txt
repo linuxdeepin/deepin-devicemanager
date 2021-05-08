@@ -20,9 +20,8 @@
 cmake_minimum_required(VERSION 3.7)
 
 if (NOT DEFINED VERSION)
-    set(VERSION 5.5.10.1)
+    set(VERSION 5.6.0.32)
 endif ()
-
 
 #common resource names
 set(APP_RES_DIR "assets")

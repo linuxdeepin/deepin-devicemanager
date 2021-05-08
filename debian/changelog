@@ -1,3 +1,10 @@
+deepin-devicemanager (5.6.0.32-1) UNRELEASED; urgency=medium
+
+  * 修复景嘉微显卡名称显示错误.
+  * 修复显存显示错误 
+
+ -- liujun <liujuna@uniontech.com>  Sat, 08 May 2021 13:49:08 +0800
+
 deepin-devicemanager (1.0-1) unstable; urgency=medium
 
   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
