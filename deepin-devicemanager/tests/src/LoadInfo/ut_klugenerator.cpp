@@ -40,4 +40,20 @@ public:
 
 TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorComputerDevice)
 {
+    m_KLUGenerator->generatorComputerDevice();
+}
+
+TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorGpuDevice)
+{
+    m_KLUGenerator->generatorGpuDevice();
+}
+
+TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorMonitorDevice)
+{
+    //    m_KLUGenerator->generatorMonitorDevice();
+}
+
+TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorAudioDevice)
+{
+    //    m_KLUGenerator->generatorAudioDevice();
 }

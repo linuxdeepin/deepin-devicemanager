@@ -53,8 +53,15 @@ TEST_F(CmdTool_UT, CmdTool_UT_loadSmartCtlInfo)
     m_cmdTool->loadSmartCtlInfo("/", "/");
 }
 
+bool ut_isEmpty()
+{
+    return false;
+}
+
 TEST_F(CmdTool_UT, CmdTool_UT_loadCmdInfo)
 {
+    Stub stub;
+    stub.set(ADDR(QString, isEmpty), ut_isEmpty);
     m_cmdTool->loadCmdInfo("lshw", "Model");
     m_cmdTool->loadCmdInfo("lsblk_d", "Model");
     m_cmdTool->loadCmdInfo("ls_sg", "Model");
@@ -74,14 +81,31 @@ TEST_F(CmdTool_UT, CmdTool_UT_loadCmdInfo)
     m_cmdTool->loadCmdInfo("lscpu-", "Model");
 }
 
+bool ut_startsWith()
+{
+    return true;
+}
+
+bool ut_CmdTool_exacMatch()
+{
+    return true;
+}
+
 TEST_F(CmdTool_UT, CmdTool_UT_loadXrandrInfo)
 {
+    Stub stub;
+    stub.set((bool (QString::*)(QChar, Qt::CaseSensitivity) const)ADDR(QString, startsWith), ut_startsWith);
+    stub.set(ADDR(QRegExp, exactMatch), ut_CmdTool_exacMatch);
     m_cmdTool->loadXrandrInfo("/");
 }
 
 TEST_F(CmdTool_UT, CmdTool_UT_loadXrandrVerboseInfo)
 {
+    Stub stub;
+    //    stub.set((bool (QString::*)(QChar,Qt::CaseSensitivity) const)ADDR(QString,startsWith),ut_startsWith);
+    stub.set(ADDR(QRegExp, exactMatch), ut_CmdTool_exacMatch);
     m_cmdTool->loadXrandrVerboseInfo("/");
+    m_cmdTool->loadDmesgInfo("/");
 }
 
 TEST_F(CmdTool_UT, CmdTool_UT_loadBiosInfoFromLspci)
@@ -159,9 +183,12 @@ TEST_F(CmdTool_UT, CmdTool_UT_getMapInfoFromDmidecode)
 
 TEST_F(CmdTool_UT, CmdTool_UT_getMapInfoFromSmartctl)
 {
+    Stub stub;
+    stub.set(ADDR(QRegExp, exactMatch), ut_CmdTool_exacMatch);
+    stub.set((bool (QString::*)(QChar, Qt::CaseSensitivity) const)ADDR(QString, endsWith), ut_startsWith);
     QMap<QString, QString> mapInfo;
     mapInfo.insert("SysFS BusI", "model");
-    m_cmdTool->getMapInfoFromSmartctl(mapInfo, "Power_On_Hours\nbus Power_Cycle_Count Raw_Read_Error_Rate Spin_Up_Time Start_Stop_Count", "");
+    m_cmdTool->getMapInfoFromSmartctl(mapInfo, "Power_On_Hours\n Multi_Zone_Error_Rate\n UDMA_CRC_Error_Count Offline_Uncorrectable\n Current_Pending_Sector\n Reallocated_Event_Count\n (bus Power_Cycle_Count)", "");
 }
 
 TEST_F(CmdTool_UT, CmdTool_UT_getMapInfoFromHciconfig)
@@ -169,4 +196,25 @@ TEST_F(CmdTool_UT, CmdTool_UT_getMapInfoFromHciconfig)
     QMap<QString, QString> mapInfo;
     mapInfo.insert("SysFS BusI", "model");
     m_cmdTool->getMapInfoFromHciconfig(mapInfo, "IO\nBUS MODEL");
+}
+
+TEST_F(CmdTool_UT, CmdTool_UT_loadLshwInfo)
+{
+    m_cmdTool->loadLshwInfo("/");
+}
+
+bool ut_getCatDeviceInfo()
+{
+    return true;
+}
+
+TEST_F(CmdTool_UT, CmdTool_UT_loadCatInputDeviceInfo)
+{
+    Stub stub;
+    stub.set(ADDR(CmdTool, getCatDeviceInfo), ut_getCatDeviceInfo);
+    stub.set(ADDR(QString, isEmpty), ut_isEmpty);
+    stub.set(ADDR(QRegExp, exactMatch), ut_CmdTool_exacMatch);
+    m_cmdTool->loadCatInputDeviceInfo("/", "/");
+    m_cmdTool->loadCatConfigInfo("/", "/");
+    m_cmdTool->loadCatAudioInfo("/", "/");
 }
