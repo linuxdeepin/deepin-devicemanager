@@ -14,8 +14,11 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/LoadInfo/KLUGenerator.h"
+#include "../src/Page/DeviceWidget.h"
 #include "../src/DeviceManager/DeviceManager.h"
+#include "../src/LoadInfo/X86Generator.h"
+#include "../src/ThreadPool/LoadCpuInfoThread.h"
+
 #include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
@@ -24,21 +27,21 @@
 #include <gtest/gtest.h>
 #include "../stub.h"
 
-class KLUGenerator_UT : public UT_HEAD
+class LoadCpuInfoThread_UT : public UT_HEAD
 {
 public:
     void SetUp()
     {
-        m_KLUGenerator = new KLUGenerator;
+        m_loadCpuInfoThread = new LoadCpuInfoThread;
     }
     void TearDown()
     {
-        delete m_KLUGenerator;
+        delete m_loadCpuInfoThread;
     }
-    KLUGenerator *m_KLUGenerator = nullptr;
+    LoadCpuInfoThread *m_loadCpuInfoThread;
 };
 
-QList<QMap<QString, QString>> ut_cmdInfo()
+QList<QMap<QString, QString>> ut_LoadCpuInfoThread_cmdInfo()
 {
     QList<QMap<QString, QString>> list;
     QMap<QString, QString> map;
@@ -47,39 +50,9 @@ QList<QMap<QString, QString>> ut_cmdInfo()
     return list;
 }
 
-TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorComputerDevice)
+TEST_F(LoadCpuInfoThread_UT, LoadCpuInfoThread_UT_getCpuInfoFromLscpu)
 {
     Stub stub;
-    stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
-    m_KLUGenerator->generatorComputerDevice();
-}
-
-TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorGpuDevice)
-{
-    m_KLUGenerator->generatorGpuDevice();
-}
-
-TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorMonitorDevice)
-{
-    m_KLUGenerator->generatorMonitorDevice();
-}
-
-TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorAudioDevice)
-{
-    m_KLUGenerator->generatorAudioDevice();
-}
-
-TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorPowerDevice)
-{
-    m_KLUGenerator->generatorPowerDevice();
-}
-
-TEST_F(KLUGenerator_UT, KLUGenerator_UT_getKeyboardInfoFromHwinfo)
-{
-    m_KLUGenerator->getKeyboardInfoFromHwinfo();
-    m_KLUGenerator->getOthersInfoFromHwinfo();
-    m_KLUGenerator->getDiskInfoFromHwinfo();
-    m_KLUGenerator->getDiskInfoFromLshw();
-    m_KLUGenerator->getDiskInfoFromLsblk();
-    m_KLUGenerator->getDiskInfoFromSmartCtl();
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_LoadCpuInfoThread_cmdInfo);
+    m_loadCpuInfoThread->run();
 }
