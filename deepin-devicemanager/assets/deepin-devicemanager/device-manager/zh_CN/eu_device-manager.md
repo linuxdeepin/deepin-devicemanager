@@ -4,7 +4,7 @@
 
 设备管理器是查看和管理硬件设备的工具，可针对运行在操作系统的硬件设备，进行参数状态的查看、数据信息的导出等，还可以禁用或启动部分硬件驱动。
 
-![0|overview](fig/p_overview.png)
+![0|eu_overview](fig/eu_overview.png)
 
 ## 使用入门
 
@@ -39,7 +39,7 @@
 1. 在设备管理器界面，单击 **概况**。
 2. 查看操作系统内核信息及各硬件设备列表。
 
-![0|overview](fig/p_overview.png)
+![0|eu_overview](fig/eu_overview.png)
 
 ### 处理器
 

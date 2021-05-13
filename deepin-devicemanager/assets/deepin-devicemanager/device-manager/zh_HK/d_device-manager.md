@@ -4,7 +4,7 @@
 
 設備管理器是查看和管理硬件設備的工具軟件，可針對運行在操作系統的硬件設備，進行參數狀態的查看、數據訊息的導出等，還可以禁用或啟動部分硬件驅動。
 
-![0|p_overview](fig/p_overview.png)
+![0|d_overview](fig/d_overview.png)
 
 ## 使用入門
 
@@ -39,7 +39,7 @@
 1. 在設備管理器界面，單擊 **概況**。
 2. 查看操作系統內核訊息及各硬件設備列表。
 
-![0|p_overview](fig/p_overview.png)
+![0|d_overview](fig/d_overview.png)
 
 ### 處理器
 
