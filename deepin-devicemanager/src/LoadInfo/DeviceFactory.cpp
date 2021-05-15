@@ -3,6 +3,7 @@
 #include "MipsGenerator.h"
 #include "ArmGenerator.h"
 #include "KLUGenerator.h"
+#include "KLVGenerator.h"
 #include "PanguGenerator.h"
 #include "PanguVGenerator.h"
 #include <QProcess>
@@ -28,7 +29,9 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
             generator = new ArmGenerator();
         }  else if (s_GeneratorKey == "KLU") {
             generator = new KLUGenerator();
-        }  else if (s_GeneratorKey == "PanGu") {
+        } else if (s_GeneratorKey == "KLV") {
+            generator = new KLVGenerator();
+        } else if (s_GeneratorKey == "PanGu") {
             generator = new PanguGenerator();
         }  else if (s_GeneratorKey == "PanGuV") {
             generator = new PanguVGenerator();
