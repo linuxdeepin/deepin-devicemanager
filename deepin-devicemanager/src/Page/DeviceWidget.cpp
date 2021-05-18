@@ -104,22 +104,16 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
     // 根据设备类别获取设备指针
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(deviceType, lst);
-    if (ret) {
-        // 更新设备信息界面
-        if (lst.size() > 1) {
-            // 判断是否是BIOS界面
-            DeviceBios *bios = dynamic_cast<DeviceBios *>(lst[0]);
-            if (bios)
-                mp_PageInfo->updateTable(deviceType, lst);
-        } else {
-            mp_PageInfo->updateTable(deviceType, lst);
-        }
-
-    } else {
+    if (! ret) {
         // 更新Overview界面
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
         mp_PageInfo->updateTable(overviewMap);
     }
+
+    // 更新设备信息界面
+    if (lst.size() < 1)
+        return;
+    mp_PageInfo->updateTable(deviceType, lst);
 }
 
 void DeviceWidget::initWidgets()

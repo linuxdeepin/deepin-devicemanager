@@ -119,8 +119,7 @@ include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 # Tell CMake to create the executable
 add_executable(${PROJECT_NAME} ${DEVICE_SRC} ${THIRD_PARTY} ${APP_QRC})
 
-target_include_directories(${APP_BIN_NAME}
-    PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
+target_include_directories(${APP_BIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
 
 target_link_libraries(${APP_BIN_NAME}
     ${DtkWidget_LIBRARIES}

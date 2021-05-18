@@ -78,7 +78,7 @@ void LoadInfoThread::run()
     m_Running = false;
 }
 
-void LoadInfoThread::slotFinishedReadFilePool(const QString &info)
+void LoadInfoThread::slotFinishedReadFilePool(const QString &)
 {
     m_FinishedReadFilePool = true;
 }

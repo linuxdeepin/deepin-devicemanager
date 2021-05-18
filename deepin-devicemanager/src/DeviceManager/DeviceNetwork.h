@@ -86,6 +86,12 @@ public:
      */
     bool enable() override;
 
+    /**
+     * @brief correctCurrentLinkStatus
+     * @param linkStatus
+     */
+    void correctCurrentLinkStatus(QString linkStatus);
+
 protected:
 
     /**

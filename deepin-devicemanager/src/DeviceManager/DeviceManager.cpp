@@ -535,6 +535,36 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     m_ListDeviceNetwork.append(device);
 }
 
+void DeviceManager::correctNetworkLinkStatus(QString linkStatus)
+{
+    if (m_ListDeviceNetwork.size() == 0)
+        return;
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin();
+    for (; it != m_ListDeviceNetwork.end(); ++it) {
+        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
+        if (!device)
+            continue;
+
+        device->correctCurrentLinkStatus(linkStatus);
+    }
+}
+
+void DeviceManager::correctPowerInfo(const QMap<QString, QMap<QString, QString>> &mapInfo)
+{
+    if (m_ListDevicePower.size() == 0)
+        return;
+    QList<DeviceBaseInfo *>::iterator it = m_ListDevicePower.begin();
+    for (; it != m_ListDevicePower.end(); ++it) {
+        DevicePower *device = dynamic_cast<DevicePower *>(*it);
+        if (!device)
+            continue;
+
+        //根据获取到的数据，重新设置电池信息
+        device->setInfoFromUpower(mapInfo["upower"]);
+        device->setDaemonInfo(mapInfo["Daemon"]);
+    }
+}
+
 void DeviceManager::addImageDevice(DeviceImage *const device)
 {
     // 添加图像设备
@@ -619,6 +649,18 @@ void DeviceManager::setOthersDeviceInfoFromLshw(const QMap<QString, QString> &ma
             continue;
 
         device->setInfoFromLshw(mapInfo);
+    }
+}
+
+void DeviceManager::setCpuRefreshInfoFromlscpu(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceCPU.begin();
+    for (; it != m_ListDeviceCPU.end(); ++it) {
+        DeviceCpu *device = dynamic_cast<DeviceCpu *>(*it);
+        if (!device)
+            continue;
+
+        device->setInfoFromLscpu(mapInfo);
     }
 }
 

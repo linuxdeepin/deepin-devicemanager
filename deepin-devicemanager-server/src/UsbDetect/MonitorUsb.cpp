@@ -43,18 +43,17 @@ void MonitorUsb::monitor()
 
         // 获取事件并判断是否是插拔
         unsigned long long curNum = udev_device_get_devnum(dev);
-        if (curNum == 0) {
+        if (curNum <= 0) {
+            udev_device_unref(dev);
             continue;
         }
+
+        // 只有add和remove事件才会更新缓存信息
         strcpy(buf, udev_device_get_action(dev));
-        if (0 == strcmp("add", buf) && m_DevAddNum != curNum) {
-            qInfo() << " add ***************************** DETECT  " << curNum << " ** " << m_DevAddNum;
-            m_DevAddNum = curNum;
-            emit usbChanged();
-        }
-        if (0 == strcmp("remove", buf) && m_DevRemoveNum != curNum) {
-            qInfo() << " remove ***************************** DETECT  " << curNum << " ** " << m_DevRemoveNum;
-            m_DevRemoveNum = curNum;
+        if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) {
+            // 当监听到新的usb时，内核需要加载usb信息，而上层应用需要在内核处理之后获取信息
+            // 一般情况udev都会在内核处理完成后加载，但是usb2.0的会在正在加载的时候获取，需要等一段时间
+            sleep(1);
             emit usbChanged();
         }
 

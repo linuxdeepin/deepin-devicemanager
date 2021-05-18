@@ -41,12 +41,12 @@ void ReadFilePool::readAllFile()
 {
     DeviceManager::instance()->clear();
 
-    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
-    cleaner->setParent(this);
+    //QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
+    //cleaner->setParent(this);
     QList<QStringList>::iterator it = m_CmdList.begin();
     for (; it != m_CmdList.end(); ++it) {
         CmdTask *task = new CmdTask((*it)[0], (*it)[1], (*it)[2], this);
-        cleaner->add(task);
+        //cleaner->add(task);
         start(task);
         task->setAutoDelete(true);
     }
@@ -82,7 +82,7 @@ void ReadFilePool::initCmd()
     m_CmdList.append({ "dmidecode13",          "dmidecode_13.txt",       ""});
     m_CmdList.append({ "dmidecode16",          "dmidecode_16.txt",       ""});
     m_CmdList.append({ "dmidecode17",          "dmidecode_17.txt",       ""});
-
+    m_CmdList.append({"dr_config", "dr_config.txt", ""});
 
     m_CmdList.append({ "hwinfo_monitor",       "hwinfo_monitor.txt",     tr("Loading CD-ROM Info...")});
     m_CmdList.append({ "hwinfo_sound",         "hwinfo_sound.txt",       ""});

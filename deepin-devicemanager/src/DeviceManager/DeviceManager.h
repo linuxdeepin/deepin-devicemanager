@@ -272,6 +272,18 @@ public:
      */
     void addNetworkDevice(DeviceNetwork *const device);
 
+    /**
+     * @brief correctNetworkLinkStatus:校正网络连接状态
+     * @param linkStatus:连接状态
+     */
+    void correctNetworkLinkStatus(QString linkStatus);
+
+    /**
+     * @brief correctPowerOtherInfo:校正电池信息
+     * @param mapInfo：电池信息
+     */
+    void correctPowerInfo(const QMap<QString, QMap<QString, QString>> &mapInfo);
+
     // 图像设备相关
     /**
      * @brief addImageDevice:添加图像设备
@@ -316,6 +328,8 @@ public:
      * @param mapInfo:由lshw获取的其他设备信息map
      */
     void setOthersDeviceInfoFromLshw(const QMap<QString, QString> &mapInfo);
+
+    void setCpuRefreshInfoFromlscpu(const QMap<QString, QString> &mapInfo);
 
     // 电源设备相关
     /**

@@ -66,7 +66,6 @@ void ThreadPoolTask::runCmdToCache(const QString &cmd)
     // 2. 执行命令获取设备信息
     QString info;
     runCmd(cmd, info);
-
     // 3. 管理设备信息
     // 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
     if (m_File == "lsblk_d.txt") {

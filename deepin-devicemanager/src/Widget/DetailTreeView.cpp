@@ -209,7 +209,7 @@ int DetailTreeView::setTableHeight(int paintHeight)
 
     // 信息行 <= m_LimitRow + 1 不影响表格大小
     if (rowCount() <= m_LimitRow + 1) {
-        this->setFixedHeight((rowCount() - 1)*ROW_HEIGHT);
+        this->setFixedHeight((rowCount() - 1) * ROW_HEIGHT);
         return (rowCount() - 1) * ROW_HEIGHT;
     } else {
         // 未展开,窗口高度始终等于ROW_HEIGHT * (m_LimitRow+1)
@@ -330,6 +330,11 @@ void DetailTreeView::setCurDeviceState(bool state)
             this->hideRow(this->rowCount() - 1);
         }
     }
+}
+
+bool DetailTreeView::isExpanded()
+{
+    return m_IsExpand;
 }
 
 void DetailTreeView::expandCommandLinkClicked()
@@ -461,7 +466,6 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
         }
 
     } else if (hasExpendInfo() && m_IsExpand) {
-
         QTableWidgetItem *it = this->itemAt(QPoint(this->rect().bottomLeft().x(), this->rect().bottomLeft().y()));
         if (nullptr == it) {
             // 由于展开按钮行是DWidget无法获取item，所以，再在这种情况下，展开按钮行开始出现再可视区域

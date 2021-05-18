@@ -359,6 +359,11 @@ void DeviceMonitor::caculateScreenSize(const QString &edid)
     if (width <= 0)
         return;
 
+    // 如果从hwinfo和edid里面获取的信息差距很小则使用hwinfo里面的
+    // 如果从hwinfo和edid里面获取的信息差距很大则使用edid里面的
+    if (fabs(width * 10 - m_Width) < 10 && fabs(height * 10 - m_Height) < 10)
+        return;
+
     double inch = std::sqrt(height * height + width * width) / 2.54;
 //    m_ScreenSize = QString("%1英寸(%2cm X %3cm)").arg(QString::number(inch, 'f', 1)).arg(width).arg(height);
     m_ScreenSize = QString("%1 %2(%3cm X %4cm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(width).arg(height);

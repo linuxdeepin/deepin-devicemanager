@@ -37,6 +37,7 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     connect(mp_Detail, &PageDetail::refreshInfo, this, &PageMultiInfo::refreshInfo);
     connect(mp_Detail, &PageDetail::exportInfo, this, &PageMultiInfo::exportInfo);
     connect(mp_Table, &PageTableHeader::enableDevice, this, &PageMultiInfo::slotEnableDevice);
+    emit refreshInfo();
 }
 
 PageMultiInfo::~PageMultiInfo()

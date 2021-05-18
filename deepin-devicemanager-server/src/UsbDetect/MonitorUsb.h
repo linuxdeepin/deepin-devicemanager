@@ -28,8 +28,6 @@ private:
     struct udev                       *m_Udev;              //<! udev Environment
     struct udev_monitor               *mon;                 //<! object of mon
     int                               fd;                   //<! fd
-    unsigned long long                m_DevAddNum;          //<! add devicce num
-    unsigned long long                m_DevRemoveNum;       //<! remove device num
 
 };
 
