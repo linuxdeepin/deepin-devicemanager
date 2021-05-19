@@ -122,6 +122,11 @@ void DeviceNetwork::correctCurrentLinkStatus(QString linkStatus)
         m_Link = linkStatus;
 }
 
+QString DeviceNetwork::logicalName()
+{
+    return m_LogicalName;
+}
+
 void DeviceNetwork::initFilterKey()
 {
     // 初始化可显示属性

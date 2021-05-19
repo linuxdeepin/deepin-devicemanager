@@ -535,7 +535,7 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     m_ListDeviceNetwork.append(device);
 }
 
-void DeviceManager::correctNetworkLinkStatus(QString linkStatus)
+void DeviceManager::correctNetworkLinkStatus(QString linkStatus, QString networkDriver)
 {
     if (m_ListDeviceNetwork.size() == 0)
         return;
@@ -544,9 +544,23 @@ void DeviceManager::correctNetworkLinkStatus(QString linkStatus)
         DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
         if (!device)
             continue;
-
-        device->correctCurrentLinkStatus(linkStatus);
+        if (networkDriver == device->logicalName())
+            device->correctCurrentLinkStatus(linkStatus);
     }
+}
+
+QStringList DeviceManager::networkDriver()
+{
+    m_networkDriver.clear();
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin();
+    for (; it != m_ListDeviceNetwork.end(); ++it) {
+        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
+        if (!device)
+            continue;
+        //保存各个网卡的逻辑名称，用于判断具体网卡
+        m_networkDriver.append(device->logicalName());
+    }
+    return m_networkDriver;
 }
 
 void DeviceManager::correctPowerInfo(const QMap<QString, QMap<QString, QString>> &mapInfo)

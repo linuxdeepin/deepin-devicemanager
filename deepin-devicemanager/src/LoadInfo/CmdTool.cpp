@@ -888,21 +888,30 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
     }
 }
 
-QString CmdTool::getCurNetworkLinkStatus()
+QString CmdTool::getCurNetworkLinkStatus(QString driverName)
 {
+    //通过ifconfig 判断网络是否连接
     QProcess process;
-    QString cmd = "lshw -C network";
+    QString cmd = "ifconfig";
     process.start(cmd);
-    QString networkInfo;
-
-    // 获取命令执行结果
-    bool res = process.waitForFinished(-1);
-    if (!res)
+    QString ifconfigInfo;
+    QString link;
+    bool re = process.waitForFinished(-1);
+    if (!re)
         return "";
-    networkInfo = process.readAllStandardOutput();
-    QMap<QString, QString> mapInfo;
-    getMapInfoFromLshw(networkInfo, mapInfo);
-    return mapInfo["link"];
+    ifconfigInfo = process.readAllStandardOutput();
+    //截取查询到的各个网卡连接信息
+    QStringList list = ifconfigInfo.split("\n\n");
+    for (int i = 0; i < list.size(); i++) {
+        //判断具体的网卡
+        if (!list.at(i).contains(driverName))
+            continue;
+        if (list.at(i).contains("broadcast")) //若网络连接，会出现子网信息
+            link = "yes";
+        else
+            link = "no";
+    }
+    return link;
 }
 
 QMap<QString, QMap<QString, QString>> CmdTool::getCurPowerInfo()

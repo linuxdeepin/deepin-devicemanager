@@ -92,6 +92,12 @@ public:
      */
     void correctCurrentLinkStatus(QString linkStatus);
 
+    /**
+     * @brief logicalName: 获取网卡逻辑名称
+     * @return
+     */
+    QString logicalName();
+
 protected:
 
     /**

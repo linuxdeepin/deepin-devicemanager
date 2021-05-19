@@ -276,7 +276,13 @@ public:
      * @brief correctNetworkLinkStatus:校正网络连接状态
      * @param linkStatus:连接状态
      */
-    void correctNetworkLinkStatus(QString linkStatus);
+    void correctNetworkLinkStatus(QString linkStatus, QString networkDriver);
+
+    /**
+     * @brief networkDriver:获取所有网络驱动
+     * @return
+     */
+    QStringList networkDriver();
 
     /**
      * @brief correctPowerOtherInfo:校正电池信息
@@ -531,6 +537,7 @@ private:
     int                                            m_CpuNum;               //<! 物理cpu个数
 
     static int m_CurrentXlsRow;       //<! xlsx表格当前行
+    QStringList m_networkDriver; //网络驱动
 };
 
 #endif // DEVICEMANAGER_H
