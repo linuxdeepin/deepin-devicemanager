@@ -2,6 +2,7 @@
 #include "DeviceCpu.h"
 
 #include <math.h>
+#include <QDebug>
 
 DeviceCpu::DeviceCpu()
     : DeviceBaseInfo()
@@ -119,10 +120,18 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     // 设置CPU属性
     setAttribute(mapInfo, "Model name", m_Name);
     setAttribute(mapInfo, "Vendor ID", m_Vendor, false);
+    setAttribute(mapInfo, "厂商 ID", m_Vendor, false);
+    setAttribute(mapInfo, "供應商識別號", m_Vendor, false);
     setAttribute(mapInfo, "Thread(s) per core", m_ThreadNum);
+    setAttribute(mapInfo, "每核心執行緒數", m_ThreadNum);
+    setAttribute(mapInfo, "每个核的线程数", m_ThreadNum);
     setAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
     setAttribute(mapInfo, "Architecture", m_Architecture);
+    setAttribute(mapInfo, "架构", m_Architecture);
+    setAttribute(mapInfo, "架構", m_Architecture);
     setAttribute(mapInfo, "CPU family", m_Familly);
+    setAttribute(mapInfo, "CPU 家族", m_Familly);
+    setAttribute(mapInfo, "CPU 系列", m_Familly);
     setAttribute(mapInfo, "CPU MHz", m_CurFrequency);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Stepping", m_Step);
@@ -130,23 +139,15 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "L1i cache", m_CacheL1Order);
     setAttribute(mapInfo, "L2 cache", m_CacheL2);
     setAttribute(mapInfo, "L3 cache", m_CacheL3);
+    setAttribute(mapInfo, "L1d 缓存", m_CacheL1Data);
+    setAttribute(mapInfo, "L1i 缓存", m_CacheL1Order);
+    setAttribute(mapInfo, "L2 缓存", m_CacheL2);
+    setAttribute(mapInfo, "L3 缓存", m_CacheL3);
     setAttribute(mapInfo, "Flags", m_Flags);
     setAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
 
     // 计算频率范围
-    bool min = mapInfo.find("CPU min MHz") != mapInfo.end();
-    bool max = mapInfo.find("CPU max MHz") != mapInfo.end();
-    if (min && max) {
-        double minHz = mapInfo["CPU min MHz"].toDouble() / 1000;
-        double maxHz = mapInfo["CPU max MHz"].toDouble() / 1000;
-        m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
-        m_FrequencyIsRange = true;
-
-        // 如果最大最小频率相等则不显示范围
-        if (fabs(minHz - maxHz) < 0.001)
-            m_FrequencyIsRange = false;
-
-    }
+    setCpuMHz(mapInfo);
 
     //获取扩展指令集
     QStringList orders = {"MMX", "SSE", "SSE2", "SSE3", "3D Now", "SSE4", "SSSE3", "SSE4_1", "SSE4_2", "AMD64", "EM64T"};
@@ -173,6 +174,65 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
     // 获取设备其他信息
     getOtherMapInfo(mapInfo);
+}
+
+void DeviceCpu::setCpuMHz(const QMap<QString, QString> &mapInfo)
+{
+    if (setCpuMHzAE(mapInfo)) // 英文
+        return;
+    if (setCpuMHzJT(mapInfo)) // 简体
+        return;
+    if (setCpuMHzZT(mapInfo)) // 正体
+        return;
+}
+
+bool DeviceCpu::setCpuMHzAE(const QMap<QString, QString> &mapInfo)
+{
+    bool min = mapInfo.find("CPU min MHz") != mapInfo.end();
+    bool max = mapInfo.find("CPU max MHz") != mapInfo.end();
+    if (!min || !max)
+        return false;
+    double minHz = mapInfo["CPU min MHz"].toDouble() / 1000;
+    double maxHz = mapInfo["CPU max MHz"].toDouble() / 1000;
+    m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
+    m_FrequencyIsRange = true;
+
+    // 如果最大最小频率相等则不显示范围
+    if (fabs(minHz - maxHz) < 0.001)
+        m_FrequencyIsRange = false;
+    return true;
+}
+bool DeviceCpu::setCpuMHzJT(const QMap<QString, QString> &mapInfo)
+{
+    bool min = mapInfo.find("CPU 最小 MHz") != mapInfo.end();
+    bool max = mapInfo.find("CPU 最大 MHz") != mapInfo.end();
+    if (!min || !max)
+        return false;
+    double minHz = mapInfo["CPU 最小 MHz"].toDouble() / 1000;
+    double maxHz = mapInfo["CPU 最大 MHz"].toDouble() / 1000;
+    m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
+    m_FrequencyIsRange = true;
+
+    // 如果最大最小频率相等则不显示范围
+    if (fabs(minHz - maxHz) < 0.001)
+        m_FrequencyIsRange = false;
+    return true;
+}
+bool DeviceCpu::setCpuMHzZT(const QMap<QString, QString> &mapInfo)
+{
+    bool min = mapInfo.find("CPU min MHz") != mapInfo.end();
+    bool max = mapInfo.find("CPU max MHz") != mapInfo.end();
+    if (!min || !max)
+        return false;
+    double minHz = mapInfo["CPU min MHz"].toDouble() / 1000;
+    double maxHz = mapInfo["CPU max MHz"].toDouble() / 1000;
+    m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
+    m_FrequencyIsRange = true;
+
+    // 如果最大最小频率相等则不显示范围
+    if (fabs(minHz - maxHz) < 0.001)
+        m_FrequencyIsRange = false;
+    return true;
 }
 
 void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)

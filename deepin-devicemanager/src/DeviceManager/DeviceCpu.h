@@ -118,6 +118,15 @@ private:
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**
+     * @brief setCpuMHz 设置cpu的最大最小赫兹
+     * @param mapInfo info
+     */
+    void setCpuMHz(const QMap<QString, QString> &mapInfo);
+    bool setCpuMHzAE(const QMap<QString, QString> &mapInfo);
+    bool setCpuMHzJT(const QMap<QString, QString> &mapInfo);
+    bool setCpuMHzZT(const QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief setInfoFromDmidecode:设置由dmidecode -t 4获取的CPU信息
      * @param mapInfo:由dmidecode -t 4获取的CPU信息map
      */
