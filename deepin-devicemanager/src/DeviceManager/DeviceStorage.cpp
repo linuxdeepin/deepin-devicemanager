@@ -413,6 +413,9 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
             m_Size = reg.cap(1);
     }
 
+    // 修正数值
+    m_Size.replace(QRegExp(".0[1-9]"), ".00");
+
     // 型号
     //SATA
     if (false == mapInfo["Device Model"].isEmpty())

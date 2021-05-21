@@ -53,7 +53,7 @@ void MonitorUsb::monitor()
         if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) {
             // 当监听到新的usb时，内核需要加载usb信息，而上层应用需要在内核处理之后获取信息
             // 一般情况udev都会在内核处理完成后加载，但是usb2.0的会在正在加载的时候获取，需要等一段时间
-            sleep(1);
+            sleep(3);
             emit usbChanged();
         }
 
