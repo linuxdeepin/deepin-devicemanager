@@ -111,9 +111,14 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
     }
 
     // 更新设备信息界面
-    if (lst.size() < 1)
-        return;
-    mp_PageInfo->updateTable(deviceType, lst);
+    if (lst.size() == 1) {
+        mp_PageInfo->updateTable(deviceType, lst);
+    } else if (lst.size() > 1) {
+        // 判断是否是BIOS界面
+        DeviceBios *bios = dynamic_cast<DeviceBios *>(lst[0]);
+        if (bios)
+            mp_PageInfo->updateTable(deviceType, lst);
+    }
 }
 
 void DeviceWidget::initWidgets()
