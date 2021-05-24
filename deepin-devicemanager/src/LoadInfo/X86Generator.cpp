@@ -3,5 +3,4 @@
 
 X86Generator::X86Generator()
 {
-
 }
