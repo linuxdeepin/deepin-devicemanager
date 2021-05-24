@@ -1,6 +1,7 @@
 #include "ThreadExecXrandr.h"
 
 #include <QProcess>
+#include <QDebug>
 
 #include <DeviceManager.h>
 
@@ -32,38 +33,55 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
 {
     QString deviceInfo;
     runCmd(deviceInfo, cmd);
-
+    // 从文件中获取设备信息
     QMap<QString, QString> mapInfo;
-    QStringList lines = deviceInfo.split("\n");
-    foreach (const QString &line, lines) {
+    QStringList lines = deviceInfo.split(" connected");
+    foreach (const QString &str, lines) {
         // 刷新率
-        QRegExp reResolution("^[\\s]{3}([0-9]{3,5}x[0-9]{3,5}).*([0-9]{2,3}.[0-9]{2,3}\\*).*");
-        if (reResolution.exactMatch(line)) {
-            QString rate = reResolution.cap(2).replace("*", "");
-            mapInfo.insert("rate", rate);
-        }
-
-        // 最大,最小,当前分辨率
-        if (line.startsWith("Screen")) {
-            QRegExp re(".*([0-9]{3,5}\\sx\\s[0-9]{3,5}).*([0-9]{3,5}\\sx\\s[0-9]{3,5}).*([0-9]{3,5}\\sx\\s[0-9]{3,5}).*");
-            if (re.exactMatch(line)) {
-                mapInfo["minResolution"] = re.cap(1);
-                mapInfo["curResolution"] = re.cap(2);
-                mapInfo["maxResolution"] = re.cap(3);
+        QStringList strLine = str.split("\n");
+        foreach (const QString &line, strLine) {
+            QRegExp reResolution("^[\\s]{3}([0-9]{3,5}x[0-9]{3,5}).*([0-9]{2,3}.[0-9]{2,3}\\*).*");
+            if (reResolution.exactMatch(line)) {
+                QString rate = reResolution.cap(2).replace("*", "");
+                mapInfo.insert("rate", rate);
             }
-        } else if (line.startsWith("HDMI")) {
-            mapInfo["HDMI"] = "Enable";
-        } else if (line.startsWith("VGA")) {
-            mapInfo["VGA"] = "Enable";
-        } else if (line.startsWith("DP") || line.startsWith("DisplayPort"))  {
-            mapInfo["DP"] = "Enable";
-        } else if (line.startsWith("eDP")) {
-            mapInfo["eDP"] = "Enable";
-        } else if (line.startsWith("DVI")) {
-            mapInfo["DVI"] = "Enable";
+            // 最大,最小,当前分辨率
+            if (line.startsWith("Screen")) {
+                QRegExp re(".*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*");
+                if (re.exactMatch(line)) {
+                    mapInfo["minResolution"] = re.cap(1);
+                    mapInfo["curResolution"] = re.cap(2);
+                    mapInfo["maxResolution"] = re.cap(3);
+                }
+            } else if (line.contains("normal")) {
+                QRegExp re(".*([0-9]{1,5}x[0-9]{1,5}).*");
+                if (re.exactMatch(line)) {
+                    mapInfo["curResolution"] = re.cap(1);
+                } else
+                    mapInfo["curResolution"] = "";
+                if (line.contains("primary"))
+                    mapInfo.insert("Primary Monitor", "Yes");
+                else
+                    mapInfo.insert("Primary Monitor", "No");
+            }
+
+            if (line.startsWith("HDMI")) {
+                mapInfo["HDMI"] = "Enable";
+            } else if (line.startsWith("VGA")) {
+                mapInfo["VGA"] = "Enable";
+            } else if (line.startsWith("DP") || line.startsWith("DisplayPort")) {
+                mapInfo["DP"] = "Enable";
+            } else if (line.startsWith("eDP")) {
+                mapInfo["eDP"] = "Enable";
+            } else if (line.startsWith("DVI")) {
+                mapInfo["DVI"] = "Enable";
+            }
         }
+        if (mapInfo["curResolution"].isEmpty())
+            mapInfo["rate"] = "";
+        lstMap.append(mapInfo);
     }
-    lstMap.append(mapInfo);
+    lstMap.removeAt(0);
 }
 
 void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstMap, const QString &cmd)
@@ -131,8 +149,7 @@ void ThreadExecXrandr::getMonitorRefreshRateFromXrandr()
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1)
             continue;
-
-        DeviceManager::instance()->setCurrentResolution((*it)["curResolution"], (*it)["rate"]);
+        DeviceManager::instance()->setCurrentResolution((*it)["curResolution"], (*it)["rate"], (*it)["Primary Monitor"]);
     }
 }
 

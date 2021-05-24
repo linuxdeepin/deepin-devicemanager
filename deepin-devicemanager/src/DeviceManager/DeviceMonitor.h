@@ -56,7 +56,7 @@ public:
      * @param rate:当前刷新率
      * @return 布尔值，true:信息设置成功；false:信息设置失败
      */
-    bool setCurrentResolution(const QString &resolution, const QString &rate);
+    bool setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen);
 
     // 将年周转化为年月
     /**

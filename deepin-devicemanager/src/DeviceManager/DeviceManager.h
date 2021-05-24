@@ -210,8 +210,7 @@ public:
      * @param resolution:分辨率
      * @param rate:刷新率
      */
-    void setCurrentResolution(const QString &resolution, const QString &rate);
-
+    void setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen);
 
     // Bios设备相关 ************************************************************************************
     /**

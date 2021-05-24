@@ -429,7 +429,7 @@ void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString 
     }
 }
 
-void DeviceManager::setCurrentResolution(const QString &resolution, const QString &rate)
+void DeviceManager::setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen)
 {
     // 设置当前分辨率
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMonitor.begin();
@@ -438,7 +438,7 @@ void DeviceManager::setCurrentResolution(const QString &resolution, const QStrin
         if (!device)
             continue;
 
-        if (device->setCurrentResolution(resolution, rate))
+        if (device->setCurrentResolution(resolution, rate, mainScreen))
             return;
     }
 }

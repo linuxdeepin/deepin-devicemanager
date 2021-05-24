@@ -132,5 +132,5 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromXradr)
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setCurrentResolution)
 {
-    m_deviceMonitor->setCurrentResolution("connect", "/n");
+    m_deviceMonitor->setCurrentResolution("connect", "/n", "/");
 }

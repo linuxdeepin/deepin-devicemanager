@@ -96,6 +96,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 获取当前分辨率 和 当前支持分辨率
     QStringList listResolution = m_SupportResolution.split(" ");
     m_CurrentResolution = listResolution.last();
+    //    qInfo() << m_CurrentResolution << m_SupportResolution;
     m_SupportResolution = "";
     foreach (const QString &word, listResolution) {
         if (word.contains("@")) {
@@ -166,15 +167,16 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid)
     return true;
 }
 
-bool DeviceMonitor::setCurrentResolution(const QString &resolution, const QString &rate)
+bool DeviceMonitor::setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen)
 {
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
     if (m_CurrentResolution.contains("@")) {
         return false;
     }
-
     m_CurrentResolution = QString("%1@%2Hz").arg(resolution).arg(rate);
     m_CurrentResolution.replace(" ", "");
+    m_MainScreen = mainScreen;
+    caculateScreenRatio();
     return true;
 }
 
@@ -221,9 +223,11 @@ void DeviceMonitor::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Support Resolution"), m_SupportResolution);
-    addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
+    if (m_CurrentResolution != "@Hz") {
+        addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
+        addOtherDeviceInfo(tr("Display Ratio"), m_AspectRatio);
+    }
     addOtherDeviceInfo(tr("Primary Monitor"), m_MainScreen);
-    addOtherDeviceInfo(tr("Display Ratio"), m_AspectRatio);
     addOtherDeviceInfo(tr("Size"), m_ScreenSize);
     addOtherDeviceInfo(tr("Serial Number"), m_SerialNumber);
     addOtherDeviceInfo(tr("Product Date"), m_ProductionWeek);
@@ -265,11 +269,11 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
     else if (info.startsWith("DisplayPort"))
         m_Interface = "DisplayPort";
 
-    // 设置是否是主显示器
-    if (info.contains("primary"))
-        m_MainScreen = "Yes";
-    else
-        m_MainScreen = "NO";
+    //    // 设置是否是主显示器
+    //    if (info.contains("primary"))
+    //        m_MainScreen = "Yes";
+    //    else
+    //        m_MainScreen = "NO";
 
     return true;
 }

@@ -212,7 +212,7 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_setMonitorInfoFromXrandr)
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setCurrentResolution)
 {
-    DeviceManager::instance()->setCurrentResolution("/", "/");
+    DeviceManager::instance()->setCurrentResolution("/", "/", "/");
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_addBiosDevice)

@@ -569,7 +569,7 @@ void DeviceGenerator::getMonitorRefreshRateFromXrandr()
         if ((*it).size() < 1)
             continue;
 
-        DeviceManager::instance()->setCurrentResolution((*it)["curResolution"], (*it)["rate"]);
+        DeviceManager::instance()->setCurrentResolution((*it)["curResolution"], (*it)["rate"], (*it)["Primary Monitor"]);
     }
 }
 
