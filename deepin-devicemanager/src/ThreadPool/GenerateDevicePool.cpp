@@ -114,10 +114,8 @@ void GenerateDevicePool::generateDevice()
             generator->generatorOthersDevice();
 
             // 指针使用结束释放
-            if (generator != nullptr) {
-                delete generator;
-                generator = nullptr;
-            }
+            delete generator;
+            generator = nullptr;
 
             break;
         }

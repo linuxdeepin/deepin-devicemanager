@@ -13,7 +13,7 @@ const int EMUS_PER_TWIP = 635;
 
 const int UNITS_PER_POINT = 100;
 
-Length::Length()
+Length::Length(): m_value()
 {
 
 }
@@ -25,7 +25,7 @@ Length::Length(int emu) : m_value(emu)
 
 float Length::cm() const
 {
-    return (float)m_value/(float)EMUS_PER_CM;
+    return (float)m_value / (float)EMUS_PER_CM;
 }
 
 int Length::emu() const
@@ -35,22 +35,22 @@ int Length::emu() const
 
 float Length::inches() const
 {
-    return (float)m_value/(float)EMUS_PER_INCH;
+    return (float)m_value / (float)EMUS_PER_INCH;
 }
 
 float Length::mm() const
 {
-    return (float)m_value/(float)EMUS_PER_MM;
+    return (float)m_value / (float)EMUS_PER_MM;
 }
 
 int Length::px() const
 {
-    return (int)(round((float)m_value/(float)EMUS_PER_PX) + 0.1);
+    return (int)(round((float)m_value / (float)EMUS_PER_PX) + 0.1);
 }
 
 int Length::twips() const
 {
-    return (int)(round((float)m_value/(float)EMUS_PER_TWIP));
+    return (int)(round((float)m_value / (float)EMUS_PER_TWIP));
 }
 
 bool Length::isEmpty() const

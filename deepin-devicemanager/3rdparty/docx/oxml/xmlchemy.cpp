@@ -31,7 +31,7 @@ ZeroOrOne::~ZeroOrOne()
 
 // OxmlElementBase
 
-OxmlElementBase::OxmlElementBase()
+OxmlElementBase::OxmlElementBase(): m_element()
 {
 
 }
