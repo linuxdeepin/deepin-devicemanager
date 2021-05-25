@@ -41,12 +41,12 @@ void ReadFilePool::readAllFile()
 {
     DeviceManager::instance()->clear();
 
-    //QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
-    //cleaner->setParent(this);
+    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
+    cleaner->setParent(this);
     QList<QStringList>::iterator it = m_CmdList.begin();
     for (; it != m_CmdList.end(); ++it) {
         CmdTask *task = new CmdTask((*it)[0], (*it)[1], (*it)[2], this);
-        //cleaner->add(task);
+        cleaner->add(task);
         start(task);
         task->setAutoDelete(true);
     }
