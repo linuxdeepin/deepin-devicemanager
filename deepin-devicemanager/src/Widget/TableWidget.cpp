@@ -25,6 +25,7 @@
 TableWidget::TableWidget(QWidget *parent)
     : DWidget(parent)
     , mp_Table(new LogTreeView(this))
+    , m_HLayout(nullptr)
     , mp_Enable(new QAction(tr("Disable"), this))
     , mp_Refresh(new QAction(/*QIcon::fromTheme("view-refresh"), */tr("Refresh"), this))
     , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export"), this))
@@ -43,6 +44,39 @@ TableWidget::TableWidget(QWidget *parent)
     connect(mp_Refresh, &QAction::triggered, this, &TableWidget::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &TableWidget::slotActionExport);
     connect(mp_Enable, &QAction::triggered, this, &TableWidget::slotActionEnable);
+}
+
+TableWidget::~TableWidget()
+{
+    if (mp_Table) {
+        delete mp_Table;
+        mp_Table = nullptr;
+    }
+
+    if (m_HLayout) {
+        delete m_HLayout;
+        m_HLayout = nullptr;
+    }
+
+    if (mp_Enable) {
+        delete mp_Enable;
+        mp_Enable = nullptr;
+    }
+
+    if (mp_Refresh) {
+        delete mp_Refresh;
+        mp_Refresh = nullptr;
+    }
+
+    if (mp_Export) {
+        delete mp_Export;
+        mp_Export = nullptr;
+    }
+
+    if (mp_Menu) {
+        delete mp_Menu;
+        mp_Menu = nullptr;
+    }
 }
 
 void TableWidget::setHeaderLabels(const QStringList &lst)
@@ -198,9 +232,9 @@ void TableWidget::slotItemClicked(const QModelIndex &index)
 void TableWidget::initWidget()
 {
     // init widget layout
-    QHBoxLayout *hLayout = new QHBoxLayout();
+    m_HLayout = new QHBoxLayout(this);
     int margin = 2;
-    hLayout->setContentsMargins(margin, margin, margin, margin);
-    hLayout->addWidget(mp_Table);
-    setLayout(hLayout);
+    m_HLayout->setContentsMargins(margin, margin, margin, margin);
+    m_HLayout->addWidget(mp_Table);
+    setLayout(m_HLayout);
 }
