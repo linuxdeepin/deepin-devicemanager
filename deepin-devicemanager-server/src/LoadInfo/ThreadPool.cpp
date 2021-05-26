@@ -198,7 +198,7 @@ void ThreadPool::initCmd()
 
     // 添加lscpu命令
     Cmd cmdLscpu;
-    cmdLscpu.cmd = QString("%1 %2%3").arg("lscpu > ").arg(PATH).arg("lscpu.txt");
+    cmdLscpu.cmd = "lscpu";//QString("%1 %2%3").arg("lscpu > ").arg(PATH).arg("lscpu.txt");
     cmdLscpu.file = "lscpu.txt";
     cmdLscpu.canNotReplace = true;
     m_ListCmd.append(cmdLscpu);

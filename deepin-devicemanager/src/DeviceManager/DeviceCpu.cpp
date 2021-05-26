@@ -32,13 +32,12 @@ DeviceCpu::DeviceCpu()
     initFilterKey();
 }
 
-void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo, int coreNum, int logicalNum)
+void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, int coreNum, int logicalNum)
 {
     // 设置CPU信息
     setInfoFromLscpu(mapLscpu);
     setInfoFromLshw(mapLshw);
     setInfoFromDmidecode(mapDmidecode);
-    setInfoFromCatCpuinfo(catInfo);
 
     // CPU 名称后面不需要加个数
     m_Name.replace(QRegExp("/[0-9]*$"), "");
@@ -117,35 +116,41 @@ const QString DeviceCpu::getOverviewInfo()
 void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 {
     // 设置CPU属性
-    setAttribute(mapInfo, "Model name", m_Name);
-    setAttribute(mapInfo, "Vendor ID", m_Vendor, false);
+    setAttribute(mapInfo, "model name", m_Name);
+    setAttribute(mapInfo, "vendor_id", m_Vendor, false);
     setAttribute(mapInfo, "Thread(s) per core", m_ThreadNum);
-    setAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
+    setAttribute(mapInfo, "bogomips", m_BogoMIPS);
     setAttribute(mapInfo, "Architecture", m_Architecture);
-    setAttribute(mapInfo, "CPU family", m_Familly);
+    setAttribute(mapInfo, "cpu family", m_Familly);
     setAttribute(mapInfo, "CPU MHz", m_CurFrequency);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "Stepping", m_Step);
+    setAttribute(mapInfo, "model", m_Model);
+    setAttribute(mapInfo, "stepping", m_Step);
     setAttribute(mapInfo, "L1d cache", m_CacheL1Data);
     setAttribute(mapInfo, "L1i cache", m_CacheL1Order);
     setAttribute(mapInfo, "L2 cache", m_CacheL2);
     setAttribute(mapInfo, "L3 cache", m_CacheL3);
-    setAttribute(mapInfo, "Flags", m_Flags);
+    setAttribute(mapInfo, "flags", m_Flags);
     setAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
+
+    setAttribute(mapInfo, "processor", m_PhysicalID);
+    setAttribute(mapInfo, "core id", m_CoreID);
 
     // 计算频率范围
     bool min = mapInfo.find("CPU min MHz") != mapInfo.end();
     bool max = mapInfo.find("CPU max MHz") != mapInfo.end();
     if (min && max) {
-        double minHz = mapInfo["CPU min MHz"].toDouble() / 1000;
-        double maxHz = mapInfo["CPU max MHz"].toDouble() / 1000;
+        QString minS = mapInfo["CPU min MHz"];
+        QString maxS = mapInfo["CPU max MHz"];
+        double minHz = minS.replace("MHz", "").toDouble() / 1000;
+        double maxHz = maxS.replace("MHz", "").toDouble() / 1000;
         m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
         m_FrequencyIsRange = true;
 
         // 如果最大最小频率相等则不显示范围
         if (fabs(minHz - maxHz) < 0.001)
             m_FrequencyIsRange = false;
-
+    } else {
+        m_Frequency = m_CurFrequency;
     }
 
     //获取扩展指令集
@@ -190,38 +195,6 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Max Speed", m_Frequency, false);
     //    setAttribute(mapInfo, "Current Speed", m_CurFrequency);
     setAttribute(mapInfo, "Family", m_Familly);
-
-    // 获取其他cpu信息
-    getOtherMapInfo(mapInfo);
-}
-
-void DeviceCpu::setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo)
-{
-    setAttribute(mapInfo, "processor", m_PhysicalID);
-
-    // 兆芯和X86机器的关键字 core id  龙芯的关键字是 core
-    setAttribute(mapInfo, "core id", m_CoreID);
-    setAttribute(mapInfo, "core", m_CoreID);
-
-    // 在FT-2000和pangu(都是arm) 的机器上没有 core 和 core id
-    setAttribute(mapInfo, "processor", m_CoreID, false);
-
-    // 龙芯机器无法获取型号 但是有cpu model
-    setAttribute(mapInfo, "cpu model", m_Model, false);
-
-    // 龙芯机器无法获取特性，需要在cat cpu中使用Loongson Features
-    setAttribute(mapInfo, "Loongson Features", m_Flags, false);
-
-    // 设置频率
-    setAttribute(mapInfo, "CPU MHz", m_Frequency, false);
-    setAttribute(mapInfo, "cpu MHz", m_Frequency, false);
-
-    // 将频率的单位换为MHz
-    if (m_Frequency.contains("."))
-        m_Frequency.replace(QRegExp("\\.00"), "MHz");
-
-    if (!m_Frequency.contains("MHz") && !m_Frequency.contains("GHz"))
-        m_Frequency += "MHz";
 
     // 获取其他cpu信息
     getOtherMapInfo(mapInfo);

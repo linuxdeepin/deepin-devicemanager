@@ -556,7 +556,7 @@ void CmdTool::loadLscpuInfo(const QString &key, const QString &debugfile)
             continue;
 
         QMap<QString, QString> mapInfo;
-        getMapInfoFromCmd(item, mapInfo, key.startsWith("cat_os") ? "=" : ": ");
+        getMapInfoFromCmd(item, mapInfo, " : ");
         addMapInfo(key, mapInfo);
     }
 }

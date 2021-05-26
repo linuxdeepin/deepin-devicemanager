@@ -7,7 +7,8 @@
 #include <QDir>
 #include <unistd.h>
 
-#include<DeviceInfoManager.h>
+#include "DeviceInfoManager.h"
+#include "cpu/CpuInfo.h"
 
 ThreadPoolTask::ThreadPoolTask(QString cmd, QString file, bool replace, int waiting, QObject *parent)
     : QObject(parent),
@@ -26,6 +27,10 @@ ThreadPoolTask::~ThreadPoolTask()
 
 void ThreadPoolTask::run()
 {
+    if (m_Cmd == "lscpu") {
+        loadCpuInfo();
+        return;
+    }
     runCmdToCache(m_Cmd);
 }
 
@@ -103,6 +108,16 @@ void ThreadPoolTask::loadSmartCtlInfoToCache(const QString &info)
         QString sInfo;
         runCmd(smartCmd, sInfo);
         DeviceInfoManager::getInstance()->addInfo(QString("smartctl_%1").arg(words[0].trimmed()), sInfo);
+    }
+}
+
+void ThreadPoolTask::loadCpuInfo()
+{
+    CpuInfo cpu;
+    if (cpu.loadCpuInfo()) {
+        QString info;
+        cpu.logicalCpus(info);
+        DeviceInfoManager::getInstance()->addInfo("lscpu", info);
     }
 }
 

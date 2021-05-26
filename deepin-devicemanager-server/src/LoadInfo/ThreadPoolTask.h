@@ -55,6 +55,12 @@ private:
      * @param cmd : the command
      */
     void runCmd(const QString &cmd);
+
+    /**
+     * @brief runCmd
+     * @param cmd
+     * @param info
+     */
     void runCmd(const QString &cmd, QString &info);
 
     /**
@@ -68,6 +74,11 @@ private:
      * @param info
      */
     void loadSmartCtlInfoToCache(const QString &info);
+
+    /**
+     * @brief loadCpuInfo
+     */
+    void loadCpuInfo();
 
     /**
      * @brief loadSgSmartCtlInfoToCache

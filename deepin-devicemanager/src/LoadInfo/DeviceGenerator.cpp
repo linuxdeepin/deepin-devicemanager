@@ -100,13 +100,9 @@ void DeviceGenerator::generatorComputerDevice()
 void DeviceGenerator::generatorCpuDevice()
 {
     // 生成CPU
-    const QList<QMap<QString, QString> >  &lstCatCpu = DeviceManager::instance()->cmdInfo("cat_cpuinfo");
-    if (lstCatCpu.size() == 0)
-        return;
-
     // get info from lscpu
     const QList<QMap<QString, QString> >  &lsCpu = DeviceManager::instance()->cmdInfo("lscpu");
-    const QMap<QString, QString> &lscpu = lsCpu.size() > 0 ? lsCpu[0] : QMap<QString, QString>();
+//    const QMap<QString, QString> &lscpu = lsCpu.size() > 0 ? lsCpu[0] : QMap<QString, QString>();
 
     // get info from lshw
     const QList<QMap<QString, QString> >  &lshwCpu = DeviceManager::instance()->cmdInfo("lshw_cpu");
@@ -131,10 +127,10 @@ void DeviceGenerator::generatorCpuDevice()
     if (logicalNum == 0)
         logicalNum = coreNum;
 
-    QList<QMap<QString, QString> >::const_iterator it = lstCatCpu.begin();
-    for (; it != lstCatCpu.end(); ++it) {
+    QList<QMap<QString, QString> >::const_iterator it = lsCpu.begin();
+    for (; it != lsCpu.end(); ++it) {
         DeviceCpu *device = new DeviceCpu;
-        device->setCpuInfo(lscpu, lshw, dmidecode, *it, coreNum, logicalNum);
+        device->setCpuInfo(*it, lshw, dmidecode, coreNum, logicalNum);
         DeviceManager::instance()->addCpuDevice(device);
     }
 }

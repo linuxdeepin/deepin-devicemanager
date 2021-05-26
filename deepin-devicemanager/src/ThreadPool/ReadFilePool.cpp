@@ -110,7 +110,7 @@ void ReadFilePool::initCmd()
         m_CmdList.append({ "bootdevice",       "bootdevice.txt",         ""});
     }
 
-    m_CmdList.append({ "cat_cpuinfo",          "/proc/cpuinfo",          tr("Loading Monitor Info...")});
+//    m_CmdList.append({ "cat_cpuinfo",          "/proc/cpuinfo",          tr("Loading Monitor Info...")});
     m_CmdList.append({ "cat_boardinfo",        "/proc/boardinfo",        tr("Loading Mouse Info...")});
     m_CmdList.append({ "cat_os_release",       "/etc/os-release",        tr("Loading Network Adapter Info...")});
     m_CmdList.append({ "cat_version",          "/proc/version",          ""});
