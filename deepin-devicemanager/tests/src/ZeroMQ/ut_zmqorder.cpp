@@ -38,7 +38,7 @@ public:
 
 TEST_F(ZmqOrder_UT, ZmqOrder_UT_execDriverOrder)
 {
-    m_zmqOrder->execIfconfigOrder("/n");
+    m_zmqOrder->execDriverOrder("/n");
 }
 
 TEST_F(ZmqOrder_UT, ZmqOrder_UT_execIfconfigOrder)

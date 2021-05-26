@@ -218,3 +218,13 @@ TEST_F(CmdTool_UT, CmdTool_UT_loadCatInputDeviceInfo)
     m_cmdTool->loadCatConfigInfo("/", "/");
     m_cmdTool->loadCatAudioInfo("/", "/");
 }
+
+TEST_F(CmdTool_UT, CmdTool_UT_getCurNetworkLinkStatus)
+{
+    m_cmdTool->getCurNetworkLinkStatus("en2ps0");
+}
+
+TEST_F(CmdTool_UT, CmdTool_UT_getCurPowerInfo)
+{
+    m_cmdTool->getCurPowerInfo();
+}

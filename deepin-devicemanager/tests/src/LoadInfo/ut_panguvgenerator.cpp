@@ -17,6 +17,7 @@
 #include "../src/LoadInfo/PanguVGenerator.h"
 #include "../src/LoadInfo/PanguGenerator.h"
 #include "../src/LoadInfo/MipsGenerator.h"
+#include "../src/DeviceManager/DeviceManager.h"
 
 #include "../ut_Head.h"
 #include <QCoreApplication>
@@ -68,17 +69,53 @@ public:
     MipsGenerator *m_MipsGenerator = nullptr;
 };
 
+QList<QMap<QString, QString>> ut_panguv_cmdInfo()
+{
+    QList<QMap<QString, QString>> info;
+    QMap<QString, QString> map;
+    map.insert("name", "/");
+    map.insert("type", "/");
+    info.append(map);
+    return info;
+}
+
 TEST_F(PanguVGenerator_UT, PanguVGenerator_UT_generatorMonitorDevice)
 {
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_panguv_cmdInfo);
     m_PanguVGenerator->generatorMonitorDevice();
+}
+
+QList<QMap<QString, QString>> ut_pangu_cmdInfo()
+{
+    QList<QMap<QString, QString>> info;
+    QMap<QString, QString> map;
+    map.insert("name", "/");
+    map.insert("type", "/");
+    info.append(map);
+    return info;
 }
 
 TEST_F(PanguGenerator_UT, PanguGenerator_UT_generatorComputerDevice)
 {
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_pangu_cmdInfo);
     m_PanguGenerator->generatorComputerDevice();
+}
+
+QList<QMap<QString, QString>> ut_mips_cmdInfo()
+{
+    QList<QMap<QString, QString>> info;
+    QMap<QString, QString> map;
+    map.insert("name", "/");
+    map.insert("type", "/");
+    info.append(map);
+    return info;
 }
 
 TEST_F(MipsGenerator_UT, MipsGenerator_UT_generatorComputerDevice)
 {
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_mips_cmdInfo);
     m_MipsGenerator->generatorComputerDevice();
 }

@@ -76,6 +76,8 @@ TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorPowerDevice)
 
 TEST_F(KLUGenerator_UT, KLUGenerator_UT_getKeyboardInfoFromHwinfo)
 {
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
     m_KLUGenerator->getKeyboardInfoFromHwinfo();
     m_KLUGenerator->getOthersInfoFromHwinfo();
     m_KLUGenerator->getDiskInfoFromHwinfo();
