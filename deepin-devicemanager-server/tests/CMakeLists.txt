@@ -32,6 +32,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+option (PERF_ON "Use provided math implementation" ON)
+
 # 设置包含头文件的时候不用包含路径 begin ****************************************************************************************
 macro(SUBDIRLIST result curdir)
     file(GLOB children RELATIVE ${curdir} ${curdir}/*)
@@ -60,7 +62,9 @@ find_package(DtkCore REQUIRED)
 find_package(DFrameworkdbus REQUIRED)
 
 set(PROJECT_NAME_TEST
-    ${PROJECT_NAME}_test)
+    ${PROJECT_NAME}-test)
+
+ADD_COMPILE_OPTIONS(-fno-access-control)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 foreach(subdir ${all_src})
@@ -115,4 +119,4 @@ add_custom_target(test-server
 add_dependencies(test ${PROJECT_NAME_TEST})
 
 # 设置添加gocv相关信息的输出
-set(CMAKE_CXX_FLAGS "-g -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fprofile-arcs -ftest-coverage")
