@@ -50,6 +50,11 @@ void LoadCpuInfoThread::loadCpuInfo(QList<QMap<QString, QString>> &lstMap, const
         QMap<QString, QString> mapInfo;
 
         getMapInfoFromCmd(item, mapInfo, ":");
+        if (mapInfo.contains("L1d cache")
+            || mapInfo.contains("L1i cache")
+            || mapInfo.contains("L2 cache")
+            || mapInfo.contains("L3 cache"))
+            continue;
         lstMap.append(mapInfo);
     }
 }
