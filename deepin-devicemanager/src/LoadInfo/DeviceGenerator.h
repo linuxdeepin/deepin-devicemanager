@@ -23,10 +23,12 @@
 #ifndef DEVICEGENERATOR_H
 #define DEVICEGENERATOR_H
 
-#include <QObject>
 #include <DApplication>
 #include <DSysInfo>
+
+#include <QObject>
 #include <QMutex>
+
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 

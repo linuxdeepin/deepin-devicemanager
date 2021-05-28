@@ -23,8 +23,9 @@
 #ifndef ENABLEMANAGER_H
 #define ENABLEMANAGER_H
 
-#include <QObject>
 #include "DeviceInfo.h"
+
+#include <QObject>
 
 /**
  * @brief The EnableManager class

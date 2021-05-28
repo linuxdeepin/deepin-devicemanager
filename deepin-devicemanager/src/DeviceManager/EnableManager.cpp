@@ -2,6 +2,7 @@
 #include "EnableManager.h"
 #include "DBus/DBusInterface.h"
 #include "DeviceManager.h"
+#include "ZmqOrder.h"
 
 // Qt库文件
 #include <QDebug>
@@ -10,7 +11,6 @@
 
 // 其它头文件
 #include <stdlib.h>
-#include "ZmqOrder.h"
 
 EnableManager *EnableManager::s_Instance = nullptr;
 

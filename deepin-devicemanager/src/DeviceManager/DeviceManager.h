@@ -22,15 +22,16 @@
 
 #ifndef DEVICEMANAGER_H
 #define DEVICEMANAGER_H
+
+#include "document.h"
+#include "xlsxdocument.h"
+
 #include <QList>
 #include <QMap>
 #include <QMutex>
 #include <QDomDocument>
 #include <QObject>
 #include <QFile>
-
-#include "document.h"
-#include "xlsxdocument.h"
 
 //class DeviceMouse;
 class DeviceCpu;

@@ -124,7 +124,7 @@ TEST_F(MainWindow_UT, MainWindow_UT_slotListItemClicked)
     stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
     m_mainWindow = new MainWindow;
     m_mainWindow->slotListItemClicked("Monitor");
-    m_mainWindow->changeUI();
+    m_mainWindow->slotChangeUI();
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_keyPressEvent)
@@ -158,5 +158,5 @@ TEST_F(MainWindow_UT, MainWindow_UT_loadingFinishSlot)
     Stub stub;
     stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
     m_mainWindow = new MainWindow;
-    m_mainWindow->loadingFinishSlot("finish");
+    m_mainWindow->slotLoadingFinish("finish");
 }

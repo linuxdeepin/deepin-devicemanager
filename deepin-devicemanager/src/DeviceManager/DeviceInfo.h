@@ -21,6 +21,11 @@
 
 #ifndef DEVICEINFO_H
 #define DEVICEINFO_H
+
+#include "document.h"
+#include "xlsxdocument.h"
+#include "table.h"
+
 #include <QString>
 #include <QMap>
 #include <QSet>
@@ -29,10 +34,6 @@
 #include <QPair>
 #include <QDomDocument>
 #include <QFile>
-
-#include "document.h"
-#include "xlsxdocument.h"
-#include "table.h"
 
 /**
  * @brief The EnableDeviceStatus enum
