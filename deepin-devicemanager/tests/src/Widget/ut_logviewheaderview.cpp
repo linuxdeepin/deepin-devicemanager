@@ -53,20 +53,20 @@ QVariant ut_model_headerData()
 
 TEST_F(LogviewHeaderView_UT, UT_paintSection)
 {
-    //    QPainter painter(m_logViewHeaderView);
-    //    Stub stub;
-    //    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
-    //    stub.set(header, ut_model_headerData);
+    QPainter painter(m_logViewHeaderView);
+    Stub stub;
+    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
+    //        stub.set(header, ut_model_headerData);
 
-    //    m_logViewHeaderView->paintSection(&painter,QRect(10,10,10,10),0);
+    m_logViewHeaderView->paintSection(&painter, QRect(10, 10, 10, 10), 0);
 }
 
 TEST_F(LogviewHeaderView_UT, ut_paintEvent)
 {
-    //    QPaintEvent paint(QRect(m_logViewHeaderView->rect()));
-    //    Stub stub;
-    //    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
-    //    m_logViewHeaderView->paintEvent(&paint);
+    QPaintEvent paint(QRect(m_logViewHeaderView->rect()));
+    Stub stub;
+    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
+    m_logViewHeaderView->paintEvent(&paint);
 }
 
 TEST_F(LogviewHeaderView_UT, ut_sizeHint)
