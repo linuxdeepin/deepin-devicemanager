@@ -81,7 +81,6 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
             mapInfo["rate"] = "";
         lstMap.append(mapInfo);
     }
-
     lstMap.removeAt(0);
 }
 

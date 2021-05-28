@@ -88,6 +88,7 @@ void GenerateTask::run()
 
 
 GenerateDevicePool::GenerateDevicePool()
+    : QThreadPool()
 {
     initType();
 }

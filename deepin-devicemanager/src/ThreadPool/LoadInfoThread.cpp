@@ -7,13 +7,17 @@
 #include "GenerateDevicePool.h"
 #include "ZmqOrder.h"
 
+#include<malloc.h>
+
 LoadInfoThread::LoadInfoThread()
-    : mp_ReadFilePool(new ReadFilePool)
-    , mp_GenerateDevicePool(new GenerateDevicePool)
+    : mp_ReadFilePool(nullptr)
+    , mp_GenerateDevicePool(nullptr)
     , m_Running(false)
     , m_FinishedReadFilePool(false)
     , mp_ZmqOrder(nullptr)
 {
+    mp_ReadFilePool = new ReadFilePool();
+    mp_GenerateDevicePool = new GenerateDevicePool();
     connect(mp_ReadFilePool, &ReadFilePool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
 }
 
@@ -31,6 +35,7 @@ LoadInfoThread::~LoadInfoThread()
         delete mp_ZmqOrder;
         mp_ZmqOrder = nullptr;
     }
+    malloc_trim(0);
 }
 
 

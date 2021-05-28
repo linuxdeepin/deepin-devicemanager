@@ -51,6 +51,7 @@ public:
     }
     void TearDown()
     {
+        delete m_readFilePool;
         delete m_cmdTask;
     }
     CmdTask *m_cmdTask;
