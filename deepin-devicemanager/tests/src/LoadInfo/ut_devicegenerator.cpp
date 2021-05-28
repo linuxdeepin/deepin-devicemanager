@@ -44,14 +44,14 @@ public:
 QList<QMap<QString, QString>> ut_generator_cmdInfo()
 {
     QList<QMap<QString, QString>> info;
-    QMap<QString, QString> map;
-    map.insert("name", "/");
-    map.insert("type", "/");
-    info.append(map);
+//    QMap<QString, QString> map;
+//    map.insert("name", "/");
+//    map.insert("type", "/");
+//    info.append(map);
     return info;
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorComputerDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorComputerDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -59,7 +59,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorComputerDevice)
     m_deviceGenerator->generatorComputerDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorCpuDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorCpuDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -67,7 +67,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorCpuDevice)
     m_deviceGenerator->generatorCpuDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorBiosDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorBiosDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -75,7 +75,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorBiosDevice)
     m_deviceGenerator->generatorBiosDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorDiskDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorDiskDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -83,7 +83,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorDiskDevice)
     m_deviceGenerator->generatorDiskDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorGpuDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorGpuDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -91,7 +91,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorGpuDevice)
     m_deviceGenerator->generatorGpuDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorMonitorDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorMonitorDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -99,7 +99,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorMonitorDevice)
     m_deviceGenerator->generatorMonitorDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorNetworkDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorNetworkDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -107,7 +107,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorNetworkDevice)
     m_deviceGenerator->generatorNetworkDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorAudioDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorAudioDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -115,7 +115,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorAudioDevice)
     m_deviceGenerator->generatorAudioDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorBluetoothDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorBluetoothDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -123,7 +123,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorBluetoothDevice)
     m_deviceGenerator->generatorBluetoothDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorKeyboardDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorKeyboardDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -131,7 +131,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorKeyboardDevice)
     m_deviceGenerator->generatorKeyboardDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorMouseDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorMouseDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -139,7 +139,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorMouseDevice)
     m_deviceGenerator->generatorMouseDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorPrinterDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorPrinterDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -147,7 +147,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorPrinterDevice)
     m_deviceGenerator->generatorPrinterDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorCameraDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorCameraDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -155,7 +155,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorCameraDevice)
     m_deviceGenerator->generatorCameraDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorCdromDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorCdromDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -163,7 +163,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorCdromDevice)
     m_deviceGenerator->generatorCdromDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorOthersDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorOthersDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
@@ -171,7 +171,7 @@ TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorOthersDevice)
     m_deviceGenerator->generatorOthersDevice();
 }
 
-TEST_F(DeviceGenerator_UT,DeviceGenerator_UT_generatorPowerDevice)
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorPowerDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
