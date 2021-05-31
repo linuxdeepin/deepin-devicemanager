@@ -80,6 +80,12 @@ public:
      */
     void setInfoFromLscpu(const QMap<QString, QString> &mapInfo);
 
+    /**
+     * @brief setCurFreq
+     * @param curFreq
+     */
+    void setCurFreq(const QString &curFreq);
+
 protected:
 
     /**

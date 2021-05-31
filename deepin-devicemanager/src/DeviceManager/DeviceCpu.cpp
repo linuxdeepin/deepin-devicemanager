@@ -164,6 +164,11 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     getOtherMapInfo(mapInfo);
 }
 
+void DeviceCpu::setCurFreq(const QString &curFreq)
+{
+    m_CurFrequency = curFreq;
+}
+
 void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // longxin CPU型号不从lshw中获取

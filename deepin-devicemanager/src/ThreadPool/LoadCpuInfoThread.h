@@ -46,7 +46,7 @@ private:
      * @param lstMap
      * @param key:命令
      */
-    void loadCpuInfo(QList<QMap<QString, QString>> &lstMap, const QString &cmd);
+    void loadCpuInfo(QMap<QString, QString> &mapInfo, const QString &cmd);
 
     /**
      * @brief getMapInfoFromCmd:将通过命令获取的信息字符串，转化为map形式
