@@ -44,10 +44,10 @@ public:
 
 TEST_F(PageBoardInfo_UT, ut_updateInfo)
 {
-    DeviceInput *device = new DeviceInput;
+    DeviceBios *device = new DeviceBios;
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
-    device->setInfoFromHwinfo(mapinfo);
+    device->setBiosInfo(mapinfo);
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     m_pageBoardInfo->updateInfo(bInfo);
@@ -63,7 +63,7 @@ TEST_F(PageBoardInfo_UT, ut_loadDeviceInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     QList<QPair<QString, QString>> lst;
-    lst.append(QPair<QString, QString>("/", "/"));
+    lst.append(QPair<QString, QString>("/", "abc:def\n123:456"));
     m_pageBoardInfo->loadDeviceInfo(bInfo, lst);
     delete device;
 }

@@ -50,9 +50,12 @@ TEST_F(PageInfoWidget_UT, PageInfoWidget_UT_updateTable)
     mapinfo.insert("/", "/");
     device->setInfoFromHwinfo(mapinfo);
     QList<DeviceBaseInfo *> bInfo;
-    bInfo.append(device);
+    m_pageInfoWidget->updateTable("", bInfo);
+    DeviceInput *device1 = new DeviceInput;
+    bInfo.append(device1);
     m_pageInfoWidget->updateTable("", bInfo);
     delete device;
+    delete device1;
     delete p;
 }
 

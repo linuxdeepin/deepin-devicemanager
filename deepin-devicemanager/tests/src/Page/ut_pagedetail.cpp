@@ -118,9 +118,14 @@ TEST_F(PageDetail_UT, PageDetail_UT_showDeviceInfo)
     delete device;
 }
 
+int ut_detail_size()
+{
+    return 1;
+}
+
 TEST_F(PageDetail_UT, PageDetail_UT_showInfoOfNum)
 {
-    m_pageDetail->showInfoOfNum(0);
+    m_pageDetail->showInfoOfNum(2);
     m_pageDetail->enableDevice(0, true);
 }
 
@@ -142,4 +147,9 @@ TEST_F(PageDetail_UT, PageDetail_UT_addWidgets)
     m_pageDetail->addWidgets(m_tBrowser, true);
     m_pageDetail->slotCopyAllInfo();
     delete m_tBrowser;
+}
+
+TEST_F(PageDetail_UT, PageDetail_UT_slotBtnClicked)
+{
+    m_pageDetail->slotBtnClicked();
 }

@@ -21,6 +21,9 @@
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QMenu>
+#include <QAction>
+#include <DSysInfo>
 
 #include <gtest/gtest.h>
 #include "../stub.h"
@@ -60,12 +63,58 @@ TEST_F(PageOverview_UT, PageOverview_UT_updateInfo2)
     m_pageOverview->setLabel("");
 }
 
+DSysInfo::UosEdition ut_uosEditionType()
+{
+    return DSysInfo::UosHome;
+}
+
+DSysInfo::UosEdition ut_uosEditionType1()
+{
+    return DSysInfo::UosCommunity;
+}
+
+DSysInfo::UosEdition ut_uosEditionType2()
+{
+    return DSysInfo::UosEducation;
+}
+
+DSysInfo::UosEdition ut_uosEditionType3()
+{
+    return DSysInfo::UosEnterprise;
+}
+
+DSysInfo::UosEdition ut_uosEditionType4()
+{
+    return DSysInfo::UosEnterpriseC;
+}
+
+DSysInfo::UosEdition ut_uosEditionType5()
+{
+    return DSysInfo::UosEuler;
+}
+
+DSysInfo::UosEdition ut_uosEditionType6()
+{
+    return DSysInfo::UosEditionCount;
+}
+
 TEST_F(PageOverview_UT, PageOverview_UT_setLabel)
 {
+    Stub stub;
     m_pageOverview->setLabel("/desktop", "/#");
+    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType);
     m_pageOverview->setLabel("/ternimal", "/#");
+    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType1);
     m_pageOverview->setLabel("/Tablet", "/#");
+    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType2);
     m_pageOverview->setLabel("/laptop", "/#");
+    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType3);
+    m_pageOverview->setLabel("/server", "/#");
+    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType4);
+    m_pageOverview->setLabel("/Tablet", "/#");
+    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType5);
+    m_pageOverview->setLabel("/laptop", "/#");
+    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType6);
     m_pageOverview->setLabel("/server", "/#");
 }
 
@@ -73,4 +122,19 @@ TEST_F(PageOverview_UT, PageOverview_UT_slotActionRefresh)
 {
     m_pageOverview->slotActionCopy();
     m_pageOverview->isOverview();
+}
+
+QAction *ut_exec()
+{
+    QAction *a;
+    a->setText("/");
+    return a;
+}
+
+TEST_F(PageOverview_UT, PageOverview_UT_slotShowMenu)
+{
+    QPoint point(0, 0);
+    //    Stub stub;
+    //    stub.set((QAction(QMenu::*)(const QPoint &,QAction *))ADDR(QMenu,exec),ut_exec);
+    //    m_pageOverview->slotShowMenu(point);
 }

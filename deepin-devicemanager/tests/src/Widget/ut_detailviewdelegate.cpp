@@ -35,6 +35,7 @@ public:
     {
         m_treeView = new DetailTreeView;
         m_dViewDelegate = new DetailViewDelegate(m_treeView);
+        m_treeView->setItemDelegate(m_dViewDelegate);
     }
     void TearDown()
     {

@@ -57,6 +57,11 @@ TEST_F(DevicePrint_UT, DevicePrint_UT_subTitle)
     m_devicePrint->subTitle();
 }
 
+TEST_F(DevicePrint_UT, DevicePrint_UT_setEnable)
+{
+    m_devicePrint->setEnable(true);
+}
+
 TEST_F(DevicePrint_UT, DevicePrint_UT_loadBaseDeviceInfo)
 {
     m_devicePrint->loadBaseDeviceInfo();

@@ -63,6 +63,7 @@ TEST_F(LoadInfoThread_UT, LoadInfoThread_UT_run)
 TEST_F(LoadInfoThread_UT, LoadInfoThread_UT_slotFinishedReadFilePool)
 {
     m_loadInfoThread->slotFinishedReadFilePool("/");
+    m_loadInfoThread->setFramework("/");
 }
 
 TEST_F(ThreadExecXrandr_UT, ThreadExecXrandr_UT_getGpuInfoFromXrandr)

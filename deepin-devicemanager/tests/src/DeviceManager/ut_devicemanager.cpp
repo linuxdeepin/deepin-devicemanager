@@ -59,7 +59,15 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_clear)
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_getDeviceTypes)
 {
+    DeviceBios *bios = new DeviceBios;
+    DeviceAudio *audio = new DeviceAudio;
+    DeviceManager::instance()->m_ListDeviceBios.append(bios);
+    DeviceManager::instance()->m_ListDeviceAudio.append(audio);
     DeviceManager::instance()->getDeviceTypes();
+    DeviceManager::instance()->m_ListDeviceBios.clear();
+    DeviceManager::instance()->m_ListDeviceAudio.clear();
+    delete bios;
+    delete audio;
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setDeviceListClass)
@@ -179,6 +187,20 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_setGpuInfoFromXrandr)
     DeviceManager::instance()->setGpuInfoFromXrandr(mapinfo);
     DeviceManager::instance()->m_ListDeviceGPU.clear();
     delete gpu;
+}
+
+TEST_F(DeviceManager_UT, DeviceManager_UT_networkDriver)
+{
+    DeviceManager::instance()->networkDriver();
+}
+
+TEST_F(DeviceManager_UT, DeviceManager_UT_correctPowerInfo)
+{
+    QMap<QString, QString> map;
+    map.insert("link", "yes");
+    QMap<QString, QMap<QString, QString>> info;
+    info.insert("power", map);
+    DeviceManager::instance()->correctPowerInfo(info);
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_setGpuSizeFromDmesg)
@@ -423,7 +445,7 @@ TEST_F(DeviceManager_UT, DeviceManager_UT_overviewToHtml)
 TEST_F(DeviceManager_UT, DeviceManager_UT_overviewToDoc)
 {
     Docx::Document doc;
-    //    DeviceManager::instance()->overviewToDoc(doc);
+    //        DeviceManager::instance()->overviewToDoc(doc);
 }
 
 TEST_F(DeviceManager_UT, DeviceManager_UT_overviewToXlsx)

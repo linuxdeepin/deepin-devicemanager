@@ -123,4 +123,6 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromCatCpuinfo)
 TEST_F(DeviceCpu_UT, DeviceCpu_UT_getTrNumber)
 {
     m_deviceCpu->getTrNumber();
+    m_deviceCpu->setCurFreq("1800MHz");
+    m_deviceCpu->vendor();
 }

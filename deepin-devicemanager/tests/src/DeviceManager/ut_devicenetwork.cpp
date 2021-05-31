@@ -66,3 +66,11 @@ TEST_F(DeviceNetwork_UT, DeviceNetwork_UT_name)
     m_deviceNetwork->driver();
     m_deviceNetwork->getOverviewInfo();
 }
+
+TEST_F(DeviceNetwork_UT, DeviceNetwork_UT_subTitle)
+{
+    m_deviceNetwork->subTitle();
+    //    m_deviceNetwork->setEnable(true);
+    m_deviceNetwork->correctCurrentLinkStatus("yes");
+    m_deviceNetwork->logicalName();
+}

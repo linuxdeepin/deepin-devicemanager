@@ -16,6 +16,7 @@
 */
 #include "../src/DeviceManager/DeviceInfo.h"
 #include "../src/DeviceManager/DeviceBios.h"
+#include "../../src/xlsx/xlsxdocument.h"
 #include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
@@ -136,11 +137,27 @@ TEST_F(DeviceInfo_UT, DeviceInfo_UT_tableHeaderToHtml)
     m_deviceBaseInfo->tableHeaderToHtml(html);
 }
 
+TEST_F(DeviceInfo_UT, DeviceInfo_UT_tableInfoToXlsx)
+{
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    QXlsx::Document xlsx;
+    m_deviceBaseInfo->tableInfoToXlsx(xlsx);
+    m_deviceBaseInfo->tableHeaderToXlsx(xlsx);
+}
+
+TEST_F(DeviceInfo_UT, DeviceInfo_UT_tableHeaderToDoc)
+{
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    //    Docx::Table *docs;
+    //    m_deviceBaseInfo->tableHeaderToDoc(docs);
+    //    m_deviceBaseInfo->tableHeaderToXlsx(xlsx);
+}
+
 TEST_F(DeviceInfo_UT, DeviceInfo_UT_setEnable)
 {
     m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    //    m_deviceBaseInfo->setEnable(true);
-    //    m_deviceBaseInfo->enable();
+    m_deviceBaseInfo->setEnable(true);
+    m_deviceBaseInfo->enable();
     m_deviceBaseInfo->setCanEnale(true);
     ASSERT_TRUE(m_deviceBaseInfo->canEnable());
 }

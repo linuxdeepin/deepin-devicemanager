@@ -131,12 +131,19 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_subTitle)
 {
     m_deviceStorage->subTitle();
     m_deviceStorage->getOverviewInfo();
+    m_deviceStorage->keyFromStorage();
 }
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_loadTableHeader)
 {
     m_deviceStorage->loadTableHeader();
     m_deviceStorage->loadTableData();
+}
+
+TEST_F(DeviceStorage_UT, DeviceStorage_UT_loadBaseDeviceInfo)
+{
+    m_deviceStorage->loadBaseDeviceInfo();
+    m_deviceStorage->loadOtherDeviceInfo();
 }
 
 TEST_F(DeviceStorage_UT, DeviceStorage_UT_getInfoFromLshw)
@@ -158,4 +165,16 @@ TEST_F(DeviceStorage_UT, DeviceStorage_UT_getInfoFromsmartctl)
     m_deviceStorage->m_Size = "16";
     m_deviceStorage->m_KeyToLshw = "34";
     m_deviceStorage->getInfoFromsmartctl(mapinfo);
+}
+
+TEST_F(DeviceStorage_UT, DeviceStorage_UT_addInfoFromSmartctl)
+{
+    QMap<QString, QString> mapinfo;
+    mapinfo.insert("Device Model", "1:2@34");
+    mapinfo.insert("User Capacity", "1");
+    mapinfo.insert("Model Number", "test");
+    m_deviceStorage->m_Size = "16";
+    m_deviceStorage->m_KeyToLshw = "34";
+    m_deviceStorage->m_DeviceFile = "name";
+    m_deviceStorage->addInfoFromSmartctl("name", mapinfo);
 }
