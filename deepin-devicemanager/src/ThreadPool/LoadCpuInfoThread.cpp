@@ -51,9 +51,9 @@ void LoadCpuInfoThread::loadCpuInfo(QList<QMap<QString, QString>> &lstMap, const
 
         getMapInfoFromCmd(item, mapInfo, ":");
         if (mapInfo.contains("L1d cache")
-            || mapInfo.contains("L1i cache")
-            || mapInfo.contains("L2 cache")
-            || mapInfo.contains("L3 cache"))
+                || mapInfo.contains("L1i cache")
+                || mapInfo.contains("L2 cache")
+                || mapInfo.contains("L3 cache"))
             continue;
         lstMap.append(mapInfo);
     }
@@ -72,7 +72,7 @@ void LoadCpuInfoThread::getMapInfoFromCmd(const QString &info, QMap<QString, QSt
 void LoadCpuInfoThread::getCpuInfoFromLscpu()
 {
     // 生成CPU
-    const QList<QMap<QString, QString>> &lstCatCpu = DeviceManager::instance()->cmdInfo("cat_cpuinfo");
+    const QList<QMap<QString, QString>> &lstCatCpu = DeviceManager::instance()->cmdInfo("lscpu");
     if (lstCatCpu.size() == 0)
         return;
     QList<QMap<QString, QString>> lstMap;
