@@ -423,6 +423,7 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
+        QStringList listInfo = item.split("\n");
 
         // hwinfo --usb 里面有很多的无用信息，需要特殊处理
         if (key == "hwinfo_usb") {
@@ -435,6 +436,12 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 
                 addMapInfo(key, mapInfo);
             }
+        } else if (key == "hwinfo_display") {
+            if (listInfo.size() < 3)
+                return;
+            if (!listInfo.at(0).contains("VGA"))
+                continue;
+            addMapInfo(key, mapInfo);
         } else {
             addMapInfo(key, mapInfo);
         }
