@@ -119,7 +119,7 @@ void DeviceGenerator::generatorCpuDevice()
     QList<QMap<QString, QString> >::const_iterator itd = dmidecode4.begin();
     for (; itd != dmidecode4.end(); ++itd) {
         coreNum += (*itd)["Core Count"].toInt();
-        logicalNum += (*itd)["Thread Count"].toInt();
+        logicalNum += (*itd)["Thread Count"].toInt() * (*itd)["Core Count"].toInt();
     }
 
     // 如果获取不到逻辑数，就按照core算 bug53921
