@@ -42,9 +42,23 @@ QList<QMap<QString, QString>> ut_cmdInfo()
 {
     QList<QMap<QString, QString>> list;
     QMap<QString, QString> map;
+    map.insert("Device Fil", "event1");
+    map.insert("name", "/");
+    map.insert("description", "/");
+    map.insert("data", "/");
     map.insert("/", "/");
     list.append(map);
     return list;
+}
+
+DSysInfo::DeepinType ut_deepinType()
+{
+    return DSysInfo::DeepinPersonal;
+}
+
+DSysInfo::DeepinType ut_deepinType1()
+{
+    return DSysInfo::DeepinDesktop;
 }
 
 TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorComputerDevice)
@@ -52,26 +66,45 @@ TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorComputerDevice)
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
     m_KLUGenerator->generatorComputerDevice();
+    //    stub.set(ADDR(DSysInfo, deepinType), ut_deepinType);
+    //    m_KLUGenerator->generatorComputerDevice();
+    //    stub.set(ADDR(DSysInfo, deepinType), ut_deepinType1);
+    //    m_KLUGenerator->generatorComputerDevice();
 }
 
 TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorGpuDevice)
 {
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
     m_KLUGenerator->generatorGpuDevice();
 }
 
 TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorMonitorDevice)
 {
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
     m_KLUGenerator->generatorMonitorDevice();
 }
 
 TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorAudioDevice)
 {
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
     m_KLUGenerator->generatorAudioDevice();
 }
 
 TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorPowerDevice)
 {
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
     m_KLUGenerator->generatorPowerDevice();
+}
+
+TEST_F(KLUGenerator_UT, KLUGenerator_UT_getDiskInfoFromHwinfo)
+{
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
+    m_KLUGenerator->getDiskInfoFromHwinfo();
 }
 
 TEST_F(KLUGenerator_UT, KLUGenerator_UT_getKeyboardInfoFromHwinfo)
@@ -80,7 +113,6 @@ TEST_F(KLUGenerator_UT, KLUGenerator_UT_getKeyboardInfoFromHwinfo)
     stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
     m_KLUGenerator->getKeyboardInfoFromHwinfo();
     m_KLUGenerator->getOthersInfoFromHwinfo();
-    m_KLUGenerator->getDiskInfoFromHwinfo();
     m_KLUGenerator->getDiskInfoFromLshw();
     m_KLUGenerator->getDiskInfoFromLsblk();
     m_KLUGenerator->getDiskInfoFromSmartCtl();

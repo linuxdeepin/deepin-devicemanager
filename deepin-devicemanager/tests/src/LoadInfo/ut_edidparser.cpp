@@ -41,6 +41,7 @@ public:
 TEST_F(EDIDParser_UT, EDIDParser_UT_setEdid)
 {
     QString meg = "0x0f";
+    m_EDIDParser->setEdid("f00ffffffffffff0", meg, "", true);
     m_EDIDParser->setEdid("00ffffffffffff00", meg, "", true);
 }
 
@@ -61,4 +62,12 @@ TEST_F(EDIDParser_UT, EDIDParser_UT_decToHex)
 {
     QString strHex = "101";
     m_EDIDParser->decToHex(strHex);
+}
+
+TEST_F(EDIDParser_UT, EDIDParser_UT_hex2)
+{
+    unsigned char hex = 'B';
+    m_EDIDParser->hex2(hex);
+    unsigned char hex1 = 'b';
+    m_EDIDParser->hex2(hex1);
 }

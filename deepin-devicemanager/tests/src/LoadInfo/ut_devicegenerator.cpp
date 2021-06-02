@@ -44,10 +44,10 @@ public:
 QList<QMap<QString, QString>> ut_generator_cmdInfo()
 {
     QList<QMap<QString, QString>> info;
-//    QMap<QString, QString> map;
-//    map.insert("name", "/");
-//    map.insert("type", "/");
-//    info.append(map);
+    QMap<QString, QString> map;
+    map.insert("name", "/");
+    map.insert("type", "/");
+    info.append(map);
     return info;
 }
 
@@ -177,4 +177,13 @@ TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorPowerDevice)
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
     m_deviceGenerator = DeviceFactory::getDeviceGenerator();
     m_deviceGenerator->generatorPowerDevice();
+}
+
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_getOthersInfoFromLshw)
+{
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
+    m_deviceGenerator = DeviceFactory::getDeviceGenerator();
+    m_deviceGenerator->getOthersInfoFromLshw();
+    m_deviceGenerator->getOthersInfoFromHwinfo();
 }

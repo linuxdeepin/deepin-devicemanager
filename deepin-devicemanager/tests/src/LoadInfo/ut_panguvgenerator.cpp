@@ -91,7 +91,9 @@ QList<QMap<QString, QString>> ut_pangu_cmdInfo()
     QList<QMap<QString, QString>> info;
     QMap<QString, QString> map;
     map.insert("name", "/");
-    map.insert("type", "/");
+    QMap<QString, QString> map1;
+    map1.insert("type", "/");
+    info.append(map);
     info.append(map);
     return info;
 }
@@ -113,9 +115,20 @@ QList<QMap<QString, QString>> ut_mips_cmdInfo()
     return info;
 }
 
+DSysInfo::UosEdition ut_mips_uosEditionType()
+{
+    return DSysInfo::UosHome;
+}
+
+int ut_indexIn()
+{
+    return 1;
+}
+
 TEST_F(MipsGenerator_UT, MipsGenerator_UT_generatorComputerDevice)
 {
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_mips_cmdInfo);
+    stub.set(ADDR(QRegExp, indexIn), ut_indexIn);
     m_MipsGenerator->generatorComputerDevice();
 }

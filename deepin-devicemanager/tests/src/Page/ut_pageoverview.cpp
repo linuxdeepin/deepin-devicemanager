@@ -104,18 +104,18 @@ TEST_F(PageOverview_UT, PageOverview_UT_setLabel)
     m_pageOverview->setLabel("/desktop", "/#");
     stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType);
     m_pageOverview->setLabel("/ternimal", "/#");
-    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType1);
-    m_pageOverview->setLabel("/Tablet", "/#");
-    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType2);
-    m_pageOverview->setLabel("/laptop", "/#");
-    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType3);
-    m_pageOverview->setLabel("/server", "/#");
-    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType4);
-    m_pageOverview->setLabel("/Tablet", "/#");
-    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType5);
-    m_pageOverview->setLabel("/laptop", "/#");
-    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType6);
-    m_pageOverview->setLabel("/server", "/#");
+    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType1);
+    //    m_pageOverview->setLabel("/Tablet", "/#");
+    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType2);
+    //    m_pageOverview->setLabel("/laptop", "/#");
+    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType3);
+    //    m_pageOverview->setLabel("/server", "/#");
+    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType4);
+    //    m_pageOverview->setLabel("/Tablet", "/#");
+    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType5);
+    //    m_pageOverview->setLabel("/laptop", "/#");
+    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType6);
+    //    m_pageOverview->setLabel("/server", "/#");
 }
 
 TEST_F(PageOverview_UT, PageOverview_UT_slotActionRefresh)

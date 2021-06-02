@@ -88,7 +88,7 @@ bool ut_startsWith()
 
 bool ut_CmdTool_exacMatch()
 {
-    return true;
+    return false;
 }
 
 TEST_F(CmdTool_UT, CmdTool_UT_loadXrandrInfo)
@@ -123,8 +123,10 @@ TEST_F(CmdTool_UT, CmdTool_UT_loadBluetoothCtlInfo)
 
 TEST_F(CmdTool_UT, CmdTool_UT_loadHwinfoUsbInfo)
 {
+    QList<QMap<QString, QString>> list;
     QMap<QString, QString> mapInfo;
     mapInfo.insert("SysFS BusI", "model");
+    list.append(mapInfo);
     m_cmdTool->loadHwinfoUsbInfo("Printer", mapInfo);
 }
 
@@ -148,8 +150,15 @@ TEST_F(CmdTool_UT, CmdTool_UT_getMapInfoFromCmd)
 
 TEST_F(CmdTool_UT, CmdTool_UT_getMapInfoFromInput)
 {
+    QList<QMap<QString, QString>> list;
     QMap<QString, QString> mapInfo;
-    mapInfo.insert("SysFS BusI", "model");
+    mapInfo.insert("SysFS BusID", "1");
+    QMap<QString, QString> mapInfo1;
+    mapInfo1.insert("SysFS BusID", "2");
+    list.append(mapInfo);
+    list.append(mapInfo1);
+    m_cmdTool->m_cmdInfo.insert("hwinfo_usb", list);
+
     m_cmdTool->getMapInfoFromInput("SMBIOS\n", mapInfo, "/");
 }
 
@@ -198,9 +207,25 @@ TEST_F(CmdTool_UT, CmdTool_UT_getMapInfoFromHciconfig)
     m_cmdTool->getMapInfoFromHciconfig(mapInfo, "IO\nBUS MODEL");
 }
 
+bool ut_getDeviceInfo(QString deviceInfo, QString file)
+{
+    file = "lshw_cpu.txt";
+    deviceInfo = "/*-cpu*-disk*-storage*-bank*-diaplay*-multimedia*-network*-usb*-cdrom";
+    return true;
+}
+
 TEST_F(CmdTool_UT, CmdTool_UT_loadLshwInfo)
 {
-    m_cmdTool->loadLshwInfo("/");
+    //    Stub stub;
+    //    stub.set(ADDR(CmdTool,getDeviceInfo),ut_getDeviceInfo);
+    m_cmdTool->loadLshwInfo("lshw_cpu.txt");
+}
+
+TEST_F(CmdTool_UT, CmdTool_UT_loadHwinfoInfo)
+{
+    Stub stub;
+    stub.set(ADDR(QString, isEmpty), ut_isEmpty);
+    m_cmdTool->loadHwinfoInfo("hwinfo_monitor", "hwinfo_monitor.txt");
 }
 
 bool ut_getCatDeviceInfo()
@@ -227,4 +252,29 @@ TEST_F(CmdTool_UT, CmdTool_UT_getCurNetworkLinkStatus)
 TEST_F(CmdTool_UT, CmdTool_UT_getCurPowerInfo)
 {
     m_cmdTool->getCurPowerInfo();
+}
+
+DSysInfo::UosEdition ut_CmdTool_uosEditionType()
+{
+    return DSysInfo::UosHome;
+}
+
+TEST_F(CmdTool_UT, CmdTool_UT_loadHciconfigInfo)
+{
+    Stub stub;
+    stub.set(ADDR(DSysInfo, uosEditionType), ut_CmdTool_uosEditionType);
+    m_cmdTool->loadHciconfigInfo("/");
+}
+
+TEST_F(CmdTool_UT, CmdTool_UT_loadDmidecodeInfo)
+{
+    m_cmdTool->loadDmidecodeInfo("dmidecode2", "/");
+    m_cmdTool->loadDmidecodeInfo("dmidecode3", "/");
+}
+
+TEST_F(CmdTool_UT, CmdTool_UT_loadCatInfo)
+{
+    Stub stub;
+    stub.set(ADDR(CmdTool, getCatDeviceInfo), ut_getCatDeviceInfo);
+    m_cmdTool->loadCatInfo("dmidecode2", "/");
 }
