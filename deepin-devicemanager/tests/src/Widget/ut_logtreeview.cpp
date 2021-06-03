@@ -51,17 +51,30 @@ int ut_row()
     return 1;
 }
 
+QStandardItem *ut_item()
+{
+    QStandardItem *item = new QStandardItem;
+    item->setData("Disable");
+    return item;
+}
+
 TEST_F(LogTreeView_UT, UT_currentRowEnable)
 {
     Stub stub;
     stub.set(ADDR(QModelIndex, row), ut_row);
+    stub.set(ADDR(QStandardItemModel, item), ut_item);
     m_logTreeView->currentRowEnable();
     ASSERT_NE(m_logTreeView->currentRow(), 0);
+    delete ut_item();
 }
 
 TEST_F(LogTreeView_UT, UT_updateCurItemEnable)
 {
+    Stub stub;
+    stub.set(ADDR(QStandardItemModel, item), ut_item);
     m_logTreeView->updateCurItemEnable(0, 1);
+    m_logTreeView->updateCurItemEnable(0, 0);
+    delete ut_item();
 }
 
 TEST_F(LogTreeView_UT, UT_paintEvent)
@@ -77,12 +90,12 @@ int ut_treeview_pixelMetric()
 
 TEST_F(LogTreeView_UT, UT_drawRow)
 {
-    //    Stub stub;
-    //    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_treeview_pixelMetric);
-    //    QStyleOptionViewItem option;
-    //    QPainter painter(m_logTreeView);
-    //    QModelIndex index = m_logTreeView->model()->index(0,0);
-    //    m_logTreeView->drawRow(&painter, option, index);
+    Stub stub;
+    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_treeview_pixelMetric);
+    QStyleOptionViewItem option;
+    QPainter painter(m_logTreeView);
+    QModelIndex index = m_logTreeView->model()->index(0, 0);
+    m_logTreeView->drawRow(&painter, option, index);
 }
 
 TEST_F(LogTreeView_UT, UT_setRowNum)
@@ -96,4 +109,10 @@ TEST_F(LogTreeView_UT, ut_keyPressEvent)
 {
     QKeyEvent keyPressEvent(QEvent::KeyPress, Qt::Key_Up, Qt::ShiftModifier);
     QCoreApplication::sendEvent(m_logTreeView, &keyPressEvent);
+}
+
+TEST_F(LogTreeView_UT, ut_showEvent)
+{
+    QShowEvent showEvent;
+    QCoreApplication::sendEvent(m_logTreeView, &showEvent);
 }

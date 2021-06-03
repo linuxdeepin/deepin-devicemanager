@@ -20,6 +20,7 @@
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QApplication>
 
 #include <gtest/gtest.h>
 #include "../stub.h"
@@ -38,8 +39,8 @@ public:
     LogViewHeaderView *m_logViewHeaderView;
 };
 
-//typedef QVariant (*fptr)(QAbstractItemModel *, int, Qt::Orientation, int);
-//fptr header = (fptr)(&QAbstractItemModel::headerData);
+//typedef QVariant (*fptr)(QAbstractItemModel*);
+//fptr QAbstractItemModel_headerData = (fptr)((QVariant(QAbstractItemModel::*))&QAbstractItemModel::headerData);
 
 int ut_headerview_pixelMetric()
 {
@@ -57,7 +58,6 @@ TEST_F(LogviewHeaderView_UT, UT_paintSection)
     Stub stub;
     stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
     //        stub.set(header, ut_model_headerData);
-
     m_logViewHeaderView->paintSection(&painter, QRect(10, 10, 10, 10), 0);
 }
 
@@ -74,10 +74,16 @@ TEST_F(LogviewHeaderView_UT, ut_sizeHint)
     m_logViewHeaderView->sizeHint();
 }
 
+void ut_initStyleOption()
+{
+    return;
+}
+
 TEST_F(LogviewHeaderView_UT, ut_sectionSizeHint)
 {
-    //    Stub stub;
-    //    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
-    //    stub.set(header, ut_model_headerData);
-    //    m_logViewHeaderView->sectionSizeHint(0);
+    //        Stub stub;
+    //        stub.set(ADDR(LogViewHeaderView,initStyleOption),ut_initStyleOption);
+    //        stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
+    //        stub.set(QAbstractItemModel_headerData, ut_model_headerData);
+    //        m_logViewHeaderView->sectionSizeHint(0);
 }

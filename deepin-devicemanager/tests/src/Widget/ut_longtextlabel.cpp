@@ -17,6 +17,7 @@
 #include "../src/Widget/LongTextLabel.h"
 
 #include "../ut_Head.h"
+#include "../stub.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
@@ -37,8 +38,15 @@ public:
     LongTextLabel *m_ltLabel;
 };
 
+int ut_LongTextLabel_indexIn()
+{
+    return 1;
+}
+
 TEST_F(LongTextLabel_UT, ut_paintEvent)
 {
+    Stub stub;
+    stub.set(ADDR(QRegExp, indexIn), ut_LongTextLabel_indexIn);
     QPaintEvent paint(QRect(m_ltLabel->rect()));
     m_ltLabel->paintEvent(&paint);
 }

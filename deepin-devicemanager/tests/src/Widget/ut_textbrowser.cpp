@@ -63,8 +63,14 @@ TEST_F(TextBrowser_UT, ut_updateInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     tBrowser->mp_Info = bInfo.at(0);
+    tBrowser->m_ShowOtherInfo = true;
     tBrowser->updateInfo();
     delete device;
+}
+
+QString ut_selectedText()
+{
+    return "/";
 }
 
 TEST_F(TextBrowser_UT, ut_setDeviceEnabled)
@@ -72,6 +78,8 @@ TEST_F(TextBrowser_UT, ut_setDeviceEnabled)
     tBrowser->mp_Info = nullptr;
     EXPECT_EQ(tBrowser->setDeviceEnabled(true), EDS_Cancle);
     tBrowser->updateShowOtherInfo();
+    Stub stub;
+    stub.set(ADDR(QTextCursor, selectedText), ut_selectedText);
     tBrowser->fillClipboard();
 }
 
@@ -95,7 +103,14 @@ TEST_F(TextBrowser_UT, ut_slotActionRefresh)
 
 TEST_F(TextBrowser_UT, ut_slotActionCopy)
 {
+    Stub stub;
+    stub.set(ADDR(QTextCursor, selectedText), ut_selectedText);
     tBrowser->slotActionCopy();
+}
+
+bool ut_text_enable()
+{
+    return false;
 }
 
 TEST_F(TextBrowser_UT, ut_domTitleInfo)
@@ -118,6 +133,7 @@ bool ut_rect_contains()
 
 TEST_F(TextBrowser_UT, ut_focusInEvent)
 {
+    tBrowser->m_ShowOtherInfo = true;
     QFocusEvent focus(QFocusEvent::FocusIn);
     QCoreApplication::sendEvent(tBrowser, &focus);
 

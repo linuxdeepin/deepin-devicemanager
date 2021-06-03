@@ -60,8 +60,8 @@ TEST_F(RichTextDelegate_UT, ut_paint)
     QPainter painter(widget);
     QModelIndex index;
     Stub stub;
-    //    stub.set(ADDR(QModelIndex,isValid),ut_richTextDelegate_isValid);
-    //    stub.set((QRect(DStyle::*)(DStyle::SubElement, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, subElementRect), ut_richTextDelegate_subElementRect);
+    stub.set(ADDR(QModelIndex, isValid), ut_richTextDelegate_isValid);
+    stub.set((QRect(DStyle::*)(DStyle::SubElement, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, subElementRect), ut_richTextDelegate_subElementRect);
     m_rtDelegate->paint(&painter, option, index);
 }
 
