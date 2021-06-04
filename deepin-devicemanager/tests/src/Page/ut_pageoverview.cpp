@@ -124,13 +124,6 @@ TEST_F(PageOverview_UT, PageOverview_UT_slotActionRefresh)
     m_pageOverview->isOverview();
 }
 
-QAction *ut_exec()
-{
-    QAction *a;
-    a->setText("/");
-    return a;
-}
-
 TEST_F(PageOverview_UT, PageOverview_UT_slotShowMenu)
 {
     QPoint point(0, 0);

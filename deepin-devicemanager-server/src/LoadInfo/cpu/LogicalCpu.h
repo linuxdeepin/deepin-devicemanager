@@ -244,7 +244,27 @@ class LogicalCpuPrivate
 {
     Q_DECLARE_PUBLIC(LogicalCpu)
 public:
-    LogicalCpuPrivate(LogicalCpu *q) : q_ptr(q) { }
+    LogicalCpuPrivate(LogicalCpu *q)
+        : q_ptr(q)
+        , logicalID(0)
+        , coreID(0)
+        , physicalID(0)
+        , l1d_cache("")
+        , l1i_cache("")
+        , l2_cache("")
+        , l3_cache("")
+        , max_freq("")
+        , min_freq("")
+        , cur_freq("")
+        , model("")
+        , modelName("")
+        , setpping("")
+        , vendor("")
+        , cpuFamily("")
+        , flags("")
+        , bogoMips("")
+    {
+    }
     LogicalCpu *q_ptr;                 //LogicalCpu 中的q指针
 
     int         logicalID;             // logical id

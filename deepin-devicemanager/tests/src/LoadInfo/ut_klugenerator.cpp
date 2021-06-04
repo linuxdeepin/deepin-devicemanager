@@ -102,8 +102,6 @@ TEST_F(KLUGenerator_UT, KLUGenerator_UT_generatorPowerDevice)
 
 TEST_F(KLUGenerator_UT, KLUGenerator_UT_getDiskInfoFromHwinfo)
 {
-    Stub stub;
-    stub.set(ADDR(DeviceManager, cmdInfo), ut_cmdInfo);
     m_KLUGenerator->getDiskInfoFromHwinfo();
 }
 

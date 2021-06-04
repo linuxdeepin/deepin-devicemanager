@@ -33,6 +33,9 @@ public:
     void SetUp()
     {
         m_logTreeView = new LogTreeView;
+        QStandardItem *item = new QStandardItem("Disable");
+        m_logTreeView->mp_Model->setItem(0, 0, item);
+        m_logTreeView->setModel(m_logTreeView->mp_Model);
     }
     void TearDown()
     {
@@ -51,30 +54,19 @@ int ut_row()
     return 1;
 }
 
-QStandardItem *ut_item()
-{
-    QStandardItem *item = new QStandardItem;
-    item->setData("Disable");
-    return item;
-}
-
 TEST_F(LogTreeView_UT, UT_currentRowEnable)
 {
     Stub stub;
     stub.set(ADDR(QModelIndex, row), ut_row);
-    stub.set(ADDR(QStandardItemModel, item), ut_item);
     m_logTreeView->currentRowEnable();
     ASSERT_NE(m_logTreeView->currentRow(), 0);
-    delete ut_item();
 }
 
 TEST_F(LogTreeView_UT, UT_updateCurItemEnable)
 {
     Stub stub;
-    stub.set(ADDR(QStandardItemModel, item), ut_item);
     m_logTreeView->updateCurItemEnable(0, 1);
     m_logTreeView->updateCurItemEnable(0, 0);
-    delete ut_item();
 }
 
 TEST_F(LogTreeView_UT, UT_paintEvent)
