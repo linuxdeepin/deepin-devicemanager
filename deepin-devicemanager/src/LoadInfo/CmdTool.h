@@ -55,7 +55,7 @@ public:
      * @brief getCurNetworkLinkStatus:lshw -C network获取当前连接状态
      * @return
      */
-    QString getCurNetworkLinkStatus();
+    QString getCurNetworkLinkStatus(QString driverName);
 
     /**
      * @brief getCurPowerInfo:upower --dump获取电池信息

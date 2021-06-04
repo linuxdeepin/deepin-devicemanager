@@ -276,7 +276,13 @@ public:
      * @brief correctNetworkLinkStatus:校正网络连接状态
      * @param linkStatus:连接状态
      */
-    void correctNetworkLinkStatus(QString linkStatus);
+    void correctNetworkLinkStatus(QString linkStatus, QString networkDriver);
+
+    /**
+        * @brief networkDriver:获取所有网络驱动
+        * @return
+        */
+    QStringList networkDriver();
 
     /**
      * @brief correctPowerOtherInfo:校正电池信息
