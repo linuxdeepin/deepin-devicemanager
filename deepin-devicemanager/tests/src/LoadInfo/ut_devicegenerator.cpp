@@ -47,6 +47,10 @@ QList<QMap<QString, QString>> ut_generator_cmdInfo()
     QMap<QString, QString> map;
     map.insert("name", "/");
     map.insert("type", "/");
+    map.insert("name", "/");
+    map.insert("type", "/");
+    map.insert("name", "/");
+    map.insert("type", "/");
     info.append(map);
     return info;
 }
@@ -65,6 +69,27 @@ TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorCpuDevice)
     stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
     m_deviceGenerator = DeviceFactory::getDeviceGenerator();
     m_deviceGenerator->generatorCpuDevice();
+}
+
+TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_getMemoryInfoFromDmidecode)
+{
+    Stub stub;
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_generator_cmdInfo);
+    m_deviceGenerator = DeviceFactory::getDeviceGenerator();
+    m_deviceGenerator->getMemoryInfoFromDmidecode();
+    m_deviceGenerator->getGpuInfoFromLshw();
+    m_deviceGenerator->getMonitorInfoFromXrandrVerbose();
+    m_deviceGenerator->getMonitorRefreshRateFromXrandr();
+    m_deviceGenerator->getAudioInfoFromHwinfo();
+    m_deviceGenerator->getAudioInfoFromLshw();
+    m_deviceGenerator->getAudioInfoFromCatInput();
+    m_deviceGenerator->getAudioChipInfoFromDmesg();
+    m_deviceGenerator->getBluetoothInfoFromLshw();
+    m_deviceGenerator->getOthersInfoFromLshw();
+    m_deviceGenerator->getCdromInfoFromLshw();
+    m_deviceGenerator->getImageInfoFromLshw();
+    m_deviceGenerator->getGpuInfoFromXrandr();
+    m_deviceGenerator->getImageInfoFromHwinfo();
 }
 
 TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_generatorBiosDevice)
