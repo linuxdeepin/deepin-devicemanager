@@ -72,7 +72,7 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
         return;
 
     // 设置属性
-    setAttribute(mapInfo, "product", m_Name);
+    setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "version", m_Version);
@@ -103,7 +103,8 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 {
     // 设置属性
     setAttribute(mapInfo, "Vendor", m_Vendor, false);
-    setAttribute(mapInfo, "Model", m_Name, false);
+    setAttribute(mapInfo, "Device", m_Name, true);
+    setAttribute(mapInfo, "SubDevice", m_Name, true); //如果subdevice有值则使用subdevice
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version, false);
     setAttribute(mapInfo, "IRQ", m_IRQ, false);

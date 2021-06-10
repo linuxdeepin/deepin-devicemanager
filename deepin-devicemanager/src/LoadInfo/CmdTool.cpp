@@ -958,6 +958,10 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
                 mapInfo[key] += value;
 
         } else {
+            // 此处如果subDevice和subVendor没有值，则过滤
+            if (words[0].trimmed() == "SubDevice" || words[0].trimmed() == "SubVendor") {
+                continue;
+            }
             if (words[0].trimmed() == "Resolution") {
                 mapInfo[words[0].trimmed()] += words[1].trimmed();
             } else {
