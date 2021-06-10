@@ -40,6 +40,10 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    if (!QString(qgetenv("XDG_CURRENT_DESKTOP")).toLower().startsWith("deepin")) {
+        setenv("XDG_CURRENT_DESKTOP", "Deepin", 1);
+    }
+
     PERF_PRINT_BEGIN("POINT-01", "");
 
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
