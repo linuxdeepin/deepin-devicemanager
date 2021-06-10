@@ -41,8 +41,10 @@ public:
 TEST_F(DeviceInput_UT, DeviceInput_UT_setInfoFromHwinfo)
 {
     QMap<QString, QString> map;
-    map.insert("bus info", "abc");
-    map.insert("SysFS BusID", "abc-d:123");
+    map.insert("Hotplug", "abc");
+    map.insert("Model", "Bluetooth");
+    map.insert("Device", "Bluetooth");
+    map.insert("Device File", "event3");
     m_deviceInput->m_KeyToLshw = "abcd";
     m_deviceInput->setInfoFromlshw(map);
     m_deviceInput->setInfoFromHwinfo(map);
@@ -51,8 +53,11 @@ TEST_F(DeviceInput_UT, DeviceInput_UT_setInfoFromHwinfo)
 TEST_F(DeviceInput_UT, DeviceInput_UT_setKLUInfoFromHwinfo)
 {
     QMap<QString, QString> map;
+    map.insert("Hotplug", "abc");
     map.insert("Model", "Bluetooth");
-    map.insert("SysFS BusID", "abc-d:123");
+    map.insert("Device", "Bluetooth");
+    map.insert("Device File", "event3");
+    map.insert("SysFS BusID", "/-/://");
     m_deviceInput->setKLUInfoFromHwinfo(map);
 }
 

@@ -76,7 +76,9 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromLscpu)
     QMap<QString, QString> mapDmidecode;
     QMap<QString, QString> catInfo;
     mapLscpu.insert("Vendor", "1@n");
-    mapLshw.insert("Version", "1.0");
+    mapLscpu.insert("CPU min MHz", "1800MHz");
+    mapLscpu.insert("CPU max MHz", "4800MHz");
+    mapLscpu.insert("Flags", "MMX");
     mapDmidecode.insert("Vendor", "test");
     catInfo.insert("Version", "2.0");
     m_deviceCpu->setInfoFromLscpu(mapLscpu);
@@ -92,6 +94,7 @@ TEST_F(DeviceCpu_UT, DeviceCpu_UT_setInfoFromLshw)
     mapLshw.insert("Version", "1.0");
     mapDmidecode.insert("Vendor", "test");
     catInfo.insert("Version", "2.0");
+    m_deviceCpu->m_Name = "Loongson";
     m_deviceCpu->setInfoFromLshw(mapLshw);
 }
 

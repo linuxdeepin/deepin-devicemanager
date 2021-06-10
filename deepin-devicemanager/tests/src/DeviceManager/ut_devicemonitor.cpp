@@ -129,9 +129,16 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_caculateScreenSize)
     m_deviceMonitor->caculateScreenSize("abc\n");
 }
 
+bool ut_setMainInfoFromXrandr()
+{
+    return true;
+}
+
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromXradr)
 {
     m_deviceMonitor->setInfoFromXradr("connect", "/n");
+    Stub stub;
+    stub.set(ADDR(DeviceMonitor, setMainInfoFromXrandr), ut_setMainInfoFromXrandr);
 }
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setCurrentResolution)

@@ -69,10 +69,21 @@ TEST_F(DeviceInfo_UT, DeviceInfo_UT_baseInfoToHTML)
     m_deviceBaseInfo->baseInfoToHTML(doc, infoLst);
 }
 
+QString ut_subTitle()
+{
+    return "name";
+}
+
+/**/
+typedef QString (*fptr)(DeviceBaseInfo *);
+//fptr m_subTitle = (fptr)(&DeviceBaseInfo::subTitle);
+
 TEST_F(DeviceInfo_UT, DeviceInfo_UT_subTitleToHTML)
 {
     m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
     QDomDocument doc;
+    Stub stub;
+    //    stub.set(m_subTitle,ut_subTitle);
     m_deviceBaseInfo->subTitleToHTML(doc);
 }
 
@@ -140,6 +151,8 @@ TEST_F(DeviceInfo_UT, DeviceInfo_UT_tableHeaderToHtml)
 TEST_F(DeviceInfo_UT, DeviceInfo_UT_tableInfoToXlsx)
 {
     m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    m_deviceBaseInfo->m_TableData.append("name");
+    m_deviceBaseInfo->m_TableHeader.append("name");
     QXlsx::Document xlsx;
     m_deviceBaseInfo->tableInfoToXlsx(xlsx);
     m_deviceBaseInfo->tableHeaderToXlsx(xlsx);
@@ -196,5 +209,8 @@ TEST_F(DeviceInfo_UT, DeviceInfo_UT_setAttribute)
 TEST_F(DeviceInfo_UT, DeviceInfo_UT_mapInfoToList)
 {
     m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    QMap<QString, QString> mapinfo;
+    mapinfo.insert("bus info", "1@n");
+    m_deviceBaseInfo->m_MapOtherInfo = mapinfo;
     m_deviceBaseInfo->mapInfoToList();
 }

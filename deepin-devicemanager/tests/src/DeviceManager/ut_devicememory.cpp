@@ -42,6 +42,8 @@ TEST_F(DeviceMemory_UT, DeviceMemory_UT_setInfoFromLshw)
 {
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
+    m_deviceMemory->m_Size = "2GiB 4MiB";
+    m_deviceMemory->m_Speed = "2MT/s";
     m_deviceMemory->setInfoFromLshw(mapinfo);
 }
 
@@ -49,6 +51,8 @@ TEST_F(DeviceMemory_UT, DeviceMemory_UT_setInfoFromDmidecode)
 {
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
+    m_deviceMemory->m_ConfiguredSpeed = "2MT/s";
+    m_deviceMemory->m_Type = "<OUT OF SPEC>";
     m_deviceMemory->setInfoFromDmidecode(mapinfo);
 }
 

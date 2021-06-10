@@ -73,6 +73,7 @@ TEST_F(EnableManager_UT, EnableManager_UT_enableDeviceByDriver)
     Stub stub;
     stub.set(ADDR(ZmqOrder, execDriverOrder), ut_execDriverOrder);
     ASSERT_EQ(EnableManager::instance()->enableDeviceByDriver(false, "/"), 1);
+    EnableManager::instance()->enableDeviceByDriver(true, "/");
 }
 
 QByteArray ut_readAllStandardOutput_1()
@@ -100,6 +101,7 @@ TEST_F(EnableManager_UT, EnableManager_UT_enableNetworkByIfconfig)
     stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
     stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_1);
     ASSERT_EQ(EnableManager::instance()->enableNetworkByIfconfig("/", false), 2);
+    EnableManager::instance()->enableNetworkByIfconfig("/", true);
 }
 
 TEST_F(EnableManager_UT, EnableManager_UT_isDeviceId)

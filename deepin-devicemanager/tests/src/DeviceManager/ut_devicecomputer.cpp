@@ -53,7 +53,7 @@ TEST_F(DeviceComputer_UT, DeviceComputer_UT_setHomeUrl)
     m_deviceComputer->setName("Intel");
     m_deviceComputer->setType(" ");
     m_deviceComputer->setVendor("System manufacturer", "Intel");
-    m_deviceComputer->setName("System Product Name", "Intel", "font", "1.0");
+    m_deviceComputer->setName("System Product Name", "Intel", "unknown", "unknown");
 }
 
 TEST_F(DeviceComputer_UT, DeviceComputer_UT_initFilterKey)
