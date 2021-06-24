@@ -155,6 +155,12 @@ void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
 
 void DeviceGpu::setDmesgInfo(const QString &info)
 {
+    // Bug-85049 JJW 显存特殊处理
+    if (info.contains("null")) {
+        QString size = info;
+        m_GraphicsMemory = size.replace("null=", "");
+    }
+
     // 设置显存大小
     if (info.contains(m_UniqueKey)) {
         QString size = info;
@@ -202,7 +208,7 @@ void DeviceGpu::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
-    addOtherDeviceInfo(tr("Memory"), m_MemAddress);
+    addOtherDeviceInfo(tr("Memory Address"), m_MemAddress);
     addOtherDeviceInfo(tr("IO Port"), m_IOPort);
     addOtherDeviceInfo(tr("Bus Info"), m_BusInfo);
     addOtherDeviceInfo(tr("Maximum Resolution"), m_MaximumResolution);

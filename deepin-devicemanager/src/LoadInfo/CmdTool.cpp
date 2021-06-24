@@ -302,6 +302,14 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
             QString sizeS = QString("%1GB").arg(size / 1024);
             mapInfo["Size"] = reg.cap(1) + "=" + sizeS;
         }
+
+        // Bug-85049 JJW 显存特殊处理
+        QRegExp regJJW(".*VRAM Size ([0-9]*)M.*");
+        if (regJJW.exactMatch(line)) {
+            double size = regJJW.cap(1).toDouble();
+            QString sizeS = QString("%1GB").arg(size / 1024);
+            mapInfo["Size"] = "null=" + sizeS;
+        }
     }
     addMapInfo("dmesg", mapInfo);
 
