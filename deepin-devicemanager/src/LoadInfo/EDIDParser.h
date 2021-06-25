@@ -43,7 +43,7 @@ public:
      * @param littleEndianMode：大端、小端
      * @return 布尔值：true-设置成功；false-设置失败
      */
-    bool setEdid(const QString &edid, QString &errorMsg, const QString &ch = "\n", bool littleEndianMode = false);
+    bool setEdid(const QString &edid, QString &errorMsg, const QString &ch = "\n", bool littleEndianMode = true);
 
     /**
      * @brief vendor：获取厂商信息
@@ -62,6 +62,18 @@ public:
      * @return 屏幕大小
      */
     const QString &screenSize()const;
+
+    /**
+     * @brief width : get screen width
+     * @return
+     */
+    int width();
+
+    /**
+     * @brief height : get screen height
+     * @return
+     */
+    int height();
 
 private:
 
@@ -139,8 +151,11 @@ private:
     QString                m_ReleaseDate;                      // 显示屏的生产日期
     QString                m_ScreenSize;                       // 屏幕大小
     bool                   m_LittleEndianMode;                 // 小端模式
+    int                    m_Width;                            // width
+    int                    m_Height;                           // heigth
     QStringList            m_ListEdid;                         // edid数据
     QMap<QString, QString> m_MapCh;                            //
+
 
 };
 

@@ -9,7 +9,12 @@
 #include<qmath.h>
 
 EDIDParser::EDIDParser()
-    : m_LittleEndianMode(true)
+    : m_Vendor()
+    , m_ReleaseDate()
+    , m_ScreenSize()
+    , m_LittleEndianMode(true)
+    , m_Width(0)
+    , m_Height(0)
 {
     m_MapCh.insert("00001", "A");
     m_MapCh.insert("00010", "B");
@@ -89,6 +94,16 @@ const QString &EDIDParser::screenSize()const
     return m_ScreenSize;
 }
 
+int EDIDParser::width()
+{
+    return m_Width;
+}
+
+int EDIDParser::height()
+{
+    return m_Height;
+}
+
 void EDIDParser::parserVendor()
 {
     // 获取制造商信息，edid中的 08h 和 09h 是厂商信息
@@ -124,17 +139,17 @@ void EDIDParser::parseReleaseDate()
     int year = hexToDec(hYear).toInt() + 1990;
 
     QDate date(year, 1, 1);
-    date = date.addDays(week * 7 + 1);
-    m_ReleaseDate = date.toString("yyyy年MM月");
+    date = date.addDays(week * 7 - 1);
+    m_ReleaseDate = date.toString("yyyy-MM");
 }
 
 void EDIDParser::parseScreenSize()
 {
     // edid中的  15H和16H就是屏幕大小
-    int width = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt();
-    int height = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt();
-    double inch = sqrt((width / 2.54) * (width / 2.54) + (height / 2.54) * (height / 2.54));
-    m_ScreenSize = QString("%1英寸(%2cm * %3cm)").arg(QString::number(inch, 'f', 1)).arg(width).arg(height);
+    m_Width = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt();
+    m_Height = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt();
+    double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54));
+    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
 }
 
 QString EDIDParser::binToDec(QString strBin)   //二进制转十进制

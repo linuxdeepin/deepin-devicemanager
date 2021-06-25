@@ -176,7 +176,7 @@ private:
      * @brief caculateScreenSize:根据edid计算屏幕大小
      * @param edid:edid
      */
-    void caculateScreenSize(const QString &edid);
+    bool caculateScreenSize(const QString &edid);
 
 
 
