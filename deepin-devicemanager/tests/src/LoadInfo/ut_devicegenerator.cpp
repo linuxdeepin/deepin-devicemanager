@@ -79,7 +79,6 @@ TEST_F(DeviceGenerator_UT, DeviceGenerator_UT_getMemoryInfoFromDmidecode)
     m_deviceGenerator->getMemoryInfoFromDmidecode();
     m_deviceGenerator->getGpuInfoFromLshw();
     m_deviceGenerator->getMonitorInfoFromXrandrVerbose();
-    m_deviceGenerator->getMonitorRefreshRateFromXrandr();
     m_deviceGenerator->getAudioInfoFromHwinfo();
     m_deviceGenerator->getAudioInfoFromLshw();
     m_deviceGenerator->getAudioInfoFromCatInput();

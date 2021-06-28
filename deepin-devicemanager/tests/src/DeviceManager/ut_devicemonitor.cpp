@@ -77,10 +77,10 @@ TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setMainInfoFromXrandr)
 {
     Stub stub;
     stub.set(ADDR(QRegExp, exactMatch), ut_exacMatch);
-    m_deviceMonitor->setMainInfoFromXrandr("VGA.*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
-    m_deviceMonitor->setMainInfoFromXrandr("HDMI.*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
-    m_deviceMonitor->setMainInfoFromXrandr("eDP.*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
-    m_deviceMonitor->setMainInfoFromXrandr("DisplayPort.*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
+    m_deviceMonitor->setMainInfoFromXrandr("VGA.*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm", "60.00Hz");
+    m_deviceMonitor->setMainInfoFromXrandr("HDMI.*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm", "60.00Hz");
+    m_deviceMonitor->setMainInfoFromXrandr("eDP.*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm", "60.00Hz");
+    m_deviceMonitor->setMainInfoFromXrandr("DisplayPort.*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm", "60.00Hz");
 }
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_initFilterKey)
@@ -136,12 +136,7 @@ bool ut_setMainInfoFromXrandr()
 
 TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setInfoFromXradr)
 {
-    m_deviceMonitor->setInfoFromXradr("connect", "/n");
+    m_deviceMonitor->setInfoFromXradr("connect", "/n", "60.00Hz");
     Stub stub;
     stub.set(ADDR(DeviceMonitor, setMainInfoFromXrandr), ut_setMainInfoFromXrandr);
-}
-
-TEST_F(DeviceMonitor_UT, DeviceMonitor_UT_setCurrentResolution)
-{
-    m_deviceMonitor->setCurrentResolution("connect", "/n", "/");
 }

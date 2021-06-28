@@ -559,19 +559,6 @@ void DeviceGenerator::getMonitorInfoFromXrandrVerbose()
     }
 }
 
-void DeviceGenerator::getMonitorRefreshRateFromXrandr()
-{
-    // 加载从xrandr中获取的显示设备信息， 设置屏幕刷新率
-    const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("xrandr");
-    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
-    for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 1)
-            continue;
-
-        DeviceManager::instance()->setCurrentResolution((*it)["curResolution"], (*it)["rate"], (*it)["Primary Monitor"]);
-    }
-}
-
 void DeviceGenerator::getAudioInfoFromHwinfo()
 {
     // 加载从hwinfo中获取的音频适配器信息

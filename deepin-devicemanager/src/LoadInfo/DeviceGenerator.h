@@ -229,11 +229,6 @@ protected:
      */
     virtual void getMonitorInfoFromXrandrVerbose();
 
-    /**
-     * @brief getMonitorRefreshRateFromXrandr:从xrandr获取显示设备刷新率
-     */
-    virtual void getMonitorRefreshRateFromXrandr();
-
     /**@brief:generator audio info*/
     /**
      * @brief getAudioInfoFromHwinfo:从hwinfo获取声卡信息

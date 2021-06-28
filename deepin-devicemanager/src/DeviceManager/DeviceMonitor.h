@@ -48,15 +48,7 @@ public:
      * @param edid:edid信息
      * @return 布尔值，true:信息设置成功；false:信息设置失败
      */
-    bool setInfoFromXradr(const QString &main, const QString &edid);
-
-    /**
-     * @brief setCurrentResolution:设置从xrandr中获取的当前分辨率信息
-     * @param resolution:当前分辨率
-     * @param rate:当前刷新率
-     * @return 布尔值，true:信息设置成功；false:信息设置失败
-     */
-    bool setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen);
+    bool setInfoFromXradr(const QString &main, const QString &edid, const QString &rate);
 
     // 将年周转化为年月
     /**
@@ -138,9 +130,10 @@ private:
     /**
      * @brief setMainInfoFromXrandr:设置主显示器信息
      * @param info:由xrandr获取的主显示器有关信息
+     * @param rate:fresh rate
      * @return 布尔值，true:信息设置成功；false:信息设置失败
      */
-    bool setMainInfoFromXrandr(const QString &info);
+    bool setMainInfoFromXrandr(const QString &info, const QString &rate);
 
     /**
      * @brief caculateScreenRatio:计算屏幕比例

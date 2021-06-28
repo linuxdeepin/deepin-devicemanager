@@ -204,14 +204,7 @@ public:
      * @param main:主显示器信息
      * @param edid:edid信息
      */
-    void setMonitorInfoFromXrandr(const QString &main, const QString &edid);
-
-    /**
-     * @brief setCurrentResolution:设置当前分辨率
-     * @param resolution:分辨率
-     * @param rate:刷新率
-     */
-    void setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen);
+    void setMonitorInfoFromXrandr(const QString &main, const QString &edid, const QString &rate = "");
 
     // Bios设备相关 ************************************************************************************
     /**
