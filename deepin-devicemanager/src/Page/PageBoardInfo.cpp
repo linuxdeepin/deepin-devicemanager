@@ -1,24 +1,22 @@
 // 项目自身文件
 #include "PageBoardInfo.h"
-
-// Qt库文件
-#include <QTableWidgetItem>
-#include <QDebug>
-
-// Dtk头文件
-#include <DApplicationHelper>
-#include <DPalette>
-#include <DFontSizeManager>
-
-// 其它头文件
 #include <unistd.h>
 #include "DeviceInfo.h"
 #include "DeviceBios.h"
 #include "TextBrowser.h"
 #include "RichTextDelegate.h"
 #include "PageTableWidget.h"
-#include "DeviceManager/DeviceManager.h"
+#include "DeviceManager.h"
 #include "MacroDefinition.h"
+
+// Dtk头文件
+#include <DApplicationHelper>
+#include <DPalette>
+#include <DFontSizeManager>
+
+// Qt库文件
+#include <QTableWidgetItem>
+#include <QDebug>
 
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)
@@ -28,6 +26,8 @@ PageBoardInfo::PageBoardInfo(QWidget *parent)
 
 void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
+    if (lst.size() < 1)
+        return;
     mp_Device = lst[0];
 
     // 获取主板信息

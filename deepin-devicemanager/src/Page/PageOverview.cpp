@@ -66,7 +66,6 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     int maxRow = this->height() / ROW_HEIGHT - 4;
     if (maxRow < 1) {
         mp_Overview->setLimitRow(11);
-
     } else {
         mp_Overview->setLimitRow(std::min(11, maxRow));
     }

@@ -1,11 +1,9 @@
 // 项目自身文件
 #include "PageMultiInfo.h"
-
-// Qt库文件
-#include <QVBoxLayout>
-#include <QAction>
-#include <QIcon>
-#include <QDebug>
+#include "PageTableHeader.h"
+#include "PageDetail.h"
+#include "MacroDefinition.h"
+#include "DeviceInfo.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -13,11 +11,11 @@
 #include <DMenu>
 #include <DMessageManager>
 
-// 其它头文件
-#include "PageTableHeader.h"
-#include "PageDetail.h"
-#include "MacroDefinition.h"
-#include "DeviceManager/DeviceInfo.h"
+// Qt库文件
+#include <QVBoxLayout>
+#include <QAction>
+#include <QIcon>
+#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 
@@ -49,6 +47,9 @@ PageMultiInfo::~PageMultiInfo()
 
 void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
+    if (lst.size() < 1)
+        return;
+
     //  获取多个设备界面表格信息
     QList<QStringList> deviceList;
     deviceList.append(lst[0]->getTableHeader());

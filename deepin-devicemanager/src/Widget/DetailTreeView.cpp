@@ -126,9 +126,6 @@ void DetailTreeView::clear()
         delete mp_CommandBtn;
         mp_CommandBtn = nullptr;
     }
-
-    //清空页面内容时,需要保存页面的展开收起状态
-    //m_IsExpand = false;
 }
 
 void DetailTreeView::setCommanLinkButton(int row)
@@ -142,9 +139,6 @@ void DetailTreeView::setCommanLinkButton(int row)
     }
     // 设置字号
     DFontSizeManager::instance()->bind(mp_CommandBtn, DFontSizeManager::T8);
-
-    //mp_CommandBtn->setMinimumSize(150, 100);
-
     //  合并最后一行
     this->setSpan(row - 1, 0, 1, 2);
 

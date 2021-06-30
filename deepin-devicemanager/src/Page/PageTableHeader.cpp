@@ -50,6 +50,9 @@ void PageTableHeader::initWidgets()
 
 void PageTableHeader::updateTable(const QList<QStringList> &lst)
 {
+    if (lst.size() < 1)
+        return;
+
     // 提前清楚内容
     mp_Table->clear();
 
