@@ -1,11 +1,9 @@
 // 项目自身文件
 #include "WaitingWidget.h"
+#include "MacroDefinition.h"
 
 // Qt库文件
 #include <QHBoxLayout>
-
-// 其它头文件
-#include "MacroDefinition.h"
 
 
 #define SPINNER_WIDTH  32  // 小圈圈的宽度

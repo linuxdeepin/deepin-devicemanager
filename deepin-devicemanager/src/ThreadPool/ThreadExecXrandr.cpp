@@ -88,7 +88,9 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
             while (true) {
                 edid.append(reEdid.cap(1));
                 edid.append("\n");
-                if (++it != lines.end() && !reEdid.exactMatch(*it)) {
+                if (++it == lines.end())
+                    return;
+                if (!reEdid.exactMatch(*it)) {
                     last.insert("edid", edid);
                     break;
                 }
@@ -98,7 +100,7 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
 
         // 获取当前频率
         if ((*it).contains("*current")) {
-            if (++it == lines.end() || ++it == lines.end())
+            if ((it += 2) >= lines.end())
                 return;
             QRegExp regRate(".*([0-9]{2}\\.[0-9]{2}Hz).*");
             if (regRate.exactMatch(*it))

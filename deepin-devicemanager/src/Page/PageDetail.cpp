@@ -1,6 +1,15 @@
 // 项目自身文件
 #include "PageDetail.h"
 #include "TextBrowser.h"
+#include "DeviceInfo.h"
+#include "MacroDefinition.h"
+
+// Dtk头文件
+#include <DApplicationHelper>
+#include <DApplication>
+#include <DStyle>
+#include <DMenu>
+#include <DFontSizeManager>
 
 // Qt库文件
 #include <QVBoxLayout>
@@ -12,18 +21,6 @@
 #include <QAction>
 #include <QClipboard>
 #include <QPainterPath>
-
-// Dtk头文件
-#include <DApplicationHelper>
-#include <DApplication>
-#include <DStyle>
-#include <DMenu>
-#include <DFontSizeManager>
-#include <QPainterPath>
-
-// 其它头文件
-#include "DeviceInfo.h"
-#include "MacroDefinition.h"
 
 // 宏定义
 #define SPACE_HEIGHT 0  //

@@ -1,11 +1,7 @@
 // 项目自身文件
 #include "PageTableHeader.h"
-
-// Qt库文件
-#include <QHBoxLayout>
-#include <QMenu>
-#include <QPainter>
-#include <QDebug>
+#include "TableWidget.h"
+#include "MacroDefinition.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -13,9 +9,11 @@
 #include <DApplication>
 #include <DApplicationHelper>
 
-// 其它头文件
-#include "TableWidget.h"
-#include "MacroDefinition.h"
+// Qt库文件
+#include <QHBoxLayout>
+#include <QMenu>
+#include <QPainter>
+#include <QDebug>
 
 PageTableHeader::PageTableHeader(QWidget *parent)
     : DWidget(parent)
@@ -50,15 +48,12 @@ void PageTableHeader::initWidgets()
 
 void PageTableHeader::updateTable(const QList<QStringList> &lst)
 {
-    if (lst.size() < 1)
+    // 如果lst.size() == 1 则说明改设备只有一个
+    if (lst.size() <= 1)
         return;
 
     // 提前清楚内容
     mp_Table->clear();
-
-    // 如果lst.size() == 1 则说明改设备只有一个
-    if (lst.size() == 1)
-        return;
 
     // 设置表头
     mp_Table->setHeaderLabels(lst[0]);

@@ -1,16 +1,14 @@
 // 项目自身文件
 #include "PageListView.h"
-
-// Qt库文件
-#include <QHBoxLayout>
-#include <QDebug>
+#include "DeviceListView.h"
+#include "MacroDefinition.h"
 
 // Dtk头文件
 #include <DApplicationHelper>
 
-// 其它头文件
-#include "DeviceListView.h"
-#include "MacroDefinition.h"
+// Qt库文件
+#include <QHBoxLayout>
+#include <QDebug>
 
 PageListView::PageListView(DWidget *parent)
     : DWidget(parent)

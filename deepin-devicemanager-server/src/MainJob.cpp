@@ -30,11 +30,7 @@ MainJob::MainJob(QObject *parent)
 {
     // 守护进程启动的时候加载所有信息
     if (!isZhaoXin()) {
-        qInfo() << "001 ************************************* Not ZhaoXin Meche";
         updateAllDevice();
-    } else {
-        qInfo() << "002 ************************************* ZhaoXin Meche";
-        QTimer::singleShot(40 * 1000, this, &MainJob::onFirstUpdate);
     }
 }
 

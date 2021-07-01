@@ -1,5 +1,13 @@
 // 项目自身文件
 #include "PageTableWidget.h"
+#include "DetailTreeView.h"
+#include "PageInfo.h"
+#include "RichTextDelegate.h"
+
+// Dtk头文件
+#include <DApplicationHelper>
+#include <DPalette>
+#include <DApplication>
 
 // Qt库文件
 #include <QHBoxLayout>
@@ -7,16 +15,6 @@
 #include <QPainter>
 #include <QDebug>
 #include <QHeaderView>
-
-// Dtk头文件
-#include <DApplicationHelper>
-#include <DPalette>
-#include <DApplication>
-
-// 其它头文件
-#include "DetailTreeView.h"
-#include "PageInfo.h"
-#include "RichTextDelegate.h"
 
 PageTableWidget::PageTableWidget(DWidget *parent)
     : DWidget(parent)

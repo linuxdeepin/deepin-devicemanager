@@ -1,12 +1,10 @@
 // 项目自身文件
 #include "PageOverview.h"
-
-// Qt库文件
-#include <QVBoxLayout>
-#include <QTableWidgetItem>
-#include <QAction>
-#include <QDebug>
-#include <QClipboard>
+#include "PageTableWidget.h"
+#include "DeviceManager.h"
+#include "PageInfoWidget.h"
+#include "LongTextLabel.h"
+#include "MacroDefinition.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -17,12 +15,12 @@
 #include <DNotifySender>
 #include <DTextBrowser>
 
-// 其它头文件
-#include "PageTableWidget.h"
-#include "DeviceManager.h"
-#include "PageInfoWidget.h"
-#include "LongTextLabel.h"
-#include "MacroDefinition.h"
+// Qt库文件
+#include <QVBoxLayout>
+#include <QTableWidgetItem>
+#include <QAction>
+#include <QDebug>
+#include <QClipboard>
 
 #define ENTER_ONE 60    // 换行的位置 1
 #define ENTER_TWO 120   // 换行的位置 2                                                                    // end html

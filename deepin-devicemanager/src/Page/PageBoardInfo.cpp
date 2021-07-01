@@ -1,6 +1,5 @@
 // 项目自身文件
 #include "PageBoardInfo.h"
-#include <unistd.h>
 #include "DeviceInfo.h"
 #include "DeviceBios.h"
 #include "TextBrowser.h"
@@ -17,6 +16,8 @@
 // Qt库文件
 #include <QTableWidgetItem>
 #include <QDebug>
+
+#include <unistd.h>
 
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)

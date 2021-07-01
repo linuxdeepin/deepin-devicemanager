@@ -1,20 +1,18 @@
 // 项目自身文件
 #include "PageInfoWidget.h"
-
-// Qt库文件
-#include <QHBoxLayout>
-#include <QDebug>
-#include <QAction>
-
-// Dtk头文件
-#include <DMenu>
-
-// 其它头文件
 #include "PageMultiInfo.h"
 #include "PageSingleInfo.h"
 #include "PageOverview.h"
 #include "PageBoardInfo.h"
 #include "DeviceBios.h"
+
+// Dtk头文件
+#include <DMenu>
+
+// Qt库文件
+#include <QHBoxLayout>
+#include <QDebug>
+#include <QAction>
 
 
 PageInfoWidget::PageInfoWidget(QWidget *parent)
