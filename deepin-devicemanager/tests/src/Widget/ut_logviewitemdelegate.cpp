@@ -20,25 +20,34 @@
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
+#include <DApplication>
 
 #include <gtest/gtest.h>
 #include "../stub.h"
 
+DStyle *logViewItemDelegateSytle = nullptr;
 class LogViewItemDelegate_UT : public UT_HEAD
 {
 public:
     void SetUp()
     {
+        m_Model = new QStandardItemModel;
         m_view = new LogTreeView;
+        m_view->setModel(m_Model);
+        m_Model->appendRow(new QStandardItem());
         m_logDelegate = new LogViewItemDelegate(m_view);
+        logViewItemDelegateSytle = new DStyle;
     }
     void TearDown()
     {
         delete m_logDelegate;
         delete m_view;
+        delete m_Model;
+        delete logViewItemDelegateSytle;
     }
     LogViewItemDelegate *m_logDelegate;
     LogTreeView *m_view;
+    QStandardItemModel *m_Model;
 };
 
 int ut_itemdelegate_pixelMetric()
@@ -51,6 +60,11 @@ bool ut_itemdelegate_isValid()
     return true;
 }
 
+DStyle *ut_style()
+{
+    return logViewItemDelegateSytle;
+}
+
 TEST_F(LogViewItemDelegate_UT, ut_paint)
 {
     QPainter painter(m_view);
@@ -58,9 +72,9 @@ TEST_F(LogViewItemDelegate_UT, ut_paint)
     QModelIndex index = m_view->model()->index(0, 0);
 
     Stub stub;
-    stub.set(ADDR(QModelIndex, isValid), ut_itemdelegate_isValid);
-    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_itemdelegate_pixelMetric);
-
+    //stub.set(ADDR(QModelIndex, isValid), ut_itemdelegate_isValid);
+    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget * widget) const)ADDR(DStyle, pixelMetric), ut_itemdelegate_pixelMetric);
+    stub.set(ADDR(DApplication, style), ut_style); // DApplication::style()
     m_logDelegate->paint(&painter, option, index);
 }
 
