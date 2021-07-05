@@ -3,6 +3,7 @@
 
 DeviceMemory::DeviceMemory()
     : DeviceBaseInfo()
+    , m_MatchedFromDmi(false)
 {
     // 初始化可显示属性
     initFilterKey();
@@ -48,7 +49,7 @@ void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
     // 由 locator属性判断是否为同一内存条
-    if (mapInfo["Locator"] != m_Locator)
+    if (mapInfo["Locator"] != m_Locator || m_MatchedFromDmi == true)
         return false;
 
     // 由dmidecode设置基本属性
@@ -74,7 +75,7 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 
     // 获取其他属性
     getOtherMapInfo(mapInfo);
-
+    m_MatchedFromDmi = true;
     return true;
 }
 
