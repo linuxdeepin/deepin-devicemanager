@@ -96,8 +96,6 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     // 获取当前分辨率 和 当前支持分辨率
     QStringList listResolution = m_SupportResolution.split(" ");
-    m_CurrentResolution = listResolution.last();
-    //    qInfo() << m_CurrentResolution << m_SupportResolution;
     m_SupportResolution = "";
     foreach (const QString &word, listResolution) {
         if (word.contains("@")) {
@@ -147,7 +145,7 @@ QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
     return date.toString("yyyy-MM");
 }
 
-bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid)
+bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, const QString &rate)
 {
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
     if (!m_Interface.isEmpty())
@@ -164,22 +162,9 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid)
 
     // 获取屏幕的主要信息，包括借口(HDMI VGA)/是否主显示器和屏幕大小，
     // 但是这里计算的屏幕大小仅仅用来匹配是否是同一个显示器,真正的屏幕大小计算是根据edid计算的
-    if (!setMainInfoFromXrandr(main))
+    if (!setMainInfoFromXrandr(main, rate))
         return false;
 
-    return true;
-}
-
-bool DeviceMonitor::setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen)
-{
-    // 判断该显示器设备是否已经设置过从xrandr获取的消息
-    if (m_CurrentResolution.contains("@")) {
-        return false;
-    }
-    m_CurrentResolution = QString("%1@%2Hz").arg(resolution).arg(rate);
-    m_CurrentResolution.replace(" ", "");
-    m_MainScreen = mainScreen;
-    caculateScreenRatio();
     return true;
 }
 
@@ -245,7 +230,7 @@ void DeviceMonitor::loadTableData()
     m_TableData.append(m_Model);
 }
 
-bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
+bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &rate)
 {
     // 设置用的是哪个接口
     if (info.startsWith("VGA"))
@@ -257,11 +242,20 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
     else if (info.startsWith("DisplayPort"))
         m_Interface = "DisplayPort";
 
-    //    // 设置是否是主显示器
-    //    if (info.contains("primary"))
-    //        m_MainScreen = "Yes";
-    //    else
-    //        m_MainScreen = "NO";
+    // 设置是否是主显示器
+    if (info.contains("primary"))
+        m_MainScreen = "Yes";
+    else
+        m_MainScreen = "NO";
+
+    // 设置当前分辨率
+    QRegExp reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");
+    if (reScreenSize.exactMatch(info)) {
+        if (!rate.isEmpty())
+            m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(rate);
+        else
+            m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
+    }
 
     return true;
 }
@@ -321,7 +315,6 @@ void DeviceMonitor::caculateScreenSize()
         m_Height = re.cap(2).toInt();
 
         double inch = std::sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54)) / 10.0;
-//        m_ScreenSize = QString("%1英寸(%2mm X %3mm)").arg(QString::number(inch, 'f', 1)).arg(m_Width).arg(m_Height);
         m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
     }
 }

@@ -61,11 +61,6 @@ private:
     void getMonitorInfoFromXrandrVerbose();
 
     /**
-     * @brief getMonitorRefreshRateFromXrandr:从xrandr获取显示设备刷新率
-     */
-    void getMonitorRefreshRateFromXrandr();
-
-    /**
      * @brief getGpuInfoFromXrandr:从xrandr获取显卡信息
      */
     void getGpuInfoFromXrandr();

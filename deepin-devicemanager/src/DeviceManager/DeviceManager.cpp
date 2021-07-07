@@ -415,7 +415,7 @@ void DeviceManager::addMonitor(DeviceMonitor *const device)
     m_ListDeviceMonitor.append(device);
 }
 
-void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString &edid)
+void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString &edid, const QString &rate)
 {
     // 从xrandr中添加显示设备信息
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMonitor.begin();
@@ -424,21 +424,7 @@ void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString 
         if (!device)
             continue;
 
-        if (device->setInfoFromXradr(main, edid))
-            return;
-    }
-}
-
-void DeviceManager::setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen)
-{
-    // 设置当前分辨率
-    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMonitor.begin();
-    for (; it != m_ListDeviceMonitor.end(); ++it) {
-        DeviceMonitor *device = dynamic_cast<DeviceMonitor *>(*it);
-        if (!device)
-            continue;
-
-        if (device->setCurrentResolution(resolution, rate, mainScreen))
+        if (device->setInfoFromXradr(main, edid, rate))
             return;
     }
 }

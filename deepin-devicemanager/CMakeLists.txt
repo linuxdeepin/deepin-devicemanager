@@ -149,4 +149,4 @@ install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/dee
 #add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager/tests/)
 # Test--------deepin-devicemanager
 
-add_subdirectory(./tests)
+#add_subdirectory(./tests)

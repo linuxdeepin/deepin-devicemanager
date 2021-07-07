@@ -1,6 +1,7 @@
 #include "PhysicalCpu.h"
 
-PhysicalCpu::PhysicalCpu()
+PhysicalCpu::PhysicalCpu(int id)
+    : m_PhysicalCpu(id)
 {
 
 }

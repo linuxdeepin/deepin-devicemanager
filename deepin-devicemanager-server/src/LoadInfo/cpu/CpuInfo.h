@@ -52,6 +52,24 @@ public:
      */
     void logicalCpus(QString &info);
 
+    /**
+     * @brief physicalNum
+     * @return
+     */
+    int physicalNum();
+
+    /**
+     * @brief coreNum
+     * @return
+     */
+    int coreNum();
+
+    /**
+     * @brief logicalNum
+     * @return
+     */
+    int logicalNum();
+
 private:
     /**
      * @brief readCpuArchitecture

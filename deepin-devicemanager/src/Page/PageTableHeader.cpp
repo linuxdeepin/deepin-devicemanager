@@ -33,10 +33,7 @@ PageTableHeader::PageTableHeader(QWidget *parent)
 
 PageTableHeader::~PageTableHeader()
 {
-    if (mp_Table) {
-        delete mp_Table;
-        mp_Table = nullptr;
-    }
+
 }
 
 void PageTableHeader::initWidgets()

@@ -23,13 +23,11 @@
 #ifndef HEADERTABLEVIEW_H
 #define HEADERTABLEVIEW_H
 
+#include <QObject>
 #include <DTableView>
+#include <QStandardItemModel>
 #include <DStandardItem>
 #include <DHeaderView>
-
-#include <QStandardItemModel>
-#include <QObject>
-#include <QHBoxLayout>
 
 class LogTreeView;
 
@@ -44,7 +42,6 @@ class TableWidget : public DWidget
     Q_OBJECT
 public:
     explicit TableWidget(QWidget *parent = nullptr);
-    ~TableWidget() override;
 
     /**
      * @brief setHeaderLabels : 设置table的表头
@@ -124,7 +121,6 @@ private:
 
 private:
     LogTreeView      *mp_Table;
-    QHBoxLayout      *m_HLayout;
     QAction          *mp_Enable;      //<! 启用禁用
     QAction          *mp_Refresh;     //<! 右键刷新
     QAction          *mp_Export;      //<! 右键导出

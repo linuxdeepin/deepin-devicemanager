@@ -225,18 +225,20 @@ QString MainWindow::getArchString()
     bool res = inputDeviceFile.open(QIODevice::ReadOnly);
 
     // 读取架构信息
-    if (res)
+    if (res) {
         struction = inputDeviceFile.readAll().trimmed();
-    else
+    } else {
         struction = "x86_64";
+    }
 
     inputDeviceFile.close();
 
     // 华为机器需要区分KLU与PanGuV
     if (struction == "aarch64") {
         QString hw = loadGeneratorKey();
-        if (!hw.isEmpty())
+        if (!hw.isEmpty()) {
             struction = hw;
+        }
     }
 
     return struction;
@@ -250,16 +252,18 @@ QString MainWindow::loadGeneratorKey()
 
     // gdbus introspect -y -d com.deepin.system.SystemInfo -o /com/deepin/system/SystemInfo -p
     QFile inputDeviceFile(DEVICEINFO_PATH + "/gdbus.txt");
-    if (false == inputDeviceFile.open(QIODevice::ReadOnly))
+    if (false == inputDeviceFile.open(QIODevice::ReadOnly)) {
         return key;
+    }
 
     deviceInfo = inputDeviceFile.readAll();
     inputDeviceFile.close();
 
-    if (deviceInfo.contains("klu")) // klu 华为确认将判断条件改为L410 KLVU-WDU0
+    if (deviceInfo.contains("klu")) { // klu 华为确认将判断条件改为L410 KLVU-WDU0
         key = "KLU";
-    else if (deviceInfo.contains("panguV")) // panguv
+    } else if (deviceInfo.contains("panguV")) { // panguv
         key = "PanGuV";
+    }
 
     return key;
 }
@@ -308,16 +312,18 @@ void MainWindow::refreshDataBase()
     // 设置应用程序强制光标为cursor
     DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-    if (mp_WorkingThread)
+    if (mp_WorkingThread) {
         mp_WorkingThread->start();
+    }
 }
 
 void MainWindow::slotLoadingFinish(const QString &message)
 {
     static bool begin = true;
 
-    if (begin)
+    if (begin) {
         begin = false;
+    }
 
     // finish 表示所有设备信息加载完成
     if (message == "finish") {
@@ -344,8 +350,10 @@ void MainWindow::slotLoadingFinish(const QString &message)
         m_refreshing = false;
 
         //
-        if (m_IsFirstRefresh)
+        if (m_IsFirstRefresh) {
+            PERF_PRINT_END("POINT-01");
             m_IsFirstRefresh = false;
+        }
     }
 }
 

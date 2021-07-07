@@ -73,9 +73,26 @@ public:
      */
     bool isBaseBoard() override {return true;}
 
+    /**
+     * @brief event
+     * @param event
+     * @return
+     */
+    virtual bool event(QEvent *event) override;
+
+    /**
+     * @brief setRowHeight 设置行高
+     * @param strList
+     * @param fontHeight
+     * @param row 当前行
+     */
+    void setRowHeight(QStringList strList, int fontHeight, int row);
 
 private:
     RichTextDelegate     *mp_ItemDelegate;
+    QList<QPair<QString, QString>> m_pairs; //更多信息
+    int m_row = 0;
+    int m_listSize = 0;
 };
 
 #endif // PAGEBOARDINFO_H

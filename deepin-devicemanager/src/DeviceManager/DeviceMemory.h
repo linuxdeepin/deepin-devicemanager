@@ -116,6 +116,7 @@ private:
     QString           m_MaximumVoltage;         //<! 【最大电压】
     QString           m_ConfiguredVoltage;      //<! 【配置电压】
     QString           m_Driver;
+    bool              m_MatchedFromDmi;         //<! 标识是否已经从dmidecode匹配过
 };
 
 #endif // DEVICEMEMORY_H

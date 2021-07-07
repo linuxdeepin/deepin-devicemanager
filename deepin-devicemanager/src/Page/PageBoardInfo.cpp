@@ -91,6 +91,9 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
     QList<QPair<QString, QString>> pairs;
     getOtherInfoPair(devices, pairs);
 
+    m_listSize = lst.size();
+    m_row = row;
+    m_pairs = pairs;
     // 其他信息使用富文本代理
     // 其他信息的Id是出去所有BIOS信息以外的信息,使用Richtext进行显示
     for (int i = lst.size(); i < row; ++i) {
@@ -104,39 +107,10 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         // 计算行高
         QFont font = DFontSizeManager::instance()->t8();
         QFontMetrics fm(font);
-        int height = 0;
         QStringList strList = pairs[i - lst.size()].second.split("\n");
         int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height() + 2;
         //qInfo() << strList;
-        // 根据行数增加行高
-        foreach (const QString &str, strList) {
-            QStringList lst = str.split(":");
-            if (lst.size() == 2) {
-                // 属性名称
-                int width = fm.boundingRect(lst[0]).width();
-                int num = width / 110;
-                int num0 = width % 110;
-                if (num0 == 0)
-                    num = num - 1;
-
-                int line = 0;
-                // 属性值
-                if (!lst[1].contains("  /  \t\t")) {
-                    width = fm.boundingRect(lst[1]).width();
-                    line = width / 480;
-                    int line0 = width % 480;
-                    if (line0 == 0)
-                        line = line - 1;
-                }
-
-                if (num > 0 || line > 0)
-                    height += std::max(num, line) * fontHeight;
-            }
-            QStringList attris = str.split("  /  \t\t");
-            height += attris.size() * fontHeight;
-        }
-        height += 20;
-        mp_Content->setRowHeight(i, height);
+        setRowHeight(strList, fontHeight, i);
     }
 }
 
@@ -171,4 +145,62 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
         pair.second += "\n";
     }
     pair.second.replace(QRegExp("\n$"), "");
+}
+
+bool PageBoardInfo::event(QEvent *event)
+{
+    if (event->type() == QEvent::FontChange) {
+        for (int i = m_listSize; i < m_row; ++i) {
+            // 计算行高
+
+            QStringList strList = m_pairs[i - m_listSize].second.split("\n");
+            int fontHeight = 0;
+            int fontSize = DFontSizeManager::fontPixelSize(qGuiApp->font());
+            if (fontSize < 15)
+                fontHeight = fontSize + 6;
+            else if (fontSize < 18 && fontSize >= 15)
+                fontHeight = fontSize + 8;
+            else
+                fontHeight = fontSize + 10;
+            //qInfo() << strList;
+            setRowHeight(strList, fontHeight, i);
+        }
+    }
+    return DWidget::event(event);
+}
+
+void PageBoardInfo::setRowHeight(QStringList strList, int fontHeight, int row)
+{
+    // 根据行数增加行高
+    int height = 0;
+    QFont font = DFontSizeManager::instance()->t8();
+    QFontMetrics fm(font);
+    foreach (const QString &str, strList) {
+        QStringList lst = str.split(":");
+        if (lst.size() == 2) {
+            // 属性名称
+            int width = fm.boundingRect(lst[0]).width();
+            int num = width / 110;
+            int num0 = width % 110;
+            if (num0 == 0)
+                num = num - 1;
+
+            int line = 0;
+            // 属性值
+            if (!lst[1].contains("  /  \t\t")) {
+                width = fm.boundingRect(lst[1]).width();
+                line = width / 480;
+                int line0 = width % 480;
+                if (line0 == 0)
+                    line = line - 1;
+            }
+
+            if (num > 0 || line > 0)
+                height += std::max(num, line) * fontHeight;
+        }
+        QStringList attris = str.split("  /  \t\t");
+        height += attris.size() * fontHeight;
+    }
+    height += 20;
+    mp_Content->setRowHeight(row, height);
 }

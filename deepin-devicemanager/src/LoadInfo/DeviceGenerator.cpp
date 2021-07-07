@@ -101,7 +101,6 @@ void DeviceGenerator::generatorCpuDevice()
     // 生成CPU
     // get info from lscpu
     const QList<QMap<QString, QString> >  &lsCpu = DeviceManager::instance()->cmdInfo("lscpu");
-//    const QMap<QString, QString> &lscpu = lsCpu.size() > 0 ? lsCpu[0] : QMap<QString, QString>();
 
     // get info from lshw
     const QList<QMap<QString, QString> >  &lshwCpu = DeviceManager::instance()->cmdInfo("lshw_cpu");
@@ -111,20 +110,17 @@ void DeviceGenerator::generatorCpuDevice()
     const QList<QMap<QString, QString> >  &dmidecode4 = DeviceManager::instance()->cmdInfo("dmidecode4");
     const QMap<QString, QString> &dmidecode = dmidecode4.size() > 0 ? dmidecode4[0] : QMap<QString, QString>();
 
-    // 设置cpu个数
-    DeviceManager::instance()->setCpuNum(dmidecode4.size());
 
-    //  获取逻辑数和core数
-    int coreNum = 0, logicalNum = 0;
-    QList<QMap<QString, QString> >::const_iterator itd = dmidecode4.begin();
-    for (; itd != dmidecode4.end(); ++itd) {
-        coreNum += (*itd)["Core Count"].toInt();
-        logicalNum += (*itd)["Thread Count"].toInt() * (*itd)["Core Count"].toInt();
+    //  获取逻辑数和core数  获取cpu个数 获取logical个数
+    int coreNum = 0, logicalNum = 0, physicalNum = 0;
+    const QList<QMap<QString, QString> >  &lsCpu_num = DeviceManager::instance()->cmdInfo("lscpu_num");
+    if (lsCpu_num.size() > 0) {
+        physicalNum = lsCpu_num[0]["physical"].toInt();
+        coreNum = lsCpu_num[0]["core"].toInt();
+        logicalNum = lsCpu_num[0]["logical"].toInt();
     }
 
-    // 如果获取不到逻辑数，就按照core算 bug53921
-    if (logicalNum == 0)
-        logicalNum = coreNum;
+    DeviceManager::instance()->setCpuNum(physicalNum);
 
     QList<QMap<QString, QString> >::const_iterator it = lsCpu.begin();
     for (; it != lsCpu.end(); ++it) {
@@ -556,19 +552,6 @@ void DeviceGenerator::getMonitorInfoFromXrandrVerbose()
             continue;
 
         DeviceManager::instance()->setMonitorInfoFromXrandr((*it)["mainInfo"], (*it)["edid"]);
-    }
-}
-
-void DeviceGenerator::getMonitorRefreshRateFromXrandr()
-{
-    // 加载从xrandr中获取的显示设备信息， 设置屏幕刷新率
-    const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("xrandr");
-    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
-    for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 1)
-            continue;
-
-        DeviceManager::instance()->setCurrentResolution((*it)["curResolution"], (*it)["rate"], (*it)["Primary Monitor"]);
     }
 }
 

@@ -434,6 +434,10 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 
                 addMapInfo(key, mapInfo);
             }
+        } else if (key == "hwinfo_display") {
+            if (mapInfo["Device"].contains("Graphics Processing Unit"))
+                continue;
+            addMapInfo(key, mapInfo);
         } else {
             addMapInfo(key, mapInfo);
         }
@@ -558,6 +562,13 @@ void CmdTool::loadLscpuInfo(const QString &key, const QString &debugfile)
         getMapInfoFromCmd(item, mapInfo, " : ");
         addMapInfo(key, mapInfo);
     }
+
+    QString info;
+    if (!DBusInterface::getInstance()->getInfo("lscpu_num", info))
+        return;
+    QMap<QString, QString> mapInfo;
+    getMapInfoFromCmd(info, mapInfo, " : ");
+    addMapInfo("lscpu_num", mapInfo);
 }
 
 void CmdTool::loadCatInfo(const QString &key, const QString &debugfile)
@@ -966,8 +977,10 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
                 mapInfo[key] += value;
 
         } else {
-            // 此处如果subDevice和subVendor没有值，则过滤
-            if (words[0].trimmed() == "SubDevice" || words[0].trimmed() == "SubVendor") {
+            // 此处如果subDevice,subVendor,Device没有值，则过滤
+            if (words[0].trimmed() == "SubDevice" ||
+                    words[0].trimmed() == "SubVendor" ||
+                    words[0].trimmed() == "Device") {
                 continue;
             }
             if (words[0].trimmed() == "Resolution") {

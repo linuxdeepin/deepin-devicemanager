@@ -26,7 +26,9 @@
 class PhysicalCpu
 {
 public:
-    PhysicalCpu();
+    PhysicalCpu(int id);
+private:
+    int m_PhysicalCpu;
 };
 
 #endif // PHYSICALCPU_H

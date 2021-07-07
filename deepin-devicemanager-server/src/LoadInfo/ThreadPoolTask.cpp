@@ -118,6 +118,12 @@ void ThreadPoolTask::loadCpuInfo()
         QString info;
         cpu.logicalCpus(info);
         DeviceInfoManager::getInstance()->addInfo("lscpu", info);
+
+        QString numInfo;
+        numInfo += QString("%1 : %2\n").arg("physical").arg(cpu.physicalNum());
+        numInfo += QString("%1 : %2\n").arg("core").arg(cpu.coreNum());
+        numInfo += QString("%1 : %2\n").arg("logical").arg(cpu.logicalNum());
+        DeviceInfoManager::getInstance()->addInfo("lscpu_num", numInfo);
     }
 }
 

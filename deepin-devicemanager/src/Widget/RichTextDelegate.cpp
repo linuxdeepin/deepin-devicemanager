@@ -60,7 +60,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     QBrush background;
 
     if (opt.features & QStyleOptionViewItem::Alternate) {
-        background = palette.color(cg, DPalette::ItemBackground);
+        background = palette.color(cg, DPalette::AlternateBase);
     } else {
         background = palette.color(cg, DPalette::Base);
     }
