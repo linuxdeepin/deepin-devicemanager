@@ -431,9 +431,13 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
                     !item.contains("Elite Remote Control Driver") && // 在笔记本中发现了一个多余信息，做特殊处理 Elite Remote Control Driver
                     !item.contains("Model: \"serial console\"") && // 鲲鹏台式机子上发现一条多余信息  Model: "serial console"
                     !item.contains("Wacom", Qt::CaseInsensitive)) { // 数位板信息被显示成了mouse信息,这里需要做特殊处理(搞不懂数位板为什么不能显示成鼠标)
-
                 addMapInfo(key, mapInfo);
             }
+        } else if (key == "hwinfo_display") {
+            // 过滤龙心显卡中的处理单元信息
+            if (mapInfo["Device"].contains("Graphics Processing Unit"))
+                continue;
+            addMapInfo(key, mapInfo);
         } else {
             addMapInfo(key, mapInfo);
         }
@@ -558,6 +562,13 @@ void CmdTool::loadLscpuInfo(const QString &key, const QString &debugfile)
         getMapInfoFromCmd(item, mapInfo, " : ");
         addMapInfo(key, mapInfo);
     }
+
+    QString info;
+    if (!DBusInterface::getInstance()->getInfo("lscpu_num", info))
+        return;
+    QMap<QString, QString> mapInfo;
+    getMapInfoFromCmd(info, mapInfo, " : ");
+    addMapInfo("lscpu_num", mapInfo);
 }
 
 void CmdTool::loadCatInfo(const QString &key, const QString &debugfile)

@@ -101,7 +101,6 @@ void DeviceGenerator::generatorCpuDevice()
     // 生成CPU
     // get info from lscpu
     const QList<QMap<QString, QString> >  &lsCpu = DeviceManager::instance()->cmdInfo("lscpu");
-//    const QMap<QString, QString> &lscpu = lsCpu.size() > 0 ? lsCpu[0] : QMap<QString, QString>();
 
     // get info from lshw
     const QList<QMap<QString, QString> >  &lshwCpu = DeviceManager::instance()->cmdInfo("lshw_cpu");
@@ -111,21 +110,24 @@ void DeviceGenerator::generatorCpuDevice()
     const QList<QMap<QString, QString> >  &dmidecode4 = DeviceManager::instance()->cmdInfo("dmidecode4");
     const QMap<QString, QString> &dmidecode = dmidecode4.size() > 0 ? dmidecode4[0] : QMap<QString, QString>();
 
-    // 设置cpu个数
-    DeviceManager::instance()->setCpuNum(dmidecode4.size());
 
-    //  获取逻辑数和core数
-    int coreNum = 0, logicalNum = 0;
-    QList<QMap<QString, QString> >::const_iterator itd = dmidecode4.begin();
-    for (; itd != dmidecode4.end(); ++itd) {
-        coreNum += (*itd)["Core Count"].toInt();
-        logicalNum += (*itd)["Thread Count"].toInt() * (*itd)["Core Count"].toInt();
-    }
+    //  获取逻辑数和core数  获取cpu个数 获取logical个数
+    int coreNum = 0, logicalNum = 0, physicalNum = 0;
+    const QList<QMap<QString, QString> >  &lsCpu_num = DeviceManager::instance()->cmdInfo("lscpu_num");
+    if (lsCpu_num.size() <= 0)
+        return;
+    const QMap<QString, QString> &map = lsCpu_num[0];
+    if (map.find("physical") != map.end())
+        physicalNum = map["physical"].toInt();
+    if (map.find("core") != map.end())
+        coreNum = map["core"].toInt();
+    if (map.find("logical") != map.end())
+        logicalNum = map["logical"].toInt();
 
-    // 如果获取不到逻辑数，就按照core算 bug53921
-    if (logicalNum == 0)
-        logicalNum = coreNum;
+    // set cpu number
+    DeviceManager::instance()->setCpuNum(physicalNum);
 
+    // set cpu info
     QList<QMap<QString, QString> >::const_iterator it = lsCpu.begin();
     for (; it != lsCpu.end(); ++it) {
         DeviceCpu *device = new DeviceCpu;

@@ -26,7 +26,16 @@
 class CoreCpu
 {
 public:
-    CoreCpu();
+    explicit CoreCpu(int id);
+
+    /**
+     * @brief setCoreId : set core id
+     * @param id
+     */
+    void setCoreId(int id);
+
+private:
+    int m_CoreId;                //<! core id
 };
 
 #endif // CORECPU_H

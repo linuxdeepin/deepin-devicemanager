@@ -65,6 +65,21 @@ void CpuInfo::logicalCpus(QString &info)
     }
 }
 
+int CpuInfo::physicalNum()
+{
+    return m_MapPhysicalCpu.size();
+}
+
+int CpuInfo::coreNum()
+{
+    return m_CoreCpu.size();
+}
+
+int CpuInfo::logicalNum()
+{
+    return m_MapLogicalCpu.size();
+}
+
 void CpuInfo::readCpuArchitecture()
 {
     struct utsname utsbuf;
@@ -154,13 +169,19 @@ void CpuInfo::readSysCpuN(int N, const QString &path)
 
     // get core id
     int core_id = readCoreID(dir);
-    if (core_id > 0)
+    if (core_id >= 0) {
         lcpu.setCoreID(core_id);
+        CoreCpu core = CoreCpu(core_id);
+        m_CoreCpu.insert(core_id, core);
+    }
 
     // get physical id
-    int logical_id = readPhysicalID(dir);
-    if (logical_id > -1)
-        lcpu.setPhysicalID(logical_id);
+    int physical_id = readPhysicalID(dir);
+    if (physical_id >= 0) {
+        lcpu.setPhysicalID(physical_id);
+        PhysicalCpu physical = PhysicalCpu(physical_id);
+        m_MapPhysicalCpu.insert(physical_id, physical);
+    }
 
     // get cpu cache
     if (dir.exists("cache"))
