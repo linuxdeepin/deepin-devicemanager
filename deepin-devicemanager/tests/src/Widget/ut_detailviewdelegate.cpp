@@ -24,10 +24,11 @@
 #include <QStyle>
 #include <QWidget>
 #include <DStyle>
+#include <DApplication>
 
 #include <gtest/gtest.h>
 #include "../stub.h"
-
+DStyle *DetailViewDelegate_UT_style;
 class DetailViewDelegate_UT : public UT_HEAD
 {
 public:
@@ -36,10 +37,13 @@ public:
         m_treeView = new DetailTreeView;
         m_dViewDelegate = new DetailViewDelegate(m_treeView);
         m_treeView->setItemDelegate(m_dViewDelegate);
+        DetailViewDelegate_UT_style = new DStyle;
     }
     void TearDown()
     {
         delete m_treeView;
+        delete  DetailViewDelegate_UT_style;
+        DetailViewDelegate_UT_style = nullptr;
     }
     DetailViewDelegate *m_dViewDelegate;
     DetailTreeView *m_treeView;
@@ -65,21 +69,26 @@ int ut_column()
     return 0;
 }
 
+DStyle *DetailViewDelegate_UT_style_fun()
+{
+    return DetailViewDelegate_UT_style;
+}
+
 TEST_F(DetailViewDelegate_UT, ut_paint)
 {
     QStyleOptionViewItem option;
     QPainter painter(m_treeView);
-
-    QTableWidgetItem *item = new QTableWidgetItem;
-    item->setText("/");
+    m_treeView->setColumnCount(1);
+    m_treeView->insertRow(0);
+    QTableWidgetItem *item = new QTableWidgetItem("xxx");
     m_treeView->setItem(0, 0, item);
-    QModelIndex index = m_treeView->model()->index(0, 0);
+    QModelIndex index = m_treeView->indexAt(QPoint(0, 0));
 
     Stub stub;
-    stub.set(ADDR(QModelIndex, isValid), ut_isValid);
-    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_detailview_pixelMetric);
+
+    //stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget * widget) const)ADDR(DStyle, pixelMetric), ut_detailview_pixelMetric);
+    stub.set(ADDR(DApplication, style), DetailViewDelegate_UT_style_fun);
     stub.set(ADDR(QPoint, y), ut_y);
-    stub.set(ADDR(QModelIndex, column), ut_column);
     m_dViewDelegate->paint(&painter, option, index);
     delete item;
 }
