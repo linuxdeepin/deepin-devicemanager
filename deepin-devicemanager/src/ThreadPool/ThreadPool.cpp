@@ -10,7 +10,8 @@
 #include "../LoadInfo/DeviceGenerator.h"
 #include "../LoadInfo/DeviceFactory.h"
 
-QMutex             lock;
+QMutex  lock;
+QMutex  lockGen;
 
 CmdTask::CmdTask(QString key, QString cmd, QString debugFile, QString info, ThreadPool *parent)
     : m_Key(key)
@@ -151,7 +152,7 @@ void ThreadPool::finishedCmd(const QString &info, const QMap<QString, QList<QMap
 
 void ThreadPool::finishedGenerateDevice(const QStringList &lst)
 {
-    QMutexLocker locker(&lock);
+    QMutexLocker locker(&lockGen);
     m_FinishedGenerator++;
     if (lst.size() > 0) {
         DeviceManager::instance()->addBusId(lst);

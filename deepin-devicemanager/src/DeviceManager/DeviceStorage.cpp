@@ -1,5 +1,6 @@
 #include "DeviceStorage.h"
-#include<QDebug>
+#include <QDebug>
+#include <QFile>
 
 DeviceStorage::DeviceStorage()
     : DeviceBaseInfo()
@@ -99,8 +100,17 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     }
 
 
-    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
-//    setDiskSerialID(mapInfo["Device Files"]);
+    // get serial num
+    QString Path = "/sys" + mapInfo["SysFS Device Link"] + "/unique_number";
+    QFile file(Path);
+    if (file.open(QIODevice::ReadOnly)) {
+        QString value = file.readAll();
+        m_SerialNumber = value;
+        file.close();
+    } else {
+        setAttribute(mapInfo, "Serial ID", m_SerialNumber);
+    }
+
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
 
