@@ -14,10 +14,10 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/LoadInfo/CmdTool.h"
-#include "../src/LoadInfo/DeviceFactory.h"
-#include "../src/ThreadPool/GenerateDevicePool.h"
-#include "../src/DBus/DBusInterface.h"
+#include "CmdTool.h"
+#include "DeviceFactory.h"
+#include "GenerateDevicePool.h"
+#include "DBusInterface.h"
 
 #include "../ut_Head.h"
 #include <QCoreApplication>
@@ -226,14 +226,14 @@ bool ut_getDeviceInfo(QString deviceInfo, QString file)
 QStringList ut_lshw_split()
 {
     return QStringList() << "cpu"
-                         << "disk"
-                         << "storage"
-                         << "bank"
-                         << "display"
-                         << "multimedia"
-                         << "network"
-                         << "usb"
-                         << "cdrom";
+           << "disk"
+           << "storage"
+           << "bank"
+           << "display"
+           << "multimedia"
+           << "network"
+           << "usb"
+           << "cdrom";
 }
 
 bool ut_lshw_startsWith()

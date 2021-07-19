@@ -14,10 +14,10 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/LoadInfo/PanguVGenerator.h"
-#include "../src/LoadInfo/PanguGenerator.h"
-#include "../src/LoadInfo/MipsGenerator.h"
-#include "../src/DeviceManager/DeviceManager.h"
+#include "PanguVGenerator.h"
+#include "PanguGenerator.h"
+#include "MipsGenerator.h"
+#include "DeviceManager.h"
 
 #include "../ut_Head.h"
 #include <QCoreApplication>

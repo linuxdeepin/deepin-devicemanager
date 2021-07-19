@@ -14,10 +14,10 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/DeviceWidget.h"
-#include "../src/ThreadPool/LoadInfoThread.h"
-#include "../src/ThreadPool/ThreadExecXrandr.h"
-#include "../src/ThreadPool/GenerateDevicePool.h"
+#include "DeviceWidget.h"
+#include "LoadInfoThread.h"
+#include "ThreadExecXrandr.h"
+#include "GenerateDevicePool.h"
 
 #include "../ut_Head.h"
 #include <QCoreApplication>

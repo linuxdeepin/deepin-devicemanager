@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QThreadPool>
 
-class ReadFilePool;
+class GetInfoPool;
 
 /**
  * @brief The CmdTask class
@@ -33,7 +33,7 @@ class CmdTask: public QObject, public QRunnable
 {
     Q_OBJECT
 public:
-    CmdTask(QString key, QString file, QString info, ReadFilePool *parent);
+    CmdTask(QString key, QString file, QString info, GetInfoPool *parent);
     ~CmdTask();
 protected:
     void run() override;
@@ -42,20 +42,20 @@ private:
     QString m_Key;
     QString m_File;
     QString m_Info;
-    ReadFilePool *mp_Parent;
+    GetInfoPool *mp_Parent;
 };
 
 
-class ReadFilePool : public QThreadPool
+class GetInfoPool : public QThreadPool
 {
     Q_OBJECT
 public:
-    ReadFilePool();
+    GetInfoPool();
 
     /**
-     * @brief readAllFile : 加载设备信息
+     * @brief getAllInfo : 加载设备信息
      */
-    void readAllFile();
+    void getAllInfo();
 
     /**
      * @brief finishedCmd

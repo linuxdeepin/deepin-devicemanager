@@ -65,20 +65,6 @@ execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURR
 configure_file(../src/environments.h.in environments.h @ONLY)
 configure_file(../src/config.h.in config.h @ONLY)
 
-macro(SUBDIRLIST result curdir)
-#    message(************************************************SUBDIRLIST:${SUBDIRLIST})
-#    message(************************************************result:${result})
-#    message(************************************************curdir:${curdir})
-    file(GLOB children RELATIVE ${curdir} ${curdir}/*)
-    set(dirlist "")
-    foreach(child ${children})
-        if(IS_DIRECTORY ${curdir}/${child})
-            LIST(APPEND dirlist ${child})
-        endif()
-    endforeach()
-    set(${result} ${dirlist})
-endmacro()
-
 # Find the library
 find_package(PkgConfig REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -112,34 +98,26 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D${CMAKE_SAFETYTEST}")
 #Include all third
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/docx/)
+
 #add cups
 include_directories("/usr/include/cups/")
-#link_directories("/usr/lib/cups/")
 link_libraries("cups")
 link_libraries("zmq")
 
-file(GLOB_RECURSE APP_SRCS
+file(GLOB_RECURSE SRC_CPP
     ${CMAKE_CURRENT_LIST_DIR}/../3rdparty/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/DebugTimeManager.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/DBus/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/../src/GenerateDevice/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/DeviceManager/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/LoadInfo/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/../src/GetDataFromServer/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/Page/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/ThreadPool/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/../src/Tool/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/Widget/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/ZeroMQ/*.cpp
     )
-FILE(GLOB allTestSource
-  ../tests/src/*.cpp
-  ../tests/src/DBus/*.cpp
-  ../tests/src/DeviceManager/*.cpp
-  ../tests/src/LoadInfo/*.cpp
-  ../tests/src/Page/*.cpp
-  ../tests/src/ThreadPool/*.cpp
-  ../tests/src/Widget/*.cpp
-  ../tests/src/ZeroMQ/*.cpp
-)
-add_executable(${PROJECT_NAME_TEST} ${APP_SRCS} ${allTestSource})
+
+file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+add_executable(${PROJECT_NAME_TEST} ${SRC_CPP} ${TEST_SRC_CPP})
 
 target_include_directories(${PROJECT_NAME_TEST}
     PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})

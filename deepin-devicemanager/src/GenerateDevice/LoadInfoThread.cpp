@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QDateTime>
 
-#include "ReadFilePool.h"
+#include "GetInfoPool.h"
 #include "GenerateDevicePool.h"
 #include "ZmqOrder.h"
 
@@ -16,7 +16,7 @@ LoadInfoThread::LoadInfoThread()
     , m_FinishedReadFilePool(false)
     , mp_ZmqOrder(nullptr)
 {
-    connect(&mp_ReadFilePool, &ReadFilePool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
+    connect(&mp_ReadFilePool, &GetInfoPool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
 }
 
 LoadInfoThread::~LoadInfoThread()
@@ -49,7 +49,7 @@ void LoadInfoThread::run()
     }
 
     m_Running = true;
-    mp_ReadFilePool.readAllFile();
+    mp_ReadFilePool.getAllInfo();
     mp_ReadFilePool.waitForDone(-1);
 
     // 为了保证上面那个线程池完全结束

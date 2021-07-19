@@ -1,4 +1,4 @@
-#include "ReadFilePool.h"
+#include "GetInfoPool.h"
 
 #include <QObjectCleanupHandler>
 #include <QDebug>
@@ -8,7 +8,7 @@
 
 static QMutex mutex;
 
-CmdTask::CmdTask(QString key, QString file, QString info, ReadFilePool *parent)
+CmdTask::CmdTask(QString key, QString file, QString info, GetInfoPool *parent)
     : m_Key(key)
     , m_File(file)
     , m_Info(info)
@@ -30,14 +30,14 @@ void CmdTask::run()
     mp_Parent->finishedCmd(m_Info, cmdInfo);
 }
 
-ReadFilePool::ReadFilePool()
+GetInfoPool::GetInfoPool()
     : m_Arch("")
     , m_FinishedNum(0)
 {
     initCmd();
 }
 
-void ReadFilePool::readAllFile()
+void GetInfoPool::getAllInfo()
 {
     DeviceManager::instance()->clear();
 
@@ -52,7 +52,7 @@ void ReadFilePool::readAllFile()
     }
 }
 
-void ReadFilePool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
+void GetInfoPool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
     DeviceManager::instance()->addCmdInfo(cmdInfo);
     QMutexLocker m_lock(&mutex);
@@ -63,13 +63,13 @@ void ReadFilePool::finishedCmd(const QString &info, const QMap<QString, QList<QM
     }
 }
 
-void ReadFilePool::setFramework(const QString &arch)
+void GetInfoPool::setFramework(const QString &arch)
 {
     // 设置架构
     m_Arch = arch;
 }
 
-void ReadFilePool::initCmd()
+void GetInfoPool::initCmd()
 {
     m_CmdList.append({ "lshw",                 "lshw.txt",               tr("Loading Audio Device Info...") });
     m_CmdList.append({ "printer",              "printer.txt",            ""});

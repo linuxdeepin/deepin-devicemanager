@@ -1,6 +1,6 @@
 // 项目自身文件
 #include "EnableManager.h"
-#include "DBus/DBusInterface.h"
+#include "DBusInterface.h"
 #include "DeviceManager.h"
 #include "ZmqOrder.h"
 

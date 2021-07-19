@@ -69,39 +69,32 @@ execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURR
 configure_file(src/environments.h.in environments.h @ONLY)
 configure_file(src/config.h.in config.h @ONLY)
 
-macro(SUBDIRLIST result curdir)
-#    message(************************************************SUBDIRLIST:${SUBDIRLIST})
-#    message(************************************************result:${result})
-#    message(************************************************curdir:${curdir})
-    file(GLOB children RELATIVE ${curdir} ${curdir}/*)
-    set(dirlist "")
-    foreach(child ${children})
-        if(IS_DIRECTORY ${curdir}/${child})
-            LIST(APPEND dirlist ${child})
-        endif()
-    endforeach()
-    set(${result} ${dirlist})
-endmacro()
-
+# include dir
+MACRO(SUBDIRLIST result curdir)
+  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
+  SET(dirlist "")
+  FOREACH(child ${children})
+    IF(IS_DIRECTORY ${curdir}/${child})
+      LIST(APPEND dirlist ${child})
+    ENDIF()
+  ENDFOREACH()
+  SET(${result} ${dirlist})
+ENDMACRO()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
-SUBDIRLIST(all_src ${CMAKE_CURRENT_SOURCE_DIR}/src)
-
-#Include all src
-foreach(subdir ${all_src})
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${subdir})
+SUBDIRLIST(dirs ${CMAKE_CURRENT_SOURCE_DIR}/src)
+foreach(dir ${dirs})
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${dir})
 endforeach()
-
-#Include all third
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/include/QtXlsx)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/docx)
-#add cups
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/include/QtXlsx)
+
+#add cups and zmq
 include_directories("/usr/include/cups/")
-#link_directories("/usr/lib/cups/")
 link_libraries("cups")
 link_libraries("zmq")
 
-file(GLOB_RECURSE DEVICE_SRC ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
-file(GLOB_RECURSE THIRD_PARTY ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
+file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
+file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
 
 
 # Find the library
@@ -117,10 +110,9 @@ find_package(DFrameworkdbus REQUIRED)
 include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
 # Tell CMake to create the executable
-add_executable(${PROJECT_NAME} ${DEVICE_SRC} ${THIRD_PARTY} ${APP_QRC})
+add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H} ${APP_QRC})
 
 target_include_directories(${APP_BIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
-
 target_link_libraries(${APP_BIN_NAME}
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
@@ -145,8 +137,5 @@ install(FILES ${APP_DESKTOP} DESTINATION share/applications)
 install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/apps)
 install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
 
-
-#add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager/tests/)
 # Test--------deepin-devicemanager
-
 add_subdirectory(./tests)

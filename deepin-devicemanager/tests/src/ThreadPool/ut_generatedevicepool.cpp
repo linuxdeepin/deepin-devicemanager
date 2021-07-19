@@ -14,10 +14,10 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/DeviceWidget.h"
-#include "../src/LoadInfo/DeviceFactory.h"
-#include "../src/LoadInfo/X86Generator.h"
-#include "../src/ThreadPool/GenerateDevicePool.h"
+#include "DeviceWidget.h"
+#include "DeviceFactory.h"
+#include "X86Generator.h"
+#include "GenerateDevicePool.h"
 
 #include "../ut_Head.h"
 #include <QCoreApplication>
@@ -56,20 +56,21 @@ public:
     GenerateDevicePool *m_generateDevicePool;
 };
 
-DeviceGenerator *ut_getDeviceGenerator(){
+DeviceGenerator *ut_getDeviceGenerator()
+{
     DeviceGenerator *generator = nullptr;
     generator = new X86Generator();
     return generator;
 }
 
-TEST_F(GenerateTask_UT,GenerateTask_UT_run)
+TEST_F(GenerateTask_UT, GenerateTask_UT_run)
 {
-   Stub stub;
-   stub.set(ADDR(DeviceFactory,getDeviceGenerator),ut_getDeviceGenerator);
-   m_generateTask->run();
+    Stub stub;
+    stub.set(ADDR(DeviceFactory, getDeviceGenerator), ut_getDeviceGenerator);
+    m_generateTask->run();
 }
 
-TEST_F(GenerateDevicePool_UT,GenerateDevicePool_UT_generateDevice)
+TEST_F(GenerateDevicePool_UT, GenerateDevicePool_UT_generateDevice)
 {
-   m_generateDevicePool->generateDevice();
+    m_generateDevicePool->generateDevice();
 }

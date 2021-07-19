@@ -14,8 +14,8 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/LoadInfo/KLUGenerator.h"
-#include "../src/DeviceManager/DeviceManager.h"
+#include "KLUGenerator.h"
+#include "DeviceManager.h"
 #include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>

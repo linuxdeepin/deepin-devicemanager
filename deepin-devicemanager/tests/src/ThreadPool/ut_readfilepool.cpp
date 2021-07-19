@@ -14,10 +14,10 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/DeviceWidget.h"
-#include "../src/ThreadPool/LoadInfoThread.h"
-#include "../src/ThreadPool/ReadFilePool.h"
-#include "../src/ThreadPool/GenerateDevicePool.h"
+#include "DeviceWidget.h"
+#include "LoadInfoThread.h"
+#include "GetInfoPool.h"
+#include "GenerateDevicePool.h"
 
 #include "../ut_Head.h"
 #include <QCoreApplication>
@@ -32,13 +32,13 @@ class ReadFilePool_UT : public UT_HEAD
 public:
     void SetUp()
     {
-        m_readFilePool = new ReadFilePool;
+        m_readFilePool = new GetInfoPool;
     }
     void TearDown()
     {
         delete m_readFilePool;
     }
-    ReadFilePool *m_readFilePool;
+    GetInfoPool *m_readFilePool;
 };
 
 class CmdTask_UT : public UT_HEAD
@@ -46,7 +46,7 @@ class CmdTask_UT : public UT_HEAD
 public:
     void SetUp()
     {
-        m_readFilePool = new ReadFilePool;
+        m_readFilePool = new GetInfoPool;
         m_cmdTask = new CmdTask("", "", "", m_readFilePool);
     }
     void TearDown()
@@ -55,7 +55,7 @@ public:
         delete m_cmdTask;
     }
     CmdTask *m_cmdTask;
-    ReadFilePool *m_readFilePool;
+    GetInfoPool *m_readFilePool;
 };
 
 TEST_F(CmdTask_UT, CmdTask_UT_run)
@@ -72,5 +72,5 @@ TEST_F(ReadFilePool_UT, ReadFilePool_UT_readAllFile)
 {
     Stub stub;
     stub.set(ADDR(QThreadPool, start), ut_ThreadPool_start);
-    m_readFilePool->readAllFile();
+    m_readFilePool->getAllInfo();
 }
