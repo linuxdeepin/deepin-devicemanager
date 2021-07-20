@@ -144,9 +144,9 @@ void MainJob::updateAllDevice()
 {
     PERF_PRINT_BEGIN("POINT-01", "MainJob::updateAllDevice()");
     if (m_FirstUpdate)
-        mp_Pool->generateDeviceFile();
+        mp_Pool->loadDeviceInfo();
     else
-        mp_Pool->updateDeviceFile();
+        mp_Pool->updateDeviceInfo();
     mp_Pool->waitForDone(-1);
     sleep(1);
     PERF_PRINT_END("POINT-01");

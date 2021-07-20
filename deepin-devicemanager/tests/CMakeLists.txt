@@ -109,15 +109,15 @@ file(GLOB_RECURSE SRC_CPP
     ${CMAKE_CURRENT_LIST_DIR}/../src/DebugTimeManager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/GenerateDevice/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/DeviceManager/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/GetDataFromServer/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/Page/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/Tool/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/Widget/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/ZeroMQ/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/../src/EnableAndDisable/*.cpp
     )
 
 file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
-add_executable(${PROJECT_NAME_TEST} ${SRC_CPP} ${TEST_SRC_CPP})
+file(GLOB_RECURSE TEST_SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
+add_executable(${PROJECT_NAME_TEST} ${SRC_CPP} ${TEST_SRC_CPP} ${TEST_SRC_H})
 
 target_include_directories(${PROJECT_NAME_TEST}
     PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})

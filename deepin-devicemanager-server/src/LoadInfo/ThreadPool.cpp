@@ -16,7 +16,7 @@ ThreadPool::ThreadPool(QObject *parent)
     dir.mkdir(PATH);
 }
 
-void ThreadPool::generateDeviceFile()
+void ThreadPool::loadDeviceInfo()
 {
     // 在线程池执行之前，先用单线程获取hwinfo信息，因为在线程池里面执行hwinfo命令，可能出现死机的问题
     runHwinfoCmd();
@@ -33,7 +33,7 @@ void ThreadPool::generateDeviceFile()
     }
 }
 
-void ThreadPool::updateDeviceFile()
+void ThreadPool::updateDeviceInfo()
 {
     // 在线程池执行之前，先用单线程获取hwinfo信息，因为在线程池里面执行hwinfo命令，可能出现死机的问题
     runHwinfoCmd();

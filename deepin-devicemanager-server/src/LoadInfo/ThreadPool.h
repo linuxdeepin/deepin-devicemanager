@@ -58,12 +58,12 @@ public:
     /**
      * @brief generateDeviceFile : load device info
      */
-    void generateDeviceFile();
+    void loadDeviceInfo();
 
     /**
      * @brief updateDeviceFile
      */
-    void updateDeviceFile();
+    void updateDeviceInfo();
 
 private:
     /**

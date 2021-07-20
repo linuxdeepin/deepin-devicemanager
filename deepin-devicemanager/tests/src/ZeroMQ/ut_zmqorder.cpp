@@ -14,8 +14,8 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/ZeroMQ/ZmqOrder.h"
-#include "../src/ZeroMQ/zhelpers.h"
+#include "ZmqOrder.h"
+#include "zhelpers.h"
 #include "zmq.h"
 #include "../ut_Head.h"
 #include <QCoreApplication>

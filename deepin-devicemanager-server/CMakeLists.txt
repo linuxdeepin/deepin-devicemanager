@@ -16,21 +16,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 # 设置包含头文件的时候不用包含路径 begin ****************************************************************************************
-macro(SUBDIRLIST result curdir)
-    file(GLOB children RELATIVE ${curdir} ${curdir}/*)
-    set(dirlist "")
-    foreach(child ${children})
-        if(IS_DIRECTORY ${curdir}/${child})
-            LIST(APPEND dirlist ${child})
-        endif()
-    endforeach()
-    set(${result} ${dirlist})
-endmacro()
-
+MACRO(SUBDIRLIST result curdir)
+  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
+  SET(dirlist "")
+  FOREACH(child ${children})
+    IF(IS_DIRECTORY ${curdir}/${child})
+      LIST(APPEND dirlist ${child})
+    ENDIF()
+  ENDFOREACH()
+  SET(${result} ${dirlist})
+ENDMACRO()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
-SUBDIRLIST(all_src ${CMAKE_CURRENT_SOURCE_DIR}/src)
-foreach(subdir ${all_src})
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${subdir})
+SUBDIRLIST(dirs ${CMAKE_CURRENT_SOURCE_DIR}/src)
+foreach(dir ${dirs})
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${dir})
 endforeach()
 # 设置包含头文件的时候不用包含路径 end ****************************************************************************************
 
@@ -43,8 +42,9 @@ find_package(Qt5 COMPONENTS
     Core
     DBus REQUIRED)
 
-file(GLOB_RECURSE DEVICE_SRC ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
-add_executable(${PROJECT_NAME} ${DEVICE_SRC})
+file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
+add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H})
 
 target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus)
 

@@ -14,8 +14,8 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/DeviceManager/DeviceImage.h"
-#include "../src/DeviceManager/EnableManager.h"
+#include "DeviceImage.h"
+#include "EnableManager.h"
 
 #include "../ut_Head.h"
 #include <QCoreApplication>

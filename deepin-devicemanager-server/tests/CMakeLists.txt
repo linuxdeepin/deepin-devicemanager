@@ -74,24 +74,18 @@ endforeach()
 file(GLOB_RECURSE APP_SRCS
     ${CMAKE_CURRENT_LIST_DIR}/../src/DebugTimeManager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/MainJob.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/DBus/*.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../src/LoadInfo/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/UsbDetect/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/ZeroMQ/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/../src/EnableAndDisable/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/../src/HotPlug/*.cpp
     )
-FILE(GLOB allTestSource
-  ../tests/src/*.cpp
-  ../tests/src/DBus/*.cpp
-  ../tests/src/LoadInfo/*.cpp
-  ../tests/src/UsbDetect/*.cpp
-  ../tests/src/ZeroMQ/*.cpp
-)
+file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+file(GLOB_RECURSE TEST_SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 
 find_package(Qt5 COMPONENTS
     Core
     DBus REQUIRED)
 
-add_executable(${PROJECT_NAME_TEST} ${APP_SRCS} ${allTestSource})
+add_executable(${PROJECT_NAME_TEST} ${APP_SRCS} ${TEST_SRC_CPP} ${TEST_SRC_H})
 
 target_include_directories(${PROJECT_NAME_TEST}
     PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
