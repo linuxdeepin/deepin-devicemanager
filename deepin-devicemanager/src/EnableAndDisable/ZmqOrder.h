@@ -37,10 +37,11 @@ public:
     bool execIfconfigOrder(const QString &cmd);
 
     /**
-     * @brief reqUpdateUI
+     * @brief reqUpdateUI : Request udpates from the background
+     * @param start : Whether to start the device manager
      * @return
      */
-    bool reqUpdateUI();
+    bool reqUpdateUI(bool start = true);
 
 private:
     ZMQBase                   *mp_Req;

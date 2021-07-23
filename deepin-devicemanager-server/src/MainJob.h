@@ -10,6 +10,13 @@ class RRServer;
 class DetectThread;
 class DBusInterface;
 
+enum INSTRUCTION_RES {
+    IR_NULL = 0,
+    IR_FAILED = 1,
+    IR_SUCCESS = 2,
+    IR_UPDATE = 3
+};
+
 class MainJob : public QObject
 {
     Q_OBJECT
@@ -23,7 +30,7 @@ public:
      * @brief executeClientInstruction
      * @param instructions
      */
-    void executeClientInstruction(const QString &instructions);
+    INSTRUCTION_RES executeClientInstruction(const QString &instructions);
 
     /**
      * @brief isZhaoXin
@@ -31,17 +38,17 @@ public:
      */
     bool isZhaoXin();
 
+    /**
+     * @brief isServerRunning
+     * @return server running
+     */
+    bool isServerRunning();
+
 private slots:
     /**
      * @brief slotUsbChanged
      */
     void slotUsbChanged();
-
-    /**
-     * @brief slotExecuteClientInstructions
-     * @param instructions
-     */
-    void slotExecuteClientInstructions(const QString &instructions);
 
     /**
      * @brief onFirstUpdate
@@ -51,37 +58,21 @@ private slots:
 private:
 
     /**
-     * @brief handleInstruction : 处理命令的方法
-     * @param instruction : 需要处理的命令
-     */
-    void handleInstruction(const QString &instruction);
-
-    /**
      * @brief updateAllDevice
      */
     void updateAllDevice();
 
     /**
-     * @brief nullInstruction
-     */
-    void nullInstruction();
-
-    /**
      * @brief driverInstruction
      * @param instruction
      */
-    void driverInstruction(const QString &instruction);
+    INSTRUCTION_RES driverInstruction(const QString &instruction);
 
     /**
      * @brief ifconfigInstruction
      * @param instruction
      */
-    void ifconfigInstruction(const QString &instruction);
-
-    /**
-     * @brief reqUpdateInstruction
-     */
-    void reqUpdateInstruction();
+    INSTRUCTION_RES ifconfigInstruction(const QString &instruction);
 
     /**
      * @brief initDBus : 初始化dbus
@@ -93,10 +84,11 @@ private:
     ThreadPool            *mp_Pool;               //<! 生成文件的线程池
     RRServer              *mp_ZmqServer;          //<! 监听后台的服务端
     DetectThread          *mp_DetectThread;       //<! 检测usb的线程
-    bool                  m_UpdateUI;             //<! 客户端请求更新
     QTimer                *mp_Timer;              //<! 定时器
     DBusInterface         *mp_IFace;              //<! Dbus interface
-    bool                  m_FirstUpdate;
+    bool                  m_ClientIsUpdating;     //<! 前台正在更新中
+    bool                  m_ServerIsUpdating;     //<! 后台正在更新中
+    bool                  m_FirstUpdate;          //<! 是否是第一次更新
 
 };
 

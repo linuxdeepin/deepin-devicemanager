@@ -72,16 +72,6 @@ TEST_F(MainJob_UT, MainJob_UT_slotUsbChanged)
 TEST_F(MainJob_UT, MainJob_UT_onFirstUpdate)
 {
     m_mainJob->onFirstUpdate();
-    m_mainJob->nullInstruction();
-    m_mainJob->reqUpdateInstruction();
-}
-
-TEST_F(MainJob_UT, MainJob_UT_handleInstruction)
-{
-    m_mainJob->handleInstruction("DETECT");
-    m_mainJob->handleInstruction("ZMQ#DRIVER");
-    m_mainJob->handleInstruction("ZMQ#IFCONFIG");
-    m_mainJob->handleInstruction("ZMQ#UPDATE_UI");
 }
 
 TEST_F(MainJob_UT, MainJob_UT_driverInstruction)
