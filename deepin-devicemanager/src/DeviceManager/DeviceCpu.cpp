@@ -320,7 +320,7 @@ void DeviceCpu::getTrNumber()
     m_trNumber.insert(124, QObject::tr("One hundred and Twenty-four"));
     m_trNumber.insert(126, QObject::tr("One hundred and Twenty-six"));
     m_trNumber.insert(128, QObject::tr("One hundred and Twenty-eight"));
-
+    m_trNumber.insert(256, QObject::tr("Two hundred and fifty-six"));
 }
 
 
