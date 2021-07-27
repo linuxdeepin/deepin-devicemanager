@@ -140,8 +140,8 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
     m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 板载接口设备
-    if (m_ListDeviceBios.size() > 0)
-        m_ListDeviceType.append(QPair<QString, QString>(tr("Motherboard"), "motherboard##Bios"));
+//    if (m_ListDeviceBios.size() > 0)
+//        m_ListDeviceType.append(QPair<QString, QString>(tr("Motherboard"), "motherboard##Bios"));
 
     if (m_ListDeviceMemory.size() > 0)
         m_ListDeviceType.append(QPair<QString, QString>(tr("Memory"), "memory##Memory"));
@@ -1035,7 +1035,6 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
 {
     // 获取所有设备的概况信息
     m_OveriewMap.clear();
-
     auto iter = m_DeviceClassMap.begin();
 
     // 根据设备指针类,获取所有设备概况信息

@@ -57,8 +57,36 @@ void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &)
 void PageOverview::updateInfo(const QMap<QString, QString> &map)
 {
     mp_Overview->clear();
+    // HuaWei Cloud
+    // /usr/local/vdi/base.env
+//    export SW_IMG_VERSION整机系统版本号=1.0.0.B004.0
+//    export SW_TCM_VERSION=0.0.5
+//    export SW_HARDWARE_MODEL整机产品名称="HT3300"
+    QMap<QString, QString> mapCloud;
+    QFile file("/usr/local/vdi/base.env");
+    if (file.open(QIODevice::ReadOnly)) {
+        QString info = file.readAll();
+        file.close();
 
-    int row = map.size();
+        QStringList lines = info.split("\n");
+        foreach (QString line, lines) {
+            if (line.isEmpty())
+                continue;
+            line.replace("export ", "");
+            QStringList words = line.split("=");
+            if (words.size() != 2)
+                continue;
+            if (words[0] == "SW_TCM_VERSION")
+                continue;
+            QString key = words[0];
+            if (words[0] == "SW_IMG_VERSION") // "整机系统版本号"
+                key = tr("SW_IMG_VERSION");
+            else if (words[0] == "SW_HARDWARE_MODEL") //"整机产品名称";
+                key = tr("SW_HARDWARE_MODEL");
+            mapCloud.insert(key, words[1]);
+        }
+    }
+    int row = map.size() + mapCloud.size() - 1;
 
     // 根据页面高度确定表格最多显示行数
     int maxRow = this->height() / ROW_HEIGHT - 4;
@@ -72,9 +100,15 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     mp_Overview->setColumnAndRow(row - 1);
 
     int i = 0;
+    foreach (const QString &key, mapCloud.keys()) {
+        QTableWidgetItem *itemFirst = new QTableWidgetItem(key);
+        mp_Overview->setItem(i, 0, itemFirst);
+        QTableWidgetItem *itemSecond = new QTableWidgetItem(mapCloud[key].replace("\"", ""));
+        mp_Overview->setItem(i, 1, itemSecond);
+        ++i;
+    }
 
     const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
-
     foreach (auto iter, types) {
         if (iter.first == tr("Overview")) {
             continue;
