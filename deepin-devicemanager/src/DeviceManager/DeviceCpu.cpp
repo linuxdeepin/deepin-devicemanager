@@ -165,7 +165,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     // HuaWeiCloud cpu name and vendor
     if (m_Name.isEmpty() || m_Vendor.isEmpty()) {
         QProcess process;
-        process.start("cmd");
+        process.start("lscpu");
         process.waitForFinished(-1);
         QString info = process.readAllStandardOutput();
 
