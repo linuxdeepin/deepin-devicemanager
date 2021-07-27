@@ -76,14 +76,16 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
             QStringList words = line.split("=");
             if (words.size() != 2)
                 continue;
-            if (words[0] == "SW_TCM_VERSION")
-                continue;
             QString key = words[0];
-            if (words[0] == "SW_IMG_VERSION") // "整机系统版本号"
+            if (words[0] == "SW_IMG_VERSION") {
                 key = tr("SW_IMG_VERSION");
-            else if (words[0] == "SW_HARDWARE_MODEL") //"整机产品名称";
+                mapCloud.insert(key, words[1]);
+            } else if (words[0] == "SW_HARDWARE_MODEL") {
                 key = tr("SW_HARDWARE_MODEL");
-            mapCloud.insert(key, words[1]);
+                mapCloud.insert(key, words[1]);
+            } else {
+                continue;
+            }
         }
     }
     int row = map.size() + mapCloud.size() - 1;

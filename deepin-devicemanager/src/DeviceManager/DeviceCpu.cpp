@@ -1,6 +1,8 @@
 // 项目自身文件
 #include "DeviceCpu.h"
 
+#include <QProcess>
+
 #include <math.h>
 
 DeviceCpu::DeviceCpu()
@@ -158,6 +160,26 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     foreach (const QString &order, orders) {
         if (mapInfo["Flags"].contains(order, Qt::CaseInsensitive))
             m_Extensions += QString("%1 ").arg(order);
+    }
+
+    // HuaWeiCloud cpu name and vendor
+    if (m_Name.isEmpty() || m_Vendor.isEmpty()) {
+        QProcess process;
+        process.start("cmd");
+        process.waitForFinished(-1);
+        QString info = process.readAllStandardOutput();
+
+        QMap<QString, QString> mapInfo;
+        QStringList lines = info.split("\n");
+        foreach (const QString &line, lines) {
+            QStringList words = line.split(":");
+            if (words.size() != 2)
+                continue;
+            mapInfo.insert(words[0].trimmed(), words[1].trimmed());
+        }
+
+        m_Name = mapInfo["Model name"];
+        m_Vendor = mapInfo["Vendor ID"];
     }
 
     // 获取其他属性
