@@ -75,7 +75,7 @@ DSysInfo::UosEdition ut_uosEditionType1()
 
 DSysInfo::UosEdition ut_uosEditionType2()
 {
-    return DSysInfo::UosEducation;
+    return DSysInfo::UosCommunity;
 }
 
 DSysInfo::UosEdition ut_uosEditionType3()
