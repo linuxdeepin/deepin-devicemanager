@@ -169,17 +169,36 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         process.waitForFinished(-1);
         QString info = process.readAllStandardOutput();
 
-        QMap<QString, QString> mapInfo;
+        QMap<QString, QString> mapInfoT;
         QStringList lines = info.split("\n");
         foreach (const QString &line, lines) {
             QStringList words = line.split(":");
             if (words.size() != 2)
                 continue;
-            mapInfo.insert(words[0].trimmed(), words[1].trimmed());
+            mapInfoT.insert(words[0].trimmed(), words[1].trimmed());
         }
 
-        m_Name = mapInfo["Model name"];
-        m_Vendor = mapInfo["Vendor ID"];
+        m_Name = mapInfoT["Model name"];
+        m_Vendor = mapInfoT["Vendor ID"];
+        m_BogoMIPS = mapInfoT["BogoMIPS"];
+        m_Extensions = mapInfoT["Flags"];
+        m_Step = mapInfoT["Stepping"];
+        m_Model = mapInfoT["Model"];
+
+        QProcess processC;
+        processC.start("cat /proc/cpuinfo");
+        processC.waitForFinished(-1);
+        QString infoC = processC.readAllStandardOutput();
+        QString para = infoC.split("\n\n").at(0);
+        lines = para.split("\n");
+        QMap<QString, QString> mapInfoC;
+        foreach (const QString &line, lines) {
+            QStringList words = line.split(":");
+            if (words.size() != 2)
+                continue;
+            mapInfoC.insert(words[0].trimmed(), words[1].trimmed());
+        }
+        getOtherMapInfo(mapInfoC);
     }
 
     // 获取其他属性
