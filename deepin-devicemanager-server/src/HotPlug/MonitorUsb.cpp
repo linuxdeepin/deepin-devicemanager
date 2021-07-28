@@ -42,6 +42,7 @@ void MonitorUsb::monitor()
             continue;
 
         // 获取事件并判断是否是插拔
+        qInfo() << "DEBUG-RWX001 ************************ " << buf;
         unsigned long long curNum = udev_device_get_devnum(dev);
         if (curNum <= 0) {
             udev_device_unref(dev);
@@ -50,9 +51,11 @@ void MonitorUsb::monitor()
 
         // 只有add和remove事件才会更新缓存信息
         strcpy(buf, udev_device_get_action(dev));
+        qInfo() << "DEBUG-RWX002 ************************ " << buf;
         if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) {
             // 当监听到新的usb时，内核需要加载usb信息，而上层应用需要在内核处理之后获取信息
             // 一般情况udev都会在内核处理完成后加载，但是usb2.0的会在正在加载的时候获取，需要等一段时间
+            qInfo() << "DEBUG-RWX003 ************************ " << buf;
             sleep(3);
             emit usbChanged();
         }
