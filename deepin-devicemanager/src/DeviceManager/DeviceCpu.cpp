@@ -199,7 +199,7 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Max Speed", m_Frequency, false);
     //    setAttribute(mapInfo, "Current Speed", m_CurFrequency);
-    setAttribute(mapInfo, "Family", m_Familly);
+    setAttribute(mapInfo, "Family", m_Familly,false);
 
     // 获取其他cpu信息
     getOtherMapInfo(mapInfo);

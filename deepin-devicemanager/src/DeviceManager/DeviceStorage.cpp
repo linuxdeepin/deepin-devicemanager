@@ -417,13 +417,14 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     m_Size.replace(QRegExp(".0[1-9]"), ".00");
 
     // 型号
-    //SATA
-    if (false == mapInfo["Device Model"].isEmpty())
-        m_Model = mapInfo["Device Model"];
-
-    //NVME
-    if (false == mapInfo["Model Number"].isEmpty())
-        m_Model = mapInfo["Model Number"];
+    if (m_Model.isEmpty()) {
+        //SATA
+        if (mapInfo.find("Device Model") != mapInfo.end())
+            m_Model = mapInfo["Device Model"];
+        //NVME
+        if (mapInfo.find("Model Number") != mapInfo.end())
+            m_Model = mapInfo["Model Number"];
+    }
 
     setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
 }

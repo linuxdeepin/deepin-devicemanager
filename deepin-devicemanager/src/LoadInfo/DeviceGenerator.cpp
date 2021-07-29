@@ -181,6 +181,8 @@ void DeviceGenerator::generatorNetworkDevice()
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2)
             continue;
+        if((*it).find("logical name") == (*it).end() || (*it).find("serial") == (*it).end())
+            continue;
 
         DeviceNetwork *device = new DeviceNetwork();
         device->setInfoFromLshw(*it);

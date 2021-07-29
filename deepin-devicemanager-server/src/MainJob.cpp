@@ -29,13 +29,7 @@ MainJob::MainJob(QObject *parent)
     , m_FirstUpdate(true)
 {
     // 守护进程启动的时候加载所有信息
-    if (!isZhaoXin()) {
-        qInfo() << "001 ************************************* Not ZhaoXin Meche";
-        updateAllDevice();
-    } else {
-        qInfo() << "002 ************************************* ZhaoXin Meche";
-        QTimer::singleShot(40 * 1000, this, &MainJob::onFirstUpdate);
-    }
+    updateAllDevice();
 }
 
 MainJob::~MainJob()
@@ -112,10 +106,7 @@ void MainJob::slotExecuteClientInstructions(const QString &instructions)
 void MainJob::onFirstUpdate()
 {
     if (m_FirstUpdate) {
-        qInfo() << "003 ************************************* First Update In QTimer";
         updateAllDevice();
-    } else {
-        qInfo() << "004 ************************************* Not Update but In QTimer";
     }
 }
 
