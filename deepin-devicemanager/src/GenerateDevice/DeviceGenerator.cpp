@@ -670,8 +670,10 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
         if ((*it).size() < 1)
             continue;
 
-        // 下面这句代码忘了这么写的原因，先去掉
-        //if ((*it).contains("Device Files")) {}
+        // 设备管理器存在键盘未知设备 名为 fe6e0030.pwm 云终端-瑞芯微
+        if ((*it).contains("fe6e0030.pwm")) {
+            continue;
+        }
 
         DeviceInput *device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
