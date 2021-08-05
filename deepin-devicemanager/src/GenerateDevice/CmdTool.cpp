@@ -114,7 +114,11 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
         } else if (item.startsWith("storage")) {
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_storage", mapInfo);
+#ifdef __sw_64__
+        } else if ((item.startsWith("memory") && !item.startsWith("memory UNCLAIMED")) || item.startsWith("bank")) {      // 内存信息
+#else
         } else if (item.startsWith("bank")) {      // 内存信息
+#endif
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_memory", mapInfo);
         } else if (item.startsWith("display")) {      // 显卡信息
