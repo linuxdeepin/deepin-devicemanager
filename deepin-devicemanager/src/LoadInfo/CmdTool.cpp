@@ -628,9 +628,11 @@ void CmdTool::loadCatAudioInfo(const QString &key, const QString &cmd, const QSt
 void CmdTool::loadEdidInfo(const QString &key, const QString &cmd, const QString &debugfile)
 {
     QString deviceInfo;
-    if (!getDeviceInfo(cmd, deviceInfo, debugfile)) {
+    if (!getDeviceInfo(cmd, deviceInfo, debugfile))
         return;
-    }
+
+    if (deviceInfo.isEmpty())
+        return;
 
     QString edid;
     QStringList lines = deviceInfo.split("\n");

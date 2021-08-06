@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>最大功率</translation>
+        <translation>最大电流</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -157,7 +157,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>最大功率</translation>
+        <translation>最大电流</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -204,7 +204,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>最大功率</translation>
+        <translation>最大电流</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -635,7 +635,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>最大功率</translation>
+        <translation>最大电流</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -887,7 +887,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>最大功率</translation>
+        <translation>最大电流</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -998,11 +998,11 @@
     </message>
     <message>
         <source>Speed</source>
-        <translation>速度</translation>
+        <translation>协商速率</translation>
     </message>
     <message>
         <source>Capacity</source>
-        <translation>容量</translation>
+        <translation>最大速率</translation>
     </message>
     <message>
         <source>Memory Address</source>
@@ -1050,7 +1050,7 @@
     </message>
     <message>
         <source>Maximum Power</source>
-        <translation>最大功率</translation>
+        <translation>最大电流</translation>
     </message>
     <message>
         <source>Speed</source>

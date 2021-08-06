@@ -265,6 +265,8 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
     if (arch == "PanGuV") {
         cmdList.append({ "EDID_HDMI",            "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid", "EDID_HDMI.txt",     ""});
         cmdList.append({ "EDID_VGA",             "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid", "EDID_VGA.txt",     ""});
+        cmdList.append({ "EDID_HDMI",            "hexdump /sys/devices/platform/hldrm/drm/card0/card0-HDMI-A-1/edid", "EDID_HDMI.txt",     ""});
+        cmdList.append({ "EDID_VGA",             "hexdump /sys/devices/platform/hldrm/drm/card0/card0-VGA-1/edid", "EDID_VGA.txt",     ""});
     }
 
     if (arch == "KLU") {
