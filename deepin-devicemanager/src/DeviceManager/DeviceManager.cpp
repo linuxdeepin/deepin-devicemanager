@@ -235,6 +235,13 @@ bool DeviceManager::getDeviceList(const QString &name, QList<DeviceBaseInfo *> &
     return true;
 }
 
+DeviceBaseInfo *DeviceManager::getBluetoothAtIndex(int index)
+{
+    if (m_ListDeviceBluetooth.size() <= index)
+        return nullptr;
+    return m_ListDeviceBluetooth[index];
+}
+
 void DeviceManager::addMouseDevice(DeviceInput *const device)
 {
     // 如果不是重复设备则添加到设备列表

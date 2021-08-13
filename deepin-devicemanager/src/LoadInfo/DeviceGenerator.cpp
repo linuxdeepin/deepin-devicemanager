@@ -181,7 +181,7 @@ void DeviceGenerator::generatorNetworkDevice()
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2)
             continue;
-        if((*it).find("logical name") == (*it).end() || (*it).find("serial") == (*it).end())
+        if ((*it).find("logical name") == (*it).end() || (*it).find("serial") == (*it).end())
             continue;
 
         DeviceNetwork *device = new DeviceNetwork();
@@ -202,9 +202,9 @@ void DeviceGenerator::generatorAudioDevice()
 void DeviceGenerator::generatorBluetoothDevice()
 {
     // 生成蓝牙
-    getBluetoothInfoFromHciconfig();
     getBlueToothInfoFromHwinfo();
     getBluetoothInfoFromLshw();
+    getBluetoothInfoFromHciconfig();
 }
 
 void DeviceGenerator::generatorKeyboardDevice()
@@ -615,13 +615,14 @@ void DeviceGenerator::getBluetoothInfoFromHciconfig()
     //  加载从hciconfig中获取的蓝牙信息
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("hciconfig");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    int index = 0;
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1)
             continue;
-
-        DeviceBluetooth *device = new DeviceBluetooth();
-        device->setInfoFromHciconfig(*it);
-        DeviceManager::instance()->addBluetoothDevice(device);
+        DeviceBluetooth *device = dynamic_cast<DeviceBluetooth *>(DeviceManager::instance()->getBluetoothAtIndex(index)) ;
+        if (device)
+            device->setInfoFromHciconfig(*it);
+        index++;
     }
 }
 
@@ -638,8 +639,10 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
             continue;
 
         if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0") {
-            if (DeviceManager::instance()->setBluetoothInfoFromHwinfo(*it))
-                addBusIDFromHwinfo((*it)["SysFS BusID"]);
+            DeviceBluetooth *device = new DeviceBluetooth();
+            device->setInfoFromHwinfo(*it);
+            DeviceManager::instance()->addBluetoothDevice(device);
+            addBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
     }
 }

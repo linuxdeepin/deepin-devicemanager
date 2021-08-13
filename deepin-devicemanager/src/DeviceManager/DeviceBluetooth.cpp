@@ -41,24 +41,11 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
 
 bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    // 判断是不是同一个蓝牙设备，由于条件限制，现在只能通过厂商判断
-    QStringList vendor = mapInfo["Vendor"].split(" ");
-    if (vendor.size() < 1)
-        return false;
-
-    if (!m_Vendor.contains(vendor[0]))
-        return false;
-
     // 获取设备基本信息
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "", m_MAC);
-    setAttribute(mapInfo, "", m_LogicalName);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
-    setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "", m_DriverVersion);
-    setAttribute(mapInfo, "", m_MaximumPower);
     setAttribute(mapInfo, "Speed", m_Speed);
 
     // 设置关联到lshw信息的key值,设备的唯一标志
@@ -78,13 +65,10 @@ bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     // 获取基本信息
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "version", m_Version);
-    setAttribute(mapInfo, "", m_Model);
-    setAttribute(mapInfo, "", m_MAC);
     setAttribute(mapInfo, "product", m_LogicalName);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "capabilities", m_Capabilities);
     setAttribute(mapInfo, "driver", m_Driver);
-    setAttribute(mapInfo, "", m_DriverVersion);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
 

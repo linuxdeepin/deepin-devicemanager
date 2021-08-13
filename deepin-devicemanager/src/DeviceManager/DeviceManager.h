@@ -94,6 +94,14 @@ public:
      */
     bool getDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst);
 
+    /**
+     * @brief getDeviceAtIndex 根据索引获取device
+     * @param name device name
+     * @param index
+     * @return device
+     */
+    DeviceBaseInfo *getBluetoothAtIndex(int index);
+
     // 鼠标设备相关 **************************************************************************************
 
     /**
