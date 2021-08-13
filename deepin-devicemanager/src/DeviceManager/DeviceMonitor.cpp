@@ -232,15 +232,13 @@ void DeviceMonitor::loadTableData()
 
 bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &rate)
 {
-    // 设置用的是哪个接口
-    if (info.startsWith("VGA"))
-        m_Interface = "VGA";
-    else if (info.startsWith("HDMI"))
-        m_Interface = "HDMI";
-    else if (info.startsWith("eDP"))
-        m_Interface = "eDP";
-    else if (info.startsWith("DisplayPort"))
-        m_Interface = "DisplayPort";
+    //  bug89456：显示设备接口类型DP，VGA，HDMI，eDP，DisplayPort
+    //  还可能会有其它接口类型，为了避免每一次遇到新的接口类型就要修改代码
+    //  使用正则表达式获取接口类型进行显示
+    QRegExp reStart("^([a-zA-Z]*)-[\\s\\S]*");
+    if (reStart.exactMatch(info)) {
+        m_Interface = reStart.cap(1);
+    }
 
     // 设置是否是主显示器
     if (info.contains("primary"))
