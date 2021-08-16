@@ -259,10 +259,10 @@ void PageOverview::getInfoFromEnv(QMap<QString, QString> &mapInfo)
                 continue;
             QString key = words[0];
             if (words[0] == "SW_IMG_VERSION") {
-                key = tr("SW_IMG_VERSION");
+                key = tr("SW_IMG_VERSION");        // 整机系统版本号
                 mapInfo.insert(key, words[1]);
             } else if (words[0] == "SW_HARDWARE_MODEL") {
-                key = tr("SW_HARDWARE_MODEL");
+                key = tr("SW_HARDWARE_MODEL");     // 整机产品名称
                 mapInfo.insert(key, words[1]);
             } else {
                 continue;
@@ -288,7 +288,7 @@ void PageOverview::getInfoFromDmi(QMap<QString, QString> &mapInfo)
                 continue;
             QString key = words[0];
             if (key == "Version") {
-                key = tr("SYSTEM_VERSION");
+                key = tr("SYSTEM_VERSION");   // 整机系统版本号
                 mapInfo.insert(key, words[1]);
             }
         }
@@ -311,6 +311,6 @@ void PageOverview::getInfoFromDmi(QMap<QString, QString> &mapInfo)
     if (lst.size() != 2)
         return;
 
-    mapInfo.insert(tr("SERIAL_NUMBER"), lst[0]);
-    mapInfo.insert(tr("TERMINAL_MODEL"), lst[1]);
+    mapInfo.insert(tr("SERIAL_NUMBER"), lst[0]);    // 整机序列号
+    mapInfo.insert(tr("TERMINAL_MODEL"), lst[1]);   // 整机产品名称
 }
