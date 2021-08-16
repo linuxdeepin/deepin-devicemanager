@@ -109,6 +109,18 @@ private:
      */
     void initWidgets();
 
+    /**
+     * @brief getInfoFromEnv : 瑞芯项目需求 Get info from /usr/local/vdi/base.env
+     * @param mapInfo
+     */
+    void getInfoFromEnv(QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief getInfoFromDmi : 实达项目需求
+     * @param mapInfo
+     */
+    void getInfoFromDmi(QMap<QString, QString> &mapInfo);
+
 private:
     DLabel                  *mp_PicLabel;
     LongTextLabel           *mp_DeviceLabel;

@@ -63,31 +63,8 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
 //    export SW_TCM_VERSION=0.0.5
 //    export SW_HARDWARE_MODEL整机产品名称="HT3300"
     QMap<QString, QString> mapCloud;
-    QFile file("/usr/local/vdi/base.env");
-    if (file.open(QIODevice::ReadOnly)) {
-        QString info = file.readAll();
-        file.close();
-
-        QStringList lines = info.split("\n");
-        foreach (QString line, lines) {
-            if (line.isEmpty())
-                continue;
-            line.replace("export ", "");
-            QStringList words = line.split("=");
-            if (words.size() != 2)
-                continue;
-            QString key = words[0];
-            if (words[0] == "SW_IMG_VERSION") {
-                key = tr("SW_IMG_VERSION");
-                mapCloud.insert(key, words[1]);
-            } else if (words[0] == "SW_HARDWARE_MODEL") {
-                key = tr("SW_HARDWARE_MODEL");
-                mapCloud.insert(key, words[1]);
-            } else {
-                continue;
-            }
-        }
-    }
+    getInfoFromEnv(mapCloud);
+    getInfoFromDmi(mapCloud);
     int row = map.size() + mapCloud.size() - 1;
 
     // 根据页面高度确定表格最多显示行数
@@ -263,4 +240,77 @@ void PageOverview::initWidgets()
     vLayout->addWidget(mp_Overview);
     vLayout->addStretch();
     setLayout(vLayout);
+}
+
+void PageOverview::getInfoFromEnv(QMap<QString, QString> &mapInfo)
+{
+    QFile file("/usr/local/vdi/base.env");
+    if (file.open(QIODevice::ReadOnly)) {
+        QString info = file.readAll();
+        file.close();
+
+        QStringList lines = info.split("\n");
+        foreach (QString line, lines) {
+            if (line.isEmpty())
+                continue;
+            line.replace("export ", "");
+            QStringList words = line.split("=");
+            if (words.size() != 2)
+                continue;
+            QString key = words[0];
+            if (words[0] == "SW_IMG_VERSION") {
+                key = tr("SW_IMG_VERSION");
+                mapInfo.insert(key, words[1]);
+            } else if (words[0] == "SW_HARDWARE_MODEL") {
+                key = tr("SW_HARDWARE_MODEL");
+                mapInfo.insert(key, words[1]);
+            } else {
+                continue;
+            }
+        }
+    }
+}
+
+void PageOverview::getInfoFromDmi(QMap<QString, QString> &mapInfo)
+{
+    // get SYSTEM_VERSION  /usr/share/version/VersionInfo
+    QFile file("/usr/share/version/VersionInfo");
+    if (file.open(QIODevice::ReadOnly)) {
+        QString info = file.readAll();
+        file.close();
+
+        QStringList lines = info.split("\n");
+        foreach (QString line, lines) {
+            if (line.isEmpty())
+                continue;
+            QStringList words = line.split("=");
+            if (words.size() != 2)
+                continue;
+            QString key = words[0];
+            if (key == "Version") {
+                key = tr("SYSTEM_VERSION");
+                mapInfo.insert(key, words[1]);
+            }
+        }
+    }
+
+    // get TERMINAL_MODEL
+    const QList<QMap<QString, QString>> &lstInfo = DeviceManager::instance()->cmdInfo("dmidecode1");
+    if (lstInfo.size() <= 0)
+        return;
+
+    const QMap<QString, QString> &mapt = lstInfo[0];
+    if (mapt.find("SKU Number") == mapt.end())
+        return;
+
+    QString info = mapt["SKU Number"];
+    if (!info.contains("|"))
+        return;
+
+    QStringList lst = info.split("|");
+    if (lst.size() != 2)
+        return;
+
+    mapInfo.insert(tr("SERIAL_NUMBER"), lst[0]);
+    mapInfo.insert(tr("TERMINAL_MODEL"), lst[1]);
 }
