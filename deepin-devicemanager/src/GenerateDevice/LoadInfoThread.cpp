@@ -1,11 +1,10 @@
 #include "LoadInfoThread.h"
+#include "GetInfoPool.h"
+#include "GenerateDevicePool.h"
+#include "DBusInterface.h"
 
 #include <QDebug>
 #include <QDateTime>
-
-#include "GetInfoPool.h"
-#include "GenerateDevicePool.h"
-#include "ZmqOrder.h"
 
 #include<malloc.h>
 
@@ -24,27 +23,14 @@ LoadInfoThread::~LoadInfoThread()
 {
     mp_ReadFilePool.deleteLater();
     mp_GenerateDevicePool.deleteLater();
-    if (mp_ZmqOrder) {
-        delete mp_ZmqOrder;
-        mp_ZmqOrder = nullptr;
-    }
 }
 
 
 void LoadInfoThread::run()
 {
-    if (!mp_ZmqOrder) {
-        mp_ZmqOrder = new ZmqOrder;
-        if (!mp_ZmqOrder->connect()) {
-            emit finished("finish");
-            m_Running = false;
-            return;
-        }
-    }
-
     // 请求后台更新信息
     m_Running = true;
-    if (mp_ZmqOrder->reqUpdateUI(m_Start)) {
+    if (DBusInterface::getInstance()->reqUpdateUI(m_Start)) {
         m_Start = false;
         mp_ReadFilePool.getAllInfo();
         mp_ReadFilePool.waitForDone(-1);
