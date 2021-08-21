@@ -85,15 +85,7 @@ void GetInfoPool::initCmd()
     m_CmdList.append({"dr_config", "dr_config.txt", ""});
 
     m_CmdList.append({ "hwinfo_monitor",       "hwinfo_monitor.txt",     tr("Loading CD-ROM Info...")});
-    m_CmdList.append({ "hwinfo_sound",         "hwinfo_sound.txt",       ""});
-    m_CmdList.append({ "hwinfo_usb",           "hwinfo_usb.txt",         ""});
-    m_CmdList.append({ "hwinfo_network",       "hwinfo_network.txt",     ""});
-    m_CmdList.append({ "hwinfo_keyboard",      "hwinfo_keyboard.txt",    tr("Loading Bluetooth Device Info...")});
-    m_CmdList.append({ "hwinfo_cdrom",         "hwinfo_cdrom.txt",       tr("Loading Image Devices Info...")});
-    // 注意：这里一定要用 sudo hwinfo --disk,因为很多机器只有加上sudo 才能获取硬盘的大小
-    m_CmdList.append({ "hwinfo_disk",          "hwinfo_disk.txt",        tr("Loading Keyboard Info...")});
-    m_CmdList.append({ "hwinfo_display",       "hwinfo_display.txt",     ""});
-    m_CmdList.append({ "hwinfo_mouse",         "hwinfo_mouse.txt",       ""});
+    m_CmdList.append({ "hwinfo",         "hwinfo.txt",       ""});
 
 
     m_CmdList.append({ "upower",               "upower_dump.txt",        ""});
