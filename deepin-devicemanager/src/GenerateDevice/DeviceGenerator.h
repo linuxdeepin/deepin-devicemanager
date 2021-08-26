@@ -140,6 +140,12 @@ public:
      */
     const QStringList &getBusIDFromHwinfo();
 
+    /**
+     * @brief getProductName: 获取系统产品名称
+     * @return QString 系统产品名称
+     */
+    static const QString getProductName();
+
 protected:
 
     /**
