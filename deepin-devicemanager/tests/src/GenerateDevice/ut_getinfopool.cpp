@@ -27,7 +27,7 @@
 #include <gtest/gtest.h>
 #include "../stub.h"
 
-class ReadFilePool_UT : public UT_HEAD
+class GetInfoPool_UT : public UT_HEAD
 {
 public:
     void SetUp()
@@ -68,7 +68,7 @@ void ut_ThreadPool_start()
     return;
 }
 
-TEST_F(ReadFilePool_UT, ReadFilePool_UT_readAllFile)
+TEST_F(GetInfoPool_UT, ReadFilePool_UT_readAllFile)
 {
     Stub stub;
     stub.set(ADDR(QThreadPool, start), ut_ThreadPool_start);
