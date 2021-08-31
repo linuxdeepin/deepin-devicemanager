@@ -300,7 +300,7 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
     QMap<QString, QString> mapInfo;
     QStringList lines = deviceInfo.split("\n");
     foreach (const QString &line, lines) {
-        QRegExp reg(".*([0-9]{2}:[0-9]{2}.[0-9]{1}): VRAM([=:]{1}) ([0-9]*)M.*");
+        QRegExp reg(".*([0-9]{2}:[0-9]{2}\\.[0-9]{1}).*VRAM([=:]{1}) ([0-9]*).*");  // 根据显卡驱动信息调整扩大匹配范围[    3.504986] nouveau 0000:01:00.0: DRM: VRAM: 2048 MiB
         if (reg.exactMatch(line)) {
             double size = reg.cap(3).toDouble();
             QString sizeS = QString("%1GB").arg(size / 1024);
