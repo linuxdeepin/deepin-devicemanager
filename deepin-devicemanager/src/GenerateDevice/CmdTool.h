@@ -140,6 +140,12 @@ private:
     void loadHwinfoInfo(const QString &key, const QString &debugfile);
 
     /**
+     * @brief getMulHwinfoInfo : 解析 hwinfo --sound --network --keyboard --cdrom --disk --display --mouse --usb
+     * @param mapLstMap
+     */
+    void getMulHwinfoInfo(const QString &info);
+
+    /**
      * @brief loadHwinfoUsbInfo
      * @param item
      * @param mapInfo
@@ -318,6 +324,28 @@ private:
      * @param mapInfo:解析得到的设备信息map
      */
     void addMapInfo(const QString &key, const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief addMouseKeyboardInfoMapInfo : 添加map信息
+     * @param key : 与命令对应的关键字
+     * @param mapInfo : 解析得到的设备信息map
+     */
+    void addMouseKeyboardInfoMapInfo(const QString &key, const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief addUsbMapInfo
+     * @param key
+     * @param mapInfo
+     */
+    void addUsbMapInfo(const QString &key, const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief containsInfoInTheMap 判断一个map里面有一个str
+     * @param info
+     * @param mapInfo
+     * @return
+     */
+    bool containsInfoInTheMap(const QString &info, const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief getMapInfo:解析打印机cups第三方库获取的信息

@@ -67,11 +67,6 @@ public:
 
 private:
     /**
-     * @brief runHwinfoCmd run hwinfo command
-     */
-    void runHwinfoCmd();
-
-    /**
      * @brief runCmdToCache
      * @param cmd
      */
@@ -85,7 +80,6 @@ private:
 private:
     QList<Cmd>        m_ListCmd;             // all cmd
     QList<Cmd>        m_ListUpdate;          // update cmd
-    QList<Cmd>        m_ListHwinfo;          // hwinfo cmd
 };
 
 #endif // THREADPOOL_H
