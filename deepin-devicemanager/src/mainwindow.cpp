@@ -570,30 +570,21 @@ void MainWindow::loadSettings()
 QString MainWindow::getArchString()
 {
     QProcess process;
-    process.start("uname -m");
+    process.start("gdbus introspect -y -d com.deepin.system.SystemInfo -o /com/deepin/system/SystemInfo -p");
     process.waitForFinished(1000);
-    QString struction = process.readAllStandardOutput().trimmed();
-    process.exitCode();
+    QString deviceInfo = process.readAllStandardOutput().trimmed();
 
-#ifdef TEST_DATA_FROM_FILE
-    QFile inputDeviceFile(DEVICEINFO_PATH + "/" + "uname_m.txt");
-    bool res = inputDeviceFile.open(QIODevice::ReadOnly);
-    if (res) {
-        struction = inputDeviceFile.readAll().trimmed();
-    } else {
-        struction = "x86_64";
-    }
-    inputDeviceFile.close();
-#endif
-
-    if (struction == "aarch64") {
-        QString hw = DeviceInfoParser::Instance().loadGeneratorKey();
-        if (!hw.isEmpty()) {
-            struction = hw;
-        }
+    // 获取设备信息
+    QString key = "PanGuV";
+    if (deviceInfo.contains("klu")) { // klu 华为确认将判断条件改为L410 KLVU-WDU0
+        key = "KLU";
+    }  else if (deviceInfo.contains("PGUV")) { // panguv PGUV-WBX0/PGUV-WBY0包含PGUV即为PanGuV机器
+        key = "PanGuV";
+    } else if (deviceInfo.contains("KLV")) { // klv L420
+        key = "KLV";
     }
 
-    return struction;
+    return key;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)

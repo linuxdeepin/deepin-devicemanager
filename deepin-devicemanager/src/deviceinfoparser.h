@@ -56,7 +56,6 @@ public:
     void getPKStr(QString &dtStr, QString &dtInt, const QString &cStr);
 
 public:
-    QString loadGeneratorKey();
     bool getRootPassword();
 
     QString standOutput_;

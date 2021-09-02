@@ -248,19 +248,15 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
     cmdList.append({ "xrandr_verbose",       "xrandr --verbose",        "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
     cmdList.append({ "dmesg",                "sudo dmesg",              "dmesg.txt",              tr("Loading Power Info...")});
     cmdList.append({ "hciconfig",            "hciconfig -a",            "hciconfig.txt",          tr("Loading Printer Info...")});
-
-    if (arch == "KLU" || arch == "PanGuV") {
-        cmdList.append({ "gpuinfo",              "gpuinfo",                 "gpuinfo.txt",            ""});
-        cmdList.append({ "bootdevice",           "cat /proc/bootdevice/product_name",                 "bootdevice.txt",            ""});
-    }
-
+    cmdList.append({ "gpuinfo",              "gpuinfo",                 "gpuinfo.txt",            ""});
+    cmdList.append({ "bootdevice",           "cat /proc/bootdevice/product_name",                 "bootdevice.txt",            ""});
     cmdList.append({ "cat_cpuinfo",          "cat /proc/cpuinfo",       "cat_cpuinfo.txt",        tr("Loading Monitor Info...")});
     cmdList.append({ "cat_boardinfo",        "cat /proc/boardinfo",     "cat_boardinfo.txt",      tr("Loading Mouse Info...")});
     cmdList.append({ "cat_os_release",       "cat /etc/os-release",     "cat_os_release.txt",     tr("Loading Network Adapter Info...")});
     cmdList.append({ "cat_version",          "cat /proc/version",       "cat_version.txt",        ""});
     cmdList.append({ "cat_devices",          "cat /proc/bus/input/devices", "cat_devices.txt",     ""});
     cmdList.append({ "cat_audio",            "cat /proc/asound/card0/codec#0", "cat_audio.txt",     ""});
-//    cmdList.append({ "bt_device",            "bluetoothctl paired-devices",    "bt_device.txt",     ""});   // 蓝牙设备配对信息
+    cmdList.append({ "wifiinfo",              "cat /sys/hisys/wal/wifi_devices_info",  "wifiinfo.txt",            ""});
 
     if (arch == "PanGuV") {
         cmdList.append({ "EDID_HDMI",            "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid", "EDID_HDMI.txt",     ""});
@@ -268,11 +264,6 @@ void ThreadPool::getCmdList(QList<QStringList> &cmdList, const QString &arch)
         cmdList.append({ "EDID_HDMI",            "hexdump /sys/devices/platform/hldrm/drm/card0/card0-HDMI-A-1/edid", "EDID_HDMI.txt",     ""});
         cmdList.append({ "EDID_VGA",             "hexdump /sys/devices/platform/hldrm/drm/card0/card0-VGA-1/edid", "EDID_VGA.txt",     ""});
     }
-
-    if (arch == "KLU") {
-        cmdList.append({ "wifiinfo",              "cat /sys/hisys/wal/wifi_devices_info",  "wifiinfo.txt",            ""});
-    }
-
     m_AllCmdNum = cmdList.size();
 }
 
