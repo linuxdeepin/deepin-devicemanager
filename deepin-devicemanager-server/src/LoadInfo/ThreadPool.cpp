@@ -1,5 +1,6 @@
 #include "ThreadPool.h"
 #include "ThreadPoolTask.h"
+#include "DeviceInfoManager.h"
 
 #include <QObjectCleanupHandler>
 #include <QProcess>
@@ -15,51 +16,47 @@ ThreadPool::ThreadPool(QObject *parent)
     dir.mkdir(PATH);
 }
 
-void ThreadPool::generateDeviceFile()
+void ThreadPool::loadDeviceInfo()
 {
     // 根据m_ListCmd生成所有设备信息
-//    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
-//    cleaner->setParent(this);
     QList<Cmd>::iterator it = m_ListCmd.begin();
     for (; it != m_ListCmd.end(); ++it) {
         ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-//        cleaner->add(task);
         start(task);
         task->setAutoDelete(true);
     }
 }
 
-void ThreadPool::updateDeviceFile()
+void ThreadPool::updateDeviceInfo()
 {
     // 根据m_ListCmd生成所有设备信息
-//    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
-//    cleaner->setParent(this);
     QList<Cmd>::iterator it = m_ListUpdate.begin();
     for (; it != m_ListUpdate.end(); ++it) {
         ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-//        cleaner->add(task);
         start(task);
         task->setAutoDelete(true);
     }
+}
+
+void ThreadPool::runCmdToCache(const Cmd &cmd)
+{
+    QString key = cmd.file;
+    key.replace(".txt", "");
+
+    // 2. 执行命令获取设备信息
+    QString info;
+    QProcess process;
+    QString cmdT = cmd.cmd;
+    QStringList options;
+    options << "-c" << cmdT.replace(QString(" >  ") + PATH + cmd.file, "");
+    process.start("/bin/bash", options);
+    process.waitForFinished(-1);
+    info = process.readAllStandardOutput();
+    DeviceInfoManager::getInstance()->addInfo(key, info);
 }
 
 void ThreadPool::initCmd()
 {
-    // According to Huawei's requirements , Modify the way of judging klu and panguv
-    // 获取华为KLU、PanguV信息
-    Cmd cmdDbus;
-    cmdDbus.cmd = QString("%1 %2%3").arg("gdbus introspect -y -d com.deepin.system.SystemInfo -o /com/deepin/system/SystemInfo -p >").arg(PATH).arg("gdbus.txt");
-    cmdDbus.file = "gdbus.txt";
-    cmdDbus.canNotReplace = false;
-    m_ListCmd.append(cmdDbus);
-
-    // 获取架构信息
-    Cmd cmdUname;
-    cmdUname.cmd = QString("%1 %2%3").arg("uname -m > ").arg(PATH).arg("uname_m.txt");
-    cmdUname.file = "uname_m.txt";
-    cmdUname.canNotReplace = false;
-    m_ListCmd.append(cmdUname);
-
     // 添加lshw命令
     Cmd cmdLshw;
     cmdLshw.cmd = QString("%1 %2%3").arg("lshw > ").arg(PATH).arg("lshw.txt");
@@ -123,70 +120,6 @@ void ThreadPool::initCmd()
     cmdDmi17.file = "dmidecode_17.txt";
     cmdDmi17.canNotReplace = true;
     m_ListCmd.append(cmdDmi17);
-
-    // 添加hwinfo --sound命令
-    Cmd cmdHwinfoSound;
-    cmdHwinfoSound.cmd = QString("%1 %2%3").arg("hwinfo --sound > ").arg(PATH).arg("hwinfo_sound.txt");
-    cmdHwinfoSound.file = "hwinfo_sound.txt";
-    cmdHwinfoSound.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoSound);
-    m_ListUpdate.append(cmdHwinfoSound);
-
-    // 添加hwinfo --usb命令
-    Cmd cmdHwinfoUsb;
-    cmdHwinfoUsb.cmd = QString("%1 %2%3").arg("hwinfo --usb > ").arg(PATH).arg("hwinfo_usb.txt");
-    cmdHwinfoUsb.file = "hwinfo_usb.txt";
-    cmdHwinfoUsb.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoUsb);
-    m_ListUpdate.append(cmdHwinfoUsb);
-
-    // 添加hwinfo --network命令
-    Cmd cmdHwinfoNetwork;
-    cmdHwinfoNetwork.cmd = QString("%1 %2%3").arg("hwinfo --network > ").arg(PATH).arg("hwinfo_network.txt");
-    cmdHwinfoNetwork.file = "hwinfo_network.txt";
-    cmdHwinfoNetwork.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoNetwork);
-    m_ListUpdate.append(cmdHwinfoNetwork);
-
-    // 添加hwinfo --keyboard命令
-    Cmd cmdHwinfoKeyboard;
-    cmdHwinfoKeyboard.cmd = QString("%1 %2%3").arg("hwinfo --keyboard > ").arg(PATH).arg("hwinfo_keyboard.txt");
-    cmdHwinfoKeyboard.file = "hwinfo_keyboard.txt";
-    cmdHwinfoKeyboard.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoKeyboard);
-    m_ListUpdate.append(cmdHwinfoKeyboard);
-
-    // 添加hwinfo --network命令
-    Cmd cmdHwinfoCdrom;
-    cmdHwinfoCdrom.cmd = QString("%1 %2%3").arg("hwinfo --cdrom > ").arg(PATH).arg("hwinfo_cdrom.txt");
-    cmdHwinfoCdrom.file = "hwinfo_cdrom.txt";
-    cmdHwinfoCdrom.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoCdrom);
-    m_ListUpdate.append(cmdHwinfoCdrom);
-
-    // 添加hwinfo --disk命令
-    Cmd cmdHwinfoDisk;
-    cmdHwinfoDisk.cmd = QString("%1 %2%3").arg("hwinfo --disk > ").arg(PATH).arg("hwinfo_disk.txt");
-    cmdHwinfoDisk.file = "hwinfo_disk.txt";
-    cmdHwinfoDisk.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoDisk);
-    m_ListUpdate.append(cmdHwinfoDisk);
-
-    // 添加hwinfo --display命令
-    Cmd cmdHwinfoDisplay;
-    cmdHwinfoDisplay.cmd = QString("%1 %2%3").arg("hwinfo --display > ").arg(PATH).arg("hwinfo_display.txt");
-    cmdHwinfoDisplay.file = "hwinfo_display.txt";
-    cmdHwinfoDisplay.canNotReplace = true;
-    m_ListCmd.append(cmdHwinfoDisplay);
-    m_ListUpdate.append(cmdHwinfoDisplay);
-
-    // 添加hwinfo --mouse命令
-    Cmd cmdHwinfoMouse;
-    cmdHwinfoMouse.cmd = QString("%1 %2%3").arg("hwinfo --mouse > ").arg(PATH).arg("hwinfo_mouse.txt");
-    cmdHwinfoMouse.file = "hwinfo_mouse.txt";
-    cmdHwinfoMouse.canNotReplace = false;
-    m_ListCmd.append(cmdHwinfoMouse);
-    m_ListUpdate.append(cmdHwinfoMouse);
 
     // 添加hwinfo --power命令
     Cmd cmdUpower;
@@ -268,42 +201,10 @@ void ThreadPool::initCmd()
     cmdLsMod.canNotReplace = true;
     m_ListCmd.append(cmdLsMod);
 
-    //    if (info.contains("klu")) {
-    //        Cmd cmdGpuinfo;
-    //        cmdGpuinfo.cmd = "gpuinfo";
-    //        cmdGpuinfo.file = "gpuinfo.txt";
-    //        cmdGpuinfo.canNotReplace = true;
-    //        m_ListCmd.append(cmdGpuinfo);
-
-    //        Cmd cmdBootdevice;
-    //        cmdBootdevice.cmd = "cat /proc/bootdevice/product_name";
-    //        cmdBootdevice.file = "bootdevice.txt";
-    //        cmdBootdevice.canNotReplace = false;
-    //        m_ListCmd.append(cmdBootdevice);
-
-    //    } else if (info.contains("panguV")) {
-    //        Cmd cmdGpuinfo;
-    //        cmdGpuinfo.cmd = "gpuinfo";
-    //        cmdGpuinfo.file = "gpuinfo.txt";
-    //        cmdGpuinfo.canNotReplace = true;
-    //        m_ListCmd.append(cmdGpuinfo);
-
-    //        Cmd cmdBootdevice;
-    //        cmdBootdevice.cmd = "cat /proc/bootdevice/product_name";
-    //        cmdBootdevice.file = "bootdevice.txt";
-    //        cmdBootdevice.canNotReplace = false;
-    //        m_ListCmd.append(cmdBootdevice);
-
-    //        Cmd cmdEdidHdmi;
-    //        cmdEdidHdmi.cmd = "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid";
-    //        cmdEdidHdmi.file = "EDID_HDMI.txt";
-    //        cmdEdidHdmi.canNotReplace = false;
-    //        m_ListCmd.append(cmdEdidHdmi);
-
-    //        Cmd cmdEdidVGA;
-    //        cmdEdidVGA.cmd = "hexdump /sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid";
-    //        cmdEdidVGA.file = "EDID_VGA.txt";
-    //        cmdEdidVGA.canNotReplace = false;
-    //        m_ListCmd.append(cmdEdidVGA);
-    //    }
+    Cmd cmdHwinfo;
+    cmdHwinfo.cmd = QString("%1 %2%3").arg("hwinfo --sound --network --keyboard --cdrom --disk --display --mouse --usb > ").arg(PATH).arg("hwinfo.txt");
+    cmdHwinfo.file = "hwinfo.txt";
+    cmdHwinfo.canNotReplace = false;
+    m_ListCmd.append(cmdHwinfo);
+    m_ListUpdate.append(cmdHwinfo);
 }

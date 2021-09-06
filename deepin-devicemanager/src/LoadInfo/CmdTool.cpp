@@ -28,7 +28,64 @@ void CmdTool::addMapInfo(const QString &key, const QMap<QString, QString> &mapIn
         lstMap.append(mapInfo);
         m_cmdInfo.insert(key, lstMap);
     }
+}
 
+void CmdTool::addMouseKeyboardInfoMapInfo(const QString &key, const QMap<QString, QString> &mapInfo)
+{
+    if (containsInfoInTheMap("Linux Foundation", mapInfo) // 在服务器版本中发现，hwinfo --mouse 和 hwinfo --keyboard获取的信息里面有多余的无用信息，需要过滤
+            || containsInfoInTheMap("Elite Remote Control Driver", mapInfo) // 在笔记本中发现了一个多余信息，做特殊处理 Elite Remote Control Driver
+            || containsInfoInTheMap("serial console", mapInfo) // 鲲鹏台式机子上发现一条多余信息  Model: "serial console"
+            || containsInfoInTheMap("Wacom", mapInfo)) { // 数位板信息被显示成了mouse信息,这里需要做特殊处理(搞不懂数位板为什么不能显示成鼠标)
+        return;
+    }
+    addMapInfo(key, mapInfo);
+}
+
+void CmdTool::addUsbMapInfo(const QString &key, const QMap<QString, QString> &mapInfo)
+{
+    QList<QMap<QString, QString>>::iterator it = m_cmdInfo["hwinfo_usb"].begin();
+    // 有的是有同一个设备有两段信息，我们只需要一个
+    // 比如 SysFS BusID: 1-3:1.2   和  SysFS BusID: 1-3:1.0 这个是同一个设备
+    // 我们只需要一个
+    for (; it != m_cmdInfo["hwinfo_usb"].end(); ++it) {
+        QString curBus = (*it)["SysFS BusID"];
+        QString newBus = mapInfo["SysFS BusID"];
+        curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+        newBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+        if (curBus == newBus) {
+            return;
+        }
+    }
+
+    // 这个是用来过滤，没有接入任何设备的usb接口
+    if (mapInfo["Model"].contains("Linux Foundation"))
+        return;
+
+    if (mapInfo["Hardware Class"].contains("hub", Qt::CaseInsensitive))
+        return;
+
+    // 打印机几信息不从hwinfo --usb里面获取，需要过滤
+    if (containsInfoInTheMap("Printer", mapInfo) || containsInfoInTheMap("LaserJet", mapInfo))
+        return;
+
+    // 提前过滤掉键盘鼠标
+    if (containsInfoInTheMap("mouse", mapInfo) || containsInfoInTheMap("keyboard", mapInfo))
+        return;
+
+    // 这里特殊处理数位板信息，通过hwinfo --mouse可以获取到数位板信息，但是根据需求数位板应该在其它设备里面(虽然这很不合理)
+    // 所以这里需要做特殊处理 即 item 里面包含了 Wacom 的 就说明是数位板设备，那就应该添加到其它设备里面
+    if (containsInfoInTheMap("Wacom", mapInfo))
+        return;
+    addMapInfo(key, mapInfo);
+}
+
+bool CmdTool::containsInfoInTheMap(const QString &info, const QMap<QString, QString> &mapInfo)
+{
+    foreach (const QString &key, mapInfo.keys()) {
+        if (mapInfo[key].contains(info, Qt::CaseInsensitive))
+            return true;
+    }
+    return false;
 }
 
 void CmdTool::getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src)
@@ -408,38 +465,52 @@ void CmdTool::loadPrinterInfo()
 
 void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 {
-    // 获取文件信息
+    // 显示屏信息从前台直接获取
     QString deviceInfo;
-    if (key == "hwinfo_monitor")
+    if (key == "hwinfo_monitor") {
         getDeviceInfoFromCmd(deviceInfo, "hwinfo --monitor");
-    else
+        QStringList items = deviceInfo.split("\n\n");
+        foreach (const QString &item, items) {
+            if (item.isEmpty())
+                continue;
+            QMap<QString, QString> mapInfo;
+            getMapInfoFromHwinfo(item, mapInfo);
+            addMapInfo(key, mapInfo);
+        }
+    } else { // 处理其它信息 mouse sound keyboard usb display cdrom disk
         getDeviceInfo(deviceInfo, debugfile);
+        qInfo() << deviceInfo;
+        getMulHwinfoInfo(deviceInfo);
+    }
+}
 
-    QStringList items = deviceInfo.split("\n\n");
+void CmdTool::getMulHwinfoInfo(const QString &info)
+{
+    QStringList items = info.split("\n\n");
     foreach (const QString &item, items) {
         if (item.isEmpty())
             continue;
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
-
-        // hwinfo --usb 里面有很多的无用信息，需要特殊处理
-        if (key == "hwinfo_usb") {
-            loadHwinfoUsbInfo(item, mapInfo);
-        } else if (key == "hwinfo_mouse" || key == "hwinfo_keyboard") {
-            if (!item.contains("Linux Foundation") && // 在服务器版本中发现，hwinfo --mouse 和 hwinfo --keyboard获取的信息里面有多余的无用信息，需要过滤
-                    !item.contains("Elite Remote Control Driver") && // 在笔记本中发现了一个多余信息，做特殊处理 Elite Remote Control Driver
-                    !item.contains("Model: \"serial console\"") && // 鲲鹏台式机子上发现一条多余信息  Model: "serial console"
-                    !item.contains("Wacom", Qt::CaseInsensitive)) { // 数位板信息被显示成了mouse信息,这里需要做特殊处理(搞不懂数位板为什么不能显示成鼠标)
-
-                addMapInfo(key, mapInfo);
-            }
-        } else if (key == "hwinfo_display") {
+        if (mapInfo["Hardware Class"] == "sound") {
+            addMapInfo("hwinfo_sound", mapInfo);
+        } else if (mapInfo["Hardware Class"] == "network interface") {
+            addMapInfo("hwinfo_network", mapInfo);
+        } else if (mapInfo["Hardware Class"] == "keyboard") {
+            addMouseKeyboardInfoMapInfo("hwinfo_keyboard", mapInfo);
+        } else if (mapInfo["Hardware Class"] == "mouse") {
+            addMouseKeyboardInfoMapInfo("hwinfo_mouse", mapInfo);
+        } else if (mapInfo["Hardware Class"] == "cdrom") {
+            addMapInfo("hwinfo_cdrom", mapInfo);
+        } else if (mapInfo["Hardware Class"] == "disk") {
+            addMapInfo("hwinfo_disk", mapInfo);
+        } else if (mapInfo["Hardware Class"] == "graphics card") {
             if (mapInfo["Device"].contains("Graphics Processing Unit"))
                 continue;
-            addMapInfo(key, mapInfo);
+            addMapInfo("hwinfo_display", mapInfo);
         } else {
-            addMapInfo(key, mapInfo);
+            addUsbMapInfo("hwinfo_usb", mapInfo);
         }
     }
 }
