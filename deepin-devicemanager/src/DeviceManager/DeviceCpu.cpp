@@ -166,7 +166,8 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 
 void DeviceCpu::setCurFreq(const QString &curFreq)
 {
-    m_CurFrequency = curFreq;
+    if(!curFreq.isEmpty())
+        m_CurFrequency = curFreq;
 }
 
 void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
