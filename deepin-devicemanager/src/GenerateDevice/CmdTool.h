@@ -146,13 +146,6 @@ private:
     void getMulHwinfoInfo(const QString &info);
 
     /**
-     * @brief loadHwinfoUsbInfo
-     * @param item
-     * @param mapInfo
-     */
-    void loadHwinfoUsbInfo(const QString &item, const QMap<QString, QString> &mapInfo);
-
-    /**
      * @brief loadDmidecodeInfo:加载dmidecode信息
      * @param key:与cmd对应的关键字
      * @param debugfile:调试文件名
@@ -208,20 +201,6 @@ private:
     void loadCatAudioInfo(const QString &key, const QString &debugfile);
 
     /**
-     * @brief loadEdidInfo
-     * @param key:EDID_HDMI、EDID_VGA
-     * @param debugfile:调试文件名
-     */
-    void loadEdidInfo(const QString &key, const QString &debugfile);
-
-    /**
-     * @brief loadGpuInfo:加载gpuinfo信息
-     * @param key:gpuinfo
-     * @param debugfile:调试文件名
-     */
-    void loadGpuInfo(const QString &key, const QString &debugfile);
-
-    /**
      * @brief loadCatConfigInfo:cat /boot/config* | grep '=y'信息
      * @param key:dr_config
      * @param debugfile:调试文件名
@@ -233,13 +212,6 @@ private:
      * @param debugfile:调试文件名
      */
     void loadBootDeviceManfid(const QString &key, const QString &debugfile);
-
-    /**
-     * @brief loadBluetoothPairedDevices:加载蓝牙设备配对信息
-     * @param key:bt_device
-     * @param debugfile:调试文件名
-     */
-    void loadBluetoothPairedDevices(const QString &key, const QString &debugfile);
 
     /**
      * @brief getSMBIOSVersion:获取SMBIOS版本号

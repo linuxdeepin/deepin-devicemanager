@@ -129,16 +129,6 @@ TEST_F(CmdTool_UT, CmdTool_UT_loadBluetoothCtlInfo)
     m_cmdTool->loadBluetoothCtlInfo(mapInfo);
 }
 
-TEST_F(CmdTool_UT, CmdTool_UT_loadHwinfoUsbInfo)
-{
-    QList<QMap<QString, QString>> list;
-    QMap<QString, QString> mapInfo;
-    mapInfo.insert("SysFS BusI", "model");
-    list.append(mapInfo);
-    m_cmdTool->m_cmdInfo.insert("hwinfo_usb", list);
-    m_cmdTool->loadHwinfoUsbInfo("Printer", mapInfo);
-}
-
 TEST_F(CmdTool_UT, CmdTool_UT_loadDmidecode2Info)
 {
     m_cmdTool->loadDmidecode2Info("SMBIOS Version", "/");
