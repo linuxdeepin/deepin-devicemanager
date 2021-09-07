@@ -18,16 +18,16 @@
 #include "DeviceFactory.h"
 #include "X86Generator.h"
 #include "GenerateDevicePool.h"
+#include "ut_Head.h"
+#include "stub.h"
 
-#include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class GenerateTask_UT : public UT_HEAD
+class UT_GenerateTask : public UT_HEAD
 {
 public:
     void SetUp()
@@ -42,7 +42,7 @@ public:
     DeviceType type = DT_Cpu;
 };
 
-class GenerateDevicePool_UT : public UT_HEAD
+class UT_GenerateDevicePool : public UT_HEAD
 {
 public:
     void SetUp()
@@ -56,21 +56,14 @@ public:
     GenerateDevicePool *m_generateDevicePool;
 };
 
-DeviceGenerator *ut_getDeviceGenerator()
-{
-    DeviceGenerator *generator = nullptr;
-    generator = new X86Generator();
-    return generator;
+// void initType();
+TEST_F(UT_GenerateDevicePool,UT_GenerateDevicePool_initType){
+    m_generateDevicePool->m_TypeList.clear();
+    m_generateDevicePool->initType();
+    EXPECT_EQ(16, m_generateDevicePool->m_TypeList.size());
 }
 
-TEST_F(GenerateTask_UT, GenerateTask_UT_run)
-{
-    Stub stub;
-    stub.set(ADDR(DeviceFactory, getDeviceGenerator), ut_getDeviceGenerator);
-    m_generateTask->run();
-}
-
-TEST_F(GenerateDevicePool_UT, GenerateDevicePool_UT_generateDevice)
-{
+TEST_F(UT_GenerateDevicePool,UT_GenerateDevicePool_generateDevice){
     m_generateDevicePool->generateDevice();
+    EXPECT_EQ(m_generateDevicePool->m_FinishedGenerator,0);
 }
