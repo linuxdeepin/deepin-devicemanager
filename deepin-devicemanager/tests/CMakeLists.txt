@@ -98,6 +98,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D${CMAKE_SAFETYTEST}")
 #Include all third
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/docx/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/)
 
 #add cups
 include_directories("/usr/include/cups/")

@@ -99,23 +99,6 @@ bool ut_CmdTool_exacMatch1()
     return true;
 }
 
-TEST_F(CmdTool_UT, CmdTool_UT_loadXrandrInfo)
-{
-    Stub stub;
-    stub.set((bool (QString::*)(QChar, Qt::CaseSensitivity) const)ADDR(QString, startsWith), ut_startsWith);
-    stub.set(ADDR(QRegExp, exactMatch), ut_CmdTool_exacMatch1);
-    m_cmdTool->loadXrandrInfo("/");
-}
-
-TEST_F(CmdTool_UT, CmdTool_UT_loadXrandrVerboseInfo)
-{
-    Stub stub;
-    //    stub.set((bool (QString::*)(QChar,Qt::CaseSensitivity) const)ADDR(QString,startsWith),ut_startsWith);
-    stub.set(ADDR(QRegExp, exactMatch), ut_CmdTool_exacMatch);
-    m_cmdTool->loadXrandrVerboseInfo("/");
-    m_cmdTool->loadDmesgInfo("/");
-}
-
 TEST_F(CmdTool_UT, CmdTool_UT_loadBiosInfoFromLspci)
 {
     QString chipsetFamliy = "/n";
@@ -173,13 +156,6 @@ TEST_F(CmdTool_UT, CmdTool_UT_getMapInfoFromHwinfo)
     QMap<QString, QString> mapInfo;
     mapInfo.insert("SysFS BusI", "model");
     m_cmdTool->getMapInfoFromHwinfo("SMBIOS\nSys", mapInfo, "IO");
-}
-
-TEST_F(CmdTool_UT, CmdTool_UT_addWidthToMap)
-{
-    QMap<QString, QString> mapInfo;
-    mapInfo.insert("SysFS ID", "BUS");
-    m_cmdTool->addWidthToMap(mapInfo);
 }
 
 TEST_F(CmdTool_UT, CmdTool_UT_getMapInfoFromDmidecode)

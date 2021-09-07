@@ -255,92 +255,6 @@ void CmdTool::loadSmartCtlInfo(const QString &logicalName, const QString &debugf
     addMapInfo("smart", mapInfo);
 }
 
-void CmdTool::loadXrandrInfo(const QString &debugfile)
-{
-    // 读取信息
-    QString deviceInfo;
-    if (!getDeviceInfoFromCmd(deviceInfo, debugfile))
-        return;
-
-    QMap<QString, QString> mapInfo;
-    QStringList lines = deviceInfo.split("\n");
-    foreach (const QString &line, lines) {
-        // 刷新率
-        QRegExp reResolution("^[\\s]{3}([0-9]{3,5}x[0-9]{3,5}).*([0-9]{2,3}.[0-9]{2,3}\\*).*");
-        if (reResolution.exactMatch(line)) {
-            QString rate = reResolution.cap(2).replace("*", "");
-            mapInfo.insert("rate", rate);
-        }
-
-        // 最大,最小,当前分辨率
-        if (line.startsWith("Screen")) {
-            QRegExp re(".*([0-9]{3,5}\\sx\\s[0-9]{3,5}).*([0-9]{3,5}\\sx\\s[0-9]{3,5}).*([0-9]{3,5}\\sx\\s[0-9]{3,5}).*");
-            if (re.exactMatch(line)) {
-                mapInfo["minResolution"] = re.cap(1);
-                mapInfo["curResolution"] = re.cap(2);
-                mapInfo["maxResolution"] = re.cap(3);
-            }
-        } else if (line.startsWith("HDMI")) {           // HDMI 接口
-            mapInfo["HDMI"] = "Enable";
-        } else if (line.startsWith("VGA")) {            // HDMI 接口
-            mapInfo["VGA"] = "Enable";
-        } else if (line.startsWith("DP")
-                   || line.startsWith("DisplayPort"))  {        // DP 接口
-            mapInfo["DP"] = "Enable";
-        } else if (line.startsWith("eDP")) {                    // eDP 接口
-            mapInfo["eDP"] = "Enable";
-        } else if (line.startsWith("DVI")) {                    // DVI 接口
-            mapInfo["DVI"] = "Enable";
-        }
-    }
-    addMapInfo("xrandr", mapInfo);
-}
-
-void CmdTool::loadXrandrVerboseInfo(const QString &debugfile)
-{
-    // 读取文件信息
-    QString deviceInfo;
-    if (!getDeviceInfoFromCmd(deviceInfo, debugfile))
-        return;
-
-    QStringList lines = deviceInfo.split(QRegExp("\n"));
-    QString mainInfo("");
-    QString edid("");
-    foreach (QString line, lines) {
-        if (line.startsWith("Screen"))
-            continue;
-        QRegExp reResolution("^[\\s]{2}([0-9]{3,4}x[0-9]{3,4}).*");
-        if (reResolution.exactMatch(line))
-            continue;
-
-        // 主屏幕信息
-        QRegExp reMain("^[a-zA-Z].*");
-        if (reMain.exactMatch(line)) {
-            if (!mainInfo.isEmpty()) {
-                QMap<QString, QString> mapInfo;
-                mapInfo.insert("mainInfo", mainInfo.trimmed());
-                mapInfo.insert("edid", edid.trimmed());
-                addMapInfo("xrandr_verbose", mapInfo);
-            }
-            mainInfo = line;
-            edid = "";
-            continue;
-        }
-
-        // edid信息
-        QRegExp reEdid("^[\\t]{2}[0-9]{1}.*");
-        if (reEdid.exactMatch(line)) {
-            edid.append(line.trimmed());
-            edid.append("\n");
-            continue;
-        }
-    }
-    QMap<QString, QString> mapInfo;
-    mapInfo.insert("mainInfo", mainInfo.trimmed());
-    mapInfo.insert("edid", edid.trimmed());
-    addMapInfo("xrandr_verbose", mapInfo);
-}
-
 void CmdTool::loadDmesgInfo(const QString &debugfile)
 {
     QString deviceInfo;
@@ -918,27 +832,6 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
                     mapInfo[words[0].trimmed()] = words[1].trimmed();
             }
         }
-    }
-}
-
-void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
-{
-    if (mapInfo.find("SysFS ID") == mapInfo.end())
-        return;
-
-    QString pci = mapInfo["SysFS ID"];
-    pci = pci.right(7);
-    QString width;
-    if (DBusInterface::getInstance()->getInfo("width", width)) {
-        QStringList ws = width.split("\n");
-        QMap<QString, QString> mapWidth;
-        foreach (const QString &w, ws) {
-            QStringList kv = w.split("-");
-            if (kv.size() != 2)
-                continue;
-            mapWidth.insert(kv[0], kv[1]);
-        }
-        mapInfo.insert("Width", mapWidth[pci] + " bits");
     }
 }
 

@@ -98,18 +98,6 @@ private:
     void loadSmartCtlInfo(const QString &logicalName, const QString &debugfile);
 
     /**
-     * @brief loadXrandrInfo:加载xrandr获取的信息
-     * @param debugfile:调试文件名
-     */
-    void loadXrandrInfo(const QString &debugfile);
-
-    /**
-     * @brief loadXrandrVerboseInfo:加载xrandr --verbose获取的信息
-     * @param debugfile:调试文件名
-     */
-    void loadXrandrVerboseInfo(const QString &debugfile);
-
-    /**
      * @brief loadDmesgInfo:加载dmesg获取的信息
      * @param debugfile:调试文件名
      */
@@ -253,12 +241,6 @@ private:
      * @param ch:分隔符
      */
     void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
-
-    /**
-     * @brief addWidthToMap
-     * @param mapInfo
-     */
-    void addWidthToMap(QMap<QString, QString> &mapInfo);
 
     /**
      * @brief getMapInfoFromDmidecode:将通过命令获取的信息字符串，转化为map形式
