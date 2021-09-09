@@ -18,16 +18,17 @@
 #include "LoadInfoThread.h"
 #include "GetInfoPool.h"
 #include "GenerateDevicePool.h"
+#include "DeviceManager.h"
+#include "stub.h"
+#include "ut_Head.h"
 
-#include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class GetInfoPool_UT : public UT_HEAD
+class UT_GetInfoPool : public UT_HEAD
 {
 public:
     void SetUp()
@@ -41,7 +42,7 @@ public:
     GetInfoPool *m_readFilePool;
 };
 
-class CmdTask_UT : public UT_HEAD
+class UT_CmdTask : public UT_HEAD
 {
 public:
     void SetUp()
@@ -58,19 +59,19 @@ public:
     GetInfoPool *m_readFilePool;
 };
 
-TEST_F(CmdTask_UT, CmdTask_UT_run)
-{
-    m_cmdTask->run();
+TEST_F(UT_GetInfoPool,UT_GetInfoPool_initcmd){
+    m_readFilePool->m_CmdList.clear();
+    m_readFilePool->initCmd();
+    EXPECT_EQ(m_readFilePool->m_CmdList.size(),28);
 }
 
-void ut_ThreadPool_start()
-{
-    return;
-}
-
-TEST_F(GetInfoPool_UT, ReadFilePool_UT_readAllFile)
-{
-    Stub stub;
-    stub.set(ADDR(QThreadPool, start), ut_ThreadPool_start);
+TEST_F(UT_GetInfoPool,UT_GetInfoPool_getAllInfo){
     m_readFilePool->getAllInfo();
+    EXPECT_TRUE(m_readFilePool->waitForDone(-1));
 }
+
+TEST_F(UT_GetInfoPool,UT_GetInfoPool_setFramework){
+    m_readFilePool->setFramework("x86");
+    EXPECT_STREQ("x86",m_readFilePool->m_Arch.toStdString().c_str());
+}
+

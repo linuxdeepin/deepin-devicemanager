@@ -18,117 +18,155 @@
 #include "PanguGenerator.h"
 #include "MipsGenerator.h"
 #include "DeviceManager.h"
+#include "ut_Head.h"
+#include "stub.h"
 
-#include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class PanguVGenerator_UT : public UT_HEAD
+QList<QMap<QString, QString> > panGuLstMap;
+class UT_PanguVGenerator : public UT_HEAD
 {
 public:
     void SetUp()
     {
         m_PanguVGenerator = new PanguVGenerator;
+        QMap<QString, QString> mapInfo1;
+        mapInfo1.insert("Manufacturer","Samsung");
+        mapInfo1.insert("product","M378A1K43CB2-CTD");
+        mapInfo1.insert("width","64 bits");
+        mapInfo1.insert("OS","Linux version 4.19.0-amd64-desktop (uos@x86-compile-PC) (gcc version 8.3.0 (Uos 8.3.0.5-1+dde)) #4016 SMP Wed Jun 23 13:35:29 CST 2021");
+        mapInfo1.insert("physical","8");
+        mapInfo1.insert("core","8");
+        mapInfo1.insert("logical","8");
+        mapInfo1.insert("size","8GiB");
+        mapInfo1.insert("Capacity","931 GB");
+        mapInfo1.insert("SysFS BusID","0:0:0:0");
+        mapInfo1.insert("Model","camera");
+        panGuLstMap.append(mapInfo1);
+        QMap<QString, QString> mapInfo2;
+        mapInfo2.insert("Manufacturer","Samsung");
+        mapInfo2.insert("product","M378A1K43CB2-CTD");
+        mapInfo2.insert("width","64 bits");
+        mapInfo2.insert("OS","Linux version 4.19.0-amd64-desktop (uos@x86-compile-PC) (gcc version 8.3.0 (Uos 8.3.0.5-1+dde)) #4016 SMP Wed Jun 23 13:35:29 CST 2021");
+        mapInfo2.insert("size","8GiB");
+        mapInfo2.insert("Capacity","931 GB");
+        mapInfo2.insert("SysFS BusID","0:0:0:0");
+        mapInfo2.insert("Model","camera");
+        panGuLstMap.append(mapInfo2);
     }
     void TearDown()
     {
         delete m_PanguVGenerator;
+        panGuLstMap.clear();
     }
     PanguVGenerator *m_PanguVGenerator = nullptr;
 };
 
-class PanguGenerator_UT : public UT_HEAD
+class UT_PanguGenerator : public UT_HEAD
 {
 public:
     void SetUp()
     {
         m_PanguGenerator = new PanguGenerator;
+        QMap<QString, QString> mapInfo1;
+        mapInfo1.insert("Manufacturer","Samsung");
+        mapInfo1.insert("product","M378A1K43CB2-CTD");
+        mapInfo1.insert("width","64 bits");
+        mapInfo1.insert("OS","Linux version 4.19.0-amd64-desktop (uos@x86-compile-PC) (gcc version 8.3.0 (Uos 8.3.0.5-1+dde)) #4016 SMP Wed Jun 23 13:35:29 CST 2021");
+        mapInfo1.insert("physical","8");
+        mapInfo1.insert("core","8");
+        mapInfo1.insert("logical","8");
+        mapInfo1.insert("size","8GiB");
+        mapInfo1.insert("Capacity","931 GB");
+        mapInfo1.insert("SysFS BusID","0:0:0:0");
+        mapInfo1.insert("Model","camera");
+        panGuLstMap.append(mapInfo1);
+        QMap<QString, QString> mapInfo2;
+        mapInfo2.insert("Manufacturer","Samsung");
+        mapInfo2.insert("product","M378A1K43CB2-CTD");
+        mapInfo2.insert("width","64 bits");
+        mapInfo2.insert("OS","Linux version 4.19.0-amd64-desktop (uos@x86-compile-PC) (gcc version 8.3.0 (Uos 8.3.0.5-1+dde)) #4016 SMP Wed Jun 23 13:35:29 CST 2021");
+        mapInfo2.insert("size","8GiB");
+        mapInfo2.insert("Capacity","931 GB");
+        mapInfo2.insert("SysFS BusID","0:0:0:0");
+        mapInfo2.insert("Model","camera");
+        panGuLstMap.append(mapInfo2);
     }
     void TearDown()
     {
         delete m_PanguGenerator;
+        panGuLstMap.clear();
     }
     PanguGenerator *m_PanguGenerator = nullptr;
 };
 
-class MipsGenerator_UT : public UT_HEAD
+class UT_MipsGenerator : public UT_HEAD
 {
 public:
     void SetUp()
     {
         m_MipsGenerator = new MipsGenerator;
+        QMap<QString, QString> mapInfo1;
+        mapInfo1.insert("Manufacturer","Samsung");
+        mapInfo1.insert("product","M378A1K43CB2-CTD");
+        mapInfo1.insert("width","64 bits");
+        mapInfo1.insert("OS","Linux version 4.19.0-amd64-desktop (uos@x86-compile-PC) (gcc version 8.3.0 (Uos 8.3.0.5-1+dde)) #4016 SMP Wed Jun 23 13:35:29 CST 2021");
+        mapInfo1.insert("physical","8");
+        mapInfo1.insert("core","8");
+        mapInfo1.insert("logical","8");
+        mapInfo1.insert("size","8GiB");
+        mapInfo1.insert("Capacity","931 GB");
+        mapInfo1.insert("SysFS BusID","0:0:0:0");
+        mapInfo1.insert("Model","camera");
+        panGuLstMap.append(mapInfo1);
+        QMap<QString, QString> mapInfo2;
+        mapInfo2.insert("Manufacturer","Samsung");
+        mapInfo2.insert("product","M378A1K43CB2-CTD");
+        mapInfo2.insert("width","64 bits");
+        mapInfo2.insert("OS","Linux version 4.19.0-amd64-desktop (uos@x86-compile-PC) (gcc version 8.3.0 (Uos 8.3.0.5-1+dde)) #4016 SMP Wed Jun 23 13:35:29 CST 2021");
+        mapInfo2.insert("size","8GiB");
+        mapInfo2.insert("Capacity","931 GB");
+        mapInfo2.insert("SysFS BusID","0:0:0:0");
+        mapInfo2.insert("Model","camera");
+        panGuLstMap.append(mapInfo2);
     }
     void TearDown()
     {
         delete m_MipsGenerator;
+        panGuLstMap.clear();
     }
     MipsGenerator *m_MipsGenerator = nullptr;
 };
 
-QList<QMap<QString, QString>> ut_panguv_cmdInfo()
-{
-    QList<QMap<QString, QString>> info;
-    QMap<QString, QString> map;
-    map.insert("name", "/");
-    map.insert("type", "/");
-    info.append(map);
-    return info;
+const QList<QMap<QString, QString> > & ut_PanguGenerator_cmdInfo(){
+    return panGuLstMap;
 }
-
-TEST_F(PanguVGenerator_UT, PanguVGenerator_UT_generatorMonitorDevice)
-{
+// MipsGenerator virtual void generatorComputerDevice() override;
+TEST_F(UT_MipsGenerator,UT_MipsGenerator_generatorComputerDevice){
     Stub stub;
-    stub.set(ADDR(DeviceManager, cmdInfo), ut_panguv_cmdInfo);
-    m_PanguVGenerator->generatorMonitorDevice();
-}
-
-QList<QMap<QString, QString>> ut_pangu_cmdInfo()
-{
-    QList<QMap<QString, QString>> info;
-    QMap<QString, QString> map;
-    map.insert("name", "/");
-    QMap<QString, QString> map1;
-    map1.insert("type", "/");
-    info.append(map);
-    info.append(map);
-    return info;
-}
-
-TEST_F(PanguGenerator_UT, PanguGenerator_UT_generatorComputerDevice)
-{
-    Stub stub;
-    stub.set(ADDR(DeviceManager, cmdInfo), ut_pangu_cmdInfo);
-    m_PanguGenerator->generatorComputerDevice();
-}
-
-QList<QMap<QString, QString>> ut_mips_cmdInfo()
-{
-    QList<QMap<QString, QString>> info;
-    QMap<QString, QString> map;
-    map.insert("name", "/");
-    map.insert("type", "/");
-    info.append(map);
-    return info;
-}
-
-DSysInfo::UosEdition ut_mips_uosEditionType()
-{
-    return DSysInfo::UosHome;
-}
-
-int ut_indexIn()
-{
-    return 1;
-}
-
-TEST_F(MipsGenerator_UT, MipsGenerator_UT_generatorComputerDevice)
-{
-    Stub stub;
-    stub.set(ADDR(DeviceManager, cmdInfo), ut_mips_cmdInfo);
-    stub.set(ADDR(QRegExp, indexIn), ut_indexIn);
+    stub.set(ADDR(DeviceManager,cmdInfo),ut_PanguGenerator_cmdInfo);
     m_MipsGenerator->generatorComputerDevice();
+    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceComputer.size());
 }
+
+// PanguGenerator virtual void generatorComputerDevice() override;
+TEST_F(UT_PanguGenerator,UT_PanguGenerator_generatorComputerDevice){
+    Stub stub;
+    stub.set(ADDR(DeviceManager,cmdInfo),ut_PanguGenerator_cmdInfo);
+    m_PanguGenerator->generatorComputerDevice();
+    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceComputer.size());
+}
+
+// PanguVGenerator virtual void generatorMonitorDevice() override;
+TEST_F(UT_PanguVGenerator,UT_PanguVGenerator_generatorComputerDevice){
+    Stub stub;
+    stub.set(ADDR(DeviceManager,cmdInfo),ut_PanguGenerator_cmdInfo);
+    m_PanguVGenerator->generatorMonitorDevice();
+    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceMonitor.size());
+}
+
+

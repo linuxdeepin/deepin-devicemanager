@@ -16,7 +16,9 @@
 */
 #include "EnableManager.h"
 #include "DBusInterface.h"
-#include "../ut_Head.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
@@ -24,9 +26,8 @@
 #include <QIODevice>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class EnableManager_UT : public UT_HEAD
+class UT_EnableManager : public UT_HEAD
 {
 public:
     void SetUp()
@@ -47,7 +48,7 @@ QByteArray ut_readAllStandardOutput()
     return "Device Enabled:1";
 }
 
-TEST_F(EnableManager_UT, EnableManager_UT_isDeviceEnable)
+TEST_F(UT_EnableManager, UT_EnableManager_isDeviceEnable)
 {
     Stub stub;
     stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
@@ -55,7 +56,7 @@ TEST_F(EnableManager_UT, EnableManager_UT_isDeviceEnable)
     ASSERT_TRUE(EnableManager::instance()->isDeviceEnable("/"));
 }
 
-TEST_F(EnableManager_UT, EnableManager_UT_isDeviceEnable2)
+TEST_F(UT_EnableManager, UT_EnableManager_isDeviceEnable2)
 {
     Stub stub;
     stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
@@ -63,60 +64,80 @@ TEST_F(EnableManager_UT, EnableManager_UT_isDeviceEnable2)
     ASSERT_TRUE(EnableManager::instance()->isDeviceEnable(1));
 }
 
-bool ut_execDriverOrder()
+bool ut_execDriverOrder_001()
 {
     return false;
 }
-
-TEST_F(EnableManager_UT, EnableManager_UT_enableDeviceByDriver)
-{
-    Stub stub;
-    stub.set(ADDR(DBusInterface, execDriverOrder), ut_execDriverOrder);
-    ASSERT_EQ(EnableManager::instance()->enableDeviceByDriver(false, "/"), 1);
-    EnableManager::instance()->enableDeviceByDriver(true, "/");
-}
-
-QByteArray ut_readAllStandardOutput_1()
-{
-    return "filename://123 \n /abc";
-}
-
-TEST_F(EnableManager_UT, EnableManager_UT_enablePrinter)
-{
-    Stub stub;
-    stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
-    stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_1);
-    EnableManager::instance()->enablePrinter("/", false);
-}
-
-bool ut_execIfconfigOrder()
+bool ut_execDriverOrder_002()
 {
     return true;
 }
 
-TEST_F(EnableManager_UT, EnableManager_UT_enableNetworkByIfconfig)
+TEST_F(UT_EnableManager, UT_EnableManager_enableDeviceByDriver)
 {
     Stub stub;
-    stub.set(ADDR(DBusInterface, execIfconfigOrder), ut_execIfconfigOrder);
-    stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
-    stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_1);
-    ASSERT_EQ(EnableManager::instance()->enableNetworkByIfconfig("/", false), 2);
-    EnableManager::instance()->enableNetworkByIfconfig("/", true);
+    stub.set(ADDR(DBusInterface, execDriverOrder), ut_execDriverOrder_001);
+    ASSERT_EQ(EnableManager::instance()->enableDeviceByDriver(false, "driver"), 1);
+    ASSERT_EQ(EnableManager::instance()->enableDeviceByDriver(true, "driver"), 1);
+    stub.set(ADDR(DBusInterface, execDriverOrder), ut_execDriverOrder_002);
+    ASSERT_EQ(EnableManager::instance()->enableDeviceByDriver(false, "driver"), 2);
+    ASSERT_EQ(EnableManager::instance()->enableDeviceByDriver(true, "driver"), 2);
 }
 
-TEST_F(EnableManager_UT, EnableManager_UT_isDeviceId)
+QByteArray ut_readAllStandardOutput_1()
 {
-    Stub stub;
-    stub.set(ADDR(DBusInterface, execIfconfigOrder), ut_execIfconfigOrder);
-    stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
-    stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_1);
-    EnableManager::instance()->isDeviceId(10, "/");
+    return "";
+}
+QByteArray ut_readAllStandardOutput_2()
+{
+    return "filename:abc";
 }
 
-TEST_F(EnableManager_UT, EnableManager_UT_getDriverPath)
+TEST_F(UT_EnableManager, UT_EnableManager_enablePrinter)
 {
     Stub stub;
     stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
     stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_1);
-    EnableManager::instance()->getDriverPath("/");
+    ASSERT_EQ(EnableManager::instance()->enablePrinter("printer", true),2);
+    ASSERT_EQ(EnableManager::instance()->enablePrinter("printer", false),2);
+    stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_2);
+    ASSERT_EQ(EnableManager::instance()->enablePrinter("printer", true),1);
+    ASSERT_EQ(EnableManager::instance()->enablePrinter("printer", false),1);
+}
+
+bool ut_execIfconfigOrder_1()
+{
+    return true;
+}
+bool ut_execIfconfigOrder_2()
+{
+    return false;
+}
+TEST_F(UT_EnableManager, UT_EnableManager_enableNetworkByIfconfig)
+{
+    Stub stub;
+    stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
+    stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_1);
+    stub.set(ADDR(DBusInterface, execIfconfigOrder), ut_execIfconfigOrder_1);
+    ASSERT_EQ(EnableManager::instance()->enableNetworkByIfconfig("ifconfig", true), 2);
+    ASSERT_EQ(EnableManager::instance()->enableNetworkByIfconfig("ifconfig", false), 2);
+    stub.set(ADDR(DBusInterface, execIfconfigOrder), ut_execIfconfigOrder_2);
+    ASSERT_EQ(EnableManager::instance()->enableNetworkByIfconfig("ifconfig", true), 1);
+    ASSERT_EQ(EnableManager::instance()->enableNetworkByIfconfig("ifconfig", false), 1);
+}
+
+TEST_F(UT_EnableManager, UT_EnableManager_isDeviceId)
+{
+    Stub stub;
+    stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
+    stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_2);
+    EXPECT_TRUE(EnableManager::instance()->isDeviceId(10, "abc"));
+}
+
+TEST_F(UT_EnableManager, UT_EnableManager_getDriverPath)
+{
+    Stub stub;
+    stub.set((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start), ut_start);
+    stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_2);
+    EXPECT_STREQ("abc", EnableManager::instance()->getDriverPath("path").toStdString().c_str());
 }
