@@ -14,21 +14,21 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Widget/logviewheaderview.h"
+#include "logviewheaderview.h"
+#include "ut_Head.h"
+#include "stub.h"
 
-#include "../ut_Head.h"
+#include <DApplication>
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
-//#include <QApplication>
-#include <DApplication>
 #include <QStandardItemModel>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 DStyle *style = nullptr;
-class LogviewHeaderView_UT : public UT_HEAD
+class UT_LogviewHeaderView : public UT_HEAD
 {
 public:
     void SetUp()
@@ -48,9 +48,6 @@ public:
     QStandardItemModel *m_Model;
 };
 
-//typedef QVariant (*fptr)(QAbstractItemModel*);
-//fptr QAbstractItemModel_headerData = (fptr)((QVariant(QAbstractItemModel::*))&QAbstractItemModel::headerData);
-
 int ut_headerview_pixelMetric()
 {
     return 10;
@@ -66,39 +63,29 @@ DStyle *ut_header_style()
     return style;
 }
 
-TEST_F(LogviewHeaderView_UT, UT_paintSection)
+TEST_F(UT_LogviewHeaderView, UT_LogviewHeaderView_paintSection)
 {
     QPainter painter(m_logViewHeaderView);
     Stub stub;
     stub.set(ADDR(DApplication, style), ut_header_style); // DApplication::style()
     stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget * widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
     m_logViewHeaderView->paintSection(&painter, QRect(10, 10, 10, 10), 0);
+    EXPECT_FALSE(m_logViewHeaderView->grab().isNull());
 }
 
-TEST_F(LogviewHeaderView_UT, ut_paintEvent)
+TEST_F(UT_LogviewHeaderView, UT_LogviewHeaderView_paintEvent)
 {
     QPaintEvent paint(QRect(m_logViewHeaderView->rect()));
     Stub stub;
     stub.set(ADDR(DApplication, style), ut_header_style);
     stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget * widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
     m_logViewHeaderView->paintEvent(&paint);
+    EXPECT_FALSE(m_logViewHeaderView->grab().isNull());
 }
 
-TEST_F(LogviewHeaderView_UT, ut_sizeHint)
+TEST_F(UT_LogviewHeaderView, UT_LogviewHeaderView_sizeHint)
 {
-    m_logViewHeaderView->sizeHint();
-}
-
-void ut_initStyleOption()
-{
-    return;
-}
-
-TEST_F(LogviewHeaderView_UT, ut_sectionSizeHint)
-{
-    //        Stub stub;
-    //        stub.set(ADDR(LogViewHeaderView,initStyleOption),ut_initStyleOption);
-    //        stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget *widget) const)ADDR(DStyle, pixelMetric), ut_headerview_pixelMetric);
-    //        stub.set(QAbstractItemModel_headerData, ut_model_headerData);
-    //        m_logViewHeaderView->sectionSizeHint(0);
+    QSize size = m_logViewHeaderView->sizeHint();
+    EXPECT_EQ(640,size.width());
+    EXPECT_EQ(37,size.height());
 }

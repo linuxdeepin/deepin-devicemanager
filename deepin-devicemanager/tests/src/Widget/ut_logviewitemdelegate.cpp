@@ -14,19 +14,21 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Widget/logviewitemdelegate.h"
-#include "../src/Widget/logtreeview.h"
-#include "../ut_Head.h"
+#include "logviewitemdelegate.h"
+#include "logtreeview.h"
+#include "ut_Head.h"
+#include "stub.h"
+
+#include <DApplication>
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
-#include <DApplication>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 DStyle *logViewItemDelegateSytle = nullptr;
-class LogViewItemDelegate_UT : public UT_HEAD
+class UT_LogViewItemDelegate : public UT_HEAD
 {
 public:
     void SetUp()
@@ -65,31 +67,33 @@ DStyle *ut_style()
     return logViewItemDelegateSytle;
 }
 
-TEST_F(LogViewItemDelegate_UT, ut_paint)
+TEST_F(UT_LogViewItemDelegate, UT_LogViewItemDelegate_paint)
 {
     QPainter painter(m_view);
     QStyleOptionViewItem option;
     QModelIndex index = m_view->model()->index(0, 0);
 
     Stub stub;
-    //stub.set(ADDR(QModelIndex, isValid), ut_itemdelegate_isValid);
     stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget * widget) const)ADDR(DStyle, pixelMetric), ut_itemdelegate_pixelMetric);
     stub.set(ADDR(DApplication, style), ut_style); // DApplication::style()
     m_logDelegate->paint(&painter, option, index);
+    EXPECT_FALSE(m_view->grab().isNull());
 }
 
-TEST_F(LogViewItemDelegate_UT, ut_createEditor)
+TEST_F(UT_LogViewItemDelegate, UT_LogViewItemDelegate_createEditor)
 {
     QPainter painter(m_view);
     QStyleOptionViewItem option;
     QModelIndex index = m_view->model()->index(0, 0);
-    m_logDelegate->createEditor(nullptr, option, index);
+    EXPECT_FALSE(m_logDelegate->createEditor(nullptr, option, index));
 }
 
-TEST_F(LogViewItemDelegate_UT, ut_sizeHint)
+TEST_F(UT_LogViewItemDelegate, UT_LogViewItemDelegate_sizeHint)
 {
     QPainter painter(m_view);
     QStyleOptionViewItem option;
     QModelIndex index = m_view->model()->index(0, 0);
-    m_logDelegate->sizeHint(option, index);
+    QSize size = m_logDelegate->sizeHint(option, index);
+    EXPECT_EQ(6,size.width());
+    EXPECT_EQ(36,size.height());
 }

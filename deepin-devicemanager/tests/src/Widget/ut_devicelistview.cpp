@@ -14,16 +14,16 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Widget/DeviceListView.h"
+#include "DeviceListView.h"
+#include "ut_Head.h"
 
-#include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
 
-class DeviceListView_UT : public UT_HEAD
+class UT_DeviceListView : public UT_HEAD
 {
 public:
     void SetUp()
@@ -37,7 +37,7 @@ public:
     DeviceListView *m_deviceListView;
 };
 
-class DeviceListviewDelegate_UT : public UT_HEAD
+class UT_DeviceListviewDelegate : public UT_HEAD
 {
 public:
     void SetUp()
@@ -54,66 +54,76 @@ public:
     DeviceListView *m_listView;
 };
 
-TEST_F(DeviceListView_UT, ut_addItem)
+TEST_F(UT_DeviceListView, UT_DeviceListviewDelegate_addItem)
 {
-    m_deviceListView->addItem("/", "/###");
-    m_deviceListView->setCurItem("/");
+    m_deviceListView->addItem("item", "icon##icon");
+    EXPECT_STREQ(m_deviceListView->mp_ItemModel->item(0)->text().toStdString().c_str() , "item");
+    m_deviceListView->setCurItem("item");
+    QModelIndex index = m_deviceListView->currentIndex();
+    EXPECT_EQ(0,index.row());
+    EXPECT_EQ(0,index.column());
     m_deviceListView->setCurItemEnable(true);
-    m_deviceListView->setCurItem("/");
+    EXPECT_TRUE(m_deviceListView->mp_ItemModel->item(0)->isEnabled());
 }
 
-TEST_F(DeviceListView_UT, ut_getConcatenateStrings)
+TEST_F(UT_DeviceListView, UT_DeviceListView_getConcatenateStrings)
 {
     QModelIndex index;
-    m_deviceListView->getConcatenateStrings(index);
+    EXPECT_TRUE(m_deviceListView->getConcatenateStrings(index).isEmpty());
 }
 
-TEST_F(DeviceListView_UT, ut_paintEvent)
+TEST_F(UT_DeviceListView, UT_DeviceListView_paintEvent)
 {
     QPaintEvent paint(QRect(m_deviceListView->rect()));
     m_deviceListView->paintEvent(&paint);
+    EXPECT_FALSE(m_deviceListView->grab().isNull());
 }
 
-TEST_F(DeviceListView_UT, UT_mousePressEvent)
+TEST_F(UT_DeviceListView, UT_DeviceListView_mousePressEvent)
 {
     QMouseEvent mousePressEvent(QEvent::MouseButtonPress, QPoint(10, 10), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     m_deviceListView->mousePressEvent(&mousePressEvent);
 }
 
-TEST_F(DeviceListView_UT, UT_mouseMoveEvent)
+TEST_F(UT_DeviceListView, UT_DeviceListView_mouseMoveEvent)
 {
     QMouseEvent mouseMoveEvent(QEvent::MouseMove, QPoint(10, 10), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     m_deviceListView->mouseMoveEvent(&mouseMoveEvent);
+    EXPECT_EQ(m_deviceListView->cursor().pos().x(),10);
+    EXPECT_EQ(m_deviceListView->cursor().pos().y(),10);
 }
 
-TEST_F(DeviceListView_UT, UT_keyPressEvent)
+TEST_F(UT_DeviceListView, UT_DeviceListView_keyPressEvent)
 {
     QKeyEvent keyPressEvent(QEvent::KeyPress, Qt::Key_Space, Qt::NoModifier);
-    QCoreApplication::sendEvent(m_deviceListView, &keyPressEvent);
+    EXPECT_TRUE(m_deviceListView->event(&keyPressEvent));
     QKeyEvent keyPressEvent1(QEvent::KeyPress, Qt::Key_Up, Qt::NoModifier);
-    QCoreApplication::sendEvent(m_deviceListView, &keyPressEvent1);
+    EXPECT_TRUE(m_deviceListView->event(&keyPressEvent1));
 }
 
-TEST_F(DeviceListviewDelegate_UT, ut_paint)
+TEST_F(UT_DeviceListviewDelegate, UT_DeviceListView_paint)
 {
     QPainter painter(m_listView);
     QStyleOptionViewItem option;
     QModelIndex index = m_listView->model()->index(0, 0);
     m_deviceListViewDelegate->paint(&painter, option, index);
+    EXPECT_FALSE(m_listView->grab().isNull());
 }
 
-TEST_F(DeviceListviewDelegate_UT, ut_paintSeparator)
+TEST_F(UT_DeviceListviewDelegate, UT_DeviceListView_paintSeparator)
 {
     QPainter painter(m_listView);
     QStyleOptionViewItem option;
     QModelIndex index = m_listView->model()->index(0, 0);
     m_deviceListViewDelegate->paintSeparator(&painter, option);
+    EXPECT_FALSE(m_listView->grab().isNull());
 }
 
-TEST_F(DeviceListviewDelegate_UT, ut_sizeHint)
+TEST_F(UT_DeviceListviewDelegate, UT_DeviceListView_sizeHint)
 {
     QPainter painter(m_listView);
     QStyleOptionViewItem option;
     QModelIndex index = m_listView->model()->index(0, 0);
-    m_deviceListViewDelegate->sizeHint(option, index);
+    QSize size = m_deviceListViewDelegate->sizeHint(option, index);
+    EXPECT_EQ(9,size.width());
 }

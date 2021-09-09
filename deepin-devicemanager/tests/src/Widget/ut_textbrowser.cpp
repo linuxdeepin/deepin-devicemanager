@@ -14,21 +14,26 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Widget/TextBrowser.h"
-#include "../src/DeviceManager/DeviceInfo.h"
-#include "../src/DeviceManager/DeviceInput.h"
+#include "TextBrowser.h"
+#include "DeviceInfo.h"
+#include "DeviceInput.h"
+#include "stub.h"
+#include "ut_Head.h"
 
-#include "../ut_Head.h"
+#include <DApplication>
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QMap>
 #include <QDomDocument>
 #include <QMenu>
-#include <gtest/gtest.h>
-#include "../stub.h"
+#include <QClipboard>
+#include <QSignalSpy>
 
-class TextBrowser_UT : public UT_HEAD
+#include <gtest/gtest.h>
+
+class UT_TextBrowser : public UT_HEAD
 {
 public:
     void SetUp()
@@ -42,29 +47,29 @@ public:
     TextBrowser *tBrowser;
 };
 
-TEST_F(TextBrowser_UT, ut_showDeviceInfo)
+TEST_F(UT_TextBrowser, UT_TextBrowser_showDeviceInfo)
 {
     DeviceInput *device = new DeviceInput;
-    QMap<QString, QString> mapinfo;
-    mapinfo.insert("Device", "/");
-    device->setInfoFromHwinfo(mapinfo);
+    device->m_Name = "mouse";
+    device->m_Interface = "USB";
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     tBrowser->showDeviceInfo(bInfo.at(0));
+    EXPECT_STREQ("mouse\nName:\nmouse\nInterface:\nUSB\n",tBrowser->toPlainText().toStdString().c_str());
     delete device;
 }
 
-TEST_F(TextBrowser_UT, ut_updateInfo)
+TEST_F(UT_TextBrowser, UT_TextBrowser_updateInfo)
 {
     DeviceInput *device = new DeviceInput;
-    QMap<QString, QString> mapinfo;
-    mapinfo.insert("Device", "/");
-    device->setInfoFromHwinfo(mapinfo);
+    device->m_Name = "keyboard";
+    device->m_Interface = "USB";
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     tBrowser->mp_Info = bInfo.at(0);
     tBrowser->m_ShowOtherInfo = true;
     tBrowser->updateInfo();
+    EXPECT_STREQ("keyboard\nName:\nkeyboard\nInterface:\nUSB\n",tBrowser->toPlainText().toStdString().c_str());
     delete device;
 }
 
@@ -73,39 +78,49 @@ QString ut_selectedText()
     return "/";
 }
 
-TEST_F(TextBrowser_UT, ut_setDeviceEnabled)
+TEST_F(UT_TextBrowser, UT_TextBrowser_setDeviceEnabled)
 {
-    tBrowser->mp_Info = nullptr;
-    EXPECT_EQ(tBrowser->setDeviceEnabled(true), EDS_Cancle);
     tBrowser->updateShowOtherInfo();
     Stub stub;
     stub.set(ADDR(QTextCursor, selectedText), ut_selectedText);
     tBrowser->fillClipboard();
+    tBrowser->mp_Info = nullptr;
+    EXPECT_EQ(tBrowser->setDeviceEnabled(true), EDS_Cancle);
 }
 
-TEST_F(TextBrowser_UT, ut_PaintEvent)
+TEST_F(UT_TextBrowser, UT_TextBrowser_PaintEvent)
 {
     QPaintEvent paint(QRect(tBrowser->rect()));
     tBrowser->paintEvent(&paint);
+    EXPECT_FALSE(tBrowser->grab().isNull());
 }
 
-TEST_F(TextBrowser_UT, ut_keyPressEvent)
+TEST_F(UT_TextBrowser, UT_TextBrowser_keyPressEvent)
 {
     QKeyEvent keyPressEvent(QEvent::KeyPress, Qt::Key_C, Qt::ShiftModifier);
-    QCoreApplication::sendEvent(tBrowser, &keyPressEvent);
+    EXPECT_TRUE(tBrowser->event(&keyPressEvent));
 }
 
-TEST_F(TextBrowser_UT, ut_slotActionRefresh)
+TEST_F(UT_TextBrowser, UT_TextBrowser_slotActionRefresh)
 {
+    QSignalSpy spy1(tBrowser, SIGNAL(refreshInfo()));
+    ASSERT_EQ(0, spy1.count());
     tBrowser->slotActionRefresh();
+    ASSERT_EQ(1, spy1.count());
+
+    QSignalSpy spy2(tBrowser, SIGNAL(exportInfo()));
+    ASSERT_EQ(0, spy2.count());
     tBrowser->slotActionExport();
+    ASSERT_EQ(1, spy2.count());
 }
 
-TEST_F(TextBrowser_UT, ut_slotActionCopy)
+TEST_F(UT_TextBrowser, UT_TextBrowser_slotActionCopy)
 {
     Stub stub;
     stub.set(ADDR(QTextCursor, selectedText), ut_selectedText);
     tBrowser->slotActionCopy();
+    QClipboard *clipboard = DApplication::clipboard();
+    EXPECT_STREQ("/", clipboard->text().toStdString().c_str());
 }
 
 bool ut_text_enable()
@@ -113,16 +128,16 @@ bool ut_text_enable()
     return false;
 }
 
-TEST_F(TextBrowser_UT, ut_domTitleInfo)
+TEST_F(UT_TextBrowser, UT_TextBrowser_domTitleInfo)
 {
     DeviceInput *device = new DeviceInput;
-    QMap<QString, QString> mapinfo;
-    mapinfo.insert("Device", "/");
-    device->setInfoFromHwinfo(mapinfo);
+    device->m_Name = "keyboard";
+    device->m_Interface = "USB";
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     QDomDocument doc("h3");
     tBrowser->domTitleInfo(doc, bInfo.at(0));
+    EXPECT_FALSE(doc.isNull());
     delete device;
 }
 
@@ -131,7 +146,7 @@ bool ut_rect_contains()
     return false;
 }
 
-TEST_F(TextBrowser_UT, ut_focusInEvent)
+TEST_F(UT_TextBrowser, UT_TextBrowser_focusInEvent)
 {
     tBrowser->m_ShowOtherInfo = true;
     QFocusEvent focus(QFocusEvent::FocusIn);
@@ -140,12 +155,11 @@ TEST_F(TextBrowser_UT, ut_focusInEvent)
     Stub stub;
     stub.set((bool (QRect::*)(const QPoint &, bool) const)ADDR(QRect, contains), ut_rect_contains);
     DeviceInput *device = new DeviceInput;
-    QMap<QString, QString> mapinfo;
-    mapinfo.insert("Device", "/");
-    device->setInfoFromHwinfo(mapinfo);
+    device->m_Name = "keyboard";
+    device->m_Interface = "USB";
 
     tBrowser->mp_Info = dynamic_cast<DeviceBaseInfo *>(device);
     QFocusEvent focusd(QFocusEvent::FocusOut);
-    QCoreApplication::sendEvent(tBrowser, &focusd);
+    EXPECT_TRUE(tBrowser->event(&focusd));
     delete device;
 }

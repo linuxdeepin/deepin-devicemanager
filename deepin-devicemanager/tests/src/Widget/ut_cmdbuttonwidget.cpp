@@ -14,16 +14,16 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Widget/CmdButtonWidget.h"
+#include "CmdButtonWidget.h"
+#include "ut_Head.h"
 
-#include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
 
-class CmdButtonWidget_UT : public UT_HEAD
+class UT_CmdButtonWidget : public UT_HEAD
 {
 public:
     void SetUp()
@@ -37,9 +37,9 @@ public:
     CmdButtonWidget *m_cmdBtnWidget;
 };
 
-TEST_F(CmdButtonWidget_UT, ut_paintEvent)
+TEST_F(UT_CmdButtonWidget, UT_CmdButtonWidget_paintEvent)
 {
     QPaintEvent paint(QRect(m_cmdBtnWidget->rect()));
     m_cmdBtnWidget->paintEvent(&paint);
-    //    m_cmdBtnWidget->expandCommandLinkClicked();
+    EXPECT_FALSE(m_cmdBtnWidget->grab().isNull());
 }
