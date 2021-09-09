@@ -175,7 +175,11 @@ int DetailTreeView::setTableHeight(int paintHeight)
 
     // 父窗口
     PageTableWidget *pageTableWidget = dynamic_cast<PageTableWidget *>(this->parent());
+    if(!pageTableWidget)
+        return -1;
     PageInfo *par = dynamic_cast<PageInfo *>(pageTableWidget->parent());
+    if(par)
+        return -1;
     // 父窗口可显示的最大表格行数
     // 最多显示行数与父窗口高度相关,需减去Label以及Spacing占用空间
     int maxRow = 0;
