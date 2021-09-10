@@ -14,15 +14,16 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/DeviceManager/DeviceGpu.h"
+#include "DeviceGpu.h"
 
-#include "../ut_Head.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 class UT_DeviceGpu : public UT_HEAD
 {
@@ -182,11 +183,11 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_setGpuInfo)
 
     m_deviceGpu->setGpuInfo(mapinfo);
     EXPECT_STREQ("", m_deviceGpu->m_HDMI.toStdString().c_str());
-    EXPECT_STREQ("", m_deviceGpu->m_HDMI.toStdString().c_str());
-    EXPECT_STREQ("", m_deviceGpu->m_HDMI.toStdString().c_str());
-    EXPECT_STREQ("", m_deviceGpu->m_HDMI.toStdString().c_str());
-    EXPECT_STREQ("", m_deviceGpu->m_HDMI.toStdString().c_str());
-    EXPECT_STREQ("", m_deviceGpu->m_HDMI.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceGpu->m_VGA.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceGpu->m_DisplayPort.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceGpu->m_eDP.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceGpu->m_DVI.toStdString().c_str());
+    EXPECT_STREQ("GK208B", m_deviceGpu->m_Name.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_name)
@@ -247,3 +248,31 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_loadTableData)
     EXPECT_EQ(3, m_deviceGpu->m_TableData.size());
 }
 
+void ut_gpu_setxrandrmap(QMap<QString, QString> &mapInfo)
+{
+    mapInfo.insert("minResolution", "minResolution");
+    mapInfo.insert("curResolution", "curResolution");
+    mapInfo.insert("maxResolution", "maxResolution");
+    mapInfo.insert("HDMI", "Unable");
+    mapInfo.insert("VGA", "Unable");
+    mapInfo.insert("DP", "Unable");
+    mapInfo.insert("eDP", "Unable");
+    mapInfo.insert("DVI", "Unable");
+
+}
+
+TEST_F(UT_DeviceGpu, UT_DeviceGpu_setXrandrInfo)
+{
+    QMap<QString, QString> mapInfo;
+    ut_gpu_setxrandrmap(mapInfo);
+
+    m_deviceGpu->setXrandrInfo(mapInfo);
+    EXPECT_STREQ("minResolution", m_deviceGpu->m_MinimumResolution.toStdString().c_str());
+    EXPECT_STREQ("curResolution", m_deviceGpu->m_CurrentResolution.toStdString().c_str());
+    EXPECT_STREQ("maxResolution", m_deviceGpu->m_MaximumResolution.toStdString().c_str());
+    EXPECT_STREQ("Unable", m_deviceGpu->m_HDMI.toStdString().c_str());
+    EXPECT_STREQ("Unable", m_deviceGpu->m_VGA.toStdString().c_str());
+    EXPECT_STREQ("Unable", m_deviceGpu->m_DisplayPort.toStdString().c_str());
+    EXPECT_STREQ("Unable", m_deviceGpu->m_eDP.toStdString().c_str());
+    EXPECT_STREQ("Unable", m_deviceGpu->m_DVI.toStdString().c_str());
+}

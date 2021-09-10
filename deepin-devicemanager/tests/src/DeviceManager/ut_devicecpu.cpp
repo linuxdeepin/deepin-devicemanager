@@ -14,15 +14,16 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/DeviceManager/DeviceCpu.h"
+#include "DeviceCpu.h"
 
-#include "../ut_Head.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 class UT_DeviceCpu : public UT_HEAD
 {

@@ -14,18 +14,20 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/DeviceManager/DeviceInfo.h"
-#include "../src/DeviceManager/DeviceBios.h"
-#include "../../src/xlsx/xlsxdocument.h"
-#include "../ut_Head.h"
+#include "DeviceInfo.h"
+#include "DeviceAudio.h"
+
+#include "xlsxdocument.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class DeviceInfo_UT : public UT_HEAD
+class UT_DeviceInfo : public UT_HEAD
 {
 public:
     void SetUp()
@@ -33,184 +35,109 @@ public:
     }
     void TearDown()
     {
-        delete bios;
+        delete audio;
     }
     DeviceBaseInfo *m_deviceBaseInfo;
-    DeviceBios *bios = new DeviceBios;
+    DeviceAudio *audio = new DeviceAudio;
 };
 
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_getOtherAttribs)
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_getOtherAttribs)
 {
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    m_deviceBaseInfo->getBaseAttribs();
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
+    QList<QPair<QString, QString>> lst = m_deviceBaseInfo->getOtherAttribs();
+    EXPECT_EQ(0, lst.size());
+    EXPECT_EQ(0, m_deviceBaseInfo->m_LstOtherInfo.size());
 }
 
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_isValueValid)
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_getBaseAttribs)
 {
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
+    QList<QPair<QString, QString>> lst = m_deviceBaseInfo->getBaseAttribs();
+    EXPECT_EQ(0, lst.size());
+    EXPECT_EQ(0, m_deviceBaseInfo->m_LstBaseInfo.size());
+}
+
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_getTableHeader)
+{
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
+    QStringList lst = m_deviceBaseInfo->getTableHeader();
+    EXPECT_EQ(3, lst.size());
+    EXPECT_EQ(3, m_deviceBaseInfo->m_TableHeader.size());
+}
+
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_getTableData)
+{
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
+    QStringList lst = m_deviceBaseInfo->getTableData();
+    EXPECT_EQ(2, lst.size());
+    EXPECT_EQ(2, m_deviceBaseInfo->m_TableData.size());
+}
+
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_subTitle)
+{
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
+    QString title = m_deviceBaseInfo->subTitle();
+    EXPECT_STREQ("", title.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_isValueValid)
+{
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
     QString value = "";
-    m_deviceBaseInfo->isValueValid(value);
+    EXPECT_FALSE(m_deviceBaseInfo->isValueValid(value));
 }
 
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_toHtmlString)
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_setEnable)
 {
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    QDomDocument doc;
-    m_deviceBaseInfo->toHtmlString(doc);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_baseInfoToHTML)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    QDomDocument doc;
-    QList<QPair<QString, QString>> infoLst;
-    QPair<QString, QString> pair = QPair<QString, QString>("/", "/");
-    infoLst.append(pair);
-    m_deviceBaseInfo->baseInfoToHTML(doc, infoLst);
-}
-
-QString ut_subTitle()
-{
-    return "name";
-}
-
-/**/
-typedef QString (*fptr)(DeviceBaseInfo *);
-//fptr m_subTitle = (fptr)(&DeviceBaseInfo::subTitle);
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_subTitleToHTML)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    QDomDocument doc;
-    Stub stub;
-    //    stub.set(m_subTitle,ut_subTitle);
-    m_deviceBaseInfo->subTitleToHTML(doc);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_toDocString)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    Docx::Document doc;
-    m_deviceBaseInfo->toDocString(doc);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_baseInfoToDoc)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    Docx::Document doc;
-    QList<QPair<QString, QString>> infoLst;
-    QPair<QString, QString> pair = QPair<QString, QString>("/", "/");
-    infoLst.append(pair);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_toXlsxString)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    QXlsx::Document xlsx;
-    QXlsx::Format boldFont;
-    m_deviceBaseInfo->toXlsxString(xlsx, boldFont);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_baseInfoToXlsx)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    QXlsx::Document xlsx;
-    QXlsx::Format boldFont;
-    QList<QPair<QString, QString>> infoLst;
-    QPair<QString, QString> pair = QPair<QString, QString>("/", "/");
-    infoLst.append(pair);
-    m_deviceBaseInfo->baseInfoToXlsx(xlsx, boldFont, infoLst);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_toTxtString)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    QTextStream out;
-    m_deviceBaseInfo->toTxtString(out);
-    m_deviceBaseInfo->tableInfoToTxt(out);
-    m_deviceBaseInfo->tableHeaderToTxt(out);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_baseInfoToTxt)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    QTextStream out;
-    QList<QPair<QString, QString>> infoLst;
-    QPair<QString, QString> pair = QPair<QString, QString>("/", "/");
-    infoLst.append(pair);
-    m_deviceBaseInfo->baseInfoToTxt(out, infoLst);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_tableHeaderToHtml)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    QFile html;
-    m_deviceBaseInfo->tableHeaderToHtml(html);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_tableInfoToXlsx)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    m_deviceBaseInfo->m_TableData.append("name");
-    m_deviceBaseInfo->m_TableHeader.append("name");
-    QXlsx::Document xlsx;
-    m_deviceBaseInfo->tableInfoToXlsx(xlsx);
-    m_deviceBaseInfo->tableHeaderToXlsx(xlsx);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_tableHeaderToDoc)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    //    Docx::Table *docs;
-    //    m_deviceBaseInfo->tableHeaderToDoc(docs);
-    //    m_deviceBaseInfo->tableHeaderToXlsx(xlsx);
-}
-
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_setEnable)
-{
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
     m_deviceBaseInfo->setEnable(true);
     m_deviceBaseInfo->enable();
     m_deviceBaseInfo->setCanEnale(true);
     ASSERT_TRUE(m_deviceBaseInfo->canEnable());
 }
 
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_getOverviewInfo)
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_getOverviewInfo)
 {
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
-    m_deviceBaseInfo->getOverviewInfo();
-    m_deviceBaseInfo->addFilterKey("");
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
+    QString ret = m_deviceBaseInfo->getOverviewInfo();
+    EXPECT_STREQ("", ret.toStdString().c_str());
 }
 
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_getOtherMapInfo)
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_getOtherMapInfo)
 {
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
     QMap<QString, QString> mapinfo;
     mapinfo.insert("bus info", "1@n");
     m_deviceBaseInfo->getOtherMapInfo(mapinfo);
+
+    EXPECT_EQ(0, m_deviceBaseInfo->m_LstOtherInfo.size());
 }
 
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_addBaseDeviceInfo)
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_addBaseDeviceInfo)
 {
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
     m_deviceBaseInfo->addBaseDeviceInfo("name", "abc@123");
-    m_deviceBaseInfo->addOtherDeviceInfo("name", "abc@123");
+    EXPECT_EQ(1, m_deviceBaseInfo->m_LstBaseInfo.size());
 }
 
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_setAttribute)
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_setAttribute)
 {
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
     QMap<QString, QString> mapinfo;
     mapinfo.insert("bus info", "1@n");
     QString value = "abc@123";
     m_deviceBaseInfo->setAttribute(mapinfo, "name", value, true);
+    EXPECT_STREQ("abc@123", value.toStdString().c_str());
 }
 
-TEST_F(DeviceInfo_UT, DeviceInfo_UT_mapInfoToList)
+TEST_F(UT_DeviceInfo, UT_DeviceInfo_mapInfoToList)
 {
-    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(bios);
+    m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
     QMap<QString, QString> mapinfo;
     mapinfo.insert("bus info", "1@n");
+
     m_deviceBaseInfo->m_MapOtherInfo = mapinfo;
     m_deviceBaseInfo->mapInfoToList();
+
+    EXPECT_EQ(1, m_deviceBaseInfo->m_LstOtherInfo.size());
 }

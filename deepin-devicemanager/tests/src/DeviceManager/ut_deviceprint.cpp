@@ -14,17 +14,18 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/DeviceManager/DevicePrint.h"
-#include "../ut_Head.h"
+#include "DevicePrint.h"
 #include "DeviceInfo.h"
 #include "EnableManager.h"
+
+#include "ut_Head.h"
+#include "stub.h"
 
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 class UT_DevicePrint : public UT_HEAD
 {

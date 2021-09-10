@@ -14,18 +14,19 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/DeviceManager/DeviceInput.h"
-#include "../src/DeviceManager/DeviceBios.h"
-#include "../ut_Head.h"
+#include "DeviceInput.h"
+#include "DeviceBios.h"
 #include "EnableManager.h"
 #include "DeviceManager.h"
+
+#include "stub.h"
+#include "ut_Head.h"
 
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 class UT_DeviceInput : public UT_HEAD
 {
