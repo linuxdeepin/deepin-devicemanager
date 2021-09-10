@@ -14,16 +14,21 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/PageInfo.h"
-#include "../src/Page/PageMultiInfo.h"
-#include "../src/DeviceManager/DeviceInput.h"
-#include "../ut_Head.h"
+#include "PageInfo.h"
+#include "PageMultiInfo.h"
+#include "DeviceInput.h"
+#include "PageDetail.h"
+#include "ut_Head.h"
+#include "stub.h"
+
+#include <DMessageManager>
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QScrollBar>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 class PageMultiInfo_UT : public UT_HEAD
 {
@@ -48,17 +53,23 @@ TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_updateInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     m_pageMultiInfo->updateInfo(bInfo);
+    EXPECT_EQ(0,m_pageMultiInfo->mp_Detail->mp_ScrollArea->verticalScrollBar()->value());
     delete device;
 }
 
 TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_setLabel)
 {
     m_pageMultiInfo->setLabel("/");
+    EXPECT_EQ("/",m_pageMultiInfo->mp_Label->text());
+    EXPECT_EQ(63,m_pageMultiInfo->mp_Label->font().weight());
     m_pageMultiInfo->clearWidgets();
+    EXPECT_TRUE(m_pageMultiInfo->mp_Detail->m_ListTextBrowser.isEmpty());
 }
 
 TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_slotItemClicked)
 {
     m_pageMultiInfo->slotItemClicked(0);
+    EXPECT_EQ(0,m_pageMultiInfo->mp_Detail->mp_ScrollArea->verticalScrollBar()->value());
     m_pageMultiInfo->slotEnableDevice(0, true);
+    EXPECT_FALSE(m_pageMultiInfo->isVisible());
 }

@@ -47,16 +47,16 @@ class UT_CmdTask : public UT_HEAD
 public:
     void SetUp()
     {
-        m_readFilePool = new GetInfoPool;
-        m_cmdTask = new CmdTask("", "", "", m_readFilePool);
+        readFilePool = new GetInfoPool;
+        m_cmdTask = new CmdTask("", "", "", readFilePool);
     }
     void TearDown()
     {
-        delete m_readFilePool;
+        delete readFilePool;
         delete m_cmdTask;
     }
     CmdTask *m_cmdTask;
-    GetInfoPool *m_readFilePool;
+    GetInfoPool *readFilePool;
 };
 
 TEST_F(UT_GetInfoPool,UT_GetInfoPool_initcmd){

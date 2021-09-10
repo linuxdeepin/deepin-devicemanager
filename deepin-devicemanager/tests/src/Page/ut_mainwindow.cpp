@@ -14,11 +14,16 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/PageInfo.h"
-#include "../src/Page/MainWindow.h"
-#include "../src/DeviceManager/DeviceInput.h"
-#include "../src/DeviceManager/DeviceInfo.h"
-#include "../ut_Head.h"
+#include "PageInfo.h"
+#include "MainWindow.h"
+#include "DeviceInput.h"
+#include "DeviceInfo.h"
+#include "DeviceWidget.h"
+#include "PageListView.h"
+#include "DeviceListView.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
@@ -27,9 +32,9 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QIODevice>
+#include <QJsonObject>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 void ut_refreshDataBase()
 {
@@ -41,21 +46,24 @@ class MainWindow_UT : public UT_HEAD
 public:
     void SetUp()
     {
+        stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
+        m_mainWindow = new MainWindow;
     }
     void TearDown()
     {
         delete m_mainWindow;
     }
     MainWindow *m_mainWindow = nullptr;
+    Stub stub;
 };
 
 TEST_F(MainWindow_UT, MainWindow_UT_refresh)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
-    m_mainWindow = new MainWindow;
+    m_mainWindow->m_refreshing = false;
     m_mainWindow->refresh();
+    EXPECT_TRUE(m_mainWindow->m_refreshing);
     m_mainWindow->slotRefreshInfo();
+    EXPECT_TRUE(m_mainWindow->m_refreshing);
 }
 
 QString UT_getSaveFileName()
@@ -65,11 +73,9 @@ QString UT_getSaveFileName()
 
 TEST_F(MainWindow_UT, MainWindow_UT_exportTo)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
     stub.set(ADDR(QFileDialog, getSaveFileName), UT_getSaveFileName);
-    m_mainWindow = new MainWindow;
-    m_mainWindow->exportTo();
+
+    EXPECT_FALSE(m_mainWindow->exportTo());
     m_mainWindow->slotExportInfo();
 }
 
@@ -80,83 +86,62 @@ bool ut_process_startDetached()
 
 TEST_F(MainWindow_UT, MainWindow_UT_showDisplayShortcutsHelpDialog)
 {
-    //
-    //        Stub stub;
     //        stub.set((bool (QProcess::*)(const QString &, const QStringList &))ADDR(QProcess,startDetached), ut_process_startDetached);
     //        m_mainWindow->showDisplayShortcutsHelpDialog();
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_addJsonArrayItem)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
-    m_mainWindow = new MainWindow;
     QJsonArray array;
     array.insert(0, QJsonValue("/"));
     m_mainWindow->addJsonArrayItem(array, "test", "/");
+    EXPECT_EQ(2,array.size());
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_getJsonDoc)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
-    m_mainWindow = new MainWindow;
     QJsonDocument doc;
     QJsonArray array;
     array.insert(0, QJsonValue("/"));
     doc.setArray(array);
     m_mainWindow->getJsonDoc(doc);
+    EXPECT_TRUE(doc.object().keys().size() == 1);
     m_mainWindow->windowMaximizing();
+    EXPECT_TRUE(m_mainWindow->isMaximized());
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_resizeEvent)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
-    m_mainWindow = new MainWindow;
     QResizeEvent resizeevent(QSize(10, 10), QSize(10, 10));
     m_mainWindow->resizeEvent(&resizeevent);
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_slotListItemClicked)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
-    m_mainWindow = new MainWindow;
     m_mainWindow->slotListItemClicked("Monitor");
     m_mainWindow->slotChangeUI();
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_keyPressEvent)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
-    m_mainWindow = new MainWindow;
     QKeyEvent keyPressEvent(QEvent::KeyPress, Qt::Key_Space, Qt::NoModifier);
     QCoreApplication::sendEvent(m_mainWindow, &keyPressEvent);
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_event)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
-    m_mainWindow = new MainWindow;
     QEvent event(QEvent::ApplicationFontChange);
     QCoreApplication::sendEvent(m_mainWindow, &event);
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_initWindow)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
-    m_mainWindow = new MainWindow;
     m_mainWindow->initWindow();
+    EXPECT_FALSE(m_mainWindow->mp_MainStackWidget->isVisible());
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_loadingFinishSlot)
 {
-    Stub stub;
-    stub.set(ADDR(MainWindow, refreshDataBase), ut_refreshDataBase);
-    m_mainWindow = new MainWindow;
     m_mainWindow->slotLoadingFinish("finish");
+    EXPECT_EQ(12,m_mainWindow->mp_DeviceWidget->mp_ListView->mp_ListView->mp_ItemModel->rowCount());
 }

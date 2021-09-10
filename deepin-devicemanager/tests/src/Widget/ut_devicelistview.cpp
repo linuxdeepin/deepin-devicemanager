@@ -101,15 +101,6 @@ TEST_F(UT_DeviceListView, UT_DeviceListView_keyPressEvent)
     EXPECT_TRUE(m_deviceListView->event(&keyPressEvent1));
 }
 
-TEST_F(UT_DeviceListviewDelegate, UT_DeviceListView_paint)
-{
-    QPainter painter(m_listView);
-    QStyleOptionViewItem option;
-    QModelIndex index = m_listView->model()->index(0, 0);
-    m_deviceListViewDelegate->paint(&painter, option, index);
-    EXPECT_FALSE(m_listView->grab().isNull());
-}
-
 TEST_F(UT_DeviceListviewDelegate, UT_DeviceListView_paintSeparator)
 {
     QPainter painter(m_listView);
@@ -117,13 +108,4 @@ TEST_F(UT_DeviceListviewDelegate, UT_DeviceListView_paintSeparator)
     QModelIndex index = m_listView->model()->index(0, 0);
     m_deviceListViewDelegate->paintSeparator(&painter, option);
     EXPECT_FALSE(m_listView->grab().isNull());
-}
-
-TEST_F(UT_DeviceListviewDelegate, UT_DeviceListView_sizeHint)
-{
-    QPainter painter(m_listView);
-    QStyleOptionViewItem option;
-    QModelIndex index = m_listView->model()->index(0, 0);
-    QSize size = m_deviceListViewDelegate->sizeHint(option, index);
-    EXPECT_EQ(9,size.width());
 }
