@@ -56,28 +56,8 @@ void DeviceGenerator::generatorComputerDevice()
     }
 
     // setOsDescription
-    QString os = DEFAULT_STR;
-    DSysInfo::UosEdition type = DSysInfo::uosEditionType();
-    if (DSysInfo::UosProfessional == type)
-        os =  PROF_STR;
-    else if (DSysInfo::UosHome == type)
-        os =  HOME_STR;
-    else if (DSysInfo::UosCommunity == type)
-        os =  COMMUNITY_STR;
-
-#if(DTK_VERSION > DTK_VERSION_CHECK(5,4,10,0))
-    else if (DSysInfo::UosEducation == type) {
-        os = EDUC_STR;
-    }
-#endif
-    else if (DSysInfo::UosEnterprise == type)
-        os =  ENTERPRISE_STR;
-    else if (DSysInfo::UosEnterpriseC == type)
-        os =  ENTERPRISEC_STR;
-    else if (DSysInfo::UosEuler == type)
-        os =  EULER_STR;
-
-    device->setOsDescription(os);
+    QString productName = DeviceGenerator::getProductName();
+    device->setOsDescription(productName);
 
     // os
     const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
@@ -874,5 +854,27 @@ void DeviceGenerator::addBusIDFromHwinfo(const QString &sysfsBusID)
 const QStringList &DeviceGenerator::getBusIDFromHwinfo()
 {
     return m_ListBusID;
+}
+
+const QString DeviceGenerator::getProductName()
+{
+    // 由DTK接口获取系统名称
+    QString name = DSysInfo::uosSystemName(QLocale(QLocale::English));
+    QString productType = DSysInfo::uosProductTypeName(QLocale(QLocale::English));
+
+    if (!productType.contains("Server", Qt::CaseInsensitive)) {
+        // 非服务器版 “产品名称”+“大版本号”+“版本名称”
+        name += " " + DSysInfo::majorVersion();
+        name += " " + DSysInfo::uosEditionName(QLocale(QLocale::English));
+    } else {
+        // 服务器版 产品名称”+“大版本号”+“（完整版本号识别码版本识别码）”
+        name += " " + DSysInfo::majorVersion();
+        name += " (";
+        name += DSysInfo::minorVersion();
+        name += DSysInfo::uosEditionName(QLocale(QLocale::English));
+        name += ")";
+    }
+
+    return name;
 }
 
