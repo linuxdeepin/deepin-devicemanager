@@ -4,7 +4,7 @@
 
 Device Manager is a tool to view and manage hardware devices, through which you can view all kinds of parameters and export data of all hardware devices running in the operating system, you can also disable/enable some hardware drives. 
 
-![0|overview](fig/p_overview.png)
+![0|overview](fig/e_overview.png)
 
 ## Guide
 
