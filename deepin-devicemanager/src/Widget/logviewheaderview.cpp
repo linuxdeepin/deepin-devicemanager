@@ -23,6 +23,7 @@
 #include <DApplicationHelper>
 #include <DPalette>
 #include <DStyleHelper>
+
 #include <QDebug>
 #include <QPaintEvent>
 #include <QPainter>
@@ -59,6 +60,8 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style)
+        return;
 
     QStyleOptionHeader option;
     initStyleOption(&option);
@@ -96,8 +99,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
                    };
     } else {
         textRect = {contentRect.x() + margin, contentRect.y(), contentRect.width() - margin,
-                    contentRect.height()
-                   };
+                    contentRect.height()};
     }
     QString title = model()->headerData(logicalIndex, orientation(), Qt::DisplayRole).toString();
     //    int align = model()->headerData(logicalIndex, orientation(),
@@ -151,6 +153,8 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style)
+        return;
 
     QBrush bgBrush(palette.color(cg, DPalette::Base));
 

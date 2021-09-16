@@ -21,6 +21,11 @@
 
 #ifndef DEVICEINFO_H
 #define DEVICEINFO_H
+
+#include "document.h"
+#include "xlsxdocument.h"
+#include "table.h"
+
 #include <QString>
 #include <QMap>
 #include <QSet>
@@ -29,10 +34,6 @@
 #include <QPair>
 #include <QDomDocument>
 #include <QFile>
-
-#include "document.h"
-#include "xlsxdocument.h"
-#include "table.h"
 
 /**
  * @brief The EnableDeviceStatus enum
@@ -129,12 +130,6 @@ public:
      * @return
      */
     bool canEnable();
-
-    /**
-     * @brief setIndex
-     * @param index
-     */
-    void setIndex(int index);
 
     /**
      * @brief isValid：判断属性值是否有效

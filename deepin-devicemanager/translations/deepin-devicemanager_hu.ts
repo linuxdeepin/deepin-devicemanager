@@ -658,7 +658,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="151"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1148"/>
         <source>CPU quantity</source>
-        <translation type="unfinished"/>
+        <translation>Processzorok száma</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="155"/>
@@ -1237,7 +1237,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="155"/>
         <source>Temperature</source>
-        <translation type="unfinished"/>
+        <translation>Hőmérséklet</translation>
     </message>
 </context>
 <context>
@@ -1434,12 +1434,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>Monitor</source>
-        <translation type="unfinished"/>
+        <translation>Kijelző</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Display Adapter</source>
-        <translation type="unfinished"/>
+        <translation>Kijelző feldolgozó</translation>
     </message>
 </context>
 <context>
@@ -2063,27 +2063,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
         <source>CPU implementer</source>
-        <translation>CPU megvalósító</translation>
+        <translation>Processzor megvalósító</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
         <source>CPU architecture</source>
-        <translation>CPU acrhitektúra</translation>
+        <translation>Processzor acrhitektúra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
         <source>CPU variant</source>
-        <translation>CPU variáció</translation>
+        <translation>Processzor variáció</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>CPU part</source>
-        <translation>CPU rész</translation>
+        <translation>Processzor rész</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
         <source>CPU revision</source>
-        <translation>CPU felülvizsgálat</translation>
+        <translation>Processzor felülvizsgálat</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>

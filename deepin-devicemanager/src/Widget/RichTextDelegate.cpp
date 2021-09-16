@@ -24,6 +24,7 @@ RichTextDelegate::RichTextDelegate(QObject *parent)
 {
 
 }
+
 void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (!index.isValid()) {
@@ -51,22 +52,18 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    //int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
+    if (!style)
+        return;
 
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
 
     if (opt.features & QStyleOptionViewItem::Alternate) {
-        background = palette.color(cg, DPalette::AlternateBase);
+        background = palette.color(cg, DPalette::ItemBackground);
     } else {
         background = palette.color(cg, DPalette::Base);
     }
-
-    // 绘制背景色
-//    QPainterPath path;
-//    path.addRect(opt.rect);
-//    painter->fillPath(path, background);
 
     QRect rect = opt.rect;
     QPainterPath path;
@@ -76,6 +73,8 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     rectpath.setWidth(rect.width() - 1);
 
     DWidget *par = dynamic_cast<DWidget *>(this->parent());
+    if (!par)
+        return;
     if (rectpath.y() > 0) {
 
         // 高度不超过表格高度
@@ -254,11 +253,6 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         textDoc.documentLayout()->draw(painter, paintContext);
         painter->restore();
     }
-
-//    if (index.column() == 0) {
-//        painter->setPen(palette.color(cg, DPalette::FrameShadowBorder));
-//        painter->drawLine(opt.rect.topRight(), opt.rect.bottomRight());
-//    }
 
     painter->restore();
 }

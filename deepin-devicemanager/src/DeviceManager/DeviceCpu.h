@@ -41,7 +41,7 @@ public:
      * @param mapDmidecode:由dmidecode -t 4获取的信息的map
      * @param catInfo:由cat /proc/cpuinfo获取的信息
      */
-    void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, const QMap<QString, QString> &catInfo, int coreNum, int logicalNum);
+    void setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, int coreNum, int logicalNum);
     /**
      * @brief vendor:获取制造商属性值
      * @return QString:制造商属性值
@@ -73,6 +73,18 @@ public:
      * @return 概况信息
      */
     const QString getOverviewInfo() override;
+
+    /**
+     * @brief setInfoFromLscpu:设置由lscpu获取的CPU信息
+     * @param mapInfo:由lscpu获取的CPU信息map
+     */
+    void setInfoFromLscpu(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief setCurFreq
+     * @param curFreq
+     */
+    void setCurFreq(const QString &curFreq);
 
 protected:
 
@@ -106,12 +118,6 @@ protected:
 private:
 
     /**
-     * @brief setInfoFromLscpu:设置由lscpu获取的CPU信息
-     * @param mapInfo:由lscpu获取的CPU信息map
-     */
-    void setInfoFromLscpu(const QMap<QString, QString> &mapInfo);
-
-    /**
      * @brief setInfoFromLshw:设置由lshw获取的CPU信息
      * @param mapInfo:由lshw获取的CPU信息map
      */
@@ -124,10 +130,10 @@ private:
     void setInfoFromDmidecode(const QMap<QString, QString> &mapInfo);
 
     /**
-     * @brief setInfoFromCatCpuinfo:设置由cat /proc/cpuinfo获取的信息
-     * @param mapInfo:由cat /proc/cpuinfo获取的信息map
+     * @brief setRefreshInfoFromLscpu:刷新时重新获取cpu信息
+     * @param mapInfo:由lscpu获取的信息
      */
-    void setInfoFromCatCpuinfo(const QMap<QString, QString> &mapInfo);
+    void setRefreshInfoFromLscpu(const QMap<QString, QString> &mapInfo);
 
 private:
     QString           m_Vendor;             //<! 制造商

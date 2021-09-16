@@ -24,7 +24,7 @@
 
 #include <QThread>
 
-class DetectJob;
+class MonitorUsb;
 
 /**
  * @brief The DetectThread class
@@ -40,26 +40,14 @@ public:
      */
     void run() override;
 
-    /**
-     * @brief setUSleepElapse
-     * @param elapse
-     */
-    void setUSleepElapse(unsigned int elapse);
-
 signals:
     /**
      * @brief usbChanged
      */
     void usbChanged();
 
-private slots:
-    /**
-     * @brief slotUsbChanged
-     */
-    void slotUsbChanged();
-
 private:
-    DetectJob    *mp_DectectJob;          //<! 检测任务
+    MonitorUsb   *mp_MonitorUsb;          //<! udev检测任务
 };
 
 #endif // DETECTTHREAD_H

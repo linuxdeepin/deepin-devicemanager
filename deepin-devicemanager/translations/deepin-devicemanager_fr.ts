@@ -885,7 +885,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="227"/>
         <source>Primary Monitor</source>
-        <translation>Moniteur principal</translation>
+        <translation>Écran principal</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="228"/>
@@ -1434,12 +1434,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>Monitor</source>
-        <translation type="unfinished"/>
+        <translation>Écran</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Display Adapter</source>
-        <translation type="unfinished"/>
+        <translation>Adaptateur pour écran</translation>
     </message>
 </context>
 <context>
@@ -3170,7 +3170,7 @@
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="106"/>
         <source>Loading Monitor Info...</source>
-        <translation>Chargement des informations du moniteur...</translation>
+        <translation>Chargement des informations de l&apos;écran...</translation>
     </message>
     <message>
         <location filename="../src/ThreadPool/ReadFilePool.cpp" line="107"/>

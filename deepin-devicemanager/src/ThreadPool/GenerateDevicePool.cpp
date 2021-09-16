@@ -22,9 +22,9 @@ void GenerateTask::run()
 {
     DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
 
-    if (!generator) {
+    if (!generator)
         return;
-    }
+
     switch (m_Type) {
     case DT_Computer:
         generator->generatorComputerDevice();
@@ -88,6 +88,7 @@ void GenerateTask::run()
 
 
 GenerateDevicePool::GenerateDevicePool()
+    : QThreadPool()
 {
     initType();
 }
@@ -114,10 +115,8 @@ void GenerateDevicePool::generateDevice()
             generator->generatorOthersDevice();
 
             // 指针使用结束释放
-            if (generator != nullptr) {
-                delete generator;
-                generator = nullptr;
-            }
+            delete generator;
+            generator = nullptr;
 
             break;
         }

@@ -20,9 +20,8 @@ DeviceBios::DeviceBios()
 
 bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
 
     // 获取BIOS信息
     m_Name = QObject::tr("BIOS Information");
@@ -42,9 +41,8 @@ bool DeviceBios::setBiosLanguageInfo(const QMap<QString, QString> &mapInfo)
 
 bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
 
     // 获取主板信息
     m_Name = QObject::tr("Base Board Information");
@@ -64,9 +62,8 @@ bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
 
 bool DeviceBios::setSystemInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
 
     // 获取系统信息
     m_Name = QObject::tr("System Information");
@@ -80,9 +77,8 @@ bool DeviceBios::setSystemInfo(const QMap<QString, QString> &mapInfo)
 
 bool DeviceBios::setChassisInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
 
     // 获取机箱信息
     m_Name = QObject::tr("Chassis Information");
@@ -96,9 +92,8 @@ bool DeviceBios::setChassisInfo(const QMap<QString, QString> &mapInfo)
 
 bool DeviceBios::setMemoryInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
 
     // 获取内存插槽信息
     m_Name = QObject::tr("Physical Memory Array");
@@ -143,11 +138,10 @@ QString DeviceBios::subTitle()
 const QString DeviceBios::getOverviewInfo()
 {
     // 获取主板概况信息
-    if (isBoard()) {
+    if (isBoard())
         return m_ProductName;
-    } else {
+    else
         return QString("");
-    }
 }
 
 void DeviceBios::initFilterKey()
@@ -171,7 +165,6 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("Contained Object Handles"));
 
     addFilterKey(QObject::tr("Product Name"));
-//    addFilterKey(QObject::tr("Version"));
     addFilterKey(QObject::tr("Serial Number"));
     addFilterKey(QObject::tr("UUID"));
     addFilterKey(QObject::tr("Wake-up Type"));
@@ -194,7 +187,6 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("SKU Number"));
 
     addFilterKey(QObject::tr("Location"));
-//    addFilterKey(QObject::tr("Use"));
     addFilterKey(QObject::tr("Error Correction Type"));
     addFilterKey(QObject::tr("Maximum Capacity"));
     addFilterKey(QObject::tr("Error Information Handle"));

@@ -47,26 +47,30 @@ void MipsGenerator::generatorComputerDevice()
 
     // 龙心机器从sudo dmidecode -t 1中获取机器信息
     const QList<QMap<QString, QString> >  &dmiInfo = DeviceManager::instance()->cmdInfo("dmidecode1");
-    if (dmiInfo.size() > 1) {
+    if (dmiInfo.size() > 1)
         device->setName(dmiInfo[1]["Product Name"]);
-    }
 
     // setOsDescription
     QString os = DEFAULT_STR;
     DSysInfo::UosEdition type = DSysInfo::uosEditionType();
-    if (DSysInfo::UosProfessional == type) {
+    if (DSysInfo::UosProfessional == type)
         os =  PROF_STR;
-    } else if (DSysInfo::UosHome == type) {
+    else if (DSysInfo::UosHome == type)
         os =  HOME_STR;
-    } else if (DSysInfo::UosCommunity == type) {
-        os =  COMMUNITY_STR;
-    } else if (DSysInfo::UosEnterprise == type) {
-        os =  ENTERPRISE_STR;
-    } else if (DSysInfo::UosEnterpriseC == type) {
-        os =  ENTERPRISEC_STR;
-    } else if (DSysInfo::UosEuler == type) {
-        os =  EULER_STR;
+    else if (DSysInfo::UosCommunity == type)
+        os = COMMUNITY_STR;
+#if(DTK_VERSION > DTK_VERSION_CHECK(5,4,10,0))
+    else if (DSysInfo::UosEducation == type) {
+        os = EDUC_STR;
     }
+#endif
+    else if (DSysInfo::UosEnterprise == type)
+        os =  ENTERPRISE_STR;
+    else if (DSysInfo::UosEnterpriseC == type)
+        os =  ENTERPRISEC_STR;
+    else if (DSysInfo::UosEuler == type)
+        os =  EULER_STR;
+
     device->setOsDescription(os);
 
     // os

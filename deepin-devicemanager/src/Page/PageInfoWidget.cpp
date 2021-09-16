@@ -29,19 +29,21 @@ PageInfoWidget::PageInfoWidget(QWidget *parent)
     initWidgets();
 
     // 连接槽函数
-    connect(mp_PageMutilInfo, &PageMultiInfo::refreshInfo, this, &PageInfoWidget::slotRefreshInfo);
-    connect(mp_PageMutilInfo, &PageMultiInfo::exportInfo, this, &PageInfoWidget::slotExportInfo);
-    connect(mp_PageMutilInfo, &PageMultiInfo::updateUI, this, &PageInfoWidget::slotUpdateUI);
-    connect(mp_PageSignalInfo, &PageSingleInfo::refreshInfo, this, &PageInfoWidget::slotRefreshInfo);
-    connect(mp_PageSignalInfo, &PageSingleInfo::exportInfo, this, &PageInfoWidget::slotExportInfo);
-    connect(mp_PageOverviewInfo, &PageOverview::refreshInfo, this, &PageInfoWidget::slotRefreshInfo);
-    connect(mp_PageOverviewInfo, &PageOverview::exportInfo, this, &PageInfoWidget::slotExportInfo);
-    connect(mp_PageBoardInfo, &PageBoardInfo::refreshInfo, this, &PageInfoWidget::slotRefreshInfo);
-    connect(mp_PageBoardInfo, &PageBoardInfo::exportInfo, this, &PageInfoWidget::slotExportInfo);
+    connect(mp_PageMutilInfo, &PageMultiInfo::refreshInfo, this, &PageInfoWidget::refreshInfo);
+    connect(mp_PageMutilInfo, &PageMultiInfo::exportInfo, this, &PageInfoWidget::exportInfo);
+    connect(mp_PageMutilInfo, &PageMultiInfo::updateUI, this, &PageInfoWidget::updateUI);
+    connect(mp_PageSignalInfo, &PageSingleInfo::refreshInfo, this, &PageInfoWidget::refreshInfo);
+    connect(mp_PageSignalInfo, &PageSingleInfo::exportInfo, this, &PageInfoWidget::exportInfo);
+    connect(mp_PageOverviewInfo, &PageOverview::refreshInfo, this, &PageInfoWidget::refreshInfo);
+    connect(mp_PageOverviewInfo, &PageOverview::exportInfo, this, &PageInfoWidget::exportInfo);
+    connect(mp_PageBoardInfo, &PageBoardInfo::refreshInfo, this, &PageInfoWidget::refreshInfo);
+    connect(mp_PageBoardInfo, &PageBoardInfo::exportInfo, this, &PageInfoWidget::exportInfo);
 }
 
 void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseInfo *> &lst)
 {
+    mp_PageInfo->clearWidgets();
+
     // 设备个数为0,是概况界面
     if (lst.size() == 0) {
         mp_PageOverviewInfo->setVisible(true);
@@ -80,7 +82,7 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseI
     }
 }
 
-void PageInfoWidget::updateTable(const QString &itemStr, const QMap<QString, QString> &map)
+void PageInfoWidget::updateTable(const QMap<QString, QString> &map)
 {
     // 更新概况界面
     mp_PageOverviewInfo->setVisible(true);
@@ -97,23 +99,6 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QMap<QString, QSt
 void PageInfoWidget::resizeEvent(QResizeEvent *event)
 {
     DWidget::resizeEvent(event);
-}
-
-void PageInfoWidget::slotRefreshInfo()
-{
-    // 刷新信息
-    emit refreshInfo();
-}
-void PageInfoWidget::slotExportInfo()
-{
-    // 导出信息
-    emit exportInfo();
-}
-
-void PageInfoWidget::slotUpdateUI()
-{
-    // 更新UI
-    emit updateUI();
 }
 
 void PageInfoWidget::initWidgets()

@@ -128,29 +128,6 @@ void TextBrowser::paintEvent(QPaintEvent *event)
     return DTextBrowser::paintEvent(event);
 }
 
-void TextBrowser::contextMenuEvent(QContextMenuEvent *event)
-{
-//    QMenu *standMenu = new QMenu(this);
-
-//    QString str = QTextEdit::textCursor().selectedText();
-
-//    QAction *copyAction = new QAction(QIcon::fromTheme("edit-copy"), tr("Copy (C)"), this);
-//    if (str.isEmpty()) {
-//        copyAction->setDisabled(true);
-//    } else {
-//        connect(copyAction, &QAction::triggered, this, &TextBrowser::fillClipboard);
-//    }
-//    standMenu->addAction(copyAction);
-//    standMenu->addSeparator();
-
-//    standMenu->addAction(m_pDeviceInfoWidget->refreshAction_);
-//    standMenu->addAction(m_pDeviceInfoWidget->exportAction_);
-
-//    standMenu->exec(event->globalPos());
-
-//    delete standMenu;
-}
-
 void TextBrowser::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_C) {
@@ -202,13 +179,7 @@ void TextBrowser::focusOutEvent(QFocusEvent *e)
 
 void TextBrowser::slotShowMenu(const QPoint &)
 {
-//    QString str = QTextEdit::textCursor().selectedText();
-//    if (str.isEmpty()) {
-//        mp_Copy->setText(tr("Copy (C)"));
-//    } else {
-//        mp_Copy->setText(tr("Copy Selected Text"));
-//    }
-
+    // 右键菜单
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
     mp_Menu->addAction(mp_Refresh);

@@ -58,6 +58,11 @@ public:
     void updateInfo(const QMap<QString, QString> &map) override;
 
     /**
+     * @brief clearWidgets clear widgets
+     */
+    void clearWidgets() override;
+
+    /**
      * @brief setLabel:设置Label
      * @param itemstr:Label信息
      */
@@ -92,16 +97,6 @@ private slots:
      * @brief slotShowMenu:鼠标右键菜单槽函数
      */
     void slotShowMenu(const QPoint &);
-
-    /**
-     * @brief slotActionRefresh:右键菜单刷新槽函数
-     */
-    void slotActionRefresh();
-
-    /**
-     * @brief slotActionExport:右键菜单导出槽函数
-     */
-    void slotActionExport();
 
     /**
      * @brief slotActionCopy

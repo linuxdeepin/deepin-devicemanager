@@ -78,8 +78,10 @@ void DetailTreeView::setColumnAndRow(int row, int column)
     setColumnCount(column);
 
     // 当前页为主板页面时,且信息已展开,展示更多/收起按钮
-    PageTableWidget *p = dynamic_cast<PageTableWidget *>(this->parent());
-    if (p->isBaseBoard() && m_IsExpand) {
+    PageTableWidget *pageTableWidget = dynamic_cast<PageTableWidget *>(this->parent());
+    if (!pageTableWidget)
+        return;
+    if (pageTableWidget->isBaseBoard() && m_IsExpand) {
         setCommanLinkButton(row);
         showRow(row - 1);
     } else {
@@ -178,26 +180,24 @@ int DetailTreeView::setTableHeight(int paintHeight)
     }
 
     // 父窗口
-    PageTableWidget *p = dynamic_cast<PageTableWidget *>(this->parent());
-    PageInfo *par = dynamic_cast<PageInfo *>(p->parent());
-
+    PageTableWidget *pageTableWidget = dynamic_cast<PageTableWidget *>(this->parent());
+    PageInfo *par = dynamic_cast<PageInfo *>(pageTableWidget->parent());
     // 父窗口可显示的最大表格行数
     // 最多显示行数与父窗口高度相关,需减去Label以及Spacing占用空间
     int maxRow = 0;
     maxRow = par->height() / ROW_HEIGHT - 2;
 
     // 当前页面为概况时，展开更多信息，页面显示的表格的最大行数需减一，避免表格边框显示不完整
-    if (p->isOverview()) {
+    if (pageTableWidget->isOverview()) {
         // 有更多信息并且已展开
-        if (hasExpendInfo() && m_IsExpand) {
+        if (hasExpendInfo() && m_IsExpand)
             --maxRow;
-        }
     }
 
     // 主板界面的表格高度
-    if (p->isBaseBoard()) {
+    if (pageTableWidget->isBaseBoard()) {
         // 表格未展开
-        if (m_IsExpand == false) {
+        if (false == m_IsExpand) {
             this->setFixedHeight(ROW_HEIGHT * (m_LimitRow + 1));
             return this->height();
         } else {
@@ -205,16 +205,15 @@ int DetailTreeView::setTableHeight(int paintHeight)
             this->setFixedHeight(ROW_HEIGHT * maxRow);
             return this->height();
         }
-
     }
 
     // 信息行 <= m_LimitRow + 1 不影响表格大小
     if (rowCount() <= m_LimitRow + 1) {
-        this->setFixedHeight((rowCount() - 1)*ROW_HEIGHT);
+        this->setFixedHeight((rowCount() - 1) * ROW_HEIGHT);
         return (rowCount() - 1) * ROW_HEIGHT;
     } else {
         // 未展开,窗口高度始终等于ROW_HEIGHT * (m_LimitRow+1)
-        if (m_IsExpand == false) {
+        if (false == m_IsExpand) {
             this->setFixedHeight(ROW_HEIGHT * (m_LimitRow + 1));
             return this->height();
 
@@ -333,6 +332,11 @@ void DetailTreeView::setCurDeviceState(bool state)
     }
 }
 
+bool DetailTreeView::isExpanded()
+{
+    return m_IsExpand;
+}
+
 void DetailTreeView::expandCommandLinkClicked()
 {
     // 当前已展开详细信息
@@ -440,12 +444,12 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
     paintPath = paintPathOut.subtracted(paintPathIn);
 
     // 填充
-    QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
+    QBrush bgBrush(palette.color(cg, DPalette::FrameBorder));
     painter.fillPath(paintPath, bgBrush);
 
     QPen pen = painter.pen();
     pen.setWidth(1);
-    pen.setColor(palette.color(cg, DPalette::FrameShadowBorder));
+    pen.setColor(palette.color(cg, DPalette::FrameBorder));
 
     painter.setPen(pen);
 
@@ -462,9 +466,8 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
         }
 
     } else if (hasExpendInfo() && m_IsExpand) {
-
         QTableWidgetItem *it = this->itemAt(QPoint(this->rect().bottomLeft().x(), this->rect().bottomLeft().y()));
-        if (it == nullptr) {
+        if (nullptr == it) {
             // 由于展开按钮行是DWidget无法获取item，所以，再在这种情况下，展开按钮行开始出现再可视区域
             for (int i = 1; i <= 40; ++i) {
 

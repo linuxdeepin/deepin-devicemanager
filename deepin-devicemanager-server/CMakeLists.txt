@@ -36,6 +36,7 @@ endforeach()
 
 # 引用ZeroMQ的库 begin ****************************************************************
 link_libraries("zmq")
+link_libraries("udev")
 # 引用ZeroMQ的库 end  *****************************************************************
 
 find_package(Qt5 COMPONENTS
@@ -52,3 +53,5 @@ install(TARGETS ${APP_BIN_NAME} DESTINATION bin)
 install(FILES ${SYSTEMD_SERVER} DESTINATION /lib/systemd/system)
 install(FILES ${DBUS_CONFIG} DESTINATION /etc/dbus-1/system.d)
 
+#TEST--------------------------------------------------
+add_subdirectory(./tests)

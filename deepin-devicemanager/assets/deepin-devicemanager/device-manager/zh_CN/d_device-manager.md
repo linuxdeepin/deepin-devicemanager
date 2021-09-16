@@ -1,10 +1,10 @@
-# 设备管理器|../common/deepin_devicemanager_96.svg|
+# 设备管理器|deepin-devicemanager|
 
 ## 概述
 
 设备管理器是查看和管理硬件设备的工具，可针对运行在操作系统的硬件设备，进行参数状态的查看、数据信息的导出等，还可以禁用或启动部分硬件驱动。
 
-![0|overview](fig/d_overview.png)
+![0|d_overview](fig/d_overview.png)
 
 ## 使用入门
 
@@ -27,8 +27,8 @@
 
 ### 关闭设备管理器
 
-- 在设备管理器界面单击  ![close](../common/close.svg) ，退出设备管理器。
-- 右键单击任务栏上的 ![deepin_devicemanager](../common/deepin_devicemanager.svg)，选择 **关闭所有** 来退出设备管理器。
+- 在设备管理器界面，单击  ![close](../common/close.svg) ，退出设备管理器。
+- 右键单击任务栏上的 ![deepin_devicemanager](../common/deepin_devicemanager.svg) ，选择 **关闭所有** 来退出设备管理器。
 - 在设备管理器界面单击 ![icon_menu](../common/icon_menu.svg) ，选择 **退出** 来退出设备管理器。
 
 ## 操作介绍
@@ -39,7 +39,7 @@
 1. 在设备管理器界面，单击 **概况**。
 2. 查看操作系统内核信息及各硬件设备列表。
 
-![0|overview](fig/d_overview.png)
+![0|d_overview](fig/d_overview.png)
 
 ### 处理器
 
@@ -71,7 +71,7 @@
 
 ### 音频适配器
 
-1. 在设备管理器界面，单击 **音频适配器 **。
+1. 在设备管理器界面，单击 **音频适配器**。
 2. 查看音频适配器列表，以及所有音频适配器的详细信息如名称、制造商及型号等。
 
 ![0|audio_adapter](fig/audio_adapter.png)
@@ -85,35 +85,35 @@
 
 ### 网络适配器
 
-1. 在设备管理器界面，单击 **网络适配器 **。
+1. 在设备管理器界面，单击 **网络适配器**。
 2. 查看网络适配器的名称、制造商、类型及驱动等信息。
 
 ![0|network_adapter](fig/network_adapter.png)
 
 ### 鼠标
 
-1. 在设备管理器界面，单击 **鼠标 **。
+1. 在设备管理器界面，单击 **鼠标**。
 2. 查看鼠标的名称、制造商、总线信息、驱动及频率等信息。
 
 ![0|mouse](fig/mouse.png)
 
 ### 键盘
 
-1. 在设备管理器界面，单击 **键盘 **。
+1. 在设备管理器界面，单击 **键盘**。
 2. 查看键盘的名称、型号、制造商、总线信息及驱动等信息。
 
 ![0|keyboard](fig/keyboard.png)
 
 ### 显示设备
 
-1. 在设备管理器界面，单击 **显示设备 **。
+1. 在设备管理器界面，单击 **显示设备**。
 2. 查看显示设备的名称、制造商、类型、接口类型及分辨率等信息。
 
 ![0|display_device](fig/display_device.png) 
 
 ### 打印机
 
-1. 在设备管理器界面，单击 **打印机 **。
+1. 在设备管理器界面，单击 **打印机**。
 2. 查看连接的打印机列表，以及所有打印机的详细信息如名称、型号、制造商、设备URI等信息。
 
 ![0|printer](fig/printer.png)

@@ -18,26 +18,24 @@ void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "size", m_Size);
 
     // 替换内存大小单位
-    if (m_Size.contains("GiB")) {
+    if (m_Size.contains("GiB"))
         m_Size.replace("GiB", "GB");
-    }
 
     if (m_Size.contains("MiB")) {
         m_Size.replace("MiB", "");
         // MiB换算MB
         double size = m_Size.toDouble() / 1024.0;
 #ifdef __sw_64__ //lutianyu 2021-2-4 num is not even
-	if (int(size) % 2 != 0 )
-		size = size + 1;
+        if (int(size) % 2 != 0)
+            size = size + 1;
 #endif
         m_Size = QString::number(size, 'g', 0) + QString("GB");
     }
 
     // 设置内存速率
     setAttribute(mapInfo, "clock", m_Speed);
-    if (m_Speed.contains("MT/s")) {
+    if (m_Speed.contains("MT/s"))
         m_Speed.replace("MT/s", "MHz");
-    }
 
     // 由lshw设置基本信息
     setAttribute(mapInfo, "width", m_TotalBandwidth);
@@ -50,9 +48,8 @@ void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
     // 由 locator属性判断是否为同一内存条
-    if (mapInfo["Locator"] != m_Locator) {
+    if (mapInfo["Locator"] != m_Locator)
         return false;
-    }
 
     // 由dmidecode设置基本属性
     setAttribute(mapInfo, "Part Number", m_Name);
@@ -60,9 +57,8 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 
     // 设置配置频率
     setAttribute(mapInfo, "Configured Memory Speed", m_ConfiguredSpeed);
-    if (m_ConfiguredSpeed.contains("MT/s")) {
+    if (m_ConfiguredSpeed.contains("MT/s"))
         m_ConfiguredSpeed.replace("MT/s", "MHz");
-    }
 
     // 由dmidecode设置基本属性
     setAttribute(mapInfo, "Minimum Voltage", m_MinimumVoltage);
@@ -73,9 +69,8 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 
     // 设置类型
     setAttribute(mapInfo, "Type", m_Type);
-    if (m_Type == "<OUT OF SPEC>") {
+    if (m_Type == "<OUT OF SPEC>")
         m_Type = "";
-    }
 
     // 获取其他属性
     getOtherMapInfo(mapInfo);

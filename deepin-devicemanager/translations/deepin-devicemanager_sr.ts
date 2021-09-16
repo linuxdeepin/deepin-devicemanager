@@ -905,7 +905,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="231"/>
         <source>Product Date</source>
-        <translation> Датум производње</translation>
+        <translation>Датум производње</translation>
     </message>
 </context>
 <context>
@@ -1434,12 +1434,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>Monitor</source>
-        <translation type="unfinished"/>
+        <translation>Монитор</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Display Adapter</source>
-        <translation type="unfinished"/>
+        <translation>Графичка картица</translation>
     </message>
 </context>
 <context>

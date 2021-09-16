@@ -7,7 +7,8 @@
 #include <QDir>
 #include <unistd.h>
 
-#include<DeviceInfoManager.h>
+#include "DeviceInfoManager.h"
+#include "cpu/CpuInfo.h"
 
 ThreadPoolTask::ThreadPoolTask(QString cmd, QString file, bool replace, int waiting, QObject *parent)
     : QObject(parent),
@@ -26,6 +27,10 @@ ThreadPoolTask::~ThreadPoolTask()
 
 void ThreadPoolTask::run()
 {
+    if (m_Cmd == "lscpu") {
+        loadCpuInfo();
+        return;
+    }
     runCmdToCache(m_Cmd);
 }
 
@@ -66,7 +71,6 @@ void ThreadPoolTask::runCmdToCache(const QString &cmd)
     // 2. 执行命令获取设备信息
     QString info;
     runCmd(cmd, info);
-
     // 3. 管理设备信息
     // 如果命令是 lsblk  , 则需要执行 smartctl --all /dev/***命令
     if (m_File == "lsblk_d.txt") {
@@ -81,6 +85,10 @@ void ThreadPoolTask::runCmdToCache(const QString &cmd)
     // 如果命令是 lspci  , 则需要执行 lspci -v -s %1 > lspci_vs.txt 命令
     if (m_File == "lspci.txt") {
         loadLspciVSInfoToCache(info);
+    }
+
+    if ("hwinfo_display.txt" == m_File) {
+        loadDisplayWidth(info);
     }
 
     DeviceInfoManager::getInstance()->addInfo(key, info);
@@ -100,6 +108,16 @@ void ThreadPoolTask::loadSmartCtlInfoToCache(const QString &info)
         QString sInfo;
         runCmd(smartCmd, sInfo);
         DeviceInfoManager::getInstance()->addInfo(QString("smartctl_%1").arg(words[0].trimmed()), sInfo);
+    }
+}
+
+void ThreadPoolTask::loadCpuInfo()
+{
+    CpuInfo cpu;
+    if (cpu.loadCpuInfo()) {
+        QString info;
+        cpu.logicalCpus(info);
+        DeviceInfoManager::getInstance()->addInfo("lscpu", info);
     }
 }
 
@@ -139,6 +157,48 @@ void ThreadPoolTask::loadLspciVSInfoToCache(const QString &info)
     }
 }
 
+void ThreadPoolTask::loadDisplayWidth(const QString &info)
+{
+    QString widthS;
+    QStringList params = info.split("\n\n");
+    foreach (const QString &param, params) {
+
+        QStringList lines = param.split("\n");
+        if (lines.size() < 5)
+            continue;
+        foreach (const QString &line, lines) {
+            if (line.contains("SysFS ID")) {
+                QString pci = line.right(7);
+                int width = getDisplayWidthFromLspci(pci);
+                widthS += pci;
+                widthS += "-";
+                widthS += QString::number(width);
+                widthS += "\n";
+                break;
+            }
+        }
+
+        DeviceInfoManager::getInstance()->addInfo("width", widthS);
+    }
+}
+
+int ThreadPoolTask::getDisplayWidthFromLspci(const QString &info)
+{
+    QString cmd = QString("lspci -v -s %1").arg(info);
+    QString sInfo;
+    runCmd(cmd, sInfo);
+    QStringList lines = sInfo.split("\n");
+    foreach (const QString &line, lines) {
+        if (!line.contains("Memory at")) {
+            continue;
+        }
+        if (line.contains("32-bit"))
+            return 32;
+        else
+            return 64;
+    }
+    return 64;
+}
 
 void ThreadPoolTask::runCmdToFile(const QString &cmd)
 {

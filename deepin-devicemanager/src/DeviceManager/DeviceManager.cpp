@@ -48,73 +48,56 @@ void DeviceManager::clear()
     m_cmdInfo.clear();
 
     // 清除内存中的所有设备指针
-    foreach (auto device, m_ListDeviceMouse) {
+    foreach (auto device, m_ListDeviceMouse)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceStorage) {
+    foreach (auto device, m_ListDeviceStorage)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceMonitor) {
+    foreach (auto device, m_ListDeviceMonitor)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceAudio) {
+    foreach (auto device, m_ListDeviceAudio)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceImage) {
+    foreach (auto device, m_ListDeviceImage)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceKeyboard) {
+    foreach (auto device, m_ListDeviceKeyboard)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceOthers) {
+    foreach (auto device, m_ListDeviceOthers)
         delete device;
-    }
 
-    foreach (auto device, m_ListDevicePower) {
+    foreach (auto device, m_ListDevicePower)
         delete device;
-    }
 
-    foreach (auto device, m_ListDevicePrint) {
+    foreach (auto device, m_ListDevicePrint)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceOtherPCI) {
+    foreach (auto device, m_ListDeviceOtherPCI)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceCdrom) {
+    foreach (auto device, m_ListDeviceCdrom)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceComputer) {
+    foreach (auto device, m_ListDeviceComputer)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceNetwork) {
+    foreach (auto device, m_ListDeviceNetwork)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceBios) {
+    foreach (auto device, m_ListDeviceBios)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceGPU) {
+    foreach (auto device, m_ListDeviceGPU)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceMemory) {
+    foreach (auto device, m_ListDeviceMemory)
         delete device;
-    }
 
-    foreach (auto device, m_ListDeviceCPU) {
+    foreach (auto device, m_ListDeviceCPU)
         delete device;
-    }
 
     // 清空存储设备指针的列表
     m_ListDeviceMouse.clear();
@@ -144,39 +127,75 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
     m_ListDeviceType.clear();
 
     // 添加概况信息
-    if (true) m_ListDeviceType.append(QPair<QString, QString>(tr("Overview"), "overview##Overview"));
+    if (true)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Overview"), "overview##Overview"));
 
     // 添加cpu信息
-    if (m_ListDeviceCPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU"), "cpu##CPU"));
-    if (m_CpuNum > 1) m_ListDeviceType.append(QPair<QString, QString>(tr("CPU quantity"), ""));
+    if (m_ListDeviceCPU.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("CPU"), "cpu##CPU"));
+
+    if (m_CpuNum > 1)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("CPU quantity"), ""));
+
     m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 板载接口设备
-    if (m_ListDeviceBios.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Motherboard"), "motherboard##Bios"));
-    if (m_ListDeviceMemory.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Memory"), "memory##Memory"));
-    if (m_ListDeviceGPU.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Display Adapter"), "displayadapter##GPU"));
-    if (m_ListDeviceAudio.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Sound Adapter"), "audiodevice##Audio"));
-    if (m_ListDeviceStorage.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Storage"), "storage##Storage"));
-    if (m_ListDeviceOtherPCI.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Other PCI Devices"), "otherpcidevices##OtherPCI"));
-    if (m_ListDevicePower.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Battery"), "battery##Power"));
+    if (m_ListDeviceBios.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Motherboard"), "motherboard##Bios"));
+
+    if (m_ListDeviceMemory.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Memory"), "memory##Memory"));
+
+    if (m_ListDeviceGPU.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Display Adapter"), "displayadapter##GPU"));
+
+    if (m_ListDeviceAudio.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Sound Adapter"), "audiodevice##Audio"));
+
+    if (m_ListDeviceStorage.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Storage"), "storage##Storage"));
+
+    if (m_ListDeviceOtherPCI.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Other PCI Devices"), "otherpcidevices##OtherPCI"));
+
+    if (m_ListDevicePower.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Battery"), "battery##Power"));
+
     m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 网络设备
-    if (m_ListDeviceBluetooth.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Bluetooth"), "bluetooth##Bluetooth"));
-    if (m_ListDeviceNetwork.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Network Adapter"), "networkadapter##Network"));
+    if (m_ListDeviceBluetooth.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Bluetooth"), "bluetooth##Bluetooth"));
+
+    if (m_ListDeviceNetwork.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Network Adapter"), "networkadapter##Network"));
+
     m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 输入设备
-    if (m_ListDeviceMouse.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Mouse"), "mouse##Mouse"));
-    if (m_ListDeviceKeyboard.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Keyboard"), "keyboard##Keyboard"));
+    if (m_ListDeviceMouse.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Mouse"), "mouse##Mouse"));
+
+    if (m_ListDeviceKeyboard.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Keyboard"), "keyboard##Keyboard"));
+
     m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 外设设备
-    if (m_ListDeviceMonitor.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Monitor"), "monitor##Monitor"));
-    if (m_ListDeviceCdrom.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("CD-ROM"), "cdrom##Cdrom"));
-    if (m_ListDevicePrint.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Printer"), "printer##Print"));
-    if (m_ListDeviceImage.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Camera"), "camera##Image"));
-    if (m_ListDeviceOthers.size() > 0) m_ListDeviceType.append(QPair<QString, QString>(tr("Other Devices", "Other Input Devices"), "otherdevices##Others"));
+    if (m_ListDeviceMonitor.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Monitor"), "monitor##Monitor"));
+
+    if (m_ListDeviceCdrom.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("CD-ROM"), "cdrom##Cdrom"));
+
+    if (m_ListDevicePrint.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Printer"), "printer##Print"));
+
+    if (m_ListDeviceImage.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Camera"), "camera##Image"));
+
+    if (m_ListDeviceOthers.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Other Devices", "Other Input Devices"), "otherdevices##Others"));
 
     return m_ListDeviceType;
 }
@@ -206,12 +225,12 @@ void DeviceManager::setDeviceListClass()
 bool DeviceManager::getDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst)
 {
     // name为概况Overview时,没有设备列表
-    if (name == tr("Overview")) {return false;}
+    if (name == tr("Overview"))
+        return false;
 
     // 获取设备指针列表
-    if (m_DeviceClassMap.find(name) != m_DeviceClassMap.end()) {
+    if (m_DeviceClassMap.find(name) != m_DeviceClassMap.end())
         lst = m_DeviceClassMap[name];
-    }
 
     return true;
 }
@@ -222,22 +241,17 @@ void DeviceManager::addMouseDevice(DeviceInput *const device)
     m_ListDeviceMouse.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getMouseDevices()
-{
-    return m_ListDeviceMouse;
-}
-
 bool DeviceManager::addMouseInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // 从lshw中添加鼠标信息
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMouse.begin();
     for (; it != m_ListDeviceMouse.end(); ++it) {
         DeviceInput *device = dynamic_cast<DeviceInput *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
 
-        if (device->setInfoFromlshw(mapInfo)) {
+        if (device->setInfoFromlshw(mapInfo))
             return true;
-        }
     }
     return false;
 }
@@ -246,11 +260,6 @@ void DeviceManager::addCpuDevice(DeviceCpu *const device)
 {
     // 添加CPU设备
     m_ListDeviceCPU.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getCPUDevices()
-{
-    return m_ListDeviceCPU;
 }
 
 void DeviceManager::addStorageDeivce(DeviceStorage *const device)
@@ -265,11 +274,11 @@ void DeviceManager::addLshwinfoIntoStorageDevice(const QMap<QString, QString> &m
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceStorage.begin();
     for (; it != m_ListDeviceStorage.end(); ++it) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
 
-        if (device->addInfoFromlshw(mapInfo)) {
+        if (device->addInfoFromlshw(mapInfo))
             return;
-        }
     }
 }
 
@@ -279,11 +288,11 @@ void DeviceManager::addLshwinfoIntoNVMEStorageDevice(const QMap<QString, QString
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceStorage.begin();
     for (; it != m_ListDeviceStorage.end(); ++it) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
 
-        if (device->addNVMEInfoFromlshw(mapInfo)) {
+        if (device->addNVMEInfoFromlshw(mapInfo))
             return;
-        }
     }
 }
 
@@ -293,17 +302,12 @@ void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QMap<Q
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceStorage.begin();
     for (; it != m_ListDeviceStorage.end(); ++it) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
-        if (!device) continue;
+        if (!device)
+            continue;
 
-        if (device->addInfoFromSmartctl(name, mapInfo)) {
+        if (device->addInfoFromSmartctl(name, mapInfo))
             return;
-        }
     }
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getStorageDevices()
-{
-    return m_ListDeviceStorage;
 }
 
 bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString &value)
@@ -316,9 +320,8 @@ bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString
             continue;
 
         // 设置介质类型
-        if (device->setMediaType(name, value)) {
+        if (device->setMediaType(name, value))
             return true;
-        }
     }
 
     return  false;
@@ -335,9 +338,8 @@ bool DeviceManager::setKLUStorageDeviceMediaType(const QString &name, const QStr
             continue;
 
         // 设置KLU介质类型
-        if (device->setKLUMediaType(name, value)) {
+        if (device->setKLUMediaType(name, value))
             return true;
-        }
     }
     return  false;
 }
@@ -346,11 +348,6 @@ void DeviceManager::addGpuDevice(DeviceGpu *const device)
 {
     // 添加显示适配器
     m_ListDeviceGPU.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getGPUDevices()
-{
-    return m_ListDeviceGPU;
 }
 
 void DeviceManager::setGpuInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -398,11 +395,6 @@ void DeviceManager::addMemoryDevice(DeviceMemory *const device)
     m_ListDeviceMemory.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getMemoryDevices()
-{
-    return m_ListDeviceMemory;
-}
-
 void DeviceManager::setMemoryInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
     // 从dmidecode中添加内存信息
@@ -412,9 +404,8 @@ void DeviceManager::setMemoryInfoFromDmidecode(const QMap<QString, QString> &map
         if (!device)
             continue;
 
-        if (device->setInfoFromDmidecode(mapInfo)) {
+        if (device->setInfoFromDmidecode(mapInfo))
             return;
-        }
     }
 }
 
@@ -422,11 +413,6 @@ void DeviceManager::addMonitor(DeviceMonitor *const device)
 {
     // 添加显示设备
     m_ListDeviceMonitor.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getMonitorDevices()
-{
-    return m_ListDeviceMonitor;
 }
 
 void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString &edid)
@@ -438,13 +424,12 @@ void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString 
         if (!device)
             continue;
 
-        if (device->setInfoFromXradr(main, edid)) {
+        if (device->setInfoFromXradr(main, edid))
             return;
-        }
     }
 }
 
-void DeviceManager::setCurrentResolution(const QString &resolution, const QString &rate)
+void DeviceManager::setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen)
 {
     // 设置当前分辨率
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMonitor.begin();
@@ -453,9 +438,8 @@ void DeviceManager::setCurrentResolution(const QString &resolution, const QStrin
         if (!device)
             continue;
 
-        if (device->setCurrentResolution(resolution, rate)) {
+        if (device->setCurrentResolution(resolution, rate, mainScreen))
             return;
-        }
     }
 }
 
@@ -463,11 +447,6 @@ void DeviceManager::addBiosDevice(DeviceBios *const device)
 {
     // 添加主板信息
     m_ListDeviceBios.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getBiosDevices()
-{
-    return m_ListDeviceBios;
 }
 
 void DeviceManager::setLanguageInfo(const QMap<QString, QString> &mapInfo)
@@ -479,20 +458,14 @@ void DeviceManager::setLanguageInfo(const QMap<QString, QString> &mapInfo)
         if (!device)
             continue;
 
-        if (device->setBiosLanguageInfo(mapInfo)) {
+        if (device->setBiosLanguageInfo(mapInfo))
             return;
-        }
     }
 }
 
 void DeviceManager::addBluetoothDevice(DeviceBluetooth *const device)
 {
     m_ListDeviceBluetooth.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getBluetoothDevices()
-{
-    return m_ListDeviceBluetooth;
 }
 
 void DeviceManager::setBluetoothInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -504,9 +477,8 @@ void DeviceManager::setBluetoothInfoFromLshw(const QMap<QString, QString> &mapIn
         if (!device)
             continue;
 
-        if (device->setInfoFromLshw(mapInfo)) {
+        if (device->setInfoFromLshw(mapInfo))
             return;
-        }
     }
 }
 
@@ -519,9 +491,8 @@ bool DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &map
         if (!device)
             continue;
 
-        if (device->setInfoFromHwinfo(mapInfo)) {
+        if (device->setInfoFromHwinfo(mapInfo))
             return true;
-        }
     }
     return false;
 }
@@ -529,11 +500,6 @@ bool DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &map
 void DeviceManager::addAudioDevice(DeviceAudio *const device)
 {
     m_ListDeviceAudio.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getAudioDevices()
-{
-    return m_ListDeviceAudio;
 }
 
 void DeviceManager::setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -545,9 +511,8 @@ void DeviceManager::setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo)
         if (!device)
             continue;
 
-        if (device->setInfoFromLshw(mapInfo)) {
+        if (device->setInfoFromLshw(mapInfo))
             return;
-        }
     }
 }
 
@@ -570,23 +535,47 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     m_ListDeviceNetwork.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getNetworkDevices()
+void DeviceManager::correctNetworkLinkStatus(QString linkStatus, QString networkDriver)
 {
-    return m_ListDeviceNetwork;
-}
-
-void DeviceManager::setNetworkInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
-{
-    // 从hwinfo中获取网络适配器信息
+    if (m_ListDeviceNetwork.size() == 0)
+        return;
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin();
     for (; it != m_ListDeviceNetwork.end(); ++it) {
         DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
         if (!device)
             continue;
+        if (networkDriver == device->logicalName())
+            device->correctCurrentLinkStatus(linkStatus);
+    }
+}
 
-        if (device->setInfoFromHwinfo(mapInfo)) {
-            return;
-        }
+QStringList DeviceManager::networkDriver()
+{
+    m_networkDriver.clear();
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin();
+    for (; it != m_ListDeviceNetwork.end(); ++it) {
+        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
+        if (!device)
+            continue;
+        //保存各个网卡的逻辑名称，用于判断具体网卡
+        m_networkDriver.append(device->logicalName());
+    }
+    return m_networkDriver;
+}
+
+void DeviceManager::correctPowerInfo(const QMap<QString, QMap<QString, QString>> &mapInfo)
+{
+    if (m_ListDevicePower.size() == 0)
+        return;
+    QList<DeviceBaseInfo *>::iterator it = m_ListDevicePower.begin();
+    for (; it != m_ListDevicePower.end(); ++it) {
+        DevicePower *device = dynamic_cast<DevicePower *>(*it);
+        if (!device)
+            continue;
+
+        //根据获取到的数据，重新设置电池信息
+        device->setInfoFromUpower(mapInfo["upower"]);
+        device->setDaemonInfo(mapInfo["Daemon"]);
     }
 }
 
@@ -609,20 +598,10 @@ void DeviceManager::setCameraInfoFromLshw(const QMap<QString, QString> &mapInfo)
     }
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getImageDevices()
-{
-    return m_ListDeviceImage;
-}
-
 void DeviceManager::addKeyboardDevice(DeviceInput *const device)
 {
     // 添加键盘
     m_ListDeviceKeyboard.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getKeyboardDevices()
-{
-    return m_ListDeviceKeyboard;
 }
 
 void DeviceManager::setKeyboardInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -634,9 +613,8 @@ void DeviceManager::setKeyboardInfoFromLshw(const QMap<QString, QString> &mapInf
         if (!device)
             continue;
 
-        if (device->setInfoFromlshw(mapInfo)) {
+        if (device->setInfoFromlshw(mapInfo))
             return;
-        }
     }
 }
 
@@ -657,9 +635,8 @@ void DeviceManager::addOthersDevice(DeviceOthers *const device)
     }
 
     // 添加其他设备
-    if (isOtherDevice) {
+    if (isOtherDevice)
         m_ListDeviceOthers.append(device);
-    }
 }
 
 void DeviceManager::addOthersDeviceFromHwinfo(DeviceOthers *const device)
@@ -670,16 +647,10 @@ void DeviceManager::addOthersDeviceFromHwinfo(DeviceOthers *const device)
         if (!deviceOthers)
             continue;
 
-        if (deviceOthers->busInfo() == device->busInfo() && deviceOthers->busInfo() != "") {
+        if (deviceOthers->busInfo() == device->busInfo() && deviceOthers->busInfo() != "")
             return;
-        }
     }
     m_ListDeviceOthers.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getOthersDevices()
-{
-    return m_ListDeviceOthers;
 }
 
 void DeviceManager::setOthersDeviceInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -695,28 +666,22 @@ void DeviceManager::setOthersDeviceInfoFromLshw(const QMap<QString, QString> &ma
     }
 }
 
+void DeviceManager::setCpuRefreshInfoFromlscpu(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceCPU.begin();
+    for (; it != m_ListDeviceCPU.end(); ++it) {
+        DeviceCpu *device = dynamic_cast<DeviceCpu *>(*it);
+        if (!device)
+            continue;
+
+        device->setCurFreq(mapInfo["CPU MHz"]);
+    }
+}
+
 void DeviceManager::addPowerDevice(DevicePower *const device)
 {
     // 添加电池设备
     m_ListDevicePower.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getPowerDevices()
-{
-    return m_ListDevicePower;
-}
-
-void DeviceManager::setPowerDaemonInfo(const QMap<QString, QString> &mapInfo)
-{
-    // 设置电池守护进程信息
-    QList<DeviceBaseInfo *>::iterator it = m_ListDevicePower.begin();
-    for (; it != m_ListDevicePower.end(); ++it) {
-        DevicePower *device = dynamic_cast<DevicePower *>(*it);
-        if (!device)
-            continue;
-
-        device->setDaemonInfo(mapInfo);
-    }
 }
 
 void DeviceManager::addPrintDevice(DevicePrint *const device)
@@ -725,20 +690,10 @@ void DeviceManager::addPrintDevice(DevicePrint *const device)
     m_ListDevicePrint.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getPrintDevices()
-{
-    return m_ListDevicePrint;
-}
-
 void DeviceManager::addOtherPCIDevice(DeviceOtherPCI *const device)
 {
     // 添加其他PCI设备
     m_ListDeviceOtherPCI.append(device);
-}
-
-const QList<DeviceBaseInfo *> &DeviceManager::getOtherPCIDevices()
-{
-    return m_ListDeviceOtherPCI;
 }
 
 void DeviceManager::addComputerDevice(DeviceComputer *const device)
@@ -747,20 +702,10 @@ void DeviceManager::addComputerDevice(DeviceComputer *const device)
     m_ListDeviceComputer.append(device);
 }
 
-const QList<DeviceBaseInfo *> &DeviceManager::getComputerDevices()
-{
-    return m_ListDeviceComputer;
-}
-
 void DeviceManager::addCdromDevice(DeviceCdrom *const device)
 {
     // 添加CDROM
     m_ListDeviceCdrom.append(device);
-}
-
-const QList<DeviceBaseInfo *> DeviceManager::getCdromDevices()
-{
-    return m_ListDeviceCdrom;
 }
 
 void DeviceManager::addLshwinfoIntoCdromDevice(const QMap<QString, QString> &mapInfo)
@@ -792,11 +737,10 @@ void DeviceManager::addCmdInfo(const QMap<QString, QList<QMap<QString, QString> 
     QMutexLocker locker(&addCmdMutex);
     // 添加命令信息
     foreach (const QString &key, cmdInfo.keys()) {
-        if (m_cmdInfo.find(key) == m_cmdInfo.end()) {
+        if (m_cmdInfo.find(key) == m_cmdInfo.end())
             m_cmdInfo.insert(key, cmdInfo[key]);
-        } else {
+        else
             m_cmdInfo[key].append(cmdInfo[key]);
-        }
     }
 }
 
@@ -810,9 +754,8 @@ bool DeviceManager::exportToTxt(const QString &filePath)
 {
     // 导出设备信息到txt文件
     QFile txtFile(filePath);
-    if (false == txtFile.open(QIODevice::WriteOnly)) {
+    if (false == txtFile.open(QIODevice::WriteOnly))
         return false;
-    }
 
     QTextStream out(&txtFile);
     overviewToTxt(out);
@@ -899,9 +842,9 @@ bool DeviceManager::exportToHtml(const QString &filePath)
 {
     // 导出设备信息到html文件
     QFile html(filePath);
-    if (false == html.open(QIODevice::WriteOnly)) {
+    if (false == html.open(QIODevice::WriteOnly))
         return false;
-    }
+
     html.write("<!DOCTYPE html>\n");
     html.write("<html>\n");
     html.write("<body>\n");
@@ -962,10 +905,8 @@ void DeviceManager::overviewToTxt(QTextStream &out)
     out << "\n";
 
     foreach (auto iter, m_ListDeviceType) {
-
-        if (iter.first == tr("Overview")) {
+        if (iter.first == tr("Overview"))
             continue;
-        }
 
         // 导出设备的概况信息
         if (m_OveriewMap.find(iter.first) != m_OveriewMap.end()) {
@@ -996,14 +937,11 @@ void DeviceManager::overviewToHtml(QFile &html)
 
     // 导出设备概况信息到html
     foreach (auto iter, m_ListDeviceType) {
-
-        if (iter.first == tr("Overview")) {
+        if (iter.first == tr("Overview"))
             continue;
-        }
 
-        if (m_OveriewMap.find(iter.first) != m_OveriewMap.end()) {
+        if (m_OveriewMap.find(iter.first) != m_OveriewMap.end())
             infoToHtml(doc, iter.first, m_OveriewMap[iter.first]);
-        }
     }
 
     doc.appendChild(doc.createElement("br"));
@@ -1026,9 +964,8 @@ void DeviceManager::overviewToDoc(Docx::Document &doc)
 
     // 导出设备概况信息到doc
     foreach (auto iter, m_ListDeviceType) {
-        if (iter.first == tr("Overview")) {
+        if (iter.first == tr("Overview"))
             continue;
-        }
 
         if (m_OveriewMap.find(iter.first) != m_OveriewMap.end()) {
             line = iter.first + ":  " + m_OveriewMap[iter.first];
@@ -1058,9 +995,8 @@ void DeviceManager::overviewToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFon
 
     // 导出设备概况信息到xlsx文件
     foreach (auto iter, m_ListDeviceType) {
-        if (iter.first == tr("Overview")) {
+        if (iter.first == tr("Overview"))
             continue;
-        }
 
         if (m_OveriewMap.find(iter.first) != m_OveriewMap.end()) {
 
@@ -1123,7 +1059,7 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
                 QString ov = device->getOverviewInfo();
 
                 // 每一类别获取首个设备概况信息
-                if (ov.isEmpty() == false) {
+                if (false == ov.isEmpty()) {
                     if (m_OveriewMap.find(iter.key()) == m_OveriewMap.end()) {
                         m_OveriewMap[iter.key()] = ov;
                     } else {
@@ -1144,9 +1080,8 @@ const QMap<QString, QString>  &DeviceManager::getDeviceOverview()
 
 
     // CPU 概况显示 样式"Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz (四核 / 四逻辑处理器)"
-    if (!m_ListDeviceCPU.isEmpty()) {
+    if (!m_ListDeviceCPU.isEmpty())
         m_OveriewMap[tr("CPU")] = m_ListDeviceCPU[0] ->getOverviewInfo();
-    }
 
     if (m_CpuNum > 1)
         m_OveriewMap[tr("CPU quantity")] = QString::number(m_CpuNum);
@@ -1164,13 +1099,11 @@ const QMap<QString, QMap<QString, QStringList> > &DeviceManager::getDeviceDriver
         foreach (auto device, iter.value()) {
             if (m_DeviceDriverPool.find(device->driver()) != m_DeviceDriverPool.end()) {
                 // 驱动内容不为空时添加
-                if (device->driver().isEmpty() == false) {
+                if (false == device->driver().isEmpty())
                     m_DeviceDriverPool[device->driver()][iter.key()] += device->name();
-                }
             } else {
-                if (device->driver().isEmpty() == false) {
+                if (false == device->driver().isEmpty())
                     m_DeviceDriverPool[device->driver()][iter.key()] += device->name();
-                }
             }
 
         }
@@ -1197,9 +1130,8 @@ bool DeviceManager::isDeviceExistInPairedDevice(const QString &mac)
     // 判断mac是否在蓝牙设备列表中
     foreach (auto item, cmdInfo) {
         for (auto it = item.begin(); it != item.end(); ++it) {
-            if (it.value() == mac) {
+            if (it.value() == mac)
                 return true;
-            }
         }
     }
     return false;

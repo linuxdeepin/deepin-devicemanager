@@ -3,7 +3,7 @@
 
 // 其它头文件
 #include "EnableManager.h"
-
+#include <QDebug>
 DeviceAudio::DeviceAudio()
     : DeviceBaseInfo()
     , m_Name("")
@@ -45,7 +45,8 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "Driver Modules", m_Driver);   // 驱动模块
+    setAttribute(mapInfo, "Driver Modules", m_DriverModules); // 驱动模块
+
     //2. 获取设备的唯一标识
     /*
      * 在这里将设备的总线信息作为一个设备的唯一标识
@@ -64,20 +65,17 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     //1. 先判断传入的设备信息是否是该设备信息，根据总线信息来判断
     QStringList words = mapInfo["bus info"].split("@");
-    if (words.size() != 2) {
+    if (words.size() != 2)
         return false;
-    }
 
-    if (words[1] != m_UniqueKey) {
+    if (words[1] != m_UniqueKey)
         return false;
-    }
 
     //2. 确定了是该设备信息，则获取设备的基本信息
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
-    if (m_Vendor == "0000") {
+    if (m_Vendor == "0000")
         m_Vendor = "";
-    }
 
     setAttribute(mapInfo, "", m_Model);
 
@@ -86,9 +84,8 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
      * 这不符合常理，所以当版本号为00时，默认版本号获取不到
     */
     setAttribute(mapInfo, "version", m_Version);
-    if (m_Version == "00") {
+    if (m_Version == "00")
         m_Version = "";
-    }
 
     // 获取设备的基本信息
     setAttribute(mapInfo, "bus info", m_BusInfo);
@@ -159,9 +156,8 @@ EnableDeviceStatus DeviceAudio::setEnable(bool e)
 {
     // 设置设备状态
     EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    if (e != enable()) {
+    if (e != enable())
         res = EDS_Faild;
-    }
 
     return res;
 }
@@ -175,9 +171,8 @@ bool DeviceAudio::enable()
 
 
     // 如果是从cat /input/devices里面获取的则返回true
-    if (m_IsCatDevice) {
+    if (m_IsCatDevice)
         return true;
-    }
 
     return m_Enable;
 }
@@ -201,12 +196,10 @@ void DeviceAudio::initFilterKey()
     addFilterKey(QObject::tr("SubVendor"));
     addFilterKey(QObject::tr("SubDevice"));
     addFilterKey(QObject::tr("Driver"));
-//    addFilterKey(QObject::tr("Driver Modules"));
     addFilterKey(QObject::tr("Driver Status"));
     addFilterKey(QObject::tr("Driver Activation Cmd"));
     addFilterKey(QObject::tr("Config Status"));
 
-    //addFilterKey(QObject::tr("irq"));
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("latency"));
 
@@ -258,11 +251,10 @@ void DeviceAudio::loadTableData()
 {
     // 记载表格内容
     QString name;
-    if (!enable()) {
+    if (!enable())
         name = "(" + tr("Disable") + ") " + m_Name;
-    } else {
+    else
         name = m_Name;
-    }
 
     m_TableData.append(name);
     m_TableData.append(m_Vendor);

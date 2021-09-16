@@ -312,7 +312,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
         <source>Current Speed</source>
-        <translation>Velocidade Atual</translation>
+        <translation>Velocidade atual</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
@@ -394,7 +394,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="255"/>
         <source>Max Speed</source>
-        <translation>Velocidade Máxima</translation>
+        <translation>Velocidade máxima</translation>
     </message>
 </context>
 <context>
@@ -422,7 +422,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="62"/>
         <source>Graphics Memory</source>
-        <translation>Memória Gráfica</translation>
+        <translation>Memória gráfica</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="205"/>
@@ -447,12 +447,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
         <source>Maximum Resolution</source>
-        <translation>Resolução Máxima</translation>
+        <translation>Resolução máxima</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
         <source>Minimum Resolution</source>
-        <translation>Resolução Mínima</translation>
+        <translation>Resolução mínima</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
@@ -694,7 +694,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="160"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="193"/>
         <source>Other PCI Devices</source>
-        <translation>Outros Dispositivos PCI</translation>
+        <translation>Outros dispositivos PCI</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="161"/>
@@ -755,7 +755,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="203"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
-        <translation>Outros Dispositivos</translation>
+        <translation>Outros dispositivos</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="947"/>
@@ -832,12 +832,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="126"/>
         <source>Minimum Voltage</source>
-        <translation>Voltagem Mínima</translation>
+        <translation>Voltagem mínima</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="127"/>
         <source>Configured Speed</source>
-        <translation>Velocidade Configurada</translation>
+        <translation>Velocidade configurada</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="128"/>
@@ -885,7 +885,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="227"/>
         <source>Primary Monitor</source>
-        <translation>Monitor Principal</translation>
+        <translation>Monitor principal</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="228"/>
@@ -1306,7 +1306,7 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="335"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="366"/>
         <source>Media Type</source>
-        <translation>Tipo de meio</translation>
+        <translation>Tipo de suporte</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="336"/>
@@ -1434,12 +1434,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>Monitor</source>
-        <translation type="unfinished"/>
+        <translation>Monitor</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Display Adapter</source>
-        <translation type="unfinished"/>
+        <translation>Adaptador gráfico</translation>
     </message>
 </context>
 <context>
@@ -1875,7 +1875,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="203"/>
         <source>BIOS ROMSIZE</source>
-        <translation>TAMANHO BIOS ROM</translation>
+        <translation>TAMANHO ROM BIOS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="204"/>
@@ -2730,7 +2730,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="923"/>
         <source>Other Devices</source>
-        <translation>Outros Dispositivos</translation>
+        <translation>Outros dispositivos</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="831"/>
@@ -3107,7 +3107,7 @@
     <message>
         <location filename="../src/main.cpp" line="60"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-        <translation>O Gestor de Dispositivos é uma ferramenta útil para visualizar informações de hardware e gerir os dispositivos.</translation>
+        <translation>O Gestor de Dispositivos é uma ferramenta útil para visualizar informações do equipamento e gerir os dispositivos.</translation>
     </message>
 </context>
 <context>

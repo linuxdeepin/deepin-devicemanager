@@ -47,6 +47,7 @@ bool DBusInterface::getInfo(const QString &key, QString &info)
         info = reply.value();
         return true;
     } else {
+        qInfo() << "Error in getting info from getInfo .......................................";
         return false;
     }
 }

@@ -48,11 +48,6 @@ public:
     explicit PageInfoWidget(QWidget *parent = nullptr);
 
     /**
-     * @brief updateTable
-     * @param lst ：某类设备信息列表
-     */
-
-    /**
      * @brief updateTable: 更新表格
      * @param itemStr:设备类型
      * @param lst:设备类型对应的所有设备列表
@@ -61,10 +56,9 @@ public:
 
     /**
      * @brief updateTable: 更新表格
-     * @param itemStr:概况
      * @param map:概况信息map
      */
-    void updateTable(const QString &itemStr, const QMap<QString, QString> &map);
+    void updateTable(const QMap<QString, QString> &map);
 
 protected:
     virtual void resizeEvent(QResizeEvent *event) override;
@@ -80,23 +74,6 @@ signals:
      */
     void exportInfo();
     void updateUI();
-
-private slots:
-
-    /**
-     * @brief slotRefreshInfo:刷新信息槽函数
-     */
-    void slotRefreshInfo();
-
-    /**
-     * @brief slotExportInfo:导出信息槽函数
-     */
-    void slotExportInfo();
-
-    /**
-     * @brief slotUpdateUI
-     */
-    void slotUpdateUI();
 
 private:
     /**

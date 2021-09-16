@@ -36,6 +36,12 @@ public:
      */
     bool execIfconfigOrder(const QString &cmd);
 
+    /**
+     * @brief reqUpdateUI
+     * @return
+     */
+    bool reqUpdateUI();
+
 private:
     ZMQBase                   *mp_Req;
     QString                   m_EndPoint;

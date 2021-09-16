@@ -52,6 +52,18 @@ public:
     void loadCmdInfo(const QString &key, const QString &debugFile);
 
     /**
+     * @brief getCurNetworkLinkStatus:lshw -C network获取当前连接状态
+     * @return
+     */
+    QString getCurNetworkLinkStatus(QString driverName);
+
+    /**
+     * @brief getCurPowerInfo:upower --dump获取电池信息
+     * @return
+     */
+    QMap<QString, QMap<QString, QString>> getCurPowerInfo();
+
+    /**
      * @brief cmdInfo:获取命令的解析结果
      * @return 解析结果以map形式返回
      */
@@ -204,6 +216,12 @@ private:
     void loadGpuInfo(const QString &key, const QString &debugfile);
 
     /**
+     * @brief loadCatConfigInfo:cat /boot/config* | grep '=y'信息
+     * @param key:dr_config
+     * @param debugfile:调试文件名
+     */
+    void loadCatConfigInfo(const QString &key, const QString &debugfile);
+    /**
      * @brief loadBootDeviceManfid:加载本机自带硬盘
      * @param key:bootdevice
      * @param debugfile:调试文件名
@@ -257,6 +275,12 @@ private:
      * @param ch:分隔符
      */
     void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
+
+    /**
+     * @brief addWidthToMap
+     * @param mapInfo
+     */
+    void addWidthToMap(QMap<QString, QString> &mapInfo);
 
     /**
      * @brief getMapInfoFromDmidecode:将通过命令获取的信息字符串，转化为map形式

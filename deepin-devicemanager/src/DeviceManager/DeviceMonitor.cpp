@@ -96,6 +96,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 获取当前分辨率 和 当前支持分辨率
     QStringList listResolution = m_SupportResolution.split(" ");
     m_CurrentResolution = listResolution.last();
+    //    qInfo() << m_CurrentResolution << m_SupportResolution;
     m_SupportResolution = "";
     foreach (const QString &word, listResolution) {
         if (word.contains("@")) {
@@ -148,37 +149,34 @@ QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
 bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid)
 {
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
-    if (!m_Interface.isEmpty()) {
+    if (!m_Interface.isEmpty())
         return false;
-    }
 
-    if (main.contains("disconnected")) {
+    if (main.contains("disconnected"))
         return false;
-    }
 
     // 获取屏幕的主要信息，包括借口(HDMI VGA)/是否主显示器和屏幕大小，
     // 但是这里计算的屏幕大小仅仅用来匹配是否是同一个显示器,真正的屏幕大小计算是根据edid计算的
-    if (!setMainInfoFromXrandr(main)) {
+    if (!setMainInfoFromXrandr(main))
         return false;
-    }
 
     // 根据edid计算屏幕大小
-    if (edid.isEmpty() == false) {
+    if (false == edid.isEmpty())
         caculateScreenSize(edid);
-    }
 
     return true;
 }
 
-bool DeviceMonitor::setCurrentResolution(const QString &resolution, const QString &rate)
+bool DeviceMonitor::setCurrentResolution(const QString &resolution, const QString &rate, const QString &mainScreen)
 {
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
     if (m_CurrentResolution.contains("@")) {
         return false;
     }
-
     m_CurrentResolution = QString("%1@%2Hz").arg(resolution).arg(rate);
     m_CurrentResolution.replace(" ", "");
+    m_MainScreen = mainScreen;
+    caculateScreenRatio();
     return true;
 }
 
@@ -225,9 +223,11 @@ void DeviceMonitor::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Support Resolution"), m_SupportResolution);
-    addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
+    if (m_CurrentResolution != "@Hz") {
+        addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
+        addOtherDeviceInfo(tr("Display Ratio"), m_AspectRatio);
+    }
     addOtherDeviceInfo(tr("Primary Monitor"), m_MainScreen);
-    addOtherDeviceInfo(tr("Display Ratio"), m_AspectRatio);
     addOtherDeviceInfo(tr("Size"), m_ScreenSize);
     addOtherDeviceInfo(tr("Serial Number"), m_SerialNumber);
     addOtherDeviceInfo(tr("Product Date"), m_ProductionWeek);
@@ -250,35 +250,30 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info)
     QString mInfo = info;
     mInfo.replace(QRegExp("\\(.*\\)"), "");
     QRegExp re(".*([0-9]{3,5})mm\\sx\\s([0-9]{3,5})mm");
-    if (!re.exactMatch(mInfo)) {
+    if (!re.exactMatch(mInfo))
         return false;
-    }
 
-    if (m_Width != re.cap(1).toInt()) {
+    if (m_Width != re.cap(1).toInt())
         return false;
-    }
 
-    if (m_Height != re.cap(2).toInt()) {
+    if (m_Height != re.cap(2).toInt())
         return false;
-    }
 
     // 设置用的是哪个接口
-    if (info.startsWith("VGA")) {
+    if (info.startsWith("VGA"))
         m_Interface = "VGA";
-    } else if (info.startsWith("HDMI")) {
+    else if (info.startsWith("HDMI"))
         m_Interface = "HDMI";
-    } else if (info.startsWith("eDP")) {
+    else if (info.startsWith("eDP"))
         m_Interface = "eDP";
-    } else if (info.startsWith("DisplayPort")) {
+    else if (info.startsWith("DisplayPort"))
         m_Interface = "DisplayPort";
-    }
 
-    // 设置是否是主显示器
-    if (info.contains("primary")) {
-        m_MainScreen = "Yes";
-    } else {
-        m_MainScreen = "NO";
-    }
+    //    // 设置是否是主显示器
+    //    if (info.contains("primary"))
+    //        m_MainScreen = "Yes";
+    //    else
+    //        m_MainScreen = "NO";
 
     return true;
 }
@@ -293,9 +288,8 @@ void DeviceMonitor::caculateScreenRatio()
         int w = width / gys;
         int h = height / gys;
 
-        if (w > 21) {
+        if (w > 21)
             findAspectRatio(w, h, w, h);
-        }
 
         m_AspectRatio = QString::number(w) + " : " + QString::number(h);
     }
@@ -303,15 +297,13 @@ void DeviceMonitor::caculateScreenRatio()
 
 int DeviceMonitor::gcd(int a, int b)
 {
-    if (a < b) {
+    if (a < b)
         std::swap(a, b);
-    }
 
-    if (a % b == 0) {
+    if (a % b == 0)
         return b;
-    } else {
+    else
         return gcd(b, a % b);
-    }
 }
 
 bool DeviceMonitor::findAspectRatio(int width, int height, int &ar_w, int &ar_h)
@@ -349,9 +341,8 @@ void DeviceMonitor::caculateScreenSize()
 void DeviceMonitor::caculateScreenSize(const QString &edid)
 {
     QStringList list = edid.split('\n');
-    if (list.size() < 2) {
+    if (list.size() < 2)
         return;
-    }
 
     QString secondItem = list.at(1);
     QString width_field = secondItem.mid(10, 2);
@@ -363,17 +354,19 @@ void DeviceMonitor::caculateScreenSize(const QString &edid)
     bool trHeightOk = false;
     width = width_field.toInt(&trWidthOk, 16);
     height = height_field.toInt(&trHeightOk, 16);
-    if (trWidthOk == false || trHeightOk == false) {
+    if (false == trWidthOk || false == trHeightOk)
         return;
-    }
 
-    if (height <= 0) {
+    if (height <= 0)
         return;
-    }
 
-    if (width <= 0) {
+    if (width <= 0)
         return;
-    }
+
+    // 如果从hwinfo和edid里面获取的信息差距很小则使用hwinfo里面的
+    // 如果从hwinfo和edid里面获取的信息差距很大则使用edid里面的
+    if (fabs(width * 10 - m_Width) < 10 && fabs(height * 10 - m_Height) < 10)
+        return;
 
     double inch = std::sqrt(height * height + width * width) / 2.54;
 //    m_ScreenSize = QString("%1英寸(%2cm X %3cm)").arg(QString::number(inch, 'f', 1)).arg(width).arg(height);

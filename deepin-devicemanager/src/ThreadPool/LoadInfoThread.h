@@ -22,21 +22,17 @@
 
 #include <QObject>
 #include <QThread>
+#include "ReadFilePool.h"
+#include "GenerateDevicePool.h"
 
-class ReadFilePool;
-class GenerateDevicePool;
+class ZmqOrder;
 
 class LoadInfoThread : public QThread
 {
     Q_OBJECT
 public:
     LoadInfoThread();
-
-    /**
-     * @brief isRunning :判断当前进程是否正在运行
-     * @return
-     */
-    bool isRunning();
+    ~LoadInfoThread();
 
     /**
      * @brief setFramework：设置架构
@@ -58,10 +54,11 @@ private slots:
     void slotFinishedReadFilePool(const QString &info);
 
 private:
-    ReadFilePool          *mp_ReadFilePool;         //<!  生成读文件的线程池
-    GenerateDevicePool    *mp_GenerateDevicePool;   //<!  生成设备线程池
+    ReadFilePool mp_ReadFilePool;
+    GenerateDevicePool mp_GenerateDevicePool;
     bool            m_Running;                      //<!  标识是否正在运行
     bool            m_FinishedReadFilePool;         //<!  标识生成读文件的线程池是否结束
+    ZmqOrder       *mp_ZmqOrder;
 };
 
 #endif // LOADINFOTHREAD_H

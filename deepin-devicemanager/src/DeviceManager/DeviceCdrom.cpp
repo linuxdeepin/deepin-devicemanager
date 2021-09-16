@@ -22,20 +22,17 @@ DeviceCdrom::DeviceCdrom()
 bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // 通过总线信息判断是否是同一台设备
-    if (mapInfo.find("bus info") == mapInfo.end()) {
+    if (mapInfo.find("bus info") == mapInfo.end())
         return false;
-    }
 
     // 解析总线信息
     QStringList words = mapInfo["bus info"].split("@");
-    if (words.size() != 2) {
+    if (words.size() != 2)
         return false;
-    }
 
     QString busInfo = words[1].replace(".", ":").trimmed();
-    if (m_KeyToLshw != busInfo) {
+    if (m_KeyToLshw != busInfo)
         return false;
-    }
 
     // 获取设备的基本信息
     setAttribute(mapInfo, "product", m_Name, false);
@@ -137,11 +134,10 @@ void DeviceCdrom::loadTableData()
 {
     // 加载表格内容
     QString name;
-    if (!enable()) {
+    if (!enable())
         name = "(" + tr("Disable") + ") " + m_Name;
-    } else {
+    else
         name = m_Name;
-    }
 
     m_TableData.append(name);
     m_TableData.append(m_Vendor);

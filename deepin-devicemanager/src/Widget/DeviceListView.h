@@ -70,12 +70,6 @@ public:
     void addItem(const QString &name, const QString &iconFile);
 
     /**
-     * @brief:判断当前是否启用
-     * @return : 返回是否启用
-     */
-    bool curItemEnable();
-
-    /**
      * @brief:设置当前是否启用
      * @param[enable] : 是否启用
      */

@@ -46,8 +46,8 @@ PageOverview::PageOverview(DWidget *parent)
 
     // 连接槽函数
     connect(mp_Overview, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(slotShowMenu(const QPoint &)));
-    connect(mp_Refresh, &QAction::triggered, this, &PageOverview::slotActionRefresh);
-    connect(mp_Export, &QAction::triggered, this, &PageOverview::slotActionExport);
+    connect(mp_Refresh, &QAction::triggered, this, &PageOverview::refreshInfo);
+    connect(mp_Export, &QAction::triggered, this, &PageOverview::exportInfo);
     connect(mp_Copy, &QAction::triggered, this, &PageOverview::slotActionCopy);
 }
 
@@ -94,7 +94,12 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     }
 }
 
-void PageOverview::setLabel(const QString &itemstr)
+void PageOverview::clearWidgets()
+{
+    return;
+}
+
+void PageOverview::setLabel(const QString &)
 {
 
 }
@@ -126,7 +131,13 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     } else if (DSysInfo::UosCommunity == type) { // 社区版
         linkStr = COMMUNITY_LINK_STR;  // 社区版的链接与其它的不同
         linkStr += COMMUNITY_STR + END_STR + os.remove(COMMUNITY_STR);
-    } else if (DSysInfo::UosEnterprise == type) {// 服务器企业版
+    }
+#if(DTK_VERSION > DTK_VERSION_CHECK(5,4,10,0))
+    else if (DSysInfo::UosEducation == type) {// 教育版
+        linkStr += EDUC_STR + END_STR + os.remove(EDUC_STR);
+    }
+#endif
+    else if (DSysInfo::UosEnterprise == type) {// 服务器企业版
         linkStr += ENTERPRISE_STR + END_STR + os.remove(ENTERPRISE_STR);
     } else if (DSysInfo::UosEnterpriseC == type) {// 服务器行业版
         linkStr += ENTERPRISEC_STR + END_STR + os.remove(ENTERPRISEC_STR);
@@ -181,19 +192,6 @@ void PageOverview::slotShowMenu(const QPoint &)
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());
-}
-
-void PageOverview::slotActionRefresh()
-{
-    // 刷新
-    emit refreshInfo();
-}
-
-void PageOverview::slotActionExport()
-{
-    qDebug() << "export";
-    // 导出
-    emit exportInfo();
 }
 
 void PageOverview::slotActionCopy()

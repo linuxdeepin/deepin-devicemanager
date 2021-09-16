@@ -66,11 +66,15 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 
     // 添加电池温度
     setAttribute(mapInfo, "temperature", m_Temp);
-    if (!m_Temp.isEmpty()) {
+    /*
+     * 温度底层的获取方式是/sys/class/power_supply/BAT0下面的temp文件
+     * 以前向temp文件写温度时如果是28度 会写2.8(需要做*10的处理)  但是现在会直接写28
+     * 处理方法：取消*10的操作
+     * if (!m_Temp.isEmpty()) {
         double temp = m_Temp.replace("degrees C", "").trimmed().toDouble();
         temp = temp * 10;
         m_Temp = QString("%1 degrees C").arg(temp);
-    }
+    }*/
 
     getOtherMapInfo(mapInfo);
     return true;

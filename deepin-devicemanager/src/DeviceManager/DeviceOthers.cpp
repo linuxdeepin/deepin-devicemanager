@@ -19,9 +19,8 @@ DeviceOthers::DeviceOthers()
 
 void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (m_BusInfo.isEmpty() || m_BusInfo != mapInfo["bus info"]) {
+    if (m_BusInfo.isEmpty() || m_BusInfo != mapInfo["bus info"])
         return;
-    }
 
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor, false);
@@ -54,9 +53,8 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     QStringList words = mapInfo["SysFS BusID"].split(":");
     if (words.size() == 2) {
         QStringList chs = words[0].split("-");
-        if (chs.size() == 2) {
+        if (chs.size() == 2)
             m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-        }
     }
 }
 

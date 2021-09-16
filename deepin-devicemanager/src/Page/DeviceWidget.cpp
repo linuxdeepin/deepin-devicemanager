@@ -18,24 +18,26 @@ DeviceWidget::DeviceWidget(QWidget *parent)
     , mp_ListView(new PageListView(this))
     , mp_PageInfo(new PageInfoWidget(this))
     , m_CurItemStr("")
+    , m_Layout(nullptr)
 {
     // 初始化界面布局
     initWidgets();
 
     // 连接槽函数
     connect(mp_ListView, &PageListView::itemClicked, this, &DeviceWidget::slotListViewWidgetItemClicked);
-    connect(mp_PageInfo, &PageInfoWidget::refreshInfo, this, &DeviceWidget::slotRefreshInfo);
-    connect(mp_PageInfo, &PageInfoWidget::exportInfo, this, &DeviceWidget::slotExportInfo);
+    connect(mp_PageInfo, &PageInfoWidget::refreshInfo, this, &DeviceWidget::refreshInfo);
+    connect(mp_PageInfo, &PageInfoWidget::exportInfo, this, &DeviceWidget::exportInfo);
     connect(mp_PageInfo, &PageInfoWidget::updateUI, this, &DeviceWidget::slotUpdateUI);
 
-    connect(mp_ListView, &PageListView::refreshActionTrigger, this, &DeviceWidget::slotRefreshInfo);
-    connect(mp_ListView, &PageListView::exportActionTrigger, this, &DeviceWidget::slotExportInfo);
+    connect(mp_ListView, &PageListView::refreshActionTrigger, this, &DeviceWidget::refreshInfo);
+    connect(mp_ListView, &PageListView::exportActionTrigger, this, &DeviceWidget::exportInfo);
 }
 
 DeviceWidget::~DeviceWidget()
 {
-    DELETE_PTR(mp_ListView);
-    DELETE_PTR(mp_PageInfo);
+    DELETE_PTR(mp_ListView)
+    DELETE_PTR(mp_PageInfo)
+    DELETE_PTR(m_Layout)
 }
 
 void DeviceWidget::updateListView(const QList<QPair<QString, QString> > &lst)
@@ -47,26 +49,22 @@ void DeviceWidget::updateListView(const QList<QPair<QString, QString> > &lst)
 
 void DeviceWidget::updateDevice(const QString &itemStr, const QList<DeviceBaseInfo *> &lst)
 {
-    if (lst.size() == 0) {
+    if (lst.size() == 0)
         return;
-    }
 
     // 更新右边的详细内容
-    if (mp_PageInfo) {
+    if (mp_PageInfo)
         mp_PageInfo->updateTable(itemStr, lst);
-    }
 }
 
-void DeviceWidget::updateOverview(const QString &itemStr, const QMap<QString, QString> &map)
+void DeviceWidget::updateOverview(const QMap<QString, QString> &map)
 {
-    if (map.size() == 0) {
+    if (map.size() == 0)
         return;
-    }
 
     // 更新概况
-    if (mp_PageInfo) {
-        mp_PageInfo->updateTable(itemStr, map);
-    }
+    if (mp_PageInfo)
+        mp_PageInfo->updateTable(map);
 }
 
 QString DeviceWidget::currentIndex() const
@@ -80,17 +78,6 @@ void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
     // ListView Item 点击
     m_CurItemStr = itemStr;
     emit itemClicked(itemStr);
-}
-
-void DeviceWidget::slotRefreshInfo()
-{
-    // 刷新信息
-    emit refreshInfo();
-}
-void DeviceWidget::slotExportInfo()
-{
-    // 导出信息
-    emit exportInfo();
 }
 
 void DeviceWidget::slotUpdateUI()
@@ -119,32 +106,30 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
     // 根据设备类别获取设备指针
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(deviceType, lst);
-    if (ret) {
-        // 更新设备信息界面
-        if (lst.size() > 1) {
-            // 判断是否是BIOS界面
-            DeviceBios *bios = dynamic_cast<DeviceBios *>(lst[0]);
-            if (bios) {
-                mp_PageInfo->updateTable(deviceType, lst);
-            }
-        } else {
-            mp_PageInfo->updateTable(deviceType, lst);
-        }
-
-    } else {
+    if (! ret) {
         // 更新Overview界面
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
-        mp_PageInfo->updateTable(deviceType, overviewMap);
+        mp_PageInfo->updateTable(overviewMap);
+    }
+
+    // 更新设备信息界面
+    if (lst.size() == 1) {
+        mp_PageInfo->updateTable(deviceType, lst);
+    } else if (lst.size() > 1) {
+        // 判断是否是BIOS界面
+        DeviceBios *bios = dynamic_cast<DeviceBios *>(lst[0]);
+        if (bios)
+            mp_PageInfo->updateTable(deviceType, lst);
     }
 }
 
 void DeviceWidget::initWidgets()
 {
     // 初始化页面布局
-    QHBoxLayout *hLayout = new QHBoxLayout();
-    hLayout->setContentsMargins(0, 0, 0, 0);
-    hLayout->setSpacing(0);
-    hLayout->addWidget(mp_ListView);
-    hLayout->addWidget(mp_PageInfo);
-    setLayout(hLayout);
+    m_Layout = new QHBoxLayout();
+    m_Layout->setContentsMargins(0, 0, 0, 0);
+    m_Layout->setSpacing(0);
+    m_Layout->addWidget(mp_ListView);
+    m_Layout->addWidget(mp_PageInfo);
+    setLayout(m_Layout);
 }

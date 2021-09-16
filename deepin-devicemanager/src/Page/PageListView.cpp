@@ -31,8 +31,8 @@ PageListView::PageListView(DWidget *parent)
     mp_ListView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(mp_ListView, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(slotShowMenu(const QPoint &)));
-    connect(mp_Refresh, &QAction::triggered, this, &PageListView::slotActionRefresh);
-    connect(mp_Export, &QAction::triggered, this, &PageListView::slotActionExport);
+    connect(mp_Refresh, &QAction::triggered, this, &PageListView::refreshActionTrigger);
+    connect(mp_Export, &QAction::triggered, this, &PageListView::exportActionTrigger);
 
     // 连接item点击事件
     connect(mp_ListView, &DListView::clicked, this, &PageListView::slotListViewItemClicked);
@@ -85,28 +85,18 @@ void PageListView::paintEvent(QPaintEvent *event)
     return DWidget::paintEvent(event);
 }
 
-void PageListView::slotShowMenu(const QPoint &)
+void PageListView::slotShowMenu(const QPoint &point)
 {
     // 右键菜单
     mp_Menu->clear();
 
     // 导出/刷新
-    mp_Menu->addAction(mp_Export);
-    mp_Menu->addAction(mp_Refresh);
+    if (mp_ListView->indexAt(point).isValid()) {
+        mp_Menu->addAction(mp_Export);
+        mp_Menu->addAction(mp_Refresh);
 
-    mp_Menu->exec(QCursor::pos());
-}
-
-void PageListView::slotActionRefresh()
-{
-    // 刷新
-    emit refreshActionTrigger();
-}
-
-void PageListView::slotActionExport()
-{
-    // 导出
-    emit exportActionTrigger();
+        mp_Menu->exec(QCursor::pos());
+    }
 }
 
 void PageListView::slotListViewItemClicked(const QModelIndex &index)

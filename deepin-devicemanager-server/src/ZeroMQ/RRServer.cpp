@@ -42,21 +42,14 @@ void RRServer::run()
 {
 //    qint64 begin = 0, end = 0;
     while (1) {
-        if (!m_Waiting) {
-            char *msg = mpRep->recvMsg();
-//            begin = QDateTime::currentMSecsSinceEpoch();
-            emit instruction(QString::fromLocal8Bit(msg));
-            m_Waiting = true;
-        } else {
-            if (!m_ReturnStr.isEmpty()) {
-                sendMsg(m_ReturnStr);
-                m_ReturnStr = "";
-                m_Waiting = false;
-//                end = QDateTime::currentMSecsSinceEpoch();
-//                qInfo() << " ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ " << end - begin;
-            }
+        char *msg = mpRep->recvMsg();
+        if (mp_MainJob) {
+            mp_MainJob->executeClientInstruction(QString::fromLocal8Bit(msg));
+            sendMsg(m_ReturnStr);
+            continue;
         }
-        usleep(100);
+        sendMsg("0");
+//        usleep(100);
     }
 }
 

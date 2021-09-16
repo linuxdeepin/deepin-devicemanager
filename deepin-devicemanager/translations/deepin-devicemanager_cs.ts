@@ -658,7 +658,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="151"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1148"/>
         <source>CPU quantity</source>
-        <translation type="unfinished"/>
+        <translation>Počet procesorů</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="155"/>
@@ -1237,7 +1237,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="155"/>
         <source>Temperature</source>
-        <translation type="unfinished"/>
+        <translation>Teplota</translation>
     </message>
 </context>
 <context>
@@ -1419,7 +1419,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="203"/>
         <source>Export</source>
-        <translation>Exportovat</translation>
+        <translation>Vyvést</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="204"/>
@@ -1434,12 +1434,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>Monitor</source>
-        <translation type="unfinished"/>
+        <translation>Monitor</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Display Adapter</source>
-        <translation type="unfinished"/>
+        <translation>Zobrazovací adaptér</translation>
     </message>
 </context>
 <context>
@@ -1460,7 +1460,7 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="19"/>
         <source>Export</source>
-        <translation>Exportovat</translation>
+        <translation>Vyvést</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="21"/>
@@ -1491,7 +1491,7 @@
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="37"/>
         <source>Export</source>
-        <translation>Exportovat</translation>
+        <translation>Vyvést</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="38"/>
@@ -1514,7 +1514,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="27"/>
         <source>Export</source>
-        <translation>Exportovat</translation>
+        <translation>Vyvést</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="28"/>
@@ -3199,7 +3199,7 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="30"/>
         <source>Export</source>
-        <translation>Exportovat</translation>
+        <translation>Vyvést</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="149"/>
@@ -3218,7 +3218,7 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="25"/>
         <source>Export</source>
-        <translation>Exportovat</translation>
+        <translation>Vyvést</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="26"/>

@@ -29,24 +29,24 @@ PageBoardInfo::PageBoardInfo(QWidget *parent)
 void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
     mp_Device = lst[0];
-    clearContent();
 
     // 获取主板信息
     DeviceBaseInfo *board = nullptr;
     QList<DeviceBaseInfo *> lstOther;
     foreach (DeviceBaseInfo *info, lst) {
         DeviceBios *bios = dynamic_cast<DeviceBios *>(info);
-        if (!bios) {continue;}
+        if (!bios)
+            continue;
 
         // 判断是否是主板
-        if (bios->isBoard()) {
+        if (bios->isBoard())
             board = info;
-        } else {
+        else
             lstOther.append(info);
-        }
     }
 
-    if (!board) {return;}
+    if (!board)
+        return;
 
     // 获取主板信息并加载
     QList<QPair<QString, QString>> baseInfoMap = board->getBaseAttribs();
@@ -57,17 +57,21 @@ void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
 void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const QList<QPair<QString, QString>> &lst)
 {
-    if (lst.size() < 1) {
+    if (lst.size() < 1)
         return;
-    }
 
     // 比较页面可显示的最大行数与主板信息,取小值
     int maxRow = this->height() / ROW_HEIGHT - 3;
     int limitSize = std::min(lst.size(), maxRow);
-
-    if (mp_Content) {
+    if (mp_Content)
         mp_Content->setLimitRow(limitSize);
-    }
+
+    // 如果是展开状态则不更新
+    if (isExpanded())
+        return;
+
+    // clear info
+    clearContent();
 
     // 表格所有行数应等于主板信息行+其他信息行
     int row = lst.size() + devices.size();
@@ -103,19 +107,30 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
         int height = 0;
         QStringList strList = pairs[i - lst.size()].second.split("\n");
         int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height() + 2;
-
+        //qInfo() << strList;
         // 根据行数增加行高
         foreach (const QString &str, strList) {
             QStringList lst = str.split(":");
             if (lst.size() == 2) {
+                // 属性名称
                 int width = fm.boundingRect(lst[0]).width();
                 int num = width / 110;
                 int num0 = width % 110;
-                if (num0 == 0) {
+                if (num0 == 0)
                     num = num - 1;
+
+                int line = 0;
+                // 属性值
+                if (!lst[1].contains("  /  \t\t")) {
+                    width = fm.boundingRect(lst[1]).width();
+                    line = width / 480;
+                    int line0 = width % 480;
+                    if (line0 == 0)
+                        line = line - 1;
                 }
-                if (num > 0)
-                    height += num * fontHeight;
+
+                if (num > 0 || line > 0)
+                    height += std::max(num, line) * fontHeight;
             }
             QStringList attris = str.split("  /  \t\t");
             height += attris.size() * fontHeight;
@@ -130,7 +145,8 @@ void PageBoardInfo::getOtherInfoPair(const QList<DeviceBaseInfo *> &lst, QList<Q
     // 获取其他信息键值对
     foreach (DeviceBaseInfo *dev, lst) {
         DeviceBios *bios = dynamic_cast<DeviceBios *>(dev);
-        if (!bios) {continue;}
+        if (!bios)
+            continue;
         QPair<QString, QString> pair;
         pair.first = bios->name();
         getValueInfo(bios, pair);

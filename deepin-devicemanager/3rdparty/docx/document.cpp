@@ -11,8 +11,9 @@
 using namespace Docx;
 
 Document::Document()
+    : m_docPart(nullptr)
+    , m_package(nullptr)
 {
-    qInfo() << "construct docx document.";
     if (QLocale::system().name() == QStringLiteral("zh_CN")) {
         open(QStringLiteral("://defaultzh_CN.docx"));
     } else {

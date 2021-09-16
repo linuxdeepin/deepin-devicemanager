@@ -98,7 +98,6 @@ private slots:
 private:
     QList<DeviceType>            m_TypeList;
     int                          m_FinishedGenerator;
-//    QMutex                       m_lock;
 };
 
 #endif // GENERATEDEVICEPOOL_H

@@ -22,12 +22,12 @@ PageInfo::PageInfo(QWidget *parent)
 
 }
 
-void PageInfo::updateInfo(const QMap<QString, QString> &map)
+void PageInfo::updateInfo(const QMap<QString, QString> &)
 {
 
 }
 
-void PageInfo::setLabel(const QString &str1, const QString &str2)
+void PageInfo::setLabel(const QString &, const QString &)
 {
 
 }
@@ -68,11 +68,10 @@ void PageInfo::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid/* && wid == this*/) {
+    if (wid /* && wid == this*/)
         cg = DPalette::Active;
-    } else {
+    else
         cg = DPalette::Inactive;
-    }
 
     // 开始绘制边框 *********************************************************
     // 计算绘制区域

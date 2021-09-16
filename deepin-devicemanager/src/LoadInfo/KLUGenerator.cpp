@@ -15,7 +15,6 @@
 #include "DeviceManager/DevicePower.h"
 #include "DeviceManager/DeviceInput.h"
 
-
 KLUGenerator::KLUGenerator()
 {
 
@@ -44,13 +43,13 @@ void KLUGenerator::generatorComputerDevice()
     // setOsDescription
     QString os = "UOS";
     DSysInfo::DeepinType type = DSysInfo::deepinType();
-    if (DSysInfo::DeepinProfessional == type) {
+    if (DSysInfo::DeepinProfessional == type)
         os =  "UOS 20";
-    } else if (DSysInfo::DeepinPersonal == type) {
+    else if (DSysInfo::DeepinPersonal == type)
         os =  "UOS 20 Home";
-    } else if (DSysInfo::DeepinDesktop == type) {
+    else if (DSysInfo::DeepinDesktop == type)
         os =  "Deepin 20 Beta";
-    }
+
     device->setOsDescription(os);
 
     // os
@@ -84,9 +83,9 @@ void KLUGenerator::generatorGpuDevice()
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("gpuinfo");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 2) {
+        if ((*it).size() < 2)
             continue;
-        }
+
         DeviceGpu *device = new DeviceGpu();
         device->setGpuInfo(*it);
         DeviceManager::instance()->addGpuDevice(device);
@@ -118,20 +117,20 @@ void KLUGenerator::generatorPowerDevice()
     const QList<QMap<QString, QString> > &daemon = DeviceManager::instance()->cmdInfo("Daemon");
     bool hasDaemon = false;
     // 守护进程信息
-    if (daemon.size() > 0) {
+    if (daemon.size() > 0)
         hasDaemon = true;
-    }
+
     // 电池或这电源信息
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("upower");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
-        if ((*it).size() < 2) {
+        if ((*it).size() < 2)
             continue;
-        }
+
         DevicePower *device = new DevicePower();
-        if (!device->setInfoFromUpower(*it)) {
+        if (!device->setInfoFromUpower(*it))
             continue;
-        }
+
         if (hasDaemon) {
             // KLU的问题特殊处理
             QMap<QString, QString> tempMap = daemon[0];
@@ -140,8 +139,6 @@ void KLUGenerator::generatorPowerDevice()
             // 应HW的要求，将电量极低时执行固定为  Suspend
             tempMap["critical-action"] = "Suspend";
 
-
-//            device->setDaemonInfo(daemon[0]);
             device->setDaemonInfo(tempMap);
         }
         DeviceManager::instance()->addPowerDevice(device);
@@ -153,9 +150,9 @@ void KLUGenerator::getKeyboardInfoFromHwinfo()
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_keyboard");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 1) {
+        if ((*it).size() < 1)
             continue;
-        }
+
         if ((*it).contains("Device Files")) {
             DeviceInput *device = new DeviceInput();
             device->setKLUInfoFromHwinfo(*it);
@@ -170,20 +167,18 @@ void KLUGenerator::getOthersInfoFromHwinfo()
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 5) {
+        if ((*it).size() < 5)
             continue;
-        }
 
         bool isOtherDevice = true;
         QString curBus = (*it)["SysFS BusID"];
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
         const QStringList &lstBusId = DeviceManager::instance()->getBusId();
-        if (lstBusId.indexOf(curBus) != -1) {
+        if (lstBusId.indexOf(curBus) != -1)
             isOtherDevice = false;
-        }
-        if ((*it)["Driver"].contains("usb-storage")) {
+
+        if ((*it)["Driver"].contains("usb-storage"))
             isOtherDevice = false;
-        }
 
         if (isOtherDevice) {
             DeviceOthers *device = new DeviceOthers();
@@ -198,9 +193,9 @@ void KLUGenerator::getDiskInfoFromHwinfo()
     const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("hwinfo_disk");
     QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
     for (; dIt != lstDisk.end(); ++dIt) {
-        if ((*dIt).size() < 2) {
+        if ((*dIt).size() < 2)
             continue;
-        }
+
         DeviceStorage *device = new DeviceStorage();
         if (device->setKLUHwinfoInfo(*dIt) && device->isValid()) {
             DeviceManager::instance()->addStorageDeivce(device);
@@ -221,9 +216,8 @@ void KLUGenerator::getDiskInfoFromLshw()
     const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_disk");
     QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
     for (; dIt != lstDisk.end(); ++dIt) {
-        if ((*dIt).size() < 2) {
+        if ((*dIt).size() < 2)
             continue;
-        }
 
         // KLU的问题特殊处理
         QMap<QString, QString> tempMap;
@@ -260,9 +254,8 @@ void KLUGenerator::getDiskInfoFromSmartCtl()
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("smart");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 5) {
+        if ((*it).size() < 5)
             continue;
-        }
 
         // KLU的问题特殊处理
         QMap<QString, QString> tempMap;
@@ -271,9 +264,8 @@ void KLUGenerator::getDiskInfoFromSmartCtl()
         }
 
         // 按照华为的需求，如果是固态硬盘就不显示转速
-        if (tempMap["Rotation Rate"] == "Solid State Device") {
+        if (tempMap["Rotation Rate"] == "Solid State Device")
             tempMap["Rotation Rate"] = "";
-        }
 
         DeviceManager::instance()->setStorageInfoFromSmartctl(tempMap["ln"], tempMap);
     }
@@ -284,9 +276,9 @@ void KLUGenerator::getAudioInfoFromCatAudio()
     const QList<QMap<QString, QString>> lstAudio = DeviceManager::instance()->cmdInfo("cat_audio");
     QList<QMap<QString, QString> >::const_iterator it = lstAudio.begin();
     for (; it != lstAudio.end(); ++it) {
-        if ((*it).size() < 2) {
+        if ((*it).size() < 2)
             continue;
-        }
+
         DeviceAudio *device = new DeviceAudio();
         device->setInfoFromCatAudio(*it);
         DeviceManager::instance()->addAudioDevice(device);

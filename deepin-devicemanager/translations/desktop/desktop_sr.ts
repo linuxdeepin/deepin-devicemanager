@@ -9,12 +9,12 @@
 <message>
 <location filename="Desktop Entry]GenericName" line="0"/>
 <source>Device Manager</source>
-<translation>Упраник Уређаја</translation>
+<translation>Упрваник Уређаја</translation>
 </message>
 <message>
 <location filename="Desktop Entry]Name" line="0"/>
 <source>Deepin Device Manager</source>
-<translation>Дипин Упраник Уређаја</translation>
+<translation>Дипин Управник Уређаја</translation>
 </message>
 </context>
 </TS>

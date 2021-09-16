@@ -9,7 +9,7 @@
 <message>
 <location filename="Desktop Entry]GenericName" line="0"/>
 <source>Device Manager</source>
-<translation>Deepin správa zařízení</translation>
+<translation>Správa zařízení</translation>
 </message>
 <message>
 <location filename="Desktop Entry]Name" line="0"/>

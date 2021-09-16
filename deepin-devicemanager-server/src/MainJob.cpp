@@ -1,6 +1,5 @@
 #include "MainJob.h"
 #include <QDebug>
-#include "DetectJob.h"
 #include "ThreadPool.h"
 #include "RRServer.h"
 #include "DetectThread.h"
@@ -25,18 +24,18 @@ MainJob::MainJob(QObject *parent)
     , mp_Pool(new ThreadPool)
     , mp_ZmqServer(nullptr)
     , mp_DetectThread(nullptr)
-    , m_UpdateTime(QDateTime::currentMSecsSinceEpoch())
-    , m_Delay(false)
-    , m_Detected(false)
-    , mp_Timer(new QTimer)
+    , m_UpdateUI(false)
     , mp_IFace(new DBusInterface)
+    , m_FirstUpdate(true)
 {
     // 守护进程启动的时候加载所有信息
-    updateAllDevice();
-
-    // 连接定时器槽函数
-    connect(mp_Timer, &QTimer::timeout, this, &MainJob::slotTimeout);
-    mp_Timer->start(1500);
+    if (!isZhaoXin()) {
+        qInfo() << "001 ************************************* Not ZhaoXin Meche";
+        updateAllDevice();
+    } else {
+        qInfo() << "002 ************************************* ZhaoXin Meche";
+        QTimer::singleShot(40 * 1000, this, &MainJob::onFirstUpdate);
+    }
 }
 
 MainJob::~MainJob()
@@ -51,7 +50,7 @@ void MainJob::working()
 {
     // 启动dbus
     if (!initDBus()) {
-        qInfo() << " Failed to init dbus ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ";
+        qInfo() << "005 ************************************* Failed to Init Dbus";
         exit(1);
     }
 
@@ -76,12 +75,33 @@ void MainJob::working()
 
 void MainJob::executeClientInstruction(const QString &instructions)
 {
+    if (instructions.startsWith("UPDATE_UI")) {
+        if (m_FirstUpdate) {
+            updateAllDevice();
+        }
+        mp_ZmqServer->setReturnStr("2");
+        return ;
+    }
     handleInstruction("ZMQ#" + instructions);
+}
+
+bool MainJob::isZhaoXin()
+{
+    QString cmd = "sudo dmidecode -t 4";
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(-1);
+    QString info = process.readAllStandardOutput();
+    if (info.contains("ZHAOXIN KaiXian KX-U")) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void MainJob::slotUsbChanged()
 {
-    m_Detected = true;
+    handleInstruction("DETECT");
 }
 
 void MainJob::slotExecuteClientInstructions(const QString &instructions)
@@ -89,11 +109,13 @@ void MainJob::slotExecuteClientInstructions(const QString &instructions)
     handleInstruction("ZMQ#" + instructions);
 }
 
-void MainJob::slotTimeout()
+void MainJob::onFirstUpdate()
 {
-    if (m_Detected) {
-        handleInstruction("DETECT");
-        m_Detected = false;
+    if (m_FirstUpdate) {
+        qInfo() << "003 ************************************* First Update In QTimer";
+        updateAllDevice();
+    } else {
+        qInfo() << "004 ************************************* Not Update but In QTimer";
     }
 }
 
@@ -101,15 +123,10 @@ void MainJob::handleInstruction(const QString &instruction)
 {
     QMutexLocker locker(&mutex);
     if (instruction.startsWith("DETECT")) {
-        // 如果正在刷新，则延迟热插拔触发的自动更新
-        if (m_Delay) {
-            while (true) {
-                if (QDateTime::currentMSecsSinceEpoch() - m_UpdateTime > 2000)
-                    break;
-            }
-            m_Delay = false;
+        if (m_UpdateUI) {
+            sleep(2);
+            m_UpdateUI = false;
         }
-
         updateAllDevice();
     } else if (instruction.startsWith("ZMQ")) {
         if (instruction.startsWith("ZMQ#DRIVER")) {
@@ -118,6 +135,9 @@ void MainJob::handleInstruction(const QString &instruction)
             ifconfigInstruction(instruction);
         } else if (instruction.startsWith("ZMQ#UNINSTALL")) {
 
+        } else if (instruction.startsWith("ZMQ#UPDATE_UI")) {
+            reqUpdateInstruction();
+            m_UpdateUI = true;
         } else {
             nullInstruction();
         }
@@ -127,21 +147,23 @@ void MainJob::handleInstruction(const QString &instruction)
 void MainJob::updateAllDevice()
 {
     PERF_PRINT_BEGIN("POINT-01", "MainJob::updateAllDevice()");
-    mp_Pool->generateDeviceFile();
+    if (m_FirstUpdate)
+        mp_Pool->generateDeviceFile();
+    else
+        mp_Pool->updateDeviceFile();
     mp_Pool->waitForDone(-1);
+    sleep(1);
     PERF_PRINT_END("POINT-01");
+    m_FirstUpdate = false;
 }
 
 void MainJob::nullInstruction()
 {
-    PERF_PRINT_BEGIN("POINT-02", "MainJob::nullInstruction()");
     mp_ZmqServer->setReturnStr("0");
-    PERF_PRINT_END("POINT-02");
 }
 
 void MainJob::driverInstruction(const QString &instruction)
 {
-    PERF_PRINT_BEGIN("POINT-03", "MainJob::driverInstruction()");
     QStringList lst = instruction.split("#");
     if (lst.size() != 3) {
         mp_ZmqServer->setReturnStr("0");
@@ -162,13 +184,10 @@ void MainJob::driverInstruction(const QString &instruction)
             mp_ZmqServer->setReturnStr("1");
         }
     }
-
-    PERF_PRINT_END("POINT-03");
 }
 
 void MainJob::ifconfigInstruction(const QString &instruction)
 {
-    PERF_PRINT_BEGIN("POINT-04", "MainJob::ifconfigInstruction()");
     QStringList lst = instruction.split("#");
     if (lst.size() != 3) {
         mp_ZmqServer->setReturnStr("0");
@@ -182,15 +201,17 @@ void MainJob::ifconfigInstruction(const QString &instruction)
         mp_ZmqServer->setReturnStr("0");
     } else {
         QString output = process.readAllStandardOutput();
-        qInfo() << output;
         if (output == "") {
             mp_ZmqServer->setReturnStr("2");
         } else {
             mp_ZmqServer->setReturnStr("1");
         }
     }
+}
 
-    PERF_PRINT_END("POINT-04");
+void MainJob::reqUpdateInstruction()
+{
+    mp_ZmqServer->setReturnStr("2");
 }
 
 bool MainJob::initDBus()

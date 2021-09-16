@@ -21,13 +21,7 @@ CmdButtonWidget::CmdButtonWidget(DetailTreeView *parent)
     initUI();
 
     // 连接槽函数
-    connect(mp_cmdButton, &DCommandLinkButton::clicked, this, &CmdButtonWidget::expandCommandLinkClicked);
-}
-
-void CmdButtonWidget::expandCommandLinkClicked()
-{
-    // Button点击信号发送
-    emit cmdButtonClicked();
+    connect(mp_cmdButton, &DCommandLinkButton::clicked, this, &CmdButtonWidget::cmdButtonClicked);
 }
 
 void CmdButtonWidget::paintEvent(QPaintEvent *event)

@@ -11,14 +11,6 @@
 EDIDParser::EDIDParser()
     : m_LittleEndianMode(true)
 {
-    // 判断大小端
-//    int a = 0x12345678;
-//    char *c = (char *)&a;
-//    for (int i = 0; i < 4; i++) {
-//        printf("%x\n", c[i]);
-//    }
-//    m_LittleEndianMode = ((c[0] == 0x78) && (c[1] == 0x56) && (c[2] == 0x34) && (c[3] == 0x12));
-
     m_MapCh.insert("00001", "A");
     m_MapCh.insert("00010", "B");
     m_MapCh.insert("00011", "C");
@@ -65,9 +57,9 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
 
     QStringList lines = edid.split(ch);
     foreach (const QString &line, lines) {
-        if (line == "") {
+        if (line == "")
             continue;
-        }
+
         m_ListEdid.append(line);
     }
 
@@ -104,11 +96,10 @@ void EDIDParser::parserVendor()
     QString vendorStr;
     QString h08 = getBytes(0, 8);
     QString h09 = getBytes(0, 9);
-    if (m_LittleEndianMode) {
+    if (m_LittleEndianMode)
         vendorStr = h08 + h09;
-    } else {
+    else
         vendorStr = h09 + h08;
-    }
 
     // 将16进制的厂商信息转换成二进制的厂商信息
     QString binStr = hexToBin(vendorStr);
@@ -148,10 +139,12 @@ void EDIDParser::parseScreenSize()
 
 QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
 {
+    // 二进制转十进制
     QString decimal;
     int nDec = 0, nLen;
     int i, j, k;
     nLen = strBin.length();
+
     for (i = 0; i < nLen; i++) {
         if (strBin[nLen - i - 1] == "0")
             continue;
@@ -162,6 +155,7 @@ QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
             nDec += k;
         }
     }
+
     decimal = QString::number(nDec);
     return decimal;
 }
@@ -172,7 +166,7 @@ QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
     int nYushu = 0;
     int nShang = 0;
     QString strBin, strTemp;
-    //TCHAR buf[2];
+
     bool bContinue = true;
     while (bContinue) {
         nYushu = nDec % 2;
@@ -238,19 +232,21 @@ QString EDIDParser::hexToDec(QString strHex)   //十六进制转十进制
 
 QString EDIDParser::hexToBin(QString strHex)
 {
+    // 十六进制转二进制
     QString dec = hexToDec(strHex);
     return decTobin(dec);
 }
 
 QString EDIDParser::getBytes(int l, int n)
 {
+    // 获取指定字节
     int index = n * 2;
-    if (m_ListEdid.size() < l + 1) {
+    if (m_ListEdid.size() < l + 1)
         return "";
-    }
+
     QString line = m_ListEdid[l];
-    if (line.length() < n + 1) {
+    if (line.length() < n + 1)
         return "";
-    }
+
     return line.mid(index, 2);
 }

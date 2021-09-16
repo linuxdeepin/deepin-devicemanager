@@ -45,10 +45,8 @@ void DevicePrint::setInfo(const QMap<QString, QString> &info)
 
     // 获取打印机接口
     QStringList lstUri = m_URI.split(":");
-    if (lstUri.size() > 1) {
+    if (lstUri.size() > 1)
         m_InterfaceType = lstUri[0];
-    }
-
 
     getOtherMapInfo(info);
 }
@@ -80,12 +78,11 @@ EnableDeviceStatus DevicePrint::setEnable(bool e)
     EnableDeviceStatus res = EnableManager::instance()->enablePrinter(m_Name, e);
 
     // 禁用成功，状态设为5
-    if (res == EDS_Success && e == false) {
+    if (res == EDS_Success && false == e)
         m_Status = "5";
-    } else if (res == EDS_Success && e == true) {
+    else if (res == EDS_Success && true == e)
         // 启用成功状态设为3
         m_Status = "3";
-    }
 
     return res;
 }
@@ -142,11 +139,10 @@ void DevicePrint::loadTableData()
 {
     // 加载表格数据
     QString name;
-    if (!enable()) {
+    if (!enable())
         name = "(" + tr("Disable") + ") " + m_Name;
-    } else {
+    else
         name = m_Name;
-    }
 
     m_TableData.append(name);
     m_TableData.append(m_Vendor);

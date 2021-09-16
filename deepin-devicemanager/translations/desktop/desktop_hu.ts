@@ -14,7 +14,7 @@
 <message>
 <location filename="Desktop Entry]Name" line="0"/>
 <source>Deepin Device Manager</source>
-<translation>Deepin Eszközkezelő</translation>
+<translation>Deepin® Eszközkezelő</translation>
 </message>
 </context>
 </TS>

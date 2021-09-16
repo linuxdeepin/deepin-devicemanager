@@ -81,16 +81,6 @@ private slots:
     void slotShowMenu(const QPoint &point);
 
     /**
-     * @brief slotActionEnable:右键启用按钮槽函数
-     */
-    void slotActionRefresh();
-
-    /**
-     * @brief slotActionDisable:右键禁用按钮槽函数
-     */
-    void slotActionExport();
-
-    /**
      * @brief slotListViewItemClicked:ListView Item 点击槽函数
      * @param index:点击Item的索引
      */

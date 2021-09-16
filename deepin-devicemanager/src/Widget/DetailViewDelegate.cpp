@@ -42,24 +42,24 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     if (!(opt.state & DStyle::State_Enabled)) {
         cg = DPalette::Disabled;
     } else {
-        if (!wnd) {
+        if (!wnd)
             cg = DPalette::Inactive;
-        } else {
+        else
             cg = DPalette::Active;
-        }
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style)
+        return;
 
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
 
-    if (opt.features & QStyleOptionViewItem::Alternate) {
-        background = palette.color(cg, DPalette::AlternateBase);
-    } else {
+    if (opt.features & QStyleOptionViewItem::Alternate)
+        background = palette.color(cg, DPalette::ItemBackground);
+    else
         background = palette.color(cg, DPalette::Base);
-    }
 
     QRect rect = opt.rect;
     QPainterPath path;
@@ -115,10 +115,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
                     // 右侧绘制区域
                     pathRight = pathRight.subtracted(path);
                     painter->fillPath(pathRight, background);
-                }
-
-                // 填充第二列空白
-                if (index.column() == 1) {
+                } else if (index.column() == 1) { // 填充第二列空白
                     // 左侧空白
                     QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y() + 1, 8, tmpRect.height());
 
@@ -139,7 +136,6 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
                     pathRightBottom = pathRightBottom.subtracted(path);
                     painter->fillPath(pathRightBottom, background);
                 }
-
             }
 
         } else if (rectpath.y() + rect.height() >= dynamic_cast<DetailTreeView *>(this->parent())->height()) {
@@ -172,10 +168,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
                     // 右侧绘制区域
                     pathRight = pathRight.subtracted(path);
                     painter->fillPath(pathRight, background);
-
-                }
-
-                if (index.column() == 1) {
+                } else if (index.column() == 1) {
                     // 左侧空白
                     QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y(), 8, tmpRect.height());
 
@@ -197,7 +190,6 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
                     painter->fillPath(pathRightTop, background);
                 }
             }
-
 
         } else {
             path.addRect(rectpath);
@@ -226,9 +218,8 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
     if (dynamic_cast<DetailTreeView *>(this->parent())->isCurDeviceEnable()) {
-        if (index.row() == 0 && index.column() == 1) {
+        if (index.row() == 0 && index.column() == 1)
             text = text.remove("(" + tr("Disable") + ")");
-        }
     } else {
         if (index.row() == 0 && index.column() == 1) {
             text = "(" + tr("Disable") + ")" + text;
@@ -240,9 +231,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
 
-
     painter->restore();
-//    QStyledItemDelegate::paint(painter, option, index);
 }
 
 QWidget *DetailViewDelegate::createEditor(QWidget *, const QStyleOptionViewItem &, const QModelIndex &) const
@@ -255,11 +244,10 @@ QSize DetailViewDelegate::sizeHint(const QStyleOptionViewItem &option, const QMo
     QSize size = QStyledItemDelegate::sizeHint(option, index);
     size.setHeight(std::max(50, size.height()));
 
-    if (index.column()) {
+    if (index.column())
         size.setWidth(std::max(150, size.width()));
-    }
+
     return size;
-//    return QStyledItemDelegate::sizeHint(option, index);
 }
 
 void DetailViewDelegate::initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const

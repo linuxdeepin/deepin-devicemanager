@@ -39,11 +39,10 @@ DetailButton::DetailButton(const QString &txt)
 
 void DetailButton::updateText()
 {
-    if (this->text() == tr("More")) {
+    if (this->text() == tr("More"))
         this->setText(tr("Collapse"));
-    } else {
+    else
         this->setText(tr("More"));
-    }
 }
 
 void DetailButton::paintEvent(QPaintEvent *e)
@@ -62,11 +61,10 @@ void DetailButton::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid/* && wid == this*/) {
+    if (wid /* && wid == this*/)
         cg = DPalette::Active;
-    } else {
+    else
         cg = DPalette::Inactive;
-    }
 
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
@@ -103,11 +101,10 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid/* && wid == this*/) {
+    if (wid /* && wid == this*/)
         cg = DPalette::Active;
-    } else {
+    else
         cg = DPalette::Inactive;
-    }
 
     // 清除背景色颜色
     QBrush clearBrush(palette.color(cg, DPalette::Base));
@@ -119,7 +116,7 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     rect.setWidth(rect.width() - spacing);
     rect.setHeight(1);
 //    rect.setY(rect.y() + height() - 2);
-    QBrush bgBrush(palette.color(cg, DPalette::FrameShadowBorder));
+    QBrush bgBrush(palette.color(cg, DPalette::FrameBorder));
     painter.fillRect(rect, bgBrush);
 
     painter.restore();
@@ -148,11 +145,10 @@ void ScrollAreaWidget::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid/* && wid == this*/) {
+    if (wid /* && wid == this*/)
         cg = DPalette::Active;
-    } else {
+    else
         cg = DPalette::Inactive;
-    }
 
     // 清除背景色颜色
     QBrush clearBrush(palette.color(cg, DPalette::Base));
@@ -196,14 +192,13 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         if (!device) {continue;}
         TextBrowser *txtBrowser = new TextBrowser(this);
         txtBrowser->showDeviceInfo(device);
-        connect(txtBrowser, &TextBrowser::refreshInfo, this, &PageDetail::slotRefreshInfo);
-        connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::slotExportInfo);
+        connect(txtBrowser, &TextBrowser::refreshInfo, this, &PageDetail::refreshInfo);
+        connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::exportInfo);
         connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
         addWidgets(txtBrowser, device->enable());
         // 当添加到最后一个设备详细信息时，隐藏分隔符
-        if (device == lstInfo.last()) {
+        if (device == lstInfo.last())
             m_ListDetailSeperator[lstInfo.size() - 1]->setVisible(false);
-        }
     }
     // 刷新展示页面时,滚动条还原
     mp_ScrollArea->verticalScrollBar()->setValue(0);
@@ -232,15 +227,13 @@ void PageDetail::showInfoOfNum(int index)
 
 EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
 {
-    if (m_ListTextBrowser.size() <= row) {
+    if (m_ListTextBrowser.size() <= row)
         return EDS_Cancle;
-    }
 
     // 设置 TextBrowser 可用
     TextBrowser *browser = m_ListTextBrowser.at(row);
-    if (!browser) {
+    if (!browser)
         return EDS_Cancle;
-    }
 
     return browser->setDeviceEnabled(enable);
 }
@@ -264,11 +257,10 @@ void PageDetail::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid/* && wid == this*/) {
+    if (wid /* && wid == this*/)
         cg = DPalette::Active;
-    } else {
+    else
         cg = DPalette::Inactive;
-    }
 
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
@@ -289,9 +281,8 @@ void PageDetail::resizeEvent(QResizeEvent *event)
 void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 {
     // 添加 textBrowser
-    if (widget != nullptr && m_ListTextBrowser.size() != 0) {
+    if (widget != nullptr && m_ListTextBrowser.size() != 0)
         mp_ScrollAreaLayout->addSpacing(SEPERATOR_HEIGHT);
-    }
 
     mp_ScrollAreaLayout->addWidget(widget);
 
@@ -301,9 +292,8 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     DetailButton *button = new DetailButton(tr("More"));
     DFontSizeManager::instance()->bind(button, DFontSizeManager::T8);
     connect(button, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
-    if (!enable) {
+    if (!enable)
         button->setVisible(false);
-    }
 
     hLayout->addWidget(button);
     hLayout->addStretch();
@@ -376,18 +366,18 @@ void PageDetail::clearWidget()
 void PageDetail::slotBtnClicked()
 {
     DetailButton *button = qobject_cast<DetailButton *>(sender());
+    if (!button)
+        return;
     int index = 0;
     foreach (DetailButton *b, m_ListDetailButton) {
-        if (button == b) {
+        if (button == b)
             break;
-        }
         index++;
     }
 
     // 改变按钮的状态，展开和收起的切换
-    if (button) {
+    if (button)
         button->updateText();
-    }
 
     // 显示内容发生相应变化，也就是是否显示其它信息
     TextBrowser *browser = m_ListTextBrowser[index];
@@ -397,22 +387,12 @@ void PageDetail::slotBtnClicked()
     }
 }
 
-void PageDetail::slotRefreshInfo()
-{
-    emit refreshInfo();
-}
-void PageDetail::slotExportInfo()
-{
-    emit exportInfo();
-}
-
 void PageDetail::slotCopyAllInfo()
 {
     QString str;
     foreach (TextBrowser *tb, m_ListTextBrowser) {
-        if (tb) {
+        if (tb)
             str.append(tb->toPlainText());
-        }
     }
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(str);

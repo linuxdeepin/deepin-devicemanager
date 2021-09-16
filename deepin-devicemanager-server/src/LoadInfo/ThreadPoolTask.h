@@ -55,6 +55,12 @@ private:
      * @param cmd : the command
      */
     void runCmd(const QString &cmd);
+
+    /**
+     * @brief runCmd
+     * @param cmd
+     * @param info
+     */
     void runCmd(const QString &cmd, QString &info);
 
     /**
@@ -70,6 +76,11 @@ private:
     void loadSmartCtlInfoToCache(const QString &info);
 
     /**
+     * @brief loadCpuInfo
+     */
+    void loadCpuInfo();
+
+    /**
      * @brief loadSgSmartCtlInfoToCache
      * @param info
      */
@@ -80,6 +91,19 @@ private:
      * @param info
      */
     void loadLspciVSInfoToCache(const QString &info);
+
+    /**
+     * @brief loadDisplayWidth
+     * @param info
+     */
+    void loadDisplayWidth(const QString &info);
+
+    /**
+     * @brief getDisplayWidthFromLspci
+     * @param info
+     * @return
+     */
+    int getDisplayWidthFromLspci(const QString &info);
 
     /**
      * @brief runCmdToTxt

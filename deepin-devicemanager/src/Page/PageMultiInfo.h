@@ -59,6 +59,11 @@ public:
      */
     void setLabel(const QString &itemstr) override;
 
+    /**
+     * @brief clearWidgets clear widgets
+     */
+    void clearWidgets() override;
+
 signals:
     /**
      * @brief refreshInfo:刷新信息信号
@@ -88,16 +93,6 @@ private slots:
      * @param row:点击行
      */
     void slotItemClicked(int row);
-
-    /**
-     * @brief slotRefreshInfo:刷新槽函数
-     */
-    void slotRefreshInfo();
-
-    /**
-     * @brief slotExportInfo:单导出槽函数
-     */
-    void slotExportInfo();
 
     /**
      * @brief slotEnableDevice

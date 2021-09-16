@@ -50,12 +50,13 @@ class XlsxCfVoData
 {
 public:
     XlsxCfVoData()
-        :gte(true)
+        : type()
+        , gte(true)
     {
     }
 
-    XlsxCfVoData(ConditionalFormatting::ValueObjectType type, const QString &value, bool gte=true)
-        :type(type), value(value), gte(gte)
+    XlsxCfVoData(ConditionalFormatting::ValueObjectType type, const QString &value, bool gte = true)
+        : type(type), value(value), gte(gte)
     {
     }
 
@@ -100,7 +101,7 @@ public:
     };
 
     XlsxCfRuleData()
-        :priority(1)
+        : priority(1)
     {}
 
     int priority;
@@ -115,8 +116,8 @@ public:
     ConditionalFormattingPrivate(const ConditionalFormattingPrivate &other);
     ~ConditionalFormattingPrivate();
 
-    void writeCfVo(QXmlStreamWriter &writer, const XlsxCfVoData& cfvo) const;
-    bool readCfVo(QXmlStreamReader &reader, XlsxCfVoData& cfvo);
+    void writeCfVo(QXmlStreamWriter &writer, const XlsxCfVoData &cfvo) const;
+    bool readCfVo(QXmlStreamReader &reader, XlsxCfVoData &cfvo);
     bool readCfRule(QXmlStreamReader &reader, XlsxCfRuleData *cfRule, Styles *styles);
     bool readCfDataBar(QXmlStreamReader &reader, XlsxCfRuleData *cfRule);
     bool readCfColorScale(QXmlStreamReader &reader, XlsxCfRuleData *cfRule);
