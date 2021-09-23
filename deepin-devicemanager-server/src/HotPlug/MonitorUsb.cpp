@@ -25,13 +25,12 @@ void MonitorUsb::monitor()
     char buf[10];
     fd_set fds;
     struct timeval tv;
-    int ret;
     while (true) {
         FD_ZERO(&fds);
         FD_SET(fd, &fds);
         tv.tv_sec = 0;
         tv.tv_usec = 10000;
-        ret = select(fd + 1, &fds, nullptr, nullptr, &tv);
+        int ret = select(fd + 1, &fds, nullptr, nullptr, &tv);
 
         // 判断是否有事件产生
         if (!ret)
@@ -46,7 +45,7 @@ void MonitorUsb::monitor()
 
         // 获取事件并判断是否是插拔
         unsigned long long curNum = udev_device_get_devnum(dev);
-        if (curNum <= 0) {
+        if (curNum == 0) {
             udev_device_unref(dev);
             continue;
         }

@@ -244,7 +244,7 @@ class LogicalCpuPrivate
 {
     Q_DECLARE_PUBLIC(LogicalCpu)
 public:
-    LogicalCpuPrivate(LogicalCpu *q)
+    explicit LogicalCpuPrivate(LogicalCpu *q)
         : q_ptr(q)
         , logicalID(0)
         , coreID(0)

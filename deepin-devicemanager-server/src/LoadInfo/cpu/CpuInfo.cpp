@@ -34,7 +34,7 @@ bool CpuInfo::loadCpuInfo()
     return true;
 }
 
-QString CpuInfo::arch()
+const QString& CpuInfo::arch() const
 {
     return m_Arch;
 }
