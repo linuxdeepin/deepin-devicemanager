@@ -18,14 +18,14 @@
 #include "DeviceManager.h"
 #include "X86Generator.h"
 #include "LoadCpuInfoThread.h"
+#include "ut_Head.h"
+#include "stub.h"
 
-#include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 class LoadCpuInfoThread_UT : public UT_HEAD
 {
@@ -41,9 +41,10 @@ public:
     LoadCpuInfoThread *m_loadCpuInfoThread;
 };
 
-QList<QMap<QString, QString>> ut_LoadCpuInfoThread_cmdInfo()
+const QList<QMap<QString, QString>>& ut_LoadCpuInfoThread_cmdInfo()
 {
-    QList<QMap<QString, QString>> list;
+    static QList<QMap<QString, QString>> list;
+    list.clear();
     QMap<QString, QString> map;
     map.insert("/", "/");
     list.append(map);

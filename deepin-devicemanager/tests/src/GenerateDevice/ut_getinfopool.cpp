@@ -19,6 +19,7 @@
 #include "GetInfoPool.h"
 #include "GenerateDevicePool.h"
 #include "DeviceManager.h"
+#include "CmdTool.h"
 #include "stub.h"
 #include "ut_Head.h"
 
@@ -65,7 +66,13 @@ TEST_F(UT_GetInfoPool,UT_GetInfoPool_initcmd){
     EXPECT_EQ(m_readFilePool->m_CmdList.size(),28);
 }
 
+bool ut_getDeviceInfo_getAllInfo(void* obj,QString& deviceInfo, const QString& file){
+    deviceInfo = "test info";
+    return true;
+}
 TEST_F(UT_GetInfoPool,UT_GetInfoPool_getAllInfo){
+    Stub stub;
+    stub.set(ADDR(CmdTool, getDeviceInfo), ut_getDeviceInfo_getAllInfo);
     m_readFilePool->getAllInfo();
     EXPECT_TRUE(m_readFilePool->waitForDone(-1));
 }
