@@ -108,7 +108,8 @@ QByteArray ut_readAllStandardOutput_getCurPowerInfo()
 TEST_F(UT_CmdTool,UT_CmdTool_getCurPowerInfo){
     Stub stub;
     stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_getCurPowerInfo);
-    QMap<QString, QMap<QString, QString>> mapMapInfo = m_cmdTool->getCurPowerInfo();
+    QMap<QString, QMap<QString, QString>> mapMapInfo;
+    m_cmdTool->getCurPowerInfo(mapMapInfo);
     EXPECT_EQ(mapMapInfo.size() , 2);
     EXPECT_EQ(mapMapInfo["Daemon"].size(),4);
     EXPECT_EQ(mapMapInfo["upower"].size(),5);

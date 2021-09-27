@@ -32,6 +32,8 @@ class UT_DeviceInfo : public UT_HEAD
 public:
     void SetUp()
     {
+        audio->m_Name = "name";
+        audio->m_Vendor = "vendor";
     }
     void TearDown()
     {
@@ -53,8 +55,8 @@ TEST_F(UT_DeviceInfo, UT_DeviceInfo_getBaseAttribs)
 {
     m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
     QList<QPair<QString, QString>> lst = m_deviceBaseInfo->getBaseAttribs();
-    EXPECT_EQ(0, lst.size());
-    EXPECT_EQ(0, m_deviceBaseInfo->m_LstBaseInfo.size());
+    EXPECT_EQ(2, lst.size());
+    EXPECT_EQ(2, m_deviceBaseInfo->m_LstBaseInfo.size());
 }
 
 TEST_F(UT_DeviceInfo, UT_DeviceInfo_getTableHeader)
@@ -77,7 +79,7 @@ TEST_F(UT_DeviceInfo, UT_DeviceInfo_subTitle)
 {
     m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
     QString title = m_deviceBaseInfo->subTitle();
-    EXPECT_STREQ("", title.toStdString().c_str());
+    EXPECT_STREQ("name", title.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceInfo, UT_DeviceInfo_isValueValid)
@@ -100,7 +102,7 @@ TEST_F(UT_DeviceInfo, UT_DeviceInfo_getOverviewInfo)
 {
     m_deviceBaseInfo = dynamic_cast<DeviceBaseInfo *>(audio);
     QString ret = m_deviceBaseInfo->getOverviewInfo();
-    EXPECT_STREQ("", ret.toStdString().c_str());
+    EXPECT_STREQ("name", ret.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceInfo, UT_DeviceInfo_getOtherMapInfo)
