@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QDBusContext>
 
+class MainJob;
 class DBusInterface : public QObject, protected QDBusContext
 {
     Q_OBJECT
@@ -33,15 +34,31 @@ class DBusInterface : public QObject, protected QDBusContext
 public:
     explicit DBusInterface(QObject *parent = nullptr);
 
+    /**
+     * @brief setMainJob 设置主线job
+     * @param job
+     */
+    void setMainJob(MainJob *job);
+
 signals:
 
 public slots:
     /**
-     * @brief getInfo
+     * @brief getInfo : Obtain hardware information through the DBus
      * @param key
-     * @return
+     * @return : Hardware info
      */
     Q_SCRIPTABLE QString getInfo(const QString &key);
+
+    /**
+     * @brief exceCmd : Exec cmd through the DBus
+     * @param cmd : the cmd
+     * @return : result
+     */
+    Q_SCRIPTABLE QString execCmd(const QString &cmd);
+
+private:
+    MainJob *mp_MainJob;       //<!         主线job
 };
 
 #endif // DBUSINTERFACE_H

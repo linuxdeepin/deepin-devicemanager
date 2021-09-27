@@ -1,4 +1,4 @@
-#include "ReadFilePool.h"
+#include "GetInfoPool.h"
 
 #include <QObjectCleanupHandler>
 #include <QDebug>
@@ -8,7 +8,7 @@
 
 static QMutex mutex;
 
-CmdTask::CmdTask(QString key, QString file, QString info, ReadFilePool *parent)
+CmdTask::CmdTask(QString key, QString file, QString info, GetInfoPool *parent)
     : m_Key(key)
     , m_File(file)
     , m_Info(info)
@@ -30,14 +30,14 @@ void CmdTask::run()
     mp_Parent->finishedCmd(m_Info, cmdInfo);
 }
 
-ReadFilePool::ReadFilePool()
+GetInfoPool::GetInfoPool()
     : m_Arch("")
     , m_FinishedNum(0)
 {
     initCmd();
 }
 
-void ReadFilePool::readAllFile()
+void GetInfoPool::getAllInfo()
 {
     DeviceManager::instance()->clear();
 
@@ -52,7 +52,7 @@ void ReadFilePool::readAllFile()
     }
 }
 
-void ReadFilePool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
+void GetInfoPool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
     DeviceManager::instance()->addCmdInfo(cmdInfo);
     QMutexLocker m_lock(&mutex);
@@ -63,13 +63,13 @@ void ReadFilePool::finishedCmd(const QString &info, const QMap<QString, QList<QM
     }
 }
 
-void ReadFilePool::setFramework(const QString &arch)
+void GetInfoPool::setFramework(const QString &arch)
 {
     // 设置架构
     m_Arch = arch;
 }
 
-void ReadFilePool::initCmd()
+void GetInfoPool::initCmd()
 {
     m_CmdList.append({ "lshw",                 "lshw.txt",               tr("Loading Audio Device Info...") });
     m_CmdList.append({ "printer",              "printer.txt",            ""});
@@ -97,12 +97,6 @@ void ReadFilePool::initCmd()
     m_CmdList.append({ "dmesg",                "dmesg.txt",              tr("Loading Power Info...")});
     m_CmdList.append({ "hciconfig",            "hciconfig.txt",          tr("Loading Printer Info...")});
 
-    if (m_Arch == "KLU" || m_Arch == "PanGuV") {
-        m_CmdList.append({ "gpuinfo",          "gpuinfo.txt",            ""});
-        m_CmdList.append({ "bootdevice",       "bootdevice.txt",         ""});
-    }
-
-//    m_CmdList.append({ "cat_cpuinfo",          "/proc/cpuinfo",          tr("Loading Monitor Info...")});
     m_CmdList.append({ "cat_boardinfo",        "/proc/boardinfo",        tr("Loading Mouse Info...")});
     m_CmdList.append({ "cat_os_release",       "/etc/os-release",        tr("Loading Network Adapter Info...")});
     m_CmdList.append({ "cat_version",          "/proc/version",          ""});
@@ -110,9 +104,4 @@ void ReadFilePool::initCmd()
     m_CmdList.append({ "cat_audio",            "/proc/asound/card0/codec#0",     ""});
     m_CmdList.append({ "cat_gpuinfo",          "/proc/gpuinfo_0 ",     ""});
     m_CmdList.append({ "bt_device",            "bt_device.txt",          ""}); // 蓝牙设备配对信息
-
-    if (m_Arch == "PanGuV") {
-        m_CmdList.append({ "EDID_HDMI",        "EDID_HDMI.txt",     ""});
-        m_CmdList.append({ "EDID_VGA",         "EDID_VGA.txt",     ""});
-    }
 }
