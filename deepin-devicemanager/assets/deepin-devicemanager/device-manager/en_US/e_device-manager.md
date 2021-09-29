@@ -41,7 +41,7 @@ The following hardware device information is for reference only. If there is no 
 1. On the main interface, click **Overview**.
 2. You can see a list containing **CPU**, **Motherboard**, **Memory** and so on in this interface, and summary info. 
 
-![0|overview](fig/p_overview.png)
+![0|overview](fig/e_overview.png)
 
 ### CPU
 
