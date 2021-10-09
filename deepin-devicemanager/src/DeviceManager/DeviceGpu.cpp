@@ -65,7 +65,7 @@ void DeviceGpu::loadBaseDeviceInfo()
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
 {
     // 判断是否是同一个gpu
-    QRegExp re(":[0-9]{2}:[0-9]{2}");
+    QRegExp re(":[0-9a-z]{2}:[0-9a-z]{2}");
     int index = mapInfo["bus info"].indexOf(re);
     QString uniqueKey = mapInfo["bus info"].mid(index + 1);
     if (!uniqueKey.contains(m_UniqueKey))
@@ -121,7 +121,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_MaximumResolution);
 
     // 获取 m_UniqueKey
-    QRegExp re(":[0-9]{2}:[0-9]{2}");
+    QRegExp re(":[0-9a-z]{2}:[0-9a-z]{2}");
     int index = mapInfo["SysFS BusID"].indexOf(re);
     m_UniqueKey = mapInfo["SysFS BusID"].mid(index + 1);
 
