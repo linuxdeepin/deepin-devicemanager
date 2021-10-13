@@ -101,6 +101,13 @@ private:
     void readSysCpuN(int N, const QString &path);
 
     /**
+     * @brief readCoreSiblingsList  读取core_siblings_list
+     * @param path core_siblings_list 文件路径
+     * @return siblings_list
+     */
+    void readCoreSiblingsList(const QString &path);
+
+    /**
      * @brief readPhysicalID
      * @param dir
      * @return
@@ -149,6 +156,7 @@ private:
     QMap<int, CoreCpu>         m_CoreCpu;
     QMap<int, LogicalCpu>      m_MapLogicalCpu;
     QString                    m_Arch;
+    QStringList                m_SiblingsList;      // cpu sibling list
 };
 
 #endif // CPUINFO_H

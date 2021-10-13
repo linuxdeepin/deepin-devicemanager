@@ -18,6 +18,10 @@ CpuInfo::~CpuInfo()
     m_CoreCpu.clear();
     // clear logical cpu
     m_MapLogicalCpu.clear();
+
+    // clear sibling List
+    m_SiblingsList.clear();
+
 }
 
 bool CpuInfo::loadCpuInfo()
@@ -191,6 +195,23 @@ void CpuInfo::readSysCpuN(int N, const QString &path)
         readCpuFreq(dir.filePath("cpufreq"), lcpu);
 
     m_MapLogicalCpu.insert(N, lcpu);
+    // get core siblings list
+    if (dir.exists("topology"))
+        readCoreSiblingsList(dir.filePath("topology"));
+}
+
+void CpuInfo::readCoreSiblingsList(const QString &path)
+{
+    // 读取/sys/devices/system/cpu/cpu*/topology/core_siblings_list
+    // 同一物理CPU的siblings_list相同，以此来计算物理CPU数目
+    QString siblingPath = path + "/core_siblings_list";
+    QFile sibFile(siblingPath);
+    if (sibFile.open(QIODevice::ReadOnly)) {
+        QString info = sibFile.readAll();
+        if ((!info.isEmpty()) && (!m_SiblingsList.contains(info)))
+            m_SiblingsList.append(info);
+    }
+    sibFile.close();
 }
 
 int CpuInfo::readPhysicalID(const QDir &dir)
