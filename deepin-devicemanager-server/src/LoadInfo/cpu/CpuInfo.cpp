@@ -139,6 +139,11 @@ bool CpuInfo::parseInfo(const QString &info)
         lcpu.setcpuFamily(mapInfo["cpu family"]);
         lcpu.setBogomips(mapInfo["bogomips"]);
 
+        // diff in arm
+        if(m_Arch == "aarch64"){
+            lcpu.setBogomips(mapInfo["BogoMIPS"]);
+        }
+
         // diff in loognsoon
         if (m_Arch == "mips64") {
             lcpu.setBogomips(mapInfo["BogoMIPS"]);
