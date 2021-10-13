@@ -765,9 +765,10 @@ QString CmdTool::getCurNetworkLinkStatus(QString driverName)
     return link;
 }
 
-bool CmdTool::getCurPowerInfo(QMap<QString, QMap<QString, QString>>& map)
+QMap<QString, QMap<QString, QString>> CmdTool::getCurPowerInfo()
 {
     QString powerInfo;
+    QMap<QString, QMap<QString, QString>> map;
     QProcess process;
 
     //执行"upower --dump"命令获取电池相关信息
@@ -789,7 +790,7 @@ bool CmdTool::getCurPowerInfo(QMap<QString, QMap<QString, QString>>& map)
         else
             map.insert("Daemon", mapInfo);
     }
-    return true;
+    return map;
 }
 
 void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)

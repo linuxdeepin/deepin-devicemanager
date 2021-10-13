@@ -61,7 +61,7 @@ public:
      * @brief getCurPowerInfo:upower --dump获取电池信息
      * @return
      */
-    bool getCurPowerInfo(QMap<QString, QMap<QString, QString>>& map);
+    QMap<QString, QMap<QString, QString>> getCurPowerInfo();
 
     /**
      * @brief cmdInfo:获取命令的解析结果
