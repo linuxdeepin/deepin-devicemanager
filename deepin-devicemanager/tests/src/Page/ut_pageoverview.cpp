@@ -14,21 +14,29 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/PageInfo.h"
-#include "../src/Page/PageOverview.h"
-#include "../src/DeviceManager/DeviceInput.h"
-#include "../ut_Head.h"
+#include "PageInfo.h"
+#include "PageOverview.h"
+#include "PageTableWidget.h"
+#include "DetailTreeView.h"
+#include "LongTextLabel.h"
+#include "DeviceInput.h"
+#include "ut_Head.h"
+#include "stub.h"
+
+#include <DSysInfo>
+#include <DApplication>
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QMenu>
 #include <QAction>
-#include <DSysInfo>
+#include <QClipboard>
+#include <QMenu>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class PageOverview_UT : public UT_HEAD
+class UT_PageOverview : public UT_HEAD
 {
 public:
     void SetUp()
@@ -42,87 +50,22 @@ public:
     PageOverview *m_pageOverview = nullptr;
 };
 
-TEST_F(PageOverview_UT, PageOverview_UT_updateInfo)
-{
-    DeviceInput *device = new DeviceInput;
-    QMap<QString, QString> mapinfo;
-    mapinfo.insert("/", "/");
-    device->setInfoFromHwinfo(mapinfo);
-    QList<DeviceBaseInfo *> bInfo;
-    bInfo.append(device);
-    m_pageOverview->updateInfo(bInfo);
-    delete device;
-}
-
-TEST_F(PageOverview_UT, PageOverview_UT_updateInfo2)
+TEST_F(UT_PageOverview, UT_PageOverview_updateInfo2)
 {
     QMap<QString, QString> mapinfo;
     mapinfo.insert("/", "/");
     m_pageOverview->updateInfo(mapinfo);
     m_pageOverview->clearWidgets();
-    m_pageOverview->setLabel("");
+    m_pageOverview->setLabel("UnionTech OS Desktop","UOS");
+    EXPECT_STREQ("UnionTech OS Desktop",m_pageOverview->mp_DeviceLabel->text().toStdString().c_str());
 }
 
-DSysInfo::UosEdition ut_uosEditionType()
+TEST_F(UT_PageOverview, UT_PageOverview_slotActionRefresh)
 {
-    return DSysInfo::UosHome;
-}
-
-DSysInfo::UosEdition ut_uosEditionType1()
-{
-    return DSysInfo::UosCommunity;
-}
-
-DSysInfo::UosEdition ut_uosEditionType3()
-{
-    return DSysInfo::UosEnterprise;
-}
-
-DSysInfo::UosEdition ut_uosEditionType4()
-{
-    return DSysInfo::UosEnterpriseC;
-}
-
-DSysInfo::UosEdition ut_uosEditionType5()
-{
-    return DSysInfo::UosEuler;
-}
-
-DSysInfo::UosEdition ut_uosEditionType6()
-{
-    return DSysInfo::UosEditionCount;
-}
-
-TEST_F(PageOverview_UT, PageOverview_UT_setLabel)
-{
-    Stub stub;
-    m_pageOverview->setLabel("/desktop", "/#");
-    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType);
-    m_pageOverview->setLabel("/ternimal", "/#");
-    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType1);
-    //    m_pageOverview->setLabel("/Tablet", "/#");
-    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType2);
-    //    m_pageOverview->setLabel("/laptop", "/#");
-    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType3);
-    //    m_pageOverview->setLabel("/server", "/#");
-    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType4);
-    //    m_pageOverview->setLabel("/Tablet", "/#");
-    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType5);
-    //    m_pageOverview->setLabel("/laptop", "/#");
-    //    stub.set(ADDR(DSysInfo, uosEditionType), ut_uosEditionType6);
-    //    m_pageOverview->setLabel("/server", "/#");
-}
-
-TEST_F(PageOverview_UT, PageOverview_UT_slotActionRefresh)
-{
+    QString conStr=m_pageOverview->mp_Overview->toString();
     m_pageOverview->slotActionCopy();
-    m_pageOverview->isOverview();
-}
-
-TEST_F(PageOverview_UT, PageOverview_UT_slotShowMenu)
-{
-    QPoint point(0, 0);
-    //    Stub stub;
-    //    stub.set((QAction(QMenu::*)(const QPoint &,QAction *))ADDR(QMenu,exec),ut_exec);
-    //    m_pageOverview->slotShowMenu(point);
+    QClipboard *clipboard = DApplication::clipboard();
+    QString clipStr = clipboard->text();
+    EXPECT_STREQ(conStr.toStdString().c_str(),clipStr.toStdString().c_str());
+    EXPECT_TRUE(m_pageOverview->isOverview());
 }

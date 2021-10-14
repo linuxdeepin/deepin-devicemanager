@@ -37,7 +37,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (m_Model.startsWith("ST") && m_Vendor.isEmpty())
         m_Vendor = "ST";
 
-    setAttribute(mapInfo, "Drive", m_Driver);
+    setAttribute(mapInfo, "Driver", m_Driver); // 驱动
     QRegExp exp("pci 0x[0-9a-zA-Z]*");
     if (exp.indexIn(m_Vendor) != -1)
         m_Vendor = "";
@@ -80,7 +80,7 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
 
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Drive", m_Driver);
+    setAttribute(mapInfo, "Driver", m_Driver); // 驱动
 
     setAttribute(mapInfo, "Attached to", m_Interface);
     QRegExp re(".*\\((.*)\\).*");
@@ -255,12 +255,15 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
     int index = reg.indexIn(size1);
     int num1 = 0;
     int num2 = 0;
-    if (index > 0)
+
+    // index>0时，对于"32GB"（数字开头的字符串,index=0）无法获取正确的数据32
+    // 所以要改为index >= 0
+    if (index >= 0)
         num1 = reg.cap(0).toInt();
 
     index = reg.indexIn(size2);
 
-    if (index > 0)
+    if (index >= 0)
         num2 = reg.cap(0).toInt();
 
     // 返回较大值
@@ -417,13 +420,14 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     m_Size.replace(QRegExp(".0[1-9]"), ".00");
 
     // 型号
-    //SATA
-    if (false == mapInfo["Device Model"].isEmpty())
-        m_Model = mapInfo["Device Model"];
-
-    //NVME
-    if (false == mapInfo["Model Number"].isEmpty())
-        m_Model = mapInfo["Model Number"];
+    if (m_Model.isEmpty() || m_Model == "Disk") {
+        //SATA
+        if (mapInfo.find("Device Model") != mapInfo.end())
+            m_Model = mapInfo["Device Model"];
+        //NVME
+        if (mapInfo.find("Model Number") != mapInfo.end())
+            m_Model = mapInfo["Model Number"];
+    }
 
     setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
 }

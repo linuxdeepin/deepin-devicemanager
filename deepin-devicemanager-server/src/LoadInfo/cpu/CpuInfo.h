@@ -44,7 +44,7 @@ public:
      * @brief arch
      * @return
      */
-    QString arch();
+    const QString& arch() const;
 
     /**
      * @brief logicalCpus

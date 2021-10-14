@@ -19,6 +19,7 @@
 #include "../DeviceManager/DevicePower.h"
 #include "../DeviceManager/DeviceCdrom.h"
 #include "../DeviceManager/DevicePrint.h"
+
 #include "MacroDefinition.h"
 
 MipsGenerator::MipsGenerator()

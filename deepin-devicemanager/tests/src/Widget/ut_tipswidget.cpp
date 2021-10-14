@@ -14,15 +14,20 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Widget/TipsWidget.h"
+#include "TipsWidget.h"
+#include "ut_Head.h"
 
-#include "../ut_Head.h"
+#include <DPlatformWindowHandle>
+#include <DGuiApplicationHelper>
+#include <DFontSizeManager>
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-class TipsWidget_UT : public UT_HEAD
+
+class UT_TipsWidget : public UT_HEAD
 {
 public:
     void SetUp()
@@ -36,28 +41,37 @@ public:
     TipsWidget *tWidget;
 };
 
-TEST_F(TipsWidget_UT, ut_onUpdateTheme)
+TEST_F(UT_TipsWidget, UT_TipsWidget_onUpdateTheme)
 {
     tWidget->onUpdateTheme();
+    DPalette plt = tWidget->palette();
+    EXPECT_TRUE(plt.color(Dtk::Gui::DPalette::Background) == plt.color(Dtk::Gui::DPalette::Base));
 }
 
-TEST_F(TipsWidget_UT, ut_setText)
+TEST_F(UT_TipsWidget, UT_TipsWidget_setText)
 {
-    tWidget->setText(" ");
+    tWidget->setText("text");
+    EXPECT_STREQ("text",tWidget->m_text.toStdString().c_str());
 }
 
-TEST_F(TipsWidget_UT, ut_setAlignment)
+TEST_F(UT_TipsWidget, UT_TipsWidget_setAlignment)
 {
     tWidget->setAlignment(Qt::AlignTop);
+    EXPECT_EQ(Qt::AlignTop,tWidget->m_alignment);
 }
 
-TEST_F(TipsWidget_UT, ut_adjustContent)
+TEST_F(UT_TipsWidget, UT_TipsWidget_adjustContent)
 {
-    tWidget->adjustContent("/");
+    QFontMetricsF fontMetris(tWidget->font());
+    int wordHeight = static_cast<int>(fontMetris.boundingRect(QRectF(0, 0, tWidget->width() - 2 * tWidget->m_lrMargin, 0),
+                     static_cast<int>(tWidget->m_alignment | Qt::TextWrapAnywhere), "text").height() + 2 * tWidget->m_tbMargin);
+    tWidget->adjustContent("text");
+    EXPECT_EQ(tWidget->height(),wordHeight);
 }
 
-TEST_F(TipsWidget_UT, ut_PaintEvent)
+TEST_F(UT_TipsWidget, UT_TipsWidget_PaintEvent)
 {
     QPaintEvent paint(QRect(tWidget->rect()));
     tWidget->paintEvent(&paint);
+    EXPECT_FALSE(tWidget->grab().isNull());
 }

@@ -14,18 +14,21 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/PageBoardInfo.h"
-#include "../src/DeviceManager/DeviceInfo.h"
-#include "../src/DeviceManager/DeviceBios.h"
-#include "../src/Page/PageDetail.h"
-#include "../src/Widget/TextBrowser.h"
-#include "../ut_Head.h"
+#include "PageBoardInfo.h"
+#include "DeviceInfo.h"
+#include "DeviceBios.h"
+#include "PageDetail.h"
+#include "TextBrowser.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QScrollArea>
+#include <QScrollBar>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 class PageDetail_UT : public UT_HEAD
 {
@@ -84,6 +87,7 @@ public:
 TEST_F(DetailButton_UT, DetailButton_UT_updateText)
 {
     m_detailButton->updateText();
+    EXPECT_EQ("Collapse",m_detailButton->text());
 }
 
 TEST_F(DetailButton_UT, DetailButton_UT_paintEvent)
@@ -115,6 +119,7 @@ TEST_F(PageDetail_UT, PageDetail_UT_showDeviceInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     m_pageDetail->showDeviceInfo(bInfo);
+    EXPECT_EQ(0,m_pageDetail->mp_ScrollArea->verticalScrollBar()->value());
     delete device;
 }
 
@@ -126,7 +131,9 @@ int ut_detail_size()
 TEST_F(PageDetail_UT, PageDetail_UT_showInfoOfNum)
 {
     m_pageDetail->showInfoOfNum(2);
+    EXPECT_EQ(0,m_pageDetail->mp_ScrollArea->verticalScrollBar()->value());
     m_pageDetail->enableDevice(0, true);
+    EXPECT_EQ(0,m_pageDetail->m_ListTextBrowser.size());
 }
 
 TEST_F(PageDetail_UT, PageDetail_UT_paintEvent)
@@ -145,11 +152,14 @@ TEST_F(PageDetail_UT, PageDetail_UT_addWidgets)
 {
     TextBrowser *m_tBrowser = new TextBrowser;
     m_pageDetail->addWidgets(m_tBrowser, true);
+    EXPECT_FALSE(m_pageDetail->mp_ScrollAreaLayout->widget());
     m_pageDetail->slotCopyAllInfo();
+    EXPECT_TRUE(!m_pageDetail->m_ListTextBrowser.isEmpty());
     delete m_tBrowser;
 }
 
 TEST_F(PageDetail_UT, PageDetail_UT_slotBtnClicked)
 {
     m_pageDetail->slotBtnClicked();
+    EXPECT_TRUE(m_pageDetail->m_ListTextBrowser.isEmpty());
 }

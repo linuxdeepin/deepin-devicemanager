@@ -14,19 +14,20 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/PageInfo.h"
-#include "../src/Page/WaitingWidget.h"
-#include "../src/DeviceManager/DeviceInput.h"
-#include "../src/DeviceManager/DeviceInfo.h"
-#include "../ut_Head.h"
+#include "PageInfo.h"
+#include "WaitingWidget.h"
+#include "DeviceInput.h"
+#include "DeviceInfo.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class WaitingWidget_UT : public UT_HEAD
+class UT_WaitingWidget : public UT_HEAD
 {
 public:
     void SetUp()
@@ -40,8 +41,10 @@ public:
     WaitingWidget *m_waitingWidget = nullptr;
 };
 
-TEST_F(WaitingWidget_UT, WaitingWidget_UT_start)
+TEST_F(UT_WaitingWidget, UT_WaitingWidget_start)
 {
     m_waitingWidget->start();
+    EXPECT_TRUE(m_waitingWidget->mp_Spinner->isPlaying());
     m_waitingWidget->stop();
+    EXPECT_FALSE(m_waitingWidget->mp_Spinner->isPlaying());
 }

@@ -14,17 +14,18 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/DeviceManager/DeviceComputer.h"
+#include "DeviceComputer.h"
 
-#include "../ut_Head.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class DeviceComputer_UT : public UT_HEAD
+class UT_DeviceComputer : public UT_HEAD
 {
 public:
     void SetUp()
@@ -38,30 +39,131 @@ public:
     DeviceComputer *m_deviceComputer;
 };
 
-TEST_F(DeviceComputer_UT, DeviceComputer_UT_name)
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_name)
 {
     m_deviceComputer->name();
-    m_deviceComputer->driver();
 }
 
-TEST_F(DeviceComputer_UT, DeviceComputer_UT_setHomeUrl)
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_driver)
 {
-    m_deviceComputer->setHomeUrl("http://");
-    m_deviceComputer->setOsDescription("test");
-    m_deviceComputer->setOS("UOS");
-    m_deviceComputer->setVendor("Intel");
-    m_deviceComputer->setName("Intel");
-    m_deviceComputer->setType(" ");
-    m_deviceComputer->setVendor("System manufacturer", "Intel");
-    m_deviceComputer->setName("System Product Name", "Intel", "unknown", "unknown");
+    QString driver = m_deviceComputer->driver();
+    EXPECT_STREQ("", driver.toStdString().c_str());
 }
 
-TEST_F(DeviceComputer_UT, DeviceComputer_UT_initFilterKey)
+
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setHomeUrl)
+{
+    m_deviceComputer->setHomeUrl("http://url");
+    EXPECT_STREQ("http://url", m_deviceComputer->m_HomeUrl.toStdString().c_str());
+
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setOsDescription)
+{
+    m_deviceComputer->setOsDescription("OsDescription");
+    EXPECT_STREQ("OsDescription", m_deviceComputer->m_OsDescription.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setOS)
+{
+    m_deviceComputer->setOS("OS");
+    EXPECT_STREQ("OS", m_deviceComputer->m_OS.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setVendor_001)
+{
+    m_deviceComputer->setVendor("Vendor");
+    EXPECT_STREQ("Vendor", m_deviceComputer->m_Vendor.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setVendor_002)
+{
+    m_deviceComputer->setVendor("System manufacturer", "Vendor");
+    EXPECT_STREQ("Vendor", m_deviceComputer->m_Vendor.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setVendor_003)
+{
+    m_deviceComputer->setVendor("Vendor1", "Vendor2");
+    EXPECT_STREQ("Vendor1", m_deviceComputer->m_Vendor.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setName_001)
+{
+    m_deviceComputer->setName("None");
+    EXPECT_STREQ("", m_deviceComputer->m_Name.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setName_002)
+{
+    QString dmi1Name = "System Product Name";
+    QString dmi2Name = "dmi2Name";
+    QString dmi1Family = "Not Applicable";
+    QString dmi1Version = "Not Applicable";
+    m_deviceComputer->m_Vendor = "vendor";
+
+    m_deviceComputer->setName(dmi1Name, dmi2Name, dmi1Family, dmi1Version);
+    EXPECT_STREQ("  dmi2Name", m_deviceComputer->m_Name.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setName_003)
+{
+    QString dmi1Name = "dmi1Name";
+    QString dmi2Name = "dmi2Name";
+    QString dmi1Family = "Not Applicable";
+    QString dmi1Version = "Not Applicable";
+    m_deviceComputer->m_Vendor = "vendor";
+
+    m_deviceComputer->setName(dmi1Name, dmi2Name, dmi1Family, dmi1Version);
+    EXPECT_STREQ("  dmi1Name", m_deviceComputer->m_Name.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_setType)
+{
+    m_deviceComputer->setType("Type");
+    EXPECT_STREQ("Type", m_deviceComputer->m_Type.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_getOverviewInfo)
+{
+    m_deviceComputer->m_Vendor = "vendor";
+    m_deviceComputer->m_Name = "name";
+    m_deviceComputer->m_Type = "type";
+
+    QString model = m_deviceComputer->getOverviewInfo();
+    EXPECT_STREQ("vendor name type ", model.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_getOSInfo)
+{
+    m_deviceComputer->m_OS = "os";
+    m_deviceComputer->m_OsDescription = "OsDescription";
+
+    QString model = m_deviceComputer->getOSInfo();
+    EXPECT_STREQ("OsDescription os", model.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_initFilterKey)
 {
     m_deviceComputer->initFilterKey();
-    m_deviceComputer->getOverviewInfo();
+    EXPECT_EQ(0, m_deviceComputer->m_FilterKey.size());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_loadBaseDeviceInfo)
+{
     m_deviceComputer->loadBaseDeviceInfo();
+    EXPECT_EQ(0, m_deviceComputer->m_LstBaseInfo.size());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_loadOtherDeviceInfo)
+{
     m_deviceComputer->loadOtherDeviceInfo();
-    m_deviceComputer->loadTableHeader();
+    EXPECT_EQ(0, m_deviceComputer->m_LstOtherInfo.size());
+}
+
+TEST_F(UT_DeviceComputer, UT_DeviceComputer_loadTableData)
+{
     m_deviceComputer->loadTableData();
+    EXPECT_EQ(0, m_deviceComputer->m_TableData.size());
 }

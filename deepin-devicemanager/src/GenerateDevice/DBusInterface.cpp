@@ -52,6 +52,61 @@ bool DBusInterface::getInfo(const QString &key, QString &info)
     }
 }
 
+bool DBusInterface::reqUpdateUI(bool start)
+{
+    // 启动还是刷新
+    QString cmd = start ? "START" : "UPDATE_UI";
+
+    // 调用dbus接口发送指令到后台
+    QString msg;
+    QDBusReply<QString> reply = mp_Iface->call("execCmd", cmd);
+    if (reply.isValid()) {
+        msg = reply.value();
+    } else {
+        qInfo() << "Failed to exec cmd ****** " << cmd;
+        return false;
+    }
+
+    if (msg == "3")
+        return true;
+    else
+        return false;
+}
+
+bool DBusInterface::execDriverOrder(const QString &cmd)
+{
+    QString msg;
+    QDBusReply<QString> reply = mp_Iface->call("execCmd", "DRIVER#" + cmd);
+    if (reply.isValid()) {
+        msg = reply.value();
+    } else {
+        qInfo() << "Failed to exec cmd ****** " << cmd;
+        return false;
+    }
+
+    if (msg == "2")
+        return true;
+    else
+        return false;
+}
+
+bool DBusInterface::execIfconfigOrder(const QString &cmd)
+{
+    QString msg;
+    QDBusReply<QString> reply = mp_Iface->call("execCmd", "IFCONFIG#" + cmd);
+    if (reply.isValid()) {
+        msg = reply.value();
+    } else {
+        qInfo() << "Failed to exec cmd ****** " << cmd;
+        return false;
+    }
+
+    if (msg == "2")
+        return true;
+    else
+        return false;
+}
+
 void DBusInterface::init()
 {
     // 1. 连接到dbus

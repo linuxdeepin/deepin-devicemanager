@@ -1,6 +1,5 @@
 #include "MainJob.h"
 #include "ThreadPool.h"
-#include "RRServer.h"
 #include "DetectThread.h"
 #include "DebugTimeManager.h"
 #include "DBusInterface.h"
@@ -22,7 +21,6 @@ const QString SERVICE_PATH = "/com/deepin/devicemanager";
 MainJob::MainJob(QObject *parent)
     : QObject(parent)
     , mp_Pool(new ThreadPool)
-    , mp_ZmqServer(nullptr)
     , mp_DetectThread(nullptr)
     , mp_IFace(new DBusInterface)
     , m_ClientIsUpdating(false)
@@ -37,10 +35,6 @@ MainJob::MainJob(QObject *parent)
 
 MainJob::~MainJob()
 {
-    if (mp_ZmqServer) {
-        delete mp_ZmqServer;
-        mp_ZmqServer = nullptr;
-    }
 }
 
 void MainJob::working()
@@ -49,18 +43,7 @@ void MainJob::working()
     if (!initDBus()) {
         exit(1);
     }
-
-    // 启动线程监听客户端询问
-    if (mp_ZmqServer != nullptr) {
-        delete  mp_ZmqServer;
-        mp_ZmqServer = nullptr;
-    }
-
-    mp_ZmqServer = new RRServer(this);
-    char ch[] = "tcp://127.0.0.1:8700";
-    bool suc = mp_ZmqServer->initTo(ch);
-    qInfo() << "Bind to tcp://127.0.0.1:8700 ************ " << suc;
-    mp_ZmqServer->start();
+    mp_IFace->setMainJob(this);
 
     // 启动线程监听USB是否有新的设备
     mp_DetectThread = new DetectThread(this);

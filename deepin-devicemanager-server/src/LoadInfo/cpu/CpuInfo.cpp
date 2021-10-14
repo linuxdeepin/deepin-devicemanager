@@ -38,7 +38,7 @@ bool CpuInfo::loadCpuInfo()
     return true;
 }
 
-QString CpuInfo::arch()
+const QString& CpuInfo::arch() const
 {
     return m_Arch;
 }
@@ -71,7 +71,7 @@ void CpuInfo::logicalCpus(QString &info)
 
 int CpuInfo::physicalNum()
 {
-    return m_SiblingsList.size();
+    return m_MapPhysicalCpu.size();
 }
 
 int CpuInfo::coreNum()
@@ -124,7 +124,7 @@ bool CpuInfo::parseInfo(const QString &info)
         QStringList words = line.split(QRegExp("[\\s]*:[\\s]*"));
         if (words.size() != 2)
             continue;
-        mapInfo.insert(words[0], words[1]);
+        mapInfo.insert(words[0].toLower(), words[1]);
         if (words[0].contains("processor"))
             physicalID = words[1].toInt();
     }
@@ -139,15 +139,9 @@ bool CpuInfo::parseInfo(const QString &info)
         lcpu.setcpuFamily(mapInfo["cpu family"]);
         lcpu.setBogomips(mapInfo["bogomips"]);
 
-        // diff in arm
-        if(m_Arch == "aarch64"){
-            lcpu.setBogomips(mapInfo["BogoMIPS"]);
-        }
-
-        // diff in loognsoon
-        if (m_Arch == "mips64") {
-            lcpu.setBogomips(mapInfo["BogoMIPS"]);
-            lcpu.setCurFreq(mapInfo["cpu MHz"] + "MHz");
+        // diff in loognsoon and loongarch
+        if (m_Arch == "mips64" || m_Arch == "loongarch64") {
+            lcpu.setCurFreq(mapInfo["cpu mhz"]);
             lcpu.setModel(mapInfo["cpu model"]);
         }
     }

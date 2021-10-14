@@ -32,13 +32,8 @@
  * @brief The Cmd struct
  */
 struct Cmd {
-    Cmd()
-    {
-        cmd = "";
-        file = "";
-        canNotReplace = false;
-        waitingTime = -1;
-    }
+    Cmd():cmd(""),file(""),canNotReplace(false),waitingTime(-1)
+    {}
 
     QString cmd;         //<! the cmd
     QString file;        //<! the file
@@ -53,7 +48,7 @@ class ThreadPool : public QThreadPool
 {
     Q_OBJECT
 public:
-    ThreadPool(QObject *parent = nullptr);
+    explicit ThreadPool(QObject *parent = nullptr);
 
     /**
      * @brief generateDeviceFile : load device info

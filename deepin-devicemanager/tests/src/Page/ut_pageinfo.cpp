@@ -14,15 +14,16 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/PageInfo.h"
-#include "../src/Page/PageMultiInfo.h"
-#include "../ut_Head.h"
+#include "PageInfo.h"
+#include "PageMultiInfo.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 class PageInfo_UT : public UT_HEAD
 {
@@ -46,6 +47,7 @@ TEST_F(PageInfo_UT, PageInfo_UT_getDeviceInfoNum)
     m_pageInfo->updateInfo(map);
     m_pageInfo->setLabel("", "");
     m_pageInfo->clearContent();
+    EXPECT_EQ(0,m_pageInfo->m_AllInfoNum);
     delete p;
 }
 

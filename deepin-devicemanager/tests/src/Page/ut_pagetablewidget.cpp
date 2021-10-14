@@ -14,17 +14,18 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/PageTableWidget.h"
-#include "../src/Widget/DetailTreeView.h"
-#include "../ut_Head.h"
+#include "PageTableWidget.h"
+#include "DetailTreeView.h"
+#include "ut_Head.h"
+#include "stub.h"
+
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class PageTableWidget_UT : public UT_HEAD
+class UT_PageTableWidget : public UT_HEAD
 {
 public:
     void SetUp()
@@ -38,20 +39,25 @@ public:
     PageTableWidget *m_pageTableWidget = nullptr;
 };
 
-TEST_F(PageTableWidget_UT, PageTableWidget_UT_paintEvent)
+int ut_setTableHeight01()
 {
-    QPaintEvent paint(QRect(m_pageTableWidget->rect()));
-    m_pageTableWidget->paintEvent(&paint);
+    return 10;
 }
 
-TEST_F(PageTableWidget_UT, PageTableWidget_UT_setCurDeviceState)
+TEST_F(UT_PageTableWidget, UT_PageTableWidget_setCurDeviceState)
 {
     m_pageTableWidget->setCurDeviceState(false);
+    EXPECT_FALSE(m_pageTableWidget->mp_Table->m_IsEnable);
+    Stub stub;
+    stub.set(ADDR(DetailTreeView,setTableHeight),ut_setTableHeight01);
+    m_pageTableWidget->setCurDeviceState(true);
+    EXPECT_TRUE(m_pageTableWidget->mp_Table->m_IsEnable);
 }
 
-TEST_F(PageTableWidget_UT, PageTableWidget_UT_expandTable)
+TEST_F(UT_PageTableWidget, UT_PageTableWidget_expandTable)
 {
     m_pageTableWidget->mp_Table->mp_CommandBtn = new DCommandLinkButton("");
     m_pageTableWidget->mp_Table->m_IsExpand = true;
     m_pageTableWidget->expandTable();
+    EXPECT_STREQ("More",m_pageTableWidget->mp_Table->mp_CommandBtn->text().toStdString().c_str());
 }

@@ -2,7 +2,6 @@
 #include "EnableManager.h"
 #include "DBusInterface.h"
 #include "DeviceManager.h"
-#include "ZmqOrder.h"
 
 // Qt库文件
 #include <QDebug>
@@ -21,10 +20,6 @@ EnableManager::EnableManager()
 
 EnableDeviceStatus EnableManager::enableDeviceByInput(bool enable, int id)
 {
-    // 获取输入设备ID
-    //    if ((!enable) != isDeviceEnable(id))
-    //        id = -1;
-
     if (enable == isDeviceEnable(id))
         return EDS_Faild;
 
@@ -108,13 +103,8 @@ EnableDeviceStatus EnableManager::enableDeviceByDriver(bool enable, const QStrin
     else
         cmd = QString("rmmod %1").arg(driver);
 
-    // 连接到后台
-    ZmqOrder order;
-    if (!order.connect())
-        return  EDS_Faild;
-
     // 通知后台执行禁用操作
-    if (order.execDriverOrder(cmd))
+    if (DBusInterface::getInstance()->execDriverOrder(cmd))
         return EDS_Success;
     else
         return EDS_Faild;
@@ -183,17 +173,11 @@ EnableDeviceStatus EnableManager::enableNetworkByIfconfig(const QString &logical
     else
         cmd = QString("ifconfig %1 down").arg(logicalName);
 
-    // 连接到后台
-    ZmqOrder order;
-    if (!order.connect())
-        return  EDS_Faild;
-
     // 执行命令
-    if (order.execIfconfigOrder(cmd))
+    if (DBusInterface::getInstance()->execIfconfigOrder(cmd))
         return EDS_Success;
     else
         return EDS_Faild;
-
 }
 
 bool EnableManager::isNetworkEnableByIfconfig(const QString &logicalName)

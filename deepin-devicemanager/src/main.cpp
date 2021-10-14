@@ -33,8 +33,6 @@
 #include "environments.h"
 #include "DebugTimeManager.h"
 #include "application.h"
-#include "zmq.h"
-#include "zhelpers.h"
 
 DWIDGET_USE_NAMESPACE
 
