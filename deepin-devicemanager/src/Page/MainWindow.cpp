@@ -10,6 +10,7 @@
 #include "DeviceFactory.h"
 #include "ThreadExecXrandr.h"
 #include "LoadCpuInfoThread.h"
+#include "ThreadExecLshwNetwork.h"
 #include "CmdTool.h"
 
 // Dtk头文件
@@ -365,11 +366,9 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         lct.start();
         lct.wait();
     } else if (tr("Network Adapter") == itemStr) { //点击网络适配器，更新网络连接的信息
-        CmdTool tool;
-        QStringList networkDriver = DeviceManager::instance()->networkDriver();
-        //判断所有网卡的连接情况
-        for (int i = 0; i < networkDriver.size(); i++)
-            DeviceManager::instance()->correctNetworkLinkStatus(tool.getCurNetworkLinkStatus(networkDriver.at(i)), networkDriver.at(i));
+        ThreadExecLshwNetwork ln;
+        ln.start();
+        ln.wait();
     } else if (tr("Power") == itemStr) { //点击电池，重新加载电池显示信息
         CmdTool tool;
         DeviceManager::instance()->correctPowerInfo(tool.getCurPowerInfo());

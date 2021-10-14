@@ -41,6 +41,7 @@ public:
      * @param mapInfo:由lshw获取的信息map
      */
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
+    void updateInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief setInfoFromHwinfo:设置由hwinfo --network命令获取的设备信息

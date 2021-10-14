@@ -266,6 +266,12 @@ public:
     void addNetworkDevice(DeviceNetwork *const device);
 
     /**
+     * @brief updateNetworkInfo 更新网络信息
+     * @param mapInfo
+     */
+    void updateNetworkInfo(const QMap<QString,QString>& mapInfo);
+
+    /**
      * @brief correctNetworkLinkStatus:校正网络连接状态
      * @param linkStatus:连接状态
      */

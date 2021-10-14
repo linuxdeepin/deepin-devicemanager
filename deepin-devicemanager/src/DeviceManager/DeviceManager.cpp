@@ -521,6 +521,19 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     m_ListDeviceNetwork.append(device);
 }
 
+void DeviceManager::updateNetworkInfo(const QMap<QString,QString>& mapInfo)
+{
+    if (m_ListDeviceNetwork.size() == 0)
+        return;
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin();
+    for (; it != m_ListDeviceNetwork.end(); ++it) {
+        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
+        if (!device)
+            continue;
+        device->updateInfoFromLshw(mapInfo);
+    }
+}
+
 void DeviceManager::correctNetworkLinkStatus(QString linkStatus, QString networkDriver)
 {
     if (m_ListDeviceNetwork.size() == 0)

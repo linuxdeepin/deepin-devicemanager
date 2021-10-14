@@ -64,12 +64,22 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "link", m_Link);
     setAttribute(mapInfo, "ip", m_Ip);
     setAttribute(mapInfo, "size", m_Speed);
+    setAttribute(mapInfo, "speed", m_Speed);
     setAttribute(mapInfo, "capacity", m_Capacity);
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
 
     // 加载其他信息
     getOtherMapInfo(mapInfo);
+}
+
+void DeviceNetwork::updateInfoFromLshw(const QMap<QString, QString> &mapInfo){
+    if(mapInfo["logical name"] == m_LogicalName){
+        setAttribute(mapInfo, "link", m_Link);
+        setAttribute(mapInfo, "size", m_Speed);
+        setAttribute(mapInfo, "speed", m_Speed);
+        setAttribute(mapInfo, "capacity", m_Capacity);
+    }
 }
 
 bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
