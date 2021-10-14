@@ -265,7 +265,7 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
     QMap<QString, QString> mapInfo;
     QStringList lines = deviceInfo.split("\n");
     foreach (const QString &line, lines) {
-        QRegExp reg(".*([0-9a-z]{2}:[0-9a-z]{2}.[0-9]{1}): .* VRAM([=:]{1}) ([0-9]*)[\\s]{0,1}M.*");
+        QRegExp reg(".*([0-9a-z]{2}:[0-9a-z]{2}.[0-9]{1}):.*VRAM([=:]{1}) ([0-9]*)[\\s]{0,1}M.*");
         if (reg.exactMatch(line)) {
             double size = reg.cap(3).toDouble();
             QString sizeS = QString("%1GB").arg(size / 1024);
@@ -713,8 +713,8 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
         if (true == words[0].contains("configuration")) {
             QStringList keyValues = words[1].split(" ");
 
-            for (QStringList::iterator it = keyValues.begin(); it != keyValues.end(); ++it) {
-                QStringList attr = (*it).split("=");
+            for (QStringList::iterator itKV = keyValues.begin(); itKV != keyValues.end(); ++itKV) {
+                QStringList attr = (*itKV).split("=");
                 if (attr.size() != 2)
                     continue;
 
@@ -723,8 +723,8 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
         } else if (true == words[0].contains("resources")) {
             QStringList keyValues = words[1].split(" ");
 
-            for (QStringList::iterator it = keyValues.begin(); it != keyValues.end(); ++it) {
-                QStringList attr = (*it).split(":");
+            for (QStringList::iterator itKV = keyValues.begin(); itKV != keyValues.end(); ++itKV) {
+                QStringList attr = (*itKV).split(":");
                 if (attr.size() != 2)
                     continue;
 
