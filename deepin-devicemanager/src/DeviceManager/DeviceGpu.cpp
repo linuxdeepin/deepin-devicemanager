@@ -74,22 +74,13 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     // 设置属性
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "version", m_Version);
-    setAttribute(mapInfo, "", m_GraphicsMemory);
     setAttribute(mapInfo, "width", m_Width, false);
-    setAttribute(mapInfo, "", m_DisplayPort);
     setAttribute(mapInfo, "clock", m_Clock);
     setAttribute(mapInfo, "irq", m_IRQ);
     setAttribute(mapInfo, "capabilities", m_Capabilities);
-    setAttribute(mapInfo, "", m_DisplayOutput);
-    setAttribute(mapInfo, "", m_VGA);
-    setAttribute(mapInfo, "", m_HDMI);
     setAttribute(mapInfo, "description", m_Description);
     setAttribute(mapInfo, "driver", m_Driver);
-    setAttribute(mapInfo, "", m_CurrentResolution);
-    setAttribute(mapInfo, "", m_MinimumResolution);
-    setAttribute(mapInfo, "", m_MaximumResolution);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "ioport", m_IOPort);
     setAttribute(mapInfo, "memory", m_MemAddress);
@@ -110,15 +101,6 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "IRQ", m_IRQ, false);
     setAttribute(mapInfo, "Driver", m_Driver, false);
     setAttribute(mapInfo, "Width", m_Width);
-    setAttribute(mapInfo, "", m_GraphicsMemory);
-    setAttribute(mapInfo, "", m_DisplayOutput);
-    setAttribute(mapInfo, "", m_VGA);
-    setAttribute(mapInfo, "", m_HDMI);
-    setAttribute(mapInfo, "", m_DisplayPort);
-    setAttribute(mapInfo, "", m_Clock);
-    setAttribute(mapInfo, "", m_CurrentResolution);
-    setAttribute(mapInfo, "", m_MinimumResolution);
-    setAttribute(mapInfo, "", m_MaximumResolution);
 
     // 获取 m_UniqueKey
     QRegExp re(":[0-9a-z]{2}:[0-9a-z]{2}");

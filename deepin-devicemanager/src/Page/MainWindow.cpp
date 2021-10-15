@@ -372,9 +372,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
             DeviceManager::instance()->correctNetworkLinkStatus(tool.getCurNetworkLinkStatus(networkDriver.at(i)), networkDriver.at(i));
     } else if (tr("Power") == itemStr) { //点击电池，重新加载电池显示信息
         CmdTool tool;
-        QMap<QString, QMap<QString, QString>> map;
-        tool.getCurPowerInfo(map);
-        DeviceManager::instance()->correctPowerInfo(map);
+        DeviceManager::instance()->correctPowerInfo(tool.getCurPowerInfo());
     }
 
     QList<DeviceBaseInfo *> lst;

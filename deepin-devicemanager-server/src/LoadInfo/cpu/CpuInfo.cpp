@@ -18,6 +18,10 @@ CpuInfo::~CpuInfo()
     m_CoreCpu.clear();
     // clear logical cpu
     m_MapLogicalCpu.clear();
+
+    // clear sibling List
+    m_SiblingsList.clear();
+
 }
 
 bool CpuInfo::loadCpuInfo()
@@ -120,7 +124,7 @@ bool CpuInfo::parseInfo(const QString &info)
         QStringList words = line.split(QRegExp("[\\s]*:[\\s]*"));
         if (words.size() != 2)
             continue;
-        mapInfo.insert(words[0], words[1]);
+        mapInfo.insert(words[0].toLower(), words[1]);
         if (words[0].contains("processor"))
             physicalID = words[1].toInt();
     }
@@ -135,14 +139,9 @@ bool CpuInfo::parseInfo(const QString &info)
         lcpu.setcpuFamily(mapInfo["cpu family"]);
         lcpu.setBogomips(mapInfo["bogomips"]);
 
-        if(m_Arch == "aarch64"){
-            lcpu.setBogomips(mapInfo["BogoMIPS"]);
-        }
-
-        // diff in loognsoon
-        if (m_Arch == "mips64") {
-            lcpu.setBogomips(mapInfo["BogoMIPS"]);
-            lcpu.setCurFreq(mapInfo["cpu MHz"] + "MHz");
+        // diff in loognsoon and loongarch
+        if (m_Arch == "mips64" || m_Arch == "loongarch64") {
+            lcpu.setCurFreq(mapInfo["cpu mhz"]);
             lcpu.setModel(mapInfo["cpu model"]);
         }
     }
@@ -196,6 +195,23 @@ void CpuInfo::readSysCpuN(int N, const QString &path)
         readCpuFreq(dir.filePath("cpufreq"), lcpu);
 
     m_MapLogicalCpu.insert(N, lcpu);
+    // get core siblings list
+    if (dir.exists("topology"))
+        readCoreSiblingsList(dir.filePath("topology"));
+}
+
+void CpuInfo::readCoreSiblingsList(const QString &path)
+{
+    // 读取/sys/devices/system/cpu/cpu*/topology/core_siblings_list
+    // 同一物理CPU的siblings_list相同，以此来计算物理CPU数目
+    QString siblingPath = path + "/core_siblings_list";
+    QFile sibFile(siblingPath);
+    if (sibFile.open(QIODevice::ReadOnly)) {
+        QString info = sibFile.readAll();
+        if ((!info.isEmpty()) && (!m_SiblingsList.contains(info)))
+            m_SiblingsList.append(info);
+    }
+    sibFile.close();
 }
 
 int CpuInfo::readPhysicalID(const QDir &dir)
