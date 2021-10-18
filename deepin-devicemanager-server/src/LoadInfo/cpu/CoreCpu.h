@@ -22,10 +22,13 @@
 #ifndef CORECPU_H
 #define CORECPU_H
 
+#include <QMap>
 
+class LogicalCpu;
 class CoreCpu
 {
 public:
+    CoreCpu();
     explicit CoreCpu(int id);
 
     /**
@@ -34,8 +37,45 @@ public:
      */
     void setCoreId(int id);
 
+    /**
+     * @brief addLogicalCpu
+     * @param id
+     * @param lc
+     */
+    void addLogicalCpu(int id, const LogicalCpu& lc);
+
+    /**
+     * @brief logicalIsExisted
+     * @param id
+     * @return
+     */
+    bool logicalIsExisted(int id);
+
+    /**
+     * @brief logicalCpu
+     * @param id
+     * @return
+     */
+    LogicalCpu& logicalCpu(int id);
+
+    /**
+     * @brief getInfo
+     * @param info
+     */
+    void getInfo(QString& info);
+
+    /**
+     * @brief appendKeyValue
+     * @param info
+     * @param key
+     * @param value
+     */
+    void appendKeyValue(QString &info, const QString &key, const QString &value);
+    void appendKeyValue(QString &info, const QString &key, int value);
+
 private:
     int m_CoreId;                //<! core id
+    QMap<int, LogicalCpu> m_MapLogicalCpu; //<! logical info
 };
 
 #endif // CORECPU_H

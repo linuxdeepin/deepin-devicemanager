@@ -68,7 +68,7 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setInfoFromHwinfo_001)
     ut_bluetooth_sethwinfomap(mapInfo);
     mapInfo.remove("vendor");
 
-    ASSERT_FALSE(m_deviceBluetooth->setInfoFromHwinfo(mapInfo));
+    ASSERT_TRUE(m_deviceBluetooth->setInfoFromHwinfo(mapInfo));
 }
 
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setInfoFromHwinfo_002)
@@ -77,7 +77,7 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setInfoFromHwinfo_002)
     ut_bluetooth_sethwinfomap(mapInfo);
     m_deviceBluetooth->m_Vendor = "Centor";
 
-    ASSERT_FALSE(m_deviceBluetooth->setInfoFromHwinfo(mapInfo));
+    ASSERT_TRUE(m_deviceBluetooth->setInfoFromHwinfo(mapInfo));
 }
 
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setInfoFromHwinfo_003)

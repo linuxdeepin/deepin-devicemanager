@@ -46,6 +46,9 @@ public:
         mapInfo1.insert("Capacity", "931 GB");
         mapInfo1.insert("SysFS BusID", "0:0:0:0");
         mapInfo1.insert("Model", "camera");
+        mapInfo1.insert("logical name","enth0");
+        mapInfo1.insert("serial","0000000");
+        mapInfo1.insert("Hardware Class","bluetooth");
         lstMap.append(mapInfo1);
         QMap<QString, QString> mapInfo2;
         mapInfo2.insert("Manufacturer", "Samsung");
@@ -56,6 +59,9 @@ public:
         mapInfo2.insert("Capacity", "931 GB");
         mapInfo2.insert("SysFS BusID", "0:0:0:0");
         mapInfo2.insert("Model", "camera");
+        mapInfo2.insert("logical name","enth1");
+        mapInfo2.insert("serial","0000000");
+        mapInfo2.insert("Hardware Class","bluetooth");
         lstMap.append(mapInfo2);
     }
     void TearDown()

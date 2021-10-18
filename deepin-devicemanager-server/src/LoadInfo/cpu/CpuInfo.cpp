@@ -14,14 +14,6 @@ CpuInfo::~CpuInfo()
 {
     // clear physicalcpu
     m_MapPhysicalCpu.clear();
-    // clear core cpu
-    m_CoreCpu.clear();
-    // clear logical cpu
-    m_MapLogicalCpu.clear();
-
-    // clear sibling List
-    m_SiblingsList.clear();
-
 }
 
 bool CpuInfo::loadCpuInfo()
@@ -45,27 +37,9 @@ const QString& CpuInfo::arch() const
 
 void CpuInfo::logicalCpus(QString &info)
 {
-    foreach (int id, m_MapLogicalCpu.keys()) {
-        LogicalCpu &cpu = m_MapLogicalCpu[id];
-        appendKeyValue(info, "processor", cpu.logicalID());
-        appendKeyValue(info, "core id", cpu.coreID());
-        appendKeyValue(info, "physical id", cpu.physicalID());
-        appendKeyValue(info, "L1d cache", cpu.l1dCache());
-        appendKeyValue(info, "L1i cache", cpu.l1iCache());
-        appendKeyValue(info, "L2 cache", cpu.l2Cache());
-        appendKeyValue(info, "L3 cache", cpu.l3Cache());
-        appendKeyValue(info, "CPU MHz", cpu.curFreq());
-        appendKeyValue(info, "CPU max MHz", cpu.maxFreq());
-        appendKeyValue(info, "CPU min MHz", cpu.minFreq());
-        appendKeyValue(info, "flags", cpu.flags());
-        appendKeyValue(info, "model", cpu.model());
-        appendKeyValue(info, "model name", cpu.modelName());
-        appendKeyValue(info, "vendor_id", cpu.vendor());
-        appendKeyValue(info, "stepping", cpu.stepping());
-        appendKeyValue(info, "cpu family", cpu.cpuFamliy());
-        appendKeyValue(info, "bogomips", cpu.bogomips());
-        appendKeyValue(info, "Architecture", m_Arch);
-        info += QString("\n");
+    foreach (int id, m_MapPhysicalCpu.keys()) {
+        PhysicalCpu& physical = m_MapPhysicalCpu[id];
+        physical.getInfo(info);
     }
 }
 
@@ -76,12 +50,12 @@ int CpuInfo::physicalNum()
 
 int CpuInfo::coreNum()
 {
-    return m_CoreCpu.size();
+    return 0;
 }
 
 int CpuInfo::logicalNum()
 {
-    return m_MapLogicalCpu.size();
+    return 0;
 }
 
 void CpuInfo::readCpuArchitecture()
@@ -114,9 +88,9 @@ bool CpuInfo::parseInfo(const QString &info)
 {
     if (info.isEmpty())
         return false;
-
+    // 解析段落信息，获取逻辑id号
     QMap<QString, QString> mapInfo;
-    int physicalID = -1;
+    int logical_id = -1;
     QStringList lines = info.split("\n");
     foreach (const QString &line, lines) {
         if (line.isEmpty())
@@ -126,26 +100,61 @@ bool CpuInfo::parseInfo(const QString &info)
             continue;
         mapInfo.insert(words[0].toLower(), words[1]);
         if (words[0].contains("processor"))
-            physicalID = words[1].toInt();
+            logical_id = words[1].toInt();
     }
 
-    if (m_MapLogicalCpu.find(physicalID) != m_MapLogicalCpu.end()) {
-        LogicalCpu &lcpu = m_MapLogicalCpu[physicalID];
-        lcpu.setFlags(mapInfo["flags"]);
-        lcpu.setModel(mapInfo["model"]);
-        lcpu.setModelName(mapInfo["model name"]);
-        lcpu.setVendor(mapInfo["vendor_id"]);
-        lcpu.setStepping(mapInfo["stepping"]);
-        lcpu.setcpuFamily(mapInfo["cpu family"]);
-        lcpu.setBogomips(mapInfo["bogomips"]);
+    if(logical_id < 0)
+        return false;
 
-        // diff in loognsoon and loongarch
-        if (m_Arch == "mips64" || m_Arch == "loongarch64") {
-            lcpu.setCurFreq(mapInfo["cpu mhz"]);
-            lcpu.setModel(mapInfo["cpu model"]);
+    // 找到逻辑cpu
+    if(mapInfo.find("physical id") != mapInfo.end()
+            && mapInfo.find("core id") != mapInfo.end()){
+        int physical_id = mapInfo["physical id"].toInt();
+        if(m_MapPhysicalCpu.find(physical_id) == m_MapPhysicalCpu.end())
+            return false;
+        PhysicalCpu& physical = m_MapPhysicalCpu[physical_id];
+        int core_id = mapInfo["core id"].toInt();
+        if(!physical.coreIsExisted(core_id))
+            return false;
+        CoreCpu& core = physical.coreCpu(core_id);
+        if(!core.logicalIsExisted(logical_id))
+            return false;
+        LogicalCpu& logical = core.logicalCpu(logical_id);
+        setProcCpuinfo(logical,mapInfo);
+    }else{
+        LogicalCpu& logical = logicalCpu(logical_id);
+        setProcCpuinfo(logical,mapInfo);
+    }
+
+    return true;
+}
+
+LogicalCpu& CpuInfo::logicalCpu(int logical_id)
+{
+    foreach(int physical_id,m_MapPhysicalCpu.keys()){
+        PhysicalCpu physical = m_MapPhysicalCpu[physical_id];
+        if(physical.logicalIsExisted(logical_id)){
+            return physical.logicalCpu(logical_id);
         }
     }
-    return true;
+    return m_MapPhysicalCpu[-1].logicalCpu(-1);
+}
+
+void CpuInfo::setProcCpuinfo(LogicalCpu& logical,const QMap<QString, QString>& mapInfo)
+{
+    logical.setFlags(mapInfo["flags"]);
+    logical.setModel(mapInfo["model"]);
+    logical.setModelName(mapInfo["model name"]);
+    logical.setVendor(mapInfo["vendor_id"]);
+    logical.setStepping(mapInfo["stepping"]);
+    logical.setcpuFamily(mapInfo["cpu family"]);
+    logical.setBogomips(mapInfo["bogomips"]);
+
+    // diff in loognsoon and loongarch
+    if (m_Arch == "mips64" || m_Arch == "loongarch64") {
+        logical.setCurFreq(mapInfo["cpu mhz"]);
+        logical.setModel(mapInfo["cpu model"]);
+    }
 }
 
 void CpuInfo::readSysCpu()
@@ -164,76 +173,68 @@ void CpuInfo::readSysCpu()
 
 void CpuInfo::readSysCpuN(int N, const QString &path)
 {
-    LogicalCpu lcpu;
-    QDir dir(path);
-
-    // set logical id
-    lcpu.setLogicalID(N);
-
-    // get core id
-    int core_id = readCoreID(dir);
-    if (core_id >= 0) {
-        lcpu.setCoreID(core_id);
-        CoreCpu core = CoreCpu(core_id);
-        m_CoreCpu.insert(core_id, core);
+    // 第一步先读取物理cpu
+    // /sys/devices/system/cpu/cpu0/topology/physical_package_id
+    QString physicalPath = path+"/topology/physical_package_id";
+    int physical_id = readPhysicalID(physicalPath);
+    if(physical_id < 0){
+        return;
     }
-
-    // get physical id
-    int physical_id = readPhysicalID(dir);
-    if (physical_id >= 0) {
-        lcpu.setPhysicalID(physical_id);
+    if(m_MapPhysicalCpu.find(physical_id)==m_MapPhysicalCpu.end()){
         PhysicalCpu physical = PhysicalCpu(physical_id);
         m_MapPhysicalCpu.insert(physical_id, physical);
     }
 
+    // 第二步读取core id
+    // /sys/devices/system/cpu/cpu0/topology/core_id
+    QString corePath = path+"/topology/core_id";
+    int core_id = readCoreID(corePath);
+    if(core_id < 0){
+        return;
+    }
+    PhysicalCpu& cpu = m_MapPhysicalCpu[physical_id];
+    if(!cpu.coreIsExisted(core_id)){
+        CoreCpu core = CoreCpu(core_id);
+        cpu.addCoreCpu(core_id, core);
+    }
+
+    // 第三步读取逻辑cpu
+    LogicalCpu lcpu;
+    lcpu.setLogicalID(N);
+    lcpu.setCoreID(core_id);
+    lcpu.setPhysicalID(physical_id);
+    lcpu.setArch(m_Arch);
+    QDir dir(path);
     // get cpu cache
     if (dir.exists("cache"))
         readCpuCache(dir.filePath("cache"), lcpu);
-
     // get cpu freq
     if (dir.exists("cpufreq"))
         readCpuFreq(dir.filePath("cpufreq"), lcpu);
-
-    m_MapLogicalCpu.insert(N, lcpu);
-    // get core siblings list
-    if (dir.exists("topology"))
-        readCoreSiblingsList(dir.filePath("topology"));
+    CoreCpu& corecpu = cpu.coreCpu(core_id);
+    corecpu.addLogicalCpu(N,lcpu);
 }
 
-void CpuInfo::readCoreSiblingsList(const QString &path)
+int CpuInfo::readPhysicalID(const QString &path)
 {
-    // 读取/sys/devices/system/cpu/cpu*/topology/core_siblings_list
-    // 同一物理CPU的siblings_list相同，以此来计算物理CPU数目
-    QString siblingPath = path + "/core_siblings_list";
-    QFile sibFile(siblingPath);
-    if (sibFile.open(QIODevice::ReadOnly)) {
-        QString info = sibFile.readAll();
-        if ((!info.isEmpty()) && (!m_SiblingsList.contains(info)))
-            m_SiblingsList.append(info);
-    }
-    sibFile.close();
-}
-
-int CpuInfo::readPhysicalID(const QDir &dir)
-{
-    foreach (const QString &name, dir.entryList()) {
-        QRegExp reg("node([0-9]{1,4})");
-        if (!reg.exactMatch(name))
-            continue;
-        return reg.cap(1).toInt();
-    }
-    return -1;
-}
-
-int CpuInfo::readCoreID(const QDir &dir)
-{
-    if (!dir.exists("topology"))
-        return -1;
-    QString corePath = dir.filePath("topology") + "/core_id";
-    QFile file(corePath);
+    QFile file(path);
     if (!file.open(QIODevice::ReadOnly))
         return -1;
     QString info = file.readAll();
+    file.close();
+    return info.toInt();
+}
+
+int CpuInfo::readCoreID(const QString &path)
+{
+    qInfo() << path;
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)){
+        qInfo() <<"info ***** open failed ** " << file.exists();
+        return -1;
+    }
+    QString info = file.readAll();
+
     file.close();
     return info.toInt();
 }
@@ -323,17 +324,4 @@ void CpuInfo::readCpuFreq(const QString &path, LogicalCpu &lcpu)
         lcpu.setMaxFreq(QString::number(value) + "MHz");
     }
     maxFile.close();
-}
-
-void CpuInfo::appendKeyValue(QString &info, const QString &key, const QString &value)
-{
-    if (value.isEmpty())
-        return;
-    QString v = value;
-    info += QString("%1 : %2\n").arg(key).arg(v.trimmed());
-}
-
-void CpuInfo::appendKeyValue(QString &info, const QString &key, int value)
-{
-    info += QString("%1 : %2\n").arg(key).arg(value);
 }
