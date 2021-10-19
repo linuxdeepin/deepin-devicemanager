@@ -73,6 +73,12 @@ public:
     void appendKeyValue(QString &info, const QString &key, const QString &value);
     void appendKeyValue(QString &info, const QString &key, int value);
 
+    /**
+     * @brief coreId
+     * @return
+     */
+    int coreId();
+
 private:
     int m_CoreId;                //<! core id
     QMap<int, LogicalCpu> m_MapLogicalCpu; //<! logical info

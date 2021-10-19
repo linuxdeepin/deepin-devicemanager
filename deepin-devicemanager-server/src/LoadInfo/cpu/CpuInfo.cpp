@@ -45,7 +45,12 @@ void CpuInfo::logicalCpus(QString &info)
 
 int CpuInfo::physicalNum()
 {
-    return m_MapPhysicalCpu.size();
+    if(m_MapPhysicalCpu.find(-1) == m_MapPhysicalCpu.end()){
+        return m_MapPhysicalCpu.size();
+    }
+    else{
+        return m_MapPhysicalCpu.size() - 1;
+    }
 }
 
 int CpuInfo::coreNum()
@@ -98,7 +103,13 @@ bool CpuInfo::parseInfo(const QString &info)
         QStringList words = line.split(QRegExp("[\\s]*:[\\s]*"));
         if (words.size() != 2)
             continue;
-        mapInfo.insert(words[0].toLower(), words[1]);
+        if(words[0] == "core"){
+            mapInfo.insert("core id", words[1]);
+        }else if(words[0] == "package"){
+            mapInfo.insert("physical id", words[1]);
+        }else{
+            mapInfo.insert(words[0].toLower(), words[1]);
+        }
         if (words[0].contains("processor"))
             logical_id = words[1].toInt();
     }
@@ -120,10 +131,12 @@ bool CpuInfo::parseInfo(const QString &info)
         if(!core.logicalIsExisted(logical_id))
             return false;
         LogicalCpu& logical = core.logicalCpu(logical_id);
-        setProcCpuinfo(logical,mapInfo);
+        if(logical.logicalID() >= 0)
+            setProcCpuinfo(logical,mapInfo);
     }else{
         LogicalCpu& logical = logicalCpu(logical_id);
-        setProcCpuinfo(logical,mapInfo);
+        if(logical.logicalID() >= 0)
+            setProcCpuinfo(logical,mapInfo);
     }
 
     return true;
@@ -227,10 +240,8 @@ int CpuInfo::readPhysicalID(const QString &path)
 
 int CpuInfo::readCoreID(const QString &path)
 {
-    qInfo() << path;
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly)){
-        qInfo() <<"info ***** open failed ** " << file.exists();
         return -1;
     }
     QString info = file.readAll();

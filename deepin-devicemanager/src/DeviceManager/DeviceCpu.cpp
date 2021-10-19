@@ -1,6 +1,8 @@
 // 项目自身文件
 #include "DeviceCpu.h"
 
+#include <QDebug>
+
 #include <math.h>
 
 DeviceCpu::DeviceCpu()

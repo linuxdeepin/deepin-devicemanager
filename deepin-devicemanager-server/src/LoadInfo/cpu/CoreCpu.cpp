@@ -1,6 +1,8 @@
 #include "CoreCpu.h"
 #include "LogicalCpu.h"
 
+#include <QDebug>
+
 CoreCpu::CoreCpu()
     : m_CoreId(-1)
 {
@@ -38,6 +40,8 @@ LogicalCpu& CoreCpu::logicalCpu(int id)
 void CoreCpu::getInfo(QString& info)
 {
     foreach(int id,m_MapLogicalCpu.keys()){
+        if(id < 0)
+            continue;
         LogicalCpu& logical = m_MapLogicalCpu[id];
         appendKeyValue(info, "processor", logical.logicalID());
         appendKeyValue(info, "core id", logical.coreID());
@@ -72,4 +76,9 @@ void CoreCpu::appendKeyValue(QString &info, const QString &key, const QString &v
 void CoreCpu::appendKeyValue(QString &info, const QString &key, int value)
 {
     info += QString("%1 : %2\n").arg(key).arg(value);
+}
+
+int CoreCpu::coreId()
+{
+    return m_CoreId;
 }

@@ -52,9 +52,8 @@ LogicalCpu& PhysicalCpu::logicalCpu(int id)
 
 void PhysicalCpu::getInfo(QString& info)
 {
-
-    qInfo() << "m_MapCoreCpu.size() *********** " << m_MapCoreCpu.size();
     foreach(int i, m_MapCoreCpu.keys()){
-        m_MapCoreCpu[i].getInfo(info);
+        if(m_MapCoreCpu[i].coreId() >=0 )
+            m_MapCoreCpu[i].getInfo(info);
     }
 }

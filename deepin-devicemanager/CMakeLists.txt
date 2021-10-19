@@ -138,4 +138,4 @@ install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/app
 install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
 
 # Test--------deepin-devicemanager
-add_subdirectory(./tests)
+#add_subdirectory(./tests)
