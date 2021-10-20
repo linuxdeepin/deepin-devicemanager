@@ -141,6 +141,14 @@ bool EnableManager::isDeviceEnableByDriver(const QString &driver)
         if (info["drivers"].contains(driver, Qt::CaseInsensitive))
             return true;
     }
+
+    if (driver.contains("usbhid", Qt::CaseInsensitive)) {
+        foreach (auto info, cmdInfo) {
+            if (info["drivers"].contains("CONFIG_USB_HID", Qt::CaseInsensitive))
+                return true;
+        }
+    }
+
     return false;
 }
 
