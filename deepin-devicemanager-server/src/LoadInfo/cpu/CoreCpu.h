@@ -79,6 +79,12 @@ public:
      */
     int coreId();
 
+    /**
+     * @brief logicalNum
+     * @return
+     */
+    int logicalNum();
+
 private:
     int m_CoreId;                //<! core id
     QMap<int, LogicalCpu> m_MapLogicalCpu; //<! logical info

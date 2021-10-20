@@ -55,12 +55,26 @@ int CpuInfo::physicalNum()
 
 int CpuInfo::coreNum()
 {
-    return 0;
+    int num = 0;
+    foreach (int id, m_MapPhysicalCpu.keys()) {
+        if(id < 0)
+            continue;
+        PhysicalCpu& physical = m_MapPhysicalCpu[id];
+        num += physical.coreNum();
+    }
+    return num;
 }
 
 int CpuInfo::logicalNum()
 {
-    return 0;
+    int num = 0;
+    foreach (int id, m_MapPhysicalCpu.keys()) {
+        if(id < 0)
+            continue;
+        PhysicalCpu& physical = m_MapPhysicalCpu[id];
+        num += physical.logicalNum();
+    }
+    return num;
 }
 
 void CpuInfo::readCpuArchitecture()

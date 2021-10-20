@@ -82,3 +82,13 @@ int CoreCpu::coreId()
 {
     return m_CoreId;
 }
+
+int CoreCpu::logicalNum()
+{
+    if(m_MapLogicalCpu.find(-1) == m_MapLogicalCpu.end()){
+        return m_MapLogicalCpu.size();
+    }
+    else{
+        return m_MapLogicalCpu.size() - 1;
+    }
+}

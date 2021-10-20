@@ -57,3 +57,25 @@ void PhysicalCpu::getInfo(QString& info)
             m_MapCoreCpu[i].getInfo(info);
     }
 }
+
+int PhysicalCpu::coreNum()
+{
+    if(m_MapCoreCpu.find(-1) == m_MapCoreCpu.end()){
+        return m_MapCoreCpu.size();
+    }
+    else{
+        return m_MapCoreCpu.size() - 1;
+    }
+}
+
+int PhysicalCpu::logicalNum()
+{
+    int num = 0;
+    foreach (int id, m_MapCoreCpu.keys()) {
+        if(id < 0)
+            continue;
+        CoreCpu& core = m_MapCoreCpu[id];
+        num += core.logicalNum();
+    }
+    return num;
+}

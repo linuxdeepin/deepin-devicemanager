@@ -72,6 +72,18 @@ public:
      */
     void getInfo(QString& info);
 
+    /**
+     * @brief coreNum
+     * @return
+     */
+    int coreNum();
+
+    /**
+     * @brief logicalNum
+     * @return
+     */
+    int logicalNum();
+
 private:
     int m_PhysicalCpu;                   //<! physical id
     QMap<int, CoreCpu> m_MapCoreCpu;      //<! core cpu
