@@ -40,7 +40,7 @@
 1. 在設備管理器介面，單擊 **概況。**
 2. 介面顯示 **處理器** 、**主板**、**記憶體** 等硬體列表，以及對應的概要訊息。
 
-![0|overview](fig/edu_overview.png)
+![0|overview](fig/h_overview.png)
 
 ### 處理器
 
