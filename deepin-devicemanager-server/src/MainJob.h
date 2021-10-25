@@ -62,18 +62,6 @@ private:
     void updateAllDevice();
 
     /**
-     * @brief driverInstruction
-     * @param instruction
-     */
-    INSTRUCTION_RES driverInstruction(const QString &instruction);
-
-    /**
-     * @brief ifconfigInstruction
-     * @param instruction
-     */
-    INSTRUCTION_RES ifconfigInstruction(const QString &instruction);
-
-    /**
      * @brief initDBus : 初始化dbus
      * @return : 返回bool
      */

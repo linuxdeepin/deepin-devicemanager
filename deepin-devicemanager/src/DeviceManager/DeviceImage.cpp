@@ -3,7 +3,6 @@
 
 // 其它头文件
 #include "DeviceManager.h"
-#include "EnableManager.h"
 
 DeviceImage::DeviceImage()
     : DeviceBaseInfo()
@@ -85,17 +84,12 @@ const QString DeviceImage::getOverviewInfo()
 EnableDeviceStatus DeviceImage::setEnable(bool e)
 {
     // 设置设备状态
-    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    if (e != enable())
-        res = EDS_Faild;
-
-    return res;
+    return EDS_Faild;
 }
 
 bool DeviceImage::enable()
 {
     // 获取设备状态
-    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
     return m_Enable;
 }
 
@@ -145,7 +139,4 @@ void DeviceImage::setInfoFromInput()
     // 设置设备名称
     const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
     setAttribute(mapInfo, "Name", m_Name, true);
-
-    // 设置是否可禁用
-    m_Enable = EnableManager::instance()->isDeviceEnable(m_Name);
 }

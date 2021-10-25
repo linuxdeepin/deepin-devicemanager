@@ -2,7 +2,6 @@
 #include "DeviceAudio.h"
 
 // 其它头文件
-#include "EnableManager.h"
 #include <QDebug>
 DeviceAudio::DeviceAudio()
     : DeviceBaseInfo()
@@ -155,25 +154,13 @@ const QString &DeviceAudio::driver() const
 EnableDeviceStatus DeviceAudio::setEnable(bool e)
 {
     // 设置设备状态
-    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    if (e != enable())
-        res = EDS_Faild;
-
-    return res;
+    // xxx
+    return EDS_Faild;
 }
 
 bool DeviceAudio::enable()
 {
     // 获取设备状态
-    bool eDriver = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
-    bool eDriverM = EnableManager::instance()->isDeviceEnableByDriver(m_DriverModules);
-    m_Enable = eDriver || eDriverM;
-
-
-    // 如果是从cat /input/devices里面获取的则返回true
-    if (m_IsCatDevice)
-        return true;
-
     return m_Enable;
 }
 
@@ -233,7 +220,7 @@ void DeviceAudio::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
     addOtherDeviceInfo(tr("Clock"), m_Clock);
     addOtherDeviceInfo(tr("Width"), m_Width);
-    addOtherDeviceInfo(tr("Memory"), m_Memory);
+    addOtherDeviceInfo(tr("Memory Address"), m_Memory);   // 1050需求 内存改为内存地址
     addOtherDeviceInfo(tr("IRQ"), m_Irq);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>

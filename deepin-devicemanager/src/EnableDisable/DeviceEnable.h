@@ -4,7 +4,6 @@
 * Author:     Jun.Liu <liujuna@uniontech.com>
 *
 * Maintainer: XiaoMei.Ji <jixiaomei@uniontech.com>
-* Maintainer: Jun.Liu <liujuna@uniontech.com>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -20,27 +19,31 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DBUSINTERFACE_H
-#define DBUSINTERFACE_H
+#ifndef DEVICEENABLE_H
+#define DEVICEENABLE_H
 
+#include <QString>
 #include <QObject>
-#include <QDBusContext>
 
-class MainJob;
-class DBusInterface : public QObject, protected QDBusContext
+class DeviceEnable : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "com.deepin.devicemanager")
+    Q_DISABLE_COPY(DeviceEnable)
 public:
-    explicit DBusInterface(QObject *parent = nullptr);
+    explicit DeviceEnable(QObject *parent = nullptr);
+    virtual ~DeviceEnable();
 
-public slots:
     /**
-     * @brief getInfo : Obtain hardware information through the DBus
-     * @param key
-     * @return : Hardware info
+     * @brief enable 启用设备
+     * @return
      */
-    Q_SCRIPTABLE QString getInfo(const QString &key);
+    virtual bool enable(const QString& key) = 0;
+
+    /**
+     * @brief disable 禁用设备
+     * @return
+     */
+    virtual bool disable(const QString& key) = 0;
 };
 
-#endif // DBUSINTERFACE_H
+#endif // DEVICEENABLE_H

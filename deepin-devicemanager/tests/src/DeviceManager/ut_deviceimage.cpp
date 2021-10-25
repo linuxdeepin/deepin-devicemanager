@@ -15,7 +15,6 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "DeviceImage.h"
-#include "EnableManager.h"
 
 #include "stub.h"
 #include "ut_Head.h"
@@ -162,24 +161,16 @@ bool ut_image_isenablebydriver_false()
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_setEnable_001)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, enableDeviceByDriver), ut_image_enableDeviceByDriver);
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_image_isenablebydriver_true);
     EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_deviceImage->setEnable(true));
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_setEnable_002)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, enableDeviceByDriver), ut_image_enableDeviceByDriver);
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_image_isenablebydriver_true);
     EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_deviceImage->setEnable(false));
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_enable)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_image_isenablebydriver_true);
     EXPECT_TRUE(m_deviceImage->enable());
 }
 
@@ -207,9 +198,6 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_loadTableData_001)
     ut_image_sethwinfomap(mapinfo);
     m_deviceImage->setInfoFromHwinfo(mapinfo);
 
-    Stub stub;
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_image_isenablebydriver_true);
-
     m_deviceImage->loadTableData();
     EXPECT_EQ(3, m_deviceImage->m_TableData.size());
 }
@@ -219,9 +207,6 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_loadTableData_002)
     QMap<QString, QString> mapinfo;
     ut_image_sethwinfomap(mapinfo);
     m_deviceImage->setInfoFromHwinfo(mapinfo);
-
-    Stub stub;
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_image_isenablebydriver_false);
 
     m_deviceImage->loadTableData();
     EXPECT_EQ(3, m_deviceImage->m_TableData.size());

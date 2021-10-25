@@ -43,7 +43,6 @@ void MainJob::working()
     if (!initDBus()) {
         exit(1);
     }
-    mp_IFace->setMainJob(this);
 
     // 启动线程监听USB是否有新的设备
     mp_DetectThread = new DetectThread(this);
@@ -65,12 +64,6 @@ INSTRUCTION_RES MainJob::executeClientInstruction(const QString &instructions)
             updateAllDevice();
         }
         res = IR_UPDATE;
-    } else if (instructions.startsWith("DRIVER")) {
-        // 执行启用禁用的驱动指令
-        res = driverInstruction(instructions);
-    } else if (instructions.startsWith("IFCONFIG")) {
-        // 执行ifconfig指令
-        res = ifconfigInstruction(instructions);
     } else {
         res = IR_NULL;
     }
@@ -121,52 +114,6 @@ void MainJob::updateAllDevice()
     sleep(1);
     PERF_PRINT_END("POINT-01");
     m_FirstUpdate = false;
-}
-
-INSTRUCTION_RES MainJob::driverInstruction(const QString &instruction)
-{
-    QStringList lst = instruction.split("#");
-    if (lst.size() != 2) {
-        return IR_NULL;
-    }
-    const QString &cmd = lst[1];
-    QProcess process;
-    process.start(cmd);
-    process.waitForFinished(-1);
-    int exitcode = process.exitCode();
-    if (exitcode == 127 || exitcode == 126) {
-        return IR_NULL;
-    } else {
-        QString output = process.readAllStandardOutput();
-        if (output == "") {
-            return IR_SUCCESS;
-        } else {
-            return IR_FAILED;
-        }
-    }
-}
-
-INSTRUCTION_RES MainJob::ifconfigInstruction(const QString &instruction)
-{
-    QStringList lst = instruction.split("#");
-    if (lst.size() != 2) {
-        return IR_NULL;
-    }
-    const QString &cmd = lst[1];
-    QProcess process;
-    process.start(cmd);
-    process.waitForFinished(-1);
-    int exitcode = process.exitCode();
-    if (exitcode == 127 || exitcode == 126) {
-        return IR_NULL;
-    } else {
-        QString output = process.readAllStandardOutput();
-        if (output == "") {
-            return IR_SUCCESS;
-        } else {
-            return IR_FAILED;
-        }
-    }
 }
 
 bool MainJob::initDBus()

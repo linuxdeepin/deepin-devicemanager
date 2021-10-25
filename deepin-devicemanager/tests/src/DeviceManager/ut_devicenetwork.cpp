@@ -16,7 +16,6 @@
 */
 #include "DeviceNetwork.h"
 #include "DeviceBios.h"
-#include "EnableManager.h"
 
 #include "ut_Head.h"
 #include "stub.h"
@@ -185,15 +184,11 @@ bool ut_network_enable_false()
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setEnable)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, enableNetworkByIfconfig), ut_network_enableNetwork);
     EXPECT_TRUE(m_deviceNetwork->setEnable(true));
 }
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_enable)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, isNetworkEnableByIfconfig), ut_network_enable_true);
     EXPECT_TRUE(m_deviceNetwork->enable());
 }
 
@@ -246,18 +241,12 @@ TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_loadOtherDeviceInfo)
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_loadTableData_001)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, isNetworkEnableByIfconfig), ut_network_enable_true);
-
     m_deviceNetwork->loadTableData();
     EXPECT_EQ(3, m_deviceNetwork->m_TableData.size());
 }
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_loadTableData_002)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, isNetworkEnableByIfconfig), ut_network_enable_false);
-
     m_deviceNetwork->loadTableData();
     EXPECT_EQ(3, m_deviceNetwork->m_TableData.size());
 }

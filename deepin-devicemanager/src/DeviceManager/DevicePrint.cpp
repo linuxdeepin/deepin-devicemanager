@@ -4,9 +4,6 @@
 // Qt库文件
 #include <QDebug>
 
-// 其它头文件
-#include "EnableManager.h"
-
 DevicePrint::DevicePrint()
     : DeviceBaseInfo()
     , m_Name("")
@@ -74,17 +71,7 @@ const QString DevicePrint::getOverviewInfo()
 
 EnableDeviceStatus DevicePrint::setEnable(bool e)
 {
-    // 设置启用禁用状态
-    EnableDeviceStatus res = EnableManager::instance()->enablePrinter(m_Name, e);
-
-    // 禁用成功，状态设为5
-    if (res == EDS_Success && false == e)
-        m_Status = "5";
-    else if (res == EDS_Success && true == e)
-        // 启用成功状态设为3
-        m_Status = "3";
-
-    return res;
+    return EDS_Success;
 }
 
 bool DevicePrint::enable()
