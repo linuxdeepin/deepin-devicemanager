@@ -8,6 +8,7 @@
 class ThreadPool;
 class DetectThread;
 class DBusInterface;
+class DriverDBusInterface;
 
 enum INSTRUCTION_RES {
     IR_NULL = 0,
@@ -72,6 +73,7 @@ private:
     DetectThread          *mp_DetectThread;       //<! 检测usb的线程
     QTimer                *mp_Timer;              //<! 定时器
     DBusInterface         *mp_IFace;              //<! Dbus interface
+    DriverDBusInterface   *mp_DriverOperateIFace; //<! 驱动操作Dbus服务接口
     bool                  m_ClientIsUpdating;     //<! 前台正在更新中
     bool                  m_ServerIsUpdating;     //<! 后台正在更新中
     bool                  m_FirstUpdate;          //<! 是否是第一次更新

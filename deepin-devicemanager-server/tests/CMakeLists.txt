@@ -61,6 +61,8 @@ find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(DFrameworkdbus REQUIRED)
 
+#PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
+
 set(PROJECT_NAME_TEST
     ${PROJECT_NAME}-test)
 
@@ -71,19 +73,16 @@ foreach(subdir ${all_src})
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src/${subdir})
 endforeach()
 
+#src
 file(GLOB_RECURSE APP_SRCS
-    ${CMAKE_CURRENT_LIST_DIR}/../src/DebugTimeManager.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/MainJob.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/LoadInfo/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/EnableAndDisable/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/HotPlug/*.cpp
+     ${CMAKE_CURRENT_LIST_DIR}/../src/*.cpp
     )
+# remove src main.cpp or will multi define
+list(REMOVE_ITEM APP_SRCS ${CMAKE_CURRENT_LIST_DIR}/../src/main.cpp)
+
+#test src
 file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE TEST_SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
-
-find_package(Qt5 COMPONENTS
-    Core
-    DBus REQUIRED)
 
 add_executable(${PROJECT_NAME_TEST} ${APP_SRCS} ${TEST_SRC_CPP} ${TEST_SRC_H})
 
@@ -102,6 +101,7 @@ target_link_libraries(${PROJECT_NAME_TEST}
     ${GTEST_LIBRARIES}
     ${GTEST_MAIN_LIBRARIES}
     pthread
+    kmod
     )
 
 add_custom_target(test-server

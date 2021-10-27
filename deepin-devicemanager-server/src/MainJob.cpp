@@ -3,6 +3,7 @@
 #include "DetectThread.h"
 #include "DebugTimeManager.h"
 #include "DBusInterface.h"
+#include "DriverDBusInterface.h"
 #include "DeviceInfoManager.h"
 
 #include <unistd.h>
@@ -17,12 +18,14 @@
 static QMutex mutex;
 const QString SERVICE_NAME = "com.deepin.devicemanager";
 const QString SERVICE_PATH = "/com/deepin/devicemanager";
+const QString DRIVER_SERVICE_PATH = "/com/deepin/drivermanager";
 
 MainJob::MainJob(QObject *parent)
     : QObject(parent)
     , mp_Pool(new ThreadPool)
     , mp_DetectThread(nullptr)
     , mp_IFace(new DBusInterface)
+    , mp_DriverOperateIFace(new DriverDBusInterface(this))
     , m_ClientIsUpdating(false)
     , m_ServerIsUpdating(false)
     , m_FirstUpdate(true)
@@ -118,18 +121,25 @@ void MainJob::updateAllDevice()
 
 bool MainJob::initDBus()
 {
+    QDBusConnection sessionBus = QDBusConnection::systemBus();
     //1. 申请一个总线连接
     if (!QDBusConnection::systemBus().isConnected()) {
         return false;
     }
 
     //2. 在总线连接上挂载服务，这样其他进程才能请求该服务
-    if (!QDBusConnection::systemBus().registerService(SERVICE_NAME)) {
+    if (!sessionBus.registerService(SERVICE_NAME)) {
         return false;
     }
 
     //3. 在挂载的服务上注册一个执行服务的对象
-    if (!QDBusConnection::systemBus().registerObject(SERVICE_PATH, mp_IFace, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
+    if (!sessionBus.registerObject(SERVICE_PATH, mp_IFace, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
+        qInfo() << QDBusConnection::systemBus().lastError();
+        return false;
+    }
+
+    //4.导出驱动接口对象
+    if (!sessionBus.registerObject(DRIVER_SERVICE_PATH, mp_DriverOperateIFace, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
         qInfo() << QDBusConnection::systemBus().lastError();
         return false;
     }
