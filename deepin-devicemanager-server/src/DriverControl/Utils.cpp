@@ -21,6 +21,10 @@
 #include "Utils.h"
 
 #include <QProcess>
+#include <QDir>
+#include <QUuid>
+#include <QFile>
+#include <QDebug>
 
 #include <sys/utsname.h>
 
@@ -89,5 +93,46 @@ bool Utils::unInstallPackage(const QString &packageName)
     if (!process.waitForFinished())
         return  false;
 
+    return  true;
+}
+
+/**
+ * @brief Utils::isDriverPackage 判断Deb是否为驱动包
+ * @param filepath 包文件路径
+ * @return true: 是 false: 否
+ */
+bool Utils::isDriverPackage(const QString &filepath)
+{
+    if (!QFile::exists(filepath)) {
+        return  false;
+    }
+
+    QDir tmpDir = QDir::temp();
+    QString tmpPath = QString("devicemanager-%1").arg(QUuid::createUuid().toString(QUuid::WithoutBraces));
+    if (tmpDir.mkdir(tmpPath)) {
+        tmpDir.cd(tmpPath);
+        QString strExtract = tmpDir.absolutePath();
+        QProcess process;
+        process.start(QString("dpkg-deb -x %1 %2").arg(filepath).arg(strExtract));
+        if (!process.waitForFinished()) {
+            return  false;
+        }
+        //查找关键字 ko insmod modprobe和 路径 /lib/module
+        process.setWorkingDirectory(strExtract);
+        process.start(QString("grep -irH \"*.ko\" %1 ||"
+                              "grep -irH \"insmod\" %1 ||"
+                              "grep -irH \"modprobe\" %1 ||"
+                              "grep -irH \"/lib/module\" %1").arg(strExtract));
+        if (!process.waitForFinished()) {
+            return  false;
+        }
+        //获取查找结果，有结果不为空
+        QString strKeyContent = process.readAllStandardOutput();
+        qInfo() << strKeyContent;
+        if (strKeyContent.isEmpty()) {
+            return  false;
+        }
+
+    }
     return  true;
 }

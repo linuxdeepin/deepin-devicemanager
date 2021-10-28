@@ -34,8 +34,7 @@ public:
     bool unInstallDriver(const QString &moduleName); //驱动卸载
     bool installDriver(const QString &pathList);  // 驱动安装
     //获取依赖当前模块在使用的模块
-    QStringList checkModuleInUsed(const QString &modName, bool bfrompath = false);
-
+    QStringList checkModuleInUsed(const QString &modName);
 
 private:
     bool unInstallModule(const QString &moduleName);
@@ -43,6 +42,7 @@ private:
 
 
 signals:
+    void sigProgressDetail(int progress, const QString &strDeatils);
 
 public slots:
 

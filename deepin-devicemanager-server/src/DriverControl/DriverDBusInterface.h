@@ -35,14 +35,17 @@ class DriverDBusInterface : public QObject, protected QDBusContext
 public:
     explicit DriverDBusInterface(QObject *parent = nullptr);
 
-
+private:
+    void initConnects();
 
 signals:
+    Q_SCRIPTABLE void sigProgressDetail(int progress, const QString &strDeatils);
 
 public slots:
     Q_SCRIPTABLE bool unInstallDriver(const QString &modulename);
-    Q_SCRIPTABLE bool installDriver(const QString &pathList);
+    Q_SCRIPTABLE bool installDriver(const QString &filepath);
     Q_SCRIPTABLE QStringList checkModuleInUsed(const QString &modulename);
+    Q_SCRIPTABLE bool isDriverPackage(const QString &filepath);
 
 
 private:

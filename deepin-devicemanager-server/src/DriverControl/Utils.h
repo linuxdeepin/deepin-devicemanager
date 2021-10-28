@@ -31,6 +31,8 @@ public:
     static QString kernelRelease();
     static bool addModBlackList(const QString &moduleName);
     static bool unInstallPackage(const QString &packageName);
+    //判断Deb是否为驱动包
+    static bool isDriverPackage(const QString &filepath);
 };
 
 #endif // UTILS_H

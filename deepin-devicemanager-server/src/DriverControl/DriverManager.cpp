@@ -39,16 +39,18 @@ DriverManager::DriverManager(QObject *parent)
 bool DriverManager::unInstallDriver(const QString &modulename)
 {
     bool bsuccess = false;
-    QString modulePath = Utils::getModuleFilePath(modulename);
+    sigProgressDetail(5, "");
+    QString modulePath = mp_modcore->modGetPath(modulename);
     QString modulePackageName = Utils::file2PackageName(modulePath);
     QString kernelRelease = Utils::kernelRelease();
+    sigProgressDetail(10, "");
     //当模块包为内核模块包时不允许删除，采用卸载加黑名单禁用方式
     if (modulePackageName.contains(kernelRelease)) {
         bsuccess = unInstallModule(modulename);
     } else {
         bsuccess = unInstallModule(modulename, modulePackageName);
     }
-
+    sigProgressDetail(100, "");
     return  bsuccess;
 }
 
@@ -64,12 +66,11 @@ bool DriverManager::installDriver(const QString &filepath)
  * @param bfrompath true:/xx/xx/hid.ko false:hid or hid.ko
  * @return 返回当前依赖模块列表 like ['usbhid', 'hid_generic']
  */
-QStringList DriverManager::checkModuleInUsed(const QString &modName, bool bfrompath)
+QStringList DriverManager::checkModuleInUsed(const QString &modName)
 {
     if (nullptr == mp_modcore)
         return QStringList();
     QFile file(modName);
-    file.exists();
 
     bool bpath = file.exists() && modName.endsWith("ko");
     return  mp_modcore->checkModuleInUsed(modName, bpath);
@@ -83,14 +84,16 @@ QStringList DriverManager::checkModuleInUsed(const QString &modName, bool bfromp
 bool DriverManager::unInstallModule(const QString &moduleName)
 {
     bool bsuccess = true;
+    sigProgressDetail(40, "");
     if (!mp_modcore->rmModForce(moduleName)) {
         bsuccess = false;
     } else {
+        sigProgressDetail(60, "");
         if (!Utils::addModBlackList(moduleName)) {
             bsuccess = false;
         }
     }
-
+    sigProgressDetail(80, "");
     return  bsuccess;
 }
 
@@ -103,14 +106,16 @@ bool DriverManager::unInstallModule(const QString &moduleName)
 bool DriverManager::unInstallModule(const QString &moduleName, const QString &packageName)
 {
     bool bsuccess = true;
+    sigProgressDetail(20, "");
     if (!mp_modcore->rmModForce(moduleName)) {
         bsuccess = false;
     } else {
+        sigProgressDetail(30, "");
         if (!Utils::unInstallPackage(packageName)) {
             bsuccess = false;
         }
     }
-
+    sigProgressDetail(80, "");
     return  bsuccess;
 }
 
