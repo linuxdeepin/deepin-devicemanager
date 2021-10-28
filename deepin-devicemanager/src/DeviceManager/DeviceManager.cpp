@@ -140,8 +140,8 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
     m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
 
     // 板载接口设备
-//    if (m_ListDeviceBios.size() > 0)
-//        m_ListDeviceType.append(QPair<QString, QString>(tr("Motherboard"), "motherboard##Bios"));
+    if (m_ListDeviceBios.size() > 0)
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Motherboard"), "motherboard##Bios"));
 
     if (m_ListDeviceMemory.size() > 0)
         m_ListDeviceType.append(QPair<QString, QString>(tr("Memory"), "memory##Memory"));
@@ -521,7 +521,7 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     m_ListDeviceNetwork.append(device);
 }
 
-void DeviceManager::updateNetworkInfo(const QMap<QString,QString>& mapInfo)
+void DeviceManager::updateNetworkInfo(const QMap<QString, QString> &mapInfo)
 {
     if (m_ListDeviceNetwork.size() == 0)
         return;
