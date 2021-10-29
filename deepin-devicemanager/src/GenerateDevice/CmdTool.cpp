@@ -540,7 +540,9 @@ void CmdTool::loadUpowerInfo(const QString &key, const QString &debugfile)
 
     QStringList items = deviceInfo.split("\n\n");
     foreach (const QString &item, items) {
-        if (item.isEmpty() || item.contains("DisplayDevice"))
+        if (item.isEmpty() || item.contains("DisplayDevice")
+                || item.contains("mouse", Qt::CaseInsensitive)
+                || item.contains("keyboard", Qt::CaseInsensitive)) // 98003远程后发现无线鼠标电量干扰了计算机电池电量的显示，排除无线鼠标，无线键盘
             continue;
 
         QMap<QString, QString> mapInfo;
