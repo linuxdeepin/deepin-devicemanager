@@ -69,6 +69,11 @@ public:
      * @return 设备类型
      */
     QString currentIndex() const;
+
+    /**
+     * @brief setFontChangeFlag:字体变化标志
+     */
+    void setFontChangeFlag();
 signals:
 
     /**

@@ -400,6 +400,9 @@ void MainWindow::slotExportInfo()
 
 void MainWindow::slotChangeUI()
 {
+    // 设置字体变化标志
+    mp_DeviceWidget->setFontChangeFlag();
+
     // 更新当前设备界面设备
     slotListItemClicked(mp_DeviceWidget->currentIndex());
 }

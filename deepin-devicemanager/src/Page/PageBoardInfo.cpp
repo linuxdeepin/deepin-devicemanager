@@ -22,7 +22,9 @@
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)
     , mp_ItemDelegate(new RichTextDelegate(this))
+    , m_FontChangeFlag(false)
 {
+
 }
 
 void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
@@ -67,10 +69,12 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
     if (mp_Content)
         mp_Content->setLimitRow(limitSize);
 
-    // 如果是展开状态则不更新
-    if (isExpanded())
-        return;
-
+    // 字体无变化如果是展开状态则不更新
+    if (!m_FontChangeFlag) {
+        if (isExpanded())
+            return;
+    }
+    m_FontChangeFlag = false;
     // clear info
     clearContent();
 
@@ -172,4 +176,10 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
         pair.second += "\n";
     }
     pair.second.replace(QRegExp("\n$"), "");
+}
+
+void PageBoardInfo::setFontChangeFlag()
+{
+    // 设置字体变化标志
+    m_FontChangeFlag = true;
 }
