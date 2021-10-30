@@ -72,6 +72,12 @@ QString DeviceWidget::currentIndex() const
     return mp_ListView->currentType();
 }
 
+void DeviceWidget::setFontChangeFlag()
+{
+    // 设置字体变化标志
+    mp_PageInfo->setFontChangeFlag();
+}
+
 void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
 {
     // ListView Item 点击
