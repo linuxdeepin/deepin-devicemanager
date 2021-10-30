@@ -28,9 +28,12 @@ LoadInfoThread::~LoadInfoThread()
 
 void LoadInfoThread::run()
 {
+    // 判断后台是否正处理update状态
+    QString info;
+    DBusInterface::getInstance()->getInfo("is_server_running", info);
     // 请求后台更新信息
     m_Running = true;
-    if (DBusInterface::getInstance()->reqUpdateUI(m_Start)) {
+    if (!info.toInt()) {
         m_Start = false;
         mp_ReadFilePool.getAllInfo();
         mp_ReadFilePool.waitForDone(-1);

@@ -1,6 +1,7 @@
 // 项目自身文件
 #include "DeviceInput.h"
 #include "DeviceManager.h"
+#include "DBusEnableInterface.h"
 
 // Qt库文件
 #include <QDebug>
@@ -55,11 +56,29 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    if(mapInfo.find("unique_id") != mapInfo.end()){
+        m_UniqueID = mapInfo["unique_id"];
+        m_Name = mapInfo["name"];
+        m_SysPath = "/sys" + mapInfo["path"];
+        m_HardwareClass = mapInfo["Hardware Class"];
+        m_Enable = false;
+        return;
+    }
+    if(mapInfo.find("Enable") != mapInfo.end()){
+        m_Enable = false;
+    }
     // 设置设备基本属性
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
+
+    QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+]{4}.(.*)");
+    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
+        m_UniqueID = reUniqueId.cap(1);
+    }
+    m_SysPath = "/sys" + mapInfo["SysFS ID"];
+    m_SysPath.replace(mapInfo["SysFS BusID"],"");
 
     // 获取键盘的接口类型
     if (mapInfo.find("Hotplug") != mapInfo.end())
@@ -209,8 +228,15 @@ const QString DeviceInput::getOverviewInfo()
 
 EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
+    if(res){
+        m_Enable = e;
+    }
     // 设置设备状态
-    return EDS_Success;
+    return res ? EDS_Success : EDS_Faild;
 }
 
 bool DeviceInput::enable()

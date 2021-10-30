@@ -132,6 +132,12 @@ public:
     bool canEnable();
 
     /**
+     * @brief setHardwareClass
+     * @param hclass
+     */
+    void setHardwareClass(const QString& hclass);
+
+    /**
      * @brief isValid：判断属性值是否有效
      * @param value：属性值
      * @return true:属性值有效
@@ -314,6 +320,9 @@ protected:
     void mapInfoToList();
 
 protected:
+    QString                        m_UniqueID;      //<! 设备的唯一值
+    QString                        m_SysPath;       //<! 用启用的sys path
+    QString                        m_HardwareClass; //<! 设备类型
     QList<QPair<QString, QString>> m_LstBaseInfo;   //<! 基本信息
     QList<QPair<QString, QString>> m_LstOtherInfo;  //<! 其它信息
     QStringList                    m_TableHeader;   //<! 用于存放表格的表头

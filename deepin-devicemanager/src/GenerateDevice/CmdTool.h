@@ -134,6 +134,26 @@ private:
     void getMulHwinfoInfo(const QString &info);
 
     /**
+     * @brief getRemoveInfo
+     * @param lstMap
+     */
+    void getRemoveAuthInfo(const QString& info,QList<QMap<QString,QString>>& lstMap);
+
+    /**
+     * @brief getAuthorizedInfo
+     * @param lstAuth
+     */
+    void getAuthorizedInfo(QStringList& lstAuth);
+
+    /**
+     * @brief updateMapInfo
+     * @param removeLstMap
+     * @param mapInfo
+     * @return
+     */
+    void updateMapInfo(QList<QMap<QString,QString>>& removeLstMap, QMap<QString,QString>& mapInfo);
+
+    /**
      * @brief loadDmidecodeInfo:加载dmidecode信息
      * @param key:与cmd对应的关键字
      * @param debugfile:调试文件名

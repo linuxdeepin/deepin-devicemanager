@@ -38,19 +38,21 @@ endforeach()
 # 设置包含头文件的时候不用包含路径 end ****************************************************************************************
 
 # 引用ZeroMQ的库 begin ****************************************************************
-link_libraries("zmq")
+include_directories("/usr/include/cups/")
+link_libraries("cups")
 link_libraries("udev")
 # 引用ZeroMQ的库 end  *****************************************************************
 
 find_package(Qt5 COMPONENTS
     Core
-    DBus REQUIRED)
+    DBus
+    Sql REQUIRED)
 
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H})
 
-target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus kmod)
+target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus Qt5::Sql kmod)
 
 # Install files
 install(TARGETS ${APP_BIN_NAME} DESTINATION bin)

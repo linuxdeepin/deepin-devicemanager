@@ -55,14 +55,14 @@ public:
     ThreadExecXrandr *m_threadExecXrandr;
 };
 
-TEST_F(UT_LoadInfoThread,UT_LoadInfoThread_start){
-    m_loadInfoThread->run();
-    EXPECT_FALSE(m_loadInfoThread->m_Running);
-}
+//TEST_F(UT_LoadInfoThread,UT_LoadInfoThread_start){
+//    m_loadInfoThread->run();
+//    EXPECT_FALSE(m_loadInfoThread->m_Running);
+//}
 
-TEST_F(UT_ThreadExecXrandr,UT_ThreadExecXrandr_start){
-    m_threadExecXrandr->run();
-    EXPECT_TRUE(m_threadExecXrandr->m_Gpu);
-}
+//TEST_F(UT_ThreadExecXrandr,UT_ThreadExecXrandr_start){
+//    m_threadExecXrandr->run();
+//    EXPECT_TRUE(m_threadExecXrandr->m_Gpu);
+//}
 
 

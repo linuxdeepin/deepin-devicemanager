@@ -167,17 +167,40 @@ void DeviceGenerator::generatorMonitorDevice()
 
 void DeviceGenerator::generatorNetworkDevice()
 {
-    // 生成网络适配器
-    const QList<QMap<QString, QString>> &lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
-    QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
-    for (; it != lstInfo.end(); ++it) {
+    const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
+    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
+        // 如果网卡已经被禁用，则直接添加设备
+        if((*it).find("path") != (*it).end()){
+            DeviceNetwork *device = new DeviceNetwork();
+            device->setInfoFromHwinfo(*it);
+            DeviceManager::instance()->addNetworkDevice(device);
+            continue;
+        }
+
+        // 没有网卡地址的设备过滤
         if ((*it).size() < 2)
             continue;
-        if((*it).find("logical name") == (*it).end() || (*it).find("serial") == (*it).end())
+        if((*it).find("HW Address") == (*it).end())
             continue;
         DeviceNetwork *device = new DeviceNetwork();
-        device->setInfoFromLshw(*it);
+        device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addNetworkDevice(device);
+        if((*it).find("path") != (*it).end()){
+            continue;
+        }
+
+        // 添加从lshw中获取的信息
+        const QList<QMap<QString, QString>> &lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
+        QList<QMap<QString, QString> >::const_iterator itls = lstInfo.begin();
+        for (; itls != lstInfo.end(); ++itls) {
+            if ((*itls).size() < 2)
+                continue;
+            if((*itls).find("logical name") == (*itls).end() || (*itls).find("serial") == (*itls).end())
+                continue;
+            if((*it)["HW Address"] != (*itls)["serial"])
+                continue;
+            device->setInfoFromLshw(*itls);
+        }
     }
 }
 
@@ -432,15 +455,13 @@ void DeviceGenerator::getDiskInfoFromLshw()
     }
 
     // lshw -C storage
-    /*if (lstDisk.size() == 0)*/ {
-        const QList<QMap<QString, QString>> &lstDisk = DeviceManager::instance()->cmdInfo("lshw_storage");
-        QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
-        for (; dIt != lstDisk.end(); ++dIt) {
-            if ((*dIt).size() < 2)
-                continue;
+    const QList<QMap<QString, QString>> &lstStorage = DeviceManager::instance()->cmdInfo("lshw_storage");
+    QList<QMap<QString, QString> >::const_iterator sIt = lstStorage.begin();
+    for (; sIt != lstStorage.end(); ++sIt) {
+        if ((*sIt).size() < 2)
+            continue;
 
-            DeviceManager::instance()->addLshwinfoIntoNVMEStorageDevice(*dIt);
-        }
+        DeviceManager::instance()->addLshwinfoIntoNVMEStorageDevice(*sIt);
     }
 }
 
@@ -554,7 +575,7 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("hwinfo_sound");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 5)
+        if ((*it).size() < 5 && (*it).find("path")==(*it).end())
             continue;
 
         DeviceAudio *device = new DeviceAudio();
@@ -663,6 +684,8 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
 
         DeviceInput *device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
+        device->setHardwareClass("keyboard");
+        device->setCanEnale(false);
         DeviceManager::instance()->addKeyboardDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
@@ -705,6 +728,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
 
         DeviceInput *device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
+        device->setHardwareClass("mouse");
         DeviceManager::instance()->addMouseDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }

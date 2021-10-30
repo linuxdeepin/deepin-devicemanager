@@ -1,5 +1,6 @@
 // 项目自身文件
 #include "DevicePrint.h"
+#include "DBusEnableInterface.h"
 
 // Qt库文件
 #include <QDebug>
@@ -71,7 +72,12 @@ const QString DevicePrint::getOverviewInfo()
 
 EnableDeviceStatus DevicePrint::setEnable(bool e)
 {
-    return EDS_Success;
+    bool res  = DBusEnableInterface::getInstance()->enablePrinter("printer",m_Name,m_URI,e);
+    if(res){
+        m_Enable = e;
+    }
+    // 设置设备状态
+    return res ? EDS_Success : EDS_Faild;
 }
 
 bool DevicePrint::enable()

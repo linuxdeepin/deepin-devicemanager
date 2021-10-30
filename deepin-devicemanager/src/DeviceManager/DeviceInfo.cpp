@@ -15,6 +15,9 @@ DWIDGET_USE_NAMESPACE
 
 DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     : QObject(parent)
+    , m_UniqueID("")
+    , m_SysPath("")
+    , m_HardwareClass("")
 {
     // 设备可用
     m_Enable = true;
@@ -423,6 +426,11 @@ void DeviceBaseInfo::setCanEnale(bool can)
 bool DeviceBaseInfo::canEnable()
 {
     return m_CanEnable;
+}
+
+void DeviceBaseInfo::setHardwareClass(const QString& hclass)
+{
+    m_HardwareClass = hclass;
 }
 
 const QString DeviceBaseInfo::getOverviewInfo()

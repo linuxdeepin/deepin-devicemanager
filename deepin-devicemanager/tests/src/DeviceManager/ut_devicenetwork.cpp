@@ -83,7 +83,6 @@ TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromHwinfo_001)
     m_deviceNetwork->m_LogicalName = "enp2s0";
 
     EXPECT_TRUE(m_deviceNetwork->setInfoFromHwinfo(mapinfo));
-    EXPECT_STREQ("Model", m_deviceNetwork->m_Name.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromHwinfo_002)
@@ -92,7 +91,7 @@ TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromHwinfo_002)
     ut_network_sethwinfomap(mapinfo);
     m_deviceNetwork->m_LogicalName = "enp2s1";
 
-    EXPECT_FALSE(m_deviceNetwork->setInfoFromHwinfo(mapinfo));
+    EXPECT_TRUE(m_deviceNetwork->setInfoFromHwinfo(mapinfo));
 }
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromLshw)

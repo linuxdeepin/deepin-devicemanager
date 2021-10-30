@@ -1,5 +1,6 @@
 // 项目自身文件
 #include "DeviceAudio.h"
+#include "DBusEnableInterface.h"
 
 // 其它头文件
 #include <QDebug>
@@ -31,6 +32,14 @@ DeviceAudio::DeviceAudio()
 
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    if(mapInfo.find("path") != mapInfo.end()){
+        setAttribute(mapInfo, "name", m_Name);
+        m_SysPath = "/sys" + mapInfo["path"];
+        m_UniqueID = m_Name;
+        m_HardwareClass = mapInfo["Hardware Class"];
+        m_Enable = false;
+        return;
+    }
     //1. 获取设备的基本信息
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -45,6 +54,12 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Driver Modules", m_DriverModules); // 驱动模块
+
+    m_SysPath = "/sys" + mapInfo["SysFS ID"];
+    QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+-]{4}\\.(.*)");
+    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
+        m_UniqueID = reUniqueId.cap(1);
+    }
 
     //2. 获取设备的唯一标识
     /*
@@ -153,9 +168,20 @@ const QString &DeviceAudio::driver() const
 
 EnableDeviceStatus DeviceAudio::setEnable(bool e)
 {
+    if(!m_SysPath.contains("usb")){
+        m_UniqueID = m_Name;
+    }
+    m_HardwareClass = "sound";
     // 设置设备状态
-    // xxx
-    return EDS_Faild;
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_UniqueID,m_SysPath,"",e);
+    if(res){
+        m_Enable = e;
+    }
+    // 设置设备状态
+    return res ? EDS_Success : EDS_Faild;
 }
 
 bool DeviceAudio::enable()

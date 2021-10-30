@@ -179,8 +179,8 @@ void PageSingleInfo::slotActionEnable()
 
         // 除设置成功的情况，其他情况需要提示设置失败
         if (res == EDS_Success) {
-            mp_Enable->setText(tr("Enable"));
-            mp_Content->setDeviceEnable(false);
+            // 返回成功之前再次更新数据
+            emit refreshInfo();
         } else {
             QString con = tr("Failed to disable the device");
 
@@ -193,8 +193,7 @@ void PageSingleInfo::slotActionEnable()
 
         // 除设置成功的情况，其他情况需要提示设置失败
         if (res == EDS_Success) {
-            mp_Enable->setText(tr("Disable"));
-            mp_Content->setDeviceEnable(true);
+            emit refreshInfo();
         } else {
             QString con = tr("Failed to enable the device");
 

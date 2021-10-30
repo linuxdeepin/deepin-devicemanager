@@ -57,6 +57,7 @@ find_package(PkgConfig REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5 COMPONENTS DBus REQUIRED)
 find_package(Qt5Gui REQUIRED)
+find_package(Qt5Sql REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(DFrameworkdbus REQUIRED)
@@ -94,6 +95,7 @@ target_link_libraries(${PROJECT_NAME_TEST}
     Qt5::Gui
     Qt5::Widgets
     Qt5::DBus
+    Qt5::Sql
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
     ${DtkGUI_LIBRARIES}

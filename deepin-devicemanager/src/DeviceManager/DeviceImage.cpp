@@ -1,8 +1,7 @@
 // 项目自身文件
 #include "DeviceImage.h"
-
-// 其它头文件
 #include "DeviceManager.h"
+#include "DBusEnableInterface.h"
 
 DeviceImage::DeviceImage()
     : DeviceBaseInfo()
@@ -36,6 +35,24 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    if(mapInfo.find("unique_id") != mapInfo.end()){
+        m_UniqueID = mapInfo["unique_id"];
+        m_Name = mapInfo["name"];
+        m_SysPath = "/sys" + mapInfo["path"];
+        m_HardwareClass = mapInfo["Hardware Class"];
+        m_Enable = false;
+        return;
+    }
+    if(mapInfo.find("Enable") != mapInfo.end()){
+        m_Enable = false;
+    }
+    QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+]{4}.(.*)");
+    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
+        m_UniqueID = reUniqueId.cap(1);
+    }
+    m_SysPath = "/sys" + mapInfo["SysFS ID"];
+    m_SysPath.replace(mapInfo["SysFS BusID"],"");
+
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
@@ -83,8 +100,15 @@ const QString DeviceImage::getOverviewInfo()
 
 EnableDeviceStatus DeviceImage::setEnable(bool e)
 {
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable("class",m_Name,m_SysPath,m_UniqueID,e);
+    if(res){
+        m_Enable = e;
+    }
     // 设置设备状态
-    return EDS_Faild;
+    return res ? EDS_Success : EDS_Faild;
 }
 
 bool DeviceImage::enable()

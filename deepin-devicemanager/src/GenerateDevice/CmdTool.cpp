@@ -11,6 +11,7 @@
 #include "EDIDParser.h"
 #include "DeviceManager.h"
 #include "DBusInterface.h"
+#include "DBusEnableInterface.h"
 #include "MacroDefinition.h"
 
 CmdTool::CmdTool()
@@ -397,12 +398,22 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 
 void CmdTool::getMulHwinfoInfo(const QString &info)
 {
+    // 获取已经禁用的设备的信息
+    QString sinfo;
+    DBusEnableInterface::getInstance()->getRemoveInfo(sinfo);
+    QList<QMap<QString,QString>> lstMap;
+    getRemoveAuthInfo(sinfo,lstMap);
+    DBusEnableInterface::getInstance()->getAuthorizedInfo(sinfo);
+    getRemoveAuthInfo(sinfo,lstMap);
+
+    // 获取信息
     QStringList items = info.split("\n\n");
     foreach (const QString &item, items) {
         if (item.isEmpty())
             continue;
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
+        updateMapInfo(lstMap, mapInfo);
         if (mapInfo["Hardware Class"] == "sound") {
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"] == "network interface") {
@@ -421,6 +432,70 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             addMapInfo("hwinfo_display", mapInfo);
         } else {
             addUsbMapInfo("hwinfo_usb", mapInfo);
+        }
+    }
+    for (QList<QMap<QString,QString>>::iterator it = lstMap.begin();it != lstMap.end();++it) {
+        if ((*it)["Hardware Class"] == "sound") {
+            addMapInfo("hwinfo_sound", (*it));
+        }else if ((*it)["Hardware Class"] == "mouse") {
+            addMapInfo("hwinfo_mouse", (*it));
+        }else if ((*it)["Hardware Class"] == "network interface") {
+            addMapInfo("hwinfo_network", (*it));
+        }else {
+            addUsbMapInfo("hwinfo_usb", (*it));
+        }
+    }
+}
+
+void CmdTool::getRemoveAuthInfo(const QString& info,QList<QMap<QString,QString>>& lstMap)
+{
+    if(!info.isEmpty()){
+        QStringList riLst = info.split("\n\n");
+        foreach(const QString& item,riLst){
+            QStringList lines = item.split("\n");
+            if(lines.size() < 3)
+                continue;
+            QMap<QString,QString> mapInfo;
+            foreach(const QString& line,lines){
+                QStringList words = line.split(" : ");
+                if(words.size() != 2)
+                    continue;
+                mapInfo.insert(words[0],words[1].replace("/sys",""));
+            }
+            lstMap.push_back(mapInfo);
+        }
+    }
+}
+
+void CmdTool::getAuthorizedInfo(QStringList& lstAuth)
+{
+    QString authInfo;
+    DBusEnableInterface::getInstance()->getAuthorizedInfo(authInfo);
+    if(!authInfo.isEmpty()){
+        lstAuth = authInfo.split("\n");
+    }
+}
+
+void CmdTool::updateMapInfo(QList<QMap<QString,QString>>& removeLstMap, QMap<QString,QString>& mapInfo)
+{
+    QList<QMap<QString,QString>>::iterator it = removeLstMap.begin();
+    for (;it != removeLstMap.end();++it) {
+
+        QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+]{4}.(.*)");
+        if (reUniqueId.exactMatch(mapInfo["Unique ID"]) && (*it)["unique_id"] == reUniqueId.cap(1)){
+            mapInfo.insert("Enable","false");
+            removeLstMap.erase(it);
+            return;
+        }
+
+        if(mapInfo["SysFS ID"] == (*it)["path"] || mapInfo["SysFS Device Link"] == (*it)["path"]){
+            QString hclass = mapInfo["Hardware Class"];
+            mapInfo.clear();
+            mapInfo.insert("path",(*it)["path"]);
+            mapInfo.insert("name",(*it)["name"]);
+            mapInfo.insert("Hardware Class",hclass);
+            removeLstMap.erase(it);
+            return;
         }
     }
 }

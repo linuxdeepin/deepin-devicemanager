@@ -2,7 +2,8 @@
 * Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
 *
 * Author:     Jun.Liu <liujuna@uniontech.com>
-* Maintainer: xiaomei.ji <jixiaomei@uniontech.com>
+*
+* Maintainer: XiaoMei.Ji <jixiaomei@uniontech.com>
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,22 +18,22 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef DBUSINTERFACE_H
-#define DBUSINTERFACE_H
+
+#ifndef DBUSENABLEINTERFACE_H
+#define DBUSENABLEINTERFACE_H
 
 #include <QObject>
 
 #include <mutex>
 
 class QDBusInterface;
-
-class DBusInterface
+class DBusEnableInterface
 {
 public:
-    inline static DBusInterface *getInstance()
+    inline static DBusEnableInterface *getInstance()
     {
         // 利用原子变量解决，单例模式造成的内存泄露
-        DBusInterface *sin = s_Instance.load();
+        DBusEnableInterface *sin = s_Instance.load();
 
         if (!sin) {
             // std::lock_guard 自动加锁解锁
@@ -40,7 +41,7 @@ public:
             sin = s_Instance.load();
 
             if (!sin) {
-                sin = new DBusInterface();
+                sin = new DBusEnableInterface();
                 s_Instance.store(sin);
             }
         }
@@ -49,15 +50,39 @@ public:
     }
 
     /**
-     * @brief getInfo：获取信息
-     * @param key：命令关键字
-     * @param info：获取的设备信息
-     * @return 信息是否有效
+     * @brief getRemoveInfo : 获取移除信息
+     * @param info : 获取的信息
+     * @return
      */
-    bool getInfo(const QString &key, QString &info);
+    bool getRemoveInfo(QString &info);
+
+    /**
+     * @brief getAuthorizedInfo
+     * @param lst
+     * @return
+     */
+    bool getAuthorizedInfo(QString& lst);
+
+    /**
+     * @brief enable 启用禁用
+     * @param name 唯一标识
+     * @param path 系统路径
+     * @param enable_device 是否禁用
+     */
+    bool enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device);
+
+    /**
+     * @brief enablePrinter 启用禁用打印机
+     * @param hclass
+     * @param name
+     * @param path
+     * @param enable_device
+     * @return
+     */
+    bool enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device);
 
 protected:
-    DBusInterface();
+    DBusEnableInterface();
 
 private:
     /**
@@ -66,10 +91,10 @@ private:
     void init();
 
 private:
-    static std::atomic<DBusInterface *> s_Instance;
+    static std::atomic<DBusEnableInterface *> s_Instance;
     static std::mutex m_mutex;
 
     QDBusInterface       *mp_Iface;
 };
 
-#endif // DBUSINTERFACE_H
+#endif // DBUSENABLEINTERFACE_H
