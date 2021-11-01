@@ -33,6 +33,8 @@ public:
     static bool unInstallPackage(const QString &packageName);
     //判断Deb是否为驱动包
     static bool isDriverPackage(const QString &filepath);
+    //更新mod dep
+    static bool updateModDeps(bool bquick = true);
 };
 
 #endif // UTILS_H

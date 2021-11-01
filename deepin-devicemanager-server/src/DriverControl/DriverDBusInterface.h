@@ -46,6 +46,7 @@ public slots:
     Q_SCRIPTABLE bool installDriver(const QString &filepath);
     Q_SCRIPTABLE QStringList checkModuleInUsed(const QString &modulename);
     Q_SCRIPTABLE bool isDriverPackage(const QString &filepath);
+    Q_SCRIPTABLE bool isBlackListed(const QString &modName);
 
 
 private:

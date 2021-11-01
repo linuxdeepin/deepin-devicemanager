@@ -23,6 +23,11 @@
 #include "ModCore.h"
 
 #include <QFile>
+#include <QMimeDatabase>
+#include <QMimeType>
+#include <QDir>
+#include <QFileInfo>
+#include <QDebug>
 
 DriverManager::DriverManager(QObject *parent)
     : QObject(parent)
@@ -56,24 +61,104 @@ bool DriverManager::unInstallDriver(const QString &modulename)
 
 bool DriverManager::installDriver(const QString &filepath)
 {
-    Q_UNUSED(filepath);
+    /*1.检查模块是否已存在 存在报错返回，不报错返回
+     *2.拷贝、安装（重复目前不处理，提供接口由前端判断，也不指定KMOD_INSERT_FORCE_MODVERSION）
+     *3.检测是否在黑名单，如果在黑名单则需要先去除黑名单设置
+     *4.设置开机自起
+     */
+    sigProgressDetail(1, "start");
+    if (!QFile::exists(filepath)) {
+        sigProgressDetail(2, "file not exist");
+        return  false;
+    }
+
+    //模块已被加载
+    if (mp_modcore->modIsLoaded(filepath)) {
+        sigProgressDetail(5, QString("could not insert module %1 :file exist").arg(filepath));
+        return  false;
+    }
+
+    QFileInfo fileinfo(filepath);
+    QMimeDatabase typedb;
+    QMimeType filetype = typedb.mimeTypeForFile(fileinfo);
+    if (filetype.filterString().contains("deb")) {
+        //ToDo 调用 apt 安装deb
+    } else {
+        //已判断文件是否存在所以必然存在文件名
+        QString filename = fileinfo.baseName();
+        QString installdir = QString("/lib/modules/%1/custom/%2").arg(Utils::kernelRelease().arg(mp_modcore->modGetName(filepath)));
+        QDir installDir(installdir);
+        //判断安装路径是否已存在，如果不存在先创建安装目录
+        if (installDir.exists() ||
+                installDir.mkpath(installdir)) {
+            //将文件拷贝到安装目录
+            QString installpath = installDir.absoluteFilePath(filename);
+            if (QFile::copy(filepath, installpath)) {
+                //更新依赖
+                Utils::updateModDeps();
+                QString modname = mp_modcore->modGetName(installpath);
+                ModCore::ErrorCode errcode = mp_modcore->modInstall(modname);
+                if (ModCore::Success == errcode) {
+                    //处理黑名单
+                    mp_modcore->rmFromBlackList(modname);
+                    //如果非内建模块设置开机自启动
+                    if (!mp_modcore->modIsBuildIn(modname) && !mp_modcore->setModLoadedOnBoot(modname)) {
+                        return  false;
+                    }
+                } else {
+                    //失败将文件移除,只删文件不删路径
+                    QFile::remove(installpath);
+                    return  false;
+                }
+            } else {
+                return  false;
+            }
+        }
+    }
+
     return  true;
 }
 
 /**
  * @brief DriverManager::checkModuleInUsed 获取依赖当前模块在使用的模块
- * @param modName sample: hid or hid.ko /xx/xx/hid.ko
- * @param bfrompath true:/xx/xx/hid.ko false:hid or hid.ko
+ * @param modName 模块名 sample: hid or hid.ko /xx/xx/hid.ko
  * @return 返回当前依赖模块列表 like ['usbhid', 'hid_generic']
  */
 QStringList DriverManager::checkModuleInUsed(const QString &modName)
 {
     if (nullptr == mp_modcore)
         return QStringList();
-    QFile file(modName);
 
-    bool bpath = file.exists() && modName.endsWith("ko");
-    return  mp_modcore->checkModuleInUsed(modName, bpath);
+    return  mp_modcore->checkModuleInUsed(modName);
+}
+
+/**
+ * @brief DriverManager::isBlackListed 模块是否在黑名单中
+ * @param modName 模块名 sample:hid or hid.ko /xx/xx/hid.ko
+ * @return true 是 false 否
+ */
+bool DriverManager::isBlackListed(const QString &modName)
+{
+    return mp_modcore->modIsBuildIn(modName);
+}
+
+/**
+ * @brief DriverManager::isModFile 判断文件是否未驱动文件
+ * @param filePath 文件路径
+ * @return true:是 false 否
+ */
+bool DriverManager::isDriverPackage(const QString &filepath)
+{
+    bool bdriver = false;
+    QMimeDatabase typedb;
+    QMimeType filetype = typedb.mimeTypeForFile(filepath);
+    if (filetype.filterString().contains("deb")) {
+        bdriver = Utils::isDriverPackage(filepath);
+    } else {
+        bdriver = mp_modcore->isModFile(filepath);
+    }
+
+    return  bdriver;
 }
 
 /**
@@ -89,8 +174,14 @@ bool DriverManager::unInstallModule(const QString &moduleName)
         bsuccess = false;
     } else {
         sigProgressDetail(60, "");
-        if (!Utils::addModBlackList(moduleName)) {
+        QString shortname = mp_modcore->modGetName(moduleName);
+        if (!mp_modcore->addModBlackList(shortname)) {
             bsuccess = false;
+        } else {
+            //如果非内建模块检测去除自启动设置,不影响结果所以不以该操作结果做最终结果判断
+            if (mp_modcore->modIsBuildIn(shortname)) {
+                mp_modcore->rmModLoadedOnBoot(shortname);
+            }
         }
     }
     sigProgressDetail(80, "");

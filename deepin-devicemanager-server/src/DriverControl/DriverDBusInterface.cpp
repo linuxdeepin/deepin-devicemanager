@@ -3,6 +3,8 @@
 #include "ModCore.h"
 #include "Utils.h"
 
+#include <QDebug>
+
 DriverDBusInterface::DriverDBusInterface(QObject *parent)
     : QObject(parent)
     , mp_drivermanager(new DriverManager(this))
@@ -33,7 +35,12 @@ QStringList DriverDBusInterface::checkModuleInUsed(const QString &modulename)
 
 bool DriverDBusInterface::isDriverPackage(const QString &filepath)
 {
-    return  Utils::isDriverPackage(filepath);
+    return  mp_drivermanager->isDriverPackage(filepath);
+}
+
+bool DriverDBusInterface::isBlackListed(const QString &modName)
+{
+    return mp_drivermanager->isBlackListed(modName);
 }
 
 

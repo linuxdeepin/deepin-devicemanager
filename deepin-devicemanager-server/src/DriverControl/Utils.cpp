@@ -106,7 +106,7 @@ bool Utils::isDriverPackage(const QString &filepath)
     if (!QFile::exists(filepath)) {
         return  false;
     }
-
+    bool bsuccess = false;
     QDir tmpDir = QDir::temp();
     QString tmpPath = QString("devicemanager-%1").arg(QUuid::createUuid().toString(QUuid::WithoutBraces));
     if (tmpDir.mkdir(tmpPath)) {
@@ -114,25 +114,41 @@ bool Utils::isDriverPackage(const QString &filepath)
         QString strExtract = tmpDir.absolutePath();
         QProcess process;
         process.start(QString("dpkg-deb -x %1 %2").arg(filepath).arg(strExtract));
-        if (!process.waitForFinished()) {
-            return  false;
+        if (process.waitForFinished()) {
+            //查找关键字 ko insmod modprobe和 路径 /lib/module
+            process.setWorkingDirectory(strExtract);
+            process.start(QString("grep -irH \"*.ko\" %1 ||"
+                                  "grep -irH \"insmod\" %1 ||"
+                                  "grep -irH \"modprobe\" %1 ||"
+                                  "grep -irH \"/lib/module\" %1").arg(strExtract));
+            if (process.waitForFinished()) {
+                //获取查找结果，有结果不为空
+                QString strKeyContent = process.readAllStandardOutput();
+                qInfo() << strKeyContent;
+                if (!strKeyContent.isEmpty()) {
+                    bsuccess = true;
+                }
+            }
         }
-        //查找关键字 ko insmod modprobe和 路径 /lib/module
-        process.setWorkingDirectory(strExtract);
-        process.start(QString("grep -irH \"*.ko\" %1 ||"
-                              "grep -irH \"insmod\" %1 ||"
-                              "grep -irH \"modprobe\" %1 ||"
-                              "grep -irH \"/lib/module\" %1").arg(strExtract));
-        if (!process.waitForFinished()) {
-            return  false;
-        }
-        //获取查找结果，有结果不为空
-        QString strKeyContent = process.readAllStandardOutput();
-        qInfo() << strKeyContent;
-        if (strKeyContent.isEmpty()) {
-            return  false;
-        }
+        //此处主动调用删除临时文件，临时文件在/tmp目录每次重启会自动清除，所以不对删除结果做处理
+        tmpDir.removeRecursively();
 
     }
+    return  bsuccess;
+}
+
+bool Utils::updateModDeps(bool bquick)
+{
+    QProcess process;
+    QString strcomd;
+    if (bquick) {
+        strcomd = QString("depmod %1").arg("--quick");
+    } else {
+        strcomd = QString("depmod %1").arg("--all");
+    }
+    process.start(strcomd);
+    if (!process.waitForFinished())
+        return  false;
+
     return  true;
 }

@@ -32,9 +32,13 @@ public:
     explicit DriverManager(QObject *parent = nullptr);
 
     bool unInstallDriver(const QString &moduleName); //驱动卸载
-    bool installDriver(const QString &pathList);  // 驱动安装
+    bool installDriver(const QString &filepath);  // 驱动安装
     //获取依赖当前模块在使用的模块
     QStringList checkModuleInUsed(const QString &modName);
+    //检查当前模块是否在黑名单
+    bool isBlackListed(const QString &modName);
+    //判断文件是否驱动包
+    bool isDriverPackage(const QString &filepath);
 
 private:
     bool unInstallModule(const QString &moduleName);
