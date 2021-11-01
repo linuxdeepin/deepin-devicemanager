@@ -55,5 +55,8 @@
         <file>icons/deepin/builtin/icons/device_server_96px.svg</file>
         <file>icons/deepin/builtin/icons/device_tablet_96px.svg</file>
         <file>icons/deepin/builtin/icons/warning_20px.svg</file>
+        <file>icons/deepin/builtin/icons/cautious_200px.png</file>
+        <file>icons/deepin/builtin/icons/fail_200px.png</file>
+        <file>icons/deepin/builtin/icons/success_200px.png</file>
     </qresource>
 </RCC>
