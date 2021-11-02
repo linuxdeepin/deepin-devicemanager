@@ -66,6 +66,7 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
         DLabel *label = new DLabel(strTitle);
         label->setMinimumHeight(20);
         label->setAlignment(Qt::AlignCenter);
+        label->setWordWrap(true);
         DFontSizeManager::instance()->bind(label, DFontSizeManager::T7, QFont::Medium);
 
         //透明度90
@@ -83,6 +84,7 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
         DLabel *label = new DLabel(strDesc);
         label->setMinimumHeight(20);
         label->setAlignment(Qt::AlignCenter);
+        label->setWordWrap(true);
         DFontSizeManager::instance()->bind(label, DFontSizeManager::T7, QFont::Medium);
 
         //透明度50
