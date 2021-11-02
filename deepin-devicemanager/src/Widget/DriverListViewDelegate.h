@@ -30,16 +30,8 @@ public:
     explicit DriverListViewDelegate(QObject *parent = nullptr);
     void paint(QPainter *painter, const QStyleOptionViewItem &option,
                const QModelIndex &index) const override;
-    QWidget *createEditor(QWidget *, const QStyleOptionViewItem &,
-                          const QModelIndex &) const override;
+
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-
-protected:
-    void initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const override;
-
-signals:
-
-public slots:
 };
 
 #endif // DRIVERLISTVIEWDELEGATE_H

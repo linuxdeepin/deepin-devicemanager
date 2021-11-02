@@ -120,14 +120,19 @@ void PageDriverControl::installDriverLogical()
     if(0 == curIndex){
         QString path = mp_PathDialog->path();
         bool includeSubdir = mp_PathDialog->includeSubdir();
+        if(path.isEmpty())
+            return;
         mp_NameDialog->loadAllDrivers(includeSubdir,path);
         mp_stackWidget->setCurrentIndex(1);
     }else if(1 == curIndex){
         removeBtn();
+        QString driveName = mp_NameDialog->selectName();
+        if (driveName.isEmpty())
+            return;
         mp_WaitDialog->setValue(0);
         mp_WaitDialog->setText(tr("updating"));
         mp_stackWidget->setCurrentIndex(2);
-        DBusDriverInterface::getInstance()->installDriver(m_DriverName);
+        DBusDriverInterface::getInstance()->installDriver(driveName);
     }
 }
 

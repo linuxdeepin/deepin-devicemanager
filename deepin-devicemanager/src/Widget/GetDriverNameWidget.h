@@ -22,11 +22,14 @@
 #ifndef GETDRIVERNAMEDIALOG_H
 #define GETDRIVERNAMEDIALOG_H
 
+#include "DriverListView.h"
+
 #include <DWidget>
+
+#include <QStandardItemModel>
 
 DWIDGET_BEGIN_NAMESPACE
 
-class DriverListView;
 class GetDriverNameWidget : public DWidget
 {
     Q_OBJECT
@@ -53,6 +56,11 @@ private:
     void init();
 
     /**
+     * @brief initConnections 绑定信号槽
+     */
+    void initConnections();
+
+    /**
      * @brief traverseFolders 遍历目录下的文件
      * @param includeSub 是否查找目录下的子目录
      * @param path 给定的目录
@@ -60,8 +68,22 @@ private:
      */
     void traverseFolders(bool includeSub, const QString& path, QStringList& lstDrivers);
 
+public slots:
+
+    /**
+     * @brief slotSelectedDriver 选中驱动属性设置
+     * @param row 当前选中行
+     */
+    void slotSelectedDriver(const QModelIndex &index);
+
 private:
     DriverListView    *mp_ListView;
+
+    QStandardItemModel *mp_model;
+
+    QStringList       mp_driverPathList;   //驱动路径列表
+    QStringList       mp_driversList;      //驱动名列表
+    int               mp_selectedRow = -1;  //当前选中行
 };
 DWIDGET_END_NAMESPACE
 #endif // GETDRIVERNAMEDIALOG_H

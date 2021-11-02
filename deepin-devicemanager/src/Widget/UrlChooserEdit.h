@@ -55,6 +55,11 @@ public slots:
      */
     void slotChooseUrl();
 
+    /**
+     * @brief slotCheckLocalFolder 检测是否本地路径
+     */
+    void slotCheckLocalFolder(const QString &path);
+
 
 private:
     DLineEdit *mp_urlEdit;

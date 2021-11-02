@@ -18,11 +18,10 @@
 #define DRIVERLISTVIEW_H
 
 #include <DTreeView>
-#include <DRadioButton>
 
 #include <QMouseEvent>
 
-DWIDGET_BEGIN_NAMESPACE
+DWIDGET_USE_NAMESPACE
 
 class DriverListView : public DTreeView
 {
@@ -39,7 +38,6 @@ public slots:
 protected:
     void paintEvent(QPaintEvent *event);
     void drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const;
-    void mouseReleaseEvent(QMouseEvent *event);
 };
-DWIDGET_END_NAMESPACE
+
 #endif // DRIVERLISTVIEW_H

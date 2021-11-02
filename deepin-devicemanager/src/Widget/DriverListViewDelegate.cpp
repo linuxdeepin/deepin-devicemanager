@@ -45,6 +45,17 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
         QStyledItemDelegate::paint(painter, option, index);
         return;
     }
+    {
+        QStyleOptionViewItem opt = option;
+        initStyleOption(&opt, index);
+
+        const QWidget *widget = option.widget;
+        QStyle *style = widget ? widget->style() : QApplication::style();
+        opt.text = "";
+        opt.icon = QIcon();
+        opt.palette.setBrush(QPalette::Highlight, Qt::transparent);
+        style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
+    }
 
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
@@ -75,15 +86,11 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     DPalette palette = dAppHelper->applicationPalette();
     QPen forground;
     forground.setColor(palette.color(cg, DPalette::Text));
-    if (opt.state & DStyle::State_Enabled) {
-        if (opt.state & DStyle::State_Selected) {
-//            forground.setColor(palette.color(cg, DPalette::HighlightedText));
-        }
-    }
+
+
     painter->setPen(forground);
     QRect rect = opt.rect;
     QFontMetrics fm(opt.font);
-    QPainterPath path, clipPath;
     QRect textRect = rect;
     switch (opt.viewItemPosition) {
     case QStyleOptionViewItem::Beginning: {
@@ -127,33 +134,9 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     painter->restore();
 }
 
-QWidget *DriverListViewDelegate::createEditor(QWidget *, const QStyleOptionViewItem &, const QModelIndex &) const
-{
-    return nullptr;
-}
-
 QSize DriverListViewDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QSize size = QStyledItemDelegate::sizeHint(option, index);
     size.setHeight(36);
     return size;
-}
-
-void DriverListViewDelegate::initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const
-{
-    option->showDecorationSelected = true;
-    bool ok = false;
-    if (index.data(Qt::TextAlignmentRole).isValid()) {
-        uint value = index.data(Qt::TextAlignmentRole).toUInt(&ok);
-        option->displayAlignment = static_cast<Qt::Alignment>(value);
-    }
-
-    if (!ok)
-        option->displayAlignment = Qt::AlignLeft | Qt::AlignVCenter;
-    option->textElideMode = Qt::ElideRight;
-    option->features = QStyleOptionViewItem::HasDisplay;
-    if (index.row() % 2 == 0)
-        option->features |= QStyleOptionViewItem::Alternate;
-    if (index.data(Qt::DisplayRole).isValid())
-        option->text = index.data().toString();
 }

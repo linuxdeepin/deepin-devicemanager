@@ -23,6 +23,8 @@
 
 #include <QHBoxLayout>
 #include <QFileDialog>
+#include <QDir>
+#include <QStorageInfo>
 
 
 UrlChooserEdit::UrlChooserEdit(QWidget *parent) : DWidget(parent)
@@ -37,6 +39,9 @@ void UrlChooserEdit::initUI()
 {
    setFixedSize(460,36);
    mp_urlEdit->setFixedSize(410,36);
+   mp_urlEdit->setText(QDir::homePath());
+   mp_urlEdit->lineEdit()->setReadOnly(true);
+   mp_urlEdit->setFocusPolicy(Qt::NoFocus);
    mp_urlBtn->setFixedSize(40,36);
    mp_urlBtn->setIcon(DStyleHelper(mp_urlEdit->style()).standardIcon(DStyle::SP_SelectElement, nullptr));
    mp_urlBtn->setIconSize(QSize(24,24));
@@ -52,6 +57,7 @@ void UrlChooserEdit::initUI()
 void UrlChooserEdit::initConnections()
 {
     connect(mp_urlBtn,&DSuggestButton::clicked, this, &UrlChooserEdit::slotChooseUrl);
+    connect(mp_urlEdit,&DLineEdit::textChanged,this, &UrlChooserEdit::slotCheckLocalFolder);
 }
 
 QString UrlChooserEdit::text() const
@@ -64,4 +70,14 @@ void UrlChooserEdit::slotChooseUrl()
     mp_urlEdit->clear();
     QString path = QFileDialog::getExistingDirectory(this,"","",QFileDialog::ReadOnly);
     mp_urlEdit->setText(path);
+}
+
+void UrlChooserEdit::slotCheckLocalFolder(const QString &path)
+{
+    mp_urlEdit->setAlert(false);
+    QStorageInfo info(path);                               //获取路径信息
+    if (!info.isValid() || !info.device().startsWith("/dev/")) {     //判断路径信息是不是本地路径
+        mp_urlEdit->setAlert(true);
+        mp_urlEdit->showAlertMessage(tr("Select a local folder please"),this,1000);
+    }
 }

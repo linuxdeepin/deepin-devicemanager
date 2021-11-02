@@ -21,11 +21,9 @@
 #include <DApplication>
 #include <DStyle>
 
-
 #include <QHeaderView>
 #include <QPainter>
-#include <QFrame>
-DWIDGET_BEGIN_NAMESPACE
+
 DriverListView::DriverListView(QWidget *parent) : DTreeView(parent)
 {
     initUI();
@@ -40,7 +38,7 @@ void DriverListView::initUI()
     setItemDelegate(delegate);
 
     setRootIsDecorated(false);
-
+    setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 void DriverListView::paintEvent(QPaintEvent *event)
@@ -113,11 +111,6 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
     } else {
         background = palette.color(cg, DPalette::Base);
     }
-//    if (options.state & DStyle::State_Enabled) {
-//        if (selectionModel()->isSelected(index)) {
-//            background = palette.color(cg, DPalette::Highlight);
-//        }
-//    }
     // 绘制整行背景，高度-2以让高分屏非整数缩放比例下无被选中的蓝色细线，防止原来通过delegate绘制单元格交替颜色背景出现的高分屏非整数缩放比例下qrect精度问题导致的横向单元格间出现白色边框
     QPainterPath path;
     QRect rowRect { options.rect.x(),
@@ -135,11 +128,4 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
     painter->restore();
 }
 
-void DriverListView::mouseReleaseEvent(QMouseEvent *event)
-{
-    Q_UNUSED(event)
-//    DRadioButton *btn = new DRadioButton(this);
-//   qInfo() << currentIndex().row();
-//   setIndexWidget(currentIndex(),btn);
-}
-DWIDGET_END_NAMESPACE
+
