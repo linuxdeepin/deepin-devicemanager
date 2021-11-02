@@ -95,6 +95,7 @@ const QString DeviceBluetooth::getOverviewInfo()
 
 EnableDeviceStatus DeviceBluetooth::setEnable(bool e)
 {
+    Q_UNUSED(e)
     // 设置设备状态
     return EDS_Faild;
 }

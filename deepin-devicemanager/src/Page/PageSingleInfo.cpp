@@ -3,6 +3,7 @@
 #include "MacroDefinition.h"
 #include "DeviceInfo.h"
 #include "PageTableWidget.h"
+#include "PageDriverControl.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -26,6 +27,8 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export"), this))
     , mp_Copy(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Copy"), this))
     , mp_Enable(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Enable"), this))
+    , mp_updateDriver(new QAction(tr("Update Driver"), this))
+    , mp_removeDriver(new QAction(tr("Remove Driver"), this))
     , mp_Menu(new DMenu(this))
     , mp_Device(nullptr)
     , m_SameDevice(false)
@@ -42,6 +45,8 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::exportInfo);
     connect(mp_Copy, &QAction::triggered, this, &PageSingleInfo::slotActionCopy);
     connect(mp_Enable, &QAction::triggered, this, &PageSingleInfo::slotActionEnable);
+    connect(mp_updateDriver, &QAction::triggered, this, &PageSingleInfo::slotActionUpdateDriver);
+    connect(mp_removeDriver, &QAction::triggered, this, &PageSingleInfo::slotActionRemoveDriver);
 }
 
 PageSingleInfo::~PageSingleInfo()
@@ -161,6 +166,9 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     }
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
+    mp_Menu->addSeparator();
+    mp_Menu->addAction(mp_updateDriver);
+    mp_Menu->addAction(mp_removeDriver);
     mp_Menu->exec(QCursor::pos());
 }
 
@@ -201,6 +209,18 @@ void PageSingleInfo::slotActionEnable()
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         }
     }
+}
+
+void PageSingleInfo::slotActionUpdateDriver()
+{
+    PageDriverControl* installDriver = new PageDriverControl(tr("Update Driver"), mp_Device->name(), "", true, this);
+    installDriver->show();
+}
+
+void PageSingleInfo::slotActionRemoveDriver()
+{
+    PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Driver"), mp_Device->name(), "typec"/*mp_Device->driver()*/, false, this);
+    rmDriver->show();
 }
 
 void PageSingleInfo::initWidgets()
