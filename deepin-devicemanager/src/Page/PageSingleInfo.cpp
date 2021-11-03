@@ -92,7 +92,7 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     // 设置设备状态
     if (mp_Content) {
-        mp_Content->setDeviceEnable(mp_Device->enable());
+        mp_Content->setDeviceEnable(mp_Device->enable(), mp_Device->available());
     }
 }
 

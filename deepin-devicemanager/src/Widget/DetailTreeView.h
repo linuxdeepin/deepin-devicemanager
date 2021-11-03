@@ -138,10 +138,16 @@ public:
     bool isCurDeviceEnable();
 
     /**
+     * @brief isCurDeviceAvailable 判断设备是否可用，通过设备的驱动是否被加载
+     * @return
+     */
+    bool isCurDeviceAvailable();
+
+    /**
      * @brief setCurDeviceState:设置当前设备状态
      * @param state true:启用;false:禁用
      */
-    void setCurDeviceState(bool state);
+    void setCurDeviceState(bool enable, bool available);
 
     /**
      * @brief isExpanded 判断是否展开
@@ -225,6 +231,7 @@ private:
     int                       m_LimitRow;         // 正常状态下，表格显示的行数
     bool                      m_IsExpand;         // 是否展开
     bool                      m_IsEnable;         // 是否启用
+    bool                      m_IsAvailable;
     QTableWidgetItem          *mp_OldItem;
     QTableWidgetItem          *mp_CurItem;
     qint64                    m_TimeStep;

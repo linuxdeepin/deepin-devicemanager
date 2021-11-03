@@ -208,6 +208,17 @@ const QString &DeviceInput::driver() const
     return m_Driver;
 }
 
+bool DeviceInput::available()
+{
+    if(driver().isEmpty()){
+        m_Available = false;
+    }
+    if("PS/2" == m_Interface){
+        m_Available = true;
+    }
+    return m_Available;
+}
+
 QString DeviceInput::subTitle()
 {
     // 获取子标题
@@ -284,13 +295,16 @@ void DeviceInput::loadOtherDeviceInfo()
 void DeviceInput::loadTableData()
 {
     // 加载表格数据
-    QString name;
-    if (!enable())
-        name = "(" + tr("Disable") + ") " + m_Name;
-    else
-        name = m_Name;
+    QString tName;
+    if (!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
+    }else if(!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }else{
+        tName = m_Name;
+    }
 
-    m_TableData.append(name);
+    m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }

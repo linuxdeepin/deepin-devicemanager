@@ -133,13 +133,16 @@ void DeviceCdrom::loadOtherDeviceInfo()
 void DeviceCdrom::loadTableData()
 {
     // 加载表格内容
-    QString name;
-    if (!enable())
-        name = "(" + tr("Disable") + ") " + m_Name;
-    else
-        name = m_Name;
+    QString tName;
+    if (!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
+    }else if(!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }else{
+        tName = m_Name;
+    }
 
-    m_TableData.append(name);
+    m_TableData.append(tName);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Type);
 }

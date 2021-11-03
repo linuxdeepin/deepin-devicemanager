@@ -1,15 +1,11 @@
 // 项目自身文件
 #include "DeviceInfo.h"
+#include "commondefine.h"
+#include"DeviceManager.h"
 
-// Qt库文件
-#include <QDebug>
-
-// Dtk头文件
 #include <DApplication>
 
-// 其它头文件
-#include "../commondefine.h"
-#include"DeviceManager.h"
+#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 
@@ -18,15 +14,11 @@ DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     , m_UniqueID("")
     , m_SysPath("")
     , m_HardwareClass("")
+    , m_Enable(true)
+    , m_CanEnable(false)
+    , m_Available(true)
+    , m_Index(0)
 {
-    // 设备可用
-    m_Enable = true;
-
-    // 设备ID
-    m_Index = 0;
-
-    // 设备不可被禁用
-    m_CanEnable = false;
 }
 
 DeviceBaseInfo::~DeviceBaseInfo()
@@ -414,7 +406,14 @@ EnableDeviceStatus DeviceBaseInfo::setEnable(bool)
 bool DeviceBaseInfo::enable()
 {
     return m_Enable;
-    //    return false;
+}
+
+bool DeviceBaseInfo::available()
+{
+    if(driver().isEmpty()){
+        m_Available = false;
+    }
+    return m_Available;
 }
 
 void DeviceBaseInfo::setCanEnale(bool can)

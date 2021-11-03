@@ -120,6 +120,12 @@ public:
     virtual bool enable();
 
     /**
+     * @brief availble 获取是否可用
+     * @return 返回是否可用
+     */
+    virtual bool available();
+
+    /**
      * @brief setCanEnale : set can enable or not
      * @param can
      */
@@ -330,6 +336,7 @@ protected:
     QSet<QString>                  m_FilterKey;     //<! 用于避免添加重复信息
     bool                           m_Enable;        //<! 设备是否是启用状态
     bool                           m_CanEnable;     //<! 设备是否可以启用禁用
+    bool                           m_Available;     //<! 是否可用
     int                            m_Index;         //<! 同名设备的索引
 
 private:

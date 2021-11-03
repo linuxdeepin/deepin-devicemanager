@@ -356,7 +356,13 @@ void DeviceStorage::loadTableHeader()
 void DeviceStorage::loadTableData()
 {
     // 加载表格数据
-    m_TableData.append(m_Model);
+    QString model;
+    if(!available()){
+        model = "(" + tr("Unavailable") + ") " + m_Model;
+    }else{
+        model = m_Model;
+    }
+    m_TableData.append(model);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_MediaType);
     m_TableData.append(m_Size);

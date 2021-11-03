@@ -52,13 +52,6 @@ public:
      */
     void setColumnAverage();
 
-    /**
-     * @brief updateCurItemEnable :更新当前item是否可用状态
-     * @param row 行号
-     * @param enable true:启用 false:禁用
-     */
-    void updateCurItemEnable(int row, int enable);
-
 signals:
     /**
      * @brief itemClicked:点击item发出信号
