@@ -282,11 +282,6 @@ protected:
     virtual void getKeyboardInfoFromLshw();
 
     /**
-     * @brief getKeyboardInfoFromCatDevices:从cat /proc/bus/input/devices获取键盘信息
-     */
-    virtual void getKeyboardInfoFromCatDevices();
-
-    /**
      * @brief getMouseInfoFromHwinfo:从hwinfo中获取鼠标信息
      */
     virtual void getMouseInfoFromHwinfo();

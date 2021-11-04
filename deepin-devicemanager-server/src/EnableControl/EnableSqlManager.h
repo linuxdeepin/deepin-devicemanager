@@ -70,7 +70,7 @@ public:
      * @brief insertDataToAuthorizedTable 将数据插入remove表格
      * @param key
      */
-    void insertDataToAuthorizedTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id);
+    void insertDataToAuthorizedTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device);
 
     /**
      * @brief removeDataFromAuthorizedTable 从数据库里面删除数据
@@ -82,6 +82,18 @@ public:
      * @brief updateDataToAuthorizedTable
      */
     void updateDataToAuthorizedTable(const QString& unique_id, const QString& path);
+
+    /**
+     * @brief updateDataToAuthorizedTable
+     * @param unique_id
+     * @param enable
+     */
+    void updateDataToAuthorizedTable(const QString& unique_id, bool enable);
+
+    /**
+     * @brief clearEnableFromAuthorizedTable 清空数据库里面 enable = 1 数据
+     */
+    void clearEnableFromAuthorizedTable();
 
     /**
      * @brief insertDataToAuthorizedTable 讲数据插入打印机表格
@@ -103,6 +115,13 @@ public:
      * @return
      */
     bool uniqueIDExisted(const QString& key);
+
+    /**
+     * @brief isUniqueIdEnabled 判断设备是否被禁用了
+     * @param key
+     * @return
+     */
+    bool isUniqueIdEnabled(const QString& key);
 
     /**
      * @brief removeInfo 返回数据库里面的所有信息

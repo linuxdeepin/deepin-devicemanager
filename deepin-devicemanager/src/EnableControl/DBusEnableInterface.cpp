@@ -43,30 +43,29 @@ bool DBusEnableInterface::getAuthorizedInfo(QString& info)
     }
 }
 
+bool DBusEnableInterface::isDeviceEnabled(const QString& unique_id)
+{
+    QDBusReply<bool> reply = mp_Iface->call("isDeviceEnabled", unique_id);
+    if (reply.isValid()) {
+        return reply.value();
+    }
+    return false;
+}
+
 bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device)
 {
-    QDBusReply<QString> reply = mp_Iface->call("enable", hclass, name, path, value, enable_device);
-    QString msg;
+    QDBusReply<bool> reply = mp_Iface->call("enable", hclass, name, path, value, enable_device);
     if (reply.isValid()) {
-        msg = reply.value();
-    }
-
-    if(msg == "1"){
-        return true;
+        return reply.value();
     }
     return false;
 }
 
 bool DBusEnableInterface::enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device)
 {
-    QDBusReply<QString> reply = mp_Iface->call("enablePrinter", hclass, name, path, enable_device);
-    QString msg;
+    QDBusReply<bool> reply = mp_Iface->call("enablePrinter", hclass, name, path, enable_device);
     if (reply.isValid()) {
-        msg = reply.value();
-    }
-
-    if(msg == "1"){
-        return true;
+        return reply.value();
     }
     return false;
 }

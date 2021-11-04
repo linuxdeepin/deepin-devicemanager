@@ -30,22 +30,29 @@ QString DBusEnableInterface::getAuthorizedInfo()
     return EnableSqlManager::getInstance()->authorizedInfo();
 }
 
-QString DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device)
+bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device)
 {
-    // 先从数据库中查找
+    // 先从数据库中查找路径，防止设备更换usb接口
     QString sPath = EnableSqlManager::getInstance()->authorizedPath(value);
     if(sPath.isEmpty()){
         sPath = path;
     }
-    QFile file;
-    if(file.exists(sPath+QString("/authorized"))){
-        return authorizedEnable(hclass, name, sPath, value, enable_device);
-    }else{
-        return removeEnable(hclass, name, path, enable_device);
+
+    // 判断是内置设备，还是外设，内置设备通过remove文件禁用，外设通过authorized文件禁用
+    bool res = false;
+    if(QFile::exists("/sys" + sPath + QString("/authorized"))){
+        modifyPath(sPath);
+        res = authorizedEnable(hclass, name, sPath, value, enable_device);
+    }else/* if(QFile::exists("/sys" + sPath + QString("/remove")))*/{
+        res = removeEnable(hclass, name, path, enable_device);
     }
+
+    if(enable_device)
+        emit update();
+    return res;
 }
 
-Q_SCRIPTABLE QString DBusEnableInterface::enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device)
+Q_SCRIPTABLE bool DBusEnableInterface::enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device)
 {
     ipp_op_t op = enable_device ? IPP_OP_RESUME_PRINTER : IPP_OP_PAUSE_PRINTER;
     char uri[HTTP_MAX_URI];
@@ -56,14 +63,14 @@ Q_SCRIPTABLE QString DBusEnableInterface::enablePrinter(const QString& hclass, c
     ippAddString(request,IPP_TAG_OPERATION,IPP_TAG_URI,"printer-uri",NULL,uri);
     const char* host = cupsServer();
     if(!host){
-        return "0";
+        return false;
     }
     int port = ippPort();
     int encrption = (http_encryption_t)cupsEncryption();
     int cancel = 0;
     http_t *http = httpConnect2(host,port,nullptr,AF_UNSPEC,(http_encryption_t)encrption,1,30000,&cancel);
     if(!http){
-        return "0";
+        return false;
     }
     answer = cupsDoRequest(http,request,"/admin/");
     ippDelete(answer);
@@ -75,115 +82,100 @@ Q_SCRIPTABLE QString DBusEnableInterface::enablePrinter(const QString& hclass, c
         EnableSqlManager::getInstance()->insertDataToPrinterTable(hclass, name, path);
     }
 
-    return "1";
+    return true;
 }
 
+Q_SCRIPTABLE bool DBusEnableInterface::isDeviceEnabled(const QString& unique_id)
+{
+    return EnableSqlManager::getInstance()->isUniqueIdEnabled(unique_id);
+}
 
-QString DBusEnableInterface::authorizedEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device)
+bool DBusEnableInterface::authorizedEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device)
 {
     // 通过authorized文件启用禁用设备
     // 0:表示禁用 ，1:表示启用
-    QFile file(path+QString("/authorized"));
+    QFile file("/sys" + path+QString("/authorized"));
     if(!file.open(QIODevice::ReadWrite)){
-        return "0";
+        return false;
     }
     if(enable_device){
-        qint64 len = file.write("1");
+        /*
+         启用的流程为：以 /devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0 为例
+         第一步: 向 /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0/authorized 文件中写 1
+         第二步: 向 /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/authorized 文件中写 0
+         第三步: 向 /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/authorized 文件中写 1
+         */
+        // 第一步
+        file.write("1");
         file.close();
-        if(len < 1){
-            return "0";
-        }
-        EnableSqlManager::getInstance()->removeDataFromAuthorizedTable(unique_id);
 
-        //*先判断后台内存里面有没有该数据
-        if(DeviceInfoManager::getInstance()->isPathExisted(path)){
-            return "1";
-        }
-        //*如果后台的内存里面没有数据则需要等待后台更新数据
-        emit update();
-        while(true){
-            QDir dir(path);
-            if(dir.exists())
-                break;
-            usleep(100);
-        }
-        while (MainJob::serverIsRunning()) {
-            usleep(1000);
-        }
+        // 第二步
+        QFileInfo fi(path);
+        QString pop = fi.path();
+        QFile fpop("/sys" + pop + QString("/authorized"));
+        if(!fpop.open(QIODevice::ReadWrite))
+            return false;
+        fpop.write("0");
+        fpop.close();
+
+        // 第三步
+        if(!fpop.open(QIODevice::ReadWrite))
+            return false;
+        fpop.write("1");
+        fpop.close();
+
+        EnableSqlManager::getInstance()->updateDataToAuthorizedTable(unique_id, enable_device);
     }else{
-        qint64 len = file.write("0");
+        file.write("0");
         file.close();
-        if(len < 1){
-            return "0";
-        }
-        EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass,name,path,unique_id);
+        EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass,name,path,unique_id,enable_device);
     }
-    return "1";
+    return true;
 }
 
-QString DBusEnableInterface::removeEnable(const QString& hclass, const QString& name, const QString& path, bool enable)
+bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& name, const QString& path, bool enable)
 {
     if(enable){
         // 1. 先rescan 向rescan写入1,则重新加载
         QFile file("/sys/bus/pci/rescan");
         if(!file.open(QIODevice::WriteOnly)){
-            return "0";
+            return false;
         }
-        qint64 len = file.write("1");
+        file.write("1");
         file.close();
-        if(len < 1){
-            return "0";
-        }
         EnableSqlManager::getInstance()->removeDateFromRemoveTable(path);
 
         // 2. 通知后台更新数据
         //*先判断后台内存里面有没有该数据
         if(DeviceInfoManager::getInstance()->isPathExisted(path)){
-            return "1";
-        }
-        //*如果后台的内存里面没有数据则需要等待后台更新数据
-        while(true){
-            QDir dir(path);
-            if(dir.exists())
-                break;
-            usleep(100);
-        }
-        emit update();
-        while (MainJob::serverIsRunning()) {
-            usleep(1000);
+            return true;
         }
 
         // 由于rescan会将所有的remove数据都回复，因此需要重新禁用其它设备
         QStringList rpList;
         EnableSqlManager::getInstance()->removePathList(rpList);
         foreach(const QString& path,rpList){
-            QFile filerp(path+QString("/remove"));
+            QFile filerp("/sys" + path+QString("/remove"));
             if(filerp.open(QIODevice::WriteOnly)){
                 filerp.write("1");
                 filerp.close();
             }
         }
-
-        // 3. 持久化保存
     }else{
         // 1. 直接remove写入
         // 通过remove文件禁用
         // 1:表示禁用 ，0:表示启用
-        QFile file(path+QString("/remove"));
+        QFile file("/sys" + path + QString("/remove"));
         if(!file.open(QIODevice::WriteOnly)){
-            return "0";
+            return false;
         }
-        qint64 len = file.write("1");
+        file.write("1");
         file.close();
-        if(len < 1){
-            return "0";
-        }
 
         // 2. 持久化保存
         EnableSqlManager::getInstance()->insertDataToRemoveTable(hclass, name, path);
     }
-
-    return "1";
+    return true;
 }
 
 void DBusEnableInterface::construct_uri(char *buffer, size_t buflen, const char *base, const char *value)
@@ -218,4 +210,9 @@ void DBusEnableInterface::construct_uri(char *buffer, size_t buflen, const char 
 
     if (d < buffer + buflen)
         *d = '\0';
+}
+
+void DBusEnableInterface::modifyPath(QString& path)
+{
+    path.replace(QRegExp("[1-9]$"),"0");
 }

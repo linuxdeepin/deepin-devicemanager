@@ -110,7 +110,6 @@ TEST_F(UT_DeviceInput, UT_DeviceInput_setInfoFromHwinfo_001)
     EXPECT_STREQ("usbhid", m_deviceInput->m_Driver.toStdString().c_str());
     EXPECT_STREQ("12 Mbps", m_deviceInput->m_Speed.toStdString().c_str());
     EXPECT_STREQ("usb@1:8", m_deviceInput->m_KeyToLshw.toStdString().c_str());
-    EXPECT_STREQ("event4", m_deviceInput->m_KeysToCatDevices.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceInput, UT_DeviceInput_setInfoFromHwinfo_002)
@@ -132,7 +131,6 @@ TEST_F(UT_DeviceInput, UT_DeviceInput_setInfoFromHwinfo_002)
     EXPECT_STREQ("usbhid", m_deviceInput->m_Driver.toStdString().c_str());
     EXPECT_STREQ("12 Mbps", m_deviceInput->m_Speed.toStdString().c_str());
     EXPECT_STREQ("usb@1:8", m_deviceInput->m_KeyToLshw.toStdString().c_str());
-    EXPECT_STREQ("mouse1", m_deviceInput->m_KeysToCatDevices.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceInput, UT_DeviceInput_setKLUInfoFromHwinfo_001)
@@ -152,7 +150,6 @@ TEST_F(UT_DeviceInput, UT_DeviceInput_setKLUInfoFromHwinfo_001)
     EXPECT_STREQ("usbhid", m_deviceInput->m_Driver.toStdString().c_str());
     EXPECT_STREQ("12 Mbps", m_deviceInput->m_Speed.toStdString().c_str());
     EXPECT_STREQ("usb@1:8", m_deviceInput->m_KeyToLshw.toStdString().c_str());
-    EXPECT_STREQ("mouse1", m_deviceInput->m_KeysToCatDevices.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceInput, UT_DeviceInput_setKLUInfoFromHwinfo_002)
@@ -174,7 +171,6 @@ TEST_F(UT_DeviceInput, UT_DeviceInput_setKLUInfoFromHwinfo_002)
     EXPECT_STREQ("usbhid", m_deviceInput->m_Driver.toStdString().c_str());
     EXPECT_STREQ("12 Mbps", m_deviceInput->m_Speed.toStdString().c_str());
     EXPECT_STREQ("usb@1:8", m_deviceInput->m_KeyToLshw.toStdString().c_str());
-    EXPECT_STREQ("event4", m_deviceInput->m_KeysToCatDevices.toStdString().c_str());
 }
 
 bool ut_isValueValid()
@@ -199,16 +195,6 @@ QMap<QString, QString> &ut_input_Info()
 bool ut_input_isDeviceEnable()
 {
     return true;
-}
-
-TEST_F(UT_DeviceInput, UT_DeviceInput_setInfoFromInput)
-{
-    Stub stub;
-    stub.set(ADDR(DeviceManager, inputInfo), ut_input_Info);
-    m_deviceInput->setInfoFromInput();
-    EXPECT_STREQ("Cherry Zhuhai MX board 8.0 Mouse", m_deviceInput->m_Name.toStdString().c_str());
-    EXPECT_STREQ("0003", m_deviceInput->m_keysToPairedDevice.toStdString().c_str());
-
 }
 
 TEST_F(UT_DeviceInput, UT_DeviceInput_setInfoFromBluetoothctl)

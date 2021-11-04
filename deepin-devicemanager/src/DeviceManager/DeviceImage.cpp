@@ -38,7 +38,7 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     if(mapInfo.find("unique_id") != mapInfo.end()){
         m_UniqueID = mapInfo["unique_id"];
         m_Name = mapInfo["name"];
-        m_SysPath = "/sys" + mapInfo["path"];
+        m_SysPath =mapInfo["path"];
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
         return;
@@ -46,22 +46,15 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     if(mapInfo.find("Enable") != mapInfo.end()){
         m_Enable = false;
     }
-    QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+]{4}.(.*)");
-    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
-        m_UniqueID = reUniqueId.cap(1);
-    }
-    m_SysPath = "/sys" + mapInfo["SysFS ID"];
-    m_SysPath.replace(mapInfo["SysFS BusID"],"");
-
+    setAttribute(mapInfo, "Module Alias", m_UniqueID);
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
-    setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Driver", m_Driver, true);//
     setAttribute(mapInfo, "Driver Modules", m_Driver, true);
-    setAttribute(mapInfo, "", m_MaximumPower);
     setAttribute(mapInfo, "Speed", m_Speed);
 
     // 获取映射到 lshw设备信息的 关键字
@@ -103,7 +96,7 @@ EnableDeviceStatus DeviceImage::setEnable(bool e)
     if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
         return EDS_Faild;
     }
-    bool res  = DBusEnableInterface::getInstance()->enable("class",m_Name,m_SysPath,m_UniqueID,e);
+    bool res  = DBusEnableInterface::getInstance()->enable("camera",m_Name,m_SysPath,m_UniqueID,e);
     if(res){
         m_Enable = e;
     }

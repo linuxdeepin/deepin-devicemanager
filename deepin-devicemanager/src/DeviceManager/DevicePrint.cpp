@@ -59,6 +59,11 @@ const QString &DevicePrint::driver() const
     return m_Driver;
 }
 
+bool DevicePrint::available()
+{
+    return true;
+}
+
 QString DevicePrint::subTitle()
 {
     return m_Name;
@@ -134,8 +139,6 @@ void DevicePrint::loadTableData()
     QString tName;
     if (!enable()){
         tName = "(" + tr("Disable") + ") " + m_Name;
-    }else if(!available()){
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
     }else{
         tName = m_Name;
     }

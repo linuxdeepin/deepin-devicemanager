@@ -59,7 +59,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     if(mapInfo.find("unique_id") != mapInfo.end()){
         m_UniqueID = mapInfo["unique_id"];
         m_Name = mapInfo["name"];
-        m_SysPath = "/sys" + mapInfo["path"];
+        m_SysPath = mapInfo["path"];
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
         return;
@@ -69,16 +69,12 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     }
     // 设置设备基本属性
     setAttribute(mapInfo, "Device", m_Name);
+    setAttribute(mapInfo, "name", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
-
-    QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+]{4}.(.*)");
-    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
-        m_UniqueID = reUniqueId.cap(1);
-    }
-    m_SysPath = "/sys" + mapInfo["SysFS ID"];
-    m_SysPath.replace(mapInfo["SysFS BusID"],"");
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
+    setAttribute(mapInfo, "Module Alias", m_UniqueID);
 
     // 获取键盘的接口类型
     if (mapInfo.find("Hotplug") != mapInfo.end())
@@ -106,18 +102,6 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         if (chs.size() == 2)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
     }
-
-    // 获取映射到  cat /proc/bus/input/devices 里面的关键字
-    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
-    if (re.exactMatch(mapInfo["Device File"]) || re.exactMatch(mapInfo["Device Files"])) {
-        m_KeysToCatDevices = re.cap(1);
-    } else {
-        QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
-        if (rem.exactMatch(mapInfo["Device File"]))
-            m_KeysToCatDevices = rem.cap(1);
-    }
-    // 由cat /proc/bus/devices/input设置设备信息
-    setInfoFromInput();
 
     // 由bluetoothctl paired-devices设置设备接口
     setInfoFromBluetoothctl();
@@ -156,34 +140,11 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
     }
 
-    // 获取映射到  cat /proc/bus/input/devices 里面的关键字
-    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
-    if (re.exactMatch(mapInfo["Device File"]) || re.exactMatch(mapInfo["Device Files"])) {
-        m_KeysToCatDevices = re.cap(1);
-    } else {
-        QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
-        if (rem.exactMatch(mapInfo["Device File"]))
-            m_KeysToCatDevices = rem.cap(1);
-    }
-    // 由cat /proc/bus/devices/input设置设备信息
-    setInfoFromInput();
-
     // 由bluetoothctl paired-devices设置设备接口
     setInfoFromBluetoothctl();
 
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
-}
-
-void DeviceInput::setInfoFromInput()
-{
-    // 获取对应的由cat /proc/bus/devices/input读取的设备信息
-    const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
-    // 设置Name属性
-    setAttribute(mapInfo, "Name", m_Name, true);
-
-    // Uniq属性标识蓝牙设备Mac地址
-    m_keysToPairedDevice = mapInfo["Uniq"].toUpper();
 }
 
 void DeviceInput::setInfoFromBluetoothctl()
@@ -304,7 +265,7 @@ void DeviceInput::loadTableData()
         tName = m_Name;
     }
 
-    m_TableData.append(m_Name);
+    m_TableData.append(tName);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }

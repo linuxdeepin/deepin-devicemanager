@@ -185,6 +185,11 @@ const QString &DeviceMonitor::driver() const
     return m_Driver;
 }
 
+bool DeviceMonitor::available()
+{
+    return true;
+}
+
 QString DeviceMonitor::subTitle()
 {
     return m_Name;

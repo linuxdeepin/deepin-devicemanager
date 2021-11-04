@@ -226,7 +226,6 @@ void DeviceGenerator::generatorKeyboardDevice()
     // 生成键盘
     getKeyboardInfoFromHwinfo();
     getKeyboardInfoFromLshw();
-    getKeyboardInfoFromCatDevices();
 }
 
 void DeviceGenerator::generatorMouseDevice()
@@ -234,7 +233,6 @@ void DeviceGenerator::generatorMouseDevice()
     // 生成鼠标
     getMouseInfoFromHwinfo();
     getMouseInfoFromLshw();
-    getMouseInfoFromCatDevices();
 }
 
 void DeviceGenerator::generatorPrinterDevice()
@@ -703,10 +701,6 @@ void DeviceGenerator::getKeyboardInfoFromLshw()
 
         DeviceManager::instance()->setKeyboardInfoFromLshw(*it);
     }
-}
-
-void DeviceGenerator::getKeyboardInfoFromCatDevices()
-{
 }
 
 void DeviceGenerator::getMouseInfoFromHwinfo()

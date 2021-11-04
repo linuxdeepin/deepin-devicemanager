@@ -480,10 +480,10 @@ void CmdTool::updateMapInfo(QList<QMap<QString,QString>>& removeLstMap, QMap<QSt
 {
     QList<QMap<QString,QString>>::iterator it = removeLstMap.begin();
     for (;it != removeLstMap.end();++it) {
-
-        QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+]{4}.(.*)");
-        if (reUniqueId.exactMatch(mapInfo["Unique ID"]) && (*it)["unique_id"] == reUniqueId.cap(1)){
-            mapInfo.insert("Enable","false");
+        if (mapInfo.find("Module Alias") != mapInfo.end() && (*it)["unique_id"] == mapInfo["Module Alias"]){
+            if(!DBusEnableInterface::getInstance()->isDeviceEnabled((*it)["unique_id"]))
+                mapInfo.insert("Enable","false");
+            mapInfo.insert("name",(*it)["name"]);
             removeLstMap.erase(it);
             return;
         }
@@ -909,6 +909,10 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
                     mapInfo[words[0].trimmed()] = words[1].trimmed();
             }
         }
+    }
+
+    if(mapInfo.find("Module Alias") != mapInfo.end()){
+        mapInfo["Module Alias"].replace(QRegExp("[0-9a-zA-Z]{10}$"),"");
     }
 }
 

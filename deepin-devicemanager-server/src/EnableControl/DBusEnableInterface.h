@@ -52,17 +52,24 @@ public slots:
      * @param enable_device 启用或者禁用
      * @return 是否成功
      */
-    Q_SCRIPTABLE QString enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device);
+    Q_SCRIPTABLE bool enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device);
 
     /**
      * @brief enablePrinter 禁用打印机
-     * @param hclass
-     * @param name
-     * @param path
-     * @param enable_device
+     * @param hclass 设备类型
+     * @param name 打印机名称
+     * @param path -----
+     * @param enable_device 是否被启用
      * @return
      */
-    Q_SCRIPTABLE QString enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device);
+    Q_SCRIPTABLE bool enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device);
+
+    /**
+     * @brief isDeviceEnabled 判断设备是否被禁用，通过查询数据库来判断
+     * @param unique_id 设备的唯一 sid
+     * @return
+     */
+    Q_SCRIPTABLE bool isDeviceEnabled(const QString& unique_id);
 
 signals:
     void update();
@@ -76,7 +83,7 @@ private:
      * @param enable 启用或者禁用
      * @return
      */
-    QString authorizedEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device);
+    bool authorizedEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device);
 
     /**
      * @brief removeEnable 通过remove文件启用禁用设备
@@ -85,7 +92,7 @@ private:
      * @param enable 启用或者禁用
      * @return
      */
-    QString removeEnable(const QString& hclass, const QString& name, const QString& path, bool enable);
+    bool removeEnable(const QString& hclass, const QString& name, const QString& path, bool enable);
 
     /**
      * @brief construct_uri
@@ -95,6 +102,14 @@ private:
      * @param value
      */
     void construct_uri(char *buffer, size_t buflen, const char *base, const char *value);
+
+    /**
+     * @brief modifyPath 修正路径 保证xxx.0
+     *                比如将  /devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.1
+     *                修正为  /devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0
+     * @param path 需要修正的路径 /devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0
+     */
+    void modifyPath(QString& path);
 };
 
 #endif // DBUSENABLEINTERFACE_H

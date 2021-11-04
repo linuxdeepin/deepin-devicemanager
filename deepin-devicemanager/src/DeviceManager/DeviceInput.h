@@ -120,10 +120,6 @@ protected:
     void loadTableData() override;
 
 private:
-    /**
-     * @brief setNameFromInput:从cat /proc/bus/input/devices获取设备信息
-     */
-    void setInfoFromInput();
 
     /**
      * @brief setInfoFromBluetoothctl:由bluetoothctl paired-devices设置设备接口
@@ -145,7 +141,6 @@ private:
     QString             m_KeyToLshw;                    //<!
 
     QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
-    QString             m_KeysToCatDevices;             //<! 【用来标识唯一键盘】
 };
 
 #endif // DEVICEINPUT_H

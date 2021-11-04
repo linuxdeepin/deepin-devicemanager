@@ -34,8 +34,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     if(mapInfo.find("path") != mapInfo.end()){
         setAttribute(mapInfo, "name", m_Name);
-        m_SysPath = "/sys" + mapInfo["path"];
-        m_UniqueID = m_Name;
+        m_SysPath = mapInfo["path"];
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
         return;
@@ -44,22 +43,14 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "", m_Version);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "IRQ", m_Irq);
     setAttribute(mapInfo, "Memory Range", m_Memory);
-    setAttribute(mapInfo, "", m_Width);
-    setAttribute(mapInfo, "", m_Clock);
-    setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Driver Modules", m_DriverModules); // 驱动模块
-
-    m_SysPath = "/sys" + mapInfo["SysFS ID"];
-    QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+-]{4}\\.(.*)");
-    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
-        m_UniqueID = reUniqueId.cap(1);
-    }
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
+    setAttribute(mapInfo, "Module Alias", m_UniqueID);
 
     //2. 获取设备的唯一标识
     /*

@@ -43,6 +43,7 @@ MainJob::MainJob(QObject *parent)
     }
 
     // 后台加载后先禁用设备
+    EnableSqlManager::getInstance()->clearEnableFromAuthorizedTable();
     disableDevice();
 }
 
@@ -175,19 +176,16 @@ void MainJob::disableDevice()
         if(!getMapInfo(item,mapItem))
             continue;
         // 防止禁用的设备被启用
-        QString uniqueID = "";
-        QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+]{4}.(.*)");
-        if (reUniqueId.exactMatch(mapItem["Unique ID"])){
-            uniqueID = reUniqueId.cap(1);
-        }
+        QString uniqueID = mapItem["Module Alias"];
+        uniqueID.replace(QRegExp("[0-9a-zA-Z]{10}$"),"");
         if(uniqueID.isEmpty()){
             return;
         }
 
-        QString path = "/sys" + mapItem["SysFS ID"];
-        path.replace(mapItem["SysFS BusID"],"");
+        QString path = mapItem["SysFS ID"];
+        path.replace(QRegExp("[1-9]$"),"0");
         if(EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID)){
-            QFile file(path+QString("authorized"));
+            QFile file("/sys" + path + QString("/authorized"));
             if(!file.open(QIODevice::ReadWrite)){
                 return;
             }
@@ -202,7 +200,6 @@ void MainJob::disableDevice()
     QStringList rpList;
     EnableSqlManager::getInstance()->removePathList(rpList);
     foreach(const QString& path,rpList){
-        qInfo() << "path003 : " << path;
         QFile file(path+QString("/remove"));
         if(file.open(QIODevice::WriteOnly)){
             file.write("1");
@@ -223,7 +220,7 @@ bool MainJob::getMapInfo(const QString& item,QMap<QString,QString>& mapInfo)
         QStringList words = line.split(": ");
         if(words.size() != 2)
             continue;
-        mapInfo.insert(words[0].trimmed(),words[1].trimmed());
+        mapInfo.insert(words[0].trimmed(),words[1].replace("\"","").trimmed());
     }
 
     // hub为usb接口，可以直接过滤

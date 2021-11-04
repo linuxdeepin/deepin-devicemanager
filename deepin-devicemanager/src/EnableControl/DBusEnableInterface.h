@@ -64,6 +64,13 @@ public:
     bool getAuthorizedInfo(QString& lst);
 
     /**
+     * @brief isDeviceEnabled 判断设备是否被禁用 通过后台查询
+     * @param unique_id 设备的唯一标识
+     * @return
+     */
+    bool isDeviceEnabled(const QString& unique_id);
+
+    /**
      * @brief enable 启用禁用
      * @param name 唯一标识
      * @param path 系统路径
