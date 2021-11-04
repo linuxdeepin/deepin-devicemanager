@@ -91,6 +91,8 @@ public:
     virtual void setDeviceInfoNum(int num);
 
     virtual int getDeviceInfoNum();
+
+    bool m_driverPagedOpened = false;
 protected:
     void paintEvent(QPaintEvent *e) override;
 

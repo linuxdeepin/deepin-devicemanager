@@ -31,7 +31,7 @@ void GetDriverPathWidget::init()
     mainLayout->setContentsMargins(0,10,0,10);
 
     QHBoxLayout *hLayout1 = new QHBoxLayout;
-    DLabel *titleLable = new DLabel(QObject::tr("Select the location of the driver"),this);
+    DLabel *titleLable = new DLabel(QObject::tr("Search for drivers in this path"),this);
     hLayout1->addStretch();
     hLayout1->addWidget(titleLable);
     hLayout1->addStretch();

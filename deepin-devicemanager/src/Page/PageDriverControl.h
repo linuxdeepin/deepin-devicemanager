@@ -3,6 +3,7 @@
 
 #include <DStackedWidget>
 #include <DDialog>
+#include <DLabel>
 
 DWIDGET_BEGIN_NAMESPACE
 //using namespace Dtk::Widget;
@@ -97,6 +98,7 @@ private:
     GetDriverPathWidget        *mp_PathDialog;
     GetDriverNameWidget        *mp_NameDialog;
     DriverWaitingWidget        *mp_WaitDialog;
+    DLabel                     *mp_tipLabel;
     bool                       m_Install;
     QString                    m_DriverName;
 };

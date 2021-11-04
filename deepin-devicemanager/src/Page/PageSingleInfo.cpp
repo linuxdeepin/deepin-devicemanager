@@ -27,8 +27,8 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export"), this))
     , mp_Copy(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Copy"), this))
     , mp_Enable(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Enable"), this))
-    , mp_updateDriver(new QAction(tr("Update Driver"), this))
-    , mp_removeDriver(new QAction(tr("Remove Driver"), this))
+    , mp_updateDriver(new QAction(tr("Update drivers"), this))
+    , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
     , mp_Menu(new DMenu(this))
     , mp_Device(nullptr)
     , m_SameDevice(false)
@@ -145,9 +145,19 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
 {
     // 显示右键菜单
     mp_Menu->clear();
-    mp_Refresh->setEnabled(true);
-    mp_Export->setEnabled(true);
-    mp_Copy->setEnabled(true);
+    if(!m_driverPagedOpened){
+        mp_Refresh->setEnabled(true);
+        mp_Export->setEnabled(true);
+        mp_Copy->setEnabled(true);
+        mp_updateDriver->setEnabled(true);
+        mp_removeDriver->setEnabled(true);
+    } else {
+        mp_Refresh->setEnabled(false);
+        mp_Export->setEnabled(false);
+        mp_Copy->setEnabled(false);
+        mp_updateDriver->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+    }
     mp_Menu->addAction(mp_Copy);
 
     if (!mp_Device)
@@ -161,6 +171,8 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
             mp_Refresh->setEnabled(false);
             mp_Export->setEnabled(false);
             mp_Copy->setEnabled(false);
+            mp_updateDriver->setEnabled(false);
+            mp_removeDriver->setEnabled(false);
         }
         mp_Menu->addAction(mp_Enable);
     }
@@ -213,14 +225,18 @@ void PageSingleInfo::slotActionEnable()
 
 void PageSingleInfo::slotActionUpdateDriver()
 {
-    PageDriverControl* installDriver = new PageDriverControl(tr("Update Driver"), mp_Device->name(), "", true, this);
+    PageDriverControl* installDriver = new PageDriverControl(tr("Update Drivers"), mp_Device->name(), "", true, this);
     installDriver->show();
+    m_driverPagedOpened = true;
+    connect(installDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
 }
 
 void PageSingleInfo::slotActionRemoveDriver()
 {
-    PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Driver"), mp_Device->name(), "typec"/*mp_Device->driver()*/, false, this);
+    PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Drivers"), mp_Device->name(), mp_Device->driver(), false, this);
     rmDriver->show();
+    m_driverPagedOpened = true;
+    connect(rmDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
 }
 
 void PageSingleInfo::initWidgets()

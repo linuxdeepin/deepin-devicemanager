@@ -6,13 +6,18 @@
 #include "drivericonwidget.h"
 
 #include <DBlurEffectWidget>
+#include <DWidget>
+#include <DApplicationHelper>
+#include <DPalette>
 
+#include <QVBoxLayout>
 #include <QDBusConnection>
 
 DWIDGET_BEGIN_NAMESPACE
 PageDriverControl::PageDriverControl(QString operation, QString deviceName, QString driverName, bool install, QWidget *parent)
     :DDialog (parent)
     , mp_stackWidget(new DStackedWidget)
+    , mp_tipLabel(new DLabel)
     , m_Install(install)
     , m_DriverName(driverName)
 {
@@ -27,12 +32,25 @@ PageDriverControl::PageDriverControl(QString operation, QString deviceName, QStr
     widget->setBlurEnabled(false);
     setAttribute(Qt::WA_NoSystemBackground, false);
 
+    DWidget *cenWidget = new DWidget;
+    mp_tipLabel->setFixedHeight(15);
+    mp_tipLabel->setAlignment(Qt::AlignCenter);
+    QVBoxLayout *vLayout = new QVBoxLayout;
+    vLayout->setContentsMargins(0,0,0,0);
+    vLayout->addWidget(mp_stackWidget);
+    vLayout->addWidget(mp_tipLabel);
+    cenWidget->setLayout(vLayout);
+
+    DPalette pa = DApplicationHelper::instance()->palette(mp_tipLabel);
+    pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
+    DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
+
     if(m_Install){
         initInstallWidget();
     }else{
         initUninstallWidget();
     }
-    addContent(mp_stackWidget);
+    addContent(cenWidget);
     connect(DBusDriverInterface::getInstance(),&DBusDriverInterface::processChange,this,&PageDriverControl::slotProcessChange);
     connect(DBusDriverInterface::getInstance(),&DBusDriverInterface::processEnd,this,&PageDriverControl::slotProcessEnd);
 }
@@ -96,15 +114,15 @@ void PageDriverControl::slotProcessChange(qint32 value,QString detail)
 
 void PageDriverControl::slotProcessEnd(bool sucess)
 {
-    QString successStr = m_Install ? tr("Driver Update Successfully") : tr("Driver Uninstall Successfully");
-    QString failedStr = m_Install ? tr("Driver Update Failed") : tr("Driver Uninstall Failed");
+    QString successStr = m_Install ? tr("Update successful") : tr("Uninstallation successful");
+    QString failedStr = m_Install ? tr("Update failed") : tr("Uninstallation failed");
     QString status = sucess ? successStr : failedStr;
     QString iconPath = sucess ? "success" : "fail";
     QIcon icon(QIcon::fromTheme(iconPath));
     QPixmap pic = icon.pixmap(80, 80);
     DriverIconWidget* widget = new DriverIconWidget(pic,status,"",this);
     mp_stackWidget->addWidget(widget);
-    this->addButton(tr("Sure", "button"), true);
+    this->addButton(tr("OK", "button"), true);
     connect(this->getButton(0), &QPushButton::clicked, this, &DDialog::close);
     mp_stackWidget->setCurrentIndex(mp_stackWidget->currentIndex() + 1);
 }
@@ -116,19 +134,26 @@ void PageDriverControl::removeBtn()
 
 void PageDriverControl::installDriverLogical()
 {
+    mp_tipLabel->clear();
     int curIndex = mp_stackWidget->currentIndex();
     if(0 == curIndex){
         QString path = mp_PathDialog->path();
+        QFile file(path);
         bool includeSubdir = mp_PathDialog->includeSubdir();
-        if(path.isEmpty())
+        if(path.isEmpty() || !file.exists()){
+            mp_tipLabel->setText(tr("The selected folder does not exist, please select again"));
             return;
+        }
         mp_NameDialog->loadAllDrivers(includeSubdir,path);
         mp_stackWidget->setCurrentIndex(1);
     }else if(1 == curIndex){
-        removeBtn();
         QString driveName = mp_NameDialog->selectName();
-        if (driveName.isEmpty())
+        QFile file(driveName);
+        if (driveName.isEmpty() || !file.exists()){
+            mp_tipLabel->setText(tr("The selected file does not exist, please select again"));
             return;
+        }
+        removeBtn();
         mp_WaitDialog->setValue(0);
         mp_WaitDialog->setText(tr("updating"));
         mp_stackWidget->setCurrentIndex(2);

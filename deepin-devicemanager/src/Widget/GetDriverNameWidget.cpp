@@ -22,11 +22,11 @@ void GetDriverNameWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     DFrame *frame = new DFrame;
-    frame->setFixedSize(460,180);
+    frame->setFixedSize(460,165);
     mainLayout->setContentsMargins(0,0,0,0);
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->setContentsMargins(0,0,0,0);
-    DLabel *titleLable = new DLabel(tr("Select the driver that needs to be updated"));
+    DLabel *titleLable = new DLabel(tr("Select a driver for update"));
     hLayout->addStretch();
     hLayout->addWidget(titleLable);
     hLayout->addStretch();
@@ -78,6 +78,7 @@ void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString& path)
         mp_model->setItem(i,0,icomItem);
         mp_model->setItem(i,1,textItem);
         textItem->setCheckable(true);
+        textItem->setToolTip(lstDrivers[i]);
     }
 
     mp_ListView->setModel(mp_model);
