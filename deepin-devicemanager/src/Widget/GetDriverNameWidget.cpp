@@ -22,7 +22,7 @@ void GetDriverNameWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     DFrame *frame = new DFrame;
-    frame->setFixedSize(460,165);
+    frame->setFixedSize(460,170);
     mainLayout->setContentsMargins(0,0,0,0);
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->setContentsMargins(0,0,0,0);
@@ -32,7 +32,7 @@ void GetDriverNameWidget::init()
     hLayout->addStretch();
 
     QHBoxLayout *driverLayout = new QHBoxLayout;
-    driverLayout->setContentsMargins(0,10,0,10);
+    driverLayout->setContentsMargins(0,0,0,10);
     driverLayout->addStretch();
     driverLayout->addWidget(frame);
     driverLayout->addStretch();

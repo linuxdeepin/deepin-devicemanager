@@ -38,6 +38,7 @@ PageDriverControl::PageDriverControl(QString operation, QString deviceName, QStr
     QVBoxLayout *vLayout = new QVBoxLayout;
     vLayout->setContentsMargins(0,0,0,0);
     vLayout->addWidget(mp_stackWidget);
+    vLayout->addSpacing(5);
     vLayout->addWidget(mp_tipLabel);
     cenWidget->setLayout(vLayout);
 
