@@ -11,7 +11,6 @@
 LoadInfoThread::LoadInfoThread()
     : mp_ReadFilePool()
     , mp_GenerateDevicePool()
-    , mp_ZmqOrder(nullptr)
     , m_Running(false)
     , m_FinishedReadFilePool(false)
     , m_Start(true)

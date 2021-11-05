@@ -432,6 +432,11 @@ void DeviceBaseInfo::setHardwareClass(const QString& hclass)
     m_HardwareClass = hclass;
 }
 
+const QString& DeviceBaseInfo::hardwareClass() const
+{
+    return m_HardwareClass;
+}
+
 const QString DeviceBaseInfo::getOverviewInfo()
 {
     return QString("");

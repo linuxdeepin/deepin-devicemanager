@@ -246,6 +246,7 @@ void DeviceGenerator::generatorPrinterDevice()
 
         DevicePrint *device = new DevicePrint() ;
         device->setInfo(*it);
+        device->setHardwareClass("printer");
         DeviceManager::instance()->addPrintDevice(device);
     }
 }

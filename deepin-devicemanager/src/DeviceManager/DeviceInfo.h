@@ -144,6 +144,12 @@ public:
     void setHardwareClass(const QString& hclass);
 
     /**
+     * @brief hardwareClass
+     * @return
+     */
+    const QString& hardwareClass() const;
+
+    /**
      * @brief isValid：判断属性值是否有效
      * @param value：属性值
      * @return true:属性值有效
