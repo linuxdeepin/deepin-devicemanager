@@ -17,6 +17,7 @@
 // Qt库文件
 #include <QVBoxLayout>
 #include <QClipboard>
+#include <QProcess>
 
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
@@ -225,6 +226,12 @@ void PageSingleInfo::slotActionEnable()
 
 void PageSingleInfo::slotActionUpdateDriver()
 {
+    //打印设备更新驱动时，通过dde-printer来操作
+    if(mp_Device->hardwareClass() == "printer") {
+        if(!QProcess::startDetached("dde-printer"))
+            qInfo() << "dde-printer startDetached error";
+        return;
+    }
     PageDriverControl* installDriver = new PageDriverControl(tr("Update Drivers"), mp_Device->name(), "", true, this);
     installDriver->show();
     m_driverPagedOpened = true;
@@ -233,6 +240,13 @@ void PageSingleInfo::slotActionUpdateDriver()
 
 void PageSingleInfo::slotActionRemoveDriver()
 {
+    //打印设备卸载驱动时，通过dde-printer来操作
+    if(mp_Device->hardwareClass() == "printer") {
+        if(!QProcess::startDetached("dde-printer"))
+            qInfo() << "dde-printer startDetached error";
+        return;
+    }
+
     PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Drivers"), mp_Device->name(), mp_Device->driver(), false, this);
     rmDriver->show();
     m_driverPagedOpened = true;
