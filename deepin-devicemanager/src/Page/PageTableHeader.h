@@ -75,6 +75,8 @@ signals:
      * @param enable 禁用/启用
      */
     void enableDevice(int row, bool enable);
+    void uninstallDriver(int row);
+    void installDriver(int row);
 
 protected:
     void paintEvent(QPaintEvent *e) override;

@@ -161,7 +161,7 @@ void PageDriverControl::installDriverLogical()
         }
         removeBtn();
         mp_WaitDialog->setValue(0);
-        mp_WaitDialog->setText(tr("updating"));
+        mp_WaitDialog->setText(tr("Updating"));
         mp_stackWidget->setCurrentIndex(2);
         DBusDriverInterface::getInstance()->installDriver(driveName);
     }

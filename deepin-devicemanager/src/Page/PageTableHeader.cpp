@@ -27,6 +27,8 @@ PageTableHeader::PageTableHeader(QWidget *parent)
     connect(mp_Table, &TableWidget::refreshInfo, this, &PageTableHeader::refreshInfo);
     connect(mp_Table, &TableWidget::exportInfo, this, &PageTableHeader::exportInfo);
     connect(mp_Table, &TableWidget::enableDevice, this, &PageTableHeader::enableDevice);
+    connect(mp_Table, &TableWidget::installDriver, this, &PageTableHeader::installDriver);
+    connect(mp_Table, &TableWidget::uninstallDriver, this, &PageTableHeader::uninstallDriver);
 }
 
 PageTableHeader::~PageTableHeader()

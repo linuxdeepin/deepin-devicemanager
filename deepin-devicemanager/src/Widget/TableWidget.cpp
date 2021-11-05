@@ -29,6 +29,8 @@ TableWidget::TableWidget(QWidget *parent)
     , mp_Enable(new QAction(tr("Disable"), this))
     , mp_Refresh(new QAction(/*QIcon::fromTheme("view-refresh"), */tr("Refresh"), this))
     , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export"), this))
+    , mp_updateDriver(new QAction(tr("Update drivers"), this))
+    , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
     , mp_Menu(new DMenu(this))
     , m_Enable(false)
 
@@ -44,6 +46,8 @@ TableWidget::TableWidget(QWidget *parent)
     connect(mp_Refresh, &QAction::triggered, this, &TableWidget::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &TableWidget::slotActionExport);
     connect(mp_Enable, &QAction::triggered, this, &TableWidget::slotActionEnable);
+    connect(mp_updateDriver, &QAction::triggered, this, &TableWidget::slotActionUpdateDriver);
+    connect(mp_removeDriver, &QAction::triggered, this, &TableWidget::slotActionRemoveDriver);
 }
 
 TableWidget::~TableWidget()
@@ -192,6 +196,9 @@ void TableWidget::slotShowMenu(const QPoint &)
 
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
+    mp_Menu->addSeparator();
+    mp_Menu->addAction(mp_updateDriver);
+    mp_Menu->addAction(mp_removeDriver);
     mp_Menu->exec(QCursor::pos());
 }
 
@@ -218,6 +225,16 @@ void TableWidget::slotActionEnable()
         // unenable device
         emit enableDevice(mp_Table->currentRow(), false);
     }
+}
+
+void TableWidget::slotActionUpdateDriver()
+{
+    emit installDriver(mp_Table->currentRow());
+}
+
+void TableWidget::slotActionRemoveDriver()
+{
+    emit uninstallDriver(mp_Table->currentRow());
 }
 
 void TableWidget::slotItemClicked(const QModelIndex &index)

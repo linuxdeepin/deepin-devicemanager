@@ -88,8 +88,16 @@ public:
      */
     virtual bool isBaseBoard() {return false;}
 
+    /**
+     * @brief setDeviceInfoNum 设置设备信息数目
+     * @param num
+     */
     virtual void setDeviceInfoNum(int num);
 
+    /**
+     * @brief getDeviceInfoNum 获取设备信息数目
+     * @return
+     */
     virtual int getDeviceInfoNum();
 
     bool m_driverPagedOpened = false;
