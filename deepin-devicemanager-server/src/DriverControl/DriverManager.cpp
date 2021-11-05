@@ -21,7 +21,9 @@
 #include "DriverManager.h"
 #include "Utils.h"
 #include "ModCore.h"
+#include "DebInstaller.h"
 
+#include <QThread>
 #include <QFile>
 #include <QMimeDatabase>
 #include <QMimeType>
@@ -33,7 +35,38 @@ DriverManager::DriverManager(QObject *parent)
     : QObject(parent)
     , mp_modcore(new ModCore(this))
 {
+    mp_deboperatethread = new QThread(this);
+    mp_debinstaller = new DebInstaller;
+    mp_debinstaller->moveToThread(mp_deboperatethread);
+    initConnections();
+}
 
+DriverManager::~DriverManager()
+{
+    mp_deboperatethread->quit();
+    mp_deboperatethread->wait();
+}
+
+void DriverManager::initConnections()
+{
+    connect(mp_debinstaller, &DebInstaller::installFinished, [&](bool bsuccess) {
+        if (bsuccess) {
+            sigProgressDetail(100, tr("Install success"));
+        } else {
+            this->sigProgressDetail(m_installprocess, errmsg);
+        }
+        sigFinished(bsuccess);
+    });
+    connect(mp_debinstaller, &DebInstaller::progressChanged, [&](int iprocess) {
+        m_installprocess = 20 + static_cast<int>(iprocess * 0.8);
+        sigProgressDetail(m_installprocess, "");
+    });
+    connect(mp_debinstaller, &DebInstaller::errorOccurred, [&](QString errmsg) {
+        qInfo() << "signal_installFailedReason:" << errmsg;
+        this->errmsg = errmsg;
+    });
+    connect(this, &DriverManager::sigDebInstall, mp_debinstaller, &DebInstaller::installPackage);
+    connect(this, &DriverManager::sigDebUnstall, mp_debinstaller, &DebInstaller::installPackage);
 }
 
 /**
@@ -51,11 +84,20 @@ bool DriverManager::unInstallDriver(const QString &modulename)
     sigProgressDetail(10, "");
     //当模块包为内核模块包时不允许删除，采用卸载加黑名单禁用方式
     if (modulePackageName.contains(kernelRelease)) {
+        sigProgressDetail(20, "");
         bsuccess = unInstallModule(modulename);
+        if (bsuccess) {
+            sigProgressDetail(100, "");
+        }
+        sigFinished(bsuccess);
+
     } else {
-        bsuccess = unInstallModule(modulename, modulePackageName);
+        sigProgressDetail(15, "");
+        mp_modcore->rmModForce(modulename);
+        sigProgressDetail(20, "");
+        emit sigDebUnstall(modulePackageName);
     }
-    sigProgressDetail(100, "");
+
     return  bsuccess;
 }
 
@@ -68,49 +110,61 @@ bool DriverManager::installDriver(const QString &filepath)
      */
     sigProgressDetail(1, "start");
     if (!QFile::exists(filepath)) {
-        sigProgressDetail(2, "file not exist");
+        sigProgressDetail(5, "file not exist");
         return  false;
     }
 
     //模块已被加载
     if (mp_modcore->modIsLoaded(filepath)) {
-        sigProgressDetail(5, QString("could not insert module %1 :file exist").arg(filepath));
+        sigProgressDetail(10, QString("could not insert module %1 :file exist").arg(filepath));
         return  false;
     }
-
+    sigProgressDetail(10, "");
     QFileInfo fileinfo(filepath);
     QMimeDatabase typedb;
     QMimeType filetype = typedb.mimeTypeForFile(fileinfo);
     if (filetype.filterString().contains("deb")) {
-        //ToDo 调用 apt 安装deb
+        qInfo() << __func__ << "deb install start";
+        sigProgressDetail(15, "");
+        emit sigDebInstall(filepath);
+        sigProgressDetail(20, "");
     } else {
         //已判断文件是否存在所以必然存在文件名
         QString filename = fileinfo.baseName();
-        QString installdir = QString("/lib/modules/%1/custom/%2").arg(Utils::kernelRelease().arg(mp_modcore->modGetName(filepath)));
+        QString installdir = QString("/lib/modules/%1/custom/%2").arg(Utils::kernelRelease()).arg(mp_modcore->modGetName(filepath));
         QDir installDir(installdir);
         //判断安装路径是否已存在，如果不存在先创建安装目录
         if (installDir.exists() ||
                 installDir.mkpath(installdir)) {
+            sigProgressDetail(30, "");
             //将文件拷贝到安装目录
             QString installpath = installDir.absoluteFilePath(filename);
             if (QFile::copy(filepath, installpath)) {
+                sigProgressDetail(40, "");
                 //更新依赖
                 Utils::updateModDeps();
+                sigProgressDetail(50, "");
                 QString modname = mp_modcore->modGetName(installpath);
                 ModCore::ErrorCode errcode = mp_modcore->modInstall(modname);
+                sigProgressDetail(60, "");
                 if (ModCore::Success == errcode) {
                     //处理黑名单
                     mp_modcore->rmFromBlackList(modname);
+                    sigProgressDetail(70, "");
                     //如果非内建模块设置开机自启动
                     if (!mp_modcore->modIsBuildIn(modname) && !mp_modcore->setModLoadedOnBoot(modname)) {
+                        sigFinished(false);
                         return  false;
                     }
+                    sigProgressDetail(100, "");
                 } else {
                     //失败将文件移除,只删文件不删路径
                     QFile::remove(installpath);
+                    sigFinished(false);
                     return  false;
                 }
             } else {
+                sigFinished(false);
                 return  false;
             }
         }
@@ -179,7 +233,7 @@ bool DriverManager::unInstallModule(const QString &moduleName)
             bsuccess = false;
         } else {
             //如果非内建模块检测去除自启动设置,不影响结果所以不以该操作结果做最终结果判断
-            if (mp_modcore->modIsBuildIn(shortname)) {
+            if (!mp_modcore->modIsBuildIn(shortname)) {
                 mp_modcore->rmModLoadedOnBoot(shortname);
             }
         }
@@ -188,25 +242,4 @@ bool DriverManager::unInstallModule(const QString &moduleName)
     return  bsuccess;
 }
 
-/**
- * @brief DriverManager::unInstallModule 驱动卸载
- * @param moduleName 模块名称 sample: hid or hid.ko
- * @param packageName 驱动所在软件包名  sample: nvidia-driver
- * @return true: 成功 false: 失败
- */
-bool DriverManager::unInstallModule(const QString &moduleName, const QString &packageName)
-{
-    bool bsuccess = true;
-    sigProgressDetail(20, "");
-    if (!mp_modcore->rmModForce(moduleName)) {
-        bsuccess = false;
-    } else {
-        sigProgressDetail(30, "");
-        if (!Utils::unInstallPackage(packageName)) {
-            bsuccess = false;
-        }
-    }
-    sigProgressDetail(80, "");
-    return  bsuccess;
-}
 

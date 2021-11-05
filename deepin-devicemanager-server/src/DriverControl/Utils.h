@@ -29,12 +29,15 @@ public:
     static QString file2PackageName(const QString &fileName);
     static QString getModuleFilePath(const QString &moduleName);
     static QString kernelRelease();
+    static QString machineArch();
     static bool addModBlackList(const QString &moduleName);
     static bool unInstallPackage(const QString &packageName);
     //判断Deb是否为驱动包
     static bool isDriverPackage(const QString &filepath);
     //更新mod dep
     static bool updateModDeps(bool bquick = true);
+    //判断文件是否被占用
+    static bool isFileLocked(const QString &filepath, bool bread = false);
 };
 
 #endif // UTILS_H

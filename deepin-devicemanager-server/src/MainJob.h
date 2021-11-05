@@ -86,7 +86,7 @@ private:
      * @param mapInfo
      * @return
      */
-    bool getMapInfo(const QString& item,QMap<QString,QString>& mapInfo);
+    bool getMapInfo(const QString &item, QMap<QString, QString> &mapInfo);
 
 private:
     ThreadPool            *mp_Pool;               //<! 生成文件的线程池

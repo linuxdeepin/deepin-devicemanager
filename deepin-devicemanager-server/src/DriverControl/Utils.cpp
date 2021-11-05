@@ -27,6 +27,8 @@
 #include <QDebug>
 
 #include <sys/utsname.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 const QString BLACKLIST_CONF = "/etc/modprobe.d/blacklist-devicemanager.conf";
 
@@ -76,6 +78,16 @@ QString Utils::kernelRelease()
     return  strKernel;
 }
 
+QString Utils::machineArch()
+{
+    struct utsname name;
+    uname(&name);
+    QString strArch(name.machine);
+    qInfo() << name.machine << name.sysname << name.domainname << name.nodename << name.release;
+
+    return  strArch;
+}
+
 bool Utils::addModBlackList(const QString &moduleName)
 {
     QProcess process;
@@ -117,10 +129,10 @@ bool Utils::isDriverPackage(const QString &filepath)
         if (process.waitForFinished()) {
             //查找关键字 ko insmod modprobe和 路径 /lib/module
             process.setWorkingDirectory(strExtract);
-            process.start(QString("grep -irH \"*.ko\" %1 ||"
-                                  "grep -irH \"insmod\" %1 ||"
+            process.start(QString("(grep -irH \"insmod\" %1 ||"
                                   "grep -irH \"modprobe\" %1 ||"
-                                  "grep -irH \"/lib/module\" %1").arg(strExtract));
+                                  "grep -irH \"/lib/module\" %1)&&"
+                                  "grep -irH \"*.ko\" %1 ").arg(strExtract));
             if (process.waitForFinished()) {
                 //获取查找结果，有结果不为空
                 QString strKeyContent = process.readAllStandardOutput();
@@ -151,4 +163,40 @@ bool Utils::updateModDeps(bool bquick)
         return  false;
 
     return  true;
+}
+
+bool Utils::isFileLocked(const QString &filepath, bool bread)
+{
+    short int ltype;
+    int opentype;
+    if (bread) {
+        ltype = F_RDLCK;
+        opentype = O_RDONLY;
+    } else {
+        ltype = F_WRLCK;
+        opentype = O_WRONLY;
+    }
+    struct flock fl;
+    fl.l_type   = ltype;  /*F_RDLCK read/F_WRLCK write lock */
+    fl.l_whence = SEEK_SET; /* beginning of file */
+    fl.l_start  = 0;        /* offset from l_whence */
+    fl.l_len    = 0;        /* length, 0 = to EOF */
+    fl.l_pid    = getpid(); /* PID */
+
+    int fd = open(filepath.toStdString().c_str(), opentype);
+    //文件打开失败默认为被锁住
+    if (fd < 0) {
+        return  true;
+    }
+
+    if (-1 == fcntl(fd, F_SETLK, &fl)) {
+        //设置失败，文件已被锁住
+        qInfo() << __func__ << "file already locked";
+        return true;
+    }
+    //file not locked,set lock success
+    fl.l_type   = F_UNLCK;
+    //unset lock 必须取消锁定否则其它地方无法获取文件锁
+    fcntl(fd, F_SETLK, &fl);
+    return  false;
 }

@@ -40,6 +40,7 @@ private:
 
 signals:
     Q_SCRIPTABLE void sigProgressDetail(int progress, const QString &strDeatils);
+    Q_SCRIPTABLE void sigFinished(bool bsuccess);
 
 public slots:
     Q_SCRIPTABLE bool unInstallDriver(const QString &modulename);

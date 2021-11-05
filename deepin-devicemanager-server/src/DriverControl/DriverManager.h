@@ -24,12 +24,15 @@
 #include <QObject>
 
 class ModCore;
+class DebInstaller;
+class QThread;
 
 class DriverManager : public QObject
 {
     Q_OBJECT
 public:
     explicit DriverManager(QObject *parent = nullptr);
+    ~ DriverManager();
 
     bool unInstallDriver(const QString &moduleName); //驱动卸载
     bool installDriver(const QString &filepath);  // 驱动安装
@@ -41,17 +44,23 @@ public:
     bool isDriverPackage(const QString &filepath);
 
 private:
+    void initConnections();
     bool unInstallModule(const QString &moduleName);
-    bool unInstallModule(const QString &moduleName, const QString &packageName);
-
 
 signals:
     void sigProgressDetail(int progress, const QString &strDeatils);
+    void sigFinished(bool bsuccess);
+    void sigDebInstall(const QString &package);
+    void sigDebUnstall(const QString &package);
 
 public slots:
 
 private:
     ModCore *mp_modcore = nullptr;
+    DebInstaller *mp_debinstaller = nullptr;
+    QThread *mp_deboperatethread = nullptr;
+    int m_installprocess = 0;
+    QString errmsg;
 
 };
 

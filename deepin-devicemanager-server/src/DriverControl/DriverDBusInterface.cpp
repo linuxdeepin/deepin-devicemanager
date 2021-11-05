@@ -2,6 +2,7 @@
 #include "DriverManager.h"
 #include "ModCore.h"
 #include "Utils.h"
+#include "DebInstaller.h"
 
 #include <QDebug>
 
@@ -16,6 +17,7 @@ DriverDBusInterface::DriverDBusInterface(QObject *parent)
 void DriverDBusInterface::initConnects()
 {
     connect(mp_drivermanager, &DriverManager::sigProgressDetail, this, &DriverDBusInterface::sigProgressDetail);
+    connect(mp_drivermanager, &DriverManager::sigFinished, this, &DriverDBusInterface::sigFinished);
 }
 
 bool DriverDBusInterface::unInstallDriver(const QString &modulename)

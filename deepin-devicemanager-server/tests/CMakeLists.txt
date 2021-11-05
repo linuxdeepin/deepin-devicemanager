@@ -61,6 +61,7 @@ find_package(Qt5Sql REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(DFrameworkdbus REQUIRED)
+find_package(QApt REQUIRED)
 
 #PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 
@@ -104,6 +105,7 @@ target_link_libraries(${PROJECT_NAME_TEST}
     ${GTEST_MAIN_LIBRARIES}
     pthread
     kmod
+    QApt
     )
 
 add_custom_target(test-server

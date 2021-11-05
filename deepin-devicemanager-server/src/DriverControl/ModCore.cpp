@@ -147,7 +147,7 @@ ModCore::ErrorCode ModCore::modInstall(const QString &modName, unsigned int flag
         int err = 0;
         struct kmod_list *modlist = nullptr;
         err = kmod_module_new_from_lookup(ctx, modName.toStdString().c_str(), &modlist);
-        if (nullptr != modlist && err > 0) {
+        if (nullptr != modlist && err >= 0) {
             struct kmod_list *ltmp;
             kmod_list_foreach(ltmp, modlist) {
                 struct kmod_module *mod = kmod_module_get_module(ltmp);
