@@ -122,6 +122,7 @@ void GetDriverNameWidget::traverseFolders(bool includeSub, const QString& path, 
 
 void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
 {
+    emit signalItemClicked();
     int row = index.row();
     QStandardItem *item =  mp_model->item(row, 1);
     if (!item)

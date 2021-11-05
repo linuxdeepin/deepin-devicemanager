@@ -76,6 +76,10 @@ public slots:
      */
     void slotSelectedDriver(const QModelIndex &index);
 
+signals:
+
+    void signalItemClicked();
+
 private:
     DriverListView    *mp_ListView;
 

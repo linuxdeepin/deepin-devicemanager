@@ -66,6 +66,12 @@ public:
      */
     void installDriver(const QString& driver);
 
+    /**
+     * @brief installDriver
+     * @param driver
+     */
+    bool isDriverPackage(const QString& path);
+
 signals:
     void processChange(qint32 value, QString details);
     void processEnd(bool sucess);

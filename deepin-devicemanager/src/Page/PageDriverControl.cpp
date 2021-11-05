@@ -73,6 +73,7 @@ void PageDriverControl::initInstallWidget()
     this->addButton(tr("Next"), true, DDialog::ButtonRecommend);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
     connect(this->getButton(1), &QPushButton::clicked, this, &PageDriverControl::slotBtnNext);
+    connect(mp_NameDialog, &GetDriverNameWidget::signalItemClicked, this, [=]{mp_tipLabel->clear();});
 }
 
 void PageDriverControl::initUninstallWidget()
@@ -151,6 +152,10 @@ void PageDriverControl::installDriverLogical()
         QFile file(driveName);
         if (driveName.isEmpty() || !file.exists()){
             mp_tipLabel->setText(tr("The selected file does not exist, please select again"));
+            return;
+        }
+        if(!DBusDriverInterface::getInstance()->isDriverPackage(driveName)){
+            mp_tipLabel->setText(tr("It is not a driver"));
             return;
         }
         removeBtn();
