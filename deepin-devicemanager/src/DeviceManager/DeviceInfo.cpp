@@ -16,6 +16,7 @@ DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     , m_HardwareClass("")
     , m_Enable(true)
     , m_CanEnable(false)
+    , m_CanUninstall(false)
     , m_Available(true)
     , m_Index(0)
 {
@@ -427,6 +428,11 @@ bool DeviceBaseInfo::canEnable()
     return m_CanEnable;
 }
 
+bool DeviceBaseInfo::canUninstall()
+{
+    return m_CanUninstall;
+}
+
 void DeviceBaseInfo::setHardwareClass(const QString& hclass)
 {
     m_HardwareClass = hclass;
@@ -435,6 +441,11 @@ void DeviceBaseInfo::setHardwareClass(const QString& hclass)
 const QString& DeviceBaseInfo::hardwareClass() const
 {
     return m_HardwareClass;
+}
+
+const QString& DeviceBaseInfo::systemPath() const
+{
+    return m_SysPath;
 }
 
 const QString DeviceBaseInfo::getOverviewInfo()

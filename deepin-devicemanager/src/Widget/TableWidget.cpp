@@ -119,6 +119,11 @@ void TableWidget::updateCurItemEnable(int row, bool enable)
         mp_Table->updateCurItemEnable(row, enable);
 }
 
+void TableWidget::setCanUninstall(bool canInstall)
+{
+    m_CanUninstall = canInstall;
+}
+
 void TableWidget::clear()
 {
     if (mp_Table) {
@@ -190,15 +195,17 @@ void TableWidget::slotShowMenu(const QPoint &)
         } else {
             mp_Enable->setText(tr("Enable"));
         }
-
         mp_Menu->addAction(mp_Enable);
     }
 
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
-    mp_Menu->addSeparator();
-    mp_Menu->addAction(mp_updateDriver);
-    mp_Menu->addAction(mp_removeDriver);
+
+    if(m_CanUninstall){
+        mp_Menu->addSeparator();
+        mp_Menu->addAction(mp_updateDriver);
+        mp_Menu->addAction(mp_removeDriver);
+    }
     mp_Menu->exec(QCursor::pos());
 }
 

@@ -94,6 +94,11 @@ void PageTableHeader::setColumnAverage()
         mp_Table->setColumnAverage();
 }
 
+void PageTableHeader::setCanUninstall(bool canUninstall)
+{
+    mp_Table->setCanUninstall(canUninstall);
+}
+
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
     DWidget::paintEvent(e);

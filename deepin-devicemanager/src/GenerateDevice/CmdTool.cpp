@@ -434,6 +434,8 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             addUsbMapInfo("hwinfo_usb", mapInfo);
         }
     }
+
+    clearUsbDevice(lstMap);
     for (QList<QMap<QString,QString>>::iterator it = lstMap.begin();it != lstMap.end();++it) {
         if ((*it)["Hardware Class"] == "sound") {
             addMapInfo("hwinfo_sound", (*it));
@@ -478,6 +480,11 @@ void CmdTool::getAuthorizedInfo(QStringList& lstAuth)
 
 void CmdTool::updateMapInfo(QList<QMap<QString,QString>>& removeLstMap, QMap<QString,QString>& mapInfo)
 {
+    // 键盘不禁用
+    if("keyboard" == mapInfo["Hardware Class"]){
+        return;
+    }
+
     QList<QMap<QString,QString>>::iterator it = removeLstMap.begin();
     for (;it != removeLstMap.end();++it) {
         if (mapInfo.find("Module Alias") != mapInfo.end() && (*it)["unique_id"] == mapInfo["Module Alias"]){
@@ -496,6 +503,18 @@ void CmdTool::updateMapInfo(QList<QMap<QString,QString>>& removeLstMap, QMap<QSt
             mapInfo.insert("Hardware Class",hclass);
             removeLstMap.erase(it);
             return;
+        }
+    }
+}
+
+void CmdTool::clearUsbDevice(QList<QMap<QString, QString> > &removeLstMap)
+{
+    // 禁用后拔掉，还能获取信息
+    for(int index = 0; index < removeLstMap.size(); index++){
+        const QMap<QString,QString>& map = removeLstMap[index];
+        if(map["path"].contains("usb")){
+            removeLstMap.removeAt(index);
+            index--;
         }
     }
 }

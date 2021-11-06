@@ -23,6 +23,7 @@ DeviceInput::DeviceInput()
 {
     initFilterKey();
     m_CanEnable = true;
+    m_CanUninstall = true;
 }
 
 bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
@@ -213,6 +214,10 @@ EnableDeviceStatus DeviceInput::setEnable(bool e)
 
 bool DeviceInput::enable()
 {
+    // 键盘不可禁用
+    if(m_HardwareClass == "keyboard"){
+        m_Enable = true;
+    }
     return m_Enable;
 }
 
@@ -257,10 +262,10 @@ void DeviceInput::loadTableData()
 {
     // 加载表格数据
     QString tName;
-    if (!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }else if(!available()){
+    if (!available()){
         tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }else if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
     }else{
         tName = m_Name;
     }

@@ -138,6 +138,12 @@ public:
     bool canEnable();
 
     /**
+     * @brief canUninstall 获取该设备是否可以卸载驱动(主板等右键不需要安装、卸载action)
+     * @return
+     */
+    bool canUninstall();
+
+    /**
      * @brief setHardwareClass
      * @param hclass
      */
@@ -148,6 +154,12 @@ public:
      * @return
      */
     const QString& hardwareClass() const;
+
+    /**
+     * @brief systemPath
+     * @return
+     */
+    const QString& systemPath() const;
 
     /**
      * @brief isValid：判断属性值是否有效
@@ -342,6 +354,7 @@ protected:
     QSet<QString>                  m_FilterKey;     //<! 用于避免添加重复信息
     bool                           m_Enable;        //<! 设备是否是启用状态
     bool                           m_CanEnable;     //<! 设备是否可以启用禁用
+    bool                           m_CanUninstall;  //<! 是否可以卸载驱动
     bool                           m_Available;     //<! 是否可用
     int                            m_Index;         //<! 同名设备的索引
 

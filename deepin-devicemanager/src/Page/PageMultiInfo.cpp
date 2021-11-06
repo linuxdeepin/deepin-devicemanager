@@ -66,6 +66,7 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     // 更新表格
     mp_Table->updateTable(deviceList);
+    mp_Table->setCanUninstall(lst[0]->canUninstall());
 
     // 更新详细信息
     mp_Detail->showDeviceInfo(lst);

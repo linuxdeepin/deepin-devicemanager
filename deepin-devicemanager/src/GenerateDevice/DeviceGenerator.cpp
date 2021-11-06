@@ -185,21 +185,25 @@ void DeviceGenerator::generatorNetworkDevice()
         DeviceNetwork *device = new DeviceNetwork();
         device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addNetworkDevice(device);
-        if((*it).find("path") != (*it).end()){
-            continue;
-        }
+    }
 
-        // 添加从lshw中获取的信息
-        const QList<QMap<QString, QString>> &lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
-        QList<QMap<QString, QString> >::const_iterator itls = lstInfo.begin();
-        for (; itls != lstInfo.end(); ++itls) {
-            if ((*itls).size() < 2)
-                continue;
-            if((*itls).find("logical name") == (*itls).end() || (*itls).find("serial") == (*itls).end())
-                continue;
-            if((*it)["HW Address"] != (*itls)["serial"])
-                continue;
+    // 添加从lshw中获取的信息
+    const QList<QMap<QString, QString>> &lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
+    QList<QMap<QString, QString> >::const_iterator itls = lstInfo.begin();
+    for (; itls != lstInfo.end(); ++itls) {
+        if ((*itls).size() < 2)
+            continue;
+        if((*itls).find("bus info") == (*itls).end() || (*itls).find("physical id") == (*itls).end())
+            continue;
+        QString busInfo = (*itls)["bus info"];
+        DeviceNetwork *device = dynamic_cast<DeviceNetwork*>(DeviceManager::instance()->getNetworkDevice(busInfo.replace("pci@","")));
+        if(device){
             device->setInfoFromLshw(*itls);
+        }
+        else{
+            device = new DeviceNetwork();
+            device->setInfoFromLshw(*itls);
+            DeviceManager::instance()->addNetworkDevice(device);
         }
     }
 }

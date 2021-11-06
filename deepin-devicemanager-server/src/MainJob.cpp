@@ -34,7 +34,7 @@ MainJob::MainJob(QObject *parent)
     , mp_DetectThread(nullptr)
     , mp_IFace(new DBusInterface)
     , mp_DriverOperateIFace(new DriverDBusInterface(this))
-    , mp_Enable(new DBusEnableInterface(this))
+    , mp_Enable(new DBusEnableInterface())
     , m_FirstUpdate(true)
 {
     // 守护进程启动的时候加载所有信息
@@ -162,6 +162,10 @@ bool MainJob::initDBus()
         qInfo() << QDBusConnection::systemBus().lastError();
         return false;
     }
+
+    static QThread t;
+    mp_Enable->moveToThread(&t);
+    t.start();
 
     return true;
 }

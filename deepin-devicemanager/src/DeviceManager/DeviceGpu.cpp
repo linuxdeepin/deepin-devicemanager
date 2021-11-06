@@ -30,6 +30,7 @@ DeviceGpu::DeviceGpu()
 {
     // 初始化可显示属性
     initFilterKey();
+    m_CanUninstall = true;
 }
 
 void DeviceGpu::initFilterKey()

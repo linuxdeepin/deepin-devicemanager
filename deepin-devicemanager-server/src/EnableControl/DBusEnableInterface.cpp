@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QDateTime>
 
 // 系统库文件
 #include <cups.h>

@@ -134,10 +134,10 @@ void DeviceCdrom::loadTableData()
 {
     // 加载表格内容
     QString tName;
-    if (!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }else if(!available()){
+    if (!available()){
         tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }else if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
     }else{
         tName = m_Name;
     }

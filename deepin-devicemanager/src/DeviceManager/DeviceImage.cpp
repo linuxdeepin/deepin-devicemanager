@@ -16,6 +16,7 @@ DeviceImage::DeviceImage()
     , m_Speed("")
 {
     m_CanEnable = true;
+    m_CanUninstall = true;
 }
 
 void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -141,10 +142,10 @@ void DeviceImage::loadTableData()
 {
     // 记载表格内容
     QString tName;
-    if (!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }else if(!available()){
+    if (!available()){
         tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }else if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
     }else{
         tName = m_Name;
     }

@@ -273,6 +273,13 @@ public:
     void addNetworkDevice(DeviceNetwork *const device);
 
     /**
+     * @brief getNetworkDevice 获取网卡设备
+     * @param busInfo
+     * @return
+     */
+    DeviceBaseInfo * getNetworkDevice(const QString& busInfo);
+
+    /**
      * @brief correctNetworkLinkStatus:校正网络连接状态
      * @param linkStatus:连接状态
      */

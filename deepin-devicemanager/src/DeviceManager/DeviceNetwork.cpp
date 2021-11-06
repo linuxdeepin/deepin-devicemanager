@@ -34,6 +34,7 @@ DeviceNetwork::DeviceNetwork()
 
     // 设备可禁用
     m_CanEnable = true;
+    m_CanUninstall = true;
 }
 
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -196,10 +197,10 @@ void DeviceNetwork::loadTableData()
 {
     // 根据是否禁用设置设备名称
     QString tName;
-    if (!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }else if(!available()){
+    if (!available()){
         tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }else if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
     }else{
         tName = m_Name;
     }

@@ -179,9 +179,14 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     }
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
-    mp_Menu->addSeparator();
-    mp_Menu->addAction(mp_updateDriver);
-    mp_Menu->addAction(mp_removeDriver);
+
+    // 主板、内存、cpu等没有驱动，无需右键按钮
+    if(mp_Device->canUninstall()){
+        mp_Menu->addSeparator();
+        mp_Menu->addAction(mp_updateDriver);
+        mp_Menu->addAction(mp_removeDriver);
+    }
+
     mp_Menu->exec(QCursor::pos());
 }
 
