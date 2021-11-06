@@ -79,11 +79,14 @@ bool DriverManager::unInstallDriver(const QString &modulename)
     bool bsuccess = false;
     sigProgressDetail(5, "");
     QString modulePath = mp_modcore->modGetPath(modulename);
+    //失败返回空
     QString modulePackageName = Utils::file2PackageName(modulePath);
     QString kernelRelease = Utils::kernelRelease();
     sigProgressDetail(10, "");
     //当模块包为内核模块包时不允许删除，采用卸载加黑名单禁用方式
-    if (modulePackageName.contains(kernelRelease)) {
+    if (mp_modcore->modIsBuildIn(mp_modcore->modGetName(modulename)) ||
+            modulePackageName.isEmpty() ||
+            modulePackageName.contains(kernelRelease)) {
         sigProgressDetail(20, "");
         bsuccess = unInstallModule(modulename);
         if (bsuccess) {
