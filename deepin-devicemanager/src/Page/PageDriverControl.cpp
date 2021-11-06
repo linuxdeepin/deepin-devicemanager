@@ -83,7 +83,7 @@ void PageDriverControl::initUninstallWidget()
     // 先添加警告界面
     QIcon icon(QIcon::fromTheme("cautious"));
     QPixmap pic = icon.pixmap(80, 80);
-    DriverIconWidget* widget = new DriverIconWidget(pic,tr("cautious"),tr("This driver will be uninstalled from the system and the device will be unavailable after uninstallation"),this);
+    DriverIconWidget* widget = new DriverIconWidget(pic,tr("Warning"),tr("The device will be unavailable after the driver uninstallation"),this);
     mp_stackWidget->addWidget(widget);
     mp_stackWidget->setCurrentIndex(0);
     this->addButton(tr("Cancel", "button"), true);

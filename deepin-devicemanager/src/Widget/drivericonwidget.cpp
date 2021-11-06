@@ -31,7 +31,7 @@ DriverIconWidget::DriverIconWidget(const QString &strTitle, const QString &strDe
     : DWidget(parent)
 {
     iconWidget = new DWaterProgress;
-    iconWidget->setFixedSize(80, 80);
+    iconWidget->setFixedSize(100, 100);
     iconWidget->setValue(50);
     iconWidget->start();
 
@@ -42,7 +42,7 @@ DriverIconWidget::DriverIconWidget(const QPixmap &pixmap, const QString &strTitl
     : DWidget(parent)
 {
     DLabel *iconWidget = new DLabel;
-    iconWidget->setFixedSize(80, 80);
+    iconWidget->setFixedSize(100, 100);
     iconWidget->setPixmap(pixmap);
     iconWidget->setScaledContents(true);
 
@@ -57,10 +57,11 @@ DriverIconWidget::~DriverIconWidget()
 void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, const QString &strDesc)
 {
     QVBoxLayout *vlayout = new QVBoxLayout;
-    vlayout->addSpacing(55);
-    //iconWidget
-    vlayout->addWidget(iconWidget, 0, Qt::AlignHCenter);
-    vlayout->addSpacing(20);
+    vlayout->setContentsMargins(0,0,0,0);
+    vlayout->addSpacing(30);
+    vlayout->addStretch();
+    vlayout->addWidget(iconWidget, 0, Qt::AlignCenter);
+    vlayout->addStretch();
     //strTitle
     {
         DLabel *label = new DLabel(strTitle);
@@ -78,7 +79,6 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
 
         vlayout->addWidget(label, 0, Qt::AlignCenter);
     }
-    vlayout->addSpacing(10);
     //strDesc
     {
         DLabel *label = new DLabel(strDesc);
