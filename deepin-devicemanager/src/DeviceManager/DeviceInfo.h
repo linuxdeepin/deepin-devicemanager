@@ -120,6 +120,12 @@ public:
     virtual bool enable();
 
     /**
+     * @brief availble 获取是否可用
+     * @return 返回是否可用
+     */
+    virtual bool available();
+
+    /**
      * @brief setCanEnale : set can enable or not
      * @param can
      */
@@ -130,6 +136,30 @@ public:
      * @return
      */
     bool canEnable();
+
+    /**
+     * @brief canUninstall 获取该设备是否可以卸载驱动(主板等右键不需要安装、卸载action)
+     * @return
+     */
+    bool canUninstall();
+
+    /**
+     * @brief setHardwareClass
+     * @param hclass
+     */
+    void setHardwareClass(const QString& hclass);
+
+    /**
+     * @brief hardwareClass
+     * @return
+     */
+    const QString& hardwareClass() const;
+
+    /**
+     * @brief systemPath
+     * @return
+     */
+    const QString& systemPath() const;
 
     /**
      * @brief isValid：判断属性值是否有效
@@ -314,6 +344,9 @@ protected:
     void mapInfoToList();
 
 protected:
+    QString                        m_UniqueID;      //<! 设备的唯一值
+    QString                        m_SysPath;       //<! 用启用的sys path
+    QString                        m_HardwareClass; //<! 设备类型
     QList<QPair<QString, QString>> m_LstBaseInfo;   //<! 基本信息
     QList<QPair<QString, QString>> m_LstOtherInfo;  //<! 其它信息
     QStringList                    m_TableHeader;   //<! 用于存放表格的表头
@@ -321,6 +354,8 @@ protected:
     QSet<QString>                  m_FilterKey;     //<! 用于避免添加重复信息
     bool                           m_Enable;        //<! 设备是否是启用状态
     bool                           m_CanEnable;     //<! 设备是否可以启用禁用
+    bool                           m_CanUninstall;  //<! 是否可以卸载驱动
+    bool                           m_Available;     //<! 是否可用
     int                            m_Index;         //<! 同名设备的索引
 
 private:

@@ -4,9 +4,6 @@
 // Qt库文件
 #include <QDebug>
 
-// 其它头文件
-#include "EnableManager.h"
-
 DeviceBluetooth::DeviceBluetooth()
     : DeviceBaseInfo()
     , m_Name("")
@@ -98,18 +95,14 @@ const QString DeviceBluetooth::getOverviewInfo()
 
 EnableDeviceStatus DeviceBluetooth::setEnable(bool e)
 {
+    Q_UNUSED(e)
     // 设置设备状态
-    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    if (e != enable())
-        res = EDS_Faild;
-
-    return res;
+    return EDS_Faild;
 }
 
 bool DeviceBluetooth::enable()
 {
     // 获取设备状态
-    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
     return m_Enable;
 }
 

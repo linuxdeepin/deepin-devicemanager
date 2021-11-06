@@ -91,7 +91,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/include/Qt
 #add cups and zmq
 include_directories("/usr/include/cups/")
 link_libraries("cups")
-link_libraries("zmq")
 
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
@@ -138,4 +137,4 @@ install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/app
 install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
 
 # Test--------deepin-devicemanager
-#add_subdirectory(./tests)
+add_subdirectory(./tests)

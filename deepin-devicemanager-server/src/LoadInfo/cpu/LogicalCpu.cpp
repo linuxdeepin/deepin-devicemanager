@@ -91,12 +91,6 @@ void LogicalCpu::setBogomips(const QString &value)
     d->bogoMips = value;
 }
 
-void LogicalCpu::setArch(const QString& value)
-{
-    Q_D(LogicalCpu);
-    d->arch = value;
-}
-
 int LogicalCpu::physicalID()
 {
     Q_D(LogicalCpu);
@@ -182,9 +176,3 @@ const QString &LogicalCpu::bogomips()
     Q_D(LogicalCpu);
     return d->bogoMips;
 }
-const QString &LogicalCpu::arch()
-{
-    Q_D(LogicalCpu);
-    return d->arch;
-}
-

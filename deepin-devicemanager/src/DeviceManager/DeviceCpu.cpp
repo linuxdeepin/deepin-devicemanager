@@ -1,8 +1,6 @@
 // 项目自身文件
 #include "DeviceCpu.h"
 
-#include <QDebug>
-
 #include <math.h>
 
 DeviceCpu::DeviceCpu()
@@ -88,6 +86,11 @@ const QString &DeviceCpu::name() const
 const QString &DeviceCpu::driver() const
 {
     return m_Driver;
+}
+
+bool DeviceCpu::available()
+{
+    return true;
 }
 
 bool DeviceCpu::frequencyIsRange()const

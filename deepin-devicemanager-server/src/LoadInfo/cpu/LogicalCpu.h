@@ -133,12 +133,6 @@ public:
     void setBogomips(const QString &value);
 
     /**
-     * @brief setArch
-     * @param value
-     */
-    void setArch(const QString& value);
-
-    /**
      * @brief physicalID
      * @return : value
      */
@@ -240,12 +234,6 @@ public:
      */
     const QString &bogomips();
 
-    /**
-     * @brief arch
-     * @return
-     */
-    const QString &arch();
-
 
 private:
     LogicalCpuPrivate *d_ptr;
@@ -258,9 +246,9 @@ class LogicalCpuPrivate
 public:
     explicit LogicalCpuPrivate(LogicalCpu *q)
         : q_ptr(q)
-        , logicalID(-1)
-        , coreID(-1)
-        , physicalID(-1)
+        , logicalID(0)
+        , coreID(0)
+        , physicalID(0)
         , l1d_cache("")
         , l1i_cache("")
         , l2_cache("")
@@ -275,7 +263,6 @@ public:
         , cpuFamily("")
         , flags("")
         , bogoMips("")
-        , arch("")
     {
     }
     LogicalCpu *q_ptr;                 //LogicalCpu 中的q指针
@@ -297,7 +284,6 @@ public:
     QString     cpuFamily;             // cpu family
     QString     flags;                 // flags
     QString     bogoMips;              // bogomips
-    QString     arch;
 };
 
 #endif // LOGICALCPU_H

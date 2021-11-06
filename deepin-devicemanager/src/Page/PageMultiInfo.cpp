@@ -4,6 +4,7 @@
 #include "PageDetail.h"
 #include "MacroDefinition.h"
 #include "DeviceInfo.h"
+#include "PageDriverControl.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -35,6 +36,8 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     connect(mp_Detail, &PageDetail::refreshInfo, this, &PageMultiInfo::refreshInfo);
     connect(mp_Detail, &PageDetail::exportInfo, this, &PageMultiInfo::exportInfo);
     connect(mp_Table, &PageTableHeader::enableDevice, this, &PageMultiInfo::slotEnableDevice);
+    connect(mp_Table, &PageTableHeader::installDriver, this, &PageMultiInfo::slotActionUpdateDriver);
+    connect(mp_Table, &PageTableHeader::uninstallDriver, this, &PageMultiInfo::slotActionRemoveDriver);
     emit refreshInfo();
 }
 
@@ -47,6 +50,9 @@ PageMultiInfo::~PageMultiInfo()
 
 void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
+    m_lstDevice.clear();
+    m_lstDevice = lst;
+
     if (lst.size() < 1)
         return;
 
@@ -60,6 +66,7 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     // 更新表格
     mp_Table->updateTable(deviceList);
+    mp_Table->setCanUninstall(lst[0]->canUninstall());
 
     // 更新详细信息
     mp_Detail->showDeviceInfo(lst);
@@ -117,6 +124,32 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
         DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
 
     }
+}
+
+void PageMultiInfo::slotActionUpdateDriver(int row)
+{
+    DeviceBaseInfo* device = m_lstDevice[row];
+    if(nullptr == device){
+        return;
+    }
+
+    PageDriverControl* installDriver = new PageDriverControl(tr("Update Drivers"), device->name(), "", true, this);
+    installDriver->show();
+    m_driverPagedOpened = true;
+    connect(installDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
+}
+
+void PageMultiInfo::slotActionRemoveDriver(int row)
+{
+    DeviceBaseInfo* device = m_lstDevice[row];
+    if(nullptr == device){
+        return;
+    }
+
+    PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Drivers"), device->name(), device->driver(), false, this);
+    rmDriver->show();
+    m_driverPagedOpened = true;
+    connect(rmDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
 }
 
 void PageMultiInfo::initWidgets()

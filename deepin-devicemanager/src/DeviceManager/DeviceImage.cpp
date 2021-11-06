@@ -1,9 +1,7 @@
 // 项目自身文件
 #include "DeviceImage.h"
-
-// 其它头文件
 #include "DeviceManager.h"
-#include "EnableManager.h"
+#include "DBusEnableInterface.h"
 
 DeviceImage::DeviceImage()
     : DeviceBaseInfo()
@@ -18,6 +16,7 @@ DeviceImage::DeviceImage()
     , m_Speed("")
 {
     m_CanEnable = true;
+    m_CanUninstall = true;
 }
 
 void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -37,15 +36,26 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    if(mapInfo.find("unique_id") != mapInfo.end()){
+        m_UniqueID = mapInfo["unique_id"];
+        m_Name = mapInfo["name"];
+        m_SysPath =mapInfo["path"];
+        m_HardwareClass = mapInfo["Hardware Class"];
+        m_Enable = false;
+        return;
+    }
+    if(mapInfo.find("Enable") != mapInfo.end()){
+        m_Enable = false;
+    }
+    setAttribute(mapInfo, "Module Alias", m_UniqueID);
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
-    setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Driver", m_Driver, true);//
     setAttribute(mapInfo, "Driver Modules", m_Driver, true);
-    setAttribute(mapInfo, "", m_MaximumPower);
     setAttribute(mapInfo, "Speed", m_Speed);
 
     // 获取映射到 lshw设备信息的 关键字
@@ -84,18 +94,20 @@ const QString DeviceImage::getOverviewInfo()
 
 EnableDeviceStatus DeviceImage::setEnable(bool e)
 {
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable("camera",m_Name,m_SysPath,m_UniqueID,e);
+    if(res){
+        m_Enable = e;
+    }
     // 设置设备状态
-    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    if (e != enable())
-        res = EDS_Faild;
-
-    return res;
+    return res ? EDS_Success : EDS_Faild;
 }
 
 bool DeviceImage::enable()
 {
     // 获取设备状态
-    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
     return m_Enable;
 }
 
@@ -129,13 +141,16 @@ void DeviceImage::loadOtherDeviceInfo()
 void DeviceImage::loadTableData()
 {
     // 记载表格内容
-    QString name;
-    if (!enable())
-        name = "(" + tr("Disable") + ") " + m_Name;
-    else
-        name = m_Name;
+    QString tName;
+    if (!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }else if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
+    }else{
+        tName = m_Name;
+    }
 
-    m_TableData.append(name);
+    m_TableData.append(tName);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }
@@ -145,7 +160,4 @@ void DeviceImage::setInfoFromInput()
     // 设置设备名称
     const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
     setAttribute(mapInfo, "Name", m_Name, true);
-
-    // 设置是否可禁用
-    m_Enable = EnableManager::instance()->isDeviceEnable(m_Name);
 }

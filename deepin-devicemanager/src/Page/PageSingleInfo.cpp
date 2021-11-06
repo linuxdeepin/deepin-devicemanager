@@ -3,6 +3,7 @@
 #include "MacroDefinition.h"
 #include "DeviceInfo.h"
 #include "PageTableWidget.h"
+#include "PageDriverControl.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -16,6 +17,7 @@
 // Qt库文件
 #include <QVBoxLayout>
 #include <QClipboard>
+#include <QProcess>
 
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
@@ -26,6 +28,8 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export"), this))
     , mp_Copy(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Copy"), this))
     , mp_Enable(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Enable"), this))
+    , mp_updateDriver(new QAction(tr("Update drivers"), this))
+    , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
     , mp_Menu(new DMenu(this))
     , mp_Device(nullptr)
     , m_SameDevice(false)
@@ -42,6 +46,8 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::exportInfo);
     connect(mp_Copy, &QAction::triggered, this, &PageSingleInfo::slotActionCopy);
     connect(mp_Enable, &QAction::triggered, this, &PageSingleInfo::slotActionEnable);
+    connect(mp_updateDriver, &QAction::triggered, this, &PageSingleInfo::slotActionUpdateDriver);
+    connect(mp_removeDriver, &QAction::triggered, this, &PageSingleInfo::slotActionRemoveDriver);
 }
 
 PageSingleInfo::~PageSingleInfo()
@@ -87,7 +93,7 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     // 设置设备状态
     if (mp_Content) {
-        mp_Content->setDeviceEnable(mp_Device->enable());
+        mp_Content->setDeviceEnable(mp_Device->enable(), mp_Device->available());
     }
 }
 
@@ -140,9 +146,19 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
 {
     // 显示右键菜单
     mp_Menu->clear();
-    mp_Refresh->setEnabled(true);
-    mp_Export->setEnabled(true);
-    mp_Copy->setEnabled(true);
+    if(!m_driverPagedOpened){
+        mp_Refresh->setEnabled(true);
+        mp_Export->setEnabled(true);
+        mp_Copy->setEnabled(true);
+        mp_updateDriver->setEnabled(true);
+        mp_removeDriver->setEnabled(true);
+    } else {
+        mp_Refresh->setEnabled(false);
+        mp_Export->setEnabled(false);
+        mp_Copy->setEnabled(false);
+        mp_updateDriver->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+    }
     mp_Menu->addAction(mp_Copy);
 
     if (!mp_Device)
@@ -156,11 +172,21 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
             mp_Refresh->setEnabled(false);
             mp_Export->setEnabled(false);
             mp_Copy->setEnabled(false);
+            mp_updateDriver->setEnabled(false);
+            mp_removeDriver->setEnabled(false);
         }
         mp_Menu->addAction(mp_Enable);
     }
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
+
+    // 主板、内存、cpu等没有驱动，无需右键按钮
+    if(mp_Device->canUninstall()){
+        mp_Menu->addSeparator();
+        mp_Menu->addAction(mp_updateDriver);
+        mp_Menu->addAction(mp_removeDriver);
+    }
+
     mp_Menu->exec(QCursor::pos());
 }
 
@@ -179,8 +205,8 @@ void PageSingleInfo::slotActionEnable()
 
         // 除设置成功的情况，其他情况需要提示设置失败
         if (res == EDS_Success) {
-            mp_Enable->setText(tr("Enable"));
-            mp_Content->setDeviceEnable(false);
+            // 返回成功之前再次更新数据
+            emit refreshInfo();
         } else {
             QString con = tr("Failed to disable the device");
 
@@ -193,8 +219,7 @@ void PageSingleInfo::slotActionEnable()
 
         // 除设置成功的情况，其他情况需要提示设置失败
         if (res == EDS_Success) {
-            mp_Enable->setText(tr("Disable"));
-            mp_Content->setDeviceEnable(true);
+            emit refreshInfo();
         } else {
             QString con = tr("Failed to enable the device");
 
@@ -202,6 +227,35 @@ void PageSingleInfo::slotActionEnable()
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         }
     }
+}
+
+void PageSingleInfo::slotActionUpdateDriver()
+{
+    //打印设备更新驱动时，通过dde-printer来操作
+    if(mp_Device->hardwareClass() == "printer") {
+        if(!QProcess::startDetached("dde-printer"))
+            qInfo() << "dde-printer startDetached error";
+        return;
+    }
+    PageDriverControl* installDriver = new PageDriverControl(tr("Update Drivers"), mp_Device->name(), "", true, this);
+    installDriver->show();
+    m_driverPagedOpened = true;
+    connect(installDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
+}
+
+void PageSingleInfo::slotActionRemoveDriver()
+{
+    //打印设备卸载驱动时，通过dde-printer来操作
+    if(mp_Device->hardwareClass() == "printer") {
+        if(!QProcess::startDetached("dde-printer"))
+            qInfo() << "dde-printer startDetached error";
+        return;
+    }
+
+    PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Drivers"), mp_Device->name(), mp_Device->driver(), false, this);
+    rmDriver->show();
+    m_driverPagedOpened = true;
+    connect(rmDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
 }
 
 void PageSingleInfo::initWidgets()

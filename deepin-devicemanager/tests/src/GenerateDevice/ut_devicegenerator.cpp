@@ -145,7 +145,7 @@ TEST_F(UT_DeviceGenerator, UT_DeviceGenerator_generatorNetworkDevice)
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_DeviceGenerator_cmdInfo);
     m_deviceGenerator->generatorNetworkDevice();
-    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceNetwork.size());
+    EXPECT_FALSE(DeviceManager::instance()->m_ListDeviceNetwork.size());
 }
 
 //virtual void generatorAudioDevice();
@@ -500,7 +500,6 @@ TEST_F(UT_DeviceGenerator, UT_DeviceGenerator_getKeyboardInfoFromCatDevices)
     stub.set(ADDR(DeviceManager, cmdInfo), ut_DeviceGenerator_cmdInfo);
     m_deviceGenerator->getKeyboardInfoFromHwinfo();
     m_deviceGenerator->getKeyboardInfoFromLshw();
-    m_deviceGenerator->getKeyboardInfoFromCatDevices();
     EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceKeyboard.size());
 }
 

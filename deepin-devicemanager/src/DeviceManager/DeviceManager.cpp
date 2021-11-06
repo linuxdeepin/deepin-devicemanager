@@ -531,6 +531,17 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     m_ListDeviceNetwork.append(device);
 }
 
+DeviceBaseInfo * DeviceManager::getNetworkDevice(const QString& busInfo)
+{
+    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceNetwork.begin(); it != m_ListDeviceNetwork.end(); ++it) {
+        DeviceNetwork *net = dynamic_cast<DeviceNetwork*>(*it);
+        if(net && net->systemPath().contains(busInfo)){
+            return *it;
+        }
+    }
+    return nullptr;
+}
+
 void DeviceManager::correctNetworkLinkStatus(QString linkStatus, QString networkDriver)
 {
     if (m_ListDeviceNetwork.size() == 0)

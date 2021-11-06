@@ -15,8 +15,6 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "DeviceAudio.h"
-#include "EnableManager.h"
-
 #include "stub.h"
 #include "ut_Head.h"
 
@@ -119,15 +117,8 @@ TEST_F(UT_DeviceAudio, UT_DeviceAudio_driver)
     EXPECT_STREQ("snd_hda_intel", value.toStdString().c_str());
 }
 
-EnableDeviceStatus ut_audio_enableDeviceByDriver()
-{
-    return EnableDeviceStatus::EDS_Faild;
-}
-
 TEST_F(UT_DeviceAudio, UT_DeviceAudio_setEnable)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, enableDeviceByDriver), ut_audio_enableDeviceByDriver);
     EnableDeviceStatus value = m_deviceAudio->setEnable(false);
     EXPECT_EQ(1, value);
 }

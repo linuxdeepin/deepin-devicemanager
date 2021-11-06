@@ -26,7 +26,7 @@ DeviceWidget::DeviceWidget(QWidget *parent)
     connect(mp_ListView, &PageListView::itemClicked, this, &DeviceWidget::slotListViewWidgetItemClicked);
     connect(mp_PageInfo, &PageInfoWidget::refreshInfo, this, &DeviceWidget::refreshInfo);
     connect(mp_PageInfo, &PageInfoWidget::exportInfo, this, &DeviceWidget::exportInfo);
-    connect(mp_PageInfo, &PageInfoWidget::updateUI, this, &DeviceWidget::slotUpdateUI);
+    connect(mp_PageInfo, &PageInfoWidget::updateUI, this, &DeviceWidget::refreshInfo);
 
     connect(mp_ListView, &PageListView::refreshActionTrigger, this, &DeviceWidget::refreshInfo);
     connect(mp_ListView, &PageListView::exportActionTrigger, this, &DeviceWidget::exportInfo);
@@ -70,6 +70,12 @@ QString DeviceWidget::currentIndex() const
 {
     // 当前设备类型
     return mp_ListView->currentType();
+}
+
+void DeviceWidget::setFontChangeFlag()
+{
+    // 设置字体变化标志
+    mp_PageInfo->setFontChangeFlag();
 }
 
 void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)

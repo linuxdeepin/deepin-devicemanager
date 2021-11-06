@@ -60,6 +60,11 @@ public:
      */
     void updateTable(const QMap<QString, QString> &map);
 
+    /**
+     * @brief setFontChangeFlag: 设置字体变化标志
+     */
+    void setFontChangeFlag();
+
 protected:
     virtual void resizeEvent(QResizeEvent *event) override;
 

@@ -74,12 +74,6 @@ TEST_F(MainJob_UT, MainJob_UT_onFirstUpdate)
     m_mainJob->onFirstUpdate();
 }
 
-TEST_F(MainJob_UT, MainJob_UT_driverInstruction)
-{
-    m_mainJob->driverInstruction("ZMQ#DRIVER");
-    m_mainJob->ifconfigInstruction("ZMQ#DRIVER");
-}
-
 TEST_F(MainJob_UT, MainJob_UT_initDBus)
 {
     m_mainJob->initDBus();

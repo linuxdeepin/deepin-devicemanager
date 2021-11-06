@@ -15,6 +15,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstack-protector-strong -D_FORTITY_SOURCE=1 -z noexecstack -pie -fPIC -z lazy")
 
+# Find the library
+FIND_PACKAGE(PkgConfig REQUIRED)
+FIND_PACKAGE(QApt REQUIRED)
+PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
+
 # 设置包含头文件的时候不用包含路径 begin ****************************************************************************************
 MACRO(SUBDIRLIST result curdir)
   FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
@@ -34,19 +39,21 @@ endforeach()
 # 设置包含头文件的时候不用包含路径 end ****************************************************************************************
 
 # 引用ZeroMQ的库 begin ****************************************************************
-link_libraries("zmq")
+include_directories("/usr/include/cups/")
+link_libraries("cups")
 link_libraries("udev")
 # 引用ZeroMQ的库 end  *****************************************************************
 
 find_package(Qt5 COMPONENTS
     Core
-    DBus REQUIRED)
+    DBus
+    Sql REQUIRED)
 
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H})
 
-target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus)
+target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus Qt5::Sql kmod QApt)
 
 # Install files
 install(TARGETS ${APP_BIN_NAME} DESTINATION bin)
@@ -54,4 +61,4 @@ install(FILES ${SYSTEMD_SERVER} DESTINATION /lib/systemd/system)
 install(FILES ${DBUS_CONFIG} DESTINATION /etc/dbus-1/system.d)
 
 #TEST--------------------------------------------------
-#add_subdirectory(./tests)
+add_subdirectory(./tests)

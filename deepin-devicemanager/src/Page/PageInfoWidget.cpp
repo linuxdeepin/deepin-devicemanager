@@ -94,6 +94,11 @@ void PageInfoWidget::updateTable(const QMap<QString, QString> &map)
     }
 }
 
+void PageInfoWidget::setFontChangeFlag()
+{
+    mp_PageBoardInfo->setFontChangeFlag();
+}
+
 void PageInfoWidget::resizeEvent(QResizeEvent *event)
 {
     DWidget::resizeEvent(event);

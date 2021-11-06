@@ -90,22 +90,6 @@ private:
     bool parseInfo(const QString &info);
 
     /**
-     * @brief logicalCpu
-     * @param logical_id
-     * @param core_id
-     * @param physical_id
-     * @return
-     */
-    LogicalCpu& logicalCpu(int logical_id);
-
-    /**
-     * @brief setProcCpuinfo
-     * @param logical
-     * @param mapInfo
-     */
-    void setProcCpuinfo(LogicalCpu& logical,const QMap<QString, QString>& mapInfo);
-
-    /**
      * @brief readSysCpu : /sys/devices/system/cpu
      */
     void readSysCpu();
@@ -117,18 +101,25 @@ private:
     void readSysCpuN(int N, const QString &path);
 
     /**
+     * @brief readCoreSiblingsList  读取core_siblings_list
+     * @param path core_siblings_list 文件路径
+     * @return siblings_list
+     */
+    void readCoreSiblingsList(const QString &path);
+
+    /**
      * @brief readPhysicalID
-     * @param path
+     * @param dir
      * @return
      */
-    int readPhysicalID(const QString &path);
+    int readPhysicalID(const QDir &dir);
 
     /**
      * @brief readCoreID
-     * @param path
+     * @param dir
      * @return
      */
-    int readCoreID(const QString &path);
+    int readCoreID(const QDir &dir);
 
     /**
      * @brief readCpuCache : /sys/devices/system/cpu/cpu0/cache
@@ -151,9 +142,21 @@ private:
      */
     void readCpuFreq(const QString &path, LogicalCpu &lcpu);
 
+    /**
+     * @brief appendKeyValue
+     * @param info
+     * @param key
+     * @param value
+     */
+    void appendKeyValue(QString &info, const QString &key, const QString &value);
+    void appendKeyValue(QString &info, const QString &key, int value);
+
 private:
     QMap<int, PhysicalCpu>     m_MapPhysicalCpu;
+    QMap<int, CoreCpu>         m_CoreCpu;
+    QMap<int, LogicalCpu>      m_MapLogicalCpu;
     QString                    m_Arch;
+    QStringList                m_SiblingsList;      // cpu sibling list
 };
 
 #endif // CPUINFO_H

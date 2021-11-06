@@ -217,10 +217,21 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QFontMetrics fm(fo);
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
+    // 设备启用禁用的状态 和 可用不可用状态
     if (dynamic_cast<DetailTreeView *>(this->parent())->isCurDeviceEnable()) {
-        if (index.row() == 0 && index.column() == 1)
-            text = text.remove("(" + tr("Disable") + ")");
-    } else {
+        // 在设备没有被禁用的前提下，如果设备不可用则，则按照不可用要求显示
+        if(dynamic_cast<DetailTreeView *>(this->parent())->isCurDeviceAvailable()){
+            if (index.row() == 0 && index.column() == 1)
+                text = text.remove("(" + tr("Disable") + ")");
+        }else{
+            if (index.row() == 0 && index.column() == 1) {
+                text = "(" + tr("Unavailable") + ")" + text;
+                QPen pen = painter->pen();
+                pen.setColor(palette.color(cg, DPalette::PlaceholderText));
+                painter->setPen(pen);
+            }
+        }
+    } else { // 设备被禁用的情况下的显示效果
         if (index.row() == 0 && index.column() == 1) {
             text = "(" + tr("Disable") + ")" + text;
             QPen pen = painter->pen();
