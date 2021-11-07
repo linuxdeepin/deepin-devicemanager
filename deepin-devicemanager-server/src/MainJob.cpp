@@ -63,6 +63,7 @@ void MainJob::working()
     mp_DetectThread->start();
     connect(mp_DetectThread, &DetectThread::usbChanged, this, &MainJob::slotUsbChanged, Qt::ConnectionType::QueuedConnection);
     connect(mp_Enable, &DBusEnableInterface::update, this, &MainJob::slotUsbChanged);
+    connect(mp_IFace, &DBusInterface::update, this, &MainJob::slotUsbChanged);
 }
 
 INSTRUCTION_RES MainJob::executeClientInstruction(const QString &instructions)

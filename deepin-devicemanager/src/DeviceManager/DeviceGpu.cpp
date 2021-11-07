@@ -232,11 +232,9 @@ void DeviceGpu::loadOtherDeviceInfo()
 void DeviceGpu::loadTableData()
 {
     // 加载表格内容
-    QString tName;
+    QString tName = m_Name;
     if(!available()){
         tName = "(" + tr("Unavailable") + ") " + m_Name;
-    }else{
-        tName = m_Name;
     }
     m_TableData.append(tName);
     m_TableData.append(m_Vendor);

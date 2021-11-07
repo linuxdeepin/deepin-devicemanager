@@ -57,14 +57,6 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("unique_id") != mapInfo.end()){
-        m_UniqueID = mapInfo["unique_id"];
-        m_Name = mapInfo["name"];
-        m_SysPath = mapInfo["path"];
-        m_HardwareClass = mapInfo["Hardware Class"];
-        m_Enable = false;
-        return;
-    }
     if(mapInfo.find("Enable") != mapInfo.end()){
         m_Enable = false;
     }
@@ -261,13 +253,14 @@ void DeviceInput::loadOtherDeviceInfo()
 void DeviceInput::loadTableData()
 {
     // 加载表格数据
-    QString tName;
+    QString tName = m_Name;
+
     if (!available()){
         tName = "(" + tr("Unavailable") + ") " + m_Name;
-    }else if(!enable()){
+    }
+
+    if(!enable()){
         tName = "(" + tr("Disable") + ") " + m_Name;
-    }else{
-        tName = m_Name;
     }
 
     m_TableData.append(tName);

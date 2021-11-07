@@ -56,6 +56,11 @@ public:
      */
     bool getInfo(const QString &key, QString &info);
 
+    /**
+     * @brief refreshInfo 用来通知后台刷新信息
+     */
+    void refreshInfo();
+
 protected:
     DBusInterface();
 

@@ -34,6 +34,7 @@ class DriverWaitingWidget;
 
 class PageDriverControl : public DDialog
 {
+    Q_OBJECT
 public:
     /**
      * @brief PageInstallDriver
@@ -43,6 +44,13 @@ public:
      * @param parent
      */
     PageDriverControl(QString operation, QString deviceName, QString driverName, bool install = true, QWidget *parent = nullptr);
+
+signals:
+    /**
+     * @brief refreshInfo:刷新信息信号
+     */
+    void refreshInfo();
+
 private:
     /**
      * @brief init 初始化安装驱动界面
@@ -77,6 +85,12 @@ private slots:
      * @param sucess 更新是否成功
      */
     void slotProcessEnd(bool sucess);
+
+    /**
+     * @brief slotClose
+     */
+    void slotClose();
+
 private:
     /**
      * @brief removeBtn 移除按钮

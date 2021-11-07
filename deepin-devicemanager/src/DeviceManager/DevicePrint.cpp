@@ -137,11 +137,9 @@ void DevicePrint::loadOtherDeviceInfo()
 void DevicePrint::loadTableData()
 {
     // 加载表格数据
-    QString tName;
+    QString tName = m_Name;
     if (!enable()){
         tName = "(" + tr("Disable") + ") " + m_Name;
-    }else{
-        tName = m_Name;
     }
 
     m_TableData.append(tName);

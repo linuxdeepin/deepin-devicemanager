@@ -196,13 +196,14 @@ void DeviceNetwork::loadOtherDeviceInfo()
 void DeviceNetwork::loadTableData()
 {
     // 根据是否禁用设置设备名称
-    QString tName;
+    QString tName = m_Name;
+
     if (!available()){
         tName = "(" + tr("Unavailable") + ") " + m_Name;
-    }else if(!enable()){
+    }
+
+    if(!enable()){
         tName = "(" + tr("Disable") + ") " + m_Name;
-    }else{
-        tName = m_Name;
     }
 
     // 加载表格数据信息

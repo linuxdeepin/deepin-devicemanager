@@ -3,6 +3,7 @@
 #include "GetDriverNameWidget.h"
 #include "DriverWaitingWidget.h"
 #include "DBusDriverInterface.h"
+#include "DBusInterface.h"
 #include "drivericonwidget.h"
 
 #include <DBlurEffectWidget>
@@ -125,8 +126,16 @@ void PageDriverControl::slotProcessEnd(bool sucess)
     DriverIconWidget* widget = new DriverIconWidget(pic,status,"",this);
     mp_stackWidget->addWidget(widget);
     this->addButton(tr("OK", "button"), true);
-    connect(this->getButton(0), &QPushButton::clicked, this, &DDialog::close);
+    connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotClose);
     mp_stackWidget->setCurrentIndex(mp_stackWidget->currentIndex() + 1);
+    if(sucess)
+        DBusInterface::getInstance()->refreshInfo();
+}
+
+void PageDriverControl::slotClose()
+{
+    emit refreshInfo();
+    this->close();
 }
 
 void PageDriverControl::removeBtn()

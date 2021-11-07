@@ -487,7 +487,9 @@ void CmdTool::updateMapInfo(QList<QMap<QString,QString>>& removeLstMap, QMap<QSt
 
     QList<QMap<QString,QString>>::iterator it = removeLstMap.begin();
     for (;it != removeLstMap.end();++it) {
-        if (mapInfo.find("Module Alias") != mapInfo.end() && (*it)["unique_id"] == mapInfo["Module Alias"]){
+        if (mapInfo.find("Module Alias") != mapInfo.end()
+                && (*it)["unique_id"] == mapInfo["Module Alias"]
+                && (*it)["path"] == mapInfo["SysFS ID"]){
             if(!DBusEnableInterface::getInstance()->isDeviceEnabled((*it)["unique_id"]))
                 mapInfo.insert("Enable","false");
             mapInfo.insert("name",(*it)["name"]);

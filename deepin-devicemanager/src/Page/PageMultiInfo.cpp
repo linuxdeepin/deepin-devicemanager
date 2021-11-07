@@ -17,6 +17,7 @@
 #include <QAction>
 #include <QIcon>
 #include <QDebug>
+#include <QProcess>
 
 DWIDGET_USE_NAMESPACE
 
@@ -129,7 +130,10 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
 void PageMultiInfo::slotActionUpdateDriver(int row)
 {
     DeviceBaseInfo* device = m_lstDevice[row];
-    if(nullptr == device){
+    //打印设备卸载驱动时，通过dde-printer来操作
+    if(nullptr != device && device->hardwareClass() == "printer") {
+        if(!QProcess::startDetached("dde-printer"))
+            qInfo() << "dde-printer startDetached error";
         return;
     }
 
@@ -137,6 +141,7 @@ void PageMultiInfo::slotActionUpdateDriver(int row)
     installDriver->show();
     m_driverPagedOpened = true;
     connect(installDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
+    connect(installDriver, &PageDriverControl::refreshInfo, this, &PageMultiInfo::refreshInfo);
 }
 
 void PageMultiInfo::slotActionRemoveDriver(int row)

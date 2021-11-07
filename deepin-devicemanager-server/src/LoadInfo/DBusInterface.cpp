@@ -23,3 +23,8 @@ QString DBusInterface::getInfo(const QString &key)
     }
     return "0";
 }
+
+void DBusInterface::refreshInfo()
+{
+    emit update();
+}

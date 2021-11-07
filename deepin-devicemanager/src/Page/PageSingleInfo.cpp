@@ -256,6 +256,7 @@ void PageSingleInfo::slotActionRemoveDriver()
     rmDriver->show();
     m_driverPagedOpened = true;
     connect(rmDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
+    connect(rmDriver, &PageDriverControl::refreshInfo, this, &PageSingleInfo::refreshInfo);
 }
 
 void PageSingleInfo::initWidgets()

@@ -52,6 +52,11 @@ bool DBusInterface::getInfo(const QString &key, QString &info)
     }
 }
 
+void DBusInterface::refreshInfo()
+{
+    mp_Iface->asyncCall("refreshInfo");
+}
+
 void DBusInterface::init()
 {
     // 1. 连接到dbus

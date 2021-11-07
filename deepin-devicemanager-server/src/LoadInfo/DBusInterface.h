@@ -34,6 +34,9 @@ class DBusInterface : public QObject, protected QDBusContext
 public:
     explicit DBusInterface(QObject *parent = nullptr);
 
+signals:
+    void update();
+
 public slots:
     /**
      * @brief getInfo : Obtain hardware information through the DBus
@@ -41,6 +44,12 @@ public slots:
      * @return : Hardware info
      */
     Q_SCRIPTABLE QString getInfo(const QString &key);
+
+    /**
+     * @brief refreshInfo
+     * @return
+     */
+    Q_SCRIPTABLE void refreshInfo();
 };
 
 #endif // DBUSINTERFACE_H
