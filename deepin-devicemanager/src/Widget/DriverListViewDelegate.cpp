@@ -129,7 +129,7 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     //绘制文字
     textRect = rect;
     textRect.setX(textRect.x() + margin - 2);
-    QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
+    QString text = fm.elidedText(opt.text, Qt::ElideMiddle, textRect.width());
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
     painter->restore();
 }

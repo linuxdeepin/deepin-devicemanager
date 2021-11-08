@@ -20,11 +20,13 @@
 #include <DStyle>
 #include <DLineEdit>
 #include <DSuggestButton>
+#include <DFontSizeManager>
 
 #include <QHBoxLayout>
 #include <QFileDialog>
 #include <QDir>
 #include <QStorageInfo>
+#include <QFontMetrics>
 
 
 UrlChooserEdit::UrlChooserEdit(QWidget *parent) : DWidget(parent)
@@ -41,7 +43,7 @@ void UrlChooserEdit::initUI()
    mp_urlEdit->setFixedSize(410,36);
    mp_urlEdit->setText(QDir::homePath());
    mp_urlEdit->lineEdit()->setReadOnly(true);
-   mp_urlEdit->setFocusPolicy(Qt::NoFocus);
+   mp_urlEdit->setFocusPolicy(Qt::NoFocus);  
    mp_urlBtn->setFixedSize(40,36);
    mp_urlBtn->setIcon(DStyleHelper(mp_urlEdit->style()).standardIcon(DStyle::SP_SelectElement, nullptr));
    mp_urlBtn->setIconSize(QSize(24,24));
@@ -69,7 +71,9 @@ void UrlChooserEdit::slotChooseUrl()
 {
     mp_urlEdit->clear();
     QString path = QFileDialog::getExistingDirectory(this,"","",QFileDialog::ReadOnly);
-    mp_urlEdit->setText(path);
+    QFontMetrics fEdlit(mp_urlEdit->font());
+    QString floderPath = fEdlit.elidedText(path, Qt::ElideMiddle, mp_urlEdit->width()-60);
+    mp_urlEdit->setText(floderPath);
 }
 
 void UrlChooserEdit::slotCheckLocalFolder(const QString &path)

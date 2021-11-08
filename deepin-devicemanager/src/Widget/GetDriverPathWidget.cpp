@@ -40,6 +40,7 @@ void GetDriverPathWidget::init()
     mainLayout->addLayout(hLayout1);
     mainLayout->addWidget(mp_fileChooseEdit);
     mainLayout->addWidget(mp_includeCheckBox);
+    mp_includeCheckBox->setCheckState(Qt::Checked);
     mainLayout->addStretch();
     this->setLayout(mainLayout);
 }

@@ -108,13 +108,13 @@ void GetDriverNameWidget::traverseFolders(bool includeSub, const QString& path, 
 
     if (includeSub) {
         QStringList dirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-        if(dirs.isEmpty())
-            return;
-        for (QString folder : dirs) {
-            if(folder.isEmpty())
-                continue;
-            QString subPath = path + "/" + folder;
-            traverseFolders(includeSub, subPath, lstDrivers);
+        if(!dirs.isEmpty()){
+            for (QString folder : dirs) {
+                if(folder.isEmpty())
+                    continue;
+                QString subPath = path + "/" + folder;
+                traverseFolders(includeSub, subPath, lstDrivers);
+            }
         }
     }
     lstDrivers = mp_driversList;
