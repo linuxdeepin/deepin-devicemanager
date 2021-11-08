@@ -20,6 +20,7 @@ DeviceInput::DeviceInput()
     , m_MaximumPower("")
     , m_Speed("")
     , m_KeyToLshw("")
+    , m_SerialID("")
 {
     initFilterKey();
     m_CanEnable = true;
@@ -61,6 +62,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_Enable = false;
     }
     // 设置设备基本属性
+    setAttribute(mapInfo, "Serial ID", m_SerialID);
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "name", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -193,6 +195,10 @@ const QString DeviceInput::getOverviewInfo()
 
 EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
+    if(m_SerialID.isEmpty()){
+        return EDS_NoSerial;
+    }
+
     if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
         return EDS_Faild;
     }

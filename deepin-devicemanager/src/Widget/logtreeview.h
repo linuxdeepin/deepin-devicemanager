@@ -60,6 +60,12 @@ public:
     bool currentRowEnable();
 
     /**
+     * @brief currentRowAvailable : 获取当前行是否不可用状态
+     * @return
+     */
+    bool currentRowAvailable();
+
+    /**
      * @brief currentRow
      * @return
      */

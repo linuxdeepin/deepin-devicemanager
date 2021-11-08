@@ -14,7 +14,7 @@
 <message>
 <location filename="Desktop Entry]Name" line="0"/>
 <source>Deepin Device Manager</source>
-<translation>Správa zařízení</translation>
+<translation>Deepin správa zařízení</translation>
 </message>
 </context>
 </TS>

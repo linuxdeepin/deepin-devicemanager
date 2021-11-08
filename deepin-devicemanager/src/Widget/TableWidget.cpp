@@ -33,6 +33,7 @@ TableWidget::TableWidget(QWidget *parent)
     , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
     , mp_Menu(new DMenu(this))
     , m_Enable(false)
+    , m_DriverPageOpened(false)
 
 {
     initWidget();
@@ -124,6 +125,11 @@ void TableWidget::setCanUninstall(bool canInstall)
     m_CanUninstall = canInstall;
 }
 
+void TableWidget::setDriverPageOpen(bool open)
+{
+    m_DriverPageOpened = open;
+}
+
 void TableWidget::clear()
 {
     if (mp_Table) {
@@ -185,22 +191,43 @@ void TableWidget::paintEvent(QPaintEvent *e)
 
 void TableWidget::slotShowMenu(const QPoint &)
 {
-    // right-click menu
     mp_Menu->clear();
-    QModelIndex index = mp_Table->currentIndex();
+    // 不管什么状态 导出、刷新、复制 都有
+    mp_Refresh->setEnabled(true);
+    mp_Export->setEnabled(true);
+    mp_Enable->setEnabled(true);
+    mp_updateDriver->setEnabled(true);
+    mp_removeDriver->setEnabled(true);
 
-    if (m_Enable && index.row() >= 0) {
-        if (mp_Table->currentRowEnable()) {
-            mp_Enable->setText(tr("Disable"));
-        } else {
-            mp_Enable->setText(tr("Enable"));
-        }
-        mp_Menu->addAction(mp_Enable);
+    // 不可用状态：卸载和启用禁用置灰
+    if(!mp_Table->currentRowAvailable()){
+        mp_Enable->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+    }
+    // 禁用状态：更新卸载置灰
+    if (mp_Table->currentRowEnable()) {
+        mp_Enable->setText(tr("Disable"));
+    } else {
+        mp_updateDriver->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+        mp_Enable->setEnabled(true);
+        mp_Enable->setText(tr("Enable"));
+    }
+    // 驱动界面打开状态： 驱动的更新卸载和设备的启用禁用置灰
+    if(m_DriverPageOpened){
+        mp_updateDriver->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+        mp_Enable->setEnabled(false);
     }
 
+    // 添加按钮到菜单
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
-
+    QModelIndex index = mp_Table->currentIndex();
+    if (m_Enable && index.row() >= 0) {
+        mp_Menu->addAction(mp_Enable);
+    }
+    // 主板、内存、cpu等没有驱动，无需右键按钮
     if(m_CanUninstall){
         mp_Menu->addSeparator();
         mp_Menu->addAction(mp_updateDriver);

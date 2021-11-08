@@ -111,7 +111,7 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
     if (res == EDS_Success) {
         // 设置成功,更新界面
         emit updateUI();
-    } else {
+    } else if(res == EDS_Faild) {
         // 设置失败
         QString con;
         if (enable)
@@ -123,7 +123,9 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
 
         // 禁用、启用失败提示
         DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
-
+    } else if(res == EDS_NoSerial){
+        QString con = tr("Failed to disable it: unable to get the device SN");
+        DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
     }
 }
 
@@ -140,8 +142,9 @@ void PageMultiInfo::slotActionUpdateDriver(int row)
     PageDriverControl* installDriver = new PageDriverControl(tr("Update Drivers"), device->name(), "", true, this);
     installDriver->show();
     m_driverPagedOpened = true;
-    connect(installDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
+    connect(installDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;setDriverPageOpen(m_driverPagedOpened);});
     connect(installDriver, &PageDriverControl::refreshInfo, this, &PageMultiInfo::refreshInfo);
+    setDriverPageOpen(m_driverPagedOpened);
 }
 
 void PageMultiInfo::slotActionRemoveDriver(int row)
@@ -154,7 +157,9 @@ void PageMultiInfo::slotActionRemoveDriver(int row)
     PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Drivers"), device->name(), device->driver(), false, this);
     rmDriver->show();
     m_driverPagedOpened = true;
-    connect(rmDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
+    connect(rmDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;setDriverPageOpen(m_driverPagedOpened);});
+    connect(rmDriver, &PageDriverControl::refreshInfo, this, &PageMultiInfo::refreshInfo);
+    setDriverPageOpen(m_driverPagedOpened);
 }
 
 void PageMultiInfo::initWidgets()
@@ -177,4 +182,9 @@ void PageMultiInfo::initWidgets()
     hLayout->setContentsMargins(10, 10, 10, 0);
 
     setLayout(hLayout);
+}
+
+void PageMultiInfo::setDriverPageOpen(bool open)
+{
+    mp_Table->setDriverPageOpen(open);
 }

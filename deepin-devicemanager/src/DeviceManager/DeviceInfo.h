@@ -41,6 +41,7 @@
  */
 enum EnableDeviceStatus {
     EDS_Cancle,
+    EDS_NoSerial,
     EDS_Faild,
     EDS_Success
 };

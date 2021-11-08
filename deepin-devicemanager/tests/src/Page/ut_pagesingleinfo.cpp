@@ -72,14 +72,14 @@ TEST_F(UT_PageSingleInfo, UT_PageSingleInfo_setLabel)
 
 TEST_F(UT_PageSingleInfo, UT_PageSingleInfo_slotActionRefresh)
 {
-    QString conStr=m_PageSingleInfo->mp_Content->toString();
-    m_PageSingleInfo->slotActionCopy();
-    QClipboard *clipboard = DApplication::clipboard();
-    QString clipStr = clipboard->text();
-    EXPECT_STREQ(conStr.toStdString().c_str(),clipStr.toStdString().c_str());
+//    QString conStr=m_PageSingleInfo->mp_Content->toString();
+//    m_PageSingleInfo->slotActionCopy();
+//    QClipboard *clipboard = DApplication::clipboard();
+//    QString clipStr = clipboard->text();
+//    EXPECT_STREQ(conStr.toStdString().c_str(),clipStr.toStdString().c_str());
 
-    m_PageSingleInfo->slotShowMenu(QPoint(0, 0));
-    EXPECT_EQ(m_PageSingleInfo->mp_Menu->actions().size(),1);
+//    m_PageSingleInfo->slotShowMenu(QPoint(0, 0));
+//    EXPECT_EQ(m_PageSingleInfo->mp_Menu->actions().size(),1);
 }
 
 TEST_F(UT_PageSingleInfo, UT_PageSingleInfo_slotActionEnable)

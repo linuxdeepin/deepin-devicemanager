@@ -58,6 +58,12 @@ public:
      */
     void setCanUninstall(bool canUninstall);
 
+    /**
+     * @brief setDriverPageOpen 设置驱动控制界面
+     * @param open
+     */
+    void setDriverPageOpen(bool open);
+
 signals:
     /**
      * @brief itemClicked:点击item发出信号

@@ -117,6 +117,12 @@ private:
      */
     void initWidgets();
 
+    /**
+     * @brief setDriverPageOpen 设置驱动控制界面
+     * @param open
+     */
+    void setDriverPageOpen(bool open);
+
 private:
     DLabel                    *mp_Label;
     PageTableHeader           *mp_Table;       //<! 上面的表格

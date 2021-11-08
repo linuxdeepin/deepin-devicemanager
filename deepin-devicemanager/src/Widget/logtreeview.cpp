@@ -95,6 +95,23 @@ bool LogTreeView::currentRowEnable()
     return true;
 }
 
+bool LogTreeView::currentRowAvailable()
+{
+    QModelIndex index = currentIndex();
+     int row = index.row();
+     if (row < 0) {
+         return false;
+     }
+     QStandardItem *item = mp_Model->item(row, 0);
+     if (item) {
+         QString str = item->text();
+         if (str.startsWith("(" + tr("Unavailable") + ")")) {
+             return false;
+         }
+     }
+     return true;
+}
+
 int LogTreeView::currentRow()
 {
     QModelIndex index = currentIndex();

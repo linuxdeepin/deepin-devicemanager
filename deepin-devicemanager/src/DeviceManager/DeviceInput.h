@@ -139,6 +139,7 @@ private:
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
     QString             m_KeyToLshw;                    //<!
+    QString             m_SerialID;                     //<!  设备的序列号id
 
     QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
 };

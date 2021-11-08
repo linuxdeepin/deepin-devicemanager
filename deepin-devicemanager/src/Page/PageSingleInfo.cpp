@@ -144,49 +144,49 @@ bool PageSingleInfo::isExpanded()
 
 void PageSingleInfo::slotShowMenu(const QPoint &)
 {
-    // 显示右键菜单
     mp_Menu->clear();
-    if(!m_driverPagedOpened){
-        mp_Refresh->setEnabled(true);
-        mp_Export->setEnabled(true);
-        mp_Copy->setEnabled(true);
-        mp_updateDriver->setEnabled(true);
-        mp_removeDriver->setEnabled(true);
-    } else {
-        mp_Refresh->setEnabled(false);
-        mp_Export->setEnabled(false);
-        mp_Copy->setEnabled(false);
+    // 不管什么状态 导出、刷新、复制 都有
+    mp_Refresh->setEnabled(true);
+    mp_Export->setEnabled(true);
+    mp_Copy->setEnabled(true);
+    mp_Enable->setEnabled(true);
+    mp_updateDriver->setEnabled(true);
+    mp_removeDriver->setEnabled(true);
+
+    // 不可用状态：卸载和启用禁用置灰
+    if(!mp_Device->available()){
+        mp_removeDriver->setEnabled(false);
+        mp_Enable->setEnabled(false);
+    }
+    // 禁用状态：更新卸载置灰
+    if(!mp_Device->enable()){
+        mp_Enable->setEnabled(true);
         mp_updateDriver->setEnabled(false);
         mp_removeDriver->setEnabled(false);
+        mp_Enable->setText(tr("Enable"));
+    }else{
+        mp_Enable->setText(tr("Disable"));
     }
+    // 驱动界面打开状态： 驱动的更新卸载和设备的启用禁用置灰
+    if(m_driverPagedOpened){
+        mp_updateDriver->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+        mp_Enable->setEnabled(false);
+    }
+
+    // 添加按钮到菜单
     mp_Menu->addAction(mp_Copy);
-
-    if (!mp_Device)
-        return;
-
-    if (mp_Device->canEnable()) {
-        if (mp_Content->isCurDeviceEnable()) {
-            mp_Enable->setText(tr("Disable"));
-        } else {
-            mp_Enable->setText(tr("Enable"));
-            mp_Refresh->setEnabled(false);
-            mp_Export->setEnabled(false);
-            mp_Copy->setEnabled(false);
-            mp_updateDriver->setEnabled(false);
-            mp_removeDriver->setEnabled(false);
-        }
-        mp_Menu->addAction(mp_Enable);
-    }
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
-
+    if (mp_Device->canEnable()){
+        mp_Menu->addAction(mp_Enable);
+    }
     // 主板、内存、cpu等没有驱动，无需右键按钮
     if(mp_Device->canUninstall()){
         mp_Menu->addSeparator();
         mp_Menu->addAction(mp_updateDriver);
         mp_Menu->addAction(mp_removeDriver);
     }
-
     mp_Menu->exec(QCursor::pos());
 }
 
@@ -220,9 +220,12 @@ void PageSingleInfo::slotActionEnable()
         // 除设置成功的情况，其他情况需要提示设置失败
         if (res == EDS_Success) {
             emit refreshInfo();
-        } else {
+        } else if(res == EDS_NoSerial){
+            QString con = tr("Failed to disable it: unable to get the device SN");
+            // 禁用失败提示
+            DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
+        }else {
             QString con = tr("Failed to enable the device");
-
             // 禁用失败提示
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         }

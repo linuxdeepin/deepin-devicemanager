@@ -11,7 +11,7 @@ DeviceImage::DeviceImage()
     , m_Version("")
     , m_BusInfo("")
     , m_Capabilities("")
-    , m_Driver("uvcvideo")
+    , m_Driver("")
     , m_MaximumPower("")
     , m_Speed("")
 {
