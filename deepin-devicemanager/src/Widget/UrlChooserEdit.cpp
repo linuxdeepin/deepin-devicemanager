@@ -42,6 +42,7 @@ void UrlChooserEdit::initUI()
    setFixedSize(460,36);
    mp_urlEdit->setFixedSize(410,36);
    mp_urlEdit->setText(QDir::homePath());
+   mp_urlEdit->setClearButtonEnabled(false);
    mp_urlEdit->lineEdit()->setReadOnly(true);
    mp_urlEdit->setFocusPolicy(Qt::NoFocus);  
    mp_urlBtn->setFixedSize(40,36);
