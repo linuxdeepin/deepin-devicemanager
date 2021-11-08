@@ -105,16 +105,3 @@ TEST_F(DetailViewDelegate_UT, ut_createEditor)
     m_dViewDelegate->createEditor(nullptr, m_item, index);
     delete item;
 }
-
-TEST_F(DetailViewDelegate_UT, ut_sizeHint)
-{
-    QStyleOptionViewItem m_item;
-
-    QTableWidgetItem *item = new QTableWidgetItem;
-    item->setText("/");
-    m_treeView->setItem(0, 0, item);
-    QModelIndex index = m_treeView->model()->index(0, 0);
-
-    m_dViewDelegate->sizeHint(m_item, index);
-    delete item;
-}
