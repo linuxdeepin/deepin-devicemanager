@@ -76,6 +76,7 @@ void PageDriverControl::initInstallWidget()
     connect(this->getButton(1), &QPushButton::clicked, this, &PageDriverControl::slotBtnNext);
     connect(mp_NameDialog, &GetDriverNameWidget::signalItemClicked, this, [ = ] {mp_tipLabel->clear();});
     connect(mp_PathDialog, &GetDriverPathWidget::signalNotLocalFolder, this, [=](bool isLocal){
+        mp_tipLabel->clear();
         if (!isLocal)
            getButton(1)->setDisabled(true);
         else
