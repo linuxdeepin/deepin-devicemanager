@@ -64,24 +64,29 @@ void UrlChooserEdit::initConnections()
 
 QString UrlChooserEdit::text() const
 {
-    return  mp_urlEdit->text();
+    return  mp_folderPath;
 }
 
 void UrlChooserEdit::slotChooseUrl()
 {
     mp_urlEdit->clear();
     QString path = QFileDialog::getExistingDirectory(this,"","",QFileDialog::ReadOnly);
+    mp_folderPath = path;
     QFontMetrics fEdlit(mp_urlEdit->font());
-    QString floderPath = fEdlit.elidedText(path, Qt::ElideMiddle, mp_urlEdit->width()-60);
+    QString floderPath = fEdlit.elidedText(path, Qt::ElideMiddle, mp_urlEdit->width() - 80);
     mp_urlEdit->setText(floderPath);
 }
 
 void UrlChooserEdit::slotCheckLocalFolder(const QString &path)
 {
+    Q_UNUSED(path);
+    bool isLocal = true;
     mp_urlEdit->setAlert(false);
-    QStorageInfo info(path);                               //获取路径信息
+    QStorageInfo info(mp_folderPath);                               //获取路径信息
     if (!info.isValid() || !info.device().startsWith("/dev/")) {     //判断路径信息是不是本地路径
         mp_urlEdit->setAlert(true);
         mp_urlEdit->showAlertMessage(tr("Select a local folder please"),this,1000);
+        isLocal = false;
     }
+    emit signalNotLocalFolder(isLocal);
 }

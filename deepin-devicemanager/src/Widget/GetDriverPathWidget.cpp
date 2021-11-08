@@ -9,6 +9,7 @@ GetDriverPathWidget::GetDriverPathWidget(QWidget *parent)
     , mp_includeCheckBox(new DCheckBox(QObject::tr("Include subfolders"), this))
 {
     init();
+    connect(mp_fileChooseEdit, &UrlChooserEdit::signalNotLocalFolder, this, &GetDriverPathWidget::signalNotLocalFolder);
 }
 
 GetDriverPathWidget::~GetDriverPathWidget()

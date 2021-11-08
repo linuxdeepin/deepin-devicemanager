@@ -48,6 +48,11 @@ private:
 
 signals:
 
+    /**
+     * @brief signalNotLocalFolder
+     */
+    void signalNotLocalFolder(bool isLocal);
+
 public slots:
 
     /**
@@ -64,6 +69,7 @@ public slots:
 private:
     DLineEdit *mp_urlEdit;
     DSuggestButton *mp_urlBtn;
+    QString mp_folderPath;
 };
 DWIDGET_END_NAMESPACE
 #endif // URLCHOOSEREDIT_H

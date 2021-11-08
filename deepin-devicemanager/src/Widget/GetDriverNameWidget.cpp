@@ -22,7 +22,7 @@ void GetDriverNameWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     DFrame *frame = new DFrame;
-    frame->setFixedSize(460,170);
+    frame->setFixedSize(460,160);
     mainLayout->setContentsMargins(0,0,0,0);
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->setContentsMargins(0,0,0,0);

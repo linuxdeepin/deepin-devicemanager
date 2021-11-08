@@ -60,6 +60,12 @@ private:
      */
     void init();
 
+signals:
+    /**
+     * @brief signalNotLocalFolder
+     */
+    void signalNotLocalFolder(bool isLocal);
+
 private:
     UrlChooserEdit *mp_fileChooseEdit;
     DCheckBox      *mp_includeCheckBox;

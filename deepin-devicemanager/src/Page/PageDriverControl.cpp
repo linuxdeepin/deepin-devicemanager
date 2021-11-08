@@ -75,6 +75,12 @@ void PageDriverControl::initInstallWidget()
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
     connect(this->getButton(1), &QPushButton::clicked, this, &PageDriverControl::slotBtnNext);
     connect(mp_NameDialog, &GetDriverNameWidget::signalItemClicked, this, [ = ] {mp_tipLabel->clear();});
+    connect(mp_PathDialog, &GetDriverPathWidget::signalNotLocalFolder, this, [=](bool isLocal){
+        if (!isLocal)
+           getButton(1)->setDisabled(true);
+        else
+           getButton(1)->setDisabled(false);
+    });
 }
 
 void PageDriverControl::initUninstallWidget()
@@ -150,7 +156,7 @@ void PageDriverControl::installDriverLogical()
         QString path = mp_PathDialog->path();
         QFile file(path);
         bool includeSubdir = mp_PathDialog->includeSubdir();
-        if (path.isEmpty() || !file.exists()) {
+        if(path.isEmpty() || !file.exists()){
             mp_tipLabel->setText(tr("The selected folder does not exist, please select again"));
             return;
         }
