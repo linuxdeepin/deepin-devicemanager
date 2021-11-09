@@ -2,6 +2,7 @@
 
 #include <DFrame>
 #include <DLabel>
+#include <DApplicationHelper>
 
 #include <QVBoxLayout>
 #include <QPushButton>
@@ -13,6 +14,7 @@ DWIDGET_BEGIN_NAMESPACE
 GetDriverNameWidget::GetDriverNameWidget(QWidget *parent)
     :DWidget (parent)
     ,mp_ListView(new DriverListView(this))
+    ,mp_tipLabel(new DLabel)
 {
     init();
     initConnections();
@@ -22,7 +24,7 @@ void GetDriverNameWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     DFrame *frame = new DFrame;
-    frame->setFixedSize(460,160);
+    frame->setFixedWidth(460);
     mainLayout->setContentsMargins(0,0,0,0);
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->setContentsMargins(0,0,0,0);
@@ -32,13 +34,13 @@ void GetDriverNameWidget::init()
     hLayout->addStretch();
 
     QHBoxLayout *driverLayout = new QHBoxLayout;
-    driverLayout->setContentsMargins(0,0,0,10);
+    driverLayout->setContentsMargins(0,0,0,0);
     driverLayout->addStretch();
     driverLayout->addWidget(frame);
     driverLayout->addStretch();
 
     QHBoxLayout *layout = new QHBoxLayout;
-    layout->setContentsMargins(5,10,5,10);
+    layout->setContentsMargins(0,0,0,0);
     layout->addStretch();
     layout->addWidget(mp_ListView);
     layout->addStretch();
@@ -47,7 +49,15 @@ void GetDriverNameWidget::init()
     mainLayout->addStretch();
     mainLayout->addLayout(hLayout);
     mainLayout->addLayout(driverLayout);
-    mainLayout->addStretch();
+    mainLayout->addWidget(mp_tipLabel);
+
+    mp_tipLabel->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
+    mp_tipLabel->setElideMode(Qt::ElideRight);
+    mp_tipLabel->setMinimumHeight(20);
+
+    DPalette pa = DApplicationHelper::instance()->palette(mp_tipLabel);
+    pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
+    DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
 
     this->setLayout(mainLayout);
 }
@@ -89,6 +99,12 @@ QString GetDriverNameWidget::selectName()
     if (-1 == mp_selectedRow || !(mp_selectedRow < mp_driverPathList.size() && mp_selectedRow >-1))
         return "";
     return mp_driverPathList[mp_selectedRow];
+}
+
+void GetDriverNameWidget::updateTipLabelText(const QString &text)
+{
+    mp_tipLabel->setText(text);
+    mp_tipLabel->setToolTip(text);
 }
 
 void GetDriverNameWidget::traverseFolders(bool includeSub, const QString& path, QStringList& lstDrivers)
@@ -138,6 +154,7 @@ void GetDriverNameWidget::reloadDriversListPages(const QStringList &drivers)
 
 void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
 {
+    updateTipLabelText("");
     emit signalItemClicked();
     int row = index.row();
     QStandardItem *item =  mp_model->item(row, 1);
@@ -149,7 +166,7 @@ void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
         lastItem->setSelectable(false);
     }
     if (Qt::Unchecked == item->checkState())
-        item->setCheckState(Qt::Checked);      
+        item->setCheckState(Qt::Checked);
     mp_selectedRow = row;
 }
 

@@ -54,6 +54,17 @@ public:
      */
     bool includeSubdir();
 
+    /**
+     * @brief updateTipLabelText 更新tipLabel
+     * @param text
+     */
+    void updateTipLabelText(const QString &text);
+
+    /**
+     * @brief clearTipLabelText
+     */
+    void clearTipLabelText();
+
 private:
     /**
      * @brief init 初始化界面
@@ -69,6 +80,7 @@ signals:
 private:
     UrlChooserEdit *mp_fileChooseEdit;
     DCheckBox      *mp_includeCheckBox;
+    DLabel         *mp_tipLabel;
 };
 DWIDGET_END_NAMESPACE
 #endif // GETDRIVERLSTDIALOG_H
