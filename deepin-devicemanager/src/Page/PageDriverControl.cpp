@@ -94,7 +94,7 @@ void PageDriverControl::initUninstallWidget()
     mp_stackWidget->addWidget(widget);
     mp_stackWidget->setCurrentIndex(0);
     this->addButton(tr("Cancel", "button"), true);
-    this->addButton(tr("Uninstall", "button"), true, DDialog::ButtonRecommend);
+    this->addButton(tr("Uninstall", "button"), true, DDialog::ButtonWarning);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
     connect(this->getButton(1), &QPushButton::clicked, this, &PageDriverControl::slotBtnNext);
 
