@@ -428,6 +428,11 @@ bool DeviceBaseInfo::canEnable()
     return m_CanEnable;
 }
 
+void DeviceBaseInfo::setEnableValue(bool e)
+{
+    m_Enable = e;
+}
+
 bool DeviceBaseInfo::canUninstall()
 {
     return m_CanUninstall;
@@ -443,9 +448,9 @@ const QString& DeviceBaseInfo::hardwareClass() const
     return m_HardwareClass;
 }
 
-const QString& DeviceBaseInfo::systemPath() const
+const QString& DeviceBaseInfo::uniqueID() const
 {
-    return m_SysPath;
+    return m_UniqueID;
 }
 
 const QString DeviceBaseInfo::getOverviewInfo()

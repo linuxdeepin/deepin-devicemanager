@@ -47,9 +47,7 @@ bool DBusEnableInterface::enable(const QString& hclass, const QString& name, con
     }else/* if(QFile::exists("/sys" + sPath + QString("/remove")))*/{
         res = removeEnable(hclass, name, path, enable_device);
     }
-
-    if(enable_device)
-        emit update();
+    emit update();
     return res;
 }
 
@@ -99,6 +97,7 @@ bool DBusEnableInterface::authorizedEnable(const QString& hclass, const QString&
     if(!file.open(QIODevice::ReadWrite)){
         return false;
     }
+    qInfo() << "001 : " << "/sys" + path+QString("/authorized");
     if(enable_device){
         /*
          启用的流程为：以 /devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0 为例
@@ -125,11 +124,11 @@ bool DBusEnableInterface::authorizedEnable(const QString& hclass, const QString&
         fpop.write("1");
         fpop.close();
 
-        EnableSqlManager::getInstance()->updateDataToAuthorizedTable(unique_id, enable_device);
+        EnableSqlManager::getInstance()->removeDataFromAuthorizedTable(unique_id);
     }else{
         file.write("0");
         file.close();
-        EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass,name,path,unique_id,enable_device);
+        EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass,name,path,unique_id,true);
     }
     return true;
 }

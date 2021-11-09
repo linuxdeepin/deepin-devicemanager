@@ -78,13 +78,12 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         setAttribute(mapInfo, "unique_id", m_UniqueID);
         setAttribute(mapInfo, "path", m_SysPath);
         setAttribute(mapInfo, "Hardware Class", m_HardwareClass);
-        if(mapInfo.find("Enable") != mapInfo.end()){
-            m_Enable = mapInfo["Enable"].toInt();
-        }
+        m_Enable = false;
     }
 
     setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
     setAttribute(mapInfo, "SysFS Device Link", m_SysPath);
+    setAttribute(mapInfo, "Driver", m_Driver);
     return true;
 }
 

@@ -66,7 +66,6 @@ void MonitorUsb::monitor()
         strcpy(buf, udev_device_get_action(dev));
         if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) {
             if(0 == strcmp("add", buf)){
-                EnableSqlManager::getInstance()->clearEnableFromAuthorizedTable();
                 disableDevice();
             }
             m_UsbChanged = true;

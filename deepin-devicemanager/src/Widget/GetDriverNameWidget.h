@@ -30,7 +30,6 @@
 
 DWIDGET_BEGIN_NAMESPACE
 
-class DLabel;
 class GetDriverNameWidget : public DWidget
 {
     Q_OBJECT
@@ -49,12 +48,6 @@ public:
      * @return
      */
     QString selectName();
-
-    /**
-     * @brief updateTipLabelText 更新tipLabel
-     * @param text
-     */
-    void updateTipLabelText(const QString &text);
 
 private:
     /**
@@ -75,11 +68,6 @@ private:
      */
     void traverseFolders(bool includeSub, const QString& path, QStringList& lstDrivers);
 
-    /**
-     * @brief reloadDriversListPages 根据有无驱动加载界面
-     */
-    void reloadDriversListPages(const QStringList &drivers);
-
 public slots:
 
     /**
@@ -90,15 +78,7 @@ public slots:
 
 signals:
 
-    /**
-     * @brief signalItemClicked
-     */
     void signalItemClicked();
-
-    /**
-     * @brief signalDriversCount
-     */
-    void signalDriversCount();
 
 private:
     DriverListView    *mp_ListView;
@@ -108,7 +88,6 @@ private:
     QStringList       mp_driverPathList;   //驱动路径列表
     QStringList       mp_driversList;      //驱动名列表
     int               mp_selectedRow = -1;  //当前选中行
-    DLabel           *mp_tipLabel;
 };
 DWIDGET_END_NAMESPACE
 #endif // GETDRIVERNAMEDIALOG_H

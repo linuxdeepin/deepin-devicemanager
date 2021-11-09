@@ -398,23 +398,22 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 
 void CmdTool::getMulHwinfoInfo(const QString &info)
 {
-    // 获取已经禁用的设备的信息
-    QString sinfo;
-    DBusEnableInterface::getInstance()->getRemoveInfo(sinfo);
-    QList<QMap<QString,QString>> lstMap;
-    getRemoveAuthInfo(sinfo,lstMap);
-    DBusEnableInterface::getInstance()->getAuthorizedInfo(sinfo);
-    qInfo() << "sinfo: " << sinfo;
-    getRemoveAuthInfo(sinfo,lstMap);
+//    // 获取已经禁用的设备的信息
+    QString sAinfo,sRinfo;
+    DBusEnableInterface::getInstance()->getRemoveInfo(sRinfo);
+    DBusEnableInterface::getInstance()->getAuthorizedInfo(sAinfo);
 
     // 获取信息
     QStringList items = info.split("\n\n");
-    foreach (const QString &item, items) {
+    QStringList auths = sAinfo.split("\n\n");
+    QStringList remos = sRinfo.split("\n\n");
+    QStringList resItems = items + auths + remos;
+
+    foreach (const QString &item, resItems) {
         if (item.isEmpty())
             continue;
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
-        updateMapInfo(lstMap, mapInfo);
         if (mapInfo["Hardware Class"] == "sound") {
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"].contains("network")) {
@@ -433,19 +432,6 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             addMapInfo("hwinfo_display", mapInfo);
         } else {
             addUsbMapInfo("hwinfo_usb", mapInfo);
-        }
-    }
-
-    clearUsbDevice(lstMap);
-    for (QList<QMap<QString,QString>>::iterator it = lstMap.begin();it != lstMap.end();++it) {
-        if ((*it)["Hardware Class"] == "sound") {
-            addMapInfo("hwinfo_sound", (*it));
-        }else if ((*it)["Hardware Class"] == "mouse") {
-            addMapInfo("hwinfo_mouse", (*it));
-        }else if ((*it)["Hardware Class"] == "network interface") {
-            addMapInfo("hwinfo_network", (*it));
-        }else {
-            addUsbMapInfo("hwinfo_usb", (*it));
         }
     }
 }

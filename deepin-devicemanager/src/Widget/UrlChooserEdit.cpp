@@ -42,7 +42,6 @@ void UrlChooserEdit::initUI()
    setFixedSize(460,36);
    mp_urlEdit->setFixedSize(410,36);
    mp_urlEdit->setText(QDir::homePath());
-   mp_folderPath = mp_urlEdit->text();
    mp_urlEdit->setClearButtonEnabled(false);
    mp_urlEdit->lineEdit()->setReadOnly(true);
    mp_urlEdit->setFocusPolicy(Qt::NoFocus);  
@@ -56,13 +55,12 @@ void UrlChooserEdit::initUI()
    mainLayout->addSpacing(10);
    mainLayout->addWidget(mp_urlBtn);
    setLayout(mainLayout);
-   mp_folderPath = mp_urlEdit->text();
-   mp_elidParh = mp_folderPath;
 }
 
 void UrlChooserEdit::initConnections()
 {
     connect(mp_urlBtn,&DSuggestButton::clicked, this, &UrlChooserEdit::slotChooseUrl);
+    connect(mp_urlEdit,&DLineEdit::textChanged,this, &UrlChooserEdit::slotCheckLocalFolder);
 }
 
 QString UrlChooserEdit::text() const
@@ -72,26 +70,20 @@ QString UrlChooserEdit::text() const
 
 void UrlChooserEdit::slotChooseUrl()
 {
+    mp_urlEdit->clear();
     QString path = QFileDialog::getExistingDirectory(this,"","",QFileDialog::ReadOnly);
+    mp_folderPath = path;
     QFontMetrics fEdlit(mp_urlEdit->font());
     QString floderPath = fEdlit.elidedText(path, Qt::ElideMiddle, mp_urlEdit->width() - 80);
-    if (path.isEmpty()){
-        floderPath = mp_elidParh;         //带...的路径
-        path = mp_folderPath;
-    }
     mp_urlEdit->setText(floderPath);
-    mp_elidParh = floderPath;
-    mp_folderPath = path;
-    checkLocalFolder(mp_folderPath);
 }
 
-void UrlChooserEdit::checkLocalFolder(const QString &path)
+void UrlChooserEdit::slotCheckLocalFolder(const QString &path)
 {
     Q_UNUSED(path);
     bool isLocal = true;
     mp_urlEdit->setAlert(false);
     QStorageInfo info(mp_folderPath);                               //获取路径信息
-    qInfo() << __func__ <<info.device();
     if (!info.isValid() || !info.device().startsWith("/dev/")) {     //判断路径信息是不是本地路径
         mp_urlEdit->setAlert(true);
         mp_urlEdit->showAlertMessage(tr("Select a local folder please"),this,1000);

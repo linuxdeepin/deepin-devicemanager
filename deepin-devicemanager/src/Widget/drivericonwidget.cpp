@@ -58,9 +58,7 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
 {
     QVBoxLayout *vlayout = new QVBoxLayout;
     vlayout->setContentsMargins(0,0,0,0);
-
-    QSpacerItem *verticalSpacer = new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    vlayout->addItem(verticalSpacer);
+    vlayout->addSpacing(30);
     vlayout->addStretch();
     vlayout->addWidget(iconWidget, 0, Qt::AlignCenter);
     vlayout->addStretch();
@@ -96,7 +94,7 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
             palrtteTransparency(label, -50);
         });
 
-        vlayout->addWidget(label);
+        vlayout->addWidget(label, 0, Qt::AlignCenter);
     }
     vlayout->addStretch();
 

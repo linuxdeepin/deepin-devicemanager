@@ -243,7 +243,7 @@ void PageSingleInfo::slotActionUpdateDriver()
     PageDriverControl* installDriver = new PageDriverControl(tr("Update Drivers"), mp_Device->name(), "", true, this);
     installDriver->show();
     m_driverPagedOpened = true;
-    connect(installDriver, &PageDriverControl::finished, this, [=]{m_driverPagedOpened = false;});
+    connect(installDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
 }
 
 void PageSingleInfo::slotActionRemoveDriver()
@@ -258,7 +258,7 @@ void PageSingleInfo::slotActionRemoveDriver()
     PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Drivers"), mp_Device->name(), mp_Device->driver(), false, this);
     rmDriver->show();
     m_driverPagedOpened = true;
-    connect(rmDriver, &PageDriverControl::finished, this, [=]{m_driverPagedOpened = false;});
+    connect(rmDriver, &PageDriverControl::closed, this, [=]{m_driverPagedOpened = false;});
     connect(rmDriver, &PageDriverControl::refreshInfo, this, &PageSingleInfo::refreshInfo);
 }
 

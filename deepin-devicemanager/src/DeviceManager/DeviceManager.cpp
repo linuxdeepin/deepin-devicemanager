@@ -251,6 +251,19 @@ void DeviceManager::addMouseDevice(DeviceInput *const device)
     m_ListDeviceMouse.append(device);
 }
 
+DeviceBaseInfo* DeviceManager::getMouseDevice(const QString& unique_id)
+{
+    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceMouse.begin(); it != m_ListDeviceMouse.end(); ++it) {
+        DeviceInput *mouse = dynamic_cast<DeviceInput*>(*it);
+        qInfo() << mouse->uniqueID();
+        qInfo() << unique_id;
+        if(mouse && mouse->uniqueID() == unique_id){
+            return *it;
+        }
+    }
+    return nullptr;
+}
+
 bool DeviceManager::addMouseInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // 从lshw中添加鼠标信息
@@ -531,12 +544,11 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     m_ListDeviceNetwork.append(device);
 }
 
-DeviceBaseInfo * DeviceManager::getNetworkDevice(const QString& busInfo)
+DeviceBaseInfo * DeviceManager::getNetworkDevice(const QString& unique_id)
 {
     for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceNetwork.begin(); it != m_ListDeviceNetwork.end(); ++it) {
         DeviceNetwork *net = dynamic_cast<DeviceNetwork*>(*it);
-        qInfo() << net->systemPath();
-        if(net && net->systemPath().contains(busInfo)){
+        if(net && net->uniqueID() == unique_id){
             return *it;
         }
     }
@@ -591,6 +603,17 @@ void DeviceManager::addImageDevice(DeviceImage *const device)
 {
     // 添加图像设备
     m_ListDeviceImage.append(device);
+}
+
+DeviceBaseInfo* DeviceManager::getImageDevice(const QString& unique_id)
+{
+    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceImage.begin(); it != m_ListDeviceImage.end(); ++it) {
+        DeviceImage *image = dynamic_cast<DeviceImage*>(*it);
+        if(image && image->uniqueID() == unique_id){
+            return *it;
+        }
+    }
+    return nullptr;
 }
 
 void DeviceManager::setCameraInfoFromLshw(const QMap<QString, QString> &mapInfo)

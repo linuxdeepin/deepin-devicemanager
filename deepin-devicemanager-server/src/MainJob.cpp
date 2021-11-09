@@ -43,7 +43,7 @@ MainJob::MainJob(QObject *parent)
     }
 
     // 后台加载后先禁用设备
-    EnableSqlManager::getInstance()->clearEnableFromAuthorizedTable();
+//    EnableSqlManager::getInstance()->clearEnableFromAuthorizedTable();
     disableDevice();
 }
 

@@ -139,6 +139,11 @@ public:
     bool canEnable();
 
     /**
+     * @brief setEnableValue
+     */
+    void setEnableValue(bool e);
+
+    /**
      * @brief canUninstall 获取该设备是否可以卸载驱动(主板等右键不需要安装、卸载action)
      * @return
      */
@@ -157,10 +162,10 @@ public:
     const QString& hardwareClass() const;
 
     /**
-     * @brief systemPath
+     * @brief uniqueID
      * @return
      */
-    const QString& systemPath() const;
+    const QString& uniqueID() const;
 
     /**
      * @brief isValid：判断属性值是否有效

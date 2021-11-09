@@ -110,6 +110,13 @@ public:
     void addMouseDevice(DeviceInput *const device);
 
     /**
+     * @brief getMouseDevice
+     * @param unique_id
+     * @return
+     */
+    DeviceBaseInfo* getMouseDevice(const QString& unique_id);
+
+    /**
      * @brief addMouseInfoFromLshw:添加从lshw获取的鼠标信息
      * @param mapInfo:从lshw获取的鼠标信息map
      * @return 布尔值:true-设置成功；false-设置失败
@@ -277,7 +284,7 @@ public:
      * @param busInfo
      * @return
      */
-    DeviceBaseInfo * getNetworkDevice(const QString& busInfo);
+    DeviceBaseInfo * getNetworkDevice(const QString& unique_id);
 
     /**
      * @brief correctNetworkLinkStatus:校正网络连接状态
@@ -303,6 +310,13 @@ public:
      * @param device:被添加的图像设备
      */
     void addImageDevice(DeviceImage *const device);
+
+    /**
+     * @brief getImageDevice
+     * @param unique_id
+     * @return
+     */
+    DeviceBaseInfo* getImageDevice(const QString& unique_id);
 
     /**
      * @brief setCameraInfoFromLshw:设置由lshw获取的图像设备信息

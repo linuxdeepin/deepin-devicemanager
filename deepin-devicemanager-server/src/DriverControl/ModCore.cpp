@@ -24,7 +24,6 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QTextStream>
-#include <QProcess>
 #include <QDebug>
 
 const QString  BLACKLISTT_PROBE_DIR_ETC = "/etc/modprobe.d";   //黑名单配置路径
@@ -523,14 +522,6 @@ void ModCore::deleteLineOfFileWithItem(const QString &filepath, const QString &i
     tmpfile.close();
 }
 
-//更新现有的initramfs
-void ModCore::updateInitramfs()
-{
-    QProcess process;
-    process.start("update-initramfs -u");
-    process.waitForFinished(-1);
-}
-
 void ModCore::rmModLoadedOnBoot(const QString &modName)
 {
     QString conffile = QString(LOADONBOOT_FILENAME_TEMPLETE).arg(modName);
@@ -648,8 +639,7 @@ bool ModCore::addModBlackList(const QString &modName)
     instream << QString("blacklist %1").arg(modName) << endl;
     //屏蔽模块及所有依赖它的模块，设置后无法通过modprobe xx or insmod xx 进行安装
     instream << QString("install %1 /bin/false").arg(modName) << endl;
-    //添加黑名单后需要更新现有的initramfs
-    updateInitramfs();
+
     return  true;
 }
 

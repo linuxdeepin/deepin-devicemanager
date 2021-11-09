@@ -118,10 +118,7 @@ private:
     void rmModFromLoadonBootConf(const QString &filepath, const QString &modName);
     //删除文件指定行
     void deleteLineOfFileWithItem(const QString &filepath, const QString &item);
-    /**
-     * @brief updateInitramfs       更新现有的initramfs
-     */
-    void updateInitramfs();
+
 
 };
 

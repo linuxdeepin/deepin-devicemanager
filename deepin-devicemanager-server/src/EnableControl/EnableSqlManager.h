@@ -70,7 +70,7 @@ public:
      * @brief insertDataToAuthorizedTable 将数据插入remove表格
      * @param key
      */
-    void insertDataToAuthorizedTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device);
+    void insertDataToAuthorizedTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool exist);
 
     /**
      * @brief removeDataFromAuthorizedTable 从数据库里面删除数据
