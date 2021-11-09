@@ -116,12 +116,15 @@ bool DriverManager::installDriver(const QString &filepath)
         sigProgressDetail(5, "file not exist");
         return  false;
     }
-
     //模块已被加载
-    if (mp_modcore->modIsLoaded(filepath)) {
-        sigProgressDetail(10, QString("could not insert module %1 :file exist").arg(filepath));
-        return  false;
-    }
+    /*
+     * 下面代码由 liujun 于 2021年11月9号 注释
+     * 为修复bug https://pms.uniontech.com/zentao/bug-view-101808.html
+    */
+//    if (mp_modcore->modIsLoaded(filepath)) {
+//        sigProgressDetail(10, QString("could not insert module %1 :file exist").arg(filepath));
+//        return  false;
+//    }
     sigProgressDetail(10, "");
     QFileInfo fileinfo(filepath);
     QMimeDatabase typedb;

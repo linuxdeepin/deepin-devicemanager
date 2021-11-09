@@ -180,8 +180,6 @@ void MainJob::disableDevice()
         QMap<QString, QString> mapItem;
         if (!getMapInfo(item, mapItem))
             continue;
-
-        qInfo() << "Permanent HW Address ** " << mapItem["Permanent HW Address"];
         // 防止禁用的设备被启用
         QString uniqueID;
         if(mapItem.find("Permanent HW Address") != mapItem.end()){

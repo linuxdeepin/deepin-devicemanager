@@ -96,7 +96,6 @@ void EnableSqlManager::removeDataFromPrinterTable(const QString& name)
 
 bool EnableSqlManager::uniqueIDExisted(const QString& key)
 {
-    qInfo() << "path : **** " << key;
     QString sql = QString("SELECT COUNT(*) FROM %1 WHERE unique_id='%2' and enable='0';").arg(DB_TABLE_AUTHORIZED).arg(key);
     if (m_sqlQuery.exec(sql) && m_sqlQuery.next()) {
         return m_sqlQuery.value(0).toInt() > 0;
