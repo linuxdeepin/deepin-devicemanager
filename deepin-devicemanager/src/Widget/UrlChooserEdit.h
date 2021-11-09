@@ -46,6 +46,11 @@ private:
      */
     void initConnections();
 
+    /**
+     * @brief checkLocalFolder 检测是否本地路径
+     */
+    void checkLocalFolder(const QString &path);
+
 signals:
 
     /**
@@ -59,11 +64,6 @@ public slots:
      * @brief slotChooseUrl
      */
     void slotChooseUrl();
-
-    /**
-     * @brief slotCheckLocalFolder 检测是否本地路径
-     */
-    void slotCheckLocalFolder(const QString &path);
 
 
 private:

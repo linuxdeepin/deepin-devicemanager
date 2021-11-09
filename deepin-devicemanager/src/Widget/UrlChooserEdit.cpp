@@ -63,7 +63,6 @@ void UrlChooserEdit::initUI()
 void UrlChooserEdit::initConnections()
 {
     connect(mp_urlBtn,&DSuggestButton::clicked, this, &UrlChooserEdit::slotChooseUrl);
-    connect(mp_urlEdit,&DLineEdit::textChanged,this, &UrlChooserEdit::slotCheckLocalFolder);
 }
 
 QString UrlChooserEdit::text() const
@@ -83,14 +82,16 @@ void UrlChooserEdit::slotChooseUrl()
     mp_urlEdit->setText(floderPath);
     mp_elidParh = floderPath;
     mp_folderPath = path;
+    checkLocalFolder(mp_folderPath);
 }
 
-void UrlChooserEdit::slotCheckLocalFolder(const QString &path)
+void UrlChooserEdit::checkLocalFolder(const QString &path)
 {
     Q_UNUSED(path);
     bool isLocal = true;
     mp_urlEdit->setAlert(false);
     QStorageInfo info(mp_folderPath);                               //获取路径信息
+    qInfo() << __func__ <<info.device();
     if (!info.isValid() || !info.device().startsWith("/dev/")) {     //判断路径信息是不是本地路径
         mp_urlEdit->setAlert(true);
         mp_urlEdit->showAlertMessage(tr("Select a local folder please"),this,1000);
