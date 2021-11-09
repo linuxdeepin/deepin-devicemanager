@@ -89,15 +89,27 @@ void MonitorUsb::disableDevice()
         QMap<QString,QString> mapItem;
         if(!getMapInfo(item,mapItem))
             continue;
+
         // 防止禁用的设备被启用
-        QString uniqueID = mapItem["Module Alias"];
-        uniqueID.replace(QRegExp("[0-9a-zA-Z]{10}$"),"");
-        if(uniqueID.isEmpty()){
-            return;
+        QString uniqueID;
+        if(mapItem.find("Permanent HW Address") != mapItem.end()){
+            uniqueID = mapItem["Permanent HW Address"];
+        }else{
+            uniqueID = mapItem["Module Alias"];
+            uniqueID.replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
+        }
+        if (uniqueID.isEmpty()) {
+            continue;
         }
 
-        QString path = mapItem["SysFS ID"];
-        path.replace(QRegExp("[1-9]$"),"0");
+        QString path;
+        if(mapItem.find("SysFS Device Link") != mapItem.end()){
+            path = mapItem["SysFS ID"];
+        }else{
+            path = mapItem["SysFS ID"];
+        }
+        path.replace(QRegExp("[1-9]$"), "0");
+
         if(EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID)){
             QFile file("/sys" + path + QString("/authorized"));
             if(!file.open(QIODevice::ReadWrite)){

@@ -166,6 +166,8 @@ bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& nam
         // 1. 直接remove写入
         // 通过remove文件禁用
         // 1:表示禁用 ，0:表示启用
+        qInfo() << "" << "/sys" + path + QString("/remove");
+//        return false;
         QFile file("/sys" + path + QString("/remove"));
         if(!file.open(QIODevice::WriteOnly)){
             return false;

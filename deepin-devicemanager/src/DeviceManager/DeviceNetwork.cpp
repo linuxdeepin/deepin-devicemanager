@@ -75,18 +75,16 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     if(mapInfo.find("path") != mapInfo.end()){
         setAttribute(mapInfo, "name", m_Name);
-        m_SysPath = "/sys" + mapInfo["path"];
-        m_UniqueID = m_Name;
-        m_HardwareClass = mapInfo["Hardware Class"];
-        m_Enable = false;
-        return true;
+        setAttribute(mapInfo, "unique_id", m_UniqueID);
+        setAttribute(mapInfo, "path", m_SysPath);
+        setAttribute(mapInfo, "Hardware Class", m_HardwareClass);
+        if(mapInfo.find("Enable") != mapInfo.end()){
+            m_Enable = mapInfo["Enable"].toInt();
+        }
     }
 
-    m_SysPath = "/sys" + mapInfo["SysFS Device Link"];
-    QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+-]{4}\\.(.*)");
-    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
-        m_UniqueID = reUniqueId.cap(1);
-    }
+    setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
+    setAttribute(mapInfo, "SysFS Device Link", m_SysPath);
     return true;
 }
 
@@ -113,15 +111,14 @@ const QString DeviceNetwork::getOverviewInfo()
 
 EnableDeviceStatus DeviceNetwork::setEnable(bool e)
 {
-    // 设置网卡禁用启用
-    if(!m_SysPath.contains("usb")){
-        m_UniqueID = m_Name;
-    }
     m_HardwareClass = "network interface";
     // 设置设备状态
-    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+    if(m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }else if(m_SysPath.contains("usb") && m_UniqueID.isEmpty()){
         return EDS_Faild;
     }
+
     bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
     if(res){
         m_Enable = e;

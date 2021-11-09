@@ -180,15 +180,26 @@ void MainJob::disableDevice()
         QMap<QString, QString> mapItem;
         if (!getMapInfo(item, mapItem))
             continue;
-        // 防止禁用的设备被启用
 
-        QString uniqueID = mapItem["Module Alias"];
-        uniqueID.replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
+        qInfo() << "Permanent HW Address ** " << mapItem["Permanent HW Address"];
+        // 防止禁用的设备被启用
+        QString uniqueID;
+        if(mapItem.find("Permanent HW Address") != mapItem.end()){
+            uniqueID = mapItem["Permanent HW Address"];
+        }else{
+            uniqueID = mapItem["Module Alias"];
+            uniqueID.replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
+        }
         if (uniqueID.isEmpty()) {
-            return;
+            continue;
         }
 
-        QString path = mapItem["SysFS ID"];
+        QString path;
+        if(mapItem.find("SysFS Device Link") != mapItem.end()){
+            path = mapItem["SysFS ID"];
+        }else{
+            path = mapItem["SysFS ID"];
+        }
         path.replace(QRegExp("[1-9]$"), "0");
         if (EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID)) {
             QFile file("/sys" + path + QString("/authorized"));
@@ -233,11 +244,6 @@ bool MainJob::getMapInfo(const QString &item, QMap<QString, QString> &mapInfo)
 
     // hub为usb接口，可以直接过滤
     if (mapInfo["Hardware Class"] == "hub") {
-        return false;
-    }
-
-    // 没有总线信息的设备可以过滤
-    if (mapInfo.find("SysFS BusID") == mapInfo.end()) {
         return false;
     }
 

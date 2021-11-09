@@ -535,6 +535,7 @@ DeviceBaseInfo * DeviceManager::getNetworkDevice(const QString& busInfo)
 {
     for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceNetwork.begin(); it != m_ListDeviceNetwork.end(); ++it) {
         DeviceNetwork *net = dynamic_cast<DeviceNetwork*>(*it);
+        qInfo() << net->systemPath();
         if(net && net->systemPath().contains(busInfo)){
             return *it;
         }

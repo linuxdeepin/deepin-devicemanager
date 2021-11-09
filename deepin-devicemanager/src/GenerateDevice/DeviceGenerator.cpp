@@ -169,6 +169,10 @@ void DeviceGenerator::generatorNetworkDevice()
 {
     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
     for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
+        // 此处通过hwinfo获取无线网卡信息时会有两段同样的信息，需要去重操作
+        if((*it)["Hardware Class"] == "network"){
+            continue;
+        }
         // 如果网卡已经被禁用，则直接添加设备
         if((*it).find("path") != (*it).end()){
             DeviceNetwork *device = new DeviceNetwork();
@@ -196,7 +200,16 @@ void DeviceGenerator::generatorNetworkDevice()
         if((*itls).find("bus info") == (*itls).end() || (*itls).find("physical id") == (*itls).end())
             continue;
         QString busInfo = (*itls)["bus info"];
-        DeviceNetwork *device = dynamic_cast<DeviceNetwork*>(DeviceManager::instance()->getNetworkDevice(busInfo.replace("pci@","")));
+        busInfo.replace("pci@","");
+        // 此处处理无线网卡的问题
+        // /devices/pci0000:00/0000:00:14.0/usb1/1-10/1-10:1.0
+        // usb@1:10
+        if(busInfo.startsWith("usb@")){
+            busInfo.replace("usb@","");
+            busInfo.replace(":","-");
+        }
+        busInfo.replace("usb@","");
+        DeviceNetwork *device = dynamic_cast<DeviceNetwork*>(DeviceManager::instance()->getNetworkDevice(busInfo));
         if(device){
             device->setInfoFromLshw(*itls);
         }

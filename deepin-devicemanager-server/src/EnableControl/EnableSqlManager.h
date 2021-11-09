@@ -117,6 +117,13 @@ public:
     bool uniqueIDExisted(const QString& key);
 
     /**
+     * @brief uniqueIDExistedForEnable
+     * @param key
+     * @return
+     */
+    bool uniqueIDExistedEX(const QString& key);
+
+    /**
      * @brief isUniqueIdEnabled 判断设备是否被禁用了
      * @param key
      * @return

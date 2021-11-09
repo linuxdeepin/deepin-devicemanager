@@ -404,6 +404,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
     QList<QMap<QString,QString>> lstMap;
     getRemoveAuthInfo(sinfo,lstMap);
     DBusEnableInterface::getInstance()->getAuthorizedInfo(sinfo);
+    qInfo() << "sinfo: " << sinfo;
     getRemoveAuthInfo(sinfo,lstMap);
 
     // 获取信息
@@ -416,7 +417,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
         updateMapInfo(lstMap, mapInfo);
         if (mapInfo["Hardware Class"] == "sound") {
             addMapInfo("hwinfo_sound", mapInfo);
-        } else if (mapInfo["Hardware Class"] == "network interface") {
+        } else if (mapInfo["Hardware Class"].contains("network")) {
             addMapInfo("hwinfo_network", mapInfo);
         } else if (mapInfo["Hardware Class"] == "keyboard") {
             addMouseKeyboardInfoMapInfo("hwinfo_keyboard", mapInfo);
@@ -484,24 +485,43 @@ void CmdTool::updateMapInfo(QList<QMap<QString,QString>>& removeLstMap, QMap<QSt
     if("keyboard" == mapInfo["Hardware Class"]){
         return;
     }
+    // 此处通过hwinfo获取无线网卡信息时会有两段同样的信息，需要去重操作
+    if(mapInfo["Hardware Class"] == "network"){
+        return;
+    }
 
     QList<QMap<QString,QString>>::iterator it = removeLstMap.begin();
     for (;it != removeLstMap.end();++it) {
         if (mapInfo.find("Module Alias") != mapInfo.end()
                 && (*it)["unique_id"] == mapInfo["Module Alias"]
                 && (*it)["path"] == mapInfo["SysFS ID"]){
-            if(!DBusEnableInterface::getInstance()->isDeviceEnabled((*it)["unique_id"]))
-                mapInfo.insert("Enable","false");
+            mapInfo.insert("Enable",(*it)["enable"]);
+            mapInfo.insert("path",(*it)["path"]);
             mapInfo.insert("name",(*it)["name"]);
             removeLstMap.erase(it);
             return;
         }
 
+        // 网卡的唯一标识使用 Permanent HW Address
+        if (mapInfo.find("Permanent HW Address") != mapInfo.end()
+                && (*it)["unique_id"] == mapInfo["Permanent HW Address"]){
+            mapInfo.insert("Enable",(*it)["Enable"]);
+            mapInfo.insert("path",(*it)["path"]);
+            mapInfo.insert("name",(*it)["name"]);
+            removeLstMap.erase(it);
+            return;
+        }
+
+        // usb无线网卡
+        if((*it)["path"].contains("usb")){
+            continue;
+        }
         if(mapInfo["SysFS ID"] == (*it)["path"] || mapInfo["SysFS Device Link"] == (*it)["path"]){
             QString hclass = mapInfo["Hardware Class"];
             mapInfo.clear();
             mapInfo.insert("path",(*it)["path"]);
             mapInfo.insert("name",(*it)["name"]);
+            mapInfo.insert("Enable","0");
             mapInfo.insert("Hardware Class",hclass);
             removeLstMap.erase(it);
             return;
@@ -514,7 +534,7 @@ void CmdTool::clearUsbDevice(QList<QMap<QString, QString> > &removeLstMap)
     // 禁用后拔掉，还能获取信息
     for(int index = 0; index < removeLstMap.size(); index++){
         const QMap<QString,QString>& map = removeLstMap[index];
-        if(map["path"].contains("usb")){
+        if(map["path"].contains("usb") && map["Hardware Class"] != "network interface"){
             removeLstMap.removeAt(index);
             index--;
         }
