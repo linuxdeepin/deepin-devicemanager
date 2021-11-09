@@ -39,6 +39,7 @@ void DriverListView::initUI()
 
     setRootIsDecorated(false);
     setEditTriggers(QAbstractItemView::NoEditTriggers);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 void DriverListView::paintEvent(QPaintEvent *event)

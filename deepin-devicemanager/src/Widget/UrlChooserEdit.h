@@ -70,6 +70,7 @@ private:
     DLineEdit *mp_urlEdit;
     DSuggestButton *mp_urlBtn;
     QString mp_folderPath;
+    QString mp_elidParh;
 };
 DWIDGET_END_NAMESPACE
 #endif // URLCHOOSEREDIT_H

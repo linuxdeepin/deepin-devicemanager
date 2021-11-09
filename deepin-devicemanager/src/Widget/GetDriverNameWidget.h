@@ -68,6 +68,11 @@ private:
      */
     void traverseFolders(bool includeSub, const QString& path, QStringList& lstDrivers);
 
+    /**
+     * @brief reloadDriversListPages 根据有无驱动加载界面
+     */
+    void reloadDriversListPages(const QStringList &drivers);
+
 public slots:
 
     /**
@@ -78,7 +83,15 @@ public slots:
 
 signals:
 
+    /**
+     * @brief signalItemClicked
+     */
     void signalItemClicked();
+
+    /**
+     * @brief signalDriversCount
+     */
+    void signalDriversCount();
 
 private:
     DriverListView    *mp_ListView;

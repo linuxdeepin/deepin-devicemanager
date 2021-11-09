@@ -82,6 +82,7 @@ void PageDriverControl::initInstallWidget()
         else
            getButton(1)->setDisabled(false);
     });
+    connect(mp_NameDialog, &GetDriverNameWidget::signalDriversCount, this, [=]{getButton(1)->setDisabled(true);});
 }
 
 void PageDriverControl::initUninstallWidget()
@@ -144,6 +145,16 @@ void PageDriverControl::slotClose()
     this->close();
 }
 
+void PageDriverControl::slotBackPathPage()
+{
+    mp_stackWidget->setCurrentIndex(0);
+    getButton(1)->setDisabled(false);
+    this->setButtonText(1, tr("Next", "button"));
+    this->setButtonText(0, tr("Cancel", "button"));
+    this->getButton(0)->disconnect();
+    connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
+}
+
 void PageDriverControl::removeBtn()
 {
     clearButtons();
@@ -163,6 +174,10 @@ void PageDriverControl::installDriverLogical()
         }
         mp_NameDialog->loadAllDrivers(includeSubdir, path);
         mp_stackWidget->setCurrentIndex(1);
+        this->setButtonText(1, tr("Update", "button"));
+        this->setButtonText(0, tr("Previous"));
+        this->getButton(0)->disconnect();
+        connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
     } else if (1 == curIndex) {
         QString driveName = mp_NameDialog->selectName();
         QFile file(driveName);

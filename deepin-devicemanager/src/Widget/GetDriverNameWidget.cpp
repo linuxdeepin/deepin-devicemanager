@@ -61,11 +61,10 @@ void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString& path)
 {
     // 获取所有的驱动文件
     QStringList lstDrivers;
+    mp_driverPathList.clear();
+    mp_driversList.clear();
     traverseFolders(includeSub, path, lstDrivers);
-    if(lstDrivers.isEmpty()){
-        mp_selectedRow = -1;
-        return;
-    }
+    reloadDriversListPages(lstDrivers);
     mp_model = new QStandardItemModel(this);
     for (int i = 0; i < lstDrivers.size(); i++) {
         QStandardItem *icomItem = new QStandardItem;
@@ -77,8 +76,8 @@ void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString& path)
         QStandardItem *textItem = new QStandardItem(lstDrivers[i]);
         mp_model->setItem(i,0,icomItem);
         mp_model->setItem(i,1,textItem);
-        textItem->setCheckable(true);
         textItem->setToolTip(lstDrivers[i]);
+        textItem->setData(Qt::Unchecked);
     }
 
     mp_ListView->setModel(mp_model);
@@ -120,6 +119,23 @@ void GetDriverNameWidget::traverseFolders(bool includeSub, const QString& path, 
     lstDrivers = mp_driversList;
 }
 
+void GetDriverNameWidget::reloadDriversListPages(const QStringList &drivers)
+{
+    DFrame *frame = this->findChild<DFrame *>();
+    DLabel *label = this->findChild<DLabel *>();
+    if (!(frame && label))
+        return;
+    if (drivers.isEmpty()){
+        frame->hide();
+        label->setText(tr("No drivers found in this folder"));
+        mp_selectedRow = -1;
+        emit  signalDriversCount();
+    } else {
+        frame->show();
+        label->setText(tr("Select a driver for update"));
+    }
+}
+
 void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
 {
     emit signalItemClicked();
@@ -127,16 +143,14 @@ void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
     QStandardItem *item =  mp_model->item(row, 1);
     if (!item)
         return;
-    if (Qt::Unchecked == item->checkState()){
-        item->setCheckState(Qt::Checked);
-        QStandardItem *lastItem = mp_model->item(mp_selectedRow, 1);
-        if (lastItem)
-            lastItem->setCheckState(Qt::Unchecked);
-         mp_selectedRow = row;
-    }else{
-        item->setCheckState(Qt::Unchecked);
-        mp_selectedRow = -1;
+    QStandardItem *lastItem = mp_model->item(mp_selectedRow, 1);
+    if (lastItem){
+        lastItem->setCheckState(Qt::Unchecked);
+        lastItem->setSelectable(false);
     }
+    if (Qt::Unchecked == item->checkState())
+        item->setCheckState(Qt::Checked);      
+    mp_selectedRow = row;
 }
 
 DWIDGET_END_NAMESPACE

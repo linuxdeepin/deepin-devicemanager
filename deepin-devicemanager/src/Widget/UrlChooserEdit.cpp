@@ -42,6 +42,7 @@ void UrlChooserEdit::initUI()
    setFixedSize(460,36);
    mp_urlEdit->setFixedSize(410,36);
    mp_urlEdit->setText(QDir::homePath());
+   mp_folderPath = mp_urlEdit->text();
    mp_urlEdit->setClearButtonEnabled(false);
    mp_urlEdit->lineEdit()->setReadOnly(true);
    mp_urlEdit->setFocusPolicy(Qt::NoFocus);  
@@ -55,6 +56,8 @@ void UrlChooserEdit::initUI()
    mainLayout->addSpacing(10);
    mainLayout->addWidget(mp_urlBtn);
    setLayout(mainLayout);
+   mp_folderPath = mp_urlEdit->text();
+   mp_elidParh = mp_folderPath;
 }
 
 void UrlChooserEdit::initConnections()
@@ -70,12 +73,16 @@ QString UrlChooserEdit::text() const
 
 void UrlChooserEdit::slotChooseUrl()
 {
-    mp_urlEdit->clear();
     QString path = QFileDialog::getExistingDirectory(this,"","",QFileDialog::ReadOnly);
-    mp_folderPath = path;
     QFontMetrics fEdlit(mp_urlEdit->font());
     QString floderPath = fEdlit.elidedText(path, Qt::ElideMiddle, mp_urlEdit->width() - 80);
+    if (path.isEmpty()){
+        floderPath = mp_elidParh;         //带...的路径
+        path = mp_folderPath;
+    }
     mp_urlEdit->setText(floderPath);
+    mp_elidParh = floderPath;
+    mp_folderPath = path;
 }
 
 void UrlChooserEdit::slotCheckLocalFolder(const QString &path)

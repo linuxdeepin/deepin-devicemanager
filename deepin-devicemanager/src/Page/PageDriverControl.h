@@ -91,6 +91,11 @@ private slots:
      */
     void slotClose();
 
+    /**
+     * @brief slotBackPathPage
+     */
+    void slotBackPathPage();
+
 private:
     /**
      * @brief removeBtn 移除按钮
