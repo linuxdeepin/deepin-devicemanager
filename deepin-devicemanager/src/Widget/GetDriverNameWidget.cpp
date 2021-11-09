@@ -24,7 +24,8 @@ void GetDriverNameWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     DFrame *frame = new DFrame;
-    frame->setFixedWidth(460);
+    frame->setFixedSize(460,145);
+    frame->setContentsMargins(0,0,0,0);
     mainLayout->setContentsMargins(0,0,0,0);
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->setContentsMargins(0,0,0,0);
@@ -49,6 +50,7 @@ void GetDriverNameWidget::init()
     mainLayout->addStretch();
     mainLayout->addLayout(hLayout);
     mainLayout->addLayout(driverLayout);
+    mainLayout->addStretch();
     mainLayout->addWidget(mp_tipLabel);
 
     mp_tipLabel->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
@@ -92,6 +94,7 @@ void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString& path)
 
     mp_ListView->setModel(mp_model);
     mp_ListView->setColumnWidth(0,40);
+    updateTipLabelText("");
 }
 
 QString GetDriverNameWidget::selectName()
