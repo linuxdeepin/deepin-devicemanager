@@ -3,9 +3,8 @@
 #include <QVBoxLayout>
 #include <DFontSizeManager>
 
-DWIDGET_BEGIN_NAMESPACE
 DriverWaitingWidget::DriverWaitingWidget(QString status, QWidget *parent)
-    :DWidget (parent)
+    : DWidget(parent)
     , mp_Progress(new DWaterProgress(this))
     , mp_Label(new DLabel(status, this))
 {
@@ -42,10 +41,7 @@ void DriverWaitingWidget::setValue(int value)
     mp_Progress->setValue(value);
 }
 
-void DriverWaitingWidget::setText(const QString& text)
+void DriverWaitingWidget::setText(const QString &text)
 {
     mp_Label->setText(text);
 }
-
-
-DWIDGET_END_NAMESPACE

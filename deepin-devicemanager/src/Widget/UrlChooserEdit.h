@@ -20,10 +20,13 @@
 //#include <DLineEdit>
 #include <DWidget>
 
-DWIDGET_USE_NAMESPACE
 DWIDGET_BEGIN_NAMESPACE
 class DSuggestButton;
 class DLineEdit;
+DWIDGET_END_NAMESPACE
+
+DWIDGET_USE_NAMESPACE
+
 class UrlChooserEdit : public DWidget
 {
     Q_OBJECT
@@ -67,10 +70,9 @@ public slots:
 
 
 private:
-    DLineEdit *mp_urlEdit;
-    DSuggestButton *mp_urlBtn;
+    Dtk::Widget::DLineEdit *mp_urlEdit;
+    Dtk::Widget::DSuggestButton *mp_urlBtn;
     QString mp_folderPath;
     QString mp_elidParh;
 };
-DWIDGET_END_NAMESPACE
 #endif // URLCHOOSEREDIT_H

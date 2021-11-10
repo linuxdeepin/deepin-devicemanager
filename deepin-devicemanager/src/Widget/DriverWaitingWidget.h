@@ -26,7 +26,7 @@
 #include <DWaterProgress>
 #include <DLabel>
 
-DWIDGET_BEGIN_NAMESPACE
+DWIDGET_USE_NAMESPACE
 class DriverWaitingWidget : public DWidget
 {
 public:
@@ -42,7 +42,7 @@ public:
      * @brief setText 设置进度条下面的字符串
      * @param text 例如：正在卸载、正在更新
      */
-    void setText(const QString& text);
+    void setText(const QString &text);
 private:
     /**
      * @brief init 初始化界面
@@ -52,5 +52,4 @@ private:
     DWaterProgress        *mp_Progress;
     DLabel                *mp_Label;
 };
-DWIDGET_END_NAMESPACE
 #endif // DRIVERWAITINGWIDGET_H

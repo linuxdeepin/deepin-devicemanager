@@ -31,15 +31,13 @@
 #include <QVBoxLayout>
 
 DWIDGET_USE_NAMESPACE
-DWIDGET_BEGIN_NAMESPACE
-
 class UrlChooserEdit;
 class GetDriverPathWidget : public DWidget
 {
     Q_OBJECT
 public:
     explicit GetDriverPathWidget(QWidget *parent = nullptr);
-    ~GetDriverPathWidget();
+    ~GetDriverPathWidget() override;
 
 public:
     /**
@@ -82,5 +80,4 @@ private:
     DCheckBox      *mp_includeCheckBox;
     DLabel         *mp_tipLabel;
 };
-DWIDGET_END_NAMESPACE
 #endif // GETDRIVERLSTDIALOG_H

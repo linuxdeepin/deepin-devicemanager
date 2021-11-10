@@ -29,8 +29,11 @@
 #include <QStandardItemModel>
 
 DWIDGET_BEGIN_NAMESPACE
-
 class DLabel;
+DWIDGET_END_NAMESPACE
+
+DWIDGET_USE_NAMESPACE
+
 class GetDriverNameWidget : public DWidget
 {
     Q_OBJECT
@@ -42,7 +45,7 @@ public:
      * @param includeSub 是否查找目录下的子目录
      * @param path 给定的目录
      */
-    void loadAllDrivers(bool includeSub, const QString& path);
+    void loadAllDrivers(bool includeSub, const QString &path);
 
     /**
      * @brief selectName 用户选中的驱动名称
@@ -73,7 +76,7 @@ private:
      * @param path 给定的目录
      * @param lstDrivers 出参，符合条件的驱动文件
      */
-    void traverseFolders(bool includeSub, const QString& path, QStringList& lstDrivers);
+    void traverseFolders(bool includeSub, const QString &path, QStringList &lstDrivers);
 
     /**
      * @brief reloadDriversListPages 根据有无驱动加载界面
@@ -108,7 +111,7 @@ private:
     QStringList       mp_driverPathList;   //驱动路径列表
     QStringList       mp_driversList;      //驱动名列表
     int               mp_selectedRow = -1;  //当前选中行
-    DLabel           *mp_tipLabel;
+    Dtk::Widget::DLabel           *mp_tipLabel;
 };
-DWIDGET_END_NAMESPACE
+
 #endif // GETDRIVERNAMEDIALOG_H

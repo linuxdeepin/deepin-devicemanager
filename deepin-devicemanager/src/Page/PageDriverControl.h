@@ -27,12 +27,9 @@
 #include <DLabel>
 
 
-DWIDGET_BEGIN_NAMESPACE
-class GetDriverPathWidget;
-class GetDriverNameWidget;
 class DriverWaitingWidget;
-DWIDGET_END_NAMESPACE
-
+class GetDriverNameWidget;
+class GetDriverPathWidget;
 
 DWIDGET_USE_NAMESPACE
 class PageDriverControl : public DDialog
@@ -122,9 +119,9 @@ private:
 
 private:
     DStackedWidget             *mp_stackWidget;
-    Dtk::Widget::GetDriverPathWidget        *mp_PathDialog;
-    Dtk::Widget::GetDriverNameWidget        *mp_NameDialog;
-    Dtk::Widget::DriverWaitingWidget        *mp_WaitDialog;
+    GetDriverPathWidget        *mp_PathDialog;
+    GetDriverNameWidget        *mp_NameDialog;
+    DriverWaitingWidget        *mp_WaitDialog;
     DLabel                     *mp_tipLabel;
     bool                       m_Install;
     QString                    m_DriverName;

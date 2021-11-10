@@ -3,10 +3,8 @@
 
 #include <DApplicationHelper>
 
-DWIDGET_BEGIN_NAMESPACE
-
 GetDriverPathWidget::GetDriverPathWidget(QWidget *parent)
-    : DWidget (parent)
+    : DWidget(parent)
     , mp_fileChooseEdit(new UrlChooserEdit(this))
     , mp_includeCheckBox(new DCheckBox(QObject::tr("Include subfolders"), this))
     , mp_tipLabel(new DLabel)
@@ -44,10 +42,10 @@ void GetDriverPathWidget::clearTipLabelText()
 void GetDriverPathWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout();
-    mainLayout->setContentsMargins(0,10,0,0);
+    mainLayout->setContentsMargins(0, 10, 0, 0);
 
     QHBoxLayout *hLayout1 = new QHBoxLayout;
-    DLabel *titleLable = new DLabel(QObject::tr("Search for drivers in this path"),this);
+    DLabel *titleLable = new DLabel(QObject::tr("Search for drivers in this path"), this);
     hLayout1->addStretch();
     hLayout1->addWidget(titleLable);
     hLayout1->addStretch();
@@ -70,5 +68,3 @@ void GetDriverPathWidget::init()
 
     this->setLayout(mainLayout);
 }
-
-DWIDGET_END_NAMESPACE
