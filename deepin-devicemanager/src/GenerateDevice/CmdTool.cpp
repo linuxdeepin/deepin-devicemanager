@@ -53,7 +53,7 @@ void CmdTool::addUsbMapInfo(const QString &key, const QMap<QString, QString> &ma
         QString newBus = mapInfo["SysFS BusID"];
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
         newBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
-        if (curBus == newBus) {
+        if (!curBus.isEmpty() && curBus == newBus) {
             return;
         }
     }

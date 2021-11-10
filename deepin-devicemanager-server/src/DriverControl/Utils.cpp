@@ -31,6 +31,7 @@
 #include <fcntl.h>
 
 const QString BLACKLIST_CONF = "/etc/modprobe.d/blacklist-devicemanager.conf";
+const QString DEVICEMANAGER = "deepin-devicemanager";
 
 Utils::Utils()
 {
@@ -117,6 +118,10 @@ bool Utils::isDriverPackage(const QString &filepath)
 {
     if (!QFile::exists(filepath)) {
         return  false;
+    }
+    // 该过滤方法无法设备管理器自己，先添加特殊处理
+    if(filepath.contains(DEVICEMANAGER)){
+        return false;
     }
     bool bsuccess = false;
     QDir tmpDir = QDir::temp();

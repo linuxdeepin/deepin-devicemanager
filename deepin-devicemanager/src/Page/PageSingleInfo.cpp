@@ -207,7 +207,11 @@ void PageSingleInfo::slotActionEnable()
         if (res == EDS_Success) {
             // 返回成功之前再次更新数据
             emit refreshInfo();
-        } else {
+        }  else if(res == EDS_NoSerial){
+            QString con = tr("Failed to disable it: unable to get the device SN");
+            // 禁用失败提示
+            DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
+        }else {
             QString con = tr("Failed to disable the device");
 
             // 启用失败提示
