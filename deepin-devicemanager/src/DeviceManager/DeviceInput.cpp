@@ -69,7 +69,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
-    setAttribute(mapInfo, "Module Alias", m_UniqueID);
+    setAttribute(mapInfo, "Serial ID", m_UniqueID);
 
     // 获取键盘的接口类型
     if (mapInfo.find("Hotplug") != mapInfo.end())

@@ -18,7 +18,7 @@ DeviceAudio::DeviceAudio()
     , m_Capabilities("")
     , m_Description("")
     , m_Chip("")
-    , m_Driver("snd_hda_intel")
+    , m_Driver("")
     , m_DriverModules("")
     , m_UniqueKey("")
 {
