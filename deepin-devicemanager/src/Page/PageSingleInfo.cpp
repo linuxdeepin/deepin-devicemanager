@@ -168,7 +168,7 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
         mp_Enable->setText(tr("Disable"));
     }
     // 驱动界面打开状态： 驱动的更新卸载和设备的启用禁用置灰
-    if(m_driverPagedOpened){
+    if(PageDriverControl::isRunning()){
         mp_updateDriver->setEnabled(false);
         mp_removeDriver->setEnabled(false);
         mp_Enable->setEnabled(false);

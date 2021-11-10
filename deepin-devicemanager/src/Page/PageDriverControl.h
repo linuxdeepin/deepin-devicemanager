@@ -48,6 +48,11 @@ public:
      */
     PageDriverControl(QString operation, QString deviceName, QString driverName, bool install = true, QWidget *parent = nullptr);
 
+    /**
+     * @brief hasWidgetIsVisible 有驱动界面显示
+     * @return
+     */
+    static bool isRunning();
 signals:
     /**
      * @brief refreshInfo:刷新信息信号

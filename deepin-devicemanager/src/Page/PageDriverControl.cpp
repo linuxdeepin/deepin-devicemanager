@@ -33,6 +33,7 @@
 
 #include <QVBoxLayout>
 #include <QDBusConnection>
+#include <QWindow>
 
 PageDriverControl::PageDriverControl(QString operation, QString deviceName, QString driverName, bool install, QWidget *parent)
     : DDialog(parent)
@@ -40,6 +41,7 @@ PageDriverControl::PageDriverControl(QString operation, QString deviceName, QStr
     , m_Install(install)
     , m_DriverName(driverName)
 {
+    setObjectName("PageDriverControl");
     setFixedSize(480, 335);
     setOnButtonClickedClose(false);
     setWindowTitle(QString("%1-%2").arg(operation).arg(deviceName));
@@ -64,6 +66,17 @@ PageDriverControl::PageDriverControl(QString operation, QString deviceName, QStr
     addContent(cenWidget);
     connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processChange, this, &PageDriverControl::slotProcessChange);
     connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processEnd, this, &PageDriverControl::slotProcessEnd);
+}
+
+bool PageDriverControl::isRunning()
+{
+    for(auto w: qApp->allWindows()) {
+        if("PageDriverControlWindow" == w->objectName()) {
+            if(w->isVisible())
+                return true;
+        }
+    }
+    return false;
 }
 
 void PageDriverControl::initInstallWidget()

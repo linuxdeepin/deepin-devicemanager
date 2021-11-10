@@ -79,12 +79,6 @@ public:
     void setCanUninstall(bool canInstall);
 
     /**
-     * @brief setDriverPageOpen 设置驱动控制界面已经被打开
-     * @param open
-     */
-    void setDriverPageOpen(bool open);
-
-    /**
      * @brief clear : 清空数据
      */
     void clear();
@@ -157,7 +151,6 @@ private:
     QMenu            *mp_Menu;        //<! 右键菜单
     bool             m_Enable;
     bool             m_CanUninstall;  //<! 可以卸载
-    bool             m_DriverPageOpened; //<! 判断驱动是否打开
 };
 
 

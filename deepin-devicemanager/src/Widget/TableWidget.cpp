@@ -1,5 +1,9 @@
 // 项目自身文件
 #include "TableWidget.h"
+#include "PageDriverControl.h"
+#include "MacroDefinition.h"
+#include "logviewitemdelegate.h"
+#include "logtreeview.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -15,13 +19,6 @@
 #include <QHBoxLayout>
 #include <QPainterPath>
 
-// 其它头文件
-#include "MacroDefinition.h"
-#include "logviewitemdelegate.h"
-#include "logtreeview.h"
-
-
-
 TableWidget::TableWidget(QWidget *parent)
     : DWidget(parent)
     , mp_Table(new LogTreeView(this))
@@ -33,7 +30,6 @@ TableWidget::TableWidget(QWidget *parent)
     , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
     , mp_Menu(new DMenu(this))
     , m_Enable(false)
-    , m_DriverPageOpened(false)
 
 {
     initWidget();
@@ -125,11 +121,6 @@ void TableWidget::setCanUninstall(bool canInstall)
     m_CanUninstall = canInstall;
 }
 
-void TableWidget::setDriverPageOpen(bool open)
-{
-    m_DriverPageOpened = open;
-}
-
 void TableWidget::clear()
 {
     if (mp_Table) {
@@ -214,7 +205,7 @@ void TableWidget::slotShowMenu(const QPoint &)
         mp_Enable->setText(tr("Enable"));
     }
     // 驱动界面打开状态： 驱动的更新卸载和设备的启用禁用置灰
-    if(m_DriverPageOpened){
+    if(PageDriverControl::isRunning()){
         mp_updateDriver->setEnabled(false);
         mp_removeDriver->setEnabled(false);
         mp_Enable->setEnabled(false);

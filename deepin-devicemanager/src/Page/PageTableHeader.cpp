@@ -99,11 +99,6 @@ void PageTableHeader::setCanUninstall(bool canUninstall)
     mp_Table->setCanUninstall(canUninstall);
 }
 
-void PageTableHeader::setDriverPageOpen(bool open)
-{
-    mp_Table->setDriverPageOpen(open);
-}
-
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
     DWidget::paintEvent(e);
