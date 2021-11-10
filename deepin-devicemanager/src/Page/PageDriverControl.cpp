@@ -1,3 +1,23 @@
+/*
+* Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
+*
+* Author:     Jun.Liu <liujuna@uniontech.com>
+*
+* Maintainer: XiaoMei.Ji <jixiaomei@uniontech.com>
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 #include "PageDriverControl.h"
 #include "GetDriverPathWidget.h"
 #include "GetDriverNameWidget.h"
@@ -14,7 +34,6 @@
 #include <QVBoxLayout>
 #include <QDBusConnection>
 
-DWIDGET_BEGIN_NAMESPACE
 PageDriverControl::PageDriverControl(QString operation, QString deviceName, QString driverName, bool install, QWidget *parent)
     : DDialog(parent)
     , mp_stackWidget(new DStackedWidget)
@@ -65,13 +84,13 @@ void PageDriverControl::initInstallWidget()
     this->addButton(tr("Next"), true, DDialog::ButtonRecommend);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
     connect(this->getButton(1), &QPushButton::clicked, this, &PageDriverControl::slotBtnNext);
-    connect(mp_PathDialog, &GetDriverPathWidget::signalNotLocalFolder, this, [=](bool isLocal){
+    connect(mp_PathDialog, &GetDriverPathWidget::signalNotLocalFolder, this, [ = ](bool isLocal) {
         if (!isLocal)
-           getButton(1)->setDisabled(true);
+            getButton(1)->setDisabled(true);
         else
-           getButton(1)->setDisabled(false);
+            getButton(1)->setDisabled(false);
     });
-    connect(mp_NameDialog, &GetDriverNameWidget::signalDriversCount, this, [=]{getButton(1)->setDisabled(true);});
+    connect(mp_NameDialog, &GetDriverNameWidget::signalDriversCount, this, [ = ] {getButton(1)->setDisabled(true);});
 }
 
 void PageDriverControl::initUninstallWidget()
@@ -157,7 +176,7 @@ void PageDriverControl::installDriverLogical()
         QFile file(path);
         bool includeSubdir = mp_PathDialog->includeSubdir();
         mp_PathDialog->updateTipLabelText("");
-        if(path.isEmpty() || !file.exists()){
+        if (path.isEmpty() || !file.exists()) {
             mp_PathDialog->updateTipLabelText(tr("The selected folder does not exist, please select again"));
             return;
         }
@@ -194,5 +213,3 @@ void PageDriverControl::uninstallDriverLogical()
     mp_stackWidget->setCurrentIndex(mp_stackWidget->currentIndex() + 1);
     DBusDriverInterface::getInstance()->uninstallDriver(m_DriverName);
 }
-
-DWIDGET_END_NAMESPACE

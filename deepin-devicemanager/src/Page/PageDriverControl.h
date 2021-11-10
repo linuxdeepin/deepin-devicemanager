@@ -1,15 +1,3 @@
-#ifndef PAGEINSTALLDRIVER_H
-#define PAGEINSTALLDRIVER_H
-
-#include <DStackedWidget>
-#include <DDialog>
-#include <DLabel>
-
-DWIDGET_BEGIN_NAMESPACE
-//using namespace Dtk::Widget;
-class GetDriverPathWidget;
-class GetDriverNameWidget;
-class DriverWaitingWidget;
 /*
 * Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
 *
@@ -31,7 +19,22 @@ class DriverWaitingWidget;
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef PAGEINSTALLDRIVER_H
+#define PAGEINSTALLDRIVER_H
 
+#include <DStackedWidget>
+#include <DDialog>
+#include <DLabel>
+
+
+DWIDGET_BEGIN_NAMESPACE
+class GetDriverPathWidget;
+class GetDriverNameWidget;
+class DriverWaitingWidget;
+DWIDGET_END_NAMESPACE
+
+
+DWIDGET_USE_NAMESPACE
 class PageDriverControl : public DDialog
 {
     Q_OBJECT
@@ -78,7 +81,7 @@ private slots:
      * @param value 当前进度 0 ～ 100
      * @param detail 当前处理的详细信息
      */
-    void slotProcessChange(qint32 value,QString detail);
+    void slotProcessChange(qint32 value, QString detail);
 
     /**
      * @brief slotProcessEnd 更新处理结束的信号
@@ -114,12 +117,11 @@ private:
 
 private:
     DStackedWidget             *mp_stackWidget;
-    GetDriverPathWidget        *mp_PathDialog;
-    GetDriverNameWidget        *mp_NameDialog;
-    DriverWaitingWidget        *mp_WaitDialog;
+    Dtk::Widget::GetDriverPathWidget        *mp_PathDialog;
+    Dtk::Widget::GetDriverNameWidget        *mp_NameDialog;
+    Dtk::Widget::DriverWaitingWidget        *mp_WaitDialog;
     DLabel                     *mp_tipLabel;
     bool                       m_Install;
     QString                    m_DriverName;
 };
-DWIDGET_END_NAMESPACE
 #endif // PAGEINSTALLDRIVER_H
