@@ -145,6 +145,11 @@ bool DriverManager::installDriver(const QString &filepath)
             sigProgressDetail(30, "");
             //将文件拷贝到安装目录
             QString installpath = installDir.absoluteFilePath(filename);
+            /*
+             * 下面代码由 liujun 于 2021年11月10号 修改
+             * 驱动可以重复安装 因此路径如果存在则删除
+             */
+            QFile::remove(installpath);
             if (QFile::copy(filepath, installpath)) {
                 sigProgressDetail(40, "");
                 //更新依赖
