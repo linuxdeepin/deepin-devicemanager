@@ -800,11 +800,11 @@ void DeviceGenerator::getImageInfoFromHwinfo()
             continue;
 
         // hwinfo中对camera的分类不明确，通过camera等关键字认定图像设备
-        if ((*it)["Model"].contains("camera", Qt::CaseInsensitive) &&
-                (*it)["Device"].contains("camera", Qt::CaseInsensitive) &&
-                (*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive) &&
-                (*it)["Model"].contains("webcam", Qt::CaseInsensitive) &&
-                (*it)["Hardware Class"] == "camera") {
+        if (! (*it)["Model"].contains("camera", Qt::CaseInsensitive) &&
+                ! (*it)["Device"].contains("camera", Qt::CaseInsensitive) &&
+                ! (*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive) &&
+                ! (*it)["Model"].contains("webcam", Qt::CaseInsensitive) &&
+                (*it)["Hardware Class"] != "camera") {
             continue;
         }
 
