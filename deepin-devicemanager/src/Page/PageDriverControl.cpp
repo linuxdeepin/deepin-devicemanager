@@ -202,12 +202,14 @@ void PageDriverControl::installDriverLogical()
     } else if (1 == curIndex) {
         QString driveName = mp_NameDialog->selectName();
         QFile file(driveName);
+        //先判断是否是驱动文件，如果不是，再判断是否存在。
+        //因为后台isDriverPackage返回false的情况有2种：1.文件不存在 2.不是驱动文件
         mp_NameDialog->updateTipLabelText("");
-        if (driveName.isEmpty() || !file.exists()) {
-            mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
-            return;
-        }
         if (!DBusDriverInterface::getInstance()->isDriverPackage(driveName)) {
+            if (driveName.isEmpty() || !file.exists()) {
+                mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
+                return;
+            }
             mp_NameDialog->updateTipLabelText(tr("It is not a driver"));
             return;
         }
