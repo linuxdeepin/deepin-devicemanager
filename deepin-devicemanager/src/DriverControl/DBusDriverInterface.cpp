@@ -32,6 +32,14 @@ bool DBusDriverInterface::isDriverPackage(const QString &path)
     return false;
 }
 
+bool DBusDriverInterface::isArchMatched(const QString &path)
+{
+    QDBusReply<bool> reply = mp_Iface->call("isArchMatched", path);
+    if (reply.isValid())
+        return reply.value();
+    return false;
+}
+
 DBusDriverInterface::DBusDriverInterface(QObject* parent)
     : QObject (parent)
     , mp_Iface(nullptr)

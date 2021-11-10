@@ -36,6 +36,13 @@ public:
     //判断当前DebInstaller对象是否生效，如果无效继续调用可能导致crash
     bool isValid();
 
+    /**
+     * @brief isArchMatched 判断架构是否匹配
+     * @param path
+     * @return
+     */
+    bool isArchMatched(QString path);
+
 private:
     void initBackend();
     void reset();

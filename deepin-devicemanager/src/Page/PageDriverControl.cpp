@@ -213,6 +213,14 @@ void PageDriverControl::installDriverLogical()
             mp_NameDialog->updateTipLabelText(tr("It is not a driver"));
             return;
         }
+        if (driveName.isEmpty() || !file.exists()) {
+            mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
+            return;
+        }
+        if (!DBusDriverInterface::getInstance()->isArchMatched(driveName)) {
+            mp_NameDialog->updateTipLabelText(tr("Unmatched package architecture"));
+            return;
+        }
         removeBtn();
         mp_WaitDialog->setValue(0);
         mp_WaitDialog->setText(tr("Updating"));

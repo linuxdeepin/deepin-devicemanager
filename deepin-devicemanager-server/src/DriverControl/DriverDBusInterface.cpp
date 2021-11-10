@@ -45,4 +45,9 @@ bool DriverDBusInterface::isBlackListed(const QString &modName)
     return mp_drivermanager->isBlackListed(modName);
 }
 
+bool DriverDBusInterface::isArchMatched(const QString &filePath)
+{
+    return mp_drivermanager->isArchMatched(filePath);
+}
+
 

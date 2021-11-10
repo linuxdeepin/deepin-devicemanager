@@ -66,7 +66,7 @@ void DriverManager::initConnections()
         this->errmsg = errmsg;
     });
     connect(this, &DriverManager::sigDebInstall, mp_debinstaller, &DebInstaller::installPackage);
-    connect(this, &DriverManager::sigDebUnstall, mp_debinstaller, &DebInstaller::installPackage);
+    connect(this, &DriverManager::sigDebUnstall, mp_debinstaller, &DebInstaller::uninstallPackage);
 }
 
 /**
@@ -180,7 +180,6 @@ bool DriverManager::installDriver(const QString &filepath)
             }
         }
     }
-
     return  true;
 }
 
@@ -224,6 +223,15 @@ bool DriverManager::isDriverPackage(const QString &filepath)
     }
 
     return  bdriver;
+}
+
+bool DriverManager::isArchMatched(const QString &path)
+{
+    QMimeDatabase typedb;
+    QMimeType filetype = typedb.mimeTypeForFile(path);
+    if (filetype.filterString().contains("deb"))
+        return mp_debinstaller->isArchMatched(path);
+    return true;
 }
 
 /**

@@ -48,6 +48,7 @@ public slots:
     Q_SCRIPTABLE QStringList checkModuleInUsed(const QString &modulename);
     Q_SCRIPTABLE bool isDriverPackage(const QString &filepath);
     Q_SCRIPTABLE bool isBlackListed(const QString &modName);
+    Q_SCRIPTABLE bool isArchMatched(const QString &filePath);
 
 
 private:

@@ -41,6 +41,25 @@ bool DebInstaller::isValid()
     return  m_bValid;
 }
 
+bool DebInstaller::isArchMatched(QString path)
+{
+    QApt::DebFile deb(path);
+    if (!deb.isValid()) {
+        emit this->errorOccurred("Deb is invalid");
+        return false;
+    }
+    const QString arch = deb.architecture();
+
+    if ("all" == arch || "any" == arch)
+        return false;
+
+    bool architectures = m_backend->architectures().contains(deb.architecture());
+    qInfo() << architectures << m_backend->architectures() << arch;
+    if(!architectures)
+        return false;
+    return true;
+}
+
 void DebInstaller::initBackend()
 {
     m_backend = new QApt::Backend;

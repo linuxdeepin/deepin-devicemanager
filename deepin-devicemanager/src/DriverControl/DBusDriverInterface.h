@@ -72,6 +72,13 @@ public:
      */
     bool isDriverPackage(const QString& path);
 
+    /**
+     * @brief isArchMatched
+     * @param path
+     * @return
+     */
+    bool isArchMatched(const QString &path);
+
 signals:
     void processChange(qint32 value, QString details);
     void processEnd(bool sucess);

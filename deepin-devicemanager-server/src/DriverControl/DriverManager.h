@@ -42,6 +42,8 @@ public:
     bool isBlackListed(const QString &modName);
     //判断文件是否驱动包
     bool isDriverPackage(const QString &filepath);
+    //判断架构是否匹配
+    bool isArchMatched(const QString &path);
 
 private:
     void initConnections();
