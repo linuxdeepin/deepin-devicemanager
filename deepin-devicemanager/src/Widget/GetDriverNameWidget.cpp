@@ -72,6 +72,7 @@ void GetDriverNameWidget::initConnections()
 void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString& path)
 {
     // 获取所有的驱动文件
+    mp_selectedRow = -1;
     QStringList lstDrivers;
     mp_driverPathList.clear();
     mp_driversList.clear();
@@ -89,7 +90,6 @@ void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString& path)
         mp_model->setItem(i,0,icomItem);
         mp_model->setItem(i,1,textItem);
         textItem->setToolTip(lstDrivers[i]);
-        textItem->setData(Qt::Unchecked);
     }
 
     mp_ListView->setModel(mp_model);
@@ -166,7 +166,7 @@ void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
     QStandardItem *lastItem = mp_model->item(mp_selectedRow, 1);
     if (lastItem){
         lastItem->setCheckState(Qt::Unchecked);
-        lastItem->setSelectable(false);
+        lastItem->setData(QVariant(), Qt::CheckStateRole);
     }
     if (Qt::Unchecked == item->checkState())
         item->setCheckState(Qt::Checked);
