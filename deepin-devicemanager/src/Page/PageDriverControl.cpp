@@ -18,7 +18,6 @@ DWIDGET_BEGIN_NAMESPACE
 PageDriverControl::PageDriverControl(QString operation, QString deviceName, QString driverName, bool install, QWidget *parent)
     : DDialog(parent)
     , mp_stackWidget(new DStackedWidget)
-    , mp_tipLabel(new DLabel)
     , m_Install(install)
     , m_DriverName(driverName)
 {
@@ -34,18 +33,10 @@ PageDriverControl::PageDriverControl(QString operation, QString deviceName, QStr
     setAttribute(Qt::WA_NoSystemBackground, false);
 
     DWidget *cenWidget = new DWidget;
-    mp_tipLabel->setAlignment(Qt::AlignCenter);
     QVBoxLayout *vLayout = new QVBoxLayout;
     vLayout->setContentsMargins(0, 0, 0, 0);
     vLayout->addWidget(mp_stackWidget);
-    vLayout->addSpacing(5);
-    vLayout->addWidget(mp_tipLabel);
     cenWidget->setLayout(vLayout);
-
-    DPalette pa = DApplicationHelper::instance()->palette(mp_tipLabel);
-    pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
-    DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
-
     if (m_Install) {
         initInstallWidget();
     } else {
@@ -74,14 +65,13 @@ void PageDriverControl::initInstallWidget()
     this->addButton(tr("Next"), true, DDialog::ButtonRecommend);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
     connect(this->getButton(1), &QPushButton::clicked, this, &PageDriverControl::slotBtnNext);
-    connect(mp_NameDialog, &GetDriverNameWidget::signalItemClicked, this, [ = ] {mp_tipLabel->clear();});
     connect(mp_PathDialog, &GetDriverPathWidget::signalNotLocalFolder, this, [=](bool isLocal){
-        mp_tipLabel->clear();
         if (!isLocal)
            getButton(1)->setDisabled(true);
         else
            getButton(1)->setDisabled(false);
     });
+    connect(mp_NameDialog, &GetDriverNameWidget::signalDriversCount, this, [=]{getButton(1)->setDisabled(true);});
 }
 
 void PageDriverControl::initUninstallWidget()
@@ -89,11 +79,11 @@ void PageDriverControl::initUninstallWidget()
     // 先添加警告界面
     QIcon icon(QIcon::fromTheme("cautious"));
     QPixmap pic = icon.pixmap(80, 80);
-    DriverIconWidget *widget = new DriverIconWidget(pic, QObject::tr("Warning"), QObject::tr("The device will be unavailable after the driver uninstallation"), this);
+    DriverIconWidget *widget = new DriverIconWidget(pic, tr("Warning"), tr("The device will be unavailable after the driver uninstallation"), this);
     mp_stackWidget->addWidget(widget);
     mp_stackWidget->setCurrentIndex(0);
     this->addButton(tr("Cancel", "button"), true);
-    this->addButton(tr("Uninstall", "button"), true, DDialog::ButtonRecommend);
+    this->addButton(tr("Uninstall", "button"), true, DDialog::ButtonWarning);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
     connect(this->getButton(1), &QPushButton::clicked, this, &PageDriverControl::slotBtnNext);
 
@@ -144,6 +134,16 @@ void PageDriverControl::slotClose()
     this->close();
 }
 
+void PageDriverControl::slotBackPathPage()
+{
+    mp_stackWidget->setCurrentIndex(0);
+    getButton(1)->setDisabled(false);
+    this->setButtonText(1, tr("Next", "button"));
+    this->setButtonText(0, tr("Cancel", "button"));
+    this->getButton(0)->disconnect();
+    connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
+}
+
 void PageDriverControl::removeBtn()
 {
     clearButtons();
@@ -151,27 +151,32 @@ void PageDriverControl::removeBtn()
 
 void PageDriverControl::installDriverLogical()
 {
-    mp_tipLabel->clear();
     int curIndex = mp_stackWidget->currentIndex();
     if (0 == curIndex) {
         QString path = mp_PathDialog->path();
         QFile file(path);
         bool includeSubdir = mp_PathDialog->includeSubdir();
+        mp_PathDialog->updateTipLabelText("");
         if(path.isEmpty() || !file.exists()){
-            mp_tipLabel->setText(tr("The selected folder does not exist, please select again"));
+            mp_PathDialog->updateTipLabelText(tr("The selected folder does not exist, please select again"));
             return;
         }
         mp_NameDialog->loadAllDrivers(includeSubdir, path);
         mp_stackWidget->setCurrentIndex(1);
+        this->setButtonText(1, tr("Update", "button"));
+        this->setButtonText(0, tr("Previous"));
+        this->getButton(0)->disconnect();
+        connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
     } else if (1 == curIndex) {
         QString driveName = mp_NameDialog->selectName();
         QFile file(driveName);
+        mp_NameDialog->updateTipLabelText("");
         if (driveName.isEmpty() || !file.exists()) {
-            mp_tipLabel->setText(tr("The selected file does not exist, please select again"));
+            mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
             return;
         }
         if (!DBusDriverInterface::getInstance()->isDriverPackage(driveName)) {
-            mp_tipLabel->setText(tr("It is not a driver"));
+            mp_NameDialog->updateTipLabelText(tr("It is not a driver"));
             return;
         }
         removeBtn();

@@ -46,6 +46,11 @@ private:
      */
     void initConnections();
 
+    /**
+     * @brief checkLocalFolder 检测是否本地路径
+     */
+    void checkLocalFolder(const QString &path);
+
 signals:
 
     /**
@@ -60,16 +65,12 @@ public slots:
      */
     void slotChooseUrl();
 
-    /**
-     * @brief slotCheckLocalFolder 检测是否本地路径
-     */
-    void slotCheckLocalFolder(const QString &path);
-
 
 private:
     DLineEdit *mp_urlEdit;
     DSuggestButton *mp_urlBtn;
     QString mp_folderPath;
+    QString mp_elidParh;
 };
 DWIDGET_END_NAMESPACE
 #endif // URLCHOOSEREDIT_H

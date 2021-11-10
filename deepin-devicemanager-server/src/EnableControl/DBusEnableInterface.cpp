@@ -97,7 +97,6 @@ bool DBusEnableInterface::authorizedEnable(const QString& hclass, const QString&
     if(!file.open(QIODevice::ReadWrite)){
         return false;
     }
-    qInfo() << "001 : " << "/sys" + path+QString("/authorized");
     if(enable_device){
         /*
          启用的流程为：以 /devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0 为例
