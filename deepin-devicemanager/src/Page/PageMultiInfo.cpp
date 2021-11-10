@@ -150,6 +150,12 @@ void PageMultiInfo::slotActionRemoveDriver(int row)
     if(nullptr == device){
         return;
     }
+    //打印设备卸载驱动时，通过dde-printer来操作
+    if(device->hardwareClass() == "printer") {
+        if(!QProcess::startDetached("dde-printer"))
+            qInfo() << "dde-printer startDetached error";
+        return;
+    }
 
     PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Drivers"), device->name(), device->driver(), false, this);
     rmDriver->show();
