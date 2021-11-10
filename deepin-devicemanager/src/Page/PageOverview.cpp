@@ -65,7 +65,15 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     QMap<QString, QString> mapCloud;
     getInfoFromEnv(mapCloud);
     getInfoFromDmi(mapCloud);
-    int row = map.size() + mapCloud.size() - 1;
+
+    int row = 0;
+    if (mapCloud.size() > 0) {
+        row = map.size() + mapCloud.size() - 1;
+    } else {
+        // Bug102089 远程调试mapCloud.size()=0,减一造成概况界面少显示一行
+        row = map.size();
+    }
+
 
     // 根据页面高度确定表格最多显示行数
     int maxRow = this->height() / ROW_HEIGHT - 4;
