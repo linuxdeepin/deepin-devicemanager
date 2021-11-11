@@ -32,20 +32,6 @@ private slots:
     void slotTimeout();
 
 private:
-    /**
-     * @brief disableDevice 禁用设备
-     */
-    void disableDevice();
-
-    /**
-     * @brief getMapInfo 解析usb信息
-     * @param item
-     * @param mapInfo
-     * @return
-     */
-    bool getMapInfo(const QString& item,QMap<QString,QString>& mapInfo);
-
-private:
     struct udev                       *m_Udev;              //<! udev Environment
     struct udev_monitor               *mon;                 //<! object of mon
     int                               fd;                   //<! fd

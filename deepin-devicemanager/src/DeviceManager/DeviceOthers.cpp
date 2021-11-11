@@ -1,5 +1,6 @@
 // 项目自身文件
 #include "DeviceOthers.h"
+#include "DBusEnableInterface.h"
 
 DeviceOthers::DeviceOthers()
     : DeviceBaseInfo()
@@ -13,8 +14,10 @@ DeviceOthers::DeviceOthers()
     , m_MaximumPower("")
     , m_Speed("")
     , m_LogicalName("")
+    , m_SerialID("")
 {
-
+    m_CanEnable = true;
+    m_CanUninstall = true;
 }
 
 void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -43,7 +46,10 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
-    setAttribute(mapInfo, "Unique ID", m_UniqID);
+    setAttribute(mapInfo, "Serial ID", m_SerialID);
+    setAttribute(mapInfo, "Serial ID", m_UniqueID);
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
+    setAttribute(mapInfo, "unknown", m_HardwareClass);
 
     m_BusID = mapInfo["SysFS BusID"];
     m_BusID.replace(QRegExp("\\.[0-9]*$"), "");
@@ -56,6 +62,22 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         if (chs.size() == 2)
             m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
     }
+}
+
+EnableDeviceStatus DeviceOthers::setEnable(bool e){
+    if(m_SerialID.isEmpty()){
+        return EDS_NoSerial;
+    }
+
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
+    if(res){
+        m_Enable = e;
+    }
+    // 设置设备状态
+    return res ? EDS_Success : EDS_Faild;
 }
 
 const QString &DeviceOthers::name()const
@@ -115,7 +137,15 @@ void DeviceOthers::loadOtherDeviceInfo()
 void DeviceOthers::loadTableData()
 {
     // 加载表格数据
-    m_TableData.append(m_Name);
+    QString tName = m_Name;
+    if (!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }
+    if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
+    }
+
+    m_TableData.append(tName);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }

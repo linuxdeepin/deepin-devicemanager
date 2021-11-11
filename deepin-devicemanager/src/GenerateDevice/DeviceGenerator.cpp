@@ -880,7 +880,7 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 5)
+        if ((*it).size() < 3)
             continue;
 
         bool isOtherDevice = true;
@@ -893,7 +893,21 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
 
         // 添加其他设备
         if (isOtherDevice) {
-            DeviceOthers *device = new DeviceOthers();
+            // 先判断是否存在
+            QString path = pciPath(*it);
+            if(!QFile::exists(path)){
+                continue;
+            }
+
+            QString unique_id = uniqueID(*it);
+            DeviceOthers *device = dynamic_cast<DeviceOthers*>(DeviceManager::instance()->getOthersDevice(unique_id));
+            if(device){
+                device->setEnableValue(false);
+                continue;
+            }
+
+
+            device = new DeviceOthers();
             device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addOthersDevice(device);
         }

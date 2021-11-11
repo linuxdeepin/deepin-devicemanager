@@ -75,19 +75,6 @@ private:
      */
     bool initDBus();
 
-    /**
-     * @brief disableDevice 开机禁用设备
-     */
-    void disableDevice();
-
-    /**
-     * @brief MainJob::getMapInfo
-     * @param item
-     * @param mapInfo
-     * @return
-     */
-    bool getMapInfo(const QString &item, QMap<QString, QString> &mapInfo);
-
 private:
     ThreadPool            *mp_Pool;               //<! 生成文件的线程池
     DetectThread          *mp_DetectThread;       //<! 检测usb的线程

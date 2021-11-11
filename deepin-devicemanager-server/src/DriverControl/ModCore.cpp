@@ -619,6 +619,7 @@ bool ModCore::isModFile(const QString &filePath)
         }
         kmod_unref(ctx);
     }
+    qInfo() << "" << bmodfile;
     return bmodfile;
 }
 

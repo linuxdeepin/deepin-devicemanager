@@ -345,6 +345,13 @@ public:
     void addOthersDevice(DeviceOthers *const device);
 
     /**
+     * @brief getOthersDevice
+     * @param unique_id
+     * @return
+     */
+    DeviceBaseInfo* getOthersDevice(const QString& unique_id);
+
+    /**
      * @brief addOthersDeviceFromHwinfo:添加由hwinfo获取的其他设备信息
      * @param device:其他设备信息
      */

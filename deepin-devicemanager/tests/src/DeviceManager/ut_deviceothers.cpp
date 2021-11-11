@@ -107,7 +107,6 @@ TEST_F(DeviceOthers_UT, DeviceOthers_UT_setInfoFromHwinfo)
     EXPECT_STREQ("Revision", m_deviceOthers->m_Version.toStdString().c_str());
     EXPECT_STREQ("Driver", m_deviceOthers->m_Driver.toStdString().c_str());
     EXPECT_STREQ("Speed", m_deviceOthers->m_Speed.toStdString().c_str());
-    EXPECT_STREQ("Unique ID", m_deviceOthers->m_UniqID.toStdString().c_str());
     EXPECT_STREQ("1-8:1", m_deviceOthers->m_BusID.toStdString().c_str());
     EXPECT_STREQ("usb@1:8", m_deviceOthers->m_BusInfo.toStdString().c_str());
 }

@@ -411,7 +411,6 @@ bool DeviceBaseInfo::enable()
 
 bool DeviceBaseInfo::available()
 {
-    qInfo() << "driver : " << driver();
     if(driver().isEmpty()){
         m_Available = false;
     }

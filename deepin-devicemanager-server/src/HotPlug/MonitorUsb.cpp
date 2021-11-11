@@ -1,16 +1,15 @@
 #include "MonitorUsb.h"
 #include "EnableSqlManager.h"
+#include "EnableUtils.h"
 
 #include <QDebug>
 #include <QProcess>
 #include <QFile>
 #include <QDateTime>
 
-#define LEAST_NUM 10
-
 MonitorUsb::MonitorUsb()
     : m_Udev(nullptr)
-    , mp_Timer(new QTimer)
+    , mp_Timer(new QTimer(this))
     , m_UsbChangeTime()
     , m_UsbChanged(false)
 {
@@ -66,7 +65,7 @@ void MonitorUsb::monitor()
         strcpy(buf, udev_device_get_action(dev));
         if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) {
             if(0 == strcmp("add", buf)){
-                disableDevice();
+                EnableUtils::disableOutDevice();
             }
             m_UsbChanged = true;
             m_UsbChangeTime = QDateTime::currentMSecsSinceEpoch();
@@ -74,80 +73,6 @@ void MonitorUsb::monitor()
 
         udev_device_unref(dev);
     }
-}
-
-void MonitorUsb::disableDevice()
-{
-    QProcess process;
-    process.start("hwinfo --usb");
-    process.waitForFinished(-1);
-    QString info = process.readAllStandardOutput();
-
-    QStringList items = info.split("\n\n");
-    foreach(const QString& item,items){
-        QMap<QString,QString> mapItem;
-        if(!getMapInfo(item,mapItem))
-            continue;
-
-        // 防止禁用的设备被启用
-        QString uniqueID;
-        if(mapItem.find("Permanent HW Address") != mapItem.end()){
-            uniqueID = mapItem["Permanent HW Address"];
-        }else{
-            uniqueID = mapItem["Module Alias"];
-            uniqueID.replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
-        }
-        if (uniqueID.isEmpty()) {
-            continue;
-        }
-
-        QString path;
-        if(mapItem.find("SysFS Device Link") != mapItem.end()){
-            path = mapItem["SysFS ID"];
-        }else{
-            path = mapItem["SysFS ID"];
-        }
-        path.replace(QRegExp("[1-9]$"), "0");
-
-        if(EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID)){
-            QFile file("/sys" + path + QString("/authorized"));
-            if(!file.open(QIODevice::ReadWrite)){
-                return;
-            }
-            file.write("0");
-            file.close();
-            EnableSqlManager::getInstance()->updateDataToAuthorizedTable(uniqueID,path);
-        }
-    }
-}
-
-bool MonitorUsb::getMapInfo(const QString& item,QMap<QString,QString>& mapInfo)
-{
-    QStringList lines = item.split("\n");
-    // 行数太少则为无用信息
-    if(lines.size() <= LEAST_NUM){
-        return false;
-    }
-
-    foreach(const QString& line,lines){
-        QStringList words = line.split(": ");
-        if(words.size() != 2)
-            continue;
-        mapInfo.insert(words[0].trimmed(),words[1].replace("\"","").trimmed());
-    }
-
-    // hub为usb接口，可以直接过滤
-    if(mapInfo["Hardware Class"] == "hub"){
-        return false;
-    }
-
-    // 没有总线信息的设备可以过滤
-    if(mapInfo.find("SysFS BusID") == mapInfo.end()){
-        return false;
-    }
-
-    return true;
-
 }
 
 void MonitorUsb::slotTimeout()

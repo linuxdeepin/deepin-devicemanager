@@ -79,7 +79,7 @@ void TextBrowser::updateInfo()
     domTitleInfo(doc, mp_Info);
 
     // 添加一个表格
-    if (mp_Info->enable()) {
+    if (mp_Info->enable() && mp_Info->available()) {
         const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
         domTableInfo(doc, baseInfo);
         if (m_ShowOtherInfo) {
@@ -162,7 +162,7 @@ void TextBrowser::focusOutEvent(QFocusEvent *e)
         domTitleInfo(doc, mp_Info);
 
         // 添加一个表格
-        if (mp_Info->enable()) {
+        if (mp_Info->enable() && mp_Info->available()) {
             const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
             domTableInfo(doc, baseInfo);
             if (m_ShowOtherInfo) {

@@ -156,11 +156,11 @@ bool DriverManager::installDriver(const QString &filepath)
                 Utils::updateModDeps();
                 sigProgressDetail(50, "");
                 QString modname = mp_modcore->modGetName(installpath);
+                //处理黑名单
+                mp_modcore->rmFromBlackList(modname);
                 ModCore::ErrorCode errcode = mp_modcore->modInstall(modname);
                 sigProgressDetail(60, "");
                 if (ModCore::Success == errcode) {
-                    //处理黑名单
-                    mp_modcore->rmFromBlackList(modname);
                     sigProgressDetail(70, "");
                     //如果非内建模块设置开机自启动
                     if (!mp_modcore->modIsBuildIn(modname) && !mp_modcore->setModLoadedOnBoot(modname)) {

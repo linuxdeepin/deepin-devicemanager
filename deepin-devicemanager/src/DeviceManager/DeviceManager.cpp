@@ -670,6 +670,17 @@ void DeviceManager::addOthersDevice(DeviceOthers *const device)
         m_ListDeviceOthers.append(device);
 }
 
+DeviceBaseInfo* DeviceManager::getOthersDevice(const QString& unique_id)
+{
+    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceOthers.begin(); it != m_ListDeviceOthers.end(); ++it) {
+        DeviceOthers *other = dynamic_cast<DeviceOthers*>(*it);
+        if(other && other->uniqueID() == unique_id){
+            return *it;
+        }
+    }
+    return nullptr;
+}
+
 void DeviceManager::addOthersDeviceFromHwinfo(DeviceOthers *const device)
 {
     // 从hwinfo中获取其他设备信息
