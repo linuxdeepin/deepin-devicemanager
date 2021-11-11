@@ -123,7 +123,7 @@ void DebInstaller::doOperate(const QString &package, bool binstall)
 void DebInstaller::installPackage(const QString &filepath)
 {
     //检查dpkg是否正在运行，如果正在运行等待2s重试,最多尝试20次
-    if (Utils::isFileLocked("/var/lib/dpkg/lock")) {
+    if (Utils::isDpkgLocked()) {
         if (m_iRuningTestCount < MAX_DPKGRUNING_TEST) {
             QTimer::singleShot(TEST_TIME_INTERVAL, this, [&] {
                 installPackage(filepath);

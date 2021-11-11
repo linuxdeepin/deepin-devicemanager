@@ -204,3 +204,20 @@ bool Utils::isFileLocked(const QString &filepath, bool bread)
     fcntl(fd, F_SETLK, &fl);
     return  false;
 }
+
+bool Utils::isDpkgLocked()
+{
+    QProcess proc;
+    proc.setProgram("bash");
+    proc.setArguments(QStringList() << "-c"
+                                    << "ps -e -o comm | grep dpkg");
+    proc.start();
+    proc.waitForFinished();
+    QString info = proc.readAllStandardOutput();
+    info = info.trimmed();
+    if (info.isEmpty() || info == "dpkg-query")
+        return false;
+    return true;
+}
+
+

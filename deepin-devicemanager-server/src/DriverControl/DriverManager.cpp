@@ -38,6 +38,7 @@ DriverManager::DriverManager(QObject *parent)
     mp_deboperatethread = new QThread(this);
     mp_debinstaller = new DebInstaller;
     mp_debinstaller->moveToThread(mp_deboperatethread);
+    mp_deboperatethread->start();
     initConnections();
 }
 

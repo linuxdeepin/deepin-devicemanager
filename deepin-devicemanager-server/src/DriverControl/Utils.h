@@ -38,6 +38,8 @@ public:
     static bool updateModDeps(bool bquick = true);
     //判断文件是否被占用
     static bool isFileLocked(const QString &filepath, bool bread = false);
+    //判断dpkg是否被占用
+    static bool isDpkgLocked();
 };
 
 #endif // UTILS_H
