@@ -66,7 +66,7 @@ Table *DocumentPart::addTable(int rows, int cols, const QString &style)
 }
 void DocumentPart::afterUnmarshal()
 {
-    qInfo() << "afetrUnmarshal";
+    qDebug() << "afetrUnmarshal";
 }
 
 QDomDocument *DocumentPart::element() const

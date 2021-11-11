@@ -27,8 +27,7 @@ Package *Package::open(const QString &pkgFile)
     //
     Package *package = new Package();
     Unmarshaller::unmarshal(reader, package);
-    delete reader;
-    reader = nullptr;
+
     return package;
 }
 

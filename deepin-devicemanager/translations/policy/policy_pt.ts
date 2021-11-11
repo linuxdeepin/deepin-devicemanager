@@ -3,7 +3,7 @@
     <name>policy</name>
     <message>
         <source>Authentication is required to read hardware information</source>
-        <translation>É necessária autenticação para ler a informação do equipamento</translation>
+        <translation>É necessária autenticação para ler a informação do hardware</translation>
     </message>
     <message>
         <source>Cancel</source>

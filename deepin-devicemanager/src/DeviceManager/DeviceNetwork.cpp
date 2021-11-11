@@ -1,45 +1,17 @@
-// 项目自身文件
 #include "DeviceNetwork.h"
-#include "DBusEnableInterface.h"
 
 DeviceNetwork::DeviceNetwork()
-    : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
-    , m_Model(""), m_Version("")
-    , m_BusInfo("")
-    , m_LogicalName("")
-    , m_MACAddress("")
-    , m_Irq("")
-    , m_Memory("")
-    , m_Width("")
-    , m_Clock("")
-    , m_Capabilities("")
-    , m_Autonegotiation("")
-    , m_Broadcast("")
-    , m_Driver("")
-    , m_DriverVersion("")
-    , m_Duplex("")
-    , m_Firmware("")
-    , m_Port("")
-    , m_Link("")
-    , m_Ip("")
-    , m_Speed("")
-    , m_Capacity("")
-    , m_Latency("")
-    , m_Multicast("")
+    : DeviceBaseInfo(), m_Name(""), m_Vendor(""), m_Model(""), m_Version(""), m_BusInfo("")
+    , m_LogicalName(""), m_MACAddress(""), m_Irq(""), m_Memory(""), m_Width(""), m_Clock("")
+    , m_Capabilities(""), m_Autonegotiation(""), m_Broadcast(""), m_Driver(""), m_DriverVersion(""), m_Duplex(""), m_Firmware("")
+    , m_Port(""), m_Link(""), m_Ip(""), m_Speed(""), m_Capacity(""), m_Latency(""), m_Multicast("")
 {
-    // 初始化可显示属性
     initFilterKey();
-
-    // 设备可禁用
-    m_CanEnable = true;
-    m_CanUninstall = true;
 }
 
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    // 设置由lshw获取的信息
+
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "description", m_Name, false);
@@ -67,26 +39,16 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
 
-    // 加载其他信息
-    getOtherMapInfo(mapInfo);
+    loadOtherDeviceInfo(mapInfo);
 }
 
 bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("path") != mapInfo.end()){
-        setAttribute(mapInfo, "name", m_Name);
-        m_SysPath = "/sys" + mapInfo["path"];
-        m_UniqueID = m_Name;
-        m_HardwareClass = mapInfo["Hardware Class"];
-        m_Enable = false;
-        return true;
+    if (mapInfo["Device File"] != m_LogicalName) {
+        return false;
     }
 
-    m_SysPath = "/sys" + mapInfo["SysFS Device Link"];
-    QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+-]{4}\\.(.*)");
-    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
-        m_UniqueID = reUniqueId.cap(1);
-    }
+    setAttribute(mapInfo, "Model", m_Name);
     return true;
 }
 
@@ -94,119 +56,105 @@ const QString &DeviceNetwork::name()const
 {
     return m_Name;
 }
-
+const QString &DeviceNetwork::vendor()const
+{
+    return m_Vendor;
+}
+const QString &DeviceNetwork::model()const
+{
+    return m_Model;
+}
+const QString &DeviceNetwork::version()const
+{
+    return m_Version;
+}
+const QString &DeviceNetwork::busInfo()const
+{
+    return m_BusInfo;
+}
+const QString &DeviceNetwork::logicalName()const
+{
+    return m_LogicalName;
+}
+const QString &DeviceNetwork::MACAddress()const
+{
+    return m_MACAddress;
+}
+const QString &DeviceNetwork::irq()const
+{
+    return m_Irq;
+}
+const QString &DeviceNetwork::memory()const
+{
+    return m_Memory;
+}
+const QString &DeviceNetwork::width()const
+{
+    return m_Width;
+}
+const QString &DeviceNetwork::clock()const
+{
+    return m_Clock;
+}
+const QString &DeviceNetwork::capabilities()const
+{
+    return m_Capabilities;
+}
+const QString &DeviceNetwork::autoNegotiation()const
+{
+    return m_Autonegotiation;
+}
+const QString &DeviceNetwork::broadcast()const
+{
+    return m_Broadcast;
+}
 const QString &DeviceNetwork::driver()const
 {
     return m_Driver;
 }
-
-QString DeviceNetwork::subTitle()
+const QString &DeviceNetwork::driverVersion()const
 {
-    return m_Name;
+    return m_DriverVersion;
 }
-
-const QString DeviceNetwork::getOverviewInfo()
+const QString &DeviceNetwork::duplex()const
 {
-    // 获取概况信息
-    return m_Name.isEmpty() ? m_Model : m_Name;
+    return m_Duplex;
 }
-
-EnableDeviceStatus DeviceNetwork::setEnable(bool e)
+const QString &DeviceNetwork::firmware()const
 {
-    // 设置网卡禁用启用
-    if(!m_SysPath.contains("usb")){
-        m_UniqueID = m_Name;
-    }
-    m_HardwareClass = "network interface";
-    // 设置设备状态
-    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
-        return EDS_Faild;
-    }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
-    if(res){
-        m_Enable = e;
-    }
-    // 设置设备状态
-    return res ? EDS_Success : EDS_Faild;
+    return m_Firmware;
 }
-
-bool DeviceNetwork::enable()
+const QString &DeviceNetwork::port()const
 {
-    // 通过ifconfig配置网卡禁用启用
-    return m_Enable;
+    return m_Port;
 }
-
-void DeviceNetwork::correctCurrentLinkStatus(QString linkStatus)
+const QString &DeviceNetwork::link()const
 {
-    if (m_Link != linkStatus)
-        m_Link = linkStatus;
+    return m_Link;
 }
-
-QString DeviceNetwork::logicalName()
+const QString &DeviceNetwork::ip()const
 {
-    return m_LogicalName;
+    return m_Ip;
 }
-
+const QString &DeviceNetwork::speed()const
+{
+    return m_Speed;
+}
+const QString &DeviceNetwork::capacity()const
+{
+    return m_Capacity;
+}
+const QString &DeviceNetwork::latency()const
+{
+    return m_Latency;
+}
+const QString &DeviceNetwork::multicast()const
+{
+    return m_Multicast;
+}
 void DeviceNetwork::initFilterKey()
 {
-    // 初始化可显示属性
     addFilterKey(QObject::tr("ioport"));
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("network"));
-}
-
-void DeviceNetwork::loadBaseDeviceInfo()
-{
-    // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Type"), m_Model);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Driver Version"), m_DriverVersion);
-}
-
-void DeviceNetwork::loadOtherDeviceInfo()
-{
-    // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Maximum Rate"), m_Capacity);        // 1050需求 容量改为最大速率
-    addOtherDeviceInfo(tr("Negotiation Rate"), m_Speed);       // 1050需求 速度改为协商速率
-    addOtherDeviceInfo(tr("Port"), m_Port);
-    addOtherDeviceInfo(tr("Multicast"), m_Multicast);
-    addOtherDeviceInfo(tr("Link"), m_Link);
-    addOtherDeviceInfo(tr("Latency"), m_Latency);
-    addOtherDeviceInfo(tr("IP"), m_Ip);
-    addOtherDeviceInfo(tr("Firmware"), m_Firmware);
-    addOtherDeviceInfo(tr("Duplex"), m_Duplex);
-    addOtherDeviceInfo(tr("Broadcast"), m_Broadcast);
-    addOtherDeviceInfo(tr("Auto Negotiation"), m_Autonegotiation);
-    addOtherDeviceInfo(tr("Clock"), m_Clock);
-    addOtherDeviceInfo(tr("Width"), m_Width);
-    addOtherDeviceInfo(tr("Memory Address"), m_Memory);        // 1050需求 内存改为内存地址
-    addOtherDeviceInfo(tr("IRQ"), m_Irq);
-    addOtherDeviceInfo(tr("MAC Address"), m_MACAddress);
-    addOtherDeviceInfo(tr("Logical Name"), m_LogicalName);
-
-    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
-    mapInfoToList();
-}
-
-void DeviceNetwork::loadTableData()
-{
-    // 根据是否禁用设置设备名称
-    QString tName;
-    if (!available()){
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
-    }else if(!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }else{
-        tName = m_Name;
-    }
-
-    // 加载表格数据信息
-    m_TableData.append(tName);
-    m_TableData.append(m_Vendor);
-    m_TableData.append(m_Model);
 }

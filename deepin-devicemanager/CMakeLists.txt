@@ -23,7 +23,6 @@ if (NOT DEFINED VERSION)
     set(VERSION 5.5.10.1)
 endif ()
 
-
 #common resource names
 set(APP_RES_DIR "assets")
 set(APP_BIN_NAME "deepin-devicemanager")
@@ -31,6 +30,12 @@ set(APP_TRANS_SCRIPT "${APP_RES_DIR}/translate_generation.sh")
 set(APP_DESKTOP "${APP_RES_DIR}/deepin-devicemanager.desktop")
 set(APP_QRC "${APP_RES_DIR}/appimage.qrc")
 set(APP_ICON_FILE "${APP_RES_DIR}/icons/deepin/builtin/deepin-devicemanager.svg")
+
+#message(${APP_RES_DIR})
+#message(${APP_BIN_NAME})
+#message(${APP_TRANS_SCRIPT})
+#message(${APP_DESKTOP})
+#message(********************************+++++++++++++++++++++++${APP_ICON_FILE})
 project(${APP_BIN_NAME})
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -39,10 +44,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--as-need -fPIE -fstack-protector-strong -D_FORTITY_SOURCE=1 -z noexecstack -pie -fPIC -z lazy")
-set(CMAKE_EXE_LINKER_FLAGS "-pie")
-
-option (PERF_ON "Use provided math implementation" ON)
 
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "sw_64")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mieee")
@@ -67,33 +68,39 @@ endif()
 #message(${CMAKE_CURRENT_SOURCE_DIR})
 execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 configure_file(src/environments.h.in environments.h @ONLY)
-configure_file(src/config.h.in config.h @ONLY)
 
-# include dir
-MACRO(SUBDIRLIST result curdir)
-  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
-  SET(dirlist "")
-  FOREACH(child ${children})
-    IF(IS_DIRECTORY ${curdir}/${child})
-      LIST(APPEND dirlist ${child})
-    ENDIF()
-  ENDFOREACH()
-  SET(${result} ${dirlist})
-ENDMACRO()
+macro(SUBDIRLIST result curdir)
+#    message(************************************************SUBDIRLIST:${SUBDIRLIST})
+#    message(************************************************result:${result})
+#    message(************************************************curdir:${curdir})
+    file(GLOB children RELATIVE ${curdir} ${curdir}/*)
+    set(dirlist "")
+    foreach(child ${children})
+        if(IS_DIRECTORY ${curdir}/${child})
+            LIST(APPEND dirlist ${child})
+        endif()
+    endforeach()
+    set(${result} ${dirlist})
+endmacro()
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
-SUBDIRLIST(dirs ${CMAKE_CURRENT_SOURCE_DIR}/src)
-foreach(dir ${dirs})
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${dir})
-endforeach()
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/docx)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/include/QtXlsx)
+SUBDIRLIST(all_src ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-#add cups and zmq
+#Include all src
+foreach(subdir ${all_src})
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${subdir})
+endforeach()
+
+#Include all third
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/include/QtXlsx)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/docx)
+#add cups
 include_directories("/usr/include/cups/")
+link_directories("/usr/lib/cups/")
 link_libraries("cups")
 
-file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
-file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
+file(GLOB_RECURSE DEVICE_SRC ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+file(GLOB_RECURSE THIRD_PARTY ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
 
 
 # Find the library
@@ -109,9 +116,10 @@ find_package(DFrameworkdbus REQUIRED)
 include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
 # Tell CMake to create the executable
-add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H} ${APP_QRC})
+add_executable(${PROJECT_NAME} ${DEVICE_SRC} ${THIRD_PARTY} ${APP_QRC})
+target_include_directories(${APP_BIN_NAME}
+    PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
 
-target_include_directories(${APP_BIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
 target_link_libraries(${APP_BIN_NAME}
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
@@ -126,7 +134,6 @@ target_link_libraries(${APP_BIN_NAME}
 
 set(CMAKE_INSTALL_PREFIX /usr)
 
-
 # Install files
 install(TARGETS deepin-devicemanager DESTINATION bin)
 
@@ -134,7 +141,5 @@ file(GLOB APP_QM_FILES "translations/*.qm")
 install(FILES ${APP_QM_FILES} DESTINATION share/deepin-devicemanager/translations)
 install(FILES ${APP_DESKTOP} DESTINATION share/applications)
 install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/apps)
-install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
 
-# Test--------deepin-devicemanager
-add_subdirectory(./tests)
+

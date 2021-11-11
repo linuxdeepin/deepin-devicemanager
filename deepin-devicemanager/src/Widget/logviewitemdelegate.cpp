@@ -19,21 +19,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// DTK
 #include <DApplication>
 #include <DApplicationHelper>
 #include <DPalette>
 #include <DStyle>
 #include <DStyleHelper>
-
-// Qt
 #include <QDebug>
 #include <QModelIndex>
 #include <QPainter>
 #include <QStyleOptionViewItem>
-#include <QPainterPath>
 
-// other
 #include "logviewitemdelegate.h"
 
 DWIDGET_USE_NAMESPACE
@@ -58,22 +53,23 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     QStyleOptionViewItem opt = option;
     initStyleOption(&opt, index);
 
-    QWidget *wnd = DApplication::activeWindow();
+//    QWidget *wnd = DApplication::activeWindow();
     DPalette::ColorGroup cg;
     if (!(opt.state & DStyle::State_Enabled)) {
         cg = DPalette::Disabled;
     } else {
-        if (!wnd) {
-            cg = DPalette::Inactive;
-        } else {
-            cg = DPalette::Active;
-        }
+//        if (!wnd) {
+//            cg = DPalette::Inactive;
+//        } else {
+//            cg = DPalette::Active;
+//        }
+        cg = DPalette::Active;
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    if (!style)
-        return;
-    int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
+
+    int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
+    int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option)-4;
 
     DApplicationHelper *dAppHelper = DApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
@@ -85,49 +81,82 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         background = palette.color(cg, DPalette::Base);
     }
 
-    bool enableAndSelect = false;
     forground.setColor(palette.color(cg, DPalette::Text));
     if (opt.state & DStyle::State_Enabled) {
         if (opt.state & DStyle::State_Selected) {
             background = palette.color(cg, DPalette::Highlight);
             forground.setColor(palette.color(cg, DPalette::HighlightedText));
-            enableAndSelect = true;
         }
     }
     painter->setPen(forground);
 
     QRect rect = opt.rect;
-
     QFontMetrics fm(opt.font);
     QPainterPath path, clipPath;
-
     QRect textRect = rect;
+
+    switch (opt.viewItemPosition) {
+        case QStyleOptionViewItem::Beginning: {
+            rect.setX(rect.x() + margin);  // left margin
+
+            QPainterPath rectPath, roundedPath;
+            roundedPath.addRoundedRect(rect.x(), rect.y()+1, rect.width() * 2, rect.height()-2, radius,
+                                       radius);
+            rectPath.addRect(rect.x() + rect.width(), rect.y() +1, rect.width(), rect.height()-2);
+            clipPath = roundedPath.subtracted(rectPath);
+            painter->setClipPath(clipPath);
+            path.addRect(rect);
+        } break;
+        case QStyleOptionViewItem::Middle: {
+            QRect rect2(rect.left(), rect.top()+1, rect.width(), rect.height()-2);
+            path.addRect(rect2);
+        } break;
+        case QStyleOptionViewItem::End: {
+            rect.setWidth(rect.width() - margin);  // right margin
+
+            QPainterPath rectPath, roundedPath;
+            roundedPath.addRoundedRect(rect.x() - rect.width(), rect.y()+1, rect.width() * 2,
+                                       rect.height()-2, radius, radius);
+            rectPath.addRect(rect.x() - rect.width(), rect.y()+1, rect.width(), rect.height()-2);
+            clipPath = roundedPath.subtracted(rectPath);
+            painter->setClipPath(clipPath);
+            path.addRect(rect);
+        } break;
+        case QStyleOptionViewItem::OnlyOne: {
+            rect.setX(rect.x() + margin);          // left margin
+            rect.setWidth(rect.width() - margin);  // right margin
+            path.addRoundedRect(rect, radius, radius);
+        } break;
+        default: {
+            painter->restore();
+            QStyledItemDelegate::paint(painter, option, index);
+            return;
+        }
+    }
+    painter->fillPath(path, background);
 
     QRect iconRect = rect;
     if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
-            index.data(Qt::DecorationRole).isValid()) {
+        index.data(Qt::DecorationRole).isValid()) {
         iconRect.setX(rect.x() - margin);
         iconRect.setWidth(64);
         QIcon ic = index.data(Qt::DecorationRole).value<QIcon>();
         ic.paint(painter, iconRect);
     }
+    textRect = rect;
+    textRect.setX(textRect.x() + margin +3);
 
-    if (opt.viewItemPosition == QStyleOptionViewItem::Beginning) {
-        textRect.setX(textRect.x() + margin * 2);
-    } else {
-        textRect.setX(textRect.x() + margin);
-    }
+    /*
+    *@author yaobin
+    *@date 209-12-21
+    *@Modify Reason:省略符(...)后预留两个英文字母的空间
+    */
+    int leftElideSpace = fm.width(QString("yy"));
+    textRect.setWidth(textRect.width()-leftElideSpace);
 
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
+    painter->drawText(textRect, static_cast<int>(opt.displayAlignment), text);
 
-    QPen p = painter->pen();
-    if (text.startsWith("(" + tr("Disable") + ")") && !enableAndSelect) {
-        p.setColor(QColor("#FF5736"));
-    }else if(text.startsWith("(" + tr("Unavailable") + ")")){
-        palette.color(cg, DPalette::PlaceholderText);
-    }
-    painter->setPen(p);
-    painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
     painter->restore();
 }
 
@@ -161,7 +190,6 @@ void LogViewItemDelegate::initStyleOption(QStyleOptionViewItem *option,
     option->features = QStyleOptionViewItem::HasDisplay;
     if (index.row() % 2 == 0)
         option->features |= QStyleOptionViewItem::Alternate;
-
     if (index.data(Qt::DisplayRole).isValid())
         option->text = index.data().toString();
 }

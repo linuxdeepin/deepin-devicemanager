@@ -58,24 +58,26 @@ public:
 class XlsxAxis
 {
 public:
-    enum Type {
+    enum Type
+    {
         T_Cat,
         T_Val,
         T_Date,
         T_Ser
     };
 
-    enum Pos {
+    enum Pos
+    {
         Left,
         Right,
         Top,
         Bottom
     };
 
-    XlsxAxis(): type(), axisPos(), axisId(), crossAx() {}
+    XlsxAxis(){}
 
     XlsxAxis(Type t, Pos p, int id, int crossId)
-        : type(t), axisPos(p), axisId(id), crossAx(crossId)
+        :type(t), axisPos(p), axisId(id), crossAx(crossId)
     {
     }
 

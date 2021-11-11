@@ -34,21 +34,14 @@
 QT_BEGIN_NAMESPACE_XLSX
 
 CellPrivate::CellPrivate(Cell *p) :
-    cellType()
-    , parent(nullptr)
-    , q_ptr(p)
+    q_ptr(p)
 {
 
 }
 
-CellPrivate::CellPrivate(const CellPrivate *const cp)
-    : value(cp->value)
-    , formula(cp->formula)
-    , cellType(cp->cellType)
-    , format(cp->format)
-    , richString(cp->richString)
-    , parent(cp->parent)
-    , q_ptr(nullptr)
+CellPrivate::CellPrivate(const CellPrivate * const cp)
+    : value(cp->value), formula(cp->formula), cellType(cp->cellType)
+    , format(cp->format), richString(cp->richString), parent(cp->parent)
 {
 
 }
@@ -86,7 +79,7 @@ Cell::Cell(const QVariant &data, CellType type, const Format &format, Worksheet 
 /*!
  * \internal
  */
-Cell::Cell(const Cell *const cell):
+Cell::Cell(const Cell * const cell):
     d_ptr(new CellPrivate(cell->d_ptr))
 {
     d_ptr->q_ptr = this;
@@ -151,7 +144,7 @@ CellFormula Cell::formula() const
 bool Cell::isDateTime() const
 {
     Q_D(const Cell);
-    if (d->cellType == NumberType && d->value.toDouble() >= 0
+    if (d->cellType == NumberType && d->value.toDouble() >=0
             && d->format.isValid() && d->format.isDateTimeFormat()) {
         return true;
     }

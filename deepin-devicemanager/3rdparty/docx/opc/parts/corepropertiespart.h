@@ -15,8 +15,8 @@ class CorePropertiesPart : public XmlPart
 public:
     CorePropertiesPart(const QString &partName, const QString &contentType
                        , const QByteArray &blob, Package *package = nullptr);
-//    static void load(const QString &partName, const QString &contentType
-//                , const QByteArray &blob, Package *package = nullptr);
+    static void load(const QString &partName, const QString &contentType
+                , const QByteArray &blob, Package *package = nullptr);
     virtual ~CorePropertiesPart();
 
     void afterUnmarshal();
