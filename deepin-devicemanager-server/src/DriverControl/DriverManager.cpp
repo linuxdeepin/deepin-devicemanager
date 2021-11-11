@@ -30,6 +30,36 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QDebug>
+#include <QPair>
+#include <QJsonObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QEventLoop>
+#include <QTimer>
+#include <QScopedPointer>
+#include <QProcess>
+#include <QJsonArray>
+#include <QThread>
+
+#define SD_KEY_excat    "excat"
+#define SD_KEY_ver      "version"
+#define SD_KEY_code     "client_code"
+#define SD_KEY_mfg      "MFG"
+#define SD_KEY_mdl      "MDL"
+#define SD_KEY_ieeeid   "ieee1284_id"
+
+#define SD_KEY_describe "describe"
+#define SD_KEY_driver   "driver"
+#define SD_KEY_excat    "excat"
+#define SD_KEY_ppd      "ppd"
+#define SD_KEY_sid      "sid"
+
+#define RETURN_VALUE(flag) \
+{   \
+    sigFinished(flag);\
+    return flag; \
+}
 
 DriverManager::DriverManager(QObject *parent)
     : QObject(parent)
@@ -262,4 +292,151 @@ bool DriverManager::unInstallModule(const QString &moduleName)
     return  bsuccess;
 }
 
+/**
+ * @brief DriverManager::uninstallPrinter 卸载打印机
+ * @param name 打印机名
+ * @param vendor 制造商
+ * @param model 型号
+ * @return true: 成功 false: 失败
+ */
+bool DriverManager::uninstallPrinter(const QString& vendor, const QString& model)
+{
+    auto archMap = QMap<QString, QString> {
+        {"x86_64", "x86"},
+        {"i386", "x86"},
+        {"i686", "x86"},
+        {"mips64", "mips64"},
+        {"aarch64", "aarch64"},
+        {"loongarch64", "loongarch64"}
+    };
+    QJsonObject obj = {
+        QPair<QString, QJsonValue>(SD_KEY_ver, "1.2.0"),
+        QPair<QString, QJsonValue>(SD_KEY_code, "godfather"),
+        QPair<QString, QJsonValue>(SD_KEY_mfg, vendor),
+        QPair<QString, QJsonValue>(SD_KEY_mdl, model),
+        QPair<QString, QJsonValue>(SD_KEY_ieeeid, ""),
+    };
 
+    QString url = "http://printer.deepin.com:80/eagle/" + archMap[Utils::machineArch()] + "/search";
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QNetworkAccessManager networkManager;
+    QNetworkReply *reply = networkManager.post(request,QJsonDocument(obj).toJson(QJsonDocument::Compact));
+    QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> replyPtr(reply);
+
+    sigProgressDetail(0, "");
+    QTimer timer;
+    timer.setSingleShot(true);
+    QEventLoop loop;
+    QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    timer.start(10000);
+    loop.exec();
+
+    //超时
+    sigProgressDetail(10, "");
+    if(!timer.isActive())
+        RETURN_VALUE(false);
+
+    //无返回数据
+    sigProgressDetail(20, "");
+    QByteArray data = reply->readAll();
+    if (data.isEmpty())
+        RETURN_VALUE(false);
+
+    //获取packageName
+    sigProgressDetail(30, "");
+    QList<TDriverInfo> lstDrivers = parsePrinterInfo(data);
+    if (lstDrivers.isEmpty())
+        RETURN_VALUE(false);
+
+    QString packageName = lstDrivers[0].strDriver;
+    //1.若驱动已经删除，但是驱动名还在，会执行孔的卸载，然后删除打印机
+    //2.卸载打印机要确保联网状态
+    //3.驱动不存在，直接返回false
+    //未安装package
+    sigProgressDetail(40, "");
+    if(!printerHasInstalled(packageName)) {
+        RETURN_VALUE(false);
+    }
+
+    //卸载package
+    sigProgressDetail(40, "");
+    if(!unInstallPrinter(packageName))
+        RETURN_VALUE(false);
+
+    //卸载成功
+    sigProgressDetail(100, "");
+    RETURN_VALUE(true);
+}
+
+/**
+ * @brief DriverManager::parsePrinterInfo 解析打印服务器返回的数据
+ * @param byteArray 服务返回的数据
+ * @return list 返回打印机包的列表
+ */
+QList<DriverManager::TDriverInfo> DriverManager::parsePrinterInfo(const QByteArray &byteArray)
+{
+    QList<TDriverInfo> lstDrivers;
+    QJsonParseError err;
+    QJsonDocument doc = QJsonDocument::fromJson(byteArray, &err);
+    QJsonArray array = doc.object()["solutions"].toArray();
+    if (!array.isEmpty()) {
+        foreach (QJsonValue value, array) {
+            QJsonObject ppdobject = value.toObject();
+            TDriverInfo driver;
+            driver.intSid = ppdobject.value(SD_KEY_sid).toInt();
+            driver.strDescribe = ppdobject.value(SD_KEY_describe).toString();
+            driver.strPpd = ppdobject.value(SD_KEY_ppd).toString();
+            driver.isExcat = ppdobject.value(SD_KEY_excat).toBool();
+            driver.strDriver = ppdobject.value(SD_KEY_driver).toString();
+
+            lstDrivers.append(driver);
+        }
+    }
+    return lstDrivers;
+}
+
+/**
+ * @brief DriverManager::printerHasInstalled 打印机是否被安装
+ * @param packageName 包名
+ * @return true: 成功 false: 失败
+ */
+bool DriverManager::printerHasInstalled(const QString &packageName)
+{
+    QProcess p;
+    QString cmd = "sudo dpkg -s " + packageName;
+    p.start(cmd);
+    p.waitForFinished(-1);
+
+    QByteArray r = p.readAll();
+    return r.contains("installed");
+}
+
+/**
+ * @brief DriverManager::installPrinter 安装打印机驱动
+ * @param packageName 包名
+ * @return  true: 成功 false: 失败
+ */
+bool DriverManager::installPrinter(const QString &packageName)
+{
+    QProcess p;
+    p.start("sudo apt install " + packageName);
+    p.waitForFinished(-1);
+
+    return printerHasInstalled(packageName);
+}
+
+/**
+ * @brief DriverManager::unInstallPrinter 卸载打印机驱动
+ * @param packageName 包名
+ * @return  true: 成功 false: 失败
+ */
+bool DriverManager::unInstallPrinter(const QString &packageName)
+{
+    QProcess p;
+    p.start("sudo dpkg -r " + packageName);
+    p.waitForFinished(-1);
+
+    return !printerHasInstalled(packageName);
+}

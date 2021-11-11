@@ -4,6 +4,7 @@
 #include "DeviceInfo.h"
 #include "PageTableWidget.h"
 #include "PageDriverControl.h"
+#include "DevicePrint.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -244,19 +245,23 @@ void PageSingleInfo::slotActionUpdateDriver()
             qInfo() << "dde-printer startDetached error";
         return;
     }
-    PageDriverControl* installDriver = new PageDriverControl(tr("Update Drivers"), mp_Device->name(), "", true, this);
+    PageDriverControl* installDriver = new PageDriverControl(this, tr("Update Drivers"), true, mp_Device->name(), "");
     installDriver->show();
-    m_driverPagedOpened = true;
-    connect(installDriver, &PageDriverControl::finished, this, [=]{m_driverPagedOpened = false;});
     connect(installDriver, &PageDriverControl::refreshInfo, this, &PageSingleInfo::refreshInfo);
 }
 
 void PageSingleInfo::slotActionRemoveDriver()
 {
-    PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Drivers"), mp_Device->name(), mp_Device->driver(), false, this);
+    QString printerVendor;
+    QString printerModel;
+    DevicePrint *printer = qobject_cast<DevicePrint*>(mp_Device);
+    if(printer) {
+        printerVendor = printer->getVendor();
+        printerModel = printer->getModel();
+    }
+    PageDriverControl *rmDriver = new PageDriverControl(this, tr("Uninstall Drivers"), false,
+                                                        mp_Device->name(), mp_Device->driver(), printerVendor, printerModel);
     rmDriver->show();
-    m_driverPagedOpened = true;
-    connect(rmDriver, &PageDriverControl::finished, this, [=]{m_driverPagedOpened = false;});
     connect(rmDriver, &PageDriverControl::refreshInfo, this, &PageSingleInfo::refreshInfo);
 }
 

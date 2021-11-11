@@ -49,7 +49,7 @@ public slots:
     Q_SCRIPTABLE bool isDriverPackage(const QString &filepath);
     Q_SCRIPTABLE bool isBlackListed(const QString &modName);
     Q_SCRIPTABLE bool isArchMatched(const QString &filePath);
-
+    Q_SCRIPTABLE bool unInstallPrinter(const QString &vendor, const QString &model);
 
 private:
     DriverManager *mp_drivermanager;

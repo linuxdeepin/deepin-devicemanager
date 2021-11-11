@@ -16,6 +16,17 @@ void DBusDriverInterface::uninstallDriver(const QString& driver)
                      this, SLOT(slotCallFinished(QDBusPendingCallWatcher*)));
 }
 
+void DBusDriverInterface::uninstallPrinter(const QString &vendor, const QString &model)
+{
+    //Sets the timeout in milliseconds for all future DBus calls to timeout. -1 means the default DBus timeout (usually 25 seconds).
+    //超时默认是25s，打印卸载超时大概30s
+    mp_Iface->setTimeout(1000 * 1000);
+    QDBusPendingCall async = mp_Iface->asyncCall("unInstallPrinter", vendor, model);
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                     this, SLOT(slotCallFinished(QDBusPendingCallWatcher*)));
+}
+
 void DBusDriverInterface::installDriver(const QString& driver)
 {
     QDBusPendingCall async = mp_Iface->asyncCall("installDriver",driver);

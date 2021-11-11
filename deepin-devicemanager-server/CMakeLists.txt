@@ -47,13 +47,14 @@ link_libraries("udev")
 find_package(Qt5 COMPONENTS
     Core
     DBus
-    Sql REQUIRED)
+    Sql 
+    Network REQUIRED)
 
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H})
 
-target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus Qt5::Sql kmod QApt)
+target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus Qt5::Sql Qt5::Network kmod QApt)
 
 # Install files
 install(TARGETS ${APP_BIN_NAME} DESTINATION bin)

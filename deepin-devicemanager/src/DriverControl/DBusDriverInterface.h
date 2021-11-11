@@ -59,6 +59,7 @@ public:
      * @param driver 需要卸载的驱动名称
      */
     void uninstallDriver(const QString& driver);
+    void uninstallPrinter(const QString &vendor, const QString &model);
 
     /**
      * @brief installDriver 更新驱动，通过dbus调用 com.deepin.devicemanager /com/deepin/drivermanager 里面的installDriver接口

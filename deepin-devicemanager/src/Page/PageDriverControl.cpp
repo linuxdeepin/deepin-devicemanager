@@ -35,11 +35,14 @@
 #include <QDBusConnection>
 #include <QWindow>
 
-PageDriverControl::PageDriverControl(QString operation, QString deviceName, QString driverName, bool install, QWidget *parent)
+PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool install, QString deviceName, QString driverName, QString printerVendor, QString printerModel)
     : DDialog(parent)
     , mp_stackWidget(new DStackedWidget)
     , m_Install(install)
     , m_DriverName(driverName)
+    , m_deviceName(deviceName)
+    , m_printerVendor(printerVendor)
+    , m_printerModel(printerModel)
 {
     setObjectName("PageDriverControl");
     setFixedSize(480, 335);
@@ -236,5 +239,9 @@ void PageDriverControl::uninstallDriverLogical()
     // 点击卸载之后进入正在卸载界面
     removeBtn();
     mp_stackWidget->setCurrentIndex(mp_stackWidget->currentIndex() + 1);
-    DBusDriverInterface::getInstance()->uninstallDriver(m_DriverName);
+    if(m_printerVendor.count() > 0) {
+        DBusDriverInterface::getInstance()->uninstallPrinter(m_printerVendor, m_printerModel);
+    } else {
+        DBusDriverInterface::getInstance()->uninstallDriver(m_DriverName);
+    }
 }

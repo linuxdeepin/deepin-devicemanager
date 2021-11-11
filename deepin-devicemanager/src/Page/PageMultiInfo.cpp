@@ -5,6 +5,7 @@
 #include "MacroDefinition.h"
 #include "DeviceInfo.h"
 #include "PageDriverControl.h"
+#include "DevicePrint.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -139,7 +140,7 @@ void PageMultiInfo::slotActionUpdateDriver(int row)
         return;
     }
 
-    PageDriverControl* installDriver = new PageDriverControl(tr("Update Drivers"), device->name(), "", true, this);
+    PageDriverControl* installDriver = new PageDriverControl(this, tr("Update Drivers"), true, device->name(), "");
     installDriver->show();
     connect(installDriver, &PageDriverControl::refreshInfo, this, &PageMultiInfo::refreshInfo);
 }
@@ -150,14 +151,15 @@ void PageMultiInfo::slotActionRemoveDriver(int row)
     if(nullptr == device){
         return;
     }
-    //打印设备卸载驱动时，通过dde-printer来操作
-    if(device->hardwareClass() == "printer") {
-        if(!QProcess::startDetached("dde-printer"))
-            qInfo() << "dde-printer startDetached error";
-        return;
+    QString printerVendor;
+    QString printerModel;
+    DevicePrint *printer = qobject_cast<DevicePrint*>(device);
+    if(printer) {
+        printerVendor = printer->getVendor();
+        printerModel = printer->getModel();
     }
-
-    PageDriverControl* rmDriver = new PageDriverControl(tr("Uninstall Drivers"), device->name(), device->driver(), false, this);
+    PageDriverControl *rmDriver = new PageDriverControl(this, tr("Uninstall Drivers"), false,
+                                                        device->name(), device->driver(), printerVendor, printerModel);
     rmDriver->show();
     connect(rmDriver, &PageDriverControl::refreshInfo, this, &PageMultiInfo::refreshInfo);
 }

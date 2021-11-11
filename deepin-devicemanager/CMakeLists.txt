@@ -100,6 +100,7 @@ file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_D
 find_package(PkgConfig REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5 COMPONENTS DBus REQUIRED)
+find_package(Qt5Network REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
 find_package(DtkWidget REQUIRED)
@@ -122,6 +123,7 @@ target_link_libraries(${APP_BIN_NAME}
     Qt5::Widgets
     Qt5::DBus
     Qt5::Xml
+    Qt5::Network
 )
 
 set(CMAKE_INSTALL_PREFIX /usr)

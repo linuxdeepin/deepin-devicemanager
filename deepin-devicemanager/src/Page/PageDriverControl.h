@@ -43,7 +43,8 @@ public:
      * @param install 标识卸载还是更新
      * @param parent
      */
-    PageDriverControl(QString operation, QString deviceName, QString driverName, bool install = true, QWidget *parent = nullptr);
+    PageDriverControl(QWidget *parent, QString operation, bool install,
+                      QString deviceName, QString driverName, QString printerVendor = "", QString printerModel = "");
 
     /**
      * @brief hasWidgetIsVisible 有驱动界面显示
@@ -125,5 +126,8 @@ private:
     DLabel                     *mp_tipLabel;
     bool                       m_Install;
     QString                    m_DriverName;
+    QString                    m_printerVendor;
+    QString                    m_printerModel;
+    QString                    m_deviceName;
 };
 #endif // PAGEINSTALLDRIVER_H

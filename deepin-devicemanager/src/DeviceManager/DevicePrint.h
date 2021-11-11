@@ -85,6 +85,18 @@ public:
      */
     bool enable() override;
 
+
+    /**
+     * @brief getVendor 获取制造商
+     * @return
+     */
+    inline QString getVendor() { return m_Vendor; }
+
+    /**
+     * @brief getModel 获取型号
+     * @return
+     */
+    inline QString getModel() { return m_Model; }
 protected:
 
     /**

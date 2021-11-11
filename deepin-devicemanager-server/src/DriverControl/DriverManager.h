@@ -64,6 +64,32 @@ private:
     int m_installprocess = 0;
     QString errmsg;
 
+    //打印机相关===begin
+public:
+    typedef struct TPrinterInfo {
+        int intSid;         //sid
+        QString strDescribe;    //描述
+        QString strPpd;         //ppd
+        bool isExcat;       //打印机厂商和型号
+        QString strDriver;      //驱动
+    } TDriverInfo;
+public slots:
+    //卸载打印机
+    Q_SCRIPTABLE bool uninstallPrinter(const QString &vendor, const QString &model);
+
+private:
+    //解析服务器回读的数据
+    QList<TPrinterInfo> parsePrinterInfo(const QByteArray &byteArray);
+
+    //安装包已经安装
+    bool printerHasInstalled(const QString &packageName);
+
+    //安装
+    bool installPrinter(const QString &packageName);
+
+    //卸载
+    bool unInstallPrinter(const QString &packageName);
+    //打印机相关===end
 };
 
 #endif // DRIVERMANAGER_H
