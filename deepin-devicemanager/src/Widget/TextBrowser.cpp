@@ -224,16 +224,16 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
         if (!info->enable()) {
             title = "(" + tr("Disable") + ")" + title;
             h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#FF5736;");
-        } else if(!info->available()) {
+        } else if (!info->available()) {
             DApplicationHelper *dAppHelper = DApplicationHelper::instance();
             DPalette palette = dAppHelper->applicationPalette();
-            QColor color = palette.color(DPalette::Active,DPalette::PlaceholderText);
+            QColor color = palette.color(DPalette::Disabled, DPalette::PlaceholderText);
             QRgb rgb = qRgb(color.red(), color.green(), color.blue());
-            QString rgbs = QString::number(rgb,16);
+            QString rgbs = QString::number(rgb, 16);
             title = "(" + tr("Unavailable") + ")" + title;
             QString css = QString("text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#%1;").arg(rgbs);
             h3.setAttribute("style", css);
-        }else{
+        } else {
             h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;");
         }
         QDomText valueText = doc.createTextNode(title);
