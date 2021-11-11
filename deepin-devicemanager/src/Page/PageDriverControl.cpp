@@ -104,6 +104,7 @@ void PageDriverControl::initInstallWidget()
             getButton(1)->setDisabled(false);
     });
     connect(mp_NameDialog, &GetDriverNameWidget::signalDriversCount, this, [ = ] {getButton(1)->setDisabled(true);});
+    connect(mp_NameDialog, &GetDriverNameWidget::signalItemClicked, this, [ = ] {getButton(1)->setDisabled(false);});
 }
 
 void PageDriverControl::initUninstallWidget()
@@ -197,6 +198,7 @@ void PageDriverControl::installDriverLogical()
         mp_stackWidget->setCurrentIndex(1);
         this->setButtonText(1, tr("Update", "button"));
         this->setButtonText(0, tr("Previous"));
+        getButton(1)->setDisabled(true);          //默认置灰
         this->getButton(0)->disconnect();
         connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
     } else if (1 == curIndex) {
