@@ -157,7 +157,10 @@ const QString &DeviceAudio::driver() const
 {
     return m_Driver;
 }
-
+const QString& DeviceAudio::uniqueID() const
+{
+    return m_SysPath;
+}
 EnableDeviceStatus DeviceAudio::setEnable(bool e)
 {
     if(!m_SysPath.contains("usb")){

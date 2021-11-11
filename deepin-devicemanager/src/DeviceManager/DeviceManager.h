@@ -261,6 +261,13 @@ public:
     void addAudioDevice(DeviceAudio *const device);
 
     /**
+     * @brief getAudioDevice 获取音频设备
+     * @param path
+     * @return
+     */
+    DeviceBaseInfo* getAudioDevice(const QString& path);
+
+    /**
      * @brief setAudioInfoFromLshw:设置由lshw获取的声卡信息
      * @param mapInfo:由lshw获取的声卡信息map
      */

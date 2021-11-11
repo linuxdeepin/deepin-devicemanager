@@ -80,6 +80,12 @@ public:
     const QString &driver()const override;
 
     /**
+     * @brief uniqueID 获取唯一标识
+     * @return
+     */
+    const QString& uniqueID() const;
+
+    /**
      * @brief setEnable 设置设备的禁用状态
      * @param enable 是否禁用
      * @return 禁用是否成功

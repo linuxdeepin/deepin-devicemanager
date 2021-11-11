@@ -38,9 +38,7 @@ MainJob::MainJob(QObject *parent)
     , m_FirstUpdate(true)
 {
     // 守护进程启动的时候加载所有信息
-    if (!isZhaoXin()) {
-        updateAllDevice();
-    }
+    updateAllDevice();
 
     // 后台加载后先禁用设备
     const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");

@@ -591,7 +591,14 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
         if ((*it).size() < 5 && (*it).find("path")==(*it).end())
             continue;
 
-        DeviceAudio *device = new DeviceAudio();
+        QString path = pciPath(*it);
+        DeviceAudio *device = dynamic_cast<DeviceAudio*>(DeviceManager::instance()->getAudioDevice(path));
+        if(device){
+            device->setEnableValue(false);
+            continue;
+        }
+
+        device = new DeviceAudio();
         device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addAudioDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
@@ -969,7 +976,11 @@ const QString DeviceGenerator::getProductName()
 QString DeviceGenerator::pciPath(const QMap<QString,QString>& mapInfo)
 {
     if(mapInfo.find("path") != mapInfo.end()){ // SysFS Device Link
-        return "/sys" + mapInfo["path"] + "/authorized";
+        if(mapInfo["path"].contains("usb")){
+            return "/sys" + mapInfo["path"] + "/authorized";
+        }else{
+            return mapInfo["path"];
+        }
     }else if(mapInfo.find("SysFS Device Link") != mapInfo.end()){
         return "/sys" + mapInfo["SysFS Device Link"] + "/authorized";
     }else if(mapInfo.find("SysFS ID") != mapInfo.end()){
