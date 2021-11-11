@@ -3,6 +3,7 @@
 #include <DFrame>
 #include <DLabel>
 #include <DApplicationHelper>
+#include <DFontSizeManager>
 
 #include <QVBoxLayout>
 #include <QPushButton>
@@ -22,7 +23,7 @@ void GetDriverNameWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     DFrame *frame = new DFrame;
-    frame->setFixedSize(460, 145);
+    frame->setFixedSize(460, 165);
     frame->setContentsMargins(0, 0, 0, 0);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     QHBoxLayout *hLayout = new QHBoxLayout;
@@ -55,6 +56,7 @@ void GetDriverNameWidget::init()
     mp_tipLabel->setElideMode(Qt::ElideRight);
     mp_tipLabel->setMinimumHeight(20);
 
+    DFontSizeManager::instance()->bind(mp_tipLabel, DFontSizeManager::T8, QFont::Medium);
     DPalette pa = DApplicationHelper::instance()->palette(mp_tipLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
     DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
@@ -151,6 +153,11 @@ void GetDriverNameWidget::reloadDriversListPages(const QStringList &drivers)
         frame->show();
         label->setText(tr("Select a driver for update"));
     }
+
+    DPalette pa = DApplicationHelper::instance()->palette(label);
+    QColor color = DGuiApplicationHelper::adjustColor(pa.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -30);
+    pa.setColor(QPalette::WindowText, color);
+    label->setPalette(pa);
 }
 
 void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)

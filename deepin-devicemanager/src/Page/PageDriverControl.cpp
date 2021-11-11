@@ -70,9 +70,9 @@ PageDriverControl::PageDriverControl(QString operation, QString deviceName, QStr
 
 bool PageDriverControl::isRunning()
 {
-    for(auto w: qApp->allWindows()) {
-        if("PageDriverControlWindow" == w->objectName()) {
-            if(w->isVisible())
+    for (auto w : qApp->allWindows()) {
+        if ("PageDriverControlWindow" == w->objectName()) {
+            if (w->isVisible())
                 return true;
         }
     }

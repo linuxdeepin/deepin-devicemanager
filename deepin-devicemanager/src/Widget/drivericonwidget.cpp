@@ -57,9 +57,9 @@ DriverIconWidget::~DriverIconWidget()
 void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, const QString &strDesc)
 {
     QVBoxLayout *vlayout = new QVBoxLayout;
-    vlayout->setContentsMargins(0,0,0,0);
+    vlayout->setContentsMargins(0, 0, 0, 0);
 
-    QSpacerItem *verticalSpacer = new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    QSpacerItem *verticalSpacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
     vlayout->addItem(verticalSpacer);
     vlayout->addStretch();
     vlayout->addWidget(iconWidget, 0, Qt::AlignCenter);
@@ -90,14 +90,15 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
         DFontSizeManager::instance()->bind(label, DFontSizeManager::T7, QFont::Medium);
 
         //透明度50
-        palrtteTransparency(label, -50);
+        palrtteTransparency(label, -30);
         QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [label]() {
             //透明度50
-            palrtteTransparency(label, -50);
+            palrtteTransparency(label, -30);
         });
 
         vlayout->addWidget(label);
     }
+    vlayout->addSpacing(10);
     vlayout->addStretch();
 
     setLayout(vlayout);
@@ -106,7 +107,7 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
 void DriverIconWidget::updateProgress(qint32 progress, const QString &detail)
 {
     Q_UNUSED(detail)
-    if(100 == progress) {
+    if (100 == progress) {
         emit sigProgressFinished();
     }
 }

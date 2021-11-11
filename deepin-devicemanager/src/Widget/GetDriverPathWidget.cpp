@@ -55,14 +55,23 @@ void GetDriverPathWidget::init()
     mainLayout->addWidget(mp_fileChooseEdit);
     mainLayout->addWidget(mp_includeCheckBox);
     mp_includeCheckBox->setCheckState(Qt::Checked);
+    mainLayout->addSpacing(20);
     mainLayout->addStretch();
+    mainLayout->addSpacing(20);
     mainLayout->addWidget(mp_tipLabel);
+
 
     mp_tipLabel->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
     mp_tipLabel->setElideMode(Qt::ElideRight);
     mp_tipLabel->setMinimumHeight(20);
 
-    DPalette pa = DApplicationHelper::instance()->palette(mp_tipLabel);
+
+    DPalette pa = DApplicationHelper::instance()->palette(titleLable);
+    QColor color = DGuiApplicationHelper::adjustColor(pa.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -30);
+    pa.setColor(QPalette::WindowText, color);
+    titleLable->setPalette(pa);
+
+    pa = DApplicationHelper::instance()->palette(mp_tipLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
     DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
 

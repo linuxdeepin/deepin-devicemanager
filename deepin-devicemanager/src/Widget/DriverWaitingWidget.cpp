@@ -1,7 +1,9 @@
 #include "DriverWaitingWidget.h"
 
-#include <QVBoxLayout>
 #include <DFontSizeManager>
+#include <DGuiApplicationHelper>
+
+#include <QVBoxLayout>
 
 DriverWaitingWidget::DriverWaitingWidget(QString status, QWidget *parent)
     : DWidget(parent)
@@ -14,26 +16,30 @@ DriverWaitingWidget::DriverWaitingWidget(QString status, QWidget *parent)
 void DriverWaitingWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->setContentsMargins(0, 0, 0, 70);
+
+    QSpacerItem *verticalSpacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    mainLayout->addItem(verticalSpacer);
+    mainLayout->addStretch();
+    mainLayout->addWidget(mp_Progress, 0, Qt::AlignCenter);
     mainLayout->addStretch();
 
     mp_Progress->setFixedSize(80, 80);
     mp_Progress->setValue(50);
     mp_Progress->start();
-    QHBoxLayout *hLayout1 = new QHBoxLayout;
-    hLayout1->addStretch();
-    hLayout1->addWidget(mp_Progress);
-    hLayout1->addStretch();
-    mainLayout->addLayout(hLayout1);
 
     DFontSizeManager::instance()->bind(mp_Label, DFontSizeManager::T7, QFont::Medium);
-    QHBoxLayout *hLayout2 = new QHBoxLayout;
-    hLayout2->addStretch();
-    hLayout2->addWidget(mp_Label);
-    hLayout2->addStretch();
-    mainLayout->addLayout(hLayout2);
+    mainLayout->addWidget(mp_Label, 0, Qt::AlignCenter);
+    mainLayout->addSpacing(6);
 
     mainLayout->addStretch();
     setLayout(mainLayout);
+
+    // 设置文字颜色
+    QPalette palette = mp_Label->palette();
+    QColor color = DGuiApplicationHelper::adjustColor(palette.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -10);
+    palette.setColor(QPalette::WindowText, color);
+    mp_Label->setPalette(palette);
 }
 
 void DriverWaitingWidget::setValue(int value)
