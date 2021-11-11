@@ -47,7 +47,7 @@
     <message>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="228"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
 </context>
 <context>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="261"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -288,7 +288,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="139"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
 </context>
 <context>
@@ -541,7 +541,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="237"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
 </context>
 <context>
@@ -599,7 +599,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="147"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
 </context>
 <context>
@@ -637,12 +637,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="250"/>
         <source>Maximum Current</source>
-        <translation type="unfinished"/>
+        <translation>Maksimi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="265"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
     <message>
         <source>Maximum Power</source>
@@ -999,12 +999,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="174"/>
         <source>Maximum Rate</source>
-        <translation type="unfinished"/>
+        <translation>Suurin taajuus</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="175"/>
         <source>Negotiation Rate</source>
-        <translation type="unfinished"/>
+        <translation>Aloitustaajuus</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="176"/>
@@ -1069,7 +1069,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -1382,7 +1382,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
     <message>
         <source>Power Cycle Count</source>
@@ -1428,7 +1428,7 @@
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="29"/>
         <source>Select a driver for update</source>
-        <translation type="unfinished"/>
+        <translation>Valitse päivitettävä ohjain</translation>
     </message>
 </context>
 <context>
@@ -1508,7 +1508,7 @@
     <message>
         <location filename="../src/Widget/logtreeview.cpp" line="108"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
 </context>
 <context>
@@ -1521,7 +1521,7 @@
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="126"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
 </context>
 <context>
@@ -1612,7 +1612,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="68"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="178"/>
         <source>Updating</source>
-        <translation type="unfinished"/>
+        <translation>Päivittää</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="73"/>
@@ -1624,69 +1624,69 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="74"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Seuraava</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>Varoitus</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"/>
+        <translation>Laite ei ole käytettävissä ohjaimen poistamisen jälkeen</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="95"/>
         <source>Uninstall</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Poista asennus</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="99"/>
         <source>Uninstalling</source>
-        <translation type="unfinished"/>
+        <translation>Poistetaan</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
         <source>Update successful</source>
-        <translation type="unfinished"/>
+        <translation>Päivitys onnistui</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
         <source>Uninstallation successful</source>
-        <translation type="unfinished"/>
+        <translation>Asennuksen poisto onnistui</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
         <source>Update failed</source>
-        <translation type="unfinished"/>
+        <translation>Päivitys epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
         <source>Uninstallation failed</source>
-        <translation type="unfinished"/>
+        <translation>Asennuksen poistaminen epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>Valittua kansiota ei ole, valitse uudelleen</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="169"/>
         <source>The selected file does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>Valittua tiedostoa ei ole, valitse uudelleen</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="173"/>
         <source>It is not a driver</source>
-        <translation type="unfinished"/>
+        <translation>Tämä ei ole ajuri</translation>
     </message>
 </context>
 <context>
@@ -1722,17 +1722,17 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="127"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Käytöstä poisto epäonnistui: laitteen SN:n haku epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Päivitä ajurit</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="157"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Poista ajurit</translation>
     </message>
 </context>
 <context>
@@ -1784,12 +1784,12 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="31"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>Päivitä ajurit</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="32"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>Poista ajurit</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="168"/>
@@ -1804,7 +1804,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="224"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Käytöstä poisto epäonnistui: laitteen SN:n haku epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="228"/>
@@ -1814,12 +1814,12 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="243"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Päivitä ajurit</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="258"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Poista ajurit</translation>
     </message>
 </context>
 <context>
@@ -3394,12 +3394,12 @@
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="9"/>
         <source>Include subfolders</source>
-        <translation type="unfinished"/>
+        <translation>Sisällytä alikansiot</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="35"/>
         <source>Search for drivers in this path</source>
-        <translation type="unfinished"/>
+        <translation>Etsi ajurit tästä polusta</translation>
     </message>
 </context>
 <context>
@@ -3478,12 +3478,12 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="32"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>Päivitä ajurit</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="33"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>Poista ajurit</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="214"/>
@@ -3517,7 +3517,7 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="233"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ei saatavilla</translation>
     </message>
 </context>
 <context>
@@ -3525,7 +3525,7 @@
     <message>
         <location filename="../src/Widget/UrlChooserEdit.cpp" line="88"/>
         <source>Select a local folder please</source>
-        <translation type="unfinished"/>
+        <translation>Valitse paikallinen kansio</translation>
     </message>
 </context>
 <context>

@@ -913,7 +913,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="225"/>
         <source>Support Resolution</source>
-        <translation>Wsparcie rozdzielczości</translation>
+        <translation>Wspierane rozdzielczości</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="227"/>
@@ -1629,12 +1629,12 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>Ostrzeżenie</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"/>
+        <translation>Urządzenie będzie niedostępne po usunięciu sterownika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="95"/>
@@ -1722,7 +1722,7 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="127"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Nie udało się wyłączyć: nie można uzyskać numeru seryjnegoNie udało się wyłączyć: nie można uzyskać numeru seryjnego</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
@@ -1804,7 +1804,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="224"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Nie udało się wyłączyć: nie można uzyskać numeru seryjnego</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="228"/>
@@ -3264,17 +3264,17 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="98"/>
         <source>job-cancel-after</source>
-        <translation>usuń zadanie potem</translation>
+        <translation>anuluj-zadanie-po</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="99"/>
         <source>job-hold-until</source>
-        <translation>Zatrzymaj zadanie aż</translation>
+        <translation>wstrzymaj-zadanie-aż</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="100"/>
         <source>job-priority</source>
-        <translation>Priorytet zadania</translation>
+        <translation>priorytet-pracy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="101"/>
@@ -3304,27 +3304,27 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="106"/>
         <source>printer-is-shared</source>
-        <translation>drukarka udostępniona</translation>
+        <translation>drukarka-udostępniona</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="107"/>
         <source>printer-is-temporary</source>
-        <translation>drukarka jest tymczasowa</translation>
+        <translation>drukarka-jest-tymczasowa</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="108"/>
         <source>printer-make-and-model</source>
-        <translation>drukarka-zrób i wymodeluj</translation>
+        <translation>drukarka-producent-i-model</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="109"/>
         <source>printer-state-change-time</source>
-        <translation>stan drukarki-zmień czas</translation>
+        <translation>czas-zmiany-stanu-drukarki</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="110"/>
         <source>printer-state-reasons</source>
-        <translation>drukarka-stan-powody</translation>
+        <translation>drukarka-stan</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="111"/>

@@ -47,7 +47,7 @@
     <message>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="228"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
 </context>
 <context>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="261"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -288,7 +288,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="139"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
 </context>
 <context>
@@ -541,7 +541,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="237"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
 </context>
 <context>
@@ -599,7 +599,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="147"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
 </context>
 <context>
@@ -637,12 +637,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="250"/>
         <source>Maximum Current</source>
-        <translation type="unfinished"/>
+        <translation>གློག་རྒྱུན་ཆེ་ཤོས། </translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="265"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
     <message>
         <source>Maximum Power</source>
@@ -999,12 +999,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="174"/>
         <source>Maximum Rate</source>
-        <translation type="unfinished"/>
+        <translation>མྱུར་ཚད་ཆེ་ཤོས། </translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="175"/>
         <source>Negotiation Rate</source>
-        <translation type="unfinished"/>
+        <translation>གྲོས་མཐུན་མྱུར་ཚད། </translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="176"/>
@@ -1069,7 +1069,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -1382,7 +1382,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
     <message>
         <source>Power Cycle Count</source>
@@ -1428,7 +1428,7 @@
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="29"/>
         <source>Select a driver for update</source>
-        <translation type="unfinished"/>
+        <translation>གསར་སྒྱུར་བྱེད་དགོས་པའི་སྐུལ་བྱེད་བྱ་རིམ་འདེམས་དང་།</translation>
     </message>
 </context>
 <context>
@@ -1508,7 +1508,7 @@
     <message>
         <location filename="../src/Widget/logtreeview.cpp" line="108"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
 </context>
 <context>
@@ -1521,7 +1521,7 @@
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="126"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
 </context>
 <context>
@@ -1612,7 +1612,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="68"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="178"/>
         <source>Updating</source>
-        <translation type="unfinished"/>
+        <translation>གསར་སྒྱུར་བྱེད་བཞིན་པ། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="73"/>
@@ -1624,69 +1624,69 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="74"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>རྗེས་མ། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>དོ་སྣང་།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"/>
+        <translation>མ་ལག་ཁྲོད་ནས་སྐུལ་བྱེད་བྱ་རིམ་འདི་བཤིག་རྒྱུ། བཤིག་རྗེས་སྒྲིག་ཆས་འདི་སྤྱོད་མི་རུང་།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="95"/>
         <source>Uninstall</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>བཤིག་པ། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="99"/>
         <source>Uninstalling</source>
-        <translation type="unfinished"/>
+        <translation>བཤིག་བཞིན་པ། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
         <source>Update successful</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་གསར་སྒྱུར་ཐུབ་སོང་།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
         <source>Uninstallation successful</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་བཤིག་ཐུབ་སོང་།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
         <source>Update failed</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་གསར་སྒྱུར་ཐུབ་མ་སོང་།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
         <source>Uninstallation failed</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་བཤིག་ཐུབ་སོང་།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>གཏན་ཁེལ། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>བདམས་པའི་ཡིག་ཁུག་མི་འདུག་པས། ཡང་བསྐྱར་འདེམས་རོགས། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="169"/>
         <source>The selected file does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>བདམས་པའི་ཡིག་ཆ་མི་འདུག་པས། ཡང་བསྐྱར་འདེམས་རོགས།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="173"/>
         <source>It is not a driver</source>
-        <translation type="unfinished"/>
+        <translation>ཡིག་ཆ་འདི་ནི་སྐུལ་བྱེད་ཡིག་ཆ་མ་རེད། </translation>
     </message>
 </context>
 <context>
@@ -1722,17 +1722,17 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="127"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>སྒྲིག་ཆས་ཀྱི་རིམ་ཨང་ཐོབ་ཐབས་མི་འདུག་པས་སྤྱོད་མི་རུང་བ་ཐུབ་མ་སོང་།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་གསར་སྒྱུར། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="157"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་བཤིག་པ། </translation>
     </message>
 </context>
 <context>
@@ -1784,12 +1784,12 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="31"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་གསར་སྒྱུར། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="32"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་བཤིག་པ། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="168"/>
@@ -1804,7 +1804,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="224"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>སྒྲིག་ཆས་ཀྱི་རིམ་ཨང་ཐོབ་ཐབས་མི་འདུག་པས་སྤྱོད་མི་རུང་བ་ཐུབ་མ་སོང་།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="228"/>
@@ -1814,12 +1814,12 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="243"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་གསར་སྒྱུར། </translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="258"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་བཤིག་པ། </translation>
     </message>
 </context>
 <context>
@@ -3394,12 +3394,12 @@
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="9"/>
         <source>Include subfolders</source>
-        <translation type="unfinished"/>
+        <translation>ཡིག་ཁུག་བུ་ཚུད་པ། </translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="35"/>
         <source>Search for drivers in this path</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་གནས་ཡུལ་འདེམས་པ། </translation>
     </message>
 </context>
 <context>
@@ -3478,12 +3478,12 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="32"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་གསར་སྒྱུར། </translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="33"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>སྐུལ་བྱེད་བཤིག་པ། </translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="214"/>
@@ -3517,7 +3517,7 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="233"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
 </context>
 <context>
@@ -3525,7 +3525,7 @@
     <message>
         <location filename="../src/Widget/UrlChooserEdit.cpp" line="88"/>
         <source>Select a local folder please</source>
-        <translation type="unfinished"/>
+        <translation>གནས་དེ་གའི་ཡིག་ཁུག་འདེམས་རོགས། </translation>
     </message>
 </context>
 <context>

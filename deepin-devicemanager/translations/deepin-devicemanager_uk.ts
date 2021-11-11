@@ -1629,12 +1629,12 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>Попередження</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"/>
+        <translation>Після вилучення драйвер неможливо буде отримати доступ до пристрою</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="95"/>
@@ -1722,7 +1722,7 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="127"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Не вдалося вимкнути його: не можемо отримати серійний номер пристрою</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
@@ -1804,7 +1804,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="224"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Не вдалося вимкнути його: не можемо отримати серійний номер пристрою</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="228"/>
