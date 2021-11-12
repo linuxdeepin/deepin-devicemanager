@@ -139,6 +139,7 @@ void PageDriverControl::slotBtnNext()
     } else {
         uninstallDriverLogical();
     }
+    setProperty("isDoing" , true);//卸载或者加载程序在运行中
 }
 
 void PageDriverControl::slotProcessChange(qint32 value, QString detail)
@@ -162,6 +163,10 @@ void PageDriverControl::slotProcessEnd(bool sucess)
     mp_stackWidget->setCurrentIndex(mp_stackWidget->currentIndex() + 1);
     if (sucess)
         DBusInterface::getInstance()->refreshInfo();
+    disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processChange, this, &PageDriverControl::slotProcessChange);
+    disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processEnd, this, &PageDriverControl::slotProcessEnd);
+    setProperty("isDoing" , false);//卸载或者加载程序在运行中
+    setProperty("isDone" , true);//卸载或者加载程序在运行中
 }
 
 void PageDriverControl::slotClose()
@@ -243,5 +248,42 @@ void PageDriverControl::uninstallDriverLogical()
         DBusDriverInterface::getInstance()->uninstallPrinter(m_printerVendor, m_printerModel);
     } else {
         DBusDriverInterface::getInstance()->uninstallDriver(m_DriverName);
+    }
+}
+
+void PageDriverControl::keyPressEvent(QKeyEvent *event)
+{
+    // Esc、Alt+F4：如果后台更新时，直接返回。如果后台更新结束，触发close事件。如果是开始状态，则不处理
+    bool blIsClose = false;
+    if (event->key() == Qt::Key_F4) {
+        Qt::KeyboardModifiers modifiers = event->modifiers();
+        if (modifiers != Qt::NoModifier) {
+            if (modifiers.testFlag(Qt::AltModifier)) {
+                blIsClose = true;
+            }
+        }
+    }
+    if (Qt::Key_Escape == event->key()) {
+        blIsClose = true;
+    }
+    if(!blIsClose)
+    {
+        return;
+    }
+    if(property("isDoing").toBool()){
+        return;
+    }
+    else if(property("isDone").toBool()){
+        slotClose();//卸载或者更新后，关闭时刷新
+    }
+}
+void PageDriverControl::closeEvent(QCloseEvent *event)
+{
+    // 如果后台更新时，直接返回，否则不处理
+    if(property("isDoing").toBool()){
+        event->ignore();
+        return;
+    }else if(property("isDone").toBool()){
+        slotClose();//卸载或者更新后，关闭时刷新
     }
 }

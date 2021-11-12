@@ -118,6 +118,15 @@ private:
      */
     void uninstallDriverLogical();
 
+    /**
+     * @brief keyPressEvent 重写按钮事件
+     */
+    void keyPressEvent(QKeyEvent *event) override;
+
+    /**
+     * @brief closeEvent 重写关闭事件
+     */
+    void closeEvent(QCloseEvent *event) override;
 private:
     DStackedWidget             *mp_stackWidget;
     GetDriverPathWidget        *mp_PathDialog;
