@@ -111,6 +111,11 @@ private slots:
      */
     void slotActionRemoveDriver(int row);
 
+    /**
+     * @brief slotCheckPrinterStatus 判断dde-printer是否被安装
+     */
+    void slotCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled);
+
 private:
     /**
      * @brief initWidgets : 初始化控件布局

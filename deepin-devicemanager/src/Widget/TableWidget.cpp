@@ -211,6 +211,17 @@ void TableWidget::slotShowMenu(const QPoint &)
         mp_Enable->setEnabled(false);
     }
 
+
+    int row = mp_Table->currentRow();
+    bool isInstalled = false;
+    bool isPrinter = false;
+    //主线程时使用时会阻塞执行
+    emit signalCheckPrinterStatus(row, isPrinter, isInstalled);
+    //dde-printer未安装
+    if(isPrinter && !isInstalled) {
+        mp_updateDriver->setEnabled(false);
+    }
+
     // 添加按钮到菜单
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);

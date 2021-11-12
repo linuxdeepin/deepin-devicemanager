@@ -40,6 +40,7 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     connect(mp_Table, &PageTableHeader::enableDevice, this, &PageMultiInfo::slotEnableDevice);
     connect(mp_Table, &PageTableHeader::installDriver, this, &PageMultiInfo::slotActionUpdateDriver);
     connect(mp_Table, &PageTableHeader::uninstallDriver, this, &PageMultiInfo::slotActionRemoveDriver);
+    connect(mp_Table, &PageTableHeader::signalCheckPrinterStatus, this, &PageMultiInfo::slotCheckPrinterStatus);
     emit refreshInfo();
 }
 
@@ -162,6 +163,18 @@ void PageMultiInfo::slotActionRemoveDriver(int row)
                                                         device->name(), device->driver(), printerVendor, printerModel);
     rmDriver->show();
     connect(rmDriver, &PageDriverControl::refreshInfo, this, &PageMultiInfo::refreshInfo);
+}
+
+void PageMultiInfo::slotCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled)
+{
+    DeviceBaseInfo* device = m_lstDevice.value(row, nullptr);
+    if(!device)
+        return;
+    DevicePrint *printer = qobject_cast<DevicePrint*>(device);
+    if(printer){
+        isPrinter = true;
+        isInstalled = PageInfo::packageHasInstalled("dde-printer");
+    }
 }
 
 void PageMultiInfo::initWidgets()

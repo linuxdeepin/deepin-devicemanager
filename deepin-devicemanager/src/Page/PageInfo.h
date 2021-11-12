@@ -100,7 +100,12 @@ public:
      */
     virtual int getDeviceInfoNum();
 
-    bool m_driverPagedOpened = false;
+    /**
+     * @brief packageHasInstalled 是否被安装
+     * @param packageName 包名
+     * @return
+     */
+    static bool packageHasInstalled(const QString &packageName);
 protected:
     void paintEvent(QPaintEvent *e) override;
 

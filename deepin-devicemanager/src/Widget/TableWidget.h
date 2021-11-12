@@ -96,6 +96,7 @@ signals:
     void enableDevice(int row, bool enable);
     void uninstallDriver(int row);
     void installDriver(int row);
+    void signalCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled);
 protected:
     void paintEvent(QPaintEvent *e) override;
 

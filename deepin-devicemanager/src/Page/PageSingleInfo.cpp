@@ -175,6 +175,12 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
         mp_Enable->setEnabled(false);
     }
 
+    //dde-printer未安装，updateDriver不可选
+    DevicePrint *printer = qobject_cast<DevicePrint*>(mp_Device);
+    if(printer && !PageInfo::packageHasInstalled("dde-printer")) {
+        mp_updateDriver->setEnabled(false);
+    }
+
     // 添加按钮到菜单
     mp_Menu->addAction(mp_Copy);
     mp_Menu->addAction(mp_Refresh);

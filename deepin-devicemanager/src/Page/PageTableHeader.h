@@ -84,6 +84,11 @@ signals:
     void uninstallDriver(int row);
     void installDriver(int row);
 
+    /**
+     * @brief signalCheckPrinterStatus 判断dde-printer是否被安装
+     */
+    void signalCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled);
+
 protected:
     void paintEvent(QPaintEvent *e) override;
 
