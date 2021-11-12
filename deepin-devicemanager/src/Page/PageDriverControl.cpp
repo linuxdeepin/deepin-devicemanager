@@ -139,7 +139,6 @@ void PageDriverControl::slotBtnNext()
     } else {
         uninstallDriverLogical();
     }
-    setProperty("isDoing" , true);//卸载或者加载程序在运行中
 }
 
 void PageDriverControl::slotProcessChange(qint32 value, QString detail)
@@ -165,8 +164,7 @@ void PageDriverControl::slotProcessEnd(bool sucess)
         DBusInterface::getInstance()->refreshInfo();
     disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processChange, this, &PageDriverControl::slotProcessChange);
     disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processEnd, this, &PageDriverControl::slotProcessEnd);
-    setProperty("isDoing" , false);//卸载或者加载程序在运行中
-    setProperty("isDone" , true);//卸载或者加载程序在运行中
+    setProperty("DriverProcessStatus" , "Done");//卸载或者加载程序已完成
 }
 
 void PageDriverControl::slotClose()
@@ -236,6 +234,7 @@ void PageDriverControl::installDriverLogical()
         mp_WaitDialog->setText(tr("Updating"));
         mp_stackWidget->setCurrentIndex(2);
         DBusDriverInterface::getInstance()->installDriver(driveName);
+        setProperty("DriverProcessStatus", "Doing");//卸载或者加载程序进行中
     }
 }
 
@@ -249,6 +248,7 @@ void PageDriverControl::uninstallDriverLogical()
     } else {
         DBusDriverInterface::getInstance()->uninstallDriver(m_DriverName);
     }
+    setProperty("DriverProcessStatus", "Doing");//卸载或者加载程序进行中
 }
 
 void PageDriverControl::keyPressEvent(QKeyEvent *event)
@@ -270,20 +270,20 @@ void PageDriverControl::keyPressEvent(QKeyEvent *event)
     {
         return;
     }
-    if(property("isDoing").toBool()){
+    if("Doing" == property("DriverProcessStatus").toString()){
         return;
     }
-    else if(property("isDone").toBool()){
+    else if("Done" == property("DriverProcessStatus").toString()){
         slotClose();//卸载或者更新后，关闭时刷新
     }
 }
 void PageDriverControl::closeEvent(QCloseEvent *event)
 {
     // 如果后台更新时，直接返回，否则不处理
-    if(property("isDoing").toBool()){
+    if("Doing" == property("DriverProcessStatus").toString()){
         event->ignore();
         return;
-    }else if(property("isDone").toBool()){
+    }else if("Done" == property("DriverProcessStatus").toString()){
         slotClose();//卸载或者更新后，关闭时刷新
     }
 }
