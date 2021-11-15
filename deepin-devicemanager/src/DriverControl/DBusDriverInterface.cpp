@@ -37,6 +37,7 @@ void DBusDriverInterface::installDriver(const QString& driver)
 
 bool DBusDriverInterface::isDriverPackage(const QString &path)
 {
+    mp_Iface->setTimeout(1000 * 1000);
     QDBusReply<bool> reply = mp_Iface->call("isDriverPackage", path);
     if (reply.isValid())
         return reply.value();

@@ -269,7 +269,11 @@ bool DriverManager::isArchMatched(const QString &path)
 
 bool DriverManager::isDebValid(const QString &filePath)
 {
-    return  mp_debinstaller->isDebValid(filePath);
+    QMimeDatabase typedb;
+    QMimeType filetype = typedb.mimeTypeForFile(filePath);
+    if (filetype.filterString().contains("deb"))
+        return  mp_debinstaller->isDebValid(filePath);
+    return true;
 }
 
 /**
