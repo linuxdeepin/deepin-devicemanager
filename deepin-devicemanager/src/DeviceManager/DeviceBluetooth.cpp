@@ -1,5 +1,6 @@
 // 项目自身文件
 #include "DeviceBluetooth.h"
+#include "DBusEnableInterface.h"
 
 // Qt库文件
 #include <QDebug>
@@ -38,12 +39,19 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
 
 bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    if(mapInfo.find("Enable") != mapInfo.end()){
+        m_Enable = false;
+    }
+    // 设置设备基本属性
+    setAttribute(mapInfo, "Serial ID", m_SerialID);
     // 获取设备基本信息
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
+    setAttribute(mapInfo, "Serial ID", m_UniqueID);
 
     // 设置关联到lshw信息的key值,设备的唯一标志
     parseKeyToLshw(mapInfo["SysFS BusID"]);
@@ -95,9 +103,19 @@ const QString DeviceBluetooth::getOverviewInfo()
 
 EnableDeviceStatus DeviceBluetooth::setEnable(bool e)
 {
-    Q_UNUSED(e)
+    if(m_SerialID.isEmpty()){
+        return EDS_NoSerial;
+    }
+
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
+    if(res){
+        m_Enable = e;
+    }
     // 设置设备状态
-    return EDS_Faild;
+    return res ? EDS_Success : EDS_Faild;
 }
 
 bool DeviceBluetooth::enable()
@@ -184,13 +202,17 @@ void DeviceBluetooth::loadOtherDeviceInfo()
 void DeviceBluetooth::loadTableData()
 {
     // 加载表格数据
-    QString name;
-    if (!enable())
-        name = "(" + tr("Disable") + ") " + m_Name;
-    else
-        name = m_Name;
+    QString tName = m_Name;
 
-    m_TableData.append(name);
+    if (!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }
+
+    if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
+    }
+
+    m_TableData.append(tName);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }

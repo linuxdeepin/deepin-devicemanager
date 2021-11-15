@@ -55,7 +55,6 @@ public slots:
 private:
     DriverManager *mp_drivermanager;
     ModCore *pcore = nullptr; //临时测试使用
-
 };
 
 #endif // DRIVERDBUSINTERFACE_H

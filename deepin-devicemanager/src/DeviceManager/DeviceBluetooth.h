@@ -135,6 +135,7 @@ private:
     QString         m_DriverVersion;          //<! 【驱动版本】
     QString         m_MaximumPower;           //<! 【最大功耗】
     QString         m_Speed;                  //<! 【速度】
+    QString         m_SerialID;               //<! 【设备序列号】
 
     QString         m_UniqueKey;              //<!  鼠标设备的唯一标识
 };

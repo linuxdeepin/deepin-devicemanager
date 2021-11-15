@@ -49,6 +49,7 @@ PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool in
     setOnButtonClickedClose(false);
     setWindowTitle(QString("%1-%2").arg(operation).arg(deviceName));
     setWindowFlag(Qt::WindowMinimizeButtonHint, true);
+    setAttribute(Qt::WA_DeleteOnClose, true);
     setIcon(QIcon::fromTheme("deepin-devicemanager"));
 
     DBlurEffectWidget *widget = findChild<DBlurEffectWidget *>();

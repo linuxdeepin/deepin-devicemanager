@@ -108,5 +108,4 @@ void DBusDriverInterface::init()
         connect(mp_Iface, SIGNAL(sigProgressDetail(qint32, QString)), this, SLOT(slotProcessChange(qint32, QString)));
         connect(mp_Iface, SIGNAL(sigFinished(bool)), this, SLOT(slotProcessEnd(bool)));
     }
-
 }

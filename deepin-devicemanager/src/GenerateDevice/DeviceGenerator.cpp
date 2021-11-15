@@ -744,7 +744,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
 
         // 先判断是否存在
         QString path = pciPath(*it);
-        if(!QFile::exists(path)){
+        if(!path.contains("platform") && !QFile::exists(path)){
             continue;
         }
 
@@ -986,6 +986,9 @@ QString DeviceGenerator::pciPath(const QMap<QString,QString>& mapInfo)
     }else if(mapInfo.find("SysFS ID") != mapInfo.end()){
         return "/sys" + mapInfo["SysFS ID"] + "/authorized";
     }else{
+        if(mapInfo["Device Files"].contains("platform")){
+            return "platform";
+        }
         return "";
     }
 }
