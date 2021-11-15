@@ -213,6 +213,7 @@ bool DriverManager::installDriver(const QString &filepath)
             }
         }
     }
+    sigFinished(true);
     return  true;
 }
 

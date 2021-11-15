@@ -30,6 +30,8 @@
 #include <DWidget>
 #include <DApplicationHelper>
 #include <DPalette>
+#include <DTitlebar>
+#include <DIconButton>
 
 #include <QVBoxLayout>
 #include <QDBusConnection>
@@ -166,6 +168,7 @@ void PageDriverControl::slotProcessEnd(bool sucess)
     disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processChange, this, &PageDriverControl::slotProcessChange);
     disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processEnd, this, &PageDriverControl::slotProcessEnd);
     setProperty("DriverProcessStatus" , "Done");//卸载或者加载程序已完成
+    enableCloseBtn(true);
 }
 
 void PageDriverControl::slotClose()
@@ -221,6 +224,7 @@ void PageDriverControl::installDriverLogical()
         mp_stackWidget->setCurrentIndex(2);
         DBusDriverInterface::getInstance()->installDriver(driveName);
         setProperty("DriverProcessStatus", "Doing");//卸载或者加载程序进行中
+        enableCloseBtn(false);
     }
 }
 
@@ -262,6 +266,7 @@ void PageDriverControl::uninstallDriverLogical()
         DBusDriverInterface::getInstance()->uninstallDriver(m_DriverName);
     }
     setProperty("DriverProcessStatus", "Doing");//卸载或者加载程序进行中
+    enableCloseBtn(false);
 }
 
 void PageDriverControl::keyPressEvent(QKeyEvent *event)
@@ -299,4 +304,22 @@ void PageDriverControl::closeEvent(QCloseEvent *event)
     }else if("Done" == property("DriverProcessStatus").toString()){
         slotClose();//卸载或者更新后，关闭时刷新
     }
+}
+
+void PageDriverControl::enableCloseBtn(bool enable)
+{
+    // 获取titlebar
+    DTitlebar *titlebar = findChild<DTitlebar *>();
+    if(!titlebar){
+        return;
+    }
+
+    // 获取安装按钮
+    DIconButton *closeBtn = titlebar->findChild<DIconButton *>("DTitlebarDWindowCloseButton");
+    if(!closeBtn){
+        return;
+    }
+
+    // 禁用按钮
+    closeBtn->setAttribute(Qt::WA_TransparentForMouseEvents,!enable);
 }

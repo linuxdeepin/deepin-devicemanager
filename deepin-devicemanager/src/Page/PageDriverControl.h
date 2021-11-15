@@ -132,6 +132,12 @@ private:
      * @brief closeEvent 重写关闭事件
      */
     void closeEvent(QCloseEvent *event) override;
+
+    /**
+     * @brief enableCloseBtn disable禁用按钮
+     * @param enable
+     */
+    void enableCloseBtn(bool enable);
 private:
     DStackedWidget             *mp_stackWidget;
     GetDriverPathWidget        *mp_PathDialog;
