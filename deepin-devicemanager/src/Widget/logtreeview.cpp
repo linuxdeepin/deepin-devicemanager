@@ -323,3 +323,9 @@ void LogTreeView::keyPressEvent(QKeyEvent *event)
         emit clicked(this->currentIndex());
     }
 }
+
+void LogTreeView::resizeEvent(QResizeEvent *event)
+{
+    DTreeView::resizeEvent(event);
+    setColumnAverage();
+}

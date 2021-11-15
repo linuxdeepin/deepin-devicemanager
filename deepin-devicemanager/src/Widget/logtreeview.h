@@ -104,6 +104,7 @@ protected:
     void showEvent(QShowEvent *event) override;
     void drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const override;
     void keyPressEvent(QKeyEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     int           m_RowCount;          // 表格行数
@@ -111,6 +112,7 @@ private:
     QStandardItemModel         *mp_Model;
     LogViewItemDelegate        *mp_ItemDelegate;
     LogViewHeaderView          *mp_HeaderView;
+
 };
 
 #endif  // LOGTREEVIEW_H
