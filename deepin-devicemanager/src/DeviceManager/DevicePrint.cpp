@@ -21,7 +21,7 @@ DevicePrint::DevicePrint()
 
     // 设备可禁用
     m_CanEnable = true;
-    m_CanUninstall = true;
+    m_CanUninstall = false;
 }
 
 void DevicePrint::setInfo(const QMap<QString, QString> &info)
