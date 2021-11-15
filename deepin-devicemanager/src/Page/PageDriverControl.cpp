@@ -212,7 +212,8 @@ void PageDriverControl::installDriverLogical()
         //先判断是否是驱动文件，如果不是，再判断是否存在。
         //因为后台isDriverPackage返回false的情况有2种：1.文件不存在 2.不是驱动文件
         mp_NameDialog->updateTipLabelText("");
-        installErrorTips(driveName);
+        if (!installErrorTips(driveName))
+            return;
         removeBtn();
         mp_WaitDialog->setValue(0);
         mp_WaitDialog->setText(tr("Updating"));
@@ -222,29 +223,31 @@ void PageDriverControl::installDriverLogical()
     }
 }
 
-void PageDriverControl::installErrorTips(const QString &driveName)
+bool PageDriverControl::installErrorTips(const QString &driveName)
 {
     QFile file(driveName);
-    if(!DBusDriverInterface::getInstance()->isArchMatched(driveName)) {
+    if(!DBusDriverInterface::getInstance()->isDebValid(driveName)) {
         mp_NameDialog->updateTipLabelText(tr("Broken package"));
-        return;
+        return false;
     }
     if (!DBusDriverInterface::getInstance()->isArchMatched(driveName)) {
         mp_NameDialog->updateTipLabelText(tr("Unmatched package architecture"));
-        return;
+        return false;
     }
+
     if (!DBusDriverInterface::getInstance()->isDriverPackage(driveName)) {
         if (driveName.isEmpty() || !file.exists()) {
             mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
-            return;
+            return false;
         }
         mp_NameDialog->updateTipLabelText(tr("It is not a driver"));
-        return;
+        return false;
     }
     if (driveName.isEmpty() || !file.exists()) {
         mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
-        return;
+        return false;
     }
+    return true;
 }
 
 void PageDriverControl::uninstallDriverLogical()
