@@ -253,7 +253,10 @@ void PageSingleInfo::slotActionUpdateDriver()
     }
     PageDriverControl* installDriver = new PageDriverControl(this, tr("Update Drivers"), true, mp_Device->name(), "");
     installDriver->show();
-    connect(installDriver, &PageDriverControl::refreshInfo, this, &PageSingleInfo::refreshInfo);
+    connect(installDriver, &PageDriverControl::refreshInfo, this, [=]{
+        emit refreshInfo();
+        installDriver->disconnect();
+    });
 }
 
 void PageSingleInfo::slotActionRemoveDriver()
@@ -268,7 +271,11 @@ void PageSingleInfo::slotActionRemoveDriver()
     PageDriverControl *rmDriver = new PageDriverControl(this, tr("Uninstall Drivers"), false,
                                                         mp_Device->name(), mp_Device->driver(), printerVendor, printerModel);
     rmDriver->show();
-    connect(rmDriver, &PageDriverControl::refreshInfo, this, &PageSingleInfo::refreshInfo);
+    connect(rmDriver, &PageDriverControl::refreshInfo, this, [=]{
+        emit refreshInfo();
+        rmDriver->disconnect();
+    });
+
 }
 
 void PageSingleInfo::initWidgets()

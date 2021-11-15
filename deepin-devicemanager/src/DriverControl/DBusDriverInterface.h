@@ -104,6 +104,12 @@ private slots:
     void slotProcessChange(qint32 value,QString detail);
 
     /**
+     * @brief slotProcessEnd 接收后台结束信号
+     * @param success
+     */
+    void slotProcessEnd(bool success);
+
+    /**
      * @brief slotCallFinished 更新结束结束的回调
      */
     void slotCallFinished(QDBusPendingCallWatcher* watcher);

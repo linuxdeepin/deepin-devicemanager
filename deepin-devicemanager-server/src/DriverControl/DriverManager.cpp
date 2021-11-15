@@ -94,6 +94,7 @@ void DriverManager::initConnections()
     });
     connect(mp_debinstaller, &DebInstaller::errorOccurred, [&](QString errmsg) {
         qInfo() << "signal_installFailedReason:" << errmsg;
+        sigFinished(false);
         this->errmsg = errmsg;
     });
     connect(this, &DriverManager::sigDebInstall, mp_debinstaller, &DebInstaller::installPackage);
@@ -145,6 +146,7 @@ bool DriverManager::installDriver(const QString &filepath)
     sigProgressDetail(1, "start");
     if (!QFile::exists(filepath)) {
         sigProgressDetail(5, "file not exist");
+        sigFinished(false);
         return  false;
     }
     //模块已被加载

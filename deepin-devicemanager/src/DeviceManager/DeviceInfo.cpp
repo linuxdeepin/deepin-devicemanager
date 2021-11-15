@@ -6,6 +6,7 @@
 #include <DApplication>
 
 #include <QDebug>
+#include <QProcess>
 
 DWIDGET_USE_NAMESPACE
 
@@ -415,6 +416,19 @@ bool DeviceBaseInfo::available()
         m_Available = false;
     }
     return m_Available;
+}
+
+bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
+{
+    QString cmd = QString("dpkg -S %1").arg(driver);
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(-1);
+    QString info = process.readAllStandardOutput();
+    if(info.startsWith("dpkg-query")){
+        return true;
+    }
+    return false;
 }
 
 void DeviceBaseInfo::setCanEnale(bool can)

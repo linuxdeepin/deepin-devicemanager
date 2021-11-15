@@ -299,8 +299,6 @@ DeviceBaseInfo* DeviceManager::getMouseDevice(const QString& unique_id)
 {
     for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceMouse.begin(); it != m_ListDeviceMouse.end(); ++it) {
         DeviceInput *mouse = dynamic_cast<DeviceInput*>(*it);
-        qInfo() << mouse->uniqueID();
-        qInfo() << unique_id;
         if(mouse && mouse->uniqueID() == unique_id){
             return *it;
         }

@@ -45,7 +45,6 @@ bool DebInstaller::isArchMatched(const QString &path)
 {
     QApt::DebFile deb(path);
     if (!deb.isValid()) {
-        emit this->errorOccurred("Deb is invalid");
         return false;
     }
     const QString arch = deb.architecture();

@@ -40,9 +40,9 @@ PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool in
     , mp_stackWidget(new DStackedWidget)
     , m_Install(install)
     , m_DriverName(driverName)
-    , m_deviceName(deviceName)
     , m_printerVendor(printerVendor)
     , m_printerModel(printerModel)
+    , m_deviceName(deviceName)
 {
     setObjectName("PageDriverControl");
     setFixedSize(480, 335);

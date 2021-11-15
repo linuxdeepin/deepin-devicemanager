@@ -127,6 +127,13 @@ public:
     virtual bool available();
 
     /**
+     * @brief driverIsKernelIn 判断驱动是否属于内置驱动
+     * @param driver 驱动名称
+     * @return
+     */
+    virtual bool driverIsKernelIn(const QString& driver);
+
+    /**
      * @brief setCanEnale : set can enable or not
      * @param can
      */

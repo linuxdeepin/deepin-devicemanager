@@ -93,15 +93,6 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
 
 bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("path") != mapInfo.end()){
-        setAttribute(mapInfo, "name", m_Name);
-        m_SysPath = "/sys" + mapInfo["path"];
-        m_UniqueID = m_Name;
-        m_HardwareClass = mapInfo["Hardware Class"];
-        m_Enable = false;
-        return true;
-    }
-
     // 设置属性
     setAttribute(mapInfo, "Vendor", m_Vendor, false);
     setAttribute(mapInfo, "Device", m_Name, true);
@@ -111,6 +102,10 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "IRQ", m_IRQ, false);
     setAttribute(mapInfo, "Driver", m_Driver, false);
     setAttribute(mapInfo, "Width", m_Width);
+
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
     m_SysPath = "/sys" + mapInfo["SysFS ID"];
     QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+-]{4}\\.(.*)");
