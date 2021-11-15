@@ -149,33 +149,12 @@ void TextBrowser::focusInEvent(QFocusEvent *e)
 }
 void TextBrowser::focusOutEvent(QFocusEvent *e)
 {
-    if (!this->geometry().contains(this->mapFromGlobal(QCursor::pos()))) {
-        // 先清空内容 *************************************************
-        clear();
-        if (!mp_Info) {
-            return;
-        }
-        // 显示设备的信息 *************************************************
-        QDomDocument doc;
-
-        // 添加子标题
-        domTitleInfo(doc, mp_Info);
-
-        // 添加一个表格
-        if (mp_Info->enable() && mp_Info->available()) {
-            const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
-            domTableInfo(doc, baseInfo);
-            if (m_ShowOtherInfo) {
-                const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
-                domTableInfo(doc, otherInfo);
-            }
-        }
-
-        // 将设备信息显示到TextBrowser
-        setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
-    }
-    QTextBrowser::focusOutEvent(e);
+    Q_UNUSED(e)
+    // 模拟单机效果，当焦点失去的时候刷新界面选中效果
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, this->mapFromGlobal(QCursor::pos()), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QTextBrowser::mousePressEvent(&pressEvent);
 }
+
 
 void TextBrowser::slotShowMenu(const QPoint &)
 {
