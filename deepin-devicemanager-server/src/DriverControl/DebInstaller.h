@@ -41,7 +41,14 @@ public:
      * @param path
      * @return
      */
-    bool isArchMatched(QString path);
+    bool isArchMatched(const QString &path);
+
+    /**
+     * @brief isDebValid 判断包是否有效
+     * @param path
+     * @return
+     */
+    bool isDebValid(const QString &path);
 
 private:
     void initBackend();

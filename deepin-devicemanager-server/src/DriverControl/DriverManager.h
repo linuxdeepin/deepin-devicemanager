@@ -44,6 +44,8 @@ public:
     bool isDriverPackage(const QString &filepath);
     //判断架构是否匹配
     bool isArchMatched(const QString &path);
+    //判断包是否有效
+    bool isDebValid(const QString &filePath);
 
 private:
     void initConnections();

@@ -80,6 +80,13 @@ public:
      */
     bool isArchMatched(const QString &path);
 
+    /**
+     * @brief isDebValid
+     * @param path
+     * @return
+     */
+    bool isDebValid(const QString &path);
+
 signals:
     void processChange(qint32 value, QString details);
     void processEnd(bool sucess);

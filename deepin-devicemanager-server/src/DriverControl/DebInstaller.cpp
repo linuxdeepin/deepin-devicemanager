@@ -41,7 +41,7 @@ bool DebInstaller::isValid()
     return  m_bValid;
 }
 
-bool DebInstaller::isArchMatched(QString path)
+bool DebInstaller::isArchMatched(const QString &path)
 {
     QApt::DebFile deb(path);
     if (!deb.isValid()) {
@@ -58,6 +58,12 @@ bool DebInstaller::isArchMatched(QString path)
     if(!architectures)
         return false;
     return true;
+}
+
+bool DebInstaller::isDebValid(const QString &path)
+{
+    QApt::DebFile deb(path);
+    return deb.isValid();
 }
 
 void DebInstaller::initBackend()

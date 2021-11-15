@@ -265,6 +265,11 @@ bool DriverManager::isArchMatched(const QString &path)
     return true;
 }
 
+bool DriverManager::isDebValid(const QString &filePath)
+{
+    return  mp_debinstaller->isDebValid(filePath);
+}
+
 /**
  * @brief DriverManager::unInstallModule 驱动卸载
  * @param moduleName 模块名称 like hid or hid.ko

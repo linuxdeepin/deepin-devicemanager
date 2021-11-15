@@ -50,6 +50,11 @@ bool DriverDBusInterface::isArchMatched(const QString &filePath)
     return mp_drivermanager->isArchMatched(filePath);
 }
 
+bool DriverDBusInterface::isDebValid(const QString &filePath)
+{
+    return mp_drivermanager->isDebValid(filePath);
+}
+
 bool DriverDBusInterface::unInstallPrinter(const QString &vendor, const QString &model)
 {
     return mp_drivermanager->uninstallPrinter(vendor, model);

@@ -209,32 +209,41 @@ void PageDriverControl::installDriverLogical()
         connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
     } else if (1 == curIndex) {
         QString driveName = mp_NameDialog->selectName();
-        QFile file(driveName);
         //先判断是否是驱动文件，如果不是，再判断是否存在。
         //因为后台isDriverPackage返回false的情况有2种：1.文件不存在 2.不是驱动文件
         mp_NameDialog->updateTipLabelText("");
-        if (!DBusDriverInterface::getInstance()->isArchMatched(driveName)) {
-            mp_NameDialog->updateTipLabelText(tr("Unmatched package architecture"));
-            return;
-        }
-        if (!DBusDriverInterface::getInstance()->isDriverPackage(driveName)) {
-            if (driveName.isEmpty() || !file.exists()) {
-                mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
-                return;
-            }
-            mp_NameDialog->updateTipLabelText(tr("It is not a driver"));
-            return;
-        }
-        if (driveName.isEmpty() || !file.exists()) {
-            mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
-            return;
-        }
+        installErrorTips(driveName);
         removeBtn();
         mp_WaitDialog->setValue(0);
         mp_WaitDialog->setText(tr("Updating"));
         mp_stackWidget->setCurrentIndex(2);
         DBusDriverInterface::getInstance()->installDriver(driveName);
         setProperty("DriverProcessStatus", "Doing");//卸载或者加载程序进行中
+    }
+}
+
+void PageDriverControl::installErrorTips(const QString &driveName)
+{
+    QFile file(driveName);
+    if(!DBusDriverInterface::getInstance()->isArchMatched(driveName)) {
+        mp_NameDialog->updateTipLabelText(tr("Broken package"));
+        return;
+    }
+    if (!DBusDriverInterface::getInstance()->isArchMatched(driveName)) {
+        mp_NameDialog->updateTipLabelText(tr("Unmatched package architecture"));
+        return;
+    }
+    if (!DBusDriverInterface::getInstance()->isDriverPackage(driveName)) {
+        if (driveName.isEmpty() || !file.exists()) {
+            mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
+            return;
+        }
+        mp_NameDialog->updateTipLabelText(tr("It is not a driver"));
+        return;
+    }
+    if (driveName.isEmpty() || !file.exists()) {
+        mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
+        return;
     }
 }
 

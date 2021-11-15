@@ -114,6 +114,11 @@ private:
     void installDriverLogical();
 
     /**
+     * @brief installErrorTips 安装各种错误提示
+     */
+    void installErrorTips(const QString &driveName);
+
+    /**
      * @brief uninstallDriverLogical
      */
     void uninstallDriverLogical();
