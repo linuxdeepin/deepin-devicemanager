@@ -1,5 +1,7 @@
 #include "DBusDriverInterface.h"
 
+#include <unistd.h>
+
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<DBusDriverInterface *> DBusDriverInterface::s_Instance;
 std::mutex DBusDriverInterface::m_mutex;
@@ -79,17 +81,14 @@ void DBusDriverInterface::slotProcessChange(qint32 value,QString detail)
 
 void DBusDriverInterface::slotProcessEnd(bool success)
 {
+    emit processChange(100,"");
+    sleep(1);
     emit processEnd(success);
 }
 
 void DBusDriverInterface::slotCallFinished(QDBusPendingCallWatcher* watcher)
 {
     QDBusPendingReply<bool> reply = *watcher;
-//    if (reply.isError()) {
-//        emit processEnd(false);
-//    }else{
-//        emit processEnd(reply.value());
-//    }
     watcher->deleteLater();
 }
 

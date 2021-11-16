@@ -1674,6 +1674,28 @@
         <translation>确 定</translation>
     </message>
     <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="207"/>
+        <source>Update</source>
+        <comment>button</comment>
+        <translation>更 新</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="208"/>
+        <source>Previous</source>
+        <comment>button</comment>
+        <translation>上一步</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="233"/>
+        <source>Broken package</source>
+        <translation>包文件损坏</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="237"/>
+        <source>Unmatched package architecture</source>
+        <translation>包文件与系统架构不匹配</translation>
+    </message>
+    <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>所选文件夹不存在，请重新选择</translation>

@@ -205,7 +205,7 @@ void PageDriverControl::installDriverLogical()
         mp_NameDialog->loadAllDrivers(includeSubdir, path);
         mp_stackWidget->setCurrentIndex(1);
         this->setButtonText(1, tr("Update", "button"));
-        this->setButtonText(0, tr("Previous"));
+        this->setButtonText(0, tr("Previous", "button"));
         getButton(1)->setDisabled(true);          //默认置灰
         this->getButton(0)->disconnect();
         connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
