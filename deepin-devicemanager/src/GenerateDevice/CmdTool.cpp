@@ -417,6 +417,8 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
         if (mapInfo["Hardware Class"] == "sound") {
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"].contains("network")) {
+            if(mapInfo.find("SysFS Device Link") != mapInfo.end() && mapInfo["SysFS Device Link"].contains("/devices/platform"))
+                continue; // platform总线下会出现无效信息，需要过滤
             addMapInfo("hwinfo_network", mapInfo);
         } else if (mapInfo["Hardware Class"] == "keyboard") {
             addMouseKeyboardInfoMapInfo("hwinfo_keyboard", mapInfo);

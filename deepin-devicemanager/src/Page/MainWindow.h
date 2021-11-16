@@ -111,6 +111,12 @@ protected:
      */
     bool event(QEvent *event) override;
 
+    /**
+     * @brief closeEvent 重写关闭事件
+     * @param event
+     */
+    void closeEvent(QCloseEvent *event) override;
+
 private:
     /** @brief initWindow:对窗口进行一系列的初始化操作*/
     void initWindow();
