@@ -201,6 +201,7 @@ bool DriverManager::installDriver(const QString &filepath)
                         return  false;
                     }
                     sigProgressDetail(100, "");
+                    sigFinished(true);
                 } else {
                     //失败将文件移除,只删文件不删路径
                     QFile::remove(installpath);
@@ -213,7 +214,6 @@ bool DriverManager::installDriver(const QString &filepath)
             }
         }
     }
-    sigFinished(true);
     return  true;
 }
 
