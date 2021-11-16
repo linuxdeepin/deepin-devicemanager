@@ -63,6 +63,7 @@ void MainJob::working()
     connect(mp_DetectThread, &DetectThread::usbChanged, this, &MainJob::slotUsbChanged, Qt::ConnectionType::QueuedConnection);
     connect(mp_Enable, &DBusEnableInterface::update, this, &MainJob::slotUsbChanged);
     connect(mp_IFace, &DBusInterface::update, this, &MainJob::slotUsbChanged);
+    connect(mp_DriverOperateIFace, &DriverDBusInterface::sigFinished, this, &MainJob::slotDriverControl);
 }
 
 INSTRUCTION_RES MainJob::executeClientInstruction(const QString &instructions)
@@ -114,6 +115,13 @@ bool MainJob::clientIsRunning()
 void MainJob::slotUsbChanged()
 {
     executeClientInstruction("DETECT");
+}
+
+void MainJob::slotDriverControl(bool success)
+{
+    qInfo() << "slotDriverControl *********************************";
+    if(success)
+        executeClientInstruction("DETECT");
 }
 
 void MainJob::onFirstUpdate()

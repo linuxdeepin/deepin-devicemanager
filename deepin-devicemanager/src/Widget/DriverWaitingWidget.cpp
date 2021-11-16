@@ -45,6 +45,7 @@ void DriverWaitingWidget::init()
 void DriverWaitingWidget::setValue(int value)
 {
     mp_Progress->setValue(value);
+    mp_Progress->repaint();
 }
 
 void DriverWaitingWidget::setText(const QString &text)

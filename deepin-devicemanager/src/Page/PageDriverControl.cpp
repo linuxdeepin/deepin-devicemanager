@@ -163,8 +163,6 @@ void PageDriverControl::slotProcessEnd(bool sucess)
     this->addButton(tr("OK", "button"), true);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotClose);
     mp_stackWidget->setCurrentIndex(mp_stackWidget->currentIndex() + 1);
-    if (sucess)
-        DBusInterface::getInstance()->refreshInfo();
     disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processChange, this, &PageDriverControl::slotProcessChange);
     disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processEnd, this, &PageDriverControl::slotProcessEnd);
     setProperty("DriverProcessStatus" , "Done");//卸载或者加载程序已完成
@@ -293,6 +291,8 @@ void PageDriverControl::keyPressEvent(QKeyEvent *event)
     }
     else if("Done" == property("DriverProcessStatus").toString()){
         slotClose();//卸载或者更新后，关闭时刷新
+    }else{
+        this->close();
     }
 }
 void PageDriverControl::closeEvent(QCloseEvent *event)
@@ -322,4 +322,20 @@ void PageDriverControl::enableCloseBtn(bool enable)
 
     // 禁用按钮
     closeBtn->setAttribute(Qt::WA_TransparentForMouseEvents,!enable);
+    if(enable){
+        closeBtn->setIcon(style()->standardIcon(style()->SP_TitleBarCloseButton));//还原
+    }else {
+        QIcon icon = style()->standardIcon(style()->SP_TitleBarCloseButton);
+        QPixmap pm(icon.pixmap(closeBtn->size()));
+        QPixmap t(pm);
+        t.fill(Qt::transparent);
+        QPainter p(&t);
+        p.setCompositionMode(QPainter::CompositionMode_Source);
+        p.drawPixmap(0,0,pm);
+        p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+        p.fillRect(t.rect(),QColor(0,0,0,102));//255*2/5=102
+        p.end();
+        pm=t;
+        closeBtn->setIcon(pm);
+    }
 }

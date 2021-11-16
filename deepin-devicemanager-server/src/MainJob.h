@@ -58,6 +58,12 @@ private slots:
     void slotUsbChanged();
 
     /**
+     * @brief slotUsbChanged
+     * @param usbchanged
+     */
+    void slotDriverControl(bool success);
+
+    /**
      * @brief onFirstUpdate
      */
     void onFirstUpdate();

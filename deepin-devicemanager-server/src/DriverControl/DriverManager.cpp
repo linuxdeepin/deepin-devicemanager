@@ -82,7 +82,7 @@ void DriverManager::initConnections()
 {
     connect(mp_debinstaller, &DebInstaller::installFinished, [&](bool bsuccess) {
         if (bsuccess) {
-            sigProgressDetail(100, tr("Install success"));
+            sigProgressDetail(90, tr("Install success"));
         } else {
             this->sigProgressDetail(m_installprocess, errmsg);
         }
@@ -122,7 +122,7 @@ bool DriverManager::unInstallDriver(const QString &modulename)
         sigProgressDetail(20, "");
         bsuccess = unInstallModule(modulename);
         if (bsuccess) {
-            sigProgressDetail(100, "");
+            sigProgressDetail(90, "");
         }
         sigFinished(bsuccess);
 
@@ -200,7 +200,7 @@ bool DriverManager::installDriver(const QString &filepath)
                         sigFinished(false);
                         return  false;
                     }
-                    sigProgressDetail(100, "");
+                    sigProgressDetail(90, "");
                     sigFinished(true);
                 } else {
                     //失败将文件移除,只删文件不删路径
@@ -378,7 +378,7 @@ bool DriverManager::uninstallPrinter(const QString& vendor, const QString& model
         RETURN_VALUE(false);
 
     //卸载成功
-    sigProgressDetail(100, "");
+    sigProgressDetail(90, "");
     RETURN_VALUE(true);
 }
 
