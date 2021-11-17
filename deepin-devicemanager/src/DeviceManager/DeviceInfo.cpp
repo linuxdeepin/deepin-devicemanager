@@ -420,6 +420,10 @@ bool DeviceBaseInfo::available()
 
 bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
 {
+    if(driver.isEmpty()){
+        return false;
+    }
+
     QString info = "";
     QProcess process;
 

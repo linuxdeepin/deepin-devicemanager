@@ -87,6 +87,10 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "memory", m_MemAddress);
     setAttribute(mapInfo, "physical id", m_PhysID);
 
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
+
     // 获取其他属性
     getOtherMapInfo(mapInfo);
 }

@@ -66,6 +66,9 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "capacity", m_Capacity);
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
     // 加载其他信息
     getOtherMapInfo(mapInfo);
