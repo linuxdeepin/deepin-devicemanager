@@ -133,10 +133,8 @@ bool Utils::isDriverPackage(const QString &filepath)
         process.start(QString("dpkg-deb -x %1 %2").arg(filepath).arg(strExtract));
         if (process.waitForFinished()) {
             //查找关键字 ko insmod modprobe和 路径 /lib/module
-            process.start("sh", QStringList() << "-c" << QString("grep -irH \\\"insmod\\\" %1 ||"
-                                                                 "grep -irH \\\"modprobe\\\" %1 ||"
-                                                                 "grep -irH \\\"/lib/module\\\" %1 ||"
-                                                                 "grep -irH \\\"*.ko\\\" %1").arg(strExtract));
+            process.start("sh", QStringList() << "-c" << QString("grep -irHE 'insmod|modprobe|/lib/module' %1  ||"
+                                                                 "find %1 -name '*.ko' -o -name '*.ppd'").arg(strExtract));
             if (process.waitForFinished()) {
                 //获取查找结果，有结果不为空
                 QString strKeyContent = process.readAllStandardOutput();
