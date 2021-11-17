@@ -53,64 +53,64 @@
 <context>
     <name>DeviceAudio</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="200"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
         <source>Device Name</source>
         <translation>Laitteen nimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="227"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="251"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="230"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="254"/>
         <source>Name</source>
         <translation>Nimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="228"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="252"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="231"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="255"/>
         <source>Vendor</source>
         <translation>Valmistaja</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="229"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="232"/>
         <source>Model</source>
         <translation>Malli</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="230"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="233"/>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="231"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="234"/>
         <source>Bus Info</source>
         <translation>Väylän tiedot</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="240"/>
         <source>Chip</source>
         <translation>Piiri</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="241"/>
         <source>Capabilities</source>
         <translation>Ominaisuuksia</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="242"/>
         <source>Clock</source>
         <translation>Kello</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="240"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="243"/>
         <source>Width</source>
         <translation>Leveys</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="241"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="244"/>
         <source>Memory Address</source>
         <translation>Muistin osoite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="261"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="264"/>
         <source>Unavailable</source>
         <translation>Ei saatavilla</translation>
     </message>
@@ -119,12 +119,12 @@
         <translation type="vanished">Muisti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="242"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="245"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="265"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="268"/>
         <source>Disable</source>
         <translation>Poista</translation>
     </message>
@@ -132,17 +132,17 @@
 <context>
     <name>DeviceBaseInfo</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="459"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="478"/>
         <source>Name</source>
         <translation>Nimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="460"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="479"/>
         <source>Vendor</source>
         <translation>Valmistaja</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="461"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="480"/>
         <source>Model</source>
         <translation>Malli</translation>
     </message>
@@ -168,67 +168,72 @@
 <context>
     <name>DeviceBluetooth</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="145"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="163"/>
         <source>Name</source>
         <translation>Nimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="146"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="164"/>
         <source>Vendor</source>
         <translation>Valmistaja</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="147"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="165"/>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="148"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="166"/>
         <source>Model</source>
         <translation>Malli</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="171"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="189"/>
         <source>Speed</source>
         <translation>Nopeus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="172"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="190"/>
         <source>Maximum Power</source>
         <translation>Suurin teho</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="173"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="191"/>
         <source>Driver Version</source>
         <translation>Ajurin versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="174"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="192"/>
         <source>Driver</source>
         <translation>Ajuri</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="175"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="193"/>
         <source>Capabilities</source>
         <translation>Ominaisuuksia</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="176"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="194"/>
         <source>Bus Info</source>
         <translation>Väylän tiedot</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="177"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="195"/>
         <source>Logical Name</source>
         <translation>Looginen nimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="178"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="196"/>
         <source>MAC Address</source>
         <translation>Mac osoite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="189"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="208"/>
+        <source>Unavailable</source>
+        <translation>Ei saatavilla</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="212"/>
         <source>Disable</source>
         <translation>Poista</translation>
     </message>
@@ -444,102 +449,102 @@
         <translation>Grafiikkamuisti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="208"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="203"/>
         <source>Physical ID</source>
         <translation>Fyysinen tunnus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="204"/>
         <source>Memory Address</source>
         <translation>Muistin osoite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="205"/>
         <source>IO Port</source>
         <translation>IO-portti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="206"/>
         <source>Bus Info</source>
         <translation>Väylän tiedot</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="212"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="207"/>
         <source>Maximum Resolution</source>
         <translation>Maksimi tarkkuus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="208"/>
         <source>Minimum Resolution</source>
         <translation>Minimi tarkkuus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
         <source>Current Resolution</source>
         <translation>Nykyinen tarkkuus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
         <source>Driver</source>
         <translation>Ajuri</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
         <source>Description</source>
         <translation>Kuvaus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="212"/>
         <source>Clock</source>
         <translation>Kello</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
         <source>DP</source>
         <translation>DP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="219"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
         <source>eDP</source>
         <translation>eDP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="220"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
         <source>HDMI</source>
         <translation>HDMI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
         <source>VGA</source>
         <translation>VGA</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="222"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
         <source>DVI</source>
         <translation>DVI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="223"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="218"/>
         <source>Display Output</source>
         <translation>Näytön ulostulo</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="224"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="219"/>
         <source>Capabilities</source>
         <translation>Ominaisuuksia</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="225"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="220"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="226"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
         <source>Width</source>
         <translation>Leveys</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="232"/>
         <source>Unavailable</source>
         <translation>Ei saatavilla</translation>
     </message>
@@ -673,139 +678,139 @@
     <name>DeviceManager</name>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="134"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="231"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="895"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="947"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="961"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="989"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1005"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="275"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="986"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1006"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1027"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1038"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1052"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1065"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1080"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1096"/>
         <source>Overview</source>
         <translation>Yleiskuva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="138"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="209"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1091"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="140"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="253"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1182"/>
         <source>CPU</source>
         <translation>Prosessori</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="141"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1094"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="145"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1185"/>
         <source>CPU quantity</source>
         <translation>Suorittimen määrä</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="147"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="210"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="156"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="254"/>
         <source>Motherboard</source>
         <translation>Emolevy</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="150"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="211"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="161"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="255"/>
         <source>Memory</source>
         <translation>Muisti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="153"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="212"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="166"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="256"/>
         <source>Display Adapter</source>
         <translation>Näytönohjain</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="156"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="257"/>
         <source>Sound Adapter</source>
         <translation>Äänikortti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="159"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="258"/>
         <source>Storage</source>
         <translation>Levytila</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="162"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="181"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="259"/>
         <source>Other PCI Devices</source>
         <translation>Muut PCI -laitteet</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="165"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="186"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="260"/>
         <source>Battery</source>
         <translation>Akku</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="197"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="261"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="174"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="262"/>
         <source>Network Adapter</source>
         <translation>Verkkokortti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="180"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="219"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="263"/>
         <source>Mouse</source>
         <translation>Hiiri</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="183"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="220"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="264"/>
         <source>Keyboard</source>
         <translation>Näppäimistö</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="189"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="221"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="265"/>
         <source>Monitor</source>
         <translation>Näyttö</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="192"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="222"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="232"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="266"/>
         <source>CD-ROM</source>
         <translation>CD-ROM</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="195"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="223"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="267"/>
         <source>Printer</source>
         <translation>Tulostin</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="198"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="224"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="240"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="268"/>
         <source>Camera</source>
         <translation>Kamera</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="201"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="225"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="244"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="269"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
         <translation>Muut laitteet</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="901"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="965"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="996"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="992"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1056"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1087"/>
         <source>Device</source>
         <translation>Laite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="969"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1000"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1060"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1091"/>
         <source>OS</source>
         <translation>OS</translation>
     </message>
@@ -949,42 +954,42 @@
 <context>
     <name>DeviceNetwork</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="161"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="157"/>
         <source>Name</source>
         <translation>Nimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="162"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="158"/>
         <source>Vendor</source>
         <translation>Valmistaja</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="163"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="159"/>
         <source>Type</source>
         <translation>Tyyppi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="164"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="160"/>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="165"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="161"/>
         <source>Bus Info</source>
         <translation>Väylän tiedot</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="166"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="162"/>
         <source>Capabilities</source>
         <translation>Ominaisuuksia</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="167"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="163"/>
         <source>Driver</source>
         <translation>Ajuri</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="168"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="164"/>
         <source>Driver Version</source>
         <translation>Ajurin versio</translation>
     </message>
@@ -997,77 +1002,77 @@
         <translation type="vanished">Nopeus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="174"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="170"/>
         <source>Maximum Rate</source>
         <translation>Suurin taajuus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="175"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="171"/>
         <source>Negotiation Rate</source>
         <translation>Aloitustaajuus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="176"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="172"/>
         <source>Port</source>
         <translation>Portti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="177"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="173"/>
         <source>Multicast</source>
         <translation>Ryhmälähetys</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="178"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="174"/>
         <source>Link</source>
         <translation>Linkki</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="179"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="175"/>
         <source>Latency</source>
         <translation>Viive</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="180"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="176"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="181"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="177"/>
         <source>Firmware</source>
         <translation>Firmware</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="182"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="178"/>
         <source>Duplex</source>
         <translation>Kaksinpuolin</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="183"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="179"/>
         <source>Broadcast</source>
         <translation>Alaverkko</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="184"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="180"/>
         <source>Auto Negotiation</source>
         <translation>Automaattinen neuvottelu</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="185"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="181"/>
         <source>Clock</source>
         <translation>Kello</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="186"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="182"/>
         <source>Width</source>
         <translation>Leveys</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="187"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="183"/>
         <source>Memory Address</source>
         <translation>Muistin osoite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="198"/>
         <source>Unavailable</source>
         <translation>Ei saatavilla</translation>
     </message>
@@ -1076,22 +1081,22 @@
         <translation type="vanished">Muisti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="188"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="184"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="189"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="185"/>
         <source>MAC Address</source>
         <translation>Mac osoite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="190"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="186"/>
         <source>Logical Name</source>
         <translation>Looginen nimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="206"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
         <source>Disable</source>
         <translation>Poista</translation>
     </message>
@@ -1167,49 +1172,59 @@
 <context>
     <name>DeviceOthers</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="99"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="121"/>
         <source>Name</source>
         <translation>Nimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="100"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="122"/>
         <source>Vendor</source>
         <translation>Valmistaja</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="101"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="123"/>
         <source>Model</source>
         <translation>Malli</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="102"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="124"/>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="103"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="125"/>
         <source>Bus Info</source>
         <translation>Väylän tiedot</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="104"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="126"/>
         <source>Capabilities</source>
         <translation>Ominaisuuksia</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="105"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="127"/>
         <source>Driver</source>
         <translation>Ajuri</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="106"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="128"/>
         <source>Maximum Power</source>
         <translation>Suurin teho</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="107"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="129"/>
         <source>Speed</source>
         <translation>Nopeus</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="142"/>
+        <source>Unavailable</source>
+        <translation>Ei saatavilla</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="145"/>
+        <source>Disable</source>
+        <translation>Poista</translation>
     </message>
 </context>
 <context>
@@ -1426,9 +1441,15 @@
 <context>
     <name>GetDriverNameWidget</name>
     <message>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="29"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="31"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="154"/>
         <source>Select a driver for update</source>
         <translation>Valitse päivitettävä ohjain</translation>
+    </message>
+    <message>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="149"/>
+        <source>No drivers found in this folder</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1609,82 +1630,112 @@
 <context>
     <name>PageDriverControl</name>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="68"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="178"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="97"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="221"/>
         <source>Updating</source>
         <translation>Päivittää</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="73"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="94"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="102"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="124"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Peru</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="74"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="103"/>
         <source>Next</source>
         <translation>Seuraava</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
         <source>Warning</source>
         <translation>Varoitus</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="91"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
         <source>The device will be unavailable after the driver uninstallation</source>
         <translation>Laite ei ole käytettävissä ohjaimen poistamisen jälkeen</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="95"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
         <source>Uninstall</source>
         <comment>button</comment>
         <translation>Poista asennus</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="99"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
         <source>Uninstalling</source>
         <translation>Poistetaan</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
         <source>Update successful</source>
         <translation>Päivitys onnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
         <source>Uninstallation successful</source>
         <translation>Asennuksen poisto onnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Update failed</source>
         <translation>Päivitys epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Uninstallation failed</source>
         <translation>Asennuksen poistaminen epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="163"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="182"/>
+        <source>Next</source>
+        <comment>button</comment>
+        <translation>Seuraava</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="202"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>Valittua kansiota ei ole, valitse uudelleen</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="169"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="207"/>
+        <source>Update</source>
+        <comment>button</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="208"/>
+        <source>Previous</source>
+        <comment>button</comment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="233"/>
+        <source>Broken package</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="237"/>
+        <source>Unmatched package architecture</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="243"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="250"/>
         <source>The selected file does not exist, please select again</source>
         <translation>Valittua tiedostoa ei ole, valitse uudelleen</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="173"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="246"/>
         <source>It is not a driver</source>
         <translation>Tämä ei ole ajuri</translation>
     </message>
@@ -1710,27 +1761,27 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="119"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="121"/>
         <source>Failed to enable the device</source>
         <translation>Laitteen käyttöönotto epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="122"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="124"/>
         <source>Failed to disable the device</source>
         <translation>Laitteen poistaminen käytöstä epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="127"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="129"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Käytöstä poisto epäonnistui: laitteen SN:n haku epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="144"/>
         <source>Update Drivers</source>
         <translation>Päivitä ajurit</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="157"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="162"/>
         <source>Uninstall Drivers</source>
         <translation>Poista ajurit</translation>
     </message>
@@ -1761,63 +1812,64 @@
 <context>
     <name>PageSingleInfo</name>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="27"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="28"/>
         <source>Refresh</source>
         <translation>Virkistä</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="28"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="29"/>
         <source>Export</source>
         <translation>Vie</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="29"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="30"/>
         <source>Copy</source>
         <translation>Kopio</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="30"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="166"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="31"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="167"/>
         <source>Enable</source>
         <translation>Käyttöön</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="31"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="32"/>
         <source>Update drivers</source>
         <translation>Päivitä ajurit</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="32"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="33"/>
         <source>Uninstall drivers</source>
         <translation>Poista ajurit</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="168"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="169"/>
         <source>Disable</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="211"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="222"/>
         <source>Failed to disable the device</source>
         <translation>Laitteen poistaminen käytöstä epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="224"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="218"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="235"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Käytöstä poisto epäonnistui: laitteen SN:n haku epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="228"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="239"/>
         <source>Failed to enable the device</source>
         <translation>Laitteen käyttöönotto epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="243"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="254"/>
         <source>Update Drivers</source>
         <translation>Päivitä ajurit</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="258"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="271"/>
         <source>Uninstall Drivers</source>
         <translation>Poista ajurit</translation>
     </message>
@@ -1832,34 +1884,34 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="204"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>SubVendor</source>
         <translation>Alihankkija</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="205"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
         <source>SubDevice</source>
         <translation>Alalaite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
         <source>Driver</source>
         <translation>Ajuri</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="204"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="207"/>
         <source>Driver Status</source>
         <translation>Ajurin tila</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="205"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="208"/>
         <source>Driver Activation Cmd</source>
         <translation>Ajurin aktivointi cmd</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="209"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="103"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="313"/>
@@ -1867,72 +1919,72 @@
         <translation>Määrityksen tila</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="208"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="132"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="211"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="150"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="105"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="233"/>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="154"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="150"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="310"/>
         <source>physical id</source>
         <translation>fyysinen tunnus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="212"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
         <source>latency</source>
         <translation>viive</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="211"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="214"/>
         <source>Phys</source>
         <translation>Phys</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="212"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="215"/>
         <source>Sysfs</source>
         <translation>Sysfs</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="216"/>
         <source>Handlers</source>
         <translation>Käsittelijät</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="217"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="226"/>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="218"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="227"/>
         <source>EV</source>
         <translation>EV</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="219"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="228"/>
         <source>KEY</source>
         <translation>KEY</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="221"/>
         <source>Model</source>
         <translation>Malli</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="219"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="222"/>
         <source>Vendor</source>
         <translation>Valmistaja</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="220"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="223"/>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="221"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="112"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="224"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="130"/>
         <source>Bus</source>
         <translation>Väylä</translation>
     </message>
@@ -2023,7 +2075,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="161"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="116"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="134"/>
         <source>Features</source>
         <translation>Ominaisuuksia</translation>
     </message>
@@ -2050,7 +2102,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="169"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="137"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="155"/>
         <source>UUID</source>
         <translation>UUID</translation>
     </message>
@@ -2178,110 +2230,110 @@
         <translation>Asennettu kieli</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="113"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="131"/>
         <source>BD Address</source>
         <translation>BD-osoite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="114"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="132"/>
         <source>ACL MTU</source>
         <translation>ACL MTU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="115"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="133"/>
         <source>SCO MTU</source>
         <translation>SCO MTU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="117"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="135"/>
         <source>Packet type</source>
         <translation>Pakettityyppi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="118"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="136"/>
         <source>Link policy</source>
         <translation>Yhteyskäytäntö</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="119"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="137"/>
         <source>Link mode</source>
         <translation>Linkin tila</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="120"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="133"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="151"/>
         <source>Class</source>
         <translation>Luokka</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="121"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="139"/>
         <source>Service Classes</source>
         <translation>Palvelun luokat</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="122"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="140"/>
         <source>Device Class</source>
         <translation>Laiteluokka</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="123"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="141"/>
         <source>HCI Version</source>
         <translation>HCI versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="124"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="142"/>
         <source>LMP Version</source>
         <translation>LMP versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="125"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="143"/>
         <source>Subversion</source>
         <translation>Alaversio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="127"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="145"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
         <source>Device</source>
         <translation>Laite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="128"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="146"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="97"/>
         <source>Serial ID</source>
         <translation>Sarjan tunnus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="130"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="148"/>
         <source>product</source>
         <translation>tuote</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="131"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="149"/>
         <source>description</source>
         <translation>kuvaus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="152"/>
         <source>Powered</source>
         <translation>Käytössä</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="153"/>
         <source>Discoverable</source>
         <translation>Löydettävissä</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="136"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="154"/>
         <source>Pairable</source>
         <translation>Liitettävissä</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="156"/>
         <source>Modalias</source>
         <translation>Modpeite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="139"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="157"/>
         <source>Discovering</source>
         <translation>Hakemassa</translation>
     </message>
@@ -2727,7 +2779,7 @@
         <translation>GLSL-versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="76"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="77"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="189"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="207"/>
         <source>Unknown</source>
@@ -2750,274 +2802,274 @@
         <translation>Laitteistoluokka</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="769"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="797"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="825"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="861"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="860"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="888"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="952"/>
         <source>CPU</source>
         <translation>Prosessori</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="769"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="797"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="825"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="861"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="860"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="888"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="952"/>
         <source>No CPU found</source>
         <translation>Suoritinta ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="770"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="798"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="826"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="862"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="861"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="889"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="953"/>
         <source>Motherboard</source>
         <translation>Emolevy</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="770"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="798"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="826"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="862"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="861"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="889"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="953"/>
         <source>No motherboard found</source>
         <translation>Emolevyä ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="771"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="799"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="827"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="863"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="862"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="890"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="954"/>
         <source>Memory</source>
         <translation>Muisti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="771"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="799"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="827"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="863"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="862"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="890"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="954"/>
         <source>No memory found</source>
         <translation>Muistia ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="772"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="800"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="828"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="864"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="863"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="891"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="919"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="955"/>
         <source>Storage</source>
         <translation>Levytila</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="772"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="800"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="828"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="864"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="863"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="891"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="919"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="955"/>
         <source>No disk found</source>
         <translation>Levyä ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="773"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="801"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="829"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="865"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="864"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="892"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="956"/>
         <source>Display Adapter</source>
         <translation>Näytönohjain</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="773"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="801"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="829"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="865"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="864"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="892"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="956"/>
         <source>No GPU found</source>
         <translation>GPU:ta ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="774"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="802"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="830"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="866"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="865"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="893"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="921"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="957"/>
         <source>Monitor</source>
         <translation>Näyttö</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="774"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="802"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="830"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="866"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="865"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="893"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="921"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="957"/>
         <source>No monitor found</source>
         <translation>Näyttöä ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="775"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="803"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="831"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="867"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="866"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="894"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="922"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="958"/>
         <source>Network Adapter</source>
         <translation>Verkkokortti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="775"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="803"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="831"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="867"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="866"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="894"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="922"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="958"/>
         <source>No network adapter found</source>
         <translation>Verkkokorttia ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="776"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="804"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="832"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="868"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="867"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="895"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="923"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="959"/>
         <source>Sound Adapter</source>
         <translation>Äänikortti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="776"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="804"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="832"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="868"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="867"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="895"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="923"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="959"/>
         <source>No audio device found</source>
         <translation>Äänilaitetta ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="777"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="805"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="833"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="869"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="868"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="896"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="924"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="960"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="777"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="805"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="833"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="869"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="868"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="896"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="924"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="960"/>
         <source>No Bluetooth device found</source>
         <translation>Bluetooth ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="778"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="806"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="834"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="870"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="869"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="897"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="925"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="961"/>
         <source>Other PCI Devices</source>
         <translation>Muut PCI -laitteet</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="778"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="806"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="834"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="870"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="869"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="897"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="925"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="961"/>
         <source>No other PCI devices found</source>
         <translation>Muita PCI-laitteita ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="779"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="807"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="835"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="870"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="898"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="926"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="962"/>
         <source>Power</source>
         <translation>Virta</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="779"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="807"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="835"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="870"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="898"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="926"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="962"/>
         <source>No battery found</source>
         <translation>Akkua ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="780"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="808"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="836"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="899"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="927"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="963"/>
         <source>Keyboard</source>
         <translation>Näppäimistö</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="780"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="808"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="836"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="899"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="927"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="963"/>
         <source>No keyboard found</source>
         <translation>Näppäimistöä ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="781"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="809"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="837"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="900"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="928"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="964"/>
         <source>Mouse</source>
         <translation>Hiiri</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="781"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="809"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="837"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="900"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="928"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="964"/>
         <source>No mouse found</source>
         <translation>Hiirtä ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="782"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="810"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="838"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="901"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="929"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="965"/>
         <source>Printer</source>
         <translation>Tulostin</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="782"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="810"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="838"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="901"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="929"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="965"/>
         <source>No printer found</source>
         <translation>Tulostinta ei löytynyt!</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="783"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="811"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="839"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
         <source>Camera</source>
         <translation>Kamera</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="783"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="811"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="839"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
         <source>No camera found</source>
         <translation>Kameraa ei löytynyt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="784"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="812"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="840"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
         <source>CD-ROM</source>
         <translation>CD-ROM</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="784"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="812"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="840"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
         <source>No CD-ROM found</source>
         <translation>CD-levyä ei löytynyt!</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="785"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="813"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="841"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
         <source>Other Devices</source>
         <translation>Muut laitteet</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="785"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="813"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="841"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
         <source>No other devices found</source>
         <translation>Muita laitteita ei löytynyt</translation>
     </message>
@@ -3126,12 +3178,12 @@
         <translation>Päivämäärä</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="153"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="149"/>
         <source>ioport</source>
         <translation>ioportti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="155"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="151"/>
         <source>network</source>
         <translation>lähiverkko</translation>
     </message>
@@ -3381,13 +3433,13 @@
         <translation>Geometria (looginen)</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="59"/>
         <location filename="../src/main.cpp" line="61"/>
+        <location filename="../src/main.cpp" line="63"/>
         <source>Device Manager</source>
         <translation>Laitehallinta</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="62"/>
+        <location filename="../src/main.cpp" line="64"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Laitehallinta on kätevä työkalu laittetietojen tarkastelemiseen ja laitteiden hallintaan.</translation>
     </message>
@@ -3397,7 +3449,7 @@
         <translation>Sisällytä alikansiot</translation>
     </message>
     <message>
-        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="35"/>
+        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="48"/>
         <source>Search for drivers in this path</source>
         <translation>Etsi ajurit tästä polusta</translation>
     </message>
@@ -3460,34 +3512,34 @@
 <context>
     <name>TableWidget</name>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="29"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="209"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="26"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="200"/>
         <source>Disable</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="30"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="27"/>
         <source>Refresh</source>
         <translation>Virkistä</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="31"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="28"/>
         <source>Export</source>
         <translation>Vie</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="32"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="29"/>
         <source>Update drivers</source>
         <translation>Päivitä ajurit</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="33"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="30"/>
         <source>Uninstall drivers</source>
         <translation>Poista ajurit</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="214"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="256"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="205"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="258"/>
         <source>Enable</source>
         <translation>Käyttöön</translation>
     </message>
@@ -3510,12 +3562,12 @@
         <translation>Kopio</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="225"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
         <source>Disable</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="233"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
         <source>Unavailable</source>
         <translation>Ei saatavilla</translation>
     </message>
@@ -3523,7 +3575,7 @@
 <context>
     <name>UrlChooserEdit</name>
     <message>
-        <location filename="../src/Widget/UrlChooserEdit.cpp" line="88"/>
+        <location filename="../src/Widget/UrlChooserEdit.cpp" line="97"/>
         <source>Select a local folder please</source>
         <translation>Valitse paikallinen kansio</translation>
     </message>

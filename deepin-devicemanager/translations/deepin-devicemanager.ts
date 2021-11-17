@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="en">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="en" version="2.1">
 <context>
     <name>CmdButtonWidget</name>
     <message>
@@ -232,7 +230,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="208"/>
         <source>Unavailable</source>
-        <translation type="unfinished">Unavailable</translation>
+        <translation>Unavailable</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="212"/>
@@ -1221,12 +1219,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="142"/>
         <source>Unavailable</source>
-        <translation type="unfinished">Unavailable</translation>
+        <translation>Unavailable</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="145"/>
         <source>Disable</source>
-        <translation type="unfinished">Disable</translation>
+        <translation>Disable</translation>
     </message>
 </context>
 <context>
@@ -1451,7 +1449,7 @@
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="149"/>
         <source>No drivers found in this folder</source>
-        <translation type="unfinished"></translation>
+        <translation>No drivers found in this folder</translation>
     </message>
 </context>
 <context>
@@ -1552,7 +1550,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="108"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Device Info</translation>
     </message>
     <message>
@@ -1701,7 +1699,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="182"/>
         <source>Next</source>
         <comment>button</comment>
-        <translation type="unfinished">Next</translation>
+        <translation>Next</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="202"/>
@@ -1712,23 +1710,23 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="207"/>
         <source>Update</source>
         <comment>button</comment>
-        <translation type="unfinished"></translation>
+        <translation>Update</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="208"/>
         <source>Previous</source>
         <comment>button</comment>
-        <translation type="unfinished"></translation>
+        <translation>Previous</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="233"/>
         <source>Broken package</source>
-        <translation type="unfinished"></translation>
+        <translation>Broken package</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="237"/>
         <source>Unmatched package architecture</source>
-        <translation type="unfinished"></translation>
+        <translation>Unmatched package architecture</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="243"/>
