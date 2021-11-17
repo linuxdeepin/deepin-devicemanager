@@ -425,7 +425,7 @@ bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
     process.start(cmd);
     process.waitForFinished(-1);
     QString info = process.readAllStandardOutput();
-    if(info.startsWith("dpkg-query")){
+    if(info.isEmpty() || info.startsWith("dpkg-query")){
         return true;
     }
     return false;
