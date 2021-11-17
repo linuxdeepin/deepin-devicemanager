@@ -53,6 +53,10 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Module Alias", m_UniqueID);
 
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
+
     //2. 获取设备的唯一标识
     /*
      * 在这里将设备的总线信息作为一个设备的唯一标识
