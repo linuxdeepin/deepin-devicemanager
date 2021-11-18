@@ -83,6 +83,12 @@ private:
     bool readProcCpuinfo();
 
     /**
+     * @brief readProcCpuinfo：读取/proc/device-tree/compatible内容
+     * @return
+     */
+    bool readProcDTCompatible();
+
+    /**
      * @brief parseInfo
      * @param info
      * @return

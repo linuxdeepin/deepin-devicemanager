@@ -31,6 +31,11 @@ bool CpuInfo::loadCpuInfo()
     // read the file /proc/cpuinfo
     if (!readProcCpuinfo())
         return false;
+
+    // arm设备如果有/proc/device-tree/compatible则读取
+    if (!readProcDTCompatible())
+        return false;
+
     return true;
 }
 
@@ -141,6 +146,51 @@ bool CpuInfo::parseInfo(const QString &info)
             lcpu.setCurFreq(mapInfo["cpu MHz"] + "MHz");
             lcpu.setModel(mapInfo["cpu model"]);
         }
+    }
+    return true;
+}
+bool CpuInfo::readProcDTCompatible()
+{
+    QString strModelName = "";
+
+    if("aarch64" != m_Arch)//不是aarch64架构
+    {
+        qInfo() << "readProcDTCompatible: arch: " << m_Arch << ", not aarch64.";
+        return true;
+    }
+
+    QFile file("/proc/device-tree/compatible");
+
+    if (!file.exists())//文件不存在
+    {
+        qInfo() << "readProcDTCompatible: /proc/device-tree/compatible is not exists.";
+        return true;
+    }
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        qInfo() << "readProcDTCompatible: open /proc/device-tree/compatible open failed.";
+        return false;
+    }
+
+    QString cpuInfo = file.readAll();
+    QStringList infos = cpuInfo.split("\n\n");
+    foreach (const QString &info, infos) {
+        if (info.isEmpty())
+            continue;
+        qInfo() << "readProcDTCompatible: info:" <<info;
+        QStringList words = info.split(QRegExp("[\\s]*,[\\s]*"));
+        strModelName = words.last();
+        qInfo() << "readProcDTCompatible: strModelName:" <<strModelName;
+    }
+    file.close();
+
+    if(strModelName.isEmpty())
+    {
+        return false;
+    }
+
+    foreach (int id, m_MapLogicalCpu.keys()) {
+        m_MapLogicalCpu[id].setModelName(strModelName);
     }
     return true;
 }
