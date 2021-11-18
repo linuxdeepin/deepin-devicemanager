@@ -36,6 +36,9 @@
 #include <QVBoxLayout>
 #include <QDBusConnection>
 #include <QWindow>
+#include <polkit-qt5-1/PolkitQt1/Authority>
+
+using namespace PolkitQt1;
 
 PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool install, QString deviceName, QString driverName, QString printerVendor, QString printerModel)
     : DDialog(parent)
@@ -210,6 +213,14 @@ void PageDriverControl::installDriverLogical()
         this->getButton(0)->disconnect();
         connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
     } else if (1 == curIndex) {
+        // 驱动安装之前需要先提权
+        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+                                                 UnixProcessSubject(getpid()),
+                                                 Authority::AllowUserInteraction);
+        if (result != Authority::Yes) {
+            return;
+        }
+
         QString driveName = mp_NameDialog->selectName();
         //先判断是否是驱动文件，如果不是，再判断是否存在。
         //因为后台isDriverPackage返回false的情况有2种：1.文件不存在 2.不是驱动文件

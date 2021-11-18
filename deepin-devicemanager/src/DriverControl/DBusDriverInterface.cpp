@@ -81,8 +81,10 @@ void DBusDriverInterface::slotProcessChange(qint32 value,QString detail)
 
 void DBusDriverInterface::slotProcessEnd(bool success)
 {
-    emit processChange(100,"");
-    usleep(500000);
+    if(success){
+        emit processChange(100,"");
+        usleep(500000);
+    }
     emit processEnd(success);
 }
 

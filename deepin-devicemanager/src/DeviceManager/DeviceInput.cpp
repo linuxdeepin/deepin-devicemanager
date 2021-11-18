@@ -49,6 +49,10 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "driver", m_Driver);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
+
 
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
@@ -88,6 +92,9 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0

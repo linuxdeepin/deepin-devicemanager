@@ -71,6 +71,7 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5 COMPONENTS DBus REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
+find_package(PolkitQt5-1 REQUIRED)
 find_package(Qt5Test REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
@@ -133,6 +134,7 @@ target_link_libraries(${PROJECT_NAME_TEST}
     ${DFrameworkdbus_LIBRARIES}
     ${GTEST_LIBRARIES}
     ${GTEST_MAIN_LIBRARIES}
+    PolkitQt5-1::Agent
     pthread
 )
 

@@ -31,6 +31,7 @@ set(APP_TRANS_SCRIPT "${APP_RES_DIR}/translate_generation.sh")
 set(APP_DESKTOP "${APP_RES_DIR}/deepin-devicemanager.desktop")
 set(APP_QRC "${APP_RES_DIR}/appimage.qrc")
 set(APP_ICON_FILE "${APP_RES_DIR}/icons/deepin/builtin/deepin-devicemanager.svg")
+set(APP_AUTHENTICATION "${APP_RES_DIR}/com.deepin.deepin-devicemanager.policy")
 project(${APP_BIN_NAME})
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -103,6 +104,7 @@ find_package(Qt5 COMPONENTS DBus REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
+find_package(PolkitQt5-1 REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(DFrameworkdbus REQUIRED)
@@ -124,6 +126,7 @@ target_link_libraries(${APP_BIN_NAME}
     Qt5::DBus
     Qt5::Xml
     Qt5::Network
+    PolkitQt5-1::Agent
 )
 
 set(CMAKE_INSTALL_PREFIX /usr)
@@ -137,6 +140,7 @@ install(FILES ${APP_QM_FILES} DESTINATION share/deepin-devicemanager/translation
 install(FILES ${APP_DESKTOP} DESTINATION share/applications)
 install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/apps)
 install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
+install(FILES ${APP_AUTHENTICATION} DESTINATION /usr/share/polkit-1/actions)
 
 # Test--------deepin-devicemanager
 add_subdirectory(./tests)

@@ -427,19 +427,11 @@ bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
     QString info = "";
     QProcess process;
 
-    // 判断dpkg是否能查询
-    process.start("sh", QStringList() << "-c" << QString("dpkg -S %1").arg(driver));
-    process.waitForFinished(-1);
-    info = process.readAllStandardOutput();
-    bool dpkg = info.isEmpty() || info.startsWith("dpkg-query");
-
     // 判断lsmod是否能查询
-    process.start("sh", QStringList() << "-c" << QString("lsmod | grep %1").arg(driver));
+    process.start("sh", QStringList() << "-c" << QString("modinfo %1 | grep 'filename:'").arg(driver));
     process.waitForFinished(-1);
     info = process.readAllStandardOutput();
-    bool lsmod = info.isEmpty();
-
-    return dpkg && lsmod;
+    return info.isEmpty();
 }
 
 void DeviceBaseInfo::setCanEnale(bool can)
