@@ -290,7 +290,7 @@ bool DriverManager::isDebValid(const QString &filePath)
  * @param moduleName 模块名称 like hid or hid.ko
  * @return true: 成功 false: 失败
  */
-bool DriverManager::unInstallModule(const QString &moduleName ,QString msg)
+bool DriverManager::unInstallModule(const QString &moduleName ,QString& msg)
 {
     bool bsuccess = true;
     sigProgressDetail(40, "");

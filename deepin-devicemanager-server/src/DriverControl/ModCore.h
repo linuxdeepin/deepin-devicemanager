@@ -72,11 +72,11 @@ public:
     //获取依赖当前模块在使用的模块
     QStringList checkModuleInUsed(const QString &modName);
     //强制移除驱动模块 等效于rmmod -f
-    bool rmModForce(const QString &modName, QString errMsg);
+    bool rmModForce(const QString &modName, QString& errMsg);
     //直接通过ko文件的绝对路径安装
-    ErrorCode koInstall(const QString &path, QString errMsg, unsigned int flags = 0);
+    ErrorCode koInstall(const QString &path, QString& errMsg, unsigned int flags = 0);
     //ko安装
-    ErrorCode modInstall(const QString &modName, QString errMsg, unsigned int flags = 0);
+    ErrorCode modInstall(const QString &modName, QString& errMsg, unsigned int flags = 0);
 
     //通过模块名获取驱动所在路径
     QString  modGetPath(const QString &modName);

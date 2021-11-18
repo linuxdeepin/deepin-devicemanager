@@ -96,7 +96,7 @@ QStringList ModCore::checkModuleInUsed(const QString &modName)
  * @param modName 模块名sample: hid or hid.ko
  * @return 删除结果 true:成功 false: 失败
  */
-bool ModCore::rmModForce(const QString &modName, QString errMsg)
+bool ModCore::rmModForce(const QString &modName, QString& errMsg)
 {
     bool bsuccess = true;
     struct kmod_ctx *ctx = nullptr;
@@ -116,22 +116,26 @@ bool ModCore::rmModForce(const QString &modName, QString errMsg)
             qInfo() << __func__ << "modulename=" << modName << "modNew failed errcode=" << err;
             errMsg = QString("new module failed, errcode : %1").arg(err);
         } else {
-            err = kmod_module_remove_module(mod, KMOD_REMOVE_FORCE);
+            err = kmod_module_remove_module(mod, KMOD_REMOVE_NOWAIT);
             if (err < 0) {
-                QString errmsg;
+                QString errm;
                 switch (err) {
                 case -ENODEV:
-                    errmsg = QString("could not remove module %1: No such device\n").arg(modName);
+                    errm = QString("No such device\n");
                     break;
                 case -EROFS:
-                    errmsg = QString("could not remove module %1: Read-only file system\n").arg(modName);
+                    errm = QString("Read-only file system\n");
+                    break;
+                case -EAGAIN:
+                    errm = QString("This module is dependent by other modules\n");
                     break;
                 default:
-                    errmsg = QString("could not remove module %1: %1\n").arg(modName).arg(err);
+                    errm = QString("could not remove module %1: %2\n").arg(modName).arg(err);
                     break;
                 }
-                errMsg = errmsg;
+                errMsg = errm;
                 bsuccess = false;
+                qInfo() << "errMsg : " << errMsg;
                 qInfo() << __func__ << QString("could not remove module %1: %1\n").arg(modName).arg(err);
             }
 
@@ -148,7 +152,7 @@ bool ModCore::rmModForce(const QString &modName, QString errMsg)
  * @param flags 安装属性，属性值参照kmod_probe解释
  * @return 反回错误类型枚举值
  */
-ModCore::ErrorCode ModCore::modInstall(const QString &modName, QString errMsg, unsigned int flags)
+ModCore::ErrorCode ModCore::modInstall(const QString &modName, QString& errMsg, unsigned int flags)
 {
     ErrorCode errcode = Success;
     struct kmod_ctx *ctx = nullptr;
@@ -216,7 +220,7 @@ ModCore::ErrorCode ModCore::modInstall(const QString &modName, QString errMsg, u
     return  errcode;
 }
 
-ModCore::ErrorCode ModCore::koInstall(const QString &path, QString errMsg, unsigned int flags)
+ModCore::ErrorCode ModCore::koInstall(const QString &path, QString& errMsg, unsigned int flags)
 {
     ErrorCode errcode = Success;
     struct kmod_ctx *ctx = nullptr;
