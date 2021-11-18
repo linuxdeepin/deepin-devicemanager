@@ -57,7 +57,7 @@
 
 #define RETURN_VALUE(flag) \
 {   \
-    sigFinished(flag);\
+    sigFinished(flag, errmsg);\
     return flag; \
 }
 
@@ -86,15 +86,15 @@ void DriverManager::initConnections()
         } else {
             this->sigProgressDetail(m_installprocess, errmsg);
         }
-        sigFinished(bsuccess);
+        sigFinished(bsuccess, errmsg);
     });
     connect(mp_debinstaller, &DebInstaller::progressChanged, [&](int iprocess) {
         m_installprocess = 20 + static_cast<int>(iprocess * 0.8);
-        sigProgressDetail(m_installprocess, "");
+        sigProgressDetail(m_installprocess, errmsg);
     });
     connect(mp_debinstaller, &DebInstaller::errorOccurred, [&](QString errmsg) {
         qInfo() << "signal_installFailedReason:" << errmsg;
-        sigFinished(false);
+        sigFinished(false, errmsg);
         this->errmsg = errmsg;
     });
     connect(this, &DriverManager::sigDebInstall, mp_debinstaller, &DebInstaller::installPackage);
@@ -120,15 +120,15 @@ bool DriverManager::unInstallDriver(const QString &modulename)
             modulePackageName.isEmpty() ||
             modulePackageName.contains(kernelRelease)) {
         sigProgressDetail(20, "");
-        bsuccess = unInstallModule(modulename);
+        bsuccess = unInstallModule(modulename, errmsg);
         if (bsuccess) {
             sigProgressDetail(90, "");
         }
-        sigFinished(bsuccess);
+        sigFinished(bsuccess, errmsg);
 
     } else {
         sigProgressDetail(15, "");
-        mp_modcore->rmModForce(modulename);
+        mp_modcore->rmModForce(modulename, errmsg);
         sigProgressDetail(20, "");
         emit sigDebUnstall(modulePackageName);
     }
@@ -146,7 +146,7 @@ bool DriverManager::installDriver(const QString &filepath)
     sigProgressDetail(1, "start");
     if (!QFile::exists(filepath)) {
         sigProgressDetail(5, "file not exist");
-        sigFinished(false);
+        sigFinished(false, errmsg);
         return  false;
     }
     //模块已被加载
@@ -191,33 +191,33 @@ bool DriverManager::installDriver(const QString &filepath)
                 QString modname = mp_modcore->modGetName(installpath);
                 //处理黑名单
                 mp_modcore->rmFromBlackList(modname);
-                ModCore::ErrorCode errcode = mp_modcore->modInstall(modname);
+                ModCore::ErrorCode errcode = mp_modcore->modInstall(modname, errmsg);
                 sigProgressDetail(60, "");
                 if (ModCore::Success == errcode) {
                     sigProgressDetail(70, "");
                     //如果非内建模块设置开机自启动
                     if (!mp_modcore->modIsBuildIn(modname) && !mp_modcore->setModLoadedOnBoot(modname)) {
-                        sigFinished(false);
+                        sigFinished(false, errmsg);
                         return  false;
                     }
                     sigProgressDetail(90, "");
-                    sigFinished(true);
+                    sigFinished(true, "");
                 } else {
                     // 如果通过mod方式安装失败，则尝试直接通过ko文件的绝对路径安装
-                    errcode = mp_modcore->koInstall(filepath);
+                    errcode = mp_modcore->koInstall(filepath, errmsg);
                     if(ModCore::Success == errcode){
                         sigProgressDetail(90, "");
-                        sigFinished(true);
+                        sigFinished(true, "");
                         return true;
                     }
 
                     //失败将文件移除,只删文件不删路径
                     QFile::remove(installpath);
-                    sigFinished(false);
+                    sigFinished(false, errmsg);
                     return  false;
                 }
             } else {
-                sigFinished(false);
+                sigFinished(false, errmsg);
                 return  false;
             }
         }
@@ -290,11 +290,11 @@ bool DriverManager::isDebValid(const QString &filePath)
  * @param moduleName 模块名称 like hid or hid.ko
  * @return true: 成功 false: 失败
  */
-bool DriverManager::unInstallModule(const QString &moduleName)
+bool DriverManager::unInstallModule(const QString &moduleName ,QString msg)
 {
     bool bsuccess = true;
     sigProgressDetail(40, "");
-    if (!mp_modcore->rmModForce(moduleName)) {
+    if (!mp_modcore->rmModForce(moduleName, msg)) {
         bsuccess = false;
     } else {
         sigProgressDetail(60, "");

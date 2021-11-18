@@ -84,10 +84,14 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
     //strDesc
     {
         DLabel *label = new DLabel(strDesc);
+        label->setFixedWidth(293);
         label->setMinimumHeight(20);
         label->setAlignment(Qt::AlignCenter);
-        label->setWordWrap(true);
-        DFontSizeManager::instance()->bind(label, DFontSizeManager::T7, QFont::Medium);
+//        label->setWordWrap(true);
+        QFont font;
+        QFontMetrics elideFont(font);
+        label->setText(elideFont.elidedText(strDesc, Qt::ElideRight, label->width()));
+        label->setToolTip(strDesc);
 
         //透明度50
         palrtteTransparency(label, -30);
@@ -96,7 +100,7 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
             palrtteTransparency(label, -30);
         });
 
-        vlayout->addWidget(label);
+        vlayout->addWidget(label, 0, Qt::AlignCenter);
     }
     vlayout->addSpacing(10);
     vlayout->addStretch();

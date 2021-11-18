@@ -114,8 +114,13 @@ void DebInstaller::doOperate(const QString &package, bool binstall)
     });
     connect(m_pTrans, &QApt::Transaction::progressChanged, this, &DebInstaller::progressChanged);
     connect(m_pTrans, &QApt::Transaction::errorOccurred, this, [ = ](QApt::ErrorCode error) {
-        qInfo() << "QApt::ErrorCode" << error;
-        emit this->errorOccurred(m_pTrans->errorDetails());
+        qInfo() << "QApt::ErrorCode" << error << m_pTrans->errorString();
+        QString errMsg;
+        if(m_pTrans->errorDetails().isEmpty())
+            errMsg = QString("An error occurred while applying changes, such as broken dependencies");
+        else
+            errMsg = m_pTrans->errorDetails();
+        emit this->errorOccurred(errMsg);
     });
 
     m_pTrans->run();

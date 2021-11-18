@@ -49,11 +49,11 @@ public:
 
 private:
     void initConnections();
-    bool unInstallModule(const QString &moduleName);
+    bool unInstallModule(const QString &moduleName, QString msg);
 
 signals:
     void sigProgressDetail(int progress, const QString &strDeatils);
-    void sigFinished(bool bsuccess);
+    void sigFinished(bool bsuccess, QString msg);
     void sigDebInstall(const QString &package);
     void sigDebUnstall(const QString &package);
 

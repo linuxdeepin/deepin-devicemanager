@@ -153,15 +153,16 @@ void PageDriverControl::slotProcessChange(qint32 value, QString detail)
     mp_WaitDialog->setValue(value);
 }
 
-void PageDriverControl::slotProcessEnd(bool sucess)
+void PageDriverControl::slotProcessEnd(bool sucess, QString errMsg)
 {
+    qInfo() << errMsg;
     QString successStr = m_Install ? tr("Update successful") : tr("Uninstallation successful");
     QString failedStr = m_Install ? tr("Update failed") : tr("Uninstallation failed");
     QString status = sucess ? successStr : failedStr;
     QString iconPath = sucess ? "success" : "fail";
     QIcon icon(QIcon::fromTheme(iconPath));
     QPixmap pic = icon.pixmap(80, 80);
-    DriverIconWidget *widget = new DriverIconWidget(pic, status, "", this);
+    DriverIconWidget *widget = new DriverIconWidget(pic, status, errMsg, this);
     mp_stackWidget->addWidget(widget);
     this->addButton(tr("OK", "button"), true);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotClose);

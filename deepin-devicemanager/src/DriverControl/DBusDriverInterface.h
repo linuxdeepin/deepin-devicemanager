@@ -89,7 +89,7 @@ public:
 
 signals:
     void processChange(qint32 value, QString details);
-    void processEnd(bool sucess);
+    void processEnd(bool sucess, QString msg);
 
 protected:
     explicit DBusDriverInterface(QObject* parent = nullptr);
@@ -107,7 +107,7 @@ private slots:
      * @brief slotProcessEnd 接收后台结束信号
      * @param success
      */
-    void slotProcessEnd(bool success);
+    void slotProcessEnd(bool success, QString msg);
 
     /**
      * @brief slotCallFinished 更新结束结束的回调

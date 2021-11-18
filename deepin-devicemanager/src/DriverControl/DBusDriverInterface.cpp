@@ -79,13 +79,13 @@ void DBusDriverInterface::slotProcessChange(qint32 value,QString detail)
     emit processChange(value,detail);
 }
 
-void DBusDriverInterface::slotProcessEnd(bool success)
+void DBusDriverInterface::slotProcessEnd(bool success, QString msg)
 {
     if(success){
         emit processChange(100,"");
         usleep(500000);
     }
-    emit processEnd(success);
+    emit processEnd(success, msg);
 }
 
 void DBusDriverInterface::slotCallFinished(QDBusPendingCallWatcher* watcher)
@@ -108,6 +108,6 @@ void DBusDriverInterface::init()
 
     if(mp_Iface->isValid()){
         connect(mp_Iface, SIGNAL(sigProgressDetail(qint32, QString)), this, SLOT(slotProcessChange(qint32, QString)));
-        connect(mp_Iface, SIGNAL(sigFinished(bool)), this, SLOT(slotProcessEnd(bool)));
+        connect(mp_Iface, SIGNAL(sigFinished(bool, QString)), this, SLOT(slotProcessEnd(bool, QString)));
     }
 }

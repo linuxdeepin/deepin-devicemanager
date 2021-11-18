@@ -96,7 +96,7 @@ QStringList ModCore::checkModuleInUsed(const QString &modName)
  * @param modName 模块名sample: hid or hid.ko
  * @return 删除结果 true:成功 false: 失败
  */
-bool ModCore::rmModForce(const QString &modName)
+bool ModCore::rmModForce(const QString &modName, QString errMsg)
 {
     bool bsuccess = true;
     struct kmod_ctx *ctx = nullptr;
@@ -114,9 +114,23 @@ bool ModCore::rmModForce(const QString &modName)
         if (err < 0) {
             bsuccess = false;
             qInfo() << __func__ << "modulename=" << modName << "modNew failed errcode=" << err;
+            errMsg = QString("new module failed, errcode : %1").arg(err);
         } else {
             err = kmod_module_remove_module(mod, KMOD_REMOVE_FORCE);
             if (err < 0) {
+                QString errmsg;
+                switch (err) {
+                case -ENODEV:
+                    errmsg = QString("could not remove module %1: No such device\n").arg(modName);
+                    break;
+                case -EROFS:
+                    errmsg = QString("could not remove module %1: Read-only file system\n").arg(modName);
+                    break;
+                default:
+                    errmsg = QString("could not remove module %1: %1\n").arg(modName).arg(err);
+                    break;
+                }
+                errMsg = errmsg;
                 bsuccess = false;
                 qInfo() << __func__ << QString("could not remove module %1: %1\n").arg(modName).arg(err);
             }
@@ -134,7 +148,7 @@ bool ModCore::rmModForce(const QString &modName)
  * @param flags 安装属性，属性值参照kmod_probe解释
  * @return 反回错误类型枚举值
  */
-ModCore::ErrorCode ModCore::modInstall(const QString &modName, unsigned int flags)
+ModCore::ErrorCode ModCore::modInstall(const QString &modName, QString errMsg, unsigned int flags)
 {
     ErrorCode errcode = Success;
     struct kmod_ctx *ctx = nullptr;
@@ -168,11 +182,24 @@ ModCore::ErrorCode ModCore::modInstall(const QString &modName, unsigned int flag
                                          " parameter (see dmesg)").arg(kmod_module_get_name(mod));
                         errcode = ModExistError;
                         break;
+                    case -ENODEV:
+                        errmsg = QString("could not insert %1: No such device").arg(kmod_module_get_name(mod));
+                        errcode = ModExistError;
+                        break;
+                    case -EROFS:
+                        errmsg = QString("could not insert %1: Read-only file system").arg(kmod_module_get_name(mod));
+                        errcode = ModExistError;
+                        break;
+                    case -EBADF:
+                        errmsg = QString("could not insert %1: Bad file number").arg(kmod_module_get_name(mod));
+                        errcode = ModExistError;
+                        break;
                     default:
                         errmsg = QString("could not insert %1,errno=%2").arg(kmod_module_get_name(mod)).arg(err);
                         errcode = ModExistError;
                         break;
                     }
+                    errMsg = errmsg;
                     qInfo() << __func__ << errmsg;
                 }
                 kmod_module_unref(mod);
@@ -189,7 +216,7 @@ ModCore::ErrorCode ModCore::modInstall(const QString &modName, unsigned int flag
     return  errcode;
 }
 
-ModCore::ErrorCode ModCore::koInstall(const QString &path, unsigned int flags)
+ModCore::ErrorCode ModCore::koInstall(const QString &path, QString errMsg, unsigned int flags)
 {
     ErrorCode errcode = Success;
     struct kmod_ctx *ctx = nullptr;
@@ -219,11 +246,24 @@ ModCore::ErrorCode ModCore::koInstall(const QString &path, unsigned int flags)
                                      " parameter (see dmesg)").arg(kmod_module_get_name(mod));
                     errcode = ModExistError;
                     break;
+                case -ENODEV:
+                    errmsg = QString("could not insert %1: No such device").arg(kmod_module_get_name(mod));
+                    errcode = ModExistError;
+                    break;
+                case -EROFS:
+                    errmsg = QString("could not insert %1: Read-only file system").arg(kmod_module_get_name(mod));
+                    errcode = ModExistError;
+                    break;
+                case -EBADF:
+                    errmsg = QString("could not insert %1: Bad file number").arg(kmod_module_get_name(mod));
+                    errcode = ModExistError;
+                    break;
                 default:
                     errmsg = QString("could not insert %1,errno=%2").arg(kmod_module_get_name(mod)).arg(err);
                     errcode = ModExistError;
                     break;
                 }
+                errMsg = errmsg;
                 qInfo() << __func__ << errmsg;
             }
         }

@@ -90,7 +90,7 @@ private slots:
      * @brief slotProcessEnd 更新处理结束的信号
      * @param sucess 更新是否成功
      */
-    void slotProcessEnd(bool sucess);
+    void slotProcessEnd(bool sucess, QString errMsg);
 
     /**
      * @brief slotClose
