@@ -189,6 +189,50 @@ ModCore::ErrorCode ModCore::modInstall(const QString &modName, unsigned int flag
     return  errcode;
 }
 
+ModCore::ErrorCode ModCore::koInstall(const QString &path, unsigned int flags)
+{
+    ErrorCode errcode = Success;
+    struct kmod_ctx *ctx = nullptr;
+    const char **null_config = nullptr;
+
+    ctx = kmod_new(nullptr, null_config);
+    if (!ctx) {
+        errcode = KmodNewError;
+        qInfo() << __func__ << "kmod_new() failed!";
+    } else {
+        struct kmod_module *mod = nullptr;
+        int err = kmod_module_new_from_path(ctx,path.toStdString().c_str(),&mod);
+        if(err >= 0){
+            err = kmod_module_probe_insert_module(mod, flags, nullptr, nullptr, nullptr, nullptr);
+            if (err >= 0) {
+                /* ignore flag return values such as a mod being blacklisted */
+                err = 0;
+            } else {
+                QString errmsg;
+                switch (err) {
+                case -EEXIST:
+                    errmsg = QString("could not insert %1: Module already in kernel").arg(kmod_module_get_name(mod));
+                    errcode = ModExistError;
+                    break;
+                case -ENOENT:
+                    errmsg = QString("could not insert %1: Unknown symbol in module or unknown"
+                                     " parameter (see dmesg)").arg(kmod_module_get_name(mod));
+                    errcode = ModExistError;
+                    break;
+                default:
+                    errmsg = QString("could not insert %1,errno=%2").arg(kmod_module_get_name(mod)).arg(err);
+                    errcode = ModExistError;
+                    break;
+                }
+                qInfo() << __func__ << errmsg;
+            }
+        }
+        kmod_module_unref(mod);
+    }
+    kmod_unref(ctx);
+    return  errcode;
+}
+
 /**
  * @brief ModCore::modGetPath 通过模块名获取驱动所在路径
  * @param modName 模块名sample: hid or hid.ko

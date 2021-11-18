@@ -203,6 +203,14 @@ bool DriverManager::installDriver(const QString &filepath)
                     sigProgressDetail(90, "");
                     sigFinished(true);
                 } else {
+                    // 如果通过mod方式安装失败，则尝试直接通过ko文件的绝对路径安装
+                    errcode = mp_modcore->koInstall(filepath);
+                    if(ModCore::Success == errcode){
+                        sigProgressDetail(90, "");
+                        sigFinished(true);
+                        return true;
+                    }
+
                     //失败将文件移除,只删文件不删路径
                     QFile::remove(installpath);
                     sigFinished(false);

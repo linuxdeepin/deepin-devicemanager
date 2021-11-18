@@ -75,6 +75,8 @@ public:
     bool rmModForce(const QString &modName);
     //ko安装
     ErrorCode modInstall(const QString &modName, unsigned int flags = 0);
+    //直接通过ko文件的绝对路径安装
+    ErrorCode koInstall(const QString &path, unsigned int flags = 0);
     //通过模块名获取驱动所在路径
     QString  modGetPath(const QString &modName);
     //获取指定驱动名称
