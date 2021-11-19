@@ -130,7 +130,7 @@ bool Utils::isDriverPackage(const QString &filepath)
         tmpDir.cd(tmpPath);
         QString strExtract = tmpDir.absolutePath();
         QProcess process;
-        process.start(QString("dpkg-deb -x %1 %2").arg(filepath).arg(strExtract));
+        process.start("sh", QStringList() << "-c" << QString("dpkg-deb -x '%1' %2").arg(filepath).arg(strExtract));
         if (process.waitForFinished()) {
             //查找关键字 ko insmod modprobe和 路径 /lib/module
             process.start("sh", QStringList() << "-c" << QString("grep -irHE 'insmod|modprobe|/lib/module' %1  ||"
