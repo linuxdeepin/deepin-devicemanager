@@ -84,12 +84,12 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
     //strDesc
     {
         DLabel *label = new DLabel(strDesc);
-        label->setFixedWidth(293);
+        label->setFixedWidth(440);
         label->setMinimumHeight(20);
         label->setAlignment(Qt::AlignCenter);
-//        label->setWordWrap(true);
-        QFont font;
-        QFontMetrics elideFont(font);
+        DFontSizeManager::instance()->bind(label, DFontSizeManager::T7, QFont::Medium);
+
+        QFontMetrics elideFont(label->font());
         label->setText(elideFont.elidedText(strDesc, Qt::ElideRight, label->width()));
         label->setToolTip(strDesc);
 
