@@ -21,6 +21,7 @@ MonitorUsb::MonitorUsb()
     mon = udev_monitor_new_from_netlink(m_Udev, "udev");
     // 增加一个udev事件过滤器
     udev_monitor_filter_add_match_subsystem_devtype(mon, "usb", nullptr);
+    udev_monitor_filter_add_match_subsystem_devtype(mon, "bluetooth", nullptr);
     // 启动监控
     udev_monitor_enable_receiving(mon);
     // 获取该监控的文件描述符，fd就代表了这个监控
@@ -54,9 +55,15 @@ void MonitorUsb::monitor()
         if (!dev)
             continue;
 
+        // 监测蓝牙设备
+        if (0 == strcmp(udev_device_get_devtype(dev), "link")) {
+            emit usbChanged();
+            continue;
+        }
+
         // 获取事件并判断是否是插拔
         unsigned long long curNum = udev_device_get_devnum(dev);
-        if (curNum == 0) {
+        if (0 == curNum) {
             udev_device_unref(dev);
             continue;
         }

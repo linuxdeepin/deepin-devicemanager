@@ -171,7 +171,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 
 void DeviceCpu::setCurFreq(const QString &curFreq)
 {
-    if(!curFreq.isEmpty())
+    if (!curFreq.isEmpty())
         m_CurFrequency = curFreq;
 }
 
@@ -205,8 +205,8 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Max Speed", m_Frequency, false);
     // 飞腾架构由于无法通过lscpu获取当前频率，因此需要通过dmidecode获取
-    setAttribute(mapInfo, "Current Speed", m_CurFrequency,false);
-    setAttribute(mapInfo, "Family", m_Familly,false);
+    setAttribute(mapInfo, "Current Speed", m_CurFrequency, false);
+    setAttribute(mapInfo, "Family", m_Familly, false);
 
     // 获取其他cpu信息
     getOtherMapInfo(mapInfo);
@@ -327,6 +327,7 @@ void DeviceCpu::getTrNumber()
     m_trNumber.insert(124, QObject::tr("One hundred and Twenty-four"));
     m_trNumber.insert(126, QObject::tr("One hundred and Twenty-six"));
     m_trNumber.insert(128, QObject::tr("One hundred and Twenty-eight"));
+    m_trNumber.insert(192, QObject::tr("One hundred and Ninety-two"));
     m_trNumber.insert(256, QObject::tr("Two hundred and fifty-six"));
 }
 

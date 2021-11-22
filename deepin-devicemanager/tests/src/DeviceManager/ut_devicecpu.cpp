@@ -356,7 +356,7 @@ TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromDmidecode_002)
 TEST_F(UT_DeviceCpu, UT_DeviceCpu_getTrNumber)
 {
     m_deviceCpu->getTrNumber();
-    EXPECT_EQ(66, m_deviceCpu->m_trNumber.size());
+    EXPECT_EQ(67, m_deviceCpu->m_trNumber.size());
 }
 
 TEST_F(UT_DeviceCpu, UT_DeviceCpu_setCurFreq)
