@@ -20,7 +20,6 @@ DeviceAudio::DeviceAudio()
     , m_Chip("")
     , m_Driver("")
     , m_DriverModules("")
-    , m_UniqueKey("")
 {
     // 初始化可显示属性
     initFilterKey();
@@ -58,14 +57,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     }
 
     //2. 获取设备的唯一标识
-    /*
-     * 在这里将设备的总线信息作为一个设备的唯一标识
-     * 我们会通过总线信息判断从两个不同的命令获取的设备信息是不是同一个设备的信息
-     * 如果从两个命令中获取的设备信息的总线信息一样，我们就认为是同一个设备
-     * 比如从hwinfo里面获取到的  SysFS BusID: 1-3:1.0   和
-     *    从lshw里面获取到的    bus info: usb@1:3       是同一个设备
-     */
-    m_UniqueKey = mapInfo["SysFS BusID"];
+    setHwinfoLshwKey(mapInfo);
 
     //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
@@ -74,11 +66,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     //1. 先判断传入的设备信息是否是该设备信息，根据总线信息来判断
-    QStringList words = mapInfo["bus info"].split("@");
-    if (words.size() != 2)
-        return false;
-
-    if (words[1] != m_UniqueKey)
+    if (!matchToLshw(mapInfo))
         return false;
 
     //2. 确定了是该设备信息，则获取设备的基本信息
@@ -99,7 +87,7 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
     // 获取设备的基本信息
     setAttribute(mapInfo, "bus info", m_BusInfo);
-    setAttribute(mapInfo, "", m_Irq);
+    setAttribute(mapInfo, "irq", m_Irq);
     setAttribute(mapInfo, "", m_Memory);
     setAttribute(mapInfo, "width", m_Width);
     setAttribute(mapInfo, "clock", m_Clock);

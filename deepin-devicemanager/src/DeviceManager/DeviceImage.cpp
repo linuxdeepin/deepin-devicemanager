@@ -21,7 +21,7 @@ DeviceImage::DeviceImage()
 
 void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (m_KeyToLshw != mapInfo["bus info"])
+    if (!matchToLshw(mapInfo))
         return;
 
     setAttribute(mapInfo, "product", m_Name, false);
@@ -66,12 +66,7 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0
-    QStringList words = mapInfo["SysFS BusID"].split(":");
-    if (words.size() == 2) {
-        QStringList chs = words[0].split("-");
-        if (chs.size() == 2)
-            m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-    }
+    setHwinfoLshwKey(mapInfo);
 }
 
 const QString &DeviceImage::name()const
@@ -160,11 +155,4 @@ void DeviceImage::loadTableData()
     m_TableData.append(tName);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
-}
-
-void DeviceImage::setInfoFromInput()
-{
-    // 设置设备名称
-    const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
-    setAttribute(mapInfo, "Name", m_Name, true);
 }

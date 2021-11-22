@@ -29,14 +29,13 @@ DeviceInput::DeviceInput()
 
 bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
+    qInfo() << "hwinfo To lshw : " << m_HwinfoToLshw;
+    qInfo() << "mapInfo[bus info]" << mapInfo["bus info"];
     // 根据bus info属性值与m_KeyToLshw对比,判断是否为同一设备
-    if (m_KeyToLshw != mapInfo["bus info"]) {
-        QString key = mapInfo["bus info"];
-        key.replace("a", "10");
-
-        if (m_KeyToLshw != key)
+    if (!matchToLshw(mapInfo)) {
             return false;
     }
+    qInfo() << "OK ************************ ";
 
     // 设置基础设备信息
     setAttribute(mapInfo, "vendor", m_Vendor);
@@ -98,12 +97,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0
-    QStringList words = mapInfo["SysFS BusID"].split(":");
-    if (words.size() == 2) {
-        QStringList chs = words[0].split("-");
-        if (chs.size() == 2)
-            m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-    }
+    setHwinfoLshwKey(mapInfo);
 
     // 由bluetoothctl paired-devices设置设备接口
     setInfoFromBluetoothctl();

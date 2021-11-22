@@ -39,6 +39,9 @@ DeviceNetwork::DeviceNetwork()
 
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
+    if(!matchToLshw(mapInfo)){
+        return;
+    }
     // 设置由lshw获取的信息
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
@@ -90,6 +93,8 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     if(driverIsKernelIn(m_Driver)){
         m_CanUninstall = false;
     }
+
+    setHwinfoLshwKey(mapInfo);
 
     return true;
 }

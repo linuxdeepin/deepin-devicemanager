@@ -54,7 +54,7 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
 
     // 设置关联到lshw信息的key值,设备的唯一标志
-    parseKeyToLshw(mapInfo["SysFS BusID"]);
+    setHwinfoLshwKey(mapInfo);
 
     // 获取其他信息
     getOtherMapInfo(mapInfo);
@@ -64,7 +64,7 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // 根据 总线信息 与 设备信息中的唯一key值 判断是否是同一台设备
-    if (mapInfo["bus info"] != m_UniqueKey)
+    if (!matchToLshw(mapInfo))
         return false;
 
     // 获取基本信息
@@ -164,23 +164,6 @@ void DeviceBluetooth::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Version"), m_Version);
     addBaseDeviceInfo(tr("Model"), m_Model);
-}
-
-void DeviceBluetooth::parseKeyToLshw(const QString &info)
-{
-    // 解析映射到lshw的唯一值
-
-    //1-2:1.0
-    QStringList words = info.split(":");
-    if (words.size() != 2)
-        return;
-
-    QStringList chs = words[0].split("-");
-    if (chs.size() != 2)
-        return;
-
-    // usb@%1:%2
-    m_UniqueKey = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
 }
 
 void DeviceBluetooth::loadOtherDeviceInfo()

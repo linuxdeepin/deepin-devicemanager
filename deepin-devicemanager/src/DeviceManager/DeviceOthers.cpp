@@ -22,7 +22,7 @@ DeviceOthers::DeviceOthers()
 
 void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (m_BusInfo.isEmpty() || m_BusInfo != mapInfo["bus info"])
+    if (!matchToLshw(mapInfo))
         return;
 
     setAttribute(mapInfo, "product", m_Name, false);
@@ -56,12 +56,7 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0
-    QStringList words = mapInfo["SysFS BusID"].split(":");
-    if (words.size() == 2) {
-        QStringList chs = words[0].split("-");
-        if (chs.size() == 2)
-            m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-    }
+    setHwinfoLshwKey(mapInfo);
 }
 
 EnableDeviceStatus DeviceOthers::setEnable(bool e){
@@ -131,6 +126,7 @@ void DeviceOthers::loadBaseDeviceInfo()
 
 void DeviceOthers::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Serial Number"), m_SerialID);
     mapInfoToList();
 }
 

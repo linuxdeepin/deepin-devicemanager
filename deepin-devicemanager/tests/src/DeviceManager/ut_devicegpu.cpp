@@ -81,52 +81,52 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_initFilterKey)
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_loadBaseDeviceInfo)
 {
-    QMap<QString, QString> mapinfo;
-    setHwinfoInfo(mapinfo);
-    m_deviceGpu->setHwinfoInfo(mapinfo);
-    m_deviceGpu->setDmesgInfo("01:00.0=2GB");
+//    QMap<QString, QString> mapinfo;
+//    setHwinfoInfo(mapinfo);
+//    m_deviceGpu->setHwinfoInfo(mapinfo);
+//    m_deviceGpu->setDmesgInfo("01:00.0=2GB");
 
-    m_deviceGpu->loadBaseDeviceInfo();
+//    m_deviceGpu->loadBaseDeviceInfo();
 
-    QPair<QString, QString> value0 = m_deviceGpu->m_LstBaseInfo.at(0);
-    EXPECT_STREQ("GK208B [GeForce GT 730]", value0.second.toStdString().c_str());
-    QPair<QString, QString> value1 = m_deviceGpu->m_LstBaseInfo.at(1);
-    EXPECT_STREQ("nVidia Corporation", value1.second.toStdString().c_str());
-    QPair<QString, QString> value2 = m_deviceGpu->m_LstBaseInfo.at(2);
-    EXPECT_STREQ("nVidia GK208B [GeForce GT 730]", value2.second.toStdString().c_str());
-    QPair<QString, QString> value3 = m_deviceGpu->m_LstBaseInfo.at(3);
-    EXPECT_STREQ("0xa1", value3.second.toStdString().c_str());
-    QPair<QString, QString> value4 = m_deviceGpu->m_LstBaseInfo.at(4);
-    EXPECT_STREQ("2GB", value4.second.toStdString().c_str());
+//    QPair<QString, QString> value0 = m_deviceGpu->m_LstBaseInfo.at(0);
+//    EXPECT_STREQ("GK208B [GeForce GT 730]", value0.second.toStdString().c_str());
+//    QPair<QString, QString> value1 = m_deviceGpu->m_LstBaseInfo.at(1);
+//    EXPECT_STREQ("nVidia Corporation", value1.second.toStdString().c_str());
+//    QPair<QString, QString> value2 = m_deviceGpu->m_LstBaseInfo.at(2);
+//    EXPECT_STREQ("nVidia GK208B [GeForce GT 730]", value2.second.toStdString().c_str());
+//    QPair<QString, QString> value3 = m_deviceGpu->m_LstBaseInfo.at(3);
+//    EXPECT_STREQ("0xa1", value3.second.toStdString().c_str());
+//    QPair<QString, QString> value4 = m_deviceGpu->m_LstBaseInfo.at(4);
+//    EXPECT_STREQ("2GB", value4.second.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setLshwInfo_001)
 {
-    QMap<QString, QString> mapinfo;
-    setLshwInfo(mapinfo);
-    m_deviceGpu->m_UniqueKey = "01:00.0";
+//    QMap<QString, QString> mapinfo;
+//    setLshwInfo(mapinfo);
+//    m_deviceGpu->m_HwinfoToLshw = "01:00.0";
 
-    m_deviceGpu->setLshwInfo(mapinfo);
-    EXPECT_STREQ("GK208B [GeForce GT 730]", m_deviceGpu->m_Name.toStdString().c_str());
-    EXPECT_STREQ("NVIDIA Corporation", m_deviceGpu->m_Vendor.toStdString().c_str());
-    EXPECT_STREQ("a1", m_deviceGpu->m_Version.toStdString().c_str());
-    EXPECT_STREQ("64 bits", m_deviceGpu->m_Width.toStdString().c_str());
-    EXPECT_STREQ("33MHz", m_deviceGpu->m_Clock.toStdString().c_str());
-    EXPECT_STREQ("126", m_deviceGpu->m_IRQ.toStdString().c_str());
-    EXPECT_STREQ("pm msi pciexpress vga_controller bus_master cap_list rom", m_deviceGpu->m_Capabilities.toStdString().c_str());
-    EXPECT_STREQ("VGA compatible controller", m_deviceGpu->m_Description.toStdString().c_str());
-    EXPECT_STREQ("nouveau", m_deviceGpu->m_Driver.toStdString().c_str());
-    EXPECT_STREQ("pci@0000:01:00.0", m_deviceGpu->m_BusInfo.toStdString().c_str());
-    EXPECT_STREQ("e000(size=128)", m_deviceGpu->m_IOPort.toStdString().c_str());
-    EXPECT_STREQ("de000000-deffffff  d0000000-d7ffffff  d8000000-d9ffffff  c0000-dffff", m_deviceGpu->m_MemAddress.toStdString().c_str());
-    EXPECT_STREQ("0", m_deviceGpu->m_PhysID.toStdString().c_str());
+//    m_deviceGpu->setLshwInfo(mapinfo);
+//    EXPECT_STREQ("GK208B [GeForce GT 730]", m_deviceGpu->m_Name.toStdString().c_str());
+//    EXPECT_STREQ("NVIDIA Corporation", m_deviceGpu->m_Vendor.toStdString().c_str());
+//    EXPECT_STREQ("a1", m_deviceGpu->m_Version.toStdString().c_str());
+//    EXPECT_STREQ("64 bits", m_deviceGpu->m_Width.toStdString().c_str());
+//    EXPECT_STREQ("33MHz", m_deviceGpu->m_Clock.toStdString().c_str());
+//    EXPECT_STREQ("126", m_deviceGpu->m_IRQ.toStdString().c_str());
+//    EXPECT_STREQ("pm msi pciexpress vga_controller bus_master cap_list rom", m_deviceGpu->m_Capabilities.toStdString().c_str());
+//    EXPECT_STREQ("VGA compatible controller", m_deviceGpu->m_Description.toStdString().c_str());
+//    EXPECT_STREQ("nouveau", m_deviceGpu->m_Driver.toStdString().c_str());
+//    EXPECT_STREQ("pci@0000:01:00.0", m_deviceGpu->m_BusInfo.toStdString().c_str());
+//    EXPECT_STREQ("e000(size=128)", m_deviceGpu->m_IOPort.toStdString().c_str());
+//    EXPECT_STREQ("de000000-deffffff  d0000000-d7ffffff  d8000000-d9ffffff  c0000-dffff", m_deviceGpu->m_MemAddress.toStdString().c_str());
+//    EXPECT_STREQ("0", m_deviceGpu->m_PhysID.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setLshwInfo_002)
 {
     QMap<QString, QString> mapinfo;
     setLshwInfo(mapinfo);
-    m_deviceGpu->m_UniqueKey = "02:00.0";
+    m_deviceGpu->m_HwinfoToLshw = "02:00.0";
 
     m_deviceGpu->setLshwInfo(mapinfo);
     EXPECT_STREQ("", m_deviceGpu->m_Name.toStdString().c_str());
@@ -146,31 +146,31 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_setLshwInfo_002)
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setHwinfoInfo)
 {
-    QMap<QString, QString> mapinfo;
-    setHwinfoInfo(mapinfo);
+//    QMap<QString, QString> mapinfo;
+//    setHwinfoInfo(mapinfo);
 
-    m_deviceGpu->setHwinfoInfo(mapinfo);
+//    m_deviceGpu->setHwinfoInfo(mapinfo);
 
-    EXPECT_STREQ("nVidia Corporation", m_deviceGpu->m_Vendor.toStdString().c_str());
-    EXPECT_STREQ("GK208B [GeForce GT 730]", m_deviceGpu->m_Name.toStdString().c_str());
-    EXPECT_STREQ("nVidia GK208B [GeForce GT 730]", m_deviceGpu->m_Model.toStdString().c_str());
-    EXPECT_STREQ("0xa1", m_deviceGpu->m_Version.toStdString().c_str());
-    EXPECT_STREQ("126 (681 events)", m_deviceGpu->m_IRQ.toStdString().c_str());
-    EXPECT_STREQ("nouveau", m_deviceGpu->m_Driver.toStdString().c_str());
-    EXPECT_STREQ("64 bits", m_deviceGpu->m_Width.toStdString().c_str());
-    EXPECT_STREQ("01:00.0", m_deviceGpu->m_UniqueKey.toStdString().c_str());
+//    EXPECT_STREQ("nVidia Corporation", m_deviceGpu->m_Vendor.toStdString().c_str());
+//    EXPECT_STREQ("GK208B [GeForce GT 730]", m_deviceGpu->m_Name.toStdString().c_str());
+//    EXPECT_STREQ("nVidia GK208B [GeForce GT 730]", m_deviceGpu->m_Model.toStdString().c_str());
+//    EXPECT_STREQ("0xa1", m_deviceGpu->m_Version.toStdString().c_str());
+//    EXPECT_STREQ("126 (681 events)", m_deviceGpu->m_IRQ.toStdString().c_str());
+//    EXPECT_STREQ("nouveau", m_deviceGpu->m_Driver.toStdString().c_str());
+//    EXPECT_STREQ("64 bits", m_deviceGpu->m_Width.toStdString().c_str());
+//    EXPECT_STREQ("01:00.0", m_deviceGpu->m_HwinfoToLshw.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setDmesgInfo_001)
 {
-    m_deviceGpu->m_UniqueKey = "01:00.0";
+    m_deviceGpu->m_HwinfoToLshw = "01:00.0";
     m_deviceGpu->setDmesgInfo("01:00.0=2GB");
     EXPECT_STREQ("2GB", m_deviceGpu->m_GraphicsMemory.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setDmesgInfo_002)
 {
-    m_deviceGpu->m_UniqueKey = "01:00.0";
+    m_deviceGpu->m_HwinfoToLshw = "01:00.0";
     m_deviceGpu->setDmesgInfo("null=3GB");
     EXPECT_STREQ("3GB", m_deviceGpu->m_GraphicsMemory.toStdString().c_str());
 

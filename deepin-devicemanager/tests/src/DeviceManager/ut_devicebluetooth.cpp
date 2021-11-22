@@ -108,7 +108,7 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setInfoFromLshw_001)
 {
     QMap<QString, QString> mapInfo;
     ut_bluetooth_setlshwmap(mapInfo);
-    m_deviceBluetooth->m_UniqueKey = "usb@1:8";
+    m_deviceBluetooth->m_HwinfoToLshw = "usb@1:8";
 
     ASSERT_FALSE(m_deviceBluetooth->setInfoFromLshw(mapInfo));
 }
@@ -117,7 +117,7 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setInfoFromLshw_002)
 {
     QMap<QString, QString> mapInfo;
     ut_bluetooth_setlshwmap(mapInfo);
-    m_deviceBluetooth->m_UniqueKey = "usb@1:2";
+    m_deviceBluetooth->m_HwinfoToLshw = "usb@1:2";
 
     ASSERT_TRUE(m_deviceBluetooth->setInfoFromLshw(mapInfo));
     EXPECT_STREQ("vendor", m_deviceBluetooth->m_Vendor.toStdString().c_str());
@@ -211,24 +211,6 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadBaseDeviceInfo)
 {
     m_deviceBluetooth->loadBaseDeviceInfo();
     EXPECT_EQ(0, m_deviceBluetooth->m_LstBaseInfo.size());
-}
-
-TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_parseKeyToLshw_001)
-{
-    m_deviceBluetooth->parseKeyToLshw("1-2:1.0");
-    EXPECT_STREQ("usb@1:2", m_deviceBluetooth->m_UniqueKey.toStdString().c_str());
-}
-
-TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_parseKeyToLshw_002)
-{
-    m_deviceBluetooth->parseKeyToLshw("1-2.1.0");
-    EXPECT_STREQ("", m_deviceBluetooth->m_UniqueKey.toStdString().c_str());
-}
-
-TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_parseKeyToLshw_003)
-{
-    m_deviceBluetooth->parseKeyToLshw("1.2:1.0");
-    EXPECT_STREQ("", m_deviceBluetooth->m_UniqueKey.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadOtherDeviceInfo)

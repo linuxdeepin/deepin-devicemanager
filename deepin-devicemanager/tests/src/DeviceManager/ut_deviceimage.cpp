@@ -83,7 +83,7 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_setInfoFromLshw_002)
 {
     QMap<QString, QString> mapinfo;
     ut_image_setlshwmap(mapinfo);
-    m_deviceImage->m_KeyToLshw = "usb@1:9";
+    m_deviceImage->m_HwinfoToLshw = "usb@1:9";
 
     m_deviceImage->setInfoFromLshw(mapinfo);
 }
@@ -101,7 +101,7 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_setInfoFromHwinfo)
     EXPECT_STREQ("1-8:1.0", m_deviceImage->m_BusInfo.toStdString().c_str());
     EXPECT_STREQ("Driver Modules", m_deviceImage->m_Driver.toStdString().c_str());
     EXPECT_STREQ("Speed", m_deviceImage->m_Speed.toStdString().c_str());
-    EXPECT_STREQ("usb@1:8", m_deviceImage->m_KeyToLshw.toStdString().c_str());
+    EXPECT_STREQ("usb@1:8", m_deviceImage->m_HwinfoToLshw.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_name)

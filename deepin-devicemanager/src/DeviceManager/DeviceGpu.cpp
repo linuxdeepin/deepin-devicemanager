@@ -26,7 +26,6 @@ DeviceGpu::DeviceGpu()
     , m_CurrentResolution("")
     , m_MinimumResolution("")
     , m_MaximumResolution("")
-    , m_UniqueKey("")
 {
     // 初始化可显示属性
     initFilterKey();
@@ -66,10 +65,7 @@ void DeviceGpu::loadBaseDeviceInfo()
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
 {
     // 判断是否是同一个gpu
-    QRegExp re(":[0-9a-z]{2}:[0-9a-z]{2}");
-    int index = mapInfo["bus info"].indexOf(re);
-    QString uniqueKey = mapInfo["bus info"].mid(index + 1);
-    if (!uniqueKey.contains(m_UniqueKey))
+    if (!matchToLshw(mapInfo))
         return;
 
     // 设置属性
@@ -117,10 +113,8 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         m_UniqueID = reUniqueId.cap(1);
     }
 
-    // 获取 m_UniqueKey
-    QRegExp re(":[0-9a-z]{2}:[0-9a-z]{2}");
-    int index = mapInfo["SysFS BusID"].indexOf(re);
-    m_UniqueKey = mapInfo["SysFS BusID"].mid(index + 1);
+    // 获取 匹配到lshw的Key
+    setHwinfoLshwKey(mapInfo);
 
     getOtherMapInfo(mapInfo);
     return true;
@@ -159,9 +153,9 @@ void DeviceGpu::setDmesgInfo(const QString &info)
     }
 
     // 设置显存大小
-    if (info.contains(m_UniqueKey)) {
+    if (info.contains(m_HwinfoToLshw)) {
         QString size = info;
-        m_GraphicsMemory = size.replace(m_UniqueKey + "=", "");
+        m_GraphicsMemory = size.replace(m_HwinfoToLshw + "=", "");
     }
 }
 
