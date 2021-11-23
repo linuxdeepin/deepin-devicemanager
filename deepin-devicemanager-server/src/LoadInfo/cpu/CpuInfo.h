@@ -131,6 +131,13 @@ private:
     int readCoreID(const QString &path);
 
     /**
+     * @brief readThreadSiblingsListPath
+     * @param path
+     * @return
+     */
+    int readThreadSiblingsListPath(const QString &path);
+
+    /**
      * @brief readCpuCache : /sys/devices/system/cpu/cpu0/cache
      * @param path : /sys/devices/system/cpu/cpu0
      * @param lcpu
