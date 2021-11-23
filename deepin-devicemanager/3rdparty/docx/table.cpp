@@ -35,7 +35,7 @@ void Table::loadExistRowElement()
                 continue;
             Row *row = new Row(rowEle, this);
             m_rows.append(row);
-            qDebug() << m_rows.count();
+            qInfo() << m_rows.count();
         }
     }
 }
@@ -193,7 +193,7 @@ void Row::loadExistElement()
             }
 
     }
-    //qDebug() << "Current row's cell count" << m_cells.count();
+    //qInfo() << "Current row's cell count" << m_cells.count();
 }
 
 void Row::addTc()

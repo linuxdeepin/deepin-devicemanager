@@ -27,7 +27,7 @@ public:
 
     Paragraph *addHeading(const QString &text = QString(), int level = 1);
 
-    Table *addTable(int rows, int cols, const QString &style = QStringLiteral("TableGrid"));
+    Table *addTable(int rows, int cols);
 
     InlineShape *addPicture(const QString &imgPath, const Length &width = Length(), const Length &height = Length());
     InlineShape *addPicture(const QImage &img, const Length &width = Length(), const Length &height = Length());

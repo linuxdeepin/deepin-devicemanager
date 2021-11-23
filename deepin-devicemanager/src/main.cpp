@@ -20,58 +20,72 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mainwindow.h"
+#include "Page/MainWindow.h"
+
 #include <DApplication>
 #include <DWidgetUtil>
 #include <DLog>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "DTitlebar"
 #include "DApplicationSettings"
-#include "deviceinfoparser.h"
 #include "environments.h"
+#include "DebugTimeManager.h"
+#include "application.h"
 
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-
-    DApplication::loadDXcbPlugin();
-    DApplication app(argc, argv);
-
-    app.loadTranslator();
-    app.setOrganizationName("deepin");
-    app.setApplicationName("deepin-devicemanager");
-    app.setApplicationDisplayName(QObject::tr("Device Manager"));
-
-    app.setApplicationVersion(VERSION);
-
-    app.setProductName(QObject::tr("Device Manager"));
-
-    app.setApplicationDescription(QObject::tr("Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
-
-    const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
-    app.setApplicationAcknowledgementPage(acknowledgementLink);
-
-    DApplicationSettings settinAgs;
-
-    Dtk::Core::DLogManager::registerConsoleAppender();
-    Dtk::Core::DLogManager::registerFileAppender();
-
-    MainWindow w(nullptr);
-    w.titlebar()->setTitle("");
-
-    QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
-
-    if (appIcon.isNull() == false) {
-        app.setProductIcon(appIcon);
-        app.setWindowIcon(appIcon);
-        w.titlebar()->setIcon(appIcon);
+    if (!QString(qgetenv("XDG_CURRENT_DESKTOP")).toLower().startsWith("deepin")) {
+        setenv("XDG_CURRENT_DESKTOP", "Deepin", 1);
     }
 
-    Dtk::Widget::moveToCenter(&w);
+    PERF_PRINT_BEGIN("POINT-01", "");
 
-    w.show();
-    return app.exec();
+    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    Application app(argc, argv);
+    app.setAutoActivateWindows(true);
+
+
+    // 保证进程唯一性
+    qputenv("DTK_USE_SEMAPHORE_SINGLEINSTANCE", "1");
+    if (DGuiApplicationHelper::instance()->setSingleInstance("deepin-devicemanager",
+                                                             DGuiApplicationHelper::UserScope)) {
+        app.loadTranslator();
+        app.setOrganizationName("deepin");
+        app.setApplicationName("deepin-devicemanager");
+        app.setApplicationDisplayName(QObject::tr("Device Manager"));
+        app.setApplicationVersion(VERSION);
+        app.setProductName(QObject::tr("Device Manager"));
+        app.setApplicationDescription(QObject::tr("Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
+        const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
+        app.setApplicationAcknowledgementPage(acknowledgementLink);
+        DApplicationSettings settinAgs;
+        Dtk::Core::DLogManager::registerConsoleAppender();
+        Dtk::Core::DLogManager::registerFileAppender();
+
+        MainWindow w(nullptr);
+        gApp->setMainWindow(&w);
+        QObject::connect(&app,
+                         &DApplication::newInstanceStarted,
+                         &w,
+                         &MainWindow::activateWindow);
+        w.titlebar()->setTitle("");
+
+        QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
+
+        if (false == appIcon.isNull()) {
+            app.setProductIcon(appIcon);
+            app.setWindowIcon(appIcon);
+            w.titlebar()->setIcon(appIcon);
+        }
+
+        Dtk::Widget::moveToCenter(&w);
+
+        w.show();
+        return app.exec();
+    }
+    return 0;
 }

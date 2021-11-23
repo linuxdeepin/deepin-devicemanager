@@ -1,79 +1,107 @@
+// 项目自身文件
 #include "DeviceBios.h"
+
+// Qt库文件
 #include <QDebug>
 
 DeviceBios::DeviceBios()
-    : DeviceBaseInfo(), m_Name(""), m_ProductName(""), m_Vendor(""), m_Version(""), m_ChipsetFamily(""), m_IsBoard(false)
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_ProductName("")
+    , m_Vendor("")
+    , m_Version("")
+    , m_ChipsetFamily("")
+    , m_Driver("")
+    , m_IsBoard(false)
 {
+    // 初始化可显示属性
     initFilterKey();
 }
 
 bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
+
+    // 获取BIOS信息
     m_Name = QObject::tr("BIOS Information");
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
+
+    // 获取BIOS其他信息
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
 bool DeviceBios::setBiosLanguageInfo(const QMap<QString, QString> &mapInfo)
 {
-    loadOtherDeviceInfo(mapInfo);
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
 bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
+
+    // 获取主板信息
     m_Name = QObject::tr("Base Board Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
     setAttribute(mapInfo, "Product Name", m_ProductName);
     setAttribute(mapInfo, "Board name", m_ProductName, false);
     setAttribute(mapInfo, "chipset", m_ChipsetFamily);
+
+    // 该信息为主板信息
     m_IsBoard = true;
-    loadOtherDeviceInfo(mapInfo);
+
+    // 获取其他信息
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
 bool DeviceBios::setSystemInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
+
+    // 获取系统信息
     m_Name = QObject::tr("System Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
+
+    // 获取其他信息
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
 bool DeviceBios::setChassisInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
+
+    // 获取机箱信息
     m_Name = QObject::tr("Chassis Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
+
+    // 获取其他信息
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
 bool DeviceBios::setMemoryInfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() < 2) {
+    if (mapInfo.size() < 2)
         return false;
-    }
+
+    // 获取内存插槽信息
     m_Name = QObject::tr("Physical Memory Array");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
-    loadOtherDeviceInfo(mapInfo);
+
+    // 获取其他信息
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
@@ -81,29 +109,44 @@ const QString &DeviceBios::name()const
 {
     return m_Name;
 }
-const QString &DeviceBios::productName()const
+
+const QString &DeviceBios::driver() const
 {
-    return m_ProductName;
+    return m_Driver;
 }
+
 const QString &DeviceBios::vendor()const
 {
     return m_Vendor;
 }
+
 const QString &DeviceBios::version()const
 {
     return m_Version;
 }
-const QString &DeviceBios::chipsetFamily()const
-{
-    return m_ChipsetFamily;
-}
+
 bool DeviceBios::isBoard()const
 {
     return m_IsBoard;
 }
 
+QString DeviceBios::subTitle()
+{
+    return m_Name;
+}
+
+const QString DeviceBios::getOverviewInfo()
+{
+    // 获取主板概况信息
+    if (isBoard())
+        return m_ProductName;
+    else
+        return QString("");
+}
+
 void DeviceBios::initFilterKey()
 {
+    // 添加可显示属性
     addFilterKey(QObject::tr("Release Date"));
     addFilterKey(QObject::tr("Address"));
     addFilterKey(QObject::tr("Runtime Size"));
@@ -122,7 +165,6 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("Contained Object Handles"));
 
     addFilterKey(QObject::tr("Product Name"));
-//    addFilterKey(QObject::tr("Version"));
     addFilterKey(QObject::tr("Serial Number"));
     addFilterKey(QObject::tr("UUID"));
     addFilterKey(QObject::tr("Wake-up Type"));
@@ -145,7 +187,6 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("SKU Number"));
 
     addFilterKey(QObject::tr("Location"));
-//    addFilterKey(QObject::tr("Use"));
     addFilterKey(QObject::tr("Error Correction Type"));
     addFilterKey(QObject::tr("Maximum Capacity"));
     addFilterKey(QObject::tr("Error Information Handle"));
@@ -167,4 +208,29 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("Language Description Format"));
     addFilterKey(QObject::tr("Installable Languages"));
     addFilterKey(QObject::tr("Currently Installed Language"));
+}
+
+void DeviceBios::loadBaseDeviceInfo()
+{
+    // 添加基本信息
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Chipset"), m_ChipsetFamily);
+}
+
+void DeviceBios::loadOtherDeviceInfo()
+{
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
+    mapInfoToList();
+}
+
+void DeviceBios::loadTableHeader()
+{
+    // 主板界面无表格,清空表头
+    m_TableHeader.clear();
+}
+
+void DeviceBios::loadTableData()
+{
+
 }

@@ -4,7 +4,7 @@
 <message>
 <location filename="Desktop Entry]Comment" line="0"/>
 <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-<translation>Gestionnaire de périphériques est un outil pratique pour gérer et afficher les informations des composants et des périphériques</translation>
+<translation>Gestionnaire de périphériques est un outil pratique pour afficher les informations sur le matériel et gérer les périphériques.</translation>
 </message>
 <message>
 <location filename="Desktop Entry]GenericName" line="0"/>

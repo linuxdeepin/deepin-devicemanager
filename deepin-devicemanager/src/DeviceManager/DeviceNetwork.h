@@ -1,47 +1,124 @@
+/*
+* Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
+*
+* Author:     Jun.Liu <liujuna@uniontech.com>
+*
+* Maintainer: XiaoMei.Ji <jixiaomei@uniontech.com>
+* Maintainer: Jun.Liu <liujuna@uniontech.com>
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #ifndef DEVICENETWORK_H
 #define DEVICENETWORK_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceNetwork class
+ * 用来描述网络适配器的类
+ */
 
 class DeviceNetwork : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceNetwork)
 public:
     DeviceNetwork();
 
-    // 设置从 lshw 获取的信息
+    /**
+     * @brief setInfoFromLshw:设置从lshw里面获取的信息
+     * @param mapInfo:由lshw获取的信息map
+     */
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
-    // 设置从 hwinfo 获取的信息
+
+    /**
+     * @brief setInfoFromHwinfo:设置由hwinfo --network命令获取的设备信息
+     * @param mapInfo:由hwinfo获取的信息map
+     * @return 布尔值，true:信息设置成功；false:信息设置失败
+     */
     bool setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
-    // 获取设备属性
-    const QString &name()const;
-    const QString &vendor()const;
-    const QString &model()const;
-    const QString &version()const;
-    const QString &busInfo()const;
-    const QString &logicalName()const;
-    const QString &MACAddress()const;
-    const QString &irq()const;
-    const QString &memory()const;
-    const QString &width()const;
-    const QString &clock()const;
-    const QString &capabilities()const;
-    const QString &autoNegotiation()const;
-    const QString &broadcast()const;
-    const QString &driver()const;
-    const QString &driverVersion()const;
-    const QString &duplex()const;
-    const QString &firmware()const;
-    const QString &port()const;
-    const QString &link()const;
-    const QString &ip()const;
-    const QString &speed()const;
-    const QString &capacity()const;
-    const QString &latency()const;
-    const QString &multicast()const;
+    /**
+     * @brief name:获取名称属性值
+     * @return QString 名称属性值
+     */
+    const QString &name()const override;
+
+    /**
+     * @brief driver:获取驱动属性值
+     * @return QString:驱动属性值
+     */
+    const QString &driver()const override;
+
+    /**
+     * @brief subTitle:获取子标题
+     * @return 子标题
+     */
+    QString subTitle() override;
+
+    /**
+     * @brief getOverviewInfo:获取概况信息
+     * @return 概况信息
+     */
+    const QString getOverviewInfo() override;
+
+    /**
+     * @brief setEnable 设置设备的禁用状态
+     * @param enable 是否禁用
+     * @return 禁用是否成功
+     */
+    EnableDeviceStatus setEnable(bool enable) override;
+
+    /**
+     * @brief enable : 判断当前是否是禁用状态
+     * @return
+     */
+    bool enable() override;
+
+    /**
+     * @brief correctCurrentLinkStatus
+     * @param linkStatus
+     */
+    void correctCurrentLinkStatus(QString linkStatus);
+
+    /**
+     * @brief logicalName: 获取网卡逻辑名称
+     * @return
+     */
+    QString logicalName();
 
 protected:
+
+    /**
+     * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
+     */
     void initFilterKey() override;
+
+    /**
+     * @brief loadBaseDeviceInfo:加载基本信息
+     */
+    void loadBaseDeviceInfo() override;
+
+    /**
+     * @brief loadOtherDeviceInfo:加载基本信息
+     */
+    void loadOtherDeviceInfo() override;
+
+    /**
+     * @brief loadTableData:加载表头信息
+     */
+    void loadTableData() override;
 
 private:
     QString             m_Name;                         //<! 【名称】

@@ -33,7 +33,7 @@ class LogViewItemDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    LogViewItemDelegate(QObject *parent);
+    explicit LogViewItemDelegate(QObject *parent);
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option,
                const QModelIndex &index) const override;

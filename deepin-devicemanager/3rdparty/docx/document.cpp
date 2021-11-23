@@ -11,8 +11,9 @@
 using namespace Docx;
 
 Document::Document()
+    : m_docPart(nullptr)
+    , m_package(nullptr)
 {
-    qDebug() << "construct docx document.";
     if (QLocale::system().name() == QStringLiteral("zh_CN")) {
         open(QStringLiteral("://defaultzh_CN.docx"));
     } else {
@@ -22,7 +23,7 @@ Document::Document()
 
 Document::Document(const QString &name)
 {
-    qDebug() << "construct docx document from " << name;
+    qInfo() << "construct docx document from " << name;
 
     Q_ASSERT_X(QFile::exists(name), "filed", "can not find the path!");
 
@@ -73,7 +74,7 @@ Paragraph *Document::addHeading(const QString &text, int level)
     return addParagraph(text, style);
 }
 
-Table *Document::addTable(int rows, int cols, const QString &style)
+Table *Document::addTable(int rows, int cols)
 {
     return m_docPart->addTable(rows, cols);
 }
@@ -116,13 +117,13 @@ QList<Table *> Document::tables()
 
 Document::~Document()
 {
-    qDebug() << "delete Docx::Document.";
+    qInfo() << "delete Docx::Document.";
     delete m_docPart;
     delete m_package;
 }
 
 void Document::save(const QString &path)
 {
-    qDebug() << "save docx file: " << path;
+    qInfo() << "save docx file: " << path;
     m_package->save(path);
 }

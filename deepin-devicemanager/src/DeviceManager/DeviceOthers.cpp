@@ -1,21 +1,30 @@
+// 项目自身文件
 #include "DeviceOthers.h"
-#include "../deviceinfoparser.h"
 
 DeviceOthers::DeviceOthers()
-    : DeviceBaseInfo (), m_Name(""), m_Vendor(""), m_Model(""), m_Version("")
-    , m_BusInfo(""), m_Capabilities(""), m_Driver(""), m_MaximumPower(""), m_Speed(""), m_LogicalName("")
+    : DeviceBaseInfo()
+    , m_Name("")
+    , m_Vendor("")
+    , m_Model("")
+    , m_Version("")
+    , m_BusInfo("")
+    , m_Capabilities("")
+    , m_Driver("")
+    , m_MaximumPower("")
+    , m_Speed("")
+    , m_LogicalName("")
 {
 
 }
 
 void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (m_BusInfo.isEmpty() || m_BusInfo != mapInfo["bus info"]) {
+    if (m_BusInfo.isEmpty() || m_BusInfo != mapInfo["bus info"])
         return;
-    }
-    setAttribute(mapInfo, "product", m_Name);
-    setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "product", m_Model);
+
+    setAttribute(mapInfo, "product", m_Name, false);
+    setAttribute(mapInfo, "vendor", m_Vendor, false);
+    setAttribute(mapInfo, "product", m_Model, false);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "capabilities", m_Capabilities);
@@ -44,9 +53,8 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     QStringList words = mapInfo["SysFS BusID"].split(":");
     if (words.size() == 2) {
         QStringList chs = words[0].split("-");
-        if (chs.size() == 2) {
+        if (chs.size() == 2)
             m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-        }
     }
 }
 
@@ -54,44 +62,60 @@ const QString &DeviceOthers::name()const
 {
     return m_Name;
 }
-const QString &DeviceOthers::vendor()const
-{
-    return m_Vendor;
-}
-const QString &DeviceOthers::model()const
-{
-    return m_Model;
-}
-const QString &DeviceOthers::version()const
-{
-    return m_Version;
-}
+
 const QString &DeviceOthers::busInfo()const
 {
     return m_BusInfo;
 }
-const QString &DeviceOthers::capabilities()const
-{
-    return m_Capabilities;
-}
+
 const QString &DeviceOthers::driver()const
 {
     return m_Driver;
-}
-const QString &DeviceOthers::maxinumPower()const
-{
-    return m_MaximumPower;
-}
-const QString &DeviceOthers::speed()const
-{
-    return m_Speed;
 }
 
 const QString &DeviceOthers::logicalName()const
 {
     return m_LogicalName;
 }
+
+QString DeviceOthers::subTitle()
+{
+    return m_Model;
+}
+
+const QString DeviceOthers::getOverviewInfo()
+{
+    return m_Name.isEmpty() ? m_Model : m_Name;
+}
+
 void DeviceOthers::initFilterKey()
 {
 
+}
+
+void DeviceOthers::loadBaseDeviceInfo()
+{
+    // 添加基本信息
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(tr("Driver"), m_Driver);
+    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addBaseDeviceInfo(tr("Speed"), m_Speed);
+}
+
+void DeviceOthers::loadOtherDeviceInfo()
+{
+    mapInfoToList();
+}
+
+void DeviceOthers::loadTableData()
+{
+    // 加载表格数据
+    m_TableData.append(m_Name);
+    m_TableData.append(m_Vendor);
+    m_TableData.append(m_Model);
 }
