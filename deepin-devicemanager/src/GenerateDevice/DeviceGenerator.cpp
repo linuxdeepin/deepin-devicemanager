@@ -111,7 +111,7 @@ void DeviceGenerator::generatorCpuDevice()
         logicalNum = map["logical"].toInt();
 
     // set cpu number
-    DeviceManager::instance()->setCpuNum(physicalNum);
+    DeviceManager::instance()->setCpuNum(dmidecode4.size());
 
     // set cpu info
     QList<QMap<QString, QString> >::const_iterator it = lsCpu.begin();

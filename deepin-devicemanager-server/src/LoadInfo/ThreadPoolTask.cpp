@@ -77,11 +77,6 @@ void ThreadPoolTask::runCmdToCache(const QString &cmd)
         loadSmartCtlInfoToCache(info);
     }
 
-    // 如果命令是 ls /dev/sg* ,则需要执行 smartctl --all /dev/*** 命令
-    if (m_File == "ls_sg.txt") {
-        loadSgSmartCtlInfoToCache(info);
-    }
-
     // 如果命令是 lspci  , 则需要执行 lspci -v -s %1 > lspci_vs.txt 命令
     if (m_File == "lspci.txt") {
         loadLspciVSInfoToCache(info);
