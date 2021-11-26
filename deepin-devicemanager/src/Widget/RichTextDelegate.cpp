@@ -302,12 +302,32 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
         if (keyValue.size() != 2) {
             return;
         }
-        QPair<QString, QString> pair;
-        pair.first = keyValue[0];
-        pair.second = keyValue[1];
 
-        // 添加一行
-        addRow(doc, table, pair);
+        // 当value值不止一行时，按"  /  \t\t"  分行显示
+        QStringList strList = keyValue[1].split("  /  \t\t");
+        if (strList.size() >= 2) {
+            // 第一行第一列显示属性名
+            QPair<QString, QString> pair;
+            pair.first = keyValue[0];
+            pair.second = strList[0];
+            addRow(doc, table, pair);
+
+            // 除第一行以外的每行第一列以空字符串填充
+            for (int i = 1; i < strList.size(); ++i) {
+                // 添加一行
+                QPair<QString, QString> pairtmp;
+                pairtmp.first = "";
+                pairtmp.second = strList[i];
+                addRow(doc, table, pairtmp);
+            }
+        } else {
+            // 属性值只有一行
+            QPair<QString, QString> pair;
+            pair.first = keyValue[0];
+            pair.second = keyValue[1];
+            // 添加一行
+            addRow(doc, table, pair);
+        }
     }
     // 添加该表格到doc
     doc.appendChild(table);
@@ -316,29 +336,13 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
 void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair)const
 {
     QDomElement tr = doc.createElement("tr");
-//    tr.setAttribute("style", "line-height:100;height:100;");
 
     // 该行的第一列
     QString nt = pair.first.isEmpty() ? "" : pair.first + ":";
     addTd1(doc, tr, nt);
 
     // 该行的第二列
-    // 如果该列的内容很多则分行显示
-    QStringList strList = pair.second.split("  /  \t\t");
-    if (strList.size() > 2) {
-
-        QStringList::iterator it = strList.begin();
-        addTd2(doc, tr, *it);
-        ++it;
-        for (; it != strList.end(); ++it) {
-            QPair<QString, QString> tempPair;
-            tempPair.first = "";
-            tempPair.second = *it;
-            addRow(doc, table, tempPair);
-        }
-    } else {
-        addTd2(doc, tr, pair.second);
-    }
+    addTd2(doc, tr, pair.second);
 
     table.appendChild(tr);
 }
