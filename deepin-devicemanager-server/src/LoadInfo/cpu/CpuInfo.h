@@ -44,7 +44,7 @@ public:
      * @brief arch
      * @return
      */
-    const QString& arch() const;
+    const QString &arch() const;
 
     /**
      * @brief logicalCpus
@@ -96,14 +96,14 @@ private:
      * @param physical_id
      * @return
      */
-    LogicalCpu& logicalCpu(int logical_id);
+    LogicalCpu &logicalCpu(int logical_id);
 
     /**
      * @brief setProcCpuinfo
      * @param logical
      * @param mapInfo
      */
-    void setProcCpuinfo(LogicalCpu& logical,const QMap<QString, QString>& mapInfo);
+    void setProcCpuinfo(LogicalCpu &logical, const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief readSysCpu : /sys/devices/system/cpu
@@ -129,6 +129,13 @@ private:
      * @return
      */
     int readCoreID(const QString &path);
+
+    /**
+        * @brief readThreadSiblingsListPath
+        * @param path
+        * @return
+        */
+    int readThreadSiblingsListPath(const QString &path);
 
     /**
      * @brief readCpuCache : /sys/devices/system/cpu/cpu0/cache

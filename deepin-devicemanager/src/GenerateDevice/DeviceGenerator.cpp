@@ -111,7 +111,7 @@ void DeviceGenerator::generatorCpuDevice()
         logicalNum = map["logical"].toInt();
 
     // set cpu number
-    DeviceManager::instance()->setCpuNum(physicalNum);
+    DeviceManager::instance()->setCpuNum(dmidecode4.size());
 
     // set cpu info
     QList<QMap<QString, QString> >::const_iterator it = lsCpu.begin();
@@ -170,22 +170,22 @@ void DeviceGenerator::generatorNetworkDevice()
     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
     for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
         // Hardware Class 类型为 network interface
-        if((*it)["Hardware Class"] == "network"){
+        if ("network" == (*it)["Hardware Class"]) {
             continue;
         }
 
         // 判断该网卡是否存在，被金庸的和移动网卡被拔出
         QString path = pciPath(*it);
-        if(path.contains("usb")){
-            if(!QFile::exists(path)){
+        if (path.contains("usb")) {
+            if (!QFile::exists(path)) {
                 continue;
             }
         }
 
         // 判断重复设备数据
         QString unique_id = uniqueID(*it);
-        DeviceNetwork *device = dynamic_cast<DeviceNetwork*>(DeviceManager::instance()->getNetworkDevice(unique_id));
-        if(device){
+        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(DeviceManager::instance()->getNetworkDevice(unique_id));
+        if (device) {
             device->setEnableValue(false);
             device->setInfoFromHwinfo(*it);
             continue;
@@ -194,7 +194,7 @@ void DeviceGenerator::generatorNetworkDevice()
         // 没有网卡地址的设备过滤
         if ((*it).size() < 2)
             continue;
-        if((*it).find("HW Address") == (*it).end() && (*it).find("path") == (*it).end())
+        if ((*it).find("HW Address") == (*it).end() && (*it).find("path") == (*it).end())
             continue;
         device = new DeviceNetwork();
         device->setInfoFromHwinfo(*it);
@@ -209,10 +209,10 @@ void DeviceGenerator::generatorNetworkDevice()
     for (; itls != lstInfo.end(); ++itls) {
         if ((*itls).size() < 2)
             continue;
-        if((*itls).find("serial") == (*itls).end())
+        if ((*itls).find("serial") == (*itls).end())
             continue;
-        DeviceNetwork *device = dynamic_cast<DeviceNetwork*>(DeviceManager::instance()->getNetworkDevice((*itls)["serial"]));
-        if(device){
+        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(DeviceManager::instance()->getNetworkDevice((*itls)["serial"]));
+        if (device) {
             device->setInfoFromLshw(*itls);
         }
     }
@@ -588,12 +588,12 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("hwinfo_sound");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 5 && (*it).find("path")==(*it).end())
+        if ((*it).size() < 5 && (*it).find("path") == (*it).end())
             continue;
 
         QString path = pciPath(*it);
-        DeviceAudio *device = dynamic_cast<DeviceAudio*>(DeviceManager::instance()->getAudioDevice(path));
-        if(device){
+        DeviceAudio *device = dynamic_cast<DeviceAudio *>(DeviceManager::instance()->getAudioDevice(path));
+        if (device) {
             device->setEnableValue(false);
             continue;
         }
@@ -744,13 +744,13 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
 
         // 先判断是否存在
         QString path = pciPath(*it);
-        if(!path.contains("platform") && !QFile::exists(path)){
+        if (!path.contains("platform") && !QFile::exists(path)) {
             continue;
         }
 
         QString unique_id = uniqueID(*it);
-        DeviceInput *device = dynamic_cast<DeviceInput*>(DeviceManager::instance()->getMouseDevice(unique_id));
-        if(device){
+        DeviceInput *device = dynamic_cast<DeviceInput *>(DeviceManager::instance()->getMouseDevice(unique_id));
+        if (device) {
             device->setEnableValue(false);
             continue;
         }
@@ -807,26 +807,26 @@ void DeviceGenerator::getImageInfoFromHwinfo()
             continue;
 
         // hwinfo中对camera的分类不明确，通过camera等关键字认定图像设备
-        if (! (*it)["Model"].contains("camera", Qt::CaseInsensitive) &&
-                ! (*it)["Device"].contains("camera", Qt::CaseInsensitive) &&
-                ! (*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive) &&
-                ! (*it)["Model"].contains("webcam", Qt::CaseInsensitive) &&
+        if (!(*it)["Model"].contains("camera", Qt::CaseInsensitive) &&
+                !(*it)["Device"].contains("camera", Qt::CaseInsensitive) &&
+                !(*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive) &&
+                !(*it)["Model"].contains("webcam", Qt::CaseInsensitive) &&
                 (*it)["Hardware Class"] != "camera") {
             continue;
         }
 
         // 判断该摄像头是否存在，被禁用的和被拔出
         QString path = pciPath(*it);
-        if(path.contains("usb")){
-            if(!QFile::exists(path)){
+        if (path.contains("usb")) {
+            if (!QFile::exists(path)) {
                 continue;
             }
         }
 
         // 判断重复设备数据
         QString unique_id = uniqueID(*it);
-        DeviceImage *device = dynamic_cast<DeviceImage*>(DeviceManager::instance()->getImageDevice(unique_id));
-        if(device){
+        DeviceImage *device = dynamic_cast<DeviceImage *>(DeviceManager::instance()->getImageDevice(unique_id));
+        if (device) {
             device->setEnableValue(false);
             device->setInfoFromHwinfo(*it);
             continue;
@@ -902,13 +902,13 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         if (isOtherDevice) {
             // 先判断是否存在
             QString path = pciPath(*it);
-            if(!QFile::exists(path)){
+            if (!QFile::exists(path)) {
                 continue;
             }
 
             QString unique_id = uniqueID(*it);
-            DeviceOthers *device = dynamic_cast<DeviceOthers*>(DeviceManager::instance()->getOthersDevice(unique_id));
-            if(device){
+            DeviceOthers *device = dynamic_cast<DeviceOthers *>(DeviceManager::instance()->getOthersDevice(unique_id));
+            if (device) {
                 device->setEnableValue(false);
                 continue;
             }
@@ -973,33 +973,33 @@ const QString DeviceGenerator::getProductName()
     return name;
 }
 
-QString DeviceGenerator::pciPath(const QMap<QString,QString>& mapInfo)
+QString DeviceGenerator::pciPath(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("path") != mapInfo.end()){ // SysFS Device Link
-        if(mapInfo["path"].contains("usb")){
+    if (mapInfo.find("path") != mapInfo.end()) { // SysFS Device Link
+        if (mapInfo["path"].contains("usb")) {
             return "/sys" + mapInfo["path"] + "/authorized";
-        }else{
+        } else {
             return mapInfo["path"];
         }
-    }else if(mapInfo.find("SysFS Device Link") != mapInfo.end()){
+    } else if (mapInfo.find("SysFS Device Link") != mapInfo.end()) {
         return "/sys" + mapInfo["SysFS Device Link"] + "/authorized";
-    }else if(mapInfo.find("SysFS ID") != mapInfo.end()){
+    } else if (mapInfo.find("SysFS ID") != mapInfo.end()) {
         return "/sys" + mapInfo["SysFS ID"] + "/authorized";
-    }else{
-        if(mapInfo["Device Files"].contains("platform")){
+    } else {
+        if (mapInfo["Device Files"].contains("platform")) {
             return "platform";
         }
         return "";
     }
 }
 
-QString DeviceGenerator::uniqueID(const QMap<QString,QString>& mapInfo)
+QString DeviceGenerator::uniqueID(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("unique_id") != mapInfo.end()){
+    if (mapInfo.find("unique_id") != mapInfo.end()) {
         return mapInfo["unique_id"];
-    }else if(mapInfo.find("Permanent HW Address") != mapInfo.end()){
+    } else if (mapInfo.find("Permanent HW Address") != mapInfo.end()) {
         return mapInfo["Permanent HW Address"];
-    }else if(mapInfo.find("Module Alias") != mapInfo.end()){
+    } else if (mapInfo.find("Module Alias") != mapInfo.end()) {
         return mapInfo["Module Alias"];
     }
     return "";

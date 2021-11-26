@@ -554,6 +554,10 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
             continue;
         QMap<QString, QString> mapInfo;
         getMapInfoFromDmidecode(item, mapInfo);
+        // 过滤空cpu卡槽信息
+        if ("dmidecode4" == key && mapInfo.find("ID") == mapInfo.end())
+            continue;
+
         if (mapInfo.size() > MIN_NUM)
             addMapInfo(key, mapInfo);
     }

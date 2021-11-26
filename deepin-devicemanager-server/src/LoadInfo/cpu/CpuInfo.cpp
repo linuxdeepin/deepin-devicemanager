@@ -214,14 +214,16 @@ void CpuInfo::readSysCpuN(int N, const QString &path)
     // 第二步读取core id
     // /sys/devices/system/cpu/cpu0/topology/core_id
     QString corePath = path + "/topology/core_id";
+    QString thread_siblings_list_patch = path + "/topology/thread_siblings_list";
     int core_id = readCoreID(corePath);
-    if (core_id < 0) {
+    int tsl = readThreadSiblingsListPath(thread_siblings_list_patch);
+    if (core_id < 0 || tsl < 0) {
         return;
     }
     PhysicalCpu &cpu = m_MapPhysicalCpu[physical_id];
-    if (!cpu.coreIsExisted(core_id)) {
+    if (!cpu.coreIsExisted(tsl)) {
         CoreCpu core = CoreCpu(core_id);
-        cpu.addCoreCpu(core_id, core);
+        cpu.addCoreCpu(tsl, core);
     }
 
     // 第三步读取逻辑cpu
@@ -237,7 +239,7 @@ void CpuInfo::readSysCpuN(int N, const QString &path)
     // get cpu freq
     if (dir.exists("cpufreq"))
         readCpuFreq(dir.filePath("cpufreq"), lcpu);
-    CoreCpu &corecpu = cpu.coreCpu(core_id);
+    CoreCpu &corecpu = cpu.coreCpu(tsl);
     corecpu.addLogicalCpu(N, lcpu);
 }
 
@@ -261,6 +263,17 @@ int CpuInfo::readCoreID(const QString &path)
 
     file.close();
     return info.toInt();
+}
+
+int CpuInfo::readThreadSiblingsListPath(const QString &path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)) {
+        return -1;
+    }
+    QString info = file.readAll();
+    file.close();
+    return info.replace(",", "").toInt();
 }
 
 void CpuInfo::readCpuCache(const QString &path, LogicalCpu &lcpu)
