@@ -306,3 +306,10 @@ void LogTreeView::keyPressEvent(QKeyEvent *event)
         emit clicked(this->currentIndex());
     }
 }
+
+void LogTreeView::resizeEvent(QResizeEvent *event)
+{
+    // 窗口大小变化时，重计算表格列宽
+    DTreeView::resizeEvent(event);
+    setColumnAverage();
+}
