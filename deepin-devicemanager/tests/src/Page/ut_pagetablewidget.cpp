@@ -49,7 +49,7 @@ TEST_F(UT_PageTableWidget, UT_PageTableWidget_setCurDeviceState)
     m_pageTableWidget->setCurDeviceState(false);
     EXPECT_FALSE(m_pageTableWidget->mp_Table->m_IsEnable);
     Stub stub;
-    stub.set(ADDR(DetailTreeView,setTableHeight),ut_setTableHeight01);
+    stub.set(ADDR(DetailTreeView, setTableHeight), ut_setTableHeight01);
     m_pageTableWidget->setCurDeviceState(true);
     EXPECT_TRUE(m_pageTableWidget->mp_Table->m_IsEnable);
 }
@@ -59,5 +59,6 @@ TEST_F(UT_PageTableWidget, UT_PageTableWidget_expandTable)
     m_pageTableWidget->mp_Table->mp_CommandBtn = new DCommandLinkButton("");
     m_pageTableWidget->mp_Table->m_IsExpand = true;
     m_pageTableWidget->expandTable();
-    EXPECT_STREQ("More",m_pageTableWidget->mp_Table->mp_CommandBtn->text().toStdString().c_str());
+    EXPECT_STREQ("More", m_pageTableWidget->mp_Table->mp_CommandBtn->text().toStdString().c_str());
+    delete m_pageTableWidget->mp_Table->mp_CommandBtn;
 }
