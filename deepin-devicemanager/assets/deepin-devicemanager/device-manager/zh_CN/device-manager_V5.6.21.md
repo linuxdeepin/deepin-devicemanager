@@ -4,8 +4,6 @@
 
 设备管理器是查看和管理硬件设备的工具，可针对运行在操作系统的硬件设备，进行参数状态的查看、数据信息的导出等，还可以禁用或启动部分硬件驱动。
 
-![0|eu_overview](fig/eu_overview.png)
-
 ## 使用入门
 
 您可以通过以下方式运行或关闭设备管理器，或者创建快捷方式。
@@ -16,7 +14,7 @@
 
 2. 上下滚动鼠标滚轮浏览或通过搜索，找到设备管理器图标 ![deepin_devicemanager](../common/deepin_devicemanager.svg) ，并单击运行。
 
-3. 右键单击![deepin_devicemanager](../common/deepin_devicemanager.svg) ，您可以：
+3. 右键单击 ![deepin_devicemanager](../common/deepin_devicemanager.svg) ，您可以：
 
    - 单击 **发送到桌面**，在桌面创建快捷方式。
 
@@ -39,7 +37,7 @@
 1. 在设备管理器界面，单击 **概况**。
 2. 查看操作系统内核信息及各硬件设备列表。
 
-![0|eu_overview](fig/eu_overview.png)
+![0|overview](fig/overview.png)
 
 ### 处理器
 
@@ -140,7 +138,7 @@
 
 窗口主题包含浅色主题、深色主题和系统主题。
 
-1. 在设备管理器界面，单击![icon_menu](../common/icon_menu.svg)。
+1. 在设备管理器界面，单击 ![icon_menu](../common/icon_menu.svg)。
 2. 单击 **主题**，选择一个主题颜色。
 
 

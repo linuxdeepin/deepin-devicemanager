@@ -4,7 +4,7 @@
 
 Device Manager is a tool to view and manage hardware devices, through which you can view all kinds of parameters and export data of all hardware devices running in the operating system, you can also disable/enable some hardware drives. 
 
-![0|overview](fig/e_overview.png)
+
 
 ## Guide
 
@@ -41,7 +41,7 @@ The following hardware device information is for reference only. If there is no 
 1. On the main interface, click **Overview**.
 2. You can see a list containing **CPU**, **Motherboard**, **Memory** and so on in this interface, and summary info. 
 
-![0|overview](fig/e_overview.png)
+![0|overview](fig/overview.png)
 
 ### CPU
 
