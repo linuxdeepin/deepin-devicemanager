@@ -21,6 +21,7 @@ DeviceGpu::DeviceGpu()
     , m_HDMI("Unable")
     , m_eDP("Unable")
     , m_DVI("Unable")
+    , m_Digital("Unable")
     , m_Description("")
     , m_Driver("")
     , m_CurrentResolution("")
@@ -133,6 +134,9 @@ void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
 
     if (mapInfo.find("DVI") != mapInfo.end())
         m_DVI = mapInfo["DVI"];
+
+    if (mapInfo.find("DigitalOutput") != mapInfo.end())
+        m_Digital = mapInfo["DigitalOutput"];   // bug-105482添加新接口类型
 }
 
 void DeviceGpu::setDmesgInfo(const QString &info)
@@ -204,6 +208,7 @@ void DeviceGpu::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("HDMI"), m_HDMI);
     addOtherDeviceInfo(tr("VGA"), m_VGA);
     addOtherDeviceInfo(tr("DVI"), m_DVI);
+    addOtherDeviceInfo(tr("DigitalOutput"), m_Digital);   // bug-105482添加新接口类型
     addOtherDeviceInfo(tr("Display Output"), m_DisplayOutput);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
     addOtherDeviceInfo(tr("IRQ"), m_IRQ);

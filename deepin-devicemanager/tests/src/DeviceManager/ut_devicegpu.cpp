@@ -233,7 +233,7 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_getOverviewInfo)
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_loadOtherDeviceInfo)
 {
     m_deviceGpu->loadOtherDeviceInfo();
-    EXPECT_EQ(5, m_deviceGpu->m_LstOtherInfo.size());
+    EXPECT_EQ(6, m_deviceGpu->m_LstOtherInfo.size());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_loadTableHeader)

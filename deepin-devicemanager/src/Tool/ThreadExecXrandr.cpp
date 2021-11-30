@@ -55,6 +55,8 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
             lstMap[lstMap.count() - 1].insert("eDP", "Enable");
         } else if (line.startsWith("DVI")) {
             lstMap[lstMap.count() - 1].insert("DVI", "Enable");
+        } else if (line.startsWith("DigitalOutput")) {
+            lstMap[lstMap.count() - 1].insert("DigitalOutput", "Enable");
         }
     }
 }
