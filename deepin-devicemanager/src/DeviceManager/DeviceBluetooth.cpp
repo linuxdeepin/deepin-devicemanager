@@ -39,9 +39,15 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
 
 bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("Enable") != mapInfo.end()){
+    if(mapInfo.find("path") != mapInfo.end()){
+        setAttribute(mapInfo, "name", m_Name);
+        m_SysPath = mapInfo["path"];
+        m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
+        m_UniqueID = mapInfo["unique_id"];
+        return true;
     }
+
     // 设置设备基本属性
     setAttribute(mapInfo, "Serial ID", m_SerialID);
     // 获取设备基本信息
@@ -52,6 +58,8 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Speed", m_Speed);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
+    setAttribute(mapInfo, "Device", m_Name);
+    m_HardwareClass = "bluetooth";
 
     // 设置关联到lshw信息的key值,设备的唯一标志
     setHwinfoLshwKey(mapInfo);

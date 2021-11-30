@@ -253,6 +253,13 @@ public:
      */
     bool setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
+    /**
+     * @brief getBluetoothDevice
+     * @param unique_id
+     * @return
+     */
+    DeviceBaseInfo* getBluetoothDevice(const QString& unique_id);
+
     // 音频设备相关
     /**
      * @brief addAudioDevice:添加声卡

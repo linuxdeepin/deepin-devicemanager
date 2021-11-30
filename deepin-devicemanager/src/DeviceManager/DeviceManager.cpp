@@ -551,6 +551,17 @@ bool DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &map
     return false;
 }
 
+DeviceBaseInfo* DeviceManager::getBluetoothDevice(const QString& unique_id)
+{
+    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceBluetooth.begin(); it != m_ListDeviceBluetooth.end(); ++it) {
+        DeviceBluetooth *bt = dynamic_cast<DeviceBluetooth*>(*it);
+        if(bt && bt->uniqueID() == unique_id){
+            return *it;
+        }
+    }
+    return nullptr;
+}
+
 void DeviceManager::addAudioDevice(DeviceAudio *const device)
 {
     m_ListDeviceAudio.append(device);

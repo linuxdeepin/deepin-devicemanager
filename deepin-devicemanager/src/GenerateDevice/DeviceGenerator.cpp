@@ -672,7 +672,17 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
             continue;
 
         if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0") {
-            DeviceBluetooth *device = new DeviceBluetooth();
+
+            // 判断重复设备数据
+            QString unique_id = uniqueID(*it);
+            DeviceBluetooth *device = dynamic_cast<DeviceBluetooth *>(DeviceManager::instance()->getBluetoothDevice(unique_id));
+            if (device) {
+                device->setEnableValue(false);
+                device->setInfoFromHwinfo(*it);
+                continue;
+            }
+
+            device = new DeviceBluetooth();
             device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addBluetoothDevice(device);
             addBusIDFromHwinfo((*it)["SysFS BusID"]);
