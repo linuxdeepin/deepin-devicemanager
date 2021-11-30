@@ -31,6 +31,8 @@
 DWIDGET_BEGIN_NAMESPACE
 class DLabel;
 DWIDGET_END_NAMESPACE
+class GetDriverNameModel;
+class WaitingWidget;
 
 DWIDGET_USE_NAMESPACE
 
@@ -39,6 +41,7 @@ class GetDriverNameWidget : public DWidget
     Q_OBJECT
 public:
     explicit GetDriverNameWidget(QWidget *parent = nullptr);
+    ~GetDriverNameWidget();
 
     /**
      * @brief loadAllDrivers 通过给的路径，查找路径下的所有驱动文件
@@ -59,6 +62,11 @@ public:
      */
     void updateTipLabelText(const QString &text);
 
+    /**
+     * @brief stopLoadingDrivers
+     */
+    void stopLoadingDrivers();
+
 private:
     /**
      * @brief init 初始化界面
@@ -71,17 +79,9 @@ private:
     void initConnections();
 
     /**
-     * @brief traverseFolders 遍历目录下的文件
-     * @param includeSub 是否查找目录下的子目录
-     * @param path 给定的目录
-     * @param lstDrivers 出参，符合条件的驱动文件
-     */
-    void traverseFolders(bool includeSub, const QString &path, QStringList &lstDrivers);
-
-    /**
      * @brief reloadDriversListPages 根据有无驱动加载界面
      */
-    void reloadDriversListPages(const QStringList &drivers);
+    void reloadDriversListPages();
 
 public slots:
 
@@ -90,6 +90,11 @@ public slots:
      * @param row 当前选中行
      */
     void slotSelectedDriver(const QModelIndex &index);
+
+    /**
+     * @brief slotFinishLoadDrivers
+     */
+    void slotFinishLoadDrivers();
 
 signals:
 
@@ -103,15 +108,23 @@ signals:
      */
     void signalDriversCount();
 
+    /**
+     * @brief startLoadDrivers
+     * @param model
+     * @param includeSub
+     * @param path
+     */
+    void startLoadDrivers(QStandardItemModel* model, bool includeSub, const QString &path);
+
 private:
-    DriverListView    *mp_ListView;
-
-    QStandardItemModel *mp_model;
-
-    QStringList       mp_driverPathList;   //驱动路径列表
-    QStringList       mp_driversList;      //驱动名列表
-    int               mp_selectedRow = -1;  //当前选中行
-    Dtk::Widget::DLabel           *mp_tipLabel;
+    DStackedWidget             *mp_StackWidget = nullptr;
+    WaitingWidget              *mp_WaitingWidget = nullptr;
+    DriverListView             *mp_ListView = nullptr;
+    Dtk::Widget::DLabel        *mp_tipLabel;
+    QStandardItemModel         *mp_model;
+    GetDriverNameModel         *mp_GetModel;
+    QThread                    *mp_Thread = nullptr;
+    int                        mp_selectedRow = -1;  //当前选中行
 };
 
 #endif // GETDRIVERNAMEDIALOG_H

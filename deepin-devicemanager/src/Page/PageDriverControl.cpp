@@ -23,6 +23,7 @@
 #include "GetDriverNameWidget.h"
 #include "DriverWaitingWidget.h"
 #include "DBusDriverInterface.h"
+#include "DBusAnythingInterface.h"
 #include "DBusInterface.h"
 #include "drivericonwidget.h"
 
@@ -181,6 +182,7 @@ void PageDriverControl::slotClose()
 
 void PageDriverControl::slotBackPathPage()
 {
+    mp_NameDialog->stopLoadingDrivers();
     mp_stackWidget->setCurrentIndex(0);
     getButton(1)->setDisabled(false);
     this->setButtonText(1, tr("Next", "button"));
@@ -206,8 +208,8 @@ void PageDriverControl::installDriverLogical()
             mp_PathDialog->updateTipLabelText(tr("The selected folder does not exist, please select again"));
             return;
         }
-        mp_NameDialog->loadAllDrivers(includeSubdir, path);
         mp_stackWidget->setCurrentIndex(1);
+        mp_NameDialog->loadAllDrivers(includeSubdir, path);
         this->setButtonText(1, tr("Update", "button"));
         this->setButtonText(0, tr("Previous", "button"));
         getButton(1)->setDisabled(true);          //默认置灰

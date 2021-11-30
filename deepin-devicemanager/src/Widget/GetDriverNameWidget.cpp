@@ -1,22 +1,38 @@
 #include "GetDriverNameWidget.h"
+#include "GetDriverNameModel.h"
+#include "WaitingWidget.h"
 
 #include <DFrame>
 #include <DLabel>
 #include <DApplicationHelper>
 #include <DFontSizeManager>
+#include <DStackedWidget>
 
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QDir>
-#include <QFileIconProvider>
+#include <QThread>
 
 GetDriverNameWidget::GetDriverNameWidget(QWidget *parent)
     : DWidget(parent)
-    , mp_ListView(new DriverListView(this))
+    , mp_StackWidget(new DStackedWidget(this))
+    , mp_WaitingWidget(new WaitingWidget(mp_StackWidget))
+    , mp_ListView(new DriverListView(mp_StackWidget))
     , mp_tipLabel(new DLabel)
+    , mp_GetModel(new GetDriverNameModel())
+    , mp_Thread(new QThread(this))
 {
+    mp_GetModel->moveToThread(mp_Thread);
+    mp_Thread->start();
     init();
     initConnections();
+}
+
+GetDriverNameWidget::~GetDriverNameWidget()
+{
+    stopLoadingDrivers();
+    mp_Thread->quit();
+    mp_Thread->wait();
 }
 
 void GetDriverNameWidget::init()
@@ -39,10 +55,12 @@ void GetDriverNameWidget::init()
     driverLayout->addWidget(frame);
     driverLayout->addStretch();
 
+    mp_StackWidget->addWidget(mp_WaitingWidget);
+    mp_StackWidget->addWidget(mp_ListView);
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addStretch();
-    layout->addWidget(mp_ListView);
+    layout->addWidget(mp_StackWidget);
     layout->addStretch();
     frame->setLayout(layout);
 
@@ -67,84 +85,25 @@ void GetDriverNameWidget::init()
 void GetDriverNameWidget::initConnections()
 {
     connect(mp_ListView, &DriverListView::clicked, this, &GetDriverNameWidget::slotSelectedDriver);
+    connect(this,&GetDriverNameWidget::startLoadDrivers,mp_GetModel,&GetDriverNameModel::startLoadDrivers);
+    connect(mp_GetModel, &GetDriverNameModel::finishLoadDrivers,this,&GetDriverNameWidget::slotFinishLoadDrivers);
 }
 
 void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString &path)
 {
-    // 获取所有的驱动文件
-    mp_selectedRow = -1;
-    QStringList lstDrivers;
-    mp_driverPathList.clear();
-    mp_driversList.clear();
-    traverseFolders(includeSub, path, lstDrivers);
-    reloadDriversListPages(lstDrivers);
+    mp_WaitingWidget->start();
+    mp_StackWidget->setCurrentIndex(0);
     mp_model = new QStandardItemModel(this);
-    for (int i = 0; i < lstDrivers.size(); i++) {
-        QStandardItem *icomItem = new QStandardItem;
-        //获取应用文件图标
-        QFileInfo info(mp_driverPathList[i]);
-        QFileIconProvider icon_provider;
-        QIcon icon = icon_provider.icon(info);
-        icomItem->setData(icon, Qt::DecorationRole);
-        QStandardItem *textItem = new QStandardItem(lstDrivers[i]);
-        mp_model->setItem(i, 0, icomItem);
-        mp_model->setItem(i, 1, textItem);
-        textItem->setToolTip(lstDrivers[i]);
-    }
-
-    mp_ListView->setModel(mp_model);
-    mp_ListView->setColumnWidth(0, 40);
-    updateTipLabelText("");
+    emit startLoadDrivers(mp_model,includeSub,path);
 }
 
-QString GetDriverNameWidget::selectName()
-{
-    if (-1 == mp_selectedRow || !(mp_selectedRow < mp_driverPathList.size() && mp_selectedRow > -1))
-        return "";
-    return mp_driverPathList[mp_selectedRow];
-}
-
-void GetDriverNameWidget::updateTipLabelText(const QString &text)
-{
-    mp_tipLabel->setText(text);
-    mp_tipLabel->setToolTip(text);
-}
-
-void GetDriverNameWidget::traverseFolders(bool includeSub, const QString &path, QStringList &lstDrivers)
-{
-    QDir dir(path);
-    if (!dir.exists())
-        return;
-    QStringList nameFiltes;
-    nameFiltes << "*.deb" << "*.ko";
-    QStringList drivers;
-    drivers.append(dir.entryList(nameFiltes, QDir::Files | QDir::Readable, QDir::Name));
-    mp_driversList.append(drivers);
-    for (QString filename : drivers) {
-        mp_driverPathList.append(path + "/" + filename);
-    }
-
-    if (includeSub) {
-        QStringList dirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-        if (!dirs.isEmpty()) {
-            for (QString folder : dirs) {
-                if (folder.isEmpty())
-                    continue;
-                QString subPath = path + "/" + folder;
-                traverseFolders(includeSub, subPath, lstDrivers);
-            }
-        }
-    }
-    lstDrivers = mp_driversList;
-}
-
-void GetDriverNameWidget::reloadDriversListPages(const QStringList &drivers)
+void GetDriverNameWidget::reloadDriversListPages()
 {
     DFrame *frame = this->findChild<DFrame *>();
     DLabel *label = this->findChild<DLabel *>();
     if (!(frame && label))
         return;
-    if (drivers.isEmpty()) {
+    if (mp_model->rowCount() <= 0) {
         frame->hide();
         label->setText(tr("No drivers found in this folder"));
         mp_selectedRow = -1;
@@ -158,6 +117,24 @@ void GetDriverNameWidget::reloadDriversListPages(const QStringList &drivers)
     QColor color = DGuiApplicationHelper::adjustColor(pa.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -30);
     pa.setColor(QPalette::WindowText, color);
     label->setPalette(pa);
+}
+
+QString GetDriverNameWidget::selectName()
+{
+    if (-1 == mp_selectedRow || !(mp_selectedRow < mp_model->rowCount() && mp_selectedRow > -1))
+        return "";
+    return mp_model->item(mp_selectedRow,0)->text();
+}
+
+void GetDriverNameWidget::updateTipLabelText(const QString &text)
+{
+    mp_tipLabel->setText(text);
+    mp_tipLabel->setToolTip(text);
+}
+
+void GetDriverNameWidget::stopLoadingDrivers()
+{
+    mp_GetModel->stopLoadingDrivers();
 }
 
 void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
@@ -176,4 +153,15 @@ void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
     if (Qt::Unchecked == item->checkState())
         item->setCheckState(Qt::Checked);
     mp_selectedRow = row;
+}
+
+void GetDriverNameWidget::slotFinishLoadDrivers()
+{
+    reloadDriversListPages();
+    mp_ListView->setModel(mp_model);
+    mp_ListView->setColumnWidth(0, 40);
+    updateTipLabelText("");
+
+    mp_StackWidget->setCurrentIndex(1);
+    mp_WaitingWidget->stop();
 }

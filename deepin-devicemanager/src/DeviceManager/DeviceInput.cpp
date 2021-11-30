@@ -29,13 +29,10 @@ DeviceInput::DeviceInput()
 
 bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
-    qInfo() << "hwinfo To lshw : " << m_HwinfoToLshw;
-    qInfo() << "mapInfo[bus info]" << mapInfo["bus info"];
     // 根据bus info属性值与m_KeyToLshw对比,判断是否为同一设备
     if (!matchToLshw(mapInfo)) {
             return false;
     }
-    qInfo() << "OK ************************ ";
 
     // 设置基础设备信息
     setAttribute(mapInfo, "vendor", m_Vendor);
