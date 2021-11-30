@@ -45,7 +45,7 @@ bool DBusEnableInterface::enable(const QString& hclass, const QString& name, con
         modifyPath(sPath);
         res = authorizedEnable(hclass, name, sPath, value, enable_device);
     }else/* if(QFile::exists("/sys" + sPath + QString("/remove")))*/{
-        res = removeEnable(hclass, name, path, enable_device);
+        res = removeEnable(hclass, name, path, value, enable_device);
     }
     emit update();
     return res;
@@ -132,7 +132,7 @@ bool DBusEnableInterface::authorizedEnable(const QString& hclass, const QString&
     return true;
 }
 
-bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& name, const QString& path, bool enable)
+bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable)
 {
     if(enable){
         // 1. 先rescan 向rescan写入1,则重新加载
@@ -174,7 +174,7 @@ bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& nam
         file.close();
 
         // 2. 持久化保存
-        EnableSqlManager::getInstance()->insertDataToRemoveTable(hclass, name, path);
+        EnableSqlManager::getInstance()->insertDataToRemoveTable(hclass, name, path, unique_id);
     }
     return true;
 }

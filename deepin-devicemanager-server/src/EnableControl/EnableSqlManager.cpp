@@ -14,9 +14,9 @@
 std::atomic<EnableSqlManager *> EnableSqlManager::s_Instance;
 std::mutex EnableSqlManager::m_mutex;
 
-void EnableSqlManager::insertDataToRemoveTable(const QString& hclass, const QString& name, const QString& path)
+void EnableSqlManager::insertDataToRemoveTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id)
 {
-    QString sql = QString("INSERT INTO %1 (class, name, path) VALUES ('%2', '%3', '%4');").arg(DB_TABLE_REMOVE).arg(hclass).arg(name).arg(path);
+    QString sql = QString("INSERT INTO %1 (class, name, path, unique_id) VALUES ('%2', '%3', '%4', '%5');").arg(DB_TABLE_REMOVE).arg(hclass).arg(name).arg(path).arg(unique_id);
     if (!m_sqlQuery.exec(sql)) {
         qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
     }
@@ -123,7 +123,7 @@ bool EnableSqlManager::isUniqueIdEnabled(const QString& key)
 QString EnableSqlManager::removedInfo()
 {
     QString info = "";
-    QString sql = QString("SELECT class,name,path FROM %1;").arg(DB_TABLE_REMOVE);
+    QString sql = QString("SELECT class,name,path,unique_id FROM %1;").arg(DB_TABLE_REMOVE);
     if (!m_sqlQuery.exec(sql)) {
         qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
         return info;
@@ -132,7 +132,8 @@ QString EnableSqlManager::removedInfo()
     while (m_sqlQuery.next()) {
         info += "Hardware Class : " + m_sqlQuery.value(0).toString() + "\n";
         info += "name : " + m_sqlQuery.value(1).toString() + "\n";
-        info += "path : " + m_sqlQuery.value(2).toString() + "\n\n";
+        info += "path : " + m_sqlQuery.value(2).toString() + "\n";
+        info += "unique_id : " + m_sqlQuery.value(3).toString() + "\n\n";
     }
     return info;
 }
@@ -210,7 +211,7 @@ void EnableSqlManager::initDB()
         }
     }
     if(!tableStrList.contains(DB_TABLE_REMOVE)){
-        QString sql = QString("CREATE TABLE %1 (class text, name text, path text)").arg(DB_TABLE_REMOVE);
+        QString sql = QString("CREATE TABLE %1 (class text, name text, path text, unique_id text);").arg(DB_TABLE_REMOVE);
         bool res = m_sqlQuery.exec(sql);
         if(!res){
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();

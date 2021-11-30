@@ -92,7 +92,7 @@ private:
      * @param enable 启用或者禁用
      * @return
      */
-    bool removeEnable(const QString& hclass, const QString& name, const QString& path, bool enable);
+    bool removeEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable);
 
     /**
      * @brief construct_uri

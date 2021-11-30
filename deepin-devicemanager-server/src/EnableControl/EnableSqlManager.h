@@ -58,7 +58,7 @@ public:
      * @param hclass 类型
      * @param name 名称
      */
-    void insertDataToRemoveTable(const QString& hclass, const QString& name, const QString& path);
+    void insertDataToRemoveTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id);
 
     /**
      * @brief removeDateFromRemoveTable 从数据库里面删除数据
