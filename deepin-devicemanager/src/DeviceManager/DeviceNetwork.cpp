@@ -18,6 +18,7 @@ DeviceNetwork::DeviceNetwork()
     , m_Autonegotiation("")
     , m_Broadcast("")
     , m_Driver("")
+    , m_DriverModules("")
     , m_DriverVersion("")
     , m_Duplex("")
     , m_Firmware("")
@@ -69,7 +70,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "capacity", m_Capacity);
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
-    if(driverIsKernelIn(m_Driver)){
+    if(driverIsKernelIn(m_Driver) && driverIsKernelIn(m_DriverModules)){
         m_CanUninstall = false;
     }
 
@@ -90,7 +91,8 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
     setAttribute(mapInfo, "SysFS Device Link", m_SysPath);
     setAttribute(mapInfo, "Driver", m_Driver);
-    if(driverIsKernelIn(m_Driver)){
+    setAttribute(mapInfo, "Driver Modules", m_DriverModules);
+    if(driverIsKernelIn(m_Driver) && driverIsKernelIn(m_DriverModules)){
         m_CanUninstall = false;
     }
 
@@ -106,6 +108,8 @@ const QString &DeviceNetwork::name()const
 
 const QString &DeviceNetwork::driver()const
 {
+    if(! m_DriverModules.isEmpty())
+        return m_DriverModules;
     return m_Driver;
 }
 

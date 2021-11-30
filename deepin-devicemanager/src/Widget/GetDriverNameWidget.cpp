@@ -123,7 +123,7 @@ QString GetDriverNameWidget::selectName()
 {
     if (-1 == mp_selectedRow || !(mp_selectedRow < mp_model->rowCount() && mp_selectedRow > -1))
         return "";
-    return mp_model->item(mp_selectedRow,0)->text();
+    return mp_model->item(mp_selectedRow)->data(Qt::UserRole).toString();
 }
 
 void GetDriverNameWidget::updateTipLabelText(const QString &text)

@@ -52,7 +52,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Module Alias", m_UniqueID);
 
-    if(driverIsKernelIn(m_Driver)){
+    if(driverIsKernelIn(m_Driver) && driverIsKernelIn(m_DriverModules)){
         m_CanUninstall = false;
     }
 
@@ -147,6 +147,8 @@ const QString &DeviceAudio::name()const
 
 const QString &DeviceAudio::driver() const
 {
+    if(! m_DriverModules.isEmpty())
+        return m_DriverModules;
     return m_Driver;
 }
 const QString& DeviceAudio::uniqueID() const

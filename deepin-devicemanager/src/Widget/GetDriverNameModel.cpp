@@ -45,6 +45,7 @@ void GetDriverNameModel::startLoadDrivers(QStandardItemModel* model, bool includ
         QFileIconProvider icon_provider;
         QIcon icon = icon_provider.icon(info);
         icomItem->setData(icon, Qt::DecorationRole);
+        icomItem->setData(QVariant::fromValue(mp_driverPathList[i]), Qt::UserRole);
         QStandardItem *textItem = new QStandardItem(mp_driversList[i]);
         model->setItem(i, 0, icomItem);
         model->setItem(i, 1, textItem);
