@@ -218,6 +218,11 @@ EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
     // 设置设备状态
     int id = EnableManager::instance()->getDeviceID(m_Name, m_KeysToCatDevices);
+    if (id < 0)
+    {
+        //兆芯设备上，xinput输出触摸屏时，name与model信息与正常情况相反，需要用model字段查询deviceid
+        id = EnableManager::instance()->getDeviceID(m_Model, m_KeysToCatDevices);
+    }
     EnableDeviceStatus res = EnableManager::instance()->enableDeviceByInput(e, id);
     if (res == EDS_Success)
         m_Enable = e;
