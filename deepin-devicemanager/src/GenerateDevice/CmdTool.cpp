@@ -405,8 +405,8 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
 
     // 获取信息
     QStringList items = info.split("\n\n");
-    QStringList auths = sAinfo.split("\n\n");
-    QStringList remos = sRinfo.split("\n\n");
+    QStringList auths = sAinfo.split("\n\n", QString::SkipEmptyParts);
+    QStringList remos = sRinfo.split("\n\n", QString::SkipEmptyParts);
     QStringList resItems = items + auths + remos;
 
     foreach (const QString &item, resItems) {
