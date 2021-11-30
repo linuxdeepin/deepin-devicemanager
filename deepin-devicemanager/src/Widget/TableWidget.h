@@ -105,7 +105,7 @@ private slots:
     /**
      * @brief slotShowMenu:鼠标右键菜单槽函数
      */
-    void slotShowMenu(const QPoint &);
+    void slotShowMenu(const QPoint &p);
 
     /**
      * @brief slotActionRefresh:右键刷新按钮槽函数

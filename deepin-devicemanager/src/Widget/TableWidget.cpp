@@ -180,7 +180,7 @@ void TableWidget::paintEvent(QPaintEvent *e)
 
 }
 
-void TableWidget::slotShowMenu(const QPoint &)
+void TableWidget::slotShowMenu(const QPoint &point)
 {
     mp_Menu->clear();
     // 不管什么状态 导出、刷新、复制 都有
@@ -191,7 +191,7 @@ void TableWidget::slotShowMenu(const QPoint &)
     mp_removeDriver->setEnabled(true);
 
     // 不可用状态：卸载和启用禁用置灰
-    if(!mp_Table->currentRowAvailable()){
+    if (!mp_Table->currentRowAvailable()) {
         mp_Enable->setEnabled(false);
         mp_removeDriver->setEnabled(false);
     }
@@ -205,7 +205,7 @@ void TableWidget::slotShowMenu(const QPoint &)
         mp_Enable->setText(tr("Enable"));
     }
     // 驱动界面打开状态： 驱动的更新卸载和设备的启用禁用置灰
-    if(PageDriverControl::isRunning()){
+    if (PageDriverControl::isRunning()) {
         mp_updateDriver->setEnabled(false);
         mp_removeDriver->setEnabled(false);
         mp_Enable->setEnabled(false);
@@ -218,7 +218,7 @@ void TableWidget::slotShowMenu(const QPoint &)
     //主线程时使用时会阻塞执行
     emit signalCheckPrinterStatus(row, isPrinter, isInstalled);
     //dde-printer未安装
-    if(isPrinter && !isInstalled) {
+    if (isPrinter && !isInstalled) {
         mp_updateDriver->setEnabled(false);
     }
 
@@ -226,11 +226,16 @@ void TableWidget::slotShowMenu(const QPoint &)
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     QModelIndex index = mp_Table->currentIndex();
-    if (m_Enable && index.row() >= 0) {
+    QModelIndex indext = mp_Table->indexAt(point);   // 鼠标右击table，绝对位置转换
+    qInfo() << point << this->mapToGlobal(point) << mp_Table->mapFromGlobal(this->mapToGlobal(point));
+    qInfo() << index.row() << indext.row();
+    // 选中item状态下才有启用/禁用按钮
+    if (m_Enable && ((0 == index.row() && indext.row() != -1) || index.row() > 0)) {
         mp_Menu->addAction(mp_Enable);
     }
     // 主板、内存、cpu等没有驱动，无需右键按钮
-    if(m_CanUninstall){
+    // 选中item状态下才有卸载、更新按钮
+    if (m_CanUninstall && ((0 == index.row() && indext.row() != -1) || index.row() > 0)) {
         mp_Menu->addSeparator();
         mp_Menu->addAction(mp_updateDriver);
         mp_Menu->addAction(mp_removeDriver);
