@@ -57,6 +57,7 @@ void GetDriverNameWidget::init()
 
     mp_StackWidget->addWidget(mp_WaitingWidget);
     mp_StackWidget->addWidget(mp_ListView);
+    mp_StackWidget->setContentsMargins(0,5,0,0);
     QHBoxLayout *layout = new QHBoxLayout;
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addStretch();
