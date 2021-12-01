@@ -59,8 +59,11 @@ PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool in
     setIcon(QIcon::fromTheme("deepin-devicemanager"));
 
     DBlurEffectWidget *widget = findChild<DBlurEffectWidget *>();
-    widget->lower();
-    widget->setBlurEnabled(false);
+    if(nullptr != widget)
+    {
+        widget->lower();
+        widget->setBlurEnabled(false);
+    }
     setAttribute(Qt::WA_NoSystemBackground, false);
 
     DWidget *cenWidget = new DWidget;
