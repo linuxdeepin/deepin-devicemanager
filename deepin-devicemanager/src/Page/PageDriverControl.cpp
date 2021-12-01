@@ -335,20 +335,5 @@ void PageDriverControl::enableCloseBtn(bool enable)
 
     // 禁用按钮
     closeBtn->setAttribute(Qt::WA_TransparentForMouseEvents,!enable);
-    if(enable){
-        closeBtn->setIcon(style()->standardIcon(style()->SP_TitleBarCloseButton));//还原
-    }else {
-        QIcon icon = style()->standardIcon(style()->SP_TitleBarCloseButton);
-        QPixmap pm(icon.pixmap(closeBtn->size()));
-        QPixmap t(pm);
-        t.fill(Qt::transparent);
-        QPainter p(&t);
-        p.setCompositionMode(QPainter::CompositionMode_Source);
-        p.drawPixmap(0,0,pm);
-        p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-        p.fillRect(t.rect(),QColor(0,0,0,102));//255*2/5=102
-        p.end();
-        pm=t;
-        closeBtn->setIcon(pm);
-    }
+    closeBtn->setEnabled(enable);
 }
