@@ -71,6 +71,7 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5 COMPONENTS DBus REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
+find_package(PolkitQt5-1 REQUIRED)
 find_package(Qt5Test REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
@@ -104,18 +105,14 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/)
 #add cups
 include_directories("/usr/include/cups/")
 link_libraries("cups")
-link_libraries("zmq")
 
+#src
 file(GLOB_RECURSE SRC_CPP
-    ${CMAKE_CURRENT_LIST_DIR}/../3rdparty/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/DebugTimeManager.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/GenerateDevice/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/DeviceManager/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/Page/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/Tool/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/Widget/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/EnableAndDisable/*.cpp
+     ${CMAKE_CURRENT_LIST_DIR}/../src/*.cpp
+     ${CMAKE_CURRENT_LIST_DIR}/../3rdparty/*.cpp
     )
+# remove src main.cpp or will multi define
+list(REMOVE_ITEM SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/../src/main.cpp)
 
 file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE TEST_SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
@@ -137,6 +134,7 @@ target_link_libraries(${PROJECT_NAME_TEST}
     ${DFrameworkdbus_LIBRARIES}
     ${GTEST_LIBRARIES}
     ${GTEST_MAIN_LIBRARIES}
+    PolkitQt5-1::Agent
     pthread
 )
 

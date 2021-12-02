@@ -180,8 +180,6 @@ private:
     QString               m_Version;            //<! 【版本】
     QString               m_Capabilities;       //<! 【功能】
     QString               m_Description;        //<! 【描述】
-    QString               m_PowerOnHours;       //<! 【通电时间】9
-    QString               m_PowerCycleCount;    //<! 【通电次数】10
     QString               m_FirmwareVersion;    //<! 【固件版本】8
     QString               m_Speed;              //<! 【速度】5
     QString               m_Driver;

@@ -334,7 +334,7 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
             QPair<QString, QString> tempPair;
             tempPair.first = "";
             tempPair.second = *it;
-            addRow(doc, table, tempPair);
+            addRow(doc, tr, tempPair);
         }
     } else {
         addTd2(doc, tr, pair.second);

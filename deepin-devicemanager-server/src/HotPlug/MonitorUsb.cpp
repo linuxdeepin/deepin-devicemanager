@@ -1,10 +1,17 @@
 #include "MonitorUsb.h"
+#include "EnableSqlManager.h"
+#include "EnableUtils.h"
 
 #include <QDebug>
-
+#include <QProcess>
+#include <QFile>
+#include <QDateTime>
 
 MonitorUsb::MonitorUsb()
     : m_Udev(nullptr)
+    , mp_Timer(new QTimer(this))
+    , m_UsbChangeTime()
+    , m_UsbChanged(false)
 {
     m_Udev = udev_new();
     if (!m_Udev) {
@@ -19,6 +26,10 @@ MonitorUsb::MonitorUsb()
     udev_monitor_enable_receiving(mon);
     // 获取该监控的文件描述符，fd就代表了这个监控
     fd = udev_monitor_get_fd(mon);
+
+    // 定时器发送消息
+    connect(mp_Timer, &QTimer::timeout, this, &MonitorUsb::slotTimeout);
+    mp_Timer->start(1000);
 }
 
 void MonitorUsb::monitor()
@@ -60,9 +71,23 @@ void MonitorUsb::monitor()
         // 只有add和remove事件才会更新缓存信息
         strcpy(buf, udev_device_get_action(dev));
         if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) {
-            emit usbChanged();
+            if(0 == strcmp("add", buf)){
+                EnableUtils::disableOutDevice();
+            }
+            m_UsbChanged = true;
+            m_UsbChangeTime = QDateTime::currentMSecsSinceEpoch();
         }
 
         udev_device_unref(dev);
     }
+}
+
+void MonitorUsb::slotTimeout()
+{
+    if(!m_UsbChanged)
+        return;
+    if(QDateTime::currentMSecsSinceEpoch() - m_UsbChangeTime < 1000)
+        return;
+    m_UsbChanged = false;
+    emit usbChanged();
 }

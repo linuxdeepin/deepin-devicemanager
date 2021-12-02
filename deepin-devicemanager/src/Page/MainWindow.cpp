@@ -461,3 +461,10 @@ bool MainWindow::event(QEvent *event)
 
     return DMainWindow::event(event);
 }
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    // 处理状态栏 “关闭所有” 按钮时通知后台更新信息
+//    DBusInterface::getInstance()->refreshInfo();
+    return DMainWindow::closeEvent(event);
+}

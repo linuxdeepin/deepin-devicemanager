@@ -73,6 +73,12 @@ public:
     void updateCurItemEnable(int row, bool enable);
 
     /**
+     * @brief setCanUninstall
+     * @param canInstall
+     */
+    void setCanUninstall(bool canInstall);
+
+    /**
      * @brief clear : 清空数据
      */
     void clear();
@@ -88,6 +94,9 @@ signals:
     void refreshInfo();
     void exportInfo();
     void enableDevice(int row, bool enable);
+    void uninstallDriver(int row);
+    void installDriver(int row);
+    void signalCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled);
 protected:
     void paintEvent(QPaintEvent *e) override;
 
@@ -96,7 +105,7 @@ private slots:
     /**
      * @brief slotShowMenu:鼠标右键菜单槽函数
      */
-    void slotShowMenu(const QPoint &);
+    void slotShowMenu(const QPoint &p);
 
     /**
      * @brief slotActionRefresh:右键刷新按钮槽函数
@@ -114,6 +123,16 @@ private slots:
     void slotActionEnable();
 
     /**
+     * @brief slotActionCopy:右键菜单更新驱动
+     */
+    void slotActionUpdateDriver();
+
+    /**
+     * @brief slotActionCopy:右键菜单卸载驱动
+     */
+    void slotActionRemoveDriver();
+
+    /**
      * @brief slotItemClicked:ListView Item 点击槽函数
      * @param index:点击Item的索引
      */
@@ -128,8 +147,11 @@ private:
     QAction          *mp_Enable;      //<! 启用禁用
     QAction          *mp_Refresh;     //<! 右键刷新
     QAction          *mp_Export;      //<! 右键导出
+    QAction          *mp_updateDriver;//<! 驱动更新
+    QAction          *mp_removeDriver;//<! 驱动卸载
     QMenu            *mp_Menu;        //<! 右键菜单
-    bool                       m_Enable;
+    bool             m_Enable;
+    bool             m_CanUninstall;  //<! 可以卸载
 };
 
 

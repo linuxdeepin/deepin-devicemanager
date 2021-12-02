@@ -89,7 +89,17 @@ public:
      */
     const QString &name()const override;
 
-    const QString &driver()const override;
+    /**
+     * @brief driver 返回驱动，重写纯虚函数
+     * @return
+     */
+    const QString &driver() const override;
+
+    /**
+     * @brief available 返回是否可用
+     * @return
+     */
+    bool available() override;
 
     /**
      * @brief subTitle:获取子标题

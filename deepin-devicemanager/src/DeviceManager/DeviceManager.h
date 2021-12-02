@@ -110,6 +110,13 @@ public:
     void addMouseDevice(DeviceInput *const device);
 
     /**
+     * @brief getMouseDevice
+     * @param unique_id
+     * @return
+     */
+    DeviceBaseInfo* getMouseDevice(const QString& unique_id);
+
+    /**
      * @brief addMouseInfoFromLshw:添加从lshw获取的鼠标信息
      * @param mapInfo:从lshw获取的鼠标信息map
      * @return 布尔值:true-设置成功；false-设置失败
@@ -246,12 +253,26 @@ public:
      */
     bool setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
+    /**
+     * @brief getBluetoothDevice
+     * @param unique_id
+     * @return
+     */
+    DeviceBaseInfo* getBluetoothDevice(const QString& unique_id);
+
     // 音频设备相关
     /**
      * @brief addAudioDevice:添加声卡
      * @param device:被添加的声卡
      */
     void addAudioDevice(DeviceAudio *const device);
+
+    /**
+     * @brief getAudioDevice 获取音频设备
+     * @param path
+     * @return
+     */
+    DeviceBaseInfo* getAudioDevice(const QString& path);
 
     /**
      * @brief setAudioInfoFromLshw:设置由lshw获取的声卡信息
@@ -271,6 +292,13 @@ public:
      * @param device:被添加的网络适配器
      */
     void addNetworkDevice(DeviceNetwork *const device);
+
+    /**
+     * @brief getNetworkDevice 获取网卡设备
+     * @param busInfo
+     * @return
+     */
+    DeviceBaseInfo * getNetworkDevice(const QString& unique_id);
 
     /**
      * @brief correctNetworkLinkStatus:校正网络连接状态
@@ -298,6 +326,13 @@ public:
     void addImageDevice(DeviceImage *const device);
 
     /**
+     * @brief getImageDevice
+     * @param unique_id
+     * @return
+     */
+    DeviceBaseInfo* getImageDevice(const QString& unique_id);
+
+    /**
      * @brief setCameraInfoFromLshw:设置由lshw获取的图像设备信息
      * @param mapInfo:由lshw获取的图像设备信息map
      */
@@ -322,6 +357,13 @@ public:
      * @param device:其他设备设备信息
      */
     void addOthersDevice(DeviceOthers *const device);
+
+    /**
+     * @brief getOthersDevice
+     * @param unique_id
+     * @return
+     */
+    DeviceBaseInfo* getOthersDevice(const QString& unique_id);
 
     /**
      * @brief addOthersDeviceFromHwinfo:添加由hwinfo获取的其他设备信息

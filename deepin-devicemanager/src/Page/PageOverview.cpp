@@ -120,13 +120,6 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     QString os = str2;
     QString linkStr = LINK_STR;
 
-    // 社区版链接不同
-    DSysInfo::UosEdition type = DSysInfo::uosEditionType();
-    if (DSysInfo::UosCommunity == type) {
-        linkStr = DEEPIN_LINK;
-    }
-
-
     // 系统类型+链接
     QString productName = DeviceGenerator::getProductName();
     linkStr += productName + END_STR + os.remove(productName);

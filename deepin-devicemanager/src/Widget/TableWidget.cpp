@@ -1,5 +1,9 @@
 // 项目自身文件
 #include "TableWidget.h"
+#include "PageDriverControl.h"
+#include "MacroDefinition.h"
+#include "logviewitemdelegate.h"
+#include "logtreeview.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -15,13 +19,6 @@
 #include <QHBoxLayout>
 #include <QPainterPath>
 
-// 其它头文件
-#include "MacroDefinition.h"
-#include "logviewitemdelegate.h"
-#include "logtreeview.h"
-
-
-
 TableWidget::TableWidget(QWidget *parent)
     : DWidget(parent)
     , mp_Table(new LogTreeView(this))
@@ -29,6 +26,8 @@ TableWidget::TableWidget(QWidget *parent)
     , mp_Enable(new QAction(tr("Disable"), this))
     , mp_Refresh(new QAction(/*QIcon::fromTheme("view-refresh"), */tr("Refresh"), this))
     , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export"), this))
+    , mp_updateDriver(new QAction(tr("Update drivers"), this))
+    , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
     , mp_Menu(new DMenu(this))
     , m_Enable(false)
 
@@ -44,6 +43,8 @@ TableWidget::TableWidget(QWidget *parent)
     connect(mp_Refresh, &QAction::triggered, this, &TableWidget::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &TableWidget::slotActionExport);
     connect(mp_Enable, &QAction::triggered, this, &TableWidget::slotActionEnable);
+    connect(mp_updateDriver, &QAction::triggered, this, &TableWidget::slotActionUpdateDriver);
+    connect(mp_removeDriver, &QAction::triggered, this, &TableWidget::slotActionRemoveDriver);
 }
 
 TableWidget::~TableWidget()
@@ -115,6 +116,11 @@ void TableWidget::updateCurItemEnable(int row, bool enable)
         mp_Table->updateCurItemEnable(row, enable);
 }
 
+void TableWidget::setCanUninstall(bool canInstall)
+{
+    m_CanUninstall = canInstall;
+}
+
 void TableWidget::clear()
 {
     if (mp_Table) {
@@ -174,24 +180,66 @@ void TableWidget::paintEvent(QPaintEvent *e)
 
 }
 
-void TableWidget::slotShowMenu(const QPoint &)
+void TableWidget::slotShowMenu(const QPoint &point)
 {
-    // right-click menu
     mp_Menu->clear();
-    QModelIndex index = mp_Table->currentIndex();
+    // 不管什么状态 导出、刷新、复制 都有
+    mp_Refresh->setEnabled(true);
+    mp_Export->setEnabled(true);
+    mp_Enable->setEnabled(true);
+    mp_updateDriver->setEnabled(true);
+    mp_removeDriver->setEnabled(true);
 
-    if (m_Enable && index.row() >= 0) {
-        if (mp_Table->currentRowEnable()) {
-            mp_Enable->setText(tr("Disable"));
-        } else {
-            mp_Enable->setText(tr("Enable"));
-        }
-
-        mp_Menu->addAction(mp_Enable);
+    // 不可用状态：卸载和启用禁用置灰
+    if (!mp_Table->currentRowAvailable()) {
+        mp_Enable->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+    }
+    // 禁用状态：更新卸载置灰
+    if (mp_Table->currentRowEnable()) {
+        mp_Enable->setText(tr("Disable"));
+    } else {
+        mp_updateDriver->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+        mp_Enable->setEnabled(true);
+        mp_Enable->setText(tr("Enable"));
+    }
+    // 驱动界面打开状态： 驱动的更新卸载和设备的启用禁用置灰
+    if (PageDriverControl::isRunning()) {
+        mp_updateDriver->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+        mp_Enable->setEnabled(false);
     }
 
+
+    int row = mp_Table->currentRow();
+    bool isInstalled = false;
+    bool isPrinter = false;
+    //主线程时使用时会阻塞执行
+    emit signalCheckPrinterStatus(row, isPrinter, isInstalled);
+    //dde-printer未安装
+    if (isPrinter && !isInstalled) {
+        mp_updateDriver->setEnabled(false);
+    }
+
+    // 添加按钮到菜单
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
+    QModelIndex index = mp_Table->currentIndex();
+    QModelIndex indext = mp_Table->indexAt(point);   // 鼠标右击table，绝对位置转换
+    qInfo() << point << this->mapToGlobal(point) << mp_Table->mapFromGlobal(this->mapToGlobal(point));
+    qInfo() << index.row() << indext.row();
+    // 选中item状态下才有启用/禁用按钮
+    if (m_Enable && ((0 == index.row() && indext.row() != -1) || index.row() > 0)) {
+        mp_Menu->addAction(mp_Enable);
+    }
+    // 主板、内存、cpu等没有驱动，无需右键按钮
+    // 选中item状态下才有卸载、更新按钮
+    if (m_CanUninstall && ((0 == index.row() && indext.row() != -1) || index.row() > 0)) {
+        mp_Menu->addSeparator();
+        mp_Menu->addAction(mp_updateDriver);
+        mp_Menu->addAction(mp_removeDriver);
+    }
     mp_Menu->exec(QCursor::pos());
 }
 
@@ -218,6 +266,16 @@ void TableWidget::slotActionEnable()
         // unenable device
         emit enableDevice(mp_Table->currentRow(), false);
     }
+}
+
+void TableWidget::slotActionUpdateDriver()
+{
+    emit installDriver(mp_Table->currentRow());
+}
+
+void TableWidget::slotActionRemoveDriver()
+{
+    emit uninstallDriver(mp_Table->currentRow());
 }
 
 void TableWidget::slotItemClicked(const QModelIndex &index)

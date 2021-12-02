@@ -16,8 +16,6 @@
 */
 #include "DevicePrint.h"
 #include "DeviceInfo.h"
-#include "EnableManager.h"
-
 #include "ut_Head.h"
 #include "stub.h"
 
@@ -44,7 +42,7 @@ public:
 void ut_print_setmap(QMap<QString, QString> &mapinfo)
 {
     mapinfo.insert("printer-info", "Canon iR-ADV C3720 22.21");
-    mapinfo.insert("Name", "Canon-iR-ADV-C3720-UFR-II");
+    mapinfo.insert("Name", "Canon-iR-ADV-C3720-UFR");
     mapinfo.insert("device-uri", "socket://10.4.12.241");
     mapinfo.insert("printer-state", "3");
 }
@@ -57,7 +55,7 @@ TEST_F(UT_DevicePrint, UT_DevicePrint_setInfo)
 
     EXPECT_STREQ("Canon", m_devicePrint->m_Vendor.toStdString().c_str());
     EXPECT_STREQ("iR-ADV C3720 22.21", m_devicePrint->m_Model.toStdString().c_str());
-    EXPECT_STREQ("Canon-iR-ADV-C3720-UFR-II", m_devicePrint->m_Name.toStdString().c_str());
+    EXPECT_STREQ("Canon-iR-ADV-C3720-UFR", m_devicePrint->m_Name.toStdString().c_str());
     EXPECT_STREQ("socket://10.4.12.241", m_devicePrint->m_URI.toStdString().c_str());
     EXPECT_STREQ("3", m_devicePrint->m_Status.toStdString().c_str());
     EXPECT_STREQ("socket", m_devicePrint->m_InterfaceType.toStdString().c_str());
@@ -70,7 +68,7 @@ TEST_F(UT_DevicePrint, UT_DevicePrint_name)
     m_devicePrint->setInfo(mapinfo);
 
     QString name = m_devicePrint->name();
-    EXPECT_STREQ("Canon-iR-ADV-C3720-UFR-II", name.toStdString().c_str());
+    EXPECT_STREQ("Canon-iR-ADV-C3720-UFR", name.toStdString().c_str());
 }
 
 TEST_F(UT_DevicePrint, UT_DevicePrint_driver)
@@ -86,7 +84,7 @@ TEST_F(UT_DevicePrint, UT_DevicePrint_subTitle)
     m_devicePrint->setInfo(mapinfo);
 
     QString title = m_devicePrint->subTitle();
-    EXPECT_STREQ("Canon-iR-ADV-C3720-UFR-II", title.toStdString().c_str());
+    EXPECT_STREQ("Canon-iR-ADV-C3720-UFR", title.toStdString().c_str());
 }
 
 TEST_F(UT_DevicePrint, UT_DevicePrint_getOverviewInfo)
@@ -96,7 +94,7 @@ TEST_F(UT_DevicePrint, UT_DevicePrint_getOverviewInfo)
     m_devicePrint->setInfo(mapinfo);
 
     QString overview = m_devicePrint->getOverviewInfo();
-    EXPECT_STREQ("Canon-iR-ADV-C3720-UFR-II", overview.toStdString().c_str());
+    EXPECT_STREQ("Canon-iR-ADV-C3720-UFR", overview.toStdString().c_str());
 }
 
 EnableDeviceStatus ut_print_enableprinter()
@@ -106,20 +104,12 @@ EnableDeviceStatus ut_print_enableprinter()
 
 TEST_F(UT_DevicePrint, UT_DevicePrint_setEnable_001)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, enablePrinter), ut_print_enableprinter);
-
-    EXPECT_EQ(EnableDeviceStatus::EDS_Success, m_devicePrint->setEnable(true));
-    EXPECT_EQ("3", m_devicePrint->m_Status);
+//    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_devicePrint->setEnable(true));
 }
 
 TEST_F(UT_DevicePrint, UT_DevicePrint_setEnable_002)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, enablePrinter), ut_print_enableprinter);
-
-    EXPECT_EQ(EnableDeviceStatus::EDS_Success, m_devicePrint->setEnable(false));
-    EXPECT_EQ("5", m_devicePrint->m_Status);
+//    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_devicePrint->setEnable(false));
 }
 
 

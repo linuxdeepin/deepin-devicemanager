@@ -15,8 +15,6 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "DeviceBluetooth.h"
-#include "EnableManager.h"
-
 #include "stub.h"
 #include "ut_Head.h"
 
@@ -110,7 +108,7 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setInfoFromLshw_001)
 {
     QMap<QString, QString> mapInfo;
     ut_bluetooth_setlshwmap(mapInfo);
-    m_deviceBluetooth->m_UniqueKey = "usb@1:8";
+    m_deviceBluetooth->m_HwinfoToLshw = "usb@1:8";
 
     ASSERT_FALSE(m_deviceBluetooth->setInfoFromLshw(mapInfo));
 }
@@ -119,7 +117,7 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setInfoFromLshw_002)
 {
     QMap<QString, QString> mapInfo;
     ut_bluetooth_setlshwmap(mapInfo);
-    m_deviceBluetooth->m_UniqueKey = "usb@1:2";
+    m_deviceBluetooth->m_HwinfoToLshw = "usb@1:2";
 
     ASSERT_TRUE(m_deviceBluetooth->setInfoFromLshw(mapInfo));
     EXPECT_STREQ("vendor", m_deviceBluetooth->m_Vendor.toStdString().c_str());
@@ -178,11 +176,6 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_getOverviewInfo)
     EXPECT_STREQ("Name", overview.toStdString().c_str());
 }
 
-EnableDeviceStatus ut_bluetooth_enableDeviceByDriver()
-{
-    return EnableDeviceStatus::EDS_Faild;
-}
-
 bool ut_bluetooth_isenablebydriver_true()
 {
     return true;
@@ -195,24 +188,16 @@ bool ut_bluetooth_isenablebydriver_false()
 
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setEnable_001)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, enableDeviceByDriver), ut_bluetooth_enableDeviceByDriver);
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_bluetooth_isenablebydriver_true);
-    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_deviceBluetooth->setEnable(true));
+//    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_deviceBluetooth->setEnable(true));
 }
 
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setEnable_002)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, enableDeviceByDriver), ut_bluetooth_enableDeviceByDriver);
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_bluetooth_isenablebydriver_true);
-    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_deviceBluetooth->setEnable(false));
+//    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_deviceBluetooth->setEnable(false));
 }
 
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_enable)
 {
-    Stub stub;
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_bluetooth_isenablebydriver_true);
     EXPECT_TRUE(m_deviceBluetooth->enable());
 }
 
@@ -228,24 +213,6 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadBaseDeviceInfo)
     EXPECT_EQ(0, m_deviceBluetooth->m_LstBaseInfo.size());
 }
 
-TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_parseKeyToLshw_001)
-{
-    m_deviceBluetooth->parseKeyToLshw("1-2:1.0");
-    EXPECT_STREQ("usb@1:2", m_deviceBluetooth->m_UniqueKey.toStdString().c_str());
-}
-
-TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_parseKeyToLshw_002)
-{
-    m_deviceBluetooth->parseKeyToLshw("1-2.1.0");
-    EXPECT_STREQ("", m_deviceBluetooth->m_UniqueKey.toStdString().c_str());
-}
-
-TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_parseKeyToLshw_003)
-{
-    m_deviceBluetooth->parseKeyToLshw("1.2:1.0");
-    EXPECT_STREQ("", m_deviceBluetooth->m_UniqueKey.toStdString().c_str());
-}
-
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadOtherDeviceInfo)
 {
     m_deviceBluetooth->loadOtherDeviceInfo();
@@ -258,9 +225,6 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadTableData_001)
     ut_bluetooth_sethwinfomap(mapinfo);
     m_deviceBluetooth->setInfoFromHwinfo(mapinfo);
 
-    Stub stub;
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_bluetooth_isenablebydriver_true);
-
     m_deviceBluetooth->loadTableData();
     EXPECT_EQ(3, m_deviceBluetooth->m_TableData.size());
 }
@@ -270,9 +234,6 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadTableData_002)
     QMap<QString, QString> mapinfo;
     ut_bluetooth_sethwinfomap(mapinfo);
     m_deviceBluetooth->setInfoFromHwinfo(mapinfo);
-
-    Stub stub;
-    stub.set(ADDR(EnableManager, isDeviceEnableByDriver), ut_bluetooth_isenablebydriver_false);
 
     m_deviceBluetooth->loadTableData();
     EXPECT_EQ(3, m_deviceBluetooth->m_TableData.size());

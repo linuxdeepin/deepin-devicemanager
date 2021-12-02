@@ -27,6 +27,9 @@ PageTableHeader::PageTableHeader(QWidget *parent)
     connect(mp_Table, &TableWidget::refreshInfo, this, &PageTableHeader::refreshInfo);
     connect(mp_Table, &TableWidget::exportInfo, this, &PageTableHeader::exportInfo);
     connect(mp_Table, &TableWidget::enableDevice, this, &PageTableHeader::enableDevice);
+    connect(mp_Table, &TableWidget::installDriver, this, &PageTableHeader::installDriver);
+    connect(mp_Table, &TableWidget::uninstallDriver, this, &PageTableHeader::uninstallDriver);
+    connect(mp_Table, &TableWidget::signalCheckPrinterStatus, this, &PageTableHeader::signalCheckPrinterStatus);
 }
 
 PageTableHeader::~PageTableHeader()
@@ -75,12 +78,7 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
     }
 
     for (int i = 0; i < row - 1; i++) {
-        bool enable = lst[i + 1][0].startsWith("(" + tr("Disable") + ")");
-        int co = column;
-
-        if (enable)
-            co = 1;
-        for (int j = 0; j < co; j++) {
+        for (int j = 0; j < column; j++) {
             DStandardItem *item = new DStandardItem(lst[i + 1][j]);
             mp_Table->setItem(i, j, item);
         }
@@ -97,10 +95,9 @@ void PageTableHeader::setColumnAverage()
         mp_Table->setColumnAverage();
 }
 
-void PageTableHeader::updateCurItemEnable(int row, int enable)
+void PageTableHeader::setCanUninstall(bool canUninstall)
 {
-    // 禁用/启用当前设备
-    mp_Table->updateCurItemEnable(row, enable);
+    mp_Table->setCanUninstall(canUninstall);
 }
 
 void PageTableHeader::paintEvent(QPaintEvent *e)

@@ -1,11 +1,9 @@
 // 项目自身文件
 #include "DeviceBluetooth.h"
+#include "DBusEnableInterface.h"
 
 // Qt库文件
 #include <QDebug>
-
-// 其它头文件
-#include "EnableManager.h"
 
 DeviceBluetooth::DeviceBluetooth()
     : DeviceBaseInfo()
@@ -41,15 +39,30 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
 
 bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    if(mapInfo.find("path") != mapInfo.end()){
+        setAttribute(mapInfo, "name", m_Name);
+        m_SysPath = mapInfo["path"];
+        m_HardwareClass = mapInfo["Hardware Class"];
+        m_Enable = false;
+        m_UniqueID = mapInfo["unique_id"];
+        return true;
+    }
+
+    // 设置设备基本属性
+    setAttribute(mapInfo, "Serial ID", m_SerialID);
     // 获取设备基本信息
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
+    setAttribute(mapInfo, "Serial ID", m_UniqueID);
+    setAttribute(mapInfo, "Device", m_Name);
+    m_HardwareClass = "bluetooth";
 
     // 设置关联到lshw信息的key值,设备的唯一标志
-    parseKeyToLshw(mapInfo["SysFS BusID"]);
+    setHwinfoLshwKey(mapInfo);
 
     // 获取其他信息
     getOtherMapInfo(mapInfo);
@@ -59,7 +72,7 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // 根据 总线信息 与 设备信息中的唯一key值 判断是否是同一台设备
-    if (mapInfo["bus info"] != m_UniqueKey)
+    if (!matchToLshw(mapInfo))
         return false;
 
     // 获取基本信息
@@ -98,18 +111,24 @@ const QString DeviceBluetooth::getOverviewInfo()
 
 EnableDeviceStatus DeviceBluetooth::setEnable(bool e)
 {
-    // 设置设备状态
-    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    if (e != enable())
-        res = EDS_Faild;
+    if(m_SerialID.isEmpty()){
+        return EDS_NoSerial;
+    }
 
-    return res;
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
+    if(res){
+        m_Enable = e;
+    }
+    // 设置设备状态
+    return res ? EDS_Success : EDS_Faild;
 }
 
 bool DeviceBluetooth::enable()
 {
     // 获取设备状态
-    m_Enable = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
     return m_Enable;
 }
 
@@ -155,23 +174,6 @@ void DeviceBluetooth::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Model"), m_Model);
 }
 
-void DeviceBluetooth::parseKeyToLshw(const QString &info)
-{
-    // 解析映射到lshw的唯一值
-
-    //1-2:1.0
-    QStringList words = info.split(":");
-    if (words.size() != 2)
-        return;
-
-    QStringList chs = words[0].split("-");
-    if (chs.size() != 2)
-        return;
-
-    // usb@%1:%2
-    m_UniqueKey = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-}
-
 void DeviceBluetooth::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
@@ -191,13 +193,17 @@ void DeviceBluetooth::loadOtherDeviceInfo()
 void DeviceBluetooth::loadTableData()
 {
     // 加载表格数据
-    QString name;
-    if (!enable())
-        name = "(" + tr("Disable") + ") " + m_Name;
-    else
-        name = m_Name;
+    QString tName = m_Name;
 
-    m_TableData.append(name);
+    if (!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }
+
+    if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
+    }
+
+    m_TableData.append(tName);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }

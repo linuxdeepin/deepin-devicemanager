@@ -31,6 +31,7 @@ set(APP_TRANS_SCRIPT "${APP_RES_DIR}/translate_generation.sh")
 set(APP_DESKTOP "${APP_RES_DIR}/deepin-devicemanager.desktop")
 set(APP_QRC "${APP_RES_DIR}/appimage.qrc")
 set(APP_ICON_FILE "${APP_RES_DIR}/icons/deepin/builtin/deepin-devicemanager.svg")
+set(APP_AUTHENTICATION "${APP_RES_DIR}/com.deepin.deepin-devicemanager.policy")
 project(${APP_BIN_NAME})
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -39,7 +40,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "-Wl,--as-need -fPIE")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--as-need -fPIE -fstack-protector-strong -D_FORTITY_SOURCE=1 -z noexecstack -pie -fPIC -z lazy")
 set(CMAKE_EXE_LINKER_FLAGS "-pie")
 
 option (PERF_ON "Use provided math implementation" ON)
@@ -91,7 +92,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/include/Qt
 #add cups and zmq
 include_directories("/usr/include/cups/")
 link_libraries("cups")
-link_libraries("zmq")
 
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
@@ -101,8 +101,10 @@ file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_D
 find_package(PkgConfig REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5 COMPONENTS DBus REQUIRED)
+find_package(Qt5Network REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
+find_package(PolkitQt5-1 REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(DFrameworkdbus REQUIRED)
@@ -123,6 +125,8 @@ target_link_libraries(${APP_BIN_NAME}
     Qt5::Widgets
     Qt5::DBus
     Qt5::Xml
+    Qt5::Network
+    PolkitQt5-1::Agent
 )
 
 set(CMAKE_INSTALL_PREFIX /usr)
@@ -136,6 +140,7 @@ install(FILES ${APP_QM_FILES} DESTINATION share/deepin-devicemanager/translation
 install(FILES ${APP_DESKTOP} DESTINATION share/applications)
 install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/apps)
 install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
+install(FILES ${APP_AUTHENTICATION} DESTINATION /usr/share/polkit-1/actions)
 
 # Test--------deepin-devicemanager
-add_subdirectory(./tests)
+# add_subdirectory(./tests)

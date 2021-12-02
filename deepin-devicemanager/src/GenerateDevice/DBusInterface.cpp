@@ -30,7 +30,7 @@ std::atomic<DBusInterface *> DBusInterface::s_Instance;
 std::mutex DBusInterface::m_mutex;
 
 const QString SERVICE_NAME = "com.deepin.devicemanager";
-const QString SERVICE_PATH = "/com/deepin/devicemanager";
+const QString DEVICE_SERVICE_PATH = "/com/deepin/devicemanager";
 
 DBusInterface::DBusInterface()
     : mp_Iface(nullptr)
@@ -52,59 +52,9 @@ bool DBusInterface::getInfo(const QString &key, QString &info)
     }
 }
 
-bool DBusInterface::reqUpdateUI(bool start)
+void DBusInterface::refreshInfo()
 {
-    // 启动还是刷新
-    QString cmd = start ? "START" : "UPDATE_UI";
-
-    // 调用dbus接口发送指令到后台
-    QString msg;
-    QDBusReply<QString> reply = mp_Iface->call("execCmd", cmd);
-    if (reply.isValid()) {
-        msg = reply.value();
-    } else {
-        qInfo() << "Failed to exec cmd ****** " << cmd;
-        return false;
-    }
-
-    if (msg == "3")
-        return true;
-    else
-        return false;
-}
-
-bool DBusInterface::execDriverOrder(const QString &cmd)
-{
-    QString msg;
-    QDBusReply<QString> reply = mp_Iface->call("execCmd", "DRIVER#" + cmd);
-    if (reply.isValid()) {
-        msg = reply.value();
-    } else {
-        qInfo() << "Failed to exec cmd ****** " << cmd;
-        return false;
-    }
-
-    if (msg == "2")
-        return true;
-    else
-        return false;
-}
-
-bool DBusInterface::execIfconfigOrder(const QString &cmd)
-{
-    QString msg;
-    QDBusReply<QString> reply = mp_Iface->call("execCmd", "IFCONFIG#" + cmd);
-    if (reply.isValid()) {
-        msg = reply.value();
-    } else {
-        qInfo() << "Failed to exec cmd ****** " << cmd;
-        return false;
-    }
-
-    if (msg == "2")
-        return true;
-    else
-        return false;
+    mp_Iface->asyncCall("refreshInfo");
 }
 
 void DBusInterface::init()
@@ -117,5 +67,5 @@ void DBusInterface::init()
     }
 
     // 2. create interface
-    mp_Iface = new QDBusInterface(SERVICE_NAME, SERVICE_PATH, "", QDBusConnection::systemBus());
+    mp_Iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, "", QDBusConnection::systemBus());
 }

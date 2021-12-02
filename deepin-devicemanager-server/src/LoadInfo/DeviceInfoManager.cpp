@@ -38,3 +38,15 @@ bool DeviceInfoManager::isInfoExisted(const QString &key)
         return false;
     }
 }
+
+bool DeviceInfoManager::isPathExisted(const QString &path)
+{
+    QMutexLocker locker(&mutex);
+    const QString& hwinfo = m_MapInfo["hwinfo"];
+    QString pathT = path;
+    if(hwinfo.contains(pathT.replace("/sys",""))){
+        return true;
+    }
+    return false;
+}
+

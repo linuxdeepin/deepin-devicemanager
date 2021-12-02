@@ -88,6 +88,11 @@ const QString &DeviceCpu::driver() const
     return m_Driver;
 }
 
+bool DeviceCpu::available()
+{
+    return true;
+}
+
 bool DeviceCpu::frequencyIsRange()const
 {
     return m_FrequencyIsRange;

@@ -72,6 +72,13 @@ public:
      */
     bool isInfoExisted(const QString &key);
 
+    /**
+     * @brief isPathExisted 判断该路径下的信息是否在设备管理器里面
+     * @param path
+     * @return
+     */
+    bool isPathExisted(const QString &path);
+
 protected:
     explicit DeviceInfoManager(QObject *parent = nullptr);
 

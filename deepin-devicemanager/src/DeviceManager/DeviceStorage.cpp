@@ -329,8 +329,6 @@ void DeviceStorage::loadBaseDeviceInfo()
 void DeviceStorage::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Power Cycle Count"), m_PowerCycleCount);
-    addOtherDeviceInfo(tr("Power On Hours"), m_PowerOnHours);
     addOtherDeviceInfo(tr("Firmware Version"), m_FirmwareVersion);
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Description"), m_Description);
@@ -358,7 +356,11 @@ void DeviceStorage::loadTableHeader()
 void DeviceStorage::loadTableData()
 {
     // 加载表格数据
-    m_TableData.append(m_Model);
+    QString model = m_Model;
+    if(!available()){
+        model = "(" + tr("Unavailable") + ") " + m_Model;
+    }
+    m_TableData.append(model);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_MediaType);
     m_TableData.append(m_Size);
@@ -394,16 +396,6 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     // 解决Bug45428,INTEL SSDSA2BW160G3L 这个型号的硬盘通过lsblk获取的rota是１，所以这里需要特殊处理
     if (m_RotationRate == QString("Solid State Device"))
         m_MediaType = QObject::tr("SSD");
-
-    // 通电时间
-    m_PowerOnHours = mapInfo["Power_On_Hours"];
-    if (m_PowerOnHours == "")
-        m_PowerOnHours = mapInfo["Power On Hours"];
-
-    // 通电次数
-    m_PowerCycleCount = mapInfo["Power_Cycle_Count"];
-    if (m_PowerCycleCount == "")
-        m_PowerCycleCount = mapInfo["Power Cycles"];
 
     // 安装大小
     QString capacity = mapInfo["User Capacity"];

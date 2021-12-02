@@ -53,11 +53,10 @@ public:
     void setColumnAverage();
 
     /**
-     * @brief updateCurItemEnable :更新当前item是否可用状态
-     * @param row 行号
-     * @param enable true:启用 false:禁用
+     * @brief setCanUninstall 设置是否有右键菜单
+     * @param canUninstall
      */
-    void updateCurItemEnable(int row, int enable);
+    void setCanUninstall(bool canUninstall);
 
 signals:
     /**
@@ -82,6 +81,13 @@ signals:
      * @param enable 禁用/启用
      */
     void enableDevice(int row, bool enable);
+    void uninstallDriver(int row);
+    void installDriver(int row);
+
+    /**
+     * @brief signalCheckPrinterStatus 判断dde-printer是否被安装
+     */
+    void signalCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled);
 
 protected:
     void paintEvent(QPaintEvent *e) override;

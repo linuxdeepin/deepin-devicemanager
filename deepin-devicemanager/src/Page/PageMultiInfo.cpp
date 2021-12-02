@@ -4,6 +4,8 @@
 #include "PageDetail.h"
 #include "MacroDefinition.h"
 #include "DeviceInfo.h"
+#include "PageDriverControl.h"
+#include "DevicePrint.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -16,6 +18,7 @@
 #include <QAction>
 #include <QIcon>
 #include <QDebug>
+#include <QProcess>
 
 DWIDGET_USE_NAMESPACE
 
@@ -35,6 +38,9 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     connect(mp_Detail, &PageDetail::refreshInfo, this, &PageMultiInfo::refreshInfo);
     connect(mp_Detail, &PageDetail::exportInfo, this, &PageMultiInfo::exportInfo);
     connect(mp_Table, &PageTableHeader::enableDevice, this, &PageMultiInfo::slotEnableDevice);
+    connect(mp_Table, &PageTableHeader::installDriver, this, &PageMultiInfo::slotActionUpdateDriver);
+    connect(mp_Table, &PageTableHeader::uninstallDriver, this, &PageMultiInfo::slotActionRemoveDriver);
+    connect(mp_Table, &PageTableHeader::signalCheckPrinterStatus, this, &PageMultiInfo::slotCheckPrinterStatus);
     emit refreshInfo();
 }
 
@@ -47,6 +53,9 @@ PageMultiInfo::~PageMultiInfo()
 
 void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
+    m_lstDevice.clear();
+    m_lstDevice = lst;
+
     if (lst.size() < 1)
         return;
 
@@ -60,6 +69,7 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     // 更新表格
     mp_Table->updateTable(deviceList);
+    mp_Table->setCanUninstall(lst[0]->canUninstall());
 
     // 更新详细信息
     mp_Detail->showDeviceInfo(lst);
@@ -103,7 +113,7 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
     if (res == EDS_Success) {
         // 设置成功,更新界面
         emit updateUI();
-    } else {
+    } else if(res == EDS_Faild) {
         // 设置失败
         QString con;
         if (enable)
@@ -115,7 +125,55 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
 
         // 禁用、启用失败提示
         DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
+    } else if(res == EDS_NoSerial){
+        QString con = tr("Failed to disable it: unable to get the device SN");
+        DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
+    }
+}
 
+void PageMultiInfo::slotActionUpdateDriver(int row)
+{
+    DeviceBaseInfo* device = m_lstDevice[row];
+    //打印设备卸载驱动时，通过dde-printer来操作
+    if(nullptr != device && device->hardwareClass() == "printer") {
+        if(!QProcess::startDetached("dde-printer"))
+            qInfo() << "dde-printer startDetached error";
+        return;
+    }
+
+    PageDriverControl* installDriver = new PageDriverControl(this, tr("Update Drivers"), true, device->name(), "");
+    installDriver->show();
+    connect(installDriver, &PageDriverControl::refreshInfo, this, &PageMultiInfo::refreshInfo);
+}
+
+void PageMultiInfo::slotActionRemoveDriver(int row)
+{
+    DeviceBaseInfo* device = m_lstDevice[row];
+    if(nullptr == device){
+        return;
+    }
+    QString printerVendor;
+    QString printerModel;
+    DevicePrint *printer = qobject_cast<DevicePrint*>(device);
+    if(printer) {
+        printerVendor = printer->getVendor();
+        printerModel = printer->getModel();
+    }
+    PageDriverControl *rmDriver = new PageDriverControl(this, tr("Uninstall Drivers"), false,
+                                                        device->name(), device->driver(), printerVendor, printerModel);
+    rmDriver->show();
+    connect(rmDriver, &PageDriverControl::refreshInfo, this, &PageMultiInfo::refreshInfo);
+}
+
+void PageMultiInfo::slotCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled)
+{
+    DeviceBaseInfo* device = m_lstDevice.value(row, nullptr);
+    if(!device)
+        return;
+    DevicePrint *printer = qobject_cast<DevicePrint*>(device);
+    if(printer){
+        isPrinter = true;
+        isInstalled = PageInfo::packageHasInstalled("dde-printer");
     }
 }
 

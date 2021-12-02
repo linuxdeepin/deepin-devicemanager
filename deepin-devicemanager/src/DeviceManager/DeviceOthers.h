@@ -43,6 +43,13 @@ public:
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**
+     * @brief setEnable 设置设备的禁用状态
+     * @param enable 是否禁用
+     * @return 禁用是否成功
+     */
+    EnableDeviceStatus setEnable(bool enable) override;
+
+    /**
      * @brief name:获取名称属性值
      * @return QString 名称属性值
      */
@@ -110,9 +117,9 @@ private:
     QString             m_Driver;                       //<! 【驱动】
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
-    QString             m_UniqID;                       //<! 【唯一ID】
     QString             m_BusID;                        //<! 【总线ID】
     QString             m_LogicalName;
+    QString             m_SerialID;                     //<!  设备的序列号id
 };
 
 #endif // DEVICEOTHERS_H

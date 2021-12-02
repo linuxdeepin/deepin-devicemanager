@@ -16,7 +16,7 @@ You can run, close or create a shortcut for Device Manager as follows.
 
 2. Locate ![deepin_devicemanager](../common/deepin_devicemanager.svg) by scrolling the mouse wheel or searching "Device Manager" in the Launcher interface and click it to run. 
 
-3. Right-click ![deepin_devicemanager](../common/deepin_devicemanager.svg) to:
+3. Right-click![deepin_devicemanager](../common/deepin_devicemanager.svg) to:
 
    - Select **Send to desktop** to create a shortcut on the desktop.
 
@@ -28,7 +28,7 @@ You can run, close or create a shortcut for Device Manager as follows.
 
 ### Exit Device Manager
 
-- On the main interface, click ![close_icon](../common/close.svg) to exit.
+- On the main interface, click![close_icon](../common/close.svg) to exit.
 - Right-click ![deepin_devicemanager](../common/deepin_devicemanager.svg)  on the Dock, select **Close all** to exit.
 - On interface of Device Manager, click ![icon_menu](../common/icon_menu.svg)  and select **Exit** to exit.
 

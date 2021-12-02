@@ -68,6 +68,12 @@ public:
     const QString &driver()const override;
 
     /**
+     * @brief available 判断是否可用
+     * @return
+     */
+    bool available() override;
+
+    /**
      * @brief subTitle:获取子标题
      * @return 子标题
      */
@@ -114,10 +120,6 @@ protected:
     void loadTableData() override;
 
 private:
-    /**
-     * @brief setNameFromInput:从cat /proc/bus/input/devices获取设备信息
-     */
-    void setInfoFromInput();
 
     /**
      * @brief setInfoFromBluetoothctl:由bluetoothctl paired-devices设置设备接口
@@ -137,9 +139,9 @@ private:
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
     QString             m_KeyToLshw;                    //<!
+    QString             m_SerialID;                     //<!  设备的序列号id
 
     QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
-    QString             m_KeysToCatDevices;             //<! 【用来标识唯一键盘】
 };
 
 #endif // DEVICEINPUT_H

@@ -54,7 +54,7 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
     domTitleInfo(doc, mp_Info);
 
     // 添加一个表格
-    if (mp_Info->enable()) {
+    if (mp_Info->enable() && mp_Info->available()) {
         const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
         domTableInfo(doc, baseInfo);
     }
@@ -79,7 +79,7 @@ void TextBrowser::updateInfo()
     domTitleInfo(doc, mp_Info);
 
     // 添加一个表格
-    if (mp_Info->enable()) {
+    if (mp_Info->enable() && mp_Info->available()) {
         const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
         domTableInfo(doc, baseInfo);
         if (m_ShowOtherInfo) {
@@ -149,33 +149,12 @@ void TextBrowser::focusInEvent(QFocusEvent *e)
 }
 void TextBrowser::focusOutEvent(QFocusEvent *e)
 {
-    if (!this->geometry().contains(this->mapFromGlobal(QCursor::pos()))) {
-        // 先清空内容 *************************************************
-        clear();
-        if (!mp_Info) {
-            return;
-        }
-        // 显示设备的信息 *************************************************
-        QDomDocument doc;
-
-        // 添加子标题
-        domTitleInfo(doc, mp_Info);
-
-        // 添加一个表格
-        if (mp_Info->enable()) {
-            const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
-            domTableInfo(doc, baseInfo);
-            if (m_ShowOtherInfo) {
-                const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
-                domTableInfo(doc, otherInfo);
-            }
-        }
-
-        // 将设备信息显示到TextBrowser
-        setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
-    }
-    QTextBrowser::focusOutEvent(e);
+    Q_UNUSED(e)
+    // 模拟单机效果，当焦点失去的时候刷新界面选中效果
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, this->mapFromGlobal(QCursor::pos()), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QTextBrowser::mousePressEvent(&pressEvent);
 }
+
 
 void TextBrowser::slotShowMenu(const QPoint &)
 {
@@ -224,6 +203,15 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
         if (!info->enable()) {
             title = "(" + tr("Disable") + ")" + title;
             h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#FF5736;");
+        } else if (!info->available()) {
+            DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+            DPalette palette = dAppHelper->applicationPalette();
+            QColor color = palette.color(DPalette::Disabled, DPalette::PlaceholderText);
+            QRgb rgb = qRgb(color.red(), color.green(), color.blue());
+            QString rgbs = QString::number(rgb, 16);
+            title = "(" + tr("Unavailable") + ")" + title;
+            QString css = QString("text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#%1;").arg(rgbs);
+            h3.setAttribute("style", css);
         } else {
             h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;");
         }

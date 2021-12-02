@@ -53,6 +53,7 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     , m_LimitRow(13)
     , m_IsExpand(false)
     , m_IsEnable(true)
+    , m_IsAvailable(true)
     , mp_OldItem(nullptr)
     , mp_CurItem(nullptr)
     , m_TimeStep(0)
@@ -167,7 +168,7 @@ void DetailTreeView::setCommanLinkButton(int row)
 int DetailTreeView::setTableHeight(int paintHeight)
 {
     // 设备禁用状态下,只显示一行
-    if (!m_IsEnable) {
+    if (!m_IsEnable  || !m_IsAvailable) {
         paintHeight = 40;
         this->setFixedHeight(paintHeight);
         return paintHeight;
@@ -280,13 +281,19 @@ bool DetailTreeView::isCurDeviceEnable()
     return m_IsEnable;
 }
 
-void DetailTreeView::setCurDeviceState(bool state)
+bool DetailTreeView::isCurDeviceAvailable()
+{
+    return m_IsAvailable;
+}
+
+void DetailTreeView::setCurDeviceState(bool enable, bool available)
 {
     // 设置当前设备状态
-    m_IsEnable = state;
+    m_IsEnable = enable;
+    m_IsAvailable = available;
 
     // 禁用状态
-    if (!m_IsEnable) {
+    if (!m_IsEnable || !m_IsAvailable) {
 
         // 隐藏除第一行以外的所有行
         for (int i = 1; i < this->rowCount(); ++i) {
@@ -458,7 +465,7 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
         line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - 40));
 
         // 绘制横线
-        if (m_IsEnable) {
+        if (m_IsEnable || m_IsAvailable) {
             QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - 39, rect.bottomRight().x(), rect.bottomRight().y() - 39);
             painter.drawLine(hline);
         }
@@ -476,7 +483,7 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
                     line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - i));
 
                     // 绘制横线
-                    if (m_IsEnable) {
+                    if (m_IsEnable || m_IsAvailable) {
                         QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - i + 1, rect.bottomRight().x(), rect.bottomRight().y() - i + 1);
                         painter.drawLine(hline);
                     }

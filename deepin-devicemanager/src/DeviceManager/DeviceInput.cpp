@@ -1,12 +1,10 @@
 // 项目自身文件
 #include "DeviceInput.h"
+#include "DeviceManager.h"
+#include "DBusEnableInterface.h"
 
 // Qt库文件
 #include <QDebug>
-
-// 其它头文件
-#include "EnableManager.h"
-#include "DeviceManager.h"
 
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()
@@ -22,19 +20,17 @@ DeviceInput::DeviceInput()
     , m_MaximumPower("")
     , m_Speed("")
     , m_KeyToLshw("")
+    , m_SerialID("")
 {
     initFilterKey();
     m_CanEnable = true;
+    m_CanUninstall = true;
 }
 
 bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
     // 根据bus info属性值与m_KeyToLshw对比,判断是否为同一设备
-    if (m_KeyToLshw != mapInfo["bus info"]) {
-        QString key = mapInfo["bus info"];
-        key.replace("a", "10");
-
-        if (m_KeyToLshw != key)
+    if (!matchToLshw(mapInfo)) {
             return false;
     }
 
@@ -49,6 +45,10 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "driver", m_Driver);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
+
 
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
@@ -58,11 +58,18 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    if(mapInfo.find("Enable") != mapInfo.end()){
+        m_Enable = false;
+    }
     // 设置设备基本属性
+    setAttribute(mapInfo, "Serial ID", m_SerialID);
     setAttribute(mapInfo, "Device", m_Name);
+    setAttribute(mapInfo, "name", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
+    setAttribute(mapInfo, "Serial ID", m_UniqueID);
 
     // 获取键盘的接口类型
     if (mapInfo.find("Hotplug") != mapInfo.end())
@@ -81,27 +88,13 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0
-    QStringList words = mapInfo["SysFS BusID"].split(":");
-    if (words.size() == 2) {
-        QStringList chs = words[0].split("-");
-        if (chs.size() == 2)
-            m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-    }
-
-    // 获取映射到  cat /proc/bus/input/devices 里面的关键字
-    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
-    if (re.exactMatch(mapInfo["Device File"]) || re.exactMatch(mapInfo["Device Files"])) {
-        m_KeysToCatDevices = re.cap(1);
-    } else {
-        QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
-        if (rem.exactMatch(mapInfo["Device File"]))
-            m_KeysToCatDevices = rem.cap(1);
-    }
-    // 由cat /proc/bus/devices/input设置设备信息
-    setInfoFromInput();
+    setHwinfoLshwKey(mapInfo);
 
     // 由bluetoothctl paired-devices设置设备接口
     setInfoFromBluetoothctl();
@@ -140,38 +133,11 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
     }
 
-    // 获取映射到  cat /proc/bus/input/devices 里面的关键字
-    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
-    if (re.exactMatch(mapInfo["Device File"]) || re.exactMatch(mapInfo["Device Files"])) {
-        m_KeysToCatDevices = re.cap(1);
-    } else {
-        QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
-        if (rem.exactMatch(mapInfo["Device File"]))
-            m_KeysToCatDevices = rem.cap(1);
-    }
-    // 由cat /proc/bus/devices/input设置设备信息
-    setInfoFromInput();
-
     // 由bluetoothctl paired-devices设置设备接口
     setInfoFromBluetoothctl();
 
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
-}
-
-void DeviceInput::setInfoFromInput()
-{
-    // 获取对应的由cat /proc/bus/devices/input读取的设备信息
-    const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
-    // 设置Name属性
-    setAttribute(mapInfo, "Name", m_Name, true);
-
-    // Uniq属性标识蓝牙设备Mac地址
-    m_keysToPairedDevice = mapInfo["Uniq"].toUpper();
-
-    // 设置设备是否可用
-    int id = EnableManager::instance()->getDeviceID(m_Name, m_KeysToCatDevices);
-    m_Enable = EnableManager::instance()->isDeviceEnable(id);
 }
 
 void DeviceInput::setInfoFromBluetoothctl()
@@ -196,6 +162,17 @@ const QString &DeviceInput::driver() const
     return m_Driver;
 }
 
+bool DeviceInput::available()
+{
+    if(driver().isEmpty()){
+        m_Available = false;
+    }
+    if("PS/2" == m_Interface){
+        m_Available = true;
+    }
+    return m_Available;
+}
+
 QString DeviceInput::subTitle()
 {
     // 获取子标题
@@ -216,16 +193,27 @@ const QString DeviceInput::getOverviewInfo()
 
 EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
-    // 设置设备状态
-    int id = EnableManager::instance()->getDeviceID(m_Name, m_KeysToCatDevices);
-    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByInput(e, id);
-    if (res == EDS_Success)
+    if(m_SerialID.isEmpty()){
+        return EDS_NoSerial;
+    }
+
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
+    if(res){
         m_Enable = e;
-    return res;
+    }
+    // 设置设备状态
+    return res ? EDS_Success : EDS_Faild;
 }
 
 bool DeviceInput::enable()
 {
+    // 键盘不可禁用
+    if(m_HardwareClass == "keyboard"){
+        m_Enable = true;
+    }
     return m_Enable;
 }
 
@@ -257,7 +245,7 @@ void DeviceInput::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Speed"), m_Speed);
-    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addOtherDeviceInfo(tr("Maximum Current"), m_MaximumPower);   // 1050需求将最大功率改为最大电流
     addOtherDeviceInfo(tr("Driver"), m_Driver);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
     addOtherDeviceInfo(tr("Version"), m_Version);
@@ -269,13 +257,17 @@ void DeviceInput::loadOtherDeviceInfo()
 void DeviceInput::loadTableData()
 {
     // 加载表格数据
-    QString name;
-    if (!enable())
-        name = "(" + tr("Disable") + ") " + m_Name;
-    else
-        name = m_Name;
+    QString tName = m_Name;
 
-    m_TableData.append(name);
+    if (!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }
+
+    if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
+    }
+
+    m_TableData.append(tName);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }
