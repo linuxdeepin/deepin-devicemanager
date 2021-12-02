@@ -19,28 +19,22 @@ ThreadPool::ThreadPool(QObject *parent)
 void ThreadPool::loadDeviceInfo()
 {
     // 根据m_ListCmd生成所有设备信息
-//    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
-//    cleaner->setParent(this);
     QList<Cmd>::iterator it = m_ListCmd.begin();
     for (; it != m_ListCmd.end(); ++it) {
-        ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-//        cleaner->add(task);
-        start(task);
-        task->setAutoDelete(true);
+        ThreadPoolTask task((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
+        start(&task);
+        task.setAutoDelete(true);
     }
 }
 
 void ThreadPool::updateDeviceInfo()
 {
     // 根据m_ListCmd生成所有设备信息
-//    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
-//    cleaner->setParent(this);
     QList<Cmd>::iterator it = m_ListUpdate.begin();
     for (; it != m_ListUpdate.end(); ++it) {
-        ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-//        cleaner->add(task);
-        start(task);
-        task->setAutoDelete(true);
+        ThreadPoolTask task((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
+        start(&task);
+        task.setAutoDelete(true);
     }
 }
 
