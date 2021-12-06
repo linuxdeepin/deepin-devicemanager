@@ -119,7 +119,6 @@ void MainJob::slotUsbChanged()
 
 void MainJob::slotDriverControl(bool success)
 {
-    qInfo() << "slotDriverControl *********************************";
     if(success)
         executeClientInstruction("DETECT");
 }

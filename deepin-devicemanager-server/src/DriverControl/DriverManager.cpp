@@ -169,7 +169,7 @@ bool DriverManager::installDriver(const QString &filepath)
         sigProgressDetail(20, "");
     } else {
         //已判断文件是否存在所以必然存在文件名
-        QString filename = fileinfo.baseName();
+        QString filename = fileinfo.fileName();
         QString installdir = QString("/lib/modules/%1/custom/%2").arg(Utils::kernelRelease()).arg(mp_modcore->modGetName(filepath));
         QDir installDir(installdir);
         //判断安装路径是否已存在，如果不存在先创建安装目录
@@ -203,14 +203,6 @@ bool DriverManager::installDriver(const QString &filepath)
                     sigProgressDetail(90, "");
                     sigFinished(true, "");
                 } else {
-                    // 如果通过mod方式安装失败，则尝试直接通过ko文件的绝对路径安装
-                    errcode = mp_modcore->koInstall(filepath, errmsg);
-                    if(ModCore::Success == errcode){
-                        sigProgressDetail(90, "");
-                        sigFinished(true, "");
-                        return true;
-                    }
-
                     //失败将文件移除,只删文件不删路径
                     QFile::remove(installpath);
                     sigFinished(false, errmsg);

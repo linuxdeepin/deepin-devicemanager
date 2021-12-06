@@ -63,7 +63,6 @@ void GetDriverNameModel::traverseFolders(const QString &path)
     QStringList nameFiltes;
     nameFiltes << "*.deb" << "*.ko";
     mp_driversList.append(dir.entryList(nameFiltes, QDir::Files | QDir::Readable, QDir::Name));
-    mp_driversList.append(mp_driversList);
     for (const QString& filename : mp_driversList) {
         mp_driverPathList.append(path + "/" + filename);
     }
