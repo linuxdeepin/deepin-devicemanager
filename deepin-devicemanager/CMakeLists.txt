@@ -27,7 +27,7 @@ endif ()
 #common resource names
 set(APP_RES_DIR "assets")
 set(APP_BIN_NAME "deepin-devicemanager")
-set(APP_TRANS_SCRIPT "${APP_RES_DIR}/translate_generation.sh")
+set(APP_TRANS_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/translate_generation.sh")
 set(APP_DESKTOP "${APP_RES_DIR}/deepin-devicemanager.desktop")
 set(APP_QRC "${APP_RES_DIR}/appimage.qrc")
 set(APP_ICON_FILE "${APP_RES_DIR}/icons/deepin/builtin/deepin-devicemanager.svg")
