@@ -65,8 +65,7 @@ else()
 endif()
 
 #Generate the qm file
-#message(${CMAKE_CURRENT_SOURCE_DIR})
-execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
+execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 configure_file(src/environments.h.in environments.h @ONLY)
 configure_file(src/config.h.in config.h @ONLY)
 
