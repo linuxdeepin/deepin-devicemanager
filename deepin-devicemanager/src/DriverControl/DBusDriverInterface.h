@@ -33,7 +33,7 @@
 
 class DBusDriverInterface : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     inline static DBusDriverInterface *getInstance()
     {
@@ -124,7 +124,6 @@ private:
     static std::atomic<DBusDriverInterface *> s_Instance;
     static std::mutex                         m_mutex;
     QDBusInterface                            *mp_Iface;
-    QMap<QString , QString>                   m_MapErrMsg;
 };
 
 #endif // DBUSDRIVERINTERFACE_H

@@ -1,5 +1,4 @@
 #include "DBusDriverInterface.h"
-
 #include <unistd.h>
 
 // 以下这个问题可以避免单例的内存泄露问题
@@ -85,12 +84,6 @@ void DBusDriverInterface::slotProcessEnd(bool success, QString msg)
         emit processChange(100,"");
         usleep(300000);
     }
-    // 将错误码转换为错误信息
-    if(m_MapErrMsg.find(msg) != m_MapErrMsg.end()){
-        msg = m_MapErrMsg[msg];
-    }else{
-        msg = tr("Unknown error");
-    }
     emit processEnd(success, msg);
 }
 
@@ -102,14 +95,6 @@ void DBusDriverInterface::slotCallFinished(QDBusPendingCallWatcher* watcher)
 
 void DBusDriverInterface::init()
 {
-    // 初始化错误消息
-    m_MapErrMsg.insert("2",tr("The driver module was not found"));           // ENOENT		2	未发现该驱动模块 /* No such file or directory */
-    m_MapErrMsg.insert("11",tr("The driver module has dependencies"));       // EAGAIN 	    11	驱动模块被依赖
-//    m_MapErrMsg.insert("9",tr(""));                // EBADF		9	/* Bad file number */
-//    m_MapErrMsg.insert("17",tr(""));               // EEXIST		17	/* File exists */
-//    m_MapErrMsg.insert("19",tr(""));               // ENODEV		19	/* No such device */
-//    m_MapErrMsg.insert("30",tr(""));               // EROFS		30	/* Read-only file system */
-
     // 1. 连接到dbus
     if (!QDBusConnection::systemBus().isConnected()) {
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"

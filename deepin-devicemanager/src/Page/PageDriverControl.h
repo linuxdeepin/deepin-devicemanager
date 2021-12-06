@@ -90,7 +90,7 @@ private slots:
      * @brief slotProcessEnd 更新处理结束的信号
      * @param sucess 更新是否成功
      */
-    void slotProcessEnd(bool sucess, QString errMsg);
+    void slotProcessEnd(bool sucess, QString errCode);
 
     /**
      * @brief slotClose
@@ -138,6 +138,18 @@ private:
      * @param enable
      */
     void enableCloseBtn(bool enable);
+
+    /**
+     * @brief initErrMsg 初始化错误消息
+     */
+    void initErrMsg();
+
+    /**
+     * @brief errMsg
+     * @param errCode
+     * @return
+     */
+    const QString& errMsg(const QString& errCode);
 private:
     DStackedWidget             *mp_stackWidget;
     GetDriverPathWidget        *mp_PathDialog;
@@ -149,5 +161,6 @@ private:
     QString                    m_printerVendor;
     QString                    m_printerModel;
     QString                    m_deviceName;
+    QMap<QString, QString>     m_MapErrMsg;
 };
 #endif // PAGEINSTALLDRIVER_H

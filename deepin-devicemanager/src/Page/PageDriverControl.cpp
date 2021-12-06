@@ -57,6 +57,7 @@ PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool in
     setWindowFlag(Qt::WindowMinimizeButtonHint, true);
     setAttribute(Qt::WA_DeleteOnClose, true);
     setIcon(QIcon::fromTheme("deepin-devicemanager"));
+    initErrMsg();
 
     DBlurEffectWidget *widget = findChild<DBlurEffectWidget *>();
     if(nullptr != widget)
@@ -157,7 +158,7 @@ void PageDriverControl::slotProcessChange(qint32 value, QString detail)
     mp_WaitDialog->setValue(value);
 }
 
-void PageDriverControl::slotProcessEnd(bool sucess, QString errMsg)
+void PageDriverControl::slotProcessEnd(bool sucess, QString errCode)
 {
     QString successStr = m_Install ? tr("Update successful") : tr("Uninstallation successful");
     QString failedStr = m_Install ? tr("Update failed") : tr("Uninstallation failed");
@@ -165,7 +166,7 @@ void PageDriverControl::slotProcessEnd(bool sucess, QString errMsg)
     QString iconPath = sucess ? "success" : "fail";
     QIcon icon(QIcon::fromTheme(iconPath));
     QPixmap pic = icon.pixmap(80, 80);
-    DriverIconWidget *widget = new DriverIconWidget(pic, status, sucess ? "" : errMsg, this);
+    DriverIconWidget *widget = new DriverIconWidget(pic, status, sucess ? "" : errMsg(errCode), this);
     mp_stackWidget->addWidget(widget);
     this->addButton(tr("OK", "button"), true);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotClose);
@@ -339,4 +340,26 @@ void PageDriverControl::enableCloseBtn(bool enable)
     // 禁用按钮
     closeBtn->setAttribute(Qt::WA_TransparentForMouseEvents,!enable);
     closeBtn->setEnabled(enable);
+}
+
+void PageDriverControl::initErrMsg()
+{
+    // 初始化错误消息
+    m_MapErrMsg.insert("null",tr("Unknown error"));
+    m_MapErrMsg.insert("2",tr("The driver module was not found"));           // ENOENT		2	未发现该驱动模块 /* No such file or directory */
+    m_MapErrMsg.insert("11",tr("The driver module has dependencies"));       // EAGAIN 	    11	驱动模块被依赖
+//    m_MapErrMsg.insert("9",tr(""));                // EBADF		9	/* Bad file number */
+//    m_MapErrMsg.insert("17",tr(""));               // EEXIST		17	/* File exists */
+//    m_MapErrMsg.insert("19",tr(""));               // ENODEV		19	/* No such device */
+//    m_MapErrMsg.insert("30",tr(""));               // EROFS		30	/* Read-only file system */
+}
+
+const QString& PageDriverControl::errMsg(const QString& errCode)
+{
+    // 将错误码转换为错误信息
+    if(m_MapErrMsg.find(errCode) != m_MapErrMsg.end()){
+        return m_MapErrMsg[errCode];
+    }else{
+        return m_MapErrMsg["null"];
+    }
 }
