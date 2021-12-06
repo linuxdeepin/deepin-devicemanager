@@ -59,3 +59,8 @@ bool DriverDBusInterface::unInstallPrinter(const QString &vendor, const QString 
 {
     return mp_drivermanager->uninstallPrinter(vendor, model);
 }
+
+bool DriverDBusInterface::driverIsInKernel(const QString& modName)
+{
+    return mp_drivermanager->driverIsInKernel(modName);
+}

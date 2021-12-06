@@ -51,6 +51,7 @@ public slots:
     Q_SCRIPTABLE bool isArchMatched(const QString &filePath);
     Q_SCRIPTABLE bool isDebValid(const QString &filePath);
     Q_SCRIPTABLE bool unInstallPrinter(const QString &vendor, const QString &model);
+    Q_SCRIPTABLE bool driverIsInKernel(const QString& modName);
 
 private:
     DriverManager *mp_drivermanager;
