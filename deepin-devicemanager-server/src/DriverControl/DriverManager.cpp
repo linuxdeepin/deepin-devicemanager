@@ -169,7 +169,7 @@ bool DriverManager::installDriver(const QString &filepath)
         sigProgressDetail(20, "");
     } else {
         //已判断文件是否存在所以必然存在文件名
-        QString filename = fileinfo.baseName();
+        QString filename = fileinfo.fileName();
         QString installdir = QString("/lib/modules/%1/custom/%2").arg(Utils::kernelRelease()).arg(mp_modcore->modGetName(filepath));
         QDir installDir(installdir);
         //判断安装路径是否已存在，如果不存在先创建安装目录
