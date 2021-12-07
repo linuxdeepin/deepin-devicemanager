@@ -180,6 +180,10 @@ void CpuInfo::setProcCpuinfo(LogicalCpu &logical, const QMap<QString, QString> &
     if ("mips64" == m_Arch || "loongarch64" == m_Arch) {
         logical.setCurFreq(mapInfo["cpu mhz"]);
         logical.setModel(mapInfo["cpu model"]);
+        if(logical.flags().isEmpty())
+        {
+            logical.setFlags(mapInfo["features"]);
+        }
     }
 }
 
