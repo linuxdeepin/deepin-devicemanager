@@ -213,4 +213,12 @@ void ThreadPool::initCmd()
     cmdHwinfo.canNotReplace = false;
     m_ListCmd.append(cmdHwinfo);
     m_ListUpdate.append(cmdHwinfo);
+
+    // 获取N卡的显存信息 nvidia-settings  -q  VideoRam
+    Cmd cmdNvidia;
+    cmdNvidia.cmd = QString("%1 %2%3").arg("nvidia-settings  -q  VideoRam > ").arg(PATH).arg("nvidia.txt");
+    cmdNvidia.file = "nvidia.txt";
+    cmdNvidia.canNotReplace = false;
+    m_ListCmd.append(cmdNvidia);
+    m_ListUpdate.append(cmdNvidia);
 }

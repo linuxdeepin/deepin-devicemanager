@@ -173,7 +173,7 @@ void DeviceGenerator::generatorNetworkDevice()
     for (; it != lstInfo.end(); ++it) {
         if ((*it).size() < 2)
             continue;
-        if((*it).find("logical name") == (*it).end() || (*it).find("serial") == (*it).end())
+        if ((*it).find("logical name") == (*it).end() || (*it).find("serial") == (*it).end())
             continue;
         DeviceNetwork *device = new DeviceNetwork();
         device->setInfoFromLshw(*it);
@@ -515,8 +515,14 @@ void DeviceGenerator::getGpuSizeFromDmesg()
 {
     // 加载从dmesg获取的显示适配器信息，设置显存大小
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("dmesg");
-    if (lstMap.size() > 0)
+    if (lstMap.size() > 0 && lstMap[0].size() > 0)
         DeviceManager::instance()->setGpuSizeFromDmesg(lstMap[0]["Size"]);
+    else {
+        // dmesg无法获取显存信息时从nvidia-settings获取
+        const QList<QMap<QString, QString>> &nvidiaMap = DeviceManager::instance()->cmdInfo("nvidia");
+        if (nvidiaMap.size() > 0 && nvidiaMap[0].size() > 0)
+            DeviceManager::instance()->setGpuSizeFromDmesg(nvidiaMap[0]["Size"]);
+    }
 }
 
 void DeviceGenerator::getMonitorInfoFromHwinfo()

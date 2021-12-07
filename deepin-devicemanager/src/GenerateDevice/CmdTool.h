@@ -202,6 +202,13 @@ private:
     void loadBootDeviceManfid(const QString &key, const QString &debugfile);
 
     /**
+     * @brief loadNvidiaSettingInfo : 加载nvidia-settings  -q  VideoRam  信息
+     * @param key   nvidia
+     * @param debugfile  nvidia.txt
+     */
+    void loadNvidiaSettingInfo(const QString &key, const QString &debugfile);
+
+    /**
      * @brief getSMBIOSVersion:获取SMBIOS版本号
      * @param info:dmidecode获取的片断信息
      * @param version:SMBIOS版本号
