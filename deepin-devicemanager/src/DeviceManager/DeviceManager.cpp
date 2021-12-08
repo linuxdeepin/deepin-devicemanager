@@ -615,7 +615,7 @@ DeviceBaseInfo * DeviceManager::getNetworkDevice(const QString& unique_id)
 {
     for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceNetwork.begin(); it != m_ListDeviceNetwork.end(); ++it) {
         DeviceNetwork *net = dynamic_cast<DeviceNetwork*>(*it);
-        if(net && net->uniqueID() == unique_id){
+        if(!unique_id.isEmpty() && net && net->uniqueID() == unique_id){
             return *it;
         }
     }
