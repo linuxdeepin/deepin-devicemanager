@@ -29,7 +29,8 @@
 #include "CmdButtonWidget.h"
 #include "TipsWidget.h"
 
-BtnWidget::BtnWidget()
+BtnWidget::BtnWidget(DWidget *parent)
+    : DWidget(parent)
 {
 
 }
@@ -152,7 +153,7 @@ void DetailTreeView::setCommanLinkButton(int row)
     pVBoxLayout->addLayout(pHBoxLayout);
 
     // 新建放置按钮的widget,并设置鼠标出入对应的槽函数
-    BtnWidget *btnwidget = new BtnWidget();
+    BtnWidget *btnwidget = new BtnWidget(this);  // BtnWidget添加父窗口
     connect(btnwidget, &BtnWidget::enter, this, &DetailTreeView::slotEnterBtnWidget);
     connect(btnwidget, &BtnWidget::leave, this, &DetailTreeView::slotLeaveBtnWidget);
     btnwidget->setLayout(pVBoxLayout);
@@ -175,10 +176,10 @@ int DetailTreeView::setTableHeight(int paintHeight)
 
     // 父窗口
     PageTableWidget *pageTableWidget = dynamic_cast<PageTableWidget *>(this->parent());
-    if(!pageTableWidget)
+    if (!pageTableWidget)
         return -1;
     PageInfo *par = dynamic_cast<PageInfo *>(pageTableWidget->parent());
-    if(!par)
+    if (!par)
         return -1;
     // 父窗口可显示的最大表格行数
     // 最多显示行数与父窗口高度相关,需减去Label以及Spacing占用空间

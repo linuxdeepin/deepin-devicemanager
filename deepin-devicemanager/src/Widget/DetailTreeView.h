@@ -46,7 +46,7 @@ class BtnWidget: public DWidget
 {
     Q_OBJECT
 public:
-    BtnWidget();
+    explicit BtnWidget(DWidget *parent = nullptr);
 protected:
     /**
      * @brief enterEvent:鼠标进入事件
