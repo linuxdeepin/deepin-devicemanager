@@ -23,6 +23,7 @@
 
 #include <QHeaderView>
 #include <QPainter>
+#include <QStandardItemModel>
 
 DriverListView::DriverListView(QWidget *parent) : DTreeView(parent)
 {
@@ -128,4 +129,31 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
     painter->restore();
 }
 
+/**
+ * @brief keyPressEvent 重写按钮事件
+ */
+void DriverListView::keyPressEvent(QKeyEvent *event)
+{
+    DTreeView::keyPressEvent(event);
+    Qt::KeyboardModifiers modifiers = event->modifiers();
+    if (modifiers != Qt::NoModifier) {
+        if (modifiers.testFlag(Qt::ControlModifier) || modifiers.testFlag(Qt::ShiftModifier) || modifiers.testFlag(Qt::AltModifier)) {
+            return;
+        }
+    }
+    QStandardItemModel *pModel = static_cast<QStandardItemModel*>(model());
 
+    int curRow = this->currentIndex().row();
+    switch (event->key()) {
+        case Qt::Key_Home:     curRow = 0;
+        break;
+        case Qt::Key_End:      curRow = pModel->rowCount() - 1;
+        break;
+        case Qt::Key_Up:
+        case Qt::Key_Down:
+        break;
+    default:
+        return;
+    }
+    emit clicked(pModel->index(curRow,1));
+}

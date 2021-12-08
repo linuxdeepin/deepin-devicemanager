@@ -41,8 +41,8 @@ bool DBusAnythingInterface::searchDriver(QString& path, QStringList& lstDriver)
 {
     // anything是根据挂载来创建索引的，/data/home跟/home的挂载地址都是一样的，就只创建了/data的索引
     if(!hasLFT(path)){
-        if(path.startsWith("/home") && QDir("/data/home").exists()){
-            path.prepend("/data");
+        path.prepend("/data");
+        if(QDir(path).exists()){
             if(!hasLFT(path))
                 return false;
         }else{

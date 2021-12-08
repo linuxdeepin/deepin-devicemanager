@@ -189,14 +189,16 @@ void DeviceGenerator::generatorNetworkDevice()
             continue;
         }
 
-        // 没有网卡地址的设备过滤
+        // 没有网卡物理地址且在数据库里面找不到的的设备过滤
         if ((*it).size() < 2)
             continue;
-        if ((*it).find("Permanent HW Address") == (*it).end() && (*it).find("path") == (*it).end())
-            continue;
-        device = new DeviceNetwork();
-        device->setInfoFromHwinfo(*it);
-        DeviceManager::instance()->addNetworkDevice(device);
+        bool hasAddress = (*it).find("Permanent HW Address") != (*it).end() && (*it).find("HW Address") != (*it).end();
+        bool hasPath = (*it).find("path") != (*it).end();
+        if (hasAddress || hasPath){
+            device = new DeviceNetwork();
+            device->setInfoFromHwinfo(*it);
+            DeviceManager::instance()->addNetworkDevice(device);
+        }
     }
 
 

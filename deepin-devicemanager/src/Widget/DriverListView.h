@@ -18,7 +18,6 @@
 #define DRIVERLISTVIEW_H
 
 #include <DTreeView>
-
 #include <QMouseEvent>
 
 DWIDGET_USE_NAMESPACE
@@ -29,9 +28,10 @@ class DriverListView : public DTreeView
 public:
     explicit DriverListView(QWidget *parent = nullptr);
     void initUI();
-
-signals:
-
+    /**
+     * @brief keyPressEvent 重写按钮事件
+     */
+    void keyPressEvent(QKeyEvent *event) override;
 public slots:
 
     // QWidget interface

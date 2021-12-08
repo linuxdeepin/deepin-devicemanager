@@ -47,6 +47,7 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     }
     {
         QStyleOptionViewItem opt = option;
+        opt.state = opt.state & (~QStyle::State_Selected);   //bug  106152 去掉选中的option state
         initStyleOption(&opt, index);
 
         const QWidget *widget = option.widget;
@@ -121,8 +122,8 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
             index.data(Qt::DecorationRole).isValid()) {
         iconRect.setWidth(30);
         iconRect.setHeight(30);
-        iconRect.setX(rect.x()+6);
-        iconRect.setY(rect.y()+6);
+        iconRect.setX(rect.x() + 6);
+        iconRect.setY(rect.y() + 6);
         QIcon ic = index.data(Qt::DecorationRole).value<QIcon>();
         ic.paint(painter, iconRect, Qt::AlignVCenter);
     }

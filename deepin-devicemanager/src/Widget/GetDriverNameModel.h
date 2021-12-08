@@ -52,7 +52,7 @@ private:
      * @brief traverseFolders 遍历目录下的文件
      * @param path 给定的目录
      */
-    void traverseFolders(const QString &path);
+    void traverseFolders(const QString &path, bool traver = false);
 
 private:
     QStringList             mp_driverPathList;   //驱动路径列表
