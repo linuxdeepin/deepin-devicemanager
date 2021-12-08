@@ -417,9 +417,12 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
         if (mapInfo["Hardware Class"] == "sound") {
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"].contains("network")) {
-            if (mapInfo.find("SysFS Device Link") != mapInfo.end() && mapInfo["SysFS Device Link"].contains("/devices/platform"))
-                continue; // platform总线下会出现无效信息，需要过滤
-            addMapInfo("hwinfo_network", mapInfo);
+            //if (mapInfo.find("SysFS Device Link") != mapInfo.end() && mapInfo["SysFS Device Link"].contains("/devices/platform"))
+            bool hasAddress = mapInfo.find("HW Address") != mapInfo.end() && mapInfo.find("Permanent HW Address") != mapInfo.end();
+            bool hasPath = mapInfo.find("path") != mapInfo.end();
+            if(hasPath || hasAddress){
+                addMapInfo("hwinfo_network", mapInfo);
+            }
         } else if ("keyboard" == mapInfo["Hardware Class"]) {
             addMouseKeyboardInfoMapInfo("hwinfo_keyboard", mapInfo);
         } else if ("mouse" == mapInfo["Hardware Class"]) {
