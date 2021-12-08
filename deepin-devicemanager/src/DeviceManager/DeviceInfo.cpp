@@ -1,8 +1,7 @@
 // 项目自身文件
 #include "DeviceInfo.h"
 #include "commondefine.h"
-#include "DeviceManager.h"
-#include "DBusDriverInterface.h"
+#include"DeviceManager.h"
 
 #include <DApplication>
 
@@ -422,7 +421,18 @@ bool DeviceBaseInfo::available()
 
 bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
 {
-    return DBusDriverInterface::getInstance()->driverIsInKernel(driver);
+    if(driver.isEmpty()){
+        return false;
+    }
+
+    QString info = "";
+    QProcess process;
+
+    // 判断lsmod是否能查询
+    process.start("sh", QStringList() << "-c" << QString("modinfo %1 | grep 'filename:'").arg(driver));
+    process.waitForFinished(-1);
+    info = process.readAllStandardOutput();
+    return info.isEmpty();
 }
 
 void DeviceBaseInfo::setCanEnale(bool can)

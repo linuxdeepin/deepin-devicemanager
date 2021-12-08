@@ -277,22 +277,6 @@ bool DriverManager::isDebValid(const QString &filePath)
     return true;
 }
 
-bool DriverManager::driverIsInKernel(const QString& modname)
-{
-    if(modname.isEmpty()){
-        return false;
-    }
-
-    QString info = "";
-    QProcess process;
-
-    // 判断lsmod是否能查询
-    process.start("sh", QStringList() << "-c" << QString("modinfo %1 | grep 'filename:'").arg(modname));
-    process.waitForFinished(-1);
-    info = process.readAllStandardOutput();
-    return info.isEmpty();
-}
-
 /**
  * @brief DriverManager::unInstallModule 驱动卸载
  * @param moduleName 模块名称 like hid or hid.ko

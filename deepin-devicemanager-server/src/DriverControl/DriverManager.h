@@ -46,8 +46,6 @@ public:
     bool isArchMatched(const QString &path);
     //判断包是否有效
     bool isDebValid(const QString &filePath);
-    // 判断是否是内核驱动
-    bool driverIsInKernel(const QString& modname);
 
 private:
     void initConnections();

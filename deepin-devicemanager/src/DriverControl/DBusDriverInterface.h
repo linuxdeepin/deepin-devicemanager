@@ -87,13 +87,6 @@ public:
      */
     bool isDebValid(const QString &path);
 
-    /**
-     * @brief driverIsInKernel 判断是否是核心内驱动
-     * @param modname
-     * @return
-     */
-    bool driverIsInKernel(const QString& modname);
-
 signals:
     void processChange(qint32 value, QString details);
     void processEnd(bool sucess, QString msg);

@@ -98,13 +98,11 @@ void DeviceGenerator::generatorCpuDevice()
 
 
     //  获取逻辑数和core数  获取cpu个数 获取logical个数
-    int coreNum = 0, logicalNum = 0, physicalNum = 0;
+    int coreNum = 0, logicalNum = 0;
     const QList<QMap<QString, QString> >  &lsCpu_num = DeviceManager::instance()->cmdInfo("lscpu_num");
     if (lsCpu_num.size() <= 0)
         return;
     const QMap<QString, QString> &map = lsCpu_num[0];
-    if (map.find("physical") != map.end())
-        physicalNum = map["physical"].toInt();
     if (map.find("core") != map.end())
         coreNum = map["core"].toInt();
     if (map.find("logical") != map.end())
@@ -194,12 +192,11 @@ void DeviceGenerator::generatorNetworkDevice()
         // 没有网卡地址的设备过滤
         if ((*it).size() < 2)
             continue;
-        if ((*it).find("HW Address") == (*it).end() && (*it).find("path") == (*it).end())
+        if ((*it).find("Permanent HW Address") == (*it).end() && (*it).find("path") == (*it).end())
             continue;
         device = new DeviceNetwork();
         device->setInfoFromHwinfo(*it);
         DeviceManager::instance()->addNetworkDevice(device);
-
     }
 
 
@@ -905,7 +902,7 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
         const QStringList &lstBusId = DeviceManager::instance()->getBusId();
         // 判断该设备是否已经在其他类别中显示
-        if (lstBusId.indexOf(curBus) != -1)
+        if (curBus.isEmpty() || lstBusId.indexOf(curBus) != -1)
             isOtherDevice = false;
 
         // 添加其他设备

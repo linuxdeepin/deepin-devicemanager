@@ -65,7 +65,8 @@ else()
 endif()
 
 #Generate the qm file
-execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+#message(${CMAKE_CURRENT_SOURCE_DIR})
+execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 configure_file(src/environments.h.in environments.h @ONLY)
 configure_file(src/config.h.in config.h @ONLY)
 
@@ -142,4 +143,4 @@ install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/dee
 install(FILES ${APP_AUTHENTICATION} DESTINATION /usr/share/polkit-1/actions)
 
 # Test--------deepin-devicemanager
-#add_subdirectory(./tests)
+add_subdirectory(./tests)

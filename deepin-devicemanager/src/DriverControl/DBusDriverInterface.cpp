@@ -61,14 +61,6 @@ bool DBusDriverInterface::isDebValid(const QString &path)
     return false;
 }
 
-bool DBusDriverInterface::driverIsInKernel(const QString& modname)
-{
-    QDBusReply<bool> reply = mp_Iface->call("driverIsInKernel", modname);
-    if (reply.isValid())
-        return reply.value();
-    return false;
-}
-
 DBusDriverInterface::DBusDriverInterface(QObject* parent)
     : QObject (parent)
     , mp_Iface(nullptr)
