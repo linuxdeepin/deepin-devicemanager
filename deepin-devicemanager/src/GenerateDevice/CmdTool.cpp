@@ -662,8 +662,9 @@ void CmdTool::loadBootDeviceManfid(const QString &key, const QString &debugfile)
 void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile)
 {
     // 加载nvidia-settings  -q  VideoRam 信息
+    // 命令与xrandr命令一样无法在后台运行,该从前台命令直接获取信息
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile))
+    if (!getDeviceInfoFromCmd(deviceInfo, "nvidia-settings  -q  VideoRam"))
         return;
     QMap<QString, QString> mapInfo;
     QRegExp reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
