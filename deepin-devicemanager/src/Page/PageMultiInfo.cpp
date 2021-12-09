@@ -62,9 +62,11 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     //  获取多个设备界面表格信息
     QList<QStringList> deviceList;
     deviceList.append(lst[0]->getTableHeader());
-    foreach (DeviceBaseInfo *info, lst) {
-        if (info->getTableData().size() > 0)
-            deviceList.append(info->getTableData());
+    foreach (DeviceBaseInfo *info, lst) { 
+        const QStringList& lstDeviceInfo = info->getTableData();
+        if (lstDeviceInfo.size() > 0){
+            deviceList.append(lstDeviceInfo);
+        }
     }
 
     // 更新表格

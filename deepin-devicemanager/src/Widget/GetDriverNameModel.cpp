@@ -24,12 +24,9 @@ void GetDriverNameModel::startLoadDrivers(QStandardItemModel* model, bool includ
         mp_driversList.clear();
 
         QString pathT = path;
-        if(DBusAnythingInterface::getInstance()->searchDriver(pathT,mp_driverPathList)){
-            for (const QString& filepath : mp_driverPathList) {
-                mp_driversList.append(QFileInfo(filepath).fileName());
-            }
-        }else{
-            traverseFolders(path,true);
+        DBusAnythingInterface::getInstance()->searchDriver(pathT,mp_driverPathList);
+        for (const QString& filepath : mp_driverPathList) {
+            mp_driversList.append(QFileInfo(filepath).fileName());
         }
     }else{
         // 获取所有的驱动文件
@@ -58,21 +55,15 @@ void GetDriverNameModel::startLoadDrivers(QStandardItemModel* model, bool includ
     emit finishLoadDrivers();
 }
 
-void GetDriverNameModel::traverseFolders(const QString &path, bool traver)
+void GetDriverNameModel::traverseFolders(const QString &path)
 {
     QDir dir(path);
     if (!dir.exists())
         return;
-
-    QFileInfoList list = dir.entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
-    foreach(const QFileInfo& info , list){
-        if(info.isDir() && traver){
-            traverseFolders(info.absoluteFilePath());
-            continue;
-        }
-        if(info.suffix() == "deb" || info.suffix() == "ko"){
-            mp_driversList.append(info.fileName());
-            mp_driverPathList.append(info.absoluteFilePath());
-        }
+    QStringList nameFiltes;
+    nameFiltes << "*.deb" << "*.ko";
+    mp_driversList.append(dir.entryList(nameFiltes, QDir::Files | QDir::Readable, QDir::Name));
+    for (const QString& filename : mp_driversList) {
+        mp_driverPathList.append(path + "/" + filename);
     }
 }
