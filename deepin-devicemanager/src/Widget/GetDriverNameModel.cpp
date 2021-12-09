@@ -59,26 +59,25 @@ void GetDriverNameModel::startLoadDrivers(QStandardItemModel* model, bool includ
 
 void GetDriverNameModel::traverseFolders(const QString &path, bool traver)
 {
+    if(m_Stop)
+        return;
     QDir dir(path);
     if (!dir.exists())
         return;
 
-    QFileInfoList list = dir.entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
+    QStringList nameFiltes;
+    nameFiltes << "*.deb" << "*.ko";
+    QFileInfoList list = dir.entryInfoList(nameFiltes, QDir::Files | QDir::NoSymLinks);
     foreach(const QFileInfo& info , list){
-        // 停止遍历
-        if(m_Stop){
-            break;
-        }
+        mp_driversList.append(info.fileName());
+        mp_driverPathList.append(info.absoluteFilePath());
+    }
 
-        // 递归处理
-        if(info.isDir() && traver){
+    // 递归处理子文件夹
+    if(traver){
+        list = dir.entryInfoList(QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot);
+        foreach(const QFileInfo& info , list){
             traverseFolders(info.absoluteFilePath(),traver);
-            continue;
-        }
-
-        if(info.suffix() == "deb" || info.suffix() == "ko"){
-            mp_driversList.append(info.fileName());
-            mp_driverPathList.append(info.absoluteFilePath());
         }
     }
 }
