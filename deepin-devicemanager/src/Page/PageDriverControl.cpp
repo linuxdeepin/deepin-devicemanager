@@ -187,10 +187,10 @@ void PageDriverControl::slotBackPathPage()
 {
     mp_NameDialog->stopLoadingDrivers();
     mp_stackWidget->setCurrentIndex(0);
-    getButton(1)->setDisabled(false);
     this->setButtonText(1, tr("Next", "button"));
     this->setButtonText(0, tr("Cancel", "button"));
     this->getButton(0)->disconnect();
+    getButton(1)->setEnabled(true);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
 }
 

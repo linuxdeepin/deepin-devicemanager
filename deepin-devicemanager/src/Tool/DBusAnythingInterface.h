@@ -59,7 +59,7 @@ public:
      * @param lstDriver 出参：驱动列表
      * @return
      */
-    bool searchDriver(QString& path, QStringList& lstDriver);
+    bool searchDriver(const QString& sPath, QStringList& lstDriver);
 
 protected:
     DBusAnythingInterface();
