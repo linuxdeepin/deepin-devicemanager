@@ -57,7 +57,7 @@ void GetDriverNameModel::startLoadDrivers(QStandardItemModel* model, bool includ
     emit finishLoadDrivers();
 }
 
-void GetDriverNameModel::traverseFolders(const QString &path, bool traver)
+void GetDriverNameModel::traverseFolders(const QString &path, bool recursion)
 {
     if(m_Stop)
         return;
@@ -74,10 +74,10 @@ void GetDriverNameModel::traverseFolders(const QString &path, bool traver)
     }
 
     // 递归处理子文件夹
-    if(traver){
+    if(recursion){
         list = dir.entryInfoList(QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot);
         foreach(const QFileInfo& info , list){
-            traverseFolders(info.absoluteFilePath(),traver);
+            traverseFolders(info.absoluteFilePath(),recursion);
         }
     }
 }
