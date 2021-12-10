@@ -38,6 +38,7 @@
 #include <QDBusConnection>
 #include <QWindow>
 #include <polkit-qt5-1/PolkitQt1/Authority>
+#include <QGraphicsEffect>
 
 using namespace PolkitQt1;
 
@@ -187,10 +188,10 @@ void PageDriverControl::slotBackPathPage()
 {
     mp_NameDialog->stopLoadingDrivers();
     mp_stackWidget->setCurrentIndex(0);
-    getButton(1)->setDisabled(false);
     this->setButtonText(1, tr("Next", "button"));
     this->setButtonText(0, tr("Cancel", "button"));
     this->getButton(0)->disconnect();
+    getButton(1)->setEnabled(true);
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
 }
 
@@ -339,7 +340,9 @@ void PageDriverControl::enableCloseBtn(bool enable)
 
     // 禁用按钮
     closeBtn->setAttribute(Qt::WA_TransparentForMouseEvents,!enable);
-    closeBtn->setEnabled(enable);
+    QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(this);
+    closeBtn->setGraphicsEffect(opacityEffect);
+    opacityEffect->setOpacity(enable? 1 : 0.4);
 }
 
 void PageDriverControl::initErrMsg()

@@ -894,6 +894,7 @@ QMap<QString, QMap<QString, QString>> CmdTool::getCurPowerInfo()
     QStringList items = powerInfo.split("\n\n");
     foreach (const QString &item, items) {
         if (item.isEmpty() || item.contains("DisplayDevice")
+                || item.contains("line_power", Qt::CaseInsensitive)
                 || item.contains("mouse", Qt::CaseInsensitive)
                 || item.contains("keyboard", Qt::CaseInsensitive)) // 98003远程后发现无线鼠标电量干扰了计算机电池电量的显示，排除无线鼠标，无线键盘
             continue;

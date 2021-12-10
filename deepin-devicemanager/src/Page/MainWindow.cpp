@@ -370,7 +370,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         //判断所有网卡的连接情况
         for (int i = 0; i < networkDriver.size(); i++)
             DeviceManager::instance()->correctNetworkLinkStatus(tool.getCurNetworkLinkStatus(networkDriver.at(i)), networkDriver.at(i));
-    } else if (tr("Power") == itemStr) { //点击电池，重新加载电池显示信息
+    } else if (tr("Battery") == itemStr) { //点击电池，重新加载电池显示信息
         CmdTool tool;
         DeviceManager::instance()->correctPowerInfo(tool.getCurPowerInfo());
     }
