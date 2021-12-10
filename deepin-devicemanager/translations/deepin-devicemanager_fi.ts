@@ -1,25 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fi">
 <context>
     <name>CmdButtonWidget</name>
     <message>
         <location filename="../src/Widget/CmdButtonWidget.cpp" line="18"/>
         <source>More</source>
         <translation>Lisää</translation>
-    </message>
-</context>
-<context>
-    <name>DBusDriverInterface</name>
-    <message>
-        <source>Unknown error</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>The driver module was not found</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>The driver module has dependencies</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -125,18 +110,14 @@
         <translation>Muistin osoite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
-        <source>Unavailable</source>
-        <translation>Ei saatavilla</translation>
-    </message>
-    <message>
-        <source>Memory</source>
-        <translation type="vanished">Muisti</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
+        <source>Unavailable</source>
+        <translation>Ei saatavilla</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="262"/>
@@ -301,14 +282,14 @@
         <translation>Nopeus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="132"/>
-        <source>Disable</source>
-        <translation>Poista</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="128"/>
         <source>Unavailable</source>
         <translation>Ei saatavilla</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="132"/>
+        <source>Disable</source>
+        <translation>Poista</translation>
     </message>
 </context>
 <context>
@@ -439,127 +420,127 @@
 <context>
     <name>DeviceGpu</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="58"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="59"/>
         <source>Name</source>
         <translation>Nimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="59"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="60"/>
         <source>Vendor</source>
         <translation>Valmistaja</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="60"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="61"/>
         <source>Model</source>
         <translation>Malli</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="61"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="62"/>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="62"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="63"/>
         <source>Graphics Memory</source>
         <translation>Grafiikkamuisti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="205"/>
         <source>Physical ID</source>
         <translation>Fyysinen tunnus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="206"/>
         <source>Memory Address</source>
         <translation>Muistin osoite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="207"/>
         <source>IO Port</source>
         <translation>IO-portti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="204"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="208"/>
         <source>Bus Info</source>
         <translation>Väylän tiedot</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="205"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
         <source>Maximum Resolution</source>
         <translation>Maksimi tarkkuus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="206"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
         <source>Minimum Resolution</source>
         <translation>Minimi tarkkuus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="207"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
         <source>Current Resolution</source>
         <translation>Nykyinen tarkkuus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="208"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="212"/>
         <source>Driver</source>
         <translation>Ajuri</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
         <source>Description</source>
         <translation>Kuvaus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
         <source>Clock</source>
         <translation>Kello</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
         <source>DP</source>
         <translation>DP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="212"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
         <source>eDP</source>
         <translation>eDP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
         <source>HDMI</source>
         <translation>HDMI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="218"/>
         <source>VGA</source>
         <translation>VGA</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="219"/>
         <source>DVI</source>
         <translation>DVI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
         <source>Display Output</source>
         <translation>Näytön ulostulo</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="222"/>
         <source>Capabilities</source>
         <translation>Ominaisuuksia</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="223"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="219"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="224"/>
         <source>Width</source>
         <translation>Leveys</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="230"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="235"/>
         <source>Unavailable</source>
         <translation>Ei saatavilla</translation>
     </message>
@@ -612,14 +593,14 @@
         <translation>Ominaisuuksia</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="152"/>
-        <source>Disable</source>
-        <translation>Poista</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="148"/>
         <source>Unavailable</source>
         <translation>Ei saatavilla</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="152"/>
+        <source>Disable</source>
+        <translation>Poista</translation>
     </message>
 </context>
 <context>
@@ -660,15 +641,6 @@
         <translation>Maksimi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="263"/>
-        <source>Unavailable</source>
-        <translation>Ei saatavilla</translation>
-    </message>
-    <message>
-        <source>Maximum Power</source>
-        <translation type="vanished">Suurin teho</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="249"/>
         <source>Driver</source>
         <translation>Ajuri</translation>
@@ -682,6 +654,11 @@
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="251"/>
         <source>Version</source>
         <translation>Versio</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="263"/>
+        <source>Unavailable</source>
+        <translation>Ei saatavilla</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="267"/>
@@ -941,14 +918,14 @@
         <translation>Nykyinen tarkkuus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="230"/>
-        <source>Primary Monitor</source>
-        <translation>Ensisijainen näyttö</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="228"/>
         <source>Display Ratio</source>
         <translation>Näytön taajuus</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="230"/>
+        <source>Primary Monitor</source>
+        <translation>Ensisijainen näyttö</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="231"/>
@@ -1007,14 +984,6 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="180"/>
         <source>Driver Version</source>
         <translation>Ajurin versio</translation>
-    </message>
-    <message>
-        <source>Capacity</source>
-        <translation type="vanished">Kapasiteetti</translation>
-    </message>
-    <message>
-        <source>Speed</source>
-        <translation type="vanished">Nopeus</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="186"/>
@@ -1087,15 +1056,6 @@
         <translation>Muistin osoite</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="214"/>
-        <source>Unavailable</source>
-        <translation>Ei saatavilla</translation>
-    </message>
-    <message>
-        <source>Memory</source>
-        <translation type="vanished">Muisti</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="200"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
@@ -1109,6 +1069,11 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
         <source>Logical Name</source>
         <translation>Looginen nimi</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="214"/>
+        <source>Unavailable</source>
+        <translation>Ei saatavilla</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="218"/>
@@ -1415,19 +1380,6 @@
         <translation>Ominaisuuksia</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
-        <source>Unavailable</source>
-        <translation>Ei saatavilla</translation>
-    </message>
-    <message>
-        <source>Power Cycle Count</source>
-        <translation type="vanished">Käynnistyskerrat</translation>
-    </message>
-    <message>
-        <source>Power On Hours</source>
-        <translation type="vanished">Käyttötunnit</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="332"/>
         <source>Firmware Version</source>
         <translation>Firmware versio</translation>
@@ -1456,6 +1408,11 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="337"/>
         <source>Rotation Rate</source>
         <translation>Pyörimisnopeus</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
+        <source>Unavailable</source>
+        <translation>Ei saatavilla</translation>
     </message>
 </context>
 <context>
@@ -1488,18 +1445,6 @@
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="84"/>
         <source>Loading CD-ROM Info...</source>
         <translation>Ladataan CD-ROM-tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Bluetooth Device Info...</source>
-        <translation type="vanished">Ladataan Bluetooth-laitteen tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Image Devices Info...</source>
-        <translation type="vanished">Ladataan kuvalaitteiden tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Keyboard Info...</source>
-        <translation type="vanished">Ladataan näppäimistön tietoja...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="89"/>
@@ -1635,8 +1580,8 @@
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="373"/>
-        <source>Power</source>
-        <translation>Virta</translation>
+        <source>Battery</source>
+        <translation>Akku</translation>
     </message>
 </context>
 <context>
@@ -1658,7 +1603,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="110"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="132"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="192"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="191"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Peru</translation>
@@ -1716,7 +1661,7 @@
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="191"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="190"/>
         <source>Next</source>
         <comment>button</comment>
         <translation>Seuraava</translation>
@@ -1762,17 +1707,17 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>Tuntematon virhe</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="349"/>
         <source>The driver module was not found</source>
-        <translation type="unfinished"/>
+        <translation>Ohjainta ei löytynyt</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="350"/>
         <source>The driver module has dependencies</source>
-        <translation type="unfinished"/>
+        <translation>Ohjaimella on riippuvuuksia</translation>
     </message>
 </context>
 <context>
@@ -1796,27 +1741,27 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="121"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="123"/>
         <source>Failed to enable the device</source>
         <translation>Laitteen käyttöönotto epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="124"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="126"/>
         <source>Failed to disable the device</source>
         <translation>Laitteen poistaminen käytöstä epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="129"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="131"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Käytöstä poisto epäonnistui: laitteen SN:n haku epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="144"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="146"/>
         <source>Update Drivers</source>
         <translation>Päivitä ajurit</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="162"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
         <source>Uninstall Drivers</source>
         <translation>Poista ajurit</translation>
     </message>
@@ -1883,15 +1828,15 @@
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="222"/>
-        <source>Failed to disable the device</source>
-        <translation>Laitteen poistaminen käytöstä epäonnistui</translation>
-    </message>
-    <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="218"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="235"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Käytöstä poisto epäonnistui: laitteen SN:n haku epäonnistui</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="222"/>
+        <source>Failed to disable the device</source>
+        <translation>Laitteen poistaminen käytöstä epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="239"/>
@@ -1910,23 +1855,16 @@
     </message>
 </context>
 <context>
-    <name>PageTableHeader</name>
-    <message>
-        <source>Disable</source>
-        <translation type="vanished">Poista</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="198"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>SubVendor</source>
         <translation>Alihankkija</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="199"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
         <source>SubDevice</source>
         <translation>Alalaite</translation>
     </message>
@@ -1948,7 +1886,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="92"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="42"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="313"/>
         <source>Config Status</source>
         <translation>Määrityksen tila</translation>
@@ -1965,7 +1903,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
         <source>latency</source>
         <translation>viive</translation>
     </message>
@@ -2327,7 +2265,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="153"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="38"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
         <source>Device</source>
         <translation>Laite</translation>
     </message>
@@ -2374,7 +2312,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="87"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="42"/>
         <source>Driver Modules</source>
         <translation>Ajuripaketit</translation>
     </message>
@@ -2776,7 +2714,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
         <source>One hundred and Ninety-two</source>
-        <translation type="unfinished"/>
+        <translation>Sata yhdeksänkymmentäkaksi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
@@ -2784,37 +2722,37 @@
         <translation>Kaksisataa viisikymmentäkuusi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="46"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
         <source>GDDR capacity</source>
         <translation>GDDR-kapasiteetti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
         <source>GPU vendor</source>
         <translation>GPU-valmistaja</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
         <source>GPU type</source>
         <translation>GPU-tyyppi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="50"/>
         <source>EGL version</source>
         <translation>EGL-versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="50"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="51"/>
         <source>EGL client APIs</source>
         <translation>EGL-rajapinnat</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="51"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="52"/>
         <source>GL version</source>
         <translation>GL-versio</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="52"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="53"/>
         <source>GLSL version</source>
         <translation>GLSL-versio</translation>
     </message>
@@ -3492,61 +3430,6 @@
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="48"/>
         <source>Search for drivers in this path</source>
         <translation>Etsi ajurit tästä polusta</translation>
-    </message>
-</context>
-<context>
-    <name>ReadFilePool</name>
-    <message>
-        <source>Loading Audio Device Info...</source>
-        <translation type="vanished">Ladataan äänilaitteen tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading BIOS Info...</source>
-        <translation type="vanished">Ladataan BIOS-tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading CD-ROM Info...</source>
-        <translation type="vanished">Ladataan CD-ROM-tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Bluetooth Device Info...</source>
-        <translation type="vanished">Ladataan Bluetooth-laitteen tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Image Devices Info...</source>
-        <translation type="vanished">Ladataan kuvalaitteiden tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Keyboard Info...</source>
-        <translation type="vanished">Ladataan näppäimistön tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Operating System Info...</source>
-        <translation type="vanished">Ladataan käyttöjärjestelmän tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading CPU Info...</source>
-        <translation type="vanished">Ladataan prosessorin tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Other Devices Info...</source>
-        <translation type="vanished">Ladataan muiden laitteiden tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Power Info...</source>
-        <translation type="vanished">Ladataan virtatietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Printer Info...</source>
-        <translation type="vanished">Ladataan tulostintietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Mouse Info...</source>
-        <translation type="vanished">Ladataan hiiren tietoja...</translation>
-    </message>
-    <message>
-        <source>Loading Network Adapter Info...</source>
-        <translation type="vanished">Ladataan verkkokortin tietoja...</translation>
     </message>
 </context>
 <context>

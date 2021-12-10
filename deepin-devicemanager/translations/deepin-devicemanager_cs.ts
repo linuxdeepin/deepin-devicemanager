@@ -1,25 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="cs" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="cs">
 <context>
     <name>CmdButtonWidget</name>
     <message>
         <location filename="../src/Widget/CmdButtonWidget.cpp" line="18"/>
         <source>More</source>
         <translation>Další</translation>
-    </message>
-</context>
-<context>
-    <name>DBusDriverInterface</name>
-    <message>
-        <source>Unknown error</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>The driver module was not found</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>The driver module has dependencies</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -125,18 +110,14 @@
         <translation>Adresa v paměti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
-        <source>Unavailable</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Memory</source>
-        <translation type="vanished">Operační paměť</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
         <source>IRQ</source>
         <translation>Přerušení (IRQ)</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
+        <source>Unavailable</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="262"/>
@@ -301,14 +282,14 @@
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="132"/>
-        <source>Disable</source>
-        <translation>Vypnout</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="128"/>
         <source>Unavailable</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="132"/>
+        <source>Disable</source>
+        <translation>Vypnout</translation>
     </message>
 </context>
 <context>
@@ -439,127 +420,127 @@
 <context>
     <name>DeviceGpu</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="58"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="59"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="59"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="60"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="60"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="61"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="61"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="62"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="62"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="63"/>
         <source>Graphics Memory</source>
         <translation>Paměť pro grafiku</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="205"/>
         <source>Physical ID</source>
         <translation>Fyzický identif.</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="206"/>
         <source>Memory Address</source>
         <translation>Adresa v paměti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="207"/>
         <source>IO Port</source>
         <translation>Vst./výstup. port</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="204"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="208"/>
         <source>Bus Info</source>
         <translation>Informace o sběrnici</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="205"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
         <source>Maximum Resolution</source>
         <translation>Nejvyšší možné rozlišení</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="206"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
         <source>Minimum Resolution</source>
         <translation>Nejnižší možné rozlišení</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="207"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
         <source>Current Resolution</source>
         <translation>Stávající rozlišení</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="208"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="212"/>
         <source>Driver</source>
         <translation>Ovladač</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
         <source>Clock</source>
         <translation>Takt</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
         <source>DP</source>
         <translation>DP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="212"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
         <source>eDP</source>
         <translation>vnitřní DP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
         <source>HDMI</source>
         <translation>HDMI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="218"/>
         <source>VGA</source>
         <translation>VGA</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="219"/>
         <source>DVI</source>
         <translation>DVI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
         <source>Display Output</source>
         <translation>Výstup zobrazení</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="222"/>
         <source>Capabilities</source>
         <translation>Schopnosti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="223"/>
         <source>IRQ</source>
         <translation>Přerušení (IRQ)</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="219"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="224"/>
         <source>Width</source>
         <translation>Šířka</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="230"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="235"/>
         <source>Unavailable</source>
         <translation type="unfinished"/>
     </message>
@@ -612,14 +593,14 @@
         <translation>Schopnosti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="152"/>
-        <source>Disable</source>
-        <translation>Vypnout</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="148"/>
         <source>Unavailable</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="152"/>
+        <source>Disable</source>
+        <translation>Vypnout</translation>
     </message>
 </context>
 <context>
@@ -660,15 +641,6 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="263"/>
-        <source>Unavailable</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Maximum Power</source>
-        <translation type="vanished">Nejvyšší odběr</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="249"/>
         <source>Driver</source>
         <translation>Ovladač</translation>
@@ -682,6 +654,11 @@
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="251"/>
         <source>Version</source>
         <translation>Verze</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="263"/>
+        <source>Unavailable</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="267"/>
@@ -941,14 +918,14 @@
         <translation>Stávající rozlišení</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="230"/>
-        <source>Primary Monitor</source>
-        <translation>Hlavní monitor</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="228"/>
         <source>Display Ratio</source>
         <translation>Poměr stran zobrazení</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="230"/>
+        <source>Primary Monitor</source>
+        <translation>Hlavní monitor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="231"/>
@@ -1007,14 +984,6 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="180"/>
         <source>Driver Version</source>
         <translation>Verze ovladače</translation>
-    </message>
-    <message>
-        <source>Capacity</source>
-        <translation type="vanished">Kapacita</translation>
-    </message>
-    <message>
-        <source>Speed</source>
-        <translation type="vanished">Rychlost</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="186"/>
@@ -1087,15 +1056,6 @@
         <translation>Adresa v paměti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="214"/>
-        <source>Unavailable</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Memory</source>
-        <translation type="vanished">Operační paměť</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="200"/>
         <source>IRQ</source>
         <translation>Přerušení (IRQ)</translation>
@@ -1109,6 +1069,11 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
         <source>Logical Name</source>
         <translation>Logický svazek</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="214"/>
+        <source>Unavailable</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="218"/>
@@ -1415,19 +1380,6 @@
         <translation>Schopnosti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
-        <source>Unavailable</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Power Cycle Count</source>
-        <translation type="vanished">Počet zapnutí</translation>
-    </message>
-    <message>
-        <source>Power On Hours</source>
-        <translation type="vanished">Souhrn doby, po kterou bylo v chodu (hodiny)</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="332"/>
         <source>Firmware Version</source>
         <translation>Verze firmware</translation>
@@ -1456,6 +1408,11 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="337"/>
         <source>Rotation Rate</source>
         <translation>Otáčky</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
+        <source>Unavailable</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1488,18 +1445,6 @@
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="84"/>
         <source>Loading CD-ROM Info...</source>
         <translation>Načítání informací o jednotce optických disků…</translation>
-    </message>
-    <message>
-        <source>Loading Bluetooth Device Info...</source>
-        <translation type="vanished">Načítání informací o Bluetooth zařízení…</translation>
-    </message>
-    <message>
-        <source>Loading Image Devices Info...</source>
-        <translation type="vanished">Načítání informací o zařízeních pro získávání obrazu…</translation>
-    </message>
-    <message>
-        <source>Loading Keyboard Info...</source>
-        <translation type="vanished">Načítání informací o klávesnici…</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="89"/>
@@ -1635,8 +1580,8 @@
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="373"/>
-        <source>Power</source>
-        <translation>Napájení</translation>
+        <source>Battery</source>
+        <translation>Akumulátor</translation>
     </message>
 </context>
 <context>
@@ -1658,7 +1603,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="110"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="132"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="192"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="191"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Storno</translation>
@@ -1716,7 +1661,7 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="191"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="190"/>
         <source>Next</source>
         <comment>button</comment>
         <translation type="unfinished"/>
@@ -1796,27 +1741,27 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="121"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="123"/>
         <source>Failed to enable the device</source>
         <translation>Zařízení se nepodařilo zapnout</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="124"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="126"/>
         <source>Failed to disable the device</source>
         <translation>Zařízení se nepodařilo vypnout</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="129"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="131"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="144"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="146"/>
         <source>Update Drivers</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="162"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
         <source>Uninstall Drivers</source>
         <translation type="unfinished"/>
     </message>
@@ -1883,15 +1828,15 @@
         <translation>Vypnout</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="222"/>
-        <source>Failed to disable the device</source>
-        <translation>Zařízení se nepodařilo vypnout</translation>
-    </message>
-    <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="218"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="235"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="222"/>
+        <source>Failed to disable the device</source>
+        <translation>Zařízení se nepodařilo vypnout</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="239"/>
@@ -1910,23 +1855,16 @@
     </message>
 </context>
 <context>
-    <name>PageTableHeader</name>
-    <message>
-        <source>Disable</source>
-        <translation type="vanished">Vypnout</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="198"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>SubVendor</source>
         <translation>Dílčí výrobce</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="199"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
         <source>SubDevice</source>
         <translation>Dílčí zařízení</translation>
     </message>
@@ -1948,7 +1886,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="92"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="42"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="313"/>
         <source>Config Status</source>
         <translation>Stav nastavení</translation>
@@ -1965,7 +1903,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
         <source>latency</source>
         <translation>prodleva</translation>
     </message>
@@ -2327,7 +2265,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="153"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="38"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
         <source>Device</source>
         <translation>Zařízení</translation>
     </message>
@@ -2374,7 +2312,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="87"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="42"/>
         <source>Driver Modules</source>
         <translation>Moduly ovladače</translation>
     </message>
@@ -2784,37 +2722,37 @@
         <translation>Dvě stě a padesát šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="46"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
         <source>GDDR capacity</source>
         <translation>Kapacita GDDR</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
         <source>GPU vendor</source>
         <translation>Výrobce graf. čipu</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
         <source>GPU type</source>
         <translation>Typ graf. čipu</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="50"/>
         <source>EGL version</source>
         <translation>Verze EGL</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="50"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="51"/>
         <source>EGL client APIs</source>
         <translation>API rozhraní EGL klienta</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="51"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="52"/>
         <source>GL version</source>
         <translation>Verze GL</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="52"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="53"/>
         <source>GLSL version</source>
         <translation>Verze GLSL</translation>
     </message>
@@ -3492,61 +3430,6 @@
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="48"/>
         <source>Search for drivers in this path</source>
         <translation type="unfinished"/>
-    </message>
-</context>
-<context>
-    <name>ReadFilePool</name>
-    <message>
-        <source>Loading Audio Device Info...</source>
-        <translation type="vanished">Načítání informací o zvukovém zařízení…</translation>
-    </message>
-    <message>
-        <source>Loading BIOS Info...</source>
-        <translation type="vanished">Načítání informací o BIOS/UEFI…</translation>
-    </message>
-    <message>
-        <source>Loading CD-ROM Info...</source>
-        <translation type="vanished">Načítání informací o jednotce optických disků…</translation>
-    </message>
-    <message>
-        <source>Loading Bluetooth Device Info...</source>
-        <translation type="vanished">Načítání informací o Bluetooth zařízení…</translation>
-    </message>
-    <message>
-        <source>Loading Image Devices Info...</source>
-        <translation type="vanished">Načítání informací o zařízeních pro získávání obrazu…</translation>
-    </message>
-    <message>
-        <source>Loading Keyboard Info...</source>
-        <translation type="vanished">Načítání informací o klávesnici…</translation>
-    </message>
-    <message>
-        <source>Loading Operating System Info...</source>
-        <translation type="vanished">Načítání informací o operačním systému…</translation>
-    </message>
-    <message>
-        <source>Loading CPU Info...</source>
-        <translation type="vanished">Načítání informací o procesoru…</translation>
-    </message>
-    <message>
-        <source>Loading Other Devices Info...</source>
-        <translation type="vanished">Načítání informací o ostatních zařízeních…</translation>
-    </message>
-    <message>
-        <source>Loading Power Info...</source>
-        <translation type="vanished">Načítání informací o napájení…</translation>
-    </message>
-    <message>
-        <source>Loading Printer Info...</source>
-        <translation type="vanished">Načítání informací o tiskárně…</translation>
-    </message>
-    <message>
-        <source>Loading Mouse Info...</source>
-        <translation type="vanished">Načítání informací o myši…</translation>
-    </message>
-    <message>
-        <source>Loading Network Adapter Info...</source>
-        <translation type="vanished">Načítání informací o síťovém adaptéru…</translation>
     </message>
 </context>
 <context>
