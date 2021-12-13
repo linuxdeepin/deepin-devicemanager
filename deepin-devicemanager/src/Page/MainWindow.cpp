@@ -208,12 +208,11 @@ void MainWindow::getJsonDoc(QJsonDocument &doc)
 
 void MainWindow::windowMaximizing()
 {
-    if (isMaximized())
-        // 正常窗口大小
-        showNormal();
-    else
-        // 窗口最大化
-        showMaximized();
+    if (!window()->windowState().testFlag(Qt::WindowMaximized)){
+        window()->setWindowState(windowState() | Qt::WindowMaximized);
+    }else{
+        window()->setWindowState(windowState() & ~Qt::WindowMaximized);
+    }
 }
 
 QString MainWindow::getArchString()
