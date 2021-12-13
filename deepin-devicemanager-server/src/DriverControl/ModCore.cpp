@@ -135,15 +135,15 @@ bool ModCore::rmModForce(const QString &modName, QString& errMsg)
  * @param flags 安装属性，属性值参照kmod_probe解释
  * @return 反回错误类型枚举值
  */
-ModCore::ErrorCode ModCore::modInstall(const QString &modName, QString& errMsg, unsigned int flags)
+bool ModCore::modInstall(const QString &modName, QString& errMsg, unsigned int flags)
 {
-    ErrorCode errcode = Success;
+    bool success = true;
     struct kmod_ctx *ctx = nullptr;
     const char **null_config = nullptr;
 
     ctx = kmod_new(nullptr, null_config);
     if (!ctx) {
-        errcode = KmodNewError;
+        success = false;
         qInfo() << __func__ << "kmod_new() failed!";
     } else {
         int err = 0;
@@ -156,7 +156,8 @@ ModCore::ErrorCode ModCore::modInstall(const QString &modName, QString& errMsg, 
                 err = kmod_module_probe_insert_module(mod, flags, nullptr, nullptr, nullptr, nullptr);
                 if (err < 0) {
                     errMsg = QString("%1").arg(abs(err));
-                    qInfo() << __func__ << QString("could not remove module %1: %1\n").arg(modName).arg(err);
+                    success = false;
+                    qInfo() << __func__ << QString("could not insert module %1: %1\n").arg(modName).arg(err);
                 }
                 kmod_module_unref(mod);
                 break; //出错一次直接错误返回
@@ -164,12 +165,12 @@ ModCore::ErrorCode ModCore::modInstall(const QString &modName, QString& errMsg, 
             kmod_module_unref_list(modlist);
         } else {
             qInfo() << __func__ << QString("Mod %1 not found in directory %2").arg(modName).arg(kmod_get_dirname(ctx));
-            errcode = NotFoundError;
+            success = false;
         }
 
         kmod_unref(ctx);
     }
-    return  errcode;
+    return  success;
 }
 
 /**
@@ -313,26 +314,6 @@ bool ModCore::modIsBlackListed(const QString &modName)
 {
     QStringList confs = modGetConfsWithType(EBlackListConf);
     return  confs.contains(modGetName(modName));
-}
-
-/**
- * @brief ModCore::errCode2String 错误码转换为错误信息
- * @param errcode 错误码
- * @return 错误信息
- */
-QString ModCore::errCode2String(ModCore::ErrorCode errcode)
-{
-    QString strerr;
-    switch (errcode) {
-    case UnknownError:
-        strerr = "";
-        break;
-    default:
-        strerr = "";
-        break;
-    }
-
-    return strerr;
 }
 
 /**

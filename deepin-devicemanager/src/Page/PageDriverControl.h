@@ -161,6 +161,6 @@ private:
     QString                    m_printerVendor;
     QString                    m_printerModel;
     QString                    m_deviceName;
-    QMap<QString, QString>     m_MapErrMsg;
+    QMap<int, QString>     m_MapErrMsg;
 };
 #endif // PAGEINSTALLDRIVER_H

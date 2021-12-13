@@ -30,23 +30,6 @@ class ModCore: public QObject
 {
     Q_OBJECT
 public:
-    //错误类型
-    enum ErrorCode {
-        // An invalid/unknown value
-        UnknownError = -1,
-        // An error code representing no error
-        Success = 0,
-        // Module not found
-        NotFoundError,
-        // kmod new error
-        KmodNewError,
-        // Module already in kernel
-        ModExistError,
-        // Unknown symbol in module or unknown parameter (see dmesg)
-        UnknownSymbolError,
-        // Insert insert error
-        InsertModError
-    };
     //模块信息相关类型
     enum ModInfoType {
         EAlias = 0,
@@ -74,7 +57,7 @@ public:
     //强制移除驱动模块 等效于rmmod -f
     bool rmModForce(const QString &modName, QString& errMsg);
     //ko安装
-    ErrorCode modInstall(const QString &modName, QString& errMsg, unsigned int flags = 0);
+    bool modInstall(const QString &modName, QString& errMsg, unsigned int flags = 0);
 
     //通过模块名获取驱动所在路径
     QString  modGetPath(const QString &modName);
@@ -100,8 +83,6 @@ public:
     bool setModLoadedOnBoot(const QString &modName);
     //移除mod loaded on boot
     void rmModLoadedOnBoot(const QString &modName);
-    //通过错误码获取错误信息内容
-    static QString errCode2String(ErrorCode errcode);
 
 
 private:
