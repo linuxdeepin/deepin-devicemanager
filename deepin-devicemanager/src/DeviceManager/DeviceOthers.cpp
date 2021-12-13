@@ -35,6 +35,11 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
     setAttribute(mapInfo, "logical name", m_LogicalName);
+
+    // 核内驱动不显示卸载菜单
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 }
 
 void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -50,6 +55,11 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "unknown", m_HardwareClass);
+
+    // 核内驱动不显示卸载菜单
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
     m_BusID = mapInfo["SysFS BusID"];
     m_BusID.replace(QRegExp("\\.[0-9]*$"), "");
