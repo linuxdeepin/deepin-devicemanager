@@ -54,7 +54,7 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_SerialID);
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
-    setAttribute(mapInfo, "unknown", m_HardwareClass);
+    m_HardwareClass = "unknown";
 
     // 核内驱动不显示卸载菜单
     if(driverIsKernelIn(m_Driver)){
