@@ -522,7 +522,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="220"/>
         <source>DigitalOutput</source>
-        <translation type="unfinished"/>
+        <translation>Digitális Kimenet</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
@@ -1727,7 +1727,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="352"/>
         <source>Invalid module format</source>
-        <translation type="unfinished"/>
+        <translation>Érvénytelen modul formátum</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="353"/>
