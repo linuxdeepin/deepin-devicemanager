@@ -38,7 +38,8 @@
 #include <QDBusConnection>
 #include <QWindow>
 #include <polkit-qt5-1/PolkitQt1/Authority>
-#include <QGraphicsEffect>
+
+#define EUNKNOW 0
 
 using namespace PolkitQt1;
 
@@ -340,29 +341,28 @@ void PageDriverControl::enableCloseBtn(bool enable)
 
     // 禁用按钮
     closeBtn->setAttribute(Qt::WA_TransparentForMouseEvents,!enable);
-    QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(this);
-    closeBtn->setGraphicsEffect(opacityEffect);
-    opacityEffect->setOpacity(enable? 1 : 0.4);
+    closeBtn->setEnabled(enable);
 }
 
 void PageDriverControl::initErrMsg()
 {
     // 初始化错误消息
-    m_MapErrMsg.insert("null",tr("Unknown error"));
-    m_MapErrMsg.insert("2",tr("The driver module was not found"));           // ENOENT		2	未发现该驱动模块 /* No such file or directory */
-    m_MapErrMsg.insert("11",tr("The driver module has dependencies"));       // EAGAIN 	    11	驱动模块被依赖
-//    m_MapErrMsg.insert("9",tr(""));                // EBADF		9	/* Bad file number */
-//    m_MapErrMsg.insert("17",tr(""));               // EEXIST		17	/* File exists */
-//    m_MapErrMsg.insert("19",tr(""));               // ENODEV		19	/* No such device */
-//    m_MapErrMsg.insert("30",tr(""));               // EROFS		30	/* Read-only file system */
+    m_MapErrMsg.insert(EUNKNOW,tr("Unknown error"));
+    m_MapErrMsg.insert(ENOENT,tr("The driver module was not found")); // 2	未发现该驱动模块 /* No such file or directory */
+    m_MapErrMsg.insert(ENOEXEC,tr("Invalid module format"));          // 8   模块格式无效 当该驱动已经编译到内核实，安装相同驱动的.ko文件会出现这个错误
+    m_MapErrMsg.insert(EAGAIN,tr("The driver module has dependencies"));  // 11	驱动模块被依赖
+//    m_MapErrMsg.insert(EBADF,tr(""));                // EBADF		9	/* Bad file number */
+//    m_MapErrMsg.insert(EEXIST,tr(""));               // EEXIST		17	/* File exists */
+//    m_MapErrMsg.insert(ENODEV,tr(""));               // ENODEV		19	/* No such device */
+//    m_MapErrMsg.insert(EROFS,tr(""));               // EROFS		30	/* Read-only file system */
 }
 
 const QString& PageDriverControl::errMsg(const QString& errCode)
 {
     // 将错误码转换为错误信息
-    if(m_MapErrMsg.find(errCode) != m_MapErrMsg.end()){
-        return m_MapErrMsg[errCode];
+    if(m_MapErrMsg.find(errCode.toInt()) != m_MapErrMsg.end()){
+        return m_MapErrMsg[errCode.toInt()];
     }else{
-        return m_MapErrMsg["null"];
+        return m_MapErrMsg[EUNKNOW];
     }
 }

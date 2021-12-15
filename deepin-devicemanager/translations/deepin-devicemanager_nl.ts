@@ -1,25 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nl">
 <context>
     <name>CmdButtonWidget</name>
     <message>
         <location filename="../src/Widget/CmdButtonWidget.cpp" line="18"/>
         <source>More</source>
         <translation>Meer</translation>
-    </message>
-</context>
-<context>
-    <name>DBusDriverInterface</name>
-    <message>
-        <source>Unknown error</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>The driver module was not found</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>The driver module has dependencies</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -125,18 +110,14 @@
         <translation>Aanspreekbaar geheugen</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
-        <source>Unavailable</source>
-        <translation>Niet beschikbaar</translation>
-    </message>
-    <message>
-        <source>Memory</source>
-        <translation type="vanished">Geheugen</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
+        <source>Unavailable</source>
+        <translation>Niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="262"/>
@@ -301,14 +282,14 @@
         <translation>Snelheid</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="132"/>
-        <source>Disable</source>
-        <translation>Uitschakelen</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="128"/>
         <source>Unavailable</source>
         <translation>Niet beschikbaar</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="132"/>
+        <source>Disable</source>
+        <translation>Uitschakelen</translation>
     </message>
 </context>
 <context>
@@ -439,127 +420,132 @@
 <context>
     <name>DeviceGpu</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="58"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="59"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="59"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="60"/>
         <source>Vendor</source>
         <translation>Maker</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="60"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="61"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="61"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="62"/>
         <source>Version</source>
         <translation>Versie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="62"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="63"/>
         <source>Graphics Memory</source>
         <translation>Videokaartgeheugen</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="205"/>
         <source>Physical ID</source>
         <translation>Fysieke id</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="206"/>
         <source>Memory Address</source>
         <translation>Aanspreekbaar geheugen</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="207"/>
         <source>IO Port</source>
         <translation>I/O-poort</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="204"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="208"/>
         <source>Bus Info</source>
         <translation>Businformatie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="205"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
         <source>Maximum Resolution</source>
         <translation>Maximumresolutie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="206"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
         <source>Minimum Resolution</source>
         <translation>Minimumresolutie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="207"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
         <source>Current Resolution</source>
         <translation>Huidige resolutie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="208"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="212"/>
         <source>Driver</source>
         <translation>Stuurprogramma</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
         <source>Description</source>
         <translation>Omschrijving</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="210"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
         <source>Clock</source>
         <translation>Klok</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="211"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
         <source>DP</source>
         <translation>DP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="212"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
         <source>eDP</source>
         <translation>eDP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
         <source>HDMI</source>
         <translation>HDMI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="218"/>
         <source>VGA</source>
         <translation>VGA</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="219"/>
         <source>DVI</source>
         <translation>DVI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="220"/>
+        <source>DigitalOutput</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
         <source>Display Output</source>
         <translation>Schermuitvoer</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="222"/>
         <source>Capabilities</source>
         <translation>Mogelijkheden</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="223"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="219"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="224"/>
         <source>Width</source>
         <translation>Breedte</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="230"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="235"/>
         <source>Unavailable</source>
         <translation>Niet beschikbaar</translation>
     </message>
@@ -567,59 +553,64 @@
 <context>
     <name>DeviceImage</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="123"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="124"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="124"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="125"/>
         <source>Vendor</source>
         <translation>Maker</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="125"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="126"/>
         <source>Version</source>
         <translation>Versie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="126"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="127"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="127"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="128"/>
         <source>Bus Info</source>
         <translation>Businformatie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="133"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="134"/>
         <source>Speed</source>
         <translation>Snelheid</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="135"/>
         <source>Maximum Power</source>
         <translation>Maximale energie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="136"/>
         <source>Driver</source>
         <translation>Stuurprogramma</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="136"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="137"/>
         <source>Capabilities</source>
         <translation>Mogelijkheden</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="152"/>
-        <source>Disable</source>
-        <translation>Uitschakelen</translation>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="138"/>
+        <source>Serial Number</source>
+        <translation>Serienummer</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="148"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="150"/>
         <source>Unavailable</source>
         <translation>Niet beschikbaar</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="154"/>
+        <source>Disable</source>
+        <translation>Uitschakelen</translation>
     </message>
 </context>
 <context>
@@ -660,15 +651,6 @@
         <translation>Maximumvoltage</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="263"/>
-        <source>Unavailable</source>
-        <translation>Niet beschikbaar</translation>
-    </message>
-    <message>
-        <source>Maximum Power</source>
-        <translation type="vanished">Maximale energie</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="249"/>
         <source>Driver</source>
         <translation>Stuurprogramma</translation>
@@ -682,6 +664,11 @@
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="251"/>
         <source>Version</source>
         <translation>Versie</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="263"/>
+        <source>Unavailable</source>
+        <translation>Niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="267"/>
@@ -941,14 +928,14 @@
         <translation>Huidige resolutie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="230"/>
-        <source>Primary Monitor</source>
-        <translation>Primair beeldscherm</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="228"/>
         <source>Display Ratio</source>
         <translation>Beeldverhouding</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="230"/>
+        <source>Primary Monitor</source>
+        <translation>Primair beeldscherm</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="231"/>
@@ -1007,14 +994,6 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="180"/>
         <source>Driver Version</source>
         <translation>Stuurprogrammaversie</translation>
-    </message>
-    <message>
-        <source>Capacity</source>
-        <translation type="vanished">Capaciteit</translation>
-    </message>
-    <message>
-        <source>Speed</source>
-        <translation type="vanished">Snelheid</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="186"/>
@@ -1087,15 +1066,6 @@
         <translation>Aanspreekbaar geheugen</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="214"/>
-        <source>Unavailable</source>
-        <translation>Niet beschikbaar</translation>
-    </message>
-    <message>
-        <source>Memory</source>
-        <translation type="vanished">Geheugen</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="200"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
@@ -1109,6 +1079,11 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
         <source>Logical Name</source>
         <translation>Logische naam</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="214"/>
+        <source>Unavailable</source>
+        <translation>Niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="218"/>
@@ -1187,62 +1162,62 @@
 <context>
     <name>DeviceOthers</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="116"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="126"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="117"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="127"/>
         <source>Vendor</source>
         <translation>Maker</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="118"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="128"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="119"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="129"/>
         <source>Version</source>
         <translation>Versie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="120"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="130"/>
         <source>Bus Info</source>
         <translation>Businformatie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="121"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="131"/>
         <source>Capabilities</source>
         <translation>Mogelijkheden</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="122"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="132"/>
         <source>Driver</source>
         <translation>Stuurprogramma</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="123"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="133"/>
         <source>Maximum Power</source>
         <translation>Maximale energie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="124"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="134"/>
         <source>Speed</source>
         <translation>Snelheid</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="129"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="139"/>
         <source>Serial Number</source>
         <translation>Serienummer</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="148"/>
         <source>Unavailable</source>
         <translation>Niet beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="141"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="151"/>
         <source>Disable</source>
         <translation>Uitschakelen</translation>
     </message>
@@ -1415,19 +1390,6 @@
         <translation>Mogelijkheden</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
-        <source>Unavailable</source>
-        <translation>Niet beschikbaar</translation>
-    </message>
-    <message>
-        <source>Power Cycle Count</source>
-        <translation type="vanished"> Aantal keer opgestart</translation>
-    </message>
-    <message>
-        <source>Power On Hours</source>
-        <translation type="vanished">Inschakeltijden</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="332"/>
         <source>Firmware Version</source>
         <translation>Firmwareversie</translation>
@@ -1457,17 +1419,22 @@
         <source>Rotation Rate</source>
         <translation>Bewegingssnelheid</translation>
     </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
+        <source>Unavailable</source>
+        <translation>Niet beschikbaar</translation>
+    </message>
 </context>
 <context>
     <name>GetDriverNameWidget</name>
     <message>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="47"/>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="114"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="42"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="110"/>
         <source>Select a driver for update</source>
         <translation>Kies een bij te werken stuurprogramma</translation>
     </message>
     <message>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="109"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="105"/>
         <source>No drivers found in this folder</source>
         <translation>Er zijn geen stuurprogramma&apos;s aangetroffen in deze map</translation>
     </message>
@@ -1488,18 +1455,6 @@
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="84"/>
         <source>Loading CD-ROM Info...</source>
         <translation>Bezig met laden van cd-rominformatie...</translation>
-    </message>
-    <message>
-        <source>Loading Bluetooth Device Info...</source>
-        <translation type="vanished">Bezig met laden van Bluetooth-apparaten...</translation>
-    </message>
-    <message>
-        <source>Loading Image Devices Info...</source>
-        <translation type="vanished">Bezig met laden van afbeeldingsapparaten...</translation>
-    </message>
-    <message>
-        <source>Loading Keyboard Info...</source>
-        <translation type="vanished">Bezig met laden van toetsenbordinformatie...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="89"/>
@@ -1614,29 +1569,29 @@
         <translation>Apparaatbeheer</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="355"/>
+        <location filename="../src/Page/MainWindow.cpp" line="354"/>
         <source>Monitor</source>
         <translation>Beeldscherm</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="359"/>
+        <location filename="../src/Page/MainWindow.cpp" line="358"/>
         <source>Display Adapter</source>
         <translation>Beeldschermadapter</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="363"/>
+        <location filename="../src/Page/MainWindow.cpp" line="362"/>
         <source>CPU</source>
         <translation>Processor</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="367"/>
+        <location filename="../src/Page/MainWindow.cpp" line="366"/>
         <source>Network Adapter</source>
         <translation>Netwerkadapter</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="373"/>
-        <source>Power</source>
-        <translation>Energie</translation>
+        <location filename="../src/Page/MainWindow.cpp" line="372"/>
+        <source>Battery</source>
+        <translation>Accu</translation>
     </message>
 </context>
 <context>
@@ -1650,129 +1605,134 @@
 <context>
     <name>PageDriverControl</name>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="105"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="238"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="107"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="240"/>
         <source>Updating</source>
         <translation>Bezig met bijwerken…</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="110"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="132"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="192"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="112"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="134"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="193"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="111"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="113"/>
         <source>Next</source>
         <translation>Volgende</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="131"/>
         <source>Warning</source>
         <translation>Waarschuwing</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="131"/>
         <source>The device will be unavailable after the driver uninstallation</source>
         <translation>Het apparaat is niet meer beschikbaar na het verwijderen van het stuurprogramma</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="135"/>
         <source>Uninstall</source>
         <comment>button</comment>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="137"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="139"/>
         <source>Uninstalling</source>
         <translation>Bezig met verwijderen…</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="163"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="165"/>
         <source>Update successful</source>
         <translation>Het bijwerken is voltooid</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="163"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="165"/>
         <source>Uninstallation successful</source>
         <translation>Het verwijderen is voltooid</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="164"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="166"/>
         <source>Update failed</source>
         <translation>Het bijwerken is mislukt</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="164"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="166"/>
         <source>Uninstallation failed</source>
         <translation>Het verwijderen is mislukt</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="171"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="173"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>Oké</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="191"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="192"/>
         <source>Next</source>
         <comment>button</comment>
         <translation>Volgende</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="211"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="213"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>De gekozen map bestaat niet - kies een andere</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="216"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="218"/>
         <source>Update</source>
         <comment>button</comment>
         <translation>Bijwerken</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="217"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="219"/>
         <source>Previous</source>
         <comment>button</comment>
         <translation>Vorige</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="250"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="252"/>
         <source>Broken package</source>
         <translation>Beschadigd pakket</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="254"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="256"/>
         <source>Unmatched package architecture</source>
         <translation>Niet-overeenkomende pakketarchitectuur</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="260"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="267"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="262"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="269"/>
         <source>The selected file does not exist, please select again</source>
         <translation>Het gekozen bestand bestaat niet - kies een andere</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="263"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="265"/>
         <source>It is not a driver</source>
         <translation>Dit is geen stuurprogramma</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
-        <source>Unknown error</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="349"/>
-        <source>The driver module was not found</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="350"/>
-        <source>The driver module has dependencies</source>
+        <source>Unknown error</source>
+        <translation>Onbekende fout</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="351"/>
+        <source>The driver module was not found</source>
+        <translation>De stuurprogrammamodule is niet aangetroffen</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="352"/>
+        <source>Invalid module format</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="353"/>
+        <source>The driver module has dependencies</source>
+        <translation>De stuurprogrammamodule kent vereisten</translation>
     </message>
 </context>
 <context>
@@ -1796,27 +1756,27 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="121"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="123"/>
         <source>Failed to enable the device</source>
         <translation>Het apparaat kan niet worden ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="124"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="126"/>
         <source>Failed to disable the device</source>
         <translation>Het apparaat kan niet worden ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="129"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="131"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Het uitschakelen is mislukt: het serienummer van het apparaat kan niet worden opgevraagd</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="144"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="146"/>
         <source>Update Drivers</source>
         <translation>Stuurprogramma&apos;s bijwerken</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="162"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
         <source>Uninstall Drivers</source>
         <translation>Stuurprogramma&apos;s verwijderen</translation>
     </message>
@@ -1883,15 +1843,15 @@
         <translation>Uitschakelen</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="222"/>
-        <source>Failed to disable the device</source>
-        <translation>Het apparaat kan niet worden ingeschakeld</translation>
-    </message>
-    <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="218"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="235"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Het uitschakelen is mislukt: het serienummer van het apparaat kan niet worden opgevraagd</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="222"/>
+        <source>Failed to disable the device</source>
+        <translation>Het apparaat kan niet worden ingeschakeld</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="239"/>
@@ -1910,23 +1870,16 @@
     </message>
 </context>
 <context>
-    <name>PageTableHeader</name>
-    <message>
-        <source>Disable</source>
-        <translation type="vanished">Uitschakelen</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="198"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>SubVendor</source>
         <translation>Submaker</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="199"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
         <source>SubDevice</source>
         <translation>Subapparaat</translation>
     </message>
@@ -1948,7 +1901,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="92"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="42"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="313"/>
         <source>Config Status</source>
         <translation>Configuratiestatus</translation>
@@ -1965,7 +1918,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
         <source>latency</source>
         <translation>vertraging</translation>
     </message>
@@ -2327,7 +2280,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="153"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="38"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
         <source>Device</source>
         <translation>Apparaat</translation>
     </message>
@@ -2374,7 +2327,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="87"/>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="42"/>
         <source>Driver Modules</source>
         <translation>Stuurprogrammamodules</translation>
     </message>
@@ -2776,7 +2729,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
         <source>One hundred and Ninety-two</source>
-        <translation type="unfinished"/>
+        <translation>Honderdtweeënnegentig</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
@@ -2784,37 +2737,37 @@
         <translation>Tweehonderdzesenvijftig</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="46"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
         <source>GDDR capacity</source>
         <translation>GDDR-capaciteit</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
         <source>GPU vendor</source>
         <translation>GPU-maker</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
         <source>GPU type</source>
         <translation>Soort GPU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="50"/>
         <source>EGL version</source>
         <translation>EGL-versie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="50"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="51"/>
         <source>EGL client APIs</source>
         <translation>EGL-client-API&apos;s</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="51"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="52"/>
         <source>GL version</source>
         <translation>GL-versie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="52"/>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="53"/>
         <source>GLSL version</source>
         <translation>GLSL-versie</translation>
     </message>
@@ -3495,61 +3448,6 @@
     </message>
 </context>
 <context>
-    <name>ReadFilePool</name>
-    <message>
-        <source>Loading Audio Device Info...</source>
-        <translation type="vanished">Bezig met laden van audio-apparaten...</translation>
-    </message>
-    <message>
-        <source>Loading BIOS Info...</source>
-        <translation type="vanished">Bezig met laden van BIOS-informatie...</translation>
-    </message>
-    <message>
-        <source>Loading CD-ROM Info...</source>
-        <translation type="vanished">Bezig met laden van cd-rominformatie...</translation>
-    </message>
-    <message>
-        <source>Loading Bluetooth Device Info...</source>
-        <translation type="vanished">Bezig met laden van Bluetooth-apparaten...</translation>
-    </message>
-    <message>
-        <source>Loading Image Devices Info...</source>
-        <translation type="vanished">Bezig met laden van afbeeldingsapparaten...</translation>
-    </message>
-    <message>
-        <source>Loading Keyboard Info...</source>
-        <translation type="vanished">Bezig met laden van toetsenbordinformatie...</translation>
-    </message>
-    <message>
-        <source>Loading Operating System Info...</source>
-        <translation type="vanished">Bezig met laden van besturingssysteeminformatie...</translation>
-    </message>
-    <message>
-        <source>Loading CPU Info...</source>
-        <translation type="vanished">Bezig met laden van processorinformatie...</translation>
-    </message>
-    <message>
-        <source>Loading Other Devices Info...</source>
-        <translation type="vanished">Bezig met laden van overige apparaten...</translation>
-    </message>
-    <message>
-        <source>Loading Power Info...</source>
-        <translation type="vanished">Bezig met laden van energie-informatie...</translation>
-    </message>
-    <message>
-        <source>Loading Printer Info...</source>
-        <translation type="vanished">Bezig met laden van printers...</translation>
-    </message>
-    <message>
-        <source>Loading Mouse Info...</source>
-        <translation type="vanished">Bezig met laden van muisinformatie...</translation>
-    </message>
-    <message>
-        <source>Loading Network Adapter Info...</source>
-        <translation type="vanished">Bezig met laden van netwerkadapters...</translation>
-    </message>
-</context>
-<context>
     <name>TableWidget</name>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="26"/>
@@ -3579,7 +3477,7 @@
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="205"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="263"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="260"/>
         <source>Enable</source>
         <translation>Inschakelen</translation>
     </message>

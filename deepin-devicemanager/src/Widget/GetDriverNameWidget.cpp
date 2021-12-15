@@ -38,48 +38,44 @@ GetDriverNameWidget::~GetDriverNameWidget()
 void GetDriverNameWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
-    DFrame *frame = new DFrame;
-    frame->setFixedSize(460, 165);
-    frame->setContentsMargins(0, 0, 0, 0);
     mainLayout->setContentsMargins(0, 0, 0, 0);
-    QHBoxLayout *hLayout = new QHBoxLayout;
-    hLayout->setContentsMargins(0, 0, 0, 0);
     DLabel *titleLable = new DLabel(tr("Select a driver for update"));
-    hLayout->addStretch();
-    hLayout->addWidget(titleLable);
-    hLayout->addStretch();
-
-    QHBoxLayout *driverLayout = new QHBoxLayout;
-    driverLayout->setContentsMargins(0, 0, 0, 0);
-    driverLayout->addStretch();
-    driverLayout->addWidget(frame);
-    driverLayout->addStretch();
-
     mp_StackWidget->addWidget(mp_WaitingWidget);
     mp_StackWidget->addWidget(mp_ListView);
-    mp_StackWidget->setContentsMargins(0,5,0,0);
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->setContentsMargins(0, 0, 0, 0);
-    layout->addStretch();
-    layout->addWidget(mp_StackWidget);
-    layout->addStretch();
-    frame->setLayout(layout);
-
-    mainLayout->addStretch();
-    mainLayout->addLayout(hLayout);
-    mainLayout->addLayout(driverLayout);
-    mainLayout->addStretch();
-    mainLayout->addWidget(mp_tipLabel);
-
+    mp_StackWidget->setContentsMargins(0,0,0,0);
     mp_tipLabel->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
     mp_tipLabel->setElideMode(Qt::ElideRight);
-    mp_tipLabel->setMinimumHeight(20);
+    mp_tipLabel->setMinimumHeight(25);
 
     DFontSizeManager::instance()->bind(mp_tipLabel, DFontSizeManager::T8, QFont::Medium);
     DPalette pa = DApplicationHelper::instance()->palette(mp_tipLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
     DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
 
+    // 上方布局
+    QHBoxLayout *hLayout1 = new QHBoxLayout;
+    hLayout1->addStretch();
+    hLayout1->addWidget(titleLable);
+    hLayout1->addStretch();
+    mainLayout->addLayout(hLayout1);
+
+    // 中间布局
+    QHBoxLayout *hLayout2 = new QHBoxLayout;
+    hLayout2->setContentsMargins(0,5,0,5);
+    hLayout2->addStretch();
+    hLayout2->addWidget(mp_StackWidget);
+    hLayout2->addStretch();
+    DFrame *frame = new DFrame;
+    frame->setContentsMargins(0,0,0,0);
+    frame->setLayout(hLayout2);
+    mainLayout->addWidget(frame);
+
+    // 下面布局
+    QHBoxLayout *hLayout3 = new QHBoxLayout;
+    hLayout3->addStretch();
+    hLayout3->addWidget(mp_tipLabel);
+    hLayout3->addStretch();
+    mainLayout->addLayout(hLayout3);
     this->setLayout(mainLayout);
 }
 

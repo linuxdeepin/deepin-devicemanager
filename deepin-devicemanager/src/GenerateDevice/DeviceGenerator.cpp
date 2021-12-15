@@ -957,8 +957,12 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
         const QStringList &lstBusId = DeviceManager::instance()->getBusId();
         // 判断该设备是否已经在其他类别中显示
-        if (curBus.isEmpty() || lstBusId.indexOf(curBus) != -1)
-            isOtherDevice = false;
+        if((*it).find("unique_id") != (*it).end()){
+            isOtherDevice = true;
+        }else{
+            if (curBus.isEmpty() || lstBusId.indexOf(curBus) != -1)
+                isOtherDevice = false;
+        }
 
         // 添加其他设备
         if (isOtherDevice) {
@@ -1061,8 +1065,8 @@ QString DeviceGenerator::uniqueID(const QMap<QString, QString> &mapInfo)
         return mapInfo["unique_id"];
     } else if (mapInfo.find("Permanent HW Address") != mapInfo.end()) {
         return mapInfo["Permanent HW Address"];
-    } else if (mapInfo.find("Module Alias") != mapInfo.end()) {
-        return mapInfo["Module Alias"];
+    } else if (mapInfo.find("Serial ID") != mapInfo.end()) {
+        return mapInfo["Serial ID"];
     }
     return "";
 }

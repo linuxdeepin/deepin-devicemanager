@@ -371,6 +371,7 @@ protected:
 
 protected:
     QString                        m_UniqueID;      //<! 设备的唯一值
+    QString                        m_SerialID;      //<! 序列号id
     QString                        m_SysPath;       //<! 用启用的sys path
     QString                        m_HardwareClass; //<! 设备类型
     QString                        m_HwinfoToLshw;  //<! 匹配hwinfo和lshw的key
