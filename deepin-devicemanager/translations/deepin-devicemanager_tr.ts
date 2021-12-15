@@ -520,6 +520,11 @@
         <translation>DVI</translation>
     </message>
     <message>
+        <location filename="../src/DeviceManager/DeviceGpu.cpp" line="220"/>
+        <source>DigitalOutput</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
         <source>Display Output</source>
         <translation>Ekran Çıkışı</translation>
@@ -548,57 +553,62 @@
 <context>
     <name>DeviceImage</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="123"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="124"/>
         <source>Name</source>
         <translation>İsim</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="124"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="125"/>
         <source>Vendor</source>
         <translation>Satıcı</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="125"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="126"/>
         <source>Version</source>
         <translation>Sürüm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="126"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="127"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="127"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="128"/>
         <source>Bus Info</source>
         <translation>Bus Bilgisi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="133"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="134"/>
         <source>Speed</source>
         <translation>Hız</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="135"/>
         <source>Maximum Power</source>
         <translation>Azami Güç</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="136"/>
         <source>Driver</source>
         <translation>Sürücü</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="136"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="137"/>
         <source>Capabilities</source>
         <translation>Yetenekler</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="148"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="138"/>
+        <source>Serial Number</source>
+        <translation>Seri Numarası</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="150"/>
         <source>Unavailable</source>
         <translation>Yok</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="152"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="154"/>
         <source>Disable</source>
         <translation>Devre dışı</translation>
     </message>
@@ -1152,62 +1162,62 @@
 <context>
     <name>DeviceOthers</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="116"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="126"/>
         <source>Name</source>
         <translation>İsim</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="117"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="127"/>
         <source>Vendor</source>
         <translation>Satıcı</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="118"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="128"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="119"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="129"/>
         <source>Version</source>
         <translation>Sürüm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="120"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="130"/>
         <source>Bus Info</source>
         <translation>Bus Bilgisi</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="121"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="131"/>
         <source>Capabilities</source>
         <translation>Yetenekler</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="122"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="132"/>
         <source>Driver</source>
         <translation>Sürücü</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="123"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="133"/>
         <source>Maximum Power</source>
         <translation>Azami Güç</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="124"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="134"/>
         <source>Speed</source>
         <translation>Hız</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="129"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="139"/>
         <source>Serial Number</source>
         <translation>Seri Numarası</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="148"/>
         <source>Unavailable</source>
         <translation>Yok</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="141"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="151"/>
         <source>Disable</source>
         <translation>Devre dışı</translation>
     </message>
@@ -1418,13 +1428,13 @@
 <context>
     <name>GetDriverNameWidget</name>
     <message>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="47"/>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="114"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="42"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="110"/>
         <source>Select a driver for update</source>
         <translation>Güncelleme için bir sürücü seçin</translation>
     </message>
     <message>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="109"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="105"/>
         <source>No drivers found in this folder</source>
         <translation>Bu klasörde sürücü bulunamadı</translation>
     </message>
@@ -1559,27 +1569,27 @@
         <translation>Aygıt Yöneticisi</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="355"/>
+        <location filename="../src/Page/MainWindow.cpp" line="354"/>
         <source>Monitor</source>
         <translation>Ekran</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="359"/>
+        <location filename="../src/Page/MainWindow.cpp" line="358"/>
         <source>Display Adapter</source>
         <translation>Görüntü Bağdaştırıcısı</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="363"/>
+        <location filename="../src/Page/MainWindow.cpp" line="362"/>
         <source>CPU</source>
         <translation>CPU</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="367"/>
+        <location filename="../src/Page/MainWindow.cpp" line="366"/>
         <source>Network Adapter</source>
         <translation>Ağ Bağdaştırıcı</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="373"/>
+        <location filename="../src/Page/MainWindow.cpp" line="372"/>
         <source>Battery</source>
         <translation>Pil</translation>
     </message>
@@ -1595,127 +1605,132 @@
 <context>
     <name>PageDriverControl</name>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="105"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="238"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="107"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="240"/>
         <source>Updating</source>
         <translation>Güncelleniyor</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="110"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="132"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="191"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="112"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="134"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="193"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>İptal</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="111"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="113"/>
         <source>Next</source>
         <translation>Sonraki</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="131"/>
         <source>Warning</source>
         <translation>Uyarı</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="131"/>
         <source>The device will be unavailable after the driver uninstallation</source>
         <translation>Sürücü kaldırıldıktan sonra cihaz kullanılamayacak</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="135"/>
         <source>Uninstall</source>
         <comment>button</comment>
         <translation>Kaldır</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="137"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="139"/>
         <source>Uninstalling</source>
         <translation>Kaldırılıyor</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="163"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="165"/>
         <source>Update successful</source>
         <translation>Güncelleme başarılı</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="163"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="165"/>
         <source>Uninstallation successful</source>
         <translation>Kaldırma başarılı</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="164"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="166"/>
         <source>Update failed</source>
         <translation>Güncelleştirme başarısız</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="164"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="166"/>
         <source>Uninstallation failed</source>
         <translation>Kaldırma başarısız</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="171"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="173"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="190"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="192"/>
         <source>Next</source>
         <comment>button</comment>
         <translation>Sonraki</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="211"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="213"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>Seçilen klasör mevcut değil, lütfen tekrar seçin</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="216"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="218"/>
         <source>Update</source>
         <comment>button</comment>
         <translation>Güncelle</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="217"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="219"/>
         <source>Previous</source>
         <comment>button</comment>
         <translation>Öncesi</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="250"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="252"/>
         <source>Broken package</source>
         <translation>Bozuk paket</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="254"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="256"/>
         <source>Unmatched package architecture</source>
         <translation>Benzersiz paket mimarisi</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="260"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="267"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="262"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="269"/>
         <source>The selected file does not exist, please select again</source>
         <translation>Seçilen dosya mevcut değil, lütfen tekrar seçin</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="263"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="265"/>
         <source>It is not a driver</source>
         <translation>Bu bir sürücü değil</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="350"/>
         <source>Unknown error</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="349"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="351"/>
         <source>The driver module was not found</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="350"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="352"/>
+        <source>Invalid module format</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="353"/>
         <source>The driver module has dependencies</source>
         <translation type="unfinished"/>
     </message>
@@ -3462,7 +3477,7 @@
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="205"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="263"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="260"/>
         <source>Enable</source>
         <translation>Etkin</translation>
     </message>
