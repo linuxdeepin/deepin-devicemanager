@@ -225,17 +225,14 @@ void TableWidget::slotShowMenu(const QPoint &point)
     // 添加按钮到菜单
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
-    QModelIndex index = mp_Table->currentIndex();
-    QModelIndex indext = mp_Table->indexAt(point);   // 鼠标右击table，绝对位置转换
-    qInfo() << point << this->mapToGlobal(point) << mp_Table->mapFromGlobal(this->mapToGlobal(point));
-    qInfo() << index.row() << indext.row();
+    QModelIndexList selected = mp_Table->selectionModel()->selectedRows();
     // 选中item状态下才有启用/禁用按钮
-    if (m_Enable && ((0 == index.row() && indext.row() != -1) || index.row() > 0)) {
+    if (m_Enable && selected.size() > 0) {
         mp_Menu->addAction(mp_Enable);
     }
     // 主板、内存、cpu等没有驱动，无需右键按钮
     // 选中item状态下才有卸载、更新按钮
-    if (m_CanUninstall && ((0 == index.row() && indext.row() != -1) || index.row() > 0)) {
+    if (m_CanUninstall && selected.size() > 0) {
         mp_Menu->addSeparator();
         mp_Menu->addAction(mp_updateDriver);
         mp_Menu->addAction(mp_removeDriver);
