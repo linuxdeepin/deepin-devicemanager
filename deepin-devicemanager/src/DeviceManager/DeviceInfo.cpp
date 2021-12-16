@@ -421,8 +421,9 @@ bool DeviceBaseInfo::available()
 
 bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
 {
+    // 获取不到驱动，默认核内
     if(driver.isEmpty()){
-        return false;
+        return true;
     }
 
     QString info = "";
