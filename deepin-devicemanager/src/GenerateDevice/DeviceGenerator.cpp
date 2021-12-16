@@ -957,8 +957,8 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
         const QStringList &lstBusId = DeviceManager::instance()->getBusId();
         // 判断该设备是否已经在其他类别中显示
-        if((*it).find("unique_id") != (*it).end()){
-            isOtherDevice = true;
+        if((*it).find("unique_id") != (*it).end() && (*it)["Hardware Class"] != "unknown"){
+            isOtherDevice = false;
         }else{
             if (curBus.isEmpty() || lstBusId.indexOf(curBus) != -1)
                 isOtherDevice = false;
