@@ -287,8 +287,13 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
     mapInfo.clear();
 
     // 声卡芯片型号
+    /* 正则表达式匹配的字符串实例：
+     * ALC662 rev3:
+     * ALC887-VD:
+     * ALC887:
+    */
     foreach (const QString &line, lines) {
-        QRegExp reg(".*autoconfig for ([A-Za-z0-9]+):.*");
+        QRegExp reg(".*autoconfig for ([A-Za-z0-9]{6}[ -][A-Za-z0-9]+):.*");
         if (reg.exactMatch(line)) {
             QString chip = reg.cap(1);
             mapInfo["chip"] = chip;
