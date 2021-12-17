@@ -60,25 +60,29 @@ public:
     GetInfoPool *readFilePool;
 };
 
-TEST_F(UT_GetInfoPool,UT_GetInfoPool_initcmd){
+TEST_F(UT_GetInfoPool, UT_GetInfoPool_initcmd)
+{
     m_readFilePool->m_CmdList.clear();
     m_readFilePool->initCmd();
-    EXPECT_EQ(m_readFilePool->m_CmdList.size(),28);
+    EXPECT_EQ(m_readFilePool->m_CmdList.size(), 29);
 }
 
-bool ut_getDeviceInfo_getAllInfo(void* obj,QString& deviceInfo, const QString& file){
+bool ut_getDeviceInfo_getAllInfo(void *obj, QString &deviceInfo, const QString &file)
+{
     deviceInfo = "test info";
     return true;
 }
-TEST_F(UT_GetInfoPool,UT_GetInfoPool_getAllInfo){
+TEST_F(UT_GetInfoPool, UT_GetInfoPool_getAllInfo)
+{
     Stub stub;
     stub.set(ADDR(CmdTool, getDeviceInfo), ut_getDeviceInfo_getAllInfo);
     m_readFilePool->getAllInfo();
     EXPECT_TRUE(m_readFilePool->waitForDone(-1));
 }
 
-TEST_F(UT_GetInfoPool,UT_GetInfoPool_setFramework){
+TEST_F(UT_GetInfoPool, UT_GetInfoPool_setFramework)
+{
     m_readFilePool->setFramework("x86");
-    EXPECT_STREQ("x86",m_readFilePool->m_Arch.toStdString().c_str());
+    EXPECT_STREQ("x86", m_readFilePool->m_Arch.toStdString().c_str());
 }
 

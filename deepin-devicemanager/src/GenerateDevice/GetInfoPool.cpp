@@ -93,6 +93,7 @@ void GetInfoPool::initCmd()
     m_CmdList.append({ "xrandr_verbose",       "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
     m_CmdList.append({ "dmesg",                "dmesg.txt",              tr("Loading Power Info...")});
     m_CmdList.append({ "hciconfig",            "hciconfig.txt",          tr("Loading Printer Info...")});
+    m_CmdList.append({ "nvidia",               "nvidia.txt",             ""});
 
     m_CmdList.append({ "cat_boardinfo",        "/proc/boardinfo",        tr("Loading Mouse Info...")});
     m_CmdList.append({ "cat_os_release",       "/etc/os-release",        tr("Loading Network Adapter Info...")});

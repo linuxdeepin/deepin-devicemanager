@@ -137,13 +137,13 @@ private:
      * @brief getRemoveInfo
      * @param lstMap
      */
-    void getRemoveAuthInfo(const QString& info,QList<QMap<QString,QString>>& lstMap);
+    void getRemoveAuthInfo(const QString &info, QList<QMap<QString, QString>> &lstMap);
 
     /**
      * @brief getAuthorizedInfo
      * @param lstAuth
      */
-    void getAuthorizedInfo(QStringList& lstAuth);
+    void getAuthorizedInfo(QStringList &lstAuth);
 
     /**
      * @brief updateMapInfo
@@ -151,13 +151,13 @@ private:
      * @param mapInfo
      * @return
      */
-    void updateMapInfo(QList<QMap<QString,QString>>& removeLstMap, QMap<QString,QString>& mapInfo);
+    void updateMapInfo(QList<QMap<QString, QString>> &removeLstMap, QMap<QString, QString> &mapInfo);
 
     /**
      * @brief clearUsbDevice
      * @param removeLstMap
      */
-    void clearUsbDevice(QList<QMap<QString,QString>>& removeLstMap);
+    void clearUsbDevice(QList<QMap<QString, QString>> &removeLstMap);
 
     /**
      * @brief loadDmidecodeInfo:加载dmidecode信息
@@ -233,6 +233,13 @@ private:
      * @param version:SMBIOS版本号
      */
     void getSMBIOSVersion(const QString &info, QString &version);
+
+    /**
+         * @brief loadNvidiaSettingInfo : 加载nvidia-settings  -q  VideoRam  信息
+         * @param key   nvidia
+         * @param debugfile  nvidia.txt
+         */
+    void loadNvidiaSettingInfo(const QString &key, const QString &debugfile);
 
 private:
 

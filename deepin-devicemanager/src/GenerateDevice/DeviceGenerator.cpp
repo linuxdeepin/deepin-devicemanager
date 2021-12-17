@@ -193,12 +193,12 @@ void DeviceGenerator::generatorNetworkDevice()
             continue;
         }
 
-        if ((*it).find("Permanent HW Address") != (*it).end() && (*it).find("HW Address") != (*it).end()){
+        if ((*it).find("Permanent HW Address") != (*it).end() && (*it).find("HW Address") != (*it).end()) {
             device = new DeviceNetwork();
             device->setInfoFromHwinfo(*it);
             lstDevice.append(device);
         }
-        if((*it).find("path") != (*it).end()){
+        if ((*it).find("path") != (*it).end()) {
             device = new DeviceNetwork();
             device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addNetworkDevice(device);
@@ -209,12 +209,12 @@ void DeviceGenerator::generatorNetworkDevice()
     const QList<QMap<QString, QString>> &lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
     /*
      * 存在一个网卡对应2个接口的情况，lwhw会分别读到网卡和接口的信息。
-  *-network
+    *-network
        description: Network controller
        bus info: pci@0001:01:00.0
-  *-network:0
+    *-network:0
        serial: 30:aa:e4:a4:67:56
-  *-network:1 DISABLED
+    *-network:1 DISABLED
        serial: 32:aa:e4:a4:67:56
     */
     QMap<QString, QString> itemWirelssNC;
@@ -224,24 +224,23 @@ void DeviceGenerator::generatorNetworkDevice()
         if ((*itls).size() < 2)
             continue;
 
-        if((*itls).find("serial") != (*itls).end()){//有mac地址，是网卡
+        if ((*itls).find("serial") != (*itls).end()) { //有mac地址，是网卡
             QString unique_id = (*itls)["serial"];
             DeviceNetwork *devTemp = nullptr;
-            for (QList<DeviceNetwork*>::iterator it = lstDevice.begin(); it != lstDevice.end(); ++it) {
-                DeviceNetwork *net = dynamic_cast<DeviceNetwork*>(*it);
-                if(!unique_id.isEmpty() && net && net->uniqueID() == unique_id){
+            for (QList<DeviceNetwork *>::iterator it = lstDevice.begin(); it != lstDevice.end(); ++it) {
+                DeviceNetwork *net = dynamic_cast<DeviceNetwork *>(*it);
+                if (!unique_id.isEmpty() && net && net->uniqueID() == unique_id) {
                     devTemp = *it;
                     break;
                 }
             }
-            if(!devTemp){
+            if (!devTemp) {
                 continue;
             }
-            if((*itls).find("bus info") != (*itls).end()){
+            if ((*itls).find("bus info") != (*itls).end()) {
                 devTemp->setInfoFromLshw(*itls);
                 itemWirelssNC.clear();//清除可能的缓存
-            }
-            else {
+            } else {
                 QMap<QString, QString> temp;//因为可能对应2张网卡，所以用动态局部变量
                 foreach (const QString &key, itemWirelssNC.keys()) {
                     temp.insert(key, itemWirelssNC[key]);
@@ -253,8 +252,7 @@ void DeviceGenerator::generatorNetworkDevice()
             }
             DeviceManager::instance()->addNetworkDevice(devTemp);
             continue;
-        }
-        else if ((*itls).find("bus info") != (*itls).end())  {//有总线，说明是网卡
+        } else if ((*itls).find("bus info") != (*itls).end())  { //有总线，说明是网卡
             foreach (const QString &key, (*itls).keys()) {
                 itemWirelssNC.insert(key, (*itls)[key]);
             }
@@ -262,9 +260,9 @@ void DeviceGenerator::generatorNetworkDevice()
         }
     }
 
-    for (QList<DeviceNetwork*>::iterator it = lstDevice.begin(); it != lstDevice.end(); ++it) {
-        DeviceNetwork *net = dynamic_cast<DeviceNetwork*>(*it);
-        if(!DeviceManager::instance()->getNetworkDevice(net->uniqueID())){
+    for (QList<DeviceNetwork *>::iterator it = lstDevice.begin(); it != lstDevice.end(); ++it) {
+        DeviceNetwork *net = dynamic_cast<DeviceNetwork *>(*it);
+        if (!DeviceManager::instance()->getNetworkDevice(net->uniqueID())) {
             delete net;
         }
     }
@@ -601,10 +599,15 @@ void DeviceGenerator::getGpuSizeFromDmesg()
 {
     // 加载从dmesg获取的显示适配器信息，设置显存大小
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("dmesg");
-    if (lstMap.size() > 0)
+    if (lstMap.size() > 0 && lstMap[0].size() > 0)
         DeviceManager::instance()->setGpuSizeFromDmesg(lstMap[0]["Size"]);
+    else {
+        // dmesg无法获取显存信息时从nvidia-settings获取
+        const QList<QMap<QString, QString>> &nvidiaMap = DeviceManager::instance()->cmdInfo("nvidia");
+        if (nvidiaMap.size() > 0 && nvidiaMap[0].size() > 0)
+            DeviceManager::instance()->setGpuSizeFromDmesg(nvidiaMap[0]["Size"]);
+    }
 }
-
 void DeviceGenerator::getMonitorInfoFromHwinfo()
 {
     // 加载从hwinfo获取的显示设备信息
@@ -957,9 +960,9 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
         const QStringList &lstBusId = DeviceManager::instance()->getBusId();
         // 判断该设备是否已经在其他类别中显示
-        if((*it).find("unique_id") != (*it).end() && (*it)["Hardware Class"] != "unknown"){
+        if ((*it).find("unique_id") != (*it).end() && (*it)["Hardware Class"] != "unknown") {
             isOtherDevice = false;
-        }else{
+        } else {
             if (curBus.isEmpty() || lstBusId.indexOf(curBus) != -1)
                 isOtherDevice = false;
         }
