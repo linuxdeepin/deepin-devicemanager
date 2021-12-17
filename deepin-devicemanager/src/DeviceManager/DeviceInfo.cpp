@@ -600,7 +600,7 @@ bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)
     // 非usb设备
     if(mapInfo["bus info"].startsWith("pci")){
         QStringList words = mapInfo["bus info"].split("@");
-        if (words.size() == 2 && words[1] == m_HwinfoToLshw){
+        if (2 == words.size() && words[1] == m_HwinfoToLshw){
             return true;
         }
     }
