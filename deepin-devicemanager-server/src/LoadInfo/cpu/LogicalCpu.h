@@ -133,6 +133,11 @@ public:
     void setBogomips(const QString &value);
 
     /**
+     * @brief diagPrintInfo
+     */
+    void diagPrintInfo();
+
+    /**
      * @brief setArch
      * @param value
      */

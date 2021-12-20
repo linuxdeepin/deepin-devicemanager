@@ -34,6 +34,11 @@ class CpuInfo
 public:
     CpuInfo();
     ~CpuInfo();
+
+    /**
+     * @brief diagPrintInfo
+     */
+    void diagPrintInfo();
     /**
      * @brief loadCpuInfo
      * @return
@@ -157,6 +162,7 @@ private:
      * @param lcpu
      */
     void readCpuFreq(const QString &path, LogicalCpu &lcpu);
+
 
 private:
     QMap<int, PhysicalCpu>     m_MapPhysicalCpu;

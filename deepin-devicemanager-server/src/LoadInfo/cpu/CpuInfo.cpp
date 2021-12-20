@@ -370,3 +370,12 @@ void CpuInfo::readCpuFreq(const QString &path, LogicalCpu &lcpu)
     }
     maxFile.close();
 }
+
+void CpuInfo::diagPrintInfo()
+{
+    foreach (int id, m_MapPhysicalCpu.keys()) {
+        qInfo() << "m_MapPhysicalCpu id: ***************** " << id;
+        PhysicalCpu &pc = m_MapPhysicalCpu[id];
+        pc.diagPrintInfo();
+    }
+}

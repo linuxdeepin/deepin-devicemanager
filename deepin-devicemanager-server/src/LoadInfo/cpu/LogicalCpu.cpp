@@ -1,4 +1,5 @@
 #include "LogicalCpu.h"
+#include <QDebug>
 
 LogicalCpu::LogicalCpu()
     : d_ptr(new LogicalCpuPrivate(this))
@@ -188,3 +189,27 @@ const QString &LogicalCpu::arch()
     return d->arch;
 }
 
+void LogicalCpu::diagPrintInfo()
+{
+    Q_D(LogicalCpu);
+    qInfo() << "LogicalCpu ***************** ";
+    qInfo() << "logicalID  : " << d->logicalID;
+    qInfo() << "coreID     : " << d->coreID;
+    qInfo() << "physicalID : " << d->physicalID;
+    qInfo() << "l1d_cache  : " << d->l1d_cache;
+    qInfo() << "l1i_cache  : " << d->l1i_cache;
+    qInfo() << "l2_cache   : " << d->l2_cache;
+    qInfo() << "l3_cache   : " << d->l3_cache;
+    qInfo() << "max_freq   : " << d->max_freq;
+    qInfo() << "min_freq   : " << d->min_freq;
+    qInfo() << "cur_freq   : " << d->cur_freq;
+    qInfo() << "model      : " << d->model;
+    qInfo() << "modelName  : " << d->modelName;
+    qInfo() << "setpping   : " << d->setpping;
+    qInfo() << "vendor     : " << d->vendor;
+    qInfo() << "cpuFamily  : " << d->cpuFamily;
+    qInfo() << "flags      : " << d->flags;
+    qInfo() << "bogoMips   : " << d->bogoMips;
+    qInfo() << "arch       : " << d->arch;
+    return;
+}
