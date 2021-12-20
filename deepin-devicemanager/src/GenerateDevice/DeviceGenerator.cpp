@@ -187,9 +187,9 @@ void DeviceGenerator::generatorNetworkDevice()
         // 判断重复设备数据
         QString unique_id = uniqueID(*it);
         DeviceNetwork *device = nullptr;
-        for (QList<DeviceNetwork*>::iterator it = lstDevice.begin(); it != lstDevice.end(); ++it) {
-            if(!unique_id.isEmpty() && (*it)->uniqueID() == unique_id){
-                device = *it;
+        for (QList<DeviceNetwork*>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
+            if(!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id){
+                device = *itNet;
                 break;
             }
         }

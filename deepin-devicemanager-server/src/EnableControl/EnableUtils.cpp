@@ -82,6 +82,15 @@ void EnableUtils::disableInDevice()
         if (file.open(QIODevice::WriteOnly)) {
             file.write("1");
             file.close();
+        }else{
+            // platform disable with reset
+            if(path.contains("platform")){
+                QFile filep("/sys" + path + QString("/reset"));
+                if(filep.open(QIODevice::WriteOnly)){
+                    filep.write("1");
+                    filep.close();
+                }
+            }
         }
     }
 }
