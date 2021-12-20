@@ -78,7 +78,12 @@ void EnableUtils::disableInDevice()
     EnableSqlManager::getInstance()->removePathList(rpList);
 
     foreach (const QString &path, rpList) {
-        QFile file(path + QString("/remove"));
+        QString pathT = "/sys" + path + QString("/remove");
+        if(!QFile::exists(pathT)){
+            pathT = "/sys" + path + QString("/reset");
+        }
+
+        QFile file(pathT);
         if (file.open(QIODevice::WriteOnly)) {
             file.write("1");
             file.close();

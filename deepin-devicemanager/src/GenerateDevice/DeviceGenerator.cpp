@@ -186,15 +186,17 @@ void DeviceGenerator::generatorNetworkDevice()
 
         // 判断重复设备数据
         QString unique_id = uniqueID(*it);
-        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(DeviceManager::instance()->getNetworkDevice(unique_id));
+        DeviceNetwork *device = nullptr;
+        for (QList<DeviceNetwork*>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
+            if(!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id){
+                device = *itNet;
+                break;
+            }
+        }
         if (device) {
             device->setEnableValue(false);
             device->setInfoFromHwinfo(*it);
             continue;
-        }else{
-            if((*it).find("path") != (*it).end()){
-                continue;
-            }
         }
 
         if ((*it).find("Permanent HW Address") != (*it).end() && (*it).find("HW Address") != (*it).end()) {
