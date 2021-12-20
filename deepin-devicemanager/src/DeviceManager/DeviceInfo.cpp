@@ -579,10 +579,18 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
     if (chs.size() != 2){
         return;
     }
-    int first = chs[0].toInt();
-    int second = chs[1].toInt();
+
+    // 1-1.3
+    // 1-3
     QStringList nums = QStringList() << "0" << "1" << "2" << "3" << "4" << "5" << "6" << "7" << "8" << "9" << "a" << "b" << "c" << "d" << "e" << "f" << "g" << "h" << "i" << "j";
-    m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
+    QRegExp reg("([0-9a-zA-Z])-([0-9a-zA-Z]\\.[0-9a-zA-Z])");
+    if(reg.exactMatch(chs[0])){
+        m_HwinfoToLshw = QString("usb@%1:%2").arg(reg.cap(1)).arg(reg.cap(2));
+    }else{
+        int first = chs[0].toInt();
+        int second = chs[1].toInt();
+        m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
+    }
 }
 
 bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)

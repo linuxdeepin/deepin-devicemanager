@@ -809,7 +809,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
 
         // 先判断是否存在
         QString path = pciPath(*it);
-        if (!path.contains("platform") && !QFile::exists(path)) {
+        if (!QFile::exists(path)) {
             continue;
         }
 
@@ -960,7 +960,7 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
         const QStringList &lstBusId = DeviceManager::instance()->getBusId();
         // 判断该设备是否已经在其他类别中显示
-        if ((*it).find("unique_id") != (*it).end() && (*it)["Hardware Class"] != "unknown") {
+        if ((*it).find("unique_id") != (*it).end() && (*it)["Hardware Class"] != "others") {
             isOtherDevice = false;
         } else {
             if (curBus.isEmpty() || lstBusId.indexOf(curBus) != -1)

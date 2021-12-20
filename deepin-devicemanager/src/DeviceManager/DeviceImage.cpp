@@ -96,6 +96,10 @@ const QString DeviceImage::getOverviewInfo()
 
 EnableDeviceStatus DeviceImage::setEnable(bool e)
 {
+    if(m_SerialID.isEmpty()){
+        return EDS_NoSerial;
+    }
+
     if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
         return EDS_Faild;
     }
