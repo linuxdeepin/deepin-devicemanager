@@ -974,7 +974,7 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         // 判断该设备是否已经在其他类别中显示
         if ((*it).find("unique_id") != (*it).end() && (*it)["Hardware Class"] != "others") {
             isOtherDevice = false;
-        } else {
+        } else if((*it).find("unique_id") == (*it).end()){
             if (curBus.isEmpty() || lstBusId.indexOf(curBus) != -1)
                 isOtherDevice = false;
         }
@@ -992,6 +992,10 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
             if (device) {
                 device->setEnableValue(false);
                 continue;
+            }else{
+                if((*it).find("path") != (*it).end()){
+                    continue;
+                }
             }
 
 
