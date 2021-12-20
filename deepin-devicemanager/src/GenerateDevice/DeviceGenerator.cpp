@@ -191,6 +191,10 @@ void DeviceGenerator::generatorNetworkDevice()
             device->setEnableValue(false);
             device->setInfoFromHwinfo(*it);
             continue;
+        }else{
+            if((*it).find("path") != (*it).end()){
+                continue;
+            }
         }
 
         if ((*it).find("Permanent HW Address") != (*it).end() && (*it).find("HW Address") != (*it).end()) {
@@ -818,6 +822,10 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         if (device) {
             device->setEnableValue(false);
             continue;
+        }else{
+            if((*it).find("path") != (*it).end()){
+                continue;
+            }
         }
 
         device = new DeviceInput();
@@ -895,7 +903,11 @@ void DeviceGenerator::getImageInfoFromHwinfo()
             device->setEnableValue(false);
             device->setInfoFromHwinfo(*it);
             continue;
-        }
+        }else{
+            if((*it).find("path") != (*it).end()){
+                continue;
+            }
+       }
 
         device = new DeviceImage();
         device->setInfoFromHwinfo(*it);
