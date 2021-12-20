@@ -205,6 +205,12 @@ bool DriverManager::installDriver(const QString &filepath)
                 } else {
                     //失败将文件移除,只删文件不删路径
                     QFile::remove(installpath);
+
+                    //删除后执行depmod更新
+                    QProcess process;
+                    process.start("depmod -a");
+                    process.waitForFinished(-1);
+
                     sigFinished(false, errmsg);
                     return  false;
                 }

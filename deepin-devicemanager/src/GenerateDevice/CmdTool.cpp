@@ -128,6 +128,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
         loadLscpuInfo(key, debugFile);
     else if ("dr_config" == key)
         loadCatConfigInfo(key, debugFile);
+    else if ("nvidia" == key)
+        loadNvidiaSettingInfo(key, debugFile);
     else
         loadCatInfo(key, debugFile);
 }
@@ -266,7 +268,8 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
     QMap<QString, QString> mapInfo;
     QStringList lines = deviceInfo.split("\n");
     foreach (const QString &line, lines) {
-        QRegExp reg(".*([0-9a-z]{2}:[0-9a-z]{2}.[0-9]{1}):.*VRAM([=:]{1}) ([0-9]*)[\\s]{0,1}M.*");
+        // DeviceCdrom m_HwinfoToLshw 值为0000:01:00.0 此处同步修改,否则显存大小无法显示
+        QRegExp reg(".*([0-9a-z]{4}:[0-9a-z]{2}:[0-9a-z]{2}.[0-9]{1}):.*VRAM([=:]{1}) ([0-9]*)[\\s]{0,1}M.*");
         if (reg.exactMatch(line)) {
             double size = reg.cap(3).toDouble();
             QString sizeS = QString("%1GB").arg(size / 1024);
@@ -286,8 +289,13 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
     mapInfo.clear();
 
     // 声卡芯片型号
+    /* 正则表达式匹配的字符串实例：
+     * ALC662 rev3:
+     * ALC887-VD:
+     * ALC887:
+    */
     foreach (const QString &line, lines) {
-        QRegExp reg(".*autoconfig for ([A-Za-z0-9]+):.*");
+        QRegExp reg(".*autoconfig for ([A-Za-z0-9]{6}[ -][A-Za-z0-9]+):.*");
         if (reg.exactMatch(line)) {
             QString chip = reg.cap(1);
             mapInfo["chip"] = chip;
@@ -420,7 +428,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             //if (mapInfo.find("SysFS Device Link") != mapInfo.end() && mapInfo["SysFS Device Link"].contains("/devices/platform"))
             bool hasAddress = mapInfo.find("HW Address") != mapInfo.end() && mapInfo.find("Permanent HW Address") != mapInfo.end();
             bool hasPath = mapInfo.find("path") != mapInfo.end();
-            if(hasPath || hasAddress){
+            if (hasPath || hasAddress) {
                 addMapInfo("hwinfo_network", mapInfo);
             }
         } else if ("keyboard" == mapInfo["Hardware Class"]) {
@@ -777,6 +785,36 @@ void CmdTool::getSMBIOSVersion(const QString &info, QString &version)
             break;
         }
     }
+}
+
+void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile)
+{
+    // 加载nvidia-settings  -q  VideoRam 信息
+    // 命令与xrandr命令一样无法在后台运行,该从前台命令直接获取信息
+    QString deviceInfo;
+    if (!getDeviceInfoFromCmd(deviceInfo, "nvidia-settings  -q  VideoRam"))
+        return;
+    QMap<QString, QString> mapInfo;
+    QRegExp reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
+    QStringList list = deviceInfo.split("\n");
+
+    foreach (QString item, list) {
+        // Attribute 'VideoRam' (jixiaomei-PC:0.0): 2097152.  正则表达式获取2097152
+        if (reg.exactMatch(item)) {
+            QString gpuSize = reg.cap(1);
+            int numSize = gpuSize.toInt();
+            numSize /= 1024;
+            if (numSize > 1024) {
+                numSize /= 1024;
+                gpuSize = "null=" + QString::number(numSize) + "GB";   // 从nvidi-setting中获取显存信息没有Unique id ,格式与dmesg中获取信息保持一致,故添加"null="
+            } else {
+                gpuSize = "null=" + QString::number(numSize) + "MB";
+            }
+            mapInfo.insert("Size", gpuSize);
+            break;
+        }
+    }
+    addMapInfo(key, mapInfo);
 }
 
 void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)

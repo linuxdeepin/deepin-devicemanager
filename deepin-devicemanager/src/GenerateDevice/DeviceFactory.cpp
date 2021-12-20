@@ -31,15 +31,14 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
 
     // 根据架构创建设备信息生成器
     DeviceGenerator *generator = nullptr;
-    if (!generator) {
-        if (arch == "x86_64")
-            generator = new X86Generator();
-        else if (arch == "mips64")
-            generator = new MipsGenerator();
-        else if (arch == "aarch64")
-            generator = new ArmGenerator();
-        else
-            generator = new X86Generator();
-    }
+    if (arch == "x86_64")
+        generator = new X86Generator();
+    else if (arch == "mips64")
+        generator = new MipsGenerator();
+    else if (arch == "aarch64")
+        generator = new ArmGenerator();
+    else
+        generator = new X86Generator();
+
     return generator;
 }

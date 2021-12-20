@@ -41,6 +41,7 @@ void GetDriverNameWidget::init()
     mainLayout->setContentsMargins(0, 0, 0, 0);
     DLabel *titleLable = new DLabel(tr("Select a driver for update"));
     mp_StackWidget->addWidget(mp_WaitingWidget);
+    mp_StackWidget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
     mp_StackWidget->addWidget(mp_ListView);
     mp_StackWidget->setContentsMargins(0,0,0,0);
     mp_tipLabel->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
@@ -61,10 +62,8 @@ void GetDriverNameWidget::init()
 
     // 中间布局
     QHBoxLayout *hLayout2 = new QHBoxLayout;
-    hLayout2->setContentsMargins(0,5,0,5);
-    hLayout2->addStretch();
+    hLayout2->setContentsMargins(5,5,5,5);
     hLayout2->addWidget(mp_StackWidget);
-    hLayout2->addStretch();
     DFrame *frame = new DFrame;
     frame->setContentsMargins(0,0,0,0);
     frame->setLayout(hLayout2);

@@ -32,7 +32,7 @@ DriverListView::DriverListView(QWidget *parent) : DTreeView(parent)
 
 void DriverListView::initUI()
 {
-    setFixedSize(450, 155);
+    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
     setFrameStyle(QFrame::NoFrame);
     setHeaderHidden(true);
     DriverListViewDelegate *delegate = new DriverListViewDelegate(this);

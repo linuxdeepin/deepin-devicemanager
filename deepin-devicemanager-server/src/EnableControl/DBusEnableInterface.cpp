@@ -142,6 +142,16 @@ bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& nam
         }
         file.write("1");
         file.close();
+
+        // platform disable with reset
+        if(path.contains("platform")){
+            QFile filep("/sys" + path + QString("/reset"));
+            if(!filep.open(QIODevice::WriteOnly)){
+                return false;
+            }
+            filep.write("1");
+            filep.close();
+        }
         EnableSqlManager::getInstance()->removeDateFromRemoveTable(path);
 
         // 2. 通知后台更新数据

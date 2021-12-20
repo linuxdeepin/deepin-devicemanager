@@ -1727,7 +1727,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="352"/>
         <source>Invalid module format</source>
-        <translation type="unfinished"/>
+        <translation>དཔེ་དུམ་རྣམ་གཞག་གོ་མི་ཆོད།</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="353"/>

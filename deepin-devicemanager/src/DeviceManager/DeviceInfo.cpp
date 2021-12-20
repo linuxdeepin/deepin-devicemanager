@@ -421,8 +421,12 @@ bool DeviceBaseInfo::available()
 
 bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
 {
+    // 获取不到驱动，默认核内
     if(driver.isEmpty()){
-        return false;
+        // 禁用状态获取不到驱动，默认不是核内驱动
+        if(false == m_Enable)
+            return false;
+        return true;
     }
 
     QString info = "";
@@ -578,10 +582,18 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
     if (chs.size() != 2){
         return;
     }
-    int first = chs[0].toInt();
-    int second = chs[1].toInt();
+
+    // 1-1.3
+    // 1-3
     QStringList nums = QStringList() << "0" << "1" << "2" << "3" << "4" << "5" << "6" << "7" << "8" << "9" << "a" << "b" << "c" << "d" << "e" << "f" << "g" << "h" << "i" << "j";
-    m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
+    QRegExp reg("([0-9a-zA-Z])-([0-9a-zA-Z]\\.[0-9a-zA-Z])");
+    if(reg.exactMatch(words[0])){
+        m_HwinfoToLshw = QString("usb@%1:%2").arg(reg.cap(1)).arg(reg.cap(2));
+    }else{
+        int first = chs[0].toInt();
+        int second = chs[1].toInt();
+        m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
+    }
 }
 
 bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)
@@ -599,7 +611,7 @@ bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)
     // 非usb设备
     if(mapInfo["bus info"].startsWith("pci")){
         QStringList words = mapInfo["bus info"].split("@");
-        if (words.size() == 2 && words[1] == m_HwinfoToLshw){
+        if (2 == words.size() && words[1] == m_HwinfoToLshw){
             return true;
         }
     }

@@ -63,6 +63,7 @@ void setLscpuData(QMap<QString, QString> &mapLscpu)
 
 void setLshwData(QMap<QString, QString> &mapLshw)
 {
+    mapLshw.insert("product", "Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz");
     mapLshw.insert("version", "Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz");
     mapLshw.insert("vendor", "Intel Corp.");
 }

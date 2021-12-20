@@ -161,12 +161,12 @@ bool ut_image_isenablebydriver_false()
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_setEnable_001)
 {
-    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_deviceImage->setEnable(true));
+    EXPECT_EQ(EnableDeviceStatus::EDS_NoSerial, m_deviceImage->setEnable(true));
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_setEnable_002)
 {
-    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_deviceImage->setEnable(false));
+    EXPECT_EQ(EnableDeviceStatus::EDS_NoSerial, m_deviceImage->setEnable(false));
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_enable)
