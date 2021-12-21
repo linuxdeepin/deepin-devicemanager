@@ -38,6 +38,21 @@ foreach(dir ${dirs})
 endforeach()
 # 设置包含头文件的时候不用包含路径 end ****************************************************************************************
 
+#定义社区版宏begin
+message("begin")
+execute_process(COMMAND cat "/etc/os-version"
+                OUTPUT_VARIABLE output_var)
+
+if(output_var MATCHES "Community")
+    option(COMMUNITY "OS community" ON)
+    if(COMMUNITY)
+        add_definitions(-DCOMMUNITY)
+    endif()
+endif()
+
+message("end")
+#定义社区版宏end
+
 # 引用ZeroMQ的库 begin ****************************************************************
 include_directories("/usr/include/cups/")
 link_libraries("cups")

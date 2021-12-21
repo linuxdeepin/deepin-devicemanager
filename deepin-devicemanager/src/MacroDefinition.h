@@ -223,4 +223,5 @@
 #define   MIN_NUM            5     // num
 
 const QString LINK_STR = "<a style=\"text-decoration:none\" href=https://www.chinauos.com/home>";        // uos官网链接
+const QString DEEPIN_LINK = "<a style=\"text-decoration:none\" href=https://www.deepin.org/zh>";       // 社区版链接
 const QString END_STR = " </a>";                                                                         // end html
