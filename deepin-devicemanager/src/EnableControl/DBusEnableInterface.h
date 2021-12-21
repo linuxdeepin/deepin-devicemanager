@@ -76,7 +76,7 @@ public:
      * @param path 系统路径
      * @param enable_device 是否禁用
      */
-    bool enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device);
+    bool enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device, const QString& strDriver="");
 
     /**
      * @brief enablePrinter 启用禁用打印机

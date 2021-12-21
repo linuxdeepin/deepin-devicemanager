@@ -85,6 +85,7 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         setAttribute(mapInfo, "unique_id", m_UniqueID);
         setAttribute(mapInfo, "path", m_SysPath);
         setAttribute(mapInfo, "Hardware Class", m_HardwareClass);
+        setAttribute(mapInfo, "driver", m_Driver);
         m_Enable = false;
     }
 
@@ -92,10 +93,10 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "SysFS Device Link", m_SysPath);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Driver Modules", m_DriverModules);
+
     if(driverIsKernelIn(m_Driver) && driverIsKernelIn(m_DriverModules)){
         m_CanUninstall = false;
     }
-
     setHwinfoLshwKey(mapInfo);
 
     return true;
@@ -134,7 +135,7 @@ EnableDeviceStatus DeviceNetwork::setEnable(bool e)
         return EDS_Faild;
     }
 
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
     if(res){
         m_Enable = e;
     }

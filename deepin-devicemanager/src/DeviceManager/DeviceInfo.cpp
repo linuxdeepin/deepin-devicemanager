@@ -422,10 +422,10 @@ bool DeviceBaseInfo::available()
 bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
 {
     // 获取不到驱动，默认核内
-    if(driver.isEmpty()){
-        // 禁用状态获取不到驱动，默认不是核内驱动
-        return m_Enable;
-    }
+//    if(driver.isEmpty()){
+//        // 禁用状态获取不到驱动，默认不是核内驱动
+//        return m_Enable;
+//    }
 
     QString info = "";
     QProcess process;

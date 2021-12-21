@@ -14,9 +14,10 @@
 std::atomic<EnableSqlManager *> EnableSqlManager::s_Instance;
 std::mutex EnableSqlManager::m_mutex;
 
-void EnableSqlManager::insertDataToRemoveTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id)
+void EnableSqlManager::insertDataToRemoveTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, const QString strDriver)
 {
-    QString sql = QString("INSERT INTO %1 (class, name, path, unique_id) VALUES ('%2', '%3', '%4', '%5');").arg(DB_TABLE_REMOVE).arg(hclass).arg(name).arg(path).arg(unique_id);
+    QString sql = QString("INSERT INTO %1 (class, name, path, unique_id, driver) VALUES ('%2', '%3', '%4', '%5', '%6');")
+            .arg(DB_TABLE_REMOVE).arg(hclass).arg(name).arg(path).arg(unique_id).arg(strDriver);
     if (!m_sqlQuery.exec(sql)) {
         qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
     }
@@ -30,7 +31,7 @@ void EnableSqlManager::removeDateFromRemoveTable(const QString& path)
     }
 }
 
-void EnableSqlManager::insertDataToAuthorizedTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool exist)
+void EnableSqlManager::insertDataToAuthorizedTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool exist, const QString strDriver)
 {
     // 数据库已经存在该设备记录
     if(uniqueIDExistedEX(unique_id)){
@@ -38,8 +39,8 @@ void EnableSqlManager::insertDataToAuthorizedTable(const QString& hclass, const 
     }
 
     // 数据库没有该设备记录，则直接插入
-    QString sql = QString("INSERT INTO %1 (class, name, path, unique_id, exist) VALUES ('%2', '%3', '%4', '%5', '%6');")
-            .arg(DB_TABLE_AUTHORIZED).arg(hclass).arg(name).arg(path).arg(unique_id).arg(exist);
+    QString sql = QString("INSERT INTO %1 (class, name, path, unique_id, exist, driver) VALUES ('%2', '%3', '%4', '%5', '%6', '%7');")
+            .arg(DB_TABLE_AUTHORIZED).arg(hclass).arg(name).arg(path).arg(unique_id).arg(exist).arg(strDriver);
     if (!m_sqlQuery.exec(sql)) {
         qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
     }
@@ -123,7 +124,7 @@ bool EnableSqlManager::isUniqueIdEnabled(const QString& key)
 QString EnableSqlManager::removedInfo()
 {
     QString info = "";
-    QString sql = QString("SELECT class,name,path,unique_id FROM %1;").arg(DB_TABLE_REMOVE);
+    QString sql = QString("SELECT class,name,path,unique_id,driver FROM %1;").arg(DB_TABLE_REMOVE);
     if (!m_sqlQuery.exec(sql)) {
         qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
         return info;
@@ -133,7 +134,8 @@ QString EnableSqlManager::removedInfo()
         info += "Hardware Class : " + m_sqlQuery.value(0).toString() + "\n";
         info += "name : " + m_sqlQuery.value(1).toString() + "\n";
         info += "path : " + m_sqlQuery.value(2).toString() + "\n";
-        info += "unique_id : " + m_sqlQuery.value(3).toString() + "\n\n";
+        info += "unique_id : " + m_sqlQuery.value(3).toString() + "\n";
+        info += "driver : " + m_sqlQuery.value(4).toString() + "\n\n";
     }
     return info;
 }
@@ -141,7 +143,7 @@ QString EnableSqlManager::removedInfo()
 QString EnableSqlManager::authorizedInfo()
 {
     QString info = "";
-    QString sql = QString("SELECT class,name,path,unique_id FROM %1;").arg(DB_TABLE_AUTHORIZED);
+    QString sql = QString("SELECT class,name,path,unique_id,driver FROM %1;").arg(DB_TABLE_AUTHORIZED);
     if (!m_sqlQuery.exec(sql)) {
         qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
         return info;
@@ -151,7 +153,8 @@ QString EnableSqlManager::authorizedInfo()
         info += "Hardware Class : " + m_sqlQuery.value(0).toString() + "\n";
         info += "name : " + m_sqlQuery.value(1).toString() + "\n";
         info += "path : " + m_sqlQuery.value(2).toString() + "\n";
-        info += "unique_id : " + m_sqlQuery.value(3).toString() + "\n\n";
+        info += "unique_id : " + m_sqlQuery.value(3).toString() + "\n";
+        info += "driver : " + m_sqlQuery.value(4).toString() + "\n\n";
     }
     return info;
 }
@@ -204,14 +207,14 @@ void EnableSqlManager::initDB()
     QStringList tableStrList = m_db.tables();
 
     if(!tableStrList.contains(DB_TABLE_AUTHORIZED)){
-        QString sql = QString("CREATE TABLE %1 (class text, name text, path text, unique_id text, exist boolean);").arg(DB_TABLE_AUTHORIZED);
+        QString sql = QString("CREATE TABLE %1 (class text, name text, path text, unique_id text, exist boolean, driver text);").arg(DB_TABLE_AUTHORIZED);
         bool res = m_sqlQuery.exec(sql);
         if(!res){
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
         }
     }
     if(!tableStrList.contains(DB_TABLE_REMOVE)){
-        QString sql = QString("CREATE TABLE %1 (class text, name text, path text, unique_id text);").arg(DB_TABLE_REMOVE);
+        QString sql = QString("CREATE TABLE %1 (class text, name text, path text, unique_id text, driver text);").arg(DB_TABLE_REMOVE);
         bool res = m_sqlQuery.exec(sql);
         if(!res){
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();

@@ -52,7 +52,7 @@ public slots:
      * @param enable_device 启用或者禁用
      * @return 是否成功
      */
-    Q_SCRIPTABLE bool enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device);
+    Q_SCRIPTABLE bool enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device, const QString strDriver="");
 
     /**
      * @brief enablePrinter 禁用打印机
@@ -83,7 +83,7 @@ private:
      * @param enable 启用或者禁用
      * @return
      */
-    bool authorizedEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device);
+    bool authorizedEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device, const QString strDriver="");
 
     /**
      * @brief removeEnable 通过remove文件启用禁用设备
@@ -92,7 +92,7 @@ private:
      * @param enable 启用或者禁用
      * @return
      */
-    bool removeEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable);
+    bool removeEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable, const QString strDriver="");
 
     /**
      * @brief construct_uri

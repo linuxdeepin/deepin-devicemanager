@@ -31,7 +31,7 @@ QString DBusEnableInterface::getAuthorizedInfo()
     return EnableSqlManager::getInstance()->authorizedInfo();
 }
 
-bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device)
+bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device, const QString strDriver)
 {
     // 先从数据库中查找路径，防止设备更换usb接口
     QString sPath = EnableSqlManager::getInstance()->authorizedPath(value);
@@ -43,9 +43,9 @@ bool DBusEnableInterface::enable(const QString& hclass, const QString& name, con
     bool res = false;
     if(QFile::exists("/sys" + sPath + QString("/authorized"))){
         modifyPath(sPath);
-        res = authorizedEnable(hclass, name, sPath, value, enable_device);
+        res = authorizedEnable(hclass, name, sPath, value, enable_device, strDriver);
     }else/* if(QFile::exists("/sys" + sPath + QString("/remove")))*/{
-        res = removeEnable(hclass, name, path, value, enable_device);
+        res = removeEnable(hclass, name, path, value, enable_device, strDriver);
     }
     emit update();
     return res;
@@ -89,7 +89,7 @@ Q_SCRIPTABLE bool DBusEnableInterface::isDeviceEnabled(const QString& unique_id)
     return EnableSqlManager::getInstance()->isUniqueIdEnabled(unique_id);
 }
 
-bool DBusEnableInterface::authorizedEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device)
+bool DBusEnableInterface::authorizedEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device, const QString strDriver)
 {
     // 通过authorized文件启用禁用设备
     // 0:表示禁用 ，1:表示启用
@@ -127,12 +127,12 @@ bool DBusEnableInterface::authorizedEnable(const QString& hclass, const QString&
     }else{
         file.write("0");
         file.close();
-        EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass,name,path,unique_id,true);
+        EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass,name,path,unique_id,true, strDriver);
     }
     return true;
 }
 
-bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable)
+bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable, const QString strDriver)
 {
     if(enable){
         // 1. 先rescan 向rescan写入1,则重新加载
@@ -184,7 +184,7 @@ bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& nam
         file.close();
 
         // 2. 持久化保存
-        EnableSqlManager::getInstance()->insertDataToRemoveTable(hclass, name, path, unique_id);
+        EnableSqlManager::getInstance()->insertDataToRemoveTable(hclass, name, path, unique_id, strDriver);
     }
     return true;
 }

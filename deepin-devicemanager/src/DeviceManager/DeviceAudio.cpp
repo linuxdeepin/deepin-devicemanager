@@ -34,10 +34,10 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     if(mapInfo.find("path") != mapInfo.end()){
         setAttribute(mapInfo, "name", m_Name);
+        setAttribute(mapInfo, "driver", m_Driver);
         m_SysPath = mapInfo["path"];
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
-        return;
     }
     //1. 获取设备的基本信息
     setAttribute(mapInfo, "Device", m_Name);
@@ -165,7 +165,7 @@ EnableDeviceStatus DeviceAudio::setEnable(bool e)
     if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
         return EDS_Faild;
     }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_UniqueID,m_SysPath,"",e);
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_UniqueID,m_SysPath,"",e, m_Driver);
     if(res){
         m_Enable = e;
     }
