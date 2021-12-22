@@ -428,6 +428,10 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
         if (mapInfo.find("Model Number") != mapInfo.end())
             m_Model = mapInfo["Model Number"];
     }
+    //kimtigo 特殊处理，以smartctl数据为准
+    if (mapInfo["Model Number"].indexOf("kimtigo") >-1) {
+        m_Model = mapInfo["Model Number"];
+    }
 
     setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
 }
