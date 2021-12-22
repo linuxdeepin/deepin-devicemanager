@@ -60,6 +60,9 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "Device", m_Name);
     m_HardwareClass = "bluetooth";
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
     // 设置关联到lshw信息的key值,设备的唯一标志
     setHwinfoLshwKey(mapInfo);
@@ -84,6 +87,10 @@ bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "driver", m_Driver);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
+    // 此处不能用 && 因为 m_DriverModules 可能为空
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
     return true;
 }

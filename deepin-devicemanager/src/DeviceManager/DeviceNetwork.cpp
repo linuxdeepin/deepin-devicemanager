@@ -70,7 +70,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "capacity", m_Capacity);
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
-    if(driverIsKernelIn(m_Driver) && driverIsKernelIn(m_DriverModules)){
+    if(driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)){
         m_CanUninstall = false;
     }
 
@@ -94,7 +94,7 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Driver Modules", m_DriverModules);
 
-    if(driverIsKernelIn(m_Driver) && driverIsKernelIn(m_DriverModules)){
+    if(driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)){
         m_CanUninstall = false;
     }
     setHwinfoLshwKey(mapInfo);
