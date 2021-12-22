@@ -73,12 +73,6 @@ public:
     void updateCurItemEnable(int row, bool enable);
 
     /**
-     * @brief setCanUninstall
-     * @param canInstall
-     */
-    void setCanUninstall(bool canInstall);
-
-    /**
      * @brief clear : 清空数据
      */
     void clear();
@@ -151,7 +145,6 @@ private:
     QAction          *mp_removeDriver;//<! 驱动卸载
     QMenu            *mp_Menu;        //<! 右键菜单
     bool             m_Enable;
-    bool             m_CanUninstall;  //<! 可以卸载
 };
 
 

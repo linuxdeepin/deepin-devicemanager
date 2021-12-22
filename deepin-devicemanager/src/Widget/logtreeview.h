@@ -49,6 +49,14 @@ public:
     void setItem(int row, int column, QStandardItem *item);
 
     /**
+     * @brief item 获取表格的item
+     * @param row 哪一行
+     * @param column 哪一列
+     * @return
+     */
+    QStandardItem *item(int row, int column);
+
+    /**
      * @brief setColumnAverage : 设置表头等宽
      */
     void setColumnAverage();

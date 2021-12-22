@@ -80,6 +80,9 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
     for (int i = 0; i < row - 1; i++) {
         for (int j = 0; j < column; j++) {
             DStandardItem *item = new DStandardItem(lst[i + 1][j]);
+            if(0 == j){
+                item->setData(lst[i + 1][column],Qt::UserRole);
+            }
             mp_Table->setItem(i, j, item);
         }
     }
@@ -93,11 +96,6 @@ void PageTableHeader::setColumnAverage()
     // 列宽平均分配
     if (mp_Table)
         mp_Table->setColumnAverage();
-}
-
-void PageTableHeader::setCanUninstall(bool canUninstall)
-{
-    mp_Table->setCanUninstall(canUninstall);
 }
 
 void PageTableHeader::paintEvent(QPaintEvent *e)

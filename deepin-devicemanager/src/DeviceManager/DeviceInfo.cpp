@@ -421,11 +421,13 @@ bool DeviceBaseInfo::available()
 
 bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
 {
-    // 获取不到驱动，默认核内
-//    if(driver.isEmpty()){
-//        // 禁用状态获取不到驱动，默认不是核内驱动
-//        return m_Enable;
-//    }
+    // 驱动为空情况:
+    // 1. 驱动被卸载了 此时驱动属于核外驱动
+    // 2. ps/2 笔记本触摸板 暂无法获取驱动 此时当成核内驱动处理
+    // 3. 但是由于判断是否是ps/2或者笔记本触摸板在子类判断(无需放在基类)，因此此处为空时先返回false，而在子类(DeviceInput)调用后判断是否是ps/2鼠标
+    if(driver.isEmpty()){
+        return false;
+    }
 
     QString info = "";
     QProcess process;

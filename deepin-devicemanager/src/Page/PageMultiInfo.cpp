@@ -63,15 +63,15 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     QList<QStringList> deviceList;
     deviceList.append(lst[0]->getTableHeader());
     foreach (DeviceBaseInfo *info, lst) { 
-        const QStringList& lstDeviceInfo = info->getTableData();
+        QStringList lstDeviceInfo = info->getTableData();
         if (lstDeviceInfo.size() > 0){
+            lstDeviceInfo.append(info->canUninstall()?"true":"false");
             deviceList.append(lstDeviceInfo);
         }
     }
 
     // 更新表格
     mp_Table->updateTable(deviceList);
-    mp_Table->setCanUninstall(lst[0]->canUninstall());
 
     // 更新详细信息
     mp_Detail->showDeviceInfo(lst);

@@ -62,6 +62,14 @@ void LogTreeView::setItem(int row, int column, QStandardItem *item)
     }
 }
 
+QStandardItem *LogTreeView::item(int row, int column)
+{
+    if(mp_Model && mp_Model->rowCount() > row && mp_Model->columnCount() > column){
+        return mp_Model->item(row,column);
+    }
+    return nullptr;
+}
+
 void LogTreeView::setColumnAverage()
 {
     if (!mp_HeaderView) {

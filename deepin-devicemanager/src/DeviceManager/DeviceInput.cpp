@@ -48,6 +48,11 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     if(driverIsKernelIn(m_Driver)){
         m_CanUninstall = false;
     }
+    // 当驱动为空，但是又是ps/2鼠键时，驱动不可更新卸载
+    if(m_Driver.isEmpty() && "PS/2" == m_Interface){
+        m_CanUninstall = false;
+    }
+
 
 
     // 获取其他设备信息
@@ -89,6 +94,10 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
     if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
+    // 当驱动为空，但是又是ps/2鼠键时，驱动不可更新卸载
+    if(m_Driver.isEmpty() && "PS/2" == m_Interface){
         m_CanUninstall = false;
     }
 
