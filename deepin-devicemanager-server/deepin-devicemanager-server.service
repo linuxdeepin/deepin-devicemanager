@@ -1,6 +1,6 @@
 [Unit]
 Description=Deepin Device Manager Daemon
-After=network.target
+After=multi-user.target
 [Service]
 Restart=always
 ExecStart=/usr/bin/deepin-devicemanager-server

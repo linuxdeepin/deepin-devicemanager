@@ -45,7 +45,7 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_SysPath =mapInfo["path"];
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
-        return;
+        setAttribute(mapInfo, "driver", m_Driver);
     }
     if(mapInfo.find("Enable") != mapInfo.end()){
         m_Enable = false;
@@ -103,7 +103,7 @@ EnableDeviceStatus DeviceImage::setEnable(bool e)
     if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
         return EDS_Faild;
     }
-    bool res  = DBusEnableInterface::getInstance()->enable("camera",m_Name,m_SysPath,m_UniqueID,e);
+    bool res  = DBusEnableInterface::getInstance()->enable("camera",m_Name,m_SysPath,m_UniqueID,e, m_Driver);
     if(res){
         m_Enable = e;
     }

@@ -52,12 +52,6 @@ public:
      */
     void setColumnAverage();
 
-    /**
-     * @brief setCanUninstall 设置是否有右键菜单
-     * @param canUninstall
-     */
-    void setCanUninstall(bool canUninstall);
-
 signals:
     /**
      * @brief itemClicked:点击item发出信号

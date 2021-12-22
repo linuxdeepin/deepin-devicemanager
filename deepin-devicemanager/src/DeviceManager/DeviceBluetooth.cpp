@@ -41,11 +41,11 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     if(mapInfo.find("path") != mapInfo.end()){
         setAttribute(mapInfo, "name", m_Name);
+        setAttribute(mapInfo, "driver", m_Driver);
         m_SysPath = mapInfo["path"];
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
         m_UniqueID = mapInfo["unique_id"];
-        return true;
     }
 
     // 设置设备基本属性
@@ -118,7 +118,7 @@ EnableDeviceStatus DeviceBluetooth::setEnable(bool e)
     if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
         return EDS_Faild;
     }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
     if(res){
         m_Enable = e;
     }

@@ -52,9 +52,9 @@ bool DBusEnableInterface::isDeviceEnabled(const QString& unique_id)
     return false;
 }
 
-bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device)
+bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device, const QString& strDriver)
 {
-    QDBusReply<bool> reply = mp_Iface->call("enable", hclass, name, path, value, enable_device);
+    QDBusReply<bool> reply = mp_Iface->call("enable", hclass, name, path, value, enable_device, strDriver);
     if (reply.isValid()) {
         return reply.value();
     }

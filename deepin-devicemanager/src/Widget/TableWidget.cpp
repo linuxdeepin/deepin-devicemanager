@@ -116,11 +116,6 @@ void TableWidget::updateCurItemEnable(int row, bool enable)
         mp_Table->updateCurItemEnable(row, enable);
 }
 
-void TableWidget::setCanUninstall(bool canInstall)
-{
-    m_CanUninstall = canInstall;
-}
-
 void TableWidget::clear()
 {
     if (mp_Table) {
@@ -232,7 +227,12 @@ void TableWidget::slotShowMenu(const QPoint &point)
     }
     // 主板、内存、cpu等没有驱动，无需右键按钮
     // 选中item状态下才有卸载、更新按钮
-    if (m_CanUninstall && selected.size() > 0) {
+    bool canUninstall = true;
+    QStandardItem* item = mp_Table->item(row,0);
+    if(item){ // 获取该设备是否可以更新卸载驱动
+        canUninstall = item->data(Qt::UserRole).toString()=="true" ? true : false;
+    }
+    if (canUninstall && selected.size() > 0) {
         mp_Menu->addSeparator();
         mp_Menu->addAction(mp_updateDriver);
         mp_Menu->addAction(mp_removeDriver);
