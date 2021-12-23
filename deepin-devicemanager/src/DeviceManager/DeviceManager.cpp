@@ -739,6 +739,9 @@ void DeviceManager::addOthersDevice(DeviceOthers *const device)
 
 DeviceBaseInfo* DeviceManager::getOthersDevice(const QString& unique_id)
 {
+    if(unique_id.isEmpty()){
+        return nullptr;
+    }
     for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceOthers.begin(); it != m_ListDeviceOthers.end(); ++it) {
         DeviceOthers *other = dynamic_cast<DeviceOthers*>(*it);
         if(other && other->uniqueID() == unique_id){
