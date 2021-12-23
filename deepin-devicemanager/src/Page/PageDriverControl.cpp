@@ -39,7 +39,9 @@
 #include <QWindow>
 #include <polkit-qt5-1/PolkitQt1/Authority>
 
-#define EUNKNOW 0
+#define EUNKNOW         0
+#define E_FILE_NOT_EXISTED 100 // file_not_existed 文件不存在，主要比如点击下一步时拔掉优盘
+#define E_NOT_DRIVER      101 // not driver 非驱动文件
 
 using namespace PolkitQt1;
 
@@ -256,14 +258,6 @@ bool PageDriverControl::installErrorTips(const QString &driveName)
         return false;
     }
 
-    if (!DBusDriverInterface::getInstance()->isDriverPackage(driveName)) {
-        if (driveName.isEmpty() || !file.exists()) {
-            mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
-            return false;
-        }
-        mp_NameDialog->updateTipLabelText(tr("It is not a driver"));
-        return false;
-    }
     if (driveName.isEmpty() || !file.exists()) {
         mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
         return false;
@@ -344,14 +338,16 @@ void PageDriverControl::enableCloseBtn(bool enable)
 void PageDriverControl::initErrMsg()
 {
     // 初始化错误消息
-    m_MapErrMsg.insert(EUNKNOW, tr("Unknown error"));
-    m_MapErrMsg.insert(ENOENT, tr("The driver module was not found")); // 2  未发现该驱动模块 /* No such file or directory */
-    m_MapErrMsg.insert(ENOEXEC, tr("Invalid module format"));         // 8   模块格式无效 当该驱动已经编译到内核实，安装相同驱动的.ko文件会出现这个错误
-    m_MapErrMsg.insert(EAGAIN, tr("The driver module has dependencies")); // 11 驱动模块被依赖
-//    m_MapErrMsg.insert(EBADF,tr(""));                // EBADF     9   /* Bad file number */
-//    m_MapErrMsg.insert(EEXIST,tr(""));               // EEXIST        17  /* File exists */
-//    m_MapErrMsg.insert(ENODEV,tr(""));               // ENODEV        19  /* No such device */
-//    m_MapErrMsg.insert(EROFS,tr(""));               // EROFS      30  /* Read-only file system */
+    m_MapErrMsg.insert(EUNKNOW,tr("Unknown error"));
+    m_MapErrMsg.insert(ENOENT,tr("The driver module was not found")); // 2	未发现该驱动模块 /* No such file or directory */
+    m_MapErrMsg.insert(ENOEXEC,tr("Invalid module format"));          // 8   模块格式无效 当该驱动已经编译到内核实，安装相同驱动的.ko文件会出现这个错误
+    m_MapErrMsg.insert(EAGAIN,tr("The driver module has dependencies"));  // 11	驱动模块被依赖
+    m_MapErrMsg.insert(E_FILE_NOT_EXISTED,tr("The selected file does not exist, please select again"));
+    m_MapErrMsg.insert(E_NOT_DRIVER,tr("It is not a driver"));
+//    m_MapErrMsg.insert(EBADF,tr(""));                // EBADF		9	/* Bad file number */
+//    m_MapErrMsg.insert(EEXIST,tr(""));               // EEXIST		17	/* File exists */
+//    m_MapErrMsg.insert(ENODEV,tr(""));               // ENODEV		19	/* No such device */
+//    m_MapErrMsg.insert(EROFS,tr(""));               // EROFS		30	/* Read-only file system */
 }
 
 const QString &PageDriverControl::errMsg(const QString &errCode)

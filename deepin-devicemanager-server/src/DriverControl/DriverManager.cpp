@@ -55,6 +55,9 @@
 #define SD_KEY_ppd      "ppd"
 #define SD_KEY_sid      "sid"
 
+#define E_FILE_NOT_EXISTED 100 // file_not_existed 文件不存在，主要比如点击下一步时拔掉优盘
+#define E_NOT_DRIVER      101 // not driver 非驱动文件
+
 #define RETURN_VALUE(flag) \
 {   \
     sigFinished(flag, errmsg);\
@@ -146,9 +149,19 @@ bool DriverManager::installDriver(const QString &filepath)
     sigProgressDetail(1, "start");
     if (!QFile::exists(filepath)) {
         sigProgressDetail(5, "file not exist");
+        errmsg = QString("%1").arg(E_FILE_NOT_EXISTED);
         sigFinished(false, errmsg);
         return  false;
     }
+
+    // 判断是否是驱动包
+    sigProgressDetail(5, "");
+    if(!isDriverPackage(filepath)){
+        errmsg = QString("%1").arg(E_NOT_DRIVER);
+        sigFinished(false, errmsg);
+        return  false;
+    }
+
     //模块已被加载
     /*
      * 下面代码由 liujun 于 2021年11月9号 注释

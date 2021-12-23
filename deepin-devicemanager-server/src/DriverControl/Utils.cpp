@@ -95,7 +95,6 @@ bool Utils::addModBlackList(const QString &moduleName)
     process.start(QString("echo blacklist %1 >> %2").arg(moduleName).arg(BLACKLIST_CONF));
     if (!process.waitForFinished())
         return  false;
-
     return  true;
 }
 
@@ -105,7 +104,6 @@ bool Utils::unInstallPackage(const QString &packageName)
     process.start(QString("apt remove %1").arg(packageName));
     if (!process.waitForFinished())
         return  false;
-
     return  true;
 }
 
@@ -132,9 +130,8 @@ bool Utils::isDriverPackage(const QString &filepath)
         QProcess process;
         process.start("sh", QStringList() << "-c" << QString("dpkg-deb -x '%1' %2").arg(filepath).arg(strExtract));
         if (process.waitForFinished()) {
-            //查找关键字 ko insmod modprobe和 路径 /lib/module
-            process.start("sh", QStringList() << "-c" << QString("grep -irHE 'insmod|modprobe|/lib/module' %1  ||"
-                                                                 "find %1 -name '*.ko' -o -name '*.ppd'").arg(strExtract));
+            //查找关键字 ko insmod modprobe和 路径 /lib/module   // "grep -irHE 'insmod|modprobe|/lib/module' %1  ||"
+            process.start("sh", QStringList() << "-c" << QString("grep -irHE '/lib/module' %1 || find %1 -name '*.ko' -o -name '*.ppd'").arg(strExtract));
             if (process.waitForFinished()) {
                 //获取查找结果，有结果不为空
                 QString strKeyContent = process.readAllStandardOutput();
@@ -146,7 +143,6 @@ bool Utils::isDriverPackage(const QString &filepath)
         }
         //此处主动调用删除临时文件，临时文件在/tmp目录每次重启会自动清除，所以不对删除结果做处理
         tmpDir.removeRecursively();
-
     }
     return  bsuccess;
 }
