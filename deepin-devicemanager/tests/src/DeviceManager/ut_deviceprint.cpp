@@ -103,8 +103,16 @@ EnableDeviceStatus ut_print_enableprinter()
     return EnableDeviceStatus::EDS_Success;
 }
 
+bool ut_print_enablePrinter_false()
+{
+    return false;
+}
+
 TEST_F(UT_DevicePrint, UT_DevicePrint_setEnable_001)
 {
+    Stub stub;
+    stub.set(ADDR(DBusEnableInterface, enablePrinter), ut_print_enablePrinter_false);
+
     EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_devicePrint->setEnable(true));
 }
 
