@@ -38,6 +38,9 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_SysPath = mapInfo["path"];
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
+        //设备禁用的情况，没必要再继续向下执行(可能会引起不必要的问题)，直接return
+        m_CanUninstall = !driverIsKernelIn(m_Driver);
+        return;
     }
     //1. 获取设备的基本信息
     setAttribute(mapInfo, "Device", m_Name);

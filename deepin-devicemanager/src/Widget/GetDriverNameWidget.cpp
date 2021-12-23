@@ -33,6 +33,10 @@ GetDriverNameWidget::~GetDriverNameWidget()
     stopLoadingDrivers();
     mp_Thread->quit();
     mp_Thread->wait();
+    if(mp_GetModel){
+        delete mp_GetModel;
+        mp_GetModel = nullptr;
+    }
 }
 
 void GetDriverNameWidget::init()

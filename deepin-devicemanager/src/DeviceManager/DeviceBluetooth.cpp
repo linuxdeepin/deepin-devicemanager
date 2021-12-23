@@ -46,6 +46,9 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
         m_UniqueID = mapInfo["unique_id"];
+        //设备禁用的情况，没必要再继续向下执行，直接return
+        m_CanUninstall = !driverIsKernelIn(m_Driver);
+        return true;
     }
 
     // 设置设备基本属性

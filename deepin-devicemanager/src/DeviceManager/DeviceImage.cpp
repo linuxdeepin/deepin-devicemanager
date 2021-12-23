@@ -46,6 +46,9 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
         setAttribute(mapInfo, "driver", m_Driver);
+        //设备禁用的情况，没必要再继续向下执行，直接return
+        m_CanUninstall = !driverIsKernelIn(m_Driver);
+        return;
     }
     if(mapInfo.find("Enable") != mapInfo.end()){
         m_Enable = false;
