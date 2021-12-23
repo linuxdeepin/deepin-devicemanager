@@ -16,6 +16,7 @@
 */
 #include "DevicePrint.h"
 #include "DeviceInfo.h"
+#include "DBusEnableInterface.h"
 #include "ut_Head.h"
 #include "stub.h"
 
@@ -104,12 +105,21 @@ EnableDeviceStatus ut_print_enableprinter()
 
 TEST_F(UT_DevicePrint, UT_DevicePrint_setEnable_001)
 {
-//    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_devicePrint->setEnable(true));
+    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_devicePrint->setEnable(true));
+}
+
+bool ut_print_enablePrinter_true()
+{
+    return true;
 }
 
 TEST_F(UT_DevicePrint, UT_DevicePrint_setEnable_002)
 {
-//    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, m_devicePrint->setEnable(false));
+    Stub stub;
+    stub.set(ADDR(DBusEnableInterface, enablePrinter), ut_print_enablePrinter_true);
+
+    EXPECT_EQ(EnableDeviceStatus::EDS_Success, m_devicePrint->setEnable(true));
+    EXPECT_TRUE(m_devicePrint->m_Enable);
 }
 
 
@@ -162,4 +172,25 @@ TEST_F(UT_DevicePrint, UT_DevicePrint_loadTableData_002)
     m_devicePrint->m_Status = "3";
     m_devicePrint->loadTableData();
     EXPECT_EQ(3, m_devicePrint->m_TableData.size());
+}
+
+TEST_F(UT_DevicePrint, UT_DevicePrint_available)
+{
+    EXPECT_TRUE(m_devicePrint->available());
+}
+
+TEST_F(UT_DevicePrint, UT_DevicePrint_getVendor)
+{
+    QMap<QString, QString> mapinfo;
+    ut_print_setmap(mapinfo);
+    m_devicePrint->setInfo(mapinfo);
+    EXPECT_STREQ("Canon", m_devicePrint->getVendor().toStdString().c_str());
+}
+
+TEST_F(UT_DevicePrint, UT_DevicePrint_getModel)
+{
+    QMap<QString, QString> mapinfo;
+    ut_print_setmap(mapinfo);
+    m_devicePrint->setInfo(mapinfo);
+    EXPECT_STREQ("iR-ADV C3720 22.21", m_devicePrint->getModel().toStdString().c_str());
 }

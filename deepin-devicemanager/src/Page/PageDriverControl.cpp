@@ -62,8 +62,7 @@ PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool in
     initErrMsg();
 
     DBlurEffectWidget *widget = findChild<DBlurEffectWidget *>();
-    if(nullptr != widget)
-    {
+    if (nullptr != widget) {
         widget->lower();
         widget->setBlurEnabled(false);
     }
@@ -175,7 +174,7 @@ void PageDriverControl::slotProcessEnd(bool sucess, QString errCode)
     mp_stackWidget->setCurrentIndex(mp_stackWidget->currentIndex() + 1);
     disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processChange, this, &PageDriverControl::slotProcessChange);
     disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processEnd, this, &PageDriverControl::slotProcessEnd);
-    setProperty("DriverProcessStatus" , "Done");//卸载或者加载程序已完成
+    setProperty("DriverProcessStatus", "Done"); //卸载或者加载程序已完成
     enableCloseBtn(true);
 }
 
@@ -223,8 +222,8 @@ void PageDriverControl::installDriverLogical()
     } else if (1 == curIndex) {
         // 驱动安装之前需要先提权
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
-                                                 UnixProcessSubject(getpid()),
-                                                 Authority::AllowUserInteraction);
+                                                                                 UnixProcessSubject(getpid()),
+                                                                                 Authority::AllowUserInteraction);
         if (result != Authority::Yes) {
             return;
         }
@@ -248,7 +247,7 @@ void PageDriverControl::installDriverLogical()
 bool PageDriverControl::installErrorTips(const QString &driveName)
 {
     QFile file(driveName);
-    if(!DBusDriverInterface::getInstance()->isDebValid(driveName)) {
+    if (!DBusDriverInterface::getInstance()->isDebValid(driveName)) {
         mp_NameDialog->updateTipLabelText(tr("Broken package"));
         return false;
     }
@@ -277,7 +276,7 @@ void PageDriverControl::uninstallDriverLogical()
     // 点击卸载之后进入正在卸载界面
     removeBtn();
     mp_stackWidget->setCurrentIndex(mp_stackWidget->currentIndex() + 1);
-    if(m_printerVendor.count() > 0) {
+    if (m_printerVendor.count() > 0) {
         DBusDriverInterface::getInstance()->uninstallPrinter(m_printerVendor, m_printerModel);
     } else {
         DBusDriverInterface::getInstance()->uninstallDriver(m_DriverName);
@@ -301,26 +300,24 @@ void PageDriverControl::keyPressEvent(QKeyEvent *event)
     if (Qt::Key_Escape == event->key()) {
         blIsClose = true;
     }
-    if(!blIsClose)
-    {
+    if (!blIsClose) {
         return;
     }
-    if("Doing" == property("DriverProcessStatus").toString()){
+    if ("Doing" == property("DriverProcessStatus").toString()) {
         return;
-    }
-    else if("Done" == property("DriverProcessStatus").toString()){
+    } else if ("Done" == property("DriverProcessStatus").toString()) {
         slotClose();//卸载或者更新后，关闭时刷新
-    }else{
+    } else {
         this->close();
     }
 }
 void PageDriverControl::closeEvent(QCloseEvent *event)
 {
     // 如果后台更新时，直接返回，否则不处理
-    if("Doing" == property("DriverProcessStatus").toString()){
+    if ("Doing" == property("DriverProcessStatus").toString()) {
         event->ignore();
         return;
-    }else if("Done" == property("DriverProcessStatus").toString()){
+    } else if ("Done" == property("DriverProcessStatus").toString()) {
         slotClose();//卸载或者更新后，关闭时刷新
     }
 }
@@ -329,40 +326,40 @@ void PageDriverControl::enableCloseBtn(bool enable)
 {
     // 获取titlebar
     DTitlebar *titlebar = findChild<DTitlebar *>();
-    if(!titlebar){
+    if (!titlebar) {
         return;
     }
 
     // 获取安装按钮
     DIconButton *closeBtn = titlebar->findChild<DIconButton *>("DTitlebarDWindowCloseButton");
-    if(!closeBtn){
+    if (!closeBtn) {
         return;
     }
 
     // 禁用按钮
-    closeBtn->setAttribute(Qt::WA_TransparentForMouseEvents,!enable);
+    closeBtn->setAttribute(Qt::WA_TransparentForMouseEvents, !enable);
     closeBtn->setEnabled(enable);
 }
 
 void PageDriverControl::initErrMsg()
 {
     // 初始化错误消息
-    m_MapErrMsg.insert(EUNKNOW,tr("Unknown error"));
-    m_MapErrMsg.insert(ENOENT,tr("The driver module was not found")); // 2	未发现该驱动模块 /* No such file or directory */
-    m_MapErrMsg.insert(ENOEXEC,tr("Invalid module format"));          // 8   模块格式无效 当该驱动已经编译到内核实，安装相同驱动的.ko文件会出现这个错误
-    m_MapErrMsg.insert(EAGAIN,tr("The driver module has dependencies"));  // 11	驱动模块被依赖
-//    m_MapErrMsg.insert(EBADF,tr(""));                // EBADF		9	/* Bad file number */
-//    m_MapErrMsg.insert(EEXIST,tr(""));               // EEXIST		17	/* File exists */
-//    m_MapErrMsg.insert(ENODEV,tr(""));               // ENODEV		19	/* No such device */
-//    m_MapErrMsg.insert(EROFS,tr(""));               // EROFS		30	/* Read-only file system */
+    m_MapErrMsg.insert(EUNKNOW, tr("Unknown error"));
+    m_MapErrMsg.insert(ENOENT, tr("The driver module was not found")); // 2  未发现该驱动模块 /* No such file or directory */
+    m_MapErrMsg.insert(ENOEXEC, tr("Invalid module format"));         // 8   模块格式无效 当该驱动已经编译到内核实，安装相同驱动的.ko文件会出现这个错误
+    m_MapErrMsg.insert(EAGAIN, tr("The driver module has dependencies")); // 11 驱动模块被依赖
+//    m_MapErrMsg.insert(EBADF,tr(""));                // EBADF     9   /* Bad file number */
+//    m_MapErrMsg.insert(EEXIST,tr(""));               // EEXIST        17  /* File exists */
+//    m_MapErrMsg.insert(ENODEV,tr(""));               // ENODEV        19  /* No such device */
+//    m_MapErrMsg.insert(EROFS,tr(""));               // EROFS      30  /* Read-only file system */
 }
 
-const QString& PageDriverControl::errMsg(const QString& errCode)
+const QString &PageDriverControl::errMsg(const QString &errCode)
 {
     // 将错误码转换为错误信息
-    if(m_MapErrMsg.find(errCode.toInt()) != m_MapErrMsg.end()){
+    if (m_MapErrMsg.find(errCode.toInt()) != m_MapErrMsg.end()) {
         return m_MapErrMsg[errCode.toInt()];
-    }else{
+    } else {
         return m_MapErrMsg[EUNKNOW];
     }
 }

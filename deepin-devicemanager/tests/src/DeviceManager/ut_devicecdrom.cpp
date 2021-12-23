@@ -77,16 +77,16 @@ TEST_F(UT_DeviceCdrom, UT_DeviceCdrom_setInfoFromLshw_003)
 
 TEST_F(UT_DeviceCdrom, UT_DeviceCdrom_setInfoFromLshw_004)
 {
-//    QMap<QString, QString> mapInfo;
-//    ut_cdrom_setlshwmap(mapInfo);
-//    m_deviceCdrom->m_HwinfoToLshw = "1:8";
+    QMap<QString, QString> mapInfo;
+    ut_cdrom_setlshwmap(mapInfo);
+    m_deviceCdrom->m_HwinfoToLshw = "usb@1:8";
 
-//    ASSERT_TRUE(m_deviceCdrom->setInfoFromLshw(mapInfo));
-//    EXPECT_STREQ("product", m_deviceCdrom->m_Name.toStdString().c_str());
-//    EXPECT_STREQ("vendor", m_deviceCdrom->m_Vendor.toStdString().c_str());
-//    EXPECT_STREQ("version", m_deviceCdrom->m_Version.toStdString().c_str());
-//    EXPECT_STREQ("usb@1:8", m_deviceCdrom->m_BusInfo.toStdString().c_str());
-//    EXPECT_STREQ("capabilities", m_deviceCdrom->m_Capabilities.toStdString().c_str());
+    ASSERT_TRUE(m_deviceCdrom->setInfoFromLshw(mapInfo));
+    EXPECT_STREQ("product", m_deviceCdrom->m_Name.toStdString().c_str());
+    EXPECT_STREQ("vendor", m_deviceCdrom->m_Vendor.toStdString().c_str());
+    EXPECT_STREQ("version", m_deviceCdrom->m_Version.toStdString().c_str());
+    EXPECT_STREQ("usb@1:8", m_deviceCdrom->m_BusInfo.toStdString().c_str());
+    EXPECT_STREQ("capabilities", m_deviceCdrom->m_Capabilities.toStdString().c_str());
 }
 
 void ut_cdrom_sethwinfomap(QMap<QString, QString> &mapInfo)
@@ -95,7 +95,7 @@ void ut_cdrom_sethwinfomap(QMap<QString, QString> &mapInfo)
     mapInfo.insert("Vendor", "Vendor");
     mapInfo.insert("Model", "Model");
     mapInfo.insert("Revision", "Revision");
-    mapInfo.insert("SysFS BusID", "usb@1:8");
+    mapInfo.insert("SysFS BusID", "1-5:1.0");
     mapInfo.insert("Driver", "Driver");
     mapInfo.insert("Speed", "Speed");
 }
@@ -103,18 +103,18 @@ void ut_cdrom_sethwinfomap(QMap<QString, QString> &mapInfo)
 
 TEST_F(UT_DeviceCdrom, UT_DeviceCdrom_setInfoFromHwinfo)
 {
-//    QMap<QString, QString> mapInfo;
-//    ut_cdrom_sethwinfomap(mapInfo);
+    QMap<QString, QString> mapInfo;
+    ut_cdrom_sethwinfomap(mapInfo);
 
-//    m_deviceCdrom->setInfoFromHwinfo(mapInfo);
-//    EXPECT_STREQ("Device", m_deviceCdrom->m_Name.toStdString().c_str());
-//    EXPECT_STREQ("Vendor", m_deviceCdrom->m_Vendor.toStdString().c_str());
-//    EXPECT_STREQ("Model", m_deviceCdrom->m_Type.toStdString().c_str());
-//    EXPECT_STREQ("Revision", m_deviceCdrom->m_Version.toStdString().c_str());
-//    EXPECT_STREQ("usb@1:8", m_deviceCdrom->m_BusInfo.toStdString().c_str());
-//    EXPECT_STREQ("Driver", m_deviceCdrom->m_Driver.toStdString().c_str());
-//    EXPECT_STREQ("Speed", m_deviceCdrom->m_Speed.toStdString().c_str());
-//    EXPECT_STREQ("usb@1:8", m_deviceCdrom->m_HwinfoToLshw.toStdString().c_str());
+    m_deviceCdrom->setInfoFromHwinfo(mapInfo);
+    EXPECT_STREQ("Device", m_deviceCdrom->m_Name.toStdString().c_str());
+    EXPECT_STREQ("Vendor", m_deviceCdrom->m_Vendor.toStdString().c_str());
+    EXPECT_STREQ("Model", m_deviceCdrom->m_Type.toStdString().c_str());
+    EXPECT_STREQ("Revision", m_deviceCdrom->m_Version.toStdString().c_str());
+    EXPECT_STREQ("1-5:1.0", m_deviceCdrom->m_BusInfo.toStdString().c_str());
+    EXPECT_STREQ("Driver", m_deviceCdrom->m_Driver.toStdString().c_str());
+    EXPECT_STREQ("Speed", m_deviceCdrom->m_Speed.toStdString().c_str());
+    EXPECT_STREQ("usb@1:5", m_deviceCdrom->m_HwinfoToLshw.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceCdrom, UT_DeviceCdrom_name)
@@ -193,6 +193,7 @@ TEST_F(UT_DeviceCdrom, UT_DeviceCdrom_loadTableData_002)
     m_deviceCdrom->setInfoFromHwinfo(mapInfo);
 
     m_deviceCdrom->m_Enable = false;
+    m_deviceCdrom->m_Available = false;
     m_deviceCdrom->loadTableData();
     EXPECT_EQ(3, m_deviceCdrom->m_TableData.size());
 }

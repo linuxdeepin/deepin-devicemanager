@@ -368,5 +368,9 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_loadTableData)
 {
     m_deviceMonitor->loadTableData();
     EXPECT_EQ(3, m_deviceMonitor->m_TableData.size());
+}
 
+TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_available)
+{
+    EXPECT_TRUE(m_deviceMonitor->available());
 }
