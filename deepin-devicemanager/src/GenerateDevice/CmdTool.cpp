@@ -295,7 +295,7 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
      * ALC887:
     */
     foreach (const QString &line, lines) {
-        QRegExp reg(".*autoconfig for ([A-Za-z0-9]{6}[ -][A-Za-z0-9]+):.*");
+        QRegExp reg(".*autoconfig for ([A-Za-z0-9]{6}( [A-Za-z0-9]+|-[A-Za-z0-9]+|)):.*");
         if (reg.exactMatch(line)) {
             QString chip = reg.cap(1);
             mapInfo["chip"] = chip;
