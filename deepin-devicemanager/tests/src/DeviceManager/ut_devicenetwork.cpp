@@ -172,19 +172,9 @@ TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_getOverviewInfo)
     EXPECT_STREQ("product", overview.toStdString().c_str());
 }
 
-bool ut_network_enableNetwork()
-{
-    return true;
-}
-
 bool ut_network_enable_true()
 {
     return true;
-}
-
-bool ut_network_enable_false()
-{
-    return false;
 }
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setEnable_001)

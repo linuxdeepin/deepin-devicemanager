@@ -87,7 +87,7 @@ public:
 TEST_F(DetailButton_UT, DetailButton_UT_updateText)
 {
     m_detailButton->updateText();
-    EXPECT_EQ("Collapse",m_detailButton->text());
+    EXPECT_EQ("Collapse", m_detailButton->text());
 }
 
 TEST_F(DetailButton_UT, DetailButton_UT_paintEvent)
@@ -119,21 +119,16 @@ TEST_F(PageDetail_UT, PageDetail_UT_showDeviceInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     m_pageDetail->showDeviceInfo(bInfo);
-    EXPECT_EQ(0,m_pageDetail->mp_ScrollArea->verticalScrollBar()->value());
+    EXPECT_EQ(0, m_pageDetail->mp_ScrollArea->verticalScrollBar()->value());
     delete device;
-}
-
-int ut_detail_size()
-{
-    return 1;
 }
 
 TEST_F(PageDetail_UT, PageDetail_UT_showInfoOfNum)
 {
     m_pageDetail->showInfoOfNum(2);
-    EXPECT_EQ(0,m_pageDetail->mp_ScrollArea->verticalScrollBar()->value());
+    EXPECT_EQ(0, m_pageDetail->mp_ScrollArea->verticalScrollBar()->value());
     m_pageDetail->enableDevice(0, true);
-    EXPECT_EQ(0,m_pageDetail->m_ListTextBrowser.size());
+    EXPECT_EQ(0, m_pageDetail->m_ListTextBrowser.size());
 }
 
 TEST_F(PageDetail_UT, PageDetail_UT_paintEvent)

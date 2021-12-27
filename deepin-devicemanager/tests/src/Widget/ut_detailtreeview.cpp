@@ -66,11 +66,6 @@ TEST_F(UT_BtnWidget, UT_BtnWidget_leaveEvent)
     EXPECT_TRUE(m_bWidget->event(&event));
 }
 
-bool ut_isBaseBoard()
-{
-    return false;
-}
-
 TEST_F(UT_DetailTreeView, UT_DetailTreeView_setItem)
 {
     QTableWidgetItem *item = new QTableWidgetItem;

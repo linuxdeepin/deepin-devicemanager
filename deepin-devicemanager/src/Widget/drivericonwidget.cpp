@@ -107,11 +107,3 @@ void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, cons
 
     setLayout(vlayout);
 }
-
-void DriverIconWidget::updateProgress(qint32 progress, const QString &detail)
-{
-    Q_UNUSED(detail)
-    if (100 == progress) {
-        emit sigProgressFinished();
-    }
-}

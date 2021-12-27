@@ -184,20 +184,6 @@ bool ut_input_isDeviceExistInPairedDevice()
     return true;
 }
 
-QMap<QString, QString> &ut_input_Info()
-{
-    static QMap<QString, QString> map;
-    map.insert("Name", "Cherry Zhuhai MX board 8.0 Mouse");
-    map.insert("Uniq", "0003");
-
-    return map;
-}
-
-bool ut_input_isDeviceEnable()
-{
-    return true;
-}
-
 TEST_F(UT_DeviceInput, UT_DeviceInput_setInfoFromBluetoothctl)
 {
     Stub stub;
@@ -257,16 +243,6 @@ TEST_F(UT_DeviceInput, UT_DeviceInput_getOverviewInfo)
 
     QString overview = m_deviceInput->getOverviewInfo();
     EXPECT_STREQ("MX board 8.0 (Cherry MX board 8.0)", overview.toStdString().c_str());
-}
-
-EnableDeviceStatus ut_input_enableDeviceByInput_001()
-{
-    return EnableDeviceStatus::EDS_Success;
-}
-
-EnableDeviceStatus ut_input_enableDeviceByInput_002()
-{
-    return EnableDeviceStatus::EDS_Faild;
 }
 
 TEST_F(UT_DeviceInput, UT_DeviceInput_setEnable_001)

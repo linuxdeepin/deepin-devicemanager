@@ -193,16 +193,6 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_getOverviewInfo)
     EXPECT_STREQ("Name", overview.toStdString().c_str());
 }
 
-bool ut_bluetooth_isenablebydriver_true()
-{
-    return true;
-}
-
-bool ut_bluetooth_isenablebydriver_false()
-{
-    return false;
-}
-
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_setEnable_001)
 {
     m_deviceBluetooth->m_SerialID = "SerialID";

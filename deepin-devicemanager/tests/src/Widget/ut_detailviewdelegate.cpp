@@ -51,24 +51,9 @@ public:
     DetailTreeView *m_treeView;
 };
 
-bool ut_isValid()
-{
-    return false;
-}
-
-int ut_detailview_pixelMetric()
-{
-    return 10;
-}
-
 int ut_y()
 {
     return 10;
-}
-
-int ut_column()
-{
-    return 0;
 }
 
 DStyle *DetailViewDelegate_UT_style_fun()

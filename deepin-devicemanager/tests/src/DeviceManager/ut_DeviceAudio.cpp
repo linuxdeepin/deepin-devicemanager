@@ -39,11 +39,6 @@ public:
     DeviceAudio *m_deviceAudio;
 };
 
-bool ut_deviceaudio_isEmpty()
-{
-    return true;
-}
-
 TEST_F(UT_DeviceAudio, UT_DeviceAudio_setInfoFromHwinfo_001)
 {
     QMap<QString, QString> map;

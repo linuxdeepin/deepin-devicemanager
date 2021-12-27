@@ -45,11 +45,6 @@ public:
     DeviceMonitor *m_deviceMonitor;
 };
 
-bool ut_exacMatch()
-{
-    return true;
-}
-
 TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_parseMonitorSize_001)
 {
     QString sizeDescription = "527x296 mm";

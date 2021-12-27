@@ -18,6 +18,7 @@
 #include "DeviceFactory.h"
 #include "GenerateDevicePool.h"
 #include "DBusInterface.h"
+#include "DeviceManager.h"
 #include "ut_Head.h"
 #include "stub.h"
 
@@ -215,7 +216,26 @@ bool ut_getDeviceInfo_loadSmartCtlInfo(void *obj, QString &deviceInfo, const QSt
     deviceInfo = "Model Family:     Western Digital Blue\n"
                  "Device Model:     WDC WD10EZEX-08WN4A0\n"
                  "Serial Number:    WD-WCC6Y5NY6N90\n"
-                 "User Capacity:    1,000,204,886,016 bytes [1.00 TB]\n";
+                 "User Capacity:    1,000,204,886,016 bytes [1.00 TB]\n"
+                 "Power_On_Hours          0x0032   100   100   050    Old_age   Always       -       4762\n"
+                 "Power_Cycle_Count       0x0032   100   100   050    Old_age   Always       -       371\n"
+                 "Raw_Read_Error_Rate     0x002f   100   100   050    Pre-fail  Always       -       0\n"
+                 "Spin_Up_Time            0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Start_Stop_Count        0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Reallocated_Sector_Ct   0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Seek_Error_Rate         0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Spin_Retry_Count        0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Calibration_Retry_Count 0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "G-Sense_Error_Rate      0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Power-Off_Retract_Count 0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Load_Cycle_Count        0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Temperature_Celsius     0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Reallocated_Event_Count 0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Current_Pending_Sector  0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "UDMA_CRC_Error_Count    0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Offline_Uncorrectable   0x0032   100   100   050    Old_age   Always       -       353820672\n"
+                 "Multi_Zone_Error_Rate   0x0032   100   100   050    Old_age   Always       -       353820672\n";
+
     return true;
 }
 TEST_F(UT_CmdTool, UT_CmdTool_loadSmartCtlInfo)
@@ -229,8 +249,10 @@ TEST_F(UT_CmdTool, UT_CmdTool_loadSmartCtlInfo)
 bool ui_getDeviceInfo_loadDmesgInfo(void *obj, QString &deviceInfo, const QString &file)
 {
     deviceInfo = "nouveau 0000:01:00.0: VRAM: 2048MiB\n"
-                 "nouveau 0000:01:00.0: VRAM Size 2048MiB"
-                 "snd_hda_codec_realtek hdaudioC0D1: autoconfig for ALC891: ";
+                 "nouveau 0000:01:00.0: VRAM Size 2048MiB\n"
+                 "snd_hda_codec_realtek hdaudioC0D1: autoconfig for ALC891: \n"
+                 "snd_hda_codec_realtek hdaudioC0D1: autoconfig for ALC891-VD:\n"
+                 "snd_hda_codec_realtek hdaudioC0D1: autoconfig for ALC891 VD:";
     return true;
 }
 TEST_F(UT_CmdTool, UT_CmdTool_loadDmesgInfo)
@@ -461,4 +483,70 @@ TEST_F(UT_CmdTool, UT_CmdTool_addUsbMapInfo)
     mapInfo2.insert("SysFS BusID", "1-11:1.0");
     m_cmdTool->addUsbMapInfo("hwinfo_usb", mapInfo2);
     EXPECT_TRUE(m_cmdTool->m_cmdInfo.find("hwinfo_usb") != m_cmdTool->m_cmdInfo.end());
+}
+
+bool ut_getCatDeviceInfo_catInput(void *obj, QString &deviceInfo, const QString &file)
+{
+    deviceInfo = "I: Bus=0003 Vendor=093a Product=2510 Version=0111\n"
+                 "N: Name=\"PixA琀 USB Optical Mouse\"\n"
+                 "P: Phys=usb-0000:00:14.0-1/input0\n"
+                 "S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1:1.0/0003:093A:2510.0001/input/input2\n"
+                 "U: Uniq=\n"
+                 "H: Handlers=mouse0\n"
+                 "B: KEY=70000 0 0 0 0\n"
+                 "B: EV=17\n"
+                 "B: REL=103\n"
+                 "B: MSC=10\n";
+    return true;
+}
+
+TEST_F(UT_CmdTool, UT_CmdTool_loadCatInputDeviceInfo)
+{
+    Stub stub;
+    stub.set(ADDR(CmdTool, getCatDeviceInfo), ut_getCatDeviceInfo_catInput);
+
+    m_cmdTool->loadCatInputDeviceInfo("cat_devices", "/proc/bus/input/devices");
+    EXPECT_FALSE(DeviceManager::instance()->inputInfo("mouse0").isEmpty());
+}
+
+bool ut_getCatDeviceInfo_catVersion(void *obj, QString &deviceInfo, const QString &file)
+{
+    deviceInfo = "I: Bus=0003 Vendor=093a Product=2510 Version=0111\n"
+                 "N: Name=\"PixA琀 USB Optical Mouse\"\n"
+                 "P: Phys=usb-0000:00:14.0-1/input0\n"
+                 "S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1:1.0/0003:093A:2510.0001/input/input2\n"
+                 "U: Uniq=\n"
+                 "H: Handlers=mouse0\n"
+                 "B: KEY=70000 0 0 0 0\n"
+                 "B: EV=17\n"
+                 "B: REL=103\n"
+                 "B: MSC=10\n";
+    return true;
+}
+
+TEST_F(UT_CmdTool, UT_CmdTool_loadCatAudioInfo)
+{
+    Stub stub;
+    stub.set(ADDR(CmdTool, getCatDeviceInfo), ut_getCatDeviceInfo_catVersion);
+
+    m_cmdTool->loadCatAudioInfo("cat_version", "/proc/version");
+    EXPECT_FALSE(m_cmdTool->m_cmdInfo["cat_version"].isEmpty());
+}
+
+bool ut_cmdtool_getInfo(void *obj, const QString &key, QString &info)
+{
+    info = "Manufacturer: LENOVO\n"
+           "Product Name: 3133\n"
+           "Version: NOK\n";
+    return true;
+}
+
+TEST_F(UT_CmdTool, UT_CmdTool_getDeviceInfo)
+{
+    Stub stub;
+    stub.set(ADDR(DBusInterface, getInfo), ut_cmdtool_getInfo);
+
+    QString deviceInfo;
+    m_cmdTool->getDeviceInfo(deviceInfo, "dmidecode2");
+    EXPECT_STREQ("Manufacturer: LENOVO\nProduct Name: 3133\nVersion: NOK\n", deviceInfo.toStdString().c_str());
 }

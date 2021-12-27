@@ -98,11 +98,6 @@ TEST_F(UT_DevicePrint, UT_DevicePrint_getOverviewInfo)
     EXPECT_STREQ("Canon-iR-ADV-C3720-UFR", overview.toStdString().c_str());
 }
 
-EnableDeviceStatus ut_print_enableprinter()
-{
-    return EnableDeviceStatus::EDS_Success;
-}
-
 bool ut_print_enablePrinter_false()
 {
     return false;
