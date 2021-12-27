@@ -813,10 +813,13 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         if ((*it)["Device"].contains("T70"))
             continue;
 
-        // 先判断是否存在
-        QString path = pciPath(*it);
-        if (!QFile::exists(path)) {
-            continue;
+        //过滤触摸板，如果不是触摸板再检查
+        if ((*it)["Device"].indexOf("Touchpad") < 0){
+            // 先判断是否存在
+            QString path = pciPath(*it);
+            if (!QFile::exists(path)) {
+                continue;
+            }
         }
 
         QString unique_id = uniqueID(*it);
