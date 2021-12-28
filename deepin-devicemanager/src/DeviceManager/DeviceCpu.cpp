@@ -159,7 +159,8 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         else {
             m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
         }
-    } else {
+    }
+    else if(mapInfo.find("CPU MHz") != mapInfo.end()) {
         QString maxS = mapInfo["CPU MHz"];
         m_Frequency = maxS.indexOf("MHz") > -1 ? maxS : maxS + " MHz";
     }

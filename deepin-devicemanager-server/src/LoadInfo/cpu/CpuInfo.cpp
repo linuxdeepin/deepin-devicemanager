@@ -254,6 +254,9 @@ int CpuInfo::readPhysicalID(const QString &path)
         return -1;
     QString info = file.readAll();
     file.close();
+    if("sw_64" == m_Arch && -1 == info.toInt()){
+        return 0;
+    }
     return info.toInt();
 }
 
