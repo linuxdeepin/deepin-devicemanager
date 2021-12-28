@@ -158,6 +158,8 @@ bool CpuInfo::parseInfo(const QString &info)
 LogicalCpu &CpuInfo::logicalCpu(int logical_id)
 {
     foreach (int physical_id, m_MapPhysicalCpu.keys()) {
+        if(physical_id < 0)
+            continue;
         PhysicalCpu physical = m_MapPhysicalCpu[physical_id];
         if (physical.logicalIsExisted(logical_id)) {
             return physical.logicalCpu(logical_id);
@@ -219,21 +221,20 @@ void CpuInfo::readSysCpuN(int N, const QString &path)
     // /sys/devices/system/cpu/cpu0/topology/core_id
     QString corePath = path + "/topology/core_id";
     QString thread_siblings_list_patch = path + "/topology/thread_siblings_list";
-    int core_id = readCoreID(corePath);
     int tsl = readThreadSiblingsListPath(thread_siblings_list_patch);
-    if (core_id < 0 || tsl < 0) {
+    if (tsl < 0) {
         return;
     }
     PhysicalCpu &cpu = m_MapPhysicalCpu[physical_id];
     if (!cpu.coreIsExisted(tsl)) {
-        CoreCpu core = CoreCpu(core_id);
+        CoreCpu core = CoreCpu(tsl);
         cpu.addCoreCpu(tsl, core);
     }
 
     // 第三步读取逻辑cpu
     LogicalCpu lcpu;
     lcpu.setLogicalID(N);
-    lcpu.setCoreID(core_id);
+    lcpu.setCoreID(tsl);
     lcpu.setPhysicalID(physical_id);
     lcpu.setArch(m_Arch);
     QDir dir(path);
