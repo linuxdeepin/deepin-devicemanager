@@ -681,7 +681,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
             QString gpuSize = reg.cap(1);
             int numSize = gpuSize.toInt();
             numSize /= 1024;
-            if (numSize > 1024) {
+            if (numSize >= 1024) {   // Bug109782 1024MB -> 1G
                 numSize /= 1024;
                 gpuSize = "null=" + QString::number(numSize) + "GB";   // 从nvidi-setting中获取显存信息没有Unique id ,格式与dmesg中获取信息保持一致,故添加"null="
             } else {
