@@ -15,6 +15,8 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "DeviceImage.h"
+#include "DBusEnableInterface.h"
+#include "DeviceInfo.h"
 
 #include "stub.h"
 #include "ut_Head.h"
@@ -60,23 +62,24 @@ void ut_image_sethwinfomap(QMap<QString, QString> &mapinfo)
     mapinfo.insert("Driver", "Driver");
     mapinfo.insert("Driver Modules", "Driver Modules");
     mapinfo.insert("Speed", "Speed");
+    mapinfo.insert("Enable", "Enable");
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_setInfoFromLshw_001)
 {
-//    QMap<QString, QString> mapinfo;
-//    ut_image_setlshwmap(mapinfo);
-//    m_deviceImage->m_KeyToLshw = "usb@1:8";
+    QMap<QString, QString> mapinfo;
+    ut_image_setlshwmap(mapinfo);
+    m_deviceImage->m_HwinfoToLshw = "usb@1:8";
 
-//    m_deviceImage->setInfoFromLshw(mapinfo);
-//    EXPECT_STREQ("product", m_deviceImage->m_Name.toStdString().c_str());
-//    EXPECT_STREQ("vendor", m_deviceImage->m_Vendor.toStdString().c_str());
-//    EXPECT_STREQ("version", m_deviceImage->m_Version.toStdString().c_str());
-//    EXPECT_STREQ("usb@1:8", m_deviceImage->m_BusInfo.toStdString().c_str());
-//    EXPECT_STREQ("capabilities", m_deviceImage->m_Capabilities.toStdString().c_str());
-//    EXPECT_STREQ("uvcvideo", m_deviceImage->m_Driver.toStdString().c_str());
-//    EXPECT_STREQ("maxpower", m_deviceImage->m_MaximumPower.toStdString().c_str());
-//    EXPECT_STREQ("speed", m_deviceImage->m_Speed.toStdString().c_str());
+    m_deviceImage->setInfoFromLshw(mapinfo);
+    EXPECT_STREQ("product", m_deviceImage->m_Name.toStdString().c_str());
+    EXPECT_STREQ("vendor", m_deviceImage->m_Vendor.toStdString().c_str());
+    EXPECT_STREQ("version", m_deviceImage->m_Version.toStdString().c_str());
+    EXPECT_STREQ("usb@1:8", m_deviceImage->m_BusInfo.toStdString().c_str());
+    EXPECT_STREQ("capabilities", m_deviceImage->m_Capabilities.toStdString().c_str());
+    EXPECT_STREQ("driver", m_deviceImage->m_Driver.toStdString().c_str());
+    EXPECT_STREQ("maxpower", m_deviceImage->m_MaximumPower.toStdString().c_str());
+    EXPECT_STREQ("speed", m_deviceImage->m_Speed.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_setInfoFromLshw_002)
@@ -88,7 +91,7 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_setInfoFromLshw_002)
     m_deviceImage->setInfoFromLshw(mapinfo);
 }
 
-TEST_F(UT_DeviceImage, UT_DeviceImage_setInfoFromHwinfo)
+TEST_F(UT_DeviceImage, UT_DeviceImage_setInfoFromHwinfo_001)
 {
     QMap<QString, QString> mapinfo;
     ut_image_sethwinfomap(mapinfo);
@@ -102,6 +105,23 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_setInfoFromHwinfo)
     EXPECT_STREQ("Driver Modules", m_deviceImage->m_Driver.toStdString().c_str());
     EXPECT_STREQ("Speed", m_deviceImage->m_Speed.toStdString().c_str());
     EXPECT_STREQ("usb@1:8", m_deviceImage->m_HwinfoToLshw.toStdString().c_str());
+    EXPECT_FALSE(m_deviceImage->m_Enable);
+}
+
+TEST_F(UT_DeviceImage, UT_DeviceImage_setInfoFromHwinfo_002)
+{
+    QMap<QString, QString> mapinfo;
+    mapinfo.insert("unique_id", "unique_id");
+    mapinfo.insert("name", "name");
+    mapinfo.insert("path", "path");
+    mapinfo.insert("Hardware Class", "Hardware Class");
+
+    m_deviceImage->setInfoFromHwinfo(mapinfo);
+    EXPECT_STREQ("name", m_deviceImage->m_Name.toStdString().c_str());
+    EXPECT_STREQ("path", m_deviceImage->m_SysPath.toStdString().c_str());
+    EXPECT_STREQ("Hardware Class", m_deviceImage->m_HardwareClass.toStdString().c_str());
+    EXPECT_STREQ("unique_id", m_deviceImage->m_UniqueID.toStdString().c_str());
+    EXPECT_FALSE(m_deviceImage->m_Enable);
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_name)
@@ -134,7 +154,7 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_subTitle)
     EXPECT_STREQ("Device", title.toStdString().c_str());
 }
 
-TEST_F(UT_DeviceImage, UT_DeviceImage_getOverviewInfo)
+TEST_F(UT_DeviceImage, UT_DeviceImage_getOverviewInfo_001)
 {
     QMap<QString, QString> mapinfo;
     ut_image_sethwinfomap(mapinfo);
@@ -144,19 +164,9 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_getOverviewInfo)
     EXPECT_STREQ("Device (Model)", overview.toStdString().c_str());
 }
 
-EnableDeviceStatus ut_image_enableDeviceByDriver()
-{
-    return EnableDeviceStatus::EDS_Faild;
-}
-
-bool ut_image_isenablebydriver_true()
+bool ut_image_enable_true()
 {
     return true;
-}
-
-bool ut_image_isenablebydriver_false()
-{
-    return false;
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_setEnable_001)
@@ -166,7 +176,15 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_setEnable_001)
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_setEnable_002)
 {
-    EXPECT_EQ(EnableDeviceStatus::EDS_NoSerial, m_deviceImage->setEnable(false));
+    m_deviceImage->m_SerialID = "serial";
+    m_deviceImage->m_UniqueID = "unique_id";
+    m_deviceImage->m_SysPath = "path";
+    Stub stub;
+    stub.set(ADDR(DBusEnableInterface, enable), ut_image_enable_true);
+
+    EnableDeviceStatus ret = m_deviceImage->setEnable(false);
+    EXPECT_EQ(EnableDeviceStatus::EDS_Success, ret);
+    EXPECT_FALSE(m_deviceImage->m_Enable);
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_enable)
@@ -188,8 +206,8 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_loadBaseDeviceInfo)
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_loadOtherDeviceInfo)
 {
-//    m_deviceImage->loadOtherDeviceInfo();
-//    EXPECT_EQ(1, m_deviceImage->m_LstOtherInfo.size());
+    m_deviceImage->loadOtherDeviceInfo();
+    EXPECT_EQ(0, m_deviceImage->m_LstOtherInfo.size());
 }
 
 TEST_F(UT_DeviceImage, UT_DeviceImage_loadTableData_001)
@@ -197,8 +215,11 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_loadTableData_001)
     QMap<QString, QString> mapinfo;
     ut_image_sethwinfomap(mapinfo);
     m_deviceImage->setInfoFromHwinfo(mapinfo);
+    m_deviceImage->m_Enable = true;
+    m_deviceImage->m_Available = false;
 
     m_deviceImage->loadTableData();
+    EXPECT_STREQ("(Unavailable) Device", m_deviceImage->m_TableData.at(0).toStdString().c_str());
     EXPECT_EQ(3, m_deviceImage->m_TableData.size());
 }
 
@@ -209,5 +230,6 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_loadTableData_002)
     m_deviceImage->setInfoFromHwinfo(mapinfo);
 
     m_deviceImage->loadTableData();
+    EXPECT_STREQ("(Disable) Device", m_deviceImage->m_TableData.at(0).toStdString().c_str());
     EXPECT_EQ(3, m_deviceImage->m_TableData.size());
 }

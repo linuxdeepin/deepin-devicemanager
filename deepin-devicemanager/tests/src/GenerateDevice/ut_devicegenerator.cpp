@@ -46,9 +46,9 @@ public:
         mapInfo1.insert("Capacity", "931 GB");
         mapInfo1.insert("SysFS BusID", "0:0:0:0");
         mapInfo1.insert("Model", "camera");
-        mapInfo1.insert("logical name","enth0");
-        mapInfo1.insert("serial","0000000");
-        mapInfo1.insert("Hardware Class","bluetooth");
+        mapInfo1.insert("logical name", "enth0");
+        mapInfo1.insert("serial", "0000000");
+        mapInfo1.insert("Hardware Class", "bluetooth");
         lstMap.append(mapInfo1);
         QMap<QString, QString> mapInfo2;
         mapInfo2.insert("Manufacturer", "Samsung");
@@ -59,9 +59,9 @@ public:
         mapInfo2.insert("Capacity", "931 GB");
         mapInfo2.insert("SysFS BusID", "0:0:0:0");
         mapInfo2.insert("Model", "camera");
-        mapInfo2.insert("logical name","enth1");
-        mapInfo2.insert("serial","0000000");
-        mapInfo2.insert("Hardware Class","bluetooth");
+        mapInfo2.insert("logical name", "enth1");
+        mapInfo2.insert("serial", "0000000");
+        mapInfo2.insert("Hardware Class", "bluetooth");
         lstMap.append(mapInfo2);
     }
     void TearDown()
@@ -139,13 +139,62 @@ TEST_F(UT_DeviceGenerator, UT_DeviceGenerator_generatorMonitorDevice)
     EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceMonitor.size());
 }
 
+const QList<QMap<QString, QString> > &ut_DeviceGenerator_cmdInfo_hwinfonetwork(void *obj, const QString &key)
+{
+    if ("hwinfo_network" == key) {
+        QMap<QString, QString> mapInfo;
+        mapInfo.insert("Unique ID", "Ij4C.ndpeucax6V1");
+        mapInfo.insert("Parent ID", "c3qJ.NibVsBb6xb5");
+        mapInfo.insert("SysFS ID", "/class/net/enp2s0");
+        mapInfo.insert("SysFS Device Link", "/devices/pci0000:00/0000:00:1c.0/0000:02:00.0");
+        mapInfo.insert("Hardware Class", "network interface");
+        mapInfo.insert("Model", "Ethernet network interface");
+        mapInfo.insert("Driver", "r8169");
+        mapInfo.insert("Driver Modules", "r8169");
+        mapInfo.insert("Device File", "enp2s0");
+        mapInfo.insert("HW Address", "f4:b5:20:24:5e:4f");
+        mapInfo.insert("Permanent HW Address", "f4:b5:20:24:5e:4f");
+        mapInfo.insert("Link detected", "yes");
+        mapInfo.insert("Config Status", "cfg=new, avail=yes, need=no, active=unknown");
+        mapInfo.insert("Attached to", "#6 (Ethernet controller)");
+        lstMap.clear();
+        lstMap.append(mapInfo);
+        QMap<QString, QString> mapInfo1;
+        mapInfo1.insert("Unique ID", "Ij4C.ndpeucax6V1");
+        mapInfo1.insert("Parent ID", "c3qJ.NibVsBb6xb5");
+        mapInfo1.insert("SysFS ID", "/class/net/enp2s0");
+        mapInfo1.insert("SysFS Device Link", "/devices/pci0000:00/0000:00:1c.0/0000:02:00.0");
+        mapInfo1.insert("Hardware Class", "network");
+        lstMap.append(mapInfo);
+    } else if ("lshw_network" == key) {
+        QMap<QString, QString> mapInfo;
+        mapInfo.insert("description", "Ethernet interface");
+        mapInfo.insert("product", "RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller");
+        mapInfo.insert("vendor", "Realtek Semiconductor Co., Ltd.");
+        mapInfo.insert("physical id", "0");
+        mapInfo.insert("bus info", "pci@0000:02:00.0");
+        mapInfo.insert("logical name", "enp2s0");
+        mapInfo.insert("version", "15");
+        mapInfo.insert("serial", "f4:b5:20:24:5e:4f");
+        mapInfo.insert("size", "1Gbit/s");
+        mapInfo.insert("capacity", "1Gbit/s");
+        mapInfo.insert("width", "64 bits");
+        mapInfo.insert("clock", "33MHz");
+        mapInfo.insert("capabilities", "pm msi pciexpress msix bus_master cap_list ethernet");
+        lstMap.clear();
+        lstMap.append(mapInfo);
+    }
+
+    return lstMap;
+}
+
 //virtual void generatorNetworkDevice();
 TEST_F(UT_DeviceGenerator, UT_DeviceGenerator_generatorNetworkDevice)
 {
     Stub stub;
-    stub.set(ADDR(DeviceManager, cmdInfo), ut_DeviceGenerator_cmdInfo);
+    stub.set(ADDR(DeviceManager, cmdInfo), ut_DeviceGenerator_cmdInfo_hwinfonetwork);
     m_deviceGenerator->generatorNetworkDevice();
-    EXPECT_FALSE(DeviceManager::instance()->m_ListDeviceNetwork.size());
+    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceNetwork.size());
 }
 
 //virtual void generatorAudioDevice();

@@ -295,7 +295,7 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
      * ALC887:
     */
     foreach (const QString &line, lines) {
-        QRegExp reg(".*autoconfig for ([A-Za-z0-9]{6}[ -][A-Za-z0-9]+):.*");
+        QRegExp reg(".*autoconfig for ([A-Za-z0-9]{6}( [A-Za-z0-9]+|-[A-Za-z0-9]+|)):.*");
         if (reg.exactMatch(line)) {
             QString chip = reg.cap(1);
             mapInfo["chip"] = chip;
@@ -445,97 +445,6 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             addMapInfo("hwinfo_display", mapInfo);
         } else {
             addUsbMapInfo("hwinfo_usb", mapInfo);
-        }
-    }
-}
-
-void CmdTool::getRemoveAuthInfo(const QString &info, QList<QMap<QString, QString>> &lstMap)
-{
-    if (!info.isEmpty()) {
-        QStringList riLst = info.split("\n\n");
-        foreach (const QString &item, riLst) {
-            QStringList lines = item.split("\n");
-            if (lines.size() < 3)
-                continue;
-            QMap<QString, QString> mapInfo;
-            foreach (const QString &line, lines) {
-                QStringList words = line.split(" : ");
-                if (words.size() != 2)
-                    continue;
-                mapInfo.insert(words[0], words[1].replace("/sys", ""));
-            }
-            lstMap.push_back(mapInfo);
-        }
-    }
-}
-
-void CmdTool::getAuthorizedInfo(QStringList &lstAuth)
-{
-    QString authInfo;
-    DBusEnableInterface::getInstance()->getAuthorizedInfo(authInfo);
-    if (!authInfo.isEmpty()) {
-        lstAuth = authInfo.split("\n");
-    }
-}
-
-void CmdTool::updateMapInfo(QList<QMap<QString, QString>> &removeLstMap, QMap<QString, QString> &mapInfo)
-{
-    // 键盘不禁用
-    if ("keyboard" == mapInfo["Hardware Class"]) {
-        return;
-    }
-    // 此处通过hwinfo获取无线网卡信息时会有两段同样的信息，需要去重操作
-    if ("network" == mapInfo["Hardware Class"]) {
-        return;
-    }
-
-    QList<QMap<QString, QString>>::iterator it = removeLstMap.begin();
-    for (; it != removeLstMap.end(); ++it) {
-        if (mapInfo.find("Module Alias") != mapInfo.end()
-                && (*it)["unique_id"] == mapInfo["Module Alias"]
-                && (*it)["path"] == mapInfo["SysFS ID"]) {
-            mapInfo.insert("Enable", (*it)["enable"]);
-            mapInfo.insert("path", (*it)["path"]);
-            mapInfo.insert("name", (*it)["name"]);
-            removeLstMap.erase(it);
-            return;
-        }
-
-        // 网卡的唯一标识使用 Permanent HW Address
-        if (mapInfo.find("Permanent HW Address") != mapInfo.end()
-                && (*it)["unique_id"] == mapInfo["Permanent HW Address"]) {
-            mapInfo.insert("Enable", (*it)["Enable"]);
-            mapInfo.insert("path", (*it)["path"]);
-            mapInfo.insert("name", (*it)["name"]);
-            removeLstMap.erase(it);
-            return;
-        }
-
-        // usb无线网卡
-        if ((*it)["path"].contains("usb")) {
-            continue;
-        }
-        if (mapInfo["SysFS ID"] == (*it)["path"] || mapInfo["SysFS Device Link"] == (*it)["path"]) {
-            QString hclass = mapInfo["Hardware Class"];
-            mapInfo.clear();
-            mapInfo.insert("path", (*it)["path"]);
-            mapInfo.insert("name", (*it)["name"]);
-            mapInfo.insert("Enable", "0");
-            mapInfo.insert("Hardware Class", hclass);
-            removeLstMap.erase(it);
-            return;
-        }
-    }
-}
-
-void CmdTool::clearUsbDevice(QList<QMap<QString, QString> > &removeLstMap)
-{
-    // 禁用后拔掉，还能获取信息
-    for (int index = 0; index < removeLstMap.size(); index++) {
-        const QMap<QString, QString> &map = removeLstMap[index];
-        if (map["path"].contains("usb") && map["Hardware Class"] != "network interface") {
-            removeLstMap.removeAt(index);
-            index--;
         }
     }
 }
@@ -804,7 +713,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
             QString gpuSize = reg.cap(1);
             int numSize = gpuSize.toInt();
             numSize /= 1024;
-            if (numSize > 1024) {
+            if (numSize >= 1024) {   // Bug109782 1024MB -> 1G
                 numSize /= 1024;
                 gpuSize = "null=" + QString::number(numSize) + "GB";   // 从nvidi-setting中获取显存信息没有Unique id ,格式与dmesg中获取信息保持一致,故添加"null="
             } else {

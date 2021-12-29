@@ -57,11 +57,6 @@ int ut_itemdelegate_pixelMetric()
     return 10;
 }
 
-bool ut_itemdelegate_isValid()
-{
-    return true;
-}
-
 DStyle *ut_style()
 {
     return logViewItemDelegateSytle;
@@ -94,6 +89,6 @@ TEST_F(UT_LogViewItemDelegate, UT_LogViewItemDelegate_sizeHint)
     QStyleOptionViewItem option;
     QModelIndex index = m_view->model()->index(0, 0);
     QSize size = m_logDelegate->sizeHint(option, index);
-    EXPECT_EQ(6,size.width());
-    EXPECT_EQ(36,size.height());
+    EXPECT_EQ(6, size.width());
+    EXPECT_EQ(36, size.height());
 }

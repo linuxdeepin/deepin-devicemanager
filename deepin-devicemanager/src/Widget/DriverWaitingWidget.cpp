@@ -40,8 +40,15 @@ void DriverWaitingWidget::init()
     QColor color = DGuiApplicationHelper::adjustColor(palette.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -10);
     palette.setColor(QPalette::WindowText, color);
     mp_Label->setPalette(palette);
-}
 
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, &DriverWaitingWidget::onUpdateTheme);
+}
+void DriverWaitingWidget::onUpdateTheme()
+{
+    DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+    plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
+    mp_Label->setPalette(plt);
+}
 void DriverWaitingWidget::setValue(int value)
 {
     mp_Progress->setValue(value);

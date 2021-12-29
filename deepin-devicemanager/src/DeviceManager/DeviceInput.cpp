@@ -2,6 +2,7 @@
 #include "DeviceInput.h"
 #include "DeviceManager.h"
 #include "DBusEnableInterface.h"
+#include "DBusTouchPad.h"
 
 // Qt库文件
 #include <QDebug>
@@ -63,6 +64,11 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    //取触摸板的状态
+    if(mapInfo.find("Model") != mapInfo.end() && mapInfo["Model"].contains("Touchpad", Qt::CaseInsensitive)){
+        m_Enable = DBusTouchPad::instance()->getEnable();
+    }
+
     if(mapInfo.find("Enable") != mapInfo.end()){
         m_Enable = false;
     }
@@ -200,21 +206,35 @@ const QString DeviceInput::getOverviewInfo()
     return ov;
 }
 
+/**
+ * @brief setEnable : 设置禁用
+ * @param enable : 启用禁用
+ * @return 返回操作是否成功
+ *
+ * 修改：修改触摸板禁用方法，改为调用daemon提供的接口
+ */
 EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
-    if(m_SerialID.isEmpty()){
-        return EDS_NoSerial;
-    }
-
-    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
-        return EDS_Faild;
-    }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
-    if(res){
+    if(m_Name.contains("Touchpad", Qt::CaseInsensitive)){
+        DBusTouchPad::instance()->setEnable(e);
         m_Enable = e;
+        return EDS_Success;
     }
-    // 设置设备状态
-    return res ? EDS_Success : EDS_Faild;
+    else {
+        if(m_SerialID.isEmpty()){
+            return EDS_NoSerial;
+        }
+
+        if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+            return EDS_Faild;
+        }
+        bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
+        if(res){
+            m_Enable = e;
+        }
+        // 设置设备状态
+        return res ? EDS_Success : EDS_Faild;
+    }
 }
 
 bool DeviceInput::enable()

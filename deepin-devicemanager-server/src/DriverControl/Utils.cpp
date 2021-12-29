@@ -31,7 +31,6 @@
 #include <fcntl.h>
 
 const QString BLACKLIST_CONF = "/etc/modprobe.d/blacklist-devicemanager.conf";
-const QString DEVICEMANAGER = "deepin-devicemanager";
 
 Utils::Utils()
 {
@@ -95,7 +94,6 @@ bool Utils::addModBlackList(const QString &moduleName)
     process.start(QString("echo blacklist %1 >> %2").arg(moduleName).arg(BLACKLIST_CONF));
     if (!process.waitForFinished())
         return  false;
-
     return  true;
 }
 
@@ -105,7 +103,6 @@ bool Utils::unInstallPackage(const QString &packageName)
     process.start(QString("apt remove %1").arg(packageName));
     if (!process.waitForFinished())
         return  false;
-
     return  true;
 }
 
@@ -119,10 +116,6 @@ bool Utils::isDriverPackage(const QString &filepath)
     if (!QFile::exists(filepath)) {
         return  false;
     }
-    // 该过滤方法无法设备管理器自己，先添加特殊处理
-    if(filepath.contains(DEVICEMANAGER)){
-        return false;
-    }
     bool bsuccess = false;
     QDir tmpDir = QDir::temp();
     QString tmpPath = QString("devicemanager-%1").arg(QUuid::createUuid().toString(QUuid::WithoutBraces));
@@ -132,9 +125,11 @@ bool Utils::isDriverPackage(const QString &filepath)
         QProcess process;
         process.start("sh", QStringList() << "-c" << QString("dpkg-deb -x '%1' %2").arg(filepath).arg(strExtract));
         if (process.waitForFinished()) {
-            //查找关键字 ko insmod modprobe和 路径 /lib/module
-            process.start("sh", QStringList() << "-c" << QString("grep -irHE 'insmod|modprobe|/lib/module' %1  ||"
-                                                                 "find %1 -name '*.ko' -o -name '*.ppd'").arg(strExtract));
+            // 2021-12-24 liujuna@uniontech.com 修改过滤规则
+                // 关键字查找 insmod modprobe和 路径 /lib/module 会在设备管理器本身(后台服务)和libhd等安装包中返回true，因此暂不可使用
+                // 英伟达驱动中找不到 .ko 和 .ppd 等信息 ， 但是可以找到 nvidia*.ko 字段，因此添加 nvidia*.ko 过滤字段
+                // 不能直接通过包名判断 比如 "deepin-devicemanager_1.0.deb" 判断是否包含 "deepin-devicemanager" 此时同样会过滤 "/home/uos/deepin-devicemanager/driver.deb"
+            process.start("sh", QStringList() << "-c" << QString("grep -irHE 'nvidia*.ko' %1 || find %1 -name '*.ko' -o -name '*.ppd'").arg(strExtract));
             if (process.waitForFinished()) {
                 //获取查找结果，有结果不为空
                 QString strKeyContent = process.readAllStandardOutput();
@@ -146,7 +141,6 @@ bool Utils::isDriverPackage(const QString &filepath)
         }
         //此处主动调用删除临时文件，临时文件在/tmp目录每次重启会自动清除，所以不对删除结果做处理
         tmpDir.removeRecursively();
-
     }
     return  bsuccess;
 }

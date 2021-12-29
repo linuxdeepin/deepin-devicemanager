@@ -337,18 +337,18 @@ void ut_manager_setgpuLshwInfo(QMap<QString, QString> &mapLshw)
 
 TEST_F(UT_DeviceManager, UT_DeviceManager_setGpuInfoFromLshw)
 {
-//    QMap<QString, QString> mapinfo;
-//    ut_manager_setgpuLshwInfo(mapinfo);
+    QMap<QString, QString> mapinfo;
+    ut_manager_setgpuLshwInfo(mapinfo);
 
-//    DeviceGpu *gpu = new DeviceGpu;
-//    gpu->m_HwinfoToLshw = "01:00.0";
-//    DeviceManager::instance()->m_ListDeviceGPU.append(gpu);
+    DeviceGpu *gpu = new DeviceGpu;
+    gpu->m_HwinfoToLshw = "0000:01:00.0";
+    DeviceManager::instance()->m_ListDeviceGPU.append(gpu);
 
-//    DeviceManager::instance()->setGpuInfoFromLshw(mapinfo);
-//    EXPECT_STREQ("GK208B [GeForce GT 730]", gpu->m_Name.toStdString().c_str());
+    DeviceManager::instance()->setGpuInfoFromLshw(mapinfo);
+    EXPECT_STREQ("GK208B [GeForce GT 730]", gpu->m_Name.toStdString().c_str());
 
-//    DeviceManager::instance()->m_ListDeviceGPU.clear();
-//    delete gpu;
+    DeviceManager::instance()->m_ListDeviceGPU.clear();
+    delete gpu;
 }
 
 TEST_F(UT_DeviceManager, UT_DeviceManager_networkDriver)

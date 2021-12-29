@@ -48,6 +48,7 @@ private:
      * @brief init 初始化界面
      */
     void init();
+    void onUpdateTheme();
 private:
     DWaterProgress        *mp_Progress;
     DLabel                *mp_Label;

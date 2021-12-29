@@ -39,11 +39,6 @@ public:
     DeviceStorage *m_deviceStorage;
 };
 
-bool ut_DeviceStorage_exacMatch()
-{
-    return true;
-}
-
 void ut_storage_setHwinfoInfo(QMap<QString, QString> &mapinfo)
 {
     mapinfo.insert("SysFS BusID", "nvme0n12:0:0:0");

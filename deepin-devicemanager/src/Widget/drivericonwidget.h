@@ -40,8 +40,8 @@ public:
      * @param parent
      */
     explicit DriverIconWidget(const QString &strTitle,
-                          const QString &strDesc,
-                          QWidget *parent = nullptr);
+                              const QString &strDesc,
+                              QWidget *parent = nullptr);
     /**
      * @brief DriverIconWidget 返回有icon的widget
      * @param pixmap 图标
@@ -50,9 +50,9 @@ public:
      * @param parent
      */
     explicit DriverIconWidget(const QPixmap &pixmap,
-                          const QString &strTitle,
-                          const QString &strDesc,
-                          QWidget *parent = nullptr);
+                              const QString &strTitle,
+                              const QString &strDesc,
+                              QWidget *parent = nullptr);
 
     virtual ~DriverIconWidget();
 
@@ -66,12 +66,6 @@ private:
     void initUI(QWidget *iconWidget, const QString &strTitle, const QString &strDesc);
 
 public:
-    /**
-     * @brief updateProgress 更新进度
-     * @param progress 当前进度
-     * @param detail 描述
-     */
-    void updateProgress(qint32 progress, const QString &detail);
 
 signals:
     /**

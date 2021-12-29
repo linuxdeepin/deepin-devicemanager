@@ -123,11 +123,6 @@ TEST_F(UT_TextBrowser, UT_TextBrowser_slotActionCopy)
     EXPECT_STREQ("/", clipboard->text().toStdString().c_str());
 }
 
-bool ut_text_enable()
-{
-    return false;
-}
-
 TEST_F(UT_TextBrowser, UT_TextBrowser_domTitleInfo)
 {
     DeviceInput *device = new DeviceInput;
