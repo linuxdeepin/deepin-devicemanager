@@ -115,12 +115,17 @@ signals:
      * @param path
      */
     void startLoadDrivers(QStandardItemModel* model, bool includeSub, const QString &path);
-
+private slots:
+    /**
+     * @brief onUpdateTheme 更新主题
+     */
+    void onUpdateTheme();
 private:
     DStackedWidget             *mp_StackWidget = nullptr;
     WaitingWidget              *mp_WaitingWidget = nullptr;
     DriverListView             *mp_ListView = nullptr;
     Dtk::Widget::DLabel        *mp_tipLabel;
+    DLabel                     *mp_titleLabel;
     QStandardItemModel         *mp_model;
     GetDriverNameModel         *mp_GetModel;
     QThread                    *mp_Thread = nullptr;

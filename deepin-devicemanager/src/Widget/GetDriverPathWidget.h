@@ -74,10 +74,15 @@ signals:
      * @brief signalNotLocalFolder
      */
     void signalNotLocalFolder(bool isLocal);
-
+private slots:
+    /**
+     * @brief onUpdateTheme 更新主题
+     */
+    void onUpdateTheme();
 private:
     UrlChooserEdit *mp_fileChooseEdit;
     DCheckBox      *mp_includeCheckBox;
     DLabel         *mp_tipLabel;
+    DLabel         *mp_titleLabel;
 };
 #endif // GETDRIVERLSTDIALOG_H

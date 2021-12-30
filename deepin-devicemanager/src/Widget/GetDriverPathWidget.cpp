@@ -1,5 +1,6 @@
 #include "GetDriverPathWidget.h"
 #include "UrlChooserEdit.h"
+#include "MacroDefinition.h"
 
 #include <DApplicationHelper>
 
@@ -16,6 +17,8 @@ GetDriverPathWidget::GetDriverPathWidget(QWidget *parent)
 
 GetDriverPathWidget::~GetDriverPathWidget()
 {
+    DELETE_PTR(mp_tipLabel);
+    DELETE_PTR(mp_titleLabel);
 }
 
 QString GetDriverPathWidget::path()
@@ -45,9 +48,9 @@ void GetDriverPathWidget::init()
     mainLayout->setContentsMargins(0, 10, 0, 0);
 
     QHBoxLayout *hLayout1 = new QHBoxLayout;
-    DLabel *titleLable = new DLabel(QObject::tr("Search for drivers in this path"), this);
+    mp_titleLabel = new DLabel(QObject::tr("Search for drivers in this path"), this);
     hLayout1->addStretch();
-    hLayout1->addWidget(titleLable);
+    hLayout1->addWidget(mp_titleLabel);
     hLayout1->addStretch();
 
     mainLayout->addStretch();
@@ -60,20 +63,26 @@ void GetDriverPathWidget::init()
     mainLayout->addSpacing(20);
     mainLayout->addWidget(mp_tipLabel);
 
-
     mp_tipLabel->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
     mp_tipLabel->setElideMode(Qt::ElideRight);
     mp_tipLabel->setMinimumHeight(20);
 
-
-    DPalette pa = DApplicationHelper::instance()->palette(titleLable);
+    DPalette pa = DApplicationHelper::instance()->palette(mp_titleLabel);
     QColor color = DGuiApplicationHelper::adjustColor(pa.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -30);
     pa.setColor(QPalette::WindowText, color);
-    titleLable->setPalette(pa);
+    mp_titleLabel->setPalette(pa);
 
     pa = DApplicationHelper::instance()->palette(mp_tipLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
     DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
 
     this->setLayout(mainLayout);
+
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, &GetDriverPathWidget::onUpdateTheme);
+}
+void GetDriverPathWidget::onUpdateTheme()
+{
+    DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+    plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
+    mp_titleLabel->setPalette(plt);
 }

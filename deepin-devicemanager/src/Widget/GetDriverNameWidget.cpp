@@ -13,6 +13,7 @@
 #include <QDir>
 #include <QThread>
 
+#include "MacroDefinition.h"
 GetDriverNameWidget::GetDriverNameWidget(QWidget *parent)
     : DWidget(parent)
     , mp_StackWidget(new DStackedWidget(this))
@@ -37,13 +38,14 @@ GetDriverNameWidget::~GetDriverNameWidget()
         delete mp_GetModel;
         mp_GetModel = nullptr;
     }
+    DELETE_PTR(mp_titleLabel);
 }
 
 void GetDriverNameWidget::init()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->setContentsMargins(0, 0, 0, 0);
-    DLabel *titleLable = new DLabel(tr("Select a driver for update"));
+    mp_titleLabel = new DLabel(tr("Select a driver for update"));
     mp_StackWidget->addWidget(mp_WaitingWidget);
     mp_StackWidget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
     mp_StackWidget->addWidget(mp_ListView);
@@ -60,7 +62,7 @@ void GetDriverNameWidget::init()
     // 上方布局
     QHBoxLayout *hLayout1 = new QHBoxLayout;
     hLayout1->addStretch();
-    hLayout1->addWidget(titleLable);
+    hLayout1->addWidget(mp_titleLabel);
     hLayout1->addStretch();
     mainLayout->addLayout(hLayout1);
 
@@ -80,6 +82,14 @@ void GetDriverNameWidget::init()
     hLayout3->addStretch();
     mainLayout->addLayout(hLayout3);
     this->setLayout(mainLayout);
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, &GetDriverNameWidget::onUpdateTheme);
+}
+
+void GetDriverNameWidget::onUpdateTheme()
+{
+    DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+    plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
+    mp_titleLabel->setPalette(plt);
 }
 
 void GetDriverNameWidget::initConnections()
@@ -158,6 +168,7 @@ void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
 void GetDriverNameWidget::slotFinishLoadDrivers()
 {
     reloadDriversListPages();
+    mp_ListView->setModel(nullptr);
     mp_ListView->setModel(mp_model);
     mp_ListView->setColumnWidth(0, 40);
     updateTipLabelText("");
