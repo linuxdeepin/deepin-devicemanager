@@ -84,3 +84,13 @@ TEST_F(UT_LogviewHeaderView, UT_LogviewHeaderView_sizeHint)
     EXPECT_EQ(640, size.width());
     EXPECT_EQ(37, size.height());
 }
+
+TEST_F(UT_LogviewHeaderView, UT_LogviewHeaderView_sectionSizeHint)
+{
+    Stub stub;
+    stub.set(ADDR(DApplication, style), ut_header_style);
+    int size = m_logViewHeaderView->sectionSizeHint(0);
+
+    EXPECT_EQ(38, size);
+}
+

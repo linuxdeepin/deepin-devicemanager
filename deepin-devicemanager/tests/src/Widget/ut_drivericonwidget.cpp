@@ -33,11 +33,14 @@ public:
         QIcon icon(QIcon::fromTheme("cautious"));
         QPixmap pic = icon.pixmap(80, 80);
         m_DriverIconWidgetPixMap = new DriverIconWidget(pic, "Warning", "The device will be unavailable after the driver uninstallation");
+        m_DriverIconWidget = new DriverIconWidget("", "", nullptr);
     }
     void TearDown()
     {
         delete m_DriverIconWidgetPixMap;
+        delete m_DriverIconWidget;
     }
 
     DriverIconWidget *m_DriverIconWidgetPixMap;
+    DriverIconWidget *m_DriverIconWidget;
 };

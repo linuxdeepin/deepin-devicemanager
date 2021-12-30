@@ -117,3 +117,43 @@ TEST_F(UT_DriverListView, UT_DriverListView_keyPressEvent_003)
     delete textItem;
     delete model;
 }
+
+int ut_driverlistview_pixelMetric()
+{
+    return 20;
+}
+
+DStyle *ut_driverlistview_style()
+{
+    return dl_style;
+}
+
+TEST_F(UT_DriverListView, UT_DriverListView_drawRow)
+{
+    QStandardItem *icomItem = new QStandardItem;
+    QString path = "/data/home/jixiaomei/.local/share/Trash/files/deepin-devicemanager_5.6.12.13-1_arm64.deb";
+    QFileInfo info(path);
+    QFileIconProvider icon_provider;
+    QIcon icon = icon_provider.icon(info);
+    icomItem->setData(icon, Qt::DecorationRole);
+    icomItem->setData(QVariant::fromValue(path), Qt::UserRole);
+    QStandardItem *textItem = new QStandardItem("deepin-devicemanager_5.6.12.13-1_arm64.deb");
+    QStandardItemModel *model = new QStandardItemModel();
+    m_DriverListView->setModel(model);
+    model->setItem(0, 0, icomItem);
+    model->setItem(0, 1, textItem);
+
+    Stub stub;
+    stub.set((int (DStyle::*)(DStyle::PixelMetric, const QStyleOption *, const QWidget * widget) const)ADDR(DStyle, pixelMetric), ut_driverlistview_pixelMetric);
+    stub.set(ADDR(DApplication, style), ut_driverlistview_style);
+
+    QStyleOptionViewItem option;
+    QPainter painter(m_DriverListView);
+    QModelIndex index = m_DriverListView->model()->index(0, 0);
+    m_DriverListView->drawRow(&painter, option, index);
+    EXPECT_FALSE(m_DriverListView->grab().isNull());
+
+    delete icomItem;
+    delete textItem;
+    delete model;
+}

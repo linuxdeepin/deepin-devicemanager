@@ -135,18 +135,15 @@ TEST_F(UT_PageDriverControl, UT_PageDriverControl_keyPressEvent)
     EXPECT_TRUE(m_PageDriverControlInstall->event(&keyPressEvent));
 }
 
-TEST_F(UT_PageDriverControl, UT_PageDriverControl_closeEvent)
+TEST_F(UT_PageDriverControl, UT_PageDriverControl_installDriverLogical_001)
 {
-
+    m_PageDriverControlInstall->installDriverLogical();
+    EXPECT_GE(1, m_PageDriverControlInstall->mp_stackWidget->currentIndex());
 }
 
-TEST_F(UT_PageDriverControl, UT_PageDriverControl_initErrMsg)
+TEST_F(UT_PageDriverControl, UT_PageDriverControl_installDriverLogical_002)
 {
-
+    m_PageDriverControlInstall->mp_stackWidget->setCurrentIndex(1);
+    m_PageDriverControlInstall->installDriverLogical();
+    EXPECT_EQ(1, m_PageDriverControlInstall->mp_stackWidget->currentIndex());
 }
-
-TEST_F(UT_PageDriverControl, UT_PageDriverControl_errMsg)
-{
-
-}
-

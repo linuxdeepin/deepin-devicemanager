@@ -49,28 +49,28 @@ public:
 
 TEST_F(UT_TextBrowser, UT_TextBrowser_showDeviceInfo)
 {
-//    DeviceInput *device = new DeviceInput;
-//    device->m_Name = "mouse";
-//    device->m_Interface = "USB";
-//    QList<DeviceBaseInfo *> bInfo;
-//    bInfo.append(device);
-//    tBrowser->showDeviceInfo(bInfo.at(0));
-//    EXPECT_STREQ("mouse\nName:\nmouse\nInterface:\nUSB\n",tBrowser->toPlainText().toStdString().c_str());
-//    delete device;
+    DeviceInput *device = new DeviceInput;
+    device->m_Name = "mouse";
+    device->m_Interface = "USB";
+    QList<DeviceBaseInfo *> bInfo;
+    bInfo.append(device);
+    tBrowser->showDeviceInfo(bInfo.at(0));
+    EXPECT_STREQ("(Unavailable)mouse ", tBrowser->toPlainText().toStdString().c_str());
+    delete device;
 }
 
 TEST_F(UT_TextBrowser, UT_TextBrowser_updateInfo)
 {
-//    DeviceInput *device = new DeviceInput;
-//    device->m_Name = "keyboard";
-//    device->m_Interface = "USB";
-//    QList<DeviceBaseInfo *> bInfo;
-//    bInfo.append(device);
-//    tBrowser->mp_Info = bInfo.at(0);
-//    tBrowser->m_ShowOtherInfo = true;
-//    tBrowser->updateInfo();
-//    EXPECT_STREQ("keyboard\nName:\nkeyboard\nInterface:\nUSB\n",tBrowser->toPlainText().toStdString().c_str());
-//    delete device;
+    DeviceInput *device = new DeviceInput;
+    device->m_Name = "keyboard";
+    device->m_Interface = "USB";
+    QList<DeviceBaseInfo *> bInfo;
+    bInfo.append(device);
+    tBrowser->mp_Info = bInfo.at(0);
+    tBrowser->m_ShowOtherInfo = true;
+    tBrowser->updateInfo();
+    EXPECT_STREQ("(Unavailable)keyboard ", tBrowser->toPlainText().toStdString().c_str());
+    delete device;
 }
 
 QString ut_selectedText()
@@ -157,4 +157,18 @@ TEST_F(UT_TextBrowser, UT_TextBrowser_focusInEvent)
     QFocusEvent focusd(QFocusEvent::FocusOut);
     EXPECT_TRUE(tBrowser->event(&focusd));
     delete device;
+}
+
+void ut_text_exec()
+{
+    return;
+}
+
+TEST_F(UT_TextBrowser, UT_TextBrowser_slotShowMenu)
+{
+    Stub stub;
+    stub.set((QAction * (QMenu::*)(const QPoint &, QAction *))ADDR(QMenu, exec), ut_text_exec);
+
+    tBrowser->slotShowMenu(QPoint(0, 0));
+    EXPECT_EQ(tBrowser->mp_Menu->actions().size(), 3);
 }

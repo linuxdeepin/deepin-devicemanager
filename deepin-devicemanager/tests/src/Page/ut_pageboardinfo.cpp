@@ -56,6 +56,12 @@ TEST_F(PageBoardInfo_UT, ut_updateInfo)
     delete device;
 }
 
+void ut_board_getOtherInfoPair(void *obj, const QList<DeviceBaseInfo *> &lst, QList<QPair<QString, QString>> &lstPair)
+{
+    lstPair.append(QPair<QString, QString>("/", "abc:def\n123:456"));
+    lstPair.append(QPair<QString, QString>("/", "abc:def\n123:456"));
+}
+
 TEST_F(PageBoardInfo_UT, ut_loadDeviceInfo)
 {
     DeviceBios *device = new DeviceBios;
@@ -66,7 +72,11 @@ TEST_F(PageBoardInfo_UT, ut_loadDeviceInfo)
     bInfo.append(device);
     QList<QPair<QString, QString>> lst;
     lst.append(QPair<QString, QString>("/", "abc:def\n123:456"));
+    Stub stub;
+    stub.set(ADDR(PageBoardInfo, getOtherInfoPair), ut_board_getOtherInfoPair);
+
     m_pageBoardInfo->loadDeviceInfo(bInfo, lst);
+
     EXPECT_FALSE(m_pageBoardInfo->mp_Content->toString().isEmpty());
     delete device;
 }
@@ -82,7 +92,7 @@ TEST_F(PageBoardInfo_UT, ut_getOtherInfoPair)
     QList<QPair<QString, QString>> lst;
     lst.append(QPair<QString, QString>("/", "/"));
     m_pageBoardInfo->getOtherInfoPair(bInfo, lst);
-    EXPECT_EQ(1,lst.size());
+    EXPECT_EQ(1, lst.size());
     delete device;
 }
 
@@ -96,6 +106,6 @@ TEST_F(PageBoardInfo_UT, ut_getValueInfo)
     bInfo.append(device);
     QPair<QString, QString> pair = QPair<QString, QString>("/", "/");
     m_pageBoardInfo->getValueInfo(bInfo.at(0), pair);
-    EXPECT_EQ(15,pair.second.size());
+    EXPECT_EQ(15, pair.second.size());
     delete device;
 }
