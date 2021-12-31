@@ -168,10 +168,13 @@ void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
 void GetDriverNameWidget::slotFinishLoadDrivers()
 {
     reloadDriversListPages();
-    mp_ListView->setModel(nullptr);
     mp_ListView->setModel(mp_model);
     mp_ListView->setColumnWidth(0, 40);
     updateTipLabelText("");
+    if(mp_model->rowCount() > 0){
+        QModelIndex index = mp_model->index(0,0);
+        mp_ListView->setCurrentIndex(index);
+    }
 
     mp_StackWidget->setCurrentIndex(1);
     mp_WaitingWidget->stop();
