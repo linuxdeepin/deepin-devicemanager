@@ -29,7 +29,7 @@
 
 - 在設備管理器介面，單擊 ![close](../common/close.svg)，關閉設備管理器。
 - 右鍵單擊任務欄上的 ![deepin_devicemanager](../common/deepin_devicemanager.svg) 圖示，選擇 **全部關閉** 來關閉設備管理器。
-- 在設備管理器介面單擊 ![icon_menu](../common/icon_menu.svg)，選擇 **離開** 來關閉設備管理器。
+- 在設備管理器介面單擊 ![icon_menu](../common/icon_menu.svg)，選擇 **退出** 來關閉設備管理器。
 
 ## 裝置訊息
 
@@ -184,7 +184,7 @@
 1. 在設備管理器介面，單擊 ![icon_menu](../common/icon_menu.svg)。
 2. 單擊 **關於**，查看關於設備管理器的版本和介紹。
 
-### 離開
+### 退出
 
 1. 在設備管理器介面，單擊 ![icon_menu](../common/icon_menu.svg)。
-2. 單擊 **離開**。
+2. 單擊 **退出**。
