@@ -29,6 +29,8 @@ void CoreCpu::addLogicalCpu(int id, const LogicalCpu& lc)
 
 bool CoreCpu::logicalIsExisted(int id)
 {
+    if(m_CoreId < 0)
+        return false;
     return m_MapLogicalCpu.find(id) != m_MapLogicalCpu.end();
 }
 

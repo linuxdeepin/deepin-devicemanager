@@ -36,7 +36,12 @@ CoreCpu& PhysicalCpu::coreCpu(int id)
 bool PhysicalCpu::logicalIsExisted(int id)
 {
     foreach(int i, m_MapCoreCpu.keys()){
-        return m_MapCoreCpu[i].logicalIsExisted(id);
+        if(i < 0){
+            continue;
+        }
+        if(m_MapCoreCpu[i].logicalIsExisted(id)){
+            return true;
+        }
     }
     return false;
 }
@@ -44,6 +49,8 @@ bool PhysicalCpu::logicalIsExisted(int id)
 LogicalCpu& PhysicalCpu::logicalCpu(int id)
 {
     foreach(int i, m_MapCoreCpu.keys()){
+        if(i < 0)
+            continue;
         if(m_MapCoreCpu[i].logicalIsExisted(id))
             return m_MapCoreCpu[i].logicalCpu(id);
     }
