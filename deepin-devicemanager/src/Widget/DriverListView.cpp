@@ -24,6 +24,7 @@
 #include <QHeaderView>
 #include <QPainter>
 #include <QStandardItemModel>
+#include <QPainterPath>
 
 DriverListView::DriverListView(QWidget *parent) : DTreeView(parent)
 {
@@ -32,7 +33,7 @@ DriverListView::DriverListView(QWidget *parent) : DTreeView(parent)
 
 void DriverListView::initUI()
 {
-    setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setFrameStyle(QFrame::NoFrame);
     setHeaderHidden(true);
     DriverListViewDelegate *delegate = new DriverListViewDelegate(this);
@@ -141,19 +142,19 @@ void DriverListView::keyPressEvent(QKeyEvent *event)
             return;
         }
     }
-    QStandardItemModel *pModel = static_cast<QStandardItemModel*>(model());
+    QStandardItemModel *pModel = static_cast<QStandardItemModel *>(model());
 
     int curRow = this->currentIndex().row();
     switch (event->key()) {
-        case Qt::Key_Home:     curRow = 0;
+    case Qt::Key_Home:     curRow = 0;
         break;
-        case Qt::Key_End:      curRow = pModel->rowCount() - 1;
+    case Qt::Key_End:      curRow = pModel->rowCount() - 1;
         break;
-        case Qt::Key_Up:
-        case Qt::Key_Down:
+    case Qt::Key_Up:
+    case Qt::Key_Down:
         break;
     default:
         return;
     }
-    emit clicked(pModel->index(curRow,1));
+    emit clicked(pModel->index(curRow, 1));
 }
