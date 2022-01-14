@@ -41,6 +41,7 @@
 #include <QProcess>
 #include <QJsonArray>
 #include <QThread>
+#include <QDBusInterface>
 
 #define SD_KEY_excat    "excat"
 #define SD_KEY_ver      "version"
@@ -57,6 +58,7 @@
 
 #define E_FILE_NOT_EXISTED 100 // file_not_existed 文件不存在，主要比如点击下一步时拔掉优盘
 #define E_NOT_DRIVER      101 // not driver 非驱动文件
+#define E_NOT_SIGNED      102 // not signed 没有数字签名
 
 #define RETURN_VALUE(flag) \
 {   \
@@ -158,6 +160,12 @@ bool DriverManager::installDriver(const QString &filepath)
     sigProgressDetail(5, "");
     if(!isDriverPackage(filepath)){
         errmsg = QString("%1").arg(E_NOT_DRIVER);
+        sigFinished(false, errmsg);
+        return  false;
+    }
+
+    if(!isSigned(filepath)){
+        errmsg = QString("%1").arg(E_NOT_SIGNED);
         sigFinished(false, errmsg);
         return  false;
     }
@@ -277,7 +285,42 @@ bool DriverManager::isDriverPackage(const QString &filepath)
 
     return  bdriver;
 }
+/**
+ * @brief DriverManager::isModFile 判断文件是否有数字签名
+ * @param filePath 文件路径
+ * @return true:是 false 否
+ */
+bool DriverManager::isSigned(const QString &filepath)
+{
+    //如果是开发者模式，直接返回true
+    QDBusInterface *dbusInterFace = new QDBusInterface("com.deepin.sync.Helper", "/com/deepin/sync/Helper",
+                                                       "com.deepin.sync.Helper", QDBusConnection::systemBus());
+    bool isDeveloperMode = dbusInterFace->property("DeveloperMode").toBool();                            // 判断当前是否处于开发者模式
 
+    if (isDeveloperMode) {
+        return true;
+    }
+
+    QProcess process;
+    QStringList options;
+    QString strSignTool;
+    QString strSignCheckString;
+
+    if (filepath.contains("deb")) {
+        strSignTool = "deepin-deb-verify ";
+        strSignCheckString = "signature verified";
+    } else {
+        strSignTool = "deepin-elf-sign -f ";
+        strSignCheckString = "Verified successfully";
+    }
+    options << "-c" << strSignTool + filepath;
+
+    process.start("/bin/bash", options);
+    process.waitForFinished(-1);
+
+    QString str = process.readAll();
+    return str.contains(strSignCheckString);
+}
 bool DriverManager::isArchMatched(const QString &path)
 {
     QMimeDatabase typedb;

@@ -42,6 +42,7 @@
 #define EUNKNOW         0
 #define E_FILE_NOT_EXISTED 100 // file_not_existed 文件不存在，主要比如点击下一步时拔掉优盘
 #define E_NOT_DRIVER      101 // not driver 非驱动文件
+#define E_NOT_SIGNED      102 // not signed 没有数字签名
 
 using namespace PolkitQt1;
 
@@ -344,6 +345,7 @@ void PageDriverControl::initErrMsg()
     m_MapErrMsg.insert(EAGAIN,tr("The driver module has dependencies"));  // 11	驱动模块被依赖
     m_MapErrMsg.insert(E_FILE_NOT_EXISTED,tr("The selected file does not exist, please select again"));
     m_MapErrMsg.insert(E_NOT_DRIVER,tr("It is not a driver"));
+    m_MapErrMsg.insert(E_NOT_SIGNED,tr("Unable to install - no digital signature"));
 //    m_MapErrMsg.insert(EBADF,tr(""));                // EBADF		9	/* Bad file number */
 //    m_MapErrMsg.insert(EEXIST,tr(""));               // EEXIST		17	/* File exists */
 //    m_MapErrMsg.insert(ENODEV,tr(""));               // ENODEV		19	/* No such device */

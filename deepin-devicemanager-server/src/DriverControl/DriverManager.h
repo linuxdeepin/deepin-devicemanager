@@ -42,6 +42,8 @@ public:
     bool isBlackListed(const QString &modName);
     //判断文件是否驱动包
     bool isDriverPackage(const QString &filepath);
+    //判断文件是否数字签名
+    bool isSigned(const QString &filepath);
     //判断架构是否匹配
     bool isArchMatched(const QString &path);
     //判断包是否有效

@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_HK">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.0" language="zh_HK">
 <context>
     <name>CmdButtonWidget</name>
     <message>
@@ -53,74 +53,74 @@
 <context>
     <name>DeviceAudio</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="197"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="201"/>
         <source>Device Name</source>
         <translation>設備名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="224"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="248"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="252"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="225"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="249"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="229"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="253"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="226"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="230"/>
         <source>Model</source>
         <translation>型號</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="227"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="231"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="232"/>
         <source>Bus Info</source>
         <translation>總線訊息</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="234"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="238"/>
         <source>Chip</source>
         <translation>晶片</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="235"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
         <source>Capabilities</source>
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="240"/>
         <source>Clock</source>
         <translation>時鐘頻率</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="241"/>
         <source>Width</source>
         <translation>位寬</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="242"/>
         <source>Memory Address</source>
         <translation>內存地址</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="243"/>
         <source>IRQ</source>
         <translation>中斷</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="262"/>
         <source>Unavailable</source>
         <translation>不可用</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="262"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="266"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
@@ -128,17 +128,17 @@
 <context>
     <name>DeviceBaseInfo</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="482"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="486"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="483"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="487"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="484"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="488"/>
         <source>Model</source>
         <translation>型號</translation>
     </message>
@@ -164,72 +164,72 @@
 <context>
     <name>DeviceBluetooth</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="171"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="183"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="172"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="184"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="173"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="185"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="174"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="186"/>
         <source>Model</source>
         <translation>型號</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="180"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="192"/>
         <source>Speed</source>
         <translation>速度</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="181"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="193"/>
         <source>Maximum Power</source>
         <translation>最大功率</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="182"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="194"/>
         <source>Driver Version</source>
         <translation>驅動版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="183"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="195"/>
         <source>Driver</source>
         <translation>驅動</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="184"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="196"/>
         <source>Capabilities</source>
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="185"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="197"/>
         <source>Bus Info</source>
         <translation>總線訊息</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="186"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="198"/>
         <source>Logical Name</source>
         <translation>邏輯名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="187"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="199"/>
         <source>MAC Address</source>
         <translation>物理地址</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="199"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="211"/>
         <source>Unavailable</source>
         <translation>不可用</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="215"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
@@ -304,13 +304,13 @@
     <name>DeviceCpu</name>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="235"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="246"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="247"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
@@ -341,7 +341,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="249"/>
         <source>Architecture</source>
         <translation>架構</translation>
     </message>
@@ -367,52 +367,52 @@
         <translation>核</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="219"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="230"/>
         <source>Virtualization</source>
         <translation>虛擬化</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="220"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="231"/>
         <source>Flags</source>
         <translation>特性</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="221"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="232"/>
         <source>Extensions</source>
         <translation>擴展指令集</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="222"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="233"/>
         <source>L3 Cache</source>
         <translation>L3緩存</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="223"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="234"/>
         <source>L2 Cache</source>
         <translation>L2緩存</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="224"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="235"/>
         <source>L1i Cache</source>
         <translation>L1緩存（指令）</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="225"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="236"/>
         <source>L1d Cache</source>
         <translation>L1緩存（數據）</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="226"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="237"/>
         <source>Stepping</source>
         <translation>步進</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="248"/>
         <source>Speed</source>
         <translation>頻率</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="248"/>
         <source>Max Speed</source>
         <translation>最大頻率</translation>
     </message>
@@ -553,62 +553,62 @@
 <context>
     <name>DeviceImage</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="124"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="131"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="125"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="132"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="126"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="133"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="127"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="134"/>
         <source>Model</source>
         <translation>型號</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="128"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="135"/>
         <source>Bus Info</source>
         <translation>總線訊息</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="141"/>
         <source>Speed</source>
         <translation>速度</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="142"/>
         <source>Maximum Power</source>
         <translation>最大功率</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="136"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="143"/>
         <source>Driver</source>
         <translation>驅動</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="137"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="144"/>
         <source>Capabilities</source>
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="145"/>
         <source>Serial Number</source>
         <translation>序列號</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="150"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="157"/>
         <source>Unavailable</source>
         <translation>不可用</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="154"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="161"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
@@ -616,62 +616,62 @@
 <context>
     <name>DeviceInput</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="266"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="267"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="239"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="268"/>
         <source>Model</source>
         <translation>型號</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="240"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="269"/>
         <source>Interface</source>
         <translation>接口</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="241"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="270"/>
         <source>Bus Info</source>
         <translation>總線訊息</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="247"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="276"/>
         <source>Speed</source>
         <translation>頻率</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="248"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="277"/>
         <source>Maximum Current</source>
         <translation>最大電流</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="249"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="278"/>
         <source>Driver</source>
         <translation>驅動</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="250"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="279"/>
         <source>Capabilities</source>
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="251"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="280"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="263"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="292"/>
         <source>Unavailable</source>
         <translation>不可用</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="267"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="296"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
@@ -681,138 +681,119 @@
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="134"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="275"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="997"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1017"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1038"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1049"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1063"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1076"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1091"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1107"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1000"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1020"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1041"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1052"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1066"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1079"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1094"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1110"/>
         <source>Overview</source>
         <translation>概況</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="140"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="253"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1193"/>
         <source>CPU</source>
         <translation>處理器</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="145"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1196"/>
         <source>CPU quantity</source>
         <translation>CPU數量</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="156"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="254"/>
         <source>Motherboard</source>
         <translation>主板</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="161"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="255"/>
         <source>Memory</source>
         <translation>內存</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="166"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="256"/>
         <source>Display Adapter</source>
         <translation>顯示適配器</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="257"/>
         <source>Sound Adapter</source>
         <translation>音頻適配器</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="258"/>
         <source>Storage</source>
         <translation>存儲設備</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="181"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="259"/>
         <source>Other PCI Devices</source>
         <translation>其他PCI設備</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="186"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="260"/>
         <source>Battery</source>
         <translation>電池</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="197"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="261"/>
         <source>Bluetooth</source>
         <translation>藍牙</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="202"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="262"/>
         <source>Network Adapter</source>
         <translation>網絡適配器</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="213"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="263"/>
         <source>Mouse</source>
         <translation>鼠標</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="218"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="264"/>
         <source>Keyboard</source>
         <translation>鍵盤</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="228"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="265"/>
         <source>Monitor</source>
         <translation>顯示設備</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="232"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="266"/>
         <source>CD-ROM</source>
         <translation>光驅</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="236"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="267"/>
         <source>Printer</source>
         <translation>打印機</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="240"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="268"/>
         <source>Camera</source>
         <translation>圖像設備</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="244"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="269"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
         <translation>其他設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1003"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1067"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1098"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1006"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1070"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1101"/>
         <source>Device</source>
         <translation>設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1011"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1071"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1102"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1014"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1074"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1105"/>
         <source>OS</source>
         <translation>操作系統</translation>
     </message>
@@ -956,137 +937,137 @@
 <context>
     <name>DeviceNetwork</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="173"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="177"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="174"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="178"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="175"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="179"/>
         <source>Type</source>
         <translation>類型</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="176"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="180"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="177"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="181"/>
         <source>Bus Info</source>
         <translation>總線訊息</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="178"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="182"/>
         <source>Capabilities</source>
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="179"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="183"/>
         <source>Driver</source>
         <translation>驅動</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="180"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="184"/>
         <source>Driver Version</source>
         <translation>驅動版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="186"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="190"/>
         <source>Maximum Rate</source>
         <translation>最大速率</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="187"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="191"/>
         <source>Negotiation Rate</source>
         <translation>協商速率</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="188"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="192"/>
         <source>Port</source>
         <translation>端口</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="189"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="193"/>
         <source>Multicast</source>
         <translation>組播</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="190"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="194"/>
         <source>Link</source>
         <translation>連接</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="191"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="195"/>
         <source>Latency</source>
         <translation>延遲</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="192"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="196"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="193"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="197"/>
         <source>Firmware</source>
         <translation>固件</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="194"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="198"/>
         <source>Duplex</source>
         <translation>雙工</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="195"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="199"/>
         <source>Broadcast</source>
         <translation>廣播</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="196"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="200"/>
         <source>Auto Negotiation</source>
         <translation>自動協商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="197"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="201"/>
         <source>Clock</source>
         <translation>時鐘頻率</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="198"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
         <source>Width</source>
         <translation>位寬</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="199"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="203"/>
         <source>Memory Address</source>
         <translation>內存地址</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="200"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="204"/>
         <source>IRQ</source>
         <translation>中斷</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="205"/>
         <source>MAC Address</source>
         <translation>物理地址</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="206"/>
         <source>Logical Name</source>
         <translation>邏輯名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="218"/>
         <source>Unavailable</source>
         <translation>不可用</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="222"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
@@ -1428,13 +1409,13 @@
 <context>
     <name>GetDriverNameWidget</name>
     <message>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="42"/>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="110"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="48"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="123"/>
         <source>Select a driver for update</source>
         <translation>選擇需要更新的驅動程序</translation>
     </message>
     <message>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="105"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="118"/>
         <source>No drivers found in this folder</source>
         <translation>所選文件夾未檢測到驅動文件</translation>
     </message>
@@ -1482,12 +1463,12 @@
         <translation>獲取打印機訊息...</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="97"/>
+        <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="98"/>
         <source>Loading Mouse Info...</source>
         <translation>獲取鼠標訊息...</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="98"/>
+        <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="99"/>
         <source>Loading Network Adapter Info...</source>
         <translation>獲取網絡適配器訊息...</translation>
     </message>
@@ -1495,14 +1476,14 @@
 <context>
     <name>LogTreeView</name>
     <message>
-        <location filename="../src/Widget/logtreeview.cpp" line="91"/>
-        <location filename="../src/Widget/logtreeview.cpp" line="127"/>
-        <location filename="../src/Widget/logtreeview.cpp" line="129"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="99"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="135"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="137"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../src/Widget/logtreeview.cpp" line="108"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="116"/>
         <source>Unavailable</source>
         <translation>不可用</translation>
     </message>
@@ -1523,73 +1504,73 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="108"/>
+        <location filename="../src/Page/MainWindow.cpp" line="103"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
         <translation>設備訊息</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="179"/>
+        <location filename="../src/Page/MainWindow.cpp" line="174"/>
         <source>Display shortcuts</source>
         <translation>顯示快捷鍵</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="180"/>
+        <location filename="../src/Page/MainWindow.cpp" line="175"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="181"/>
+        <location filename="../src/Page/MainWindow.cpp" line="176"/>
         <source>Help</source>
         <translation>幫助</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="182"/>
+        <location filename="../src/Page/MainWindow.cpp" line="177"/>
         <source>Copy</source>
         <translation>複製</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="186"/>
+        <location filename="../src/Page/MainWindow.cpp" line="181"/>
         <source>System</source>
         <translation>系統</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="193"/>
+        <location filename="../src/Page/MainWindow.cpp" line="188"/>
         <source>Export</source>
         <translation>導出</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="194"/>
+        <location filename="../src/Page/MainWindow.cpp" line="189"/>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="198"/>
+        <location filename="../src/Page/MainWindow.cpp" line="193"/>
         <source>Device Manager</source>
         <translation>設備管理器</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="354"/>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
         <source>Monitor</source>
         <translation>顯示設備</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="358"/>
+        <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>顯示適配器</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="362"/>
+        <location filename="../src/Page/MainWindow.cpp" line="309"/>
         <source>CPU</source>
         <translation>處理器</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="366"/>
+        <location filename="../src/Page/MainWindow.cpp" line="313"/>
         <source>Network Adapter</source>
         <translation>網絡適配器</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="372"/>
+        <location filename="../src/Page/MainWindow.cpp" line="319"/>
         <source>Battery</source>
         <translation>電池</translation>
     </message>
@@ -1605,132 +1586,137 @@
 <context>
     <name>PageDriverControl</name>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="107"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="240"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="109"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="242"/>
         <source>Updating</source>
         <translation>正在更新</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="112"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="134"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="193"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="114"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="136"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="195"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>取 消</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="113"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="115"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="131"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
         <source>Warning</source>
         <translation>注意</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="131"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
         <source>The device will be unavailable after the driver uninstallation</source>
         <translation>將從系統中卸載此驅動程序，卸載後該設備不可用</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="135"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="137"/>
         <source>Uninstall</source>
         <comment>button</comment>
         <translation>卸 載</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="139"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="141"/>
         <source>Uninstalling</source>
         <translation>正在卸載</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="165"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="167"/>
         <source>Update successful</source>
         <translation>驅動更新成功</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="165"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="167"/>
         <source>Uninstallation successful</source>
         <translation>驅動卸載成功</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="166"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="168"/>
         <source>Update failed</source>
         <translation>驅動更新失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="166"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="168"/>
         <source>Uninstallation failed</source>
         <translation>驅動卸載失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="173"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="175"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>確 定</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="192"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="194"/>
         <source>Next</source>
         <comment>button</comment>
         <translation>下一步</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="213"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="215"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>所選文件夾不存在，請重新選擇</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="218"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="220"/>
         <source>Update</source>
         <comment>button</comment>
         <translation>更 新</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="219"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="221"/>
         <source>Previous</source>
         <comment>button</comment>
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="252"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="254"/>
         <source>Broken package</source>
         <translation>包文件損壞</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="256"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="258"/>
         <source>Unmatched package architecture</source>
         <translation>包文件與系統架構不匹配</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="262"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="269"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="263"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="346"/>
         <source>The selected file does not exist, please select again</source>
         <translation>所選文件不存在，請重新選擇</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="265"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="347"/>
         <source>It is not a driver</source>
         <translation>該文件不是驅動文件</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="350"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
+        <source>Unable to install - no digital signature</source>
+        <translation>無法安裝，安裝包無數字簽名</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="342"/>
         <source>Unknown error</source>
         <translation>未知錯誤</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="351"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="343"/>
         <source>The driver module was not found</source>
         <translation>未發現該驅動模塊</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="352"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="344"/>
         <source>Invalid module format</source>
         <translation>模塊格式無效</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="353"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="345"/>
         <source>The driver module has dependencies</source>
         <translation>驅動模塊被依賴</translation>
     </message>
@@ -1872,34 +1858,34 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="198"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="202"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>SubVendor</source>
         <translation>子製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="199"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
         <source>SubDevice</source>
         <translation>子設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="200"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="204"/>
         <source>Driver</source>
         <translation>驅動</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="205"/>
         <source>Driver Status</source>
         <translation>驅動狀態</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
         <source>Driver Activation Cmd</source>
         <translation>驅動啟動命令</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="207"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="92"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="313"/>
@@ -1907,72 +1893,72 @@
         <translation>配置狀態</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="205"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="158"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="170"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="94"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="231"/>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="166"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="260"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="170"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="310"/>
         <source>physical id</source>
         <translation>物理ID</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="210"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
         <source>latency</source>
         <translation>延遲</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="208"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="212"/>
         <source>Phys</source>
         <translation>Phys</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="213"/>
         <source>Sysfs</source>
         <translation>Sysfs</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="210"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="214"/>
         <source>Handlers</source>
         <translation>進程</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="211"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="224"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="253"/>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="212"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="225"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="254"/>
         <source>EV</source>
         <translation>EV</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="213"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="226"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="255"/>
         <source>KEY</source>
         <translation>KEY</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="219"/>
         <source>Model</source>
         <translation>型號</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="220"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="221"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="218"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="222"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="150"/>
         <source>Bus</source>
         <translation>總線</translation>
     </message>
@@ -2063,7 +2049,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="161"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="142"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="154"/>
         <source>Features</source>
         <translation>特徵</translation>
     </message>
@@ -2090,7 +2076,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="169"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="163"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="175"/>
         <source>UUID</source>
         <translation>UUID</translation>
     </message>
@@ -2218,110 +2204,110 @@
         <translation>當前安裝語言</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="139"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="151"/>
         <source>BD Address</source>
         <translation>藍牙設備地址</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="140"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="152"/>
         <source>ACL MTU</source>
         <translation>ACL MTU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="141"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="153"/>
         <source>SCO MTU</source>
         <translation>SCO MTU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="143"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="155"/>
         <source>Packet type</source>
         <translation>數據包類型</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="144"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="156"/>
         <source>Link policy</source>
         <translation>連接策略</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="145"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="157"/>
         <source>Link mode</source>
         <translation>連接模式</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="146"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="159"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="158"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="171"/>
         <source>Class</source>
         <translation>類別</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="147"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="159"/>
         <source>Service Classes</source>
         <translation>服務類別</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="148"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="160"/>
         <source>Device Class</source>
         <translation>設備類別</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="149"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="161"/>
         <source>HCI Version</source>
         <translation>HCI版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="150"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="162"/>
         <source>LMP Version</source>
         <translation>LMP版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="151"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="163"/>
         <source>Subversion</source>
         <translation>子版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="153"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="165"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
         <source>Device</source>
         <translation>設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="154"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="166"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="86"/>
         <source>Serial ID</source>
         <translation>序列號</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="156"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="168"/>
         <source>product</source>
         <translation>產品</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="157"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="169"/>
         <source>description</source>
         <translation>描述</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="160"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="172"/>
         <source>Powered</source>
         <translation>供電</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="161"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="173"/>
         <source>Discoverable</source>
         <translation>可發現</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="162"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="174"/>
         <source>Pairable</source>
         <translation>可配對</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="164"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="176"/>
         <source>Modalias</source>
         <translation>設置命令別名</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="165"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="177"/>
         <source>Discovering</source>
         <translation>搜索中</translation>
     </message>
@@ -2333,7 +2319,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="88"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="257"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="305"/>
         <source>Device File</source>
         <translation>設備文件</translation>
@@ -2402,337 +2388,337 @@
         <translation>CPU版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="253"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="264"/>
         <source>One</source>
         <translation>單</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="254"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="265"/>
         <source>Two</source>
         <translation>雙</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="255"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="266"/>
         <source>Four</source>
         <translation>四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="256"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="267"/>
         <source>Six</source>
         <translation>六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="257"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="268"/>
         <source>Eight</source>
         <translation>八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="259"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="270"/>
         <source>Ten</source>
         <translation>十</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="260"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
         <source>Twelve</source>
         <translation>十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="261"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="272"/>
         <source>Fourteen</source>
         <translation>十四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="262"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
         <source>Sixteen</source>
         <translation>十六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="263"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
         <source>Eighteen</source>
         <translation>十八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="265"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="276"/>
         <source>Twenty</source>
         <translation>二十</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="266"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="277"/>
         <source>Twenty-two</source>
         <translation>二十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="267"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="278"/>
         <source>Twenty-four</source>
         <translation>二十四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="268"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="279"/>
         <source>Twenty-six</source>
         <translation>二十六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="269"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="280"/>
         <source>Twenty-eight</source>
         <translation>二十八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="282"/>
         <source>Thirty</source>
         <translation>三十</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="272"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="283"/>
         <source>Thirty-two</source>
         <translation>三十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="284"/>
         <source>Thirty-four</source>
         <translation>三十四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
         <source>Thirty-six</source>
         <translation>三十六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="275"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
         <source>Thirty-eight</source>
         <translation>三十八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="277"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="288"/>
         <source>Forty</source>
         <translation>四十</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="278"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="289"/>
         <source>Forty-two</source>
         <translation>四十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="279"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
         <source>Forty-four</source>
         <translation>四十四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="280"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="291"/>
         <source>Forty-six</source>
         <translation>四十六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="281"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="292"/>
         <source>Forty-eight</source>
         <translation>四十八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="283"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="294"/>
         <source>Fifty</source>
         <translation>五十</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="284"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="295"/>
         <source>Fifty-two</source>
         <translation>五十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="296"/>
         <source>Fifty-four</source>
         <translation>五十四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="297"/>
         <source>Fifty-six</source>
         <translation>五十六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="287"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="298"/>
         <source>Fifty-eight</source>
         <translation>五十八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="289"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="300"/>
         <source>Sixty</source>
         <translation>六十</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="301"/>
         <source>Sixty-two</source>
         <translation>六十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="291"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="302"/>
         <source>Sixty-four</source>
         <translation>六十四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="292"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="303"/>
         <source>Sixty-six</source>
         <translation>六十六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="293"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="304"/>
         <source>Sixty-eight</source>
         <translation>六十八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="295"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="306"/>
         <source>Seventy</source>
         <translation>七十</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="296"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="307"/>
         <source>Seventy-two</source>
         <translation>七十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="297"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="308"/>
         <source>Seventy-four</source>
         <translation>七十四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="298"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="309"/>
         <source>Seventy-six</source>
         <translation>七十六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="299"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
         <source>Seventy-eight</source>
         <translation>七十八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="301"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="312"/>
         <source>Eighty</source>
         <translation>八十</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="302"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="313"/>
         <source>Eighty-two</source>
         <translation>八十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="303"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="314"/>
         <source>Eighty-four</source>
         <translation>八十四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="304"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="315"/>
         <source>Eighty-six</source>
         <translation>八十六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="305"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="316"/>
         <source>Eighty-eight</source>
         <translation>八十八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="307"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="318"/>
         <source>Ninety</source>
         <translation>九十</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="308"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="319"/>
         <source>Ninety-two</source>
         <translation>九十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="309"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="320"/>
         <source>Ninety-four</source>
         <translation>九十四</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
         <source>Ninety-six</source>
         <translation>九十六</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
         <source>Ninety-eight</source>
         <translation>九十八</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="313"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="324"/>
         <source>One hundred</source>
         <translation>100</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="314"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="325"/>
         <source>One hundred and Two</source>
         <translation>102</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="315"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
         <source>One hundred and four</source>
         <translation>104</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="316"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
         <source>One hundred and Six</source>
         <translation>106</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="317"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="328"/>
         <source>One hundred and Eight</source>
         <translation>108</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="319"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
         <source>One hundred and Ten</source>
         <translation>110</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="320"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
         <source>One hundred and Twelve</source>
         <translation>112</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="332"/>
         <source>One hundred and Fourteen</source>
         <translation>114</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="333"/>
         <source>One hundred and Sixteen</source>
         <translation>116</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="323"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="334"/>
         <source>One hundred and Eighteen</source>
         <translation>118</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="325"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="336"/>
         <source>One hundred and Twenty</source>
         <translation>120</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="337"/>
         <source>One hundred and Twenty-two</source>
         <translation>122</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="338"/>
         <source>One hundred and Twenty-four</source>
         <translation>124</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="328"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="339"/>
         <source>One hundred and Twenty-six</source>
         <translation>126</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="329"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="340"/>
         <source>One hundred and Twenty-eight</source>
         <translation>128</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="341"/>
         <source>One hundred and Ninety-two</source>
         <translation>一百九十二</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="342"/>
         <source>Two hundred and fifty-six</source>
         <translation>256</translation>
     </message>
@@ -2779,290 +2765,290 @@
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="223"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="252"/>
         <source>Uniq</source>
         <translation>Uniq</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="227"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="256"/>
         <source>MSC</source>
         <translation>MSC</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="229"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="258"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="304"/>
         <source>Hardware Class</source>
         <translation>硬件類別</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="899"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="927"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="963"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
         <source>CPU</source>
         <translation>處理器</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="899"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="927"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="963"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
         <source>No CPU found</source>
         <translation>未發現處理器</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="900"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="928"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="964"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
         <source>Motherboard</source>
         <translation>主板</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="900"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="928"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="964"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
         <source>No motherboard found</source>
         <translation>未發現主板</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="901"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="929"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="965"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
         <source>Memory</source>
         <translation>內存</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="901"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="929"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="965"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
         <source>No memory found</source>
         <translation>未發現內存</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="905"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="933"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="969"/>
         <source>Storage</source>
         <translation>存儲設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="905"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="933"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="969"/>
         <source>No disk found</source>
         <translation>未發現磁盤</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="906"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="934"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="970"/>
         <source>Display Adapter</source>
         <translation>顯示適配器</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="906"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="934"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="970"/>
         <source>No GPU found</source>
         <translation>未發現GPU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="935"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="971"/>
         <source>Monitor</source>
         <translation>顯示設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="935"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="971"/>
         <source>No monitor found</source>
         <translation>未發現顯示設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="905"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="933"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="969"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
         <source>Network Adapter</source>
         <translation>網絡適配器</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="905"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="933"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="969"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
         <source>No network adapter found</source>
         <translation>未發現網絡適配器</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="906"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="934"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="970"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="937"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="973"/>
         <source>Sound Adapter</source>
         <translation>音頻適配器</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="906"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="934"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="970"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="937"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="973"/>
         <source>No audio device found</source>
         <translation>未發現音頻設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="935"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="971"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
         <source>Bluetooth</source>
         <translation>藍牙</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="935"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="971"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
         <source>No Bluetooth device found</source>
         <translation>未發現藍牙設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
         <source>Other PCI Devices</source>
         <translation>其他PCI設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
         <source>No other PCI devices found</source>
         <translation>未發現其他PCI設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="937"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="973"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
         <source>Power</source>
         <translation>電池</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="937"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="973"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
         <source>No battery found</source>
         <translation>未發現電池</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="941"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="977"/>
         <source>Keyboard</source>
         <translation>鍵盤</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="941"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="977"/>
         <source>No keyboard found</source>
         <translation>未發現鍵盤</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="942"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="978"/>
         <source>Mouse</source>
         <translation>鼠標</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="942"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="978"/>
         <source>No mouse found</source>
         <translation>未發現鼠標</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
         <source>Printer</source>
         <translation>打印機</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
         <source>No printer found</source>
         <translation>未發現打印機</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="941"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="977"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="888"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
         <source>Camera</source>
         <translation>圖像設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="941"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="977"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="888"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
         <source>No camera found</source>
         <translation>未發現圖像設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="942"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="978"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="889"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
         <source>CD-ROM</source>
         <translation>光驅</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="942"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="978"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="889"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
         <source>No CD-ROM found</source>
         <translation>未發現光驅</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="890"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
         <source>Other Devices</source>
         <translation>其他設備</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="890"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
         <source>No other devices found</source>
         <translation>未發現其他設備</translation>
     </message>
@@ -3171,12 +3157,12 @@
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="165"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="169"/>
         <source>ioport</source>
         <translation>I/O端口</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="167"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="171"/>
         <source>network</source>
         <translation>網絡</translation>
     </message>
@@ -3437,12 +3423,12 @@
         <translation>設備管理器是查看、管理硬件設備的工具軟件。</translation>
     </message>
     <message>
-        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="9"/>
+        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="10"/>
         <source>Include subfolders</source>
         <translation>包括子文件夾</translation>
     </message>
     <message>
-        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="48"/>
+        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="51"/>
         <source>Search for drivers in this path</source>
         <translation>選擇驅動所在位置</translation>
     </message>
@@ -3451,7 +3437,7 @@
     <name>TableWidget</name>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="26"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="200"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="195"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
@@ -3476,7 +3462,7 @@
         <translation>卸載驅動</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="205"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="200"/>
         <location filename="../src/Widget/TableWidget.cpp" line="260"/>
         <source>Enable</source>
         <translation>啟用</translation>

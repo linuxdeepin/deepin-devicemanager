@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="uk">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.0" language="uk">
 <context>
     <name>CmdButtonWidget</name>
     <message>
@@ -53,74 +53,74 @@
 <context>
     <name>DeviceAudio</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="197"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="201"/>
         <source>Device Name</source>
         <translation>Назва пристрою</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="224"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="248"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="252"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="225"/>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="249"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="229"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="253"/>
         <source>Vendor</source>
         <translation>Постачальник</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="226"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="230"/>
         <source>Model</source>
         <translation>Модель</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="227"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="231"/>
         <source>Version</source>
         <translation>Версія</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="232"/>
         <source>Bus Info</source>
         <translation>Дані щодо каналу</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="234"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="238"/>
         <source>Chip</source>
         <translation>Мікросхема</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="235"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
         <source>Capabilities</source>
         <translation>Можливості</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="240"/>
         <source>Clock</source>
         <translation>Годинник</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="241"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="242"/>
         <source>Memory Address</source>
         <translation>Адреса у пам&apos;яті</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="239"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="243"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="258"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="262"/>
         <source>Unavailable</source>
         <translation>Недоступне</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="262"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="266"/>
         <source>Disable</source>
         <translation>Вимкнути</translation>
     </message>
@@ -128,17 +128,17 @@
 <context>
     <name>DeviceBaseInfo</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="482"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="486"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="483"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="487"/>
         <source>Vendor</source>
         <translation>Постачальник</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="484"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="488"/>
         <source>Model</source>
         <translation>Модель</translation>
     </message>
@@ -164,72 +164,72 @@
 <context>
     <name>DeviceBluetooth</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="171"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="183"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="172"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="184"/>
         <source>Vendor</source>
         <translation>Постачальник</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="173"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="185"/>
         <source>Version</source>
         <translation>Версія</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="174"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="186"/>
         <source>Model</source>
         <translation>Модель</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="180"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="192"/>
         <source>Speed</source>
         <translation>Швидкість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="181"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="193"/>
         <source>Maximum Power</source>
         <translation>Максимальна потужність</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="182"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="194"/>
         <source>Driver Version</source>
         <translation>Версія драйвера</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="183"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="195"/>
         <source>Driver</source>
         <translation>Драйвер</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="184"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="196"/>
         <source>Capabilities</source>
         <translation>Можливості</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="185"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="197"/>
         <source>Bus Info</source>
         <translation>Дані щодо каналу</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="186"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="198"/>
         <source>Logical Name</source>
         <translation>Логічна назва</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="187"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="199"/>
         <source>MAC Address</source>
         <translation>MAC-адреса</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="199"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="211"/>
         <source>Unavailable</source>
         <translation>Недоступне</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="215"/>
         <source>Disable</source>
         <translation>Вимкнути</translation>
     </message>
@@ -304,13 +304,13 @@
     <name>DeviceCpu</name>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="235"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="246"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="247"/>
         <source>Vendor</source>
         <translation>Постачальник</translation>
     </message>
@@ -341,7 +341,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="249"/>
         <source>Architecture</source>
         <translation>Архітектура</translation>
     </message>
@@ -367,52 +367,52 @@
         <translation>Ядра</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="219"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="230"/>
         <source>Virtualization</source>
         <translation>Віртуалізація</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="220"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="231"/>
         <source>Flags</source>
         <translation>Прапорці</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="221"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="232"/>
         <source>Extensions</source>
         <translation>Розширення</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="222"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="233"/>
         <source>L3 Cache</source>
         <translation>Кеш L3</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="223"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="234"/>
         <source>L2 Cache</source>
         <translation>Кеш L2</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="224"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="235"/>
         <source>L1i Cache</source>
         <translation>Кеш L1i</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="225"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="236"/>
         <source>L1d Cache</source>
         <translation>Кеш L1d</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="226"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="237"/>
         <source>Stepping</source>
         <translation>Модифікація</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="248"/>
         <source>Speed</source>
         <translation>Швидкість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="248"/>
         <source>Max Speed</source>
         <translation>Макс. швидкість</translation>
     </message>
@@ -522,7 +522,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="220"/>
         <source>DigitalOutput</source>
-        <translation type="unfinished"/>
+        <translation>DigitalOutput</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
@@ -553,62 +553,62 @@
 <context>
     <name>DeviceImage</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="124"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="131"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="125"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="132"/>
         <source>Vendor</source>
         <translation>Постачальник</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="126"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="133"/>
         <source>Version</source>
         <translation>Версія</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="127"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="134"/>
         <source>Model</source>
         <translation>Модель</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="128"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="135"/>
         <source>Bus Info</source>
         <translation>Дані щодо каналу</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="141"/>
         <source>Speed</source>
         <translation>Швидкість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="142"/>
         <source>Maximum Power</source>
         <translation>Максимальна потужність</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="136"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="143"/>
         <source>Driver</source>
         <translation>Драйвер</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="137"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="144"/>
         <source>Capabilities</source>
         <translation>Можливості</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="145"/>
         <source>Serial Number</source>
         <translation>Серійний номер</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="150"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="157"/>
         <source>Unavailable</source>
         <translation>Недоступне</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceImage.cpp" line="154"/>
+        <location filename="../src/DeviceManager/DeviceImage.cpp" line="161"/>
         <source>Disable</source>
         <translation>Вимкнути</translation>
     </message>
@@ -616,62 +616,62 @@
 <context>
     <name>DeviceInput</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="266"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="267"/>
         <source>Vendor</source>
         <translation>Постачальник</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="239"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="268"/>
         <source>Model</source>
         <translation>Модель</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="240"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="269"/>
         <source>Interface</source>
         <translation>Інтерфейс</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="241"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="270"/>
         <source>Bus Info</source>
         <translation>Дані щодо каналу</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="247"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="276"/>
         <source>Speed</source>
         <translation>Швидкість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="248"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="277"/>
         <source>Maximum Current</source>
         <translation>Максимальний струм</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="249"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="278"/>
         <source>Driver</source>
         <translation>Драйвер</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="250"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="279"/>
         <source>Capabilities</source>
         <translation>Можливості</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="251"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="280"/>
         <source>Version</source>
         <translation>Версія</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="263"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="292"/>
         <source>Unavailable</source>
         <translation>Недоступне</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="267"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="296"/>
         <source>Disable</source>
         <translation>Вимкнути</translation>
     </message>
@@ -681,138 +681,119 @@
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="134"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="275"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="997"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1017"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1038"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1049"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1063"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1076"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1091"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1107"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1000"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1020"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1041"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1052"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1066"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1079"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1094"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1110"/>
         <source>Overview</source>
         <translation>Огляд</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="140"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="253"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1193"/>
         <source>CPU</source>
         <translation>Процесор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="145"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1196"/>
         <source>CPU quantity</source>
         <translation>Кількість процесорів</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="156"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="254"/>
         <source>Motherboard</source>
         <translation>Материнська плата</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="161"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="255"/>
         <source>Memory</source>
         <translation>Пам&apos;ять</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="166"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="256"/>
         <source>Display Adapter</source>
         <translation>Адаптер дисплея</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="257"/>
         <source>Sound Adapter</source>
         <translation>Звуковий адаптер</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="258"/>
         <source>Storage</source>
         <translation>Сховище даних</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="181"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="259"/>
         <source>Other PCI Devices</source>
         <translation>Інші пристрої PCI</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="186"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="260"/>
         <source>Battery</source>
         <translation>Акумулятор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="197"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="261"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="202"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="262"/>
         <source>Network Adapter</source>
         <translation>Адаптер мережі</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="213"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="263"/>
         <source>Mouse</source>
         <translation>Миша</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="218"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="264"/>
         <source>Keyboard</source>
         <translation>Клавіатура</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="228"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="265"/>
         <source>Monitor</source>
         <translation>Монітор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="232"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="266"/>
         <source>CD-ROM</source>
         <translation>CD-ROM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="236"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="267"/>
         <source>Printer</source>
         <translation>Принтер</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="240"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="268"/>
         <source>Camera</source>
         <translation>Камера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="244"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="269"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
         <translation>Інші пристрої</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1003"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1067"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1098"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1006"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1070"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1101"/>
         <source>Device</source>
         <translation>Пристрій</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1011"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1071"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1102"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1014"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1074"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1105"/>
         <source>OS</source>
         <translation>ОС</translation>
     </message>
@@ -956,137 +937,137 @@
 <context>
     <name>DeviceNetwork</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="173"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="177"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="174"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="178"/>
         <source>Vendor</source>
         <translation>Постачальник</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="175"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="179"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="176"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="180"/>
         <source>Version</source>
         <translation>Версія</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="177"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="181"/>
         <source>Bus Info</source>
         <translation>Дані щодо каналу</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="178"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="182"/>
         <source>Capabilities</source>
         <translation>Можливості</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="179"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="183"/>
         <source>Driver</source>
         <translation>Драйвер</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="180"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="184"/>
         <source>Driver Version</source>
         <translation>Версія драйвера</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="186"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="190"/>
         <source>Maximum Rate</source>
         <translation>Максимальна частота</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="187"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="191"/>
         <source>Negotiation Rate</source>
         <translation>Частота узгодження</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="188"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="192"/>
         <source>Port</source>
         <translation>Порт</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="189"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="193"/>
         <source>Multicast</source>
         <translation>Групова трансляція</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="190"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="194"/>
         <source>Link</source>
         <translation>Зв&apos;язок</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="191"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="195"/>
         <source>Latency</source>
         <translation>Латентність</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="192"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="196"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="193"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="197"/>
         <source>Firmware</source>
         <translation>Мікропрограма</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="194"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="198"/>
         <source>Duplex</source>
         <translation>Двобічний</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="195"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="199"/>
         <source>Broadcast</source>
         <translation>Трансляція</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="196"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="200"/>
         <source>Auto Negotiation</source>
         <translation>Автоузгодження</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="197"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="201"/>
         <source>Clock</source>
         <translation>Годинник</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="198"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="199"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="203"/>
         <source>Memory Address</source>
         <translation>Адреса у пам&apos;яті</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="200"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="204"/>
         <source>IRQ</source>
         <translation>IRQ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="205"/>
         <source>MAC Address</source>
         <translation>MAC-адреса</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="206"/>
         <source>Logical Name</source>
         <translation>Логічна назва</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="214"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="218"/>
         <source>Unavailable</source>
         <translation>Недоступне</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="222"/>
         <source>Disable</source>
         <translation>Вимкнути</translation>
     </message>
@@ -1428,13 +1409,13 @@
 <context>
     <name>GetDriverNameWidget</name>
     <message>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="42"/>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="110"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="48"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="123"/>
         <source>Select a driver for update</source>
         <translation>Виберіть драйвер для оновлення</translation>
     </message>
     <message>
-        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="105"/>
+        <location filename="../src/Widget/GetDriverNameWidget.cpp" line="118"/>
         <source>No drivers found in this folder</source>
         <translation>У цій теці драйверів не знайдено</translation>
     </message>
@@ -1482,12 +1463,12 @@
         <translation>Завантажуємо дані щодо принтерів…</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="97"/>
+        <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="98"/>
         <source>Loading Mouse Info...</source>
         <translation>Завантажуємо дані щодо миші…</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="98"/>
+        <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="99"/>
         <source>Loading Network Adapter Info...</source>
         <translation>Завантажуємо дані щодо адаптера мережі…</translation>
     </message>
@@ -1495,14 +1476,14 @@
 <context>
     <name>LogTreeView</name>
     <message>
-        <location filename="../src/Widget/logtreeview.cpp" line="91"/>
-        <location filename="../src/Widget/logtreeview.cpp" line="127"/>
-        <location filename="../src/Widget/logtreeview.cpp" line="129"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="99"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="135"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="137"/>
         <source>Disable</source>
         <translation>Вимкнути</translation>
     </message>
     <message>
-        <location filename="../src/Widget/logtreeview.cpp" line="108"/>
+        <location filename="../src/Widget/logtreeview.cpp" line="116"/>
         <source>Unavailable</source>
         <translation>Недоступне</translation>
     </message>
@@ -1523,73 +1504,73 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="108"/>
+        <location filename="../src/Page/MainWindow.cpp" line="103"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
         <translation>Дані щодо пристрою</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="179"/>
+        <location filename="../src/Page/MainWindow.cpp" line="174"/>
         <source>Display shortcuts</source>
         <translation>Скорочення дисплея</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="180"/>
+        <location filename="../src/Page/MainWindow.cpp" line="175"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="181"/>
+        <location filename="../src/Page/MainWindow.cpp" line="176"/>
         <source>Help</source>
         <translation>Довідка</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="182"/>
+        <location filename="../src/Page/MainWindow.cpp" line="177"/>
         <source>Copy</source>
         <translation>Копіювати</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="186"/>
+        <location filename="../src/Page/MainWindow.cpp" line="181"/>
         <source>System</source>
         <translation>Система</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="193"/>
+        <location filename="../src/Page/MainWindow.cpp" line="188"/>
         <source>Export</source>
         <translation>Експортувати</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="194"/>
+        <location filename="../src/Page/MainWindow.cpp" line="189"/>
         <source>Refresh</source>
         <translation>Оновити</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="198"/>
+        <location filename="../src/Page/MainWindow.cpp" line="193"/>
         <source>Device Manager</source>
         <translation>Керування пристроями</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="354"/>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
         <source>Monitor</source>
         <translation>Монітор</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="358"/>
+        <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>Адаптер дисплея</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="362"/>
+        <location filename="../src/Page/MainWindow.cpp" line="309"/>
         <source>CPU</source>
         <translation>Процесор</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="366"/>
+        <location filename="../src/Page/MainWindow.cpp" line="313"/>
         <source>Network Adapter</source>
         <translation>Адаптер мережі</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="372"/>
+        <location filename="../src/Page/MainWindow.cpp" line="319"/>
         <source>Battery</source>
         <translation>Акумулятор</translation>
     </message>
@@ -1605,132 +1586,137 @@
 <context>
     <name>PageDriverControl</name>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="107"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="240"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="109"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="242"/>
         <source>Updating</source>
         <translation>Оновлення</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="112"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="134"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="193"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="114"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="136"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="195"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="113"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="115"/>
         <source>Next</source>
         <translation>Далі</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="131"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
         <source>Warning</source>
         <translation>Попередження</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="131"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
         <source>The device will be unavailable after the driver uninstallation</source>
         <translation>Після вилучення драйвер неможливо буде отримати доступ до пристрою</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="135"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="137"/>
         <source>Uninstall</source>
         <comment>button</comment>
         <translation>Вилучити</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="139"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="141"/>
         <source>Uninstalling</source>
         <translation>Вилучення</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="165"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="167"/>
         <source>Update successful</source>
         <translation>Успішне оновлення</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="165"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="167"/>
         <source>Uninstallation successful</source>
         <translation>Успішне вилучення</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="166"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="168"/>
         <source>Update failed</source>
         <translation>Помилка під час оновлення</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="166"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="168"/>
         <source>Uninstallation failed</source>
         <translation>Помилка під час вилучення</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="173"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="175"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>Гаразд</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="192"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="194"/>
         <source>Next</source>
         <comment>button</comment>
         <translation>Далі</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="213"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="215"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>Вибраної теки не існує. Будь ласка, виберіть іншу теку</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="218"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="220"/>
         <source>Update</source>
         <comment>button</comment>
         <translation>Оновити</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="219"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="221"/>
         <source>Previous</source>
         <comment>button</comment>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="252"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="254"/>
         <source>Broken package</source>
         <translation>Пошкоджений пакунок</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="256"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="258"/>
         <source>Unmatched package architecture</source>
         <translation>Невідповідна архітектура пакунка</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="262"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="269"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="263"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="346"/>
         <source>The selected file does not exist, please select again</source>
         <translation>Вибраного файла не існує. Будь ласка, виберіть інший файл</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="265"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="347"/>
         <source>It is not a driver</source>
         <translation>Не є драйвером</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="350"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
+        <source>Unable to install - no digital signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverControl.cpp" line="342"/>
         <source>Unknown error</source>
         <translation>Невідома помилка</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="351"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="343"/>
         <source>The driver module was not found</source>
         <translation>Модуль драйвера не знайдено</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="352"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="344"/>
         <source>Invalid module format</source>
-        <translation type="unfinished"/>
+        <translation>Некоректний формат модуля</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="353"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="345"/>
         <source>The driver module has dependencies</source>
         <translation>Модуль драйвера має залежності</translation>
     </message>
@@ -1872,34 +1858,34 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="198"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="202"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>SubVendor</source>
         <translation>Підрядчик</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="199"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
         <source>SubDevice</source>
         <translation>Підпристрій</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="200"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="204"/>
         <source>Driver</source>
         <translation>Драйвер</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="201"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="205"/>
         <source>Driver Status</source>
         <translation>Стан драйвера</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
         <source>Driver Activation Cmd</source>
         <translation>Команда активації драйвера</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="203"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="207"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="92"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="313"/>
@@ -1907,72 +1893,72 @@
         <translation>Стан налаштувань</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="205"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="158"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="170"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="94"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="231"/>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="166"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="260"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="170"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="310"/>
         <source>physical id</source>
         <translation>фізичний ід.</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="206"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="210"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
         <source>latency</source>
         <translation>латентність</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="208"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="212"/>
         <source>Phys</source>
         <translation>Фіз.</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="209"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="213"/>
         <source>Sysfs</source>
         <translation>Sysfs</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="210"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="214"/>
         <source>Handlers</source>
         <translation>Обробники</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="211"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="224"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="253"/>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="212"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="225"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="254"/>
         <source>EV</source>
         <translation>EV</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="213"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="226"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="255"/>
         <source>KEY</source>
         <translation>КЛЮЧ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="215"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="219"/>
         <source>Model</source>
         <translation>Модель</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="216"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="220"/>
         <source>Vendor</source>
         <translation>Постачальник</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="217"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="221"/>
         <source>Version</source>
         <translation>Версія</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="218"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceAudio.cpp" line="222"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="150"/>
         <source>Bus</source>
         <translation>Канал</translation>
     </message>
@@ -2063,7 +2049,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="161"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="142"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="154"/>
         <source>Features</source>
         <translation>Можливості</translation>
     </message>
@@ -2090,7 +2076,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="169"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="163"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="175"/>
         <source>UUID</source>
         <translation>UUID</translation>
     </message>
@@ -2218,110 +2204,110 @@
         <translation>Поточна встановлена мова</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="139"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="151"/>
         <source>BD Address</source>
         <translation>Адреса BD</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="140"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="152"/>
         <source>ACL MTU</source>
         <translation>MTU ACL</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="141"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="153"/>
         <source>SCO MTU</source>
         <translation>MTU SCO</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="143"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="155"/>
         <source>Packet type</source>
         <translation>Тип пакета</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="144"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="156"/>
         <source>Link policy</source>
         <translation>Правила зв&apos;язку</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="145"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="157"/>
         <source>Link mode</source>
         <translation>Режим зв&apos;язку</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="146"/>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="159"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="158"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="171"/>
         <source>Class</source>
         <translation>Клас</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="147"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="159"/>
         <source>Service Classes</source>
         <translation>Класи служби</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="148"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="160"/>
         <source>Device Class</source>
         <translation>Клас пристрою</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="149"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="161"/>
         <source>HCI Version</source>
         <translation>Версія HCI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="150"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="162"/>
         <source>LMP Version</source>
         <translation>Версія LMP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="151"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="163"/>
         <source>Subversion</source>
         <translation>Підверсія</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="153"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="165"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
         <source>Device</source>
         <translation>Пристрій</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="154"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="166"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="86"/>
         <source>Serial ID</source>
         <translation>Послідовний ід.</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="156"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="168"/>
         <source>product</source>
         <translation>продукт</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="157"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="169"/>
         <source>description</source>
         <translation>опис</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="160"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="172"/>
         <source>Powered</source>
         <translation>Живлення</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="161"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="173"/>
         <source>Discoverable</source>
         <translation>Може визначатися</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="162"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="174"/>
         <source>Pairable</source>
         <translation>Може пов&apos;язуватися</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="164"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="176"/>
         <source>Modalias</source>
         <translation>Мод-прив&apos;язка</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="165"/>
+        <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="177"/>
         <source>Discovering</source>
         <translation>Визначення</translation>
     </message>
@@ -2333,7 +2319,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="88"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="257"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="305"/>
         <source>Device File</source>
         <translation>Файл пристрою</translation>
@@ -2402,337 +2388,337 @@
         <translation>Модифікація процесора</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="253"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="264"/>
         <source>One</source>
         <translation>Одне</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="254"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="265"/>
         <source>Two</source>
         <translation>Два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="255"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="266"/>
         <source>Four</source>
         <translation>Чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="256"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="267"/>
         <source>Six</source>
         <translation>Шістка</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="257"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="268"/>
         <source>Eight</source>
         <translation>Вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="259"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="270"/>
         <source>Ten</source>
         <translation>Десятка</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="260"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
         <source>Twelve</source>
         <translation>Дванадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="261"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="272"/>
         <source>Fourteen</source>
         <translation>Чотирнадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="262"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
         <source>Sixteen</source>
         <translation>Шістнадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="263"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
         <source>Eighteen</source>
         <translation>Вісімнадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="265"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="276"/>
         <source>Twenty</source>
         <translation>Двадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="266"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="277"/>
         <source>Twenty-two</source>
         <translation>Двадцять два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="267"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="278"/>
         <source>Twenty-four</source>
         <translation>Двадцять чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="268"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="279"/>
         <source>Twenty-six</source>
         <translation>Двадцять шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="269"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="280"/>
         <source>Twenty-eight</source>
         <translation>Двадцять вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="282"/>
         <source>Thirty</source>
         <translation>Тридцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="272"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="283"/>
         <source>Thirty-two</source>
         <translation>Тридцять два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="284"/>
         <source>Thirty-four</source>
         <translation>Тридцять чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
         <source>Thirty-six</source>
         <translation>Тридцять шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="275"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
         <source>Thirty-eight</source>
         <translation>Тридцять вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="277"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="288"/>
         <source>Forty</source>
         <translation>Сорок</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="278"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="289"/>
         <source>Forty-two</source>
         <translation>Сорок два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="279"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
         <source>Forty-four</source>
         <translation>Сорок чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="280"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="291"/>
         <source>Forty-six</source>
         <translation>Сорок шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="281"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="292"/>
         <source>Forty-eight</source>
         <translation>Сорок вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="283"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="294"/>
         <source>Fifty</source>
         <translation>П’ятдесят</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="284"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="295"/>
         <source>Fifty-two</source>
         <translation>П&apos;ятдесят два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="296"/>
         <source>Fifty-four</source>
         <translation>П&apos;ятдесят чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="297"/>
         <source>Fifty-six</source>
         <translation>П&apos;ятдесят шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="287"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="298"/>
         <source>Fifty-eight</source>
         <translation>П&apos;ятдесят вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="289"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="300"/>
         <source>Sixty</source>
         <translation>Шістдесят</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="301"/>
         <source>Sixty-two</source>
         <translation>Шістдесят два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="291"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="302"/>
         <source>Sixty-four</source>
         <translation>Шістдесят чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="292"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="303"/>
         <source>Sixty-six</source>
         <translation>Шістдесят шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="293"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="304"/>
         <source>Sixty-eight</source>
         <translation>Шістдесят вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="295"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="306"/>
         <source>Seventy</source>
         <translation>Сімдесят</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="296"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="307"/>
         <source>Seventy-two</source>
         <translation>Сімдесят два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="297"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="308"/>
         <source>Seventy-four</source>
         <translation>Сімдесят чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="298"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="309"/>
         <source>Seventy-six</source>
         <translation>Сімдесят шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="299"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
         <source>Seventy-eight</source>
         <translation>Сімдесят вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="301"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="312"/>
         <source>Eighty</source>
         <translation>Вісімдесят</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="302"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="313"/>
         <source>Eighty-two</source>
         <translation>Вісімдесят два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="303"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="314"/>
         <source>Eighty-four</source>
         <translation>Вісімдесят чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="304"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="315"/>
         <source>Eighty-six</source>
         <translation>Вісімдесят шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="305"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="316"/>
         <source>Eighty-eight</source>
         <translation>Вісімдесят вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="307"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="318"/>
         <source>Ninety</source>
         <translation>Дев&apos;яносто</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="308"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="319"/>
         <source>Ninety-two</source>
         <translation>Дев&apos;яносто два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="309"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="320"/>
         <source>Ninety-four</source>
         <translation>Дев&apos;яносто чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
         <source>Ninety-six</source>
         <translation>Дев&apos;яносто шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
         <source>Ninety-eight</source>
         <translation>Дев&apos;яносто вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="313"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="324"/>
         <source>One hundred</source>
         <translation>Сто</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="314"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="325"/>
         <source>One hundred and Two</source>
         <translation>Сто два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="315"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
         <source>One hundred and four</source>
         <translation>Сто чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="316"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
         <source>One hundred and Six</source>
         <translation>Сто шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="317"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="328"/>
         <source>One hundred and Eight</source>
         <translation>Сто вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="319"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
         <source>One hundred and Ten</source>
         <translation>Сто десять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="320"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
         <source>One hundred and Twelve</source>
         <translation>Сто дванадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="332"/>
         <source>One hundred and Fourteen</source>
         <translation>Сто чотирнадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="333"/>
         <source>One hundred and Sixteen</source>
         <translation>Сто шістнадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="323"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="334"/>
         <source>One hundred and Eighteen</source>
         <translation>Сто вісімнадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="325"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="336"/>
         <source>One hundred and Twenty</source>
         <translation>Сто двадцять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="337"/>
         <source>One hundred and Twenty-two</source>
         <translation>Сто двадцять два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="338"/>
         <source>One hundred and Twenty-four</source>
         <translation>Сто двадцять чотири</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="328"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="339"/>
         <source>One hundred and Twenty-six</source>
         <translation>Сто двадцять шість</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="329"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="340"/>
         <source>One hundred and Twenty-eight</source>
         <translation>Сто двадцять вісім</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="341"/>
         <source>One hundred and Ninety-two</source>
         <translation>Сто дев&apos;яносто два</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="342"/>
         <source>Two hundred and fifty-six</source>
         <translation>Двісті п&apos;ятдесят шість</translation>
     </message>
@@ -2779,290 +2765,290 @@
         <translation>Невідомий</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="223"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="252"/>
         <source>Uniq</source>
         <translation>Uniq</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="227"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="256"/>
         <source>MSC</source>
         <translation>MSC</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="229"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="258"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="304"/>
         <source>Hardware Class</source>
         <translation>Клас обладнання</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="899"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="927"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="963"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
         <source>CPU</source>
         <translation>Процесор</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="871"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="899"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="927"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="963"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
         <source>No CPU found</source>
         <translation>Процесорів не знайдено</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="900"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="928"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="964"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
         <source>Motherboard</source>
         <translation>Материнська плата</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="872"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="900"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="928"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="964"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
         <source>No motherboard found</source>
         <translation>Материнської плати не знайдено</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="901"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="929"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="965"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
         <source>Memory</source>
         <translation>Пам&apos;ять</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="873"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="901"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="929"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="965"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
         <source>No memory found</source>
         <translation>Пам&apos;яті не знайдено</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="905"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="933"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="969"/>
         <source>Storage</source>
         <translation>Сховище даних</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="874"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="902"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="930"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="966"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="905"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="933"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="969"/>
         <source>No disk found</source>
         <translation>Не знайдено дисків</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="906"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="934"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="970"/>
         <source>Display Adapter</source>
         <translation>Адаптер дисплея</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="875"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="903"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="931"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="967"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="906"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="934"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="970"/>
         <source>No GPU found</source>
         <translation>Графічних процесорів не виявлено</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="935"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="971"/>
         <source>Monitor</source>
         <translation>Монітор</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="876"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="904"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="932"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="968"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="935"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="971"/>
         <source>No monitor found</source>
         <translation>Моніторів не знайдено</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="905"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="933"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="969"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
         <source>Network Adapter</source>
         <translation>Адаптер мережі</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="877"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="905"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="933"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="969"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
         <source>No network adapter found</source>
         <translation>Не знайдено адаптера мережі</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="906"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="934"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="970"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="937"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="973"/>
         <source>Sound Adapter</source>
         <translation>Звуковий адаптер</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="878"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="906"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="934"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="970"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="937"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="973"/>
         <source>No audio device found</source>
         <translation>Звукових пристроїв не знайдено</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="935"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="971"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="879"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="907"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="935"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="971"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
         <source>No Bluetooth device found</source>
         <translation>Не знайдено пристроїв Bluetooth</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
         <source>Other PCI Devices</source>
         <translation>Інші пристрої PCI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="880"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
         <source>No other PCI devices found</source>
         <translation>Не знайдено інших пристроїв PCI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="937"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="973"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
         <source>Power</source>
         <translation>Живлення</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="881"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="909"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="937"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="973"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
         <source>No battery found</source>
         <translation>Не знайдено акумулятора</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="941"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="977"/>
         <source>Keyboard</source>
         <translation>Клавіатура</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="882"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="941"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="977"/>
         <source>No keyboard found</source>
         <translation>Не знайдено клавіатури</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="942"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="978"/>
         <source>Mouse</source>
         <translation>Миша</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="942"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="978"/>
         <source>No mouse found</source>
         <translation>Не знайдено миші</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
         <source>Printer</source>
         <translation>Принтер</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="884"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
         <source>No printer found</source>
         <translation>Не знайдено принтерів</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="941"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="977"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="888"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
         <source>Camera</source>
         <translation>Камера</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="885"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="913"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="941"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="977"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="888"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
         <source>No camera found</source>
         <translation>Не знайдено камери</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="942"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="978"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="889"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
         <source>CD-ROM</source>
         <translation>CD-ROM</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="886"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="914"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="942"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="978"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="889"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
         <source>No CD-ROM found</source>
         <translation>Не знайдено CD-ROM</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="890"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
         <source>Other Devices</source>
         <translation>Інші пристрої</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="887"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="890"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
         <source>No other devices found</source>
         <translation>Інших пристроїв не знайдено</translation>
     </message>
@@ -3171,12 +3157,12 @@
         <translation>Дата</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="165"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="169"/>
         <source>ioport</source>
         <translation>Порт ВВ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="167"/>
+        <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="171"/>
         <source>network</source>
         <translation>мережа</translation>
     </message>
@@ -3437,12 +3423,12 @@
         <translation>«Керування пристроями» — зручний інструмент для перегляду відомостей щодо обладнання та керування пристроями.</translation>
     </message>
     <message>
-        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="9"/>
+        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="10"/>
         <source>Include subfolders</source>
         <translation>Включити підтеки</translation>
     </message>
     <message>
-        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="48"/>
+        <location filename="../src/Widget/GetDriverPathWidget.cpp" line="51"/>
         <source>Search for drivers in this path</source>
         <translation>Шукати драйвери у цій теці</translation>
     </message>
@@ -3451,7 +3437,7 @@
     <name>TableWidget</name>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="26"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="200"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="195"/>
         <source>Disable</source>
         <translation>Вимкнути</translation>
     </message>
@@ -3476,7 +3462,7 @@
         <translation>Вилучити драйвери</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="205"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="200"/>
         <location filename="../src/Widget/TableWidget.cpp" line="260"/>
         <source>Enable</source>
         <translation>Увімкнути</translation>
