@@ -82,11 +82,71 @@ void DeviceGenerator::generatorComputerDevice()
     DeviceManager::instance()->addComputerDevice(device);
 }
 
+void mergeSortCpuInfoByLogicalID(QList<QMap<QString, QString> > &lsCpu, QList<QMap<QString, QString> > &tmpLst, int begin, int end)
+{
+    // 合并列表
+    int left_length = (end - begin + 1) / 2;
+    int left_index = begin;
+    int right_index = begin + left_length;
+    int result_index = begin;
+
+    // 合并左右区间 左区间未合并结束且右区间未合并结束时
+    while (left_index < begin + left_length && right_index < end + 1) {
+        // 左右区间,哪个小先排哪个,下标加1
+        if (lsCpu[left_index]["processor"].toInt() <= lsCpu[right_index]["processor"].toInt())
+            tmpLst[result_index++] = lsCpu[left_index++];
+        else
+            tmpLst[result_index++] = lsCpu[right_index++];
+    }
+
+    // 合并左区间剩余数据
+    while (left_index < begin + left_length)
+        tmpLst[result_index++] = lsCpu[left_index++];
+
+    // 合并右区间剩余数据
+    while (right_index < end + 1)
+        tmpLst[result_index++] = lsCpu[right_index++];
+}
+
+void sortCpuInfoByLogicalID(QList<QMap<QString, QString> > &lsCpu, QList<QMap<QString, QString> > &tmpLst, int begin, int end)
+{
+    // 列表个数为1,直接返回
+    if (0 == end - begin)
+        return;
+
+    // bug 后台获取CPU信息是按照物理CPU,核心,逻辑CPU顺序获取的
+    // 界面上展示顺序混乱实际是按照物理CPU,核心,逻辑CPU顺序展示
+    // 与产品沟通后,按照用户的使用感修改,CPU信息按照逻辑CPU的id从小到大显示
+    // 区间个数为2
+    if (1 == end - begin) {
+        // 前 processor > 后 processor 时交换位置
+        if (lsCpu[begin]["processor"].toInt() > lsCpu[end]["processor"].toInt()) {
+            QMap<QString, QString> tmpMap = lsCpu[begin];
+            lsCpu[begin] = lsCpu[end];
+            lsCpu[end] = tmpMap;
+        }
+    } else {
+        // 区间个数 > 2 递归
+        sortCpuInfoByLogicalID(lsCpu, tmpLst, begin, (end - begin) / 2 + begin);
+        sortCpuInfoByLogicalID(lsCpu, tmpLst, (end - begin + 1) / 2 + begin, end);
+        mergeSortCpuInfoByLogicalID(lsCpu, tmpLst, begin, end);
+        lsCpu = tmpLst;
+    }
+}
+
 void DeviceGenerator::generatorCpuDevice()
 {
     // 生成CPU
     // get info from lscpu
     const QList<QMap<QString, QString> >  &lsCpu = DeviceManager::instance()->cmdInfo("lscpu");
+    QList<QMap<QString, QString> > tmpLst;
+    QList<QMap<QString, QString> > srcLst;
+    tmpLst.append(lsCpu);
+    srcLst.append(lsCpu);
+
+    // 按照processor id 从小到大排序
+    if (lsCpu.size() > 1)
+        sortCpuInfoByLogicalID(srcLst, tmpLst, 0, lsCpu.size() - 1);
 
     // get info from lshw
     const QList<QMap<QString, QString> >  &lshwCpu = DeviceManager::instance()->cmdInfo("lshw_cpu");
@@ -114,8 +174,8 @@ void DeviceGenerator::generatorCpuDevice()
     DeviceManager::instance()->setCpuNum(dmidecode4.size());
 
     // set cpu info
-    QList<QMap<QString, QString> >::const_iterator it = lsCpu.begin();
-    for (; it != lsCpu.end(); ++it) {
+    QList<QMap<QString, QString> >::const_iterator it = srcLst.begin();
+    for (; it != srcLst.end(); ++it) {
         DeviceCpu *device = new DeviceCpu;
         device->setCpuInfo(*it, lshw, dmidecode, coreNum, logicalNum);
         DeviceManager::instance()->addCpuDevice(device);
