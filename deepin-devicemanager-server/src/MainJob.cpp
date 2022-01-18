@@ -125,11 +125,37 @@ void MainJob::updateAllDevice()
 
 INSTRUCTION_RES MainJob::driverInstruction(const QString &instruction)
 {
+    qInfo() << instruction;
     QStringList lst = instruction.split("#");
     if (lst.size() != 2) {
         return IR_NULL;
     }
     const QString &cmd = lst[1];
+
+    QStringList lstCmd = cmd.split(" ");
+    if (lstCmd.size() != 2) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
+    qInfo() << lstCmd[0] << " " <<lstCmd[1];
+    //检查输入，防止代码注入
+    if (("insmod" != lstCmd[0]) && ("rmmod" != lstCmd[0])) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
+    if (("insmod" == lstCmd[0]) && (!lstCmd[1].contains("ko"))) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
+    if ((lstCmd[1].contains("|")) || (lstCmd[1].contains("||"))
+            || (lstCmd[1].contains("&")) || (lstCmd[1].contains("&&"))) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
     QProcess process;
     process.start(cmd);
     process.waitForFinished(-1);
@@ -152,7 +178,22 @@ INSTRUCTION_RES MainJob::ifconfigInstruction(const QString &instruction)
     if (lst.size() != 2) {
         return IR_NULL;
     }
-    const QString &cmd = lst[1];
+    const QString &cmd = lst[1];//ifconfig %1 up ifconfig %1 down
+    QStringList lstCmd = cmd.split(" ");
+    if (lstCmd.size() != 3) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+    if (("ifconfig" != lstCmd[0]) || ("up" != lstCmd[2] && "down" != lstCmd[2])) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
+    QRegExp reg("\\w{1,15}");//接口名称限制，长度1-15.
+    if (!reg.exactMatch(lstCmd[1])) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
     QProcess process;
     process.start(cmd);
     process.waitForFinished(-1);
