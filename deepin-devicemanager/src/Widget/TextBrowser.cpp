@@ -25,6 +25,7 @@ TextBrowser::TextBrowser(QWidget *parent)
     , mp_Export(new QAction(tr("Export"), this))
     , mp_Copy(new QAction(tr("Copy"), this))
     , mp_Menu(new DMenu(this))
+    , m_IsMenuShowing(false)
 {
     DFontSizeManager::instance()->bind(this, DFontSizeManager::SizeType(DFontSizeManager::T7));
     setFrameShape(QFrame::NoFrame);
@@ -36,6 +37,7 @@ TextBrowser::TextBrowser(QWidget *parent)
     connect(mp_Refresh, &QAction::triggered, this, &TextBrowser::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &TextBrowser::slotActionExport);
     connect(mp_Copy, &QAction::triggered, this, &TextBrowser::slotActionCopy);
+    connect(mp_Menu, &DMenu::aboutToHide, this, &TextBrowser::slotCloseMenu);
 }
 
 void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
@@ -144,20 +146,30 @@ void TextBrowser::keyPressEvent(QKeyEvent *event)
 
 void TextBrowser::focusInEvent(QFocusEvent *e)
 {
-//    setTextInteractionFlags(Qt::TextBrowserInteraction);
     QTextBrowser::focusInEvent(e);
 }
+
 void TextBrowser::focusOutEvent(QFocusEvent *e)
 {
-    Q_UNUSED(e)
-    // 模拟单机效果，当焦点失去的时候刷新界面选中效果
-    QMouseEvent pressEvent(QEvent::MouseButtonPress, this->mapFromGlobal(QCursor::pos()), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-    QTextBrowser::mousePressEvent(&pressEvent);
+    if(m_IsMenuShowing){
+        DTextBrowser::focusOutEvent(e);
+    }
+    else {
+        // 模拟单击效果，当焦点失去的时候刷新界面选中效果
+        QMouseEvent *pressEvent = new QMouseEvent(QEvent::MouseButtonPress, this->mapFromGlobal(QCursor::pos())
+                               , Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+        QTextBrowser::mousePressEvent(pressEvent);
+    }
 }
 
+void TextBrowser::slotCloseMenu()
+{
+    m_IsMenuShowing = false;
+}
 
 void TextBrowser::slotShowMenu(const QPoint &)
 {
+    m_IsMenuShowing = true;
     // 右键菜单
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
