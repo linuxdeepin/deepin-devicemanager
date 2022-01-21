@@ -82,11 +82,71 @@ void DeviceGenerator::generatorComputerDevice()
     DeviceManager::instance()->addComputerDevice(device);
 }
 
+void mergeSortCpuInfoByLogicalID(QList<QMap<QString, QString> > &lsCpu, QList<QMap<QString, QString> > &tmpLst, int begin, int end)
+{
+    // 合并列表
+    int left_length = (end - begin + 1) / 2;
+    int left_index = begin;
+    int right_index = begin + left_length;
+    int result_index = begin;
+
+    // 合并左右区间 左区间未合并结束且右区间未合并结束时
+    while (left_index < begin + left_length && right_index < end + 1) {
+        // 左右区间,哪个小先排哪个,下标加1
+        if (lsCpu[left_index]["processor"].toInt() <= lsCpu[right_index]["processor"].toInt())
+            tmpLst[result_index++] = lsCpu[left_index++];
+        else
+            tmpLst[result_index++] = lsCpu[right_index++];
+    }
+
+    // 合并左区间剩余数据
+    while (left_index < begin + left_length)
+        tmpLst[result_index++] = lsCpu[left_index++];
+
+    // 合并右区间剩余数据
+    while (right_index < end + 1)
+        tmpLst[result_index++] = lsCpu[right_index++];
+}
+
+void sortCpuInfoByLogicalID(QList<QMap<QString, QString> > &lsCpu, QList<QMap<QString, QString> > &tmpLst, int begin, int end)
+{
+    // 列表个数为1,直接返回
+    if (0 == end - begin)
+        return;
+
+    // bug 后台获取CPU信息是按照物理CPU,核心,逻辑CPU顺序获取的
+    // 界面上展示顺序混乱实际是按照物理CPU,核心,逻辑CPU顺序展示
+    // 与产品沟通后,按照用户的使用感修改,CPU信息按照逻辑CPU的id从小到大显示
+    // 区间个数为2
+    if (1 == end - begin) {
+        // 前 processor > 后 processor 时交换位置
+        if (lsCpu[begin]["processor"].toInt() > lsCpu[end]["processor"].toInt()) {
+            QMap<QString, QString> tmpMap = lsCpu[begin];
+            lsCpu[begin] = lsCpu[end];
+            lsCpu[end] = tmpMap;
+        }
+    } else {
+        // 区间个数 > 2 递归
+        sortCpuInfoByLogicalID(lsCpu, tmpLst, begin, (end - begin) / 2 + begin);
+        sortCpuInfoByLogicalID(lsCpu, tmpLst, (end - begin + 1) / 2 + begin, end);
+        mergeSortCpuInfoByLogicalID(lsCpu, tmpLst, begin, end);
+        lsCpu = tmpLst;
+    }
+}
+
 void DeviceGenerator::generatorCpuDevice()
 {
     // 生成CPU
     // get info from lscpu
     const QList<QMap<QString, QString> >  &lsCpu = DeviceManager::instance()->cmdInfo("lscpu");
+    QList<QMap<QString, QString> > tmpLst;
+    QList<QMap<QString, QString> > srcLst;
+    tmpLst.append(lsCpu);
+    srcLst.append(lsCpu);
+
+    // 按照processor id 从小到大排序
+    if (lsCpu.size() > 1)
+        sortCpuInfoByLogicalID(srcLst, tmpLst, 0, lsCpu.size() - 1);
 
     // get info from lshw
     const QList<QMap<QString, QString> >  &lshwCpu = DeviceManager::instance()->cmdInfo("lshw_cpu");
@@ -98,11 +158,13 @@ void DeviceGenerator::generatorCpuDevice()
 
 
     //  获取逻辑数和core数  获取cpu个数 获取logical个数
-    int coreNum = 0, logicalNum = 0;
+    int coreNum = 0, logicalNum = 0, physicalNum = 0;
     const QList<QMap<QString, QString> >  &lsCpu_num = DeviceManager::instance()->cmdInfo("lscpu_num");
     if (lsCpu_num.size() <= 0)
         return;
     const QMap<QString, QString> &map = lsCpu_num[0];
+    if (map.find("physical") != map.end())
+        physicalNum = map["physical"].toInt();
     if (map.find("core") != map.end())
         coreNum = map["core"].toInt();
     if (map.find("logical") != map.end())
@@ -112,8 +174,8 @@ void DeviceGenerator::generatorCpuDevice()
     DeviceManager::instance()->setCpuNum(dmidecode4.size());
 
     // set cpu info
-    QList<QMap<QString, QString> >::const_iterator it = lsCpu.begin();
-    for (; it != lsCpu.end(); ++it) {
+    QList<QMap<QString, QString> >::const_iterator it = srcLst.begin();
+    for (; it != srcLst.end(); ++it) {
         DeviceCpu *device = new DeviceCpu;
         device->setCpuInfo(*it, lshw, dmidecode, coreNum, logicalNum);
         DeviceManager::instance()->addCpuDevice(device);
@@ -187,8 +249,8 @@ void DeviceGenerator::generatorNetworkDevice()
         // 判断重复设备数据
         QString unique_id = uniqueID(*it);
         DeviceNetwork *device = nullptr;
-        for (QList<DeviceNetwork*>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
-            if(!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id){
+        for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
+            if (!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id) {
                 device = *itNet;
                 break;
             }
@@ -814,7 +876,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
             continue;
 
         //过滤触摸板，如果不是触摸板再检查
-        if ((*it)["Device"].indexOf("Touchpad") < 0){
+        if ((*it)["Device"].indexOf("Touchpad") < 0) {
             // 先判断是否存在
             QString path = pciPath(*it);
             if (!QFile::exists(path)) {
@@ -827,8 +889,8 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         if (device) {
             device->setEnableValue(false);
             continue;
-        }else{
-            if((*it).find("path") != (*it).end()){
+        } else {
+            if ((*it).find("path") != (*it).end()) {
                 continue;
             }
         }
@@ -908,11 +970,11 @@ void DeviceGenerator::getImageInfoFromHwinfo()
             device->setEnableValue(false);
             device->setInfoFromHwinfo(*it);
             continue;
-        }else{
-            if((*it).find("path") != (*it).end()){
+        } else {
+            if ((*it).find("path") != (*it).end()) {
                 continue;
             }
-       }
+        }
 
         device = new DeviceImage();
         device->setInfoFromHwinfo(*it);
@@ -979,7 +1041,7 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         // 判断该设备是否已经在其他类别中显示
         if ((*it).find("unique_id") != (*it).end() && (*it)["Hardware Class"] != "others") {
             isOtherDevice = false;
-        } else if((*it).find("unique_id") == (*it).end()){
+        } else if ((*it).find("unique_id") == (*it).end()) {
             if (curBus.isEmpty() || lstBusId.indexOf(curBus) != -1)
                 isOtherDevice = false;
         }
@@ -997,8 +1059,8 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
             if (device) {
                 device->setEnableValue(false);
                 continue;
-            }else{
-                if((*it).find("path") != (*it).end()){
+            } else {
+                if ((*it).find("path") != (*it).end()) {
                     continue;
                 }
             }

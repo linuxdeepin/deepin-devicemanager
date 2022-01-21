@@ -357,7 +357,7 @@ void DeviceStorage::loadTableData()
 {
     // 加载表格数据
     QString model = m_Model;
-    if(!available()){
+    if (!available()) {
         model = "(" + tr("Unavailable") + ") " + m_Model;
     }
     m_TableData.append(model);
@@ -420,9 +420,18 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
         if (mapInfo.find("Model Number") != mapInfo.end())
             m_Model = mapInfo["Model Number"];
     }
+
     //kimtigo 特殊处理，以smartctl数据为准
-    if (mapInfo["Model Number"].indexOf("kimtigo") >-1) {
+    if (mapInfo["Model Number"].indexOf("kimtigo") > -1) {
         m_Model = mapInfo["Model Number"];
+    }
+
+    // tf5000 hwinfo --disk获取的硬盘型号为TOSHIBA DT01ACA1 实际为smartctl 中的TOSHIBA DT01ACA100
+    // 在此特殊处理针对该型号硬盘,型号信息从smartctl中获取
+    if (m_Model.startsWith("TOSHIBA DT01ACA1", Qt::CaseInsensitive)) {
+        //SATA
+        if (mapInfo.find("Device Model") != mapInfo.end())
+            m_Model = mapInfo["Device Model"];
     }
 
     setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
