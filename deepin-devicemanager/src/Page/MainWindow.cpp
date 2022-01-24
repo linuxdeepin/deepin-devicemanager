@@ -298,7 +298,7 @@ void MainWindow::slotLoadingFinish(const QString &message)
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
     // xrandr would be execed later
-    if (tr("Monitor") == itemStr) { //点击显示设备，执行线程加载信息
+    if (tr("Monitor") == itemStr || tr("Overview") == itemStr) { //点击显示设备，执行线程加载信息
         ThreadExecXrandr tx(false);
         tx.start();
         tx.wait();

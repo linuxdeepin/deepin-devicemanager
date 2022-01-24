@@ -1555,6 +1555,11 @@
         <translation>Monitor</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
+        <source>Overview</source>
+        <translation>Übersicht</translation>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>Anzeigeadapter</translation>
@@ -1638,7 +1643,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="168"/>
         <source>Update failed</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisierung fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="168"/>
@@ -1713,7 +1718,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="344"/>
         <source>Invalid module format</source>
-        <translation type="unfinished"/>
+        <translation>Ungültiges Modulformat</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="345"/>
@@ -3486,12 +3491,12 @@
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
         <source>Disable</source>
         <translation>Deaktivieren</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
         <source>Unavailable</source>
         <translation>Nicht verfügbar</translation>
     </message>

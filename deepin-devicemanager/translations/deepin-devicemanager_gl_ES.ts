@@ -1555,6 +1555,11 @@
         <translation>Monitor</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
+        <source>Overview</source>
+        <translation>Visión xeral</translation>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>Adaptador de pantalla</translation>
@@ -3486,12 +3491,12 @@
         <translation>Copiar</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
         <source>Disable</source>
         <translation>Desactivar</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
         <source>Unavailable</source>
         <translation type="unfinished"/>
     </message>

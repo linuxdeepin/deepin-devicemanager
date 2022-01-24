@@ -1555,6 +1555,11 @@
         <translation>Monitor</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
+        <source>Overview</source>
+        <translation>Panoramica</translation>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>Adattatore video</translation>
@@ -3487,12 +3492,12 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
         <translation>Copia</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
         <source>Disable</source>
         <translation>Disabilita</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
         <source>Unavailable</source>
         <translation>Non disponibile</translation>
     </message>

@@ -1555,6 +1555,11 @@
         <translation>Monitor</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
+        <source>Overview</source>
+        <translation>Prezentare Generală</translation>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>Adaptor Afișaj</translation>
@@ -3486,12 +3491,12 @@
         <translation>Copiază</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
         <source>Disable</source>
         <translation>Dezactivează</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
         <source>Unavailable</source>
         <translation type="unfinished"/>
     </message>

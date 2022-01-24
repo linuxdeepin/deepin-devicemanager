@@ -1555,6 +1555,11 @@
         <translation>كۆرسىتىش ئۈسكۈنىسى</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
+        <source>Overview</source>
+        <translation>ئومۇمىي چۈشەنچە</translation>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>كۆرسەتكۈچ ماسلاشتۇرغۇچ</translation>
@@ -3486,12 +3491,12 @@
         <translation>كۆچۈرۈش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
         <source>Disable</source>
         <translation>چەكلەش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
         <source>Unavailable</source>
         <translation>ئىشلەتكىلى بولمايدۇ</translation>
     </message>

@@ -1555,6 +1555,11 @@
         <translation>Монітор</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
+        <source>Overview</source>
+        <translation>Огляд</translation>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>Адаптер дисплея</translation>
@@ -1698,7 +1703,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
         <source>Unable to install - no digital signature</source>
-        <translation type="unfinished"/>
+        <translation>Неможливо встановити: немає цифрового підпису</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="342"/>
@@ -3486,12 +3491,12 @@
         <translation>Копіювати</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
         <source>Disable</source>
         <translation>Вимкнути</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
         <source>Unavailable</source>
         <translation>Недоступне</translation>
     </message>

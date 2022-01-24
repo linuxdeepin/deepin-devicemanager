@@ -1555,6 +1555,11 @@
         <translation>Ekran</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
+        <source>Overview</source>
+        <translation>Özet</translation>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>Görüntü Bağdaştırıcısı</translation>
@@ -1698,7 +1703,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
         <source>Unable to install - no digital signature</source>
-        <translation type="unfinished"/>
+        <translation>Yüklenemiyor - dijital imza yok</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="342"/>
@@ -3486,12 +3491,12 @@
         <translation>Kopyala</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
         <source>Disable</source>
         <translation>Devre dışı</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
         <source>Unavailable</source>
         <translation>Yok</translation>
     </message>

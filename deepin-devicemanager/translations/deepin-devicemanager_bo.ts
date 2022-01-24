@@ -522,7 +522,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="220"/>
         <source>DigitalOutput</source>
-        <translation>DigitalOutput</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="221"/>
@@ -1553,6 +1553,11 @@
         <location filename="../src/Page/MainWindow.cpp" line="301"/>
         <source>Monitor</source>
         <translation>སྒྲིག་ཆས་མངོན་སྟོན།</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
+        <source>Overview</source>
+        <translation>གནས་ཚུལ་རགས་བསྡུས།</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="305"/>
@@ -3486,12 +3491,12 @@
         <translation>པར་སློག</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
         <source>Disable</source>
         <translation>སྤྱོད་མི་ཆོག</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
         <source>Unavailable</source>
         <translation>སྤྱོད་མི་རུང་།</translation>
     </message>

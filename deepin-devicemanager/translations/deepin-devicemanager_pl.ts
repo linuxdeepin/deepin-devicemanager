@@ -1555,6 +1555,11 @@
         <translation>Monitor</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="301"/>
+        <source>Overview</source>
+        <translation>Podgląd</translation>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="305"/>
         <source>Display Adapter</source>
         <translation>Karta graficzna</translation>
@@ -1698,7 +1703,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
         <source>Unable to install - no digital signature</source>
-        <translation type="unfinished"/>
+        <translation>Nie można zainstalować - brak cyfrowej sygnatury</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="342"/>
@@ -1754,7 +1759,7 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="131"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation>Nie udało się wyłączyć: nie można uzyskać numeru seryjnegoNie udało się wyłączyć: nie można uzyskać numeru seryjnego</translation>
+        <translation>Nie udało się wyłączyć: nie można uzyskać numeru seryjnego</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="146"/>
@@ -3486,12 +3491,12 @@
         <translation>Kopiuj</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="204"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
         <source>Disable</source>
         <translation>Wyłącz</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="212"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
         <source>Unavailable</source>
         <translation>Niedostępne</translation>
     </message>
