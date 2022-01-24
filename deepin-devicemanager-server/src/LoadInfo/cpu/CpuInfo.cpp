@@ -161,7 +161,7 @@ LogicalCpu& CpuInfo::logicalCpu(int logical_id)
     foreach (int physical_id, m_MapPhysicalCpu.keys()) {
         if(physical_id < 0)
             continue;
-        PhysicalCpu physical = m_MapPhysicalCpu[physical_id];
+        PhysicalCpu& physical = m_MapPhysicalCpu[physical_id];
         if(physical.logicalIsExisted(logical_id)){
             return physical.logicalCpu(logical_id);
         }
