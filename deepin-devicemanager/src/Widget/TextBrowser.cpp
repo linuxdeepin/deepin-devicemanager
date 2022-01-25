@@ -156,9 +156,8 @@ void TextBrowser::focusOutEvent(QFocusEvent *e)
     }
     else {
         // 模拟单击效果，当焦点失去的时候刷新界面选中效果
-        QMouseEvent *pressEvent = new QMouseEvent(QEvent::MouseButtonPress, this->mapFromGlobal(QCursor::pos())
-                               , Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-        QTextBrowser::mousePressEvent(pressEvent);
+        QMouseEvent pressEvent(QEvent::MouseButtonPress, this->mapFromGlobal(QCursor::pos()), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+        QTextBrowser::mousePressEvent(&pressEvent);
     }
 }
 
