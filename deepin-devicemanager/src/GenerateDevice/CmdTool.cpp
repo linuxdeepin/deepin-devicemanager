@@ -854,7 +854,8 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
             QString value = re.cap(1);
 
             //这里是为了防止  "usb-storage", "sr"  -》 usb-storage", "sr
-            if (key == "Driver")
+            // bug112311 驱动模块显示异常
+            if ("Driver" ==  key || "Driver Modules" ==  key)
                 value.replace("\"", "");
 
             // 如果信息中有unknown 则过滤
