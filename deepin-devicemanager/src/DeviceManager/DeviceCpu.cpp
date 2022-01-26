@@ -191,8 +191,10 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
         setAttribute(mapInfo, "product", m_Name, false);//这里覆盖了lscpu中的数据。主要版本中lshw中的version是CPU信息，而1050A中读取到的是版本信息。
 
         // bug-108166 lshw 中 product 包含NULL信息，version 信息正确
-        if (m_Name.contains("null", Qt::CaseInsensitive))
+        // bug-112403 lshw 中 product 包含O.E.M.信息，version 信息正确
+        if (m_Name.contains("null", Qt::CaseInsensitive) || m_Name.contains("O.E.M.", Qt::CaseInsensitive) ){
             setAttribute(mapInfo, "version", m_Name);
+        }
     }
 
     // 获取设备基本信息
