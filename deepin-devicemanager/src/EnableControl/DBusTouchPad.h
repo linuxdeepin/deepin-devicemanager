@@ -60,7 +60,6 @@ protected:
     ~DBusTouchPad();
 private:
     static DBusTouchPad    *sInstance;
-    Mouse        *m_dbusMouse;      //mouse dbus对象
     TouchPad     *m_dbusTouchPad;   //mouse dbus对象
 };
 

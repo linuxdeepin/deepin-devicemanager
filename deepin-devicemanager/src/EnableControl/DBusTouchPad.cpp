@@ -6,18 +6,15 @@
 #include <QDBusReply>
 #include <QDebug>
 const QString Service = "com.deepin.daemon.InputDevices";
-DBusTouchPad    *DBusTouchPad::sInstance = nullptr;
+DBusTouchPad *DBusTouchPad::sInstance = nullptr;
 DBusTouchPad::DBusTouchPad()
     :QObject(nullptr)
-, m_dbusMouse(new Mouse(Service, "/com/deepin/daemon/InputDevice/Mouse", QDBusConnection::sessionBus(), this))
 , m_dbusTouchPad(new TouchPad(Service, "/com/deepin/daemon/InputDevice/TouchPad", QDBusConnection::sessionBus(), this))
 {
-
 }
 
 DBusTouchPad::~DBusTouchPad()
 {
-    DELETE_PTR(m_dbusMouse);
     DELETE_PTR(m_dbusTouchPad);
 }
 /**
