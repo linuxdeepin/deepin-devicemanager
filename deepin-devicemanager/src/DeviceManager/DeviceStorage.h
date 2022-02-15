@@ -170,6 +170,15 @@ protected:
     void loadTableData() override;
 
 private:
+    /**
+     * @brief getSerialID 获取序列号字符串
+     * @param strDeviceLink  DeviceLink
+     * @return Serial字符串
+     */
+    QString getSerialID(QString &strDeviceLink);
+
+
+private:
     QString               m_Model;              //<! 【型号】1
     QString               m_Vendor;             //<! 【制造商】2
     QString               m_MediaType;          //<! 【介质类型】3

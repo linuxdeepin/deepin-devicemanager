@@ -53,7 +53,6 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Capacity", m_Size);
-    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
 
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
     m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
@@ -62,6 +61,15 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if ((m_Size.startsWith("0") || m_Size == "") && m_SerialNumber == "")
         return false;
 
+    // get serial num
+    m_SerialNumber = "";
+    QString strLink = mapInfo["SysFS Device Link"];
+    m_SerialNumber = getSerialID(strLink);
+    if (m_SerialNumber.isEmpty()) {
+        setAttribute(mapInfo, "Serial ID", m_SerialNumber);
+    }
+
+
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
     if (m_KeyToLshw.contains("nvme", Qt::CaseInsensitive))
@@ -69,6 +77,49 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 
     getOtherMapInfo(mapInfo);
     return true;
+}
+
+QString DeviceStorage::getSerialID(QString &strDeviceLink)
+{
+    //取SerialID优先级：1.取cid 2.取unique_number 3.取hwinfo中的SerialID
+    QString strSerialNumber = "";
+    if (!strDeviceLink.isEmpty() && strDeviceLink.contains("platform/")) {
+        // /devices/platform/f8300000.ufs/host0/target0:0:0/0:0:0:3
+        // /proc/bootdevice/name:f8300000.ufs
+        QRegExp reg(".*platform/([^/]+)/.*");
+        QString strName = "";
+        QString strBootdeviceName = "";
+        if (reg.exactMatch(strDeviceLink)) {
+            strName = reg.cap(1);
+        }
+        if (!strName.isEmpty()) { //取到设备名称再去读文件，因为读文件开销大。
+            QString Path = "/proc/bootdevice/name";
+            QFile file(Path);
+            if (file.open(QIODevice::ReadOnly)) {
+                strBootdeviceName = file.readAll();
+                file.close();
+            }
+            if (strName == strBootdeviceName) {
+                Path = "/proc/bootdevice/cid";
+                QFile filecid(Path);
+                if (filecid.open(QIODevice::ReadOnly)) {
+                    strSerialNumber = filecid.readAll().trimmed();
+                    filecid.close();
+                }
+            }
+        }
+    }
+
+    if (strSerialNumber.isEmpty()) {
+        QString Path = "/sys" + strDeviceLink + "/unique_number";
+        QFile file(Path);
+        if (file.open(QIODevice::ReadOnly)) {
+            QString value = file.readAll();
+            strSerialNumber = value;
+            file.close();
+        }
+    }
+    return strSerialNumber;
 }
 
 bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
