@@ -156,7 +156,7 @@ void ThreadPool::initCmd()
     m_ListCmd.append(cmdHwinfoKeyboard);
     m_ListUpdate.append(cmdHwinfoKeyboard);
 
-    // 添加hwinfo --network命令
+    // 添加hwinfo --cdrom命令
     Cmd cmdHwinfoCdrom;
     cmdHwinfoCdrom.cmd = QString("%1 %2%3").arg("hwinfo --cdrom > ").arg(PATH).arg("hwinfo_cdrom.txt");
     cmdHwinfoCdrom.file = "hwinfo_cdrom.txt";
