@@ -128,6 +128,12 @@ private:
     void loadHwinfoInfo(const QString &key, const QString &debugfile);
 
     /**
+     * @brief addWidthToMap
+     * @param mapInfo
+     */
+    void addWidthToMap(QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief getMulHwinfoInfo : 解析 hwinfo --sound --network --keyboard --cdrom --disk --display --mouse --usb
      * @param mapLstMap
      */
