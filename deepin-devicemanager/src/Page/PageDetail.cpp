@@ -235,6 +235,18 @@ EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
     return browser->setDeviceEnabled(enable);
 }
 
+void PageDetail::setWakeupMachine(int row, bool wakeup)
+{
+    if (m_ListTextBrowser.size() <= row)
+        return ;
+    // 设置 TextBrowser 可用
+    TextBrowser *browser = m_ListTextBrowser.at(row);
+    if (!browser)
+        return ;
+
+    browser->setWakeupMachine(wakeup);
+}
+
 void PageDetail::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);

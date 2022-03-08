@@ -29,6 +29,7 @@ PageTableHeader::PageTableHeader(QWidget *parent)
     connect(mp_Table, &TableWidget::enableDevice, this, &PageTableHeader::enableDevice);
     connect(mp_Table, &TableWidget::installDriver, this, &PageTableHeader::installDriver);
     connect(mp_Table, &TableWidget::uninstallDriver, this, &PageTableHeader::uninstallDriver);
+    connect(mp_Table, &TableWidget::wakeupMachine, this, &PageTableHeader::wakeupMachine);
     connect(mp_Table, &TableWidget::signalCheckPrinterStatus, this, &PageTableHeader::signalCheckPrinterStatus);
 }
 
@@ -49,7 +50,7 @@ void PageTableHeader::initWidgets()
     setLayout(hLayout);
 }
 
-void PageTableHeader::updateTable(const QList<QStringList> &lst)
+void PageTableHeader::updateTable(const QList<QStringList> &lst, const QList<QStringList>& lstMenuControl)
 {
     // 如果lst.size() == 1 则说明改设备只有一个
     if (lst.size() <= 1)
@@ -81,7 +82,9 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst)
         for (int j = 0; j < column; j++) {
             DStandardItem *item = new DStandardItem(lst[i + 1][j]);
             if(0 == j){
-                item->setData(lst[i + 1][column],Qt::UserRole);
+                for(int index = 0; index < lstMenuControl[i].size(); index++){
+                    item->setData(lstMenuControl[i][index],Qt::UserRole+index);
+                }
             }
             mp_Table->setItem(i, j, item);
         }

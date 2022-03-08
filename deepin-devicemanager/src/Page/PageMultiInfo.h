@@ -102,6 +102,13 @@ private slots:
     void slotEnableDevice(int row, bool enable);
 
     /**
+     * @brief slotWakeupMachine
+     * @param row
+     * @param wakeup
+     */
+    void slotWakeupMachine(int row, bool wakeup);
+
+    /**
      * @brief slotActionCopy:右键菜单更新驱动
      */
     void slotActionUpdateDriver(int row);

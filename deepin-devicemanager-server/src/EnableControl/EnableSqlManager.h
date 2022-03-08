@@ -154,6 +154,43 @@ public:
      */
     void removePathList(QStringList& lsPath);
 
+    /**
+     * @brief insertWakeupData
+     * @param unique_id
+     * @param path
+     * @param wakeup
+     */
+    void insertWakeupData(const QString& unique_id, const QString& path, bool wakeup);
+
+    /**
+     * @brief isWakeupUniqueIdExisted
+     * @param unique_id
+     * @return
+     */
+    bool isWakeupUniqueIdExisted(const QString& unique_id);
+
+    /**
+     * @brief updateWakeData
+     * @param unique_id
+     * @param path
+     * @return
+     */
+    void updateWakeData(const QString& unique_id, const QString& path, bool wakeup);
+
+    /**
+     * @brief wakeupPath
+     * @param unique_id
+     * @return
+     */
+    QString wakeupPath(const QString& unique_id);
+
+    /**
+     * @brief isWakeup
+     * @param unique_id
+     * @return
+     */
+    bool isWakeup(const QString& unique_id);
+
 protected:
     explicit EnableSqlManager(QObject *parent = nullptr);
 

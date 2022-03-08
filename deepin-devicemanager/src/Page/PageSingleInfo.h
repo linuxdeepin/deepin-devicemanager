@@ -119,6 +119,11 @@ protected slots:
      */
     void slotActionRemoveDriver();
 
+    /**
+     * @brief slotWakeupMachine:设置可以唤醒机器
+     */
+    void slotWakeupMachine();
+
 protected:
     /**
      * @brief initWidgets : 初始化控件布局
@@ -139,6 +144,7 @@ protected:
     QAction                 *mp_Enable;      //<! 启用/禁用
     QAction                 *mp_updateDriver;//<! 驱动更新
     QAction                 *mp_removeDriver;//<! 驱动卸载
+    QAction                 *mp_WakeupMachine;//<! 唤醒设备
     QMenu                   *mp_Menu;        //<! 右键菜单
 
     DeviceBaseInfo          *mp_Device;      //<! 设备

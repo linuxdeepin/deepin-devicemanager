@@ -1,6 +1,7 @@
 #include "MonitorUsb.h"
 #include "EnableSqlManager.h"
 #include "EnableUtils.h"
+#include "WakeupUtils.h"
 
 #include <QDebug>
 #include <QProcess>
@@ -71,9 +72,14 @@ void MonitorUsb::monitor()
         // 只有add和remove事件才会更新缓存信息
         strcpy(buf, udev_device_get_action(dev));
         if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) {
+            QProcess process;
+            process.start("hwinfo --usb");
+            process.waitForFinished(-1);
+            QString info = process.readAllStandardOutput();
             if(0 == strcmp("add", buf)){
-                EnableUtils::disableOutDevice();
+                EnableUtils::disableOutDevice(info);
             }
+            WakeupUtils::updateWakeupDeviceInfo(info);
             m_UsbChanged = true;
             m_UsbChangeTime = QDateTime::currentMSecsSinceEpoch();
         }

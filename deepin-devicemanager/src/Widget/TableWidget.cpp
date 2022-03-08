@@ -28,6 +28,7 @@ TableWidget::TableWidget(QWidget *parent)
     , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export"), this))
     , mp_updateDriver(new QAction(tr("Update drivers"), this))
     , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
+    , mp_WakeupMachine(new QAction(tr("Allow it to wake the computer"), this))
     , mp_Menu(new DMenu(this))
     , m_Enable(false)
 
@@ -45,6 +46,7 @@ TableWidget::TableWidget(QWidget *parent)
     connect(mp_Enable, &QAction::triggered, this, &TableWidget::slotActionEnable);
     connect(mp_updateDriver, &QAction::triggered, this, &TableWidget::slotActionUpdateDriver);
     connect(mp_removeDriver, &QAction::triggered, this, &TableWidget::slotActionRemoveDriver);
+    connect(mp_WakeupMachine, &QAction::triggered, this, &TableWidget::slotWakeupMachine);
 }
 
 TableWidget::~TableWidget()
@@ -184,6 +186,9 @@ void TableWidget::slotShowMenu(const QPoint &point)
     mp_Enable->setEnabled(true);
     mp_updateDriver->setEnabled(true);
     mp_removeDriver->setEnabled(true);
+    mp_WakeupMachine->setEnabled(true);
+    mp_WakeupMachine->setCheckable(true);
+    mp_WakeupMachine->setChecked(false);
 
     // 不可用状态：卸载和启用禁用置灰
     if (!mp_Table->currentRowAvailable()) {
@@ -237,6 +242,32 @@ void TableWidget::slotShowMenu(const QPoint &point)
         mp_Menu->addAction(mp_updateDriver);
         mp_Menu->addAction(mp_removeDriver);
     }
+
+    QVariant canWakeup = item->data(Qt::UserRole+1);
+    if(canWakeup.isValid()){
+        mp_Menu->addSeparator();
+        bool canWakeupBool = canWakeup.toString()=="true" ? true : false;
+        if(canWakeupBool){
+            QString wakeupPath = item->data(Qt::UserRole+2).toString();
+            QFile file(wakeupPath);
+            bool isWakeup = false;
+            if(file.open(QIODevice::ReadOnly)){
+                QString info = file.readAll();
+                if(info.contains("disabled"))
+                    isWakeup = false;
+                else
+                    isWakeup =  true;
+            }
+            mp_WakeupMachine->setChecked(isWakeup);
+        }else{
+            mp_WakeupMachine->setEnabled(false);
+        }
+
+        // 如果是禁用状态，则唤醒置灰
+        if(!mp_Table->currentRowEnable())
+            mp_WakeupMachine->setEnabled(false);
+        mp_Menu->addAction(mp_WakeupMachine);
+    }
     mp_Menu->exec(QCursor::pos());
 }
 
@@ -273,6 +304,11 @@ void TableWidget::slotActionUpdateDriver()
 void TableWidget::slotActionRemoveDriver()
 {
     emit uninstallDriver(mp_Table->currentRow());
+}
+
+void TableWidget::slotWakeupMachine()
+{
+    emit wakeupMachine(mp_Table->currentRow(),mp_WakeupMachine->isChecked());
 }
 
 void TableWidget::slotItemClicked(const QModelIndex &index)

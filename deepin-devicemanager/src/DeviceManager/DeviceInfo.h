@@ -175,6 +175,12 @@ public:
     const QString& uniqueID() const;
 
     /**
+     * @brief sysPath
+     * @return
+     */
+    const QString& sysPath() const;
+
+    /**
      * @brief isValid：判断属性值是否有效
      * @param value：属性值
      * @return true:属性值有效

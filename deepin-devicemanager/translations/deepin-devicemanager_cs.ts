@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.0" language="cs">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="cs">
 <context>
     <name>CmdButtonWidget</name>
     <message>
@@ -128,17 +128,17 @@
 <context>
     <name>DeviceBaseInfo</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="486"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="492"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="487"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="493"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="488"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="494"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
@@ -304,13 +304,13 @@
     <name>DeviceCpu</name>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="246"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="248"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="247"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="249"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
@@ -341,7 +341,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="249"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="251"/>
         <source>Architecture</source>
         <translation>Architektura</translation>
     </message>
@@ -367,52 +367,52 @@
         <translation>Jader</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="230"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="232"/>
         <source>Virtualization</source>
         <translation>Virtualizace</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="231"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="233"/>
         <source>Flags</source>
         <translation>Výčet rozšíření instrukční sady procesoru</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="232"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="234"/>
         <source>Extensions</source>
         <translation>Rozšíření</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="233"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="235"/>
         <source>L3 Cache</source>
         <translation>Mezipaměť 3. úrovně</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="234"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="236"/>
         <source>L2 Cache</source>
         <translation>Mezipaměť 2. úrovně</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="235"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="237"/>
         <source>L1i Cache</source>
         <translation>Mezipaměť 1. úrovně (instrukční)</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="238"/>
         <source>L1d Cache</source>
         <translation>Mezipaměť 1. úrovně (datová)</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="237"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="239"/>
         <source>Stepping</source>
         <translation>Číslo revize</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="248"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="250"/>
         <source>Speed</source>
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="248"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="250"/>
         <source>Max Speed</source>
         <translation>Nejvyšší frekvence</translation>
     </message>
@@ -616,62 +616,62 @@
 <context>
     <name>DeviceInput</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="266"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="354"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="267"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="355"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="268"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="356"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="269"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="357"/>
         <source>Interface</source>
         <translation>Rozhraní</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="270"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="358"/>
         <source>Bus Info</source>
         <translation>Informace o sběrnici</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="276"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="364"/>
         <source>Speed</source>
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="277"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="365"/>
         <source>Maximum Current</source>
-        <translation>Nejvyšší proud</translation>
+        <translation>Nejvyšší napájecí proud</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="278"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="366"/>
         <source>Driver</source>
         <translation>Ovladač</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="279"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="367"/>
         <source>Capabilities</source>
         <translation>Schopnosti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="280"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="368"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="292"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="380"/>
         <source>Unavailable</source>
         <translation>Nedostupný</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="296"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="384"/>
         <source>Disable</source>
         <translation>Vypnout</translation>
     </message>
@@ -694,91 +694,110 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="140"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="253"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1196"/>
         <source>CPU</source>
         <translation>Procesor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="145"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1199"/>
         <source>CPU quantity</source>
         <translation>Počet procesorů</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="156"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="254"/>
         <source>Motherboard</source>
         <translation>Základní deska</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="161"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="255"/>
         <source>Memory</source>
         <translation>Operační paměť</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="166"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="256"/>
         <source>Display Adapter</source>
         <translation>Zobrazovací adaptér</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="257"/>
         <source>Sound Adapter</source>
         <translation>Zvukový adaptér</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="258"/>
         <source>Storage</source>
         <translation>Úložiště</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="181"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="259"/>
         <source>Other PCI Devices</source>
         <translation>Ostatní PCI zařízení</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="186"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="260"/>
         <source>Battery</source>
         <translation>Akumulátor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="197"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="261"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="202"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="262"/>
         <source>Network Adapter</source>
         <translation>Síťový adaptér</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="213"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="263"/>
         <source>Mouse</source>
         <translation>Myš</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="218"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="264"/>
         <source>Keyboard</source>
         <translation>Klávesnice</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="228"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="265"/>
         <source>Monitor</source>
         <translation>Monitor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="232"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="266"/>
         <source>CD-ROM</source>
         <translation>Jednotka optických médií</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="267"/>
         <source>Printer</source>
         <translation>Tiskárna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="240"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="268"/>
         <source>Camera</source>
         <translation>Kamera</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="244"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="269"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
         <translation>Ostatní zařízení</translation>
@@ -1337,71 +1356,71 @@
 <context>
     <name>DeviceStorage</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="321"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="350"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="372"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="401"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="322"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="351"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="373"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="402"/>
         <source>Vendor</source>
         <translation>Výrobce</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="323"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="352"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="374"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="403"/>
         <source>Media Type</source>
         <translation>Typ média</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="324"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="353"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="375"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="404"/>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="325"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="376"/>
         <source>Version</source>
         <translation>Verze</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="326"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="377"/>
         <source>Capabilities</source>
         <translation>Schopnosti</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="332"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="383"/>
         <source>Firmware Version</source>
         <translation>Verze firmware</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="333"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="384"/>
         <source>Speed</source>
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="334"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="385"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="335"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="386"/>
         <source>Serial Number</source>
         <translation>Sériové číslo</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="336"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="387"/>
         <source>Interface</source>
         <translation>Rozhraní</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="337"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="388"/>
         <source>Rotation Rate</source>
         <translation>Otáčky</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="412"/>
         <source>Unavailable</source>
         <translation>Nedostupný</translation>
     </message>
@@ -1583,7 +1602,7 @@
 <context>
     <name>PageDetail</name>
     <message>
-        <location filename="../src/Page/PageDetail.cpp" line="289"/>
+        <location filename="../src/Page/PageDetail.cpp" line="301"/>
         <source>More</source>
         <translation>Další</translation>
     </message>
@@ -1703,7 +1722,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
         <source>Unable to install - no digital signature</source>
-        <translation>Nedaří se nainstalovat – chybí digitální podpis</translation>
+        <translation>Není možné nainstalovat – chybí digitální podpis</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="342"/>
@@ -1747,27 +1766,27 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="123"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="132"/>
         <source>Failed to enable the device</source>
         <translation>Zařízení se nepodařilo zapnout</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="126"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="135"/>
         <source>Failed to disable the device</source>
         <translation>Zařízení se nepodařilo vypnout</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="131"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="140"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Nepodařilo se zakázat: nedaří se získat sériové číslo zařízení</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="146"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="162"/>
         <source>Update Drivers</source>
         <translation>Aktualizovat ovladače</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="180"/>
         <source>Uninstall Drivers</source>
         <translation>Odinstalovat ovladače</translation>
     </message>
@@ -1798,64 +1817,69 @@
 <context>
     <name>PageSingleInfo</name>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="28"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="30"/>
         <source>Refresh</source>
         <translation>Načíst znovu</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="29"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="31"/>
         <source>Export</source>
         <translation>Exportovat</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="30"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="32"/>
         <source>Copy</source>
         <translation>Zkopírovat</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="31"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="167"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="33"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="174"/>
         <source>Enable</source>
         <translation>Zapnout</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="32"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="34"/>
         <source>Update drivers</source>
         <translation>Aktualizovat ovladače</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="33"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="35"/>
         <source>Uninstall drivers</source>
         <translation>Odinstalovat ovladače</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="169"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="36"/>
+        <source>Allow it to wake the computer</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="176"/>
         <source>Disable</source>
         <translation>Vypnout</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="218"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="235"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="239"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="256"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Nepodařilo se zakázat: nedaří se získat sériové číslo zařízení</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="222"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="243"/>
         <source>Failed to disable the device</source>
         <translation>Zařízení se nepodařilo vypnout</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="239"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="260"/>
         <source>Failed to enable the device</source>
         <translation>Zařízení se nepodařilo zapnout</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="254"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="275"/>
         <source>Update Drivers</source>
         <translation>Aktualizovat ovladače</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="271"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="292"/>
         <source>Uninstall Drivers</source>
         <translation>Odinstalovat ovladače</translation>
     </message>
@@ -1893,7 +1917,7 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="207"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="92"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="313"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="364"/>
         <source>Config Status</source>
         <translation>Stav nastavení</translation>
     </message>
@@ -1901,9 +1925,9 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="209"/>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="170"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="94"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="260"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="348"/>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="170"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="310"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="361"/>
         <source>physical id</source>
         <translation>fyzický identif.</translation>
     </message>
@@ -1930,19 +1954,19 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="215"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="253"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="341"/>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="216"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="254"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="342"/>
         <source>EV</source>
         <translation>EV</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="217"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="255"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="343"/>
         <source>KEY</source>
         <translation>KEY</translation>
     </message>
@@ -2324,8 +2348,8 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="88"/>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="257"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="305"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="345"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="356"/>
         <source>Device File</source>
         <translation>Soubor zařízení</translation>
     </message>
@@ -2336,7 +2360,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="90"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="314"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="365"/>
         <source>Device Number</source>
         <translation>Číslo zařízení</translation>
     </message>
@@ -2357,13 +2381,13 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="97"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="308"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="359"/>
         <source>logical name</source>
         <translation>logický název</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="99"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="306"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="357"/>
         <source>ansiversion</source>
         <translation>ansi verze</translation>
     </message>
@@ -2393,337 +2417,337 @@
         <translation>Revize procesoru</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="264"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="266"/>
         <source>One</source>
         <translation>Jeden</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="265"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="267"/>
         <source>Two</source>
         <translation>Dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="266"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="268"/>
         <source>Four</source>
         <translation>Čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="267"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="269"/>
         <source>Six</source>
         <translation>Šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="268"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="270"/>
         <source>Eight</source>
         <translation>Osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="270"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="272"/>
         <source>Ten</source>
         <translation>Deset</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
         <source>Twelve</source>
         <translation>Dvanáct</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="272"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
         <source>Fourteen</source>
         <translation>Čtrnáct</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="275"/>
         <source>Sixteen</source>
         <translation>Šestnáct</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="276"/>
         <source>Eighteen</source>
         <translation>Osmnáct</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="276"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="278"/>
         <source>Twenty</source>
         <translation>Dvacet</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="277"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="279"/>
         <source>Twenty-two</source>
         <translation>Dvacet dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="278"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="280"/>
         <source>Twenty-four</source>
         <translation>Dvacet čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="279"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="281"/>
         <source>Twenty-six</source>
         <translation>Dvacet šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="280"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="282"/>
         <source>Twenty-eight</source>
         <translation>Dvacet osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="282"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="284"/>
         <source>Thirty</source>
         <translation>Třicet</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="283"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
         <source>Thirty-two</source>
         <translation>Třicet dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="284"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
         <source>Thirty-four</source>
         <translation>Třicet čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="287"/>
         <source>Thirty-six</source>
         <translation>Třicet šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="288"/>
         <source>Thirty-eight</source>
         <translation>Třicet osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="288"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
         <source>Forty</source>
         <translation>Čtyřicet</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="289"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="291"/>
         <source>Forty-two</source>
         <translation>Čtyřicet dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="292"/>
         <source>Forty-four</source>
         <translation>Čtyřicet čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="291"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="293"/>
         <source>Forty-six</source>
         <translation>Čtyřicet šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="292"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="294"/>
         <source>Forty-eight</source>
         <translation>Čtyřicet osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="294"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="296"/>
         <source>Fifty</source>
         <translation>Padesát</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="295"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="297"/>
         <source>Fifty-two</source>
         <translation>Padesát dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="296"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="298"/>
         <source>Fifty-four</source>
         <translation>Padesát čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="297"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="299"/>
         <source>Fifty-six</source>
         <translation>Padesát šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="298"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="300"/>
         <source>Fifty-eight</source>
         <translation>Padesát osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="300"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="302"/>
         <source>Sixty</source>
         <translation>Šedesát</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="301"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="303"/>
         <source>Sixty-two</source>
         <translation>Šedesát dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="302"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="304"/>
         <source>Sixty-four</source>
         <translation>Šedesát čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="303"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="305"/>
         <source>Sixty-six</source>
         <translation>Šedesát šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="304"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="306"/>
         <source>Sixty-eight</source>
         <translation>Šedesát osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="306"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="308"/>
         <source>Seventy</source>
         <translation>Sedmdesát</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="307"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="309"/>
         <source>Seventy-two</source>
         <translation>Sedmdesát dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="308"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
         <source>Seventy-four</source>
         <translation>Sedmdesát čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="309"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
         <source>Seventy-six</source>
         <translation>Sedmdesát šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="312"/>
         <source>Seventy-eight</source>
         <translation>Sedmdesát osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="312"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="314"/>
         <source>Eighty</source>
         <translation>Osmdesát</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="313"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="315"/>
         <source>Eighty-two</source>
         <translation>Osmdesát dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="314"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="316"/>
         <source>Eighty-four</source>
         <translation>Devadesát čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="315"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="317"/>
         <source>Eighty-six</source>
         <translation>Osmdesát šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="316"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="318"/>
         <source>Eighty-eight</source>
         <translation>Osmdesát osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="318"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="320"/>
         <source>Ninety</source>
         <translation>Devadesát</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="319"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
         <source>Ninety-two</source>
         <translation>Devadesát dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="320"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
         <source>Ninety-four</source>
         <translation>Devadesát čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="323"/>
         <source>Ninety-six</source>
         <translation>Devadesát šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="324"/>
         <source>Ninety-eight</source>
         <translation>Devadesát osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="324"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
         <source>One hundred</source>
         <translation>Jedno sto</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="325"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
         <source>One hundred and Two</source>
         <translation>Jedno sto a dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="328"/>
         <source>One hundred and four</source>
         <translation>Jedno sto a čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="329"/>
         <source>One hundred and Six</source>
         <translation>Jedno sto a šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="328"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
         <source>One hundred and Eight</source>
         <translation>Jedno sto a osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="332"/>
         <source>One hundred and Ten</source>
         <translation>Jedno sto a deset</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="333"/>
         <source>One hundred and Twelve</source>
         <translation>Jedno sto a dvanáct</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="332"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="334"/>
         <source>One hundred and Fourteen</source>
         <translation>Jedno sto a čtrnáct</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="333"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="335"/>
         <source>One hundred and Sixteen</source>
         <translation>Jedno sto a šestnáct</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="334"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="336"/>
         <source>One hundred and Eighteen</source>
         <translation>Jedno sto a osmdesát</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="336"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="338"/>
         <source>One hundred and Twenty</source>
         <translation>Jedno sto a dvacet</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="337"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="339"/>
         <source>One hundred and Twenty-two</source>
         <translation>Jedno sto a dvacet dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="338"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="340"/>
         <source>One hundred and Twenty-four</source>
         <translation>Jedno sto a dvacet čtyři</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="339"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="341"/>
         <source>One hundred and Twenty-six</source>
         <translation>Jedno sto a dvacet šest</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="340"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="342"/>
         <source>One hundred and Twenty-eight</source>
         <translation>Jedno sto a dvacet osm</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="341"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="343"/>
         <source>One hundred and Ninety-two</source>
         <translation>Jedno sto a devadesát dva</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="342"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="344"/>
         <source>Two hundred and fifty-six</source>
         <translation>Dvě stě a padesát šest</translation>
     </message>
@@ -2763,25 +2787,25 @@
         <translation>Verze GLSL</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="78"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="189"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="207"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="79"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="240"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="258"/>
         <source>Unknown</source>
         <translation>Neznámé</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="252"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="340"/>
         <source>Uniq</source>
         <translation>Uniq</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="256"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="344"/>
         <source>MSC</source>
         <translation>MSC</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInput.cpp" line="258"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="304"/>
+        <location filename="../src/DeviceManager/DeviceInput.cpp" line="346"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="355"/>
         <source>Hardware Class</source>
         <translation>Třída hardware</translation>
     </message>
@@ -3378,41 +3402,41 @@
         <translation>stran</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="185"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="203"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="340"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="398"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="236"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="254"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="391"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="449"/>
         <source>SSD</source>
         <translation>Úložiště bez pohyblivých součástek (SSD)</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="187"/>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="205"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="238"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="256"/>
         <source>HDD</source>
         <translation>Pevný disk (HDD)</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="307"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="358"/>
         <source>bus info</source>
         <translation>informace o sběrnici</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="309"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="360"/>
         <source>logicalsectorsize</source>
         <translation>velikost logického sektoru</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="311"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="362"/>
         <source>sectorsize</source>
         <translation>velikost sektoru</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="312"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="363"/>
         <source>guid</source>
         <translation>globálně se neopakující identif.</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="315"/>
+        <location filename="../src/DeviceManager/DeviceStorage.cpp" line="366"/>
         <source>Geometry (Logical)</source>
         <translation>Geometrie (logická)</translation>
     </message>
@@ -3442,7 +3466,7 @@
     <name>TableWidget</name>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="26"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="195"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="200"/>
         <source>Disable</source>
         <translation>Vypnout</translation>
     </message>
@@ -3467,8 +3491,13 @@
         <translation>Odinstalovat ovladače</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="200"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="260"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="31"/>
+        <source>Allow it to wake the computer</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Widget/TableWidget.cpp" line="205"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="291"/>
         <source>Enable</source>
         <translation>Zapnout</translation>
     </message>
@@ -3476,27 +3505,27 @@
 <context>
     <name>TextBrowser</name>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="24"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="26"/>
         <source>Refresh</source>
         <translation>Načíst znovu</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="25"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="27"/>
         <source>Export</source>
         <translation>Exportovat</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="26"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="28"/>
         <source>Copy</source>
         <translation>Zkopírovat</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="216"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="227"/>
         <source>Disable</source>
         <translation>Vypnout</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="224"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="235"/>
         <source>Unavailable</source>
         <translation>Nedostupný</translation>
     </message>

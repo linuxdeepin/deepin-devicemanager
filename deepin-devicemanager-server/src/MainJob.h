@@ -10,6 +10,8 @@ class DetectThread;
 class DBusInterface;
 class DriverDBusInterface;
 class DBusEnableInterface;
+class DBusWakeupInterface;
+class QThread;
 
 enum INSTRUCTION_RES {
     IR_NULL = 0,
@@ -88,6 +90,7 @@ private:
     DBusInterface         *mp_IFace;              //<! Dbus interface
     DriverDBusInterface   *mp_DriverOperateIFace; //<! 驱动操作Dbus服务接口
     DBusEnableInterface   *mp_Enable;             //<! 启用禁用dbus
+    DBusWakeupInterface   *mp_Wakeup;               //<! 唤醒
     static bool           s_ClientIsUpdating;     //<! 前台正在更新中
     static bool           s_ServerIsUpdating;     //<! 后台正在更新中
     bool                  m_FirstUpdate;          //<! 是否是第一次更新

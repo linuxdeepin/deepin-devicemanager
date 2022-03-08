@@ -5,9 +5,11 @@
 #include "DBusInterface.h"
 #include "DriverDBusInterface.h"
 #include "DBusEnableInterface.h"
+#include "DBusWakeupInterface.h"
 #include "DeviceInfoManager.h"
 #include "EnableSqlManager.h"
 #include "EnableUtils.h"
+#include "WakeupUtils.h"
 
 #include <QDateTime>
 #include <QThread>
@@ -25,6 +27,7 @@ const QString SERVICE_NAME = "com.deepin.devicemanager";
 const QString DRIVER_SERVICE_PATH = "/com/deepin/drivermanager";
 const QString DEVICE_SERVICE_PATH = "/com/deepin/devicemanager";
 const QString ENABLE_SERVICE_PATH = "/com/deepin/enablemanager";
+const QString WAKEUP_SERVICE_PATH = "/com/deepin/wakeupmanager";
 bool  MainJob::s_ServerIsUpdating = false;
 bool  MainJob::s_ClientIsUpdating = false;
 
@@ -32,9 +35,10 @@ MainJob::MainJob(QObject *parent)
     : QObject(parent)
     , mp_Pool(new ThreadPool)
     , mp_DetectThread(nullptr)
-    , mp_IFace(new DBusInterface)
+    , mp_IFace(new DBusInterface(this))
     , mp_DriverOperateIFace(new DriverDBusInterface(this))
-    , mp_Enable(new DBusEnableInterface())
+    , mp_Enable(new DBusEnableInterface(this))
+    , mp_Wakeup(new DBusWakeupInterface(this))
     , m_FirstUpdate(true)
 {
     // 守护进程启动的时候加载所有信息
@@ -44,6 +48,7 @@ MainJob::MainJob(QObject *parent)
     const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");
     EnableUtils::disableOutDevice(info);
     EnableUtils::disableInDevice();
+    WakeupUtils::updateWakeupDeviceInfo(info);
 }
 
 MainJob::~MainJob()
@@ -169,6 +174,11 @@ bool MainJob::initDBus()
         qInfo() << QDBusConnection::systemBus().lastError();
         return false;
     }
+    if (!systemBus.registerObject(WAKEUP_SERVICE_PATH, mp_Wakeup, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
+        qInfo() << QDBusConnection::systemBus().lastError();
+        return false;
+    }
+
 
     static QThread t;
     mp_Enable->moveToThread(&t);

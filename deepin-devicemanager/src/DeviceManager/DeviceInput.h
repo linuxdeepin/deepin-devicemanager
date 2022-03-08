@@ -98,6 +98,30 @@ public:
      */
     bool enable() override;
 
+    /**
+     * @brief canWakeupMachine
+     * @return
+     */
+    bool canWakeupMachine();
+
+    /**
+     * @brief isWakeupMachine
+     * @return
+     */
+    bool isWakeupMachine();
+
+    /**
+     * @brief wakeupPath
+     * @return
+     */
+    QString wakeupPath();
+
+    /**
+     * @brief wakeID
+     * @return
+     */
+    const QString& wakeupID();
+
 protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
@@ -126,6 +150,12 @@ private:
      */
     void setInfoFromBluetoothctl();
 
+    /**
+     * @brief getPS2Syspath 获取ps2鼠标键盘的syspath
+     * @param dfs : Device Files 属性
+     */
+    bool getPS2Syspath(const QString& dfs);
+
 private:
     QString             m_Name;                         //<! 【名称】
     QString             m_Vendor;                       //<! 【制造商】
@@ -139,7 +169,7 @@ private:
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
     QString             m_KeyToLshw;                    //<!
-    QString             m_SerialID;                     //<!  设备的序列号id
+    QString             m_WakeupID;                     //<!  wakeup id
 
     QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
 };

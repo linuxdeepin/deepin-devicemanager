@@ -5,6 +5,8 @@
 #include "PageTableWidget.h"
 #include "PageDriverControl.h"
 #include "DevicePrint.h"
+#include "DeviceInput.h"
+#include "DBusWakeupInterface.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -31,6 +33,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Enable(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Enable"), this))
     , mp_updateDriver(new QAction(tr("Update drivers"), this))
     , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
+    , mp_WakeupMachine(new QAction(tr("Allow it to wake the computer"), this))
     , mp_Menu(new DMenu(this))
     , mp_Device(nullptr)
     , m_SameDevice(false)
@@ -49,6 +52,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     connect(mp_Enable, &QAction::triggered, this, &PageSingleInfo::slotActionEnable);
     connect(mp_updateDriver, &QAction::triggered, this, &PageSingleInfo::slotActionUpdateDriver);
     connect(mp_removeDriver, &QAction::triggered, this, &PageSingleInfo::slotActionRemoveDriver);
+    connect(mp_WakeupMachine, &QAction::triggered, this, &PageSingleInfo::slotWakeupMachine);
 }
 
 PageSingleInfo::~PageSingleInfo()
@@ -153,6 +157,9 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     mp_Enable->setEnabled(true);
     mp_updateDriver->setEnabled(true);
     mp_removeDriver->setEnabled(true);
+    mp_WakeupMachine->setEnabled(true);
+    mp_WakeupMachine->setCheckable(true);
+    mp_WakeupMachine->setChecked(false);
 
     // 不可用状态：卸载和启用禁用置灰
     if(!mp_Device->available()){
@@ -193,6 +200,20 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
         mp_Menu->addSeparator();
         mp_Menu->addAction(mp_updateDriver);
         mp_Menu->addAction(mp_removeDriver);
+    }
+
+    DeviceInput* input = dynamic_cast<DeviceInput*>(mp_Device);
+    if(input){
+        mp_Menu->addSeparator();
+        if(input->canWakeupMachine()){
+            mp_WakeupMachine->setChecked(input->isWakeupMachine());
+        }else{
+            mp_WakeupMachine->setEnabled(false);
+        }
+        // 如果是禁用状态，则唤醒置灰
+        if(!mp_Device->enable())
+            mp_WakeupMachine->setEnabled(false);
+        mp_Menu->addAction(mp_WakeupMachine);
     }
     mp_Menu->exec(QCursor::pos());
 }
@@ -275,7 +296,18 @@ void PageSingleInfo::slotActionRemoveDriver()
         emit refreshInfo();
         rmDriver->disconnect();
     });
+}
 
+void PageSingleInfo::slotWakeupMachine()
+{
+    // 只有键盘鼠标才有唤醒机器的功能
+    DeviceInput *input = qobject_cast<DeviceInput*>(mp_Device);
+    if(!input)
+        return;
+
+    if(input->wakeupID().isEmpty() || input->sysPath().isEmpty())
+        return;
+    DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),mp_WakeupMachine->isChecked());
 }
 
 void PageSingleInfo::initWidgets()

@@ -6,6 +6,7 @@
 #include "DeviceInfo.h"
 #include "PageDriverControl.h"
 #include "DevicePrint.h"
+#include "DeviceInput.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -40,6 +41,7 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     connect(mp_Table, &PageTableHeader::enableDevice, this, &PageMultiInfo::slotEnableDevice);
     connect(mp_Table, &PageTableHeader::installDriver, this, &PageMultiInfo::slotActionUpdateDriver);
     connect(mp_Table, &PageTableHeader::uninstallDriver, this, &PageMultiInfo::slotActionRemoveDriver);
+    connect(mp_Table, &PageTableHeader::wakeupMachine, this, &PageMultiInfo::slotWakeupMachine);
     connect(mp_Table, &PageTableHeader::signalCheckPrinterStatus, this, &PageMultiInfo::slotCheckPrinterStatus);
     emit refreshInfo();
 }
@@ -62,16 +64,23 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     //  获取多个设备界面表格信息
     QList<QStringList> deviceList;
     deviceList.append(lst[0]->getTableHeader());
+    QList<QStringList> menuControlList;
     foreach (DeviceBaseInfo *info, lst) { 
         QStringList lstDeviceInfo = info->getTableData();
-        if (lstDeviceInfo.size() > 0){
-            lstDeviceInfo.append(info->canUninstall()?"true":"false");
-            deviceList.append(lstDeviceInfo);
+        deviceList.append(lstDeviceInfo);
+
+        QStringList menuControl;
+        menuControl.append(info->canUninstall()?"true":"false");
+        DeviceInput* input = dynamic_cast<DeviceInput*>(info);
+        if(input){
+            menuControl.append(input->canWakeupMachine()?"true":"false");
+            menuControl.append(input->wakeupPath());
         }
+        menuControlList.append(menuControl);
     }
 
     // 更新表格
-    mp_Table->updateTable(deviceList);
+    mp_Table->updateTable(deviceList, menuControlList);
 
     // 更新详细信息
     mp_Detail->showDeviceInfo(lst);
@@ -131,6 +140,13 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
         QString con = tr("Failed to disable it: unable to get the device SN");
         DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
     }
+}
+
+void PageMultiInfo::slotWakeupMachine(int row, bool wakeup)
+{
+    if (!mp_Detail)
+        return;
+    mp_Detail->setWakeupMachine(row,wakeup);
 }
 
 void PageMultiInfo::slotActionUpdateDriver(int row)

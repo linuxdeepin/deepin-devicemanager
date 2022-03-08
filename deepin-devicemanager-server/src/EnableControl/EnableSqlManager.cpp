@@ -10,6 +10,7 @@
 #define DB_TABLE_AUTHORIZED "authorized"
 #define DB_TABLE_REMOVE "remove"
 #define DB_TABLE_PRINTER "printer"
+#define DB_TABLE_WAKEUP "wake"
 
 std::atomic<EnableSqlManager *> EnableSqlManager::s_Instance;
 std::mutex EnableSqlManager::m_mutex;
@@ -180,6 +181,48 @@ void EnableSqlManager::removePathList(QStringList& lsPath)
     }
 }
 
+void EnableSqlManager::insertWakeupData(const QString& unique_id, const QString& path, bool wakeup)
+{
+    QString sql = QString("INSERT INTO %1 (unique_id, path, wakeup) VALUES ('%2', '%3', '%4');").arg(DB_TABLE_WAKEUP).arg(unique_id).arg(path).arg(wakeup);
+    if (!m_sqlQuery.exec(sql)) {
+        qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
+    }
+}
+
+bool EnableSqlManager::isWakeupUniqueIdExisted(const QString& unique_id)
+{
+    QString sql = QString("SELECT COUNT(*) FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_WAKEUP).arg(unique_id);
+    if (m_sqlQuery.exec(sql) && m_sqlQuery.next()) {
+        return m_sqlQuery.value(0).toInt() > 0;
+    }
+    return false;
+}
+
+void EnableSqlManager::updateWakeData(const QString& unique_id, const QString& path, bool wakeup)
+{
+    QString sql = QString("UPDATE %1 SET path='%2', wakeup='%3' WHERE unique_id='%4';").arg(DB_TABLE_WAKEUP).arg(path).arg(wakeup).arg(unique_id);
+    if (!m_sqlQuery.exec(sql)) {
+        qInfo() << m_sqlQuery.lastError();
+    }
+}
+
+QString EnableSqlManager::wakeupPath(const QString& unique_id)
+{
+    QString sql = QString("SELECT path FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_WAKEUP).arg(unique_id);
+    if (m_sqlQuery.exec(sql) && m_sqlQuery.next()) {
+        return m_sqlQuery.value(0).toString();
+    }
+    return "";
+}
+
+bool EnableSqlManager::isWakeup(const QString& unique_id)
+{
+    QString sql = QString("SELECT wakeup FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_WAKEUP).arg(unique_id);
+    if (m_sqlQuery.exec(sql) && m_sqlQuery.next())
+        return m_sqlQuery.value(0).toBool();
+    return false;
+}
+
 EnableSqlManager::EnableSqlManager(QObject *parent)
     :QObject (parent)
 {
@@ -222,6 +265,13 @@ void EnableSqlManager::initDB()
     }
     if(!tableStrList.contains(DB_TABLE_PRINTER)){
         QString sql = QString("CREATE TABLE %1 (class text, name text, path text)").arg(DB_TABLE_PRINTER);
+        bool res = m_sqlQuery.exec(sql);
+        if(!res){
+            qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
+        }
+    }
+    if(!tableStrList.contains(DB_TABLE_WAKEUP)){
+        QString sql = QString("CREATE TABLE %1 (unique_id text, path text, wakeup boolean)").arg(DB_TABLE_WAKEUP);
         bool res = m_sqlQuery.exec(sql);
         if(!res){
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();

@@ -134,6 +134,12 @@ private:
     void getMulHwinfoInfo(const QString &info);
 
     /**
+     * @brief addWidthToMap
+     * @param mapInfo
+     */
+    void addWidthToMap(QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief getRemoveInfo
      * @param lstMap
      */

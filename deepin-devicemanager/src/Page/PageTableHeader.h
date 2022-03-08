@@ -45,7 +45,7 @@ public:
      * @brief updateTable:更新表格
      * @param lst : 表格内容
      */
-    void updateTable(const QList<QStringList> &lst);
+    void updateTable(const QList<QStringList> &lst, const QList<QStringList>& lstMenuControl);
 
     /**
      * @brief setColumnAverage:设置每列等宽
@@ -77,6 +77,7 @@ signals:
     void enableDevice(int row, bool enable);
     void uninstallDriver(int row);
     void installDriver(int row);
+    void wakeupMachine(int row, bool wakeup);
 
     /**
      * @brief signalCheckPrinterStatus 判断dde-printer是否被安装

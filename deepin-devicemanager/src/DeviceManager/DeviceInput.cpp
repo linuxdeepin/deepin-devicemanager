@@ -3,6 +3,7 @@
 #include "DeviceManager.h"
 #include "DBusEnableInterface.h"
 #include "DBusTouchPad.h"
+#include "DBusWakeupInterface.h"
 
 // Qt库文件
 #include <QDebug>
@@ -21,7 +22,7 @@ DeviceInput::DeviceInput()
     , m_MaximumPower("")
     , m_Speed("")
     , m_KeyToLshw("")
-    , m_SerialID("")
+    , m_WakeupID("")
 {
     initFilterKey();
     m_CanEnable = true;
@@ -54,8 +55,6 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
         m_CanUninstall = false;
     }
 
-
-
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
 
@@ -81,6 +80,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
+    setAttribute(mapInfo, "Unique ID", m_WakeupID);
 
     // 获取键盘的接口类型
     if (mapInfo.find("Hotplug") != mapInfo.end())
@@ -105,6 +105,11 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 当驱动为空，但是又是ps/2鼠键时，驱动不可更新卸载
     if(m_Driver.isEmpty() && "PS/2" == m_Interface){
         m_CanUninstall = false;
+    }
+
+    // ps2键盘的接口 将Device Files作为syspath解析
+    if("PS/2" == m_Interface){
+        getPS2Syspath(mapInfo["Device Files"]);
     }
 
     // 获取映射到 lshw设备信息的 关键字
@@ -166,6 +171,52 @@ void DeviceInput::setInfoFromBluetoothctl()
     }
 }
 
+bool DeviceInput::getPS2Syspath(const QString& dfs)
+{
+    // 获取 dfs 中的 event
+    QRegExp regdfs = QRegExp(".*(event[0-9]{1,2}).*");
+    if(!regdfs.exactMatch(dfs)){
+        return false;
+    }
+    QString eventdfs = regdfs.cap(1);
+
+    QFile file("/proc/bus/input/devices");
+    if(!file.open(QIODevice::ReadOnly))
+        return false;
+
+    QString info = file.readAll();
+    QStringList lstDevices = info.split("\n\n");
+    foreach(const QString& item,lstDevices){
+        QStringList lines = item.split("\n");
+        QString sysfs = "";
+        QString event = "";
+        foreach(const QString& line,lines){
+            if(line.startsWith("S:")){
+                sysfs = line;
+                continue;
+            }
+            QRegExp reg = QRegExp("H: Handlers=.*(event[0-9]{1,2}).*");
+            if(reg.exactMatch(line)){
+                event = reg.cap(1);
+            }
+        }
+
+        if(!event.isEmpty() && !sysfs.isEmpty()){
+            if(event == eventdfs){
+                QRegExp regfs;
+                if(sysfs.contains("i2c_designware"))
+                    regfs = QRegExp("S: Sysfs=(.*)/input/input[0-9]{1,2}");
+                else
+                    regfs = QRegExp("S: Sysfs=(.*)/input[0-9]{1,2}");
+                if(regfs.exactMatch(sysfs)){
+                    m_SysPath = regfs.cap(1);
+                }
+            }
+        }
+    }
+
+    return true;
+}
 
 const QString &DeviceInput::name() const
 {
@@ -244,6 +295,43 @@ bool DeviceInput::enable()
         m_Enable = true;
     }
     return m_Enable;
+}
+
+bool DeviceInput::canWakeupMachine()
+{
+    if(m_WakeupID.isEmpty())
+        return false;
+    QFile file(wakeupPath());
+    if(!file.open(QIODevice::ReadOnly)){
+        return false;
+    }
+    return true;
+}
+
+bool DeviceInput::isWakeupMachine()
+{
+    QFile file(wakeupPath());
+    if(!file.open(QIODevice::ReadOnly)){
+        return false;
+    }
+    QString info = file.readAll();
+    if(info.contains("disabled"))
+        return false;
+    return true;
+}
+
+QString DeviceInput::wakeupPath()
+{
+    int index = m_SysPath.lastIndexOf('/');
+    if(index < 1){
+        return "";
+    }
+    return QString("/sys") + m_SysPath.left(index) + QString("/power/wakeup");
+}
+
+const QString& DeviceInput::wakeupID()
+{
+    return m_WakeupID;
 }
 
 void DeviceInput::initFilterKey()

@@ -63,6 +63,12 @@ public:
     EnableDeviceStatus setDeviceEnabled(bool enable);
 
     /**
+     * @brief setWakeupMachine
+     * @param wakeup
+     */
+    void setWakeupMachine(bool wakeup);
+
+    /**
      * @brief updateShowOtherInfo 更新是否需要显示其它信息
      */
     void updateShowOtherInfo();

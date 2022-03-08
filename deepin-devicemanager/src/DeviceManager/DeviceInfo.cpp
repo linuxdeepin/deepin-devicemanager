@@ -13,6 +13,7 @@ DWIDGET_USE_NAMESPACE
 DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     : QObject(parent)
     , m_UniqueID("")
+    , m_SerialID("")
     , m_SysPath("")
     , m_HardwareClass("")
     , m_HwinfoToLshw("")
@@ -473,6 +474,11 @@ const QString& DeviceBaseInfo::hardwareClass() const
 const QString& DeviceBaseInfo::uniqueID() const
 {
     return m_UniqueID;
+}
+
+const QString& DeviceBaseInfo::sysPath() const
+{
+    return m_SysPath;
 }
 
 const QString DeviceBaseInfo::getOverviewInfo()

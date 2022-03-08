@@ -92,7 +92,7 @@ TEST_F(UT_PageSingleInfo, UT_PageSingleInfo_slotShowMenu_001)
     stub.set((QAction * (QMenu::*)(const QPoint &, QAction *))ADDR(QMenu, exec), ut_single_exec);
 
     m_PageSingleInfo->slotShowMenu(QPoint(0, 0));
-    EXPECT_EQ(m_PageSingleInfo->mp_Menu->actions().size(), 7);
+    EXPECT_EQ(m_PageSingleInfo->mp_Menu->actions().size(), 9);
 
     delete m_PageSingleInfo->mp_Device;
 }
@@ -105,7 +105,7 @@ TEST_F(UT_PageSingleInfo, UT_PageSingleInfo_slotShowMenu_002)
     stub.set((QAction * (QMenu::*)(const QPoint &, QAction *))ADDR(QMenu, exec), ut_single_exec);
 
     m_PageSingleInfo->slotShowMenu(QPoint(0, 0));
-    EXPECT_EQ(m_PageSingleInfo->mp_Menu->actions().size(), 7);
+    EXPECT_EQ(m_PageSingleInfo->mp_Menu->actions().size(), 9);
 
     delete m_PageSingleInfo->mp_Device;
 }

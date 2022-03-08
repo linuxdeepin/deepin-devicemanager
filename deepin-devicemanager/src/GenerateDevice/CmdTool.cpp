@@ -442,9 +442,32 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
         } else if ("graphics card" == mapInfo["Hardware Class"]) {
             if (mapInfo["Device"].contains("Graphics Processing Unit"))
                 continue;
+            addWidthToMap(mapInfo);
             addMapInfo("hwinfo_display", mapInfo);
         } else {
             addUsbMapInfo("hwinfo_usb", mapInfo);
+        }
+    }
+}
+
+void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
+{
+    QString vendor = mapInfo["Vendor"];
+    if(!vendor.contains("NVIDIA Corporation")){
+        return;
+    }
+
+    QString cmd = QString("nvidia-settings -q GPUMemoryInterface");
+    QString sInfo;
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(-1);
+    sInfo = process.readAllStandardOutput();
+    QStringList lines = sInfo.split("\n");
+    foreach (const QString &line, lines) {
+        QRegExp reg("\\s\\sAttribute\\s'GPUMemoryInterface' \\(.*\\):\\s([0-9]{2}).*");
+        if(reg.exactMatch(line)){
+            mapInfo.insert("Width",reg.cap(1) + " bits");
         }
     }
 }

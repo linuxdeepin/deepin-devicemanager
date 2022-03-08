@@ -16,7 +16,9 @@
 #include <QDebug>
 
 // 其它头文件
-#include "DeviceManager/DeviceInfo.h"
+#include "DeviceInfo.h"
+#include "DeviceInput.h"
+#include "DBusWakeupInterface.h"
 
 TextBrowser::TextBrowser(QWidget *parent)
     : DTextBrowser(parent)
@@ -99,6 +101,16 @@ EnableDeviceStatus TextBrowser::setDeviceEnabled(bool enable)
         return EDS_Cancle;
     }
     return mp_Info->setEnable(enable);
+}
+
+void TextBrowser::setWakeupMachine(bool wakeup)
+{
+    DeviceInput* input = dynamic_cast<DeviceInput*>(mp_Info);
+    if(!input)
+        return;
+    if(input->wakeupID().isEmpty() || input->sysPath().isEmpty())
+        return;
+    DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),wakeup);
 }
 
 void TextBrowser::updateShowOtherInfo()
