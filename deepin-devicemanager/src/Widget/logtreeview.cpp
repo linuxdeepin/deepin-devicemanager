@@ -20,11 +20,9 @@
  */
 
 #include "logtreeview.h"
-
 #include <DApplication>
 #include <DApplicationHelper>
 #include <DStyledItemDelegate>
-
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -32,181 +30,50 @@
 #include <QHeaderView>
 #include <QScrollBar>
 #include <QPainterPath>
-
-#include "MacroDefinition.h"
-#include "TableWidget.h"
+//#include "structdef.h"
+#include "deviceinfowidgetbase.h"
+#include "../commondefine.h"
 
 DWIDGET_USE_NAMESPACE
 
 LogTreeView::LogTreeView(QWidget *parent)
     : DTreeView(parent)
-    , m_RowCount(4)
-    , mp_Model(nullptr)
-    , mp_ItemDelegate(nullptr)
-    , mp_HeaderView(nullptr)
 {
     initUI();
-}
 
-void LogTreeView::setHeaderLabels(const QStringList &lst)
-{
-    if (mp_Model) {
-        mp_Model->setHorizontalHeaderLabels(lst);
-    }
-}
+    m_pModel = new QStandardItemModel(this);
 
-void LogTreeView::setItem(int row, int column, QStandardItem *item)
-{
-    if (mp_Model) {
-        mp_Model->setItem(row, column, item);
-    }
-}
+    setModel(m_pModel);
 
-QStandardItem *LogTreeView::item(int row, int column)
-{
-    if(mp_Model && mp_Model->rowCount() > row && mp_Model->columnCount() > column){
-        return mp_Model->item(row,column);
-    }
-    return nullptr;
-}
-
-void LogTreeView::setColumnAverage()
-{
-    if (!mp_HeaderView) {
-        return;
-    }
-    // 设置每一行等宽
-    int colCount = mp_HeaderView->count();
-    if (colCount == 0)
-        return;
-
-    int avgColWidth = width() / colCount;
-    for (int i = 0; i < colCount; i++) {
-        setColumnWidth(i, avgColWidth);
-    }
-}
-
-bool LogTreeView::currentRowEnable()
-{
-    QModelIndex index = currentIndex();
-    int row = index.row();
-    if (row < 0) {
-        return false;
-    }
-    QStandardItem *item = mp_Model->item(row, 0);
-    if (item) {
-        QString str = item->text();
-        if (str.startsWith("(" + tr("Disable") + ")")) {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool LogTreeView::currentRowAvailable()
-{
-    QModelIndex index = currentIndex();
-     int row = index.row();
-     if (row < 0) {
-         return false;
-     }
-     QStandardItem *item = mp_Model->item(row, 0);
-     if (item) {
-         QString str = item->text();
-         if (str.startsWith("(" + tr("Unavailable") + ")")) {
-             return false;
-         }
-     }
-     return true;
-}
-
-int LogTreeView::currentRow()
-{
-    QModelIndex index = currentIndex();
-    return index.row();
-}
-
-void LogTreeView::updateCurItemEnable(int row, int enable)
-{
-    QStandardItem *item = mp_Model->item(row, 0);
-    if (item) {
-        QString str = item->text();
-        if (enable) {
-            str.replace("(" + tr("Disable") + ")", "");
-        } else {
-            str = "(" + tr("Disable") + ")" + str;
-        }
-
-        item->setText(str);
-    }
-}
-
-void LogTreeView::clear()
-{
-    if (mp_Model)
-        mp_Model->clear();
-}
-
-void LogTreeView::setRowNum(int row)
-{
-    // 设置表格行数
-    m_RowCount = row;
-
-    // 行数改变,表格高度要随之改变，为保证treewidget横向滚动条与item不重叠，添加滚动条高度(bug52470)
-    this->setFixedHeight(TREE_ROW_HEIGHT * (m_RowCount + 1) + HORSCROLL_WIDTH);
-}
-
-int LogTreeView::RowNum() const
-{
-    return m_RowCount;
 }
 
 void LogTreeView::initUI()
 {
-    // 模型
-    mp_Model = new QStandardItemModel(this);
-    setModel(mp_Model);
+    m_itemDelegate = new LogViewItemDelegate(this);
+    setItemDelegate(m_itemDelegate);
 
-    // Item 代理
-    mp_ItemDelegate = new LogViewItemDelegate(this);
-    setItemDelegate(mp_ItemDelegate);
+    m_headerDelegate = new LogViewHeaderView(Qt::Horizontal, this);
+    setHeader(m_headerDelegate);
 
-    // 表头
-    mp_HeaderView = new LogViewHeaderView(Qt::Horizontal, this);
-    setHeader(mp_HeaderView);
-
-    // 设置不可编辑
     this->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    //隐藏根节点项前的图标（展开折叠图标）
     this->setRootIsDecorated(false);
 
-
     // this is setting is necessary,because scrollperpixel is default in dtk!!
-    this->setVerticalScrollMode(QAbstractItemView::ScrollMode::ScrollPerItem);
+    //this->setVerticalScrollMode(QAbstractItemView::ScrollMode::ScrollPerItem);
+    setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAsNeeded);
+    setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 
-    // 设置选择模式
     setSelectionMode(QAbstractItemView::SingleSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
     this->header()->setStretchLastSection(true);
 
-    // 水平右对齐
     this->header()->setDefaultAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-
-    // 设置的固定高度,包括内容与表头(+1)，为保证treewidget横向滚动条与item不重叠，添加滚动条高度
-    this->header()->setFixedHeight(TREE_ROW_HEIGHT);
-    this->setFixedHeight(TREE_ROW_HEIGHT * (m_RowCount + 1) + HORSCROLL_WIDTH);
-
-
-    // Item 不可扩展
+    this->header()->setFixedHeight(TableViewRowHeight_);
+    setRootIsDecorated(false);
     setItemsExpandable(false);
-
-    // 设置无边框
     setFrameStyle(QFrame::NoFrame);
-    this->viewport()->setAutoFillBackground(false);
-
-    setAlternatingRowColors(false);
-    setAllColumnsShowFocus(false);
+    this->viewport()->setAutoFillBackground(true);
+    //setBack
 }
 
 void LogTreeView::paintEvent(QPaintEvent *event)
@@ -225,103 +92,35 @@ void LogTreeView::paintEvent(QPaintEvent *event)
         cg = DPalette::Active;
     }
 
+    //    auto style = dynamic_cast<DStyle *>(DApplication::style());
     auto *dAppHelper = DApplicationHelper::instance();
     auto palette = dAppHelper->applicationPalette();
 
-    QBrush bgBrush(palette.color(cg, DPalette::Base));
+    QBrush bgBrush(palette.color(cg, DPalette::Background));
 
     QStyleOptionFrame option;
     initStyleOption(&option);
 
-    // 计算绘制背景色有问题
     QRect rect = viewport()->rect();
-
-    QPainterPath clipPath;
-
-    // 填充背景色
-    clipPath.addRoundedRect(rect, 8, 8);
+    QRectF clipRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height() * 2);
+    QRectF subRect(rect.x(), rect.y() - rect.height(), rect.width(), rect.height());
+    QPainterPath clipPath, subPath;
+    /*
+    *@author yaobin
+    *@date 2020-01-03
+    *@Modify Reason:底部不需要圆角
+    */
+//    clipPath.addRoundedRect(clipRect, 8, 8);
+    clipPath.addRoundedRect(clipRect, 0, 0);
+    subPath.addRect(subRect);
+    clipPath = clipPath.subtracted(subPath);
+    clipPath.addRect(rect);
 
     painter.fillPath(clipPath, bgBrush);
+
     painter.restore();
 
     DTreeView::paintEvent(event);
-}
-
-void LogTreeView::showEvent(QShowEvent *event)
-{
-    //在show之前平均分布表头 Bug-73605
-    setColumnAverage();
-    return QTreeView::showEvent(event);
-}
-
-void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const
-{
-    painter->save();
-    painter->setRenderHint(QPainter::Antialiasing);
-
-#ifdef ENABLE_INACTIVE_DISPLAY
-    QWidget *wnd = DApplication::activeWindow();
-#endif
-    DPalette::ColorGroup cg;
-    if (!(options.state & DStyle::State_Enabled)) {
-        cg = DPalette::Disabled;
-    } else {
-#ifdef ENABLE_INACTIVE_DISPLAY
-        if (!wnd) {
-            cg = DPalette::Inactive;
-        } else {
-            if (wnd->isModal()) {
-                cg = DPalette::Inactive;
-            } else {
-                cg = DPalette::Active;
-            }
-        }
-#else
-        cg = DPalette::Active;
-#endif
-    }
-
-    auto *style = dynamic_cast<DStyle *>(DApplication::style());
-    if (!style)
-        return;
-    // 圆角以及边距
-    auto radius = style->pixelMetric(DStyle::PM_FrameRadius, &options);
-    auto margin = style->pixelMetric(DStyle::PM_ContentsMargins, &options);
-
-    // modify background color acorrding to UI designer
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
-    QBrush background;
-
-    // 隔行变色
-    if (!(index.row() & 1)) {
-        background = palette.color(cg, DPalette::ItemBackground);
-    } else {
-        background = palette.color(cg, DPalette::Base);
-    }
-
-    // 选中状态背景色
-    if (options.state & DStyle::State_Enabled) {
-        if (selectionModel()->isSelected(index)) {
-            background = palette.color(cg, DPalette::Highlight);
-        }
-    }
-
-    // 绘制背景色
-    QPainterPath path;
-    QRect rowRect { options.rect.x() - header()->offset(),
-                    options.rect.y() + 1,
-                    header()->length() - header()->sectionPosition(0),
-                    options.rect.height() - 2 };
-    rowRect.setX(rowRect.x() + margin);
-    rowRect.setWidth(rowRect.width() - margin);
-
-    path.addRoundedRect(rowRect, radius, radius);
-    painter->fillPath(path, background);
-
-    painter->restore();
-
-    QTreeView::drawRow(painter, options, index);
 }
 
 void LogTreeView::keyPressEvent(QKeyEvent *event)
@@ -332,8 +131,68 @@ void LogTreeView::keyPressEvent(QKeyEvent *event)
     }
 }
 
+int LogTreeView::calulateColumnSize() const
+{
+    /*
+    int columnCount = m_headerDelegate->count();
+
+    int maxColumnWidth = static_cast<float>(width())*(static_cast<float>(2*columnCount-1))/(static_cast<float>(columnCount*columnCount));
+
+    static int margin = 25;
+
+    int maxWidth = static_cast<float>(width())/static_cast<float>(columnCount*2);
+
+    for(int i = 0; i < m_pModel->rowCount(); ++i)
+    {
+        int width = QFontMetrics( DeviceInfoWidgetBase::tableContentFont_ ).width(m_pModel->item(i, column)->text()) + margin;
+        if(maxWidth < width)
+        {
+            maxWidth = width;
+        }
+    }
+
+    if(maxWidth > maxColumnWidth)
+    {
+        maxWidth  = maxColumnWidth;
+    }
+
+    return maxWidth;
+    */
+//    int colWidthSum = 0;
+//    for(int i = 0;i < header()->count();i++){
+//        colWidthSum += columnWidth(i);
+//    }
+    return  width() / header()->count();
+}
+
 void LogTreeView::resizeEvent(QResizeEvent *event)
 {
+    setEachColunmWidthSame();
     DTreeView::resizeEvent(event);
-    setColumnAverage();
 }
+
+void LogTreeView::setEachColunmWidthSame()
+{
+    int colCount = header()->count();
+    int avgColWidth = width() / colCount;
+    for (int i = 0; i < colCount; i++) {
+        setColumnWidth(i, avgColWidth);
+    }
+}
+
+//QStyleOptionViewItem LogTreeView::viewOptions() const
+//{
+//    auto styleOptViewItem = DTreeView::viewOptions();
+//    styleOptViewItem.state |= QStyle::State_Active;
+
+//    return styleOptViewItem;
+//}
+
+//void LogTreeView::initStyleOption(QStyleOptionFrame *option) const
+//{
+//    DTreeView::initStyleOption(option);
+//    option->state |= QStyle::State_Active;
+
+//}
+
+

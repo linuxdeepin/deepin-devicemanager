@@ -1,98 +1,97 @@
-/*
-* Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-*
-* Author:     Jun.Liu <liujuna@uniontech.com>
-*
-* Maintainer: XiaoMei.Ji <jixiaomei@uniontech.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #ifndef DEVICECDROM_H
 #define DEVICECDROM_H
 #include "DeviceInfo.h"
 
-/**
- * @brief The DeviceCdrom class
- * 用来描述光驱的类
- */
 class DeviceCdrom : public DeviceBaseInfo
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(DeviceCdrom)
 public:
     DeviceCdrom();
 
     /**
-       * @brief setInfoFromLshw:设置从lshw里面获取的信息
-       * @param mapInfo:由lshw获取的信息map
-       * @return 布尔值，true:信息设置成功；false:信息设置失败
+       * @brief setInfoFromLshw：设置从lshw里面获取的信息
+       * @param mapInfo：由lshw获取的信息map
+       * @return 布尔值，true：信息设置成功；false：信息设置失败
        */
     bool setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**
-       * @brief setInfoFromHwinfo:设置由hwinfo --cdrom命令获取的设备信息
-       * @param mapInfo:由hwinfo获取的信息map
+       * @brief setInfoFromHwinfo：设置由hwinfo --cdrom命令获取的设备信息
+       * @param mapInfo：由hwinfo获取的信息map
+       * @return 无
        */
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**
-       * @brief name:获取名称属性值
-       * @return QString:名称属性值
+       * @brief name：获取名称属性值
+       * @param 无
+       * @return QString：名称属性值
        */
-    const QString &name()const override;
+    const QString &name()const;
 
     /**
-       * @brief driver:获取驱动属性值
-       * @return QString:驱动属性值
+       * @brief vendor：获取制造商属性值
+       * @param 无
+       * @return QString：制造商属性值
        */
-    const QString &driver()const override;
+    const QString &vendor()const;
 
     /**
-     * @brief subTitle:获取子标题
-     * @return 子标题
-     */
-    QString subTitle() override;
+       * @brief type：获取类型属性值
+       * @param 无
+       * @return QString：类型属性值
+       */
+    const QString &type()const;
 
     /**
-     * @brief getOverviewInfo:获取概况信息
-     * @return 概况信息
-     */
-    const QString getOverviewInfo() override;
+       * @brief version：获取名称属性值
+       * @param 无
+       * @return QString：版本号属性值
+       */
+    const QString &version()const;
+
+    /**
+       * @brief busInfo：获取总线信息属性值
+       * @param 无
+       * @return QString：总线信息属性值
+       */
+    const QString &busInfo()const;
+
+    /**
+       * @brief capabilities：获取功能属性值
+       * @param 无
+       * @return QString：功能属性值
+       */
+    const QString &capabilities()const;
+
+    /**
+       * @brief driver：获取驱动属性值
+       * @param 无
+       * @return QString：驱动属性值
+       */
+    const QString &driver()const;
+
+    /**
+       * @brief maxPower：获取maxPower属性值
+       * @param 无
+       * @return QString：maxPower属性值
+       */
+    const QString &maxPower()const;
+
+    /**
+       * @brief speed：获取速率属性值
+       * @param 无
+       * @return QString：速率属性值
+       */
+    const QString &speed()const;
 
 protected:
 
     /**
-       * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
+       * @brief initFilterKey：初始化可现实的可显示的属性,m_FilterKey
+       * @param 无
+       * @return 无
        */
     void initFilterKey() override;
-
-    /**
-     * @brief loadBaseDeviceInfo:加载基本信息
-     */
-    void loadBaseDeviceInfo() override;
-
-    /**
-     * @brief loadOtherDeviceInfo:加载基本信息
-     */
-    void loadOtherDeviceInfo() override;
-
-    /**
-     * @brief loadTableData:加载表头信息
-     */
-    void loadTableData() override;
-
 
 private:
     QString        m_Name;                  //<!名称
@@ -104,6 +103,9 @@ private:
     QString        m_Driver;                //<!驱动
     QString        m_MaxPower;              //<!最大功耗
     QString        m_Speed;                 //<!速度
+
+    QString        m_UnikeyKey;
+    QString        m_KeyToLshw;            //<!
 };
 
 #endif // DEVICECDROM_H

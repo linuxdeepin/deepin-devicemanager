@@ -1,8 +1,4 @@
-// 项目自身文件
 #include "DevicePrint.h"
-#include "DBusEnableInterface.h"
-
-// Qt库文件
 #include <QDebug>
 
 DevicePrint::DevicePrint()
@@ -16,12 +12,7 @@ DevicePrint::DevicePrint()
     , m_Status("")
     , m_Shared("")
 {
-    // 初始化可显示属性
     initFilterKey();
-
-    // 设备可禁用
-    m_CanEnable = true;
-    m_CanUninstall = false;
 }
 
 void DevicePrint::setInfo(const QMap<QString, QString> &info)
@@ -44,10 +35,12 @@ void DevicePrint::setInfo(const QMap<QString, QString> &info)
 
     // 获取打印机接口
     QStringList lstUri = m_URI.split(":");
-    if (lstUri.size() > 1)
+    if (lstUri.size() > 1) {
         m_InterfaceType = lstUri[0];
+    }
 
-    getOtherMapInfo(info);
+
+    loadOtherDeviceInfo(info);
 }
 
 const QString &DevicePrint::name()const
@@ -55,94 +48,68 @@ const QString &DevicePrint::name()const
     return m_Name;
 }
 
-const QString &DevicePrint::driver() const
+const QString &DevicePrint::vendor()const
 {
-    return m_Driver;
+    return m_Vendor;
 }
 
-bool DevicePrint::available()
+const QString &DevicePrint::model()const
 {
-    return true;
+    return m_Model;
 }
 
-QString DevicePrint::subTitle()
+const QString &DevicePrint::serialNumber()const
 {
-    return m_Name;
+    return m_SerialNumber;
 }
 
-const QString DevicePrint::getOverviewInfo()
+const QString &DevicePrint::interfaceType()const
 {
-    // 获取概况信息
-    return m_Name.isEmpty() ? m_Model : m_Name;
+    return m_InterfaceType;
 }
 
-EnableDeviceStatus DevicePrint::setEnable(bool e)
+const QString &DevicePrint::URI()const
 {
-    bool res  = DBusEnableInterface::getInstance()->enablePrinter("printer",m_Name,m_URI,e);
-    if(res){
-        m_Enable = e;
-    }
-    // 设置设备状态
-    return res ? EDS_Success : EDS_Faild;
+    return m_URI;
 }
 
-bool DevicePrint::enable()
+const QString &DevicePrint::status()const
 {
-    return m_Status == "5" ? false : true;
+    return m_Status;
+}
+
+const QString &DevicePrint::shared()const
+{
+    return m_Shared;
 }
 
 void DevicePrint::initFilterKey()
 {
-    // 初始化可显示属性
     addFilterKey(QObject::tr("copies"));
+    //addFilterKey(QObject::tr("device-uri"));
+    //addFilterKey(QObject::tr("finishings"));
     addFilterKey(QObject::tr("job-cancel-after"));
     addFilterKey(QObject::tr("job-hold-until"));
     addFilterKey(QObject::tr("job-priority"));
+    //addFilterKey(QObject::tr("job-sheets"));
     addFilterKey(QObject::tr("marker-change-time"));
+    //addFilterKey(QObject::tr("media-source"));
+    //addFilterKey(QObject::tr("media-type"));
     addFilterKey(QObject::tr("number-up"));
     addFilterKey(QObject::tr("orientation-requested"));
     addFilterKey(QObject::tr("print-color-mode"));
+    //addFilterKey(QObject::tr("print-quality"));
+    //addFilterKey(QObject::tr("printer-commands"));
+    //addFilterKey(QObject::tr("printer-info"));
     addFilterKey(QObject::tr("printer-is-accepting-jobs"));
     addFilterKey(QObject::tr("printer-is-shared"));
     addFilterKey(QObject::tr("printer-is-temporary"));
+    //addFilterKey(QObject::tr("printer-location"));
     addFilterKey(QObject::tr("printer-make-and-model"));
+    //addFilterKey(QObject::tr("printer-state"));
     addFilterKey(QObject::tr("printer-state-change-time"));
     addFilterKey(QObject::tr("printer-state-reasons"));
     addFilterKey(QObject::tr("printer-type"));
     addFilterKey(QObject::tr("printer-uri-supported"));
     addFilterKey(QObject::tr("sides"));
-}
-
-void DevicePrint::loadBaseDeviceInfo()
-{
-    // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
-}
-
-void DevicePrint::loadOtherDeviceInfo()
-{
-    // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Shared"), m_Shared);
-    addOtherDeviceInfo(tr("URI"), m_URI);
-    addOtherDeviceInfo(tr("Status"), m_Status);
-    addOtherDeviceInfo(tr("Interface Type"), m_InterfaceType);
-
-    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
-    mapInfoToList();
-}
-
-void DevicePrint::loadTableData()
-{
-    // 加载表格数据
-    QString tName = m_Name;
-    if (!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }
-
-    m_TableData.append(tName);
-    m_TableData.append(m_Vendor);
-    m_TableData.append(m_Model);
 }

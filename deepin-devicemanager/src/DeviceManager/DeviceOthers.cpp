@@ -1,6 +1,5 @@
-// 项目自身文件
 #include "DeviceOthers.h"
-#include "DBusEnableInterface.h"
+#include "../deviceinfoparser.h"
 
 DeviceOthers::DeviceOthers()
     : DeviceBaseInfo()
@@ -14,20 +13,18 @@ DeviceOthers::DeviceOthers()
     , m_MaximumPower("")
     , m_Speed("")
     , m_LogicalName("")
-    , m_SerialID("")
 {
-    m_CanEnable = true;
-    m_CanUninstall = true;
+
 }
 
 void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (!matchToLshw(mapInfo))
+    if (m_BusInfo.isEmpty() || m_BusInfo != mapInfo["bus info"]) {
         return;
-
-    setAttribute(mapInfo, "product", m_Name, false);
-    setAttribute(mapInfo, "vendor", m_Vendor, false);
-    setAttribute(mapInfo, "product", m_Model, false);
+    }
+    setAttribute(mapInfo, "product", m_Name);
+    setAttribute(mapInfo, "vendor", m_Vendor);
+    setAttribute(mapInfo, "product", m_Model);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "capabilities", m_Capabilities);
@@ -35,11 +32,6 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
     setAttribute(mapInfo, "logical name", m_LogicalName);
-
-    // 核内驱动不显示卸载菜单
-    if(driverIsKernelIn(m_Driver)){
-        m_CanUninstall = false;
-    }
 }
 
 void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -51,38 +43,20 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
-    setAttribute(mapInfo, "Serial ID", m_SerialID);
-    setAttribute(mapInfo, "Serial ID", m_UniqueID);
-    setAttribute(mapInfo, "SysFS ID", m_SysPath);
-    m_HardwareClass = "others";
-
-    // 核内驱动不显示卸载菜单
-    if(driverIsKernelIn(m_Driver)){
-        m_CanUninstall = false;
-    }
+    setAttribute(mapInfo, "Unique ID", m_UniqID);
 
     m_BusID = mapInfo["SysFS BusID"];
     m_BusID.replace(QRegExp("\\.[0-9]*$"), "");
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0
-    setHwinfoLshwKey(mapInfo);
-}
-
-EnableDeviceStatus DeviceOthers::setEnable(bool e){
-    if(m_SerialID.isEmpty()){
-        return EDS_NoSerial;
+    QStringList words = mapInfo["SysFS BusID"].split(":");
+    if (words.size() == 2) {
+        QStringList chs = words[0].split("-");
+        if (chs.size() == 2) {
+            m_BusInfo = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
+        }
     }
-
-    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
-        return EDS_Faild;
-    }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
-    if(res){
-        m_Enable = e;
-    }
-    // 设置设备状态
-    return res ? EDS_Success : EDS_Faild;
 }
 
 const QString &DeviceOthers::name()const
@@ -90,9 +64,29 @@ const QString &DeviceOthers::name()const
     return m_Name;
 }
 
+const QString &DeviceOthers::vendor()const
+{
+    return m_Vendor;
+}
+
+const QString &DeviceOthers::model()const
+{
+    return m_Model;
+}
+
+const QString &DeviceOthers::version()const
+{
+    return m_Version;
+}
+
 const QString &DeviceOthers::busInfo()const
 {
     return m_BusInfo;
+}
+
+const QString &DeviceOthers::capabilities()const
+{
+    return m_Capabilities;
 }
 
 const QString &DeviceOthers::driver()const
@@ -100,58 +94,22 @@ const QString &DeviceOthers::driver()const
     return m_Driver;
 }
 
+const QString &DeviceOthers::maxinumPower()const
+{
+    return m_MaximumPower;
+}
+
+const QString &DeviceOthers::speed()const
+{
+    return m_Speed;
+}
+
 const QString &DeviceOthers::logicalName()const
 {
     return m_LogicalName;
 }
 
-QString DeviceOthers::subTitle()
-{
-    return m_Model;
-}
-
-const QString DeviceOthers::getOverviewInfo()
-{
-    return m_Name.isEmpty() ? m_Model : m_Name;
-}
-
 void DeviceOthers::initFilterKey()
 {
 
-}
-
-void DeviceOthers::loadBaseDeviceInfo()
-{
-    // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
-}
-
-void DeviceOthers::loadOtherDeviceInfo()
-{
-    addOtherDeviceInfo(tr("Serial Number"), m_SerialID);
-    mapInfoToList();
-}
-
-void DeviceOthers::loadTableData()
-{
-    // 加载表格数据
-    QString tName = m_Name;
-    if (!available()){
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
-    }
-    if(!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }
-
-    m_TableData.append(tName);
-    m_TableData.append(m_Vendor);
-    m_TableData.append(m_Model);
 }

@@ -1,38 +1,9 @@
-/*
-* Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-*
-* Author:     Jun.Liu <liujuna@uniontech.com>
-*
-* Maintainer: XiaoMei.Ji <jixiaomei@uniontech.com>
-* Maintainer: Jun.Liu <liujuna@uniontech.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #ifndef DEVICESTORAGE_H
 #define DEVICESTORAGE_H
 #include"DeviceInfo.h"
 
-/**
- * @brief The DeviceStorage class
- * 用来描述存储设备的类
- */
-
 class DeviceStorage: public DeviceBaseInfo
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(DeviceStorage)
 public:
     DeviceStorage();
 
@@ -120,8 +91,75 @@ public:
      */
     QString compareSize(const QString &size1, const QString &size2);
 
-    const QString &name()const override;
-    const QString &driver()const override;
+    /**
+       * @brief model:获取型号属性值
+       * @param 无
+       * @return QString:型号属性值
+       */
+    const QString &model()const;
+
+    /**
+       * @brief vendor:获取制造商属性值
+       * @param 无
+       * @return QString:制造商属性值
+       */
+    const QString &vendor()const;
+
+    /**
+       * @brief mediaType:获取介质类型属性值
+       * @param 无
+       * @return QString:mediaType属性值
+       */
+    const QString &mediaType()const;
+
+    /**
+       * @brief size:获取容量属性值
+       * @param 无
+       * @return QString:容量属性值
+       */
+    const QString &size()const;
+
+    /**
+       * @brief rotationRate:获取转速属性值
+       * @param 无
+       * @return QString:转速属性值
+       */
+    const QString &rotationRate()const;
+
+    /**
+       * @brief interface:获取接口属性值
+       * @param 无
+       * @return QString:接口属性值
+       */
+    const QString &interface()const;
+
+    /**
+       * @brief serialNumber:获取序列号属性值
+       * @param 无
+       * @return QString:序列号属性值
+       */
+    const QString &serialNumber()const;
+
+    /**
+       * @brief version:获取版本号属性值
+       * @param 无
+       * @return QString:版本号属性值
+       */
+    const QString &version()const;
+
+    /**
+       * @brief capabilities:获取功能属性值
+       * @param 无
+       * @return QString:功能属性值
+       */
+    const QString &capabilities()const;
+
+    /**
+       * @brief description:获取描述属性值
+       * @param 无
+       * @return QString:描述属性值
+       */
+    const QString &description()const;
 
     /**
        * @brief keyFromStorage:获取存储设备标识符
@@ -131,16 +169,32 @@ public:
     const QString &keyFromStorage()const;
 
     /**
-     * @brief subTitle:获取子标题
-     * @return 子标题
-     */
-    QString subTitle() override;
+       * @brief firmwareVersion:获取固件版本属性值
+       * @param 无
+       * @return QString:固件版本属性值
+       */
+    const QString &firmwareVersion()const;
 
     /**
-     * @brief getOverviewInfo:获取概况信息
-     * @return 概况信息
-     */
-    const QString getOverviewInfo() override;
+       * @brief speed:获取速率属性值
+       * @param 无
+       * @return QString:速率属性值
+       */
+    const QString &speed()const;
+
+    /**
+       * @brief powerOnHours:获取通电时长属性值
+       * @param 无
+       * @return QString:通电时长属性值
+       */
+    const QString &powerOnHours()const;
+
+    /**
+       * @brief powerCycleCount:获取通电次数属性值
+       * @param 无
+       * @return QString:通电次数属性值
+       */
+    const QString &powerCycleCount()const;
 
 protected:
 
@@ -148,26 +202,6 @@ protected:
        * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
        */
     void initFilterKey() override;
-
-    /**
-     * @brief loadBaseDeviceInfo:加载基本信息
-     */
-    void loadBaseDeviceInfo() override;
-
-    /**
-     * @brief loadOtherDeviceInfo:加载基本信息
-     */
-    void loadOtherDeviceInfo() override;
-
-    /**
-     * @brief loadTableHeader : 过去表格的表头数据
-     */
-    void loadTableHeader() override;
-
-    /**
-     * @brief loadTableData:加载表头信息
-     */
-    void loadTableData() override;
 
 private:
     QString               m_Model;              //<! 【型号】1
@@ -180,9 +214,10 @@ private:
     QString               m_Version;            //<! 【版本】
     QString               m_Capabilities;       //<! 【功能】
     QString               m_Description;        //<! 【描述】
+    QString               m_PowerOnHours;       //<! 【通电时间】9
+    QString               m_PowerCycleCount;    //<! 【通电次数】10
     QString               m_FirmwareVersion;    //<! 【固件版本】8
     QString               m_Speed;              //<! 【速度】5
-    QString               m_Driver;
 
     QString               m_DeviceFile;         //<
     QString               m_KeyToLshw;          //<!  用于表示存储文件

@@ -52,10 +52,10 @@ public:
     ~AbstractSheetPrivate();
 
     Workbook *workbook;
-    int id;
     QSharedPointer<Drawing> drawing;
 
     QString name;
+    int id;
     AbstractSheet::SheetState sheetState;
     AbstractSheet::SheetType type;
 };

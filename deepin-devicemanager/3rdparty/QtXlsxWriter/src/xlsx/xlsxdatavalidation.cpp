@@ -34,7 +34,7 @@
 QT_BEGIN_NAMESPACE_XLSX
 
 DataValidationPrivate::DataValidationPrivate()
-    : validationType(DataValidation::None), validationOperator(DataValidation::Between)
+    :validationType(DataValidation::None), validationOperator(DataValidation::Between)
     , errorStyle(DataValidation::Stop), allowBlank(false), isPromptMessageVisible(true)
     , isErrorMessageVisible(true)
 {
@@ -42,7 +42,7 @@ DataValidationPrivate::DataValidationPrivate()
 }
 
 DataValidationPrivate::DataValidationPrivate(DataValidation::ValidationType type, DataValidation::ValidationOperator op, const QString &formula1, const QString &formula2, bool allowBlank)
-    : validationType(type), validationOperator(op)
+    :validationType(type), validationOperator(op)
     , errorStyle(DataValidation::Stop), allowBlank(allowBlank), isPromptMessageVisible(true)
     , isErrorMessageVisible(true), formula1(formula1), formula2(formula2)
 {
@@ -50,15 +50,10 @@ DataValidationPrivate::DataValidationPrivate(DataValidation::ValidationType type
 }
 
 DataValidationPrivate::DataValidationPrivate(const DataValidationPrivate &other)
-    : QSharedData(other)
+    :QSharedData(other)
     , validationType(DataValidation::None), validationOperator(DataValidation::Between)
     , errorStyle(DataValidation::Stop), allowBlank(false), isPromptMessageVisible(true)
-    , isErrorMessageVisible(true), formula1(), formula2()
-    , errorMessage()
-    , errorMessageTitle()
-    , promptMessage()
-    , promptMessageTitle()
-    , ranges()
+    , isErrorMessageVisible(true)
 {
 
 }
@@ -123,7 +118,7 @@ DataValidationPrivate::~DataValidationPrivate()
  * \a formula2, and \a allowBlank.
  */
 DataValidation::DataValidation(ValidationType type, ValidationOperator op, const QString &formula1, const QString &formula2, bool allowBlank)
-    : d(new DataValidationPrivate(type, op, formula1, formula2, allowBlank))
+    :d(new DataValidationPrivate(type, op, formula1, formula2, allowBlank))
 {
 
 }
@@ -132,7 +127,7 @@ DataValidation::DataValidation(ValidationType type, ValidationOperator op, const
     Construct a data validation object
 */
 DataValidation::DataValidation()
-    : d(new DataValidationPrivate())
+    :d(new DataValidationPrivate())
 {
 
 }
@@ -141,7 +136,7 @@ DataValidation::DataValidation()
     Constructs a copy of \a other.
 */
 DataValidation::DataValidation(const DataValidation &other)
-    : d(other.d)
+    :d(other.d)
 {
 
 }
@@ -541,7 +536,7 @@ DataValidation DataValidation::loadFromXml(QXmlStreamReader &reader)
         validation.setPromptMessage(p, pt);
 
     //find the end
-    while (!(reader.name() == QLatin1String("dataValidation") && reader.tokenType() == QXmlStreamReader::EndElement)) {
+    while(!(reader.name() == QLatin1String("dataValidation") && reader.tokenType() == QXmlStreamReader::EndElement)) {
         reader.readNextStartElement();
         if (reader.tokenType() == QXmlStreamReader::StartElement) {
             if (reader.name() == QLatin1String("formula1")) {

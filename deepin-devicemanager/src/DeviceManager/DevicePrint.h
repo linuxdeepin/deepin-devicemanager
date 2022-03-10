@@ -1,38 +1,10 @@
-/*
-* Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-*
-* Author:     Jun.Liu <liujuna@uniontech.com>
-*
-* Maintainer: XiaoMei.Ji <jixiaomei@uniontech.com>
-* Maintainer: Jun.Liu <liujuna@uniontech.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #ifndef DEVICEPRINT_H
 #define DEVICEPRINT_H
 #include"DeviceInfo.h"
 
-/**
- * @brief The DevicePrint class
- * 用来描述打印机的类
- */
 
 class DevicePrint : public DeviceBaseInfo
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(DevicePrint)
 public:
     DevicePrint();
 
@@ -46,78 +18,56 @@ public:
      * @brief name:获取名称属性值
      * @return QString 名称属性值
      */
-    const QString &name()const override;
+    const QString &name()const;
 
     /**
-     * @brief driver 返回驱动，重写纯虚函数
-     * @return
+     * @brief vendor:获取制造商属性值
+     * @return QString:制造商属性值
      */
-    const QString &driver() const override;
+    const QString &vendor()const;
 
     /**
-     * @brief available 返回是否可用
-     * @return
+     * @brief model:获取型号属性值
+     * @return QString:型号属性值
      */
-    bool available() override;
+    const QString &model()const;
 
     /**
-     * @brief subTitle:获取子标题
-     * @return 子标题
+     * @brief serialNumber:获取序列号属性值
+     * @return Qstring:序列号属性值
      */
-    QString subTitle() override;
+    const QString &serialNumber()const;
 
     /**
-     * @brief getOverviewInfo:获取概况信息
-     * @return 概况信息
+     * @brief interfaceType:获取接口类型属性值
+     * @return QString:接口类型属性值
      */
-    const QString getOverviewInfo() override;
+    const QString &interfaceType()const;
 
     /**
-     * @brief setEnable 设置设备的禁用状态
-     * @param enable 是否禁用
-     * @return 禁用是否成功
+     * @brief URI:获取URL属性值
+     * @return QString:URL属性值
      */
-    EnableDeviceStatus setEnable(bool enable) override;
+    const QString &URI()const;
 
     /**
-     * @brief enable : 判断当前是否是禁用状态
-     * @return
+     * @brief status:获取状态属性值
+     * @return QString:状态属性值
      */
-    bool enable() override;
-
-
-    /**
-     * @brief getVendor 获取制造商
-     * @return
-     */
-    inline QString getVendor() { return m_Vendor; }
+    const QString &status()const;
 
     /**
-     * @brief getModel 获取型号
-     * @return
+     * @brief shared:获取shared属性值
+     * @return QString:shared属性值
      */
-    inline QString getModel() { return m_Model; }
+    const QString &shared()const;
+
 protected:
 
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
      */
     void initFilterKey() override;
-
-    /**
-     * @brief loadBaseDeviceInfo:加载基本信息
-     */
-    void loadBaseDeviceInfo() override;
-
-    /**
-     * @brief loadOtherDeviceInfo:加载基本信息
-     */
-    void loadOtherDeviceInfo() override;
-
-    /**
-     * @brief loadTableData:加载表头信息
-     */
-    void loadTableData() override;
 
 private:
     QString             m_Name;                         //<! 【名称】
@@ -128,7 +78,6 @@ private:
     QString             m_URI;                          //<! 【URI】
     QString             m_Status;                       //<! 【状态】
     QString             m_Shared;                       //<! 【共享】
-    QString             m_Driver;
 };
 
 #endif // DEVICEPRINT_H

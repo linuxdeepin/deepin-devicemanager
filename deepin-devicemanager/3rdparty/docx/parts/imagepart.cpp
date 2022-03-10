@@ -48,13 +48,13 @@ Length ImagePart::defaultCy() const
 
 ImagePart *ImagePart::load(const PackURI &partName, const QString &contentType, const QByteArray &blob, Image *image)
 {
-    //qInfo() << "Image Name" << partName << "  image ext  " << partName.ext();
+    //qDebug() << "Image Name" << partName << "  image ext  " << partName.ext();
     return new ImagePart(partName, contentType, blob, image);
 }
 
 ImagePart *ImagePart::fromImage(const PackURI &partName, Image *image, const QByteArray &hash)
 {
-    //qInfo() << "Image Name" << partName << "  image ext  " << partName.ext();
+    //qDebug() << "Image Name" << partName << "  image ext  " << partName.ext();
     return new ImagePart(partName, image->contentType(), QByteArray(), image, hash);
 }
 

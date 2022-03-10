@@ -1,9 +1,5 @@
-// 项目自身文件
 #include "DeviceAudio.h"
-#include "DBusEnableInterface.h"
 
-// 其它头文件
-#include <QDebug>
 DeviceAudio::DeviceAudio()
     : DeviceBaseInfo()
     , m_Name("")
@@ -17,96 +13,63 @@ DeviceAudio::DeviceAudio()
     , m_Clock("")
     , m_Capabilities("")
     , m_Description("")
-    , m_Chip("")
-    , m_Driver("")
-    , m_DriverModules("")
+    , m_UniqueKey("")
 {
-    // 初始化可显示属性
     initFilterKey();
-
-    // 设置可禁用
-    m_CanEnable = true;
-    m_CanUninstall = true;
-    m_IsCatDevice = false;
 }
 
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("path") != mapInfo.end()){
-        setAttribute(mapInfo, "name", m_Name);
-        setAttribute(mapInfo, "driver", m_Driver);
-        m_SysPath = mapInfo["path"];
-        m_HardwareClass = mapInfo["Hardware Class"];
-        m_Enable = false;
-        //设备禁用的情况，没必要再继续向下执行(可能会引起不必要的问题)，直接return
-        m_CanUninstall = !driverIsKernelIn(m_Driver);
-        return;
-    }
-    //1. 获取设备的基本信息
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "", m_Version);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "IRQ", m_Irq);
     setAttribute(mapInfo, "Memory Range", m_Memory);
+    setAttribute(mapInfo, "", m_Width);
+    setAttribute(mapInfo, "", m_Clock);
+    setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Hardware Class", m_Description);
-    setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "Driver Modules", m_DriverModules); // 驱动模块
-    setAttribute(mapInfo, "SysFS ID", m_SysPath);
-    setAttribute(mapInfo, "Module Alias", m_UniqueID);
 
-    // 此处不能用 && 因为 m_DriverModules 可能为空
-    if(driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)){
-        m_CanUninstall = false;
-    }
+    m_UniqueKey = mapInfo["SysFS BusID"];
 
-    //2. 获取设备的唯一标识
-    setHwinfoLshwKey(mapInfo);
-
-    //3. 获取设备的其它信息
-    getOtherMapInfo(mapInfo);
+    loadOtherDeviceInfo(mapInfo);
 }
 
 bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    //1. 先判断传入的设备信息是否是该设备信息，根据总线信息来判断
-    if (!matchToLshw(mapInfo))
+    // 先判断传入的设备信息是否是同一个
+    QStringList words = mapInfo["bus info"].split("@");
+    if (words.size() != 2) {
         return false;
+    }
+    if (words[1] != m_UniqueKey) {
+        return false;
+    }
 
-    //2. 确定了是该设备信息，则获取设备的基本信息
+    // 设置设备属性
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
-    if (m_Vendor == "0000")
-        m_Vendor = "";
-
     setAttribute(mapInfo, "", m_Model);
-
-    /*
-     * 再过去设备的版本号的时候，会出现版本号为00的情况，
-     * 这不符合常理，所以当版本号为00时，默认版本号获取不到
-    */
     setAttribute(mapInfo, "version", m_Version);
-    if (m_Version == "00")
+    if (m_Version == "00") {
         m_Version = "";
-
-    // 获取设备的基本信息
+    }
     setAttribute(mapInfo, "bus info", m_BusInfo);
-    setAttribute(mapInfo, "irq", m_Irq);
+    setAttribute(mapInfo, "", m_Irq);
     setAttribute(mapInfo, "", m_Memory);
     setAttribute(mapInfo, "width", m_Width);
     setAttribute(mapInfo, "clock", m_Clock);
     setAttribute(mapInfo, "capabilities", m_Capabilities);
     setAttribute(mapInfo, "description", m_Description);
 
-    //3. 获取设备的其它信息
-    getOtherMapInfo(mapInfo);
-
+    loadOtherDeviceInfo(mapInfo);
     return true;
 }
 
 bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
 {
-    //1. 获取设备的基本信息
     setAttribute(mapInfo, "Name", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
@@ -119,27 +82,19 @@ bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "", m_Description);
 
-    //2. 获取设备的其它信息
-    getOtherMapInfo(mapInfo);
 
-    //3. get from cat /input/devices
-    m_IsCatDevice = true;
-
+    loadOtherDeviceInfo(mapInfo);
     return true;
 }
 
 void DeviceAudio::setInfoFromCatAudio(const QMap<QString, QString> &mapInfo)
 {
-    //1. 获取设备的基本信息
     setAttribute(mapInfo, "Name", m_Name);
-
-    //2. 获取设备的其它信息
-    getOtherMapInfo(mapInfo);
+    loadOtherDeviceInfo(mapInfo);
 }
 
 bool DeviceAudio::setAudioChipFromDmesg(const QString &info)
 {
-    // 设置声卡芯片型号
     m_Chip = info;
     return true;
 }
@@ -149,63 +104,73 @@ const QString &DeviceAudio::name()const
     return m_Name;
 }
 
-const QString &DeviceAudio::driver() const
+const QString &DeviceAudio::vendor()const
 {
-    if(! m_DriverModules.isEmpty())
-        return m_DriverModules;
-    return m_Driver;
-}
-const QString& DeviceAudio::uniqueID() const
-{
-    return m_SysPath;
-}
-EnableDeviceStatus DeviceAudio::setEnable(bool e)
-{
-    if(!m_SysPath.contains("usb")){
-        m_UniqueID = m_Name;
-    }
-    m_HardwareClass = "sound";
-    // 设置设备状态
-    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
-        return EDS_Faild;
-    }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_UniqueID,m_SysPath,"",e, m_Driver);
-    if(res){
-        m_Enable = e;
-    }
-    // 设置设备状态
-    return res ? EDS_Success : EDS_Faild;
+    return m_Vendor;
 }
 
-bool DeviceAudio::enable()
+const QString &DeviceAudio::model()const
 {
-    // 获取设备状态
-    return m_Enable;
+    return m_Model;
 }
 
-QString DeviceAudio::subTitle()
+const QString &DeviceAudio::version()const
 {
-    // 设备信息子标题
-    return m_Name;
+    return m_Version;
 }
 
-const QString DeviceAudio::getOverviewInfo()
+const QString &DeviceAudio::busInfo()const
 {
-    // 获取概况信息
-    return m_Name.isEmpty() ? m_Model : m_Name;
+    return m_BusInfo;
+}
+
+const QString &DeviceAudio::irq()const
+{
+    return m_Irq;
+}
+
+const QString &DeviceAudio::memory()const
+{
+    return m_Memory;
+}
+
+const QString &DeviceAudio::width()const
+{
+    return m_Width;
+}
+
+const QString &DeviceAudio::clock()const
+{
+    return m_Clock;
+}
+
+const QString &DeviceAudio::capabilities()const
+{
+    return m_Capabilities;
+}
+
+const QString &DeviceAudio::description()const
+{
+    return m_Description;
+}
+
+const QString &DeviceAudio::chip() const
+{
+    return m_Chip;
 }
 
 void DeviceAudio::initFilterKey()
 {
-    // 添加可显示的属性
-    addFilterKey(tr("Device Name"));
+    addFilterKey(QObject::tr("Device Name"));
     addFilterKey(QObject::tr("SubVendor"));
     addFilterKey(QObject::tr("SubDevice"));
     addFilterKey(QObject::tr("Driver"));
+    addFilterKey(QObject::tr("Driver Modules"));
     addFilterKey(QObject::tr("Driver Status"));
     addFilterKey(QObject::tr("Driver Activation Cmd"));
     addFilterKey(QObject::tr("Config Status"));
 
+    //addFilterKey(QObject::tr("irq"));
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("latency"));
 
@@ -217,55 +182,7 @@ void DeviceAudio::initFilterKey()
     addFilterKey(QObject::tr("KEY"));
 
     addFilterKey(QObject::tr("Model"));
-    addFilterKey(QObject::tr("Vendor"));
+//    addFilterKey(QObject::tr("Vendor"));
     addFilterKey(QObject::tr("Version"));
     addFilterKey(QObject::tr("Bus"));
-}
-
-void DeviceAudio::loadBaseDeviceInfo()
-{
-    // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-}
-
-void DeviceAudio::loadOtherDeviceInfo()
-{
-    // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Chip"), m_Chip);
-    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addOtherDeviceInfo(tr("Clock"), m_Clock);
-    addOtherDeviceInfo(tr("Width"), m_Width);
-    addOtherDeviceInfo(tr("Memory Address"), m_Memory);   // 1050需求 内存改为内存地址
-    addOtherDeviceInfo(tr("IRQ"), m_Irq);
-
-    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
-    mapInfoToList();
-}
-
-void DeviceAudio::loadTableHeader()
-{
-    // 表头信息
-    m_TableHeader.append(tr("Name"));
-    m_TableHeader.append(tr("Vendor"));
-}
-
-void DeviceAudio::loadTableData()
-{
-    // 记载表格内容
-    QString tName = m_Name;
-
-    if (!available()){
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
-    }
-
-    if(!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }
-
-    m_TableData.append(tName);
-    m_TableData.append(m_Vendor);
 }

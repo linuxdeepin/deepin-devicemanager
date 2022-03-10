@@ -37,7 +37,7 @@ class OxmlElementBase
 public:
     OxmlElementBase();
     OxmlElementBase(QDomElement *x);
-//    void insertElementBefore(QDomElement *elm, const QString &tagname);
+    void insertElementBefore(QDomElement *elm, const QString &tagname);
 
     virtual ~OxmlElementBase();
 

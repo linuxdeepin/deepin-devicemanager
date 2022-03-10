@@ -1059,9 +1059,9 @@ bool Styles::readCellXfs(QXmlStreamReader &reader)
                 Format format;
                 QXmlStreamAttributes xfAttrs = reader.attributes();
 
-                //        qInfo()<<reader.name()<<reader.tokenString()<<" .........";
+                //        qDebug()<<reader.name()<<reader.tokenString()<<" .........";
                 //        for (int i=0; i<xfAttrs.size(); ++i)
-                //            qInfo()<<"... "<<i<<" "<<xfAttrs[i].name()<<xfAttrs[i].value();
+                //            qDebug()<<"... "<<i<<" "<<xfAttrs[i].name()<<xfAttrs[i].value();
 
                 if (xfAttrs.hasAttribute(QLatin1String("numFmtId"))) {
                     int numFmtIndex = xfAttrs.value(QLatin1String("numFmtId")).toString().toInt();
@@ -1299,7 +1299,7 @@ bool Styles::loadFromXmlFile(QIODevice *device)
         }
 
         if (reader.hasError()) {
-            qInfo()<<"Error when read style file: "<<reader.errorString();
+            qDebug()<<"Error when read style file: "<<reader.errorString();
         }
     }
     return true;

@@ -582,7 +582,7 @@ void CT_Tc::moveContentTo(CT_Tc *top_tc)
     int i = 0;
     QDomNodeList nodes = m_ele.childNodes();
     int count = nodes.count() - 1;
-    qInfo() << "nodes count : " << count;
+    qDebug() << "nodes count : " << count;
     QDomNode firstN = m_ele.firstChild();
     if (firstN.nodeName() == QStringLiteral("w:tcPr"))
         i = 1;

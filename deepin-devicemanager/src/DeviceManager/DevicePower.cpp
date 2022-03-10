@@ -1,13 +1,5 @@
-// 项目自身文件
 #include "DevicePower.h"
-
-// Qt库文件
 #include<QFileInfo>
-
-// Dtk头文件
-#include <DApplication>
-
-DWIDGET_USE_NAMESPACE
 
 DevicePower::DevicePower()
     : DeviceBaseInfo()
@@ -31,15 +23,12 @@ DevicePower::DevicePower()
     , m_SBDSSerialNumber("")
     , m_SBDSVersion("")
     , m_Temp("")
-
 {
-    // 初始化可显示属性
     initFilterKey();
 }
 
 bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 {
-    // 设置upower中获取的信息
     if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive)) {
         return false;
     }
@@ -63,28 +52,20 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_SBDSManufactureDate);
     setAttribute(mapInfo, "", m_SBDSSerialNumber);
     setAttribute(mapInfo, "", m_SBDSVersion);
-
-    // 添加电池温度
     setAttribute(mapInfo, "temperature", m_Temp);
-    /*
-     * 温度底层的获取方式是/sys/class/power_supply/BAT0下面的temp文件
-     * 以前向temp文件写温度时如果是28度 会写2.8(需要做*10的处理)  但是现在会直接写28
-     * 处理方法：取消*10的操作
-     * if (!m_Temp.isEmpty()) {
+    if (!m_Temp.isEmpty()) {
         double temp = m_Temp.replace("degrees C", "").trimmed().toDouble();
         temp = temp * 10;
         m_Temp = QString("%1 degrees C").arg(temp);
-    }*/
-
-    getOtherMapInfo(mapInfo);
+    }
+    loadOtherDeviceInfo(mapInfo);
     return true;
 }
 
 void DevicePower::setDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
-    // 设置守护进程信息
     if (m_Name == QObject::tr("battery"))
-        getOtherMapInfo(mapInfo);
+        loadOtherDeviceInfo(mapInfo);
 }
 
 const QString &DevicePower::name()const
@@ -92,30 +73,103 @@ const QString &DevicePower::name()const
     return m_Name;
 }
 
-const QString &DevicePower::driver() const
+const QString &DevicePower::vendor()const
 {
-    return m_Driver;
+    return m_Vendor;
 }
 
-bool DevicePower::available()
+const QString &DevicePower::model()const
 {
-    return true;
+    return m_Model;
 }
 
-QString DevicePower::subTitle()
+const QString &DevicePower::type()const
 {
-    return m_Name;
+    return m_Type;
 }
 
-const QString DevicePower::getOverviewInfo()
+const QString &DevicePower::serialNumber()const
 {
-    // 获取概况信息
-    return DApplication::translate("ManulTrack", m_Name.trimmed().toStdString().data(), "");
+    return m_SerialNumber;
+}
+
+const QString &DevicePower::electircType()const
+{
+    return m_ElectricType;
+}
+
+const QString &DevicePower::maxPower()const
+{
+    return m_MaxPower;
+}
+
+const QString &DevicePower::status()const
+{
+    return m_Status;
+}
+
+const QString &DevicePower::enabled()const
+{
+    return m_Enabled;
+}
+
+const QString &DevicePower::hotSwitch()const
+{
+    return m_HotSwitch;
+}
+
+const QString &DevicePower::capacity()const
+{
+    return  m_Capacity;
+}
+
+const QString &DevicePower::voltage()const
+{
+    return m_Voltage;
+}
+
+const QString &DevicePower::slot()const
+{
+    return m_Slot;
+}
+
+const QString &DevicePower::designCapacity()const
+{
+    return m_DesignCapacity;
+}
+
+const QString &DevicePower::designVoltage()const
+{
+    return m_DesignVoltage;
+}
+
+const QString &DevicePower::temprature()const
+{
+    return m_Temp;
+}
+
+const QString &DevicePower::SBDSChemistry()const
+{
+    return m_SBDSChemistry;
+}
+
+const QString &DevicePower::SBDSManufactureDate()const
+{
+    return m_SBDSManufactureDate;
+}
+
+const QString &DevicePower::SBDSSerialNumber()const
+{
+    return m_SBDSSerialNumber;
+}
+
+const QString &DevicePower::SBDSVersion()const
+{
+    return m_SBDSVersion;
 }
 
 void DevicePower::initFilterKey()
 {
-    // 初始化可显示属性
     addFilterKey(QObject::tr("native-path"));
     addFilterKey(QObject::tr("power supply"));
     addFilterKey(QObject::tr("updated"));
@@ -131,7 +185,7 @@ void DevicePower::initFilterKey()
     addFilterKey(QObject::tr("energy-rate"));
     addFilterKey(QObject::tr("voltage"));
     addFilterKey(QObject::tr("percentage"));
-//    addFilterKey(QObject::tr("temperature"));    // 温度已经常规显示
+    //addFilterKey(QObject::tr("temperature"));
     addFilterKey(QObject::tr("technology"));
     addFilterKey(QObject::tr("icon-name"));
     addFilterKey(QObject::tr("online"));
@@ -140,39 +194,4 @@ void DevicePower::initFilterKey()
     addFilterKey(QObject::tr("lid-is-closed"));
     addFilterKey(QObject::tr("lid-is-present"));
     addFilterKey(QObject::tr("critical-action"));
-}
-
-void DevicePower::loadBaseDeviceInfo()
-{
-    // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
-    addBaseDeviceInfo(tr("Type"), m_Type);
-    addBaseDeviceInfo(tr("Status"), m_Status);
-    addBaseDeviceInfo(tr("Capacity"), m_Capacity);
-    addBaseDeviceInfo(tr("Voltage"), m_Voltage);
-    addBaseDeviceInfo(tr("Slot"), m_Slot);
-    addBaseDeviceInfo(tr("Design Capacity"), m_DesignCapacity);
-    addBaseDeviceInfo(tr("Design Voltage"), m_DesignVoltage);
-    addBaseDeviceInfo(tr("SBDS Version"), m_SBDSVersion);
-    addBaseDeviceInfo(tr("SBDS Serial Number"), m_SBDSSerialNumber);
-    addBaseDeviceInfo(tr("SBDS Manufacture Date"), m_SBDSManufactureDate);
-    addBaseDeviceInfo(tr("SBDS Chemistry"), m_SBDSChemistry);
-    addBaseDeviceInfo(tr("Temperature"), m_Temp);
-}
-
-void DevicePower::loadOtherDeviceInfo()
-{
-    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
-    mapInfoToList();
-}
-
-void DevicePower::loadTableData()
-{
-    // 加载表格信息
-    m_TableData.append(m_Name);
-    m_TableData.append(m_Vendor);
-    m_TableData.append(m_Model);
 }

@@ -196,7 +196,7 @@ bool ContentTypes::loadFromXmlFile(QIODevice *device)
         }
 
         if (reader.hasError()) {
-            qInfo()<<reader.errorString();
+            qDebug()<<reader.errorString();
         }
     }
     return true;
