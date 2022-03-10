@@ -405,7 +405,7 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
 {
     QString vendor = mapInfo["Vendor"];
-    if(!vendor.contains("NVIDIA Corporation")){
+    if(!vendor.contains("NVIDIA Corporation",Qt::CaseInsensitive)){
         return;
     }
 
