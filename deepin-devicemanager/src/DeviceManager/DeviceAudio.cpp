@@ -169,7 +169,7 @@ EnableDeviceStatus DeviceAudio::setEnable(bool e)
     if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
         return EDS_Faild;
     }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_UniqueID,m_SysPath,"",e, m_Driver);
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
     if(res){
         m_Enable = e;
     }

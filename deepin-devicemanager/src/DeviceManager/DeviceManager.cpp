@@ -571,7 +571,9 @@ DeviceBaseInfo* DeviceManager::getAudioDevice(const QString& path)
 {
     for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {
         DeviceAudio *audio = dynamic_cast<DeviceAudio*>(*it);
-        if(audio && audio->uniqueID() == path){
+        QString tpath = audio->uniqueID();
+        // 判断该设备是否已经存在，1.1:1.1 -> 1.1:1.0
+        if(audio && path == tpath.replace(QRegExp("[1-9]$"),"0")){
             return *it;
         }
     }

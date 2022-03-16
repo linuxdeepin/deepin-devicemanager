@@ -158,13 +158,11 @@ void DeviceGenerator::generatorCpuDevice()
 
 
     //  获取逻辑数和core数  获取cpu个数 获取logical个数
-    int coreNum = 0, logicalNum = 0, physicalNum = 0;
+    int coreNum = 0, logicalNum = 0;
     const QList<QMap<QString, QString> >  &lsCpu_num = DeviceManager::instance()->cmdInfo("lscpu_num");
     if (lsCpu_num.size() <= 0)
         return;
     const QMap<QString, QString> &map = lsCpu_num[0];
-    if (map.find("physical") != map.end())
-        physicalNum = map["physical"].toInt();
     if (map.find("core") != map.end())
         coreNum = map["core"].toInt();
     if (map.find("logical") != map.end())
@@ -238,7 +236,8 @@ void DeviceGenerator::generatorNetworkDevice()
         // 判断该网卡是否存在，被禁用的移动网卡被拔出
         QString path = pciPath(*it);
         if (path.contains("usb")) {
-            if (!QFile::exists(path)) {
+            // 判断authorized是否存在，不存在则直接返回
+            if (!QFile::exists("/sys" + path + "/authorized")) {
                 continue;
             }
         }
@@ -879,7 +878,8 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         if ((*it)["Device"].indexOf("Touchpad") < 0) {
             // 先判断是否存在
             QString path = pciPath(*it);
-            if (!QFile::exists(path)) {
+            // 判断authorized是否存在，不存在则直接返回
+            if (!QFile::exists("/sys" + path + "/authorized")) {
                 continue;
             }
         }
@@ -958,7 +958,8 @@ void DeviceGenerator::getImageInfoFromHwinfo()
         // 判断该摄像头是否存在，被禁用的和被拔出
         QString path = pciPath(*it);
         if (path.contains("usb")) {
-            if (!QFile::exists(path)) {
+            // 判断authorized是否存在，不存在则直接返回
+            if (!QFile::exists("/sys" + path + "/authorized")) {
                 continue;
             }
         }
@@ -1050,7 +1051,8 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         if (isOtherDevice) {
             // 先判断是否存在
             QString path = pciPath(*it);
-            if (!QFile::exists(path)) {
+            // 判断authorized是否存在，不存在则直接返回
+            if (!QFile::exists("/sys" + path + "/authorized")) {
                 continue;
             }
 
@@ -1128,15 +1130,11 @@ const QString DeviceGenerator::getProductName()
 QString DeviceGenerator::pciPath(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.find("path") != mapInfo.end()) { // SysFS Device Link
-        if (mapInfo["path"].contains("usb")) {
-            return "/sys" + mapInfo["path"] + "/authorized";
-        } else {
-            return mapInfo["path"];
-        }
+        return mapInfo["path"];
     } else if (mapInfo.find("SysFS Device Link") != mapInfo.end()) {
-        return "/sys" + mapInfo["SysFS Device Link"] + "/authorized";
+        return mapInfo["SysFS Device Link"];
     } else if (mapInfo.find("SysFS ID") != mapInfo.end()) {
-        return "/sys" + mapInfo["SysFS ID"] + "/authorized";
+        return mapInfo["SysFS ID"];
     } else {
         if (mapInfo["Device Files"].contains("platform")) {
             return "platform";
