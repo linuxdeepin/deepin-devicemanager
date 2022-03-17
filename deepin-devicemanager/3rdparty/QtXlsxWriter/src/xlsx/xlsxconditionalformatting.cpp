@@ -41,7 +41,9 @@ ConditionalFormattingPrivate::ConditionalFormattingPrivate()
 }
 
 ConditionalFormattingPrivate::ConditionalFormattingPrivate(const ConditionalFormattingPrivate &other)
-    :QSharedData(other)
+    : QSharedData(other)
+    , cfRules()
+    , ranges()
 {
 
 }
@@ -55,13 +57,13 @@ void ConditionalFormattingPrivate::writeCfVo(QXmlStreamWriter &writer, const Xls
 {
     writer.writeEmptyElement(QStringLiteral("cfvo"));
     QString type;
-    switch(cfvo.type) {
-    case ConditionalFormatting::VOT_Formula: type=QStringLiteral("formula"); break;
-    case ConditionalFormatting::VOT_Max: type=QStringLiteral("max"); break;
-    case ConditionalFormatting::VOT_Min: type=QStringLiteral("min"); break;
-    case ConditionalFormatting::VOT_Num: type=QStringLiteral("num"); break;
-    case ConditionalFormatting::VOT_Percent: type=QStringLiteral("percent"); break;
-    case ConditionalFormatting::VOT_Percentile: type=QStringLiteral("percentile"); break;
+    switch (cfvo.type) {
+    case ConditionalFormatting::VOT_Formula: type = QStringLiteral("formula"); break;
+    case ConditionalFormatting::VOT_Max: type = QStringLiteral("max"); break;
+    case ConditionalFormatting::VOT_Min: type = QStringLiteral("min"); break;
+    case ConditionalFormatting::VOT_Num: type = QStringLiteral("num"); break;
+    case ConditionalFormatting::VOT_Percent: type = QStringLiteral("percent"); break;
+    case ConditionalFormatting::VOT_Percentile: type = QStringLiteral("percentile"); break;
     default: break;
     }
     writer.writeAttribute(QStringLiteral("type"), type);
@@ -140,7 +142,7 @@ void ConditionalFormattingPrivate::writeCfVo(QXmlStreamWriter &writer, const Xls
     Construct a conditional formatting object
 */
 ConditionalFormatting::ConditionalFormatting()
-    :d(new ConditionalFormattingPrivate())
+    : d(new ConditionalFormattingPrivate())
 {
 
 }
@@ -149,7 +151,7 @@ ConditionalFormatting::ConditionalFormatting()
     Constructs a copy of \a other.
 */
 ConditionalFormatting::ConditionalFormatting(const ConditionalFormatting &other)
-    :d(other.d)
+    : d(other.d)
 {
 
 }
@@ -264,7 +266,7 @@ bool ConditionalFormatting::addHighlightCellsRule(HighlightRuleType type, const 
             cfRule->attrs[XlsxCfRuleData::A_stdDev] = QStringLiteral("2");
         else if (type == Highlight_AboveStdDev3 || type == Highlight_BelowStdDev3)
             cfRule->attrs[XlsxCfRuleData::A_stdDev] = QStringLiteral("3");
-    } else if (type == Highlight_Expression){
+    } else if (type == Highlight_Expression) {
         cfRule->attrs[XlsxCfRuleData::A_type] = QStringLiteral("expression");
     } else {
         return false;
@@ -662,7 +664,7 @@ bool ConditionalFormatting::saveToXml(QXmlStreamWriter &writer) const
         sqref.append(range.toString());
     writer.writeAttribute(QStringLiteral("sqref"), sqref.join(QLatin1Char(' ')));
 
-    for (int i=0; i<d->cfRules.size(); ++i) {
+    for (int i = 0; i < d->cfRules.size(); ++i) {
         const QSharedPointer<XlsxCfRuleData> &rule = d->cfRules[i];
         writer.writeStartElement(QStringLiteral("cfRule"));
         writer.writeAttribute(QStringLiteral("type"), rule->attrs[XlsxCfRuleData::A_type].toString());

@@ -14,7 +14,7 @@
 <message>
 <location filename="Desktop Entry]Name" line="0"/>
 <source>Deepin Device Manager</source>
-<translation>深度設備管理器</translation>
+<translation>Deepin 設備管理器</translation>
 </message>
 </context>
 </TS>

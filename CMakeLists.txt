@@ -1,3 +1,9 @@
-project(dde-devicemanager C CXX)
+project(deepin-devicemanager C CXX)
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager)
-add_subdirectory(${CMAKE_SOURCE_DIR}/authenticateProxy)
+add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager-server)
+
+#代码覆盖率开关
+if(CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -fprofile-arcs -ftest-coverage")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -fprofile-arcs -ftest-coverage")
+endif()

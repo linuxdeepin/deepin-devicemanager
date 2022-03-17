@@ -16,7 +16,7 @@ class OpcPackage
 public:
     OpcPackage();
     DocumentPart *mainDocument();
-    Part * partByRelated(const QString &reltype);
+    Part *partByRelated(const QString &reltype);
     QList<Part *> parts() const;
     virtual ~OpcPackage();
 

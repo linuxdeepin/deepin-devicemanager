@@ -1,4 +1,6 @@
+// 项目自身文件
 #include "DeviceNetwork.h"
+#include "DBusEnableInterface.h"
 
 DeviceNetwork::DeviceNetwork()
     : DeviceBaseInfo()
@@ -16,6 +18,7 @@ DeviceNetwork::DeviceNetwork()
     , m_Autonegotiation("")
     , m_Broadcast("")
     , m_Driver("")
+    , m_DriverModules("")
     , m_DriverVersion("")
     , m_Duplex("")
     , m_Firmware("")
@@ -27,12 +30,20 @@ DeviceNetwork::DeviceNetwork()
     , m_Latency("")
     , m_Multicast("")
 {
+    // 初始化可显示属性
     initFilterKey();
+
+    // 设备可禁用
+    m_CanEnable = true;
+    m_CanUninstall = true;
 }
 
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-
+    if(!matchToLshw(mapInfo)){
+        return;
+    }
+    // 设置由lshw获取的信息
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "description", m_Name, false);
@@ -59,17 +70,38 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "capacity", m_Capacity);
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
+    if(driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
-    loadOtherDeviceInfo(mapInfo);
+    // 加载其他信息
+    getOtherMapInfo(mapInfo);
 }
 
 bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo["Device File"] != m_LogicalName) {
-        return false;
+    if(mapInfo.find("path") != mapInfo.end()){
+        setAttribute(mapInfo, "name", m_Name);
+        setAttribute(mapInfo, "unique_id", m_UniqueID);
+        setAttribute(mapInfo, "path", m_SysPath);
+        setAttribute(mapInfo, "Hardware Class", m_HardwareClass);
+        setAttribute(mapInfo, "driver", m_Driver);
+        m_Enable = false;
+        //设备禁用的情况，没必要再继续向下执行(可能会引起不必要的问题)，直接return
+        m_CanUninstall = !driverIsKernelIn(m_Driver);
+        return true;
     }
 
-    setAttribute(mapInfo, "Model", m_Name);
+    setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
+    setAttribute(mapInfo, "SysFS Device Link", m_SysPath);
+    setAttribute(mapInfo, "Driver", m_Driver);
+    setAttribute(mapInfo, "Driver Modules", m_DriverModules);
+
+    if(driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
+    setHwinfoLshwKey(mapInfo);
+
     return true;
 }
 
@@ -78,129 +110,120 @@ const QString &DeviceNetwork::name()const
     return m_Name;
 }
 
-const QString &DeviceNetwork::vendor()const
+const QString &DeviceNetwork::driver()const
 {
-    return m_Vendor;
+    if(! m_DriverModules.isEmpty())
+        return m_DriverModules;
+    return m_Driver;
 }
 
-const QString &DeviceNetwork::model()const
+QString DeviceNetwork::subTitle()
 {
-    return m_Model;
+    return m_Name;
 }
 
-const QString &DeviceNetwork::version()const
+const QString DeviceNetwork::getOverviewInfo()
 {
-    return m_Version;
+    // 获取概况信息
+    return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
-const QString &DeviceNetwork::busInfo()const
+EnableDeviceStatus DeviceNetwork::setEnable(bool e)
 {
-    return m_BusInfo;
+    m_HardwareClass = "network interface";
+    // 设置设备状态
+    if(m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }else if(m_SysPath.contains("usb") && m_UniqueID.isEmpty()){
+        return EDS_Faild;
+    }
+
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
+    if(res){
+        m_Enable = e;
+    }
+    // 设置设备状态
+    return res ? EDS_Success : EDS_Faild;
 }
 
-const QString &DeviceNetwork::logicalName()const
+bool DeviceNetwork::enable()
+{
+    // 通过ifconfig配置网卡禁用启用
+    return m_Enable;
+}
+
+void DeviceNetwork::correctCurrentLinkStatus(QString linkStatus)
+{
+    if (m_Link != linkStatus)
+        m_Link = linkStatus;
+}
+
+QString DeviceNetwork::logicalName()
 {
     return m_LogicalName;
 }
 
-const QString &DeviceNetwork::MACAddress()const
-{
-    return m_MACAddress;
-}
-
-const QString &DeviceNetwork::irq()const
-{
-    return m_Irq;
-}
-
-const QString &DeviceNetwork::memory()const
-{
-    return m_Memory;
-}
-
-const QString &DeviceNetwork::width()const
-{
-    return m_Width;
-}
-
-const QString &DeviceNetwork::clock()const
-{
-    return m_Clock;
-}
-
-const QString &DeviceNetwork::capabilities()const
-{
-    return m_Capabilities;
-}
-
-const QString &DeviceNetwork::autoNegotiation()const
-{
-    return m_Autonegotiation;
-}
-
-const QString &DeviceNetwork::broadcast()const
-{
-    return m_Broadcast;
-}
-
-const QString &DeviceNetwork::driver()const
-{
-    return m_Driver;
-}
-
-const QString &DeviceNetwork::driverVersion()const
-{
-    return m_DriverVersion;
-}
-
-const QString &DeviceNetwork::duplex()const
-{
-    return m_Duplex;
-}
-
-const QString &DeviceNetwork::firmware()const
-{
-    return m_Firmware;
-}
-
-const QString &DeviceNetwork::port()const
-{
-    return m_Port;
-}
-
-const QString &DeviceNetwork::link()const
-{
-    return m_Link;
-}
-
-const QString &DeviceNetwork::ip()const
-{
-    return m_Ip;
-}
-
-const QString &DeviceNetwork::speed()const
-{
-    return m_Speed;
-}
-
-const QString &DeviceNetwork::capacity()const
-{
-    return m_Capacity;
-}
-
-const QString &DeviceNetwork::latency()const
-{
-    return m_Latency;
-}
-
-const QString &DeviceNetwork::multicast()const
-{
-    return m_Multicast;
-}
-
 void DeviceNetwork::initFilterKey()
 {
+    // 初始化可显示属性
     addFilterKey(QObject::tr("ioport"));
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("network"));
+}
+
+void DeviceNetwork::loadBaseDeviceInfo()
+{
+    // 添加基本信息
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Type"), m_Model);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(tr("Driver"), m_Driver);
+    addBaseDeviceInfo(tr("Driver Version"), m_DriverVersion);
+}
+
+void DeviceNetwork::loadOtherDeviceInfo()
+{
+    // 添加其他信息,成员变量
+    addOtherDeviceInfo(tr("Maximum Rate"), m_Capacity);        // 1050需求 容量改为最大速率
+    addOtherDeviceInfo(tr("Negotiation Rate"), m_Speed);       // 1050需求 速度改为协商速率
+    addOtherDeviceInfo(tr("Port"), m_Port);
+    addOtherDeviceInfo(tr("Multicast"), m_Multicast);
+    addOtherDeviceInfo(tr("Link"), m_Link);
+    addOtherDeviceInfo(tr("Latency"), m_Latency);
+    addOtherDeviceInfo(tr("IP"), m_Ip);
+    addOtherDeviceInfo(tr("Firmware"), m_Firmware);
+    addOtherDeviceInfo(tr("Duplex"), m_Duplex);
+    addOtherDeviceInfo(tr("Broadcast"), m_Broadcast);
+    addOtherDeviceInfo(tr("Auto Negotiation"), m_Autonegotiation);
+    addOtherDeviceInfo(tr("Clock"), m_Clock);
+    addOtherDeviceInfo(tr("Width"), m_Width);
+    addOtherDeviceInfo(tr("Memory Address"), m_Memory);        // 1050需求 内存改为内存地址
+    addOtherDeviceInfo(tr("IRQ"), m_Irq);
+    addOtherDeviceInfo(tr("MAC Address"), m_MACAddress);
+    addOtherDeviceInfo(tr("Logical Name"), m_LogicalName);
+
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
+    mapInfoToList();
+}
+
+void DeviceNetwork::loadTableData()
+{
+    // 根据是否禁用设置设备名称
+    QString tName = m_Name;
+
+    if (!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }
+
+    if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
+    }
+
+    // 加载表格数据信息
+    m_TableData.append(tName);
+    m_TableData.append(m_Vendor);
+    m_TableData.append(m_Model);
 }

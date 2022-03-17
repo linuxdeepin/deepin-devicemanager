@@ -1,36 +1,110 @@
+/*
+* Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
+*
+* Author:     Jun.Liu <liujuna@uniontech.com>
+*
+* Maintainer: XiaoMei.Ji <jixiaomei@uniontech.com>
+* Maintainer: Jun.Liu <liujuna@uniontech.com>
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #ifndef DEVICEMEMORY_H
 #define DEVICEMEMORY_H
 #include"DeviceInfo.h"
 
+/**
+ * @brief The DeviceMemory class
+ * 用来描述内存条的类
+ */
+
 class DeviceMemory : public DeviceBaseInfo
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceMemory)
 public:
     DeviceMemory();
 
-    /**@brief:设置从 sudo lshw -C memory 获取的内存信息*/
+    /**
+     * @brief setInfoFromLshw:设置从 sudo lshw -C memory 获取的内存信息
+     * @param mapInfo:由lshw获取的信息map
+     */
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
-    /**@brief:设置从 sudo dmideocde -t memory 获取的内存信息*/
+    /**
+     * @brief setInfoFromDmidecode:设置从 sudo dmideocde -t memory 获取的内存信息
+     * @param mapInfo:由dmideocde获取的信息map
+     * @return 布尔值，true:信息设置成功；false:信息设置失败
+     */
     bool setInfoFromDmidecode(const QMap<QString, QString> &mapInfo);
 
-    // 获取各种属性
-    const QString &name()const;
-    const QString &vendor()const;
-    const QString &model()const;
-    const QString &size()const;
-    const QString &type()const;
-    const QString &speed()const;
-    const QString &totalBandwidth()const;
-    const QString &dataBandwidth()const;
-    const QString &locator()const;
-    const QString &serialNumber()const;
-    const QString &configuredSpeed()const;
-    const QString &minimumVoltage()const;
-    const QString &maximumVoltage()const;
-    const QString &configuredVoltage()const;
+    /**
+     * @brief name:获取名称属性值
+     * @return QString 名称属性值
+     */
+    const QString &name()const override;
+
+    /**
+     * @brief name:获取驱动属性值
+     * @return QString 驱动属性值
+     */
+    const QString &driver()const override;
+
+    /**
+     * @brief available 返回是否可用
+     * @return
+     */
+    bool available() override;
+
+    /**
+     * @brief subTitle:获取子标题
+     * @return 子标题
+     */
+    QString subTitle() override;
+
+    /**
+     * @brief getOverviewInfo:获取概况信息
+     * @return 概况信息
+     */
+    const QString getOverviewInfo() override;
+
 protected:
-    /**@brief:初始化过滤信息*/
-    virtual void initFilterKey();
+
+    /**
+     * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
+     */
+    void initFilterKey() override;
+
+    /**
+     * @brief loadBaseDeviceInfo:加载基本信息
+     */
+    void loadBaseDeviceInfo() override;
+
+    /**
+     * @brief loadOtherDeviceInfo:加载基本信息
+     */
+    void loadOtherDeviceInfo() override;
+
+    /**
+     * @brief loadTableHeader : 过去表格的表头数据
+     */
+    void loadTableHeader() override;
+
+    /**
+     * @brief loadTableData:加载表头信息
+     */
+    void loadTableData() override;
 
 private:
     QString           m_Name;                   //<! 【名称】
@@ -47,6 +121,8 @@ private:
     QString           m_MinimumVoltage;         //<! 【最小电压】
     QString           m_MaximumVoltage;         //<! 【最大电压】
     QString           m_ConfiguredVoltage;      //<! 【配置电压】
+    QString           m_Driver;
+    bool              m_MatchedFromDmi;         //<! 标识是否已经从dmidecode匹配过
 };
 
 #endif // DEVICEMEMORY_H

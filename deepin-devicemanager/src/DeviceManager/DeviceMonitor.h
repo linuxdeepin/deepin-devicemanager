@@ -1,69 +1,185 @@
+/*
+* Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
+*
+* Author:     Jun.Liu <liujuna@uniontech.com>
+*
+* Maintainer: XiaoMei.Ji <jixiaomei@uniontech.com>
+* Maintainer: Jun.Liu <liujuna@uniontech.com>
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #ifndef DEVICEMONITOR_H
 #define DEVICEMONITOR_H
 #include "DeviceInfo.h"
 
+/**
+ * @brief The DeviceMonitor class
+ * 用来描述显示屏的类
+ */
 
 class DeviceMonitor : public DeviceBaseInfo
 {
-
+    Q_OBJECT
+    Q_DISABLE_COPY(DeviceMonitor)
 public:
     DeviceMonitor();
 
-    // 设置从hwinfo中获取的信息
+    /**
+     * @brief setInfoFromHwinfo:设置由hwinfo --monitor命令获取的设备信息
+     * @param mapInfo:由hwinfo获取的信息map
+     */
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
-    // 设置从xrandr中获取的信息
-    bool setInfoFromXradr(const QString &main, const QString &edid);
-
-    // 设置从xrandr中获取的信息
-    bool setCurrentResolution(const QString &resolution, const QString &rate);
+    /**
+     * @brief setInfoFromXradr:设置从xrandr中获取的信息
+     * @param main:主显示器信息
+     * @param edid:edid信息
+     * @return 布尔值，true:信息设置成功；false:信息设置失败
+     */
+    bool setInfoFromXradr(const QString &main, const QString &edid, const QString &rate);
 
     // 将年周转化为年月
+    /**
+     * @brief transWeekToDate:将年周转化为年月
+     * @param year:年
+     * @param week:周
+     * @return QString:年月字符串
+     */
     QString transWeekToDate(const QString &year, const QString &week);
 
     // 获取屏幕大小英寸
+    /**
+     * @brief parseMonitorSize:获取屏幕大小英寸
+     * @param sizeDescription:【in】屏幕尺寸mm×mm or cm×cm
+     * @param inch:【out】屏幕尺寸 英尺
+     * @param retSize:【out】QSize
+     * @return QString:屏幕尺寸mm*mm(inch)
+     */
     QString parseMonitorSize(const QString &sizeDescription, double &inch, QSize &retSize);
 
     /**@brief:华为KLU项目里面的显示屏信息是写死的*/
+    /**
+     * @brief setInfoFromSelfDefine:设置华为KLU项目里面的显示屏信息部分为固定的值
+     * @param mapInfo:固定值信息map
+     */
     void setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo);
 
     /**@brief:华为PanGuV项目里面的显示屏信息是从edid里面获取的*/
+    /**
+     * @brief setInfoFromEdid:设置华为PanGuV项目里面的显示屏信息（从edid里面获取的）
+     * @param mapInfo:edid中获取的信息map
+     */
     void setInfoFromEdid(const QMap<QString, QString> &mapInfo);
 
-    // 获取设备属性
-    const QString &name()const;
-    const QString &vendor()const;
-    const QString &model()const;
-    const QString &displayInput()const;
-    const QString &VGA()const;
-    const QString &HDMI()const;
-    const QString &DVI()const;
-    const QString &interface()const;
-    const QString &screenSize()const;
-    const QString &aspectRatio()const;
-    const QString &mainScreen()const;
-    const QString &currentResolution()const;
-    const QString &serialNumber()const;
-    const QString &productionWeek()const;
-    const QString &supportResolutions()const;
+    /**
+     * @brief name:获取名称属性值
+     * @return QString 名称属性值
+     */
+    const QString &name()const override;
+
+    /**
+     * @brief driver 返回驱动，重写纯虚函数
+     * @return
+     */
+    const QString &driver() const override;
+
+    /**
+     * @brief available 返回是否可用
+     * @return
+     */
+    bool available() override;
+
+    /**
+     * @brief subTitle:获取子标题
+     * @return 子标题
+     */
+    QString subTitle() override;
+
+    /**
+     * @brief getOverviewInfo:获取概况信息
+     * @return 概况信息
+     */
+    const QString getOverviewInfo() override;
 
 protected:
+
+    /**
+     * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
+     */
     void initFilterKey() override;
+
+    /**
+     * @brief loadBaseDeviceInfo:加载基本信息
+     */
+    void loadBaseDeviceInfo() override;
+
+    /**
+     * @brief loadOtherDeviceInfo:加载基本信息
+     */
+    void loadOtherDeviceInfo() override;
+
+    /**
+     * @brief loadTableData:加载表头信息
+     */
+    void loadTableData() override;
 
 private:
     /**@brief:设置是否主显示屏幕等信息*/
-    bool setMainInfoFromXrandr(const QString &info);
+    /**
+     * @brief setMainInfoFromXrandr:设置主显示器信息
+     * @param info:由xrandr获取的主显示器有关信息
+     * @param rate:fresh rate
+     * @return 布尔值，true:信息设置成功；false:信息设置失败
+     */
+    bool setMainInfoFromXrandr(const QString &info, const QString &rate);
 
-    /**@brief:计算屏幕比例*/
+    /**
+     * @brief caculateScreenRatio:计算屏幕比例
+     */
     void caculateScreenRatio();
-    int gcd(int a, int b); // 和计算屏幕比例有关，拷贝过来的
-    bool findAspectRatio(int width, int height, int &ar_w, int &ar_h);// 和计算屏幕比例有关，拷贝过来的
 
-    /**@brief:计算屏幕大小*/
+    /**
+     * @brief gcd:计算最大公约数
+     * @param a:屏幕宽
+     * @param b:屏幕高
+     * @return 最大公约数
+     */
+    int gcd(int a, int b);
+
+    /**
+     * @brief findAspectRatio:计算屏幕宽高比
+     * @param width:宽
+     * @param height:高
+     * @param ar_w:宽
+     * @param ar_h:高
+     * @return布尔值，true:信息设置成功；false:信息设置失败
+     */
+    bool findAspectRatio(int width, int height, int &ar_w, int &ar_h);
+
+    /**
+     * @brief caculateScreenSize:计算屏幕大小
+     */
     void caculateScreenSize();
 
-    /**@brief:根据edid计算屏幕大小*/
-    void caculateScreenSize(const QString &edid);
+    /**@brief:*/
+
+    /**
+     * @brief caculateScreenSize:根据edid计算屏幕大小
+     * @param edid:edid
+     */
+    bool caculateScreenSize(const QString &edid);
 
 
 
@@ -83,6 +199,7 @@ private:
     QString         m_SerialNumber;      //<! 【流水号】
     QString         m_ProductionWeek;    //<! 【生产年月】
     QString         m_SupportResolution; //<!  支持的屏幕分辨率
+    QString         m_Driver;
 
     int             m_Width;             //<!  屏幕的宽度
     int             m_Height;            //<!  屏幕的高度

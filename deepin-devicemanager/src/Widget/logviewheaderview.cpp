@@ -23,6 +23,7 @@
 #include <DApplicationHelper>
 #include <DPalette>
 #include <DStyleHelper>
+
 #include <QDebug>
 #include <QPaintEvent>
 #include <QPainter>
@@ -37,7 +38,6 @@ LogViewHeaderView::LogViewHeaderView(Qt::Orientation orientation, QWidget *paren
 {
     viewport()->setAutoFillBackground(false);
 }
-
 void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const
 {
     painter->save();
@@ -60,6 +60,8 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style)
+        return;
 
     QStyleOptionHeader option;
     initStyleOption(&option);
@@ -67,7 +69,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
 
     // title
     QRect contentRect(rect.x(), rect.y(), rect.width(), rect.height() - m_spacing);
-    QRect hSpacingRect(rect.x(), contentRect.height() - 4, rect.width(),
+    QRect hSpacingRect(rect.x(), contentRect.height(), rect.width(),
                        rect.height() - contentRect.height());
 
     QBrush contentBrush(palette.color(cg, DPalette::Base));
@@ -76,7 +78,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     // vertical spacing
     QBrush vSpacingBrush(palette.color(cg, DPalette::FrameBorder));
     QRectF vSpacingRect(rect.x(), rect.y() + kSpacingMargin, m_spacing,
-                        rect.height() - kSpacingMargin * 2 - 4);
+                        rect.height() - kSpacingMargin * 2);
     QBrush clearBrush(palette.color(cg, DPalette::Window));
 
     painter->fillRect(hSpacingRect, clearBrush);
@@ -97,16 +99,8 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
                    };
     } else {
         textRect = {contentRect.x() + margin, contentRect.y(), contentRect.width() - margin,
-                    contentRect.height()
-                   };
+                    contentRect.height()};
     }
-    /*
-    *@author yaobin
-    *@date 2020-01-02
-    *@Modify Reason:使文字居中
-    */
-    textRect.adjust(0, -2, 0, -2);
-
     QString title = model()->headerData(logicalIndex, orientation(), Qt::DisplayRole).toString();
     //    int align = model()->headerData(logicalIndex, orientation(),
     //    Qt::TextAlignmentRole).toInt();
@@ -116,7 +110,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
 
     if (logicalIndex == 0) {
         QRect col0Rect = textRect;
-        col0Rect.setX(textRect.x() + 4);
+        col0Rect.setX(textRect.x() + margin - 2);
         painter->drawText(col0Rect, static_cast<int>(align), title);
     } else {
         painter->drawText(textRect, static_cast<int>(align), title);
@@ -159,6 +153,8 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style)
+        return;
 
     QBrush bgBrush(palette.color(cg, DPalette::Base));
 
@@ -170,13 +166,7 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
     QRectF clipRect(rect.x(), rect.y(), rect.width(), rect.height() * 2);
     QRectF subRect(rect.x(), rect.y() + rect.height(), rect.width(), rect.height());
     QPainterPath clipPath, subPath;
-    /*
-    *@author yaobin
-    *@date 2020-01-07
-    *改为直角
-    */
-    Q_UNUSED(radius);
-    clipPath.addRoundedRect(clipRect, 0, 0);
+    clipPath.addRoundedRect(clipRect, radius, radius);
     subPath.addRect(subRect);
     clipPath = clipPath.subtracted(subPath);
 

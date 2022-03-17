@@ -1,5 +1,9 @@
+// 项目自身文件
 #include "DeviceBluetooth.h"
-#include<QDebug>
+#include "DBusEnableInterface.h"
+
+// Qt库文件
+#include <QDebug>
 
 DeviceBluetooth::DeviceBluetooth()
     : DeviceBaseInfo()
@@ -11,66 +15,87 @@ DeviceBluetooth::DeviceBluetooth()
     , m_LogicalName("")
     , m_BusInfo("")
     , m_Capabilities("")
-    , m_Driver("")
+    , m_Driver("btusb")
     , m_DriverVersion("")
     , m_MaximumPower("")
     , m_Speed("")
 {
+    // 初始化可显示属性
     initFilterKey();
+
+    // 设置可禁用
+    m_CanEnable = true;
 }
 
 void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo)
 {
+    // 获取设备的基本信息
     setAttribute(mapInfo, "Name", m_Name);
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
-    loadOtherDeviceInfo(mapInfo);
+
+    // 获取设备其他信息
+    getOtherMapInfo(mapInfo);
 }
 
 bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    // 判断是不是同一个蓝牙设备，由于条件限制，现在只能通过厂商判断
-    QStringList vendor = mapInfo["Vendor"].split(" ");
-    if (vendor.size() < 1) {
-        return false;
-    }
-    if (!m_Vendor.contains(vendor[0])) {
-        return false;
+    if(mapInfo.find("path") != mapInfo.end()){
+        setAttribute(mapInfo, "name", m_Name);
+        setAttribute(mapInfo, "driver", m_Driver);
+        m_SysPath = mapInfo["path"];
+        m_HardwareClass = mapInfo["Hardware Class"];
+        m_Enable = false;
+        m_UniqueID = mapInfo["unique_id"];
+        //设备禁用的情况，没必要再继续向下执行，直接return
+        m_CanUninstall = !driverIsKernelIn(m_Driver);
+        return true;
     }
 
+    // 设置设备基本属性
+    setAttribute(mapInfo, "Serial ID", m_SerialID);
+    // 获取设备基本信息
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "", m_MAC);
-    setAttribute(mapInfo, "", m_LogicalName);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
-    setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "", m_DriverVersion);
-    setAttribute(mapInfo, "", m_MaximumPower);
     setAttribute(mapInfo, "Speed", m_Speed);
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
+    setAttribute(mapInfo, "Serial ID", m_UniqueID);
+    setAttribute(mapInfo, "Device", m_Name);
+    m_HardwareClass = "bluetooth";
+  
+    // 判断是否核内驱动
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
-    parseKeyToLshw(mapInfo["SysFS BusID"]);
+    // 设置关联到lshw信息的key值,设备的唯一标志
+    setHwinfoLshwKey(mapInfo);
 
-    loadOtherDeviceInfo(mapInfo);
+    // 获取其他信息
+    getOtherMapInfo(mapInfo);
     return true;
 }
 
 bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo["bus info"] != m_UniqueKey) {
+    // 根据 总线信息 与 设备信息中的唯一key值 判断是否是同一台设备
+    if (!matchToLshw(mapInfo))
         return false;
-    }
 
+    // 获取基本信息
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "version", m_Version);
-    setAttribute(mapInfo, "", m_Model);
-    setAttribute(mapInfo, "", m_MAC);
     setAttribute(mapInfo, "product", m_LogicalName);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "capabilities", m_Capabilities);
     setAttribute(mapInfo, "driver", m_Driver);
-    setAttribute(mapInfo, "", m_DriverVersion);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
+    // 判断是否核内驱动
+    if(driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
     return true;
 }
@@ -80,63 +105,48 @@ const QString &DeviceBluetooth::name()const
     return m_Name;
 }
 
-const QString &DeviceBluetooth::vendor()const
-{
-    return m_Vendor;
-}
-
-const QString &DeviceBluetooth::version()const
-{
-    return m_Version;
-}
-
-const QString &DeviceBluetooth::model()const
-{
-    return m_Model;
-}
-
-const QString &DeviceBluetooth::MAC()const
-{
-    return m_MAC;
-}
-
-const QString &DeviceBluetooth::logicalName()const
-{
-    return m_LogicalName;
-}
-
-const QString &DeviceBluetooth::busInfo()const
-{
-    return m_BusInfo;
-}
-
-const QString &DeviceBluetooth::capabilities()const
-{
-    return m_Capabilities;
-}
-
 const QString &DeviceBluetooth::driver()const
 {
     return m_Driver;
 }
 
-const QString &DeviceBluetooth::driverVersion()const
+QString DeviceBluetooth::subTitle()
 {
-    return m_DriverVersion;
+    return m_Name;
 }
 
-const QString &DeviceBluetooth::maximumPower()const
+const QString DeviceBluetooth::getOverviewInfo()
 {
-    return m_MaximumPower;
+    // 获取概况信息
+    return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
-const QString &DeviceBluetooth::speed()const
+EnableDeviceStatus DeviceBluetooth::setEnable(bool e)
 {
-    return m_Speed;
+    if(m_SerialID.isEmpty()){
+        return EDS_NoSerial;
+    }
+
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
+    if(res){
+        m_Enable = e;
+    }
+    // 设置设备状态
+    return res ? EDS_Success : EDS_Faild;
+}
+
+bool DeviceBluetooth::enable()
+{
+    // 获取设备状态
+    return m_Enable;
 }
 
 void DeviceBluetooth::initFilterKey()
 {
+    // 添加可显示的属性
     addFilterKey(QObject::tr("Bus"));
     addFilterKey(QObject::tr("BD Address"));
     addFilterKey(QObject::tr("ACL MTU"));
@@ -149,7 +159,6 @@ void DeviceBluetooth::initFilterKey()
     addFilterKey(QObject::tr("Service Classes"));
     addFilterKey(QObject::tr("Device Class"));
     addFilterKey(QObject::tr("HCI Version"));
-    //addFilterKey(QObject::tr("Revision"));
     addFilterKey(QObject::tr("LMP Version"));
     addFilterKey(QObject::tr("Subversion"));
 
@@ -168,17 +177,45 @@ void DeviceBluetooth::initFilterKey()
     addFilterKey(QObject::tr("Discovering"));
 }
 
-void DeviceBluetooth::parseKeyToLshw(const QString &info)
+void DeviceBluetooth::loadBaseDeviceInfo()
 {
-    //1-2:1.0
-    QStringList words = info.split(":");
-    if (words.size() != 2) {
-        return;
+    // 添加基本信息
+    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
+    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo(tr("Model"), m_Model);
+}
+
+void DeviceBluetooth::loadOtherDeviceInfo()
+{
+    // 添加其他信息,成员变量
+    addOtherDeviceInfo(tr("Speed"), m_Speed);
+    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
+    addOtherDeviceInfo(tr("Driver Version"), m_DriverVersion);
+    addOtherDeviceInfo(tr("Driver"), m_Driver);
+    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addOtherDeviceInfo(tr("Logical Name"), m_LogicalName);
+    addOtherDeviceInfo(tr("MAC Address"), m_MAC);
+
+    // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
+    mapInfoToList();
+}
+
+void DeviceBluetooth::loadTableData()
+{
+    // 加载表格数据
+    QString tName = m_Name;
+
+    if (!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
 
-    QStringList chs = words[0].split("-");
-    if (chs.size() != 2) {
-        return;
+    if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
     }
-    m_UniqueKey = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
+
+    m_TableData.append(tName);
+    m_TableData.append(m_Vendor);
+    m_TableData.append(m_Model);
 }
