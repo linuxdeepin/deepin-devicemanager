@@ -213,6 +213,8 @@ void TableWidget::slotShowMenu(const QPoint &point)
 
 
     int row = mp_Table->currentRow();
+    if(row < 0)
+        return;
     bool isInstalled = false;
     bool isPrinter = false;
     //主线程时使用时会阻塞执行
