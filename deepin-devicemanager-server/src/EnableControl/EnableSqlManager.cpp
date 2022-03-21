@@ -169,6 +169,22 @@ QString EnableSqlManager::authorizedPath(const QString& unique_id)
     return "";
 }
 
+
+void EnableSqlManager::authorizedPathUniqueIDList(QList<QPair<QString, QString> >& lstPair)
+{
+    QString sql = QString("SELECT path,unique_id FROM %1;").arg(DB_TABLE_AUTHORIZED);
+    if (!m_sqlQuery.exec(sql)) {
+        qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
+        return;
+    }
+    while (m_sqlQuery.next()) {
+        QPair<QString,QString> pair;
+        pair.first = m_sqlQuery.value(0).toString();
+        pair.second = m_sqlQuery.value(1).toString();
+        lstPair.append(lstPair);
+    }
+}
+
 void EnableSqlManager::removePathList(QStringList& lsPath)
 {
     QString sql = QString("SELECT path FROM %1;").arg(DB_TABLE_REMOVE);
@@ -178,6 +194,21 @@ void EnableSqlManager::removePathList(QStringList& lsPath)
     }
     while (m_sqlQuery.next()) {
         lsPath.append(m_sqlQuery.value(0).toString());
+    }
+}
+
+void EnableSqlManager::removePathUniqueIDList(QList<QPair<QString, QString> >& lstPair)
+{
+    QString sql = QString("SELECT path,unique_id FROM %1;").arg(DB_TABLE_REMOVE);
+    if (!m_sqlQuery.exec(sql)) {
+        qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
+        return;
+    }
+    while (m_sqlQuery.next()) {
+        QPair<QString,QString> pair;
+        pair.first = m_sqlQuery.value(0).toString();
+        pair.second = m_sqlQuery.value(1).toString();
+        lstPair.append(lstPair);
     }
 }
 

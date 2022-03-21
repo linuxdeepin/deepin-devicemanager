@@ -6,6 +6,10 @@
 #include <QFile>
 #include <QProcess>
 
+#include <net/if.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
+
 #define LEAST_NUM 10
 
 EnableUtils::EnableUtils()
@@ -40,6 +44,7 @@ void EnableUtils::disableOutDevice(const QString& info)
         // 获取设备信息路径
         // 有 SysFS Device Link 的使用 SysFS Device Link
         // 没有 SysFS Device Link 的使用 SysFS ID
+        // 如果是网卡则使用逻辑名称作为path
         QString path;
         if(mapItem.find("SysFS Device Link") != mapItem.end()){
             path = mapItem["SysFS Device Link"];
@@ -47,6 +52,18 @@ void EnableUtils::disableOutDevice(const QString& info)
             path = mapItem["SysFS ID"];
         }
         path.replace(QRegExp("[1-9]$"), "0");
+
+
+        // 网卡采用ioctl的方式禁用
+        QRegExp reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
+        if(reg.exactMatch(uniqueID)){
+            path = mapItem["Device File"];
+            if(EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID) &&
+                    EnableUtils::ioctlOperateNetworkLogicalName(path,false))
+                EnableSqlManager::getInstance()->updateDataToAuthorizedTable(uniqueID,path);
+            continue;
+        }
+
 
         // 先判断设备是否被记录在数据库，如果在则禁用
         if(EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID)){
@@ -73,14 +90,25 @@ void EnableUtils::disableOutDevice()
 
 void EnableUtils::disableInDevice()
 {
-    // 由于rescan会将所有的remove数据都回复，因此需要重新禁用其它设备
-    QStringList rpList;
-    EnableSqlManager::getInstance()->removePathList(rpList);
+    // 网卡通过ioctl禁用
+    QList<QPair<QString, QString> > lstAuthPair;
+    EnableSqlManager::getInstance()->authorizedPathUniqueIDList(lstAuthPair);
+    for (QList<QPair<QString,QString>>::iterator it = lstAuthPair.begin() ; it != lstAuthPair.end(); ++it) {
+        QRegExp reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
+        if(reg.exactMatch((*it).second)){
+            EnableUtils::ioctlOperateNetworkLogicalName((*it).first, false);
+            continue;
+        }
+    }
 
-    foreach (const QString &path, rpList) {
-        QString pathT = "/sys" + path + QString("/remove");
+
+    // 其它通过remove文件禁用
+    QList<QPair<QString, QString> > lstRemovePair;
+    EnableSqlManager::getInstance()->removePathUniqueIDList(lstRemovePair);
+    for (QList<QPair<QString,QString>>::iterator it = lstRemovePair.begin() ; it != lstRemovePair.end(); ++it) {
+        QString pathT = "/sys" + (*it).first + QString("/remove");
         if(!QFile::exists(pathT)){
-            pathT = "/sys" + path + QString("/reset");
+            pathT = "/sys" + (*it).first + QString("/reset");
         }
 
         QFile file(pathT);
@@ -89,6 +117,39 @@ void EnableUtils::disableInDevice()
             file.close();
         }
     }
+}
+
+bool EnableUtils::ioctlOperateNetworkLogicalName(const QString& logicalName, bool enable){
+    // 1. 通过ioctl禁用
+    int fd = socket(AF_INET, SOCK_STREAM, 0);
+    if(fd < 0)
+        return false;
+    struct ifreq ifr;
+    strcpy(ifr.ifr_name,logicalName.toStdString().c_str());
+
+    short flag;
+    if(enable){
+        flag = IFF_UP | IFF_PROMISC;
+    }else{
+        flag = ~(IFF_UP | IFF_PROMISC);
+    }
+    // 先获取标识
+    if(ioctl(fd, SIOCGIFFLAGS, &ifr) < 0){
+        close(fd);
+        return false;
+    }
+    // 获取后重新设置标识
+    if(enable){
+        ifr.ifr_ifru.ifru_flags |= flag;
+    }else{
+        ifr.ifr_ifru.ifru_flags &= flag;
+    }
+
+    if(ioctl(fd, SIOCSIFFLAGS, &ifr) < 0){
+        close(fd);
+        return false;
+    }
+    return true;
 }
 
 bool EnableUtils::getMapInfo(const QString& item,QMap<QString,QString>& mapInfo)

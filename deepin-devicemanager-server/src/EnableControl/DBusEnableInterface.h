@@ -95,6 +95,15 @@ private:
     bool removeEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable, const QString strDriver="");
 
     /**
+     * @brief ioctlEnableNetwork 通过ioctl启用禁用网卡
+     * @param key 设备的唯一标识
+     * @param logical_name 网卡的逻辑名称
+     * @param enable 启用或者禁用
+     * @return
+     */
+    bool ioctlEnableNetwork(const QString& hclass, const QString& name, const QString& logical_name, const QString& unique_id, bool enable, const QString strDriver="");
+
+    /**
      * @brief construct_uri
      * @param buffer
      * @param buflen
