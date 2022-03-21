@@ -46,6 +46,14 @@ public:
     static void disableInDevice();
 
     /**
+     * @brief ioctlOperateNetworkLogicalName 通过ioctl设置网卡是否可用
+     * @param logicalName
+     * @param enable
+     * @return
+     */
+    static bool ioctlOperateNetworkLogicalName(const QString& logicalName, bool enable);
+
+    /**
      * @brief getMapInfo 解析usb信息
      * @param item
      * @param mapInfo

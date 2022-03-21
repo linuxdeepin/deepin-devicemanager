@@ -225,113 +225,55 @@ void DeviceGenerator::generatorMonitorDevice()
 
 void DeviceGenerator::generatorNetworkDevice()
 {
-    const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
     QList<DeviceNetwork *> lstDevice;
-    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
+    const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
+    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it){
         // Hardware Class 类型为 network interface
         if ("network" == (*it)["Hardware Class"]) {
             continue;
         }
 
-        // 判断该网卡是否存在，被禁用的移动网卡被拔出
-        QString path = pciPath(*it);
-        if (path.contains("usb")) {
-            // 判断authorized是否存在，不存在则直接返回
-            if (!QFile::exists("/sys" + path + "/authorized")) {
-                continue;
+        // 先判断是否是有效网卡信息
+        // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
+        if(((*it).find("HW Address") == (*it).end() || (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())){
+            continue;
+        }
+
+        // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
+        if((*it).find("unique_id") == (*it).end()){
+            DeviceNetwork *device = new DeviceNetwork();
+            device->setInfoFromHwinfo(*it);
+            lstDevice.append(device);
+        }else{
+            DeviceNetwork *device = nullptr;
+            const QString& unique_id = (*it)["unique_id"];
+            for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet){
+                if(!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id){
+                    device = (*itNet);
+                }
+            }
+            if(device){
+                device->setEnableValue(false);
             }
         }
-        // 没有网卡物理地址且在数据库里面找不到的的设备过滤
-        if ((*it).size() < 2)
-            continue;
+    }
 
-        // 判断重复设备数据
-        QString unique_id = uniqueID(*it);
-        DeviceNetwork *device = nullptr;
-        for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
-            if (!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id) {
-                device = *itNet;
+    // 设置从lshw中获取的信息
+    const QList<QMap<QString, QString>> &lstLshw = DeviceManager::instance()->cmdInfo("lshw_network");
+    for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it){
+        if((*it).find("serial") == (*it).end())
+            continue;
+        const QString& serialNumber = (*it)["serial"];
+        for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
+            if (!serialNumber.isEmpty() && (*itDevice)->uniqueID() == serialNumber) {
+                (*itDevice)->setInfoFromLshw(*it);
                 break;
             }
         }
-        if (device) {
-            device->setEnableValue(false);
-            device->setInfoFromHwinfo(*it);
-            continue;
-        }
-
-        if ((*it).find("Permanent HW Address") != (*it).end() && (*it).find("HW Address") != (*it).end()) {
-            device = new DeviceNetwork();
-            device->setInfoFromHwinfo(*it);
-            lstDevice.append(device);
-        }
-        if ((*it).find("path") != (*it).end()) {
-            device = new DeviceNetwork();
-            device->setInfoFromHwinfo(*it);
-            DeviceManager::instance()->addNetworkDevice(device);
-        }
     }
 
-    // 添加从lshw中获取的信息
-    const QList<QMap<QString, QString>> &lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
-    /*
-     * 存在一个网卡对应2个接口的情况，lwhw会分别读到网卡和接口的信息。
-    *-network
-       description: Network controller
-       bus info: pci@0001:01:00.0
-    *-network:0
-       serial: 30:aa:e4:a4:67:56
-    *-network:1 DISABLED
-       serial: 32:aa:e4:a4:67:56
-    */
-    QMap<QString, QString> itemWirelssNC;
-    itemWirelssNC.clear();
-    QList<QMap<QString, QString> >::const_iterator itls = lstInfo.begin();
-    for (; itls != lstInfo.end(); ++itls) {
-        if ((*itls).size() < 2)
-            continue;
-
-        if ((*itls).find("serial") != (*itls).end()) { //有mac地址，是网卡
-            QString unique_id = (*itls)["serial"];
-            DeviceNetwork *devTemp = nullptr;
-            for (QList<DeviceNetwork *>::iterator it = lstDevice.begin(); it != lstDevice.end(); ++it) {
-                DeviceNetwork *net = dynamic_cast<DeviceNetwork *>(*it);
-                if (!unique_id.isEmpty() && net && net->uniqueID() == unique_id) {
-                    devTemp = *it;
-                    break;
-                }
-            }
-            if (!devTemp) {
-                continue;
-            }
-            if ((*itls).find("bus info") != (*itls).end()) {
-                devTemp->setInfoFromLshw(*itls);
-                itemWirelssNC.clear();//清除可能的缓存
-            } else {
-                QMap<QString, QString> temp;//因为可能对应2张网卡，所以用动态局部变量
-                foreach (const QString &key, itemWirelssNC.keys()) {
-                    temp.insert(key, itemWirelssNC[key]);
-                }
-                foreach (const QString &key, (*itls).keys()) {
-                    temp.insert(key, (*itls)[key]);
-                }
-                devTemp->setInfoFromLshw(temp);
-            }
-            DeviceManager::instance()->addNetworkDevice(devTemp);
-            continue;
-        } else if ((*itls).find("bus info") != (*itls).end())  { //有总线，说明是网卡
-            foreach (const QString &key, (*itls).keys()) {
-                itemWirelssNC.insert(key, (*itls)[key]);
-            }
-            continue;
-        }
-    }
-
-    for (QList<DeviceNetwork *>::iterator it = lstDevice.begin(); it != lstDevice.end(); ++it) {
-        DeviceNetwork *net = dynamic_cast<DeviceNetwork *>(*it);
-        if (!DeviceManager::instance()->getNetworkDevice(net->uniqueID())) {
-            delete net;
-        }
+    foreach(DeviceNetwork* device, lstDevice){
+        DeviceManager::instance()->addNetworkDevice(device);
     }
 }
 

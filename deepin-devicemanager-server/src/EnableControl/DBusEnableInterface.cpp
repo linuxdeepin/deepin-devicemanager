@@ -2,6 +2,7 @@
 #include "EnableSqlManager.h"
 #include "DeviceInfoManager.h"
 #include "MainJob.h"
+#include "EnableUtils.h"
 
 #include <QFile>
 #include <QDir>
@@ -10,7 +11,6 @@
 
 // 系统库文件
 #include <cups.h>
-#include <unistd.h>
 #include <string>
 
 # define HTTP_MAX_URI 1024	/* Max length of URI string */
@@ -33,6 +33,13 @@ QString DBusEnableInterface::getAuthorizedInfo()
 
 bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device, const QString strDriver)
 {
+    // 网卡通过ioctl禁用
+    // 先判断是否是网卡
+    QRegExp reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
+    if(reg.exactMatch(value)){
+        return ioctlEnableNetwork(hclass,name,path,value,enable_device,strDriver);
+    }
+
     // 先从数据库中查找路径，防止设备更换usb接口
     QString sPath = EnableSqlManager::getInstance()->authorizedPath(value);
     if(sPath.isEmpty()){
@@ -185,6 +192,20 @@ bool DBusEnableInterface::removeEnable(const QString& hclass, const QString& nam
 
         // 2. 持久化保存
         EnableSqlManager::getInstance()->insertDataToRemoveTable(hclass, name, path, unique_id, strDriver);
+    }
+    return true;
+}
+
+bool DBusEnableInterface::ioctlEnableNetwork(const QString& hclass, const QString& name, const QString& logical_name, const QString& unique_id, bool enable, const QString strDriver)
+{
+    // 1. 通过ioctl禁用
+    if(!EnableUtils::ioctlOperateNetworkLogicalName(logical_name,enable))
+        return false;
+    // 2. 持久化保存
+    if(enable){
+        EnableSqlManager::getInstance()->removeDataFromAuthorizedTable(unique_id);
+    }else{
+        EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass, name, logical_name, unique_id, enable, strDriver);
     }
     return true;
 }

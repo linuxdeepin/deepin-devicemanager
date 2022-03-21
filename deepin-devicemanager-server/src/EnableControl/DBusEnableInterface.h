@@ -47,9 +47,12 @@ public slots:
 
     /**
      * @brief enable 启用禁用设备
-     * @param key 设备的唯一标识
+     * @param hclass 类型
+     * @param name 名称
      * @param path 授权文件的路径
+     * @param value 传过来的数值
      * @param enable_device 启用或者禁用
+     * @param strDriver
      * @return 是否成功
      */
     Q_SCRIPTABLE bool enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device, const QString strDriver="");
@@ -77,22 +80,40 @@ signals:
 private:
 
     /**
-     * @brief enable 通过authorized文件启用禁用设备
-     * @param key 设备的唯一标识
-     * @param path 授权文件的路径
-     * @param enable 启用或者禁用
+     * @brief authorizedEnable 通过authorized文件启用禁用设备
+     * @param hclass 设备类型
+     * @param name 设备名称
+     * @param path 设备节点路径
+     * @param unique_id 设备的唯一标识
+     * @param enable_device 启用或者禁用
+     * @param strDriver 驱动名称
      * @return
      */
     bool authorizedEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable_device, const QString strDriver="");
 
     /**
      * @brief removeEnable 通过remove文件启用禁用设备
-     * @param key 设备的唯一标识
-     * @param path 授权文件的路径
+     * @param hclass 设备类型
+     * @param name 设备名称
+     * @param path 设备节点路径
+     * @param unique_id 设备的唯一标识
      * @param enable 启用或者禁用
+     * @param strDriver 驱动名称
      * @return
      */
     bool removeEnable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool enable, const QString strDriver="");
+
+    /**
+     * @brief ioctlEnableNetwork 通过ioctl启用禁用网卡
+     * @param hclass 设备类型
+     * @param name 设备名称
+     * @param logical_name 逻辑名称
+     * @param unique_id 唯一标识
+     * @param enable 启用或者禁用
+     * @param strDriver 驱动名称
+     * @return 返回是否成功
+     */
+    bool ioctlEnableNetwork(const QString& hclass, const QString& name, const QString& logical_name, const QString& unique_id, bool enable, const QString strDriver="");
 
     /**
      * @brief construct_uri

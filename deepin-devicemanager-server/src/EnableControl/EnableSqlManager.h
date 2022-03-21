@@ -149,10 +149,22 @@ public:
     QString authorizedPath(const QString& unique_id);
 
     /**
+     * @brief authorizedPathUniqueIDList 获取path 和 unique_id两个字段
+     * @param lstPair
+     */
+    void authorizedPathUniqueIDList(QList<QPair<QString, QString> >& lstPair);
+
+    /**
      * @brief removePathList 获取所有被remove的数据
      * @param lsPath
      */
     void removePathList(QStringList& lsPath);
+
+    /**
+     * @brief removePathUniqueIDList 获取path 和 unique_id两个字段
+     * @param lstPair
+     */
+    void removePathUniqueIDList(QList<QPair<QString, QString> >& lstPair);
 
     /**
      * @brief insertWakeupData
