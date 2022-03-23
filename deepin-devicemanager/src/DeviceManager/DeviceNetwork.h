@@ -96,7 +96,13 @@ public:
      * @brief logicalName: 获取网卡逻辑名称
      * @return
      */
-    QString logicalName();
+    const QString& logicalName();
+
+    /**
+     * @brief hwAddress 获取网卡的物理地址
+     * @return
+     */
+    const QString& hwAddress();
 
 protected:
 
@@ -147,6 +153,7 @@ private:
     QString             m_Capacity;                     //<! 【最大速度】
     QString             m_Latency;                      //<! 【延迟】
     QString             m_Multicast;                    //<! 【组播】
+    QString             m_HWAddress;                    //<! 【物理地址】
 };
 
 #endif // DEVICENETWORK_H

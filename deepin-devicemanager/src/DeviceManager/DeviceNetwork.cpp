@@ -93,6 +93,7 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     }
 
     setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
+    setAttribute(mapInfo, "HW Address", m_HWAddress);
     setAttribute(mapInfo, "SysFS Device Link", m_SysPath);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Driver Modules", m_DriverModules);
@@ -158,9 +159,14 @@ void DeviceNetwork::correctCurrentLinkStatus(QString linkStatus)
         m_Link = linkStatus;
 }
 
-QString DeviceNetwork::logicalName()
+const QString& DeviceNetwork::logicalName()
 {
     return m_LogicalName;
+}
+
+const QString& DeviceNetwork::hwAddress()
+{
+    return m_HWAddress;
 }
 
 void DeviceNetwork::initFilterKey()

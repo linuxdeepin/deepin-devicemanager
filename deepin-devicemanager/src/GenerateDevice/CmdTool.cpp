@@ -184,8 +184,6 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
         } else if (item.startsWith("network")) {      // 网卡信息
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_network", mapInfo);
-//            if (!item.contains(QRegExp(".*network:[0-9] DISABLED.*")))
-//                addMapInfo("lshw_network", mapInfo);
         } else if (item.startsWith("usb")) {          // USB 设备信息
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_usb", mapInfo);

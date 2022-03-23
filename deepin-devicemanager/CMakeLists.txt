@@ -143,4 +143,4 @@ install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/dee
 install(FILES ${APP_AUTHENTICATION} DESTINATION /usr/share/polkit-1/actions)
 
 # Test--------deepin-devicemanager
-#add_subdirectory(./tests)
+add_subdirectory(./tests)

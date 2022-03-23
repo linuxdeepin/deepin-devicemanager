@@ -11,6 +11,7 @@
 #include <unistd.h>
 
 #define LEAST_NUM 10
+#define REG_ADDRESS "^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$"
 
 EnableUtils::EnableUtils()
 {
@@ -55,7 +56,7 @@ void EnableUtils::disableOutDevice(const QString& info)
 
 
         // 网卡采用ioctl的方式禁用
-        QRegExp reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
+        QRegExp reg(REG_ADDRESS);
         if(reg.exactMatch(uniqueID)){
             path = mapItem["Device File"];
             if(EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID) &&
@@ -94,7 +95,7 @@ void EnableUtils::disableInDevice()
     QList<QPair<QString, QString> > lstAuthPair;
     EnableSqlManager::getInstance()->authorizedPathUniqueIDList(lstAuthPair);
     for (QList<QPair<QString,QString>>::iterator it = lstAuthPair.begin() ; it != lstAuthPair.end(); ++it) {
-        QRegExp reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
+        QRegExp reg(REG_ADDRESS);
         if(reg.exactMatch((*it).second)){
             EnableUtils::ioctlOperateNetworkLogicalName((*it).first, false);
             continue;

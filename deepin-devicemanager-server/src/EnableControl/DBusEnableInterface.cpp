@@ -201,7 +201,6 @@ bool DBusEnableInterface::ioctlEnableNetwork(const QString& hclass, const QStrin
     // 1. 通过ioctl禁用
     if(!EnableUtils::ioctlOperateNetworkLogicalName(logical_name,enable))
         return false;
-    qInfo() << "ioctlEnableNetwork ****** " << enable;
     // 2. 持久化保存
     if(enable){
         EnableSqlManager::getInstance()->removeDataFromAuthorizedTable(unique_id);
