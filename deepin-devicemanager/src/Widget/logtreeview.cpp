@@ -62,14 +62,6 @@ void LogTreeView::setItem(int row, int column, QStandardItem *item)
     }
 }
 
-QStandardItem *LogTreeView::item(int row, int column)
-{
-    if(mp_Model && mp_Model->rowCount() > row && mp_Model->columnCount() > column){
-        return mp_Model->item(row,column);
-    }
-    return nullptr;
-}
-
 void LogTreeView::setColumnAverage()
 {
     if (!mp_HeaderView) {
@@ -101,23 +93,6 @@ bool LogTreeView::currentRowEnable()
         }
     }
     return true;
-}
-
-bool LogTreeView::currentRowAvailable()
-{
-    QModelIndex index = currentIndex();
-     int row = index.row();
-     if (row < 0) {
-         return false;
-     }
-     QStandardItem *item = mp_Model->item(row, 0);
-     if (item) {
-         QString str = item->text();
-         if (str.startsWith("(" + tr("Unavailable") + ")")) {
-             return false;
-         }
-     }
-     return true;
 }
 
 int LogTreeView::currentRow()
@@ -334,6 +309,7 @@ void LogTreeView::keyPressEvent(QKeyEvent *event)
 
 void LogTreeView::resizeEvent(QResizeEvent *event)
 {
+    // 窗口大小变化时，重计算表格列宽
     DTreeView::resizeEvent(event);
     setColumnAverage();
 }

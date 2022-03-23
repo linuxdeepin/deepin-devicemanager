@@ -3,14 +3,9 @@
 #include "DetectThread.h"
 #include "DebugTimeManager.h"
 #include "DBusInterface.h"
-#include "DriverDBusInterface.h"
-#include "DBusEnableInterface.h"
-#include "DBusWakeupInterface.h"
 #include "DeviceInfoManager.h"
-#include "EnableSqlManager.h"
-#include "EnableUtils.h"
-#include "WakeupUtils.h"
 
+#include <unistd.h>
 #include <QDateTime>
 #include <QThread>
 #include <QProcess>
@@ -18,37 +13,24 @@
 #include <QMutexLocker>
 #include <QDBusConnection>
 #include <QDebug>
-#include <QFile>
-
-#include <unistd.h>
 
 static QMutex mutex;
 const QString SERVICE_NAME = "com.deepin.devicemanager";
-const QString DRIVER_SERVICE_PATH = "/com/deepin/drivermanager";
-const QString DEVICE_SERVICE_PATH = "/com/deepin/devicemanager";
-const QString ENABLE_SERVICE_PATH = "/com/deepin/enablemanager";
-const QString WAKEUP_SERVICE_PATH = "/com/deepin/wakeupmanager";
-bool  MainJob::s_ServerIsUpdating = false;
-bool  MainJob::s_ClientIsUpdating = false;
+const QString SERVICE_PATH = "/com/deepin/devicemanager";
 
 MainJob::MainJob(QObject *parent)
     : QObject(parent)
     , mp_Pool(new ThreadPool)
     , mp_DetectThread(nullptr)
-    , mp_IFace(new DBusInterface(this))
-    , mp_DriverOperateIFace(new DriverDBusInterface(this))
-    , mp_Enable(new DBusEnableInterface(this))
-    , mp_Wakeup(new DBusWakeupInterface(this))
+    , mp_IFace(new DBusInterface)
+    , m_ClientIsUpdating(false)
+    , m_ServerIsUpdating(false)
     , m_FirstUpdate(true)
 {
     // 守护进程启动的时候加载所有信息
-    updateAllDevice();
-
-    // 后台加载后先禁用设备
-    const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");
-    EnableUtils::disableOutDevice(info);
-    EnableUtils::disableInDevice();
-    WakeupUtils::updateWakeupDeviceInfo(info);
+    if (!isZhaoXin()) {
+        updateAllDevice();
+    }
 }
 
 MainJob::~MainJob()
@@ -61,20 +43,18 @@ void MainJob::working()
     if (!initDBus()) {
         exit(1);
     }
+    mp_IFace->setMainJob(this);
 
     // 启动线程监听USB是否有新的设备
     mp_DetectThread = new DetectThread(this);
     mp_DetectThread->start();
     connect(mp_DetectThread, &DetectThread::usbChanged, this, &MainJob::slotUsbChanged, Qt::ConnectionType::QueuedConnection);
-    connect(mp_Enable, &DBusEnableInterface::update, this, &MainJob::slotUsbChanged);
-    connect(mp_IFace, &DBusInterface::update, this, &MainJob::slotUsbChanged);
-    connect(mp_DriverOperateIFace, &DriverDBusInterface::sigFinished, this, &MainJob::slotDriverControl);
 }
 
 INSTRUCTION_RES MainJob::executeClientInstruction(const QString &instructions)
 {
     QMutexLocker locker(&mutex);
-    s_ServerIsUpdating = true;
+    m_ServerIsUpdating = true;
     INSTRUCTION_RES res = IR_NULL;
 
     if (instructions.startsWith("DETECT")) {
@@ -85,11 +65,17 @@ INSTRUCTION_RES MainJob::executeClientInstruction(const QString &instructions)
             updateAllDevice();
         }
         res = IR_UPDATE;
+    } else if (instructions.startsWith("DRIVER")) {
+        // 执行启用禁用的驱动指令
+        res = driverInstruction(instructions);
+    } else if (instructions.startsWith("IFCONFIG")) {
+        // 执行ifconfig指令
+        res = ifconfigInstruction(instructions);
     } else {
         res = IR_NULL;
     }
 
-    s_ServerIsUpdating = false;
+    m_ServerIsUpdating = false;
     return res;
 }
 
@@ -107,25 +93,14 @@ bool MainJob::isZhaoXin()
     }
 }
 
-bool MainJob::serverIsRunning()
+bool MainJob::isServerRunning()
 {
-    return s_ServerIsUpdating;
-}
-
-bool MainJob::clientIsRunning()
-{
-    return s_ClientIsUpdating;
+    return m_ServerIsUpdating;
 }
 
 void MainJob::slotUsbChanged()
 {
     executeClientInstruction("DETECT");
-}
-
-void MainJob::slotDriverControl(bool success)
-{
-    if(success)
-        executeClientInstruction("DETECT");
 }
 
 void MainJob::onFirstUpdate()
@@ -148,42 +123,110 @@ void MainJob::updateAllDevice()
     m_FirstUpdate = false;
 }
 
+INSTRUCTION_RES MainJob::driverInstruction(const QString &instruction)
+{
+    qInfo() << instruction;
+    QStringList lst = instruction.split("#");
+    if (lst.size() != 2) {
+        return IR_NULL;
+    }
+    const QString &cmd = lst[1];
+
+    QStringList lstCmd = cmd.split(" ");
+    if (lstCmd.size() != 2) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
+    qInfo() << lstCmd[0] << " " <<lstCmd[1];
+    //检查输入，防止代码注入
+    if (("insmod" != lstCmd[0]) && ("rmmod" != lstCmd[0])) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
+    if (("insmod" == lstCmd[0]) && (!lstCmd[1].contains("ko"))) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
+    if ((lstCmd[1].contains("|")) || (lstCmd[1].contains("||"))
+            || (lstCmd[1].contains("&")) || (lstCmd[1].contains("&&"))) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(-1);
+    int exitcode = process.exitCode();
+    if (exitcode == 127 || exitcode == 126) {
+        return IR_NULL;
+    } else {
+        QString output = process.readAllStandardOutput();
+        if (output == "") {
+            return IR_SUCCESS;
+        } else {
+            return IR_FAILED;
+        }
+    }
+}
+
+INSTRUCTION_RES MainJob::ifconfigInstruction(const QString &instruction)
+{
+    QStringList lst = instruction.split("#");
+    if (lst.size() != 2) {
+        return IR_NULL;
+    }
+    const QString &cmd = lst[1];//ifconfig %1 up ifconfig %1 down
+    QStringList lstCmd = cmd.split(" ");
+    if (lstCmd.size() != 3) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+    if (("ifconfig" != lstCmd[0]) || ("up" != lstCmd[2] && "down" != lstCmd[2])) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+
+    QRegExp reg("\\w{1,15}");//接口名称限制，长度1-15.
+    if (!reg.exactMatch(lstCmd[1])) {
+        qInfo() << "Cmd format is wrong.";
+        return IR_NULL;
+    }
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(-1);
+    int exitcode = process.exitCode();
+    if (exitcode == 127 || exitcode == 126) {
+        return IR_NULL;
+    } else {
+        QString output = process.readAllStandardOutput();
+        if (output == "") {
+            return IR_SUCCESS;
+        } else {
+            return IR_FAILED;
+        }
+    }
+}
+
 bool MainJob::initDBus()
 {
-    QDBusConnection systemBus = QDBusConnection::systemBus();
     //1. 申请一个总线连接
-    if (!systemBus.isConnected()) {
+    if (!QDBusConnection::systemBus().isConnected()) {
         return false;
     }
 
     //2. 在总线连接上挂载服务，这样其他进程才能请求该服务
-    if (!systemBus.registerService(SERVICE_NAME)) {
+    if (!QDBusConnection::systemBus().registerService(SERVICE_NAME)) {
         return false;
     }
 
     //3. 在挂载的服务上注册一个执行服务的对象
-    if (!systemBus.registerObject(DEVICE_SERVICE_PATH, mp_IFace, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
+    if (!QDBusConnection::systemBus().registerObject(SERVICE_PATH, mp_IFace, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
         qInfo() << QDBusConnection::systemBus().lastError();
         return false;
     }
-    if (!systemBus.registerObject(DRIVER_SERVICE_PATH, mp_DriverOperateIFace, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals))  {
-        qInfo() << QDBusConnection::systemBus().lastError();
-        return false;
-    }
-    if (!systemBus.registerObject(ENABLE_SERVICE_PATH, mp_Enable, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
-        qInfo() << QDBusConnection::systemBus().lastError();
-        return false;
-    }
-    if (!systemBus.registerObject(WAKEUP_SERVICE_PATH, mp_Wakeup, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
-        qInfo() << QDBusConnection::systemBus().lastError();
-        return false;
-    }
-
-
-    static QThread t;
-    mp_Enable->moveToThread(&t);
-    t.start();
 
     return true;
 }
-

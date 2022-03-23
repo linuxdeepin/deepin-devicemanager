@@ -29,7 +29,8 @@
 #include "CmdButtonWidget.h"
 #include "TipsWidget.h"
 
-BtnWidget::BtnWidget()
+BtnWidget::BtnWidget(DWidget *parent)
+    : DWidget(parent)
 {
 
 }
@@ -53,7 +54,6 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     , m_LimitRow(13)
     , m_IsExpand(false)
     , m_IsEnable(true)
-    , m_IsAvailable(true)
     , mp_OldItem(nullptr)
     , mp_CurItem(nullptr)
     , m_TimeStep(0)
@@ -153,7 +153,7 @@ void DetailTreeView::setCommanLinkButton(int row)
     pVBoxLayout->addLayout(pHBoxLayout);
 
     // 新建放置按钮的widget,并设置鼠标出入对应的槽函数
-    BtnWidget *btnwidget = new BtnWidget();
+    BtnWidget *btnwidget = new BtnWidget(this);  // BtnWidget添加父窗口
     connect(btnwidget, &BtnWidget::enter, this, &DetailTreeView::slotEnterBtnWidget);
     connect(btnwidget, &BtnWidget::leave, this, &DetailTreeView::slotLeaveBtnWidget);
     btnwidget->setLayout(pVBoxLayout);
@@ -168,7 +168,7 @@ void DetailTreeView::setCommanLinkButton(int row)
 int DetailTreeView::setTableHeight(int paintHeight)
 {
     // 设备禁用状态下,只显示一行
-    if (!m_IsEnable  || !m_IsAvailable) {
+    if (!m_IsEnable) {
         paintHeight = 40;
         this->setFixedHeight(paintHeight);
         return paintHeight;
@@ -176,10 +176,10 @@ int DetailTreeView::setTableHeight(int paintHeight)
 
     // 父窗口
     PageTableWidget *pageTableWidget = dynamic_cast<PageTableWidget *>(this->parent());
-    if(!pageTableWidget)
+    if (!pageTableWidget)
         return -1;
     PageInfo *par = dynamic_cast<PageInfo *>(pageTableWidget->parent());
-    if(!par)
+    if (!par)
         return -1;
     // 父窗口可显示的最大表格行数
     // 最多显示行数与父窗口高度相关,需减去Label以及Spacing占用空间
@@ -281,19 +281,13 @@ bool DetailTreeView::isCurDeviceEnable()
     return m_IsEnable;
 }
 
-bool DetailTreeView::isCurDeviceAvailable()
-{
-    return m_IsAvailable;
-}
-
-void DetailTreeView::setCurDeviceState(bool enable, bool available)
+void DetailTreeView::setCurDeviceState(bool state)
 {
     // 设置当前设备状态
-    m_IsEnable = enable;
-    m_IsAvailable = available;
+    m_IsEnable = state;
 
     // 禁用状态
-    if (!m_IsEnable || !m_IsAvailable) {
+    if (!m_IsEnable) {
 
         // 隐藏除第一行以外的所有行
         for (int i = 1; i < this->rowCount(); ++i) {
@@ -465,7 +459,7 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
         line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - 40));
 
         // 绘制横线
-        if (m_IsEnable || m_IsAvailable) {
+        if (m_IsEnable) {
             QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - 39, rect.bottomRight().x(), rect.bottomRight().y() - 39);
             painter.drawLine(hline);
         }
@@ -483,7 +477,7 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
                     line.setP2(QPoint(rect.bottomLeft().x() + 179, rect.bottomLeft().y() - i));
 
                     // 绘制横线
-                    if (m_IsEnable || m_IsAvailable) {
+                    if (m_IsEnable) {
                         QLine hline(rect.bottomLeft().x(), rect.bottomLeft().y() - i + 1, rect.bottomRight().x(), rect.bottomRight().y() - i + 1);
                         painter.drawLine(hline);
                     }

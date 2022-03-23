@@ -1,6 +1,5 @@
 // 项目自身文件
 #include "RichTextDelegate.h"
-#include "PageBoardInfo.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -213,23 +212,16 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     if (lstStr.size() > 1) {
         QTextDocument  textDoc;
         //设置文字居中显示
-        textDoc.setTextWidth(option.rect.width() - 6);//设置文本左边空6px的位置。1. 文本长度减6
+        textDoc.setTextWidth(option.rect.width());
         //设置文本内容
         QDomDocument doc;
         getDocFromLst(doc, lstStr);
         textDoc.setHtml(doc.toString());
 
-        // bug111063中 社区版与专业版使用同一代码，主板界面展示效果不同
-        // PageBoardInfo 中计算行高方式与html中计算行高方式不同，导致每行下方出现截断或空白
-        // 此处获取html整体高度后再对PageBoardInfo设置行高，则不会再出现截断或空白
-        dynamic_cast<PageBoardInfo *>(this->parent())->setRowHeight(index.row(), textDoc.size().toSize().height());
-
         QAbstractTextDocumentLayout::PaintContext   paintContext;
         paintContext.palette.setCurrentColorGroup(cg);
         QRect  textRect = style->subElementRect(QStyle::SE_ItemViewItemText,  &opt);
-        textRect.setWidth(textRect.size().width() - 6);//设置文本左边空6px的位置。2. 显示矩形减6
-        textRect.setHeight(textRect.size().height() - 3);
-        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 3));//设置文本左边空6px的位置。1. 文本长度减6
+        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 3));
         painter->save();
         painter->translate(point);
         painter->setClipRect(textRect.translated(-point));
@@ -238,7 +230,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     } else {
         QTextDocument  textDoc;
         //设置文字居中显示
-        textDoc.setTextWidth(option.rect.width() - 6);//设置文本左边空6px的位置。1. 文本长度减6
+        textDoc.setTextWidth(option.rect.width());
         //设置文本内容
         QDomDocument doc;
         QDomElement p = doc.createElement("p");
@@ -254,9 +246,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         QAbstractTextDocumentLayout::PaintContext   paintContext;
         paintContext.palette.setCurrentColorGroup(cg);
         QRect  textRect = style->subElementRect(QStyle::SE_ItemViewItemText,  &opt);
-        textRect.setWidth(textRect.size().width() - 6);//设置文本左边空6px的位置。2. 显示矩形减6
-        textRect.setHeight(textRect.size().height() - 6);
-        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 6));//设置文本左边空6px的位置。3. 显示矩形位置加6
+        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 6));
         painter->save();
         painter->translate(point);
         painter->setClipRect(textRect.translated(-point));
@@ -312,12 +302,32 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
         if (keyValue.size() != 2) {
             return;
         }
-        QPair<QString, QString> pair;
-        pair.first = keyValue[0];
-        pair.second = keyValue[1];
 
-        // 添加一行
-        addRow(doc, table, pair);
+        // 当value值不止一行时，按"  /  \t\t"  分行显示
+        QStringList strList = keyValue[1].split("  /  \t\t");
+        if (strList.size() >= 2) {
+            // 第一行第一列显示属性名
+            QPair<QString, QString> pair;
+            pair.first = keyValue[0];
+            pair.second = strList[0];
+            addRow(doc, table, pair);
+
+            // 除第一行以外的每行第一列以空字符串填充
+            for (int i = 1; i < strList.size(); ++i) {
+                // 添加一行
+                QPair<QString, QString> pairtmp;
+                pairtmp.first = "";
+                pairtmp.second = strList[i];
+                addRow(doc, table, pairtmp);
+            }
+        } else {
+            // 属性值只有一行
+            QPair<QString, QString> pair;
+            pair.first = keyValue[0];
+            pair.second = keyValue[1];
+            // 添加一行
+            addRow(doc, table, pair);
+        }
     }
     // 添加该表格到doc
     doc.appendChild(table);
@@ -326,29 +336,13 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
 void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair)const
 {
     QDomElement tr = doc.createElement("tr");
-//    tr.setAttribute("style", "line-height:100;height:100;");
 
     // 该行的第一列
     QString nt = pair.first.isEmpty() ? "" : pair.first + ":";
     addTd1(doc, tr, nt);
 
     // 该行的第二列
-    // 如果该列的内容很多则分行显示
-    QStringList strList = pair.second.split("  /  \t\t");
-    if (strList.size() > 2) {
-
-        QStringList::iterator it = strList.begin();
-        addTd2(doc, tr, *it);
-        ++it;
-        for (; it != strList.end(); ++it) {
-            QPair<QString, QString> tempPair;
-            tempPair.first = "";
-            tempPair.second = *it;
-            addRow(doc, tr, tempPair);
-        }
-    } else {
-        addTd2(doc, tr, pair.second);
-    }
+    addTd2(doc, tr, pair.second);
 
     table.appendChild(tr);
 }

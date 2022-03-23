@@ -126,6 +126,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
         linkStr = DEEPIN_LINK;
     }
 
+
     // 系统类型+链接
     QString productName = DeviceGenerator::getProductName();
     linkStr += productName + END_STR + os.remove(productName);

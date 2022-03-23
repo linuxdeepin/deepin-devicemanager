@@ -27,10 +27,10 @@ DeviceGpu::DeviceGpu()
     , m_CurrentResolution("")
     , m_MinimumResolution("")
     , m_MaximumResolution("")
+    , m_UniqueKey("")
 {
     // 初始化可显示属性
     initFilterKey();
-    m_CanUninstall = true;
 }
 
 void DeviceGpu::initFilterKey()
@@ -66,7 +66,10 @@ void DeviceGpu::loadBaseDeviceInfo()
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
 {
     // 判断是否是同一个gpu
-    if (!matchToLshw(mapInfo))
+    QRegExp re(":[0-9a-z]{2}:[0-9a-z]{2}");
+    int index = mapInfo["bus info"].indexOf(re);
+    QString uniqueKey = mapInfo["bus info"].mid(index + 1);
+    if (!uniqueKey.contains(m_UniqueKey))
         return;
 
     // 设置属性
@@ -84,10 +87,6 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "memory", m_MemAddress);
     setAttribute(mapInfo, "physical id", m_PhysID);
 
-    if(driverIsKernelIn(m_Driver)){
-        m_CanUninstall = false;
-    }
-
     // 获取其他属性
     getOtherMapInfo(mapInfo);
 }
@@ -104,18 +103,10 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver, false);
     setAttribute(mapInfo, "Width", m_Width);
 
-    if(driverIsKernelIn(m_Driver)){
-        m_CanUninstall = false;
-    }
-
-    m_SysPath = "/sys" + mapInfo["SysFS ID"];
-    QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+-]{4}\\.(.*)");
-    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
-        m_UniqueID = reUniqueId.cap(1);
-    }
-
-    // 获取 匹配到lshw的Key
-    setHwinfoLshwKey(mapInfo);
+    // 获取 m_UniqueKey
+    QRegExp re(":[0-9a-z]{2}:[0-9a-z]{2}");
+    int index = mapInfo["SysFS BusID"].indexOf(re);
+    m_UniqueKey = mapInfo["SysFS BusID"].mid(index + 1);
 
     getOtherMapInfo(mapInfo);
     return true;
@@ -157,9 +148,9 @@ void DeviceGpu::setDmesgInfo(const QString &info)
     }
 
     // 设置显存大小
-    if (info.contains(m_HwinfoToLshw)) {
+    if (info.contains(m_UniqueKey)) {
         QString size = info;
-        m_GraphicsMemory = size.replace(m_HwinfoToLshw + "=", "");
+        m_GraphicsMemory = size.replace(m_UniqueKey + "=", "");
     }
 }
 
@@ -230,11 +221,7 @@ void DeviceGpu::loadOtherDeviceInfo()
 void DeviceGpu::loadTableData()
 {
     // 加载表格内容
-    QString tName = m_Name;
-    if(!available()){
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
-    }
-    m_TableData.append(tName);
+    m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }

@@ -11,7 +11,6 @@
 #include <QStyleOptionFrame>
 #include <QDebug>
 #include <QPainterPath>
-#include <QProcess>
 
 
 DWIDGET_USE_NAMESPACE
@@ -47,17 +46,6 @@ int PageInfo::getDeviceInfoNum()
 {
     // 获取设备信息数目
     return m_AllInfoNum;
-}
-
-bool PageInfo::packageHasInstalled(const QString &packageName)
-{
-    QProcess p;
-    QString cmd = "dpkg -s " + packageName;
-    p.start(cmd);
-    p.waitForFinished(-1);
-
-    QByteArray r = p.readAll();
-    return r.contains("installed");
 }
 
 void PageInfo::paintEvent(QPaintEvent *e)

@@ -63,12 +63,6 @@ public:
     EnableDeviceStatus setDeviceEnabled(bool enable);
 
     /**
-     * @brief setWakeupMachine
-     * @param wakeup
-     */
-    void setWakeupMachine(bool wakeup);
-
-    /**
      * @brief updateShowOtherInfo 更新是否需要显示其它信息
      */
     void updateShowOtherInfo();
@@ -83,6 +77,7 @@ protected:
     virtual void focusInEvent(QFocusEvent *e) override;
     virtual void focusOutEvent(QFocusEvent *e) override;
 
+
 signals:
     void refreshInfo();
     void exportInfo();
@@ -93,11 +88,6 @@ private slots:
      * @brief slotShowMenu:右键菜单
      */
     void slotShowMenu(const QPoint &);
-
-    /**
-     * @brief slotCloseMenu:右键菜单关闭
-     */
-    void slotCloseMenu();
 
     /**
      * @brief slotActionRefresh:刷新
@@ -125,8 +115,6 @@ private:
     QAction                 *mp_Export;      //<! 右键导出
     QAction                 *mp_Copy;        //<! 拷贝
     QMenu                   *mp_Menu;        //<! 右键菜单
-
-    bool                     m_IsMenuShowing;
 };
 
 #endif // TEXTBROWSER_H

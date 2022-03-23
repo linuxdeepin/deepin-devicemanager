@@ -32,14 +32,14 @@ You can run, close or create a shortcut for Device Manager as follows.
 - Right-click ![deepin_devicemanager](../common/deepin_devicemanager.svg)  on the Dock, select **Close all** to exit.
 - On interface of Device Manager, click ![icon_menu](../common/icon_menu.svg)  and select **Exit** to exit.
 
-## Device Information
+## Operations
 
-The information displayed by Device Manager is related to the computer hardware. If your computer is connected to devices such as mouse and keyboard, the corresponding device information will be displayed. If multiple devices of the same type are detected, the device information is displayed in a list. The following contents are for reference only, please refer to the actual situation.
+The following hardware device information is for reference only. If there is no mouse, keyboard, and other devices inserted into your computer, the corresponding hardware information will not be displayed in the device manager.
 
 ### Overview
 
 1. On the main interface, click **Overview**.
-2. View the information of kernel and all hardware. 
+2. You can see a list containing **CPU**, **Motherboard**, **Memory** and so on in this interface, and summary info. 
 
 ![0|overview](fig/overview.png)
 
@@ -92,6 +92,13 @@ The information displayed by Device Manager is related to the computer hardware.
 
 ![0|networkadapter](fig/networkadapter.png)
 
+### Mouse
+
+1. On the main interface, click **Mouse**.
+2. You can view info such as name, vendor, model, and so on.
+
+![0|mouse](fig/mouse.png)
+
 ### Keyboard
 
 1. On the main interface, click **Keyboard **.
@@ -104,60 +111,28 @@ The information displayed by Device Manager is related to the computer hardware.
 1. On the main interface, click **Monitor **.
 2. You can view info about Monitor such as name, vendor, type and so on.
 
-![0|displaydevice](fig/monitor.png)
+![0|displaydevice](fig/displaydevice.png)
 
-## Operations 
+### Printer
 
-In the device details area, right-click and you will have several options.
+1. On the main interface, click **Printer**.
+2. You can view a list of printers connected and info such as name, model, vendor, and so on.
+
+![0|printer](fig/printer.png)
+
+
+
+### Right-click Operations 
+
+**Copy**: To copy contents selected by cursor, right-click to select  **Copy**.
+
+**Disable/Enable**: You can disable some hardware drives. You can judge whether the hardware device supports the disable function according to the right-click menu options. 
+
+**Refresh**: Right-click and select  **Refresh** to reload info of all devices of the operating system. You can also use shortcut key F5 to realize this function.
+
+**Export**: You can export the device information to the specified folder,formats such as txt/docx/xls/html are supported. 
 
 ![0|rightclick](fig/rightclick.png)
-
-### Copy
-
-To copy current page, or, some selectable information.
-
-### Refresh
-
-To reload info of all current devices of the operating system. You can also use shortcut key F5.
-
-### Export
-
-To export the device information to the specified folder,formats such as txt/docx/xls/html are supported. 
-
-### Disable/Enable
-
-Some hardware drivers can be enabled / disabled. Drivers are enabled by default. You can judge whether the hardware device supports the disable function according to the right-click menu options. 
-
-### Update drivers
-
-Some hardware can be updated / uninstalled, which can be judged according to the right-click menu options. Currently, only installation and updates of local driver files are supported.  
-
-1. Right-click and select **Update drivers**, a window pops up.
-
-2. Select the folder where the driver is located and click **Next**. "Include subfolders" is checked by default, which means to detect the driver files contained in the folder and its subfolders.
-
-   ![0|file_location](fig/file_location.png)
-
-3. The system will detect all installable driver files (in deb and ko format) contained in the file location. Select the corresponding driver file and click **Update**.
-
-   ![0|renew](fig/renew.png)
-
-4. The authentication window pops up. Enter the system login password and update it after authentication.
-
-5. If the update fails, the system will automatically roll back the driver of the device to the previous driver version, which will not affect the use. It is recommended to find out the reason for the failure and update it again according to the system prompt.
-
-### Uninstall drivers
-
-You can uninstall the driver of the devices you don't want to use.
-
-1. Select **Uninstall drivers** in the right-click menu, and click **Uninstall**.
-
-   - Successful: the device status changes to unavailable.
-   - Failed: the original driver is in normal use. It is recommended to find out the failure reason according to the system prompt and uninstall again.
-
-2. If you want to reuse the device, right-click on the device details page and select **Update drivers** to install the driver.
-
-
 
 ## Main Menu
 

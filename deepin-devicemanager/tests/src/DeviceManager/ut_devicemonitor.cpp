@@ -21,15 +21,11 @@
 #include "ut_Head.h"
 #include "stub.h"
 
-#include <DApplication>
-
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-
-DWIDGET_USE_NAMESPACE
 
 class UT_DeviceMonitor : public UT_HEAD
 {
@@ -44,6 +40,11 @@ public:
     }
     DeviceMonitor *m_deviceMonitor;
 };
+
+bool ut_exacMatch()
+{
+    return true;
+}
 
 TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_parseMonitorSize_001)
 {
@@ -163,20 +164,11 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_002)
     EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr("disconnected", "/", "/"));
 }
 
-bool ut_monitor_isDXcbPlatform()
-{
-    return true;
-}
-
 TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_003)
 {
     m_deviceMonitor->m_Interface = "";
     QString main = "HDMI-1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 527mm x 296mm";
     QString edid = "";
-
-    Stub stub;
-    stub.set(ADDR(DApplication, isDXcbPlatform), ut_monitor_isDXcbPlatform);
-
     EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr(main, edid, "/"));
 }
 
@@ -186,10 +178,6 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_004)
     m_deviceMonitor->m_ProductionWeek = "2020-04";
     QString main = "HDMI-1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 527mm x 296mm";
     QString edid = "00ffffffffffff005a63384001010101\n0d1e010380351d782ece65a657519f27\n";
-
-    Stub stub;
-    stub.set(ADDR(DApplication, isDXcbPlatform), ut_monitor_isDXcbPlatform);
-
     EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr(main, edid, "/"));
 }
 
@@ -363,9 +351,5 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_loadTableData)
 {
     m_deviceMonitor->loadTableData();
     EXPECT_EQ(3, m_deviceMonitor->m_TableData.size());
-}
 
-TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_available)
-{
-    EXPECT_TRUE(m_deviceMonitor->available());
 }

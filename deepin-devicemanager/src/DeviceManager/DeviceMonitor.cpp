@@ -2,8 +2,6 @@
 #include "DeviceMonitor.h"
 #include "EDIDParser.h"
 
-#include <DApplication>
-
 // Qt库文件
 #include <QDebug>
 #include <QDate>
@@ -11,8 +9,6 @@
 
 // 其它头文件
 #include <math.h>
-
-DWIDGET_USE_NAMESPACE
 
 DeviceMonitor::DeviceMonitor()
     : DeviceBaseInfo()
@@ -158,14 +154,11 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
     if (main.contains("disconnected"))
         return false;
 
-    // wayland xrandr --verbose无法获取edid信息
-    if (qApp->isDXcbPlatform()) {
-        // 根据edid计算屏幕大小
-        if (edid.isEmpty())
-            return false;
-        if (!caculateScreenSize(edid))
-            return false;
-    }
+    // 根据edid计算屏幕大小
+    if (edid.isEmpty())
+        return false;
+    if (!caculateScreenSize(edid))
+        return false;
 
     // 获取屏幕的主要信息，包括借口(HDMI VGA)/是否主显示器和屏幕大小，
     // 但是这里计算的屏幕大小仅仅用来匹配是否是同一个显示器,真正的屏幕大小计算是根据edid计算的
@@ -183,11 +176,6 @@ const QString &DeviceMonitor::name()const
 const QString &DeviceMonitor::driver() const
 {
     return m_Driver;
-}
-
-bool DeviceMonitor::available()
-{
-    return true;
 }
 
 QString DeviceMonitor::subTitle()
@@ -252,14 +240,11 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
         m_Interface = reStart.cap(1);
     }
 
-    // wayland xrandr --verbose无primary信息
-    if (qApp->isDXcbPlatform()) {
-        // 设置是否是主显示器
-        if (info.contains("primary"))
-            m_MainScreen = "Yes";
-        else
-            m_MainScreen = "NO";
-    }
+    // 设置是否是主显示器
+    if (info.contains("primary"))
+        m_MainScreen = "Yes";
+    else
+        m_MainScreen = "NO";
 
     // 设置当前分辨率
     QRegExp reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");

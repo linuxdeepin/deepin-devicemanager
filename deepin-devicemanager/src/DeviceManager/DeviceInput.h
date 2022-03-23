@@ -68,12 +68,6 @@ public:
     const QString &driver()const override;
 
     /**
-     * @brief available 判断是否可用
-     * @return
-     */
-    bool available() override;
-
-    /**
      * @brief subTitle:获取子标题
      * @return 子标题
      */
@@ -98,30 +92,6 @@ public:
      */
     bool enable() override;
 
-    /**
-     * @brief canWakeupMachine
-     * @return
-     */
-    bool canWakeupMachine();
-
-    /**
-     * @brief isWakeupMachine
-     * @return
-     */
-    bool isWakeupMachine();
-
-    /**
-     * @brief wakeupPath
-     * @return
-     */
-    QString wakeupPath();
-
-    /**
-     * @brief wakeID
-     * @return
-     */
-    const QString& wakeupID();
-
 protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
@@ -144,17 +114,15 @@ protected:
     void loadTableData() override;
 
 private:
+    /**
+     * @brief setNameFromInput:从cat /proc/bus/input/devices获取设备信息
+     */
+    void setInfoFromInput();
 
     /**
      * @brief setInfoFromBluetoothctl:由bluetoothctl paired-devices设置设备接口
      */
     void setInfoFromBluetoothctl();
-
-    /**
-     * @brief getPS2Syspath 获取ps2鼠标键盘的syspath
-     * @param dfs : Device Files 属性
-     */
-    bool getPS2Syspath(const QString& dfs);
 
 private:
     QString             m_Name;                         //<! 【名称】
@@ -169,9 +137,9 @@ private:
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
     QString             m_KeyToLshw;                    //<!
-    QString             m_WakeupID;                     //<!  wakeup id
 
     QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
+    QString             m_KeysToCatDevices;             //<! 【用来标识唯一键盘】
 };
 
 #endif // DEVICEINPUT_H

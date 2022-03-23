@@ -154,7 +154,3 @@ TEST_F(UT_DevicePower, UT_DevicePower_loadTableData)
     EXPECT_EQ(3, m_DevicePower->m_TableData.size());
 }
 
-TEST_F(UT_DevicePower, UT_DevicePower_available)
-{
-    EXPECT_TRUE(m_DevicePower->available());
-}

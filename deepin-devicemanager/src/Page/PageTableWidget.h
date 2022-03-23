@@ -84,11 +84,10 @@ public:
     virtual bool isBaseBoard();
 
     /**
-     * @brief setDeviceEnable 设置设备是否被禁用和是否可用
-     * @param enable 是否被禁用，用户直接禁用
-     * @param available 因为驱动导致的无法可用
+     * @brief setDeviceEnable
+     * @param e true:启用 false:禁用
      */
-    void setDeviceEnable(bool enable, bool available);
+    void setDeviceEnable(bool e);
 
     /**
      * @brief clear : 清空数据
@@ -119,7 +118,7 @@ public:
      * @brief setCurDeviceState:设置当前设备状态
      * @param state true:启用;false:禁用
      */
-    void setCurDeviceState(bool enable, bool available);
+    void setCurDeviceState(bool state);
 
     /**
      * @brief expandTable 手动扩展表格

@@ -282,6 +282,11 @@ protected:
     virtual void getKeyboardInfoFromLshw();
 
     /**
+     * @brief getKeyboardInfoFromCatDevices:从cat /proc/bus/input/devices获取键盘信息
+     */
+    virtual void getKeyboardInfoFromCatDevices();
+
+    /**
      * @brief getMouseInfoFromHwinfo:从hwinfo中获取鼠标信息
      */
     virtual void getMouseInfoFromHwinfo();
@@ -325,21 +330,6 @@ protected:
      * @brief getOthersInfoFromLshw:从lshw中获取其他设备信息
      */
     virtual void getOthersInfoFromLshw();
-
-private:
-    /**
-     * @brief pciPath 获取路径
-     * @param mapInfo
-     * @return
-     */
-    QString pciPath(const QMap<QString,QString>& mapInfo);
-
-    /**
-     * @brief uniqueID
-     * @param mapInfo
-     * @return
-     */
-    QString uniqueID(const QMap<QString,QString>& mapInfo);
 
 protected:
     QStringList m_ListBusID;

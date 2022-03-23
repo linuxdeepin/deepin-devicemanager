@@ -120,13 +120,11 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
-    QPen p = painter->pen();
     if (text.startsWith("(" + tr("Disable") + ")") && !enableAndSelect) {
+        QPen p = painter->pen();
         p.setColor(QColor("#FF5736"));
-    }else if(text.startsWith("(" + tr("Unavailable") + ")")){
-        palette.color(cg, DPalette::PlaceholderText);
+        painter->setPen(p);
     }
-    painter->setPen(p);
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
     painter->restore();
 }

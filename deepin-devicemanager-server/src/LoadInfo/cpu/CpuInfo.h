@@ -34,11 +34,6 @@ class CpuInfo
 public:
     CpuInfo();
     ~CpuInfo();
-
-    /**
-     * @brief diagPrintInfo
-     */
-    void diagPrintInfo();
     /**
      * @brief loadCpuInfo
      * @return
@@ -49,7 +44,7 @@ public:
      * @brief arch
      * @return
      */
-    const QString &arch() const;
+    const QString& arch() const;
 
     /**
      * @brief logicalCpus
@@ -101,14 +96,14 @@ private:
      * @param physical_id
      * @return
      */
-    LogicalCpu &logicalCpu(int logical_id);
+    LogicalCpu& logicalCpu(int logical_id);
 
     /**
      * @brief setProcCpuinfo
      * @param logical
      * @param mapInfo
      */
-    void setProcCpuinfo(LogicalCpu &logical, const QMap<QString, QString> &mapInfo);
+    void setProcCpuinfo(LogicalCpu& logical,const QMap<QString, QString>& mapInfo);
 
     /**
      * @brief readSysCpu : /sys/devices/system/cpu
@@ -136,10 +131,10 @@ private:
     int readCoreID(const QString &path);
 
     /**
-        * @brief readThreadSiblingsListPath
-        * @param path
-        * @return
-        */
+     * @brief readThreadSiblingsListPath
+     * @param path
+     * @return
+     */
     int readThreadSiblingsListPath(const QString &path);
 
     /**
@@ -162,7 +157,6 @@ private:
      * @param lcpu
      */
     void readCpuFreq(const QString &path, LogicalCpu &lcpu);
-
 
 private:
     QMap<int, PhysicalCpu>     m_MapPhysicalCpu;

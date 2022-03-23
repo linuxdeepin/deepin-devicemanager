@@ -161,11 +161,6 @@ const QString &DeviceMemory::driver() const
     return m_Driver;
 }
 
-bool DeviceMemory::available()
-{
-    return true;
-}
-
 QString DeviceMemory::subTitle()
 {
     // 获取子标题

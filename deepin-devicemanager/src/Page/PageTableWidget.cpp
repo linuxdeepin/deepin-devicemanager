@@ -86,10 +86,10 @@ bool PageTableWidget::isCurDeviceEnable()
     return mp_Table->isCurDeviceEnable();
 }
 
-void PageTableWidget::setCurDeviceState(bool enable, bool available)
+void PageTableWidget::setCurDeviceState(bool state)
 {
     // 设置当前设备状态
-    mp_Table->setCurDeviceState(enable, available);
+    mp_Table->setCurDeviceState(state);
 }
 
 void PageTableWidget::expandTable()
@@ -106,10 +106,10 @@ bool PageTableWidget::isExpanded()
     return false;
 }
 
-void PageTableWidget::setDeviceEnable(bool enable, bool available)
+void PageTableWidget::setDeviceEnable(bool e)
 {
     // 设置设备状态
-    mp_Table->setCurDeviceState(enable, available);
+    mp_Table->setCurDeviceState(e);
 }
 
 void PageTableWidget::paintEvent(QPaintEvent *event)

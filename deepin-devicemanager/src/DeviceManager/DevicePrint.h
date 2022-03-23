@@ -48,17 +48,7 @@ public:
      */
     const QString &name()const override;
 
-    /**
-     * @brief driver 返回驱动，重写纯虚函数
-     * @return
-     */
-    const QString &driver() const override;
-
-    /**
-     * @brief available 返回是否可用
-     * @return
-     */
-    bool available() override;
+    const QString &driver()const override;
 
     /**
      * @brief subTitle:获取子标题
@@ -85,18 +75,6 @@ public:
      */
     bool enable() override;
 
-
-    /**
-     * @brief getVendor 获取制造商
-     * @return
-     */
-    inline QString getVendor() { return m_Vendor; }
-
-    /**
-     * @brief getModel 获取型号
-     * @return
-     */
-    inline QString getModel() { return m_Model; }
 protected:
 
     /**

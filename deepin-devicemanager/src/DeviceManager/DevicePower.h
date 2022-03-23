@@ -62,12 +62,6 @@ public:
     const QString &driver()const override;
 
     /**
-     * @brief available
-     * @return
-     */
-    bool available() override;
-
-    /**
      * @brief subTitle:获取子标题
      * @return 子标题
      */

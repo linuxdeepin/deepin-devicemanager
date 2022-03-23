@@ -97,11 +97,6 @@ const QString &DevicePower::driver() const
     return m_Driver;
 }
 
-bool DevicePower::available()
-{
-    return true;
-}
-
 QString DevicePower::subTitle()
 {
     return m_Name;
@@ -110,7 +105,8 @@ QString DevicePower::subTitle()
 const QString DevicePower::getOverviewInfo()
 {
     // 获取概况信息
-    return DApplication::translate("ManulTrack", m_Name.trimmed().toStdString().data(), "");
+    QString value = DApplication::translate("ManulTrack", m_Name.trimmed().toStdString().data(), "");
+    return value;
 }
 
 void DevicePower::initFilterKey()

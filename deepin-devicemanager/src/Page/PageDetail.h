@@ -118,13 +118,6 @@ public:
     EnableDeviceStatus enableDevice(int row, bool enable);
 
     /**
-     * @brief setWakeupMachine
-     * @param row
-     * @param wakeup
-     */
-    void setWakeupMachine(int row, bool wakeup);
-
-    /**
      * @brief clearWidget : 清楚widget
      */
     void clearWidget();

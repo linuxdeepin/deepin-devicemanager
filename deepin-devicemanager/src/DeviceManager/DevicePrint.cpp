@@ -1,9 +1,11 @@
 // 项目自身文件
 #include "DevicePrint.h"
-#include "DBusEnableInterface.h"
 
 // Qt库文件
 #include <QDebug>
+
+// 其它头文件
+#include "EnableManager.h"
 
 DevicePrint::DevicePrint()
     : DeviceBaseInfo()
@@ -21,7 +23,6 @@ DevicePrint::DevicePrint()
 
     // 设备可禁用
     m_CanEnable = true;
-    m_CanUninstall = false;
 }
 
 void DevicePrint::setInfo(const QMap<QString, QString> &info)
@@ -60,11 +61,6 @@ const QString &DevicePrint::driver() const
     return m_Driver;
 }
 
-bool DevicePrint::available()
-{
-    return true;
-}
-
 QString DevicePrint::subTitle()
 {
     return m_Name;
@@ -78,12 +74,17 @@ const QString DevicePrint::getOverviewInfo()
 
 EnableDeviceStatus DevicePrint::setEnable(bool e)
 {
-    bool res  = DBusEnableInterface::getInstance()->enablePrinter("printer",m_Name,m_URI,e);
-    if(res){
-        m_Enable = e;
-    }
-    // 设置设备状态
-    return res ? EDS_Success : EDS_Faild;
+    // 设置启用禁用状态
+    EnableDeviceStatus res = EnableManager::instance()->enablePrinter(m_Name, e);
+
+    // 禁用成功，状态设为5
+    if (res == EDS_Success && false == e)
+        m_Status = "5";
+    else if (res == EDS_Success && true == e)
+        // 启用成功状态设为3
+        m_Status = "3";
+
+    return res;
 }
 
 bool DevicePrint::enable()
@@ -137,12 +138,13 @@ void DevicePrint::loadOtherDeviceInfo()
 void DevicePrint::loadTableData()
 {
     // 加载表格数据
-    QString tName = m_Name;
-    if (!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }
+    QString name;
+    if (!enable())
+        name = "(" + tr("Disable") + ") " + m_Name;
+    else
+        name = m_Name;
 
-    m_TableData.append(tName);
+    m_TableData.append(name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }

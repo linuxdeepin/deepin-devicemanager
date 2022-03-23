@@ -220,8 +220,3 @@ TEST_F(UT_DeviceMemory, UT_DeviceMemory_getOverviewInfo)
     QString overview = m_deviceMemory->getOverviewInfo();
     EXPECT_STREQ("8GB(CT8G4DFS8266.M8FD DDR4 2667MHz)", overview.toStdString().c_str());
 }
-
-TEST_F(UT_DeviceMemory, UT_DeviceMemory_available)
-{
-    EXPECT_TRUE(m_deviceMemory->available());
-}

@@ -1,12 +1,12 @@
 // 项目自身文件
 #include "DeviceInput.h"
-#include "DeviceManager.h"
-#include "DBusEnableInterface.h"
-#include "DBusTouchPad.h"
-#include "DBusWakeupInterface.h"
 
 // Qt库文件
 #include <QDebug>
+
+// 其它头文件
+#include "EnableManager.h"
+#include "DeviceManager.h"
 
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()
@@ -22,17 +22,19 @@ DeviceInput::DeviceInput()
     , m_MaximumPower("")
     , m_Speed("")
     , m_KeyToLshw("")
-    , m_WakeupID("")
 {
     initFilterKey();
     m_CanEnable = true;
-    m_CanUninstall = true;
 }
 
 bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
     // 根据bus info属性值与m_KeyToLshw对比,判断是否为同一设备
-    if (!matchToLshw(mapInfo)) {
+    if (m_KeyToLshw != mapInfo["bus info"]) {
+        QString key = mapInfo["bus info"];
+        key.replace("a", "10");
+
+        if (m_KeyToLshw != key)
             return false;
     }
 
@@ -47,13 +49,6 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "driver", m_Driver);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
-    if(driverIsKernelIn(m_Driver)){
-        m_CanUninstall = false;
-    }
-    // 当驱动为空，但是又是ps/2鼠键时，驱动不可更新卸载
-    if(m_Driver.isEmpty() && "PS/2" == m_Interface){
-        m_CanUninstall = false;
-    }
 
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
@@ -63,24 +58,11 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    //取触摸板的状态
-    if(mapInfo.find("Model") != mapInfo.end() && mapInfo["Model"].contains("Touchpad", Qt::CaseInsensitive)){
-        m_Enable = DBusTouchPad::instance()->getEnable();
-    }
-
-    if(mapInfo.find("Enable") != mapInfo.end()){
-        m_Enable = false;
-    }
     // 设置设备基本属性
-    setAttribute(mapInfo, "Serial ID", m_SerialID);
     setAttribute(mapInfo, "Device", m_Name);
-    setAttribute(mapInfo, "name", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
-    setAttribute(mapInfo, "SysFS ID", m_SysPath);
-    setAttribute(mapInfo, "Serial ID", m_UniqueID);
-    setAttribute(mapInfo, "Unique ID", m_WakeupID);
 
     // 获取键盘的接口类型
     if (mapInfo.find("Hotplug") != mapInfo.end())
@@ -99,22 +81,27 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
-    if(driverIsKernelIn(m_Driver)){
-        m_CanUninstall = false;
-    }
-    // 当驱动为空，但是又是ps/2鼠键时，驱动不可更新卸载
-    if(m_Driver.isEmpty() && "PS/2" == m_Interface){
-        m_CanUninstall = false;
-    }
-
-    // ps2键盘的接口 将Device Files作为syspath解析
-    if("PS/2" == m_Interface){
-        getPS2Syspath(mapInfo["Device Files"]);
-    }
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0
-    setHwinfoLshwKey(mapInfo);
+    QStringList words = mapInfo["SysFS BusID"].split(":");
+    if (words.size() == 2) {
+        QStringList chs = words[0].split("-");
+        if (chs.size() == 2)
+            m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
+    }
+
+    // 获取映射到  cat /proc/bus/input/devices 里面的关键字
+    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
+    if (re.exactMatch(mapInfo["Device File"]) || re.exactMatch(mapInfo["Device Files"])) {
+        m_KeysToCatDevices = re.cap(1);
+    } else {
+        QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
+        if (rem.exactMatch(mapInfo["Device File"]))
+            m_KeysToCatDevices = rem.cap(1);
+    }
+    // 由cat /proc/bus/devices/input设置设备信息
+    setInfoFromInput();
 
     // 由bluetoothctl paired-devices设置设备接口
     setInfoFromBluetoothctl();
@@ -153,11 +140,38 @@ void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
             m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
     }
 
+    // 获取映射到  cat /proc/bus/input/devices 里面的关键字
+    QRegExp re = QRegExp(".*(event[0-9]{1,2}).*");
+    if (re.exactMatch(mapInfo["Device File"]) || re.exactMatch(mapInfo["Device Files"])) {
+        m_KeysToCatDevices = re.cap(1);
+    } else {
+        QRegExp rem = QRegExp(".*(mouse[0-9]{1,2}).*");
+        if (rem.exactMatch(mapInfo["Device File"]))
+            m_KeysToCatDevices = rem.cap(1);
+    }
+    // 由cat /proc/bus/devices/input设置设备信息
+    setInfoFromInput();
+
     // 由bluetoothctl paired-devices设置设备接口
     setInfoFromBluetoothctl();
 
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
+}
+
+void DeviceInput::setInfoFromInput()
+{
+    // 获取对应的由cat /proc/bus/devices/input读取的设备信息
+    const QMap<QString, QString> &mapInfo = DeviceManager::instance()->inputInfo(m_KeysToCatDevices);
+    // 设置Name属性
+    setAttribute(mapInfo, "Name", m_Name, true);
+
+    // Uniq属性标识蓝牙设备Mac地址
+    m_keysToPairedDevice = mapInfo["Uniq"].toUpper();
+
+    // 设置设备是否可用
+    int id = EnableManager::instance()->getDeviceID(m_Name, m_KeysToCatDevices);
+    m_Enable = EnableManager::instance()->isDeviceEnable(id);
 }
 
 void DeviceInput::setInfoFromBluetoothctl()
@@ -171,52 +185,6 @@ void DeviceInput::setInfoFromBluetoothctl()
     }
 }
 
-bool DeviceInput::getPS2Syspath(const QString& dfs)
-{
-    // 获取 dfs 中的 event
-    QRegExp regdfs = QRegExp(".*(event[0-9]{1,2}).*");
-    if(!regdfs.exactMatch(dfs)){
-        return false;
-    }
-    QString eventdfs = regdfs.cap(1);
-
-    QFile file("/proc/bus/input/devices");
-    if(!file.open(QIODevice::ReadOnly))
-        return false;
-
-    QString info = file.readAll();
-    QStringList lstDevices = info.split("\n\n");
-    foreach(const QString& item,lstDevices){
-        QStringList lines = item.split("\n");
-        QString sysfs = "";
-        QString event = "";
-        foreach(const QString& line,lines){
-            if(line.startsWith("S:")){
-                sysfs = line;
-                continue;
-            }
-            QRegExp reg = QRegExp("H: Handlers=.*(event[0-9]{1,2}).*");
-            if(reg.exactMatch(line)){
-                event = reg.cap(1);
-            }
-        }
-
-        if(!event.isEmpty() && !sysfs.isEmpty()){
-            if(event == eventdfs){
-                QRegExp regfs;
-                if(sysfs.contains("i2c_designware"))
-                    regfs = QRegExp("S: Sysfs=(.*)/input/input[0-9]{1,2}");
-                else
-                    regfs = QRegExp("S: Sysfs=(.*)/input[0-9]{1,2}");
-                if(regfs.exactMatch(sysfs)){
-                    m_SysPath = regfs.cap(1);
-                }
-            }
-        }
-    }
-
-    return true;
-}
 
 const QString &DeviceInput::name() const
 {
@@ -226,17 +194,6 @@ const QString &DeviceInput::name() const
 const QString &DeviceInput::driver() const
 {
     return m_Driver;
-}
-
-bool DeviceInput::available()
-{
-    if(driver().isEmpty()){
-        m_Available = false;
-    }
-    if("PS/2" == m_Interface){
-        m_Available = true;
-    }
-    return m_Available;
 }
 
 QString DeviceInput::subTitle()
@@ -257,81 +214,24 @@ const QString DeviceInput::getOverviewInfo()
     return ov;
 }
 
-/**
- * @brief setEnable : 设置禁用
- * @param enable : 启用禁用
- * @return 返回操作是否成功
- *
- * 修改：修改触摸板禁用方法，改为调用daemon提供的接口
- */
 EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
-    if(m_Name.contains("Touchpad", Qt::CaseInsensitive)){
-        DBusTouchPad::instance()->setEnable(e);
+    // 设置设备状态
+    int id = EnableManager::instance()->getDeviceID(m_Name, m_KeysToCatDevices);
+    if (id < 0)
+    {
+        //兆芯设备上，xinput输出触摸屏时，name与model信息与正常情况相反，需要用model字段查询deviceid
+        id = EnableManager::instance()->getDeviceID(m_Model, m_KeysToCatDevices);
+    }
+    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByInput(e, id);
+    if (res == EDS_Success)
         m_Enable = e;
-        return EDS_Success;
-    }
-    else {
-        if(m_SerialID.isEmpty()){
-            return EDS_NoSerial;
-        }
-
-        if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
-            return EDS_Faild;
-        }
-        bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
-        if(res){
-            m_Enable = e;
-        }
-        // 设置设备状态
-        return res ? EDS_Success : EDS_Faild;
-    }
+    return res;
 }
 
 bool DeviceInput::enable()
 {
-    // 键盘不可禁用
-    if(m_HardwareClass == "keyboard"){
-        m_Enable = true;
-    }
     return m_Enable;
-}
-
-bool DeviceInput::canWakeupMachine()
-{
-    if(m_WakeupID.isEmpty())
-        return false;
-    QFile file(wakeupPath());
-    if(!file.open(QIODevice::ReadOnly)){
-        return false;
-    }
-    return true;
-}
-
-bool DeviceInput::isWakeupMachine()
-{
-    QFile file(wakeupPath());
-    if(!file.open(QIODevice::ReadOnly)){
-        return false;
-    }
-    QString info = file.readAll();
-    if(info.contains("disabled"))
-        return false;
-    return true;
-}
-
-QString DeviceInput::wakeupPath()
-{
-    int index = m_SysPath.lastIndexOf('/');
-    if(index < 1){
-        return "";
-    }
-    return QString("/sys") + m_SysPath.left(index) + QString("/power/wakeup");
-}
-
-const QString& DeviceInput::wakeupID()
-{
-    return m_WakeupID;
 }
 
 void DeviceInput::initFilterKey()
@@ -362,7 +262,7 @@ void DeviceInput::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Speed"), m_Speed);
-    addOtherDeviceInfo(tr("Maximum Current"), m_MaximumPower);   // 1050需求将最大功率改为最大电流
+    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
     addOtherDeviceInfo(tr("Driver"), m_Driver);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
     addOtherDeviceInfo(tr("Version"), m_Version);
@@ -374,17 +274,13 @@ void DeviceInput::loadOtherDeviceInfo()
 void DeviceInput::loadTableData()
 {
     // 加载表格数据
-    QString tName = m_Name;
+    QString name;
+    if (!enable())
+        name = "(" + tr("Disable") + ") " + m_Name;
+    else
+        name = m_Name;
 
-    if (!available()){
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
-    }
-
-    if(!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }
-
-    m_TableData.append(tName);
+    m_TableData.append(name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
 }

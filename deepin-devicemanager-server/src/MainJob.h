@@ -8,10 +8,6 @@
 class ThreadPool;
 class DetectThread;
 class DBusInterface;
-class DriverDBusInterface;
-class DBusEnableInterface;
-class DBusWakeupInterface;
-class QThread;
 
 enum INSTRUCTION_RES {
     IR_NULL = 0,
@@ -42,28 +38,16 @@ public:
     bool isZhaoXin();
 
     /**
-     * @brief serverIsRunning
-     * @return
+     * @brief isServerRunning
+     * @return server running
      */
-    static bool serverIsRunning();
-
-    /**
-     * @brief clientIsRunning
-     * @return
-     */
-    static bool clientIsRunning();
+    bool isServerRunning();
 
 private slots:
     /**
      * @brief slotUsbChanged
      */
     void slotUsbChanged();
-
-    /**
-     * @brief slotUsbChanged
-     * @param usbchanged
-     */
-    void slotDriverControl(bool success);
 
     /**
      * @brief onFirstUpdate
@@ -78,6 +62,18 @@ private:
     void updateAllDevice();
 
     /**
+     * @brief driverInstruction
+     * @param instruction
+     */
+    INSTRUCTION_RES driverInstruction(const QString &instruction);
+
+    /**
+     * @brief ifconfigInstruction
+     * @param instruction
+     */
+    INSTRUCTION_RES ifconfigInstruction(const QString &instruction);
+
+    /**
      * @brief initDBus : 初始化dbus
      * @return : 返回bool
      */
@@ -88,11 +84,8 @@ private:
     DetectThread          *mp_DetectThread;       //<! 检测usb的线程
     QTimer                *mp_Timer;              //<! 定时器
     DBusInterface         *mp_IFace;              //<! Dbus interface
-    DriverDBusInterface   *mp_DriverOperateIFace; //<! 驱动操作Dbus服务接口
-    DBusEnableInterface   *mp_Enable;             //<! 启用禁用dbus
-    DBusWakeupInterface   *mp_Wakeup;               //<! 唤醒
-    static bool           s_ClientIsUpdating;     //<! 前台正在更新中
-    static bool           s_ServerIsUpdating;     //<! 后台正在更新中
+    bool                  m_ClientIsUpdating;     //<! 前台正在更新中
+    bool                  m_ServerIsUpdating;     //<! 后台正在更新中
     bool                  m_FirstUpdate;          //<! 是否是第一次更新
 
 };

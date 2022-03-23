@@ -57,9 +57,25 @@ public:
     bool getInfo(const QString &key, QString &info);
 
     /**
-     * @brief refreshInfo 用来通知后台刷新信息
+     * @brief reqUpdateUI : Request udpates from the background
+     * @param start : Whether to start the device manager
+     * @return
      */
-    void refreshInfo();
+    bool reqUpdateUI(bool start = true);
+
+    /**
+     * @brief execDriverOrder 通过驱动禁用设备
+     * @param cmd cmd needed to be exec
+     * @return
+     */
+    bool execDriverOrder(const QString &cmd);
+
+    /**
+     * @brief execIfconfigOrder 通过ifconfig启用禁用网卡
+     * @param cmd cmd needed to be exec
+     * @return
+     */
+    bool execIfconfigOrder(const QString &cmd);
 
 protected:
     DBusInterface();

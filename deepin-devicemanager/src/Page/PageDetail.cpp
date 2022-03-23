@@ -192,7 +192,7 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         connect(txtBrowser, &TextBrowser::refreshInfo, this, &PageDetail::refreshInfo);
         connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::exportInfo);
         connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
-        addWidgets(txtBrowser, device->enable() && device->available());
+        addWidgets(txtBrowser, device->enable());
         // 当添加到最后一个设备详细信息时，隐藏分隔符
         if (device == lstInfo.last())
             m_ListDetailSeperator[lstInfo.size() - 1]->setVisible(false);
@@ -233,18 +233,6 @@ EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
         return EDS_Cancle;
 
     return browser->setDeviceEnabled(enable);
-}
-
-void PageDetail::setWakeupMachine(int row, bool wakeup)
-{
-    if (m_ListTextBrowser.size() <= row)
-        return ;
-    // 设置 TextBrowser 可用
-    TextBrowser *browser = m_ListTextBrowser.at(row);
-    if (!browser)
-        return ;
-
-    browser->setWakeupMachine(wakeup);
 }
 
 void PageDetail::paintEvent(QPaintEvent *e)
@@ -306,6 +294,10 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 
     hLayout->addWidget(button);
     hLayout->addStretch();
+//    if (!enable) {
+//        button->setVisible(false);
+//    }
+
     mp_ScrollAreaLayout->addLayout(hLayout);
 
     // 添加分割线

@@ -95,6 +95,7 @@ void GetInfoPool::initCmd()
     m_CmdList.append({ "hciconfig",            "hciconfig.txt",          tr("Loading Printer Info...")});
     m_CmdList.append({ "nvidia",               "nvidia.txt",             ""});
 
+
     m_CmdList.append({ "cat_boardinfo",        "/proc/boardinfo",        tr("Loading Mouse Info...")});
     m_CmdList.append({ "cat_os_release",       "/etc/os-release",        tr("Loading Network Adapter Info...")});
     m_CmdList.append({ "cat_version",          "/proc/version",          ""});

@@ -83,6 +83,15 @@ public:
      */
     void windowMaximizing();
 
+    /**@brief:获取计算机架构字符串*/
+    QString getArchString();
+
+    /**
+     * @brief loadGeneratorKey:获取计算机dbus信息，区分机器类型
+     * @return panguV，klu
+     */
+    QString loadGeneratorKey();
+
 protected:
     /**
      * @brief: 事件的重写
@@ -101,12 +110,6 @@ protected:
      * @return 布尔
      */
     bool event(QEvent *event) override;
-
-    /**
-     * @brief closeEvent 重写关闭事件
-     * @param event
-     */
-    void closeEvent(QCloseEvent *event) override;
 
 private:
     /** @brief initWindow:对窗口进行一系列的初始化操作*/

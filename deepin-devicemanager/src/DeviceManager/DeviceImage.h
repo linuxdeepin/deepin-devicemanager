@@ -107,6 +107,12 @@ protected:
     void loadTableData() override;
 
 private:
+    /**
+     * @brief setNameFromInput:从cat /proc/bus/input/devices获取设备信息
+     */
+    void setInfoFromInput();
+
+private:
     QString             m_Name;                         //<! 【名称】
     QString             m_Vendor;                       //<! 【制造商】
     QString             m_Model;                        //<! 【型号】
@@ -116,6 +122,8 @@ private:
     QString             m_Driver;                       //<! 【驱动】
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
+    QString             m_KeyToLshw;                    //<!
+    QString             m_KeysToCatDevices;             //<! 【用来标识唯一键盘】
 };
 
 #endif // DEVICEIMAGE_H

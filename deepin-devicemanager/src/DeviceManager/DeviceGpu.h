@@ -138,6 +138,8 @@ private:
     QString            m_IOPort;                  //<! 【ioport】
     QString            m_MemAddress;              //<! 【内存地址】
     QString            m_PhysID;                  //<! 【物理ID】
+
+    QString            m_UniqueKey;               //<! 【标识一个适配器的唯一标识】
 };
 
 #endif // DEVICEGPU_H

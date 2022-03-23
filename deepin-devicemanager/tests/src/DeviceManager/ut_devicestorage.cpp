@@ -39,6 +39,11 @@ public:
     DeviceStorage *m_deviceStorage;
 };
 
+bool ut_DeviceStorage_exacMatch()
+{
+    return true;
+}
+
 void ut_storage_setHwinfoInfo(QMap<QString, QString> &mapinfo)
 {
     mapinfo.insert("SysFS BusID", "nvme0n12:0:0:0");
@@ -475,6 +480,8 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_getInfoFromsmartctl_001)
     EXPECT_STREQ(" 6.0 Gb/s (current: 6.0 Gb/s)", m_deviceStorage->m_Speed.toStdString().c_str());
     EXPECT_STREQ("Solid State Device", m_deviceStorage->m_RotationRate.toStdString().c_str());
     EXPECT_STREQ("SSD", m_deviceStorage->m_MediaType.toStdString().c_str());
+    EXPECT_STREQ("3717", m_deviceStorage->m_PowerOnHours.toStdString().c_str());
+    EXPECT_STREQ("306", m_deviceStorage->m_PowerCycleCount.toStdString().c_str());
     EXPECT_STREQ("240 GB", m_deviceStorage->m_Size.toStdString().c_str());
     EXPECT_STREQ("CT240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
     EXPECT_STREQ("2002E3E0B393", m_deviceStorage->m_SerialNumber.toStdString().c_str());
@@ -490,6 +497,8 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_getInfoFromsmartctl_002)
     EXPECT_STREQ(" 6.0 Gb/s (current: 6.0 Gb/s)", m_deviceStorage->m_Speed.toStdString().c_str());
     EXPECT_STREQ("Solid State Device", m_deviceStorage->m_RotationRate.toStdString().c_str());
     EXPECT_STREQ("SSD", m_deviceStorage->m_MediaType.toStdString().c_str());
+    EXPECT_STREQ("3717", m_deviceStorage->m_PowerOnHours.toStdString().c_str());
+    EXPECT_STREQ("306", m_deviceStorage->m_PowerCycleCount.toStdString().c_str());
     EXPECT_STREQ("240 GB", m_deviceStorage->m_Size.toStdString().c_str());
     EXPECT_STREQ("CT240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
     EXPECT_STREQ("2002E3E0B393", m_deviceStorage->m_SerialNumber.toStdString().c_str());

@@ -48,7 +48,7 @@ TEST_F(PageListView_UT, PageListView_UT_updateListItems)
     QList<QPair<QString, QString>> list;
     list.append(QPair<QString, QString>("/", "/"));
     m_pageListView->updateListItems(list);
-    EXPECT_EQ(0, m_pageListView->mp_ListView->mp_ItemModel->rowCount());
+    EXPECT_EQ(0,m_pageListView->mp_ListView->mp_ItemModel->rowCount());
 }
 
 TEST_F(PageListView_UT, PageListView_UT_currentIndex)
@@ -74,19 +74,5 @@ TEST_F(PageListView_UT, PageListView_UT_slotListViewItemClicked)
     stub.set(ADDR(DeviceListView, getConcatenateStrings), ut_getConcatenateStrings);
     QModelIndex index;
     m_pageListView->slotListViewItemClicked(index);
-    EXPECT_EQ("/", m_pageListView->m_CurType);
-}
-
-void ut_listview_exec()
-{
-    return;
-}
-
-TEST_F(PageListView_UT, PageListView_UT_slotShowMenu)
-{
-    Stub stub;
-    stub.set((QAction * (QMenu::*)(const QPoint &, QAction *))ADDR(QMenu, exec), ut_listview_exec);
-
-    m_pageListView->slotShowMenu(QPoint(0, 0));
-    EXPECT_EQ(m_pageListView->mp_Menu->actions().size(), 0);
+    EXPECT_EQ("/",m_pageListView->m_CurType);
 }

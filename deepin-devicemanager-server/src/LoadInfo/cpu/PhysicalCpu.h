@@ -84,11 +84,6 @@ public:
      */
     int logicalNum();
 
-    /**
-     * @brief diagPrintInfo
-     */
-    void diagPrintInfo();
-
 private:
     int m_PhysicalCpu;                   //<! physical id
     QMap<int, CoreCpu> m_MapCoreCpu;      //<! core cpu

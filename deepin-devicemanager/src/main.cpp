@@ -34,8 +34,6 @@
 #include "DebugTimeManager.h"
 #include "application.h"
 
-#include <signal.h>
-
 DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])

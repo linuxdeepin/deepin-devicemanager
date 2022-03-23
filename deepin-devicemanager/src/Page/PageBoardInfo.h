@@ -78,13 +78,6 @@ public:
      */
     void setFontChangeFlag();
 
-    /**
-     * @brief setRowHeight: 设置行高
-     * @param row： 行
-     * @param height：行高
-     */
-    void setRowHeight(int row, int height);
-
 private:
     RichTextDelegate     *mp_ItemDelegate;
 

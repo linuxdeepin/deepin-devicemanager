@@ -104,6 +104,9 @@ private:
     QString        m_Driver;                //<!驱动
     QString        m_MaxPower;              //<!最大功耗
     QString        m_Speed;                 //<!速度
+
+    QString        m_UnikeyKey;
+    QString        m_KeyToLshw;            //<!
 };
 
 #endif // DEVICECDROM_H

@@ -43,6 +43,11 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_DeviceWidget(new DeviceWidget(this))
     , mp_WorkingThread(new LoadInfoThread)
 {
+    // 获取计算机架构信息,x86 arm mips
+    QString arch = getArchString();
+    mp_WorkingThread->setFramework(arch);
+    DeviceFactory::setGeneratorKey(arch);
+
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
 
@@ -203,11 +208,60 @@ void MainWindow::getJsonDoc(QJsonDocument &doc)
 
 void MainWindow::windowMaximizing()
 {
-    if (!window()->windowState().testFlag(Qt::WindowMaximized)){
-        window()->setWindowState(windowState() | Qt::WindowMaximized);
-    }else{
-        window()->setWindowState(windowState() & ~Qt::WindowMaximized);
+    if (isMaximized())
+        // 正常窗口大小
+        showNormal();
+    else
+        // 窗口最大化
+        showMaximized();
+}
+
+QString MainWindow::getArchString()
+{
+    QString struction;
+
+    // 架构信息文件
+    QFile inputDeviceFile(DEVICEINFO_PATH + "/" + "uname_m.txt");
+    bool res = inputDeviceFile.open(QIODevice::ReadOnly);
+
+    // 读取架构信息
+    if (res)
+        struction = inputDeviceFile.readAll().trimmed();
+    else
+        struction = "x86_64";
+
+    inputDeviceFile.close();
+
+    // 华为机器需要区分KLU与PanGuV
+    if (struction == "aarch64") {
+        QString hw = loadGeneratorKey();
+        if (!hw.isEmpty())
+            struction = hw;
     }
+
+    return struction;
+}
+
+QString MainWindow::loadGeneratorKey()
+{
+    // 获取设备信息
+    QString key = "";
+    QString deviceInfo;
+
+    // gdbus introspect -y -d com.deepin.system.SystemInfo -o /com/deepin/system/SystemInfo -p
+    QFile inputDeviceFile(DEVICEINFO_PATH + "/gdbus.txt");
+    if (false == inputDeviceFile.open(QIODevice::ReadOnly))
+        return key;
+
+    deviceInfo = inputDeviceFile.readAll();
+    inputDeviceFile.close();
+
+    if (deviceInfo.contains("klu")) // klu 华为确认将判断条件改为L410 KLVU-WDU0
+        key = "KLU";
+    else if (deviceInfo.contains("panguV")) // panguv
+        key = "PanGuV";
+
+    return key;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -298,7 +352,7 @@ void MainWindow::slotLoadingFinish(const QString &message)
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
     // xrandr would be execed later
-    if (tr("Monitor") == itemStr || tr("Overview") == itemStr) { //点击显示设备，执行线程加载信息
+    if (tr("Monitor") == itemStr) { //点击显示设备，执行线程加载信息
         ThreadExecXrandr tx(false);
         tx.start();
         tx.wait();
@@ -316,7 +370,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         //判断所有网卡的连接情况
         for (int i = 0; i < networkDriver.size(); i++)
             DeviceManager::instance()->correctNetworkLinkStatus(tool.getCurNetworkLinkStatus(networkDriver.at(i)), networkDriver.at(i));
-    } else if (tr("Battery") == itemStr) { //点击电池，重新加载电池显示信息
+    } else if (tr("Power") == itemStr) { //点击电池，重新加载电池显示信息
         CmdTool tool;
         DeviceManager::instance()->correctPowerInfo(tool.getCurPowerInfo());
     }
@@ -406,11 +460,4 @@ bool MainWindow::event(QEvent *event)
     }
 
     return DMainWindow::event(event);
-}
-
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-    // 处理状态栏 “关闭所有” 按钮时通知后台更新信息
-//    DBusInterface::getInstance()->refreshInfo();
-    return DMainWindow::closeEvent(event);
 }

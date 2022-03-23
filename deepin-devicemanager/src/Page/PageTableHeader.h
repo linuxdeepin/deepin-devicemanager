@@ -45,12 +45,19 @@ public:
      * @brief updateTable:更新表格
      * @param lst : 表格内容
      */
-    void updateTable(const QList<QStringList> &lst, const QList<QStringList>& lstMenuControl);
+    void updateTable(const QList<QStringList> &lst);
 
     /**
      * @brief setColumnAverage:设置每列等宽
      */
     void setColumnAverage();
+
+    /**
+     * @brief updateCurItemEnable :更新当前item是否可用状态
+     * @param row 行号
+     * @param enable true:启用 false:禁用
+     */
+    void updateCurItemEnable(int row, int enable);
 
 signals:
     /**
@@ -75,14 +82,6 @@ signals:
      * @param enable 禁用/启用
      */
     void enableDevice(int row, bool enable);
-    void uninstallDriver(int row);
-    void installDriver(int row);
-    void wakeupMachine(int row, bool wakeup);
-
-    /**
-     * @brief signalCheckPrinterStatus 判断dde-printer是否被安装
-     */
-    void signalCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled);
 
 protected:
     void paintEvent(QPaintEvent *e) override;

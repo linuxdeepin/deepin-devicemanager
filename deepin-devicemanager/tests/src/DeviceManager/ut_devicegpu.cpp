@@ -66,7 +66,6 @@ void setHwinfoInfo(QMap<QString, QString> &mapHwinfo)
     mapHwinfo.insert("Driver", "nouveau");
     mapHwinfo.insert("Width", "64 bits");
     mapHwinfo.insert("SysFS BusID", "0000:01:00.0");
-    mapHwinfo.insert("SysFS ID", "/devices/pci0000:00/0000:00:01.0/0000:01:00.0");
 }
 
 void setGpuInfo(QMap<QString, QString> &mapGpu)
@@ -85,7 +84,8 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_loadBaseDeviceInfo)
     QMap<QString, QString> mapinfo;
     setHwinfoInfo(mapinfo);
     m_deviceGpu->setHwinfoInfo(mapinfo);
-    m_deviceGpu->setDmesgInfo("0000:01:00.0=2GB");
+    m_deviceGpu->setDmesgInfo("01:00.0=2GB");
+
     m_deviceGpu->loadBaseDeviceInfo();
 
     QPair<QString, QString> value0 = m_deviceGpu->m_LstBaseInfo.at(0);
@@ -104,7 +104,7 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_setLshwInfo_001)
 {
     QMap<QString, QString> mapinfo;
     setLshwInfo(mapinfo);
-    m_deviceGpu->m_HwinfoToLshw = "0000:01:00.0";
+    m_deviceGpu->m_UniqueKey = "01:00.0";
 
     m_deviceGpu->setLshwInfo(mapinfo);
     EXPECT_STREQ("GK208B [GeForce GT 730]", m_deviceGpu->m_Name.toStdString().c_str());
@@ -126,7 +126,7 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_setLshwInfo_002)
 {
     QMap<QString, QString> mapinfo;
     setLshwInfo(mapinfo);
-    m_deviceGpu->m_HwinfoToLshw = "02:00.0";
+    m_deviceGpu->m_UniqueKey = "02:00.0";
 
     m_deviceGpu->setLshwInfo(mapinfo);
     EXPECT_STREQ("", m_deviceGpu->m_Name.toStdString().c_str());
@@ -158,19 +158,19 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_setHwinfoInfo)
     EXPECT_STREQ("126 (681 events)", m_deviceGpu->m_IRQ.toStdString().c_str());
     EXPECT_STREQ("nouveau", m_deviceGpu->m_Driver.toStdString().c_str());
     EXPECT_STREQ("64 bits", m_deviceGpu->m_Width.toStdString().c_str());
-    EXPECT_STREQ("0000:01:00.0", m_deviceGpu->m_HwinfoToLshw.toStdString().c_str());
+    EXPECT_STREQ("01:00.0", m_deviceGpu->m_UniqueKey.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setDmesgInfo_001)
 {
-    m_deviceGpu->m_HwinfoToLshw = "01:00.0";
+    m_deviceGpu->m_UniqueKey = "01:00.0";
     m_deviceGpu->setDmesgInfo("01:00.0=2GB");
     EXPECT_STREQ("2GB", m_deviceGpu->m_GraphicsMemory.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setDmesgInfo_002)
 {
-    m_deviceGpu->m_HwinfoToLshw = "01:00.0";
+    m_deviceGpu->m_UniqueKey = "01:00.0";
     m_deviceGpu->setDmesgInfo("null=3GB");
     EXPECT_STREQ("3GB", m_deviceGpu->m_GraphicsMemory.toStdString().c_str());
 
@@ -258,7 +258,7 @@ void ut_gpu_setxrandrmap(QMap<QString, QString> &mapInfo)
     mapInfo.insert("DP", "Unable");
     mapInfo.insert("eDP", "Unable");
     mapInfo.insert("DVI", "Unable");
-    mapInfo.insert("DigitalOutput", "Unable");
+
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setXrandrInfo)

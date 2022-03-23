@@ -88,24 +88,9 @@ public:
      */
     virtual bool isBaseBoard() {return false;}
 
-    /**
-     * @brief setDeviceInfoNum 设置设备信息数目
-     * @param num
-     */
     virtual void setDeviceInfoNum(int num);
 
-    /**
-     * @brief getDeviceInfoNum 获取设备信息数目
-     * @return
-     */
     virtual int getDeviceInfoNum();
-
-    /**
-     * @brief packageHasInstalled 是否被安装
-     * @param packageName 包名
-     * @return
-     */
-    static bool packageHasInstalled(const QString &packageName);
 protected:
     void paintEvent(QPaintEvent *e) override;
 

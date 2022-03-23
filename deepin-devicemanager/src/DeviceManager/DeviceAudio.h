@@ -80,12 +80,6 @@ public:
     const QString &driver()const override;
 
     /**
-     * @brief uniqueID 获取唯一标识
-     * @return
-     */
-    const QString& uniqueID() const;
-
-    /**
      * @brief setEnable 设置设备的禁用状态
      * @param enable 是否禁用
      * @return 禁用是否成功
@@ -154,6 +148,9 @@ private:
     QString             m_Chip;                         //<! 【芯片型号】
     QString             m_Driver;                       //<! 【驱动】
     QString             m_DriverModules;                //<!  driver modules
+
+    QString             m_UniqueKey;                    //<! 【标识唯一设备】
+
     bool                m_IsCatDevice;                  //<!  标识该设备是从cat /input/devices里面获取的
 };
 

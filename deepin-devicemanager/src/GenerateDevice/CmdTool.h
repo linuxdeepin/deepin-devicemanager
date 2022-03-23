@@ -134,38 +134,6 @@ private:
     void getMulHwinfoInfo(const QString &info);
 
     /**
-     * @brief addWidthToMap
-     * @param mapInfo
-     */
-    void addWidthToMap(QMap<QString, QString> &mapInfo);
-
-    /**
-     * @brief getRemoveInfo
-     * @param lstMap
-     */
-    void getRemoveAuthInfo(const QString &info, QList<QMap<QString, QString>> &lstMap);
-
-    /**
-     * @brief getAuthorizedInfo
-     * @param lstAuth
-     */
-    void getAuthorizedInfo(QStringList &lstAuth);
-
-    /**
-     * @brief updateMapInfo
-     * @param removeLstMap
-     * @param mapInfo
-     * @return
-     */
-    void updateMapInfo(QList<QMap<QString, QString>> &removeLstMap, QMap<QString, QString> &mapInfo);
-
-    /**
-     * @brief clearUsbDevice
-     * @param removeLstMap
-     */
-    void clearUsbDevice(QList<QMap<QString, QString>> &removeLstMap);
-
-    /**
      * @brief loadDmidecodeInfo:加载dmidecode信息
      * @param key:与cmd对应的关键字
      * @param debugfile:调试文件名
@@ -234,18 +202,18 @@ private:
     void loadBootDeviceManfid(const QString &key, const QString &debugfile);
 
     /**
+     * @brief loadNvidiaSettingInfo : 加载nvidia-settings  -q  VideoRam  信息
+     * @param key   nvidia
+     * @param debugfile  nvidia.txt
+     */
+    void loadNvidiaSettingInfo(const QString &key, const QString &debugfile);
+
+    /**
      * @brief getSMBIOSVersion:获取SMBIOS版本号
      * @param info:dmidecode获取的片断信息
      * @param version:SMBIOS版本号
      */
     void getSMBIOSVersion(const QString &info, QString &version);
-
-    /**
-         * @brief loadNvidiaSettingInfo : 加载nvidia-settings  -q  VideoRam  信息
-         * @param key   nvidia
-         * @param debugfile  nvidia.txt
-         */
-    void loadNvidiaSettingInfo(const QString &key, const QString &debugfile);
 
 private:
 

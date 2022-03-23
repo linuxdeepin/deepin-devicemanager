@@ -15,7 +15,8 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "DeviceAudio.h"
-#include "DBusEnableInterface.h"
+#include "EnableManager.h"
+
 #include "stub.h"
 #include "ut_Head.h"
 
@@ -24,6 +25,7 @@
 #include <QPainter>
 
 #include <gtest/gtest.h>
+
 
 class UT_DeviceAudio : public UT_HEAD
 {
@@ -39,38 +41,23 @@ public:
     DeviceAudio *m_deviceAudio;
 };
 
-TEST_F(UT_DeviceAudio, UT_DeviceAudio_setInfoFromHwinfo_001)
+TEST_F(UT_DeviceAudio, UT_DeviceAudio_setInfoFromHwinfo)
 {
     QMap<QString, QString> map;
     map.insert("Device", "Cannon Lake PCH cAVS");
     map.insert("Vendor", "Intel Corporation");
     map.insert("Model", "Intel Cannon Lake PCH cAVS");
     map.insert("Driver", "snd_hda_intel");
-
     m_deviceAudio->setInfoFromHwinfo(map);
-
     EXPECT_STREQ("Cannon Lake PCH cAVS", m_deviceAudio->m_Name.toStdString().c_str());
     EXPECT_STREQ("Intel Corporation", m_deviceAudio->m_Vendor.toStdString().c_str());
     EXPECT_STREQ("Intel Cannon Lake PCH cAVS", m_deviceAudio->m_Model.toStdString().c_str());
     EXPECT_STREQ("snd_hda_intel", m_deviceAudio->m_Driver.toStdString().c_str());
 }
 
-TEST_F(UT_DeviceAudio, UT_DeviceAudio_setInfoFromHwinfo_002)
+TEST_F(UT_DeviceAudio, UT_DeviceAudio_setInfoFromLshw)
 {
     QMap<QString, QString> map;
-    map.insert("name", "name");
-    map.insert("Hardware Class", "Hardware Class");
-    map.insert("path", "path");
-
-    m_deviceAudio->setInfoFromHwinfo(map);
-    EXPECT_STREQ("name", m_deviceAudio->m_Name.toStdString().c_str());
-    EXPECT_STREQ("Hardware Class", m_deviceAudio->m_HardwareClass.toStdString().c_str());
-    EXPECT_STREQ("path", m_deviceAudio->m_SysPath.toStdString().c_str());
-    EXPECT_FALSE(m_deviceAudio->m_Enable);
-}
-
-void ut_audio_setLshwInfo(QMap<QString, QString> &map)
-{
     map.insert("product", "Cannon Lake PCH cAVS");
     map.insert("vendor", "Intel Corporation");
     map.insert("version", "10");
@@ -78,14 +65,7 @@ void ut_audio_setLshwInfo(QMap<QString, QString> &map)
     map.insert("clock", "33MHz");
     map.insert("description", "Audio device");
     map.insert("bus info", "pci@0000:00:1f.3");
-}
-
-TEST_F(UT_DeviceAudio, UT_DeviceAudio_setInfoFromLshw)
-{
-    QMap<QString, QString> map;
-    ut_audio_setLshwInfo(map);
-    m_deviceAudio->m_HwinfoToLshw = "0000:00:1f.3";
-
+    m_deviceAudio->m_UniqueKey = "0000:00:1f.3";
     m_deviceAudio->setInfoFromLshw(map);
     EXPECT_STREQ("Cannon Lake PCH cAVS", m_deviceAudio->m_Name.toStdString().c_str());
     EXPECT_STREQ("Intel Corporation", m_deviceAudio->m_Vendor.toStdString().c_str());
@@ -130,54 +110,26 @@ TEST_F(UT_DeviceAudio, UT_DeviceAudio_name)
     EXPECT_STREQ("Cannon Lake PCH cAVS", name.toStdString().c_str());
 }
 
-TEST_F(UT_DeviceAudio, UT_DeviceAudio_driver_001)
-{
-    QMap<QString, QString> map;
-    map.insert("Driver", "snd_hda_intel");
-    map.insert("Driver Modules", "snd_hda_intel");
-    m_deviceAudio->setInfoFromHwinfo(map);
-
-    QString value = m_deviceAudio->driver();
-
-    EXPECT_STREQ("snd_hda_intel", value.toStdString().c_str());
-}
-
-TEST_F(UT_DeviceAudio, UT_DeviceAudio_driver_002)
+TEST_F(UT_DeviceAudio, UT_DeviceAudio_driver)
 {
     QMap<QString, QString> map;
     map.insert("Driver", "snd_hda_intel");
     m_deviceAudio->setInfoFromHwinfo(map);
-
     QString value = m_deviceAudio->driver();
-
     EXPECT_STREQ("snd_hda_intel", value.toStdString().c_str());
 }
 
-bool ut_audio_enable_true()
+EnableDeviceStatus ut_audio_enableDeviceByDriver()
 {
-    return true;
+    return EnableDeviceStatus::EDS_Faild;
 }
 
-TEST_F(UT_DeviceAudio, UT_DeviceAudio_setEnable_001)
+TEST_F(UT_DeviceAudio, UT_DeviceAudio_setEnable)
 {
-    m_deviceAudio->m_SysPath = "syspath";
-    m_deviceAudio->m_UniqueID = "uniqueid";
-    m_deviceAudio->m_Name = "name";
-
     Stub stub;
-    stub.set(ADDR(DBusEnableInterface, enable), ut_audio_enable_true);
-
+    stub.set(ADDR(EnableManager, enableDeviceByDriver), ut_audio_enableDeviceByDriver);
     EnableDeviceStatus value = m_deviceAudio->setEnable(false);
-    EXPECT_EQ(EnableDeviceStatus::EDS_Success, value);
-}
-
-TEST_F(UT_DeviceAudio, UT_DeviceAudio_setEnable_002)
-{
-    m_deviceAudio->m_SysPath = "syspath";
-    m_deviceAudio->m_UniqueID = "";
-
-    EnableDeviceStatus value = m_deviceAudio->setEnable(false);
-    EXPECT_EQ(EnableDeviceStatus::EDS_Faild, value);
+    EXPECT_EQ(1, value);
 }
 
 TEST_F(UT_DeviceAudio, UT_DeviceAudio_subTitle)
@@ -237,9 +189,6 @@ TEST_F(UT_DeviceAudio, UT_DeviceAudio_loadTableHeader)
 
 TEST_F(UT_DeviceAudio, UT_DeviceAudio_loadTableData)
 {
-    m_deviceAudio->m_Available = false;
-    m_deviceAudio->m_Enable = false;
-
     m_deviceAudio->loadTableData();
     EXPECT_EQ(2, m_deviceAudio->m_TableData.size());
 }

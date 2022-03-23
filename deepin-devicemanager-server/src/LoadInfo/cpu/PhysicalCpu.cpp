@@ -86,12 +86,3 @@ int PhysicalCpu::logicalNum()
     }
     return num;
 }
-void PhysicalCpu::diagPrintInfo()
-{
-    qInfo() << "PhysicalCpu m_PhysicalCpu: ***************** " << m_PhysicalCpu;
-    foreach (int id, m_MapCoreCpu.keys()) {
-        qInfo() << "CoreCpu id: ***************** " << id;
-        CoreCpu &cc = m_MapCoreCpu[id];
-        cc.diagPrintInfo();
-    }
-}

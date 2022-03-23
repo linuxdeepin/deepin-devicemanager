@@ -83,10 +83,6 @@ public:
        */
     const QString &name()const override;
 
-    /**
-     * @brief driver 返回驱动，重写纯虚函数(主板没有驱动)
-     * @return
-     */
     const QString &driver() const override;
 
     /**

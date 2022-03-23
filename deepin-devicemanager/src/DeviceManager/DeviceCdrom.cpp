@@ -12,6 +12,8 @@ DeviceCdrom::DeviceCdrom()
     , m_Driver("")
     , m_MaxPower("")
     , m_Speed("")
+    , m_UnikeyKey("")
+    , m_KeyToLshw("")
 {
     // 初始化可显示属性
     initFilterKey();
@@ -20,7 +22,16 @@ DeviceCdrom::DeviceCdrom()
 bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     // 通过总线信息判断是否是同一台设备
-    if (!matchToLshw(mapInfo))
+    if (mapInfo.find("bus info") == mapInfo.end())
+        return false;
+
+    // 解析总线信息
+    QStringList words = mapInfo["bus info"].split("@");
+    if (words.size() != 2)
+        return false;
+
+    QString busInfo = words[1].replace(".", ":").trimmed();
+    if (m_KeyToLshw != busInfo)
         return false;
 
     // 获取设备的基本信息
@@ -53,7 +64,7 @@ void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Speed", m_Speed);
 
     // 获取映射到 lshw设备信息的 关键字
-    setHwinfoLshwKey(mapInfo);
+    m_KeyToLshw = mapInfo["SysFS BusID"];
 
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
@@ -122,17 +133,13 @@ void DeviceCdrom::loadOtherDeviceInfo()
 void DeviceCdrom::loadTableData()
 {
     // 加载表格内容
-    QString tName = m_Name;
+    QString name;
+    if (!enable())
+        name = "(" + tr("Disable") + ") " + m_Name;
+    else
+        name = m_Name;
 
-    if (!available()){
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
-    }
-
-    if(!enable()){
-        tName = "(" + tr("Disable") + ") " + m_Name;
-    }
-
-    m_TableData.append(tName);
+    m_TableData.append(name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Type);
 }

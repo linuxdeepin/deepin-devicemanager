@@ -55,7 +55,7 @@ TEST_F(UT_TextBrowser, UT_TextBrowser_showDeviceInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     tBrowser->showDeviceInfo(bInfo.at(0));
-    EXPECT_STREQ("(Unavailable)mouse ", tBrowser->toPlainText().toStdString().c_str());
+    EXPECT_STREQ("mouse\nName:\nmouse\nInterface:\nUSB\n",tBrowser->toPlainText().toStdString().c_str());
     delete device;
 }
 
@@ -69,7 +69,7 @@ TEST_F(UT_TextBrowser, UT_TextBrowser_updateInfo)
     tBrowser->mp_Info = bInfo.at(0);
     tBrowser->m_ShowOtherInfo = true;
     tBrowser->updateInfo();
-    EXPECT_STREQ("(Unavailable)keyboard ", tBrowser->toPlainText().toStdString().c_str());
+    EXPECT_STREQ("keyboard\nName:\nkeyboard\nInterface:\nUSB\n",tBrowser->toPlainText().toStdString().c_str());
     delete device;
 }
 
@@ -123,6 +123,11 @@ TEST_F(UT_TextBrowser, UT_TextBrowser_slotActionCopy)
     EXPECT_STREQ("/", clipboard->text().toStdString().c_str());
 }
 
+bool ut_text_enable()
+{
+    return false;
+}
+
 TEST_F(UT_TextBrowser, UT_TextBrowser_domTitleInfo)
 {
     DeviceInput *device = new DeviceInput;
@@ -157,18 +162,4 @@ TEST_F(UT_TextBrowser, UT_TextBrowser_focusInEvent)
     QFocusEvent focusd(QFocusEvent::FocusOut);
     EXPECT_TRUE(tBrowser->event(&focusd));
     delete device;
-}
-
-void ut_text_exec()
-{
-    return;
-}
-
-TEST_F(UT_TextBrowser, UT_TextBrowser_slotShowMenu)
-{
-    Stub stub;
-    stub.set((QAction * (QMenu::*)(const QPoint &, QAction *))ADDR(QMenu, exec), ut_text_exec);
-
-    tBrowser->slotShowMenu(QPoint(0, 0));
-    EXPECT_EQ(tBrowser->mp_Menu->actions().size(), 3);
 }

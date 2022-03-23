@@ -101,28 +101,6 @@ private slots:
      */
     void slotEnableDevice(int row, bool enable);
 
-    /**
-     * @brief slotWakeupMachine
-     * @param row
-     * @param wakeup
-     */
-    void slotWakeupMachine(int row, bool wakeup);
-
-    /**
-     * @brief slotActionCopy:右键菜单更新驱动
-     */
-    void slotActionUpdateDriver(int row);
-
-    /**
-     * @brief slotActionCopy:右键菜单卸载驱动
-     */
-    void slotActionRemoveDriver(int row);
-
-    /**
-     * @brief slotCheckPrinterStatus 判断dde-printer是否被安装
-     */
-    void slotCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled);
-
 private:
     /**
      * @brief initWidgets : 初始化控件布局
@@ -133,7 +111,6 @@ private:
     DLabel                    *mp_Label;
     PageTableHeader           *mp_Table;       //<! 上面的表格
     PageDetail                *mp_Detail;      //<! 下面的详细内容
-    QList<DeviceBaseInfo *>   m_lstDevice;     //<! 保存设备列表
 };
 
 #endif // DEVICEPAGE_H

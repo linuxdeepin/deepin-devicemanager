@@ -49,14 +49,6 @@ public:
     void setItem(int row, int column, QStandardItem *item);
 
     /**
-     * @brief item 获取表格的item
-     * @param row 哪一行
-     * @param column 哪一列
-     * @return
-     */
-    QStandardItem *item(int row, int column);
-
-    /**
      * @brief setColumnAverage : 设置表头等宽
      */
     void setColumnAverage();
@@ -66,12 +58,6 @@ public:
      * @return : 返回状态
      */
     bool currentRowEnable();
-
-    /**
-     * @brief currentRowAvailable : 获取当前行是否不可用状态
-     * @return
-     */
-    bool currentRowAvailable();
 
     /**
      * @brief currentRow
@@ -120,7 +106,6 @@ private:
     QStandardItemModel         *mp_Model;
     LogViewItemDelegate        *mp_ItemDelegate;
     LogViewHeaderView          *mp_HeaderView;
-
 };
 
 #endif  // LOGTREEVIEW_H

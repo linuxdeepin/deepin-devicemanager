@@ -79,12 +79,23 @@ TEST_F(MainWindow_UT, MainWindow_UT_exportTo)
     m_mainWindow->slotExportInfo();
 }
 
+bool ut_process_startDetached()
+{
+    return false;
+}
+
+TEST_F(MainWindow_UT, MainWindow_UT_showDisplayShortcutsHelpDialog)
+{
+    //        stub.set((bool (QProcess::*)(const QString &, const QStringList &))ADDR(QProcess,startDetached), ut_process_startDetached);
+    //        m_mainWindow->showDisplayShortcutsHelpDialog();
+}
+
 TEST_F(MainWindow_UT, MainWindow_UT_addJsonArrayItem)
 {
     QJsonArray array;
     array.insert(0, QJsonValue("/"));
     m_mainWindow->addJsonArrayItem(array, "test", "/");
-    EXPECT_EQ(2, array.size());
+    EXPECT_EQ(2,array.size());
 }
 
 TEST_F(MainWindow_UT, MainWindow_UT_getJsonDoc)

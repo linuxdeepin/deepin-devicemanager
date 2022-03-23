@@ -1,30 +1,41 @@
 #include "DBusInterface.h"
 #include "DeviceInfoManager.h"
 #include "MainJob.h"
-#include "EnableSqlManager.h"
 
 #include <QDebug>
-#include <QFile>
 
 DBusInterface::DBusInterface(QObject *parent)
     : QObject(parent)
+    , mp_MainJob(nullptr)
 {
 
+}
+
+void DBusInterface::setMainJob(MainJob *job)
+{
+    mp_MainJob = job;
 }
 
 QString DBusInterface::getInfo(const QString &key)
 {
-    // 不能返回用常引用
-    if("is_server_running" != key){
-        return DeviceInfoManager::getInstance()->getInfo(key);
-    }
-    if(MainJob::serverIsRunning()){
-        return "1";
-    }
-    return "0";
+    // 不能用常引用
+    return DeviceInfoManager::getInstance()->getInfo(key);
 }
 
-void DBusInterface::refreshInfo()
+QString DBusInterface::execCmd(const QString &cmd)
 {
-    emit update();
+    if (!mp_MainJob)
+        return "0";
+
+    // Request update
+    if (cmd.startsWith("UPDATE_UI")) {
+        if (mp_MainJob->isServerRunning())
+            return QString::number(IR_SUCCESS);
+        else
+            return QString::number(IR_UPDATE);
+    }
+
+    // return result cmd
+    INSTRUCTION_RES res = mp_MainJob->executeClientInstruction(cmd);
+    return QString::number(res);
 }

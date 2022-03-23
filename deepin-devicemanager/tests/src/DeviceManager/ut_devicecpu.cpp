@@ -64,7 +64,6 @@ void setLscpuData(QMap<QString, QString> &mapLscpu)
 void setLshwData(QMap<QString, QString> &mapLshw)
 {
     mapLshw.insert("product", "Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz");
-    mapLshw.insert("version", "Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz");
     mapLshw.insert("vendor", "Intel Corp.");
 }
 
@@ -322,7 +321,6 @@ TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromLshw_002)
 {
     QMap<QString, QString> mapLshw;
     setLshwData(mapLshw);
-    mapLshw.insert("product", "null");
 
     m_deviceCpu->setInfoFromLshw(mapLshw);
     EXPECT_STREQ("Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz", m_deviceCpu->m_Name.toStdString().c_str());
@@ -365,9 +363,4 @@ TEST_F(UT_DeviceCpu, UT_DeviceCpu_setCurFreq)
 {
     m_deviceCpu->setCurFreq("1800 MHz");
     EXPECT_STREQ("1800 MHz", m_deviceCpu->m_CurFrequency.toStdString().c_str());
-}
-
-TEST_F(UT_DeviceCpu, UT_DeviceCpu_available)
-{
-    EXPECT_TRUE(m_deviceCpu->available());
 }
