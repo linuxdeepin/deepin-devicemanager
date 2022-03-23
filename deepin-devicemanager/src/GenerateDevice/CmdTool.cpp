@@ -293,7 +293,7 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
      * ALC887:
     */
     foreach (const QString &line, lines) {
-        QRegExp reg(".*autoconfig for ([A-Za-z0-9]{6}[ -][A-Za-z0-9]+):.*");
+        QRegExp reg(".*autoconfig for ([A-Za-z0-9]{6}( [A-Za-z0-9]+|-[A-Za-z0-9]+|)):.*");
         if (reg.exactMatch(line)) {
             QString chip = reg.cap(1);
             mapInfo["chip"] = chip;
@@ -402,6 +402,28 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
     }
 }
 
+void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
+{
+    QString vendor = mapInfo["Vendor"];
+    if(!vendor.contains("NVIDIA Corporation",Qt::CaseInsensitive)){
+        return;
+    }
+
+    QString cmd = QString("nvidia-settings -q GPUMemoryInterface");
+    QString sInfo;
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(-1);
+    sInfo = process.readAllStandardOutput();
+    QStringList lines = sInfo.split("\n");
+    foreach (const QString &line, lines) {
+        QRegExp reg("\\s\\sAttribute\\s'GPUMemoryInterface' \\(.*\\):\\s([0-9]{2}).*");
+        if(reg.exactMatch(line)){
+            mapInfo.insert("Width",reg.cap(1) + " bits");
+        }
+    }
+}
+
 void CmdTool::getMulHwinfoInfo(const QString &info)
 {
     QStringList items = info.split("\n\n");
@@ -425,6 +447,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
         } else if (mapInfo["Hardware Class"] == "graphics card") {
             if (mapInfo["Device"].contains("Graphics Processing Unit"))
                 continue;
+            addWidthToMap(mapInfo);
             addMapInfo("hwinfo_display", mapInfo);
         } else {
             addUsbMapInfo("hwinfo_usb", mapInfo);
@@ -458,10 +481,8 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
         QMap<QString, QString> mapInfo;
         getMapInfoFromDmidecode(item, mapInfo);
         // 过滤空cpu卡槽信息
-        if (key == "dmidecode4"){
-            if(mapInfo.find("ID") == mapInfo.end() || mapInfo["ID"] == "00 00 00 00 00 00 00 00")
-                continue;
-        }
+        if (key == "dmidecode4" && (mapInfo.find("ID") == mapInfo.end() || mapInfo["ID"] == "00 00 00 00 00 00 00 00"))
+            continue;
         if (mapInfo.size() > MIN_NUM)
             addMapInfo(key, mapInfo);
     }

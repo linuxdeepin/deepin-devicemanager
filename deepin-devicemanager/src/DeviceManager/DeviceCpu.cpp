@@ -143,23 +143,21 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         QString maxS = mapInfo["CPU max MHz"];
         double minHz = minS.replace("MHz", "").toDouble() / 1000;
         double maxHz = maxS.replace("MHz", "").toDouble() / 1000;
-        m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
         m_FrequencyIsRange = true;
 
         // 如果最大最小频率相等则不显示范围
-        if (fabs(minHz - maxHz) < 0.001){
+        if (fabs(minHz - maxHz) < 0.001)
+        {
             m_FrequencyIsRange = false;
             m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(maxHz) : QString("%1 MHz").arg(maxHz * 1000);
         }
         else {
             m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
         }
-    }
-    else if(mapInfo.find("CPU MHz") != mapInfo.end()) {
+    } else {
         QString maxS = mapInfo["CPU MHz"];
         m_Frequency = maxS.indexOf("MHz") > -1 ? maxS : maxS + " MHz";
     }
-
     //获取扩展指令集
     QStringList orders = {"MMX", "SSE", "SSE2", "SSE3", "3D Now", "SSE4", "SSSE3", "SSE4_1", "SSE4_2", "AMD64", "EM64T"};
     foreach (const QString &order, orders) {
@@ -193,8 +191,8 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
         setAttribute(mapInfo, "product", m_Name, false);//这里覆盖了lscpu中的数据。主要版本中lshw中的version是CPU信息，而1050A中读取到的是版本信息。
 
         // bug-108166 lshw 中 product 包含NULL信息，version 信息正确
-        // bug-112403 lshw 中 product 包含O.E.M.信息，version 信息正确
-        if (m_Name.contains("null", Qt::CaseInsensitive) || m_Name.contains("O.E.M.", Qt::CaseInsensitive) ){
+        // bug-112403 lshw 中 product 包含ARMv信息，version 信息正确
+        if (m_Name.contains("null", Qt::CaseInsensitive) || m_Name.contains("ARMv", Qt::CaseInsensitive) ){
             setAttribute(mapInfo, "version", m_Name);
         }
     }

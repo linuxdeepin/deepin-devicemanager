@@ -419,19 +419,14 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     // 修正数值
     m_Size.replace(QRegExp(".0[1-9]"), ".00");
 
-    // 型号
-    if (m_Model.isEmpty() || m_Model == "Disk") {
-        //SATA
-        if (mapInfo.find("Device Model") != mapInfo.end())
-            m_Model = mapInfo["Device Model"];
-        //NVME
-        if (mapInfo.find("Model Number") != mapInfo.end())
-            m_Model = mapInfo["Model Number"];
-    }
-    //kimtigo 特殊处理，以smartctl数据为准
-    if (mapInfo["Model Number"].indexOf("kimtigo") >-1) {
+    // 通过不断适配，当厂商有在固件中提供时，硬盘型号从smartctl中获取更加合理
+    // 因为hwinfo获取的是主控的型号，而硬盘厂商由于还不能自己生产主控，只能采购别人的主控
+    //SATA
+    if (mapInfo.find("Device Model") != mapInfo.end())
+        m_Model = mapInfo["Device Model"];
+    //NVME
+    if (mapInfo.find("Model Number") != mapInfo.end())
         m_Model = mapInfo["Model Number"];
-    }
 
     setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
 }

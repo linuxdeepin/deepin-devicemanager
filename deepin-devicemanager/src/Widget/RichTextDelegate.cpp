@@ -1,5 +1,6 @@
 // 项目自身文件
 #include "RichTextDelegate.h"
+#include "PageBoardInfo.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -217,6 +218,11 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         QDomDocument doc;
         getDocFromLst(doc, lstStr);
         textDoc.setHtml(doc.toString());
+
+        // bug111063中 社区版与专业版使用同一代码，主板界面展示效果不同
+        // PageBoardInfo 中计算行高方式与html中计算行高方式不同，导致每行下方出现截断或空白
+        // 此处获取html整体高度后再对PageBoardInfo设置行高，则不会再出现截断或空白
+        dynamic_cast<PageBoardInfo *>(this->parent())->setRowHeight(index.row(), textDoc.size().toSize().height());
 
         QAbstractTextDocumentLayout::PaintContext   paintContext;
         paintContext.palette.setCurrentColorGroup(cg);
