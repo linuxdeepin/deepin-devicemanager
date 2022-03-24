@@ -432,8 +432,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             continue;
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
-        if (mapInfo["Hardware Class"] == "sound" || mapInfo["Device"].contains("USB Audio")) {
-            // mapInfo["Device"].contains("USB Audio") 是为了处理未识别的USB声卡 Bug-118773
+        if (mapInfo["Hardware Class"] == "sound") {
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"] == "network interface") {
             addMapInfo("hwinfo_network", mapInfo);
@@ -482,6 +481,10 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
         QMap<QString, QString> mapInfo;
         getMapInfoFromDmidecode(item, mapInfo);
         // 过滤空cpu卡槽信息
+        qInfo() << "CPU ID : " << mapInfo["ID"];
+        if(mapInfo["ID"] == "00 00 00 00 00 00 00 00"){
+            qInfo() << "equal mapInfo ID";
+        }
         if (key == "dmidecode4" && (mapInfo.find("ID") == mapInfo.end() || mapInfo["ID"] == "00 00 00 00 00 00 00 00"))
             continue;
         if (mapInfo.size() > MIN_NUM)
