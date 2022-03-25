@@ -883,6 +883,10 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
     QStringList infoList = info.split("\n");
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
         QStringList words = (*it).split(ch);
+        if((*it).contains("PS/2 Mouse")){
+            words.clear();
+            words << "Hotplug" << "PS/2";
+        }
         if (words.size() != 2)
             continue;
 

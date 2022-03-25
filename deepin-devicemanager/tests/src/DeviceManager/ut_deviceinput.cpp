@@ -126,7 +126,7 @@ TEST_F(UT_DeviceInput, UT_DeviceInput_setInfoFromHwinfo_002)
     EXPECT_STREQ("Cherry GmbH", m_deviceInput->m_Vendor.toStdString().c_str());
     EXPECT_STREQ("Cherry MX board 8.0 Bluetooth", m_deviceInput->m_Model.toStdString().c_str());
     EXPECT_STREQ("1.07", m_deviceInput->m_Version.toStdString().c_str());
-    EXPECT_STREQ("Bluetooth", m_deviceInput->m_Interface.toStdString().c_str());
+    EXPECT_STREQ("USB", m_deviceInput->m_Interface.toStdString().c_str());
     EXPECT_STREQ("1-8:1.1", m_deviceInput->m_BusInfo.toStdString().c_str());
     EXPECT_STREQ("keyboard", m_deviceInput->m_Description.toStdString().c_str());
     EXPECT_STREQ("usbhid", m_deviceInput->m_Driver.toStdString().c_str());

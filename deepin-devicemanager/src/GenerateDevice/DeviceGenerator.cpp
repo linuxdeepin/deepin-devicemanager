@@ -817,7 +817,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
             continue;
 
         //过滤触摸板，如果不是触摸板再检查
-        if ((*it)["Device"].indexOf("Touchpad") < 0) {
+        if ((*it)["Hotplug"] != "PS/2"){
             // 先判断是否存在
             QString path = pciPath(*it);
             // 判断authorized是否存在，不存在则直接返回
@@ -840,8 +840,13 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
         device->setHardwareClass("mouse");
-        DeviceManager::instance()->addMouseDevice(device);
-        addBusIDFromHwinfo((*it)["SysFS BusID"]);
+        if(device->bluetoothIsConnected()){
+            DeviceManager::instance()->addMouseDevice(device);
+            addBusIDFromHwinfo((*it)["SysFS BusID"]);
+        }else{
+            delete device;
+            device = nullptr;
+        }
     }
 
     //  加载从hwinfo --usb中获取的触摸屏信息具有鼠标功能，放到鼠标设备中

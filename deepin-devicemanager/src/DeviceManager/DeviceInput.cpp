@@ -23,6 +23,7 @@ DeviceInput::DeviceInput()
     , m_Speed("")
     , m_KeyToLshw("")
     , m_WakeupID("")
+    , m_BluetoothIsConnected(true)
 {
     initFilterKey();
     m_CanEnable = true;
@@ -89,11 +90,9 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_Interface = "PS/2";
 
     // 上面的方法不适合蓝牙键盘的获取方法
-    if (mapInfo.find("Model") != mapInfo.end() && mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive))
+    if(isBluetoothDevice(mapInfo["Device Files"])){
         m_Interface = "Bluetooth";
-
-    if (mapInfo.find("Device") != mapInfo.end() && mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive))
-        m_Interface = "Bluetooth";
+    }
 
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Hardware Class", m_Description);
@@ -174,11 +173,9 @@ void DeviceInput::setInfoFromBluetoothctl()
 bool DeviceInput::getPS2Syspath(const QString& dfs)
 {
     // 获取 dfs 中的 event
-    QRegExp regdfs = QRegExp(".*(event[0-9]{1,2}).*");
-    if(!regdfs.exactMatch(dfs)){
+    QString eventdfs = eventStrFromDeviceFiles(dfs);
+    if(eventdfs.isEmpty())
         return false;
-    }
-    QString eventdfs = regdfs.cap(1);
 
     QFile file("/proc/bus/input/devices");
     if(!file.open(QIODevice::ReadOnly))
@@ -218,6 +215,61 @@ bool DeviceInput::getPS2Syspath(const QString& dfs)
     return true;
 }
 
+bool DeviceInput::isBluetoothDevice(const QString& dfs)
+{
+    // 获取 dfs 中的 event
+    QString eventdfs = eventStrFromDeviceFiles(dfs);
+    if(eventdfs.isEmpty())
+        return false;
+
+    QFile file("/proc/bus/input/devices");
+    if(!file.open(QIODevice::ReadOnly))
+        return false;
+
+    QString info = file.readAll();
+    QStringList lstDevices = info.split("\n\n");
+    foreach(const QString& item,lstDevices){
+        QStringList lines = item.split("\n");
+        QString Uniq = "";
+        QString event = "";
+        foreach(const QString& line,lines){
+            if(line.startsWith("U:")){
+                Uniq = line;
+                continue;
+            }
+            QRegExp reg = QRegExp("H: Handlers=.*(event[0-9]{1,2}).*");
+            if(reg.exactMatch(line)){
+                event = reg.cap(1);
+            }
+        }
+
+        if(event == eventdfs){
+            QRegExp regUniq(".*([0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}).*");
+            if(regUniq.exactMatch(Uniq)){
+                QString id = regUniq.cap(1);
+                QProcess process;
+                process.start("hcitool con");
+                process.waitForFinished(-1);
+                QString hciInfo = process.readAllStandardOutput();
+                if(!hciInfo.contains(id))
+                    m_BluetoothIsConnected = false;
+                return true;
+            }
+            break;
+        }
+    }
+
+    return false;
+}
+
+QString DeviceInput::eventStrFromDeviceFiles(const QString& dfs)
+{
+    QRegExp regdfs = QRegExp(".*(event[0-9]{1,2}).*");
+    if(regdfs.exactMatch(dfs))
+        return regdfs.cap(1);
+    return "";
+}
+
 const QString &DeviceInput::name() const
 {
     return m_Name;
@@ -233,7 +285,7 @@ bool DeviceInput::available()
     if(driver().isEmpty()){
         m_Available = false;
     }
-    if("PS/2" == m_Interface){
+    if("PS/2" == m_Interface || "Bluetooth" == m_Interface){
         m_Available = true;
     }
     return m_Available;
@@ -332,6 +384,11 @@ QString DeviceInput::wakeupPath()
 const QString& DeviceInput::wakeupID()
 {
     return m_WakeupID;
+}
+
+bool DeviceInput::bluetoothIsConnected()
+{
+    return m_BluetoothIsConnected;
 }
 
 void DeviceInput::initFilterKey()
