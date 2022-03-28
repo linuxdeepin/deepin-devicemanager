@@ -60,6 +60,11 @@ public:
      */
     void updateDeviceInfo();
 
+    /**
+     * @brief udpateCpuInfo 仅仅更新cpu信息
+     */
+    void udpateCpuInfo();
+
 private:
     /**
      * @brief runCmdToCache
@@ -75,6 +80,7 @@ private:
 private:
     QList<Cmd>        m_ListCmd;             // all cmd
     QList<Cmd>        m_ListUpdate;          // update cmd
+    QList<Cmd>        m_ListCpu;             // update cpu
 };
 
 #endif // THREADPOOL_H

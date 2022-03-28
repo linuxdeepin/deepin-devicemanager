@@ -26,6 +26,11 @@ public:
     void working();
 
     /**
+     * @brief updateCpuInfo 重新加载cpu信息
+     */
+    void updateCpuInfo();
+
+    /**
      * @brief executeClientInstruction
      * @param instructions
      */

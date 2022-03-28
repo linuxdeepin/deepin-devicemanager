@@ -51,6 +51,12 @@ void MainJob::working()
     connect(mp_DetectThread, &DetectThread::usbChanged, this, &MainJob::slotUsbChanged, Qt::ConnectionType::QueuedConnection);
 }
 
+void MainJob::updateCpuInfo()
+{
+    mp_Pool->udpateCpuInfo();
+    mp_Pool->waitForDone(-1);
+}
+
 INSTRUCTION_RES MainJob::executeClientInstruction(const QString &instructions)
 {
     QMutexLocker locker(&mutex);

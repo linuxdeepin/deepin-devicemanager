@@ -44,6 +44,20 @@ void ThreadPool::updateDeviceInfo()
     }
 }
 
+void ThreadPool::udpateCpuInfo()
+{
+    // 根据m_ListCmd生成所有设备信息
+    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
+    cleaner->setParent(this);
+    QList<Cmd>::iterator it = m_ListCpu.begin();
+    for (; it != m_ListCpu.end(); ++it) {
+        ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
+        cleaner->add(task);
+        start(task);
+        task->setAutoDelete(true);
+    }
+}
+
 void ThreadPool::runCmdToCache(const Cmd &cmd)
 {
     QString key = cmd.file;
@@ -142,6 +156,7 @@ void ThreadPool::initCmd()
     cmdLscpu.canNotReplace = true;
     m_ListCmd.append(cmdLscpu);
     m_ListUpdate.append(cmdLscpu);
+    m_ListCpu.append(cmdLscpu);
 
     // 添加lsblk -d -o name,rota命令
     Cmd cmdLsblk;

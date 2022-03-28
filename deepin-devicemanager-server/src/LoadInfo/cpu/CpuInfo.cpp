@@ -181,7 +181,8 @@ void CpuInfo::setProcCpuinfo(LogicalCpu& logical,const QMap<QString, QString>& m
 
     // diff in loognsoon and loongarch
     if (m_Arch == "mips64" || m_Arch == "loongarch64") {
-        logical.setCurFreq(mapInfo["cpu mhz"]);
+        if(logical.curFreq().isEmpty())
+            logical.setCurFreq(mapInfo["cpu mhz"]);
         logical.setModel(mapInfo["cpu model"]);
     }
 }

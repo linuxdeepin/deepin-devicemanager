@@ -29,10 +29,12 @@ QString DBusInterface::execCmd(const QString &cmd)
 
     // Request update
     if (cmd.startsWith("UPDATE_UI")) {
-        if (mp_MainJob->isServerRunning())
+        if (mp_MainJob->isServerRunning()){
             return QString::number(IR_SUCCESS);
-        else
+        }else{
+            mp_MainJob->updateCpuInfo();
             return QString::number(IR_UPDATE);
+        }
     }
 
     // return result cmd

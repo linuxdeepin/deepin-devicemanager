@@ -360,10 +360,6 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         ThreadExecXrandr tx(true);
         tx.start();
         tx.wait();
-    } else if (tr("CPU") == itemStr) { //点击处理器，执行加载处理器信息线程
-        LoadCpuInfoThread lct;
-        lct.start();
-        lct.wait();
     } else if (tr("Network Adapter") == itemStr) { //点击网络适配器，更新网络连接的信息
         CmdTool tool;
         QStringList networkDriver = DeviceManager::instance()->networkDriver();
