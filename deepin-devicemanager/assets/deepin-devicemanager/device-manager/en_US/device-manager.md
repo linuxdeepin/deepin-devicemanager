@@ -34,12 +34,12 @@ You can run, close or create a shortcut for Device Manager as follows.
 
 ## Device Information
 
-The information displayed by Device Manager is related to the computer hardware. If your computer is connected to devices such as mouse and keyboard, the corresponding device information will be displayed. If multiple devices of the same type are detected, the device information is displayed in a list. The following contents are for reference only, please refer to the actual situation.
+The information displayed by Device Manager is related to the computer hardwares. If your computer is connected to a mouse, keyboard, etc., the corresponding device information is displayed. If multiple devices of the same type are detected, the device information is displayed in a list. The following content is for reference only, please refer to the actual situation.
 
 ### Overview
 
 1. On the main interface, click **Overview**.
-2. View the information of kernel and all hardware. 
+2. You can see a list containing **CPU**, **Motherboard**, **Memory** and so on in this interface, and summary info. 
 
 ![0|overview](fig/overview.png)
 
@@ -92,6 +92,13 @@ The information displayed by Device Manager is related to the computer hardware.
 
 ![0|networkadapter](fig/networkadapter.png)
 
+### Mouse
+
+1. On the main interface, click **Mouse**.
+2. You can view info such as name, vendor, model, and so on.
+
+![0|mouse](fig/mouse.png)
+
 ### Keyboard
 
 1. On the main interface, click **Keyboard **.
@@ -104,60 +111,73 @@ The information displayed by Device Manager is related to the computer hardware.
 1. On the main interface, click **Monitor **.
 2. You can view info about Monitor such as name, vendor, type and so on.
 
-![0|displaydevice](fig/monitor.png)
+![0|displaydevice](fig/displaydevice.png)
+
+### Printer
+
+1. On the main interface, click **Printer**.
+2. You can view a list of printers connected and info such as name, model, vendor, and so on.
+
+![0|printer](fig/printer.png)
+
+
 
 ## Operations 
 
-In the device details area, right-click and you will have several options.
+Right-click in the details area of any device to carry out corresponding operations.
 
 ![0|rightclick](fig/rightclick.png)
 
 ### Copy
-
-To copy current page, or, some selectable information.
+To copy contents of the current page or selected contents.
 
 ### Refresh
-
-To reload info of all current devices of the operating system. You can also use shortcut key F5.
+To reload info of all devices of the operating system. You can also use shortcut key F5 to realize this function.
 
 ### Export
-
-To export the device information to the specified folder,formats such as txt/docx/xls/html are supported. 
+To export the device information to the specified folder, formats such as txt/docx/xls/html are supported. 
 
 ### Disable/Enable
 
-Some hardware drivers can be enabled / disabled. Drivers are enabled by default. You can judge whether the hardware device supports the disable function according to the right-click menu options. 
+You can disable /enable some hardware drives, which are enabled by default. You can judge whether the hardware device supports the disable function according to the right-click menu options. 
 
 ### Update drivers
 
-Some hardware can be updated / uninstalled, which can be judged according to the right-click menu options. Currently, only installation and updates of local driver files are supported.  
+Some hardware supports update/uninstall driver function, which can be judged by the right-click menu options. Currently, only local driver files are supported for installation and update.
 
-1. Right-click and select **Update drivers**, a window pops up.
-
-2. Select the folder where the driver is located and click **Next**. "Include subfolders" is checked by default, which means to detect the driver files contained in the folder and its subfolders.
+1. Select **Update drivers** in the right-click menu to bring up a pop-up window.
+2. Select the folder where the driver is located and click the **Next** button. The "Include subfolders" is checked by default, indicating that the folder and the driver files contained in the subfolder are detected.
 
    ![0|file_location](fig/file_location.png)
 
-3. The system will detect all installable driver files (in deb and ko format) contained in the file location. Select the corresponding driver file and click **Update**.
+3. The system will detect all installable deb and ko format driver files contained in this file location. Select the corresponding driver file and then click the **Update** button.
 
    ![0|renew](fig/renew.png)
 
-4. The authentication window pops up. Enter the system login password and update it after authentication.
-
-5. If the update fails, the system will automatically roll back the driver of the device to the previous driver version, which will not affect the use. It is recommended to find out the reason for the failure and update it again according to the system prompt.
+4. Authentication window pops up. Input login password to complete authentication and proceed.
+5. If the update fails, the system automatically rolls back the device's driver to the previous driver version, which does not affect the use. It is recommended to find the reason of failure according to the system prompt and update again.
 
 ### Uninstall drivers
 
-You can uninstall the driver of the devices you don't want to use.
+You can uninstall devices that you don't want to use.
 
-1. Select **Uninstall drivers** in the right-click menu, and click **Uninstall**.
+1. Select **Uninstall drivers** in the right-click menu, after confirming again, click **Uninstall**. 
 
-   - Successful: the device status changes to unavailable.
-   - Failed: the original driver is in normal use. It is recommended to find out the failure reason according to the system prompt and uninstall again.
+   - Successful: The device status becomes unavailable.
 
-2. If you want to reuse the device, right-click on the device details page and select **Update drivers** to install the driver.
+   - Failure: The original driver works normally. It is recommended to find the reason for failure according to the system prompt and uninstall again.
 
+2. If you want to use the device again, right-click on the device details page and select **Update Driver** to install the driver.
 
+### Wake up the computer
+
+When the computer is suspending, it supports waking up the computer and lighting up the screen via mouse and keyboard. If the devices are disabled, this feature is not available.
+
+1. Click "Mouse" or "Keyboard" in Device Manager to display details.
+2. Right-click in the details area to check or uncheck **Allow it to wake the computer**.
+
+   - Allow it to wake the computer: When the computer is in suspending, left-click / right-click / middle-click or hit any key on keyboard to wake up the computer and light up the screen.
+   - Don't allow it to wake the computer: When the computer is in suspending, the computer does not respond when you  left-click / right-click / middle-click or hit any key on keyboard.
 
 ## Main Menu
 
