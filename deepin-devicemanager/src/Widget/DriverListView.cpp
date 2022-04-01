@@ -17,7 +17,7 @@
 #include "DriverListView.h"
 #include "DriverListViewDelegate.h"
 
-#include <DApplicationHelper>
+#include <DPaletteHelper>
 #include <DApplication>
 #include <DStyle>
 
@@ -58,9 +58,10 @@ void DriverListView::paintEvent(QPaintEvent *event)
     } else {
         cg = DPalette::Active;
     }
-    auto *dAppHelper = DApplicationHelper::instance();
-    auto palette = dAppHelper->applicationPalette();
+
+    auto palette = DPaletteHelper::instance()->palette(this);
     QBrush bgBrush(palette.color(cg, DPalette::Base));
+
     //绘制背景
     QStyleOptionFrame option;
     initStyleOption(&option);
@@ -108,7 +109,7 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
     auto palette = options.palette;
     QBrush background;
     if (!(index.row() & 1)) {
-        auto dpa = DApplicationHelper::instance()->palette(this);
+        auto dpa = DPaletteHelper::instance()->palette(this);
         background = dpa.color(DPalette::ItemBackground);
     } else {
         background = palette.color(cg, DPalette::Base);

@@ -20,7 +20,7 @@
  */
 
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DPalette>
 #include <DStyleHelper>
 
@@ -56,8 +56,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     cg = DPalette::Active;
 #endif
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
+    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
     if (!style)
@@ -149,8 +148,7 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
     cg = DPalette::Active;
 #endif
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
+    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
     if (!style)

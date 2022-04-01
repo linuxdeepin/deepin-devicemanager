@@ -5,7 +5,6 @@
 #include <DLabel>
 #include <DWaterProgress>
 #include <DFontSizeManager>
-#include <DApplicationHelper>
 #include <DRadioButton>
 #include <DGuiApplicationHelper>
 #include <DLabel>

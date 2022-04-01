@@ -21,9 +21,13 @@
 
 #include "logtreeview.h"
 
+#include "MacroDefinition.h"
+#include "TableWidget.h"
+
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DStyledItemDelegate>
+#include <DPaletteHelper>
 
 #include <QDebug>
 #include <QDir>
@@ -32,9 +36,6 @@
 #include <QHeaderView>
 #include <QScrollBar>
 #include <QPainterPath>
-
-#include "MacroDefinition.h"
-#include "TableWidget.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -225,8 +226,7 @@ void LogTreeView::paintEvent(QPaintEvent *event)
         cg = DPalette::Active;
     }
 
-    auto *dAppHelper = DApplicationHelper::instance();
-    auto palette = dAppHelper->applicationPalette();
+    auto palette = DPaletteHelper::instance()->palette(this);
 
     QBrush bgBrush(palette.color(cg, DPalette::Base));
 
@@ -289,8 +289,7 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
     auto margin = style->pixelMetric(DStyle::PM_ContentsMargins, &options);
 
     // modify background color acorrding to UI designer
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
+    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
     QBrush background;
 
     // 隔行变色

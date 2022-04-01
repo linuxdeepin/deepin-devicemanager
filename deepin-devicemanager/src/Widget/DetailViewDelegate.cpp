@@ -9,7 +9,7 @@
 // Dtk头文件
 #include <DApplication>
 #include <DStyle>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DFontSizeManager>
 
 // 其它头文件
@@ -52,8 +52,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     if (!style)
         return;
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
+    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
     QBrush background;
 
     if (opt.features & QStyleOptionViewItem::Alternate)

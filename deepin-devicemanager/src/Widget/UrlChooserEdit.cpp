@@ -16,7 +16,6 @@
 */
 #include "UrlChooserEdit.h"
 
-#include <DApplicationHelper>
 #include <DStyle>
 #include <DLineEdit>
 #include <DSuggestButton>

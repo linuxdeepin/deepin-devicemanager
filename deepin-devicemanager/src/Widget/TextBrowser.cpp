@@ -2,7 +2,8 @@
 #include "TextBrowser.h"
 
 // Dtk头文件
-#include <DApplicationHelper>
+#include <DPaletteHelper>
+#include <DGuiApplicationHelper>
 #include <DApplication>
 #include <DFontSizeManager>
 #include <DMenu>
@@ -131,9 +132,9 @@ void TextBrowser::fillClipboard()
 
 void TextBrowser::paintEvent(QPaintEvent *event)
 {
-    DPalette pa = DApplicationHelper::instance()->palette(this);
+    DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setBrush(DPalette::WindowText, pa.color(DPalette::TextTips));
-    DApplicationHelper::instance()->setPalette(this, pa);
+    DPaletteHelper::instance()->setPalette(this, pa);
 
 
     int height = int(document()->size().height());
@@ -227,8 +228,7 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
             title = "(" + tr("Disable") + ")" + title;
             h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#FF5736;");
         } else if (!info->available()) {
-            DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-            DPalette palette = dAppHelper->applicationPalette();
+            DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
             QColor color = palette.color(DPalette::Disabled, DPalette::PlaceholderText);
             QRgb rgb = qRgb(color.red(), color.green(), color.blue());
             QString rgbs = QString::number(rgb, 16);

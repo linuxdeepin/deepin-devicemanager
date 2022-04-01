@@ -21,7 +21,7 @@
 
 // DTK
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DPalette>
 #include <DStyle>
 #include <DStyleHelper>
@@ -75,8 +75,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         return;
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
+    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
     QBrush background;
     QPen forground;
     if (opt.features & QStyleOptionViewItem::Alternate) {

@@ -16,7 +16,7 @@
 
 // Dtk头文件
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DPaletteHelper>
 #include <DStyle>
 #include <DFontSizeManager>
 
@@ -420,8 +420,7 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
         cg = DPalette::Active;
     }
 
-    auto *dAppHelper = DApplicationHelper::instance();
-    auto palette = dAppHelper->applicationPalette();
+    auto palette = DPaletteHelper::instance()->palette(this);;
 
     QRect rect = viewport()->rect();
     int pHeight = setTableHeight(rect.height());

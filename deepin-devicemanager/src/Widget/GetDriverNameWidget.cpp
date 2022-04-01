@@ -4,7 +4,8 @@
 
 #include <DFrame>
 #include <DLabel>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
+#include <DPaletteHelper>
 #include <DFontSizeManager>
 #include <DStackedWidget>
 
@@ -55,9 +56,9 @@ void GetDriverNameWidget::init()
     mp_tipLabel->setMinimumHeight(25);
 
     DFontSizeManager::instance()->bind(mp_tipLabel, DFontSizeManager::T8, QFont::Medium);
-    DPalette pa = DApplicationHelper::instance()->palette(mp_tipLabel);
+    DPalette pa = DPaletteHelper::instance()->palette(mp_tipLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
-    DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
+    DPaletteHelper::instance()->setPalette(mp_tipLabel, pa);
 
     // 上方布局
     QHBoxLayout *hLayout1 = new QHBoxLayout;
@@ -123,7 +124,7 @@ void GetDriverNameWidget::reloadDriversListPages()
         label->setText(tr("Select a driver for update"));
     }
 
-    DPalette pa = DApplicationHelper::instance()->palette(label);
+    DPalette pa = DPaletteHelper::instance()->palette(label);
     QColor color = DGuiApplicationHelper::adjustColor(pa.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -30);
     pa.setColor(QPalette::WindowText, color);
     label->setPalette(pa);
