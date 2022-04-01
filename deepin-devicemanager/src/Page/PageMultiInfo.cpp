@@ -23,6 +23,8 @@
 
 DWIDGET_USE_NAMESPACE
 
+#define LEAST_PAGE_HEIGHT 315  // PageMultiInfo最小高度 当小于这个高度时，上方的表格就要变小
+
 PageMultiInfo::PageMultiInfo(QWidget *parent)
     : PageInfo(parent)
     , mp_Label(new DLabel(this))
@@ -63,21 +65,8 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     //  获取多个设备界面表格信息
     QList<QStringList> deviceList;
-    deviceList.append(lst[0]->getTableHeader());
     QList<QStringList> menuControlList;
-    foreach (DeviceBaseInfo *info, lst) { 
-        QStringList lstDeviceInfo = info->getTableData();
-        deviceList.append(lstDeviceInfo);
-
-        QStringList menuControl;
-        menuControl.append(info->canUninstall()?"true":"false");
-        DeviceInput* input = dynamic_cast<DeviceInput*>(info);
-        if(input){
-            menuControl.append(input->canWakeupMachine()?"true":"false");
-            menuControl.append(input->wakeupPath());
-        }
-        menuControlList.append(menuControl);
-    }
+    getTableListInfo(lst,deviceList,menuControlList);
 
     // 更新表格
     mp_Table->updateTable(deviceList, menuControlList);
@@ -103,6 +92,27 @@ void PageMultiInfo::setLabel(const QString &itemstr)
 void PageMultiInfo::clearWidgets()
 {
     mp_Detail->clearWidget();
+}
+
+void PageMultiInfo::resizeEvent(QResizeEvent* e)
+{
+    if(m_lstDevice.size() < 1)
+        return PageInfo::resizeEvent(e);
+
+    // 先获取当前窗口大小
+    int curHeight = this->height();
+    QList<QStringList> deviceList;
+    QList<QStringList> menuControlList;
+    getTableListInfo(m_lstDevice,deviceList,menuControlList);
+    if(curHeight < LEAST_PAGE_HEIGHT){
+        //  获取多个设备界面表格信息
+        mp_Table->updateTable(deviceList,menuControlList,true,(LEAST_PAGE_HEIGHT-curHeight)/TREE_ROW_HEIGHT+1);
+    }else{
+        //  获取多个设备界面表格信息
+        mp_Table->updateTable(deviceList,menuControlList,true,0);
+    }
+
+    return PageInfo::resizeEvent(e);
 }
 
 void PageMultiInfo::slotItemClicked(int row)
@@ -215,4 +225,23 @@ void PageMultiInfo::initWidgets()
     hLayout->setContentsMargins(10, 10, 10, 0);
 
     setLayout(hLayout);
+}
+
+void PageMultiInfo::getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<QStringList>& deviceList, QList<QStringList>& menuControlList)
+{
+    //  获取多个设备界面表格信息
+    deviceList.append(lst[0]->getTableHeader());
+    foreach (DeviceBaseInfo *info, lst) {
+        QStringList lstDeviceInfo = info->getTableData();
+        deviceList.append(lstDeviceInfo);
+
+        QStringList menuControl;
+        menuControl.append(info->canUninstall()?"true":"false");
+        DeviceInput* input = dynamic_cast<DeviceInput*>(info);
+        if(input){
+            menuControl.append(input->canWakeupMachine()?"true":"false");
+            menuControl.append(input->wakeupPath());
+        }
+        menuControlList.append(menuControl);
+    }
 }
