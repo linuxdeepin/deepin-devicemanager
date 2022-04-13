@@ -14,17 +14,17 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Widget/LongTextLabel.h"
+#include "LongTextLabel.h"
+#include "ut_Head.h"
+#include "stub.h"
 
-#include "../ut_Head.h"
-#include "../stub.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
 
-class LongTextLabel_UT : public UT_HEAD
+class UT_LongTextLabel : public UT_HEAD
 {
 public:
     void SetUp()
@@ -43,10 +43,11 @@ int ut_LongTextLabel_indexIn()
     return 1;
 }
 
-TEST_F(LongTextLabel_UT, ut_paintEvent)
+TEST_F(UT_LongTextLabel, UT_LongTextLabel_paintEvent)
 {
     Stub stub;
     stub.set(ADDR(QRegExp, indexIn), ut_LongTextLabel_indexIn);
     QPaintEvent paint(QRect(m_ltLabel->rect()));
     m_ltLabel->paintEvent(&paint);
+    EXPECT_FALSE(m_ltLabel->grab().isNull());
 }

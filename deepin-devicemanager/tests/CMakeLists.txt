@@ -32,7 +32,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "-Wl,--as-need -fPIE")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--as-need -fPIE  -fstack-protector-strong -D_FORTITY_SOURCE=1 -z noexecstack -pie -fPIC -z lazy")
 set(CMAKE_EXE_LINKER_FLAGS "-pie")
 
 option (PERF_ON "Use provided math implementation" ON)
@@ -71,6 +71,8 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5 COMPONENTS DBus REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
+find_package(PolkitQt5-1 REQUIRED)
+find_package(Qt5Test REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(DFrameworkdbus REQUIRED)
@@ -98,22 +100,19 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D${CMAKE_SAFETYTEST}")
 #Include all third
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/docx/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/)
 
 #add cups
 include_directories("/usr/include/cups/")
 link_libraries("cups")
-link_libraries("zmq")
 
+#src
 file(GLOB_RECURSE SRC_CPP
-    ${CMAKE_CURRENT_LIST_DIR}/../3rdparty/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/DebugTimeManager.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/GenerateDevice/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/DeviceManager/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/Page/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/Tool/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/Widget/*.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/../src/EnableAndDisable/*.cpp
+     ${CMAKE_CURRENT_LIST_DIR}/../src/*.cpp
+     ${CMAKE_CURRENT_LIST_DIR}/../3rdparty/*.cpp
     )
+# remove src main.cpp or will multi define
+list(REMOVE_ITEM SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/../src/main.cpp)
 
 file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE TEST_SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
@@ -128,12 +127,14 @@ target_link_libraries(${PROJECT_NAME_TEST}
     Qt5::Widgets
     Qt5::DBus
     Qt5::Xml
+    Qt5::Test
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
     ${DtkGUI_LIBRARIES}
     ${DFrameworkdbus_LIBRARIES}
     ${GTEST_LIBRARIES}
     ${GTEST_MAIN_LIBRARIES}
+    PolkitQt5-1::Agent
     pthread
 )
 

@@ -2,7 +2,8 @@
 #include "TextBrowser.h"
 
 // Dtk头文件
-#include <DApplicationHelper>
+#include <DPaletteHelper>
+#include <DGuiApplicationHelper>
 #include <DApplication>
 #include <DFontSizeManager>
 #include <DMenu>
@@ -16,7 +17,9 @@
 #include <QDebug>
 
 // 其它头文件
-#include "DeviceManager/DeviceInfo.h"
+#include "DeviceInfo.h"
+#include "DeviceInput.h"
+#include "DBusWakeupInterface.h"
 
 TextBrowser::TextBrowser(QWidget *parent)
     : DTextBrowser(parent)
@@ -25,6 +28,7 @@ TextBrowser::TextBrowser(QWidget *parent)
     , mp_Export(new QAction(tr("Export"), this))
     , mp_Copy(new QAction(tr("Copy"), this))
     , mp_Menu(new DMenu(this))
+    , m_IsMenuShowing(false)
 {
     DFontSizeManager::instance()->bind(this, DFontSizeManager::SizeType(DFontSizeManager::T7));
     setFrameShape(QFrame::NoFrame);
@@ -36,6 +40,7 @@ TextBrowser::TextBrowser(QWidget *parent)
     connect(mp_Refresh, &QAction::triggered, this, &TextBrowser::slotActionRefresh);
     connect(mp_Export, &QAction::triggered, this, &TextBrowser::slotActionExport);
     connect(mp_Copy, &QAction::triggered, this, &TextBrowser::slotActionCopy);
+    connect(mp_Menu, &DMenu::aboutToHide, this, &TextBrowser::slotCloseMenu);
 }
 
 void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
@@ -54,7 +59,7 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
     domTitleInfo(doc, mp_Info);
 
     // 添加一个表格
-    if (mp_Info->enable()) {
+    if (mp_Info->enable() && mp_Info->available()) {
         const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
         domTableInfo(doc, baseInfo);
     }
@@ -79,7 +84,7 @@ void TextBrowser::updateInfo()
     domTitleInfo(doc, mp_Info);
 
     // 添加一个表格
-    if (mp_Info->enable()) {
+    if (mp_Info->enable() && mp_Info->available()) {
         const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
         domTableInfo(doc, baseInfo);
         if (m_ShowOtherInfo) {
@@ -97,6 +102,16 @@ EnableDeviceStatus TextBrowser::setDeviceEnabled(bool enable)
         return EDS_Cancle;
     }
     return mp_Info->setEnable(enable);
+}
+
+void TextBrowser::setWakeupMachine(bool wakeup)
+{
+    DeviceInput* input = dynamic_cast<DeviceInput*>(mp_Info);
+    if(!input)
+        return;
+    if(input->wakeupID().isEmpty() || input->sysPath().isEmpty())
+        return;
+    DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),wakeup);
 }
 
 void TextBrowser::updateShowOtherInfo()
@@ -117,9 +132,9 @@ void TextBrowser::fillClipboard()
 
 void TextBrowser::paintEvent(QPaintEvent *event)
 {
-    DPalette pa = DApplicationHelper::instance()->palette(this);
+    DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setBrush(DPalette::WindowText, pa.color(DPalette::TextTips));
-    DApplicationHelper::instance()->setPalette(this, pa);
+    DPaletteHelper::instance()->setPalette(this, pa);
 
 
     int height = int(document()->size().height());
@@ -144,41 +159,29 @@ void TextBrowser::keyPressEvent(QKeyEvent *event)
 
 void TextBrowser::focusInEvent(QFocusEvent *e)
 {
-//    setTextInteractionFlags(Qt::TextBrowserInteraction);
     QTextBrowser::focusInEvent(e);
 }
+
 void TextBrowser::focusOutEvent(QFocusEvent *e)
 {
-    if (!this->geometry().contains(this->mapFromGlobal(QCursor::pos()))) {
-        // 先清空内容 *************************************************
-        clear();
-        if (!mp_Info) {
-            return;
-        }
-        // 显示设备的信息 *************************************************
-        QDomDocument doc;
-
-        // 添加子标题
-        domTitleInfo(doc, mp_Info);
-
-        // 添加一个表格
-        if (mp_Info->enable()) {
-            const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
-            domTableInfo(doc, baseInfo);
-            if (m_ShowOtherInfo) {
-                const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
-                domTableInfo(doc, otherInfo);
-            }
-        }
-
-        // 将设备信息显示到TextBrowser
-        setHtml(doc.toString().replace("<h3>", "<h3>&nbsp;"));
+    if(m_IsMenuShowing){
+        DTextBrowser::focusOutEvent(e);
     }
-    QTextBrowser::focusOutEvent(e);
+    else {
+        // 模拟单击效果，当焦点失去的时候刷新界面选中效果
+        QMouseEvent pressEvent(QEvent::MouseButtonPress, this->mapFromGlobal(QCursor::pos()), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+        QTextBrowser::mousePressEvent(&pressEvent);
+    }
+}
+
+void TextBrowser::slotCloseMenu()
+{
+    m_IsMenuShowing = false;
 }
 
 void TextBrowser::slotShowMenu(const QPoint &)
 {
+    m_IsMenuShowing = true;
     // 右键菜单
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
@@ -224,6 +227,14 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
         if (!info->enable()) {
             title = "(" + tr("Disable") + ")" + title;
             h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#FF5736;");
+        } else if (!info->available()) {
+            DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
+            QColor color = palette.color(DPalette::Disabled, DPalette::PlaceholderText);
+            QRgb rgb = qRgb(color.red(), color.green(), color.blue());
+            QString rgbs = QString::number(rgb, 16);
+            title = "(" + tr("Unavailable") + ")" + title;
+            QString css = QString("text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#%1;").arg(rgbs);
+            h3.setAttribute("style", css);
         } else {
             h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;");
         }

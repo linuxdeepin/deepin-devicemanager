@@ -1,10 +1,11 @@
 // 项目自身文件
 #include "RichTextDelegate.h"
+#include "PageBoardInfo.h"
 
 // Dtk头文件
 #include <DApplication>
 #include <DStyle>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 
 // Qt库文件
 #include <QPainter>
@@ -55,8 +56,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     if (!style)
         return;
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
+    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
     QBrush background;
 
     if (opt.features & QStyleOptionViewItem::Alternate) {
@@ -212,16 +212,23 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     if (lstStr.size() > 1) {
         QTextDocument  textDoc;
         //设置文字居中显示
-        textDoc.setTextWidth(option.rect.width());
+        textDoc.setTextWidth(option.rect.width() - 6);//设置文本左边空6px的位置。1. 文本长度减6
         //设置文本内容
         QDomDocument doc;
         getDocFromLst(doc, lstStr);
         textDoc.setHtml(doc.toString());
 
+        // bug111063中 社区版与专业版使用同一代码，主板界面展示效果不同
+        // PageBoardInfo 中计算行高方式与html中计算行高方式不同，导致每行下方出现截断或空白
+        // 此处获取html整体高度后再对PageBoardInfo设置行高，则不会再出现截断或空白
+        dynamic_cast<PageBoardInfo *>(this->parent())->setRowHeight(index.row(), textDoc.size().toSize().height());
+
         QAbstractTextDocumentLayout::PaintContext   paintContext;
         paintContext.palette.setCurrentColorGroup(cg);
         QRect  textRect = style->subElementRect(QStyle::SE_ItemViewItemText,  &opt);
-        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 3));
+        textRect.setWidth(textRect.size().width() - 6);//设置文本左边空6px的位置。2. 显示矩形减6
+        textRect.setHeight(textRect.size().height() - 3);
+        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 3));//设置文本左边空6px的位置。1. 文本长度减6
         painter->save();
         painter->translate(point);
         painter->setClipRect(textRect.translated(-point));
@@ -230,7 +237,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     } else {
         QTextDocument  textDoc;
         //设置文字居中显示
-        textDoc.setTextWidth(option.rect.width());
+        textDoc.setTextWidth(option.rect.width() - 6);//设置文本左边空6px的位置。1. 文本长度减6
         //设置文本内容
         QDomDocument doc;
         QDomElement p = doc.createElement("p");
@@ -246,7 +253,9 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         QAbstractTextDocumentLayout::PaintContext   paintContext;
         paintContext.palette.setCurrentColorGroup(cg);
         QRect  textRect = style->subElementRect(QStyle::SE_ItemViewItemText,  &opt);
-        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 6));
+        textRect.setWidth(textRect.size().width() - 6);//设置文本左边空6px的位置。2. 显示矩形减6
+        textRect.setHeight(textRect.size().height() - 6);
+        QPoint point(QPoint(option.rect.x() + 6, option.rect.y() + 6));//设置文本左边空6px的位置。3. 显示矩形位置加6
         painter->save();
         painter->translate(point);
         painter->setClipRect(textRect.translated(-point));
@@ -334,7 +343,7 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
             QPair<QString, QString> tempPair;
             tempPair.first = "";
             tempPair.second = *it;
-            addRow(doc, table, tempPair);
+            addRow(doc, tr, tempPair);
         }
     } else {
         addTd2(doc, tr, pair.second);

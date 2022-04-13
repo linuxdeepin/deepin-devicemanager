@@ -9,7 +9,6 @@
 #include "MacroDefinition.h"
 
 // Dtk头文件
-#include <DApplicationHelper>
 #include <DPalette>
 #include <DFontSizeManager>
 
@@ -22,7 +21,9 @@
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)
     , mp_ItemDelegate(new RichTextDelegate(this))
+    , m_FontChangeFlag(false)
 {
+
 }
 
 void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
@@ -67,10 +68,12 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
     if (mp_Content)
         mp_Content->setLimitRow(limitSize);
 
-    // 如果是展开状态则不更新
-    if (isExpanded())
-        return;
-
+    // 字体无变化如果是展开状态则不更新
+    if (!m_FontChangeFlag) {
+        if (isExpanded())
+            return;
+    }
+    m_FontChangeFlag = false;
     // clear info
     clearContent();
 
@@ -101,43 +104,6 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
 
         QTableWidgetItem *itemSecond = new QTableWidgetItem(pairs[i - lst.size()].second);
         mp_Content->setItem(i, 1, itemSecond);
-
-        // 计算行高
-        QFont font = DFontSizeManager::instance()->t8();
-        QFontMetrics fm(font);
-        int height = 0;
-        QStringList strList = pairs[i - lst.size()].second.split("\n");
-        int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height() + 2;
-        //qInfo() << strList;
-        // 根据行数增加行高
-        foreach (const QString &str, strList) {
-            QStringList lst = str.split(":");
-            if (lst.size() == 2) {
-                // 属性名称
-                int width = fm.boundingRect(lst[0]).width();
-                int num = width / 110;
-                int num0 = width % 110;
-                if (num0 == 0)
-                    num = num - 1;
-
-                int line = 0;
-                // 属性值
-                if (!lst[1].contains("  /  \t\t")) {
-                    width = fm.boundingRect(lst[1]).width();
-                    line = width / 480;
-                    int line0 = width % 480;
-                    if (line0 == 0)
-                        line = line - 1;
-                }
-
-                if (num > 0 || line > 0)
-                    height += std::max(num, line) * fontHeight;
-            }
-            QStringList attris = str.split("  /  \t\t");
-            height += attris.size() * fontHeight;
-        }
-        height += 20;
-        mp_Content->setRowHeight(i, height);
     }
 }
 
@@ -172,4 +138,15 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
         pair.second += "\n";
     }
     pair.second.replace(QRegExp("\n$"), "");
+}
+
+void PageBoardInfo::setFontChangeFlag()
+{
+    // 设置字体变化标志
+    m_FontChangeFlag = true;
+}
+
+void PageBoardInfo::setRowHeight(int row, int height)
+{
+    mp_Content->setRowHeight(row, height);
 }

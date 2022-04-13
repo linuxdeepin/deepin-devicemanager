@@ -34,6 +34,11 @@ class CpuInfo
 public:
     CpuInfo();
     ~CpuInfo();
+
+    /**
+     * @brief diagPrintInfo
+     */
+    void diagPrintInfo();
     /**
      * @brief loadCpuInfo
      * @return
@@ -44,7 +49,7 @@ public:
      * @brief arch
      * @return
      */
-    QString arch();
+    const QString &arch() const;
 
     /**
      * @brief logicalCpus
@@ -90,6 +95,22 @@ private:
     bool parseInfo(const QString &info);
 
     /**
+     * @brief logicalCpu
+     * @param logical_id
+     * @param core_id
+     * @param physical_id
+     * @return
+     */
+    LogicalCpu &logicalCpu(int logical_id);
+
+    /**
+     * @brief setProcCpuinfo
+     * @param logical
+     * @param mapInfo
+     */
+    void setProcCpuinfo(LogicalCpu &logical, const QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief readSysCpu : /sys/devices/system/cpu
      */
     void readSysCpu();
@@ -102,17 +123,24 @@ private:
 
     /**
      * @brief readPhysicalID
-     * @param dir
+     * @param path
      * @return
      */
-    int readPhysicalID(const QDir &dir);
+    int readPhysicalID(const QString &path);
 
     /**
      * @brief readCoreID
-     * @param dir
+     * @param path
      * @return
      */
-    int readCoreID(const QDir &dir);
+    int readCoreID(const QString &path);
+
+    /**
+        * @brief readThreadSiblingsListPath
+        * @param path
+        * @return
+        */
+    int readThreadSiblingsListPath(const QString &path);
 
     /**
      * @brief readCpuCache : /sys/devices/system/cpu/cpu0/cache
@@ -135,19 +163,9 @@ private:
      */
     void readCpuFreq(const QString &path, LogicalCpu &lcpu);
 
-    /**
-     * @brief appendKeyValue
-     * @param info
-     * @param key
-     * @param value
-     */
-    void appendKeyValue(QString &info, const QString &key, const QString &value);
-    void appendKeyValue(QString &info, const QString &key, int value);
 
 private:
     QMap<int, PhysicalCpu>     m_MapPhysicalCpu;
-    QMap<int, CoreCpu>         m_CoreCpu;
-    QMap<int, LogicalCpu>      m_MapLogicalCpu;
     QString                    m_Arch;
 };
 

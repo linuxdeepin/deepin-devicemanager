@@ -113,15 +113,6 @@ protected:
      */
     void loadTableData() override;
 
-
-private:
-
-    /**
-     * @brief parseKeyToLshw:获取映射到lshw的key
-     * @param info:hwinfo 中的SysFS BusID属性值
-     */
-    void parseKeyToLshw(const QString &info);
-
 private:
     QString         m_Name;                   //<! 【名称】
     QString         m_Vendor;                 //<! 【制造商】
@@ -135,8 +126,6 @@ private:
     QString         m_DriverVersion;          //<! 【驱动版本】
     QString         m_MaximumPower;           //<! 【最大功耗】
     QString         m_Speed;                  //<! 【速度】
-
-    QString         m_UniqueKey;              //<!  鼠标设备的唯一标识
 };
 
 #endif // DEVICEBLUETOOTH_H

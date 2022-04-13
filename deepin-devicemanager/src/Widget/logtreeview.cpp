@@ -21,9 +21,13 @@
 
 #include "logtreeview.h"
 
+#include "MacroDefinition.h"
+#include "TableWidget.h"
+
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DStyledItemDelegate>
+#include <DPaletteHelper>
 
 #include <QDebug>
 #include <QDir>
@@ -32,9 +36,6 @@
 #include <QHeaderView>
 #include <QScrollBar>
 #include <QPainterPath>
-
-#include "MacroDefinition.h"
-#include "TableWidget.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -60,6 +61,14 @@ void LogTreeView::setItem(int row, int column, QStandardItem *item)
     if (mp_Model) {
         mp_Model->setItem(row, column, item);
     }
+}
+
+QStandardItem *LogTreeView::item(int row, int column)
+{
+    if(mp_Model && mp_Model->rowCount() > row && mp_Model->columnCount() > column){
+        return mp_Model->item(row,column);
+    }
+    return nullptr;
 }
 
 void LogTreeView::setColumnAverage()
@@ -93,6 +102,23 @@ bool LogTreeView::currentRowEnable()
         }
     }
     return true;
+}
+
+bool LogTreeView::currentRowAvailable()
+{
+    QModelIndex index = currentIndex();
+     int row = index.row();
+     if (row < 0) {
+         return false;
+     }
+     QStandardItem *item = mp_Model->item(row, 0);
+     if (item) {
+         QString str = item->text();
+         if (str.startsWith("(" + tr("Unavailable") + ")")) {
+             return false;
+         }
+     }
+     return true;
 }
 
 int LogTreeView::currentRow()
@@ -200,8 +226,7 @@ void LogTreeView::paintEvent(QPaintEvent *event)
         cg = DPalette::Active;
     }
 
-    auto *dAppHelper = DApplicationHelper::instance();
-    auto palette = dAppHelper->applicationPalette();
+    auto palette = DPaletteHelper::instance()->palette(this);
 
     QBrush bgBrush(palette.color(cg, DPalette::Base));
 
@@ -264,8 +289,7 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
     auto margin = style->pixelMetric(DStyle::PM_ContentsMargins, &options);
 
     // modify background color acorrding to UI designer
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
+    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
     QBrush background;
 
     // 隔行变色
@@ -305,4 +329,10 @@ void LogTreeView::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Down) {
         emit clicked(this->currentIndex());
     }
+}
+
+void LogTreeView::resizeEvent(QResizeEvent *event)
+{
+    DTreeView::resizeEvent(event);
+    setColumnAverage();
 }

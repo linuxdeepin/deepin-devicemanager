@@ -127,6 +127,7 @@ private:
     QString            m_HDMI;                    //<! 【HDMI】
     QString            m_eDP;
     QString            m_DVI;
+    QString            m_Digital;                 // bug-105482添加新接口类型
     QString            m_Description;             //<! 【描述】
     QString            m_Driver;                  //<! 【驱动】
     QString            m_CurrentResolution;       //<! 【当前分辨率】
@@ -137,8 +138,6 @@ private:
     QString            m_IOPort;                  //<! 【ioport】
     QString            m_MemAddress;              //<! 【内存地址】
     QString            m_PhysID;                  //<! 【物理ID】
-
-    QString            m_UniqueKey;               //<! 【标识一个适配器的唯一标识】
 };
 
 #endif // DEVICEGPU_H

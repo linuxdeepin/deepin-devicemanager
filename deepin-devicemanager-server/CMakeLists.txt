@@ -13,7 +13,12 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstack-protector-strong -D_FORTITY_SOURCE=1 -z noexecstack -pie -fPIC -z lazy")
 
+# Find the library
+FIND_PACKAGE(PkgConfig REQUIRED)
+FIND_PACKAGE(QApt REQUIRED)
+PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 
 # 设置包含头文件的时候不用包含路径 begin ****************************************************************************************
 MACRO(SUBDIRLIST result curdir)
@@ -33,20 +38,38 @@ foreach(dir ${dirs})
 endforeach()
 # 设置包含头文件的时候不用包含路径 end ****************************************************************************************
 
+#定义社区版宏begin
+message("begin")
+execute_process(COMMAND cat "/etc/os-version"
+                OUTPUT_VARIABLE output_var)
+
+if(output_var MATCHES "Community")
+    option(COMMUNITY "OS community" ON)
+    if(COMMUNITY)
+        add_definitions(-DCOMMUNITY)
+    endif()
+endif()
+
+message("end")
+#定义社区版宏end
+
 # 引用ZeroMQ的库 begin ****************************************************************
-link_libraries("zmq")
+include_directories("/usr/include/cups/")
+link_libraries("cups")
 link_libraries("udev")
 # 引用ZeroMQ的库 end  *****************************************************************
 
 find_package(Qt5 COMPONENTS
     Core
-    DBus REQUIRED)
+    DBus
+    Sql 
+    Network REQUIRED)
 
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H})
 
-target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus)
+target_link_libraries(${APP_BIN_NAME} Qt5::Core Qt5::DBus Qt5::Sql Qt5::Network kmod QApt)
 
 # Install files
 install(TARGETS ${APP_BIN_NAME} DESTINATION bin)

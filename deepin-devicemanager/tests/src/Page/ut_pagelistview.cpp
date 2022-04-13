@@ -14,20 +14,20 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "../src/Page/PageListView.h"
-#include "../src/Widget/DeviceListView.h"
+#include "PageListView.h"
+#include "DeviceListView.h"
 
-#include "../src/DeviceManager/DeviceInput.h"
-#include "../src/Page/PageInfo.h"
-#include "../src/Page/PageMultiInfo.h"
+#include "DeviceInput.h"
+#include "PageInfo.h"
+#include "PageMultiInfo.h"
+#include "stub.h"
+#include "ut_Head.h"
 
-#include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
 class PageListView_UT : public UT_HEAD
 {
@@ -48,6 +48,7 @@ TEST_F(PageListView_UT, PageListView_UT_updateListItems)
     QList<QPair<QString, QString>> list;
     list.append(QPair<QString, QString>("/", "/"));
     m_pageListView->updateListItems(list);
+    EXPECT_EQ(0, m_pageListView->mp_ListView->mp_ItemModel->rowCount());
 }
 
 TEST_F(PageListView_UT, PageListView_UT_currentIndex)
@@ -73,4 +74,19 @@ TEST_F(PageListView_UT, PageListView_UT_slotListViewItemClicked)
     stub.set(ADDR(DeviceListView, getConcatenateStrings), ut_getConcatenateStrings);
     QModelIndex index;
     m_pageListView->slotListViewItemClicked(index);
+    EXPECT_EQ("/", m_pageListView->m_CurType);
+}
+
+void ut_listview_exec()
+{
+    return;
+}
+
+TEST_F(PageListView_UT, PageListView_UT_slotShowMenu)
+{
+    Stub stub;
+    stub.set((QAction * (QMenu::*)(const QPoint &, QAction *))ADDR(QMenu, exec), ut_listview_exec);
+
+    m_pageListView->slotShowMenu(QPoint(0, 0));
+    EXPECT_EQ(m_pageListView->mp_Menu->actions().size(), 0);
 }

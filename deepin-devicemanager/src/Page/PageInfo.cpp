@@ -3,7 +3,7 @@
 #include "MacroDefinition.h"
 
 // Dtk头文件
-#include <DApplicationHelper>
+#include <DPaletteHelper>
 #include <DApplication>
 
 // Qt库文件
@@ -11,6 +11,7 @@
 #include <QStyleOptionFrame>
 #include <QDebug>
 #include <QPainterPath>
+#include <QProcess>
 
 
 DWIDGET_USE_NAMESPACE
@@ -48,6 +49,17 @@ int PageInfo::getDeviceInfoNum()
     return m_AllInfoNum;
 }
 
+bool PageInfo::packageHasInstalled(const QString &packageName)
+{
+    QProcess p;
+    QString cmd = "dpkg -s " + packageName;
+    p.start(cmd);
+    p.waitForFinished(-1);
+
+    QByteArray r = p.readAll();
+    return r.contains("installed");
+}
+
 void PageInfo::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
@@ -58,8 +70,7 @@ void PageInfo::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
+    DPalette palette = DPaletteHelper::instance()->palette(this);
 
     // 获取系统默认的圆角半径
     int radius = 8;

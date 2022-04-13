@@ -5,7 +5,6 @@
 #include "RichTextDelegate.h"
 
 // Dtk头文件
-#include <DApplicationHelper>
 #include <DPalette>
 #include <DApplication>
 
@@ -86,10 +85,10 @@ bool PageTableWidget::isCurDeviceEnable()
     return mp_Table->isCurDeviceEnable();
 }
 
-void PageTableWidget::setCurDeviceState(bool state)
+void PageTableWidget::setCurDeviceState(bool enable, bool available)
 {
     // 设置当前设备状态
-    mp_Table->setCurDeviceState(state);
+    mp_Table->setCurDeviceState(enable, available);
 }
 
 void PageTableWidget::expandTable()
@@ -106,10 +105,10 @@ bool PageTableWidget::isExpanded()
     return false;
 }
 
-void PageTableWidget::setDeviceEnable(bool e)
+void PageTableWidget::setDeviceEnable(bool enable, bool available)
 {
     // 设置设备状态
-    mp_Table->setCurDeviceState(e);
+    mp_Table->setCurDeviceState(enable, available);
 }
 
 void PageTableWidget::paintEvent(QPaintEvent *event)

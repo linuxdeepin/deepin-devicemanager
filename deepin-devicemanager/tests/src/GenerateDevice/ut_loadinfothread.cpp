@@ -18,16 +18,16 @@
 #include "LoadInfoThread.h"
 #include "ThreadExecXrandr.h"
 #include "GenerateDevicePool.h"
+#include "ut_Head.h"
+#include "stub.h"
 
-#include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class LoadInfoThread_UT : public UT_HEAD
+class UT_LoadInfoThread : public UT_HEAD
 {
 public:
     void SetUp()
@@ -41,7 +41,7 @@ public:
     LoadInfoThread *m_loadInfoThread;
 };
 
-class ThreadExecXrandr_UT : public UT_HEAD
+class UT_ThreadExecXrandr : public UT_HEAD
 {
 public:
     void SetUp()
@@ -55,18 +55,14 @@ public:
     ThreadExecXrandr *m_threadExecXrandr;
 };
 
-TEST_F(LoadInfoThread_UT, LoadInfoThread_UT_run)
-{
-    m_loadInfoThread->m_FinishedReadFilePool = true;
-}
+//TEST_F(UT_LoadInfoThread,UT_LoadInfoThread_start){
+//    m_loadInfoThread->run();
+//    EXPECT_FALSE(m_loadInfoThread->m_Running);
+//}
 
-TEST_F(LoadInfoThread_UT, LoadInfoThread_UT_slotFinishedReadFilePool)
-{
-    m_loadInfoThread->slotFinishedReadFilePool("/");
-    m_loadInfoThread->setFramework("/");
-}
+//TEST_F(UT_ThreadExecXrandr,UT_ThreadExecXrandr_start){
+//    m_threadExecXrandr->run();
+//    EXPECT_TRUE(m_threadExecXrandr->m_Gpu);
+//}
 
-TEST_F(ThreadExecXrandr_UT, ThreadExecXrandr_UT_getGpuInfoFromXrandr)
-{
-    m_threadExecXrandr->getGpuInfoFromXrandr();
-}
+

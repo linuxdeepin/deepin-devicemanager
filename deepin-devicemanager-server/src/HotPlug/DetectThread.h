@@ -35,7 +35,7 @@ class DetectThread : public QThread
 {
     Q_OBJECT
 public:
-    DetectThread(QObject *parent);
+    explicit DetectThread(QObject *parent);
 
     /**
      * @brief run

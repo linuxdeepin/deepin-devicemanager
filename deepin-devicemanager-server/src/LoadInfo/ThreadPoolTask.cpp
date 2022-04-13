@@ -107,6 +107,11 @@ void ThreadPoolTask::loadSmartCtlInfoToCache(const QString &info)
         QString smartCmd = QString("smartctl --all /dev/%1").arg(words[0].trimmed());
         QString sInfo;
         runCmd(smartCmd, sInfo);
+        // 在使用smartctl的时候会出现对 /dev/sda 出现判断错误的情况，此时可以对/dev/sda1进行处理
+        if(sInfo.contains("Read Device Identity failed:")){
+            smartCmd = smartCmd + "1";
+            runCmd(smartCmd, sInfo);
+        }
         DeviceInfoManager::getInstance()->addInfo(QString("smartctl_%1").arg(words[0].trimmed()), sInfo);
     }
 }

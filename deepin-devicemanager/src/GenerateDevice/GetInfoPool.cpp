@@ -40,11 +40,12 @@ GetInfoPool::GetInfoPool()
 void GetInfoPool::getAllInfo()
 {
     DeviceManager::instance()->clear();
+
     QList<QStringList>::iterator it = m_CmdList.begin();
     for (; it != m_CmdList.end(); ++it) {
         CmdTask *task = new CmdTask((*it)[0], (*it)[1], (*it)[2], this);
         start(task);
-        task->setAutoDelete(true);
+        task->deleteLater();
     }
 }
 
@@ -92,13 +93,8 @@ void GetInfoPool::initCmd()
     m_CmdList.append({ "xrandr_verbose",       "xrandr_verbose.txt",     tr("Loading Other Devices Info...")});
     m_CmdList.append({ "dmesg",                "dmesg.txt",              tr("Loading Power Info...")});
     m_CmdList.append({ "hciconfig",            "hciconfig.txt",          tr("Loading Printer Info...")});
+    m_CmdList.append({ "nvidia",               "nvidia.txt",             ""});
 
-    if (m_Arch == "KLU" || m_Arch == "PanGuV") {
-        m_CmdList.append({ "gpuinfo",          "gpuinfo.txt",            ""});
-        m_CmdList.append({ "bootdevice",       "bootdevice.txt",         ""});
-    }
-
-//    m_CmdList.append({ "cat_cpuinfo",          "/proc/cpuinfo",          tr("Loading Monitor Info...")});
     m_CmdList.append({ "cat_boardinfo",        "/proc/boardinfo",        tr("Loading Mouse Info...")});
     m_CmdList.append({ "cat_os_release",       "/etc/os-release",        tr("Loading Network Adapter Info...")});
     m_CmdList.append({ "cat_version",          "/proc/version",          ""});
@@ -106,9 +102,4 @@ void GetInfoPool::initCmd()
     m_CmdList.append({ "cat_audio",            "/proc/asound/card0/codec#0",     ""});
     m_CmdList.append({ "cat_gpuinfo",          "/proc/gpuinfo_0 ",     ""});
     m_CmdList.append({ "bt_device",            "bt_device.txt",          ""}); // 蓝牙设备配对信息
-
-    if (m_Arch == "PanGuV") {
-        m_CmdList.append({ "EDID_HDMI",        "EDID_HDMI.txt",     ""});
-        m_CmdList.append({ "EDID_VGA",         "EDID_VGA.txt",     ""});
-    }
 }

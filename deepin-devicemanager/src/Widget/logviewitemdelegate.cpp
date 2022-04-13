@@ -21,7 +21,7 @@
 
 // DTK
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DPalette>
 #include <DStyle>
 #include <DStyleHelper>
@@ -75,8 +75,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
         return;
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
+    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
     QBrush background;
     QPen forground;
     if (opt.features & QStyleOptionViewItem::Alternate) {
@@ -120,11 +119,13 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     QString text = fm.elidedText(opt.text, opt.textElideMode, textRect.width());
 
+    QPen p = painter->pen();
     if (text.startsWith("(" + tr("Disable") + ")") && !enableAndSelect) {
-        QPen p = painter->pen();
         p.setColor(QColor("#FF5736"));
-        painter->setPen(p);
+    }else if(text.startsWith("(" + tr("Unavailable") + ")")){
+        palette.color(cg, DPalette::PlaceholderText);
     }
+    painter->setPen(p);
     painter->drawText(textRect, Qt::TextSingleLine | static_cast<int>(opt.displayAlignment), text);
     painter->restore();
 }

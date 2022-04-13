@@ -3,6 +3,10 @@
 #include "MacroDefinition.h"
 #include "DeviceInfo.h"
 #include "PageTableWidget.h"
+#include "PageDriverControl.h"
+#include "DevicePrint.h"
+#include "DeviceInput.h"
+#include "DBusWakeupInterface.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -16,6 +20,7 @@
 // Qt库文件
 #include <QVBoxLayout>
 #include <QClipboard>
+#include <QProcess>
 
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
@@ -26,6 +31,9 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Export(new QAction(/*QIcon::fromTheme("document-new"), */tr("Export"), this))
     , mp_Copy(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Copy"), this))
     , mp_Enable(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Enable"), this))
+    , mp_updateDriver(new QAction(tr("Update drivers"), this))
+    , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
+    , mp_WakeupMachine(new QAction(tr("Allow it to wake the computer"), this))
     , mp_Menu(new DMenu(this))
     , mp_Device(nullptr)
     , m_SameDevice(false)
@@ -42,6 +50,9 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     connect(mp_Export, &QAction::triggered, this, &PageSingleInfo::exportInfo);
     connect(mp_Copy, &QAction::triggered, this, &PageSingleInfo::slotActionCopy);
     connect(mp_Enable, &QAction::triggered, this, &PageSingleInfo::slotActionEnable);
+    connect(mp_updateDriver, &QAction::triggered, this, &PageSingleInfo::slotActionUpdateDriver);
+    connect(mp_removeDriver, &QAction::triggered, this, &PageSingleInfo::slotActionRemoveDriver);
+    connect(mp_WakeupMachine, &QAction::triggered, this, &PageSingleInfo::slotWakeupMachine);
 }
 
 PageSingleInfo::~PageSingleInfo()
@@ -87,7 +98,7 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     // 设置设备状态
     if (mp_Content) {
-        mp_Content->setDeviceEnable(mp_Device->enable());
+        mp_Content->setDeviceEnable(mp_Device->enable(), mp_Device->available());
     }
 }
 
@@ -138,29 +149,72 @@ bool PageSingleInfo::isExpanded()
 
 void PageSingleInfo::slotShowMenu(const QPoint &)
 {
-    // 显示右键菜单
     mp_Menu->clear();
+    // 不管什么状态 导出、刷新、复制 都有
     mp_Refresh->setEnabled(true);
     mp_Export->setEnabled(true);
     mp_Copy->setEnabled(true);
-    mp_Menu->addAction(mp_Copy);
+    mp_Enable->setEnabled(true);
+    mp_updateDriver->setEnabled(true);
+    mp_removeDriver->setEnabled(true);
+    mp_WakeupMachine->setEnabled(true);
+    mp_WakeupMachine->setCheckable(true);
+    mp_WakeupMachine->setChecked(false);
 
-    if (!mp_Device)
-        return;
-
-    if (mp_Device->canEnable()) {
-        if (mp_Content->isCurDeviceEnable()) {
-            mp_Enable->setText(tr("Disable"));
-        } else {
-            mp_Enable->setText(tr("Enable"));
-            mp_Refresh->setEnabled(false);
-            mp_Export->setEnabled(false);
-            mp_Copy->setEnabled(false);
-        }
-        mp_Menu->addAction(mp_Enable);
+    // 不可用状态：卸载和启用禁用置灰
+    if(!mp_Device->available()){
+        mp_removeDriver->setEnabled(false);
+        mp_Enable->setEnabled(false);
     }
+    // 禁用状态：更新卸载置灰
+    if(!mp_Device->enable()){
+        mp_Enable->setEnabled(true);
+        mp_updateDriver->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+        mp_Enable->setText(tr("Enable"));
+    }else{
+        mp_Enable->setText(tr("Disable"));
+    }
+    // 驱动界面打开状态： 驱动的更新卸载和设备的启用禁用置灰
+    if(PageDriverControl::isRunning()){
+        mp_updateDriver->setEnabled(false);
+        mp_removeDriver->setEnabled(false);
+        mp_Enable->setEnabled(false);
+    }
+
+    //dde-printer未安装，updateDriver不可选
+    DevicePrint *printer = qobject_cast<DevicePrint*>(mp_Device);
+    if(printer && !PageInfo::packageHasInstalled("dde-printer")) {
+        mp_updateDriver->setEnabled(false);
+    }
+
+    // 添加按钮到菜单
+    mp_Menu->addAction(mp_Copy);
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
+    if (mp_Device->canEnable()){
+        mp_Menu->addAction(mp_Enable);
+    }
+    // 主板、内存、cpu等没有驱动，无需右键按钮
+    if(mp_Device->canUninstall()){
+        mp_Menu->addSeparator();
+        mp_Menu->addAction(mp_updateDriver);
+        mp_Menu->addAction(mp_removeDriver);
+    }
+
+    DeviceInput* input = dynamic_cast<DeviceInput*>(mp_Device);
+    if(input){
+        mp_Menu->addSeparator();
+        if(input->canWakeupMachine()){
+            mp_WakeupMachine->setChecked(input->isWakeupMachine());
+        }else{
+            mp_WakeupMachine->setEnabled(false);
+        }
+        // 如果是禁用状态，则唤醒置灰
+        if(!mp_Device->enable())
+            mp_WakeupMachine->setEnabled(false);
+        mp_Menu->addAction(mp_WakeupMachine);
+    }
     mp_Menu->exec(QCursor::pos());
 }
 
@@ -179,9 +233,13 @@ void PageSingleInfo::slotActionEnable()
 
         // 除设置成功的情况，其他情况需要提示设置失败
         if (res == EDS_Success) {
-            mp_Enable->setText(tr("Enable"));
-            mp_Content->setDeviceEnable(false);
-        } else {
+            // 返回成功之前再次更新数据
+            emit refreshInfo();
+        }  else if(res == EDS_NoSerial){
+            QString con = tr("Failed to disable it: unable to get the device SN");
+            // 禁用失败提示
+            DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
+        }else {
             QString con = tr("Failed to disable the device");
 
             // 启用失败提示
@@ -193,15 +251,63 @@ void PageSingleInfo::slotActionEnable()
 
         // 除设置成功的情况，其他情况需要提示设置失败
         if (res == EDS_Success) {
-            mp_Enable->setText(tr("Disable"));
-            mp_Content->setDeviceEnable(true);
-        } else {
+            emit refreshInfo();
+        } else if(res == EDS_NoSerial){
+            QString con = tr("Failed to disable it: unable to get the device SN");
+            // 禁用失败提示
+            DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
+        }else {
             QString con = tr("Failed to enable the device");
-
             // 禁用失败提示
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         }
     }
+}
+
+void PageSingleInfo::slotActionUpdateDriver()
+{
+    //打印设备更新驱动时，通过dde-printer来操作
+    if(mp_Device->hardwareClass() == "printer") {
+        if(!QProcess::startDetached("dde-printer"))
+            qInfo() << "dde-printer startDetached error";
+        return;
+    }
+    PageDriverControl* installDriver = new PageDriverControl(this, tr("Update Drivers"), true, mp_Device->name(), "");
+    installDriver->show();
+    connect(installDriver, &PageDriverControl::refreshInfo, this, [=]{
+        emit refreshInfo();
+        installDriver->disconnect();
+    });
+}
+
+void PageSingleInfo::slotActionRemoveDriver()
+{
+    QString printerVendor;
+    QString printerModel;
+    DevicePrint *printer = qobject_cast<DevicePrint*>(mp_Device);
+    if(printer) {
+        printerVendor = printer->getVendor();
+        printerModel = printer->getModel();
+    }
+    PageDriverControl *rmDriver = new PageDriverControl(this, tr("Uninstall Drivers"), false,
+                                                        mp_Device->name(), mp_Device->driver(), printerVendor, printerModel);
+    rmDriver->show();
+    connect(rmDriver, &PageDriverControl::refreshInfo, this, [=]{
+        emit refreshInfo();
+        rmDriver->disconnect();
+    });
+}
+
+void PageSingleInfo::slotWakeupMachine()
+{
+    // 只有键盘鼠标才有唤醒机器的功能
+    DeviceInput *input = qobject_cast<DeviceInput*>(mp_Device);
+    if(!input)
+        return;
+
+    if(input->wakeupID().isEmpty() || input->sysPath().isEmpty())
+        return;
+    DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),mp_WakeupMachine->isChecked());
 }
 
 void PageSingleInfo::initWidgets()

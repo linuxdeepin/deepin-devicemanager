@@ -18,16 +18,18 @@
 #include "LoadInfoThread.h"
 #include "GetInfoPool.h"
 #include "GenerateDevicePool.h"
+#include "DeviceManager.h"
+#include "CmdTool.h"
+#include "stub.h"
+#include "ut_Head.h"
 
-#include "../ut_Head.h"
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
 
 #include <gtest/gtest.h>
-#include "../stub.h"
 
-class GetInfoPool_UT : public UT_HEAD
+class UT_GetInfoPool : public UT_HEAD
 {
 public:
     void SetUp()
@@ -41,36 +43,46 @@ public:
     GetInfoPool *m_readFilePool;
 };
 
-class CmdTask_UT : public UT_HEAD
+class UT_CmdTask : public UT_HEAD
 {
 public:
     void SetUp()
     {
-        m_readFilePool = new GetInfoPool;
-        m_cmdTask = new CmdTask("", "", "", m_readFilePool);
+        readFilePool = new GetInfoPool;
+        m_cmdTask = new CmdTask("", "", "", readFilePool);
     }
     void TearDown()
     {
-        delete m_readFilePool;
+        delete readFilePool;
         delete m_cmdTask;
     }
     CmdTask *m_cmdTask;
-    GetInfoPool *m_readFilePool;
+    GetInfoPool *readFilePool;
 };
 
-TEST_F(CmdTask_UT, CmdTask_UT_run)
+TEST_F(UT_GetInfoPool, UT_GetInfoPool_initcmd)
 {
-    m_cmdTask->run();
+    m_readFilePool->m_CmdList.clear();
+    m_readFilePool->initCmd();
+    EXPECT_EQ(m_readFilePool->m_CmdList.size(), 29);
 }
 
-void ut_ThreadPool_start()
+bool ut_getDeviceInfo_getAllInfo(void *obj, QString &deviceInfo, const QString &file)
 {
-    return;
+    deviceInfo = "test info";
+    return true;
+}
+TEST_F(UT_GetInfoPool, UT_GetInfoPool_getAllInfo)
+{
+    Stub stub;
+    stub.set(ADDR(CmdTool, getDeviceInfo), ut_getDeviceInfo_getAllInfo);
+    m_readFilePool->getAllInfo();
+    EXPECT_TRUE(m_readFilePool->waitForDone(-1));
 }
 
-TEST_F(GetInfoPool_UT, ReadFilePool_UT_readAllFile)
+TEST_F(UT_GetInfoPool, UT_GetInfoPool_setFramework)
 {
-//    Stub stub;
-//    stub.set(ADDR(QThreadPool, start), ut_ThreadPool_start);
-//    m_readFilePool->getAllInfo();
+    m_readFilePool->setFramework("x86");
+    EXPECT_STREQ("x86", m_readFilePool->m_Arch.toStdString().c_str());
 }
+

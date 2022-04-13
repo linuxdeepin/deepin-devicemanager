@@ -98,18 +98,6 @@ private:
     void loadSmartCtlInfo(const QString &logicalName, const QString &debugfile);
 
     /**
-     * @brief loadXrandrInfo:加载xrandr获取的信息
-     * @param debugfile:调试文件名
-     */
-    void loadXrandrInfo(const QString &debugfile);
-
-    /**
-     * @brief loadXrandrVerboseInfo:加载xrandr --verbose获取的信息
-     * @param debugfile:调试文件名
-     */
-    void loadXrandrVerboseInfo(const QString &debugfile);
-
-    /**
      * @brief loadDmesgInfo:加载dmesg获取的信息
      * @param debugfile:调试文件名
      */
@@ -146,11 +134,36 @@ private:
     void getMulHwinfoInfo(const QString &info);
 
     /**
-     * @brief loadHwinfoUsbInfo
-     * @param item
+     * @brief addWidthToMap
      * @param mapInfo
      */
-    void loadHwinfoUsbInfo(const QString &item, const QMap<QString, QString> &mapInfo);
+    void addWidthToMap(QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief getRemoveInfo
+     * @param lstMap
+     */
+    void getRemoveAuthInfo(const QString &info, QList<QMap<QString, QString>> &lstMap);
+
+    /**
+     * @brief getAuthorizedInfo
+     * @param lstAuth
+     */
+    void getAuthorizedInfo(QStringList &lstAuth);
+
+    /**
+     * @brief updateMapInfo
+     * @param removeLstMap
+     * @param mapInfo
+     * @return
+     */
+    void updateMapInfo(QList<QMap<QString, QString>> &removeLstMap, QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief clearUsbDevice
+     * @param removeLstMap
+     */
+    void clearUsbDevice(QList<QMap<QString, QString>> &removeLstMap);
 
     /**
      * @brief loadDmidecodeInfo:加载dmidecode信息
@@ -208,20 +221,6 @@ private:
     void loadCatAudioInfo(const QString &key, const QString &debugfile);
 
     /**
-     * @brief loadEdidInfo
-     * @param key:EDID_HDMI、EDID_VGA
-     * @param debugfile:调试文件名
-     */
-    void loadEdidInfo(const QString &key, const QString &debugfile);
-
-    /**
-     * @brief loadGpuInfo:加载gpuinfo信息
-     * @param key:gpuinfo
-     * @param debugfile:调试文件名
-     */
-    void loadGpuInfo(const QString &key, const QString &debugfile);
-
-    /**
      * @brief loadCatConfigInfo:cat /boot/config* | grep '=y'信息
      * @param key:dr_config
      * @param debugfile:调试文件名
@@ -235,18 +234,18 @@ private:
     void loadBootDeviceManfid(const QString &key, const QString &debugfile);
 
     /**
-     * @brief loadBluetoothPairedDevices:加载蓝牙设备配对信息
-     * @param key:bt_device
-     * @param debugfile:调试文件名
-     */
-    void loadBluetoothPairedDevices(const QString &key, const QString &debugfile);
-
-    /**
      * @brief getSMBIOSVersion:获取SMBIOS版本号
      * @param info:dmidecode获取的片断信息
      * @param version:SMBIOS版本号
      */
     void getSMBIOSVersion(const QString &info, QString &version);
+
+    /**
+         * @brief loadNvidiaSettingInfo : 加载nvidia-settings  -q  VideoRam  信息
+         * @param key   nvidia
+         * @param debugfile  nvidia.txt
+         */
+    void loadNvidiaSettingInfo(const QString &key, const QString &debugfile);
 
 private:
 
@@ -281,12 +280,6 @@ private:
      * @param ch:分隔符
      */
     void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
-
-    /**
-     * @brief addWidthToMap
-     * @param mapInfo
-     */
-    void addWidthToMap(QMap<QString, QString> &mapInfo);
 
     /**
      * @brief getMapInfoFromDmidecode:将通过命令获取的信息字符串，转化为map形式

@@ -1,8 +1,8 @@
 // 项目自身文件
 #include "DeviceAudio.h"
+#include "DBusEnableInterface.h"
 
 // 其它头文件
-#include "EnableManager.h"
 #include <QDebug>
 DeviceAudio::DeviceAudio()
     : DeviceBaseInfo()
@@ -18,44 +18,50 @@ DeviceAudio::DeviceAudio()
     , m_Capabilities("")
     , m_Description("")
     , m_Chip("")
-    , m_Driver("snd_hda_intel")
+    , m_Driver("")
     , m_DriverModules("")
-    , m_UniqueKey("")
 {
     // 初始化可显示属性
     initFilterKey();
 
     // 设置可禁用
     m_CanEnable = true;
+    m_CanUninstall = true;
     m_IsCatDevice = false;
 }
 
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    if(mapInfo.find("path") != mapInfo.end()){
+        setAttribute(mapInfo, "name", m_Name);
+        setAttribute(mapInfo, "driver", m_Driver);
+        m_SysPath = mapInfo["path"];
+        m_HardwareClass = mapInfo["Hardware Class"];
+        m_Enable = false;
+        //设备禁用的情况，没必要再继续向下执行(可能会引起不必要的问题)，直接return
+        m_CanUninstall = !driverIsKernelIn(m_Driver);
+        return;
+    }
     //1. 获取设备的基本信息
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "", m_Version);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "IRQ", m_Irq);
     setAttribute(mapInfo, "Memory Range", m_Memory);
-    setAttribute(mapInfo, "", m_Width);
-    setAttribute(mapInfo, "", m_Clock);
-    setAttribute(mapInfo, "", m_Capabilities);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Driver Modules", m_DriverModules); // 驱动模块
+    setAttribute(mapInfo, "SysFS ID", m_SysPath);
+    setAttribute(mapInfo, "Module Alias", m_UniqueID);
+
+    // 此处不能用 && 因为 m_DriverModules 可能为空
+    if(driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)){
+        m_CanUninstall = false;
+    }
 
     //2. 获取设备的唯一标识
-    /*
-     * 在这里将设备的总线信息作为一个设备的唯一标识
-     * 我们会通过总线信息判断从两个不同的命令获取的设备信息是不是同一个设备的信息
-     * 如果从两个命令中获取的设备信息的总线信息一样，我们就认为是同一个设备
-     * 比如从hwinfo里面获取到的  SysFS BusID: 1-3:1.0   和
-     *    从lshw里面获取到的    bus info: usb@1:3       是同一个设备
-     */
-    m_UniqueKey = mapInfo["SysFS BusID"];
+    setHwinfoLshwKey(mapInfo);
 
     //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
@@ -64,11 +70,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     //1. 先判断传入的设备信息是否是该设备信息，根据总线信息来判断
-    QStringList words = mapInfo["bus info"].split("@");
-    if (words.size() != 2)
-        return false;
-
-    if (words[1] != m_UniqueKey)
+    if (!matchToLshw(mapInfo))
         return false;
 
     //2. 确定了是该设备信息，则获取设备的基本信息
@@ -89,7 +91,7 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
     // 获取设备的基本信息
     setAttribute(mapInfo, "bus info", m_BusInfo);
-    setAttribute(mapInfo, "", m_Irq);
+    setAttribute(mapInfo, "irq", m_Irq);
     setAttribute(mapInfo, "", m_Memory);
     setAttribute(mapInfo, "width", m_Width);
     setAttribute(mapInfo, "clock", m_Clock);
@@ -149,31 +151,35 @@ const QString &DeviceAudio::name()const
 
 const QString &DeviceAudio::driver() const
 {
+    if(! m_DriverModules.isEmpty())
+        return m_DriverModules;
     return m_Driver;
 }
-
+const QString& DeviceAudio::uniqueID() const
+{
+    return m_SysPath;
+}
 EnableDeviceStatus DeviceAudio::setEnable(bool e)
 {
+    if(!m_SysPath.contains("usb")){
+        m_UniqueID = m_Name;
+    }
+    m_HardwareClass = "sound";
     // 设置设备状态
-    EnableDeviceStatus res = EnableManager::instance()->enableDeviceByDriver(e, m_Driver);
-    if (e != enable())
-        res = EDS_Faild;
-
-    return res;
+    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+        return EDS_Faild;
+    }
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
+    if(res){
+        m_Enable = e;
+    }
+    // 设置设备状态
+    return res ? EDS_Success : EDS_Faild;
 }
 
 bool DeviceAudio::enable()
 {
     // 获取设备状态
-    bool eDriver = EnableManager::instance()->isDeviceEnableByDriver(m_Driver);
-    bool eDriverM = EnableManager::instance()->isDeviceEnableByDriver(m_DriverModules);
-    m_Enable = eDriver || eDriverM;
-
-
-    // 如果是从cat /input/devices里面获取的则返回true
-    if (m_IsCatDevice)
-        return true;
-
     return m_Enable;
 }
 
@@ -233,7 +239,7 @@ void DeviceAudio::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
     addOtherDeviceInfo(tr("Clock"), m_Clock);
     addOtherDeviceInfo(tr("Width"), m_Width);
-    addOtherDeviceInfo(tr("Memory"), m_Memory);
+    addOtherDeviceInfo(tr("Memory Address"), m_Memory);   // 1050需求 内存改为内存地址
     addOtherDeviceInfo(tr("IRQ"), m_Irq);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
@@ -250,12 +256,16 @@ void DeviceAudio::loadTableHeader()
 void DeviceAudio::loadTableData()
 {
     // 记载表格内容
-    QString name;
-    if (!enable())
-        name = "(" + tr("Disable") + ") " + m_Name;
-    else
-        name = m_Name;
+    QString tName = m_Name;
 
-    m_TableData.append(name);
+    if (!available()){
+        tName = "(" + tr("Unavailable") + ") " + m_Name;
+    }
+
+    if(!enable()){
+        tName = "(" + tr("Disable") + ") " + m_Name;
+    }
+
+    m_TableData.append(tName);
     m_TableData.append(m_Vendor);
 }

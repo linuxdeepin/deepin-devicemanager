@@ -73,9 +73,22 @@ public:
      */
     bool isBaseBoard() override {return true;}
 
+    /**
+     * @brief setFontChangeFlag: 设置字体变化标志
+     */
+    void setFontChangeFlag();
+
+    /**
+     * @brief setRowHeight: 设置行高
+     * @param row： 行
+     * @param height：行高
+     */
+    void setRowHeight(int row, int height);
 
 private:
     RichTextDelegate     *mp_ItemDelegate;
+
+    bool                 m_FontChangeFlag;     // 设置字体变化标志
 };
 
 #endif // PAGEBOARDINFO_H

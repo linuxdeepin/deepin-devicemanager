@@ -41,6 +41,7 @@
  */
 enum EnableDeviceStatus {
     EDS_Cancle,
+    EDS_NoSerial,
     EDS_Faild,
     EDS_Success
 };
@@ -120,6 +121,19 @@ public:
     virtual bool enable();
 
     /**
+     * @brief availble 获取是否可用
+     * @return 返回是否可用
+     */
+    virtual bool available();
+
+    /**
+     * @brief driverIsKernelIn 判断驱动是否属于内置驱动
+     * @param driver 驱动名称
+     * @return
+     */
+    virtual bool driverIsKernelIn(const QString& driver);
+
+    /**
      * @brief setCanEnale : set can enable or not
      * @param can
      */
@@ -130,6 +144,41 @@ public:
      * @return
      */
     bool canEnable();
+
+    /**
+     * @brief setEnableValue
+     */
+    void setEnableValue(bool e);
+
+    /**
+     * @brief canUninstall 获取该设备是否可以卸载驱动(主板等右键不需要安装、卸载action)
+     * @return
+     */
+    bool canUninstall();
+
+    /**
+     * @brief setHardwareClass
+     * @param hclass
+     */
+    void setHardwareClass(const QString& hclass);
+
+    /**
+     * @brief hardwareClass
+     * @return
+     */
+    const QString& hardwareClass() const;
+
+    /**
+     * @brief uniqueID
+     * @return
+     */
+    const QString& uniqueID() const;
+
+    /**
+     * @brief sysPath
+     * @return
+     */
+    const QString& sysPath() const;
 
     /**
      * @brief isValid：判断属性值是否有效
@@ -313,7 +362,25 @@ protected:
      */
     void mapInfoToList();
 
+    /**
+     * @brief setHwinfoLshwKey
+     * @param mapInfo
+     */
+    void setHwinfoLshwKey(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief matchToLshw
+     * @param mapInfo
+     * @return
+     */
+    bool matchToLshw(const QMap<QString, QString> &mapInfo);
+
 protected:
+    QString                        m_UniqueID;      //<! 设备的唯一值
+    QString                        m_SerialID;      //<! 序列号id
+    QString                        m_SysPath;       //<! 用启用的sys path
+    QString                        m_HardwareClass; //<! 设备类型
+    QString                        m_HwinfoToLshw;  //<! 匹配hwinfo和lshw的key
     QList<QPair<QString, QString>> m_LstBaseInfo;   //<! 基本信息
     QList<QPair<QString, QString>> m_LstOtherInfo;  //<! 其它信息
     QStringList                    m_TableHeader;   //<! 用于存放表格的表头
@@ -321,6 +388,8 @@ protected:
     QSet<QString>                  m_FilterKey;     //<! 用于避免添加重复信息
     bool                           m_Enable;        //<! 设备是否是启用状态
     bool                           m_CanEnable;     //<! 设备是否可以启用禁用
+    bool                           m_CanUninstall;  //<! 是否可以卸载驱动
+    bool                           m_Available;     //<! 是否可用
     int                            m_Index;         //<! 同名设备的索引
 
 private:

@@ -53,7 +53,6 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Capacity", m_Size);
-    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
 
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
     m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
@@ -62,6 +61,15 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if ((m_Size.startsWith("0") || m_Size == "") && m_SerialNumber == "")
         return false;
 
+    // get serial num
+    m_SerialNumber = "";
+    QString strLink = mapInfo["SysFS Device Link"];
+    m_SerialNumber = getSerialID(strLink);
+    if (m_SerialNumber.isEmpty()) {
+        setAttribute(mapInfo, "Serial ID", m_SerialNumber);
+    }
+
+
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
     if (m_KeyToLshw.contains("nvme", Qt::CaseInsensitive))
@@ -69,6 +77,49 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 
     getOtherMapInfo(mapInfo);
     return true;
+}
+
+QString DeviceStorage::getSerialID(QString &strDeviceLink)
+{
+    //取SerialID优先级：1.取cid 2.取unique_number 3.取hwinfo中的SerialID
+    QString strSerialNumber = "";
+    if (!strDeviceLink.isEmpty() && strDeviceLink.contains("platform/")) {
+        // /devices/platform/f8300000.ufs/host0/target0:0:0/0:0:0:3
+        // /proc/bootdevice/name:f8300000.ufs
+        QRegExp reg(".*platform/([^/]+)/.*");
+        QString strName = "";
+        QString strBootdeviceName = "";
+        if (reg.exactMatch(strDeviceLink)) {
+            strName = reg.cap(1);
+        }
+        if (!strName.isEmpty()) { //取到设备名称再去读文件，因为读文件开销大。
+            QString Path = "/proc/bootdevice/name";
+            QFile file(Path);
+            if (file.open(QIODevice::ReadOnly)) {
+                strBootdeviceName = file.readAll();
+                file.close();
+            }
+            if (strName == strBootdeviceName) {
+                Path = "/proc/bootdevice/cid";
+                QFile filecid(Path);
+                if (filecid.open(QIODevice::ReadOnly)) {
+                    strSerialNumber = filecid.readAll().trimmed();
+                    filecid.close();
+                }
+            }
+        }
+    }
+
+    if (strSerialNumber.isEmpty()) {
+        QString Path = "/sys" + strDeviceLink + "/unique_number";
+        QFile file(Path);
+        if (file.open(QIODevice::ReadOnly)) {
+            QString value = file.readAll();
+            strSerialNumber = value;
+            file.close();
+        }
+    }
+    return strSerialNumber;
 }
 
 bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
@@ -329,8 +380,6 @@ void DeviceStorage::loadBaseDeviceInfo()
 void DeviceStorage::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Power Cycle Count"), m_PowerCycleCount);
-    addOtherDeviceInfo(tr("Power On Hours"), m_PowerOnHours);
     addOtherDeviceInfo(tr("Firmware Version"), m_FirmwareVersion);
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Description"), m_Description);
@@ -358,7 +407,11 @@ void DeviceStorage::loadTableHeader()
 void DeviceStorage::loadTableData()
 {
     // 加载表格数据
-    m_TableData.append(m_Model);
+    QString model = m_Model;
+    if (!available()) {
+        model = "(" + tr("Unavailable") + ") " + m_Model;
+    }
+    m_TableData.append(model);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_MediaType);
     m_TableData.append(m_Size);
@@ -395,16 +448,6 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     if (m_RotationRate == QString("Solid State Device"))
         m_MediaType = QObject::tr("SSD");
 
-    // 通电时间
-    m_PowerOnHours = mapInfo["Power_On_Hours"];
-    if (m_PowerOnHours == "")
-        m_PowerOnHours = mapInfo["Power On Hours"];
-
-    // 通电次数
-    m_PowerCycleCount = mapInfo["Power_Cycle_Count"];
-    if (m_PowerCycleCount == "")
-        m_PowerCycleCount = mapInfo["Power Cycles"];
-
     // 安装大小
     QString capacity = mapInfo["User Capacity"];
     if (capacity == "")
@@ -419,13 +462,13 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     // 修正数值
     m_Size.replace(QRegExp(".0[1-9]"), ".00");
 
-    // 型号
+    // 通过不断适配，当厂商有在固件中提供时，硬盘型号从smartctl中获取更加合理
+    // 因为hwinfo获取的是主控的型号，而硬盘厂商由于还不能自己生产主控，只能采购别人的主控
     //SATA
-    if (false == mapInfo["Device Model"].isEmpty())
+    if (mapInfo.find("Device Model") != mapInfo.end())
         m_Model = mapInfo["Device Model"];
-
     //NVME
-    if (false == mapInfo["Model Number"].isEmpty())
+    if (mapInfo.find("Model Number") != mapInfo.end())
         m_Model = mapInfo["Model Number"];
 
     setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
