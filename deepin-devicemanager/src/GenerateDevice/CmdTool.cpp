@@ -65,7 +65,8 @@ void CmdTool::addUsbMapInfo(const QString &key, const QMap<QString, QString> &ma
         return;
 
     // 打印机几信息不从hwinfo --usb里面获取，需要过滤
-    if (containsInfoInTheMap("Printer", mapInfo) || containsInfoInTheMap("LaserJet", mapInfo))
+    // bug124895 打印机在hwinfo --usb中显示了两条记录，其中一个已通过printer过滤，另一个无法判断类别，需增加M7208W型号判断该设备为打印机
+    if (containsInfoInTheMap("Printer", mapInfo) || containsInfoInTheMap("LaserJet", mapInfo) || containsInfoInTheMap("M7208W", mapInfo))
         return;
 
     // 提前过滤掉键盘鼠标
@@ -405,7 +406,7 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
 {
     QString vendor = mapInfo["Vendor"];
-    if(!vendor.contains("NVIDIA Corporation",Qt::CaseInsensitive)){
+    if (!vendor.contains("NVIDIA Corporation", Qt::CaseInsensitive)) {
         return;
     }
 
@@ -418,8 +419,8 @@ void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
     QStringList lines = sInfo.split("\n");
     foreach (const QString &line, lines) {
         QRegExp reg("\\s\\sAttribute\\s'GPUMemoryInterface' \\(.*\\):\\s([0-9]{2}).*");
-        if(reg.exactMatch(line)){
-            mapInfo.insert("Width",reg.cap(1) + " bits");
+        if (reg.exactMatch(line)) {
+            mapInfo.insert("Width", reg.cap(1) + " bits");
         }
     }
 }
