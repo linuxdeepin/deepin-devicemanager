@@ -87,9 +87,6 @@ signals:
      */
     void updateUI();
 
-protected:
-    void resizeEvent(QResizeEvent* e) override;
-
 private slots:
     /**
      * @brief slotItemClicked:点击表格Item
@@ -131,13 +128,6 @@ private:
      * @brief initWidgets : 初始化控件布局
      */
     void initWidgets();
-
-    /**
-     * @brief getTableListInfo 获取需要在表格中显示的数据
-     * @param deviceList 显示在表格中的数据
-     * @param menuList 显示的右键菜单数据
-     */
-    void getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<QStringList>& deviceList, QList<QStringList>& menuList);
 
 private:
     DLabel                    *mp_Label;

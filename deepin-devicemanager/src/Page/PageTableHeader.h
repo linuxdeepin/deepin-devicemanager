@@ -45,7 +45,7 @@ public:
      * @brief updateTable:更新表格
      * @param lst : 表格内容
      */
-    void updateTable(const QList<QStringList> &lst, const QList<QStringList>& lstMenuControl, bool resizeTable = false, int step = 0);
+    void updateTable(const QList<QStringList> &lst, const QList<QStringList>& lstMenuControl);
 
     /**
      * @brief setColumnAverage:设置每列等宽
