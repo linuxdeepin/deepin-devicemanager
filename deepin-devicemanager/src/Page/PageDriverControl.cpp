@@ -29,6 +29,7 @@
 
 #include <DBlurEffectWidget>
 #include <DWidget>
+#include <DApplicationHelper>
 #include <DPalette>
 #include <DTitlebar>
 #include <DIconButton>

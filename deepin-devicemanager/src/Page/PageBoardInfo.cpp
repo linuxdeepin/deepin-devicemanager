@@ -9,6 +9,7 @@
 #include "MacroDefinition.h"
 
 // Dtk头文件
+#include <DApplicationHelper>
 #include <DPalette>
 #include <DFontSizeManager>
 
@@ -104,6 +105,44 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
 
         QTableWidgetItem *itemSecond = new QTableWidgetItem(pairs[i - lst.size()].second);
         mp_Content->setItem(i, 1, itemSecond);
+
+//        // 行高已在RichTextDelegate中设置，该段代码先保留
+//        // 计算行高
+//        QFont font = DFontSizeManager::instance()->t8();
+//        QFontMetrics fm(font);
+//        int height = 0;
+//        QStringList strList = pairs[i - lst.size()].second.split("\n");
+//        int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height()/* + 2*/;
+//        //qInfo() << strList;
+//        // 根据行数增加行高
+//        foreach (const QString &str, strList) {
+//            QStringList lst = str.split(":");
+//            if (lst.size() == 2) {
+//                // 属性名称
+//                int width = fm.boundingRect(lst[0]).width() + fm.boundingRect(":").width();//未计算“:”，导致width为110时，实际上换行了，而高度又未算入
+//                int num = width / 110;
+//                int num0 = width % 110;
+//                if (num0 == 0)
+//                    num = num - 1;
+
+//                int line = 0;
+//                // 属性值
+//                if (!lst[1].contains("  /  \t\t")) {
+//                    width = fm.boundingRect(lst[1]).width();
+//                    line = width / 480;
+//                    int line0 = width % 480;
+//                    if (line0 == 0)
+//                        line = line - 1;
+//                }
+
+//                if (num > 0 || line > 0)
+//                    height += std::max(num, line) * fontHeight;
+//            }
+//            QStringList attris = str.split("  /  \t\t");
+//            height += attris.size() * fontHeight;
+//        }
+//        height += 20;
+//        mp_Content->setRowHeight(i, height);
     }
 }
 

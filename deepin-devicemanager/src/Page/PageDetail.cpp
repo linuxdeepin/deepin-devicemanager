@@ -5,11 +5,11 @@
 #include "MacroDefinition.h"
 
 // Dtk头文件
+#include <DApplicationHelper>
 #include <DApplication>
 #include <DStyle>
 #include <DMenu>
 #include <DFontSizeManager>
-#include <DPaletteHelper>
 
 // Qt库文件
 #include <QVBoxLayout>
@@ -52,7 +52,8 @@ void DetailButton::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DPalette palette = DPaletteHelper::instance()->palette(this);
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
 
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
@@ -88,7 +89,8 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DPalette palette = DPaletteHelper::instance()->palette(this);
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
 
     // 分割线两端到边框的边距
     int spacing = 5;
@@ -134,7 +136,8 @@ void ScrollAreaWidget::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DPalette palette = DPaletteHelper::instance()->palette(this);
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
 
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
@@ -254,7 +257,8 @@ void PageDetail::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DPalette palette = DPaletteHelper::instance()->palette(this);
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
 
     // 获取系统默认的圆角半径
     int radius = 8;

@@ -11,7 +11,7 @@
 // Dtk头文件
 #include <DFontSizeManager>
 #include <DApplication>
-#include <DPaletteHelper>
+#include <DApplicationHelper>
 
 CmdButtonWidget::CmdButtonWidget(DetailTreeView *parent)
     : DWidget(parent)
@@ -35,7 +35,8 @@ void CmdButtonWidget::paintEvent(QPaintEvent *event)
     painter.setClipping(true);
 
     // 获取调色板
-    DPalette palette = DPaletteHelper::instance()->palette(this);
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
 
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;

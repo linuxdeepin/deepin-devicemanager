@@ -4,7 +4,7 @@
 #include "MacroDefinition.h"
 
 // Dtk头文件
-#include <DPaletteHelper>
+#include <DApplicationHelper>
 
 // Qt库文件
 #include <QHBoxLayout>
@@ -75,10 +75,11 @@ QString PageListView::currentType()
 void PageListView::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色
-    DPalette pa = DPaletteHelper::instance()->palette(this);
+    DPalette pa;
+    pa = DApplicationHelper::instance()->palette(this);
     pa.setBrush(DPalette::ItemBackground, pa.brush(DPalette::Base));
     pa.setBrush(DPalette::Background, pa.brush(DPalette::Base));
-    DPaletteHelper::instance()->setPalette(this, pa);
+    DApplicationHelper::instance()->setPalette(this, pa);
     return DWidget::paintEvent(event);
 }
 

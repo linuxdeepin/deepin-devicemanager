@@ -2,8 +2,7 @@
 #include "DeviceListView.h"
 
 // Dtk头文件
-#include <DGuiApplicationHelper>
-#include <DPaletteHelper>
+#include <DApplicationHelper>
 #include <DApplication>
 
 // Qt库文件
@@ -54,7 +53,8 @@ void DeviceListviewDelegate::paintSeparator(QPainter *painter, const QStyleOptio
         cg = DPalette::Active;
     }
 
-    auto palette = DGuiApplicationHelper::instance()->applicationPalette();
+    auto *dAppHelper = DApplicationHelper::instance();
+    auto palette = dAppHelper->applicationPalette();
 
 
     int yPoint = option.rect.top() + option.rect.height() / 2;
@@ -156,9 +156,10 @@ void DeviceListView::clearItem()
 void DeviceListView::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色
-    DPalette pa = DPaletteHelper::instance()->palette(this);
+    DPalette pa;
+    pa = DApplicationHelper::instance()->palette(this);
     pa.setBrush(DPalette::ItemBackground, pa.brush(DPalette::Base));
-    DPaletteHelper::instance()->setPalette(this, pa);
+    DApplicationHelper::instance()->setPalette(this, pa);
 
     DListView::paintEvent(event);
 }

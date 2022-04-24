@@ -5,7 +5,7 @@
 // Dtk头文件
 #include <DApplication>
 #include <DStyle>
-#include <DGuiApplicationHelper>
+#include <DApplicationHelper>
 
 // Qt库文件
 #include <QPainter>
@@ -56,7 +56,8 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     if (!style)
         return;
 
-    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
 
     if (opt.features & QStyleOptionViewItem::Alternate) {

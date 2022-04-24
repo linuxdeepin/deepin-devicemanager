@@ -2,8 +2,7 @@
 #include "UrlChooserEdit.h"
 #include "MacroDefinition.h"
 
-#include <DPaletteHelper>
-#include <DGuiApplicationHelper>
+#include <DApplicationHelper>
 
 GetDriverPathWidget::GetDriverPathWidget(QWidget *parent)
     : DWidget(parent)
@@ -68,14 +67,14 @@ void GetDriverPathWidget::init()
     mp_tipLabel->setElideMode(Qt::ElideRight);
     mp_tipLabel->setMinimumHeight(20);
 
-    DPalette pa = DPaletteHelper::instance()->palette(mp_titleLabel);
+    DPalette pa = DApplicationHelper::instance()->palette(mp_titleLabel);
     QColor color = DGuiApplicationHelper::adjustColor(pa.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -30);
     pa.setColor(QPalette::WindowText, color);
     mp_titleLabel->setPalette(pa);
 
-    pa = DPaletteHelper::instance()->palette(mp_tipLabel);
+    pa = DApplicationHelper::instance()->palette(mp_tipLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
-    DPaletteHelper::instance()->setPalette(mp_tipLabel, pa);
+    DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
 
     this->setLayout(mainLayout);
 

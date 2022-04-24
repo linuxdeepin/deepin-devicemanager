@@ -9,7 +9,7 @@
 #include <DFontSizeManager>
 #include <DApplication>
 #include <DStyle>
-#include <DGuiApplicationHelper>
+#include <DApplicationHelper>
 #include <DHeaderView>
 #include <DMenu>
 
@@ -141,7 +141,8 @@ void TableWidget::paintEvent(QPaintEvent *e)
     painter.setClipping(true);
 
     // 获取调色板
-    DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
 
     int radius = 8;
 

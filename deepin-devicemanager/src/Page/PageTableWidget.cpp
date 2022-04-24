@@ -5,6 +5,7 @@
 #include "RichTextDelegate.h"
 
 // Dtk头文件
+#include <DApplicationHelper>
 #include <DPalette>
 #include <DApplication>
 

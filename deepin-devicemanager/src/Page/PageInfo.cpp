@@ -3,7 +3,7 @@
 #include "MacroDefinition.h"
 
 // Dtk头文件
-#include <DPaletteHelper>
+#include <DApplicationHelper>
 #include <DApplication>
 
 // Qt库文件
@@ -70,7 +70,8 @@ void PageInfo::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DPalette palette = DPaletteHelper::instance()->palette(this);
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
 
     // 获取系统默认的圆角半径
     int radius = 8;
