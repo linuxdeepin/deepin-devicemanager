@@ -203,6 +203,18 @@ public:
      */
     bool isWakeup(const QString& unique_id);
 
+    /**
+     * @brief insertNetworkWakeup
+     */
+    void insertNetworkWakeup(const QString& logical_name, bool wake);
+
+    /**
+     * @brief isNetworkWakeup 判断当前是否可以唤醒
+     * @param logical_name 逻辑名称
+     * @return
+     */
+    bool isNetworkWakeup(const QString& logical_name);
+
 protected:
     explicit EnableSqlManager(QObject *parent = nullptr);
 

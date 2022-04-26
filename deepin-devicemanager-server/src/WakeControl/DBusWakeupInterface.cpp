@@ -24,6 +24,21 @@ bool DBusWakeupInterface::setWakeupMachine(const QString& unique_id, const QStri
     return true;
 }
 
+bool DBusWakeupInterface::setNetworkWake(const QString& logicalName, bool wakeup)
+{
+    bool res = WakeupUtils::setWakeOnLan(logicalName,wakeup);
+    if(res){
+        // 将数据保存到数据库
+        EnableSqlManager::getInstance()->insertNetworkWakeup(logicalName,wakeup);
+    }
+    return res;
+}
+
+int DBusWakeupInterface::isNetworkWakeup(const QString& logicalName)
+{
+    return WakeupUtils::wakeOnLanIsOpen(logicalName);
+}
+
 void DBusWakeupInterface::saveWakeupInfo(const QString& unique_id, const QString& path, bool wakeup)
 {
     if(EnableSqlManager::getInstance()->isWakeupUniqueIdExisted(unique_id)){

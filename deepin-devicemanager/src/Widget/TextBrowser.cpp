@@ -1,5 +1,9 @@
 // 项目自身文件
 #include "TextBrowser.h"
+#include "DeviceNetwork.h"
+#include "DeviceInfo.h"
+#include "DeviceInput.h"
+#include "DBusWakeupInterface.h"
 
 // Dtk头文件
 #include <DApplicationHelper>
@@ -14,11 +18,6 @@
 #include <QScrollBar>
 #include <QAction>
 #include <QDebug>
-
-// 其它头文件
-#include "DeviceInfo.h"
-#include "DeviceInput.h"
-#include "DBusWakeupInterface.h"
 
 TextBrowser::TextBrowser(QWidget *parent)
     : DTextBrowser(parent)
@@ -105,12 +104,17 @@ EnableDeviceStatus TextBrowser::setDeviceEnabled(bool enable)
 
 void TextBrowser::setWakeupMachine(bool wakeup)
 {
-    DeviceInput* input = dynamic_cast<DeviceInput*>(mp_Info);
-    if(!input)
-        return;
-    if(input->wakeupID().isEmpty() || input->sysPath().isEmpty())
-        return;
-    DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),wakeup);
+    // 键盘鼠标唤醒机器
+    DeviceInput *input = qobject_cast<DeviceInput*>(mp_Info);
+    if(input && !input->wakeupID().isEmpty() && !input->sysPath().isEmpty()){
+        DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),wakeup);
+    }
+
+    // 网卡的远程唤醒
+    DeviceNetwork* network = qobject_cast<DeviceNetwork*>(mp_Info);
+    if(network && !network->logicalName().isEmpty()){
+        DBusWakeupInterface::getInstance()->setNetworkWakeup(network->logicalName(),wakeup);
+    }
 }
 
 void TextBrowser::updateShowOtherInfo()

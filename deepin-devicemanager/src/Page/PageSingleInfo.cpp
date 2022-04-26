@@ -6,6 +6,7 @@
 #include "PageDriverControl.h"
 #include "DevicePrint.h"
 #include "DeviceInput.h"
+#include "DeviceNetwork.h"
 #include "DBusWakeupInterface.h"
 
 // Dtk头文件
@@ -22,6 +23,8 @@
 #include <QClipboard>
 #include <QProcess>
 
+#define WAKEUP_OPEN 3
+#define WAKEUP_CLOSE 4
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
     : PageInfo(parent)
@@ -215,6 +218,25 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
             mp_WakeupMachine->setEnabled(false);
         mp_Menu->addAction(mp_WakeupMachine);
     }
+
+    // 网卡远程唤醒
+    DeviceNetwork* network = dynamic_cast<DeviceNetwork*>(mp_Device);
+    if(network){
+        int res = DBusWakeupInterface::getInstance()->isNetworkWakeup(network->logicalName());
+        if(WAKEUP_OPEN == res){
+            mp_WakeupMachine->setChecked(true);
+        }else if(WAKEUP_CLOSE == res){
+            mp_WakeupMachine->setChecked(false);
+        }else{
+            mp_WakeupMachine->setEnabled(false);
+        }
+
+        // 如果是禁用状态，则唤醒置灰
+        if(!mp_Device->enable())
+            mp_WakeupMachine->setEnabled(false);
+        mp_Menu->addAction(mp_WakeupMachine);
+    }
+
     mp_Menu->exec(QCursor::pos());
 }
 
@@ -300,14 +322,17 @@ void PageSingleInfo::slotActionRemoveDriver()
 
 void PageSingleInfo::slotWakeupMachine()
 {
-    // 只有键盘鼠标才有唤醒机器的功能
+    // 键盘鼠标唤醒机器
     DeviceInput *input = qobject_cast<DeviceInput*>(mp_Device);
-    if(!input)
-        return;
+    if(input && !input->wakeupID().isEmpty() && !input->sysPath().isEmpty()){
+        DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),mp_WakeupMachine->isChecked());
+    }
 
-    if(input->wakeupID().isEmpty() || input->sysPath().isEmpty())
-        return;
-    DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),mp_WakeupMachine->isChecked());
+    // 网卡的远程唤醒
+    DeviceNetwork* network = qobject_cast<DeviceNetwork*>(mp_Device);
+    if(network && !network->logicalName().isEmpty()){
+        DBusWakeupInterface::getInstance()->setNetworkWakeup(network->logicalName(),mp_WakeupMachine->isChecked());
+    }
 }
 
 void PageSingleInfo::initWidgets()

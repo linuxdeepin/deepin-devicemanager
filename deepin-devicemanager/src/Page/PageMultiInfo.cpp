@@ -7,6 +7,7 @@
 #include "PageDriverControl.h"
 #include "DevicePrint.h"
 #include "DeviceInput.h"
+#include "DeviceNetwork.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -75,6 +76,11 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
         if(input){
             menuControl.append(input->canWakeupMachine()?"true":"false");
             menuControl.append(input->wakeupPath());
+        }
+
+        DeviceNetwork* network = dynamic_cast<DeviceNetwork*>(info);
+        if(network){
+            menuControl.append(network->logicalName());
         }
         menuControlList.append(menuControl);
     }

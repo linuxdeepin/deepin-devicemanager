@@ -38,6 +38,21 @@ public:
      */
     bool setWakeupMachine(const QString& unique_id, const QString& path, bool wakeup);
 
+    /**
+     * @brief isNetworkWakeup 获取网卡是否支持远程唤醒
+     * @param logical_name 网卡的逻辑名称
+     * @return
+     */
+    int isNetworkWakeup(const QString& logical_name);
+
+    /**
+     * @brief setNetworkWakeup 设置网卡的唤醒功能
+     * @param logical_name 网卡的逻辑名称
+     * @param wake 是否唤醒
+     * @return
+     */
+    bool setNetworkWakeup(const QString& logical_name, bool wake);
+
 protected:
     DBusWakeupInterface();
 

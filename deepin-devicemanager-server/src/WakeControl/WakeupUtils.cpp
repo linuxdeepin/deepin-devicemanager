@@ -70,6 +70,58 @@ bool WakeupUtils::writeWakeupFile(const QString& path, bool wakeup)
     return true;
 }
 
+WakeupUtils::EthStatus WakeupUtils::wakeOnLanIsOpen(const QString& logicalName)
+{
+    int fd = socket(AF_INET, SOCK_DGRAM, 0);
+    if(fd < 0){
+        return ES_SOCKET_FAILED;
+    }
+
+    struct ifreq ifr;
+    struct ethtool_wolinfo wolinfo;
+    memset(&ifr,0,sizeof (ifr));
+    strcpy(ifr.ifr_name,logicalName.toStdString().c_str());
+    wolinfo.cmd = ETHTOOL_GWOL;
+    ifr.ifr_data = reinterpret_cast<char*>(&wolinfo);
+    if(0 != ioctl(fd, SIOCETHTOOL, &ifr)){
+        return ES_IOCTL_ERROR;
+    }
+
+    if(47 != wolinfo.supported){
+        return ES_NOT_SUPPORT_WAKE_ON;
+    }
+
+    if(0 == wolinfo.wolopts){
+        return ES_WAKE_ON_CLOSE;
+    }else if(32 == wolinfo.wolopts){
+        return ES_WAKE_ON_OPEN;
+    }else{
+        return ES_WAKE_ON_UNKNOW;
+    }
+}
+
+bool WakeupUtils::setWakeOnLan(const QString& logicalName, bool open)
+{
+    int fd = socket(AF_INET, SOCK_DGRAM, 0);
+    if(fd < 0)
+        return false;
+
+    struct ifreq ifr;
+    struct ethtool_wolinfo wolinfo;
+    memset(&ifr,0,sizeof (ifr));
+    strcpy(ifr.ifr_name,logicalName.toStdString().c_str());
+    wolinfo.cmd = ETHTOOL_SWOL;
+    if(open)
+        wolinfo.wolopts = 0 | WAKE_MAGIC;
+    else
+        wolinfo.wolopts = 0;
+    ifr.ifr_data = reinterpret_cast<char*>(&wolinfo);
+
+    if(0 == ioctl(fd, SIOCETHTOOL, &ifr))
+        return true;
+    return false;
+}
+
 bool WakeupUtils::getMapInfo(const QString& item,QMap<QString,QString>& mapInfo)
 {
     QStringList lines = item.split("\n");

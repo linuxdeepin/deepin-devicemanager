@@ -4,6 +4,7 @@
 #include "MacroDefinition.h"
 #include "logviewitemdelegate.h"
 #include "logtreeview.h"
+#include "DBusWakeupInterface.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -18,6 +19,9 @@
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QPainterPath>
+
+#define WAKEUP_OPEN 3
+#define WAKEUP_CLOSE 4
 
 TableWidget::TableWidget(QWidget *parent)
     : DWidget(parent)
@@ -248,21 +252,36 @@ void TableWidget::slotShowMenu(const QPoint &point)
     QVariant canWakeup = item->data(Qt::UserRole+1);
     if(canWakeup.isValid()){
         mp_Menu->addSeparator();
-        bool canWakeupBool = canWakeup.toString()=="true" ? true : false;
-        if(canWakeupBool){
-            QString wakeupPath = item->data(Qt::UserRole+2).toString();
-            QFile file(wakeupPath);
-            bool isWakeup = false;
-            if(file.open(QIODevice::ReadOnly)){
-                QString info = file.readAll();
-                if(info.contains("disabled"))
-                    isWakeup = false;
-                else
-                    isWakeup =  true;
+
+        QString str = canWakeup.toString();
+        // 先判断是网卡唤醒还是键鼠唤醒
+        if("true" != str && "false" != str){
+            // 网络唤醒菜单处理处理
+            int res = DBusWakeupInterface::getInstance()->isNetworkWakeup(str);
+            if(WAKEUP_OPEN == res){
+                mp_WakeupMachine->setChecked(true);
+            }else if(WAKEUP_CLOSE == res){
+                mp_WakeupMachine->setChecked(false);
+            }else{
+                mp_WakeupMachine->setEnabled(false);
             }
-            mp_WakeupMachine->setChecked(isWakeup);
-        }else{
-            mp_WakeupMachine->setEnabled(false);
+        }else{ // 简述右键菜单处理
+            bool canWakeupBool = str == "true" ? true : false;
+            if(canWakeupBool){
+                QString wakeupPath = item->data(Qt::UserRole+2).toString();
+                QFile file(wakeupPath);
+                bool isWakeup = false;
+                if(file.open(QIODevice::ReadOnly)){
+                    QString info = file.readAll();
+                    if(info.contains("disabled"))
+                        isWakeup = false;
+                    else
+                        isWakeup =  true;
+                }
+                mp_WakeupMachine->setChecked(isWakeup);
+            }else{
+                mp_WakeupMachine->setEnabled(false);
+            }
         }
 
         // 如果是禁用状态，则唤醒置灰

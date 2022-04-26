@@ -11,6 +11,7 @@
 #define DB_TABLE_REMOVE "remove"
 #define DB_TABLE_PRINTER "printer"
 #define DB_TABLE_WAKEUP "wake"
+#define DB_TABLE_NETWORK_WAKEUP "net_wake"
 
 std::atomic<EnableSqlManager *> EnableSqlManager::s_Instance;
 std::mutex EnableSqlManager::m_mutex;
@@ -254,6 +255,31 @@ bool EnableSqlManager::isWakeup(const QString& unique_id)
     return false;
 }
 
+void EnableSqlManager::insertNetworkWakeup(const QString& logical_name, bool wake)
+{
+    // 先判断是否已经存在
+    QString sqlAdd;
+    QString sqlExist = QString("SELECT wakeup FROM %1 WHERE logical_name='%2';").arg(DB_TABLE_NETWORK_WAKEUP).arg(logical_name);
+    if (m_sqlQuery.exec(sqlExist) && m_sqlQuery.next()){
+        sqlAdd = QString("UPDATE %1 SET wakeup='%2' WHERE logical_name='%3';").arg(DB_TABLE_NETWORK_WAKEUP).arg(wake).arg(logical_name);
+    }else{
+        sqlAdd = QString("INSERT INTO %1 (logical_name, wakeup) VALUES ('%2', '%3');").arg(DB_TABLE_NETWORK_WAKEUP).arg(logical_name).arg(wake);
+    }
+
+
+    if (!m_sqlQuery.exec(sqlAdd)) {
+        qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
+    }
+}
+
+bool EnableSqlManager::isNetworkWakeup(const QString& logical_name)
+{
+    QString sql = QString("SELECT wakeup FROM %1 WHERE logical_name='%2';").arg(DB_TABLE_NETWORK_WAKEUP).arg(logical_name);
+    if (m_sqlQuery.exec(sql) && m_sqlQuery.next())
+        return m_sqlQuery.value(0).toBool();
+    return false;
+}
+
 EnableSqlManager::EnableSqlManager(QObject *parent)
     :QObject (parent)
 {
@@ -303,6 +329,13 @@ void EnableSqlManager::initDB()
     }
     if(!tableStrList.contains(DB_TABLE_WAKEUP)){
         QString sql = QString("CREATE TABLE %1 (unique_id text, path text, wakeup boolean)").arg(DB_TABLE_WAKEUP);
+        bool res = m_sqlQuery.exec(sql);
+        if(!res){
+            qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
+        }
+    }
+    if(!tableStrList.contains(DB_TABLE_NETWORK_WAKEUP)){
+        QString sql = QString("CREATE TABLE %1 (logical_name text, wakeup boolean)").arg(DB_TABLE_NETWORK_WAKEUP);
         bool res = m_sqlQuery.exec(sql);
         if(!res){
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
