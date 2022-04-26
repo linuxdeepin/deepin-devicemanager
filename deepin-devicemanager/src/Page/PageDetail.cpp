@@ -25,6 +25,7 @@
 // 宏定义
 #define SPACE_HEIGHT 0  //
 #define SEPERATOR_HEIGHT 10  // 分割线上下距离
+#define MIN_HEIGHT 50 // 当前Widget的最小高度
 
 DWIDGET_USE_NAMESPACE
 
@@ -161,6 +162,8 @@ PageDetail::PageDetail(QWidget *parent)
     , mp_ScrollArea(new QScrollArea(this))
     , mp_ScrollWidget(new ScrollAreaWidget(this))
 {
+    this->setMinimumHeight(MIN_HEIGHT);
+
     setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *hLayout = new QVBoxLayout();
     hLayout->setContentsMargins(0, 0, 0, 0);

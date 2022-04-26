@@ -721,6 +721,7 @@ void CmdTool::getSMBIOSVersion(const QString &info, QString &version)
 
 void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile)
 {
+    Q_UNUSED(debugfile);
     // 加载nvidia-settings  -q  VideoRam 信息
     // 命令与xrandr命令一样无法在后台运行,该从前台命令直接获取信息
     QString deviceInfo;
