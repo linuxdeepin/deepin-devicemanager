@@ -84,7 +84,7 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "memory", m_MemAddress);
     setAttribute(mapInfo, "physical id", m_PhysID);
 
-    if(driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 
@@ -104,13 +104,13 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver, false);
     setAttribute(mapInfo, "Width", m_Width);
 
-    if(driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 
-    m_SysPath = "/sys" + mapInfo["SysFS ID"];
+    m_SysPath = mapInfo["SysFS ID"];
     QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+-]{4}\\.(.*)");
-    if (reUniqueId.exactMatch(mapInfo["Unique ID"])){
+    if (reUniqueId.exactMatch(mapInfo["Unique ID"])) {
         m_UniqueID = reUniqueId.cap(1);
     }
 
@@ -183,6 +183,11 @@ const QString &DeviceGpu::name() const
     return m_Name;
 }
 
+const QString &DeviceGpu::vendor() const
+{
+    return m_Vendor;
+}
+
 const QString &DeviceGpu::driver() const
 {
     return m_Driver;
@@ -231,7 +236,7 @@ void DeviceGpu::loadTableData()
 {
     // 加载表格内容
     QString tName = m_Name;
-    if(!available()){
+    if (!available()) {
         tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
     m_TableData.append(tName);

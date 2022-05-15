@@ -20,14 +20,12 @@
 */
 #ifndef DEBINSTALLER_H
 #define DEBINSTALLER_H
-
 #include <QObject>
 
 namespace QApt {
 class Backend;
 class Transaction;
 }
-
 class DebInstaller: public QObject
 {
     Q_OBJECT

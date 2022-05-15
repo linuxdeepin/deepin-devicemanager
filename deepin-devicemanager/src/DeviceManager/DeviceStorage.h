@@ -121,6 +121,13 @@ public:
     QString compareSize(const QString &size1, const QString &size2);
 
     const QString &name()const override;
+
+    /**
+     * @brief name:获取制造商属性值
+     * @return QString 制造商属性值
+     */
+    const QString &vendor()const override;
+
     const QString &driver()const override;
 
     /**

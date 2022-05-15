@@ -21,25 +21,58 @@
  */
 
 #include "Page/MainWindow.h"
+#include "DTitlebar"
+#include "DApplicationSettings"
+#include "environments.h"
+#include "DebugTimeManager.h"
+#include "SingleDeviceManager.h"
 
 #include <DApplication>
 #include <DWidgetUtil>
 #include <DLog>
 
+#include <QDBusConnection>
+#include <QDBusInterface>
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "DTitlebar"
-#include "DApplicationSettings"
-#include "environments.h"
-#include "DebugTimeManager.h"
-#include "application.h"
-
 #include <signal.h>
 
 DWIDGET_USE_NAMESPACE
 
+const QString SERVICE_NAME = "com.deepin.dde.Notification";
+const QString DEVICE_SERVICE_PATH = "/com/deepin/dde/Notification";
+const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.Notification";
+
 int main(int argc, char *argv[])
 {
+    // /usr/bin/devicemanager notify
+    if (argc > 1 && QString(argv[1]).contains("notify")){
+        // 1. 连接到dbus
+        if (!QDBusConnection::sessionBus().isConnected()) {
+            fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
+                    "To start it, run:/n"
+                    "/teval `dbus-launch --auto-syntax`/n");
+        }
+
+        // 2. create interface
+        QDBusInterface *mp_Iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, DEVICE_SERVICE_INTERFACE, QDBusConnection::sessionBus());
+
+        QString appname("deepin-devicemanager");
+        uint replaces_id = 0;
+        QString appicon("deepin-devicemanager");
+        QString title = "";
+        QString body = "New drivers available! Install or update them now.";
+        QStringList actionlist;
+        actionlist << "view" << "查看";
+        QVariantMap hints;
+        hints.insert(QString("x-deepin-action-view"),
+                     QVariant(QString("/usr/bin/deepin-devicemanager,driver")));  //实现查看2按钮点击打开控制中心账户界面)
+        int timeout = 3000;
+        mp_Iface->call("Notify", appname, replaces_id, appicon, title, body, actionlist, hints, timeout);
+        return -1;
+    }
+
     if (!QString(qgetenv("XDG_CURRENT_DESKTOP")).toLower().startsWith("deepin")) {
         setenv("XDG_CURRENT_DESKTOP", "Deepin", 1);
     }
@@ -47,14 +80,14 @@ int main(int argc, char *argv[])
     PERF_PRINT_BEGIN("POINT-01", "");
 
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-    Application app(argc, argv);
+    SingleDeviceManager app(argc, argv);
     app.setAutoActivateWindows(true);
 
 
     // 保证进程唯一性
     qputenv("DTK_USE_SEMAPHORE_SINGLEINSTANCE", "1");
-    if (DGuiApplicationHelper::instance()->setSingleInstance("deepin-devicemanager",
-                                                             DGuiApplicationHelper::UserScope)) {
+    /*if (DGuiApplicationHelper::instance()->setSingleInstance("deepin-devicemanager",
+                                                             DGuiApplicationHelper::UserScope))*/ {
         app.loadTranslator();
         app.setOrganizationName("deepin");
         app.setApplicationName("deepin-devicemanager");
@@ -68,26 +101,29 @@ int main(int argc, char *argv[])
         Dtk::Core::DLogManager::registerConsoleAppender();
         Dtk::Core::DLogManager::registerFileAppender();
 
-        MainWindow w(nullptr);
-        gApp->setMainWindow(&w);
-        QObject::connect(&app,
-                         &DApplication::newInstanceStarted,
-                         &w,
-                         &MainWindow::activateWindow);
-        w.titlebar()->setTitle("");
-
         QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
 
         if (false == appIcon.isNull()) {
             app.setProductIcon(appIcon);
             app.setWindowIcon(appIcon);
-            w.titlebar()->setIcon(appIcon);
         }
 
-        Dtk::Widget::moveToCenter(&w);
+        QDBusConnection dbus = QDBusConnection::sessionBus();
+        if (dbus.registerService("com.deepin.DeviceManagerNotify")) {
+            dbus.registerObject("/com/deepin/DeviceManagerNotify", &app, QDBusConnection::ExportScriptableSlots);
+            app.parseCmdLine();
+            app.activateWindow();
+            return app.exec();
+        } else {
+            QCommandLineParser parser;
+            parser.process(app);
+            QList<QVariant> debInstallPathList;
+            debInstallPathList << parser.positionalArguments();
 
-        w.show();
-        return app.exec();
+            qInfo() << parser.positionalArguments();
+            QDBusInterface notification("com.deepin.DeviceManagerNotify", "/com/deepin/DeviceManagerNotify", "com.deepin.DeviceManagerNotify", QDBusConnection::sessionBus());
+            QDBusMessage msg = notification.call(QDBus::AutoDetect, "startDeviceManager", parser.positionalArguments().at(0));
+            return 0;
+        }
     }
-    return 0;
 }

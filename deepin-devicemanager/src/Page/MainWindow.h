@@ -24,15 +24,18 @@
 #define MAINWINDOW_H
 
 #include "DBusInterface.h"
+#include "DBusDriverInterface.h"
 
 #include <DMainWindow>
 #include <DStackedWidget>
+#include <DButtonBox>
 
 #include <QObject>
 
 class WaitingWidget;
 class DeviceWidget;
 class LoadInfoThread;
+class PageDriverManager;
 
 using namespace Dtk::Widget;
 
@@ -83,6 +86,11 @@ public:
      */
     void windowMaximizing();
 
+    /**
+     * @brief swichStackWidget:切换到“驱动管理”页面
+     */
+    void swichStackWidget();
+
 protected:
     /**
      * @brief: 事件的重写
@@ -115,6 +123,9 @@ private:
     /** @brief initWindowSize:初始化窗口大小*/
     void initWindowSize();
 
+    /** @brief 初始化标题栏 */
+    void initWindowTitle();
+
     /** @brief initWidgets:初始化界面相关的内容*/
     void initWidgets();
 
@@ -124,6 +135,11 @@ private:
     void refreshDataBase();
 
 private slots:
+    /**
+     * @brief slotSetPage
+     * @param page
+     */
+    void slotSetPage(QString page);
 
     /**
      * @brief loadingFinishSlot:加载设备信息结束 槽
@@ -161,11 +177,14 @@ signals:
 private:
     /**@brief:主窗口的stackWidget，主要有两个widget，一个是等待界面，还有一个是信息显示界面*/
     DStackedWidget        *mp_MainStackWidget;
-    WaitingWidget *mp_WaitingWidget; //加载界面
-    DeviceWidget *mp_DeviceWidget; //设备显示界面
-    LoadInfoThread *mp_WorkingThread; //信息加载线程
-    bool                  m_refreshing = false;                  // 判断界面是否正在刷新
+    WaitingWidget         *mp_WaitingWidget;           //加载界面
+    DeviceWidget          *mp_DeviceWidget;            //设备显示界面
+    PageDriverManager     *mp_DriverManager;           //驱动管理主界面
+    LoadInfoThread        *mp_WorkingThread;           //信息加载线程
+    DButtonBox            *mp_ButtonBox;               // titlebar上添加Buttonbox
+    bool                  m_refreshing = false;        // 判断界面是否正在刷新
     bool                  m_IsFirstRefresh = true;
+    bool                  m_ShowDriverPage = false;
 };
 
 #endif // MAINWINDOW_H

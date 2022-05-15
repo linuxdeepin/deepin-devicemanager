@@ -26,6 +26,7 @@
 #include "DBusAnythingInterface.h"
 #include "DBusInterface.h"
 #include "drivericonwidget.h"
+#include "HttpDriverInterface.h"
 
 #include <DBlurEffectWidget>
 #include <DWidget>
@@ -223,6 +224,7 @@ void PageDriverControl::installDriverLogical()
         this->getButton(0)->disconnect();
         connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
     } else if (1 == curIndex) {
+#if 0
         // 驱动安装之前需要先提权
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
                                                                                  UnixProcessSubject(getpid()),
@@ -244,6 +246,8 @@ void PageDriverControl::installDriverLogical()
         DBusDriverInterface::getInstance()->installDriver(driveName);
         setProperty("DriverProcessStatus", "Doing");//卸载或者加载程序进行中
         enableCloseBtn(false);
+#endif
+        DBusDriverInterface::getInstance()->installDriver("lenovo-image-g-series","1.0-17");
     }
 }
 

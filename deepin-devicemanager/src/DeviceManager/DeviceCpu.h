@@ -46,7 +46,7 @@ public:
      * @brief vendor:获取制造商属性值
      * @return QString:制造商属性值
      */
-    const QString &vendor() const;
+    const QString &vendor() const override;
 
     /**
      * @brief name:获取名称属性值

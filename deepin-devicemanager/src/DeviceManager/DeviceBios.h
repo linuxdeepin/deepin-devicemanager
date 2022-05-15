@@ -94,7 +94,7 @@ public:
        * @param 无
        * @return QString:制造商属性值
        */
-    const QString &vendor()const;
+    const QString &vendor()const override;
 
     /**
        * @brief version:获取版本号属性值

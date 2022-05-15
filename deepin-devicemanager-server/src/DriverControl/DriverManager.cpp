@@ -22,6 +22,9 @@
 #include "Utils.h"
 #include "ModCore.h"
 #include "DebInstaller.h"
+#include "DriverInstaller.h"
+#include "DeviceInfoManager.h"
+#include "HttpDriverInterface.h"
 
 #include <QThread>
 #include <QFile>
@@ -43,6 +46,7 @@
 #include <QThread>
 #include <QDBusInterface>
 
+
 #define SD_KEY_excat    "excat"
 #define SD_KEY_ver      "version"
 #define SD_KEY_code     "client_code"
@@ -61,10 +65,10 @@
 #define E_NOT_SIGNED      102 // not signed 没有数字签名
 
 #define RETURN_VALUE(flag) \
-{   \
-    sigFinished(flag, errmsg);\
-    return flag; \
-}
+    {   \
+        sigFinished(flag, errmsg);\
+        return flag; \
+    }
 
 DriverManager::DriverManager(QObject *parent)
     : QObject(parent)
@@ -74,6 +78,12 @@ DriverManager::DriverManager(QObject *parent)
     mp_debinstaller = new DebInstaller;
     mp_debinstaller->moveToThread(mp_deboperatethread);
     mp_deboperatethread->start();
+
+    mp_driverOperateThread = new QThread(this);
+    mp_driverInstaller = new DriverInstaller;
+    mp_driverInstaller->moveToThread(mp_driverOperateThread);
+    mp_driverOperateThread->start();
+
     initConnections();
 }
 
@@ -81,6 +91,19 @@ DriverManager::~DriverManager()
 {
     mp_deboperatethread->quit();
     mp_deboperatethread->wait();
+}
+
+
+bool DriverManager::checkDriverInfo()
+{
+    //1.遍历硬件查询结果。
+    //2.过滤，只检测显示适配器（显卡），音频适配器（声卡），网络适配器（网卡/无线网卡），蓝牙适配器，外设输入输出设备（打印机，图像设备（扫描仪，摄像头））
+    //2.1 查找前端的处理，找到硬件的驱动部分。
+    //3.查询。
+
+    if (checkPrinterInfo() || checkBoardCardInfo()) return true;
+
+    return false;
 }
 
 void DriverManager::initConnections()
@@ -104,6 +127,35 @@ void DriverManager::initConnections()
     });
     connect(this, &DriverManager::sigDebInstall, mp_debinstaller, &DebInstaller::installPackage);
     connect(this, &DriverManager::sigDebUnstall, mp_debinstaller, &DebInstaller::uninstallPackage);
+
+    connect(mp_driverInstaller, &DriverInstaller::installProgressFinished, [&](bool bsuccess) {
+        if (bsuccess) {
+            sigInstallProgressFinished(bsuccess, EC_NULL);
+            qInfo() << "Driver installed successfully";
+        } else {
+            qInfo() << "Driver installation failed , reason : unknow";
+        }
+    });
+
+    connect(mp_driverInstaller, &DriverInstaller::errorOccurred, [&](int err) {
+        qInfo() << "Driver installation failed , reason : " << err;
+        sigInstallProgressFinished(false, err);
+//        this->errmsg = errmsg;
+    });
+
+    connect(mp_driverInstaller, &DriverInstaller::downloadProgressChanged, [&](QStringList msg) {
+        sigDownloadProgressChanged(msg);
+        qInfo() << "Downloading driver , " << "progress rate : " << msg[0] << " downloaded size : " << msg[1] << " download speed : " << msg[2];
+    });
+
+    connect(mp_driverInstaller, &DriverInstaller::downloadFinished, [&]() {
+        sigDownloadFinished();
+    });
+
+    connect(mp_driverInstaller, &DriverInstaller::installProgressChanged, [&](int progress) {
+        sigInstallProgressChanged(progress);
+        qInfo() << "Installing driver ,  installation progress : " << progress;
+    });
 }
 
 /**
@@ -158,13 +210,13 @@ bool DriverManager::installDriver(const QString &filepath)
 
     // 判断是否是驱动包
     sigProgressDetail(5, "");
-    if(!isDriverPackage(filepath)){
+    if (!isDriverPackage(filepath)) {
         errmsg = QString("%1").arg(E_NOT_DRIVER);
         sigFinished(false, errmsg);
         return  false;
     }
 
-    if(!isSigned(filepath)){
+    if (!isSigned(filepath)) {
         errmsg = QString("%1").arg(E_NOT_SIGNED);
         sigFinished(false, errmsg);
         return  false;
@@ -242,6 +294,18 @@ bool DriverManager::installDriver(const QString &filepath)
         }
     }
     return  true;
+}
+
+void DriverManager::installDriver(const QString &pkgName, const QString &version)
+{
+    if (!mp_driverOperateThread->isRunning())
+        mp_driverOperateThread->start();
+    mp_driverInstaller->installPackage(pkgName, version);
+}
+
+void DriverManager::undoInstallDriver()
+{
+    mp_driverInstaller->undoInstallDriver();
 }
 
 /**
@@ -344,7 +408,7 @@ bool DriverManager::isDebValid(const QString &filePath)
  * @param moduleName 模块名称 like hid or hid.ko
  * @return true: 成功 false: 失败
  */
-bool DriverManager::unInstallModule(const QString &moduleName ,QString& msg)
+bool DriverManager::unInstallModule(const QString &moduleName, QString &msg)
 {
     bool bsuccess = true;
     sigProgressDetail(40, "");
@@ -366,6 +430,288 @@ bool DriverManager::unInstallModule(const QString &moduleName ,QString& msg)
     return  bsuccess;
 }
 
+bool DriverManager::checkPrinterInfo()
+{
+    //打印机
+    QMap<QString, QString> mapInfo;
+    loadPrinterInfo(mapInfo);
+    if(mapInfo.size() < 1){
+        return false;
+    }
+    //qInfo() << mapInfo;//"printer-make-and-model" //
+    QStringList lstInfo = mapInfo["printer-info"].split(" ");
+    QString strVendor = "";
+    if (lstInfo.size() > 1) {
+        strVendor = lstInfo[0];
+    }
+    strDriverInfo di;
+    di.type       = DR_Printer;
+    di.modelName  = mapInfo["printer-make-and-model"];
+    di.vendorName = strVendor;
+    if (HttpDriverInterface::getInstance()->checkDriverInfo(di))
+        return true;
+    return false;
+}
+
+void DriverManager::loadPrinterInfo(QMap<QString, QString> &mapInfo)
+{
+    // 通过cups获取打印机信息
+    //cups会识别打印机信息，之前通过文件判断概率性出现文件无信息的情况
+    cups_dest_t *dests = nullptr;
+    http_t *http = nullptr;
+    int num_dests;
+    num_dests = cupsGetDests2(http, &dests);
+    if (nullptr == dests) {
+        cupsFreeDests(num_dests, dests);
+        return;
+    }
+    for (int i = 0; i < num_dests; i++) {
+        cups_dest_t *dest = nullptr;
+        dest = dests + i;
+        getMapInfo(mapInfo, dest);
+        // 这里为了和打印机管理保持一致，做出限制
+//        if (mapInfo.size() > 10)
+//            addMapInfo("printer", mapInfo);
+    }
+    cupsFreeDests(num_dests, dests);
+}
+
+void DriverManager::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
+{
+    QStringList infoList = info.split("\n");
+    for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
+        QStringList words = (*it).split(ch);
+        if ((*it).contains("PS/2 Mouse")) {
+            words.clear();
+            words << "Hotplug" << "PS/2";
+        }
+        if (words.size() != 2)
+            continue;
+
+        if (mapInfo.find(words[0].trimmed()) != mapInfo.end())
+            mapInfo[words[0].trimmed()] += QString(" ");
+
+        QRegExp re(".*\"(.*)\".*");
+        if (re.exactMatch(words[1].trimmed())) {
+            QString key = words[0].trimmed();
+            QString value = re.cap(1);
+
+            //这里是为了防止  "usb-storage", "sr"  -》 usb-storage", "sr
+            // bug112311 驱动模块显示异常
+            if ("Driver" ==  key || "Driver Modules" ==  key)
+                value.replace("\"", "");
+
+            // 如果信息中有unknown 则过滤
+            if (!value.contains("unknown"))
+                mapInfo[key] += value;
+
+        } else {
+            if ("Resolution" == words[0].trimmed()) {
+                mapInfo[words[0].trimmed()] += words[1].trimmed();
+            } else {
+                // 如果信息中有unknown 则过滤
+                if (!words[1].trimmed().contains("unknown"))
+                    mapInfo[words[0].trimmed()] = words[1].trimmed();
+            }
+        }
+    }
+
+    if (mapInfo.find("Module Alias") != mapInfo.end()) {
+        mapInfo["Module Alias"].replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
+    }
+}
+bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QString> &mapInfo)
+{
+    QString strVendor, strDevice;
+    bool flag = false;//是否需要查sysfs
+    if(mapInfo.find("Vendor") != mapInfo.end()){
+        QStringList strListVendor = mapInfo["Vendor"].split(" ");
+        foreach (QString strSub, strListVendor) {
+            if (strSub.contains("0x")) {
+                strVendor = strSub;
+                break;
+            }
+        }
+        if(strVendor.isEmpty()){
+            flag = true;
+        }
+        QStringList strListDevice = mapInfo["Device"].split(" ");
+        foreach(QString strSub, strListDevice){
+            if(strSub.contains("0x")){
+                strDevice = strSub;
+                break;
+            }
+        }
+        if(strDevice.isEmpty()){
+            flag = true;
+        }
+    }
+    else {
+        flag = true;
+    }
+    if(flag) {
+        //
+        QString strSysFSLink;
+        if (mapInfo.find("SysFS ID") != mapInfo.end() && mapInfo["SysFS ID"].contains("/devices/")) {
+            strSysFSLink = mapInfo["SysFS ID"];
+        }
+        //
+        else if (mapInfo.find("SysFS Device Link") != mapInfo.end() && mapInfo["SysFS Device Link"].contains("/devices/")) {
+            strSysFSLink = mapInfo["SysFS Device Link"];
+        }
+        QString strVendorFile = "/vendor";
+        QString strDeviceFile = "/device";
+        if(strSysFSLink.contains("usb")){
+            strVendorFile = "/idVendor";
+            strDeviceFile = "/idProduct";
+        }
+        if (strSysFSLink.isEmpty()) {
+            return false;
+        }
+        if (!QFile::exists("/sys" + strSysFSLink)) {
+            return false;
+        }
+        if(strSysFSLink.contains("usb")){
+            if (!QFile::exists("/sys" + strSysFSLink + strVendorFile)) {
+                strSysFSLink = strSysFSLink.mid(0, strSysFSLink.lastIndexOf('/'));
+            }
+        }
+        QFile file("/sys" + strSysFSLink + strVendorFile);
+        if(!file.open(QIODevice::ReadOnly)){
+            return false;
+        }
+        strVendor = file.readAll();
+        file.close();
+        QFile fileDevice("/sys" + strSysFSLink + strDeviceFile);
+        if(!fileDevice.open(QIODevice::ReadOnly)){
+            return false;
+        }
+        strDevice = fileDevice.readAll();
+        fileDevice.close();
+        if(strSysFSLink.contains("usb")){
+            strVendor = "0x" + strVendor;
+            strDevice = "0x" + strDevice;
+        }
+    }
+
+    if(strVendor.isEmpty() && strDevice.isEmpty()){
+        return false;
+    }
+    strDriverInfo di;
+    di.type       = type;
+    di.vendorId   = strVendor;
+    di.modelId   = strDevice;
+    di.driverName = mapInfo["Driver"];//如果没有，后续会处理，无影响
+
+    QProcess process;
+    QStringList options;
+    options << "-c" << "modinfo " + mapInfo["Driver"] + " | grep version";
+
+    process.start("/bin/bash", options);
+    process.waitForFinished(-1);
+
+    QStringList str = QString(process.readAll()).split("\n\n");
+    foreach(QString temp, str){
+        if(temp.startsWith("version") && temp.contains(":")){
+            di.version = temp.split(':')[2];
+        }
+    }
+//#define DRIVER_TEST_ 1
+//#if DRIVER_TEST_
+//    di.vendorId   = "0x8086";
+//    di.modelId   = "0x3e92";
+//#endif
+    if (HttpDriverInterface::getInstance()->checkDriverInfo(di))
+        return true;
+    return false;
+}
+bool DriverManager::checkBoardCardInfo()
+{
+    QMap<QString, QString> mapInfo;
+
+    const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");
+
+    // 获取信息
+    QStringList items = info.split("\n\n");
+
+    foreach (const QString &item, items) {
+        if (item.isEmpty())
+            continue;
+
+        mapInfo.clear();
+        getMapInfoFromHwinfo(item, mapInfo);
+        if (mapInfo["Hardware Class"] == "sound" || mapInfo["Device"].contains("USB Audio")) {
+            if (checkBoardCardInfo(DR_Sound, mapInfo)) return true;
+        } else if (mapInfo["Hardware Class"].contains("network")) {
+            if (checkBoardCardInfo(DR_Network, mapInfo)) return true;
+        } else if ("keyboard" == mapInfo["Hardware Class"]) {
+            continue;
+        } else if ("mouse" == mapInfo["Hardware Class"]) {
+            continue;
+        } else if ("cdrom" == mapInfo["Hardware Class"]) {
+            continue;
+        } else if ("disk" == mapInfo["Hardware Class"]) {
+            continue;
+        } else if ("graphics card" == mapInfo["Hardware Class"]) {
+            if (mapInfo["Device"].contains("Graphics Processing Unit"))
+                continue;
+            qInfo() << item;
+            if (checkBoardCardInfo(DR_Gpu, mapInfo)) return true;
+        } else {
+            if (mapInfo["Hardware Class"] == "hub" || mapInfo["Hardware Class"] == "mouse" || mapInfo["Hardware Class"] == "keyboard")
+                continue;
+
+            // USB包括：蓝牙、图像设备
+            // hwinfo中对camera的分类不明确，通过camera等关键字认定图像设备
+            // 当前只做扫描仪。无法区分摄像头和扫描仪。
+            if (mapInfo["Model"].contains("camera", Qt::CaseInsensitive) ||
+                    mapInfo["Device"].contains("camera", Qt::CaseInsensitive) ||
+                    mapInfo["Driver"].contains("uvcvideo", Qt::CaseInsensitive) ||
+                    mapInfo["Model"].contains("webcam", Qt::CaseInsensitive) ||
+                    mapInfo["Hardware Class"] != "camera") {
+                if (checkCameraInfo(mapInfo)) return true;
+            }
+            if (mapInfo["Hardware Class"] == "bluetooth" || mapInfo["Driver"] == "btusb" || mapInfo["Device"] == "BCM20702A0") {
+                if (checkBoardCardInfo(DR_Bluetooth, mapInfo)) return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DriverManager::checkCameraInfo(QMap<QString, QString> &mapInfo)
+{
+    QString strVendor, strDevice;
+    QStringList strListVendor = mapInfo["Vendor"].split(" ");
+    foreach (QString strSub, strListVendor) {
+        if (strSub.contains("0x")) {
+            strVendor = strSub;
+        }
+    }
+    QStringList strListDevice = mapInfo["Device:"].split(" ");
+    foreach (QString strSub, strListDevice) {
+        if (strSub.contains("0x")) {
+            strDevice = strSub;
+        }
+    }
+    if(strVendor.isEmpty() && strDevice.isEmpty()){
+        return false;
+    }
+    strDriverInfo di;
+    di.type       = DR_Camera;
+    di.vendorId   = strVendor;
+    di.modelId   = strDevice;
+    if (HttpDriverInterface::getInstance()->checkDriverInfo(di))
+        return true;
+    return false;
+}
+void DriverManager::getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src)
+{
+    // 获取打印机信息
+    mapInfo.insert("Name", src->name);
+    for (int i = 0; i < src->num_options; i++)
+        mapInfo.insert(src->options[i].name, src->options[i].value);
+}
 /**
  * @brief DriverManager::uninstallPrinter 卸载打印机
  * @param name 打印机名
@@ -373,7 +719,7 @@ bool DriverManager::unInstallModule(const QString &moduleName ,QString& msg)
  * @param model 型号
  * @return true: 成功 false: 失败
  */
-bool DriverManager::uninstallPrinter(const QString& vendor, const QString& model)
+bool DriverManager::uninstallPrinter(const QString &vendor, const QString &model)
 {
     auto archMap = QMap<QString, QString> {
         {"x86_64", "x86"},
@@ -391,11 +737,13 @@ bool DriverManager::uninstallPrinter(const QString& vendor, const QString& model
         QPair<QString, QJsonValue>(SD_KEY_ieeeid, ""),
     };
 
-    QString url = "http://printer.deepin.com:80/eagle/" + archMap[Utils::machineArch()] + "/search";
+    QString url = "http://drive-pre.uniontech.com/api/v1/drive/search?arch=" + archMap[Utils::machineArch()];
+    url += "&desc=" + model;
+    url += "&deb_manufacturer=" + vendor;
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     QNetworkAccessManager networkManager;
-    QNetworkReply *reply = networkManager.post(request,QJsonDocument(obj).toJson(QJsonDocument::Compact));
+    QNetworkReply *reply = networkManager.get(request);
     QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> replyPtr(reply);
 
     sigProgressDetail(0, "");
@@ -409,7 +757,7 @@ bool DriverManager::uninstallPrinter(const QString& vendor, const QString& model
 
     //超时
     sigProgressDetail(10, "");
-    if(!timer.isActive())
+    if (!timer.isActive())
         RETURN_VALUE(false);
 
     //无返回数据
@@ -430,13 +778,13 @@ bool DriverManager::uninstallPrinter(const QString& vendor, const QString& model
     //3.驱动不存在，直接返回false
     //未安装package
     sigProgressDetail(40, "");
-    if(!printerHasInstalled(packageName)) {
+    if (!printerHasInstalled(packageName)) {
         RETURN_VALUE(false);
     }
 
     //卸载package
     sigProgressDetail(40, "");
-    if(!unInstallPrinter(packageName))
+    if (!unInstallPrinter(packageName))
         RETURN_VALUE(false);
 
     //卸载成功

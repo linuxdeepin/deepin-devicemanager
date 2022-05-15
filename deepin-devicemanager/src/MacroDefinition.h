@@ -22,6 +22,7 @@
 
 #pragma once
 #include <QString>
+#include <QList>
 
 /**@brief:定义一个删除指针的宏*/
 #define DELETE_PTR(p) \
@@ -225,3 +226,148 @@
 const QString LINK_STR = "<a style=\"text-decoration:none\" href=https://www.chinauos.com/home>";        // uos官网链接
 const QString DEEPIN_LINK = "<a style=\"text-decoration:none\" href=https://www.deepin.org/zh>";       // 社区版链接
 const QString END_STR = " </a>";                                                                         // end html
+
+
+// 驱动管理公用数据结构
+
+/**
+ * @brief The DDeviceType enum 可更新驱动类型
+ */
+enum DriverType {
+    DR_Null = 0,
+    DR_Bluetooth = 1,
+    DR_Camera = 2,
+    DR_Gpu = 3,
+    DR_Keyboard = 4,
+    DR_Sound = 5,
+    DR_Mouse = 6,
+    DR_Network = 7,
+    DR_Printer = 8,
+    DR_Scaner = 9,
+    DR_Tablet = 10,
+    DR_WiFi = 11
+};
+
+/**
+ * @brief STR_DRIVER_INFO 从仓库查询驱动信息
+ */
+typedef struct STR_PPDS {
+    QString strSource;
+    QString strDesc;
+    QString strManufacturer;
+} strPpds;
+
+typedef struct STR_DRIVER_INFO {
+    QString strManufacturer;//厂商
+    QString strDebManufacturer;//包厂商
+    QString strArch;//架构
+    QString strVersion;//驱动版本
+    QString strDebVersion;//包版本
+    QString strPackages;//包名
+    QString strClass_p;//父级(驱动分类)
+    QString strClass;//驱动分类
+    QStringList strModels;//设备型号
+    QString strProducts;//包设备型号
+    QString strDeb;//包URL地址
+    int iLevel;//
+    QString strSystem;//
+    QString strDesc;//
+    QString strAdaptation;//
+    QString strSource;//
+    QString strDownloadUrl;//
+    QString strSize;//包大小
+
+    QList<strPpds> lstPpds;//Ppd文件
+} strDriverInfo;
+/**
+ * @brief The Status enum 驱动状态
+ */
+enum Status {
+    ST_SUCESS      = 0,   // 成功了
+    ST_FAILED      = 1,   // 失败了
+    ST_DOWNLOADING = 2,   // 下载中
+    ST_INSTALL     = 3,   // 安装中
+    ST_NOT_INSTALL = 4,   // 驱动未安装
+    ST_CAN_UPDATE  = 5,   // 驱动可更新
+    ST_WAITING     = 6,   // 等待中
+    ST_NetWorkErr = 7,    // 网络异常
+    ST_DRIVER_IS_NEW = 8, // 此驱动不需要更新
+};
+
+/**
+ * @brief The ScanResult enum 驱动扫描结果
+ */
+enum ScanResult {
+    SR_Failed      = 0,
+    SR_SUCESS      = 1,
+    SR_NETWORD_ERR = 2
+};
+
+struct DriverInfo {
+
+    DriverInfo()
+        : m_Type(DR_Null)
+        , m_Name("")
+        , m_VendorId("")
+        , m_VendorName("")
+        , m_ModelId("")
+        , m_ModelName("")
+        , m_DriverName("")
+        , m_Version("")
+        , m_Size("")
+        , m_Status(ST_DRIVER_IS_NEW)
+        , m_Checked(false)
+        , m_DebVersion("")
+        , m_Packages("")
+    {
+
+    }
+
+    DriverType m_Type;         //
+    QString    m_Name;         //
+    QString    m_VendorId;     // 板载用
+    QString    m_VendorName;   // 打印机用
+    QString    m_ModelId;      // 板载用
+    QString    m_ModelName;    // 打印机用
+    QString    m_DriverName;   // 返回值
+    QString    m_Version;
+    QString    m_Size;         // 返回值
+    Status     m_Status;       // 检测后要更新
+    bool       m_Checked;      //
+
+    QString    m_DebVersion;   //包版本 返回值
+    QString    m_Packages;     //包名  返回值
+
+    DriverType type() { return m_Type; }
+    QString    name() { return m_Name; }
+    QString    vendorId() { return m_VendorId; }
+    QString    vendorName() { return m_VendorName; }
+    QString    modelId() { return m_ModelId; }
+    QString    modelName() { return m_ModelName; }
+    QString    driverName() {return m_DriverName; }
+    QString    version() {return m_Version; }
+    QString    size() { return m_Size; }
+    Status     status() { return m_Status; }
+    bool       checked() { return m_Checked; }
+    QString    debVersion() { return m_DebVersion; }
+    QString    packages() {return m_Packages; }
+};
+
+
+//enum ErrorCode {
+//    EC_NULL = 0,
+//    EC_NETWORK = 1,
+//    EC_CANCEL = 2,
+//    EC_3 = 3,
+//    EC_4 = 4,
+//    EC_5 = 5,
+//    EC_6 = 6
+//};
+
+#define EC_NULL 0
+#define EC_NETWORK 1
+#define EC_CANCEL 2
+#define EC_3 3
+#define EC_4 4
+#define EC_5 5
+#define EC_6 6

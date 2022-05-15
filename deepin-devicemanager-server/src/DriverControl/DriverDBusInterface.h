@@ -23,6 +23,8 @@
 #ifndef DRIVERDBUSINTERFACE_H
 #define DRIVERDBUSINTERFACE_H
 
+#include "commonfunction.h"
+
 #include <QObject>
 #include <QDBusContext>
 
@@ -40,11 +42,18 @@ private:
 
 signals:
     Q_SCRIPTABLE void sigProgressDetail(int progress, const QString &strDeatils);
-    Q_SCRIPTABLE void sigFinished(bool bsuccess, QString mdg);
+    Q_SCRIPTABLE void sigFinished(bool bsuccess, QString msg);
+
+    Q_SCRIPTABLE void sigDownloadProgressChanged(QStringList msg);//驱动下载进度、速度、已下载大小
+    Q_SCRIPTABLE void sigDownloadFinished();//下载完成
+    Q_SCRIPTABLE void sigInstallProgressChanged(int progress);//安装进度
+    Q_SCRIPTABLE void sigInstallProgressFinished(bool bsuccess, int err);
 
 public slots:
     Q_SCRIPTABLE bool unInstallDriver(const QString &modulename);
     Q_SCRIPTABLE bool installDriver(const QString &filepath);
+    Q_SCRIPTABLE void installDriver(const QString &modulename, const QString &version);
+    Q_SCRIPTABLE void undoInstallDriver();
     Q_SCRIPTABLE QStringList checkModuleInUsed(const QString &modulename);
     Q_SCRIPTABLE bool isDriverPackage(const QString &filepath);
     Q_SCRIPTABLE bool isBlackListed(const QString &modName);

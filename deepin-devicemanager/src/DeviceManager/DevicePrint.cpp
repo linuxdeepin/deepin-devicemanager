@@ -15,6 +15,7 @@ DevicePrint::DevicePrint()
     , m_URI("")
     , m_Status("")
     , m_Shared("")
+    , m_MakeAndModel("")
 {
     // 初始化可显示属性
     initFilterKey();
@@ -41,6 +42,7 @@ void DevicePrint::setInfo(const QMap<QString, QString> &info)
     // 获取其它信息
     setAttribute(info, "device-uri", m_URI);
     setAttribute(info, "printer-state", m_Status);
+    setAttribute(info, "printer-make-and-model", m_MakeAndModel);
 
     // 获取打印机接口
     QStringList lstUri = m_URI.split(":");
@@ -53,6 +55,16 @@ void DevicePrint::setInfo(const QMap<QString, QString> &info)
 const QString &DevicePrint::name()const
 {
     return m_Name;
+}
+
+const QString &DevicePrint::vendor() const
+{
+    return m_Vendor;
+}
+
+const QString DevicePrint::makeAndeModel() const
+{
+    return m_MakeAndModel;
 }
 
 const QString &DevicePrint::driver() const
@@ -78,8 +90,8 @@ const QString DevicePrint::getOverviewInfo()
 
 EnableDeviceStatus DevicePrint::setEnable(bool e)
 {
-    bool res  = DBusEnableInterface::getInstance()->enablePrinter("printer",m_Name,m_URI,e);
-    if(res){
+    bool res  = DBusEnableInterface::getInstance()->enablePrinter("printer", m_Name, m_URI, e);
+    if (res) {
         m_Enable = e;
     }
     // 设置设备状态
@@ -105,7 +117,7 @@ void DevicePrint::initFilterKey()
     addFilterKey(QObject::tr("printer-is-accepting-jobs"));
     addFilterKey(QObject::tr("printer-is-shared"));
     addFilterKey(QObject::tr("printer-is-temporary"));
-    addFilterKey(QObject::tr("printer-make-and-model"));
+//    addFilterKey(QObject::tr("printer-make-and-model"));
     addFilterKey(QObject::tr("printer-state-change-time"));
     addFilterKey(QObject::tr("printer-state-reasons"));
     addFilterKey(QObject::tr("printer-type"));
@@ -129,7 +141,7 @@ void DevicePrint::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("URI"), m_URI);
     addOtherDeviceInfo(tr("Status"), m_Status);
     addOtherDeviceInfo(tr("Interface Type"), m_InterfaceType);
-
+    addOtherDeviceInfo(QObject::tr("printer-make-and-model"), m_MakeAndModel);
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
@@ -138,7 +150,7 @@ void DevicePrint::loadTableData()
 {
     // 加载表格数据
     QString tName = m_Name;
-    if (!enable()){
+    if (!enable()) {
         tName = "(" + tr("Disable") + ") " + m_Name;
     }
 

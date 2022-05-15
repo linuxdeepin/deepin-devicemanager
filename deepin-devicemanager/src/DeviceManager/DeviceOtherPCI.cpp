@@ -26,6 +26,11 @@ const QString &DeviceOtherPCI::name()const
     return m_Name;
 }
 
+const QString &DeviceOtherPCI::vendor() const
+{
+    return m_Vendor;
+}
+
 const QString &DeviceOtherPCI::driver()const
 {
     return m_Driver;

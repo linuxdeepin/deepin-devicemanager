@@ -74,6 +74,12 @@ public:
     const QString &name()const override;
 
     /**
+     * @brief name:获取制造商属性值
+     * @return QString 制造商属性值
+     */
+    const QString &vendor()const override;
+
+    /**
      * @brief driver
      * @return
      */
@@ -83,7 +89,7 @@ public:
      * @brief uniqueID 获取唯一标识
      * @return
      */
-    const QString& uniqueID() const;
+    const QString &uniqueID() const;
 
     /**
      * @brief setEnable 设置设备的禁用状态

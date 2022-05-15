@@ -32,7 +32,7 @@ DeviceAudio::DeviceAudio()
 
 void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("path") != mapInfo.end()){
+    if (mapInfo.find("path") != mapInfo.end()) {
         setAttribute(mapInfo, "name", m_Name);
         setAttribute(mapInfo, "driver", m_Driver);
         m_SysPath = mapInfo["path"];
@@ -56,7 +56,7 @@ void DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Module Alias", m_UniqueID);
 
     // 此处不能用 && 因为 m_DriverModules 可能为空
-    if(driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 
@@ -149,28 +149,33 @@ const QString &DeviceAudio::name()const
     return m_Name;
 }
 
+const QString &DeviceAudio::vendor() const
+{
+    return m_Vendor;
+}
+
 const QString &DeviceAudio::driver() const
 {
-    if(! m_DriverModules.isEmpty())
+    if (! m_DriverModules.isEmpty())
         return m_DriverModules;
     return m_Driver;
 }
-const QString& DeviceAudio::uniqueID() const
+const QString &DeviceAudio::uniqueID() const
 {
     return m_SysPath;
 }
 EnableDeviceStatus DeviceAudio::setEnable(bool e)
 {
-    if(!m_SysPath.contains("usb")){
+    if (!m_SysPath.contains("usb")) {
         m_UniqueID = m_Name;
     }
     m_HardwareClass = "sound";
     // 设置设备状态
-    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+    if (m_UniqueID.isEmpty() || m_SysPath.isEmpty()) {
         return EDS_Faild;
     }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
-    if(res){
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_SysPath, m_UniqueID, e, m_Driver);
+    if (res) {
         m_Enable = e;
     }
     // 设置设备状态
@@ -258,11 +263,11 @@ void DeviceAudio::loadTableData()
     // 记载表格内容
     QString tName = m_Name;
 
-    if (!available()){
+    if (!available()) {
         tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
 
-    if(!enable()){
+    if (!enable()) {
         tName = "(" + tr("Disable") + ") " + m_Name;
     }
 

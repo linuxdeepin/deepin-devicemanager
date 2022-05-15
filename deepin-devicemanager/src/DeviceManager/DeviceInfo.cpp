@@ -414,19 +414,19 @@ bool DeviceBaseInfo::enable()
 
 bool DeviceBaseInfo::available()
 {
-    if(driver().isEmpty()){
+    if (driver().isEmpty()) {
         m_Available = false;
     }
     return m_Available;
 }
 
-bool DeviceBaseInfo::driverIsKernelIn(const QString& driver)
+bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
 {
     // 驱动为空情况:
     // 1. 驱动被卸载了 此时驱动属于核外驱动
     // 2. ps/2 笔记本触摸板 暂无法获取驱动 此时当成核内驱动处理
     // 3. 但是由于判断是否是ps/2或者笔记本触摸板在子类判断(无需放在基类)，因此此处为空时先返回false，而在子类(DeviceInput)调用后判断是否是ps/2鼠标
-    if(driver.isEmpty()){
+    if (driver.isEmpty()) {
         return false;
     }
 
@@ -445,7 +445,6 @@ void DeviceBaseInfo::setCanEnale(bool can)
     m_CanEnable = can;
 }
 
-
 bool DeviceBaseInfo::canEnable()
 {
     return m_CanEnable;
@@ -461,24 +460,61 @@ bool DeviceBaseInfo::canUninstall()
     return m_CanUninstall;
 }
 
-void DeviceBaseInfo::setHardwareClass(const QString& hclass)
+void DeviceBaseInfo::setHardwareClass(const QString &hclass)
 {
     m_HardwareClass = hclass;
 }
 
-const QString& DeviceBaseInfo::hardwareClass() const
+const QString &DeviceBaseInfo::hardwareClass() const
 {
     return m_HardwareClass;
 }
 
-const QString& DeviceBaseInfo::uniqueID() const
+const QString &DeviceBaseInfo::uniqueID() const
 {
     return m_UniqueID;
 }
 
-const QString& DeviceBaseInfo::sysPath() const
+const QString &DeviceBaseInfo::sysPath() const
 {
     return m_SysPath;
+}
+
+const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool flag)
+{
+    // 从文件中获取制造商ID信息
+    QFile vendorFile;
+
+    if (flag) {
+        vendorFile.setFileName(QString("/sys") + sysPath + QString("/vendor"));
+    } else {
+        vendorFile.setFileName(QString("/sys") + sysPath + QString("/device"));
+    }
+    if (false == vendorFile.open(QIODevice::ReadOnly))
+        return QString();
+
+    QString vendor = vendorFile.readAll();
+    vendorFile.close();
+
+    return vendor;
+}
+
+const QString DeviceBaseInfo::getDriverVersion()
+{
+    QProcess process;
+    process.start("modinfo " + driver()  + "| grep version");
+    process.waitForFinished(-1);
+
+    QString output = process.readAllStandardOutput();
+
+    foreach (QString out, output.split("\n")) {
+        QStringList item = out.split(":");
+        if ("version" == item[0].trimmed()) {
+            return item[1];
+        }
+    }
+
+    return "";
 }
 
 const QString DeviceBaseInfo::getOverviewInfo()
@@ -566,15 +602,15 @@ void DeviceBaseInfo::mapInfoToList()
 void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
 {
     // 网卡使用物理地址作为匹配值
-    if(mapInfo.find("HW Address") != mapInfo.end()){
+    if (mapInfo.find("HW Address") != mapInfo.end()) {
         m_HwinfoToLshw = mapInfo["HW Address"];
         return;
     }
 
     // 非usb总线设备直接使用 SysFS BusID
-    if(mapInfo.find("SysFS ID") != mapInfo.end()
+    if (mapInfo.find("SysFS ID") != mapInfo.end()
             && mapInfo.find("SysFS BusID") != mapInfo.end()
-            && !mapInfo["SysFS ID"].contains("usb")){
+            && !mapInfo["SysFS ID"].contains("usb")) {
         m_HwinfoToLshw = mapInfo["SysFS BusID"];
         return;
     }
@@ -585,7 +621,7 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
         return;
     }
     QStringList chs = words[0].split("-");
-    if (chs.size() != 2){
+    if (chs.size() != 2) {
         return;
     }
 
@@ -593,9 +629,9 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
     // 1-3
     QStringList nums = QStringList() << "0" << "1" << "2" << "3" << "4" << "5" << "6" << "7" << "8" << "9" << "a" << "b" << "c" << "d" << "e" << "f" << "g" << "h" << "i" << "j";
     QRegExp reg("([0-9a-zA-Z])-([0-9a-zA-Z]\\.[0-9a-zA-Z])");
-    if(reg.exactMatch(words[0])){
+    if (reg.exactMatch(words[0])) {
         m_HwinfoToLshw = QString("usb@%1:%2").arg(reg.cap(1)).arg(reg.cap(2));
-    }else{
+    } else {
         int first = chs[0].toInt();
         int second = chs[1].toInt();
         m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
@@ -605,19 +641,19 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
 bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)
 {
     // 网卡设备与序列号匹配上
-    if(mapInfo.find("logical name") != mapInfo.end() && mapInfo.find("serial") != mapInfo.end()){
-        if(m_HwinfoToLshw == mapInfo["serial"]){
+    if (mapInfo.find("logical name") != mapInfo.end() && mapInfo.find("serial") != mapInfo.end()) {
+        if (m_HwinfoToLshw == mapInfo["serial"]) {
             return true;
         }
     }
 
-    if(mapInfo.find("bus info") == mapInfo.end()){
+    if (mapInfo.find("bus info") == mapInfo.end()) {
         return false;
     }
     // 非usb设备
-    if(mapInfo["bus info"].startsWith("pci")){
+    if (mapInfo["bus info"].startsWith("pci")) {
         QStringList words = mapInfo["bus info"].split("@");
-        if (2 == words.size() && words[1] == m_HwinfoToLshw){
+        if (2 == words.size() && words[1] == m_HwinfoToLshw) {
             return true;
         }
     }

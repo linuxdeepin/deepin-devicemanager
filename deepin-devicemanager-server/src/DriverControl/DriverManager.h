@@ -21,10 +21,15 @@
 #ifndef DRIVERMANAGER_H
 #define DRIVERMANAGER_H
 
+#include "commonfunction.h"
+
 #include <QObject>
+
+#include <cups.h>
 
 class ModCore;
 class DebInstaller;
+class DriverInstaller;
 class QThread;
 
 class DriverManager : public QObject
@@ -34,8 +39,11 @@ public:
     explicit DriverManager(QObject *parent = nullptr);
     ~ DriverManager();
 
+    bool checkDriverInfo(); //检测驱动是否需要更新
     bool unInstallDriver(const QString &moduleName); //驱动卸载
-    bool installDriver(const QString &filepath);  // 驱动安装
+    bool installDriver(const QString &filepath);     // 驱动安装
+    void installDriver(const QString &pkgName, const QString &version);// 驱动安装
+    void undoInstallDriver(); // 取消当前的驱动安装
     //获取依赖当前模块在使用的模块
     QStringList checkModuleInUsed(const QString &modName);
     //检查当前模块是否在黑名单
@@ -51,7 +59,21 @@ public:
 
 private:
     void initConnections();
-    bool unInstallModule(const QString &moduleName, QString& msg);
+    bool unInstallModule(const QString &moduleName, QString &msg);
+    bool checkPrinterInfo(); //检测打印机驱动是否需要更新 返回值true：是 false：否
+    void loadPrinterInfo(QMap<QString, QString> &mapInfo);
+    bool checkBoardCardInfo();//检测板载设备驱动是否需要更新 返回值true：是 false：否
+    bool checkBoardCardInfo(const DriverType type, QMap<QString, QString> &mapInfo);
+    bool checkCameraInfo(QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief getMapInfo:解析打印机cups第三方库获取的信息
+     * @param mapInfo:解析得到的map信息
+     * @param src:cups获取的原始信息
+     */
+    void getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src);
+    void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
+
 
 signals:
     void sigProgressDetail(int progress, const QString &strDeatils);
@@ -59,12 +81,20 @@ signals:
     void sigDebInstall(const QString &package);
     void sigDebUnstall(const QString &package);
 
+    void sigDownloadProgressChanged(QStringList msg);//驱动下载进度、速度、已下载大小
+    void sigDownloadFinished();//下载完成
+    void sigInstallProgressChanged(int progress);//安装进度
+    void sigInstallProgressFinished(bool bsuccess, int err);
+
 public slots:
 
 private:
     ModCore *mp_modcore = nullptr;
     DebInstaller *mp_debinstaller = nullptr;
     QThread *mp_deboperatethread = nullptr;
+    DriverInstaller *mp_driverInstaller = nullptr;
+    QThread *mp_driverOperateThread = nullptr;
+
     int m_installprocess = 0;
     QString errmsg;
 

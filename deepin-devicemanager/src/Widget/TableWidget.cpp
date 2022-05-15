@@ -178,7 +178,6 @@ void TableWidget::paintEvent(QPaintEvent *e)
     painter.fillPath(paintPath, bgBrush);
 
     painter.restore();
-
 }
 
 void TableWidget::slotShowMenu(const QPoint &point)

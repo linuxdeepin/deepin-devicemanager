@@ -102,6 +102,12 @@ public:
     virtual const QString &name() const = 0;
 
     /**
+     * @brief vendor:获取设备制造商
+     * @return 设备制造商
+     */
+    virtual const QString &vendor() const = 0;
+
+    /**
      * @brief driver:获取设备驱动
      * @return 设备驱动
      */
@@ -131,7 +137,7 @@ public:
      * @param driver 驱动名称
      * @return
      */
-    virtual bool driverIsKernelIn(const QString& driver);
+    virtual bool driverIsKernelIn(const QString &driver);
 
     /**
      * @brief setCanEnale : set can enable or not
@@ -160,25 +166,39 @@ public:
      * @brief setHardwareClass
      * @param hclass
      */
-    void setHardwareClass(const QString& hclass);
+    void setHardwareClass(const QString &hclass);
 
     /**
      * @brief hardwareClass
      * @return
      */
-    const QString& hardwareClass() const;
+    const QString &hardwareClass() const;
 
     /**
      * @brief uniqueID
      * @return
      */
-    const QString& uniqueID() const;
+    const QString &uniqueID() const;
 
     /**
      * @brief sysPath
      * @return
      */
-    const QString& sysPath() const;
+    const QString &sysPath() const;
+
+    /**
+     * @brief getVendorOrModelId:获取Vendor 或 Model Id
+     * @param sysPath 属性sysFS ID
+     * @param flag true:vendor id.false:model id
+     * @return
+     */
+    const QString getVendorOrModelId(const QString &sysPath, bool flag = true);
+
+    /**
+     * @brief getDriverVersion: 获取驱动版本
+     * @return
+     */
+    const QString getDriverVersion();
 
     /**
      * @brief isValid：判断属性值是否有效

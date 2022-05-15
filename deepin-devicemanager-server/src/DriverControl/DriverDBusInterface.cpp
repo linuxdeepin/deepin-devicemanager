@@ -8,6 +8,7 @@
 
 DriverDBusInterface::DriverDBusInterface(QObject *parent)
     : QObject(parent)
+    , QDBusContext()
     , mp_drivermanager(new DriverManager(this))
     , pcore(new ModCore(this))
 {
@@ -18,6 +19,11 @@ void DriverDBusInterface::initConnects()
 {
     connect(mp_drivermanager, &DriverManager::sigProgressDetail, this, &DriverDBusInterface::sigProgressDetail);
     connect(mp_drivermanager, &DriverManager::sigFinished, this, &DriverDBusInterface::sigFinished);
+
+    connect(mp_drivermanager, &DriverManager::sigDownloadProgressChanged, this, &DriverDBusInterface::sigDownloadProgressChanged);
+    connect(mp_drivermanager, &DriverManager::sigDownloadFinished, this, &DriverDBusInterface::sigDownloadFinished);
+    connect(mp_drivermanager, &DriverManager::sigInstallProgressChanged, this, &DriverDBusInterface::sigInstallProgressChanged);
+    connect(mp_drivermanager, &DriverManager::sigInstallProgressFinished, this, &DriverDBusInterface::sigInstallProgressFinished);
 }
 
 bool DriverDBusInterface::unInstallDriver(const QString &modulename)
@@ -28,6 +34,16 @@ bool DriverDBusInterface::unInstallDriver(const QString &modulename)
 bool DriverDBusInterface::installDriver(const QString &filepath)
 {
     return  mp_drivermanager->installDriver(filepath);
+}
+
+void DriverDBusInterface::installDriver(const QString &modulename, const QString &version)
+{
+    return  mp_drivermanager->installDriver(modulename, version);
+}
+
+void DriverDBusInterface::undoInstallDriver()
+{
+    return mp_drivermanager->undoInstallDriver();
 }
 
 QStringList DriverDBusInterface::checkModuleInUsed(const QString &modulename)

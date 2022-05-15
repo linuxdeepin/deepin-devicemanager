@@ -32,17 +32,17 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "driver", m_Driver, false);
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
-    if(driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 }
 
 void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("unique_id") != mapInfo.end()){
+    if (mapInfo.find("unique_id") != mapInfo.end()) {
         m_UniqueID = mapInfo["unique_id"];
         m_Name = mapInfo["name"];
-        m_SysPath =mapInfo["path"];
+        m_SysPath = mapInfo["path"];
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
         setAttribute(mapInfo, "driver", m_Driver);
@@ -50,7 +50,7 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_CanUninstall = !driverIsKernelIn(m_Driver);
         return;
     }
-    if(mapInfo.find("Enable") != mapInfo.end()){
+    if (mapInfo.find("Enable") != mapInfo.end()) {
         m_Enable = false;
     }
     setAttribute(mapInfo, "Serial ID", m_SerialID);
@@ -64,7 +64,7 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver, true);//
     setAttribute(mapInfo, "Driver Modules", m_Driver, true);
     setAttribute(mapInfo, "Speed", m_Speed);
-    if(driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 
@@ -76,6 +76,11 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 const QString &DeviceImage::name()const
 {
     return m_Name;
+}
+
+const QString &DeviceImage::vendor() const
+{
+    return m_Vendor;
 }
 
 const QString &DeviceImage::driver()const
@@ -99,15 +104,15 @@ const QString DeviceImage::getOverviewInfo()
 
 EnableDeviceStatus DeviceImage::setEnable(bool e)
 {
-    if(m_SerialID.isEmpty()){
+    if (m_SerialID.isEmpty()) {
         return EDS_NoSerial;
     }
 
-    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+    if (m_UniqueID.isEmpty() || m_SysPath.isEmpty()) {
         return EDS_Faild;
     }
-    bool res  = DBusEnableInterface::getInstance()->enable("camera",m_Name,m_SysPath,m_UniqueID,e, m_Driver);
-    if(res){
+    bool res  = DBusEnableInterface::getInstance()->enable("camera", m_Name, m_SysPath, m_UniqueID, e, m_Driver);
+    if (res) {
         m_Enable = e;
     }
     // 设置设备状态
@@ -153,11 +158,11 @@ void DeviceImage::loadTableData()
     // 记载表格内容
     QString tName = m_Name;
 
-    if (!available()){
+    if (!available()) {
         tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
 
-    if(!enable()){
+    if (!enable()) {
         tName = "(" + tr("Disable") + ") " + m_Name;
     }
 

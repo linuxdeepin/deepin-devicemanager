@@ -69,6 +69,7 @@ configure_file(../src/config.h.in config.h @ONLY)
 find_package(PkgConfig REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5 COMPONENTS DBus REQUIRED)
+find_package(Qt5Network REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
@@ -128,6 +129,7 @@ target_link_libraries(${PROJECT_NAME_TEST}
     Qt5::DBus
     Qt5::Xml
     Qt5::Test
+    Qt5::Network
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
     ${DtkGUI_LIBRARIES}

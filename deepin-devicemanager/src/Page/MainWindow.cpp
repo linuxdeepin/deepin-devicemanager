@@ -2,6 +2,7 @@
 #include "MainWindow.h"
 #include "WaitingWidget.h"
 #include "DeviceWidget.h"
+#include "PageDriverManager.h"
 #include "MacroDefinition.h"
 #include "DeviceManager.h"
 #include "DebugTimeManager.h"
@@ -16,6 +17,9 @@
 #include <DFileDialog>
 #include <DApplication>
 #include <DFontSizeManager>
+#include <DButtonBox>
+#include <DTitlebar>
+#include <DDialog>
 
 // Qt库文件
 #include <QResizeEvent>
@@ -41,7 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_MainStackWidget(new DStackedWidget(this))
     , mp_WaitingWidget(new WaitingWidget(this))
     , mp_DeviceWidget(new DeviceWidget(this))
+    , mp_DriverManager(new PageDriverManager(this))
     , mp_WorkingThread(new LoadInfoThread)
+    , mp_ButtonBox(new DButtonBox(this))
 {
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
@@ -62,6 +68,7 @@ MainWindow::~MainWindow()
     // 释放指针
     DELETE_PTR(mp_WaitingWidget)
     DELETE_PTR(mp_DeviceWidget)
+//    DELETE_PTR(mp_DriverManager)
     DELETE_PTR(mp_MainStackWidget)
     DELETE_PTR(mp_WorkingThread)
 }
@@ -203,11 +210,17 @@ void MainWindow::getJsonDoc(QJsonDocument &doc)
 
 void MainWindow::windowMaximizing()
 {
-    if (!window()->windowState().testFlag(Qt::WindowMaximized)){
+    if (!window()->windowState().testFlag(Qt::WindowMaximized)) {
         window()->setWindowState(windowState() | Qt::WindowMaximized);
-    }else{
+    } else {
         window()->setWindowState(windowState() & ~Qt::WindowMaximized);
     }
+}
+
+void MainWindow::swichStackWidget()
+{
+    if (0 == mp_MainStackWidget->currentIndex())
+        mp_MainStackWidget->setCurrentIndex(1);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -220,7 +233,10 @@ void MainWindow::initWindow()
     //1. 第一步初始化窗口大小
     initWindowSize();
 
-    //2. 初始化界面布局
+    //2. 添加标题栏按钮
+    initWindowTitle();
+
+    //3. 初始化界面布局
     initWidgets();
 }
 
@@ -235,6 +251,32 @@ void MainWindow::initWindowSize()
     resize(initSize);
 }
 
+void MainWindow::initWindowTitle()
+{
+    QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
+    titlebar()->setIcon(appIcon);
+    // 设置 DButtonBox 里面的 button
+    mp_ButtonBox->setFixedSize(242, 38);
+    mp_ButtonBox->setButtonList({new DButtonBoxButton("硬件信息"), new DButtonBoxButton("驱动管理")}, true);
+    mp_ButtonBox->setId(mp_ButtonBox->buttonList().at(0), 0);
+    mp_ButtonBox->setId(mp_ButtonBox->buttonList().at(1), 1);
+    mp_ButtonBox->buttonList().at(0)->click();
+
+    connect(mp_ButtonBox, &DButtonBox::buttonClicked, this, [this](QAbstractButton * button) {
+        if (mp_ButtonBox->id(button) == 0) {
+            if (0 == mp_MainStackWidget->currentIndex())
+                return ;
+            else
+                mp_MainStackWidget->setCurrentIndex(1);
+        } else {
+            mp_MainStackWidget->setCurrentIndex(2);
+            if (mp_DriverManager->isFirstScan())
+                mp_DriverManager->scanDriverInfo();
+        }
+    });
+    titlebar()->addWidget(mp_ButtonBox);
+}
+
 void MainWindow::initWidgets()
 {
     // 设置窗口的主控件
@@ -247,6 +289,9 @@ void MainWindow::initWidgets()
 
     // 添加信息显示界面
     mp_MainStackWidget->addWidget(mp_DeviceWidget);
+
+    // 初始化驱动相关界面
+    mp_MainStackWidget->addWidget(mp_DriverManager);
 }
 
 void MainWindow::refreshDataBase()
@@ -256,6 +301,17 @@ void MainWindow::refreshDataBase()
 
     if (mp_WorkingThread)
         mp_WorkingThread->start();
+}
+
+void MainWindow::slotSetPage(QString page)
+{
+    if("driver" == page){
+        if(m_IsFirstRefresh){
+            m_ShowDriverPage = true;
+        }else{
+            mp_ButtonBox->buttonList().at(1)->click();
+        }
+    }
 }
 
 void MainWindow::slotLoadingFinish(const QString &message)
@@ -289,9 +345,14 @@ void MainWindow::slotLoadingFinish(const QString &message)
         // 刷新结束
         m_refreshing = false;
 
-        //
         if (m_IsFirstRefresh)
             m_IsFirstRefresh = false;
+
+        // 是否切换到驱动界面
+        if(m_ShowDriverPage){
+            m_ShowDriverPage = false;
+            mp_ButtonBox->buttonList().at(1)->click();
+        }
     }
 }
 
@@ -410,7 +471,25 @@ bool MainWindow::event(QEvent *event)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    // 处理状态栏 “关闭所有” 按钮时通知后台更新信息
-//    DBusInterface::getInstance()->refreshInfo();
-    return DMainWindow::closeEvent(event);
+    if (mp_DriverManager->isInstalling()) {
+        // 当前界面正在驱动安装，弹窗提示
+        DDialog dialog;
+        dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
+        dialog.setTitle(QObject::tr("You are installing a driver, which will be interrupted if you exit."));
+        DLabel* label = new DLabel(this);
+        label->setText(QObject::tr("Are you sure you want to exit?"));
+        label->setAlignment(Qt::AlignHCenter);
+        dialog.addContent(label);
+        dialog.addButton(QObject::tr("Exit","button"), false, DDialog::ButtonWarning);
+        dialog.addButton(QObject::tr("Cancel","button"));
+        connect(dialog.getButton(0), &QAbstractButton::clicked, this, [ = ]() {
+            return DMainWindow::closeEvent(event);
+        });
+        connect(dialog.getButton(1), &QAbstractButton::clicked, this, [ = ]() {
+            event->ignore();
+        });
+        dialog.exec();
+    } else {
+        return DMainWindow::closeEvent(event);
+    }
 }

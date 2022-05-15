@@ -50,10 +50,22 @@ public:
     bool setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**
+     * @brief setIsWireless: 设置是否是无线网
+     * @param sysFSID: SysFS ID: /class/net/enp2s0
+     */
+    void setIsWireless(const QString &sysfs);
+
+    /**
      * @brief name:获取名称属性值
      * @return QString 名称属性值
      */
     const QString &name()const override;
+
+    /**
+     * @brief name:获取制造商属性值
+     * @return QString 制造商属性值
+     */
+    const QString &vendor()const override;
 
     /**
      * @brief driver:获取驱动属性值
@@ -97,6 +109,12 @@ public:
      * @return
      */
     QString logicalName();
+
+    /**
+     * @brief isWireless: 获取是否是无线网
+     * @return
+     */
+    bool isWireless();
 
 protected:
 
@@ -147,6 +165,8 @@ private:
     QString             m_Capacity;                     //<! 【最大速度】
     QString             m_Latency;                      //<! 【延迟】
     QString             m_Multicast;                    //<! 【组播】
+
+    bool                m_IsWireless;                   //<! 【是否是无线网】
 };
 
 #endif // DEVICENETWORK_H

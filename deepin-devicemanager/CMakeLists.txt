@@ -32,6 +32,7 @@ set(APP_DESKTOP "${APP_RES_DIR}/deepin-devicemanager.desktop")
 set(APP_QRC "${APP_RES_DIR}/appimage.qrc")
 set(APP_ICON_FILE "${APP_RES_DIR}/icons/deepin/builtin/deepin-devicemanager.svg")
 set(APP_AUTHENTICATION "${APP_RES_DIR}/com.deepin.deepin-devicemanager.policy")
+set(APP_SERVICE "${APP_RES_DIR}/dbus/com.deepin.Devicemanager.service")
 project(${APP_BIN_NAME})
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -104,10 +105,12 @@ find_package(Qt5 COMPONENTS DBus REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
+find_package(QApt REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(DFrameworkdbus REQUIRED)
+
 
 include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
@@ -141,6 +144,7 @@ install(FILES ${APP_DESKTOP} DESTINATION share/applications)
 install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/apps)
 install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
 install(FILES ${APP_AUTHENTICATION} DESTINATION /usr/share/polkit-1/actions)
+install(FILES ${APP_SERVICE} DESTINATION share/dbus-1/services)
 
 # Test--------deepin-devicemanager
 add_subdirectory(./tests)

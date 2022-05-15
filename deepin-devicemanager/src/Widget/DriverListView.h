@@ -36,8 +36,8 @@ public slots:
 
     // QWidget interface
 protected:
-    void paintEvent(QPaintEvent *event);
-    void drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const;
+    void paintEvent(QPaintEvent *event) override;
+    void drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const override;
 };
 
 #endif // DRIVERLISTVIEW_H

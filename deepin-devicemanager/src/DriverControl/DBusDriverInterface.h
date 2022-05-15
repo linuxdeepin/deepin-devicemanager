@@ -22,12 +22,15 @@
 #ifndef DBUSDRIVERINTERFACE_H
 #define DBUSDRIVERINTERFACE_H
 
+#include "MacroDefinition.h"
+
 #include <QObject>
 #include <QDBusInterface>
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDebug>
+#include <QDBusContext>
 
 #include <mutex>
 
@@ -58,20 +61,31 @@ public:
      * @brief uninstallDriver 卸载驱动，通过dbus调用 com.deepin.devicemanager /com/deepin/drivermanager 里面的unInstallDriver接口
      * @param driver 需要卸载的驱动名称
      */
-    void uninstallDriver(const QString& driver);
+    void uninstallDriver(const QString &driver);
     void uninstallPrinter(const QString &vendor, const QString &model);
 
     /**
      * @brief installDriver 更新驱动，通过dbus调用 com.deepin.devicemanager /com/deepin/drivermanager 里面的installDriver接口
      * @param driver 需要安装的驱动文件名称
      */
-    void installDriver(const QString& driver);
+    void installDriver(const QString &driver);
+
+    /**
+     * @brief installDriver 更新驱动，通过dbus调用 com.deepin.devicemanager /com/deepin/drivermanager 里面的installDriver接口
+     * @param driver 需要安装的驱动文件名称
+     */
+    void installDriver(const QString &driverName, const QString &version);
+
+    /**
+     * @brief undoInstallDriver 取消当前正在安装的驱动过程
+     */
+    void undoInstallDriver();
 
     /**
      * @brief installDriver
      * @param driver
      */
-    bool isDriverPackage(const QString& path);
+    bool isDriverPackage(const QString &path);
 
     /**
      * @brief isArchMatched
@@ -90,9 +104,13 @@ public:
 signals:
     void processChange(qint32 value, QString details);
     void processEnd(bool sucess, QString msg);
+    void downloadProgressChanged(QStringList msg);
+    void downloadFinished();
+    void installProgressChanged(int progress);
+    void installProgressFinished(bool bsuccess, int err);
 
 protected:
-    explicit DBusDriverInterface(QObject* parent = nullptr);
+    explicit DBusDriverInterface(QObject *parent = nullptr);
     virtual ~DBusDriverInterface();
 
 private slots:
@@ -101,7 +119,7 @@ private slots:
      * @param value 当前处理的进度
      * @param detail 发送过来的时时信息
      */
-    void slotProcessChange(qint32 value,QString detail);
+    void slotProcessChange(qint32 value, QString detail);
 
     /**
      * @brief slotProcessEnd 接收后台结束信号
@@ -112,7 +130,27 @@ private slots:
     /**
      * @brief slotCallFinished 更新结束结束的回调
      */
-    void slotCallFinished(QDBusPendingCallWatcher* watcher);
+    void slotCallFinished(QDBusPendingCallWatcher *watcher);
+
+    /**
+     * @brief slotDownloadProgressChanged 驱动下载时回调，返回驱动下载进度、速度、已下载大小信息
+     */
+    void slotDownloadProgressChanged(QStringList msg);
+
+    /**
+     * @brief slotDownloadFinished 驱动下载完成
+     */
+    void slotDownloadFinished();
+
+    /**
+     * @brief slotInstallProgressChanged 驱动安装时回调，返回安装进度信息
+     */
+    void slotInstallProgressChanged(int progress);
+
+    /**
+     * @brief slotInstallProgressFinished 驱动安装完成回调，返回错误信息
+     */
+    void slotInstallProgressFinished(bool bsuccess, int err);
 
 private:
     /**

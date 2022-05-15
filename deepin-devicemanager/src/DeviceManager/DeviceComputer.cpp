@@ -21,6 +21,11 @@ const QString &DeviceComputer::name() const
     return m_Name;
 }
 
+const QString &DeviceComputer::vendor() const
+{
+    return m_Vendor;
+}
+
 const QString &DeviceComputer::driver() const
 {
     return m_Driver;

@@ -58,5 +58,40 @@
         <file>icons/deepin/builtin/icons/cautious_200px.png</file>
         <file>icons/deepin/builtin/icons/fail_200px.png</file>
         <file>icons/deepin/builtin/icons/success_200px.png</file>
+        <file>icons/deepin/builtin/icons/update.svg</file>
+        <file>icons/deepin/builtin/icons/alert.svg</file>
+        <file>icons/deepin/builtin/icons/ok.svg</file>
+        <file>icons/deepin/builtin/icons/waiting.svg</file>
+        <file>icons/deepin/builtin/icons/warning.svg</file>
+        <file>icons/deepin/builtin/icons/bluetooth.svg</file>
+        <file>icons/deepin/builtin/icons/camera.svg</file>
+        <file>icons/deepin/builtin/icons/cpu.svg</file>
+        <file>icons/deepin/builtin/icons/GPU.svg</file>
+        <file>icons/deepin/builtin/icons/keyboard.svg</file>
+        <file>icons/deepin/builtin/icons/mc.svg</file>
+        <file>icons/deepin/builtin/icons/mouse.svg</file>
+        <file>icons/deepin/builtin/icons/network.svg</file>
+        <file>icons/deepin/builtin/icons/printer.svg</file>
+        <file>icons/deepin/builtin/icons/scaner.svg</file>
+        <file>icons/deepin/builtin/icons/tablet.svg</file>
+        <file>icons/deepin/builtin/icons/voice.svg</file>
+        <file>icons/deepin/builtin/icons/Wi-Fi.svg</file>
+        <file>icons/deepin/builtin/icons/fail.svg</file>
+        <file>icons/deepin/builtin/icons/erro-128.svg</file>
+        <file>icons/deepin/builtin/icons/erro-96.svg</file>
+        <file>icons/deepin/builtin/icons/update failed.svg</file>
+        <file>icons/deepin/builtin/icons/update succeed.svg</file>
+        <file>icons/deepin/builtin/icons/update-btn.svg</file>
+        <file>icons/deepin/builtin/icons/install.svg</file>
+        <file>icons/deepin/builtin/icons/retest.svg</file>
+        <file>icons/deepin/builtin/icons/latest.svg</file>
+        <file>icons/deepin/builtin/icons/animation/1.png</file>
+        <file>icons/deepin/builtin/icons/animation/2.png</file>
+        <file>icons/deepin/builtin/icons/animation/3.png</file>
+        <file>icons/deepin/builtin/icons/animation/4.png</file>
+        <file>icons/deepin/builtin/icons/animation/5.png</file>
+        <file>icons/deepin/builtin/icons/animation/6.png</file>
+        <file>icons/deepin/builtin/icons/animation/7.png</file>
+        <file>icons/deepin/builtin/icons/animation/8.png</file>
     </qresource>
 </RCC>

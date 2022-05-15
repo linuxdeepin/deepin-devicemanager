@@ -56,6 +56,12 @@ public:
     const QString &name()const override;
 
     /**
+     * @brief name:获取制造商属性值
+     * @return QString 制造商属性值
+     */
+    const QString &vendor()const override;
+
+    /**
      * @brief busInfo:获取总线信息属性值
      * @return QString:总线信息属性值
      */
@@ -119,7 +125,6 @@ private:
     QString             m_Speed;                        //<! 【速度】
     QString             m_BusID;                        //<! 【总线ID】
     QString             m_LogicalName;
-    QString             m_SerialID;                     //<!  设备的序列号id
 };
 
 #endif // DEVICEOTHERS_H

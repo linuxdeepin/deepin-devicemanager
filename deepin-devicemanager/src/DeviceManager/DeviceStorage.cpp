@@ -329,6 +329,11 @@ const QString &DeviceStorage::name() const
     return m_Model;
 }
 
+const QString &DeviceStorage::vendor() const
+{
+    return m_Vendor;
+}
+
 const QString &DeviceStorage::driver() const
 {
     return m_Driver;

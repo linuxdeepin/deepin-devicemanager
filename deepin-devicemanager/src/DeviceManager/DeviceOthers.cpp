@@ -14,7 +14,6 @@ DeviceOthers::DeviceOthers()
     , m_MaximumPower("")
     , m_Speed("")
     , m_LogicalName("")
-    , m_SerialID("")
 {
     m_CanEnable = true;
     m_CanUninstall = true;
@@ -37,7 +36,7 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "logical name", m_LogicalName);
 
     // 核内驱动不显示卸载菜单
-    if(driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 }
@@ -57,7 +56,7 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     m_HardwareClass = "others";
 
     // 核内驱动不显示卸载菜单
-    if(driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 
@@ -69,16 +68,17 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setHwinfoLshwKey(mapInfo);
 }
 
-EnableDeviceStatus DeviceOthers::setEnable(bool e){
-    if(m_SerialID.isEmpty()){
+EnableDeviceStatus DeviceOthers::setEnable(bool e)
+{
+    if (m_SerialID.isEmpty()) {
         return EDS_NoSerial;
     }
 
-    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+    if (m_UniqueID.isEmpty() || m_SysPath.isEmpty()) {
         return EDS_Faild;
     }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e);
-    if(res){
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_SysPath, m_UniqueID, e);
+    if (res) {
         m_Enable = e;
     }
     // 设置设备状态
@@ -88,6 +88,11 @@ EnableDeviceStatus DeviceOthers::setEnable(bool e){
 const QString &DeviceOthers::name()const
 {
     return m_Name;
+}
+
+const QString &DeviceOthers::vendor() const
+{
+    return m_Vendor;
 }
 
 const QString &DeviceOthers::busInfo()const
@@ -144,10 +149,10 @@ void DeviceOthers::loadTableData()
 {
     // 加载表格数据
     QString tName = m_Name;
-    if (!available()){
+    if (!available()) {
         tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
-    if(!enable()){
+    if (!enable()) {
         tName = "(" + tr("Disable") + ") " + m_Name;
     }
 

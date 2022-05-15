@@ -10,6 +10,7 @@
 #include "EnableSqlManager.h"
 #include "EnableUtils.h"
 #include "WakeupUtils.h"
+#include "DriverManager.h"
 
 #include <QDateTime>
 #include <QThread>
@@ -43,6 +44,21 @@ MainJob::MainJob(QObject *parent)
 {
     // 守护进程启动的时候加载所有信息
     updateAllDevice();
+    //启动时，检测驱动是否要更新，如果要更新则通知系统
+    DriverManager *drivermanager = new DriverManager(this);
+    if(drivermanager->checkDriverInfo()){
+        QString strUsername("");
+        QProcess process;
+        process.start("sh", QStringList() << "-c" << "who");
+        process.waitForFinished(-1);
+        strUsername = process.readAll().split(' ')[0];
+        qInfo() << strUsername;
+
+        QString strCmd = "runuser -l " + strUsername + " -c \"XDG_RUNTIME_DIR=\"/run/user/$(id -u " + strUsername + " )\" /usr/bin/deepin-devicemanager notify\"";
+        process.start("sh", QStringList() << "-c" << strCmd);
+        process.waitForFinished(-1);
+        qInfo() << process.readAll();
+    }
 
     // 后台加载后先禁用设备
     const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");

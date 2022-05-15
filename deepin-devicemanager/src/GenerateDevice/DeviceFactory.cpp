@@ -6,14 +6,11 @@
 #include "KLUGenerator.h"
 #include "PanguGenerator.h"
 #include "PanguVGenerator.h"
-#include "commondefine.h"
+#include "commonfunction.h"
 
 // Qt库文件
 #include <QProcess>
 #include <QFile>
-
-// 其它头文件
-#include <sys/utsname.h>
 
 DeviceFactory::DeviceFactory()
 {
@@ -23,11 +20,7 @@ DeviceFactory::DeviceFactory()
 DeviceGenerator *DeviceFactory::getDeviceGenerator()
 {
     // 获取系统架构
-    QString arch;
-    struct utsname utsbuf;
-    if (-1 == uname(&utsbuf)){
-        arch = QString::fromLocal8Bit(utsbuf.machine);
-    }
+    QString arch = Common::getArch();
 
     // 根据架构创建设备信息生成器
     DeviceGenerator *generator = nullptr;

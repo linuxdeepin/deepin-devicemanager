@@ -64,6 +64,11 @@ const QString &DeviceCdrom::name()const
     return m_Name;
 }
 
+const QString &DeviceCdrom::vendor() const
+{
+    return m_Vendor;
+}
+
 const QString &DeviceCdrom::driver()const
 {
     return m_Driver;
@@ -124,11 +129,11 @@ void DeviceCdrom::loadTableData()
     // 加载表格内容
     QString tName = m_Name;
 
-    if (!available()){
+    if (!available()) {
         tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
 
-    if(!enable()){
+    if (!enable()) {
         tName = "(" + tr("Disable") + ") " + m_Name;
     }
 

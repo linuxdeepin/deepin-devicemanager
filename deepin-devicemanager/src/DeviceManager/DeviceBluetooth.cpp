@@ -39,7 +39,7 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
 
 bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("path") != mapInfo.end()){
+    if (mapInfo.find("path") != mapInfo.end()) {
         setAttribute(mapInfo, "name", m_Name);
         setAttribute(mapInfo, "driver", m_Driver);
         m_SysPath = mapInfo["path"];
@@ -63,9 +63,9 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "Device", m_Name);
     m_HardwareClass = "bluetooth";
-  
+
     // 判断是否核内驱动
-    if(driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 
@@ -93,7 +93,7 @@ bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
     // 判断是否核内驱动
-    if(driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 
@@ -103,6 +103,11 @@ bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 const QString &DeviceBluetooth::name()const
 {
     return m_Name;
+}
+
+const QString &DeviceBluetooth::vendor() const
+{
+    return m_Vendor;
 }
 
 const QString &DeviceBluetooth::driver()const
@@ -123,15 +128,15 @@ const QString DeviceBluetooth::getOverviewInfo()
 
 EnableDeviceStatus DeviceBluetooth::setEnable(bool e)
 {
-    if(m_SerialID.isEmpty()){
+    if (m_SerialID.isEmpty()) {
         return EDS_NoSerial;
     }
 
-    if(m_UniqueID.isEmpty() || m_SysPath.isEmpty()){
+    if (m_UniqueID.isEmpty() || m_SysPath.isEmpty()) {
         return EDS_Faild;
     }
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_SysPath,m_UniqueID,e, m_Driver);
-    if(res){
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_SysPath, m_UniqueID, e, m_Driver);
+    if (res) {
         m_Enable = e;
     }
     // 设置设备状态
@@ -207,11 +212,11 @@ void DeviceBluetooth::loadTableData()
     // 加载表格数据
     QString tName = m_Name;
 
-    if (!available()){
+    if (!available()) {
         tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
 
-    if(!enable()){
+    if (!enable()) {
         tName = "(" + tr("Disable") + ") " + m_Name;
     }
 

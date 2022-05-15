@@ -180,6 +180,11 @@ const QString &DeviceMonitor::name()const
     return m_Name;
 }
 
+const QString &DeviceMonitor::vendor() const
+{
+    return m_Vendor;
+}
+
 const QString &DeviceMonitor::driver() const
 {
     return m_Driver;

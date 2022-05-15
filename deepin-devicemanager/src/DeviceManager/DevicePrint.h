@@ -49,6 +49,18 @@ public:
     const QString &name()const override;
 
     /**
+     * @brief name:获取制造商属性值
+     * @return QString 制造商属性值
+     */
+    const QString &vendor()const override;
+
+    /**
+     * @brief name:获取型号属性值
+     * @return QString 型号属性值
+     */
+    const QString makeAndeModel()const;
+
+    /**
      * @brief driver 返回驱动，重写纯虚函数
      * @return
      */
@@ -128,7 +140,8 @@ private:
     QString             m_URI;                          //<! 【URI】
     QString             m_Status;                       //<! 【状态】
     QString             m_Shared;                       //<! 【共享】
-    QString             m_Driver;
+    QString             m_Driver;                       //<! 【驱动】
+    QString             m_MakeAndModel;                 //<! 【制造商和型号】
 };
 
 #endif // DEVICEPRINT_H

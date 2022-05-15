@@ -2,6 +2,8 @@
 #include "DeviceNetwork.h"
 #include "DBusEnableInterface.h"
 
+#include <QFileInfo>
+
 DeviceNetwork::DeviceNetwork()
     : DeviceBaseInfo()
     , m_Name("")
@@ -29,6 +31,7 @@ DeviceNetwork::DeviceNetwork()
     , m_Capacity("")
     , m_Latency("")
     , m_Multicast("")
+    , m_IsWireless(false)
 {
     // 初始化可显示属性
     initFilterKey();
@@ -40,7 +43,7 @@ DeviceNetwork::DeviceNetwork()
 
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if(!matchToLshw(mapInfo)){
+    if (!matchToLshw(mapInfo)) {
         return;
     }
     // 设置由lshw获取的信息
@@ -70,7 +73,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "capacity", m_Capacity);
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
-    if(driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
 
@@ -80,7 +83,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
 bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo.find("path") != mapInfo.end()){
+    if (mapInfo.find("path") != mapInfo.end()) {
         setAttribute(mapInfo, "name", m_Name);
         setAttribute(mapInfo, "unique_id", m_UniqueID);
         setAttribute(mapInfo, "path", m_SysPath);
@@ -97,12 +100,26 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Driver Modules", m_DriverModules);
 
-    if(driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)){
+    if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
+
+    // 判断是否是无线网卡
+    setIsWireless(mapInfo["SysFS ID"]);
+
+
     setHwinfoLshwKey(mapInfo);
 
     return true;
+}
+
+void DeviceNetwork::setIsWireless(const QString &sysfs)
+{
+    // 路径下包含 phy80211 或 wireless 是无线网卡
+    QFileInfo fileInfo(QString("/sys") + sysfs);
+    if (fileInfo.exists("phy80211") || fileInfo.exists("wireless")) {
+        m_IsWireless = true;
+    }
 }
 
 const QString &DeviceNetwork::name()const
@@ -110,9 +127,14 @@ const QString &DeviceNetwork::name()const
     return m_Name;
 }
 
+const QString &DeviceNetwork::vendor() const
+{
+    return m_Vendor;
+}
+
 const QString &DeviceNetwork::driver()const
 {
-    if(! m_DriverModules.isEmpty())
+    if (! m_DriverModules.isEmpty())
         return m_DriverModules;
     return m_Driver;
 }
@@ -132,14 +154,14 @@ EnableDeviceStatus DeviceNetwork::setEnable(bool e)
 {
     m_HardwareClass = "network interface";
     // 设置设备状态
-    if(m_SysPath.isEmpty()){
+    if (m_SysPath.isEmpty()) {
         return EDS_Faild;
-    }else if(m_SysPath.contains("usb") && m_UniqueID.isEmpty()){
+    } else if (m_SysPath.contains("usb") && m_UniqueID.isEmpty()) {
         return EDS_Faild;
     }
 
-    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass,m_Name,m_LogicalName,m_UniqueID,e, m_Driver);
-    if(res){
+    bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_LogicalName, m_UniqueID, e, m_Driver);
+    if (res) {
         m_Enable = e;
     }
     // 设置设备状态
@@ -161,6 +183,11 @@ void DeviceNetwork::correctCurrentLinkStatus(QString linkStatus)
 QString DeviceNetwork::logicalName()
 {
     return m_LogicalName;
+}
+
+bool DeviceNetwork::isWireless()
+{
+    return m_IsWireless;
 }
 
 void DeviceNetwork::initFilterKey()
@@ -214,11 +241,11 @@ void DeviceNetwork::loadTableData()
     // 根据是否禁用设置设备名称
     QString tName = m_Name;
 
-    if (!available()){
+    if (!available()) {
         tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
 
-    if(!enable()){
+    if (!enable()) {
         tName = "(" + tr("Disable") + ") " + m_Name;
     }
 

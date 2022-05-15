@@ -135,7 +135,7 @@ TEST_F(UT_DevicePrint, UT_DevicePrint_enable)
 TEST_F(UT_DevicePrint, UT_DevicePrint_initFilterKey)
 {
     m_devicePrint->initFilterKey();
-    EXPECT_EQ(17, m_devicePrint->m_FilterKey.size());
+    EXPECT_EQ(16, m_devicePrint->m_FilterKey.size());
 }
 
 TEST_F(UT_DevicePrint, UT_DevicePrint_loadBaseDeviceInfo)

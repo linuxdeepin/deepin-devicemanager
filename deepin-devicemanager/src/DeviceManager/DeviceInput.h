@@ -62,6 +62,12 @@ public:
     const QString &name()const override;
 
     /**
+     * @brief name:获取制造商属性值
+     * @return QString 制造商属性值
+     */
+    const QString &vendor()const override;
+
+    /**
      * @brief name:获取名称属性值
      * @return QString 名称属性值
      */
@@ -120,7 +126,7 @@ public:
      * @brief wakeID
      * @return
      */
-    const QString& wakeupID();
+    const QString &wakeupID();
 
     /**
      * @brief bluetoothIsConnected 获取蓝牙的连接状态
@@ -160,21 +166,21 @@ private:
      * @brief getPS2Syspath 获取ps2鼠标键盘的syspath
      * @param dfs : Device Files 属性
      */
-    bool getPS2Syspath(const QString& dfs);
+    bool getPS2Syspath(const QString &dfs);
 
     /**
      * @brief isBluetoothDevice 判断是否是蓝牙设备
      * @param dfs 设备文件
      * @return
      */
-    bool isBluetoothDevice(const QString& dfs);
+    bool isBluetoothDevice(const QString &dfs);
 
     /**
      * @brief eventStrFromDeviceFiles 从Device Files中获取event字符串
      * @param dfs : Device Files 属性
      * @return
      */
-    QString eventStrFromDeviceFiles(const QString& dfs);
+    QString eventStrFromDeviceFiles(const QString &dfs);
 
 private:
     QString             m_Name;                         //<! 【名称】
