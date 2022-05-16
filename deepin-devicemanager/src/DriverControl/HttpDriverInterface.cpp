@@ -166,11 +166,11 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
                     if (infoList.size() > 2) {
                         if (infoList[1].contains(info.strDebVersion)) {
                             driverInfo->m_Status = ST_DRIVER_IS_NEW;
-                            driverInfo->m_Version  = info.strDebVersion;
+                            driverInfo->m_DebVersion  = info.strDebVersion;
                             return;
                         } else if (!infoList[1].contains("（") || !infoList[1].contains("(")) { //不是(none)（无），则是更新
                             //本地有安装包，但版本较低
-                            driverInfo->m_Version  = info.strDebVersion;
+                            driverInfo->m_DebVersion  = info.strDebVersion;
                             driverInfo->m_Packages = info.strPackages;
                             driverInfo->m_Status   = ST_CAN_UPDATE;
                             return;
@@ -184,7 +184,7 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
                             return;
                         } else {
                             //本地有安装包，但版本较低
-                            driverInfo->m_Version  = info.strDebVersion;
+                            driverInfo->m_DebVersion  = info.strDebVersion;
                             driverInfo->m_Packages = info.strPackages;
                             driverInfo->m_Status   = ST_CAN_UPDATE;
                             return;
@@ -195,7 +195,7 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
         }
         foreach (const strDriverInfo& info , lstDriverInfo) {
             if (max == info.iLevel) {
-                driverInfo->m_Version = info.strDebVersion;
+                driverInfo->m_DebVersion = info.strDebVersion;
                 driverInfo->m_Packages = info.strPackages;
                 driverInfo->m_Status = ST_NOT_INSTALL;
                 return;
