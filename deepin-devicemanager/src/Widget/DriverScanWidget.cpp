@@ -7,6 +7,7 @@
 
 #include <QPropertyAnimation>
 #include <QProcess>
+#include <QPainterPath>
 
 #define FONT_WEIGHT 63
 #define ICON_LABEL_SIZE 128

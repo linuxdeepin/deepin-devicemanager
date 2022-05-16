@@ -12,6 +12,7 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QThread>
+#include <QPainterPath>
 
 #define MARGIN_LR          20
 #define MARGIN_TB          12

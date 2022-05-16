@@ -7,6 +7,7 @@
 
 #include <QPainter>
 #include <QHBoxLayout>
+#include <QPainterPath>
 
 PageDriverTableView::PageDriverTableView(DWidget *parent)
     : DWidget(parent)
