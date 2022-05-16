@@ -163,12 +163,12 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
                     process.start("/bin/bash", options);
                     process.waitForFinished(-1);
                     QStringList infoList = QString(process.readAllStandardOutput()).split("\n");
-                    if (infoList.size() > 2 && infoList[1].contains(info.strDebVersion)) {
+                    if (infoList.size() > 2) {
                         if (infoList[1].contains(info.strDebVersion)) {
                             driverInfo->m_Status = ST_DRIVER_IS_NEW;
                             driverInfo->m_Version  = info.strDebVersion;
                             return;
-                        } else if (!(infoList[1].contains("（") || !infoList[1].contains("("))) { //不是(none)（无），则是更新
+                        } else if (!infoList[1].contains("（") || !infoList[1].contains("(")) { //不是(none)（无），则是更新
                             //本地有安装包，但版本较低
                             driverInfo->m_Version  = info.strDebVersion;
                             driverInfo->m_Packages = info.strPackages;
