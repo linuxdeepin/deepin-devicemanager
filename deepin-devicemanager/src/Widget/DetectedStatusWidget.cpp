@@ -111,7 +111,8 @@ void DetectedStatusWidget::setDownloadUI(const DriverType &driverType, const QSt
     mp_PicLabel->setPixmap(pic);
 
     // 下载驱动  和  机器类型
-    QString downloadStr = QObject::tr("Downloading drivers for %1...").arg(CommonTools::getDriverType(driverType));
+    QString ts = DApplication::translate("QObject", CommonTools::getDriverType(driverType).toStdString().data());
+    QString downloadStr = QObject::tr("Downloading drivers for %1...").arg(ts);
     mp_UpdateLabel->setText(downloadStr);
     QString speedStr = QObject::tr("Download speed: %1 Downloaded %2/%3")
                        .arg(speed)
@@ -155,7 +156,8 @@ void DetectedStatusWidget::setInstallUI(const DriverType &driverType, const QStr
     mp_PicLabel->setPixmap(pic);
 
     // 安装驱动  和  驱动描述
-    QString installStr = QObject::tr("Installing drivers for %1...").arg(CommonTools::getDriverType(driverType));
+    QString ts = DApplication::translate("QObject", CommonTools::getDriverType(driverType).toStdString().data());
+    QString installStr = QObject::tr("Installing drivers for %1...").arg(ts);
     mp_UpdateLabel->setText(installStr);
     mp_ModelLabel->setText(driverDescription);
     mp_Progress->setValue(progressValue);

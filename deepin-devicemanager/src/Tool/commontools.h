@@ -29,6 +29,8 @@
 #include <QPixmap>
 #include <QIcon>
 
+#include <DWidget>
+
 class CommonTools : public QObject
 {
     Q_OBJECT

@@ -450,7 +450,6 @@ void PageDriverManager::installNextDriver()
             mp_CurDriverInfo->m_Status = ST_DOWNLOADING;
             mp_ViewCanUpdate->setItemStatus(m_ListDriverIndex[0], mp_CurDriverInfo->status());
             mp_ViewNotInstall->setItemStatus(m_ListDriverIndex[0], mp_CurDriverInfo->status());
-            qInfo() << "Start driver ************************* " << info->packages();
             mp_HeadWidget->setDownloadUI(mp_CurDriverInfo->type(), "0MB/s", "0MB", mp_CurDriverInfo->size(), 0);
             DBusDriverInterface::getInstance()->installDriver(info->packages(), info->debVersion());
         }

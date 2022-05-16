@@ -19,105 +19,84 @@
 <context>
     <name>CommonTools</name>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="24"/>
         <source>Bluetooth adapter</source>
-        <translation>Adaptador de Bluetooth</translation>
+        <translation type="vanished">Adaptador de Bluetooth</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="25"/>
-        <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Imaging device</source>
-        <translation>Dispositivo de imagen</translation>
+        <translation type="vanished">Dispositivo de imagen</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="26"/>
         <source>Display adapter</source>
-        <translation>Adaptador de pantalla</translation>
+        <translation type="vanished">Adaptador de pantalla</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="27"/>
         <source>Keyboard</source>
-        <translation>Teclado</translation>
+        <translation type="vanished">Teclado</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="28"/>
         <source>Sound card</source>
-        <translation>Tarjeta de sonido</translation>
+        <translation type="vanished">Tarjeta de sonido</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="29"/>
         <source>Mouse</source>
-        <translation>Ratón</translation>
+        <translation type="vanished">Ratón</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="30"/>
         <source>Network adapter</source>
-        <translation>Adaptador de red</translation>
+        <translation type="vanished">Adaptador de red</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Printer</source>
-        <translation>Impresora</translation>
+        <translation type="vanished">Impresora</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Other Devices</source>
-        <translation>Otros dispositivos</translation>
+        <translation type="vanished">Otros dispositivos</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Wireless network adapter</source>
-        <translation>Adaptador de red inalámbrica</translation>
+        <translation type="vanished">Adaptador de red inalámbrica</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="48"/>
         <source>Installation successful</source>
-        <translation>Instalación exitosa</translation>
+        <translation type="vanished">Instalación exitosa</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="49"/>
         <source>Installation failed</source>
-        <translation>Instalación fallida</translation>
+        <translation type="vanished">Instalación fallida</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="50"/>
         <source>Downloading</source>
-        <translation>Descargando</translation>
+        <translation type="vanished">Descargando</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="51"/>
         <source>Installing</source>
-        <translation>Instalando</translation>
+        <translation type="vanished">Instalando</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Not installed</source>
-        <translation>No instalado</translation>
+        <translation type="vanished">No instalado</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Out-of-date</source>
-        <translation>Tiempo agotado</translation>
+        <translation type="vanished">Tiempo agotado</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Waiting</source>
-        <translation>Esperando</translation>
+        <translation type="vanished">Esperando</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="58"/>
         <source>Unknown error</source>
-        <translation>Error desconocido</translation>
+        <translation type="vanished">Error desconocido</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="59"/>
         <source>Network error</source>
-        <translation>Error de red</translation>
+        <translation type="vanished">Error de red</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Canceled</source>
-        <translation>Cancelado</translation>
+        <translation type="vanished">Cancelado</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="61"/>
@@ -143,9 +122,8 @@
 <context>
     <name>DBusDriverInterface</name>
     <message>
-        <location filename="../src/DriverControl/DBusDriverInterface.cpp" line="124"/>
         <source>Unknown error</source>
-        <translation>Error desconocido</translation>
+        <translation type="vanished">Error desconocido</translation>
     </message>
 </context>
 <context>
@@ -1303,62 +1281,62 @@
 <context>
     <name>DeviceOthers</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="132"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="131"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="133"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="132"/>
         <source>Vendor</source>
         <translation>Vendedor</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="133"/>
         <source>Model</source>
         <translation>Modelo</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="134"/>
         <source>Version</source>
         <translation>Versión</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="136"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="135"/>
         <source>Bus Info</source>
         <translation>Información de bus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="137"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="136"/>
         <source>Capabilities</source>
         <translation>Capacidades</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="137"/>
         <source>Driver</source>
         <translation>Controlador</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="139"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
         <source>Maximum Power</source>
         <translation>Potencia máxima</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="140"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="139"/>
         <source>Speed</source>
         <translation>Velocidad</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="145"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="144"/>
         <source>Serial Number</source>
         <translation>Número de serie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="154"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="153"/>
         <source>Unavailable</source>
         <translation>No disponible</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="157"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="156"/>
         <source>Disable</source>
         <translation>Deshabilitar</translation>
     </message>
@@ -3019,7 +2997,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="463"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="462"/>
         <source>Display Adapter</source>
         <translation>Adaptador de pantalla</translation>
     </message>
@@ -3052,7 +3030,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="472"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="471"/>
         <source>Network Adapter</source>
         <translation>Adaptador de red</translation>
     </message>
@@ -3069,7 +3047,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="466"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="465"/>
         <source>Sound Adapter</source>
         <translation>Adaptador de sonido</translation>
     </message>
@@ -3086,7 +3064,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="469"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="468"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
@@ -3135,6 +3113,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
+        <location filename="../src/Tool/commontools.cpp" line="27"/>
         <source>Keyboard</source>
         <translation>Teclado</translation>
     </message>
@@ -3151,6 +3130,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
+        <location filename="../src/Tool/commontools.cpp" line="29"/>
         <source>Mouse</source>
         <translation>Ratón</translation>
     </message>
@@ -3167,7 +3147,8 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="478"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="477"/>
+        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Printer</source>
         <translation>Impresora</translation>
     </message>
@@ -3184,7 +3165,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="475"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="474"/>
         <source>Camera</source>
         <translation>Cámara</translation>
     </message>
@@ -3217,6 +3198,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="948"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="984"/>
+        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Other Devices</source>
         <translation>Otros dispositivos</translation>
     </message>
@@ -3588,13 +3570,13 @@
         <translation>Geometría (lógica)</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="95"/>
-        <location filename="../src/main.cpp" line="97"/>
+        <location filename="../src/main.cpp" line="94"/>
+        <location filename="../src/main.cpp" line="96"/>
         <source>Device Manager</source>
         <translation>Administrador de dispositivos</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="98"/>
+        <location filename="../src/main.cpp" line="97"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Administrador de dispositivos de Deepin es una herramienta útil para ver la información del hardware y administrarlo.</translation>
     </message>
@@ -3649,17 +3631,17 @@
         <translation>Versión actual</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="624"/>
         <source>Missing drivers (%1)</source>
         <translation>Controladores faltantes (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
         <source>Outdated drivers (%1)</source>
         <translation>Controladores obsoletos (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="627"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
         <source>Up-to-date drivers (%1)</source>
         <translation>Controladores actualizados (%1)</translation>
     </message>
@@ -3808,6 +3790,87 @@
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="24"/>
+        <source>Bluetooth adapter</source>
+        <translation>Adaptador de Bluetooth</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="25"/>
+        <location filename="../src/Tool/commontools.cpp" line="32"/>
+        <source>Imaging device</source>
+        <translation>Dispositivo de imagen</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="26"/>
+        <source>Display adapter</source>
+        <translation>Adaptador de pantalla</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="28"/>
+        <source>Sound card</source>
+        <translation>Tarjeta de sonido</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="30"/>
+        <source>Network adapter</source>
+        <translation>Adaptador de red</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="34"/>
+        <source>Wireless network adapter</source>
+        <translation>Adaptador de red inalámbrica</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="48"/>
+        <source>Installation successful</source>
+        <translation>Instalación exitosa</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="49"/>
+        <source>Installation failed</source>
+        <translation>Instalación fallida</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="50"/>
+        <source>Downloading</source>
+        <translation>Descargando</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="51"/>
+        <source>Installing</source>
+        <translation>Instalando</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="52"/>
+        <source>Not installed</source>
+        <translation>No instalado</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="53"/>
+        <source>Out-of-date</source>
+        <translation>Tiempo agotado</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="54"/>
+        <source>Waiting</source>
+        <translation>Esperando</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="58"/>
+        <source>Unknown error</source>
+        <translation>Error desconocido</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="59"/>
+        <source>Network error</source>
+        <translation>Error de red</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="60"/>
+        <source>Canceled</source>
+        <translation>Cancelado</translation>
     </message>
 </context>
 <context>

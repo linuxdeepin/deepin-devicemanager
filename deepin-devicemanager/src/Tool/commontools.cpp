@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QDateTime>
 
+DWIDGET_USE_NAMESPACE
+
 #define ICON_SIZE_WIDTH 36
 #define ICON_SIZE_HEIGHT 36
 
@@ -21,17 +23,17 @@ QMap<DriverType, QString> CommonTools::m_MapDriverIcon = {
 };
 
 QMap<DriverType, QString> CommonTools::m_MapDriverType = {
-    {DR_Bluetooth, tr("Bluetooth adapter")}
-    , {DR_Camera, tr("Imaging device")}
-    , {DR_Gpu, tr("Display adapter")}
-    , {DR_Keyboard, tr("Keyboard")}
-    , {DR_Sound, tr("Sound card")}
-    , {DR_Mouse, tr("Mouse")}
-    , {DR_Network, tr("Network adapter")}
-    , {DR_Printer, tr("Printer")}
-    , {DR_Scaner, tr("Imaging device")}
-    , {DR_Tablet, tr("Other Devices")}
-    , {DR_WiFi, tr("Wireless network adapter")}
+    {DR_Bluetooth, QObject::tr("Bluetooth adapter")}
+    , {DR_Camera, QObject::tr("Imaging device")}
+    , {DR_Gpu, QObject::tr("Display adapter")}
+    , {DR_Keyboard, QObject::tr("Keyboard")}
+    , {DR_Sound, QObject::tr("Sound card")}
+    , {DR_Mouse, QObject::tr("Mouse")}
+    , {DR_Network, QObject::tr("Network adapter")}
+    , {DR_Printer, QObject::tr("Printer")}
+    , {DR_Scaner, QObject::tr("Imaging device")}
+    , {DR_Tablet, QObject::tr("Other Devices")}
+    , {DR_WiFi, QObject::tr("Wireless network adapter")}
 };
 
 QMap<Status, QString> CommonTools::m_MapStatusIcon = {
@@ -45,19 +47,19 @@ QMap<Status, QString> CommonTools::m_MapStatusIcon = {
 };
 
 QMap<Status, QString> CommonTools::m_MapStatusType = {
-    {ST_SUCESS, tr("Installation successful")}
-    , {ST_FAILED, tr("Installation failed")}
-    , {ST_DOWNLOADING, tr("Downloading")}
-    , {ST_INSTALL, tr("Installing")}
-    , {ST_NOT_INSTALL, tr("Not installed")}
-    , {ST_CAN_UPDATE, tr("Out-of-date")}
-    , {ST_WAITING, tr("Waiting")}
+    {ST_SUCESS, QObject::tr("Installation successful")}
+    , {ST_FAILED, QObject::tr("Installation failed")}
+    , {ST_DOWNLOADING, QObject::tr("Downloading")}
+    , {ST_INSTALL, QObject::tr("Installing")}
+    , {ST_NOT_INSTALL, QObject::tr("Not installed")}
+    , {ST_CAN_UPDATE, QObject::tr("Out-of-date")}
+    , {ST_WAITING, QObject::tr("Waiting")}
 };
 
 QMap<int, QString> CommonTools::m_MapErrorString = {
-    {EC_NULL, tr("Unknown error")}
-    , {EC_NETWORK, tr("Network error")}
-    , {EC_CANCEL, tr("Canceled")}
+    {EC_NULL, QObject::tr("Unknown error")}
+    , {EC_NETWORK, QObject::tr("Network error")}
+    , {EC_CANCEL, QObject::tr("Canceled")}
     , {EC_3, tr("EC_3")}
     , {EC_4, tr("EC_4")}
     , {EC_5, tr("EC_5")}

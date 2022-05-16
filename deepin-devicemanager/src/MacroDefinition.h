@@ -354,16 +354,6 @@ struct DriverInfo {
 };
 
 
-//enum ErrorCode {
-//    EC_NULL = 0,
-//    EC_NETWORK = 1,
-//    EC_CANCEL = 2,
-//    EC_3 = 3,
-//    EC_4 = 4,
-//    EC_5 = 5,
-//    EC_6 = 6
-//};
-
 #define EC_NULL 0
 #define EC_NETWORK 1
 #define EC_CANCEL 2
@@ -371,3 +361,6 @@ struct DriverInfo {
 #define EC_4 4
 #define EC_5 5
 #define EC_6 6
+
+const int DRIVER_TABLE_HEADER_HEIGHT = 40; // 驱动表头宽度
+const int DRIVER_TABLE_ROW_HEIGHT = 64; // 驱动表格行高

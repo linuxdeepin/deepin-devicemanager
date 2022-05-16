@@ -1,5 +1,6 @@
 #include "PageDriverTableView.h"
 #include "drivertableview.h"
+#include "MacroDefinition.h"
 
 #include <DApplicationHelper>
 #include <DApplication>
@@ -24,7 +25,7 @@ void PageDriverTableView::setColumnWidth(int row, int column)
 void PageDriverTableView::appendRowItems(int column)
 {
     mp_View->appendRowItems(column);
-    this->setMaximumHeight(maximumHeight() + 64);
+    this->setMaximumHeight(maximumHeight() + DRIVER_TABLE_ROW_HEIGHT);
 }
 
 void PageDriverTableView::setWidget(int row, int column, DWidget *widget)
@@ -123,6 +124,7 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
 
 void PageDriverTableView::initWidgets()
 {
+    this->setMaximumHeight(DRIVER_TABLE_HEADER_HEIGHT + 4);
     setContentsMargins(0, 0, 0, 0);
     QBoxLayout *mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(2, 2, 2, 2);

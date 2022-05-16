@@ -19,105 +19,84 @@
 <context>
     <name>CommonTools</name>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="24"/>
         <source>Bluetooth adapter</source>
-        <translation>藍牙適配器</translation>
+        <translation type="vanished">藍牙適配器</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="25"/>
-        <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Imaging device</source>
-        <translation>圖像裝置</translation>
+        <translation type="vanished">圖像裝置</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="26"/>
         <source>Display adapter</source>
-        <translation>顯示卡</translation>
+        <translation type="vanished">顯示卡</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="27"/>
         <source>Keyboard</source>
-        <translation>鍵盤</translation>
+        <translation type="vanished">鍵盤</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="28"/>
         <source>Sound card</source>
-        <translation>音效卡</translation>
+        <translation type="vanished">音效卡</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="29"/>
         <source>Mouse</source>
-        <translation>滑鼠</translation>
+        <translation type="vanished">滑鼠</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="30"/>
         <source>Network adapter</source>
-        <translation>網卡</translation>
+        <translation type="vanished">網卡</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Printer</source>
-        <translation>印表機</translation>
+        <translation type="vanished">印表機</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Other Devices</source>
-        <translation>其他設備</translation>
+        <translation type="vanished">其他設備</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Wireless network adapter</source>
-        <translation>無線網卡</translation>
+        <translation type="vanished">無線網卡</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="48"/>
         <source>Installation successful</source>
-        <translation>安裝成功</translation>
+        <translation type="vanished">安裝成功</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="49"/>
         <source>Installation failed</source>
-        <translation>安裝失敗</translation>
+        <translation type="vanished">安裝失敗</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="50"/>
         <source>Downloading</source>
-        <translation>下載中</translation>
+        <translation type="vanished">下載中</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="51"/>
         <source>Installing</source>
-        <translation>安裝中</translation>
+        <translation type="vanished">安裝中</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Not installed</source>
-        <translation>驅動未安裝</translation>
+        <translation type="vanished">驅動未安裝</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Out-of-date</source>
-        <translation>驅動可更新</translation>
+        <translation type="vanished">驅動可更新</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Waiting</source>
-        <translation>等待中</translation>
+        <translation type="vanished">等待中</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="58"/>
         <source>Unknown error</source>
-        <translation>未知錯誤</translation>
+        <translation type="vanished">未知錯誤</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="59"/>
         <source>Network error</source>
-        <translation>網路異常</translation>
+        <translation type="vanished">網路異常</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Canceled</source>
-        <translation>已取消</translation>
+        <translation type="vanished">已取消</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="61"/>
@@ -143,9 +122,8 @@
 <context>
     <name>DBusDriverInterface</name>
     <message>
-        <location filename="../src/DriverControl/DBusDriverInterface.cpp" line="124"/>
         <source>Unknown error</source>
-        <translation>未知錯誤</translation>
+        <translation type="vanished">未知錯誤</translation>
     </message>
 </context>
 <context>
@@ -1303,62 +1281,62 @@
 <context>
     <name>DeviceOthers</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="132"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="131"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="133"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="132"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="133"/>
         <source>Model</source>
         <translation>型號</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="134"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="136"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="135"/>
         <source>Bus Info</source>
         <translation>匯流排訊息</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="137"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="136"/>
         <source>Capabilities</source>
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="137"/>
         <source>Driver</source>
         <translation>驅動</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="139"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
         <source>Maximum Power</source>
         <translation>最大功率</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="140"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="139"/>
         <source>Speed</source>
         <translation>速度</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="145"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="144"/>
         <source>Serial Number</source>
         <translation>序號</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="154"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="153"/>
         <source>Unavailable</source>
         <translation>不可用</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="157"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="156"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
@@ -3019,7 +2997,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="463"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="462"/>
         <source>Display Adapter</source>
         <translation>顯示適配器</translation>
     </message>
@@ -3052,7 +3030,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="472"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="471"/>
         <source>Network Adapter</source>
         <translation>網路適配器</translation>
     </message>
@@ -3069,7 +3047,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="466"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="465"/>
         <source>Sound Adapter</source>
         <translation>音訊適配器</translation>
     </message>
@@ -3086,7 +3064,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="469"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="468"/>
         <source>Bluetooth</source>
         <translation>藍牙</translation>
     </message>
@@ -3135,6 +3113,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
+        <location filename="../src/Tool/commontools.cpp" line="27"/>
         <source>Keyboard</source>
         <translation>鍵盤</translation>
     </message>
@@ -3151,6 +3130,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
+        <location filename="../src/Tool/commontools.cpp" line="29"/>
         <source>Mouse</source>
         <translation>滑鼠</translation>
     </message>
@@ -3167,7 +3147,8 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="478"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="477"/>
+        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Printer</source>
         <translation>印表機</translation>
     </message>
@@ -3184,7 +3165,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="475"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="474"/>
         <source>Camera</source>
         <translation>圖像設備</translation>
     </message>
@@ -3217,6 +3198,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="948"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="984"/>
+        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Other Devices</source>
         <translation>其他設備</translation>
     </message>
@@ -3588,13 +3570,13 @@
         <translation>幾何資料（邏輯）</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="95"/>
-        <location filename="../src/main.cpp" line="97"/>
+        <location filename="../src/main.cpp" line="94"/>
+        <location filename="../src/main.cpp" line="96"/>
         <source>Device Manager</source>
         <translation>設備管理器</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="98"/>
+        <location filename="../src/main.cpp" line="97"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>設備管理器是查看、管理硬體設備的工具軟體。</translation>
     </message>
@@ -3649,17 +3631,17 @@
         <translation>目前版本</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="624"/>
         <source>Missing drivers (%1)</source>
         <translation>可安裝驅動 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
         <source>Outdated drivers (%1)</source>
         <translation>可更新驅動 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="627"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
         <source>Up-to-date drivers (%1)</source>
         <translation>無需更新驅動 (%1)</translation>
     </message>
@@ -3808,6 +3790,87 @@
         <source>Cancel</source>
         <comment>button</comment>
         <translation>取 消</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="24"/>
+        <source>Bluetooth adapter</source>
+        <translation>藍牙適配器</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="25"/>
+        <location filename="../src/Tool/commontools.cpp" line="32"/>
+        <source>Imaging device</source>
+        <translation>圖像裝置</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="26"/>
+        <source>Display adapter</source>
+        <translation>顯示卡</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="28"/>
+        <source>Sound card</source>
+        <translation>音效卡</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="30"/>
+        <source>Network adapter</source>
+        <translation>網卡</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="34"/>
+        <source>Wireless network adapter</source>
+        <translation>無線網卡</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="48"/>
+        <source>Installation successful</source>
+        <translation>安裝成功</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="49"/>
+        <source>Installation failed</source>
+        <translation>安裝失敗</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="50"/>
+        <source>Downloading</source>
+        <translation>下載中</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="51"/>
+        <source>Installing</source>
+        <translation>安裝中</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="52"/>
+        <source>Not installed</source>
+        <translation>驅動未安裝</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="53"/>
+        <source>Out-of-date</source>
+        <translation>驅動可更新</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="54"/>
+        <source>Waiting</source>
+        <translation>等待中</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="58"/>
+        <source>Unknown error</source>
+        <translation>未知錯誤</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="59"/>
+        <source>Network error</source>
+        <translation>網路異常</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="60"/>
+        <source>Canceled</source>
+        <translation>已取消</translation>
     </message>
 </context>
 <context>

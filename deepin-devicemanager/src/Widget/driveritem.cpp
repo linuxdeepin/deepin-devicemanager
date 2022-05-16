@@ -4,6 +4,7 @@
 
 #include <DFontSizeManager>
 #include <DApplicationHelper>
+#include <DApplication>
 
 #include <QHBoxLayout>
 
@@ -91,7 +92,8 @@ DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
     DApplicationHelper::instance()->setPalette(mp_Name, pa);
 
     mp_Icon->setPixmap(QIcon(CommonTools::getDriverPixmap(dt)).pixmap(ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT));
-    mp_Type->setText(CommonTools::getDriverType(dt));
+    QString ts = DApplication::translate("QObject", CommonTools::getDriverType(dt).toStdString().data());
+    mp_Type->setText(ts);
 
     QHBoxLayout *hLayout = new QHBoxLayout(this);
     hLayout->setContentsMargins(10, 0, 0, 0);
@@ -143,7 +145,6 @@ DriverLabelItem::DriverLabelItem(DWidget *parent,  const QString &txt)
     DPalette pa = DApplicationHelper::instance()->palette(mp_Txt);
     pa.setColor(DPalette::Text, pa.color(DPalette::TextTips));
     DApplicationHelper::instance()->setPalette(mp_Txt, pa);
-//    mp_Txt->setStyleSheet("background:red;");
 }
 
 DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
@@ -176,7 +177,8 @@ void DriverStatusItem::setStatus(Status st)
 {
     showSpinner(ST_DOWNLOADING == st || ST_INSTALL == st);
     mp_Icon->setPixmap(QIcon(CommonTools::getStatusPixmap(st)).pixmap(STATUS_ICON_SIZE, STATUS_ICON_SIZE));
-    mp_Status->setText(CommonTools::getStausType(st));
+    QString ts = DApplication::translate("QObject", CommonTools::getStausType(st).toStdString().data());
+    mp_Status->setText(ts);
 }
 
 void DriverStatusItem::setErrorMsg(const QString& msg)

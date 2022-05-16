@@ -19,133 +19,111 @@
 <context>
     <name>CommonTools</name>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="24"/>
         <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Bluetooth adapter</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="25"/>
-        <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Imaging device</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Képalkotó eszköz</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="26"/>
         <source>Display adapter</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Kijelző adapter</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="27"/>
         <source>Keyboard</source>
-        <translation>Billentyűzet</translation>
+        <translation type="vanished">Billentyűzet</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="28"/>
         <source>Sound card</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Hangkártya</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="29"/>
         <source>Mouse</source>
-        <translation>Egér</translation>
+        <translation type="vanished">Egér</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="30"/>
         <source>Network adapter</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Hálózati adapter</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Printer</source>
-        <translation>Nyomtató</translation>
+        <translation type="vanished">Nyomtató</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Other Devices</source>
-        <translation>Egyéb eszközök</translation>
+        <translation type="vanished">Egyéb eszközök</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Vezeték nélküli hálózati adapter</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="48"/>
         <source>Installation successful</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">A telepítés sikeres</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="49"/>
         <source>Installation failed</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">A telepítés sikertelen</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="50"/>
         <source>Downloading</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Letöltés </translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="51"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Telepítés</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Not installed</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Nincs telepítve</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Out-of-date</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Lejárt</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Waiting</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Várakozás</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="58"/>
         <source>Unknown error</source>
-        <translation>Ismeretlen hiba</translation>
+        <translation type="vanished">Ismeretlen hiba</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="59"/>
         <source>Network error</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Hálózati hiba</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Canceled</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">Megszakítva</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="61"/>
         <source>EC_3</source>
-        <translation type="unfinished"/>
+        <translation>EC_3</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="62"/>
         <source>EC_4</source>
-        <translation type="unfinished"/>
+        <translation>EC_4</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="63"/>
         <source>EC_5</source>
-        <translation type="unfinished"/>
+        <translation>EC_5</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>EC_6</source>
-        <translation type="unfinished"/>
+        <translation>EC_6</translation>
     </message>
 </context>
 <context>
     <name>DBusDriverInterface</name>
     <message>
-        <location filename="../src/DriverControl/DBusDriverInterface.cpp" line="124"/>
         <source>Unknown error</source>
-        <translation>Ismeretlen hiba</translation>
+        <translation type="vanished">Ismeretlen hiba</translation>
     </message>
 </context>
 <context>
@@ -1303,62 +1281,62 @@
 <context>
     <name>DeviceOthers</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="132"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="131"/>
         <source>Name</source>
         <translation>Név</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="133"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="132"/>
         <source>Vendor</source>
         <translation>Gyártó</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="134"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="133"/>
         <source>Model</source>
         <translation>Modell</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="135"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="134"/>
         <source>Version</source>
         <translation>Verzió</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="136"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="135"/>
         <source>Bus Info</source>
         <translation>Busz adatok</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="137"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="136"/>
         <source>Capabilities</source>
         <translation>Képességek</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="137"/>
         <source>Driver</source>
         <translation>Illesztőprogram</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="139"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
         <source>Maximum Power</source>
         <translation>Legnagyobb teljesítmény</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="140"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="139"/>
         <source>Speed</source>
         <translation>Sebesség</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="145"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="144"/>
         <source>Serial Number</source>
         <translation>Sorozatszám</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="154"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="153"/>
         <source>Unavailable</source>
         <translation>Nem elérhető</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="157"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="156"/>
         <source>Disable</source>
         <translation>Letiltás</translation>
     </message>
@@ -3019,7 +2997,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="463"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="462"/>
         <source>Display Adapter</source>
         <translation>Kijelző feldolgozó</translation>
     </message>
@@ -3052,7 +3030,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="472"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="471"/>
         <source>Network Adapter</source>
         <translation>Hálózati feldolgozó</translation>
     </message>
@@ -3069,7 +3047,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="466"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="465"/>
         <source>Sound Adapter</source>
         <translation>Hang feldolgozó</translation>
     </message>
@@ -3086,7 +3064,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="469"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="468"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
@@ -3135,6 +3113,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
+        <location filename="../src/Tool/commontools.cpp" line="27"/>
         <source>Keyboard</source>
         <translation>Billentyűzet</translation>
     </message>
@@ -3151,6 +3130,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
+        <location filename="../src/Tool/commontools.cpp" line="29"/>
         <source>Mouse</source>
         <translation>Egér</translation>
     </message>
@@ -3167,7 +3147,8 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="478"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="477"/>
+        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Printer</source>
         <translation>Nyomtató</translation>
     </message>
@@ -3184,7 +3165,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="475"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="474"/>
         <source>Camera</source>
         <translation>Kamera</translation>
     </message>
@@ -3217,6 +3198,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="948"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="984"/>
+        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Other Devices</source>
         <translation>Egyéb eszközök</translation>
     </message>
@@ -3588,13 +3570,13 @@
         <translation>Geometria (Logikai)</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="95"/>
-        <location filename="../src/main.cpp" line="97"/>
+        <location filename="../src/main.cpp" line="94"/>
+        <location filename="../src/main.cpp" line="96"/>
         <source>Device Manager</source>
         <translation>Eszközkezelő</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="98"/>
+        <location filename="../src/main.cpp" line="97"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>Az Eszközkezelő egy praktikus eszköz a hardverinformációk megtekintéséhez és az eszközök kezeléséhez.</translation>
     </message>
@@ -3618,7 +3600,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="282"/>
         <source>Version Available</source>
-        <translation type="unfinished"/>
+        <translation>Elérhető verzió</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="283"/>
@@ -3636,120 +3618,120 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="285"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="298"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Művelet</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="295"/>
         <source>New Version</source>
-        <translation type="unfinished"/>
+        <translation>Új verzió</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="307"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Jelenlegi verzió</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverManager.cpp" line="624"/>
+        <source>Missing drivers (%1)</source>
+        <translation>Hiányzó illesztőprogramok (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
-        <source>Missing drivers (%1)</source>
-        <translation type="unfinished"/>
+        <source>Outdated drivers (%1)</source>
+        <translation>Elavult illesztőprogramok (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
-        <source>Outdated drivers (%1)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="627"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Naprakész illesztőprogramok (%1)</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="64"/>
         <source>%1 driver updates available</source>
-        <translation type="unfinished"/>
+        <translation>%1 illesztőprogram frissítése érhető el</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="67"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="327"/>
         <source>Time checked: %1</source>
-        <translation type="unfinished"/>
+        <translation>Ellenőrzési idő: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="114"/>
         <source>Downloading drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>A %1 illesztőprogramjának letöltése</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="116"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation type="unfinished"/>
+        <translation>letöltési sebesség: %1 Letöltve %2 / %3</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="158"/>
         <source>Installing drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>A %1 illesztőprogramjának telepítése</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="200"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 illesztőprogram telepítve, %2 illesztőprogram meghiúsult</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="202"/>
         <source>%1 drivers installed</source>
-        <translation type="unfinished"/>
+        <translation>%1 illesztőprogram telepítve</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="242"/>
         <source>Failed to install drivers</source>
-        <translation type="unfinished"/>
+        <translation>Az illesztőprogramok telepítése sikertelen</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="282"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"/>
+        <translation>Hálózati hiba. Újra csatlakozás...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="284"/>
         <source>Download speed: %1</source>
-        <translation type="unfinished"/>
+        <translation>Letöltési sebesség: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="324"/>
         <source>Your drivers are up to date</source>
-        <translation type="unfinished"/>
+        <translation>Az illesztőprogramok naprakészek</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="490"/>
         <source>reboot</source>
-        <translation type="unfinished"/>
+        <translation>Újraindítás</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="491"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation type="unfinished"/>
+        <translation>Kérjük %1, hogy a telepített illesztőprogramok érvénybe lépjenek</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="494"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="253"/>
         <source>submit feedback</source>
-        <translation type="unfinished"/>
+        <translation>Visszajelzés küldése</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Kérjük próbálja újra, vagy küldje el nekünk %1-et</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="498"/>
         <source>Install All</source>
-        <translation type="unfinished"/>
+        <translation>Összes telepítése</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="501"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="257"/>
         <source>Scan Again</source>
-        <translation type="unfinished"/>
+        <translation>Újra ellenőrzés</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
@@ -3759,55 +3741,136 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="51"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Hardvereszköz illesztőprogramok ellenőrzése, kérjük várjon...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="59"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="304"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>Ellenőrzés %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="113"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>Az ellenőrzés sikertelen</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="170"/>
         <source>Network unavailable</source>
-        <translation type="unfinished"/>
+        <translation>A hálózat nem érhető el</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="174"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>Kérjük ellenőrizze a hálózati kapcsolatot</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="254"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Kérjük ellenőrizze újra, vagy küldje be nekünk a %1-et</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="478"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Az illesztőprogramok telepítése folyamatban, kilépés esetén a folyamat megszakad.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="480"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>Valóban ki szeretne lépni? </translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="483"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Kilépés</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="484"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Mégsem</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="24"/>
+        <source>Bluetooth adapter</source>
+        <translation>Bluetooth adapter</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="25"/>
+        <location filename="../src/Tool/commontools.cpp" line="32"/>
+        <source>Imaging device</source>
+        <translation>Képalkotó eszköz</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="26"/>
+        <source>Display adapter</source>
+        <translation>Kijelző adapter</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="28"/>
+        <source>Sound card</source>
+        <translation>Hangkártya</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="30"/>
+        <source>Network adapter</source>
+        <translation>Hálózati adapter</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="34"/>
+        <source>Wireless network adapter</source>
+        <translation>Vezeték nélküli hálózati adapter</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="48"/>
+        <source>Installation successful</source>
+        <translation>A telepítés sikeres</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="49"/>
+        <source>Installation failed</source>
+        <translation>A telepítés sikertelen</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="50"/>
+        <source>Downloading</source>
+        <translation>Letöltés </translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="51"/>
+        <source>Installing</source>
+        <translation>Telepítés</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="52"/>
+        <source>Not installed</source>
+        <translation>Nincs telepítve</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="53"/>
+        <source>Out-of-date</source>
+        <translation>Lejárt</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="54"/>
+        <source>Waiting</source>
+        <translation>Várakozás</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="58"/>
+        <source>Unknown error</source>
+        <translation>Ismeretlen hiba</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="59"/>
+        <source>Network error</source>
+        <translation>Hálózati hiba</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="60"/>
+        <source>Canceled</source>
+        <translation>Megszakítva</translation>
     </message>
 </context>
 <context>

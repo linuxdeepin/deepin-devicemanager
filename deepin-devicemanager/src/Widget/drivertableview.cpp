@@ -1,5 +1,6 @@
 #include "drivertableview.h"
 #include "driveritem.h"
+#include "MacroDefinition.h"
 
 #include <DApplication>
 #include <DStyle>
@@ -16,7 +17,6 @@
 
 
 static const int kSpacingMargin = 4;
-static const int TABLE_ROW_HEIGHT = 64;
 
 DriverItemDelegate::DriverItemDelegate(QAbstractItemView *parent)
     : QStyledItemDelegate(parent)
@@ -102,7 +102,7 @@ void DriverItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 QSize DriverItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QSize size = QStyledItemDelegate::sizeHint(option, index);
-    size.setHeight(std::max(TABLE_ROW_HEIGHT, size.height()));
+    size.setHeight(std::max(DRIVER_TABLE_ROW_HEIGHT, size.height()));
     return size;
 }
 
@@ -352,7 +352,7 @@ void DriverTableView::appendRowItems(int column)
 
     mp_Model->appendRow(lstItem);
 
-    setFixedHeight(height() + TABLE_ROW_HEIGHT);
+    setFixedHeight(height() + DRIVER_TABLE_ROW_HEIGHT);
 }
 
 void DriverTableView::setWidget(int row, int column, DWidget *widget)

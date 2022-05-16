@@ -29,24 +29,31 @@ void DriverScanner::run()
         } else {
             emit scanFinished(SR_NETWORD_ERR);
         }
-
-        //        emit scanInfo(info->name(), 0);
-        //        usleep(10000);
-        //        emit scanInfo(info->name(), 20);
-        //        usleep(10000);
-        //        emit scanInfo(info->name(), 40);
-        //        usleep(10000);
-        //        emit scanInfo(info->name(), 60);
-        //        usleep(10000);
-        //        emit scanInfo(info->name(), 80);
-        //        usleep(10000);
-        //        emit scanInfo(info->name(), 100);
     }
+
     if (!m_IsStop) {
         // 扫描结束
         usleep(10000);
         emit scanFinished(SR_SUCESS);
     }
+
+// 测试代码
+//    foreach (DriverInfo *info, m_ListDriverInfo) {
+//        emit scanInfo(info->name(), 0);
+//        usleep(10000);
+//        emit scanInfo(info->name(), 20);
+//        usleep(10000);
+//        emit scanInfo(info->name(), 40);
+//        usleep(10000);
+//        emit scanInfo(info->name(), 60);
+//        usleep(10000);
+//        emit scanInfo(info->name(), 80);
+//        usleep(10000);
+//        emit scanInfo(info->name(), 100);
+//    }
+
+//    usleep(10000);
+//    emit scanFinished(SR_SUCESS);
 }
 
 void DriverScanner::setDriverList(QList<DriverInfo *> lstInfo)
