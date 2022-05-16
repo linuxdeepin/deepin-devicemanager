@@ -90,6 +90,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
     if(0 < iClass){
         strUrl += "&class=" + QString(iClass);
     }
+    qInfo() << strUrl;
     return getRequestJson(strUrl);
 }
 

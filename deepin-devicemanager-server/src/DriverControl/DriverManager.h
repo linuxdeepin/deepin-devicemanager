@@ -65,6 +65,7 @@ private:
     bool checkBoardCardInfo();//检测板载设备驱动是否需要更新 返回值true：是 false：否
     bool checkBoardCardInfo(const DriverType type, QMap<QString, QString> &mapInfo);
     bool checkCameraInfo(QMap<QString, QString> &mapInfo);
+    QString getDriverVersion(QString strDriver);
 
     /**
      * @brief getMapInfo:解析打印机cups第三方库获取的信息

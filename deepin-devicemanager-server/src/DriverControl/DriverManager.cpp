@@ -601,26 +601,15 @@ bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QStr
     di.type       = type;
     di.vendorId   = strVendor;
     di.modelId   = strDevice;
+
     di.driverName = mapInfo["Driver"];//如果没有，后续会处理，无影响
-
-    QProcess process;
-    QStringList options;
-    options << "-c" << "modinfo " + mapInfo["Driver"] + " | grep version";
-
-    process.start("/bin/bash", options);
-    process.waitForFinished(-1);
-
-    QStringList str = QString(process.readAll()).split("\n\n");
-    foreach(QString temp, str){
-        if(temp.startsWith("version") && temp.contains(":")){
-            di.version = temp.split(':')[2];
+    di.version = getDriverVersion(mapInfo["Driver"]);
+    if(di.version.isEmpty()){
+        di.version = getDriverVersion(mapInfo["Driver Modules"]);
+        if(!di.version.isEmpty()){
+            di.driverName = mapInfo["Driver Modules"];//如果没有，后续会处理，无影响
         }
     }
-//#define DRIVER_TEST_ 1
-//#if DRIVER_TEST_
-//    di.vendorId   = "0x8086";
-//    di.modelId   = "0x3e92";
-//#endif
     if (HttpDriverInterface::getInstance()->checkDriverInfo(di))
         return true;
     return false;
@@ -704,6 +693,24 @@ bool DriverManager::checkCameraInfo(QMap<QString, QString> &mapInfo)
     if (HttpDriverInterface::getInstance()->checkDriverInfo(di))
         return true;
     return false;
+}
+
+QString DriverManager::getDriverVersion(QString strDriver)
+{
+    QProcess process;
+    QStringList options;
+    options << "-c" << "modinfo " + strDriver + " | grep version";
+
+    process.start("/bin/bash", options);
+    process.waitForFinished(-1);
+
+    QStringList str = QString(process.readAll()).split("\n\n");
+    foreach(QString temp, str){
+        if(temp.startsWith("version") && temp.contains(":") && temp.split(':').size() > 1){
+            return temp.split(':')[2];
+        }
+    }
+    return "";
 }
 void DriverManager::getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src)
 {
