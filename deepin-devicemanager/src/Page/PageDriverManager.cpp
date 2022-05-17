@@ -619,6 +619,7 @@ void PageDriverManager::showTables()
 {
     int installLength = m_ListInstallIndex.size();
     int updateLength = m_ListUpdateIndex.size();
+    int newLength = m_ListNewIndex.size();
 
     // Label显示
     mp_InstallLabel->setText(QObject::tr("Missing drivers (%1)").arg(m_ListInstallIndex.size()));
@@ -628,19 +629,20 @@ void PageDriverManager::showTables()
     // 设置哪几个Label需要显示出来
     mp_InstallLabel->setVisible(installLength != 0);
     mp_UpdateLabel->setVisible(updateLength != 0);
-    mp_LabelIsNew->setVisible(installLength == 0 && updateLength == 0);
+    mp_LabelIsNew->setVisible(newLength != 0);
 
     // 设置哪几个表格需要显示出来
     mp_ViewNotInstall->setVisible(installLength != 0);
     mp_ViewCanUpdate->setVisible(updateLength != 0);
-    mp_AllDriverIsNew->setVisible(installLength == 0 && updateLength == 0);
+    mp_AllDriverIsNew->setVisible(newLength != 0);
 
 
     // 显示表头显示的内容
+    const QMap<QString, QString>& overviewMap = DeviceManager::instance()->getDeviceOverview();
     if (installLength == 0 && updateLength == 0) {
-        mp_HeadWidget->setNoUpdateDriverUI("PythonManGH");
+        mp_HeadWidget->setNoUpdateDriverUI(overviewMap["Overview"]);
     } else {
-        mp_HeadWidget->setDetectFinishUI(QString::number(installLength + updateLength), "PythonManGH", installLength != 0);
+        mp_HeadWidget->setDetectFinishUI(QString::number(installLength + updateLength), overviewMap["Overview"], installLength != 0);
     }
 
     // 显示驱动列表界面
