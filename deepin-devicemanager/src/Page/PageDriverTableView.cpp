@@ -75,6 +75,7 @@ bool PageDriverTableView::hasItemDisabled()
 
 void PageDriverTableView::clear()
 {
+    this->setMaximumHeight(DRIVER_TABLE_HEADER_HEIGHT + 4);
     mp_View->clear();
 }
 

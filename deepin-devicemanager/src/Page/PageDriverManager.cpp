@@ -400,7 +400,7 @@ void PageDriverManager::addDriverInfoToTableView(DriverInfo *info, int index)
         view->setWidget(row, 1, nameItem);
 
         // 设置版本
-        DriverLabelItem *versionItem = new DriverLabelItem(this, info->version());
+        DriverLabelItem *versionItem = new DriverLabelItem(this, info->debVersion());
         view->setWidget(row, 2, versionItem);
 
         // 设置大小
