@@ -117,12 +117,14 @@ int main(int argc, char *argv[])
         } else {
             QCommandLineParser parser;
             parser.process(app);
-            QList<QVariant> debInstallPathList;
-            debInstallPathList << parser.positionalArguments();
 
-            qInfo() << parser.positionalArguments();
+            QVariant var = "";
+            if(parser.positionalArguments().size() > 0){
+                var = parser.positionalArguments().at(0);
+            }
+            qInfo() << var;
             QDBusInterface notification("com.deepin.DeviceManagerNotify", "/com/deepin/DeviceManagerNotify", "com.deepin.DeviceManagerNotify", QDBusConnection::sessionBus());
-            QDBusMessage msg = notification.call(QDBus::AutoDetect, "startDeviceManager", parser.positionalArguments().at(0));
+            QDBusMessage msg = notification.call(QDBus::AutoDetect, "startDeviceManager", var);
             return 0;
         }
     }

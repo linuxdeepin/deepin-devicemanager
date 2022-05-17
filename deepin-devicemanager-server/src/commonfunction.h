@@ -101,7 +101,7 @@ public:
 #define EC_NULL 0
 #define EC_NETWORK 1
 #define EC_CANCEL 2
-#define EC_3 3
+#define EC_NOTFOUND 3
 #define EC_4 4
 #define EC_5 5
 #define EC_6 6

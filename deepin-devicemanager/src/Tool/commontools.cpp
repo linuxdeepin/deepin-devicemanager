@@ -60,7 +60,7 @@ QMap<int, QString> CommonTools::m_MapErrorString = {
     {EC_NULL, QObject::tr("Unknown error")}
     , {EC_NETWORK, QObject::tr("Network error")}
     , {EC_CANCEL, QObject::tr("Canceled")}
-    , {EC_3, tr("EC_3")}
+    , {EC_NOTFOUND, QObject::tr("Failed to get driver files")}
     , {EC_4, tr("EC_4")}
     , {EC_5, tr("EC_5")}
     , {EC_6, tr("EC_6")}

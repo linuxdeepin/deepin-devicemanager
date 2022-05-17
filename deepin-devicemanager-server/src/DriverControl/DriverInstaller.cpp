@@ -27,7 +27,8 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
         QApt::PackageList packages;
         QApt::Package *p = m_backend->package(package);//"htsy-prn-pclcustom-drv"
         if (!p) {
-            emit this->errorOccurred(EC_NULL);//查看源码，只有授权错误和apt自身错误
+            //包名不存在
+            emit this->errorOccurred(EC_NOTFOUND);//查看源码，只有授权错误和apt自身错误
             return;
         }
         p->setVersion(version);
@@ -36,7 +37,7 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
     }
 
     if (nullptr == m_pTrans) {
-        emit this->errorOccurred(EC_3);
+        emit this->errorOccurred(EC_5);
         return ;
     }
 
@@ -67,8 +68,11 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
     connect(m_pTrans, &QApt::Transaction::errorOccurred, this, [ = ](QApt::ErrorCode error) {
         m_pTrans->disconnect(this);
         m_pTrans->deleteLater();
+        qInfo() << error;
         if(5 == error)
             emit this->errorOccurred(EC_NETWORK);
+        else if(6 == error)
+            emit this->errorOccurred(EC_NOTFOUND); //没有指定版本的驱动包
         else
             emit this->errorOccurred(EC_NULL);
     });

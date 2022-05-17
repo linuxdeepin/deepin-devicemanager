@@ -11,6 +11,7 @@
 #include "EnableUtils.h"
 #include "WakeupUtils.h"
 #include "DriverManager.h"
+#include "DriverInstaller.h"
 
 #include <QDateTime>
 #include <QThread>
