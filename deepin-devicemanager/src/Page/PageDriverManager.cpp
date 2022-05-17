@@ -188,8 +188,10 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
     mp_CurDriverInfo->m_Status = bsuccess ? ST_SUCESS : ST_FAILED;
     mp_ViewCanUpdate->setItemStatus(index, mp_CurDriverInfo->status());
     mp_ViewNotInstall->setItemStatus(index, mp_CurDriverInfo->status());
-    mp_ViewCanUpdate->setErrorMsg(index, CommonTools::getErrorString(err));
-    mp_ViewNotInstall->setErrorMsg(index, CommonTools::getErrorString(err));
+
+    QString errS = DApplication::translate("QObject", CommonTools::getErrorString(err).toStdString().data());
+    mp_ViewCanUpdate->setErrorMsg(index, errS);
+    mp_ViewNotInstall->setErrorMsg(index, errS);
 
 
     // 当前驱动安装结束，如果没有其它驱动需要安装，则显示安装结果
