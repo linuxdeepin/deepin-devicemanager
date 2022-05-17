@@ -31,7 +31,12 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
             emit this->errorOccurred(EC_NOTFOUND);//查看源码，只有授权错误和apt自身错误
             return;
         }
-        p->setVersion(version);
+
+        if (!p->setVersion(version)){
+            emit this->errorOccurred(EC_NOTFOUND);
+            return;
+        }
+
         packages.append(p);
         m_pTrans = m_backend->installPackages(packages);//QApt::Transaction *installPackages(QApt::PackageList packages);
     }
