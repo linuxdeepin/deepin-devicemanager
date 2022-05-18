@@ -75,6 +75,12 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
         emit sigRequestFinished(false, "network error");
     } else {
         checkDriverInfo(strJson, driverInfo);
+        qInfo() << "m_VendorId:" << driverInfo->m_VendorId;
+        qInfo() << "m_ModelId:" << driverInfo->m_ModelId;
+        qInfo() << "m_Packages:" << driverInfo->m_Packages;
+        qInfo() << "m_DebVersion:" << driverInfo->m_DebVersion;
+
+        qInfo() << "m_Status:" << driverInfo->m_Status;
     }
 }
 

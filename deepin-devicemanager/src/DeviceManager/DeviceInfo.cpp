@@ -484,12 +484,24 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
 {
     // 从文件中获取制造商ID信息
     QFile vendorFile;
+    QString strVendorFile("/vendor");
+    QString strDeviceFile("/device");
+    QString strSysFSLink = sysPath;
+
+    if(sysPath.contains("usb")){
+        strVendorFile = "/idVendor";
+        strDeviceFile = "/idProduct";
+        if (!QFile::exists("/sys" + strSysFSLink + strVendorFile)) {
+            strSysFSLink = strSysFSLink.mid(0, sysPath.lastIndexOf('/'));
+        }
+    }
 
     if (flag) {
-        vendorFile.setFileName(QString("/sys") + sysPath + QString("/vendor"));
+        vendorFile.setFileName(QString("/sys") + strSysFSLink + strVendorFile);
     } else {
-        vendorFile.setFileName(QString("/sys") + sysPath + QString("/device"));
+        vendorFile.setFileName(QString("/sys") + strSysFSLink + strDeviceFile);
     }
+
     if (false == vendorFile.open(QIODevice::ReadOnly))
         return QString();
 

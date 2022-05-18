@@ -598,6 +598,12 @@ void PageDriverManager::scanDevicesInfo(const QString &deviceType, DriverType dr
             info->m_DriverName = device->driver();                 // 驱动名称
             info->m_Version = device->getDriverVersion();          // 驱动版本
 
+            qInfo() << "m_Name" << info->m_Name;
+            qInfo() << "m_VendorId" << info->m_VendorId;
+            qInfo() << "m_ModelId" << info->m_ModelId;
+            qInfo() << "m_Status" << info->m_Status;
+            qInfo() << "m_Type" << info->m_Type;
+
             DevicePrint *print = dynamic_cast<DevicePrint *>(device);
             if (print != nullptr) {
                 info->m_VendorName = device->vendor();           // vendor name
