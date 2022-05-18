@@ -149,7 +149,7 @@ bool HttpDriverInterface::checkDriverInfo(QString strJson, strDriverInfo &driver
         //因为无法从设备型号查询到驱动包的名称（可能有多种同样推荐等级的驱动），所以就查询到这些推荐驱动并遍历，查询本地是否安装。
         foreach (const strRepoDriverInfo& strDriverInfo , lstDriverInfo){
             if(max == strDriverInfo.iLevel){
-                if(driverInfo.driverName.isEmpty()){
+                if(driverInfo.driverName.isEmpty() || strDriverInfo.strPackages != driverInfo.driverName || driverInfo.version.isEmpty()){//
                     //如果有一个，且版本也对，则返回false，否则返回true
                     QProcess process;
                     QStringList options;
@@ -164,14 +164,25 @@ bool HttpDriverInterface::checkDriverInfo(QString strJson, strDriverInfo &driver
                 }
                 else {
                     //如果本地获取的驱动能与仓库推荐驱动中任意一个匹配，则返回false，不需要更新
-                    if(strDriverInfo.strPackages.contains(driverInfo.driverName) && strDriverInfo.strDebVersion == driverInfo.version){
+                    if(strDriverInfo.strDebVersion == driverInfo.version){
                         return false;
                     }
                 }
             }
         }
+        qInfo() << "packages: "   << driverInfo.packages;
+        qInfo() << "debVersion: " << driverInfo.debVersion;
+        qInfo() << "driverName: " << driverInfo.driverName;
+        qInfo() << "version: "    << driverInfo.version;
+
+        qInfo() << lstDriverInfo.size();
+        foreach(const strRepoDriverInfo &di, lstDriverInfo){
+            qInfo() << "strPackages: " << di.strPackages;
+            qInfo() << "strDebVersion: " << di.strDebVersion;
+        }
+        return true;
     }
-    return true;
+    return false;
 }
 
 bool HttpDriverInterface::getDriverInfoFromJson(QString strJson, QList<strRepoDriverInfo> &lstDriverInfo)
