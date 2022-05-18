@@ -145,7 +145,7 @@ public:
      * @brief setErrorMsg
      * @param msg
      */
-    void setErrorMsg(const QString& msg);
+    void setErrorMsg(const QString &msg);
 
 private:
 

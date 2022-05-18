@@ -257,7 +257,7 @@ void MainWindow::initWindowTitle()
     titlebar()->setIcon(appIcon);
     // 设置 DButtonBox 里面的 button
     mp_ButtonBox->setFixedSize(242, 38);
-    mp_ButtonBox->setButtonList({new DButtonBoxButton("硬件信息"), new DButtonBoxButton("驱动管理")}, true);
+    mp_ButtonBox->setButtonList({new DButtonBoxButton(tr("Hardware")), new DButtonBoxButton(tr("Drivers"))}, true);
     mp_ButtonBox->setId(mp_ButtonBox->buttonList().at(0), 0);
     mp_ButtonBox->setId(mp_ButtonBox->buttonList().at(1), 1);
     mp_ButtonBox->buttonList().at(0)->click();
@@ -305,10 +305,10 @@ void MainWindow::refreshDataBase()
 
 void MainWindow::slotSetPage(QString page)
 {
-    if("driver" == page){
-        if(m_IsFirstRefresh){
+    if ("driver" == page) {
+        if (m_IsFirstRefresh) {
             m_ShowDriverPage = true;
-        }else{
+        } else {
             mp_ButtonBox->buttonList().at(1)->click();
         }
     }
@@ -349,7 +349,7 @@ void MainWindow::slotLoadingFinish(const QString &message)
             m_IsFirstRefresh = false;
 
         // 是否切换到驱动界面
-        if(m_ShowDriverPage){
+        if (m_ShowDriverPage) {
             m_ShowDriverPage = false;
             mp_ButtonBox->buttonList().at(1)->click();
         }
@@ -476,12 +476,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
         DDialog dialog;
         dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
         dialog.setTitle(QObject::tr("You are installing a driver, which will be interrupted if you exit."));
-        DLabel* label = new DLabel(this);
+        DLabel *label = new DLabel(this);
         label->setText(QObject::tr("Are you sure you want to exit?"));
         label->setAlignment(Qt::AlignHCenter);
         dialog.addContent(label);
-        dialog.addButton(QObject::tr("Exit","button"), false, DDialog::ButtonWarning);
-        dialog.addButton(QObject::tr("Cancel","button"));
+        dialog.addButton(QObject::tr("Exit", "button"), false, DDialog::ButtonWarning);
+        dialog.addButton(QObject::tr("Cancel", "button"));
         connect(dialog.getButton(0), &QAbstractButton::clicked, this, [ = ]() {
             return DMainWindow::closeEvent(event);
         });

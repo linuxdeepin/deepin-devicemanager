@@ -31,15 +31,11 @@ class BtnLabel : public DLabel
 {
     Q_OBJECT
 public:
-    explicit BtnLabel(DWidget* parent = nullptr);
+    explicit BtnLabel(DWidget *parent = nullptr);
 
 public:
-    void setDesc(const QString& txt);
+    void setDesc(const QString &txt);
 
-protected:
-    virtual void mousePressEvent(QMouseEvent *event) override;
-signals:
-    void clicked();
 private:
     QString m_Desc;
 };

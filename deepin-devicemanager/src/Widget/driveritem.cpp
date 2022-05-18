@@ -177,11 +177,18 @@ void DriverStatusItem::setStatus(Status st)
 {
     showSpinner(ST_DOWNLOADING == st || ST_INSTALL == st);
     mp_Icon->setPixmap(QIcon(CommonTools::getStatusPixmap(st)).pixmap(STATUS_ICON_SIZE, STATUS_ICON_SIZE));
+
+    // bug132075 安装成功状态此button无法点击
     QString ts = DApplication::translate("QObject", CommonTools::getStausType(st).toStdString().data());
-    mp_Status->setText(ts);
+    if (ST_FAILED == st) {
+        QString statusStr = QString("<a style=\"text-decoration:none\" href=\"failed\">") + ts + "</a>";
+        mp_Status->setText(statusStr);
+    } else {
+        mp_Status->setText(ts);
+    }
 }
 
-void DriverStatusItem::setErrorMsg(const QString& msg)
+void DriverStatusItem::setErrorMsg(const QString &msg)
 {
     mp_Status->setDesc(msg);
 }
