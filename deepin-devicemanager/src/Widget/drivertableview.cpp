@@ -373,7 +373,7 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
     }
 
     // 点击安装或者更新的曹函数
-    // 做三件事，1:当前行的勾选框置灰，2:当前行的按钮置灰，3:其它行如果选中则取消选中
+    // 做三件事，1:当前行的勾选框置灰，2:当前行的按钮置灰，3:其它行如果选中则取消选中且为可安装或可更新状态
     DriverOperationItem *orItem = qobject_cast<DriverOperationItem *>(widget);
     if (orItem) {
         connect(orItem, &DriverOperationItem::clicked, this, [this, orItem](bool checked) {
@@ -397,7 +397,7 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
                         emit operatorClicked(name->index());
                     } else {
                         // 此时如果选中，则取消选中
-                        if (cb->checked()) {
+                        if (cb->checked() && (status->getStatus() == ST_NOT_INSTALL && status->getStatus() == ST_CAN_UPDATE)) {
                             cb->setChecked(false);
                         }
                     }

@@ -35,6 +35,7 @@ PageDriverManager::PageDriverManager(DWidget *parent)
     , mp_UpdateLabel(new DLabel(this))
     , mp_LabelIsNew(new DLabel(this))
     , mp_CurDriverInfo(nullptr)
+    , m_CurIndex(-1)
     , mp_scanner(new DriverScanner(this))
 {
     // 初始化界面
@@ -89,14 +90,13 @@ bool PageDriverManager::isFirstScan()
 
 bool PageDriverManager::isInstalling()
 {
-    return (mp_ViewCanUpdate->hasItemDisabled() || mp_ViewNotInstall->hasItemDisabled()) && m_ListDriverIndex.size() > 0;
+    return mp_CurDriverInfo != nullptr;
 }
 
 void PageDriverManager::scanDriverInfo()
 {
     // 如果在安装过程中则不扫描
-    bool install = mp_scanner->isRunning() || ((mp_ViewCanUpdate->hasItemDisabled() || mp_ViewNotInstall->hasItemDisabled()) && m_ListDriverIndex.size() > 0);
-    if (install) {
+    if (mp_CurDriverInfo) {
         return;
     }
 
@@ -121,8 +121,7 @@ void PageDriverManager::slotDriverOperationClicked(int index)
     // 如果已经在安装过程中，则直接添加到list
     // 如果不在安装过程中则需要安装
     addToDriverIndex(index);
-    bool install = (mp_ViewCanUpdate->hasItemDisabled() || mp_ViewNotInstall->hasItemDisabled()) && m_ListDriverIndex.size() > 0;
-    if (install) {
+    if (! mp_CurDriverInfo) {
         installNextDriver();
     }
 }
@@ -133,13 +132,10 @@ void PageDriverManager::slotItemCheckedClicked(int index, bool checked)
         // 取消选中则从list中删除
         removeFromDriverIndex(index);
     } else {
-        // 获取是否在安装过程中
-        bool install = (mp_ViewCanUpdate->hasItemDisabled() || mp_ViewNotInstall->hasItemDisabled()) && m_ListDriverIndex.size() > 0;
-
         // 如果不在安装过程中则直接添加到list
         // 如果在安装过程中：1. 添加到list  2. 将item置灰
         addToDriverIndex(index);
-        if (install) {
+        if (mp_CurDriverInfo) {
             mp_ViewCanUpdate->setCheckedCBDisnable();
             mp_ViewCanUpdate->setCheckedCBDisnable();
         }
@@ -157,8 +153,8 @@ void PageDriverManager::slotDownloadProgressChanged(QStringList msg)
 void PageDriverManager::slotDownloadFinished()
 {
     mp_CurDriverInfo->m_Status = ST_INSTALL;
-    mp_ViewCanUpdate->setItemStatus(m_ListDriverIndex[0], mp_CurDriverInfo->status());
-    mp_ViewNotInstall->setItemStatus(m_ListDriverIndex[0], mp_CurDriverInfo->status());
+    mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
+    mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
 }
 
 void PageDriverManager::slotInstallProgressChanged(int progress)
@@ -167,6 +163,8 @@ void PageDriverManager::slotInstallProgressChanged(int progress)
     mp_HeadWidget->setInstallUI(mp_CurDriverInfo->type(), mp_CurDriverInfo->name(), progress);
 
     // 设置表格安装中的状态
+    mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
+    mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
 }
 
 void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
@@ -179,19 +177,14 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
         failedNum += 1;
     }
 
-    int index = m_ListDriverIndex[0];
-
-    // 安装结束一个，就从m_ListDriverIndex里面pop掉一个
-    m_ListDriverIndex.pop_front();
-
     // 安装结束后，对应的表格需要设置相应的状态
     mp_CurDriverInfo->m_Status = bsuccess ? ST_SUCESS : ST_FAILED;
-    mp_ViewCanUpdate->setItemStatus(index, mp_CurDriverInfo->status());
-    mp_ViewNotInstall->setItemStatus(index, mp_CurDriverInfo->status());
+    mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
+    mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
 
     QString errS = DApplication::translate("QObject", CommonTools::getErrorString(err).toStdString().data());
-    mp_ViewCanUpdate->setErrorMsg(index, errS);
-    mp_ViewNotInstall->setErrorMsg(index, errS);
+    mp_ViewCanUpdate->setErrorMsg(m_CurIndex, errS);
+    mp_ViewNotInstall->setErrorMsg(m_CurIndex, errS);
 
 
     // 当前驱动安装结束，如果没有其它驱动需要安装，则显示安装结果
@@ -202,6 +195,8 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
     } else {
         // 设置头部显示效果
         mp_HeadWidget->setInstallSuccessUI(QString::number(successNum), QString::number(failedNum));
+        mp_CurDriverInfo = nullptr;
+        m_CurIndex = -1;
         successNum = 0;
         failedNum = 0;
     }
@@ -389,8 +384,8 @@ void PageDriverManager::addDriverInfoToTableView(DriverInfo *info, int index)
         // 设置CheckBtn
         DriverCheckItem *cbItem = new DriverCheckItem(this);
         connect(cbItem, &DriverCheckItem::sigChecked, view, [index, view](bool checked) {
+            Q_UNUSED(index)
             view->setHeaderCbStatus(checked);
-            qInfo() << "index : " << index;
         });
         cbItem->setChecked(ST_NOT_INSTALL == info->status());
         view->setWidget(row, 0, cbItem);
@@ -446,12 +441,14 @@ void PageDriverManager::addCurDriverInfo(DriverInfo *info)
 void PageDriverManager::installNextDriver()
 {
     if (m_ListDriverIndex.size() > 0) {
-        DriverInfo *info = m_ListDriverInfo[m_ListDriverIndex[0]];
+        m_CurIndex = m_ListDriverIndex[0];
+        m_ListDriverIndex.removeAt(0);
+        DriverInfo *info = m_ListDriverInfo[m_CurIndex];
         if (info) {
             mp_CurDriverInfo = info;
             mp_CurDriverInfo->m_Status = ST_DOWNLOADING;
-            mp_ViewCanUpdate->setItemStatus(m_ListDriverIndex[0], mp_CurDriverInfo->status());
-            mp_ViewNotInstall->setItemStatus(m_ListDriverIndex[0], mp_CurDriverInfo->status());
+            mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
+            mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
             mp_HeadWidget->setDownloadUI(mp_CurDriverInfo->type(), "0MB/s", "0MB", mp_CurDriverInfo->size(), 0);
             DBusDriverInterface::getInstance()->installDriver(info->packages(), info->debVersion());
         }
@@ -488,8 +485,8 @@ void PageDriverManager::testScanDevices()
     info->m_Status = ST_NOT_INSTALL;
     info->m_Checked = true;
     info->m_DriverName = "lenovo-image-g-series";
-    info->m_Packages = "deepin-log-viewer";
-    info->m_Version = "1.0-17";
+    info->m_Packages = "lenovo-image-g-series";
+    info->m_DebVersion = "1.0-17";
     addDriverInfo(info);
 
     info = new DriverInfo();
@@ -500,7 +497,7 @@ void PageDriverManager::testScanDevices()
     info->m_Checked = true;
     info->m_DriverName = "deepin-log-viewer";
     info->m_Packages = "deepin-log-viewer";
-    info->m_Version = "5.8.32-1";
+    info->m_DebVersion = "5.9.2-1";
     addDriverInfo(info);
 
     info = new DriverInfo();
@@ -510,8 +507,8 @@ void PageDriverManager::testScanDevices()
     info->m_Status = ST_NOT_INSTALL;
     info->m_Checked = true;
     info->m_DriverName = "deepin-reader";
-    info->m_Packages = "deepin-log-viewer";
-    info->m_Version = "5.10.11-1";
+    info->m_Packages = "deepin-reader";
+    info->m_DebVersion = "5.10.11-1";
     addDriverInfo(info);
 
     info = new DriverInfo();
@@ -521,8 +518,8 @@ void PageDriverManager::testScanDevices()
     info->m_Status = ST_NOT_INSTALL;
     info->m_Checked = true;
     info->m_DriverName = "deepin-diskmanager";
-    info->m_Packages = "deepin-log-viewer";
-    info->m_Version = "1.2.21-1";
+    info->m_Packages = "deepin-diskmanager";
+    info->m_DebVersion = "1.3.10-1";
     addDriverInfo(info);
 
     info = new DriverInfo();
@@ -532,8 +529,8 @@ void PageDriverManager::testScanDevices()
     info->m_Status = ST_CAN_UPDATE;
     info->m_Checked = true;
     info->m_DriverName = "uos-remote-assistance";
-    info->m_Packages = "deepin-log-viewer";
-    info->m_Version = "1.0.7-1";
+    info->m_Packages = "uos-remote-assistance";
+    info->m_DebVersion = "1.0.7-1";
     addDriverInfo(info);
 
     info = new DriverInfo();
@@ -543,8 +540,8 @@ void PageDriverManager::testScanDevices()
     info->m_Status = ST_CAN_UPDATE;
     info->m_Checked = false;
     info->m_DriverName = "deepin-calculator";
-    info->m_Packages = "deepin-log-viewer";
-    info->m_Version = "5.7.12-1";
+    info->m_Packages = "deepin-calculator";
+    info->m_DebVersion = "5.7.12-1";
     addDriverInfo(info);
 
     info = new DriverInfo();
@@ -554,8 +551,8 @@ void PageDriverManager::testScanDevices()
     info->m_Status = ST_CAN_UPDATE;
     info->m_Checked = false;
     info->m_DriverName = "deepin-defender";
-    info->m_Packages = "deepin-log-viewer";
-    info->m_Version = "3.0.21-1";
+    info->m_Packages = "deepin-defender";
+    info->m_DebVersion = "3.0.21-1";
     addDriverInfo(info);
 
     info = new DriverInfo();
@@ -565,8 +562,8 @@ void PageDriverManager::testScanDevices()
     info->m_Status = ST_CAN_UPDATE;
     info->m_Checked = false;
     info->m_DriverName = "deepin-system-monitor";
-    info->m_Packages = "deepin-log-viewer";
-    info->m_Version = "5.8.17-1";
+    info->m_Packages = "deepin-system-monitor";
+    info->m_DebVersion = "5.8.17-1";
     addDriverInfo(info);
 
     info = new DriverInfo();
@@ -576,8 +573,8 @@ void PageDriverManager::testScanDevices()
     info->m_Status = ST_DRIVER_IS_NEW;
     info->m_Checked = false;
     info->m_DriverName = "dde-introduction";
-    info->m_Packages = "deepin-log-viewer";
-    info->m_Version = "5.6.18-1";
+    info->m_Packages = "dde-introduction";
+    info->m_DebVersion = "5.6.18-1";
     addDriverInfo(info);
 
 }

@@ -28,11 +28,13 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
         QApt::Package *p = m_backend->package(package);//"htsy-prn-pclcustom-drv"
         if (!p) {
             //包名不存在
+            qInfo() << "package : \"" << package << "\"" << "was not founded !";
             emit this->errorOccurred(EC_NOTFOUND);//查看源码，只有授权错误和apt自身错误
             return;
         }
 
         if (!p->setVersion(version)){
+            qInfo() << "version : \"" << version << "\"" << "was not founded !";
             emit this->errorOccurred(EC_NOTFOUND);
             return;
         }

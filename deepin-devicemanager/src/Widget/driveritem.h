@@ -142,6 +142,12 @@ public:
     void setStatus(Status st);
 
     /**
+     * @brief getStatus
+     * @return
+     */
+    Status getStatus();
+
+    /**
      * @brief setErrorMsg
      * @param msg
      */
@@ -158,6 +164,7 @@ private:
     DSpinner *mp_Spinner;
     DLabel   *mp_Icon;
     BtnLabel *mp_Status;
+    Status    m_Status;
 
     const int ICON_SIZE_WIDTH = 16;
     const int ICON_SIZE_HEIGHT = 16;

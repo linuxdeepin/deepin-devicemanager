@@ -180,12 +180,21 @@ void DriverStatusItem::setStatus(Status st)
 
     // bug132075 安装成功状态此button无法点击
     QString ts = DApplication::translate("QObject", CommonTools::getStausType(st).toStdString().data());
+
     if (ST_FAILED == st) {
         QString statusStr = QString("<a style=\"text-decoration:none\" href=\"failed\">") + ts + "</a>";
         mp_Status->setText(statusStr);
     } else {
         mp_Status->setText(ts);
     }
+
+    mp_Status->setText(ts);
+    m_Status = st;
+}
+
+Status DriverStatusItem::getStatus()
+{
+    return m_Status;
 }
 
 void DriverStatusItem::setErrorMsg(const QString &msg)
