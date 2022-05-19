@@ -10,10 +10,10 @@ DWIDGET_USE_NAMESPACE
 
 QMap<DriverType, QString> CommonTools::m_MapDriverIcon = {
     {DR_Bluetooth, QString(":/icons/deepin/builtin/icons/bluetooth.svg")}
-    , {DR_Camera, QString(":/icons/deepin/builtin/icons/camera.svg")}
+    , {DR_Camera, QString(":/icons/deepin/builtin/icons/image.svg")}
     , {DR_Gpu, QString(":/icons/deepin/builtin/icons/GPU.svg")}
     , {DR_Keyboard, QString(":/icons/deepin/builtin/icons/keyboard.svg")}
-    , {DR_Sound, QString(":/icons/deepin/builtin/icons/mc.svg")}
+    , {DR_Sound, QString(":/icons/deepin/builtin/icons/voice.svg")}
     , {DR_Mouse, QString(":/icons/deepin/builtin/icons/mouse.svg")}
     , {DR_Network, QString(":/icons/deepin/builtin/icons/network.svg")}
     , {DR_Printer, QString(":/icons/deepin/builtin/icons/printer.svg")}
