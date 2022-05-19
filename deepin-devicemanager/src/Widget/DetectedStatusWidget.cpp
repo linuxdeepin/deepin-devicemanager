@@ -498,9 +498,13 @@ void DetectedStatusWidget::initUI()
 
     // 一键安装
     mp_InstallButton->setText(QObject::tr("Install All"));
+    mp_InstallButton->setFixedWidth(BUTTON_WIDTH);
+    mp_InstallButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     // 重新检测 DSuggestButton
     mp_ReDetectedSgButton->setText(QObject::tr("Scan Again"));
+    mp_ReDetectedSgButton->setFixedWidth(BUTTON_WIDTH);
+    mp_ReDetectedSgButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     // 取消
     mp_CancelButton->setText(QObject::tr("Cancel"));
@@ -514,8 +518,7 @@ void DetectedStatusWidget::initUI()
 
     // 进度条
     mp_Progress->setFixedHeight(PROGRESS_HEIGHT);
-    mp_Progress->setMaximumWidth(PROGRESS_WIDTH);
-
+    mp_Progress->setFixedWidth(PROGRESS_WIDTH);
 }
 
 void DetectedStatusWidget::initConnect()
