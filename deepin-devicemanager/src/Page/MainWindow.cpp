@@ -84,6 +84,7 @@ void MainWindow::refresh()
 
     mp_WaitingWidget->start();
     mp_MainStackWidget->setCurrentIndex(0);
+    mp_ButtonBox->buttonList().at(0)->click();
 
     // 加载设备信息
     refreshDataBase();
