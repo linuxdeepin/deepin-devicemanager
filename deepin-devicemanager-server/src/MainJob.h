@@ -83,6 +83,12 @@ private:
      */
     bool initDBus();
 
+    /**
+     * @brief initDriverRepoSource : 初始化驱动仓库
+     * @return : 无
+     */
+    void initDriverRepoSource();
+
 private:
     ThreadPool            *mp_Pool;               //<! 生成文件的线程池
     DetectThread          *mp_DetectThread;       //<! 检测usb的线程

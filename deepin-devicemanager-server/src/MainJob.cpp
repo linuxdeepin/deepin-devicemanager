@@ -11,8 +11,10 @@
 #include "EnableUtils.h"
 #include "WakeupUtils.h"
 #include "DriverManager.h"
-#include "DriverInstaller.h"
 #include "NotifyThread.h"
+
+//todo: deleted later
+#include "DriverInstaller.h"
 
 #include <QDateTime>
 #include <QThread>
@@ -33,6 +35,7 @@ const QString ENABLE_SERVICE_PATH = "/com/deepin/enablemanager";
 const QString WAKEUP_SERVICE_PATH = "/com/deepin/wakeupmanager";
 bool  MainJob::s_ServerIsUpdating = false;
 bool  MainJob::s_ClientIsUpdating = false;
+const QString DRIVER_REPO_PATH = "/etc/apt/sources.list.d/devicemanager.list";
 
 MainJob::MainJob(QObject *parent)
     : QObject(parent)
@@ -64,13 +67,14 @@ MainJob::MainJob(QObject *parent)
 MainJob::~MainJob()
 {
 }
-
 void MainJob::working()
 {
     // 启动dbus
     if (!initDBus()) {
         exit(1);
     }
+
+    initDriverRepoSource();
 
     // 启动线程监听USB是否有新的设备
     mp_DetectThread = new DetectThread(this);
@@ -79,6 +83,10 @@ void MainJob::working()
     connect(mp_Enable, &DBusEnableInterface::update, this, &MainJob::slotUsbChanged);
     connect(mp_IFace, &DBusInterface::update, this, &MainJob::slotUsbChanged);
     connect(mp_DriverOperateIFace, &DriverDBusInterface::sigFinished, this, &MainJob::slotDriverControl);
+
+    //todo: 先不删除，后续测试完再删除。
+//    DriverInstaller *mp_driverInstaller = new DriverInstaller;;
+//    mp_driverInstaller->installPackage("cnrcupsir2625zk","5.00-1");
 }
 
 INSTRUCTION_RES MainJob::executeClientInstruction(const QString &instructions)
@@ -189,11 +197,25 @@ bool MainJob::initDBus()
         return false;
     }
 
-
     static QThread t;
     mp_Enable->moveToThread(&t);
     t.start();
 
     return true;
+}
+
+void MainJob::initDriverRepoSource()
+{
+    QFile file(DRIVER_REPO_PATH);
+    if(QFile::exists(DRIVER_REPO_PATH)){
+        return;
+    }
+    if(!file.open(QIODevice::ReadWrite| QIODevice::Text)){
+        return;
+    }
+
+    file.write("deb https://pro-driver-packages.uniontech.com eagle non-free\n");
+    file.write("deb http://10.0.32.52:5000/pkg/drivepre2 eagle non-free\n");
+    file.close();
 }
 

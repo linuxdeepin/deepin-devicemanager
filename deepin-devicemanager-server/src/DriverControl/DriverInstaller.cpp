@@ -159,7 +159,9 @@ void DriverInstaller::initBackend()
     m_bValid = m_backend->init();
     if (!m_bValid) {
         qInfo() << "Error in \"DriverInstaller::initBackend()\" : " << m_backend->initErrorMessage();
+        return;
     }
+    m_backend->updateCache();
 }
 /**
  * @brief DriverInstaller::installPackage deb包安装
