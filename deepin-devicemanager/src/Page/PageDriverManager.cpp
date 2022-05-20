@@ -204,7 +204,13 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
         installNextDriver();
     } else {
         // 设置头部显示效果
-        mp_HeadWidget->setInstallSuccessUI(QString::number(successNum), QString::number(failedNum));
+        if(successNum > 0){
+            mp_HeadWidget->setInstallSuccessUI(QString::number(successNum), QString::number(failedNum));
+        }
+        else {
+            mp_HeadWidget->setInstallFailedUI();
+        }
+
         mp_CurDriverInfo = nullptr;
         m_CurIndex = -1;
         m_CancelIndex = -1;

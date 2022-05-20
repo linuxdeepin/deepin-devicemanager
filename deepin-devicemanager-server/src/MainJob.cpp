@@ -211,6 +211,7 @@ void MainJob::initDriverRepoSource()
         return;
     }
     if(!file.open(QIODevice::ReadWrite| QIODevice::Text)){
+        qInfo() << file.errorString();
         return;
     }
 
