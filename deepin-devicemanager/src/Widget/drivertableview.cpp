@@ -397,7 +397,7 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
                         emit operatorClicked(name->index());
                     } else {
                         // 此时如果选中，则取消选中
-                        if (cb->checked() && (status->getStatus() == ST_NOT_INSTALL && status->getStatus() == ST_CAN_UPDATE)) {
+                        if (cb->checked() && (status->getStatus() == ST_NOT_INSTALL || status->getStatus() == ST_CAN_UPDATE)) {
                             cb->setChecked(false);
                         }
                     }

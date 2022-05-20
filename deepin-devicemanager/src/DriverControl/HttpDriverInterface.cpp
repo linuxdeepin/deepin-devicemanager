@@ -96,7 +96,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
         strUrl += "&deb_manufacturer=" + strManufacturer;
     }
     if (!strModels.isEmpty()) {
-        strUrl += "&products=" + strModels;
+        strUrl += "&product=" + strModels;
     }
     if (0 < iClassP) {
         strUrl += "&class_p=" + QString(iClassP);

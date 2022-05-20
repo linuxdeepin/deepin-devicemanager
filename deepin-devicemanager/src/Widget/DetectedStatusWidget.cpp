@@ -134,7 +134,10 @@ void DetectedStatusWidget::setDownloadUI(const DriverType &driverType, const QSt
 
     // 取消
     mp_HLayoutButton->addStretch();
-    mp_CancelButton->setEnabled(true);
+    if(progressValue > 90)
+        mp_CancelButton->setEnabled(false);
+    else
+        mp_CancelButton->setEnabled(true);
     mp_HLayoutButton->addWidget(mp_CancelButton);
     mp_HLayoutTotal->addLayout(mp_HLayoutButton);
 
