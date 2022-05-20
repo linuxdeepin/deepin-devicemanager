@@ -174,7 +174,7 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
                             driverInfo->m_Status = ST_DRIVER_IS_NEW;
                             driverInfo->m_DebVersion  = info.strDebVersion;
                             return;
-                        } else if (!infoList[1].contains("（") || !infoList[1].contains("(")) { //不是(none)（无），则是更新
+                        } else if (!infoList[1].contains("（") && !infoList[1].contains("(")) { //不是(none)（无），则是更新
                             //本地有安装包，但版本较低
                             driverInfo->m_DebVersion  = info.strDebVersion;
                             driverInfo->m_Packages = info.strPackages;
