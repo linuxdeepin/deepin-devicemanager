@@ -19,111 +19,19 @@
 <context>
     <name>CommonTools</name>
     <message>
-        <source>Bluetooth adapter</source>
-        <translation type="vanished">Adaptador de Bluetooth</translation>
-    </message>
-    <message>
-        <source>Imaging device</source>
-        <translation type="vanished">Dispositivo de imagen</translation>
-    </message>
-    <message>
-        <source>Display adapter</source>
-        <translation type="vanished">Adaptador de pantalla</translation>
-    </message>
-    <message>
-        <source>Keyboard</source>
-        <translation type="vanished">Teclado</translation>
-    </message>
-    <message>
-        <source>Sound card</source>
-        <translation type="vanished">Tarjeta de sonido</translation>
-    </message>
-    <message>
-        <source>Mouse</source>
-        <translation type="vanished">Ratón</translation>
-    </message>
-    <message>
-        <source>Network adapter</source>
-        <translation type="vanished">Adaptador de red</translation>
-    </message>
-    <message>
-        <source>Printer</source>
-        <translation type="vanished">Impresora</translation>
-    </message>
-    <message>
-        <source>Other Devices</source>
-        <translation type="vanished">Otros dispositivos</translation>
-    </message>
-    <message>
-        <source>Wireless network adapter</source>
-        <translation type="vanished">Adaptador de red inalámbrica</translation>
-    </message>
-    <message>
-        <source>Installation successful</source>
-        <translation type="vanished">Instalación exitosa</translation>
-    </message>
-    <message>
-        <source>Installation failed</source>
-        <translation type="vanished">Instalación fallida</translation>
-    </message>
-    <message>
-        <source>Downloading</source>
-        <translation type="vanished">Descargando</translation>
-    </message>
-    <message>
-        <source>Installing</source>
-        <translation type="vanished">Instalando</translation>
-    </message>
-    <message>
-        <source>Not installed</source>
-        <translation type="vanished">No instalado</translation>
-    </message>
-    <message>
-        <source>Out-of-date</source>
-        <translation type="vanished">Tiempo agotado</translation>
-    </message>
-    <message>
-        <source>Waiting</source>
-        <translation type="vanished">Esperando</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">Error desconocido</translation>
-    </message>
-    <message>
-        <source>Network error</source>
-        <translation type="vanished">Error de red</translation>
-    </message>
-    <message>
-        <source>Canceled</source>
-        <translation type="vanished">Cancelado</translation>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="61"/>
-        <source>EC_3</source>
-        <translation>EC_3</translation>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="62"/>
+        <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>EC_4</source>
         <translation>EC_4</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="63"/>
+        <location filename="../src/Tool/commontools.cpp" line="65"/>
         <source>EC_5</source>
         <translation>EC_5</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="64"/>
+        <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>EC_6</source>
         <translation>EC_6</translation>
-    </message>
-</context>
-<context>
-    <name>DBusDriverInterface</name>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">Error desconocido</translation>
     </message>
 </context>
 <context>
@@ -1688,6 +1596,16 @@
         <translation>Administrador de dispositivos</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="260"/>
+        <source>Hardware</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="260"/>
+        <source>Drivers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="362"/>
         <source>Monitor</source>
         <translation>Monitor</translation>
@@ -1730,7 +1648,7 @@
     <name>PageDriverControl</name>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="110"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="243"/>
         <source>Updating</source>
         <translation>Actualizando</translation>
     </message>
@@ -1818,48 +1736,48 @@
         <translation>Anterior</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="258"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="255"/>
         <source>Broken package</source>
         <translation>Paquete roto</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="262"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="259"/>
         <source>Unmatched package architecture</source>
         <translation>Arquitectura de paquetes inigualable</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="267"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="350"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="264"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="347"/>
         <source>The selected file does not exist, please select again</source>
         <translation>El archivo seleccionado no existe, por favor seleccione de nuevo</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="351"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
         <source>It is not a driver</source>
         <translation>No es un controlador</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="352"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="349"/>
         <source>Unable to install - no digital signature</source>
         <translation>No se puede instalar - no hay firma digital</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="346"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="343"/>
         <source>Unknown error</source>
         <translation>Error desconocido</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="347"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="344"/>
         <source>The driver module was not found</source>
         <translation>No se ha encontrado el módulo del controlador</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="345"/>
         <source>Invalid module format</source>
         <translation>Formato de módulo inválido</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="349"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="346"/>
         <source>The driver module has dependencies</source>
         <translation>El módulo del controlador tiene dependencias</translation>
     </message>
@@ -2997,7 +2915,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="462"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="464"/>
         <source>Display Adapter</source>
         <translation>Adaptador de pantalla</translation>
     </message>
@@ -3030,7 +2948,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="471"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="473"/>
         <source>Network Adapter</source>
         <translation>Adaptador de red</translation>
     </message>
@@ -3047,7 +2965,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="465"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="467"/>
         <source>Sound Adapter</source>
         <translation>Adaptador de sonido</translation>
     </message>
@@ -3064,7 +2982,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="468"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="470"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
@@ -3113,7 +3031,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
-        <location filename="../src/Tool/commontools.cpp" line="27"/>
+        <location filename="../src/Tool/commontools.cpp" line="29"/>
         <source>Keyboard</source>
         <translation>Teclado</translation>
     </message>
@@ -3130,7 +3048,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
-        <location filename="../src/Tool/commontools.cpp" line="29"/>
+        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Mouse</source>
         <translation>Ratón</translation>
     </message>
@@ -3147,8 +3065,8 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="477"/>
-        <location filename="../src/Tool/commontools.cpp" line="31"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="479"/>
+        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Printer</source>
         <translation>Impresora</translation>
     </message>
@@ -3165,7 +3083,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="474"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="476"/>
         <source>Camera</source>
         <translation>Cámara</translation>
     </message>
@@ -3198,7 +3116,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="948"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="984"/>
-        <location filename="../src/Tool/commontools.cpp" line="33"/>
+        <location filename="../src/Tool/commontools.cpp" line="35"/>
         <source>Other Devices</source>
         <translation>Otros dispositivos</translation>
     </message>
@@ -3591,57 +3509,57 @@
         <translation>Buscar controladores en esta ruta</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="281"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="294"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="307"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="283"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="296"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="309"/>
         <source>Device Name</source>
         <translation>Nombre del dispositivo</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="282"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="284"/>
         <source>Version Available</source>
         <translation>Versión disponible</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="283"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="296"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="285"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="298"/>
         <source>Size</source>
         <translation>Tamaño</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="284"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="297"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="286"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="299"/>
         <source>Status</source>
         <translation>Estado</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="285"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="298"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="287"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="300"/>
         <source>Action</source>
         <translation>Acción</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="295"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="297"/>
         <source>New Version</source>
         <translation>Nueva versión </translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="307"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="309"/>
         <source>Current Version</source>
         <translation>Versión actual</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="624"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="627"/>
         <source>Missing drivers (%1)</source>
         <translation>Controladores faltantes (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
         <source>Outdated drivers (%1)</source>
         <translation>Controladores obsoletos (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="629"/>
         <source>Up-to-date drivers (%1)</source>
         <translation>Controladores actualizados (%1)</translation>
     </message>
@@ -3652,89 +3570,89 @@
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="67"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="327"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="329"/>
         <source>Time checked: %1</source>
         <translation>Tiempo de comprobación: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="114"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="115"/>
         <source>Downloading drivers for %1...</source>
         <translation>Descargando controladores para %1...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="116"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="117"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
         <translation>Velocidad de descarga: %1 Descargado %2/%3</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="158"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="160"/>
         <source>Installing drivers for %1...</source>
         <translation>Instalando controladores para %1...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="200"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="202"/>
         <source>%1 drivers installed, %2 drivers failed</source>
         <translation>%1 controladores instalados, %2 controladores que fallaron</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="202"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="204"/>
         <source>%1 drivers installed</source>
         <translation>%1 controladores instalados</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="242"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="244"/>
         <source>Failed to install drivers</source>
         <translation>Error al instalar los controladores</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="282"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="284"/>
         <source>Network error. Reconnecting...</source>
         <translation>Error de red. Reconectando...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="284"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="286"/>
         <source>Download speed: %1</source>
         <translation>Velocidad de descarga: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="324"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="326"/>
         <source>Your drivers are up to date</source>
         <translation>Sus controladores están actualizados</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="490"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
         <source>reboot</source>
         <translation>Reiniciar</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="491"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="493"/>
         <source>Please %1 for the installed drivers to take effect</source>
         <translation>Por favor espere, %1 para que los controladores instalados surtan efecto</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="494"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="253"/>
         <source>submit feedback</source>
         <translation>Enviar comentarios</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="497"/>
         <source>Please try again or %1 to us</source>
         <translation>Vuelva a intentarlo o %1 contáctenos</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="498"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="500"/>
         <source>Install All</source>
         <translation>Instalar todo</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="501"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="503"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="257"/>
         <source>Scan Again</source>
         <translation>Buscar nuevamente</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -3792,85 +3710,90 @@
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="24"/>
+        <location filename="../src/Tool/commontools.cpp" line="26"/>
         <source>Bluetooth adapter</source>
         <translation>Adaptador de Bluetooth</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="25"/>
-        <location filename="../src/Tool/commontools.cpp" line="32"/>
+        <location filename="../src/Tool/commontools.cpp" line="27"/>
+        <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Imaging device</source>
         <translation>Dispositivo de imagen</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="26"/>
+        <location filename="../src/Tool/commontools.cpp" line="28"/>
         <source>Display adapter</source>
         <translation>Adaptador de pantalla</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="28"/>
+        <location filename="../src/Tool/commontools.cpp" line="30"/>
         <source>Sound card</source>
         <translation>Tarjeta de sonido</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="30"/>
+        <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Network adapter</source>
         <translation>Adaptador de red</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="34"/>
+        <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Wireless network adapter</source>
         <translation>Adaptador de red inalámbrica</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="48"/>
+        <location filename="../src/Tool/commontools.cpp" line="50"/>
         <source>Installation successful</source>
         <translation>Instalación exitosa</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="49"/>
+        <location filename="../src/Tool/commontools.cpp" line="51"/>
         <source>Installation failed</source>
         <translation>Instalación fallida</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="50"/>
+        <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Downloading</source>
         <translation>Descargando</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="51"/>
+        <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Installing</source>
         <translation>Instalando</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="52"/>
+        <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Not installed</source>
         <translation>No instalado</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="53"/>
+        <location filename="../src/Tool/commontools.cpp" line="55"/>
         <source>Out-of-date</source>
         <translation>Tiempo agotado</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="54"/>
+        <location filename="../src/Tool/commontools.cpp" line="56"/>
         <source>Waiting</source>
         <translation>Esperando</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="58"/>
+        <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Unknown error</source>
         <translation>Error desconocido</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="59"/>
+        <location filename="../src/Tool/commontools.cpp" line="61"/>
         <source>Network error</source>
         <translation>Error de red</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="60"/>
+        <location filename="../src/Tool/commontools.cpp" line="62"/>
         <source>Canceled</source>
         <translation>Cancelado</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="63"/>
+        <source>Failed to get driver files</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

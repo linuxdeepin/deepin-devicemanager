@@ -56,7 +56,7 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
             // 通过判断文件本身大小和已经下载的大小是否一直判断是否取消
             quint64 file_size = dp.fileSize();
             quint64 fetched_size = dp.fetchedSize();
-            if (file_size == fetched_size) {
+            if (file_size == fetched_size && 0 != fetched_size) {
                 emit this->installProgressFinished(QApt::Success == m_pTrans->error());
             } else {
                 emit this->errorOccurred(EC_CANCEL);
@@ -216,6 +216,21 @@ void DriverInstaller::slotProgressChanged(int progress)
         if (downloadInfo(strStatus, progress))
             emit this->downloadProgressChanged(strStatus);
     } else {
-        emit installProgressChanged((progress - 50) * 2);
+        int iProcess = (progress - 50) * 2;
+        if(iProcess < 100){
+            emit installProgressChanged(iProcess);
+        }else{
+            if(m_pTrans){
+                QApt::DownloadProgress dp = m_pTrans->downloadProgress();
+                quint64 file_size = dp.fileSize();
+                quint64 fetched_size = dp.fetchedSize();
+                if (file_size != fetched_size){
+                    emit this->errorOccurred(EC_CANCEL);
+                    qInfo() << "EC_CANCEL ************************** 229";
+                }else{
+                    emit installProgressChanged(iProcess);
+                }
+            }
+        }
     }
 }

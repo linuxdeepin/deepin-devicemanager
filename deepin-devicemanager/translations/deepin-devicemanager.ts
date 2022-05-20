@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="en">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="en">
 <context>
     <name>BtnLabel</name>
     <message>
@@ -1554,7 +1552,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="110"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Device Info</translation>
     </message>
     <message>
@@ -1600,12 +1598,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="260"/>
         <source>Hardware</source>
-        <translation type="unfinished"></translation>
+        <translation>Hardware</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="260"/>
         <source>Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Drivers</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="362"/>
@@ -3795,7 +3793,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="63"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"></translation>
+        <translation>Failed to get driver files</translation>
     </message>
 </context>
 <context>

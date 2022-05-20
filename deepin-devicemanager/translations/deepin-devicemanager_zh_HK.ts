@@ -19,111 +19,19 @@
 <context>
     <name>CommonTools</name>
     <message>
-        <source>Bluetooth adapter</source>
-        <translation type="vanished">藍牙適配器</translation>
-    </message>
-    <message>
-        <source>Imaging device</source>
-        <translation type="vanished">圖像設備</translation>
-    </message>
-    <message>
-        <source>Display adapter</source>
-        <translation type="vanished">顯卡</translation>
-    </message>
-    <message>
-        <source>Keyboard</source>
-        <translation type="vanished">鍵盤</translation>
-    </message>
-    <message>
-        <source>Sound card</source>
-        <translation type="vanished">聲卡</translation>
-    </message>
-    <message>
-        <source>Mouse</source>
-        <translation type="vanished">鼠標</translation>
-    </message>
-    <message>
-        <source>Network adapter</source>
-        <translation type="vanished">網卡</translation>
-    </message>
-    <message>
-        <source>Printer</source>
-        <translation type="vanished">打印機</translation>
-    </message>
-    <message>
-        <source>Other Devices</source>
-        <translation type="vanished">其他設備</translation>
-    </message>
-    <message>
-        <source>Wireless network adapter</source>
-        <translation type="vanished">無線網卡</translation>
-    </message>
-    <message>
-        <source>Installation successful</source>
-        <translation type="vanished">安裝成功</translation>
-    </message>
-    <message>
-        <source>Installation failed</source>
-        <translation type="vanished">安裝失敗</translation>
-    </message>
-    <message>
-        <source>Downloading</source>
-        <translation type="vanished">下載中</translation>
-    </message>
-    <message>
-        <source>Installing</source>
-        <translation type="vanished">安裝中</translation>
-    </message>
-    <message>
-        <source>Not installed</source>
-        <translation type="vanished">驅動未安裝</translation>
-    </message>
-    <message>
-        <source>Out-of-date</source>
-        <translation type="vanished">驅動可更新</translation>
-    </message>
-    <message>
-        <source>Waiting</source>
-        <translation type="vanished">等待中</translation>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">未知錯誤</translation>
-    </message>
-    <message>
-        <source>Network error</source>
-        <translation type="vanished">網絡異常</translation>
-    </message>
-    <message>
-        <source>Canceled</source>
-        <translation type="vanished">已取消</translation>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="61"/>
-        <source>EC_3</source>
-        <translation>EC_3</translation>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="62"/>
+        <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>EC_4</source>
         <translation>EC_4</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="63"/>
+        <location filename="../src/Tool/commontools.cpp" line="65"/>
         <source>EC_5</source>
         <translation>EC_5</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="64"/>
+        <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>EC_6</source>
         <translation>EC_6</translation>
-    </message>
-</context>
-<context>
-    <name>DBusDriverInterface</name>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">未知錯誤</translation>
     </message>
 </context>
 <context>
@@ -1688,6 +1596,16 @@
         <translation>設備管理器</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="260"/>
+        <source>Hardware</source>
+        <translation>硬件訊息</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="260"/>
+        <source>Drivers</source>
+        <translation>驅動管理</translation>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="362"/>
         <source>Monitor</source>
         <translation>顯示設備</translation>
@@ -1730,7 +1648,7 @@
     <name>PageDriverControl</name>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="110"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="243"/>
         <source>Updating</source>
         <translation>正在更新</translation>
     </message>
@@ -1818,48 +1736,48 @@
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="258"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="255"/>
         <source>Broken package</source>
         <translation>包文件損壞</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="262"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="259"/>
         <source>Unmatched package architecture</source>
         <translation>包文件與系統架構不匹配</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="267"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="350"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="264"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="347"/>
         <source>The selected file does not exist, please select again</source>
         <translation>所選文件不存在，請重新選擇</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="351"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
         <source>It is not a driver</source>
         <translation>該文件不是驅動文件</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="352"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="349"/>
         <source>Unable to install - no digital signature</source>
         <translation>無法安裝，安裝包無數字簽名</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="346"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="343"/>
         <source>Unknown error</source>
         <translation>未知錯誤</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="347"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="344"/>
         <source>The driver module was not found</source>
         <translation>未發現該驅動模塊</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="345"/>
         <source>Invalid module format</source>
         <translation>模塊格式無效</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="349"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="346"/>
         <source>The driver module has dependencies</source>
         <translation>驅動模塊被依賴</translation>
     </message>
@@ -2997,7 +2915,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="462"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="464"/>
         <source>Display Adapter</source>
         <translation>顯示適配器</translation>
     </message>
@@ -3030,7 +2948,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="471"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="473"/>
         <source>Network Adapter</source>
         <translation>網絡適配器</translation>
     </message>
@@ -3047,7 +2965,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="465"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="467"/>
         <source>Sound Adapter</source>
         <translation>音頻適配器</translation>
     </message>
@@ -3064,7 +2982,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="468"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="470"/>
         <source>Bluetooth</source>
         <translation>藍牙</translation>
     </message>
@@ -3113,7 +3031,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
-        <location filename="../src/Tool/commontools.cpp" line="27"/>
+        <location filename="../src/Tool/commontools.cpp" line="29"/>
         <source>Keyboard</source>
         <translation>鍵盤</translation>
     </message>
@@ -3130,7 +3048,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
-        <location filename="../src/Tool/commontools.cpp" line="29"/>
+        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Mouse</source>
         <translation>鼠標</translation>
     </message>
@@ -3147,8 +3065,8 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="477"/>
-        <location filename="../src/Tool/commontools.cpp" line="31"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="479"/>
+        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Printer</source>
         <translation>打印機</translation>
     </message>
@@ -3165,7 +3083,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="474"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="476"/>
         <source>Camera</source>
         <translation>圖像設備</translation>
     </message>
@@ -3198,7 +3116,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="948"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="984"/>
-        <location filename="../src/Tool/commontools.cpp" line="33"/>
+        <location filename="../src/Tool/commontools.cpp" line="35"/>
         <source>Other Devices</source>
         <translation>其他設備</translation>
     </message>
@@ -3591,57 +3509,57 @@
         <translation>選擇驅動所在位置</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="281"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="294"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="307"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="283"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="296"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="309"/>
         <source>Device Name</source>
         <translation>設備名稱</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="282"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="284"/>
         <source>Version Available</source>
         <translation>可安裝版本</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="283"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="296"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="285"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="298"/>
         <source>Size</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="284"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="297"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="286"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="299"/>
         <source>Status</source>
         <translation>狀態</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="285"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="298"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="287"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="300"/>
         <source>Action</source>
         <translation>操作</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="295"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="297"/>
         <source>New Version</source>
         <translation>可更新版本</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="307"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="309"/>
         <source>Current Version</source>
         <translation>當前版本</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="624"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="627"/>
         <source>Missing drivers (%1)</source>
         <translation>可安裝驅動 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
         <source>Outdated drivers (%1)</source>
         <translation>可更新驅動 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="629"/>
         <source>Up-to-date drivers (%1)</source>
         <translation>無需更新驅動 (%1)</translation>
     </message>
@@ -3652,89 +3570,89 @@
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="67"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="327"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="329"/>
         <source>Time checked: %1</source>
         <translation>檢測時間: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="114"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="115"/>
         <source>Downloading drivers for %1...</source>
         <translation>正在下載%1驅動…</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="116"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="117"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
         <translation>下載速度：%1 已完成 %2/%3</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="158"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="160"/>
         <source>Installing drivers for %1...</source>
         <translation>正在安裝%1驅動…</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="200"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="202"/>
         <source>%1 drivers installed, %2 drivers failed</source>
         <translation>驅動安裝成功%1個，失敗%2個</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="202"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="204"/>
         <source>%1 drivers installed</source>
         <translation>共成功安裝%1個驅動</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="242"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="244"/>
         <source>Failed to install drivers</source>
         <translation>驅動安裝失敗</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="282"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="284"/>
         <source>Network error. Reconnecting...</source>
         <translation>網絡異常，重試中</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="284"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="286"/>
         <source>Download speed: %1</source>
         <translation>下載速度：%1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="324"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="326"/>
         <source>Your drivers are up to date</source>
         <translation>驅動已是最新</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="490"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
         <source>reboot</source>
         <translation>重啟電腦</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="491"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="493"/>
         <source>Please %1 for the installed drivers to take effect</source>
         <translation>驅動已安裝完成，請稍後%1生效</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="494"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="253"/>
         <source>submit feedback</source>
         <translation>反饋</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="497"/>
         <source>Please try again or %1 to us</source>
         <translation>驅動未安裝成功，請重試或%1給我們</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="498"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="500"/>
         <source>Install All</source>
         <translation>一鍵安裝</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="501"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="503"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="257"/>
         <source>Scan Again</source>
         <translation>重新檢測</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <source>Cancel</source>
         <translation>取 消</translation>
     </message>
@@ -3792,85 +3710,90 @@
         <translation>取 消</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="24"/>
+        <location filename="../src/Tool/commontools.cpp" line="26"/>
         <source>Bluetooth adapter</source>
         <translation>藍牙適配器</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="25"/>
-        <location filename="../src/Tool/commontools.cpp" line="32"/>
+        <location filename="../src/Tool/commontools.cpp" line="27"/>
+        <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Imaging device</source>
         <translation>圖像設備</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="26"/>
+        <location filename="../src/Tool/commontools.cpp" line="28"/>
         <source>Display adapter</source>
         <translation>顯卡</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="28"/>
+        <location filename="../src/Tool/commontools.cpp" line="30"/>
         <source>Sound card</source>
         <translation>聲卡</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="30"/>
+        <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Network adapter</source>
         <translation>網卡</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="34"/>
+        <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Wireless network adapter</source>
         <translation>無線網卡</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="48"/>
+        <location filename="../src/Tool/commontools.cpp" line="50"/>
         <source>Installation successful</source>
         <translation>安裝成功</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="49"/>
+        <location filename="../src/Tool/commontools.cpp" line="51"/>
         <source>Installation failed</source>
         <translation>安裝失敗</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="50"/>
+        <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Downloading</source>
         <translation>下載中</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="51"/>
+        <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Installing</source>
         <translation>安裝中</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="52"/>
+        <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Not installed</source>
         <translation>驅動未安裝</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="53"/>
+        <location filename="../src/Tool/commontools.cpp" line="55"/>
         <source>Out-of-date</source>
         <translation>驅動可更新</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="54"/>
+        <location filename="../src/Tool/commontools.cpp" line="56"/>
         <source>Waiting</source>
         <translation>等待中</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="58"/>
+        <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Unknown error</source>
         <translation>未知錯誤</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="59"/>
+        <location filename="../src/Tool/commontools.cpp" line="61"/>
         <source>Network error</source>
         <translation>網絡異常</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="60"/>
+        <location filename="../src/Tool/commontools.cpp" line="62"/>
         <source>Canceled</source>
         <translation>已取消</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="63"/>
+        <source>Failed to get driver files</source>
+        <translation>驅動文件獲取異常</translation>
     </message>
 </context>
 <context>

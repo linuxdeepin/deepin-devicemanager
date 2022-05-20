@@ -19,111 +19,19 @@
 <context>
     <name>CommonTools</name>
     <message>
-        <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Imaging device</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Display adapter</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Keyboard</source>
-        <translation type="vanished">Tastierë</translation>
-    </message>
-    <message>
-        <source>Sound card</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Mouse</source>
-        <translation type="vanished">Mi</translation>
-    </message>
-    <message>
-        <source>Network adapter</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Printer</source>
-        <translation type="vanished">Shtypës</translation>
-    </message>
-    <message>
-        <source>Other Devices</source>
-        <translation type="vanished">Pajisje të Tjera</translation>
-    </message>
-    <message>
-        <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Installation successful</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Installation failed</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Downloading</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Installing</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Not installed</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Out-of-date</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Waiting</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Unknown error</source>
-        <translation type="vanished">Gabim i panjohur</translation>
-    </message>
-    <message>
-        <source>Network error</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Canceled</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="61"/>
-        <source>EC_3</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="62"/>
-        <source>EC_4</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="63"/>
-        <source>EC_5</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../src/Tool/commontools.cpp" line="64"/>
-        <source>EC_6</source>
-        <translation type="unfinished"/>
+        <source>EC_4</source>
+        <translation>EC_4</translation>
     </message>
-</context>
-<context>
-    <name>DBusDriverInterface</name>
     <message>
-        <source>Unknown error</source>
-        <translation type="vanished">Gabim i panjohur</translation>
+        <location filename="../src/Tool/commontools.cpp" line="65"/>
+        <source>EC_5</source>
+        <translation>EC_5</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="66"/>
+        <source>EC_6</source>
+        <translation>EC_6</translation>
     </message>
 </context>
 <context>
@@ -166,7 +74,7 @@
     <message>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="228"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
 </context>
 <context>
@@ -236,7 +144,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="267"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="271"/>
@@ -345,7 +253,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="216"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="220"/>
@@ -403,7 +311,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="133"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="137"/>
@@ -666,7 +574,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="240"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
 </context>
 <context>
@@ -724,7 +632,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="162"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="166"/>
@@ -787,7 +695,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="441"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="445"/>
@@ -1202,7 +1110,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="245"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="249"/>
@@ -1333,7 +1241,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="153"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="156"/>
@@ -1386,7 +1294,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="161"/>
         <source>Slot</source>
-        <translation type="unfinished"/>
+        <translation>Vend</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="162"/>
@@ -1541,7 +1449,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="417"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
 </context>
 <context>
@@ -1623,7 +1531,7 @@
     <message>
         <location filename="../src/Widget/logtreeview.cpp" line="116"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
 </context>
 <context>
@@ -1636,7 +1544,7 @@
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="126"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
 </context>
 <context>
@@ -1688,6 +1596,16 @@
         <translation>Përgjegjës Pajisjesh</translation>
     </message>
     <message>
+        <location filename="../src/Page/MainWindow.cpp" line="260"/>
+        <source>Hardware</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="260"/>
+        <source>Drivers</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../src/Page/MainWindow.cpp" line="362"/>
         <source>Monitor</source>
         <translation>Monitor</translation>
@@ -1730,7 +1648,7 @@
     <name>PageDriverControl</name>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="110"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="243"/>
         <source>Updating</source>
         <translation>Po përditësohet</translation>
     </message>
@@ -1818,48 +1736,48 @@
         <translation>E mëparshmja</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="258"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="255"/>
         <source>Broken package</source>
         <translation>Paketë e dëmtuar</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="262"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="259"/>
         <source>Unmatched package architecture</source>
         <translation>Mospërputhje arkitekture pakete</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="267"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="350"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="264"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="347"/>
         <source>The selected file does not exist, please select again</source>
         <translation>Kartela e përzgjedhur s’ekziston, ju lutemi, ripërzgjidhni</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="351"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
         <source>It is not a driver</source>
         <translation>S’është përudhës</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="352"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="349"/>
         <source>Unable to install - no digital signature</source>
         <translation>S’arrihet të instalohet - s’ka nënshkrim dixhital</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="346"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="343"/>
         <source>Unknown error</source>
         <translation>Gabim i panjohur</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="347"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="344"/>
         <source>The driver module was not found</source>
         <translation>S’u gjet modul përudhësi</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="348"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="345"/>
         <source>Invalid module format</source>
         <translation>Format i pavlefshëm modulesh</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="349"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="346"/>
         <source>The driver module has dependencies</source>
         <translation>Moduli i përudhësit ka varësi</translation>
     </message>
@@ -2997,7 +2915,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="462"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="464"/>
         <source>Display Adapter</source>
         <translation>Përshtatës Ekrani</translation>
     </message>
@@ -3030,7 +2948,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="471"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="473"/>
         <source>Network Adapter</source>
         <translation>Përshtatës Rrjeti</translation>
     </message>
@@ -3047,7 +2965,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="465"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="467"/>
         <source>Sound Adapter</source>
         <translation>Përshtatës Zëri</translation>
     </message>
@@ -3064,7 +2982,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="468"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="470"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
@@ -3113,7 +3031,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
-        <location filename="../src/Tool/commontools.cpp" line="27"/>
+        <location filename="../src/Tool/commontools.cpp" line="29"/>
         <source>Keyboard</source>
         <translation>Tastierë</translation>
     </message>
@@ -3130,7 +3048,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
-        <location filename="../src/Tool/commontools.cpp" line="29"/>
+        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Mouse</source>
         <translation>Mi</translation>
     </message>
@@ -3147,8 +3065,8 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="477"/>
-        <location filename="../src/Tool/commontools.cpp" line="31"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="479"/>
+        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Printer</source>
         <translation>Shtypës</translation>
     </message>
@@ -3165,7 +3083,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="474"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="476"/>
         <source>Camera</source>
         <translation>Kamerë</translation>
     </message>
@@ -3198,7 +3116,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="948"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="984"/>
-        <location filename="../src/Tool/commontools.cpp" line="33"/>
+        <location filename="../src/Tool/commontools.cpp" line="35"/>
         <source>Other Devices</source>
         <translation>Pajisje të Tjera</translation>
     </message>
@@ -3591,199 +3509,199 @@
         <translation>Kërko për përudhës në këtë shteg</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="281"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="294"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="307"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="283"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="296"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="309"/>
         <source>Device Name</source>
         <translation>Emër Pajisjeje</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="282"/>
-        <source>Version Available</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="283"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="296"/>
-        <source>Size</source>
-        <translation>Madhësi</translation>
-    </message>
-    <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="284"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="297"/>
-        <source>Status</source>
-        <translation>Gjendje</translation>
+        <source>Version Available</source>
+        <translation>Version i Gatshëm</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="285"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="298"/>
+        <source>Size</source>
+        <translation>Madhësi</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverManager.cpp" line="286"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="299"/>
+        <source>Status</source>
+        <translation>Gjendje</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverManager.cpp" line="287"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="300"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Veprim</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="295"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="297"/>
         <source>New Version</source>
-        <translation type="unfinished"/>
+        <translation>Version i Ri</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="307"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="309"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Version i Tanishëm</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="624"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="627"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Mungojnë përudhës (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Përudhës të vjetruar (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="629"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Përudhës të përditësuar (%1)</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="64"/>
         <source>%1 driver updates available</source>
-        <translation type="unfinished"/>
+        <translation>%1 përditësime përudhësish të gatshme</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="67"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="327"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="329"/>
         <source>Time checked: %1</source>
-        <translation type="unfinished"/>
+        <translation>Kohë kontrolli: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="114"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="115"/>
         <source>Downloading drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>Po shkarkohen përudhësa për %1…</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="116"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="117"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation type="unfinished"/>
+        <translation>Shpejtësi shkarkimi: %1 Të shkarkuar %2/%3</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="158"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="160"/>
         <source>Installing drivers for %1...</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="200"/>
-        <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>Po instalohen përudhës për %1…</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="202"/>
+        <source>%1 drivers installed, %2 drivers failed</source>
+        <translation>U instaluan %1 përudhës, dështoi instalimi për %2 përudhës</translation>
+    </message>
+    <message>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="204"/>
         <source>%1 drivers installed</source>
-        <translation type="unfinished"/>
+        <translation>U instaluan %1 përudhës</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="242"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="244"/>
         <source>Failed to install drivers</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="282"/>
-        <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"/>
+        <translation>S’u arrit të instalohet përudhës</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="284"/>
+        <source>Network error. Reconnecting...</source>
+        <translation>Gabim rrjeti. Po rilidhet…</translation>
+    </message>
+    <message>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="286"/>
         <source>Download speed: %1</source>
-        <translation type="unfinished"/>
+        <translation>Shpejtësi shkarkimi: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="324"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="326"/>
         <source>Your drivers are up to date</source>
-        <translation type="unfinished"/>
+        <translation>Përudhësit tuaj janë të përditësuar</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="490"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
         <source>reboot</source>
-        <translation type="unfinished"/>
+        <translation>riniseni</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="491"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="493"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation type="unfinished"/>
+        <translation>Ju lutemi, %1 që të hyjnë në fuqi përudhësit e instaluar</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="494"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="253"/>
         <source>submit feedback</source>
-        <translation type="unfinished"/>
+        <translation>jepni përshtypjet</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="497"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Ju lutemi, riprovoni, ose na %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="498"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="500"/>
         <source>Install All</source>
-        <translation type="unfinished"/>
+        <translation>Instaloji Krejt</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="501"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="503"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="257"/>
         <source>Scan Again</source>
-        <translation type="unfinished"/>
+        <translation>Rikontrollo</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <source>Cancel</source>
         <translation>Anuloje</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="51"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Po kontrollohet për përudhës pajisjesh hardware, ju lutemi, pritni…</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="59"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="304"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>Po kontrollohet %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="113"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>Kontrolli dështoi</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="170"/>
         <source>Network unavailable</source>
-        <translation type="unfinished"/>
+        <translation>S’ka lidhje në rrjet</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="174"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>Ju lutemi, kontrolloni lidhjen tuaj në rrjet</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="254"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Ju lutemi, rikontrolloni, ose na %1</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="478"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Po instaloni një përudhës, çka do të ndalet, nëse dilni.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="480"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>Jeni i sigurt se doni të dilet?</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="483"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Dil</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="484"/>
@@ -3792,85 +3710,90 @@
         <translation>Anuloje</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="24"/>
-        <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="25"/>
-        <location filename="../src/Tool/commontools.cpp" line="32"/>
-        <source>Imaging device</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../src/Tool/commontools.cpp" line="26"/>
-        <source>Display adapter</source>
-        <translation type="unfinished"/>
+        <source>Bluetooth adapter</source>
+        <translation>Përshtatës Bluetooth</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="27"/>
+        <location filename="../src/Tool/commontools.cpp" line="34"/>
+        <source>Imaging device</source>
+        <translation>Pajisje Figurash</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="28"/>
-        <source>Sound card</source>
-        <translation type="unfinished"/>
+        <source>Display adapter</source>
+        <translation>Përshtatës ekrani</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="30"/>
+        <source>Sound card</source>
+        <translation>Kartë zëri</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Përshtatës rrjeti</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="34"/>
+        <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="48"/>
-        <source>Installation successful</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="49"/>
-        <source>Installation failed</source>
-        <translation type="unfinished"/>
+        <translation>Përshtatës rrjeti pa fill</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="50"/>
-        <source>Downloading</source>
-        <translation type="unfinished"/>
+        <source>Installation successful</source>
+        <translation>Instalim i suksesshëm</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="51"/>
-        <source>Installing</source>
-        <translation type="unfinished"/>
+        <source>Installation failed</source>
+        <translation>Instalimi dështoi</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="52"/>
-        <source>Not installed</source>
-        <translation type="unfinished"/>
+        <source>Downloading</source>
+        <translation>Po shkarkohet</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="53"/>
-        <source>Out-of-date</source>
-        <translation type="unfinished"/>
+        <source>Installing</source>
+        <translation>Po instalohet</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="54"/>
-        <source>Waiting</source>
-        <translation type="unfinished"/>
+        <source>Not installed</source>
+        <translation>Jo i instaluar</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="58"/>
+        <location filename="../src/Tool/commontools.cpp" line="55"/>
+        <source>Out-of-date</source>
+        <translation>I vjetruar</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="56"/>
+        <source>Waiting</source>
+        <translation>Po pritet</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Unknown error</source>
         <translation>Gabim i panjohur</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="59"/>
+        <location filename="../src/Tool/commontools.cpp" line="61"/>
         <source>Network error</source>
-        <translation type="unfinished"/>
+        <translation>Gabim rrjeti</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="60"/>
+        <location filename="../src/Tool/commontools.cpp" line="62"/>
         <source>Canceled</source>
-        <translation type="unfinished"/>
+        <translation>Anuluar</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="63"/>
+        <source>Failed to get driver files</source>
+        <translation>S’u arrit të merren kartela përudhësi</translation>
     </message>
 </context>
 <context>
@@ -3938,7 +3861,7 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="239"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Jo i passhëm</translation>
     </message>
 </context>
 <context>

@@ -36,6 +36,7 @@ PageDriverManager::PageDriverManager(DWidget *parent)
     , mp_LabelIsNew(new DLabel(this))
     , mp_CurDriverInfo(nullptr)
     , m_CurIndex(-1)
+    , m_CancelIndex(-1)
     , mp_scanner(new DriverScanner(this))
 {
     // 初始化界面
@@ -144,6 +145,8 @@ void PageDriverManager::slotItemCheckedClicked(int index, bool checked)
 
 void PageDriverManager::slotDownloadProgressChanged(QStringList msg)
 {
+    if(! mp_CurDriverInfo)
+        return;
     // 将下载过程时时更新到表格上方的状态里面 qInfo() << "Download ********** " << msg[0] << " , " << msg[1] << " , " << msg[2];
     mp_HeadWidget->setDownloadUI(mp_CurDriverInfo->type(), msg[2], msg[1], mp_CurDriverInfo->size(), msg[0].toInt());
 
@@ -152,6 +155,8 @@ void PageDriverManager::slotDownloadProgressChanged(QStringList msg)
 
 void PageDriverManager::slotDownloadFinished()
 {
+    if(! mp_CurDriverInfo)
+        return;
     mp_CurDriverInfo->m_Status = ST_INSTALL;
     mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
     mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
@@ -159,6 +164,8 @@ void PageDriverManager::slotDownloadFinished()
 
 void PageDriverManager::slotInstallProgressChanged(int progress)
 {
+    if(! mp_CurDriverInfo)
+        return;
     // 设置表头状态
     mp_HeadWidget->setInstallUI(mp_CurDriverInfo->type(), mp_CurDriverInfo->name(), progress);
 
@@ -169,6 +176,9 @@ void PageDriverManager::slotInstallProgressChanged(int progress)
 
 void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
 {
+    if(! mp_CurDriverInfo)
+        return;
+
     static int successNum = 0;
     static int failedNum = 0;
     if (bsuccess) {
@@ -197,6 +207,7 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
         mp_HeadWidget->setInstallSuccessUI(QString::number(successNum), QString::number(failedNum));
         mp_CurDriverInfo = nullptr;
         m_CurIndex = -1;
+        m_CancelIndex = -1;
         successNum = 0;
         failedNum = 0;
     }
@@ -252,7 +263,10 @@ void PageDriverManager::slotScanFinished(ScanResult sr)
 
 void PageDriverManager::slotUndoInstall()
 {
-    DBusDriverInterface::getInstance()->undoInstallDriver();
+    if(m_CancelIndex != m_CurIndex){
+        m_CancelIndex = m_CurIndex;
+        DBusDriverInterface::getInstance()->undoInstallDriver();
+    }
 }
 
 void PageDriverManager::initWidget()

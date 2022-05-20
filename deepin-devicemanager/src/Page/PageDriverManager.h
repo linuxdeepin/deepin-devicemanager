@@ -201,6 +201,7 @@ private:
     QList<DriverInfo *>   m_ListDriverInfo;  // 保存所有驱动信息
     DriverInfo          *mp_CurDriverInfo;
     int                  m_CurIndex;
+    int                  m_CancelIndex;
     QList<int>           m_ListDriverIndex;
     QList<int>           m_ListInstallIndex;
     QList<int>           m_ListUpdateIndex;

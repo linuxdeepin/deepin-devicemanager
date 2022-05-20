@@ -188,7 +188,6 @@ void DriverStatusItem::setStatus(Status st)
         mp_Status->setText(ts);
     }
 
-    mp_Status->setText(ts);
     m_Status = st;
 }
 
