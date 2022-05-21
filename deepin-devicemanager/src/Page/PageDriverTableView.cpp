@@ -31,6 +31,7 @@ void PageDriverTableView::appendRowItems(int column)
 void PageDriverTableView::setWidget(int row, int column, DWidget *widget)
 {
     mp_View->setWidget(row, column, widget);
+    mp_View->resizeColumn(column);
 }
 
 QAbstractItemModel *PageDriverTableView::model() const

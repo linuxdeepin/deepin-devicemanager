@@ -173,6 +173,12 @@ public:
     */
    void removeItemAndWidget(int row, int column);
 
+   /**
+    * @brief resizeColumn 触发一列的sectionresize事件
+    * @param column
+    */
+   void resizeColumn(int column);
+
 protected:
     /**
      * @brief 重写 paintEvent showEvent drawRow

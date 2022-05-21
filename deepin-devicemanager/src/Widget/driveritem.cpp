@@ -114,6 +114,7 @@ DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
 void DriverNameItem::setName(const QString &name)
 {
     mp_Name->setText(name);
+    mp_Name->setToolTip(name);
 }
 
 void DriverNameItem::setIndex(int index)

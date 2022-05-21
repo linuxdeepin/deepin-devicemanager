@@ -206,8 +206,7 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
         // 设置头部显示效果
         if(successNum > 0){
             mp_HeadWidget->setInstallSuccessUI(QString::number(successNum), QString::number(failedNum));
-        }
-        else {
+        } else {
             mp_HeadWidget->setInstallFailedUI();
         }
 

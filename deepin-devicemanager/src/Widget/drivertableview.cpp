@@ -360,7 +360,7 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
     QModelIndex index = mp_Model->index(row, column);
     setIndexWidget(index, widget);
 
-    // 选中的操函数处理
+    // 选中的操作函数处理
     DriverCheckItem *cbItem = qobject_cast<DriverCheckItem *>(widget);
     if (cbItem) {
         connect(cbItem, &DriverCheckItem::sigChecked, this, [this, row](bool checked) {
@@ -372,7 +372,7 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
         });
     }
 
-    // 点击安装或者更新的曹函数
+    // 点击安装或者更新的槽函数
     // 做三件事，1:当前行的勾选框置灰，2:当前行的按钮置灰，3:其它行如果选中则取消选中且为可安装或可更新状态
     DriverOperationItem *orItem = qobject_cast<DriverOperationItem *>(widget);
     if (orItem) {
@@ -567,6 +567,11 @@ void DriverTableView::removeItemAndWidget(int row, int column)
         delete widget;
         widget = nullptr;
     }
+}
+
+void DriverTableView::resizeColumn(int column)
+{
+    mp_HeadView->sectionResized(column, mp_HeadView->sectionSize(column), mp_HeadView->sectionSize(column));
 }
 
 void DriverTableView::paintEvent(QPaintEvent *event)
