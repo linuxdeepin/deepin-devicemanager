@@ -206,8 +206,8 @@ private:
     QList<int>           m_ListInstallIndex;
     QList<int>           m_ListUpdateIndex;
     QList<int>           m_ListNewIndex;
-
     DriverScanner       *mp_scanner;     // 扫描驱动线程
+    bool                m_IsFirstScan = true;
 
 };
 

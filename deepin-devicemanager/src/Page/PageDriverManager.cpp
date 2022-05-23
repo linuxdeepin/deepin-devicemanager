@@ -86,7 +86,7 @@ void PageDriverManager::addDriverInfo(DriverInfo *info)
 
 bool PageDriverManager::isFirstScan()
 {
-    return m_ListNewIndex.isEmpty() && m_ListUpdateIndex.isEmpty() && m_ListInstallIndex.isEmpty();
+    return m_IsFirstScan;
 }
 
 bool PageDriverManager::isInstalling()
@@ -96,6 +96,7 @@ bool PageDriverManager::isInstalling()
 
 void PageDriverManager::scanDriverInfo()
 {
+    m_IsFirstScan = false;
     // 如果在安装过程中则不扫描
     if (mp_CurDriverInfo) {
         return;

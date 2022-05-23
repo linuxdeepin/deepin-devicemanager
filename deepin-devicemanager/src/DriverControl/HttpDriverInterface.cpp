@@ -79,7 +79,6 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
         qInfo() << "m_ModelId:" << driverInfo->m_ModelId;
         qInfo() << "m_Packages:" << driverInfo->m_Packages;
         qInfo() << "m_DebVersion:" << driverInfo->m_DebVersion;
-
         qInfo() << "m_Status:" << driverInfo->m_Status;
     }
 }
@@ -146,72 +145,70 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
     if (strJson.isEmpty()) {
         return;
     }
-    QList<strDriverInfo> lstDriverInfo;
-    if (convertJsonToDeviceList(strJson, lstDriverInfo)) {
-        if (lstDriverInfo.size() == 0) {
-            return;
-        }
 
-        int max = 0;
-        foreach (const strDriverInfo& info , lstDriverInfo) {
-            if (max < info.iLevel) {
-                max = info.iLevel;
-            }
+    QList<strDriverInfo> lstDriverInfo;
+    if (! convertJsonToDeviceList(strJson, lstDriverInfo))
+        return ;
+
+    if (lstDriverInfo.size() == 0) {
+        return;
+    }
+
+    // 找到最优等级
+    int max = 0;
+    foreach (const strDriverInfo& info , lstDriverInfo) {
+        if (max < info.iLevel) {
+            max = info.iLevel;
         }
-        //因为无法从设备型号查询到驱动包的名称（可能有多种同样推荐等级的驱动），所以就查询到这些推荐驱动并遍历，查询本地是否安装。
-        foreach (const strDriverInfo& info , lstDriverInfo) {
-            if (max == info.iLevel) {
-                if (driverInfo->driverName().isEmpty() || driverInfo->version().isEmpty()) {
-                    //如果有一个，且版本也对，则不需要更新，否则要更新
-                    QProcess process;
-                    QStringList options;
-                    options << "-c" << "apt policy " + info.strPackages;
-                    process.start("/bin/bash", options);
-                    process.waitForFinished(-1);
-                    QStringList infoList = QString(process.readAllStandardOutput()).split("\n");
-                    if (infoList.size() > 2) {
-                        if (infoList[1].contains(info.strDebVersion)) {
-                            driverInfo->m_Status = ST_DRIVER_IS_NEW;
-                            driverInfo->m_DebVersion  = info.strDebVersion;
-                            return;
-                        } else if (!infoList[1].contains("（") && !infoList[1].contains("(")) { //不是(none)（无），则是更新
-                            //本地有安装包，但版本较低
-                            driverInfo->m_DebVersion  = info.strDebVersion;
-                            driverInfo->m_Packages = info.strPackages;
-                            driverInfo->m_Status   = ST_CAN_UPDATE;
-                            return;
-                        }
-                    }
-                } else {
-                    //如果本地获取的驱动能与仓库推荐驱动中任意一个匹配，则返回false，不需要更新
-                    if (info.strPackages.contains(driverInfo->driverName())) {
-                        if (info.strDebVersion == driverInfo->version()) {
-                            driverInfo->m_Status = ST_DRIVER_IS_NEW;
-                            return;
-                        } else {
-                            //本地有安装包，但版本较低
-                            driverInfo->m_DebVersion  = info.strDebVersion;
-                            driverInfo->m_Packages = info.strPackages;
-                            driverInfo->m_Status   = ST_CAN_UPDATE;
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-        foreach (const strDriverInfo& info , lstDriverInfo) {
-            if (max == info.iLevel) {
-                driverInfo->m_DebVersion = info.strDebVersion;
-                driverInfo->m_Packages = info.strPackages;
-                driverInfo->m_Status = ST_NOT_INSTALL;
-                return;
+    }
+
+    // 找到最优选择
+    int index = -1;
+    int res_out = 0;
+    for (int i = 0; i < lstDriverInfo.size(); i++) {
+        if (max == lstDriverInfo[i].iLevel){
+            // 选中第一个最优等级的index
+            if (index < 0)
+                index = i;
+            int res = packageInstall(lstDriverInfo[i].strPackages, lstDriverInfo[i].strDebVersion);
+            if(res > 0){
+                res_out = res;
+                index = i;
             }
         }
     }
-    driverInfo->m_Status = ST_DRIVER_IS_NEW;
-    return;
+
+    // 找到最优选择后，设置状态，最新、可安装、可更新
+    driverInfo->m_DebVersion  = lstDriverInfo[index].strDebVersion;
+    driverInfo->m_Packages = lstDriverInfo[index].strPackages;
+    driverInfo->m_Size = lstDriverInfo[index].strSize;
+    if(driverInfo->driverName().isEmpty() && driverInfo->type() != DR_Printer){
+        driverInfo->m_Status = ST_NOT_INSTALL;
+    }else{
+        if(2 == res_out){
+            driverInfo->m_Status = ST_DRIVER_IS_NEW;
+        }else { // 此时不管是0(此时本地安装的是系统驱动)，还是1(此时装的是仓库驱动) 都是可更新
+            driverInfo->m_Status = ST_CAN_UPDATE;
+        }
+    }
 }
 
+int HttpDriverInterface::packageInstall(const QString& package_name, const QString& version)
+{
+    // 0:没有包 1:版本不一致 2:版本一致
+    QProcess process;
+    QStringList options;
+    options << "-c" << "apt policy " + package_name;
+    process.start("/bin/bash", options);
+    process.waitForFinished(-1);
+    QStringList infoList = QString(process.readAllStandardOutput()).split("\n");
+
+    if( infoList.size() <= 2 || infoList[1].contains("（") || infoList[1].contains("("))
+        return 0;
+    if(infoList[1].contains(version))
+        return 2;
+    return 1;
+}
 
 bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<strDriverInfo> &lstDriverInfo)
 {

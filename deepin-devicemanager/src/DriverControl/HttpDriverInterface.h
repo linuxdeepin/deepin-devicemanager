@@ -65,6 +65,9 @@ protected:
     QString getRequestPrinter(QString strDebManufacturer = "", QString strDesc = "");//打印机用
     QString getRequestCamera(QString strDesc = "");//图像设备
     void checkDriverInfo(QString strJson, DriverInfo *driverInfo);
+
+private:
+    int packageInstall(const QString& package_name, const QString& version);
 public:
     signals:
     void sigRequestFinished(bool sucess, QString msg);
