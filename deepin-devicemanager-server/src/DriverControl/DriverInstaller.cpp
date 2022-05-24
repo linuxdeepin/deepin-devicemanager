@@ -220,18 +220,6 @@ void DriverInstaller::slotProgressChanged(int progress)
         int iProcess = (progress - 50) * 2;
         if(iProcess < 100){
             emit installProgressChanged(iProcess);
-        }else{
-            if(m_pTrans){
-                QApt::DownloadProgress dp = m_pTrans->downloadProgress();
-                quint64 file_size = dp.fileSize();
-                quint64 fetched_size = dp.fetchedSize();
-                if (file_size != fetched_size){
-                    emit this->errorOccurred(EC_CANCEL);
-                    qInfo() << "EC_CANCEL ************************** 229";
-                }else{
-                    emit installProgressChanged(iProcess);
-                }
-            }
         }
     }
 }
