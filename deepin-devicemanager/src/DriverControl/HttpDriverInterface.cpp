@@ -30,13 +30,14 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
     qInfo() << "strUrl : " << newUrl;
 
     QNetworkRequest request(newUrl);
-    reply.reset(qnam.get(request));
+    QNetworkAccessManager qnam;
+    QNetworkReply* reply = qnam.get(request);
 
     QTimer timer;
     timer.setSingleShot(true);
     QEventLoop loop;
     QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-    QObject::connect(reply.get(), &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     timer.start(10000);
     loop.exec();
 
@@ -44,8 +45,8 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
     //! [networkreply-error-handling-1]
     QNetworkReply::NetworkError error = reply->error();
 
-    reply.reset();
-    qInfo() << error;
+    reply->reset();
+    reply->deleteLater();
     if (error != QNetworkReply::NoError) {
         return "network error";
     }

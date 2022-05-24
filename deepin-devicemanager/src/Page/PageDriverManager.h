@@ -193,6 +193,12 @@ private:
      */
     void failAllIndex();
 
+    /**
+     * @brief networkIsOnline
+     * @return
+     */
+    bool networkIsOnline();
+
 private:
     DStackedWidget       *mp_StackWidget;
     PageDriverTableView  *mp_ViewNotInstall; //没有安装驱动的列表
@@ -213,6 +219,7 @@ private:
     QList<int>           m_ListNewIndex;
     DriverScanner       *mp_scanner;     // 扫描驱动线程
     bool                m_IsFirstScan = true;
+    bool                m_Scanning = false;
 
 };
 

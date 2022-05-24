@@ -18,6 +18,7 @@
 
 #include <QBoxLayout>
 #include <QMetaType>
+#include <QNetworkConfigurationManager>
 
 #include <unistd.h>
 
@@ -75,7 +76,6 @@ PageDriverManager::~PageDriverManager()
     DELETE_PTR(mp_UpdateLabel);
     DELETE_PTR(mp_LabelIsNew);
 
-
     DELETE_PTR(mp_StackWidget);
 }
 
@@ -86,7 +86,11 @@ void PageDriverManager::addDriverInfo(DriverInfo *info)
 
 bool PageDriverManager::isFirstScan()
 {
-    return m_IsFirstScan;
+    if(m_IsFirstScan)
+        return true;
+    if(m_Scanning || networkIsOnline())
+        return false;
+    return true;
 }
 
 bool PageDriverManager::isInstalling()
@@ -97,6 +101,7 @@ bool PageDriverManager::isInstalling()
 void PageDriverManager::scanDriverInfo()
 {
     m_IsFirstScan = false;
+    m_Scanning = true;
     // 如果在安装过程中则不扫描
     if (mp_CurDriverInfo) {
         return;
@@ -285,6 +290,9 @@ void PageDriverManager::slotScanFinished(ScanResult sr)
         mp_ScanWidget->setNetworkErr();
         mp_scanner->quit();
     }
+
+    // 扫描结束，可以继续扫描
+    m_Scanning = false;
 }
 
 void PageDriverManager::slotUndoInstall()
@@ -759,4 +767,10 @@ void PageDriverManager::failAllIndex()
         mp_ViewCanUpdate->setErrorMsg(index, errS);
         mp_ViewNotInstall->setErrorMsg(index, errS);
     }
+}
+
+bool PageDriverManager::networkIsOnline()
+{
+    QNetworkConfigurationManager mgr;
+    return mgr.isOnline();
 }

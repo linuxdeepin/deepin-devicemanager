@@ -73,12 +73,7 @@ public:
     void sigRequestFinished(bool sucess, QString msg);
 
 private:
-    QNetworkAccessManager qnam;
-    QScopedPointer<QNetworkReply, QScopedPointerDeleteLater> reply;
-
-    //QList<strDriverInfo> lstDriverInfo {};
     QString strJsonDriverInfo;
-
     static std::atomic<HttpDriverInterface *> s_Instance;
     static std::mutex                         m_mutex;
 };
