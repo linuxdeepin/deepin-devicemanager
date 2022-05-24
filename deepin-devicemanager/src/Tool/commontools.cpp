@@ -61,8 +61,8 @@ QMap<int, QString> CommonTools::m_MapErrorString = {
     , {EC_NETWORK, QObject::tr("Network error")}
     , {EC_CANCEL, QObject::tr("Canceled")}
     , {EC_NOTFOUND, QObject::tr("Failed to get driver files")}
-    , {EC_4, tr("EC_4")}
-    , {EC_5, tr("EC_5")}
+    , {EC_NOTIFY_NETWORK, tr("EC_NOTIFY_NETWORK")}
+    , {EC_REINSTALL, tr("EC_REINSTALL")}
     , {EC_6, tr("EC_6")}
 };
 

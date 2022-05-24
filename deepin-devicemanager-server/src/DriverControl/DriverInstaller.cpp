@@ -44,7 +44,7 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
     }
 
     if (nullptr == m_pTrans) {
-        emit this->errorOccurred(EC_5);
+        emit errorOccurred(EC_NULL);
         return ;
     }
 
@@ -75,7 +75,6 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
     connect(m_pTrans, &QApt::Transaction::errorOccurred, this, [ = ](QApt::ErrorCode error) {
         m_pTrans->disconnect(this);
         m_pTrans->deleteLater();
-        qInfo() << error;
         if(5 == error)
             emit this->errorOccurred(EC_NETWORK);
         else if(6 == error)
@@ -178,7 +177,7 @@ void DriverInstaller::installPackage(const QString &filename, const QString &ver
             });
             return;
         } else {
-            emit errorOccurred(EC_5);
+            emit errorOccurred(EC_NULL);
             emit installProgressFinished(false);
         }
     }

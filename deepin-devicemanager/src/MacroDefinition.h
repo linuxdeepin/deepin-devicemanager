@@ -358,8 +358,8 @@ struct DriverInfo {
 #define EC_NETWORK 1
 #define EC_CANCEL 2
 #define EC_NOTFOUND 3
-#define EC_4 4
-#define EC_5 5
+#define EC_NOTIFY_NETWORK 4  // 仅仅做通知处理，通知前台异常
+#define EC_REINSTALL 5 // 通知前台重新安装
 #define EC_6 6
 
 const int DRIVER_TABLE_HEADER_HEIGHT = 40; // 驱动表头宽度

@@ -45,6 +45,7 @@
 #include <QJsonArray>
 #include <QThread>
 #include <QDBusInterface>
+#include <QNetworkConfigurationManager>
 
 
 #define SD_KEY_excat    "excat"
@@ -137,10 +138,38 @@ void DriverManager::initConnections()
         }
     });
 
-    connect(mp_driverInstaller, &DriverInstaller::errorOccurred, [&](int err) {
-        qInfo() << "Driver installation failed , reason : " << err;
-        sigInstallProgressFinished(false, err);
-//        this->errmsg = errmsg;
+    connect(mp_driverInstaller, &DriverInstaller::errorOccurred, [this](int err) {
+        if (EC_NETWORK != err){
+            qInfo() << "Driver installation failed , reason : " << err;
+            sigInstallProgressFinished(false, err);
+            return;
+        }
+
+        // 如果错误是网络异常，则需要尝试60s
+        // 先通知前台网络异常
+        sigInstallProgressFinished(false, EC_NOTIFY_NETWORK);
+        qInfo() << "Network error : We are listening to the network";
+
+        // 60s等待操作
+        m_IsNetworkOnline = false;
+        qint64 seconds = QDateTime::currentSecsSinceEpoch();
+        while (QDateTime::currentSecsSinceEpoch() - seconds < 30){
+
+            if(m_StopQueryNetwork){
+                sigInstallProgressFinished(false, EC_CANCEL);
+                m_StopQueryNetwork = false;
+                return ;
+            }
+
+            if(isNetworkOnline()){
+                sigInstallProgressFinished(false, EC_REINSTALL);
+                return ;
+            }else{
+                sleep(1);
+            }
+        }
+        m_IsNetworkOnline = true;
+        sigInstallProgressFinished(false, EC_NETWORK);
     });
 
     connect(mp_driverInstaller, &DriverInstaller::downloadProgressChanged, [&](QStringList msg) {
@@ -305,7 +334,11 @@ void DriverManager::installDriver(const QString &pkgName, const QString &version
 
 void DriverManager::undoInstallDriver()
 {
-    mp_driverInstaller->undoInstallDriver();
+    if(m_IsNetworkOnline){
+        mp_driverInstaller->undoInstallDriver();
+    }else{
+        m_StopQueryNetwork = true;
+    }
 }
 
 /**
@@ -317,7 +350,6 @@ QStringList DriverManager::checkModuleInUsed(const QString &modName)
 {
     if (nullptr == mp_modcore)
         return QStringList();
-
     return  mp_modcore->checkModuleInUsed(modName);
 }
 
@@ -520,6 +552,13 @@ void DriverManager::getMapInfoFromHwinfo(const QString &info, QMap<QString, QStr
         mapInfo["Module Alias"].replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
     }
 }
+
+bool DriverManager::isNetworkOnline()
+{
+    QNetworkConfigurationManager mgr;
+    return mgr.isOnline();
+}
+
 bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QString> &mapInfo)
 {
     QString strVendor, strDevice;

@@ -75,7 +75,7 @@ private:
     void getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src);
     void getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch = QString(": "));
 
-
+    bool isNetworkOnline();
 signals:
     void sigProgressDetail(int progress, const QString &strDeatils);
     void sigFinished(bool bsuccess, QString msg);
@@ -98,6 +98,8 @@ private:
 
     int m_installprocess = 0;
     QString errmsg;
+    bool m_IsNetworkOnline = true;
+    bool m_StopQueryNetwork = false;
 
     //打印机相关===begin
 public:

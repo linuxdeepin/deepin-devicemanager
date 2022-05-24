@@ -289,7 +289,7 @@ void DetectedStatusWidget::setNetworkErrorUI(const QString &speed, int progressV
     QString speedStr = QObject::tr("Download speed: %1")
                        .arg(speed);
     mp_ModelLabel->setText(speedStr);
-    mp_Progress->setValue(progressValue);
+//    mp_Progress->setValue(progressValue);
 
     mp_HLayoutTotal->addWidget(mp_PicLabel);
     mp_HLayoutTotal->addSpacing(SPACE_15);

@@ -188,6 +188,11 @@ private:
      */
     void removeFromDriverIndex(int index);
 
+    /**
+     * @brief failAllIndex
+     */
+    void failAllIndex();
+
 private:
     DStackedWidget       *mp_StackWidget;
     PageDriverTableView  *mp_ViewNotInstall; //没有安装驱动的列表

@@ -177,14 +177,34 @@ void PageDriverManager::slotInstallProgressChanged(int progress)
 
 void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
 {
+    static int successNum = 0;
+    static int failedNum = 0;
     if(! mp_CurDriverInfo)
         return;
 
-    static int successNum = 0;
-    static int failedNum = 0;
+    // 成功
     if (bsuccess) {
         successNum += 1;
-    } else {
+    } else { // 失败
+        // 通知网络错误
+        if(err == EC_NOTIFY_NETWORK){
+            mp_HeadWidget->setNetworkErrorUI("0.00MB/s",0);
+            return;
+        }
+
+        // 通知重新安装
+        if(err == EC_REINSTALL){
+            DBusDriverInterface::getInstance()->installDriver(mp_CurDriverInfo->packages(), mp_CurDriverInfo->debVersion());
+            return;
+        }
+
+        // 网络错误
+        if (err == EC_NETWORK){
+            failAllIndex();
+            failedNum += m_ListDriverIndex.size();
+            m_ListDriverIndex.clear();
+        }
+
         failedNum += 1;
     }
 
@@ -726,5 +746,17 @@ void PageDriverManager::removeFromDriverIndex(int index)
     // 移除时 如果一个都没有 则一键安装按钮置灰
     if (m_ListDriverIndex.size() <= 0) {
         mp_HeadWidget->setInstallBtnEnable(false);
+    }
+}
+
+void PageDriverManager::failAllIndex()
+{
+    foreach(int index, m_ListDriverIndex){
+        mp_ViewCanUpdate->setItemStatus(index, ST_FAILED);
+        mp_ViewNotInstall->setItemStatus(index, ST_FAILED);
+
+        QString errS = DApplication::translate("QObject", CommonTools::getErrorString(EC_NETWORK).toStdString().data());
+        mp_ViewCanUpdate->setErrorMsg(index, errS);
+        mp_ViewNotInstall->setErrorMsg(index, errS);
     }
 }
