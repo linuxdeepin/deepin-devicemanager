@@ -176,7 +176,7 @@ TEST_F(UT_DeviceOther, UT_DeviceOther_getOverviewInfo)
 TEST_F(UT_DeviceOther, UT_DeviceOther_initFilterKey)
 {
     m_deviceOthers->initFilterKey();
-    EXPECT_EQ(0, m_deviceOthers->m_FilterKey.size());
+    EXPECT_EQ(2, m_deviceOthers->m_FilterKey.size());
 }
 
 TEST_F(UT_DeviceOther, UT_DeviceOther_loadBaseDeviceInfo)

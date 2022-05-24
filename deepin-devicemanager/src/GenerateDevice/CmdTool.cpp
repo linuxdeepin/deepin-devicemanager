@@ -59,7 +59,9 @@ void CmdTool::addUsbMapInfo(const QString &key, const QMap<QString, QString> &ma
     }
 
     // 这个是用来过滤，没有接入任何设备的usb接口
-    if (mapInfo["Model"].contains("Linux Foundation") || mapInfo["Model"].contains("Wireless Network Adapter"))
+    if (mapInfo["Model"].contains("Linux Foundation")
+            || mapInfo["Model"].contains("Wireless Network Adapter")
+            || mapInfo["Model"].contains("Hub Controller"))
         return;
 
     if (mapInfo["Hardware Class"].contains("hub", Qt::CaseInsensitive))
