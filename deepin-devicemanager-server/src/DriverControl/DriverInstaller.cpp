@@ -59,7 +59,8 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
             if (file_size == fetched_size && 0 != fetched_size) {
                 emit this->installProgressFinished(QApt::Success == m_pTrans->error());
             } else {
-                emit this->errorOccurred(EC_CANCEL);
+                bool canceled = m_pTrans->property("isCancelled").toBool();
+                emit this->errorOccurred(canceled ? EC_CANCEL : EC_NOTFOUND);
             }
             m_pTrans->disconnect(this);
             m_pTrans->deleteLater();
