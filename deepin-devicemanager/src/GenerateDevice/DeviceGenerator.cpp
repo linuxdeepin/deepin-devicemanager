@@ -982,6 +982,13 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
         if ((*it).size() < 3)
             continue;
 
+        if ((*it).find("Device") != (*it).end() && (*it)["Device"].contains("fingerprint", Qt::CaseInsensitive)) {
+            DeviceOthers *device = new DeviceOthers();
+            device->setInfoFromHwinfo(*it);
+            DeviceManager::instance()->addOthersDevice(device);
+            continue;
+        }
+
         bool isOtherDevice = true;
         QString curBus = (*it)["SysFS BusID"];
         curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");

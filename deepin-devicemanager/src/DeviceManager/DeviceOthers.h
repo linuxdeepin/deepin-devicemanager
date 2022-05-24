@@ -85,6 +85,12 @@ public:
      * @return 概况信息
      */
     const QString getOverviewInfo() override;
+
+    /**
+     * @brief availble 获取是否可用
+     * @return 返回是否可用
+     */
+    virtual bool available() override;
 protected:
 
     /**

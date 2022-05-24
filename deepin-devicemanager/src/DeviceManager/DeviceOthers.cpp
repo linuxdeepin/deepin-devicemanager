@@ -16,6 +16,7 @@ DeviceOthers::DeviceOthers()
     , m_LogicalName("")
     , m_SerialID("")
 {
+    initFilterKey();
     m_CanEnable = true;
     m_CanUninstall = true;
 }
@@ -54,8 +55,17 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_SerialID);
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
-    m_HardwareClass = "others";
 
+    if (mapInfo["Hardware Class"] != "fingerprint") {
+        m_HardwareClass = "others";
+    } else {
+        // 机器自带指纹模块不支持禁用,和卸载驱动
+        setAttribute(mapInfo, "Hardware Class", m_HardwareClass);
+        m_CanEnable = false;
+        m_CanUninstall = false;
+    }
+
+    getOtherMapInfo(mapInfo);
     // 核内驱动不显示卸载菜单
     if(driverIsKernelIn(m_Driver)){
         m_CanUninstall = false;
@@ -115,9 +125,18 @@ const QString DeviceOthers::getOverviewInfo()
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
+bool DeviceOthers::available()
+{
+    if (driver().isEmpty() && m_HardwareClass == "others") {
+        m_Available = false;
+    }
+    return m_Available;
+}
+
 void DeviceOthers::initFilterKey()
 {
-
+    addFilterKey(QObject::tr("Device File"));
+    addFilterKey(QObject::tr("Hardware Class"));
 }
 
 void DeviceOthers::loadBaseDeviceInfo()
