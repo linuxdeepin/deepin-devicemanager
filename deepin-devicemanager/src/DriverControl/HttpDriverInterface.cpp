@@ -183,12 +183,19 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
     driverInfo->m_DebVersion  = lstDriverInfo[index].strDebVersion;
     driverInfo->m_Packages = lstDriverInfo[index].strPackages;
     driverInfo->m_Size = lstDriverInfo[index].strSize;
-    if(driverInfo->driverName().isEmpty() && driverInfo->type() != DR_Printer){
-        driverInfo->m_Status = ST_NOT_INSTALL;
-    }else{
-        if(2 == res_out){
-            driverInfo->m_Status = ST_DRIVER_IS_NEW;
-        }else { // 此时不管是0(此时本地安装的是系统驱动)，还是1(此时装的是仓库驱动) 都是可更新
+
+    if (2 == res_out){
+        // 此时说明最优版本已经安装
+        driverInfo->m_Status = ST_DRIVER_IS_NEW;
+    } else if(1 == res_out){
+        // 此时安装了最优包的不同版本
+        driverInfo->m_Status = ST_CAN_UPDATE;
+    } else {
+        // 此时没有安装最优推荐包(包括其他版本)
+        if (driverInfo->driverName().isEmpty() && driverInfo->type() != DR_Printer){
+            driverInfo->m_Status = ST_NOT_INSTALL;
+        }else{
+            // 此时安装了其他驱动
             driverInfo->m_Status = ST_CAN_UPDATE;
         }
     }
