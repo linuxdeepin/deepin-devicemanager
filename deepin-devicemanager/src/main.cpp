@@ -137,8 +137,13 @@ void notify(int argc, char *argv[])
     hints.insert(QString("x-deepin-action-view"),
                  QVariant(QString("/usr/bin/deepin-devicemanager,driver")));  //实现查看2按钮点击打开控制中心账户界面)
     int timeout = 3000;
-    QDBusReply<uint32_t> reply  = mp_Iface->call("Notify", appname, replaces_id, appicon, title, body, actionlist, hints, timeout);
-    if (!reply.isValid()) {
-        notify(argc, argv);
+
+    int count = 0;
+    while (count < 10){
+        QDBusReply<uint32_t> reply  = mp_Iface->call("Notify", appname, replaces_id, appicon, title, body, actionlist, hints, timeout);
+        if (reply.isValid()) {
+            return;
+        }
+        count++;
     }
 }
