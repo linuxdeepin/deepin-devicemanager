@@ -92,6 +92,7 @@ void PageMultiInfo::setLabel(const QString &itemstr)
 
 void PageMultiInfo::clearWidgets()
 {
+    m_lstDevice.clear();
     mp_Detail->clearWidget();
 }
 
