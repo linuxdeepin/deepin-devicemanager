@@ -30,6 +30,7 @@
 #include <DLabel>
 #include <DSpinner>
 #include <DIconButton>
+#include <DToolButton>
 
 class BtnLabel;
 
@@ -183,7 +184,7 @@ protected:
 signals:
     void clicked(bool checked = false);
 private:
-    DIconButton  *mp_Btn;
+    DToolButton  *mp_Btn;
 };
 
 #endif // DRIVERITEM_H

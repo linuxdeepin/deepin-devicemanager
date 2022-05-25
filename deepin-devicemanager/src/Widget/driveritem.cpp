@@ -8,8 +8,8 @@
 
 #include <QHBoxLayout>
 
-#define STATUS_ICON_SIZE 16
-#define DEVICE_ICON_SIZE 16
+#define STATUS_ICON_SIZE 32
+#define DEVICE_ICON_SIZE 32
 
 DriverCheckItem::DriverCheckItem(DWidget *parent, bool header)
     : DWidget(parent)
@@ -212,7 +212,7 @@ void DriverStatusItem::showSpinner(bool spin)
 
 DriverOperationItem::DriverOperationItem(DWidget *parent, bool install)
     : DWidget(parent)
-    , mp_Btn(new DIconButton(this))
+    , mp_Btn(new DToolButton(this))
 {
     QHBoxLayout *hLayout = new QHBoxLayout(this);
     hLayout->setContentsMargins(0, 0, 0, 0);
@@ -235,6 +235,7 @@ void DriverOperationItem::enterEvent(QEvent *event)
 {
     return DWidget::enterEvent(event);
 }
+
 void DriverOperationItem::leaveEvent(QEvent *event)
 {
     return DWidget::leaveEvent(event);
