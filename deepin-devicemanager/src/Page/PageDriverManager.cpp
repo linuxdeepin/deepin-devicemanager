@@ -518,7 +518,7 @@ void PageDriverManager::scanDevices()
     scanDevicesInfo(QObject::tr("Network Adapter"), DR_Network);
 
     // 图像设备
-    scanDevicesInfo(QObject::tr("Camera"), DR_Camera);
+//    scanDevicesInfo(QObject::tr("Camera"), DR_Camera);
 
     // 打印机
     scanDevicesInfo(QObject::tr("Printer"), DR_Printer);

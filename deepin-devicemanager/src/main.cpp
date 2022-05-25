@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
         uint replaces_id = 0;
         QString appicon("deepin-devicemanager");
         QString title = "";
-        QString body = "New drivers available! Install or update them now.";
+        QString body = QObject::tr("New drivers available! Install or update them now.");
         QStringList actionlist;
         actionlist << "view" << "查看";
         QVariantMap hints;

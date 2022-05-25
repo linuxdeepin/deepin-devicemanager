@@ -476,7 +476,7 @@ void DriverTableView::setCheckedCBDisable()
 
             // 设置状态为等待
             DriverStatusItem *status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
-            if (status) {
+            if (status && status->getStatus() != ST_DOWNLOADING && status->getStatus() != ST_INSTALL) {
                 status->setStatus(ST_WAITING);
             }
         }
