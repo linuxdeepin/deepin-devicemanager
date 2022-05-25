@@ -73,6 +73,8 @@ public:
 
     static QString getErrorString(int err);
 
+    static void feedback();
+
 signals:
 
 public slots:

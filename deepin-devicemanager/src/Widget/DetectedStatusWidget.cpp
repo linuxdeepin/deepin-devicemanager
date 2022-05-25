@@ -415,9 +415,7 @@ void DetectedStatusWidget::slotReboot()
 
 void DetectedStatusWidget::slotFeedBack()
 {
-    QProcess process;
-    process.startDetached("uos-service-support");   // 启动服务与支持，不阻塞当前进程
-    process.waitForFinished(-1);
+     CommonTools::feedback();
 }
 
 void DetectedStatusWidget::slotInstall()

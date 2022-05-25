@@ -1,5 +1,6 @@
 #include "DriverScanWidget.h"
 #include "AnimationLabel.h"
+#include "commontools.h"
 
 #include <DFontSizeManager>
 #include <DApplication>
@@ -218,11 +219,7 @@ void DriverScanWidget::setNetworkErr()
 
 void DriverScanWidget::slotFeedBack()
 {
-    qInfo() << "feedBack";
-
-    QProcess process;
-    process.startDetached("uos-service-support");    // 调用服务与支持，不阻塞当前进程
-    process.waitForFinished(-1);
+     CommonTools::feedback();
 }
 
 void DriverScanWidget::slotReDetected()

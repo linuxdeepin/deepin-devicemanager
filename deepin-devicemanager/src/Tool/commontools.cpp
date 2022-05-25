@@ -2,6 +2,8 @@
 
 #include <QDebug>
 #include <QDateTime>
+#include <QDBusInterface>
+#include <QDBusReply>
 
 DWIDGET_USE_NAMESPACE
 
@@ -102,4 +104,23 @@ QString CommonTools::getSystemTime()
 QString CommonTools::getErrorString(int err)
 {
     return m_MapErrorString[err];
+}
+
+void CommonTools::feedback()
+{
+    QDBusInterface interface("com.deepin.dde.ServiceAndSupport",
+                              "/com/deepin/dde/ServiceAndSupport",
+                              "com.deepin.dde.ServiceAndSupport");
+
+     //    selfSupport         = 0, //自助支持
+     //    messageConsultation = 1, //留言咨询
+     //    customerChat        = 2, //在线客服
+     //    contentUs           = 3  //联系我们
+     uint8_t supporttype = 1;
+     QDBusReply<void> reply = interface.call("ServiceSession", supporttype);
+     if (reply.isValid()) {
+         qDebug() << "call com.deepin.dde.ServiceAndSupport success";
+     } else {
+         qDebug() << "call com.deepin.dde.ServiceAndSupport failed";
+     }
 }
