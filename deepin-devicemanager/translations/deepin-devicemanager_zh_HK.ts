@@ -2,7 +2,7 @@
 <context>
     <name>BtnLabel</name>
     <message>
-        <location filename="../src/Widget/BtnLabel.cpp" line="15"/>
+        <location filename="../src/Widget/BtnLabel.cpp" line="17"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>確 定</translation>
@@ -19,14 +19,22 @@
 <context>
     <name>CommonTools</name>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>EC_4</source>
-        <translation>EC_4</translation>
+        <translation type="vanished">EC_4</translation>
+    </message>
+    <message>
+        <source>EC_5</source>
+        <translation type="vanished">EC_5</translation>
+    </message>
+    <message>
+        <location filename="../src/Tool/commontools.cpp" line="64"/>
+        <source>EC_NOTIFY_NETWORK</source>
+        <translation>EC_NOTIFY_NETWORK</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="65"/>
-        <source>EC_5</source>
-        <translation>EC_5</translation>
+        <source>EC_REINSTALL</source>
+        <translation>EC_REINSTALL</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
@@ -155,17 +163,17 @@
 <context>
     <name>DeviceBaseInfo</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="528"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="540"/>
         <source>Name</source>
         <translation>名稱</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="529"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="541"/>
         <source>Vendor</source>
         <translation>製造商</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="530"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="542"/>
         <source>Model</source>
         <translation>型號</translation>
     </message>
@@ -1550,88 +1558,88 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="110"/>
+        <location filename="../src/Page/MainWindow.cpp" line="111"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
         <translation>設備訊息</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="181"/>
+        <location filename="../src/Page/MainWindow.cpp" line="182"/>
         <source>Display shortcuts</source>
         <translation>顯示快捷鍵</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="182"/>
+        <location filename="../src/Page/MainWindow.cpp" line="183"/>
         <source>Close</source>
         <translation>關閉</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="183"/>
+        <location filename="../src/Page/MainWindow.cpp" line="184"/>
         <source>Help</source>
         <translation>幫助</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="184"/>
+        <location filename="../src/Page/MainWindow.cpp" line="185"/>
         <source>Copy</source>
         <translation>複製</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="188"/>
+        <location filename="../src/Page/MainWindow.cpp" line="189"/>
         <source>System</source>
         <translation>系統</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="195"/>
+        <location filename="../src/Page/MainWindow.cpp" line="196"/>
         <source>Export</source>
         <translation>導出</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="196"/>
+        <location filename="../src/Page/MainWindow.cpp" line="197"/>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="200"/>
+        <location filename="../src/Page/MainWindow.cpp" line="201"/>
         <source>Device Manager</source>
         <translation>設備管理器</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="260"/>
+        <location filename="../src/Page/MainWindow.cpp" line="261"/>
         <source>Hardware</source>
         <translation>硬件訊息</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="260"/>
+        <location filename="../src/Page/MainWindow.cpp" line="261"/>
         <source>Drivers</source>
         <translation>驅動管理</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="362"/>
+        <location filename="../src/Page/MainWindow.cpp" line="363"/>
         <source>Monitor</source>
         <translation>顯示設備</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="362"/>
+        <location filename="../src/Page/MainWindow.cpp" line="363"/>
         <source>Overview</source>
         <translation>概況</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="366"/>
+        <location filename="../src/Page/MainWindow.cpp" line="367"/>
         <source>Display Adapter</source>
         <translation>顯示適配器</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="370"/>
+        <location filename="../src/Page/MainWindow.cpp" line="371"/>
         <source>CPU</source>
         <translation>處理器</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="374"/>
+        <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Network Adapter</source>
         <translation>網絡適配器</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="380"/>
+        <location filename="../src/Page/MainWindow.cpp" line="381"/>
         <source>Battery</source>
         <translation>電池</translation>
     </message>
@@ -2915,7 +2923,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="464"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="509"/>
         <source>Display Adapter</source>
         <translation>顯示適配器</translation>
     </message>
@@ -2948,7 +2956,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="473"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="518"/>
         <source>Network Adapter</source>
         <translation>網絡適配器</translation>
     </message>
@@ -2965,7 +2973,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="467"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="512"/>
         <source>Sound Adapter</source>
         <translation>音頻適配器</translation>
     </message>
@@ -2982,7 +2990,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="470"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="515"/>
         <source>Bluetooth</source>
         <translation>藍牙</translation>
     </message>
@@ -3065,7 +3073,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="479"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="524"/>
         <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Printer</source>
         <translation>打印機</translation>
@@ -3083,7 +3091,6 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="918"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="946"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="982"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="476"/>
         <source>Camera</source>
         <translation>圖像設備</translation>
     </message>
@@ -3488,15 +3495,20 @@
         <translation>幾何數據（邏輯）</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="94"/>
-        <location filename="../src/main.cpp" line="96"/>
+        <location filename="../src/main.cpp" line="74"/>
+        <location filename="../src/main.cpp" line="76"/>
         <source>Device Manager</source>
         <translation>設備管理器</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="97"/>
+        <location filename="../src/main.cpp" line="77"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>設備管理器是查看、管理硬件設備的工具軟件。</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="133"/>
+        <source>New drivers available! Install or update them now.</source>
+        <translation>您有驅動可進行安裝/更新</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="10"/>
@@ -3509,57 +3521,57 @@
         <translation>選擇驅動所在位置</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="283"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="296"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="309"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="326"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="339"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="352"/>
         <source>Device Name</source>
         <translation>設備名稱</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="284"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="327"/>
         <source>Version Available</source>
         <translation>可安裝版本</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="285"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="298"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="328"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="341"/>
         <source>Size</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="286"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="299"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="329"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="342"/>
         <source>Status</source>
         <translation>狀態</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="287"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="300"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="330"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="343"/>
         <source>Action</source>
         <translation>操作</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="297"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="340"/>
         <source>New Version</source>
         <translation>可更新版本</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="309"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="352"/>
         <source>Current Version</source>
         <translation>當前版本</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="627"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="678"/>
         <source>Missing drivers (%1)</source>
         <translation>可安裝驅動 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="679"/>
         <source>Outdated drivers (%1)</source>
         <translation>可更新驅動 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="629"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="680"/>
         <source>Up-to-date drivers (%1)</source>
         <translation>無需更新驅動 (%1)</translation>
     </message>
@@ -3570,7 +3582,7 @@
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="67"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="329"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="332"/>
         <source>Time checked: %1</source>
         <translation>檢測時間: %1</translation>
     </message>
@@ -3585,74 +3597,74 @@
         <translation>下載速度：%1 已完成 %2/%3</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="160"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="163"/>
         <source>Installing drivers for %1...</source>
         <translation>正在安裝%1驅動…</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="202"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="205"/>
         <source>%1 drivers installed, %2 drivers failed</source>
         <translation>驅動安裝成功%1個，失敗%2個</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="204"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="207"/>
         <source>%1 drivers installed</source>
         <translation>共成功安裝%1個驅動</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="244"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="247"/>
         <source>Failed to install drivers</source>
         <translation>驅動安裝失敗</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="284"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="287"/>
         <source>Network error. Reconnecting...</source>
         <translation>網絡異常，重試中</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="286"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="289"/>
         <source>Download speed: %1</source>
         <translation>下載速度：%1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="326"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="329"/>
         <source>Your drivers are up to date</source>
         <translation>驅動已是最新</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
         <source>reboot</source>
         <translation>重啟電腦</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="493"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <source>Please %1 for the installed drivers to take effect</source>
         <translation>驅動已安裝完成，請稍後%1生效</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="499"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="253"/>
         <source>submit feedback</source>
         <translation>反饋</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="497"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="500"/>
         <source>Please try again or %1 to us</source>
         <translation>驅動未安裝成功，請重試或%1給我們</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="500"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="503"/>
         <source>Install All</source>
         <translation>一鍵安裝</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="503"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="508"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="257"/>
         <source>Scan Again</source>
         <translation>重新檢測</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="513"/>
         <source>Cancel</source>
         <translation>取 消</translation>
     </message>
@@ -3688,23 +3700,23 @@
         <translation>請重新檢測或%1給我們</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="478"/>
+        <location filename="../src/Page/MainWindow.cpp" line="479"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
         <translation>當前正在安裝驅動，退出應用後任務將會中斷</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="480"/>
+        <location filename="../src/Page/MainWindow.cpp" line="481"/>
         <source>Are you sure you want to exit?</source>
         <translation>確認是否退出應用？</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="483"/>
+        <location filename="../src/Page/MainWindow.cpp" line="484"/>
         <source>Exit</source>
         <comment>button</comment>
         <translation>退 出</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="484"/>
+        <location filename="../src/Page/MainWindow.cpp" line="485"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>取 消</translation>

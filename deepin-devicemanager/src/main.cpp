@@ -44,13 +44,13 @@ const QString SERVICE_NAME = "com.deepin.dde.Notification";
 const QString DEVICE_SERVICE_PATH = "/com/deepin/dde/Notification";
 const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.Notification";
 
-void notify();
+void notify(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
     // /usr/bin/devicemanager notify
     if (argc > 1 && QString(argv[1]).contains("notify")){
-        notify();
+        notify(argc, argv);
         return -1;
     }
 
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
     }
 }
 
-void notify()
+void notify(int argc, char *argv[])
 {
     // 1. 连接到dbus
     if (!QDBusConnection::sessionBus().isConnected()) {
@@ -118,7 +118,12 @@ void notify()
                 "To start it, run:/n"
                 "/teval `dbus-launch --auto-syntax`/n");
     }
-    // 2. create interface
+
+    // 2. 加载翻译文件
+    DApplication app(argc, argv);
+    app.loadTranslator();
+
+    // 3. create interface
     QDBusInterface *mp_Iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, DEVICE_SERVICE_INTERFACE, QDBusConnection::sessionBus());
 
     QString appname("deepin-devicemanager");
@@ -134,6 +139,6 @@ void notify()
     int timeout = 3000;
     QDBusReply<uint32_t> reply  = mp_Iface->call("Notify", appname, replaces_id, appicon, title, body, actionlist, hints, timeout);
     if (!reply.isValid()) {
-        notify();
+        notify(argc, argv);
     }
 }
