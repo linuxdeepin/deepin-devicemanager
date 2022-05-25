@@ -486,10 +486,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
         connect(dialog.getButton(0), &QAbstractButton::clicked, this, [ = ]() {
             return DMainWindow::closeEvent(event);
         });
-        connect(dialog.getButton(1), &QAbstractButton::clicked, this, [ = ]() {
-            event->ignore();
-        });
         dialog.exec();
+        event->ignore();
     } else {
         return DMainWindow::closeEvent(event);
     }
