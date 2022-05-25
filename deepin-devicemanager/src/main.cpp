@@ -44,32 +44,13 @@ const QString SERVICE_NAME = "com.deepin.dde.Notification";
 const QString DEVICE_SERVICE_PATH = "/com/deepin/dde/Notification";
 const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.Notification";
 
+void notify();
+
 int main(int argc, char *argv[])
 {
     // /usr/bin/devicemanager notify
     if (argc > 1 && QString(argv[1]).contains("notify")){
-        // 1. 连接到dbus
-        if (!QDBusConnection::sessionBus().isConnected()) {
-            fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
-                    "To start it, run:/n"
-                    "/teval `dbus-launch --auto-syntax`/n");
-        }
-
-        // 2. create interface
-        QDBusInterface *mp_Iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, DEVICE_SERVICE_INTERFACE, QDBusConnection::sessionBus());
-
-        QString appname("deepin-devicemanager");
-        uint replaces_id = 0;
-        QString appicon("deepin-devicemanager");
-        QString title = "";
-        QString body = QObject::tr("New drivers available! Install or update them now.");
-        QStringList actionlist;
-        actionlist << "view" << "查看";
-        QVariantMap hints;
-        hints.insert(QString("x-deepin-action-view"),
-                     QVariant(QString("/usr/bin/deepin-devicemanager,driver")));  //实现查看2按钮点击打开控制中心账户界面)
-        int timeout = 3000;
-        mp_Iface->call("Notify", appname, replaces_id, appicon, title, body, actionlist, hints, timeout);
+        notify();
         return -1;
     }
 
@@ -82,7 +63,6 @@ int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     SingleDeviceManager app(argc, argv);
     app.setAutoActivateWindows(true);
-
 
     // 保证进程唯一性
     qputenv("DTK_USE_SEMAPHORE_SINGLEINSTANCE", "1");
@@ -127,5 +107,33 @@ int main(int argc, char *argv[])
             QDBusMessage msg = notification.call(QDBus::AutoDetect, "startDeviceManager", var);
             return 0;
         }
+    }
+}
+
+void notify()
+{
+    // 1. 连接到dbus
+    if (!QDBusConnection::sessionBus().isConnected()) {
+        fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
+                "To start it, run:/n"
+                "/teval `dbus-launch --auto-syntax`/n");
+    }
+    // 2. create interface
+    QDBusInterface *mp_Iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, DEVICE_SERVICE_INTERFACE, QDBusConnection::sessionBus());
+
+    QString appname("deepin-devicemanager");
+    uint replaces_id = 0;
+    QString appicon("deepin-devicemanager");
+    QString title = "";
+    QString body = QObject::tr("New drivers available! Install or update them now.");
+    QStringList actionlist;
+    actionlist << "view" << "查看";
+    QVariantMap hints;
+    hints.insert(QString("x-deepin-action-view"),
+                 QVariant(QString("/usr/bin/deepin-devicemanager,driver")));  //实现查看2按钮点击打开控制中心账户界面)
+    int timeout = 3000;
+    QDBusReply<uint32_t> reply  = mp_Iface->call("Notify", appname, replaces_id, appicon, title, body, actionlist, hints, timeout);
+    if (!reply.isValid()) {
+        notify();
     }
 }
