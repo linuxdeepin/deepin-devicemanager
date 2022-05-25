@@ -673,7 +673,7 @@ void DriverTableView::slotAllItemChecked(bool checked)
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
         DriverCheckItem *item = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
-        if (item)
+        if (item && item->isEnabled())
             item->setChecked(checked);
     }
 }
