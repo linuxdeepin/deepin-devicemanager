@@ -483,11 +483,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
         dialog.addContent(label);
         dialog.addButton(QObject::tr("Exit", "button"), false, DDialog::ButtonWarning);
         dialog.addButton(QObject::tr("Cancel", "button"));
-        connect(dialog.getButton(0), &QAbstractButton::clicked, this, [ = ]() {
+        int ret = dialog.exec();
+        if (0 == ret) {
             return DMainWindow::closeEvent(event);
-        });
-        dialog.exec();
-        event->ignore();
+        } else {
+            event->ignore();
+        }
     } else {
         return DMainWindow::closeEvent(event);
     }
