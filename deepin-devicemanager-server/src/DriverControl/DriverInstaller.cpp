@@ -56,12 +56,12 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
             // 通过判断文件本身大小和已经下载的大小是否一直判断是否取消
             quint64 file_size = dp.fileSize();
             quint64 fetched_size = dp.fetchedSize();
-            if (file_size == fetched_size && 0 != fetched_size) {
-                emit this->installProgressFinished(QApt::Success == m_pTrans->error());
+            if (m_pTrans->property("isCancelled").toBool() && file_size > fetched_size) {
+                emit this->errorOccurred(EC_CANCEL);
             } else {
-                bool canceled = m_pTrans->property("isCancelled").toBool();
-                emit this->errorOccurred(canceled ? EC_CANCEL : EC_NOTFOUND);
+                emit this->installProgressFinished(QApt::Success == m_pTrans->error());
             }
+
             m_pTrans->disconnect(this);
             m_pTrans->deleteLater();
         }
