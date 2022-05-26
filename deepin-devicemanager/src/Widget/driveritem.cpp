@@ -5,11 +5,9 @@
 #include <DFontSizeManager>
 #include <DApplicationHelper>
 #include <DApplication>
+#include <DToolTip>
 
 #include <QHBoxLayout>
-
-#define STATUS_ICON_SIZE 32
-#define DEVICE_ICON_SIZE 32
 
 DriverCheckItem::DriverCheckItem(DWidget *parent, bool header)
     : DWidget(parent)
@@ -144,7 +142,7 @@ DriverLabelItem::DriverLabelItem(DWidget *parent,  const QString &txt)
     DFontSizeManager::instance()->bind(mp_Txt, DFontSizeManager::T8);
 
     DPalette pa = DApplicationHelper::instance()->palette(mp_Txt);
-    pa.setColor(DPalette::Text, pa.color(DPalette::TextTips));
+    pa.setColor(DPalette::Text, pa.color(DPalette::TextTitle));
     DApplicationHelper::instance()->setPalette(mp_Txt, pa);
 }
 
@@ -169,6 +167,9 @@ DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
     this->setLayout(hLayout);
 
     DFontSizeManager::instance()->bind(mp_Status, DFontSizeManager::T8);
+    DPalette pa = DApplicationHelper::instance()->palette(mp_Status);
+    pa.setColor(DPalette::Text, pa.color(DPalette::TextTitle));
+    DApplicationHelper::instance()->setPalette(mp_Status, pa);
 
     // 初始化图标状态和状态信息
     setStatus(s);
@@ -177,7 +178,7 @@ DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
 void DriverStatusItem::setStatus(Status st)
 {
     showSpinner(ST_DOWNLOADING == st || ST_INSTALL == st);
-    mp_Icon->setPixmap(QIcon(CommonTools::getStatusPixmap(st)).pixmap(STATUS_ICON_SIZE, STATUS_ICON_SIZE));
+    mp_Icon->setPixmap(QIcon(CommonTools::getStatusPixmap(st)).pixmap(16, 16));
 
     // bug132075 安装成功状态此button无法点击
     QString ts = DApplication::translate("QObject", CommonTools::getStausType(st).toStdString().data());
@@ -217,11 +218,12 @@ DriverOperationItem::DriverOperationItem(DWidget *parent, bool install)
     QHBoxLayout *hLayout = new QHBoxLayout(this);
     hLayout->setContentsMargins(0, 0, 0, 0);
     hLayout->addWidget(mp_Btn);
-    mp_Btn->setFixedSize(STATUS_ICON_SIZE, STATUS_ICON_SIZE);
+    mp_Btn->setFixedSize(36, 36);
     mp_Btn->setIconSize(QSize(36, 36));
     mp_Btn->setIcon(install ? QIcon(":/icons/deepin/builtin/icons/install.svg") : QIcon(":/icons/deepin/builtin/icons/update-btn.svg"));
     this->setLayout(hLayout);
-
+    // bug134379 驱动更新/安装按钮，悬浮框提示
+    mp_Btn->setToolTip(install ? QObject::tr("Intall") : QObject::tr("Update"));
     // 处理信号逻辑
     connect(mp_Btn, &DIconButton::clicked, this, &DriverOperationItem::clicked);
 }

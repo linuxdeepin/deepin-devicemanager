@@ -134,7 +134,7 @@ void DetectedStatusWidget::setDownloadUI(const DriverType &driverType, const QSt
 
     // 取消
     mp_HLayoutButton->addStretch();
-    if(progressValue > 90)
+    if (progressValue > 90)
         mp_CancelButton->setEnabled(false);
     else
         mp_CancelButton->setEnabled(true);
@@ -415,7 +415,7 @@ void DetectedStatusWidget::slotReboot()
 
 void DetectedStatusWidget::slotFeedBack()
 {
-     CommonTools::feedback();
+    CommonTools::feedback();
 }
 
 void DetectedStatusWidget::slotInstall()
@@ -479,13 +479,16 @@ void DetectedStatusWidget::initUI()
     font.setWeight(FONT_WEIGHT);
     mp_UpdateLabel->setFont(font);
     DFontSizeManager::instance()->bind(mp_UpdateLabel, DFontSizeManager::T5);
+    DPalette pa = DApplicationHelper::instance()->palette(mp_UpdateLabel);
+    pa.setColor(DPalette::Text, pa.color(DPalette::TextTitle));
+    DApplicationHelper::instance()->setPalette(mp_UpdateLabel, pa);
 
     // 检测时间
     DFontSizeManager::instance()->bind(mp_TimeLabel, DFontSizeManager::T8);
 
     // 机器型号
     DFontSizeManager::instance()->bind(mp_ModelLabel, DFontSizeManager::T9);
-    DPalette pa = DApplicationHelper::instance()->palette(mp_ModelLabel);
+    pa = DApplicationHelper::instance()->palette(mp_ModelLabel);
     pa.setColor(DPalette::Text, pa.color(DPalette::TextTips));
     DApplicationHelper::instance()->setPalette(mp_ModelLabel, pa);
 
