@@ -251,13 +251,13 @@ enum DriverType {
 /**
  * @brief STR_DRIVER_INFO 从仓库查询驱动信息
  */
-typedef struct STR_PPDS {
+struct strPpds {
     QString strSource;
     QString strDesc;
     QString strManufacturer;
-} strPpds;
+};
 
-typedef struct STR_DRIVER_INFO {
+struct RepoDriverInfo{
     QString strManufacturer;//厂商
     QString strDebManufacturer;//包厂商
     QString strArch;//架构
@@ -278,7 +278,7 @@ typedef struct STR_DRIVER_INFO {
     QString strSize;//包大小
 
     QList<strPpds> lstPpds;//Ppd文件
-} strDriverInfo;
+};
 /**
  * @brief The Status enum 驱动状态
  */

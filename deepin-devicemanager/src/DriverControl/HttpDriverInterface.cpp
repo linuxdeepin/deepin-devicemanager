@@ -147,7 +147,7 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
         return;
     }
 
-    QList<strDriverInfo> lstDriverInfo;
+    QList<RepoDriverInfo> lstDriverInfo;
     if (! convertJsonToDeviceList(strJson, lstDriverInfo))
         return ;
 
@@ -157,7 +157,7 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
 
     // 找到最优等级
     int max = 0;
-    foreach (const strDriverInfo& info , lstDriverInfo) {
+    foreach (const RepoDriverInfo& info , lstDriverInfo) {
         if (max < info.iLevel) {
             max = info.iLevel;
         }
@@ -218,7 +218,7 @@ int HttpDriverInterface::packageInstall(const QString& package_name, const QStri
     return 1;
 }
 
-bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<strDriverInfo> &lstDriverInfo)
+bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<RepoDriverInfo> &lstDriverInfo)
 {
     QJsonArray ja;
     QJsonArray jappds;
@@ -242,7 +242,7 @@ bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<strDriv
     QJsonObject _jsonObjppds;
     for (int i = 0; i < ja.size(); i++) {
         _jsonObj = ja.at(i).toObject();
-        strDriverInfo _driverinfo;
+        RepoDriverInfo _driverinfo;
         //因为是预先定义好的JSON数据格式，所以这里可以这样读取
         if (_jsonObj.contains("arch")) {
             _driverinfo.strArch = _jsonObj.value("arch").toString();

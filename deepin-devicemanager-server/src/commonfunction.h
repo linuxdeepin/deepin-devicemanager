@@ -55,7 +55,7 @@ enum DriverType {
     DR_WiFi = 11
 };
 
-typedef struct STR_DriverInfo {
+struct DriverInfo {
     DriverType type;
     QString    vendorId;
     QString    vendorName;
@@ -66,14 +66,14 @@ typedef struct STR_DriverInfo {
 
     QString    debVersion;//包版本
     QString    packages;//包名
-} strDriverInfo;
+};
 
-typedef struct STR_WAREHOUSE_DRIVER_INFO {
+struct RepoDriverInfo {
     QString strDebManufacturer;//包厂商
     QString strDebVersion;//包版本
     QString strPackages;//包名
     int iLevel;
-} strRepoDriverInfo;
+};
 
 
 class Common

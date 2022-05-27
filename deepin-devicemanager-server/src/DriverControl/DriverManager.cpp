@@ -476,7 +476,7 @@ bool DriverManager::checkPrinterInfo()
     if (lstInfo.size() > 1) {
         strVendor = lstInfo[0];
     }
-    strDriverInfo di;
+    DriverInfo di;
     di.type       = DR_Printer;
     di.modelName  = mapInfo["printer-make-and-model"];
     di.vendorName = strVendor;
@@ -636,7 +636,7 @@ bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QStr
     if(strVendor.isEmpty() && strDevice.isEmpty()){
         return false;
     }
-    strDriverInfo di;
+    DriverInfo di;
     di.type       = type;
     di.vendorId   = strVendor;
     di.modelId   = strDevice;
@@ -725,7 +725,7 @@ bool DriverManager::checkCameraInfo(QMap<QString, QString> &mapInfo)
     if(strVendor.isEmpty() && strDevice.isEmpty()){
         return false;
     }
-    strDriverInfo di;
+    DriverInfo di;
     di.type       = DR_Camera;
     di.vendorId   = strVendor;
     di.modelId   = strDevice;

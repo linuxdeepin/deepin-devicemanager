@@ -55,7 +55,7 @@ public:
     }
     void getRequest(DriverInfo *driverInfo);
 
-    bool convertJsonToDeviceList(QString strJson, QList<strDriverInfo> &lstDriverInfo);
+    bool convertJsonToDeviceList(QString strJson, QList<RepoDriverInfo> &lstDriverInfo);
 protected:
     explicit HttpDriverInterface(QObject* parent = nullptr);
     virtual ~HttpDriverInterface();

@@ -49,7 +49,7 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
     return strJsonDriverInfo;
 }
 
-bool HttpDriverInterface::checkDriverInfo(strDriverInfo &driverInfo)
+bool HttpDriverInterface::checkDriverInfo(DriverInfo &driverInfo)
 {
     QString strJson;
     switch (driverInfo.type) {
@@ -82,7 +82,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
         strUrl += "&deb_manufacturer=" + strManufacturer;
     }
     if(!strProducts.isEmpty()){
-        strUrl += "&products=" + strProducts;
+        strUrl += "&product=" + strProducts;
     }
     if(0 < iClassP){
         strUrl += "&class_p=" + QString(iClassP);
@@ -128,12 +128,12 @@ QString HttpDriverInterface::getRequestCamera(QString strDesc)
     return getRequestJson(strUrl);
 }
 
-bool HttpDriverInterface::checkDriverInfo(QString strJson, strDriverInfo &driverInfo)
+bool HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo &driverInfo)
 {
     if(strJson.isEmpty()){
         return false;
     }
-    QList<strRepoDriverInfo> lstDriverInfo;
+    QList<RepoDriverInfo> lstDriverInfo;
 
     if(getDriverInfoFromJson(strJson, lstDriverInfo)){
         if(lstDriverInfo.size() == 0){
@@ -141,24 +141,17 @@ bool HttpDriverInterface::checkDriverInfo(QString strJson, strDriverInfo &driver
         }
 
         int max = 0;
-        foreach (const strRepoDriverInfo& strDriverInfo , lstDriverInfo){
+        foreach (const RepoDriverInfo& strDriverInfo , lstDriverInfo){
             if(max < strDriverInfo.iLevel){
                 max = strDriverInfo.iLevel;
             }
         }
         //因为无法从设备型号查询到驱动包的名称（可能有多种同样推荐等级的驱动），所以就查询到这些推荐驱动并遍历，查询本地是否安装。
-        foreach (const strRepoDriverInfo& strDriverInfo , lstDriverInfo){
+        foreach (const RepoDriverInfo& strDriverInfo , lstDriverInfo){
             if(max == strDriverInfo.iLevel){
                 if(driverInfo.driverName.isEmpty() || strDriverInfo.strPackages != driverInfo.driverName || driverInfo.version.isEmpty()){//
                     //如果有一个，且版本也对，则返回false，否则返回true
-                    QProcess process;
-                    QStringList options;
-                    options << "-c" << "apt policy " + strDriverInfo.strPackages;
-                    process.start("/bin/bash", options);
-                    process.waitForFinished(-1);
-                    QStringList infoList = QString(process.readAllStandardOutput()).split("\n");
-
-                    if(infoList.size() > 2 && infoList[1].contains(strDriverInfo.strDebVersion)){
+                    if(isPkgInstalled(strDriverInfo.strPackages, strDriverInfo.strDebVersion)){
                         return false;
                     }
                 }
@@ -176,7 +169,7 @@ bool HttpDriverInterface::checkDriverInfo(QString strJson, strDriverInfo &driver
         qInfo() << "version: "    << driverInfo.version;
 
         qInfo() << lstDriverInfo.size();
-        foreach(const strRepoDriverInfo &di, lstDriverInfo){
+        foreach(const RepoDriverInfo &di, lstDriverInfo){
             qInfo() << "strPackages: " << di.strPackages;
             qInfo() << "strDebVersion: " << di.strDebVersion;
         }
@@ -185,7 +178,23 @@ bool HttpDriverInterface::checkDriverInfo(QString strJson, strDriverInfo &driver
     return false;
 }
 
-bool HttpDriverInterface::getDriverInfoFromJson(QString strJson, QList<strRepoDriverInfo> &lstDriverInfo)
+bool HttpDriverInterface::isPkgInstalled(QString strPkgName, QString strVersion)
+{
+    //调用apt命令查看包是否安装。
+    QProcess process;
+    QStringList options;
+    options << "-c" << "apt policy " + strPkgName;
+    process.start("/bin/bash", options);
+    process.waitForFinished(-1);
+    QStringList infoList = QString(process.readAllStandardOutput()).split("\n");
+
+    if(infoList.size() > 2 && infoList[1].contains(strVersion)){
+        return true;
+    }
+    return false;
+}
+
+bool HttpDriverInterface::getDriverInfoFromJson(QString strJson, QList<RepoDriverInfo> &lstDriverInfo)
 {
     QJsonArray ja;
     QJsonArray jappds;
@@ -205,7 +214,7 @@ bool HttpDriverInterface::getDriverInfoFromJson(QString strJson, QList<strRepoDr
     QJsonObject _jsonObjppds;
     for (int i = 0; i < ja.size(); i++) {
         _jsonObj = ja.at(i).toObject();
-        strRepoDriverInfo _driverinfo;
+        RepoDriverInfo _driverinfo;
         //因为是预先定义好的JSON数据格式，所以这里可以这样读取
         if (_jsonObj.contains("deb_manufacturer")) {
             _driverinfo.strDebManufacturer = _jsonObj.value("deb_manufacturer").toString();

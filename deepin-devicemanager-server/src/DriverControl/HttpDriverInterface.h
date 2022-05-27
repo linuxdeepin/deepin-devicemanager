@@ -57,19 +57,20 @@ public:
      * @param driverInfo:解析得到的map信息
      * @return 返回值，true：需要更新 false：不需要更新
      */
-    bool checkDriverInfo(strDriverInfo &driverInfo);
+    bool checkDriverInfo(DriverInfo &driverInfo);
 
 protected:
     explicit HttpDriverInterface(QObject* parent = nullptr);
     virtual ~HttpDriverInterface();
 
-    bool getDriverInfoFromJson(QString strJson, QList<strRepoDriverInfo> &lstDriverInfo);//返回值true：转换成功 false：失败
+    bool getDriverInfoFromJson(QString strJson, QList<RepoDriverInfo> &lstDriverInfo);//返回值true：转换成功 false：失败
     QString getRequestJson(QString strUrl);//从仓库接口查询获取json字符串
     QString getRequestBoard(QString strManufacturer = "", QString strProducts = "", int iClassP = 0, int iClass = 0);//板卡设备用
     QString getRequestPrinter(QString strDebManufacturer = "", QString strDesc = "");//打印机用
     QString getRequestCamera(QString strDesc = "");//图像设备
 
-    bool checkDriverInfo(QString strJson, strDriverInfo &driverInfo);
+    bool checkDriverInfo(QString strJson, DriverInfo &driverInfo);
+    bool isPkgInstalled(QString strPkgName, QString strVersion);
 public:
     signals:
     void sigRequestFinished(bool sucess, QString msg);
