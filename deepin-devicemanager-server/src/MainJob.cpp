@@ -47,6 +47,8 @@ MainJob::MainJob(QObject *parent)
     , mp_Wakeup(new DBusWakeupInterface(this))
     , m_FirstUpdate(true)
 {
+    //初始化源
+    initDriverRepoSource();
     // 守护进程启动的时候加载所有信息
     updateAllDevice();
     //启动时，检测驱动是否要更新，如果要更新则通知系统
@@ -73,8 +75,6 @@ void MainJob::working()
     if (!initDBus()) {
         exit(1);
     }
-
-    // initDriverRepoSource();
 
     // 启动线程监听USB是否有新的设备
     mp_DetectThread = new DetectThread(this);
@@ -216,7 +216,11 @@ void MainJob::initDriverRepoSource()
     }
 
     file.write("deb https://pro-driver-packages.uniontech.com eagle non-free\n");
-    file.write("deb http://10.0.32.52:5000/pkg/drivepre2 eagle non-free\n");
     file.close();
+
+    QString cmd = "apt update";
+    QProcess process;
+    process.start(cmd);
+    process.waitForFinished(-1);
 }
 

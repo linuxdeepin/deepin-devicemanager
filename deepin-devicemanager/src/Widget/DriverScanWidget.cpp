@@ -13,6 +13,7 @@
 #define ICON_LABEL_SIZE 128
 #define PROGRESS_HEIGHT 8
 #define PROGRESS_WIDTH 422
+#define INFO_WIDTH 500
 #define BUTTON_WIDTH   310
 #define SPACE_15       15
 
@@ -254,6 +255,7 @@ void DriverScanWidget::initUI()
     DPalette pa = DApplicationHelper::instance()->palette(mp_ScanningInfoLabel);
     pa.setColor(DPalette::Text, pa.color(DPalette::TextTips));
     DApplicationHelper::instance()->setPalette(mp_ScanningInfoLabel, pa);
+    mp_ScanningInfoLabel->setElideMode(Qt::ElideRight);
 
     // 反馈Label
     QString feedbackStr = QString("<a style=\"text-decoration:none\" href=\"submit feedback\">") + QObject::tr("submit feedback") + "</a>";
@@ -266,7 +268,8 @@ void DriverScanWidget::initUI()
     // progressbar
     mp_ScanningProgress->setFixedHeight(PROGRESS_HEIGHT);
     mp_ScanningProgress->setMinimumWidth(PROGRESS_WIDTH);
-
+    mp_ScanningInfoLabel->setFixedWidth(INFO_WIDTH);
+    mp_ScanningInfoLabel->setAlignment(Qt::AlignCenter);
 }
 
 void DriverScanWidget::initConnect()
@@ -308,6 +311,7 @@ void DriverScanWidget::setProgressFinish()
 void DriverScanWidget::refreshProgress(QString info, int progress)
 {
     mp_ScanningInfoLabel->setText(QObject::tr("Scanning %1").arg(info));
+    mp_ScanningInfoLabel->show();
 
     int old = mp_ScanningProgress->value();
     mp_ScanningProgress->setValue(old + progress);
@@ -320,7 +324,7 @@ void DriverScanWidget::paintEvent(QPaintEvent *event)
     painter.setRenderHints(QPainter::Antialiasing, true);
     painter.setOpacity(1);
     painter.setClipping(true);
-    QRect rect = this->rect();;
+    QRect rect = this->rect();
     QPainterPath path;
     path.addRoundedRect(rect, 8, 8);
     // 获取调色板
