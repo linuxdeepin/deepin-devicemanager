@@ -474,13 +474,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (mp_DriverManager->isInstalling()) {
         // 当前界面正在驱动安装，弹窗提示
-        DDialog dialog;
+        // bug134487
+        DDialog dialog(QObject::tr("You are installing a driver, which will be interrupted if you exit.")
+                       , QObject::tr("Are you sure you want to exit?"));
         dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
-        dialog.setTitle(QObject::tr("You are installing a driver, which will be interrupted if you exit."));
-        DLabel *label = new DLabel(this);
-        label->setText(QObject::tr("Are you sure you want to exit?"));
-        label->setAlignment(Qt::AlignHCenter);
-        dialog.addContent(label);
         dialog.addButton(QObject::tr("Exit", "button"), false, DDialog::ButtonWarning);
         dialog.addButton(QObject::tr("Cancel", "button"));
         int ret = dialog.exec();

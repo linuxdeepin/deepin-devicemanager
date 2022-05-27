@@ -219,7 +219,7 @@ void DriverScanWidget::setNetworkErr()
 
 void DriverScanWidget::slotFeedBack()
 {
-     CommonTools::feedback();
+    CommonTools::feedback();
 }
 
 void DriverScanWidget::slotReDetected()
@@ -245,6 +245,12 @@ void DriverScanWidget::initUI()
     font.setWeight(FONT_WEIGHT);
     mp_ScanningLabel->setFont(font);
     DFontSizeManager::instance()->bind(mp_ScanningLabel, DFontSizeManager::T5);
+
+    // bug134487
+    DFontSizeManager::instance()->bind(mp_ScanningInfoLabel, DFontSizeManager::T8);
+    DPalette pa = DApplicationHelper::instance()->palette(mp_ScanningInfoLabel);
+    pa.setColor(DPalette::Text, pa.color(DPalette::TextTips));
+    DApplicationHelper::instance()->setPalette(mp_ScanningInfoLabel, pa);
 
     // 反馈Label
     QString feedbackStr = QString("<a style=\"text-decoration:none\" href=\"submit feedback\">") + QObject::tr("submit feedback") + "</a>";
