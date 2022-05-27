@@ -25,7 +25,7 @@ void PageDriverTableView::setColumnWidth(int row, int column)
 void PageDriverTableView::appendRowItems(int column)
 {
     mp_View->appendRowItems(column);
-    this->setMaximumHeight(maximumHeight() + DRIVER_TABLE_ROW_HEIGHT);
+    this->setFixedHeight(height() + DRIVER_TABLE_ROW_HEIGHT);
 }
 
 void PageDriverTableView::setWidget(int row, int column, DWidget *widget)
@@ -126,10 +126,11 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
 
 void PageDriverTableView::initWidgets()
 {
-    this->setMaximumHeight(DRIVER_TABLE_HEADER_HEIGHT + 4);
+    this->setFixedHeight(DRIVER_TABLE_HEADER_HEIGHT + 8);
     setContentsMargins(0, 0, 0, 0);
-    QBoxLayout *mainLayout = new QHBoxLayout(this);
-    mainLayout->setContentsMargins(2, 2, 2, 2);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    mainLayout->setContentsMargins(5, 2, 5, 5);
     mainLayout->addWidget(mp_View);
+    mainLayout->addStretch();
     this->setLayout(mainLayout);
 }

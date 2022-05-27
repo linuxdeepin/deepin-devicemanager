@@ -110,8 +110,8 @@ private:
     DLabel *mp_Name;
     int    m_Index;
 
-    const int ICON_SIZE_WIDTH = 36;
-    const int ICON_SIZE_HEIGHT = 36;
+    const int ICON_SIZE_WIDTH = 32;
+    const int ICON_SIZE_HEIGHT = 32;
 };
 
 

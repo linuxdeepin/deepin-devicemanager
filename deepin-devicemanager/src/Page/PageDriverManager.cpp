@@ -308,6 +308,7 @@ void PageDriverManager::initWidget()
     initTable();
 
     QHBoxLayout *mainLayout = new QHBoxLayout();
+    mainLayout->setContentsMargins(10,10,10,10);
     mainLayout->addWidget(mp_StackWidget);
     this->setLayout(mainLayout);
 
@@ -333,7 +334,6 @@ void PageDriverManager::initTable()
     mp_ViewNotInstall->setColumnWidth(2, 186);
     mp_ViewNotInstall->setColumnWidth(3, 120);
     mp_ViewNotInstall->setColumnWidth(4, 150);
-    mp_ViewNotInstall->setColumnWidth(5, 120);
 
     mp_ViewCanUpdate->initHeaderView(QStringList() << ""
                                      << QObject::tr("Device Name")
@@ -347,24 +347,22 @@ void PageDriverManager::initTable()
     mp_ViewCanUpdate->setColumnWidth(2, 186);
     mp_ViewCanUpdate->setColumnWidth(3, 120);
     mp_ViewCanUpdate->setColumnWidth(4, 150);
-    mp_ViewCanUpdate->setColumnWidth(5, 120);
 
     mp_AllDriverIsNew->initHeaderView(QStringList() << QObject::tr("Device Name") << QObject::tr("Current Version"));
     mp_AllDriverIsNew->setColumnWidth(0, 508);
-    mp_AllDriverIsNew->setColumnWidth(1, 432);
 }
 
 void PageDriverManager::initMainFrame(DFrame *mainFrame)
 {
-    mainFrame->setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *vLaout = new QVBoxLayout();
-    vLaout->setContentsMargins(0, 20, 0, 0);
+    vLaout->setContentsMargins(20, 20, 20, 20);
     vLaout->setSpacing(0);
 
     // 上方的表头
     QHBoxLayout *headerLayout = new QHBoxLayout();
     initHeadWidget(headerLayout);
     vLaout->addLayout(headerLayout);
+    vLaout->addSpacing(15);
 
     // 下方的可滑动区域
     DScrollArea *area = new DScrollArea(this);
@@ -377,9 +375,7 @@ void PageDriverManager::initMainFrame(DFrame *mainFrame)
 void PageDriverManager::initHeadWidget(QHBoxLayout *hLayout)
 {
     hLayout->setSpacing(0);
-    hLayout->addSpacing(18);
     hLayout->addWidget(mp_HeadWidget);
-    hLayout->addSpacing(18);
 }
 
 void PageDriverManager::initScrollArea(DScrollArea *area)
@@ -387,19 +383,15 @@ void PageDriverManager::initScrollArea(DScrollArea *area)
     area->setFrameShape(QFrame::NoFrame);
     area->setWidgetResizable(true);
     DWidget *frame = new DWidget(this);
-    frame->setContentsMargins(10, 10, 10, 10);
+    frame->setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *frameLayout = new QVBoxLayout();
+    frameLayout->setSpacing(12);
+    frameLayout->setContentsMargins(0,0,0,0);
 
     frameLayout->addWidget(mp_InstallLabel);
-    mp_InstallLabel->setFixedHeight(25);
-    mp_InstallLabel->setContentsMargins(0, 0, 1, 0);
     frameLayout->addWidget(mp_ViewNotInstall);
-
     frameLayout->addWidget(mp_UpdateLabel);
-    mp_UpdateLabel->setFixedHeight(mp_UpdateLabel->height() + 10);
-    mp_UpdateLabel->setContentsMargins(0, 10, 0, 0);
     frameLayout->addWidget(mp_ViewCanUpdate);
-
     frameLayout->addWidget(mp_LabelIsNew);
     frameLayout->addWidget(mp_AllDriverIsNew);
 
@@ -540,7 +532,7 @@ void PageDriverManager::testScanDevices()
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (Notebooks) 002";
     info->m_Size = "124.36";
-    info->m_Type = DR_Camera;
+    info->m_Type = DR_WiFi;
     info->m_Status = ST_NOT_INSTALL;
     info->m_Checked = true;
     info->m_DriverName = "deepin-log-viewer";
@@ -551,7 +543,7 @@ void PageDriverManager::testScanDevices()
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (Notebooks) 003";
     info->m_Size = "124.36";
-    info->m_Type = DR_Camera;
+    info->m_Type = DR_Scaner;
     info->m_Status = ST_NOT_INSTALL;
     info->m_Checked = true;
     info->m_DriverName = "deepin-reader";
@@ -562,7 +554,7 @@ void PageDriverManager::testScanDevices()
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (Notebooks) 004";
     info->m_Size = "124.36";
-    info->m_Type = DR_Camera;
+    info->m_Type = DR_Bluetooth;
     info->m_Status = ST_NOT_INSTALL;
     info->m_Checked = true;
     info->m_DriverName = "deepin-diskmanager";
@@ -573,7 +565,7 @@ void PageDriverManager::testScanDevices()
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (Notebooks) 005";
     info->m_Size = "124.36";
-    info->m_Type = DR_Camera;
+    info->m_Type = DR_Sound;
     info->m_Status = ST_CAN_UPDATE;
     info->m_Checked = true;
     info->m_DriverName = "uos-remote-assistance";
@@ -584,7 +576,7 @@ void PageDriverManager::testScanDevices()
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (update)";
     info->m_Size = "124.36";
-    info->m_Type = DR_Camera;
+    info->m_Type = DR_Printer;
     info->m_Status = ST_CAN_UPDATE;
     info->m_Checked = false;
     info->m_DriverName = "deepin-calculator";
@@ -595,7 +587,7 @@ void PageDriverManager::testScanDevices()
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (update)";
     info->m_Size = "124.36";
-    info->m_Type = DR_Camera;
+    info->m_Type = DR_Sound;
     info->m_Status = ST_CAN_UPDATE;
     info->m_Checked = false;
     info->m_DriverName = "deepin-defender";
@@ -606,7 +598,7 @@ void PageDriverManager::testScanDevices()
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (update)";
     info->m_Size = "124.36";
-    info->m_Type = DR_Camera;
+    info->m_Type = DR_Sound;
     info->m_Status = ST_CAN_UPDATE;
     info->m_Checked = false;
     info->m_DriverName = "deepin-system-monitor";
@@ -617,7 +609,7 @@ void PageDriverManager::testScanDevices()
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (update)";
     info->m_Size = "124.36";
-    info->m_Type = DR_Camera;
+    info->m_Type = DR_Sound;
     info->m_Status = ST_DRIVER_IS_NEW;
     info->m_Checked = false;
     info->m_DriverName = "dde-introduction";
