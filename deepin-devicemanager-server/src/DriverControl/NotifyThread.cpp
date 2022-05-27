@@ -31,8 +31,10 @@ void NotifyThread::run()
             continue;
         }
 
+        QString name = QLocale::system().name();
+
         //通知前端
-        QString strCmd = "runuser -l " + strUsername + " -c \"XDG_RUNTIME_DIR=\"/run/user/$(id -u " + strUsername + " )\" /usr/bin/deepin-devicemanager notify\"";
+        QString strCmd = "runuser -l " + strUsername + " -c \"XDG_RUNTIME_DIR=\"/run/user/$(id -u " + strUsername + " )\" /usr/bin/deepin-devicemanager notify " + name + "\"";
         process.start("sh", QStringList() << "-c" << strCmd);
         process.waitForFinished(-1);
             break;

@@ -49,7 +49,7 @@ void notify(int argc, char *argv[]);
 int main(int argc, char *argv[])
 {
     // /usr/bin/devicemanager notify
-    if (argc > 1 && QString(argv[1]).contains("notify")){
+    if (argc > 2 && QString(argv[1]).contains("notify")){
         notify(argc, argv);
         return -1;
     }
@@ -120,8 +120,15 @@ void notify(int argc, char *argv[])
     }
 
     // 2. 加载翻译文件
-    DApplication app(argc, argv);
-    app.loadTranslator();
+    QString body = QObject::tr("New drivers available! Install or update them now.");
+    QString l = QString(argv[2]);
+    if("zh_CN" == l){
+        body = QObject::tr("您有驱动可进行安装/更新");
+    }else if("zh_HK" == l){
+        body = QObject::tr("您有驅動可進行安裝/更新");
+    }else if("zh_TW" == l){
+        body = QObject::tr("您有驅動可進行安裝/更新");
+    }
 
     // 3. create interface
     QDBusInterface *mp_Iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, DEVICE_SERVICE_INTERFACE, QDBusConnection::sessionBus());
@@ -130,7 +137,7 @@ void notify(int argc, char *argv[])
     uint replaces_id = 0;
     QString appicon("deepin-devicemanager");
     QString title = "";
-    QString body = QObject::tr("New drivers available! Install or update them now.");
+
     QStringList actionlist;
     actionlist << "view" << "查看";
     QVariantMap hints;
