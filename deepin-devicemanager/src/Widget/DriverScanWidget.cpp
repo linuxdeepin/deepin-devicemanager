@@ -91,6 +91,7 @@ void DriverScanWidget::setScanningUI(const QString &scanInfo, int progressValue)
     mp_VLayout->addLayout(mp_HLayoutscProgress);
     mp_VLayout->addSpacing(SPACE_15);
     mp_VLayout->addLayout(mp_HLayoutInfoLabel);
+    mp_VLayout->addSpacing(25);
     mp_VLayout->addStretch();
     mp_VLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -148,6 +149,7 @@ void DriverScanWidget::setScanFailedUI()
     mp_VLayout->addLayout(mp_HLayoutscProgress);
     mp_VLayout->addSpacing(SPACE_15);
     mp_VLayout->addLayout(mp_HLayoutInfoLabel);
+    mp_VLayout->addSpacing(20);
     mp_VLayout->addStretch();
     mp_VLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -207,6 +209,7 @@ void DriverScanWidget::setNetworkErr()
     mp_VLayout->addLayout(mp_HLayoutscProgress);
     mp_VLayout->addSpacing(SPACE_15);
     mp_VLayout->addLayout(mp_HLayoutInfoLabel);
+    mp_VLayout->addSpacing(20);
     mp_VLayout->addStretch();
     mp_VLayout->setContentsMargins(0, 0, 0, 0);
 

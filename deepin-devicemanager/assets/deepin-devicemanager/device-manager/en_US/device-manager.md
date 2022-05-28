@@ -2,7 +2,7 @@
 
 ## Overview 
 
-Device Manager is a tool to view and manage hardware devices, through which you can view all kinds of parameters and export data of all hardware devices running in the operating system, you can also disable/enable some hardware drives. 
+Device Manager is a tool to view and manage hardware devices, through which you can view all details of hardware running in the operating system, and you can manage drivers as well. 
 
 
 
@@ -32,118 +32,96 @@ You can run, close or create a shortcut for Device Manager as follows.
 - Right-click ![deepin_devicemanager](../common/deepin_devicemanager.svg)  on the Dock, select **Close all** to exit.
 - On interface of Device Manager, click ![icon_menu](../common/icon_menu.svg)  and select **Exit** to exit.
 
-## Device Information
+## Hardware
 
-The information displayed by Device Manager is related to the computer hardwares. If your computer is connected to a mouse, keyboard, etc., the corresponding device information is displayed. If multiple devices of the same type are detected, the device information is displayed in a list. The following content is for reference only, please refer to the actual situation.
+The information displayed by Device Manager is related to the computer hardwares. If your computer is connected to a mouse, keyboard, etc., the corresponding device information is displayed. If multiple devices of the same type are detected, the device information is displayed in a list. 
 
-### Overview
+### Device Information
 
-1. On the main interface, click **Overview**.
-2. You can see a list containing **CPU**, **Motherboard**, **Memory** and so on in this interface, and summary info. 
+On the main interface, click **Hardware** to view details of each hardware running in this system.
 
 ![0|overview](fig/overview.png)
 
-### CPU
+The following table mainly introduces common hardware information and is for reference only, please refer to the actual situation.
 
-1. On the main interface, click **CPU**.
-2. You can view a CPU list and particular info such as name, vendor, CPU ID and so on. 
+<table class="block1">
+    <caption></caption>
+    <tbody>
+        <tr>
+            <td width="150px"><b>Hardware Name</b></td>
+            <td><b>Details</b></td>
+        </tr>
+        <tr>
+            <td>Overview</td>
+            <td>Including the kernel and the hardware list.</td>
+        </tr>
+        <tr>
+            <td>CPU</td>
+            <td>Including name, vendor, CPU ID, architecture and so on.</td>
+        </tr>
+        <tr>
+            <td>Motherboard</td>
+            <td>Including vendor, version, chipset, SMBIOS version and so on.</td>
+        </tr>
+         <tr>
+            <td>Memory</td>
+            <td>Including name, vendor, size, type, speed and so on.</td>
+      </tr>
+      <tr>
+            <td>Display Adapter</td>
+            <td>Including name, vendor, model and so on.</td>
+        </tr>
+       <tr>
+            <td>Sound Adapter</td>
+            <td>Including name, vendor, model and so on.</td>
+        </tr>
+         <tr>
+            <td>Storage</td>
+            <td>Including model, vendor, media type and so on.</td>
+        </tr>
+        <tr>
+            <td>Network Adapter</td>
+            <td>Including name, vendor, type, driver and so on.</td>
+        </tr>
+         <tr>
+            <td>Mouse</td>
+            <td>Including name, vendor, model, interface and so on.</td>
+        </tr>
+          <tr>
+            <td>Keyboard</td>
+            <td>Including name, vendor, model, interface and so on.</td>
+        </tr>
+        <tr>
+            <td>Monitior</td>
+            <td>Including name, vendor, type, interface type and so on.</td>
+        </tr>
+   </tbody>
+   </table>
 
-![0|cpu](fig/cpu.png)
-
-### Motherboard 
-
-1. On the main interface, click **Motherboard**. 
-2. You can view info about motherboard, such as vendor, version, chipset, and so on.
-
-![0|board](fig/board.png)
-
-### Memory
-
-1. On the main interface, click **Memory**.
-2. You can view a memory list and particular info such as name, size, type, and so on.
-
-![0|RAM](fig/RAM.png)
-
-### Display Adapter
-
-1. On the main interface, click **Display Adapter**.
-2. You can view info about Display Adapter such as name, vendor, model and so on.
-
-![0|displayadapter](fig/displayadapter.png)
-
-### Sound Adapter
-
-1. On the main interface, click **Sound Adapter **.
-2. You can view a list of audio adapters and info such as name, vendor, model and so on.
-
-![0|audioadapter](fig/audioadapter.png)
-
-### Storage
-
-1. On the main interface, click **Storage**.
-2. You can view a storage device list and particular info such as model, vendor, media type, and so on.
-
-![0|storagedevice](fig/storagedevice.png)
-
-### Network Adapter
-
-1. On the main interface, click **Network Adapter**.
-2. You can view info about Network Adapter such as name, vendor, type, and so on.
-
-![0|networkadapter](fig/networkadapter.png)
-
-### Mouse
-
-1. On the main interface, click **Mouse**.
-2. You can view info such as name, vendor, model, and so on.
-
-![0|mouse](fig/mouse.png)
-
-### Keyboard
-
-1. On the main interface, click **Keyboard **.
-2. You can view info such as name, vendor, model, and so on.
-
-![0|keyboard](fig/keyboard.png)
-
-### Monitor
-
-1. On the main interface, click **Monitor **.
-2. You can view info about Monitor such as name, vendor, type and so on.
-
-![0|displaydevice](fig/displaydevice.png)
-
-### Printer
-
-1. On the main interface, click **Printer**.
-2. You can view a list of printers connected and info such as name, model, vendor, and so on.
-
-![0|printer](fig/printer.png)
-
-
-
-## Operations 
+### Context Menu 
 
 Right-click in the details area of any device to carry out corresponding operations.
 
 ![0|rightclick](fig/rightclick.png)
 
-### Copy
+#### Copy
 To copy contents of the current page or selected contents.
 
-### Refresh
+#### Refresh
 To reload info of all devices of the operating system. You can also use shortcut key F5 to realize this function.
 
-### Export
+#### Export
 To export the device information to the specified folder, formats such as txt/docx/xls/html are supported. 
 
-### Disable/Enable
+#### Disable/Enable
 
 You can disable /enable some hardware drives, which are enabled by default. You can judge whether the hardware device supports the disable function according to the right-click menu options. 
 
-### Update drivers
+#### Update drivers
 
-Some hardware supports update/uninstall driver function, which can be judged by the right-click menu options. Currently, only local driver files are supported for installation and update.
+Some hardware supports update/uninstall driver function, which can be judged by the right-click menu options. 
+
+> ![tips](../common/tips.svg) Tips: Update online is supported in "Drivers" interface.
 
 1. Select **Update drivers** in the right-click menu to bring up a pop-up window.
 2. Select the folder where the driver is located and click the **Next** button. The "Include subfolders" is checked by default, indicating that the folder and the driver files contained in the subfolder are detected.
@@ -157,7 +135,7 @@ Some hardware supports update/uninstall driver function, which can be judged by 
 4. Authentication window pops up. Input login password to complete authentication and proceed.
 5. If the update fails, the system automatically rolls back the device's driver to the previous driver version, which does not affect the use. It is recommended to find the reason of failure according to the system prompt and update again.
 
-### Uninstall drivers
+#### Uninstall drivers
 
 You can uninstall devices that you don't want to use.
 
@@ -169,15 +147,61 @@ You can uninstall devices that you don't want to use.
 
 2. If you want to use the device again, right-click on the device details page and select **Update Driver** to install the driver.
 
-### Wake up the computer
+#### Wake up the computer
 
-When the computer is suspending, it supports waking up the computer and lighting up the screen via mouse and keyboard. If the devices are disabled, this feature is not available.
+When the computer is suspending, it supports waking up the computer and lighting up the screen via mouse, keyboard and network card. If the devices are disabled, this feature is not available.
 
-1. Click "Mouse" or "Keyboard" in Device Manager to display details.
+**Wake up the computer by mouse and keyboard**
+
+1. Click **Mouse** or **Keyboard** in "Hardware" interface to display details.
 2. Right-click in the details area to check or uncheck **Allow it to wake the computer**.
 
-   - Allow it to wake the computer: When the computer is in suspending, left-click / right-click / middle-click or hit any key on keyboard to wake up the computer and light up the screen.
-   - Don't allow it to wake the computer: When the computer is in suspending, the computer does not respond when you  left-click / right-click / middle-click or hit any key on keyboard.
+   - Allow it to wake the computer: When the computer is suspending, left-click / right-click / middle-click or hit any key on keyboard to wake up the computer and light up the screen.
+   - Don't allow it to wake the computer: When the computer is suspending, the computer does not respond when you left-click / right-click / middle-click or hit any key on keyboard.
+
+**Wake up the computer by network card**
+
+1. Click **Network Adapter** in "Hardware" interface to display details.
+2. Right-click in the details area to check or uncheck **Allow it to wake the computer**.
+
+   - Allow it to wake the computer: When this computer is suspending, other computers (in the same network segment that can be pinged through to each other's IP address) can wake up this computer and light up the screen by sending special network packet requests (Wake On LAN command) to it.
+   - Don't allow it to wake the computer: When this computer is suspending, it does not respond if other computers (in the same network segment that can be pinged through to each other's IP address) send special network packet requests (Wake On LAN command) to it.
+
+## Drivers
+
+"Drivers" interface mainly includes features such as driver list, driver updates scan, driver online installation, etc.
+
+### Scan for updates
+
+Open Device Manager, click **Drivers**. The system will detect if there is any updates available automatically.
+
+   - Already up to date: It means that there are no drivers that can be updated/installed, and the names and versions of devices that do not require driver updates are displayed.
+   - Updates available: It means that updates are detected and can be installed online.
+
+![0|update_detection](fig/update_detection.png)
+
+If the detection fails, click **Scan Again** after fixing the problem according to the prompt, or click **Feedback** for unknown reasons to jump to the "Consults" interface of Support to give feedback on the problem.
+
+### Install drivers online
+
+1. In the "Drivers" interface, you can view the list of updatable/installable drivers and install them online.
+
+   - Click ![install](../common/install.svg) to install the installable drivers.
+   - Click ![reinstall](../common/reinstall.svg) to update the updatable drivers.
+
+   ![0|drive_management](fig/drive_management.png)
+
+2. For batch installation, check all drivers you want and click **Install All**.
+
+3. Wait for the installation result.
+
+   - Installation successful: The status bar will change to "Installation successful" and take effect after restarting the computer.
+
+   - Installation failed: The status bar changes to "Installation failed", follow the prompts to fix the problem and click the refresh button ![refresh](../common/refresh.svg) to re-scan and try to install again. For unknown reasons, you can click the **Feedback** button to jump to the "Consults" interface of Support to give feedback on the problem..
+
+   - Installation partially  successful: For batch installation, some of the drivers may be installed successfully and some may not, you can check the status of each driver in the driver list.
+
+   
 
 ## Main Menu
 
@@ -196,7 +220,7 @@ The window theme includes Light Theme, Dark Theme and System Theme.
 Click Help to get the manual, which will help you further know and use Device Manager.
 
 1. Click ![icon_menu](../common/icon_menu.svg)on the interface.
-2. Click **Help** to view the manual.
+2. Click **Help** to view the manual to further know and use Device Manager.
 
 
 ### About
