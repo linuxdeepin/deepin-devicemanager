@@ -68,6 +68,7 @@ protected:
 
 private:
     int packageInstall(const QString& package_name, const QString& version);
+    QString getOsBuild();
 public:
     signals:
     void sigRequestFinished(bool sucess, QString msg);

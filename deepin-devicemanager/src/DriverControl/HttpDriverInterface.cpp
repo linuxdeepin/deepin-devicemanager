@@ -88,9 +88,9 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
 {
     QString arch = Common::getArchStore();
     QString strUrl = strRepoUrl + "?arch=" + arch;
-    int iType = DTK_CORE_NAMESPACE::DSysInfo::uosType();
-    int iEditionType = DTK_CORE_NAMESPACE::DSysInfo::uosEditionType();
-    strUrl += "&system=" + QString::number(iType) + '-' + QString::number(iEditionType);
+    QString build = getOsBuild();
+    if(! build.isEmpty())
+        strUrl += "&system=" + build;
 
     if (!strManufacturer.isEmpty()) {
         strUrl += "&deb_manufacturer=" + strManufacturer;
@@ -216,6 +216,24 @@ int HttpDriverInterface::packageInstall(const QString& package_name, const QStri
     if(infoList[1].contains(version))
         return 2;
     return 1;
+}
+
+QString HttpDriverInterface::getOsBuild()
+{
+    QFile file("/etc/os-version");
+    if(!file.open(QIODevice::ReadOnly))
+        return "";
+    QString info = file.readAll().data();
+    QStringList lines = info.split("\n");
+    foreach(const QString& line,lines){
+        if(line.startsWith("OsBuild")){
+            QStringList words = line.split("=");
+            if(2 == words.size()){
+                return words[1].trimmed();
+            }
+        }
+    }
+    return "";
 }
 
 bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<RepoDriverInfo> &lstDriverInfo)
