@@ -20,11 +20,11 @@
     <name>CommonTools</name>
     <message>
         <source>EC_4</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">EC_4</translation>
     </message>
     <message>
         <source>EC_5</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">EC_5</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="64"/>

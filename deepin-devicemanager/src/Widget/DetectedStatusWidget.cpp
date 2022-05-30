@@ -42,7 +42,7 @@ DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
     , mp_InstallButton(new DSuggestButton(this))
     , mp_ReDetectedSgButton(new DSuggestButton(this))
     , mp_CancelButton(new DPushButton(this))
-    , mp_ReDetectedIconButton(new DIconButton(DStyle::SP_BrowserReload, this))
+    , mp_ReDetectedIconButton(new DIconButton(this))
     , mp_Progress(new DProgressBar(this))
     , mp_HLayoutTotal(nullptr)
     , mp_HLayoutButton(nullptr)
@@ -433,6 +433,31 @@ void DetectedStatusWidget::slotCancel()
     emit undoInstall();
 }
 
+void DetectedStatusWidget::onUpdateTheme()
+{
+    // 根据主题设置字体颜色
+    DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+    plt.setColor(DPalette::Text, plt.color(DPalette::TextTitle));
+    mp_UpdateLabel->setPalette(plt);
+    plt.setColor(DPalette::Text, plt.color(DPalette::TextTips));
+    mp_ModelLabel->setPalette(plt);
+
+    setSgBtnIcon();
+}
+
+void DetectedStatusWidget::setSgBtnIcon()
+{
+    // 根据主题选择图标风格
+    DGuiApplicationHelper::ColorType theme = DGuiApplicationHelper::instance()->themeType();
+    if (DGuiApplicationHelper::DarkType == theme) {
+        QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/retest_dark.svg"));
+        mp_ReDetectedIconButton->setIcon(icon);
+    } else {
+        QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/retest.svg"));
+        mp_ReDetectedIconButton->setIcon(icon);
+    }
+}
+
 void DetectedStatusWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
@@ -515,8 +540,7 @@ void DetectedStatusWidget::initUI()
     mp_CancelButton->setMinimumWidth(BUTTON_WIDTH);
 
     // 重新检测 IconButton
-    QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/retest.svg"));
-    mp_ReDetectedIconButton->setIcon(icon);
+    setSgBtnIcon();
     mp_ReDetectedIconButton->setIconSize(QSize(ICON_BT_SIZE, ICON_BT_SIZE));
     mp_ReDetectedIconButton->setFixedSize(ICON_BT_SIZE, ICON_BT_SIZE);
 
@@ -542,6 +566,9 @@ void DetectedStatusWidget::initConnect()
 
     // 取消
     connect(mp_CancelButton, &DPushButton::clicked, this, &DetectedStatusWidget::slotCancel);
+
+    // 主题变化
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, &DetectedStatusWidget::onUpdateTheme);
 }
 
 void DetectedStatusWidget::hideAll()

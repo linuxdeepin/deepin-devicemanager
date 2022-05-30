@@ -20,26 +20,26 @@
     <name>CommonTools</name>
     <message>
         <source>EC_4</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">EC_4</translation>
     </message>
     <message>
         <source>EC_5</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">EC_5</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>EC_NOTIFY_NETWORK</source>
-        <translation type="unfinished"/>
+        <translation>EC_NOTIFY_NETWORK</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="65"/>
         <source>EC_REINSTALL</source>
-        <translation type="unfinished"/>
+        <translation>EC_REINSTALL</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>EC_6</source>
-        <translation type="unfinished"/>
+        <translation>EC_6</translation>
     </message>
 </context>
 <context>
@@ -1606,12 +1606,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="261"/>
         <source>Hardware</source>
-        <translation type="unfinished"/>
+        <translation>Laitteisto</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="261"/>
         <source>Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Ajurit</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="363"/>
@@ -3508,7 +3508,7 @@
     <message>
         <location filename="../src/main.cpp" line="133"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation type="unfinished"/>
+        <translation>Uusia ajureita saatavilla! Asenna tai päivitä ne nyt.</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="10"/>
@@ -3530,7 +3530,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="327"/>
         <source>Version Available</source>
-        <translation type="unfinished"/>
+        <translation>Versio saatavilla</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="328"/>
@@ -3548,120 +3548,120 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="330"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="343"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Toiminta</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="340"/>
         <source>New Version</source>
-        <translation type="unfinished"/>
+        <translation>Uusi versio</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="352"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Nykyinen versio</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="678"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Puuttuvat ajurit (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="679"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Vanhetuneet ajurit (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="680"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Ajantasaiset ajurit (%1)</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="64"/>
         <source>%1 driver updates available</source>
-        <translation type="unfinished"/>
+        <translation>%1 ajuripäivitystä saatavilla</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="67"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="332"/>
         <source>Time checked: %1</source>
-        <translation type="unfinished"/>
+        <translation>Tarkistettu: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="115"/>
         <source>Downloading drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>Ajurien lataus %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="117"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation type="unfinished"/>
+        <translation>Latausnopeus: %1 ladattu %2/%3</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="163"/>
         <source>Installing drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>Asennetaan ajureita %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="205"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 ajuria asennettu, %2 ajuria epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="207"/>
         <source>%1 drivers installed</source>
-        <translation type="unfinished"/>
+        <translation>%1 ajuria asennettu</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="247"/>
         <source>Failed to install drivers</source>
-        <translation type="unfinished"/>
+        <translation>Ajurien asentaminen epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="287"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"/>
+        <translation>Verkkovirhe. Yhdistetään uudelleen...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="289"/>
         <source>Download speed: %1</source>
-        <translation type="unfinished"/>
+        <translation>Latausnopeus: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="329"/>
         <source>Your drivers are up to date</source>
-        <translation type="unfinished"/>
+        <translation>Ajurit ovat ajan tasalla</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
         <source>reboot</source>
-        <translation type="unfinished"/>
+        <translation>käynnistä uudelleen</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation type="unfinished"/>
+        <translation>Ole hyvä ja %1, jotta asennetut ajurit tulevat voimaan</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="499"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="253"/>
         <source>submit feedback</source>
-        <translation type="unfinished"/>
+        <translation>anna palautetta</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="500"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Yritä uudelleen tai %1 meille</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="503"/>
         <source>Install All</source>
-        <translation type="unfinished"/>
+        <translation>Asenna kaikki</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="508"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="257"/>
         <source>Scan Again</source>
-        <translation type="unfinished"/>
+        <translation>Tarkista uudelleen</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="513"/>
@@ -3671,49 +3671,49 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="51"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Tarkistetaan laitteisto-ajureita, odota...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="59"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="304"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>Tarkistetaan %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="113"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>Tarkistus epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="170"/>
         <source>Network unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Verkko ei saatavilla</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="174"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>Tarkista verkkoyhteytesi</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="254"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Tarkista uudelleen tai %1 meille</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="479"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Olet asentamassa ajuria, joka rikkoutuu, jos poistut.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="481"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>Oletko varma, että haluat poistua?</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="484"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Poistu</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="485"/>
@@ -3724,68 +3724,68 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="26"/>
         <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
+        <translation>Bluetooth sovitin</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="27"/>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Imaging device</source>
-        <translation type="unfinished"/>
+        <translation>Kuvauslaite</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="28"/>
         <source>Display adapter</source>
-        <translation type="unfinished"/>
+        <translation>Näytön sovitin</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="30"/>
         <source>Sound card</source>
-        <translation type="unfinished"/>
+        <translation>Äänikortti</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Verkkokortti</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Langaton verkkosovitin</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="50"/>
         <source>Installation successful</source>
-        <translation type="unfinished"/>
+        <translation>Asennus onnistui</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="51"/>
         <source>Installation failed</source>
-        <translation type="unfinished"/>
+        <translation>Asennus epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Downloading</source>
-        <translation type="unfinished"/>
+        <translation>Ladataan</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Asennus</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Not installed</source>
-        <translation type="unfinished"/>
+        <translation>Ei asennettu</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="55"/>
         <source>Out-of-date</source>
-        <translation type="unfinished"/>
+        <translation>Vanhentunut</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="56"/>
         <source>Waiting</source>
-        <translation type="unfinished"/>
+        <translation>Odottaa</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="60"/>
@@ -3795,17 +3795,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="61"/>
         <source>Network error</source>
-        <translation type="unfinished"/>
+        <translation>Verkkovirhe</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="62"/>
         <source>Canceled</source>
-        <translation type="unfinished"/>
+        <translation>Peruutettu</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="63"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"/>
+        <translation>Ajuritiedostoja ei saatu</translation>
     </message>
 </context>
 <context>

@@ -82,7 +82,6 @@ void DriverScanWidget::setScanningUI(const QString &scanInfo, int progressValue)
     mp_HLayoutInfoLabel->setContentsMargins(0, 0, 0, 0);
 
     // 整体垂直居中显示
-    mp_VLayout->setSpacing(0);
     mp_VLayout->addStretch();
     mp_VLayout->addLayout(mp_HLayoutPic);
     mp_VLayout->addSpacing(SPACE_15);
@@ -93,6 +92,7 @@ void DriverScanWidget::setScanningUI(const QString &scanInfo, int progressValue)
     mp_VLayout->addLayout(mp_HLayoutInfoLabel);
     mp_VLayout->addSpacing(25);
     mp_VLayout->addStretch();
+
     mp_VLayout->setContentsMargins(0, 0, 0, 0);
 
     // 整体水平居中显示

@@ -83,7 +83,6 @@
         <file>icons/deepin/builtin/icons/update succeed.svg</file>
         <file>icons/deepin/builtin/icons/update-btn.svg</file>
         <file>icons/deepin/builtin/icons/install.svg</file>
-        <file>icons/deepin/builtin/icons/retest.svg</file>
         <file>icons/deepin/builtin/icons/latest.svg</file>
         <file>icons/deepin/builtin/icons/animation/1.png</file>
         <file>icons/deepin/builtin/icons/animation/2.png</file>
@@ -93,5 +92,9 @@
         <file>icons/deepin/builtin/icons/animation/6.png</file>
         <file>icons/deepin/builtin/icons/animation/7.png</file>
         <file>icons/deepin/builtin/icons/animation/8.png</file>
+        <file>icons/deepin/builtin/icons/reinstall_dark.svg</file>
+        <file>icons/deepin/builtin/icons/retest_dark.svg</file>
+        <file>icons/deepin/builtin/icons/install_dark.svg</file>
+        <file>icons/deepin/builtin/icons/retest.svg</file>
     </qresource>
 </RCC>

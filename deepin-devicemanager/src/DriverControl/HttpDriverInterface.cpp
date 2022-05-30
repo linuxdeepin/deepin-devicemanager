@@ -31,7 +31,7 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
 
     QNetworkRequest request(newUrl);
     QNetworkAccessManager qnam;
-    QNetworkReply* reply = qnam.get(request);
+    QNetworkReply *reply = qnam.get(request);
 
     QTimer timer;
     timer.setSingleShot(true);
@@ -89,7 +89,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
     QString arch = Common::getArchStore();
     QString strUrl = strRepoUrl + "?arch=" + arch;
     QString build = getOsBuild();
-    if(! build.isEmpty())
+    if (! build.isEmpty())
         strUrl += "&system=" + build;
 
     if (!strManufacturer.isEmpty()) {
@@ -157,7 +157,7 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
 
     // 找到最优等级
     int max = 0;
-    foreach (const RepoDriverInfo& info , lstDriverInfo) {
+    foreach (const RepoDriverInfo &info, lstDriverInfo) {
         if (max < info.iLevel) {
             max = info.iLevel;
         }
@@ -167,12 +167,12 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
     int index = -1;
     int res_out = 0;
     for (int i = 0; i < lstDriverInfo.size(); i++) {
-        if (max == lstDriverInfo[i].iLevel){
+        if (max == lstDriverInfo[i].iLevel) {
             // 选中第一个最优等级的index
             if (index < 0)
                 index = i;
             int res = packageInstall(lstDriverInfo[i].strPackages, lstDriverInfo[i].strDebVersion);
-            if(res > 0){
+            if (res > 0) {
                 res_out = res;
                 index = i;
             }
@@ -184,24 +184,24 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
     driverInfo->m_Packages = lstDriverInfo[index].strPackages;
     driverInfo->m_Size = lstDriverInfo[index].strSize;
 
-    if (2 == res_out){
+    if (2 == res_out) {
         // 此时说明最优版本已经安装
         driverInfo->m_Status = ST_DRIVER_IS_NEW;
-    } else if(1 == res_out){
+    } else if (1 == res_out) {
         // 此时安装了最优包的不同版本
         driverInfo->m_Status = ST_CAN_UPDATE;
     } else {
         // 此时没有安装最优推荐包(包括其他版本)
-        if (driverInfo->driverName().isEmpty() && driverInfo->type() != DR_Printer){
+        if (driverInfo->driverName().isEmpty() && driverInfo->type() != DR_Printer) {
             driverInfo->m_Status = ST_NOT_INSTALL;
-        }else{
+        } else {
             // 此时安装了其他驱动
             driverInfo->m_Status = ST_CAN_UPDATE;
         }
     }
 }
 
-int HttpDriverInterface::packageInstall(const QString& package_name, const QString& version)
+int HttpDriverInterface::packageInstall(const QString &package_name, const QString &version)
 {
     // 0:没有包 1:版本不一致 2:版本一致
     QProcess process;
@@ -211,9 +211,9 @@ int HttpDriverInterface::packageInstall(const QString& package_name, const QStri
     process.waitForFinished(-1);
     QStringList infoList = QString(process.readAllStandardOutput()).split("\n");
 
-    if( infoList.size() <= 2 || infoList[1].contains("（") || infoList[1].contains("("))
+    if (infoList.size() <= 2 || infoList[1].contains("（") || infoList[1].contains("("))
         return 0;
-    if(infoList[1].contains(version))
+    if (infoList[1].contains(version))
         return 2;
     return 1;
 }
@@ -221,14 +221,14 @@ int HttpDriverInterface::packageInstall(const QString& package_name, const QStri
 QString HttpDriverInterface::getOsBuild()
 {
     QFile file("/etc/os-version");
-    if(!file.open(QIODevice::ReadOnly))
+    if (!file.open(QIODevice::ReadOnly))
         return "";
     QString info = file.readAll().data();
     QStringList lines = info.split("\n");
-    foreach(const QString& line,lines){
-        if(line.startsWith("OsBuild")){
+    foreach (const QString &line, lines) {
+        if (line.startsWith("OsBuild")) {
             QStringList words = line.split("=");
-            if(2 == words.size()){
+            if (2 == words.size()) {
                 return words[1].trimmed();
             }
         }

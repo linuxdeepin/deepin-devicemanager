@@ -30,6 +30,7 @@
 #include <DIconButton>
 #include <DProgressBar>
 #include <DPushButton>
+#include <DApplicationHelper>
 
 #include <QWidget>
 #include <QStringList>
@@ -117,6 +118,11 @@ public:
      */
     void setInstallBtnEnable(bool enable);
 
+    /**
+     * @brief setSgBtnIcon 根据主题设置图片
+     */
+    void setSgBtnIcon();
+
 
 signals:
     void redetected();
@@ -148,6 +154,11 @@ public slots:
      * @brief slotCancel: 取消槽函数
      */
     void slotCancel();
+
+    /**
+     * @brief onUpdateTheme 更新主题
+     */
+    void onUpdateTheme();
 
 protected:
 

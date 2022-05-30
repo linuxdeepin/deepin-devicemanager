@@ -20,21 +20,21 @@
     <name>CommonTools</name>
     <message>
         <source>EC_4</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">EC_4</translation>
     </message>
     <message>
         <source>EC_5</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">EC_5</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>EC_NOTIFY_NETWORK</source>
-        <translation type="unfinished"/>
+        <translation>EC_NOTIFY_NETWORK</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="65"/>
         <source>EC_REINSTALL</source>
-        <translation type="unfinished"/>
+        <translation>EC_REINSTALL</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
@@ -3508,7 +3508,7 @@
     <message>
         <location filename="../src/main.cpp" line="133"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation type="unfinished"/>
+        <translation>Er zijn nieuwe stuurprogramma&apos;s beschikbaar! Installeer of werk ze nu bij.</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="10"/>

@@ -89,6 +89,13 @@ DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
     pa.setColor(DPalette::Text, pa.color(DPalette::TextTips));
     DApplicationHelper::instance()->setPalette(mp_Name, pa);
 
+    // 切换主题
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
+        DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+        plt.setColor(DPalette::Text, plt.color(DPalette::TextTips));
+        mp_Name->setPalette(plt);
+    });
+
     mp_Icon->setPixmap(QIcon(CommonTools::getDriverPixmap(dt)).pixmap(ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT));
     QString ts = DApplication::translate("QObject", CommonTools::getDriverType(dt).toStdString().data());
     mp_Type->setText(ts);
@@ -144,6 +151,13 @@ DriverLabelItem::DriverLabelItem(DWidget *parent,  const QString &txt)
     DPalette pa = DApplicationHelper::instance()->palette(mp_Txt);
     pa.setColor(DPalette::Text, pa.color(DPalette::TextTitle));
     DApplicationHelper::instance()->setPalette(mp_Txt, pa);
+
+    // 切换主题
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
+        DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+        plt.setColor(DPalette::Text, plt.color(DPalette::TextTitle));
+        mp_Txt->setPalette(plt);
+    });
 }
 
 DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
@@ -167,9 +181,17 @@ DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
     this->setLayout(hLayout);
 
     DFontSizeManager::instance()->bind(mp_Status, DFontSizeManager::T8);
-    DPalette pa = DApplicationHelper::instance()->palette(mp_Status);
+    DPalette pa = DApplicationHelper::instance()->applicationPalette();
     pa.setColor(DPalette::Text, pa.color(DPalette::TextTitle));
     DApplicationHelper::instance()->setPalette(mp_Status, pa);
+
+    // 切换主题
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
+        DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+        plt.setColor(DPalette::Text, plt.color(DPalette::TextTitle));
+        mp_Status->setPalette(plt);
+    });
+
 
     // 初始化图标状态和状态信息
     setStatus(s);
@@ -220,17 +242,41 @@ DriverOperationItem::DriverOperationItem(DWidget *parent, bool install)
     hLayout->addWidget(mp_Btn);
     mp_Btn->setFixedSize(36, 36);
     mp_Btn->setIconSize(QSize(36, 36));
-    mp_Btn->setIcon(install ? QIcon(":/icons/deepin/builtin/icons/install.svg") : QIcon(":/icons/deepin/builtin/icons/update-btn.svg"));
+    m_IsInstall = install;
+    setBtnIcon();
     this->setLayout(hLayout);
     // bug134379 驱动更新/安装按钮，悬浮框提示
     mp_Btn->setToolTip(install ? QObject::tr("Intall") : QObject::tr("Update"));
     // 处理信号逻辑
     connect(mp_Btn, &DIconButton::clicked, this, &DriverOperationItem::clicked);
+
+    // 切换主题
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
+        setBtnIcon();
+    });
 }
 
 void DriverOperationItem::setBtnEnable(bool enable)
 {
     mp_Btn->setEnabled(enable);
+}
+
+void DriverOperationItem::setBtnIcon()
+{
+    DGuiApplicationHelper::ColorType theme = DGuiApplicationHelper::instance()->themeType();
+    if (DGuiApplicationHelper::DarkType == theme) {
+        if (m_IsInstall) {
+            mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/icons/install_dark.svg"));
+        } else {
+            mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/icons/reinstall_dark.svg"));
+        }
+    } else {
+        if (m_IsInstall) {
+            mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/icons/install.svg"));
+        } else {
+            mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/icons/update-btn.svg"));
+        }
+    }
 }
 
 void DriverOperationItem::enterEvent(QEvent *event)

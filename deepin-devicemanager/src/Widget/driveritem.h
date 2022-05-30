@@ -178,6 +178,9 @@ class DriverOperationItem : public DWidget
 public:
     explicit DriverOperationItem(DWidget *parent = nullptr, bool install = true);
     void setBtnEnable(bool enable);
+
+    // 设置Btn  Icon
+    void setBtnIcon();
 protected:
     void enterEvent(QEvent *event) override;
     void leaveEvent(QEvent *event) override;
@@ -185,6 +188,7 @@ signals:
     void clicked(bool checked = false);
 private:
     DToolButton  *mp_Btn;
+    bool          m_IsInstall;   // 是否是安装
 };
 
 #endif // DRIVERITEM_H
