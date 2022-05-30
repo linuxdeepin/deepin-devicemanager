@@ -126,10 +126,10 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
 
 void PageDriverTableView::initWidgets()
 {
-    this->setFixedHeight(DRIVER_TABLE_HEADER_HEIGHT + 8);
+    this->setFixedHeight(DRIVER_TABLE_HEADER_HEIGHT + 5);
     setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    mainLayout->setContentsMargins(5, 2, 5, 5);
+    mainLayout->setContentsMargins(6, 2, 6, 0);
     mainLayout->addWidget(mp_View);
     mainLayout->addStretch();
     this->setLayout(mainLayout);

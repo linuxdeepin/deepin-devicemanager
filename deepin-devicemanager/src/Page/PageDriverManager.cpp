@@ -385,13 +385,15 @@ void PageDriverManager::initScrollArea(DScrollArea *area)
     DWidget *frame = new DWidget(this);
     frame->setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *frameLayout = new QVBoxLayout();
-    frameLayout->setSpacing(12);
+    frameLayout->setSpacing(8);
     frameLayout->setContentsMargins(0,0,0,0);
 
     frameLayout->addWidget(mp_InstallLabel);
     frameLayout->addWidget(mp_ViewNotInstall);
+    frameLayout->addSpacing(8);
     frameLayout->addWidget(mp_UpdateLabel);
     frameLayout->addWidget(mp_ViewCanUpdate);
+    frameLayout->addSpacing(8);
     frameLayout->addWidget(mp_LabelIsNew);
     frameLayout->addWidget(mp_AllDriverIsNew);
 

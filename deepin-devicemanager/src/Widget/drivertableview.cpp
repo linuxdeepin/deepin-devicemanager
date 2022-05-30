@@ -653,10 +653,8 @@ void DriverTableView::drawRow(QPainter *painter, const QStyleOptionViewItem &opt
 
     // 绘制背景色
     QPainterPath path;
-    QRect rowRect { options.rect.x() - header()->offset(),
-                    options.rect.y() + 1,
-                    header()->length() - header()->sectionPosition(0),
-                    options.rect.height() - 2 };
+    margin = 0;
+    QRect rowRect = options.rect;
     rowRect.setX(rowRect.x() + margin);
     rowRect.setWidth(rowRect.width() - margin);
 

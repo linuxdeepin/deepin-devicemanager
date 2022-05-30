@@ -107,6 +107,7 @@ DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
 
     QVBoxLayout *vLayout = new QVBoxLayout();
     vLayout->setContentsMargins(0, 0, 0, 0);
+    vLayout->addSpacing(3);
     vLayout->setSpacing(0);
     vLayout->addWidget(mp_Type);
     vLayout->addWidget(mp_Name);
