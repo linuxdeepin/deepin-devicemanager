@@ -246,7 +246,7 @@ DriverOperationItem::DriverOperationItem(DWidget *parent, bool install)
     setBtnIcon();
     this->setLayout(hLayout);
     // bug134379 驱动更新/安装按钮，悬浮框提示
-    mp_Btn->setToolTip(install ? QObject::tr("Intall") : QObject::tr("Update"));
+    mp_Btn->setToolTip(install ? QObject::tr("Install") : QObject::tr("Update"));
     // 处理信号逻辑
     connect(mp_Btn, &DIconButton::clicked, this, &DriverOperationItem::clicked);
 

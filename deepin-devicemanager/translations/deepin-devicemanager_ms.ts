@@ -19,25 +19,17 @@
 <context>
     <name>CommonTools</name>
     <message>
-        <source>EC_4</source>
-        <translation type="vanished">EC_4</translation>
-    </message>
-    <message>
-        <source>EC_5</source>
-        <translation type="vanished">EC_5</translation>
-    </message>
-    <message>
-        <location filename="../src/Tool/commontools.cpp" line="64"/>
+        <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>EC_NOTIFY_NETWORK</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="65"/>
+        <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>EC_REINSTALL</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="66"/>
+        <location filename="../src/Tool/commontools.cpp" line="68"/>
         <source>EC_6</source>
         <translation>EC_6</translation>
     </message>
@@ -1811,27 +1803,27 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="143"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="144"/>
         <source>Failed to enable the device</source>
         <translation>Gagal membenarkan peranti</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="146"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="147"/>
         <source>Failed to disable the device</source>
         <translation>Gagal melumpuhkan peranti</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="151"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="152"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Gagal melumpuhkannya: Gagal mendapatkan SN peranti</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="173"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="174"/>
         <source>Update Drivers</source>
         <translation>Kemas Kini Pemacu</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="191"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="192"/>
         <source>Uninstall Drivers</source>
         <translation>Nyahpasang Pemacu</translation>
     </message>
@@ -2923,7 +2915,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="908"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="936"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="972"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="509"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="501"/>
         <source>Display Adapter</source>
         <translation>Penyesuai Paparan</translation>
     </message>
@@ -2956,7 +2948,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="910"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="518"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="510"/>
         <source>Network Adapter</source>
         <translation>Penyesuai Rangkaian</translation>
     </message>
@@ -2973,7 +2965,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="911"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="939"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="975"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="512"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="504"/>
         <source>Sound Adapter</source>
         <translation>Penyesuai Bunyi</translation>
     </message>
@@ -2990,7 +2982,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="912"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="940"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="976"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="515"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="507"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
@@ -3039,7 +3031,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="915"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="943"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="979"/>
-        <location filename="../src/Tool/commontools.cpp" line="29"/>
+        <location filename="../src/Tool/commontools.cpp" line="31"/>
         <source>Keyboard</source>
         <translation>Papan Kekunci</translation>
     </message>
@@ -3056,7 +3048,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="916"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="944"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
-        <location filename="../src/Tool/commontools.cpp" line="31"/>
+        <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Mouse</source>
         <translation>Tetikus</translation>
     </message>
@@ -3073,8 +3065,8 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="917"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="945"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="981"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="524"/>
-        <location filename="../src/Tool/commontools.cpp" line="33"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="516"/>
+        <location filename="../src/Tool/commontools.cpp" line="35"/>
         <source>Printer</source>
         <translation>Pencetak</translation>
     </message>
@@ -3123,7 +3115,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="920"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="948"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="984"/>
-        <location filename="../src/Tool/commontools.cpp" line="35"/>
+        <location filename="../src/Tool/commontools.cpp" line="37"/>
         <source>Other Devices</source>
         <translation>Lain-lain Peranti</translation>
     </message>
@@ -3506,7 +3498,7 @@
         <translation>Pengurus Peranti ialah sebuah alat mudah yang dapat melihat maklumat perkakasan dan mengurus peranti-peranti.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="133"/>
+        <location filename="../src/main.cpp" line="123"/>
         <source>New drivers available! Install or update them now.</source>
         <translation type="unfinished"/>
     </message>
@@ -3521,31 +3513,31 @@
         <translation>Gelintar pemacu dalam laluan ini</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="326"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="327"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="339"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="352"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="351"/>
         <source>Device Name</source>
         <translation>Nama Peranti</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="327"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="328"/>
         <source>Version Available</source>
         <translation>Versi Tersedia</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="328"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="329"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="341"/>
         <source>Size</source>
         <translation>Saiz</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="329"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="330"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="342"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="330"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="331"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="343"/>
         <source>Action</source>
         <translation>Tindakan</translation>
@@ -3556,22 +3548,22 @@
         <translation>Versi Baharu</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="352"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="351"/>
         <source>Current Version</source>
         <translation>Versi Semasa</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="678"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="670"/>
         <source>Missing drivers (%1)</source>
         <translation>Pemacu hilang (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="679"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="671"/>
         <source>Outdated drivers (%1)</source>
         <translation>Pemacu lapuk (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="680"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="672"/>
         <source>Up-to-date drivers (%1)</source>
         <translation>Pemacu terkini (%1)</translation>
     </message>
@@ -3632,179 +3624,189 @@
         <translation>Pemacu anda adalah yang terkini</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="521"/>
         <source>reboot</source>
         <translation>but semula</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="522"/>
         <source>Please %1 for the installed drivers to take effect</source>
         <translation>Sila %1 supaya pemacu yang baru dipasang berkesan</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="499"/>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="253"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="525"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="259"/>
         <source>submit feedback</source>
         <translation>serah maklum balas</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="500"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="526"/>
         <source>Please try again or %1 to us</source>
         <translation>Cuba sekali lagi atau %1 kepada kami</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="503"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="529"/>
         <source>Install All</source>
         <translation>Pasang Semua</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="508"/>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="257"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="534"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="263"/>
         <source>Scan Again</source>
         <translation>Imbas Sekali Lagi</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="513"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="539"/>
         <source>Cancel</source>
         <translation>Batal</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="51"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="52"/>
         <source>Scanning hardware device drivers, please wait...</source>
         <translation>Mengimbas pemacu peranti perkakasan, tunggu sebentar...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="59"/>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="304"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="60"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="310"/>
         <source>Scanning %1</source>
         <translation>Mengimbas %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="113"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="115"/>
         <source>Scan failed</source>
         <translation>Pengimbasan gagal</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="170"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="173"/>
         <source>Network unavailable</source>
         <translation>Rangkaian tidak tersedia</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="174"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="177"/>
         <source>Please check your network connection</source>
         <translation>Sila periksa sambungan rangkaian anda</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="254"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="260"/>
         <source>Please scan again or %1 to us</source>
         <translation>Sila imbas sekali lagi atau %1 kepada kami</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="479"/>
+        <location filename="../src/Page/MainWindow.cpp" line="478"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
         <translation>Anda sedang memasang sebuah pemacu, yang akan terganggu sekiranya anda keluar.</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="481"/>
+        <location filename="../src/Page/MainWindow.cpp" line="479"/>
         <source>Are you sure you want to exit?</source>
         <translation>Anda pasti mahu keluar?</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="484"/>
+        <location filename="../src/Page/MainWindow.cpp" line="481"/>
         <source>Exit</source>
         <comment>button</comment>
         <translation>Keluar</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="485"/>
+        <location filename="../src/Page/MainWindow.cpp" line="482"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Batal</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="26"/>
+        <location filename="../src/Tool/commontools.cpp" line="28"/>
         <source>Bluetooth adapter</source>
         <translation>Penyesuai Bluetooth</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="27"/>
-        <location filename="../src/Tool/commontools.cpp" line="34"/>
+        <location filename="../src/Tool/commontools.cpp" line="29"/>
+        <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Imaging device</source>
         <translation>Peranti pengimejan</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="28"/>
+        <location filename="../src/Tool/commontools.cpp" line="30"/>
         <source>Display adapter</source>
         <translation>Penyesuai paparan</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="30"/>
+        <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Sound card</source>
         <translation>Kad bunyi</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="32"/>
+        <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Network adapter</source>
         <translation>Penyesuai rangkaian</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="36"/>
+        <location filename="../src/Tool/commontools.cpp" line="38"/>
         <source>Wireless network adapter</source>
         <translation>Penyesuai rangkaian tanpa wayar</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="50"/>
+        <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Installation successful</source>
         <translation>Pemasangan berjaya</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="51"/>
+        <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Installation failed</source>
         <translation>Pemasangan gagal</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="52"/>
+        <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Downloading</source>
         <translation>Memuat turun</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="53"/>
+        <location filename="../src/Tool/commontools.cpp" line="55"/>
         <source>Installing</source>
         <translation>Memasang</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="54"/>
+        <location filename="../src/Tool/commontools.cpp" line="56"/>
         <source>Not installed</source>
         <translation>Tidak dipasang</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="55"/>
+        <location filename="../src/Tool/commontools.cpp" line="57"/>
         <source>Out-of-date</source>
         <translation>telah-lapuk</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="56"/>
+        <location filename="../src/Tool/commontools.cpp" line="58"/>
         <source>Waiting</source>
         <translation>Menunggu</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="60"/>
+        <location filename="../src/Tool/commontools.cpp" line="62"/>
         <source>Unknown error</source>
         <translation>Ralat tidak diketahui</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="61"/>
+        <location filename="../src/Tool/commontools.cpp" line="63"/>
         <source>Network error</source>
         <translation>Ralat rangkaian</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="62"/>
+        <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>Canceled</source>
         <translation>Dibatalkan</translation>
     </message>
     <message>
-        <location filename="../src/Tool/commontools.cpp" line="63"/>
+        <location filename="../src/Tool/commontools.cpp" line="65"/>
         <source>Failed to get driver files</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/Widget/driveritem.cpp" line="249"/>
+        <source>Update</source>
+        <translation>Kemas kini</translation>
+    </message>
+    <message>
+        <location filename="../src/Widget/driveritem.cpp" line="249"/>
+        <source>Install</source>
         <translation type="unfinished"/>
     </message>
 </context>

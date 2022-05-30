@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="en">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="en">
 <context>
     <name>BtnLabel</name>
     <message>
@@ -1554,7 +1552,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="111"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Device Info</translation>
     </message>
     <message>
@@ -3505,17 +3503,6 @@
         <translation>New drivers available! Install or update them now.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="126"/>
-        <source>您有驱动可进行安装/更新</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main.cpp" line="128"/>
-        <location filename="../src/main.cpp" line="130"/>
-        <source>您有驅動可進行安裝/更新</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="10"/>
         <source>Include subfolders</source>
         <translation>Include subfolders</translation>
@@ -3814,13 +3801,13 @@
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
-        <source>Intall</source>
-        <translation type="unfinished"></translation>
+        <source>Update</source>
+        <translation>Update</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
-        <source>Update</source>
-        <translation type="unfinished">Update</translation>
+        <source>Install</source>
+        <translation>Install</translation>
     </message>
 </context>
 <context>

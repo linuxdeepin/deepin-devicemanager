@@ -49,7 +49,7 @@ void notify(int argc, char *argv[]);
 int main(int argc, char *argv[])
 {
     // /usr/bin/devicemanager notify
-    if (argc > 2 && QString(argv[1]).contains("notify")){
+    if (argc > 2 && QString(argv[1]).contains("notify")) {
         notify(argc, argv);
         return -1;
     }
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
             parser.process(app);
 
             QVariant var = "";
-            if(parser.positionalArguments().size() > 0){
+            if (parser.positionalArguments().size() > 0) {
                 var = parser.positionalArguments().at(0);
             }
             qInfo() << var;
@@ -122,12 +122,12 @@ void notify(int argc, char *argv[])
     // 2. 加载翻译文件
     QString body = QObject::tr("New drivers available! Install or update them now.");
     QString l = QString(argv[2]);
-    if("zh_CN" == l){
-        body = QObject::tr("您有驱动可进行安装/更新");
-    }else if("zh_HK" == l){
-        body = QObject::tr("您有驅動可進行安裝/更新");
-    }else if("zh_TW" == l){
-        body = QObject::tr("您有驅動可進行安裝/更新");
+    if ("zh_CN" == l) {
+        body = QString("您有驱动可进行安装/更新");
+    } else if ("zh_HK" == l) {
+        body = QString("您有驅動可進行安裝/更新");
+    } else if ("zh_TW" == l) {
+        body = QString("您有驅動可進行安裝/更新");
     }
 
     // 3. create interface
@@ -146,7 +146,7 @@ void notify(int argc, char *argv[])
     int timeout = 3000;
 
     int count = 0;
-    while (count < 10){
+    while (count < 10) {
         QDBusReply<uint32_t> reply  = mp_Iface->call("Notify", appname, replaces_id, appicon, title, body, actionlist, hints, timeout);
         if (reply.isValid()) {
             return;
