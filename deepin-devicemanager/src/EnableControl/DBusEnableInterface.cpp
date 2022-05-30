@@ -11,6 +11,7 @@ std::mutex DBusEnableInterface::m_mutex;
 
 const QString SERVICE_NAME = "com.deepin.devicemanager";
 const QString ENABLE_SERVICE_PATH = "/com/deepin/enablemanager";
+const QString ENABLE_SERVICE_INTER = "com.deepin.enablemanager";
 
 DBusEnableInterface::DBusEnableInterface()
     : mp_Iface(nullptr)
@@ -31,7 +32,7 @@ bool DBusEnableInterface::getRemoveInfo(QString &info)
     }
 }
 
-bool DBusEnableInterface::getAuthorizedInfo(QString& info)
+bool DBusEnableInterface::getAuthorizedInfo(QString &info)
 {
     QDBusReply<QString> reply = mp_Iface->call("getAuthorizedInfo");
     if (reply.isValid()) {
@@ -43,7 +44,7 @@ bool DBusEnableInterface::getAuthorizedInfo(QString& info)
     }
 }
 
-bool DBusEnableInterface::isDeviceEnabled(const QString& unique_id)
+bool DBusEnableInterface::isDeviceEnabled(const QString &unique_id)
 {
     QDBusReply<bool> reply = mp_Iface->call("isDeviceEnabled", unique_id);
     if (reply.isValid()) {
@@ -52,7 +53,7 @@ bool DBusEnableInterface::isDeviceEnabled(const QString& unique_id)
     return false;
 }
 
-bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device, const QString& strDriver)
+bool DBusEnableInterface::enable(const QString &hclass, const QString &name, const QString &path, const QString &value, bool enable_device, const QString &strDriver)
 {
     QDBusReply<bool> reply = mp_Iface->call("enable", hclass, name, path, value, enable_device, strDriver);
     if (reply.isValid()) {
@@ -61,7 +62,7 @@ bool DBusEnableInterface::enable(const QString& hclass, const QString& name, con
     return false;
 }
 
-bool DBusEnableInterface::enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device)
+bool DBusEnableInterface::enablePrinter(const QString &hclass, const QString &name, const QString &path, bool enable_device)
 {
     QDBusReply<bool> reply = mp_Iface->call("enablePrinter", hclass, name, path, enable_device);
     if (reply.isValid()) {
@@ -80,5 +81,5 @@ void DBusEnableInterface::init()
     }
 
     // 2. create interface
-    mp_Iface = new QDBusInterface(SERVICE_NAME, ENABLE_SERVICE_PATH, "", QDBusConnection::systemBus());
+    mp_Iface = new QDBusInterface(SERVICE_NAME, ENABLE_SERVICE_PATH, ENABLE_SERVICE_INTER, QDBusConnection::systemBus());
 }
