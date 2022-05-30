@@ -430,6 +430,11 @@ bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
         return false;
     }
 
+    // 英伟达驱动无法获取驱动模块，但是不属于核内驱动
+    if("nvidia" == driver){
+        return false;
+    }
+
     QString info = "";
     QProcess process;
 
