@@ -61,12 +61,12 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
                 // 先判断是否100
                 int progress = m_pTrans->progress();
                 if(progress == 100){
-                    if(!isNetworkOnline()){
+                    if(!isNetworkOnline() || 4 == m_pTrans->error()){
                         emit this->errorOccurred(EC_NETWORK);
                     }else{
                         emit this->installProgressFinished(true);
                     }
-                } else if(!isNetworkOnline()){ // 先判断网络是否异常
+                } else if(!isNetworkOnline() || 4 == m_pTrans->error()){ // 先判断网络是否异常
                     emit this->errorOccurred(EC_NETWORK);
                 }else{
                     if( 6 == m_pTrans->error()){
