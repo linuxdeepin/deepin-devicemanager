@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <QProcess>
+#include <QNetworkConfigurationManager>
 
 #include <QApt/Backend>
 #include <QApt/DebFile>
@@ -49,19 +50,32 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
     }
 
     connect(m_pTrans, &QApt::Transaction::finished, this, [ = ](QApt::ExitStatus status) {
-        Q_UNUSED(status)
         if (m_pTrans) {
-            QApt::DownloadProgress dp = this->m_pTrans->downloadProgress();
-
-            // 通过判断文件本身大小和已经下载的大小是否一直判断是否取消
-            quint64 file_size = dp.fileSize();
-            quint64 fetched_size = dp.fetchedSize();
-            if (m_pTrans->property("isCancelled").toBool() && file_size > fetched_size) {
+            if(QApt::ExitSuccess == status){
+                // 成功，直接发送成功信号
+                emit this->installProgressFinished(true);
+            }else if(QApt::ExitCancelled == status){
+                // 取消安装
                 emit this->errorOccurred(EC_CANCEL);
-            } else {
-                emit this->installProgressFinished(QApt::Success == m_pTrans->error());
+            }else {
+                // 先判断是否100
+                int progress = m_pTrans->progress();
+                if(progress == 100){
+                    if(!isNetworkOnline()){
+                        emit this->errorOccurred(EC_NETWORK);
+                    }else{
+                        emit this->installProgressFinished(true);
+                    }
+                } else if(!isNetworkOnline()){ // 先判断网络是否异常
+                    emit this->errorOccurred(EC_NETWORK);
+                }else{
+                    if( 6 == m_pTrans->error()){
+                        emit this->errorOccurred(EC_NOTFOUND); //没有指定版本的驱动包
+                    }else{
+                        emit this->errorOccurred(EC_NULL);
+                    }
+                }
             }
-
             m_pTrans->disconnect(this);
             m_pTrans->deleteLater();
         }
@@ -73,17 +87,6 @@ void DriverInstaller::doOperate(const QString &package, const QString &version, 
     connect(m_pTrans, &QApt::Transaction::statusChanged, this, &DriverInstaller::slotStatusChanged);
     connect(m_pTrans, &QApt::Transaction::progressChanged, this, &DriverInstaller::slotProgressChanged);
     qRegisterMetaType<QApt::ErrorCode>("QApt::ErrorCode");
-    connect(m_pTrans, &QApt::Transaction::errorOccurred, this, [ = ](QApt::ErrorCode error) {
-        m_pTrans->disconnect(this);
-        m_pTrans->deleteLater();
-        if(5 == error)
-            emit this->errorOccurred(EC_NETWORK);
-        else if(6 == error)
-            emit this->errorOccurred(EC_NOTFOUND); //没有指定版本的驱动包
-        else
-            emit this->errorOccurred(EC_NULL);
-    });
-
     m_pTrans->run();
 }
 
@@ -223,4 +226,10 @@ void DriverInstaller::slotProgressChanged(int progress)
             emit installProgressChanged(iProcess);
         }
     }
+}
+
+bool DriverInstaller::isNetworkOnline()
+{
+    QNetworkConfigurationManager mgr;
+    return mgr.isOnline();
 }

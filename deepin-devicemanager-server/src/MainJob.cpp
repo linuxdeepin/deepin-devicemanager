@@ -35,7 +35,8 @@ const QString ENABLE_SERVICE_PATH = "/com/deepin/enablemanager";
 const QString WAKEUP_SERVICE_PATH = "/com/deepin/wakeupmanager";
 bool  MainJob::s_ServerIsUpdating = false;
 bool  MainJob::s_ClientIsUpdating = false;
-const QString DRIVER_REPO_PATH = "/etc/apt/sources.list.d/devicemanager.list";
+const QString DEVICE_REPO_PATH = "/etc/apt/sources.list.d/devicemanager.list";
+const QString DRIVER_REPO_PATH = "/etc/apt/sources.list.d/driver.list";
 
 MainJob::MainJob(QObject *parent)
     : QObject(parent)
@@ -206,8 +207,21 @@ bool MainJob::initDBus()
 
 void MainJob::initDriverRepoSource()
 {
-    QFile file(DRIVER_REPO_PATH);
-    if(QFile::exists(DRIVER_REPO_PATH)){
+    QFile fileDriver(DRIVER_REPO_PATH);
+    if(fileDriver.open(QIODevice::ReadOnly)){
+        QString info = fileDriver.readAll();
+        QStringList lines = info.split("\n");
+        foreach (QString line, lines) {
+            if(line.contains("pro-driver-packages")){
+                fileDriver.close();
+                return;
+            }
+        }
+        fileDriver.close();
+    }
+
+    QFile file(DEVICE_REPO_PATH);
+    if(QFile::exists(DEVICE_REPO_PATH)){
         return;
     }
     if(!file.open(QIODevice::ReadWrite| QIODevice::Text)){

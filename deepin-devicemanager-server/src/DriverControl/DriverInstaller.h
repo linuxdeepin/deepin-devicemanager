@@ -58,6 +58,9 @@ signals:
     void installProgressFinished(bool bsuccess);
 
 private:
+    bool isNetworkOnline();
+
+private:
     QApt::Backend *m_backend = nullptr;
     QApt::Transaction *m_pTrans = nullptr;
     bool m_bValid = false;
