@@ -23,6 +23,7 @@
 #define DRIVERSCANWIDGET_H
 
 #include <DWidget>
+#include <DFrame>
 #include <DLabel>
 #include <DProgressBar>
 #include <DSuggestButton>
@@ -32,7 +33,7 @@
 DWIDGET_USE_NAMESPACE
 
 class AnimationLabel;
-class DriverScanWidget : public DWidget
+class DriverScanWidget : public DFrame
 {
     Q_OBJECT
 public:

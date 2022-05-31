@@ -18,7 +18,7 @@
 #define SPACE_15       15
 
 DriverScanWidget::DriverScanWidget(DWidget *parent)
-    : DWidget(parent)
+    : DFrame(parent)
     , mp_ScanningPicLabel(new AnimationLabel(this))
     , mp_ErrPicLabel(new AnimationLabel(this))
     , mp_ScanningLabel(new DLabel(this))
@@ -257,6 +257,13 @@ void DriverScanWidget::initUI()
     DApplicationHelper::instance()->setPalette(mp_ScanningInfoLabel, pa);
     mp_ScanningInfoLabel->setElideMode(Qt::ElideRight);
 
+    // 切换主题
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
+        DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+        plt.setColor(DPalette::Text, plt.color(DPalette::TextTips));
+        mp_ScanningInfoLabel->setPalette(plt);
+    });
+
     // 反馈Label
     QString feedbackStr = QString("<a style=\"text-decoration:none\" href=\"submit feedback\">") + QObject::tr("submit feedback") + "</a>";
     mp_FeedBackLabel->setText(QObject::tr("Please scan again or %1 to us").arg(feedbackStr));
@@ -346,5 +353,5 @@ void DriverScanWidget::paintEvent(QPaintEvent *event)
 
     painter.restore();
 
-    DWidget::paintEvent(event);
+    DFrame::paintEvent(event);
 }

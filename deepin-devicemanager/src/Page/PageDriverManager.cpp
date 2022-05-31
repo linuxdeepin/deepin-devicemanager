@@ -86,9 +86,9 @@ void PageDriverManager::addDriverInfo(DriverInfo *info)
 
 bool PageDriverManager::isFirstScan()
 {
-    if(m_IsFirstScan)
+    if (m_IsFirstScan)
         return true;
-    if(m_Scanning || networkIsOnline())
+    if (m_Scanning || networkIsOnline())
         return false;
     return true;
 }
@@ -151,7 +151,7 @@ void PageDriverManager::slotItemCheckedClicked(int index, bool checked)
 
 void PageDriverManager::slotDownloadProgressChanged(QStringList msg)
 {
-    if(! mp_CurDriverInfo)
+    if (! mp_CurDriverInfo)
         return;
     // 将下载过程时时更新到表格上方的状态里面 qInfo() << "Download ********** " << msg[0] << " , " << msg[1] << " , " << msg[2];
     mp_HeadWidget->setDownloadUI(mp_CurDriverInfo->type(), msg[2], msg[1], mp_CurDriverInfo->size(), msg[0].toInt());
@@ -161,7 +161,7 @@ void PageDriverManager::slotDownloadProgressChanged(QStringList msg)
 
 void PageDriverManager::slotDownloadFinished()
 {
-    if(! mp_CurDriverInfo)
+    if (! mp_CurDriverInfo)
         return;
     mp_CurDriverInfo->m_Status = ST_INSTALL;
     mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
@@ -170,7 +170,7 @@ void PageDriverManager::slotDownloadFinished()
 
 void PageDriverManager::slotInstallProgressChanged(int progress)
 {
-    if(! mp_CurDriverInfo)
+    if (! mp_CurDriverInfo)
         return;
     // 设置表头状态
     mp_HeadWidget->setInstallUI(mp_CurDriverInfo->type(), mp_CurDriverInfo->name(), progress);
@@ -184,7 +184,7 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
 {
     static int successNum = 0;
     static int failedNum = 0;
-    if(! mp_CurDriverInfo)
+    if (! mp_CurDriverInfo)
         return;
 
     // 成功
@@ -192,19 +192,19 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
         successNum += 1;
     } else { // 失败
         // 通知网络错误
-        if(err == EC_NOTIFY_NETWORK){
-            mp_HeadWidget->setNetworkErrorUI("0.00MB/s",0);
+        if (err == EC_NOTIFY_NETWORK) {
+            mp_HeadWidget->setNetworkErrorUI("0.00MB/s", 0);
             return;
         }
 
         // 通知重新安装
-        if(err == EC_REINSTALL){
+        if (err == EC_REINSTALL) {
             DBusDriverInterface::getInstance()->installDriver(mp_CurDriverInfo->packages(), mp_CurDriverInfo->debVersion());
             return;
         }
 
         // 网络错误
-        if (err == EC_NETWORK){
+        if (err == EC_NETWORK) {
             failAllIndex();
             failedNum += m_ListDriverIndex.size();
             m_ListDriverIndex.clear();
@@ -230,7 +230,7 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
         installNextDriver();
     } else {
         // 设置头部显示效果
-        if(successNum > 0){
+        if (successNum > 0) {
             mp_HeadWidget->setInstallSuccessUI(QString::number(successNum), QString::number(failedNum));
         } else {
             mp_HeadWidget->setInstallFailedUI();
@@ -297,7 +297,7 @@ void PageDriverManager::slotScanFinished(ScanResult sr)
 
 void PageDriverManager::slotUndoInstall()
 {
-    if(m_CancelIndex != m_CurIndex){
+    if (m_CancelIndex != m_CurIndex) {
         m_CancelIndex = m_CurIndex;
         DBusDriverInterface::getInstance()->undoInstallDriver();
     }
@@ -308,13 +308,13 @@ void PageDriverManager::initWidget()
     initTable();
 
     QHBoxLayout *mainLayout = new QHBoxLayout();
-    mainLayout->setContentsMargins(10,10,10,10);
+    mainLayout->setContentsMargins(10, 10, 10, 10);
     mainLayout->addWidget(mp_StackWidget);
     this->setLayout(mainLayout);
 
-    DFrame *mainFrame = new DFrame(this);
-    mainFrame->setLineWidth(0);
-    mainFrame->setFrameRounded(true);
+    DriverWidget *mainFrame = new DriverWidget(this);
+//    mainFrame->setLineWidth(0);
+//    mainFrame->setFrameRounded(true);
     initMainFrame(mainFrame);
     mp_StackWidget->addWidget(mp_ScanWidget);
     mp_StackWidget->addWidget(mainFrame);
@@ -352,7 +352,7 @@ void PageDriverManager::initTable()
     mp_AllDriverIsNew->setColumnWidth(0, 508);
 }
 
-void PageDriverManager::initMainFrame(DFrame *mainFrame)
+void PageDriverManager::initMainFrame(DriverWidget *mainFrame)
 {
     QVBoxLayout *vLaout = new QVBoxLayout();
     vLaout->setContentsMargins(20, 20, 20, 20);
@@ -386,7 +386,7 @@ void PageDriverManager::initScrollArea(DScrollArea *area)
     frame->setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *frameLayout = new QVBoxLayout();
     frameLayout->setSpacing(8);
-    frameLayout->setContentsMargins(0,0,0,0);
+    frameLayout->setContentsMargins(0, 0, 0, 0);
 
     frameLayout->addWidget(mp_InstallLabel);
     frameLayout->addWidget(mp_ViewNotInstall);
@@ -685,7 +685,7 @@ void PageDriverManager::showTables()
 
 
     // 显示表头显示的内容
-    const QMap<QString, QString>& overviewMap = DeviceManager::instance()->getDeviceOverview();
+    const QMap<QString, QString> &overviewMap = DeviceManager::instance()->getDeviceOverview();
     if (installLength == 0 && updateLength == 0) {
         mp_HeadWidget->setNoUpdateDriverUI(overviewMap["Overview"]);
     } else {
@@ -753,7 +753,7 @@ void PageDriverManager::removeFromDriverIndex(int index)
 
 void PageDriverManager::failAllIndex()
 {
-    foreach(int index, m_ListDriverIndex){
+    foreach (int index, m_ListDriverIndex) {
         mp_ViewCanUpdate->setItemStatus(index, ST_FAILED);
         mp_ViewNotInstall->setItemStatus(index, ST_FAILED);
 
@@ -767,4 +767,42 @@ bool PageDriverManager::networkIsOnline()
 {
     QNetworkConfigurationManager mgr;
     return mgr.isOnline();
+}
+
+DriverWidget::DriverWidget(DWidget *parent)
+    : DWidget(parent)
+{
+
+}
+
+void DriverWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    painter.save();
+    painter.setRenderHints(QPainter::Antialiasing, true);
+    painter.setOpacity(1);
+    painter.setClipping(true);
+    QRect rect = this->rect();;
+    QPainterPath path;
+    path.addRoundedRect(rect, 8, 8);
+    // 获取调色板
+    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DPalette palette = dAppHelper->applicationPalette();
+
+    // 获取窗口当前的状态,激活，禁用，未激活
+    DPalette::ColorGroup cg;
+    DWidget *wid = DApplication::activeWindow();
+    if (wid /* && wid == this*/)
+        cg = DPalette::Active;
+    else
+        cg = DPalette::Inactive;
+
+    // 开始绘制边框 *********************************************************
+    // 计算绘制区域
+    QBrush bgBrush(palette.color(cg, DPalette::Base));
+    painter.fillPath(path, bgBrush);
+
+    painter.restore();
+
+    DWidget::paintEvent(event);
 }
