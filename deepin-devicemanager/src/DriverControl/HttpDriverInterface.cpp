@@ -12,7 +12,7 @@
 std::atomic<HttpDriverInterface *> HttpDriverInterface::s_Instance;
 std::mutex HttpDriverInterface::m_mutex;
 
-static QString strRepoUrl = "http://drive-pre.uniontech.com/api/v1/drive/search";
+static QString strRepoUrl = "https://driver.uniontech.com/api/v1/drive/search";
 
 HttpDriverInterface::HttpDriverInterface(QObject *parent) : QObject(parent)
 {
