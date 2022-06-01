@@ -47,6 +47,10 @@
 #include <QDBusInterface>
 #include <QNetworkConfigurationManager>
 
+#include <fstream>
+#include <string>
+#include <vector>
+
 
 #define SD_KEY_excat    "excat"
 #define SD_KEY_ver      "version"
@@ -555,8 +559,47 @@ void DriverManager::getMapInfoFromHwinfo(const QString &info, QMap<QString, QStr
 
 bool DriverManager::isNetworkOnline()
 {
-    QNetworkConfigurationManager mgr;
-    return mgr.isOnline();
+    /*
+       -c 2（代表ping次数，ping 2次后结束ping操作） -w 2（代表超时时间，2秒后结束ping操作）
+    */
+ // system("ping www.google.com -c 2 -w 2 >netlog.bat");
+    system("ping www.baidu.com -c 2 -w 2 >netlog.bat");
+    sleep(2);
+
+    //把文件一行一行读取放入vector
+    std::ifstream infile;
+    infile.open("netlog.bat");
+    string s;
+    std::vector<string> v;
+    while(infile)
+    {
+        getline(infile,s);
+        if(infile.fail())
+            break;
+        v.push_back(s);
+    }
+    infile.close();
+
+    //读取倒数第二行 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+    if (v.size() > 1)
+    {
+        string data = v[v.size()-2];
+        int iPos = data.find("received,");
+        if (iPos != -1 )
+        {
+            data = data.substr(iPos+10,3);//截取字符串返回packet loss
+            int  n = atoi(data.c_str());
+            if(n == 0)
+             return 1;
+            else
+            return 0 ;
+        }else{
+            return 0;
+        }
+
+    }else{
+        return 0;
+    }
 }
 
 bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QString> &mapInfo)
