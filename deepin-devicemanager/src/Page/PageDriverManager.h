@@ -124,7 +124,7 @@ private:
     /**
      * @brief initMainFrame
      */
-    void initMainFrame(DriverWidget *mainFrame);
+    void initMainFrame(DFrame *mainFrame);
 
     /**
      * @brief initHeadWidget 初始化表头编辑
@@ -222,17 +222,6 @@ private:
     bool                m_IsFirstScan = true;
     bool                m_Scanning = false;
 
-};
-
-
-class DriverWidget: public DWidget
-{
-    Q_OBJECT
-public:
-    explicit DriverWidget(DWidget *parent = nullptr);
-
-protected:
-    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif // PAGEDRIVERMANAGER_H

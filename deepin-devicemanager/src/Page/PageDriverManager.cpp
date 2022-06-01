@@ -312,8 +312,8 @@ void PageDriverManager::initWidget()
     mainLayout->addWidget(mp_StackWidget);
     this->setLayout(mainLayout);
 
-    DriverWidget *mainFrame = new DriverWidget(this);
-//    mainFrame->setLineWidth(0);
+    DFrame *mainFrame = new DFrame(this);
+    mainFrame->setLineWidth(0);
 //    mainFrame->setFrameRounded(true);
     initMainFrame(mainFrame);
     mp_StackWidget->addWidget(mp_ScanWidget);
@@ -352,7 +352,7 @@ void PageDriverManager::initTable()
     mp_AllDriverIsNew->setColumnWidth(0, 508);
 }
 
-void PageDriverManager::initMainFrame(DriverWidget *mainFrame)
+void PageDriverManager::initMainFrame(DFrame *mainFrame)
 {
     QVBoxLayout *vLaout = new QVBoxLayout();
     vLaout->setContentsMargins(20, 20, 20, 20);
@@ -767,42 +767,4 @@ bool PageDriverManager::networkIsOnline()
 {
     QNetworkConfigurationManager mgr;
     return mgr.isOnline();
-}
-
-DriverWidget::DriverWidget(DWidget *parent)
-    : DWidget(parent)
-{
-
-}
-
-void DriverWidget::paintEvent(QPaintEvent *event)
-{
-    QPainter painter(this);
-    painter.save();
-    painter.setRenderHints(QPainter::Antialiasing, true);
-    painter.setOpacity(1);
-    painter.setClipping(true);
-    QRect rect = this->rect();;
-    QPainterPath path;
-    path.addRoundedRect(rect, 8, 8);
-    // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
-    DPalette palette = dAppHelper->applicationPalette();
-
-    // 获取窗口当前的状态,激活，禁用，未激活
-    DPalette::ColorGroup cg;
-    DWidget *wid = DApplication::activeWindow();
-    if (wid /* && wid == this*/)
-        cg = DPalette::Active;
-    else
-        cg = DPalette::Inactive;
-
-    // 开始绘制边框 *********************************************************
-    // 计算绘制区域
-    QBrush bgBrush(palette.color(cg, DPalette::Base));
-    painter.fillPath(path, bgBrush);
-
-    painter.restore();
-
-    DWidget::paintEvent(event);
 }

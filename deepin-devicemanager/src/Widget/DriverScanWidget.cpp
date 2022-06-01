@@ -234,6 +234,7 @@ void DriverScanWidget::slotReDetected()
 
 void DriverScanWidget::initUI()
 {
+    this->setLineWidth(0);
     // 设置动画关键帧
     mp_ScanningPicLabel->setImageList(QStringList() << ":/icons/deepin/builtin/icons/animation/0.png"
                                       << ":/icons/deepin/builtin/icons/animation/1.png"
