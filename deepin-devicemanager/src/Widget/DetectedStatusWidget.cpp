@@ -52,6 +52,13 @@ DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
     initConnect();
 }
 
+DetectedStatusWidget::~DetectedStatusWidget()
+{
+    DELETE_PTR(mp_HLayoutTotal);
+    DELETE_PTR(mp_HLayoutButton);
+    DELETE_PTR(mp_VLayoutLabel);
+}
+
 void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString &model, bool hasInstall)
 {
     hideAll();

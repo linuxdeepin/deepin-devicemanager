@@ -55,6 +55,7 @@ public:
 
     explicit DetectedStatusWidget(QWidget *parent = nullptr);
 
+    ~DetectedStatusWidget();
     /**
      * @brief setDetectFinishUI: 检测结束头部UI
      * @param size 可安装更新的驱动个数
