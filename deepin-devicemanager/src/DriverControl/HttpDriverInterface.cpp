@@ -164,13 +164,11 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
     }
 
     // 找到最优选择
-    int index = -1;
+    int index = 0;
     int res_out = 0;
     for (int i = 0; i < lstDriverInfo.size(); i++) {
         if (max == lstDriverInfo[i].iLevel) {
             // 选中第一个最优等级的index
-            if (index < 0)
-                index = i;
             int res = packageInstall(lstDriverInfo[i].strPackages, lstDriverInfo[i].strDebVersion);
             if (res > 0) {
                 res_out = res;

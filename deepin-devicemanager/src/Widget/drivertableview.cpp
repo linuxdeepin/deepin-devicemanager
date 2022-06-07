@@ -238,8 +238,9 @@ void DriverHeaderView::paintEvent(QPaintEvent *event)
     QStyleOptionHeader option;
     initStyleOption(&option);
     int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
+    int margin = 1;
 
-    QRect rect = viewport()->rect();
+    QRect rect = QRect(viewport()->rect().x()+margin,viewport()->rect().y()+margin,viewport()->rect().width()-margin*2,viewport()->rect().height()-margin*2);
     QRectF clipRect(rect.x(), rect.y(), rect.width(), rect.height() * 2);
     QRectF subRect(rect.x(), rect.y() + rect.height(), rect.width(), rect.height());
     QPainterPath clipPath, subPath;
@@ -599,6 +600,9 @@ void DriverTableView::paintEvent(QPaintEvent *event)
 
     // 计算绘制背景色有问题
     QRect rect = viewport()->rect();
+    int hMargin = 1; // 水平方向的内边距
+    rect.setX(rect.x()+hMargin);
+    rect.setWidth(rect.width()-hMargin*2);
     QPainterPath clipPath = getTopRadiusPath(rect);
 
     // 填充背景色
@@ -631,7 +635,7 @@ void DriverTableView::drawRow(QPainter *painter, const QStyleOptionViewItem &opt
         return;
     // 圆角以及边距
     auto radius = style->pixelMetric(DStyle::PM_FrameRadius, &options);
-    auto margin = style->pixelMetric(DStyle::PM_ContentsMargins, &options) - 4;
+    auto margin = 6;
 
     // modify background color acorrding to UI designer
     DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
@@ -653,7 +657,6 @@ void DriverTableView::drawRow(QPainter *painter, const QStyleOptionViewItem &opt
 
     // 绘制背景色
     QPainterPath path;
-    margin = 0;
     QRect rowRect = options.rect;
     rowRect.setX(rowRect.x() + margin);
     rowRect.setWidth(rowRect.width() - margin);
@@ -709,6 +712,3 @@ QPainterPath DriverTableView::getTopRadiusPath(const QRect &rect)
     path.lineTo(QPoint(rect.bottomRight().x() - radius, rect.bottomRight().y()));
     return path;
 }
-
-
-

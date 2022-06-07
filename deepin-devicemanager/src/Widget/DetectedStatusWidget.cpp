@@ -87,7 +87,7 @@ void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString 
 
     mp_HLayoutButton->addStretch();
     mp_HLayoutButton->addWidget(mp_ReDetectedIconButton);
-    mp_HLayoutButton->addSpacing(10);
+    mp_HLayoutButton->addSpacing(SPACE_10);
     mp_HLayoutButton->addWidget(mp_InstallButton);
     mp_HLayoutTotal->addLayout(mp_HLayoutButton);
 
@@ -222,7 +222,7 @@ void DetectedStatusWidget::setInstallSuccessUI(const QString &success, const QSt
 //    mp_InstallButton->setEnabled(false);
     mp_HLayoutButton->addStretch();
     mp_HLayoutButton->addWidget(mp_ReDetectedIconButton);
-    mp_HLayoutButton->addSpacing(SPACE_15);
+    mp_HLayoutButton->addSpacing(SPACE_10);
     mp_HLayoutButton->addWidget(mp_InstallButton);
     mp_HLayoutTotal->addLayout(mp_HLayoutButton);
 
@@ -262,7 +262,7 @@ void DetectedStatusWidget::setInstallFailedUI()
 
     mp_HLayoutButton->addStretch();
     mp_HLayoutButton->addWidget(mp_ReDetectedIconButton);
-    mp_HLayoutButton->addSpacing(SPACE_15);
+    mp_HLayoutButton->addSpacing(SPACE_10);
     mp_HLayoutButton->addWidget(mp_InstallButton);
     mp_HLayoutTotal->addLayout(mp_HLayoutButton);
 

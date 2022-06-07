@@ -105,7 +105,7 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
     }
 
     // 设置Widget固定高度,(+1)表示包含表头高度,(*2)表示上下边距，为保证treewidget横向滚动条与item不重叠，添加滚动条高度
-    QRect rect  = this->rect();
+    QRect rect  = QRect(this->rect().x(), this->rect().y(), this->rect().width(), this->rect().height()-2);
 
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
@@ -126,10 +126,10 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
 
 void PageDriverTableView::initWidgets()
 {
-    this->setFixedHeight(DRIVER_TABLE_HEADER_HEIGHT + 5);
+    this->setFixedHeight(DRIVER_TABLE_HEADER_HEIGHT);
     setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    mainLayout->setContentsMargins(6, 2, 6, 0);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->addWidget(mp_View);
     mainLayout->addStretch();
     this->setLayout(mainLayout);

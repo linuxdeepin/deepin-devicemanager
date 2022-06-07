@@ -595,7 +595,7 @@ void PageDriverManager::testScanDevices()
     info->m_DriverName = "deepin-defender";
     info->m_Packages = "deepin-defender";
     info->m_DebVersion = "3.0.21-1";
-    addDriverInfo(info);
+//    addDriverInfo(info);
 
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (update)";
@@ -606,7 +606,7 @@ void PageDriverManager::testScanDevices()
     info->m_DriverName = "deepin-system-monitor";
     info->m_Packages = "deepin-system-monitor";
     info->m_DebVersion = "5.8.17-1";
-    addDriverInfo(info);
+//    addDriverInfo(info);
 
     info = new DriverInfo();
     info->m_Name = "GeFore RTX30 Series (update)";
