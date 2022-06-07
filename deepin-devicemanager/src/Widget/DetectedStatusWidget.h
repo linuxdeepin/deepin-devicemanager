@@ -119,12 +119,6 @@ public:
      */
     void setInstallBtnEnable(bool enable);
 
-    /**
-     * @brief setSgBtnIcon 根据主题设置图片
-     */
-    void setSgBtnIcon();
-
-
 signals:
     void redetected();
     void installAll();

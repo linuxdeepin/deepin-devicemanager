@@ -250,11 +250,6 @@ DriverOperationItem::DriverOperationItem(DWidget *parent, bool install)
     mp_Btn->setToolTip(install ? QObject::tr("Install") : QObject::tr("Update"));
     // 处理信号逻辑
     connect(mp_Btn, &DIconButton::clicked, this, &DriverOperationItem::clicked);
-
-    // 切换主题
-    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
-        setBtnIcon();
-    });
 }
 
 void DriverOperationItem::setBtnEnable(bool enable)
@@ -264,19 +259,10 @@ void DriverOperationItem::setBtnEnable(bool enable)
 
 void DriverOperationItem::setBtnIcon()
 {
-    DGuiApplicationHelper::ColorType theme = DGuiApplicationHelper::instance()->themeType();
-    if (DGuiApplicationHelper::DarkType == theme) {
-        if (m_IsInstall) {
-            mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/icons/install_dark.svg"));
-        } else {
-            mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/icons/reinstall_dark.svg"));
-        }
+    if (m_IsInstall) {
+        mp_Btn->setIcon(QIcon::fromTheme("install"));
     } else {
-        if (m_IsInstall) {
-            mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/icons/install.svg"));
-        } else {
-            mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/icons/update-btn.svg"));
-        }
+        mp_Btn->setIcon(QIcon::fromTheme("update-btn"));
     }
 }
 

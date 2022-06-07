@@ -448,21 +448,6 @@ void DetectedStatusWidget::onUpdateTheme()
     mp_UpdateLabel->setPalette(plt);
     plt.setColor(DPalette::Text, plt.color(DPalette::TextTips));
     mp_ModelLabel->setPalette(plt);
-
-    setSgBtnIcon();
-}
-
-void DetectedStatusWidget::setSgBtnIcon()
-{
-    // 根据主题选择图标风格
-    DGuiApplicationHelper::ColorType theme = DGuiApplicationHelper::instance()->themeType();
-    if (DGuiApplicationHelper::DarkType == theme) {
-        QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/retest_dark.svg"));
-        mp_ReDetectedIconButton->setIcon(icon);
-    } else {
-        QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/retest.svg"));
-        mp_ReDetectedIconButton->setIcon(icon);
-    }
 }
 
 void DetectedStatusWidget::paintEvent(QPaintEvent *event)
@@ -547,7 +532,7 @@ void DetectedStatusWidget::initUI()
     mp_CancelButton->setMinimumWidth(BUTTON_WIDTH);
 
     // 重新检测 IconButton
-    setSgBtnIcon();
+    mp_ReDetectedIconButton->setIcon(QIcon::fromTheme("retest"));
     mp_ReDetectedIconButton->setIconSize(QSize(ICON_BT_SIZE, ICON_BT_SIZE));
     mp_ReDetectedIconButton->setFixedSize(ICON_BT_SIZE, ICON_BT_SIZE);
 
