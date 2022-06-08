@@ -1,6 +1,9 @@
 #include "BtnLabel.h"
 
 #include <DDialog>
+#include <DFontSizeManager>
+#include <DApplicationHelper>
+#include <DApplication>
 
 BtnLabel::BtnLabel(DWidget *parent)
     : DLabel(parent)
@@ -22,6 +25,69 @@ BtnLabel::BtnLabel(DWidget *parent)
 void BtnLabel::setDesc(const QString &txt)
 {
     m_Desc = txt;
+}
+
+void BtnLabel::paintEvent(QPaintEvent* e)
+{
+    DPalette::ColorGroup cg;
+    if (Qt::ApplicationActive == DApplication::applicationState()) {
+        cg = DPalette::Active;
+    } else {
+        cg = DPalette::Inactive;
+    }
+
+    DFontSizeManager::instance()->bind(this, DFontSizeManager::T8);
+    DPalette pa = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+    pa.setColor(DPalette::Text, pa.color(cg, DPalette::TextTips));
+    DApplicationHelper::instance()->setPalette(this, pa);
+
+    return DLabel::paintEvent(e);
+}
+
+
+TipsLabel::TipsLabel(DWidget *parent)
+    : DLabel(parent)
+{
+
+}
+
+void TipsLabel::paintEvent(QPaintEvent* e)
+{
+    DPalette::ColorGroup cg;
+    if (Qt::ApplicationActive == DApplication::applicationState()) {
+        cg = DPalette::Active;
+    } else {
+        cg = DPalette::Inactive;
+    }
+
+    DFontSizeManager::instance()->bind(this, DFontSizeManager::T8);
+    DPalette pa = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+    pa.setColor(DPalette::Text, pa.color(cg, DPalette::TextTips));
+    DApplicationHelper::instance()->setPalette(this, pa);
+
+    return DLabel::paintEvent(e);
+}
+
+TitleLabel::TitleLabel(DWidget *parent)
+    : DLabel(parent)
+{
+    DFontSizeManager::instance()->bind(this, DFontSizeManager::T8);
+}
+
+void TitleLabel::paintEvent(QPaintEvent* e)
+{
+    DPalette::ColorGroup cg;
+    if (Qt::ApplicationActive == DApplication::applicationState()) {
+        cg = DPalette::Active;
+    } else {
+        cg = DPalette::Inactive;
+    }
+
+    DPalette pa = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+    pa.setColor(DPalette::Text, pa.color(cg, DPalette::TextTitle));
+    DApplicationHelper::instance()->setPalette(this, pa);
+
+    return DLabel::paintEvent(e);
 }
 
 

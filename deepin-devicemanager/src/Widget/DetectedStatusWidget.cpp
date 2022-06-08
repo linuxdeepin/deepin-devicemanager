@@ -1,5 +1,6 @@
 #include "DetectedStatusWidget.h"
 #include "commontools.h"
+#include "BtnLabel.h"
 
 #include <DStyle>
 #include <DCommandLinkButton>
@@ -34,9 +35,9 @@ const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.shutdownFront";
 DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
     : DFrame(parent)
     , mp_PicLabel(new DLabel(this))
-    , mp_UpdateLabel(new DLabel(this))
+    , mp_UpdateLabel(new TitleLabel(this))
     , mp_TimeLabel(new DLabel(this))
-    , mp_ModelLabel(new DLabel(this))
+    , mp_ModelLabel(new TipsLabel(this))
     , mp_RebootLabel(new DLabel(this))
     , mp_FeedBackLabel(new DLabel(this))
     , mp_InstallButton(new DSuggestButton(this))
@@ -496,18 +497,12 @@ void DetectedStatusWidget::initUI()
     font.setWeight(FONT_WEIGHT);
     mp_UpdateLabel->setFont(font);
     DFontSizeManager::instance()->bind(mp_UpdateLabel, DFontSizeManager::T5);
-    DPalette pa = DApplicationHelper::instance()->palette(mp_UpdateLabel);
-    pa.setColor(DPalette::Text, pa.color(DPalette::TextTitle));
-    DApplicationHelper::instance()->setPalette(mp_UpdateLabel, pa);
 
     // 检测时间
     DFontSizeManager::instance()->bind(mp_TimeLabel, DFontSizeManager::T8);
 
     // 机器型号
     DFontSizeManager::instance()->bind(mp_ModelLabel, DFontSizeManager::T9);
-    pa = DApplicationHelper::instance()->palette(mp_ModelLabel);
-    pa.setColor(DPalette::Text, pa.color(DPalette::TextTips));
-    DApplicationHelper::instance()->setPalette(mp_ModelLabel, pa);
 
     // 重启Label
     QString rebootStr = QString("<a style=\"text-decoration:none\" href=\"reboot\">") + QObject::tr("reboot") + "</a>";

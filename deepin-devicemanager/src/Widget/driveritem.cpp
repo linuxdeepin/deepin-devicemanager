@@ -71,7 +71,7 @@ DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
     : DWidget(parent)
     , mp_Icon(new DLabel(this))
     , mp_Type(new DLabel(this))
-    , mp_Name(new DLabel(this))
+    , mp_Name(new TipsLabel(this))
     , m_Index(-1)
 {
     mp_Type->setAlignment(Qt::AlignLeft | Qt::AlignBottom);
@@ -83,18 +83,6 @@ DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
     mp_Name->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     mp_Name->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     mp_Name->setElideMode(Qt::ElideRight);
-//    mp_Name->setStyleSheet("background:green;");
-    DFontSizeManager::instance()->bind(mp_Name, DFontSizeManager::T8);
-    DPalette pa = DApplicationHelper::instance()->palette(mp_Name);
-    pa.setColor(DPalette::Text, pa.color(DPalette::TextTips));
-    DApplicationHelper::instance()->setPalette(mp_Name, pa);
-
-    // 切换主题
-    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
-        DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
-        plt.setColor(DPalette::Text, plt.color(DPalette::TextTips));
-        mp_Name->setPalette(plt);
-    });
 
     mp_Icon->setPixmap(QIcon(CommonTools::getDriverPixmap(dt)).pixmap(ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT));
     QString ts = DApplication::translate("QObject", CommonTools::getDriverType(dt).toStdString().data());
@@ -112,7 +100,7 @@ DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
     vLayout->addWidget(mp_Type);
     vLayout->addWidget(mp_Name);
     hLayout->addLayout(vLayout);
-//    hLayout->addSpacing(20);
+    hLayout->addSpacing(15);
 
     this->setLayout(hLayout);
 }
@@ -136,29 +124,18 @@ int DriverNameItem::index()
 
 DriverLabelItem::DriverLabelItem(DWidget *parent,  const QString &txt)
     : DWidget(parent)
-    , mp_Txt(new DLabel(this))
+    , mp_Txt(new TipsLabel(this))
 {
     mp_Txt->setText(txt);
     mp_Txt->setElideMode(Qt::ElideRight);
 
     QVBoxLayout *vLayout = new QVBoxLayout();
+    vLayout->setContentsMargins(1,0,0,0);
     vLayout->addStretch();
     vLayout->addWidget(mp_Txt);
     vLayout->addStretch();
     this->setLayout(vLayout);
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    DFontSizeManager::instance()->bind(mp_Txt, DFontSizeManager::T8);
-
-    DPalette pa = DApplicationHelper::instance()->palette(mp_Txt);
-    pa.setColor(DPalette::Text, pa.color(DPalette::TextTitle));
-    DApplicationHelper::instance()->setPalette(mp_Txt, pa);
-
-    // 切换主题
-    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
-        DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
-        plt.setColor(DPalette::Text, plt.color(DPalette::TextTitle));
-        mp_Txt->setPalette(plt);
-    });
 }
 
 DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
@@ -180,19 +157,6 @@ DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
     hLayout->addWidget(mp_Status);
     hLayout->addStretch();
     this->setLayout(hLayout);
-
-    DFontSizeManager::instance()->bind(mp_Status, DFontSizeManager::T8);
-    DPalette pa = DApplicationHelper::instance()->applicationPalette();
-    pa.setColor(DPalette::Text, pa.color(DPalette::TextTitle));
-    DApplicationHelper::instance()->setPalette(mp_Status, pa);
-
-    // 切换主题
-    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
-        DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
-        plt.setColor(DPalette::Text, plt.color(DPalette::TextTitle));
-        mp_Status->setPalette(plt);
-    });
-
 
     // 初始化图标状态和状态信息
     setStatus(s);

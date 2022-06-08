@@ -33,6 +33,8 @@
 #include <DToolButton>
 
 class BtnLabel;
+class TipsLabel;
+class TitleLabel;
 
 DWIDGET_USE_NAMESPACE
 
@@ -107,7 +109,7 @@ public:
 private:
     DLabel *mp_Icon;
     DLabel *mp_Type;
-    DLabel *mp_Name;
+    TipsLabel *mp_Name;
     int    m_Index;
 
     const int ICON_SIZE_WIDTH = 32;
@@ -125,7 +127,7 @@ class DriverLabelItem : public DWidget
 public:
     explicit DriverLabelItem(DWidget *parent = nullptr,  const QString &txt = "");
 private:
-    DLabel *mp_Txt;
+    TipsLabel *mp_Txt;
 };
 
 

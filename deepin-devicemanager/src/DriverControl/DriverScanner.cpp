@@ -52,7 +52,7 @@ void DriverScanner::run()
 //        emit scanInfo(info->name(), 100);
 //    }
 
-//    usleep(1000);
+//    usleep(100);
 //    emit scanFinished(SR_SUCESS);
 }
 

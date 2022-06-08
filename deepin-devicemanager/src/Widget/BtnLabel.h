@@ -35,9 +35,28 @@ public:
 
 public:
     void setDesc(const QString &txt);
-
+protected:
+    void paintEvent(QPaintEvent* e) override;
 private:
     QString m_Desc;
+};
+
+class TipsLabel : public DLabel
+{
+    Q_OBJECT
+public:
+    explicit TipsLabel(DWidget *parent = nullptr);
+protected:
+    void paintEvent(QPaintEvent* e) override;
+};
+
+class TitleLabel : public DLabel
+{
+    Q_OBJECT
+public:
+    explicit TitleLabel(DWidget *parent = nullptr);
+protected:
+    void paintEvent(QPaintEvent* e) override;
 };
 
 #endif // BTNLABEL_H

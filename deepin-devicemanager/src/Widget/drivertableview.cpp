@@ -123,16 +123,11 @@ void DriverHeaderView::paintSection(QPainter *painter, const QRect &rect, int lo
     painter->setOpacity(1);
 
     DPalette::ColorGroup cg;
-#ifdef ENABLE_INACTIVE_DISPLAY
-    QWidget *wnd = DApplication::activeWindow();
-    if (!wnd) {
-        cg = DPalette::Inactive;
-    } else {
+    if (Qt::ApplicationActive == DApplication::applicationState()) {
         cg = DPalette::Active;
+    } else {
+        cg = DPalette::Inactive;
     }
-#else
-    cg = DPalette::Active;
-#endif
 
     DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
 

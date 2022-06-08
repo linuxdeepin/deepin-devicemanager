@@ -106,6 +106,7 @@ private:
     AnimationLabel  *mp_ScanningPicLabel;    // 扫描图片Label
     DLabel          *mp_ErrPicLabel;          // 扫描出错图片Label
     DLabel          *mp_ScanningLabel;       // 正在扫描文字Label
+    DLabel          *mp_CheckNetworkLabel;   // 请检查网络标签
     DLabel          *mp_FeedBackLabel;       // 反馈Label
     DLabel          *mp_ScanningInfoLabel;   // 扫描信息Label
     DProgressBar    *mp_ScanningProgress;    // 扫描进度条

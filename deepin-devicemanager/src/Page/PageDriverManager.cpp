@@ -362,7 +362,7 @@ void PageDriverManager::initMainFrame(DFrame *mainFrame)
     QHBoxLayout *headerLayout = new QHBoxLayout();
     initHeadWidget(headerLayout);
     vLaout->addLayout(headerLayout);
-    vLaout->addSpacing(15);
+    vLaout->addSpacing(20);
 
     // 下方的可滑动区域
     DScrollArea *area = new DScrollArea(this);
@@ -390,10 +390,10 @@ void PageDriverManager::initScrollArea(DScrollArea *area)
 
     frameLayout->addWidget(mp_InstallLabel);
     frameLayout->addWidget(mp_ViewNotInstall);
-    frameLayout->addSpacing(8);
+    frameLayout->addSpacing(7);
     frameLayout->addWidget(mp_UpdateLabel);
     frameLayout->addWidget(mp_ViewCanUpdate);
-    frameLayout->addSpacing(8);
+    frameLayout->addSpacing(7);
     frameLayout->addWidget(mp_LabelIsNew);
     frameLayout->addWidget(mp_AllDriverIsNew);
 

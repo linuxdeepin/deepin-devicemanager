@@ -22,6 +22,7 @@ DriverScanWidget::DriverScanWidget(DWidget *parent)
     , mp_ScanningPicLabel(new AnimationLabel(this))
     , mp_ErrPicLabel(new AnimationLabel(this))
     , mp_ScanningLabel(new DLabel(this))
+    , mp_CheckNetworkLabel(new DLabel(this))
     , mp_FeedBackLabel(new DLabel(this))
     , mp_ScanningInfoLabel(new DLabel(this))
     , mp_ScanningProgress(new DProgressBar(this))
@@ -175,8 +176,8 @@ void DriverScanWidget::setNetworkErr()
     mp_ScanningLabel->show();
 
     // 请检查网络连接
-    mp_ScanningInfoLabel->setText(QObject::tr("Please check your network connection"));
-    mp_ScanningInfoLabel->show();
+    mp_CheckNetworkLabel->setText(QObject::tr("Please check your network connection"));
+    mp_CheckNetworkLabel->show();
     mp_ReScanButton->show();
 
     // 控件水平居中显示
@@ -191,7 +192,7 @@ void DriverScanWidget::setNetworkErr()
     mp_HLayoutscLabel->setContentsMargins(0, 0, 0, 0);
 
     mp_HLayoutscProgress->addStretch();
-    mp_HLayoutscProgress->addWidget(mp_ScanningInfoLabel);
+    mp_HLayoutscProgress->addWidget(mp_CheckNetworkLabel);
     mp_HLayoutscProgress->addStretch();
     mp_HLayoutscProgress->setContentsMargins(0, 0, 0, 0);
 
@@ -296,6 +297,7 @@ void DriverScanWidget::hideAll()
     mp_ScanningPicLabel->hide();
     mp_ErrPicLabel->hide();
     mp_ScanningLabel->hide();
+    mp_CheckNetworkLabel->hide();
     mp_FeedBackLabel->hide();
     mp_ScanningInfoLabel->hide();
     mp_ScanningProgress->hide();

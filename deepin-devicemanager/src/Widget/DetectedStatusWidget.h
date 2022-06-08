@@ -36,6 +36,8 @@
 #include <QStringList>
 #include <QBoxLayout>
 
+class TitleLabel;
+class TipsLabel;
 
 DWIDGET_USE_NAMESPACE
 
@@ -178,9 +180,9 @@ private:
 
 private:
     DLabel         *mp_PicLabel;              // 图片DLabel
-    DLabel         *mp_UpdateLabel;           // 第一行 发现6个驱动可安装更新   或   驱动已是最新    或 正在下载驱动 等Label
+    TitleLabel     *mp_UpdateLabel;           // 第一行 发现6个驱动可安装更新   或   驱动已是最新    或 正在下载驱动 等Label
     DLabel         *mp_TimeLabel;             // 第二行 检测时间
-    DLabel         *mp_ModelLabel;            // 第三行 联想 Lenovo Product 台式机  或 下载速度 Label
+    TipsLabel      *mp_ModelLabel;            // 第三行 联想 Lenovo Product 台式机  或 下载速度 Label
     DLabel         *mp_RebootLabel;           // 重启Label
     DLabel         *mp_FeedBackLabel;         // 反馈Label
     DSuggestButton *mp_InstallButton;         // 一键安装 Button
