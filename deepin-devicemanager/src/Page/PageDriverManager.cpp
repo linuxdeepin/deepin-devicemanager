@@ -19,6 +19,8 @@
 #include <QBoxLayout>
 #include <QMetaType>
 #include <QNetworkConfigurationManager>
+#include <QScrollBar>
+#include <QTimer>
 
 #include <unistd.h>
 
@@ -314,7 +316,6 @@ void PageDriverManager::initWidget()
 
     DFrame *mainFrame = new DFrame(this);
     mainFrame->setLineWidth(0);
-//    mainFrame->setFrameRounded(true);
     initMainFrame(mainFrame);
     mp_StackWidget->addWidget(mp_ScanWidget);
     mp_StackWidget->addWidget(mainFrame);
@@ -355,7 +356,7 @@ void PageDriverManager::initTable()
 void PageDriverManager::initMainFrame(DFrame *mainFrame)
 {
     QVBoxLayout *vLaout = new QVBoxLayout();
-    vLaout->setContentsMargins(20, 20, 20, 20);
+    vLaout->setContentsMargins(20, 20, 20, 0);
     vLaout->setSpacing(0);
 
     // 上方的表头
@@ -397,6 +398,7 @@ void PageDriverManager::initScrollArea(DScrollArea *area)
     frameLayout->addWidget(mp_LabelIsNew);
     frameLayout->addWidget(mp_AllDriverIsNew);
 
+    frameLayout->addSpacing(17);
     frameLayout->addStretch();
 
     frame->setLayout(frameLayout);

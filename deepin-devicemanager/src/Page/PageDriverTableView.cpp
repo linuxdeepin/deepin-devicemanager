@@ -11,6 +11,7 @@
 PageDriverTableView::PageDriverTableView(DWidget *parent)
     : DWidget(parent)
     , mp_View(new DriverTableView(this))
+    , m_PreWidth(width())
 {
     initWidgets();
     connect(mp_View, &DriverTableView::operatorClicked, this, &PageDriverTableView::operatorClicked);
@@ -124,6 +125,22 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
     painter.restore();
 }
 
+void PageDriverTableView::resizeEvent(QResizeEvent *e)
+{
+    int detal = this->width() - m_PreWidth;
+    m_PreWidth = this->width();
+
+    // 宽度不变，不做处理
+    if(0 == detal) {
+        return DWidget::resizeEvent(e);
+    }
+
+    // 动态改变表格宽度
+    resizeColumnWidth(detal);
+
+    return DWidget::resizeEvent(e);
+}
+
 void PageDriverTableView::initWidgets()
 {
     this->setFixedHeight(DRIVER_TABLE_HEADER_HEIGHT);
@@ -133,4 +150,82 @@ void PageDriverTableView::initWidgets()
     mainLayout->addWidget(mp_View);
     mainLayout->addStretch();
     this->setLayout(mainLayout);
+}
+
+void PageDriverTableView::resizeColumnWidth(int detal)
+{
+    bool newDriverTable = mp_View->columnWidth(5) == 0;
+    if(newDriverTable){
+        int columnZeroWidth = mp_View->columnWidth(0);
+        if(detal > 0){ // 放大
+            if(columnZeroWidth + detal < 508){
+                mp_View->setColumnWidth(0,columnZeroWidth + detal);
+            }
+        }else{ // 缩小
+            if(columnZeroWidth + detal > 120){
+                mp_View->setColumnWidth(0,columnZeroWidth + detal);
+            }
+        }
+    }else{
+        int columnOneWidth = mp_View->columnWidth(1);
+        int columnTwoWidth = mp_View->columnWidth(2);
+        int columnFourWidth = mp_View->columnWidth(4);
+        if(detal > 0){ // 放大
+            // 第一步：先放大第一列
+            int detalOne = 324 - columnOneWidth;
+            if(detalOne - detal >= 0){ // 此时只需要放大第一列
+                mp_View->setColumnWidth(1,columnOneWidth + detal);
+                return;
+            }else {
+                mp_View->setColumnWidth(1,columnOneWidth + detalOne);
+                detal = detal - detalOne;
+            }
+
+            // 第二步：放大第二列
+            int detalTwo = 186 - columnTwoWidth;
+            if(detalTwo - detal >= 0){ // 此时只需要放大第一列
+                mp_View->setColumnWidth(2,columnTwoWidth + detal);
+                return;
+            }else {
+                mp_View->setColumnWidth(2,columnTwoWidth + detalTwo);
+                detal = detal - detalTwo;
+            }
+
+            // 第三步：放大第四列
+            int detalFour = 150 - columnFourWidth;
+            if(detalFour - detal >= 0){ // 此时只需要放大第一列
+                mp_View->setColumnWidth(4,columnFourWidth + detal);
+            }else {
+                mp_View->setColumnWidth(4,columnFourWidth + detalFour);
+            }
+        }else{ // 缩小
+            // 第一步：先缩小第一列
+            int detalOne = columnOneWidth - 120; // 计算第一列可缩小距离
+            if(detalOne + detal >= 0){ // 此时只需要降低第一列
+                mp_View->setColumnWidth(1,columnOneWidth + detal);
+                return;
+            }else { // 此时需要降低第二列，但是先把第一列降低了再说
+                mp_View->setColumnWidth(1,columnOneWidth - detalOne);
+                detal = detal + detalOne;
+            }
+
+            // 第二步：缩小第二列
+            int detalTwo = columnTwoWidth - 120;
+            if(detalTwo + detal >= 0){ // 此时只需要降低第一列
+                mp_View->setColumnWidth(2,columnTwoWidth + detal);
+                return;
+            }else { // 此时需要降低第二列，但是先把第一列降低了再说
+                mp_View->setColumnWidth(2,columnTwoWidth - detalTwo);
+                detal = detal + detalTwo;
+            }
+
+            // 第三步：缩小第四列
+            int detalFour = columnFourWidth - 120;
+            if(detalFour + detal >= 0){ // 此时只需要降低第一列
+                mp_View->setColumnWidth(4,columnFourWidth + detal);
+            }else { // 此时需要降低第二列，但是先把第一列降低了再说
+                mp_View->setColumnWidth(4,columnFourWidth - detalFour);
+            }
+        }
+    }
 }

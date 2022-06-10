@@ -71,8 +71,12 @@ void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString 
     // 发现5个驱动可安装更新  和  机器类型
     QString updateStr = QObject::tr("%1 driver updates available").arg(size);
     mp_UpdateLabel->setText(updateStr);
+    mp_UpdateLabel->setElideMode(Qt::ElideRight);
     mp_ModelLabel->setText(model);
+    mp_ModelLabel->setElideMode(Qt::ElideRight);
+    mp_ModelLabel->setToolTip(model);
     mp_TimeLabel->setText(QObject::tr("Time checked: %1").arg(CommonTools::getSystemTime()));
+    mp_TimeLabel->setElideMode(Qt::ElideRight);
 
     // 布局
     mp_HLayoutTotal->addWidget(mp_PicLabel);
@@ -85,6 +89,7 @@ void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString 
     mp_VLayoutLabel->addStretch();
     mp_HLayoutTotal->addSpacing(SPACE_15);
     mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
+    mp_HLayoutTotal->addSpacing(SPACE_10);
 
     // icon button 和 一键安装
     if (hasInstall) {

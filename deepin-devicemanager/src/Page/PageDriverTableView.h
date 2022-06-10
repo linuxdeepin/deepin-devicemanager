@@ -106,6 +106,7 @@ signals:
 
 protected:
     void paintEvent(QPaintEvent *e) override;
+    void resizeEvent(QResizeEvent *e) override;
 
 private:
     /**
@@ -113,8 +114,15 @@ private:
      */
     void initWidgets();
 
+    /**
+     * @brief resizeColumnWidth
+     * @param detal
+     */
+    void resizeColumnWidth(int detal);
+
 private:
     DriverTableView  *mp_View;
+    int               m_PreWidth;
 };
 
 #endif // PAGEDRIVERTABLEVIEW_H

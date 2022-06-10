@@ -102,6 +102,9 @@ protected:
     // 重绘背景色
     void paintEvent(QPaintEvent *event) override;
 
+    // resize 事件
+    void resizeEvent(QResizeEvent* event) override;
+
 private:
     AnimationLabel  *mp_ScanningPicLabel;    // 扫描图片Label
     DLabel          *mp_ErrPicLabel;          // 扫描出错图片Label
@@ -111,6 +114,8 @@ private:
     DLabel          *mp_ScanningInfoLabel;   // 扫描信息Label
     DProgressBar    *mp_ScanningProgress;    // 扫描进度条
     DSuggestButton  *mp_ReScanButton;        // 重新扫描button
+    QWidget         *mp_ScrollWidget;
+    QScrollBar      *mp_ScroBar;
 
     QHBoxLayout     *mp_HLayoutPic;          // 横向图片布局
     QHBoxLayout     *mp_HLayoutscLabel;      // 横向提示信息布局

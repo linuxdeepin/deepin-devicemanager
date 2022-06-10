@@ -8,6 +8,8 @@
 
 #include <QPropertyAnimation>
 #include <QProcess>
+#include <QScrollArea>
+#include <QScrollBar>
 
 #define FONT_WEIGHT 63
 #define ICON_LABEL_SIZE 128
@@ -27,6 +29,8 @@ DriverScanWidget::DriverScanWidget(DWidget *parent)
     , mp_ScanningInfoLabel(new DLabel(this))
     , mp_ScanningProgress(new DProgressBar(this))
     , mp_ReScanButton(new DSuggestButton(this))
+    , mp_ScrollWidget(new QWidget(this))
+    , mp_ScroBar(nullptr)
     , mp_HLayoutPic(nullptr)
     , mp_HLayoutscLabel(nullptr)
     , mp_HLayoutscProgress(nullptr)
@@ -67,6 +71,7 @@ void DriverScanWidget::setScanningUI(const QString &scanInfo, int progressValue)
     mp_HLayoutPic->addWidget(mp_ScanningPicLabel);
     mp_HLayoutPic->addStretch();
     mp_HLayoutPic->setContentsMargins(0, 0, 0, 0);
+    mp_ScanningPicLabel->setMinimumHeight(mp_ScanningPicLabel->height());
 
     mp_HLayoutscLabel->addStretch();
     mp_HLayoutscLabel->addWidget(mp_ScanningLabel);
@@ -101,7 +106,7 @@ void DriverScanWidget::setScanningUI(const QString &scanInfo, int progressValue)
     mp_HLayout->addStretch();
     mp_HLayout->addLayout(mp_VLayout);
     mp_HLayout->addStretch();
-    this->setLayout(mp_HLayout);
+    mp_ScrollWidget->setLayout(mp_HLayout);
 }
 
 void DriverScanWidget::setScanFailedUI()
@@ -159,7 +164,7 @@ void DriverScanWidget::setScanFailedUI()
     mp_HLayout->addStretch();
     mp_HLayout->addLayout(mp_VLayout);
     mp_HLayout->addStretch();
-    this->setLayout(mp_HLayout);
+    mp_ScrollWidget->setLayout(mp_HLayout);
 }
 
 void DriverScanWidget::setNetworkErr()
@@ -219,7 +224,7 @@ void DriverScanWidget::setNetworkErr()
     mp_HLayout->addStretch();
     mp_HLayout->addLayout(mp_VLayout);
     mp_HLayout->addStretch();
-    this->setLayout(mp_HLayout);
+    mp_ScrollWidget->setLayout(mp_HLayout);
 }
 
 void DriverScanWidget::slotFeedBack()
@@ -279,6 +284,19 @@ void DriverScanWidget::initUI()
     mp_ScanningProgress->setMinimumWidth(PROGRESS_WIDTH);
     mp_ScanningInfoLabel->setFixedWidth(INFO_WIDTH);
     mp_ScanningInfoLabel->setAlignment(Qt::AlignCenter);
+
+    QHBoxLayout *mainLayout = new QHBoxLayout();
+    mainLayout->setContentsMargins(0,0,0,0);
+    QScrollArea* area = new QScrollArea(this);
+    mp_ScrollWidget->setMinimumHeight(290);
+
+    area->setFrameShape(QFrame::NoFrame);
+    area->setWidgetResizable(true);
+    area->setWidget(mp_ScrollWidget);
+    mp_ScroBar = area->verticalScrollBar();
+
+    mainLayout->addWidget(area);
+    this->setLayout(mainLayout);
 }
 
 void DriverScanWidget::initConnect()
@@ -304,7 +322,7 @@ void DriverScanWidget::hideAll()
     mp_ReScanButton->hide();
 
     // 清除布局
-    delete this->layout();
+    delete mp_ScrollWidget->layout();
     mp_HLayoutPic = new QHBoxLayout();
     mp_HLayoutscLabel = new QHBoxLayout();
     mp_HLayoutscProgress = new QHBoxLayout();
@@ -357,4 +375,11 @@ void DriverScanWidget::paintEvent(QPaintEvent *event)
     painter.restore();
 
     DFrame::paintEvent(event);
+}
+
+void DriverScanWidget::resizeEvent(QResizeEvent* event)
+{
+    mp_ScroBar->setValue(mp_ScroBar->maximum());
+    mp_ScroBar->setVisible(false);
+    return DFrame::resizeEvent(event);
 }
