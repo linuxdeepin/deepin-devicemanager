@@ -13,6 +13,7 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QThread>
+#include <QSizePolicy>
 
 #define MARGIN_LR          20
 #define MARGIN_TB          12
@@ -146,7 +147,7 @@ void DetectedStatusWidget::setDownloadUI(const DriverType &driverType, const QSt
     mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
 
     // 取消
-    mp_HLayoutButton->addStretch();
+    mp_HLayoutTotal->addSpacing(100);
     if (progressValue > 90)
         mp_CancelButton->setEnabled(false);
     else
@@ -190,7 +191,7 @@ void DetectedStatusWidget::setInstallUI(const DriverType &driverType, const QStr
     mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
 
     // 取消
-    mp_HLayoutButton->addStretch();
+    mp_HLayoutButton->addSpacing(100);
     mp_CancelButton->setEnabled(false);
     mp_HLayoutButton->addWidget(mp_CancelButton);
     mp_HLayoutTotal->addLayout(mp_HLayoutButton);
@@ -316,7 +317,8 @@ void DetectedStatusWidget::setNetworkErrorUI(const QString &speed, int progressV
     mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
 
     // 取消
-    mp_HLayoutButton->addStretch();
+
+    mp_HLayoutTotal->addSpacing(100);
     mp_CancelButton->setEnabled(true);
     mp_HLayoutButton->addWidget(mp_CancelButton);
     mp_HLayoutTotal->addLayout(mp_HLayoutButton);
@@ -538,7 +540,7 @@ void DetectedStatusWidget::initUI()
 
     // 进度条
     mp_Progress->setFixedHeight(PROGRESS_HEIGHT);
-    mp_Progress->setFixedWidth(PROGRESS_WIDTH);
+    mp_Progress->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);   // 长度随窗口大小变化
 }
 
 void DetectedStatusWidget::initConnect()
