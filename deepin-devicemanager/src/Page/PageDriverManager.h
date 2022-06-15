@@ -210,6 +210,8 @@ private:
     DLabel               *mp_InstallLabel;
     DLabel               *mp_UpdateLabel;
     DLabel               *mp_LabelIsNew;
+    DWidget              *mp_InstallWidget;
+    DWidget              *mp_UpdateWidget;
     QList<DriverInfo *>   m_ListDriverInfo;  // 保存所有驱动信息
     DriverInfo          *mp_CurDriverInfo;
     int                  m_CurIndex;

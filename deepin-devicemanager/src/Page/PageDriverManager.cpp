@@ -37,6 +37,8 @@ PageDriverManager::PageDriverManager(DWidget *parent)
     , mp_InstallLabel(new DLabel(this))
     , mp_UpdateLabel(new DLabel(this))
     , mp_LabelIsNew(new DLabel(this))
+    , mp_InstallWidget(new DWidget(this))
+    , mp_UpdateWidget(new DWidget(this))
     , mp_CurDriverInfo(nullptr)
     , m_CurIndex(-1)
     , m_CancelIndex(-1)
@@ -363,7 +365,7 @@ void PageDriverManager::initMainFrame(DFrame *mainFrame)
     QHBoxLayout *headerLayout = new QHBoxLayout();
     initHeadWidget(headerLayout);
     vLaout->addLayout(headerLayout);
-    vLaout->addSpacing(20);
+    vLaout->addSpacing(16);
 
     // 下方的可滑动区域
     DScrollArea *area = new DScrollArea(this);
@@ -381,20 +383,33 @@ void PageDriverManager::initHeadWidget(QHBoxLayout *hLayout)
 
 void PageDriverManager::initScrollArea(DScrollArea *area)
 {
+    area->setMinimumHeight(10);
     area->setFrameShape(QFrame::NoFrame);
     area->setWidgetResizable(true);
     DWidget *frame = new DWidget(this);
     frame->setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *frameLayout = new QVBoxLayout();
-    frameLayout->setSpacing(8);
+//    frameLayout->setSpacing(8);
     frameLayout->setContentsMargins(0, 0, 0, 0);
 
-    frameLayout->addWidget(mp_InstallLabel);
-    frameLayout->addWidget(mp_ViewNotInstall);
-    frameLayout->addSpacing(7);
-    frameLayout->addWidget(mp_UpdateLabel);
-    frameLayout->addWidget(mp_ViewCanUpdate);
-    frameLayout->addSpacing(7);
+    // 将Label，tabel spacing都放在widget中作为一个整体进行展示
+    QVBoxLayout *installLayout = new QVBoxLayout();
+    installLayout->setContentsMargins(0, 0, 0, 0);
+    installLayout->addWidget(mp_InstallLabel);
+    installLayout->addWidget(mp_ViewNotInstall);
+    installLayout->addSpacing(7);
+    mp_InstallWidget->setLayout(installLayout);
+    frameLayout->addWidget(mp_InstallWidget);
+
+    QVBoxLayout *updateLayout = new QVBoxLayout();
+    updateLayout->setContentsMargins(0, 0, 0, 0);
+    updateLayout->addWidget(mp_UpdateLabel);
+    updateLayout->addWidget(mp_ViewCanUpdate);
+    updateLayout->addSpacing(7);
+    mp_UpdateWidget->setLayout(updateLayout);
+    frameLayout->addWidget(mp_UpdateWidget);
+
+
     frameLayout->addWidget(mp_LabelIsNew);
     frameLayout->addWidget(mp_AllDriverIsNew);
 
@@ -675,16 +690,13 @@ void PageDriverManager::showTables()
     mp_UpdateLabel->setText(QObject::tr("Outdated drivers (%1)").arg(m_ListUpdateIndex.size()));
     mp_LabelIsNew->setText(QObject::tr("Up-to-date drivers (%1)").arg(m_ListNewIndex.size()));
 
-    // 设置哪几个Label需要显示出来
-    mp_InstallLabel->setVisible(installLength != 0);
-    mp_UpdateLabel->setVisible(updateLength != 0);
+    // 无需更新驱动列表是否显示
     mp_LabelIsNew->setVisible(newLength != 0);
-
-    // 设置哪几个表格需要显示出来
-    mp_ViewNotInstall->setVisible(installLength != 0);
-    mp_ViewCanUpdate->setVisible(updateLength != 0);
     mp_AllDriverIsNew->setVisible(newLength != 0);
 
+    // 可安装和可更新表格分别与Label作为整体进行隐藏
+    mp_InstallWidget->setVisible(installLength != 0);
+    mp_UpdateWidget->setVisible(updateLength != 0);
 
     // 显示表头显示的内容
     const QMap<QString, QString> &overviewMap = DeviceManager::instance()->getDeviceOverview();
