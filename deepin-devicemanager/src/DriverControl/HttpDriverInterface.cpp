@@ -182,6 +182,7 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
     driverInfo->m_DebVersion  = lstDriverInfo[index].strDebVersion;
     driverInfo->m_Packages = lstDriverInfo[index].strPackages;
     driverInfo->m_Size = lstDriverInfo[index].strSize;
+    driverInfo->m_Byte = lstDriverInfo[index].bytes;
 
     if (2 == res_out) {
         // 此时说明最优版本已经安装
@@ -318,6 +319,7 @@ bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<RepoDri
         }
         if (_jsonObj.contains("size")) {
             double size = _jsonObj.value("size").toInt();
+            _driverinfo.bytes = qint64(size);
             if (size < 1024 * 1024) {
                 _driverinfo.strSize = QString::number(size / 1024, 'f', 2) + "KB";
             } else if (size < 1024 * 1024 * 1024) {

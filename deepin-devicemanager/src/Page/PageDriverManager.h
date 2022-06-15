@@ -200,6 +200,14 @@ private:
      */
     bool networkIsOnline();
 
+    /**
+     * @brief getDownloadInfo
+     * @param porgress
+     * @param speed
+     * @param size
+     */
+    void getDownloadInfo(int porgress, qint64 total, QString& speed, QString& size);
+
 private:
     DStackedWidget       *mp_StackWidget;
     PageDriverTableView  *mp_ViewNotInstall; //没有安装驱动的列表

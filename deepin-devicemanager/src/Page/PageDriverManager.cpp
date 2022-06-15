@@ -21,6 +21,7 @@
 #include <QNetworkConfigurationManager>
 #include <QScrollBar>
 #include <QTimer>
+#include <QDateTime>
 
 #include <unistd.h>
 
@@ -167,7 +168,7 @@ void PageDriverManager::slotDownloadFinished()
 {
     if (! mp_CurDriverInfo)
         return;
-    mp_CurDriverInfo->m_Status = ST_INSTALL;
+
     mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
     mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
 }
@@ -176,8 +177,19 @@ void PageDriverManager::slotInstallProgressChanged(int progress)
 {
     if (! mp_CurDriverInfo)
         return;
-    // 设置表头状态
-    mp_HeadWidget->setInstallUI(mp_CurDriverInfo->type(), mp_CurDriverInfo->name(), progress);
+    // 当进度小于50时，apt处于下载过程
+    if(progress <= 50){
+        if(progress > 45)
+            mp_CurDriverInfo->m_Status = ST_INSTALL;
+        QString speed = "";
+        QString size = "";
+        getDownloadInfo(progress*2,mp_CurDriverInfo->m_Byte,speed,size);
+        mp_HeadWidget->setDownloadUI(mp_CurDriverInfo->type(), speed, size, mp_CurDriverInfo->size(), progress * 2);
+    }else{
+        mp_CurDriverInfo->m_Status = ST_INSTALL;
+        // 设置表头状态
+        mp_HeadWidget->setInstallUI(mp_CurDriverInfo->type(), mp_CurDriverInfo->name(), (progress - 50) * 2);
+    }
 
     // 设置表格安装中的状态
     mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
@@ -781,4 +793,41 @@ bool PageDriverManager::networkIsOnline()
 {
     QNetworkConfigurationManager mgr;
     return mgr.isOnline();
+}
+
+void PageDriverManager::getDownloadInfo(int progress, qint64 total, QString& speed, QString& size)
+{
+    static qint64 msec = QDateTime::currentMSecsSinceEpoch();
+    static double pre_bytes = total*(progress / 100.0);
+    double bytes = total*(progress / 100.0);
+    if(pre_bytes > bytes){
+        pre_bytes = 0;
+    }
+
+    // 已下载
+
+    if (bytes < 1024 * 1024) {
+        size = QString::number(bytes / 1024, 'f', 2) + "KB";
+    } else if (bytes < 1024 * 1024 * 1024) {
+        size = QString::number(bytes / 1024 / 1024, 'f', 2) + "MB";
+    } else {
+        size = QString::number(bytes / 1024 / 1024 / 1024, 'f', 2) + "GB";
+    }
+
+    // 速度
+    double detal_bytes = bytes - pre_bytes;
+    pre_bytes = bytes;
+    qint64 detal_time = QDateTime::currentMSecsSinceEpoch() - msec;
+    double speed_s = detal_bytes / (detal_time / 1000.0);
+    if ( 0 == detal_time ){
+        speed_s = 0;
+    }
+    if (speed_s < 1024 * 1024) {
+        speed = QString::number(speed_s / 1024, 'f', 2) + "KB";
+    } else if (speed_s < 1024 * 1024 * 1024) {
+        speed = QString::number(speed_s / 1024 / 1024, 'f', 2) + "MB";
+    } else {
+        speed = QString::number(speed_s / 1024 / 1024 / 1024, 'f', 2) + "GB";
+    }
+    msec = QDateTime::currentMSecsSinceEpoch();
 }

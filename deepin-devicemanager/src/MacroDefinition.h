@@ -276,6 +276,7 @@ struct RepoDriverInfo{
     QString strSource;//
     QString strDownloadUrl;//
     QString strSize;//包大小
+    qint64  bytes;
 
     QList<strPpds> lstPpds;//Ppd文件
 };
@@ -319,6 +320,7 @@ struct DriverInfo {
         , m_Checked(false)
         , m_DebVersion("")
         , m_Packages("")
+        , m_Byte(0)
     {
 
     }
@@ -337,6 +339,7 @@ struct DriverInfo {
 
     QString    m_DebVersion;   //包版本 返回值
     QString    m_Packages;     //包名  返回值
+    qint64     m_Byte;
 
     DriverType type() { return m_Type; }
     QString    name() { return m_Name; }

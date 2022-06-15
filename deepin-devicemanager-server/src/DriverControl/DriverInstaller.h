@@ -21,51 +21,75 @@
 
 #ifndef DRIVERINSTALLER_H
 #define DRIVERINSTALLER_H
-#include "commonfunction.h"
+
+
+//class PackageInstaller
+//{
+//public:
+//    PackageInstaller();
+//};
 
 #include <QObject>
-#include <QApt/Globals>
-#include <QApt/Backend>
-#include <QApt/Transaction>
 
-class DriverInstaller: public QObject
+namespace QApt {
+class Backend;
+class Transaction;
+class DebFile;
+}
+
+class DriverInstaller : public QObject
 {
     Q_OBJECT
 public:
     explicit DriverInstaller(QObject *parent = nullptr);
 
-private:
-    void initBackend();
-    void reset();
-    void doOperate(const QString &package, const QString &version, bool binstall = true);
-    void doAptClean();//清理apt缓存
-    bool downloadInfo(QStringList &lstInfo, int total_progress);
 public slots:
-    void installPackage(const QString &filename, const QString &version);
+    /**
+     * @brief installPackage 安装包
+     * @param package 包名
+     * @param version 包版本
+     */
+    void installPackage(const QString& package, const QString& version);
+
+    /**
+     * @brief undoInstallDriver 停止任务
+     */
     void undoInstallDriver();
 
-    void slotStatusChanged(QApt::TransactionStatus status);
-    void slotDownloadStatusChanged(QApt::ExitStatus status);
-    void slotProgressChanged(int progress);
 signals:
-    void installFinished(bool bsuccess);
     void errorOccurred(int error);
-    void progressChanged(int progress);
-
-    void downloadProgressChanged(QStringList msg);//驱动下载进度、速度、已下载大小
-    void downloadFinished();//下载完成
     void installProgressChanged(int progress);//安装进度
     void installProgressFinished(bool bsuccess);
 
 private:
-    bool isNetworkOnline();
+    /**
+     * @brief initBackend 初始化工作
+     * @return
+     */
+    bool initBackend();
 
+    /**
+     * @brief aptClean
+     */
+    void aptClean();
+
+    /**
+     * @brief isNetworkOnline 判断网络是否在线
+     * @return
+     */
+    bool isNetworkOnline(uint sec = 2000000);
+
+    /**
+     * @brief doOperate 开始操作
+     * @param package
+     * @param version
+     */
+    void doOperate(const QString &package, const QString &version);
 private:
-    QApt::Backend *m_backend = nullptr;
-    QApt::Transaction *m_pTrans = nullptr;
-    bool m_bValid = false;
+    QApt::Backend *mp_Backend = nullptr;
+    QApt::Transaction *mp_Trans = nullptr;
     int m_iRuningTestCount = 0;
-
+    bool m_Cancel;
 };
 
 #endif // DRIVERINSTALLER_H

@@ -176,15 +176,6 @@ void DriverManager::initConnections()
         sigInstallProgressFinished(false, EC_NETWORK);
     });
 
-    connect(mp_driverInstaller, &DriverInstaller::downloadProgressChanged, [&](QStringList msg) {
-        sigDownloadProgressChanged(msg);
-        qInfo() << "Downloading driver , " << "progress rate : " << msg[0] << " downloaded size : " << msg[1] << " download speed : " << msg[2];
-    });
-
-    connect(mp_driverInstaller, &DriverInstaller::downloadFinished, [&]() {
-        sigDownloadFinished();
-    });
-
     connect(mp_driverInstaller, &DriverInstaller::installProgressChanged, [&](int progress) {
         sigInstallProgressChanged(progress);
         qInfo() << "Installing driver ,  installation progress : " << progress;
@@ -569,8 +560,8 @@ bool DriverManager::isNetworkOnline()
     //把文件一行一行读取放入vector
     std::ifstream infile;
     infile.open("netlog.bat");
-    string s;
-    std::vector<string> v;
+    std::string s;
+    std::vector<std::string> v;
     while(infile)
     {
         getline(infile,s);
@@ -583,7 +574,7 @@ bool DriverManager::isNetworkOnline()
     //读取倒数第二行 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
     if (v.size() > 1)
     {
-        string data = v[v.size()-2];
+        std::string data = v[v.size()-2];
         int iPos = data.find("received,");
         if (iPos != -1 )
         {
