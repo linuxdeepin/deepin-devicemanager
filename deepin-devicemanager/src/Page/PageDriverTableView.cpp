@@ -127,6 +127,12 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
 
 void PageDriverTableView::resizeEvent(QResizeEvent *e)
 {
+    if(m_PreWidth < 680){
+        m_PreWidth = this->width();
+        return DWidget::resizeEvent(e);
+    }
+
+
     int detal = this->width() - m_PreWidth;
     m_PreWidth = this->width();
 
@@ -137,7 +143,6 @@ void PageDriverTableView::resizeEvent(QResizeEvent *e)
 
     // 动态改变表格宽度
     resizeColumnWidth(detal);
-
     return DWidget::resizeEvent(e);
 }
 
@@ -158,9 +163,7 @@ void PageDriverTableView::resizeColumnWidth(int detal)
     if(newDriverTable){
         int columnZeroWidth = mp_View->columnWidth(0);
         if(detal > 0){ // 放大
-            if(columnZeroWidth + detal < 508){
-                mp_View->setColumnWidth(0,columnZeroWidth + detal);
-            }
+            mp_View->setColumnWidth(0,columnZeroWidth + detal);
         }else{ // 缩小
             if(columnZeroWidth + detal > 120){
                 mp_View->setColumnWidth(0,columnZeroWidth + detal);
@@ -195,9 +198,16 @@ void PageDriverTableView::resizeColumnWidth(int detal)
             int detalFour = 150 - columnFourWidth;
             if(detalFour - detal >= 0){ // 此时只需要放大第一列
                 mp_View->setColumnWidth(4,columnFourWidth + detal);
+                return;
             }else {
                 mp_View->setColumnWidth(4,columnFourWidth + detalFour);
+                detal = detal - detalFour;
             }
+
+            // 第五步：继续放大第一列
+            columnOneWidth = mp_View->columnWidth(1);
+            mp_View->setColumnWidth(1, columnOneWidth + detal);
+
         }else{ // 缩小
             // 第一步：先缩小第一列
             int detalOne = columnOneWidth - 120; // 计算第一列可缩小距离
