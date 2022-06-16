@@ -121,13 +121,17 @@ void notify(int argc, char *argv[])
 
     // 2. 加载翻译文件
     QString body = QObject::tr("New drivers available! Install or update them now.");
+    QString view = QObject::tr("View");
     QString l = QString(argv[2]);
     if ("zh_CN" == l) {
         body = QString("您有驱动可进行安装/更新");
+        view = QString("查 看");
     } else if ("zh_HK" == l) {
         body = QString("您有驅動可進行安裝/更新");
+        view = QString("查 看");
     } else if ("zh_TW" == l) {
         body = QString("您有驅動可進行安裝/更新");
+        view = QString("查 看");
     }
 
     // 3. create interface
@@ -139,7 +143,7 @@ void notify(int argc, char *argv[])
     QString title = "";
 
     QStringList actionlist;
-    actionlist << "view" << "查看";
+    actionlist << "view" << view;
     QVariantMap hints;
     hints.insert(QString("x-deepin-action-view"),
                  QVariant(QString("/usr/bin/deepin-devicemanager,driver")));  //实现查看2按钮点击打开控制中心账户界面)
