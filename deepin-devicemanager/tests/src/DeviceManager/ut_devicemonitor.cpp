@@ -93,7 +93,7 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromHwinfo)
     EXPECT_STREQ("VIEWSONIC VA2430-FHD", m_deviceMonitor->m_Name.toStdString().c_str());
     EXPECT_STREQ("VIEWSONIC", m_deviceMonitor->m_Vendor.toStdString().c_str());
     EXPECT_STREQ("VIEWSONIC VA2430-FHD", m_deviceMonitor->m_Model.toStdString().c_str());
-    EXPECT_STREQ("720x400@70Hz  ,  640x480@60Hz  ,  640x480@67Hz  ", m_deviceMonitor->m_SupportResolution.toStdString().c_str());
+    EXPECT_STREQ("720x400@70Hz, 640x480@60Hz, 640x480@67Hz", m_deviceMonitor->m_SupportResolution.toStdString().c_str());
     EXPECT_STREQ("23.8 inch (527x296 mm)", m_deviceMonitor->m_ScreenSize.toStdString().c_str());
     EXPECT_STREQ("VSQ201321294", m_deviceMonitor->m_SerialNumber.toStdString().c_str());
     EXPECT_STREQ("2020-03", m_deviceMonitor->m_ProductionWeek.toStdString().c_str());

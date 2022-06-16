@@ -22,6 +22,7 @@
 #include <QScrollBar>
 #include <QTimer>
 #include <QDateTime>
+#include <QDir>
 
 #include <unistd.h>
 

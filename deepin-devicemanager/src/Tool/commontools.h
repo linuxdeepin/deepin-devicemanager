@@ -71,9 +71,23 @@ public:
      */
     static QString getSystemTime();
 
+    /**
+     * @brief getErrorString
+     * @param err
+     * @return
+     */
     static QString getErrorString(int err);
 
+    /**
+     * @brief feedback
+     */
     static void feedback();
+
+    /**
+     * @brief getUrl
+     * @return
+     */
+    static QString getUrl();
 
 signals:
 

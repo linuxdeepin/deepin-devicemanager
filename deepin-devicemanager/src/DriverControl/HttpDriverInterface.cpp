@@ -1,5 +1,6 @@
 #include "HttpDriverInterface.h"
 #include "commonfunction.h"
+#include "commontools.h"
 
 #include <QJsonDocument>
 #include <QtNetwork>
@@ -11,9 +12,6 @@
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<HttpDriverInterface *> HttpDriverInterface::s_Instance;
 std::mutex HttpDriverInterface::m_mutex;
-
-//static QString strRepoUrl = "https://driver.uniontech.com/api/v1/drive/search";
-static QString strRepoUrl = "https://drive-pre.uniontech.com/api/v1/drive/search";
 
 HttpDriverInterface::HttpDriverInterface(QObject *parent) : QObject(parent)
 {
@@ -88,7 +86,7 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
 QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString strModels, int iClassP, int iClass)
 {
     QString arch = Common::getArchStore();
-    QString strUrl = strRepoUrl + "?arch=" + arch;
+    QString strUrl = CommonTools::getUrl() + "?arch=" + arch;
     QString build = getOsBuild();
     if (! build.isEmpty())
         strUrl += "&system=" + build;
@@ -111,7 +109,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
 QString HttpDriverInterface::getRequestPrinter(QString strDebManufacturer, QString strDesc)
 {
     QString arch = Common::getArchStore();
-    QString strUrl = strRepoUrl + "?arch=" + arch;
+    QString strUrl = CommonTools::getUrl() + "?arch=" + arch;
     int iType = DTK_CORE_NAMESPACE::DSysInfo::uosType();
     int iEditionType = DTK_CORE_NAMESPACE::DSysInfo::uosEditionType();
     strUrl += "&system=" + QString::number(iType) + '-' + QString::number(iEditionType);
@@ -131,7 +129,7 @@ QString HttpDriverInterface::getRequestPrinter(QString strDebManufacturer, QStri
 QString HttpDriverInterface::getRequestCamera(QString strDesc)
 {
     QString arch = Common::getArchStore();
-    QString strUrl = strRepoUrl + "?arch=" + arch;
+    QString strUrl = CommonTools::getUrl() + "?arch=" + arch;
     int iType = DTK_CORE_NAMESPACE::DSysInfo::uosType();
     int iEditionType = DTK_CORE_NAMESPACE::DSysInfo::uosEditionType();
     strUrl += "&system=" + QString::number(iType) + '-' + QString::number(iEditionType);

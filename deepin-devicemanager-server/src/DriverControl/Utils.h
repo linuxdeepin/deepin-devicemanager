@@ -40,6 +40,8 @@ public:
     static bool isFileLocked(const QString &filepath, bool bread = false);
     //判断dpkg是否被占用
     static bool isDpkgLocked();
+    //获取url
+    static QString getUrl();
 };
 
 #endif // UTILS_H

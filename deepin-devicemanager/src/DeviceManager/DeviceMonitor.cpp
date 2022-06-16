@@ -104,14 +104,14 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     foreach (const QString &word, listResolution) {
         if (word.contains("@")) {
             m_SupportResolution.append(word);
-            m_SupportResolution.append("  ,  ");
+            m_SupportResolution.append(", ");
         }
     }
 
     // 计算显示比例
     caculateScreenRatio();
 
-    m_SupportResolution.replace(QRegExp(",  $"), "");
+    m_SupportResolution.replace(QRegExp(", $"), "");
 
     m_ProductionWeek  = transWeekToDate(mapInfo["Year of Manufacture"], mapInfo["Week of Manufacture"]);
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);

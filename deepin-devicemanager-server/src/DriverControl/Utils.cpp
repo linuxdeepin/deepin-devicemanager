@@ -212,4 +212,18 @@ bool Utils::isDpkgLocked()
     return true;
 }
 
+QString Utils::getUrl()
+{
+    QFile file(QDir::homePath() + "/url");
+    if(!file.open(QIODevice::ReadOnly)){
+        return "https://driver.uniontech.com/api/v1/drive/search";
+    }
+    QString info = file.readAll();
+    if("true" == info){
+        return "https://driver.uniontech.com/api/v1/drive/search";
+    }else{
+        return "https://drive-pre.uniontech.com/api/v1/drive/search";
+    }
+}
+
 

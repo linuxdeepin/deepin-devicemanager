@@ -4,6 +4,8 @@
 #include <QDateTime>
 #include <QDBusInterface>
 #include <QDBusReply>
+#include <QFile>
+#include <QDir>
 
 DWIDGET_USE_NAMESPACE
 
@@ -123,4 +125,18 @@ void CommonTools::feedback()
      } else {
          qDebug() << "call com.deepin.dde.ServiceAndSupport failed";
      }
+}
+
+QString CommonTools::getUrl()
+{
+    QFile file(QDir::homePath() + "/url");
+    if(!file.open(QIODevice::ReadOnly)){
+        return "https://driver.uniontech.com/api/v1/drive/search";
+    }
+    QString info = file.readAll();
+    if("true" == info){
+        return "https://driver.uniontech.com/api/v1/drive/search";
+    }else{
+        return "https://drive-pre.uniontech.com/api/v1/drive/search";
+    }
 }
