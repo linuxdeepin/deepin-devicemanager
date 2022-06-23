@@ -200,7 +200,7 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
             mp_Trans->cancel();
             qInfo() << "DRIVER_LOG *************progressChanged*************** 取消操作";
         }
-        if(isNetworkOnline(500000) && false == m_Cancel)
+        if(false == m_Cancel)
             emit installProgressChanged(progress);
         qInfo() << "DRIVER_LOG : ************************** 总进度 " << progress << "  下载状态 " << mp_Trans->downloadProgress().uri();
     });
