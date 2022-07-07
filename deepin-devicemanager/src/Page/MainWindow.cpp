@@ -383,6 +383,9 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         DeviceManager::instance()->correctPowerInfo(tool.getCurPowerInfo());
     }
 
+    // 数据刷新时不处理界面刷新
+    if (m_refreshing) return;
+
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
 
