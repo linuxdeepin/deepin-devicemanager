@@ -16,16 +16,16 @@
 std::atomic<EnableSqlManager *> EnableSqlManager::s_Instance;
 std::mutex EnableSqlManager::m_mutex;
 
-void EnableSqlManager::insertDataToRemoveTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, const QString strDriver)
+void EnableSqlManager::insertDataToRemoveTable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, const QString strDriver)
 {
     QString sql = QString("INSERT INTO %1 (class, name, path, unique_id, driver) VALUES ('%2', '%3', '%4', '%5', '%6');")
-            .arg(DB_TABLE_REMOVE).arg(hclass).arg(name).arg(path).arg(unique_id).arg(strDriver);
+                  .arg(DB_TABLE_REMOVE).arg(hclass).arg(name).arg(path).arg(unique_id).arg(strDriver);
     if (!m_sqlQuery.exec(sql)) {
         qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
     }
 }
 
-void EnableSqlManager::removeDateFromRemoveTable(const QString& path)
+void EnableSqlManager::removeDateFromRemoveTable(const QString &path)
 {
     QString sql = QString("DELETE FROM %1 WHERE path='%2';").arg(DB_TABLE_REMOVE).arg(path);
     if (!m_sqlQuery.exec(sql)) {
@@ -33,22 +33,22 @@ void EnableSqlManager::removeDateFromRemoveTable(const QString& path)
     }
 }
 
-void EnableSqlManager::insertDataToAuthorizedTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool exist, const QString strDriver)
+void EnableSqlManager::insertDataToAuthorizedTable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool exist, const QString strDriver)
 {
     // 数据库已经存在该设备记录
-    if(uniqueIDExistedEX(unique_id)){
+    if (uniqueIDExistedEX(unique_id)) {
         return;
     }
 
     // 数据库没有该设备记录，则直接插入
     QString sql = QString("INSERT INTO %1 (class, name, path, unique_id, exist, driver) VALUES ('%2', '%3', '%4', '%5', '%6', '%7');")
-            .arg(DB_TABLE_AUTHORIZED).arg(hclass).arg(name).arg(path).arg(unique_id).arg(exist).arg(strDriver);
+                  .arg(DB_TABLE_AUTHORIZED).arg(hclass).arg(name).arg(path).arg(unique_id).arg(exist).arg(strDriver);
     if (!m_sqlQuery.exec(sql)) {
         qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
     }
 }
 
-void EnableSqlManager::removeDataFromAuthorizedTable(const QString& key)
+void EnableSqlManager::removeDataFromAuthorizedTable(const QString &key)
 {
     QString sql = QString("DELETE FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_AUTHORIZED).arg(key);
     if (!m_sqlQuery.exec(sql)) {
@@ -56,7 +56,7 @@ void EnableSqlManager::removeDataFromAuthorizedTable(const QString& key)
     }
 }
 
-void EnableSqlManager::updateDataToAuthorizedTable(const QString& unique_id, const QString& path)
+void EnableSqlManager::updateDataToAuthorizedTable(const QString &unique_id, const QString &path)
 {
     QString sql = QString("UPDATE %1 SET path='%2' WHERE unique_id='%3';").arg(DB_TABLE_AUTHORIZED).arg(path).arg(unique_id);
     if (!m_sqlQuery.exec(sql)) {
@@ -64,7 +64,7 @@ void EnableSqlManager::updateDataToAuthorizedTable(const QString& unique_id, con
     }
 }
 
-void EnableSqlManager::updateDataToAuthorizedTable(const QString& unique_id, bool enable_device)
+void EnableSqlManager::updateDataToAuthorizedTable(const QString &unique_id, bool enable_device)
 {
     QString sql = QString("UPDATE %1 SET enable='%2' WHERE unique_id='%3';").arg(DB_TABLE_AUTHORIZED).arg(enable_device).arg(unique_id);
     if (!m_sqlQuery.exec(sql)) {
@@ -80,7 +80,7 @@ void EnableSqlManager::clearEnableFromAuthorizedTable()
     }
 }
 
-void EnableSqlManager::insertDataToPrinterTable(const QString& hclass, const QString& name, const QString& path)
+void EnableSqlManager::insertDataToPrinterTable(const QString &hclass, const QString &name, const QString &path)
 {
     QString sql = QString("INSERT INTO %1 (class, name, path) VALUES ('%2', '%3', '%4');").arg(DB_TABLE_PRINTER).arg(hclass).arg(name).arg(path);
     if (!m_sqlQuery.exec(sql)) {
@@ -88,7 +88,7 @@ void EnableSqlManager::insertDataToPrinterTable(const QString& hclass, const QSt
     }
 }
 
-void EnableSqlManager::removeDataFromPrinterTable(const QString& name)
+void EnableSqlManager::removeDataFromPrinterTable(const QString &name)
 {
     QString sql = QString("DELETE FROM %1 WHERE name='%2';").arg(DB_TABLE_PRINTER).arg(name);
     if (!m_sqlQuery.exec(sql)) {
@@ -96,7 +96,7 @@ void EnableSqlManager::removeDataFromPrinterTable(const QString& name)
     }
 }
 
-bool EnableSqlManager::uniqueIDExisted(const QString& key)
+bool EnableSqlManager::uniqueIDExisted(const QString &key)
 {
     QString sql = QString("SELECT COUNT(*) FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_AUTHORIZED).arg(key);
     if (m_sqlQuery.exec(sql) && m_sqlQuery.next()) {
@@ -105,7 +105,7 @@ bool EnableSqlManager::uniqueIDExisted(const QString& key)
     return false;
 }
 
-bool EnableSqlManager::uniqueIDExistedEX(const QString& key)
+bool EnableSqlManager::uniqueIDExistedEX(const QString &key)
 {
     QString sql = QString("SELECT COUNT(*) FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_AUTHORIZED).arg(key);
     if (m_sqlQuery.exec(sql) && m_sqlQuery.next()) {
@@ -114,10 +114,10 @@ bool EnableSqlManager::uniqueIDExistedEX(const QString& key)
     return false;
 }
 
-bool EnableSqlManager::isUniqueIdEnabled(const QString& key)
+bool EnableSqlManager::isUniqueIdEnabled(const QString &key)
 {
     QString sql = QString("SELECT enable FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_AUTHORIZED).arg(key);
-    if(m_sqlQuery.exec(sql) && m_sqlQuery.next()){
+    if (m_sqlQuery.exec(sql) && m_sqlQuery.next()) {
         return m_sqlQuery.value(0).toBool();
     }
     return false;
@@ -151,7 +151,7 @@ QString EnableSqlManager::authorizedInfo()
         return info;
     }
 
-    while(m_sqlQuery.next()){
+    while (m_sqlQuery.next()) {
         info += "Hardware Class : " + m_sqlQuery.value(0).toString() + "\n";
         info += "name : " + m_sqlQuery.value(1).toString() + "\n";
         info += "path : " + m_sqlQuery.value(2).toString() + "\n";
@@ -161,7 +161,7 @@ QString EnableSqlManager::authorizedInfo()
     return info;
 }
 
-QString EnableSqlManager::authorizedPath(const QString& unique_id)
+QString EnableSqlManager::authorizedPath(const QString &unique_id)
 {
     QString sql = QString("SELECT path FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_AUTHORIZED).arg(unique_id);
     if (m_sqlQuery.exec(sql) && m_sqlQuery.next()) {
@@ -171,7 +171,7 @@ QString EnableSqlManager::authorizedPath(const QString& unique_id)
 }
 
 
-void EnableSqlManager::authorizedPathUniqueIDList(QList<QPair<QString, QString> >& lstPair)
+void EnableSqlManager::authorizedPathUniqueIDList(QList<QPair<QString, QString> > &lstPair)
 {
     QString sql = QString("SELECT path,unique_id FROM %1;").arg(DB_TABLE_AUTHORIZED);
     if (!m_sqlQuery.exec(sql)) {
@@ -179,14 +179,14 @@ void EnableSqlManager::authorizedPathUniqueIDList(QList<QPair<QString, QString> 
         return;
     }
     while (m_sqlQuery.next()) {
-        QPair<QString,QString> pair;
+        QPair<QString, QString> pair;
         pair.first = m_sqlQuery.value(0).toString();
         pair.second = m_sqlQuery.value(1).toString();
-        lstPair.append(lstPair);
+        lstPair.append(pair);
     }
 }
 
-void EnableSqlManager::removePathList(QStringList& lsPath)
+void EnableSqlManager::removePathList(QStringList &lsPath)
 {
     QString sql = QString("SELECT path FROM %1;").arg(DB_TABLE_REMOVE);
     if (!m_sqlQuery.exec(sql)) {
@@ -198,7 +198,7 @@ void EnableSqlManager::removePathList(QStringList& lsPath)
     }
 }
 
-void EnableSqlManager::removePathUniqueIDList(QList<QPair<QString, QString> >& lstPair)
+void EnableSqlManager::removePathUniqueIDList(QList<QPair<QString, QString> > &lstPair)
 {
     QString sql = QString("SELECT path,unique_id FROM %1;").arg(DB_TABLE_REMOVE);
     if (!m_sqlQuery.exec(sql)) {
@@ -206,14 +206,14 @@ void EnableSqlManager::removePathUniqueIDList(QList<QPair<QString, QString> >& l
         return;
     }
     while (m_sqlQuery.next()) {
-        QPair<QString,QString> pair;
+        QPair<QString, QString> pair;
         pair.first = m_sqlQuery.value(0).toString();
         pair.second = m_sqlQuery.value(1).toString();
-        lstPair.append(lstPair);
+        lstPair.append(pair);
     }
 }
 
-void EnableSqlManager::insertWakeupData(const QString& unique_id, const QString& path, bool wakeup)
+void EnableSqlManager::insertWakeupData(const QString &unique_id, const QString &path, bool wakeup)
 {
     QString sql = QString("INSERT INTO %1 (unique_id, path, wakeup) VALUES ('%2', '%3', '%4');").arg(DB_TABLE_WAKEUP).arg(unique_id).arg(path).arg(wakeup);
     if (!m_sqlQuery.exec(sql)) {
@@ -221,7 +221,7 @@ void EnableSqlManager::insertWakeupData(const QString& unique_id, const QString&
     }
 }
 
-bool EnableSqlManager::isWakeupUniqueIdExisted(const QString& unique_id)
+bool EnableSqlManager::isWakeupUniqueIdExisted(const QString &unique_id)
 {
     QString sql = QString("SELECT COUNT(*) FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_WAKEUP).arg(unique_id);
     if (m_sqlQuery.exec(sql) && m_sqlQuery.next()) {
@@ -230,7 +230,7 @@ bool EnableSqlManager::isWakeupUniqueIdExisted(const QString& unique_id)
     return false;
 }
 
-void EnableSqlManager::updateWakeData(const QString& unique_id, const QString& path, bool wakeup)
+void EnableSqlManager::updateWakeData(const QString &unique_id, const QString &path, bool wakeup)
 {
     QString sql = QString("UPDATE %1 SET path='%2', wakeup='%3' WHERE unique_id='%4';").arg(DB_TABLE_WAKEUP).arg(path).arg(wakeup).arg(unique_id);
     if (!m_sqlQuery.exec(sql)) {
@@ -238,7 +238,7 @@ void EnableSqlManager::updateWakeData(const QString& unique_id, const QString& p
     }
 }
 
-QString EnableSqlManager::wakeupPath(const QString& unique_id)
+QString EnableSqlManager::wakeupPath(const QString &unique_id)
 {
     QString sql = QString("SELECT path FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_WAKEUP).arg(unique_id);
     if (m_sqlQuery.exec(sql) && m_sqlQuery.next()) {
@@ -247,7 +247,7 @@ QString EnableSqlManager::wakeupPath(const QString& unique_id)
     return "";
 }
 
-bool EnableSqlManager::isWakeup(const QString& unique_id)
+bool EnableSqlManager::isWakeup(const QString &unique_id)
 {
     QString sql = QString("SELECT wakeup FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_WAKEUP).arg(unique_id);
     if (m_sqlQuery.exec(sql) && m_sqlQuery.next())
@@ -255,14 +255,14 @@ bool EnableSqlManager::isWakeup(const QString& unique_id)
     return false;
 }
 
-void EnableSqlManager::insertNetworkWakeup(const QString& logical_name, bool wake)
+void EnableSqlManager::insertNetworkWakeup(const QString &logical_name, bool wake)
 {
     // 先判断是否已经存在
     QString sqlAdd;
     QString sqlExist = QString("SELECT wakeup FROM %1 WHERE logical_name='%2';").arg(DB_TABLE_NETWORK_WAKEUP).arg(logical_name);
-    if (m_sqlQuery.exec(sqlExist) && m_sqlQuery.next()){
+    if (m_sqlQuery.exec(sqlExist) && m_sqlQuery.next()) {
         sqlAdd = QString("UPDATE %1 SET wakeup='%2' WHERE logical_name='%3';").arg(DB_TABLE_NETWORK_WAKEUP).arg(wake).arg(logical_name);
-    }else{
+    } else {
         sqlAdd = QString("INSERT INTO %1 (logical_name, wakeup) VALUES ('%2', '%3');").arg(DB_TABLE_NETWORK_WAKEUP).arg(logical_name).arg(wake);
     }
 
@@ -272,7 +272,7 @@ void EnableSqlManager::insertNetworkWakeup(const QString& logical_name, bool wak
     }
 }
 
-bool EnableSqlManager::isNetworkWakeup(const QString& logical_name)
+bool EnableSqlManager::isNetworkWakeup(const QString &logical_name)
 {
     QString sql = QString("SELECT wakeup FROM %1 WHERE logical_name='%2';").arg(DB_TABLE_NETWORK_WAKEUP).arg(logical_name);
     if (m_sqlQuery.exec(sql) && m_sqlQuery.next())
@@ -281,7 +281,7 @@ bool EnableSqlManager::isNetworkWakeup(const QString& logical_name)
 }
 
 EnableSqlManager::EnableSqlManager(QObject *parent)
-    :QObject (parent)
+    : QObject(parent)
 {
     initDB();
 }
@@ -306,38 +306,38 @@ void EnableSqlManager::initDB()
     // 创建数据库表
     QStringList tableStrList = m_db.tables();
 
-    if(!tableStrList.contains(DB_TABLE_AUTHORIZED)){
+    if (!tableStrList.contains(DB_TABLE_AUTHORIZED)) {
         QString sql = QString("CREATE TABLE %1 (class text, name text, path text, unique_id text, exist boolean, driver text);").arg(DB_TABLE_AUTHORIZED);
         bool res = m_sqlQuery.exec(sql);
-        if(!res){
+        if (!res) {
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
         }
     }
-    if(!tableStrList.contains(DB_TABLE_REMOVE)){
+    if (!tableStrList.contains(DB_TABLE_REMOVE)) {
         QString sql = QString("CREATE TABLE %1 (class text, name text, path text, unique_id text, driver text);").arg(DB_TABLE_REMOVE);
         bool res = m_sqlQuery.exec(sql);
-        if(!res){
+        if (!res) {
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
         }
     }
-    if(!tableStrList.contains(DB_TABLE_PRINTER)){
+    if (!tableStrList.contains(DB_TABLE_PRINTER)) {
         QString sql = QString("CREATE TABLE %1 (class text, name text, path text)").arg(DB_TABLE_PRINTER);
         bool res = m_sqlQuery.exec(sql);
-        if(!res){
+        if (!res) {
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
         }
     }
-    if(!tableStrList.contains(DB_TABLE_WAKEUP)){
+    if (!tableStrList.contains(DB_TABLE_WAKEUP)) {
         QString sql = QString("CREATE TABLE %1 (unique_id text, path text, wakeup boolean)").arg(DB_TABLE_WAKEUP);
         bool res = m_sqlQuery.exec(sql);
-        if(!res){
+        if (!res) {
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
         }
     }
-    if(!tableStrList.contains(DB_TABLE_NETWORK_WAKEUP)){
+    if (!tableStrList.contains(DB_TABLE_NETWORK_WAKEUP)) {
         QString sql = QString("CREATE TABLE %1 (logical_name text, wakeup boolean)").arg(DB_TABLE_NETWORK_WAKEUP);
         bool res = m_sqlQuery.exec(sql);
-        if(!res){
+        if (!res) {
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
         }
     }
