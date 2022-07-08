@@ -343,6 +343,16 @@ void MainWindow::slotLoadingFinish(const QString &message)
         // 设置当前页面设备信息页
         mp_MainStackWidget->setCurrentWidget(mp_DeviceWidget);
 
+        QList<DeviceBaseInfo *> lst;
+        bool ret = DeviceManager::instance()->getDeviceList(mp_DeviceWidget->currentIndex(), lst);
+
+        if (ret && lst.size() > 0) {//当设备大小为0时，显示概况信息
+            mp_DeviceWidget->updateDevice(mp_DeviceWidget->currentIndex(), lst);
+        } else {
+            QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
+            mp_DeviceWidget->updateOverview(overviewMap);
+        }
+
         // 刷新结束
         m_refreshing = false;
 
