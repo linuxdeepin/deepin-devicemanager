@@ -295,6 +295,94 @@ void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
     }
 }
 
+QString DeviceStorage::getDiskSerialID()
+{
+    return m_SerialNumber;
+}
+
+void DeviceStorage::appendDisk(DeviceStorage *device)
+{
+    QList<QPair<QString, QString> > allAttribs = device->getBaseAttribs();
+    QMap<QString, QString> allAttribMaps;
+    for (int i = 0; i < allAttribs.size(); ++i) {
+        allAttribMaps.insert(allAttribs[i].first, allAttribs[i].second);
+    }
+    QString size = allAttribMaps[tr("Size")];
+
+    if (size.isEmpty()) return;
+    // 直接设置大小
+    if (m_Size.isEmpty())
+        m_Size = size;
+    else {
+        QRegExp reg("[0-9]*.?[0-9]*");
+        int index = reg.indexIn(m_Size);
+        double num1 = 0;
+        QString type1;
+        // index>0时，对于"32GB"（数字开头的字符串,index=0）无法获取正确的数据32
+        // 所以要改为index >= 0
+        if (index >= 0) {
+            num1 = reg.cap(0).toDouble();
+            type1 = m_Size.right(m_Size.length() - reg.cap(0).size()).trimmed();
+        }
+
+        index = reg.indexIn(size);
+        double num2 = 0;
+        QString type2;
+        if (index >= 0) {
+            num2 = reg.cap(0).toDouble();
+            type2 = m_Size.right(size.length() - reg.cap(0).size()).trimmed();
+        }
+        // 匹配大小
+        if (type1 != type2) {
+            if (type1 == "TB" && type2 != "TB") {
+                num2 /= 1000.0;
+                type2 = "TB";
+            } else if (type1 != "TB" && type2 == "TB") {
+                num1 /= 1000.0;
+                type1 = "TB";
+            }
+        }
+
+        if (type1 == type2) {
+            num1 = num1 + num2;
+            if (num1 > int(num1))
+                m_Size = QString("%1 %2").arg(QString::number(num1, 'f', 2)).arg(type1);
+            else {
+                m_Size = QString("%1 %2").arg(num1).arg(type1);
+            }
+
+            QList<QPair<QString, QString> > allOtherAttribs = device->getOtherAttribs();
+            QMap<QString, QString> allOtherAttribMaps;
+            for (int i = 0; i < allOtherAttribs.size(); ++i) {
+                allAttribMaps.insert(allOtherAttribs[i].first, allOtherAttribs[i].second);
+            }
+
+            loadOtherDeviceInfo();
+            //合并
+            QMap<QString, QString> curAllOtherAttribMaps;
+            for (int i = 0; i < m_LstOtherInfo.size(); ++i) {
+                curAllOtherAttribMaps.insert(m_LstOtherInfo[i].first, m_LstOtherInfo[i].second);
+            }
+
+            QStringList keyList;
+            keyList.append(QObject::tr("bus info"));
+            keyList.append(QObject::tr("Device File"));
+            keyList.append(QObject::tr("physical id"));
+            keyList.append(QObject::tr("Device Number"));
+            keyList.append(QObject::tr("logical name"));
+            for (QString keyStr : keyList) {
+                QString curBusInfo = curAllOtherAttribMaps[keyStr];
+                QString busInfo = allAttribMaps[keyStr];
+                if (!curBusInfo.isEmpty() && !busInfo.isEmpty() && curBusInfo != busInfo) {
+                    setOtherDeviceInfo(keyStr, curBusInfo + "," + busInfo);
+                }
+            }
+
+            loadOtherDeviceInfo();
+        }
+    }
+}
+
 QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
 {
     // 比较smartctl中可能提供的两个大小，取大值作为存储设备的大小

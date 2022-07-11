@@ -316,6 +316,13 @@ public:
      */
     void tableHeaderToXlsx(QXlsx::Document &xlsx);
 
+    /**
+     * @brief setOtherDeviceInfo:设置其他信息信息
+     * @param key:属性名称
+     * @param value:属性值
+     */
+    void setOtherDeviceInfo(const QString &key, const QString &value);
+
 protected:
     /**
      * @brief:初始化过滤信息

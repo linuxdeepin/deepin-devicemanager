@@ -332,7 +332,6 @@ void DeviceManager::addCpuDevice(DeviceCpu *const device)
 
 void DeviceManager::addStorageDeivce(DeviceStorage *const device)
 {
-    // 添加存储设备
     m_ListDeviceStorage.append(device);
 }
 
@@ -375,6 +374,28 @@ void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QMap<Q
 
         if (device->addInfoFromSmartctl(name, mapInfo))
             return;
+    }
+}
+
+void DeviceManager::mergeDisk()
+{
+    QMap<QString,QList<int> > allSerialIDs;
+    for (int i=0;i<m_ListDeviceStorage.size();++i) {
+        DeviceStorage *device = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[i]);
+        if(!device->getDiskSerialID().isEmpty()){
+            allSerialIDs[device->getDiskSerialID()].append(i);
+        }
+    }
+    for (auto serialIDs:allSerialIDs) {
+        if(serialIDs.size() < 2)
+            continue;
+        DeviceStorage *fDevice = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[serialIDs[0] ]);
+        for (int i=1;i<serialIDs.size();++i) {
+            DeviceStorage *curDevice = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[serialIDs[i] ]);
+            fDevice->appendDisk(curDevice);
+            m_ListDeviceStorage.removeAt(serialIDs[i]);
+            delete curDevice;
+        }
     }
 }
 

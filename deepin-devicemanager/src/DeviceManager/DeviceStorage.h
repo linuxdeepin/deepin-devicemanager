@@ -113,6 +113,18 @@ public:
     void setDiskSerialID(const QString &deviceFiles);
 
     /**
+     * @brief getDiskSerialID:获取序列号属性
+     * @return 序列号属性
+     */
+    QString getDiskSerialID();
+
+    /**
+     * @brief device:追加磁盘
+     * @param device:磁盘信息
+     */
+    void appendDisk(DeviceStorage *device);
+
+    /**
      * @brief compareSize:比较nvme提供的两个容量值的大小
      * @param size1:Total NVM Capacity
      * @param size2:Namespace 1 Size/Capacity

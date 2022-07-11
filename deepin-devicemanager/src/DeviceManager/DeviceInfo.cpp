@@ -402,6 +402,11 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
     }
 }
 
+void DeviceBaseInfo::setOtherDeviceInfo(const QString &key, const QString &value)
+{
+    m_MapOtherInfo[key] = value;
+}
+
 EnableDeviceStatus DeviceBaseInfo::setEnable(bool)
 {
     return EDS_Success;

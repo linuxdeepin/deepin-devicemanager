@@ -168,6 +168,11 @@ public:
      */
     void setStorageInfoFromSmartctl(const QString &name, const QMap<QString, QString> &mapInfo);
 
+    /**
+     * @brief mergeDisk:将磁盘相同的SerialID合并
+     */
+    virtual void mergeDisk();
+
     // GPU设备相关 **************************************************************************************
     /**
      * @brief addGpuDevice:添加显卡
