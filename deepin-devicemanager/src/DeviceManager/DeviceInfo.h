@@ -163,6 +163,12 @@ public:
     bool canUninstall();
 
     /**
+     * @brief setCanUninstall 设置设备是否可以卸载驱动(主板等右键不需要安装、卸载action)
+     * @return
+     */
+    bool setCanUninstall(bool can);
+
+    /**
      * @brief setHardwareClass
      * @param hclass
      */

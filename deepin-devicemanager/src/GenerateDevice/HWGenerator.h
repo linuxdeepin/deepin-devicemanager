@@ -36,7 +36,17 @@ class HWGenerator : public DeviceGenerator
 public:
     HWGenerator();
 
+    /**
+     * @brief generatorAudioDevice:生成音频适配器
+     */
+    virtual void generatorAudioDevice() override;
+
 protected:
+    /**
+     * @brief getAudioInfoFromCatInput:从cat /proc/bus/input/devices获取音频设备信息
+     */
+    virtual void getAudioInfoFromCatAudio();
+
     /**
      * @brief getDiskInfoFromLshw:从lshw获取存储设备信息
      */

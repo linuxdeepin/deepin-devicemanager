@@ -20,6 +20,34 @@ HWGenerator::HWGenerator()
 
 }
 
+void HWGenerator::generatorAudioDevice()
+{
+    getAudioInfoFromCatAudio();
+}
+
+void HWGenerator::getAudioInfoFromCatAudio()
+{
+    const QList<QMap<QString, QString>> lstAudio = DeviceManager::instance()->cmdInfo("cat_audio");
+    QList<QMap<QString, QString> >::const_iterator it = lstAudio.begin();
+    for (; it != lstAudio.end(); ++it) {
+        if ((*it).size() < 2)
+            continue;
+
+        QMap<QString, QString> tempMap = *it;
+        tempMap["driver"] = tempMap["Name"];
+        if(tempMap["Name"].contains("da_combine_v5",Qt::CaseInsensitive)){
+            tempMap["Name"] = "Hi6405";
+            tempMap["Model"] = "Hi6405";
+        }
+
+        DeviceAudio *device = new DeviceAudio();
+        device->setCanEnale(false);
+        device->setCanUninstall(false);
+        device->setInfoFromCatAudio(tempMap);
+        DeviceManager::instance()->addAudioDevice(device);
+    }
+}
+
 void HWGenerator::getDiskInfoFromLshw()
 {
     QString bootdevicePath("/proc/bootdevice/product_name");

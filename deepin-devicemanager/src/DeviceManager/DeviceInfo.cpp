@@ -470,6 +470,11 @@ bool DeviceBaseInfo::canUninstall()
     return m_CanUninstall;
 }
 
+bool DeviceBaseInfo::setCanUninstall(bool can)
+{
+    m_CanUninstall = can;
+}
+
 void DeviceBaseInfo::setHardwareClass(const QString &hclass)
 {
     m_HardwareClass = hclass;
