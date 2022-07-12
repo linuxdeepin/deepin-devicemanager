@@ -588,6 +588,26 @@ void DeviceManager::addAudioDevice(DeviceAudio *const device)
     m_ListDeviceAudio.append(device);
 }
 
+void DeviceManager::deleteDisableDuplicate_AudioDevice(void)
+{
+    if (m_ListDeviceAudio.size() > 0){
+        for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {
+            DeviceAudio *audio_1 = dynamic_cast<DeviceAudio*>(*it);
+            //QString tpath = audio_1->uniqueID();
+            // 判断该设备是否已经存在，
+            if(!audio_1->enable()){
+                for (QList<DeviceBaseInfo*>::iterator it2 = m_ListDeviceAudio.begin(); it2 != m_ListDeviceAudio.end(); ++it2) {
+                    DeviceAudio *audio_2 = dynamic_cast<DeviceAudio*>(*it2);
+                    if(audio_2->name() == audio_1->name())
+                        if(audio_2->enable())
+                            m_ListDeviceAudio.removeOne(audio_2);
+                }
+            }
+        }
+
+    }
+}
+
 DeviceBaseInfo* DeviceManager::getAudioDevice(const QString& path)
 {
     for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {

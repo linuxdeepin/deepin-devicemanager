@@ -668,6 +668,7 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
         DeviceManager::instance()->addAudioDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
+     DeviceManager::instance()->deleteDisableDuplicate_AudioDevice();
 }
 
 void DeviceGenerator::getAudioInfoFromLshw()

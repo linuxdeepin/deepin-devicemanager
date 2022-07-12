@@ -273,6 +273,12 @@ public:
     void addAudioDevice(DeviceAudio *const device);
 
     /**
+     * @brief addAudioDevice:去除列表中重复的已禁声卡
+     * @param device:
+     */
+    void deleteDisableDuplicate_AudioDevice(void);
+
+    /**
      * @brief getAudioDevice 获取音频设备
      * @param path
      * @return
