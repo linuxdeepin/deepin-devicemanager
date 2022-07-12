@@ -25,6 +25,7 @@
 // 其它头文件
 #include <QString>
 #include <QMap>
+#include <QProcess>
 
 #include <sys/utsname.h>
 
@@ -35,6 +36,9 @@ static QMap<QString, QString> mapArch = {   {"aarch64"    , "arm64"}
                                       ,{"sw_64"      , "sw_64"}
                                       ,{"loongarch"  , "loongarch"}
                                       ,{"loongarch64", "loongarch64"}};
+
+static bool initBoardVendorFlag = false;
+static bool boardVendorFlag = false;
 
 class Common
 {
@@ -56,5 +60,22 @@ public:
         return mapArch[getArch()];
     }
 
+    static bool checkBoardVendorFlag()
+    {
+        QProcess process;
+        process.start("dmidecode",QStringList()<< "-s"<<"system-product-name");
+        process.waitForFinished(-1);
+        QString info = process.readAllStandardOutput();
+        boardVendorFlag = info.contains("KLVV") || info.contains("KLVU") || info.contains("PGUV") || info.contains("PGUW");
+        process.close();
+
+        initBoardVendorFlag = true;
+        return boardVendorFlag;
+    }
+
+    static bool boardVendorType()
+    {
+        return initBoardVendorFlag ? boardVendorFlag : checkBoardVendorFlag();
+    }
 };
 #endif // COMMONFUNCTION_H

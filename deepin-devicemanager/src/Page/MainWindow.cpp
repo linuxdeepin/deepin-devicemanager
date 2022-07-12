@@ -12,6 +12,7 @@
 #include "ThreadExecXrandr.h"
 #include "LoadCpuInfoThread.h"
 #include "CmdTool.h"
+#include "commonfunction.h"
 
 // Dtk头文件
 #include <DFileDialog>
@@ -276,6 +277,9 @@ void MainWindow::initWindowTitle()
         }
     });
     titlebar()->addWidget(mp_ButtonBox);
+    // 特殊处理
+    if(Common::boardVendorType())
+        mp_ButtonBox->hide();
 }
 
 void MainWindow::initWidgets()

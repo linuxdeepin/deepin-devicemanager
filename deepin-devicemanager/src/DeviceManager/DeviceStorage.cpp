@@ -541,6 +541,12 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     if (m_RotationRate == QString("Solid State Device"))
         m_MediaType = QObject::tr("SSD");
 
+    // 按照HW的需求，如果是固态硬盘就不显示转速
+    if (m_RotationRate == QString("HW_SSD")) {
+        m_MediaType = QObject::tr("SSD");
+        m_RotationRate = "";
+    }
+
     // 安装大小
     QString capacity = mapInfo["User Capacity"];
     if (capacity == "")

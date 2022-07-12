@@ -6,6 +6,7 @@
 #include "KLUGenerator.h"
 #include "PanguGenerator.h"
 #include "PanguVGenerator.h"
+#include "HWGenerator.h"
 #include "commonfunction.h"
 
 // Qt库文件
@@ -29,7 +30,10 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
     else if (arch == "mips64")
         generator = new MipsGenerator();
     else if (arch == "aarch64")
-        generator = new ArmGenerator();
+        if(Common::boardVendorType())
+            generator = new HWGenerator();
+        else
+            generator = new ArmGenerator();
     else
         generator = new X86Generator();
 
