@@ -22,6 +22,50 @@ HWGenerator::HWGenerator()
 
 }
 
+void HWGenerator::generatorComputerDevice()
+{
+    const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
+    DeviceComputer *device = new DeviceComputer() ;
+
+    // home url
+    if (cmdInfo.size() > 0) {
+        QString value = cmdInfo[0]["HOME_URL"];
+        device->setHomeUrl(value.replace("\"", ""));
+    }
+
+    // name type
+    const QList<QMap<QString, QString> >  &sysInfo = DeviceManager::instance()->cmdInfo("lshw_system");
+    if (sysInfo.size() > 0) {
+        device->setType(sysInfo[0]["description"]);
+        device->setVendor(sysInfo[0]["vendor"]);
+        device->setName(sysInfo[0]["product"]);
+    }
+
+    // set Os Description from /etc/os-version
+
+    QString productName = DeviceGenerator::getProductName();
+    device->setOsDescription(productName);
+
+    // os
+    const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
+    if (verInfo.size() > 0) {
+        QString info = verInfo[0]["OS"].trimmed();
+        info = info.trimmed();
+        QRegExp reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)", Qt::CaseSensitive);
+        int index = reg.indexIn(info);
+        if (index != -1) {
+            QString tmp = reg.cap(0);
+            info.remove(tmp);
+            info.insert(index, reg.cap(1));
+        }
+
+        QRegExp replaceReg("\\(.*\\@.*\\)", Qt::CaseSensitive);
+        info.replace(replaceReg, "");
+        device->setOS(info);
+    }
+    DeviceManager::instance()->addComputerDevice(device);
+}
+
 void HWGenerator::generatorAudioDevice()
 {
     getAudioInfoFromCatAudio();
@@ -54,7 +98,7 @@ void HWGenerator::generatorGpuDevice()
         mapInfo.insert("Name", items[0].trimmed());
     }
 
-    for (int i = 1;i < items.size(); ++i) {
+    for (int i = 1; i < items.size(); ++i) {
         QStringList words = items[i].split(":");
         if (words.size() == 2) {
             mapInfo.insert(words[0].trimmed(), words[1].trimmed());
@@ -79,7 +123,7 @@ void HWGenerator::getAudioInfoFromCatAudio()
             continue;
 
         QMap<QString, QString> tempMap = *it;
-        if(tempMap["Name"].contains("da_combine_v5",Qt::CaseInsensitive)){
+        if (tempMap["Name"].contains("da_combine_v5", Qt::CaseInsensitive)) {
             tempMap["Name"] = "Hi6405";
             tempMap["Model"] = "Hi6405";
         }
@@ -98,7 +142,7 @@ void HWGenerator::getDiskInfoFromLshw()
     QString bootdevicePath("/proc/bootdevice/product_name");
     QString modelStr = "";
     QFile file(bootdevicePath);
-    if(file.open(QIODevice::ReadOnly)){
+    if (file.open(QIODevice::ReadOnly)) {
         modelStr = file.readLine().simplified();
         file.close();
     }
@@ -200,7 +244,7 @@ void HWGenerator::getBluetoothInfoFromCatWifiInfo()
     QList<QMap<QString, QString> >  lstWifiInfo;
     QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
     QFile file(wifiDevicesInfoPath);
-    if(file.open(QIODevice::ReadOnly)){
+    if (file.open(QIODevice::ReadOnly)) {
         QMap<QString, QString>  wifiInfo;
         QString allStr = file.readAll();
         file.close();
@@ -212,11 +256,11 @@ void HWGenerator::getBluetoothInfoFromCatWifiInfo()
                 continue;
 
             QStringList strList = item.split(':', QString::SkipEmptyParts);
-            if(strList.size() == 2)
+            if (strList.size() == 2)
                 wifiInfo[strList[0] ] = strList[1];
         }
 
-        if(!wifiInfo.isEmpty())
+        if (!wifiInfo.isEmpty())
             lstWifiInfo.append(wifiInfo);
     }
 

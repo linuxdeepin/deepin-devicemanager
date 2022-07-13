@@ -37,6 +37,11 @@ public:
     HWGenerator();
 
     /**
+     * @brief generatorComputerDevice:生成计算机概况
+     */
+    virtual void generatorComputerDevice();
+
+    /**
      * @brief generatorAudioDevice:生成音频适配器
      */
     virtual void generatorAudioDevice() override;
