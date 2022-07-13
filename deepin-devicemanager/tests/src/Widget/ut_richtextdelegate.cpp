@@ -117,7 +117,7 @@ TEST_F(UT_RichTextDelegate, UT_RichTextDelegate_RichTextDelegate_addRow)
     QDomElement table = doc.createElement("table");
     table.setAttribute("style", "border-collapse: collapse;border-spacing: 0;");
     QPair<QString, QString> pair = QPair<QString, QString>("first", "second1  /  \t\tsecond2  /  \t\tsecond3");
-    m_rtDelegate->addRow(doc, table, pair);
+    m_rtDelegate->addRow(doc, table, pair,120);
     EXPECT_FALSE(doc.isNull());
 }
 

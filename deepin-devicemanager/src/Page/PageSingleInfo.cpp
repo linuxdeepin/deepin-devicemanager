@@ -8,6 +8,7 @@
 #include "DeviceInput.h"
 #include "DeviceNetwork.h"
 #include "DBusWakeupInterface.h"
+#include "RichTextDelegate.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -40,6 +41,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , mp_Menu(new DMenu(this))
     , mp_Device(nullptr)
     , m_SameDevice(false)
+    , m_ItemDelegate(new RichTextDelegate(this))
 {
     // 初始化页面布局
     initWidgets();
@@ -127,6 +129,11 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
 
     // 设置单元格内容
     for (int i = 0; i < row; ++i) {
+        QStringList lstStr = lst[i].second.split("\n");
+        if(lstStr.size() > 1){
+            mp_Content->setItemDelegateForRow(i, m_ItemDelegate);
+        }
+
         // 第一列
         QTableWidgetItem *itemFirst = new QTableWidgetItem(lst[i].first);
         mp_Content->setItem(i, 0, itemFirst);
@@ -141,6 +148,7 @@ void PageSingleInfo::clearContent()
 {
     // 清空表格内容
     mp_Content->clear();
+    setMultiFlag(false);
 }
 
 bool PageSingleInfo::isExpanded()
@@ -148,6 +156,12 @@ bool PageSingleInfo::isExpanded()
     if (mp_Content)
         return mp_Content->isExpanded();
     return false;
+}
+
+void PageSingleInfo::setRowHeight(int row, int height)
+{
+    mp_Content->setRowHeight(row, height);
+    setMultiFlag(true);
 }
 
 void PageSingleInfo::slotShowMenu(const QPoint &)

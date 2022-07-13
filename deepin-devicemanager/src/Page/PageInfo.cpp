@@ -18,6 +18,7 @@ DWIDGET_USE_NAMESPACE
 PageInfo::PageInfo(QWidget *parent)
     : QWidget(parent)
     , m_AllInfoNum(0)
+    , m_multiFlag(false)
 {
 
 }
@@ -47,6 +48,16 @@ int PageInfo::getDeviceInfoNum()
 {
     // 获取设备信息数目
     return m_AllInfoNum;
+}
+
+void PageInfo::setMultiFlag(const bool &flag)
+{
+    m_multiFlag = flag;
+}
+
+bool PageInfo::getMultiFlag()
+{
+    return m_multiFlag;
 }
 
 bool PageInfo::packageHasInstalled(const QString &packageName)

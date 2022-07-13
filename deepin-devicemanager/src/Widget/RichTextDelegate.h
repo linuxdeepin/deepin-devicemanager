@@ -45,8 +45,8 @@ protected:
 
 private:
     void getDocFromLst(QDomDocument &doc, const QStringList &lst)const;
-    void addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair)const;
-    void addTd1(QDomDocument &doc, QDomElement &tr, const QString &value)const;
+    void addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair,const int &rowWidth)const;
+    void addTd1(QDomDocument &doc, QDomElement &tr, const QString &value,const int &rowWidth)const;
     void addTd2(QDomDocument &doc, QDomElement &tr, const QString &value)const;
 };
 

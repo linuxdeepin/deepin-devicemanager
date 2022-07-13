@@ -41,6 +41,11 @@ public:
      */
     virtual void generatorAudioDevice() override;
 
+    /**
+     * @brief generatorBluetoothDevice:生成蓝牙设备
+     */
+    virtual void generatorBluetoothDevice();
+
 protected:
     /**
      * @brief getAudioInfoFromCatInput:从cat /proc/bus/input/devices获取音频设备信息
@@ -56,6 +61,24 @@ protected:
      * @brief getDiskInfoFromSmartCtl:从smartctl获取存储设备信息
      */
     virtual void getDiskInfoFromSmartCtl() override;
+
+    /**
+     * @brief getBluetoothInfoFromHciconfig:hciconfig获取蓝牙信息
+     */
+    virtual void getBluetoothInfoFromHciconfig();
+
+    /**
+     * @brief getBlueToothInfoFromHwinfo:从hwinfo获取蓝牙信息
+     */
+    virtual void getBlueToothInfoFromHwinfo();
+
+    /**
+     * @brief getBluetoothInfoFromLshw:从lshw获取蓝牙信息
+     */
+    virtual void getBluetoothInfoFromLshw();
+
+    /**@brief:generator bluetooth info*/
+    virtual void getBluetoothInfoFromCatWifiInfo();
 };
 
 #endif // PANGUVGENERATOR_H

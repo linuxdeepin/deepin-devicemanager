@@ -572,6 +572,18 @@ bool DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &map
     return false;
 }
 
+bool DeviceManager::setBluetoothInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceBluetooth.begin();
+    for (; it != m_ListDeviceBluetooth.end(); ++it) {
+        DeviceBluetooth *device = dynamic_cast<DeviceBluetooth *>(*it);
+        if (device->setInfoFromWifiInfo(mapInfo)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 DeviceBaseInfo* DeviceManager::getBluetoothDevice(const QString& unique_id)
 {
     for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceBluetooth.begin(); it != m_ListDeviceBluetooth.end(); ++it) {

@@ -21,7 +21,6 @@
 
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)
-    , mp_ItemDelegate(new RichTextDelegate(this))
     , m_FontChangeFlag(false)
 {
 
@@ -99,7 +98,7 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
     // 其他信息使用富文本代理
     // 其他信息的Id是出去所有BIOS信息以外的信息,使用Richtext进行显示
     for (int i = lst.size(); i < row; ++i) {
-        mp_Content->setItemDelegateForRow(i, mp_ItemDelegate);
+        mp_Content->setItemDelegateForRow(i, m_ItemDelegate);
         QTableWidgetItem *itemFirst = new QTableWidgetItem(pairs[i - lst.size()].first);
         mp_Content->setItem(i, 0, itemFirst);
 
@@ -183,9 +182,4 @@ void PageBoardInfo::setFontChangeFlag()
 {
     // 设置字体变化标志
     m_FontChangeFlag = true;
-}
-
-void PageBoardInfo::setRowHeight(int row, int height)
-{
-    mp_Content->setRowHeight(row, height);
 }

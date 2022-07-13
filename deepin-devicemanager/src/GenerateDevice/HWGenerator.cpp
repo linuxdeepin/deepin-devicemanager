@@ -14,6 +14,7 @@
 #include "DeviceManager/DeviceComputer.h"
 #include "DeviceManager/DevicePower.h"
 #include "DeviceManager/DeviceInput.h"
+#include "DeviceManager/DeviceBluetooth.h"
 
 HWGenerator::HWGenerator()
 {
@@ -23,6 +24,14 @@ HWGenerator::HWGenerator()
 void HWGenerator::generatorAudioDevice()
 {
     getAudioInfoFromCatAudio();
+}
+
+void HWGenerator::generatorBluetoothDevice()
+{
+    getBluetoothInfoFromHciconfig();
+    getBlueToothInfoFromHwinfo();
+    getBluetoothInfoFromLshw();
+    getBluetoothInfoFromCatWifiInfo();
 }
 
 void HWGenerator::getAudioInfoFromCatAudio()
@@ -102,5 +111,104 @@ void HWGenerator::getDiskInfoFromSmartCtl()
             tempMap["Rotation Rate"] = "HW_SSD";
 
         DeviceManager::instance()->setStorageInfoFromSmartctl(tempMap["ln"], tempMap);
+    }
+}
+
+void HWGenerator::getBluetoothInfoFromHciconfig()
+{
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hciconfig");
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 1) {
+            continue;
+        }
+        DeviceBluetooth *device = new DeviceBluetooth();
+        device->setCanEnale(false);
+        device->setInfoFromHciconfig(*it);
+        DeviceManager::instance()->addBluetoothDevice(device);
+    }
+}
+
+void HWGenerator::getBlueToothInfoFromHwinfo()
+{
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 1) {
+            continue;
+        }
+        if ((*it)["Hardware Class"] == "hub" || (*it)["Hardware Class"] == "mouse" || (*it)["Hardware Class"] == "keyboard") {
+            continue;
+        }
+        if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0") {
+            if (DeviceManager::instance()->setBluetoothInfoFromHwinfo(*it))
+                addBusIDFromHwinfo((*it)["SysFS BusID"]);
+        }
+    }
+}
+
+void HWGenerator::getBluetoothInfoFromLshw()
+{
+    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 1) {
+            continue;
+        }
+        DeviceManager::instance()->setBluetoothInfoFromLshw(*it);
+    }
+}
+
+void HWGenerator::getBluetoothInfoFromCatWifiInfo()
+{
+    QList<QMap<QString, QString> >  lstWifiInfo;
+    QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
+    QFile file(wifiDevicesInfoPath);
+    if(file.open(QIODevice::ReadOnly)){
+        QMap<QString, QString>  wifiInfo;
+        QString allStr = file.readAll();
+        file.close();
+
+        // 解析数据
+        QStringList items = allStr.split("\n");
+        foreach (const QString &item, items) {
+            if (item.isEmpty())
+                continue;
+
+            QStringList strList = item.split(':', QString::SkipEmptyParts);
+            if(strList.size() == 2)
+                wifiInfo[strList[0] ] = strList[1];
+        }
+
+        if(!wifiInfo.isEmpty())
+            lstWifiInfo.append(wifiInfo);
+    }
+
+    if (lstWifiInfo.size() == 0) {
+        return;
+    }
+    QList<QMap<QString, QString> >::const_iterator it = lstWifiInfo.begin();
+
+    for (; it != lstWifiInfo.end(); ++it) {
+        if ((*it).size() < 3) {
+            continue;
+        }
+
+        // KLU的问题特殊处理
+        QMap<QString, QString> tempMap;
+        foreach (const QString &key, (*it).keys()) {
+            tempMap.insert(key, (*it)[key]);
+        }
+
+        // cat /sys/hisys/wal/wifi_devices_info  获取结果为 HUAWEI HI103
+        if (tempMap["Chip Type"].contains("HUAWEI", Qt::CaseInsensitive)) {
+            tempMap["Chip Type"] = tempMap["Chip Type"].remove("HUAWEI").trimmed();
+        }
+
+        // 按照华为的需求，设置蓝牙制造商和类型
+        tempMap["Vendor"] = "HISILICON";
+        tempMap["Type"] = "Bluetooth Device";
+
+        DeviceManager::instance()->setBluetoothInfoFromWifiInfo(tempMap);
     }
 }

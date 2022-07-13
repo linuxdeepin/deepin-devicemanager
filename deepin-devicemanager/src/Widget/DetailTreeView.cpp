@@ -206,6 +206,13 @@ int DetailTreeView::setTableHeight(int paintHeight)
         }
     }
 
+    // 处理多行
+    if (par->getMultiFlag()) {
+        // 表格展开,父窗口最大容纳高度
+        this->setFixedHeight(ROW_HEIGHT * maxRow);
+        return this->height();
+    }
+
     // 信息行 <= m_LimitRow + 1 不影响表格大小
     if (rowCount() <= m_LimitRow + 1) {
         this->setFixedHeight((rowCount() - 1) * ROW_HEIGHT);

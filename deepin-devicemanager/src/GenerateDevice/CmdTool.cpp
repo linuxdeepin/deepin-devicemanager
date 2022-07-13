@@ -350,7 +350,7 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
     QString deviceInfo;
 
     // 读取文件信息
-    if (!getDeviceInfo(deviceInfo, "bluetoothctl.txt")) {
+    if (!getDeviceInfoFromCmd(deviceInfo, "bluetoothctl show " + mapInfo["BD Address"])) {
         addMapInfo("hciconfig", mapInfo);
         return;
     }
@@ -1130,7 +1130,11 @@ void CmdTool::getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const 
         QStringList keyValue = line.trimmed().split(": ");
         if (2 == keyValue.size()) {
             if ("UUID" == keyValue[0]) {
-                uuid.append(keyValue[1]);
+                QString valueStr = keyValue[1].trimmed();
+                QStringList valueStrList = valueStr.split("(",QString::SkipEmptyParts);
+                if(valueStrList.size() == 2)
+                    valueStr = valueStrList[0].trimmed() + ":(" + valueStrList[1];
+                uuid.append(valueStr);
                 uuid.append("\n");
             } else {
                 mapInfo[keyValue[0].trimmed()] = keyValue[1].trimmed();

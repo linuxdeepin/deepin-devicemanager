@@ -101,17 +101,30 @@ public:
     virtual int getDeviceInfoNum();
 
     /**
+     * @brief setDeviceInfoNum 设置多行标识
+     * @return
+     */
+    virtual void setMultiFlag(const bool &flag);
+
+    /**
+     * @brief getMultiFlag 获取多行标识
+     * @return
+     */
+    virtual bool getMultiFlag();
+
+    /**
      * @brief packageHasInstalled 是否被安装
      * @param packageName 包名
      * @return
      */
     static bool packageHasInstalled(const QString &packageName);
+
 protected:
     void paintEvent(QPaintEvent *e) override;
 
 private:
-
     int m_AllInfoNum;
+    bool m_multiFlag;  // 多行标识
 
 };
 

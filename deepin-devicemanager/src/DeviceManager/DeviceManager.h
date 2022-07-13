@@ -259,6 +259,13 @@ public:
     bool setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**
+     * @brief setBluetoothInfoFromWifiInfo:设置由WifiInfo获取的蓝牙信息
+     * @param mapInfo:由WifiInfo获取的蓝牙信息map
+     * @return 布尔值:true设置成功；false设置失败
+     */
+    bool setBluetoothInfoFromWifiInfo(const QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief getBluetoothDevice
      * @param unique_id
      * @return

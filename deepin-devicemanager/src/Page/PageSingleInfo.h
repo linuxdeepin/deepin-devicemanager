@@ -36,6 +36,7 @@ DCORE_USE_NAMESPACE
 using namespace Dtk::Widget;
 
 class PageTableWidget;
+class RichTextDelegate;
 
 /**
  * @brief The PageSingleInfo class
@@ -81,6 +82,14 @@ public:
      * @return 是否展开
      */
     bool isExpanded();
+
+
+    /**
+     * @brief setRowHeight: 设置行高
+     * @param row： 行
+     * @param height：行高
+     */
+    void setRowHeight(int row, int height);
 
 signals:
     /**
@@ -150,7 +159,7 @@ protected:
     DeviceBaseInfo          *mp_Device;      //<! 设备
     bool                    m_SameDevice;
 
-
+    RichTextDelegate       *m_ItemDelegate;
 };
 
 #endif // PAGESINGLEINFO_H
