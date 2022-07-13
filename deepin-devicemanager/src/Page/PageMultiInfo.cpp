@@ -52,8 +52,14 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
 PageMultiInfo::~PageMultiInfo()
 {
     // 清空指针
-    DELETE_PTR(mp_Table)
-    DELETE_PTR(mp_Detail)
+    if (mp_Table) {
+        delete mp_Table;
+        mp_Table = nullptr;
+    }
+    if (mp_Detail) {
+        delete mp_Detail;
+        mp_Detail = nullptr;
+    }
 }
 
 void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
@@ -67,7 +73,7 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     //  获取多个设备界面表格信息
     QList<QStringList> deviceList;
     QList<QStringList> menuControlList;
-    getTableListInfo(lst,deviceList,menuControlList);
+    getTableListInfo(lst, deviceList, menuControlList);
 
     // 更新表格
     mp_Table->updateTable(deviceList, menuControlList);
@@ -96,22 +102,22 @@ void PageMultiInfo::clearWidgets()
     mp_Detail->clearWidget();
 }
 
-void PageMultiInfo::resizeEvent(QResizeEvent* e)
+void PageMultiInfo::resizeEvent(QResizeEvent *e)
 {
-    if(m_lstDevice.size() < 1)
+    if (m_lstDevice.size() < 1)
         return PageInfo::resizeEvent(e);
 
     // 先获取当前窗口大小
     int curHeight = this->height();
     QList<QStringList> deviceList;
     QList<QStringList> menuControlList;
-    getTableListInfo(m_lstDevice,deviceList,menuControlList);
-    if(curHeight < LEAST_PAGE_HEIGHT){
+    getTableListInfo(m_lstDevice, deviceList, menuControlList);
+    if (curHeight < LEAST_PAGE_HEIGHT) {
         //  获取多个设备界面表格信息
-        mp_Table->updateTable(deviceList,menuControlList,true,(LEAST_PAGE_HEIGHT-curHeight)/TREE_ROW_HEIGHT+1);
-    }else{
+        mp_Table->updateTable(deviceList, menuControlList, true, (LEAST_PAGE_HEIGHT - curHeight) / TREE_ROW_HEIGHT + 1);
+    } else {
         //  获取多个设备界面表格信息
-        mp_Table->updateTable(deviceList,menuControlList,true,0);
+        mp_Table->updateTable(deviceList, menuControlList, true, 0);
     }
 
     return PageInfo::resizeEvent(e);
@@ -136,7 +142,7 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
     if (res == EDS_Success) {
         // 设置成功,更新界面
         emit updateUI();
-    } else if(res == EDS_Faild) {
+    } else if (res == EDS_Faild) {
         // 设置失败
         QString con;
         if (enable)
@@ -148,7 +154,7 @@ void PageMultiInfo::slotEnableDevice(int row, bool enable)
 
         // 禁用、启用失败提示
         DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
-    } else if(res == EDS_NoSerial){
+    } else if (res == EDS_NoSerial) {
         QString con = tr("Failed to disable it: unable to get the device SN");
         DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
     }
@@ -158,34 +164,34 @@ void PageMultiInfo::slotWakeupMachine(int row, bool wakeup)
 {
     if (!mp_Detail)
         return;
-    mp_Detail->setWakeupMachine(row,wakeup);
+    mp_Detail->setWakeupMachine(row, wakeup);
 }
 
 void PageMultiInfo::slotActionUpdateDriver(int row)
 {
-    DeviceBaseInfo* device = m_lstDevice[row];
+    DeviceBaseInfo *device = m_lstDevice[row];
     //打印设备卸载驱动时，通过dde-printer来操作
-    if(nullptr != device && device->hardwareClass() == "printer") {
-        if(!QProcess::startDetached("dde-printer"))
+    if (nullptr != device && device->hardwareClass() == "printer") {
+        if (!QProcess::startDetached("dde-printer"))
             qInfo() << "dde-printer startDetached error";
         return;
     }
 
-    PageDriverControl* installDriver = new PageDriverControl(this, tr("Update Drivers"), true, device->name(), "");
+    PageDriverControl *installDriver = new PageDriverControl(this, tr("Update Drivers"), true, device->name(), "");
     installDriver->show();
     connect(installDriver, &PageDriverControl::refreshInfo, this, &PageMultiInfo::refreshInfo);
 }
 
 void PageMultiInfo::slotActionRemoveDriver(int row)
 {
-    DeviceBaseInfo* device = m_lstDevice[row];
-    if(nullptr == device){
+    DeviceBaseInfo *device = m_lstDevice[row];
+    if (nullptr == device) {
         return;
     }
     QString printerVendor;
     QString printerModel;
-    DevicePrint *printer = qobject_cast<DevicePrint*>(device);
-    if(printer) {
+    DevicePrint *printer = qobject_cast<DevicePrint *>(device);
+    if (printer) {
         printerVendor = printer->getVendor();
         printerModel = printer->getModel();
     }
@@ -197,11 +203,11 @@ void PageMultiInfo::slotActionRemoveDriver(int row)
 
 void PageMultiInfo::slotCheckPrinterStatus(int row, bool &isPrinter, bool &isInstalled)
 {
-    DeviceBaseInfo* device = m_lstDevice.value(row, nullptr);
-    if(!device)
+    DeviceBaseInfo *device = m_lstDevice.value(row, nullptr);
+    if (!device)
         return;
-    DevicePrint *printer = qobject_cast<DevicePrint*>(device);
-    if(printer){
+    DevicePrint *printer = qobject_cast<DevicePrint *>(device);
+    if (printer) {
         isPrinter = true;
         isInstalled = PageInfo::packageHasInstalled("dde-printer");
     }
@@ -229,7 +235,7 @@ void PageMultiInfo::initWidgets()
     setLayout(hLayout);
 }
 
-void PageMultiInfo::getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<QStringList>& deviceList, QList<QStringList>& menuControlList)
+void PageMultiInfo::getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<QStringList> &deviceList, QList<QStringList> &menuControlList)
 {
     //  获取多个设备界面表格信息
     deviceList.append(lst[0]->getTableHeader());
@@ -238,15 +244,16 @@ void PageMultiInfo::getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<Q
         deviceList.append(lstDeviceInfo);
 
         QStringList menuControl;
-        menuControl.append(info->canUninstall()?"true":"false");
-        DeviceInput* input = dynamic_cast<DeviceInput*>(info);
-        if(input){
-            menuControl.append(input->canWakeupMachine()?"true":"false");
+        menuControl.append(info->canUninstall() ? "true" : "false");
+        menuControl.append(info->canEnable() ? "true" : "false");
+        DeviceInput *input = dynamic_cast<DeviceInput *>(info);
+        if (input) {
+            menuControl.append(input->canWakeupMachine() ? "true" : "false");
             menuControl.append(input->wakeupPath());
         }
 
-        DeviceNetwork* network = dynamic_cast<DeviceNetwork*>(info);
-        if(network){
+        DeviceNetwork *network = dynamic_cast<DeviceNetwork *>(info);
+        if (network) {
             menuControl.append(network->logicalName());
         }
 

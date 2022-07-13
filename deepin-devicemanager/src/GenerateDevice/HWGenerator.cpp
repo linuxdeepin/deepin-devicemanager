@@ -16,6 +16,7 @@
 #include "DeviceManager/DevicePower.h"
 #include "DeviceManager/DeviceInput.h"
 #include "DeviceManager/DeviceBluetooth.h"
+#include "DeviceManager/DeviceNetwork.h"
 
 HWGenerator::HWGenerator()
 {
@@ -112,6 +113,65 @@ void HWGenerator::generatorGpuDevice()
     device->setForcedDisplay(true);
     device->setGpuInfo(mapInfo);
     DeviceManager::instance()->addGpuDevice(device);
+}
+
+void HWGenerator::generatorNetworkDevice()
+{
+    QList<DeviceNetwork *> lstDevice;
+    const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
+    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it){
+        // Hardware Class 类型为 network interface
+        if ("network" == (*it)["Hardware Class"]) {
+            continue;
+        }
+
+        // 先判断是否是有效网卡信息
+        // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
+        if(((*it).find("HW Address") == (*it).end() || (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())){
+            continue;
+        }
+
+        // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
+        if((*it).find("unique_id") == (*it).end()){
+            DeviceNetwork *device = new DeviceNetwork();
+            device->setInfoFromHwinfo(*it);
+            if(!device->available()){
+                device->setCanEnale(false);
+                device->setCanUninstall(false);
+                device->setForcedDisplay(true);
+            }
+            lstDevice.append(device);
+        }else{
+            DeviceNetwork *device = nullptr;
+            const QString& unique_id = (*it)["unique_id"];
+            for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet){
+                if(!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id){
+                    device = (*itNet);
+                }
+            }
+            if(device){
+                device->setEnableValue(false);
+            }
+        }
+    }
+
+    // 设置从lshw中获取的信息
+    const QList<QMap<QString, QString>> &lstLshw = DeviceManager::instance()->cmdInfo("lshw_network");
+    for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it){
+        if((*it).find("serial") == (*it).end())
+            continue;
+        const QString& serialNumber = (*it)["serial"];
+        for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
+            if (!serialNumber.isEmpty() && (*itDevice)->uniqueID() == serialNumber) {
+                (*itDevice)->setInfoFromLshw(*it);
+                break;
+            }
+        }
+    }
+
+    foreach(DeviceNetwork* device, lstDevice){
+        DeviceManager::instance()->addNetworkDevice(device);
+    }
 }
 
 void HWGenerator::getAudioInfoFromCatAudio()

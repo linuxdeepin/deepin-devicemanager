@@ -237,10 +237,14 @@ void TableWidget::slotShowMenu(const QPoint &point)
     }
     // 主板、内存、cpu等没有驱动，无需右键按钮
     // 选中item状态下才有卸载、更新按钮
-    bool canUninstall = true;
+    bool canUninstall = true , canEnable = true;
     QStandardItem* item = mp_Table->item(row,0);
     if(item){ // 获取该设备是否可以更新卸载驱动
         canUninstall = item->data(Qt::UserRole).toString()=="true" ? true : false;
+        canEnable = item->data(Qt::UserRole+1).toString()=="true" ? true : false;
+    }
+    if(!canEnable){
+        mp_Enable->setEnabled(false);
     }
     if (canUninstall && selected.size() > 0) {
         mp_Menu->addSeparator();
@@ -248,7 +252,7 @@ void TableWidget::slotShowMenu(const QPoint &point)
         mp_Menu->addAction(mp_removeDriver);
     }
 
-    QVariant canWakeup = item->data(Qt::UserRole+1);
+    QVariant canWakeup = item->data(Qt::UserRole+2);
     if(canWakeup.isValid()){
         mp_Menu->addSeparator();
 
@@ -267,7 +271,7 @@ void TableWidget::slotShowMenu(const QPoint &point)
         }else{ // 简述右键菜单处理
             bool canWakeupBool = str == "true" ? true : false;
             if(canWakeupBool){
-                QString wakeupPath = item->data(Qt::UserRole+2).toString();
+                QString wakeupPath = item->data(Qt::UserRole+3).toString();
                 QFile file(wakeupPath);
                 bool isWakeup = false;
                 if(file.open(QIODevice::ReadOnly)){

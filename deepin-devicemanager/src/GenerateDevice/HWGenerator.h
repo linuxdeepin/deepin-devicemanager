@@ -56,6 +56,11 @@ public:
      */
     virtual void generatorGpuDevice() override;
 
+    /**
+     * @brief generatorNetworkDevice:生成网卡
+     */
+    virtual void generatorNetworkDevice();
+
 protected:
     /**
      * @brief getAudioInfoFromCatInput:从cat /proc/bus/input/devices获取音频设备信息

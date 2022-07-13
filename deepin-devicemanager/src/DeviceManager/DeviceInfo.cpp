@@ -122,7 +122,7 @@ bool DeviceBaseInfo::isValueValid(QString &value)
     return true;
 }
 
-bool DeviceBaseInfo::setForcedDisplay(const bool &flag)
+void DeviceBaseInfo::setForcedDisplay(const bool &flag)
 {
     m_forcedDisplay = flag;
 }
@@ -425,10 +425,10 @@ bool DeviceBaseInfo::enable()
 
 bool DeviceBaseInfo::available()
 {
-    if (!m_forcedDisplay && driver().isEmpty()) {
+    if (driver().isEmpty()) {
         m_Available = false;
     }
-    return m_Available;
+    return m_forcedDisplay ? m_forcedDisplay : m_Available;
 }
 
 bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
@@ -442,7 +442,7 @@ bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
     }
 
     // 英伟达驱动无法获取驱动模块，但是不属于核内驱动
-    if("nvidia" == driver){
+    if ("nvidia" == driver) {
         return false;
     }
 
@@ -476,7 +476,7 @@ bool DeviceBaseInfo::canUninstall()
     return m_CanUninstall;
 }
 
-bool DeviceBaseInfo::setCanUninstall(bool can)
+void DeviceBaseInfo::setCanUninstall(bool can)
 {
     m_CanUninstall = can;
 }
@@ -509,7 +509,7 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
     QString strDeviceFile("/device");
     QString strSysFSLink = sysPath;
 
-    if(sysPath.contains("usb")){
+    if (sysPath.contains("usb")) {
         strVendorFile = "/idVendor";
         strDeviceFile = "/idProduct";
         if (!QFile::exists("/sys" + strSysFSLink + strVendorFile)) {

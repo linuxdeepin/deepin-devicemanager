@@ -257,7 +257,7 @@ struct strPpds {
     QString strManufacturer;
 };
 
-struct RepoDriverInfo{
+struct RepoDriverInfo {
     QString strManufacturer;//厂商
     QString strDebManufacturer;//包厂商
     QString strArch;//架构
