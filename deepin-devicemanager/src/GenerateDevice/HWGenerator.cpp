@@ -2,7 +2,8 @@
 #include "HWGenerator.h"
 
 // Qt库文件
-#include<QDebug>
+#include <QDebug>
+#include <QProcess>
 
 // 其它头文件
 #include "DeviceManager/DeviceManager.h"
@@ -34,6 +35,41 @@ void HWGenerator::generatorBluetoothDevice()
     getBluetoothInfoFromCatWifiInfo();
 }
 
+void HWGenerator::generatorGpuDevice()
+{
+    QProcess process;
+    process.start("gpuinfo");
+    process.waitForFinished(-1);
+    int exitCode = process.exitCode();
+    if (exitCode == 127 || exitCode == 126) {
+        return;
+    }
+
+    QString deviceInfo = process.readAllStandardOutput();
+    deviceInfo.replace("：", ":");
+    QStringList items = deviceInfo.split("\n");
+
+    QMap<QString, QString> mapInfo;
+    if (items.size() > 0) {
+        mapInfo.insert("Name", items[0].trimmed());
+    }
+
+    for (int i = 1;i < items.size(); ++i) {
+        QStringList words = items[i].split(":");
+        if (words.size() == 2) {
+            mapInfo.insert(words[0].trimmed(), words[1].trimmed());
+        }
+    }
+    if (mapInfo.size() < 2)
+        return;
+
+    DeviceGpu *device = new DeviceGpu();
+    device->setCanUninstall(false);
+    device->setForcedDisplay(true);
+    device->setGpuInfo(mapInfo);
+    DeviceManager::instance()->addGpuDevice(device);
+}
+
 void HWGenerator::getAudioInfoFromCatAudio()
 {
     const QList<QMap<QString, QString>> lstAudio = DeviceManager::instance()->cmdInfo("cat_audio");
@@ -43,7 +79,6 @@ void HWGenerator::getAudioInfoFromCatAudio()
             continue;
 
         QMap<QString, QString> tempMap = *it;
-        tempMap["driver"] = tempMap["Name"];
         if(tempMap["Name"].contains("da_combine_v5",Qt::CaseInsensitive)){
             tempMap["Name"] = "Hi6405";
             tempMap["Model"] = "Hi6405";
@@ -52,6 +87,7 @@ void HWGenerator::getAudioInfoFromCatAudio()
         DeviceAudio *device = new DeviceAudio();
         device->setCanEnale(false);
         device->setCanUninstall(false);
+        device->setForcedDisplay(true);
         device->setInfoFromCatAudio(tempMap);
         DeviceManager::instance()->addAudioDevice(device);
     }

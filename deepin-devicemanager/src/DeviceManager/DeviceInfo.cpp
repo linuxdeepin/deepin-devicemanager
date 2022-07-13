@@ -22,6 +22,7 @@ DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     , m_CanUninstall(false)
     , m_Available(true)
     , m_Index(0)
+    , m_forcedDisplay(false)
 {
 }
 
@@ -119,6 +120,11 @@ bool DeviceBaseInfo::isValueValid(QString &value)
         return false;
 
     return true;
+}
+
+bool DeviceBaseInfo::setForcedDisplay(const bool &flag)
+{
+    m_forcedDisplay = flag;
 }
 
 void DeviceBaseInfo::toHtmlString(QDomDocument &doc)
@@ -419,7 +425,7 @@ bool DeviceBaseInfo::enable()
 
 bool DeviceBaseInfo::available()
 {
-    if (driver().isEmpty()) {
+    if (!m_forcedDisplay && driver().isEmpty()) {
         m_Available = false;
     }
     return m_Available;

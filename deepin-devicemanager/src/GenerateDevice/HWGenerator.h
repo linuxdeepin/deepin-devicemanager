@@ -46,6 +46,11 @@ public:
      */
     virtual void generatorBluetoothDevice();
 
+    /**
+     * @brief generatorGpuDevice:生成显卡信息
+     */
+    virtual void generatorGpuDevice() override;
+
 protected:
     /**
      * @brief getAudioInfoFromCatInput:从cat /proc/bus/input/devices获取音频设备信息

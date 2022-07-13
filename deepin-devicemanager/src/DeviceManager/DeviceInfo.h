@@ -214,6 +214,12 @@ public:
     bool isValueValid(QString &value);
 
     /**
+     * @brief setForcedDisplay：设置强制显示
+     * @param flag：是否强制显示
+     */
+    bool setForcedDisplay(const bool &flag);
+
+    /**
      * @brief toHtmlString:导出信息为html格式
      * @param doc xml格式文本
      */
@@ -423,6 +429,7 @@ protected:
     bool                           m_CanEnable;     //<! 设备是否可以启用禁用
     bool                           m_CanUninstall;  //<! 是否可以卸载驱动
     bool                           m_Available;     //<! 是否可用
+    bool                           m_forcedDisplay; //<! 强制显示
     int                            m_Index;         //<! 同名设备的索引
 
 private:
