@@ -10,7 +10,7 @@
 #include <QProcess>
 #include <QScrollArea>
 #include <QScrollBar>
-
+#include <QPainterPath>
 #define FONT_WEIGHT 63
 #define ICON_LABEL_SIZE 128
 #define PROGRESS_HEIGHT 8

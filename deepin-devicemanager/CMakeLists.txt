@@ -147,4 +147,7 @@ install(FILES ${APP_AUTHENTICATION} DESTINATION /usr/share/polkit-1/actions)
 install(FILES ${APP_SERVICE} DESTINATION share/dbus-1/services)
 
 # Test--------deepin-devicemanager
-add_subdirectory(./tests)
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+   add_subdirectory(./tests)
+endif()
+

@@ -80,4 +80,6 @@ install(FILES ${SYSTEMD_SERVER} DESTINATION /lib/systemd/system)
 install(FILES ${DBUS_CONFIG} DESTINATION /etc/dbus-1/system.d)
 
 #TEST--------------------------------------------------
-add_subdirectory(./tests)
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+   add_subdirectory(./tests)
+endif()

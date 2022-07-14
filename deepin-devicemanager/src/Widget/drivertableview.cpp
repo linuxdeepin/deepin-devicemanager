@@ -13,7 +13,7 @@
 #include <QDebug>
 #include <QPainter>
 #include <QHeaderView>
-
+#include <QPainterPath>
 
 
 static const int kSpacingMargin = 4;

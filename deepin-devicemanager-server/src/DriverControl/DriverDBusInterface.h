@@ -39,6 +39,7 @@ public:
 
 private:
     void initConnects();
+    bool getUserAuthorPasswd(void);
 
 signals:
     Q_SCRIPTABLE void sigProgressDetail(int progress, const QString &strDeatils);

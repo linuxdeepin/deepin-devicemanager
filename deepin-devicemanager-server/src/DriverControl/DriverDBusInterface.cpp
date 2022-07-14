@@ -5,6 +5,45 @@
 #include "DebInstaller.h"
 
 #include <QDebug>
+#include <QProcess>
+#include <QDir>
+
+bool DriverDBusInterface::getUserAuthorPasswd()
+{
+
+    // 2. 执行命令获取用户
+    QString  username;
+    QString info;
+    QProcess process;
+    process.start("whoami");
+    process.waitForFinished(-1);
+    info = process.readAllStandardOutput();
+    if(!info.contains("root"))
+        return true;
+
+    process.start("lslogins -u");
+    process.waitForFinished(-1);
+    info = process.readAllStandardOutput();
+    QStringList infolist = info.split("\n", QString::SkipEmptyParts);
+    for (int i = 0; i < infolist.size(); i++) {
+        QStringList names = infolist[i].split(" ", QString::SkipEmptyParts);
+
+        if(names.size() < 2 || names[1].contains("root") || names[1].contains("USER"))
+            continue;
+         else if(! names[1].isEmpty()){
+              username = names[1];
+              break;
+        }
+    }
+    process.start("pkexec --user deep pkexec sudo");
+    process.waitForFinished(-1);
+    int exitCode = process.exitCode();
+    if (exitCode == 127 || exitCode == 126) {
+        return false;
+    }
+    return true;
+}
+
 
 DriverDBusInterface::DriverDBusInterface(QObject *parent)
     : QObject(parent)
@@ -28,11 +67,15 @@ void DriverDBusInterface::initConnects()
 
 bool DriverDBusInterface::unInstallDriver(const QString &modulename)
 {
+    if(!getUserAuthorPasswd())
+        return false;
     return  mp_drivermanager->unInstallDriver(modulename);
 }
 
 bool DriverDBusInterface::installDriver(const QString &filepath)
 {
+    if(!getUserAuthorPasswd())
+        return false;
     return  mp_drivermanager->installDriver(filepath);
 }
 
