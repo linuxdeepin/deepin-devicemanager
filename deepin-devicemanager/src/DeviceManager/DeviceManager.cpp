@@ -1309,4 +1309,14 @@ void DeviceManager::setCpuNum(int num)
     m_CpuNum = num;
 }
 
+void DeviceManager::setCpuFrequencyIsCur(const bool &flag)
+{
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceCPU.begin();
+    for (; it != m_ListDeviceCPU.end(); ++it) {
+        DeviceCpu *device = dynamic_cast<DeviceCpu *>(*it);
+        if (!device)
+            continue;
 
+        device->setFrequencyIsCur(flag);
+    }
+}

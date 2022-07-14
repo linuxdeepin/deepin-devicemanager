@@ -28,6 +28,7 @@ DeviceCpu::DeviceCpu()
     , m_CPUCoreNum(0)
     , m_Driver("")
     , m_FrequencyIsRange(false)
+    , m_FrequencyIsCur(true)
 {
     initFilterKey();
 }
@@ -66,7 +67,10 @@ void DeviceCpu::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("CPU ID"), m_PhysicalID);
     addBaseDeviceInfo(tr("Core ID"), m_CoreID);
     addBaseDeviceInfo(tr("Threads"), m_ThreadNum);
-    addBaseDeviceInfo(tr("Current Speed"), m_CurFrequency);
+    if(m_FrequencyIsCur)
+        addBaseDeviceInfo(tr("Current Speed"), m_CurFrequency);
+    else
+        addBaseDeviceInfo(tr("Max Speed"),m_MaxFrequency);
     addBaseDeviceInfo(tr("BogoMIPS"), m_BogoMIPS);
     addBaseDeviceInfo(tr("Architecture"), m_Architecture);
     addBaseDeviceInfo(tr("CPU Family"), m_Familly);
@@ -146,6 +150,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     if (min && max) {
         QString minS = mapInfo["CPU min MHz"];
         QString maxS = mapInfo["CPU max MHz"];
+        m_MaxFrequency = maxS;
         double minHz = minS.replace("MHz", "").toDouble() / 1000;
         double maxHz = maxS.replace("MHz", "").toDouble() / 1000;
         m_FrequencyIsRange = true;
@@ -179,6 +184,11 @@ void DeviceCpu::setCurFreq(const QString &curFreq)
 {
     if (!curFreq.isEmpty())
         m_CurFrequency = curFreq;
+}
+
+void DeviceCpu::setFrequencyIsCur(const bool &flag)
+{
+    m_FrequencyIsCur = flag;
 }
 
 void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -217,6 +227,7 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     // 获取设备基本信息
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Max Speed", m_Frequency, false);
+    setAttribute(mapInfo,"Max Speed",m_MaxFrequency,false);
     // 飞腾架构由于无法通过lscpu获取当前频率，因此需要通过dmidecode获取
     setAttribute(mapInfo, "Current Speed", m_CurFrequency, false);
     setAttribute(mapInfo, "Family", m_Familly, false);

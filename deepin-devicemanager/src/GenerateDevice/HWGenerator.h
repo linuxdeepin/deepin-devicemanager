@@ -40,6 +40,11 @@ public:
      * @brief generatorComputerDevice:生成计算机概况
      */
     virtual void generatorComputerDevice();
+    
+    /**
+     * @brief generatorCpuDevice:生成CPU设备
+     */
+    virtual void generatorCpuDevice();
 
     /**
      * @brief generatorAudioDevice:生成音频适配器

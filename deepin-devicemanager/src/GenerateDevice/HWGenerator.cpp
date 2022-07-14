@@ -67,6 +67,12 @@ void HWGenerator::generatorComputerDevice()
     DeviceManager::instance()->addComputerDevice(device);
 }
 
+void HWGenerator::generatorCpuDevice()
+{
+    DeviceGenerator::generatorCpuDevice();
+    DeviceManager::instance()->setCpuFrequencyIsCur(false);
+}
+
 void HWGenerator::generatorAudioDevice()
 {
     getAudioInfoFromCatAudio();

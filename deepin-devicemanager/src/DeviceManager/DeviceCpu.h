@@ -96,6 +96,12 @@ public:
      */
     void setCurFreq(const QString &curFreq);
 
+    /**
+     * @brief setFrequencyIsCur:设置频率显示是当前还是最大值
+     * @param flag:频率显示是当前还是最大值
+     */
+    void setFrequencyIsCur(const bool &flag);
+
 protected:
 
     /**
@@ -153,6 +159,7 @@ private:
     QString           m_ThreadNum;          //<! 线程数
     QString           m_Frequency;          //<! 频率
     QString           m_CurFrequency;       //<! 当前频率
+    QString           m_MaxFrequency;       //<! 最大频率
     QString           m_BogoMIPS;           //<! BogoMIPS
     QString           m_Architecture;       //<! 架构
     QString           m_Familly;            //<! 家族
@@ -171,6 +178,7 @@ private:
     int               m_CPUCoreNum;         //<! cpu核数
     QString           m_Driver;
     bool              m_FrequencyIsRange;   //<! 频率显示的是范围还是最大值
+    bool              m_FrequencyIsCur;     //<! 频率显示是当前还是最大值
 
     QMap<int, QString>        m_trNumber;
 };

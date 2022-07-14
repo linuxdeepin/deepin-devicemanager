@@ -560,6 +560,12 @@ public:
      */
     void setCpuNum(int num);
 
+    /**
+     * @brief setCpuFrequencyIsCur:设置频率显示是当前还是最大值
+     * @param flag:频率显示是当前还是最大值
+     */
+    void setCpuFrequencyIsCur(const bool &flag);
+
 protected:
     DeviceManager();
     ~DeviceManager();
