@@ -54,6 +54,7 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_Enable = false;
     }
     setAttribute(mapInfo, "Serial ID", m_SerialID);
+    setAttribute(mapInfo, "Unique ID", m_SerialID);
     m_UniqueID = m_SerialID;
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Device", m_Name);
