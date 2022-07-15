@@ -344,6 +344,9 @@ bool DeviceMonitor::caculateScreenSize(const QString &edid)
     QString errormsg;
     if (!edidParse.setEdid(edid, errormsg))
         return false;
+    // 使用edid的厂商信息
+    if (!edidParse.vendor().isEmpty())
+        m_Vendor = edidParse.vendor();
     double height = edidParse.height();
     double width = edidParse.width();
     if (height <= 0 || width <= 0)
