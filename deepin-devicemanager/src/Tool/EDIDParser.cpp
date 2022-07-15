@@ -111,22 +111,36 @@ void EDIDParser::parserVendor()
     QString vendorStr;
     QString h08 = getBytes(0, 8);
     QString h09 = getBytes(0, 9);
-    if (m_LittleEndianMode)
+    char h0809[2];
+    if (m_LittleEndianMode) {
         vendorStr = h08 + h09;
-    else
+        h0809[0] = static_cast<char>(hexToDec(h08).toInt());
+        h0809[1] = static_cast<char>(hexToDec(h09).toInt());
+    } else {
         vendorStr = h09 + h08;
+        h0809[0] = static_cast<char>(hexToDec(h09).toInt());
+        h0809[1] = static_cast<char>(hexToDec(h08).toInt());
+    }
 
-    // 将16进制的厂商信息转换成二进制的厂商信息
-    QString binStr = hexToBin(vendorStr);
+    char name[4];
+    name[0] = ((h0809[0] & 0x7C) >> 2) + '@';
+    name[1] = ((h0809[0] & 0x03) << 3) + ((h0809[1] & 0xE0) >> 5) + '@';
+    name[2] = (h0809[1] & 0x1F) + '@';
+    name[3] = 0;
 
-    // 转换后的二进制厂商信息格式为(6,5,5),如：010110 10011 00011
-    // 分别表示三个字符，就是厂商的缩写
-    QString bin1 = binStr.mid(1, 5);
-    QString bin2 = binStr.mid(6, 5);
-    QString bin3 = binStr.mid(11, 5);
+    m_Vendor = QString(name);
 
-    // 获取厂商信息
-    m_Vendor = m_MapCh[bin1] +  m_MapCh[bin2] + m_MapCh[bin3];
+//    // 将16进制的厂商信息转换成二进制的厂商信息
+//    QString binStr = hexToBin(vendorStr);
+
+//    // 转换后的二进制厂商信息格式为(6,5,5),如：010110 10011 00011
+//    // 分别表示三个字符，就是厂商的缩写
+//    QString bin1 = binStr.mid(1, 5);
+//    QString bin2 = binStr.mid(6, 5);
+//    QString bin3 = binStr.mid(11, 5);
+
+//    // 获取厂商信息
+//    m_Vendor = m_MapCh[bin1] +  m_MapCh[bin2] + m_MapCh[bin3];
 }
 
 void EDIDParser::parseReleaseDate()
