@@ -228,7 +228,7 @@ void DeviceGenerator::generatorNetworkDevice()
 {
     QList<DeviceNetwork *> lstDevice;
     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
-    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it){
+    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
         // Hardware Class 类型为 network interface
         if ("network" == (*it)["Hardware Class"]) {
             continue;
@@ -236,24 +236,24 @@ void DeviceGenerator::generatorNetworkDevice()
 
         // 先判断是否是有效网卡信息
         // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
-        if(((*it).find("HW Address") == (*it).end() || (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())){
+        if (((*it).find("HW Address") == (*it).end() || (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())) {
             continue;
         }
 
         // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
-        if((*it).find("unique_id") == (*it).end()){
+        if ((*it).find("unique_id") == (*it).end()) {
             DeviceNetwork *device = new DeviceNetwork();
             device->setInfoFromHwinfo(*it);
             lstDevice.append(device);
-        }else{
+        } else {
             DeviceNetwork *device = nullptr;
-            const QString& unique_id = (*it)["unique_id"];
-            for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet){
-                if(!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id){
+            const QString &unique_id = (*it)["unique_id"];
+            for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
+                if (!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id) {
                     device = (*itNet);
                 }
             }
-            if(device){
+            if (device) {
                 device->setEnableValue(false);
             }
         }
@@ -261,10 +261,10 @@ void DeviceGenerator::generatorNetworkDevice()
 
     // 设置从lshw中获取的信息
     const QList<QMap<QString, QString>> &lstLshw = DeviceManager::instance()->cmdInfo("lshw_network");
-    for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it){
-        if((*it).find("serial") == (*it).end())
+    for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it) {
+        if ((*it).find("serial") == (*it).end())
             continue;
-        const QString& serialNumber = (*it)["serial"];
+        const QString &serialNumber = (*it)["serial"];
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
             if (!serialNumber.isEmpty() && (*itDevice)->uniqueID() == serialNumber) {
                 (*itDevice)->setInfoFromLshw(*it);
@@ -273,7 +273,7 @@ void DeviceGenerator::generatorNetworkDevice()
         }
     }
 
-    foreach(DeviceNetwork* device, lstDevice){
+    foreach (DeviceNetwork *device, lstDevice) {
         DeviceManager::instance()->addNetworkDevice(device);
     }
 }
@@ -668,7 +668,7 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
         DeviceManager::instance()->addAudioDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
-     DeviceManager::instance()->deleteDisableDuplicate_AudioDevice();
+    DeviceManager::instance()->deleteDisableDuplicate_AudioDevice();
 }
 
 void DeviceGenerator::getAudioInfoFromLshw()
@@ -737,7 +737,7 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
         if ((*it)["Hardware Class"] == "hub" || (*it)["Hardware Class"] == "mouse" || (*it)["Hardware Class"] == "keyboard")
             continue;
 
-        if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0") {
+        if ((*it)["Model"].contains("bluetooth", Qt::CaseInsensitive) || (*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0") {
 
             // 判断重复设备数据
             QString unique_id = uniqueID(*it);
@@ -819,7 +819,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
             continue;
 
         //过滤触摸板，如果不是触摸板再检查
-        if ((*it)["Hotplug"] != "PS/2"){
+        if ((*it)["Hotplug"] != "PS/2") {
             // 先判断是否存在
             QString path = pciPath(*it);
             // 判断authorized是否存在，不存在则直接返回
@@ -842,10 +842,10 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
         device->setHardwareClass("mouse");
-        if(device->bluetoothIsConnected()){
+        if (device->bluetoothIsConnected()) {
             DeviceManager::instance()->addMouseDevice(device);
             addBusIDFromHwinfo((*it)["SysFS BusID"]);
-        }else{
+        } else {
             delete device;
             device = nullptr;
         }

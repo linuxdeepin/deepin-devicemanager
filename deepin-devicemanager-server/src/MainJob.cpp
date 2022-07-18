@@ -54,7 +54,7 @@ MainJob::MainJob(QObject *parent)
     updateAllDevice();
     //启动时，检测驱动是否要更新，如果要更新则通知系统
     DriverManager *drivermanager = new DriverManager(this);
-    if(drivermanager->checkDriverInfo()){
+    if (drivermanager->checkDriverInfo()) {
         NotifyThread *thread = new NotifyThread();
         connect(thread, &QThread::finished, thread, &QObject::deleteLater);
         thread->start();
@@ -97,6 +97,7 @@ INSTRUCTION_RES MainJob::executeClientInstruction(const QString &instructions)
     INSTRUCTION_RES res = IR_NULL;
 
     if (instructions.startsWith("DETECT")) {
+        this->thread()->msleep(1000);
         // 跟新缓存信息
         updateAllDevice();
     } else if (instructions.startsWith("START")) {
@@ -143,7 +144,7 @@ void MainJob::slotUsbChanged()
 
 void MainJob::slotDriverControl(bool success)
 {
-    if(success)
+    if (success)
         executeClientInstruction("DETECT");
 }
 
@@ -208,11 +209,11 @@ bool MainJob::initDBus()
 void MainJob::initDriverRepoSource()
 {
     QFile fileDriver(DRIVER_REPO_PATH);
-    if(fileDriver.open(QIODevice::ReadOnly)){
+    if (fileDriver.open(QIODevice::ReadOnly)) {
         QString info = fileDriver.readAll();
         QStringList lines = info.split("\n");
         foreach (QString line, lines) {
-            if(line.contains("pro-driver-packages")){
+            if (line.contains("pro-driver-packages")) {
                 fileDriver.close();
                 return;
             }
@@ -221,10 +222,10 @@ void MainJob::initDriverRepoSource()
     }
 
     QFile file(DEVICE_REPO_PATH);
-    if(QFile::exists(DEVICE_REPO_PATH)){
+    if (QFile::exists(DEVICE_REPO_PATH)) {
         return;
     }
-    if(!file.open(QIODevice::ReadWrite| QIODevice::Text)){
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
         qInfo() << file.errorString();
         return;
     }
