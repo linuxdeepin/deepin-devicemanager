@@ -40,7 +40,7 @@ public:
      * @brief generatorComputerDevice:生成计算机概况
      */
     virtual void generatorComputerDevice();
-    
+
     /**
      * @brief generatorCpuDevice:生成CPU设备
      */
@@ -70,7 +70,7 @@ protected:
     /**
      * @brief getAudioInfoFromCatInput:从cat /proc/bus/input/devices获取音频设备信息
      */
-    virtual void getAudioInfoFromCatAudio();
+    virtual void getAudioInfoFromCatAudio() ;
 
     /**
      * @brief getDiskInfoFromLshw:从lshw获取存储设备信息
@@ -85,20 +85,25 @@ protected:
     /**
      * @brief getBluetoothInfoFromHciconfig:hciconfig获取蓝牙信息
      */
-    virtual void getBluetoothInfoFromHciconfig();
+    virtual void getBluetoothInfoFromHciconfig() override;
 
     /**
      * @brief getBlueToothInfoFromHwinfo:从hwinfo获取蓝牙信息
      */
-    virtual void getBlueToothInfoFromHwinfo();
+    virtual void getBlueToothInfoFromHwinfo() override;
 
     /**
      * @brief getBluetoothInfoFromLshw:从lshw获取蓝牙信息
      */
-    virtual void getBluetoothInfoFromLshw();
+    virtual void getBluetoothInfoFromLshw() override;
 
     /**@brief:generator bluetooth info*/
     virtual void getBluetoothInfoFromCatWifiInfo();
+
+    /**
+     * @brief getMemoryInfoFromLshw:从lshw获取内存信息
+     */
+    virtual void getMemoryInfoFromLshw() override;
 };
 
 #endif // PANGUVGENERATOR_H

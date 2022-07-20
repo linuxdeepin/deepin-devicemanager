@@ -1,5 +1,7 @@
 // 项目自身文件
 #include "DeviceMemory.h"
+#include "commonfunction.h"
+#include "DeviceCpu.h"
 
 DeviceMemory::DeviceMemory()
     : DeviceBaseInfo()
@@ -121,10 +123,14 @@ void DeviceMemory::loadOtherDeviceInfo()
 {
     // 倒序，头插，保证原来的顺序
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
-    addOtherDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
-    addOtherDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
-    addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
+    if(Common::boardVendorType().isEmpty()){
+        addOtherDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
+        addOtherDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
+        addOtherDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
+        addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
+    } else {
+        addOtherDeviceInfo(DeviceCpu::tr("Max Speed"), m_ConfiguredSpeed);
+    }
     addOtherDeviceInfo(tr("Data Width"), m_DataBandwidth);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>

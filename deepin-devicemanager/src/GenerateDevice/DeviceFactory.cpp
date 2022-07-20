@@ -30,7 +30,7 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
     else if (arch == "mips64")
         generator = new MipsGenerator();
     else if (arch == "aarch64")
-        if(Common::boardVendorType())
+        if (!Common::boardVendorType().isEmpty())
             generator = new HWGenerator();
         else
             generator = new ArmGenerator();

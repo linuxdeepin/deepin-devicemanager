@@ -17,6 +17,7 @@
 #include "DeviceManager/DeviceInput.h"
 #include "DeviceManager/DeviceBluetooth.h"
 #include "DeviceManager/DeviceNetwork.h"
+#include "DeviceManager/DeviceMemory.h"
 
 HWGenerator::HWGenerator()
 {
@@ -125,7 +126,7 @@ void HWGenerator::generatorNetworkDevice()
 {
     QList<DeviceNetwork *> lstDevice;
     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
-    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it){
+    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
         // Hardware Class 类型为 network interface
         if ("network" == (*it)["Hardware Class"]) {
             continue;
@@ -133,29 +134,29 @@ void HWGenerator::generatorNetworkDevice()
 
         // 先判断是否是有效网卡信息
         // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
-        if(((*it).find("HW Address") == (*it).end() || (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())){
+        if (((*it).find("HW Address") == (*it).end() || (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())) {
             continue;
         }
 
         // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
-        if((*it).find("unique_id") == (*it).end()){
+        if ((*it).find("unique_id") == (*it).end()) {
             DeviceNetwork *device = new DeviceNetwork();
             device->setInfoFromHwinfo(*it);
-            if(!device->available()){
+            if (!device->available()) {
                 device->setCanEnale(false);
                 device->setCanUninstall(false);
                 device->setForcedDisplay(true);
             }
             lstDevice.append(device);
-        }else{
+        } else {
             DeviceNetwork *device = nullptr;
-            const QString& unique_id = (*it)["unique_id"];
-            for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet){
-                if(!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id){
+            const QString &unique_id = (*it)["unique_id"];
+            for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
+                if (!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id) {
                     device = (*itNet);
                 }
             }
-            if(device){
+            if (device) {
                 device->setEnableValue(false);
             }
         }
@@ -163,10 +164,10 @@ void HWGenerator::generatorNetworkDevice()
 
     // 设置从lshw中获取的信息
     const QList<QMap<QString, QString>> &lstLshw = DeviceManager::instance()->cmdInfo("lshw_network");
-    for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it){
-        if((*it).find("serial") == (*it).end())
+    for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it) {
+        if ((*it).find("serial") == (*it).end())
             continue;
-        const QString& serialNumber = (*it)["serial"];
+        const QString &serialNumber = (*it)["serial"];
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
             if (!serialNumber.isEmpty() && (*itDevice)->uniqueID() == serialNumber) {
                 (*itDevice)->setInfoFromLshw(*it);
@@ -175,7 +176,7 @@ void HWGenerator::generatorNetworkDevice()
         }
     }
 
-    foreach(DeviceNetwork* device, lstDevice){
+    foreach (DeviceNetwork *device, lstDevice) {
         DeviceManager::instance()->addNetworkDevice(device);
     }
 }
@@ -356,5 +357,33 @@ void HWGenerator::getBluetoothInfoFromCatWifiInfo()
         tempMap["Type"] = "Bluetooth Device";
 
         DeviceManager::instance()->setBluetoothInfoFromWifiInfo(tempMap);
+    }
+}
+
+void HWGenerator::getMemoryInfoFromLshw()
+{
+    // 从lshw中获取内存信息
+    const QList<QMap<QString, QString>> &lstMemory = DeviceManager::instance()->cmdInfo("lshw_memory");
+    QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
+
+    for (; it != lstMemory.end(); ++it) {
+
+        // bug47194 size属性包含MiB
+        // 目前处理内存信息时，bank下一定要显示内存信息，否则无法生成内存
+        if (!(*it)["size"].contains("GiB") && !(*it)["size"].contains("MiB"))
+            continue;
+
+        // KLU的问题特殊处理
+        QMap<QString, QString> tempMap;
+        foreach (const QString &key, (*it).keys()) {
+            tempMap.insert(key, (*it)[key]);
+        }
+        if (tempMap.contains("clock")) {
+            tempMap.remove("clock");
+        }
+
+        DeviceMemory *device = new DeviceMemory();
+        device->setInfoFromLshw(tempMap);
+        DeviceManager::instance()->addMemoryDevice(device);
     }
 }

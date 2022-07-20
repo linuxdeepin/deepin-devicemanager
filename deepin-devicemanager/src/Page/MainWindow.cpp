@@ -278,7 +278,7 @@ void MainWindow::initWindowTitle()
     });
     titlebar()->addWidget(mp_ButtonBox);
     // 特殊处理
-    if(Common::boardVendorType())
+    if (!Common::boardVendorType().isEmpty())
         mp_ButtonBox->hide();
 }
 

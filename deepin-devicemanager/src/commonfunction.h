@@ -29,16 +29,17 @@
 
 #include <sys/utsname.h>
 
-static QMap<QString, QString> mapArch = {   {"aarch64"    , "arm64"}
-                                      ,{"x86_64"     , "amd64"}
-                                      ,{"mips64"     , "mips64el"}
-                                      ,{"i386"       , "i386"}
-                                      ,{"sw_64"      , "sw_64"}
-                                      ,{"loongarch"  , "loongarch"}
-                                      ,{"loongarch64", "loongarch64"}};
+static QMap<QString, QString> mapArch = {   {"aarch64", "arm64"}
+    , {"x86_64", "amd64"}
+    , {"mips64", "mips64el"}
+    , {"i386", "i386"}
+    , {"sw_64", "sw_64"}
+    , {"loongarch", "loongarch"}
+    , {"loongarch64", "loongarch64"}
+};
 
 static bool initBoardVendorFlag = false;
-static bool boardVendorFlag = false;
+static QString boardVendorKey = "";
 
 class Common
 {
@@ -49,7 +50,7 @@ public:
     {
         QString arch;
         struct utsname utsbuf;
-        if (-1 != uname(&utsbuf)){
+        if (-1 != uname(&utsbuf)) {
             arch = QString::fromLocal8Bit(utsbuf.machine);
         }
         return arch;
@@ -60,22 +61,30 @@ public:
         return mapArch[getArch()];
     }
 
-    static bool checkBoardVendorFlag()
+    static QString checkBoardVendorFlag()
     {
         QProcess process;
-        process.start("dmidecode",QStringList()<< "-s"<<"system-product-name");
+        process.start("dmidecode", QStringList() << "-s" << "system-product-name");
         process.waitForFinished(-1);
         QString info = process.readAllStandardOutput();
-        boardVendorFlag = info.contains("KLVV") || info.contains("KLVU") || info.contains("PGUV") || info.contains("PGUW");
+        if (info.contains("KLVV")) {
+            boardVendorKey = "KLVV";
+        } else if (info.contains("KLVU")) {
+            boardVendorKey = "KLVU";
+        } else if (info.contains("PGUV")) {
+            boardVendorKey = "PGUV";
+        } else if (info.contains("PGUW")) {
+            boardVendorKey = "PGUW";
+        }
         process.close();
 
         initBoardVendorFlag = true;
-        return boardVendorFlag;
+        return boardVendorKey;
     }
 
-    static bool boardVendorType()
+    static QString boardVendorType()
     {
-        return initBoardVendorFlag ? boardVendorFlag : checkBoardVendorFlag();
+        return initBoardVendorFlag ? boardVendorKey : checkBoardVendorFlag();
     }
 };
 #endif // COMMONFUNCTION_H
