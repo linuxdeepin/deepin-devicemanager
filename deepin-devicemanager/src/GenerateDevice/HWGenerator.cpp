@@ -43,6 +43,11 @@ void HWGenerator::generatorComputerDevice()
         device->setName(sysInfo[0]["product"]);
     }
 
+    const QList<QMap<QString, QString> >  &dmidecode1List = DeviceManager::instance()->cmdInfo("dmidecode1");
+    if (!dmidecode1List.isEmpty() && dmidecode1List[0].contains("Product Name") && !dmidecode1List[0]["Product Name"].isEmpty()) {
+        device->setName(dmidecode1List[0]["Product Name"]);
+    }
+
     // set Os Description from /etc/os-version
 
     QString productName = DeviceGenerator::getProductName();
