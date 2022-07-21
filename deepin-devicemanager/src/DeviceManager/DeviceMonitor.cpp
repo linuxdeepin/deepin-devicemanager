@@ -1,6 +1,7 @@
 // 项目自身文件
 #include "DeviceMonitor.h"
 #include "EDIDParser.h"
+#include "commonfunction.h"
 
 #include <DApplication>
 
@@ -269,8 +270,15 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
     // 设置当前分辨率
     QRegExp reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");
     if (reScreenSize.exactMatch(info)) {
-        if (!rate.isEmpty())
-            m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(rate);
+        if (!rate.isEmpty()){
+            QString curRate = rate;
+            QRegExp rateStart("[a-zA-Z]");
+            int pos = curRate.indexOf(rateStart);
+            if(pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()){
+                curRate = QString::number(ceil( curRate.left(pos).toDouble()))+curRate.right(curRate.size() - pos);
+            }
+            m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(curRate);
+        }
         else
             m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
     }

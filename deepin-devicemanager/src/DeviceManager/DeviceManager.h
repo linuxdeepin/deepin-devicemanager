@@ -312,6 +312,12 @@ public:
     void addNetworkDevice(DeviceNetwork *const device);
 
     /**
+     * @brief setNetworkInfoFromWifiInfo:设置网络适配器
+     * @param mapInfo:由WifiInfo获取的网卡信息map
+     */
+    bool setNetworkInfoFromWifiInfo(const QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief getNetworkDevice 获取网卡设备
      * @param busInfo
      * @return

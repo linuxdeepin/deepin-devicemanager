@@ -39,7 +39,7 @@ void HWGenerator::generatorComputerDevice()
     const QList<QMap<QString, QString> >  &sysInfo = DeviceManager::instance()->cmdInfo("lshw_system");
     if (sysInfo.size() > 0) {
         device->setType(sysInfo[0]["description"]);
-        device->setVendor(sysInfo[0]["vendor"]);
+//        device->setVendor(sysInfo[0]["vendor"]);
         device->setName(sysInfo[0]["product"]);
     }
 
