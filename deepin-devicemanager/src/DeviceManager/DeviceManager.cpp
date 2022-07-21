@@ -666,6 +666,22 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     m_ListDeviceNetwork.append(device);
 }
 
+bool DeviceManager::setNetworkInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin();
+    for (; it != m_ListDeviceNetwork.end(); ++it) {
+
+        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
+        if (!device)
+            continue;
+
+        if (device->setInfoFromWifiInfo(mapInfo)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 DeviceBaseInfo * DeviceManager::getNetworkDevice(const QString& unique_id)
 {
     for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceNetwork.begin(); it != m_ListDeviceNetwork.end(); ++it) {
