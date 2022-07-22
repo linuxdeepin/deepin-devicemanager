@@ -125,6 +125,11 @@ public:
     void appendDisk(DeviceStorage *device);
 
     /**
+     * @brief checkDiskSize:规范磁盘大小
+     */
+    virtual void checkDiskSize();
+
+    /**
      * @brief compareSize:比较nvme提供的两个容量值的大小
      * @param size1:Total NVM Capacity
      * @param size2:Namespace 1 Size/Capacity

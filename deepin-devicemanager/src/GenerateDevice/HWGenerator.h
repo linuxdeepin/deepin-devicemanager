@@ -39,12 +39,12 @@ public:
     /**
      * @brief generatorComputerDevice:生成计算机概况
      */
-    virtual void generatorComputerDevice();
+    virtual void generatorComputerDevice() override;
 
     /**
      * @brief generatorCpuDevice:生成CPU设备
      */
-    virtual void generatorCpuDevice();
+    virtual void generatorCpuDevice() override;
 
     /**
      * @brief generatorAudioDevice:生成音频适配器
@@ -54,7 +54,7 @@ public:
     /**
      * @brief generatorBluetoothDevice:生成蓝牙设备
      */
-    virtual void generatorBluetoothDevice();
+    virtual void generatorBluetoothDevice() override;
 
     /**
      * @brief generatorGpuDevice:生成显卡信息
@@ -64,7 +64,12 @@ public:
     /**
      * @brief generatorNetworkDevice:生成网卡
      */
-    virtual void generatorNetworkDevice();
+    virtual void generatorNetworkDevice() override;
+
+    /**
+     * @brief generatorDiskDevice生成存储设备信息
+     */
+    virtual void generatorDiskDevice() override;
 
 protected:
     /**

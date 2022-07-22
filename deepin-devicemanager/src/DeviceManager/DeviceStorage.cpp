@@ -383,6 +383,22 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
     }
 }
 
+void DeviceStorage::checkDiskSize()
+{
+    QRegExp reg("[0-9]*.?[0-9]*");
+    int index = reg.indexIn(m_Size);
+    // index>0时，对于"32GB"（数字开头的字符串,index=0）无法获取正确的数据32
+    // 所以要改为index >= 0
+    if (index >= 0) {
+        double num = reg.cap(0).toDouble();
+        double num1 = num - int(num);
+        QString type = m_Size.right(m_Size.length() - reg.cap(0).size()).trimmed();
+        if(!qFuzzyCompare(num1,0.0) && type == "GB"){
+            m_Size = QString::number(int(num)+1)+type;
+        }
+    }
+}
+
 QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
 {
     // 比较smartctl中可能提供的两个大小，取大值作为存储设备的大小
