@@ -42,9 +42,8 @@ void KLVGenerator::generatorNetworkDevice()
         capabilities: ethernet physical wireless
         configuration: broadcast=yes ip=10.4.6.115 multicast=yes wireless=IEEE 802.11
         */
-        if ((tempMap["configuration"].indexOf("wireless=IEEE 802.11")> -1) ||
-                (tempMap["capabilities"].indexOf("wireless") > -1))
-        {
+        if ((tempMap["configuration"].indexOf("wireless=IEEE 802.11") > -1) ||
+                (tempMap["capabilities"].indexOf("wireless") > -1)) {
             continue;
         }
 
@@ -109,6 +108,41 @@ void KLVGenerator::getNetworkInfoFromCatWifiInfo()
         tempMap["Type"] = "Wireless network";
 
         DeviceManager::instance()->setNetworkInfoFromWifiInfo(tempMap);
+    }
+}
+
+void KLVGenerator::getDiskInfoFromLshw()
+{
+    QString bootdevicePath("/proc/bootdevice/product_name");
+    QString modelStr = "";
+    QFile file(bootdevicePath);
+    if (file.open(QIODevice::ReadOnly)) {
+        modelStr = file.readLine().simplified();
+        file.close();
+    }
+
+    const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_disk");
+    QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
+    for (; dIt != lstDisk.end(); ++dIt) {
+        if ((*dIt).size() < 2)
+            continue;
+
+        // KLU的问题特殊处理
+        QMap<QString, QString> tempMap;
+        foreach (const QString &key, (*dIt).keys()) {
+            tempMap.insert(key, (*dIt)[key]);
+        }
+
+//        qInfo() << tempMap["product"] << " ***** " << modelStr << " " << (tempMap["product"] == modelStr);
+        // HW写死
+        if (tempMap["product"] == modelStr) {
+            // 应HW的要求，将描述固定为   Universal Flash Storage
+            tempMap["description"] = "Universal Flash Storage";
+            // 应HW的要求，添加interface   UFS 3.0
+            tempMap["interface"] = "UFS 3.1";
+        }
+
+        DeviceManager::instance()->addLshwinfoIntoStorageDevice(tempMap);
     }
 }
 

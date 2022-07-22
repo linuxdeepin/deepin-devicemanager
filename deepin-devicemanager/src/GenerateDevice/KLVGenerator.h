@@ -46,6 +46,11 @@ protected:
 protected:
     /**@brief:generator network info*/
     virtual void getNetworkInfoFromCatWifiInfo();
+
+    /**
+     * @brief getDiskInfoFromLshw:从lshw获取存储设备信息
+     */
+    virtual void getDiskInfoFromLshw() override;
 };
 
 #endif // KLVGENERATOR_H
