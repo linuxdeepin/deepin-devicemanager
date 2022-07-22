@@ -186,6 +186,12 @@ void HWGenerator::generatorNetworkDevice()
     }
 }
 
+void HWGenerator::generatorDiskDevice()
+{
+    DeviceGenerator::generatorDiskDevice();
+    DeviceManager::instance()->checkDiskSize();
+}
+
 void HWGenerator::getAudioInfoFromCatAudio()
 {
     const QList<QMap<QString, QString>> lstAudio = DeviceManager::instance()->cmdInfo("cat_audio");

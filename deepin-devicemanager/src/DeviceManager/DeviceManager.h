@@ -173,6 +173,11 @@ public:
      */
     virtual void mergeDisk();
 
+    /**
+     * @brief checkDiskSize:规范磁盘大小
+     */
+    virtual void checkDiskSize();
+
     // GPU设备相关 **************************************************************************************
     /**
      * @brief addGpuDevice:添加显卡

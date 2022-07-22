@@ -399,6 +399,14 @@ void DeviceManager::mergeDisk()
     }
 }
 
+void DeviceManager::checkDiskSize()
+{
+    for (int i=0;i<m_ListDeviceStorage.size();++i) {
+        DeviceStorage *device = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[i]);
+        device->checkDiskSize();
+    }
+}
+
 bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString &value)
 {
     // 设置存储设备介质类型
