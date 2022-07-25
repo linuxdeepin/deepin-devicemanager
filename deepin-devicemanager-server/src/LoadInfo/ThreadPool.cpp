@@ -80,6 +80,13 @@ void ThreadPool::initCmd()
     m_ListCmd.append(cmdLshw);
     m_ListUpdate.append(cmdLshw);
 
+    // 添加dmidecode -s system-product-name命令
+    Cmd cmdDmiSPN;
+    cmdDmiSPN.cmd = QString("%1 %2%3").arg("dmidecode -s system-product-name > ").arg(PATH).arg("dmidecode_spn.txt");
+    cmdDmiSPN.file = "dmidecode_spn.txt";
+    cmdDmiSPN.canNotReplace = true;
+    m_ListCmd.append(cmdDmiSPN);
+
     // 添加dmidecode -t 0命令
     Cmd cmdDmi0;
     cmdDmi0.cmd = QString("%1 %2%3").arg("dmidecode -t 0 > ").arg(PATH).arg("dmidecode_0.txt");
