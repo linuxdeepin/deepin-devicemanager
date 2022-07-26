@@ -55,13 +55,15 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_SerialID);
     // 获取设备基本信息
     setAttribute(mapInfo, "Revision", m_Version);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
-    setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "Device", m_Name);
+    setAttribute(mapInfo, "Unique ID", m_SerialID);
+    m_UniqueID = m_SerialID;
     m_HardwareClass = "bluetooth";
 
     // 判断是否核内驱动
@@ -103,9 +105,9 @@ bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 bool DeviceBluetooth::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
 {
     // 机器自身蓝牙
-    const QList<QPair<QString, QString> > & otherAttribs = getOtherAttribs();
+    const QList<QPair<QString, QString> > &otherAttribs = getOtherAttribs();
     QMap<QString, QString> tmpMaps;
-    for (QPair<QString, QString> attrib: otherAttribs) {
+    for (QPair<QString, QString> attrib : otherAttribs) {
         tmpMaps[attrib.first] = attrib.second;
     }
 
