@@ -130,117 +130,117 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
     m_ListDeviceType.clear();
     bool addSeperator = false;
     // 添加概况信息
-    if (true){
+    if (true) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Overview"), "overview##Overview"));
         addSeperator = true;
     }
 
     // 添加cpu信息
-    if (m_ListDeviceCPU.size() > 0){
+    if (m_ListDeviceCPU.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("CPU"), "cpu##CPU"));
         addSeperator = true;
     }
 
-    if (m_CpuNum > 1){
+    if (m_CpuNum > 1) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("CPU quantity"), ""));
         addSeperator = true;
     }
 
-    if(addSeperator){
+    if (addSeperator) {
         m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
         addSeperator = false;
     }
 
     // 板载接口设备
-    if (m_ListDeviceBios.size() > 0){
+    if (m_ListDeviceBios.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Motherboard"), "motherboard##Bios"));
         addSeperator = true;
     }
 
-    if (m_ListDeviceMemory.size() > 0){
+    if (m_ListDeviceMemory.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Memory"), "memory##Memory"));
         addSeperator = true;
     }
 
-    if (m_ListDeviceGPU.size() > 0){
+    if (m_ListDeviceGPU.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Display Adapter"), "displayadapter##GPU"));
         addSeperator = true;
     }
 
-    if (m_ListDeviceAudio.size() > 0){
+    if (m_ListDeviceAudio.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Sound Adapter"), "audiodevice##Audio"));
         addSeperator = true;
     }
 
-    if (m_ListDeviceStorage.size() > 0){
+    if (m_ListDeviceStorage.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Storage"), "storage##Storage"));
         addSeperator = true;
     }
 
-    if (m_ListDeviceOtherPCI.size() > 0){
+    if (m_ListDeviceOtherPCI.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Other PCI Devices"), "otherpcidevices##OtherPCI"));
         addSeperator = true;
     }
 
-    if (m_ListDevicePower.size() > 0){
+    if (m_ListDevicePower.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Battery"), "battery##Power"));
         addSeperator = true;
     }
 
-    if(addSeperator){
+    if (addSeperator) {
         m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
         addSeperator = false;
     }
 
     // 网络设备
-    if (m_ListDeviceBluetooth.size() > 0){
+    if (m_ListDeviceBluetooth.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Bluetooth"), "bluetooth##Bluetooth"));
         addSeperator = true;
     }
 
-    if (m_ListDeviceNetwork.size() > 0){
+    if (m_ListDeviceNetwork.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Network Adapter"), "networkadapter##Network"));
         addSeperator = true;
     }
 
-    if(addSeperator){
+    if (addSeperator) {
         m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
         addSeperator = false;
     }
 
     // 输入设备
-    if (m_ListDeviceMouse.size() > 0){
+    if (m_ListDeviceMouse.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Mouse"), "mouse##Mouse"));
         addSeperator = true;
     }
 
-    if (m_ListDeviceKeyboard.size() > 0){
+    if (m_ListDeviceKeyboard.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Keyboard"), "keyboard##Keyboard"));
         addSeperator = true;
     }
 
-    if(addSeperator){
+    if (addSeperator) {
         m_ListDeviceType.append(QPair<QString, QString>("Separator", "Separator##Separator"));
     }
 
     // 外设设备
-    if (m_ListDeviceMonitor.size() > 0){
+    if (m_ListDeviceMonitor.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Monitor"), "monitor##Monitor"));
     }
 
-    if (m_ListDeviceCdrom.size() > 0){
+    if (m_ListDeviceCdrom.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("CD-ROM"), "cdrom##Cdrom"));
     }
 
-    if (m_ListDevicePrint.size() > 0){
+    if (m_ListDevicePrint.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Printer"), "printer##Print"));
     }
 
-    if (m_ListDeviceImage.size() > 0){
+    if (m_ListDeviceImage.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Camera"), "camera##Image"));
     }
 
-    if (m_ListDeviceOthers.size() > 0){
+    if (m_ListDeviceOthers.size() > 0) {
         m_ListDeviceType.append(QPair<QString, QString>(tr("Other Devices", "Other Input Devices"), "otherdevices##Others"));
     }
 
@@ -295,14 +295,14 @@ void DeviceManager::addMouseDevice(DeviceInput *const device)
     m_ListDeviceMouse.append(device);
 }
 
-DeviceBaseInfo* DeviceManager::getMouseDevice(const QString& unique_id)
+DeviceBaseInfo *DeviceManager::getMouseDevice(const QString &unique_id)
 {
-    if(unique_id.isEmpty()){
+    if (unique_id.isEmpty()) {
         return nullptr;
     }
-    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceMouse.begin(); it != m_ListDeviceMouse.end(); ++it) {
-        DeviceInput *mouse = dynamic_cast<DeviceInput*>(*it);
-        if(mouse && mouse->uniqueID() == unique_id){
+    for (QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMouse.begin(); it != m_ListDeviceMouse.end(); ++it) {
+        DeviceInput *mouse = dynamic_cast<DeviceInput *>(*it);
+        if (mouse && mouse->uniqueID() == unique_id) {
             return *it;
         }
     }
@@ -379,18 +379,18 @@ void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QMap<Q
 
 void DeviceManager::mergeDisk()
 {
-    QMap<QString,QList<int> > allSerialIDs;
-    for (int i=0;i<m_ListDeviceStorage.size();++i) {
+    QMap<QString, QList<int> > allSerialIDs;
+    for (int i = 0; i < m_ListDeviceStorage.size(); ++i) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[i]);
-        if(!device->getDiskSerialID().isEmpty()){
+        if (!device->getDiskSerialID().isEmpty()) {
             allSerialIDs[device->getDiskSerialID()].append(i);
         }
     }
-    for (auto serialIDs:allSerialIDs) {
-        if(serialIDs.size() < 2)
+    for (auto serialIDs : allSerialIDs) {
+        if (serialIDs.size() < 2)
             continue;
         DeviceStorage *fDevice = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[serialIDs[0] ]);
-        for (int i=1;i<serialIDs.size();++i) {
+        for (int i = 1; i < serialIDs.size(); ++i) {
             DeviceStorage *curDevice = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[serialIDs[i] ]);
             fDevice->appendDisk(curDevice);
             m_ListDeviceStorage.removeAt(serialIDs[i]);
@@ -401,7 +401,7 @@ void DeviceManager::mergeDisk()
 
 void DeviceManager::checkDiskSize()
 {
-    for (int i=0;i<m_ListDeviceStorage.size();++i) {
+    for (int i = 0; i < m_ListDeviceStorage.size(); ++i) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[i]);
         device->checkDiskSize();
     }
@@ -592,11 +592,11 @@ bool DeviceManager::setBluetoothInfoFromWifiInfo(const QMap<QString, QString> &m
     return false;
 }
 
-DeviceBaseInfo* DeviceManager::getBluetoothDevice(const QString& unique_id)
+DeviceBaseInfo *DeviceManager::getBluetoothDevice(const QString &unique_id)
 {
-    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceBluetooth.begin(); it != m_ListDeviceBluetooth.end(); ++it) {
-        DeviceBluetooth *bt = dynamic_cast<DeviceBluetooth*>(*it);
-        if(bt && bt->uniqueID() == unique_id){
+    for (QList<DeviceBaseInfo *>::iterator it = m_ListDeviceBluetooth.begin(); it != m_ListDeviceBluetooth.end(); ++it) {
+        DeviceBluetooth *bt = dynamic_cast<DeviceBluetooth *>(*it);
+        if (bt && bt->uniqueID() == unique_id) {
             return *it;
         }
     }
@@ -610,16 +610,16 @@ void DeviceManager::addAudioDevice(DeviceAudio *const device)
 
 void DeviceManager::deleteDisableDuplicate_AudioDevice(void)
 {
-    if (m_ListDeviceAudio.size() > 0){
-        for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {
-            DeviceAudio *audio_1 = dynamic_cast<DeviceAudio*>(*it);
+    if (m_ListDeviceAudio.size() > 0) {
+        for (QList<DeviceBaseInfo *>::iterator it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {
+            DeviceAudio *audio_1 = dynamic_cast<DeviceAudio *>(*it);
             //QString tpath = audio_1->uniqueID();
             // 判断该设备是否已经存在，
-            if(!audio_1->enable()){
-                for (QList<DeviceBaseInfo*>::iterator it2 = m_ListDeviceAudio.begin(); it2 != m_ListDeviceAudio.end(); ++it2) {
-                    DeviceAudio *audio_2 = dynamic_cast<DeviceAudio*>(*it2);
-                    if(audio_2->name() == audio_1->name())
-                        if(audio_2->enable())
+            if (!audio_1->enable()) {
+                for (QList<DeviceBaseInfo *>::iterator it2 = m_ListDeviceAudio.begin(); it2 != m_ListDeviceAudio.end(); ++it2) {
+                    DeviceAudio *audio_2 = dynamic_cast<DeviceAudio *>(*it2);
+                    if (audio_2->name() == audio_1->name())
+                        if (audio_2->enable())
                             m_ListDeviceAudio.removeOne(audio_2);
                 }
             }
@@ -628,13 +628,13 @@ void DeviceManager::deleteDisableDuplicate_AudioDevice(void)
     }
 }
 
-DeviceBaseInfo* DeviceManager::getAudioDevice(const QString& path)
+DeviceBaseInfo *DeviceManager::getAudioDevice(const QString &path)
 {
-    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {
-        DeviceAudio *audio = dynamic_cast<DeviceAudio*>(*it);
+    for (QList<DeviceBaseInfo *>::iterator it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {
+        DeviceAudio *audio = dynamic_cast<DeviceAudio *>(*it);
         QString tpath = audio->uniqueID();
         // 判断该设备是否已经存在，1.1:1.1 -> 1.1:1.0
-        if(audio && path == tpath.replace(QRegExp("[1-9]$"),"0")){
+        if (audio && path == tpath.replace(QRegExp("[1-9]$"), "0")) {
             return *it;
         }
     }
@@ -690,11 +690,11 @@ bool DeviceManager::setNetworkInfoFromWifiInfo(const QMap<QString, QString> &map
     return false;
 }
 
-DeviceBaseInfo * DeviceManager::getNetworkDevice(const QString& unique_id)
+DeviceBaseInfo *DeviceManager::getNetworkDevice(const QString &unique_id)
 {
-    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceNetwork.begin(); it != m_ListDeviceNetwork.end(); ++it) {
-        DeviceNetwork *net = dynamic_cast<DeviceNetwork*>(*it);
-        if(!unique_id.isEmpty() && net && net->uniqueID() == unique_id){
+    for (QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin(); it != m_ListDeviceNetwork.end(); ++it) {
+        DeviceNetwork *net = dynamic_cast<DeviceNetwork *>(*it);
+        if (!unique_id.isEmpty() && net && net->uniqueID() == unique_id) {
             return *it;
         }
     }
@@ -751,11 +751,11 @@ void DeviceManager::addImageDevice(DeviceImage *const device)
     m_ListDeviceImage.append(device);
 }
 
-DeviceBaseInfo* DeviceManager::getImageDevice(const QString& unique_id)
+DeviceBaseInfo *DeviceManager::getImageDevice(const QString &unique_id)
 {
-    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceImage.begin(); it != m_ListDeviceImage.end(); ++it) {
-        DeviceImage *image = dynamic_cast<DeviceImage*>(*it);
-        if(image && image->uniqueID() == unique_id){
+    for (QList<DeviceBaseInfo *>::iterator it = m_ListDeviceImage.begin(); it != m_ListDeviceImage.end(); ++it) {
+        DeviceImage *image = dynamic_cast<DeviceImage *>(*it);
+        if (image && image->uniqueID() == unique_id) {
             return *it;
         }
     }
@@ -816,14 +816,14 @@ void DeviceManager::addOthersDevice(DeviceOthers *const device)
         m_ListDeviceOthers.append(device);
 }
 
-DeviceBaseInfo* DeviceManager::getOthersDevice(const QString& unique_id)
+DeviceBaseInfo *DeviceManager::getOthersDevice(const QString &unique_id)
 {
-    if(unique_id.isEmpty()){
+    if (unique_id.isEmpty()) {
         return nullptr;
     }
-    for (QList<DeviceBaseInfo*>::iterator it = m_ListDeviceOthers.begin(); it != m_ListDeviceOthers.end(); ++it) {
-        DeviceOthers *other = dynamic_cast<DeviceOthers*>(*it);
-        if(other && other->uniqueID() == unique_id){
+    for (QList<DeviceBaseInfo *>::iterator it = m_ListDeviceOthers.begin(); it != m_ListDeviceOthers.end(); ++it) {
+        DeviceOthers *other = dynamic_cast<DeviceOthers *>(*it);
+        if (other && other->uniqueID() == unique_id) {
             return *it;
         }
     }
