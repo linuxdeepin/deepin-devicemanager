@@ -986,6 +986,7 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
 
         if ((*it).find("Device") != (*it).end() && (*it)["Device"].contains("fingerprint", Qt::CaseInsensitive)) {
             DeviceOthers *device = new DeviceOthers();
+            device->setForcedDisplay(true);
             device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addOthersDevice(device);
             continue;

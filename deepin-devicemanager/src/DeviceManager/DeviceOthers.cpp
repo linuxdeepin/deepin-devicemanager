@@ -135,7 +135,7 @@ bool DeviceOthers::available()
     if (driver().isEmpty() && m_HardwareClass == "others") {
         m_Available = false;
     }
-    return m_Available;
+    return m_forcedDisplay ? m_forcedDisplay : m_Available;
 }
 
 void DeviceOthers::initFilterKey()
