@@ -983,9 +983,13 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 3)
             continue;
-
-        if ((*it).find("Device") != (*it).end() && (*it)["Device"].contains("fingerprint", Qt::CaseInsensitive)) {
+/*  bug 141439 不可见功能设计需要再次思考*/
+        if (  (*it).find("Device") != (*it).end() &&
+             ((*it)["Device"].contains("fingerprint", Qt::CaseInsensitive)  ||  
+              (*it)["Device"].contains("MOH", Qt::CaseInsensitive)
+             )) { 
             DeviceOthers *device = new DeviceOthers();
+            device->setForcedDisplay(true);
             device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addOthersDevice(device);
             continue;

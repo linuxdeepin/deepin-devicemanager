@@ -31,7 +31,6 @@ MonitorUsb::MonitorUsb()
     // 定时器发送消息
     connect(mp_Timer, &QTimer::timeout, this, &MonitorUsb::slotTimeout);
     mp_Timer->start(1000);
-    QTimer::singleShot(10000, this, &MonitorUsb::slotTimeout);
 }
 
 void MonitorUsb::monitor()

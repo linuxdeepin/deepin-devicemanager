@@ -54,6 +54,9 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_SerialID);
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
+/* 禁用时提示获取序列号失败*/
+    setAttribute(mapInfo, "Unique ID", m_SerialID);
+    m_UniqueID = m_SerialID;
 
     if (mapInfo["Hardware Class"] != "fingerprint") {
         m_HardwareClass = "others";
@@ -135,7 +138,7 @@ bool DeviceOthers::available()
     if (driver().isEmpty() && m_HardwareClass == "others") {
         m_Available = false;
     }
-    return m_Available;
+    return m_forcedDisplay ? m_forcedDisplay : m_Available;
 }
 
 void DeviceOthers::initFilterKey()
