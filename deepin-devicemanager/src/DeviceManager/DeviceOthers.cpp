@@ -54,7 +54,9 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_SerialID);
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
-
+    setAttribute(mapInfo, "Unique ID", m_SerialID);
+    m_UniqueID = m_SerialID;
+    
     if (mapInfo["Hardware Class"] != "fingerprint") {
         m_HardwareClass = "others";
     } else {
