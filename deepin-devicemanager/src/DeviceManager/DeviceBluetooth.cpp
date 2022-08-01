@@ -122,7 +122,7 @@ bool DeviceBluetooth::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
 
 const QString &DeviceBluetooth::name()const
 {
-    return m_Name;
+    return m_Model;
 }
 
 const QString &DeviceBluetooth::vendor() const
