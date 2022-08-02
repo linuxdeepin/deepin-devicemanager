@@ -53,12 +53,13 @@ MainJob::MainJob(QObject *parent)
     // 守护进程启动的时候加载所有信息
     updateAllDevice();
     //启动时，检测驱动是否要更新，如果要更新则通知系统
-    DriverManager *drivermanager = new DriverManager(this);
-    if (drivermanager->checkDriverInfo()) {
-        NotifyThread *thread = new NotifyThread();
-        connect(thread, &QThread::finished, thread, &QObject::deleteLater);
-        thread->start();
-    }
+// 取消开机驱动安装提示
+//    DriverManager *drivermanager = new DriverManager(this);
+//    if (drivermanager->checkDriverInfo()) {
+//        NotifyThread *thread = new NotifyThread();
+//        connect(thread, &QThread::finished, thread, &QObject::deleteLater);
+//        thread->start();
+//    }
 
     // 后台加载后先禁用设备
     const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");
