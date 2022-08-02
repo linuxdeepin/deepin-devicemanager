@@ -101,7 +101,7 @@ void PageListView::slotListViewItemClicked(const QModelIndex &index)
 {
     // Item 点击事件
     QString concateStr = mp_ListView->getConcatenateStrings(index);
-    if (!concateStr.isEmpty()) {
+    if (!concateStr.isEmpty() && concateStr != QString("Separator")) {
         emit itemClicked(concateStr);
         m_CurType = concateStr;
     }

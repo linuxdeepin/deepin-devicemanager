@@ -107,9 +107,12 @@ void DeviceListView::addItem(const QString &name, const QString &iconFile)
     item->setData(name, Qt::DisplayRole);
     item->setData(lst[1], Qt::UserRole);
     item->setTextAlignment(Qt::AlignVCenter);
-    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
-    if (name != QString("Separator"))
+    if (name != QString("Separator")) {
         item->setToolTip(name);
+        item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
+    } else {
+        item->setFlags(Qt::ItemNeverHasChildren);
+    }
     item->setIcon(QIcon::fromTheme(lst[0]));
     setIconSize(QSize(20, 20));
     mp_ItemModel->appendRow(item);
