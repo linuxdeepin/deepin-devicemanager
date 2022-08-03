@@ -1,8 +1,10 @@
 #include "SingleDeviceManager.h"
 #include "MainWindow.h"
+#include "eventlogutils.h"
 
 #include <DWidgetUtil>
 #include <DGuiApplicationHelper>
+#include <QJsonObject>
 
 SingleDeviceManager::SingleDeviceManager(int &argc, char **argv)
     : DApplication(argc, argv)
@@ -17,6 +19,12 @@ void SingleDeviceManager::activateWindow()
         m_qspMainWnd.reset(new MainWindow());
         Dtk::Widget::moveToCenter(m_qspMainWnd.get());
         m_qspMainWnd->show();
+        QJsonObject obj{
+            {"tid", EventLogUtils::Start},
+            {"version", QCoreApplication::applicationVersion()},
+            {"mode", 1}
+        };
+        EventLogUtils::get().writeLogs(obj);
     } else {
         m_qspMainWnd->setWindowState(Qt::WindowActive);
         m_qspMainWnd->activateWindow(); // Reactive main window
