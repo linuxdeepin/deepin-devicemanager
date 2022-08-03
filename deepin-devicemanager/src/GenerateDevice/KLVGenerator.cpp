@@ -8,6 +8,7 @@
 #include "DeviceManager/DeviceManager.h"
 #include "DeviceManager/DeviceMonitor.h"
 #include "DeviceManager/DeviceNetwork.h"
+#include "DeviceManager/DeviceImage.h"
 
 KLVGenerator::KLVGenerator()
 {
@@ -143,6 +144,79 @@ void KLVGenerator::getDiskInfoFromLshw()
         }
 
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(tempMap);
+    }
+}
+
+void KLVGenerator::getImageInfoFromHwinfo()
+{
+    //  加载从hwinfo中获取的图像设备信息
+    const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 3)
+            continue;
+
+        // hwinfo中对camera的分类不明确，通过camera等关键字认定图像设备
+        if (!(*it)["Model"].contains("camera", Qt::CaseInsensitive) &&
+                !(*it)["Device"].contains("camera", Qt::CaseInsensitive) &&
+                !(*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive) &&
+                !(*it)["Model"].contains("webcam", Qt::CaseInsensitive) &&
+                (*it)["Hardware Class"] != "camera") {
+            continue;
+        }
+
+        // KLU的问题特殊处理
+        QMap<QString, QString> tempMap;
+        foreach (const QString &key, (*it).keys()) {
+            if("Vendor" != key)
+                tempMap.insert(key, (*it)[key]);
+        }
+
+        // 判断该摄像头是否存在，被禁用的和被拔出
+        QString path = pciPath(tempMap);
+        if (path.contains("usb")) {
+            // 判断authorized是否存在，不存在则直接返回
+            if (!QFile::exists("/sys" + path + "/authorized")) {
+                continue;
+            }
+        }
+
+        // 判断重复设备数据
+        QString unique_id = uniqueID(tempMap);
+        DeviceImage *device = dynamic_cast<DeviceImage *>(DeviceManager::instance()->getImageDevice(unique_id));
+        if (device) {
+            device->setEnableValue(false);
+            device->setInfoFromHwinfo(tempMap);
+            continue;
+        } else {
+            if (tempMap.contains("path")) {
+                continue;
+            }
+        }
+
+        device = new DeviceImage();
+        device->setInfoFromHwinfo(tempMap);
+        DeviceManager::instance()->addImageDevice(device);
+        addBusIDFromHwinfo(tempMap["SysFS BusID"]);
+    }
+}
+
+void KLVGenerator::getImageInfoFromLshw()
+{
+    //  加载从lshw中获取的图像设备信息
+    const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 2)
+            continue;
+
+        QMap<QString, QString> tempMap;
+        foreach (const QString &key, (*it).keys()) {
+            if("vendor" != key)
+                tempMap.insert(key, (*it)[key]);
+        }
+
+        DeviceManager::instance()->setCameraInfoFromLshw(tempMap);
     }
 }
 
