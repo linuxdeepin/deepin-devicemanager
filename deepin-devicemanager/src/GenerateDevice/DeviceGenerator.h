@@ -326,20 +326,19 @@ protected:
      */
     virtual void getOthersInfoFromLshw();
 
-private:
     /**
      * @brief pciPath 获取路径
      * @param mapInfo
      * @return
      */
-    QString pciPath(const QMap<QString,QString>& mapInfo);
+    QString pciPath(const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief uniqueID
      * @param mapInfo
      * @return
      */
-    QString uniqueID(const QMap<QString,QString>& mapInfo);
+    QString uniqueID(const QMap<QString, QString> &mapInfo);
 
 protected:
     QStringList m_ListBusID;

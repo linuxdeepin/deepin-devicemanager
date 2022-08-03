@@ -51,6 +51,16 @@ protected:
      * @brief getDiskInfoFromLshw:从lshw获取存储设备信息
      */
     virtual void getDiskInfoFromLshw() override;
+
+    /**
+     * @brief getImageInfoFromHwinfo:从hwinfo中获取图像设备信息
+     */
+    virtual void getImageInfoFromHwinfo() override;
+
+    /**
+     * @brief getImageInfoFromLshw:从lshw中获取图像设备信息
+     */
+    virtual void getImageInfoFromLshw() override;
 };
 
 #endif // KLVGENERATOR_H
