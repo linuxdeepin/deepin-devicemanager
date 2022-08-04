@@ -187,9 +187,12 @@ const QString DeviceMemory::getOverviewInfo()
 {
     // 获取概况信息
     QString ov;
+    QString nameStr = m_Name != "" ? m_Name : m_Vendor;
+    if(nameStr == "--")
+        nameStr.clear();
     ov += QString("%1(%2 %3 %4)") \
           .arg(m_Size) \
-          .arg(m_Name != "" ? m_Name : m_Vendor) \
+          .arg(nameStr) \
           .arg(m_Type) \
           .arg(m_Speed);
 
