@@ -138,6 +138,7 @@ void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
     m_Name = "Monitor " + mapInfo["Vendor"];
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Date", m_ProductionWeek);
     getOtherMapInfo(mapInfo);
 }
 

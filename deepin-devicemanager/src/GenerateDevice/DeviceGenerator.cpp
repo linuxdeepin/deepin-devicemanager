@@ -169,7 +169,12 @@ void DeviceGenerator::generatorCpuDevice()
         logicalNum = map["logical"].toInt();
 
     // set cpu number
-    DeviceManager::instance()->setCpuNum(dmidecode4.size());
+    QSet<QString> allCPUS;
+    for (auto dd4:dmidecode4) {
+        if(dd4.contains("Socket Designation"))
+            allCPUS.insert(dd4["Socket Designation"]);
+    }
+    DeviceManager::instance()->setCpuNum(allCPUS.isEmpty() ? dmidecode4.size() : allCPUS.size());
 
     // set cpu info
     QList<QMap<QString, QString> >::const_iterator it = srcLst.begin();

@@ -24,14 +24,14 @@
 #define PANGUVGENERATOR_H
 
 #include <QObject>
-#include "KLUGenerator.h"
+#include "HWGenerator.h"
 
 /**
  * @brief The PanguVGenerator class
  * 将获取的设备信息生成设备对象，panguV下的生成器
  */
 
-class PanguVGenerator : public KLUGenerator
+class PanguVGenerator : public HWGenerator
 {
 public:
     PanguVGenerator();
