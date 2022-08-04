@@ -9,6 +9,7 @@
 #include <QProcess>
 #include <QTimer>
 
+#include <unistd.h>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -85,8 +86,8 @@ bool DriverInstaller::isNetworkOnline(uint usec)
     //把文件一行一行读取放入vector
     std::ifstream infile;
     infile.open("netlog.bat");
-    string s;
-    std::vector<string> v;
+    std::string s;
+    std::vector<std::string> v;
     while(infile)
     {
         getline(infile,s);
@@ -99,7 +100,7 @@ bool DriverInstaller::isNetworkOnline(uint usec)
     //读取倒数第二行 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
     if (v.size() > 1)
     {
-        string data = v[v.size()-2];
+        std::string data = v[v.size()-2];
         int iPos = data.find("received,");
         if (iPos != -1 )
         {
