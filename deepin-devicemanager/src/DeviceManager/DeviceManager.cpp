@@ -637,6 +637,10 @@ DeviceBaseInfo *DeviceManager::getAudioDevice(const QString &path)
         if (audio && path == tpath.replace(QRegExp("[1-9]$"), "0")) {
             return *it;
         }
+         QString syspath = audio->sysPath();   //remove dumplicate syspath
+         if (audio && path == syspath) {
+             return *it;
+         }
     }
     return nullptr;
 }

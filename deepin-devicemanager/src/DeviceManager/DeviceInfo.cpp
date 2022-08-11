@@ -697,3 +697,35 @@ bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)
     }
     return false;
 }
+
+void DeviceBaseInfo::setsysFStoHwinfoKey(const QMap<QString, QString> &mapInfo)
+{
+    if (mapInfo.find("VID_PID") != mapInfo.end() ) {
+        m_sysFSToHwinfo = mapInfo["VID_PID"];
+        return;
+    }
+}
+
+bool DeviceBaseInfo::sysFSmatchToHwinfo(const QMap<QString, QString> &mapInfo)
+{
+    // VID_PID 匹配上
+    if (mapInfo.find("VID_PID") != mapInfo.end() ) {
+        if (m_sysFSToHwinfo == mapInfo["VID_PID"]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const  QString DeviceBaseInfo::get_string(const QString &sysPathfile)
+{
+    // 从文件中获取D信息
+    QFile file(sysPathfile);
+    if (!file.open(QIODevice::ReadOnly))
+        return QString();
+
+    QString info = file.readAll();
+    file.close();
+    return info;
+}
+

@@ -201,6 +201,12 @@ public:
     const QString getVendorOrModelId(const QString &sysPath, bool flag = true);
 
     /**
+     * @brief get_string:读取文件内信息
+     * @param path:文件绝对路径+名称
+     */
+    const  QString get_string(const QString  &sysPathfile);
+
+    /**
      * @brief getDriverVersion: 获取驱动版本
      * @return
      */
@@ -414,6 +420,20 @@ protected:
      */
     bool matchToLshw(const QMap<QString, QString> &mapInfo);
 
+    /**
+     * @brief setsysFStoHwinfoKey
+     * @param mapInfo
+     * @return
+     */
+    void setsysFStoHwinfoKey(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief sysFSmatchToHwinfo  PID VID
+     * @param mapInfo
+     * @return
+     */
+    bool sysFSmatchToHwinfo(const QMap<QString, QString> &mapInfo);
+
 protected:
     QString                        m_UniqueID;      //<! 设备的唯一值
     QString                        m_SerialID;      //<! 序列号id
@@ -431,6 +451,10 @@ protected:
     bool                           m_Available;     //<! 是否可用
     bool                           m_forcedDisplay; //<! 强制显示
     int                            m_Index;         //<! 同名设备的索引
+    QString                        m_sysFSToHwinfo;  //<! 匹配hwinfo和lshw的key
+    QString                        m_VID_PID;      //<! 设备hw的唯一值 m_VID_PID = m_VID + m_PID.remove("0x")
+    QString                        m_VID;           //<! 设备hw的唯一值
+    QString                        m_PID;           //<! 设备hw的唯一值
 
 private:
     QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息

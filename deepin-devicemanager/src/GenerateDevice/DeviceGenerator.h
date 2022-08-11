@@ -251,9 +251,15 @@ protected:
      */
     virtual void getAudioInfoFromCatInput();
 
+    // /**
+    //  * @brief getAudioChipInfoFromDmesg:从dmesg获取声卡芯片信息
+    //  */
+    // virtual void getAudioChipInfoFromDmesg();
+
     /**
-     * @brief getAudioChipInfoFromDmesg:从dmesg获取声卡芯片信息
+     * @brief getAudioInfoFrom_sysFS:从sysfs获取声卡芯片信息
      */
+    virtual void getAudioInfoFrom_sysFS();
     virtual void getAudioChipInfoFromDmesg();
 
     /**

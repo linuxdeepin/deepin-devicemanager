@@ -287,9 +287,11 @@ void DeviceGenerator::generatorAudioDevice()
 {
     // 生成音频适配器
     getAudioInfoFromHwinfo();
-    getAudioChipInfoFromDmesg();
+    // getAudioChipInfoFromDmesg();  //将两个设备芯片显示为一个，该功能代码逻辑错误  被 getAudioInfoFrom_sysFS 取代
     getAudioInfoFromLshw();
-    //getAudioInfoFromCatInput();
+    getAudioInfoFrom_sysFS();
+    // getAudioInfoFromCatInput();
+    
 }
 
 void DeviceGenerator::generatorBluetoothDevice()
@@ -674,6 +676,33 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
     DeviceManager::instance()->deleteDisableDuplicate_AudioDevice();
+}
+
+void DeviceGenerator::getAudioInfoFrom_sysFS()
+{
+    // 加载从sysFS中获取的音频适配器信息，设备声卡型号
+    // QMap<QString, QString> mapInfo_0;
+    // QMap<QString, QString> mapInfo_1;
+    // QMap<QString, QString> mapInfo_2;
+    QMap<QString, QString> mapInfo;
+    QString path;
+
+    for(int i=0; i<5;i++){
+        mapInfo.clear();
+        DeviceAudio *device = new DeviceAudio();
+        bool getcard = device->setInfoFrom_sysFS(mapInfo,i);
+        if(getcard){
+            path = mapInfo["SysFS ID"];
+            DeviceAudio *tmpdevice = dynamic_cast<DeviceAudio *>(DeviceManager::instance()->getAudioDevice(path));
+            if (!tmpdevice){  // 没有该设备 说加新的
+                DeviceManager::instance()->addAudioDevice(device);
+            } else{  //找到有就 加芯片等信息
+                QString chip = mapInfo["chip"];
+                // DeviceManager::instance()->setAudioChipFromDmesg(chip);
+                tmpdevice->setAudioChipFromDmesg(chip);
+            }
+        }
+    }
 }
 
 void DeviceGenerator::getAudioInfoFromLshw()
