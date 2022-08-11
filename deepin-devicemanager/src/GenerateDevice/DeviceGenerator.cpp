@@ -687,6 +687,7 @@ void DeviceGenerator::getAudioInfoFromLshw()
 
         DeviceManager::instance()->setAudioInfoFromLshw(*it);
     }
+     DeviceManager::instance()->deleteDisableDuplicate_AudioDevice();  //bug 150331  禁用显卡音频，重启后音频信息异常增多
 }
 
 void DeviceGenerator::getAudioInfoFromCatInput()
