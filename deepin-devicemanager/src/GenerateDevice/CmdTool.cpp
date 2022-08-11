@@ -884,6 +884,10 @@ QMap<QString, QMap<QString, QString>> CmdTool::getCurPowerInfo()
 
 void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
+    QString tmpkey;
+    QString tmpvalue;
+    QString tmpvid;
+    tmpvid.clear();
     QStringList infoList = info.split("\n");
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
         QStringList words = (*it).split(ch);
@@ -891,11 +895,54 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
             words.clear();
             words << "Hotplug" << "PS/2";
         }
+         if((*it).contains("SubDevice:")){
+             tmpkey = "PsubID";
+         }
         if (words.size() != 2)
             continue;
 
         if (mapInfo.find(words[0].trimmed()) != mapInfo.end())
             mapInfo[words[0].trimmed()] += QString(" ");
+
+        /*pick PID VID*/
+        if (
+            ("SubDevice" ==  words[0].trimmed() || "SubVendor" == words[0].trimmed() ||
+                "Vendor" ==  words[0].trimmed() || "Device" == words[0].trimmed()      )
+            && !(words[1].trimmed().isEmpty() ||  words[1].trimmed().contains("unknown") )
+            && words[1].trimmed().contains("0x")
+         ){
+            if ("SubDevice" ==  words[0].trimmed()){
+                tmpkey = "PsubID";
+                tmpvalue = words[1].trimmed(); //re.cap(0);
+            } else if ("SubVendor" ==  words[0].trimmed()){
+                tmpkey = "VsubID";
+                tmpvalue = words[1].trimmed();
+            } else if ("Vendor" ==  words[0].trimmed()){
+                tmpkey = "VID";
+                tmpvalue = words[1].trimmed();
+            } else if ("Device" ==  words[0].trimmed()){
+                tmpkey = "PID";
+                tmpvalue = words[1].trimmed();
+             }
+
+            QStringList tmpword = tmpvalue.split(" ");
+            if(tmpword.size() > 1){
+                mapInfo[tmpkey] += tmpword[1].trimmed();
+
+                 if(tmpkey == "VID"){
+                     tmpvid = tmpword[1].trimmed();
+                 }
+                 else if(tmpkey == "PID"){
+                     if(!tmpvid.isEmpty()){
+                         tmpkey = "VID_PID";
+                         tmpvalue.clear();
+                         tmpvalue = tmpvid + tmpword[1].remove("0x",Qt::CaseSensitive).trimmed();
+                         tmpvid.clear();
+                         mapInfo[tmpkey] += tmpvalue;
+                     }
+                 }
+            }
+        }
 
         QRegExp re(".*\"(.*)\".*");
         if (re.exactMatch(words[1].trimmed())) {
@@ -913,11 +960,11 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
 
         } else {
             // 此处如果subDevice,subVendor,Device没有值，则过滤
-            if ("SubDevice" ==  words[0].trimmed() ||
-                    "SubVendor" == words[0].trimmed() ||
-                    "Device" == words[0].trimmed()) {
-                continue;
-            }
+//            if ("SubDevice" ==  words[0].trimmed() ||
+//                    "SubVendor" == words[0].trimmed() ||
+//                    "Device" == words[0].trimmed()) {
+//                continue;
+//            }
             if ("Resolution" == words[0].trimmed()) {
                 mapInfo[words[0].trimmed()] += words[1].trimmed();
             } else {
@@ -928,9 +975,9 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
         }
     }
 
-    if (mapInfo.find("Module Alias") != mapInfo.end()) {
+    if (mapInfo.find("Module Alias") != mapInfo.end())
         mapInfo["Module Alias"].replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
-    }
+    
 }
 
 void CmdTool::getMapInfoFromDmidecode(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)

@@ -39,7 +39,7 @@ public:
        * @brief setInfoFromHwinfo:设置由hwinfo --sound命令获取的设备信息
        * @param mapInfo:由hwinfo获取的信息map
        */
-    void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
+    bool  setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**
        * @brief setInfoFromLshw:设置从lshw里面获取的信息
@@ -56,6 +56,14 @@ public:
     bool setInfoFromCatDevices(const QMap<QString, QString> &mapInfo);
 
     /**
+       * @brief setInfoFrom_sysFS:设置从cat /sys/class/sound里面获取的信息
+       * @param mapInfo:由cat /sys/class/sound获取的信息map
+       * @param ii: /sys/class/sound /card0  card1 ...n ,i-=1~n
+       * @return 布尔值，true:获取设备信息成功；false:获取设备信息失败
+       */
+    bool setInfoFrom_sysFS( QMap<QString, QString> &mapInfo,int ii);
+
+    /**
        * @brief setInfoFromCatAudio:设置从cat /proc/asound/card0/codec#0里面获取的信息 , KLU专用
        * @param mapInfo:由cat /proc/asound/card0/codec#0获取的信息map
        */
@@ -66,6 +74,12 @@ public:
        * @param mapInfo:由dmesg获取的有关声卡型号信息
        */
     bool setAudioChipFromDmesg(const QString &info);
+
+    /**
+       * @brief chip_name:获取名称属性值
+       * @return QString:名称属性值
+       */
+    const QString &chip_name()const;
 
     /**
        * @brief name:获取名称属性值

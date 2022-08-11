@@ -304,10 +304,16 @@ public:
     void setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
     /**
-     * @brief setAudioChipFromDmesg:从Dmesg获取的信息设置声卡芯片型号
-     * @param info:声卡芯片型号
+     * @brief setAudioInfoFrom_sysFS:设置由sysFS获取的声卡信息
+     * @param mapInfo:由sysFS获取的声卡信息map
      */
-    void setAudioChipFromDmesg(const QString &info);
+    void setAudioInfoFrom_sysFS(const QMap<QString, QString> &mapInfo);
+
+    // /**
+    //  * @brief setAudioChipFromDmesg:从Dmesg获取的信息设置声卡芯片型号
+    //  * @param info:声卡芯片型号
+    //  */
+     void setAudioChipFromDmesg(const QString &info);
 
     // 网络设备相关
     /**
