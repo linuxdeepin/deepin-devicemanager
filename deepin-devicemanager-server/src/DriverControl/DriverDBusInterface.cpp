@@ -102,6 +102,10 @@ bool DriverDBusInterface::installDriver(const QString &filepath)
 
 void DriverDBusInterface::installDriver(const QString &modulename, const QString &version)
 {
+    if (!getUserAuthorPasswd()) {
+        emit mp_drivermanager->sigInstallProgressFinished(false, EC_CANCEL);
+        return;
+    }
     return  mp_drivermanager->installDriver(modulename, version);
 }
 
@@ -137,5 +141,9 @@ bool DriverDBusInterface::isDebValid(const QString &filePath)
 
 bool DriverDBusInterface::unInstallPrinter(const QString &vendor, const QString &model)
 {
+    if (!getUserAuthorPasswd()) {
+        emit mp_drivermanager->sigFinished(false, "Cancel");
+        return false;
+    }
     return mp_drivermanager->uninstallPrinter(vendor, model);
 }
