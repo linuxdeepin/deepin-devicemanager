@@ -11,4 +11,4 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, dmidecode, x11-xserver-utils, hwinf
 Description: Device Manager is a handy tool for viewing hardware information and managing the devices.
  Device Manager helps users manage hardware devices installed on computers,
  through which users can view parameters and export data of all hardware devices running in the system.
-Recommends:uos-reporter,deepin-event-log.
+Recommends:uos-reporter,deepin-event-log
