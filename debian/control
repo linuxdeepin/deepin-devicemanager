@@ -8,7 +8,7 @@ Standards-Version: 4.1.3
 Package: deepin-devicemanager
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, dmidecode, x11-xserver-utils, hwinfo, cups, upower, deepin-shortcut-viewer, lshw, libdtkcore5 (>= 5.2.2.2),libkmod2,deepin-elf-sign-tool
+Recommends: uos-reporter, deepin-event-log
 Description: Device Manager is a handy tool for viewing hardware information and managing the devices.
  Device Manager helps users manage hardware devices installed on computers,
  through which users can view parameters and export data of all hardware devices running in the system.
-Recommends: uos-reporter, deepin-event-log
