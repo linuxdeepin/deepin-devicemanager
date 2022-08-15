@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.7)
 
 set(APP_BIN_NAME "deepin-devicemanager-server")
 set(SYSTEMD_SERVER "${CMAKE_CURRENT_SOURCE_DIR}/deepin-devicemanager-server.service")
@@ -18,6 +18,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstack-protector-strong -D_FORTITY_SOUR
 # Find the library
 FIND_PACKAGE(PkgConfig REQUIRED)
 FIND_PACKAGE(QApt REQUIRED)
+find_package(PolkitQt5-1 REQUIRED)
+find_package(DFrameworkdbus REQUIRED)
+
 PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 
 # 设置包含头文件的时候不用包含路径 begin ****************************************************************************************
@@ -72,7 +75,8 @@ add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H})
 
 target_link_libraries(${APP_BIN_NAME}
     ${DtkCore_LIBRARIES}
-    Qt5::Core Qt5::DBus Qt5::Sql Qt5::Network kmod QApt)
+    ${DFrameworkdbus_LIBRARIES}
+    Qt5::Core Qt5::DBus Qt5::Sql Qt5::Network PolkitQt5-1::Agent kmod QApt)
 
 # Install files
 install(TARGETS ${APP_BIN_NAME} DESTINATION bin)

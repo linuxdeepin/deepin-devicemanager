@@ -8,42 +8,63 @@
 #include <QProcess>
 #include <QDir>
 
-bool DriverDBusInterface::getUserAuthorPasswd()
+#include <polkit-qt5-1/PolkitQt1/Authority>
+
+#include <dirent.h>
+
+using namespace PolkitQt1;
+
+static int getPidByName(const QString &taskName)
 {
+    DIR *dir = opendir("/proc");
+    int pid = -1;
+    if (nullptr == dir)
+        return pid;
 
-    // 2. 执行命令获取用户
-    QString  username;
-    QString info;
-    QProcess process;
-    process.start("whoami");
-    process.waitForFinished(-1);
-    info = process.readAllStandardOutput();
-    if(!info.contains("root"))
-        return true;
-
-    process.start("lslogins -u");
-    process.waitForFinished(-1);
-    info = process.readAllStandardOutput();
-    QStringList infolist = info.split("\n", QString::SkipEmptyParts);
-    for (int i = 0; i < infolist.size(); i++) {
-        QStringList names = infolist[i].split(" ", QString::SkipEmptyParts);
-
-        if(names.size() < 2 || names[1].contains("root") || names[1].contains("USER"))
+    struct dirent *ptr = nullptr;
+    while ((ptr = readdir(dir)) != nullptr) {
+        if ((strcmp(ptr->d_name, ".") == 0) || (strcmp(ptr->d_name, "..") == 0) || DT_DIR != ptr->d_type)
             continue;
-         else if(! names[1].isEmpty()){
-              username = names[1];
-              break;
+        char filepath[1024] = {0};
+        sprintf(filepath, "/proc/%s/cmdline", ptr->d_name);
+        FILE *fp = fopen(filepath, "r");
+        if (nullptr == fp)
+            continue;
+
+        char buf[1024] = {0};
+        if (fgets(buf, 1023, fp) == nullptr) {
+            fclose(fp);
+            continue;
+        }
+        char cur_task_name[1024] = {0};
+        sscanf(buf, "%s", cur_task_name);
+        fclose(fp);
+        if (!strcmp(taskName.toStdString().c_str(), cur_task_name)) {
+            bool ok = false;
+            int curPid = QString(ptr->d_name).toInt(&ok);
+            if (ok) {
+                pid = curPid;
+                break;
+            }
         }
     }
-    process.start("pkexec --user deep pkexec sudo");
-    process.waitForFinished(-1);
-    int exitCode = process.exitCode();
-    if (exitCode == 127 || exitCode == 126) {
-        return false;
-    }
-    return true;
+    closedir(dir);
+
+    return pid;
 }
 
+bool DriverDBusInterface::getUserAuthorPasswd()
+{
+    int pid = getPidByName("deepin-devicemanager");
+    if (pid >= 0) {
+        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+                                                                                 UnixProcessSubject(pid),
+                                                                                 Authority::AllowUserInteraction);
+        return result == Authority::Yes;
+    } else {
+        return false;
+    }
+}
 
 DriverDBusInterface::DriverDBusInterface(QObject *parent)
     : QObject(parent)
@@ -67,14 +88,14 @@ void DriverDBusInterface::initConnects()
 
 bool DriverDBusInterface::unInstallDriver(const QString &modulename)
 {
-    if(!getUserAuthorPasswd())
+    if (!getUserAuthorPasswd())
         return false;
     return  mp_drivermanager->unInstallDriver(modulename);
 }
 
 bool DriverDBusInterface::installDriver(const QString &filepath)
 {
-    if(!getUserAuthorPasswd())
+    if (!getUserAuthorPasswd())
         return false;
     return  mp_drivermanager->installDriver(filepath);
 }
