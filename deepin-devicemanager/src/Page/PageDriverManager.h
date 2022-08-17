@@ -108,7 +108,7 @@ private slots:
     void slotUndoInstall();
 
 signals:
-    void startScanning(QList<DriverInfo *> lstInfo);
+    void startScanning();
 
 private:
     /**
@@ -206,7 +206,7 @@ private:
      * @param speed
      * @param size
      */
-    void getDownloadInfo(int porgress, qint64 total, QString& speed, QString& size);
+    void getDownloadInfo(int porgress, qint64 total, QString &speed, QString &size);
 
 private:
     DStackedWidget       *mp_StackWidget;

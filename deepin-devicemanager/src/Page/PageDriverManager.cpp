@@ -62,8 +62,8 @@ PageDriverManager::PageDriverManager(DWidget *parent)
     connect(mp_ViewCanUpdate, &PageDriverTableView::itemChecked, this, &PageDriverManager::slotItemCheckedClicked);
     connect(mp_HeadWidget, &DetectedStatusWidget::installAll, this, &PageDriverManager::slotInstallAllDrivers);
     connect(mp_HeadWidget, &DetectedStatusWidget::undoInstall, this, &PageDriverManager::slotUndoInstall);
-    connect(mp_HeadWidget, &DetectedStatusWidget::redetected, this, &PageDriverManager::scanDriverInfo);
-    connect(mp_ScanWidget, &DriverScanWidget::redetected, this, &PageDriverManager::scanDriverInfo);
+    connect(mp_HeadWidget, &DetectedStatusWidget::redetected, this, &PageDriverManager::startScanning);
+    connect(mp_ScanWidget, &DriverScanWidget::redetected, this, &PageDriverManager::startScanning);
 
     // 将扫描动作放到线程里面
     connect(mp_scanner, &DriverScanner::scanInfo, this, &PageDriverManager::slotScanInfo);
@@ -179,14 +179,14 @@ void PageDriverManager::slotInstallProgressChanged(int progress)
     if (! mp_CurDriverInfo)
         return;
     // 当进度小于50时，apt处于下载过程
-    if(progress <= 50){
-        if(progress > 45)
+    if (progress <= 50) {
+        if (progress > 45)
             mp_CurDriverInfo->m_Status = ST_INSTALL;
         QString speed = "";
         QString size = "";
-        getDownloadInfo(progress*2,mp_CurDriverInfo->m_Byte,speed,size);
+        getDownloadInfo(progress * 2, mp_CurDriverInfo->m_Byte, speed, size);
         mp_HeadWidget->setDownloadUI(mp_CurDriverInfo->type(), speed, size, mp_CurDriverInfo->size(), progress * 2);
-    }else{
+    } else {
         mp_CurDriverInfo->m_Status = ST_INSTALL;
         // 设置表头状态
         mp_HeadWidget->setInstallUI(mp_CurDriverInfo->type(), mp_CurDriverInfo->name(), (progress - 50) * 2);
@@ -796,12 +796,12 @@ bool PageDriverManager::networkIsOnline()
     return mgr.isOnline();
 }
 
-void PageDriverManager::getDownloadInfo(int progress, qint64 total, QString& speed, QString& size)
+void PageDriverManager::getDownloadInfo(int progress, qint64 total, QString &speed, QString &size)
 {
     static qint64 msec = QDateTime::currentMSecsSinceEpoch();
-    static double pre_bytes = total*(progress / 100.0);
-    double bytes = total*(progress / 100.0);
-    if(pre_bytes > bytes){
+    static double pre_bytes = total * (progress / 100.0);
+    double bytes = total * (progress / 100.0);
+    if (pre_bytes > bytes) {
         pre_bytes = 0;
     }
 
@@ -820,7 +820,7 @@ void PageDriverManager::getDownloadInfo(int progress, qint64 total, QString& spe
     pre_bytes = bytes;
     qint64 detal_time = QDateTime::currentMSecsSinceEpoch() - msec;
     double speed_s = detal_bytes / (detal_time / 1000.0);
-    if ( 0 == detal_time ){
+    if (0 == detal_time) {
         speed_s = 0;
     }
     if (speed_s < 1024 * 1024) {
