@@ -163,11 +163,13 @@ void DeviceGpu::setDmesgInfo(const QMap<QString, QString> &mapInfo)
     }
 
     // 设置设备名称
-    if (mapInfo.contains("Device") && !mapInfo["Device"].isEmpty() && m_Name.startsWith("pci"))
+    if (mapInfo.contains("Device") && !mapInfo["Device"].isEmpty() && m_Name.startsWith("pci")){
         setAttribute(mapInfo, "Device", m_Name, true);
-
-    if (mapInfo.contains("Device") && !mapInfo["Device"].isEmpty() && !m_Model.contains(mapInfo["Device"]))
         m_Model = mapInfo["Device"];
+        QMap<QString, QString> devInfo;
+        devInfo.insert("Device",mapInfo["Device"]);
+        getOtherMapInfo(devInfo);
+    }
 
     // 设置显存大小
     if (mapInfo["Size"].contains(m_HwinfoToLshw)) {
