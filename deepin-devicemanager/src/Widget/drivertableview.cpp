@@ -5,7 +5,6 @@
 #include <DApplication>
 #include <DStyle>
 #include <DGuiApplicationHelper>
-#include <DPaletteHelper>
 #include <DFontSizeManager>
 
 #include <QApplication>
@@ -235,7 +234,7 @@ void DriverHeaderView::paintEvent(QPaintEvent *event)
     int radius = style->pixelMetric(DStyle::PM_FrameRadius, &option);
     int margin = 1;
 
-    QRect rect = QRect(viewport()->rect().x()+margin,viewport()->rect().y()+margin,viewport()->rect().width()-margin*2,viewport()->rect().height()-margin*2);
+    QRect rect = QRect(viewport()->rect().x() + margin, viewport()->rect().y() + margin, viewport()->rect().width() - margin * 2, viewport()->rect().height() - margin * 2);
     QRectF clipRect(rect.x(), rect.y(), rect.width(), rect.height() * 2);
     QRectF subRect(rect.x(), rect.y() + rect.height(), rect.width(), rect.height());
     QPainterPath clipPath, subPath;
@@ -517,7 +516,7 @@ void DriverTableView::setItemStatus(int index, Status s)
     }
 }
 
-void DriverTableView::setErrorMsg(int index, const QString& msg)
+void DriverTableView::setErrorMsg(int index, const QString &msg)
 {
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
@@ -586,7 +585,7 @@ void DriverTableView::paintEvent(QPaintEvent *event)
         cg = DPalette::Active;
     }
 
-    auto palette = DPaletteHelper::instance()->palette(this);
+    auto palette = DGuiApplicationHelper::instance()->applicationPalette();;
 
     QBrush bgBrush(palette.color(cg, DPalette::Base));
 
@@ -596,8 +595,8 @@ void DriverTableView::paintEvent(QPaintEvent *event)
     // 计算绘制背景色有问题
     QRect rect = viewport()->rect();
     int hMargin = 1; // 水平方向的内边距
-    rect.setX(rect.x()+hMargin);
-    rect.setWidth(rect.width()-hMargin*2);
+    rect.setX(rect.x() + hMargin);
+    rect.setWidth(rect.width() - hMargin * 2);
     QPainterPath clipPath = getTopRadiusPath(rect);
 
     // 填充背景色
@@ -678,15 +677,15 @@ void DriverTableView::slotHeaderSectionResized(int logicalIndex, int oldSize, in
 {
     Q_UNUSED(oldSize)
     int rowCount = mp_Model->rowCount();
-    for (int i = 0; i < rowCount; i++){
-        QWidget* widget = indexWidget(mp_Model->index(i,logicalIndex));
-        if(widget){
-            if(logicalIndex == 1 && newSize < 106){
+    for (int i = 0; i < rowCount; i++) {
+        QWidget *widget = indexWidget(mp_Model->index(i, logicalIndex));
+        if (widget) {
+            if (logicalIndex == 1 && newSize < 106) {
                 newSize = 106;
-                setColumnWidth(logicalIndex,newSize);
-            }else if(logicalIndex == 2 && newSize < 80){
+                setColumnWidth(logicalIndex, newSize);
+            } else if (logicalIndex == 2 && newSize < 80) {
                 newSize = 80;
-                setColumnWidth(logicalIndex,newSize);
+                setColumnWidth(logicalIndex, newSize);
             }
             widget->setMaximumWidth(newSize);
         }
