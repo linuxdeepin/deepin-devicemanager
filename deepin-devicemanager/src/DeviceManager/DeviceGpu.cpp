@@ -97,7 +97,10 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     // 设置属性
     setAttribute(mapInfo, "Vendor", m_Vendor, false);
     setAttribute(mapInfo, "Device", m_Name, true);
-    setAttribute(mapInfo, "SubDevice", m_Name, true); //如果subdevice有值则使用subdevice
+    // 如果subdevice有值则使用subdevice
+    if (m_Name.isEmpty() || (mapInfo.contains("SubDevice") && mapInfo["Device"].startsWith("pci")) || !mapInfo["SubDevice"].startsWith("pci")) {
+        setAttribute(mapInfo, "SubDevice", m_Name, true);
+    }
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version, false);
     setAttribute(mapInfo, "IRQ", m_IRQ, false);
@@ -148,17 +151,27 @@ void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
         m_Digital = mapInfo["DigitalOutput"];   // bug-105482添加新接口类型
 }
 
-void DeviceGpu::setDmesgInfo(const QString &info)
+void DeviceGpu::setDmesgInfo(const QMap<QString, QString> &mapInfo)
 {
+    if (mapInfo.contains("BusID") && mapInfo["BusID"].size() >= m_HwinfoToLshw.size()
+            && mapInfo["BusID"].right(m_HwinfoToLshw.size()) != m_HwinfoToLshw)
+        return;
     // Bug-85049 JJW 显存特殊处理
-    if (info.contains("null")) {
-        QString size = info;
+    if (mapInfo["Size"].contains("null")) {
+        QString size = mapInfo["Size"];
         m_GraphicsMemory = size.replace("null=", "");
     }
 
+    // 设置设备名称
+    if (mapInfo.contains("Device") && !mapInfo["Device"].isEmpty() && m_Name.startsWith("pci"))
+        setAttribute(mapInfo, "Device", m_Name, true);
+
+    if (mapInfo.contains("Device") && !mapInfo["Device"].isEmpty() && !m_Model.contains(mapInfo["Device"]))
+        m_Model = mapInfo["Device"];
+
     // 设置显存大小
-    if (info.contains(m_HwinfoToLshw)) {
-        QString size = info;
+    if (mapInfo["Size"].contains(m_HwinfoToLshw)) {
+        QString size = mapInfo["Size"];
         m_GraphicsMemory = size.replace(m_HwinfoToLshw + "=", "");
     }
 }

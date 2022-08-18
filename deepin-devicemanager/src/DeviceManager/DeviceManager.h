@@ -201,7 +201,7 @@ public:
      * @brief setGpuSizeFromDmesg:设置由Dmesg获取的显卡大小信息
      * @param info:由由Dmesg获取的显卡大小信息
      */
-    void setGpuSizeFromDmesg(const QString &info);
+    void setGpuSizeFromDmesg(const QMap<QString, QString> &mapInfo);
 
     // 内存设备相关 *************************************************************************************
     /**

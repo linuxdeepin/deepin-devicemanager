@@ -55,9 +55,9 @@ public:
 
     /**
      * @brief setDmesgInfo:设置从dmesg中获取的显存信息
-     * @param info: dmesg中获取的显存信息
+     * @param mapInfo: dmesg中获取的显存信息
      */
-    void setDmesgInfo(const QString &info);
+    void setDmesgInfo(const QMap<QString, QString> &mapInfo);
 
     /**
        * @brief setGpuInfo:设置从gpuinfo命令中获取的信息，华为KLU笔记本和PanGuV机器专用
