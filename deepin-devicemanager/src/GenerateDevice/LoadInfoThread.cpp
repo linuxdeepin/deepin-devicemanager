@@ -2,6 +2,7 @@
 #include "GetInfoPool.h"
 #include "GenerateDevicePool.h"
 #include "DBusInterface.h"
+#include "DeviceManager.h"
 
 #include <QDebug>
 #include <QDateTime>
@@ -37,18 +38,43 @@ void LoadInfoThread::run()
         mp_ReadFilePool.getAllInfo();
         mp_ReadFilePool.waitForDone(-1);
 
-        // 为了保证上面那个线程池完全结束
-        long long begin = QDateTime::currentMSecsSinceEpoch();
-        while (true) {
-            if (m_FinishedReadFilePool)
+        bool readDataFlag = false;
+        int readNum = 0;
+        while (!readDataFlag) {
+            if (m_FinishedReadFilePool) {
+                mp_ReadFilePool.getAllInfo();
+                mp_ReadFilePool.waitForDone(-1);
+            }
+            // 为了保证上面那个线程池完全结束
+            long long begin = QDateTime::currentMSecsSinceEpoch();
+            while (true) {
+                readDataFlag = !DeviceManager::instance()->cmdInfo("dmidecode0").isEmpty();
+                if (readDataFlag && m_FinishedReadFilePool)
+                    break;
+                long long end = QDateTime::currentMSecsSinceEpoch();
+                if (end - begin > 4000)
+                    break;
+                usleep(100);
+            }
+            if ((++readNum) > 2) {
+                if (m_FinishedReadFilePool && !readDataFlag) {
+                    mp_ReadFilePool.getAllInfo();
+                    mp_ReadFilePool.waitForDone(-1);
+                    begin = QDateTime::currentMSecsSinceEpoch();
+                    while (true) {
+                        if (m_FinishedReadFilePool)
+                            break;
+                        long long end = QDateTime::currentMSecsSinceEpoch();
+                        if (end - begin > 4000)
+                            break;
+                        usleep(100);
+                    }
+                }
                 break;
-            long long end = QDateTime::currentMSecsSinceEpoch();
-            if (end - begin > 4000)
-                break;
-            usleep(100);
+            }
         }
-        m_FinishedReadFilePool = false;
 
+        m_FinishedReadFilePool = false;
         mp_GenerateDevicePool.generateDevice();
         mp_GenerateDevicePool.waitForDone(-1);
     }
