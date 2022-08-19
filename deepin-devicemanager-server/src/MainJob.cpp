@@ -164,7 +164,6 @@ void MainJob::updateAllDevice()
     else
         mp_Pool->updateDeviceInfo();
     mp_Pool->waitForDone(-1);
-    sleep(1);
     PERF_PRINT_END("POINT-01");
     m_FirstUpdate = false;
 }
