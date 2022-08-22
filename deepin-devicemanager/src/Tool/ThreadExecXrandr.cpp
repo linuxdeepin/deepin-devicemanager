@@ -106,7 +106,7 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
         if ((*it).contains("*current")) {
             if ((it += 2) >= lines.end())
                 return;
-            QRegExp regRate(".*([0-9]{2}\\.[0-9]{2}Hz).*");
+            QRegExp regRate(".*([0-9]{1,5}\\.[0-9]{1,5}Hz).*");
             if (regRate.exactMatch(*it))
                 last.insert("rate", regRate.cap(1));
         }
