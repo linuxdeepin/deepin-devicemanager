@@ -43,9 +43,6 @@ MainJob::MainJob(QObject *parent)
     , mp_Pool(new ThreadPool)
     , mp_DetectThread(nullptr)
     , mp_IFace(new DBusInterface(this))
-    , mp_DriverOperateIFace(new DriverDBusInterface(this))
-    , mp_Enable(new DBusEnableInterface(this))
-    , mp_Wakeup(new DBusWakeupInterface(this))
     , m_FirstUpdate(true)
 {
     //初始化源
@@ -60,12 +57,6 @@ MainJob::MainJob(QObject *parent)
 //        connect(thread, &QThread::finished, thread, &QObject::deleteLater);
 //        thread->start();
 //    }
-
-    // 后台加载后先禁用设备
-    const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");
-    EnableUtils::disableOutDevice(info);
-    EnableUtils::disableInDevice();
-    WakeupUtils::updateWakeupDeviceInfo(info);
 }
 
 MainJob::~MainJob()
@@ -82,9 +73,26 @@ void MainJob::working()
     mp_DetectThread = new DetectThread(this);
     mp_DetectThread->start();
     connect(mp_DetectThread, &DetectThread::usbChanged, this, &MainJob::slotUsbChanged, Qt::ConnectionType::QueuedConnection);
-    connect(mp_Enable, &DBusEnableInterface::update, this, &MainJob::slotUsbChanged);
-    connect(mp_IFace, &DBusInterface::update, this, &MainJob::slotUsbChanged);
-    connect(mp_DriverOperateIFace, &DriverDBusInterface::sigFinished, this, &MainJob::slotDriverControl);
+
+    // 在驱动管理延迟加载100ms
+    QTimer::singleShot(100, this, [ = ]() {
+        // 后台加载后先禁用设备
+        const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");
+        EnableUtils::disableOutDevice(info);
+        EnableUtils::disableInDevice();
+        WakeupUtils::updateWakeupDeviceInfo(info);
+
+        mp_DriverOperateIFace = (new DriverDBusInterface(this));
+        mp_Enable = (new DBusEnableInterface(this));
+        mp_Wakeup = (new DBusWakeupInterface(this));
+        if (!initDriverDbus()) {
+            exit(1);
+        }
+
+        connect(mp_Enable, &DBusEnableInterface::update, this, &MainJob::slotUsbChanged);
+        connect(mp_IFace, &DBusInterface::update, this, &MainJob::slotUsbChanged);
+        connect(mp_DriverOperateIFace, &DriverDBusInterface::sigFinished, this, &MainJob::slotDriverControl);
+    });
 
     //todo: 先不删除，后续测试完再删除。
 //    DriverInstaller *mp_driverInstaller = new DriverInstaller;;
@@ -186,6 +194,23 @@ bool MainJob::initDBus()
         qInfo() << QDBusConnection::systemBus().lastError();
         return false;
     }
+
+    return true;
+}
+
+bool MainJob::initDriverDbus()
+{
+    QDBusConnection systemBus = QDBusConnection::systemBus();
+    //1. 申请一个总线连接
+    if (!systemBus.isConnected()) {
+        return false;
+    }
+
+    //2. 在总线连接上挂载服务，这样其他进程才能请求该服务
+    if (!systemBus.registerService(SERVICE_NAME)) {
+        return false;
+    }
+
     if (!systemBus.registerObject(DRIVER_SERVICE_PATH, mp_DriverOperateIFace, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals))  {
         qInfo() << QDBusConnection::systemBus().lastError();
         return false;
