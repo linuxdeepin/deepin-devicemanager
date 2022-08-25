@@ -79,9 +79,9 @@ target_link_libraries(${APP_BIN_NAME}
     Qt5::Core Qt5::DBus Qt5::Sql Qt5::Network PolkitQt5-1::Agent kmod QApt)
 
 # Install files
-install(TARGETS ${APP_BIN_NAME} DESTINATION bin)
+install(TARGETS ${APP_BIN_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(FILES ${SYSTEMD_SERVER} DESTINATION /lib/systemd/system)
-install(FILES ${DBUS_CONFIG} DESTINATION /etc/dbus-1/system.d)
+install(FILES ${DBUS_CONFIG} DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/dbus-1/system.d)
 
 #TEST--------------------------------------------------
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
