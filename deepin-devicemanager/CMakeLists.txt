@@ -132,19 +132,16 @@ target_link_libraries(${APP_BIN_NAME}
     PolkitQt5-1::Agent
 )
 
-set(CMAKE_INSTALL_PREFIX /usr)
-
-
 # Install files
-install(TARGETS deepin-devicemanager DESTINATION bin)
+install(TARGETS deepin-devicemanager DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 file(GLOB APP_QM_FILES "translations/*.qm")
-install(FILES ${APP_QM_FILES} DESTINATION share/deepin-devicemanager/translations)
-install(FILES ${APP_DESKTOP} DESTINATION share/applications)
-install(FILES ${APP_ICON_FILE} DESTINATION /usr/share/icons/hicolor/scalable/apps)
-install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION /usr/share/deepin-manual/manual-assets/application/)
-install(FILES ${APP_AUTHENTICATION} DESTINATION /usr/share/polkit-1/actions)
-install(FILES ${APP_SERVICE} DESTINATION share/dbus-1/services)
+install(FILES ${APP_QM_FILES} DESTINATION ${CMAKE_INSTALL_DATADIR}/deepin-devicemanager/translations)
+install(FILES ${APP_DESKTOP} DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+install(FILES ${APP_ICON_FILE} DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
+install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION ${CMAKE_INSTALL_DATADIR}/deepin-manual/manual-assets/application/)
+install(FILES ${APP_AUTHENTICATION} DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/actions)
+install(FILES ${APP_SERVICE} DESTINATION ${CMAKE_INSTALL_DATADIR}/dbus-1/services)
 
 # Test--------deepin-devicemanager
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")

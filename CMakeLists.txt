@@ -1,4 +1,10 @@
 project(deepin-devicemanager C CXX)
+
+include(GNUInstallDirs)
+if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+   set(CMAKE_INSTALL_PREFIX /usr)
+endif()
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager)
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager-server)
 
