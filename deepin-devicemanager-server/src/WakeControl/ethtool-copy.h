@@ -1,14 +1,11 @@
-/*
- * ethtool.h: Defines for Linux ethtool.
- *
- * Copyright (C) 1998 David S. Miller (davem@redhat.com)
- * Copyright 2001 Jeff Garzik <jgarzik@pobox.com>
- * Portions Copyright 2001 Sun Microsystems (thockin@sun.com)
- * Portions Copyright 2002 Intel (eli.kupermann@intel.com,
- *                                christopher.leech@intel.com,
- *                                scott.feldman@intel.com)
- * Portions Copyright (C) Sun Microsystems 2008
- */
+// Copyright (C) 1998 David S. Miller (davem@redhat.com)
+// Copyright (C) Sun Microsystems 2008
+// Copyright 2001 Jeff Garzik <jgarzik@pobox.com>
+// Copyright 2001 Sun Microsystems (thockin@sun.com)
+// Copyright 2002 Intel (eli.kupermann@intel.com,
+// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 #ifndef _LINUX_ETHTOOL_H
 #define _LINUX_ETHTOOL_H
