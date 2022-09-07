@@ -45,8 +45,6 @@ MainJob::MainJob(QObject *parent)
     , mp_IFace(new DBusInterface(this))
     , m_FirstUpdate(true)
 {
-    //初始化源
-    initDriverRepoSource();
     // 守护进程启动的时候加载所有信息
     updateAllDevice();
     //启动时，检测驱动是否要更新，如果要更新则通知系统
@@ -74,8 +72,10 @@ void MainJob::working()
     mp_DetectThread->start();
     connect(mp_DetectThread, &DetectThread::usbChanged, this, &MainJob::slotUsbChanged, Qt::ConnectionType::QueuedConnection);
 
-    // 在驱动管理延迟加载100ms
-    QTimer::singleShot(100, this, [ = ]() {
+    // 在驱动管理延迟加载1000ms
+    QTimer::singleShot(1000, this, [ = ]() {
+        //初始化源
+        initDriverRepoSource();
         // 后台加载后先禁用设备
         const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");
         EnableUtils::disableOutDevice(info);
