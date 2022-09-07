@@ -41,6 +41,8 @@ DWIDGET_USE_NAMESPACE
 #define MIN_WIDTH  680      // 窗口的最小宽度
 #define MIN_HEIGHT 300      // 窗口的最小高度
 
+static bool startScanningFlag = false;
+
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
     , mp_MainStackWidget(new DStackedWidget(this))
@@ -62,6 +64,18 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mp_DeviceWidget, &DeviceWidget::refreshInfo, this, &MainWindow::slotRefreshInfo);
     connect(mp_DeviceWidget, &DeviceWidget::exportInfo, this, &MainWindow::slotExportInfo);
     connect(this, &MainWindow::fontChange, this, &MainWindow::slotChangeUI);
+    connect(mp_DriverManager, &PageDriverManager::startScanning, this, [ = ]() {
+        // 正在刷新,避免重复操作
+        if (m_refreshing) {
+            startScanningFlag = true;
+            return;
+        }
+        // 正在刷新标志
+        m_refreshing = true;
+        // 加载设备信息
+        refreshDataBase();
+        startScanningFlag = true;
+    });
 }
 
 MainWindow::~MainWindow()
@@ -345,7 +359,8 @@ void MainWindow::slotLoadingFinish(const QString &message)
         mp_DeviceWidget->updateListView(types);
 
         // 设置当前页面设备信息页
-        mp_MainStackWidget->setCurrentWidget(mp_DeviceWidget);
+        if (mp_ButtonBox->checkedId() != 1)
+            mp_MainStackWidget->setCurrentWidget(mp_DeviceWidget);
 
         QList<DeviceBaseInfo *> lst;
         bool ret = DeviceManager::instance()->getDeviceList(mp_DeviceWidget->currentIndex(), lst);
@@ -368,6 +383,10 @@ void MainWindow::slotLoadingFinish(const QString &message)
             m_ShowDriverPage = false;
             mp_ButtonBox->buttonList().at(1)->click();
         }
+    }
+    if (startScanningFlag) {
+        mp_DriverManager->scanDriverInfo();
+        startScanningFlag = false;
     }
 }
 

@@ -1,6 +1,8 @@
 // 项目自身文件
 #include "CmdTool.h"
 
+#include <cmath>
+
 // Qt库文件
 #include<QDebug>
 #include<QDateTime>
@@ -455,7 +457,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
 void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
 {
     QString vendor = mapInfo["Vendor"];
-    if(!vendor.contains("NVIDIA Corporation")){
+    if (!vendor.contains("NVIDIA Corporation")) {
         return;
     }
 
@@ -468,8 +470,8 @@ void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
     QStringList lines = sInfo.split("\n");
     foreach (const QString &line, lines) {
         QRegExp reg("\\s\\sAttribute\\s'GPUMemoryInterface' \\(.*\\):\\s([0-9]{2}).*");
-        if(reg.exactMatch(line)){
-            mapInfo.insert("Width",reg.cap(1) + " bits");
+        if (reg.exactMatch(line)) {
+            mapInfo.insert("Width", reg.cap(1) + " bits");
         }
     }
 }
@@ -727,29 +729,113 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
     // 加载nvidia-settings  -q  VideoRam 信息
     // 命令与xrandr命令一样无法在后台运行,该从前台命令直接获取信息
     QString deviceInfo;
-    if (!getDeviceInfoFromCmd(deviceInfo, "nvidia-settings  -q  VideoRam"))
-        return;
-    QMap<QString, QString> mapInfo;
-    QRegExp reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
-    QStringList list = deviceInfo.split("\n");
-
-    foreach (QString item, list) {
-        // Attribute 'VideoRam' (jixiaomei-PC:0.0): 2097152.  正则表达式获取2097152
-        if (reg.exactMatch(item)) {
-            QString gpuSize = reg.cap(1);
-            int numSize = gpuSize.toInt();
-            numSize /= 1024;
-            if (numSize >= 1024) {   // Bug109782 1024MB -> 1G
-                numSize /= 1024;
-                gpuSize = "null=" + QString::number(numSize) + "GB";   // 从nvidi-setting中获取显存信息没有Unique id ,格式与dmesg中获取信息保持一致,故添加"null="
-            } else {
-                gpuSize = "null=" + QString::number(numSize) + "MB";
+    if (getDeviceInfoFromCmd(deviceInfo, "nvidia-smi -L")) {
+        QStringList gpuList = deviceInfo.split("\n");
+        for (QString item : gpuList) {
+            int index = item.indexOf(":");
+            if (item.isEmpty() || index == -1)
+                continue;
+            QString firstStr = item.left(index).trimmed();
+            QString lastStr = item.right(item.size() - index - 1).trimmed();
+            if (firstStr.isEmpty() || lastStr.isEmpty())
+                continue;
+            QStringList gpuNumList = firstStr.split(' ', QString::SkipEmptyParts);
+            if (gpuNumList.size() != 2)
+                continue;
+            QString deviceStr;
+            int devIndex = lastStr.indexOf("(");
+            if (devIndex != -1) {
+                deviceStr = lastStr.left(devIndex).trimmed();
             }
-            mapInfo.insert("Size", gpuSize);
-            break;
+
+            QString memoryInfo;
+            if (!getDeviceInfoFromCmd(memoryInfo, QString("nvidia-smi -i %1 -q -d MEMORY").arg(gpuNumList[1])))
+                continue;
+
+            // 读取Bus Id
+            QString sizeStr;
+            QStringList memoryList = memoryInfo.split("\n");
+            bool memoryUsageFlag = false;
+            QString curBusIdStr;
+            foreach (QString memoryItem, memoryList) {
+                // 读取ID
+                if (curBusIdStr.isEmpty() && memoryItem.trimmed().startsWith("GPU")) {
+                    QStringList strList = memoryItem.split(' ', QString::SkipEmptyParts);
+                    curBusIdStr = strList.size() == 2 ? strList[1] : "null";
+                }
+
+                // 获取显存大小
+                if (!memoryUsageFlag && memoryItem.trimmed() == "FB Memory Usage") {
+                    memoryUsageFlag = true;
+                } else if (memoryUsageFlag) {
+                    QStringList strList = memoryItem.split(':', QString::SkipEmptyParts);
+                    if (strList.size() != 2) {
+                        break;
+                    }
+                    if (strList[0].trimmed() == "Total") {
+                        if (strList[1].trimmed() != "N/A") {
+                            QStringList memorySizeList = strList[1].split(' ', QString::SkipEmptyParts);
+                            if (memorySizeList.size() == 2) {
+                                bool isOk = false;
+                                int mSize = memorySizeList[0].toInt(&isOk);
+                                if (isOk && memorySizeList[1].trimmed() == "MiB" && mSize >= 1000) {
+                                    int curSize =  static_cast<int>((floor(mSize / 1000.0)));
+                                    if ((mSize / 1000.0 - curSize) < 0.6 && (mSize / 1000.0 - curSize) > 0.4) {
+                                        sizeStr = "null=" + QString::number(curSize) + ".5GB";
+                                    } else {
+                                        curSize = static_cast<int>((floor(mSize / 1000.0 + 0.5)));
+                                        sizeStr = "null=" + QString::number(curSize) + "GB";
+                                    }
+                                } else if (isOk) {
+                                    if (memorySizeList[1].trimmed() == "MiB" && mSize < 1000)
+                                        sizeStr = "null=" + QString::number(mSize) + "MB";
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+
+            QMap<QString, QString> mapInfo;
+            if (getDeviceInfoFromCmd(deviceInfo, "nvidia-settings  -q  VideoRam")) {
+                QRegExp reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
+                QStringList list = deviceInfo.split("\n");
+
+                foreach (QString item, list) {
+                    // Attribute 'VideoRam' (jixiaomei-PC:0.0): 2097152.  正则表达式获取2097152
+                    if (reg.exactMatch(item)) {
+                        QString gpuSize = reg.cap(1);
+                        int numSize = gpuSize.toInt();
+                        numSize /= 1024;
+                        if (numSize >= 1024) {   // Bug109782 1024MB -> 1G
+                            numSize /= 1024;
+                            gpuSize = "null=" + QString::number(numSize) + "GB";   // 从nvidi-setting中获取显存信息没有Unique id ,格式与dmesg中获取信息保持一致,故添加"null="
+                        } else {
+                            gpuSize = "null=" + QString::number(numSize) + "MB";
+                        }
+                        mapInfo.insert("Size", gpuSize);
+                        mapInfo.insert("Device", deviceStr);
+                        break;
+                    }
+                }
+            }
+
+            // 从nvidia-smi读取显存大小
+            if (!mapInfo.contains("Size") && !sizeStr.isEmpty()) {
+                mapInfo.insert("Size", sizeStr);
+                mapInfo.insert("Device", deviceStr);
+            }
+            if (!curBusIdStr.isEmpty() && curBusIdStr != "null") {
+                mapInfo.insert("BusID", curBusIdStr);
+            }
+
+            if (mapInfo.contains("Size"))
+                addMapInfo(key, mapInfo);
         }
     }
-    addMapInfo(key, mapInfo);
+
 }
 
 void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
@@ -891,13 +977,13 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
     QStringList infoList = info.split("\n");
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
         QStringList words = (*it).split(ch);
-        if((*it).contains("PS/2 Mouse")){
+        if ((*it).contains("PS/2 Mouse")) {
             words.clear();
             words << "Hotplug" << "PS/2";
         }
-         if((*it).contains("SubDevice:")){
-             tmpkey = "PsubID";
-         }
+        if ((*it).contains("SubDevice:")) {
+            tmpkey = "PsubID";
+        }
         if (words.size() != 2)
             continue;
 
@@ -907,40 +993,39 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
         /*pick PID VID*/
         if (
             ("SubDevice" ==  words[0].trimmed() || "SubVendor" == words[0].trimmed() ||
-                "Vendor" ==  words[0].trimmed() || "Device" == words[0].trimmed()      )
-            && !(words[1].trimmed().isEmpty() ||  words[1].trimmed().contains("unknown") )
+             "Vendor" ==  words[0].trimmed() || "Device" == words[0].trimmed())
+            && !(words[1].trimmed().isEmpty() ||  words[1].trimmed().contains("unknown"))
             && words[1].trimmed().contains("0x")
-         ){
-            if ("SubDevice" ==  words[0].trimmed()){
+        ) {
+            if ("SubDevice" ==  words[0].trimmed()) {
                 tmpkey = "PsubID";
                 tmpvalue = words[1].trimmed(); //re.cap(0);
-            } else if ("SubVendor" ==  words[0].trimmed()){
+            } else if ("SubVendor" ==  words[0].trimmed()) {
                 tmpkey = "VsubID";
                 tmpvalue = words[1].trimmed();
-            } else if ("Vendor" ==  words[0].trimmed()){
+            } else if ("Vendor" ==  words[0].trimmed()) {
                 tmpkey = "VID";
                 tmpvalue = words[1].trimmed();
-            } else if ("Device" ==  words[0].trimmed()){
+            } else if ("Device" ==  words[0].trimmed()) {
                 tmpkey = "PID";
                 tmpvalue = words[1].trimmed();
-             }
+            }
 
             QStringList tmpword = tmpvalue.split(" ");
-            if(tmpword.size() > 1){
+            if (tmpword.size() > 1) {
                 mapInfo[tmpkey] += tmpword[1].trimmed();
 
-                 if(tmpkey == "VID"){
-                     tmpvid = tmpword[1].trimmed();
-                 }
-                 else if(tmpkey == "PID"){
-                     if(!tmpvid.isEmpty()){
-                         tmpkey = "VID_PID";
-                         tmpvalue.clear();
-                         tmpvalue = tmpvid + tmpword[1].remove("0x",Qt::CaseSensitive).trimmed();
-                         tmpvid.clear();
-                         mapInfo[tmpkey] += tmpvalue;
-                     }
-                 }
+                if (tmpkey == "VID") {
+                    tmpvid = tmpword[1].trimmed();
+                } else if (tmpkey == "PID") {
+                    if (!tmpvid.isEmpty()) {
+                        tmpkey = "VID_PID";
+                        tmpvalue.clear();
+                        tmpvalue = tmpvid + tmpword[1].remove("0x", Qt::CaseSensitive).trimmed();
+                        tmpvid.clear();
+                        mapInfo[tmpkey] += tmpvalue;
+                    }
+                }
             }
         }
 
@@ -977,7 +1062,7 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
 
     if (mapInfo.find("Module Alias") != mapInfo.end())
         mapInfo["Module Alias"].replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
-    
+
 }
 
 void CmdTool::getMapInfoFromDmidecode(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
@@ -1178,8 +1263,8 @@ void CmdTool::getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const 
         if (2 == keyValue.size()) {
             if ("UUID" == keyValue[0]) {
                 QString valueStr = keyValue[1].trimmed();
-                QStringList valueStrList = valueStr.split("(",QString::SkipEmptyParts);
-                if(valueStrList.size() == 2)
+                QStringList valueStrList = valueStr.split("(", QString::SkipEmptyParts);
+                if (valueStrList.size() == 2)
                     valueStr = valueStrList[0].trimmed() + ":(" + valueStrList[1];
                 uuid.append(valueStr);
                 uuid.append("\n");

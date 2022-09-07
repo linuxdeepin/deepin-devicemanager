@@ -370,7 +370,9 @@ TEST_F(UT_DeviceManager, UT_DeviceManager_setGpuSizeFromDmesg)
     gpu->m_HwinfoToLshw = "01:00.0";
     DeviceManager::instance()->m_ListDeviceGPU.append(gpu);
 
-    DeviceManager::instance()->setGpuSizeFromDmesg("01:00.0=2GB");
+    QMap<QString, QString> dmesgInfoMap;
+    dmesgInfoMap.insert("Size","01:00.0=2GB");
+    DeviceManager::instance()->setGpuSizeFromDmesg(dmesgInfoMap);
     EXPECT_STREQ("2GB", gpu->m_GraphicsMemory.toStdString().c_str());
     DeviceManager::instance()->m_ListDeviceGPU.clear();
     delete gpu;

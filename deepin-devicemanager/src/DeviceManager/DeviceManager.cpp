@@ -473,7 +473,7 @@ void DeviceManager::setGpuInfoFromXrandr(const QMap<QString, QString> &mapInfo)
     }
 }
 
-void DeviceManager::setGpuSizeFromDmesg(const QString &info)
+void DeviceManager::setGpuSizeFromDmesg(const QMap<QString, QString> &mapInfo)
 {
     // 从dmesg中设置显卡大小
     QList<DeviceBaseInfo *>::iterator it = m_ListDeviceGPU.begin();
@@ -482,7 +482,7 @@ void DeviceManager::setGpuSizeFromDmesg(const QString &info)
         if (!device)
             continue;
 
-        device->setDmesgInfo(info);
+        device->setDmesgInfo(mapInfo);
     }
 }
 

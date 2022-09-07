@@ -9,6 +9,7 @@
 #include <QObjectCleanupHandler>
 #include <QProcess>
 #include <QDir>
+#include <QDateTime>
 #include <QDebug>
 
 ThreadPool::ThreadPool(QObject *parent)
@@ -37,6 +38,16 @@ void ThreadPool::loadDeviceInfo()
         start(task);
         task->setAutoDelete(true);
     }
+
+    // 当所有设备执行完毕之后，开始执行生成其它设备的任务
+    // 这里是为了确保其它设备在最后一个生成
+    qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
+    while (true) {
+        qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
+        if (activeThreadCount() == 0 || curMSecond - beginMSecond > 10000) {
+            break;
+        }
+    }
 }
 
 void ThreadPool::updateDeviceInfo()
@@ -54,6 +65,15 @@ void ThreadPool::updateDeviceInfo()
 #endif
         start(task);
         task->setAutoDelete(true);
+    }
+    // 当所有设备执行完毕之后，开始执行生成其它设备的任务
+    // 这里是为了确保其它设备在最后一个生成
+    qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
+    while (true) {
+        qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
+        if (activeThreadCount() == 0 || curMSecond - beginMSecond > 10000) {
+            break;
+        }
     }
 }
 

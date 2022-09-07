@@ -88,22 +88,28 @@ private:
     bool initDBus();
 
     /**
+     * @brief initDBus : 初始化Driver相关dbus
+     * @return : 返回bool
+     */
+    bool initDriverDbus();
+
+    /**
      * @brief initDriverRepoSource : 初始化驱动仓库
      * @return : 无
      */
     void initDriverRepoSource();
 
 private:
-    ThreadPool            *mp_Pool;               //<! 生成文件的线程池
-    DetectThread          *mp_DetectThread;       //<! 检测usb的线程
-    QTimer                *mp_Timer;              //<! 定时器
-    DBusInterface         *mp_IFace;              //<! Dbus interface
-    DriverDBusInterface   *mp_DriverOperateIFace; //<! 驱动操作Dbus服务接口
-    DBusEnableInterface   *mp_Enable;             //<! 启用禁用dbus
-    DBusWakeupInterface   *mp_Wakeup;               //<! 唤醒
-    static bool           s_ClientIsUpdating;     //<! 前台正在更新中
-    static bool           s_ServerIsUpdating;     //<! 后台正在更新中
-    bool                  m_FirstUpdate;          //<! 是否是第一次更新
+    ThreadPool            *mp_Pool = nullptr;                 //<! 生成文件的线程池
+    DetectThread          *mp_DetectThread = nullptr;         //<! 检测usb的线程
+    QTimer                *mp_Timer = nullptr;                //<! 定时器
+    DBusInterface         *mp_IFace = nullptr;                //<! Dbus interface
+    DriverDBusInterface   *mp_DriverOperateIFace = nullptr;   //<! 驱动操作Dbus服务接口
+    DBusEnableInterface   *mp_Enable = nullptr;               //<! 启用禁用dbus
+    DBusWakeupInterface   *mp_Wakeup = nullptr;               //<! 唤醒
+    static bool           s_ClientIsUpdating;                 //<! 前台正在更新中
+    static bool           s_ServerIsUpdating;                 //<! 后台正在更新中
+    bool                  m_FirstUpdate;                      //<! 是否是第一次更新
 
 };
 

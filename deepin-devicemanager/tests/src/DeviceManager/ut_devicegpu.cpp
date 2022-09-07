@@ -74,7 +74,9 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_loadBaseDeviceInfo)
     QMap<QString, QString> mapinfo;
     setHwinfoInfo(mapinfo);
     m_deviceGpu->setHwinfoInfo(mapinfo);
-    m_deviceGpu->setDmesgInfo("0000:01:00.0=2GB");
+    QMap<QString, QString> DmesgInfoMap;
+    DmesgInfoMap.insert("Size","0000:01:00.0=2GB");
+    m_deviceGpu->setDmesgInfo(DmesgInfoMap);
     m_deviceGpu->loadBaseDeviceInfo();
 
     QPair<QString, QString> value0 = m_deviceGpu->m_LstBaseInfo.at(0);
@@ -153,14 +155,18 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_setHwinfoInfo)
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setDmesgInfo_001)
 {
     m_deviceGpu->m_HwinfoToLshw = "01:00.0";
-    m_deviceGpu->setDmesgInfo("01:00.0=2GB");
+    QMap<QString, QString> DmesgInfoMap;
+    DmesgInfoMap.insert("Size","01:00.0=2GB");
+    m_deviceGpu->setDmesgInfo(DmesgInfoMap);
     EXPECT_STREQ("2GB", m_deviceGpu->m_GraphicsMemory.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setDmesgInfo_002)
 {
     m_deviceGpu->m_HwinfoToLshw = "01:00.0";
-    m_deviceGpu->setDmesgInfo("null=3GB");
+    QMap<QString, QString> DmesgInfoMap;
+    DmesgInfoMap.insert("Size","null=3GB");
+    m_deviceGpu->setDmesgInfo(DmesgInfoMap);
     EXPECT_STREQ("3GB", m_deviceGpu->m_GraphicsMemory.toStdString().c_str());
 
 }

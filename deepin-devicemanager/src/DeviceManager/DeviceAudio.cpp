@@ -135,44 +135,42 @@ bool DeviceAudio::setInfoFrom_sysFS(QMap<QString, QString> &mapInfo, int ii)
     //4. get from cat /sys/class/sound
     QString hwCxDx;
     QString hwCard_path;
-    
+
     QString Cardx = QString("card%1").arg(ii);
     QString Cardx_path =   "/sys/class/sound/"  + Cardx;
 
     QFileInfo info1(Cardx_path);
-    if(info1.isSymLink())          // returns true
-    {
-        m_BusInfo =  info1.symLinkTarget();      
-        m_SysPath =  info1.symLinkTarget();        
+    if (info1.isSymLink()) {       // returns true
+        m_BusInfo =  info1.symLinkTarget();
+        m_SysPath =  info1.symLinkTarget();
     }
     QString tmps = "/sound/" + Cardx;
     m_SysPath = m_SysPath.remove(tmps);
     m_SysPath = m_SysPath.remove("/sys");
 
     QString vid = DeviceBaseInfo::get_string(Cardx_path + "/device/vendor");
-    QString pid = DeviceBaseInfo::get_string(Cardx_path + "/device/device");          
+    QString pid = DeviceBaseInfo::get_string(Cardx_path + "/device/device");
 
-    for(int n=0;n<11;n++){  //这里最多假定为device编号最大为 0-9
+    for (int n = 0; n < 11; n++) { //这里最多假定为device编号最大为 0-9
 
         hwCxDx = QString("hwC%1D%2").arg(ii).arg(n);
         hwCard_path =   "/sys/class/sound/"  + hwCxDx;
         QDir dir(hwCard_path);
-        if (dir.exists()){
+        if (dir.exists()) {
             QFile file(hwCard_path + "/vendor_id");
-            if (file.open(QIODevice::ReadOnly)){
+            if (file.open(QIODevice::ReadOnly)) {
                 file.close();
                 break;
             }
         }
-        if(9==n)
+        if (9 == n)
             return false;
     }
 
-    if(vid.isEmpty() || pid.isEmpty()){                      // 如果/cardx/device/device 先取作数据
+    if (vid.isEmpty() || pid.isEmpty()) {                    // 如果/cardx/device/device 先取作数据
         m_VID_PID = DeviceBaseInfo::get_string(hwCard_path + "/vendor_id");  //没有 则取 chip vendor_id
-    }
-    else
-        m_VID_PID = vid.trimmed() + pid.remove("0x",Qt::CaseSensitive).trimmed();
+    } else
+        m_VID_PID = vid.trimmed() + pid.remove("0x", Qt::CaseSensitive).trimmed();
 
     m_Chip = DeviceBaseInfo::get_string(hwCard_path + "/vendor_name") + DeviceBaseInfo::get_string(hwCard_path + "/chip_name");
     m_Vendor = DeviceBaseInfo::get_string(hwCard_path + "/vendor_name");
@@ -182,16 +180,16 @@ bool DeviceAudio::setInfoFrom_sysFS(QMap<QString, QString> &mapInfo, int ii)
 
     // setAttribute(mapInfo, "SysFS ID", m_SysPath);
 
-    m_BusInfo = m_SysPath; 
+    m_BusInfo = m_SysPath;
     mapInfo.insert("VID_PID", m_VID_PID);
     mapInfo.insert("SysFS ID", m_SysPath);
     mapInfo.insert("chip", m_Chip);
     return true;
-   //----------------
+    //----------------
     //2. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
 
-        // 设置不可禁用
+    // 设置不可禁用
     m_CanEnable = false;
     m_CanUninstall = false;
 
@@ -321,8 +319,8 @@ void DeviceAudio::initFilterKey()
     addFilterKey(QObject::tr("EV"));
     addFilterKey(QObject::tr("KEY"));
 
-    addFilterKey(QObject::tr("Model"));
-    addFilterKey(QObject::tr("Vendor"));
+//    addFilterKey(QObject::tr("Model"));
+//    addFilterKey(QObject::tr("Vendor"));
     addFilterKey(QObject::tr("Version"));
     addFilterKey(QObject::tr("Bus"));
 }
