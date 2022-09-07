@@ -2,11 +2,28 @@
 
 #include <QProcess>
 #include <QDebug>
+#include <QDBusInterface>
+#include <QDBusReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QString>
+#include <DApplication>
 
 #include <DeviceManager.h>
 
-ThreadExecXrandr::ThreadExecXrandr(bool gpu)
-    : m_Gpu(gpu)
+const QString DISPLAY_SERVICE_NAME = "com.deepin.system.Display";
+const QString DISPLAY_SERVICE_PATH = "/com/deepin/system/Display";
+const QString DISPLAY_INTERFACE = "com.deepin.system.Display";
+
+const QString DISPLAY_DAEMON_SERVICE_NAME = "com.deepin.daemon.Display";
+const QString DISPLAY_DAEMON_SERVICE_PATH = "/com/deepin/daemon/Display";
+const QString DISPLAY_DAEMON_INTERFACE = "com.deepin.daemon.Display";
+const QString DISPLAY_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properties";
+const QString DISPLAY_MONITOR_INTERFACE = "com.deepin.daemon.Display.Monitor";
+
+ThreadExecXrandr::ThreadExecXrandr(bool gpu, bool isDXcbPlatform)
+    : m_Gpu(gpu), m_isDXcbPlatform(isDXcbPlatform)
 {
 
 }
@@ -113,10 +130,86 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
     }
 }
 
+void ThreadExecXrandr::getRefreshRateFromDBus(QList<QMap<QString, QString> > &lstMap)
+{
+    QDBusInterface displayInterface(DISPLAY_SERVICE_NAME, DISPLAY_SERVICE_PATH, DISPLAY_INTERFACE, QDBusConnection::systemBus());
+    if (!displayInterface.isValid())
+        return;
+    QDBusReply<QString> reply = displayInterface.call("GetConfig");
+    if (!reply.isValid())
+        return;
+    QString info = reply.value();
+
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(info.toLatin1());
+    if (!jsonDoc.isObject())
+        return;
+    QJsonObject object = jsonDoc.object();
+    QStringList keys = object.keys();
+
+    //读取Config
+    if (!keys.contains("Config"))
+        return;
+    QJsonValue configValue = object.value("Config");
+    if (!configValue.isObject())
+        return;
+    QJsonObject configObject = configValue.toObject();
+    QStringList configKeys = configObject.keys();
+
+    //读取Screens
+    if (!configKeys.contains("Screens"))
+        return;
+    QJsonValue screensValue = configObject.value("Screens");
+    if (!screensValue.isObject())
+        return;
+    QJsonObject screensObject = screensValue.toObject();
+    QStringList screensKeys = screensObject.keys();
+
+    for (auto screenKey : screensKeys) {
+        QJsonValue screenValue = screensObject.value(screenKey);
+        if (!screenValue.isObject())
+            continue;
+        QJsonObject screenObject = screenValue.toObject();
+        QStringList screenKeys = screenObject.keys();
+
+        if (!screenKeys.contains("Extend"))
+            continue;
+        QJsonValue extendValue = screenObject.value("Extend");
+        if (!extendValue.isObject())
+            continue;
+        QJsonObject extendObject = extendValue.toObject();
+        QStringList extendKeys = extendObject.keys();
+
+        if (!extendKeys.contains("Monitors"))
+            continue;
+        QJsonValue monitorsValue = extendObject.value("Monitors");
+        if (!monitorsValue.isArray())
+            continue;
+        QJsonArray monitorsObject = monitorsValue.toArray();
+
+        for (auto monitor : monitorsObject) {
+            if (!monitor.isObject())
+                continue;
+
+            QJsonObject monitorObject = monitor.toObject();
+            QStringList monitorKeys = monitorObject.keys();
+            if (!monitorKeys.contains("Name") || !monitorKeys.contains("RefreshRate"))
+                continue;
+
+            QJsonValue ss = monitorObject.value("RefreshRate");
+            QMap<QString, QString> infoMap;
+            infoMap.insert("Name", monitorObject.value("Name").toString());
+            QString refreshRate = QString::number(monitorObject.value("RefreshRate").toDouble(), 'f', 2);
+            infoMap.insert("RefreshRate", refreshRate);
+            lstMap.append(infoMap);
+        }
+    }
+}
+
 void ThreadExecXrandr::getMonitorInfoFromXrandrVerbose()
 {
     QList<QMap<QString, QString>> lstMap;
     loadXrandrVerboseInfo(lstMap, "xrandr --verbose");
+
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1)
@@ -126,10 +219,114 @@ void ThreadExecXrandr::getMonitorInfoFromXrandrVerbose()
     }
 }
 
+struct MonitorResolution {
+    uint32_t index;
+    uint16_t width;
+    uint16_t height;
+    double refreshRate;
+};
+
+const QDBusArgument &operator>>(const QDBusArgument &argument, MonitorResolution &resolution)
+{
+    argument.beginStructure();
+    argument >> resolution.index;
+    argument >> resolution.width;
+    argument >> resolution.height;
+    argument >> resolution.refreshRate;
+    argument.endStructure();
+    return argument;
+}
+void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
+{
+    QDBusInterface displayInterface(DISPLAY_DAEMON_SERVICE_NAME, DISPLAY_DAEMON_SERVICE_PATH, DISPLAY_DAEMON_INTERFACE, QDBusConnection::sessionBus());
+    if (!displayInterface.isValid())
+        return;
+
+    QVariant monitors = displayInterface.property("Monitors");
+
+    if (!monitors.isValid())
+        return;
+
+    QList<QDBusObjectPath> monitorList = monitors.value<QList<QDBusObjectPath> >();
+    int maxResolutionWidth = -1, maxResolutionHeight = -1, minResolutionWidth = -1, minResolutionHeight = -1;
+    for (auto monitor : monitorList) {
+        if (monitor.path().isEmpty())
+            continue;
+
+        QDBusInterface monitorEnabledInterface(DISPLAY_DAEMON_SERVICE_NAME, monitor.path(), DISPLAY_MONITOR_INTERFACE, QDBusConnection::sessionBus());
+        if (!monitorEnabledInterface.isValid())
+            continue;
+
+        QVariant enbaled = monitorEnabledInterface.property("Enabled");
+        if (!enbaled.isValid() || !enbaled.toBool())
+            continue;
+
+        QDBusInterface monitorInterface(DISPLAY_DAEMON_SERVICE_NAME, monitor.path(), DISPLAY_PROPERTIES_INTERFACE, QDBusConnection::sessionBus());
+        if (!monitorInterface.isValid())
+            continue;
+
+        QDBusMessage replay = monitorInterface.call("Get", DISPLAY_MONITOR_INTERFACE, "Modes");
+        QVariant v =  replay.arguments().first();
+        qDebug() << v.value<QDBusVariant>().variant();
+        QDBusArgument arg = v.value<QDBusVariant>().variant().value<QDBusArgument>();
+        arg.beginArray();
+        int curMaxResolutionWidth = -1, curMaxResolutionHeight = -1;
+        while (!arg.atEnd()) {
+            MonitorResolution resolution;
+            arg >> resolution;
+            if (curMaxResolutionWidth == -1) {
+                curMaxResolutionWidth = resolution.width;
+                curMaxResolutionHeight = resolution.height;
+            } else {
+                int curResolution = static_cast<int>(resolution.width) * static_cast<int>(resolution.height);
+                if (curResolution > (curMaxResolutionWidth * curMaxResolutionHeight)) {
+                    curMaxResolutionWidth = resolution.width;
+                    curMaxResolutionHeight = resolution.height;
+                }
+            }
+            if (minResolutionWidth == -1) {
+                minResolutionWidth = resolution.width;
+                minResolutionHeight = resolution.height;
+            } else {
+                int curResolution = static_cast<int>(resolution.width) * static_cast<int>(resolution.height);
+                if (curResolution < (minResolutionWidth * minResolutionHeight)) {
+                    minResolutionWidth = resolution.width;
+                    minResolutionHeight = resolution.height;
+                }
+            }
+        }
+        if (maxResolutionWidth == -1) {
+            maxResolutionWidth = curMaxResolutionWidth;
+            maxResolutionHeight = curMaxResolutionHeight;
+        } else {
+            maxResolutionWidth += curMaxResolutionWidth;
+            maxResolutionHeight += curMaxResolutionHeight;
+        }
+    }
+
+    if (maxResolutionWidth != -1) {
+        lstMap.insert("maxResolution", QString("%1 x %2").arg(maxResolutionWidth).arg(maxResolutionHeight));
+        lstMap.insert("minResolution", QString("%1 x %2").arg(minResolutionWidth).arg(minResolutionHeight));
+    }
+}
+
 void ThreadExecXrandr::getGpuInfoFromXrandr()
 {
     QList<QMap<QString, QString>> lstMap;
     loadXrandrInfo(lstMap, "xrandr");
+
+    // 通过dbus获取最大最小分辨率
+    QMap<QString, QString> dbusMap;
+    getResolutionFromDBus(dbusMap);
+    for (auto &lstInfo : lstMap) {
+        if (dbusMap.contains("minResolution")) {
+            lstInfo["minResolution"] = dbusMap["minResolution"];
+        }
+        if (dbusMap.contains("maxResolution")) {
+            lstInfo["maxResolution"] = dbusMap["maxResolution"];
+        }
+    }
+
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1)

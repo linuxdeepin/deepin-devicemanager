@@ -46,7 +46,7 @@ class UT_ThreadExecXrandr : public UT_HEAD
 public:
     void SetUp()
     {
-        m_threadExecXrandr = new ThreadExecXrandr(true);
+        m_threadExecXrandr = new ThreadExecXrandr(true, true);
     }
     void TearDown()
     {

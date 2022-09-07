@@ -43,6 +43,18 @@ DWIDGET_USE_NAMESPACE
 
 static bool startScanningFlag = false;
 
+static bool checkWaylandMode()
+{
+    auto e = QProcessEnvironment::systemEnvironment();
+    QString XDG_SESSION_TYPE = e.value(QStringLiteral("XDG_SESSION_TYPE"));
+    QString WAYLAND_DISPLAY = e.value(QStringLiteral("WAYLAND_DISPLAY"));
+    bool waylandMode = false;
+    if (XDG_SESSION_TYPE == QLatin1String("wayland") || WAYLAND_DISPLAY.contains(QLatin1String("wayland"), Qt::CaseInsensitive)) //是否开启wayland
+        waylandMode = true;
+
+    return waylandMode;
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
     , mp_MainStackWidget(new DStackedWidget(this))
@@ -394,11 +406,11 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 {
     // xrandr would be execed later
     if (tr("Monitor") == itemStr || tr("Overview") == itemStr) { //点击显示设备，执行线程加载信息
-        ThreadExecXrandr tx(false);
+        ThreadExecXrandr tx(false, !checkWaylandMode());
         tx.start();
         tx.wait();
     } else if (tr("Display Adapter") == itemStr) { //点击显示适配器，执行线程加载信息
-        ThreadExecXrandr tx(true);
+        ThreadExecXrandr tx(true, !checkWaylandMode());
         tx.start();
         tx.wait();
     } else if (tr("CPU") == itemStr) { //点击处理器，执行加载处理器信息线程
