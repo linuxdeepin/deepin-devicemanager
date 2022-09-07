@@ -26,7 +26,7 @@
 class ThreadExecXrandr : public QThread
 {
 public:
-    ThreadExecXrandr(bool gpu);
+    ThreadExecXrandr(bool gpu, bool isDXcbPlatform);
 
     /**
      * @brief run
@@ -56,6 +56,18 @@ private:
     void loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstMap, const QString &cmd);
 
     /**
+     * @brief getRefreshRateFromDBus:通过dbus获取刷新率
+     * @param lstMap
+     */
+    void getRefreshRateFromDBus(QList<QMap<QString, QString>> &lstMap);
+
+    /**
+     * @brief getResolutionFromDBus:通过dbus获取分辨率
+     * @param lstMap
+     */
+    void getResolutionFromDBus(QMap<QString, QString> &lstMap);
+
+    /**
      * @brief getMonitorInfoFromXrandrVerbose:从xrandr --verbose获取显示设备信息
      */
     void getMonitorInfoFromXrandrVerbose();
@@ -67,7 +79,8 @@ private:
 
 
 private:
-    bool m_Gpu;    //<!  判断是否是gpu
+    bool m_Gpu;                //<!  判断是否是gpu
+    bool m_isDXcbPlatform;     //<!  判断是否是DXcbPlatform
 };
 
 #endif // THREADEXECXRANDR_H
