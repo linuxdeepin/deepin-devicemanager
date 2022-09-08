@@ -228,6 +228,8 @@ void DeviceAudio::setInfoFromCatAudio(const QMap<QString, QString> &mapInfo)
     //1. 获取设备的基本信息
     setAttribute(mapInfo, "Name", m_Name);
     setAttribute(mapInfo, "driver", m_Driver);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Model", m_Model);
 
     //2. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
