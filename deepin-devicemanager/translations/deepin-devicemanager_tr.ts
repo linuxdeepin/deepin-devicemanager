@@ -21,17 +21,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>EC_NOTIFY_NETWORK</source>
-        <translation type="unfinished"/>
+        <translation>EC_AĞ_BİLDİRİM</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>EC_REINSTALL</source>
-        <translation type="unfinished"/>
+        <translation>EC_YENİDEN YÜKLE</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="68"/>
         <source>EC_6</source>
-        <translation type="unfinished"/>
+        <translation>EC_6</translation>
     </message>
 </context>
 <context>
@@ -1598,12 +1598,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="261"/>
         <source>Hardware</source>
-        <translation type="unfinished"/>
+        <translation>Donanım</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="261"/>
         <source>Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Sürücüler</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="363"/>
@@ -3500,7 +3500,7 @@
     <message>
         <location filename="../src/main.cpp" line="123"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation type="unfinished"/>
+        <translation>Yeni sürücüler mevcut! Bunları şimdi yükleyin veya güncelleyin.</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="10"/>
@@ -3522,7 +3522,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="328"/>
         <source>Version Available</source>
-        <translation type="unfinished"/>
+        <translation>Sürüm mevcut</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="329"/>
@@ -3540,120 +3540,120 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="331"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="343"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Eylem</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="340"/>
         <source>New Version</source>
-        <translation type="unfinished"/>
+        <translation>Yeni Sürüm</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="351"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Geçerli Sürüm</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="670"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Kayıp sürücüler (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="671"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Tarihi geçmiş sürücüler (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="672"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Güncel sürücüler (%1)</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="64"/>
         <source>%1 driver updates available</source>
-        <translation type="unfinished"/>
+        <translation>%1 sürücü güncellemeleri mevcut</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="67"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="332"/>
         <source>Time checked: %1</source>
-        <translation type="unfinished"/>
+        <translation>Kontrol edilen zaman: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="115"/>
         <source>Downloading drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>%1 için sürücüler indiriliyor...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="117"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation type="unfinished"/>
+        <translation>İndirme hızı: %1 İndirildi %2/%3</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="163"/>
         <source>Installing drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>%1 için sürücüler yükleniyor...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="205"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 sürücü yüklendi, %2 sürücü başarısız oldu</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="207"/>
         <source>%1 drivers installed</source>
-        <translation type="unfinished"/>
+        <translation>%1 sürücüler yüklü</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="247"/>
         <source>Failed to install drivers</source>
-        <translation type="unfinished"/>
+        <translation>Sürücülerin yüklenmesi başarısız oldu</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="287"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"/>
+        <translation>Ağ hatası. Yeniden bağlanılıyor...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="289"/>
         <source>Download speed: %1</source>
-        <translation type="unfinished"/>
+        <translation>İndirme hızı: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="329"/>
         <source>Your drivers are up to date</source>
-        <translation type="unfinished"/>
+        <translation>Senin sürücülerin güncel</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="521"/>
         <source>reboot</source>
-        <translation type="unfinished"/>
+        <translation>Yeniden başlat</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="522"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation type="unfinished"/>
+        <translation>Yüklü sürücülerin etkinleşmesi için lütfen %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="525"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="259"/>
         <source>submit feedback</source>
-        <translation type="unfinished"/>
+        <translation>geribildirim gönder</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="526"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen tekrar deneyin veya bize %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="529"/>
         <source>Install All</source>
-        <translation type="unfinished"/>
+        <translation>Hepsini Yükle</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="534"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="263"/>
         <source>Scan Again</source>
-        <translation type="unfinished"/>
+        <translation>Tekrar tara</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="539"/>
@@ -3663,49 +3663,49 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="52"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Donanım aygıt sürücüleri taranıyor. Lütfen bekleyin...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="60"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="310"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>%1 Taranıyor</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="115"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>Tarama başarısız oldu</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="173"/>
         <source>Network unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Ağ kullanılamıyor</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="177"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>İnternet bağlantını kontrol et</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="260"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen tekrar tarayın veya bize %1</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="478"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Çıktığınızda kesintiye uğrayacak bir sürücü kuruyorsunuz.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="479"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>Çıkış yapmak istediğinden emin misin?</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="481"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Çıkış</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="482"/>
@@ -3716,68 +3716,68 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="28"/>
         <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
+        <translation>Bluetooth bağdaştırıcısı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="29"/>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Imaging device</source>
-        <translation type="unfinished"/>
+        <translation>Görüntüleme aygıtı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="30"/>
         <source>Display adapter</source>
-        <translation type="unfinished"/>
+        <translation>Görüntü bağdaştırıcısı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Sound card</source>
-        <translation type="unfinished"/>
+        <translation>Ses kartı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Ağ bağdaştırıcısı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="38"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Kablosuz ağ bağdaştırıcısı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Installation successful</source>
-        <translation type="unfinished"/>
+        <translation>Yükleme başarılı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Installation failed</source>
-        <translation type="unfinished"/>
+        <translation>Yükleme başarısız</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Downloading</source>
-        <translation type="unfinished"/>
+        <translation>İndiriliyor</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="55"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Yükleniyor</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="56"/>
         <source>Not installed</source>
-        <translation type="unfinished"/>
+        <translation>Yüklü değil</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="57"/>
         <source>Out-of-date</source>
-        <translation type="unfinished"/>
+        <translation>Tarihi geçmiş</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="58"/>
         <source>Waiting</source>
-        <translation type="unfinished"/>
+        <translation>Bekliyor</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="62"/>
@@ -3787,17 +3787,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="63"/>
         <source>Network error</source>
-        <translation type="unfinished"/>
+        <translation>Ağ hatası</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>Canceled</source>
-        <translation type="unfinished"/>
+        <translation>İptal edildi</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="65"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü dosyalarını edinme başarısız oldu</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
@@ -3807,7 +3807,7 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
         <source>Install</source>
-        <translation type="unfinished"/>
+        <translation>Yükle</translation>
     </message>
 </context>
 <context>
