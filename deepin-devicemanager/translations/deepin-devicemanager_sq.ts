@@ -21,12 +21,12 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>EC_NOTIFY_NETWORK</source>
-        <translation type="unfinished"/>
+        <translation>EC_NOTIFY_NETWORK</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>EC_REINSTALL</source>
-        <translation type="unfinished"/>
+        <translation>EC_REINSTALL</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="68"/>
@@ -1603,7 +1603,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="261"/>
         <source>Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Përudhës</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="363"/>
@@ -3500,7 +3500,7 @@
     <message>
         <location filename="../src/main.cpp" line="123"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation type="unfinished"/>
+        <translation>Ka përudhës të rinj! Instalojini, ose përditësojini tani.</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="10"/>
@@ -3807,7 +3807,7 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
         <source>Install</source>
-        <translation type="unfinished"/>
+        <translation>Instaloje</translation>
     </message>
 </context>
 <context>

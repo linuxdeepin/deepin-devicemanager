@@ -109,12 +109,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="237"/>
         <source>Bus Info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="243"/>
         <source>Chip</source>
-        <translation>Chip</translation>
+        <translation>Czip</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="244"/>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="202"/>
         <source>Bus Info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="203"/>
@@ -286,7 +286,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="114"/>
         <source>Bus Info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="115"/>
@@ -441,7 +441,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="250"/>
         <source>Max Speed</source>
-        <translation>Maksymalna prędkość</translation>
+        <translation>Prędkość maksymalna</translation>
     </message>
 </context>
 <context>
@@ -489,12 +489,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="213"/>
         <source>Bus Info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="214"/>
         <source>Maximum Resolution</source>
-        <translation>Maksymalna rozdzielczość</translation>
+        <translation>Rozdzielczość maksymalna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
@@ -602,7 +602,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="140"/>
         <source>Bus Info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="146"/>
@@ -665,7 +665,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="419"/>
         <source>Bus Info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="425"/>
@@ -790,7 +790,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="213"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="263"/>
         <source>Mouse</source>
-        <translation>Mysz</translation>
+        <translation>Myszka</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="218"/>
@@ -1005,7 +1005,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="208"/>
         <source>Bus Info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="209"/>
@@ -1138,7 +1138,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="60"/>
         <source>Bus Info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="61"/>
@@ -1211,7 +1211,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="135"/>
         <source>Bus Info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="136"/>
@@ -1226,7 +1226,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="138"/>
         <source>Maximum Power</source>
-        <translation>Moc Maksymalna</translation>
+        <translation>Moc maksymalna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="139"/>
@@ -1501,7 +1501,7 @@
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="94"/>
         <source>Loading Power Info...</source>
-        <translation>Wczytywanie informacji o mocy...</translation>
+        <translation>Wczytywanie informacji o zasilaniu...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="95"/>
@@ -1511,12 +1511,12 @@
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="98"/>
         <source>Loading Mouse Info...</source>
-        <translation>Wczytywanie informacji o myszy...</translation>
+        <translation>Wczytywanie informacji o myszce...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="99"/>
         <source>Loading Network Adapter Info...</source>
-        <translation>Wczytywanie informacji o karcie sieciowej...</translation>
+        <translation>Wczytywanie informacji o adapterze sieciowym...</translation>
     </message>
 </context>
 <context>
@@ -1583,7 +1583,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="196"/>
         <source>Export</source>
-        <translation>Eksport</translation>
+        <translation>Eksportuj</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="197"/>
@@ -1673,7 +1673,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="134"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation>Urządzenie będzie niedostępne po usunięciu sterownika</translation>
+        <translation>Urządzenie nie będzie dostępne po usunięciu sterownika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="138"/>
@@ -1792,7 +1792,7 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="17"/>
         <source>Export</source>
-        <translation>Eksport</translation>
+        <translation>Eksportuj</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="19"/>
@@ -1838,7 +1838,7 @@
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="36"/>
         <source>Export</source>
-        <translation>Eksport</translation>
+        <translation>Eksportuj</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="37"/>
@@ -1861,7 +1861,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="34"/>
         <source>Export</source>
-        <translation>Eksport</translation>
+        <translation>Eksportuj</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="35"/>
@@ -2221,7 +2221,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="191"/>
         <source>Maximum Capacity</source>
-        <translation>Maksymalna pojemność</translation>
+        <translation>Pojemność maksymalna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="192"/>
@@ -2958,7 +2958,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="938"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="974"/>
         <source>No network adapter found</source>
-        <translation>Nie znaleziono karty sieciowej</translation>
+        <translation>Nie znaleziono adaptera sieciowego</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="883"/>
@@ -3050,7 +3050,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="980"/>
         <location filename="../src/Tool/commontools.cpp" line="33"/>
         <source>Mouse</source>
-        <translation>Mysz</translation>
+        <translation>Myszka</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="888"/>
@@ -3464,7 +3464,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="363"/>
         <source>bus info</source>
-        <translation>Informacja o szynie</translation>
+        <translation>Informacje o szynie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="365"/>
@@ -3807,7 +3807,7 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
         <source>Install</source>
-        <translation type="unfinished"/>
+        <translation>Zainstaluj</translation>
     </message>
 </context>
 <context>
@@ -3826,7 +3826,7 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="32"/>
         <source>Export</source>
-        <translation>Eksport</translation>
+        <translation>Eksportuj</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="33"/>
@@ -3860,7 +3860,7 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="26"/>
         <source>Export</source>
-        <translation>Eksport</translation>
+        <translation>Eksportuj</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="27"/>

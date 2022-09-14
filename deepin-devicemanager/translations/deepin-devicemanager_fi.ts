@@ -3807,7 +3807,7 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
         <source>Install</source>
-        <translation type="unfinished"/>
+        <translation>Asenna</translation>
     </message>
 </context>
 <context>
