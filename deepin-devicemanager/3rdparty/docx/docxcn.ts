@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2022 lpxxn <mi_duo@live.com>
-//
-// SPDX-License-Identifier: GPL-3.0-or-later
-
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN" sourcelanguage="en">
