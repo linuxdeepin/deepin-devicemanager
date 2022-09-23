@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 lpxxn <mi_duo@live.com>
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 #ifndef TABLE_H
 #define TABLE_H
 #include "docx_global.h"
