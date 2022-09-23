@@ -21,6 +21,7 @@ LoadInfoThread::LoadInfoThread()
     , m_Start(true)
 {
     connect(&mp_ReadFilePool, &GetInfoPool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
+    DBusInterface::getInstance()->refreshInfo();
 }
 
 LoadInfoThread::~LoadInfoThread()
@@ -60,7 +61,7 @@ void LoadInfoThread::run()
                     break;
                 usleep(100);
             }
-            if ((++readNum) > 2) {
+            if ((++readNum) > 3) {
                 if (m_FinishedReadFilePool && !readDataFlag) {
                     mp_ReadFilePool.getAllInfo();
                     mp_ReadFilePool.waitForDone(-1);
