@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DeviceGpu.h"
+#include "commonfunction.h"
 
 // Qt库文件
 #include<QDebug>
@@ -167,11 +168,11 @@ void DeviceGpu::setDmesgInfo(const QMap<QString, QString> &mapInfo)
     }
 
     // 设置设备名称
-    if (mapInfo.contains("Device") && !mapInfo["Device"].isEmpty() && m_Name.startsWith("pci")){
+    if (mapInfo.contains("Device") && !mapInfo["Device"].isEmpty() && m_Name.startsWith("pci")) {
         setAttribute(mapInfo, "Device", m_Name, true);
         m_Model = mapInfo["Device"];
         QMap<QString, QString> devInfo;
-        devInfo.insert("Device",mapInfo["Device"]);
+        devInfo.insert("Device", mapInfo["Device"]);
         getOtherMapInfo(devInfo);
     }
 
@@ -225,13 +226,16 @@ const QString DeviceGpu::getOverviewInfo()
 
 void DeviceGpu::loadOtherDeviceInfo()
 {
+    QString type = Common::boardVendorType();
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
     addOtherDeviceInfo(tr("Memory Address"), m_MemAddress);
     addOtherDeviceInfo(tr("IO Port"), m_IOPort);
     addOtherDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addOtherDeviceInfo(tr("Maximum Resolution"), m_MaximumResolution);
-    addOtherDeviceInfo(tr("Minimum Resolution"), m_MinimumResolution);
+    if (type != "KLVV" && type != "KLVU" && type != "PGUV" && type != "PGUW") {
+        addOtherDeviceInfo(tr("Maximum Resolution"), m_MaximumResolution);
+        addOtherDeviceInfo(tr("Minimum Resolution"), m_MinimumResolution);
+    }
     addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
     addOtherDeviceInfo(tr("Driver"), m_Driver);
     addOtherDeviceInfo(tr("Description"), m_Description);
