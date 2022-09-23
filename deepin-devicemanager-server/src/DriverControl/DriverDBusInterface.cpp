@@ -125,7 +125,10 @@ QStringList DriverDBusInterface::checkModuleInUsed(const QString &modulename)
 
 bool DriverDBusInterface::isDriverPackage(const QString &filepath)
 {
-    return  mp_drivermanager->isDriverPackage(filepath);
+    if (!getUserAuthorPasswd())
+        return false;
+    else
+        return  mp_drivermanager->isDriverPackage(filepath);
 }
 
 bool DriverDBusInterface::isBlackListed(const QString &modName)
