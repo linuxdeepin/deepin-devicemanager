@@ -142,14 +142,20 @@ bool CpuInfo::parseInfo(const QString &info)
             return false;
         PhysicalCpu &physical = m_MapPhysicalCpu[physical_id];
         int core_id = mapInfo["core id"].toInt();
-        if (!physical.coreIsExisted(core_id))
-            return false;
-        CoreCpu &core = physical.coreCpu(core_id);
-        if (!core.logicalIsExisted(logical_id))
-            return false;
-        LogicalCpu &logical = core.logicalCpu(logical_id);
-        if (logical.logicalID() >= 0)
-            setProcCpuinfo(logical, mapInfo);
+        if (!physical.coreIsExisted(core_id)) {
+            if (physical.logicalIsExisted(logical_id)) {
+                LogicalCpu &logical = physical.logicalCpu(logical_id);
+                if (logical.logicalID() >= 0)
+                    setProcCpuinfo(logical, mapInfo);
+            }
+        } else {
+            CoreCpu &core = physical.coreCpu(core_id);
+            if (!core.logicalIsExisted(logical_id))
+                return false;
+            LogicalCpu &logical = core.logicalCpu(logical_id);
+            if (logical.logicalID() >= 0)
+                setProcCpuinfo(logical, mapInfo);
+        }
     } else {
         LogicalCpu &logical = logicalCpu(logical_id);
         if (logical.logicalID() >= 0)
@@ -162,9 +168,9 @@ bool CpuInfo::parseInfo(const QString &info)
 LogicalCpu &CpuInfo::logicalCpu(int logical_id)
 {
     foreach (int physical_id, m_MapPhysicalCpu.keys()) {
-        if(physical_id < 0)
+        if (physical_id < 0)
             continue;
-        PhysicalCpu& physical = m_MapPhysicalCpu[physical_id];
+        PhysicalCpu &physical = m_MapPhysicalCpu[physical_id];
         if (physical.logicalIsExisted(logical_id)) {
             return physical.logicalCpu(logical_id);
         }
@@ -186,8 +192,7 @@ void CpuInfo::setProcCpuinfo(LogicalCpu &logical, const QMap<QString, QString> &
     if ("mips64" == m_Arch || "loongarch64" == m_Arch) {
         logical.setCurFreq(mapInfo["cpu mhz"]);
         logical.setModel(mapInfo["cpu model"]);
-        if(logical.flags().isEmpty())
-        {
+        if (logical.flags().isEmpty()) {
             logical.setFlags(mapInfo["features"]);
         }
     }
@@ -259,7 +264,7 @@ int CpuInfo::readPhysicalID(const QString &path)
         return -1;
     QString info = file.readAll();
     file.close();
-    if("sw_64" == m_Arch && -1 == info.toInt()){
+    if ("sw_64" == m_Arch && -1 == info.toInt()) {
         return 0;
     }
     return info.toInt();
@@ -285,7 +290,8 @@ int CpuInfo::readThreadSiblingsListPath(const QString &path)
     }
     QString info = file.readAll();
     file.close();
-    return info.replace(",", "").toInt();
+
+    return info.replace(QRegExp("\\D"), "").toInt();
 }
 
 void CpuInfo::readCpuCache(const QString &path, LogicalCpu &lcpu)
