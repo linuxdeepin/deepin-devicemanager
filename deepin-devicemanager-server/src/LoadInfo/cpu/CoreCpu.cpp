@@ -24,31 +24,31 @@ void CoreCpu::setCoreId(int id)
     m_CoreId = id;
 }
 
-void CoreCpu::addLogicalCpu(int id, const LogicalCpu& lc)
+void CoreCpu::addLogicalCpu(int id, const LogicalCpu &lc)
 {
-    if(m_MapLogicalCpu.find(id) == m_MapLogicalCpu.end()){
-        m_MapLogicalCpu.insert(id,lc);
+    if (m_MapLogicalCpu.find(id) == m_MapLogicalCpu.end()) {
+        m_MapLogicalCpu.insert(id, lc);
     }
 }
 
 bool CoreCpu::logicalIsExisted(int id)
 {
-    if(m_CoreId < 0)
+    if (m_CoreId < 0)
         return false;
     return m_MapLogicalCpu.find(id) != m_MapLogicalCpu.end();
 }
 
-LogicalCpu& CoreCpu::logicalCpu(int id)
+LogicalCpu &CoreCpu::logicalCpu(int id)
 {
     return m_MapLogicalCpu[id];
 }
 
-void CoreCpu::getInfo(QString& info)
+void CoreCpu::getInfo(QString &info)
 {
-    foreach(int id,m_MapLogicalCpu.keys()){
-        if(id < 0)
+    foreach (int id, m_MapLogicalCpu.keys()) {
+        if (id < 0)
             continue;
-        LogicalCpu& logical = m_MapLogicalCpu[id];
+        LogicalCpu &logical = m_MapLogicalCpu[id];
         appendKeyValue(info, "processor", logical.logicalID());
         appendKeyValue(info, "core id", logical.coreID());
         appendKeyValue(info, "physical id", logical.physicalID());
@@ -91,10 +91,9 @@ int CoreCpu::coreId()
 
 int CoreCpu::logicalNum()
 {
-    if(m_MapLogicalCpu.find(-1) == m_MapLogicalCpu.end()){
+    if (m_MapLogicalCpu.find(-1) == m_MapLogicalCpu.end()) {
         return m_MapLogicalCpu.size();
-    }
-    else{
+    } else {
         return m_MapLogicalCpu.size() - 1;
     }
 }
