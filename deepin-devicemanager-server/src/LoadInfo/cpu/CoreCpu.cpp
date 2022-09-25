@@ -22,6 +22,9 @@ CoreCpu::CoreCpu(int id)
 void CoreCpu::setCoreId(int id)
 {
     m_CoreId = id;
+    for (LogicalCpu &lCpu : m_MapLogicalCpu) {
+        lCpu.setCoreID(id);
+    }
 }
 
 void CoreCpu::addLogicalCpu(int id, const LogicalCpu &lc)
