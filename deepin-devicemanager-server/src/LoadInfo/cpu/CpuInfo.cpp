@@ -31,6 +31,23 @@ bool CpuInfo::loadCpuInfo()
     // read the file /proc/cpuinfo
     if (!readProcCpuinfo())
         return false;
+
+    // 重新编号
+    QMap<int, PhysicalCpu> curMapPhysicalCpu = m_MapPhysicalCpu;
+    m_MapPhysicalCpu.clear();
+    foreach (int id, curMapPhysicalCpu.keys()) {
+        PhysicalCpu physical = PhysicalCpu(id);
+
+        PhysicalCpu &curPhysical = curMapPhysicalCpu[id];
+        QList<int> curCoreNums = curPhysical.coreNums();
+        for (int i = 0; i < curCoreNums.size(); ++i) {
+            CoreCpu curCoreCpu = curPhysical.coreCpu(curCoreNums[i]);
+            curCoreCpu.setCoreId(i);
+            physical.addCoreCpu(i, curCoreCpu);
+        }
+        m_MapPhysicalCpu.insert(id, physical);
+    }
+
     return true;
 }
 
@@ -291,7 +308,9 @@ int CpuInfo::readThreadSiblingsListPath(const QString &path)
     QString info = file.readAll();
     file.close();
 
-    return info.replace(QRegExp("\\D"), "").toInt();
+    QStringList words = info.split(QRegExp("\\D"));
+
+    return words.isEmpty() ? 0 : words.first().toInt();
 }
 
 void CpuInfo::readCpuCache(const QString &path, LogicalCpu &lcpu)

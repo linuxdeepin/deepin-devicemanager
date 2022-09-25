@@ -20,10 +20,10 @@ PhysicalCpu::PhysicalCpu(int id)
 
 }
 
-void PhysicalCpu::addCoreCpu(int id, const CoreCpu& cpu)
+void PhysicalCpu::addCoreCpu(int id, const CoreCpu &cpu)
 {
-    if(m_MapCoreCpu.find(id) == m_MapCoreCpu.end()){
-        m_MapCoreCpu.insert(id,cpu);
+    if (m_MapCoreCpu.find(id) == m_MapCoreCpu.end()) {
+        m_MapCoreCpu.insert(id, cpu);
     }
 }
 
@@ -32,49 +32,48 @@ bool PhysicalCpu::coreIsExisted(int id)
     return m_MapCoreCpu.find(id) != m_MapCoreCpu.end();
 }
 
-CoreCpu& PhysicalCpu::coreCpu(int id)
+CoreCpu &PhysicalCpu::coreCpu(int id)
 {
     return m_MapCoreCpu[id];
 }
 
 bool PhysicalCpu::logicalIsExisted(int id)
 {
-    foreach(int i, m_MapCoreCpu.keys()){
-        if(i < 0){
+    foreach (int i, m_MapCoreCpu.keys()) {
+        if (i < 0) {
             continue;
         }
-        if(m_MapCoreCpu[i].logicalIsExisted(id)){
+        if (m_MapCoreCpu[i].logicalIsExisted(id)) {
             return true;
         }
     }
     return false;
 }
 
-LogicalCpu& PhysicalCpu::logicalCpu(int id)
+LogicalCpu &PhysicalCpu::logicalCpu(int id)
 {
-    foreach(int i, m_MapCoreCpu.keys()){
-        if(i < 0)
+    foreach (int i, m_MapCoreCpu.keys()) {
+        if (i < 0)
             continue;
-        if(m_MapCoreCpu[i].logicalIsExisted(id))
+        if (m_MapCoreCpu[i].logicalIsExisted(id))
             return m_MapCoreCpu[i].logicalCpu(id);
     }
     return m_MapCoreCpu[-1].logicalCpu(-1);
 }
 
-void PhysicalCpu::getInfo(QString& info)
+void PhysicalCpu::getInfo(QString &info)
 {
-    foreach(int i, m_MapCoreCpu.keys()){
-        if(m_MapCoreCpu[i].coreId() >=0 )
+    foreach (int i, m_MapCoreCpu.keys()) {
+        if (m_MapCoreCpu[i].coreId() >= 0)
             m_MapCoreCpu[i].getInfo(info);
     }
 }
 
 int PhysicalCpu::coreNum()
 {
-    if(m_MapCoreCpu.find(-1) == m_MapCoreCpu.end()){
+    if (m_MapCoreCpu.find(-1) == m_MapCoreCpu.end()) {
         return m_MapCoreCpu.size();
-    }
-    else{
+    } else {
         return m_MapCoreCpu.size() - 1;
     }
 }
@@ -83,9 +82,9 @@ int PhysicalCpu::logicalNum()
 {
     int num = 0;
     foreach (int id, m_MapCoreCpu.keys()) {
-        if(id < 0)
+        if (id < 0)
             continue;
-        CoreCpu& core = m_MapCoreCpu[id];
+        CoreCpu &core = m_MapCoreCpu[id];
         num += core.logicalNum();
     }
     return num;
@@ -98,4 +97,9 @@ void PhysicalCpu::diagPrintInfo()
         CoreCpu &cc = m_MapCoreCpu[id];
         cc.diagPrintInfo();
     }
+}
+
+QList<int> PhysicalCpu::coreNums()
+{
+    return m_MapCoreCpu.keys();
 }

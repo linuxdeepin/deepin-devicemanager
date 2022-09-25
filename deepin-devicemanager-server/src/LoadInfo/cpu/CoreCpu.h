@@ -26,7 +26,7 @@ public:
      * @param id
      * @param lc
      */
-    void addLogicalCpu(int id, const LogicalCpu& lc);
+    void addLogicalCpu(int id, const LogicalCpu &lc);
 
     /**
      * @brief logicalIsExisted
@@ -40,13 +40,13 @@ public:
      * @param id
      * @return
      */
-    LogicalCpu& logicalCpu(int id);
+    LogicalCpu &logicalCpu(int id);
 
     /**
      * @brief getInfo
      * @param info
      */
-    void getInfo(QString& info);
+    void getInfo(QString &info);
 
     /**
      * @brief appendKeyValue

@@ -21,7 +21,7 @@ public:
      * @param id
      * @param cpu
      */
-    void addCoreCpu(int id, const CoreCpu& cpu);
+    void addCoreCpu(int id, const CoreCpu &cpu);
 
     /**
      * @brief coreIsExisted
@@ -34,7 +34,7 @@ public:
      * @param id
      * @return
      */
-    CoreCpu& coreCpu(int id);
+    CoreCpu &coreCpu(int id);
 
     /**
      * @brief logicalIsExisted
@@ -48,13 +48,13 @@ public:
      * @param id
      * @return
      */
-    LogicalCpu& logicalCpu(int id);
+    LogicalCpu &logicalCpu(int id);
 
     /**
      * @brief getInfo
      * @param info
      */
-    void getInfo(QString& info);
+    void getInfo(QString &info);
 
     /**
      * @brief coreNum
@@ -72,6 +72,12 @@ public:
      * @brief diagPrintInfo
      */
     void diagPrintInfo();
+
+    /**
+     * @brief coreNums
+     * @return
+     */
+    QList<int> coreNums();
 
 private:
     int m_PhysicalCpu;                   //<! physical id
