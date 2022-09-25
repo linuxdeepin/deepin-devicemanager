@@ -167,11 +167,17 @@ bool CpuInfo::parseInfo(const QString &info)
             }
         } else {
             CoreCpu &core = physical.coreCpu(core_id);
-            if (!core.logicalIsExisted(logical_id))
-                return false;
-            LogicalCpu &logical = core.logicalCpu(logical_id);
-            if (logical.logicalID() >= 0)
-                setProcCpuinfo(logical, mapInfo);
+            if (!core.logicalIsExisted(logical_id)) {
+                if (physical.logicalIsExisted(logical_id)) {
+                    LogicalCpu &logical = physical.logicalCpu(logical_id);
+                    if (logical.logicalID() >= 0)
+                        setProcCpuinfo(logical, mapInfo);
+                }
+            } else {
+                LogicalCpu &logical = core.logicalCpu(logical_id);
+                if (logical.logicalID() >= 0)
+                    setProcCpuinfo(logical, mapInfo);
+            }
         }
     } else {
         LogicalCpu &logical = logicalCpu(logical_id);
