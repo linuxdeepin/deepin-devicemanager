@@ -255,6 +255,13 @@ void DeviceNetwork::loadOtherDeviceInfo()
     mapInfoToList();
 }
 
+void DeviceNetwork::loadTableHeader()
+{
+    m_TableHeader.append(tr("Name"));
+    m_TableHeader.append(tr("Vendor"));
+    m_TableHeader.append(tr("Type"));
+}
+
 void DeviceNetwork::loadTableData()
 {
     // 根据是否禁用设置设备名称
