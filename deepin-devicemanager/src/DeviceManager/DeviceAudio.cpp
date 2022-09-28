@@ -346,8 +346,8 @@ void DeviceAudio::loadOtherDeviceInfo()
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Chip"), m_Chip);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addOtherDeviceInfo(tr("Clock"), m_Clock);
-    addOtherDeviceInfo(tr("Width"), m_Width);
+//    addOtherDeviceInfo(tr("Clock"), m_Clock);
+//    addOtherDeviceInfo(tr("Width"), m_Width);
     addOtherDeviceInfo(tr("Memory Address"), m_Memory);   // 1050需求 内存改为内存地址
     addOtherDeviceInfo(tr("IRQ"), m_Irq);
 

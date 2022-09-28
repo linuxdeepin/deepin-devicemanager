@@ -239,7 +239,7 @@ void DeviceGpu::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
     addOtherDeviceInfo(tr("Driver"), m_Driver);
     addOtherDeviceInfo(tr("Description"), m_Description);
-    addOtherDeviceInfo(tr("Clock"), m_Clock);
+//    addOtherDeviceInfo(tr("Clock"), m_Clock);
     addOtherDeviceInfo(tr("DP"), m_DisplayPort);
     addOtherDeviceInfo(tr("eDP"), m_eDP);
     addOtherDeviceInfo(tr("HDMI"), m_HDMI);
@@ -249,7 +249,7 @@ void DeviceGpu::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Display Output"), m_DisplayOutput);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
     addOtherDeviceInfo(tr("IRQ"), m_IRQ);
-    addOtherDeviceInfo(tr("Width"), m_Width);
+//    addOtherDeviceInfo(tr("Width"), m_Width);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();

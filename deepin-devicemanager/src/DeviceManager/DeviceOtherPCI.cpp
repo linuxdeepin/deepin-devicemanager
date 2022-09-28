@@ -72,8 +72,8 @@ void DeviceOtherPCI::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Memory"), m_Memory);
     addOtherDeviceInfo(tr("IRQ"), m_Irq);
     addOtherDeviceInfo(tr("Latency"), m_Latency);
-    addOtherDeviceInfo(tr("Clock"), m_Clock);
-    addOtherDeviceInfo(tr("Width"), m_Width);
+//    addOtherDeviceInfo(tr("Clock"), m_Clock);
+//    addOtherDeviceInfo(tr("Width"), m_Width);
     addOtherDeviceInfo(tr("Driver"), m_Driver);
     addOtherDeviceInfo(tr("Capabilities"), m_Version);
 
