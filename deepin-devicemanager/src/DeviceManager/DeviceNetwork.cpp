@@ -244,8 +244,8 @@ void DeviceNetwork::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Duplex"), m_Duplex);
     addOtherDeviceInfo(tr("Broadcast"), m_Broadcast);
     addOtherDeviceInfo(tr("Auto Negotiation"), m_Autonegotiation);
-    addOtherDeviceInfo(tr("Clock"), m_Clock);
-    addOtherDeviceInfo(tr("Width"), m_Width);
+//    addOtherDeviceInfo(tr("Clock"), m_Clock);
+//    addOtherDeviceInfo(tr("Width"), m_Width);
     addOtherDeviceInfo(tr("Memory Address"), m_Memory);        // 1050需求 内存改为内存地址
     addOtherDeviceInfo(tr("IRQ"), m_Irq);
     addOtherDeviceInfo(tr("MAC Address"), m_MACAddress);
