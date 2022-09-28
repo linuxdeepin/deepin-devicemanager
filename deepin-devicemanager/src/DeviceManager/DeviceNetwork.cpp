@@ -8,6 +8,7 @@
 #include "commonfunction.h"
 
 #include <QFileInfo>
+#include <QProcess>
 
 DeviceNetwork::DeviceNetwork()
     : DeviceBaseInfo()
@@ -54,8 +55,29 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     // 设置由lshw获取的信息
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
-    setAttribute(mapInfo, "description", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
+    if (m_SysPath.contains("usb")) {
+        QProcess process;
+        QString vendorId = getVendorOrModelId(m_SysPath, true).trimmed();
+        QString deviceId = getVendorOrModelId(m_SysPath, false).trimmed();
+        process.start("lsusb -v -d " + vendorId + ":" + deviceId);
+        process.waitForFinished(-1);
+
+        QString output = process.readAllStandardOutput();
+
+        foreach (QString out, output.split("\n")) {
+            if (!m_Vendor.isEmpty() && !m_Name.isEmpty())
+                break;
+            // 从USB设备获取制造商和设备名称
+            if (m_Vendor.isEmpty() && out.contains("idVendor", Qt::CaseSensitive)) {
+                m_Vendor = out.remove(0, out.indexOf(vendorId) + 4).trimmed();
+            } else if (m_Name.isEmpty() && out.contains("idProduct", Qt::CaseSensitive)) {
+                m_Name = out.remove(0, out.indexOf(deviceId) + 4).trimmed();
+            }
+        }
+    } else {
+        setAttribute(mapInfo, "description", m_Name, false);
+    }
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "logical name", m_LogicalName);
