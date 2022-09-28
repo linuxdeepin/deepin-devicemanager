@@ -52,4 +52,4 @@ If run in Qt Creator, you should set [Project][Run Settings] [Run] [Run configur
 - ./deepin-devicemanager
 
 ## License
-This project is licensed under GPLv3 or any later version.
+deepin-devicemanager is licensed under [GPL-3.0-or-later](LICENSE).
