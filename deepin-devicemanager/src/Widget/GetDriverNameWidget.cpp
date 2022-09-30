@@ -38,7 +38,7 @@ GetDriverNameWidget::~GetDriverNameWidget()
     stopLoadingDrivers();
     mp_Thread->quit();
     mp_Thread->wait();
-    if(mp_GetModel){
+    if (mp_GetModel) {
         delete mp_GetModel;
         mp_GetModel = nullptr;
     }
@@ -51,9 +51,9 @@ void GetDriverNameWidget::init()
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mp_titleLabel = new DLabel(tr("Select a driver for update"));
     mp_StackWidget->addWidget(mp_WaitingWidget);
-    mp_StackWidget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    mp_StackWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     mp_StackWidget->addWidget(mp_ListView);
-    mp_StackWidget->setContentsMargins(0,0,0,0);
+    mp_StackWidget->setContentsMargins(0, 0, 0, 0);
     mp_tipLabel->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
     mp_tipLabel->setElideMode(Qt::ElideRight);
     mp_tipLabel->setMinimumHeight(25);
@@ -72,10 +72,10 @@ void GetDriverNameWidget::init()
 
     // 中间布局
     QHBoxLayout *hLayout2 = new QHBoxLayout;
-    hLayout2->setContentsMargins(5,5,5,5);
+    hLayout2->setContentsMargins(5, 5, 5, 5);
     hLayout2->addWidget(mp_StackWidget);
     DFrame *frame = new DFrame;
-    frame->setContentsMargins(0,0,0,0);
+    frame->setContentsMargins(0, 0, 0, 0);
     frame->setLayout(hLayout2);
     mainLayout->addWidget(frame);
 
@@ -99,8 +99,8 @@ void GetDriverNameWidget::onUpdateTheme()
 void GetDriverNameWidget::initConnections()
 {
     connect(mp_ListView, &DriverListView::clicked, this, &GetDriverNameWidget::slotSelectedDriver);
-    connect(this,&GetDriverNameWidget::startLoadDrivers,mp_GetModel,&GetDriverNameModel::startLoadDrivers);
-    connect(mp_GetModel, &GetDriverNameModel::finishLoadDrivers,this,&GetDriverNameWidget::slotFinishLoadDrivers);
+    connect(this, &GetDriverNameWidget::startLoadDrivers, mp_GetModel, &GetDriverNameModel::startLoadDrivers);
+    connect(mp_GetModel, &GetDriverNameModel::finishLoadDrivers, this, &GetDriverNameWidget::slotFinishLoadDrivers);
 }
 
 void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString &path)
@@ -108,7 +108,7 @@ void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString &path)
     mp_WaitingWidget->start();
     mp_StackWidget->setCurrentIndex(0);
     mp_model = new QStandardItemModel(this);
-    emit startLoadDrivers(mp_model,includeSub,path);
+    emit startLoadDrivers(mp_model, includeSub, path);
 }
 
 void GetDriverNameWidget::reloadDriversListPages()
@@ -119,11 +119,13 @@ void GetDriverNameWidget::reloadDriversListPages()
         return;
     if (mp_model->rowCount() <= 0) {
         frame->hide();
+        mp_tipLabel->hide();
         label->setText(tr("No drivers found in this folder"));
         mp_selectedRow = -1;
         emit  signalDriversCount();
     } else {
         frame->show();
+        mp_tipLabel->show();
         label->setText(tr("Select a driver for update"));
     }
 
@@ -175,8 +177,8 @@ void GetDriverNameWidget::slotFinishLoadDrivers()
     mp_ListView->setModel(mp_model);
     mp_ListView->setColumnWidth(0, 40);
     updateTipLabelText("");
-    if(mp_model->rowCount() > 0){
-        QModelIndex index = mp_model->index(0,0);
+    if (mp_model->rowCount() > 0) {
+        QModelIndex index = mp_model->index(0, 0);
         mp_ListView->setCurrentIndex(index);
     }
 
