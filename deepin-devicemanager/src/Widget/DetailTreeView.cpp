@@ -180,10 +180,10 @@ int DetailTreeView::setTableHeight(int paintHeight)
 
     // 父窗口
     PageTableWidget *pageTableWidget = dynamic_cast<PageTableWidget *>(this->parent());
-    if(!pageTableWidget)
+    if (!pageTableWidget)
         return -1;
     PageInfo *par = dynamic_cast<PageInfo *>(pageTableWidget->parent());
-    if(!par)
+    if (!par)
         return -1;
     // 父窗口可显示的最大表格行数
     // 最多显示行数与父窗口高度相关,需减去Label以及Spacing占用空间
@@ -465,8 +465,8 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
 
     QPen pen = painter.pen();
     pen.setWidth(1);
-    pen.setColor(palette.color(cg, DPalette::FrameBorder));
-
+    QColor frameColor = palette.color(cg, DPalette::FrameBorder);
+    pen.setColor(frameColor);
     painter.setPen(pen);
 
     QLine line(rect.topLeft().x() + 179, rect.topLeft().y(), rect.bottomLeft().x() + 179, rect.bottomLeft().y());
@@ -505,6 +505,11 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
             }
         }
     }
+    // 控制透明度大于等于20
+    if (frameColor.alpha() < 20)
+        frameColor.setAlpha(20);
+    pen.setColor(frameColor);
+    painter.setPen(pen);
     painter.drawLine(line);
     painter.restore();
 }
