@@ -226,7 +226,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         // bug111063中 社区版与专业版使用同一代码，主板界面展示效果不同
         // PageBoardInfo 中计算行高方式与html中计算行高方式不同，导致每行下方出现截断或空白
         // 此处获取html整体高度后再对PageBoardInfo设置行高，则不会再出现截断或空白
-        dynamic_cast<PageSingleInfo *>(this->parent())->setRowHeight(index.row(), textDoc.size().toSize().height());
+        dynamic_cast<PageSingleInfo *>(this->parent())->setRowHeight(index.row(), textDoc.size().toSize().height() + 6);
 
         QAbstractTextDocumentLayout::PaintContext   paintContext;
         paintContext.palette.setCurrentColorGroup(cg);
@@ -319,8 +319,8 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
         if (keyValue.size() != 2) {
             return;
         }
-        int curWidth = fm.width(keyValue[0]+":")+10;
-        if(rowWidth < curWidth) rowWidth = curWidth;
+        int curWidth = fm.width(keyValue[0] + ":") + 10;
+        if (rowWidth < curWidth) rowWidth = curWidth;
     }
 
     foreach (auto kv, lst) {
@@ -330,20 +330,20 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
         pair.second = keyValue[1];
 
         // 添加一行
-        addRow(doc, table, pair,rowWidth);
+        addRow(doc, table, pair, rowWidth);
     }
     // 添加该表格到doc
     doc.appendChild(table);
 }
 
-void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair,const int &rowWidth)const
+void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair, const int &rowWidth)const
 {
     QDomElement tr = doc.createElement("tr");
 //    tr.setAttribute("style", "line-height:100;height:100;");
 
     // 该行的第一列
     QString nt = pair.first.isEmpty() ? "" : pair.first + ":";
-    addTd1(doc, tr, nt,rowWidth);
+    addTd1(doc, tr, nt, rowWidth);
 
     // 该行的第二列
     // 如果该列的内容很多则分行显示
@@ -357,7 +357,7 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
             QPair<QString, QString> tempPair;
             tempPair.first = "";
             tempPair.second = *it;
-            addRow(doc, tr, tempPair,rowWidth);
+            addRow(doc, tr, tempPair, rowWidth);
         }
     } else {
         addTd2(doc, tr, pair.second);
@@ -366,7 +366,7 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
     table.appendChild(tr);
 }
 
-void RichTextDelegate::addTd1(QDomDocument &doc, QDomElement &tr, const QString &value,const int &rowWidth)const
+void RichTextDelegate::addTd1(QDomDocument &doc, QDomElement &tr, const QString &value, const int &rowWidth)const
 {
     QDomElement td = doc.createElement("td");
     td.setAttribute("width", QString("%1").arg(rowWidth));
