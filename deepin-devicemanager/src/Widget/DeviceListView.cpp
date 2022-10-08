@@ -90,7 +90,7 @@ DeviceListView::DeviceListView(QWidget *parent)
     setAutoFillBackground(true); //与背景色有关
 
     // bug51444左侧菜单和滚动条不重叠重叠
-    setViewportMargins(5, 2, 11, 5);
+    setViewportMargins(11, 2, 11, 5);
 
     setMovement(QListView::Static);
 }
