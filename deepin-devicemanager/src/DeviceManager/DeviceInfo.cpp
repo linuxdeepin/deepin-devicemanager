@@ -704,7 +704,7 @@ bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceBaseInfo::setsysFStoHwinfoKey(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.find("VID_PID") != mapInfo.end() ) {
+    if (mapInfo.find("VID_PID") != mapInfo.end()) {
         m_sysFSToHwinfo = mapInfo["VID_PID"];
         return;
     }
@@ -713,7 +713,7 @@ void DeviceBaseInfo::setsysFStoHwinfoKey(const QMap<QString, QString> &mapInfo)
 bool DeviceBaseInfo::sysFSmatchToHwinfo(const QMap<QString, QString> &mapInfo)
 {
     // VID_PID 匹配上
-    if (mapInfo.find("VID_PID") != mapInfo.end() ) {
+    if (mapInfo.find("VID_PID") != mapInfo.end()) {
         if (m_sysFSToHwinfo == mapInfo["VID_PID"]) {
             return true;
         }
@@ -729,6 +729,7 @@ const  QString DeviceBaseInfo::get_string(const QString &sysPathfile)
         return QString();
 
     QString info = file.readAll();
+    info = info.trimmed();
     file.close();
     return info;
 }
