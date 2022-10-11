@@ -174,8 +174,8 @@ void DeviceGenerator::generatorCpuDevice()
 
     // set cpu number
     QSet<QString> allCPUS;
-    for (auto dd4:dmidecode4) {
-        if(dd4.contains("Socket Designation"))
+    for (auto dd4 : dmidecode4) {
+        if (dd4.contains("Socket Designation"))
             allCPUS.insert(dd4["Socket Designation"]);
     }
     DeviceManager::instance()->setCpuNum(allCPUS.isEmpty() ? dmidecode4.size() : allCPUS.size());
@@ -295,7 +295,7 @@ void DeviceGenerator::generatorAudioDevice()
     getAudioInfoFromLshw();
     getAudioInfoFrom_sysFS();
     // getAudioInfoFromCatInput();
-    
+
 }
 
 void DeviceGenerator::generatorBluetoothDevice()
@@ -623,11 +623,10 @@ void DeviceGenerator::getGpuSizeFromDmesg()
     if (lstMap.size() > 0 && lstMap[0].size() > 0)
         for (QMap<QString, QString> curMap : lstMap) {
             DeviceManager::instance()->setGpuSizeFromDmesg(curMap);
-        }
-    else {
+        } else {
         // dmesg无法获取显存信息时从nvidia-settings获取
         const QList<QMap<QString, QString>> &nvidiaMap = DeviceManager::instance()->cmdInfo("nvidia");
-        if (nvidiaMap.size() > 0 && nvidiaMap[0].size() > 0){
+        if (nvidiaMap.size() > 0 && nvidiaMap[0].size() > 0) {
             for (QMap<QString, QString> curMap : nvidiaMap) {
                 DeviceManager::instance()->setGpuSizeFromDmesg(curMap);
             }
@@ -696,19 +695,21 @@ void DeviceGenerator::getAudioInfoFrom_sysFS()
     QMap<QString, QString> mapInfo;
     QString path;
 
-    for(int i=0; i<5;i++){
+    for (int i = 0; i < 5; i++) {
         mapInfo.clear();
         DeviceAudio *device = new DeviceAudio();
-        bool getcard = device->setInfoFrom_sysFS(mapInfo,i);
-        if(getcard){
+        bool getcard = device->setInfoFrom_sysFS(mapInfo, i);
+        if (getcard) {
             path = mapInfo["SysFS ID"];
             DeviceAudio *tmpdevice = dynamic_cast<DeviceAudio *>(DeviceManager::instance()->getAudioDevice(path));
-            if (!tmpdevice){  // 没有该设备 说加新的
+            if (!tmpdevice) { // 没有该设备 说加新的
                 DeviceManager::instance()->addAudioDevice(device);
-            } else{  //找到有就 加芯片等信息
+            } else { //找到有就 加芯片等信息
                 QString chip = mapInfo["chip"];
                 // DeviceManager::instance()->setAudioChipFromDmesg(chip);
                 tmpdevice->setAudioChipFromDmesg(chip);
+                delete device;
+                device = nullptr;
             }
         }
     }
@@ -725,7 +726,7 @@ void DeviceGenerator::getAudioInfoFromLshw()
 
         DeviceManager::instance()->setAudioInfoFromLshw(*it);
     }
-     DeviceManager::instance()->deleteDisableDuplicate_AudioDevice();  //bug 150331  禁用显卡音频，重启后音频信息异常增多
+    DeviceManager::instance()->deleteDisableDuplicate_AudioDevice();  //bug 150331  禁用显卡音频，重启后音频信息异常增多
 }
 
 void DeviceGenerator::getAudioInfoFromCatInput()
@@ -1027,11 +1028,11 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 3)
             continue;
-/*  bug 141439 不可见功能设计需要再次思考*/
-        if (  (*it).find("Device") != (*it).end() &&
-             ((*it)["Device"].contains("fingerprint", Qt::CaseInsensitive)  ||  
-              (*it)["Device"].contains("MOH", Qt::CaseInsensitive)
-             )) { 
+        /*  bug 141439 不可见功能设计需要再次思考*/
+        if ((*it).find("Device") != (*it).end() &&
+                ((*it)["Device"].contains("fingerprint", Qt::CaseInsensitive)  ||
+                 (*it)["Device"].contains("MOH", Qt::CaseInsensitive)
+                )) {
             DeviceOthers *device = new DeviceOthers();
             device->setForcedDisplay(true);
             device->setInfoFromHwinfo(*it);
