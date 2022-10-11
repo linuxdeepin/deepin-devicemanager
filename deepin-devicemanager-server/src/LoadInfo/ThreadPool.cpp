@@ -24,19 +24,11 @@ ThreadPool::ThreadPool(QObject *parent)
 void ThreadPool::loadDeviceInfo()
 {
     // 根据m_ListCmd生成所有设备信息
-#ifndef COMMUNITY
-    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
-    cleaner->setParent(this);
-#endif
-
     QList<Cmd>::iterator it = m_ListCmd.begin();
     for (; it != m_ListCmd.end(); ++it) {
         ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-#ifndef COMMUNITY
-        cleaner->add(task);
-#endif
-        start(task);
         task->setAutoDelete(true);
+        start(task);
     }
 
     // 当所有设备执行完毕之后，开始执行生成其它设备的任务
@@ -53,18 +45,11 @@ void ThreadPool::loadDeviceInfo()
 void ThreadPool::updateDeviceInfo()
 {
     // 根据m_ListCmd生成所有设备信息
-#ifndef COMMUNITY
-    QObjectCleanupHandler *cleaner = new QObjectCleanupHandler;
-    cleaner->setParent(this);
-#endif
     QList<Cmd>::iterator it = m_ListUpdate.begin();
     for (; it != m_ListUpdate.end(); ++it) {
         ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-#ifndef COMMUNITY
-        cleaner->add(task);
-#endif
-        start(task);
         task->setAutoDelete(true);
+        start(task);
     }
     // 当所有设备执行完毕之后，开始执行生成其它设备的任务
     // 这里是为了确保其它设备在最后一个生成
