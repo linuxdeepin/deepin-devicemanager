@@ -36,6 +36,7 @@
 #include <QProcess>
 #include <QDir>
 #include <QVBoxLayout>
+#include <QTimer>
 
 DWIDGET_USE_NAMESPACE
 
@@ -88,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent)
         }
         // 正在刷新标志
         m_refreshing = true;
+        mp_ButtonBox->setEnabled(false);
         // 加载设备信息
         refreshDataBase();
         startScanningFlag = true;
@@ -112,6 +114,7 @@ void MainWindow::refresh()
 
     // 正在刷新标志
     m_refreshing = true;
+    mp_ButtonBox->setEnabled(false);
 
     mp_WaitingWidget->start();
     mp_MainStackWidget->setCurrentIndex(0);
@@ -388,6 +391,7 @@ void MainWindow::slotLoadingFinish(const QString &message)
             mp_DeviceWidget->updateOverview(overviewMap);
         }
 
+        mp_ButtonBox->setEnabled(true);
         // 刷新结束
         m_refreshing = false;
 
