@@ -48,6 +48,11 @@ public:
      */
     void setFontChangeFlag();
 
+    /**
+     * @brief clear:清除数据
+     */
+    void clear();
+
 protected:
     virtual void resizeEvent(QResizeEvent *event) override;
 

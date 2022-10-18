@@ -110,6 +110,8 @@ bool PageDriverManager::isInstalling()
 
 void PageDriverManager::scanDriverInfo()
 {
+    if (m_Scanning)
+        return;
     m_IsFirstScan = false;
     m_Scanning = true;
     // 如果在安装过程中则不扫描

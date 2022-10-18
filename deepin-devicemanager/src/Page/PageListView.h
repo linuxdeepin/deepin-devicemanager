@@ -41,6 +41,11 @@ public:
      */
     QString currentType();
 
+    /**
+     * @brief clear:清除数据
+     */
+    void clear();
+
 protected:
     /**@brief:事件重写*/
     void paintEvent(QPaintEvent *event) override;

@@ -38,9 +38,18 @@ DeviceWidget::DeviceWidget(QWidget *parent)
 
 DeviceWidget::~DeviceWidget()
 {
-    DELETE_PTR(mp_ListView)
-    DELETE_PTR(mp_PageInfo)
-    DELETE_PTR(m_Layout)
+    if (mp_ListView) {
+        delete mp_ListView;
+        mp_ListView = nullptr;
+    }
+    if (mp_PageInfo) {
+        delete mp_PageInfo;
+        mp_PageInfo = nullptr;
+    }
+    if (m_Layout) {
+        delete m_Layout;
+        m_Layout = nullptr;
+    }
 }
 
 void DeviceWidget::updateListView(const QList<QPair<QString, QString> > &lst)
@@ -80,6 +89,12 @@ void DeviceWidget::setFontChangeFlag()
 {
     // 设置字体变化标志
     mp_PageInfo->setFontChangeFlag();
+}
+
+void DeviceWidget::clear()
+{
+    mp_ListView->clear();
+    mp_PageInfo->clear();
 }
 
 void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)

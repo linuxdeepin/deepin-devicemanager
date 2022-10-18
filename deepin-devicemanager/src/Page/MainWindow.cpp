@@ -99,19 +99,34 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     // 释放指针
-    DELETE_PTR(mp_WaitingWidget)
-    DELETE_PTR(mp_DeviceWidget)
-//    DELETE_PTR(mp_DriverManager)
-    DELETE_PTR(mp_MainStackWidget)
-    DELETE_PTR(mp_WorkingThread)
+    if (mp_WaitingWidget) {
+        delete mp_WaitingWidget;
+        mp_WaitingWidget = nullptr;
+    }
+    if (mp_DeviceWidget) {
+        delete mp_DeviceWidget;
+        mp_DeviceWidget = nullptr;
+    }
+    //    DELETE_PTR(mp_DriverManager)
+    if (mp_MainStackWidget) {
+        delete mp_MainStackWidget;
+        mp_MainStackWidget = nullptr;
+    }
+    if (mp_WorkingThread) {
+        delete mp_WorkingThread;
+        mp_WorkingThread = nullptr;
+    }
 }
 
 void MainWindow::refresh()
 {
     // 正在刷新,避免重复操作
-    if (m_refreshing)
+    if (m_refreshing || startScanningFlag)
         return;
 
+    if (mp_ButtonBox->checkedId() == 1) {
+        startScanningFlag = true;
+    }
     // 正在刷新标志
     m_refreshing = true;
     mp_ButtonBox->setEnabled(false);
@@ -119,6 +134,7 @@ void MainWindow::refresh()
     mp_WaitingWidget->start();
     mp_MainStackWidget->setCurrentIndex(0);
     mp_ButtonBox->buttonList().at(0)->click();
+    mp_DeviceWidget->clear();
 
     // 加载设备信息
     refreshDataBase();
@@ -305,8 +321,9 @@ void MainWindow::initWindowTitle()
                 mp_MainStackWidget->setCurrentIndex(1);
         } else {
             mp_MainStackWidget->setCurrentIndex(2);
-            if (mp_DriverManager->isFirstScan())
+            if (mp_DriverManager->isFirstScan()) {
                 mp_DriverManager->scanDriverInfo();
+            }
         }
     });
     titlebar()->addWidget(mp_ButtonBox);
@@ -405,6 +422,7 @@ void MainWindow::slotLoadingFinish(const QString &message)
         }
     }
     if (startScanningFlag) {
+        mp_MainStackWidget->setCurrentWidget(mp_DriverManager);
         mp_DriverManager->scanDriverInfo();
         startScanningFlag = false;
     }
