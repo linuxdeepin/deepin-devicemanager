@@ -329,35 +329,37 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 
 void PageDetail::clearWidget()
 {
-    //  清空TextBrowser
-    foreach (auto widget, m_ListTextBrowser) {
-        delete widget;
-        widget = nullptr;
-    }
-
-    //  清空layout
-    foreach (auto widget, m_ListHlayout) {
-        delete widget;
-        widget = nullptr;
-    }
-
-    // 清空DetailButton
-    foreach (auto widget, m_ListDetailButton) {
-        delete widget;
-        widget = nullptr;
-    }
-
-    // 清空Seperator
-    foreach (auto widget, m_ListDetailSeperator) {
-        delete widget;
-        widget = nullptr;
-    }
-
-    // 清空List列表
+    QList<TextBrowser *> listTextBrowser = m_ListTextBrowser;
     m_ListTextBrowser.clear();
+    //  清空TextBrowser
+    foreach (auto widget, listTextBrowser) {
+        widget->deleteLater();
+        widget = nullptr;
+    }
+
+    QList<QHBoxLayout *> listHlayout = m_ListHlayout;
     m_ListHlayout.clear();
+    //  清空layout
+    foreach (auto widget, listHlayout) {
+        widget->deleteLater();
+        widget = nullptr;
+    }
+
+    QList<DetailButton *> listDetailButton = m_ListDetailButton;
     m_ListDetailButton.clear();
+    // 清空DetailButton
+    foreach (auto widget, listDetailButton) {
+        widget->deleteLater();
+        widget = nullptr;
+    }
+
+    QList<DetailSeperator *> listDetailSeperator = m_ListDetailSeperator;
     m_ListDetailSeperator.clear();
+    // 清空Seperator
+    foreach (auto widget, listDetailSeperator) {
+        widget->deleteLater();
+        widget = nullptr;
+    }
 
     // 删除最后的一个弹簧
     if (mp_ScrollAreaLayout) {

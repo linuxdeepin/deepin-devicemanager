@@ -76,6 +76,16 @@ QString PageListView::currentType()
     return m_CurType;
 }
 
+void PageListView::clear()
+{
+    if (!mp_ListView) {
+        return;
+    }
+
+    // 更新之前先清理
+    mp_ListView->clearItem();
+}
+
 void PageListView::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色

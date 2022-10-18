@@ -103,6 +103,14 @@ void PageInfoWidget::setFontChangeFlag()
     mp_PageBoardInfo->setFontChangeFlag();
 }
 
+void PageInfoWidget::clear()
+{
+    mp_PageOverviewInfo->clearWidgets();
+    mp_PageMutilInfo->clearWidgets();
+    mp_PageSignalInfo->clearWidgets();
+    mp_PageBoardInfo->clearWidgets();
+}
+
 void PageInfoWidget::resizeEvent(QResizeEvent *event)
 {
     DWidget::resizeEvent(event);

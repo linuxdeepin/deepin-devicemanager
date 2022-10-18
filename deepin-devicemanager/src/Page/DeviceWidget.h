@@ -57,6 +57,12 @@ public:
      * @brief setFontChangeFlag:字体变化标志
      */
     void setFontChangeFlag();
+
+    /**
+     * @brief clear:清除数据
+     */
+    void clear();
+
 signals:
 
     /**
