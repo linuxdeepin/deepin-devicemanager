@@ -75,7 +75,7 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
         return;
 
     // 设置属性
-    setAttribute(mapInfo, "product", m_Name, false);
+    setAttribute(mapInfo, "product", m_Name, m_Name.isEmpty() || (m_Name.startsWith("pci") && mapInfo.contains("product") && !mapInfo["product"].startsWith("pci")));
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "width", m_Width, false);
@@ -103,7 +103,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Vendor", m_Vendor, false);
     setAttribute(mapInfo, "Device", m_Name, true);
     // 如果subdevice有值则使用subdevice
-    if (m_Name.isEmpty() || (mapInfo.contains("SubDevice") && mapInfo["Device"].startsWith("pci")) || !mapInfo["SubDevice"].startsWith("pci")) {
+    if (m_Name.isEmpty() || (mapInfo.contains("SubDevice") && mapInfo["Device"].startsWith("pci") && !mapInfo["SubDevice"].startsWith("pci"))) {
         setAttribute(mapInfo, "SubDevice", m_Name, true);
     }
     setAttribute(mapInfo, "Model", m_Model);
