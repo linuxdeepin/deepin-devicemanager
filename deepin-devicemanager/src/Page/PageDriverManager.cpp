@@ -108,6 +108,11 @@ bool PageDriverManager::isInstalling()
     return mp_CurDriverInfo != nullptr;
 }
 
+bool PageDriverManager::isScanning()
+{
+    return m_Scanning;
+}
+
 void PageDriverManager::scanDriverInfo()
 {
     if (m_Scanning)
@@ -316,6 +321,7 @@ void PageDriverManager::slotScanFinished(ScanResult sr)
 
     // 扫描结束，可以继续扫描
     m_Scanning = false;
+    emit scanFinished();
 }
 
 void PageDriverManager::slotUndoInstall()

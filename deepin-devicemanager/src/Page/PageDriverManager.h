@@ -51,6 +51,12 @@ public:
      */
     bool isInstalling();
 
+    /**
+     * @brief isScanning：判断当前是否扫描
+     * @return
+     */
+    bool isScanning();
+
 public slots:
 
     /**
@@ -113,6 +119,7 @@ private slots:
 
 signals:
     void startScanning();
+    void scanFinished();
 
 private:
     /**
