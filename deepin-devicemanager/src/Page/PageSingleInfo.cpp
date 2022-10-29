@@ -113,7 +113,7 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
 void PageSingleInfo::clearWidgets()
 {
-    return;
+    mp_Device = nullptr;
 }
 
 void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
@@ -134,7 +134,7 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
     // 设置单元格内容
     for (int i = 0; i < row; ++i) {
         QStringList lstStr = lst[i].second.split("\n");
-        if(lstStr.size() > 1){
+        if (lstStr.size() > 1) {
             mp_Content->setItemDelegateForRow(i, m_ItemDelegate);
         }
 
@@ -170,6 +170,9 @@ void PageSingleInfo::setRowHeight(int row, int height)
 
 void PageSingleInfo::slotShowMenu(const QPoint &)
 {
+    // 设备为空
+    if (nullptr == mp_Device)
+        return;
     mp_Menu->clear();
     // 不管什么状态 导出、刷新、复制 都有
     mp_Refresh->setEnabled(true);
@@ -183,29 +186,29 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     mp_WakeupMachine->setChecked(false);
 
     // 不可用状态：卸载和启用禁用置灰
-    if(!mp_Device->available()){
+    if (!mp_Device->available()) {
         mp_removeDriver->setEnabled(false);
         mp_Enable->setEnabled(false);
     }
     // 禁用状态：更新卸载置灰
-    if(!mp_Device->enable()){
+    if (!mp_Device->enable()) {
         mp_Enable->setEnabled(true);
         mp_updateDriver->setEnabled(false);
         mp_removeDriver->setEnabled(false);
         mp_Enable->setText(tr("Enable"));
-    }else{
+    } else {
         mp_Enable->setText(tr("Disable"));
     }
     // 驱动界面打开状态： 驱动的更新卸载和设备的启用禁用置灰
-    if(PageDriverControl::isRunning()){
+    if (PageDriverControl::isRunning()) {
         mp_updateDriver->setEnabled(false);
         mp_removeDriver->setEnabled(false);
         mp_Enable->setEnabled(false);
     }
 
     //dde-printer未安装，updateDriver不可选
-    DevicePrint *printer = qobject_cast<DevicePrint*>(mp_Device);
-    if(printer && !PageInfo::packageHasInstalled("dde-printer")) {
+    DevicePrint *printer = qobject_cast<DevicePrint *>(mp_Device);
+    if (printer && !PageInfo::packageHasInstalled("dde-printer")) {
         mp_updateDriver->setEnabled(false);
     }
 
@@ -213,44 +216,44 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     mp_Menu->addAction(mp_Copy);
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
-    if (mp_Device->canEnable()){
+    if (mp_Device->canEnable()) {
         mp_Menu->addAction(mp_Enable);
     }
     // 主板、内存、cpu等没有驱动，无需右键按钮
-    if(mp_Device->canUninstall()){
+    if (mp_Device->canUninstall()) {
         mp_Menu->addSeparator();
         mp_Menu->addAction(mp_updateDriver);
         mp_Menu->addAction(mp_removeDriver);
     }
 
-    DeviceInput* input = dynamic_cast<DeviceInput*>(mp_Device);
-    if(input){
+    DeviceInput *input = dynamic_cast<DeviceInput *>(mp_Device);
+    if (input) {
         mp_Menu->addSeparator();
-        if(input->canWakeupMachine()){
+        if (input->canWakeupMachine()) {
             mp_WakeupMachine->setChecked(input->isWakeupMachine());
-        }else{
+        } else {
             mp_WakeupMachine->setEnabled(false);
         }
         // 如果是禁用状态，则唤醒置灰
-        if(!mp_Device->enable())
+        if (!mp_Device->enable())
             mp_WakeupMachine->setEnabled(false);
         mp_Menu->addAction(mp_WakeupMachine);
     }
 
     // 网卡远程唤醒
-    DeviceNetwork* network = dynamic_cast<DeviceNetwork*>(mp_Device);
-    if(network){
+    DeviceNetwork *network = dynamic_cast<DeviceNetwork *>(mp_Device);
+    if (network) {
         int res = DBusWakeupInterface::getInstance()->isNetworkWakeup(network->logicalName());
-        if(WAKEUP_OPEN == res){
+        if (WAKEUP_OPEN == res) {
             mp_WakeupMachine->setChecked(true);
-        }else if(WAKEUP_CLOSE == res){
+        } else if (WAKEUP_CLOSE == res) {
             mp_WakeupMachine->setChecked(false);
-        }else{
+        } else {
             mp_WakeupMachine->setEnabled(false);
         }
 
         // 如果是禁用状态，则唤醒置灰
-        if(!mp_Device->enable())
+        if (!mp_Device->enable())
             mp_WakeupMachine->setEnabled(false);
         mp_Menu->addAction(mp_WakeupMachine);
     }
@@ -275,11 +278,11 @@ void PageSingleInfo::slotActionEnable()
         if (res == EDS_Success) {
             // 返回成功之前再次更新数据
             emit refreshInfo();
-        }  else if(res == EDS_NoSerial){
+        }  else if (res == EDS_NoSerial) {
             QString con = tr("Failed to disable it: unable to get the device SN");
             // 禁用失败提示
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
-        }else {
+        } else {
             QString con = tr("Failed to disable the device");
 
             // 启用失败提示
@@ -292,11 +295,11 @@ void PageSingleInfo::slotActionEnable()
         // 除设置成功的情况，其他情况需要提示设置失败
         if (res == EDS_Success) {
             emit refreshInfo();
-        } else if(res == EDS_NoSerial){
+        } else if (res == EDS_NoSerial) {
             QString con = tr("Failed to disable it: unable to get the device SN");
             // 禁用失败提示
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
-        }else {
+        } else {
             QString con = tr("Failed to enable the device");
             // 禁用失败提示
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
@@ -307,14 +310,14 @@ void PageSingleInfo::slotActionEnable()
 void PageSingleInfo::slotActionUpdateDriver()
 {
     //打印设备更新驱动时，通过dde-printer来操作
-    if(mp_Device->hardwareClass() == "printer") {
-        if(!QProcess::startDetached("dde-printer"))
+    if (mp_Device->hardwareClass() == "printer") {
+        if (!QProcess::startDetached("dde-printer"))
             qInfo() << "dde-printer startDetached error";
         return;
     }
-    PageDriverControl* installDriver = new PageDriverControl(this, tr("Update Drivers"), true, mp_Device->name(), "");
+    PageDriverControl *installDriver = new PageDriverControl(this, tr("Update Drivers"), true, mp_Device->name(), "");
     installDriver->show();
-    connect(installDriver, &PageDriverControl::refreshInfo, this, [=]{
+    connect(installDriver, &PageDriverControl::refreshInfo, this, [ = ] {
         emit refreshInfo();
         installDriver->disconnect();
     });
@@ -324,15 +327,15 @@ void PageSingleInfo::slotActionRemoveDriver()
 {
     QString printerVendor;
     QString printerModel;
-    DevicePrint *printer = qobject_cast<DevicePrint*>(mp_Device);
-    if(printer) {
+    DevicePrint *printer = qobject_cast<DevicePrint *>(mp_Device);
+    if (printer) {
         printerVendor = printer->getVendor();
         printerModel = printer->getModel();
     }
     PageDriverControl *rmDriver = new PageDriverControl(this, tr("Uninstall Drivers"), false,
                                                         mp_Device->name(), mp_Device->driver(), printerVendor, printerModel);
     rmDriver->show();
-    connect(rmDriver, &PageDriverControl::refreshInfo, this, [=]{
+    connect(rmDriver, &PageDriverControl::refreshInfo, this, [ = ] {
         emit refreshInfo();
         rmDriver->disconnect();
     });
@@ -341,15 +344,15 @@ void PageSingleInfo::slotActionRemoveDriver()
 void PageSingleInfo::slotWakeupMachine()
 {
     // 键盘鼠标唤醒机器
-    DeviceInput *input = qobject_cast<DeviceInput*>(mp_Device);
-    if(input && !input->wakeupID().isEmpty() && !input->sysPath().isEmpty()){
-        DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),mp_WakeupMachine->isChecked());
+    DeviceInput *input = qobject_cast<DeviceInput *>(mp_Device);
+    if (input && !input->wakeupID().isEmpty() && !input->sysPath().isEmpty()) {
+        DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(), input->sysPath(), mp_WakeupMachine->isChecked());
     }
 
     // 网卡的远程唤醒
-    DeviceNetwork* network = qobject_cast<DeviceNetwork*>(mp_Device);
-    if(network && !network->logicalName().isEmpty()){
-        DBusWakeupInterface::getInstance()->setNetworkWakeup(network->logicalName(),mp_WakeupMachine->isChecked());
+    DeviceNetwork *network = qobject_cast<DeviceNetwork *>(mp_Device);
+    if (network && !network->logicalName().isEmpty()) {
+        DBusWakeupInterface::getInstance()->setNetworkWakeup(network->logicalName(), mp_WakeupMachine->isChecked());
     }
 }
 
