@@ -25,6 +25,7 @@
 #include <DButtonBox>
 #include <DTitlebar>
 #include <DDialog>
+#include <QShortcut>
 
 // Qt库文件
 #include <QResizeEvent>
@@ -293,6 +294,15 @@ void MainWindow::initWindow()
 
     //3. 初始化界面布局
     initWidgets();
+
+    //4. 初始化快捷键
+    QShortcut *viewshortcut = new QShortcut(this);
+    viewshortcut->setAutoRepeat(false);
+    QKeySequence viewSequence(QLatin1String("F5"));
+    viewshortcut->setKey(viewSequence);
+    connect(viewshortcut, &QShortcut::activated, this, [ = ]() {
+        refresh();
+    });
 }
 
 void MainWindow::initWindowSize()
@@ -507,12 +517,6 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
                 return;
             }
         }
-    }
-
-    // F5:界面刷新
-    if (e->key() == Qt::Key_F5) {
-        refresh();
-        return;
     }
 
     // ctrl+shift+command:快捷键提示界面
