@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mp_DriverManager, &PageDriverManager::startScanning, this, [ = ]() {
         // 正在刷新,避免重复操作
         if (m_refreshing) {
+            mp_ButtonBox->setEnabled(false);
             startScanningFlag = true;
             return;
         }
@@ -93,6 +94,9 @@ MainWindow::MainWindow(QWidget *parent)
         // 加载设备信息
         refreshDataBase();
         startScanningFlag = true;
+    });
+    connect(mp_DriverManager, &PageDriverManager::scanFinished, this, [ = ]() {
+        mp_ButtonBox->setEnabled(true);
     });
 }
 
@@ -121,7 +125,7 @@ MainWindow::~MainWindow()
 void MainWindow::refresh()
 {
     // 正在刷新,避免重复操作
-    if (m_refreshing || startScanningFlag)
+    if (m_refreshing || startScanningFlag || mp_DriverManager->isScanning())
         return;
 
     if (mp_ButtonBox->checkedId() == 1) {
@@ -322,6 +326,7 @@ void MainWindow::initWindowTitle()
         } else {
             mp_MainStackWidget->setCurrentIndex(2);
             if (mp_DriverManager->isFirstScan()) {
+                mp_ButtonBox->setEnabled(false);
                 mp_DriverManager->scanDriverInfo();
             }
         }
@@ -408,7 +413,9 @@ void MainWindow::slotLoadingFinish(const QString &message)
             mp_DeviceWidget->updateOverview(overviewMap);
         }
 
-        mp_ButtonBox->setEnabled(true);
+        if (!startScanningFlag) {
+            mp_ButtonBox->setEnabled(true);
+        }
         // 刷新结束
         m_refreshing = false;
 
