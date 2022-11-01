@@ -372,6 +372,9 @@ void PageSingleInfo::initWidgets()
     hLayout->addWidget(mp_Content);
     hLayout->addStretch(1); // 考虑禁用后表格只有一行，靠上显示
     setLayout(hLayout);
+
+    mp_Enable->setVisible(false);
+    mp_WakeupMachine->setVisible(false);
 }
 
 void PageSingleInfo::expandTable()

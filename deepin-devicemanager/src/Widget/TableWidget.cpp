@@ -220,7 +220,7 @@ void TableWidget::slotShowMenu(const QPoint &point)
 
 
     int row = mp_Table->currentRow();
-    if(row < 0)
+    if (row < 0)
         return;
     bool isInstalled = false;
     bool isPrinter = false;
@@ -241,13 +241,13 @@ void TableWidget::slotShowMenu(const QPoint &point)
     }
     // 主板、内存、cpu等没有驱动，无需右键按钮
     // 选中item状态下才有卸载、更新按钮
-    bool canUninstall = true , canEnable = true;
-    QStandardItem* item = mp_Table->item(row,0);
-    if(item){ // 获取该设备是否可以更新卸载驱动
-        canUninstall = item->data(Qt::UserRole).toString()=="true" ? true : false;
-        canEnable = item->data(Qt::UserRole+1).toString()=="true" ? true : false;
+    bool canUninstall = true, canEnable = true;
+    QStandardItem *item = mp_Table->item(row, 0);
+    if (item) { // 获取该设备是否可以更新卸载驱动
+        canUninstall = item->data(Qt::UserRole).toString() == "true" ? true : false;
+        canEnable = item->data(Qt::UserRole + 1).toString() == "true" ? true : false;
     }
-    if(!canEnable){
+    if (!canEnable) {
         mp_Enable->setEnabled(false);
     }
     if (canUninstall && selected.size() > 0) {
@@ -256,43 +256,43 @@ void TableWidget::slotShowMenu(const QPoint &point)
         mp_Menu->addAction(mp_removeDriver);
     }
 
-    QVariant canWakeup = item->data(Qt::UserRole+2);
-    if(canWakeup.isValid()){
+    QVariant canWakeup = item->data(Qt::UserRole + 2);
+    if (canWakeup.isValid()) {
         mp_Menu->addSeparator();
 
         QString str = canWakeup.toString();
         // 先判断是网卡唤醒还是键鼠唤醒
-        if("true" != str && "false" != str){
+        if ("true" != str && "false" != str) {
             // 网络唤醒菜单处理处理
             int res = DBusWakeupInterface::getInstance()->isNetworkWakeup(str);
-            if(WAKEUP_OPEN == res){
+            if (WAKEUP_OPEN == res) {
                 mp_WakeupMachine->setChecked(true);
-            }else if(WAKEUP_CLOSE == res){
+            } else if (WAKEUP_CLOSE == res) {
                 mp_WakeupMachine->setChecked(false);
-            }else{
+            } else {
                 mp_WakeupMachine->setEnabled(false);
             }
-        }else{ // 简述右键菜单处理
+        } else { // 简述右键菜单处理
             bool canWakeupBool = str == "true" ? true : false;
-            if(canWakeupBool){
-                QString wakeupPath = item->data(Qt::UserRole+3).toString();
+            if (canWakeupBool) {
+                QString wakeupPath = item->data(Qt::UserRole + 3).toString();
                 QFile file(wakeupPath);
                 bool isWakeup = false;
-                if(file.open(QIODevice::ReadOnly)){
+                if (file.open(QIODevice::ReadOnly)) {
                     QString info = file.readAll();
-                    if(info.contains("disabled"))
+                    if (info.contains("disabled"))
                         isWakeup = false;
                     else
                         isWakeup =  true;
                 }
                 mp_WakeupMachine->setChecked(isWakeup);
-            }else{
+            } else {
                 mp_WakeupMachine->setEnabled(false);
             }
         }
 
         // 如果是禁用状态，则唤醒置灰
-        if(!mp_Table->currentRowEnable())
+        if (!mp_Table->currentRowEnable())
             mp_WakeupMachine->setEnabled(false);
         mp_Menu->addAction(mp_WakeupMachine);
     }
@@ -336,7 +336,7 @@ void TableWidget::slotActionRemoveDriver()
 
 void TableWidget::slotWakeupMachine()
 {
-    emit wakeupMachine(mp_Table->currentRow(),mp_WakeupMachine->isChecked());
+    emit wakeupMachine(mp_Table->currentRow(), mp_WakeupMachine->isChecked());
 }
 
 void TableWidget::slotItemClicked(const QModelIndex &index)
@@ -356,4 +356,7 @@ void TableWidget::initWidget()
     m_HLayout->setContentsMargins(margin, margin, margin, margin);
     m_HLayout->addWidget(mp_Table);
     setLayout(m_HLayout);
+
+    mp_Enable->setVisible(false);
+    mp_WakeupMachine->setVisible(false);
 }
