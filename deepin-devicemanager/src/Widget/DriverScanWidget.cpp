@@ -23,6 +23,8 @@
 #define BUTTON_WIDTH   310
 #define SPACE_15       15
 
+static QPropertyAnimation *animation = nullptr;
+
 DriverScanWidget::DriverScanWidget(DWidget *parent)
     : DFrame(parent)
     , mp_ScanningPicLabel(new AnimationLabel(this))
@@ -50,11 +52,13 @@ void DriverScanWidget::setScanningUI(const QString &scanInfo, int progressValue)
 {
     hideAll();
     // Animation Label
-    QPropertyAnimation *animation = new QPropertyAnimation(mp_ScanningPicLabel, "icon");
-    animation->setLoopCount(-1);
-    animation->setDuration(800);
-    animation->setStartValue(1);
-    animation->setEndValue(8);
+    if (nullptr == animation) {
+        animation = new QPropertyAnimation(mp_ScanningPicLabel, "icon");
+        animation->setLoopCount(-1);
+        animation->setDuration(800);
+        animation->setStartValue(1);
+        animation->setEndValue(8);
+    }
     animation->start();
     mp_ScanningPicLabel->show();
 
@@ -290,8 +294,8 @@ void DriverScanWidget::initUI()
     mp_ScanningInfoLabel->setAlignment(Qt::AlignCenter);
 
     QHBoxLayout *mainLayout = new QHBoxLayout();
-    mainLayout->setContentsMargins(0,0,0,0);
-    QScrollArea* area = new QScrollArea(this);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+    QScrollArea *area = new QScrollArea(this);
     mp_ScrollWidget->setMinimumHeight(290);
 
     area->setFrameShape(QFrame::NoFrame);
@@ -333,10 +337,15 @@ void DriverScanWidget::hideAll()
     mp_HLayoutInfoLabel = new QHBoxLayout();
     mp_HLayout = new QHBoxLayout();
     mp_VLayout = new QVBoxLayout();
+
+    if (nullptr != animation)
+        animation->stop();
 }
 
 void DriverScanWidget::setProgressFinish()
 {
+    if (nullptr != animation)
+        animation->stop();
     mp_ScanningProgress->setValue(100);
 }
 
@@ -381,7 +390,7 @@ void DriverScanWidget::paintEvent(QPaintEvent *event)
     DFrame::paintEvent(event);
 }
 
-void DriverScanWidget::resizeEvent(QResizeEvent* event)
+void DriverScanWidget::resizeEvent(QResizeEvent *event)
 {
     mp_ScroBar->setValue(mp_ScroBar->maximum());
     mp_ScroBar->setVisible(false);
