@@ -41,8 +41,6 @@ void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
     // 设置内存速率
     setAttribute(mapInfo, "clock", m_Speed);
-    if (m_Speed.contains("MT/s"))
-        m_Speed.replace("MT/s", "MHz");
 
     // 由lshw设置基本信息
     setAttribute(mapInfo, "width", m_TotalBandwidth);
@@ -62,10 +60,9 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Part Number", m_Name);
     setAttribute(mapInfo, "Serial Number", m_SerialNumber);
 
+    setAttribute(mapInfo, "Speed", m_Speed);
     // 设置配置频率
     setAttribute(mapInfo, "Configured Memory Speed", m_ConfiguredSpeed);
-    if (m_ConfiguredSpeed.contains("MT/s"))
-        m_ConfiguredSpeed.replace("MT/s", "MHz");
 
     // 由dmidecode设置基本属性
     setAttribute(mapInfo, "Minimum Voltage", m_MinimumVoltage);
@@ -127,7 +124,7 @@ void DeviceMemory::loadOtherDeviceInfo()
 {
     // 倒序，头插，保证原来的顺序
     // 添加其他信息,成员变量
-    if(Common::boardVendorType().isEmpty()){
+    if (Common::boardVendorType().isEmpty()) {
         addOtherDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
         addOtherDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
         addOtherDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
@@ -192,7 +189,7 @@ const QString DeviceMemory::getOverviewInfo()
     // 获取概况信息
     QString ov;
     QString nameStr = m_Name != "" ? m_Name : m_Vendor;
-    if(nameStr == "--")
+    if (nameStr == "--")
         nameStr.clear();
     ov += QString("%1(%2 %3 %4)") \
           .arg(m_Size) \
