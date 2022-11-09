@@ -353,10 +353,13 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
         addMapInfo("hciconfig", mapInfo);
         return;
     }
-    QString deviceInfo;
+    QProcess process;
+    process.start("bluetoothctl show " + mapInfo["BD Address"]);
+    process.waitForFinished(10000);
+    QString deviceInfo = process.readAllStandardOutput();
 
     // 读取文件信息
-    if (!getDeviceInfoFromCmd(deviceInfo, "bluetoothctl show " + mapInfo["BD Address"])) {
+    if (deviceInfo.isEmpty()) {
         addMapInfo("hciconfig", mapInfo);
         return;
     }
