@@ -76,6 +76,11 @@ PageDriverManager::PageDriverManager(DWidget *parent)
 
 PageDriverManager::~PageDriverManager()
 {
+    // 扫描驱动时关闭线程
+    if (mp_scanner->isRunning()) {
+        mp_scanner->terminate();
+        mp_scanner->wait();
+    }
     DELETE_PTR(mp_ViewNotInstall);
     DELETE_PTR(mp_ViewCanUpdate);
     DELETE_PTR(mp_AllDriverIsNew);
