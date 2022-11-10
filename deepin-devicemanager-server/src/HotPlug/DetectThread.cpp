@@ -7,6 +7,7 @@
 
 #include <QDebug>
 #include <QProcess>
+#include <QCryptographicHash>
 
 #define LEAST_NUM 10
 
@@ -89,8 +90,30 @@ void DetectThread::curHwinfoUsbInfo(QMap<QString, QMap<QString, QString>> &usbIn
         if (!getMapInfo(item, mapItem))
             continue;
 
+        QString uniqueID;
+        if (mapItem.contains("Unique ID"))
+            uniqueID = mapItem["Unique ID"];
+        if (mapItem.contains("Vendor") && mapItem.contains("Device") && (mapItem.contains("SysFS ID") || mapItem.contains("SysFS Device Link"))
+                && mapItem["Vendor"].contains("0x") && mapItem["Device"].contains("0x")) {
+            QStringList vendorlist = mapItem["Vendor"].split(" ");
+            QStringList devicelist = mapItem["Device"].split(" ");
+            if (vendorlist.size() > 1 && devicelist.size() > 1  && (!mapItem["SysFS ID"].isEmpty() || !mapItem["SysFS Device Link"].isEmpty())) {
+                QString valueStr = vendorlist[1].trimmed() + devicelist[1].remove("0x", Qt::CaseSensitive).trimmed();
+                QCryptographicHash Hash(QCryptographicHash::Md5);
+                QByteArray buf;
+                buf.append(valueStr);
+                if (!mapItem["SysFS Device Link"].isEmpty()) {
+                    buf.append(mapItem["SysFS Device Link"].trimmed());
+                } else {
+                    buf.append(mapItem["SysFS ID"].trimmed());
+                }
+                Hash.addData(buf);
+                uniqueID = QString::fromStdString(Hash.result().toBase64().toStdString());
+            }
+        }
+
         // 使用 Unique ID 作为唯一标识
-        usbInfo.insert(mapItem["Unique ID"], mapItem);
+        usbInfo.insert(uniqueID, mapItem);
     }
 }
 

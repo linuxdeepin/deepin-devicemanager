@@ -1152,6 +1152,8 @@ QString DeviceGenerator::uniqueID(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.find("unique_id") != mapInfo.end()) {
         return mapInfo["unique_id"];
+    } else if (mapInfo.find("Unique ID") != mapInfo.end()) {
+        return mapInfo["Unique ID"];
     } else if (mapInfo.find("Permanent HW Address") != mapInfo.end()) {
         return mapInfo["Permanent HW Address"];
     } else if (mapInfo.find("Serial ID") != mapInfo.end()) {
