@@ -1032,18 +1032,6 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
                         tmpvalue = tmpvid + tmpword[1].remove("0x", Qt::CaseSensitive).trimmed();
                         tmpvid.clear();
                         mapInfo[tmpkey] += tmpvalue;
-                        if (mapInfo.contains("SysFS ID") || mapInfo.contains("SysFS Device Link")) {
-                            QCryptographicHash Hash(QCryptographicHash::Md5);
-                            QByteArray buf;
-                            buf.append(mapInfo[tmpkey]);
-                            if (mapInfo.contains("SysFS Device Link") && !mapInfo["SysFS Device Link"].isEmpty()) {
-                                buf.append(mapInfo["SysFS Device Link"]);
-                            } else {
-                                buf.append(mapInfo["SysFS ID"]);
-                            }
-                            Hash.addData(buf);
-                            mapInfo["Unique ID"] = QString::fromStdString(Hash.result().toBase64().toStdString());
-                        }
                     }
                 }
             }
@@ -1078,6 +1066,19 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
                     mapInfo[words[0].trimmed()] = words[1].trimmed();
             }
         }
+    }
+
+    if (mapInfo.contains("VID_PID") && !mapInfo["VID_PID"].isEmpty() && (mapInfo.contains("SysFS ID") || mapInfo.contains("SysFS Device Link"))) {
+        QCryptographicHash Hash(QCryptographicHash::Md5);
+        QByteArray buf;
+        buf.append(mapInfo[tmpkey]);
+        if (mapInfo.contains("SysFS Device Link") && !mapInfo["SysFS Device Link"].isEmpty()) {
+            buf.append(mapInfo["SysFS Device Link"]);
+        } else {
+            buf.append(mapInfo["SysFS ID"]);
+        }
+        Hash.addData(buf);
+        mapInfo["Unique ID"] = QString::fromStdString(Hash.result().toBase64().toStdString());
     }
 
     if (mapInfo.find("Module Alias") != mapInfo.end())
