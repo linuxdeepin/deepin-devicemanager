@@ -10,9 +10,11 @@
 
 #include <QDebug>
 #include <QDateTime>
+#include <QTimer>
 
 #include<malloc.h>
 
+static bool firstLoadFlag = true;
 LoadInfoThread::LoadInfoThread()
     : mp_ReadFilePool()
     , mp_GenerateDevicePool()
@@ -21,7 +23,6 @@ LoadInfoThread::LoadInfoThread()
     , m_Start(true)
 {
     connect(&mp_ReadFilePool, &GetInfoPool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
-    DBusInterface::getInstance()->refreshInfo();
 }
 
 LoadInfoThread::~LoadInfoThread()
@@ -91,6 +92,14 @@ void LoadInfoThread::run()
 void LoadInfoThread::slotFinishedReadFilePool(const QString &)
 {
     m_FinishedReadFilePool = true;
+    // 首次加载刷新
+    if (firstLoadFlag) {
+        firstLoadFlag = false;
+        DBusInterface::getInstance()->refreshInfo();
+        QTimer::singleShot(500, this, [ = ]() {
+            start();
+        });
+    }
 }
 
 void LoadInfoThread::setFramework(const QString &arch)

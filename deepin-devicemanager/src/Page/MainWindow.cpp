@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::fontChange, this, &MainWindow::slotChangeUI);
     connect(mp_DriverManager, &PageDriverManager::startScanning, this, [ = ]() {
         // 正在刷新,避免重复操作
-        if (m_refreshing) {
+        if (m_refreshing || mp_WorkingThread->isRunning()) {
             mp_ButtonBox->setEnabled(false);
             startScanningFlag = true;
             return;
@@ -104,6 +104,9 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     // 释放指针
+    if (mp_WorkingThread && mp_WorkingThread->isRunning())
+        mp_WorkingThread->terminate();
+    while (mp_WorkingThread && mp_WorkingThread->isRunning()) {}
     if (mp_WaitingWidget) {
         delete mp_WaitingWidget;
         mp_WaitingWidget = nullptr;
@@ -126,7 +129,7 @@ MainWindow::~MainWindow()
 void MainWindow::refresh()
 {
     // 正在刷新,避免重复操作
-    if (m_refreshing || startScanningFlag || mp_DriverManager->isScanning())
+    if (m_refreshing || startScanningFlag || mp_DriverManager->isScanning() || mp_WorkingThread->isRunning())
         return;
 
     if (mp_ButtonBox->checkedId() == 1) {
@@ -472,7 +475,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
     }
 
     // 数据刷新时不处理界面刷新
-    if (m_refreshing) return;
+    if (m_refreshing || mp_WorkingThread->isRunning()) return;
 
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
