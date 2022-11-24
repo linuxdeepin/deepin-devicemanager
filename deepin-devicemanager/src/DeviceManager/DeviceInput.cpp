@@ -87,7 +87,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Unique ID", m_WakeupID);
     setAttribute(mapInfo, "Unique ID", m_SerialID);
     m_UniqueID = m_SerialID;
-    
+
 
     // 获取键盘的接口类型
     if (mapInfo.find("Hotplug") != mapInfo.end())
@@ -363,11 +363,8 @@ bool DeviceInput::canWakeupMachine()
 {
     if (m_WakeupID.isEmpty())
         return false;
-    QFile file(wakeupPath());
-    if (!file.open(QIODevice::ReadOnly)) {
-        return false;
-    }
-    return true;
+
+    return DBusWakeupInterface::getInstance()->canInputWakeupMachine(wakeupPath());
 }
 
 bool DeviceInput::isWakeupMachine()
@@ -376,10 +373,8 @@ bool DeviceInput::isWakeupMachine()
     if (!file.open(QIODevice::ReadOnly)) {
         return false;
     }
-    QString info = file.readAll();
-    if (info.contains("disabled"))
-        return false;
-    return true;
+
+    return DBusWakeupInterface::getInstance()->isInputWakeupMachine(wakeupPath());
 }
 
 QString DeviceInput::wakeupPath()
