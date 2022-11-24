@@ -40,14 +40,28 @@ public:
      * @param wakeup 可唤醒 不可唤醒
      * @return
      */
-    bool setWakeupMachine(const QString& unique_id, const QString& path, bool wakeup);
+    bool setWakeupMachine(const QString &unique_id, const QString &path, bool wakeup);
+
+    /**
+     * @brief canWakeupMachine 获取input是否支持唤醒
+     * @param path 设备节点路径
+     * @return
+     */
+    bool canInputWakeupMachine(const QString &path);
+
+    /**
+     * @brief isWakeupMachine 获取input唤醒状态
+     * @param path 设备节点路径
+     * @return
+     */
+    bool isInputWakeupMachine(const QString &path);
 
     /**
      * @brief isNetworkWakeup 获取网卡是否支持远程唤醒
      * @param logical_name 网卡的逻辑名称
      * @return
      */
-    int isNetworkWakeup(const QString& logical_name);
+    int isNetworkWakeup(const QString &logical_name);
 
     /**
      * @brief setNetworkWakeup 设置网卡的唤醒功能
@@ -55,7 +69,7 @@ public:
      * @param wake 是否唤醒
      * @return
      */
-    bool setNetworkWakeup(const QString& logical_name, bool wake);
+    bool setNetworkWakeup(const QString &logical_name, bool wake);
 
 protected:
     DBusWakeupInterface();
@@ -69,6 +83,7 @@ private:
     static std::atomic<DBusWakeupInterface *> s_Instance;
     static std::mutex                         m_mutex;
     QDBusInterface                            *mp_Iface;
+    QDBusInterface                            *mp_InputIface;
 };
 
 #endif // DBUSWAKEUPINTERFACE_H
