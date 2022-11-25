@@ -6,7 +6,8 @@
 #include "KLVGenerator.h"
 
 // Qt库文件
-#include<QDebug>
+#include <QDebug>
+#include <QProcess>
 
 // 其它头文件
 #include "DeviceManager/DeviceManager.h"
@@ -144,7 +145,27 @@ void KLVGenerator::getDiskInfoFromLshw()
             // 应HW的要求，将描述固定为   Universal Flash Storage
             tempMap["description"] = "Universal Flash Storage";
             // 应HW的要求，添加interface   UFS 3.0
-            tempMap["interface"] = "UFS 3.1";
+            tempMap["interface"] = "UFS 3.0";
+
+            // 读取interface版本
+            QProcess process;
+            process.start("cat /sys/devices/platform/f8200000.ufs/host0/scsi_host/host0/wb_en");
+            process.waitForFinished(-1);
+            int exitCode = process.exitCode();
+            if (exitCode != 127 && exitCode != 126) {
+                QString deviceInfo = process.readAllStandardOutput();
+                if (deviceInfo.trimmed() == "true") {
+                    process.start("cat /sys/block/sdd/device/spec_version");
+                    process.waitForFinished(-1);
+                    exitCode = process.exitCode();
+                    if (exitCode != 127 && exitCode != 126) {
+                        deviceInfo = process.readAllStandardOutput();
+                        if (deviceInfo.trimmed() == "310") {
+                            tempMap["interface"] = "UFS 3.1";
+                        }
+                    }
+                }
+            }
         }
 
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(tempMap);
@@ -172,7 +193,7 @@ void KLVGenerator::getImageInfoFromHwinfo()
         // KLU的问题特殊处理
         QMap<QString, QString> tempMap;
         foreach (const QString &key, (*it).keys()) {
-            if("Vendor" != key)
+            if ("Vendor" != key)
                 tempMap.insert(key, (*it)[key]);
         }
 
@@ -216,7 +237,7 @@ void KLVGenerator::getImageInfoFromLshw()
 
         QMap<QString, QString> tempMap;
         foreach (const QString &key, (*it).keys()) {
-            if("vendor" != key)
+            if ("vendor" != key)
                 tempMap.insert(key, (*it)[key]);
         }
 

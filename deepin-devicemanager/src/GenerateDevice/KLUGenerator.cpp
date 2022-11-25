@@ -6,7 +6,8 @@
 #include "KLUGenerator.h"
 
 // Qt库文件
-#include<QDebug>
+#include <QDebug>
+#include <QProcess>
 
 // 其它头文件
 #include "DeviceManager/DeviceManager.h"
@@ -237,6 +238,26 @@ void KLUGenerator::getDiskInfoFromLshw()
             tempMap["description"] = "Universal Flash Storage";
             // 应HW的要求，添加interface   UFS 3.0
             tempMap["interface"] = "UFS 3.0";
+
+            // 读取interface版本
+            QProcess process;
+            process.start("cat /sys/devices/platform/f8200000.ufs/host0/scsi_host/host0/wb_en");
+            process.waitForFinished(-1);
+            int exitCode = process.exitCode();
+            if (exitCode != 127 && exitCode != 126) {
+                QString deviceInfo = process.readAllStandardOutput();
+                if (deviceInfo.trimmed() == "true") {
+                    process.start("cat /sys/block/sdd/device/spec_version");
+                    process.waitForFinished(-1);
+                    exitCode = process.exitCode();
+                    if (exitCode != 127 && exitCode != 126) {
+                        deviceInfo = process.readAllStandardOutput();
+                        if (deviceInfo.trimmed() == "310") {
+                            tempMap["interface"] = "UFS 3.1";
+                        }
+                    }
+                }
+            }
         }
 
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(tempMap);
